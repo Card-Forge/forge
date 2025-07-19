@@ -90,7 +90,7 @@ public class ConquestUtil {
             gen = new DeckGenerator5Color(pool, DeckFormat.PlanarConquest);
             break;
         default:
-            return null; //shouldn't happen
+            return null; // Shouldn't happen
         }
 
         gen.setSingleton(true);
@@ -132,12 +132,12 @@ public class ConquestUtil {
             availableCards.add(pc);
         }
 
-        //remove all exiled cards
+        // Remove all exiled cards
         for (PaperCard pc : model.getExiledCards()) {
             availableCards.remove(pc);
         }
 
-        //create pool from available cards
+        // Create pool from available cards
         CardPool pool = new CardPool();
         pool.addAllFlat(availableCards);
         return pool;
@@ -154,7 +154,7 @@ public class ConquestUtil {
 
     public static void setPlaneTemporarilyAccessible(String planeName, boolean accessible) {
         ConquestPlane plane = getPlaneByName(planeName);
-        if (plane != null && accessible != !plane.isUnreachable()) {
+        if (plane != null && accessible == plane.isUnreachable()) {
             plane.setTemporarilyReachable(accessible);
         } else {
             System.err.println("Could not find plane to set the accessibility flag: " + planeName);
@@ -164,7 +164,7 @@ public class ConquestUtil {
     public static Iterable<PaperCard> getStartingPlaneswalkerOptions(final PaperCard startingCommander) {
         final byte colorIdentity = startingCommander.getRules().getColorIdentity().getColor();
         final Set<String> selected = Sets.newHashSet();
-        //TODO: Could make this more efficient by streaming unique cards and then mapping them to an acceptable print if they aren't already...
+        // TODO: Could make this more efficient by streaming unique cards and then mapping them to an acceptable print if they aren't already...
         return IterableUtil.filter(FModel.getMagicDb().getCommonCards().getAllNonPromosNonReprintsNoAlt(), card -> {
             if (selected.contains(card.getName())) {
                 return false;

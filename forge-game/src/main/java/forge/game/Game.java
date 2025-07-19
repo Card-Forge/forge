@@ -1379,6 +1379,12 @@ public class Game {
         if (!isNeitherDayNorNight())
             fireEvent(new GameEventDayTimeChanged(isDay()));
     }
+
+    public boolean isVoid() {
+        return getLeftBattlefieldThisTurn().stream().anyMatch(c -> !c.isLand()) ||
+                getStack().getSpellsCastThisTurn().stream().anyMatch(s -> s.getCastSA().isWarp());
+    }
+
     public int getAITimeout() {
         return AI_TIMEOUT;
     }

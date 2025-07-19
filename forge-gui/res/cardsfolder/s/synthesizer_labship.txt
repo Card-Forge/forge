@@ -1,0 +1,11 @@
+Name:Synthesizer Labship
+ManaCost:U
+Types:Artifact Spacecraft
+PT:4/4
+K:Station:9
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE2_CHARGE | AddTrigger$ CombatTrig | Description$ STATION 2+ At the beginning of combat on your turn, up to one other target artifact you control becomes an artifact creature with base power and toughness 2/2 and gains flying until end of turn.
+SVar:CombatTrig:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ At the beginning of combat on your turn, up to one other target artifact you control becomes an artifact creature with base power and toughness 2/2 and gains flying until end of turn.
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Artifact.Other+YouCtrl | TgtPrompt$ Select up to one other target artifact you control | TargetMin$ 0 | TargetMax$ 1 | Power$ 2 | Toughness$ 2 | Types$ Artifact,Creature | Keywords$ Flying
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE9_CHARGE | AddType$ Creature | AddKeyword$ Flying & Vigilance | Description$ STATION 9+ Flying, vigilance
+SVar:PlayMain1:TRUE
+Oracle:Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 9+.)\nSTATION 2+\nAt the beginning of combat on your turn, up to one other target artifact you control becomes an artifact creature with base power and toughness 2/2 and gains flying until end of turn.\nSTATION 9+\nFlying, vigilance

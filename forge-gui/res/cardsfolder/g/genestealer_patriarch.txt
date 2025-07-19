@@ -1,6 +1,6 @@
 Name:Genestealer Patriarch
 ManaCost:4 U
-Types:Creature Tyranid Human
+Types:Creature Tyranid
 PT:4/3
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigInfectionCounter | TriggerDescription$ Genestealer's Kiss — Whenever CARDNAME attacks, put an infection counter on target creature defending player controls.
 SVar:TrigInfectionCounter:DB$ PutCounter | CounterType$ INFECTION | CounterNum$ 1 | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Put an infection counter on target creature defending player controls

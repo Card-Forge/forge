@@ -1,0 +1,7 @@
+Name:Invasive Maneuvers
+ManaCost:1 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ X | SpellDescription$ CARDNAME deals 3 damage to target creature. It deals 5 damage instead if you control a Spacecraft.
+SVar:Y:Count$Valid Spacecraft.YouCtrl
+SVar:X:Count$Compare Y GE1.5.3
+Oracle:Invasive Maneuvers deals 3 damage to target creature. It deals 5 damage instead if you control a Spacecraft.

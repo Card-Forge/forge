@@ -42,7 +42,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-
 /**
  * <p>
  * CardSet class.
@@ -384,6 +383,15 @@ public final class CardEdition implements Comparable<CardEdition> {
     public List<EditionEntry> getCards() { return cardMap.get(EditionSectionWithCollectorNumbers.CARDS.getName()); }
     public List<EditionEntry> getRebalancedCards() { return cardMap.get(EditionSectionWithCollectorNumbers.REBALANCED.getName()); }
     public List<EditionEntry> getFunnyEternalCards() { return cardMap.get(EditionSectionWithCollectorNumbers.ETERNAL.getName()); }
+    public List<EditionEntry> getObtainableCards() { 
+        List<EditionEntry> allCards = new ArrayList<>(getAllCardsInSet());
+        List<EditionEntry> conjuredCards = cardMap.get(EditionSectionWithCollectorNumbers.CONJURED.getName());
+        if (conjuredCards != null) {
+            allCards.removeAll(conjuredCards);
+        }
+
+        return allCards; 
+    }
     public List<EditionEntry> getAllCardsInSet() {
         return cardsInSet;
     }
@@ -427,6 +435,15 @@ public final class CardEdition implements Comparable<CardEdition> {
             }
         }
         return false;
+    }
+
+    public boolean isCardObtainable(String cardName) {
+        for (EditionEntry ee : cardMap.get(EditionSectionWithCollectorNumbers.CONJURED.getName())) {
+            if (ee.name.equals(cardName)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean isModern() { return getDate().after(parseDate("2003-07-27")); } //8ED and above are modern except some promo cards and others
@@ -539,6 +556,9 @@ public final class CardEdition implements Comparable<CardEdition> {
 
         List<PrintSheet> sheets = Lists.newArrayList();
         for (String sectionName : cardMap.keySet()) {
+            if (sectionName.equals(EditionSectionWithCollectorNumbers.CONJURED.getName())) {
+                continue;
+            }
             PrintSheet sheet = new PrintSheet(String.format("%s %s", this.getCode(), sectionName));
 
             List<EditionEntry> cards = cardMap.get(sectionName);

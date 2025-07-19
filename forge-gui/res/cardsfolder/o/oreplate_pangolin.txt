@@ -1,0 +1,9 @@
+Name:Oreplate Pangolin
+ManaCost:1 R
+Types:Artifact Creature Robot Pangolin
+PT:2/2
+T:Mode$ ChangesZone | ValidCard$ Artifact.YouCtrl+Other | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another artifact you control enters, you may pay {1}. If you do, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ 1 | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Artifact
+DeckHints:Type$Artifact
+Oracle:Whenever another artifact you control enters, you may pay {1}. If you do, put a +1/+1 counter on this creature.

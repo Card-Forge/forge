@@ -1,0 +1,9 @@
+Name:Sunset Saboteur
+ManaCost:1 B
+Types:Creature Human Rogue
+PT:4/1
+K:Menace
+K:Ward:Discard<1/Card>
+T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever this creature attacks, put a +1/+1 counter on target creature an opponent controls.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Menace\nWard—Discard a card.\nWhenever this creature attacks, put a +1/+1 counter on target creature an opponent controls.

@@ -36,7 +36,6 @@ import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import forge.util.storage.StorageReaderFile;
 
-
 public class ConquestPlane {
     private final String name;
     private final String directory;
@@ -141,7 +140,7 @@ public class ConquestPlane {
             for (String name : planeCardNames) {
                 PaperCard pc = variantCards.getCard(name);
                 if (pc == null) {
-                    // try to get a non-variant Magic card in case a plane card with the given name does not exist
+                    // Try to get a non-variant Magic card in case a plane card with the given name does not exist
                     pc = FModel.getMagicDb().getCommonCards().getCard(name);
                     if (pc == null) {
                         System.out.println("\"" + name + "\" does not correspond to a valid Plane card or standard Magic card!");
@@ -157,10 +156,10 @@ public class ConquestPlane {
     private void ensureRegionsLoaded() {
         if (regions != null) { return; }
 
-        //load regions
+        // Load regions
         regions = new FCollection<>(new ConquestRegion.Reader(this));
 
-        //load events
+        // Load events
         int eventIndex = 0;
         int eventsPerRegion = rowsPerRegion * cols;
         int regionEndIndex = eventsPerRegion;
@@ -173,14 +172,14 @@ public class ConquestPlane {
                     break;
                 }
             }
-            //if not enough events defined, create random events for remaining
+            // If there are not enough events defined, create random events for the remaining
             while (eventIndex < regionEndIndex) {
                 events[eventIndex++] = new ConquestEvent(region, region.getName() + " - Random " + ((eventIndex % eventsPerRegion) + 1), null, null, EnumSet.noneOf(GameType.class), null, null);
             }
             regionEndIndex += eventsPerRegion;
         }
 
-        //load card pool
+        // Load card pool
         cardPool = new DeckGenPool();
         commanders = new FCollection<>();
 
@@ -191,21 +190,26 @@ public class ConquestPlane {
         List<String> setCodes = FileUtil.readFile(directory + "sets.txt");
         for (String setCode : setCodes) {
             CardEdition edition = FModel.getMagicDb().getEditions().get(setCode);
-            if (edition != null) {
-                for (EditionEntry card : edition.getAllCardsInSet()) {
-                    if (bannedCardSet == null || !bannedCardSet.contains(card.name())) {
-                        addCard(commonCards.getCard(card.name(), setCode));
-                    }
+            if (edition == null)
+                continue;
+
+            for (EditionEntry card : edition.getObtainableCards()) {
+                if (bannedCardSet == null || !bannedCardSet.contains(card.name())) {
+                    addCard(commonCards.getCard(card.name(), setCode));
                 }
             }
         }
 
         List<String> additionalCards = FileUtil.readFile(directory + "cards.txt");
-        for (String cardName : additionalCards) {
-            addCard(commonCards.getCard(cardName));
+        for (String ac : additionalCards) {
+            String[] cardData = ac.split("\\|");
+            String cardName = cardData[0];
+            String cardEdition = cardData.length > 1 ? cardData[1] : CardEdition.UNKNOWN_CODE;
+
+            addCard(commonCards.getCard(cardName, cardEdition));
         }
 
-        //sort commanders by name
+        // Sort commanders by name
         Collections.sort(commanders);
     }
 
@@ -213,7 +217,9 @@ public class ConquestPlane {
         if (pc == null) { return; }
 
         cardPool.add(pc);
-        if (pc.getRules().canBeCommander()) {
+        // Add unique commanders
+        if (pc.getRules().canBeCommander()
+                && !commanders.anyMatch(c -> c.getName().equals(pc.getName()))) {
             commanders.add(pc);
         }
         ConquestRegion.addCard(pc, regions);
@@ -224,7 +230,7 @@ public class ConquestPlane {
     }
 
     public ConquestAwardPool getAwardPool() {
-        if (awardPool == null) { //delay initializing until needed
+        if (awardPool == null) { // Delay initializing until needed
             awardPool = new ConquestAwardPool(cardPool.getAllCards());
         }
         return awardPool;
