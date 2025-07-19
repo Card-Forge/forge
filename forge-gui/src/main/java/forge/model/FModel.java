@@ -59,9 +59,11 @@ import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.Function;
 
 /**
@@ -149,11 +151,11 @@ public final class FModel {
             }
         };
 
-        //if (new AutoUpdater(true).attemptToUpdate()) {}
-        // load types before loading cards
+        // if (new AutoUpdater(true).attemptToUpdate()) {}
+        // Load types before loading cards
         loadDynamicGamedata();
 
-        //load card database
+        // Load card database
         // Lazy loading currently disabled
         final CardStorageReader reader = new CardStorageReader(ForgeConstants.CARD_DATA_DIR, progressBarBridge,
                 false);
@@ -172,7 +174,7 @@ public final class FModel {
             customTokenReader = null;
         }
 
-        // do this first so PaperCards see the real preference
+        // Do this first so PaperCards see the real preference
         CardTranslation.preloadTranslation(preferences.getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
 
         magicDb = new StaticData(reader, tokenReader, customReader, customTokenReader, ForgeConstants.EDITIONS_DIR,
@@ -184,11 +186,11 @@ public final class FModel {
                                  FModel.getPreferences().getPrefBoolean(FPref.UI_SMART_CARD_ART)
                 );
 
-        //create profile dirs if they don't already exist
+        // Create profile dirs if they don't already exist
         for (final String dname : ForgeConstants.PROFILE_DIRS) {
             final File path = new File(dname);
             if (path.isDirectory()) {
-                // already exists
+                // Already exists
                 continue;
             }
             if (!path.mkdirs()) {
@@ -217,7 +219,7 @@ public final class FModel {
         }
 
         blocks = new StorageBase<>("Block definitions", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "blocks.txt", magicDb.getEditions()));
-        //setblockLands
+        // SetblockLands
         for (final CardBlock b : blocks) {
             magicDb.getBlockLands().add(b.getLandSet().getCode());
         }
@@ -259,11 +261,11 @@ public final class FModel {
         achievements.put(GameType.Puzzle, new PuzzleAchievements());
         achievements.put(GameType.Adventure, new AdventureAchievements());
 
-        //preload AI profiles
+        // Preload AI profiles
         AiProfileUtil.loadAllProfiles(ForgeConstants.AI_PROFILE_DIR);
         AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(FModel.getPreferences().getPref(FPref.MATCH_AI_SIDEBOARDING_MODE)));
 
-        //generate Deck Gen matrix
+        // Generate Deck Gen matrix
         if(FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_CARDBASED)) {
             boolean commanderDeckGenMatrixLoaded=CardRelationMatrixGenerator.initialize();
             deckGenMatrixLoaded=CardArchetypeLDAGenerator.initialize();
@@ -273,19 +275,19 @@ public final class FModel {
         }
 
         if (GuiBase.getInterface().isLibgdxPort() && GuiBase.getDeviceRAM() < 5000)
-            return; // don't preload ItemPool on mobile port with less than 5GB RAM
+            return; // Don't preload ItemPool on mobile port with less than 5GB RAM
 
-        //common ItemPool to preload
+        // Common ItemPool to preload
         allCardsNoAlt = getAllCardsNoAlt();
         archenemyCards = getArchenemyCards();
         planechaseCards = getPlanechaseCards();
         attractionPool = getAttractionPool();
         contraptionPool = getContraptionPool();
         if (GuiBase.getInterface().isLibgdxPort()) {
-            //preload mobile Itempool
+            // Preload mobile Itempool
             uniqueCardsNoAlt = getUniqueCardsNoAlt();
         } else {
-            //preload Desktop Itempool
+            // Preload Desktop Itempool
             commanderPool = getCommanderPool();
             brawlCommander = getBrawlCommander();
             tinyLeadersCommander = getTinyLeadersCommander();
@@ -404,15 +406,30 @@ public final class FModel {
      */
     public static void loadDynamicGamedata() {
         if (!CardType.Constant.LOADED.isSet()) {
+            
             final List<String> typeListFile = FileUtil.readFile(ForgeConstants.TYPE_LIST_FILE);
 
-            Set<String> addTo = null;
+            Set<String> addTo = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
             loadTypes(addTo, typeListFile);
 
-            File customTypesFile = new File(ForgeConstants.USER_CUSTOM_TYPE_LIST_FILE);
-            if (customTypesFile.exists()) {
-                final List<String> customTypeListFile = FileUtil.readFile(ForgeConstants.USER_CUSTOM_TYPE_LIST_FILE);
-                loadTypes(addTo, customTypeListFile);
+            File customTypesFilesDir = new File(ForgeConstants.USER_CUSTOM_TYPE_LIST_DIR);
+            if (customTypesFilesDir.exists() && customTypesFilesDir.isDirectory()) {
+                File[] txtFiles = customTypesFilesDir.listFiles(new FilenameFilter() {
+                    public boolean accept(File dir, String name) {
+                        return name.toLowerCase().endsWith(".txt");
+                    }
+                });
+
+                if (txtFiles != null) {
+                    for (File file : txtFiles) {
+                        try {
+                            final List<String> customTypeListFile = FileUtil.readFile(file);
+                            loadTypes(addTo, customTypeListFile);
+                        } catch (Exception e) {
+                            System.err.println("Failed to load custom types from file " + file.getAbsolutePath());
+                        }
+                    }
+                }
             }
 
             CardType.Constant.LOADED.set();
@@ -455,29 +472,27 @@ public final class FModel {
             } else if (s.equals("[PlanarTypes]")) {
                 addTo = CardType.Constant.PLANAR_TYPES;
             } else if (s.length() > 1) {
-                if (addTo != null) {
-                    if (s.contains(":")) {
-                        String[] k = s.split(":");
+                if (s.contains(":")) {
+                    String[] k = s.split(":");
 
-                        if (addTo.contains(k[0])) {
-                            continue;
-                        }
+                    if (addTo.contains(k[0])) {
+                        continue;
+                    }
 
-                        addTo.add(k[0]);
-                        CardType.Constant.pluralTypes.put(k[0], k[1]);
+                    addTo.add(k[0]);
+                    CardType.Constant.pluralTypes.put(k[0], k[1]);
 
-                        if (k[0].contains(" ")) {
-                            CardType.Constant.MultiwordTypes.add(k[0]);
-                        }
-                    } else {
-                        if (addTo.contains(s)) {
-                            continue;
-                        }
+                    if (k[0].contains(" ")) {
+                        CardType.Constant.MultiwordTypes.add(k[0]);
+                    }
+                } else {
+                    if (addTo.contains(s)) {
+                        continue;
+                    }
 
-                        addTo.add(s);
-                        if (s.contains(" ")) {
-                            CardType.Constant.MultiwordTypes.add(s);
-                        }
+                    addTo.add(s);
+                    if (s.contains(" ")) {
+                        CardType.Constant.MultiwordTypes.add(s);
                     }
                 }
             }
@@ -496,7 +511,7 @@ public final class FModel {
     }
 
     public static AchievementCollection getAchievements(GameType gameType) {
-        switch (gameType) { //translate gameType to appropriate type if needed
+        switch (gameType) { // Translate gameType to appropriate type if needed
         case Constructed:
         case Draft:
         case Sealed:
