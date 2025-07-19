@@ -282,6 +282,8 @@ ScryfallCode=EOE
 274 L Mountain @Julian Kok Joon Wen
 275 L Forest @Sergey Glushakov
 276 L Forest @Julian Kok Joon Wen
+
+[borderless]
 277 M Adagia, Windswept Bastion @Piotr Dura
 278 R Breeding Pool @Chris Ostrowski
 279 M Evendo, Waking Haven @Piotr Dura
@@ -322,6 +324,23 @@ ScryfallCode=EOE
 314 R Mutinous Massacre @Jack Hughes
 315 R Space-Time Anomaly @Princess Hidir
 316 R Secluded Starforge @Jaime A. Zuverza
+367 L Plains @Adam Paquette
+368 L Island @Adam Paquette
+369 L Swamp @Adam Paquette
+370 L Mountain @Adam Paquette
+371 L Forest @Adam Paquette
+372 M Adagia, Windswept Bastion @Piotr Dura
+373 R Breeding Pool @Chris Ostrowski
+374 M Evendo, Waking Haven @Piotr Dura
+375 R Godless Shrine @Chris Ostrowski
+376 M Kavaron, Memorial World @Piotr Dura
+377 R Sacred Foundry @Chris Ostrowski
+378 R Stomping Ground @Chris Ostrowski
+379 M Susur Secundi, Void Altar @Piotr Dura
+380 M Uthros, Titanic Godcore @Piotr Dura
+381 R Watery Grave @Chris Ostrowski
+
+[extended art]
 317 R Anticausal Vestige @Chase Stone
 318 M Exalted Sunborn @Scott M. Fischer
 319 R Hardlight Containment @Dominik Mayer
@@ -362,6 +381,8 @@ ScryfallCode=EOE
 354 R The Eternity Elevator @Josu Solano
 355 R Extinguisher Battleship @Danny Schwartz
 356 R Thrumming Hivepool @Rob Rey
+
+[showcase]
 357 M Anticausal Vestige @Nottsuo
 358 M Exalted Sunborn @Makoron
 359 M Starfield Vocalist @nina
@@ -372,21 +393,6 @@ ScryfallCode=EOE
 364 M The Dominion Bracelet @Mai Minamiura
 365 M The Endstone @Hidetaka Tenjin
 366 M Secluded Starforge @Makoto Yukimura
-367 L Plains @Adam Paquette
-368 L Island @Adam Paquette
-369 L Swamp @Adam Paquette
-370 L Mountain @Adam Paquette
-371 L Forest @Adam Paquette
-372 M Adagia, Windswept Bastion @Piotr Dura
-373 R Breeding Pool @Chris Ostrowski
-374 M Evendo, Waking Haven @Piotr Dura
-375 R Godless Shrine @Chris Ostrowski
-376 M Kavaron, Memorial World @Piotr Dura
-377 R Sacred Foundry @Chris Ostrowski
-378 R Stomping Ground @Chris Ostrowski
-379 M Susur Secundi, Void Altar @Piotr Dura
-380 M Uthros, Titanic Godcore @Piotr Dura
-381 R Watery Grave @Chris Ostrowski
 382 M Sothera, the Supervoid @Micha Huigen
 383 M Anticausal Vestige @Nottsuo
 384 M Exalted Sunborn @Makoron
@@ -398,6 +404,8 @@ ScryfallCode=EOE
 390 M The Dominion Bracelet @Mai Minamiura
 391 M The Endstone @Hidetaka Tenjin
 392 M Secluded Starforge @Makoto Yukimura
+
+[promo]
 393 U Starfield Shepherd @Marta Nael
 394 U Annul @Carlos Palma Cruchaga
 395 U Umbral Collar Zealot @Dmitry Burmak
