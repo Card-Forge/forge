@@ -3,7 +3,7 @@ ManaCost:5 G G G
 Types:Creature Leviathan
 PT:0/0
 K:Ward:3
-K:Devour land:3
+K:Devour:3:Land
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When this creature enters, look at the top X cards of your library, where X is this creature's power. Put any number of land cards from among them onto the battlefield tapped, then shuffle.
 SVar:TrigDig:DB$ Dig | DigNum$ X | AnyNumber$ True | ChangeValid$ Land | DestinationZone$ Battlefield | Tapped$ True | SkipReorder$ True | SubAbility$ DBShuffle
 SVar:DBShuffle:DB$ Shuffle | Defined$ You
