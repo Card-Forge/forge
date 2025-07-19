@@ -2250,14 +2250,25 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
             final String magnitude = k[1];
             String valid = "Creature";
-            final String[] s = k[0].split(" ");
-            if (s.length > 1) {
-                valid = s[1].substring(0, 1).toUpperCase() + s[1].substring(1);
+            String type = "creature";
+            StringBuilder sbDesc = new StringBuilder("Devour ");
+            if (k.length > 2 && !k[2].isEmpty()) {
+                valid = k[2];
+                type = valid;
+                if (CardType.isACardType(type)) {
+                    type = type.toLowerCase(Locale.ENGLISH);
+                }
+                sbDesc.append(type).append(" ");
+            }
+            sbDesc.append(magnitude);
+            if (k.length > 3) {
+                sbDesc.append(k[3]);
             }
 
-            String sacrificeStr = "DB$ Sacrifice | Defined$ You | Amount$ DevourSacX | SacValid$ " + valid +
-                    ".Other | SacMessage$ another " + valid.toLowerCase() + " (Devour " + magnitude +
-                    ") | RememberSacrificed$ True | Optional$ True";
+            String sacrificeStr = "DB$ Sacrifice | Defined$ You | Amount$ DevourSacX | RememberSacrificed$ True | Optional$ True"
+                    + " | SacValid$ " + valid + ".Other | SacMessage$ another " + type;
+            // TODO find better way to add Devour N to Player Msg
+            // Also better lblDoYouWantSacrifice?
 
             String counterStr = "DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ DevourX";
             String cleanupStr = "DB$ Cleanup | ClearRemembered$ True";
@@ -2272,7 +2283,7 @@ public class CardFactoryUtil {
             AbilitySub cleanupSA = (AbilitySub) AbilityFactory.getAbility(cleanupStr, card);
             counterSA.setSubAbility(cleanupSA);
 
-            String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Secondary$ True | ReplacementResult$ Updated | Description$ Devour " + magnitude + " ("+ inst.getReminderText() + ")";
+            String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | Description$ " + sbDesc + " ("+ inst.getReminderText() + ")";
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, host, intrinsic, card);
 
