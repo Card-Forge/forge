@@ -97,12 +97,15 @@ public enum CSubmenuDraft implements ICDoc {
                 view.getBtnBuildDeck().requestFocusInWindow();
             }
         });
+
+        view.getGamesInMatchBinder().load();
     }
 
     private void startGame(final GameType gameType) {
         final Localizer localizer = Localizer.getInstance();
-        final boolean gauntlet = VSubmenuDraft.SINGLETON_INSTANCE.isGauntlet();
-        final DeckProxy humanDeck = VSubmenuDraft.SINGLETON_INSTANCE.getLstDecks().getSelectedItem();
+        final VSubmenuDraft view = VSubmenuDraft.SINGLETON_INSTANCE;
+        final boolean gauntlet = view.isGauntlet();
+        final DeckProxy humanDeck = view.getLstDecks().getSelectedItem();
 
         if (humanDeck == null) {
             FOptionPane.showErrorDialog(localizer.getMessage("lblNoDeckSelected"), localizer.getMessage("lblNoDeck"));
@@ -245,5 +248,4 @@ public enum CSubmenuDraft implements ICDoc {
             combo.addItem("5");
         }
     }
-
 }
