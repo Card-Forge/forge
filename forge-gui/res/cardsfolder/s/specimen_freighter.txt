@@ -4,7 +4,7 @@ Types:Artifact Spacecraft
 PT:4/7
 K:Station:9
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this Spacecraft enters, return up to two target non-Spacecraft creatures to their owners' hands.
-SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.nonSpacecraft | TgtPrompt$ Select target non-Spacecraft creature | TargetMin$ 0 | TargetMax$ 2 | Origin$ Battlefield | Destination$ Hand
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.nonSpacecraft | TgtPrompt$ Select up to two target non-Spacecraft creatures | TargetMin$ 0 | TargetMax$ 2 | Origin$ Battlefield | Destination$ Hand
 S:Mode$ Continuous | Affected$ Card.Self+counters_GE9_CHARGE | AddType$ Creature | AddKeyword$ Flying | AddTrigger$ AttackTrig | Description$ STATION 9+ Flying,,,Whenever this Spacecraft attacks, defending player mills four cards.
 SVar:AttackTrig:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever this Spacecraft attacks, defending player mills four cards.
 SVar:TrigMill:DB$ Mill | Defined$ TriggeredDefendingPlayer | NumCards$ 4
