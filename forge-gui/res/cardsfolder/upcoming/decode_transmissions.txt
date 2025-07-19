@@ -1,4 +1,4 @@
-Name:Decode
+Name:Decode Transmissions
 ManaCost:2 B
 Types:Sorcery
 A:SP$ Draw | NumCards$ 2 | SubAbility$ DBLoseLifeYou | SpellDescription$ You draw two cards and you lose 2 life. Void — If a nonland permanent left the battlefield this turn or a spell was warped this turn, instead you draw two cards and each opponent loses 2 life.
