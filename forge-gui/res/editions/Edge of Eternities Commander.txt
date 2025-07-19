@@ -199,6 +199,7 @@ ScryfallCode=EOC
 191 C Wastes @Raymond Swanland
 
 [tokens]
+2 c_x_x_shapeshifter_changeling_deathtouch @Carlos Palma Cruchaga
 3 u_2_2_bird_flying @Alessandra Pisano
 4 g_1_1_insect_flying @Deruchenko Alexander
 5 g_3_3_beast @Dave Allsop
