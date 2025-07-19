@@ -1,0 +1,10 @@
+Name:Runeblade Raiser
+ManaCost:B
+Types:Creature Human Warrior
+PT:2/1
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This creature enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When this creature dies, return it to the battlefield under its owner's control. It perpetually loses this ability.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | RememberChanged$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | RemoveThisTrigger$ True | Duration$ Perpetual
+Oracle:This creature enters tapped.\nWhen this creature dies, return it to the battlefield under its owner's control. It perpetually loses this ability.

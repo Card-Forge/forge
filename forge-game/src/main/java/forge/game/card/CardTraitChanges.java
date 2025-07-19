@@ -17,13 +17,14 @@ public class CardTraitChanges implements Cloneable {
     private List<StaticAbility> staticAbilities = Lists.newArrayList();
 
     private List<SpellAbility> removedAbilities = Lists.newArrayList();
+    private List<Trigger> removedTriggers = Lists.newArrayList();
 
     private boolean removeAll = false;
     private boolean removeNonMana = false;
 
     public CardTraitChanges(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
-            Collection<Trigger> trigger, Collection<ReplacementEffect> res, Collection<StaticAbility> st,
-            boolean removeAll, boolean removeNonMana) {
+            Collection<Trigger> trigger, Collection<Trigger> removedTriggers, Collection<ReplacementEffect> res,
+            Collection<StaticAbility> st, boolean removeAll, boolean removeNonMana) {
         if (spells != null) {
             this.abilities.addAll(spells);
         }
@@ -32,6 +33,9 @@ public class CardTraitChanges implements Cloneable {
         }
         if (trigger != null) {
             this.triggers.addAll(trigger);
+        }
+        if (removedTriggers != null) {
+            this.removedTriggers.addAll(removedTriggers);
         }
         if (res != null) {
             this.replacements.addAll(res);
@@ -50,6 +54,14 @@ public class CardTraitChanges implements Cloneable {
     public Collection<Trigger> getTriggers() {
         return triggers;
     }
+
+    /**
+     * @return the removed triggers
+     */
+    public Collection<Trigger> getRemovedTriggers() {
+        return removedTriggers;
+    }
+
     /**
      * @return the replacements
      */
@@ -65,7 +77,7 @@ public class CardTraitChanges implements Cloneable {
     }
 
     /**
-     * @return the abilities
+     * @return the removed abilities
      */
     public Collection<SpellAbility> getRemovedAbilities() {
         return removedAbilities;
@@ -102,6 +114,11 @@ public class CardTraitChanges implements Cloneable {
             result.triggers = Lists.newArrayList();
             for (Trigger tr : this.triggers) {
                 result.triggers.add(tr.copy(host, lki));
+            }
+
+            result.removedTriggers = Lists.newArrayList();
+            for (Trigger tr : this.removedTriggers) {
+                result.removedTriggers.add(tr.copy(host, lki));
             }
 
             result.replacements = Lists.newArrayList();
