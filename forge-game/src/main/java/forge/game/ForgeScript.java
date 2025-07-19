@@ -193,7 +193,9 @@ public class ForgeScript {
             return sa.isCrew();
         } else if (property.equals("Saddle")) {
             return sa.isKeyword(Keyword.SADDLE);
-        } else if (property.equals("Cycling")) {
+        } else if (property.equals("Station")) {
+            return sa.isKeyword(Keyword.STATION);
+        }else if (property.equals("Cycling")) {
             return sa.isCycling();
         } else if (property.equals("Dash")) {
             return sa.isDash();
@@ -255,6 +257,8 @@ public class ForgeScript {
             return sa.isKeyword(Keyword.DAYBOUND);
         } else if (property.equals("Nightbound")) {
             return sa.isKeyword(Keyword.NIGHTBOUND);
+        } else if (property.equals("Warp")) {
+            return sa.isWarp();
         } else if (property.equals("Ward")) {
             return sa.isKeyword(Keyword.WARD);
         } else if (property.equals("CumulativeUpkeep")) {

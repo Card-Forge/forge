@@ -190,4 +190,8 @@ public abstract class FDisplayObject {
     public boolean keyDown(int keyCode) {
         return false;
     }
+
+    public boolean keyUp(int keyCode) {
+        return false;
+    }
 }

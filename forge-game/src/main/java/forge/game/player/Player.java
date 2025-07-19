@@ -118,7 +118,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int descended;
     private int numRingTemptedYou;
     private int devotionMod;
-    private boolean revolt = false;
     private Card ringBearer, theRing;
     private int speed;
 
@@ -904,10 +903,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             runParams.put(AbilityKey.CounterAmount, oldValue + i + 1);
             getGame().getTriggerHandler().runTrigger(TriggerType.CounterAdded, AbilityKey.newMap(runParams), false);
         }
-        if (addAmount > 0) {
-            runParams.put(AbilityKey.CounterAmount, addAmount);
-            getGame().getTriggerHandler().runTrigger(TriggerType.CounterAddedOnce, AbilityKey.newMap(runParams), false);
-        }
+        runParams.put(AbilityKey.CounterAmount, addAmount);
+        getGame().getTriggerHandler().runTrigger(TriggerType.CounterAddedOnce, AbilityKey.newMap(runParams), false);
         if (table != null) {
             table.put(source, this, counterType, addAmount);
         }
@@ -2144,10 +2141,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasRevolt() {
-        return revolt;
-    }
-    public final void setRevolt(final boolean val) {
-        revolt = val;
+        return getGame().getLeftBattlefieldThisTurn().stream().anyMatch(CardPredicates.isController(this));
     }
 
     public final int getDescended() {
@@ -2551,7 +2545,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetDiscardedThisTurn();
         resetSacrificedThisTurn();
         resetVenturedThisTurn();
-        setRevolt(false);
         setDescended(0);
         setSpellsCastLastTurn(getSpellsCastThisTurn());
         resetSpellsCastThisTurn();
@@ -3605,7 +3598,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
 
             String trigStr = "Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Command | TriggerDescription$ " +
-            "At the beginning of your precombat main phase, if you have any rad counters, mill that many cards. For each nonland card milled this way, you lose 1 life and a rad counter.";
+                "At the beginning of your precombat main phase, if you have any rad counters, mill that many cards. For each nonland card milled this way, you lose 1 life and a rad counter.";
 
             Trigger tr = TriggerHandler.parseTrigger(trigStr, radiationEffect, true);
             SpellAbility sa = AbilityFactory.getAbility("DB$ InternalRadiation", radiationEffect);

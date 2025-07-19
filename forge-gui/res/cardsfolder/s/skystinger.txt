@@ -1,0 +1,8 @@
+Name:Skystinger
+ManaCost:2 G
+Types:Creature Insect Warrior
+PT:3/3
+K:Reach
+T:Mode$ AttackerBlocked | ValidCard$ Creature.withFlying | ValidBlocker$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever this creature blocks a creature with flying, this creature gets +5/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +5
+Oracle:Reach\nWhenever this creature blocks a creature with flying, this creature gets +5/+0 until end of turn.

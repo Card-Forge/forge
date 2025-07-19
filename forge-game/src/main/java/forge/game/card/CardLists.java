@@ -63,6 +63,10 @@ public class CardLists {
         return CardLists.filter(in, c -> c.getNetPower() <= lessthanPower);
     }
 
+    public static CardCollection filterAnyCounters(final Iterable<Card> in, final int atLeastCounters) {
+        return CardLists.filter(in, c -> c.getNumAllCounters() >= atLeastCounters);
+    }
+
     public static final Comparator<Card> ToughnessComparator = Comparator.comparingInt(Card::getNetToughness);
     public static final Comparator<Card> ToughnessComparatorInv = Comparator.comparingInt(Card::getNetToughness).reversed();
     public static final Comparator<Card> PowerComparator = Comparator.comparingInt(Card::getNetCombatDamage);
@@ -419,15 +423,14 @@ public class CardLists {
      * Given a list of cards, return their combined power
      * 
      * @param cardList the list of creature cards for which to sum the power
-     * @param crew for cards that crew with toughness rather than power
      */
-    public static int getTotalPower(Iterable<Card> cardList, SpellAbility sa) {
+    public static int getTotalPower(Iterable<Card> cardList, CardTraitBase ctb) {
         int total = 0;
         for (final Card crd : cardList) {
-            if (StaticAbilityTapPowerValue.withToughness(crd, sa)) {
+            if (StaticAbilityTapPowerValue.withToughness(crd, ctb)) {
                 total += Math.max(0, crd.getNetToughness());
             } else {
-                int m = StaticAbilityTapPowerValue.getMod(crd, sa);
+                int m = StaticAbilityTapPowerValue.getMod(crd, ctb);
                 total += Math.max(0, crd.getNetPower() + m);
             }
         }

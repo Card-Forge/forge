@@ -1,6 +1,7 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -64,8 +65,8 @@ public class UIScene extends Scene {
             //actor.fire(UIScene.eventExit());
         }
 
-        public void onPressDown(UIScene scene) {
-            if (actor instanceof TextField) {
+        public void onPressDown(UIScene scene, int keycode) {
+            if (actor instanceof TextField && Input.Keys.ENTER != keycode) {
                 scene.requestTextInput(((TextField) actor).getText(), text -> ((TextField) actor).setText(text));
 
             }
@@ -242,6 +243,7 @@ public class UIScene extends Scene {
     public Dialog createGenericDialog(String title, String label, String stringYes, String stringNo, Runnable runnableYes, Runnable runnableNo) {
         return createGenericDialog(title, label, stringYes, stringNo, runnableYes, runnableNo, false, "");
     }
+
     public Dialog createGenericDialog(String title, String label, String stringYes, String stringNo, Runnable runnableYes, Runnable runnableNo, boolean cancelButton, String stringCancel) {
         Dialog dialog = new Dialog(title == null ? "" : title, Controls.getSkin());
         textboxOpen = true;
@@ -340,16 +342,15 @@ public class UIScene extends Scene {
     }
 
     public boolean keyPressed(int keycode) {
-        Selectable selection = getSelected();
+        ui.pressDown(keycode);
 
+        Selectable selection = getSelected();
         if (KeyBinding.Use.isPressed(keycode)) {
             if (selection != null) {
-                selection.onPressDown(this);
-                return true;
+                selection.onPressDown(this, keycode);
             }
         }
 
-        ui.pressDown(keycode);
         if (stage.getKeyboardFocus() instanceof SelectBox) {
             SelectBox box = (SelectBox) stage.getKeyboardFocus();
             if (box.getScrollPane().hasParent()) {
@@ -379,17 +380,22 @@ public class UIScene extends Scene {
                 scroll.setScrollY(scroll.getScrollY() + 20);
             }
         }
-        if(!textboxOpen){
-            if (KeyBinding.Down.isPressed(keycode))
+        if (!textboxOpen) {
+            //Allow letter S for TextField since this is binded on down keys
+            if (KeyBinding.Down.isPressed(keycode, !(stage.getKeyboardFocus() instanceof TextField))
+                    || KeyBinding.Down.isPressed(keycode, Input.Keys.S != keycode))
                 selectNextDown();
-            if (KeyBinding.Up.isPressed(keycode))
+            //Allow letter W for TextField since this is binded on up keys
+            if (KeyBinding.Up.isPressed(keycode, !(stage.getKeyboardFocus() instanceof TextField))
+                    || KeyBinding.Up.isPressed(keycode, Input.Keys.W != keycode))
                 selectNextUp();
-            if (!(stage.getKeyboardFocus() instanceof Selector) && !(stage.getKeyboardFocus() instanceof TextField) && !(stage.getKeyboardFocus() instanceof Slider)) {
-                if (KeyBinding.Right.isPressed(keycode))
-                    selectNextRight();
-                if (KeyBinding.Left.isPressed(keycode))
-                    selectNextLeft();
-            }
+            // Allow Right & Left keybinds if not Selector, Slider or Textfield
+            if (KeyBinding.Right.isPressed(keycode, !(stage.getKeyboardFocus() instanceof Selector)
+                    && !(stage.getKeyboardFocus() instanceof TextField) && !(stage.getKeyboardFocus() instanceof Slider)))
+                selectNextRight();
+            if (KeyBinding.Left.isPressed(keycode, !(stage.getKeyboardFocus() instanceof Selector)
+                    && !(stage.getKeyboardFocus() instanceof TextField) && !(stage.getKeyboardFocus() instanceof Slider)))
+                selectNextLeft();
         }
         if (!dialogShowing()) {
             Button pressedButton = ui.buttonPressed(keycode);

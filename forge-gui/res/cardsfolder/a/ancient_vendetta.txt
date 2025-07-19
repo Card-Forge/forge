@@ -1,10 +1,10 @@
 Name:Ancient Vendetta
 ManaCost:3 B
 Types:Sorcery
-A:SP$ NameCard | Defined$ You | SubAbility$ ExileYard | SpellDescription$ Choose a card name. Search target opponent's graveyard, hand, and library for up to four cards with that name and exile them. That player shuffles.
-SVar:ExileYard:DB$ ChangeZone | ValidTgts$ Opponent | ChangeType$ Card.NamedCard | Origin$ Graveyard | DefinedPlayer$ Targeted | Chooser$ You | Destination$ Exile | ChangeNum$ Y | Hidden$ True | RememberChanged$ True | SubAbility$ ExileHand
-SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | ChangeType$ Card.NamedCard | ChangeNum$ Y | Chooser$ You | SubAbility$ ExileLib | RememberChanged$ True
-SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ Targeted | ChangeType$ Card.NamedCard | ChangeNum$ Y | Chooser$ You | Shuffle$ True
+A:SP$ NameCard | Defined$ You | SubAbility$ ExileYard | StackDescription$ REP Choose a_{p:You} chooses a & Search target opponent's_{p:You} searches {p:Targeted}'s & and exile_and exiles & That player_{p:Targeted} | SpellDescription$ Choose a card name. Search target opponent's graveyard, hand, and library for up to four cards with that name and exile them. That player shuffles.
+SVar:ExileYard:DB$ ChangeZone | ValidTgts$ Opponent | ChangeType$ Card.NamedCard | Origin$ Graveyard | DefinedPlayer$ Targeted | Chooser$ You | Destination$ Exile | ChangeNum$ Y | Hidden$ True | RememberChanged$ True | SubAbility$ ExileHand | StackDescription$ None
+SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | ChangeType$ Card.NamedCard | ChangeNum$ Y | Chooser$ You | SubAbility$ ExileLib | RememberChanged$ True | StackDescription$ None
+SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ Targeted | ChangeType$ Card.NamedCard | ChangeNum$ Y | Chooser$ You | Shuffle$ True | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Y:SVar$X/NMinus.4

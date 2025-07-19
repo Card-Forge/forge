@@ -1,0 +1,9 @@
+Name:Weftwalking
+ManaCost:4 U U
+Types:Enchantment
+T:Mode$ ChangesZone | ValidCard$ Card.wasCastByYou+Self | Destination$ Battlefield | Execute$ TrigChangeAll | TriggerDescription$ When this enchantment enters, if you cast it, shuffle your hand and graveyard into your library, then draw seven cards.
+SVar:TrigChangeAll:DB$ ChangeZoneAll | Origin$ Graveyard,Hand | Destination$ Library | ChangeType$ Card.YouOwn | Shuffle$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 7
+S:Mode$ Continuous | Affected$ Card.nonLand+ControlledBy Player.Active | MayPlayPlayer$ Player.Active | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayDontGrantZonePermissions$ True | AffectedZone$ All | CheckSVar$ Y | SVarCompare$ EQ0 | Description$ The first spell each player casts during each of their turns may be cast without paying its mana cost.
+SVar:Y:Count$ThisTurnCast_Card.ControlledBy Player.Active
+Oracle:When this enchantment enters, if you cast it, shuffle your hand and graveyard into your library, then draw seven cards.\nThe first spell each player casts during each of their turns may be cast without paying its mana cost.

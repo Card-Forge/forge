@@ -1,0 +1,7 @@
+Name:Starfield Vocalist
+ManaCost:3 U
+Types:Creature Human Bard
+PT:3/4
+S:Mode$ Panharmonicon | ValidMode$ ChangesZone,ChangesZoneAll | ValidCard$ Permanent.YouCtrl | ValidCause$ Permanent | Destination$ Battlefield | Description$ If a permanent entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+K:Warp:1 U
+Oracle:If a permanent entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.\nWarp {1}{U} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)

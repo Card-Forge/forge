@@ -7,5 +7,7 @@ ScryfallCode=PSPL
 
 [cards]
 1 R Terror of the Peaks @Richard Kane Ferguson
-2a M Kaldra Compleat @Monztre
-2b M Sword of Forge and Frontier @Sam Guay
+2 M Kaldra Compleat @Monztre
+3 M Sword of Forge and Frontier @Sam Guay
+5 M Cloud, Midgar Mercenary @Tetsuya Nomura
+6 R Get Lost @Dominik Mayer

@@ -500,3 +500,9 @@ ScryfallCode=MOC
 40 c_x_x_a_phyrexian_horror @Scott Chou
 41 replicated_ring @Olena Richards
 42 c_1_1_a_servo @Victor Adame Minguez
+
+[other]
+43 emblem_elspeth_suns_champion @Tyler Jacobson
+44 emblem_teferis_talent @Dominik Mayer
+45 blessing @Yeong-Hao Han
+46 monarch @Volkan Baǵa

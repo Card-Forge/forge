@@ -590,6 +590,9 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                     @Override
                     protected void buildMenu() {
                         addItem(new FMenuItem(Forge.getLocalizer().getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e1 -> FDeckViewer.copyDeckToClipboard(getDeck())));
+                        addItem(new FMenuItem(Forge.getLocalizer().getMessage("btnCopyCollectionToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e1 -> {
+                            FDeckViewer.copyCollectionToClipboard(AdventurePlayer.current().getCards());
+                        }));
                         if (allowsAddBasic()) {
                             FMenuItem addBasic = new FMenuItem(Forge.getLocalizer().getMessage("lblAddBasicLands"), FSkinImage.LANDLOGO, e1 -> launchBasicLandDialog());
                             addItem(addBasic);
@@ -663,6 +666,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             for (CardEdition e : FModel.getMagicDb().getEditions()) {
                 editionsByName.put(e.getName().toLowerCase(), e);
                 editionsByName.put(e.getName().replace(":", "").toLowerCase(), e);
+                editionsByName.put(e.getName().replace("'", "").toLowerCase(), e);
             }
 
             String sketchbookPrefix = "landscape sketchbook - ";
@@ -1624,6 +1628,14 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             }
         }
         return true;
+    }
+
+    @Override
+    public boolean keyUp(int keyCode) {
+        if (keyCode == Input.Keys.ESCAPE) {
+            return this.tabHeader.btnBack.trigger();
+        }
+        return super.keyUp(keyCode);
     }
 }
 

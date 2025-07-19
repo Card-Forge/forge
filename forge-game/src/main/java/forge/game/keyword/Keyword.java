@@ -178,6 +178,7 @@ public enum Keyword {
     SQUAD("Squad", KeywordWithCost.class, false, "As an additional cost to cast this spell, you may pay %s any number of times. When this creature enters, create that many tokens that are copies of it."),
     START_YOUR_ENGINES("Start your engines", SimpleKeyword.class, true, "If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4."),
     STARTING_INTENSITY("Starting intensity", KeywordWithAmount.class, true, null),
+    STATION("Station", KeywordWithAmount.class, false, "Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It’s an artifact creature at %d+."),
     STORM("Storm", SimpleKeyword.class, false, "When you cast this spell, copy it for each other spell that was cast before it this turn. You may choose new targets for the copies."),
     STRIVE("Strive", KeywordWithCost.class, false, "CARDNAME costs %s more to cast for each target beyond the first."),
     SUNBURST("Sunburst", SimpleKeyword.class, false, "This enters with either a +1/+1 or charge counter on it for each color of mana spent to cast it based on whether it's a creature."),
@@ -199,6 +200,7 @@ public enum Keyword {
     VANISHING("Vanishing", KeywordWithAmount.class, false, "This permanent enters with {%d:time counter} on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it."),
     VIGILANCE("Vigilance", SimpleKeyword.class, true, "Attacking doesn't cause this creature to tap."),
     WARD("Ward", KeywordWithCost.class, false, "Whenever this permanent becomes the target of a spell or ability an opponent controls, counter it unless that player pays %s."),
+    WARP("Warp", KeywordWithCost.class, false, "You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn."),
     WITHER("Wither", SimpleKeyword.class, true, "This deals damage to creatures in the form of -1/-1 counters."),
 
     // mayflash additional cast

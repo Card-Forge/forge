@@ -1,0 +1,17 @@
+{
+    "automappingRulesFile": "",
+    "commands": [
+    ],
+    "compatibilityVersion": 1100,
+    "extensionsPath": "../../common/maps/extensions",
+    "folders": [
+        ".",
+        "../../common/maps/obj",
+        "../../common/maps/extensions",
+        "../../common/maps/tileset"
+    ],
+    "properties": [
+    ],
+    "propertyTypes": [
+    ]
+}

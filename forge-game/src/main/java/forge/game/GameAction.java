@@ -146,10 +146,6 @@ public class GameAction {
             c.updateRooms();
         }
 
-        if (fromBattlefield && !toBattlefield) {
-            c.getController().setRevolt(true);
-        }
-
         boolean suppress = !c.isToken() && zoneFrom.equals(zoneTo);
         Card copied = null;
         Card lastKnownInfo = null;
@@ -453,7 +449,7 @@ public class GameAction {
             if (zoneFrom.is(ZoneType.Stack) && toBattlefield) {
                 // 400.7a Effects from static abilities that give a permanent spell on the stack an ability
                 // that allows it to be cast for an alternative cost continue to apply to the permanent that spell becomes.
-                if (c.getCastSA() != null && !c.getCastSA().isIntrinsic() && c.getCastSA().getKeyword() != null) {
+                if (c.getCastSA() != null && !c.getCastSA().isIntrinsic() && c.getKeywords().contains(c.getCastSA().getKeyword())) {
                     KeywordInterface ki = c.getCastSA().getKeyword();
                     ki.setHostCard(copied);
                     copied.addChangedCardKeywordsInternal(ImmutableList.of(ki), null, false, copied.getGameTimestamp(), null, true);
@@ -519,6 +515,7 @@ public class GameAction {
                 }
                 card.setZone(zoneTo);
             }
+            copied.clearMergedCards();
         } else {
             storeChangesZoneAll(copied, zoneFrom, zoneTo, params);
             // "enter the battlefield as a copy" - apply code here
@@ -645,7 +642,8 @@ public class GameAction {
                     // Ask controller if it wants to be on top or bottom of other meld.
                     unmeldPosition++;
                 }
-                changeZone(null, zoneTo, unmeld, position, cause, params);
+                unmeld = changeZone(null, zoneTo, unmeld, position, cause, params);
+                storeChangesZoneAll(unmeld, zoneFrom, zoneTo, params);
             }
         } else if (toBattlefield) {
             for (Player p : game.getPlayers()) {

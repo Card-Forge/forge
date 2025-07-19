@@ -1,0 +1,9 @@
+Name:Thawbringer
+ManaCost:2 G
+Types:Creature Insect Scout
+PT:4/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When this creature enters or dies, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSurveil | Secondary$ True | TriggerDescription$ When this creature enters or dies, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+SVar:TrigSurveil:DB$ Surveil | Defined$ You | Amount$ 1
+DeckHas:Ability$Surveil|Graveyard
+Oracle:When this creature enters or dies, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)

@@ -1,6 +1,7 @@
 package forge.token;
 
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
@@ -41,7 +42,6 @@ public class TokenDb implements ITokenDatabase {
 
     public boolean containsRule(String rule) {
         return this.rulesByName.containsKey(rule);
-
     }
 
     public void preloadTokens() {
@@ -101,21 +101,33 @@ public class TokenDb implements ITokenDatabase {
 
     @Override
     public PaperToken getToken(String tokenName, String edition) {
+        return getToken(tokenName, edition, -1);
+    }
+
+    @Override
+    public PaperToken getToken(String tokenName, String edition, int artIndex) {
         CardEdition realEdition = editions.getEditionByCodeOrThrow(edition);
         String fullName = String.format("%s_%s", tokenName, realEdition.getCode().toLowerCase());
 
-        // token exist in Set, return one at random
+        // Token exists in edition, return token at artIndex or a random one.
         if (loadTokenFromSet(realEdition, tokenName)) {
-            return Aggregates.random(allTokenByName.get(fullName));
+            Collection<PaperToken> collection = allTokenByName.get(fullName);
+
+            if (artIndex < 1 || artIndex > collection.size()) {
+                return Aggregates.random(collection);
+            }
+
+            return Iterables.get(collection, artIndex - 1);
         }
         PaperToken fallback = this.fallbackToken(tokenName);
         if (fallback != null) {
             return fallback;
         }
 
-        if (!extraTokensByName.containsKey(fullName)) {
+        CardRules cr = rulesByName.get(tokenName);
+        if (!extraTokensByName.containsKey(fullName) && cr != null) {
             try {
-                PaperToken pt = new PaperToken(rulesByName.get(tokenName), realEdition, tokenName, "", IPaperCard.NO_ARTIST_NAME);
+                PaperToken pt = new PaperToken(cr, realEdition, tokenName, "", IPaperCard.NO_ARTIST_NAME);
                 extraTokensByName.put(fullName, pt);
                 return pt;
             } catch(Exception e) {
@@ -124,11 +136,6 @@ public class TokenDb implements ITokenDatabase {
         }
 
         return extraTokensByName.get(fullName);
-    }
-
-    @Override
-    public PaperToken getToken(String tokenName, String edition, int artIndex) {
-        return null;
     }
 
     @Override

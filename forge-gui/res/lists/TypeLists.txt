@@ -12,6 +12,7 @@ Lair
 Locus
 Mine
 Omenpath
+Planet:Planets
 Power-Plant
 Sphere:Spheres
 Tower
@@ -92,10 +93,12 @@ Dog:Dogs
 Dragon:Dragons
 Drake:Drakes
 Dreadnought:Dreadnoughts
+Drix:Drixes
 Drone:Drones
 Druid:Druids
 Dryad:Dryads
 Dwarf:Dwarves
+Echidna:Echidnas
 Efreet:Efreets
 Egg:Eggs
 Elder:Elders
@@ -136,6 +139,7 @@ Hag:Hags
 Halfling:Halflings
 Hamster:Hamsters
 Harpy:Harpies
+Hedgehog:Hedgehogs
 Hellion:Hellions
 Hero:Heroes
 Hippo:Hippos
@@ -363,8 +367,10 @@ Gold
 Incubator:Incubators
 Junk
 Key:Keys
+Lander:Landers
 Map
 Powerstone:Powerstones
+Spacecraft:Spacecraft
 Treasure:Treasures
 Vehicle:Vehicles
 [WalkerTypes]

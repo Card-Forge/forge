@@ -7,7 +7,7 @@ SVar:Frenetic:AB$ FlipACoin | Cost$ 0 | ConditionPresent$ Card.Self | ConditionC
 SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Self | RememberChanged$ True | SubAbility$ DelTrig
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ MoveBack | RememberObjects$ RememberedLKI | SubAbility$ DBCleanup | TriggerDescription$ Return CARDNAME to the battlefield under its owner's control at the beginning of the next end step.
 SVar:MoveBack:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRememberedLKI
-SVar:Cleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DBSacSelf:DB$ Sacrifice
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:All

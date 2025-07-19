@@ -110,7 +110,7 @@ public abstract class GameStage extends Stage {
         dialog.setPosition((dialogStage.getWidth() - dialog.getWidth()) / 2, (dialogStage.getHeight() - dialog.getHeight()) / 2);
         dialogOnlyInput = true;
 
-        if (Forge.hasGamepad() && !dialogButtonMap.isEmpty())
+        if (Forge.hasExternalInput() && !dialogButtonMap.isEmpty())
             dialogStage.setKeyboardFocus(dialogButtonMap.first());
     }
 
@@ -576,9 +576,6 @@ public abstract class GameStage extends Stage {
             player.getMovementDirection().y = 0;
             if (!player.isMoving())
                 stop();
-        }
-        if (KeyBinding.Menu.isPressed(keycode)) {
-            openMenu();
         }
         return false;
     }

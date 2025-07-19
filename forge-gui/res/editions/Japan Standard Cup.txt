@@ -4,7 +4,8 @@ Date=2025-02-09
 Name=Japan Standard Cup
 Type=Promo
 ScryfallCode=PJSC
+CardLang=ja
 
 [cards]
-20251 R Tishana's Tidebinder @Hagiya Kaoru
-20252 R Brotherhood's End @Takayama Toshiaki
+2025-1 R Tishana's Tidebinder @Hagiya Kaoru
+2025-2 R Brotherhood's End @Takayama Toshiaki

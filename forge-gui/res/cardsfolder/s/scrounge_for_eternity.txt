@@ -1,0 +1,6 @@
+Name:Scrounge for Eternity
+ManaCost:2 B
+Types:Sorcery
+A:SP$ ChangeZone | Cost$ 2 B Sac<1/Artifact;Creature/artifact or creature> | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+cmcLE5,Spacecraft.YouOwn+cmcLE5 | TgtPrompt$ Choose target creature or Spacecraft card with mana value 5 or less in your graveyard | SubAbility$ DBToken | SpellDescription$ Return target creature or Spacecraft card with mana value 5 or less from your graveyard to the battlefield. Then create a Lander token. (It's an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_lander_sac_search | TokenOwner$ You
+Oracle:As an additional cost to cast this spell, sacrifice an artifact or creature.\nReturn target creature or Spacecraft card with mana value 5 or less from your graveyard to the battlefield. Then create a Lander token. (It's an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")

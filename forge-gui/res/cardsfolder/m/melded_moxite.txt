@@ -1,0 +1,8 @@
+Name:Melded Moxite
+ManaCost:1 R
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When this artifact enters, you may discard a card. If you do, draw two cards.
+SVar:TrigDiscard:AB$ Draw | Cost$ Discard<1/Card> | NumCards$ 2
+A:AB$ Token | Cost$ 3 Sac<1/CARDNAME> | TokenAmount$ 1 | TokenScript$ c_2_2_a_robot | TokenTapped$ True | TokenOwner$ You | SpellDescription$ Create a tapped 2/2 colorless Robot artifact creature token.
+DeckHas:Ability$Discard|Sacrifice|Token
+Oracle:When this artifact enters, you may discard a card. If you do, draw two cards.\n{3}, Sacrifice this artifact: Create a tapped 2/2 colorless Robot artifact creature token.

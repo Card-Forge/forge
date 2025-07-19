@@ -274,6 +274,14 @@ public class Forge implements ApplicationListener {
         return false;
     }
 
+    public static boolean hasExternalInput() {
+        return hasGamepad() || hasKeyboard();
+    }
+
+    public static boolean hasKeyboard() {
+        return !GuiBase.isAndroid();
+    }
+
     public static InputProcessor getInputProcessor() {
         return inputProcessor;
     }
@@ -1235,7 +1243,15 @@ public class Forge implements ApplicationListener {
             if (keyInputAdapter != null) {
                 return keyInputAdapter.keyUp(keyCode);
             }
-            return false;
+            // if no active key input adapter, give current screen or overlay a chance to handle key
+            FContainer container = FOverlay.getTopOverlay();
+            if (container == null) {
+                container = currentScreen;
+                if (container == null) {
+                    return false;
+                }
+            }
+            return container.keyUp(keyCode);
         }
 
         @Override

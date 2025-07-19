@@ -1,0 +1,10 @@
+Name:Command Bridge
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When this land enters, sacrifice it unless you tap an untapped permanent you control.
+SVar:TrigSac:DB$ Sacrifice | UnlessCost$ tapXType<1/Permanent> | UnlessPayer$ You
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+SVar:NeedsToPlay:Permanent.untapped+YouCtrl
+Oracle:This land enters tapped.\nWhen this land enters, sacrifice it unless you tap an untapped permanent you control.\n{T}: Add one mana of any color.

@@ -316,6 +316,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     // however it could also be a different card which isn't an error but means the exiling SA was gained
     private Card exiledWith;
     private Player exiledBy;
+    private SpellAbility exiledSA;
 
     private Map<Long, Player> goad = Maps.newTreeMap();
 
@@ -1090,7 +1091,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final boolean isOnAdventure() {
         if (!isAdventureCard())
             return false;
-        if (getExiledWith() == null)
+        if (!equals(getExiledWith()))
             return false;
         if (!CardStateName.Secondary.equals(getExiledWith().getCurrentStateName()))
             return false;
@@ -1407,6 +1408,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final CardCollectionView getMergedCards() {
         return CardCollection.getView(mergedCards);
     }
+    public final void setMergedCards(Iterable<Card> mc) {
+        mergedCards = new CardCollection(mc);
+    }
+
     public final Card getTopMergedCard() {
         return mergedCards.get(0);
     }
@@ -2153,11 +2158,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         exiledWith = null;
         exiledBy = null;
+        exiledSA = null;
     }
 
     public final Player getExiledBy() { return exiledBy; }
     public final void setExiledBy(final Player ep) {
         exiledBy = ep;
+    }
+
+    public final SpellAbility getExiledSA() { return exiledSA;}
+    public final void setExiledSA(final SpellAbility sa) {
+        exiledSA = sa;
     }
 
     public final String getChosenType() {
@@ -2739,7 +2750,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Class") || keyword.startsWith("Blitz")
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous")
                         || keyword.equals("For Mirrodin") || keyword.equals("Job select") || keyword.startsWith("Craft")
-                        || keyword.startsWith("Landwalk") || keyword.startsWith("Visit") || keyword.startsWith("Mobilize")) {
+                        || keyword.startsWith("Landwalk") || keyword.startsWith("Visit") || keyword.startsWith("Mobilize")
+                        || keyword.startsWith("Station") || keyword.startsWith("Warp")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.equals("Read ahead")) {
                     sb.append(Localizer.getInstance().getMessage("lblReadAhead")).append(" (").append(Localizer.getInstance().getMessage("lblReadAheadDesc"));
@@ -6832,6 +6844,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         this.foretoldCostByEffect = val;
     }
 
+    public boolean isWarped() {
+        if (!isInZone(ZoneType.Exile)) {
+            return false;
+        }
+        if (exiledSA == null) {
+            return false;
+        }
+        return exiledSA.isKeyword(Keyword.WARP);
+    }
+
     public boolean isSpecialized() {
         return specialized;
     }
@@ -7645,8 +7667,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         CardState oState = getState(CardStateName.Original);
         final List<SpellAbility> abilities = Lists.newArrayList();
         for (SpellAbility sa : getSpellAbilities()) {
-            //adventure spell check
-            if (isAdventureCard() && sa.isAdventure() && isOnAdventure()) {
+            if (sa.isAdventure() && isOnAdventure()) {
                 continue; // skip since it's already on adventure
             }
             //add alternative costs as additional spell abilities

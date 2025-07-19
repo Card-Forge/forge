@@ -1997,7 +1997,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         @Override
         public void refresh() {
             BoosterDraft draft = parentScreen.getDraft();
-            if (draft == null) { return; }
+            if (draft == null || !draft.hasNextChoice()) {
+                return;
+            }
 
             CardPool pool = draft.nextChoice();
             int packNumber = draft.getCurrentBoosterIndex() + 1;
