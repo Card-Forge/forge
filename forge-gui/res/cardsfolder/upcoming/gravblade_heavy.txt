@@ -1,0 +1,8 @@
+Name:Gravblade Heavy
+ManaCost:3 B
+Types:Creature Human Soldier
+PT:3/4
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddKeyword$ Deathtouch | IsPresent$ Artifact.YouCtrl | Description$ As long as you control an artifact, this creature gets +1/+0 and has deathtouch.
+SVar:BuffedBy:Artifact
+DeckHints:Type$Artifact
+Oracle:As long as you control an artifact, this creature gets +1/+0 and has deathtouch.
