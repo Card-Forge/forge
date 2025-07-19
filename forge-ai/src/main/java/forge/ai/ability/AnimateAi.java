@@ -231,41 +231,44 @@ public class AnimateAi extends SpellAbilityAi {
             return bFlag; // All of the defined stuff is animated, not very useful
         } else {
             sa.resetTargets();
-            return animateTgtAI(sa);
+            return animateTgtAI(sa).willingToPlay();
         }
 
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         if (sa.usesTargeting()) {
             sa.resetTargets();
             return animateTgtAI(sa);
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+        AiAbilityDecision decision;
         if (sa.usesTargeting()) {
-            if(animateTgtAI(sa))
-                return true;
-            else if (!mandatory)
-                return false;
+            decision = animateTgtAI(sa);
+            if (decision.willingToPlay()) {
+                return decision;
+            } else if (!mandatory) {
+                return decision;
+            }
             else {
                 // fallback if animate is mandatory
                 sa.resetTargets();
                 List<Card> list = CardUtil.getValidCardsToTarget(sa);
                 if (list.isEmpty()) {
-                    return false;
+                    return decision;
                 }
                 Card toAnimate = ComputerUtilCard.getWorstAI(list);
                 rememberAnimatedThisTurn(aiPlayer, toAnimate);
                 sa.getTargets().add(toAnimate);
             }
         }
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
@@ -273,7 +276,7 @@ public class AnimateAi extends SpellAbilityAi {
         return player.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2);
     }
 
-    private boolean animateTgtAI(final SpellAbility sa) {
+    private AiAbilityDecision animateTgtAI(final SpellAbility sa) {
         final Player ai = sa.getActivatingPlayer();
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
         final String logic = sa.getParamOrDefault("AILogic", "");
@@ -295,7 +298,7 @@ public class AnimateAi extends SpellAbilityAi {
 
         // list is empty, no possible targets
         if (list.isEmpty() && !alwaysActivatePWAbility) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         // something is used for animate into creature
@@ -362,7 +365,7 @@ public class AnimateAi extends SpellAbilityAi {
 
             // data is empty, no good targets
             if (data.isEmpty() && !alwaysActivatePWAbility) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
             // get the best creature to be animated
@@ -385,13 +388,13 @@ public class AnimateAi extends SpellAbilityAi {
                     holdAnimatedTillMain2(ai, worst);
                     if (!ComputerUtilMana.canPayManaCost(sa, ai, 0, sa.isTrigger())) {
                         releaseHeldTillMain2(ai, worst);
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
                     }
                 }
                 rememberAnimatedThisTurn(ai, worst);
                 sa.getTargets().add(worst);
             }
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         if (logic.equals("SetPT")) {
@@ -403,7 +406,7 @@ public class AnimateAi extends SpellAbilityAi {
                     && (buffed.getNetPower() - worst.getNetPower() >= 3 || !ComputerUtilCard.doesCreatureAttackAI(ai, worst))) {
                 sa.getTargets().add(worst);
                 rememberAnimatedThisTurn(ai, worst);
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
         }
 
@@ -415,7 +418,7 @@ public class AnimateAi extends SpellAbilityAi {
                     boolean isValuableAttacker = ph.is(PhaseType.MAIN1, ai) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animated);
                     boolean isValuableBlocker = combat != null && combat.getDefendingPlayers().contains(ai) && ComputerUtilCard.doesSpecifiedCreatureBlock(ai, animated);
                     if (isValuableAttacker || isValuableBlocker)
-                        return true;
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
         }
@@ -425,7 +428,7 @@ public class AnimateAi extends SpellAbilityAi {
             if(worst != null) {
                 sa.getTargets().add(worst);
                 rememberAnimatedThisTurn(ai, worst);
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
         }
 
@@ -435,7 +438,7 @@ public class AnimateAi extends SpellAbilityAi {
             if(best != null) {
                 sa.getTargets().add(best);
                 rememberAnimatedThisTurn(ai, best);
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
         }
 
@@ -443,7 +446,7 @@ public class AnimateAi extends SpellAbilityAi {
         // two are the only things
         // that animate a target. Those can just use AI:RemoveDeck:All until
         // this can do a reasonably good job of picking a good target
-        return false;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     public static Card becomeAnimated(final Card card, final SpellAbility sa) {

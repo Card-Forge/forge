@@ -1,8 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -20,7 +18,7 @@ public class UnattachAllAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
         // prevent run-away activations - first time will always return true
         boolean chance = MyRandom.getRandom().nextFloat() <= .9;
 
@@ -33,7 +31,7 @@ public class UnattachAllAi extends SpellAbilityAi {
             final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
 
             if (xPay == 0) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             sa.setXManaCostPaid(xPay);
@@ -41,17 +39,21 @@ public class UnattachAllAi extends SpellAbilityAi {
 
         if (ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
                 && !"Curse".equals(sa.getParam("AILogic"))) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        return chance;
+        if (chance) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else {
+            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
+        }
     }
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card card = sa.getHostCard();
         // Check if there are any valid targets
         List<GameObject> targets = new ArrayList<>();
@@ -63,21 +65,25 @@ public class UnattachAllAi extends SpellAbilityAi {
             Card newTarget = (Card) targets.get(0);
             //don't equip opponent creatures
             if (!newTarget.getController().equals(ai)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             //don't equip a worse creature
             if (card.isEquipping()) {
                 Card oldTarget = card.getEquipping();
-                return ComputerUtilCard.evaluateCreature(oldTarget) <= ComputerUtilCard.evaluateCreature(newTarget);
+                if (ComputerUtilCard.evaluateCreature(oldTarget) <= ComputerUtilCard.evaluateCreature(newTarget)) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                } else {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
             }
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
         // AI should only activate this during Human's turn
         return canPlayAI(ai, sa);
     }

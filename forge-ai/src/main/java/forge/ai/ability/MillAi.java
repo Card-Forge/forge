@@ -2,10 +2,7 @@ package forge.ai.ability;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCost;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
@@ -165,14 +162,14 @@ public class MillAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        return targetAI(aiPlayer, sa, true);
+    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+        return targetAI(aiPlayer, sa, true) ? new AiAbilityDecision(100, forge.ai.AiPlayDecision.WillPlay) : new AiAbilityDecision(0, forge.ai.AiPlayDecision.CantPlayAi);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         if (!targetAI(aiPlayer, sa, mandatory)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (sa.hasParam("NumCards") && (sa.getParam("NumCards").equals("X") && sa.getSVar("X").equals("Count$xPaid"))) {
@@ -180,7 +177,7 @@ public class MillAi extends SpellAbilityAi {
             sa.setXManaCostPaid(getNumToDiscard(aiPlayer, sa));
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
     /* (non-Javadoc)
      * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)

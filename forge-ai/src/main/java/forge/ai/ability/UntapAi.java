@@ -70,41 +70,53 @@ public class UntapAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (!sa.usesTargeting()) {
             if (mandatory) {
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             } else if ("Never".equals(sa.getParam("AILogic"))) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             final List<Card> pDefined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
-            return pDefined.isEmpty() || (pDefined.get(0).isTapped() && pDefined.get(0).getController() == ai);
+            if (pDefined.isEmpty() || (pDefined.get(0).isTapped() && pDefined.get(0).getController() == ai)) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
+            }
         } else {
             if (untapPrefTargeting(ai, sa, mandatory)) {
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             } else if (mandatory) {
                 // not enough preferred targets, but mandatory so keep going:
-                return untapUnpreferredTargeting(sa, mandatory);
+                if (untapUnpreferredTargeting(sa, mandatory)) {
+                    return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
+                } else {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
             }
         }
 
-        return false;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
         boolean randomReturn = true;
 
         if (!sa.usesTargeting()) {
             // who cares if its already untapped, it's only a subability?
         } else {
             if (!untapPrefTargeting(ai, sa, false)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
-        return randomReturn;
+        if (randomReturn) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else {
+            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
+        }
     }
 
     /**

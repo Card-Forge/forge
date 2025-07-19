@@ -76,7 +76,7 @@ public class TokenAi extends SpellAbilityAi {
             final AbilitySub sub = sa.getSubAbility();
             // useful
             // no token created
-            return pwPlus || (sub != null && SpellApiToAi.Converter.get(sub).chkAIDrawback(sub, ai)); // planeswalker plus ability or sub-ability is
+            return pwPlus || (sub != null && SpellApiToAi.Converter.get(sub).chkAIDrawback(sub, ai).willingToPlay()); // planeswalker plus ability or sub-ability is
         }
 
         String tokenPower = sa.getParamOrDefault("TokenPower", actualToken.getBasePowerString());
@@ -252,7 +252,7 @@ public class TokenAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         Card actualToken = spawnToken(ai, sa);
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -260,13 +260,18 @@ public class TokenAi extends SpellAbilityAi {
             sa.resetTargets();
 
             if (actualToken.getType().hasSubtype("Role")) {
-                return tgtRoleAura(ai, sa, actualToken, mandatory);
+                if (tgtRoleAura(ai, sa, actualToken, mandatory)) {
+                    // Targeting handled in tgtRoleAura
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                } else {
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+                }
             }
 
             if (tgt.canOnlyTgtOpponent()) {
                 PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
                 if (mandatory && targetableOpps.isEmpty()) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 Player opp = targetableOpps.min(PlayerPredicates.compareByLife());
                 sa.getTargets().add(opp);
@@ -290,23 +295,27 @@ public class TokenAi extends SpellAbilityAi {
                 }
             }
             if (x <= 0 && !mandatory) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
         if (mandatory) {
             // Necessary because the AI goes into this method twice, first to set up targets (with mandatory=true)
             // and then the second time to confirm the trigger (where mandatory may be set to false).
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         if ("OnlyOnAlliedAttack".equals(sa.getParam("AILogic"))) {
             Combat combat = ai.getGame().getCombat();
-            return combat != null && combat.getAttackingPlayer() != null
-                    && !combat.getAttackingPlayer().isOpponentOf(ai);
+            if (combat != null && combat.getAttackingPlayer() != null
+                    && !combat.getAttackingPlayer().isOpponentOf(ai)) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
     /* (non-Javadoc)
      * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
