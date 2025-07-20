@@ -67,5 +67,6 @@ public class ReplaceDrawCards extends ReplacementEffect {
     @Override
     public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
         sa.setReplacingObject(AbilityKey.Player, runParams.get(AbilityKey.Affected));
+        sa.setReplacingObject(AbilityKey.Number, runParams.get(AbilityKey.Number));
     }
 }

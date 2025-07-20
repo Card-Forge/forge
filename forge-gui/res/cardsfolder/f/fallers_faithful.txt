@@ -1,0 +1,9 @@
+Name:Faller's Faithful
+ManaCost:2 B
+Types:Creature Human Wizard
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When this creature enters, destroy up to one other target creature. If that creature wasn't dealt damage this turn, its controller draws two cards.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.Other | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBDraw | TgtPrompt$ Select up to one other target creature
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | Defined$ TargetedController | ConditionDefined$ Targeted | ConditionPresent$ Card.!wasDealtDamageThisTurn
+SVar:PlayMain1:TRUE
+Oracle:When this creature enters, destroy up to one other target creature. If that creature wasn't dealt damage this turn, its controller draws two cards.

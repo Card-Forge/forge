@@ -1,0 +1,8 @@
+Name:Exosuit Savior
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When this creature enters, return up to one other target permanent you control to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Permanent.Other+YouCtrl | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select up to one other target permanent you control
+Oracle:Flying\nWhen this creature enters, return up to one other target permanent you control to its owner's hand.
