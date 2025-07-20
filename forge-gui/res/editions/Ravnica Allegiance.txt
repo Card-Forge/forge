@@ -2,7 +2,6 @@
 Code=RNA
 Date=2019-01-25
 Name=Ravnica Allegiance
-Code2=RNA
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common:fromSheet("RNA cards"):!fromSheet("RNA Lands"), 3 Uncommon:fromSheet("RNA cards"), 1 RareMythic:fromSheet("RNA cards"), 1 fromSheet("RNA Lands")
@@ -310,3 +309,6 @@ Simic Guildgate|RNA
 10 wb_1_1_spirit_flying @Josh Hass
 11 c_1_1_a_thopter_flying @Darren Tan
 12 c_a_treasure_sac @Mark Behm
+
+[emblem]
+13 emblem_domri_chaos_bringer @Zack Stella
