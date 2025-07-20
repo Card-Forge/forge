@@ -1,10 +1,9 @@
 Name:Worldpurge
 ManaCost:4 WU WU WU WU
 Types:Sorcery
-A:SP$ ChangeZoneAll | ChangeType$ Permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBRepeat | SpellDescription$ Return all permanents to their owners' hands. Each player chooses up to seven cards in their hand, then shuffles the rest into their library. Each player loses all unspent mana.
-SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose
-SVar:DBChoose:DB$ ChooseCard | MinAmount$ 0 | Amount$ 7 | Defined$ Remembered | Choices$ Card.RememberedPlayerCtrl | ChoiceZone$ Hand | SubAbility$ DBReturn
-SVar:DBReturn:DB$ ChangeZone | Defined$ ValidHand Card.nonChosenCard+RememberedPlayerCtrl | Origin$ Hand | Destination$ Library | Shuffle$ True | SubAbility$ DBEmpty
-SVar:DBEmpty:DB$ DrainMana | Defined$ Remembered
+A:SP$ ChangeZoneAll | ChangeType$ Permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBChoose | SpellDescription$ Return all permanents to their owners' hands. Each player chooses up to seven cards in their hand, then shuffles the rest into their library. Each player loses all unspent mana.
+SVar:DBChoose:DB$ ChooseCard | MinAmount$ 0 | Amount$ 7 | Defined$ Player | ControlledByPlayer$ Chooser | ChoiceZone$ Hand | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ ValidHand Card.nonChosenCard | Origin$ Hand | Destination$ Library | Shuffle$ True | SubAbility$ DBEmpty
+SVar:DBEmpty:DB$ DrainMana | Defined$ Player
 AI:RemoveDeck:All
 Oracle:Return all permanents to their owners' hands. Each player chooses up to seven cards in their hand, then shuffles the rest into their library. Each player loses all unspent mana.
