@@ -3,8 +3,7 @@ ManaCost:1 U B
 Types:Enchantment Saga
 K:Chapter:3:DBMill,DBEffect,DBEffect
 SVar:DBMill:DB$ Mill | NumCards$ 4 | Defined$ Player | SubAbility$ DBChangeZone | SpellDescription$ Each player mills four cards. Then you may exile a creature or planeswalker card from each graveyard.
-SVar:DBChangeZone:DB$ ChangeZone | DefinedPlayer$ Player | Chooser$ You | Origin$ Graveyard | Destination$ Exile | Hidden$ True | Choices$ Creature,Planeswalker | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+SVar:DBChangeZone:DB$ ChangeZone | DefinedPlayer$ Player | Chooser$ You | Origin$ Graveyard | Destination$ Exile | Hidden$ True | ChangeType$ Creature,Planeswalker
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PlayExile | RememberObjects$ ValidExile Card.ExiledWithSource+nonLand | ForgetOnMoved$ Exile | SpellDescription$ Until end of turn, you may cast spells from among cards exiled with CARDNAME, and you may spend mana as though it were mana of any color to cast those spells.
 SVar:PlayExile:Mode$ Continuous | MayPlayIgnoreType$ True | MayPlayIgnoreColor$ True | MayPlay$ True | Affected$ Card.ExiledWithEffectSource+nonLand | AffectedZone$ Exile | Description$ Until end of turn, you may cast spells from among cards exiled with EFFECTSOURCE, and you may spend mana as though it were mana of any color to cast those spells.
 DeckHas:Ability$Mill

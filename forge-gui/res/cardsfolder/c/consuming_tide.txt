@@ -1,7 +1,7 @@
 Name:Consuming Tide
 ManaCost:2 U U
 Types:Sorcery
-A:SP$ ChooseCard | Defined$ Player | Mandatory$ True | ControlledByPlayer$ Chooser | Choices$ Permanent.nonLand | ChoiceTitle$ Choose a nonland permanent you control | SpellDescription$ Each player chooses a nonland permanent they control. Return all nonland permanents not chosen this way to their owners' hands. Then you draw a card for each opponent who has more cards in their hand than you.
+A:SP$ ChooseCard | Defined$ Player | Mandatory$ True | ControlledByPlayer$ Chooser | Choices$ Permanent.nonLand | ChoiceTitle$ Choose a nonland permanent you control | SubAbility$ DBReturnAll | SpellDescription$ Each player chooses a nonland permanent they control. Return all nonland permanents not chosen this way to their owners' hands. Then you draw a card for each opponent who has more cards in their hand than you.
 SVar:DBReturnAll:DB$ ChangeZoneAll | ChangeType$ Permanent.nonLand+!ChosenCard | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | StackDescription$ None
 SVar:X:PlayerCountOpponents$HasPropertyHasCardsInHand_Card_GTY
