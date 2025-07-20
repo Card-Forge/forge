@@ -12,6 +12,3 @@ ScryfallCode=PRIX
 130 R Ghalta, Primal Hunger @Johann Bodin
 177 R Captain's Hook @Kev Walker
 186 C Evolving Wilds @Daniel Ljunggren
-
-[tokens]
-c_a_treasure_sac
