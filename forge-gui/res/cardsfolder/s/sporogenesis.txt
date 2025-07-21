@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZone
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You
 SVar:X:TriggeredCard$CardCounters.FUNGUS
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigRemove | TriggerDescription$ When CARDNAME leaves the battlefield, remove all fungus counters from all creatures.
-SVar:TrigRemove:DB$ RepeatEach | RepeatCards$ Creature | RepeatSubAbility$ DBRemoveFungus
-SVar:DBRemoveFungus:DB$ RemoveCounter | Defined$ Remembered | CounterType$ FUNGUS | CounterNum$ All
+SVar:TrigRemove:DB$ RemoveCounterAll | ValidCards$ Creature | CounterType$ FUNGUS | AllCounters$ True
 DeckHas:Ability$Token
 Oracle:At the beginning of your upkeep, you may put a fungus counter on target nontoken creature.\nWhenever a creature with a fungus counter on it dies, create a 1/1 green Saproling creature token for each fungus counter on that creature.\nWhen Sporogenesis leaves the battlefield, remove all fungus counters from all creatures.
