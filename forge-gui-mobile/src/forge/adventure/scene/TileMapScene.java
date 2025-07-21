@@ -98,10 +98,24 @@ public class TileMapScene extends HudScene {
             if (Current.player().fullHeal())
                 autoheal = true; // to play sound/effect on act
         }
+        if (WorldSave.getCurrentSave().getPlayer().hasAnnounceFantasy()) {
+            WorldSave.getCurrentSave().getPlayer().clearAnnounceFantasy();
+            MapStage.getInstance().showDeckAwardDialog("{BLINK=WHITE;RED}Chaos Mode!{ENDBLINK}\n" +
+                            "Enemy will use Preconstructed or Random Generated Decks. Genetic AI Decks will be available to some enemies on Hard difficulty.",
+                    WorldSave.getCurrentSave().getPlayer().getSelectedDeck(), this::initializeDialogs);
+        } else if (WorldSave.getCurrentSave().getPlayer().hasAnnounceCustom()) {
+            WorldSave.getCurrentSave().getPlayer().clearAnnounceCustom();
+            MapStage.getInstance().showDeckAwardDialog("{GRADIENT}Custom Deck Mode!{ENDGRADIENT}\n" +
+                    "Some enemies will use Genetic AI Decks randomly.", WorldSave.getCurrentSave().getPlayer().getSelectedDeck(), this::initializeDialogs);
+        } else {
+            initializeDialogs();
+        }
+    }
+
+    private void initializeDialogs() {
         AdventureQuestController.instance().updateEnteredPOI(rootPoint);
         AdventureQuestController.instance().showQuestDialogs(stage);
     }
-
     @Override
     public boolean leave() {
         // clear player collision on WorldStage and the GameHUD will restore it after the flicker animation.

@@ -191,7 +191,7 @@ public abstract class GameStage extends Stage {
         showDialog();
     }
 
-    public void showDeckAwardDialog(String message, Deck deck) {
+    public void showDeckAwardDialog(String message, Deck deck, Runnable runnable) {
         dialog.getContentTable().clear();
         dialog.getButtonTable().clear();
         dialog.clearListeners();
@@ -236,7 +236,11 @@ public abstract class GameStage extends Stage {
         L.skipToTheEnd();
 
         dialog.getContentTable().add(L).width(250);
-        dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog)).width(240);
+        dialog.getButtonTable().add(Controls.newTextButton("OK", () -> {
+            hideDialog();
+            if (runnable != null)
+                runnable.run();
+        })).width(240);
         dialog.setKeepWithinStage(true);
         setDialogStage(GameHUD.getInstance());
         showDialog();
