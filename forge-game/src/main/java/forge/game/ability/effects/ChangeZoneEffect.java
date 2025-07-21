@@ -757,7 +757,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (sa.isTrigger() && sa.getTrigger().isKeyword(Keyword.WARP)) {
                     Card eff = createEffect(sa, activator, "Warped " + sa.getHostCard(), sa.getHostCard().getImageKey());
                     StringBuilder sbPlay = new StringBuilder();
-                    sbPlay.append("Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand+!ThisTurnEntered");
+                    sbPlay.append("Mode$ Continuous | MayPlay$ True | MayPlayPlayer$ CardOwner | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand+!ThisTurnEntered");
                     sbPlay.append(" | AffectedZone$ Exile | Description$ You may cast the card.");
                     final StaticAbility st = eff.addStaticAbility(sbPlay.toString());
                     eff.addRemembered(movedCard);
