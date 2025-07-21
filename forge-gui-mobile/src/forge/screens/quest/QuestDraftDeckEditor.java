@@ -1,6 +1,6 @@
 package forge.screens.quest;
 
-import forge.deck.Deck;
+import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.deck.FDeckEditor;
 
@@ -8,8 +8,8 @@ public class QuestDraftDeckEditor extends FDeckEditor {
     public QuestDraftDeckEditor(String existingDeckName) {
         super(FDeckEditor.EditorConfigQuestDraft, existingDeckName);
     }
-    public QuestDraftDeckEditor(Deck newDeck) {
-        super(FDeckEditor.EditorConfigQuestDraft, newDeck);
+    public QuestDraftDeckEditor(DeckGroup newDecks) {
+        super(FDeckEditor.EditorConfigQuestDraft, newDecks);
         setSelectedSection(DeckSection.Sideboard);
     }
 

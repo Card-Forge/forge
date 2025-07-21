@@ -27,7 +27,7 @@ public class DraftingProcessScreen extends FDeckEditor {
     }
 
     public DraftingProcessScreen(BoosterDraft draft, DeckEditorConfig editorConfig, QuestTournamentController questDraftController) {
-        super(editorConfig, "");
+        super(editorConfig, draft.getDecksAsGroup());
         this.draft = draft;
         this.questDraftController = questDraftController;
         getCatalogPage().scheduleRefresh(); //must refresh after draft set

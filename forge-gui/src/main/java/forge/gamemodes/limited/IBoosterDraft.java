@@ -20,6 +20,7 @@ package forge.gamemodes.limited;
 import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.item.PaperCard;
 
@@ -55,6 +56,13 @@ public interface IBoosterDraft {
         List<LimitedPlayer> out = new ArrayList<>();
         out.add(getHumanPlayer());
         out.addAll(Arrays.asList(getOpposingPlayers()));
+        return out;
+    }
+
+    default DeckGroup getDecksAsGroup() {
+        DeckGroup out = new DeckGroup();
+        out.setHumanDeck(getHumanPlayer().deck);
+        out.addAiDecks(Arrays.stream(getOpposingPlayers()).map(LimitedPlayer::getDeck).toArray(Deck[]::new));
         return out;
     }
 

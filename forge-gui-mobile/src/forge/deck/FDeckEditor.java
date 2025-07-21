@@ -113,6 +113,18 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             return controller;
         }
 
+        private IDeckController initDeckController(DeckGroup newDecks) {
+            IDeckController controller = this.getController();
+            if(newDecks == null) {
+                controller.newDeck();
+                return controller;
+            }
+            if(!(controller instanceof FileDeckGroupController fileController))
+                return initDeckController(newDecks.getHumanDeck());
+            fileController.setDeckGroup(newDecks);
+            return controller;
+        }
+
         private IDeckController initDeckController() {
             IDeckController controller = this.getController();
             controller.setEditor(null);
@@ -291,15 +303,15 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     public static DeckEditorConfig EditorConfigConstructed = new GameTypeDeckEditorConfig(GameType.Constructed,
             new FileDeckController<>(FModel.getDecks().getConstructed(), Deck::new, DeckPreferences::setCurrentDeck));
 
-    public static final FileDeckController<DeckGroup> DECK_CONTROLLER_DRAFT = new FileDeckController<>(FModel.getDecks().getDraft(),
+    public static final FileDeckGroupController DECK_CONTROLLER_DRAFT = new FileDeckGroupController(FModel.getDecks().getDraft(),
             DeckGroup::new, DeckPreferences::setDraftDeck);
     public static DeckEditorConfig EditorConfigDraft = new GameTypeDeckEditorConfig(GameType.Draft, DECK_CONTROLLER_DRAFT);
 
     public static DeckEditorConfig EditorConfigSealed = new GameTypeDeckEditorConfig(GameType.Sealed,
-            new FileDeckController<>(FModel.getDecks().getSealed(), DeckGroup::new, DeckPreferences::setSealedDeck))
+            new FileDeckGroupController(FModel.getDecks().getSealed(), DeckGroup::new, DeckPreferences::setSealedDeck))
             .setSideboardConfig(ItemManagerConfig.SEALED_POOL);
     public static DeckEditorConfig EditorConfigWinston = new GameTypeDeckEditorConfig(GameType.Winston,
-            new FileDeckController<>(FModel.getDecks().getWinston(), DeckGroup::new, null));
+            new FileDeckGroupController(FModel.getDecks().getWinston(), DeckGroup::new, null));
     public static DeckEditorConfig EditorConfigCommander = new GameTypeDeckEditorConfig(GameType.Commander,
             new FileDeckController<>(FModel.getDecks().getCommander(), Deck::new, DeckPreferences::setCommanderDeck));
     public static DeckEditorConfig EditorConfigOathbreaker = new GameTypeDeckEditorConfig(GameType.Oathbreaker,
@@ -329,7 +341,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     };
     //These are configured when the respective adventures are loaded.
     public static final FileDeckController<Deck> DECK_CONTROLLER_QUEST = new FileDeckController<>(null, Deck::new, fnUpdateQuestDeck);
-    public static final FileDeckController<DeckGroup> DECK_CONTROLLER_QUEST_DRAFT = new FileDeckController<>(null, DeckGroup::new, fnUpdateQuestDeck);
+    public static final FileDeckGroupController DECK_CONTROLLER_QUEST_DRAFT = new FileDeckGroupController(null, DeckGroup::new, fnUpdateQuestDeck);
     public static final FileDeckController<Deck> DECK_CONTROLLER_PLANAR_CONQUEST = new FileDeckController<>(null, Deck::new, null);
     public static DeckEditorConfig EditorConfigQuest = new GameTypeDeckEditorConfig(GameType.Quest, DECK_CONTROLLER_QUEST)
             .setCatalogConfig(ItemManagerConfig.QUEST_EDITOR_POOL)
@@ -426,6 +438,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     }
     public FDeckEditor(DeckEditorConfig editorConfig, Deck newDeck, FEventHandler backButton) {
         this(editorConfig, editorConfig.initDeckController(newDeck), backButton);
+    }
+    public FDeckEditor(DeckEditorConfig editorConfig, DeckGroup newDeckGroup) {
+        this(editorConfig, editorConfig.initDeckController(newDeckGroup), null);
     }
     public FDeckEditor(DeckEditorConfig editorConfig, FEventHandler backButton) {
         this(editorConfig, editorConfig.initDeckController(), backButton);
@@ -2373,10 +2388,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             return name;
         }
 
-        private void setModel(final T document) {
+        protected void setModel(final T document) {
             setModel(document, false);
         }
-        private void setModel(final T document, final boolean isStored) {
+        protected void setModel(final T document, final boolean isStored) {
             model = document;
 
             if (isStored) {
@@ -2553,6 +2568,18 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             currentFolder.delete(model.getName());
             setModel(null);
             return true;
+        }
+    }
+
+    public static class FileDeckGroupController extends FileDeckController<DeckGroup> {
+
+        protected FileDeckGroupController(IStorage<DeckGroup> folder, Supplier<DeckGroup> newModelCreator, Consumer<String> fnSetCurrentDeck) {
+            super(folder, newModelCreator, fnSetCurrentDeck);
+        }
+
+        public void setDeckGroup(DeckGroup deckGroup) {
+            this.setModel(deckGroup);
+            this.setDeck(deckGroup.getHumanDeck());
         }
     }
 }

@@ -214,15 +214,15 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
     }
 
     public void editDeck(boolean isExistingDeck) {
-        Deck deck = getDeck();
-        if (deck != null) {
+        DeckGroup deckGroup = FModel.getQuest().getDraftDecks().get(QuestEventDraft.DECK_NAME);
+        if (deckGroup != null) {
             /*preload deck to cache*/
-            ImageCache.getInstance().preloadCache(deck);
+            ImageCache.getInstance().preloadCache(deckGroup.getHumanDeck());
             if (isExistingDeck) {
-                Forge.openScreen(new QuestDraftDeckEditor(deck.getName()));
+                Forge.openScreen(new QuestDraftDeckEditor(deckGroup.getName()));
             }
             else {
-                Forge.openScreen(new QuestDraftDeckEditor(deck));
+                Forge.openScreen(new QuestDraftDeckEditor(deckGroup));
             }
         }
     }
