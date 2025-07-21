@@ -68,42 +68,43 @@ public class DraftingProcessScreen extends FDeckEditor {
             return;
         }
 
-        FOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblSaveDraftAs") + "?", new Callback<String>() {
-            @Override
-            public void run(final String name) {
-                if (StringUtils.isEmpty(name)) {
-                    save(callback); //re-prompt if user doesn't pick a name
-                    return;
-                }
-
-                // Check for overwrite case
-                for (DeckGroup d : FModel.getDecks().getDraft()) {
-                    if (name.equalsIgnoreCase(d.getName())) {
-                        FOptionPane.showConfirmDialog(
-                            Forge.getLocalizer().getMessage("lblAlreadyDeckName") + name + Forge.getLocalizer().getMessage("lblOverwriteConfirm"),
-                            Forge.getLocalizer().getMessage("lblOverwriteDeck"), false, new Callback<Boolean>() {
-                                @Override
-                                public void run(Boolean result) {
-                                    if (result) {
-                                        finishSave(name);
-                                        if (callback != null) {
-                                            callback.run(true);
-                                        }
-                                    }
-                                    else {
-                                        save(callback); //If no overwrite, recurse
-                                    }
-                                }
-                            });
+        FThreads.invokeInEdtNowOrLater(() -> {
+            FOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblSaveDraftAs") + "?", new Callback<>() {
+                @Override
+                public void run(final String name) {
+                    if (StringUtils.isEmpty(name)) {
+                        save(callback); //re-prompt if user doesn't pick a name
                         return;
                     }
-                }
 
-                finishSave(name);
-                if (callback != null) {
-                    callback.run(true);
+                    // Check for overwrite case
+                    for (DeckGroup d : FModel.getDecks().getDraft()) {
+                        if (name.equalsIgnoreCase(d.getName())) {
+                            FOptionPane.showConfirmDialog(
+                                    Forge.getLocalizer().getMessage("lblAlreadyDeckName") + name + Forge.getLocalizer().getMessage("lblOverwriteConfirm"),
+                                    Forge.getLocalizer().getMessage("lblOverwriteDeck"), false, new Callback<>() {
+                                        @Override
+                                        public void run(Boolean result) {
+                                            if (result) {
+                                                finishSave(name);
+                                                if (callback != null) {
+                                                    callback.run(true);
+                                                }
+                                            } else {
+                                                save(callback); //If no overwrite, recurse
+                                            }
+                                        }
+                                    });
+                            return;
+                        }
+                    }
+
+                    finishSave(name);
+                    if (callback != null) {
+                        callback.run(true);
+                    }
                 }
-            }
+            });
         });
     }
 

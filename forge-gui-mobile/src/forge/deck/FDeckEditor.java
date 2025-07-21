@@ -906,16 +906,18 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             else if (deckController.supportsRename()){
                 List<PaperCard> commanders = deck.getCommanders(); //use commander name as default deck name
                 String initialInput = commanders.isEmpty() ? "New Deck" : Lang.joinHomogenous(commanders);
-                FOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblNameNewDeck"), initialInput, new Callback<>() {
-                    @Override
-                    public void run(String result) {
-                        if (StringUtils.isEmpty(result)) { return; }
+                FThreads.invokeInEdtNowOrLater(() -> {
+                    FOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblNameNewDeck"), initialInput, new Callback<>() {
+                        @Override
+                        public void run(String result) {
+                            if (StringUtils.isEmpty(result)) { return; }
 
-                        deckController.saveAs(result);
-                        if (callback != null) {
-                            callback.run(true);
+                            deckController.saveAs(result);
+                            if (callback != null) {
+                                callback.run(true);
+                            }
                         }
-                    }
+                    });
                 });
                 return;
             }
