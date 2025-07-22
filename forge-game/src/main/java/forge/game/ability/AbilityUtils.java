@@ -3001,15 +3001,24 @@ public class AbilityUtils {
         for (SpellAbility s : list) {
             if (s.isLandAbility()) {
                 s.setActivatingPlayer(controller);
-                if (controller.canPlayLand(tgtCard, true, s)) {
+                // CR 305.3
+                if (controller.getGame().getPhaseHandler().isPlayerTurn(controller) && controller.canPlayLand(tgtCard, true, s)) {
                     sas.add(s);
                 }
             } else {
                 final Spell newSA = (Spell) s.copy(controller);
-                newSA.getRestrictions().setZone(null);
-                newSA.setCastFromPlayEffect(true);
-                // extra timing restrictions still apply
-                if (newSA.canPlay()) {
+                SpellAbilityRestriction res = new SpellAbilityRestriction();
+                // timing restrictions still apply
+                res.setPlayerTurn(s.getRestrictions().getPlayerTurn());
+                res.setOpponentTurn(s.getRestrictions().getOpponentTurn());
+                res.setPhases(s.getRestrictions().getPhases());
+                res.setZone(null);
+                newSA.setRestrictions(res);
+                // timing restrictions still apply
+                if (res.checkTimingRestrictions(tgtCard, newSA)
+                        // still need to check the other restrictions like Aftermath
+                        && res.checkOtherRestrictions(tgtCard, newSA, controller)) {
+                    newSA.setCastFromPlayEffect(true);
                     sas.add(newSA);
                 }
             }
