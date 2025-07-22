@@ -1,17 +1,17 @@
 //Rank|Name|Rarity|Set
 #1|Singularity Rupture|R|EOE
 #2|Zero Point Ballad|R|EOE
-#3|Celestial Colonnade|R|EOE
+#3|Celestial Colonnade|R|EOS
 #4|Astelli Reclaimer|R|EOE
 #5|Beyond the Quiet|R|EOE
 #6|Cosmogrand Zenith|M|EOE
 #7|Exalted Sunborn|M|EOE
 #8|Quantum Riddler|M|EOE
 #9|Ouroboroid|M|EOE
-#10|Creeping Tar Pit|R|EOE
-#11|Lavaclaw Reaches|R|EOE
-#12|Lumbering Falls|R|EOE
-#13|Raging Ravine|R|EOE
+#10|Creeping Tar Pit|R|EOS
+#11|Lavaclaw Reaches|R|EOS
+#12|Lumbering Falls|R|EOS
+#13|Raging Ravine|R|EOS
 #14|Elegy Acolyte|R|EOE
 #15|Mightform Harmonizer|R|EOE
 #16|Alpharael, Stonechosen|M|EOE
@@ -22,7 +22,7 @@
 #21|Xu-Ifit, Osteoharmonist|R|EOE
 #22|Syr Vondam, Sunstar Exemplar|R|EOE
 #23|Starwinder|R|EOE
-#24|Stirring Wildwood|R|EOE
+#24|Stirring Wildwood|R|EOS
 #25|Sunstar Chaplain|R|EOE
 #26|Warmaker Gunship|R|EOE
 #27|Frenzied Baloth|R|EOE
@@ -55,12 +55,12 @@
 #54|Station Monitor|U|EOE
 #55|Memorial Vault|R|EOE
 #56|Tannuk, Steadfast Second|M|EOE
-#57|Green Sun's Zenith|M|EOE
-#58|Nexus of Fate|M|EOE
-#59|Ancient Tomb|M|EOE
-#60|Blinkmoth Nexus|R|EOE
-#61|Hissing Quagmire|R|EOE
-#62|Shambling Vent|R|EOE
+#57|Green Sun's Zenith|M|SPG
+#58|Nexus of Fate|M|SPG
+#59|Ancient Tomb|M|EOS
+#60|Blinkmoth Nexus|R|EOS
+#61|Hissing Quagmire|R|EOS
+#62|Shambling Vent|R|EOS
 #63|Pulsar Squadron Ace|U|EOE
 #64|Rescue Skiff|U|EOE
 #65|Sunstar Expansionist|U|EOE
@@ -93,8 +93,8 @@
 #92|Secluded Starforge|R|EOE
 #93|Meltstrider's Resolve|U|EOE
 #94|Mm'menon, Uthros Exile|U|EOE
-#95|Needle Spires|R|EOE
-#96|Wandering Fumarole|R|EOE
+#95|Needle Spires|R|EOS
+#96|Wandering Fumarole|R|EOS
 #97|Timeline Culler|U|EOE
 #98|Umbral Collar Zealot|U|EOE
 #99|Voidforged Titan|U|EOE
@@ -154,12 +154,12 @@
 #153|Gene Pollinator|C|EOE
 #154|Intrepid Tenderfoot|C|EOE
 #155|Seedship Agrarian|U|EOE
-#156|Bonders' Enclave|R|EOE
-#157|Inkmoth Nexus|M|EOE
-#158|Inventors' Fair|M|EOE
-#159|Mutavault|M|EOE
-#160|Reflecting Pool|M|EOE
-#161|Sunken Citadel|R|EOE
+#156|Bonders' Enclave|R|EOS
+#157|Inkmoth Nexus|M|EOS
+#158|Inventors' Fair|M|EOS
+#159|Mutavault|M|EOS
+#160|Reflecting Pool|M|EOS
+#161|Sunken Citadel|R|EOS
 #162|Illvoi Galeblade|C|EOE
 #163|Mouth of the Storm|U|EOE
 #164|Starbreach Whale|C|EOE
@@ -232,8 +232,8 @@
 #231|Icecave Crasher|C|EOE
 #232|Pull Through the Weft|U|EOE
 #233|Thawbringer|C|EOE
-#234|Meteor Crater|R|EOE
-#235|Mystifying Maze|R|EOE
+#234|Meteor Crater|R|EOS
+#235|Mystifying Maze|R|EOS
 #236|Starport Security|C|EOE
 #237|Embrace Oblivion|C|EOE
 #238|Insatiable Skittermaw|C|EOE
@@ -264,7 +264,7 @@
 #263|Meltstrider's Gear|C|EOE
 #264|Skystinger|C|EOE
 #265|Thaumaton Torpedo|C|EOE
-#266|Grove of the Burnwillows|M|EOE
+#266|Grove of the Burnwillows|M|EOS
 #267|Shattered Wings|C|EOE
 #268|Sinister Cryologist|C|EOE
 #269|Drill Too Deep|C|EOE
@@ -281,40 +281,40 @@
 #280|Requiem Monolith|R|EOE
 #281|Space-Time Anomaly|R|EOE
 #282|Terminal Velocity|R|EOE
-#283|Sliver Overlord|M|EOE
-#284|Contested War Zone|R|EOE
-#285|Mana Confluence|M|EOE
-#286|Cathedral of War|R|EOE
-#287|Deserted Temple|M|EOE
-#288|Mirrorpool|M|EOE
-#289|Lotus Field|M|EOE
-#290|Plaza of Heroes|M|EOE
-#291|Swarmyard|R|EOE
+#283|Sliver Overlord|M|SPG
+#284|Contested War Zone|R|EOS
+#285|Mana Confluence|M|EOS
+#286|Cathedral of War|R|EOS
+#287|Deserted Temple|M|EOS
+#288|Mirrorpool|M|EOS
+#289|Lotus Field|M|EOS
+#290|Plaza of Heroes|M|EOS
+#291|Swarmyard|R|EOS
 #292|The Eternity Elevator|R|EOE
 #293|Moonlit Meditation|R|EOE
-#294|Burgeoning|M|EOE
-#295|Magus of the Moon|M|EOE
-#296|Darkness|M|EOE
-#297|Paradox Haze|M|EOE
-#298|Robe of Stars|M|EOE
-#299|Deafening Silence|M|EOE
-#300|Warping Wail|M|EOE
-#301|Cascading Cataracts|R|EOE
-#302|Crystal Quarry|R|EOE
-#303|Dust Bowl|M|EOE
-#304|Echoing Deeps|R|EOE
-#305|Eldrazi Temple|R|EOE
-#306|Endless Sands|R|EOE
-#307|Gemstone Caverns|M|EOE
-#308|High Market|R|EOE
-#309|Nesting Grounds|R|EOE
-#310|Petrified Field|M|EOE
-#311|Power Depot|R|EOE
-#312|Scavenger Grounds|R|EOE
-#313|Terrain Generator|R|EOE
-#314|Thespian's Stage|R|EOE
-#315|Strip Mine|M|EOE
-#316|Blast Zone|R|EOE
+#294|Burgeoning|M|SPG
+#295|Magus of the Moon|M|SPG
+#296|Darkness|M|SPG
+#297|Paradox Haze|M|SPG
+#298|Robe of Stars|M|SPG
+#299|Deafening Silence|M|SPG
+#300|Warping Wail|M|SPG
+#301|Cascading Cataracts|R|EOS
+#302|Crystal Quarry|R|EOS
+#303|Dust Bowl|M|EOS
+#304|Echoing Deeps|R|EOS
+#305|Eldrazi Temple|R|EOS
+#306|Endless Sands|R|EOS
+#307|Gemstone Caverns|M|EOS
+#308|High Market|R|EOS
+#309|Nesting Grounds|R|EOS
+#310|Petrified Field|M|EOS
+#311|Power Depot|R|EOS
+#312|Scavenger Grounds|R|EOS
+#313|Terrain Generator|R|EOS
+#314|Thespian's Stage|R|EOS
+#315|Strip Mine|M|EOS
+#316|Blast Zone|R|EOS
 #317|Plains|C|EOE
 #318|Island|C|EOE
 #319|Swamp|C|EOE
