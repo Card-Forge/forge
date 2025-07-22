@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -21,7 +23,7 @@ import java.util.List;
 
 public class TapAllAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(final Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlayAI(final Player ai, SpellAbility sa) {
         // If tapping all creatures do it either during declare attackers of AIs turn
         // or during upkeep/begin combat?
 
@@ -30,7 +32,7 @@ public class TapAllAi extends SpellAbilityAi {
         final Game game = ai.getGame();
 
         if (game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         final String valid = sa.getParamOrDefault("ValidCards", "");
@@ -51,31 +53,31 @@ public class TapAllAi extends SpellAbilityAi {
             if (logic.startsWith("AtLeast")) {
                 int num = AbilityUtils.calculateAmount(source, logic.substring(7), sa);
                 if (validTappables.size() < num) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }
         }
 
         if (MyRandom.getRandom().nextFloat() > Math.pow(.6667, sa.getActivationsThisTurn())) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (validTappables.isEmpty()) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         final List<Card> human = CardLists.filterControlledBy(validTappables, opp);
         final List<Card> compy = CardLists.filterControlledBy(validTappables, ai);
         if (human.size() <= compy.size()) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
         // in AI's turn, check if there are possible attackers, before tapping blockers
         if (game.getPhaseHandler().isPlayerTurn(ai)) {
             validTappables = ai.getCardsIn(ZoneType.Battlefield);
             final boolean any = validTappables.anyMatch(c -> CombatUtil.canAttack(c) && ComputerUtilCombat.canAttackNextTurn(c));
-            return any;
+            return any ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     private CardCollectionView getTapAllTargets(final String valid, final Card source, SpellAbility sa) {
@@ -87,7 +89,7 @@ public class TapAllAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(final Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerAINoCost(final Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
 
         final String valid = sa.getParamOrDefault("ValidCards", "");
@@ -106,7 +108,7 @@ public class TapAllAi extends SpellAbilityAi {
         }
 
         if (mandatory) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         boolean rr = false;
@@ -118,9 +120,9 @@ public class TapAllAi extends SpellAbilityAi {
             final int human = CardLists.count(validTappables, CardPredicates.isControlledByAnyOf(ai.getYourTeam()));
             final int compy = CardLists.count(validTappables, CardPredicates.isControlledByAnyOf(ai.getOpponents()));
             if (human > compy) {
-                return rr;
+                return rr ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
-        return false;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 }

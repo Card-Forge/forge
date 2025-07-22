@@ -105,26 +105,38 @@ public class FightAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean chkAIDrawback(final SpellAbility sa, final Player aiPlayer) {
+    public AiAbilityDecision chkAIDrawback(final SpellAbility sa, final Player aiPlayer) {
         if ("Always".equals(sa.getParam("AILogic"))) {
-            return true; // e.g. Hunt the Weak, the AI logic was already checked through canFightAi
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay); // e.g. Hunt the Weak, the AI logic was already checked through canFightAi
         }
 
-        return checkApiLogic(aiPlayer, sa);
+        if (checkApiLogic(aiPlayer, sa)) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
         if (aiLogic.equals("Grothama")) {
-            return mandatory ? true : SpecialCardAi.GrothamaAllDevouring.consider(ai, sa);
+            if (mandatory) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+
+            if (SpecialCardAi.GrothamaAllDevouring.consider(ai, sa)) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
         }
 
         if (checkApiLogic(ai, sa)) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         if (!mandatory) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         //try to make a good trade or no trade
@@ -132,7 +144,7 @@ public class FightAi extends SpellAbilityAi {
         List<Card> humCreatures = ai.getOpponents().getCreaturesInPlay();
         humCreatures = CardLists.getTargetableCards(humCreatures, sa);
         if (humCreatures.isEmpty()) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
         //assumes the triggered card belongs to the ai
         if (sa.hasParam("Defined")) {
@@ -141,19 +153,19 @@ public class FightAi extends SpellAbilityAi {
                 if (canKill(aiCreature, humanCreature, 0)
                         && ComputerUtilCard.evaluateCreature(humanCreature) > ComputerUtilCard.evaluateCreature(aiCreature)) {
                     sa.getTargets().add(humanCreature);
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
             for (Card humanCreature : humCreatures) {
                 if (!canKill(humanCreature, aiCreature, 0)) {
                     sa.getTargets().add(humanCreature);
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
             sa.getTargets().add(humCreatures.get(0));
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
     
     /**

@@ -276,10 +276,10 @@ public class CharmAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean chkDrawbackWithSubs(Player aiPlayer, AbilitySub ab) {
+    public AiAbilityDecision chkDrawbackWithSubs(Player aiPlayer, AbilitySub ab) {
         // choices were already targeted
         if (ab.getRootAbility().getChosenList() != null) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         return super.chkDrawbackWithSubs(aiPlayer, ab);
     }

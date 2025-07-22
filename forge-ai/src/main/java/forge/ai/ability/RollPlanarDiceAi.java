@@ -1,10 +1,7 @@
 package forge.ai.ability;
 
 
-import forge.ai.AiController;
-import forge.ai.AiProps;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -18,17 +15,19 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
         if (ai.getGame().getActivePlanes() == null) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
         
         for (Card c : ai.getGame().getActivePlanes()) {
             if (willRollOnPlane(ai, c)) {
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
-        return false;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     private boolean willRollOnPlane(Player ai, Card plane) {
@@ -162,7 +161,7 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         // for potential implementation of drawback checks?
         return canPlayAI(aiPlayer, sa);
     }

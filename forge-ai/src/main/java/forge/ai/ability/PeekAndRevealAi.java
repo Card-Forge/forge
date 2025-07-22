@@ -1,9 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.AiAttackController;
-import forge.ai.ComputerUtilCost;
-import forge.ai.SpellAbilityAi;
-import forge.ai.SpellApiToAi;
+import forge.ai.*;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.phase.PhaseHandler;
@@ -27,20 +24,20 @@ public class PeekAndRevealAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
         if (sa instanceof AbilityStatic) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         String logic = sa.getParamOrDefault("AILogic", "");
         if ("Main2".equals(logic)) {
             if (aiPlayer.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         } else if ("EndOfOppTurn".equals(logic)) {
             PhaseHandler ph = aiPlayer.getGame().getPhaseHandler();
             if (!(ph.getNextTurn() == aiPlayer && ph.is(PhaseType.END_OF_TURN))) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
         // So far this only appears on Triggers, but will expand
@@ -50,32 +47,32 @@ public class PeekAndRevealAi extends SpellAbilityAi {
         Player libraryOwner = aiPlayer;
 
         if (!willPayCosts(aiPlayer, sa, sa.getPayCosts(), host)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (sa.usesTargeting()) {
             sa.resetTargets();
             //todo: evaluate valid targets
             if (!sa.canTarget(opp)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
             sa.getTargets().add(opp);
             libraryOwner = opp;
         }
 
         if (libraryOwner.getCardsIn(ZoneType.Library).isEmpty()) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if ("X".equals(sa.getParam("PeekAmount")) && sa.getSVar("X").equals("Count$xPaid")) {
             int xPay = ComputerUtilCost.getMaxXValue(sa, aiPlayer, sa.isTrigger());
             if (xPay == 0) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
             sa.getRootAbility().setXManaCostPaid(xPay);
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /* (non-Javadoc)
@@ -93,7 +90,7 @@ public class PeekAndRevealAi extends SpellAbilityAi {
         }
 
         AbilitySub subAb = sa.getSubAbility();
-        return subAb != null && SpellApiToAi.Converter.get(subAb).chkDrawbackWithSubs(player, subAb);
+        return subAb != null && SpellApiToAi.Converter.get(subAb).chkDrawbackWithSubs(player, subAb).willingToPlay();
     }
 
 }

@@ -26,20 +26,20 @@ public class DigAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
         final Game game = ai.getGame();
         Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         final Card host = sa.getHostCard();
         Player libraryOwner = ai;
 
         if (!willPayCosts(ai, sa, sa.getPayCosts(), host)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (sa.usesTargeting()) {
             sa.resetTargets();
             if (!sa.canTarget(opp)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
             sa.getTargets().add(opp);
             libraryOwner = opp;
@@ -47,14 +47,14 @@ public class DigAi extends SpellAbilityAi {
 
         // return false if nothing to dig into
         if (libraryOwner.getCardsIn(ZoneType.Library).isEmpty()) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if ("Never".equals(sa.getParam("AILogic"))) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else if ("AtOppEOT".equals(sa.getParam("AILogic"))) {
             if (!(game.getPhaseHandler().getNextTurn() == ai && game.getPhaseHandler().is(PhaseType.END_OF_TURN))) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
@@ -62,14 +62,14 @@ public class DigAi extends SpellAbilityAi {
         if (sa.hasParam("DestinationZone2") && !"Library".equals(sa.getParam("DestinationZone2"))) {
             int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
             if (libraryOwner == ai && ai.getCardsIn(ZoneType.Library).size() <= numToDig + 2) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
         // Don't use draw abilities before main 2 if possible
         if (game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
                 && !sa.hasParam("DestinationZone") && !ComputerUtil.castSpellInMain1(ai, sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         final String num = sa.getParam("DigNum");
@@ -87,14 +87,14 @@ public class DigAi extends SpellAbilityAi {
 
                 int numCards = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger()) - manaToSave;
                 if (numCards <= 0) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 root.setXManaCostPaid(numCards);
             }
         }
 
         if (playReusable(ai, sa)) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         if ((!game.getPhaseHandler().getNextTurn().equals(ai)
@@ -102,24 +102,28 @@ public class DigAi extends SpellAbilityAi {
             && !sa.hasParam("PlayerTurn") && !isSorcerySpeed(sa, ai)
             && (ai.getCardsIn(ZoneType.Hand).size() > 1 || game.getPhaseHandler().getPhase().isBefore(PhaseType.DRAW))
             && !ComputerUtil.activateForCost(sa, ai)) {
-        	return false;
+        	return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if ("MadSarkhanDigDmg".equals(sa.getParam("AILogic"))) {
             return SpecialCardAi.SarkhanTheMad.considerDig(ai, sa);
         }
-        
-        return !ComputerUtil.preventRunAwayActivations(sa);
+
+        if (ComputerUtil.preventRunAwayActivations(sa)) {
+            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
+        } else {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         // TODO: improve this check in ways that may be specific to a subability
         return canPlayAI(aiPlayer, sa);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final SpellAbility root = sa.getRootAbility();
         PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
         Player opp = targetableOpps.min(PlayerPredicates.compareByLife());
@@ -137,12 +141,16 @@ public class DigAi extends SpellAbilityAi {
             int manaToSave = Integer.parseInt(TextUtil.split(sa.getParam("AILogic"), '.')[1]);
             int numCards = ComputerUtilCost.getMaxXValue(sa, ai, true) - manaToSave;
             if (numCards <= 0) {
-                return mandatory;
+                if (mandatory) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                } else {
+                    return new AiAbilityDecision(100, AiPlayDecision.CantPlayAi);
+                }
             }
             root.setXManaCostPaid(numCards);
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
     
     @Override
