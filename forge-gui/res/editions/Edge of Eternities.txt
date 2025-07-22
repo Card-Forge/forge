@@ -425,3 +425,6 @@ ScryfallCode=EOE
 8 c_a_lander_sac_search @Jorge Jacinto
 9 munitions @Leonardo Santanna
 10 c_2_2_a_robot @Leonardo Santanna
+
+[other]
+11 emblem_tezzeret_cruel_captain @Chris Rahn
