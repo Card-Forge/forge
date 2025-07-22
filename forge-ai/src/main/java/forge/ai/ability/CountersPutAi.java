@@ -53,8 +53,7 @@ public class CountersPutAi extends CountersAi {
 
         // disable moving counters (unless a specialized AI logic supports it)
         for (final CostPart part : cost.getCostParts()) {
-            if (part instanceof CostRemoveCounter) {
-                final CostRemoveCounter remCounter = (CostRemoveCounter) part;
+            if (part instanceof CostRemoveCounter remCounter) {
                 final CounterType counterType = remCounter.counter;
                 if (counterType.getName().equals(type) && !aiLogic.startsWith("MoveCounter")) {
                     return false;
@@ -666,7 +665,7 @@ public class CountersPutAi extends CountersAi {
     }
 
     @Override
-    public boolean chkAIDrawback(final SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkAIDrawback(final SpellAbility sa, Player ai) {
         boolean chance = true;
         final Game game = ai.getGame();
         Card choice = null;
@@ -701,9 +700,9 @@ public class CountersPutAi extends CountersAi {
             while (sa.canAddMoreTarget()) {
                 if (list.isEmpty()) {
                     if (!sa.isTargetNumberValid()
-                            || sa.getTargets().size() == 0) {
+                            || sa.getTargets().isEmpty()) {
                         sa.resetTargets();
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                     } else {
                         break;
                     }
@@ -724,9 +723,9 @@ public class CountersPutAi extends CountersAi {
                 }
 
                 if (choice == null) { // can't find anything left
-                    if ((!sa.isTargetNumberValid()) || (sa.getTargets().size() == 0)) {
+                    if ((!sa.isTargetNumberValid()) || (sa.getTargets().isEmpty())) {
                         sa.resetTargets();
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                     } else {
                         // TODO is this good enough? for up to amounts?
                         break;
@@ -741,11 +740,14 @@ public class CountersPutAi extends CountersAi {
             }
         }
 
-        return chance;
+        if (chance) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+        return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final SpellAbility root = sa.getRootAbility();
         final Card source = sa.getHostCard();
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
@@ -770,9 +772,20 @@ public class CountersPutAi extends CountersAi {
         }
 
         if ("ChargeToBestCMC".equals(aiLogic)) {
-            return doChargeToCMCLogic(ai, sa) || mandatory;
+            if (doChargeToCMCLogic(ai, sa) || mandatory) {
+                // If the AI logic is to charge to best CMC, we can return true
+                // if the logic was successfully applied or if it's mandatory.
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                // If the logic was not applied and it's not mandatory, we return false.
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
         } else if ("ChargeToBestOppControlledCMC".equals(aiLogic)) {
-            return doChargeToOppCtrlCMCLogic(ai, sa) || mandatory;
+            if (doChargeToOppCtrlCMCLogic(ai, sa) || mandatory) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
         }
 
         if (!sa.usesTargeting()) {
@@ -801,7 +814,7 @@ public class CountersPutAi extends CountersAi {
                     sa.getTargetRestrictions().getAllCandidates(sa, true, true), Player.class));
 
             if (playerList.isEmpty()) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
             // try to choose player with less creatures
@@ -818,7 +831,7 @@ public class CountersPutAi extends CountersAi {
                     nPump = amount;
                 }
                 if (FightAi.canFightAi(ai, sa, nPump, nPump)) {
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
 
@@ -839,7 +852,7 @@ public class CountersPutAi extends CountersAi {
                 if (mandatory) {
                     // When things are mandatory, gotta handle a little differently
                     if ((list.isEmpty() || !preferred) && sa.isTargetNumberValid()) {
-                        return true;
+                        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                     }
 
                     if (list.isEmpty() && preferred) {
@@ -859,7 +872,9 @@ public class CountersPutAi extends CountersAi {
                 if (list.isEmpty()) {
                     // Not mandatory, or the the list was regenerated and is still empty,
                     // so return whether or not we found enough targets
-                    return sa.isTargetNumberValid();
+                    if (sa.isTargetNumberValid()) {
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                    }
                 }
 
                 Card choice = null;
@@ -912,7 +927,7 @@ public class CountersPutAi extends CountersAi {
             }
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override

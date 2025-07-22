@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.MyRandom;
@@ -27,8 +29,11 @@ public class RevealHandAi extends RevealAiBase {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        return revealHandTargetAI(ai, sa, mandatory);
+    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        if (revealHandTargetAI(ai, sa, mandatory)) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
     }
-
 }

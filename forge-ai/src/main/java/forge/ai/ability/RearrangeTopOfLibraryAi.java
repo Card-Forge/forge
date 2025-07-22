@@ -23,7 +23,7 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
         // Specific details of ordering cards are handled by PlayerControllerAi#orderMoveToZoneList
         final PhaseHandler ph = aiPlayer.getGame().getPhaseHandler();
         final Card source = sa.getHostCard();
@@ -33,13 +33,13 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
                     && (sa.getPayCosts().hasTapCost() || sa.getPayCosts().hasManaCost())) {
                 // If it has an associated cost, try to only do this before own turn
                 if (!(ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == aiPlayer)) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }
 
             // Do it once per turn, generally (may be improved later)
             if (AiCardMemory.isRememberedCardByName(aiPlayer, source.getName(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
@@ -61,7 +61,7 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
             } else if (canTgtHuman) {
                 sa.getTargets().add(opp);
             } else {
-                return false; // could not find a valid target
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi); // could not find a valid target
             }
 
             if (!canTgtHuman || !canTgtAI) {
@@ -73,16 +73,26 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
             AiCardMemory.rememberCard(aiPlayer, source, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         // Specific details of ordering cards are handled by PlayerControllerAi#orderMoveToZoneList
-        return canPlayAI(ai, sa) || mandatory;
+
+        AiAbilityDecision decision = canPlayAI(ai, sa);
+        if (decision.willingToPlay()) {
+            return decision;
+        }
+
+        if (mandatory) {
+            return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
+        }
+
+        return decision;
     }
 
     /* (non-Javadoc)

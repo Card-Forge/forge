@@ -29,7 +29,7 @@ public class ChooseGenericAi extends SpellAbilityAi {
             return true;
         } else if ("Pump".equals(aiLogic) || "BestOption".equals(aiLogic)) {
             for (AbilitySub sb : sa.getAdditionalAbilityList("Choices")) {
-                if (SpellApiToAi.Converter.get(sb).canPlayAIWithSubs(ai, sb)) {
+                if (SpellApiToAi.Converter.get(sb).canPlayAIWithSubs(ai, sb).willingToPlay()) {
                     return true;
                 }
             }
@@ -51,27 +51,30 @@ public class ChooseGenericAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        return sa.isTrigger() ? doTriggerAINoCost(aiPlayer, sa, sa.isMandatory()) : checkApiLogic(aiPlayer, sa);
+    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+        boolean result = sa.isTrigger()
+            ? doTriggerAINoCost(aiPlayer, sa, sa.isMandatory()).willingToPlay()
+            : checkApiLogic(aiPlayer, sa);
+        return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
+    protected AiAbilityDecision doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         if ("CombustibleGearhulk".equals(sa.getParam("AILogic")) || "SoulEcho".equals(sa.getParam("AILogic"))) {
             for (final Player p : aiPlayer.getOpponents()) {
                 if (p.canBeTargetedBy(sa)) {
                     sa.resetTargets();
                     sa.getTargets().add(p);
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
-            return true; // perhaps the opponent(s) had Sigarda, Heron's Grace or another effect giving hexproof in play, still play the creature as 6/6
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay); // perhaps the opponent(s) had Sigarda, Heron's Grace or another effect giving hexproof in play, still play the creature as 6/6
         }
         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Deathmist Raptor")) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
-
-        return super.doTriggerAINoCost(aiPlayer, sa, mandatory);
+        AiAbilityDecision superDecision = super.doTriggerAINoCost(aiPlayer, sa, mandatory);
+        return superDecision;
     }
 
     @Override
@@ -262,7 +265,7 @@ public class ChooseGenericAi extends SpellAbilityAi {
             List<SpellAbility> filtered = Lists.newArrayList();
             // filter first for the spells which can be done
             for (SpellAbility sp : spells) {
-                if (SpellApiToAi.Converter.get(sp).canPlayAIWithSubs(player, sp)) {
+                if (SpellApiToAi.Converter.get(sp).canPlayAIWithSubs(player, sp).willingToPlay()) {
                     filtered.add(sp);
                 }
             }

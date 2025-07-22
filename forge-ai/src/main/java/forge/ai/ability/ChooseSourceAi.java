@@ -1,10 +1,7 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
-import forge.ai.AiAttackController;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
@@ -32,7 +29,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(final Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlayAI(final Player ai, SpellAbility sa) {
         // TODO: AI Support! Currently this is copied from AF ChooseCard.
         //       When implementing AI, I believe AI also needs to be made aware of the damage sources chosen
         //       to be prevented (e.g. so the AI doesn't attack with a creature that will not deal any damage
@@ -44,7 +41,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
 
         if (abCost != null) {
             if (!willPayCosts(ai, sa, abCost, source)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
             }
         }
 
@@ -54,7 +51,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
             if (sa.canTarget(opp)) {
                 sa.getTargets().add(opp);
             } else {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
         }
         if (sa.hasParam("AILogic")) {
@@ -63,11 +60,11 @@ public class ChooseSourceAi extends SpellAbilityAi {
                 if (!game.getStack().isEmpty()) {
                     final SpellAbility topStack = game.getStack().peekAbility();
                     if (sa.hasParam("Choices") && !topStack.matchesValid(topStack.getHostCard(), sa.getParam("Choices").split(","))) {
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                     }
                     final ApiType threatApi = topStack.getApi();
                     if (threatApi != ApiType.DealDamage && threatApi != ApiType.DamageAll) {
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                     }
 
                     final Card threatSource = topStack.getHostCard();
@@ -79,13 +76,17 @@ public class ChooseSourceAi extends SpellAbilityAi {
                     }
 
                     if (!objects.contains(ai) || topStack.hasParam("NoPrevention")) {
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
                     int dmg = AbilityUtils.calculateAmount(threatSource, topStack.getParam("NumDmg"), topStack);
-                    return ComputerUtilCombat.predictDamageTo(ai, dmg, threatSource, false) > 0;
+                    if (ComputerUtilCombat.predictDamageTo(ai, dmg, threatSource, false) > 0) {
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                    } else {
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                    }
                 }
                 if (game.getPhaseHandler().getPhase() != PhaseType.COMBAT_DECLARE_BLOCKERS) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
                 }
                 CardCollectionView choices = game.getCardsIn(ZoneType.Battlefield);
                 if (sa.hasParam("Choices")) {
@@ -98,11 +99,13 @@ public class ChooseSourceAi extends SpellAbilityAi {
                     }
                     return ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) > 0;
                 });
-                return !choices.isEmpty();
+                if (choices.isEmpty()) {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
             }
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override

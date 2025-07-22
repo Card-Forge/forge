@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -18,7 +20,7 @@ import java.util.Map;
 public class CloneAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
 
@@ -37,7 +39,7 @@ public class CloneAi extends SpellAbilityAi {
         // "Can I use this to block something?"
 
         if (!checkPhaseRestrictions(ai, sa, game.getPhaseHandler())) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.MissingPhaseRestrictions);
         }
 
         PhaseHandler phase = game.getPhaseHandler();
@@ -66,18 +68,19 @@ public class CloneAi extends SpellAbilityAi {
             }
 
             if (!bFlag) { // All of the defined stuff is cloned, not very useful
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
         } else {
             sa.resetTargets();
             useAbility &= cloneTgtAI(sa);
         }
 
-        return useAbility;
+        return useAbility ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
+                : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     } // end cloneCanPlayAI()
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         // AI should only activate this during Human's turn
         boolean chance = true;
 
@@ -85,11 +88,12 @@ public class CloneAi extends SpellAbilityAi {
             chance = cloneTgtAI(sa);
         }
 
-        return chance;
+        return chance ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
+                : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         Card host = sa.getHostCard();
         boolean chance = true;
 
@@ -111,7 +115,11 @@ public class CloneAi extends SpellAbilityAi {
         // Eventually, we can call the trigger of ETB abilities with
         // not mandatory as part of the checks to cast something
 
-        return chance || mandatory;
+        if (mandatory || chance) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     /**
