@@ -499,7 +499,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
                     itemInfo.setBounds(x, y, itemWidth, itemHeight);
 
-                    if (pile.items.size() == 0) {
+                    if (pile.items.isEmpty()) {
                         pile.setBounds(0, y, groupWidth, itemHeight);
                         group.piles.add(pile);
                     }
@@ -541,7 +541,16 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             int index = 0;
             orderedItems.get().clear();
             for (Group group : groups.get()) {
-                if (group.isCollapsed || group.items.isEmpty()) {
+                if (group.items.isEmpty()) {
+                    continue;
+                }
+
+                if (group.isCollapsed && pileBy == null) {
+                    //Piles won't have been generated in this case.
+                    for(ItemInfo itemInfo : group.items) {
+                        itemInfo.index = index++;
+                        orderedItems.get().add(itemInfo);
+                    }
                     continue;
                 }
 
