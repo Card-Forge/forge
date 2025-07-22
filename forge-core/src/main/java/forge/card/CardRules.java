@@ -475,6 +475,7 @@ public final class CardRules implements ICardCharacteristics {
          * Reset all fields to parse next card (to avoid allocating new CardRulesReader N times)
          */
         public final void reset() {
+            this.setColorID = 0;
             this.curFace = 0;
             this.faces[0] = null;
             this.faces[1] = null;
