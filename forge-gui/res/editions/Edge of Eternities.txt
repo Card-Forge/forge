@@ -5,52 +5,51 @@ Name=Edge of Eternities
 Type=Expansion
 ScryfallCode=EOE
 #https://mtgscribe.com/2025/07/16/edge-of-eternities-play-booster-fact-sheet/
-BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,AnyLand,Wildcard,WildcardFoil
-BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,AnyLand,Wildcard,WildcardFoil
-Booster=6 Common,1 Common-Guest,3 Uncommon, 1 RareMythic, 1 WildcardA, 1 WildcardB+, 1 BasicLand
+BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,BasicLand,Wildcard,WildcardFoil
+Booster=6 Common,1 Common-Guest,3 Uncommon, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 BasicLand
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=30
 
 [Common]
-Base=Common:fromSheet("cards"):!BasicLand
+Base=Common:fromSheet("EOE cards"):!BasicLand
 
 [Common-Guest]
-Base=Common:fromSheet("cards"):!BasicLand
-Replace=.018F fromSheet("special guests")
+Base=Common:fromSheet("EOE cards"):!BasicLand
+Replace=.018F fromSheet("EOE special guests")
 
 [Uncommon]
-Base=Uncommon:fromSheet("cards")
+Base=Uncommon:fromSheet("EOE cards")
 
 [RareMythic]
-Base=Rare:fromSheet("cards")
-Replace=.142F Mythic:fromSheet("cards")
-Replace=.036F Rare:fromSheet("borderless")
-Replace=.018F Mythic:fromSheet("borderless")
+Base=Rare:fromSheet("EOE cards")
+Replace=.142F Mythic:fromSheet("EOE cards")
+Replace=.036F Rare:fromSheet("EOE borderless")
+Replace=.018F Mythic:fromSheet("EOE borderless")
 
-[WildcardA]
-Base=Uncommon:fromSheet("cards")
-Replace=0.125F Common:fromSheet("cards"):!BasicLand
-Replace=0.106F Rare:fromSheet("cards")
-Replace=0.003F Mythic:fromSheet("cards")
+[Wildcard]
+Base=Uncommon:fromSheet("EOE cards")
+Replace=0.125F Common:fromSheet("EOE cards"):!BasicLand
+Replace=0.106F Rare:fromSheet("EOE cards")
+Replace=0.003F Mythic:fromSheet("EOE cards")
 Replace=0.1F Rare:fromSheet("EOS cards")
 Replace=0.025F Mythic:fromSheet("EOS cards")
-Replace=0.01F Rare:fromSheet("borderless")
-Replace=0.005F Mythic:fromSheet("borderless")
+Replace=0.01F Rare:fromSheet("EOE borderless")
+Replace=0.005F Mythic:fromSheet("EOE borderless")
 
-[WildcardB]
-Base=Common:fromSheet("cards"):!BasicLand
-Replace=0.32F Uncommon:fromSheet("cards")
-Replace=0.064F Rare:fromSheet("cards")
-Replace=0.011F Mythic:fromSheet("cards")
+[WildcardFoil]
+Base=Common:fromSheet("EOE cards"):!BasicLand
+Replace=0.32F Uncommon:fromSheet("EOE cards")
+Replace=0.064F Rare:fromSheet("EOE cards")
+Replace=0.011F Mythic:fromSheet("EOE cards")
 Replace=0.01F Rare:fromSheet("EOS cards")
 Replace=0.0075F Mythic:fromSheet("EOS cards")
-Replace=0.0075F fromSheet("borderless"):!BasicLand
+Replace=0.0075F fromSheet("EOE borderless"):!BasicLand
 
 [BasicLand]
-Base=BasicLand:fromSheet("cards")
-Replace=0.16F BasicLand:fromSheet("cards")+
-Replace=0.16F BasicLand:fromSheet("borderless")
-Replace=0.04F BasicLand:fromSheet("borderless")+
+Base=BasicLand:fromSheet("EOE cards")
+Replace=0.16F BasicLand:fromSheet("EOE cards")+
+Replace=0.16F BasicLand:fromSheet("EOE borderless")
+Replace=0.04F BasicLand:fromSheet("EOE borderless")+
 
 [cards]
 1 R Anticausal Vestige @Chase Stone
