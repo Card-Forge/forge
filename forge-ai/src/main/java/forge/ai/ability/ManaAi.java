@@ -112,13 +112,14 @@ public class ManaAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         final String logic = sa.getParamOrDefault("AILogic", "");
         if (logic.startsWith("ManaRitual")) {
-            return doManaRitualLogic(aiPlayer, sa, true);
+            boolean result = doManaRitualLogic(aiPlayer, sa, true);
+            return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
     
     // Dark Ritual and other similar instants/sorceries that add mana to mana pool
@@ -270,5 +271,12 @@ public class ManaAi extends SpellAbilityAi {
             mp.removeMana(test, false);
         }
         return !lose;
+    }
+
+    @Override
+    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+        final String logic = sa.getParamOrDefault("AILogic", "");
+        boolean result = checkApiLogic(ai, sa);
+        return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 }

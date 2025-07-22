@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.GameEntity;
@@ -16,30 +18,32 @@ import java.util.List;
 
 public class AssembleContraptionAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        //Pulls double duty as the OpenAttraction API. Same logic; usually good to do as long as we have the appropriate cards.
+    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
         CardCollectionView deck = getDeck(ai, sa);
 
         if(deck.isEmpty())
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
 
-        if(!super.canPlayAI(ai, sa))
-            return false;
+        AiAbilityDecision superDecision = super.canPlayAI(ai, sa);
+        if (!superDecision.willingToPlay())
+            return superDecision;
 
         if ("X".equals(sa.getParam("Amount")) && sa.getSVar("X").equals("Count$xPaid")) {
             int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
             xPay = Math.max(xPay, deck.size());
             if (xPay == 0) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
             }
             sa.getRootAbility().setXManaCostPaid(xPay);
         }
 
         if(sa.hasParam("DefinedContraption") && sa.usesTargeting()) {
-            return getGoodReassembleTarget(ai, sa) != null;
+            if (getGoodReassembleTarget(ai, sa) == null) {
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     private static CardCollectionView getDeck(Player ai, SpellAbility sa) {
@@ -92,18 +96,16 @@ public class AssembleContraptionAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        if(getDeck(aiPlayer, sa).isEmpty())
-            return false;
-
-        return super.chkAIDrawback(sa, aiPlayer);
+    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+        if(!mandatory && getDeck(aiPlayer, sa).isEmpty())
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        return super.doTriggerAINoCost(aiPlayer, sa, mandatory);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        if(!mandatory && getDeck(aiPlayer, sa).isEmpty())
-            return false;
-
-        return super.doTriggerAINoCost(aiPlayer, sa, mandatory);
+    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+        if(getDeck(aiPlayer, sa).isEmpty())
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        return super.chkAIDrawback(sa, aiPlayer);
     }
 }

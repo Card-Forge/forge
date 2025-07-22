@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -18,9 +20,9 @@ public class LifeExchangeAi extends SpellAbilityAi {
      * forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
         if (!aiPlayer.canGainLife()) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         final int myLife = aiPlayer.getLife();
@@ -42,19 +44,20 @@ public class LifeExchangeAi extends SpellAbilityAi {
                 // never target self, that would be silly for exchange
                 sa.getTargets().add(opponent);
             } else {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
         // if life is in danger, always activate
         if (myLife < 5 && hLife > myLife) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         // cost includes sacrifice probably, so make sure it's worth it
         chance &= (hLife > (myLife + 8));
 
-        return MyRandom.getRandom().nextFloat() < .6667 && chance;
+        boolean result = MyRandom.getRandom().nextFloat() < .6667 && chance;
+        return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     /**
@@ -71,7 +74,7 @@ public class LifeExchangeAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
+    protected AiAbilityDecision doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
         PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
         Player opp = targetableOpps.max(PlayerPredicates.compareByLife());
         if (sa.usesTargeting()) {
@@ -82,10 +85,10 @@ public class LifeExchangeAi extends SpellAbilityAi {
                     sa.getTargets().add(ai);
                 }
             } else {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
 }

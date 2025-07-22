@@ -20,8 +20,12 @@ import forge.util.collect.FCollectionView;
 
 public class DestroyAi extends SpellAbilityAi {
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        return checkApiLogic(ai, sa);
+    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+        if (checkApiLogic(ai, sa)) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
     }
 
     @Override
@@ -313,7 +317,7 @@ public class DestroyAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final boolean noRegen = sa.hasParam("NoRegen");
         if (sa.usesTargeting()) {
             sa.resetTargets();
@@ -321,7 +325,7 @@ public class DestroyAi extends SpellAbilityAi {
             CardCollection list = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
 
             if (list.isEmpty() || list.size() < sa.getMinTargets()) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             // Try to avoid targeting creatures that are dead on board
@@ -349,7 +353,7 @@ public class DestroyAi extends SpellAbilityAi {
             list.removeAll(preferred);
 
             if (preferred.isEmpty() && !mandatory) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             while (sa.canAddMoreTarget()) {
@@ -357,12 +361,12 @@ public class DestroyAi extends SpellAbilityAi {
                     if (!sa.isMinTargetChosen()) {
                         if (!mandatory) {
                             sa.resetTargets();
-                            return false;
+                            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                         } else {
                             break;
                         }
                     } else {
-                        return true;
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                     }
                 } else {
                     Card c = ComputerUtilCard.getBestAI(preferred);
@@ -397,9 +401,18 @@ public class DestroyAi extends SpellAbilityAi {
                 }
             }
 
-            return sa.isTargetNumberValid();
+            if (sa.isTargetNumberValid()) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                sa.resetTargets();
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
         } else {
-            return mandatory;
+            if (mandatory) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
         }
     }
 
