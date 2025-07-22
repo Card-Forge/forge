@@ -1,364 +1,364 @@
 //Rank|Name|Rarity|Set
-#1|Adeline, Resplendent Cathar|R|FCA
+#1|Atraxa, Grand Unifier|M|FCA
 #2|Dion, Bahamut's Dominant|R|FIN
-#3|Smuggler's Copter|R|FCA
-#4|Summon: Leviathan|R|FIN
-#5|Atraxa, Grand Unifier|M|FCA
-#6|Ardyn, the Usurper|R|FIN
-#7|Yawgmoth, Thran Physician|M|FCA
-#8|The Lunar Whale|R|FIN
-#9|Gilgamesh, Master-at-Arms|R|FIN
-#10|Joshua, Phoenix's Dominant|R|FIN
-#11|Sin, Spira's Punishment|R|FIN
-#12|Urza, Lord High Artificer|M|FCA
-#13|Jenova, Ancient Calamity|R|FIN
-#14|The Regalia|R|FIN
-#15|Primeval Titan|R|FCA
-#16|Ragavan, Nimble Pilferer|M|FCA
-#17|Summon: Primal Odin|R|FIN
-#18|Clive, Ifrit's Dominant|M|FIN
-#19|Sazh Katzroy|R|FIN
-#20|Summon: Titan|R|FIN
-#21|Absolute Virtue|M|FIN
-#22|Kuja, Genome Sorcerer|R|FIN
-#23|Lightning, Army of One|M|FIN
-#24|Kenrith, the Returned King|R|FCA
-#25|Machinist's Arsenal|R|FIN
-#26|Jill, Shiva's Dominant|R|FIN
-#27|Kefka, Court Mage|M|FIN
-#28|Gix, Yawgmoth Praetor|M|FCA
-#29|Godo, Bandit Warlord|R|FCA
-#30|Venser, Shaper Savant|R|FCA
-#31|Winota, Joiner of Forces|R|FCA
-#32|Cloud, Midgar Mercenary|M|FIN
-#33|Delivery Moogle|U|FIN
-#34|Summon: Knights of Round|M|FIN
-#35|Edgar, King of Figaro|R|FIN
-#36|Bartz and Boko|R|FIN
-#37|Yuna, Hope of Spira|M|FIN
-#38|Balamb Garden, SeeD Academy|R|FIN
-#39|Zanarkand, Ancient Metropolis|R|FIN
-#40|Bruse Tarl, Boorish Herder|R|FCA
-#41|Cryptic Command|R|FCA
-#42|Venat, Heart of Hydaelyn|R|FIN
-#43|Sephiroth, Fabled SOLDIER|M|FIN
-#44|Firion, Wild Rose Warrior|R|FIN
-#45|Terra, Magical Adept|M|FIN
-#46|Akroma's Will|M|FCA
+#3|Ardyn, the Usurper|R|FIN
+#4|Nibelheim Aflame|M|FIN
+#5|Smuggler's Copter|R|FCA
+#6|Urza, Lord High Artificer|M|FCA
+#7|Winota, Joiner of Forces|R|FCA
+#8|Summon Primal Odin|R|FIN
+#9|Esper Origins|R|FIN
+#10|Sazh Katzroy|R|FIN
+#11|Akroma's Will|M|FCA
+#12|Jill, Shiva's Dominant|R|FIN
+#13|Sephiroth, Fabled SOLDIER|M|FIN
+#14|Kefka, Court Mage|M|FIN
+#15|Kuja, Genome Sorcerer|R|FIN
+#16|Bruse Tarl, Boorish Herder|R|FCA
+#17|Cryptic Command|R|FCA
+#18|Yawgmoth, Thran Physician|M|FCA
+#19|Adeline, Resplendent Cathar|R|FCA
+#20|Dragoon's Lance|U|FIN
+#21|Choco-Comet|U|FIN
+#22|Buster Sword|M|FIN
+#23|Summon Fenrir|U|FIN
+#24|Jenova, Ancient Calamity|R|FIN
+#25|Yuna, Hope of Spira|M|FIN
+#26|Ranger-Captain of Eos|M|FCA
+#27|Sidequest Hunt the Mark|U|FIN
+#28|Samurai's Katana|U|FIN
+#29|Cloud of Darkness|U|FIN
+#30|Primeval Titan|R|FCA
+#31|Delivery Moogle|U|FIN
+#32|Memories Returning|R|FIN
+#33|Zenos yae Galvus|R|FIN
+#34|Sazh's Chocobo|U|FIN
+#35|Sram, Senior Edificer|R|FCA
+#36|Loran of the Third Path|R|FCA
+#37|Moogles' Valor|R|FIN
+#38|Sidequest Card Collection|U|FIN
+#39|Swallowed by Leviathan|U|FIN
+#40|Dark Confidant|M|FIN
+#41|Overkill|U|FIN
+#42|Summon Titan|R|FIN
+#43|The Emperor of Palamecia|U|FIN
+#44|Sin, Spira's Punishment|R|FIN
+#45|Fatal Push|U|FCA
+#46|Kenrith, the Returned King|R|FCA
 #47|Lightning Bolt|U|FCA
-#48|Najeela, the Blade-Blossom|M|FCA
-#49|Loran of the Third Path|R|FCA
-#50|Eject|U|FIN
-#51|Memories Returning|R|FIN
-#52|Jecht, Reluctant Guardian|R|FIN
-#53|Zenos yae Galvus|R|FIN
-#54|Choco-Comet|U|FIN
-#55|Nibelheim Aflame|M|FIN
-#56|Samurai's Katana|U|FIN
-#57|Seifer Almasy|R|FIN
-#58|Esper Origins|R|FIN
-#59|Summon: Fenrir|U|FIN
-#60|Torgal, A Fine Hound|U|FIN
-#61|Traveling Chocobo|M|FIN
-#62|Cloud of Darkness|U|FIN
-#63|Squall, SeeD Mercenary|R|FIN
-#64|Ultimecia, Time Sorceress|U|FIN
-#65|Kraum, Ludevic's Opus|R|FCA
-#66|Varragoth, Bloodsky Sire|R|FCA
-#67|Vial Smasher the Fierce|M|FCA
-#68|Summon: Bahamut|M|FIN
-#69|Dragoon's Lance|U|FIN
-#70|Moogles' Valor|R|FIN
-#71|Astrologian's Planisphere|R|FIN
-#72|Valkyrie Aerial Unit|U|FIN
-#73|Summon: Brynhildr|R|FIN
-#74|Sazh's Chocobo|U|FIN
-#75|Vanille, Cheerful l'Cie|U|FIN
-#76|Balthier and Fran|R|FIN
-#77|Choco, Seeker of Paradise|R|FIN
-#78|Garland, Knight of Cornelia|U|FIN
-#79|Garnet, Princess of Alexandria|U|FIN
-#80|Giott, King of the Dwarves|U|FIN
-#81|Ignis Scientia|U|FIN
-#82|Buster Sword|M|FIN
-#83|Lindblum, Industrial Regency|R|FIN
-#84|Captain Lannery Storm|U|FCA
-#85|Mangara, the Diplomat|R|FCA
-#86|Muldrotha, the Gravetide|R|FCA
-#87|Ranger-Captain of Eos|M|FCA
-#88|Thrasios, Triton Hero|M|FCA
-#89|Wall of Omens|U|FCA
-#90|Ambrosia Whiteheart|U|FIN
-#91|Battle Menu|U|FIN
-#92|Ultima|R|FIN
-#93|Il Mheg Pixie|U|FIN
-#94|Cecil, Dark Knight|R|FIN
-#95|Reno and Rude|U|FIN
-#96|Raubahn, Bull of Ala Mhigo|R|FIN
-#97|Summon: G.F. Cerberus|R|FIN
-#98|Locke Cole|U|FIN
-#99|Omega, Heartless Evolution|U|FIN
-#100|Vivi Ornitier|M|FIN
-#101|Midgar, City of Mako|R|FIN
-#102|Fynn, the Fangbearer|U|FCA
-#103|Traxos, Scourge of Kroog|R|FCA
-#104|Yuriko, the Tiger's Shadow|R|FCA
-#105|Adelbert Steiner|U|FIN
-#106|Magitek Armor|U|FIN
-#107|Weapons Vendor|C|FIN
-#108|White Auracite|C|FIN
-#109|Zack Fair|U|FIN
-#110|Sleep Magic|U|FIN
-#111|Summon: Shiva|U|FIN
-#112|Demon Wall|U|FIN
-#113|Overkill|U|FIN
-#114|Sephiroth's Intervention|C|FIN
-#115|Summon: Anima|U|FIN
-#116|Vayne's Treachery|C|FIN
-#117|Freya Crescent|U|FIN
-#118|Thunder Magic|C|FIN
-#119|Zell Dincht|R|FIN
-#120|Clash of the Eikons|U|FIN
-#121|Town Greeter|C|FIN
-#122|Cid, Timeless Artificer|U|FIN
-#123|Emet-Selch, Unsundered|M|FIN
-#124|The Emperor of Palamecia|U|FIN
-#125|Gladiolus Amicitia|U|FIN
-#126|Noctis, Prince of Lucis|R|FIN
-#127|Rinoa Heartilly|U|FIN
-#128|Shantotto, Tactician Magician|U|FIN
-#129|Zidane, Tantalus Thief|U|FIN
-#130|Fatal Push|U|FCA
-#131|Jodah, the Unifier|R|FCA
-#132|Light Up the Stage|U|FCA
-#133|Purphoros, God of the Forge|M|FCA
-#134|The Crystal's Chosen|U|FIN
-#135|Gaelicat|C|FIN
-#136|Minwu, White Mage|R|FIN
-#137|Dragoon's Wyvern|C|FIN
-#138|Travel the Overworld|U|FIN
-#139|Gaius van Baelsar|U|FIN
-#140|Golbez, Crystal Collector|R|FIN
-#141|Tidus, Blitzball Star|U|FIN
-#142|Ishgard, the Holy See|R|FIN
-#143|Rydia, Summoner of Mist|U|FIN
-#144|Blitzball|C|FIN
-#145|Ancient Copper Dragon|M|FCA
-#146|Danitha Capashen, Paragon|U|FCA
-#147|Deadly Dispute|U|FCA
-#148|Sram, Senior Edificer|R|FCA
-#149|Ashe, Princess of Dalmasca|U|FIN
-#150|Magitek Infantry|C|FIN
-#151|You're Not Alone|C|FIN
-#152|Ice Magic|C|FIN
-#153|Stuck in Summoner's Sanctum|C|FIN
-#154|Ultros, Obnoxious Octopus|U|FIN
-#155|Y'shtola Rhul|M|FIN
-#156|Al Bhed Salvagers|U|FIN
-#157|Hecteyes|C|FIN
-#158|Ninja's Blades|R|FIN
-#159|Call the Mountain Chocobo|C|FIN
-#160|Queen Brahne|U|FIN
-#161|Suplex|C|FIN
-#162|Balamb T-Rexaur|C|FIN
-#163|Coliseum Behemoth|U|FIN
-#164|Diamond Weapon|U|FIN
-#165|Summon: Fat Chocobo|C|FIN
-#166|Hope Estheim|R|FIN
-#167|Judge Magister Gabranth|U|FIN
-#168|Crossroads Village|C|FIN
-#169|Vincent's Limit Break|C|FIN
-#170|Tifa's Limit Break|U|FIN
-#171|Exdeath, Void Warlock|U|FIN
-#172|Counterspell|U|FCA
-#173|Syr Konrad, the Grim|U|FCA
-#174|Tymna the Weaver|R|FCA
-#175|Kinnan, Bonder Prodigy|M|FCA
-#176|Teferi, Mage of Zhalfir|R|FCA
-#177|Ultima, Origin of Oblivion|R|FIN
-#178|Aerith Gainsborough|R|FIN
-#179|Dwarven Castle Guard|C|FIN
-#180|G'raha Tia|U|FIN
-#181|Restoration Magic|U|FIN
-#182|Slash of Light|C|FIN
-#183|Stiltzkin, Moogle Merchant|R|FIN
-#184|The Wind Crystal|R|FIN
-#185|Cargo Ship|U|FIN
-#186|Combat Tutorial|C|FIN
-#187|Matoya, Archon Elder|R|FIN
-#188|Retrieve the Esper|C|FIN
-#189|Swallowed by Leviathan|U|FIN
-#190|Black Mage's Rod|C|FIN
-#191|Dark Knight's Greatsword|U|FIN
-#192|Evil Reawakened|U|FIN
-#193|The Final Days|U|FIN
-#194|Sidequest: Hunt the Mark|U|FIN
-#195|Vincent Valentine|R|FIN
-#196|Prompto Argentum|U|FIN
-#197|Sandworm|U|FIN
-#198|Ancient Adamantoise|M|FIN
-#199|Quina, Qu Gourmet|U|FIN
-#200|Sidequest: Raise a Chocobo|U|FIN
-#201|Tifa Lockhart|R|FIN
-#202|Rufus Shinra|U|FIN
-#203|Tellah, Great Sage|R|FIN
-#204|Baron, Airship Kingdom|C|FIN
-#205|Gohn, Town of Ruin|C|FIN
-#206|Gongaga, Reactor Town|C|FIN
-#207|Guadosalam, Farplane Gateway|C|FIN
-#208|Insomnia, Crown City|C|FIN
-#209|Jidoor, Aristocratic Capital|R|FIN
-#210|Rabanastre, Royal City|C|FIN
-#211|Sharlayan, Nation of Scholars|C|FIN
-#212|Treno, Dark City|C|FIN
-#213|Vector, Imperial Capital|C|FIN
-#214|Windurst, Federation Center|C|FIN
-#215|Aerith Rescue Mission|C|FIN
-#216|Summon: Choco/Mog|C|FIN
-#217|Summon: Primal Garuda|U|FIN
-#218|White Mage's Staff|C|FIN
-#219|Dreams of Laguna|C|FIN
-#220|Sahagin|C|FIN
-#221|Cornered by Black Mages|C|FIN
-#222|The Darkness Crystal|R|FIN
-#223|Shinra Reinforcements|C|FIN
-#224|Fire Magic|U|FIN
-#225|Item Shopkeep|C|FIN
-#226|Mysidian Elder|C|FIN
-#227|Opera Love Song|U|FIN
-#228|Summon: Esper Ramuh|U|FIN
-#229|Vaan, Street Thief|R|FIN
-#230|Bard's Bow|C|FIN
-#231|Chocobo Kick|C|FIN
-#232|The Earth Crystal|R|FIN
-#233|Gysahl Greens|C|FIN
-#234|Jumbo Cactuar|R|FIN
-#235|Black Waltz No. 3|U|FIN
-#236|Serah Farron|R|FIN
-#237|The Wandering Minstrel|R|FIN
-#238|Lion Heart|U|FIN
-#239|Relentless X-ATM092|U|FIN
-#240|Starting Town|R|FIN
-#241|Rydia's Return|U|FIN
-#242|Brainstorm|U|FCA
-#243|Isshin, Two Heavens as One|R|FCA
-#244|Nyxbloom Ancient|M|FCA
-#245|Snow Villiers|U|FIN
-#246|Magic Damper|C|FIN
-#247|Quistis Trepe|U|FIN
-#248|Rook Turret|C|FIN
-#249|Sage's Nouliths|C|FIN
-#250|Sidequest: Card Collection|U|FIN
-#251|Syncopate|C|FIN
-#252|Circle of Power|U|FIN
-#253|Shambling Cie'th|U|FIN
-#254|Tonberry|U|FIN
-#255|Barret Wallace|U|FIN
-#256|Warrior's Sword|C|FIN
-#257|Blitzball Shot|C|FIN
-#258|Commune with Beavers|C|FIN
-#259|Gran Pulse Ochu|C|FIN
-#260|Ride the Shoopuf|U|FIN
-#261|Summon: G.F. Ifrit|C|FIN
-#262|Farseek|U|FCA
-#263|Ishai, Ojutai Dragonspeaker|R|FCA
-#264|Auron's Inspiration|U|FIN
-#265|Fate of the Sun-Cryst|C|FIN
-#266|Paladin's Arms|C|FIN
-#267|Gogo, Master of Mimicry|M|FIN
-#268|Scorpion Sentinel|C|FIN
-#269|Thief's Knife|U|FIN
-#270|Ahriman|C|FIN
-#271|Fang, Fearless l'Cie|U|FIN
-#272|Kain, Traitorous Dragoon|R|FIN
-#273|Malboro|C|FIN
-#274|Namazu Trader|C|FIN
-#275|Poison the Waters|U|FIN
-#276|Resentful Revelation|C|FIN
-#277|Undercity Dire Rat|C|FIN
-#278|Blazing Bomb|C|FIN
-#279|Coral Sword|U|FIN
-#280|Red Mage's Rapier|C|FIN
-#281|Sabotender|C|FIN
-#282|Sidequest: Play Blitzball|U|FIN
-#283|Chocobo Racetrack|U|FIN
-#284|Goobbue Gardener|C|FIN
-#285|Loporrit Scout|C|FIN
-#286|Prishe's Wanderings|C|FIN
-#287|Summoner's Grimoire|R|FIN
-#288|Adventurer's Airship|C|FIN
-#289|The Masamune|R|FIN
-#290|Monk's Fist|C|FIN
-#291|Capital City|U|FIN
-#292|Chromatic Lantern|R|FCA
-#293|Cloudbound Moogle|C|FIN
-#294|Coeurl|C|FIN
-#295|Crystal Fragments|U|FIN
-#296|Ice Flan|C|FIN
-#297|The Prima Vista|U|FIN
-#298|Qiqirn Merchant|C|FIN
-#299|Relm's Sketching|U|FIN
-#300|Fight On!|C|FIN
-#301|Haste Magic|C|FIN
-#302|Hill Gigas|C|FIN
-#303|Laughing Mad|C|FIN
-#304|Light of Judgment|C|FIN
-#305|Unexpected Request|U|FIN
-#306|Airship Crash|C|FIN
-#307|Cactuar|U|FIN
-#308|Galuf's Final Act|U|FIN
-#309|Gigantoad|C|FIN
-#310|Instant Ramen|C|FIN
-#311|World Map|C|FIN
-#312|Adventurer's Inn|C|FIN
-#313|Clive's Hideaway|R|FIN
-#314|Mizzix's Mastery|R|FCA
-#315|Nature's Claim|U|FCA
-#316|Dark Confidant|M|FIN
-#317|Phantom Train|U|FIN
-#318|Qutrub Forayer|C|FIN
-#319|Reach the Horizon|U|FIN
-#320|PuPu UFO|U|FIN
-#321|Phoenix Down|U|FIN
-#322|Sidequest: Catch a Fish|U|FIN
-#323|The Water Crystal|R|FIN
-#324|The Fire Crystal|R|FIN
-#325|Sorceress's Schemes|U|FIN
-#326|Elixir|U|FIN
-#327|Excalibur II|R|FIN
-#328|Genji Glove|R|FIN
-#329|Magic Pot|C|FIN
-#330|Ring of the Lucii|U|FIN
-#331|Inalla, Archmage Ritualist|R|FCA
-#332|Aettir and Priwen|M|FIN
-#333|Azusa, Lost but Seeking|R|FCA
-#334|K'rrik, Son of Yawgmoth|R|FCA
-#335|Rhystic Study|M|FCA
-#336|Strixhaven Stadium|U|FCA
-#337|Lunatic Pandora|C|FIN
-#338|Bolas's Citadel|R|FCA
-#339|Stroke of Midnight|U|FCA
-#340|Louisoix's Sacrifice|R|FIN
-#341|Eden, Seat of the Sanctum|U|FIN
-#342|Zodiark, Umbral God|R|FIN
-#343|Iron Giant|C|FIN
-#344|The Gold Saucer|U|FIN
-#345|Laboratory Maniac|U|FCA
-#346|Ether|U|FIN
-#347|Self-Destruct|U|FIN
-#348|Triple Triad|R|FIN
-#349|Random Encounter|U|FIN
-#350|Wastes|C|FIN
-#351|From Father to Son|R|FIN
-#352|Diabolic Intent|R|FCA
-#353|Dovin's Veto|U|FCA
-#354|A Realm Reborn|R|FIN
-#355|Carpet of Flowers|R|FCA
-#356|Command Beacon|R|FCA
-#357|Dark Ritual|R|FCA
-#358|Stolen Uniform|U|FIN
-#359|Plains|C|FIN
-#360|Island|C|FIN
-#361|Swamp|C|FIN
-#362|Mountain|C|FIN
-#363|Forest|C|FIN
+#48|Machinist's Arsenal|R|FIN
+#49|Summon Knights of Round|M|FIN
+#50|White Auracite|C|FIN
+#51|Combat Tutorial|C|FIN
+#52|Dragoon's Wyvern|C|FIN
+#53|Eject|U|FIN
+#54|The Lunar Whale|R|FIN
+#55|Summon Leviathan|R|FIN
+#56|Cecil, Dark Knight|R|FIN
+#57|Sephiroth's Intervention|C|FIN
+#58|Seifer Almasy|R|FIN
+#59|Traveling Chocobo|M|FIN
+#60|Shantotto, Tactician Magician|U|FIN
+#61|Ragavan, Nimble Pilferer|M|FCA
+#62|Tymna the Weaver|R|FCA
+#63|Adelbert Steiner|U|FIN
+#64|Battle Menu|U|FIN
+#65|Cloud, Midgar Mercenary|M|FIN
+#66|Ice Magic|C|FIN
+#67|Sleep Magic|U|FIN
+#68|Ultros, Obnoxious Octopus|U|FIN
+#69|Cornered by Black Mages|C|FIN
+#70|Vincent Valentine|R|FIN
+#71|Gilgamesh, Master-at-Arms|R|FIN
+#72|Thunder Magic|C|FIN
+#73|Ancient Adamantoise|M|FIN
+#74|Coliseum Behemoth|U|FIN
+#75|Torgal, A Fine Hound|U|FIN
+#76|Town Greeter|C|FIN
+#77|Vanille, Cheerful l'Cie|U|FIN
+#78|Absolute Virtue|M|FIN
+#79|Emet-Selch, Unsundered|M|FIN
+#80|Ignis Scientia|U|FIN
+#81|Vivi Ornitier|M|FIN
+#82|Balamb Garden, SeeD Academy|R|FIN
+#83|Counterspell|U|FCA
+#84|Gix, Yawgmoth Praetor|M|FCA
+#85|Magitek Infantry|C|FIN
+#86|White Mage's Staff|C|FIN
+#87|Dreams of Laguna|C|FIN
+#88|Il Mheg Pixie|U|FIN
+#89|Sahagin|C|FIN
+#90|Circle of Power|U|FIN
+#91|Ninja's Blades|R|FIN
+#92|Resentful Revelation|C|FIN
+#93|Vayne's Treachery|C|FIN
+#94|Sorceress's Schemes|U|FIN
+#95|Joshua, Phoenix's Dominant|R|FIN
+#96|Omega, Heartless Evolution|U|FIN
+#97|Squall, SeeD Mercenary|R|FIN
+#98|Zidane, Tantalus Thief|U|FIN
+#99|Exdeath, Void Warlock|U|FIN
+#100|Captain Lannery Storm|U|FCA
+#101|Muldrotha, the Gravetide|R|FCA
+#102|Venser, Shaper Savant|R|FCA
+#103|Venat, Heart of Hydaelyn|R|FIN
+#104|Zack Fair|U|FIN
+#105|Astrologian's Planisphere|R|FIN
+#106|Syncopate|C|FIN
+#107|Evil Reawakened|U|FIN
+#108|Shinra Reinforcements|C|FIN
+#109|Call the Mountain Chocobo|C|FIN
+#110|Chocobo Kick|C|FIN
+#111|Summon Fat Chocobo|C|FIN
+#112|Gladiolus Amicitia|U|FIN
+#113|Locke Cole|U|FIN
+#114|The Regalia|R|FIN
+#115|Wall of Omens|U|FCA
+#116|Summon Bahamut|M|FIN
+#117|Magitek Armor|U|FIN
+#118|Restoration Magic|U|FIN
+#119|Summon Shiva|U|FIN
+#120|Travel the Overworld|U|FIN
+#121|Blazing Bomb|C|FIN
+#122|Fire Magic|U|FIN
+#123|Garland, Knight of Cornelia|U|FIN
+#124|Rinoa Heartilly|U|FIN
+#125|Ambrosia Whiteheart|U|FIN
+#126|The Crystal's Chosen|U|FIN
+#127|Gaelicat|C|FIN
+#128|Slash of Light|C|FIN
+#129|Quistis Trepe|U|FIN
+#130|Al Bhed Salvagers|U|FIN
+#131|The Final Days|U|FIN
+#132|Hecteyes|C|FIN
+#133|Jecht, Reluctant Guardian|R|FIN
+#134|Malboro|C|FIN
+#135|Firion, Wild Rose Warrior|R|FIN
+#136|Prompto Argentum|U|FIN
+#137|Suplex|C|FIN
+#138|Lightning, Army of One|M|FIN
+#139|Rufus Shinra|U|FIN
+#140|Danitha Capashen, Paragon|U|FCA
+#141|Deadly Dispute|U|FCA
+#142|Kraum, Ludevic's Opus|R|FCA
+#143|Vial Smasher the Fierce|M|FCA
+#144|Aerith Gainsborough|R|FIN
+#145|Paladin's Arms|C|FIN
+#146|Summon Primal Garuda|U|FIN
+#147|You're Not Alone|C|FIN
+#148|Magic Damper|C|FIN
+#149|Relm's Sketching|U|FIN
+#150|Scorpion Sentinel|C|FIN
+#151|Y'shtola Rhul|M|FIN
+#152|Black Mage's Rod|C|FIN
+#153|Dark Knight's Greatsword|U|FIN
+#154|Balamb T-Rexaur|C|FIN
+#155|Bartz and Boko|R|FIN
+#156|Giott, King of the Dwarves|U|FIN
+#157|Judge Magister Gabranth|U|FIN
+#158|Zanarkand, Ancient Metropolis|R|FIN
+#159|Ultima|R|FIN
+#160|Weapons Vendor|C|FIN
+#161|Retrieve the Esper|C|FIN
+#162|Stuck in Summoner's Sanctum|C|FIN
+#163|Demon Wall|U|FIN
+#164|Tonberry|U|FIN
+#165|Undercity Dire Rat|C|FIN
+#166|Clive, Ifrit's Dominant|M|FIN
+#167|Zell Dincht|R|FIN
+#168|Bard's Bow|C|FIN
+#169|Goobbue Gardener|C|FIN
+#170|Gran Pulse Ochu|C|FIN
+#171|The Wandering Minstrel|R|FIN
+#172|PuPu UFO|U|FIN
+#173|Baron, Airship Kingdom|C|FIN
+#174|Capital City|U|FIN
+#175|Crossroads Village|C|FIN
+#176|Gohn, Town of Ruin|C|FIN
+#177|Guadosalam, Farplane Gateway|C|FIN
+#178|Treno, Dark City|C|FIN
+#179|Bolas's Citadel|R|FCA
+#180|Fynn, the Fangbearer|U|FCA
+#181|Ahriman|C|FIN
+#182|Gaius van Baelsar|U|FIN
+#183|Namazu Trader|C|FIN
+#184|Phantom Train|U|FIN
+#185|Warrior's Sword|C|FIN
+#186|Diamond Weapon|U|FIN
+#187|Ride the Shoopuf|U|FIN
+#188|Cid, Timeless Artificer|U|FIN
+#189|Garnet, Princess of Alexandria|U|FIN
+#190|Ultimecia, Time Sorceress|U|FIN
+#191|Adventurer's Inn|C|FIN
+#192|Eden, Seat of the Sanctum|U|FIN
+#193|Starting Town|R|FIN
+#194|Godo, Bandit Warlord|R|FCA
+#195|Light Up the Stage|U|FCA
+#196|Syr Konrad, the Grim|U|FCA
+#197|Ashe, Princess of Dalmasca|U|FIN
+#198|Cargo Ship|U|FIN
+#199|The Darkness Crystal|R|FIN
+#200|Fight On!|C|FIN
+#201|Coral Sword|U|FIN
+#202|Freya Crescent|U|FIN
+#203|Prishe's Wanderings|C|FIN
+#204|Choco, Seeker of Paradise|R|FIN
+#205|Tellah, Great Sage|R|FIN
+#206|Terra, Magical Adept|M|FIN
+#207|Lion Heart|U|FIN
+#208|Monk's Fist|C|FIN
+#209|Vector, Imperial Capital|C|FIN
+#210|Thrasios, Triton Hero|M|FCA
+#211|Aerith Rescue Mission|C|FIN
+#212|Dwarven Castle Guard|C|FIN
+#213|Fate of the Sun-Cryst|C|FIN
+#214|Reno and Rude|U|FIN
+#215|Zodiark, Umbral God|R|FIN
+#216|Blitzball Shot|C|FIN
+#217|Clash of the Eikons|U|FIN
+#218|Commune with Beavers|C|FIN
+#219|Gysahl Greens|C|FIN
+#220|Sidequest Raise a Chocobo|U|FIN
+#221|Midgar, City of Mako|R|FIN
+#222|Sharlayan, Nation of Scholars|C|FIN
+#223|Windurst, Federation Center|C|FIN
+#224|Farseek|U|FCA
+#225|Traxos, Scourge of Kroog|R|FCA
+#226|Kinnan, Bonder Prodigy|M|FCA
+#227|Ultima, Origin of Oblivion|R|FIN
+#228|Coeurl|C|FIN
+#229|G'raha Tia|U|FIN
+#230|Summon Choco Mog|C|FIN
+#231|Edgar, King of Figaro|R|FIN
+#232|Ice Flan|C|FIN
+#233|Poison the Waters|U|FIN
+#234|Laughing Mad|C|FIN
+#235|Reach the Horizon|U|FIN
+#236|Adventurer's Airship|C|FIN
+#237|Ring of the Lucii|U|FIN
+#238|Gongaga, Reactor Town|C|FIN
+#239|Insomnia, Crown City|C|FIN
+#240|Rydia, Summoner of Mist|U|FIN
+#241|Brainstorm|U|FCA
+#242|Mangara, the Diplomat|R|FCA
+#243|Varragoth, Bloodsky Sire|R|FCA
+#244|Yuriko, the Tiger's Shadow|R|FCA
+#245|Sage's Nouliths|C|FIN
+#246|Thief's Knife|U|FIN
+#247|Valkyrie Aerial Unit|U|FIN
+#248|Summon Anima|U|FIN
+#249|Item Shopkeep|C|FIN
+#250|Light of Judgment|C|FIN
+#251|Opera Love Song|U|FIN
+#252|Queen Brahne|U|FIN
+#253|Unexpected Request|U|FIN
+#254|Airship Crash|C|FIN
+#255|Gigantoad|C|FIN
+#256|Balthier and Fran|R|FIN
+#257|Instant Ramen|C|FIN
+#258|The Gold Saucer|U|FIN
+#259|Ishgard, the Holy See|R|FIN
+#260|Lindblum, Industrial Regency|R|FIN
+#261|Rabanastre, Royal City|C|FIN
+#262|Tifa's Limit Break|U|FIN
+#263|Rydia's Return|U|FIN
+#264|Ancient Copper Dragon|M|FCA
+#265|Mizzix's Mastery|R|FCA
+#266|Najeela, the Blade-Blossom|M|FCA
+#267|Crystal Fragments|U|FIN
+#268|Stiltzkin, Moogle Merchant|R|FIN
+#269|Qiqirn Merchant|C|FIN
+#270|Rook Turret|C|FIN
+#271|Shambling Cie'th|U|FIN
+#272|Raubahn, Bull of Ala Mhigo|R|FIN
+#273|Summon Brynhildr|R|FIN
+#274|Summon Esper Ramuh|U|FIN
+#275|Quina, Qu Gourmet|U|FIN
+#276|Relentless X-ATM092|U|FIN
+#277|Cloudbound Moogle|C|FIN
+#278|Minwu, White Mage|R|FIN
+#279|Phoenix Down|U|FIN
+#280|Snow Villiers|U|FIN
+#281|Gogo, Master of Mimicry|M|FIN
+#282|Fang, Fearless l'Cie|U|FIN
+#283|Qutrub Forayer|C|FIN
+#284|Barret Wallace|U|FIN
+#285|Mysidian Elder|C|FIN
+#286|Sabotender|C|FIN
+#287|Sandworm|U|FIN
+#288|Summon GF Cerberus|R|FIN
+#289|Chocobo Racetrack|U|FIN
+#290|Black Waltz No. 3|U|FIN
+#291|Vincent's Limit Break|C|FIN
+#292|Auron's Inspiration|U|FIN
+#293|Matoya, Archon Elder|R|FIN
+#294|The Prima Vista|U|FIN
+#295|Kain, Traitorous Dragoon|R|FIN
+#296|Cactuar|U|FIN
+#297|Summoner's Grimoire|R|FIN
+#298|Hope Estheim|R|FIN
+#299|World Map|C|FIN
+#300|The Wind Crystal|R|FIN
+#301|Hill Gigas|C|FIN
+#302|Red Mage's Rapier|C|FIN
+#303|Triple Triad|R|FIN
+#304|Tidus, Blitzball Star|U|FIN
+#305|Summon GF Ifrit|C|FIN
+#306|Blitzball|C|FIN
+#307|Purphoros, God of the Forge|M|FCA
+#308|Sidequest Catch a Fish|U|FIN
+#309|Haste Magic|C|FIN
+#310|Self-Destruct|U|FIN
+#311|Golbez, Crystal Collector|R|FIN
+#312|Nature's Claim|U|FCA
+#313|Teferi, Mage of Zhalfir|R|FCA
+#314|Ether|U|FIN
+#315|Louisoix's Sacrifice|R|FIN
+#316|The Water Crystal|R|FIN
+#317|The Fire Crystal|R|FIN
+#318|Random Encounter|U|FIN
+#319|Sidequest Play Blitzball|U|FIN
+#320|Vaan, Street Thief|R|FIN
+#321|The Earth Crystal|R|FIN
+#322|Galuf's Final Act|U|FIN
+#323|Jumbo Cactuar|R|FIN
+#324|Loporrit Scout|C|FIN
+#325|Tifa Lockhart|R|FIN
+#326|Noctis, Prince of Lucis|R|FIN
+#327|Serah Farron|R|FIN
+#328|Aettir and Priwen|M|FIN
+#329|Elixir|U|FIN
+#330|Excalibur II|R|FIN
+#331|Genji Glove|R|FIN
+#332|Iron Giant|C|FIN
+#333|Lunatic Pandora|C|FIN
+#334|Magic Pot|C|FIN
+#335|The Masamune|R|FIN
+#336|Clive's Hideaway|R|FIN
+#337|Jidoor, Aristocratic Capital|R|FIN
+#338|Chromatic Lantern|R|FCA
+#339|Dovin's Veto|U|FCA
+#340|Laboratory Maniac|U|FCA
+#341|Stroke of Midnight|U|FCA
+#342|From Father to Son|R|FIN
+#343|Stolen Uniform|U|FIN
+#344|A Realm Reborn|R|FIN
+#345|Azusa, Lost but Seeking|R|FCA
+#346|Carpet of Flowers|R|FCA
+#347|Command Beacon|R|FCA
+#348|Dark Ritual|R|FCA
+#349|Diabolic Intent|R|FCA
+#350|Ishai, Ojutai Dragonspeaker|R|FCA
+#351|Isshin, Two Heavens as One|R|FCA
+#352|Jodah, the Unifier|R|FCA
+#353|K'rrik, Son of Yawgmoth|R|FCA
+#354|Nyxbloom Ancient|M|FCA
+#355|Rhystic Study|M|FCA
+#356|Strixhaven Stadium|U|FCA
+#357|Inalla, Archmage Ritualist|R|FCA
+#358|Plains|C|FIN
+#359|Island|C|FIN
+#360|Swamp|C|FIN
+#361|Mountain|C|FIN
+#362|Forest|C|FIN
+#363|Wastes|C|FIN
