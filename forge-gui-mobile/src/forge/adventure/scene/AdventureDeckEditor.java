@@ -518,7 +518,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         return currentEvent.draft != null && !currentEvent.isDraftComplete;
     }
 
-    public static AdventureEventData currentEvent; //TODO: Remove
+    public static AdventureEventData currentEvent; //TODO: Remove. Should just get this from the controller.
 
     public void setEvent(AdventureEventData event) {
         currentEvent = event;

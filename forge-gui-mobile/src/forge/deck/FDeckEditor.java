@@ -335,7 +335,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
 
     private static final Consumer<String> fnUpdateQuestDeck = deckStr -> {
-        //TODO: Think this will work but double check. May need to trim off a path string?
         FModel.getQuest().setCurrentDeck(deckStr);
         FModel.getQuest().save();
     };
@@ -2217,8 +2216,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             DeckSection section = ((DeckSectionPage) destination).deckSection;
             FThreads.invokeInBackgroundThread(() -> {
                 draft.setChoice(card, section);
-
-                // TODO Implement handling of extra boosters
 
                 if (draft.hasNextChoice()) {
                     refresh();
