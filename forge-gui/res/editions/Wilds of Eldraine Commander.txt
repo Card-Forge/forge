@@ -183,8 +183,10 @@ TokensFallbackCode=WOE
 
 [tokens]
 1 role_monster @Rovina Cai
+# Need to flip it
 1 role_virtuous @Rovina Cai
 2 role_royal @Rovina Cai
+# Need to flip it
 2 role_virtuous @Rovina Cai
 7 w_1_1_human_soldier @Kimonas Theodossiou
 9 w_2_2_pegasus_flying @Lars Grant-West

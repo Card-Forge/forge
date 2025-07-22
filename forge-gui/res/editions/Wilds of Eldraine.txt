@@ -420,11 +420,14 @@ ScryfallCode=WOE
 13 c_a_food_sac @Jokubas Uogintas
 14 c_a_treasure_sac @Zezhou Chen
 15 role_monster @Rovina Cai
+# Need to flip it
 15 role_sorcerer @Rovina Cai
 16 role_royal @Rovina Cai
+# Need to flip it
 16 role_young_hero @Rovina Cai
-17 role_cursed @Rovina Cai
 17 role_wicked @Rovina Cai
+# Need to flip it
+17 role_cursed @Rovina Cai
 
 [other]
 18 adventure @Dmitry Burmak
