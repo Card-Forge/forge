@@ -916,10 +916,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 player = sa.getTargets().getFirstTargetedPlayer();
             }
 
-            if (!player.isInGame()) {
-                continue;
-            }
-
             List<ZoneType> origin = Lists.newArrayList();
             if (sa.hasParam("Origin")) {
                 origin = ZoneType.listValueOf(sa.getParam("Origin"));

@@ -66,10 +66,6 @@ public class RepeatEffect extends SpellAbilityEffect {
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
 
-        if (game.isGameOver()) {
-            return false;
-        }
-
         if (sa.hasParam("RepeatPresent")) {
             final String repeatPresent = sa.getParam("RepeatPresent");
             String repeatCompare = sa.getParamOrDefault("RepeatCompare", "GE1");
