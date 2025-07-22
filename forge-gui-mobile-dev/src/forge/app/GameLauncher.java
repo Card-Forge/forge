@@ -24,7 +24,7 @@ public class GameLauncher {
         if (SharedLibraryLoader.isMac) {
             Configuration.GLFW_LIBRARY_NAME.set("glfw_async");
         }
-        //increase MemoryStack to 1MB, default is 64
+        //increase MemoryStack to 1MB, default is 64kb
         Configuration.STACK_SIZE.set(1024);
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         ApplicationListener start = Forge.getApp(new Lwjgl3Clipboard(), new Main.DesktopAdapter(switchOrientationFile),//todo get totalRAM && isTabletDevice
