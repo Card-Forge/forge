@@ -544,6 +544,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         boolean allowSave = allowSave();
         deckHeader.btnSave.setEnabled(allowSave);
         deckHeader.btnSave.setVisible(allowSave);
+        deckHeader.revalidate();
     }
 
     public void setHeaderText(String headerText) {
@@ -944,6 +945,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             deck.setDraftNotes(player.getSerializedDraftNotes());
         }
 
+        updateDeckHeader();
+
         save(null);
     }
 
@@ -1031,7 +1034,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         return !isDrafting() && this.deckController.supportsRename();
     }
     protected boolean allowDelete() {
-        return this.deckController.supportsDelete();
+        return !isDrafting() && this.deckController.supportsDelete();
     }
     protected boolean allowSave() {
         return !isDrafting() && this.deckController.supportsSave();
