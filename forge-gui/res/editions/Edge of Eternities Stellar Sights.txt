@@ -1,7 +1,7 @@
 [metadata]
 Code=EOS
 Date=2025-08-01
-Name=Edge of Eternities: Stellar Sights
+Name=Edge of Eternities: Steller Sights
 Type=Collector_Edition
 ScryfallCode=EOS
 
