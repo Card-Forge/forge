@@ -143,4 +143,4 @@ Aetherdrift, 3/6/DFT, DFT
 Tarkir Dragonstorm, 3/6/TDM, TDM
 Final Fantasy, 3/6/FIN, FIN
 Alchemy: Innistrad, 3/6/ISD, YMID
-Edge of Eternity, 3/6/EOE, EOE
+Edge of Eternities, 3/6/EOE, EOE

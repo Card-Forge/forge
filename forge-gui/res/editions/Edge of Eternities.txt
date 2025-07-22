@@ -4,8 +4,7 @@ Date=2025-08-01
 Name=Edge of Eternities
 Type=Expansion
 ScryfallCode=EOE
-TokensCode=TEOE
-https://mtgscribe.com/2025/07/16/edge-of-eternities-play-booster-fact-sheet/
+#https://mtgscribe.com/2025/07/16/edge-of-eternities-play-booster-fact-sheet/
 BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,AnyLand,Wildcard,WildcardFoil
 BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,AnyLand,Wildcard,WildcardFoil
 Booster=6 Common,1 Common-Guest,3 Uncommon, 1 RareMythic, 1 WildcardA, 1 WildcardB+, 1 BasicLand
