@@ -1401,6 +1401,11 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.RulesText, rulesText);
         }
 
+        public boolean hasPrintedPower() {
+            EnumMap props = getProps();
+            return props.containsKey(TrackableProperty.Power);
+        }
+
         public int getPower() {
             return get(TrackableProperty.Power);
         }
@@ -1479,7 +1484,6 @@ public class CardView extends GameEntityView {
             }
             set(TrackableProperty.Loyalty, "0"); //alternates don't need loyalty
         }
-
 
         public String getDefense() {
             return get(TrackableProperty.Defense);
