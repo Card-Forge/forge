@@ -201,7 +201,7 @@ ScryfallCode=EOC
 [tokens]
 2 c_x_x_shapeshifter_changeling_deathtouch @Carlos Palma Cruchaga
 3 u_2_2_bird_flying @Alessandra Pisano
-4 g_1_1_insect_flying @Deruchenko Alexander
+4 b_1_1_insect_flying @Deruchenko Alexander
 5 g_3_3_beast @Dave Allsop
 6 g_4_4_beast @Xabi Gaztelua
 7 g_5_3_elemental @Nils Hamm
