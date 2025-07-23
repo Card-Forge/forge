@@ -722,29 +722,32 @@ public class CardFactory {
 
             // Special Rules for Embalm and Eternalize
             if (sa.isEmbalm() && sa.isIntrinsic()) {
-                String name = TextUtil.fastReplace(
+                String name = "embalm_" + TextUtil.fastReplace(
                         TextUtil.fastReplace(host.getName(), ",", ""),
                         " ", "_").toLowerCase();
-                String set = host.getSetCode().toLowerCase();
-                state.setImageKey(ImageKeys.getTokenKey("embalm_" + name + "_" + set));
+                state.setImageKey(StaticData.instance().getOtherImageKey(name, host.getSetCode()));
             }
 
             if (sa.isEternalize() && sa.isIntrinsic()) {
-                String name = TextUtil.fastReplace(
+                String name = "eternalize_" + TextUtil.fastReplace(
                     TextUtil.fastReplace(host.getName(), ",", ""),
                         " ", "_").toLowerCase();
-                String set = host.getSetCode().toLowerCase();
-                state.setImageKey(ImageKeys.getTokenKey("eternalize_" + name + "_" + set));
+                state.setImageKey(StaticData.instance().getOtherImageKey(name, host.getSetCode()));
             }
 
             if (sa.isKeyword(Keyword.OFFSPRING) && sa.isIntrinsic()) {
-                String name = TextUtil.fastReplace(
+                String name = "offspring_" + TextUtil.fastReplace(
                         TextUtil.fastReplace(host.getName(), ",", ""),
                         " ", "_").toLowerCase();
-                String set = host.getSetCode().toLowerCase();
-                state.setImageKey(ImageKeys.getTokenKey("offspring_" + name + "|" + set));
+                state.setImageKey(StaticData.instance().getOtherImageKey(name, host.getSetCode()));
             }
 
+            if (sa.isKeyword(Keyword.SQUAD) && sa.isIntrinsic()) {
+                String name = "squad_" + TextUtil.fastReplace(
+                        TextUtil.fastReplace(host.getName(), ",", ""),
+                        " ", "_").toLowerCase();
+                state.setImageKey(StaticData.instance().getOtherImageKey(name, host.getSetCode()));
+            }
             
             if (sa.hasParam("GainTextOf") && originalState != null) {
                 state.setSetCode(originalState.getSetCode());
