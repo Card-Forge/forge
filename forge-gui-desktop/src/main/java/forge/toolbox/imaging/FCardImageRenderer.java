@@ -294,7 +294,8 @@ public class FCardImageRenderer {
         int headerHeight = NAME_SIZE + 2 * HEADER_PADDING;
         int typeBoxHeight = TYPE_SIZE + 2 * TYPE_PADDING;
         int ptBoxHeight = 0;
-        if (state.isCreature() || state.isPlaneswalker() | state.isBattle() || state.isVehicle()) {
+        if (state.isCreature() || state.isPlaneswalker() | state.isBattle() || state.isVehicle() ||
+                (state.getType().hasSubtype("Spacecraft") && state.hasPrintedPower())) {
             //if P/T box needed, make room for it
             ptBoxHeight = headerHeight;
         }
@@ -682,7 +683,6 @@ public class FCardImageRenderer {
             new Rectangle(x, y, w, h), NAME_FONT, NAME_SIZE);
     }
 
-
     private static void drawArt(Graphics2D g, Color[] colors, int x, int y, int w, int h, BufferedImage art) {
         if (art != null) {
             int artWidth = art.getWidth();
@@ -840,6 +840,14 @@ public class FCardImageRenderer {
                 pieces.add("/");
                 pieces.add(String.valueOf(state.getToughness()));
             }
+        }
+        else if (state.getType().hasSubtype("Spacecraft")) {
+            Color [] scColor = { Color.BLACK };
+            colors = scColor;
+            TEXT_COLOR = Color.WHITE;
+            pieces.add(String.valueOf(state.getPower()));
+            pieces.add("/");
+            pieces.add(String.valueOf(state.getToughness()));
         }
         else if (state.isPlaneswalker()) {
             Color [] pwColor = { Color.BLACK };
