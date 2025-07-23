@@ -1799,10 +1799,8 @@ public class CardView extends GameEntityView {
         public boolean isArtifact() {
             return getType().isArtifact();
         }
-        public boolean isNyx() {
-            if (!getType().isEnchantment() || getType().getCoreTypes() == null)
-                return false;
-            return Iterables.size(getType().getCoreTypes()) > 1;
+        public boolean isEnchantment() {
+            return getType().isEnchantment();
         }
         public boolean isAttraction() {
             return getType().isAttraction();
