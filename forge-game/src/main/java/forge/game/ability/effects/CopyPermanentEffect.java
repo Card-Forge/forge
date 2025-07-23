@@ -12,7 +12,6 @@ import org.apache.commons.lang3.mutable.MutableBoolean;
 
 import com.google.common.collect.Lists;
 
-import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardRarity;
 import forge.card.CardRulesPredicates;
