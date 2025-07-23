@@ -952,7 +952,6 @@ public class CardImageRenderer {
     public static Color[] drawCardBackgroundTexture(CardStateView state, Graphics g, List<DetailColors> backColors, float x, float y, float w, float h) {
         boolean isHybrid = state.getManaCost().hasMultiColor();
         boolean isPW = state.isPlaneswalker();
-        boolean isNyx = state.isNyx();
         Color[] colors = new Color[backColors.size()];
         for (int i = 0; i < colors.length; i++) {
             DetailColors dc = backColors.get(i);
@@ -967,7 +966,7 @@ public class CardImageRenderer {
                 } else if (backColors.get(0) == DetailColors.MULTICOLOR) {
                     if (state.isVehicle())
                         g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
-                    else if (isNyx)
+                    else if (state.isEnchantment())
                         g.drawImage(FSkinTexture.NYX_M, x, y, w, h);
                     else if (state.isArtifact() && !isPW)
                         g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
@@ -978,7 +977,7 @@ public class CardImageRenderer {
                         g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
                     else if (isPW)
                         g.drawImage(FSkinTexture.PWBG_C, x, y, w, h);
-                    else if (isNyx)
+                    else if (state.isEnchantment())
                         g.drawImage(FSkinTexture.NYX_C, x, y, w, h);
                     else if (state.isArtifact())
                         g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
@@ -987,7 +986,7 @@ public class CardImageRenderer {
                 } else if (backColors.get(0) == DetailColors.GREEN) {
                     if (state.isVehicle())
                         g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
-                    else if (isNyx)
+                    else if (state.isEnchantment())
                         g.drawImage(FSkinTexture.NYX_G, x, y, w, h);
                     else if (state.isArtifact() && !isPW)
                         g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
@@ -996,7 +995,7 @@ public class CardImageRenderer {
                 } else if (backColors.get(0) == DetailColors.RED) {
                     if (state.isVehicle())
                         g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
-                    else if (isNyx)
+                    else if (state.isEnchantment())
                         g.drawImage(FSkinTexture.NYX_R, x, y, w, h);
                     else if (state.isArtifact() && !isPW)
                         g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
@@ -1005,7 +1004,7 @@ public class CardImageRenderer {
                 } else if (backColors.get(0) == DetailColors.BLACK) {
                     if (state.isVehicle())
                         g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
-                    else if (isNyx)
+                    else if (state.isEnchantment())
                         g.drawImage(FSkinTexture.NYX_B, x, y, w, h);
                     else if (state.isArtifact() && !isPW)
                         g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
@@ -1014,7 +1013,7 @@ public class CardImageRenderer {
                 } else if (backColors.get(0) == DetailColors.BLUE) {
                     if (state.isVehicle())
                         g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
-                    else if (isNyx)
+                    else if (state.isEnchantment())
                         g.drawImage(FSkinTexture.NYX_U, x, y, w, h);
                     else if (state.isArtifact() && !isPW)
                         g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
@@ -1023,7 +1022,7 @@ public class CardImageRenderer {
                 } else if (backColors.get(0) == DetailColors.WHITE) {
                     if (state.isVehicle())
                         g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
-                    else if (isNyx)
+                    else if (state.isEnchantment())
                         g.drawImage(FSkinTexture.NYX_W, x, y, w, h);
                     else if (state.isArtifact() && !isPW)
                         g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
@@ -1034,7 +1033,7 @@ public class CardImageRenderer {
             case 2:
                 if (state.isVehicle())
                     g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
-                else if (isNyx)
+                else if (state.isEnchantment())
                     g.drawImage(FSkinTexture.NYX_M, x, y, w, h);
                 else if (state.isArtifact() && !isPW)
                     g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
@@ -1067,7 +1066,7 @@ public class CardImageRenderer {
             case 3:
                 if (state.isVehicle())
                     g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
-                else if (isNyx)
+                else if (state.isEnchantment())
                     g.drawImage(FSkinTexture.NYX_M, x, y, w, h);
                 else if (state.isArtifact() && !isPW)
                     g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
@@ -1077,7 +1076,7 @@ public class CardImageRenderer {
             default:
                 if (state.isVehicle())
                     g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
-                else if (isNyx)
+                else if (state.isEnchantment())
                     g.drawImage(FSkinTexture.NYX_C, x, y, w, h);
                 else if (state.isArtifact() && !isPW)
                     g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
