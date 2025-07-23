@@ -154,7 +154,7 @@ public class PumpAllAi extends PumpAiBase {
         if (decision == null) {
             return mandatory ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
-        if (mandatory && decision.getDecision() != AiPlayDecision.WillPlay) {
+        if (mandatory && decision.decision() != AiPlayDecision.WillPlay) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         return decision;
