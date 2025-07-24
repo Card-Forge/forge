@@ -174,16 +174,15 @@ public class CardDetailUtil {
             return "";
         }
         final StringBuilder ptText = new StringBuilder();
-        boolean hasPrintedPT = card.hasPrintedPT();
-        if (hasPrintedPT && !card.isCreature()) {
+        if (card.hasPrintedPT() && !card.isCreature()) {
             ptText.append("[");
         }
 
-        if (card.isCreature() || hasPrintedPT) {
+        if (card.isCreature() || card.hasPrintedPT()) {
             ptText.append(card.getPower()).append(" / ").append(card.getToughness());
         }
 
-        if (hasPrintedPT && !card.isCreature()) {
+        if (card.hasPrintedPT() && !card.isCreature()) {
             ptText.append("]");
         }
 

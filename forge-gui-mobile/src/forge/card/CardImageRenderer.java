@@ -724,7 +724,7 @@ public class CardImageRenderer {
             pieces.add(String.valueOf(state.getToughness()));
         } else if (state.isPlaneswalker()) {
             pieces.add(String.valueOf(state.getLoyalty()));
-        } else if (state.isVehicle() || state.isSpaceCraft()) {
+        } else if (state.hasPrintedPT()) {
             // TODO Invert color box for Vehicles?
             pieces.add("[");
             pieces.add(String.valueOf(state.getPower()));
