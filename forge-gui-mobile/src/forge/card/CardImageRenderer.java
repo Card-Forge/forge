@@ -151,7 +151,8 @@ public class CardImageRenderer {
         float ptBoxHeight = 0;
         float textBoxHeight = h - headerHeight - artHeight - typeBoxHeight - outerBorderThickness - artInset;
 
-        if (state.isCreature() || state.isPlaneswalker() || state.getType().hasSubtype("Vehicle") || state.isBattle()) {
+        if (state.isCreature() || state.isPlaneswalker() || state.isVehicle() || state.isBattle() ||
+                (state.isSpaceCraft() && state.hasPrintedPower())) {
             ptBoxHeight = 2 * PT_FONT.getCapHeight();
         }
         //space for artist
@@ -724,7 +725,7 @@ public class CardImageRenderer {
             pieces.add(String.valueOf(state.getToughness()));
         } else if (state.isPlaneswalker()) {
             pieces.add(String.valueOf(state.getLoyalty()));
-        } else if (state.getType().hasSubtype("Vehicle")) {
+        } else if (state.isVehicle() || state.isSpaceCraft()) {
             // TODO Invert color box for Vehicles?
             pieces.add("[");
             pieces.add(String.valueOf(state.getPower()));

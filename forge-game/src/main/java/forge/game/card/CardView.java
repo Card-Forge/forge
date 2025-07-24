@@ -1411,7 +1411,7 @@ public class CardView extends GameEntityView {
         }
         void updatePower(Card c) {
             int num;
-            if (getType().hasSubtype("Vehicle") && !isCreature()) {
+            if (isVehicle() && !isCreature()) {
                 // use printed value so user can still see it
                 num = c.getCurrentPower();
             } else {
@@ -1436,7 +1436,7 @@ public class CardView extends GameEntityView {
         }
         void updateToughness(Card c) {
             int num;
-            if (getType().hasSubtype("Vehicle") && !isCreature()) {
+            if (isVehicle() && !isCreature()) {
                 // use printed value so user can still see it
                 num = c.getCurrentToughness();
             } else {
@@ -1804,6 +1804,9 @@ public class CardView extends GameEntityView {
             return getType().isArtifact();
         }
         public boolean isEnchantment() {
+            return getType().isEnchantment();
+        }
+        public boolean isSpaceCraft() {
             return getType().isEnchantment();
         }
         public boolean isAttraction() {
