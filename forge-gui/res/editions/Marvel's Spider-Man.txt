@@ -11,6 +11,7 @@ ScryfallCode=SPM
 9 R Origin of Spider-Man @Bill Sienkiewicz
 10 M Peter Parker @Thanh Tuấn
 12 C Selfless Police Captain @Aniekan Udofia
+14 R Spectacular Spider-Man @Roberta Ingranata
 15 C Spectacular Tactics @Zoltan Boros
 16 C Spider-Man, Web-Slinger @Ryan Pancoast
 18 C Starling, Aerial Ally @Aniekan Udofia
