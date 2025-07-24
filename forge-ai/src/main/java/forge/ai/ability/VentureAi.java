@@ -44,9 +44,6 @@ public class VentureAi extends SpellAbilityAi {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         AiAbilityDecision decision = canPlayAI(aiPlayer, sa);
-        if (decision == null) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        }
         return decision;
     }
 
