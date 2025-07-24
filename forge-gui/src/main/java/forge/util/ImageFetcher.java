@@ -116,13 +116,22 @@ public abstract class ImageFetcher {
         final ArrayList<String> downloadUrls = new ArrayList<>();
         if (imageKey.startsWith("PLANECHASEBG:")) {
             final String filename = imageKey.substring("PLANECHASEBG:".length());
-            downloadUrls.add("https://downloads.cardforge.org/images/planes/" + filename);
-            FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_PLANECHASE_PICS_DIR);
-            File destFile = new File(ForgeConstants.CACHE_PLANECHASE_PICS_DIR, filename);
-            if (destFile.exists())
-                return;
+            PaperCard pc = StaticData.instance().getVariantCards().getCard(filename.replace("_", " ").replace(".jpg", ""));
+            if (pc != null) {
+                CardEdition ed = StaticData.instance().getEditions().get(pc.getEdition());
+                if (ed != null) {
+                    String setCode = ed.getScryfallCode();
+                    String langCode = ed.getCardsLangCode();
+                    downloadUrls.add("PLANECHASEBG:" + ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(pc, "", setCode, langCode, true));
+                    FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_PLANECHASE_PICS_DIR);
+                    File destFile = new File(ForgeConstants.CACHE_PLANECHASE_PICS_DIR, filename);
+                    if (destFile.exists())
+                        return;
 
-            setupObserver(destFile.getAbsolutePath(), callback, downloadUrls);
+                    setupObserver(destFile.getAbsolutePath(), callback, downloadUrls);
+                    return;
+                }
+            }
             return;
         }
 
@@ -266,7 +275,8 @@ public abstract class ImageFetcher {
                 return;
 
             if (tempdata.length < 2) {
-                System.err.println("Token image key is malformed: " + imageKey);
+                if (!"planechase".equals(tempdata[0]))
+                    System.err.println("Token image key is malformed: " + imageKey);
                 return;
             }
 
