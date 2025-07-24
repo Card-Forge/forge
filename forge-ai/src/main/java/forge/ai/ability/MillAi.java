@@ -163,7 +163,7 @@ public class MillAi extends SpellAbilityAi {
 
     @Override
     public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        return targetAI(aiPlayer, sa, true) ? new AiAbilityDecision(100, forge.ai.AiPlayDecision.WillPlay) : new AiAbilityDecision(0, forge.ai.AiPlayDecision.CantPlayAi);
+        return targetAI(aiPlayer, sa, true) ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override

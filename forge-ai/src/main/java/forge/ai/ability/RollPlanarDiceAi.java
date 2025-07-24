@@ -23,8 +23,6 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
         for (Card c : ai.getGame().getActivePlanes()) {
             if (willRollOnPlane(ai, c)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
