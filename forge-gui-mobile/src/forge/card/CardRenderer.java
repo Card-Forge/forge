@@ -1382,7 +1382,7 @@ public class CardRenderer {
             pieces.add(String.valueOf(details.getPower()));
             pieces.add("/");
             pieces.add(String.valueOf(details.getToughness()));
-        } else if (details.getType().hasSubtype("Vehicle")) {
+        } else if (details.hasPrintedPT()) {
             pieces.add("[");
             pieces.add(String.valueOf(details.getPower()));
             pieces.add("/");
