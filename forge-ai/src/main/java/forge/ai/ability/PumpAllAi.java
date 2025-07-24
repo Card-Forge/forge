@@ -151,11 +151,8 @@ public class PumpAllAi extends PumpAiBase {
 
         // important to call canPlay first so targets are added if needed
         AiAbilityDecision decision = canPlayAI(ai, sa);
-        if (decision == null) {
-            return mandatory ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        }
-        if (mandatory && decision.decision() != AiPlayDecision.WillPlay) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        if (mandatory && decision.decision().willingToPlay()) {
+            return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
         }
         return decision;
     }
