@@ -461,7 +461,7 @@ Replace=0.04F BasicLand:fromSheet("EOE borderless")+
 399 R Emissary Escort @Lius Lasahido
 
 [special guests]
-1 Warping Wall|SPG
+1 Warping Wail|SPG
 1 Nexus of Fate|SPG
 1 Paradox of Haze|SPG
 1 Magus of the Moon|SPG
