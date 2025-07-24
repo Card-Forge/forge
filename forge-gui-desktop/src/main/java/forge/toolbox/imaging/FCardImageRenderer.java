@@ -294,8 +294,7 @@ public class FCardImageRenderer {
         int headerHeight = NAME_SIZE + 2 * HEADER_PADDING;
         int typeBoxHeight = TYPE_SIZE + 2 * TYPE_PADDING;
         int ptBoxHeight = 0;
-        if (state.isCreature() || state.isPlaneswalker() | state.isBattle() || state.isVehicle() ||
-                (state.isSpaceCraft() && state.hasPrintedPower())) {
+        if (state.isCreature() || state.isPlaneswalker() | state.isBattle() || state.hasPrintedPT()) {
             //if P/T box needed, make room for it
             ptBoxHeight = headerHeight;
         }

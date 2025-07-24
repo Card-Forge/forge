@@ -151,8 +151,7 @@ public class CardImageRenderer {
         float ptBoxHeight = 0;
         float textBoxHeight = h - headerHeight - artHeight - typeBoxHeight - outerBorderThickness - artInset;
 
-        if (state.isCreature() || state.isPlaneswalker() || state.isVehicle() || state.isBattle() ||
-                (state.isSpaceCraft() && state.hasPrintedPower())) {
+        if (state.isCreature() || state.isPlaneswalker() || state.hasPrintedPT() || state.isBattle()) {
             ptBoxHeight = 2 * PT_FONT.getCapHeight();
         }
         //space for artist
