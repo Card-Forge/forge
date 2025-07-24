@@ -45,6 +45,8 @@ public class CardImageRenderer {
     private static FSkinFont NAME_FONT, TYPE_FONT, TEXT_FONT, PT_FONT;
     private static float prevImageWidth, prevImageHeight;
     private static final float BLACK_BORDER_THICKNESS_RATIO = 0.021f;
+    public static final Color[] VEHICLE_PTBOX_COLOR = new Color[] { Color.valueOf("#A36C42") };
+    public static final Color[] SPACECRAFT_PTBOX_COLOR = new Color[] { Color.valueOf("#6F6E6E") };
 
     private static Color fromDetailColor(DetailColors detailColor) {
         return FSkinColor.fromRGB(detailColor.r, detailColor.g, detailColor.b);
@@ -231,7 +233,7 @@ public class CardImageRenderer {
         if (onTop && ptBoxHeight > 0) {
             //only needed if on top since otherwise P/T will be hidden
             Color[] ptColors = FSkinColor.tintColors(Color.WHITE, colors, CardRenderer.PT_BOX_TINT);
-            drawPtBox(g, card, state, ptColors, x, y - 2 * artInset, w, ptBoxHeight, noText);
+            drawPtBox(g, state, ptColors, x, y - 2 * artInset, w, ptBoxHeight, noText);
         }
         //draw artist
         if (showArtist)
@@ -716,7 +718,7 @@ public class CardImageRenderer {
         g.drawImage(Forge.getAssets().getTexture(getDefaultSkinFile("overlay_alpha.png")), x, y, w, h);
     }
 
-    private static void drawPtBox(Graphics g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean noText) {
+    private static void drawPtBox(Graphics g, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean noText) {
         List<String> pieces = new ArrayList<>();
         if (state.isCreature()) {
             pieces.add(String.valueOf(state.getPower()));
@@ -725,7 +727,6 @@ public class CardImageRenderer {
         } else if (state.isPlaneswalker()) {
             pieces.add(String.valueOf(state.getLoyalty()));
         } else if (state.hasPrintedPT()) {
-            // TODO Invert color box for Vehicles?
             pieces.add("[");
             pieces.add(String.valueOf(state.getPower()));
             pieces.add("/");
@@ -753,17 +754,16 @@ public class CardImageRenderer {
         w = boxWidth;
         h = boxHeight;
 
-        fillColorBackground(g, colors, x, y, w, h);
+        fillColorBackground(g, state.isVehicle() ? VEHICLE_PTBOX_COLOR : state.isSpaceCraft() ? SPACECRAFT_PTBOX_COLOR : colors, x, y, w, h);
         //draw outline color here
-        if (state != null)
-            drawOutlineColor(g, state.getColors(), x, y, w, h);
+        drawOutlineColor(g, state.getColors(), x, y, w, h);
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
         if (noText)
             return;
         x += (boxWidth - totalPieceWidth) / 2;
         for (int i = 0; i < pieces.size(); i++) {
-            g.drawText(pieces.get(i), PT_FONT, Color.BLACK, x, y, w, h, false, Align.left, true);
+            g.drawText(pieces.get(i), PT_FONT, state.isVehicle() || state.isSpaceCraft() ? Color.WHITE : Color.BLACK, x, y, w, h, false, Align.left, true);
             x += pieceWidths[i];
         }
     }
@@ -936,7 +936,7 @@ public class CardImageRenderer {
 
         y += textBoxHeight + innerBorderThickness;
         Color[] ptColors = FSkinColor.tintColors(Color.WHITE, colors, CardRenderer.PT_BOX_TINT);
-        drawDetailsIdAndPtBox(g, card, state, canShow, idForeColor, ptColors, x, y, w, ptBoxHeight);
+        drawDetailsIdAndPtBox(g, state, canShow, idForeColor, ptColors, x, y, w, ptBoxHeight);
     }
 
     public static Color[] fillColorBackground(Graphics g, List<DetailColors> backColors, float x, float y, float w, float h) {
@@ -1167,7 +1167,7 @@ public class CardImageRenderer {
         cardTextRenderer.drawText(g, CardDetailUtil.composeCardText(state, gameView, canShow), TEXT_FONT, Color.BLACK, x, y, w, h, y, h, true, Align.left, false);
     }
 
-    private static void drawDetailsIdAndPtBox(Graphics g, CardView card, CardStateView state, boolean canShow, Color idForeColor, Color[] colors, float x, float y, float w, float h) {
+    private static void drawDetailsIdAndPtBox(Graphics g, CardStateView state, boolean canShow, Color idForeColor, Color[] colors, float x, float y, float w, float h) {
         float idWidth = 0;
         if (canShow) {
             String idText = CardDetailUtil.formatCardId(state);
@@ -1187,8 +1187,8 @@ public class CardImageRenderer {
         x += w - boxWidth;
         w = boxWidth;
 
-        fillColorBackground(g, colors, x, y, w, h);
+        fillColorBackground(g, state.isVehicle() ? VEHICLE_PTBOX_COLOR : state.isSpaceCraft() ? SPACECRAFT_PTBOX_COLOR : colors, x, y, w, h);
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
-        cardTextRenderer.drawText(g, ptText, PT_FONT, Color.BLACK, x, y, w, h, y, h, false, Align.center, true);
+        cardTextRenderer.drawText(g, ptText, PT_FONT, state.isVehicle() || state.isSpaceCraft() ? Color.WHITE : Color.BLACK, x, y, w, h, y, h, false, Align.center, true);
     }
 }
