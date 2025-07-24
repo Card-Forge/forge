@@ -178,23 +178,9 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
 
         @Override
         protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
-            addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), Forge.getLocalizer().getMessage("lblTo") + " " + getMainDeckPage().cardManager.getCaption(), getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
-                @Override
-                public void run(Integer result) {
-                    if (result == null || result <= 0) {
-                        return;
-                    }
-
-                    if (!cardManager.isInfinite()) {
-                        removeCard(card, result);
-                    }
-                    if (Current.player().autoSellCards.contains(card))
-                        Current.player().autoSellCards.remove(card);
-                    getMainDeckPage().addCard(card, result);
-                }
-            });
-            if (getSideboardPage() != null) {
-                addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), Forge.getLocalizer().getMessage("lbltosideboard"), getSideboardPage().getIcon(), true, true, new Callback<Integer>() {
+            if(!showAutoSellCards) {
+                //Prevent moving cards from the auto-sell list to a deck.
+                addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), Forge.getLocalizer().getMessage("lblTo") + " " + getMainDeckPage().cardManager.getCaption(), getMainDeckPage().getIcon(), true, true, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == null || result <= 0) {
@@ -206,9 +192,26 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                         }
                         if (Current.player().autoSellCards.contains(card))
                             Current.player().autoSellCards.remove(card);
-                        getSideboardPage().addCard(card, result);
+                        getMainDeckPage().addCard(card, result);
                     }
                 });
+                if (getSideboardPage() != null) {
+                    addItem(menu, Forge.getLocalizer().getMessage("lblAdd"), Forge.getLocalizer().getMessage("lbltosideboard"), getSideboardPage().getIcon(), true, true, new Callback<Integer>() {
+                        @Override
+                        public void run(Integer result) {
+                            if (result == null || result <= 0) {
+                                return;
+                            }
+
+                            if (!cardManager.isInfinite()) {
+                                removeCard(card, result);
+                            }
+                            if (Current.player().autoSellCards.contains(card))
+                                Current.player().autoSellCards.remove(card);
+                            getSideboardPage().addCard(card, result);
+                        }
+                    });
+                }
             }
 
             int autoSellCount = Current.player().autoSellCards.count(card);
@@ -227,7 +230,8 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                 });
                 moveToAutosell.setEnabled(sellableCount - autoSellCount > 0);
                 menu.addItem(moveToAutosell);
-
+            }
+            if (sellableCount > 0 || autoSellCount > 0) {
                 FMenuItem moveToCatalog = new FMenuItem(Forge.getLocalizer().getMessage("lbltoInventory", autoSellCount, sellableCount), Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> {
                     Current.player().autoSellCards.remove(card);
                     refresh();
@@ -235,6 +239,15 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                 moveToCatalog.setEnabled(autoSellCount > 0);
                 menu.addItem(moveToCatalog);
             }
+        }
+
+        @Override
+        protected void onCardActivated(PaperCard card) {
+            if(showAutoSellCards) {
+                Current.player().autoSellCards.remove(card);
+                refresh();
+            }
+            super.onCardActivated(card);
         }
 
         @Override
