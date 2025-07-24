@@ -1,0 +1,8 @@
+Name:Spider-Ham, Peter Porker
+ManaCost:1 G
+Types:Legendary Creature Spider Boar Hero
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+S:Mode$ Continuous | Affected$ Spider.Other+YouCtrl,Boar.Other+YouCtrl,Bat.Other+YouCtrl,Bear.Other+YouCtrl,Bird.Other+YouCtrl,Cat.Other+YouCtrl,Dog.Other+YouCtrl,Frog.Other+YouCtrl,Jackal.Other+YouCtrl,Lizard.Other+YouCtrl,Mouse.Other+YouCtrl,Otter.Other+YouCtrl,Rabbit.Other+YouCtrl,Raccoon.Other+YouCtrl,Rat.Other+YouCtrl,Squirrel.Other+YouCtrl,Turtle.Other+YouCtrl,Wolf.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Animal May-Ham — Other Spiders, Boars, Bats, Bears, Birds, Cats, Dogs, Frogs, Jackals, Lizards, Mice, Otters, Rabbits, Raccoons, Rats, Squirrels, Turtles, and Wolves you control get +1/+1.
+Oracle:When Spider-Ham enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")\nAnimal May-Ham — Other Spiders, Boars, Bats, Bears, Birds, Cats, Dogs, Frogs, Jackals, Lizards, Mice, Otters, Rabbits, Raccoons, Rats, Squirrels, Turtles, and Wolves you control get +1/+1.
