@@ -1,0 +1,5 @@
+Name:Double Trouble
+ManaCost:4 R
+Types:Instant
+A:SP$ Pump | Defined$ Valid Creature.YouCtrl | NumAtt$ Double | SpellDescription$ Double the power of each creature you control until end of turn.
+Oracle:Double the power of each creature you control until end of turn.
