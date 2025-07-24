@@ -1,4 +1,4 @@
-Name:Ghost-Spider, Gwem Stacy
+Name:Ghost-Spider, Gwen Stacy
 ManaCost:3 R R
 Types:Legendary Creature Spider Human Hero
 PT:4/4
