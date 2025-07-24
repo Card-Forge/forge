@@ -1807,7 +1807,7 @@ public class CardView extends GameEntityView {
             return getType().isEnchantment();
         }
         public boolean isSpaceCraft() {
-            return getType().isEnchantment();
+            return getType().hasSubtype("Spacecraft");
         }
         public boolean isAttraction() {
             return getType().isAttraction();
