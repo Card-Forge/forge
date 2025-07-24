@@ -277,6 +277,10 @@ public final class CardRules implements ICardCharacteristics {
         return getType().isDungeon();
     }
 
+    public boolean hasPrintedPT() {
+        return getPower() != null || getToughness() != null;
+    }
+
     public boolean canBeCommander() {
         if (mainPart.getOracleText().contains(" is your commander, choose a color before the game begins.")) {
             addsWildCardColor = true;
