@@ -616,12 +616,6 @@
                                 <debug>false</debug>
                             </sign>
                             <renameManifestPackage>forge.app.debug</renameManifestPackage>
-                            <manifestPlaceholders>
-                                <!-- this becomes ${applicationId} inside merged manifests -->
-                                <applicationId>forge.app.debug</applicationId>
-                                <!-- Sentry 7.x uses ${sentryAuthority} instead -->
-                                <sentryAuthority>forge.app.debug.sentryinitprovider</sentryAuthority>
-                            </manifestPlaceholders>
                             <sdk>
                                 <platform>${androidPlatform}</platform>
                                 <buildTools>${androidBuildTools}</buildTools>
@@ -665,6 +659,20 @@
                                 </goals>
                                 <configuration>
                                     <manifestVersionName>${snapshot-version}</manifestVersionName>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>fix-provider-authorities</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>manifest-update</goal>
+                                </goals>
+                                <configuration>
+                                    <manifestProviderAuthorities>
+                                        <io.sentry.android.core.SentryInitProvider>forge.app.debug.SentryInitProvider</io.sentry.android.core.SentryInitProvider>
+                                        <io.sentry.android.core.SentryPerformanceProvider>forge.app.debug.SentryPerformanceProvider</io.sentry.android.core.SentryPerformanceProvider>
+                                        <de.cketti.fileprovider.PublicFileProvider>forge.app.debug.publicfileprovider</de.cketti.fileprovider.PublicFileProvider>
+                                    </manifestProviderAuthorities>
                                 </configuration>
                             </execution>
                         </executions>
