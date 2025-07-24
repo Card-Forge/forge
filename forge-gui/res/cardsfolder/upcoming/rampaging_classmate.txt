@@ -1,0 +1,9 @@
+Name:Rampaging Classmate
+ManaCost:2 R
+Types:Creature Lizard Berserker
+PT:3/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever this creature attacks, it gets +1/+0 until end of turn for each other attacking creature.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X
+SVar:X:Count$Valid Creature.attacking+Other
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever this creature attacks, it gets +1/+0 until end of turn for each other attacking creature.
