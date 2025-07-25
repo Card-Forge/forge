@@ -1,0 +1,10 @@
+Name:All-Fates Stalker
+ManaCost:3 W
+Types:Creature Drix Assassin
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this creature enters, exile up to one target non-Assassin creature until this creature leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.nonAssassin | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target non-Assassin creature | Duration$ UntilHostLeavesPlay
+K:Warp:1 W
+SVar:PlayMain1:TRUE
+SVar:OblivionRing:TRUE
+Oracle:When this creature enters, exile up to one target non-Assassin creature until this creature leaves the battlefield.\nWarp {1}{W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)

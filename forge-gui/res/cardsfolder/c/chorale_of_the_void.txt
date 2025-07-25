@@ -1,0 +1,13 @@
+Name:Chorale of the Void
+ManaCost:3 B
+Types:Enchantment Aura
+K:Enchant:Creature.YouCtrl:creature you control
+T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigChange | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature attacks, put target creature card from defending player's graveyard onto the battlefield under your control tapped and attacking.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.OwnedBy TriggeredDefendingPlayer | TgtPrompt$ Select target creature card in defending player's graveyard | Tapped$ True | Attacking$ True | GainControl$ True
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Void — At the beginning of your end step, sacrifice this Aura unless a nonland permanent left the battlefield this turn or a spell was warped this turn.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Self | ConditionCheckSVar$ X
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddSVar$ AE
+SVar:X:Count$Void.0.1
+SVar:AE:SVar:HasAttackEffect:TRUE
+SVar:AttachAILogic:Pump
+Oracle:Enchant creature you control\nWhenever enchanted creature attacks, put target creature card from defending player's graveyard onto the battlefield under your control tapped and attacking.\nVoid — At the beginning of your end step, sacrifice this Aura unless a nonland permanent left the battlefield this turn or a spell was warped this turn.

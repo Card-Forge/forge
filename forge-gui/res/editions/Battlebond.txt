@@ -344,3 +344,7 @@ ScryfallCode=BBD
 4 b_5_5_zombie_giant @Igor Kieryluk
 5 g_3_3_beast @Jesper Ejsing
 6 c_1_1_a_myr @Ryan Pancoast
+
+[other]
+7 emblem_will_kenrith @Anna Steinbauer
+8 emblem_rowan_kenrith @Anna Steinbauer

@@ -1,0 +1,9 @@
+Name:Systems Override
+ManaCost:2 R
+Types:Sorcery
+A:SP$ GainControl | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DBPutCounter | SpellDescription$ Gain control of target artifact or creature until end of turn. Untap that permanent. It gains haste until end of turn. If it's a Spacecraft, put ten charge counters on it. If you do, remove ten charge counters from it at the beginning of the next end step.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted.Spacecraft | CounterType$ CHARGE | CounterNum$ 10 | RememberPut$ True | SubAbility$ DBDelTrig
+SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigRemoveCounter | RememberObjects$ RememberedLKI | ConditionDefined$ Remembered | ConditionPresent$ Card | TriggerDescription$ Remove ten charge counters from it at the beginning of the next end step. | SubAbility$ DBCleanup
+SVar:TrigRemoveCounter:DB$ RemoveCounter | Defined$ DelayTriggerRememberedLKI | CounterType$ CHARGE | CounterNum$ 10
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Gain control of target artifact or creature until end of turn. Untap that permanent. It gains haste until end of turn. If it's a Spacecraft, put ten charge counters on it. If you do, remove ten charge counters from it at the beginning of the next end step.

@@ -1609,10 +1609,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isOffering() {
-        return isAlternativeCost(AlternativeCost.Offering);
+        return isOptionalCostPaid(OptionalCost.Offering);
     }
 
-    public Card getSacrificedAsOffering() { //for Patron offering
+    public Card getSacrificedAsOffering() {
         return sacrificedAsOffering;
     }
     public void setSacrificedAsOffering(final Card c) {

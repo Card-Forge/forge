@@ -1147,7 +1147,7 @@ ScryfallCode=CMM
 [other]
 49 blessing @Yeong-Hao Han
 50 monarch @Volkan Baǵa
-51 Emblem_daretti_scrap_savant @Dan Murayama Scott
+51 emblem_daretti_scrap_savant @Dan Murayama Scott
 52 emblem_ob_nixilis_of_the_black_oath @Daarken
 53 emblem_teferi_temporal_archmage @Tyler Jacobson
 54 copy @David Palumbo

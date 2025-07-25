@@ -1160,20 +1160,20 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         questFlags.clear();
     }
 
-    public void addQuest(String questID) {
+    public void addQuest(String questID, boolean isNewGame) {
         int id = Integer.parseInt(questID);
-        addQuest(id);
+        addQuest(id, isNewGame);
     }
 
-    public void addQuest(int questID) {
+    public void addQuest(int questID, boolean isNewGame) {
         AdventureQuestData toAdd = AdventureQuestController.instance().generateQuest(questID);
 
         if (toAdd != null) {
-            addQuest(toAdd);
+            addQuest(toAdd, isNewGame);
         }
     }
 
-    public void addQuest(AdventureQuestData q) {
+    public void addQuest(AdventureQuestData q, boolean isNewGame) {
         //TODO: add a config flag for this
         boolean noTrackedQuests = true;
         for (AdventureQuestData existing : quests) {
@@ -1186,7 +1186,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if (noTrackedQuests || q.autoTrack)
             AdventureQuestController.trackQuest(q);
         q.activateNextStages();
-        AdventureQuestController.instance().showQuestDialogs(MapStage.getInstance());
+        if (!isNewGame)
+            AdventureQuestController.instance().showQuestDialogs(MapStage.getInstance());
     }
 
     public List<AdventureQuestData> getQuests() {
