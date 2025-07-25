@@ -495,8 +495,8 @@ public final class GameActionUtil {
                 String[] k = keyword.split(":");
                 final Cost cost = new Cost(k[1], false);
                 costs.add(new OptionalCostValue(OptionalCost.Flash, cost));
-            } else if (keyword.endsWith(" offering")) {
-                final String type = keyword.split(" ")[0];
+            } else if (keyword.startsWith("Offering")) {
+                final String type = keyword.split(":")[1];
                 final Cost cost = new Cost("Sac<1/" + type + ">", false);
                 costs.add(new OptionalCostValue(OptionalCost.Offering, cost));
             }
