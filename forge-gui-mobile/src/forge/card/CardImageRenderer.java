@@ -82,7 +82,7 @@ public class CardImageRenderer {
     }
 
     public static void drawFaceDownCard(CardView card, Graphics g, float x, float y, float w, float h) {
-        //try to draw the card sleeves first
+        // Try to draw the card sleeves first
         FImage sleeves = MatchController.getPlayerSleeve(card.getOwner());
         if (sleeves != null)
             g.drawImage(sleeves, x, y, w, h);
@@ -91,10 +91,14 @@ public class CardImageRenderer {
     }
 
     public static void drawCardImage(Graphics g, CardView card, boolean altState, float x, float y, float w, float h, CardStackPosition pos, boolean useCardBGTexture, boolean showArtist) {
-        drawCardImage(g, card, altState, x, y, w, h, pos, useCardBGTexture, false, false, showArtist);
+        drawCardImage(g, card, altState, x, y, w, h, pos, useCardBGTexture, false, false, showArtist, true);
     }
 
     public static void drawCardImage(Graphics g, CardView card, boolean altState, float x, float y, float w, float h, CardStackPosition pos, boolean useCardBGTexture, boolean noText, boolean isChoiceList, boolean showArtist) {
+        drawCardImage(g, card, altState, x, y, w, h, pos, useCardBGTexture, noText, isChoiceList, showArtist, true);
+    }
+
+    public static void drawCardImage(Graphics g, CardView card, boolean altState, float x, float y, float w, float h, CardStackPosition pos, boolean useCardBGTexture, boolean noText, boolean isChoiceList, boolean showArtist, boolean showArtBox) {
         updateStaticFields(w, h);
 
         float blackBorderThickness = w * BLACK_BORDER_THICKNESS_RATIO;
@@ -104,7 +108,11 @@ public class CardImageRenderer {
         w -= 2 * blackBorderThickness;
         h -= 2 * blackBorderThickness;
 
-        CardStateView state = altState ? card.getAlternateState() : isChoiceList && card.isSplitCard() ? card.getLeftSplitState() : card.getCurrentState();
+        CardStateView state = altState
+            ? card.getAlternateState()
+            : isChoiceList && card.isSplitCard() 
+                ? card.getLeftSplitState()
+                : card.getCurrentState();
         final boolean isFaceDown = card.isFaceDown();
         final boolean canShow = MatchController.instance.mayView(card);
         //override
@@ -123,7 +131,11 @@ public class CardImageRenderer {
         //determine colors for borders
         final List<DetailColors> borderColors;
         if (isFaceDown) {
-            borderColors = !altState ? ImmutableList.of(DetailColors.FACE_DOWN) : !useCardBGTexture ? ImmutableList.of(DetailColors.FACE_DOWN) : CardDetailUtil.getBorderColors(state, canShow);
+            borderColors = !altState
+                ? ImmutableList.of(DetailColors.FACE_DOWN)
+                : !useCardBGTexture 
+                    ? ImmutableList.of(DetailColors.FACE_DOWN)
+                    : CardDetailUtil.getBorderColors(state, canShow);
         } else {
             borderColors = CardDetailUtil.getBorderColors(state, canShow);
         }
@@ -148,7 +160,7 @@ public class CardImageRenderer {
         y += headerHeight;
 
         float artWidth = w - 2 * artInset;
-        float artHeight = artWidth / CardRenderer.CARD_ART_RATIO;
+        float artHeight = !showArtBox ? 0f : artWidth / CardRenderer.CARD_ART_RATIO;
         float typeBoxHeight = 2 * TYPE_FONT.getCapHeight();
         float ptBoxHeight = 0;
         float textBoxHeight = h - headerHeight - artHeight - typeBoxHeight - outerBorderThickness - artInset;
