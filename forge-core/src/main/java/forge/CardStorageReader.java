@@ -391,7 +391,9 @@ public class CardStorageReader {
         try (InputStream fileInputStream = java.nio.file.Files.newInputStream(file.toPath())) {
             reader.reset();
             final List<String> lines = readScript(fileInputStream);
-            return reader.readCard(lines, Files.getNameWithoutExtension(file.getName()));
+            CardRules rules = reader.readCard(lines, Files.getNameWithoutExtension(file.getName()));
+            rules.setPath(file.getPath());
+            return rules;
         } catch (final FileNotFoundException ex) {
             throw new RuntimeException("CardReader : run error -- file not found: " + file.getPath(), ex);
         } catch (final Exception ex) {
