@@ -434,13 +434,13 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
 
         if (upcomingSet != null) {
-            System.err.println("Upcoming set " + upcomingSet + " dated in the future. All unaccounted cards will be added to this set with unknown rarity.");
+            System.err.println("Upcoming set " + upcomingSet + " dated in the future. All `upcoming` cards will be added to this set with unknown rarity.");
         }
 
         for (CardRules cr : rulesByName.values()) {
             if (!contains(cr.getName())) {
                 if (!cr.isCustom()) {
-                    if (upcomingSet != null) {
+                    if (upcomingSet != null && cr.getPath().contains("/upcoming/")) {
                         addCard(new PaperCard(cr, upcomingSet.getCode(), CardRarity.Unknown));
                     } else if (enableUnknownCards && !this.filtered.contains(cr.getName())) {
                         System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/editions/ folder. ");
