@@ -252,7 +252,7 @@ public abstract class SpellAbilityAi {
 
             return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
-        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /**
