@@ -253,20 +253,6 @@ public enum Keyword {
             details = "";
         }
 
-        if (keyword == Keyword.UNDEFINED) {
-            //check for special keywords that have a prefix before the keyword enum name
-            int idx = k.indexOf(' ');
-            String enumName = k.replace(" ", "_").toUpperCase(Locale.ROOT);
-            String firstWord = idx == -1 ? enumName : enumName.substring(0, idx);
-            if (idx != -1) {
-                idx = k.indexOf(' ', idx + 1);
-                String secondWord = idx == -1 ? enumName.substring(firstWord.length() + 1) : enumName.substring(firstWord.length() + 1, idx);
-                if (secondWord.equalsIgnoreCase("OFFERING")) {
-                    keyword = Keyword.OFFERING;
-                    details = firstWord;
-                }
-            }
-        }
         KeywordInstance<?> inst;
         try {
             inst = keyword.type.getConstructor().newInstance();
