@@ -277,6 +277,10 @@ public final class CardRules implements ICardCharacteristics {
         return getType().isDungeon();
     }
 
+    public boolean hasPrintedPT() {
+        return getPower() != null || getToughness() != null;
+    }
+
     public boolean canBeCommander() {
         if (mainPart.getOracleText().contains(" is your commander, choose a color before the game begins.")) {
             addsWildCardColor = true;
@@ -810,7 +814,7 @@ public final class CardRules implements ICardCharacteristics {
     public boolean hasStartOfKeyword(final String k, ICardFace cf) {
         for (final String inst : cf.getKeywords()) {
             final String[] parts = inst.split(":");
-            if (parts[0].equals(k)) {
+            if ((parts[0]).equalsIgnoreCase(k)) {
                 return true;
             }
         }

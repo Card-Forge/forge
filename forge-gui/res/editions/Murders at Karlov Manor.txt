@@ -6,7 +6,7 @@ Type=Expansion
 ScryfallCode=MKM
 BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,BasicLand,Wildcard,PrereleasePromo
 Booster=6 Common, 1 Common-Guest, 3 Uncommon, 1 RareMythic, 1 BasicLand, 1 Wildcard, 1 Wildcard+
-Prerelease=6 Boosters, 1 RareMythic+, 1 PrereleasePromo+
+Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=36
 
 [Common]
@@ -21,6 +21,7 @@ Base=Uncommon:fromSheet("MKM cards")
 
 [RareMythic]
 Base=RareMythic:fromSheet("MKM cards")
+Replace=.175F fromSheet("MKM prerelease promo")
 
 [BasicLand]
 Base=BasicLand:fromSheet("MKM cards")

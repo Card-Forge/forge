@@ -360,7 +360,7 @@ public class CostAdjustment {
         String offeringType = "";
         for (KeywordInterface inst : sa.getHostCard().getKeywords(Keyword.OFFERING)) {
             final String kw = inst.getOriginal();
-            offeringType = kw.split(" ")[0];
+            offeringType = kw.split(":")[1];
             break;
         }
 

@@ -6,6 +6,7 @@ Type=Promo
 ScryfallCode=PAVR
 
 [cards]
+A19 R Angel of Glory's Rise @James Ryman
 32★ R Restoration Angel @Wesley Burt
 36★ R Silverblade Paladin @Todd Lockwood
 63 U Latch Seeker @Eytan Zana

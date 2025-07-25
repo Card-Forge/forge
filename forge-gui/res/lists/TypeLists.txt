@@ -223,6 +223,7 @@ Pangolin:Pangolins
 Peasant:Peasants
 Pegasus:Pegasi
 Pentavite:Pentavites
+Performer:Performers
 Pest:Pests
 Phelddagrif:Phelddagrifs
 Phoenix:Phoenixes

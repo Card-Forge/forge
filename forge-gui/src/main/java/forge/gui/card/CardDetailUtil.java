@@ -174,17 +174,16 @@ public class CardDetailUtil {
             return "";
         }
         final StringBuilder ptText = new StringBuilder();
-        boolean vehicle = card.getType().hasSubtype("Vehicle");
-        if (vehicle && !card.isCreature()) {
-            ptText.append("{");
+        if (card.hasPrintedPT() && !card.isCreature()) {
+            ptText.append("[");
         }
 
-        if (card.isCreature() || vehicle) {
+        if (card.isCreature() || card.hasPrintedPT()) {
             ptText.append(card.getPower()).append(" / ").append(card.getToughness());
         }
 
-        if (vehicle && !card.isCreature()) {
-            ptText.append("}");
+        if (card.hasPrintedPT() && !card.isCreature()) {
+            ptText.append("]");
         }
 
         if (card.isPlaneswalker()) {

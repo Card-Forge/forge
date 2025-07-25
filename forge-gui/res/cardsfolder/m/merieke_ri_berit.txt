@@ -4,7 +4,7 @@ Types:Legendary Creature Human
 PT:1/1
 R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ CARDNAME doesn't untap during your untap step.
 A:AB$ GainControl | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ LeavesPlay,LoseControl | SubAbility$ DBEffect | SpellDescription$ Gain control of target creature for as long as you control CARDNAME. When CARDNAME leaves the battlefield or becomes untapped, destroy that creature. It can't be regenerated.
-SVar:DBEffect:DB$ Effect | RememberObjects$ ParentTarget,Self | ExileOnMoved$ Battlefield | Triggers$ LeavesPlay,Untap | Duration$ Permanent | ConditionPresent$ Card.StrictlySelf
+SVar:DBEffect:DB$ Effect | RememberObjects$ ParentTarget | ExileOnMoved$ Battlefield | Triggers$ LeavesPlay,Untap | Duration$ Permanent | ConditionPresent$ Card.StrictlySelf
 SVar:LeavesPlay:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.EffectSource | OneOff$ True | Execute$ DBDestroy | TriggerDescription$ When EFFECTSOURCE leaves the battlefield, or becomes untapped, destroy that creature. It can't be regenerated.
 SVar:Untap:Mode$ Untaps | ValidCard$ Card.EffectSource | Execute$ DBDestroy | Secondary$ True | OneOff$ True | TriggerDescription$ When EFFECTSOURCE leaves the battlefield, or becomes untapped, destroy that creature. It can't be regenerated.
 SVar:DBDestroy:DB$ Destroy | Defined$ RememberedLKI | NoRegen$ True

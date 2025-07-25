@@ -1,0 +1,7 @@
+Name:Lyla, Holographic Assistant
+ManaCost:3 U
+Types:Legendary Artifact Creature Illusion Advisor
+PT:2/2
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw a card, put a +1/+1 counter on target creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1
+Oracle:Whenever you draw a card, put a +1/+1 counter on target creature.

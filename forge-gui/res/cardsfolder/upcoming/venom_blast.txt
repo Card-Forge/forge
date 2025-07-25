@@ -1,0 +1,7 @@
+Name:Venom Blast
+ManaCost:2 G G
+Types:Instant
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBDamage | SpellDescription$ Put two +1/+1 counters on target creature you control. It deals damage equal to its power to up to one other target creature.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | TargetUnique$ True | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one other target creature | NumDmg$ X | DamageSource$ ParentTarget | AILogic$ PowerDmg
+SVar:X:ParentTargeted$CardPower
+Oracle:Put two +1/+1 counters on target creature you control. It deals damage equal to its power to up to one other target creature.

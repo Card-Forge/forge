@@ -68,7 +68,3 @@ ScryfallCode=CST
 381 L Forest @Pat Lewis
 382 L Forest @Pat Lewis
 383 L Forest @Pat Lewis
-
-[tokens]
-w_0_1_deserter
-br_3_1_graveborn_haste

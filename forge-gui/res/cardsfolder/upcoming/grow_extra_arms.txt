@@ -1,0 +1,7 @@
+Name:Grow Extra Arms
+ManaCost:1 G
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | ValidTarget$ Spider | Description$ This spell costs {1} less to cast if it targets a Spider.
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +4 | NumDef$ +4 | SpellDescription$ Target creature gets +4/+4 until end of turn.
+DeckHints:Type$Spider
+Oracle:This spell costs {1} less to cast if it targets a Spider.\nTarget creature gets +4/+4 until end of turn.

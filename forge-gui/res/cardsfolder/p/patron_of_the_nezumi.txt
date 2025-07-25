@@ -2,7 +2,7 @@ Name:Patron of the Nezumi
 ManaCost:5 B B
 Types:Legendary Creature Spirit
 PT:6/6
-K:Rat offering
+K:Offering:Rat
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ValidCard$ Card.OppOwn | Execute$ TrigLoseLife | TriggerDescription$ Whenever a permanent is put into an opponent's graveyard, that player loses 1 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardOwner | LifeAmount$ 1
 AI:RemoveDeck:All
