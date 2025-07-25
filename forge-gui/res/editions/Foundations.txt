@@ -822,6 +822,7 @@ Replace=.024F Uncommon:fromSheet("FDN borderless")
 11 komas_coil @Simon Dominic
 12 u_2_1_ninja @Diana Cearley
 13 scion_of_the_deep @Brent Hollowell
+14 b_1_1_rat @Mike Bierek
 15 b_2_2_zombie @Anna Steinbauer
 16 r_4_4_dragon_flying @Alexander Ostrowski
 17 r_5_5_dragon_flying @Raymond Swanland
@@ -831,12 +832,17 @@ Replace=.024F Uncommon:fromSheet("FDN borderless")
 21 bg_1_1_insect_flying @Helge C. Balzer
 22 c_a_food_sac @Alexander Mokhov
 23 c_a_treasure_sac @Alayna Danner
-27 w_1_1_cat @Filip Burburan
-28 w_1_1_cat_lifelink @Filip Burburan
+27 w_1_1_cat_lifelink @Filip Burburan
 28 w_2_2_cat_beast @Bayard Wu
 29 w_1_1_dog @Manuel Castañón
-30 b_1_1_rat @Kim Sokol
-31 b_1_1_rat_noblock @Kim Sokol
+30 b_1_1_rat_noblock @Kim Sokol
 31 r_1_1_phyrexian_goblin @Jokubas Uogintas
+# Duplicated as there is no r_1_1_phyrexian_goblin_haste token yet
+31 r_1_1_phyrexian_goblin_haste @Jokubas Uogintas
 32 g_3_3_beast @John Donahue
 33 g_4_4_beast @Steve Prescott
+
+[other]
+24 emblem_kaito_cunning_infiltrator @Evyn Fong
+25 emblem_vivien_reid @Anna Steinbauer
+26 copy @Brian Valeza

@@ -27,6 +27,7 @@ ScryfallCode=GPT
 12 U Martyred Rusalka @Alex Horley-Orlandelli
 13 U Order of the Stars @Heather Hudson
 14 U Shadow Lance @Hideaki Takamura
+14★ U Shadow Lance @Hideaki Takamura
 15 C Shrieking Grotesque @Dany Orizio
 16 U Sinstriker's Will @Ben Thompson
 17 C Skyrider Trainee @Adam Rex
@@ -50,6 +51,7 @@ ScryfallCode=GPT
 35 C Steamcore Weird @Justin Norman
 36 U Stratozeppelid @Ittoku
 37 U Thunderheads @Hideaki Takamura
+37★ U Thunderheads @Hideaki Takamura
 38 C Torch Drake @Daren Bader
 39 C Train of Thought @Matt Thompson
 40 U Vacuumelt @Nottsuo
@@ -178,12 +180,3 @@ ScryfallCode=GPT
 163 U Skarrg, the Rage Pits @Martina Pilcerova
 164 R Steam Vents @Rob Alexander
 165 R Stomping Ground @Rob Alexander
-
-[tokens]
-c_1_1_sand
-w_1_1_pegasus_flying
-w_1_1_spirit_flying
-u_3_3_weird_defender_flying
-b_1_1_bat_flying
-g_1_1_saproling
-g_6_6_wurm
