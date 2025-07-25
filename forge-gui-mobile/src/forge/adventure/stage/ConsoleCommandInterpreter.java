@@ -178,7 +178,7 @@ public class ConsoleCommandInterpreter {
             catch (Exception e){
                 return "Can not convert " +s[0]+" to number";
             }
-            Current.player().addQuest(ID);
+            Current.player().addQuest(ID, false);
             return "Quest generated";
         });
         registerCommand(new String[]{"give", "shards"}, s -> {

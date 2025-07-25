@@ -80,41 +80,63 @@ public class Assets implements Disposable {
                     bitmapFont.dispose();
                 counterFonts.clear();
             }
+        } catch (Exception ignored) {}
+        try {
             if (fallback_skins != null) {
                 for (Texture texture : fallback_skins.values())
                     texture.dispose();
                 fallback_skins.clear();
             }
+        } catch (Exception ignored) {}
+        try {
             if (tmxMap != null) {
                 for (Texture texture : tmxMap.values())
                     texture.dispose();
                 tmxMap.clear();
             }
+        } catch (Exception ignored) {}
+        try {
             if (defaultImage != null)
                 defaultImage.dispose();
+        } catch (Exception ignored) {}
+        try {
             if (dummy != null)
                 dummy.dispose();
+        } catch (Exception ignored) {}
+        try {
             if (textrafonts != null) {
                 for (Font f : textrafonts.values())
                     f.dispose();
             }
+        } catch (Exception ignored) {}
+        if (cardArtCache != null)
             cardArtCache.clear();
+        if (avatarImages != null)
             avatarImages.clear();
+        if (manaImages != null)
             manaImages.clear();
+        if (symbolLookup != null)
             symbolLookup.clear();
+        if (images != null)
             images.clear();
+        if (avatars != null)
             avatars.clear();
+        if (sleeves != null)
             sleeves.clear();
+        if (cracks != null)
             cracks.clear();
+        if (borders != null)
             borders.clear();
+        if (deckbox != null)
             deckbox.clear();
+        if (cursor != null)
             cursor.clear();
+        if (fonts != null)
             fonts.clear();
+        try {
             if (manager != null)
                 manager.dispose();
-        } catch (Exception e) {
-            //e.printStackTrace();
-        }
+        } catch (Exception ignored) {}
     }
 
     public MemoryTrackingAssetManager manager() {

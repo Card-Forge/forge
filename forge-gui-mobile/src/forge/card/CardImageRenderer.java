@@ -45,6 +45,8 @@ public class CardImageRenderer {
     private static FSkinFont NAME_FONT, TYPE_FONT, TEXT_FONT, PT_FONT;
     private static float prevImageWidth, prevImageHeight;
     private static final float BLACK_BORDER_THICKNESS_RATIO = 0.021f;
+    public static final Color[] VEHICLE_PTBOX_COLOR = new Color[] { Color.valueOf("#A36C42") };
+    public static final Color[] SPACECRAFT_PTBOX_COLOR = new Color[] { Color.valueOf("#6F6E6E") };
 
     private static Color fromDetailColor(DetailColors detailColor) {
         return FSkinColor.fromRGB(detailColor.r, detailColor.g, detailColor.b);
@@ -151,7 +153,7 @@ public class CardImageRenderer {
         float ptBoxHeight = 0;
         float textBoxHeight = h - headerHeight - artHeight - typeBoxHeight - outerBorderThickness - artInset;
 
-        if (state.isCreature() || state.isPlaneswalker() || state.getType().hasSubtype("Vehicle") || state.isBattle()) {
+        if (state.isCreature() || state.isPlaneswalker() || state.hasPrintedPT() || state.isBattle()) {
             ptBoxHeight = 2 * PT_FONT.getCapHeight();
         }
         //space for artist
@@ -231,7 +233,7 @@ public class CardImageRenderer {
         if (onTop && ptBoxHeight > 0) {
             //only needed if on top since otherwise P/T will be hidden
             Color[] ptColors = FSkinColor.tintColors(Color.WHITE, colors, CardRenderer.PT_BOX_TINT);
-            drawPtBox(g, card, state, ptColors, x, y - 2 * artInset, w, ptBoxHeight, noText);
+            drawPtBox(g, state, ptColors, x, y - 2 * artInset, w, ptBoxHeight, noText);
         }
         //draw artist
         if (showArtist)
@@ -716,7 +718,7 @@ public class CardImageRenderer {
         g.drawImage(Forge.getAssets().getTexture(getDefaultSkinFile("overlay_alpha.png")), x, y, w, h);
     }
 
-    private static void drawPtBox(Graphics g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean noText) {
+    private static void drawPtBox(Graphics g, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean noText) {
         List<String> pieces = new ArrayList<>();
         if (state.isCreature()) {
             pieces.add(String.valueOf(state.getPower()));
@@ -724,8 +726,7 @@ public class CardImageRenderer {
             pieces.add(String.valueOf(state.getToughness()));
         } else if (state.isPlaneswalker()) {
             pieces.add(String.valueOf(state.getLoyalty()));
-        } else if (state.getType().hasSubtype("Vehicle")) {
-            // TODO Invert color box for Vehicles?
+        } else if (state.hasPrintedPT()) {
             pieces.add("[");
             pieces.add(String.valueOf(state.getPower()));
             pieces.add("/");
@@ -753,17 +754,16 @@ public class CardImageRenderer {
         w = boxWidth;
         h = boxHeight;
 
-        fillColorBackground(g, colors, x, y, w, h);
+        fillColorBackground(g, state.isVehicle() ? VEHICLE_PTBOX_COLOR : state.isSpaceCraft() ? SPACECRAFT_PTBOX_COLOR : colors, x, y, w, h);
         //draw outline color here
-        if (state != null)
-            drawOutlineColor(g, state.getColors(), x, y, w, h);
+        drawOutlineColor(g, state.getColors(), x, y, w, h);
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
         if (noText)
             return;
         x += (boxWidth - totalPieceWidth) / 2;
         for (int i = 0; i < pieces.size(); i++) {
-            g.drawText(pieces.get(i), PT_FONT, Color.BLACK, x, y, w, h, false, Align.left, true);
+            g.drawText(pieces.get(i), PT_FONT, state.isVehicle() || state.isSpaceCraft() ? Color.WHITE : Color.BLACK, x, y, w, h, false, Align.left, true);
             x += pieceWidths[i];
         }
     }
@@ -936,7 +936,7 @@ public class CardImageRenderer {
 
         y += textBoxHeight + innerBorderThickness;
         Color[] ptColors = FSkinColor.tintColors(Color.WHITE, colors, CardRenderer.PT_BOX_TINT);
-        drawDetailsIdAndPtBox(g, card, state, canShow, idForeColor, ptColors, x, y, w, ptBoxHeight);
+        drawDetailsIdAndPtBox(g, state, canShow, idForeColor, ptColors, x, y, w, ptBoxHeight);
     }
 
     public static Color[] fillColorBackground(Graphics g, List<DetailColors> backColors, float x, float y, float w, float h) {
@@ -952,7 +952,6 @@ public class CardImageRenderer {
     public static Color[] drawCardBackgroundTexture(CardStateView state, Graphics g, List<DetailColors> backColors, float x, float y, float w, float h) {
         boolean isHybrid = state.getManaCost().hasMultiColor();
         boolean isPW = state.isPlaneswalker();
-        boolean isNyx = state.isNyx();
         Color[] colors = new Color[backColors.size()];
         for (int i = 0; i < colors.length; i++) {
             DetailColors dc = backColors.get(i);
@@ -967,7 +966,7 @@ public class CardImageRenderer {
                 } else if (backColors.get(0) == DetailColors.MULTICOLOR) {
                     if (state.isVehicle())
                         g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
-                    else if (isNyx)
+                    else if (state.isEnchantment())
                         g.drawImage(FSkinTexture.NYX_M, x, y, w, h);
                     else if (state.isArtifact() && !isPW)
                         g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
@@ -978,7 +977,7 @@ public class CardImageRenderer {
                         g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
                     else if (isPW)
                         g.drawImage(FSkinTexture.PWBG_C, x, y, w, h);
-                    else if (isNyx)
+                    else if (state.isEnchantment())
                         g.drawImage(FSkinTexture.NYX_C, x, y, w, h);
                     else if (state.isArtifact())
                         g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
@@ -987,7 +986,7 @@ public class CardImageRenderer {
                 } else if (backColors.get(0) == DetailColors.GREEN) {
                     if (state.isVehicle())
                         g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
-                    else if (isNyx)
+                    else if (state.isEnchantment())
                         g.drawImage(FSkinTexture.NYX_G, x, y, w, h);
                     else if (state.isArtifact() && !isPW)
                         g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
@@ -996,7 +995,7 @@ public class CardImageRenderer {
                 } else if (backColors.get(0) == DetailColors.RED) {
                     if (state.isVehicle())
                         g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
-                    else if (isNyx)
+                    else if (state.isEnchantment())
                         g.drawImage(FSkinTexture.NYX_R, x, y, w, h);
                     else if (state.isArtifact() && !isPW)
                         g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
@@ -1005,7 +1004,7 @@ public class CardImageRenderer {
                 } else if (backColors.get(0) == DetailColors.BLACK) {
                     if (state.isVehicle())
                         g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
-                    else if (isNyx)
+                    else if (state.isEnchantment())
                         g.drawImage(FSkinTexture.NYX_B, x, y, w, h);
                     else if (state.isArtifact() && !isPW)
                         g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
@@ -1014,7 +1013,7 @@ public class CardImageRenderer {
                 } else if (backColors.get(0) == DetailColors.BLUE) {
                     if (state.isVehicle())
                         g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
-                    else if (isNyx)
+                    else if (state.isEnchantment())
                         g.drawImage(FSkinTexture.NYX_U, x, y, w, h);
                     else if (state.isArtifact() && !isPW)
                         g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
@@ -1023,7 +1022,7 @@ public class CardImageRenderer {
                 } else if (backColors.get(0) == DetailColors.WHITE) {
                     if (state.isVehicle())
                         g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
-                    else if (isNyx)
+                    else if (state.isEnchantment())
                         g.drawImage(FSkinTexture.NYX_W, x, y, w, h);
                     else if (state.isArtifact() && !isPW)
                         g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
@@ -1034,7 +1033,7 @@ public class CardImageRenderer {
             case 2:
                 if (state.isVehicle())
                     g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
-                else if (isNyx)
+                else if (state.isEnchantment())
                     g.drawImage(FSkinTexture.NYX_M, x, y, w, h);
                 else if (state.isArtifact() && !isPW)
                     g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
@@ -1067,7 +1066,7 @@ public class CardImageRenderer {
             case 3:
                 if (state.isVehicle())
                     g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
-                else if (isNyx)
+                else if (state.isEnchantment())
                     g.drawImage(FSkinTexture.NYX_M, x, y, w, h);
                 else if (state.isArtifact() && !isPW)
                     g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
@@ -1077,7 +1076,7 @@ public class CardImageRenderer {
             default:
                 if (state.isVehicle())
                     g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
-                else if (isNyx)
+                else if (state.isEnchantment())
                     g.drawImage(FSkinTexture.NYX_C, x, y, w, h);
                 else if (state.isArtifact() && !isPW)
                     g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
@@ -1168,7 +1167,7 @@ public class CardImageRenderer {
         cardTextRenderer.drawText(g, CardDetailUtil.composeCardText(state, gameView, canShow), TEXT_FONT, Color.BLACK, x, y, w, h, y, h, true, Align.left, false);
     }
 
-    private static void drawDetailsIdAndPtBox(Graphics g, CardView card, CardStateView state, boolean canShow, Color idForeColor, Color[] colors, float x, float y, float w, float h) {
+    private static void drawDetailsIdAndPtBox(Graphics g, CardStateView state, boolean canShow, Color idForeColor, Color[] colors, float x, float y, float w, float h) {
         float idWidth = 0;
         if (canShow) {
             String idText = CardDetailUtil.formatCardId(state);
@@ -1188,8 +1187,8 @@ public class CardImageRenderer {
         x += w - boxWidth;
         w = boxWidth;
 
-        fillColorBackground(g, colors, x, y, w, h);
+        fillColorBackground(g, state.isVehicle() ? VEHICLE_PTBOX_COLOR : state.isSpaceCraft() ? SPACECRAFT_PTBOX_COLOR : colors, x, y, w, h);
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
-        cardTextRenderer.drawText(g, ptText, PT_FONT, Color.BLACK, x, y, w, h, y, h, false, Align.center, true);
+        cardTextRenderer.drawText(g, ptText, PT_FONT, state.isVehicle() || state.isSpaceCraft() ? Color.WHITE : Color.BLACK, x, y, w, h, y, h, false, Align.center, true);
     }
 }

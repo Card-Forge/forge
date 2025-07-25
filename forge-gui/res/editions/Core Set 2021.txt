@@ -474,3 +474,8 @@ ScryfallCode=M21
 15 c_a_treasure_sac @Alayna Danner
 19 w_1_1_dog @Manuel Castañón
 20 g_1_1_cat @Leesha Hannigan
+
+[other]
+16 emblem_basri_ket @Kieran Yanner
+17 emblem_garruk_unleashed @Lie Setiawan
+18 emblem_liliana_waker_of_the_dead @Anna Steinbauer

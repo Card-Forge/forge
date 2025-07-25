@@ -3001,7 +3001,8 @@ public class AbilityUtils {
         for (SpellAbility s : list) {
             if (s.isLandAbility()) {
                 s.setActivatingPlayer(controller);
-                if (controller.canPlayLand(tgtCard, true, s)) {
+                // CR 305.3
+                if (controller.getGame().getPhaseHandler().isPlayerTurn(controller) && controller.canPlayLand(tgtCard, true, s)) {
                     sas.add(s);
                 }
             } else {

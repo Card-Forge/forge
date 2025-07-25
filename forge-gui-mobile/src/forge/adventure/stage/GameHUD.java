@@ -482,8 +482,7 @@ public class GameHUD extends Stage {
                 Current.player().addShards(-data.shardsNeeded);
                 ConsoleCommandInterpreter.getInstance().command(data.commandOnUse);
                 AdventureQuestController.instance().updateItemUsed(data);
-            });
-            button.setStyle(Controls.getTextButtonStyle("menu"));
+            }, "menu");
             abilityButtonMap.add(button);
         }
     }
