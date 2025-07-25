@@ -814,7 +814,7 @@ public final class CardRules implements ICardCharacteristics {
     public boolean hasStartOfKeyword(final String k, ICardFace cf) {
         for (final String inst : cf.getKeywords()) {
             final String[] parts = inst.split(":");
-            if (parts[0].equals(k)) {
+            if ((parts[0]).equalsIgnoreCase(k)) {
                 return true;
             }
         }
