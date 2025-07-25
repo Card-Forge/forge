@@ -204,12 +204,3 @@ ScryfallCode=ME1
 193 L Forest @Christopher Rush
 194 L Forest @Christopher Rush
 195 L Forest @Christopher Rush
-
-[tokens]
-w_1_1_citizen
-u_1_1_camarid
-b_0_1_thrull
-b_2_2_zombie
-r_1_1_survivor
-g_1_1_hippo
-c_1_1_a_snake_poison
