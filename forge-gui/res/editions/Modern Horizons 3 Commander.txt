@@ -427,12 +427,12 @@ ScryfallCode=M3C
 19 g_1_1_forest_dryad @Donato Giancola
 20 g_x_x_hydra @Simon Dominic
 21 g_1_1_saproling @Trevor Claxton
-22 tarmogoyf @Camille Alquier
 23 rgw_1_1_sand_warrior @Piotr Foksowicz
 24 c_6_12_a_construct_trample @Jung Park
 25 c_1_1_a_myr @Ryan Pancoast
 26 c_1_1_a_thopter_flying @Adam Paquette
 
 [other]
+22 tarmogoyf @Camille Alquier
 27 emblem_garruk_apex_predator @Tyler Jacobson
 28 emblem_vivien_reid @Anna Steinbauer
