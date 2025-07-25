@@ -116,7 +116,7 @@ public abstract class ImageFetcher {
         final ArrayList<String> downloadUrls = new ArrayList<>();
         if (imageKey.startsWith("PLANECHASEBG:")) {
             final String filename = imageKey.substring("PLANECHASEBG:".length());
-            PaperCard pc = StaticData.instance().getVariantCards().getCard(filename.replace("_", " ").replace(".jpg", ""));
+            PaperCard pc = StaticData.instance().getVariantCards().getCard(filename);
             if (pc != null) {
                 CardEdition ed = StaticData.instance().getEditions().get(pc.getEdition());
                 if (ed != null) {
@@ -124,7 +124,8 @@ public abstract class ImageFetcher {
                     String langCode = ed.getCardsLangCode();
                     downloadUrls.add("PLANECHASEBG:" + ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(pc, "", setCode, langCode, true));
                     FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_PLANECHASE_PICS_DIR);
-                    File destFile = new File(ForgeConstants.CACHE_PLANECHASE_PICS_DIR, filename);
+                    File destFile = new File(ForgeConstants.CACHE_PLANECHASE_PICS_DIR, filename.replace(" ", "_").replace("'", "")
+                            .replace("-", "").replace("!", "").replace(":", "") + ".jpg");
                     if (destFile.exists())
                         return;
 

@@ -119,7 +119,8 @@ public enum FSkinTexture implements FImage {
             return false;
         if (!planeName.isEmpty()) {
             texture = null; //reset
-            this.filename = planeName + ".jpg";
+            this.filename = planeName.replace(" ", "_").replace("'", "")
+                    .replace("-", "").replace("!", "").replace(":", "") + ".jpg";
         }
         FileHandle preferredFile = isPlanechaseBG ? FSkin.getCachePlanechaseFile(filename) : FSkin.getSkinFile(filename);
         if (preferredFile.exists()) {
@@ -140,7 +141,7 @@ public enum FSkinTexture implements FImage {
             FileHandle defaultFile = FSkin.getDefaultSkinFile(filename);
             if(isPlanechaseBG) {
                 ImageFetcher fetcher = GuiBase.getInterface().getImageFetcher();
-                fetcher.fetchImage("PLANECHASEBG:" + filename, () -> {
+                fetcher.fetchImage("PLANECHASEBG:" + planeName, () -> {
                     hasError = false;
                     load();
                 });
