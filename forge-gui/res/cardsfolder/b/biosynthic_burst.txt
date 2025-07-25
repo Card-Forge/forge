@@ -1,0 +1,8 @@
+Name:Biosynthic Burst
+ManaCost:1 G
+Types:Instant
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature you control. It gains reach, trample, and indestructible until end of turn. Untap it. (Damage and effects that say "destroy" don't destroy it.)
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Reach & Trample & Indestructible | SubAbility$ DBUntap
+SVar:DBUntap:DB$ Untap | Defined$ Targeted
+DeckHas:Ability$Counters & Keyword$Reach|Trample|Hexproof|Indestructible
+Oracle:Put a +1/+1 counter on target creature you control. It gains reach, trample, and indestructible until end of turn. Untap it. (Damage and effects that say "destroy" don't destroy it.)

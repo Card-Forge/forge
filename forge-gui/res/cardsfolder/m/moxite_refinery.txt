@@ -1,0 +1,10 @@
+Name:Moxite Refinery
+ManaCost:2
+Types:Artifact
+A:AB$ Charm | Cost$ 2 T SubCounter<X/Any/Artifact.YouCtrl;Creature.YouCtrl/an artifact or creature you control> | Choices$ Artifact,Creature | CharmNum$ 1 | SorcerySpeed$ True | AdditionalDescription$ . Activate only as a sorcery.
+SVar:Artifact:DB$ PutCounter | ValidTgts$ Artifact | CounterType$ CHARGE | CounterNum$ X | SpellDescription$ Put X charge counters on target artifact.
+SVar:Creature:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ X | SpellDescription$ Put X +1/+1 counters on target creature.
+SVar:X:Count$xPaid
+DeckNeeds:Ability$Counters
+DeckHas:Ability$Counters
+Oracle:{2}, {T}, Remove X counters from an artifact or creature you control: Choose one. Activate only as a sorcery.\n• Put X charge counters on target artifact.\n• Put X +1/+1 counters on target creature.

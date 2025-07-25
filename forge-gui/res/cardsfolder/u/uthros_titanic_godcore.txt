@@ -1,0 +1,11 @@
+Name:Uthros, Titanic Godcore
+ManaCost:no cost
+Types:Land Planet
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+K:Station:12
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE12_CHARGE | AddAbility$ UthrosMana | Description$ STATION 12+ {U}, {T}: Add {U} for each artifact you control.
+SVar:UthrosMana:AB$ Mana | Cost$ U T | Produced$ U | Amount$ X | SpellDescription$ Add {U} for each artifact you control.
+SVar:X:Count$Valid Artifact.YouCtrl
+Oracle:This land enters tapped.\n{T}: Add {U}.\nStation (Tap another creature you control: Put charge counters equal to its power on this Planet. Station only as a sorcery.)\nSTATION 12+\n{U}, {T}: Add {U} for each artifact you control.

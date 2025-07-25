@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="106">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../tileset/inn_dungeon_floor.tsx"/>
+ <tileset firstgid="12530" source="../../../tileset/Inn_Dungeon.tsx"/>
+ <tileset firstgid="17010" source="../../../tileset/inn_main.tsx"/>
+ <layer id="7" name="Floor" width="20" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxbqcfAsHIUj+JRPIqHMZbhoY95AFR8HD4=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="20" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNk1sKgCAQRV1AS2gNLrbnGiKKPltAD9tVM5A0iDdJ+2jggFgeRi+TZ0rlgEIrVTpUGv8foqezbg0/8i10diVaor7WW4LPMpFjjPDw+xsHzoDvPXiyCWXkey8u60OFeke+Tt+k+p48sb4395UZ+PJgDmIH34yTh+wJvV+oRuCLLeT7oj+eqeZCrhF29uReygzK2Zs9fO07AUHVcJ0=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="20" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYCANvLUkUcMIAkeMGRj4DRkYBIBYEIiFDFHlfxpA6MlpDAzBjgwMt4C4yoyBodoMu3ksJgwM/kAzAoA4EIiDgNgPycxKKNswHWgm0KxpQPwLaNZvHObFRTIw9AP1TADiiUA8CYj70Nz4MZ6B4RMQfwbiL/GkhwE66E8A2gfEE4F4UgJh9cbR+OV1ExkY9IBYH4gNEiFiM9KwqzUF+s0MiM2R/FiB5t/TQDPOAPFZID4HNc8sHSH/14iB4R8Q/wfisgzC7i+FqhHJRIhdcUSw9wLTyD5jwubo2OKWE3FCdT+y23EBWLwSitt6C1Q96OoaEyA0LB5A8QqKC2Li9jQed8L8gR4Xgw106zEw9ABxrx52eQAroU61
+  </data>
+ </layer>
+ <layer id="8" name="Walls Supplementary" width="20" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYMANLpkzMEwE4klAvMqBgWG1Ax7FRAAhCwida8XA8Apo1msKzRts4BwwnNqNMTGy/JQ0BoYz5qj60PkwIGABkesH4glA3Iemjhsob5QOoU8D5aScGBj4gWweC9xu5IGaeR6IL0DjFwZEM1HNJhaAzATZK0CCHmoCfhz2dgP9ZmFIvDmwcBZCMu8cNHxAYdaDFFbTHRkYwhwx7etDyjMwcB6J/TGegeFTPCTsL5pD8hipAN2/IPtAYS8IxHwUxkE3knuEgenhriNutTDQlIDKf0BADyzt0RPI8KBiapiHDQAAsPU3Kw==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../common/maps/obj/entry_up.tx" x="195.625" y="270.665" width="26.375" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../../common/maps/obj/enemy.tx" name="Enemy" x="33.5" y="207.25" visible="1">
+   <properties>
+    <property name="enemy" value="Watcher in the Web"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="pursueRange" type="int" value="300"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="97" template="../../../../../common/maps/obj/enemy.tx" name="Enemy" x="211.75" y="174.75" visible="1">
+   <properties>
+    <property name="enemy" value="Watcher in the Web"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="pursueRange" type="int" value="300"/>
+    <property name="threatRange" type="int" value="45"/>
+   </properties>
+  </object>
+  <object id="99" template="../../../../../common/maps/obj/enemy.tx" name="Enemy" x="121.75" y="138.25" visible="1">
+   <properties>
+    <property name="enemy" value="Watcher in the Web"/>
+    <property name="hidden" type="bool" value="false"/>
+    <property name="pursueRange" type="int" value="300"/>
+    <property name="threatRange" type="int" value="80"/>
+    <property name="waypoints" value="105,104,103"/>
+   </properties>
+  </object>
+  <object id="101" template="../../../../../common/maps/obj/enemy.tx" name="Enemy" x="248.75" y="158" visible="1">
+   <properties>
+    <property name="enemy" value="Watcher in the Web"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="pursueRange" type="int" value="300"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="96" template="../../../../../common/maps/obj/manashards.tx" x="16" y="236.75">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;shards&quot;,
+    &quot;count&quot;: 2,
+    &quot;addMaxCount&quot;: 2
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="98" template="../../../../../common/maps/obj/booster.tx" x="84.75" y="159.25">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot;, &quot;DKA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot;, &quot;DKA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 2,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="100" template="../../../../../common/maps/obj/gold.tx" x="258.75" y="161">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 5,
+    &quot;addMaxCount&quot;: 80
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="102" template="../../../../../common/maps/obj/gold.tx" x="126" y="45.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 10,
+    &quot;addMaxCount&quot;: 40
+ }
+]</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="103" template="../../../../../common/maps/obj/waypoint.tx" x="59.75" y="124.25"/>
+  <object id="104" template="../../../../../common/maps/obj/waypoint.tx" x="107" y="157.25"/>
+  <object id="105" template="../../../../../common/maps/obj/waypoint.tx" x="128.75" y="125.25"/>
+ </objectgroup>
+</map>

@@ -1,0 +1,8 @@
+Name:Molecular Modifier
+ManaCost:2 R
+Types:Creature Kavu Artificer
+PT:2/2
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control gets +1/+0 and gains first strike until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +1 | KW$ First Strike
+SVar:PlayMain1:TRUE
+Oracle:At the beginning of combat on your turn, target creature you control gets +1/+0 and gains first strike until end of turn.

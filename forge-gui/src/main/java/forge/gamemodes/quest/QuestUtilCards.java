@@ -505,7 +505,7 @@ public final class QuestUtilCards {
     }
 
     /**
-     * Generate boosters in shop.
+     * Generate singles in shop.
      *
      * @param quantity the count
      */
@@ -550,7 +550,7 @@ public final class QuestUtilCards {
     }
 
     /**
-     * Generate precons in shop.
+     * Generate tournament packs in shop.
      *
      * @param count
      *            the count
@@ -565,7 +565,7 @@ public final class QuestUtilCards {
     }
 
     /**
-     * Generate precons in shop.
+     * Generate fat packs in shop.
      *
      * @param count
      *            the count

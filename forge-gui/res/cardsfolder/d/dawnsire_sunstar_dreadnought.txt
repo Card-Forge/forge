@@ -1,0 +1,10 @@
+Name:Dawnsire, Sunstar Dreadnought
+ManaCost:5
+Types:Legendary Artifact Spacecraft
+PT:20/20
+K:Station:20
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE10_CHARGE | AddTrigger$ AttackTrig | Description$ STATION 10+ Whenever you attack, NICKNAME deals 100 damage to up to one target creature or planeswalker.
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE20_CHARGE | AddType$ Creature | AddKeyword$ Flying | Description$ STATION 20+ Flying
+SVar:AttackTrig:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, NICKNAME deals 100 damage to up to one target creature or planeswalker.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature or planeswalker | NumDmg$ 100
+Oracle:Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 20+.)\nSTATION 10+\nWhenever you attack, Dawnsire deals 100 damage to up to one target creature or planeswalker.\nSTATION 20+\nFlying

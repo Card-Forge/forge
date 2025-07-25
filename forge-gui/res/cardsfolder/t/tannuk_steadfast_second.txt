@@ -1,0 +1,9 @@
+Name:Tannuk, Steadfast Second
+ManaCost:2 R R
+Types:Legendary Creature Kavu Pilot
+PT:3/5
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddKeyword$ Haste | Description$ Other creatures you control have haste.
+S:Mode$ Continuous | Affected$ Artifact.YouOwn,Creature.Red+YouOwn | EffectZone$ Battlefield | AffectedZone$ Hand | AddKeyword$ Warp:2 R | Description$ Artifact cards and red creature cards in your hand have warp {2}{R}. (You may cast a card from your hand for its warp cost. Exile that permanent at the beginning of the next end step, then you may cast it from exile on a later turn.)
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Creature
+Oracle:Other creatures you control have haste.\nArtifact cards and red creature cards in your hand have warp {2}{R}. (You may cast a card from your hand for its warp cost. Exile that permanent at the beginning of the next end step, then you may cast it from exile on a later turn.)

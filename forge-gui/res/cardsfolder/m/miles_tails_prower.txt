@@ -1,0 +1,14 @@
+Name:Miles "Tails" Prower
+ManaCost:1 W U
+Types:Legendary Creature Fox Artificer
+PT:3/1
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Vehicle.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigBranch | TriggerDescription$ Whenever a Vehicle you control enters, draw a card if it has flying. Otherwise, put a flying counter on it.
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE1 | TrueSubAbility$ DBDraw | FalseSubAbility$ DBPutCounter
+SVar:DBDraw:DB$ Draw
+SVar:DBPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterType$ Flying | CounterNum$ 1
+SVar:X:TriggeredCard$Valid Card.withFlying
+DeckHas:Ability$Counters
+DeckHints:Type$Vehicle
+Oracle:Flash\nFlying\nWhenever a Vehicle you control enters, draw a card if it has flying. Otherwise, put a flying counter on it.

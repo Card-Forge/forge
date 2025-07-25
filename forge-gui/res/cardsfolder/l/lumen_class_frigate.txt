@@ -1,0 +1,9 @@
+Name:Lumen-Class Frigate
+ManaCost:1 W
+Types:Artifact Spacecraft
+PT:3/5
+K:Station:12
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE2_CHARGE | AddStaticAbility$ AnthemStatic | Description$ STATION 2+ Other creatures you control get +1/+1.
+SVar:AnthemStatic:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddPower$ 1 | AddToughness$ 1 | Description$ Other creatures you control get +1/+1.
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE12_CHARGE | AddType$ Creature | AddKeyword$ Flying & Lifelink | Description$ STATION 12+ Flying, lifelink
+Oracle:Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 12+.)\nSTATION 2+\nOther creatures you control get +1/+1.\nSTATION 12+\nFlying, lifelink

@@ -1,0 +1,9 @@
+Name:Pampered Loamfrill
+ManaCost:G
+Types:Creature Lizard
+PT:1/1
+K:Deathtouch
+A:AB$ MakeCard | Cost$ 1 G ExileFromGrave<1/CARDNAME/this card> | PrecostDesc$ Renew — | Conjure$ True | TgtPrompt$ Select another target creature card in your graveyard | ValidTgts$ Creature.Other+YouOwn | TgtZone$ Graveyard | DefinedName$ Targeted | Zone$ Library | LibraryPosition$ 0 | ActivationZone$ Graveyard | SorcerySpeed$ True | RememberMade$ True | SubAbility$ DBPump | SpellDescription$ Conjure a duplicate of another target creature card in your graveyard onto the top of your library. The duplicate perpetually gets +1/+1 and gains deathtouch. Activate only as a sorcery.
+SVar:DBPump:DB$ Pump | Defined$ Remembered | PumpZone$ Library | KW$ Deathtouch | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Deathtouch\nRenew — {1}{G}, Exile this card from your graveyard: Conjure a duplicate of another target creature card in your graveyard onto the top of your library. The duplicate perpetually gets +1/+1 and gains deathtouch. Activate only as a sorcery.

@@ -137,6 +137,7 @@ public enum TrackableProperty {
     AttractionLights(TrackableTypes.IntegerSetType),
     ChangedColorWords(TrackableTypes.StringMapType),
     HasChangedColors(TrackableTypes.BooleanType),
+    HasPrintedPT(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
     ChangedTypes(TrackableTypes.StringMapType),
 
     //check produce mana for BG

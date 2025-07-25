@@ -1713,14 +1713,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (!canCastSorcery() && (landSa == null || !landSa.withFlash(land, this))) {
                 return false;
             }
-        }
 
-        // CantBeCast static abilities
-        if (StaticAbilityCantBeCast.cantPlayLandAbility(landSa, land, this)) {
-            return false;
-        }
-
-        if (land != null && !ignoreZoneAndTiming) {
             final boolean mayPlay = landSa == null ? !land.mayPlay(this).isEmpty() : landSa.getMayPlay() != null;
             if (land.getOwner() != this && !mayPlay) {
                 return false;
@@ -1730,6 +1723,11 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (zone != null && (zone.is(ZoneType.Battlefield) || (!zone.is(ZoneType.Hand) && !mayPlay))) {
                 return false;
             }
+        }
+
+        // CantBeCast static abilities
+        if (StaticAbilityCantBeCast.cantPlayLandAbility(landSa, land, this)) {
+            return false;
         }
 
         // **** Check for land play limit per turn ****

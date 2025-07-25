@@ -1,6 +1,6 @@
 Name:Lobelia Sackville-Baggins
 ManaCost:2 B
-Types:Creature Halfling Citizen
+Types:Legendary Creature Halfling Citizen
 PT:2/3
 K:Flash
 K:Menace

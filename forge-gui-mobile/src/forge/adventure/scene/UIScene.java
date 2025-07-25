@@ -65,8 +65,8 @@ public class UIScene extends Scene {
             //actor.fire(UIScene.eventExit());
         }
 
-        public void onPressDown(UIScene scene) {
-            if (actor instanceof TextField) {
+        public void onPressDown(UIScene scene, int keycode) {
+            if (actor instanceof TextField && Input.Keys.ENTER != keycode) {
                 scene.requestTextInput(((TextField) actor).getText(), text -> ((TextField) actor).setText(text));
 
             }
@@ -347,7 +347,7 @@ public class UIScene extends Scene {
         Selectable selection = getSelected();
         if (KeyBinding.Use.isPressed(keycode)) {
             if (selection != null) {
-                selection.onPressDown(this);
+                selection.onPressDown(this, keycode);
             }
         }
 

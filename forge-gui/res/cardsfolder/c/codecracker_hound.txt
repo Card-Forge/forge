@@ -1,0 +1,8 @@
+Name:Codecracker Hound
+ManaCost:2 U
+Types:Creature Dog
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When this creature enters, look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
+SVar:TrigDig:DB$ Dig | DigNum$ 2 | ChangeNum$ 1 | DestinationZone2$ Graveyard | NoReveal$ True
+K:Warp:2 U
+Oracle:When this creature enters, look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.\nWarp {2}{U} (You may cast this card from your hand for its warp cost. Exile this enchantment at the beginning of the next end step, then you may cast it from exile on a later turn.)

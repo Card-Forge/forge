@@ -1,0 +1,7 @@
+Name:Vaultguard Trooper
+ManaCost:4 R
+Types:Creature Kavu Soldier
+PT:5/5
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | IsPresent$ Creature.YouCtrl+tapped | PresentCompare$ GE2 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, if you control two or more tapped creatures, you may discard your hand. If you do, draw two cards.
+SVar:TrigDraw:AB$ Draw | Cost$ Discard<0/Hand> | NumCards$ 2
+Oracle:At the beginning of your end step, if you control two or more tapped creatures, you may discard your hand. If you do, draw two cards.

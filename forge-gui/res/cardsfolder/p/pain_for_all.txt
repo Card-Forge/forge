@@ -1,0 +1,13 @@
+Name:Pain for All
+ManaCost:2 R
+Types:Enchantment Aura
+K:Enchant:Creature.YouCtrl:creature you control
+SVar:AttachAILogic:Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When this Aura enters, enchanted creature deals damage equal to its power to any other target.
+SVar:TrigDamage:DB$ DealDamage | DamageSource$ Enchanted | ValidTgts$ Creature.!EnchantedBy,Player,Planeswalker.!EnchantedBy,Battle.!EnchantedBy | TgtPrompt$ Select any other target | NumDmg$ X
+T:Mode$ DamageDoneOnce | ValidTarget$ Card.AttachedBy | Execute$ TrigDamageAll | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature is dealt damage, it deals that much damage to each opponent.
+SVar:TrigDamageAll:DB$ DamageAll | ValidPlayers$ Opponent | NumDmg$ Y | DamageSource$ TriggeredTargetLKICopy
+SVar:X:Enchanted$CardPower
+SVar:Y:TriggerCount$DamageAmount
+SVar:PlayMain1:TRUE
+Oracle:Enchant creature you control\nWhen this Aura enters, enchanted creature deals damage equal to its power to any other target.\nWhenever enchanted creature is dealt damage, it deals that much damage to each opponent.

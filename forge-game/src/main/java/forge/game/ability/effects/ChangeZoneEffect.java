@@ -755,7 +755,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
 
                 if (sa.isTrigger() && sa.getTrigger().isKeyword(Keyword.WARP)) {
-                    Card eff = createEffect(sa, activator, "Warped " + sa.getHostCard(), sa.getHostCard().getImageKey());
+                    Card eff = createEffect(sa, sa.getHostCard().getOwner(), "Warped " + sa.getHostCard(), sa.getHostCard().getImageKey());
                     StringBuilder sbPlay = new StringBuilder();
                     sbPlay.append("Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand+!ThisTurnEntered");
                     sbPlay.append(" | AffectedZone$ Exile | Description$ You may cast the card.");
@@ -914,6 +914,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
             if (sa.usesTargeting() && !sa.hasParam("DefinedPlayer")) {
                 player = sa.getTargets().getFirstTargetedPlayer();
+            }
+
+            if (!player.isInGame()) {
+                continue;
             }
 
             List<ZoneType> origin = Lists.newArrayList();

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="56">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../tileset/INN_dungen_crawler_tileset.tsx"/>
+ <tileset firstgid="24193" source="../../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="34305" source="../../../tileset/inn_main.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyVlf1WgzAMxTumw83BA1mOjwboce6L8chqckgOd3ft1D9yUlrozS9NwxhDGMXKJoQP8TuxN7FPsZXMfb9MtpfnQ5w9jtkHGPfw/CX7VLLnYzPtrZoPZj53tHhcN/yi0yfmD6Rf2r5L8Sfx5zjrazyqtxBfG2+X2FPXeA7ZmFt9K7ZpppxWxrc0XdUrwBfNLW+wXOT2P9A6xqU5fRbbiq1N8xJn1sK4+zjrYi6Rd6S9R1v3eFj33XKsXjWHeM2r3+pcZ98MpMFn7FqoyTG2pqnMT8a8t3eQdyCrbT53jrmceL4q01Ltk+mvm1ve3D0KidodEjWAMemz3qUd6F2sppm3g/PFffeg5RoDvcO8ztECa0V17Lyu3Sf2RW0/U48j10dcd2O5Vt5lgtdrCw17Ca8Nd+JzhtbqujJbZHj5/nbxupcg57077TnRM95a79Kz9ZiYl2sLOVk/QJyp/uLMF8pDjtf7Zf2arjOsAR8jIzLremU9cmUaI+n7e5xb1MCaQd5cLx2tlj1nOneM1/puNeSd65jjcV5mReayme9wCb3rL2P9X//3Gx//AK1XMOI=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBh4UMeLnU0L80cBbpDOOrztPc3CwKCLhE8hsc+wYHFXN3Xsxec/kBwII7uNhQ2/eepo/KNk2JvGCvE/sl2ZQLEMVtQwyiIjbmD2YrMfJgayCznM8enBBtSwiGWyYsYrDJ9Ai/cMNLXk+BMdtFszMHRYo4qh+4cWaR1m7z2gP+6zQNjo4YvOJxZgC2dke2F2I/sd3Y+44hoGLnCS5iaYXTD7cNkLs5uctHyQBPfQsvzCV3dRYi8Aw4suHw==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJz7w8/A8BeI6QXOc0LoWQIMDLMFIOwmXlS5wQgU+KhjzmD24+3pDAx3ptPPvsoZqHxYGFfPwFQ7EOAmkWFBaZzexWGPFJFprpoXt9x1bQaGG0BchSdMlaiUtpHBPaCf7iP5qw5ofz3UDbJo9lUgue0WHdMfqYDUeEZP34pEhPMFGpcPyHF9E5gubmnjVktJupbB4VdQOngAjOOHSPFMCz+Xk1iGxAHrwHikepBe5fQfpPoX2U5a2w8Almws8w==
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYMAPQviJEyPWjAucuNXhksOnR52FgUERiOWBWAEJg8TIBbj8dx7JHXuB5u8H4mhWBoYYIN4DZO8D4kggW40Iu+XxuNV2OgOD3XTsauOA5seyQsR7ORgYkpHs3k+EvXuhaolRnwA1+yAQp7JiyidD/Z4ElUMPNxgf5P4oVog5KUjq8YFoJH/aTMduPiFwCOrP42j+7GjDzrefzoAXuPMwMHjwELYX5HaQP7GFGQyosGBPJ+huA4GnQDufEWEvNuAA9JMjkr9AYXKEBbddMGCDpAeU7s/jyYP4gB5UXwKR8U4NgM9fxKhHLm9wlV2xQPE4II4nMU0SAvjKOhD4DbTvDxB/hdrbxItdHa40jgycgHHsjJbmccXzTAEGhulAPFsAv/voCUgpD0hNE4TiAR/A5y5y8xG17IcBAIqQQwU=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../common/maps/obj/entry_up.tx" x="240" y="272"/>
+  <object id="42" template="../../../../../common/maps/obj/shop.tx" x="303.122" y="112.667" width="18.0606" height="14.6667">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Human,Werewolf"/>
+   </properties>
+  </object>
+  <object id="43" template="../../../../../common/maps/obj/shop.tx" x="351.788" y="159.576" width="17.3031" height="13.5758">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Human,Werewolf"/>
+   </properties>
+  </object>
+  <object id="45" template="../../../../../common/maps/obj/shop.tx" x="240.455" y="126.242" width="15.5455" height="13.2424">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Human,Werewolf"/>
+   </properties>
+  </object>
+  <object id="46" template="../../../../../common/maps/obj/shop.tx" x="369.333" y="224.031" width="29.7576" height="14.0303">
+   <properties>
+    <property name="shopList" value="Equipment"/>
+   </properties>
+  </object>
+  <object id="51" template="../../../../../common/maps/obj/inn.tx" x="127.94" y="159.849" width="31.9394" height="18.1818"/>
+  <object id="52" template="../../../../../common/maps/obj/quest.tx" x="174.273" y="79.606" width="34.1818" height="18.2727"/>
+  <object id="53" template="../../../../../common/maps/obj/shardtrader.tx" x="373.333" y="126.333" width="24" height="16"/>
+ </objectgroup>
+</map>

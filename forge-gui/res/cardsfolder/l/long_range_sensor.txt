@@ -1,0 +1,8 @@
+Name:Long-Range Sensor
+ManaCost:2 R
+Types:Artifact
+T:Mode$ AttackersDeclaredOneTarget | ValidAttackers$ Creature.YouCtrl | AttackedTarget$ Player | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack a player, put a charge counter on this artifact.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
+A:AB$ Discover | Cost$ 1 SubCounter<2/CHARGE> | Num$ 4 | SorcerySpeed$ True | SpellDescription$ Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+DeckHas:Ability$Counters
+Oracle:Whenever you attack a player, put a charge counter on this artifact.\n{1}, Remove two charge counters from this artifact: Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)

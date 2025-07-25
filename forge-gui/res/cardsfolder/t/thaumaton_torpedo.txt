@@ -1,0 +1,7 @@
+Name:Thaumaton Torpedo
+ManaCost:1
+Types:Artifact
+A:AB$ Destroy | Cost$ 6 T Sac<1/CARDNAME> | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | ReduceCost$ X | SpellDescription$ Destroy target nonland permanent. This ability costs {3} less to activate if you attacked with a Spacecraft this turn.
+SVar:X:Count$Compare Y GE1.3.0
+SVar:Y:Count$CreaturesAttackedThisTurn Spacecraft.YouCtrl
+Oracle:{6}, {T}, Sacrifice this artifact: Destroy target nonland permanent. This ability costs {3} less to activate if you attacked with a Spacecraft this turn.

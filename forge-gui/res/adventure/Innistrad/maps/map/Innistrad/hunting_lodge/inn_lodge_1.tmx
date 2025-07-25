@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="106">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../tileset/inn_dungeon_floor.tsx"/>
+ <tileset firstgid="12530" source="../../../tileset/Inn_Dungeon.tsx"/>
+ <tileset firstgid="17010" source="../../../tileset/inn_main.tsx"/>
+ <layer id="7" name="Floor" width="20" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxbqcfAsHIUj+JRPIqHMZbhoY95AFR8HD4=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="20" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNk1sKgCAQRV1AS2gNLrbnGiKKPltAD9tVM5A0iDdJ+2jggFgeRi+TZ0rlgEIrVTpUGv8foqezbg0/8i10diVaor7WW4LPMpFjjPDw+xsHzoDvPXiyCWXkey8u60OFeke+Tt+k+p48sb4395UZ+PJgDmIH34yTh+wJvV+oRuCLLeT7oj+eqeZCrhF29uReygzK2Zs9fO07AUHVcJ0=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="20" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzlkUkKwkAUROsGDufQOAQjLlx4AceVCBpvIejGtWMieAxvoBeIehMXDhsVhwoSjBK7406w4NEN/3f1/xTgX7MMsMl88eAPFUgAQRIi4cRr7Rh/3iu5x9nRgLb22a9AjyIpkTLJuzyj2ed9Qr8pOdHr/MGvXgVGfD8mBjHJ8G3GbQPYkT05NOT7yjTS+R8xiKnL+9WauB5tAgqJkXhT3JvibhpJu3Zsve1r0WNJVmTt4XdJAldyS8pn96O5CixUeV8kK++xZQlmd8vJ9Ztstx59Xf1xOjnYudpZ+MnWEszp7CHK4hfUU4A+GSje9Ts5GUWO
+  </data>
+ </layer>
+ <layer id="8" name="Walls Supplementary" width="20" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYMANXlsxMLwBYgUbBoZVDgwMqx3wKCYCaFszMOgAcS7QzFdAs15TaN5gA4eNGRja0bCrMaqaKWkMDNPSIOxgJwhtZ4HdPGYTTLFWJPMcjRgYjNIZGEzSIXwpJ8rcL5pJmf6BAjPSsItfBoaLhSHp5pmlYxcvzECwpzsyMIQ5YqopBaoRQQvHK0jqPsYzMHwC4i/xpLsLBkQojGdigTDQH3ex+BEdNCWg8h8g6XHEkbbpDWR4UDE1zMMGAI3bJCo=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../common/maps/obj/entry_up.tx" x="195.625" y="270.665" width="26.375" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="93" template="../../../../../common/maps/obj/treasure.tx" x="270.526" y="125.614">
+   <properties>
+    <property name="reward">[{
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 80,
+    &quot;addMaxCount&quot;: 200
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.3,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="95" template="../../../../../common/maps/obj/enemy.tx" x="153.684" y="135.789">
+   <properties>
+    <property name="enemy" value="Wolfkin Outcast"/>
+    <property name="pursueRange" type="int" value="20"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="101,102,104,105,99,100,105,101,102,104,105,99,100,105,104"/>
+   </properties>
+  </object>
+  <object id="96" template="../../../../../common/maps/obj/enemy.tx" x="151.901" y="39.0909" width="9.81818" height="10.1818">
+   <properties>
+    <property name="enemy" value="Immerwolf"/>
+    <property name="pursueRange" type="int" value="15"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="97" template="../../../../../common/maps/obj/gold.tx" x="191.579" y="32.9825">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 60,
+    &quot;addMaxCount&quot;: 50
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="103" template="../../../../../common/maps/obj/gold.tx" x="116.491" y="57.193">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 10,
+    &quot;addMaxCount&quot;: 20
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="99" template="../../../../../common/maps/obj/waypoint.tx" x="108.421" y="212.281"/>
+  <object id="100" template="../../../../../common/maps/obj/waypoint.tx" x="233.333" y="199.298"/>
+  <object id="101" template="../../../../../common/maps/obj/waypoint.tx" x="103.509" y="124.561"/>
+  <object id="102" template="../../../../../common/maps/obj/waypoint.tx" x="228.772" y="123.86"/>
+  <object id="104" template="../../../../../common/maps/obj/waypoint.tx" x="152.25" y="128"/>
+  <object id="105" template="../../../../../common/maps/obj/waypoint.tx" x="153.25" y="179.75"/>
+ </objectgroup>
+</map>

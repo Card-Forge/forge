@@ -1,0 +1,9 @@
+Name:Biotech Specialist
+ManaCost:R G
+Types:Creature Insect Scientist
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a Lander token. (It's an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_lander_sac_search | TokenOwner$ You
+T:Mode$ Sacrificed | ValidCard$ Artifact | ValidPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice an artifact, this creature deals 2 damage to target opponent.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ 2
+Oracle:When this creature enters, create a Lander token. (It's an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")\nWhenever you sacrifice an artifact, this creature deals 2 damage to target opponent.

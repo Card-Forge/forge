@@ -1,0 +1,8 @@
+Name:Emissary Escort
+ManaCost:1 U
+Types:Artifact Creature Robot Soldier
+PT:0/4
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ This creature gets +X/+0, where X is the greatest mana value among other artifacts you control.
+SVar:X:Count$Valid Artifact.Other+YouCtrl$GreatestCMC
+DeckHints:Type$Artifact
+Oracle:This creature gets +X/+0, where X is the greatest mana value among other artifacts you control.

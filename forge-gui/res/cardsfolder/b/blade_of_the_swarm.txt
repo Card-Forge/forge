@@ -1,0 +1,10 @@
+Name:Blade of the Swarm
+ManaCost:3 B
+Types:Creature Insect Assassin
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When this creature enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBCounter,DBChangeZone
+SVar:DBCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on this creature.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Exile | ValidTgts$ Card.withWarp | TgtPrompt$ Select target exiled card with warp | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target exiled card with warp on the bottom of its owner's library.
+DeckHas:Ability$Counters
+Oracle:When this creature enters, choose one —\n• Put two +1/+1 counters on this creature.\n• Put target exiled card with warp on the bottom of its owner's library.

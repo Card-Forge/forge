@@ -193,7 +193,7 @@ public class ConquestPlane {
             if (edition == null)
                 continue;
 
-            for (EditionEntry card : edition.getAllCardsInSet()) {
+            for (EditionEntry card : edition.getObtainableCards()) {
                 if (bannedCardSet == null || !bannedCardSet.contains(card.name())) {
                     addCard(commonCards.getCard(card.name(), setCode));
                 }

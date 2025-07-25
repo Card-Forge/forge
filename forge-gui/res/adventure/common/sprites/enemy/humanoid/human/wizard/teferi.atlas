@@ -1,11 +1,20 @@
 teferi.png
-size: 57,51
+size: 64,32
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none          
 Avatar
-  xy: 10,0
-  size: 32,32
-Idle 
-  xy: 1,1
-  size: 50, 41
+  xy: 0, 0
+  size: 16, 16
+Idle
+  xy: 0, 16
+  size: 16, 16
+Idle
+  xy: 16, 16
+  size: 16, 16
+Idle
+  xy: 32, 16
+  size: 16, 16
+Idle
+  xy: 48, 16
+  size: 16, 16

@@ -1,0 +1,10 @@
+Name:Mm'menon, Uthros Exile
+ManaCost:1 U R
+Types:Legendary Creature Jellyfish Advisor
+PT:1/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever an artifact you control enters, put a +1/+1 counter on target creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1
+SVar:BuffedBy:Artifact
+DeckHas:Ability$Counters
+Oracle:Flying\nWhenever an artifact you control enters, put a +1/+1 counter on target creature.

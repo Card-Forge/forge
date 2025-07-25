@@ -1,0 +1,7 @@
+Name:Pull Through the Weft
+ManaCost:3 G G
+Types:Sorcery
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand+YouOwn | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target nonland permanent cards in your graveyard | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBChangeZone | SpellDescription$ Return up to two target nonland permanent cards from your graveyard to your hand, then return up to two target land cards from your graveyard to the battlefield tapped.
+SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Land.YouOwn | TgtPrompt$ Select up to two target land cards in your graveyard | TargetMin$ 0 | TargetMax$ 2 | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
+DeckHints:Ability$Graveyard|Discard
+Oracle:Return up to two target nonland permanent cards from your graveyard to your hand, then return up to two target land cards from your graveyard to the battlefield tapped.

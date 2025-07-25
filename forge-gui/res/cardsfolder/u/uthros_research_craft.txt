@@ -1,0 +1,13 @@
+Name:Uthros Research Craft
+ManaCost:2 U
+Types:Artifact Spacecraft
+PT:0/8
+K:Station:12
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE3_CHARGE | AddTrigger$ CastTrig | Description$ STATION 3+ Whenever you cast an artifact spell, draw a card. Put a charge counter on this Spacecraft.
+SVar:CastTrig:Mode$ SpellCast | ValidCard$ Artifact | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an artifact spell, draw a card. Put a charge counter on this Spacecraft.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE12_CHARGE | AddType$ Creature | AddKeyword$ Flying | AddStaticAbility$ CraftStatic | Description$ STATION 12+ Flying,,,This Spacecraft gets +1/+0 for each artifact you control.
+SVar:CraftStatic:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ This Spacecraft gets +1/+0 for each artifact you control.
+SVar:X:Count$Valid Artifact.YouCtrl
+Oracle:Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 12+.)\nSTATION 3+\nWhenever you cast an artifact spell, draw a card. Put a charge counter on this Spacecraft.\nSTATION 12+\nFlying\nThis Spacecraft gets +1/+0 for each artifact you control.

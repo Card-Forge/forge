@@ -362,12 +362,3 @@ ScryfallCode=6ED
 348 L Forest @Quinton Hoover
 349 L Forest @John Avon
 350 L Forest @John Avon
-
-[tokens]
-wasp
-c_5_5_a_djinn_flying
-w_1_1_citizen
-b_0_1_serf
-r_1_1_goblin
-g_1_1_cat
-g_1_1_snake

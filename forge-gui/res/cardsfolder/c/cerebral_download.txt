@@ -1,0 +1,8 @@
+Name:Cerebral Download
+ManaCost:4 U
+Types:Instant
+A:SP$ Surveil | Amount$ X | SubAbility$ DBDraw | SpellDescription$ Surveil X, where X is the number of artifacts you control. Then draw three cards. (To surveil X, look at the top X cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:DBDraw:DB$ Draw | NumCards$ 3
+SVar:X:Count$Valid Artifact.YouCtrl
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Surveil X, where X is the number of artifacts you control. Then draw three cards. (To surveil X, look at the top X cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)

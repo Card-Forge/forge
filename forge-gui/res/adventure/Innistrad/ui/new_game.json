@@ -219,7 +219,7 @@
       "name": "start",
       "text": "tr(lblStart)",
       "selectable": true,
-      "binding": "Status",
+      "binding": "Enter",
       "width": 100,
       "height": 30,
       "x": 376,

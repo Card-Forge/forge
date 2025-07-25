@@ -1,0 +1,8 @@
+Name:Mechan Shieldmate
+ManaCost:1 U
+Types:Artifact Creature Robot Soldier
+PT:3/2
+K:Defender
+S:Mode$ CanAttackDefender | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as an artifact entered the battlefield under your control this turn, this creature can attack as though it didn't have defender.
+SVar:X:Count$ThisTurnEntered_Battlefield_Artifact.YouCtrl
+Oracle:Defender\nAs long as an artifact entered the battlefield under your control this turn, this creature can attack as though it didn't have defender.

@@ -1,0 +1,16 @@
+Name:Tezzeret, Cruel Captain
+ManaCost:3
+Types:Legendary Planeswalker Tezzeret
+Loyalty:4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter1 | TriggerDescription$ Whenever an artifact you control enters, put a loyalty counter on NICKNAME.
+SVar:TrigPutCounter1:DB$ PutCounter | CounterType$ LOYALTY
+A:AB$ Untap | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | SubAbility$ DBPutCounter | SpellDescription$ Untap target artifact or creature. If it's an artifact creature, put a +1/+1 counter on it.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted.Artifact+Creature | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Origin$ Library | Destination$ Hand | ChangeType$ Artifact.cmcLE1 | ChangeNum$ 1 | StackDescription$ SpellDescription | SpellDescription$ Search your library for an artifact card with mana value 1 or less, reveal it, put it into your hand, then shuffle.
+A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem — Tezzeret, Cruel Captain | Image$ emblem_tezzeret_cruel_captain | Duration$ Permanent | AILogic$ Always | Triggers$ EffPhase | SpellDescription$ You get an emblem with "At the beginning of combat on your turn, put three +1/+1 counters on target artifact you control. If it's not a creature, it becomes a 0/0 Robot artifact creature."
+SVar:EffPhase:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter2 | TriggerDescription$ At the beginning of combat on your turn, put three +1/+1 counters on target artifact you control. If it's not a creature, it becomes a 0/0 Robot artifact creature.
+SVar:TrigPutCounter2:DB$ PutCounter | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Select target artifact you control | CounterType$ P1P1 | CounterNum$ 3 | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted.!Creature | Power$ 0 | Toughness$ 0 | Types$ Artifact,Creature,Robot | Duration$ Permanent
+DeckHas:Ability$Counters
+DeckHints:Type$Artifact
+Oracle:Whenever an artifact you control enters, put a loyalty counter on Tezzeret.\n[0]: Untap target artifact or creature. If it's an artifact creature, put a +1/+1 counter on it.\n[-3]: Search your library for an artifact card with mana value 1 or less, reveal it, put it into your hand, then shuffle.\n[-7]: You get an emblem with "At the beginning of combat on your turn, put three +1/+1 counters on target artifact you control. If it's not a creature, it becomes a 0/0 Robot artifact creature."

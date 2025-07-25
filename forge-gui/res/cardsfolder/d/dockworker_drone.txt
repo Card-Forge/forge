@@ -1,0 +1,10 @@
+Name:Dockworker Drone
+ManaCost:1 W
+Types:Artifact Creature Robot
+PT:1/1
+K:etbCounter:P1P1:1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When this creature dies, put its counters on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ EachFromSource | EachFromSource$ TriggeredCardLKICopy
+SVar:SacMe:2
+DeckHas:Ability$Counters
+Oracle:This creature enters with a +1/+1 counter on it.\nWhen this creature dies, put its counters on target creature you control.

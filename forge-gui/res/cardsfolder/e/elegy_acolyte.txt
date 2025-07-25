@@ -1,0 +1,13 @@
+Name:Elegy Acolyte
+ManaCost:2 B B
+Types:Creature Human Cleric
+PT:4/4
+K:Lifelink
+T:Mode$ DamageDoneOnce | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, you draw a card and lose 1 life.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigToken | TriggerDescription$ Void — At the beginning of your end step, if a nonland permanent left the battlefield this turn or a spell was warped this turn, create a 2/2 colorless Robot artifact creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_2_2_a_robot | TokenOwner$ You
+SVar:X:Count$Void.1.0
+DeckHas:Ability$Token & Type$Robot
+Oracle:Lifelink\nWhenever one or more creatures you control deal combat damage to a player, you draw a card and lose 1 life.\nVoid — At the beginning of your end step, if a nonland permanent left the battlefield this turn or a spell was warped this turn, create a 2/2 colorless Robot artifact creature token.

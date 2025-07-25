@@ -1,0 +1,8 @@
+Name:Loading Zone
+ManaCost:3 G
+Types:Enchantment
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Creature.YouCtrl+inZoneBattlefield,Spacecraft.YouCtrl+inZoneBattlefield,Planet.YouCtrl+inZoneBattlefield | ReplaceWith$ DoubleCounters | Description$ If one or more counters would be put on a creature, Spacecraft, or Planet you control, twice that many of each of those kinds of counters are put on it instead.
+SVar:DoubleCounters:DB$ ReplaceCounter | Amount$ X
+SVar:X:ReplaceCount$CounterNum/Twice
+K:Warp:G
+Oracle:If one or more counters would be put on a creature, Spacecraft, or Planet you control, twice that many of each of those kinds of counters are put on it instead.\nWarp {G} (You may cast this card from your hand for its warp cost. Exile this enchantment at the beginning of the next end step, then you may cast it from exile on a later turn.)

@@ -1,0 +1,11 @@
+Name:Seedship Agrarian
+ManaCost:3 G
+Types:Creature Insect Scientist
+PT:3/3
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever this creature becomes tapped, create a Lander token. (It's an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_lander_sac_search
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Landfall — Whenever a land you control enters, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Land
+DeckHas:Ability$Token
+Oracle:Whenever this creature becomes tapped, create a Lander token. (It's an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")\nLandfall — Whenever a land you control enters, put a +1/+1 counter on this creature.

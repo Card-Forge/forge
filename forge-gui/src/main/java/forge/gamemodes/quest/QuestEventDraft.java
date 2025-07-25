@@ -445,7 +445,7 @@ public class QuestEventDraft implements IQuestEvent {
         final List<String> cardNames = new ArrayList<>();
 
         for (final CardEdition edition : getAllEditions()) {
-            for (final EditionEntry card : edition.getAllCardsInSet()) {
+            for (final EditionEntry card : edition.getObtainableCards()) {
                 if (card.rarity() == CardRarity.Rare || card.rarity() == CardRarity.MythicRare) {
                     final PaperCard cardToAdd = FModel.getMagicDb().getCommonCards().getCard(card.name(), edition.getCode());
                     if (cardToAdd != null && !cardNames.contains(cardToAdd.getName())) {
@@ -471,7 +471,7 @@ public class QuestEventDraft implements IQuestEvent {
         final List<EditionEntry> cardsInEdition = new ArrayList<>();
         final List<String> cardNames = new ArrayList<>();
 
-        for (final EditionEntry card : randomEdition.getAllCardsInSet()) {
+        for (final EditionEntry card : randomEdition.getObtainableCards()) {
             if (card.rarity() == CardRarity.Rare || card.rarity() == CardRarity.MythicRare) {
                 if (!cardNames.contains(card.name())) {
                     cardsInEdition.add(card);

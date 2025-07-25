@@ -449,7 +449,7 @@ public class GameAction {
             if (zoneFrom.is(ZoneType.Stack) && toBattlefield) {
                 // 400.7a Effects from static abilities that give a permanent spell on the stack an ability
                 // that allows it to be cast for an alternative cost continue to apply to the permanent that spell becomes.
-                if (c.getCastSA() != null && !c.getCastSA().isIntrinsic() && c.getCastSA().getKeyword() != null) {
+                if (c.getCastSA() != null && !c.getCastSA().isIntrinsic() && c.getKeywords().contains(c.getCastSA().getKeyword())) {
                     KeywordInterface ki = c.getCastSA().getKeyword();
                     ki.setHostCard(copied);
                     copied.addChangedCardKeywordsInternal(ImmutableList.of(ki), null, false, copied.getGameTimestamp(), null, true);

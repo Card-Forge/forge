@@ -1,0 +1,13 @@
+Name:Specimen Freighter
+ManaCost:5 U
+Types:Artifact Spacecraft
+PT:4/7
+K:Station:9
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this Spacecraft enters, return up to two target non-Spacecraft creatures to their owners' hands.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.nonSpacecraft | TgtPrompt$ Select up to two target non-Spacecraft creatures | TargetMin$ 0 | TargetMax$ 2 | Origin$ Battlefield | Destination$ Hand
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE9_CHARGE | AddType$ Creature | AddKeyword$ Flying | AddTrigger$ AttackTrig | Description$ STATION 9+ Flying,,,Whenever this Spacecraft attacks, defending player mills four cards.
+SVar:AttackTrig:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever this Spacecraft attacks, defending player mills four cards.
+SVar:TrigMill:DB$ Mill | Defined$ TriggeredDefendingPlayer | NumCards$ 4
+SVar:PlayMain1:TRUE
+SVar:HasAttackEffect:TRUE
+Oracle:When this Spacecraft enters, return up to two target non-Spacecraft creatures to their owners' hands.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 9+.)\nSTATION 9+\nFlying\nWhenever this Spacecraft attacks, defending player mills four cards.

@@ -1,0 +1,6 @@
+Name:Lethal Protection
+ManaCost:3 B
+Types:Sorcery
+A:SP$ Destroy | ValidTgts$ Creature | SubAbility$ DBReturn | SpellDescription$ Destroy target creature. Return up to one target creature card from your graveyard to your hand.
+SVar:DBReturn:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose up to one target creature card in your graveyard | ValidTgts$ Creature.YouOwn | Origin$ Graveyard | Destination$ Hand
+Oracle:Destroy target creature. Return up to one target creature card from your graveyard to your hand.

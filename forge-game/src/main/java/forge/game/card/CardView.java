@@ -1098,6 +1098,7 @@ public class CardView extends GameEntityView {
         currentState.getView().setOriginalColors(c); //set original Colors
 
         currentStateView.updateAttractionLights(currentState);
+        currentStateView.updateHasPrintedPT(c.getRules() != null && c.getRules().hasPrintedPT());
 
         CardState alternateState = isSplitCard && isFaceDown() ? c.getState(CardStateName.RightSplit) : c.getAlternateState();
 
@@ -1406,7 +1407,7 @@ public class CardView extends GameEntityView {
         }
         void updatePower(Card c) {
             int num;
-            if (getType().hasSubtype("Vehicle") && !isCreature()) {
+            if (hasPrintedPT() && !isCreature()) {
                 // use printed value so user can still see it
                 num = c.getCurrentPower();
             } else {
@@ -1431,7 +1432,7 @@ public class CardView extends GameEntityView {
         }
         void updateToughness(Card c) {
             int num;
-            if (getType().hasSubtype("Vehicle") && !isCreature()) {
+            if (hasPrintedPT() && !isCreature()) {
                 // use printed value so user can still see it
                 num = c.getCurrentToughness();
             } else {
@@ -1480,7 +1481,6 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.Loyalty, "0"); //alternates don't need loyalty
         }
 
-
         public String getDefense() {
             return get(TrackableProperty.Defense);
         }
@@ -1515,6 +1515,13 @@ public class CardView extends GameEntityView {
         }
         void updateAttractionLights(CardState c) {
             set(TrackableProperty.AttractionLights, c.getAttractionLights());
+        }
+
+        public boolean hasPrintedPT() {
+            return get(TrackableProperty.HasPrintedPT);
+        }
+        void updateHasPrintedPT(boolean val) {
+            set(TrackableProperty.HasPrintedPT, val);
         }
 
         public String getSetCode() {
@@ -1799,10 +1806,11 @@ public class CardView extends GameEntityView {
         public boolean isArtifact() {
             return getType().isArtifact();
         }
-        public boolean isNyx() {
-            if (!getType().isEnchantment() || getType().getCoreTypes() == null)
-                return false;
-            return Iterables.size(getType().getCoreTypes()) > 1;
+        public boolean isEnchantment() {
+            return getType().isEnchantment();
+        }
+        public boolean isSpaceCraft() {
+            return getType().hasSubtype("Spacecraft");
         }
         public boolean isAttraction() {
             return getType().isAttraction();

@@ -1,0 +1,12 @@
+Name:Territorial Bruntar
+ManaCost:4 R R
+Types:Creature Beast
+PT:6/6
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ DBDigUntil | TriggerDescription$ Landfall — Whenever a land you control enters, exile cards from the top of your library until you exile a nonland card. You may cast that card this turn.
+SVar:DBDigUntil:DB$ DigUntil | Valid$ Card.nonLand | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ You may cast that card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:BuffedBy:Land
+Oracle:Reach\nLandfall — Whenever a land you control enters, exile cards from the top of your library until you exile a nonland card. You may cast that card this turn.

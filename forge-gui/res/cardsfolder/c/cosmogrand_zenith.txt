@@ -1,0 +1,10 @@
+Name:Cosmogrand Zenith
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:2/4
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCharm | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Whenever you cast your second spell each turn, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBToken,DBPutCounterAll
+SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_human_soldier | TokenOwner$ You | SpellDescription$ Create two 1/1 white Human Soldier creature tokens.
+SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each creature you control.
+DeckHas:Ability$Counters|Token
+Oracle:Whenever you cast your second spell each turn, choose one —\n• Create two 1/1 white Human Soldier creature tokens.\n• Put a +1/+1 counter on each creature you control.

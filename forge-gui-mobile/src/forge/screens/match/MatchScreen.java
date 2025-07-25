@@ -969,8 +969,7 @@ public class MatchScreen extends FScreen {
             //overrideBG
             if (!Forge.isMobileAdventureMode) {
                 if (hasActivePlane()) {
-                    imageName = getPlaneName().replace(" ", "_").replace("'", "")
-                            .replace("-", "").replace("!", "");
+                    imageName = getPlaneName();
                     if (!plane.equals(imageName)) {
                         plane = imageName;
                         bgAnimation.progress = 0;

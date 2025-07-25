@@ -1,0 +1,13 @@
+Name:Inspirit, Flagship Vessel
+ManaCost:U R W
+Types:Legendary Artifact Spacecraft
+PT:5/5
+K:Station:8
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_CHARGE | AddTrigger$ CombatTrig | Description$ STATION 1+ At the beginning of combat on your turn, put your choice of a +1/+1 counter or two charge counters on up to one other target artifact.
+SVar:CombatTrig:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, put your choice of a +1/+1 counter or two charge counters on up to one other target artifact.
+SVar:TrigChoose:DB$ GenericChoice | ValidTgts$ Artifact.Other | TgtPrompt$ Select up to one other target artifact | TargetMin$ 0 | TargetMax$ 1 | Choices$ P1P1Counter,ChargeCounters | ConditionDefined$ Targeted | ConditionPresent$ Card | Defined$ You
+SVar:P1P1Counter:DB$ PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target artifact.
+SVar:ChargeCounters:DB$ PutCounter | Defined$ Targeted | CounterType$ CHARGE | CounterNum$ 2 | SpellDescription$ Put two charge counters on target artifact.
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE8_CHARGE | AddType$ Creature | AddKeyword$ Flying | AddStaticAbility$ DBStatic | Description$ STATION 8+ Flying,,,Other artifacts you control have hexproof and indestructible.
+SVar:DBStatic:Mode$ Continuous | Affected$ Artifact.YouCtrl+Other | AddKeyword$ Hexproof & Indestructible | Description$ Other artifacts you control have hexproof and indestructible.
+Oracle:Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 8+.)\nSTATION 1+\nAt the beginning of combat on your turn, put your choice of a +1/+1 counter or two charge counters on up to one other target artifact.\nSTATION 8+\nFlying\nOther artifacts you control have hexproof and indestructible.

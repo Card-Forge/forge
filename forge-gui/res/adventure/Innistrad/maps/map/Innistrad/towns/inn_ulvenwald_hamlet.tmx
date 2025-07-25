@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="56">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../tileset/INN_dungen_crawler_tileset.tsx"/>
+ <tileset firstgid="24193" source="../../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="34305" source="../../../tileset/inn_main.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyVlf1WgzAMxTumw83BA1mOjwboce6L8chqckgOd3ft1D9yUlrozS9NwxhDGMXKJoQP8TuxN7FPsZXMfb9MtpfnQ5w9jtkHGPfw/CX7VLLnYzPtrZoPZj53tHhcN/yi0yfmD6Rf2r5L8Sfx5zjrazyqtxBfG2+X2FPXeA7ZmFt9K7ZpppxWxrc0XdUrwBfNLW+wXOT2P9A6xqU5fRbbiq1N8xJn1sK4+zjrYi6Rd6S9R1v3eFj33XKsXjWHeM2r3+pcZ98MpMFn7FqoyTG2pqnMT8a8t3eQdyCrbT53jrmceL4q01Ltk+mvm1ve3D0KidodEjWAMemz3qUd6F2sppm3g/PFffeg5RoDvcO8ztECa0V17Lyu3Sf2RW0/U48j10dcd2O5Vt5lgtdrCw17Ca8Nd+JzhtbqujJbZHj5/nbxupcg57077TnRM95a79Kz9ZiYl2sLOVk/QJyp/uLMF8pDjtf7Zf2arjOsAR8jIzLremU9cmUaI+n7e5xb1MCaQd5cLx2tlj1nOneM1/puNeSd65jjcV5mReayme9wCb3rL2P9X//3Gx//AK1XMOI=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBh4UMeLnU0L80cBbpDOOrztPc3CwKCLhE8hsc+wYHFXN3Xsxec/mByy21jY8JunjsY/Soa9aayYdmWyYg8HUgHMXmz2w8TQ7cKnBxtQwyKWyYoZrzB8Ai3eM9DUZlEhDbZbMzB0WKOKofuHFmkdZu89oD/us0DY6OFLbtxiC2dke2F2I/sd3Y+44hoGLnCS5iaYXTD7cNkLs1uXjDg+SIJ7aFl+4au7KLEXAA88LHc=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJz7w8/A8BeI6QXOc0LoWQIMDLMFIOwmXlS54QwGsx9vT2dguDOdfvZVzkDlK/DRz25iwE0iw4JWcSpFZHhU8+KWu67NwHADiKtm4FZDC3APGHb3kcKvDo/9FUhyt+iY/kgFpMYzevomBlygcfmghJSmbgLTxS1t3GopSdcyONIuKB08AMbxQ6R4poWfy0kM+zhgHRiPVA/Sq5z+g1T/IttJa/sBcL4onQ==
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYMAPQviJEyPWjAucuNXhksOnR52FgUERiOWBWAEJg8TIBbj8dx7JHXuB5u8H4mhWBoYYIN4DZO8D4kggW40Iu+XxuNV2OgOD3XTsauOA5seyQsR7OSD2w+zeT4S9e6FqiVGfADX7IBCnsmLKJ0P9ngSVQw83GB/k/ihWiDkpSOrxgWgkf9pMx24+IXAI6s/jaP7saMPOP48nnZECQG4H+RNbmMGACgv2dILuNkqBAzDsHJHSEihMjrCg2oXN3zZIekDy5IaNHlRvAlK8I5tFrTBHBqSGIbp65PIGV9kVCxSPA+J4ItMkNn9iE8NX1oHAb6B9f4D4K9TeJl7s6nClcWTgBIxj5+moYrjiY6YAA8N0IJ4tgN999ATIcUMoHZGaJgjFAz6Ar5yiRXonxX4YAACfCUZd
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../common/maps/obj/entry_up.tx" x="240" y="272"/>
+  <object id="42" template="../../../../../common/maps/obj/shop.tx" x="303.485" y="113.122" width="18.3333" height="15.1212">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Human,Werewolf"/>
+   </properties>
+  </object>
+  <object id="43" template="../../../../../common/maps/obj/shop.tx" x="351.515" y="160.576" width="17.9394" height="14.5758">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Human,Werewolf"/>
+   </properties>
+  </object>
+  <object id="46" template="../../../../../common/maps/obj/shop.tx" x="369.878" y="224.394" width="29.6667" height="14.394">
+   <properties>
+    <property name="shopList" value="Equipment"/>
+   </properties>
+  </object>
+  <object id="51" template="../../../../../common/maps/obj/inn.tx" x="127.849" y="160.031" width="31.9394" height="18.3636"/>
+  <object id="52" template="../../../../../common/maps/obj/quest.tx" x="174.545" y="79.6969" width="34.6364" height="18.3636"/>
+ </objectgroup>
+</map>

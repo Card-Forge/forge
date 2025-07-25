@@ -1,0 +1,322 @@
+//Rank|Name|Rarity|Set
+#1|Singularity Rupture|R|EOE
+#2|Zero Point Ballad|R|EOE
+#3|Celestial Colonnade|R|EOS
+#4|Astelli Reclaimer|R|EOE
+#5|Beyond the Quiet|R|EOE
+#6|Cosmogrand Zenith|M|EOE
+#7|Exalted Sunborn|M|EOE
+#8|Quantum Riddler|M|EOE
+#9|Ouroboroid|M|EOE
+#10|Creeping Tar Pit|R|EOS
+#11|Lavaclaw Reaches|R|EOS
+#12|Lumbering Falls|R|EOS
+#13|Raging Ravine|R|EOS
+#14|Elegy Acolyte|R|EOE
+#15|Mightform Harmonizer|R|EOE
+#16|Alpharael, Stonechosen|M|EOE
+#17|Biotech Specialist|R|EOE
+#18|Genemorph Imago|R|EOE
+#19|The Endstone|M|EOE
+#20|Lumen-Class Frigate|R|EOE
+#21|Xu-Ifit, Osteoharmonist|R|EOE
+#22|Syr Vondam, Sunstar Exemplar|R|EOE
+#23|Starwinder|R|EOE
+#24|Stirring Wildwood|R|EOS
+#25|Sunstar Chaplain|R|EOE
+#26|Warmaker Gunship|R|EOE
+#27|Frenzied Baloth|R|EOE
+#28|Mutinous Massacre|R|EOE
+#29|Extinguisher Battleship|R|EOE
+#30|Anticausal Vestige|R|EOE
+#31|Tezzeret, Cruel Captain|M|EOE
+#32|All-Fates Stalker|U|EOE
+#33|Haliya, Guided by Light|R|EOE
+#34|The Seriema|R|EOE
+#35|Starfield Shepherd|U|EOE
+#36|Starfield Vocalist|R|EOE
+#37|Synthesizer Labship|R|EOE
+#38|Archenemy's Charm|R|EOE
+#39|Nova Hellkite|R|EOE
+#40|Pain for All|R|EOE
+#41|Possibility Technician|R|EOE
+#42|Rust Harvester|R|EOE
+#43|Bioengineered Future|R|EOE
+#44|Dyadrine, Synthesis Amalgam|R|EOE
+#45|Infinite Guideline Station|R|EOE
+#46|Sami, Wildcat Captain|M|EOE
+#47|Syr Vondam, the Lucent|U|EOE
+#48|Dawnsire, Sunstar Dreadnought|M|EOE
+#49|The Dominion Bracelet|M|EOE
+#50|Thrumming Hivepool|R|EOE
+#51|Hardlight Containment|R|EOE
+#52|Devastating Onslaught|M|EOE
+#53|Pinnacle Emissary|R|EOE
+#54|Station Monitor|U|EOE
+#55|Memorial Vault|R|EOE
+#56|Tannuk, Steadfast Second|M|EOE
+#57|Green Sun's Zenith|M|SPG
+#58|Nexus of Fate|M|SPG
+#59|Ancient Tomb|M|EOS
+#60|Blinkmoth Nexus|R|EOS
+#61|Hissing Quagmire|R|EOS
+#62|Shambling Vent|R|EOS
+#63|Pulsar Squadron Ace|U|EOE
+#64|Rescue Skiff|U|EOE
+#65|Sunstar Expansionist|U|EOE
+#66|Monoist Circuit-Feeder|U|EOE
+#67|Famished Worldsire|M|EOE
+#68|Biomechan Engineer|U|EOE
+#69|Interceptor Mechan|U|EOE
+#70|Steelswarm Operator|U|EOE
+#71|Edge Rover|U|EOE
+#72|Banishing Light|C|EOE
+#73|Emergency Eject|U|EOE
+#74|Scout for Survivors|U|EOE
+#75|Emissary Escort|R|EOE
+#76|Mm'menon, the Right Hand|R|EOE
+#77|Specimen Freighter|U|EOE
+#78|Weftwalking|M|EOE
+#79|Tragic Trajectory|U|EOE
+#80|Memorial Team Leader|U|EOE
+#81|Terrapact Intimidator|U|EOE
+#82|Alpharael, Dreaming Acolyte|U|EOE
+#83|Seedship Broodtender|U|EOE
+#84|Tannuk, Memorial Ensign|U|EOE
+#85|Survey Mechan|U|EOE
+#86|Lightstall Inquisitor|R|EOE
+#87|Cerebral Download|U|EOE
+#88|Desculpting Blast|U|EOE
+#89|Invasive Maneuvers|U|EOE
+#90|Sledge-Class Seedship|R|EOE
+#91|Haliya, Ascendant Cadet|U|EOE
+#92|Secluded Starforge|R|EOE
+#93|Meltstrider's Resolve|U|EOE
+#94|Mm'menon, Uthros Exile|U|EOE
+#95|Needle Spires|R|EOS
+#96|Wandering Fumarole|R|EOS
+#97|Timeline Culler|U|EOE
+#98|Umbral Collar Zealot|U|EOE
+#99|Voidforged Titan|U|EOE
+#100|Plasma Bolt|C|EOE
+#101|Weftstalker Ardent|U|EOE
+#102|Sami, Ship's Engineer|U|EOE
+#103|Bygone Colossus|U|EOE
+#104|Honor|U|EOE
+#105|Rayblade Trooper|U|EOE
+#106|Mechan Assembler|U|EOE
+#107|Tractor Beam|U|EOE
+#108|Dubious Delicacy|U|EOE
+#109|Lightless Evangel|U|EOE
+#110|Atmospheric Greenhouse|U|EOE
+#111|Close Encounter|U|EOE
+#112|Icetill Explorer|R|EOE
+#113|Meltstrider Eulogist|U|EOE
+#114|Glacier Godmaw|U|EOE
+#115|Seam Rip|U|EOE
+#116|Sunstar Lightsmith|U|EOE
+#117|Codecracker Hound|U|EOE
+#118|Cryoshatter|C|EOE
+#119|Gigastorm Titan|U|EOE
+#120|Depressurize|C|EOE
+#121|Vote Out|U|EOE
+#122|Bombard|C|EOE
+#123|Molecular Modifier|U|EOE
+#124|Vaultguard Trooper|U|EOE
+#125|Diplomatic Relations|C|EOE
+#126|Reroute Systems|U|EOE
+#127|Consult the Star Charts|R|EOE
+#128|Chorale of the Void|R|EOE
+#129|Fell Gravship|U|EOE
+#130|Gravkill|C|EOE
+#131|Virus Beetle|C|EOE
+#132|Kavaron Harrier|U|EOE
+#133|Broodguard Elite|U|EOE
+#134|Harmonious Grovestrider|U|EOE
+#135|Terrasymbiosis|R|EOE
+#136|Ragost, Deft Gastronaut|R|EOE
+#137|All-Fates Scroll|U|EOE
+#138|Breeding Pool|R|EOE
+#139|Godless Shrine|R|EOE
+#140|Sacred Foundry|R|EOE
+#141|Stomping Ground|R|EOE
+#142|Watery Grave|R|EOE
+#143|Luxknight Breacher|C|EOE
+#144|Wedgelight Rammer|U|EOE
+#145|Entropic Battlecruiser|R|EOE
+#146|Full Bore|U|EOE
+#147|Loading Zone|R|EOE
+#148|Dauntless Scrapbot|U|EOE
+#149|Faller's Faithful|U|EOE
+#150|Dawnstrike Vanguard|U|EOE
+#151|Swarm Culler|C|EOE
+#152|Orbital Plunge|C|EOE
+#153|Gene Pollinator|C|EOE
+#154|Intrepid Tenderfoot|C|EOE
+#155|Seedship Agrarian|U|EOE
+#156|Bonders' Enclave|R|EOS
+#157|Inkmoth Nexus|M|EOS
+#158|Inventors' Fair|M|EOS
+#159|Mutavault|M|EOS
+#160|Reflecting Pool|M|EOS
+#161|Sunken Citadel|R|EOS
+#162|Illvoi Galeblade|C|EOE
+#163|Mouth of the Storm|U|EOE
+#164|Starbreach Whale|C|EOE
+#165|Cut Propulsion|U|EOE
+#166|Kav Landseeker|C|EOE
+#167|Roving Actuator|U|EOE
+#168|Ruinous Rampage|U|EOE
+#169|Weapons Manufacturing|R|EOE
+#170|Eusocial Engineering|U|EOE
+#171|Seedship Impact|U|EOE
+#172|Nutrient Block|C|EOE
+#173|Virulent Silencer|U|EOE
+#174|Dual-Sun Technique|U|EOE
+#175|Honored Knight-Captain|U|EOE
+#176|Uthros Scanship|U|EOE
+#177|Hylderblade|U|EOE
+#178|Drix Fatemaker|C|EOE
+#179|Larval Scoutlander|U|EOE
+#180|Atomic Microsizer|U|EOE
+#181|Pinnacle Kill-Ship|C|EOE
+#182|Exosuit Savior|C|EOE
+#183|Illvoi Infiltrator|U|EOE
+#184|Scour for Scrap|U|EOE
+#185|Scrounge for Eternity|U|EOE
+#186|Susurian Voidborn|U|EOE
+#187|Territorial Bruntar|U|EOE
+#188|Lashwhip Predator|U|EOE
+#189|Starfighter Pilot|C|EOE
+#190|Mechanozoa|C|EOE
+#191|Unravel|U|EOE
+#192|Decode Transmissions|C|EOE
+#193|Hullcarver|C|EOE
+#194|Galvanizing Sawship|U|EOE
+#195|Red Tiger Mechan|C|EOE
+#196|Remnant Elemental|U|EOE
+#197|Systems Override|U|EOE
+#198|Fungal Colossus|C|EOE
+#199|Galactic Wayfarer|C|EOE
+#200|Sami's Curiosity|C|EOE
+#201|Tapestry Warden|U|EOE
+#202|Wurmwall Sweeper|C|EOE
+#203|Command Bridge|C|EOE
+#204|Focus Fire|C|EOE
+#205|Radiant Strike|C|EOE
+#206|Cryogen Relic|C|EOE
+#207|Mechan Navigator|U|EOE
+#208|Uthros Psionicist|U|EOE
+#209|Hymn of the Faller|U|EOE
+#210|Melded Moxite|C|EOE
+#211|Auxiliary Boosters|C|EOE
+#212|Dockworker Drone|C|EOE
+#213|Dual-Sun Adepts|U|EOE
+#214|Knight Luminary|C|EOE
+#215|Weftblade Enhancer|C|EOE
+#216|Illvoi Operative|C|EOE
+#217|Lost in Space|C|EOE
+#218|Selfcraft Mechan|C|EOE
+#219|Beamsaw Prospector|C|EOE
+#220|Blade of the Swarm|U|EOE
+#221|Gravblade Heavy|C|EOE
+#222|Gravpack Monoist|C|EOE
+#223|Perigee Beckoner|C|EOE
+#224|Susurian Dirgecraft|U|EOE
+#225|Kavaron Turbodrone|C|EOE
+#226|Oreplate Pangolin|C|EOE
+#227|Zookeeper Mechan|C|EOE
+#228|Biosynthic Burst|C|EOE
+#229|Blooming Stinger|C|EOE
+#230|Eumidian Terrabotanist|U|EOE
+#231|Icecave Crasher|C|EOE
+#232|Pull Through the Weft|U|EOE
+#233|Thawbringer|C|EOE
+#234|Meteor Crater|R|EOS
+#235|Mystifying Maze|R|EOS
+#236|Starport Security|C|EOE
+#237|Embrace Oblivion|C|EOE
+#238|Insatiable Skittermaw|C|EOE
+#239|Debris Field Crusher|U|EOE
+#240|Hemosymbic Mite|U|EOE
+#241|Chrome Companion|C|EOE
+#242|Uthros, Titanic Godcore|M|EOE
+#243|Lithobraking|U|EOE
+#244|Brightspear Zealot|C|EOE
+#245|Flight-Deck Coordinator|C|EOE
+#246|Squire's Lightblade|C|EOE
+#247|Zealous Display|C|EOE
+#248|Cloudsculpt Technician|C|EOE
+#249|Divert Disaster|C|EOE
+#250|Illvoi Light Jammer|C|EOE
+#251|Mechan Shieldmate|C|EOE
+#252|Mental Modulation|C|EOE
+#253|Nanoform Sentinel|C|EOE
+#254|Comet Crawler|C|EOE
+#255|Dark Endurance|C|EOE
+#256|Monoist Sentry|U|EOE
+#257|Frontline War-Rager|C|EOE
+#258|Kavaron Skywarden|C|EOE
+#259|Nebula Dragon|C|EOE
+#260|Rig for War|C|EOE
+#261|Slagdrill Scrapper|C|EOE
+#262|Germinating Wurm|C|EOE
+#263|Meltstrider's Gear|C|EOE
+#264|Skystinger|C|EOE
+#265|Thaumaton Torpedo|C|EOE
+#266|Grove of the Burnwillows|M|EOS
+#267|Shattered Wings|C|EOE
+#268|Sinister Cryologist|C|EOE
+#269|Drill Too Deep|C|EOE
+#270|Annul|U|EOE
+#271|Sothera, the Supervoid|M|EOE
+#272|Sunset Saboteur|R|EOE
+#273|Temporal Intervention|C|EOE
+#274|Cosmogoyf|R|EOE
+#275|Adagia, Windswept Bastion|M|EOE
+#276|Evendo, Waking Haven|M|EOE
+#277|Kavaron, Memorial World|M|EOE
+#278|Susur Secundi, Void Altar|M|EOE
+#279|Pinnacle Starcage|R|EOE
+#280|Requiem Monolith|R|EOE
+#281|Space-Time Anomaly|R|EOE
+#282|Terminal Velocity|R|EOE
+#283|Sliver Overlord|M|SPG
+#284|Contested War Zone|R|EOS
+#285|Mana Confluence|M|EOS
+#286|Cathedral of War|R|EOS
+#287|Deserted Temple|M|EOS
+#288|Mirrorpool|M|EOS
+#289|Lotus Field|M|EOS
+#290|Plaza of Heroes|M|EOS
+#291|Swarmyard|R|EOS
+#292|The Eternity Elevator|R|EOE
+#293|Moonlit Meditation|R|EOE
+#294|Burgeoning|M|SPG
+#295|Magus of the Moon|M|SPG
+#296|Darkness|M|SPG
+#297|Paradox Haze|M|SPG
+#298|Robe of Stars|M|SPG
+#299|Deafening Silence|M|SPG
+#300|Warping Wail|M|SPG
+#301|Cascading Cataracts|R|EOS
+#302|Crystal Quarry|R|EOS
+#303|Dust Bowl|M|EOS
+#304|Echoing Deeps|R|EOS
+#305|Eldrazi Temple|R|EOS
+#306|Endless Sands|R|EOS
+#307|Gemstone Caverns|M|EOS
+#308|High Market|R|EOS
+#309|Nesting Grounds|R|EOS
+#310|Petrified Field|M|EOS
+#311|Power Depot|R|EOS
+#312|Scavenger Grounds|R|EOS
+#313|Terrain Generator|R|EOS
+#314|Thespian's Stage|R|EOS
+#315|Strip Mine|M|EOS
+#316|Blast Zone|R|EOS
+#317|Plains|C|EOE
+#318|Island|C|EOE
+#319|Swamp|C|EOE
+#320|Mountain|C|EOE
+#321|Forest|C|EOE

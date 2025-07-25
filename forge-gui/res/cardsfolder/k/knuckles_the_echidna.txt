@@ -1,0 +1,14 @@
+Name:Knuckles the Echidna
+ManaCost:2 R R
+Types:Legendary Creature Echidna Warrior
+PT:2/4
+K:Double Strike
+K:Trample
+K:Haste
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, create a Treasure token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | PresentCompare$ GE30 | IsPresent$ Artifact.YouCtrl | Execute$ TrigWinsGame | TriggerZones$ Battlefield | TriggerDescription$ Treasure Hunter — At the beginning of your upkeep, if you control thirty or more artifacts, you win the game.
+SVar:TrigWinsGame:DB$ WinsGame | Defined$ You
+DeckHas:Ability$Token
+DeckHints:Type$Artifact
+Oracle:Double strike, trample, haste\nWhenever one or more creatures you control deal combat damage to a player, create a Treasure token.\nTreasure Hunter — At the beginning of your upkeep, if you control thirty or more artifacts, you win the game.

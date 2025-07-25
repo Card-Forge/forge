@@ -1,0 +1,7 @@
+Name:Lashwhip Predator
+ManaCost:4 G G
+Types:Creature Plant Beast
+PT:5/7
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | IsPresent$ Creature.OppCtrl | PresentCompare$ GE3 | Description$ This spell costs {2} less to cast if your opponents control three or more creatures.
+K:Reach
+Oracle:This spell costs {2} less to cast if your opponents control three or more creatures.\nReach

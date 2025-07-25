@@ -3,5 +3,5 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ Combo W U | SpellDescription$ Add {W} or {U}.
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBTap | ReplacementResult$ Updated | Description$ As CARDNAME enters, you may reveal a Plains or Island card from your hand. If you don't, CARDNAME enters tapped.
-SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Plains,Island/Plains or Island> | UnlessPayer$ You | StackDescription$ enters tapped.
+SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Plains;Island/Plains or Island> | UnlessPayer$ You | StackDescription$ enters tapped.
 Oracle:As Port Town enters, you may reveal a Plains or Island card from your hand. If you don't, Port Town enters tapped.\n{T}: Add {W} or {U}.

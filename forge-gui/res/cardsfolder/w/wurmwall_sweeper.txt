@@ -1,0 +1,9 @@
+Name:Wurmwall Sweeper
+ManaCost:2
+Types:Artifact Spacecraft
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When this Spacecraft enters, surveil 2.
+SVar:TrigSurveil:DB$ Surveil | Defined$ You | Amount$ 2
+K:Station:4
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE4_CHARGE | AddType$ Creature | AddKeyword$ Flying | Description$ STATION 4+ Flying
+Oracle:When this Spacecraft enters, surveil 2.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 4+.)\nSTATION 4+\nFlying

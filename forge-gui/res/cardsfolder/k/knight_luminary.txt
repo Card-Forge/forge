@@ -1,0 +1,8 @@
+Name:Knight Luminary
+ManaCost:3 W
+Types:Creature Human Knight
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a 1/1 white Human Soldier creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_human_soldier | TokenOwner$ You
+K:Warp:1 W
+Oracle:When this creature enters, create a 1/1 white Human Soldier creature token.\nWarp {1}{W} (You may cast this card from your hand for its warp cost. Exile this enchantment at the beginning of the next end step, then you may cast it from exile on a later turn.)
