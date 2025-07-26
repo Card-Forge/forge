@@ -1,9 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.AiPlayDecision;
-import forge.ai.ComputerUtil;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -36,8 +33,16 @@ public class DiscoverAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        return mandatory || checkApiLogic(ai, sa);
+    protected AiAbilityDecision doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
+        if (mandatory) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        if (checkApiLogic(ai, sa)) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
     }
 
     @Override

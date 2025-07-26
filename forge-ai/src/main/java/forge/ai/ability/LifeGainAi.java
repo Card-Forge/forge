@@ -216,13 +216,13 @@ public class LifeGainAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
+    protected AiAbilityDecision doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
         // If the Target is gaining life, target self.
         // if the Target is modifying how much life is gained, this needs to be
         // handled better
         if (sa.usesTargeting()) {
             if (!target(ai, sa, mandatory)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
         }
 
@@ -233,11 +233,11 @@ public class LifeGainAi extends SpellAbilityAi {
             sa.setXManaCostPaid(xPay);
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
     
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
     	return doTriggerAINoCost(ai, sa, true);
     }
 

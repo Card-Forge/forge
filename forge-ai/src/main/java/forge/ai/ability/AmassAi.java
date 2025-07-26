@@ -3,6 +3,8 @@ package forge.ai.ability;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -28,9 +30,7 @@ public class AmassAi extends SpellAbilityAi {
             return aiArmies.anyMatch(CardPredicates.canReceiveCounters(CounterEnumType.P1P1));
         }
         final String type = sa.getParam("Type");
-        StringBuilder sb = new StringBuilder("b_0_0_");
-        sb.append(sa.getOriginalParam("Type").toLowerCase()).append("_army");
-        final String tokenScript = sb.toString();
+        final String tokenScript = "b_0_0_" + sa.getOriginalParam("Type").toLowerCase() + "_army";
         final int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Num", "1"), sa);
 
         Card token = TokenInfo.getProtoType(tokenScript, sa, ai, false);
@@ -82,8 +82,9 @@ public class AmassAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        return mandatory || checkApiLogic(ai, sa);
+    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        boolean result = mandatory || checkApiLogic(ai, sa);
+        return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override

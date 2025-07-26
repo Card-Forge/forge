@@ -435,7 +435,7 @@ public class PumpAi extends PumpAiBase {
             } else if (sa.getParam("AILogic").equals("SacOneEach")) {
                 // each player sacrifices one permanent, e.g. Vaevictis, Asmadi the Dire - grab the worst for allied and
                 // the best for opponents
-                return SacrificeAi.doSacOneEachLogic(ai, sa);
+                return SacrificeAi.doSacOneEachLogic(ai, sa).willingToPlay();
             } else if (sa.getParam("AILogic").equals("Destroy")) {
                 List<Card> tgts = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
                 if (tgts.isEmpty()) {
@@ -628,7 +628,7 @@ public class PumpAi extends PumpAiBase {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final SpellAbility root = sa.getRootAbility();
         final String numDefense = sa.getParamOrDefault("NumDef", "");
         final String numAttack = sa.getParamOrDefault("NumAtt", "");
@@ -667,17 +667,17 @@ public class PumpAi extends PumpAiBase {
 
         if (!sa.usesTargeting()) {
             if (mandatory) {
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else {
-            return pumpTgtAI(ai, sa, defense, attack, mandatory, true);
+            boolean result = pumpTgtAI(ai, sa, defense, attack, mandatory, true);
+            return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
-
-        return true;
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
         final SpellAbility root = sa.getRootAbility();
         final Card source = sa.getHostCard();
 
@@ -700,10 +700,10 @@ public class PumpAi extends PumpAiBase {
                         continue; // in case the calculation gets messed up somewhere
                     }
                     root.setSVar("EnergyToPay", "Number$" + minus);
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         int attack;
@@ -735,17 +735,25 @@ public class PumpAi extends PumpAiBase {
         }
 
         if (sa.usesTargeting()) {
-            return pumpTgtAI(ai, sa, defense, attack, false, true);
+            if (pumpTgtAI(ai, sa, defense, attack, false, true)) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
         }
 
         if (source.isCreature()) {
             if (!source.hasKeyword(Keyword.INDESTRUCTIBLE) && source.getNetToughness() + defense <= source.getDamage()) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
-            return source.getNetToughness() + defense > 0;
+            if (source.getNetToughness() + defense > 0) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override

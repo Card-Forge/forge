@@ -1,6 +1,8 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
@@ -24,9 +26,9 @@ import java.util.function.Predicate;
 public class CountersRemoveAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayWithoutRestrict(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision canPlayWithoutRestrict(final Player ai, final SpellAbility sa) {
         if ("Always".equals(sa.getParam("AILogic"))) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         return super.canPlayWithoutRestrict(ai, sa);
     }
@@ -351,11 +353,14 @@ public class CountersRemoveAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         if (sa.usesTargeting()) {
-            return doTgt(aiPlayer, sa, mandatory);
+            boolean canTarget = doTgt(aiPlayer, sa, mandatory);
+            return canTarget ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
+                             : new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
-        return mandatory;
+        return mandatory ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
+                         : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     /*

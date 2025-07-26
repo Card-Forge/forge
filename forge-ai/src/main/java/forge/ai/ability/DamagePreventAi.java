@@ -1,9 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
@@ -24,7 +21,7 @@ import java.util.List;
 public class DamagePreventAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
@@ -33,7 +30,7 @@ public class DamagePreventAi extends SpellAbilityAi {
         final Cost cost = sa.getPayCosts();
 
         if (!willPayCosts(ai, sa, cost, hostCard)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
         }
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -70,7 +67,7 @@ public class DamagePreventAi extends SpellAbilityAi {
                     chance = flag;
                 } else { // if nothing on the stack, and it's not declare
                          // blockers. no need to prevent
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }
         } // non-targeted
@@ -120,7 +117,7 @@ public class DamagePreventAi extends SpellAbilityAi {
                 targetables = CardLists.getTargetableCards(targetables, sa);
 
                 if (targetables.isEmpty()) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
                 final CardCollection combatants = CardLists.filter(targetables, CardPredicates.CREATURES);
                 ComputerUtilCard.sortByEvaluateCreature(combatants);
@@ -137,11 +134,15 @@ public class DamagePreventAi extends SpellAbilityAi {
             sa.addDividedAllocation(sa.getTargets().get(0), AbilityUtils.calculateAmount(hostCard, sa.getParam("Amount"), sa));
         }
 
-        return chance;
+        if (chance) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         boolean chance = false;
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
@@ -151,7 +152,11 @@ public class DamagePreventAi extends SpellAbilityAi {
             chance = preventDamageMandatoryTarget(ai, sa, mandatory);
         }
 
-        return chance;
+        if (chance) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else {
+            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
+        }
     }
 
     /**

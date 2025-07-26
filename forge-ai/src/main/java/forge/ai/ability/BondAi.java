@@ -17,6 +17,8 @@
  */
 package forge.ai.ability;
 
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
@@ -46,8 +48,8 @@ public final class BondAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        return true;
+    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     } // end bondCanPlayAI()
 
     @Override
@@ -56,7 +58,7 @@ public final class BondAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
-        return true;
+    protected AiAbilityDecision doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 }

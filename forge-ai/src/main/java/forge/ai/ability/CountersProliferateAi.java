@@ -72,24 +72,31 @@ public class CountersProliferateAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         boolean chance = true;
 
         // TODO Make sure Human has poison counters or there are some counters
         // we want to proliferate
-        return chance;
+        return new AiAbilityDecision(
+            chance ? 100 : 0,
+            chance ? AiPlayDecision.WillPlay : AiPlayDecision.CantPlayAi
+        );
     }
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
         if ("Always".equals(sa.getParam("AILogic"))) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        return checkApiLogic(ai, sa);
+        if (checkApiLogic(ai, sa)) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     /*

@@ -2,6 +2,8 @@ package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
@@ -15,17 +17,17 @@ import java.util.Map;
 
 public class ChoosePlayerAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        return true;
+    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
         return canPlayAI(ai, sa);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         return canPlayAI(ai, sa);
     }
 

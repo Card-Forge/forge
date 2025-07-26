@@ -1,8 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -86,36 +84,36 @@ public class GoadAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (checkApiLogic(ai, sa)) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         if (!mandatory) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
         if (sa.usesTargeting()) {
             if (sa.getTargetRestrictions().canTgtPlayer()) {
                 for (Player opp : ai.getOpponents()) {
                     if (sa.canTarget(opp)) {
                         sa.getTargets().add(opp);
-                        return true;
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                     }
                 }
                 if (sa.canTarget(ai)) {
                     sa.getTargets().add(ai);
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             } else {
                 List<Card> list = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
 
                 if (list.isEmpty())
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
 
                 sa.getTargets().add(ComputerUtilCard.getWorstCreatureAI(list));
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
         }
-        return false;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
-
 }
+
