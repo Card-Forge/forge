@@ -53,7 +53,6 @@ public final class CardRules implements ICardCharacteristics {
     private boolean addsWildCardColor;
     private int setColorID;
     private boolean custom;
-    private String path;
 
     public CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
         splitType = altMode;
@@ -193,9 +192,6 @@ public final class CardRules implements ICardCharacteristics {
 
     public String getNormalizedName() { return normalizedName; }
     public void setNormalizedName(String filename) { normalizedName = filename; }
-
-    public String getPath() { return path; }
-    public void setPath(String path) { this.path = path; }
 
     public CardAiHints getAiHints() {
         return aiHints;
