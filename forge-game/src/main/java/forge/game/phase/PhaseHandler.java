@@ -1025,9 +1025,12 @@ public class PhaseHandler implements java.io.Serializable {
         startFirstTurn(goesFirst, null);
     }
     public void startFirstTurn(Player goesFirst, Runnable startGameHook) {
-        StopWatch sw = new StopWatch();
-
         setupFirstTurn(goesFirst, startGameHook);
+        mainGameLoop();
+    }
+
+    public void mainGameLoop() {
+        StopWatch sw = new StopWatch();
 
         // MAIN GAME LOOP
         while (!game.isGameOver()) {
