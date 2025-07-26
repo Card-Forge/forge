@@ -15,6 +15,7 @@ import forge.card.PrintSheet;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
+import forge.gamemodes.limited.LimitedPlayer;
 import forge.gamemodes.limited.LimitedPoolType;
 import forge.model.CardBlock;
 import forge.model.FModel;
@@ -97,7 +98,7 @@ public class AdventureEventData implements Serializable {
         eventStatus = AdventureEventController.EventStatus.Available;
         registeredDeck = new Deck();
         format = selectedFormat;
-        if (format.equals(AdventureEventController.EventFormat.Draft)) {
+        if (format == AdventureEventController.EventFormat.Draft) {
             cardBlock = pickWeightedCardBlock();
             if (cardBlock == null)
                 return;
@@ -127,7 +128,7 @@ public class AdventureEventData implements Serializable {
                 r2.itemRewards = new String[]{"Challenge Coin"};
                 rewards[2] = r2;
             }
-        } else if (format.equals(AdventureEventController.EventFormat.Jumpstart)) {
+        } else if (format == AdventureEventController.EventFormat.Jumpstart) {
             int numPacksToPickFrom = 6;
             generateParticipants(7);
 
@@ -183,19 +184,19 @@ public class AdventureEventData implements Serializable {
                 Map<String, List<Deck>> colorMap = new HashMap<>();
                 for (Deck option : availableOptions) {
                     if (option.getTags().contains("black"))
-                        colorMap.getOrDefault("black", new ArrayList<Deck>()).add(option);
+                        colorMap.computeIfAbsent("black", (k) -> new ArrayList<>()).add(option);
                     if (option.getTags().contains("blue"))
-                        colorMap.getOrDefault("blue", new ArrayList<Deck>()).add(option);
+                        colorMap.computeIfAbsent("blue", (k) -> new ArrayList<>()).add(option);
                     if (option.getTags().contains("green"))
-                        colorMap.getOrDefault("green", new ArrayList<Deck>()).add(option);
+                        colorMap.computeIfAbsent("green", (k) -> new ArrayList<>()).add(option);
                     if (option.getTags().contains("red"))
-                        colorMap.getOrDefault("red", new ArrayList<Deck>()).add(option);
+                        colorMap.computeIfAbsent("red", (k) -> new ArrayList<>()).add(option);
                     if (option.getTags().contains("white"))
-                        colorMap.getOrDefault("white", new ArrayList<Deck>()).add(option);
+                        colorMap.computeIfAbsent("white", (k) -> new ArrayList<>()).add(option);
                     if (option.getTags().contains("multicolor"))
-                        colorMap.getOrDefault("multicolor", new ArrayList<Deck>()).add(option);
+                        colorMap.computeIfAbsent("multicolor", (k) -> new ArrayList<>()).add(option);
                     if (option.getTags().contains("colorless"))
-                        colorMap.getOrDefault("colorless", new ArrayList<Deck>()).add(option);
+                        colorMap.computeIfAbsent("colorless", (k) -> new ArrayList<>()).add(option);
                 }
 
                 done = false;
@@ -212,7 +213,7 @@ public class AdventureEventData implements Serializable {
                         if (picked.getTags().contains("colorless")) colorsAlreadyPicked.add("colorless");
                     }
 
-                    while (colorAdded.isEmpty() && colorsAlreadyPicked.size() > 0) {
+                    while (colorAdded.isEmpty() && !colorsAlreadyPicked.isEmpty()) {
                         String colorToTry = Aggregates.removeRandom(colorsAlreadyPicked);
                         for (Deck toCheck : availableOptions) {
                             if (toCheck.getTags().contains(colorToTry)) {
@@ -292,6 +293,8 @@ public class AdventureEventData implements Serializable {
         MyRandom.setRandom(getEventRandom());
         if (draft == null && (eventStatus == AdventureEventController.EventStatus.Available || eventStatus == AdventureEventController.EventStatus.Entered)) {
             draft = BoosterDraft.createDraft(LimitedPoolType.Block, getCardBlock(), packConfiguration);
+            registeredDeck = draft.getHumanPlayer().getDeck();
+            assignPlayerNames(draft);
         }
         if (packConfiguration == null) {
             packConfiguration = getBoosterConfiguration(getCardBlock());
@@ -462,6 +465,15 @@ public class AdventureEventData implements Serializable {
         }
 
         participants[numberOfOpponents] = getHumanPlayer();
+    }
+
+    private void assignPlayerNames(BoosterDraft draft) {
+        if(participants == null)
+            return;
+        draft.getHumanPlayer().setName(getHumanPlayer().getName());
+        LimitedPlayer[] opponents = draft.getOpposingPlayers();
+        for(int i = 0; i < Math.min(participants.length, opponents.length); i++)
+            opponents[i].setName(participants[i].getName());
     }
 
     private transient AdventureEventHuman humanPlayerInstance;

@@ -468,6 +468,7 @@ public class CardPool extends ItemPool<PaperCard> {
      * @param predicate the Predicate to apply to this CardPool
      * @return a new CardPool made from this CardPool with only the cards that agree with the provided Predicate
      */
+    @Override
     public CardPool getFilteredPool(Predicate<PaperCard> predicate) {
         CardPool filteredPool = new CardPool();
         for (PaperCard c : this.items.keySet()) {
