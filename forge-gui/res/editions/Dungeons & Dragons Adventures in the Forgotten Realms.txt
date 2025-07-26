@@ -2,7 +2,6 @@
 Code=AFR
 Date=2021-07-23
 Name=Dungeons & Dragons: Adventures in the Forgotten Realms
-Code2=AFR
 Type=Expansion
 ScryfallCode=AFR
 BoosterCovers=5
@@ -467,3 +466,9 @@ S Tomb of Annihilation
 13 guenhwyvar @Brian Valeza
 14 g_2_2_wolf @Daren Bader
 15 c_a_treasure_sac @Dan Murayama Scott
+
+[other]
+16 emblem_ellywick_tumblestrum @Anna Steinbauer
+17 emblem_lolth_spider_queen @Tyler Jacobson
+18 emblem_mordenkainen @Ryan Pancoast
+19 emblem_zariel_archduke_of_avernus @Heonhwa Choe

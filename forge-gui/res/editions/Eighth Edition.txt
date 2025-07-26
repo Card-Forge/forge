@@ -133,14 +133,17 @@ ScryfallCode=8ED
 119 C Bog Imp @Carl Critchlow
 120 U Bog Wraith @Dave Dorman
 121 U Carrion Wall @Tony Szczudlo
+121s U Carrion Wall @Pete Venters
 122 C Coercion @DiTerlizzi
 123 C Dark Banishing @Dermot Power
 124 R Death Pit Offering @Pete Venters
 125 R Death Pits of Rath @Joel Biske
+125s R Death Pits of Rath @Greg Hildebrandt & Tim Hildebrandt
 126 U Deathgazer @Donato Giancola
 127 C Deepwood Ghoul @Alan Pollack
 128 U Diabolic Tutor @Rick Farrell
 129 C Drudge Skeletons @Jim Nelson
+129s C Drudge Skeletons @Arnie Swekel
 130 C Dusk Imp @Edward P. Beard, Jr.
 131 R Eastern Paladin @Carl Critchlow
 132 U Execute @Gary Ruddell
@@ -367,8 +370,6 @@ S2 U Vengeance @Paolo Parente
 S3 C Giant Octopus @Heather Hudson
 S4 C Sea Eagle @Anthony S. Waters
 S5 R Vizzerdrix @Dave Dorman
+S5a R Vizzerdrix @Dave Dorman
 S6 U Enormous Baloth @Mark Tedin
 S7 U Silverback Ape @Ron Spears
-
-[tokens]
-r_4_4_bird_flying
