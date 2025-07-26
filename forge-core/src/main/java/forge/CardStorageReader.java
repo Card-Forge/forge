@@ -391,7 +391,9 @@ public class CardStorageReader {
         try (InputStream fileInputStream = java.nio.file.Files.newInputStream(file.toPath())) {
             reader.reset();
             final List<String> lines = readScript(fileInputStream);
-            return reader.readCard(lines, Files.getNameWithoutExtension(file.getName()));
+            CardRules rules = reader.readCard(lines, Files.getNameWithoutExtension(file.getName()));
+            rules.setPath(file.getPath());
+            return rules;
         } catch (final FileNotFoundException ex) {
             throw new RuntimeException("CardReader : run error -- file not found: " + file.getPath(), ex);
         } catch (final Exception ex) {
@@ -410,7 +412,9 @@ public class CardStorageReader {
     protected final CardRules loadCard(final CardRules.Reader rulesReader, final ZipEntry entry) {
         try (InputStream zipInputStream = this.zip.getInputStream(entry)) {
             rulesReader.reset();
-            return rulesReader.readCard(readScript(zipInputStream), Files.getNameWithoutExtension(entry.getName()));
+            CardRules rules = rulesReader.readCard(readScript(zipInputStream), Files.getNameWithoutExtension(entry.getName()));
+            rules.setPath(entry.getName());
+            return rules;
         } catch (final IOException exn) {
             throw new RuntimeException(exn);
         }
