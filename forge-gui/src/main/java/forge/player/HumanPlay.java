@@ -407,7 +407,7 @@ public class HumanPlay {
             }
             else if (part instanceof CostReveal) {
                 CostReveal costReveal = (CostReveal) part;
-                CardCollectionView list = CardLists.getValidCards(p.getCardsIn(costReveal.getRevealFrom()), part.getType(), p, source, sourceAbility);
+                CardCollectionView list = CardLists.getValidCards(p.getCardsIn(costReveal.getRevealFrom()), part.getType().split(";"), p, source, sourceAbility);
                 int amount = part.getAbilityAmount(sourceAbility);
                 boolean hasPaid = payCostPart(controller, p, sourceAbility, hcd.isEffect(), (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblReveal") + orString);
                 if (!hasPaid) { return false; }
@@ -514,6 +514,7 @@ public class HumanPlay {
                 hostCard.addExiledCard(d);
                 d.setExiledWith(hostCard);
                 d.setExiledBy(hostCard.getController());
+                d.setExiledSA(ability);
             }
         }
         if (ability.isOffering() && ability.getSacrificedAsOffering() != null) {

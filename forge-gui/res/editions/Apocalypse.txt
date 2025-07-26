@@ -30,7 +30,7 @@ ScryfallCode=APC
 16 C Shield of Duty and Reason @Anthony S. Waters
 17 R Spectral Lynx @Heather Hudson
 18 C Standard Bearer @Ron Spencer
-19 C Ceta Disciple @Greg Hildebrandt & Tim Hildebrandt
+19 C Ceta Disciple @Greg Hildebrandt
 20 U Ceta Sanctuary @Franz Vohwinkel
 21 R Cetavolver @Gary Ruddell
 22 C Coastal Drake @John Gallagher
@@ -72,7 +72,7 @@ ScryfallCode=APC
 58 U Bloodfire Kavu @Greg Staples
 59 R Desolation Giant @Alan Pollack
 60 C Dwarven Landslide @Tony Szczudlo
-61 U Dwarven Patrol @Greg Hildebrandt & Tim Hildebrandt
+61 U Dwarven Patrol @Greg Hildebrandt
 62 U Goblin Ringleader @Mark Romanoski
 63 U Illuminate @Christopher Moeller
 64 C Kavu Glider @Heather Hudson
@@ -126,7 +126,7 @@ ScryfallCode=APC
 112 R Mystic Snake @Daren Bader
 113 R Overgrown Estate @Brian Snõddy
 114 R Pernicious Deed @Christopher Moeller
-115 R Powerstone Minefield @Greg Hildebrandt & Tim Hildebrandt
+115 R Powerstone Minefield @Greg Hildebrandt
 116 R Prophetic Bolt @Dave Dorman
 117 C Putrid Warrior @Ray Lago
 118 C Quicksilver Dagger @Alex Horley-Orlandelli
@@ -155,11 +155,3 @@ ScryfallCode=APC
 141 R Llanowar Wastes @Rob Alexander
 142 R Shivan Reef @Rob Alexander
 143 R Yavimaya Coast @Anthony S. Waters
-
-[tokens]
-b_3_3_angel_flying
-b_2_1_cat
-b_3_3_kavu
-b_6_6_wurm_trample
-g_1_1_saproling
-rw_1_1_goblin_soldier

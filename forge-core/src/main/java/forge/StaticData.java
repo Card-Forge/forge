@@ -791,8 +791,7 @@ public class StaticData {
 
             Map<String, Pair<Boolean, Integer>> cardCount = new HashMap<>();
             List<CompletableFuture<?>> futures = new ArrayList<>();
-            
-            for (CardEdition.EditionEntry c : e.getAllCardsInSet()) {
+            for (CardEdition.EditionEntry c : e.getObtainableCards()) {
                 int amount = 1;
 
                 if (cardCount.containsKey(c.name())) {

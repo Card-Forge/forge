@@ -1,0 +1,7 @@
+Name:Merciless Enforcers
+ManaCost:1 B
+Types:Creature Human Mercenary Villain
+PT:2/1
+K:Lifelink
+A:AB$ DealDamage | Defined$ Opponent | NumDmg$ 1 | Cost$ 3 B | SpellDescription$ This creature deals 1 damage to each opponent.
+Oracle:Lifelink\n{3}{B}: This creature deals 1 damage to each opponent.
