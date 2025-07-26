@@ -1,11 +1,11 @@
 bonegolem.png
-size: 84,16
+size: 80,16
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none          
 Avatar
   xy: 64, 0
-  size: 20, 16      
+  size: 16, 16
 Idle 
   xy: 0, 0
   size: 16, 16      

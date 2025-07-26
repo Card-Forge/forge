@@ -1,11 +1,11 @@
 bat.png
-size: 80,72
+size: 96,72
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none  
 Avatar        
-  xy: 66, 1
-  size: 12, 9     
+  xy: 80, 0
+  size: 16, 16
 Idle
   xy: 0, 0
   size: 16, 16  

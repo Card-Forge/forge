@@ -1,11 +1,11 @@
 sandelemental.png
-size: 96,32
+size: 80,16
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none          
 Avatar
-  xy: 65, 0
-  size: 31, 32     
+  xy: 64, 0
+  size: 16, 16
 Idle 
   xy: 0, 0
   size: 16, 16   
