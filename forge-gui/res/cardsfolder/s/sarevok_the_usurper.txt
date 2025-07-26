@@ -20,7 +20,7 @@ K:First Strike
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control gains first strike and gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +X | KW$ First Strike
 SVar:X:Count$ValidGraveyard Creature.YouOwn
-DeckHas:Ability$Graveyard & Keyword$FirstStrike
+DeckHas:Ability$Graveyard & Keyword$First Strike
 Oracle:First strike\nAt the beginning of combat on your turn, target creature you control gains first strike and gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
 
 SPECIALIZE:BLUE

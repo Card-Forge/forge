@@ -5,5 +5,5 @@ PT:3/3
 K:Flash
 K:Haste
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+ThisTurnEntered | AddKeyword$ Double Strike | Description$ Flesh Hooks — Creatures you control that entered this turn have double strike.
-DeckHas:Keyword$DoubleStrike
+DeckHas:Keyword$Double Strike
 Oracle:Flash\nHaste\nFlesh Hooks — Creatures you control that entered this turn have double strike.
