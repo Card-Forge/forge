@@ -131,6 +131,19 @@ public class CostPayment extends ManaConversionMatrix {
         new ManaRefundService(this.ability).refundManaPaid();
     }
 
+    private void payPhyrexianLife(final CostDecisionMakerBase decisionMaker) {
+        int phyLifeToPay = cost.getPhyLifeToPay();
+        if(phyLifeToPay > 0) {
+            decisionMaker.getPlayer().payLife(phyLifeToPay, ability, cost.getIsPhyLifeToPayForEffect());
+            this.clearPhyrexianLifeToPay(decisionMaker);
+        }
+    }
+
+    private void clearPhyrexianLifeToPay(final CostDecisionMakerBase decisionMaker) {
+        this.getCost().setPhyLifeToPay(0);
+        this.getCost().setIsPhyLifeToPayForEffect(false);
+    }
+
     public boolean payCost(final CostDecisionMakerBase decisionMaker) {
         adjustedCost = CostAdjustment.adjust(cost, ability, decisionMaker.isEffect());
         List<CostPart> costParts = adjustedCost.getCostPartsWithZeroMana();
@@ -155,6 +168,7 @@ public class CostPayment extends ManaConversionMatrix {
 
             if (pd == null || !part.payAsDecided(decisionMaker.getPlayer(), pd, ability, decisionMaker.isEffect())) {
                 game.costPaymentStack.pop(); // cost is resolved
+                this.clearPhyrexianLifeToPay(decisionMaker);
                 return false;
             }
             this.paidCostParts.add(part);
@@ -168,6 +182,7 @@ public class CostPayment extends ManaConversionMatrix {
             }
         }
 
+        this.payPhyrexianLife(decisionMaker);
         return true;
     }
 
@@ -188,12 +203,16 @@ public class CostPayment extends ManaConversionMatrix {
 
         for (final CostPart part : parts) {
             PaymentDecision decision = part.accept(decisionMaker);
-            if (null == decision) return false;
+            if (null == decision) {
+                this.clearPhyrexianLifeToPay(decisionMaker);
+                return false;
+            }
 
             // wrap the payment and push onto the cost stack
             game.costPaymentStack.push(part, this);
             if (decisionMaker.paysRightAfterDecision() && !part.payAsDecided(decisionMaker.getPlayer(), decision, ability, decisionMaker.isEffect())) {
                 game.costPaymentStack.pop(); // cost is resolved
+                this.clearPhyrexianLifeToPay(decisionMaker);
                 return false;
             }
 
@@ -207,6 +226,7 @@ public class CostPayment extends ManaConversionMatrix {
 
             if (!part.payAsDecided(decisionMaker.getPlayer(), decisions.get(part), this.ability, decisionMaker.isEffect())) {
                 game.costPaymentStack.pop(); // cost is resolved
+                this.clearPhyrexianLifeToPay(decisionMaker);
                 return false;
             }
             // abilities care what was used to pay for them
@@ -216,6 +236,8 @@ public class CostPayment extends ManaConversionMatrix {
 
             game.costPaymentStack.pop(); // cost is resolved
         }
+
+        this.payPhyrexianLife(decisionMaker);
         return true;
     }
 

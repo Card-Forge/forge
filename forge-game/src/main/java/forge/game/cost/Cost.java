@@ -56,6 +56,10 @@ public class Cost implements Serializable {
     private final List<CostPart> costParts = Lists.newArrayList();
     private boolean isMandatory = false;
 
+    // Used to know how much life to pay for phyrexian mana only after each cost part has been paid.
+    private int phyLifeToPay = 0;
+    private boolean isPhyLifeToPayForEffect = false;
+
     // Primarily used for Summoning Sickness awareness
     private boolean tapCost = false;
 
@@ -65,6 +69,26 @@ public class Cost implements Serializable {
 
     private void cacheTapCost() {
         tapCost = hasSpecificCostType(CostTap.class);
+    }
+
+    public final void setPhyLifeToPay(int phyLifeToPay) {
+        this.phyLifeToPay = phyLifeToPay;
+    }
+
+    public final void addPhyLifeToPay(int phyLifeToPay) {
+        this.phyLifeToPay += phyLifeToPay;
+    }
+
+    public final int getPhyLifeToPay() {
+        return this.phyLifeToPay;
+    }
+
+    public final void setIsPhyLifeToPayForEffect(boolean isPhyLifeToPayForEffect) {
+        this.isPhyLifeToPayForEffect= isPhyLifeToPayForEffect;
+    }
+
+    public final boolean getIsPhyLifeToPayForEffect(){
+        return this.isPhyLifeToPayForEffect;
     }
 
     public final boolean hasNoManaCost() {

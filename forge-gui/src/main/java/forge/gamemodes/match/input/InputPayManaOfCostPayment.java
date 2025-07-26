@@ -62,7 +62,8 @@ public class InputPayManaOfCostPayment extends InputPayMana {
     @Override
     protected void done() {
         if (this.phyLifeToLose > 0) {
-            player.payLife(this.phyLifeToLose, saPaidFor, this.effect);
+            saPaidFor.getPayCosts().addPhyLifeToPay(phyLifeToLose);
+            saPaidFor.getPayCosts().setIsPhyLifeToPayForEffect(effect);
         }
     }
 

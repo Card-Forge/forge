@@ -674,6 +674,8 @@ public class ComputerUtilMana {
         ManaCostShard toPay = null;
         List<SpellAbility> saExcludeList = new ArrayList<>();
 
+        int phyLifeToPay = sa.getPayCosts().getPhyLifeToPay();
+
         // Loop over mana needed
         while (!cost.isPaid()) {
             while (!cost.isPaid() && !manapool.isEmpty()) {
@@ -752,8 +754,9 @@ public class ComputerUtilMana {
             }
 
             if (saPayment == null) {
-                if ((!toPay.isPhyrexian() && !lifeInsteadOfBlack) || !ai.canPayLife(2, false, sa)
-                        || (ai.getLife() <= 2 && !ai.cantLoseForZeroOrLessLife())) {
+                phyLifeToPay += 2;
+                if ((!toPay.isPhyrexian() && !lifeInsteadOfBlack) || !ai.canPayLife(phyLifeToPay, false, sa)
+                        || (ai.getLife() <= phyLifeToPay && !ai.cantLoseForZeroOrLessLife())) {
                     break; // cannot pay
                 }
 
@@ -778,7 +781,8 @@ public class ComputerUtilMana {
                 }
 
                 if (!test) {
-                    ai.payLife(2, sa, false);
+                    sa.getPayCosts().addPhyLifeToPay(2);
+                    sa.getPayCosts().setIsPhyLifeToPayForEffect(effect);
                 }
                 continue;
             }
