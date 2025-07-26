@@ -6,6 +6,7 @@ Type=Expansion
 ScryfallCode=SPM
 
 [cards]
+1 M Anti-Venom, Horrifying Healer @Néstor Ossandón Leal
 3 U Aunt May @Randy Gallegos
 6 C Daily Bugle Reporters @Zoltan Boros
 9 R Origin of Spider-Man @Bill Sienkiewicz
@@ -36,12 +37,14 @@ ScryfallCode=SPM
 73 C Venom's Hunger @Dave DeVries
 75 C Angry Rabble @Bartek Fedyczak
 77 C Electro's Bolt @JB Casacop
+78 M Gwen Stacy @Victor Adame Minguez
 82 C Masked Meower @Narendra Bintara Adi
 86 C Romantic Rendezvous @Nereida
 88 C Shock @Piotr Dura
 89 U Shocker, Unshakable @Kevin Glint
 90 C Spider-Gwen, Free Spirit @Lie Setiawan
 91 C Spider-Islanders @Helge C. Balzer
+92 R Spider-Punk @Forrest Imel
 95 C Stegron the Dinosaur Man @John Tyler Christopher
 97 C Taxi Driver @Néstor Ossandón Leal
 101 C Grow Extra Arms @Kevin Sidharta
@@ -49,18 +52,49 @@ ScryfallCode=SPM
 103 C Kapow! @Jessica Fong
 104 C Kraven's Cats @Kevin Glint
 107 C Lurking Lizards @Rafater
+108 M Miles Morales @LA Draws
 113 C Scout the City @Rafater
 114 R Spider-Ham, Peter Porker @Filipe Pagliuso
 115 C Spider-Man, Brooklyn Visionary @Aniekan Udofia
 116 C Spider-Rex, Daring Dino @Narendra Bintara Adi
+128 M Doctor Octopus, Master Planner @Xabi Gaztelua
+130 U Green Goblin, Revenant @Chris Rahn
 147 U SP//dr, Piloted by Peni @Toni Infante
 150 R Spider-Man 2099 @Toni Infante
+156 R Symbiote Spider-Man @Paolo Rivera
+159 U Web-Warriors @Thanh Tuấn
 163 C Eerie Gravestone @Lordigan
+166 R Iron Spider, Stark Upgrade @Kevin Glint
 168 C Mechanical Mobster @David Szabo
 173 C Spider-Bot @Carlos Dattoli
+180 R Multiversal Passage @Pablo Mendoza
+189 L Plains @Sarah Finnigan
+190 L Island @Sarah Finnigan
+191 L Swamp @Sarah Finnigan
+192 L Mountain @Sarah Finnigan
+193 L Forest @Sarah Finnigan
 194 L Plains @Jonas De Ro
 195 L Island @Jonas De Ro
 196 L Swamp @Jonas De Ro
 197 L Mountain @Jonas De Ro
 198 L Forest @Jonas De Ro
+200 M Miles Morales @Jim Cheung & Jay David Ramos
+201 R Spider-Ham, Peter Porker @Jim Cheung & Jay David Ramos
+202 M Gwen Stacy @Jim Cheung & Jay David Ramos
+203 U Web-Warriors @Jim Cheung & Jay David Ramos
+204 U Spider-Man Noir @Jim Cheung & Jay David Ramos
+205 R Spider-Man 2099 @Jim Cheung & Jay David Ramos
+206 R Multiversal Passage @Jim Cheung & Jay David Ramos
+207 R Spider-Punk @Jim Cheung & Jay David Ramos
+208 M Peter Parker @Lucas Werneck
+209 M Gwen Stacy @Roberta Ingranata
+210 R Spider-Punk @Chris Bachalo
+211 M Miles Morales @Ivan Shavrin
+216 R Spider-Man 2099 @Jim Cheung & Jay David Ramos
+217 R Symbiote Spider-Man @Tyler Walpole
+218 R Origin of Spider-Man @Jim Cheung & Jay David Ramos
+228 M Doctor Octopus, Master Planner @Jim Cheung & Jay David Ramos
 232 M Peter Parker @Jack Kirby & Steve Ditko
+234 M Miles Morales @Sara Pichelli & Justin Ponsor
+244 M Anti-Venom, Horrifying Healer @Néstor Ossandón Leal
+279 R Iron Spider, Stark Upgrade @Kevin Glint
