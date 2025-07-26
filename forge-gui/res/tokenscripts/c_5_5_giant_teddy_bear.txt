@@ -1,0 +1,5 @@
+Name:Giant Teddy Bear Token
+ManaCost:no cost
+Types:Creature Giant Teddy Bear
+PT:5/5
+Oracle:
