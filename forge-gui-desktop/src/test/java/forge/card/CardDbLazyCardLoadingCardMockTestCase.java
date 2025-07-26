@@ -32,7 +32,7 @@ public class CardDbLazyCardLoadingCardMockTestCase extends CardMockTestCase {
     @Test
     public void testLoadAndGetBorrowing100_000ArrowsCardFromAllEditions() {
         String cardName = "Borrowing 100,000 Arrows";
-        String[] allAvailableEds = new String[] { "PTK", "ME3", "C13", "CMA", "A25", "MB1" };
+        String[] allAvailableEds = new String[] { "PTK", "ME3", "C13", "CMA", "A25", "PLST" };
 
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
@@ -45,7 +45,7 @@ public class CardDbLazyCardLoadingCardMockTestCase extends CardMockTestCase {
         borrowingCard = this.cardDb.getCard(cardName);
         assertNotNull(borrowingCard);
         assertEquals(borrowingCard.getName(), cardName);
-        assertEquals(borrowingCard.getEdition(), "MB1");
+        assertEquals(borrowingCard.getEdition(), "PLST");
 
         // Now get card from all the specified editions
         for (String setCode : allAvailableEds) {
