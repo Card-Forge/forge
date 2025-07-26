@@ -9,6 +9,7 @@ ScryfallCode=SPM
 1 M Anti-Venom, Horrifying Healer @Néstor Ossandón Leal
 3 U Aunt May @Randy Gallegos
 6 C Daily Bugle Reporters @Zoltan Boros
+8 R Friendly Neighborhood @
 9 R Origin of Spider-Man @Bill Sienkiewicz
 10 M Peter Parker @Thanh Tuấn
 12 C Selfless Police Captain @Aniekan Udofia
