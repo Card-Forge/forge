@@ -362,11 +362,11 @@ public class CounterAi extends SpellAbilityAi {
 
     @Override
     public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
-        // ward or human misplay
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
         List<SpellAbility> spells = AbilityUtils.getDefinedSpellAbilities(source, sa.getParamOrDefault("Defined", "Targeted"), sa);
         for (SpellAbility toBeCountered : spells) {
+            // ward or human misplay
             if (!toBeCountered.isCounterableBy(sa)) {
                 return false;
             }
