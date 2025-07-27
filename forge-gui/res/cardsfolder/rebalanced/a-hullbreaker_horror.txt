@@ -1,0 +1,10 @@
+Name:A-Hullbreaker Horror
+ManaCost:5 U U
+Types:Creature Kraken Horror
+PT:7/8
+K:Flash
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ ControlReturn,ControlBounce | MinCharmNum$ 0 | CharmNum$ 1
+SVar:ControlReturn:DB$ ChangeZone | ValidTgts$ Card.YouDontCtrl | TgtPrompt$ Select target spell you don't control | TgtZone$ Stack | Origin$ Stack | Destination$ Hand | SpellDescription$ Return target spell you don't control to its owner's hand.
+SVar:ControlBounce:DB$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | TgtZone$ Battlefield | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent to its owner's hand.
+Oracle:Flash\nWhenever you cast a spell, choose up to one —\n• Return target spell you don't control to its owner's hand.\n• Return target nonland permanent to its owner's hand.
