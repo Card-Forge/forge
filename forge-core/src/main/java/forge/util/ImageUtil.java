@@ -12,8 +12,6 @@ import forge.token.TokenDb;
 import org.apache.commons.lang3.StringUtils;
 
 import java.net.URLEncoder;
-import java.util.Arrays;
-import java.util.List;
 
 public class ImageUtil {
     public static float getNearestHQSize(float baseSize, float actualSize) {
