@@ -72,7 +72,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         }
 
         // CR 118.6 cost is unpayable
-        if (getPayCosts().hasManaCost() && getPayCosts().getCostMana().getMana().isNoCost()) {
+        if (!isCastFromPlayEffect() && getPayCosts().hasManaCost() && getPayCosts().getCostMana().getMana().isNoCost()) {
             return false;
         }
 

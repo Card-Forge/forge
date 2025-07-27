@@ -18,6 +18,7 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -753,6 +754,17 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     movedCard.addMayLookFaceDownExile(activator);
                 }
 
+                if (sa.isTrigger() && sa.getTrigger().isKeyword(Keyword.WARP)) {
+                    Card eff = createEffect(sa, sa.getHostCard().getOwner(), "Warped " + sa.getHostCard(), sa.getHostCard().getImageKey());
+                    StringBuilder sbPlay = new StringBuilder();
+                    sbPlay.append("Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand+!ThisTurnEntered");
+                    sbPlay.append(" | AffectedZone$ Exile | Description$ You may cast the card.");
+                    final StaticAbility st = eff.addStaticAbility(sbPlay.toString());
+                    eff.addRemembered(movedCard);
+                    addForgetOnMovedTrigger(eff, "Exile");
+                    game.getAction().moveToCommand(eff, sa);
+                }
+
                 // CR 400.7k
                 if (sa.hasParam("TrackDiscarded")) {
                     movedCard.setDiscarded(true);
@@ -902,6 +914,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
             if (sa.usesTargeting() && !sa.hasParam("DefinedPlayer")) {
                 player = sa.getTargets().getFirstTargetedPlayer();
+            }
+
+            if (!player.isInGame()) {
+                continue;
             }
 
             List<ZoneType> origin = Lists.newArrayList();

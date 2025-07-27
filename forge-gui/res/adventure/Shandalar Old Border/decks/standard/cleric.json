@@ -1,0 +1,12 @@
+{                                    
+"name":"Cleric",
+  "template":
+  {
+   "count":60,
+   "colors":["White"],
+   "tribe":"Cleric",        
+   "tribeCards":1.0,
+   "tribeSynergyCards":0.2,
+   "rares":0.4
+  }
+}

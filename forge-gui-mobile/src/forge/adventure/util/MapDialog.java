@@ -92,10 +92,10 @@ public class MapDialog {
                 @Override
                 public void changed(ChangeEvent changeEvent, Actor actor) {
                     if (prebuiltQuestData != null && Integer.parseInt(questAccepted) == prebuiltQuestData.getID()) {
-                        Current.player().addQuest(prebuiltQuestData);
+                        Current.player().addQuest(prebuiltQuestData, false);
                     }
                     else {
-                        Current.player().addQuest(questAccepted);
+                        Current.player().addQuest(questAccepted, false);
                     }
                 }
             };

@@ -434,13 +434,13 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
 
         if (upcomingSet != null) {
-            System.err.println("Upcoming set " + upcomingSet + " dated in the future. All unaccounted cards will be added to this set with unknown rarity.");
+            System.err.println("Upcoming set " + upcomingSet + " dated in the future. All `upcoming` cards will be added to this set with unknown rarity.");
         }
 
         for (CardRules cr : rulesByName.values()) {
             if (!contains(cr.getName())) {
                 if (!cr.isCustom()) {
-                    if (upcomingSet != null) {
+                    if (upcomingSet != null && cr.getPath() != null && cr.getPath().contains("upcoming/")) {
                         addCard(new PaperCard(cr, upcomingSet.getCode(), CardRarity.Unknown));
                     } else if (enableUnknownCards && !this.filtered.contains(cr.getName())) {
                         System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/editions/ folder. ");
@@ -659,7 +659,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             if(cardFromSet != null && request.flags != null)
                 cardFromSet = cardFromSet.copyWithFlags(request.flags);
 
-            return cardFromSet;
+            if (cardFromSet != null)
+                return cardFromSet;
         }
 
         // 2. Card lookup in edition with specified filter didn't work.
@@ -1053,7 +1054,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         CardEdition edition = StaticData.instance().getCardEdition(code);
         if(edition == null && code.equals(CardEdition.UNKNOWN_CODE))
             return true;
-        return edition != null && Type.REPRINT_SET_TYPES.contains(edition.getType());
+        return edition != null && !Type.REPRINT_SET_TYPES.contains(edition.getType());
     };
 
     public Collection<PaperCard> getAllNonPromosNonReprintsNoAlt() {
@@ -1133,8 +1134,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     public Predicate<? super PaperCard> wasPrintedInSets(Collection<String> setCodes) {
         Set<String> sets = new HashSet<>(setCodes);
         return paperCard -> getAllCards(paperCard.getName()).stream()
-                .map(PaperCard::getEdition)
-                .anyMatch(sets::contains);
+                .map(PaperCard::getEdition).anyMatch(editionCode ->
+                    sets.contains(editionCode) &&
+                        StaticData.instance().getCardEdition(editionCode).isCardObtainable(paperCard.getName())
+                );
     }
 
     // This Predicate validates if a card is legal in a given format (identified by the list of allowed sets)

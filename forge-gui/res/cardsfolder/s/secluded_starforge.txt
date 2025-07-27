@@ -1,0 +1,8 @@
+Name:Secluded Starforge
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Pump | Cost$ 2 T tapXType<X/Artifact> | ValidTgts$ Creature | NumAtt$ +X | SorcerySpeed$ True | SpellDescription$ Target creature gets +X/+0 until end of turn. Activate only as a sorcery.
+A:AB$ Token | Cost$ 5 T | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ c_2_2_a_robot | SpellDescription$ Create a 2/2 colorless Robot artifact creature token.
+SVar:X:Count$xPaid
+Oracle:{T}: Add {C}.\n{2}, {T}, Tap X untapped artifacts you control: Target creature gets +X/+0 until end of turn. Activate only as a sorcery.\n{5}, {T}: Create a 2/2 colorless Robot artifact creature token.

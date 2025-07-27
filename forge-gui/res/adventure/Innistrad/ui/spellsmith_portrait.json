@@ -1,0 +1,355 @@
+{
+  "width": 270,
+  "height": 480,
+  "yDown": true,
+  "elements": [
+    {
+      "type": "Image",
+      "image": "ui/inn_spellsmith.png",
+      "width": 270,
+      "height": 480
+    },
+    {
+      "type": "Scroll",
+      "name": "xkUkiUhwoi2ll5rrSpk6-6",
+      "text": "Scroll",
+      "style": "paper",
+      "x": 0,
+      "y": 0,
+      "width": 130,
+      "height": 180
+    },
+    {
+      "type": "Scroll",
+      "name": "xkUkiUhwoi2ll5rrSpk6-3",
+      "text": "Scroll",
+      "style": "paper",
+      "x": 0,
+      "y": 260,
+      "width": 270,
+      "height": 83
+    },
+    {
+      "type": "Scroll",
+      "name": "xkUkiUhwoi2ll5rrSpk6-4",
+      "text": "Scroll",
+      "style": "paper",
+      "x": 0,
+      "y": 360,
+      "width": 270,
+      "height": 53
+    },
+    {
+      "type": "Scroll",
+      "name": "xkUkiUhwoi2ll5rrSpk6-5",
+      "text": "Scroll",
+      "style": "paper",
+      "x": 0,
+      "y": 427,
+      "width": 270,
+      "height": 53
+    },
+    {
+      "type": "Scroll",
+      "name": "xkUkiUhwoi2ll5rrSpk6-2",
+      "text": "Scroll",
+      "style": "paper",
+      "x": 0,
+      "y": 190,
+      "width": 270,
+      "height": 53
+    },
+    {
+      "type": "TextButton",
+      "selectable": true,
+      "name": "done",
+      "text": "[+OK]",
+      "x": 180,
+      "y": 150,
+      "width": 90,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "selectable": true,
+      "name": "BBlack",
+      "text": "[+B]",
+      "x": 58,
+      "y": 290,
+      "width": 45,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "selectable": true,
+      "name": "BBlue",
+      "text": "[+U]",
+      "x": 113,
+      "y": 290,
+      "width": 45,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "selectable": true,
+      "name": "BGreen",
+      "text": "[+G]",
+      "x": 168,
+      "y": 290,
+      "width": 45,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "selectable": true,
+      "name": "BRed",
+      "text": "[+R]",
+      "x": 58,
+      "y": 320,
+      "width": 45,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "selectable": true,
+      "name": "BWhite",
+      "text": "[+W]",
+      "x": 113,
+      "y": 320,
+      "width": 45,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "selectable": true,
+      "name": "BColorless",
+      "text": "[+C]",
+      "x": 168,
+      "y": 320,
+      "width": 45,
+      "height": 20
+    },
+    {
+      "type": "Label",
+      "name": "gold", 
+      "x": 150,
+      "y": 0,
+      "width": 120,
+      "height": 20
+    },
+    {
+      "type": "Label",
+      "name": "playerGold", 
+	  "style":"background",
+      "x": 180,
+      "y": 0,
+      "width": 90,
+      "height": 20
+    },
+	{
+      "type": "TextButton",
+      "selectable": true,
+      "name": "pullUsingGold",
+      "text": "tr(lblDraw) [+gold]",  
+      "x": 180,
+      "y": 25,
+      "width": 90,
+      "height": 20
+    },
+	{
+      "type": "Label",
+      "name": "playerShards", 
+	  "style":"background",
+      "x": 180,
+      "y": 50,
+      "width": 90,
+      "height": 20
+    },
+	{
+      "type": "TextButton",
+      "selectable": true,
+      "name": "pullUsingShards",
+      "text": "tr(lblDraw) [+shards]",  
+      "x": 180,
+      "y": 75,
+      "width": 90,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "selectable": true,
+      "name": "accept",
+      "text": "tr(lblTake)",
+      "binding": "Use",
+      "x": 2,
+      "y": 142,
+      "width": 60,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "selectable": true,
+      "name": "decline",
+      "text": "tr(lblRefund)",
+      "binding": "Back",
+      "x": 70,
+      "y": 142,
+      "width": 60,
+      "height": 20
+    },
+	{
+      "type": "Label",
+      "name": "poolSize", 
+      "x": 16,
+      "y": 163,
+      "width": 97,
+      "height": 20
+    },
+    {
+      "type": "Label",
+      "name": "colorLabel",
+      "text": "[/][BLACK]tr(lblColors)",
+      "x": 10,
+      "y": 260,
+      "width": 100,
+      "height": 20
+    },
+    {
+      "type": "Label",
+      "name": "vnXYKZJw_P5wMnHa1tH7-3",
+      "text": "[/][BLACK]tr(lblPlane)",
+      "x": 10,
+      "y": 190,
+      "width": 100,
+      "height": 20
+    },
+    {
+      "type": "SelectBox",
+      "name": "BSelectPlane",
+      "text": "Select Plane",
+      "selectable": true,
+      "x": 0,
+      "y": 220,
+      "width": 190,
+      "height": 20
+    },
+    {
+      "type": "Label",
+      "name": "vnXYKZJw_P5wMnHa1tH7-5",
+      "text": "[/][BLACK]tr(lblManaCost)",
+      "x": 10,
+      "y": 360,
+      "width": 100,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "selectable": true,
+      "name": "B02",
+      "text": "0-2",
+      "x": 20,
+      "y": 390,
+      "width": 50,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "selectable": true,
+      "name": "B35",
+      "text": "3-5",
+      "x": 80,
+      "y": 390,
+      "width": 50,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "selectable": true,
+      "name": "B68",
+      "text": "6-8",
+      "x": 140,
+      "y": 390,
+      "width": 50,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "selectable": true,
+      "name": "B9X",
+      "text": "9+",
+      "x": 200,
+      "y": 390,
+      "width": 50,
+      "height": 20
+    },
+    {
+      "type": "Label",
+      "name": "vnXYKZJw_P5wMnHa1tH7-10",
+      "text": "[/][BLACK]tr(lblRarity)",
+      "x": 10,
+      "y": 427,
+      "width": 100,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "selectable": true,
+      "name": "BCommon",
+      "text": "tr(lblCommon)",  
+      "x": 20,
+      "y": 450,
+      "width": 50,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "selectable": true,
+      "name": "BUncommon",
+      "text": "tr(lblUncommon)",  
+      "x": 80,
+      "y": 450,
+      "width": 50,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "selectable": true,
+      "name": "BRare",
+      "text": "tr(lblRare)",  
+      "x": 140,
+      "y": 450,
+      "width": 50,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "selectable": true,
+      "name": "BMythic",
+      "text": "Mythic", 
+      "x": 200,
+      "y": 450,
+      "width": 50,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "selectable": true,
+      "name": "BReset",
+      "text": "tr(lblReset)",  
+      "x": 195,
+      "y": 220,
+      "width": 70,
+      "height": 20
+    },
+    {
+      "type": "Scroll",
+      "name": "RewardDummy",
+      "text": "Image",
+      "style": "nobg",
+      "x": 18,
+      "y": 10,
+      "width": 95,
+      "height": 130
+    }
+  ]
+}

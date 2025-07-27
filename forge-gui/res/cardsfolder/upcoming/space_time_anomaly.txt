@@ -1,6 +1,0 @@
-Name:Space-Time Anomaly
-ManaCost:2 W U
-Types:Sorcery
-A:SP$ Mill | NumCards$ X | ValidTgts$ Opponent | SpellDescription$ Target opponent mills cards equal to your life total.
-SVar:X:Count$YourLifeTotal
-Oracle:Target opponent mills cards equal to your life total.

@@ -111,6 +111,3 @@ ScryfallCode=ATQ
 85b U Urza's Tower @Mark Poole
 85c U Urza's Tower @Mark Poole
 85d U Urza's Tower @Mark Poole
-
-[tokens]
-c_1_1_a_tetravite_flying_noenchant

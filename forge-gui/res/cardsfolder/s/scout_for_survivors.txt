@@ -1,0 +1,7 @@
+Name:Scout for Survivors
+ManaCost:2 W
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ 3 | MaxTotalTargetCMC$ 3 | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select up to three target creature cards with total mana value 3 or less in your graveyard | SubAbility$ DBPutCounter | StackDescription$ SpellDescription | SpellDescription$ Return up to three target creature cards with total mana value 3 or less from your graveyard to the battlefield. Put a +1/+1 counter on each of them.
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | Defined$ Targeted
+DeckHas:Ability$Counters|Graveyard
+Oracle:Return up to three target creature cards with total mana value 3 or less from your graveyard to the battlefield. Put a +1/+1 counter on each of them.

@@ -1,0 +1,10 @@
+{                                    
+"name":"Death Knight",
+  "template":
+  {
+   "count":60,
+   "colors":["Black"],
+   "tribe":"Knight",        
+   "rares":0.5
+  }
+}

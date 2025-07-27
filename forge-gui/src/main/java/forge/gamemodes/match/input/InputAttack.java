@@ -319,7 +319,7 @@ public class InputAttack extends InputSyncronizedBase {
     private boolean isBandingPossible() {
         final CardCollectionView possibleAttackers = playerAttacks.getCardsIn(ZoneType.Battlefield);
         for (final Card c : possibleAttackers) {
-            if ((c.hasKeyword(Keyword.BANDING) || c.hasStartOfKeyword("Bands with Other")) &&
+            if ((c.hasKeyword(Keyword.BANDING) || c.hasKeyword(Keyword.BANDSWITH)) &&
                     CombatUtil.canAttack(c, currentDefender)) {
                 return true;
             }
