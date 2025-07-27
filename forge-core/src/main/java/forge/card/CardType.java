@@ -659,33 +659,36 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (subtypes.isEmpty()) {
             return;
         }
-        if (!isCreature() && !isKindred()) {
-            subtypes.removeIf(Predicates.IS_CREATURE_TYPE);
+        Predicate<String> allowedTypes = x -> false;
+        if (isCreature() || isKindred()) {
+            allowedTypes = allowedTypes.or(Predicates.IS_CREATURE_TYPE);
         }
-        if (!isLand()) {
-            subtypes.removeIf(Predicates.IS_LAND_TYPE);
+        if (isLand()) {
+            allowedTypes = allowedTypes.or(Predicates.IS_LAND_TYPE);
         }
-        if (!isArtifact()) {
-            subtypes.removeIf(Predicates.IS_ARTIFACT_TYPE);
+        if (isArtifact()) {
+            allowedTypes = allowedTypes.or(Predicates.IS_ARTIFACT_TYPE);
         }
-        if (!isEnchantment()) {
-            subtypes.removeIf(Predicates.IS_ENCHANTMENT_TYPE);
+        if (isEnchantment()) {
+            allowedTypes = allowedTypes.or(Predicates.IS_ENCHANTMENT_TYPE);
         }
-        if (!isInstant() && !isSorcery()) {
-            subtypes.removeIf(Predicates.IS_SPELL_TYPE);
+        if (isInstant() || isSorcery()) {
+            allowedTypes = allowedTypes.or(Predicates.IS_SPELL_TYPE);
         }
-        if (!isPlaneswalker()) {
-            subtypes.removeIf(Predicates.IS_WALKER_TYPE);
+        if (isPlaneswalker()) {
+            allowedTypes = allowedTypes.or(Predicates.IS_WALKER_TYPE);
         }
-        if (!isDungeon()) {
-            subtypes.removeIf(Predicates.IS_DUNGEON_TYPE);
+        if (isDungeon()) {
+            allowedTypes = allowedTypes.or(Predicates.IS_DUNGEON_TYPE);
         }
-        if (!isBattle()) {
-            subtypes.removeIf(Predicates.IS_BATTLE_TYPE);
+        if (isBattle()) {
+            allowedTypes = allowedTypes.or(Predicates.IS_BATTLE_TYPE);
         }
-        if (!isPlane()) {
-            subtypes.removeIf(Predicates.IS_PLANAR_TYPE);
+        if (isPlane()) {
+            allowedTypes = allowedTypes.or(Predicates.IS_PLANAR_TYPE);
         }
+
+        subtypes.removeIf(allowedTypes.negate());
     }
 
     @Override

@@ -316,6 +316,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     // however it could also be a different card which isn't an error but means the exiling SA was gained
     private Card exiledWith;
     private Player exiledBy;
+    private SpellAbility exiledSA;
 
     private Map<Long, Player> goad = Maps.newTreeMap();
 
@@ -1090,7 +1091,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final boolean isOnAdventure() {
         if (!isAdventureCard())
             return false;
-        if (getExiledWith() == null)
+        if (!equals(getExiledWith()))
             return false;
         if (!CardStateName.Secondary.equals(getExiledWith().getCurrentStateName()))
             return false;
@@ -2157,11 +2158,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         exiledWith = null;
         exiledBy = null;
+        exiledSA = null;
     }
 
     public final Player getExiledBy() { return exiledBy; }
     public final void setExiledBy(final Player ep) {
         exiledBy = ep;
+    }
+
+    public final SpellAbility getExiledSA() { return exiledSA;}
+    public final void setExiledSA(final SpellAbility sa) {
+        exiledSA = sa;
     }
 
     public final String getChosenType() {
@@ -2632,7 +2639,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Graft") || keyword.startsWith("Fading") || keyword.startsWith("Vanishing:")
                         || keyword.startsWith("Afterlife") || keyword.startsWith("Hideaway") || keyword.startsWith("Toxic")
                         || keyword.startsWith("Afflict") || keyword.startsWith ("Poisonous") || keyword.startsWith("Rampage")
-                        || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Devour")) {
+                        || keyword.startsWith("Renown") || keyword.startsWith("Annihilator")) {
                     final String[] k = keyword.split(":");
                     sbLong.append(k[0]).append(" ").append(k[1]).append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Crew")) {
@@ -2719,13 +2726,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     sbLong.append(onlyMana? "" : ".").append(extra);
                     sbLong.append(!complex ? " (" + (inst.getReminderText()) + ")" : "");
                     sbLong.append("\r\n");
-                } else if (keyword.endsWith(" offering")) {
-                    String offeringType = keyword.split(" ")[0];
+                } else if (keyword.startsWith("Offering")) {
+                    String type = keyword.split(":")[1];
                     if (sb.length() != 0) {
                         sb.append("\r\n");
                     }
-                    sbLong.append(keyword);
-                    sbLong.append(" (").append(Keyword.getInstance("Offering:" + offeringType).getReminderText()).append(")");
+                    sbLong.append(type).append(" offering");
+                    sbLong.append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Equip") || keyword.startsWith("Fortify") || keyword.startsWith("Outlast")
                         || keyword.startsWith("Unearth") || keyword.startsWith("Scavenge")
                         || keyword.startsWith("Spectacle") || keyword.startsWith("Evoke")
@@ -2744,7 +2751,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous")
                         || keyword.equals("For Mirrodin") || keyword.equals("Job select") || keyword.startsWith("Craft")
                         || keyword.startsWith("Landwalk") || keyword.startsWith("Visit") || keyword.startsWith("Mobilize")
-                        || keyword.startsWith("Station")) {
+                        || keyword.startsWith("Station") || keyword.startsWith("Warp") || keyword.startsWith("Devour")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.equals("Read ahead")) {
                     sb.append(Localizer.getInstance().getMessage("lblReadAhead")).append(" (").append(Localizer.getInstance().getMessage("lblReadAheadDesc"));
@@ -6837,6 +6844,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         this.foretoldCostByEffect = val;
     }
 
+    public boolean isWarped() {
+        if (!isInZone(ZoneType.Exile)) {
+            return false;
+        }
+        if (exiledSA == null) {
+            return false;
+        }
+        return exiledSA.isKeyword(Keyword.WARP);
+    }
+
     public boolean isSpecialized() {
         return specialized;
     }
@@ -7650,8 +7667,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         CardState oState = getState(CardStateName.Original);
         final List<SpellAbility> abilities = Lists.newArrayList();
         for (SpellAbility sa : getSpellAbilities()) {
-            //adventure spell check
-            if (isAdventureCard() && sa.isAdventure() && isOnAdventure()) {
+            if (sa.isAdventure() && isOnAdventure()) {
                 continue; // skip since it's already on adventure
             }
             //add alternative costs as additional spell abilities

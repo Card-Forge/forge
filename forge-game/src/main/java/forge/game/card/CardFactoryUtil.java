@@ -2250,14 +2250,25 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
             final String magnitude = k[1];
             String valid = "Creature";
-            final String[] s = k[0].split(" ");
-            if (s.length > 1) {
-                valid = s[1].substring(0, 1).toUpperCase() + s[1].substring(1);
+            String type = "creature";
+            StringBuilder sbDesc = new StringBuilder("Devour ");
+            if (k.length > 2 && !k[2].isEmpty()) {
+                valid = k[2];
+                type = valid;
+                if (CardType.isACardType(type)) {
+                    type = type.toLowerCase(Locale.ENGLISH);
+                }
+                sbDesc.append(type).append(" ");
+            }
+            sbDesc.append(magnitude);
+            if (k.length > 3) {
+                sbDesc.append(k[3]);
             }
 
-            String sacrificeStr = "DB$ Sacrifice | Defined$ You | Amount$ DevourSacX | SacValid$ " + valid +
-                    ".Other | SacMessage$ another " + valid.toLowerCase() + " (Devour " + magnitude +
-                    ") | RememberSacrificed$ True | Optional$ True";
+            String sacrificeStr = "DB$ Sacrifice | Defined$ You | Amount$ DevourSacX | RememberSacrificed$ True | Optional$ True"
+                    + " | SacValid$ " + valid + ".Other | SacMessage$ another " + type;
+            // TODO find better way to add Devour N to Player Msg
+            // Also better lblDoYouWantSacrifice?
 
             String counterStr = "DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ DevourX";
             String cleanupStr = "DB$ Cleanup | ClearRemembered$ True";
@@ -2272,7 +2283,7 @@ public class CardFactoryUtil {
             AbilitySub cleanupSA = (AbilitySub) AbilityFactory.getAbility(cleanupStr, card);
             counterSA.setSubAbility(cleanupSA);
 
-            String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Secondary$ True | ReplacementResult$ Updated | Description$ Devour " + magnitude + " ("+ inst.getReminderText() + ")";
+            String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | Description$ " + sbDesc + " ("+ inst.getReminderText() + ")";
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, host, intrinsic, card);
 
@@ -2993,6 +3004,14 @@ public class CardFactoryUtil {
                 System.err.println("Malformed Equip entry! - Card: " + card.toString());
                 return;
             }
+            boolean hasFlav = false;
+            String flavor = "";
+            // Flavor keyword titles should be last in the card script K: line
+            if (keyword.contains(":Flavor ")) {
+                flavor = (keyword.split(":Flavor ", 2)[1]) + (" — ");
+                keyword = keyword.substring(0, keyword.indexOf(":Flavor "));
+                hasFlav = true;
+            }
             String[] k = keyword.split(":");
             // Get cost string
             String equipCost = k[1];
@@ -3013,7 +3032,9 @@ public class CardFactoryUtil {
             if (card.hasSVar("AttachAi")) {
                 abilityStr.append("| ").append(card.getSVar("AttachAi"));
             }
-            abilityStr.append(" | PrecostDesc$ Equip");
+            abilityStr.append(" | PrecostDesc$ ");
+            if (hasFlav) abilityStr.append(flavor);
+            abilityStr.append("Equip");
             if (k.length > 3 && !k[3].isEmpty()) {
                 abilityStr.append(" ").append(vstr);
             }
@@ -3030,7 +3051,7 @@ public class CardFactoryUtil {
             if (!extraDesc.isEmpty()) {
                 abilityStr.append(". ").append(extraDesc).append(". ");
             }
-            if (!altCost) {
+            if (!altCost && !hasFlav) {
                 abilityStr.append("(").append(inst.getReminderText()).append(")");
             }
             if (!extra.isEmpty()) {
@@ -3239,7 +3260,7 @@ public class CardFactoryUtil {
 
             StringBuilder sb = new StringBuilder();
             sb.append("AB$ PutCounter | Cost$ ").append(manacost).append(" | PrecostDesc$ Level up | CostDesc$ ");
-            sb.append(ManaCostParser.parse(manacost)).append(" | SorcerySpeed$ True | LevelUp$ True | Secondary$ True");
+            sb.append(ManaCostParser.parse(manacost)).append(" | SorcerySpeed$ True | Secondary$ True");
             sb.append("| CounterType$ LEVEL | StackDescription$ {p:You} levels up {c:Self}.");
             if (card.hasSVar("maxLevel")) {
                 final String strMaxLevel = card.getSVar("maxLevel");
@@ -3761,20 +3782,32 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
-        } else if (keyword.endsWith(" offering")) {
-            final String offeringType = keyword.split(" ")[0];
-            final SpellAbility sa = card.getFirstSpellAbility();
+        } else if (keyword.startsWith("Warp")) {
+            final String[] k = keyword.split(":");
+            final Cost warpCost = new Cost(k[1], true);
 
-            final SpellAbility newSA = sa.copy();
+            final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(warpCost);
 
-            SpellAbilityRestriction sar = newSA.getRestrictions();
-            sar.setIsPresent(offeringType + ".YouCtrl+CanBeSacrificedBy");
-            sar.setInstantSpeed(true);
+            StringBuilder sbCost = new StringBuilder("Warp");
+            if (!warpCost.isOnlyManaCost()) { //Something other than a mana cost
+                sbCost.append("—");
+            } else {
+                sbCost.append(" ");
+            }
 
-            newSA.putParam("Secondary", "True");
-            newSA.setAlternativeCost(AlternativeCost.Offering);
-            newSA.setPayCosts(sa.getPayCosts());
-            newSA.setDescription(sa.getDescription() + " (" + offeringType + " offering)");
+            newSA.putParam("PrecostDesc", sbCost.toString());
+            newSA.putParam("CostDesc", warpCost.toString());
+            // need to add the "."?
+
+            // makes new SpellDescription
+            final StringBuilder desc = new StringBuilder();
+            desc.append(newSA.getCostDescription());
+            desc.append("(").append(inst.getReminderText()).append(")");
+            newSA.setDescription(desc.toString());
+            newSA.putParam("AfterDescription", "(Warped)");
+
+            newSA.getRestrictions().setZone(ZoneType.Hand);
+            newSA.setAlternativeCost(AlternativeCost.Warp);
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Crew")) {

@@ -1,0 +1,12 @@
+{                                    
+"name":"Dross Gladiator",
+  "template":
+  {
+   "count":60,
+   "colors":["Black"],
+   "tribe":"Phyrexian",        
+   "tribeCards":1.0,
+   "tribeSynergyCards":0.40,
+   "rares":0.25
+  }
+}

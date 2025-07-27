@@ -2,7 +2,6 @@ Name:Keeper of the Mind
 ManaCost:U U
 Types:Creature Human Wizard
 PT:1/2
-A:AB$ Draw | Cost$ U T | ValidTgts$ Opponent | TgtPrompt$ Choose target opponent with at least two more cards in hand than you | CheckSVar$ X | SVarCompare$ GEY | Defined$ You | NumCards$ 1 | SpellDescription$ Choose target opponent who had at least two more cards in hand than you did as you activated this ability. Draw a card.
-SVar:X:Count$ValidHand Card.OppOwn
+A:AB$ Draw | Cost$ U T | ValidTgts$ Opponent | ValidAfterStack$ Ability.IsTargeting Player.HasCardsInHand_Card_GEY | TgtPrompt$ Choose target opponent with at least two more cards in hand than you | Defined$ You | NumCards$ 1 | SpellDescription$ Choose target opponent who had at least two more cards in hand than you did as you activated this ability. Draw a card.
 SVar:Y:Count$ValidHand Card.YouOwn/Plus.2
 Oracle:{U}, {T}: Choose target opponent who had at least two more cards in hand than you did as you activated this ability. Draw a card.

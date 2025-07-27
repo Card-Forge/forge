@@ -277,6 +277,10 @@ public final class CardRules implements ICardCharacteristics {
         return getType().isDungeon();
     }
 
+    public boolean hasPrintedPT() {
+        return getPower() != null || getToughness() != null;
+    }
+
     public boolean canBeCommander() {
         if (mainPart.getOracleText().contains(" is your commander, choose a color before the game begins.")) {
             addsWildCardColor = true;
@@ -288,7 +292,9 @@ public final class CardRules implements ICardCharacteristics {
         if (!type.isLegendary()) {
             return false;
         }
-        if (canBeCreature() || type.isVehicle() || type.isSpacecraft()) {
+        if (canBeCreature() || type.isVehicle() || (
+                type.isSpacecraft() && getPower() != null)) {
+            // Spacecraft need printed PT
             return true;
         }
         return false;
@@ -473,6 +479,7 @@ public final class CardRules implements ICardCharacteristics {
          * Reset all fields to parse next card (to avoid allocating new CardRulesReader N times)
          */
         public final void reset() {
+            this.setColorID = 0;
             this.curFace = 0;
             this.faces[0] = null;
             this.faces[1] = null;
@@ -807,7 +814,7 @@ public final class CardRules implements ICardCharacteristics {
     public boolean hasStartOfKeyword(final String k, ICardFace cf) {
         for (final String inst : cf.getKeywords()) {
             final String[] parts = inst.split(":");
-            if (parts[0].equals(k)) {
+            if ((parts[0]).equalsIgnoreCase(k)) {
                 return true;
             }
         }

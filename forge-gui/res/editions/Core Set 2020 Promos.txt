@@ -11,5 +11,6 @@ ScryfallCode=PM20
 131 R Chandra's Regulator @Mathias Kollros
 139 U Flame Sweep @Viktor Titov
 185 R Nightpack Ambusher @Sam Rowan
+172 R Gargos, Vicious Watcher @Mathias Kollros
 197 U Thrashing Brontodon @Jakub Kasper
 206 U Corpse Knight @Karl Kopinski

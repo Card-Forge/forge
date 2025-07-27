@@ -1,0 +1,10 @@
+{                                    
+"name":"Eldrazi",
+  "template":
+  {
+   "count":60,
+   "colors":["Blue","Black","Green"],
+   "tribe":"Phyrexian",
+   "rares":0.6
+  }
+}

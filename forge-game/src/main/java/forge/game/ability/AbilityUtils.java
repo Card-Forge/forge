@@ -794,7 +794,7 @@ public class AbilityUtils {
     public static List<GameEntity> getDefinedEntities(final Card card, final String[] def, final CardTraitBase sa) {
         final List<GameEntity> objects = new ArrayList<>();
         for (String d : def) {
-            objects.addAll(AbilityUtils.getDefinedEntities(card, d, sa));
+            objects.addAll(getDefinedEntities(card, d, sa));
         }
         return objects;
     }
@@ -1351,7 +1351,7 @@ public class AbilityUtils {
             }
             return;
         }
-        AbilityUtils.resolveApiAbility(sa, game);
+        resolveApiAbility(sa, game);
     }
 
     private static void resolvePreAbilities(final SpellAbility sa, final Game game) {
@@ -1373,7 +1373,7 @@ public class AbilityUtils {
             AbilitySub giftAbility = (AbilitySub) sa.getAdditionalAbility("GiftAbility");
             if (giftAbility != null) {
                 giftAbility.setActivatingPlayer(controller);
-                AbilityUtils.resolveApiAbility(giftAbility, game);
+                resolveApiAbility(giftAbility, game);
             }
         }
     }
@@ -1395,7 +1395,7 @@ public class AbilityUtils {
         } else {
             game.getTriggerHandler().resetActiveTriggers();
         }
-        AbilityUtils.resolveApiAbility(abSub, game);
+        resolveApiAbility(abSub, game);
     }
 
     private static void resolveApiAbility(final SpellAbility sa, final Game game) {
@@ -2114,15 +2114,8 @@ public class AbilityUtils {
         if (sq[0].contains("CardCounters")) {
             // CardCounters.ALL to be used for Kinsbaile Borderguard and anything that cares about all counters
             int count = 0;
-            if (sq[1].equals("ALL")) {
-                for (Integer i : c.getCounters().values()) {
-                    if (i != null && i > 0) {
-                        count += i;
-                    }
-                }
-            } else {
-                count = c.getCounters(CounterType.getType(sq[1]));
-            }
+            if (sq[1].equals("ALL")) count = c.getNumAllCounters();
+            else count = c.getCounters(CounterType.getType(sq[1]));
             return doXMath(count, expr, c, ctb);
         }
 
@@ -2486,7 +2479,7 @@ public class AbilityUtils {
         if (sq[0].startsWith("TypesSharedWith")) {
             Set<CardType.CoreType> thisTypes = Sets.newHashSet(c.getType().getCoreTypes());
             Set<CardType.CoreType> matches = new HashSet<>();
-            for (Card c1 : AbilityUtils.getDefinedCards(ctb.getHostCard(), l[0].split(" ", 2)[1], ctb)) {
+            for (Card c1 : getDefinedCards(ctb.getHostCard(), l[0].split(" ", 2)[1], ctb)) {
                 for (CardType.CoreType type : Sets.newHashSet(c1.getType().getCoreTypes())) {
                     if (thisTypes.contains(type)) {
                         matches.add(type);
@@ -2709,6 +2702,10 @@ public class AbilityUtils {
         if (sq[0].startsWith("Morbid")) {
             final List<Card> res = CardUtil.getThisTurnEntered(ZoneType.Graveyard, ZoneType.Battlefield, "Creature", c, ctb, player);
             return doXMath(calculateAmount(c, sq[res.size() > 0 ? 1 : 2], ctb), expr, c, ctb);
+        }
+        // Count$Void.<True>.<False>
+        if (sq[0].startsWith("Void")) {
+            return doXMath(calculateAmount(c, sq[game.isVoid() ? 1 : 2], ctb), expr, c, ctb);
         }
 
         // Count$Chroma.<color name>
@@ -3010,18 +3007,10 @@ public class AbilityUtils {
                 }
             } else {
                 final Spell newSA = (Spell) s.copy(controller);
-                SpellAbilityRestriction res = new SpellAbilityRestriction();
-                // timing restrictions still apply
-                res.setPlayerTurn(s.getRestrictions().getPlayerTurn());
-                res.setOpponentTurn(s.getRestrictions().getOpponentTurn());
-                res.setPhases(s.getRestrictions().getPhases());
-                res.setZone(null);
-                newSA.setRestrictions(res);
-                // timing restrictions still apply
-                if (res.checkTimingRestrictions(tgtCard, newSA)
-                        // still need to check the other restrictions like Aftermath
-                        && res.checkOtherRestrictions(tgtCard, newSA, controller)) {
-                    newSA.setCastFromPlayEffect(true);
+                newSA.getRestrictions().setZone(null);
+                newSA.setCastFromPlayEffect(true);
+                // extra timing restrictions still apply
+                if (newSA.canPlay()) {
                     sas.add(newSA);
                 }
             }

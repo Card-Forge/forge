@@ -93,6 +93,7 @@ Dog:Dogs
 Dragon:Dragons
 Drake:Drakes
 Dreadnought:Dreadnoughts
+Drix:Drixes
 Drone:Drones
 Druid:Druids
 Dryad:Dryads
@@ -222,6 +223,7 @@ Pangolin:Pangolins
 Peasant:Peasants
 Pegasus:Pegasi
 Pentavite:Pentavites
+Performer:Performers
 Pest:Pests
 Phelddagrif:Phelddagrifs
 Phoenix:Phoenixes
@@ -365,12 +367,11 @@ Fortification
 Gold
 Incubator:Incubators
 Junk
-Lander:Landers
 Key:Keys
 Lander:Landers
 Map
 Powerstone:Powerstones
-Spacecraft:Spacecrafts
+Spacecraft:Spacecraft
 Treasure:Treasures
 Vehicle:Vehicles
 [WalkerTypes]

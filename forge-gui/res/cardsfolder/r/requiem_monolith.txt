@@ -1,0 +1,10 @@
+Name:Requiem Monolith
+ManaCost:2 B
+Types:Artifact
+A:AB$ Animate | Cost$ T | Triggers$ DamageTrigger | ValidTgts$ Creature | SubAbility$ DBDamage | SorcerySpeed$ True | SpellDescription$ Until end of turn, target creature gains "Whenever this creature is dealt damage, you draw that many cards and lose that much life." That creature's controller may have this artifact deal 1 damage to it. Activate only as a sorcery.
+SVar:DamageTrigger:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever this creature is dealt damage, you draw that many cards and lose that much life.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X
+SVar:DBDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ 1 | OptionalDecider$ TargetedController
+SVar:X:TriggerCount$DamageAmount
+Oracle:{T}: Until end of turn, target creature gains "Whenever this creature is dealt damage, you draw that many cards and lose that much life." That creature's controller may have this artifact deal 1 damage to it. Activate only as a sorcery.

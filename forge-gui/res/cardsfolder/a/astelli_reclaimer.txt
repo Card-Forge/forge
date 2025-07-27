@@ -1,0 +1,10 @@
+Name:Astelli Reclaimer
+ManaCost:3 W W
+Types:Creature Angel Warrior
+PT:5/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When this creature enters, return target noncreature, nonland permanent card with mana value X or less from your graveyard to the battlefield, where X is the amount of mana spent to cast this creature.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Permanent.nonCreature+nonLand+YouOwn+cmcLEX | TgtPrompt$ Select target noncreature, nonland permanent card with mana value X or less in your graveyard
+K:Warp:2 W
+SVar:X:Count$CastTotalManaSpent
+Oracle:Flying\nWhen this creature enters, return target noncreature, nonland permanent card with mana value X or less from your graveyard to the battlefield, where X is the amount of mana spent to cast this creature.\nWarp {2}{W}

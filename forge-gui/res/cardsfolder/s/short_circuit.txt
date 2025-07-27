@@ -3,9 +3,7 @@ ManaCost:1 U
 Types:Enchantment Aura
 K:Flash
 K:Enchant:Creature,Artifact:artifact or creature
-SVar:AttachAITgts:Creature
-SVar:AttachAILogic:Curse
-SVar:AttachAITgts:Creature
+SVar:AttachAITgts:Creature,Vehicle
 SVar:AttachAILogic:Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -3 | RemoveKeyword$ Flying | Description$ As long as enchanted permanent is a creature, it gets -3/-0 and loses flying.
 Oracle:Flash\nEnchant artifact or creature\nAs long as enchanted permanent is a creature, it gets -3/-0 and loses flying.

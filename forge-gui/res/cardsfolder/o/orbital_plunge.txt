@@ -1,0 +1,7 @@
+Name:Orbital Plunge
+ManaCost:3 R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 6 | ExcessSVar$ Excess | SubAbility$ DBToken | SpellDescription$ CARDNAME deals 6 damage to target creature. If excess damage was dealt this way, create a Lander token. (It's an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")
+SVar:DBToken:DB$ Token | TokenScript$ c_a_lander_sac_search | TokenAmount$ 1 | ConditionCheckSVar$ Excess
+DeckHas:Ability$Token
+Oracle:Orbital Plunge deals 6 damage to target creature. If excess damage was dealt this way, create a Lander token. (It's an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")
