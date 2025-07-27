@@ -365,11 +365,6 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
-    public void setSourceTrigger(final int id) {
-        sa.setSourceTrigger(id);
-    }
-
-    @Override
     public int getSourceTrigger() {
         return sa.getSourceTrigger();
     }
