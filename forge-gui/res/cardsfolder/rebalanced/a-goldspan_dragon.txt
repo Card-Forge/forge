@@ -1,0 +1,13 @@
+Name:A-Goldspan Dragon
+ManaCost:3 R R
+Types:Creature Dragon
+PT:4/4
+K:Flying
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create a Treasure token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac
+S:Mode$ Continuous | Affected$ Card.Treasure+YouCtrl | AddAbility$ Mana | Description$ Treasures you control have "{T}, Sacrifice this artifact: Add two mana of any one color."
+SVar:Mana:AB$ Mana | Cost$ T Sac<1/CARDNAME/this artifact> | Produced$ Any | Amount$ 2 | SpellDescription$ Add two mana of any one color.
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
+Oracle:Flying, haste\nWhenever Goldspan Dragon attacks, create a Treasure token.\nTreasures you control have "{T}, Sacrifice this artifact: Add two mana of any one color."

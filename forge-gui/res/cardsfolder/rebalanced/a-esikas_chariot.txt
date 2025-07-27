@@ -1,0 +1,11 @@
+Name:A-Esika's Chariot
+ManaCost:3 G
+Types:Legendary Artifact Vehicle
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 2/2 green Cat creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_cat
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ Whenever CARDNAME attacks, create a token that's a copy of target token you control.
+SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Permanent.token+YouCtrl | TgtPrompt$ Select target token you control | NumCopies$ 1
+K:Crew:2
+DeckHas:Ability$Token
+Oracle:When Esika's Chariot enters, create a 2/2 green Cat creature token.\nWhenever Esika's Chariot attacks, create a token that's a copy of target token you control.\nCrew 2

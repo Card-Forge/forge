@@ -1,0 +1,28 @@
+Name:A-Kumano Faces Kakkazan
+ManaCost:R
+Types:Enchantment Saga
+K:Chapter:3:DBDamage,DBEffectAddCounter,DBTransform
+SVar:DBDamage:DB$ DamageAll | NumDmg$ 1 | ValidPlayers$ Opponent | ValidCards$ Planeswalker.OppCtrl | SpellDescription$ CARDNAME deals 1 damage to each opponent and 1 damage to each planeswalker they control.
+SVar:DBEffectAddCounter:DB$ Effect | Triggers$ TrigSpellCast | SpellDescription$ When you cast your next creature spell this turn, that creature enters with an additional +1/+1 counter on it.
+SVar:TrigSpellCast:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | OneOff$ True | Static$ True | TriggerZones$ Command | Execute$ ReplEffAddCounter | TriggerDescription$ When you cast your next creature spell this turn, that creature enters with an additional +1/+1 counter on it.
+SVar:ReplEffAddCounter:DB$ Effect | ReplacementEffects$ ETBAddCounter | RememberObjects$ TriggeredCard | Execute$ TrigRemoveSelf
+SVar:ETBAddCounter:Event$ Moved | Origin$ Stack | Destination$ Battlefield | ValidCard$ Card.IsRemembered | ReplaceWith$ ETBAddExtraCounter | ReplacementResult$ Updated
+SVar:ETBAddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ TrigRemoveSelf
+SVar:TrigRemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | GainControl$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Counters
+AlternateMode:DoubleFaced
+Oracle:(As this Saga enters and after your draw step, add a lore counter.)\nI — Kumano Faces Kakkazan deals 1 damage to each opponent and each planeswalker they control.\nII — When you cast your next creature spell this turn, that creature enters with an additional +1/+1 counter on it.\nIII — Exile this Saga, then return it to the battlefield transformed under your control.
+
+ALTERNATE
+
+Name:A-Etching of Kumano
+ManaCost:no cost
+Colors:red
+Types:Enchantment Creature Human Shaman
+PT:2/2
+R:Event$ Moved | ValidLKI$ Creature.DamagedByCard.YouCtrl;Emblem.YouCtrl | Destination$ Graveyard | ReplaceWith$ DBExile | ActiveZones$ Battlefield | Description$ If a creature dealt damage this turn by a source you controlled would die, exile it instead.
+SVar:DBExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ Exile
+Oracle:If a creature dealt damage this turn by a source you controlled would die, exile it instead.

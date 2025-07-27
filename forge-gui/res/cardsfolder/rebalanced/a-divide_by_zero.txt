@@ -1,0 +1,6 @@
+Name:A-Divide by Zero
+ManaCost:2 U
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Permanent.cmcGE1,Card.inZoneStack+cmcGE1 | TgtZone$ Stack,Battlefield | Origin$ Battlefield,Stack | Destination$ Hand | SubAbility$ DBLearn | SpellDescription$ Return target spell or permanent with mana value 1 or greater to its owner's hand. If its mana value was 4 or less, learn.
+SVar:DBLearn:DB$ Learn | ConditionDefined$ Targeted | ConditionPresent$ Card.cmcLE4 | ConditionCompare$ EQ1
+Oracle:Return target spell or permanent with mana value 1 or greater to its owner's hand. If its mana value was 4 or less, learn.
