@@ -518,7 +518,6 @@ public class TriggerHandler {
         }
 
         sa.setTrigger(regtrig);
-        sa.setSourceTrigger(regtrig.getId());
         regtrig.setTriggeringObjects(sa, runParams);
         sa.setTriggerRemembered(regtrig.getTriggerRemembered());
 
