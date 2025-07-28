@@ -934,7 +934,7 @@ public class AiController {
         // Account for possible Ward after the spell is fully targeted
         // TODO: ideally, this should be done while targeting, so that a different target can be preferred if the best
         // one is warded and can't be paid for. (currently it will be stuck with the target until it could pay)
-        if (!sa.isSpell() || sa.isCounterableBy(null)) {
+        if (sa.isCounterableBy(null)) {
             for (TargetChoices tc : sa.getAllTargetChoices()) {
                 for (Card tgt : tc.getTargetCards()) {
                     // TODO some older cards don't use the keyword, so check for trigger instead
@@ -1804,9 +1804,9 @@ public class AiController {
 
         for (int i = 0; i < numToExile; i++) {
             Card chosen = null;
-            for (final Card c : grave) { // Exile noncreatures first in
-                // case we can revive. Might wanna do some additional
-                // checking here for Flashback and the like.
+            for (final Card c : grave) {
+                // Exile noncreatures first in case we can revive
+                // Might wanna do some additional checking here for Flashback and the like
                 if (!c.isCreature()) {
                     chosen = c;
                     break;
@@ -1827,12 +1827,12 @@ public class AiController {
         return toExile;
     }
 
-    public boolean doTrigger(SpellAbility spell, boolean mandatory) {
-        if (spell instanceof WrappedAbility)
-            return doTrigger(((WrappedAbility) spell).getWrappedAbility(), mandatory);
-        if (spell.getApi() != null)
-            return SpellApiToAi.Converter.get(spell).doTriggerAI(player, spell, mandatory);
-        if (spell.getPayCosts() == Cost.Zero && !spell.usesTargeting()) {
+    public boolean doTrigger(SpellAbility sa, boolean mandatory) {
+        if (sa instanceof WrappedAbility)
+            return doTrigger(((WrappedAbility) sa).getWrappedAbility(), mandatory);
+        if (sa.getApi() != null)
+            return SpellApiToAi.Converter.get(sa).doTriggerAI(player, sa, mandatory);
+        if (sa.getPayCosts() == Cost.Zero && !sa.usesTargeting()) {
             // For non-converted triggers (such as Cumulative Upkeep) that don't have costs or targets to worry about
             return true;
         }
