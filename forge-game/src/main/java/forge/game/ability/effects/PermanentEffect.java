@@ -28,22 +28,24 @@ public class PermanentEffect extends SpellAbilityEffect {
         final Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         final CardZoneTable table = AbilityKey.addCardZoneTableParams(moveParams, sa);
 
-        final Card c = game.getAction().moveToPlay(host, host.getController(), sa, moveParams);
+        final Card c = game.getAction().moveToPlay(host, sa, moveParams);
         sa.setHostCard(c);
 
-        // some extra for Dashing
-        if (sa.isDash() && c.isInPlay()) {
-            c.addChangedSVars(Collections.singletonMap("EndOfTurnLeavePlay", "Dash"), c.getGame().getNextTimestamp(), 0);
-            registerDelayedTrigger(sa, "Hand", Lists.newArrayList(c));
-        }
-        // similar for Blitz keyword
-        if (sa.isBlitz() && c.isInPlay()) {
-            c.addChangedSVars(Collections.singletonMap("EndOfTurnLeavePlay", "Blitz"), c.getGame().getNextTimestamp(), 0);
-            registerDelayedTrigger(sa, "Sacrifice", Lists.newArrayList(c));
-        }
-        if (sa.isWarp() && c.isInPlay()) {
-            c.addChangedSVars(Collections.singletonMap("EndOfTurnLeavePlay", "Warp"), c.getGame().getNextTimestamp(), 0);
-            registerDelayedTrigger(sa, "Exile", Lists.newArrayList(c));
+        // CR 608.3g
+        if (sa.isIntrinsic() || c.wasCast()) {
+            if (sa.isDash() && c.isInPlay()) {
+                registerDelayedTrigger(sa, "Hand", Lists.newArrayList(c));
+                // add AI hint
+                c.addChangedSVars(Collections.singletonMap("EndOfTurnLeavePlay", "Dash"), c.getGame().getNextTimestamp(), 0);
+            }
+            if (sa.isBlitz() && c.isInPlay()) {
+                registerDelayedTrigger(sa, "Sacrifice", Lists.newArrayList(c));
+                c.addChangedSVars(Collections.singletonMap("EndOfTurnLeavePlay", "Blitz"), c.getGame().getNextTimestamp(), 0);
+            }
+            if (sa.isWarp() && c.isInPlay()) {
+                registerDelayedTrigger(sa, "Exile", Lists.newArrayList(c));
+                c.addChangedSVars(Collections.singletonMap("EndOfTurnLeavePlay", "Warp"), c.getGame().getNextTimestamp(), 0);
+            }
         }
 
         table.triggerChangesZoneAll(game, sa);

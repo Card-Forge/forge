@@ -1,0 +1,8 @@
+Name:Decode Transmissions
+ManaCost:2 B
+Types:Sorcery
+A:SP$ Draw | NumCards$ 2 | SubAbility$ DBLoseLifeYou | SpellDescription$ You draw two cards and you lose 2 life. Void — If a nonland permanent left the battlefield this turn or a spell was warped this turn, instead you draw two cards and each opponent loses 2 life.
+SVar:DBLoseLifeYou:DB$ LoseLife | LifeAmount$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBLoseLifeOpp
+SVar:DBLoseLifeOpp:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 2 | ConditionCheckSVar$ X
+SVar:X:Count$Void.1.0
+Oracle:You draw two cards and lose 2 life.\nVoid — If a nonland permanent left the battlefield this turn or a spell was warped this turn, instead you draw two cards and each opponent loses 2 life.

@@ -1,0 +1,8 @@
+Name:Mechan Navigator
+ManaCost:1 U
+Types:Artifact Creature Robot Pilot
+PT:2/1
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever this creature becomes tapped, draw a card, then discard a card.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+Oracle:Whenever this creature becomes tapped, draw a card, then discard a card.

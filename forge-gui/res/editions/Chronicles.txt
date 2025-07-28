@@ -137,7 +137,3 @@ ScryfallCode=CHR
 116b U Urza's Tower @Mark Poole
 116c U Urza's Tower @Mark Poole
 116d U Urza's Tower @Mark Poole
-
-[tokens]
-stangg_twin
-c_1_1_a_snake_poison

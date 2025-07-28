@@ -302,6 +302,10 @@ public class Controls {
     }
 
     static public TextraButton newTextButton(String text, Runnable func) {
+        return newTextButton(text, func, "");
+    }
+
+    static public TextraButton newTextButton(String text, Runnable func, String styleName) {
         TextraButton ret = newTextButton(text);
         ret.addListener(new ClickListener() {
             @Override
@@ -314,7 +318,8 @@ public class Controls {
                 }
             }
         });
-
+        if (!styleName.isEmpty())
+            ret.setStyle(getTextButtonStyle(styleName));
         return ret;
     }
 
