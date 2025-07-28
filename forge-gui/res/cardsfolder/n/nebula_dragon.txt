@@ -1,0 +1,8 @@
+Name:Nebula Dragon
+ManaCost:6 R
+Types:Creature Dragon
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When this creature enters, it deals 3 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3
+Oracle:Flying\nWhen this creature enters, it deals 3 damage to any target.

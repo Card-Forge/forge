@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
+import forge.game.GameObject;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -522,13 +523,12 @@ public class ComputerUtilCost {
             sa.setActivatingPlayer(player); // complaints on NPE had came before this line was added.
         }
 
-        boolean cannotBeCountered = false;
-
         // Check for stuff like Nether Void
         int extraManaNeeded = 0;
         if (!effect) {
+            boolean cannotBeCountered = !sa.isCounterableBy(null);
+
             if (sa instanceof Spell) {
-                cannotBeCountered = !sa.isCounterableBy(null);
                 for (Card c : player.getGame().getCardsIn(ZoneType.Battlefield)) {
                     final String snem = c.getSVar("AI_SpellsNeedExtraMana");
                     if (!StringUtils.isBlank(snem)) {
@@ -579,9 +579,13 @@ public class ComputerUtilCost {
             }
 
             // Ward - will be accounted for when rechecking a targeted ability
-            if (!sa.isTrigger() && (!sa.isSpell() || !cannotBeCountered)) {
+            if (!sa.isTrigger() && !cannotBeCountered) {
+                Set<GameObject> distinctObjects = Sets.newHashSet();
                 for (TargetChoices tc : sa.getAllTargetChoices()) {
                     for (Card tgt : tc.getTargetCards()) {
+                        if (!distinctObjects.add(tgt)) {
+                            continue;
+                        }
                         if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(sa.getHostCard().getController())) {
                             Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
                             if (wardCost.hasManaCost()) {

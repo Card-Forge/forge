@@ -1,0 +1,7 @@
+Name:Lost in Space
+ManaCost:3 U
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | AlternativeDecider$ TargetedOwner | Origin$ Battlefield | Destination$ Library | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | SubAbility$ DBSurveil | SpellDescription$ Target artifact or creature's owner puts it on their choice of the top or bottom of their library. Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+SVar:DBSurveil:DB$ Surveil | Amount$ 1
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Target artifact or creature's owner puts it on their choice of the top or bottom of their library. Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)

@@ -1,0 +1,9 @@
+Name:Archenemy's Charm
+ManaCost:B B B
+Types:Instant
+A:SP$ Charm | Choices$ DBExile,DBReturn,DBPutCounter
+SVar:DBExile:DB$ ChangeZone | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature or planeswalker.
+SVar:DBReturn:DB$ ChangeZone | ValidTgts$ Creature.YouOwn,Planeswalker.YouOwn | TgtPrompt$ Select one or two target creature and/or planeswalker cards in your graveyard | TargetMin$ 1 | TargetMax$ 2 | TgtZone$ Graveyard | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return one or two target creature and/or planeswalker cards from your graveyard to your hand.
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPump | SpellDescription$ Put two +1/+1 counters on target creature you control. It gains lifelink until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ ParentTarget | KW$ Lifelink
+Oracle:Choose one —\n• Exile target creature or planeswalker.\n• Return one or two target creature and/or planeswalker cards from your graveyard to your hand.\n• Put two +1/+1 counters on target creature you control. It gains lifelink until end of turn.

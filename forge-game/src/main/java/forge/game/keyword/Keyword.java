@@ -52,7 +52,7 @@ public enum Keyword {
     DELVE("Delve", SimpleKeyword.class, true, "As an additional cost to cast this spell, you may exile any number of cards from your graveyard. Each card exiled this way reduces the cost to cast this spell by {1}."),
     DEMONSTRATE("Demonstrate", SimpleKeyword.class, false, "When you cast this spell, you may copy it. If you do, choose an opponent to also copy it. Players may choose new targets for their copies."),
     DETHRONE("Dethrone", SimpleKeyword.class, false, "Whenever this creature attacks the player with the most life or tied for the most life, put a +1/+1 counter on it."),
-    DEVOUR("Devour", KeywordWithAmount.class, false, "As this creature enters, you may sacrifice any number of creatures. This creature enters with {%d:+1/+1 counter} on it for each creature sacrificed this way."),
+    DEVOUR("Devour", Devour.class, false, "As this object enters, you may sacrifice any number of %2$s. This permanent enters with {%1$s:+1/+1 counter} on it for each permanent sacrificed this way."),
     DEVOID("Devoid", SimpleKeyword.class, true, "This card has no color."),
     DISGUISE("Disguise", KeywordWithCost.class, false, "You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost."),
     DISTURB("Disturb", KeywordWithCost.class, false, "You may cast this card from your graveyard transformed for its disturb cost."),
@@ -228,6 +228,9 @@ public enum Keyword {
             final String[] x = k.split(":", 2);
             keyword = smartValueOf(x[0]);
             details = x[1];
+            // Flavor keyword titles should be last in the card script K: line
+            if (details.contains(":Flavor ")) details = details.substring(0, details.indexOf(":Flavor "));
+            // Simply remove flavor here so it doesn't goof up parsing details
         } else if (k.contains(" ")) {
             // First strike
             keyword = smartValueOf(k);
@@ -250,20 +253,6 @@ public enum Keyword {
             details = "";
         }
 
-        if (keyword == Keyword.UNDEFINED) {
-            //check for special keywords that have a prefix before the keyword enum name
-            int idx = k.indexOf(' ');
-            String enumName = k.replace(" ", "_").toUpperCase(Locale.ROOT);
-            String firstWord = idx == -1 ? enumName : enumName.substring(0, idx);
-            if (idx != -1) {
-                idx = k.indexOf(' ', idx + 1);
-                String secondWord = idx == -1 ? enumName.substring(firstWord.length() + 1) : enumName.substring(firstWord.length() + 1, idx);
-                if (secondWord.equalsIgnoreCase("OFFERING")) {
-                    keyword = Keyword.OFFERING;
-                    details = firstWord;
-                }
-            }
-        }
         KeywordInstance<?> inst;
         try {
             inst = keyword.type.getConstructor().newInstance();
