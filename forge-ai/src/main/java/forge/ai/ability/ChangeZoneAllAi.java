@@ -69,11 +69,9 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         computerType = AbilityUtils.filterListByType(computerType, sa.getParam("ChangeType"), sa);
         
         if ("LivingDeath".equals(aiLogic)) {
-            boolean result = SpecialCardAi.LivingDeath.consider(ai, sa);
-            return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            return SpecialCardAi.LivingDeath.consider(ai, sa);
         } else if ("Timetwister".equals(aiLogic)) {
-            boolean result = SpecialCardAi.Timetwister.consider(ai, sa);
-            return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            return SpecialCardAi.Timetwister.consider(ai, sa);
         } else if ("RetDiscardedThisTurn".equals(aiLogic)) {
             boolean result = !ai.getDiscardedThisTurn().isEmpty() && ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN);
             return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);

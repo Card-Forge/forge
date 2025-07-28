@@ -50,9 +50,13 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
      * forge.game.spellability.SpellAbility)
      */
     @Override
-    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         if (sa.usesTargeting()) {
-            return doTgt(ai, sa, false);
+            if (doTgt(ai, sa, false)) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
         }
         return super.checkApiLogic(ai, sa);
     }

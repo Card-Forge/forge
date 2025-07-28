@@ -253,7 +253,7 @@ public class CardStorageReader {
             sw.start();
             executeLoadTask(result, taskFiles, cdlFiles);
             sw.stop();
-            final long timeOnParse = sw.getTime();
+            final long timeOnParse = sw.getTime(TimeUnit.SECONDS);
             System.out.printf("Read cards: %s files in %d ms (%d parts) %s%n", allFiles.size(), timeOnParse, taskFiles.size(), useThreadPool ? "using thread pool" : "in same thread");
         }
 
@@ -267,7 +267,7 @@ public class CardStorageReader {
             sw.start();
             executeLoadTask(result, taskZip, cdlZip);
             sw.stop();
-            final long timeOnParse = sw.getTime();
+            final long timeOnParse = sw.getTime(TimeUnit.SECONDS);
             System.out.printf("Read cards: %s archived files in %d ms (%d parts) %s%n", this.zip.size(), timeOnParse, taskZip.size(), useThreadPool ? "using thread pool" : "in same thread");
         }
 

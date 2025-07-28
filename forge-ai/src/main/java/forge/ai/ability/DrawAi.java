@@ -42,43 +42,46 @@ public class DrawAi extends SpellAbilityAi {
      * @see forge.ai.SpellAbilityAi#checkApiLogic(forge.game.player.Player, forge.game.spellability.SpellAbility)
      */
     @Override
-    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         if (!targetAI(ai, sa, false)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
         if (sa.usesTargeting()) {
             final Player player = sa.getTargets().getFirstTargetedPlayer();
             if (player != null && player.isOpponentOf(ai)) {
-                return true;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
         // prevent run-away activations - first time will always return true
         if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
         }
 
         if (ComputerUtil.playImmediately(ai, sa)) {
-            return true;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         // Don't tap creatures that may be able to block
         if (ComputerUtil.waitForBlocking(sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.WaitForCombat);
         }
 
         if (!canLoot(ai, sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())) {
             // Canopy lands and other cards that sacrifice themselves to draw cards
-            return ai.getCardsIn(ZoneType.Hand).isEmpty()
-                    || (sa.getHostCard().isLand() && ai.getLandsInPlay().size() >= 5); // TODO: make this configurable in the AI profile
+            if (ai.getCardsIn(ZoneType.Hand).isEmpty()
+                    || (sa.getHostCard().isLand() && ai.getLandsInPlay().size() >= 5)) {
+                // TODO: make this configurable in the AI profile
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
         }
 
-        return true;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     /*

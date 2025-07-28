@@ -142,21 +142,22 @@ public class AnimateAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean checkApiLogic(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player aiPlayer, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Game game = aiPlayer.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
         if (!sa.metConditions() && sa.getSubAbility() == null) {
-            return false; // what is this for?
+            return new AiAbilityDecision(0, AiPlayDecision.ConditionsNotMet); // what is this for?
         }
         if (!game.getStack().isEmpty() && game.getStack().peekAbility().getApi() == ApiType.Sacrifice) {
+            // Should I animate a card before i have to sacrifice something better?
             if (!isAnimatedThisTurn(aiPlayer, source)) {
                 rememberAnimatedThisTurn(aiPlayer, source);
-                return true;  // interrupt sacrifice
+                return new AiAbilityDecision(100, AiPlayDecision.ResponseToStackResolve);
             }
         }
         if (!ComputerUtilCost.checkTapTypeCost(aiPlayer, sa.getPayCosts(), source, sa, new CardCollection())) {
-            return false; // prevent crewing with equal or better creatures
+            return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable); // prevent crewing with equal or better creatures
         }
 
         if (sa.costHasManaX() && sa.getSVar("X").equals("Count$xPaid")) {
@@ -202,16 +203,16 @@ public class AnimateAi extends SpellAbilityAi {
                 if (!isSorcerySpeed(sa, aiPlayer) && !"Permanent".equals(sa.getParam("Duration"))) {
                     if (sa.isCrew() && c.isCreature()) {
                         // Do not try to crew a vehicle which is already a creature
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
                     Card animatedCopy = becomeAnimated(c, sa);
                     if (ph.isPlayerTurn(aiPlayer)
                             && !ComputerUtilCard.doesSpecifiedCreatureAttackAI(aiPlayer, animatedCopy)) {
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.DoesntImpactCombat);
                     }
                     if (ph.getPlayerTurn().isOpponentOf(aiPlayer)
                             && !ComputerUtilCard.doesSpecifiedCreatureBlock(aiPlayer, animatedCopy)) {
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.DoesntImpactCombat);
                     }
                     // also check if maybe there are static effects applied to the animated copy that would matter
                     // (e.g. Myth Realized)
@@ -227,11 +228,12 @@ public class AnimateAi extends SpellAbilityAi {
             }
             if (bFlag) {
                 rememberAnimatedThisTurn(aiPlayer, sa.getHostCard());
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
-            return bFlag; // All of the defined stuff is animated, not very useful
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else {
             sa.resetTargets();
-            return animateTgtAI(sa).willingToPlay();
+            return animateTgtAI(sa);
         }
 
     }
