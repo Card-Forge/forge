@@ -208,7 +208,7 @@ ChaosShop
   xy: 352, 816
   size: 16, 16
 InsectShop
-  xy: 368, 912
+  xy: 288, 960
   size: 16, 16
 CatShop
   xy: 288, 928
