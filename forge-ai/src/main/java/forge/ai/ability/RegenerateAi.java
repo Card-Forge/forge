@@ -42,7 +42,7 @@ import java.util.List;
 public class RegenerateAi extends SpellAbilityAi {
 
     @Override
-    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
         final Card hostCard = sa.getHostCard();
@@ -54,7 +54,7 @@ public class RegenerateAi extends SpellAbilityAi {
             List<Card> targetables = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
 
             if (targetables.isEmpty()) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
             if (!game.getStack().isEmpty()) {
@@ -87,12 +87,12 @@ public class RegenerateAi extends SpellAbilityAi {
                 }
             }
             if (sa.getTargets().isEmpty()) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
         } else {
             final List<Card> list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("Defined"), sa);
             if (list.isEmpty()) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
             // when regenerating more than one is possible try for slightly more value
             int numToSave = Math.min(2, list.size());
@@ -116,7 +116,11 @@ public class RegenerateAi extends SpellAbilityAi {
             chance = saved >= numToSave;
         }
 
-        return chance;
+        if (chance) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override

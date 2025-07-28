@@ -13,12 +13,12 @@ import java.util.Map;
 public class DiscoverAi extends SpellAbilityAi {
 
     @Override
-    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
         if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false; // prevent infinite loop
+            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
         }
 
-        return true;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     /**
@@ -38,11 +38,7 @@ public class DiscoverAi extends SpellAbilityAi {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        if (checkApiLogic(ai, sa)) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        }
+        return checkApiLogic(ai, sa);
     }
 
     @Override

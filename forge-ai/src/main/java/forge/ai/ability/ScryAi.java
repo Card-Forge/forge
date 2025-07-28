@@ -147,10 +147,10 @@ public class ScryAi extends SpellAbilityAi {
     }
     
     @Override
-    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         // does Scry make sense with no Library cards?
         if (ai.getCardsIn(ZoneType.Library).isEmpty()) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         double chance = .4; // 40 percent chance of milling with instant speed stuff
@@ -181,12 +181,15 @@ public class ScryAi extends SpellAbilityAi {
         if ("X".equals(sa.getParam("ScryNum")) && sa.getSVar("X").equals("Count$xPaid")) {
             int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
             if (xPay == 0) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
             }
             sa.getRootAbility().setXManaCostPaid(xPay);
         }
 
-        return randomReturn;
+        if (randomReturn) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override

@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 public class PlayAi extends SpellAbilityAi {
 
     @Override
-    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
         final String logic = sa.getParamOrDefault("AILogic", "");
 
         final Game game = ai.getGame();
@@ -34,11 +34,11 @@ public class PlayAi extends SpellAbilityAi {
         // don't use this as a response (ReplaySpell logic is an exception, might be called from a subability
         // while the trigger is on stack)
         if (!game.getStack().isEmpty() && !"ReplaySpell".equals(logic)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false; // prevent infinite loop
+            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
         }
 
         if (game.getRules().hasAppliedVariant(GameType.MoJhoSto) && source.getName().equals("Jhoira of the Ghitu Avatar")) {
@@ -48,38 +48,46 @@ public class PlayAi extends SpellAbilityAi {
             int numLandsForJhoira = aic.getIntProperty(AiProps.MOJHOSTO_NUM_LANDS_TO_ACTIVATE_JHOIRA);
             int chanceToActivateInst = 100 - aic.getIntProperty(AiProps.MOJHOSTO_CHANCE_TO_USE_JHOIRA_COPY_INSTANT);
             if (ai.getLandsInPlay().size() < numLandsForJhoira) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
             // Don't spam activate the Instant copying ability all the time to give the AI a chance to use other abilities
             // Can probably be improved, but as random as MoJhoSto already is, probably not a huge deal for now
             if ("Instant".equals(sa.getParam("AnySupportedCard")) && MyRandom.percentTrue(chanceToActivateInst)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         List<Card> cards = getPlayableCards(sa, ai);
         if (cards.isEmpty()) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
         }
 
         if ("ReplaySpell".equals(logic)) {
-            return ComputerUtil.targetPlayableSpellCard(ai, cards, sa, sa.hasParam("WithoutManaCost"), false);
+            if (ComputerUtil.targetPlayableSpellCard(ai, cards, sa, sa.hasParam("WithoutManaCost"), false)) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
         } else if (logic.startsWith("NeedsChosenCard")) {
             int minCMC = 0;
             if (sa.getPayCosts().getCostMana() != null) {
                 minCMC = sa.getPayCosts().getTotalMana().getCMC();
             }
             cards = CardLists.filter(cards, CardPredicates.greaterCMC(minCMC));
-            return chooseSingleCard(ai, sa, cards, sa.hasParam("Optional"), null, null) != null;
+            if (chooseSingleCard(ai, sa, cards, sa.hasParam("Optional"), null, null) != null) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
+            }
         } else if ("WithTotalCMC".equals(logic)) {
             // Try to play only when there are more than three playable cards.
             if (cards.size() < 3)
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             if (sa.costHasManaX()) {
                 int amount = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
                 if (amount < ComputerUtilCard.getBestAI(cards).getCMC())
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 int totalCMC = 0;
                 for (Card c : cards) {
                     totalCMC += c.getCMC();
@@ -97,10 +105,14 @@ public class PlayAi extends SpellAbilityAi {
             Card rem = source.getExiledCards().getFirst();
             CardTypeView t = rem.getState(CardStateName.Original).getType();
 
-            return t.isPermanent() && !t.isLand();
+            if (t.isPermanent() && !t.isLand()) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /**
@@ -126,8 +138,7 @@ public class PlayAi extends SpellAbilityAi {
                 return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
-            boolean result = checkApiLogic(ai, sa);
-            return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            return checkApiLogic(ai, sa);
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

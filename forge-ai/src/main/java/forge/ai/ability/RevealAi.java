@@ -15,20 +15,27 @@ import forge.util.MyRandom;
 public class RevealAi extends RevealAiBase {
 
     @Override
-    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
         // we can reuse this function here...
         final boolean bFlag = revealHandTargetAI(ai, sa, false);
 
         if (!bFlag) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
         boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(.667, sa.getActivationsThisTurn() + 1);
 
+        // Are we checking for runaway activations?
         if (playReusable(ai, sa)) {
             randomReturn = true;
         }
-        return randomReturn;
+
+        if (randomReturn) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
     }
 
     @Override

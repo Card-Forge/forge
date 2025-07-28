@@ -19,20 +19,25 @@ import java.util.Map;
 
 public class CountersMoveAi extends SpellAbilityAi {
     @Override
-    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
+        AiAbilityDecision decision = new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         if (sa.usesTargeting()) {
             sa.resetTargets();
-            AiAbilityDecision decision = moveTgtAI(ai, sa);
+            decision = moveTgtAI(ai, sa);
             if (!decision.willingToPlay()) {
-                return false;
+                return decision;
             }
         }
 
         if (!playReusable(ai, sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        return MyRandom.getRandom().nextFloat() < .8f; // random success
+        if (MyRandom.getRandom().nextFloat() < .8f) {
+            return decision;
+        }
+
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override

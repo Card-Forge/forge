@@ -26,19 +26,19 @@ public class ChooseCardAi extends SpellAbilityAi {
      * The rest of the logic not covered by the canPlayAI template is defined here
      */
     @Override
-    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
         if (sa.usesTargeting()) {
             sa.resetTargets();
             // search targetable Opponents
             final List<Player> oppList = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
 
             if (oppList.isEmpty()) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             sa.getTargets().add(Iterables.getFirst(oppList, null));
         }
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /**
@@ -140,11 +140,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        if (checkApiLogic(ai, sa)) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        }
+        return checkApiLogic(ai, sa);
     }
 
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {

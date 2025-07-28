@@ -134,7 +134,7 @@ public class TokenAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
         /*
          * readParameters() is called in checkPhaseRestrictions
          */
@@ -142,14 +142,14 @@ public class TokenAi extends SpellAbilityAi {
         final Player opp = ai.getWeakestOpponent();
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false; // prevent infinite tokens?
+            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
         }
         Card actualToken = spawnToken(ai, sa);
 
         // Don't kill AIs Legendary tokens
         if (actualToken.getType().isLegendary() && ai.isCardInPlay(actualToken.getName())) {
             // TODO Check if Token is useless due to an aura or counters?
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.WouldDestroyLegend);
         }
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -157,14 +157,18 @@ public class TokenAi extends SpellAbilityAi {
             sa.resetTargets();
 
             if (actualToken.getType().hasSubtype("Role")) {
-                return tgtRoleAura(ai, sa, actualToken, false);
+                if (tgtRoleAura(ai, sa, actualToken, false)) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                } else {
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+                }
             }
 
             if (tgt.canOnlyTgtOpponent() || "Opponent".equals(sa.getParam("AITgts"))) {
                 if (sa.canTarget(opp)) {
                     sa.getTargets().add(opp);
                 } else {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             } else {
                 if (sa.canTarget(ai)) {
@@ -183,7 +187,7 @@ public class TokenAi extends SpellAbilityAi {
                     if (!list.isEmpty()) {
                         sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(list));
                     } else {
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
                 }
             }
@@ -201,7 +205,7 @@ public class TokenAi extends SpellAbilityAi {
         }
 
         if (sa.isPwAbility() && alwaysFromPW) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && game.getPhaseHandler().getPlayerTurn().isOpponentOf(ai)
                 && game.getCombat() != null
@@ -210,14 +214,18 @@ public class TokenAi extends SpellAbilityAi {
                 && actualToken.isCreature()) {
             for (Card attacker : game.getCombat().getAttackers()) {
                 if (CombatUtil.canBlock(attacker, actualToken)) {
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
             // if the token can't block, then what's the point?
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.DoesntImpactCombat);
         }
 
-        return MyRandom.getRandom().nextFloat() <= chance;
+        if (MyRandom.getRandom().nextFloat() <= chance) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     /**

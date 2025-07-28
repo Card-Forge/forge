@@ -87,18 +87,22 @@ public class ManaAi extends SpellAbilityAi {
      * forge.game.spellability.SpellAbility)
      */
     @Override
-    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         if (sa.hasParam("AILogic")) {
-            return true; // handled elsewhere, does not meet the standard requirements
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay); // handled elsewhere, does not meet the standard requirements
         }
 
         // TODO check if it would be worth it to keep mana open for opponents turn anyway
         if (ComputerUtil.activateForCost(sa, ai)) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        return sa.getPayCosts().hasNoManaCost() && sa.getPayCosts().isReusuableResource()
-                && sa.getSubAbility() == null && (improvesPosition(ai, sa) || ComputerUtil.playImmediately(ai, sa));
+        if (sa.getPayCosts().hasNoManaCost() && sa.getPayCosts().isReusuableResource()
+                && sa.getSubAbility() == null && (improvesPosition(ai, sa) || ComputerUtil.playImmediately(ai, sa))) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     /**
@@ -276,7 +280,6 @@ public class ManaAi extends SpellAbilityAi {
     @Override
     protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
         final String logic = sa.getParamOrDefault("AILogic", "");
-        boolean result = checkApiLogic(ai, sa);
-        return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        return checkApiLogic(ai, sa);
     }
 }

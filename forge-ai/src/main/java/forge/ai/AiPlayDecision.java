@@ -5,6 +5,8 @@ public enum AiPlayDecision {
     WillPlay,
     MandatoryPlay,
     PlayToEmptyHand,
+    ImpactCombat,
+    ResponseToStackResolve,
     AddBoardPresence,
     Removal,
     Tempo,
@@ -22,14 +24,18 @@ public enum AiPlayDecision {
     CantPlayAi,
     CantAfford,
     CantAffordX,
+    DoesntImpactCombat,
+    DoesntImpactGame,
     MissingLogic,
     MissingNeededCards,
     TimingRestrictions,
     MissingPhaseRestrictions,
+    ConditionsNotMet,
     NeedsToPlayCriteriaNotMet,
     StopRunawayActivations,
     TargetingFailed,
     CostNotAcceptable,
+    LifeInDanger,
     WouldDestroyLegend,
     WouldDestroyOtherPlaneswalker,
     WouldBecomeZeroToughnessCreature,
@@ -39,7 +45,7 @@ public enum AiPlayDecision {
 
     public boolean willingToPlay() {
         return switch (this) {
-            case WillPlay, MandatoryPlay, PlayToEmptyHand, AddBoardPresence, Removal, Tempo, CardAdvantage -> true;
+            case WillPlay, MandatoryPlay, PlayToEmptyHand, AddBoardPresence, ImpactCombat, ResponseToStackResolve, Removal, Tempo, CardAdvantage -> true;
             default -> false;
         };
     }
