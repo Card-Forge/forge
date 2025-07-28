@@ -553,8 +553,11 @@ public class ManaCostBeingPaid {
             }
             if (!bill.isPhyrexian()) {
                 return 10;
+            } else {
+                // Phyrexian mana is paid last since life can be used and previously cards like
+                // "Moltensteel Dragon" could not be autopaid because phyrexian mana was paid first
+                return 0;
             }
-            return 8;
         }
         return 5;
     }
