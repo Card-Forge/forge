@@ -258,6 +258,12 @@ public class Config {
                         return CardUtil.getDeck(entry.value, false, false, "", false, false);
                     }
                 }
+            case OldBorder:
+                for (ObjectMap.Entry<String, String> entry : difficultyData.oldStarterDecks) {
+                    if (ColorSet.fromNames(entry.key.toCharArray()).getColor() == color.getColor()) {
+                        return CardUtil.getDeck(entry.value, false, false, "", false, false);
+                    }
+                }
         }
         return null;
     }

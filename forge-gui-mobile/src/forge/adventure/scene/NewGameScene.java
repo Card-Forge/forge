@@ -97,6 +97,11 @@ public class NewGameScene extends MenuScene {
                 AdventureModes.Pile.setSelectionName(colorIdLabel);
                 AdventureModes.Pile.setModes(colorNames);
             }
+            if (diff.oldStarterDecks != null) {
+                modes.add(AdventureModes.OldBorder);
+                AdventureModes.OldBorder.setSelectionName(colorIdLabel);
+                AdventureModes.OldBorder.setModes(colorNames);
+            }
             break;
         }
 
@@ -450,6 +455,26 @@ public class NewGameScene extends MenuScene {
                 break;
             case Custom:
                 summaryText.append("Mode: Custom\n\nChoose your own preconstructed deck. Enemies can receive a random genetic AI deck (difficult).\n\nWarning: This will make encounter difficulty vary wildly from the developers' intent");
+                break;
+            case OldBorder:
+                summaryText.append("Mode: Classic Starter\n\nYou will receive a specific Starter deck based on your chosen color and difficulty.\n\n");
+                switch (selectedDifficulty.name) {
+                    case "Easy":
+                        summaryText.append("On your currently selected difficulty, Easy, your deck will either be a Mirage Starter, or Mercadian Masques Starter, based on your chosen color.\n\n");
+                        break;
+                    case "Normal":
+                        summaryText.append("On your currently selected difficulty, Normal, your deck will either be a Tempest Starter, or Urza's Saga Starter, based on your chosen color.\n\n");
+                        break;
+                    case "Hard":
+                        summaryText.append("On your currently selected difficulty, Hard, your deck will be a 7th Edition Starter, based on your chosen color.\n\n");
+                        break;
+                    case "Insane":
+                        summaryText.append("On your currently selected difficulty, Insane, your deck will be a 1999 Starter Edition, base on your chosen color.\n\n");
+                        break;
+                    default:
+                        difficultySummary.text = "((Cannot determine starter deck based on custom difficulty settings))";
+                        break;
+                }
                 break;
             default:
                 summaryText.append("No summary available for your this game mode.");

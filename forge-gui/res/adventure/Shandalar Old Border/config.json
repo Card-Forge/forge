@@ -135,7 +135,7 @@
       "rewardMaxFactor" : 1.5,
       "sellFactor": 0.6,  
       "shardSellRatio": 0.95,
-      "starterDecks": {
+      "oldStarterDecks": {
         "W":"decks/starter/MMQ - White.dck",
         "B":"decks/starter/MIR - Black.dck",
         "U":"decks/starter/MMQ - BlueWhite.dck",
@@ -173,7 +173,7 @@
       "lifeLoss": 0.2,  
       "sellFactor": 0.5,      
       "shardSellRatio": 0.8,
-      "starterDecks": {
+      "oldStarterDecks": {
         "W":"decks/starter/USG - White.dck",
         "B":"decks/starter/TMP - BlueBlack.dck",
         "U":"decks/starter/USG - BlueBlack.dck",
@@ -209,7 +209,7 @@
       "lifeLoss": 0.3,  
       "sellFactor": 0.25,
       "shardSellRatio": 0.6,
-      "starterDecks": {
+      "oldStarterDecks": {
         "W":"decks/starter/7ED - White.dck",
         "B":"decks/starter/7ED - Black.dck",
         "U":"decks/starter/7ED - Blue.dck",
@@ -242,7 +242,7 @@
       "lifeLoss": 0.3,
       "sellFactor": 0.05,
       "shardSellRatio": 0.3,
-      "starterDecks": {
+      "oldStarterDecks": {
         "W":"decks/starter/Starter 1999 - White.dck",
         "B":"decks/starter/Starter 1999 - Black.dck",
         "U":"decks/starter/Starter 1999 - Blue.dck",
