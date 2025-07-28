@@ -21,13 +21,19 @@ import java.util.Map;
 
 public class AmassAi extends SpellAbilityAi {
     @Override
-    protected boolean checkApiLogic(Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, final SpellAbility sa) {
         CardCollection aiArmies = CardLists.getType(ai.getCardsIn(ZoneType.Battlefield), "Army");
         Card host = sa.getHostCard();
         final Game game = ai.getGame();
 
         if (!aiArmies.isEmpty()) {
-            return aiArmies.anyMatch(CardPredicates.canReceiveCounters(CounterEnumType.P1P1));
+            if (aiArmies.anyMatch(CardPredicates.canReceiveCounters(CounterEnumType.P1P1))) {
+                // If AI has an Army that can receive counters, play the ability
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                // AI has Armies but none can receive counters, so don't play
+                return new AiAbilityDecision(0, AiPlayDecision.DoesntImpactGame);
+            }
         }
         final String type = sa.getParam("Type");
         final String tokenScript = "b_0_0_" + sa.getOriginalParam("Type").toLowerCase() + "_army";
@@ -36,7 +42,7 @@ public class AmassAi extends SpellAbilityAi {
         Card token = TokenInfo.getProtoType(tokenScript, sa, ai, false);
 
         if (token == null) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         token.setController(ai, 0);
@@ -63,7 +69,11 @@ public class AmassAi extends SpellAbilityAi {
         //reset static abilities
         game.getAction().checkStaticAbilities(false);
 
-        return result;
+        if (result) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
     }
 
     @Override
@@ -83,8 +93,11 @@ public class AmassAi extends SpellAbilityAi {
 
     @Override
     protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        boolean result = mandatory || checkApiLogic(ai, sa);
-        return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        if (mandatory) {
+            return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
+        }
+
+        return checkApiLogic(ai, sa);
     }
 
     @Override

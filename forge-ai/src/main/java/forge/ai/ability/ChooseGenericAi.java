@@ -43,8 +43,13 @@ public class ChooseGenericAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
-        return sa.hasParam("AILogic");
+    protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
+        if (sa.hasParam("AILogic")) {
+            // This is equivilant to what was here before but feels bad
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     /* (non-Javadoc)
@@ -52,10 +57,14 @@ public class ChooseGenericAi extends SpellAbilityAi {
      */
     @Override
     public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        boolean result = sa.isTrigger()
-            ? doTriggerAINoCost(aiPlayer, sa, sa.isMandatory()).willingToPlay()
-            : checkApiLogic(aiPlayer, sa);
-        return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        AiAbilityDecision decision;
+        if (sa.isTrigger()) {
+            decision = doTriggerAINoCost(aiPlayer, sa, sa.isMandatory());
+        } else {
+            decision = checkApiLogic(aiPlayer, sa);
+        }
+
+        return decision;
     }
 
     @Override
@@ -73,8 +82,7 @@ public class ChooseGenericAi extends SpellAbilityAi {
         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Deathmist Raptor")) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
-        AiAbilityDecision superDecision = super.doTriggerAINoCost(aiPlayer, sa, mandatory);
-        return superDecision;
+        return super.doTriggerAINoCost(aiPlayer, sa, mandatory);
     }
 
     @Override

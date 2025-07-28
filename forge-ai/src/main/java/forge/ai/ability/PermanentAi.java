@@ -43,27 +43,27 @@ public class PermanentAi extends SpellAbilityAi {
      * here
      */
     @Override
-    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
         final Card source = sa.getHostCard();
 
         // check on legendary
         if (!source.ignoreLegendRule() && ai.isCardInPlay(source.getName())) {
             // TODO check the risk we'd lose the effect with bad timing
+            // TODO Technically we're not checking if same card in play is also legendary, but this is a good enough approximation
             if (!source.hasSVar("AILegendaryException")) {
-                // AiPlayDecision.WouldDestroyLegend
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.WouldDestroyLegend);
             } else {
                 String specialRule = source.getSVar("AILegendaryException");
                 if ("TwoCopiesAllowed".equals(specialRule)) {
                     // One extra copy allowed on the battlefield, e.g. Brothers Yamazaki
                     if (CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(source.getName())) > 1) {
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.WouldDestroyLegend);
                     }
                 } else if ("AlwaysAllowed".equals(specialRule)) {
                     // Nothing to do here, check for Legendary is disabled
                 } else {
                     // Unknown hint, assume two copies not allowed
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.WouldDestroyLegend);
                 }
             }
         }
@@ -71,8 +71,7 @@ public class PermanentAi extends SpellAbilityAi {
         if (source.getType().hasSupertype(Supertype.World)) {
             CardCollection list = CardLists.getType(ai.getCardsIn(ZoneType.Battlefield), "World");
             if (!list.isEmpty()) {
-                // AiPlayDecision.WouldDestroyWorldEnchantment
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.WouldDestroyWorldEnchantment);
             }
         }
 
@@ -93,9 +92,8 @@ public class PermanentAi extends SpellAbilityAi {
                     }
                 }
             } else {
-                // AiPlayDecision.CantAffordX
                 if (xPay <= 0) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
                 }
                 sa.setXManaCostPaid(xPay);
             }
@@ -103,8 +101,7 @@ public class PermanentAi extends SpellAbilityAi {
             // if mana is zero, but card mana cost does have X, then something is wrong
             ManaCost cardCost = source.getManaCost();
             if (cardCost != null && cardCost.countX() > 0) {
-                // AiPlayDecision.CantPlayAi
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
             }
         }
 
@@ -147,10 +144,10 @@ public class PermanentAi extends SpellAbilityAi {
                 }
                 if (oppCards.size() > 3 && oppCards.size() >= aiCards.size() * 2) {
                     sa.setXManaCostPaid(manaValue);
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         for (KeywordInterface ki : source.getKeywords(Keyword.MULTIKICKER)) {
@@ -177,7 +174,7 @@ public class PermanentAi extends SpellAbilityAi {
                 sa.clearOptionalKeywordAmount();
                 // Bail if the card cost was {0} and no multikicker was paid (e.g. Everflowing Chalice).
                 // TODO: update this if there's ever a card where it makes sense to play it for {0} with no multikicker
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
             }
         }
 
@@ -213,8 +210,7 @@ public class PermanentAi extends SpellAbilityAi {
             emptyAbility.setActivatingPlayer(ai);
 
             if (!ComputerUtilCost.canPayCost(emptyAbility, ai, true)) {
-                // AiPlayDecision.AnotherTime
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
             }
         }
 
@@ -310,10 +306,12 @@ public class PermanentAi extends SpellAbilityAi {
                 }
             }
 
-            return !dontCast;
+            if (dontCast) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
@@ -333,8 +331,13 @@ public class PermanentAi extends SpellAbilityAi {
         if (!checkPhaseRestrictions(ai, sa, ai.getGame().getPhaseHandler())) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
-        boolean result = checkApiLogic(ai, sa);
-        return (result || mandatory) ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-    }
-
+        AiAbilityDecision decision = checkApiLogic(ai, sa);
+        if (decision.willingToPlay()) {
+            return decision;
+        } else if (mandatory) {
+            return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
+        } else {
+            return decision;
+        }
+     }
 }

@@ -56,7 +56,7 @@ public class PumpAi extends PumpAiBase {
         } else if ("Aristocrat".equals(aiLogic)) {
             return SpecialAiLogic.doAristocratLogic(ai, sa);
         } else if (aiLogic.startsWith("AristocratCounters")) {
-            return SpecialAiLogic.doAristocratWithCountersLogic(ai, sa);
+            return SpecialAiLogic.doAristocratWithCountersLogic(ai, sa).willingToPlay();
         } else if (aiLogic.equals("SwitchPT")) {
             // Some more AI would be even better, but this is a good start to prevent spamming
             if (sa.isActivatedAbility() && sa.getActivationsThisTurn() > 0 && !sa.usesTargeting()) {
@@ -114,7 +114,7 @@ public class PumpAi extends PumpAiBase {
     }
 
     @Override
-    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final Game game = ai.getGame();
         final Card source = sa.getHostCard();
         final SpellAbility root = sa.getRootAbility();
@@ -131,14 +131,15 @@ public class PumpAi extends PumpAiBase {
         if ("Pummeler".equals(aiLogic)) {
             return SpecialCardAi.ElectrostaticPummeler.consider(ai, sa);
         } else if (aiLogic.startsWith("AristocratCounters")) {
-            return true; // the preconditions to this are already tested in checkAiLogic
+            // the preconditions to this are already tested in checkAiLogic
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else if ("GideonBlackblade".equals(aiLogic)) {
             return SpecialCardAi.GideonBlackblade.consider(ai, sa);
         } else if ("MoveCounter".equals(aiLogic)) {
             final SpellAbility moveSA = sa.findSubAbilityByType(ApiType.MoveCounter);
 
             if (moveSA == null) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             final String counterType = moveSA.getParam("CounterType");
@@ -153,7 +154,7 @@ public class PumpAi extends PumpAiBase {
                 if (cType != null) {
                     attr = CardLists.filter(attr, CardPredicates.hasCounter(cType));
                     if (attr.isEmpty()) {
-                        return false;
+                        return new AiAbilityDecision(0,AiPlayDecision.TargetingFailed);
                     }
                     CardCollection best = CardLists.filter(attr, card -> {
                         int amount = 0;
@@ -187,7 +188,7 @@ public class PumpAi extends PumpAiBase {
 
                     final Card card = ComputerUtilCard.getBestCreatureAI(best);
                     sa.getTargets().add(card);
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             } else {
                 final boolean sameCtrl = moveSA.getTargetRestrictions().isSameController();
@@ -196,7 +197,7 @@ public class PumpAi extends PumpAiBase {
                 if (cType != null) {
                     list = CardLists.filter(list, CardPredicates.hasCounter(cType));
                     if (list.isEmpty()) {
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                     }
                     List<Card> oppList = CardLists.filterControlledBy(list, ai.getOpponents());
                     if (!oppList.isEmpty() && !sameCtrl) {
@@ -232,7 +233,7 @@ public class PumpAi extends PumpAiBase {
 
                         final Card card = ComputerUtilCard.getBestCreatureAI(best);
                         sa.getTargets().add(card);
-                        return true;
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                     }
                 }
 
@@ -244,12 +245,12 @@ public class PumpAi extends PumpAiBase {
             int numRedMana = ComputerUtilMana.determineLeftoverMana(new SpellAbility.EmptySa(source), ai, "R", false);
             int currentPower = source.getNetPower();
             if (currentPower < 20 && currentPower + numRedMana >= 20) {
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
         }
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
         }
 
         if (!game.getStack().isEmpty() && !sa.isCurse() && !isFight) {
@@ -261,7 +262,7 @@ public class PumpAi extends PumpAiBase {
             final int activations = sa.getActivationsThisTurn();
             // don't risk sacrificing a creature just to pump it
             if (activations >= sacActivations - 1) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.ConditionsNotMet);
             }
         }
 
@@ -304,7 +305,7 @@ public class PumpAi extends PumpAiBase {
         }
 
         if ((numDefense.contains("X") && defense == 0) || (numAttack.contains("X") && attack == 0 && !isBerserk)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         //Untargeted
@@ -312,47 +313,51 @@ public class PumpAi extends PumpAiBase {
             final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
 
             if (cards.isEmpty()) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
 
             // when this happens we need to expand AI to consider if its ok for everything?
             for (final Card card : cards) {
                 if (sa.isCurse()) {
                     if (!card.getController().isOpponentOf(ai)) {
-                        return false;
+                        continue;
                     }
 
                     if (!containsUsefulKeyword(ai, keywords, card, sa, attack)) {
                         continue;
                     }
 
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
                 if (!card.getController().isOpponentOf(ai)) {
                     if (ComputerUtilCard.shouldPumpCard(ai, sa, card, defense, attack, keywords, false)) {
-                        return true;
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                     } else if (containsUsefulKeyword(ai, keywords, card, sa, attack)) {
                         if (game.getPhaseHandler().is(PhaseType.MAIN1) && isSorcerySpeed(sa, ai) ||
                                 game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai) ||
                                 game.getPhaseHandler().is(PhaseType.COMBAT_BEGIN, ai)) {
                             Card pumped = ComputerUtilCard.getPumpedCreature(ai, sa, card, 0, 0, keywords);
-                            return ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped);
+                            if (ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
+                                // If the AI can attack with the pumped creature, then it is worth playing
+                                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                            }
+                            return new AiAbilityDecision(0, AiPlayDecision.DoesntImpactCombat);
                         }
 
-                        return true;
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                     } else if (grantsUsefulExtraBlockOpts(ai, sa, card, keywords)) {
-                        return true;
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                     }
                 }
             }
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
         //Targeted
         if (!pumpTgtAI(ai, sa, defense, attack, false, false)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
-        return true;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     } // pumpPlayAI()
 
     private boolean pumpTgtAI(final Player ai, final SpellAbility sa, final int defense, final int attack, final boolean mandatory,
@@ -462,7 +467,7 @@ public class PumpAi extends PumpAiBase {
             }
 
             if (isFight) {
-                return FightAi.canFightAi(ai, sa, attack, defense);
+                return FightAi.canFightAi(ai, sa, attack, defense).willingToPlay();
             }
         }
 

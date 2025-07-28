@@ -275,7 +275,7 @@ public class EffectAi extends SpellAbilityAi {
                 }
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (logic.equals("Fight")) {
-                return FightAi.canFightAi(ai, sa, 0, 0) ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                return FightAi.canFightAi(ai, sa, 0,0);
             } else if (logic.equals("Pump")) {
                 sa.resetTargets();
                 List<Card> options = CardUtil.getValidCardsToTarget(sa);

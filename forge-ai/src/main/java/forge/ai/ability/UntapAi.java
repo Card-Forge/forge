@@ -54,19 +54,29 @@ public class UntapAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
         }
 
         if (sa.usesTargeting()) {
-            return untapPrefTargeting(ai, sa, false);
+            if (untapPrefTargeting(ai, sa, false)) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
         }
 
         final List<Card> pDefined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
-        return pDefined.isEmpty() || (pDefined.get(0).isTapped() && pDefined.get(0).getController() == ai);
+        if (pDefined.isEmpty() || (pDefined.get(0).isTapped() && pDefined.get(0).getController() == ai)) {
+            // If the defined card is tapped, or if there are no defined cards, we can play this ability
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else {
+            // Otherwise, we can't play this ability
+            return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
+        }
     }
 
     @Override

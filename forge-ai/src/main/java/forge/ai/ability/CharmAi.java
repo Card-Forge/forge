@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class CharmAi extends SpellAbilityAi {
     @Override
-    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
 
@@ -70,10 +70,10 @@ public class CharmAi extends SpellAbilityAi {
                 // Set minimum choices for triggers where chooseMultipleOptionsAi() returns null
                 chosenList = chooseOptionsAi(sa, choices, ai, true, num, min);
                 if (chosenList.isEmpty() && min != 0) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             } else {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
@@ -81,7 +81,7 @@ public class CharmAi extends SpellAbilityAi {
         sa.setChosenList(chosenList);
 
         if (choiceForOpp) {
-            return true;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (sa.isSpell()) {
@@ -90,7 +90,11 @@ public class CharmAi extends SpellAbilityAi {
         }
 
         // prevent run-away activations - first time will always return true
-        return MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
+        if (MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn())) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     private List<AbilitySub> chooseOptionsAi(SpellAbility sa, List<AbilitySub> choices, final Player ai, boolean isTrigger, int num, int min) {

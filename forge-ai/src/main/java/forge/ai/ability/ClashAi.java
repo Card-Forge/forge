@@ -42,14 +42,17 @@ public class ClashAi extends SpellAbilityAi {
      * forge.game.spellability.SpellAbility)
      */
     @Override
-    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         boolean legalAction = true;
 
         if (sa.usesTargeting()) {
             legalAction = selectTarget(ai, sa);
+            if (!legalAction) {
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
         }
 
-        return legalAction;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /*

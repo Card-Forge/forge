@@ -95,14 +95,15 @@ public abstract class SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.MissingPhaseRestrictions);
         }
 
-        if (!checkApiLogic(ai, sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        AiAbilityDecision decision = checkApiLogic(ai, sa);
+        if (!decision.willingToPlay()) {
+            return decision;
         }
         // needs to be after API logic because needs to check possible X Cost?
         if (cost != null && !willPayCosts(ai, sa, cost, source)) {
             return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
         }
-        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        return decision;
     }
 
     protected boolean checkConditions(final Player ai, final SpellAbility sa, SpellAbilityCondition con) {
@@ -169,12 +170,18 @@ public abstract class SpellAbilityAi {
     /**
      * The rest of the logic not covered by the canPlayAI template is defined here
      */
-    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
         if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
         }
 
-        return MyRandom.getRandom().nextFloat() < .8f;
+        if (MyRandom.getRandom().nextFloat() < .8f) {
+            // 80% chance to play the ability
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        // 20% chance to not play the ability
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     public final boolean doTriggerAI(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {

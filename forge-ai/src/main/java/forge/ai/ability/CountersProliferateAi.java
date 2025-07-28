@@ -16,7 +16,7 @@ import java.util.Map;
 public class CountersProliferateAi extends SpellAbilityAi {
 
     @Override
-    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final List<Card> cperms = Lists.newArrayList();
         boolean allyExpOrEnergy = false;
 
@@ -68,7 +68,13 @@ public class CountersProliferateAi extends SpellAbilityAi {
             }));
         }
 
-        return !cperms.isEmpty() || !hperms.isEmpty() || opponentPoison || allyExpOrEnergy;
+        if (!cperms.isEmpty() || !hperms.isEmpty() || opponentPoison || allyExpOrEnergy) {
+            // AI will play it if there are any counters to proliferate
+            // or if there are no counters, but AI has experience or energy counters
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
@@ -92,11 +98,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        if (checkApiLogic(ai, sa)) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        }
-
-        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        return checkApiLogic(ai, sa);
     }
 
     /*

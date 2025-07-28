@@ -60,7 +60,7 @@ public class MillAi extends SpellAbilityAi {
     }
     
     @Override
-    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
         /*
          * TODO:
          * - logic in targetAI looks dodgy
@@ -70,16 +70,17 @@ public class MillAi extends SpellAbilityAi {
          * effect due to possibility of "lose abilities" effect)
          */
         if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false;   // prevents mill 0 infinite loop?
+            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
         }
         
         if (("You".equals(sa.getParam("Defined")) || "Player".equals(sa.getParam("Defined")))
                 && ai.getCardsIn(ZoneType.Library).size() < 10) {
-            return false;   // prevent self and each player mill when library is small
+            // prevent self and each player mill when library is small
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
         
         if (sa.usesTargeting() && !targetAI(ai, sa, false)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
         if (sa.hasParam("NumCards") && (sa.getParam("NumCards").equals("X") || sa.getParam("NumCards").equals("Z"))
@@ -87,9 +88,11 @@ public class MillAi extends SpellAbilityAi {
             // Set PayX here to maximum value.
             final int cardsToDiscard = getNumToDiscard(ai, sa);
             sa.setXManaCostPaid(cardsToDiscard);
-            return cardsToDiscard > 0;
+            if (cardsToDiscard <= 0) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
+            }
         }
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     private boolean targetAI(final Player ai, final SpellAbility sa, final boolean mandatory) {

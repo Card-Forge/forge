@@ -52,11 +52,11 @@ public class AssembleContraptionAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         if ("X".equals(sa.getParam("Amount")) && sa.getSVar("X").equals("Count$xPaid")) {
             int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
             if (xPay == 0) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
             sa.getRootAbility().setXManaCostPaid(xPay);
         }
@@ -66,7 +66,7 @@ public class AssembleContraptionAi extends SpellAbilityAi {
             if(target != null)
                 sa.getTargets().add(target);
             else
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         return super.checkApiLogic(ai, sa);
