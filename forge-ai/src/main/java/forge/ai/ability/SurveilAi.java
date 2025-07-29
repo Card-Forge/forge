@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import forge.ai.*;
-import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayLife;
 import forge.game.phase.PhaseHandler;
