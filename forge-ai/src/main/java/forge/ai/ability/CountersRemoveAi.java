@@ -327,7 +327,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         if (sa.usesTargeting()) {
             return doTgt(aiPlayer, sa, mandatory);
         }

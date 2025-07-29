@@ -12,7 +12,7 @@ public class GameWinAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         if (ai.cantWin()) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
@@ -29,7 +29,7 @@ public class GameWinAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 

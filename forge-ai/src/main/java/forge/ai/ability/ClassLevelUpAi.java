@@ -14,7 +14,7 @@ import forge.game.trigger.TriggerType;
 
 public class ClassLevelUpAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         // TODO does leveling up affect combat? Otherwise wait for Main2
         Card host = sa.getHostCard();
         final int level = host.getClassLevel() + 1;
@@ -28,7 +28,7 @@ public class ClassLevelUpAi extends SpellAbilityAi {
                     continue;
                 }
                 SpellAbility effect = t.ensureAbility();
-                if (!SpellApiToAi.Converter.get(effect).doTriggerAI(aiPlayer, effect, false)) {
+                if (!SpellApiToAi.Converter.get(effect).doTrigger(aiPlayer, effect, false)) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }

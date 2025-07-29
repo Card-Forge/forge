@@ -113,7 +113,7 @@ public class CountersMoveAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(final Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player ai, SpellAbility sa, boolean mandatory) {
         if (sa.usesTargeting()) {
             sa.resetTargets();
 

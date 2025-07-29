@@ -256,7 +256,7 @@ public class TokenAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         Card actualToken = spawnToken(ai, sa);
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();

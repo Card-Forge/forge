@@ -19,7 +19,7 @@ import java.util.Map;
 public class MustBlockAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Game game = aiPlayer.getGame();
         final Combat combat = game.getCombat();
@@ -56,11 +56,11 @@ public class MustBlockAi extends SpellAbilityAi {
         }
 
         // Otherwise it's a standard targeted "target creature blocks CARDNAME" ability, so use the main canPlayAI code path
-        return canPlayAI(aiPlayer, sa);
+        return canPlay(aiPlayer, sa);
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(final Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
 
         // only use on creatures that can attack

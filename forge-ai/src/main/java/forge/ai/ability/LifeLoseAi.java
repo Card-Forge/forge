@@ -163,8 +163,8 @@ public class LifeLoseAi extends SpellAbilityAi {
      * forge.game.spellability.SpellAbility, boolean)
      */
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(final Player ai, final SpellAbility sa,
-    final boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player ai, final SpellAbility sa,
+                                                final boolean mandatory) {
         if (sa.usesTargeting()) {
             if (!doTgt(ai, sa, mandatory)) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);

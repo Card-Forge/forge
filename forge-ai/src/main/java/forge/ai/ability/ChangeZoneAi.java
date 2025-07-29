@@ -227,7 +227,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         String aiLogic = sa.getParamOrDefault("AILogic", "");
 
         if (sa.isReplacementAbility() && "Command".equals(sa.getParam("Destination")) && "ReplacedCard".equals(sa.getParam("Defined"))) {

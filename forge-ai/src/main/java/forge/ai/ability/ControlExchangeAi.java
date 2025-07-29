@@ -48,7 +48,7 @@ public class ControlExchangeAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         if (!sa.usesTargeting()) {
             if (mandatory) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -62,7 +62,7 @@ public class ControlExchangeAi extends SpellAbilityAi {
 
                 return decision;
             } else {
-                return canPlayAI(aiPlayer, sa);
+                return canPlay(aiPlayer, sa);
             }
         }
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

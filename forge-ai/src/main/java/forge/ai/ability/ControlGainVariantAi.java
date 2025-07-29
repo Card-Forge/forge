@@ -43,7 +43,7 @@ import java.util.Map;
  */
 public class ControlGainVariantAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlayAI(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision canPlay(final Player ai, final SpellAbility sa) {
         String logic = sa.getParam("AILogic");
 
         if ("GainControlOwns".equals(logic)) {

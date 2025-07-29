@@ -92,7 +92,7 @@ public class DigUntilAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (sa.usesTargeting()) {
             sa.resetTargets();
             if (sa.isCurse()) {

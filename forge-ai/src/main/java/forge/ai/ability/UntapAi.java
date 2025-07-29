@@ -73,7 +73,7 @@ public class UntapAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (!sa.usesTargeting()) {
             if (mandatory) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

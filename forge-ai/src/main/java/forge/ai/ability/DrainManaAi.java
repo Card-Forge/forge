@@ -36,7 +36,7 @@ public class DrainManaAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Player opp = ai.getWeakestOpponent();
 
         final Card source = sa.getHostCard();

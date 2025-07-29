@@ -15,7 +15,7 @@ public class FlipACoinAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         if (sa.hasParam("AILogic")) {
             String ailogic = sa.getParam("AILogic");
             if (ailogic.equals("Never")) {
@@ -65,6 +65,6 @@ public class FlipACoinAi extends SpellAbilityAi {
 
     @Override
     public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
-        return canPlayAI(ai, sa);
+        return canPlay(ai, sa);
     }
 }

@@ -117,7 +117,7 @@ public class ManaAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         final String logic = sa.getParamOrDefault("AILogic", "");
         if (logic.startsWith("ManaRitual")) {
             boolean result = doManaRitualLogic(aiPlayer, sa, true);
@@ -279,7 +279,7 @@ public class ManaAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         final String logic = sa.getParamOrDefault("AILogic", "");
         return checkApiLogic(ai, sa);
     }

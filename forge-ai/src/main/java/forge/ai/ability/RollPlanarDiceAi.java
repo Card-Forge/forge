@@ -15,7 +15,7 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         if (ai.getGame().getActivePlanes() == null) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
@@ -161,7 +161,7 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
     @Override
     public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         // for potential implementation of drawback checks?
-        return canPlayAI(aiPlayer, sa);
+        return canPlay(aiPlayer, sa);
     }
 
     private boolean detectColorInZone(Player p, String paramValue, ZoneType zone, boolean creaturesOnly) {

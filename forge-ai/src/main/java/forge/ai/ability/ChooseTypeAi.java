@@ -21,7 +21,7 @@ import java.util.Set;
 
 public class ChooseTypeAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         String aiLogic = sa.getParamOrDefault("AILogic", "");
 
         if (aiLogic.isEmpty()) {
@@ -51,7 +51,7 @@ public class ChooseTypeAi extends SpellAbilityAi {
                     : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        return doTriggerAINoCost(aiPlayer, sa, false);
+        return doTriggerNoCost(aiPlayer, sa, false);
     }
 
     private boolean doMirrorEntityLogic(Player aiPlayer, SpellAbility sa) {
@@ -115,7 +115,7 @@ public class ChooseTypeAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         boolean isCurse = sa.isCurse();
 
         if (sa.usesTargeting()) {

@@ -11,13 +11,13 @@ import forge.game.zone.ZoneType;
 
 public class AdvanceCrankAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         int nextSprocket = (ai.getCrankCounter() % 3) + 1;
         int crankCount = CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isContraptionOnSprocket(nextSprocket));
         if (crankCount < 2) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
-        return super.canPlayAI(ai, sa);
+        return super.canPlay(ai, sa);
     }
 
 }

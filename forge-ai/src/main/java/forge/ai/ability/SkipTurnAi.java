@@ -11,7 +11,7 @@ public class SkipTurnAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         if ("Always".equals(sa.getParam("AILogic"))) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else {
@@ -24,6 +24,6 @@ public class SkipTurnAi extends SpellAbilityAi {
      */
     @Override
     public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        return canPlayAI(aiPlayer, sa);
+        return canPlay(aiPlayer, sa);
     }
 }

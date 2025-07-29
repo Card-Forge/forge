@@ -628,7 +628,7 @@ public class PumpAi extends PumpAiBase {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final SpellAbility root = sa.getRootAbility();
         final String numDefense = sa.getParamOrDefault("NumDef", "");
         final String numAttack = sa.getParamOrDefault("NumAtt", "");

@@ -44,7 +44,7 @@ public class ActivateAbilityAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Player opp = ai.getStrongestOpponent();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();

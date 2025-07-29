@@ -69,7 +69,7 @@ public class LifeExchangeAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
         PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
         Player opp = targetableOpps.max(PlayerPredicates.compareByLife());
         if (sa.usesTargeting()) {

@@ -38,7 +38,7 @@ public class DelayedTriggerAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         SpellAbility trigsa = sa.getAdditionalAbility("Execute");
         if (trigsa == null) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
@@ -64,7 +64,7 @@ public class DelayedTriggerAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         // Card-specific logic
         String logic = sa.getParamOrDefault("AILogic", "");
         if (logic.equals("SpellCopy")) {

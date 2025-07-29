@@ -17,7 +17,7 @@ import java.util.List;
 public class HauntAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card card = sa.getHostCard();
         final Game game = ai.getGame();
         if (sa.usesTargeting() && !card.isToken()) {

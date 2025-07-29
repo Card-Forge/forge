@@ -29,7 +29,7 @@ public class DiscoverAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
         if (mandatory) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }

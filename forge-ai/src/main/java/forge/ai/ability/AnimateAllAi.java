@@ -11,7 +11,7 @@ import forge.game.spellability.SpellAbility;
 public class AnimateAllAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         String logic = sa.getParamOrDefault("AILogic", "");
 
         if ("CreatureAdvantage".equals(logic) && !aiPlayer.getCreaturesInPlay().isEmpty()) {
@@ -30,11 +30,11 @@ public class AnimateAllAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         if (mandatory) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
-        return canPlayAI(aiPlayer, sa);
+        return canPlay(aiPlayer, sa);
     }
 
 }

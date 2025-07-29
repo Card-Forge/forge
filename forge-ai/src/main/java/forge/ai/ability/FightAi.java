@@ -117,7 +117,7 @@ public class FightAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
         if (aiLogic.equals("Grothama")) {
             if (mandatory) {

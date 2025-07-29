@@ -22,7 +22,7 @@ import java.util.Map;
 public class ChooseCardNameAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         if (sa.hasParam("AILogic")) {
             // Don't tap creatures that may be able to block
             if (ComputerUtil.waitForBlocking(sa)) {
@@ -53,7 +53,7 @@ public class ChooseCardNameAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         String aiLogic = sa.getParamOrDefault("AILogic", "");
         if ("PithingNeedle".equals(aiLogic)) {
             // Make sure theres something in play worth Needlings.

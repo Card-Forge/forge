@@ -231,11 +231,11 @@ public class CounterAi extends SpellAbilityAi {
 
     @Override
     public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        return doTriggerAINoCost(aiPlayer, sa, true);
+        return doTriggerNoCost(aiPlayer, sa, true);
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Game game = ai.getGame();
 
         if (sa.usesTargeting()) {

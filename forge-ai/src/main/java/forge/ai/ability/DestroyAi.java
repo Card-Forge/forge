@@ -308,7 +308,7 @@ public class DestroyAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final boolean noRegen = sa.hasParam("NoRegen");
         if (sa.usesTargeting()) {
             sa.resetTargets();

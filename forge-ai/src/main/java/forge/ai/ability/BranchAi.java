@@ -23,7 +23,7 @@ public class BranchAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
         if ("GrislySigil".equals(aiLogic)) {
             boolean result = SpecialCardAi.GrislySigil.consider(aiPlayer, sa);
@@ -57,8 +57,8 @@ public class BranchAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        AiAbilityDecision decision = canPlayAI(aiPlayer, sa);
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+        AiAbilityDecision decision = canPlay(aiPlayer, sa);
         if (decision.willingToPlay() || mandatory) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }

@@ -48,7 +48,7 @@ public final class BondAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
@@ -58,7 +58,7 @@ public final class BondAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 }

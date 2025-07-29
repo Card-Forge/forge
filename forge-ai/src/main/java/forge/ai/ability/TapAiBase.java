@@ -275,7 +275,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
 
         if (!sa.usesTargeting()) {

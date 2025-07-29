@@ -78,7 +78,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         boolean chance = true;
 
         // TODO Make sure Human has poison counters or there are some counters

@@ -17,7 +17,7 @@ import java.util.Map;
 public class CopySpellAbilityAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         Game game = aiPlayer.getGame();
         int chance = ((PlayerControllerAi)aiPlayer.getController()).getAi().getIntProperty(AiProps.CHANCE_TO_COPY_OWN_SPELL_WHILE_ON_STACK);
         int diff = ((PlayerControllerAi)aiPlayer.getController()).getAi().getIntProperty(AiProps.ALWAYS_COPY_SPELL_IF_CMC_DIFF);
@@ -113,7 +113,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         // the AI should not miss mandatory activations (e.g. Precursor Golem trigger)
         String logic = sa.getParamOrDefault("AILogic", "");
 
@@ -137,7 +137,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
             return SpecialCardAi.ChainOfAcid.consider(aiPlayer, sa);
 
         }
-        AiAbilityDecision decision = canPlayAI(aiPlayer, sa);
+        AiAbilityDecision decision = canPlay(aiPlayer, sa);
         if (!decision.willingToPlay()) {
             if (sa.isMandatory()) {
                 return super.chkAIDrawback(sa, aiPlayer);

@@ -17,13 +17,13 @@ public class ChangeCombatantsAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         // TODO: Extend this if possible for cards that have this as an activated ability
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         if (mandatory) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }

@@ -735,7 +735,7 @@ public class CountersPutAi extends CountersAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final SpellAbility root = sa.getRootAbility();
         final Card source = sa.getHostCard();
         final String aiLogic = sa.getParamOrDefault("AILogic", "");

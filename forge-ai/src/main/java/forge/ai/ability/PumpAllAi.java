@@ -139,14 +139,14 @@ public class PumpAllAi extends PumpAiBase {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         // it might help so take it
         if (!sa.usesTargeting() && !sa.isCurse() && sa.hasParam("ValidCards") && sa.getParam("ValidCards").contains("YouCtrl")) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         // important to call canPlay first so targets are added if needed
-        AiAbilityDecision decision = canPlayAI(ai, sa);
+        AiAbilityDecision decision = canPlay(ai, sa);
         if (mandatory && decision.decision().willingToPlay()) {
             return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
         }

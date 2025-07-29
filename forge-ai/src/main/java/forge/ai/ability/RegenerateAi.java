@@ -124,7 +124,7 @@ public class RegenerateAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         boolean chance;
         if (sa.usesTargeting()) {
             chance = regenMandatoryTarget(ai, sa, mandatory);

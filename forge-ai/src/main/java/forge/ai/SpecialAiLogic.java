@@ -371,10 +371,10 @@ public class SpecialAiLogic {
             // FIXME: We're emulating the UnlessCost on the SA to run the proper checks.
             // This is hacky, but it works. Perhaps a cleaner way exists?
             sa.getMapParams().put("UnlessCost", falseSub.getParam("UnlessCost"));
-            willPlay = SpellApiToAi.Converter.get(ApiType.Counter).canPlayAIWithSubs(ai, sa).willingToPlay();
+            willPlay = SpellApiToAi.Converter.get(ApiType.Counter).canPlayWithSubs(ai, sa).willingToPlay();
             sa.getMapParams().remove("UnlessCost");
         } else {
-            willPlay = SpellApiToAi.Converter.get(ApiType.Counter).canPlayAIWithSubs(ai, sa).willingToPlay();
+            willPlay = SpellApiToAi.Converter.get(ApiType.Counter).canPlayWithSubs(ai, sa).willingToPlay();
         }
         return willPlay;
     }

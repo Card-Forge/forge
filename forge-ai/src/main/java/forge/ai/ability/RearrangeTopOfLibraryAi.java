@@ -22,7 +22,7 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         // Specific details of ordering cards are handled by PlayerControllerAi#orderMoveToZoneList
         final PhaseHandler ph = aiPlayer.getGame().getPhaseHandler();
         final Card source = sa.getHostCard();
@@ -79,10 +79,10 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         // Specific details of ordering cards are handled by PlayerControllerAi#orderMoveToZoneList
 
-        AiAbilityDecision decision = canPlayAI(ai, sa);
+        AiAbilityDecision decision = canPlay(ai, sa);
         if (decision.willingToPlay()) {
             return decision;
         }

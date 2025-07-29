@@ -182,7 +182,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (sa.usesTargeting()) {
             if (doTgt(ai, sa, mandatory)) {
                 // if we can target, then we can play it

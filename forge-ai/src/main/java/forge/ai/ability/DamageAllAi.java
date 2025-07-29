@@ -257,7 +257,7 @@ public class  DamageAllAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
         final String validP = sa.getParamOrDefault("ValidPlayers", "");
 

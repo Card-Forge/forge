@@ -941,7 +941,7 @@ public class AttachAi extends SpellAbilityAi {
      * @return true, if successful
      */
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card card = sa.getHostCard();
         List<GameObject> targets = new ArrayList<>();
         final TargetRestrictions tgt = sa.getTargetRestrictions();

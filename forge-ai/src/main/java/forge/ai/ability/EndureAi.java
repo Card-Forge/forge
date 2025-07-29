@@ -24,7 +24,7 @@ public class EndureAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         // Support for possible targeted Endure (e.g. target creature endures X)
         if (sa.usesTargeting()) {
             Card bestCreature = ComputerUtilCard.getBestCreatureAI(aiPlayer.getCardsIn(ZoneType.Battlefield));
@@ -123,7 +123,7 @@ public class EndureAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         // Support for possible targeted Endure (e.g. target creature endures X)
         if (sa.usesTargeting()) {
             CardCollection list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield),
@@ -141,6 +141,6 @@ public class EndureAi extends SpellAbilityAi {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        return canPlayAI(aiPlayer, sa);
+        return canPlay(aiPlayer, sa);
     }
 }
