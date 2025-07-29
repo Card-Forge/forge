@@ -9,7 +9,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 
 import java.util.List;
 import java.util.Map;
@@ -17,7 +16,7 @@ import java.util.Map;
 public class DigUntilAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         Card source = sa.getHostCard();
         final String logic = sa.getParamOrDefault("AILogic", "");
         double chance = .4; // 40 percent chance with instant speed stuff
@@ -89,13 +88,7 @@ public class DigUntilAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        final boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
-
-        if (randomReturn) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override

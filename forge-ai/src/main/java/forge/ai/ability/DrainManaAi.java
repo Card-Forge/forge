@@ -7,19 +7,17 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.util.MyRandom;
 
 import java.util.List;
 
 public class DrainManaAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
 
         final Card source = sa.getHostCard();
         final Player opp = ai.getWeakestOpponent();
-        boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         if (!sa.usesTargeting()) {
             // assume we are looking to tap human's stuff
@@ -34,11 +32,7 @@ public class DrainManaAi extends SpellAbilityAi {
             sa.getTargets().add(opp);
         }
 
-        if (randomReturn) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
@@ -72,8 +66,6 @@ public class DrainManaAi extends SpellAbilityAi {
         // AI cannot use this properly until he can use SAs during Humans turn
         final Card source = sa.getHostCard();
 
-        boolean randomReturn = true;
-
         if (!sa.usesTargeting()) {
             final List<Player> defined = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
 
@@ -85,10 +77,6 @@ public class DrainManaAi extends SpellAbilityAi {
             sa.getTargets().add(ai.getWeakestOpponent());
         }
 
-        if (randomReturn) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 }

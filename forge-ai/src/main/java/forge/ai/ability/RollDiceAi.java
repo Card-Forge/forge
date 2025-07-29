@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-
 import forge.ai.AiAbilityDecision;
 import forge.ai.AiPlayDecision;
 import forge.ai.SpellAbilityAi;
@@ -17,7 +16,7 @@ import java.util.Map;
 
 public class RollDiceAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player aiPlayer, SpellAbility sa) {
         Card source = sa.getHostCard();
         Game game = aiPlayer.getGame();
         PhaseHandler ph = game.getPhaseHandler();
@@ -32,9 +31,6 @@ public class RollDiceAi extends SpellAbilityAi {
             return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else if (logic.equals("Main2")) {
             boolean result = ph.is(PhaseType.MAIN2, aiPlayer);
-            return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        } else if (logic.equals("AtOppEOT")) {
-            boolean result = ph.getNextTurn() == aiPlayer && ph.is(PhaseType.END_OF_TURN);
             return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 

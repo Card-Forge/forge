@@ -982,7 +982,7 @@ public class ComputerUtilMana {
 
                 if ("Any".equals(s) || ai.getManaPool().canPayForShardWithColor(toPay, ManaAtom.fromName(s))){
                     return true;
-                    }
+                }
             }
             return false;
         }

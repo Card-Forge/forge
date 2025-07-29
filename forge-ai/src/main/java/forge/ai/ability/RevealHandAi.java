@@ -4,7 +4,6 @@ import forge.ai.AiAbilityDecision;
 import forge.ai.AiPlayDecision;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.util.MyRandom;
 
 public class RevealHandAi extends RevealAiBase {
 
@@ -13,23 +12,15 @@ public class RevealHandAi extends RevealAiBase {
      */
     @Override
     protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
-        final boolean bFlag = revealHandTargetAI(ai, sa, false);
-
-        if (!bFlag) {
+        if (!revealHandTargetAI(ai, sa, false)) {
             return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
-        boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(.667, sa.getActivationsThisTurn() + 1);
-
         if (playReusable(ai, sa)) {
-            randomReturn = true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        if (randomReturn) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        }
+        return super.checkApiLogic(ai, sa);
     }
 
     @Override

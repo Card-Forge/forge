@@ -26,22 +26,13 @@ import forge.util.collect.FCollectionView;
 public class DiscardAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
-        final Cost abCost = sa.getPayCosts();
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
-
-        // temporarily disabled until better AI
-        if (!willPayCosts(ai, sa, abCost, source)) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        }
 
         if ("Chandra, Flamecaller".equals(sourceName)) {
             final int hand = ai.getCardsIn(ZoneType.Hand).size();
-
-
-
             if (MyRandom.getRandom().nextFloat() < (1.0 / (1 + hand))) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             } else {
@@ -144,15 +135,9 @@ public class DiscardAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(0.9, sa.getActivationsThisTurn());
-
         // some other variables here, like handsize vs. maxHandSize
 
-        if (randomReturn) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     private boolean discardTargetAI(final Player ai, final SpellAbility sa) {

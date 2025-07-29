@@ -110,10 +110,6 @@ public class DestroyAi extends SpellAbilityAi {
 
         CardCollection list;
 
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
-
         // Targeting
         if (sa.usesTargeting()) {
             // If there's X in payment costs and it's tied to targeting, make sure we set the XManaCostPaid first

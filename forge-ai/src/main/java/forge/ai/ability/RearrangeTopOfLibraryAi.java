@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-
 import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;

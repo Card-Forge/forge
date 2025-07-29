@@ -26,13 +26,11 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
 
-
 public class CounterAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         boolean toReturn = true;
-        final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final Game game = ai.getGame();
@@ -41,16 +39,6 @@ public class CounterAi extends SpellAbilityAi {
 
         if (game.getStack().isEmpty()) {
             return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
-        }
-
-        if (abCost != null) {
-            // AI currently disabled for these costs
-            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa)) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
-            }
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
-            }
         }
 
         if ("Force of Will".equals(sourceName)) {
@@ -293,8 +281,7 @@ public class CounterAi extends SpellAbilityAi {
                     }
 
                     if (toPay <= usableManaSources) {
-                        // If this is a reusable Resource, feel free to play it most
-                        // of the time
+                        // If this is a reusable Resource, feel free to play it most of the time
                         if (!playReusable(ai,sa) || (MyRandom.getRandom().nextFloat() < .4)) {
                             return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
                         }

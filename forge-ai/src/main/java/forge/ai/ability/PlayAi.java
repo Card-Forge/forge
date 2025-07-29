@@ -37,10 +37,6 @@ public class PlayAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
-
         if (game.getRules().hasAppliedVariant(GameType.MoJhoSto) && source.getName().equals("Jhoira of the Ghitu Avatar")) {
             // Additional logic for MoJhoSto:
             // Do not activate Jhoira too early, usually there are few good targets

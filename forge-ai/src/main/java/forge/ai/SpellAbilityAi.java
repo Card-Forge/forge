@@ -169,6 +169,9 @@ public abstract class SpellAbilityAi {
 
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph,
             final String logic) {
+         if (logic.equals("AtOppEOT")) {
+            return ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN);
+         }
         return checkPhaseRestrictions(ai, sa, ph);
     }
     /**

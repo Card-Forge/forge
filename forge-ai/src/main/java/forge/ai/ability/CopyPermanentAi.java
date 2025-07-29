@@ -22,14 +22,10 @@ import java.util.function.Predicate;
 
 public class CopyPermanentAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player aiPlayer, SpellAbility sa) {
         Card source = sa.getHostCard();
         PhaseHandler ph = aiPlayer.getGame().getPhaseHandler();
         String aiLogic = sa.getParamOrDefault("AILogic", "");
-
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
 
         if ("MomirAvatar".equals(aiLogic)) {
             return SpecialCardAi.MomirVigAvatar.consider(aiPlayer, sa);
@@ -48,20 +44,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
                 // Not at EOT phase
                 return new AiAbilityDecision(0, AiPlayDecision.WaitForEndOfTurn);
             }
-        } else if ("AtOppEOT".equals(aiLogic)) {
-            if (ph.is(PhaseType.END_OF_TURN)) {
-                if (ph.getPlayerTurn() != aiPlayer) {
-                    // If it's not the AI's turn, it can activate at EOT
-                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
-                    // If it's the AI's turn, it can't activate at EOT
-                    return new AiAbilityDecision(0, AiPlayDecision.WaitForEndOfTurn);
-                }
-            } else {
-                // Not at EOT phase
-                return new AiAbilityDecision(0, AiPlayDecision.WaitForEndOfTurn);
-            }
-        } else if ("DuplicatePerms".equals(aiLogic)) {
+        } if ("DuplicatePerms".equals(aiLogic)) {
             final List<Card> valid = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
             if (valid.size() < 2) {
                 return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);

@@ -11,12 +11,11 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 
 public class ChooseColorAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final Game game = ai.getGame();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final PhaseHandler ph = game.getPhaseHandler();
@@ -25,10 +24,6 @@ public class ChooseColorAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.MissingLogic);
         }
         final String logic = sa.getParam("AILogic");
-
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
 
         if ("Nykthos, Shrine to Nyx".equals(sourceName)) {
             if (SpecialCardAi.NykthosShrineToNyx.consider(ai, sa)) {
@@ -88,10 +83,7 @@ public class ChooseColorAi extends SpellAbilityAi {
             }
         }
 
-        boolean chance = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
-        return new AiAbilityDecision(
-                chance ? 100 : 0,
-                chance ? AiPlayDecision.WillPlay : AiPlayDecision.StopRunawayActivations);
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override

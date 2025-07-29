@@ -37,24 +37,9 @@ public class DestroyAllAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision canPlayAI(final Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(final Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the expected targets could be
-        final Cost abCost = sa.getPayCosts();
-        final Card source = sa.getHostCard();
-
-        if (abCost != null) {
-            // AI currently disabled for some costs
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
-            }
-        }
-
-        // prevent run-away activations - first time will always return true
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
-
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
 
         if ("FellTheMighty".equals(aiLogic)) {

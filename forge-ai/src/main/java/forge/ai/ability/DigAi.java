@@ -20,21 +20,16 @@ import forge.util.TextUtil;
 
 import java.util.Map;
 
-
 public class DigAi extends SpellAbilityAi {
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final Game game = ai.getGame();
         Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         final Card host = sa.getHostCard();
         Player libraryOwner = ai;
-
-        if (!willPayCosts(ai, sa, sa.getPayCosts(), host)) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        }
 
         if (sa.usesTargeting()) {
             sa.resetTargets();
@@ -48,14 +43,6 @@ public class DigAi extends SpellAbilityAi {
         // return false if nothing to dig into
         if (libraryOwner.getCardsIn(ZoneType.Library).isEmpty()) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        }
-
-        if ("Never".equals(sa.getParam("AILogic"))) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        } else if ("AtOppEOT".equals(sa.getParam("AILogic"))) {
-            if (!(game.getPhaseHandler().getNextTurn() == ai && game.getPhaseHandler().is(PhaseType.END_OF_TURN))) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            }
         }
 
         // don't deck yourself
@@ -109,11 +96,7 @@ public class DigAi extends SpellAbilityAi {
             return SpecialCardAi.SarkhanTheMad.considerDig(ai, sa);
         }
 
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        } else {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        }
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
@@ -211,15 +194,12 @@ public class DigAi extends SpellAbilityAi {
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         Card topc = player.getZone(ZoneType.Library).get(0);
 
-        // AI actions for individual cards (until this AI can be generalized)
-        if (sa.getHostCard() != null) {
-            if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Explorer's Scope")) {
-                // for Explorer's Scope, always put a land on the battlefield tapped
-                // (TODO: might not always be a good idea, e.g. when a land ETBing can have detrimental effects)
-                return true;
-            } else if ("AlwaysConfirm".equals(sa.getParam("AILogic"))) {
-                return true;
-            }
+        if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Explorer's Scope")) {
+            // for Explorer's Scope, always put a land on the battlefield tapped
+            // (TODO: might not always be a good idea, e.g. when a land ETBing can have detrimental effects)
+            return true;
+        } else if ("AlwaysConfirm".equals(sa.getParam("AILogic"))) {
+            return true;
         }
 
         // looks like perfect code for Delver of Secrets, but what about other cards? 

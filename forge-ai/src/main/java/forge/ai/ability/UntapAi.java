@@ -29,13 +29,10 @@ import java.util.Map;
 public class UntapAi extends SpellAbilityAi {
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        final Card source = sa.getHostCard();
-        if ("EOT".equals(aiLogic) && (source.getGame().getPhaseHandler().getNextTurn() != ai
-                || !source.getGame().getPhaseHandler().getPhase().equals(PhaseType.END_OF_TURN))) {
-            return false;
-        } else if ("PoolExtraMana".equals(aiLogic)) {
+        if ("PoolExtraMana".equals(aiLogic)) {
             return doPoolExtraManaLogic(ai, sa);
-        } else if ("PreventCombatDamage".equals(aiLogic)) {
+        }
+        if ("PreventCombatDamage".equals(aiLogic)) {
             return doPreventCombatDamageLogic(ai, sa);
             // In the future if you want to give Pseudo vigilance to a creature you attacked with
             // activate during your own during the end of combat step
@@ -56,10 +53,6 @@ public class UntapAi extends SpellAbilityAi {
     @Override
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
-
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
 
         if (sa.usesTargeting()) {
             if (untapPrefTargeting(ai, sa, false)) {
@@ -112,8 +105,6 @@ public class UntapAi extends SpellAbilityAi {
 
     @Override
     public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
-        boolean randomReturn = true;
-
         if (!sa.usesTargeting()) {
             // who cares if its already untapped, it's only a subability?
         } else {
@@ -122,11 +113,7 @@ public class UntapAi extends SpellAbilityAi {
             }
         }
 
-        if (randomReturn) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /**
