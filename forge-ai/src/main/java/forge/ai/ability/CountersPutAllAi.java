@@ -8,7 +8,6 @@ import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
-import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -17,17 +16,15 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 
 import java.util.List;
 import java.util.Map;
 
 public class CountersPutAllAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the expected targets could be
-        final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
         List<Card> hList;
         List<Card> cList;
@@ -44,21 +41,6 @@ public class CountersPutAllAi extends SpellAbilityAi {
         } else {
             hList = CardLists.getValidCards(ai.getWeakestOpponent().getCardsIn(ZoneType.Battlefield), valid, source.getController(), source, sa);
             cList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source, sa);
-        }
-
-        if (abCost != null) {
-            // AI currently disabled for these costs
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 8, sa)) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
-            }
-
-            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source, sa)) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
-            }
-
-            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa)) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
-            }
         }
 
         if (logic.equals("AtEOTOrBlock")) {
@@ -89,9 +71,6 @@ public class CountersPutAllAi extends SpellAbilityAi {
         } else {
             amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }
-
-        // prevent run-away activations - first time will always return true
-        boolean chance = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         if (curse) {
             if (type.equals("M1M1")) {
@@ -132,24 +111,11 @@ public class CountersPutAllAi extends SpellAbilityAi {
             }
         }
 
-        if (!chance) {
-            // if the AI has already activated this ability this turn, it is less likely to do so again
-            // this is to prevent the AI from trading away its best cards too often
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
-
         if (playReusable(ai, sa)) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        if (MyRandom.getRandom().nextFloat() < .6667) {
-            // if the AI has not activated this ability this turn, it is more likely to do so again
-            // this is to prevent the AI from trading away its best cards too often
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            // if the AI has not activated this ability this turn, it is less likely to do so again
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
+        return super.checkApiLogic(ai, sa);
     }
 
     @Override

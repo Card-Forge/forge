@@ -7,7 +7,6 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
-import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -24,11 +23,7 @@ public class PeekAndRevealAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
-        if (sa instanceof AbilityStatic) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        }
-
+    protected AiAbilityDecision checkApiLogic(Player aiPlayer, SpellAbility sa) {
         String logic = sa.getParamOrDefault("AILogic", "");
         if ("Main2".equals(logic)) {
             if (aiPlayer.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
@@ -43,12 +38,7 @@ public class PeekAndRevealAi extends SpellAbilityAi {
         // So far this only appears on Triggers, but will expand
         // once things get converted from Dig + NoMove
         Player opp = AiAttackController.choosePreferredDefenderPlayer(aiPlayer);
-        final Card host = sa.getHostCard();
         Player libraryOwner = aiPlayer;
-
-        if (!willPayCosts(aiPlayer, sa, sa.getPayCosts(), host)) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        }
 
         if (sa.usesTargeting()) {
             sa.resetTargets();

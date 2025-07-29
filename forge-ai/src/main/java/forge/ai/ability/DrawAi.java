@@ -54,11 +54,6 @@ public class DrawAi extends SpellAbilityAi {
             }
         }
 
-        // prevent run-away activations - first time will always return true
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
-
         if (ComputerUtil.playImmediately(ai, sa)) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }

@@ -26,16 +26,10 @@ import forge.util.collect.FCollectionView;
 public class DiscardAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
-        final Cost abCost = sa.getPayCosts();
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
-
-        // temporarily disabled until better AI
-        if (!willPayCosts(ai, sa, abCost, source)) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        }
 
         if ("Chandra, Flamecaller".equals(sourceName)) {
             final int hand = ai.getCardsIn(ZoneType.Hand).size();

@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-
 import java.util.List;
 import java.util.Map;
 
@@ -141,9 +140,6 @@ public class TokenAi extends SpellAbilityAi {
         final Game game = ai.getGame();
         final Player opp = ai.getWeakestOpponent();
 
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
         Card actualToken = spawnToken(ai, sa);
 
         // Don't kill AIs Legendary tokens

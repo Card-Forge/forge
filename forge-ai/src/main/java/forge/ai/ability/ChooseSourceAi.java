@@ -11,7 +11,6 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.combat.Combat;
-import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -29,21 +28,13 @@ public class ChooseSourceAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected AiAbilityDecision canPlayAI(final Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(final Player ai, SpellAbility sa) {
         // TODO: AI Support! Currently this is copied from AF ChooseCard.
         //       When implementing AI, I believe AI also needs to be made aware of the damage sources chosen
         //       to be prevented (e.g. so the AI doesn't attack with a creature that will not deal any damage
         //       to the player because a CoP was pre-activated on it - unless, of course, there's another
         //       possible reason to attack with that creature).
         final Card host = sa.getHostCard();
-        final Cost abCost = sa.getPayCosts();
-        final Card source = sa.getHostCard();
-
-        if (abCost != null) {
-            if (!willPayCosts(ai, sa, abCost, source)) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
-            }
-        }
 
         if (sa.usesTargeting()) {
             sa.resetTargets();

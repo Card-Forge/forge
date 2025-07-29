@@ -14,10 +14,6 @@ public class DiscoverAi extends SpellAbilityAi {
 
     @Override
     protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
-
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 

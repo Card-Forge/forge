@@ -249,10 +249,6 @@ public class PumpAi extends PumpAiBase {
             }
         }
 
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
-
         if (!game.getStack().isEmpty() && !sa.isCurse() && !isFight) {
             return ComputerUtilCard.canPumpAgainstRemoval(ai, sa);
         }
@@ -308,7 +304,6 @@ public class PumpAi extends PumpAiBase {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        //Untargeted
         if (!sa.usesTargeting()) {
             final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
 

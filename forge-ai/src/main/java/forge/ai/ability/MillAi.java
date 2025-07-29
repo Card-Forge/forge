@@ -69,10 +69,7 @@ public class MillAi extends SpellAbilityAi {
          * - check for Laboratory Maniac effect (needs to check for actual
          * effect due to possibility of "lose abilities" effect)
          */
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
-        
+
         if (("You".equals(sa.getParam("Defined")) || "Player".equals(sa.getParam("Defined")))
                 && ai.getCardsIn(ZoneType.Library).size() < 10) {
             // prevent self and each player mill when library is small

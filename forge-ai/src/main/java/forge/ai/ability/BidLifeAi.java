@@ -12,14 +12,13 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 
 import java.util.List;
 
 public class BidLifeAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player aiPlayer, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
         TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -51,8 +50,8 @@ public class BidLifeAi extends SpellAbilityAi {
                 }
             }
         }
-        boolean chance = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
-        return new AiAbilityDecision(chance ? 100 : 0, chance ? AiPlayDecision.WillPlay : AiPlayDecision.StopRunawayActivations);
+
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
 }

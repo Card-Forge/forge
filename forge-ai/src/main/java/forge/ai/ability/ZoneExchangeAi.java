@@ -11,7 +11,6 @@ import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 
 public class ZoneExchangeAi extends SpellAbilityAi {
 
@@ -19,7 +18,7 @@ public class ZoneExchangeAi extends SpellAbilityAi {
  * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
  */
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, final SpellAbility sa) {
         Card object1 = null;
         Card object2 = null;
         final Card source = sa.getHostCard();
@@ -46,11 +45,7 @@ public class ZoneExchangeAi extends SpellAbilityAi {
             }
         }
         if (object2.getCMC() > object1.getCMC()) {
-            if (MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn())) {
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-            }
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }

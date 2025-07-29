@@ -35,7 +35,7 @@ import java.util.Map;
 
 public class EffectAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlayAI(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
         final Game game = ai.getGame();
         boolean randomReturn = MyRandom.getRandom().nextFloat() <= .6667;
         String logic = "";

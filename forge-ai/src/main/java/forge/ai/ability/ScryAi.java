@@ -155,7 +155,7 @@ public class ScryAi extends SpellAbilityAi {
         if (isSorcerySpeed(sa, ai)) {
             chance = .667; // 66.7% chance for sorcery speed (since it will never activate EOT)
         }
-        boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
+        boolean randomReturn = MyRandom.getRandom().nextFloat() <= chance;
 
         if (playReusable(ai, sa)) {
             randomReturn = true;

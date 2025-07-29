@@ -22,14 +22,10 @@ import java.util.function.Predicate;
 
 public class CopyPermanentAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player aiPlayer, SpellAbility sa) {
         Card source = sa.getHostCard();
         PhaseHandler ph = aiPlayer.getGame().getPhaseHandler();
         String aiLogic = sa.getParamOrDefault("AILogic", "");
-
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
 
         if ("MomirAvatar".equals(aiLogic)) {
             return SpecialCardAi.MomirVigAvatar.consider(aiPlayer, sa);

@@ -57,10 +57,6 @@ public class UntapAi extends SpellAbilityAi {
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
 
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
-
         if (sa.usesTargeting()) {
             if (untapPrefTargeting(ai, sa, false)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

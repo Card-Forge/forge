@@ -84,9 +84,6 @@ public abstract class ManifestBaseAi extends SpellAbilityAi {
     protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
         final Game game = ai.getGame();
         final Card host = sa.getHostCard();
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
 
         if (sa.hasParam("Choices") || sa.hasParam("ChoiceZone")) {
             ZoneType choiceZone = ZoneType.Hand;

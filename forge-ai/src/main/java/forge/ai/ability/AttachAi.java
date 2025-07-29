@@ -45,7 +45,7 @@ public class AttachAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
 
@@ -55,27 +55,12 @@ public class AttachAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.TimingRestrictions);
         }
 
-        if (abCost != null) {
-            // AI currently disabled for these costs
-            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa)) {
-                return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
-            }
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
-                return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
-            }
-        }
-
         if (source.isAura() && sa.isSpell() && !source.ignoreLegendRule() && ai.isCardInPlay(source.getName())) {
             // Don't play the second copy of a legendary enchantment already in play
 
             // TODO: Add some extra checks for where the AI may want to cast a replacement aura
             // on another creature and keep it when the original enchanted creature is useless
             return new AiAbilityDecision(0, AiPlayDecision.WouldDestroyLegend);
-        }
-
-        // prevent run-away activations - first time will always return true
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
         }
 
         // Attach spells always have a target
