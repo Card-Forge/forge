@@ -429,6 +429,12 @@ public class CardView extends GameEntityView {
     void updateChosenColors(Card c) {
         set(TrackableProperty.ChosenColors, c.getChosenColors());
     }
+    public boolean hasPaperFoil() {
+        return get(TrackableProperty.PaperFoil);
+    }
+    void updatePaperFoil(boolean v) {
+        set(TrackableProperty.PaperFoil, v);
+    }
     public ColorSet getMarkedColors() {
         return get(TrackableProperty.MarkedColors);
     }
@@ -1520,8 +1526,8 @@ public class CardView extends GameEntityView {
         public boolean hasPrintedPT() {
             return get(TrackableProperty.HasPrintedPT);
         }
-        void updateHasPrintedPT(boolean val) {
-            set(TrackableProperty.HasPrintedPT, val);
+        void updateHasPrintedPT(boolean v) {
+            set(TrackableProperty.HasPrintedPT, v);
         }
 
         public String getSetCode() {
