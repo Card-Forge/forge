@@ -17,7 +17,7 @@ import java.util.Map;
 public class CopySpellAbilityAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player aiPlayer, SpellAbility sa) {
         Game game = aiPlayer.getGame();
         int chance = ((PlayerControllerAi)aiPlayer.getController()).getAi().getIntProperty(AiProps.CHANCE_TO_COPY_OWN_SPELL_WHILE_ON_STACK);
         int diff = ((PlayerControllerAi)aiPlayer.getController()).getAi().getIntProperty(AiProps.ALWAYS_COPY_SPELL_IF_CMC_DIFF);
@@ -43,15 +43,8 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
 
         if (!MyRandom.percentTrue(chance)
                 && !"AlwaysIfViable".equals(logic)
-                && !"OnceIfViable".equals(logic)
                 && !"AlwaysCopyActivatedAbilities".equals(logic)) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        }
-
-        if ("OnceIfViable".equals(logic)) {
-            if (AiCardMemory.isRememberedCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            }
         }
 
         if (sa.usesTargeting()) {

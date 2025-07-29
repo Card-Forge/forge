@@ -140,11 +140,13 @@ public class ComputerUtilCost {
                     if (type.equals("CARDNAME")) {
                         if (source.getAbilityText().contains("Bloodrush")) {
                             continue;
-                        } else if (ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN, ai)
+                        }
+                        if (ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN, ai)
                                 && !ai.isUnlimitedHandSize() && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize()) {
                             // Better do something than just discard stuff
                             return true;
                         }
+                        return false;
                     }
                     typeList = CardLists.getValidCards(hand, type, source.getController(), source, sa);
                     if (typeList.size() > ai.getMaxHandSize()) {
