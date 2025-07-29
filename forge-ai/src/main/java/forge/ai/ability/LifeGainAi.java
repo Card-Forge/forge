@@ -129,7 +129,6 @@ public class LifeGainAi extends SpellAbilityAi {
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
-        final String aiLogic = sa.getParamOrDefault("AILogic", "");
 
         final int life = ai.getLife();
         final String amountStr = sa.getParam("LifeAmount");
@@ -152,23 +151,7 @@ public class LifeGainAi extends SpellAbilityAi {
         }
 
         // don't use it if no life to gain
-        if (!activateForCost && lifeAmount <= 0) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        }
-        // don't play if the conditions aren't met, unless it would trigger a
-        // beneficial sub-condition
-        if (!activateForCost && !sa.metConditions()) {
-            final AbilitySub abSub = sa.getSubAbility();
-            if (abSub != null && !sa.isWrapper() && "True".equals(source.getSVar("AIPlayForSub"))) {
-                if (!abSub.getConditions().areMet(abSub)) {
-                    return new AiAbilityDecision(0, AiPlayDecision.ConditionsNotMet);
-                }
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.ConditionsNotMet);
-            }
-        }
-
-        if (!activateForCost && !ai.canGainLife()) {
+        if (!activateForCost && (lifeAmount <= 0 || !ai.canGainLife())) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
@@ -177,10 +160,8 @@ public class LifeGainAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
         }
 
-        if (sa.usesTargeting()) {
-            if (!target(ai, sa, true)) {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
-            }
+        if (sa.usesTargeting() && !target(ai, sa, true)) {
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
         if (ComputerUtil.playImmediately(ai, sa)) {

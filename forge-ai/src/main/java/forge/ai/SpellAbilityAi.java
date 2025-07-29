@@ -41,7 +41,7 @@ public abstract class SpellAbilityAi {
 
     public final AiAbilityDecision canPlayAIWithSubs(final Player aiPlayer, final SpellAbility sa) {
         AiAbilityDecision decision = canPlayAI(aiPlayer, sa);
-        if (!decision.willingToPlay()) {
+        if (!decision.willingToPlay() && !"PlayForSub".equals(sa.getParam("AILogic"))) {
             return decision;
         }
         final AbilitySub subAb = sa.getSubAbility();
