@@ -47,10 +47,6 @@ public class CountersPutAllAi extends SpellAbilityAi {
             if (!ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && !ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
             }
-        } else if (logic.equals("AtOppEOT")) {
-            if (!(ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && ai.getGame().getPhaseHandler().getNextTurn() == ai)) {
-                return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
-            }
         }
 
         if (tgt != null) {

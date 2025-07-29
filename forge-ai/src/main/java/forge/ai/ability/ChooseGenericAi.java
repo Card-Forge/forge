@@ -7,7 +7,6 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.cost.Cost;
-import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
@@ -19,7 +18,6 @@ import forge.util.collect.FCollection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 
 public class ChooseGenericAi extends SpellAbilityAi {
 
@@ -33,9 +31,6 @@ public class ChooseGenericAi extends SpellAbilityAi {
                     return true;
                 }
             }
-        } else if ("AtOppEOT".equals(aiLogic)) {
-            PhaseHandler ph = ai.getGame().getPhaseHandler();
-            return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai;
         } else if ("Always".equals(aiLogic)) {
             return true;
         }

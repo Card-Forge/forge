@@ -39,10 +39,6 @@ public class DigMultipleAi extends SpellAbilityAi {
 
         if ("Never".equals(sa.getParam("AILogic"))) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        } else if ("AtOppEOT".equals(sa.getParam("AILogic"))) {
-            if (!(game.getPhaseHandler().getNextTurn() == ai && game.getPhaseHandler().is(PhaseType.END_OF_TURN))) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            }
         }
 
         // don't deck yourself

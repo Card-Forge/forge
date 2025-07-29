@@ -44,20 +44,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
                 // Not at EOT phase
                 return new AiAbilityDecision(0, AiPlayDecision.WaitForEndOfTurn);
             }
-        } else if ("AtOppEOT".equals(aiLogic)) {
-            if (ph.is(PhaseType.END_OF_TURN)) {
-                if (ph.getPlayerTurn() != aiPlayer) {
-                    // If it's not the AI's turn, it can activate at EOT
-                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
-                    // If it's the AI's turn, it can't activate at EOT
-                    return new AiAbilityDecision(0, AiPlayDecision.WaitForEndOfTurn);
-                }
-            } else {
-                // Not at EOT phase
-                return new AiAbilityDecision(0, AiPlayDecision.WaitForEndOfTurn);
-            }
-        } else if ("DuplicatePerms".equals(aiLogic)) {
+        } if ("DuplicatePerms".equals(aiLogic)) {
             final List<Card> valid = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
             if (valid.size() < 2) {
                 return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);

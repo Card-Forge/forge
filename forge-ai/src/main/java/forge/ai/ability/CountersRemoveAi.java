@@ -45,24 +45,6 @@ public class CountersRemoveAi extends SpellAbilityAi {
     /*
      * (non-Javadoc)
      *
-     * @see
-     * forge.ai.SpellAbilityAi#checkPhaseRestrictions(forge.game.player.Player,
-     * forge.game.spellability.SpellAbility, forge.game.phase.PhaseHandler,
-     * java.lang.String)
-     */
-    @Override
-    protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph, String logic) {
-        if ("EndOfOpponentsTurn".equals(logic)) {
-            if (!ph.is(PhaseType.END_OF_TURN) || !ph.getNextTurn().equals(ai)) {
-                return false;
-            }
-        }
-        return super.checkPhaseRestrictions(ai, sa, ph, logic);
-    }
-
-    /*
-     * (non-Javadoc)
-     *
      * @see forge.ai.SpellAbilityAi#checkApiLogic(forge.game.player.Player,
      * forge.game.spellability.SpellAbility)
      */

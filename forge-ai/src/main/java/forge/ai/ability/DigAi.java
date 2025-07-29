@@ -20,7 +20,6 @@ import forge.util.TextUtil;
 
 import java.util.Map;
 
-
 public class DigAi extends SpellAbilityAi {
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
@@ -44,12 +43,6 @@ public class DigAi extends SpellAbilityAi {
         // return false if nothing to dig into
         if (libraryOwner.getCardsIn(ZoneType.Library).isEmpty()) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        }
-
-        if ("AtOppEOT".equals(sa.getParam("AILogic"))) {
-            if (!(game.getPhaseHandler().getNextTurn() == ai && game.getPhaseHandler().is(PhaseType.END_OF_TURN))) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            }
         }
 
         // don't deck yourself

@@ -29,13 +29,10 @@ import java.util.Map;
 public class UntapAi extends SpellAbilityAi {
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        final Card source = sa.getHostCard();
-        if ("EOT".equals(aiLogic) && (source.getGame().getPhaseHandler().getNextTurn() != ai
-                || !source.getGame().getPhaseHandler().getPhase().equals(PhaseType.END_OF_TURN))) {
-            return false;
-        } else if ("PoolExtraMana".equals(aiLogic)) {
+        if ("PoolExtraMana".equals(aiLogic)) {
             return doPoolExtraManaLogic(ai, sa);
-        } else if ("PreventCombatDamage".equals(aiLogic)) {
+        }
+        if ("PreventCombatDamage".equals(aiLogic)) {
             return doPreventCombatDamageLogic(ai, sa);
             // In the future if you want to give Pseudo vigilance to a creature you attacked with
             // activate during your own during the end of combat step

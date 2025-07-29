@@ -427,12 +427,6 @@ public class CountersPutAi extends CountersAi {
             }
         }
 
-        if ("AtOppEOT".equals(logic)) {
-            if (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai)) {
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            }
-        }
-
         final boolean hasSacCost = abCost.hasSpecificCostType(CostSacrifice.class);
         final boolean sacSelf = ComputerUtilCost.isSacrificeSelfCost(abCost);
 

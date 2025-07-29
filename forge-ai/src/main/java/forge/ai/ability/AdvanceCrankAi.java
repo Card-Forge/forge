@@ -5,8 +5,6 @@ import forge.ai.AiPlayDecision;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.phase.PhaseHandler;
-import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -22,11 +20,4 @@ public class AdvanceCrankAi extends SpellAbilityAi {
         return super.canPlayAI(ai, sa);
     }
 
-    @Override
-    protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph, String logic) {
-        if(logic.equals("AtOppEOT"))
-            return ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN);
-
-        return super.checkPhaseRestrictions(ai, sa, ph, logic);
-    }
 }

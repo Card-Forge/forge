@@ -8,8 +8,6 @@ import forge.game.GameEntity;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
-import forge.game.phase.PhaseHandler;
-import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -85,14 +83,6 @@ public class AssembleContraptionAi extends SpellAbilityAi {
                     return c.isContraption() && c.getSprocket() != nextSprocket;
                 }).map(c -> (Card) c)
                 .findFirst().orElse(null);
-    }
-
-    @Override
-    protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph, String logic) {
-        if(logic.equals("AtOppEOT"))
-            return ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN);
-
-        return super.checkPhaseRestrictions(ai, sa, ph);
     }
 
     @Override

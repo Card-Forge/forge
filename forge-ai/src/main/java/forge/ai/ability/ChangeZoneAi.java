@@ -792,7 +792,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
         String aiLogic = sa.getParamOrDefault("AILogic", "");
 
-        if (aiLogic.equals("SurvivalOfTheFittest") || aiLogic.equals("AtOppEOT")) {
+        if (aiLogic.equals("SurvivalOfTheFittest")) {
             return ph.getNextTurn().equals(ai) && ph.is(PhaseType.END_OF_TURN);
         } else if (aiLogic.equals("Main1") && ph.is(PhaseType.MAIN1, ai)) {
             return true;
