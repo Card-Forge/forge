@@ -130,7 +130,13 @@ public abstract class SpellAbilityAi {
      * Checks if the AI will play a SpellAbility with the specified AiLogic
      */
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        return !"Never".equals(aiLogic);
+        if ("Never".equals(aiLogic)) {
+            return false;
+        }
+        if (!"Once".equals(aiLogic)) {
+            return !AiCardMemory.isRememberedCard(ai, sa.getHostCard(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
+        }
+        return true;
     }
 
     /**

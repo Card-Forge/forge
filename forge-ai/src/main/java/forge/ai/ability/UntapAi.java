@@ -41,7 +41,7 @@ public class UntapAi extends SpellAbilityAi {
             // activate during your own during the end of combat step
         }
 
-        return !("Never".equals(aiLogic));
+        return super.checkAiLogic(ai, sa, aiLogic);
     }
 
     @Override

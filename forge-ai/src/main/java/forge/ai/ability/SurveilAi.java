@@ -65,24 +65,6 @@ public class SurveilAi extends SpellAbilityAi {
         return true;
     }
 
-    /**
-     * Checks if the AI will play a SpellAbility with the specified AiLogic
-     */
-    @Override
-    protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        final Card source = sa.getHostCard();
-
-        if ("Never".equals(aiLogic)) {
-            return false;
-        } else if ("Once".equals(aiLogic)) {
-            return !AiCardMemory.isRememberedCard(ai, source, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
-        }
-
-        // TODO: add card-specific Surveil AI logic here when/if necessary
-
-        return true;
-    }
-
     @Override
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         // Makes no sense to do Surveil when there's nothing in the library

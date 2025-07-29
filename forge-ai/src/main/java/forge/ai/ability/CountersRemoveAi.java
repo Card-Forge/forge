@@ -25,14 +25,6 @@ import java.util.function.Predicate;
 
 public class CountersRemoveAi extends SpellAbilityAi {
 
-    @Override
-    protected AiAbilityDecision canPlayWithoutRestrict(final Player ai, final SpellAbility sa) {
-        if ("Always".equals(sa.getParam("AILogic"))) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        }
-        return super.canPlayWithoutRestrict(ai, sa);
-    }
-
     /*
      * (non-Javadoc)
      *
@@ -357,8 +349,8 @@ public class CountersRemoveAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             return doTgt(aiPlayer, sa, mandatory);
         }
-        return mandatory ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
-                         : new AiAbilityDecision(0, AiPlayDecision.MandatoryPlay);
+        return mandatory ? new AiAbilityDecision(100, AiPlayDecision.MandatoryPlay)
+                         : new AiAbilityDecision(0, AiPlayDecision.CantPlaySa);
     }
 
     /*

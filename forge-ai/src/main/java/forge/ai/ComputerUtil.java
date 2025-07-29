@@ -1385,6 +1385,10 @@ public class ComputerUtil {
 
     // returns true if the AI should stop using the ability
     public static boolean preventRunAwayActivations(final SpellAbility sa) {
+        if (!sa.isActivatedAbility()) {
+            return false;
+        }
+
         int activations = sa.getActivationsThisTurn();
 
         //10 activations should still be acceptable

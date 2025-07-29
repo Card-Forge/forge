@@ -214,13 +214,7 @@ public class CountersPutAi extends CountersAi {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
-
-        if ("Never".equals(logic)) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        } else if ("AlwaysWithNoTgt".equals(logic)) {
+        if ("AlwaysWithNoTgt".equals(logic)) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else if ("AristocratCounters".equals(logic)) {
             return SpecialAiLogic.doAristocratWithCountersLogic(ai, sa);
