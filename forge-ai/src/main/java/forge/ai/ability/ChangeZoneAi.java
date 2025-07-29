@@ -336,22 +336,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
 
-        // don't play if the conditions aren't met, unless it would trigger a beneficial sub-condition
-        if (!activateForCost && !sa.metConditions()) {
-            final AbilitySub abSub = sa.getSubAbility();
-            if (abSub != null && !sa.isWrapper() && "True".equals(source.getSVar("AIPlayForSub"))) {
-                if (!abSub.metConditions()) {
-                    return new AiAbilityDecision(0, AiPlayDecision.ConditionsNotMet);
-                }
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.ConditionsNotMet);
-            }
-        }
-        // prevent run-away activations - first time will always return true
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
-
         Iterable<Player> pDefined = Lists.newArrayList(source.getController());
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null && tgt.canTgtPlayer()) {
@@ -710,10 +694,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
-
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
 
         if (sa.usesTargeting()) {
             if (!isPreferredTarget(ai, sa, false, false)) {

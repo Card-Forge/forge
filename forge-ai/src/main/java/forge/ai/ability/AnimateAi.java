@@ -146,9 +146,7 @@ public class AnimateAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final Game game = aiPlayer.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
-        if (!sa.metConditions() && sa.getSubAbility() == null) {
-            return new AiAbilityDecision(0, AiPlayDecision.ConditionsNotMet); // what is this for?
-        }
+
         if (!game.getStack().isEmpty() && game.getStack().peekAbility().getApi() == ApiType.Sacrifice) {
             // Should I animate a card before i have to sacrifice something better?
             if (!isAnimatedThisTurn(aiPlayer, source)) {
@@ -157,7 +155,7 @@ public class AnimateAi extends SpellAbilityAi {
             }
         }
         if (!ComputerUtilCost.checkTapTypeCost(aiPlayer, sa.getPayCosts(), source, sa, new CardCollection())) {
-            return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable); // prevent crewing with equal or better creatures
+            return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
         }
 
         if (sa.costHasManaX() && sa.getSVar("X").equals("Count$xPaid")) {

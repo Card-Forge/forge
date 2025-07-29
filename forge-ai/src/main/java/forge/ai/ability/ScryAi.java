@@ -136,14 +136,12 @@ public class ScryAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        if ("Never".equals(aiLogic)) {
-            return false;
-        } else if ("BrainJar".equals(aiLogic)) {
+        if ("BrainJar".equals(aiLogic)) {
             return SpecialCardAi.BrainInAJar.consider(ai, sa);
         } else if ("MultipleChoice".equals(aiLogic)) {
             return SpecialCardAi.MultipleChoice.consider(ai, sa);
         }
-        return true;
+        return super.checkAiLogic(ai, sa, aiLogic);
     }
     
     @Override

@@ -214,13 +214,7 @@ public class CountersPutAi extends CountersAi {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
-
-        if ("Never".equals(logic)) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        } else if ("AlwaysWithNoTgt".equals(logic)) {
+        if ("AlwaysWithNoTgt".equals(logic)) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else if ("AristocratCounters".equals(logic)) {
             return SpecialAiLogic.doAristocratWithCountersLogic(ai, sa);
@@ -309,10 +303,6 @@ public class CountersPutAi extends CountersAi {
             return doChargeToOppCtrlCMCLogic(ai, sa);
         } else if (logic.equals("TheOneRing")) {
             return SpecialCardAi.TheOneRing.consider(ai, sa);
-        }
-
-        if (!sa.metConditions() && sa.getSubAbility() == null) {
-            return new AiAbilityDecision(100, AiPlayDecision.ConditionsNotMet);
         }
 
         if (sourceName.equals("Feat of Resistance")) { // sub-ability should take precedence

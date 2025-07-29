@@ -918,24 +918,6 @@ public class AiController {
             return canPlay;
         }
 
-        // Account for possible Ward after the spell is fully targeted
-        // TODO: ideally, this should be done while targeting, so that a different target can be preferred if the best
-        // one is warded and can't be paid for. (currently it will be stuck with the target until it could pay)
-        if (sa.isCounterableBy(null)) {
-            for (TargetChoices tc : sa.getAllTargetChoices()) {
-                for (Card tgt : tc.getTargetCards()) {
-                    // TODO some older cards don't use the keyword, so check for trigger instead
-                    if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(host.getController())) {
-                        Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
-                        SpellAbilityAi topAI = new SpellAbilityAi() {};
-                        if (!topAI.willPayCosts(player, sa, wardCost, host)) {
-                            return AiPlayDecision.CostNotAcceptable;
-                        }
-                    }
-                }
-            }
-        }
-
         if (!ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
             // for dependent costs with X, e.g. Repeal, which require a valid target to be specified before a decision can be made
             // on whether the cost can be paid, this can only be checked late after canPlaySa has been run (or the AI will misplay)

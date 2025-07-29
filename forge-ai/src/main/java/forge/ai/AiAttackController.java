@@ -145,13 +145,15 @@ public class AiAttackController {
                 sa.setActivatingPlayer(defender);
                 if (sa.isCrew() && !ComputerUtilCost.checkTapTypeCost(defender, sa.getPayCosts(), c, sa, tappedDefenders)) {
                     continue;
-                } else if (!ComputerUtilCost.canPayCost(sa, defender, false) || !sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
+                }
+                if (!ComputerUtilCost.canPayCost(sa, defender, false) || !sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
                     continue;
                 }
                 Card animatedCopy = AnimateAi.becomeAnimated(c, sa);
                 if (animatedCopy.isCreature()) {
+                    // TODO imprecise, only works 100% for colorless mana
                     int saCMC = sa.getPayCosts() != null && sa.getPayCosts().hasManaCost() ?
-                            sa.getPayCosts().getTotalMana().getCMC() : 0; // FIXME: imprecise, only works 100% for colorless mana
+                            sa.getPayCosts().getTotalMana().getCMC() : 0;
                     if (totalMana - manaReserved >= saCMC) {
                         manaReserved += saCMC;
                         defenders.add(animatedCopy);

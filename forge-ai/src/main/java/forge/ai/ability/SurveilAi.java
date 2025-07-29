@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import forge.ai.*;
-import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayLife;
 import forge.game.phase.PhaseHandler;
@@ -62,24 +61,6 @@ public class SurveilAi extends SpellAbilityAi {
                 return ph.is(PhaseType.UPKEEP);
             }
         }
-        return true;
-    }
-
-    /**
-     * Checks if the AI will play a SpellAbility with the specified AiLogic
-     */
-    @Override
-    protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        final Card source = sa.getHostCard();
-
-        if ("Never".equals(aiLogic)) {
-            return false;
-        } else if ("Once".equals(aiLogic)) {
-            return !AiCardMemory.isRememberedCard(ai, source, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
-        }
-
-        // TODO: add card-specific Surveil AI logic here when/if necessary
-
         return true;
     }
 

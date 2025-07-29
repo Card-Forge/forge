@@ -41,7 +41,7 @@ public abstract class SpellAbilityAi {
 
     public final AiAbilityDecision canPlayAIWithSubs(final Player aiPlayer, final SpellAbility sa) {
         AiAbilityDecision decision = canPlayAI(aiPlayer, sa);
-        if (!decision.willingToPlay()) {
+        if (!decision.willingToPlay() && !"PlayForSub".equals(sa.getParam("AILogic"))) {
             return decision;
         }
         final AbilitySub subAb = sa.getSubAbility();
@@ -56,9 +56,7 @@ public abstract class SpellAbilityAi {
      * Handles the AI decision to play a "main" SpellAbility
      */
     protected AiAbilityDecision canPlayAI(final Player ai, final SpellAbility sa) {
-        final Card source = sa.getHostCard();
-
-        if (sa.getRestrictions() != null && !sa.getRestrictions().canPlay(source, sa)) {
+        if (sa.getRestrictions() != null && !sa.getRestrictions().canPlay(sa.getHostCard(), sa)) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlaySa);
         }
 
@@ -74,13 +72,6 @@ public abstract class SpellAbilityAi {
             sa.setXManaCostPaid(ComputerUtilCost.getMaxXValue(sa, ai, false));
         }
 
-        if (!checkConditions(ai, sa, sa.getConditions())) {
-            SpellAbility sub = sa.getSubAbility();
-            if (sub != null && !checkConditions(ai, sub, sub.getConditions())) {
-                return new AiAbilityDecision(0, AiPlayDecision.NeedsToPlayCriteriaNotMet);
-            }
-        }
-
         if (sa.hasParam("AILogic")) {
             final String logic = sa.getParam("AILogic");
             final boolean alwaysOnDiscard = "AlwaysOnDiscard".equals(logic) && ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN, ai)
@@ -93,22 +84,35 @@ public abstract class SpellAbilityAi {
             }
         } else if (!checkPhaseRestrictions(ai, sa, ai.getGame().getPhaseHandler())) {
             return new AiAbilityDecision(0, AiPlayDecision.MissingPhaseRestrictions);
+        } else if (ComputerUtil.preventRunAwayActivations(sa)) {
+            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
         }
 
         AiAbilityDecision decision = checkApiLogic(ai, sa);
         if (!decision.willingToPlay()) {
             return decision;
         }
-        // needs to be after API logic because needs to check possible X Cost?
+
+        // needs to be after API logic because needs to check possible X Cost
         if (cost != null && !willPayCosts(ai, sa, cost, source)) {
             return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
+        }
+
+        // for cards like Figure of Destiny
+        // (it's unlikely a valid effect would work like this -
+        // and while in theory AI could turn some conditions true in response that's far too advanced as default)
+        if (!checkConditions(ai, sa)) {
+            SpellAbility sub = sa.getSubAbility();
+            if (sub == null || !checkConditions(ai, sub)) {
+                return new AiAbilityDecision(0, AiPlayDecision.NeedsToPlayCriteriaNotMet);
+            }
         }
         return decision;
     }
 
-    protected boolean checkConditions(final Player ai, final SpellAbility sa, SpellAbilityCondition con) {
+    protected boolean checkConditions(final Player ai, final SpellAbility sa) {
         // copy it to disable some checks that the AI need to check extra
-        con = (SpellAbilityCondition) con.copy();
+        SpellAbilityCondition con = (SpellAbilityCondition) sa.getConditions().copy();
 
         // if manaspent, check if AI can pay the colored mana as cost
         if (!con.getManaSpent().isEmpty()) {
@@ -126,13 +130,13 @@ public abstract class SpellAbilityAi {
      * Checks if the AI will play a SpellAbility with the specified AiLogic
      */
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        if (aiLogic.equals("CheckCondition")) {
-            SpellAbility saCopy = sa.copy();
-            saCopy.setActivatingPlayer(ai);
-            return saCopy.metConditions();
+        if ("Never".equals(aiLogic)) {
+            return false;
         }
-
-        return !("Never".equals(aiLogic));
+        if (!"Once".equals(aiLogic)) {
+            return !AiCardMemory.isRememberedCard(ai, sa.getHostCard(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
+        }
+        return true;
     }
 
     /**
@@ -171,16 +175,11 @@ public abstract class SpellAbilityAi {
      * The rest of the logic not covered by the canPlayAI template is defined here
      */
     protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
-
         if (MyRandom.getRandom().nextFloat() < .8f) {
             // 80% chance to play the ability
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        // 20% chance to not play the ability
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
