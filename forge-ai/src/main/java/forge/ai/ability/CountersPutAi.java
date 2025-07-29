@@ -664,7 +664,6 @@ public class CountersPutAi extends CountersAi {
 
     @Override
     public AiAbilityDecision chkAIDrawback(final SpellAbility sa, Player ai) {
-        boolean chance = true;
         final Game game = ai.getGame();
         Card choice = null;
         final String type = sa.getParam("CounterType");
@@ -738,10 +737,7 @@ public class CountersPutAi extends CountersAi {
             }
         }
 
-        if (chance) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        }
-        return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override

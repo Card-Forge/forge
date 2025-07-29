@@ -33,9 +33,6 @@ public class DiscardAi extends SpellAbilityAi {
 
         if ("Chandra, Flamecaller".equals(sourceName)) {
             final int hand = ai.getCardsIn(ZoneType.Hand).size();
-
-
-
             if (MyRandom.getRandom().nextFloat() < (1.0 / (1 + hand))) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             } else {
@@ -138,15 +135,9 @@ public class DiscardAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(0.9, sa.getActivationsThisTurn());
-
         // some other variables here, like handsize vs. maxHandSize
 
-        if (randomReturn) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     private boolean discardTargetAI(final Player ai, final SpellAbility sa) {

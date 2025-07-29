@@ -108,8 +108,6 @@ public class UntapAi extends SpellAbilityAi {
 
     @Override
     public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
-        boolean randomReturn = true;
-
         if (!sa.usesTargeting()) {
             // who cares if its already untapped, it's only a subability?
         } else {
@@ -118,11 +116,7 @@ public class UntapAi extends SpellAbilityAi {
             }
         }
 
-        if (randomReturn) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /**
