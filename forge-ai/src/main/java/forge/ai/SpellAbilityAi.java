@@ -56,9 +56,7 @@ public abstract class SpellAbilityAi {
      * Handles the AI decision to play a "main" SpellAbility
      */
     protected AiAbilityDecision canPlayAI(final Player ai, final SpellAbility sa) {
-        final Card source = sa.getHostCard();
-
-        if (sa.getRestrictions() != null && !sa.getRestrictions().canPlay(source, sa)) {
+        if (sa.getRestrictions() != null && !sa.getRestrictions().canPlay(sa.getHostCard(), sa)) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlaySa);
         }
 
@@ -86,6 +84,8 @@ public abstract class SpellAbilityAi {
             }
         } else if (!checkPhaseRestrictions(ai, sa, ai.getGame().getPhaseHandler())) {
             return new AiAbilityDecision(0, AiPlayDecision.MissingPhaseRestrictions);
+        } else if (ComputerUtil.preventRunAwayActivations(sa)) {
+            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
         }
 
         AiAbilityDecision decision = checkApiLogic(ai, sa);
@@ -130,13 +130,7 @@ public abstract class SpellAbilityAi {
      * Checks if the AI will play a SpellAbility with the specified AiLogic
      */
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        if (aiLogic.equals("CheckCondition")) {
-            SpellAbility saCopy = sa.copy();
-            saCopy.setActivatingPlayer(ai);
-            return saCopy.metConditions();
-        }
-
-        return !("Never".equals(aiLogic));
+        return !"Never".equals(aiLogic);
     }
 
     /**
@@ -175,16 +169,11 @@ public abstract class SpellAbilityAi {
      * The rest of the logic not covered by the canPlayAI template is defined here
      */
     protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
-
         if (MyRandom.getRandom().nextFloat() < .8f) {
             // 80% chance to play the ability
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        // 20% chance to not play the ability
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 

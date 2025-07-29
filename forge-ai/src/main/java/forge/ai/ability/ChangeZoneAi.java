@@ -336,11 +336,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
 
-        // prevent run-away activations - first time will always return true
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
-
         Iterable<Player> pDefined = Lists.newArrayList(source.getController());
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null && tgt.canTgtPlayer()) {
@@ -699,10 +694,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
-
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
 
         if (sa.usesTargeting()) {
             if (!isPreferredTarget(ai, sa, false, false)) {

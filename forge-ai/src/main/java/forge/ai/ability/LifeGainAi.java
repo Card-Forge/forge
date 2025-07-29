@@ -155,11 +155,6 @@ public class LifeGainAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        // prevent run-away activations - first time will always return true
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
-
         if (sa.usesTargeting() && !target(ai, sa, true)) {
             return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
