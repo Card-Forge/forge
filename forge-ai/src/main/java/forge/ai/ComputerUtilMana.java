@@ -666,6 +666,7 @@ public class ComputerUtilMana {
             return true;
         }
 
+        int phyLifeToPay = 2;
         boolean purePhyrexian = cost.containsOnlyPhyrexianMana();
         boolean hasConverge = sa.getHostCard().hasConverge();
         ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = getSourcesForShards(cost, sa, ai, test, checkPlayable, hasConverge);
@@ -693,12 +694,11 @@ public class ComputerUtilMana {
             }
 
             if (sourcesForShards == null && !purePhyrexian) {
-                break;    // no mana abilities to use for paying
+                // no mana abilities to use for paying
+                break;
             }
 
             toPay = getNextShardToPay(cost, sourcesForShards);
-
-            boolean lifeInsteadOfBlack = toPay.isBlack() && ai.hasKeyword("PayLifeInsteadOf:B");
 
             Collection<SpellAbility> saList = null;
             if (hasConverge &&
@@ -752,9 +752,14 @@ public class ComputerUtilMana {
             }
 
             if (saPayment == null) {
-                if ((!toPay.isPhyrexian() && !lifeInsteadOfBlack) || !ai.canPayLife(2, false, sa)
-                        || (ai.getLife() <= 2 && !ai.cantLoseForZeroOrLessLife())) {
-                    break; // cannot pay
+                boolean lifeInsteadOfBlack = toPay.isBlack() && ai.hasKeyword("PayLifeInsteadOf:B");
+                if ((!toPay.isPhyrexian() && !lifeInsteadOfBlack) || !ai.canPayLife(phyLifeToPay, false, sa)
+                        || (ai.getLife() <= phyLifeToPay && !ai.cantLoseForZeroOrLessLife())) {
+                    // cannot pay
+                    break;
+                }
+                if (test) {
+                    phyLifeToPay += 2;
                 }
 
                 if (sa.hasParam("AIPhyrexianPayment")) {
