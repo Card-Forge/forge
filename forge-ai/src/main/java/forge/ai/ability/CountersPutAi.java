@@ -311,10 +311,6 @@ public class CountersPutAi extends CountersAi {
             return SpecialCardAi.TheOneRing.consider(ai, sa);
         }
 
-        if (!sa.metConditions() && sa.getSubAbility() == null) {
-            return new AiAbilityDecision(100, AiPlayDecision.ConditionsNotMet);
-        }
-
         if (sourceName.equals("Feat of Resistance")) { // sub-ability should take precedence
             CardCollection prot = ProtectAi.getProtectCreatures(ai, sa.getSubAbility());
             if (!prot.isEmpty()) {

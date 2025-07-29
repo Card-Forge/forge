@@ -74,13 +74,6 @@ public abstract class SpellAbilityAi {
             sa.setXManaCostPaid(ComputerUtilCost.getMaxXValue(sa, ai, false));
         }
 
-        if (!checkConditions(ai, sa, sa.getConditions())) {
-            SpellAbility sub = sa.getSubAbility();
-            if (sub != null && !checkConditions(ai, sub, sub.getConditions())) {
-                return new AiAbilityDecision(0, AiPlayDecision.NeedsToPlayCriteriaNotMet);
-            }
-        }
-
         if (sa.hasParam("AILogic")) {
             final String logic = sa.getParam("AILogic");
             final boolean alwaysOnDiscard = "AlwaysOnDiscard".equals(logic) && ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN, ai)
@@ -99,16 +92,27 @@ public abstract class SpellAbilityAi {
         if (!decision.willingToPlay()) {
             return decision;
         }
-        // needs to be after API logic because needs to check possible X Cost?
+
+        // needs to be after API logic because needs to check possible X Cost
         if (cost != null && !willPayCosts(ai, sa, cost, source)) {
             return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
+        }
+
+        // for cards like Figure of Destiny
+        // (it's unlikely a valid effect would work like this -
+        // and while in theory AI could turn some conditions true in response that's far too advanced as default)
+        if (!checkConditions(ai, sa)) {
+            SpellAbility sub = sa.getSubAbility();
+            if (sub == null || !checkConditions(ai, sub)) {
+                return new AiAbilityDecision(0, AiPlayDecision.NeedsToPlayCriteriaNotMet);
+            }
         }
         return decision;
     }
 
-    protected boolean checkConditions(final Player ai, final SpellAbility sa, SpellAbilityCondition con) {
+    protected boolean checkConditions(final Player ai, final SpellAbility sa) {
         // copy it to disable some checks that the AI need to check extra
-        con = (SpellAbilityCondition) con.copy();
+        SpellAbilityCondition con = (SpellAbilityCondition) sa.getConditions().copy();
 
         // if manaspent, check if AI can pay the colored mana as cost
         if (!con.getManaSpent().isEmpty()) {

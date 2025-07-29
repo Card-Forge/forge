@@ -249,11 +249,7 @@ public class ComputerUtilCost {
                     // Does the AI want to use Sacrifice All?
                     return false;
                 } else {
-                    Integer c = part.convertAmount();
-
-                    if (c == null) {
-                        c = part.getAbilityAmount(sourceAbility);
-                    }
+                    int c = part.getAbilityAmount(sourceAbility);
                     final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
                     CardCollectionView choices = aic.chooseSacrificeType(part.getType(), sourceAbility, effect, c, exclude);
                     if (choices != null) {
