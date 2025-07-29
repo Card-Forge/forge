@@ -82,7 +82,7 @@ public class PhasesAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         if (tgt != null) {

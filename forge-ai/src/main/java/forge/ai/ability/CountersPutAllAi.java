@@ -115,7 +115,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         return canPlay(ai, sa);
     }
     /* (non-Javadoc)

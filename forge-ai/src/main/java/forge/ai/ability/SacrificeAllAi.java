@@ -29,7 +29,7 @@ public class SacrificeAllAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         //TODO: Add checks for bad outcome
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
 

@@ -247,7 +247,7 @@ public abstract class SpellAbilityAi {
      */
     public AiAbilityDecision chkDrawbackWithSubs(Player aiPlayer, AbilitySub ab) {
         final AbilitySub subAb = ab.getSubAbility();
-        AiAbilityDecision decision = SpellApiToAi.Converter.get(ab).chkAIDrawback(ab, aiPlayer);
+        AiAbilityDecision decision = SpellApiToAi.Converter.get(ab).chkDrawback(ab, aiPlayer);
         if (!decision.willingToPlay()) {
             return decision;
         }
@@ -262,7 +262,7 @@ public abstract class SpellAbilityAi {
     /**
      * Handles the AI decision to play a sub-SpellAbility
      */
-    public AiAbilityDecision chkAIDrawback(final SpellAbility sa, final Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(final SpellAbility sa, final Player aiPlayer) {
         // sub-SpellAbility might use targets too
         if (sa.usesTargeting()) {
             // no Candidates, no adding to Stack

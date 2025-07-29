@@ -54,7 +54,7 @@ public class BecomesBlockedAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         // TODO - implement AI
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }

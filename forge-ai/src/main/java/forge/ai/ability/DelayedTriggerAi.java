@@ -15,7 +15,7 @@ import forge.game.zone.ZoneType;
 public class DelayedTriggerAi extends SpellAbilityAi {
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         if ("Always".equals(sa.getParam("AILogic"))) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }

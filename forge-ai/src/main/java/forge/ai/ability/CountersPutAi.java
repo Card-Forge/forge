@@ -657,7 +657,7 @@ public class CountersPutAi extends CountersAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(final SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(final SpellAbility sa, Player ai) {
         final Game game = ai.getGame();
         Card choice = null;
         final String type = sa.getParam("CounterType");

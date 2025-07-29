@@ -299,7 +299,7 @@ public class ControlGainAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, final Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, final Player ai) {
         final Game game = ai.getGame();
 
         // Special card logic that is processed elsewhere

@@ -134,7 +134,7 @@ public class PumpAllAi extends PumpAiBase {
     } // pumpAllCanPlayAI()
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 

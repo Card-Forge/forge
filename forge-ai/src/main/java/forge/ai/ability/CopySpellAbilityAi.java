@@ -130,7 +130,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(final SpellAbility sa, final Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(final SpellAbility sa, final Player aiPlayer) {
         if ("ChainOfSmog".equals(sa.getParam("AILogic"))) {
             return SpecialCardAi.ChainOfSmog.consider(aiPlayer, sa);
         } else if ("ChainOfAcid".equals(sa.getParam("AILogic"))) {
@@ -140,7 +140,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
         AiAbilityDecision decision = canPlay(aiPlayer, sa);
         if (!decision.willingToPlay()) {
             if (sa.isMandatory()) {
-                return super.chkAIDrawback(sa, aiPlayer);
+                return super.chkDrawback(sa, aiPlayer);
             }
         }
         return decision;

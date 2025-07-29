@@ -28,7 +28,7 @@ public class LifeLoseAi extends SpellAbilityAi {
      * SpellAbility, forge.game.player.Player)
      */
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         final PlayerCollection tgtPlayers = getPlayers(ai, sa);
 
         final Card source = sa.getHostCard();

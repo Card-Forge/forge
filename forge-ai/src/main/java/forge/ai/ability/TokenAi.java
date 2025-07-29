@@ -75,7 +75,7 @@ public class TokenAi extends SpellAbilityAi {
             final AbilitySub sub = sa.getSubAbility();
             // useful
             // no token created
-            return pwPlus || (sub != null && SpellApiToAi.Converter.get(sub).chkAIDrawback(sub, ai).willingToPlay()); // planeswalker plus ability or sub-ability is
+            return pwPlus || (sub != null && SpellApiToAi.Converter.get(sub).chkDrawback(sub, ai).willingToPlay()); // planeswalker plus ability or sub-ability is
         }
 
         String tokenPower = sa.getParamOrDefault("TokenPower", actualToken.getBasePowerString());

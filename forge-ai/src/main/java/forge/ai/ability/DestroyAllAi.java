@@ -32,7 +32,7 @@ public class DestroyAllAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         return doMassRemovalLogic(aiPlayer, sa);
     }
 

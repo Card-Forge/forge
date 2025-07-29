@@ -204,7 +204,7 @@ public class CountersMoveAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         if (sa.usesTargeting()) {
             sa.resetTargets();
             return moveTgtAI(ai, sa);

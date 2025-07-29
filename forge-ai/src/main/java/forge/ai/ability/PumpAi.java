@@ -677,7 +677,7 @@ public class PumpAi extends PumpAiBase {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         final SpellAbility root = sa.getRootAbility();
         final Card source = sa.getHostCard();
 

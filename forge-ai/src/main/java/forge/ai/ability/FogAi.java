@@ -141,7 +141,7 @@ public class FogAi extends SpellAbilityAi {
 
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         // AI should only activate this during Human's turn
         boolean chance;
         final Game game = ai.getGame();

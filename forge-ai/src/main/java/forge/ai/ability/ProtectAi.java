@@ -329,7 +329,7 @@ public class ProtectAi extends SpellAbilityAi {
     } // protectTriggerAI
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         if (sa.usesTargeting()) {
             return protectTgtAI(ai, sa, false);
         }

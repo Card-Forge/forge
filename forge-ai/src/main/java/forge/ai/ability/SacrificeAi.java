@@ -32,7 +32,7 @@ public class SacrificeAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         // AI should only activate this during Human's turn
 
         return sacrificeTgtAI(ai, sa, false);

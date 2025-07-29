@@ -20,7 +20,7 @@ import forge.util.collect.FCollectionView;
 
 public class DestroyAi extends SpellAbilityAi {
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         return checkApiLogic(ai, sa);
     }
 

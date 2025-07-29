@@ -249,7 +249,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         // if putting cards from hand to library and parent is drawing cards
         // make sure this will actually do something:
 

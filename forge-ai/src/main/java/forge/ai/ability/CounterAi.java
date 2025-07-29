@@ -230,7 +230,7 @@ public class CounterAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         return doTriggerNoCost(aiPlayer, sa, true);
     }
 

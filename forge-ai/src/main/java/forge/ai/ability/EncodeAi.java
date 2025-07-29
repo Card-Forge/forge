@@ -52,7 +52,7 @@ public final class EncodeAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
