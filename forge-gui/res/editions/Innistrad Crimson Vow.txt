@@ -2,7 +2,6 @@
 Code=VOW
 Date=2021-11-19
 Name=Innistrad: Crimson Vow
-Code2=VOW
 Type=Expansion
 ScryfallCode=VOW
 Booster=10 Common:fromSheet("VOW cards"), 3 Uncommon:fromSheet("VOW cards"), 1 RareMythic:fromSheet("VOW cards"), 1 BasicLand
@@ -472,4 +471,5 @@ A248 U A-Skull Skaab @Nicholas Gregory
 19 copy @Brian Valeza
 20 emblem_chandra_dressed_to_kill @Viktor Titov
 21 day @Johan Grenier
-21 night @Johan Grenier
+# Double-faced tokens are not supported yet
+# 21☇ night @Johan Grenier
