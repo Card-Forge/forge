@@ -317,7 +317,7 @@
                 <executions>
                     <execution>
                         <id>checkstyle-validation</id>
-                        <phase>none</phase>
+                        <phase>validate</phase>
                         <configuration>
                             <configLocation>checkstyle.xml</configLocation>
                             <includeTestSourceDirectory>true</includeTestSourceDirectory>

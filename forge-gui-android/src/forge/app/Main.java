@@ -77,8 +77,6 @@ import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Date;
 
-import forge.app.R;
-
 public class Main extends AndroidApplication {
     private AndroidAdapter Gadapter;
     private ArrayList<String> gamepads;
