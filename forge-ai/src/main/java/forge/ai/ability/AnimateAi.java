@@ -157,7 +157,7 @@ public class AnimateAi extends SpellAbilityAi {
             }
         }
         if (!ComputerUtilCost.checkTapTypeCost(aiPlayer, sa.getPayCosts(), source, sa, new CardCollection())) {
-            return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable); // prevent crewing with equal or better creatures
+            return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
         }
 
         if (sa.costHasManaX() && sa.getSVar("X").equals("Count$xPaid")) {

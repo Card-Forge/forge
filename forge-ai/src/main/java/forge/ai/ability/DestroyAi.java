@@ -160,12 +160,7 @@ public class DestroyAi extends SpellAbilityAi {
 
             // AI doesn't destroy own cards if it isn't defined in AI logic
             list = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
-            if ("FatalPush".equals(logic)) {
-                final int cmcMax = ai.hasRevolt() ? 4 : 2;
-                list = CardLists.filter(list, CardPredicates.lessCMC(cmcMax));
-            }
 
-            // Filter AI-specific targets if provided
             list = ComputerUtil.filterAITgts(sa, ai, list, true);
 
             list = CardLists.getNotKeyword(list, Keyword.INDESTRUCTIBLE);
