@@ -973,7 +973,7 @@ public class AiController {
             Sentry.setExtra("Card", card.getName());
             Sentry.setExtra("SA", sa.toString());
 
-            boolean canPlay = SpellApiToAi.Converter.get(sa).canPlayAIWithSubs(player, sa).willingToPlay();
+            boolean canPlay = SpellApiToAi.Converter.get(sa).canPlayWithSubs(player, sa).willingToPlay();
 
             // remove added extra
             Sentry.removeExtra("Card");
@@ -1353,7 +1353,7 @@ public class AiController {
             if (withoutPayingManaCost) {
                 chance = SpellApiToAi.Converter.get(spell).doTriggerNoCostWithSubs(player, spell, mandatory).willingToPlay();
             } else {
-                chance = SpellApiToAi.Converter.get(spell).doTriggerAI(player, spell, mandatory);
+                chance = SpellApiToAi.Converter.get(spell).doTrigger(player, spell, mandatory);
             }
             if (!chance) {
                 return AiPlayDecision.TargetingFailed;
@@ -1787,7 +1787,7 @@ public class AiController {
         if (sa instanceof WrappedAbility)
             return doTrigger(((WrappedAbility) sa).getWrappedAbility(), mandatory);
         if (sa.getApi() != null)
-            return SpellApiToAi.Converter.get(sa).doTriggerAI(player, sa, mandatory);
+            return SpellApiToAi.Converter.get(sa).doTrigger(player, sa, mandatory);
         if (sa.getPayCosts() == Cost.Zero && !sa.usesTargeting()) {
             // For non-converted triggers (such as Cumulative Upkeep) that don't have costs or targets to worry about
             return true;

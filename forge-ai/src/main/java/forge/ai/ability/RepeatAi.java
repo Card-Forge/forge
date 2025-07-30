@@ -17,7 +17,7 @@ import java.util.Map;
 public class RepeatAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         String logic = sa.getParamOrDefault("AILogic", "");
 
@@ -51,7 +51,7 @@ public class RepeatAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         String logic = sa.getParamOrDefault("AILogic", "");
 
         if (sa.usesTargeting()) {

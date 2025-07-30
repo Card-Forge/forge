@@ -45,7 +45,7 @@ public class UnattachAllAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card card = sa.getHostCard();
         // Check if there are any valid targets
         List<GameObject> targets = new ArrayList<>();
@@ -75,9 +75,9 @@ public class UnattachAllAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         // AI should only activate this during Human's turn
-        return canPlayAI(ai, sa);
+        return canPlay(ai, sa);
     }
 
 }

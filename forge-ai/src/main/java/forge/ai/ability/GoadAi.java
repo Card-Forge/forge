@@ -85,7 +85,7 @@ public class GoadAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         AiAbilityDecision decision = checkApiLogic(ai, sa);
         if (decision.willingToPlay()) {
             return decision;

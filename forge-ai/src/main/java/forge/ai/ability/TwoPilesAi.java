@@ -17,7 +17,7 @@ import java.util.List;
 
 public class TwoPilesAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         final Card card = sa.getHostCard();
         ZoneType zone = null;
 

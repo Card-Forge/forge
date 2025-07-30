@@ -115,12 +115,12 @@ public class CopyPermanentAi extends SpellAbilityAi {
                     return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
         } else {
-            return doTriggerAINoCost(aiPlayer, sa, false);
+            return doTriggerNoCost(aiPlayer, sa, false);
         }
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(final Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player aiPlayer, SpellAbility sa, boolean mandatory) {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final Game game = host.getGame();

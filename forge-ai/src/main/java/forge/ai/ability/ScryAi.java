@@ -21,7 +21,7 @@ public class ScryAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (sa.usesTargeting()) {
             // ability is targeted
             sa.resetTargets();
@@ -68,8 +68,8 @@ public class ScryAi extends SpellAbilityAi {
     } // scryTargetAI()
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
-        return doTriggerAINoCost(ai, sa, false);
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+        return doTriggerNoCost(ai, sa, false);
     }
     
     /**

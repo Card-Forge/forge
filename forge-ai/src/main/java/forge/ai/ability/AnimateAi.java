@@ -237,7 +237,7 @@ public class AnimateAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         if (sa.usesTargeting()) {
             sa.resetTargets();
             return animateTgtAI(sa);
@@ -247,7 +247,7 @@ public class AnimateAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         AiAbilityDecision decision;
         if (sa.usesTargeting()) {
             decision = animateTgtAI(sa);

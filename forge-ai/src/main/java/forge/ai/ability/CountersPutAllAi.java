@@ -115,8 +115,8 @@ public class CountersPutAllAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
-        return canPlayAI(ai, sa);
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+        return canPlay(ai, sa);
     }
     /* (non-Javadoc)
      * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
@@ -127,7 +127,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         if (sa.usesTargeting()) {
             List<Player> players = Lists.newArrayList();
             if (!sa.isCurse()) {
@@ -162,6 +162,6 @@ public class CountersPutAllAi extends SpellAbilityAi {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        return canPlayAI(aiPlayer, sa);
+        return canPlay(aiPlayer, sa);
     }
 }

@@ -247,7 +247,7 @@ public class CountersPutAi extends CountersAi {
             } else if (sa.getSubAbility() != null
                         && "Self".equals(sa.getSubAbility().getParam("Defined"))
                         && sa.getSubAbility().getParamOrDefault("KW", "").contains("Hexproof")
-                        && !AiCardMemory.isRememberedCard(ai, source, AiCardMemory.MemorySet.ANIMATED_THIS_TURN)) {
+                        && !AiCardMemory.isRememberedCard(ai, source, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
                     // Bristling Hydra: save from death using a ping activation
                     if (ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa).contains(source)) {
                         AiCardMemory.rememberCard(ai, source, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
@@ -657,7 +657,7 @@ public class CountersPutAi extends CountersAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(final SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(final SpellAbility sa, Player ai) {
         final Game game = ai.getGame();
         Card choice = null;
         final String type = sa.getParam("CounterType");
@@ -735,7 +735,7 @@ public class CountersPutAi extends CountersAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final SpellAbility root = sa.getRootAbility();
         final Card source = sa.getHostCard();
         final String aiLogic = sa.getParamOrDefault("AILogic", "");

@@ -941,7 +941,7 @@ public class AttachAi extends SpellAbilityAi {
      * @return true, if successful
      */
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card card = sa.getHostCard();
         List<GameObject> targets = new ArrayList<>();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -972,7 +972,7 @@ public class AttachAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(final SpellAbility sa, final Player ai) {
+    public AiAbilityDecision chkDrawback(final SpellAbility sa, final Player ai) {
         if (sa.isTrigger() && sa.usesTargeting()) {
             CardCollection targetables = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
             CardCollection source = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Object"), sa);

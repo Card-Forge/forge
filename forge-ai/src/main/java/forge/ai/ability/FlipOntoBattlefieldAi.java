@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class FlipOntoBattlefieldAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         PhaseHandler ph = sa.getHostCard().getGame().getPhaseHandler();
         String logic = sa.getParamOrDefault("AILogic", "");
 
@@ -47,12 +47,12 @@ public class FlipOntoBattlefieldAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         if (mandatory) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        return canPlayAI(aiPlayer, sa);
+        return canPlay(aiPlayer, sa);
     }
 
     @Override

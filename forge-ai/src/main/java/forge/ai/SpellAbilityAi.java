@@ -39,8 +39,8 @@ import forge.util.collect.FCollectionView;
  */
 public abstract class SpellAbilityAi {
 
-    public final AiAbilityDecision canPlayAIWithSubs(final Player aiPlayer, final SpellAbility sa) {
-        AiAbilityDecision decision = canPlayAI(aiPlayer, sa);
+    public final AiAbilityDecision canPlayWithSubs(final Player aiPlayer, final SpellAbility sa) {
+        AiAbilityDecision decision = canPlay(aiPlayer, sa);
         if (!decision.willingToPlay() && !"PlayForSub".equals(sa.getParam("AILogic"))) {
             return decision;
         }
@@ -55,7 +55,7 @@ public abstract class SpellAbilityAi {
     /**
      * Handles the AI decision to play a "main" SpellAbility
      */
-    protected AiAbilityDecision canPlayAI(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision canPlay(final Player ai, final SpellAbility sa) {
         if (sa.getRestrictions() != null && !sa.getRestrictions().canPlay(sa.getHostCard(), sa)) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlaySa);
         }
@@ -66,11 +66,6 @@ public abstract class SpellAbilityAi {
     protected AiAbilityDecision canPlayWithoutRestrict(final Player ai, final SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Cost cost = sa.getPayCosts();
-
-        if (sa.hasParam("AICheckCanPlayWithDefinedX")) {
-            // FIXME: can this somehow be simplified without the need for an extra AI hint?
-            sa.setXManaCostPaid(ComputerUtilCost.getMaxXValue(sa, ai, false));
-        }
 
         if (sa.hasParam("AILogic")) {
             final String logic = sa.getParam("AILogic");
@@ -99,7 +94,7 @@ public abstract class SpellAbilityAi {
         }
 
         // for cards like Figure of Destiny
-        // (it's unlikely a valid effect would work like this -
+        // (it's unlikely many valid effect would work like this -
         // and while in theory AI could turn some conditions true in response that's far too advanced as default)
         if (!checkConditions(ai, sa)) {
             SpellAbility sub = sa.getSubAbility();
@@ -127,40 +122,6 @@ public abstract class SpellAbilityAi {
     }
 
     /**
-     * Checks if the AI will play a SpellAbility with the specified AiLogic
-     */
-    protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        if ("Never".equals(aiLogic)) {
-            return false;
-        }
-        if (!"Once".equals(aiLogic)) {
-            return !AiCardMemory.isRememberedCard(ai, sa.getHostCard(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
-        }
-        return true;
-    }
-
-    /**
-     * Checks if the AI is willing to pay for additional costs
-     * <p>
-     * Evaluated costs are: life, discard, sacrifice and counter-removal
-     */
-    protected boolean willPayCosts(final Player ai, final SpellAbility sa, final Cost cost, final Card source) {
-        if (!ComputerUtilCost.checkLifeCost(ai, cost, source, 4, sa)) {
-            return false;
-        }
-        if (!ComputerUtilCost.checkDiscardCost(ai, cost, source, sa)) {
-            return false;
-        }
-        if (!ComputerUtilCost.checkSacrificeCost(ai, cost, source, sa)) {
-            return false;
-        }
-        if (!ComputerUtilCost.checkRemoveCounterCost(cost, source, sa)) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
      * Checks if the AI will play a SpellAbility based on its phase restrictions
      */
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
@@ -174,6 +135,20 @@ public abstract class SpellAbilityAi {
          }
         return checkPhaseRestrictions(ai, sa, ph);
     }
+
+    /**
+     * Checks if the AI will play a SpellAbility with the specified AiLogic
+     */
+    protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
+        if ("Never".equals(aiLogic)) {
+            return false;
+        }
+        if (!"Once".equals(aiLogic)) {
+            return !AiCardMemory.isRememberedCard(ai, sa.getHostCard(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
+        }
+        return true;
+    }
+
     /**
      * The rest of the logic not covered by the canPlayAI template is defined here
      */
@@ -186,7 +161,7 @@ public abstract class SpellAbilityAi {
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
-    public final boolean doTriggerAI(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
+    public final boolean doTrigger(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         // this evaluation order is currently intentional as it does more stuff that helps avoiding some crashes
         if (!ComputerUtilCost.canPayCost(sa, aiPlayer, true) && !mandatory) {
             return false;
@@ -202,7 +177,7 @@ public abstract class SpellAbilityAi {
     }
 
     public final AiAbilityDecision doTriggerNoCostWithSubs(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
-        AiAbilityDecision decision = doTriggerAINoCost(aiPlayer, sa, mandatory);
+        AiAbilityDecision decision = doTriggerNoCost(aiPlayer, sa, mandatory);
         if (!decision.willingToPlay() && !"Always".equals(sa.getParam("AILogic"))) {
             return decision;
         }
@@ -230,7 +205,7 @@ public abstract class SpellAbilityAi {
     /**
      * Handles the AI decision to play a triggered SpellAbility
      */
-    protected AiAbilityDecision doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         AiAbilityDecision decision = canPlayWithoutRestrict(aiPlayer, sa);
         if (decision.willingToPlay() && (!mandatory || sa.isTargetNumberValid())) {
             // This is a weird check. Why do we care if its not mandatory if we WANT to do it?
@@ -265,9 +240,29 @@ public abstract class SpellAbilityAi {
     }
 
     /**
+     * TODO: Write javadoc for this method.
+     * @param aiPlayer
+     * @param ab
+     * @return
+     */
+    public AiAbilityDecision chkDrawbackWithSubs(Player aiPlayer, AbilitySub ab) {
+        final AbilitySub subAb = ab.getSubAbility();
+        AiAbilityDecision decision = SpellApiToAi.Converter.get(ab).chkDrawback(ab, aiPlayer);
+        if (!decision.willingToPlay()) {
+            return decision;
+        }
+
+        if (subAb == null) {
+            return decision;
+        }
+
+        return chkDrawbackWithSubs(aiPlayer, subAb);
+    }
+
+    /**
      * Handles the AI decision to play a sub-SpellAbility
      */
-    public AiAbilityDecision chkAIDrawback(final SpellAbility sa, final Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(final SpellAbility sa, final Player aiPlayer) {
         // sub-SpellAbility might use targets too
         if (sa.usesTargeting()) {
             // no Candidates, no adding to Stack
@@ -281,100 +276,9 @@ public abstract class SpellAbilityAi {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
-    /**
-     * <p>
-     * isSorcerySpeed.
-     * </p>
-     *
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
-    protected static boolean isSorcerySpeed(final SpellAbility sa, Player ai) {
-        return (sa.getRootAbility().isSpell() && sa.getHostCard().isSorcery())
-            || (sa.getRootAbility().isActivatedAbility() && sa.getRootAbility().getRestrictions().isSorcerySpeed())
-            || (sa.getRootAbility().isAdventure() && sa.getHostCard().getState(CardStateName.Secondary).getType().isSorcery())
-            || (sa.isPwAbility() && !sa.withFlash(sa.getHostCard(), ai));
-    }
-
-    /**
-     * <p>
-     * playReusable.
-     * </p>
-     *
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
-    protected static boolean playReusable(final Player ai, final SpellAbility sa) {
-        PhaseHandler phase = ai.getGame().getPhaseHandler();
-
-        // TODO probably also consider if winter orb or similar are out
-
-        if (sa instanceof AbilitySub) {
-            return true; // This is only true for Drawbacks and triggers
-        }
-
-        if (!sa.getPayCosts().isReusuableResource()) {
-            return false;
-        }
-
-        if (ComputerUtil.playImmediately(ai, sa)) {
-            return true;
-        }
-
-        if (sa.isPwAbility() && phase.is(PhaseType.MAIN2)) {
-            return true;
-        }
-        if (sa.isSpell() && !sa.isBuyback()) {
-            return false;
-        }
-
-        return phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai);
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @param aiPlayer
-     * @param ab
-     * @return
-     */
-    public AiAbilityDecision chkDrawbackWithSubs(Player aiPlayer, AbilitySub ab) {
-        final AbilitySub subAb = ab.getSubAbility();
-        AiAbilityDecision decision = SpellApiToAi.Converter.get(ab).chkAIDrawback(ab, aiPlayer);
-        if (!decision.willingToPlay()) {
-            return decision;
-        }
-
-        if (subAb == null) {
-            return decision;
-        }
-
-        return chkDrawbackWithSubs(aiPlayer, subAb);
-    }
-
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of confirmAction is used by " + sa.getHostCard().getName() + " for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return true;
-    }
-
-    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
-        final Card source = sa.getHostCard();
-        final String aiLogic = sa.getParam("UnlessAI");
-        boolean payNever = "Never".equals(aiLogic);
-        boolean isMine = sa.getActivatingPlayer().equals(payer);
-
-        if (payNever) { return false; }
-
-        // AI will only pay when it's not already payed and only opponents abilities
-        if (alreadyPaid || (payers.size() > 1 && isMine)) {
-            return false;
-        }
-
-        return ComputerUtilCost.checkLifeCost(payer, cost, source, 4, sa)
-                && ComputerUtilCost.checkDamageCost(payer, cost, source, 4, sa)
-                && (isMine || ComputerUtilCost.checkSacrificeCost(payer, cost, source, sa))
-                && (isMine || ComputerUtilCost.checkDiscardCost(payer, cost, source, sa));
     }
 
     @SuppressWarnings("unchecked")
@@ -456,6 +360,46 @@ public abstract class SpellAbilityAi {
         return MyRandom.getRandom().nextBoolean();
     }
 
+    /**
+     * Checks if the AI is willing to pay for additional costs
+     * <p>
+     * Evaluated costs are: life, discard, sacrifice and counter-removal
+     */
+    protected boolean willPayCosts(final Player ai, final SpellAbility sa, final Cost cost, final Card source) {
+        if (!ComputerUtilCost.checkLifeCost(ai, cost, source, 4, sa)) {
+            return false;
+        }
+        if (!ComputerUtilCost.checkDiscardCost(ai, cost, source, sa)) {
+            return false;
+        }
+        if (!ComputerUtilCost.checkSacrificeCost(ai, cost, source, sa)) {
+            return false;
+        }
+        if (!ComputerUtilCost.checkRemoveCounterCost(cost, source, sa)) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+        final Card source = sa.getHostCard();
+        final String aiLogic = sa.getParam("UnlessAI");
+        boolean payNever = "Never".equals(aiLogic);
+        boolean isMine = sa.getActivatingPlayer().equals(payer);
+
+        if (payNever) { return false; }
+
+        // AI will only pay when it's not already payed and only opponents abilities
+        if (alreadyPaid || (payers.size() > 1 && isMine)) {
+            return false;
+        }
+
+        return ComputerUtilCost.checkLifeCost(payer, cost, source, 4, sa)
+                && ComputerUtilCost.checkDamageCost(payer, cost, source, 4, sa)
+                && (isMine || ComputerUtilCost.checkSacrificeCost(payer, cost, source, sa))
+                && (isMine || ComputerUtilCost.checkDiscardCost(payer, cost, source, sa));
+    }
+
     public List<OptionalCostValue> chooseOptionalCosts(SpellAbility chosen, Player player, List<OptionalCostValue> optionalCostValues) {
         List<OptionalCostValue> chosenOptCosts = Lists.newArrayList();
         Cost costSoFar = chosen.getPayCosts().copy();
@@ -465,14 +409,14 @@ public abstract class SpellAbilityAi {
             Cost fullCost = opt.getCost().copy().add(costSoFar);
             SpellAbility fullCostSa = chosen.copyWithDefinedCost(fullCost);
 
-            // Playability check for Kicker
             if (opt.getType() == OptionalCost.Kicker1 || opt.getType() == OptionalCost.Kicker2) {
                 SpellAbility kickedSaCopy = fullCostSa.copy();
                 kickedSaCopy.addOptionalCost(opt.getType());
                 Card copy = CardCopyService.getLKICopy(chosen.getHostCard());
                 copy.setCastSA(kickedSaCopy);
                 if (ComputerUtilCard.checkNeedsToPlayReqs(copy, kickedSaCopy) != AiPlayDecision.WillPlay) {
-                    continue; // don't choose kickers we don't want to play
+                    // don't choose kickers we don't want to play
+                    continue;
                 }
             }
 
@@ -483,5 +427,57 @@ public abstract class SpellAbilityAi {
         }
 
         return chosenOptCosts;
+    }
+
+    /**
+     * <p>
+     * isSorcerySpeed.
+     * </p>
+     *
+     * @param sa
+     *            a {@link forge.game.spellability.SpellAbility} object.
+     * @return a boolean.
+     */
+    protected static boolean isSorcerySpeed(final SpellAbility sa, Player ai) {
+        return (sa.getRootAbility().isSpell() && sa.getHostCard().isSorcery())
+                || (sa.getRootAbility().isActivatedAbility() && sa.getRootAbility().getRestrictions().isSorcerySpeed())
+                || (sa.getRootAbility().isAdventure() && sa.getHostCard().getState(CardStateName.Secondary).getType().isSorcery())
+                || (sa.isPwAbility() && !sa.withFlash(sa.getHostCard(), ai));
+    }
+
+    /**
+     * <p>
+     * playReusable.
+     * </p>
+     *
+     * @param sa
+     *            a {@link forge.game.spellability.SpellAbility} object.
+     * @return a boolean.
+     */
+    protected static boolean playReusable(final Player ai, final SpellAbility sa) {
+        PhaseHandler phase = ai.getGame().getPhaseHandler();
+
+        // TODO probably also consider if winter orb or similar are out
+
+        if (sa instanceof AbilitySub) {
+            return true; // This is only true for Drawbacks and triggers
+        }
+
+        if (!sa.getPayCosts().isReusuableResource()) {
+            return false;
+        }
+
+        if (ComputerUtil.playImmediately(ai, sa)) {
+            return true;
+        }
+
+        if (sa.isPwAbility() && phase.is(PhaseType.MAIN2)) {
+            return true;
+        }
+        if (sa.isSpell() && !sa.isBuyback()) {
+            return false;
+        }
+
+        return phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai);
     }
 }

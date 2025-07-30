@@ -20,7 +20,7 @@ import forge.util.collect.FCollectionView;
 
 public class DestroyAi extends SpellAbilityAi {
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         return checkApiLogic(ai, sa);
     }
 
@@ -308,7 +308,7 @@ public class DestroyAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final boolean noRegen = sa.hasParam("NoRegen");
         if (sa.usesTargeting()) {
             sa.resetTargets();

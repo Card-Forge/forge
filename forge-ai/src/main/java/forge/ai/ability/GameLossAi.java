@@ -8,7 +8,7 @@ import forge.game.spellability.SpellAbility;
 
 public class GameLossAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         final Player opp = ai.getStrongestOpponent();
         if (opp.cantLose()) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
@@ -26,7 +26,7 @@ public class GameLossAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         Player loser = ai;
         
         // Phage the Untouchable

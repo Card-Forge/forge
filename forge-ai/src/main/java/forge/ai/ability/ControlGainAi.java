@@ -65,7 +65,7 @@ import java.util.Map;
  */
 public class ControlGainAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlayAI(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision canPlay(final Player ai, final SpellAbility sa) {
         final List<String> lose = Lists.newArrayList();
 
         if (sa.hasParam("LoseControl")) {
@@ -271,13 +271,13 @@ public class ControlGainAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (!sa.usesTargeting()) {
             if (mandatory) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
         } else {
-            if (sa.hasParam("TargetingPlayer") || (mandatory && !this.canPlayAI(ai, sa).willingToPlay())) {
+            if (sa.hasParam("TargetingPlayer") || (mandatory && !this.canPlay(ai, sa).willingToPlay())) {
                 if (sa.getTargetRestrictions().canOnlyTgtOpponent()) {
                     List<Player> oppList = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
                     if (oppList.isEmpty()) {
@@ -299,7 +299,7 @@ public class ControlGainAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, final Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, final Player ai) {
         final Game game = ai.getGame();
 
         // Special card logic that is processed elsewhere
@@ -331,7 +331,7 @@ public class ControlGainAi extends SpellAbilityAi {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
         } else {
-            return this.canPlayAI(ai, sa);
+            return this.canPlay(ai, sa);
         }
     }
 

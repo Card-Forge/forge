@@ -23,7 +23,7 @@ import java.util.List;
 public class DebuffAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision canPlayAI(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision canPlay(final Player ai, final SpellAbility sa) {
         // if there is no target and host card isn't in play, don't activate
         final Card source = sa.getHostCard();
         final Game game = ai.getGame(); 
@@ -87,7 +87,7 @@ public class DebuffAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         if (!sa.usesTargeting()) {
             // TODO - copied from AF_Pump.pumpDrawbackAI() - what should be here?
         } else {
@@ -244,7 +244,7 @@ public class DebuffAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final List<String> kws = sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : new ArrayList<>();
 
         if (!sa.usesTargeting()) {

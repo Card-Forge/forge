@@ -123,7 +123,7 @@ public class PlayAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
         if (sa.usesTargeting()) {
             if (!sa.hasParam("AILogic")) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);

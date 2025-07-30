@@ -135,7 +135,7 @@ public class DamagePreventAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         boolean chance = false;
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {

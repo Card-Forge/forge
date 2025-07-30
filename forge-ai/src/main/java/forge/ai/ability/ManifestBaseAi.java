@@ -23,7 +23,7 @@ import java.util.Map;
 public abstract class ManifestBaseAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         // Manifest doesn't have any "Pay X to manifest X triggers"
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

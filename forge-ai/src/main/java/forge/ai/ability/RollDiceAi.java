@@ -43,7 +43,7 @@ public class RollDiceAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 

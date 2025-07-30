@@ -27,7 +27,7 @@ public class ChooseGenericAi extends SpellAbilityAi {
             return true;
         } else if ("Pump".equals(aiLogic) || "BestOption".equals(aiLogic)) {
             for (AbilitySub sb : sa.getAdditionalAbilityList("Choices")) {
-                if (SpellApiToAi.Converter.get(sb).canPlayAIWithSubs(ai, sb).willingToPlay()) {
+                if (SpellApiToAi.Converter.get(sb).canPlayWithSubs(ai, sb).willingToPlay()) {
                     return true;
                 }
             }
@@ -51,10 +51,10 @@ public class ChooseGenericAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         AiAbilityDecision decision;
         if (sa.isTrigger()) {
-            decision = doTriggerAINoCost(aiPlayer, sa, sa.isMandatory());
+            decision = doTriggerNoCost(aiPlayer, sa, sa.isMandatory());
         } else {
             decision = checkApiLogic(aiPlayer, sa);
         }
@@ -63,7 +63,7 @@ public class ChooseGenericAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         if ("CombustibleGearhulk".equals(sa.getParam("AILogic")) || "SoulEcho".equals(sa.getParam("AILogic"))) {
             for (final Player p : aiPlayer.getOpponents()) {
                 if (p.canBeTargetedBy(sa)) {
@@ -77,7 +77,7 @@ public class ChooseGenericAi extends SpellAbilityAi {
         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Deathmist Raptor")) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
-        return super.doTriggerAINoCost(aiPlayer, sa, mandatory);
+        return super.doTriggerNoCost(aiPlayer, sa, mandatory);
     }
 
     @Override
@@ -268,7 +268,7 @@ public class ChooseGenericAi extends SpellAbilityAi {
             List<SpellAbility> filtered = Lists.newArrayList();
             // filter first for the spells which can be done
             for (SpellAbility sp : spells) {
-                if (SpellApiToAi.Converter.get(sp).canPlayAIWithSubs(player, sp).willingToPlay()) {
+                if (SpellApiToAi.Converter.get(sp).canPlayWithSubs(player, sp).willingToPlay()) {
                     filtered.add(sp);
                 }
             }

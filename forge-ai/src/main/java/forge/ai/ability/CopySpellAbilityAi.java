@@ -17,7 +17,7 @@ import java.util.Map;
 public class CopySpellAbilityAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player aiPlayer, SpellAbility sa) {
         Game game = aiPlayer.getGame();
         int chance = ((PlayerControllerAi)aiPlayer.getController()).getAi().getIntProperty(AiProps.CHANCE_TO_COPY_OWN_SPELL_WHILE_ON_STACK);
         int diff = ((PlayerControllerAi)aiPlayer.getController()).getAi().getIntProperty(AiProps.ALWAYS_COPY_SPELL_IF_CMC_DIFF);
@@ -43,15 +43,8 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
 
         if (!MyRandom.percentTrue(chance)
                 && !"AlwaysIfViable".equals(logic)
-                && !"OnceIfViable".equals(logic)
                 && !"AlwaysCopyActivatedAbilities".equals(logic)) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        }
-
-        if ("OnceIfViable".equals(logic)) {
-            if (AiCardMemory.isRememberedCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            }
         }
 
         if (sa.usesTargeting()) {
@@ -113,7 +106,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         // the AI should not miss mandatory activations (e.g. Precursor Golem trigger)
         String logic = sa.getParamOrDefault("AILogic", "");
 
@@ -130,17 +123,17 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(final SpellAbility sa, final Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(final SpellAbility sa, final Player aiPlayer) {
         if ("ChainOfSmog".equals(sa.getParam("AILogic"))) {
             return SpecialCardAi.ChainOfSmog.consider(aiPlayer, sa);
         } else if ("ChainOfAcid".equals(sa.getParam("AILogic"))) {
             return SpecialCardAi.ChainOfAcid.consider(aiPlayer, sa);
 
         }
-        AiAbilityDecision decision = canPlayAI(aiPlayer, sa);
+        AiAbilityDecision decision = canPlay(aiPlayer, sa);
         if (!decision.willingToPlay()) {
             if (sa.isMandatory()) {
-                return super.chkAIDrawback(sa, aiPlayer);
+                return super.chkDrawback(sa, aiPlayer);
             }
         }
         return decision;

@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class ShuffleAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         // TODO Does the AI know what's on top of the deck and is it something useful?
 
         String logic = sa.getParamOrDefault("AILogic", "");
@@ -34,7 +34,7 @@ public class ShuffleAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         return shuffleTargetAI(sa);
     }
 
@@ -51,7 +51,7 @@ public class ShuffleAi extends SpellAbilityAi {
     } // shuffleTargetAI()
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         return shuffleTargetAI(sa);
     }  
 

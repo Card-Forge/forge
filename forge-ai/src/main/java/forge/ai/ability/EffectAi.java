@@ -109,7 +109,7 @@ public class EffectAi extends SpellAbilityAi {
                 }
             } else if (logic.equals("Fog")) {
                 FogAi fogAi = new FogAi();
-                if (!fogAi.canPlayAI(ai, sa).willingToPlay()) {
+                if (!fogAi.canPlay(ai, sa).willingToPlay()) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
 
@@ -290,7 +290,7 @@ public class EffectAi extends SpellAbilityAi {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (logic.equals("Burn")) {
                 SpellAbility burn = sa.getSubAbility();
-                return SpellApiToAi.Converter.get(burn).canPlayAIWithSubs(ai, burn).willingToPlay() ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                return SpellApiToAi.Converter.get(burn).canPlayWithSubs(ai, burn).willingToPlay() ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (logic.equals("YawgmothsWill")) {
                 return SpecialCardAi.YawgmothsWill.consider(ai, sa) ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (logic.startsWith("NeedCreatures")) {
@@ -419,9 +419,9 @@ public class EffectAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         if (sa.hasParam("AILogic")) {
-            if (canPlayAI(aiPlayer, sa).willingToPlay()) {
+            if (canPlay(aiPlayer, sa).willingToPlay()) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
         }
@@ -451,7 +451,7 @@ public class EffectAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        return super.doTriggerAINoCost(aiPlayer, sa, mandatory);
+        return super.doTriggerNoCost(aiPlayer, sa, mandatory);
     }
 
     protected boolean cantRegenerateCheckCombat(Card host) {

@@ -16,7 +16,7 @@ import forge.game.zone.ZoneType;
 
 public class UntapAllAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         final Card source = sa.getHostCard();
 
         final AbilitySub abSub = sa.getSubAbility();
@@ -39,7 +39,7 @@ public class UntapAllAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         Card source = sa.getHostCard();
 
         if (sa.hasParam("ValidCards")) {

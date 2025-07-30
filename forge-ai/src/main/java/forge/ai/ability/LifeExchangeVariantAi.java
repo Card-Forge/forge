@@ -21,7 +21,7 @@ public class LifeExchangeVariantAi extends SpellAbilityAi {
      * forge.card.spellability.SpellAbility)
      */
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final Game game = ai.getGame();
@@ -143,7 +143,7 @@ public class LifeExchangeVariantAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
         Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         if (sa.usesTargeting()) {
             sa.resetTargets();

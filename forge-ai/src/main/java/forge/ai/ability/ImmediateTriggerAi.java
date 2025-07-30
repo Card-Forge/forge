@@ -10,7 +10,7 @@ public class ImmediateTriggerAi extends SpellAbilityAi {
     // TODO: this class is largely reused from DelayedTriggerAi, consider updating
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         String logic = sa.getParamOrDefault("AILogic", "");
         if (logic.equals("Always")) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -36,7 +36,7 @@ public class ImmediateTriggerAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         // always add to stack, targeting happens after payment
         if (mandatory) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -54,7 +54,7 @@ public class ImmediateTriggerAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         String logic = sa.getParamOrDefault("AILogic", "");
         if (logic.equals("Always")) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

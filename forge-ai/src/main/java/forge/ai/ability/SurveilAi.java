@@ -20,7 +20,7 @@ public class SurveilAi extends SpellAbilityAi {
      * @see forge.ai.SpellAbilityAi#doTriggerAINoCost(forge.game.player.Player, forge.game.spellability.SpellAbility, boolean)
      */
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (sa.usesTargeting()) { // TODO: It doesn't appear that Surveil ever targets, is this necessary?
             sa.resetTargets();
             sa.getTargets().add(ai);
@@ -33,8 +33,8 @@ public class SurveilAi extends SpellAbilityAi {
      * @see forge.ai.SpellAbilityAi#chkAIDrawback(forge.game.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
-        return doTriggerAINoCost(ai, sa, false);
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+        return doTriggerNoCost(ai, sa, false);
     }
 
     /**

@@ -316,7 +316,7 @@ public class ProtectAi extends SpellAbilityAi {
     } // protectMandatoryTarget()
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (!sa.usesTargeting()) {
             if (mandatory) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -329,7 +329,7 @@ public class ProtectAi extends SpellAbilityAi {
     } // protectTriggerAI
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         if (sa.usesTargeting()) {
             return protectTgtAI(ai, sa, false);
         }

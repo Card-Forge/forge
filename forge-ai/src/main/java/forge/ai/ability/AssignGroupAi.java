@@ -13,7 +13,7 @@ import java.util.Map;
 public class AssignGroupAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         // TODO: Currently this AI relies on the card-specific limiting hints (NeedsToPlay / NeedsToPlayVar),
         // otherwise the AI considers the card playable.
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

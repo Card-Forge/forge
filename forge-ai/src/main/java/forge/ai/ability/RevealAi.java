@@ -27,7 +27,7 @@ public class RevealAi extends RevealAiBase {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         // logic to see if it should reveal Miracle Card
         if (sa.hasParam("MiracleCost")) {
             final Card c = sa.getHostCard();

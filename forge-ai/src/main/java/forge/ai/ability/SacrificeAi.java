@@ -27,19 +27,19 @@ import java.util.Map;
 public class SacrificeAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         return sacrificeTgtAI(ai, sa, false);
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         // AI should only activate this during Human's turn
 
         return sacrificeTgtAI(ai, sa, false);
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         AiAbilityDecision decision = sacrificeTgtAI(ai, sa, mandatory);
         if (decision.willingToPlay()) {
             return decision;
