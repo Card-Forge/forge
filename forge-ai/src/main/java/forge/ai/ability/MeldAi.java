@@ -23,10 +23,8 @@ public class MeldAi extends SpellAbilityAi {
         boolean hasPrimaryMeld = cardsOTB.anyMatch(CardPredicates.nameEquals(primaryMeld).and(CardPredicates.isOwner(aiPlayer)));
         boolean hasSecondaryMeld = cardsOTB.anyMatch(CardPredicates.nameEquals(secondaryMeld).and(CardPredicates.isOwner(aiPlayer)));
         if (hasPrimaryMeld && hasSecondaryMeld && sa.getHostCard().getName().equals(primaryMeld)) {
-            // If the primary meld card is on the battlefield and both meld cards are owned by the AI, play the ability
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else {
-            // If the secondary meld card is on the battlefield and it is the one being activated, play the ability
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
     }

@@ -78,10 +78,8 @@ public class ChooseCardNameAi extends SpellAbilityAi {
         }
 
         if (mandatory) {
-            // If mandatory, then we will play it.
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else {
-            // If not mandatory, then we won't play it.
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
     }

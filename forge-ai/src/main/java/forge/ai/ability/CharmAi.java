@@ -89,11 +89,6 @@ public class CharmAi extends SpellAbilityAi {
             CharmEffect.chainAbilities(sa, chosenList);
         }
 
-        // prevent run-away activations - first time will always return true
-        if (MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn())) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        }
-
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 

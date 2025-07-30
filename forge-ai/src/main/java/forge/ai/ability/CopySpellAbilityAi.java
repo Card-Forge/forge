@@ -42,7 +42,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
         }
 
         if (!MyRandom.percentTrue(chance)
-                && !"AlwaysIfViable".equals(logic)
+                && !"Always".equals(logic)
                 && !"AlwaysCopyActivatedAbilities".equals(logic)) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
@@ -93,7 +93,6 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
                 }
                 if (decision == AiPlayDecision.WillPlay) {
                     sa.getTargets().add(top);
-                    AiCardMemory.rememberCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
                 return new AiAbilityDecision(0, decision);
@@ -115,7 +114,6 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
         }
 
         if (logic.contains("Always")) {
-            // If the logic is "Always" or "AlwaysIfViable", we will always play this ability
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
@@ -126,10 +124,11 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
     public AiAbilityDecision chkDrawback(final SpellAbility sa, final Player aiPlayer) {
         if ("ChainOfSmog".equals(sa.getParam("AILogic"))) {
             return SpecialCardAi.ChainOfSmog.consider(aiPlayer, sa);
-        } else if ("ChainOfAcid".equals(sa.getParam("AILogic"))) {
-            return SpecialCardAi.ChainOfAcid.consider(aiPlayer, sa);
-
         }
+        if ("ChainOfAcid".equals(sa.getParam("AILogic"))) {
+            return SpecialCardAi.ChainOfAcid.consider(aiPlayer, sa);
+        }
+
         AiAbilityDecision decision = canPlay(aiPlayer, sa);
         if (!decision.willingToPlay()) {
             if (sa.isMandatory()) {

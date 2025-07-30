@@ -5,7 +5,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
-import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -21,14 +20,6 @@ public class  DamageAllAi extends SpellAbilityAi {
         // based on what the expected targets could be
         final Card source = sa.getHostCard();
 
-        // abCost stuff that should probably be centralized...
-        final Cost abCost = sa.getPayCosts();
-        if (abCost != null) {
-            // AI currently disabled for some costs
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
-            }
-        }
         // wait until stack is empty (prevents duplicate kills)
         if (!ai.getGame().getStack().isEmpty()) {
             return new AiAbilityDecision(0, AiPlayDecision.StackNotEmpty);

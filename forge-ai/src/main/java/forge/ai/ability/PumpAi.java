@@ -23,13 +23,6 @@ import java.util.*;
 
 public class PumpAi extends PumpAiBase {
 
-    private static boolean hasTapCost(final Cost cost, final Card source) {
-        if (cost == null) {
-            return true;
-        }
-        return cost.hasSpecificCostType(CostTapType.class);
-    }
-
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         if ("MoveCounter".equals(aiLogic)) {
@@ -96,7 +89,7 @@ public class PumpAi extends PumpAiBase {
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
         final Game game = ai.getGame();
         boolean main1Preferred = "Main1IfAble".equals(sa.getParam("AILogic")) && ph.is(PhaseType.MAIN1, ai);
-        if (game.getStack().isEmpty() && hasTapCost(sa.getPayCosts(), sa.getHostCard())) {
+        if (game.getStack().isEmpty() && sa.getPayCosts().hasTapCost()) {
             if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && ph.isPlayerTurn(ai)) {
                 return false;
             }
@@ -347,13 +340,13 @@ public class PumpAi extends PumpAiBase {
             }
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
-        //Targeted
+
         if (!pumpTgtAI(ai, sa, defense, attack, false, false)) {
             return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-    } // pumpPlayAI()
+    }
 
     private boolean pumpTgtAI(final Player ai, final SpellAbility sa, final int defense, final int attack, final boolean mandatory,
     		boolean immediately) {
@@ -487,17 +480,14 @@ public class PumpAi extends PumpAiBase {
             }
         }
 
-        if (game.getStack().isEmpty()) {
-            // If the cost is tapping, don't activate before declare attack/block
-            if (sa.getPayCosts().hasTapCost()) {
-                if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                        && game.getPhaseHandler().isPlayerTurn(ai)) {
-                    list.remove(sa.getHostCard());
-                }
-                if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                        && game.getPhaseHandler().getPlayerTurn().isOpponentOf(ai)) {
-                    list.remove(sa.getHostCard());
-                }
+        if (game.getStack().isEmpty() && sa.getPayCosts().hasTapCost()) {
+            if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                    && game.getPhaseHandler().isPlayerTurn(ai)) {
+                list.remove(source);
+            }
+            if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                    && game.getPhaseHandler().getPlayerTurn().isOpponentOf(ai)) {
+                list.remove(source);
             }
         }
 

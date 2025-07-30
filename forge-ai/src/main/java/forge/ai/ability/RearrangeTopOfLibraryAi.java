@@ -37,13 +37,12 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
             }
 
             // Do it once per turn, generally (may be improved later)
-            if (AiCardMemory.isRememberedCardByName(aiPlayer, source.getName(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
+            if (source.getAbilityActivatedThisTurn().getActivators(sa).contains(aiPlayer)) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
         if (sa.usesTargeting()) {
-            // ability is targeted
             sa.resetTargets();
 
             PlayerCollection targetableOpps = aiPlayer.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
@@ -62,14 +61,6 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
             } else {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi); // could not find a valid target
             }
-
-            if (!canTgtHuman || !canTgtAI) {
-                // can't target another player anyway, remember for no second activation this turn
-                AiCardMemory.rememberCard(aiPlayer, source, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
-            }
-        } else {
-            // if it's just defined, no big deal
-            AiCardMemory.rememberCard(aiPlayer, source, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -80,8 +71,6 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
      */
     @Override
     protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        // Specific details of ordering cards are handled by PlayerControllerAi#orderMoveToZoneList
-
         AiAbilityDecision decision = canPlay(ai, sa);
         if (decision.willingToPlay()) {
             return decision;

@@ -21,10 +21,6 @@ public class SurveilAi extends SpellAbilityAi {
      */
     @Override
     protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        if (sa.usesTargeting()) { // TODO: It doesn't appear that Surveil ever targets, is this necessary?
-            sa.resetTargets();
-            sa.getTargets().add(ai);
-        }
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
@@ -92,7 +88,6 @@ public class SurveilAi extends SpellAbilityAi {
         }
 
         if (randomReturn) {
-            AiCardMemory.rememberCard(ai, sa.getHostCard(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
