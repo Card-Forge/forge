@@ -16,4 +16,4 @@ p0battlefield=Generous Plunderer;Barbed Servitor|Suspected;Evolved Sleeper;Fores
 # Needed so that human doesn't lose immediately drawing into the empty library
 p0library=Opt
 p1life=17
-p1battlefield=Ancient Adamantoise|Damage:3;Synapse Necromage
+p1battlefield=Ancient Adamantoise|Damage:4;Synapse Necromage
