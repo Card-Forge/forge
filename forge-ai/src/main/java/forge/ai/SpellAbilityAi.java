@@ -144,7 +144,7 @@ public abstract class SpellAbilityAi {
             return false;
         }
         if (!"Once".equals(aiLogic)) {
-            return !AiCardMemory.isRememberedCard(ai, sa.getHostCard(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
+            return !sa.getHostCard().getAbilityActivatedThisTurn().getActivators(sa).contains(ai);
         }
         return true;
     }
