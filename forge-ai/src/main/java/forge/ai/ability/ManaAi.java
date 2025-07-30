@@ -76,7 +76,8 @@ public class ManaAi extends SpellAbilityAi {
              return ph.is(PhaseType.MAIN2, ai) || ph.is(PhaseType.MAIN1, ai);
         }
         if ("AtOppEOT".equals(logic)) {
-            return (!ai.getManaPool().hasBurn() || !ai.canLoseLife() || ai.cantLoseForZeroOrLessLife()) && ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai;
+            return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai
+                    && (!ai.getManaPool().hasBurn() || !ai.canLoseLife() || ai.cantLoseForZeroOrLessLife());
         }
         return super.checkPhaseRestrictions(ai, sa, ph, logic);
     }
@@ -276,11 +277,5 @@ public class ManaAi extends SpellAbilityAi {
             mp.removeMana(test, false);
         }
         return !lose;
-    }
-
-    @Override
-    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
-        final String logic = sa.getParamOrDefault("AILogic", "");
-        return checkApiLogic(ai, sa);
     }
 }
