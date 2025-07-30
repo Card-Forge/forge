@@ -410,11 +410,11 @@ public class EffectAi extends SpellAbilityAi {
 
             // TODO add more cases later
             if (!cantAttack && !cantBlock && !cantActivate) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             if (cantBlock && duraction == null && phase.isPlayerTurn(ai) && !phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             if (sa.usesTargeting()) {
@@ -425,7 +425,7 @@ public class EffectAi extends SpellAbilityAi {
                 list = ComputerUtil.filterAITgts(sa, ai, list, true);
 
                 if (list.isEmpty()) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
 
                 List<Card> oppCreatures = CardLists.filterAsList(list, c -> {
@@ -439,7 +439,7 @@ public class EffectAi extends SpellAbilityAi {
                 if (cantAttack || cantBlock) {
                     if (oppCreatures.isEmpty()) {
                         if (!cantActivate || oppWithAbilities.isEmpty()) {
-                            return false;
+                            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                         }
                     }
                 }
@@ -476,10 +476,10 @@ public class EffectAi extends SpellAbilityAi {
                     if (choice == null) { // can't find anything left
                         if (!sa.isMinTargetChosen() || sa.isZeroTargets()) {
                             sa.resetTargets();
-                            return false;
+                            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                         } else {
                             if (!ComputerUtil.shouldCastLessThanMax(ai, sa.getHostCard())) {
-                                return false;
+                                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                             }
                             break;
                         }
@@ -489,10 +489,10 @@ public class EffectAi extends SpellAbilityAi {
                     oppCreatures.remove(choice);
                     sa.getTargets().add(choice);
                 }
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else { //no AILogic
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
