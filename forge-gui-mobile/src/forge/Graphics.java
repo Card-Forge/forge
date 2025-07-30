@@ -18,6 +18,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
+import com.badlogic.gdx.utils.Disposable;
 import forge.adventure.util.Config;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
@@ -107,28 +108,19 @@ public class Graphics {
     }
 
     public void dispose() {
-        try {
-            batch.dispose();
-        } catch (Exception ignored) {}
-        try {
-            shapeRenderer.dispose();
-        } catch (Exception ignored) {}
-        try {
-            shaderOutline.dispose();
-        } catch (Exception ignored) {}
-        try {
-            shaderGrayscale.dispose();
-        } catch (Exception ignored) {}
-        try {
-            shaderUnderwater.dispose();
-        } catch (Exception ignored) {}
-        try {
-            shaderWarp.dispose();
-        } catch (Exception ignored) {}
-        try {
-            if (dummyTexture != null)
-                dummyTexture.dispose();
-        } catch (Exception ignored) {}
+        safeDispose(shaderOutline, shaderGrayscale, shaderWarp, shaderUnderwater, shaderNightDay,
+                shaderPixelate, shaderRipple, shaderPixelateWarp, shaderChromaticAbberation, shaderHueShift,
+                shaderRoundedRect, shaderRoundedRect2, shaderNoiseFade, shaderPortal, dummyTexture);
+    }
+
+    public void safeDispose(Disposable... disposables) {
+        for (Disposable d : disposables) {
+            if (d != null) {
+                try {
+                    d.dispose();
+                } catch (Exception ignored) {}
+            }
+        }
     }
 
     public Batch getBatch() {
