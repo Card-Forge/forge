@@ -853,9 +853,7 @@ public class CountersPutAi extends CountersAi {
                 if (list.isEmpty()) {
                     // Not mandatory, or the the list was regenerated and is still empty,
                     // so return whether or not we found enough targets
-                    if (sa.isTargetNumberValid()) {
-                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                    }
+                    return new AiAbilityDecision(sa.isTargetNumberValid() ? 100 : 0, sa.isTargetNumberValid() ? AiPlayDecision.WillPlay : AiPlayDecision.CantPlayAi);
                 }
 
                 Card choice = null;
@@ -877,7 +875,6 @@ public class CountersPutAi extends CountersAi {
                 } else {
                     if (preferred) {
                         list = ComputerUtil.getSafeTargets(ai, sa, list);
-                        System.out.println("bla");
                         choice = chooseBoonTarget(list, type);
                         if (choice == null && mandatory) {
                             choice = Aggregates.random(list);
