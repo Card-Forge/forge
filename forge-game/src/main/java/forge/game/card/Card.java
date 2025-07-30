@@ -410,8 +410,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         view.updateSickness(this);
         view.updateClassLevel(this);
         view.updateDraftAction(this);
-        if (paperCard != null)
+        if (paperCard != null) {
             setMarkedColors(paperCard.getMarkedColors());
+            setPaperFoil(paperCard.isFoil());
+        }
     }
 
     public int getHiddenId() {
@@ -2246,6 +2248,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public boolean hasChosenColor(String s) {
         return chosenColors != null && chosenColors.contains(s);
     }
+
+    public final boolean hasPaperFoil() {
+        return view.hasPaperFoil();
+    }
+    public final void setPaperFoil(final boolean v) {
+        view.updatePaperFoil(v);
+    }
+
     public final ColorSet getMarkedColors() {
         if (markedColor == null) {
             return ColorSet.getNullColor();

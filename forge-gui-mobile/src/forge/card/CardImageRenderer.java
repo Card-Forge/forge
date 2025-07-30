@@ -10,8 +10,7 @@ import java.util.List;
 import forge.ImageKeys;
 import forge.assets.*;
 import forge.item.PaperCard;
-import forge.util.ImageUtil;
-import forge.util.TextBounds;
+import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.Color;
@@ -35,8 +34,6 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.match.MatchController;
-import forge.util.CardTranslation;
-import forge.util.Utils;
 
 public class CardImageRenderer {
     private static final float BASE_IMAGE_WIDTH = 360;
@@ -791,6 +788,9 @@ public class CardImageRenderer {
         }
     }
     public static void drawZoom(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h, float dispW, float dispH, boolean isCurrentCard) {
+        drawZoom(g, card, gameView, altState, x, y, w, h, dispW, dispH, isCurrentCard, 1f);
+    }
+    public static void drawZoom(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h, float dispW, float dispH, boolean isCurrentCard, float modR) {
         boolean canshow = MatchController.instance.mayView(card);
         String key = card.getState(altState).getImageKey();
         Texture image = new CachedCardImageRenderer(key).getImage();
@@ -814,33 +814,31 @@ public class CardImageRenderer {
             float new_h = h * wh_Adj;
             float new_x = ForgeConstants.isGdxPortLandscape && isCurrentCard ? (dispW - new_w) / 2 : x;
             float new_y = ForgeConstants.isGdxPortLandscape && isCurrentCard ? (dispH - new_h) / 2 : y;
-            float new_xRotate = (dispW - new_h) / 2;
-            float new_yRotate = (dispH - new_w) / 2;
-            boolean rotateSplit = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_SPLIT_CARDS);
-            boolean rotatePlane = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON);
             float croppedArea = isModernFrame(card) ? CROP_MULTIPLIER : 0.97f;
             float minusxy = isModernFrame(card) ? 0.0f : 0.13f * radius;
             if (card.getCurrentState().getSetCode().equals("LEA") || card.getCurrentState().getSetCode().equals("LEB")) {
                 croppedArea = 0.975f;
                 minusxy = 0.135f * radius;
             }
-            if (rotatePlane && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane() || (card.getCurrentState().isBattle() && !altState) || (card.getAlternateState() != null && card.getAlternateState().isBattle() && altState))) {
+            if (canshow && CardRendererUtils.needsRotation(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON, card, altState)) {
                 if (Forge.enableUIMask.equals("Full")) {
                     if (ImageCache.getInstance().isFullBorder(image))
                         g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
                     else {
                         g.drawRotatedImage(FSkin.getBorders().get(0), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
                         g.drawRotatedImage(ImageCache.getInstance().croppedBorderImage(image), new_x + radius / 2 - minusxy, new_y + radius / 2 - minusxy, new_w * croppedArea, new_h * croppedArea, (new_x + radius / 2 - minusxy) + (new_w * croppedArea) / 2, (new_y + radius / 2 - minusxy) + (new_h * croppedArea) / 2, -90);
+                        if (CardRendererUtils.drawFoil(card))
+                            g.drawFoil(new_x, new_y, new_w, new_h, modR, true);
                     }
                 } else if (Forge.enableUIMask.equals("Crop")) {
                     g.drawRotatedImage(ImageCache.getInstance().croppedBorderImage(image), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
                 } else
                     g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, -90);
-            } else if (rotateSplit && isCurrentCard && card.isSplitCard() && canshow && !card.isFaceDown()) {
+            } else if (canshow && CardRendererUtils.needsRotation(ForgePreferences.FPref.UI_ROTATE_SPLIT_CARDS, card, altState)) {
                 boolean isAftermath = card.getText().contains("Aftermath") || card.getAlternateState().getOracleText().contains("Aftermath");
                 if (Forge.enableUIMask.equals("Full")) {
                     if (ImageCache.getInstance().isFullBorder(image))
-                        g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
+                        g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90, modR, CardRendererUtils.drawFoil(card));
                     else {
                         g.drawRotatedImage(FSkin.getBorders().get(ImageCache.getInstance().getFSkinBorders(card)), new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
                         g.drawRotatedImage(ImageCache.getInstance().croppedBorderImage(image), new_x + radius / 2 - minusxy, new_y + radius / 2 - minusxy, new_w * croppedArea, new_h * croppedArea, (new_x + radius / 2 - minusxy) + (new_w * croppedArea) / 2, (new_y + radius / 2 - minusxy) + (new_h * croppedArea) / 2, isAftermath ? 90 : -90);
@@ -852,7 +850,7 @@ public class CardImageRenderer {
             } else {
                 if (card.isFaceDown() && ZoneType.Exile.equals(card.getZone())) {
                     if (card.isForeTold() || altState) {
-                        if (card.isSplitCard() && rotateSplit && isCurrentCard) {
+                        if (CardRendererUtils.needsRotation(ForgePreferences.FPref.UI_ROTATE_SPLIT_CARDS, card, altState) && isCurrentCard) {
                             boolean isAftermath = card.getText().contains("Aftermath") || card.getAlternateState().getOracleText().contains("Aftermath");
                             if (Forge.enableUIMask.equals("Full")) {
                                 if (ImageCache.getInstance().isFullBorder(image))
@@ -868,7 +866,7 @@ public class CardImageRenderer {
                         } else {
                             if (Forge.enableUIMask.equals("Full")) {
                                 if (ImageCache.getInstance().isFullBorder(image))
-                                    g.drawCardRoundRect(image, null, x, y, w, h, false, false);
+                                    g.drawCardRoundRect(image, null, x, y, w, h, false, false, CardRendererUtils.drawFoil(card));
                                 else {
                                     g.drawImage(ImageCache.getInstance().getBorderImage(image.toString()), ImageCache.getInstance().borderColor(image), x, y, w, h);
                                     g.drawImage(ImageCache.getInstance().croppedBorderImage(image), x + radius / 2.4f - minusxy, y + radius / 2 - minusxy, w * croppedArea, h * croppedArea);
@@ -885,7 +883,7 @@ public class CardImageRenderer {
                     }
                 } else if (Forge.enableUIMask.equals("Full") && canshow) {
                     if (ImageCache.getInstance().isFullBorder(image))
-                        g.drawCardRoundRect(image, null, x, y, w, h, false, false);
+                        g.drawCardRoundRect(image, null, x, y, w, h, false, false, CardRendererUtils.drawFoil(card));
                     else {
                         g.drawImage(ImageCache.getInstance().getBorderImage(image.toString()), ImageCache.getInstance().borderColor(image), x, y, w, h);
                         g.drawImage(ImageCache.getInstance().croppedBorderImage(image), x + radius / 2.4f - minusxy, y + radius / 2 - minusxy, w * croppedArea, h * croppedArea);
@@ -900,7 +898,8 @@ public class CardImageRenderer {
                 }
             }
         }
-        CardRenderer.drawFoilEffect(g, card, x, y, w, h, isCurrentCard && canshow && image != ImageCache.getInstance().getDefaultImage());
+        if (canshow && !Forge.enableUIMask.equals("Full") && CardRendererUtils.drawFoil(card))
+            g.drawFoil(x, y, w, h, 0f, CardRendererUtils.needsRotation(card, altState));
     }
 
     public static void drawDetails(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h) {
