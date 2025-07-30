@@ -9,7 +9,6 @@ import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
-import forge.util.MyRandom;
 import forge.util.collect.FCollection;
 
 import java.util.Collections;
