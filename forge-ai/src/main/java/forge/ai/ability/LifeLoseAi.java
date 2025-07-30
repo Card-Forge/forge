@@ -28,7 +28,7 @@ public class LifeLoseAi extends SpellAbilityAi {
      * SpellAbility, forge.game.player.Player)
      */
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         final PlayerCollection tgtPlayers = getPlayers(ai, sa);
 
         final Card source = sa.getHostCard();
@@ -118,10 +118,6 @@ public class LifeLoseAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
-
         if (ComputerUtil.playImmediately(ai, sa)) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
@@ -167,8 +163,8 @@ public class LifeLoseAi extends SpellAbilityAi {
      * forge.game.spellability.SpellAbility, boolean)
      */
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(final Player ai, final SpellAbility sa,
-    final boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player ai, final SpellAbility sa,
+                                                final boolean mandatory) {
         if (sa.usesTargeting()) {
             if (!doTgt(ai, sa, mandatory)) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);

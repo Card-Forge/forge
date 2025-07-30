@@ -44,12 +44,7 @@ public class SetStateAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean checkAiLogic(final Player aiPlayer, final SpellAbility sa, final String aiLogic) {
-        return super.checkAiLogic(aiPlayer, sa, aiLogic);
-    }
-
-    @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         // Gross generalization, but this always considers alternate states more powerful
         return sa.getHostCard().isInAlternateState() ? new AiAbilityDecision(0, AiPlayDecision.CantPlayAi) : new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }

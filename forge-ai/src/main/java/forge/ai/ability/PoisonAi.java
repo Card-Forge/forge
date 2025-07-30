@@ -61,7 +61,7 @@ public class PoisonAi extends SpellAbilityAi {
      * forge.game.spellability.SpellAbility, boolean)
      */
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         boolean result;
         if (sa.usesTargeting()) {
             result = tgtPlayer(ai, sa, mandatory);

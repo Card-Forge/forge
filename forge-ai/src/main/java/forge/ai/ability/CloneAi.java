@@ -20,7 +20,7 @@ import java.util.Map;
 public class CloneAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
 
@@ -80,7 +80,7 @@ public class CloneAi extends SpellAbilityAi {
     } // end cloneCanPlayAI()
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         // AI should only activate this during Human's turn
         boolean chance = true;
 
@@ -93,7 +93,7 @@ public class CloneAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         Card host = sa.getHostCard();
         boolean chance = true;
 

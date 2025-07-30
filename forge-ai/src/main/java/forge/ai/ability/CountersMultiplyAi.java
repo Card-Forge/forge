@@ -83,7 +83,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (!sa.usesTargeting()) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }

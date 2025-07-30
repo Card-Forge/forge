@@ -249,10 +249,6 @@ public class PumpAi extends PumpAiBase {
             }
         }
 
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
-
         if (!game.getStack().isEmpty() && !sa.isCurse() && !isFight) {
             return ComputerUtilCard.canPumpAgainstRemoval(ai, sa);
         }
@@ -308,7 +304,6 @@ public class PumpAi extends PumpAiBase {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        //Untargeted
         if (!sa.usesTargeting()) {
             final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
 
@@ -633,7 +628,7 @@ public class PumpAi extends PumpAiBase {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final SpellAbility root = sa.getRootAbility();
         final String numDefense = sa.getParamOrDefault("NumDef", "");
         final String numAttack = sa.getParamOrDefault("NumAtt", "");
@@ -682,7 +677,7 @@ public class PumpAi extends PumpAiBase {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         final SpellAbility root = sa.getRootAbility();
         final Card source = sa.getHostCard();
 

@@ -18,7 +18,7 @@ public class RestartGameAi extends SpellAbilityAi {
      * forge.card.spellability.SpellAbility)
      */
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         if (ComputerUtil.aiLifeInDanger(ai, true, 0)) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }

@@ -74,8 +74,10 @@ public class ManaAi extends SpellAbilityAi {
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph, String logic) {
         if (logic.startsWith("ManaRitual")) {
              return ph.is(PhaseType.MAIN2, ai) || ph.is(PhaseType.MAIN1, ai);
-        } else if ("AtOppEOT".equals(logic)) {
-            return (!ai.getManaPool().hasBurn() || !ai.canLoseLife() || ai.cantLoseForZeroOrLessLife()) && ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai;
+        }
+        if ("AtOppEOT".equals(logic)) {
+            return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai
+                    && (!ai.getManaPool().hasBurn() || !ai.canLoseLife() || ai.cantLoseForZeroOrLessLife());
         }
         return super.checkPhaseRestrictions(ai, sa, ph, logic);
     }
@@ -116,7 +118,7 @@ public class ManaAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         final String logic = sa.getParamOrDefault("AILogic", "");
         if (logic.startsWith("ManaRitual")) {
             boolean result = doManaRitualLogic(aiPlayer, sa, true);
@@ -275,11 +277,5 @@ public class ManaAi extends SpellAbilityAi {
             mp.removeMana(test, false);
         }
         return !lose;
-    }
-
-    @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
-        final String logic = sa.getParamOrDefault("AILogic", "");
-        return checkApiLogic(ai, sa);
     }
 }

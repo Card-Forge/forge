@@ -19,7 +19,7 @@ import forge.util.collect.FCollectionView;
 
 public class TapAi extends TapAiBase {
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final PhaseHandler phase = ai.getGame().getPhaseHandler();
         final Player turn = phase.getPlayerTurn();
 
@@ -43,11 +43,6 @@ public class TapAi extends TapAiBase {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        // prevent run-away activations - first time will always return true
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        }
-
         final Card source = sa.getHostCard();
         final Cost abCost = sa.getPayCosts();
 
@@ -56,10 +51,6 @@ public class TapAi extends TapAiBase {
             return SpecialCardAi.GoblinPolkaBand.consider(ai, sa);
         } else if ("Arena".equals(aiLogic)) {
             return SpecialCardAi.Arena.consider(ai, sa);
-        }
-
-        if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source, sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (!sa.usesTargeting()) {

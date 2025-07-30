@@ -26,7 +26,7 @@ public class PumpAllAi extends PumpAiBase {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected AiAbilityDecision canPlayAI(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
@@ -39,10 +39,6 @@ public class PumpAllAi extends PumpAiBase {
                     || (!ph.getPlayerTurn().equals(ai) && ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS)))) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
-        }
-
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (abCost != null && source.hasSVar("AIPreference")) {
@@ -138,19 +134,19 @@ public class PumpAllAi extends PumpAiBase {
     } // pumpAllCanPlayAI()
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         // it might help so take it
         if (!sa.usesTargeting() && !sa.isCurse() && sa.hasParam("ValidCards") && sa.getParam("ValidCards").contains("YouCtrl")) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         // important to call canPlay first so targets are added if needed
-        AiAbilityDecision decision = canPlayAI(ai, sa);
+        AiAbilityDecision decision = canPlay(ai, sa);
         if (mandatory && decision.decision().willingToPlay()) {
             return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
         }

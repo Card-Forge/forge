@@ -108,7 +108,7 @@ public class FightAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(final SpellAbility sa, final Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(final SpellAbility sa, final Player aiPlayer) {
         if ("Always".equals(sa.getParam("AILogic"))) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay); // e.g. Hunt the Weak, the AI logic was already checked through canFightAi
         }
@@ -117,7 +117,7 @@ public class FightAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
         if (aiLogic.equals("Grothama")) {
             if (mandatory) {

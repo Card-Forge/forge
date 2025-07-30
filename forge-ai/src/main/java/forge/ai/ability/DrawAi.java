@@ -54,11 +54,6 @@ public class DrawAi extends SpellAbilityAi {
             }
         }
 
-        // prevent run-away activations - first time will always return true
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
-
         if (ComputerUtil.playImmediately(ai, sa)) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
@@ -164,8 +159,6 @@ public class DrawAi extends SpellAbilityAi {
             // LifeLessThan logic presupposes activation as soon as possible in an
             // attempt to save the AI from dying
             return true;
-        } else if (logic.equals("AtOppEOT")) {
-            return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai);
         } else if (logic.equals("RespondToOwnActivation")) {
             return !ai.getGame().getStack().isEmpty() && ai.getGame().getStack().peekAbility().getHostCard().equals(sa.getHostCard());
         } else if ((!ph.getNextTurn().equals(ai) || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
@@ -178,7 +171,7 @@ public class DrawAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         if (targetAI(ai, sa, sa.isTrigger() && sa.getHostCard().isInPlay())) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else {
@@ -541,7 +534,7 @@ public class DrawAi extends SpellAbilityAi {
     } // drawTargetAI()
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (!mandatory && !willPayCosts(ai, sa, sa.getPayCosts(), sa.getHostCard())) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }

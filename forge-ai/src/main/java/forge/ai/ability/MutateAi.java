@@ -15,7 +15,7 @@ import java.util.function.Predicate;
 
 public class MutateAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         CardCollectionView mutateTgts = CardLists.getTargetableCards(aiPlayer.getCreaturesInPlay(), sa);
         mutateTgts = ComputerUtil.getSafeTargets(aiPlayer, sa, mutateTgts);
 

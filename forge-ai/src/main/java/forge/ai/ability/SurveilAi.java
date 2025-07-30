@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import forge.ai.*;
-import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayLife;
 import forge.game.phase.PhaseHandler;
@@ -21,7 +20,7 @@ public class SurveilAi extends SpellAbilityAi {
      * @see forge.ai.SpellAbilityAi#doTriggerAINoCost(forge.game.player.Player, forge.game.spellability.SpellAbility, boolean)
      */
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (sa.usesTargeting()) { // TODO: It doesn't appear that Surveil ever targets, is this necessary?
             sa.resetTargets();
             sa.getTargets().add(ai);
@@ -34,8 +33,8 @@ public class SurveilAi extends SpellAbilityAi {
      * @see forge.ai.SpellAbilityAi#chkAIDrawback(forge.game.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
-        return doTriggerAINoCost(ai, sa, false);
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+        return doTriggerNoCost(ai, sa, false);
     }
 
     /**
@@ -65,24 +64,6 @@ public class SurveilAi extends SpellAbilityAi {
         return true;
     }
 
-    /**
-     * Checks if the AI will play a SpellAbility with the specified AiLogic
-     */
-    @Override
-    protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        final Card source = sa.getHostCard();
-
-        if ("Never".equals(aiLogic)) {
-            return false;
-        } else if ("Once".equals(aiLogic)) {
-            return !AiCardMemory.isRememberedCard(ai, source, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
-        }
-
-        // TODO: add card-specific Surveil AI logic here when/if necessary
-
-        return true;
-    }
-
     @Override
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         // Makes no sense to do Surveil when there's nothing in the library
@@ -105,7 +86,7 @@ public class SurveilAi extends SpellAbilityAi {
             chance = .667; // 66.7% chance for sorcery speed (since it will never activate EOT)
         }
 
-        boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
+        boolean randomReturn = MyRandom.getRandom().nextFloat() <= chance;
         if (playReusable(ai, sa)) {
             randomReturn = true;
         }

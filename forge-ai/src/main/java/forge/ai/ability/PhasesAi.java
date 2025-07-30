@@ -12,7 +12,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 
 import java.util.Collection;
 import java.util.List;
@@ -21,12 +20,10 @@ import java.util.function.Predicate;
 
 public class PhasesAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         // This still needs to be fleshed out
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
-
-        boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         List<Card> tgtCards;
         if (tgt == null) {
@@ -49,15 +46,11 @@ public class PhasesAi extends SpellAbilityAi {
             }
         }
 
-        if (randomReturn) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         if (tgt == null) {
@@ -89,21 +82,16 @@ public class PhasesAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-
-        boolean randomReturn = true;
 
         if (tgt != null) {
             if (!phasesPrefTargeting(tgt, sa, false)) {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
         }
-        if (randomReturn) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
+
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     private boolean phasesPrefTargeting(final TargetRestrictions tgt, final SpellAbility sa,

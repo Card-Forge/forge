@@ -315,7 +315,7 @@ public class PermanentAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (!sa.metConditions()) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }

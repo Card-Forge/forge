@@ -92,7 +92,7 @@ public class AmassAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (mandatory) {
             return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
         }

@@ -7,7 +7,6 @@ import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.util.MyRandom;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +17,7 @@ public class UnattachAllAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
-        // prevent run-away activations - first time will always return true
-        boolean chance = MyRandom.getRandom().nextFloat() <= .9;
-
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         // Attach spells always have a target
         if (sa.usesTargeting()) {
             sa.resetTargets();
@@ -42,18 +38,14 @@ public class UnattachAllAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        if (chance) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card card = sa.getHostCard();
         // Check if there are any valid targets
         List<GameObject> targets = new ArrayList<>();
@@ -83,9 +75,9 @@ public class UnattachAllAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         // AI should only activate this during Human's turn
-        return canPlayAI(ai, sa);
+        return canPlay(ai, sa);
     }
 
 }

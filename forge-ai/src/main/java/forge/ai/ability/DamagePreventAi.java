@@ -6,7 +6,6 @@ import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.combat.Combat;
-import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -21,17 +20,11 @@ import java.util.List;
 public class DamagePreventAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
         boolean chance = false;
-
-        final Cost cost = sa.getPayCosts();
-
-        if (!willPayCosts(ai, sa, cost, hostCard)) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
-        }
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
@@ -142,7 +135,7 @@ public class DamagePreventAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         boolean chance = false;
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {

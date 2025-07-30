@@ -11,7 +11,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 
 public class ControlExchangeAi extends SpellAbilityAi {
 
@@ -19,7 +18,7 @@ public class ControlExchangeAi extends SpellAbilityAi {
  * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
  */
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, final SpellAbility sa) {
         Card object1 = null;
         Card object2 = null;
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -43,42 +42,34 @@ public class ControlExchangeAi extends SpellAbilityAi {
         }
         if (ComputerUtilCard.evaluateCreature(object1) > ComputerUtilCard.evaluateCreature(object2) + 40) {
             sa.getTargets().add(object1);
-
-            if (MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn())) {
-                // if the AI has already activated this ability this turn, it is less likely to do so again
-                // this is to prevent the AI from trading away its best cards too often
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                // if the AI has not activated this ability this turn, it is more likely to do so again
-                return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-            }
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         if (!sa.usesTargeting()) {
             if (mandatory) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
         } else {
             if (mandatory) {
-                AiAbilityDecision decision = chkAIDrawback(sa, aiPlayer);
+                AiAbilityDecision decision = chkDrawback(sa, aiPlayer);
                 if (sa.isTargetNumberValid()) {
                     return  new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
 
                 return decision;
             } else {
-                return canPlayAI(aiPlayer, sa);
+                return canPlay(aiPlayer, sa);
             }
         }
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         if (!sa.usesTargeting()) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }

@@ -17,13 +17,12 @@ import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 
 import java.util.List;
 
 public class TapAllAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlayAI(final Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(final Player ai, SpellAbility sa) {
         // If tapping all creatures do it either during declare attackers of AIs turn
         // or during upkeep/begin combat?
 
@@ -58,10 +57,6 @@ public class TapAllAi extends SpellAbilityAi {
             }
         }
 
-        if (MyRandom.getRandom().nextFloat() > Math.pow(.6667, sa.getActivationsThisTurn())) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        }
-
         if (validTappables.isEmpty()) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
@@ -89,7 +84,7 @@ public class TapAllAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(final Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
 
         final String valid = sa.getParamOrDefault("ValidCards", "");
@@ -111,16 +106,11 @@ public class TapAllAi extends SpellAbilityAi {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        boolean rr = false;
-        if (MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn())) {
-            rr = true;
-        }
-
         if (validTappables.size() > 0) {
             final int human = CardLists.count(validTappables, CardPredicates.isControlledByAnyOf(ai.getYourTeam()));
             final int compy = CardLists.count(validTappables, CardPredicates.isControlledByAnyOf(ai.getOpponents()));
             if (human > compy) {
-                return rr ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
         }
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);

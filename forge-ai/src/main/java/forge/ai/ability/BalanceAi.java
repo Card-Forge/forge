@@ -13,7 +13,7 @@ import forge.util.MyRandom;
 
 public class BalanceAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         String logic = sa.getParam("AILogic");
         int diff = 0;
         Player opp = aiPlayer.getWeakestOpponent();

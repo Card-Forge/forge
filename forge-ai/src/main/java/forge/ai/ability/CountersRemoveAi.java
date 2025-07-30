@@ -25,14 +25,6 @@ import java.util.function.Predicate;
 
 public class CountersRemoveAi extends SpellAbilityAi {
 
-    @Override
-    protected AiAbilityDecision canPlayWithoutRestrict(final Player ai, final SpellAbility sa) {
-        if ("Always".equals(sa.getParam("AILogic"))) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        }
-        return super.canPlayWithoutRestrict(ai, sa);
-    }
-
     /*
      * (non-Javadoc)
      *
@@ -48,24 +40,6 @@ public class CountersRemoveAi extends SpellAbilityAi {
             return false;
         }
         return super.checkPhaseRestrictions(ai, sa, ph);
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * forge.ai.SpellAbilityAi#checkPhaseRestrictions(forge.game.player.Player,
-     * forge.game.spellability.SpellAbility, forge.game.phase.PhaseHandler,
-     * java.lang.String)
-     */
-    @Override
-    protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph, String logic) {
-        if ("EndOfOpponentsTurn".equals(logic)) {
-            if (!ph.is(PhaseType.END_OF_TURN) || !ph.getNextTurn().equals(ai)) {
-                return false;
-            }
-        }
-        return super.checkPhaseRestrictions(ai, sa, ph, logic);
     }
 
     /*
@@ -353,12 +327,12 @@ public class CountersRemoveAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         if (sa.usesTargeting()) {
             return doTgt(aiPlayer, sa, mandatory);
         }
-        return mandatory ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
-                         : new AiAbilityDecision(0, AiPlayDecision.MandatoryPlay);
+        return mandatory ? new AiAbilityDecision(100, AiPlayDecision.MandatoryPlay)
+                         : new AiAbilityDecision(0, AiPlayDecision.CantPlaySa);
     }
 
     /*

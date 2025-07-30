@@ -275,7 +275,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
 
         if (!sa.usesTargeting()) {
@@ -308,7 +308,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         final Card source = sa.getHostCard();
         final boolean oppTargetsChoice = sa.hasParam("TargetingPlayer");
 

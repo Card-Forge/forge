@@ -47,12 +47,12 @@ public final class EncodeAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 

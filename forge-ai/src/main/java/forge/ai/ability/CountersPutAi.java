@@ -214,13 +214,7 @@ public class CountersPutAi extends CountersAi {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
-
-        if ("Never".equals(logic)) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        } else if ("AlwaysWithNoTgt".equals(logic)) {
+        if ("AlwaysWithNoTgt".equals(logic)) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else if ("AristocratCounters".equals(logic)) {
             return SpecialAiLogic.doAristocratWithCountersLogic(ai, sa);
@@ -253,7 +247,7 @@ public class CountersPutAi extends CountersAi {
             } else if (sa.getSubAbility() != null
                         && "Self".equals(sa.getSubAbility().getParam("Defined"))
                         && sa.getSubAbility().getParamOrDefault("KW", "").contains("Hexproof")
-                        && !AiCardMemory.isRememberedCard(ai, source, AiCardMemory.MemorySet.ANIMATED_THIS_TURN)) {
+                        && !AiCardMemory.isRememberedCard(ai, source, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
                     // Bristling Hydra: save from death using a ping activation
                     if (ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa).contains(source)) {
                         AiCardMemory.rememberCard(ai, source, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
@@ -309,10 +303,6 @@ public class CountersPutAi extends CountersAi {
             return doChargeToOppCtrlCMCLogic(ai, sa);
         } else if (logic.equals("TheOneRing")) {
             return SpecialCardAi.TheOneRing.consider(ai, sa);
-        }
-
-        if (!sa.metConditions() && sa.getSubAbility() == null) {
-            return new AiAbilityDecision(100, AiPlayDecision.ConditionsNotMet);
         }
 
         if (sourceName.equals("Feat of Resistance")) { // sub-ability should take precedence
@@ -434,12 +424,6 @@ public class CountersPutAi extends CountersAi {
             }
             if (!found) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            }
-        }
-
-        if ("AtOppEOT".equals(logic)) {
-            if (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai)) {
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
         }
 
@@ -673,8 +657,7 @@ public class CountersPutAi extends CountersAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(final SpellAbility sa, Player ai) {
-        boolean chance = true;
+    public AiAbilityDecision chkDrawback(final SpellAbility sa, Player ai) {
         final Game game = ai.getGame();
         Card choice = null;
         final String type = sa.getParam("CounterType");
@@ -748,14 +731,11 @@ public class CountersPutAi extends CountersAi {
             }
         }
 
-        if (chance) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        }
-        return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final SpellAbility root = sa.getRootAbility();
         final Card source = sa.getHostCard();
         final String aiLogic = sa.getParamOrDefault("AILogic", "");

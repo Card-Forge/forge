@@ -12,13 +12,12 @@ import forge.game.zone.ZoneType;
 
 import java.util.Map;
 
-
 public class DigMultipleAi extends SpellAbilityAi {
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final Game game = ai.getGame();
         Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         final Card host = sa.getHostCard();
@@ -40,10 +39,6 @@ public class DigMultipleAi extends SpellAbilityAi {
 
         if ("Never".equals(sa.getParam("AILogic"))) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        } else if ("AtOppEOT".equals(sa.getParam("AILogic"))) {
-            if (!(game.getPhaseHandler().getNextTurn() == ai && game.getPhaseHandler().is(PhaseType.END_OF_TURN))) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            }
         }
 
         // don't deck yourself
@@ -72,15 +67,11 @@ public class DigMultipleAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        } else {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        }
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         if (sa.usesTargeting()) {
             sa.resetTargets();

@@ -12,12 +12,12 @@ import forge.util.collect.FCollectionView;
 public class StoreSVarAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         if (sa instanceof WrappedAbility) {
             SpellAbility origSa = ((WrappedAbility)sa).getWrappedAbility();
             if (origSa.getHostCard().getName().equals("Maralen of the Mornsong Avatar")) {

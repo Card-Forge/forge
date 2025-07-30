@@ -23,7 +23,7 @@ import java.util.Map;
 public abstract class ManifestBaseAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         // Manifest doesn't have any "Pay X to manifest X triggers"
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -84,9 +84,6 @@ public abstract class ManifestBaseAi extends SpellAbilityAi {
     protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
         final Game game = ai.getGame();
         final Card host = sa.getHostCard();
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
 
         if (sa.hasParam("Choices") || sa.hasParam("ChoiceZone")) {
             ZoneType choiceZone = ZoneType.Hand;

@@ -20,7 +20,7 @@ import forge.util.collect.FCollectionView;
 
 public class DestroyAi extends SpellAbilityAi {
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         return checkApiLogic(ai, sa);
     }
 
@@ -110,10 +110,6 @@ public class DestroyAi extends SpellAbilityAi {
 
         CardCollection list;
 
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
-
         // Targeting
         if (sa.usesTargeting()) {
             // If there's X in payment costs and it's tied to targeting, make sure we set the XManaCostPaid first
@@ -160,12 +156,7 @@ public class DestroyAi extends SpellAbilityAi {
 
             // AI doesn't destroy own cards if it isn't defined in AI logic
             list = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
-            if ("FatalPush".equals(logic)) {
-                final int cmcMax = ai.hasRevolt() ? 4 : 2;
-                list = CardLists.filter(list, CardPredicates.lessCMC(cmcMax));
-            }
 
-            // Filter AI-specific targets if provided
             list = ComputerUtil.filterAITgts(sa, ai, list, true);
 
             list = CardLists.getNotKeyword(list, Keyword.INDESTRUCTIBLE);
@@ -317,7 +308,7 @@ public class DestroyAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final boolean noRegen = sa.hasParam("NoRegen");
         if (sa.usesTargeting()) {
             sa.resetTargets();

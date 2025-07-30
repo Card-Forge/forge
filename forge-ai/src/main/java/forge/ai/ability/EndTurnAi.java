@@ -14,7 +14,7 @@ import forge.game.spellability.SpellAbility;
 public class EndTurnAi extends SpellAbilityAi  {
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         if (mandatory) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else {
@@ -23,13 +23,13 @@ public class EndTurnAi extends SpellAbilityAi  {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) { return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi); }
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) { return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi); }
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 }

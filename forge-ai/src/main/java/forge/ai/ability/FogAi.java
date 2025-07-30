@@ -22,7 +22,7 @@ public class FogAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         final Game game = ai.getGame();
         final Card hostCard = sa.getHostCard();
         final Combat combat = game.getCombat();
@@ -141,7 +141,7 @@ public class FogAi extends SpellAbilityAi {
 
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         // AI should only activate this during Human's turn
         boolean chance;
         final Game game = ai.getGame();
@@ -161,7 +161,7 @@ public class FogAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         final Game game = aiPlayer.getGame();
         boolean chance;
         if (game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer().getWeakestOpponent())) {

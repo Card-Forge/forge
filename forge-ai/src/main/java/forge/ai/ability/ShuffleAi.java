@@ -12,9 +12,8 @@ import java.util.Map;
 
 public class ShuffleAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         // TODO Does the AI know what's on top of the deck and is it something useful?
-        //
 
         String logic = sa.getParamOrDefault("AILogic", "");
         if (logic.equals("Always")) {
@@ -32,23 +31,10 @@ public class ShuffleAi extends SpellAbilityAi {
         // not really sure when the compy would use this; maybe only after a human
         // deliberately put a card on top of their library
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        /*
-         * if (!ComputerUtil.canPayCost(sa)) return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-         * 
-         * Card source = sa.getHostCard();
-         * 
-         * Random r = MyRandom.random; boolean randomReturn = r.nextFloat() <=
-         * Math.pow(.667, sa.getActivationsThisTurn()+1);
-         * 
-         * if (AbilityFactory.playReusable(sa)) randomReturn = true;
-         * 
-         * Ability_Sub subAb = sa.getSubAbility(); if (subAb != null)
-         * randomReturn &= subAb.chkAI_Drawback(); return randomReturn;
-         */
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         return shuffleTargetAI(sa);
     }
 
@@ -65,7 +51,7 @@ public class ShuffleAi extends SpellAbilityAi {
     } // shuffleTargetAI()
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         return shuffleTargetAI(sa);
     }  
 

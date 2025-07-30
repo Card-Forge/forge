@@ -23,7 +23,7 @@ public class LegendaryRuleAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#canPlayAI(forge.game.player.Player, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi); // should not get here
     }
 

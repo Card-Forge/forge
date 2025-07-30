@@ -8,8 +8,6 @@ import forge.game.GameEntity;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
-import forge.game.phase.PhaseHandler;
-import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -18,13 +16,13 @@ import java.util.List;
 
 public class AssembleContraptionAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         CardCollectionView deck = getDeck(ai, sa);
 
         if(deck.isEmpty())
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
 
-        AiAbilityDecision superDecision = super.canPlayAI(ai, sa);
+        AiAbilityDecision superDecision = super.canPlay(ai, sa);
         if (!superDecision.willingToPlay())
             return superDecision;
 
@@ -88,24 +86,16 @@ public class AssembleContraptionAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph, String logic) {
-        if(logic.equals("AtOppEOT"))
-            return ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN);
-
-        return super.checkPhaseRestrictions(ai, sa, ph);
-    }
-
-    @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         if(!mandatory && getDeck(aiPlayer, sa).isEmpty())
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        return super.doTriggerAINoCost(aiPlayer, sa, mandatory);
+        return super.doTriggerNoCost(aiPlayer, sa, mandatory);
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         if(getDeck(aiPlayer, sa).isEmpty())
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        return super.chkAIDrawback(sa, aiPlayer);
+        return super.chkDrawback(sa, aiPlayer);
     }
 }

@@ -46,6 +46,30 @@ public class ChangeZoneAi extends SpellAbilityAi {
     private static CardCollection multipleCardsToChoose = new CardCollection();
 
     protected boolean willPayCosts(Player ai, SpellAbility sa, Cost cost, Card source) {
+        if (sa.isHidden()) {
+            if (!ComputerUtilCost.checkSacrificeCost(ai, cost, source, sa)
+                    && !"Battlefield".equals(sa.getParam("Destination")) && !source.isLand()) {
+                return false;
+            }
+
+            if (!ComputerUtilCost.checkLifeCost(ai, cost, source, 4, sa)) {
+                return false;
+            }
+
+            if (!ComputerUtilCost.checkDiscardCost(ai, cost, source, sa)) {
+                for (final CostPart part : cost.getCostParts()) {
+                    if (part instanceof CostDiscard) {
+                        CostDiscard cd = (CostDiscard) part;
+                        // this is mainly for typecycling
+                        if (!cd.payCostFromSource() || !ComputerUtil.isWorseThanDraw(ai, source)) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
         if (sa.isCraft()) {
             CardCollection payingCards = new CardCollection();
             int needed = 0;
@@ -130,8 +154,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
     @Override
     protected AiAbilityDecision checkApiLogic(Player aiPlayer, SpellAbility sa) {
-        // Checks for "return true" unlike checkAiLogic()
-
         multipleCardsToChoose.clear();
         String aiLogic = sa.getParam("AILogic");
         if (aiLogic != null) {
@@ -186,7 +208,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         if (sa.isHidden()) {
             return hiddenOriginPlayDrawbackAI(aiPlayer, sa);
         }
@@ -205,7 +227,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         String aiLogic = sa.getParamOrDefault("AILogic", "");
 
         if (sa.isReplacementAbility() && "Command".equals(sa.getParam("Destination")) && "ReplacedCard".equals(sa.getParam("Defined"))) {
@@ -267,9 +289,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @return a boolean.
      */
     private static AiAbilityDecision hiddenOriginCanPlayAI(final Player ai, final SpellAbility sa) {
-        // Fetching should occur fairly often as it helps cast more spells, and
-        // have access to more mana
-        final Cost abCost = sa.getPayCosts();
+        // Fetching should occur fairly often as it helps cast more spells, and have access to more mana
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
@@ -288,68 +308,28 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
         final String destination = sa.getParam("Destination");
 
-        if (abCost != null) {
-            // AI currently disabled for these costs
-            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa)
-                    && !(destination.equals("Battlefield") && !source.isLand())) {
-                return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
+        if (sa.isNinjutsu()) {
+            if (!source.ignoreLegendRule() && ai.isCardInPlay(source.getName())) {
+                return new AiAbilityDecision(0, AiPlayDecision.WouldDestroyLegend);
+            }
+            if (ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE)) {
+                return new AiAbilityDecision(0, AiPlayDecision.WaitForCombat);
             }
 
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
+            if (ai.getGame().getCombat() == null) {
+                return new AiAbilityDecision(0, AiPlayDecision.WaitForCombat);
             }
-
-            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source, sa)) {
-                for (final CostPart part : abCost.getCostParts()) {
-                    if (part instanceof CostDiscard) {
-                        CostDiscard cd = (CostDiscard) part;
-                        // this is mainly for typecycling
-                        if (!cd.payCostFromSource() || !ComputerUtil.isWorseThanDraw(ai, source)) {
-                            return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
-                        }
-                    }
+            List<Card> attackers = ai.getGame().getCombat().getUnblockedAttackers();
+            boolean lowerCMC = false;
+            for (Card attacker : attackers) {
+                if (attacker.getCMC() < source.getCMC()) {
+                    lowerCMC = true;
+                    break;
                 }
             }
-
-            if (sa.isNinjutsu()) {
-                if (!source.ignoreLegendRule() && ai.isCardInPlay(source.getName())) {
-                    return new AiAbilityDecision(0, AiPlayDecision.WouldDestroyLegend);
-                }
-                if (ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE)) {
-                    return new AiAbilityDecision(0, AiPlayDecision.WaitForCombat);
-                }
-
-                if (ai.getGame().getCombat() == null) {
-                    return new AiAbilityDecision(0, AiPlayDecision.WaitForCombat);
-                }
-                List<Card> attackers = ai.getGame().getCombat().getUnblockedAttackers();
-                boolean lowerCMC = false;
-                for (Card attacker : attackers) {
-                    if (attacker.getCMC() < source.getCMC()) {
-                        lowerCMC = true;
-                        break;
-                    }
-                }
-                if (!lowerCMC) {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-                }
+            if (!lowerCMC) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
-        }
-
-        // don't play if the conditions aren't met, unless it would trigger a beneficial sub-condition
-        if (!activateForCost && !sa.metConditions()) {
-            final AbilitySub abSub = sa.getSubAbility();
-            if (abSub != null && !sa.isWrapper() && "True".equals(source.getSVar("AIPlayForSub"))) {
-                if (!abSub.metConditions()) {
-                    return new AiAbilityDecision(0, AiPlayDecision.ConditionsNotMet);
-                }
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.ConditionsNotMet);
-            }
-        }
-        // prevent run-away activations - first time will always return true
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
         }
 
         Iterable<Player> pDefined = Lists.newArrayList(source.getController());
@@ -473,12 +453,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.WaitForCombat);
         }
 
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb == null) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        }
-
-        return SpellApiToAi.Converter.get(subAb).chkDrawbackWithSubs(ai, subAb);
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /**
@@ -711,10 +686,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
 
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
-
         if (sa.usesTargeting()) {
             if (!isPreferredTarget(ai, sa, false, false)) {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
@@ -795,12 +766,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
 
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb == null) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        }
-
-        return SpellApiToAi.Converter.get(subAb).chkDrawbackWithSubs(ai, subAb);
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /*
@@ -814,7 +780,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
         String aiLogic = sa.getParamOrDefault("AILogic", "");
 
-        if (aiLogic.equals("SurvivalOfTheFittest") || aiLogic.equals("AtOppEOT")) {
+        if (aiLogic.equals("SurvivalOfTheFittest")) {
             return ph.getNextTurn().equals(ai) && ph.is(PhaseType.END_OF_TURN);
         } else if (aiLogic.equals("Main1") && ph.is(PhaseType.MAIN1, ai)) {
             return true;

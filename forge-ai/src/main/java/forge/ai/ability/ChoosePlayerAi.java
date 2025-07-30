@@ -17,18 +17,18 @@ import java.util.Map;
 
 public class ChoosePlayerAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
-        return canPlayAI(ai, sa);
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+        return canPlay(ai, sa);
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        return canPlayAI(ai, sa);
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        return canPlay(ai, sa);
     }
 
     @Override

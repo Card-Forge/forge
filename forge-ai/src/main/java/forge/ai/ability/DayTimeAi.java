@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class DayTimeAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         PhaseHandler ph = aiPlayer.getGame().getPhaseHandler();
 
         if ((sa.getHostCard().isCreature() && sa.getPayCosts().hasTapCost()) || sa.getPayCosts().hasManaCost()) {
@@ -38,7 +38,7 @@ public class DayTimeAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
 
     }

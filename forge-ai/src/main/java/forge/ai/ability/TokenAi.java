@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +26,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
-import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
@@ -68,17 +66,15 @@ public class TokenAi extends SpellAbilityAi {
                 }
             }
         }
-        String tokenAmount = sa.getParamOrDefault("TokenAmount", "1");
 
         Card actualToken = spawnToken(ai, sa);
 
         if (actualToken == null || (actualToken.isCreature() && actualToken.getNetToughness() < 1)) {
-            final AbilitySub sub = sa.getSubAbility();
-            // useful
-            // no token created
-            return pwPlus || (sub != null && SpellApiToAi.Converter.get(sub).chkAIDrawback(sub, ai).willingToPlay()); // planeswalker plus ability or sub-ability is
+            // planeswalker plus ability or sub-ability is useful
+            return pwPlus || sa.getSubAbility() != null;
         }
 
+        String tokenAmount = sa.getParamOrDefault("TokenAmount", "1");
         String tokenPower = sa.getParamOrDefault("TokenPower", actualToken.getBasePowerString());
         String tokenToughness = sa.getParamOrDefault("TokenToughness", actualToken.getBaseToughnessString());
 
@@ -135,15 +131,9 @@ public class TokenAi extends SpellAbilityAi {
 
     @Override
     protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
-        /*
-         * readParameters() is called in checkPhaseRestrictions
-         */
         final Game game = ai.getGame();
         final Player opp = ai.getWeakestOpponent();
 
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
         Card actualToken = spawnToken(ai, sa);
 
         // Don't kill AIs Legendary tokens
@@ -260,7 +250,7 @@ public class TokenAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         Card actualToken = spawnToken(ai, sa);
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();

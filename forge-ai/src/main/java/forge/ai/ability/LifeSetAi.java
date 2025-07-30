@@ -12,12 +12,11 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 
 public class LifeSetAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final int myLife = ai.getLife();
         final PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
         final Player opponent = targetableOpps.max(PlayerPredicates.compareByLife());
@@ -46,9 +45,6 @@ public class LifeSetAi extends SpellAbilityAi {
         } else {
             amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
         }
-
-        // prevent run-away activations - first time will always return true
-        final boolean chance = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
@@ -93,12 +89,11 @@ public class LifeSetAi extends SpellAbilityAi {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        boolean result = MyRandom.getRandom().nextFloat() < .6667 && chance;
-        return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        return super.checkApiLogic(ai, sa);
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final int myLife = ai.getLife();
         final PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
         final Player opponent = targetableOpps.max(PlayerPredicates.compareByLife());

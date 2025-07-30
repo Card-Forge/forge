@@ -11,21 +11,16 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 
 import java.util.function.Predicate;
 
 public class  DamageAllAi extends SpellAbilityAi {
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the expected targets could be
         final Card source = sa.getHostCard();
 
-        // prevent run-away activations - first time will always return true
-        if (MyRandom.getRandom().nextFloat() > Math.pow(.9, sa.getActivationsThisTurn())) {
-            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
-        }
         // abCost stuff that should probably be centralized...
         final Cost abCost = sa.getPayCosts();
         if (abCost != null) {
@@ -189,7 +184,7 @@ public class  DamageAllAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         final Card source = sa.getHostCard();
         final String validP = sa.getParamOrDefault("ValidPlayers", "");
 
@@ -262,7 +257,7 @@ public class  DamageAllAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
         final String validP = sa.getParamOrDefault("ValidPlayers", "");
 

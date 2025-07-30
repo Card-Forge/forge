@@ -20,7 +20,7 @@ public class ChooseDirectionAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         final String logic = sa.getParam("AILogic");
         final Game game = sa.getActivatingPlayer().getGame();
         if (logic == null) {
@@ -44,15 +44,15 @@ public class ChooseDirectionAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
-        return canPlayAI(ai, sa);
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+        return canPlay(ai, sa);
     }
 
     @Override
-    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (mandatory) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
-        return canPlayAI(ai, sa);
+        return canPlay(ai, sa);
     }
 }

@@ -918,24 +918,6 @@ public class AiController {
             return canPlay;
         }
 
-        // Account for possible Ward after the spell is fully targeted
-        // TODO: ideally, this should be done while targeting, so that a different target can be preferred if the best
-        // one is warded and can't be paid for. (currently it will be stuck with the target until it could pay)
-        if (sa.isCounterableBy(null)) {
-            for (TargetChoices tc : sa.getAllTargetChoices()) {
-                for (Card tgt : tc.getTargetCards()) {
-                    // TODO some older cards don't use the keyword, so check for trigger instead
-                    if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(host.getController())) {
-                        Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
-                        SpellAbilityAi topAI = new SpellAbilityAi() {};
-                        if (!topAI.willPayCosts(player, sa, wardCost, host)) {
-                            return AiPlayDecision.CostNotAcceptable;
-                        }
-                    }
-                }
-            }
-        }
-
         if (!ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
             // for dependent costs with X, e.g. Repeal, which require a valid target to be specified before a decision can be made
             // on whether the cost can be paid, this can only be checked late after canPlaySa has been run (or the AI will misplay)
@@ -991,7 +973,7 @@ public class AiController {
             Sentry.setExtra("Card", card.getName());
             Sentry.setExtra("SA", sa.toString());
 
-            boolean canPlay = SpellApiToAi.Converter.get(sa).canPlayAIWithSubs(player, sa).willingToPlay();
+            boolean canPlay = SpellApiToAi.Converter.get(sa).canPlayWithSubs(player, sa).willingToPlay();
 
             // remove added extra
             Sentry.removeExtra("Card");
@@ -1371,7 +1353,7 @@ public class AiController {
             if (withoutPayingManaCost) {
                 chance = SpellApiToAi.Converter.get(spell).doTriggerNoCostWithSubs(player, spell, mandatory).willingToPlay();
             } else {
-                chance = SpellApiToAi.Converter.get(spell).doTriggerAI(player, spell, mandatory);
+                chance = SpellApiToAi.Converter.get(spell).doTrigger(player, spell, mandatory);
             }
             if (!chance) {
                 return AiPlayDecision.TargetingFailed;
@@ -1805,7 +1787,7 @@ public class AiController {
         if (sa instanceof WrappedAbility)
             return doTrigger(((WrappedAbility) sa).getWrappedAbility(), mandatory);
         if (sa.getApi() != null)
-            return SpellApiToAi.Converter.get(sa).doTriggerAI(player, sa, mandatory);
+            return SpellApiToAi.Converter.get(sa).doTrigger(player, sa, mandatory);
         if (sa.getPayCosts() == Cost.Zero && !sa.usesTargeting()) {
             // For non-converted triggers (such as Cumulative Upkeep) that don't have costs or targets to worry about
             return true;
