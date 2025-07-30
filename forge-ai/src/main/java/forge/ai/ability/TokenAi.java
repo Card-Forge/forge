@@ -67,17 +67,15 @@ public class TokenAi extends SpellAbilityAi {
                 }
             }
         }
-        String tokenAmount = sa.getParamOrDefault("TokenAmount", "1");
 
         Card actualToken = spawnToken(ai, sa);
 
         if (actualToken == null || (actualToken.isCreature() && actualToken.getNetToughness() < 1)) {
-            final AbilitySub sub = sa.getSubAbility();
-            // useful
-            // no token created
-            return pwPlus || (sub != null && SpellApiToAi.Converter.get(sub).chkDrawback(sub, ai).willingToPlay()); // planeswalker plus ability or sub-ability is
+            // planeswalker plus ability or sub-ability is useful
+            return pwPlus || sa.getSubAbility() != null;
         }
 
+        String tokenAmount = sa.getParamOrDefault("TokenAmount", "1");
         String tokenPower = sa.getParamOrDefault("TokenPower", actualToken.getBasePowerString());
         String tokenToughness = sa.getParamOrDefault("TokenToughness", actualToken.getBaseToughnessString());
 
@@ -134,9 +132,6 @@ public class TokenAi extends SpellAbilityAi {
 
     @Override
     protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
-        /*
-         * readParameters() is called in checkPhaseRestrictions
-         */
         final Game game = ai.getGame();
         final Player opp = ai.getWeakestOpponent();
 

@@ -289,9 +289,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @return a boolean.
      */
     private static AiAbilityDecision hiddenOriginCanPlayAI(final Player ai, final SpellAbility sa) {
-        // Fetching should occur fairly often as it helps cast more spells, and
-        // have access to more mana
-        final Cost abCost = sa.getPayCosts();
+        // Fetching should occur fairly often as it helps cast more spells, and have access to more mana
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
@@ -455,12 +453,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.WaitForCombat);
         }
 
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb == null) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        }
-
-        return SpellApiToAi.Converter.get(subAb).chkDrawbackWithSubs(ai, subAb);
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /**
@@ -773,12 +766,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
 
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb == null) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        }
-
-        return SpellApiToAi.Converter.get(subAb).chkDrawbackWithSubs(ai, subAb);
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /*

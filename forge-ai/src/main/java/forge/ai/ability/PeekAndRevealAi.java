@@ -3,7 +3,6 @@ package forge.ai.ability;
 import forge.ai.*;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -27,11 +26,6 @@ public class PeekAndRevealAi extends SpellAbilityAi {
         String logic = sa.getParamOrDefault("AILogic", "");
         if ("Main2".equals(logic)) {
             if (aiPlayer.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            }
-        } else if ("EndOfOppTurn".equals(logic)) {
-            PhaseHandler ph = aiPlayer.getGame().getPhaseHandler();
-            if (!(ph.getNextTurn() == aiPlayer && ph.is(PhaseType.END_OF_TURN))) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
