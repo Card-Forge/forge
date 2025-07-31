@@ -1191,6 +1191,8 @@ public class AbilityUtils {
             if (sa.getHostCard().wasCast()) {
                 players.add((sa.getHostCard().getCastSA().getActivatingPlayer()));
             }
+        } else if (defined.equals("Exiler")) {
+            players.add(card.getExiledBy());
         } else if (defined.equals("ActivePlayer")) {
             players.add(game.getPhaseHandler().getPlayerTurn());
         } else if (defined.equals("You")) {
@@ -3007,18 +3009,10 @@ public class AbilityUtils {
                 }
             } else {
                 final Spell newSA = (Spell) s.copy(controller);
-                SpellAbilityRestriction res = new SpellAbilityRestriction();
-                // timing restrictions still apply
-                res.setPlayerTurn(s.getRestrictions().getPlayerTurn());
-                res.setOpponentTurn(s.getRestrictions().getOpponentTurn());
-                res.setPhases(s.getRestrictions().getPhases());
-                res.setZone(null);
-                newSA.setRestrictions(res);
-                // timing restrictions still apply
-                if (res.checkTimingRestrictions(tgtCard, newSA)
-                        // still need to check the other restrictions like Aftermath
-                        && res.checkOtherRestrictions(tgtCard, newSA, controller)) {
-                    newSA.setCastFromPlayEffect(true);
+                newSA.getRestrictions().setZone(null);
+                newSA.setCastFromPlayEffect(true);
+                // extra timing restrictions still apply
+                if (newSA.canPlay()) {
                     sas.add(newSA);
                 }
             }

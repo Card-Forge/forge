@@ -1,11 +1,11 @@
 crab.png
-size: 128,128
+size: 144,128
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none          
 Avatar
-  xy: 41, 111
-  size: 15, 16     
+  xy: 128, 0
+  size: 16, 16
 Idle 
   xy: 5,16
   size: 20, 16   

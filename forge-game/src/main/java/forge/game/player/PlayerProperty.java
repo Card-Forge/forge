@@ -490,7 +490,9 @@ public class PlayerProperty {
                 }
             }
             return false;
-        }  
+        } else {
+            return false;
+        }
         return true;
     }
 

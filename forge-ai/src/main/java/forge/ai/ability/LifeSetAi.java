@@ -1,8 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCost;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardPredicates;
@@ -14,12 +12,11 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 
 public class LifeSetAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final int myLife = ai.getLife();
         final PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
         final Player opponent = targetableOpps.max(PlayerPredicates.compareByLife());
@@ -29,12 +26,12 @@ public class LifeSetAi extends SpellAbilityAi {
         // Don't use setLife before main 2 if possible
         if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !sa.hasParam("ActivationPhases")) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         // TODO add AI logic for that
         if (sa.hasParam("Redistribute")) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         // TODO handle proper calculation of X values based on Cost and what would be paid
@@ -49,9 +46,6 @@ public class LifeSetAi extends SpellAbilityAi {
             amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
         }
 
-        // prevent run-away activations - first time will always return true
-        final boolean chance = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
-
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             sa.resetTargets();
@@ -61,7 +55,7 @@ public class LifeSetAi extends SpellAbilityAi {
                 // possibly add a combo here for Magister Sphinx and
                 // Higedetsu's (sp?) Second Rite
                 if (opponent == null || amount > hlife || !opponent.canLoseLife()) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 sa.getTargets().add(opponent);
             } else {
@@ -72,34 +66,34 @@ public class LifeSetAi extends SpellAbilityAi {
                 } else if (amount > myLife && ai.canGainLife()) {
                     sa.getTargets().add(ai);
                 } else {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }
         } else {
             if (sa.getParam("Defined").equals("Player")) {
                 if (amount == 0) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 } else if (myLife > amount) { // will decrease computer's life
                     if ((myLife < 5) || ((myLife - amount) > (hlife - amount))) {
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
                 }
             }
             if (amount <= myLife) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
         // if life is in danger, always activate
         if (myLife < 3 && amount > myLife && ai.canGainLife()) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        return MyRandom.getRandom().nextFloat() < .6667 && chance;
+        return super.checkApiLogic(ai, sa);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final int myLife = ai.getLife();
         final PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
         final Player opponent = targetableOpps.max(PlayerPredicates.compareByLife());
@@ -109,7 +103,7 @@ public class LifeSetAi extends SpellAbilityAi {
 
         // TODO add AI logic for that
         if (sa.hasParam("Redistribute")) {
-            return mandatory;
+            return mandatory ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         final String amountStr = sa.getParam("LifeAmount");
@@ -127,12 +121,13 @@ public class LifeSetAi extends SpellAbilityAi {
         // special cases when amount can't be calculated without targeting first
         if (amount == 0 && "TargetedPlayer$StartingLife/HalfDown".equals(source.getSVar(amountStr))) {
             // e.g. Torgaar, Famine Incarnate
-            return doHalfStartingLifeLogic(ai, opponent, sa) || mandatory;
+            boolean result = doHalfStartingLifeLogic(ai, opponent, sa);
+            return result || mandatory ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (sourceName.equals("Eternity Vessel")
                 && (ai.getOpponents().getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.nameEquals("Vampire Hexmage")) || (source.getCounters(CounterEnumType.CHARGE) == 0))) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         // If the Target is gaining life, target self.
@@ -142,7 +137,7 @@ public class LifeSetAi extends SpellAbilityAi {
             sa.resetTargets();
             if (tgt.canOnlyTgtOpponent()) {
                 if (opponent == null) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 sa.getTargets().add(opponent);
             } else {
@@ -153,12 +148,12 @@ public class LifeSetAi extends SpellAbilityAi {
                 } else if (amount > myLife || mandatory) {
                     sa.getTargets().add(ai);
                 } else {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     private boolean doHalfStartingLifeLogic(Player ai, Player opponent, SpellAbility sa) {

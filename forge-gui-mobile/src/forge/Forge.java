@@ -78,6 +78,7 @@ public class Forge implements ApplicationListener {
     public static KeyInputAdapter keyInputAdapter;
     private static boolean exited, initialized;
     public boolean needsUpdate = false;
+    public static boolean switchClassic = false;
     public static boolean advStartup = false;
     public static boolean safeToClose = true;
     public static boolean magnify = false;
@@ -91,6 +92,7 @@ public class Forge implements ApplicationListener {
     public static String extrawide = "default";
     public static float heigtModifier = 0.0f;
     public static float deltaTime = 0f;
+    public static float hueFragTime = 0f;
     private static boolean isloadingaMatch = false;
     public static boolean autoAIDeckSelection = false;
     public static boolean showFPS = false;
@@ -371,8 +373,8 @@ public class Forge implements ApplicationListener {
             Config.instance().loadResources();
             SpellSmithScene.instance().loadEditions();
             GameHUD.getInstance().stopAudio();
+            MusicPlaylist.invalidateMusicPlaylist();
             if (startScene) {
-                MusicPlaylist.invalidateMusicPlaylist();
                 SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
                 switchScene(StartScene.instance());
             }
@@ -730,6 +732,7 @@ public class Forge implements ApplicationListener {
                         }
                     }
                     deltaTime = 0f;
+                    hueFragTime = 0f;
                 }
             }
         });
@@ -775,6 +778,9 @@ public class Forge implements ApplicationListener {
     }
 
     public static void switchToClassic() {
+        if (switchClassic)
+            return;
+        switchClassic = true;
         setTransitionScreen(new TransitionScreen(() -> {
             ImageCache.getInstance().disposeTextures();
             isMobileAdventureMode = false;
@@ -785,7 +791,8 @@ public class Forge implements ApplicationListener {
             clearTransitionScreen();
             openHomeDefault();
             exited = false;
-        }, Forge.takeScreenshot(), false, false));
+            switchClassic = false;
+        }, takeScreenshot(), false, false));
     }
 
     public static void switchToAdventure() {
@@ -880,6 +887,9 @@ public class Forge implements ApplicationListener {
             deltaTime += Gdx.graphics.getDeltaTime();
             if (deltaTime > 22.5f)
                 deltaTime = 0f;
+            hueFragTime += Gdx.graphics.getDeltaTime();
+            if (hueFragTime > 6.29f)
+                hueFragTime = 0f;
 
             FContainer screen = currentScreen;
 

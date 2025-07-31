@@ -51,6 +51,7 @@ import forge.toolbox.FScrollPane;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.Utils;
+import forge.util.GuiPrefBinders;
 
 public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     private static final ForgePreferences prefs = FModel.getPreferences();
@@ -72,6 +73,8 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     // Max games in a match frame and variables
     private final FLabel lblGamesInMatch = new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblMatch") + ":").font(VARIANTS_FONT).build();
     private final FComboBox<String> cbGamesInMatch = new FComboBox<>();
+    private final GuiPrefBinders.ComboBox cbGamesInMatchBinder =
+        new GuiPrefBinders.ComboBox(FPref.UI_MATCHES_PER_GAME, cbGamesInMatch);
 
     private final List<PlayerPanel> playerPanels = new ArrayList<>(MAX_PLAYERS);
     private final FScrollPane playersScroll = new FScrollPane() {
@@ -133,8 +136,6 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         cbGamesInMatch.addItem("1");
         cbGamesInMatch.addItem("3");
         cbGamesInMatch.addItem("5");
-        cbGamesInMatch.setSelectedItem(FModel.getPreferences().getPref((FPref.UI_MATCHES_PER_GAME)));
-        cbGamesInMatch.setChangedHandler(event -> FModel.getPreferences().setPref(FPref.UI_MATCHES_PER_GAME, cbGamesInMatch.getSelectedItem()));
 
         add(lblVariants);
         add(cbVariants);
@@ -586,6 +587,11 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onActivate() {
+        cbGamesInMatchBinder.load();
     }
 
     @Override

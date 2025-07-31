@@ -1355,9 +1355,6 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
             String n = k[1];
 
-            // The exiled card gains ‘Any player who has controlled the permanent that exiled this card may look at this card in the exile zone.’
-            // this is currently not possible because the StaticAbility currently has no information about the OriginalHost
-
             List<Trigger> triggers = Lists.newArrayList();
             StringBuilder sb = new StringBuilder();
             sb.append("Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Secondary$ True | ");
@@ -3808,22 +3805,6 @@ public class CardFactoryUtil {
 
             newSA.getRestrictions().setZone(ZoneType.Hand);
             newSA.setAlternativeCost(AlternativeCost.Warp);
-            newSA.setIntrinsic(intrinsic);
-            inst.addSpellAbility(newSA);
-        } else if (keyword.endsWith(" offering")) {
-            final String offeringType = keyword.split(" ")[0];
-            final SpellAbility sa = card.getFirstSpellAbility();
-
-            final SpellAbility newSA = sa.copy();
-
-            SpellAbilityRestriction sar = newSA.getRestrictions();
-            sar.setIsPresent(offeringType + ".YouCtrl+CanBeSacrificedBy");
-            sar.setInstantSpeed(true);
-
-            newSA.putParam("Secondary", "True");
-            newSA.setAlternativeCost(AlternativeCost.Offering);
-            newSA.setPayCosts(sa.getPayCosts());
-            newSA.setDescription(sa.getDescription() + " (" + offeringType + " offering)");
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Crew")) {

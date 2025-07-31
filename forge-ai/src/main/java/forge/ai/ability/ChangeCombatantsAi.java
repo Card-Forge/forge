@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.SpellAbilityAi;
 import forge.game.GameEntity;
 import forge.game.player.Player;
@@ -15,34 +17,36 @@ public class ChangeCombatantsAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         // TODO: Extend this if possible for cards that have this as an activated ability
-        return false;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        return mandatory || canPlayAI(aiPlayer, sa);
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+        if (mandatory) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         final String logic = sa.getParamOrDefault("AILogic", "");
 
         if (logic.equals("WeakestOppExceptCtrl")) {
             PlayerCollection targetableOpps = aiPlayer.getOpponents();
             targetableOpps.remove(sa.getHostCard().getController());
             if (targetableOpps.isEmpty()) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
-
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        return false;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
@@ -63,4 +67,3 @@ public class ChangeCombatantsAi extends SpellAbilityAi {
         return (T)weakestTargetableOpp;
     }
 }
-
