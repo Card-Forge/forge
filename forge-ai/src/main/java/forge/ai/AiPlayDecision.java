@@ -19,7 +19,7 @@ public enum AiPlayDecision {
     StackNotEmpty,
     AnotherTime,
 
-    // Don't play decision reasons,
+    // Don't play decision reasons
     CantPlaySa,
     CantPlayAi,
     CantAfford,

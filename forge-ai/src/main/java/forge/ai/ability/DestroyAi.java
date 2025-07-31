@@ -110,15 +110,7 @@ public class DestroyAi extends SpellAbilityAi {
 
         CardCollection list;
 
-        // Targeting
         if (sa.usesTargeting()) {
-            // If there's X in payment costs and it's tied to targeting, make sure we set the XManaCostPaid first
-            // (e.g. Heliod's Intervention)
-            if ("X".equals(sa.getTargetRestrictions().getMinTargets()) && sa.getSVar("X").equals("Count$xPaid")) {
-                int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-                sa.getRootAbility().setXManaCostPaid(xPay);
-            }
-
             // Assume there where already enough targets chosen by AI Logic Above
             if (sa.hasParam("AILogic") && !sa.canAddMoreTarget() && sa.isTargetNumberValid()) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -128,7 +120,10 @@ public class DestroyAi extends SpellAbilityAi {
             sa.resetTargets();
             int maxTargets;
 
-            if (sa.getRootAbility().costHasManaX()) {
+            // If there's X in payment costs and it's tied to targeting, make sure we set the XManaCostPaid first
+            // (e.g. Heliod's Intervention)
+            if (sa.getRootAbility().costHasManaX() ||
+                    ("X".equals(sa.getTargetRestrictions().getMinTargets()) && sa.getSVar("X").equals("Count$xPaid"))) {
                 // TODO: currently the AI will maximize mana spent on X, trying to maximize damage. This may need improvement.
                 maxTargets = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
                 // need to set XPaid to get the right number for
