@@ -2,7 +2,6 @@
 Code=PCA
 Date=2016-11-25
 Name=Planechase Anthology
-Code2=PCA
 Type=Multiplayer
 ScryfallCode=PCA
 
@@ -253,11 +252,11 @@ OPCA86 C The Zephyr Maze @rk post
 [tokens]
 1 c_7_7_eldrazi_annihilator @Vincent Proce
 2 c_0_1_eldrazi_spawn_sac @Aleksi Briclot
-3 c_0_1_eldrazi_spawn_sac @Aleksi Briclot
-4 c_0_1_eldrazi_spawn_sac @Aleksi Briclot
+3 c_0_1_eldrazi_spawn_sac @Mark Tedin
+4 c_0_1_eldrazi_spawn_sac @Véronique Meignaud
 5 w_4_4_angel_flying @Cyril Van Der Haegen
 6 w_0_1_goat @Terese Nielsen
-7 b_0_0_phyrexian_germ @Igor Kieryluk
+7 b_0_0_germ @Igor Kieryluk
 8 b_2_4_spider_reach @Lars Grant-West
 9 b_2_2_zombie @Dave Kendall
 10 r_5_5_dragon_flying @Jim Pavelec
