@@ -144,7 +144,7 @@ public abstract class SpellAbilityAi {
             return false;
         }
         if (!"Once".equals(aiLogic)) {
-            return !AiCardMemory.isRememberedCard(ai, sa.getHostCard(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
+            return !sa.getHostCard().getAbilityActivatedThisTurn().getActivators(sa).contains(ai);
         }
         return true;
     }
@@ -153,7 +153,7 @@ public abstract class SpellAbilityAi {
      * The rest of the logic not covered by the canPlayAI template is defined here
      */
     protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
-        if (MyRandom.getRandom().nextFloat() < .8f) {
+        if (sa.getActivationsThisTurn() == 0 || MyRandom.getRandom().nextFloat() < .8f) {
             // 80% chance to play the ability
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }

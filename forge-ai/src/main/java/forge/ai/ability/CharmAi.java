@@ -9,7 +9,6 @@ import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
-import forge.util.MyRandom;
 import forge.util.collect.FCollection;
 
 import java.util.Collections;
@@ -89,12 +88,7 @@ public class CharmAi extends SpellAbilityAi {
             CharmEffect.chainAbilities(sa, chosenList);
         }
 
-        // prevent run-away activations - first time will always return true
-        if (MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn())) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        }
-
-        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        return checkApiLogic(ai, sa);
     }
 
     private List<AbilitySub> chooseOptionsAi(SpellAbility sa, List<AbilitySub> choices, final Player ai, boolean isTrigger, int num, int min) {

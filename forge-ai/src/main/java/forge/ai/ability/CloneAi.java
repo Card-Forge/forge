@@ -20,7 +20,7 @@ import java.util.Map;
 public class CloneAi extends SpellAbilityAi {
 
     @Override
-    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
 
@@ -37,10 +37,6 @@ public class CloneAi extends SpellAbilityAi {
         // "Am I going to attack with this?"
         // TODO - add some kind of check for during human turn to answer
         // "Can I use this to block something?"
-
-        if (!checkPhaseRestrictions(ai, sa, game.getPhaseHandler())) {
-            return new AiAbilityDecision(0, AiPlayDecision.MissingPhaseRestrictions);
-        }
 
         PhaseHandler phase = game.getPhaseHandler();
 
@@ -77,7 +73,7 @@ public class CloneAi extends SpellAbilityAi {
 
         return useAbility ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
                 : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-    } // end cloneCanPlayAI()
+    }
 
     @Override
     public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {

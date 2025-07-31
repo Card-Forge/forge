@@ -27,7 +27,8 @@ public class MustBlockAi extends SpellAbilityAi {
 
         if (combat == null || !combat.isAttacking(source)) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        } else if (AiCardMemory.isRememberedCard(aiPlayer, source, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
+        }
+        if (source.getAbilityActivatedThisTurn().getActivators(sa).contains(aiPlayer)) {
             // The AI can meaningfully do it only to one creature per card yet, trying to do it to multiple cards
             // may result in overextending and losing the attacker
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
@@ -41,7 +42,6 @@ public class MustBlockAi extends SpellAbilityAi {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
             sa.getTargets().add(blocker);
-            AiCardMemory.rememberCard(aiPlayer, source, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 

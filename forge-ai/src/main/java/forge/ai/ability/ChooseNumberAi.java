@@ -63,8 +63,7 @@ public class ChooseNumberAi extends SpellAbilityAi {
     protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (mandatory) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } {
-            return canPlay(ai, sa);
         }
+        return canPlay(ai, sa);
     }
 }

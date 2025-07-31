@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - Final Fantasy #04
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2025/07/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Start in your upkeep with Generous Plunderer's ability on the stack. Ensure your solution satisfies all blocks. Good luck! [Assume that any cards drawn from the library are irrelevant to the puzzle]
+[state]
+turn=1
+activeplayer=p1
+activephase=CLEANUP
+activephaseadvance=UPKEEP
+p0life=20
+p0hand=Caught Red-Handed;Molten Duplication;Cornered by Black Mages;Curse of the Werefox;Fire Magic
+p0battlefield=Generous Plunderer;Barbed Servitor|Suspected;Evolved Sleeper;Forest;Swamp;Swamp;Mountain;Mountain
+# Needed so that human doesn't lose immediately drawing into the empty library
+p0library=Opt
+p1life=17
+p1battlefield=Ancient Adamantoise|Damage:4;Synapse Necromage
