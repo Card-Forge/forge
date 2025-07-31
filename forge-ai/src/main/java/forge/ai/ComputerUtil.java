@@ -2737,7 +2737,7 @@ public class ComputerUtil {
         return safeCards;
     }
 
-    public static Card getKilledByTargeting(final SpellAbility sa, CardCollectionView validCards) {
+    public static Card getKilledByTargeting(final SpellAbility sa, Iterable<Card> validCards) {
         CardCollection killables = CardLists.filter(validCards, c -> c.getController() != sa.getActivatingPlayer() && c.getSVar("Targeting").equals("Dies"));
         return ComputerUtilCard.getBestCreatureAI(killables);
     }
