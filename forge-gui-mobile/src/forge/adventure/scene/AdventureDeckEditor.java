@@ -611,18 +611,6 @@ public class AdventureDeckEditor extends FDeckEditor {
 
     private static ItemPool<InventoryItem> decksUsingMyCards = new ItemPool<>(InventoryItem.class);
 
-    public static void leave() {
-        Forge.getCurrentScreen().onClose(new Callback<>() {
-            @Override
-            public void run(Boolean result) {
-                if (result) {
-                    Forge.clearCurrentScreen();
-                    Forge.switchToLast();
-                }
-            }
-        });
-    }
-
     @Override
     public void onActivate() {
         decksUsingMyCards = new ItemPool<>(InventoryItem.class);
@@ -666,14 +654,13 @@ public class AdventureDeckEditor extends FDeckEditor {
 
     public AdventureDeckEditor(boolean createAsShop) {
         super(createAsShop ? new ShopConfig() : new AdventureEditorConfig(),
-                createAsShop ? null : Current.player().getSelectedDeck(),
-                e -> leave());
+                createAsShop ? null : Current.player().getSelectedDeck());
         if(createAsShop)
             setHeaderText(Forge.getLocalizer().getMessage("lblSell"));
     }
 
     public AdventureDeckEditor(AdventureEventData event) {
-        super(new AdventureEventEditorConfig(event), event.registeredDeck, e -> leave());
+        super(new AdventureEventEditorConfig(event), event.registeredDeck);
         currentEvent = event;
 
         if(event.getDraft() != null && event.getDraft().shouldShowDraftLog()) {
@@ -684,7 +671,7 @@ public class AdventureDeckEditor extends FDeckEditor {
     }
 
     public AdventureDeckEditor(Deck deckToPreview) {
-        super(new DeckPreviewConfig(deckToPreview), e -> leave());
+        super(new DeckPreviewConfig(deckToPreview), deckToPreview.getName());
     }
 
     @Override

@@ -418,35 +418,20 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     private boolean tabsInitialized = false;
 
     public FDeckEditor(DeckEditorConfig editorConfig, String editDeckName) {
-        this(editorConfig, editDeckName, null);
-    }
-    public FDeckEditor(DeckEditorConfig editorConfig, String editDeckName, FEventHandler backButton) {
-        this(editorConfig, editDeckName, "", backButton);
+        this(editorConfig, editorConfig.initDeckController(editDeckName, ""));
     }
     public FDeckEditor(DeckEditorConfig editorConfig, DeckProxy editDeck) {
-        this(editorConfig, editDeck, null);
-    }
-    public FDeckEditor(DeckEditorConfig editorConfig, DeckProxy editDeck, FEventHandler backButton) {
-        this(editorConfig, editDeck.getName(), editDeck.getPath(), backButton);
-    }
-    public FDeckEditor(DeckEditorConfig editorConfig, String editDeckName, String editDeckPath, FEventHandler backButton) {
-        this(editorConfig, editorConfig.initDeckController(editDeckName, editDeckPath), backButton);
+        this(editorConfig, editorConfig.initDeckController(editDeck.getName(), editDeck.getPath()));
     }
     public FDeckEditor(DeckEditorConfig editorConfig, Deck newDeck) {
-        this(editorConfig, editorConfig.initDeckController(newDeck), null);
-    }
-    public FDeckEditor(DeckEditorConfig editorConfig, Deck newDeck, FEventHandler backButton) {
-        this(editorConfig, editorConfig.initDeckController(newDeck), backButton);
+        this(editorConfig, editorConfig.initDeckController(newDeck));
     }
     public FDeckEditor(DeckEditorConfig editorConfig, DeckGroup newDeckGroup) {
-        this(editorConfig, editorConfig.initDeckController(newDeckGroup), null);
-    }
-    public FDeckEditor(DeckEditorConfig editorConfig, FEventHandler backButton) {
-        this(editorConfig, editorConfig.initDeckController(), backButton);
+        this(editorConfig, editorConfig.initDeckController(newDeckGroup));
     }
 
-    protected FDeckEditor(DeckEditorConfig editorConfig, IDeckController deckController, FEventHandler backButton) {
-        super(backButton, editorConfig.getInitialPages());
+    protected FDeckEditor(DeckEditorConfig editorConfig, IDeckController deckController) {
+        super(editorConfig.getInitialPages());
         this.editorConfig = editorConfig;
 
         this.deckHeader = initDeckHeader();

@@ -140,7 +140,7 @@ public class DuelScene extends ForgeScene {
             dungeonEffect = null;
             callbackExit = false;
             Forge.clearTransitionScreen();
-            Forge.clearCurrentScreen();
+            Forge.clearScreenStack();
             Forge.advFreezePlayerControls = false;
             Scene last = Forge.switchToLast();
             Current.player().getStatistic().setResult(enemyName, winner);
