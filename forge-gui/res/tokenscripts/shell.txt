@@ -1,0 +1,5 @@
+Name:Shell
+ManaCost:no cost
+Types:Artifact
+A:AB$ DealDamage | Cost$ T Sac<1/CARDNAME/this token> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ It deals 2 damage to any target.
+Oracle:{T}, Sacrifice this token: It deals 2 damage to any target.
