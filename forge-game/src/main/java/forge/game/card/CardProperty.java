@@ -2136,11 +2136,8 @@ public class CardProperty {
                 }
             }
             return new CheckCanPayManaCost().check();
-        } else {
-            // StringType done in CardState
-            if (!card.getCurrentState().hasProperty(property, sourceController, source, spellAbility)) {
-                return false;
-            }
+        } else if (!card.getCurrentState().hasProperty(property, sourceController, source, spellAbility)) {
+            return false;
         }
         return true;
     }
