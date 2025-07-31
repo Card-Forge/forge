@@ -1074,6 +1074,80 @@ public class ComputerUtil {
         return prevented;
     }
 
+    /**
+     * Is it OK to cast this for less than the Max Targets?
+     * @param source the source Card
+     * @return true if it's OK to cast this Card for less than the max targets
+     */
+    public static boolean shouldCastLessThanMax(final Player ai, final Card source) {
+        if (source.getXManaCostPaid() > 0) {
+            // If TargetMax is MaxTgts (i.e., an "X" cost), this is fine because AI is limited by payment resources available.
+            return true;
+        }
+        if (aiLifeInDanger(ai, false, 0)) {
+            // Otherwise, if life is possibly in danger, then this is fine.
+            return true;
+        }
+        // do not play now.
+        return false;
+    }
+
+    /**
+     * Is this discard probably worse than a random draw?
+     * @param discard Card to discard
+     * @return boolean
+     */
+    public static boolean isWorseThanDraw(final Player ai, Card discard) {
+        if (discard.hasSVar("DiscardMe")) {
+            return true;
+        }
+
+        final Game game = ai.getGame();
+        final CardCollection landsInPlay = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS_PRODUCING_MANA);
+        final CardCollection landsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.LANDS);
+        final CardCollection nonLandsInHand = CardLists.getNotType(ai.getCardsIn(ZoneType.Hand), "Land");
+        final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, Card::getCMC));
+        final int discardCMC = discard.getCMC();
+        if (discard.isLand()) {
+            if (landsInPlay.size() >= highestCMC
+                    || (landsInPlay.size() + landsInHand.size() > 6 && landsInHand.size() > 1)
+                    || (landsInPlay.size() > 3 && nonLandsInHand.size() == 0)) {
+                // Don't need more land.
+                return true;
+            }
+        } else { //non-land
+            if (discardCMC > landsInPlay.size() + landsInHand.size() + 2) {
+                // not castable for some time.
+                return true;
+            } else if (!game.getPhaseHandler().isPlayerTurn(ai)
+                    && game.getPhaseHandler().getPhase().isAfter(PhaseType.MAIN2)
+                    && discardCMC > landsInPlay.size() + landsInHand.size()
+                    && discardCMC > landsInPlay.size() + 1
+                    && nonLandsInHand.size() > 1) {
+                // not castable for at least one other turn.
+                return true;
+            } else if (landsInPlay.size() > 5 && discard.getCMC() <= 1
+                    && !discard.hasProperty("hasXCost", ai, null, null)) {
+                // Probably don't need small stuff now.
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // returns true if it's better to wait until blockers are declared
+    public static boolean waitForBlocking(final SpellAbility sa) {
+        final Game game = sa.getActivatingPlayer().getGame();
+        final PhaseHandler ph = game.getPhaseHandler();
+
+        return sa.getHostCard().isCreature()
+                && sa.getPayCosts().hasTapCost()
+                && (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                        && !ph.getNextTurn().equals(sa.getActivatingPlayer()))
+                && !sa.getHostCard().hasSVar("EndOfTurnLeavePlay")
+                && !sa.hasParam("ActivationPhases");
+    }
+
     public static boolean castPermanentInMain1(final Player ai, final SpellAbility sa) {
         final Card card = sa.getHostCard();
         final CardState cardState = card.isFaceDown() ? card.getState(CardStateName.Original) : card.getCurrentState();
@@ -1245,80 +1319,6 @@ public class ComputerUtil {
         return false;
     }
 
-    /**
-     * Is it OK to cast this for less than the Max Targets?
-     * @param source the source Card
-     * @return true if it's OK to cast this Card for less than the max targets
-     */
-    public static boolean shouldCastLessThanMax(final Player ai, final Card source) {
-        if (source.getXManaCostPaid() > 0) {
-            // If TargetMax is MaxTgts (i.e., an "X" cost), this is fine because AI is limited by payment resources available.
-            return true;
-        }
-        if (aiLifeInDanger(ai, false, 0)) {
-            // Otherwise, if life is possibly in danger, then this is fine.
-            return true;
-        }
-        // do not play now.
-        return false;
-    }
-
-    /**
-     * Is this discard probably worse than a random draw?
-     * @param discard Card to discard
-     * @return boolean
-     */
-    public static boolean isWorseThanDraw(final Player ai, Card discard) {
-        if (discard.hasSVar("DiscardMe")) {
-            return true;
-        }
-
-        final Game game = ai.getGame();
-        final CardCollection landsInPlay = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS_PRODUCING_MANA);
-        final CardCollection landsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.LANDS);
-        final CardCollection nonLandsInHand = CardLists.getNotType(ai.getCardsIn(ZoneType.Hand), "Land");
-        final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, Card::getCMC));
-        final int discardCMC = discard.getCMC();
-        if (discard.isLand()) {
-            if (landsInPlay.size() >= highestCMC
-                    || (landsInPlay.size() + landsInHand.size() > 6 && landsInHand.size() > 1)
-                    || (landsInPlay.size() > 3 && nonLandsInHand.size() == 0)) {
-                // Don't need more land.
-                return true;
-            }
-        } else { //non-land
-            if (discardCMC > landsInPlay.size() + landsInHand.size() + 2) {
-                // not castable for some time.
-                return true;
-            } else if (!game.getPhaseHandler().isPlayerTurn(ai)
-                    && game.getPhaseHandler().getPhase().isAfter(PhaseType.MAIN2)
-                    && discardCMC > landsInPlay.size() + landsInHand.size()
-                    && discardCMC > landsInPlay.size() + 1
-                    && nonLandsInHand.size() > 1) {
-                // not castable for at least one other turn.
-                return true;
-            } else if (landsInPlay.size() > 5 && discard.getCMC() <= 1
-                    && !discard.hasProperty("hasXCost", ai, null, null)) {
-                // Probably don't need small stuff now.
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // returns true if it's better to wait until blockers are declared
-    public static boolean waitForBlocking(final SpellAbility sa) {
-        final Game game = sa.getActivatingPlayer().getGame();
-        final PhaseHandler ph = game.getPhaseHandler();
-
-        return sa.getHostCard().isCreature()
-                && sa.getPayCosts().hasTapCost()
-                && (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                        && !ph.getNextTurn().equals(sa.getActivatingPlayer()))
-                && !sa.getHostCard().hasSVar("EndOfTurnLeavePlay")
-                && !sa.hasParam("ActivationPhases");
-    }
-
     public static boolean castSpellInMain1(final Player ai, final SpellAbility sa) {
         final Card source = sa.getHostCard();
         final SpellAbility sub = sa.getSubAbility();
@@ -1327,7 +1327,6 @@ public class ComputerUtil {
             return true;
         }
 
-        // Cipher spells
         if (sub != null) {
             final ApiType api = sub.getApi();
             if (ApiType.Encode == api && !ai.getCreaturesInPlay().isEmpty()) {
@@ -1622,7 +1621,6 @@ public class ComputerUtil {
                 damage = dmg;
             }
 
-            // Triggered abilities
             if (c.isCreature() && c.isInPlay() && CombatUtil.canAttack(c)) {
                 for (final Trigger t : c.getTriggers()) {
                     if (TriggerType.Attacks.equals(t.getMode())) {

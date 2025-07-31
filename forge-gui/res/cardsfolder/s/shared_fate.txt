@@ -1,7 +1,7 @@
 Name:Shared Fate
 ManaCost:4 U
 Types:Enchantment
-R:Event$ Draw | ReplaceWith$ DBChooseOpp | Description$ If a player would draw a card, that player exiles the top card of one of their opponents' libraries face down instead.
+R:Event$ Draw | ReplaceWith$ DBChooseOpp | ActiveZones$ Battlefield | Description$ If a player would draw a card, that player exiles the top card of one of their opponents' libraries face down instead.
 SVar:DBChooseOpp:DB$ ChoosePlayer | Defined$ ReplacedPlayer | ChoiceTitle$ Choose an opponent whose top library card to exile | Choices$ Player.OpponentOf ReplacedPlayer | AILogic$ Curse | SubAbility$ DBExile | DontNotify$ True
 SVar:DBExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | Defined$ Player.Chosen | DefinedExiler$ ReplacedPlayer
 S:Mode$ Continuous | MayPlayPlayer$ Exiler | MayLookAt$ True | MayPlay$ True | Affected$ Card.ExiledWithSource | AffectedZone$ Exile | Description$ Each player may look at cards they exiled with CARDNAME, and they may play lands and cast spells from among those cards.
