@@ -2,7 +2,6 @@
 Code=ME4
 Date=2011-01-10
 Name=Masters Edition IV
-Code2=ME4
 Type=Online
 BoosterCovers=1
 Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
@@ -278,8 +277,3 @@ ScryfallCode=ME4
 259c L Urza's Tower @Mark Poole
 259d L Urza's Tower @Mark Poole
 260 R Volcanic Island @Brian Snõddy
-
-[tokens]
-r_1_1_goblin
-c_1_1_a_tetravite_flying_noenchant
-c_5_5_a_djinn_flying
