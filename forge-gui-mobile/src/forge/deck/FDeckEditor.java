@@ -1805,10 +1805,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     });
                 }
                 if (parentScreen.isAllowedReplacement()) {
-                    final List<PaperCard> cardOptions = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
-                    if (cardOptions.size() > 1) {
-                        menu.addItem(new FMenuItem(lblReplaceCard, iconReplaceCard, e -> handleReplaceCard(card, cardOptions)));
-                    }
+                    addChangeArtMenu(card, menu, iconReplaceCard, lblReplaceCard);
+                    addFoilMenu(card, menu, iconReplaceCard);
                 }
                 addCommanderItems(menu, card);
                 if (markedColorCount > 0) {
@@ -1861,10 +1859,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     }
                 });
                 if (parentScreen.isAllowedReplacement()) {
-                    final List<PaperCard> cardOptions = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
-                    if (cardOptions.size() > 1) {
-                        menu.addItem(new FMenuItem(lblReplaceCard, iconReplaceCard, e -> handleReplaceCard(card, cardOptions)));
-                    }
+                    addChangeArtMenu(card, menu, iconReplaceCard, lblReplaceCard);
+                    addFoilMenu(card, menu, iconReplaceCard);
                 }
                 addCommanderItems(menu, card);
                 if (markedColorCount > 0) {
@@ -1901,10 +1897,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     });
                 }
                 if (parentScreen.isAllowedReplacement()) {
-                    final List<PaperCard> cardOptions = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
-                    if (cardOptions.size() > 1) {
-                        menu.addItem(new FMenuItem(lblReplaceCard, iconReplaceCard, e -> handleReplaceCard(card, cardOptions)));
-                    }
+                    addChangeArtMenu(card, menu, iconReplaceCard, lblReplaceCard);
+                    addFoilMenu(card, menu, iconReplaceCard);
                 }
                 break;
             case Avatar:
@@ -1947,36 +1941,56 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     }
                 });
                 if (parentScreen.isAllowedReplacement()) {
-                    final List<PaperCard> cardOptions = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
-                    if (cardOptions.size() > 1) {
-                        menu.addItem(new FMenuItem(lblReplaceCard, iconReplaceCard, e -> handleReplaceCard(card, cardOptions)));
-                    }
+                    addChangeArtMenu(card, menu, iconReplaceCard, lblReplaceCard);
+                    addFoilMenu(card, menu, iconReplaceCard);
                 }
                 break;
             }
         }
 
-        private void handleReplaceCard(PaperCard card, List<PaperCard> cardOptions) {
-            //sort options so current option is on top and selected by default
-            List<PaperCard> sortedOptions = new ArrayList<>();
-            sortedOptions.add(card);
-            for (PaperCard option : cardOptions) {
-                if (option != card) {
-                    sortedOptions.add(option);
-                }
-            }
-            String prompt = Forge.getLocalizer().getMessage("lblSelectReplacementCard") + " " + card.getName();
-            GuiChoose.oneOrNone(prompt, sortedOptions, new Callback<PaperCard>() {
-                @Override
-                public void run(PaperCard result) {
-                    if (result != null) {
-                        if (result != card) {
-                            addCard(result);
-                            removeCard(card);
+        private void addChangeArtMenu(final PaperCard paperCard, final FDropDownMenu menu, final FSkinImage iconReplaceCard, final String lblReplaceCard) {
+            if (paperCard == null)
+                return;
+            final List<PaperCard> cardOptions = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(paperCard.getName());
+            if (cardOptions.size() > 1) {
+                menu.addItem(new FMenuItem(lblReplaceCard, iconReplaceCard, e -> {
+                    //sort options so current option is on top and selected by default
+                    List<PaperCard> sortedOptions = new ArrayList<>();
+                    sortedOptions.add(paperCard);
+                    for (PaperCard option : cardOptions) {
+                        if (option != paperCard) {
+                            sortedOptions.add(option);
                         }
                     }
-                }
-            });
+                    String prompt = Forge.getLocalizer().getMessage("lblSelectReplacementCard") + " " + paperCard.getName();
+                    GuiChoose.oneOrNone(prompt, sortedOptions, new Callback<PaperCard>() {
+                        @Override
+                        public void run(PaperCard result) {
+                            if (result != null) {
+                                if (result != paperCard) {
+                                    addCard(result);
+                                    removeCard(paperCard);
+                                }
+                            }
+                        }
+                    });
+                }));
+            }
+        }
+
+        private void addFoilMenu(final PaperCard paperCard, final FDropDownMenu menu, final FSkinImage iconReplaceCard) {
+            if (!FModel.getPreferences().getPrefBoolean(FPref.UI_OVERLAY_FOIL_EFFECT))
+                return;
+            if (paperCard == null)
+                return;
+            final Localizer localizer = Forge.getLocalizer();
+            String lblFoil = paperCard.isFoil() ? localizer.getMessage("lblRemove") : localizer.getMessage("lblAdd");
+            lblFoil += " " + localizer.getMessage("lblConvertToFoil");
+            menu.addItem(new FMenuItem(lblFoil, iconReplaceCard, e -> {
+                PaperCard result = paperCard.isFoil() ? paperCard.getUnFoiled() : paperCard.getFoiled();
+                addCard(result);
+                removeCard(paperCard);
+            }));
         }
 
         private boolean isPartnerCommander(final PaperCard card) {
