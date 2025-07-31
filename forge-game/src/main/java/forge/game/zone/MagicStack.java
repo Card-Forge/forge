@@ -256,6 +256,15 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             System.out.println(source.getName() + " - activatingPlayer not set before adding to stack.");
         }
 
+        // Stop infinite loop. E.g. Scalelord Reckoner mirrormatch with only triggering targets is a draw.
+        if (game.getStack().size() > 999) {
+            for (Player p : game.getPlayers()) {
+                p.intentionalDraw();
+            }
+            game.setGameOver(GameEndReason.Draw);
+            return;
+        }
+
         recordUndoableActions(sp, activator);
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through
