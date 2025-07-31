@@ -2,7 +2,6 @@
 Code=FUT
 Date=2007-05-04
 Name=Future Sight
-Code2=FUT
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare
@@ -191,16 +190,3 @@ ScryfallCode=FUT
 178 R Nimbus Maze @Jason Chan
 179 R River of Tears @Chris J. Anderson
 180 U Zoetic Cavern @Lars Grant-West
-
-[tokens]
-goldmeadow_harrier
-cloud_sprite
-festering_goblin
-spark_elemental
-llanowar_elves
-metallic_sliver
-w_1_1_soldier
-b_2_2_zombie
-r_4_4_giant
-g_1_1_saproling
-g_x_x_wurm

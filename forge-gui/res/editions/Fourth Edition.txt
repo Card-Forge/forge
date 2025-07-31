@@ -390,8 +390,3 @@ ScryfallCode=4ED
 376 L Forest @Christopher Rush
 377 L Forest @Christopher Rush
 378 L Forest @Christopher Rush
-
-[tokens]
-wasp
-c_1_1_a_tetravite_flying_noenchant
-c_5_5_a_djinn_flying

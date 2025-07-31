@@ -1,7 +1,7 @@
 [metadata]
 Code=PIP
 Date=2024-03-08
-Name=Fallout Commander
+Name=Fallout
 Type=Commander
 ScryfallCode=PIP
 
@@ -1087,14 +1087,15 @@ ScryfallCode=PIP
 10 rw_1_1_soldier_haste @Justine Cruz
 11 c_a_clue_draw @Ashley Mackenzie
 12 c_a_food_sac @David Astruga
-13 c_a_food_sac @David Astruga
-14 c_a_food_sac @David Astruga
+13 c_a_food_sac @Bruno Biazotto
+14 c_a_food_sac @Kamila Szutenberg
 15 c_a_junk_sac_exileplay @Justine Cruz
 16 c_3_3_a_robot @Sergio Cosmai
 17 c_1_1_a_thopter_flying @Victor Harmatiuk
 18 c_a_treasure_sac @Rafater
-19 c_a_treasure_sac @Rafater
+19 c_a_treasure_sac @Kim Sokol
 20 wasteland_survival_guide @Sergio Cosmai
 
 [other]
+1 copy @Monztre
 22 radiation @Skinnyelbows
