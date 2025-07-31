@@ -4,6 +4,8 @@ Date=2025-09-26
 Name=Marvel's Spider-Man
 Type=Expansion
 ScryfallCode=SPM
+DoublePick=Always
+RecommendedPodSize=4
 
 [cards]
 1 M Anti-Venom, Horrifying Healer @Néstor Ossandón Leal
