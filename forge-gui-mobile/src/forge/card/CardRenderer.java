@@ -647,6 +647,7 @@ public class CardRenderer {
         float radius = (h - w) / 8;
         float croppedArea = isModernFrame(card) ? CROP_MULTIPLIER : 0.97f;
         float minusxy = isModernFrame(card) ? 0.0f : 0.13f * radius;
+        boolean needsRotation = rotate && !Forge.enableUIMask.equals("Art") && CardRendererUtils.needsRotation(card, showAltState);
         if (card.getCurrentState().getSetCode().equals("LEA") || card.getCurrentState().getSetCode().equals("LEB")) {
             croppedArea = 0.975f;
             minusxy = 0.135f * radius;
@@ -661,7 +662,7 @@ public class CardRenderer {
                 else
                     g.drawCardImage(image, crack_overlay, x, y, w, h, CardRendererUtils.drawGray(card), CardRendererUtils.drawCracks(card, magnify));
             } else {
-                if (rotate && CardRendererUtils.needsRotation(card, showAltState) ) {
+                if (needsRotation) {
                     float rotation = CardRendererUtils.hasAftermath(card) ? 90 : -90;
                     if (Forge.enableUIMask.equals("Full")) {
                         if (ImageCache.getInstance().isFullBorder(image))
@@ -695,7 +696,7 @@ public class CardRenderer {
                 }
             }
             if (canshow && CardRendererUtils.drawFoil(card))
-                g.drawFoil(x, y, w, h, Forge.enableUIMask.equals("Full") ? cardR : 0f, !Forge.enableUIMask.equals("Art") && rotate);
+                g.drawFoil(x, y, w, h, Forge.enableUIMask.equals("Full") ? cardR : 0f, needsRotation);
         } else {
             //if card has invalid or no texture due to sudden changes in ImageCache, draw CardImageRenderer instead and wait for it to refresh automatically
             CardImageRenderer.drawCardImage(g, card, showAltState, x, y, w, h, pos, true, false, isChoiceList, !CardRendererUtils.showCardIdOverlay(card));
