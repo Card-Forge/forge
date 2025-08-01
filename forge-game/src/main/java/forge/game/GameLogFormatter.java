@@ -159,6 +159,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         if (newLobbyPlayer == null) {
             message = localizer.getMessage("lblLogPlayerHasRestoredControlThemself", p.getName());
         } else {
+            if (newLobbyPlayer.getName().equals(p.getName())) return null;
             message = localizer.getMessage("lblLogPlayerControlledTargetPlayer", p.getName(), newLobbyPlayer.getName());
         }
         return new GameLogEntry(GameLogEntryType.PLAYER_CONTROL, message);
