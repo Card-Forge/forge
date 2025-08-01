@@ -661,7 +661,7 @@ public class CardRenderer {
                 else
                     g.drawCardImage(image, crack_overlay, x, y, w, h, CardRendererUtils.drawGray(card), CardRendererUtils.drawCracks(card, magnify));
             } else {
-                if (rotate) {
+                if (rotate && CardRendererUtils.needsRotation(card, showAltState) ) {
                     float rotation = CardRendererUtils.hasAftermath(card) ? 90 : -90;
                     if (Forge.enableUIMask.equals("Full")) {
                         if (ImageCache.getInstance().isFullBorder(image))
