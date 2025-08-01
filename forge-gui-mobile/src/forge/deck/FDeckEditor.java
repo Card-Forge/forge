@@ -1957,7 +1957,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         @Override
         protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
-            FSkinImage iconReplaceCard = Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST;
 
             CardManagerPage cardSourcePage = getCardSourcePage();
             DeckSectionPage sideboardPage = parentScreen.getSideboardPage();
@@ -1974,7 +1973,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 if(cardSourcePage != sideboardPage && canSideboard(card))
                     addMoveCardMenuItem(menu, card, this, sideboardPage);
 
-                addReplaceVariantItem(menu, card, iconReplaceCard);
+                addReplaceVariantItems(menu, card);
                 addCommanderItems(menu, card);
                 break;
             case Sideboard:
@@ -1988,7 +1987,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         addMoveCardMenuItem(menu, card, this, cardSourcePage);
                 }
 
-                addReplaceVariantItem(menu, card, iconReplaceCard);
+                addReplaceVariantItems(menu, card);
                 addCommanderItems(menu, card);
                 break;
             case Commander:
@@ -2004,7 +2003,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         }
                     });
                 }
-                addReplaceVariantItem(menu, card, iconReplaceCard);
+                addReplaceVariantItems(menu, card);
                 break;
             case Avatar:
                 addMoveCardMenuItem(menu, card, this, cardSourcePage);
@@ -2015,7 +2014,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             case Contraptions:
                 addMoveCardMenuItem(menu, card, cardSourcePage, this);
                 addMoveCardMenuItem(menu, card, this, cardSourcePage);
-                addReplaceVariantItem(menu, card, iconReplaceCard);
+                addReplaceVariantItems(menu, card);
                 break;
             }
 
@@ -2043,17 +2042,26 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             }
         }
 
-        private void addReplaceVariantItem(FDropDownMenu menu, PaperCard card, FSkinImage iconReplaceCard) {
+        private void addReplaceVariantItems(FDropDownMenu menu, PaperCard card) {
             //Determine if we're allowed to replace cards, and if there are any cards to substitute in.
             if (!parentScreen.isAllowedReplacement())
                 return;
+            FSkinImage iconReplaceCard = Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST;
             final Localizer localizer = Forge.getLocalizer();
-            String lblReplaceCard = localizer.getMessage("lblReplaceCard");
             final ItemPool<PaperCard> cardOptions = parentScreen.getCardSourcePage().cardManager.getPool().getFilteredPool((c) -> c.getName().equals(card.getName()));
-            if (cardOptions.countDistinct() <= 1)
-                return;
+            if (cardOptions.countDistinct() > 1) {
+                String lblReplaceCard = localizer.getMessage("lblReplaceCard");
+                menu.addItem(new FMenuItem(lblReplaceCard, iconReplaceCard, e -> handleReplaceCard(e, card, cardOptions)));
+            }
 
-            menu.addItem(new FMenuItem(lblReplaceCard, iconReplaceCard, e -> handleReplaceCard(e, card, cardOptions)));
+            if (parentScreen.getEditorConfig().hasInfiniteCardPool()) {
+                //If there's a player inventory, foils can be included in the above. Otherwise, it's a separate option.
+                boolean isFoil = card.isFoil();
+                String lblFoil = (isFoil ? localizer.getMessage("lblRemove") : localizer.getMessage("lblSet"))
+                        + (" " + localizer.getMessage("lblConvertToFoil"));
+                menu.addItem(new FMenuItem(lblFoil, iconReplaceCard, e -> handleFoilCard(e, card, !isFoil)));
+            }
+
         }
 
         private void handleReplaceCard(FEvent e, PaperCard card, ItemPool<PaperCard> cardOptions) {
@@ -2067,7 +2075,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 }
             }
             final Localizer localizer = Forge.getLocalizer();
-            String lblReplaceCard = localizer.getMessage("lblReplaceCard");
+            String lblReplaceCard = localizer.getMessage("lblReplace");
             String prompt = localizer.getMessage("lblSelectReplacementCard") + " " + card.getName();
             String promptQuantity = String.format("%s - %s %s", card, lblReplaceCard, localizer.getMessage("lblHowMany"));
             //First have the player choose which card to swap in.
@@ -2087,6 +2095,22 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     }).handleEvent(e);
                 }
             });
+        }
+
+        /**
+         * Converts one or more copies of the selected card to foil. Only used when pulling cards from an infinite pool.
+         */
+        private void handleFoilCard(FEvent e, PaperCard card, boolean makeFoil) {
+            final Localizer localizer = Forge.getLocalizer();
+            String lblReplaceCard = localizer.getMessage("lblReplace");
+            String promptQuantity = String.format("%s - %s %s", card, lblReplaceCard, localizer.getMessage("lblHowMany"));
+            int maxMovable = cardManager.getItemCount(card);
+            //This loses any marked flags. Could manually re-add them but for now it's probably fine.
+            PaperCard newCard = makeFoil ? card.getFoiled() : card.getUnFoiled();
+            new MoveQuantityPrompt(promptQuantity, maxMovable, (amount) -> {
+                addCard(newCard, amount);
+                removeCard(card, amount);
+            }).handleEvent(e);
         }
 
         private boolean isPartnerCommander(final PaperCard card) {
