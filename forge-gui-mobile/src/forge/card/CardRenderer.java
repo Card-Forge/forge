@@ -679,7 +679,7 @@ public class CardRenderer {
                 } else {
                     if (Forge.enableUIMask.equals("Full") && canshow) {
                         if (ImageCache.getInstance().isFullBorder(image))
-                            g.drawCardRoundRect(image, crack_overlay, x, y, w, h, CardRendererUtils.drawGray(card), CardRendererUtils.drawCracks(card, magnify), CardRendererUtils.drawFoil(card));
+                            g.drawCardRoundRect(image, crack_overlay, x, y, w, h, CardRendererUtils.drawGray(card), CardRendererUtils.drawCracks(card, magnify), false/*should be handled below*/);
                         else {
                             //boolean t = (card.getCurrentState().getOriginalColors() != card.getCurrentState().getColors()) || card.getCurrentState().hasChangeColors();
                             g.drawBorderImage(ImageCache.getInstance().getBorderImage(image.toString(), canshow), ImageCache.getInstance().borderColor(image), ImageCache.getInstance().getTint(card, image), x, y, w, h, false); //tint check for changed colors
