@@ -20,6 +20,6 @@ PT:8/8
 K:Flying
 R:Event$ Transform | ValidCard$ Card.Self | ReplaceWith$ DBChoose | Description$ As this creature transforms into NICKNAME, choose an opponent.
 SVar:DBChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent
-T:Mode$ LosesGame | ValidPlayer$ Player.ChosenPlayer | Execute$ TrigWinGame | TriggerZones$ Battlefield | TriggerDescription$ Burning Chains — When the chosen player loses the game, you win the game.
+T:Mode$ LosesGame | ValidPlayer$ Player.Chosen | Execute$ TrigWinGame | TriggerZones$ Battlefield | TriggerDescription$ Burning Chains — When the chosen player loses the game, you win the game.
 SVar:TrigWinGame:DB$ WinsGame | Defined$ You
 Oracle:Flying\nAs this creature transforms into Shinryu, choose an opponent.\nBurning Chains — When the chosen player loses the game, you win the game.
