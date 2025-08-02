@@ -155,7 +155,7 @@ public class VoteEffect extends SpellAbilityEffect {
                 } else if (sa.hasAdditionalAbility("VoteSubAbility")) {
                     host.addRemembered(mostVotes);
                     subAbs.add(sa.getAdditionalAbility("VoteSubAbility"));
-                } else if (!sa.hasParam("VotePlayer")) {
+                } else if (sa.hasParam("Choices")) {
                     for (Object type : mostVotes) {
                         subAbs.add((SpellAbility)type);
                     }
