@@ -491,6 +491,7 @@ public class PlayerProperty {
             }
             return false;
         } else {
+            // could print error msg for unknown property here, though it'd need to check that it's not "Any" case
             return false;
         }
         return true;
