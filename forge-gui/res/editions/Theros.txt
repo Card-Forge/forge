@@ -267,6 +267,8 @@ ScryfallCode=THS
 4 u_2_2_bird_flying @Peter Mohrbacher
 5 u_1_0_elemental @Karl Kopinski
 6 b_1_1_harpy_flying @Nils Hamm
+7 r_1_1_soldier @Johann Bodin
+# Duplicated as there is no r_1_1_soldier_haste token yet
 7 r_1_1_soldier_haste @Johann Bodin
 8 g_2_2_boar @James Ryman
 9 rg_2_2_satyr_haste @Johann Bodin
