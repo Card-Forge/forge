@@ -63,7 +63,9 @@ public final class AbilityFactory {
             "CantChooseSubAbility", // Can't choose a player via ChoosePlayer
             "RegenerationAbility", // for Regeneration Effect
             "ReturnAbility", // for Delayed Trigger on Magpie
-            "GiftAbility" // for Promise Gift
+            "GiftAbility", // for Promise Gift
+            "VoteSubAbility", // for Vote with VoteCard
+            "VoteTiedAbility" // for fallback to Choices
         );
 
     public enum AbilityRecordType {
@@ -268,7 +270,7 @@ public final class AbilityFactory {
             }
         }
 
-        if (api == ApiType.Charm || api == ApiType.GenericChoice || api == ApiType.AssignGroup || api == ApiType.VillainousChoice) {
+        if (api == ApiType.Charm || api == ApiType.GenericChoice || api == ApiType.AssignGroup || api == ApiType.VillainousChoice || api == ApiType.Vote) {
             final String key = "Choices";
             if (mapParams.containsKey(key)) {
                 List<String> names = Lists.newArrayList(mapParams.get(key).split(","));

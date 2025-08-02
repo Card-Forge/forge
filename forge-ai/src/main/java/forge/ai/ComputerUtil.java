@@ -2551,7 +2551,7 @@ public class ComputerUtil {
         String logic = sa.getParam("AILogic");
         switch (logic) {
         case "Torture":
-            return "Torture";
+            return options.get(1);
         case "GraceOrCondemnation":
             List<ZoneType> graceZones = new ArrayList<ZoneType>();
             graceZones.add(ZoneType.Battlefield);
@@ -2559,12 +2559,12 @@ public class ComputerUtil {
             CardCollection graceCreatures = CardLists.getType(game.getCardsIn(graceZones), "Creature");
             int humanGrace = CardLists.filterControlledBy(graceCreatures, ai.getOpponents()).size();
             int aiGrace = CardLists.filterControlledBy(graceCreatures, ai).size();
-            return aiGrace > humanGrace ? "Grace" : "Condemnation";
+            return options.get(aiGrace > humanGrace ? 0 : 1);
         case "CarnageOrHomage":
             CardCollection cardsInPlay = CardLists.getNotType(game.getCardsIn(ZoneType.Battlefield), "Land");
             CardCollection humanlist = CardLists.filterControlledBy(cardsInPlay, ai.getOpponents());
             CardCollection computerlist = ai.getCreaturesInPlay();
-            return ComputerUtilCard.evaluatePermanentList(computerlist) + 3 < ComputerUtilCard.evaluatePermanentList(humanlist) ? "Carnage" : "Homage";
+            return options.get(ComputerUtilCard.evaluatePermanentList(computerlist) + 3 < ComputerUtilCard.evaluatePermanentList(humanlist) ? 0 : 1);
         case "Judgment":
             if (votes.isEmpty()) {
                 CardCollection list = new CardCollection();
@@ -2580,66 +2580,70 @@ public class ComputerUtil {
             if (votes.isEmpty()) {
                 List<String> restrictedToColors = Lists.newArrayList();
                 for (Object o : options) {
-                    if (o instanceof String) {
-                        restrictedToColors.add((String) o);
-                        }
+                    if (o instanceof SpellAbility) { // TODO check for Color Word Changes
+                        restrictedToColors.add(((SpellAbility) o).getOriginalDescription());
                     }
+                }
                 CardCollection lists = CardLists.filterControlledBy(game.getCardsInGame(), ai.getOpponents());
                 return StringUtils.capitalize(ComputerUtilCard.getMostProminentColor(lists, restrictedToColors));
             }
             return Iterables.getFirst(votes.keySet(), null);
         case "FeatherOrQuill":
+            SpellAbility feather = (SpellAbility)options.get(0);
+            SpellAbility quill = (SpellAbility)options.get(1);
             // try to mill opponent with Quill vote
             if (opponent && !controller.cantLoseCheck(GameLossReason.Milled)) {
-                int numQuill = votes.get("Quill").size();
+                int numQuill = votes.get(quill).size();
                 if (numQuill + 1 >= controller.getCardsIn(ZoneType.Library).size()) {
-                    return controller.isCardInPlay("Laboratory Maniac") ? "Feather" : "Quill";
+                    return controller.isCardInPlay("Laboratory Maniac") ? feather : quill;
                 }
             }
             // is it can't receive counters, choose +1/+1 ones
             if (!source.canReceiveCounters(p1p1Type)) {
-                return opponent ? "Feather" : "Quill";
+                return opponent ? feather : quill;
             }
             // if source is not on the battlefield anymore, choose +1/+1 ones
             if (!game.getCardState(source).isInPlay()) {
-                return opponent ? "Feather" : "Quill";
+                return opponent ? feather : quill;
             }
             // if no hand cards, try to mill opponent
             if (controller.getCardsIn(ZoneType.Hand).isEmpty()) {
-                return opponent ? "Quill" : "Feather";
+                return opponent ? quill : feather;
             }
 
             // AI has something to discard
             if (ai.equals(controller)) {
                 CardCollectionView aiCardsInHand = ai.getCardsIn(ZoneType.Hand);
                 if (CardLists.count(aiCardsInHand, CardPredicates.hasSVar("DiscardMe")) >= 1) {
-                    return "Quill";
+                    return quill;
                 }
             }
 
             // default card draw and discard are better than +1/+1 counter
-            return opponent ? "Feather" : "Quill";
+            return opponent ? feather : quill;
         case "StrengthOrNumbers":
+            SpellAbility strength = (SpellAbility)options.get(0);
+            SpellAbility numbers = (SpellAbility)options.get(1);
             // similar to fabricate choose +1/+1 or Token
             final SpellAbility saToken = sa.findSubAbilityByType(ApiType.Token);
-            int numStrength = votes.get("Strength").size();
-            int numNumbers = votes.get("Numbers").size();
+            int numStrength = votes.get(strength).size();
+            int numNumbers = votes.get(numbers).size();
 
             Card token = TokenAi.spawnToken(controller, saToken);
 
             // is it can't receive counters, choose +1/+1 ones
             if (!source.canReceiveCounters(p1p1Type)) {
-                return opponent ? "Strength" : "Numbers";
+                return opponent ? strength : numbers;
             }
 
             // if source is not on the battlefield anymore
             if (!game.getCardState(source).isInPlay()) {
-                return opponent ? "Strength" : "Numbers";
+                return opponent ? strength : numbers;
             }
 
             // token would not survive
             if (token == null || !token.isCreature()  || token.getNetToughness() < 1) {
-                return opponent ? "Numbers" : "Strength";
+                return opponent ? numbers : strength;
             }
 
             // TODO check for ETB to +1/+1 counters or over another trigger like lifegain
@@ -2660,35 +2664,40 @@ public class ComputerUtil {
             int scoreStrength = ComputerUtilCard.evaluateCreature(sourceStrength) + tokenScore * numNumbers;
             int scoreNumbers = ComputerUtilCard.evaluateCreature(sourceNumbers) + tokenScore * (numNumbers + 1);
 
-            return (scoreNumbers >= scoreStrength) != opponent ? "Numbers" : "Strength";
+            return (scoreNumbers >= scoreStrength) != opponent ? numbers : strength;
         case "SproutOrHarvest":
+            SpellAbility sprout = (SpellAbility)options.get(0);
+            SpellAbility harvest = (SpellAbility)options.get(1);
             // lifegain would hurt or has no effect
             if (opponent) {
                 if (lifegainNegative(controller, source)) {
-                    return "Harvest";
+                    return harvest;
                 }
             } else {
                 if (lifegainNegative(controller, source)) {
-                    return "Sprout";
+                    return sprout;
                 }
             }
 
             // is it can't receive counters, choose +1/+1 ones
             if (!source.canReceiveCounters(p1p1Type)) {
-                return opponent ? "Sprout" : "Harvest";
+                return opponent ? sprout : harvest;
             }
 
             // if source is not on the battlefield anymore
             if (!game.getCardState(source).isInPlay()) {
-                return opponent ? "Sprout" : "Harvest";
+                return opponent ? sprout : harvest;
             }
             // TODO add Lifegain to +1/+1 counters trigger
 
             // for now +1/+1 counters are better
-            return opponent ? "Harvest" : "Sprout";
+            return opponent ? harvest : sprout;
         case "DeathOrTaxes":
-            int numDeath = votes.get("Death").size();
-            int numTaxes = votes.get("Taxes").size();
+            SpellAbility death = (SpellAbility)options.get(0);
+            SpellAbility taxes = (SpellAbility)options.get(1);
+
+            int numDeath = votes.get(death).size();
+            int numTaxes = votes.get(taxes).size();
 
             if (opponent) {
                 CardCollection aiCreatures = ai.getCreaturesInPlay();
@@ -2696,29 +2705,29 @@ public class ComputerUtil {
                 // would need to sacrifice more creatures than AI has
                 // sacrifice even more
                 if (aiCreatures.size() <= numDeath) {
-                    return "Death";
+                    return death;
                 }
                 // would need to discard more cards than it has
                 if (aiCardsInHand.size() <= numTaxes) {
-                    return "Taxes";
+                    return taxes;
                 }
 
                 // has cards with SacMe or Token
                 if (CardLists.count(aiCreatures, CardPredicates.hasSVar("SacMe").or(CardPredicates.TOKEN)) >= numDeath) {
-                    return "Death";
+                    return death;
                 }
 
                 // has cards with DiscardMe
                 if (CardLists.count(aiCardsInHand, CardPredicates.hasSVar("DiscardMe")) >= numTaxes) {
-                    return "Taxes";
+                    return taxes;
                 }
 
                 // discard is probably less worse than sacrifice
-                return "Taxes";
+                return taxes;
             } else {
                 // ai is first voter or ally of controller
                 // both are not affected, but if opponents control creatures, sacrifice is worse
-                return controller.getOpponents().getCreaturesInPlay().isEmpty() ? "Taxes" : "Death";
+                return controller.getOpponents().getCreaturesInPlay().isEmpty() ? taxes : death;
             }
         default:
             return Iterables.getFirst(options, null);
