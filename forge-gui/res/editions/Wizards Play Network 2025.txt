@@ -12,3 +12,4 @@ ScryfallCode=PW25
 3 R Dragonspeaker Shaman @Yigit Koroglu
 4 R Culling Ritual @AKAGI
 5 M Zidane, Tantalus Thief @Eiji Kaneda
+6 R Palladium Myr @Alan Pollack
