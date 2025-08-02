@@ -2,9 +2,9 @@
 Code=DDQ
 Date=2016-02-26
 Name=Duel Decks: Blessed vs. Cursed
-Code2=DDQ
 Type=Duel_Deck
 ScryfallCode=DDQ
+TokensCode=DDQ
 
 [cards]
 1 M Geist of Saint Traft @Daarken
@@ -85,7 +85,7 @@ ScryfallCode=DDQ
 76 L Swamp @Jung Park
 
 [tokens]
-w_4_4_angel_flying
-w_1_1_human
-w_1_1_spirit_flying
-b_2_2_zombie
+77 w_4_4_angel_flying @Winona Nelson
+78 w_1_1_human @John Stanko
+79 w_1_1_spirit_flying @Kev Walker
+80 b_2_2_zombie @Lucas Graciano
