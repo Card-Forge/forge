@@ -83,8 +83,6 @@ public class BoosterDraft implements IBoosterDraft {
         if (!draft.generateProduct()) {
             return null;
         }
-        // Choose the amount of players
-
 
         draft.initializeBoosters();
         return draft;
@@ -164,8 +162,8 @@ public class BoosterDraft implements IBoosterDraft {
                     // If this is metaset, edtion will be null
                     if (edition != null) {
                         doublePickDuringDraft = edition.getDraftOptions().getDoublePick();
-                        // Let's set the pod size to the recommended one for this edition
                         if (podSize != edition.getDraftOptions().getRecommendedPodSize()) {
+                            // Auto choosing recommended pod size. In the future we may want to allow user to choose
                             setPodSize(edition.getDraftOptions().getRecommendedPodSize());
                         }
                     }
