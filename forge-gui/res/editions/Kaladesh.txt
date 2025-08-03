@@ -2,7 +2,6 @@
 Code=KLD
 Date=2016-09-30
 Name=Kaladesh
-Code2=KLD
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:fromSheet("KLD cards"), 3 Uncommon:fromSheet("KLD cards"), 1 RareMythic:fromSheet("KLD cards"), 1 BasicLand
@@ -325,10 +324,15 @@ Sword of Light and Shadow|MPS_KLD
 [tokens]
 1 c_6_6_a_beast @Sara Winters
 2 c_x_x_a_construct @Magali Villeneuve
-2 c_x_x_a_construct @Magali Villeneuve
+3 c_x_x_a_construct @Kieran Yanner
 4 c_1_1_a_servo @Igor Kieryluk
-4 c_1_1_a_servo @Igor Kieryluk
-4 c_1_1_a_servo @Igor Kieryluk
+5 c_1_1_a_servo @Victor Adame Minguez
+6 c_1_1_a_servo @Jung Park
 7 c_1_1_a_thopter_flying @Adam Paquette
-8 c_1_1_a_thopter_flying @Adam Paquette
-9 c_1_1_a_thopter_flying @Adam Paquette
+8 c_1_1_a_thopter_flying @Svetlin Velinov
+9 c_1_1_a_thopter_flying @Richard Wright
+
+[other]
+10 emblem_chandra_torch_of_defiance @Magali Villeneuve
+11 emblem_nissa_vital_force @Clint Cearley
+12 emblem_dovin_baan @Tyler Jacobson
