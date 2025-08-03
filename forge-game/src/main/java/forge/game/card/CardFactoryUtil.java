@@ -3807,6 +3807,31 @@ public class CardFactoryUtil {
             newSA.setAlternativeCost(AlternativeCost.Warp);
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
+        } else if (keyword.startsWith("Web-slinging")) {
+            final String[] k = keyword.split(":");
+            final String manaCost = k[1];
+            final Cost webCost = new Cost(manaCost + " Return<1/Creature.tapped>", false);
+
+            final SpellAbility newSA = card.getFirstSpellAbilityWithFallback().copyWithManaCostReplaced(host.getController(), webCost);
+
+            if (k.length > 2) {
+                newSA.getMapParams().put("ValidAfterStack", k[2]);
+            }
+
+            final StringBuilder desc = new StringBuilder();
+            desc.append("Web-Slinging ").append(ManaCostParser.parse(manaCost)).append(" (");
+            desc.append(inst.getReminderText());
+            desc.append(")");
+
+            newSA.setDescription(desc.toString());
+
+            final StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" (Web-Slinging)");
+            newSA.setStackDescription(sb.toString());
+
+            newSA.setAlternativeCost(AlternativeCost.WebSlinging);
+            newSA.setIntrinsic(intrinsic);
+            inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Crew")) {
             final String[] k = keyword.split(":");
             final String power = k[1];

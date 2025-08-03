@@ -24,6 +24,7 @@ public enum AlternativeCost {
     Spectacle,
     Surge,
     Warp,
+    WebSlinging
     ;
 
 }
