@@ -155,8 +155,3 @@ FoilAlwaysInCommonSlot=False
 141 U Well of Life @Tom Wänerstrand
 142 U Rhystic Cave @Rob Alexander
 143 R Wintermoon Mesa @Tom Wänerstrand
-
-[tokens]
-b_1_1_minion
-g_x_x_elephant_resurgence
-g_1_1_squirrel
