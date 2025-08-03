@@ -2467,7 +2467,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Reconfigure") || keyword.startsWith("Squad")
                         || keyword.startsWith("Miracle") || keyword.startsWith("More Than Meets the Eye")
                         || keyword.startsWith("Level up") || keyword.startsWith("Plot")
-                        || keyword.startsWith("Offspring")) {
+                        || keyword.startsWith("Offspring") || keyword.startsWith("Mayhem")) {
                     String[] k = keyword.split(":");
                     sbLong.append(k[0]);
                     if (k.length > 1) {
@@ -3320,10 +3320,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Miracle") || keyword.startsWith("Recover")
                         || keyword.startsWith("Escape") || keyword.startsWith("Foretell:")
                         || keyword.startsWith("Disturb") || keyword.startsWith("Overload")
-                        || keyword.startsWith("Plot")) {
+                        || keyword.startsWith("Plot") || keyword.startsWith("Mayhem")) {
                     final String[] k = keyword.split(":");
                     final Cost mCost;
-                    if ("ManaCost".equals(k[1])) {
+                    if (k.length < 2 || "ManaCost".equals(k[1])) {
                         mCost = new Cost(getManaCost(), false);
                     } else {
                         mCost = new Cost(k[1], false);
