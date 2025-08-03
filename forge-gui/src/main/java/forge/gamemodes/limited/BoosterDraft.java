@@ -161,14 +161,15 @@ public class BoosterDraft implements IBoosterDraft {
                     CardEdition edition = FModel.getMagicDb().getEditions().get(setCode);
                     // If this is metaset, edtion will be null
                     if (edition != null) {
-                        doublePickDuringDraft = edition.getDraftOptions().getDoublePick();
                         if (podSize != edition.getDraftOptions().getRecommendedPodSize()) {
                             // Auto choosing recommended pod size. In the future we may want to allow user to choose
                             setPodSize(edition.getDraftOptions().getRecommendedPodSize());
                         }
+                        doublePickDuringDraft = edition.getDraftOptions().isDoublePick(this.getPodSize());
                     }
 
                     final IUnOpenedProduct product1 = block.getBooster(setCode);
+                    // lets associate the booster here so we can reference it later
                     for (int i = 0; i < nPacks; i++) {
                         this.product.add(product1);
                     }
@@ -274,7 +275,19 @@ public class BoosterDraft implements IBoosterDraft {
     }
 
     public static BoosterDraft createDraft(final LimitedPoolType draftType, final CardBlock block, final String[] boosters) {
+        // quest draft
         final BoosterDraft draft = new BoosterDraft(draftType);
+
+        String setCode = boosters[0];
+        CardEdition edition = FModel.getMagicDb().getEditions().get(setCode);
+        // If this is metaset, edtion will be null
+        if (edition != null) {
+            if (draft.getPodSize() != edition.getDraftOptions().getRecommendedPodSize()) {
+                // Auto choosing recommended pod size. In the future we may want to allow user to choose
+                draft.setPodSize(edition.getDraftOptions().getRecommendedPodSize());
+            }
+            draft.doublePickDuringDraft = edition.getDraftOptions().isDoublePick(draft.getPodSize());
+        }
 
         for (String booster : boosters) {
             try {
@@ -332,6 +345,9 @@ public class BoosterDraft implements IBoosterDraft {
         }
     }
 
+    public int getPodSize() {
+        return this.podSize;
+    }
 
     @Override
     public boolean isPileDraft() {
@@ -370,6 +386,8 @@ public class BoosterDraft implements IBoosterDraft {
         }
 
         final SealedTemplate tpl = draft.getSealedProductTemplate();
+
+        // TODO Determine PodSize from custom draft
 
         final UnOpenedProduct toAdd = new UnOpenedProduct(tpl, dPool);
         toAdd.setLimitedPool(draft.isSingleton());
@@ -478,6 +496,7 @@ public class BoosterDraft implements IBoosterDraft {
         if (firstPlayer.unopenedPacks.isEmpty()) {
             return false;
         }
+        // todo set pick two logic  for this booster group
 
         for (LimitedPlayer pl : this.players) {
             pl.newPack();

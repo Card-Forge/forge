@@ -4,6 +4,7 @@ public class DraftOptions {
     public enum DoublePick {
         NEVER,
         FIRST_PICK, // only first pick each pack
+        WHEN_POD_SIZE_IS_4, // only when pod size is 4, so you can pick two cards each time
         ALWAYS // each time you receive a pack, you can pick two cards
     };
     public enum DeckType {
@@ -32,6 +33,9 @@ public class DraftOptions {
                 case "always":
                     doublePick = DoublePick.ALWAYS;
                     break;
+                case "whenpodsizeis4":
+                    doublePick = DoublePick.WHEN_POD_SIZE_IS_4;
+                    break;
             }
         }
 
@@ -45,6 +49,20 @@ public class DraftOptions {
     public DoublePick getDoublePick() {
         return doublePick;
     }
+
+    public DoublePick isDoublePick(int podSize) {
+        if (doublePick == DoublePick.WHEN_POD_SIZE_IS_4) {
+            if (podSize != 4) {
+                return DoublePick.NEVER;
+            }
+            // only when pod size is 4, so you can pick two cards each time
+            return DoublePick.ALWAYS;
+        }
+
+        return doublePick;
+    }
+
+
     public int getMaxMatchPlayers() {
         return maxMatchPlayers;
     }
