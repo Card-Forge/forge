@@ -4,7 +4,7 @@ Date=2025-09-26
 Name=Marvel's Spider-Man
 Type=Expansion
 ScryfallCode=SPM
-DoublePick=Always
+DoublePick=WhenPodSizeIs4
 RecommendedPodSize=4
 
 [cards]
