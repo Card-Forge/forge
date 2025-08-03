@@ -314,6 +314,3 @@ ScryfallCode=2ED
 300 L Forest @Christopher Rush
 301 L Forest @Christopher Rush
 302 L Forest @Christopher Rush
-
-[tokens]
-wasp

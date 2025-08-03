@@ -11,6 +11,3 @@ A5 R Terra Stomper @Goran Josic
 178★ M Rampaging Baloths @Eric Deschamps
 221★ R Oran-Rief, the Vastwood @Mike Bierek
 228★ R Valakut, the Molten Pinnacle @James Paick
-
-[tokens]
-g_4_4_beast
