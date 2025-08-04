@@ -83,7 +83,7 @@ public class AddTurnAi extends SpellAbilityAi {
      */
     @Override
     protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
-        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        return doTriggerNoCost(aiPlayer, sa, false);
     }
 
 }
