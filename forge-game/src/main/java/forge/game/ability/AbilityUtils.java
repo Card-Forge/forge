@@ -399,8 +399,8 @@ public class AbilityUtils {
     }
     public static int calculateAmount(final Card card, String amount, CardTraitBase ability, boolean maxto) {
         // return empty strings and constants
-        if (StringUtils.isBlank(amount)) { return 0; }
-        if (card == null) { return 0; }
+        // avoid "SVar 'Any' not found/defined" log spam
+        if (card == null || StringUtils.isBlank(amount) || Set.of("Any", "Double", "Result", "Triple").contains(amount)) { return 0; }
 
         Player player = null;
         if (ability instanceof SpellAbility) {
