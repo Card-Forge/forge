@@ -1355,9 +1355,6 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
             String n = k[1];
 
-            // The exiled card gains ‘Any player who has controlled the permanent that exiled this card may look at this card in the exile zone.’
-            // this is currently not possible because the StaticAbility currently has no information about the OriginalHost
-
             List<Trigger> triggers = Lists.newArrayList();
             StringBuilder sb = new StringBuilder();
             sb.append("Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Secondary$ True | ");
@@ -3808,6 +3805,31 @@ public class CardFactoryUtil {
 
             newSA.getRestrictions().setZone(ZoneType.Hand);
             newSA.setAlternativeCost(AlternativeCost.Warp);
+            newSA.setIntrinsic(intrinsic);
+            inst.addSpellAbility(newSA);
+        } else if (keyword.startsWith("Web-slinging")) {
+            final String[] k = keyword.split(":");
+            final String manaCost = k[1];
+            final Cost webCost = new Cost(manaCost + " Return<1/Creature.tapped>", false);
+
+            final SpellAbility newSA = card.getFirstSpellAbilityWithFallback().copyWithManaCostReplaced(host.getController(), webCost);
+
+            if (k.length > 2) {
+                newSA.getMapParams().put("ValidAfterStack", k[2]);
+            }
+
+            final StringBuilder desc = new StringBuilder();
+            desc.append("Web-Slinging ").append(ManaCostParser.parse(manaCost)).append(" (");
+            desc.append(inst.getReminderText());
+            desc.append(")");
+
+            newSA.setDescription(desc.toString());
+
+            final StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" (Web-Slinging)");
+            newSA.setStackDescription(sb.toString());
+
+            newSA.setAlternativeCost(AlternativeCost.WebSlinging);
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Crew")) {

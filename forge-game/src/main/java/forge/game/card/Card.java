@@ -410,8 +410,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         view.updateSickness(this);
         view.updateClassLevel(this);
         view.updateDraftAction(this);
-        if (paperCard != null)
+        if (paperCard != null) {
             setMarkedColors(paperCard.getMarkedColors());
+            setPaperFoil(paperCard.isFoil());
+        }
     }
 
     public int getHiddenId() {
@@ -2246,6 +2248,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public boolean hasChosenColor(String s) {
         return chosenColors != null && chosenColors.contains(s);
     }
+
+    public final boolean hasPaperFoil() {
+        return view.hasPaperFoil();
+    }
+    public final void setPaperFoil(final boolean v) {
+        view.updatePaperFoil(v);
+    }
+
     public final ColorSet getMarkedColors() {
         if (markedColor == null) {
             return ColorSet.getNullColor();
@@ -2457,7 +2467,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Reconfigure") || keyword.startsWith("Squad")
                         || keyword.startsWith("Miracle") || keyword.startsWith("More Than Meets the Eye")
                         || keyword.startsWith("Level up") || keyword.startsWith("Plot")
-                        || keyword.startsWith("Offspring")) {
+                        || keyword.startsWith("Offspring") || keyword.startsWith("Mayhem")) {
                     String[] k = keyword.split(":");
                     sbLong.append(k[0]);
                     if (k.length > 1) {
@@ -2747,7 +2757,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Transfigure") || keyword.startsWith("Aura swap")
                         || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")
                         || keyword.startsWith("Encore") || keyword.startsWith("Mutate") || keyword.startsWith("Dungeon")
-                        || keyword.startsWith("Class") || keyword.startsWith("Blitz")
+                        || keyword.startsWith("Class") || keyword.startsWith("Blitz") || keyword.startsWith("Web-slinging")
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous")
                         || keyword.equals("For Mirrodin") || keyword.equals("Job select") || keyword.startsWith("Craft")
                         || keyword.startsWith("Landwalk") || keyword.startsWith("Visit") || keyword.startsWith("Mobilize")
@@ -3310,10 +3320,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Miracle") || keyword.startsWith("Recover")
                         || keyword.startsWith("Escape") || keyword.startsWith("Foretell:")
                         || keyword.startsWith("Disturb") || keyword.startsWith("Overload")
-                        || keyword.startsWith("Plot")) {
+                        || keyword.startsWith("Plot") || keyword.startsWith("Mayhem")) {
                     final String[] k = keyword.split(":");
                     final Cost mCost;
-                    if ("ManaCost".equals(k[1])) {
+                    if (k.length < 2 || "ManaCost".equals(k[1])) {
                         mCost = new Cost(getManaCost(), false);
                     } else {
                         mCost = new Cost(k[1], false);

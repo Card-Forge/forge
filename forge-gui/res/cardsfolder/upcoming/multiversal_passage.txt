@@ -1,0 +1,8 @@
+Name:Multiversal Passage
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBChooseBasic | ReplacementResult$ Updated | Description$ As this land enters, choose a basic land type. Then you may pay 2 life. If you don't, it enters tapped.
+SVar:DBChooseBasic:DB$ ChooseType | ETB$ True | Type$ Basic Land | SubAbility$ DBTap
+SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ PayLife<2> | UnlessPayer$ You
+S:Mode$ Continuous | Affected$ Card.Self | AddType$ ChosenType | RemoveLandTypes$ True | Description$ This land is the chosen type.
+Oracle:As this land enters, choose a basic land type. Then you may pay 2 life. If you don't, it enters tapped.\nThis land is the chosen type.

@@ -15,19 +15,19 @@ public class ExploreAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         // Explore with a target (e.g. Enter the Unknown)
         if (sa.usesTargeting()) {
             Card bestCreature = ComputerUtilCard.getBestCreatureAI(aiPlayer.getCardsIn(ZoneType.Battlefield));
             if (bestCreature == null) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             sa.resetTargets();
             sa.getTargets().add(bestCreature);
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     public static boolean shouldPutInGraveyard(Card topCard, Player ai) {
@@ -64,19 +64,23 @@ public class ExploreAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         if (sa.usesTargeting()) {
             CardCollection list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield),
                     sa.getTargetRestrictions().getValidTgts(), aiPlayer, sa.getHostCard(), sa);
 
             if (!list.isEmpty()) {
                 sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(list));
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
-        return canPlayAI(aiPlayer, sa) || mandatory;
+        if (mandatory) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        return canPlay(aiPlayer, sa);
     }
 }

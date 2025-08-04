@@ -1,8 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -16,7 +14,7 @@ import java.util.List;
 public class GoadAi extends SpellAbilityAi {
 
     @Override
-    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
 
@@ -26,7 +24,7 @@ public class GoadAi extends SpellAbilityAi {
             List<Card> list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
 
             if (list.isEmpty())
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
 
             if (game.getPlayers().size() > 2) {
                 // use this part only in multiplayer
@@ -52,7 +50,7 @@ public class GoadAi extends SpellAbilityAi {
                 if (!betterList.isEmpty()) {
                     list = betterList;
                     sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(list));
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             } else {
                 // single Player, goaded creature would attack ai
@@ -73,49 +71,52 @@ public class GoadAi extends SpellAbilityAi {
                 if (!betterList.isEmpty()) {
                     list = betterList;
                     sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(list));
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
 
             // AI does not find a good creature to goad.
             // because if it would goad a creature it would attack AI.
             // AI might not have enough information to block it
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
-        return true;
+
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        if (checkApiLogic(ai, sa)) {
-            return true;
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        AiAbilityDecision decision = checkApiLogic(ai, sa);
+        if (decision.willingToPlay()) {
+            return decision;
         }
         if (!mandatory) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
+        // mandatory play, so we have to play it
         if (sa.usesTargeting()) {
             if (sa.getTargetRestrictions().canTgtPlayer()) {
                 for (Player opp : ai.getOpponents()) {
                     if (sa.canTarget(opp)) {
                         sa.getTargets().add(opp);
-                        return true;
+                        return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
                     }
                 }
                 if (sa.canTarget(ai)) {
                     sa.getTargets().add(ai);
-                    return true;
+                    return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
                 }
             } else {
                 List<Card> list = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
 
                 if (list.isEmpty())
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
 
                 sa.getTargets().add(ComputerUtilCard.getWorstCreatureAI(list));
-                return true;
+                return new AiAbilityDecision(30, AiPlayDecision.MandatoryPlay);
             }
         }
-        return false;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
-
 }
+

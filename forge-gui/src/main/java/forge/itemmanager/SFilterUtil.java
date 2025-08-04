@@ -216,7 +216,7 @@ public class SFilterUtil {
             }
             entry.append(ch);
         }
-        if (!entry.isEmpty()) {
+       if (entry.length() != 0) { // Android API isEmpty() is unavailable. https://developer.android.com/reference/java/lang/StringBuilder
             splitText.add(entry.toString());
         }
         return splitText;

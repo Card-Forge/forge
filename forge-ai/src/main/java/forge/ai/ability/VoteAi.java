@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
-
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -16,32 +17,40 @@ public class VoteAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         // TODO: add ailogic
         String logic = sa.getParam("AILogic");
         final Card host = sa.getHostCard();
         if ("Always".equals(logic)) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else if ("Judgment".equals(logic)) {
-            return !CardLists.getValidCards(host.getGame().getCardsIn(ZoneType.Battlefield),
-                    sa.getParam("VoteCard"), host.getController(), host, sa).isEmpty();
+            if (!CardLists.getValidCards(host.getGame().getCardsIn(ZoneType.Battlefield),
+                    sa.getParam("VoteCard"), host.getController(), host, sa).isEmpty()) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
+            }
         } else if ("Torture".equals(logic)) {
-            return aiPlayer.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.MAIN1);
+            if (aiPlayer.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.MAIN1)) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.WaitForMain2);
+            }
         }
-        return false;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        return canPlayAI(aiPlayer, sa);
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+        return canPlay(aiPlayer, sa);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        return true;
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override

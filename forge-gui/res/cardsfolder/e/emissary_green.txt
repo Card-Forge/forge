@@ -3,10 +3,9 @@ ManaCost:4 G
 Types:Legendary Creature Human Advisor
 PT:3/3
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigVote | TriggerDescription$ Whenever CARDNAME attacks, starting with you, each player votes for profit or security. You create a number of Treasure tokens equal to twice the number of profit votes. Put a number of +1/+1 counters on each creature you control equal to the number of security votes.
-SVar:TrigVote:DB$ Vote | Defined$ Player | StoreVoteNum$ True | VoteType$ Profit,Security | SubAbility$ DBVoteProfit
-SVar:DBVoteProfit:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SubAbility$ DBVoteSecurity
-SVar:DBVoteSecurity:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ VoteNumSecurity
-SVar:X:SVar$VoteNumProfit/Times.2
+SVar:TrigVote:DB$ Vote | Defined$ Player | Choices$ DBVoteProfit,DBVoteSecurity | StoreVoteNum$ True
+SVar:DBVoteProfit:DB$ Token | TokenAmount$ SVar$VoteNum/Times.2 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Profit
+SVar:DBVoteSecurity:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ VoteNum | SpellDescription$ Security
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Counters|Token & Type$Treasure|Artifact
 Oracle:Whenever Emissary Green attacks, starting with you, each player votes for profit or security. You create a number of Treasure tokens equal to twice the number of profit votes. Put a number of +1/+1 counters on each creature you control equal to the number of security votes.

@@ -1,9 +1,7 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Lists;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCost;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
@@ -21,7 +19,7 @@ import java.util.Map;
 public class CountersMultiplyAi extends SpellAbilityAi {
 
     @Override
-    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final CounterType counterType = getCounterType(sa);
 
         if (!sa.usesTargeting()) {
@@ -53,7 +51,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
             });
 
             if (list.isEmpty()) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
         } else {
             return setTargets(ai, sa);
@@ -85,24 +83,27 @@ public class CountersMultiplyAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (!sa.usesTargeting()) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
-        if (setTargets(ai, sa)) {
-            return true;
+
+        AiAbilityDecision decision = setTargets(ai, sa);
+        if (decision.willingToPlay()) {
+            return decision;
         } else if (mandatory) {
             CardCollection list = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
             if (list.isEmpty()) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
             Card safeMatch = list.stream()
                     .filter(CardPredicates.hasCounters().negate())
                     .findFirst().orElse(null);
             sa.getTargets().add(safeMatch == null ? list.getFirst() : safeMatch);
-            return true;
+            return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
         }
-        return mandatory;
+
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     private CounterType getCounterType(SpellAbility sa) {
@@ -117,7 +118,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
         return null;
     }
 
-    private boolean setTargets(Player ai, SpellAbility sa) {
+    private AiAbilityDecision setTargets(Player ai, SpellAbility sa) {
         final CounterType counterType = getCounterType(sa);
 
         final Game game = ai.getGame();
@@ -173,10 +174,10 @@ public class CountersMultiplyAi extends SpellAbilityAi {
         // targeting does failed
         if (!sa.isTargetNumberValid() || sa.getTargets().size() == 0) {
             sa.resetTargets();
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     private void addTargetsByCounterType(final Player ai, final SpellAbility sa, final CardCollection list,

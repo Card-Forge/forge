@@ -1191,6 +1191,8 @@ public class AbilityUtils {
             if (sa.getHostCard().wasCast()) {
                 players.add((sa.getHostCard().getCastSA().getActivatingPlayer()));
             }
+        } else if (defined.equals("Exiler")) {
+            players.add(card.getExiledBy());
         } else if (defined.equals("ActivePlayer")) {
             players.add(game.getPhaseHandler().getPlayerTurn());
         } else if (defined.equals("You")) {
