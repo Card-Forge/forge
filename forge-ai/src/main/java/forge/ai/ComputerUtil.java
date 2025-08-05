@@ -2580,8 +2580,8 @@ public class ComputerUtil {
             if (votes.isEmpty()) {
                 Map<String, SpellAbility> restrictedToColors = Maps.newHashMap();
                 for (Object o : options) {
-                    if (o instanceof SpellAbility) { // TODO check for Color Word Changes
-                        restrictedToColors.put(((SpellAbility) o).getOriginalDescription(), (SpellAbility) o));
+                    if (o instanceof SpellAbility sp) { // TODO check for Color Word Changes
+                        restrictedToColors.put(sp.getOriginalDescription(), sp);
                     }
                 }
                 CardCollection lists = CardLists.filterControlledBy(game.getCardsInGame(), ai.getOpponents());
