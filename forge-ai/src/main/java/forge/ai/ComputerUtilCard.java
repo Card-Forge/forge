@@ -919,7 +919,7 @@ public class ComputerUtilCard {
         return MagicColor.Constant.WHITE; // no difference, there was no prominent color
     }
 
-    public static String getMostProminentColor(final CardCollectionView list, final List<String> restrictedToColors) {
+    public static String getMostProminentColor(final CardCollectionView list, final Iterable<String> restrictedToColors) {
         byte colors = CardFactoryUtil.getMostProminentColorsFromList(list, restrictedToColors);
         for (byte c : MagicColor.WUBRG) {
             if ((colors & c) != 0) {
