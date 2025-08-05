@@ -926,7 +926,7 @@ public class ComputerUtilCard {
                 return MagicColor.toLongString(c);
             }
         }
-        return restrictedToColors.get(0); // no difference, there was no prominent color
+        return Iterables.get(restrictedToColors, 0); // no difference, there was no prominent color
     }
 
     public static List<String> getColorByProminence(final List<Card> list) {
