@@ -2578,14 +2578,14 @@ public class ComputerUtil {
             return Iterables.getFirst(votes.keySet(), null);
         case "Protection":
             if (votes.isEmpty()) {
-                List<String> restrictedToColors = Lists.newArrayList();
+                Map<String, SpellAbility> restrictedToColors = Maps.newHashMap();
                 for (Object o : options) {
-                    if (o instanceof SpellAbility) { // TODO check for Color Word Changes
-                        restrictedToColors.add(((SpellAbility) o).getOriginalDescription());
+                    if (o instanceof SpellAbility sp) { // TODO check for Color Word Changes
+                        restrictedToColors.put(sp.getOriginalDescription(), sp);
                     }
                 }
                 CardCollection lists = CardLists.filterControlledBy(game.getCardsInGame(), ai.getOpponents());
-                return StringUtils.capitalize(ComputerUtilCard.getMostProminentColor(lists, restrictedToColors));
+                return restrictedToColors.get(StringUtils.capitalize(ComputerUtilCard.getMostProminentColor(lists, restrictedToColors.keySet())));
             }
             return Iterables.getFirst(votes.keySet(), null);
         case "FeatherOrQuill":
