@@ -6,6 +6,7 @@ public enum GameLogEntryType {
     TURN("Turn"),
     MULLIGAN("Mulligan"),
     ANTE("Ante"),
+    DRAFT("Draft"),
     ZONE_CHANGE("Zone Change"),
     PLAYER_CONTROL("Player control"),
     COMBAT("Combat"),
