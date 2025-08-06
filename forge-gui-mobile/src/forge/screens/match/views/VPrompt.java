@@ -1,6 +1,8 @@
 package forge.screens.match.views;
 
 import forge.Forge;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.utils.Align;
@@ -88,7 +90,15 @@ public class VPrompt extends FContainer {
     @Override
     protected void doLayout(float width, float height) {
         lblMessage.setWidth(width - 2 * BTN_WIDTH);
-        btnCancel.setLeft(lblMessage.getRight());
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_REVERSE_PROMPT_BUTTON)) {
+            btnOk.setCorner(Corner.BottomRight);
+            btnCancel.setCorner(Corner.BottomLeft);
+            btnOk.setLeft(lblMessage.getRight());
+        } else {
+            btnOk.setCorner(Corner.BottomLeft);
+            btnCancel.setCorner(Corner.BottomRight);
+            btnCancel.setLeft(lblMessage.getRight());
+        }
     }
 
     @Override
