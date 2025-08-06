@@ -342,9 +342,15 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         },1);
         // Preffered Prompt button
         lstSettings.addItem(new BooleanSetting(FPref.UI_REVERSE_PROMPT_BUTTON,
-                        Forge.getLocalizer().getMessage("lblReversePromptButton"),
-                        Forge.getLocalizer().getMessage("nlReversePromptButton")),
-                1);
+                Forge.getLocalizer().getMessage("lblReversePromptButton"),
+                Forge.getLocalizer().getMessage("nlReversePromptButton")){
+            @Override
+            public void select() {
+                super.select();
+                //update
+                Forge.reversedPrompt = FModel.getPreferences().getPrefBoolean(FPref.UI_REVERSE_PROMPT_BUTTON);
+            }
+        },1);
         //Random Deck Generation
         lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_NOSMALL,
                         Forge.getLocalizer().getMessage("cbRemoveSmall"),

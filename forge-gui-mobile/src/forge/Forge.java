@@ -120,6 +120,7 @@ public class Forge implements ApplicationListener {
     public static String CJK_Font = "";
     public static int hoveredCount = 0;
     public static boolean afterDBloaded = false;
+    public static boolean reversedPrompt = false;
     public static int mouseButtonID = 0;
     public static InputProcessor inputProcessor;
     private static Cursor cursor0, cursor1, cursor2, cursorA0, cursorA1, cursorA2;
@@ -208,6 +209,7 @@ public class Forge implements ApplicationListener {
 
         textureFiltering = getForgePreferences().getPrefBoolean(FPref.UI_LIBGDX_TEXTURE_FILTERING);
         showFPS = getForgePreferences().getPrefBoolean(FPref.UI_SHOW_FPS);
+        reversedPrompt = getForgePreferences().getPrefBoolean(FPref.UI_REVERSE_PROMPT_BUTTON);
         autoAIDeckSelection = getForgePreferences().getPrefBoolean(FPref.UI_AUTO_AIDECK_SELECTION);
         altPlayerLayout = getForgePreferences().getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
         altZoneTabs = getForgePreferences().getPrefBoolean(FPref.UI_ALT_PLAYERZONETABS);
