@@ -1,3 +1,5 @@
+> <span style="color: red;">Note:</span> if want to contribute to this Wiki please only make pull requests against the main repos docs folder or your changes might get lost
+
 # What is Forge?
 
 Forge is a "Rules Engine" for the game Magic: the Gathering.  
@@ -49,3 +51,5 @@ for the release developer to give a shout out for those that helped
 specifically for that version. Feel free to give kudos there.
 
 If you are curious about the written/oral history of Forge, we're working on recreating some of that [Forge Historical reference](Forge-historical-reference)
+
+> <span style="color: red;">Note:</span> if you're reading this locally here's the [Table of Contents](_sidebar.md)
