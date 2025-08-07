@@ -42,7 +42,7 @@
   - [Guide: Creating a Custom Card](Card-scripting-API/Creating-a-Custom-Card.md)
 
 - [Development]((SM-autoconverted)-how-to-get-started-developing-forge.md)
-  - [IntelliJ Setup](Development/IntelliJ-setup.md)
+  - [IntelliJ Setup](Development/IntelliJ-setup/IntelliJ-setup.md)
   - [Snapshots and Releases](Snapshots-and-Releases.md)
   - [Android Builds](Development/android-builds.md)
   - [Ownership](Development/ownership.md)
