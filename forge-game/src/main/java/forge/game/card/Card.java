@@ -1056,7 +1056,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final boolean isTransformable() {
-        return getRules() != null && getRules().getSplitType() == CardSplitType.Transform;
+        return getRules() != null && getRules().isTransformable();
     }
 
     public final boolean isMeldable() {
