@@ -2,7 +2,6 @@
 Code=SOI
 Date=2016-04-08
 Name=Shadows over Innistrad
-Code2=SOI
 Type=Expansion
 BoosterCovers=5
 Booster=9 Common:!dfc, 3 Uncommon:!dfc, 1 RareMythic:!dfc, 1 dfc:!Rare:!Mythic, 1 BasicLand
@@ -323,8 +322,12 @@ ScryfallCode=SOI
 9 g_2_2_wolf @Aaron Miller
 10 wb_1_1_human_cleric @Min Yum
 11 c_a_clue_draw @John Avon
-12 c_a_clue_draw @John Avon
-13 c_a_clue_draw @John Avon
-14 c_a_clue_draw @John Avon
-15 c_a_clue_draw @John Avon
-16 c_a_clue_draw @John Avon
+12 c_a_clue_draw @Noah Bradley
+13 c_a_clue_draw @Zezhou Chen
+14 c_a_clue_draw @Cliff Childs
+15 c_a_clue_draw @James Paick
+16 c_a_clue_draw @Franz Vohwinkel
+
+[other]
+17 emblem_jace_unraveler_of_secrets @Tyler Jacobson
+18 emblem_arlinn_embraced_by_the_moon @Winona Nelson
