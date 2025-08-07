@@ -554,8 +554,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
     public boolean setState(final CardStateName state, boolean updateView, boolean forceUpdate) {
         boolean rollback = state == CardStateName.Original
-                && (currentStateName == CardStateName.Flipped || currentStateName == CardStateName.Transformed);
-        boolean transform = state == CardStateName.Flipped || state == CardStateName.Transformed || state == CardStateName.Meld;
+                && (currentStateName == CardStateName.Flipped || currentStateName == CardStateName.Backside);
+        boolean transform = state == CardStateName.Flipped || state == CardStateName.Backside || state == CardStateName.Meld;
         boolean needsTransformAnimation = transform || rollback;
         // faceDown has higher priority over clone states
         // while text change states doesn't apply while the card is faceDown
@@ -675,7 +675,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 c.backside = !c.backside;
                 // 613.7g A transforming double-faced permanent receives a new timestamp each time it transforms.
                 c.setLayerTimestamp(ts);
-                boolean result = c.changeToState(c.backside ? CardStateName.Transformed : CardStateName.Original);
+                boolean result = c.changeToState(c.backside ? CardStateName.Backside : CardStateName.Original);
                 retResult = retResult || result;
             }
             if (hasMergedCard()) {
@@ -939,7 +939,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return true;
         }
 
-        CardStateName destState = transformCard.backside ? CardStateName.Original : CardStateName.Transformed;
+        CardStateName destState = transformCard.backside ? CardStateName.Original : CardStateName.Backside;
 
         // use Original State for the transform check
         if (!transformCard.getOriginalState(destState).getType().isPermanent()) {
@@ -1056,7 +1056,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final boolean isTransformable() {
-        return getRules() != null && getRules().getSplitType() == CardSplitType.Transform;
+        return getRules() != null && getRules().isTransformable();
     }
 
     public final boolean isMeldable() {
@@ -2930,7 +2930,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             sb.append("(Gain the next level as a sorcery to add its ability.)").append(linebreak);
         }
 
-        if (state.getStateName().equals(CardStateName.Transformed) &&
+        if (state.getStateName().equals(CardStateName.Backside) && state.getCard().isTransformable() &&
                 state.getView().getOracleText().startsWith("(Transforms")) {
             sb.append("(").append(Localizer.getInstance().getMessage("lblTransformsFrom",
                     CardTranslation.getTranslatedName(state.getCard().getState(CardStateName.Original).getName())));
@@ -5753,7 +5753,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return isInstant() || isSorcery() || (isAura() && !isInZone(ZoneType.Battlefield));
     }
 
-    public final boolean hasPlayableLandFace() { return isLand() || (isModal() && getState(CardStateName.Modal).getType().isLand()); }
+    public final boolean hasPlayableLandFace() { return isLand() || (isModal() && getState(CardStateName.Backside).getType().isLand()); }
 
     public final boolean isLand()       { return getType().isLand(); }
     public final boolean isBasicLand()  { return getType().isBasicLand(); }
@@ -7550,7 +7550,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     System.out.println(TextUtil.concatWithSpace("Illegal Split Card CMC mode", mode.toString(),"passed to getCMC!"));
                     break;
             }
-        } else if (currentStateName == CardStateName.Transformed) {
+        } else if (currentStateName == CardStateName.Backside && !isModal()) {
             // Except in the cases were we clone the back-side of a DFC.
             if (getCopiedPermanent() != null) {
                 return 0;
@@ -7699,8 +7699,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             }
         }
         // Add Modal Spells
-        if (isModal() && hasState(CardStateName.Modal)) {
-            for (SpellAbility sa : getState(CardStateName.Modal).getSpellAbilities()) {
+        if (isModal() && hasState(CardStateName.Backside)) {
+            for (SpellAbility sa : getState(CardStateName.Backside).getSpellAbilities()) {
                 //add alternative costs as additional spell abilities
                 // only add Spells there
                 if (sa.isSpell() || sa.isLandAbility()) {
