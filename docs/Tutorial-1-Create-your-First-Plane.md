@@ -1,0 +1,6 @@
+## Tutorial: 1 Create your First Plane
+
+Creating a new plane allows you to fully customize your Adventure mode experience, and can even be shared with the community. The most basic step in doing so, is to add a new directory in `...\YourIntelliJProjectFolder\forge-gui\res\adventure\`, copy the 'config.json' file from `...\YourIntelliJProjectFolder\forge-gui\res\adventure\common`, paste it into your new directory. Then copy the contents of `...\YourIntelliJProjectFolder\forge-gui\res\adventure\Shandalar\world` into your new directory. Congratulations, that is the bare minimum to create a new plane. If you tell IntelliJ to run the Forge project using the Adventure mode settings, you can load up Adventure mode, find your plane in the drop-down list, and load into it. 
+
+Of course, now many of you will come back here and say "nothing looks different". Don't worry, nothing is broken. As you haven't actually changed any files from their default settings, everything will load up in the exact same way as the default game. This is intentional, so that you can make as many, or as few, changes from the default Shandalar plane as you like, without breaking anything. Look to the other tutorials for guides on how to change each piece of a plane to match your desire.
+
