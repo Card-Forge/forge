@@ -175,7 +175,7 @@ public final class CardRules implements ICardCharacteristics {
         }
         for (ICardFace face : getAllFaces()) {
             for (String spell : face.getAbilities()) {
-                if (spell.contains("AB$ Transform")) {
+                if (spell.contains("AB$ SetState") && spell.contains("Mode$ Transform")) {
                     return true;
                 }
             }
