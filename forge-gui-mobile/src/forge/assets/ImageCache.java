@@ -407,7 +407,7 @@ public class ImageCache {
     public void preloadCache(Deck deck) {
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_CARD_IMAGES))
             return;
-        if (deck == null || !Forge.enablePreloadExtendedArt)
+        if (deck == null)
             return;
         if (deck.getAllCardsInASinglePool().toFlatList().size() <= 100) {
             for (PaperCard p : deck.getAllCardsInASinglePool().toFlatList()) {
