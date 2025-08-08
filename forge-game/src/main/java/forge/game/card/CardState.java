@@ -416,10 +416,14 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
 
         // SpellPermanent only for Original State
         switch(getStateName()) {
+        case Backside:
+            if (!getCard().isModal()) {
+                return;
+            }
+            break;
         case Original:
         case LeftSplit:
         case RightSplit:
-        case Modal:
         case SpecializeB:
         case SpecializeG:
         case SpecializeR:
