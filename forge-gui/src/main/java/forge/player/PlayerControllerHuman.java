@@ -1464,9 +1464,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public Object vote(final SpellAbility sa, final String prompt, final List<Object> options,
                        final ListMultimap<Object, Player> votes, Player forPlayer, boolean optional) {
         if (options.get(0) instanceof SpellAbility) {
-            return chooseSpellAbilitiesForEffect((List<SpellAbility>)(Object) options, sa, prompt, 1, null).get(0);
+            return chooseSpellAbilitiesForEffect(Lists.newArrayList(IterableUtil.filter(options, SpellAbility.class)), sa, prompt, 1, null).get(0);
         }
-        return chooseSingleEntityForEffect(new FCollection<>((List<GameEntity>)(Object) options), sa, prompt, optional,null);
+        return chooseSingleEntityForEffect(new FCollection<>(IterableUtil.filter(options, GameEntity.class)), sa, prompt, optional,null);
     }
 
     /*
