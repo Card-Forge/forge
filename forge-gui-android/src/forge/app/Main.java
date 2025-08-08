@@ -140,18 +140,18 @@ public class Main extends AndroidApplication {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-            PackageInfo pInfo = getContext().getPackageManager().getPackageInfo(getContext().getPackageName(), 0);
+            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
             versionString = pInfo.versionName;
-        } catch (Exception e) {
+        } catch (PackageManager.NameNotFoundException e) {
             versionString = "0.0";
         }
-        setContentView(getResources().getIdentifier("main", "layout", getPackageName()));
+        setContentView(R.layout.main);
         mShortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
         sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-        progressBar = findViewById(getResources().getIdentifier("pBar", "id", getPackageName()));
+        progressBar = findViewById(R.id.pBar);
         progressBar.setIndeterminate(true);
         progressBar.setVisibility(View.GONE);
-        progressText = findViewById(getResources().getIdentifier("pText", "id", getPackageName()));
+        progressText = findViewById(R.id.pText);
         progressText.setVisibility(View.GONE);
 
         isMIUI = isMiUi();
@@ -167,8 +167,8 @@ public class Main extends AndroidApplication {
         int totalMemory = Math.round(memInfo.totalMem / 1024f / 1024f);
 
         boolean permissiongranted = checkPermission();
-        Gadapter = new AndroidAdapter(getContext());
-        initForge(Gadapter, permissiongranted, totalMemory, isTabletDevice(getContext()));
+        Gadapter = new AndroidAdapter(Main.this);
+        initForge(Gadapter, permissiongranted, totalMemory, isTabletDevice(Main.this));
     }
 
     private void crossfade(View contentView, View previousView) {
@@ -206,11 +206,11 @@ public class Main extends AndroidApplication {
     }
 
     private void displayMessage(View previousView, AndroidAdapter adapter, boolean ex, String msg, boolean manageApp) {
-        TableLayout TL = new TableLayout(this);
+        TableLayout TL = new TableLayout(Main.this);
         TL.setBackgroundResource(android.R.color.black);
-        TableRow row = new TableRow(this);
-        TableRow row2 = new TableRow(this);
-        TextView text = new TextView(this);
+        TableRow row = new TableRow(Main.this);
+        TableRow row2 = new TableRow(Main.this);
+        TextView text = new TextView(Main.this);
         text.setGravity(Gravity.LEFT);
         text.setTypeface(Typeface.SERIF);
         String SP = "Storage Permission";
@@ -252,7 +252,7 @@ public class Main extends AndroidApplication {
         gd2.setStroke(3, Color.DKGRAY);
         gd2.setCornerRadius(100);
 
-        Button button = new Button(this);
+        Button button = new Button(Main.this);
         button.setText("App Settings");
         button.setTypeface(Typeface.DEFAULT_BOLD);
 
@@ -291,8 +291,8 @@ public class Main extends AndroidApplication {
     private void loadGame(final String title, final String steps, boolean isLandscape, AndroidAdapter adapter, boolean permissiongranted, int totalRAM, boolean isTabletDevice, AndroidApplicationConfiguration config, boolean exception, String msg) {
         try {
             final Handler handler = new Handler();
-            forgeLogo = findViewById(getResources().getIdentifier("logo_id", "id", getPackageName()));
-            activeView = findViewById(getResources().getIdentifier("mainview", "id", getPackageName()));
+            forgeLogo = findViewById(R.id.logo_id);
+            activeView = findViewById(R.id.mainview);
             activeView.setBackgroundColor(Color.WHITE);
             forgeView = initializeForView(Forge.getApp(getAndroidClipboard(), adapter, ASSETS_DIR, false, !isLandscape, totalRAM, isTabletDevice, Build.VERSION.SDK_INT, Build.VERSION.RELEASE, getDeviceName()), config);
 
@@ -317,12 +317,12 @@ public class Main extends AndroidApplication {
                                 crossfade(forgeView, forgeLogo);
                                 return;
                             }
-                            TableLayout TL = new TableLayout(getContext());
+                            TableLayout TL = new TableLayout(Main.this);
                             TL.setBackgroundResource(android.R.color.black);
-                            TableRow messageRow = new TableRow(getContext());
-                            TableRow checkboxRow = new TableRow(getContext());
-                            TableRow buttonRow = new TableRow(getContext());
-                            TextView text = new TextView(getContext());
+                            TableRow messageRow = new TableRow(Main.this);
+                            TableRow checkboxRow = new TableRow(Main.this);
+                            TableRow buttonRow = new TableRow(Main.this);
+                            TextView text = new TextView(Main.this);
                             text.setGravity(Gravity.LEFT);
                             text.setTypeface(Typeface.SERIF);
 
@@ -333,7 +333,7 @@ public class Main extends AndroidApplication {
                             messageRow.addView(text);
                             messageRow.setGravity(Gravity.CENTER);
 
-                            CheckBox checkBox = new CheckBox(getContext());
+                            CheckBox checkBox = new CheckBox(Main.this);
                             checkBox.setTypeface(Typeface.SERIF);
                             checkBox.setGravity(Gravity.TOP);
                             checkBox.setChecked(false);
@@ -359,7 +359,7 @@ public class Main extends AndroidApplication {
                             gd2.setStroke(3, Color.DKGRAY);
                             gd2.setCornerRadius(100);
 
-                            Button button = new Button(getContext());
+                            Button button = new Button(Main.this);
                             button.setText("Run Forge..");
                             button.setTypeface(Typeface.DEFAULT_BOLD);
 
@@ -435,7 +435,7 @@ public class Main extends AndroidApplication {
         config.useGyroscope = false;
         config.useRotationVectorSensor = false;
         config.useImmersiveMode = false;
-        config.nativeLoader = () -> ReLinker.loadLibrary(getContext(), "gdx");
+        config.nativeLoader = () -> ReLinker.loadLibrary(Main.this, "gdx");
 
         if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             String message = getDeviceName() + "\n" + "Android " + Build.VERSION.RELEASE + "\n" + "RAM " + totalRAM + "MB" + "\n" + "LibGDX " + Version.VERSION + "\n" + "Can't access external storage";
@@ -443,7 +443,7 @@ public class Main extends AndroidApplication {
             loadGame("", "", false, adapter, permissiongranted, totalRAM, isTabletDevice, config, true, message);
             return;
         }
-        ASSETS_DIR = Build.VERSION.SDK_INT > Build.VERSION_CODES.Q ? getContext().getObbDir() + "/Forge/" : Environment.getExternalStorageDirectory() + "/Forge/";
+        ASSETS_DIR = Build.VERSION.SDK_INT > Build.VERSION_CODES.Q ? this.getObbDir() + "/Forge/" : Environment.getExternalStorageDirectory() + "/Forge/";
         if (!FileUtil.ensureDirectoryExists(ASSETS_DIR)) {
             String message = getDeviceName() + "\n" + "Android " + Build.VERSION.RELEASE + "\n" + "RAM " + totalRAM + "MB" + "\n" + "LibGDX " + Version.VERSION + "\n" + "Can't access external storage\nPath: " + ASSETS_DIR;
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
@@ -516,7 +516,7 @@ public class Main extends AndroidApplication {
                 return false;
             if (clipData.getItemCount() > 0) {
                 try {
-                    return clipData.getItemAt(0).coerceToText(getContext()).length() > 0;
+                    return clipData.getItemAt(0).coerceToText(Main.this).length() > 0;
                 } catch (Exception ex) {
                     return false;
                 }
@@ -531,7 +531,7 @@ public class Main extends AndroidApplication {
                 return "";
             if (clipData.getItemCount() > 0) {
                 try {
-                    String text = clipData.getItemAt(0).coerceToText(getContext()).toString();
+                    String text = clipData.getItemAt(0).coerceToText(Main.this).toString();
                     return Normalizer.normalize(text, Normalizer.Form.NFD);
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -671,7 +671,7 @@ public class Main extends AndroidApplication {
                     return true;
                 } else {
                     Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
-                    intent.setData(PublicFileProvider.getUriForFile(getContext(), "com.mydomain.publicfileprovider", new File(filename)));
+                    intent.setData(PublicFileProvider.getUriForFile(Main.this, "com.mydomain.publicfileprovider", new File(filename)));
                     intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     startActivity(intent);
                     return true;
