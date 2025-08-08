@@ -82,6 +82,8 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             source.addRemembered(c);
         }
 
+        final boolean wasCreature = c.isCreature();
+
         // Alchemy "incorporate" cost
         ColorSet incColors = null;
         if (sa.hasParam("Incorporate")) {
@@ -141,6 +143,8 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
                 c.addPerpetual(params);
             }
             c.addNewPT(power, toughness, timestamp, 0);
+        } else if (!wasCreature && c.isCreature()) {
+            c.updatePTforView();
         }
 
         if (sa.hasParam("CantHaveKeyword")) {
@@ -210,6 +214,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
                 c.removeChangedSVars(timestamp, 0);
                 c.removeChangedName(timestamp, 0);
                 c.updateStateForView();
+                c.updatePTforView();
 
                 game.fireEvent(new GameEventCardStatsChanged(c));
             }

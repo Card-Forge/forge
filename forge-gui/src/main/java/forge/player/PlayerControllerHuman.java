@@ -1463,10 +1463,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public Object vote(final SpellAbility sa, final String prompt, final List<Object> options,
                        final ListMultimap<Object, Player> votes, Player forPlayer, boolean optional) {
-        if (optional) {
-            return getGui().oneOrNone(prompt, options);
+        if (sa.hasParam("Choices")) {
+            return chooseSpellAbilitiesForEffect(Lists.newArrayList(IterableUtil.filter(options, SpellAbility.class)), sa, prompt, 1, null).get(0);
         }
-        return getGui().one(prompt, options);
+        return chooseSingleEntityForEffect(new FCollection<>(IterableUtil.filter(options, GameEntity.class)), sa, prompt, optional, null);
     }
 
     /*

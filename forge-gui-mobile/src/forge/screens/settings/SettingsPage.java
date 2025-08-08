@@ -616,16 +616,6 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 ImageCache.getInstance().disposeTextures();
             }
         }, 4);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART,
-                Forge.getLocalizer().getMessage("lblPreloadExtendedArtCards"),
-                Forge.getLocalizer().getMessage("nlPreloadExtendedArtCards")){
-            @Override
-            public void select() {
-                super.select();
-                //update
-                Forge.enablePreloadExtendedArt = FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
-            }
-        },4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_MATCH_SCROLL_INDICATOR,
                         Forge.getLocalizer().getMessage("lblMatchScrollIndicator"),
                         Forge.getLocalizer().getMessage("nlMatchScrollIndicator")),
