@@ -47,6 +47,9 @@ jobs:
           curl -L -o android-maven-plugin-4.6.2.pom https://github.com/Card-Forge/android-maven-plugin/releases/download/4.6.2/android-maven-plugin-4.6.2.pom
           #mvn install:install-file -Dfile=android-maven-plugin-4.6.2.jar -DgroupId=com.simpligility.maven.plugins -DartifactId=android-maven-plugin -Dversion=4.6.2 -Dpackaging=jar
           cd -
+
+      - name: Build Forge Components
+        run: |
           mvn install -Dmaven.test.skip=true
           mvn dependency:tree
 
@@ -57,4 +60,4 @@ jobs:
         run: |
           export DISPLAY=":1"
           Xvfb :1 -screen 0 800x600x8 &
-          mvn -U -B -P android-test-build verify -e -T 1C -Dandroid.sdk.path=$ANDROID_SDK_ROOT -Dandroid.buildToolsVersion=35.0.0 -Dmaven.test.skip=true
+          mvn -U -B verify -e -T 1C -Pandroid -Dandroid.sdk.path=$ANDROID_SDK_ROOT -Dandroid.buildToolsVersion=35.0.0 -Dmaven.test.skip=true

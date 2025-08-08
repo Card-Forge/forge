@@ -72,7 +72,6 @@
         <module>forge-gui-ios</module>
         <module>forge-lda</module>
         <module>adventure-editor</module>
-        <module>forge-gui-android</module>
         <module>forge-installer</module>
     </modules>
 
@@ -379,4 +378,13 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <profiles>
+        <profile>
+            <id>android</id>
+            <modules>
+                <module>forge-gui-android</module>
+            </modules>
+        </profile>
+    </profiles>
 </project>
