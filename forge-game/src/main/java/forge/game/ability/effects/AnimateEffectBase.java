@@ -143,7 +143,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
                 c.addPerpetual(params);
             }
             c.addNewPT(power, toughness, timestamp, 0);
-        } elseif (!wasCreature && c.isCreature()) {
+        } else if (!wasCreature && c.isCreature()) {
             c.updatePTforView();
         }
 
