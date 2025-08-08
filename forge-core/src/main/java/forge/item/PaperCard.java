@@ -523,6 +523,29 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         return StaticData.instance().isRebalanced(name);
     }
 
+    public String getCollectorNumberSuffix(CardStateName state) {
+        if (this.collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
+            return "";
+        }
+        if (getRules().getSplitType() == CardSplitType.Meld) {
+            return state == CardStateName.Meld ? "b" : "a";
+        }
+        switch(state) {
+        case SpecializeB:
+            return "b";
+        case SpecializeG:
+            return "g";
+        case SpecializeR:
+            return "r";
+        case SpecializeU:
+            return "u";
+        case SpecializeW:
+            return "w";
+        default:
+            return "";
+        }
+    }
+
     /**
      * Contains properties of a card which distinguish it from an otherwise identical copy of the card with the same
      * name, edition, and collector number. Examples include permanent markings on the card, and flags for Adventure
