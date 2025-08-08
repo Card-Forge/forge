@@ -26,8 +26,13 @@
 	"DarkGras"
 ],
 "enemies": [
+	"Gavony Farmhand",
+	"Scarecrow"
 ],
 "pointsOfInterest": [
+	"inn_abbey",
+	"inn_gavony_chapelry",
+	"inn_gavony_parish"
 
 ],
 "structures": [
