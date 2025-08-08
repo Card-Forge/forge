@@ -1463,6 +1463,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public Object vote(final SpellAbility sa, final String prompt, final List<Object> options,
                        final ListMultimap<Object, Player> votes, Player forPlayer, boolean optional) {
+        if (sa.hasParam("Choices")) {
+            spellViewCache = SpellAbilityView.getMap(IterableUtil.filter(options, SpellAbility.class));
+            List<SpellAbilityView> guiOptions = Lists.newArrayList(spellViewCache.keySet());
+            final SpellAbilityView resultView = optional ? getGui().oneOrNone(prompt, guiOptions) : getGui().one(prompt, guiOptions);
+            return resultView == null ? null : spellViewCache.get(resultView);
+        }
         if (optional) {
             return getGui().oneOrNone(prompt, options);
         }
