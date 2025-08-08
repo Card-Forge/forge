@@ -217,7 +217,6 @@ public class Forge implements ApplicationListener {
             enableUIMask = "Full";
         else if (getForgePreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("false"))
             enableUIMask = "Off";
-        enablePreloadExtendedArt = getForgePreferences().getPrefBoolean(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
         locale = getForgePreferences().getPref(FPref.UI_LANGUAGE);
         autoCache = getForgePreferences().getPrefBoolean(FPref.UI_AUTO_CACHE_SIZE);
         disposeTextures = getForgePreferences().getPrefBoolean(FPref.UI_ENABLE_DISPOSE_TEXTURES);
