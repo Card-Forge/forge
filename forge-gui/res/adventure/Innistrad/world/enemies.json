@@ -1057,7 +1057,7 @@
 	},
 	{
 		"name": "Scarecrow",
-		"sprite": "sprites/enemy/humanoid/construct/scarecrow.atlas",
+		"sprite": "sprites/enemy/construct/scarecrow.atlas",
 		"deck": [
 			"decks/standard/INN/inn_scarecrow_easy.dck"
 		],
