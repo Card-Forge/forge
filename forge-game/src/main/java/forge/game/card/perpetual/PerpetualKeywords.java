@@ -12,6 +12,6 @@ public record PerpetualKeywords(long timestamp, List<String> addKeywords, List<S
 
     @Override
     public void applyCard(Card c) {
-        c.addChangedCardKeywords(addKeywords, removeKeywords, removeAll, this.getTimestamp(), null);
+        c.addChangedCardKeywords(addKeywords, removeKeywords, removeAll, timestamp, null);
     }
 }

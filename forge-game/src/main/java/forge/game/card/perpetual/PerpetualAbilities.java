@@ -12,7 +12,7 @@ public record PerpetualAbilities(long timestamp, CardTraitChanges changes) imple
 
     @Override
     public void applyCard(Card c) {
-        c.addChangedCardTraits(changes.copy(c, false), getTimestamp(), (long) 0);
+        c.addChangedCardTraits(changes.copy(c, false), timestamp, (long) 0);
     }
 
 }
