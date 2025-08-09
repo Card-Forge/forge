@@ -1724,7 +1724,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (counterType.is(CounterEnumType.DREAM)) {
             return StaticAbilityMaxCounter.maxCounter(this, counterType);
         }
-        return null;
+        return 999_999;
     }
 
     @Override
