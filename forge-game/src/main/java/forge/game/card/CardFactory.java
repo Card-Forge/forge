@@ -102,7 +102,7 @@ public class CardFactory {
         copy.setStates(getCloneStates(original, copy, sourceSA));
         // force update the now set State
         if (original.isTransformable()) {
-            copy.setState(original.isTransformed() ? CardStateName.Transformed : CardStateName.Original, true, true);
+            copy.setState(original.isTransformed() ? CardStateName.Backside : CardStateName.Original, true, true);
         } else {
             copy.setState(copy.getCurrentStateName(), true, true);
         }
@@ -549,9 +549,9 @@ public class CardFactory {
             ret1.copyFrom(in.getState(CardStateName.Original), false, sa);
             result.put(CardStateName.Original, ret1);
 
-            final CardState ret2 = new CardState(out, CardStateName.Transformed);
-            ret2.copyFrom(in.getState(CardStateName.Transformed), false, sa);
-            result.put(CardStateName.Transformed, ret2);
+            final CardState ret2 = new CardState(out, CardStateName.Backside);
+            ret2.copyFrom(in.getState(CardStateName.Backside), false, sa);
+            result.put(CardStateName.Backside, ret2);
         } else if (in.isSplitCard()) {
             // for split cards, copy all three states
             final CardState ret1 = new CardState(out, CardStateName.Original);

@@ -462,9 +462,8 @@ public class BoosterGenerator {
                 } else {
                     paperCards.addAll(ps.random(numCardsToGenerate, true));
                 }
-
-                result.addAll(paperCards);
             }
+            result.addAll(paperCards);
         }
 
         return result;

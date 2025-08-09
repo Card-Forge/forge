@@ -153,8 +153,8 @@ public class PlayAi extends SpellAbilityAi {
             final boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         final CardStateName state;
         if (sa.hasParam("CastTransformed")) {
-            state = CardStateName.Transformed;
-            options.forEach(c -> c.changeToState(CardStateName.Transformed));
+            state = CardStateName.Backside;
+            options.forEach(c -> c.changeToState(CardStateName.Backside));
         } else {
             state = CardStateName.Original; 
         }

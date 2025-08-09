@@ -481,7 +481,7 @@ public class AiController {
 
             if (lands.size() >= Math.max(maxCmcInHand, 6)) {
                 // don't play MDFC land if other side is spell and enough lands are available
-                if (!c.isLand() || (c.isModal() && !c.getState(CardStateName.Modal).getType().isLand())) {
+                if (!c.isLand() || (c.isModal() && !c.getState(CardStateName.Backside).getType().isLand())) {
                     return false;
                 }
 
@@ -1748,7 +1748,12 @@ public class AiController {
             // instead of computing all available concurrently just add a simple timeout depending on the user prefs
             return future.get(game.getAITimeout(), TimeUnit.SECONDS);
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
-            t.stop();
+            try {
+                t.stop();
+            } catch (UnsupportedOperationException ex) {
+                // Android and Java 20 dropped support to stop so sadly thread will keep running
+                future.cancel(true);
+            }
             return null;
         }
     }

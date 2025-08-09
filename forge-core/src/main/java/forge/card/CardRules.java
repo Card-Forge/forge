@@ -166,6 +166,24 @@ public final class CardRules implements ICardCharacteristics {
         return Iterables.concat(Arrays.asList(mainPart, otherPart), specializedParts.values());
     }
 
+    public boolean isTransformable() {
+        if (CardSplitType.Transform == getSplitType()) {
+            return true;
+        }
+        if (CardSplitType.Modal != getSplitType()) {
+            return false;
+        }
+        for (ICardFace face : getAllFaces()) {
+            for (String spell : face.getAbilities()) {
+                if (spell.contains("AB$ SetState") && spell.contains("Mode$ Transform")) {
+                    return true;
+                }
+            }
+            // TODO check keywords if needed
+        }
+        return false;
+    }
+
     public ICardFace getWSpecialize() {
         return specializedParts.get(CardStateName.SpecializeW);
     }

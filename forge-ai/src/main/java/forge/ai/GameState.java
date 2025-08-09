@@ -321,9 +321,7 @@ public abstract class GameState {
                     newText.append(":Cloaked");
                 }
             }
-            if (c.getCurrentStateName().equals(CardStateName.Transformed)) {
-                newText.append("|Transformed");
-            } else if (c.getCurrentStateName().equals(CardStateName.Flipped)) {
+            if (c.getCurrentStateName().equals(CardStateName.Flipped)) {
                 newText.append("|Flipped");
             } else if (c.getCurrentStateName().equals(CardStateName.Meld)) {
                 newText.append("|Meld");
@@ -332,8 +330,12 @@ public abstract class GameState {
                     newText.append(":");
                     newText.append(c.getMeldedWith().getName()).append(suffix);
                 }
-            } else if (c.getCurrentStateName().equals(CardStateName.Modal)) {
-                newText.append("|Modal");
+            } else if (c.getCurrentStateName().equals(CardStateName.Backside)) {
+                if (c.isModal()) {
+                    newText.append("|Modal");
+                } else {
+                    newText.append("|Transformed");
+                }
             }
 
             if (c.getPlayerAttachedTo() != null) {
@@ -1314,8 +1316,8 @@ public abstract class GameState {
                     if (info.endsWith("Cloaked")) {
                         c.setCloaked(new SpellAbility.EmptySa(ApiType.Cloak, c));
                     }
-                } else if (info.startsWith("Transformed")) {
-                    c.setState(CardStateName.Transformed, true);
+                } else if (info.startsWith("Transformed") || info.startsWith("Modal")) {
+                    c.setState(CardStateName.Backside, true);
                     c.setBackSide(true);
                 } else if (info.startsWith("Flipped")) {
                     c.setState(CardStateName.Flipped, true);
@@ -1332,9 +1334,6 @@ public abstract class GameState {
                         c.setMeldedWith(meldTarget);
                     }
                     c.setState(CardStateName.Meld, true);
-                    c.setBackSide(true);
-                } else if (info.startsWith("Modal")) {
-                    c.setState(CardStateName.Modal, true);
                     c.setBackSide(true);
                 }
                 else if (info.startsWith("OnAdventure")) {
