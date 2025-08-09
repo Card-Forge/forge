@@ -14,7 +14,7 @@ public record PerpetualTypes(long timestamp, CardType addTypes, CardType removeT
     }
 
     @Override
-    public void applyCard(Card c) {
+    public void applyEffect(Card c) {
         c.addChangedCardTypes(addTypes, removeTypes, false, removeXTypes, timestamp, (long) 0, true, false);
     }
 

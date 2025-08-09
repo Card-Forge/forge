@@ -11,7 +11,7 @@ public record PerpetualKeywords(long timestamp, List<String> addKeywords, List<S
     }
 
     @Override
-    public void applyCard(Card c) {
+    public void applyEffect(Card c) {
         c.addChangedCardKeywords(addKeywords, removeKeywords, removeAll, timestamp, null);
     }
 }

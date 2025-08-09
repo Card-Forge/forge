@@ -4842,7 +4842,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final void setPerpetual(final Card oldCard) {
         perpetual = oldCard.getPerpetual();
         for (PerpetualInterface p : perpetual) {
-            p.applyCard(this);
+            p.applyEffect(this);
         }
     }
 

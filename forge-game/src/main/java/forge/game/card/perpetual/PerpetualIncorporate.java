@@ -13,7 +13,7 @@ public record PerpetualIncorporate(long timestamp, ManaCost incorporate) impleme
     }
 
     @Override
-    public void applyCard(Card c) {
+    public void applyEffect(Card c) {
         ColorSet colors = ColorSet.fromMask(incorporate.getColorProfile());
         final ManaCost newCost = ManaCost.combine(c.getManaCost(), incorporate);
         c.addChangedManaCost(newCost, timestamp, (long) 0);

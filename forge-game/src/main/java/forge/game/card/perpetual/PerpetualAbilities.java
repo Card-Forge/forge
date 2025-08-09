@@ -11,7 +11,7 @@ public record PerpetualAbilities(long timestamp, CardTraitChanges changes) imple
     }
 
     @Override
-    public void applyCard(Card c) {
+    public void applyEffect(Card c) {
         c.addChangedCardTraits(changes.copy(c, false), timestamp, (long) 0);
     }
 

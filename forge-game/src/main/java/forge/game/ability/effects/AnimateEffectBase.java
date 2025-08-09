@@ -88,7 +88,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             final ManaCost incMCost = new ManaCost(new ManaCostParser(sa.getParam("Incorporate")));
             PerpetualIncorporate p = new PerpetualIncorporate(timestamp, incMCost);
             c.addPerpetual(p);
-            p.applyCard(c);
+            p.applyEffect(c);
         }
         
         if (!addType.isEmpty() || !removeType.isEmpty() || addAllCreatureTypes || !remove.isEmpty()) {

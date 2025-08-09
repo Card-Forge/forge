@@ -4,5 +4,5 @@ import forge.game.card.Card;
 
 public interface PerpetualInterface {
     long getTimestamp();
-    void applyCard(Card c);
+    void applyEffect(Card c);
 }

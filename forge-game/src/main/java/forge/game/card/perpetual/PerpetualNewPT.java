@@ -10,7 +10,7 @@ public record PerpetualNewPT(long timestamp, Integer power, Integer toughness) i
     }
 
     @Override
-    public void applyCard(Card c) {
+    public void applyEffect(Card c) {
         c.addNewPT(power, toughness, timestamp, (long) 0);
     }
 }
