@@ -246,6 +246,12 @@
     <profiles>
         <profile>
             <id>android-debug</id>
+            <activation>
+                <property>
+                    <name>android.variant</name>
+                    <value>debug</value>
+                </property>
+            </activation>
             <properties>
                 <packaging.type>apk</packaging.type>
             </properties>
@@ -343,6 +349,12 @@
         </profile>
         <profile>
             <id>android-release-build</id>
+            <activation>
+                <property>
+                    <name>android.variant</name>
+                    <value>release-build</value>
+                </property>
+            </activation>
             <properties>
                 <packaging.type>apk</packaging.type>
             </properties>
@@ -568,10 +580,18 @@
         <profile>
             <!-- test build signed with embedded debug.keystore from uber-signer -->
             <id>android-test-build</id>
+            <activation>
+                <property>
+                    <name>!android.variant</name>
+                </property>
+            </activation>
             <properties>
+                <app.id.dev>forge.app.dev</app.id.dev>
                 <packaging.type>apk</packaging.type>
             </properties>
             <build>
+                <!-- append generated snapshot-version property -->
+                <finalName>forge-dev-android-${snapshot-version}</finalName>
                 <plugins>
                     <plugin>
                         <artifactId>exec-maven-plugin</artifactId>
@@ -626,6 +646,7 @@
                             <sign>
                                 <debug>false</debug>
                             </sign>
+                            <renameManifestPackage>${app.id.dev}</renameManifestPackage>
                             <sdk>
                                 <platform>${androidPlatform}</platform>
                                 <buildTools>${androidBuildTools}</buildTools>
@@ -668,7 +689,23 @@
                                     <goal>manifest-merger</goal>
                                 </goals>
                                 <configuration>
-                                    <manifestVersionName>${snapshot-version}</manifestVersionName>
+                                    <manifestVersionName>${snapshot-version}-dev</manifestVersionName>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>fix-provider-authorities</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>manifest-update</goal>
+                                </goals>
+                                <configuration>
+                                    <versionCodeUpdateFromVersion>false</versionCodeUpdateFromVersion>
+                                    <manifestApplicationLabel>Forge (dev)</manifestApplicationLabel>
+                                    <manifestProviderAuthorities>
+                                        <io.sentry.android.core.SentryInitProvider>${app.id.dev}.SentryInitProvider</io.sentry.android.core.SentryInitProvider>
+                                        <io.sentry.android.core.SentryPerformanceProvider>${app.id.dev}.SentryPerformanceProvider</io.sentry.android.core.SentryPerformanceProvider>
+                                        <de.cketti.fileprovider.PublicFileProvider>${app.id.dev}.publicfileprovider</de.cketti.fileprovider.PublicFileProvider>
+                                    </manifestProviderAuthorities>
                                 </configuration>
                             </execution>
                         </executions>
