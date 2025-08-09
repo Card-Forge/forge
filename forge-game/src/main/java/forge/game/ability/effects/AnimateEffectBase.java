@@ -125,7 +125,10 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         if (colors != null) {
             final boolean overwrite = sa.hasParam("OverwriteColors");
-            handleColors(c, colors, timestamp, overwrite, perpetual);
+            if (perpetual) {
+                c.addPerpetual(new PerpetualColors(timestamp, colors, overwrite));
+            }
+            c.addColor(colors, !overwrite, timestamp, 0, false);
         }
 
         if (sa.hasParam("LeaveBattlefield")) {
@@ -252,13 +255,4 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         c.removeHiddenExtrinsicKeywords(timestamp, 0);
     }
-
-    static void handleColors(final Card c, final ColorSet colors, final long timestamp, final boolean overwrite, 
-                                final boolean perpetual) {
-        if (perpetual) {
-            c.addPerpetual(new PerpetualColors(timestamp, colors, overwrite));
-        }
-        c.addColor(colors, !overwrite, timestamp, 0, false);
-    }
-
 }
