@@ -33,6 +33,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
+import forge.game.card.perpetual.PerpetualInterface;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatLki;
 import forge.game.cost.Cost;
@@ -2078,6 +2079,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return result;
     }
 
+    public ManaCost getChangedManaCost(long timestamp, long staticId) {
+        return changedCardManaCost.get(timestamp, staticId);
+    }
     public void addChangedManaCost(ManaCost cost, long timestamp, long staticId) {
         changedCardManaCost.put(timestamp, staticId, cost);
     }
@@ -4812,22 +4816,22 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return intensity > 0;
     }
 
-    private List<Map<String, Object>> perpetual = new ArrayList<>();
+    private List<PerpetualInterface> perpetual = new ArrayList<>();
     public final boolean hasPerpetual() {
         return !perpetual.isEmpty();
     }
-    public final List<Map<String, Object>> getPerpetual() {
+    public final List<PerpetualInterface> getPerpetual() {
         return perpetual;
     }
 
-    public final void addPerpetual(Map<String, Object> p) {
+    public final void addPerpetual(PerpetualInterface p) {
         perpetual.add(p);
     }
 
     public final void removePerpetual(final long timestamp) {
-        Map<String, Object> toRemove = Maps.newHashMap();
-        for (Map<String, Object> p : perpetual) {
-            if (p.get("Timestamp").equals(timestamp)) {
+        PerpetualInterface toRemove = null;
+        for (PerpetualInterface p : perpetual) {
+            if (p.getTimestamp() == (timestamp)) {
                 toRemove = p;
                 break;
             }
@@ -4837,39 +4841,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public final void setPerpetual(final Card oldCard) {
         perpetual = oldCard.getPerpetual();
-        for (Map<String, Object> p : perpetual) {
-            final String category = (String) p.get("Category");
-            if (category.equals("Abilities")) {
-                long timestamp = (long) p.get("Timestamp");
-                CardTraitChanges ctc = oldCard.getChangedCardTraits().get(timestamp, (long) 0).copy(this, false);
-                addChangedCardTraits(ctc, timestamp, (long) 0);
-            } else if (category.equals("Incorporate")) {
-                long ts = (long) p.get("Timestamp");
-                final ManaCost cCMC = oldCard.changedCardManaCost.get(ts, (long) 0);
-                addChangedManaCost(cCMC, ts, (long) 0);
-                updateManaCostForView();
-
-                if (getFirstSpellAbility() != null) {
-                    getFirstSpellAbility().getPayCosts().add(new Cost((String) p.get("Incorporate"), false));
-                }
-            } else if (category.equals("NewPT")) {
-                addNewPT((Integer) p.get("Power"), (Integer) p.get("Toughness"), (long)
-                        p.get("Timestamp"), (long) 0);
-            } else if (category.equals("PTBoost")) {
-                addPTBoost((Integer) p.get("Power"), (Integer) p.get("Toughness"), (long)
-                        p.get("Timestamp"), (long) 0);
-            } else if (category.equals("Keywords")) {
-                boolean removeAll = p.containsKey("RemoveAll") && (boolean) p.get("RemoveAll") == true;
-                addChangedCardKeywords((List<String>) p.get("AddKeywords"), (List<String>) p.get("RemoveKeywords"),
-                        removeAll, (long) p.get("Timestamp"), null);
-            } else if (category.equals("Types")) {
-                addChangedCardTypes((CardType) p.get("AddTypes"), (CardType) p.get("RemoveTypes"),
-                        false, (Set<RemoveType>) p.get("RemoveXTypes"),
-                        (long) p.get("Timestamp"), (long) 0, true, false);
-            } else if (category.equals("Colors")) {
-                addColor((ColorSet) p.get("Colors"), !(boolean) p.get("Overwrite"), (long) p.get("Timestamp"),
-                        (long) 0, false);
-            }
+        for (PerpetualInterface p : perpetual) {
+            p.applyEffect(this);
         }
     }
 
@@ -5122,20 +5095,22 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         updateAbilityTextForView();
     }
 
-    public final void addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
+    public final CardTraitChanges addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
             Collection<Trigger> trigger, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics,
             boolean removeAll, boolean removeNonMana, long timestamp, long staticId) {
-        addChangedCardTraits(spells, removedAbilities, trigger, replacements, statics, removeAll, removeNonMana, timestamp, staticId, true);
+        return addChangedCardTraits(spells, removedAbilities, trigger, replacements, statics, removeAll, removeNonMana, timestamp, staticId, true);
     }
-    public final void addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
+    public final CardTraitChanges addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
             Collection<Trigger> trigger, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics,
             boolean removeAll, boolean removeNonMana, long timestamp, long staticId, boolean updateView) {
-        changedCardTraits.put(timestamp, staticId, new CardTraitChanges(
+        CardTraitChanges result = new CardTraitChanges(
             spells, removedAbilities, trigger, replacements, statics, removeAll, removeNonMana
-        ));
+        );
+        changedCardTraits.put(timestamp, staticId, result);
         if (updateView) {
             updateAbilityTextForView();
         }
+        return result;
     }
 
     public final void addChangedCardTraits(CardTraitChanges ctc, long timestamp, long staticId) {
