@@ -82,17 +82,11 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         switch (this.gameType) {
             case Constructed:
                 allSections.add(DeckSection.Avatar);
-                allSections.add(DeckSection.Schemes);
-                allSections.add(DeckSection.Planes);
                 allSections.add(DeckSection.Conspiracy);
-                allSections.add(DeckSection.Dungeon);
 
                 normalPool = FModel.getAllCardsNoAlt();
                 avatarPool = FModel.getAvatarPool();
-                planePool = FModel.getPlanechaseCards();
-                schemePool = FModel.getArchenemyCards();
                 conspiracyPool = FModel.getConspiracyPool();
-                dungeonPool = FModel.getDungeonPool();
 
                 break;
             case Commander:
@@ -129,6 +123,14 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 break;
             default:
         }
+
+        allSections.add(DeckSection.Planes);
+        allSections.add(DeckSection.Schemes);
+        allSections.add(DeckSection.Dungeon);
+
+        planePool = FModel.getPlanechaseCards();
+        schemePool = FModel.getArchenemyCards();
+        dungeonPool = FModel.getDungeonPool();
 
         allSections.add(DeckSection.Attractions);
         attractionPool = FModel.getAttractionPool();
