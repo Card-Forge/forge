@@ -23,7 +23,10 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMustTarget;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
@@ -370,7 +373,25 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     return true;
                 });
             }
-            // TODO: prevent ai searching its own library when Ob Nixilis, Unshackled is in play
+
+            for (final Player op : ai.getOpponents()) {
+                for (Card c : op.getCardsIn(ZoneType.Battlefield)) {
+                    // Ob Nixilis, Unshackled
+                    for (Trigger trigger : c.getTriggers()) {
+                        if (TriggerType.SearchedLibrary.equals(trigger.getMode())
+                            && "TrigSac".equals(trigger.getParam("Execute"))) {
+                                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                        }
+                    }
+                    // Opposition Agent
+                    for (StaticAbility stAb : c.getStaticAbilities()) {
+                        if ("You".equals(stAb.getParam("ControlOpponentsSearchingLibrary"))) {
+                            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                        }
+                    }
+                }
+            }
+
             if (origin != null && origin.size() == 1 && origin.get(0).isKnown()) {
                 // FIXME: make this properly interact with several origin zones
                 list = CardLists.getValidCards(list, type, source.getController(), source, sa);
