@@ -11,5 +11,8 @@ ScryfallCode=PW25
 2 U Despark @Maji
 3 R Dragonspeaker Shaman @Yigit Koroglu
 4 R Culling Ritual @AKAGI
-5 M Zidane, Tantalus Thief @Eiji Kaneda
+5 R Zidane, Tantalus Thief @Eiji Kaneda
 6 R Palladium Myr @Alan Pollack
+7 R Spectacular Spider-Man @Julian Totino Tedesco
+8 R Trinket Mage @Scott Chou
+9 R Monstrous Rage @Borja Pindado

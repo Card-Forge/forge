@@ -481,7 +481,7 @@ public class AiController {
 
             if (lands.size() >= Math.max(maxCmcInHand, 6)) {
                 // don't play MDFC land if other side is spell and enough lands are available
-                if (!c.isLand() || (c.isModal() && !c.getState(CardStateName.Modal).getType().isLand())) {
+                if (!c.isLand() || (c.isModal() && !c.getState(CardStateName.Backside).getType().isLand())) {
                     return false;
                 }
 

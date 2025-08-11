@@ -39,8 +39,11 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.File;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * Booster Draft Format.
@@ -317,6 +320,7 @@ public class BoosterDraft implements IBoosterDraft {
     private static List<CustomLimited> loadCustomDrafts() {
         if (customs.isEmpty()) {
             String[] dList;
+            ConcurrentLinkedQueue<CustomLimited> queue = new ConcurrentLinkedQueue<>();
 
             // get list of custom draft files
             final File dFolder = new File(ForgeConstants.DRAFT_DIR);
@@ -330,12 +334,26 @@ public class BoosterDraft implements IBoosterDraft {
 
             dList = dFolder.list();
 
-            for (final String element : dList) {
-                if (element.endsWith(FILE_EXT)) {
-                    final List<String> dfData = FileUtil.readFile(ForgeConstants.DRAFT_DIR + element);
-                    customs.add(CustomLimited.parse(dfData, FModel.getDecks().getCubes()));
+            if (dList != null) {
+                List<CompletableFuture<?>> futures = new ArrayList<>();
+                for (final String element : dList) {
+                    if (element.endsWith(FILE_EXT)) {
+                        futures.add(CompletableFuture.supplyAsync(()-> {
+                            final List<String> dfData = FileUtil.readFile(ForgeConstants.DRAFT_DIR + element);
+                            queue.add(CustomLimited.parse(dfData, FModel.getDecks().getCubes()));
+                            return null;
+                        }).exceptionally(ex -> {
+                            ex.printStackTrace();
+                            return null;
+                        }));
+                    }
                 }
+                CompletableFuture<?>[] futuresArray = futures.toArray(new CompletableFuture<?>[0]);
+                CompletableFuture.allOf(futuresArray).join();
+                futures.clear();
             }
+            // stream().toList() causes crash on Android, use Collectors.toList()
+            customs.addAll(queue.stream().collect(Collectors.toList()));
         }
         return customs;
     }

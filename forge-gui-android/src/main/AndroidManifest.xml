@@ -62,6 +62,13 @@
             android:exported="false">
         </activity>
         <meta-data android:name="io.sentry.dsn" android:value="https://a0b8dbad9b8a49cfa51bf65d462e8dae:b3f27d7461224cb8836eb5c6050c666c@sentry.cardforge.org/2?buffer.enabled=false" />
+        <meta-data android:name="io.sentry.send-default-pii" android:value="true" />
+        <!-- enable automatic breadcrumbs for user interactions (clicks, swipes, scrolls) -->
+        <!-- meta-data android:name="io.sentry.traces.user-interaction.enable" android:value="true" /-->
+        <!-- enable screenshot for crashes -->
+        <!--meta-data android:name="io.sentry.attach-screenshot" android:value="true" /-->
+        <!-- enable view hierarchy for crashes -->
+        <!--meta-data android:name="io.sentry.attach-view-hierarchy" android:value="true" /-->
         <meta-data android:name="io.sentry.anr.enable" android:value="false" />
         <!-- To disable the activity lifecycle breadcrumbs integration -->
         <meta-data android:name="io.sentry.breadcrumbs.activity-lifecycle" android:value="false" />

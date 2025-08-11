@@ -104,3 +104,5 @@ ScryfallCode=SPM
 243 M The Soul Stone @Leinil Francis Yu & Sunny Gho
 244 M Anti-Venom, Horrifying Healer @Néstor Ossandón Leal
 279 R Iron Spider, Stark Upgrade @Kevin Glint
+9998 M Gwenom, Remorseless @
+9999 R Carnage, Crimson Chaos @

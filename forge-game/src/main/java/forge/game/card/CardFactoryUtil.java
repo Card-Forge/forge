@@ -334,7 +334,7 @@ public class CardFactoryUtil {
      *            a {@link forge.game.card.CardCollectionView} object.
      * @return a boolean.
      */
-    public static byte getMostProminentColorsFromList(final CardCollectionView list, final List<String> restrictedToColors) {
+    public static byte getMostProminentColorsFromList(final CardCollectionView list, final Iterable<String> restrictedToColors) {
         List<Byte> colorRestrictions = Lists.newArrayList();
         for (final String col : restrictedToColors) {
             colorRestrictions.add(MagicColor.fromName(col));

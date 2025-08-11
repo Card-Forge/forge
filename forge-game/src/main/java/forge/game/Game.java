@@ -744,7 +744,7 @@ public class Game {
             if (!visitor.visitAll(player.getZone(ZoneType.Exile).getCards())) {
                 return;
             }
-            if (!visitor.visitAll(player.getZone(ZoneType.Command).getCards())) {
+            if (!visitor.visitAll(player.getCardsIn(ZoneType.PART_OF_COMMAND_ZONE))) {
                 return;
             }
             if (withSideboard && !visitor.visitAll(player.getZone(ZoneType.Sideboard).getCards())) {
