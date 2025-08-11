@@ -34,7 +34,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
             }
 
             if (counterType != null) {
-                if (c.getCounters(counterType) <= 0) {
+                if (c.getCounters(counterType) <= 0 || c.getCounters(counterType) >= c.getCounterMax(counterType)) {
                     return false;
                 }
                 if (!c.canReceiveCounters(counterType)) {
