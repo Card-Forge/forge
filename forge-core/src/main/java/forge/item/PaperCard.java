@@ -46,7 +46,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
 
     // These fields are kinda PK for PrintedCard
     private final String name;
-    private final String edition;
+    private String edition;
     /* [NEW] Attribute to store reference to CollectorNumber of each PaperCard.
        By default the attribute is marked as "unset" so that it could be retrieved and set.
        (see getCollectorNumber())
