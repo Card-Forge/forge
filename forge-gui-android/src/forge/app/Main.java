@@ -96,12 +96,12 @@ public class Main extends AndroidApplication {
 
     private int resId(String type, String name) {
         // 1) Try fully-qualified with *runtime* package
-        int id = getResources().getIdentifier(getPackageName() + ":" + type + "/" + name, null, null);
+        int id = getResources().getIdentifier(name, type, getPackageName());
         if (id != 0) return id;
 
         // 2) Try fully-qualified with *fallback* resource package
         if (!RES_PKG_FALLBACK.equals(getPackageName())) {
-            id = getResources().getIdentifier(RES_PKG_FALLBACK + ":" + type + "/" + name, null, null);
+            id = getResources().getIdentifier(name, type, RES_PKG_FALLBACK);
             if (id != 0) return id;
         }
 
