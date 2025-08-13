@@ -17,11 +17,11 @@ Name=MTGACube
 1 Angrath, Captain of Chaos|SLD
 1 Aphemia, the Cacophony|THB|1
 1 Arboreal Grazer|WAR
-1 Arch of Orazca|MB1
+1 Arch of Orazca|PLST
 1 Archon of Sun's Grace|THB|1
 1 Ardenvale Tactician|ELD|1
 1 Arguel's Blood Fast|V17
-1 Arrester's Zeal|MB1
+1 Arrester's Zeal|PLST
 1 Aryel, Knight of Windgrace|DOM
 1 Ashiok, Dream Render|SLD
 1 Ashiok, Nightmare Muse|THB|1
@@ -78,23 +78,23 @@ Name=MTGACube
 1 Chainweb Aracnir|THB
 1 Chandra, Acolyte of Flame|M20
 1 Chandra, Awakened Inferno|M20
-1 Charging Monstrosaur|MB1
+1 Charging Monstrosaur|PLST
 1 Charming Prince|ELD|1
-1 Chart a Course|MB1
+1 Chart a Course|PLST
 1 Chemister's Insight|C20
 1 Chevill, Bane of Monsters|IKO|1
-1 Chromatic Lantern|MB1
+1 Chromatic Lantern|PLST
 1 Claim the Firstborn|ELD
 1 Clifftop Retreat|DOM
 1 Clockwork Servant|ELD
-1 Cloudkin Seer|MB1
+1 Cloudkin Seer|PLST
 1 Colossal Majesty|C19
 1 Commence the Endgame|WAR
 1 Conclave Tribunal|GRN
 1 Connive // Concoct|GRN
 1 Corpse Knight|M20
 1 Crackling Drake|C20
-1 Crash Through|MB1
+1 Crash Through|PLST
 1 Crucible of Worlds|M19
 1 Cruel Celebrant|WAR
 1 Cryptbreaker|HA1
@@ -134,8 +134,8 @@ Name=MTGACube
 1 Dryad Greenseeker|M19
 1 Dryad of the Ilysian Grove|THB|1
 1 Dungeon Geists|M20
-1 Duress|MB1
-1 Dusk Legion Zealot|MB1
+1 Duress|PLST
+1 Dusk Legion Zealot|PLST
 1 Eat to Extinction|THB|1
 1 Electrostatic Field|GRN
 1 Elite Guardmage|WAR
@@ -194,8 +194,8 @@ Name=MTGACube
 1 Gallia of the Endless Dance|THB|1
 1 Gemrazer|IKO|1
 1 Ghalta, Primal Hunger|GN2
-1 Ghitu Lavarunner|MB1
-1 Giant Growth|MB1
+1 Ghitu Lavarunner|PLST
+1 Giant Growth|PLST
 1 Giant Killer|ELD|1
 1 Gideon Blackblade|SLD
 1 Gilded Goose|ELD|1
@@ -207,7 +207,7 @@ Name=MTGACube
 1 Goblin Chainwhirler|DOM
 1 God-Eternal Bontu|WAR
 1 Godless Shrine|RNA
-1 Gods Willing|MB1
+1 Gods Willing|PLST
 1 Golden Demise|RIX
 1 Golden Egg|ELD
 1 Golos, Tireless Pilgrim|M20
@@ -234,7 +234,7 @@ Name=MTGACube
 1 Hydroid Krasis|RNA
 1 Hypnotic Specter|HA1
 1 Hypnotic Sprite|ELD|1
-1 Icy Manipulator|MB1
+1 Icy Manipulator|PLST
 1 Idyllic Tutor|THB|1
 1 Ilysian Caryatid|THB
 1 Imperial Aerosaur|XLN
@@ -253,7 +253,7 @@ Name=MTGACube
 1 Jhoira, Weatherlight Captain|DOM
 1 Josu Vess, Lich Knight|DOM
 1 Judith, the Scourge Diva|RNA
-1 Juggernaut|MB1
+1 Juggernaut|PLST
 1 Karn's Temporal Sundering|DOM
 1 Karn, Scion of Urza|MPS_RNA
 1 Kenrith's Transformation|ELD|1
@@ -283,7 +283,7 @@ Name=MTGACube
 1 Lightning Strike|GN2
 1 Liliana's Contract|M19
 1 Liliana, Dreadhorde General|SLD
-1 Llanowar Elves|MB1
+1 Llanowar Elves|PLST
 1 Lonely Sandbar|C20
 1 Lotus Field|M20
 1 Lovestruck Beast|ELD|1
@@ -311,15 +311,15 @@ Name=MTGACube
 1 Mire's Grasp|THB
 1 Mist-Cloaked Herald|M19
 1 Momentary Blink|HA3
-1 Mortify|MB1
+1 Mortify|PLST
 1 Mox Amber|DOM
 1 Murderous Rider|ELD|1
 1 Murmuring Mystic|C20
-1 Mutiny|MB1
+1 Mutiny|PLST
 1 Mythos of Illuna|IKO|1
 1 Mythos of Nethroi|IKO|1
 1 Nadir Kraken|THB|1
-1 Negate|MB1
+1 Negate|PLST
 1 Nessian Hornbeetle|THB
 1 Nessian Wanderer|THB
 1 Neutralize|IKO
@@ -348,13 +348,13 @@ Name=MTGACube
 1 Pharika's Spawn|THB
 1 Phoenix of Ash|THB|1
 1 Phyrexian Arena|HA1
-1 Plaguecrafter|MB1
+1 Plaguecrafter|PLST
 1 Planar Cleansing|M20
 1 Planewide Celebration|WAR
 1 Platinum Angel|HA2
 1 Polukranos, Unchained|THB|1
 1 Portal of Sanctuary|M20
-1 Prey Upon|MB1
+1 Prey Upon|PLST
 1 Pride of Conquerors|RIX
 1 Priest of Forgotten Gods|RNA
 1 Prime Speaker Vannifar|RNA
@@ -372,7 +372,7 @@ Name=MTGACube
 1 Rankle, Master of Pranks|ELD|1
 1 Raugrin Triome|IKO|1
 1 Realm-Cloaked Giant|ELD|1
-1 Reassembling Skeleton|MB1
+1 Reassembling Skeleton|PLST
 1 Reclamation Sage|C20
 1 Reconnaissance Mission|IKO
 1 Redcap Melee|ELD
@@ -383,7 +383,7 @@ Name=MTGACube
 1 Return of the Wildspeaker|ELD|1
 1 Reverent Hoplite|THB
 1 Revoke Existence|THB
-1 Rhys the Redeemed|MB1
+1 Rhys the Redeemed|PLST
 1 Rielle, the Everwise|IKO|1
 1 Rigging Runner|XLN
 1 Rimrock Knight|ELD|1
@@ -400,7 +400,7 @@ Name=MTGACube
 1 Rupture Spire|M19
 1 Sacred Foundry|GRN
 1 Saheeli, Sublime Artificer|SLD
-1 Saproling Migration|MB1
+1 Saproling Migration|PLST
 1 Sarkhan the Masterless|SLD
 1 Sarkhan's Unsealing|M19
 1 Savage Stomp|XLN
@@ -435,7 +435,7 @@ Name=MTGACube
 1 Skittering Surveyor|DOM
 1 Sky Terror|XLN
 1 Skycat Sovereign|IKO|1
-1 Skymarcher Aspirant|MB1
+1 Skymarcher Aspirant|PLST
 1 Slaughter-Priest of Mogis|THB
 1 Slaying Fire|ELD|1
 1 Song of Freyalise|DOM
@@ -493,15 +493,15 @@ Name=MTGACube
 1 The Akroan War|THB
 1 The Birth of Meletis|THB
 1 The Circle of Loyalty|ELD|1
-1 The Eldest Reborn|MB1
+1 The Eldest Reborn|PLST
 1 The First Iroan Games|THB
-1 The Gitrog Monster|MB1
+1 The Gitrog Monster|PLST
 1 The Great Henge|ELD|1
 1 The Immortal Sun|RIX
 1 The Mending of Dominaria|DOM
 1 Thief of Sanity|GRN
 1 Thirst for Meaning|THB|1
-1 Thought Erasure|MB1
+1 Thought Erasure|PLST
 1 Thrashing Brontodon|RIX
 1 Threnody Singer|THB
 1 Tibalt, Rakish Instigator|SLD
