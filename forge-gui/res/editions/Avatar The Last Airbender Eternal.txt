@@ -1,0 +1,14 @@
+[metadata]
+Code=TLE
+Date=2025-11-21
+Name=Avatar: The Last Airbender Eternal
+Type=Expansion
+ScryfallCode=TLE
+
+[cards]
+13 M Force of Negation @Viacom
+41 M The Great Henge @Viacom
+74 M Aang, Airbending Master @Tomoyo Asatani
+93 M Katara, Waterbending Master @Yueko
+104 M Fire Lord Ozai @Ryuichi Sakuma
+134 R The Cabbage Merchant @Patrick Gañas

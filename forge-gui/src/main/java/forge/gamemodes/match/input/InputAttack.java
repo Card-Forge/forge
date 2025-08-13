@@ -30,6 +30,7 @@ import forge.game.event.GameEventCombatUpdate;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
+import forge.game.staticability.StaticAbilityMustAttack;
 import forge.game.zone.ZoneType;
 import forge.gui.events.UiEventAttackerDeclared;
 import forge.player.PlayerControllerHuman;
@@ -126,6 +127,20 @@ public class InputAttack extends InputSyncronizedBase {
         for (final Card c : playerAttacks.getCreaturesInPlay()) {
             if (combat.isAttacking(c)) {
                 continue;
+            }
+
+            final List<GameEntity> mustAttack = StaticAbilityMustAttack.entitiesMustAttack(c);
+            if (!mustAttack.isEmpty()) {
+                for (final GameEntity defender : mustAttack) {
+                    if (CombatUtil.canAttack(c, defender)) {
+                        combat.addAttacker(c, defender);
+                        refreshCards.add(CardView.get(c));
+                        break;
+                    }
+                }
+                if (combat.isAttacking(c)) {
+                    continue;
+                }
             }
 
             if (currentDefender != null && CombatUtil.canAttack(c, currentDefender)) {

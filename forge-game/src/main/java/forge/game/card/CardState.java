@@ -750,11 +750,21 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
                 triggers.add(tr.copy(card, lki));
             }
         }
+        ReplacementEffect runRE = null;
+        if (ctb instanceof SpellAbility sp && sp.isReplacementAbility()
+            && source.getCard().equals(ctb.getHostCard())) {
+            runRE = sp.getReplacementEffect();
+        }
 
         replacementEffects.clear();
         for (ReplacementEffect re : source.replacementEffects) {
             if (re.isIntrinsic()) {
-                replacementEffects.add(re.copy(card, lki));
+                ReplacementEffect reCopy = re.copy(card, lki);
+                if (re.equals(runRE) && runRE.hasRun()) {
+                    // CR 208.2b prevent loop from card copying itself
+                    reCopy.setHasRun(true);
+                }
+                replacementEffects.add(reCopy);
             }
         }
 

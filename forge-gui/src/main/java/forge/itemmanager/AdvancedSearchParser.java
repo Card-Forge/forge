@@ -408,6 +408,20 @@ public abstract class AdvancedSearchParser {
                         break;
                 }
                 break;
+
+            case "is":
+                if (opUsed.equals(":")) {
+                    switch(valueStr) {
+                        case "foil":
+                            predicate = PaperCardPredicates.isFoil(true);
+                            break;
+
+                        case "nonfoil":
+                            predicate = PaperCardPredicates.isFoil(false);
+                            break;
+                    }
+                }
+                break;
         }
 
         if (predicate == null) {
