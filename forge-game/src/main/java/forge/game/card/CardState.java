@@ -751,12 +751,9 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
             }
         }
         ReplacementEffect runRE = null;
-        if (ctb != null && source.getCard().equals(ctb.getHostCard())) {
-            if (ctb instanceof SpellAbility sp) {
-                if (sp.isReplacementAbility()) {
-                    runRE = sp.getReplacementEffect();
-                }
-            }
+        if (ctb instanceof SpellAbility sp && sp.isReplacementAbility()
+            && source.getCard().equals(ctb.getHostCard())) {
+            runRE = sp.getReplacementEffect();
         }
 
         replacementEffects.clear();
