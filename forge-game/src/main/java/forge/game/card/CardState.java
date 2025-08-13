@@ -761,6 +761,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
             if (re.isIntrinsic()) {
                 ReplacementEffect reCopy = re.copy(card, lki);
                 if (re.equals(runRE) && runRE.hasRun()) {
+                    // CR 208.2b prevent loop from card copying itself
                     reCopy.setHasRun(true);
                 }
                 replacementEffects.add(reCopy);
