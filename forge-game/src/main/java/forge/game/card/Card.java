@@ -3609,13 +3609,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     }
                 }
             }
-        } else {
+        } else if (hasState(CardStateName.Secondary) && state.getStateName() == CardStateName.Original) {
             // Adventure and Omen may only be cast not from Battlefield
-            if (hasState(CardStateName.Secondary) && state.getStateName() == CardStateName.Original) {
-                for (SpellAbility sa : getState(CardStateName.Secondary).getSpellAbilities()) {
-                    if (mana == null || mana == sa.isManaAbility()) {
-                        list.add(sa);
-                    }
+            for (SpellAbility sa : getState(CardStateName.Secondary).getSpellAbilities()) {
+                if (mana == null || mana == sa.isManaAbility()) {
+                    list.add(sa);
                 }
             }
         }
