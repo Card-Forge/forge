@@ -5031,7 +5031,7 @@ TGRN-1 w_4_4_angel_flying_vigilance @Grzegorz Rutkowski
 TGRN-2 w_1_1_soldier_lifelink @John Severin Brassell
 TISD-5 b_2_2_vampire_flying @Svetlin Velinov
 TISD-6 b_1_1_wolf_deathtouch @Daniel Ljunggren
-TKHM-8 u_2_2_shapshifter_changeling @Filip Burburan
+TKHM-8 u_2_2_shapeshifter_changeling @Filip Burburan
 TM20-1 ajanis_pridemate @Howard Lyon
 TM21-3 w_2_2_griffin_flying @Johann Bodin
 TM21-11 g_2_2_cat @Izzy
