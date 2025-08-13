@@ -230,6 +230,7 @@
                                                 <include name="adventure-editor.command" />
                                                 <include name="adventure-editor.cmd" />
                                                 <include name="adventure-editor.exe" />
+                                                <exclude name="**/*.xcf" />
                                             </tarfileset>
                                             <tarfileset dir="${project.build.directory}/${project.build.finalName}">
                                                 <include name="**" />
@@ -245,6 +246,7 @@
                                                 <exclude name="adventure-editor.command" />
                                                 <exclude name="adventure-editor.cmd" />
                                                 <exclude name="adventure-editor.exe" />
+                                                <exclude name="**/*.xcf" />
                                             </tarfileset>
                                         </tar>
                                     </target>

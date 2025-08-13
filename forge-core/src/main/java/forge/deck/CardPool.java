@@ -37,7 +37,6 @@ import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 public class CardPool extends ItemPool<PaperCard> {
     private static final long serialVersionUID = -5379091255613968393L;
 
