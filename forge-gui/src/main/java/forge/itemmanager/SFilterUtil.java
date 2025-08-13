@@ -81,6 +81,7 @@ public class SFilterUtil {
 
             if (ch == '"') {
                 inQuotes = !inQuotes;
+                current.append(ch);
                 continue;
             }
 

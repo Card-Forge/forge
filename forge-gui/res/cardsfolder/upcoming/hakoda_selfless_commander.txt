@@ -1,0 +1,9 @@
+Name:Hakoda, Selfless Commander
+ManaCost:3 W
+Types:Legendary Creature Human Warrior Ally
+PT:3/5
+K:Vigilance
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Ally.TopLibrary+YouCtrl+nonLand | AffectedZone$ Library | MayPlay$ True | Description$ You may cast Ally spells from the top of your library.
+A:AB$ PumpAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | NumDef$ +5 | KW$ Indestructible | SpellDescription$ Creatures you control get +0/+5 and gain indestructible until end of turn.
+Oracle:Vigilance\nYou may look at the top of your library any time.\nYou may cast Ally spells from the top of your library.\nSacrifice Hakoda: Creatures you control get +0/+5 and gain indestructible until end of turn.

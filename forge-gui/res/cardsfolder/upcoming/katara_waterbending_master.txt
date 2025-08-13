@@ -1,0 +1,12 @@
+Name:Katara, Waterbending Master
+ManaCost:1 U
+Types:Legendary Creature Human Warrior Ally
+PT:1/3
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OpponentTurn$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a spell during an opponent's turn, you get an experience counter.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ You | CounterType$ Experience | CounterNum$ 1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME attacks, you may draw a card for each experience counter you have. If you do, discard a card.
+SVar:TrigDraw:AB$ Discard | Cost$ Draw<X/You> | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+SVar:X:Count$YourCountersExperience
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Discard
+Oracle:Whenever you cast a spell during an opponent's turn, you get an experience counter.\nWhenever Katara attacks, you may draw a card for each experience counter you have. If you do, discard a card.
