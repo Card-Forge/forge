@@ -226,7 +226,7 @@ public class BoosterDraft implements IBoosterDraft {
             case Import:
                 /*
                  * Import a cube from CubeCobra.
-                 * Default settings are boosters from all sets with a booster size of 15 cards.
+                 * Default settings are 3 boosters with a size of 15 cards.
                  */
                 String cubeCobraId = SOptionPane.showInputDialog(
                         Localizer.getInstance().getMessage("lblEnterCubeCobraURL") + ":",
