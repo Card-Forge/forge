@@ -1,0 +1,7 @@
+Name:Lost in the Spirit World
+ManaCost:2 U
+Types:Sorcery
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBToken | SpellDescription$ Return up to one target creature to its owner's hand. Create a 1/1 colorless Spirit creature token with "This token can't block or be blocked by non-Spirit creatures."
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_spirit_spiritshadow | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:Return up to one target creature to its owner's hand. Create a 1/1 colorless Spirit creature token with "This token can't block or be blocked by non-Spirit creatures."
