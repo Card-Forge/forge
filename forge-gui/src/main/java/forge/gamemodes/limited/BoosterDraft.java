@@ -228,20 +228,20 @@ public class BoosterDraft implements IBoosterDraft {
                  * Import a cube from CubeCobra.
                  * Default settings are 3 boosters with a size of 15 cards.
                  */
-                String cubeCobraId = SOptionPane.showInputDialog(
+                String inputCubeId = SOptionPane.showInputDialog(
                         Localizer.getInstance().getMessage("lblEnterCubeCobraURL") + ":",
                         Localizer.getInstance().getMessage("lblImportCube"),
                         null);
 
-                if (cubeCobraId == null) {
+                if (inputCubeId == null) {
                     return false;
                 }
 
                 try {
-                    CubeImporter importer = new CubeImporter();
-                    CustomLimited importedDraft = importer.importFromCubeCobra(cubeCobraId);
+                    CubeImporter importer = new CubeImporter(inputCubeId);
+                    CustomLimited importedDraft = importer.importCube();
                     if (importedDraft == null) {
-                        SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblFailedToImportCube") + ": " + cubeCobraId);
+                        SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblFailedToImportCube") + ": " + inputCubeId);
                         return false;
                     }
                     this.setupCustomDraft(importedDraft);

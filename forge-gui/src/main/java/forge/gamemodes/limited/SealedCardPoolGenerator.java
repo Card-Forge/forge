@@ -330,21 +330,21 @@ public class SealedCardPoolGenerator {
                   Import a cube from CubeCobra.
                   Default settings include a variable number of boosters with a size of 15 cards.
                  */
-                String cubeCobraId = SOptionPane.showInputDialog(
+                String inputCubeId = SOptionPane.showInputDialog(
                         Localizer.getInstance().getMessage("lblEnterCubeCobraURL") + ":",
                         Localizer.getInstance().getMessage("lblImportCube"),
                         null);
 
-                if (cubeCobraId == null) {
+                if (inputCubeId == null) {
                     return;
                 }
 
                 try {
-                    CubeImporter importer = new CubeImporter();
-                    CustomLimited importedDraft = importer.importFromCubeCobra(cubeCobraId);
+                    CubeImporter importer = new CubeImporter(inputCubeId);
+                    CustomLimited importedDraft = importer.importCube();
 
                     if (importedDraft == null) {
-                        SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblFailedToImportCube") + ": " + cubeCobraId);
+                        SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblFailedToImportCube") + ": " + inputCubeId);
                         return;
                     }
                     UnOpenedProduct importedProduct = new UnOpenedProduct(importedDraft.getSealedProductTemplate(), importedDraft.getCardPool());

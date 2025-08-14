@@ -18,6 +18,7 @@
 package forge.gamemodes.limited;
 
 import forge.card.CardEdition;
+import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.io.DeckSerializer;
@@ -126,24 +127,6 @@ public class CustomLimited extends DeckBase {
         return cd;
     }
 
-    public static CustomLimited parseFromURL(final URL url) {
-        List<Pair<String, Integer>> slots = SealedTemplate.genericNoSlotBooster.getSlots();
-
-        final CustomLimited cd = new CustomLimited("CubeCobra Imported", slots);
-//        cd.landSetCode = "UNF";
-        cd.numPacks = 3;
-        cd.singleton = true;
-        cd.customRankingsFile = "rankings_cubecobra.txt";
-
-        final Map<String, List<String>> sections = FileSection.parseSections(FileUtil.readFile(url));
-        final Deck deckCube = DeckSerializer.fromSections(sections);
-        if (deckCube == null) {
-            throw new IllegalArgumentException("Failed to parse deck from URL: " + url);
-        }
-        cd.cardPool = deckCube.getMain();
-        return cd;
-    }
-
     /**
      * Gets the num packs.
      * 
@@ -181,6 +164,14 @@ public class CustomLimited extends DeckBase {
         return this.cardPool;
     }
 
+    /**
+     * Sets the card pool.
+     *
+     * @param cardPoolIn
+     *            the cardPool to set
+     */
+    public void setCardPool(CardPool cardPoolIn) { this.cardPool = cardPoolIn; }
+
     /*
      * (non-Javadoc)
      * 
@@ -203,8 +194,18 @@ public class CustomLimited extends DeckBase {
         return singleton;
     }
 
+    public void setSingleton(boolean bIn) { this.singleton = bIn; }
+
     public String getCustomRankingsFileName() {
         return customRankingsFile;
+    }
+
+    public void setCustomRankingsFile(String fileName) {
+        if (fileName == null) {
+            // Default to a known fileName if none is specified
+            fileName = "rankings_cubecobra.txt";
+        }
+        this.customRankingsFile = fileName;
     }
 
     @Override
