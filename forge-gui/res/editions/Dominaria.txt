@@ -308,6 +308,10 @@ ScryfallCode=DOM
 9 r_1_1_goblin @Kev Walker
 10 karox_bladewing @XiaoDi Jin
 11 g_1_1_saproling @Mike Burns
-11 g_1_1_saproling @Mike Burns
-11 g_1_1_saproling @Mike Burns
+12 g_1_1_saproling @Mike Burns
+13 g_1_1_saproling @Mike Burns
 14 c_0_0_a_construct_total_artifacts @Victor Adame Minguez
+
+[other]
+15 emblem_jaya_ballard @Magali Villeneuve
+16 emblem_teferi_hero_of_dominaria @Chris Rallis

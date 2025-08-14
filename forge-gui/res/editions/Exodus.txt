@@ -153,8 +153,3 @@ ScryfallCode=EXO
 141 U Transmogrifying Licid @Jim Nelson
 142 R Workhorse @DiTerlizzi
 143 R City of Traitors @Kev Walker
-
-[tokens]
-c_1_1_a_thopter_flying
-w_1_1_pegasus_flying
-g_2_2_beast
