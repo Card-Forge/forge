@@ -1,0 +1,6 @@
+Name:Fire Nation Soldier
+ManaCost:2 R
+Types:Creature Human Soldier
+PT:3/2
+K:Haste
+Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)
