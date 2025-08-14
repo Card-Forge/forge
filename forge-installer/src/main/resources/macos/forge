@@ -1,0 +1,3 @@
+#!/bin/bash
+cd "$(dirname "$0")/../Resources"
+java -Xdock:icon="forge.icns" -jar $project.build.finalName$-jar-with-dependencies.jar
