@@ -74,6 +74,7 @@ public enum TriggerType {
     Discover(TriggerDiscover.class),
     Drawn(TriggerDrawn.class),
     DungeonCompleted(TriggerCompletedDungeon.class),
+    Earthbend(TriggerElementalbend.class),
     Evolved(TriggerEvolved.class),
     ExcessDamage(TriggerExcessDamage.class),
     ExcessDamageAll(TriggerExcessDamageAll.class),
