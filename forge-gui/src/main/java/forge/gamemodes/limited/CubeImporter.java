@@ -91,8 +91,8 @@ public class CubeImporter {
             }
         };
 
-        // Check if parsedStr is alphanumeric only
-        if (parsedStr != null && !parsedStr.matches("^[a-zA-Z0-9]+$")) {
+        // Check if parsedStr is alphanumeric only, allow hyphens as well since full Cube IDs can contain them
+        if (parsedStr != null && !parsedStr.matches("^[a-zA-Z0-9\\-]+$")) {
             throw new IllegalArgumentException("Cube ID must contain only alphanumeric characters");
         }
         return parsedStr;
