@@ -31,9 +31,40 @@ Join the **Forge community** on [Discord](https://discord.gg/HcPJNyD66a)!
 3. **User Data Management:** Previous players’ data is preserved during upgrades.
 4. **Java Requirement:** Ensure you have **Java 17 or later** installed.
 
+**Platform-specific launchers:**
+- **macOS:** `Forge.app` and `Forge Adventure.app` (native app bundles)
+- **Windows:** `forge.exe` and `forge-adventure.exe`
+- **Linux:** `forge.sh` and `forge-adventure.sh`
+- **Cross-platform:** JAR files
+
 ### 📱 Android Installation
 - _(Note: **Android 11** is the minimum requirements with at least **6GB RAM** to run smoothly. You need to enable **"Install unknown apps"** for Forge to initialize and update itself)_
 - Download the **APK** from the [Snapshot Build](https://github.com/Card-Forge/forge/releases/tag/daily-snapshots). On the first launch, Forge will automatically download all necessary assets.
+
+## 🔨 Building from Source
+
+To build Forge for all platforms:
+
+```bash
+git clone https://github.com/Card-Forge/forge.git
+cd forge
+mvn clean package -DskipTests
+```
+
+**Platform-specific builds:**
+- **All platforms:** `mvn clean package -DskipTests` (default)
+- **Windows/Linux:** `mvn clean package -Pwindows-linux -DskipTests`
+- **macOS app bundles:** `mvn clean package -Pmacos -DskipTests`
+
+**Requirements:**
+- Java 17 or later
+- Maven 3.6+
+- Git
+
+**Output locations:**
+- Desktop apps: `forge-gui-desktop/target/`
+- Adventure mode: `forge-gui-mobile-dev/target/`
+- Installers: `forge-installer/target/`
 
 ---
 
