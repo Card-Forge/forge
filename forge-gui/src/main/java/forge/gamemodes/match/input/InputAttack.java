@@ -132,7 +132,7 @@ public class InputAttack extends InputSyncronizedBase {
             final List<GameEntity> mustAttack = StaticAbilityMustAttack.entitiesMustAttack(c);
             if (!mustAttack.isEmpty()) {
                 for (final GameEntity defender : mustAttack) {
-                    if (CombatUtil.canAttack(c, defender)) {
+                    if (!c.equals(defender) && CombatUtil.canAttack(c, defender)) {
                         combat.addAttacker(c, defender);
                         refreshCards.add(CardView.get(c));
                         break;
