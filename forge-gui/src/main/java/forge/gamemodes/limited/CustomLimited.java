@@ -20,10 +20,12 @@ package forge.gamemodes.limited;
 import forge.card.CardEdition;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
+import forge.deck.io.DeckSerializer;
 import forge.item.PaperCard;
 import forge.item.SealedTemplate;
 import forge.model.FModel;
 import forge.util.FileSection;
+import forge.util.FileUtil;
 import forge.util.ItemPool;
 import forge.util.TextUtil;
 import forge.util.storage.IStorage;
@@ -31,8 +33,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -119,6 +123,24 @@ public class CustomLimited extends DeckBase {
         final Deck deckCube = cubes.get(data.get("DeckFile"));
         cd.cardPool = deckCube == null ? ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCards(), PaperCard.class) : deckCube.getMain();
 
+        return cd;
+    }
+
+    public static CustomLimited parseFromURL(final URL url) {
+        List<Pair<String, Integer>> slots = SealedTemplate.genericNoSlotBooster.getSlots();
+
+        final CustomLimited cd = new CustomLimited("CubeCobra Imported", slots);
+//        cd.landSetCode = "UNF";
+        cd.numPacks = 3;
+        cd.singleton = true;
+        cd.customRankingsFile = "rankings_cubecobra.txt";
+
+        final Map<String, List<String>> sections = FileSection.parseSections(FileUtil.readFile(url));
+        final Deck deckCube = DeckSerializer.fromSections(sections);
+        if (deckCube == null) {
+            throw new IllegalArgumentException("Failed to parse deck from URL: " + url);
+        }
+        cd.cardPool = deckCube.getMain();
         return cd;
     }
 
