@@ -325,6 +325,40 @@ public class SealedCardPoolGenerator {
 
                 landSetCode = draft.getLandSetCode();
                 break;
+            case Import:
+                /*
+                  Import a cube from CubeCobra.
+                  Default settings include a variable number of boosters with a size of 15 cards.
+                 */
+                String cubeCobraId = SOptionPane.showInputDialog(
+                        Localizer.getInstance().getMessage("lblEnterCubeCobraURL") + ":",
+                        Localizer.getInstance().getMessage("lblImportCube"),
+                        null);
+
+                if (cubeCobraId == null) {
+                    return;
+                }
+
+                try {
+                    CubeImporter importer = new CubeImporter();
+                    CustomLimited importedDraft = importer.importFromCubeCobra(cubeCobraId);
+
+                    if (importedDraft == null) {
+                        SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblFailedToImportCube") + ": " + cubeCobraId);
+                        return;
+                    }
+                    UnOpenedProduct importedProduct = new UnOpenedProduct(importedDraft.getSealedProductTemplate(), importedDraft.getCardPool());
+                    importedProduct.setLimitedPool(importedDraft.isSingleton());
+                    if (!chooseNumberOfBoosters(importedProduct)) {
+                        return;
+                    }
+                    this.product.add(importedProduct);
+
+                } catch (Exception e) {
+                    SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblErrorImportingCube") + ": " + e.getMessage());
+                    return;
+                }
+                break;
         }
     }
 
