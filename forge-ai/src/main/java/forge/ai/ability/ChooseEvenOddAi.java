@@ -1,17 +1,18 @@
 package forge.ai.ability;
 
+import forge.ai.AiAbilityDecision;
 import forge.ai.AiAttackController;
+import forge.ai.AiPlayDecision;
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.util.MyRandom;
 
 public class ChooseEvenOddAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player aiPlayer, SpellAbility sa) {
         if (!sa.hasParam("AILogic")) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.MissingLogic);
         }
         if (sa.usesTargeting()) {
             sa.resetTargets();
@@ -19,16 +20,17 @@ public class ChooseEvenOddAi extends SpellAbilityAi {
             if (sa.canTarget(opp)) {
                 sa.getTargets().add(opp);
             } else {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
         }
-        boolean chance = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
-        return chance;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        return mandatory || canPlayAI(ai, sa);
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        if (mandatory) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+        return canPlay(ai, sa);
     }
-
 }

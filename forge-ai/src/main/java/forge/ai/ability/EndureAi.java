@@ -2,6 +2,8 @@ package forge.ai.ability;
 
 import com.google.common.collect.Sets;
 
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
@@ -22,19 +24,19 @@ public class EndureAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         // Support for possible targeted Endure (e.g. target creature endures X)
         if (sa.usesTargeting()) {
             Card bestCreature = ComputerUtilCard.getBestCreatureAI(aiPlayer.getCardsIn(ZoneType.Battlefield));
             if (bestCreature == null) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             sa.resetTargets();
             sa.getTargets().add(bestCreature);
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     public static boolean shouldPutCounters(Player ai, SpellAbility sa) {
@@ -121,7 +123,7 @@ public class EndureAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         // Support for possible targeted Endure (e.g. target creature endures X)
         if (sa.usesTargeting()) {
             CardCollection list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield),
@@ -129,12 +131,16 @@ public class EndureAi extends SpellAbilityAi {
 
             if (!list.isEmpty()) {
                 sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(list));
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        return canPlayAI(aiPlayer, sa) || mandatory;
+        if (mandatory) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        return canPlay(aiPlayer, sa);
     }
 }

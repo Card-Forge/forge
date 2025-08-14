@@ -302,7 +302,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
             copy.setStates(CardFactory.getCloneStates(original, copy, sa));
             // force update the now set State
             if (original.isTransformable()) {
-                copy.setState(original.isTransformed() ? CardStateName.Transformed : CardStateName.Original, true, true);
+                copy.setState(original.isTransformed() ? CardStateName.Backside : CardStateName.Original, true, true);
             } else {
                 copy.setState(copy.getCurrentStateName(), true, true);
             }

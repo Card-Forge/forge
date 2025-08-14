@@ -1,13 +1,12 @@
 package forge.game.ability.effects;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import forge.GameCommand;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.perpetual.PerpetualNewPT;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.spellability.SpellAbility;
 
@@ -61,13 +60,8 @@ public class PowerExchangeEffect extends SpellAbilityEffect {
         final long timestamp = game.getNextTimestamp();
 
         if (perpetual) {
-            Map <String, Object> params = new HashMap<>();
-            params.put("Power", power2);
-            params.put("Timestamp", timestamp);
-            params.put("Category", "NewPT");
-            c1.addPerpetual(params);
-            params.put("Power", power1);
-            c2.addPerpetual(params);
+            c1.addPerpetual(new PerpetualNewPT(timestamp, power2, null));
+            c2.addPerpetual(new PerpetualNewPT(timestamp, power1, null));
         }
         c1.addNewPT(power2, null, timestamp, 0);
         c2.addNewPT(power1, null, timestamp, 0);

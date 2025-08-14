@@ -275,32 +275,40 @@ public abstract class TapAiBase extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
 
         if (!sa.usesTargeting()) {
             if (mandatory) {
-                return true;
+                return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
             }
 
             final List<Card> pDefined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
             // might be from ETBreplacement
-            return pDefined.isEmpty() || !pDefined.get(0).isInPlay() || (pDefined.get(0).isUntapped() && pDefined.get(0).getController() != ai);
+            if (pDefined.isEmpty() || !pDefined.get(0).isInPlay() || (pDefined.get(0).isUntapped() && pDefined.get(0).getController() != ai)) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
         } else {
             sa.resetTargets();
             if (tapPrefTargeting(ai, source, sa, mandatory)) {
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             } else if (mandatory) {
                 // not enough preferred targets, but mandatory so keep going:
-                return tapUnpreferredTargeting(ai, sa, mandatory);
+                if (tapUnpreferredTargeting(ai, sa, mandatory)) {
+                    return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
+                } else {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
             }
         }
 
-        return false;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         final Card source = sa.getHostCard();
         final boolean oppTargetsChoice = sa.hasParam("TargetingPlayer");
 
@@ -309,7 +317,11 @@ public abstract class TapAiBase extends SpellAbilityAi {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);
             sa.getTargets().clear();
-            return targetingPlayer.getController().chooseTargetsFor(sa);
+            if (targetingPlayer.getController().chooseTargetsFor(sa)) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
         }
 
         boolean randomReturn = true;
@@ -318,11 +330,10 @@ public abstract class TapAiBase extends SpellAbilityAi {
             // target section, maybe pull this out?
             sa.resetTargets();
             if (!tapPrefTargeting(ai, source, sa, false)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
-        return randomReturn;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
-
 }

@@ -1,0 +1,8 @@
+Name:Sokka's Haiku
+ManaCost:3 U U
+Types:Instant Lesson
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDraw | SpellDescription$ Counter target spell.,,,Draw a card, then mill three cards.,,,Untap target land.
+SVar:DBDraw:DB$ Draw | SubAbility$ DBMill
+SVar:DBMill:DB$ Mill | Defined$ You | NumCards$ 3 | SubAbility$ DBUntap
+SVar:DBUntap:DB$ Untap | ValidTgts$ Land | TgtPrompt$ Select target land
+Oracle:Counter target spell.\nDraw a card, then mill three cards.\nUntap target land.

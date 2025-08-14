@@ -1,10 +1,10 @@
 monkey_small.png
-size: 64,16
+size: 80,16
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none  
 Avatar        
-  xy: 0, 0
+  xy: 64, 0
   size: 16, 16     
 Idle 
   xy: 0, 0

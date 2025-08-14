@@ -762,6 +762,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     final StaticAbility st = eff.addStaticAbility(sbPlay.toString());
                     eff.addRemembered(movedCard);
                     addForgetOnMovedTrigger(eff, "Exile");
+                    addForgetOnCastTrigger(eff, "Card.IsRemembered");
                     game.getAction().moveToCommand(eff, sa);
                 }
 

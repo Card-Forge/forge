@@ -47,11 +47,9 @@ public class InputPayManaOfCostPayment extends InputPayMana {
                 if (manaCost.payPhyrexian()) {
                     saPaidFor.setSpendPhyrexianMana(true);
                     this.phyLifeToLose += 2;
-                } else {
-                    if (player.hasKeyword("PayLifeInsteadOf:B") && manaCost.hasAnyKind(ManaAtom.BLACK)) {
-                        manaCost.decreaseShard(ManaCostShard.BLACK, 1);
-                        this.phyLifeToLose += 2;
-                    }
+                } else if (player.hasKeyword("PayLifeInsteadOf:B") && manaCost.hasAnyKind(ManaAtom.BLACK)) {
+                    manaCost.decreaseShard(ManaCostShard.BLACK, 1);
+                    this.phyLifeToLose += 2;
                 }
             }
 

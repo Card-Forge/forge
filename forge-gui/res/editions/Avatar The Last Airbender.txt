@@ -6,4 +6,42 @@ Type=Expansion
 ScryfallCode=TLA
 
 [cards]
+1 C Aang's Journey @Kotakan
+5 R Aang's Iceberg @Matteo Bassini
+10 M Appa, Steadfast Guardian @Maël Ollivier-Henry
+11 C Avatar Enthusiasts @Leanna Crossan
+29 R Momo, Friendly Flier @Brandon L. Hunt
+36 U Southern Air Temple @Salvatorre Zee Yazzie
+71 U Sokka's Haiku @Bun Toujo
+83 R Yue, the Moon Spirit @Yuumei
+117 M The Rise of Sozin @Mitori
+132 M Fated Firepower @Toshiaki Takayama
+133 U Fire Nation Attacks @Claudiu-Antoniu Magherusan
+151 R Redirect Lightning @Toni Infante
+176 C Earthbending Lesson @Toni Infante
+207 M Avatar Aang @Fahmi Fauzi
+221 R Fire Lord Zuko @Jo Cordisco
+230 R Katara, the Fearless @Hisashi Momose
+231 R Katara, Water Tribe's Hope @Toraji
+240 R Sokka, Bold Boomeranger @Toni Infante
+247 R Toph, the First Metalbender @Eilene Cherie
+287 L Plains @Salvatorre Zee Yazzie
+288 L Island @Grady Frederick
+289 L Swamp @John Di Giovanni
+290 L Mountain @Lorenzo Lanfranconi
+291 L Forest @Luc Courtois
+316 M Appa, Steadfast Guardian @Ilse Gort
+317 R Momo, Friendly Flier @Filip Burburan
+336 R Aang's Iceberg @Brigitte Roka & Clifton Stommel
+338 R Yue, the Moon Spirit @Barbara Rosiak
+341 M Fated Firepower @Brigitte Roka
+343 R Redirect Lightning @Perci Chen
+350 R Katara, the Fearless @Barbara Rosiak
+351 R Katara, Water Tribe's Hope @Chun Lo
+353 R Toph, the First Metalbender @Barbara Rosiak
+356 M The Rise of Sozin @Barbara Rosiak
+360 R Fire Lord Zuko @Flavio Girón
+361 R Katara, the Fearless @Flavio Girón
+362 R Toph, the First Metalbender @Flavio Girón
 363 M Avatar Aang @Bryan Konietzko
+383 R Sokka, Bold Boomeranger @Toni Infante

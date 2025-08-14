@@ -48,7 +48,6 @@ import forge.sound.SoundSystem;
 import forge.toolbox.*;
 import forge.util.*;
 
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
@@ -78,6 +77,7 @@ public class Forge implements ApplicationListener {
     public static KeyInputAdapter keyInputAdapter;
     private static boolean exited, initialized;
     public boolean needsUpdate = false;
+    public static boolean switchClassic = false;
     public static boolean advStartup = false;
     public static boolean safeToClose = true;
     public static boolean magnify = false;
@@ -91,6 +91,7 @@ public class Forge implements ApplicationListener {
     public static String extrawide = "default";
     public static float heigtModifier = 0.0f;
     public static float deltaTime = 0f;
+    public static float hueFragTime = 0f;
     private static boolean isloadingaMatch = false;
     public static boolean autoAIDeckSelection = false;
     public static boolean showFPS = false;
@@ -100,7 +101,6 @@ public class Forge implements ApplicationListener {
     public static boolean animatedCardTapUntap = false;
     public static String enableUIMask = "Crop";
     public static String selector = "Default";
-    public static boolean enablePreloadExtendedArt = false;
     public static boolean isTabletDevice = false;
     public static String locale = "en-US";
     public Assets assets;
@@ -118,6 +118,7 @@ public class Forge implements ApplicationListener {
     public static String CJK_Font = "";
     public static int hoveredCount = 0;
     public static boolean afterDBloaded = false;
+    public static boolean reversedPrompt = false;
     public static int mouseButtonID = 0;
     public static InputProcessor inputProcessor;
     private static Cursor cursor0, cursor1, cursor2, cursorA0, cursorA1, cursorA2;
@@ -206,6 +207,7 @@ public class Forge implements ApplicationListener {
 
         textureFiltering = getForgePreferences().getPrefBoolean(FPref.UI_LIBGDX_TEXTURE_FILTERING);
         showFPS = getForgePreferences().getPrefBoolean(FPref.UI_SHOW_FPS);
+        reversedPrompt = getForgePreferences().getPrefBoolean(FPref.UI_REVERSE_PROMPT_BUTTON);
         autoAIDeckSelection = getForgePreferences().getPrefBoolean(FPref.UI_AUTO_AIDECK_SELECTION);
         altPlayerLayout = getForgePreferences().getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
         altZoneTabs = getForgePreferences().getPrefBoolean(FPref.UI_ALT_PLAYERZONETABS);
@@ -215,7 +217,6 @@ public class Forge implements ApplicationListener {
             enableUIMask = "Full";
         else if (getForgePreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("false"))
             enableUIMask = "Off";
-        enablePreloadExtendedArt = getForgePreferences().getPrefBoolean(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
         locale = getForgePreferences().getPref(FPref.UI_LANGUAGE);
         autoCache = getForgePreferences().getPrefBoolean(FPref.UI_AUTO_CACHE_SIZE);
         disposeTextures = getForgePreferences().getPrefBoolean(FPref.UI_ENABLE_DISPOSE_TEXTURES);
@@ -240,27 +241,8 @@ public class Forge implements ApplicationListener {
                 getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblLoadingCardTranslations"));
                 CardTranslation.preloadTranslation(locale, ForgeConstants.LANG_DIR);
 
-                getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup"));
-
-                //add reminder to preload
-                if (enablePreloadExtendedArt) {
-                    if (autoCache)
-                        getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblPreloadExtendedArt") + "\nDetected RAM: " + totalDeviceRAM + "MB. Cache size: " + cacheSize);
-                    else
-                        getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblPreloadExtendedArt"));
-                } else {
-                    if (autoCache)
-                        getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup") + "\nDetected RAM: " + totalDeviceRAM + "MB. Cache size: " + cacheSize);
-                    else
-                        getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup"));
-                }
-
-                Gdx.app.postRunnable(() -> {
-                    afterDbLoaded();
-                    /*  call preloadExtendedArt here, if we put it above we will  *
-                     *  get error: No OpenGL context found in the current thread. */
-                    preloadExtendedArt();
-                });
+                getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblPrepareDatabase"));
+                Gdx.app.postRunnable(this::afterDbLoaded);
             };
             //see if app or assets need updating
             FThreads.invokeInBackgroundThread(() -> AssetsDownloader.checkForUpdates(exited, runnable));
@@ -297,22 +279,6 @@ public class Forge implements ApplicationListener {
 
     public static Scene getCurrentScene() {
         return currentScene;
-    }
-
-    private void preloadExtendedArt() {
-        if (!enablePreloadExtendedArt || !enableUIMask.equals("Full"))
-            return;
-        List<String> borderlessCardlistkeys = FileUtil.readFile(ForgeConstants.BORDERLESS_CARD_LIST_FILE);
-        if (borderlessCardlistkeys.isEmpty())
-            return;
-        List<String> filteredkeys = new ArrayList<>();
-        for (String cardname : borderlessCardlistkeys) {
-            File image = new File(ForgeConstants.CACHE_CARD_PICS_DIR + ForgeConstants.PATH_SEPARATOR + cardname + ".jpg");
-            if (image.exists())
-                filteredkeys.add(cardname);
-        }
-        if (!filteredkeys.isEmpty())
-            ImageCache.getInstance().preloadCache(filteredkeys);
     }
 
     private void preloadBoosterDrafts() {
@@ -370,8 +336,8 @@ public class Forge implements ApplicationListener {
             Config.instance().loadResources();
             SpellSmithScene.instance().loadEditions();
             GameHUD.getInstance().stopAudio();
+            MusicPlaylist.invalidateMusicPlaylist();
             if (startScene) {
-                MusicPlaylist.invalidateMusicPlaylist();
                 SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
                 switchScene(StartScene.instance());
             }
@@ -380,6 +346,10 @@ public class Forge implements ApplicationListener {
         }
     }
     protected void afterDbLoaded() {
+        if (GuiBase.isAndroid() && autoCache)
+            getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup") + "\nDetected RAM: " + totalDeviceRAM + "MB. Cache size: " + cacheSize);
+        else
+            getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup"));
         //override transition & title bg
         try {
             FileHandle transitionFile = Config.instance().getFile("ui/transition.png");
@@ -728,6 +698,7 @@ public class Forge implements ApplicationListener {
                         }
                     }
                     deltaTime = 0f;
+                    hueFragTime = 0f;
                 }
             }
         });
@@ -768,6 +739,9 @@ public class Forge implements ApplicationListener {
     }
 
     public static void switchToClassic() {
+        if (switchClassic)
+            return;
+        switchClassic = true;
         setTransitionScreen(new TransitionScreen(() -> {
             ImageCache.getInstance().disposeTextures();
             isMobileAdventureMode = false;
@@ -778,7 +752,8 @@ public class Forge implements ApplicationListener {
             clearTransitionScreen();
             openHomeDefault();
             exited = false;
-        }, Forge.takeScreenshot(), false, false));
+            switchClassic = false;
+        }, takeScreenshot(), false, false));
     }
 
     public static void switchToAdventure() {
@@ -870,6 +845,9 @@ public class Forge implements ApplicationListener {
             deltaTime += Gdx.graphics.getDeltaTime();
             if (deltaTime > 22.5f)
                 deltaTime = 0f;
+            hueFragTime += Gdx.graphics.getDeltaTime();
+            if (hueFragTime > 6.29f)
+                hueFragTime = 0f;
 
             FContainer screen = currentScreen;
 
