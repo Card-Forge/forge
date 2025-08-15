@@ -43,7 +43,7 @@ public abstract class AdvancedSearchParser {
         }
 
         String key = token.substring(0, index).trim().toLowerCase();
-        String valueStr = token.substring(index + opUsed.length()).trim().toLowerCase();
+        String valueStr = token.substring(index + opUsed.length()).toLowerCase();
         boolean creatureOnly = false;
 
         Predicate<CardRules> predicate = null;
@@ -406,6 +406,20 @@ public abstract class AdvancedSearchParser {
                     case "<=":
                         predicate = RarityParser.handleLessOrEqual(valueStr);
                         break;
+                }
+                break;
+
+            case "is":
+                if (opUsed.equals(":")) {
+                    switch(valueStr) {
+                        case "foil":
+                            predicate = PaperCardPredicates.isFoil(true);
+                            break;
+
+                        case "nonfoil":
+                            predicate = PaperCardPredicates.isFoil(false);
+                            break;
+                    }
                 }
                 break;
         }

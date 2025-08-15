@@ -90,6 +90,26 @@ public class Main extends AndroidApplication {
     private TextView progressText;
     private String versionString;
 
+    // The package name the resources are compiled under (stable across dev/prod).
+    // If you ever change the base app package, update this constant once.
+    private static final String RES_PKG_FALLBACK = "forge.app";
+
+    private int resId(String type, String name) {
+        // 1) Try fully-qualified with *runtime* package
+        int id = getResources().getIdentifier(name, type, getPackageName());
+        if (id != 0) return id;
+
+        // 2) Try fully-qualified with *fallback* resource package
+        if (!RES_PKG_FALLBACK.equals(getPackageName())) {
+            id = getResources().getIdentifier(name, type, RES_PKG_FALLBACK);
+            if (id != 0) return id;
+        }
+
+        android.util.Log.e("ForgeRes", "Missing resource " + type + "/" + name +
+                " for pkg=" + getPackageName() + " (also tried " + RES_PKG_FALLBACK + ")");
+        return 0;
+    }
+
     private AndroidClipboard getAndroidClipboard() {
         if (androidClipboard == null)
             androidClipboard = new AndroidClipboard();
@@ -98,6 +118,10 @@ public class Main extends AndroidApplication {
 
     public static boolean isMiUi() {
         return !TextUtils.isEmpty(getSystemProperty("ro.miui.ui.version.name"));
+    }
+
+    public boolean needExternalFileAccess() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager();
     }
 
     public static String getSystemProperty(String propName) {
@@ -126,8 +150,7 @@ public class Main extends AndroidApplication {
     protected void onResume() {
         try {
             super.onResume();
-        } catch (Exception e) {
-        }
+        } catch (Exception ignore) {}
     }
 
     @Override
@@ -145,13 +168,13 @@ public class Main extends AndroidApplication {
         } catch (Exception e) {
             versionString = "0.0";
         }
-        setContentView(getResources().getIdentifier("main", "layout", getPackageName()));
+        setContentView(resId("layout", "main"));
         mShortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
         sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-        progressBar = findViewById(getResources().getIdentifier("pBar", "id", getPackageName()));
+        progressBar = findViewById(resId("id", "pBar"));
         progressBar.setIndeterminate(true);
         progressBar.setVisibility(View.GONE);
-        progressText = findViewById(getResources().getIdentifier("pText", "id", getPackageName()));
+        progressText = findViewById(resId("id", "pText"));
         progressText.setVisibility(View.GONE);
 
         isMIUI = isMiUi();
@@ -214,7 +237,9 @@ public class Main extends AndroidApplication {
         text.setGravity(Gravity.LEFT);
         text.setTypeface(Typeface.SERIF);
         String SP = "Storage Permission";
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        if (needExternalFileAccess()) {
+          SP = "All File Access Permission";
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             SP = "Photos and Videos, Music and Audio Permissions";
         } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
             SP = "Files & Media Permissions";
@@ -226,8 +251,11 @@ public class Main extends AndroidApplication {
                 " 2) Tap Permissions\n" +
                 " 3) Enable the " + SP + ".\n\n" +
                 "(You can tap anywhere to exit and restart the app)\n\n";
+        String allFileAccessSteps =  " 1) Tap \"App Settings\" Button.\n" +
+                " 2) Enable the " + SP + ".\n\n" +
+                "(You can tap anywhere to exit and restart the app)\n\n";
         if (ex) {
-            title = manageApp ? "Forge AutoUpdater Permission...\n" : "Forge didn't initialize!\n";
+            title = needExternalFileAccess() ? "All File Access Permission" : manageApp ? "Forge AutoUpdater Permission...\n" : "Forge didn't initialize!\n";
             steps = manageApp ? " 1) Tap \"App Settings\" Button.\n" +
                     " 2) Enable \"Allow apps from this source\"\n" +
                     "(You can tap anywhere to exit and restart the app)\n\n" : msg + "\n\n";
@@ -236,7 +264,7 @@ public class Main extends AndroidApplication {
         SpannableString ss1 = new SpannableString(title);
         ss1.setSpan(new StyleSpan(Typeface.BOLD), 0, ss1.length(), 0);
         text.append(ss1);
-        text.append(steps);
+        text.append(needExternalFileAccess() ? allFileAccessSteps : steps);
         row.addView(text);
         row.setGravity(Gravity.CENTER);
 
@@ -265,7 +293,16 @@ public class Main extends AndroidApplication {
 
         button.setTextColor(Color.RED);
         button.setOnClickListener(v -> {
-            if (manageApp) {
+            if (needExternalFileAccess()) {
+                /*
+                  This is needed for Android 11 and upwards to have access on external storage (direct file path)
+                  ie adventure mode -> data -> restore. Though its not fast like the app-specific storage...
+                */
+                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                intent.setData(uri).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            } else if (manageApp) {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES)
                         .setData(Uri.parse(String.format("package:%s", getPackageName())))
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -291,8 +328,8 @@ public class Main extends AndroidApplication {
     private void loadGame(final String title, final String steps, boolean isLandscape, AndroidAdapter adapter, boolean permissiongranted, int totalRAM, boolean isTabletDevice, AndroidApplicationConfiguration config, boolean exception, String msg) {
         try {
             final Handler handler = new Handler();
-            forgeLogo = findViewById(getResources().getIdentifier("logo_id", "id", getPackageName()));
-            activeView = findViewById(getResources().getIdentifier("mainview", "id", getPackageName()));
+            forgeLogo = findViewById(resId("id", "logo_id"));
+            activeView = findViewById(resId("id", "mainview"));
             activeView.setBackgroundColor(Color.WHITE);
             forgeView = initializeForView(Forge.getApp(getAndroidClipboard(), adapter, ASSETS_DIR, false, !isLandscape, totalRAM, isTabletDevice, Build.VERSION.SDK_INT, Build.VERSION.RELEASE, getDeviceName()), config);
 
@@ -301,7 +338,7 @@ public class Main extends AndroidApplication {
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
                     handler.postDelayed(() -> {
-                        if (!permissiongranted || exception) {
+                        if (needExternalFileAccess() || !permissiongranted || exception) {
                             displayMessage(forgeLogo, adapter, exception, msg, false);
                         } else if (title.isEmpty() && steps.isEmpty()) {
                             if (isLandscape) {
@@ -657,6 +694,11 @@ public class Main extends AndroidApplication {
             return new GitLogs().getLatestReleaseTag(releaseAtom);
         }
 
+        private String fileProviderAuthority() {
+            // Works for both prod (forge.app) and dev (forge.app.dev)
+            return getPackageName() + ".publicfileprovider";
+        }
+
         @Override
         public boolean openFile(String filename) {
             try {
@@ -671,7 +713,8 @@ public class Main extends AndroidApplication {
                     return true;
                 } else {
                     Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
-                    intent.setData(PublicFileProvider.getUriForFile(getContext(), "com.mydomain.publicfileprovider", new File(filename)));
+                    intent.setData(PublicFileProvider.getUriForFile(
+                          getContext(), fileProviderAuthority(), new File(filename)));
                     intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     startActivity(intent);
                     return true;

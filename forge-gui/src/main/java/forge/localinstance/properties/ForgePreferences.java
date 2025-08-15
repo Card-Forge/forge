@@ -88,6 +88,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_SMART_CARD_ART("false"),
         UI_AUTO_AIDECK_SELECTION("true"),
         UI_DISABLE_CARD_IMAGES ("false"),
+        UI_REVERSE_PROMPT_BUTTON ("false"),
         UI_IMAGE_CACHE_MAXIMUM("400"),
         UI_OVERLAY_FOIL_EFFECT ("true"),
         UI_HIDE_REMINDER_TEXT ("false"),
@@ -216,6 +217,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
 
         LOAD_CARD_SCRIPTS_LAZILY ("false"),
         LOAD_ARCHIVED_FORMATS ("false"),
+        PRELOAD_CUSTOM_DRAFTS ("false"),
 
         DECK_DEFAULT_CARD_LIMIT ("4"),
         DECKGEN_SINGLETONS ("false"),

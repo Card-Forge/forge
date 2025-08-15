@@ -48,13 +48,13 @@ public class CardRendererUtils {
                 showAlt = reference.equals(card.getAlternateState().getAbilityText());
             else if (card.isSplitCard()) {
                 //special case if aftermath cards can be cast from graveyard like yawgmoths will, you will have choices
-                if (card.getAlternateState().getOracleText().contains("Aftermath"))
-                    showAlt = card.getAlternateState().getOracleText().contains(reference);
+                if (card.getAlternateState().hasAftermath())
+                    showAlt = card.getAlternateState().getOracleText().contains(reference.trim());
                 else {
                     if (card.isRoom()) // special case for room cards
                         showAlt = card.getAlternateState().getName().equalsIgnoreCase(reference);
                     else
-                        showAlt = reference.equals(card.getAlternateState().getAbilityText());
+                        showAlt = reference.contains(card.getAlternateState().getAbilityText());
                 }
             }
         }
