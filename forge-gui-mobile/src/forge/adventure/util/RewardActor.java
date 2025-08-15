@@ -551,9 +551,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         generateBackFace(r, t, false);
     }
 
-    private void generateBackFace(Reward r, Texture t, boolean mustFlip) {
+    private void generateBackFace(Reward r, Texture t, boolean displayFlipped) {
         try {
-            alternateToolTipImage = new RewardImage(processDrawable(t, mustFlip));
+            alternateToolTipImage = new RewardImage(processDrawable(t, displayFlipped));
 
             if (holdTooltip != null) {
                 if (holdTooltip.tooltip_actor.getChildren().size <= 2) {
@@ -635,9 +635,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         return processDrawable(texture, false);
     }
 
-    private TextureRegionDrawable processDrawable(Texture texture, boolean mustFlip) {
+    private TextureRegionDrawable processDrawable(Texture texture, boolean displayFlipped) {
         TextureRegion textureRegion = ImageCache.getInstance().croppedBorderImage(texture);
-        if (mustFlip) {
+        if (displayFlipped) {
             textureRegion.flip(true, true);
         }
         TextureRegionDrawable drawable = new TextureRegionDrawable(textureRegion);
