@@ -816,11 +816,16 @@ public class CardImageRenderer {
             float new_y = ForgeConstants.isGdxPortLandscape && isCurrentCard ? (dispH - new_h) / 2 : y;
             float croppedArea = isModernFrame(card) ? CROP_MULTIPLIER : 0.97f;
             float minusxy = isModernFrame(card) ? 0.0f : 0.13f * radius;
+            boolean displayFlipped = card.isFlipped();
+            if (card.isFlipCard() && altState) {
+                displayFlipped = !displayFlipped;
+            }
+            
             if (card.getCurrentState().getSetCode().equals("LEA") || card.getCurrentState().getSetCode().equals("LEB")) {
                 croppedArea = 0.975f;
                 minusxy = 0.135f * radius;
             }
-            if (canshow && card.isFlipped()) {
+            if (canshow && displayFlipped) {
                 if (Forge.enableUIMask.equals("Full")) {
                     if (ImageCache.getInstance().isFullBorder(image))
                         g.drawCardRoundRect(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, 180);
