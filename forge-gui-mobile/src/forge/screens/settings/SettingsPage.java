@@ -393,6 +393,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         Forge.getLocalizer().getMessage("cbLoadArchivedFormats"),
                         Forge.getLocalizer().getMessage("nlLoadArchivedFormats")),
                 3);
+        lstSettings.addItem(new BooleanSetting(FPref.PRELOAD_CUSTOM_DRAFTS,
+                        Forge.getLocalizer().getMessage("cbPreloadCustomDrafts"),
+                        Forge.getLocalizer().getMessage("nlPreloadCustomDrafts")),
+                3);
         lstSettings.addItem(new BooleanSetting(FPref.UI_LOAD_UNKNOWN_CARDS,
                                     Forge.getLocalizer().getMessage("lblEnableUnknownCards"),
                                     Forge.getLocalizer().getMessage("nlEnableUnknownCards")) {
