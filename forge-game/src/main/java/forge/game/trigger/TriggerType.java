@@ -17,6 +17,7 @@ public enum TriggerType {
     AbilityResolves(TriggerAbilityResolves.class),
     AbilityTriggered(TriggerAbilityTriggered.class),
     Adapt(TriggerAdapt.class),
+    Airbend(TriggerElementalbend.class),
     Always(TriggerAlways.class),
     Attached(TriggerAttached.class),
     AttackerBlocked(TriggerAttackerBlocked.class),
@@ -85,6 +86,7 @@ public enum TriggerType {
     Explores(TriggerExplores.class),
     Fight(TriggerFight.class),
     FightOnce(TriggerFightOnce.class),
+    Firebend(TriggerElementalbend.class),
     FlippedCoin(TriggerFlippedCoin.class),
     Forage(TriggerForage.class),
     Foretell(TriggerForetell.class),
@@ -152,7 +154,9 @@ public enum TriggerType {
     UntapAll(TriggerUntapAll.class),
     Untaps(TriggerUntaps.class),
     VisitAttraction(TriggerVisitAttraction.class),
-    Vote(TriggerVote.class);
+    Vote(TriggerVote.class),
+    Waterbend(TriggerElementalbend.class)          
+    ;
 
     private final Constructor<? extends Trigger> constructor;
 
