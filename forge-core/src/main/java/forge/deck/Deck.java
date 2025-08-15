@@ -521,6 +521,17 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return sum;
     }
 
+    /**
+     * Counts the number of copies of this exact card print across all deck sections.
+     */
+    public int count(PaperCard card) {
+        int sum = 0;
+        for (Entry<DeckSection, CardPool> section : this) {
+            sum += section.getValue().count(card);
+        }
+        return sum;
+    }
+
     public void setAiHints(String aiHintsInfo) {
         if (aiHintsInfo == null || aiHintsInfo.trim().isEmpty()) {
             return;
