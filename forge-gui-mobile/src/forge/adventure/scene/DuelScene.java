@@ -426,6 +426,10 @@ public class DuelScene extends ForgeScene {
     }
 
     private static void removeExcessCopies(CardPool mainSection, DeckFormat format) {
+        if (mainSection == null || format == null) {
+            return;
+        }
+
         for(Map.Entry<PaperCard, Integer> e : mainSection) {
             PaperCard card = e.getKey();
             int amount = e.getValue();
