@@ -198,7 +198,7 @@ public class CardFactory {
         if (c.hasAlternateState()) {
             if (c.isFlipCard()) {
                 c.setState(CardStateName.Flipped, false);
-                // set the altstate to false since the rotated image is handled by graphics renderer
+                // set the imagekey altstate to false since the rotated image is handled by graphics renderer
                 // setting this to true will download the original image with different name.
                 c.setImageKey(cp.getImageKey(false));
             }
