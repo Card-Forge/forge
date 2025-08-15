@@ -283,7 +283,8 @@ public class Forge implements ApplicationListener {
 
     private void preloadBoosterDrafts() {
         //preloading of custom drafts
-        BoosterDraft.initializeCustomDrafts();
+        if (getForgePreferences().getPrefBoolean(FPref.PRELOAD_CUSTOM_DRAFTS))
+            BoosterDraft.initializeCustomDrafts();
     }
 
     public static void openHomeScreen(int index, FScreen lastMatch) {
