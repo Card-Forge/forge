@@ -19,6 +19,7 @@ package forge.gamemodes.limited;
 
 import forge.StaticData;
 import forge.card.CardEdition;
+import forge.card.DraftOptions;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
@@ -53,12 +54,14 @@ public class BoosterDraft implements IBoosterDraft {
     private int nextId = 0;
     private static final int N_PLAYERS = 8;
     public static final String FILE_EXT = ".draft";
+
+    int podSize;
     private final List<LimitedPlayer> players = new ArrayList<>();
     private final LimitedPlayer localPlayer;
 
     private IDraftLog draftLog = null;
 
-    private String doublePickDuringDraft = ""; // "FirstPick" or "Always"
+    private DraftOptions.DoublePick doublePickDuringDraft;
     protected int nextBoosterGroup = 0;
     private int currentBoosterSize = 0;
     private int currentBoosterPick = 0;
@@ -77,6 +80,7 @@ public class BoosterDraft implements IBoosterDraft {
         if (!draft.generateProduct()) {
             return null;
         }
+
         draft.initializeBoosters();
         return draft;
     }
@@ -152,11 +156,15 @@ public class BoosterDraft implements IBoosterDraft {
                     CardEdition edition = FModel.getMagicDb().getEditions().get(setCode);
                     // If this is metaset, edtion will be null
                     if (edition != null) {
-                        doublePickDuringDraft = edition.getDoublePickDuringDraft();
+                        if (podSize != edition.getDraftOptions().getRecommendedPodSize()) {
+                            // Auto choosing recommended pod size. In the future we may want to allow user to choose
+                            setPodSize(edition.getDraftOptions().getRecommendedPodSize());
+                        }
+                        doublePickDuringDraft = edition.getDraftOptions().isDoublePick(this.getPodSize());
                     }
 
                     final IUnOpenedProduct product1 = block.getBooster(setCode);
-
+                    // lets associate the booster here so we can reference it later
                     for (int i = 0; i < nPacks; i++) {
                         this.product.add(product1);
                     }
@@ -231,7 +239,19 @@ public class BoosterDraft implements IBoosterDraft {
     }
 
     public static BoosterDraft createDraft(final LimitedPoolType draftType, final CardBlock block, final String[] boosters) {
+        // quest draft
         final BoosterDraft draft = new BoosterDraft(draftType);
+
+        String setCode = boosters[0];
+        CardEdition edition = FModel.getMagicDb().getEditions().get(setCode);
+        // If this is metaset, edtion will be null
+        if (edition != null) {
+            if (draft.getPodSize() != edition.getDraftOptions().getRecommendedPodSize()) {
+                // Auto choosing recommended pod size. In the future we may want to allow user to choose
+                draft.setPodSize(edition.getDraftOptions().getRecommendedPodSize());
+            }
+            draft.doublePickDuringDraft = edition.getDraftOptions().isDoublePick(draft.getPodSize());
+        }
 
         for (String booster : boosters) {
             try {
@@ -258,10 +278,11 @@ public class BoosterDraft implements IBoosterDraft {
 
     protected BoosterDraft(final LimitedPoolType draftType, int numPlayers) {
         this.draftFormat = draftType;
+        this.podSize = numPlayers;
 
         localPlayer = new LimitedPlayer(0, this);
         players.add(localPlayer);
-        for (int i = 1; i < numPlayers; i++) {
+        for (int i = 1; i < this.podSize; i++) {
             players.add(new LimitedPlayerAI(i, this));
         }
     }
@@ -269,6 +290,25 @@ public class BoosterDraft implements IBoosterDraft {
     public DraftPack addBooster(CardEdition edition) {
         final IUnOpenedProduct product = new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(edition.getCode()));
         return new DraftPack(product.get(), nextId++);
+    }
+
+    public void setPodSize(int size) {
+        if (size < 2 || size > N_PLAYERS) {
+            throw new IllegalArgumentException("BoosterDraft : invalid pod size " + size);
+        }
+        this.podSize = size;
+
+        // Resize players list if it was already generated
+        while (this.players.size() < this.podSize) {
+            this.players.add(new LimitedPlayerAI(this.players.size(), this));
+        }
+        while (this.players.size() > this.podSize) {
+            this.players.remove(this.players.size() - 1);
+        }
+    }
+
+    public int getPodSize() {
+        return this.podSize;
     }
 
     @Override
@@ -293,7 +333,7 @@ public class BoosterDraft implements IBoosterDraft {
 
     @Override
     public LimitedPlayer getNeighbor(LimitedPlayer player, boolean left) {
-        return players.get((player.order + (left ? 1 : -1) + N_PLAYERS) % N_PLAYERS);
+        return players.get((player.order + (left ? 1 : -1) + this.podSize) % this.podSize);
     }
 
     private void setupCustomDraft(final CustomLimited draft) {
@@ -303,6 +343,8 @@ public class BoosterDraft implements IBoosterDraft {
         }
 
         final SealedTemplate tpl = draft.getSealedProductTemplate();
+
+        // TODO Determine PodSize from custom draft
 
         final UnOpenedProduct toAdd = new UnOpenedProduct(tpl, dPool);
         toAdd.setLimitedPool(draft.isSingleton());
@@ -389,7 +431,7 @@ public class BoosterDraft implements IBoosterDraft {
     public void initializeBoosters() {
 
         for (Supplier<List<PaperCard>> boosterRound : this.product) {
-            for (int i = 0; i < N_PLAYERS; i++) {
+            for (int i = 0; i < this.podSize; i++) {
                 DraftPack pack = new DraftPack(boosterRound.get(), nextId++);
                 this.players.get(i).receiveUnopenedPack(pack);
             }
@@ -405,6 +447,7 @@ public class BoosterDraft implements IBoosterDraft {
         if (firstPlayer.unopenedPacks.isEmpty()) {
             return false;
         }
+        // todo set pick two logic  for this booster group
 
         for (LimitedPlayer pl : this.players) {
             pl.newPack();
@@ -418,8 +461,8 @@ public class BoosterDraft implements IBoosterDraft {
 
     @Override
     public Deck[] getDecks() {
-        Deck[] decks = new Deck[7];
-        for (int i = 1; i < N_PLAYERS; i++) {
+        Deck[] decks = new Deck[this.podSize - 1];
+        for (int i = 1; i < this.podSize; i++) {
             decks[i - 1] = ((LimitedPlayerAI) this.players.get(i)).buildDeck(IBoosterDraft.LAND_SET_CODE[0] != null ? IBoosterDraft.LAND_SET_CODE[0].getCode() : null);
         }
         return decks;
@@ -427,7 +470,7 @@ public class BoosterDraft implements IBoosterDraft {
 
     @Override
     public LimitedPlayer[] getOpposingPlayers() {
-        return this.players.toArray(new LimitedPlayer[7]);
+        return this.players.toArray(new LimitedPlayer[this.podSize - 1]);
     }
 
     @Override
@@ -447,9 +490,9 @@ public class BoosterDraft implements IBoosterDraft {
     public void passPacks() {
         // Alternate direction of pack passing
         int adjust = this.nextBoosterGroup % 2 == 1 ? 1 : -1;
-        if ("FirstPick".equals(this.doublePickDuringDraft) && currentBoosterPick == 1) {
+        if (DraftOptions.DoublePick.FIRST_PICK.equals(this.doublePickDuringDraft) && currentBoosterPick == 0) {
             adjust = 0;
-        } else if (currentBoosterPick % 2 == 1 && "Always".equals(this.doublePickDuringDraft)) {
+        } else if (currentBoosterPick % 2 == 0 && DraftOptions.DoublePick.ALWAYS.equals(this.doublePickDuringDraft)) {
             // This may not work with Conspiracy cards that mess with the draft
             // But it probably doesn't matter since Conspiracy doesn't have double pick?
             adjust = 0;
@@ -463,7 +506,7 @@ public class BoosterDraft implements IBoosterDraft {
             }
         }
 
-        for (int i = 0; i < N_PLAYERS; i++) {
+        for (int i = 0; i < this.podSize; i++) {
             LimitedPlayer pl = this.players.get(i);
             DraftPack passingPack = pl.passPack();
 
@@ -498,7 +541,7 @@ public class BoosterDraft implements IBoosterDraft {
             }
 
             if (passToPlayer == null) {
-                passToPlayer = this.players.get((i + adjust + N_PLAYERS) % N_PLAYERS);
+                passToPlayer = this.players.get((i + adjust + this.podSize) % this.podSize);
             }
 
             passToPlayer.receiveOpenedPack(passingPack);
@@ -507,7 +550,7 @@ public class BoosterDraft implements IBoosterDraft {
 
     protected void computerChoose() {
         // Loop through players 1-7 to draft their current pack
-        for (int i = 1; i < N_PLAYERS; i++) {
+        for (int i = 1; i < this.podSize; i++) {
             LimitedPlayer pl = this.players.get(i);
             if (pl.shouldSkipThisPick()) {
                 continue;
