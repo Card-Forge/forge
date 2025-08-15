@@ -409,33 +409,35 @@ public class DuelScene extends ForgeScene {
         removeExcessCopies(attractions, format);
         removeExcessCopies(contraptions, format);
 
-        int missingCards = Config.instance().getConfigData().minDeckSize - mainSection.countAll();
-        if (missingCards > 0) //Replace unknown cards for a Wastes.
-            mainSection.add(PLACEHOLDER_MAIN, missingCards);
+        if (mainSection != null && !mainSection.isEmpty()) {
+            int missingCards = Config.instance().getConfigData().minDeckSize - mainSection.countAll();
+            if (missingCards > 0) //Replace unknown cards for a Wastes.
+                mainSection.add(PLACEHOLDER_MAIN, missingCards);
+        }
 
-        if(!attractions.isEmpty()) {
+        if (attractions != null && !attractions.isEmpty()) {
             int missingAttractions = 10 - attractions.countAll(); //TODO: These shouldn't be hard coded but DeckFormat's gonna need some reorganizing to fetch this dynamically
             if(missingAttractions > 0)
                 attractions.add(PLACEHOLDER_ATTRACTION, missingAttractions);
         }
-        if(!contraptions.isEmpty()) {
+        if (contraptions != null && !contraptions.isEmpty()) {
             int missingContraptions = 15 - contraptions.countAll();
             if(missingContraptions > 0)
                 contraptions.add(PLACEHOLDER_CONTRAPTION, missingContraptions);
         }
     }
 
-    private static void removeExcessCopies(CardPool mainSection, DeckFormat format) {
-        if (mainSection == null || format == null) {
+    private static void removeExcessCopies(CardPool section, DeckFormat format) {
+        if (section == null || format == null) {
             return;
         }
 
-        for(Map.Entry<PaperCard, Integer> e : mainSection) {
+        for(Map.Entry<PaperCard, Integer> e : section) {
             PaperCard card = e.getKey();
             int amount = e.getValue();
             int limit = format.getMaxCardCopies(card);
             if(amount > limit)
-                mainSection.remove(card, amount - limit);
+                section.remove(card, amount - limit);
         }
     }
 
