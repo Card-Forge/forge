@@ -1,0 +1,8 @@
+Name:Raucous Audience
+ManaCost:1 G
+Types:Creature Human Citizen
+PT:2/1
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add {G}. If you control a creature with power 4 or greater, add {G}{G} instead.
+SVar:X:Count$Compare Y GE1.2.1
+SVar:Y:Count$Valid Creature.YouCtrl+powerGE4
+Oracle:{T}: Add {G}. If you control a creature with power 4 or greater, add {G}{G} instead.
