@@ -230,7 +230,7 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
         // TODO For pile drafts, only one other draft deck is made
 
         // Construct computer's decks and save draft
-        final Deck[] computer = this.boosterDraft.getDecks();
+        final Deck[] computer = this.boosterDraft.getComputerDecks();
 
         final DeckGroup finishedDraft = new DeckGroup(s);
         finishedDraft.setHumanDeck((Deck) this.getPlayersDeck().copyTo(s));

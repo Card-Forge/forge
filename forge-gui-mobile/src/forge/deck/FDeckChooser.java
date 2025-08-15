@@ -19,7 +19,6 @@ import com.google.common.collect.Lists;
 
 import forge.Forge;
 import forge.assets.ImageCache;
-import forge.deck.FDeckEditor.EditorType;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
@@ -365,9 +364,10 @@ public class FDeckChooser extends FScreen {
             Deck generatedDeck = deck.getDeck();
             if (generatedDeck == null) { return; }
             generatedDeck = (Deck)generatedDeck.copyTo(""); //prevent deck having a name by default
-            editor = new FDeckEditor(getEditorType(), generatedDeck, true);
+            editor = new FDeckEditor(getEditorConfig(), generatedDeck);
         } else {
-            editor = new FDeckEditor(getEditorType(), "", false);
+            editor = new FDeckEditor(getEditorConfig(), "");
+            editor.setSelectedSection(DeckSection.Sideboard);
         }
         editor.setSaveHandler(event -> {
             //ensure user returns to proper deck type and that list is refreshed if new deck is saved
@@ -463,80 +463,80 @@ public class FDeckChooser extends FScreen {
         }
     }
 
-    private EditorType getEditorType() {
+    private FDeckEditor.DeckEditorConfig getEditorConfig() {
         switch (lstDecks.getGameType()) {
         case DeckManager:
             switch (selectedDeckType) {
             case COMMANDER_DECK:
-                return EditorType.Commander;
+                return FDeckEditor.EditorConfigCommander;
             case OATHBREAKER_DECK:
-                return EditorType.Oathbreaker;
+                return FDeckEditor.EditorConfigOathbreaker;
             case TINY_LEADERS_DECK:
-                return EditorType.TinyLeaders;
+                return FDeckEditor.EditorConfigTinyLeaders;
             case BRAWL_DECK:
-                return EditorType.Brawl;
+                return FDeckEditor.EditorConfigBrawl;
             case SCHEME_DECK:
-                return EditorType.Archenemy;
+                return FDeckEditor.EditorConfigArchenemy;
             case PLANAR_DECK:
-                return EditorType.Planechase;
+                return FDeckEditor.EditorConfigPlanechase;
             case DRAFT_DECK:
-                return EditorType.Draft;
+                return FDeckEditor.EditorConfigDraft;
             case SEALED_DECK:
-                return EditorType.Sealed;
+                return FDeckEditor.EditorConfigSealed;
             default:
-                return EditorType.Constructed;
+                return FDeckEditor.EditorConfigConstructed;
             }
         case Commander:
-            return EditorType.Commander;
+            return FDeckEditor.EditorConfigCommander;
         case Oathbreaker:
-            return EditorType.Oathbreaker;
+            return FDeckEditor.EditorConfigOathbreaker;
         case TinyLeaders:
-            return EditorType.TinyLeaders;
+            return FDeckEditor.EditorConfigTinyLeaders;
         case Brawl:
-            return EditorType.Brawl;
+            return FDeckEditor.EditorConfigBrawl;
         case Archenemy:
-            return EditorType.Archenemy;
+            return FDeckEditor.EditorConfigArchenemy;
         case Planechase:
-            return EditorType.Planechase;
+            return FDeckEditor.EditorConfigPlanechase;
         default:
-            return EditorType.Constructed;
+            return FDeckEditor.EditorConfigConstructed;
         }
     }
 
     private void editDeck(DeckProxy deck) {
-        EditorType editorType = getEditorType();
-        switch (editorType) {
-        case Commander:
-            DeckPreferences.setCommanderDeck(deck.getName());
-            break;
-        case Oathbreaker:
-            DeckPreferences.setOathbreakerDeck(deck.getName());
-            break;
-        case TinyLeaders:
-            DeckPreferences.setTinyLeadersDeck(deck.getName());
-            break;
-        case Archenemy:
-            DeckPreferences.setSchemeDeck(deck.getName());
-            break;
-        case Planechase:
-            DeckPreferences.setPlanarDeck(deck.getName());
-            break;
-        case Draft:
-            DeckPreferences.setDraftDeck(deck.getName());
-            break;
-        case Sealed:
-            DeckPreferences.setSealedDeck(deck.getName());
-            break;
-        case Constructed:
-            DeckPreferences.setCurrentDeck(deck.getName());
-            break;
-        default:
-            break;
+        FDeckEditor.DeckEditorConfig editorConfig = getEditorConfig();
+        switch (editorConfig.getGameType()) {
+            case Commander:
+                DeckPreferences.setCommanderDeck(deck.getName());
+                break;
+            case Oathbreaker:
+                DeckPreferences.setOathbreakerDeck(deck.getName());
+                break;
+            case TinyLeaders:
+                DeckPreferences.setTinyLeadersDeck(deck.getName());
+                break;
+            case Archenemy:
+                DeckPreferences.setSchemeDeck(deck.getName());
+                break;
+            case Planechase:
+                DeckPreferences.setPlanarDeck(deck.getName());
+                break;
+            case Draft:
+                DeckPreferences.setDraftDeck(deck.getName());
+                break;
+            case Sealed:
+                DeckPreferences.setSealedDeck(deck.getName());
+                break;
+            case Constructed:
+                DeckPreferences.setCurrentDeck(deck.getName());
+                break;
+            default:
+                break;
         }
         needRefreshOnActivate = true;
         /*preload deck to cache*/
         ImageCache.getInstance().preloadCache(deck.getDeck());
-        Forge.openScreen(new FDeckEditor(editorType, deck, true));
+        Forge.openScreen(new FDeckEditor(editorConfig, deck));
     }
 
     public void initialize(FPref savedStateSetting, DeckType defaultDeckType) {

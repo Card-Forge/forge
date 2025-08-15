@@ -232,7 +232,9 @@ public class ImageUtil {
         String versionParam = useArtCrop ? "art_crop" : "normal";
         String faceParam = "";
         if (cp.getRules().getOtherPart() != null) {
-            faceParam = (face.equals("back") ? "&face=back" : "&face=front");
+            faceParam = (face.equals("back") && cp.getRules().getSplitType() != CardSplitType.Flip
+                    ? "&face=back"
+                    : "&face=front");
         } else if (cp.getRules().getSplitType() == CardSplitType.Meld
                     && !cardCollectorNumber.endsWith("a")
                     && !cardCollectorNumber.endsWith("b")) {

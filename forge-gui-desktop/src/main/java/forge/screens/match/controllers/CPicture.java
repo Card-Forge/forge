@@ -69,8 +69,12 @@ public class CPicture implements ICDoc {
      */
     void showCard(final CardView c, final boolean isInAltState, final boolean mayView, final boolean mayFlip) {
         final CardStateView toShow = c != null && mayView ? c.getState(isInAltState) : null;
+        boolean displayFlipped = c != null && c.isFlipped();
+        if (c != null && c.isFlipCard() && isInAltState) {
+            displayFlipped = !displayFlipped;
+        }
         flipIndicator.setVisible(toShow != null && mayFlip);
-        picturePanel.setCard(toShow, mayView);
+        picturePanel.setCard(toShow, mayView, displayFlipped);
         zoomer.setCard(toShow, mayFlip);
     }
 
