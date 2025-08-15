@@ -21,12 +21,10 @@ import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
-import forge.deck.io.DeckSerializer;
 import forge.item.PaperCard;
 import forge.item.SealedTemplate;
 import forge.model.FModel;
 import forge.util.FileSection;
-import forge.util.FileUtil;
 import forge.util.ItemPool;
 import forge.util.TextUtil;
 import forge.util.storage.IStorage;
@@ -34,10 +32,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
