@@ -277,6 +277,10 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         items.keySet().removeIf(filter.negate());
     }
 
+    public T find(Predicate<T> filter) {
+        return items.keySet().stream().filter(filter).findFirst().orElse(null);
+    }
+
     public void clear() {
         items.clear();
     }
