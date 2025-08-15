@@ -168,13 +168,19 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         if (meldWith == null) {
             return null;
         }
-
-        CardDb db = StaticData.instance().getCommonCards();
-        if (db == null) {
-            return null;
+        
+        List<PrintSheet> sheets = StaticData.instance().getCardEdition(this.edition).getPrintSheetsBySection();
+        for (PrintSheet sheet : sheets) {
+            if (sheet.all().contains(this) && sheet.containsCardNamed(meldWith, 1)) {
+                for (PaperCard card : sheet.all()) {
+                    if (card.getName().equals(meldWith)) {
+                        return card;
+                    }
+                }
+            }
         }
 
-        return db.getCard(meldWith, this.edition, this.artIndex);
+        return null;
     }
 
     public PaperCard copyWithoutFlags() {
