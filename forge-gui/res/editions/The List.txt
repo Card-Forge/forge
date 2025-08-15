@@ -1435,7 +1435,6 @@ DMC-142 M Atla Palani, Nest Tender @Ekaterina Burmak
 DMC-220 R Murmuring Bosk @John Avon
 DMC-222 U Nomad Outpost @Kamila Szutenberg
 DMR-24 C Savannah Lions @Winona Nelson
-DMR-25 U Serra Angel @Donato Giancola
 DMR-64 U Ovinomancer @Kev Walker
 DMR-116 U Dragon Whelp @Jokubas Uogintas
 DMR-153 U Call of the Herd @Carl Critchlow
@@ -2592,16 +2591,11 @@ LCC-181 R Black Market Connections @Lixin Yin
 LCC-233 U Beast Within @Jesper Ejsing
 LCC-235 C Cultivate @Justyna Dura
 LCC-242 C Farseek @Hristo D. Chukov
-LCI-393 L Plains @Carlos Palma Cruchaga
 LCI-394 L Plains @Adam Paquette
-LCI-395 L Island @Néstor Ossandón Leal
 LCI-396 L Island @Adam Paquette
-LCI-397 L Swamp @Logan Feliciano
 LCI-398 L Swamp @Adam Paquette
-LCI-399 L Mountain @Muhammad Firdaus
 LCI-400 L Mountain @Adam Paquette
 LCI-401 L Forest @Carlos Palma Cruchaga
-LCI-402 L Forest @Adam Paquette
 LGN-12 C Deftblade Elite @Alan Pollack
 LGN-25 U Ward Sliver @Pete Venters
 LGN-36 R Dreamborn Muse @Kev Walker
@@ -2955,7 +2949,6 @@ M21-100 C Gloom Sower @Chris Cold
 M21-109 U Liliana's Devotee @Colin Boyer
 M21-117 R Peer into the Abyss @Izzy
 M21-119 C Rise Again @Sean Sevestre
-M21-137 C Chandra's Magmutt @Kimonas Theodossiou
 M21-139 R Conspicuous Snoop @Zoltan Boros
 M21-148 C Goblin Wizardry @Izzy
 M21-149 U Havoc Jester @Jason A. Engle
@@ -2987,7 +2980,6 @@ M3C-362 R Overflowing Basin @Sarah Finnigan
 M3C-363 C Path of Ancestry @Alayna Danner
 MAT-12 U Blot Out @Chris Cold
 MAT-14 U Markov Baron @Ina Wong
-MAT-17 U Kolaghan Warmonger @Andrew Mar
 MAT-67 U Kolaghan Warmonger @Domenico Cava
 MBS-1 U Accorder Paladin @Kekai Kotaki
 MBS-9 U Kemba's Legion @Anthony Francisco
@@ -3144,7 +3136,6 @@ MID-147 U Lunar Frenzy @Alix Branwyn
 MID-155 U Purifying Dragon @Zezhou Chen
 MID-168 R Augur of Autumn @Billy Christian
 MID-176 U Clear Shot @Craig J Spearing
-MID-180 C Dawnhart Rejuvenator @Darren Tan
 MID-196 U Rise of the Ants @Nicholas Gregory
 MID-204 R Tovolar's Huntmaster @Cristi Balanescu
 MID-211 M Arlinn, the Pack's Hope @Anna Steinbauer
@@ -3195,14 +3186,10 @@ MKC-223 C Arcane Signet @Dan Murayama Scott
 MKC-274 R Mossfire Valley @John Avon
 MKC-288 U Seaside Citadel @Volkan Baǵa
 MKC-297 R Sungrass Prairie @Ron Spencer
-MKM-277 L Plains @Muhammad Firdaus
 MKM-278 L Plains @Carlos Palma Cruchaga
 MKM-279 L Island @Jorge Jacinto
-MKM-280 L Island @Titus Lunter
-MKM-281 L Swamp @Carlos Palma Cruchaga
 MKM-282 L Swamp @Carlos Palma Cruchaga
 MKM-285 L Forest @Jorge Jacinto
-MKM-286 L Forest @Carlos Palma Cruchaga
 MM2-1 R All Is Dust @Jason Felix
 MM2-8 C Apostle's Blessing @Brad Rigney
 MM2-9 C Arrest @Daarken
@@ -3379,7 +3366,6 @@ MMQ-291 R Crooked Scales @Ron Spears
 MMQ-314 U Toymaker @Frank Kelly Freas
 MMQ-320 R High Market @Carl Critchlow
 MMQ-322 C Peat Bog @Val Mayerik
-MOC-240 U Tetsuko Umezawa, Fugitive @Randy Vargas
 MOC-249 U Foulmire Knight @Alex Brock
 MOC-251 U Graveshifter @Jakub Kasper
 MOC-306 C Kodama's Reach @John Avon
@@ -3503,7 +3489,6 @@ NEO-44 U Acquisition Octopus @Francisco Miyara
 NEO-67 C Moon-Circuit Hacker @Tia Masic
 NEO-81 C Suit Up @Miguel Mercado
 NEO-93 U Dockside Chef @Steven Belledin
-NEO-100 C Inkrise Infiltrator @Campbell White
 NEO-114 M Nashi, Moon Sage's Scion @Valera Lutfullina
 NEO-116 U Nezumi Prowler @Joseph Weston
 NEO-120 C Reckoner's Bargain @Justine Cruz
@@ -3573,7 +3558,7 @@ ODY-129 U Diabolic Tutor @Rick Farrell
 ODY-149 R Mindslicer @Kev Walker
 ODY-159 U Sadistic Hypnotist @Paolo Parente
 ODY-170 U Zombie Infestation @Thomas M. Baxa
-ODY-173 C Anarchist @Greg Hildebrandt & Tim Hildebrandt
+ODY-173 C Anarchist @Greg Hildebrandt
 ODY-182 R Chance Encounter @Mark Brill
 ODY-185 C Dwarven Grunt @Mike Ploog
 ODY-186 U Dwarven Recruiter @Ciruelo
@@ -3645,7 +3630,6 @@ ONE-26 U Ossification @Nino Vecia
 ONE-28 C Planar Disruption @Campbell White
 ONE-36 C Vanish into Eternity @Magali Villeneuve
 ONE-49 C Experimental Augury @Donato Giancola
-ONE-66 C Quicksilver Fisher @Filip Burburan
 ONE-108 U Sheoldred's Edict @Helge C. Balzer
 ONE-114 R Vraan, Executioner Thane @Helge C. Balzer
 ONE-121 C Barbed Batterfist @Randy Gallegos
@@ -4828,15 +4812,11 @@ WAR-266 C Desperate Lunge @Deruchenko Alexander
 WAR-271 C Guildpact Informant @Randy Gallegos
 WOC-27 M Brenard, Ginger Sculptor @Marta Nael
 WOC-166 R Secluded Glen @Alayna Danner
-WOE-267 L Plains @Carlos Palma Cruchaga
 WOE-268 L Plains @Jonas De Ro
 WOE-269 L Island @Leanna Crossan
-WOE-270 L Island @Sarah Finnigan
 WOE-271 L Swamp @Jonas De Ro
-WOE-272 L Swamp @Julian Kok Joon Wen
 WOE-273 L Mountain @Sarah Finnigan
 WOE-274 L Mountain @Julian Kok Joon Wen
-WOE-275 L Forest @Jonas De Ro
 WOE-276 L Forest @Adam Paquette
 WTH-6 U Argivian Find @Roger Raupp
 WTH-8 C Benalish Infantry @Dan Frazier
@@ -4984,7 +4964,6 @@ ZNC-27 U Invisible Stalker @Bud Cook
 ZNC-103 R Sygg, River Cutthroat @Jeremy Enecio
 ZNC-134 U Krosan Verge @Ruxing Gao
 ZNR-2 M Angel of Destiny @Ryan Pancoast
-ZNR-7 U Canyon Jerboa @Antonio José Manzanedo
 ZNR-15 U Fearless Fledgling @Jesper Ejsing
 ZNR-16 R Felidar Retreat @Ralph Horsley
 ZNR-22 C Kor Celebrant @Jake Murray
@@ -4994,12 +4973,10 @@ ZNR-50 C Chilling Trap @Johann Bodin
 ZNR-71 C Negate @Billy Christian
 ZNR-75 U Ruin Crab @Simon Dominic
 ZNR-94 U Bloodchief's Thirst @Jason Rainville
-ZNR-100 C Dreadwurm @Lius Lasahido
 ZNR-106 R Hagra Mauling @Victor Adame Minguez
 ZNR-171 U Thundering Sparkmage @Billy Christian
 ZNR-174 R Valakut Awakening @Campbell White
 ZNR-180 U Bala Ged Recovery @Lucas Staniec
-ZNR-182 C Canopy Baloth @Filip Burburan
 ZNR-217 U Vastwood Surge @Jason Rainville
 ZNR-226 R Linvala, Shield of Sea Gate @Wayne Reynolds
 ZNR-237 U Spoils of Adventure @Zezhou Chen
@@ -5027,23 +5004,33 @@ TC21-25 c_3_3_a_golem_flying @Andrew Mar
 TC21-26 c_3_3_a_golem_trample @Andrew Mar
 TC21-27 c_3_3_a_golem_vigilance @Andrew Mar
 TCMR-2 w_1_1_soldier @Svetlin Velinov
+TDMC-8 g_0_1_egg_defender @Christopher Burdett
 TGRN-1 w_4_4_angel_flying_vigilance @Grzegorz Rutkowski
 TGRN-2 w_1_1_soldier_lifelink @John Severin Brassell
+TIKO-10 g_3_3_beast @Aaron Miller
 TISD-5 b_2_2_vampire_flying @Svetlin Velinov
 TISD-6 b_1_1_wolf_deathtouch @Daniel Ljunggren
 TKHM-8 u_2_2_shapeshifter_changeling @Filip Burburan
+TKHM-19 c_a_treasure_sac @Olena Richards
+TLCC-1 c_3_2_shapeshifter_changeling @Ryan Valle
 TM20-1 ajanis_pridemate @Howard Lyon
 TM21-3 w_2_2_griffin_flying @Johann Bodin
 TM21-11 g_2_2_cat @Izzy
+TM21-20 g_1_1_cat @Leesha Hannigan
 TMH2-17 c_a_food_sac @Steven Belledin
 TMID-13 g_2_2_wolf @Andrea Radeck
 TMID-16 c_a_clue_draw @Campbell White
+TMKC-21 tiny @Campbell White
+TMKM-1 w_1_1_dog @Alayna Danner
+TMKM-15 c_a_clue_draw @Alfven Ato
+TMOC-2 c_1_1_sliver @Tony Szczudlo
 TNEC-12 c_1_1_a_thopter_flying @Johan Grenier
 TNEO-17 c_a_treasure_sac @Yeong-Hao Han
 TNPH-1 g_3_3_beast @Dave Allsop
 TONE-2 w_2_2_samurai_double_strike @Gaboleps
 TORI-5 b_2_2_zombie @Lucas Graciano
 TORI-7 ashaya_the_awoken_world @Raymond Swanland
+TOTJ-3 w_2_2_ox @Fiona Hsieh
 TSHM-12 gw_1_1_elf_warrior @Carl Frank
 TSNC-9 g_2_2_cat_haste @David Gaillet
 TSNC-10 g_3_1_dog_vigilance @David Gaillet
@@ -5051,10 +5038,14 @@ TSNC-12 gw_1_1_citizen @Maria Poliakova
 TSOI-10 wb_1_1_human_cleric @Min Yum
 TSTX-5 bg_1_1_pest_lifegain @Ilse Gort
 TTSR-10 g_3_3_ape @Lars Grant-West
+TWOC-11 b_1_1_faerie_rogue_flying @Dave Allsop
+TWOC-15 g_1_1_saproling @Joseph Meehan
+TWOE-11 c_a_food_sac @Gaboleps
 TXLN-1 w_1_1_vampire_lifelink @John Severin Brassell
 TXLN-6 g_0_2_plant_defender @Florian de Gesincourt
 TXLN-10 c_a_treasure_sac @Milivoj Ćeran
 TZNR-3 w_2_2_cat_beast @Bayard Wu
+TZNR-8 g_0_2_plant_defender @Jakub Kasper
 
 [other]
 LCI-1 copy @Henry Peters

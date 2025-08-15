@@ -12,7 +12,6 @@ import forge.deck.DeckGroup;
 import forge.deck.DeckProxy;
 import forge.deck.FDeckChooser;
 import forge.deck.FDeckEditor;
-import forge.deck.FDeckEditor.EditorType;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
@@ -80,7 +79,7 @@ public class LoadSealedScreen extends LaunchScreen {
         if (deck == null) { return; }
 
         DeckPreferences.setSealedDeck(deck.getName());
-        Forge.openScreen(new FDeckEditor(EditorType.Sealed, deck, true));
+        Forge.openScreen(new FDeckEditor(FDeckEditor.EditorConfigSealed, deck));
     }
 
     @Override
@@ -113,7 +112,9 @@ public class LoadSealedScreen extends LaunchScreen {
         FThreads.invokeInBackgroundThread(() -> {
             final DeckProxy humanDeck = lstDecks.getSelectedItem();
             if (humanDeck == null) {
-                FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblYouMustSelectExistingSealedPool"), Forge.getLocalizer().getMessage("lblNoDeck"));
+                FThreads.invokeInEdtLater(() ->
+                    FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblYouMustSelectExistingSealedPool"), Forge.getLocalizer().getMessage("lblNoDeck"))
+                );
                 return;
             }
 

@@ -14,10 +14,10 @@ import forge.model.FModel;
 
 public class QuestDeckEditor extends FDeckEditor {
     public QuestDeckEditor(boolean commander) {
-        super(commander ? EditorType.QuestCommander: EditorType.Quest, "", false);
+        super(commander ? FDeckEditor.EditorConfigQuestCommander : FDeckEditor.EditorConfigQuest, "");
     }
     public QuestDeckEditor(DeckProxy editDeck, boolean commander) {
-        super(commander ? EditorType.QuestCommander: EditorType.Quest, editDeck, true);
+        super(commander ? FDeckEditor.EditorConfigQuestCommander : FDeckEditor.EditorConfigQuest, editDeck);
     }
 
     @Override

@@ -440,48 +440,43 @@ public class SFilterUtil {
         final byte colors = colors0;
         final boolean wantColorless = buttonMap.get(StatTypes.COLORLESS).isSelected();
         final boolean wantMulticolor = buttonMap.get(StatTypes.MULTICOLOR).isSelected();
+        final boolean wantAllColors = colors == ColorSet.ALL_COLORS.getColor();
+        //Use color identity instead of color for lands, unless all colors are filtered out anyway.
+        final boolean filterLandsByCI = colors != 0 && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_FILTER_LANDS_BY_COLOR_IDENTITY);
 
         return card -> {
             CardRules rules = card.getRules();
             ColorSet color = rules.getColor();
-            boolean allColorsFilteredOut = colors == 0;
 
             //use color identity for lands, which allows filtering to just lands that can be played in your deck
-            boolean useColorIdentity = rules.getType().isLand() && !allColorsFilteredOut && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_FILTER_LANDS_BY_COLOR_IDENTITY);
+            boolean useColorIdentity = filterLandsByCI && rules.getType().isLand();
             if (useColorIdentity) {
                 color = rules.getColorIdentity();
             }
 
-            boolean result = true;
-            if (wantMulticolor) {
-                if (colors == 0) { //handle showing all multi-color cards if all 5 colors are filtered
-                    result = color.isMulticolor() || (wantColorless && color.isColorless());
-                } else if (colors != ColorSet.ALL_COLORS.getColor()) {
-                    if (useColorIdentity && !allColorsFilteredOut) {
-                        result = color.hasAnyColor(colors) || (wantColorless && color.isColorless());
-                    } else {
-                        result = (wantColorless && color.isColorless()) || rules.canCastWithAvailable(colors);
-                    }
+            if (color.isColorless())
+                return wantColorless;
+            if (!wantMulticolor && color.isMulticolor())
+                return false;
+            if (wantMulticolor && colors == 0)
+                return color.isMulticolor();
+
+            if (!wantAllColors) {
+                if (useColorIdentity) {
+                    if (!color.hasAnyColor(colors))
+                        return false;
+                } else {
+                    if(!rules.canCastWithAvailable(colors))
+                        return false;
                 }
-            } else {
-                result = !color.isMulticolor();
-                if (colors != ColorSet.ALL_COLORS.getColor()) {
-                    if (useColorIdentity && !allColorsFilteredOut) {
-                        result = result && (color.hasAnyColor(colors) || (wantColorless && color.isColorless()));
-                    } else {
-                        result = result && (color.isColorless() || rules.canCastWithAvailable(colors));
-                    }
-                }
-            }
-            if (!wantColorless) {
-                if (colors != 0 && colors != ColorSet.ALL_COLORS.getColor()) {
+                if (!wantColorless && colors != 0 && !color.hasAnyColor(colors)) {
                     //if colorless filtered out ensure phyrexian cards don't appear
                     //unless at least one of their colors is selected
-                    result = result && color.hasAnyColor(colors);
+                    return false;
                 }
-                result = result && !color.isColorless();
             }
-            return result;
+
+            return true;
         };
     }
 
