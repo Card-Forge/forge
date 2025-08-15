@@ -1,0 +1,7 @@
+Name:Wolf Cove Villager
+ManaCost:W
+Types:Creature Human Peasant
+PT:2/2
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This creature enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+Oracle:This creature enters tapped.

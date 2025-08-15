@@ -9,4 +9,5 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+cmcLEX | TgtPrompt$ Select target creature card with mana value less than or equal to Alesha's power
 SVar:RaidTest:Count$AttackersDeclared
 SVar:X:Count$CardPower
+SVar:HasAttackEffect:TRUE
 Oracle:First strike\nWhenever Alesha attacks, put a +1/+1 counter on it.\nRaid — At the beginning of your end step, if you attacked this turn, return target creature card with mana value less than or equal to Alesha's power from your graveyard to the battlefield.

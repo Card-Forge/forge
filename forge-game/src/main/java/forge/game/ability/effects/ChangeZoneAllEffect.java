@@ -7,6 +7,7 @@ import com.google.common.collect.Iterables;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameEntityCounterTable;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -21,6 +22,12 @@ import forge.util.Localizer;
 import forge.util.TextUtil;
 
 public class ChangeZoneAllEffect extends SpellAbilityEffect {
+
+    @Override
+    public void buildSpellAbility(SpellAbility sa) {
+        AbilityFactory.adjustChangeZoneTarget(sa.getMapParams(), sa);
+    }
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         // TODO build Stack Description will need expansion as more cards are added

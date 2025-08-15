@@ -1,0 +1,5 @@
+Name:Zuko's Offense
+ManaCost:R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+Oracle:Zuko's Offense deals 2 damage to any target.

@@ -1,0 +1,9 @@
+Name:Toph, the First Metalbender
+ManaCost:1 R G W
+Types:Legendary Creature Human Warrior Ally
+PT:3/3
+S:Mode$ Continuous | Affected$ Artifact.!token+YouCtrl | AddType$ Land | Description$ Nontoken artifacts you control are lands in addition to their other types. (They don't gain the ability to {T} for mana.)
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigEarthbend | TriggerDescription$ At the beginning of your end step, earthbend 2. (Target land you control becomes a 0/0 creature with haste that's still a land. Put two +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)
+SVar:TrigEarthbend:DB$ Earthbend | Num$ 2
+DeckHas:Ability$Counters
+Oracle:Nontoken artifacts you control are lands in addition to their other types. (They don't gain the ability to {T} for mana.)\nAt the beginning of your end step, earthbend 2. (Target land you control becomes a 0/0 creature with haste that's still a land. Put two +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)

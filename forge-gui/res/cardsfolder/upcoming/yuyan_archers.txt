@@ -1,0 +1,9 @@
+Name:Yuyan Archers
+ManaCost:1 R
+Types:Creature Human Archer
+PT:3/1
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this creature enters, you may discard a card. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Card>
+DeckHas:Ability$Discard
+Oracle:Reach\nWhen this creature enters, you may discard a card. If you do, draw a card.

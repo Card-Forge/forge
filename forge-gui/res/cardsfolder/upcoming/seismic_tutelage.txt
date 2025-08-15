@@ -1,0 +1,10 @@
+Name:Seismic Tutelage
+ManaCost:3 G
+Types:Enchantment Aura
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When this Aura enters, put a +1/+1 counter on enchanted creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Enchanted | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigDoubleCounters | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature attacks, double the number of +1/+1 counters on it.
+SVar:TrigDoubleCounters:DB$ MultiplyCounter | Defined$ TriggeredAttackerLKICopy | CounterType$ P1P1
+Oracle:Enchant creature\nWhen this Aura enters, put a +1/+1 counter on enchanted creature.\nWhenever enchanted creature attacks, double the number of +1/+1 counters on it.

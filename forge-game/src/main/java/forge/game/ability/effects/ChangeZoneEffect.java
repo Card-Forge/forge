@@ -6,6 +6,7 @@ import com.google.common.collect.Maps;
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.game.*;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -33,6 +34,11 @@ import java.util.List;
 import java.util.Map;
 
 public class ChangeZoneEffect extends SpellAbilityEffect {
+
+    @Override
+    public void buildSpellAbility(SpellAbility sa) {
+        AbilityFactory.adjustChangeZoneTarget(sa.getMapParams(), sa);
+    }
 
     @Override
     protected String getStackDescription(SpellAbility sa) {

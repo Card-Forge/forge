@@ -1,0 +1,8 @@
+Name:Iguana Parrot
+ManaCost:2 U
+Types:Creature Lizard Bird Pirate
+PT:2/2
+K:Flying
+K:Vigilance
+K:Prowess
+Oracle:Flying, vigilance\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)

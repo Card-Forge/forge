@@ -341,6 +341,7 @@ F538 R Water Gun Balloon Game @Ralph Horsley
 103 C Circuits Act @Jakub Kasper
 106 C Eelectrocute @Dave Greco
 107 C _____ Goblin @Chuck Lukacs
+107m C "Name Sticker" Goblin @Chuck Lukacs
 108 U Goblin Airbrusher @Caroline Gariba
 114 C Minotaur de Force @Gaboleps
 115 C Non-Human Cannonball @Ralph Horsley

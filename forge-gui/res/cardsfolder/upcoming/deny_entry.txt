@@ -1,0 +1,7 @@
+Name:Deny Entry
+ManaCost:2 U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target creature spell | ValidTgts$ Creature | SubAbility$ DBDraw | SpellDescription$ Counter target creature spell. Draw a card, then discard a card.
+SVar:DBDraw:DB$ Draw | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+Oracle:Counter target creature spell. Draw a card, then discard a card.

@@ -1,0 +1,9 @@
+Name:Earthbending Student
+ManaCost:2 G
+Types:Creature Human Warrior Ally
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEarthbend | TriggerDescription$ When this creature enters, earthbend 2. (Target land you control becomes a 0/0 creature with haste that's still a land. Put two +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)
+SVar:TrigEarthbend:DB$ Earthbend | Num$ 2
+S:Mode$ Continuous | Affected$ Creature.Land+YouCtrl | AddKeyword$ Vigilance | Description$ Land creatures you control have vigilance. (Attacking doesn't cause them to tap.)
+DeckHas:Ability$Counters
+Oracle:When this creature enters, earthbend 2. (Target land you control becomes a 0/0 creature with haste that's still a land. Put two +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)\nLand creatures you control have vigilance. (Attacking doesn't cause them to tap.)

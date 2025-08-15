@@ -1,0 +1,7 @@
+Name:Saber-Tooth Moose-Lion
+ManaCost:4 G G
+Types:Creature Elk Cat
+PT:7/7
+K:Reach
+K:TypeCycling:Forest:2
+Oracle:Reach\nForestcycling {2} ({2}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)

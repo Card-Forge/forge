@@ -1,0 +1,8 @@
+Name:Earth Kingdom Soldier
+ManaCost:4 GW
+Types:Creature Human Soldier
+PT:3/4
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When this creature enters, put a +1/+1 counter on each of up to two target creatures you control.
+SVar:TrigPut:DB$ PutCounter | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target Creature you control | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Vigilance\nWhen this creature enters, put a +1/+1 counter on each of up to two target creatures you control.

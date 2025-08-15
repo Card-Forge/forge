@@ -1,0 +1,6 @@
+Name:Turtle-Duck
+ManaCost:G
+Types:Creature Turtle Bird
+PT:0/4
+A:AB$ Animate | Cost$ 3 | Defined$ Self | Power$ 4 | Keywords$ Trample | SpellDescription$ Until end of turn, this creature has base power 4 and gains trample.
+Oracle:{3}: Until end of turn, this creature has base power 4 and gains trample.

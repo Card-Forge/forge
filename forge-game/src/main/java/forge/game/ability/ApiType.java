@@ -81,6 +81,7 @@ public enum ApiType {
     Draft (DraftEffect.class),
     Draw (DrawEffect.class),
     EachDamage (DamageEachEffect.class),
+    Earthbend (EarthbendEffect.class),
     Effect (EffectEffect.class),
     Encode (EncodeEffect.class),
     EndCombatPhase (EndCombatPhaseEffect.class),

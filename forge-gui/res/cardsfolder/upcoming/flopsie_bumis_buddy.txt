@@ -1,0 +1,9 @@
+Name:Flopsie, Bumi's Buddy
+ManaCost:4 G G
+Types:Legendary Creature Ape Goat
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ When NICKNAME enters, put a +1/+1 counter on each creature you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+S:Mode$ MinMaxBlocker | ValidCard$ Creature.YouCtrl+powerGE4 | Max$ 1 | Description$ Each creature you control with power 4 or greater can't be blocked by more than one creature.
+SVar:PlayMain1:TRUE
+Oracle:When Flopsie enters, put a +1/+1 counter on each creature you control.\nEach creature you control with power 4 or greater can't be blocked by more than one creature.

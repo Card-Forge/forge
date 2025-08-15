@@ -1,0 +1,11 @@
+Name:Buzzard-Wasp Colony
+ManaCost:3 B
+Types:Creature Bird Insect
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this creature enters, you may sacrifice an artifact or creature. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | NumCards$ 1 | Cost$ Sac<1/Artifact;Creature/artifact or creature>
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl+HasCounters | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature you control dies, if it had counters on it, put its counters on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ EachFromSource | EachFromSource$ TriggeredCardLKICopy
+DeckHints:Ability$Counters
+Oracle:Flying\nWhen this creature enters, you may sacrifice an artifact or creature. If you do, draw a card.\nWhenever another creature you control dies, if it had counters on it, put its counters on this creature.
