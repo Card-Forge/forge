@@ -1,0 +1,7 @@
+Name:Desculpting Blast
+ManaCost:1 U
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBToken | SpellDescription$ Return target nonland permanent to its owner's hand. If it was attacking, create a 1/1 colorless Drone artifact creature token with flying and "This token can block only creatures with flying."
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_drone_flying_blockflying | TokenOwner$ You | ConditionDefined$ Targeted | ConditionPresent$ Card.attacking
+DeckHas:Ability$Token
+Oracle:Return target nonland permanent to its owner's hand. If it was attacking, create a 1/1 colorless Drone artifact creature token with flying and "This token can block only creatures with flying."

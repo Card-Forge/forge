@@ -290,6 +290,17 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         return counters;
     }
 
+    // get total number of all counters on an entity
+    public final int getNumAllCounters() {
+        int count = 0;
+        for (Integer i : getCounters().values()) {
+            if (i != null && i > 0) {
+                count += i;
+            }
+        }
+        return count;
+    }
+
     public final int getCounters(final CounterType counterName) {
         Integer value = counters.get(counterName);
         return value == null ? 0 : value;

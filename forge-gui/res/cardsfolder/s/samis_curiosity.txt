@@ -1,0 +1,6 @@
+Name:Sami's Curiosity
+ManaCost:G
+Types:Sorcery
+A:SP$ GainLife | LifeAmount$ 2 | SubAbility$ DBToken | SpellDescription$ You gain 2 life. Create a Lander token. (It's an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_lander_sac_search | TokenOwner$ You | StackDescription$ Create a Lander token.
+Oracle:You gain 2 life. Create a Lander token. (It's an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")

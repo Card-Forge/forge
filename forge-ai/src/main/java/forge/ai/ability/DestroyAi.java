@@ -20,7 +20,7 @@ import forge.util.collect.FCollectionView;
 
 public class DestroyAi extends SpellAbilityAi {
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         return checkApiLogic(ai, sa);
     }
 
@@ -103,36 +103,27 @@ public class DestroyAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
         final Card source = sa.getHostCard();
         final boolean noRegen = sa.hasParam("NoRegen");
         final String logic = sa.getParam("AILogic");
 
         CardCollection list;
 
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false;
-        }
-
-        // Targeting
         if (sa.usesTargeting()) {
-            // If there's X in payment costs and it's tied to targeting, make sure we set the XManaCostPaid first
-            // (e.g. Heliod's Intervention)
-            if ("X".equals(sa.getTargetRestrictions().getMinTargets()) && sa.getSVar("X").equals("Count$xPaid")) {
-                int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-                sa.getRootAbility().setXManaCostPaid(xPay);
-            }
-
             // Assume there where already enough targets chosen by AI Logic Above
             if (sa.hasParam("AILogic") && !sa.canAddMoreTarget() && sa.isTargetNumberValid()) {
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
             // reset targets before AI Logic part
             sa.resetTargets();
             int maxTargets;
 
-            if (sa.getRootAbility().costHasManaX()) {
+            // If there's X in payment costs and it's tied to targeting, make sure we set the XManaCostPaid first
+            // (e.g. Heliod's Intervention)
+            if (sa.getRootAbility().costHasManaX() ||
+                    ("X".equals(sa.getTargetRestrictions().getMinTargets()) && sa.getSVar("X").equals("Count$xPaid"))) {
                 // TODO: currently the AI will maximize mana spent on X, trying to maximize damage. This may need improvement.
                 maxTargets = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
                 // need to set XPaid to get the right number for
@@ -145,23 +136,22 @@ public class DestroyAi extends SpellAbilityAi {
 
             if (maxTargets == 0) {
                 // can't afford X or otherwise target anything
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
             }
 
             if (sa.hasParam("TargetingPlayer")) {
                 Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
                 sa.setTargetingPlayer(targetingPlayer);
-                return targetingPlayer.getController().chooseTargetsFor(sa);
+                if (targetingPlayer.getController().chooseTargetsFor(sa)) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                } else {
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+                }
             }
 
             // AI doesn't destroy own cards if it isn't defined in AI logic
             list = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
-            if ("FatalPush".equals(logic)) {
-                final int cmcMax = ai.hasRevolt() ? 4 : 2;
-                list = CardLists.filter(list, CardPredicates.lessCMC(cmcMax));
-            }
 
-            // Filter AI-specific targets if provided
             list = ComputerUtil.filterAITgts(sa, ai, list, true);
 
             list = CardLists.getNotKeyword(list, Keyword.INDESTRUCTIBLE);
@@ -206,7 +196,7 @@ public class DestroyAi extends SpellAbilityAi {
             // Try to avoid targeting creatures that are dead on board
             list = ComputerUtil.filterCreaturesThatWillDieThisTurn(ai, list, sa);
             if (list.isEmpty()) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
             // target loop
@@ -221,7 +211,7 @@ public class DestroyAi extends SpellAbilityAi {
                 if (list.isEmpty()) {
                     if (!sa.isMinTargetChosen() || sa.isZeroTargets()) {
                         sa.resetTargets();
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                     } else {
                         // TODO is this good enough? for up to amounts?
                         break;
@@ -235,7 +225,7 @@ public class DestroyAi extends SpellAbilityAi {
                     if ("OppDestroyYours".equals(logic)) {
                         Card aiBest = ComputerUtilCard.getBestCreatureAI(ai.getCreaturesInPlay());
                         if (ComputerUtilCard.evaluateCreature(aiBest) > ComputerUtilCard.evaluateCreature(choice) - 40) {
-                            return false;
+                            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                         }
                     }
                 } else if (CardLists.getNotType(list, "Land").isEmpty()) {
@@ -244,7 +234,7 @@ public class DestroyAi extends SpellAbilityAi {
                     if ("LandForLand".equals(logic) || "GhostQuarter".equals(logic)) {
                         // Strip Mine, Wasteland - cut short if the relevant logic fails
                         if (!doLandForLandRemovalLogic(sa, ai, choice, logic)) {
-                            return false;
+                            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                         }
                     }
                 } else {
@@ -254,14 +244,14 @@ public class DestroyAi extends SpellAbilityAi {
                 //option to hold removal instead only applies for single targeted removal
                 if (!sa.isTrigger() && sa.getMaxTargets() == 1) {
                     if (choice == null || !ComputerUtilCard.useRemovalNow(sa, choice, 0, ZoneType.Graveyard)) {
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                     }
                 }
 
                 if (choice == null) { // can't find anything left
                     if (!sa.isMinTargetChosen() || sa.isZeroTargets()) {
                         sa.resetTargets();
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                     } else {
                         // TODO is this good enough? for up to amounts?
                         break;
@@ -298,22 +288,22 @@ public class DestroyAi extends SpellAbilityAi {
                 || !source.getGame().getPhaseHandler().isPlayerTurn(ai)
                 || ai.getLife() <= 5)) {
                 // Basic ai logic for Lethal Vapors
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if ("Always".equals(logic)) {
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
             if (list.isEmpty()
                     || !CardLists.filterControlledBy(list, ai).isEmpty()
                     || CardLists.getNotKeyword(list, Keyword.INDESTRUCTIBLE).isEmpty()) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final boolean noRegen = sa.hasParam("NoRegen");
         if (sa.usesTargeting()) {
             sa.resetTargets();
@@ -321,7 +311,7 @@ public class DestroyAi extends SpellAbilityAi {
             CardCollection list = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
 
             if (list.isEmpty() || list.size() < sa.getMinTargets()) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             // Try to avoid targeting creatures that are dead on board
@@ -349,7 +339,7 @@ public class DestroyAi extends SpellAbilityAi {
             list.removeAll(preferred);
 
             if (preferred.isEmpty() && !mandatory) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             while (sa.canAddMoreTarget()) {
@@ -357,12 +347,12 @@ public class DestroyAi extends SpellAbilityAi {
                     if (!sa.isMinTargetChosen()) {
                         if (!mandatory) {
                             sa.resetTargets();
-                            return false;
+                            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                         } else {
                             break;
                         }
                     } else {
-                        return true;
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                     }
                 } else {
                     Card c = ComputerUtilCard.getBestAI(preferred);
@@ -397,9 +387,18 @@ public class DestroyAi extends SpellAbilityAi {
                 }
             }
 
-            return sa.isTargetNumberValid();
+            if (sa.isTargetNumberValid()) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                sa.resetTargets();
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
         } else {
-            return mandatory;
+            if (mandatory) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
         }
     }
 

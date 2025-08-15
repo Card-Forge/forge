@@ -5,6 +5,6 @@ K:Hideaway:4
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
-A:AB$ Play | Cost$ B T | Defined$ ExiledWith | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True | ConditionZone$ Hand | ConditionPresent$ Card | ConditionCompare$ EQ0 | AILogic$ CheckCondition | SpellDescription$ You may play the exiled card without paying its mana cost if each player has no cards in hand.
+A:AB$ Play | Cost$ B T | Defined$ ExiledWith | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True | ConditionZone$ Hand | ConditionPresent$ Card | ConditionCompare$ EQ0 | SpellDescription$ You may play the exiled card without paying its mana cost if each player has no cards in hand.
 AI:RemoveDeck:Random
 Oracle:Hideaway 4 (When this permanent enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)\nHowltooth Hollow enters tapped.\n{T}: Add {B}.\n{B}, {T}: You may play the exiled card without paying its mana cost if each player has no cards in hand.

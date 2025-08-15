@@ -919,14 +919,14 @@ public class ComputerUtilCard {
         return MagicColor.Constant.WHITE; // no difference, there was no prominent color
     }
 
-    public static String getMostProminentColor(final CardCollectionView list, final List<String> restrictedToColors) {
+    public static String getMostProminentColor(final CardCollectionView list, final Iterable<String> restrictedToColors) {
         byte colors = CardFactoryUtil.getMostProminentColorsFromList(list, restrictedToColors);
         for (byte c : MagicColor.WUBRG) {
             if ((colors & c) != 0) {
                 return MagicColor.toLongString(c);
             }
         }
-        return restrictedToColors.get(0); // no difference, there was no prominent color
+        return Iterables.get(restrictedToColors, 0); // no difference, there was no prominent color
     }
 
     public static List<String> getColorByProminence(final List<Card> list) {
@@ -1819,18 +1819,18 @@ public class ComputerUtilCard {
      * @param sa Pump* or CounterPut*
      * @return
      */
-    public static boolean canPumpAgainstRemoval(Player ai, SpellAbility sa) {
+    public static AiAbilityDecision canPumpAgainstRemoval(Player ai, SpellAbility sa) {
         final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa, true);
 
         if (!sa.usesTargeting()) {
             final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
             for (final Card card : cards) {
                 if (objects.contains(card)) {
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.ResponseToStackResolve);
                 }
             }
             // For pumps without targeting restrictions, just return immediately until this is fleshed out.
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
         CardCollection threatenedTargets = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
@@ -1849,11 +1849,11 @@ public class ComputerUtilCard {
             }
             if (!sa.isTargetNumberValid()) {
                 sa.resetTargets();
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.ResponseToStackResolve);
         }
-        return false;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     public static boolean isUselessCreature(Player ai, Card c) {

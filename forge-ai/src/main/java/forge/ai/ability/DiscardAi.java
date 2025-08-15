@@ -26,31 +26,29 @@ import forge.util.collect.FCollectionView;
 public class DiscardAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
-        final Cost abCost = sa.getPayCosts();
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
-
-        // temporarily disabled until better AI
-        if (!willPayCosts(ai, sa, abCost, source)) {
-            return false;
-        }
 
         if ("Chandra, Flamecaller".equals(sourceName)) {
             final int hand = ai.getCardsIn(ZoneType.Hand).size();
-            return MyRandom.getRandom().nextFloat() < (1.0 / (1 + hand));
+            if (MyRandom.getRandom().nextFloat() < (1.0 / (1 + hand))) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
         }
 
         if (aiLogic.equals("VolrathsShapeshifter")) {
             return SpecialCardAi.VolrathsShapeshifter.consider(ai, sa);
         }
 
-        final boolean humanHasHand = ai.getWeakestOpponent().getCardsIn(ZoneType.Hand).size() > 0;
+        final boolean humanHasHand = !ai.getWeakestOpponent().getCardsIn(ZoneType.Hand).isEmpty();
 
         if (sa.usesTargeting()) {
             if (!discardTargetAI(ai, sa)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         } else {
             // TODO: Add appropriate restrictions
@@ -64,7 +62,7 @@ public class DiscardAi extends SpellAbilityAi {
                 } else {
                     // defined to the human, so that's fine as long the human has cards
                     if (!humanHasHand) {
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
                 }
             } else {
@@ -78,12 +76,12 @@ public class DiscardAi extends SpellAbilityAi {
                 final int cardsToDiscard = Math.min(ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger()), ai.getWeakestOpponent()
                         .getCardsIn(ZoneType.Hand).size());
                 if (cardsToDiscard < 1) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 sa.setXManaCostPaid(cardsToDiscard);
             } else {
                 if (AbilityUtils.calculateAmount(source, sa.getParam("NumCards"), sa) < 1) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }
         }
@@ -113,7 +111,7 @@ public class DiscardAi extends SpellAbilityAi {
                     }
                 }
                 if (numDiscard == 0) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }
         }
@@ -121,27 +119,25 @@ public class DiscardAi extends SpellAbilityAi {
         // Don't use discard abilities before main 2 if possible
         if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !sa.hasParam("ActivationPhases") && !aiLogic.startsWith("AnyPhase")) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (aiLogic.equals("AnyPhaseIfFavored")) {
             if (ai.getGame().getCombat() != null) {
                 if (ai.getCardsIn(ZoneType.Hand).size() < ai.getGame().getCombat().getDefenderPlayerByAttacker(source).getCardsIn(ZoneType.Hand).size()) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }
         }
 
         // Don't tap creatures that may be able to block
         if (ComputerUtil.waitForBlocking(sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
-
-        boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(0.9, sa.getActivationsThisTurn());
 
         // some other variables here, like handsize vs. maxHandSize
 
-        return randomReturn;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     private boolean discardTargetAI(final Player ai, final SpellAbility sa) {
@@ -166,7 +162,7 @@ public class DiscardAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (sa.usesTargeting()) {
             PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
             Player opp = targetableOpps.min(PlayerPredicates.compareByLife());
@@ -176,7 +172,7 @@ public class DiscardAi extends SpellAbilityAi {
                 } else if (mandatory && sa.canTarget(ai)) {
                     sa.getTargets().add(ai);
                 } else {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }
         } else {
@@ -184,7 +180,7 @@ public class DiscardAi extends SpellAbilityAi {
             	if ("AtLeast2".equals(sa.getParam("AILogic"))) {
             		final List<Player> players = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
             		if (players.isEmpty() || players.get(0).getCardsIn(ZoneType.Hand).size() < 2) {
-            			return false;
+            			return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             		}
             	}
             }
@@ -196,18 +192,22 @@ public class DiscardAi extends SpellAbilityAi {
             }
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         // Drawback AI improvements
         // if parent draws cards, make sure cards in hand + cards drawn > 0
         if (sa.usesTargeting()) {
-            return discardTargetAI(ai, sa);
+            if (discardTargetAI(ai, sa)) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
         }
         // TODO: check for some extra things
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {

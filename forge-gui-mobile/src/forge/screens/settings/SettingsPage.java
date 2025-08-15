@@ -160,8 +160,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 @Override
                 public void valueChanged(String newValue) {
                     super.valueChanged(newValue);
-                    String mode = newValue;
-                    Graphics.setVideoMode(mode);
+                    Graphics.setVideoMode(newValue);
                 }
             }, 0);
         }
@@ -331,7 +330,27 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         Forge.getLocalizer().getMessage("cbStackCreatures"),
                         Forge.getLocalizer().getMessage("nlStackCreatures")),
                 1);
-
+        lstSettings.addItem(new BooleanSetting(FPref.UI_AUTO_AIDECK_SELECTION,
+                Forge.getLocalizer().getMessage("lblAutoAIDeck"),
+                Forge.getLocalizer().getMessage("nlAutoAIDeck")){
+            @Override
+            public void select() {
+                super.select();
+                //update
+                Forge.autoAIDeckSelection = FModel.getPreferences().getPrefBoolean(FPref.UI_AUTO_AIDECK_SELECTION);
+            }
+        },1);
+        // Preffered Prompt button
+        lstSettings.addItem(new BooleanSetting(FPref.UI_REVERSE_PROMPT_BUTTON,
+                Forge.getLocalizer().getMessage("lblReversePromptButton"),
+                Forge.getLocalizer().getMessage("nlReversePromptButton")){
+            @Override
+            public void select() {
+                super.select();
+                //update
+                Forge.reversedPrompt = FModel.getPreferences().getPrefBoolean(FPref.UI_REVERSE_PROMPT_BUTTON);
+            }
+        },1);
         //Random Deck Generation
         lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_NOSMALL,
                         Forge.getLocalizer().getMessage("cbRemoveSmall"),
@@ -373,6 +392,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.LOAD_ARCHIVED_FORMATS,
                         Forge.getLocalizer().getMessage("cbLoadArchivedFormats"),
                         Forge.getLocalizer().getMessage("nlLoadArchivedFormats")),
+                3);
+        lstSettings.addItem(new BooleanSetting(FPref.PRELOAD_CUSTOM_DRAFTS,
+                        Forge.getLocalizer().getMessage("cbPreloadCustomDrafts"),
+                        Forge.getLocalizer().getMessage("nlPreloadCustomDrafts")),
                 3);
         lstSettings.addItem(new BooleanSetting(FPref.UI_LOAD_UNKNOWN_CARDS,
                                     Forge.getLocalizer().getMessage("lblEnableUnknownCards"),
@@ -597,16 +620,6 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 ImageCache.getInstance().disposeTextures();
             }
         }, 4);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART,
-                Forge.getLocalizer().getMessage("lblPreloadExtendedArtCards"),
-                Forge.getLocalizer().getMessage("nlPreloadExtendedArtCards")){
-            @Override
-            public void select() {
-                super.select();
-                //update
-                Forge.enablePreloadExtendedArt = FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
-            }
-        },4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_MATCH_SCROLL_INDICATOR,
                         Forge.getLocalizer().getMessage("lblMatchScrollIndicator"),
                         Forge.getLocalizer().getMessage("nlMatchScrollIndicator")),
@@ -625,16 +638,6 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 }
             },4);
         }
-        lstSettings.addItem(new BooleanSetting(FPref.UI_AUTO_AIDECK_SELECTION,
-                Forge.getLocalizer().getMessage("lblAutoAIDeck"),
-                Forge.getLocalizer().getMessage("nlAutoAIDeck")){
-            @Override
-            public void select() {
-                super.select();
-                //update
-                Forge.autoAIDeckSelection = FModel.getPreferences().getPrefBoolean(FPref.UI_AUTO_AIDECK_SELECTION);
-            }
-        },4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_FPS,
                 Forge.getLocalizer().getMessage("lblShowFPSDisplay"),
                 Forge.getLocalizer().getMessage("nlShowFPSDisplay")){

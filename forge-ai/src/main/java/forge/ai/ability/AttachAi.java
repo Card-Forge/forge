@@ -45,24 +45,14 @@ public class AttachAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
 
         // TODO: improve this so that the AI can use a flash aura buff as a means of killing opposing creatures
         // and gaining card advantage
         if (source.hasKeyword("MayFlashSac") && !ai.canCastSorcery()) {
-            return false;
-        }
-
-        if (abCost != null) {
-            // AI currently disabled for these costs
-            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa)) {
-                return false;
-            }
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
-                return false;
-            }
+            return new AiAbilityDecision(0, AiPlayDecision.TimingRestrictions);
         }
 
         if (source.isAura() && sa.isSpell() && !source.ignoreLegendRule() && ai.isCardInPlay(source.getName())) {
@@ -70,20 +60,16 @@ public class AttachAi extends SpellAbilityAi {
 
             // TODO: Add some extra checks for where the AI may want to cast a replacement aura
             // on another creature and keep it when the original enchanted creature is useless
-            return false;
-        }
-
-        // prevent run-away activations - first time will always return true
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.WouldDestroyLegend);
         }
 
         // Attach spells always have a target
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             sa.resetTargets();
-            if (!attachPreference(sa, tgt, false)) {
-                return false;
+            AiAbilityDecision attachDecision = attachPreference(sa, tgt, false);
+            if (!attachDecision.willingToPlay()) {
+                return attachDecision;
             }
         }
 
@@ -94,7 +80,7 @@ public class AttachAi extends SpellAbilityAi {
         }
         if ((source.hasKeyword(Keyword.FLASH) || (!ai.canCastSorcery() && sa.canCastTiming(ai)))
                 && source.isAura() && advancedFlash && !doAdvancedFlashAuraLogic(ai, sa, sa.getTargetCard())) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (abCost.getTotalMana().countX() > 0 && sa.getSVar("X").equals("Count$xPaid")) {
@@ -102,7 +88,7 @@ public class AttachAi extends SpellAbilityAi {
             final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
 
             if (xPay == 0) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
             }
 
             sa.setXManaCostPaid(xPay);
@@ -112,10 +98,10 @@ public class AttachAi extends SpellAbilityAi {
             final SpellAbility effectExile = AbilityFactory.getAbility(source.getSVar("TrigExile"), source);
             effectExile.setActivatingPlayer(ai);
             final List<Card> targets = CardUtil.getValidCardsToTarget(effectExile);
-            return !targets.isEmpty();
+            return !targets.isEmpty() ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     private boolean doAdvancedFlashAuraLogic(Player ai, SpellAbility sa, Card attachTarget) {
@@ -955,9 +941,8 @@ public class AttachAi extends SpellAbilityAi {
      * @return true, if successful
      */
     @Override
-    protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card card = sa.getHostCard();
-        // Check if there are any valid targets
         List<GameObject> targets = new ArrayList<>();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
@@ -969,23 +954,44 @@ public class AttachAi extends SpellAbilityAi {
 
         if (!mandatory && card.isEquipment() && !targets.isEmpty()) {
             Card newTarget = (Card) targets.get(0);
-            //don't equip human creatures
             if (newTarget.getController().isOpponentOf(ai)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
-
-            //don't equip a worse creature
             if (card.isEquipping()) {
                 Card oldTarget = card.getEquipping();
                 if (ComputerUtilCard.evaluateCreature(oldTarget) > ComputerUtilCard.evaluateCreature(newTarget)) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
-                // don't equip creatures that don't gain anything
-                return !card.hasSVar("NonStackingAttachEffect") || !newTarget.isEquippedBy(card.getName());
+                boolean stacking = !card.hasSVar("NonStackingAttachEffect") || !newTarget.isEquippedBy(card.getName());
+                if (!stacking) {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
             }
         }
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+    }
 
-        return true;
+    @Override
+    public AiAbilityDecision chkDrawback(final SpellAbility sa, final Player ai) {
+        if (sa.isTrigger() && sa.usesTargeting()) {
+            CardCollection targetables = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
+            CardCollection source = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Object"), sa);
+            Card tgt = attachGeneralAI(ai, sa, targetables, !sa.getRootAbility().isOptionalTrigger(), source.getFirst(), null);
+            if (tgt != null) {
+                sa.resetTargets();
+                sa.getTargets().add(tgt);
+            }
+            if (sa.isTargetNumberValid()) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
+        } else if ("Remembered".equals(sa.getParam("Defined")) && sa.getParent() != null
+            && sa.getParent().getApi() == ApiType.Token && sa.getParent().hasParam("RememberTokens")) {
+            // Living Weapon or similar
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     private static boolean isAuraSpell(final SpellAbility sa) {
@@ -1005,13 +1011,13 @@ public class AttachAi extends SpellAbilityAi {
      *            the mandatory
      * @return true, if successful
      */
-    private static boolean attachPreference(final SpellAbility sa, final TargetRestrictions tgt, final boolean mandatory) {
+    private static AiAbilityDecision attachPreference(final SpellAbility sa, final TargetRestrictions tgt, final boolean mandatory) {
         GameObject o;
         boolean spellCanTargetPlayer = false;
         if (isAuraSpell(sa)) {
             Card source = sa.getHostCard();
             if (!source.hasKeyword(Keyword.ENCHANT)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
             for (KeywordInterface ki : source.getKeywords(Keyword.ENCHANT)) {
                 String ko = ki.getOriginal();
@@ -1036,11 +1042,11 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         if (o == null) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
         sa.getTargets().add(o);
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /**
@@ -1692,25 +1698,6 @@ public class AttachAi extends SpellAbilityAi {
         return chosen;
     }
 
-    @Override
-    public boolean chkAIDrawback(final SpellAbility sa, final Player ai) {
-        // TODO for targeting optional Halvar trigger, needs to be coordinated with PumpAi to make it playable
-        if (sa.isTrigger() && sa.usesTargeting()) {
-            CardCollection targetables = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
-            CardCollection source = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Object"), sa);
-            Card tgt = attachGeneralAI(ai, sa, targetables, !sa.getRootAbility().isOptionalTrigger(), source.getFirst(), null);
-            if (tgt != null) {
-                sa.resetTargets();
-                sa.getTargets().add(tgt);
-            }
-            return sa.isTargetNumberValid();
-        } else if ("Remembered".equals(sa.getParam("Defined")) && sa.getParent() != null
-            && sa.getParent().getApi() == ApiType.Token && sa.getParent().hasParam("RememberTokens")) {
-            // Living Weapon or similar
-            return true;
-        }
-        return false;
-    }
 
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {

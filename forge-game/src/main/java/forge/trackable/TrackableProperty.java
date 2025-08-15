@@ -37,6 +37,7 @@ public enum TrackableProperty {
     Secondary(TrackableTypes.BooleanType),
     DoubleFaced(TrackableTypes.BooleanType),
     FacedownImageKey(TrackableTypes.StringType),
+    PaperFoil(TrackableTypes.BooleanType),
 
     //TODO?
     Cloner(TrackableTypes.StringType),
@@ -137,6 +138,7 @@ public enum TrackableProperty {
     AttractionLights(TrackableTypes.IntegerSetType),
     ChangedColorWords(TrackableTypes.StringMapType),
     HasChangedColors(TrackableTypes.BooleanType),
+    HasPrintedPT(TrackableTypes.BooleanType),
     ChangedTypes(TrackableTypes.StringMapType),
 
     //check produce mana for BG

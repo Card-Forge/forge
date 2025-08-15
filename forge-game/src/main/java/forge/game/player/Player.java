@@ -118,7 +118,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int descended;
     private int numRingTemptedYou;
     private int devotionMod;
-    private boolean revolt = false;
     private Card ringBearer, theRing;
     private int speed;
 
@@ -1714,14 +1713,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (!canCastSorcery() && (landSa == null || !landSa.withFlash(land, this))) {
                 return false;
             }
-        }
 
-        // CantBeCast static abilities
-        if (StaticAbilityCantBeCast.cantPlayLandAbility(landSa, land, this)) {
-            return false;
-        }
-
-        if (land != null && !ignoreZoneAndTiming) {
             final boolean mayPlay = landSa == null ? !land.mayPlay(this).isEmpty() : landSa.getMayPlay() != null;
             if (land.getOwner() != this && !mayPlay) {
                 return false;
@@ -1731,6 +1723,11 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (zone != null && (zone.is(ZoneType.Battlefield) || (!zone.is(ZoneType.Hand) && !mayPlay))) {
                 return false;
             }
+        }
+
+        // CantBeCast static abilities
+        if (StaticAbilityCantBeCast.cantPlayLandAbility(landSa, land, this)) {
+            return false;
         }
 
         // **** Check for land play limit per turn ****
@@ -1967,9 +1964,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         speedEffect.setOwner(this);
         speedEffect.setGamePieceType(GamePieceType.EFFECT);
 
-        speedEffect.addAlternateState(CardStateName.Transformed, false);
+        speedEffect.addAlternateState(CardStateName.Backside, false);
         CardState speedFront = speedEffect.getState(CardStateName.Original);
-        CardState speedBack = speedEffect.getState(CardStateName.Transformed);
+        CardState speedBack = speedEffect.getState(CardStateName.Backside);
 
         speedFront.setImageKey("t:speed");
         speedFront.setName("Start Your Engines!");
@@ -1993,7 +1990,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         speedEffect.updateStateForView();
 
         if(this.maxSpeed())
-            speedEffect.setState(CardStateName.Transformed, true);
+            speedEffect.setState(CardStateName.Backside, true);
 
         final PlayerZone com = getZone(ZoneType.Command);
         com.add(speedEffect);
@@ -2009,8 +2006,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         String label = this.maxSpeed() ? localizer.getMessage("lblMaxSpeed") : localizer.getMessage("lblSpeed", this.speed);
         speedEffect.setOverlayText(label);
         if(maxSpeed() && speedEffect.getCurrentStateName() == CardStateName.Original)
-            speedEffect.setState(CardStateName.Transformed, true);
-        else if(!maxSpeed() && speedEffect.getCurrentStateName() == CardStateName.Transformed)
+            speedEffect.setState(CardStateName.Backside, true);
+        else if(!maxSpeed() && speedEffect.getCurrentStateName() == CardStateName.Backside)
             speedEffect.setState(CardStateName.Original, true);
     }
 
@@ -2142,10 +2139,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasRevolt() {
-        return revolt;
-    }
-    public final void setRevolt(final boolean val) {
-        revolt = val;
+        return getGame().getLeftBattlefieldThisTurn().stream().anyMatch(CardPredicates.isController(this));
     }
 
     public final int getDescended() {
@@ -2549,7 +2543,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetDiscardedThisTurn();
         resetSacrificedThisTurn();
         resetVenturedThisTurn();
-        setRevolt(false);
         setDescended(0);
         setSpellsCastLastTurn(getSpellsCastThisTurn());
         resetSpellsCastThisTurn();

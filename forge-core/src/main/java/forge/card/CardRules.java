@@ -53,6 +53,7 @@ public final class CardRules implements ICardCharacteristics {
     private boolean addsWildCardColor;
     private int setColorID;
     private boolean custom;
+    private String path;
 
     public CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
         splitType = altMode;
@@ -165,6 +166,24 @@ public final class CardRules implements ICardCharacteristics {
         return Iterables.concat(Arrays.asList(mainPart, otherPart), specializedParts.values());
     }
 
+    public boolean isTransformable() {
+        if (CardSplitType.Transform == getSplitType()) {
+            return true;
+        }
+        if (CardSplitType.Modal != getSplitType()) {
+            return false;
+        }
+        for (ICardFace face : getAllFaces()) {
+            for (String spell : face.getAbilities()) {
+                if (spell.contains("AB$ SetState") && spell.contains("Mode$ Transform")) {
+                    return true;
+                }
+            }
+            // TODO check keywords if needed
+        }
+        return false;
+    }
+
     public ICardFace getWSpecialize() {
         return specializedParts.get(CardStateName.SpecializeW);
     }
@@ -192,6 +211,9 @@ public final class CardRules implements ICardCharacteristics {
 
     public String getNormalizedName() { return normalizedName; }
     public void setNormalizedName(String filename) { normalizedName = filename; }
+
+    public String getPath() { return path; }
+    public void setPath(String path) { this.path = path; }
 
     public CardAiHints getAiHints() {
         return aiHints;
@@ -275,6 +297,10 @@ public final class CardRules implements ICardCharacteristics {
             return false;
         }
         return getType().isDungeon();
+    }
+
+    public boolean hasPrintedPT() {
+        return getPower() != null || getToughness() != null;
     }
 
     public boolean canBeCommander() {
@@ -475,6 +501,7 @@ public final class CardRules implements ICardCharacteristics {
          * Reset all fields to parse next card (to avoid allocating new CardRulesReader N times)
          */
         public final void reset() {
+            this.setColorID = 0;
             this.curFace = 0;
             this.faces[0] = null;
             this.faces[1] = null;
@@ -809,7 +836,7 @@ public final class CardRules implements ICardCharacteristics {
     public boolean hasStartOfKeyword(final String k, ICardFace cf) {
         for (final String inst : cf.getKeywords()) {
             final String[] parts = inst.split(":");
-            if (parts[0].equals(k)) {
+            if ((parts[0]).equalsIgnoreCase(k)) {
                 return true;
             }
         }

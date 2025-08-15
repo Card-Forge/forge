@@ -2,9 +2,8 @@ Name:The Mending of Dominaria
 ManaCost:3 G G
 Types:Enchantment Saga
 K:Chapter:3:TrigMill,TrigMill,DBChangeZoneAll
-SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You | SubAbility$ DBChooseCard | SpellDescription$ Mill two cards, then you may return a creature card from your graveyard to your hand.
-SVar:DBChooseCard:DB$ ChooseCard | Choices$ Creature.YouOwn | ChoiceZone$ Graveyard | Amount$ 1 | SubAbility$ DBChangeZone
-SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ ChosenCard
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You | SubAbility$ DBChangeZone | SpellDescription$ Mill two cards, then you may return a creature card from your graveyard to your hand.
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature.YouOwn
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Land.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBShuffle | SpellDescription$ Return all land cards from your graveyard to the battlefield, then shuffle your graveyard into your library.
 SVar:DBShuffle:DB$ ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Graveyard | Destination$ Library | Shuffle$ True
 DeckHints:Ability$Graveyard

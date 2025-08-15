@@ -8,7 +8,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDamage | Trigger
 SVar:TrigDamage:DB$ DealDamage | Defined$ You | NumDmg$ X
 SVar:X:Count$CardCounters.CHARGE
 A:AB$ PutCounter | Cost$ 3 | CounterType$ CHARGE | CounterNum$ 1 | AILogic$ Never | SpellDescription$ Put a charge counter on CARDNAME.
-A:AB$ RemoveCounter | Cost$ 3 | CounterType$ CHARGE | CounterNum$ 1 | AILogic$ EndOfOpponentsTurn | SpellDescription$ Remove a charge counter from CARDNAME.
+A:AB$ RemoveCounter | Cost$ 3 | CounterType$ CHARGE | CounterNum$ 1 | AILogic$ AtOppEOT | SpellDescription$ Remove a charge counter from CARDNAME.
 SVar:SacMe:4
 AI:RemoveDeck:All
 Oracle:At the beginning of your end step, target opponent gains control of Jinxed Choker and puts a charge counter on it.\nAt the beginning of your upkeep, Jinxed Choker deals damage to you equal to the number of charge counters on it.\n{3}: Put a charge counter on Jinxed Choker or remove one from it.

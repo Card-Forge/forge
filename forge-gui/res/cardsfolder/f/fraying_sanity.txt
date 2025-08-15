@@ -5,5 +5,5 @@ K:Enchant:Player
 SVar:AttachAILogic:Curse
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of each end step, enchanted player mills X cards, where X is the number of cards put into their graveyard from anywhere this turn.
 SVar:TrigMill:DB$ Mill | Defined$ Player.EnchantedBy | NumCards$ X
-SVar:X:Count$ThisTurnEntered_Graveyard_Card.EnchantedPlayerOwn
+SVar:X:Count$ThisTurnEntered_Graveyard_Card.EnchantedPlayerOwn+!token
 Oracle:Enchant player\nAt the beginning of each end step, enchanted player mills X cards, where X is the number of cards put into their graveyard from anywhere this turn.

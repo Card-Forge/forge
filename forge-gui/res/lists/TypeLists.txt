@@ -51,6 +51,7 @@ Beeble:Beebles
 Beholder:Beholders
 Berserker:Berserkers
 Bird:Birds
+Bison:Bisons
 Blinkmoth:Blinkmoths
 Boar:Boars
 Brainiac:Brainiacs
@@ -93,6 +94,7 @@ Dog:Dogs
 Dragon:Dragons
 Drake:Drakes
 Dreadnought:Dreadnoughts
+Drix:Drixes
 Drone:Drones
 Druid:Druids
 Dryad:Dryads
@@ -171,6 +173,7 @@ Kraken:Krakens
 Lamia:Lamias
 Lammasu:Lammasus
 Leech:Leeches
+Lemur:Lemurs
 Leviathan:Leviathans
 Lhurgoyf:Lhurgoyfs
 Licid:Licids
@@ -222,6 +225,7 @@ Pangolin:Pangolins
 Peasant:Peasants
 Pegasus:Pegasi
 Pentavite:Pentavites
+Performer:Performers
 Pest:Pests
 Phelddagrif:Phelddagrifs
 Phoenix:Phoenixes
@@ -365,7 +369,6 @@ Fortification
 Gold
 Incubator:Incubators
 Junk
-Lander:Landers
 Key:Keys
 Lander:Landers
 Map

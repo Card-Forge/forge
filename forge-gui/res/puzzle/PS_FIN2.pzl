@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Final Fantasy #02
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2025/06/latest-2-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Start in your first main phase with Summon: Fat Chocobo's Chapter IV ability on the stack... and win this turn! Ensure your solution satisfies all possible blocks. Your opponent has 15 cards left in their library. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=UPKEEP
+activephaseadvance=MAIN1
+p0life=6
+p0hand=Dawn's Truce;Fresh Start;Battle Menu;Stolen Uniform;Military Discipline
+p0battlefield=Clockwork Drawbridge;Hope Estheim;Bedrock Tortoise;Summon: Fat Chocobo|Counters:LORE=3
+p1life=14
+p1library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p1battlefield=T:c_1_1_hero|Set:FIN|Id:1;Warrior's Sword|AttachedTo:1;Adelbert Steiner;Aettir and Priwen;Elixir|Tapped

@@ -1,0 +1,8 @@
+Name:The Mary Janes
+ManaCost:3 R
+Types:Legendary Creature Human Bard Performer
+PT:3/3
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature that attacked this turn.
+K:Menace
+SVar:X:PlayerCountPlayers$AttackersDeclared
+Oracle:This spell costs {1} less to cast for each creature that attacked this turn.\nMenace (This creature can't be blocked except by two or more creatures.)

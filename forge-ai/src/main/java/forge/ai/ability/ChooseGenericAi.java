@@ -7,7 +7,6 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.cost.Cost;
-import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
@@ -20,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-
 public class ChooseGenericAi extends SpellAbilityAi {
 
     @Override
@@ -29,13 +27,10 @@ public class ChooseGenericAi extends SpellAbilityAi {
             return true;
         } else if ("Pump".equals(aiLogic) || "BestOption".equals(aiLogic)) {
             for (AbilitySub sb : sa.getAdditionalAbilityList("Choices")) {
-                if (SpellApiToAi.Converter.get(sb).canPlayAIWithSubs(ai, sb)) {
+                if (SpellApiToAi.Converter.get(sb).canPlayWithSubs(ai, sb).willingToPlay()) {
                     return true;
                 }
             }
-        } else if ("AtOppEOT".equals(aiLogic)) {
-            PhaseHandler ph = ai.getGame().getPhaseHandler();
-            return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai;
         } else if ("Always".equals(aiLogic)) {
             return true;
         }
@@ -43,35 +38,46 @@ public class ChooseGenericAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
-        return sa.hasParam("AILogic");
+    protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
+        if (sa.hasParam("AILogic")) {
+            // This is equivilant to what was here before but feels bad
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        return sa.isTrigger() ? doTriggerAINoCost(aiPlayer, sa, sa.isMandatory()) : checkApiLogic(aiPlayer, sa);
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+        AiAbilityDecision decision;
+        if (sa.isTrigger()) {
+            decision = doTriggerNoCost(aiPlayer, sa, sa.isMandatory());
+        } else {
+            decision = checkApiLogic(aiPlayer, sa);
+        }
+
+        return decision;
     }
 
     @Override
-    protected boolean doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         if ("CombustibleGearhulk".equals(sa.getParam("AILogic")) || "SoulEcho".equals(sa.getParam("AILogic"))) {
             for (final Player p : aiPlayer.getOpponents()) {
                 if (p.canBeTargetedBy(sa)) {
                     sa.resetTargets();
                     sa.getTargets().add(p);
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
-            return true; // perhaps the opponent(s) had Sigarda, Heron's Grace or another effect giving hexproof in play, still play the creature as 6/6
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay); // perhaps the opponent(s) had Sigarda, Heron's Grace or another effect giving hexproof in play, still play the creature as 6/6
         }
         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Deathmist Raptor")) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
-
-        return super.doTriggerAINoCost(aiPlayer, sa, mandatory);
+        return super.doTriggerNoCost(aiPlayer, sa, mandatory);
     }
 
     @Override
@@ -262,7 +268,7 @@ public class ChooseGenericAi extends SpellAbilityAi {
             List<SpellAbility> filtered = Lists.newArrayList();
             // filter first for the spells which can be done
             for (SpellAbility sp : spells) {
-                if (SpellApiToAi.Converter.get(sp).canPlayAIWithSubs(player, sp)) {
+                if (SpellApiToAi.Converter.get(sp).canPlayWithSubs(player, sp).willingToPlay()) {
                     filtered.add(sp);
                 }
             }

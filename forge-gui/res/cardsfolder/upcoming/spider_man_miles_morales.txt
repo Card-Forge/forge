@@ -1,0 +1,13 @@
+Name:Spider-Man, Miles Morales
+ManaCost:4 G G
+Types:Legendary Creature Spider Human Hero
+PT:5/5
+K:Vigilance
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ Whenever NICKNAME enters or attacks, put a +1/+1 counter on each other creature you control. Those creatures gain trample until end of turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, put a +1/+1 counter on each other creature you control. Those creatures gain trample until end of turn.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+StrictlyOther | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPumpAll
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl+StrictlyOther | KW$ Trample
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+Oracle:Vigilance, trample (Attacking doesn't cause this creature to tap. He can deal excess combat damage to the player he's attacking.)\nWhenever Spider-Man enters or attacks, put a +1/+1 counter on each other creature you control. Those creatures gain trample until end of turn.

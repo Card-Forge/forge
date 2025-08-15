@@ -18,11 +18,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Timer;
-import com.github.tommyettinger.textra.Font;
-import com.github.tommyettinger.textra.TextraButton;
-import com.github.tommyettinger.textra.TextraLabel;
-import com.github.tommyettinger.textra.TypingButton;
-import com.github.tommyettinger.textra.TypingLabel;
+import com.github.tommyettinger.textra.*;
 import forge.Forge;
 import forge.adventure.player.AdventurePlayer;
 import forge.card.ColorSet;
@@ -35,6 +31,15 @@ import java.util.function.Function;
  * Class to create ui elements in the correct style
  */
 public class Controls {
+
+    static public Label.LabelStyle getLabelStyle(String name) {
+        return getSkin().get(name, Label.LabelStyle.class);
+    }
+
+    static public TextButton.TextButtonStyle getTextButtonStyle(String name) {
+        return getSkin().get(name, TextButton.TextButtonStyle.class);
+    }
+
     static class LabelFix extends TextraLabel {
         public LabelFix(String text, Font font) {
             super(text, getSkin(), font);
@@ -297,6 +302,10 @@ public class Controls {
     }
 
     static public TextraButton newTextButton(String text, Runnable func) {
+        return newTextButton(text, func, "");
+    }
+
+    static public TextraButton newTextButton(String text, Runnable func, String styleName) {
         TextraButton ret = newTextButton(text);
         ret.addListener(new ClickListener() {
             @Override
@@ -309,7 +318,8 @@ public class Controls {
                 }
             }
         });
-
+        if (!styleName.isEmpty())
+            ret.setStyle(getTextButtonStyle(styleName));
         return ret;
     }
 
@@ -459,26 +469,27 @@ public class Controls {
 
     public static String colorIdToTypingString(ColorSet color, boolean vertical) {
         String nextline = vertical ? "\n" : "";
-        //NOTE converting to uppercase will use pixelmana.atlas, higher quality pixel mana symbol.
         String colorId = "";
         if (color.hasWhite())
-            colorId += "[+w]"+nextline;
+            colorId += "[+W]"+nextline;
         if (color.hasBlue())
-            colorId += "[+u]"+nextline;
+            colorId += "[+U]"+nextline;
         if (color.hasBlack())
-            colorId += "[+b]"+nextline;
+            colorId += "[+B]"+nextline;
         if (color.hasRed())
-            colorId += "[+r]"+nextline;
+            colorId += "[+R]"+nextline;
         if (color.hasGreen())
-            colorId += "[+g]"+nextline;
+            colorId += "[+G]"+nextline;
         if (color.isColorless())
-            colorId += "[+c]"+nextline;
+            colorId += "[+C]"+nextline;
         return colorId;
     }
 
     public static TypingLabel newTypingLabel(String name) {
         TypingLabel ret = new TypingLabel(name == null ? "" : name, getSkin(), getTextraFont());
-        ret.setVariable("player_name", Current.player().getName());
+        String pn = Current.player().getName();
+        if (pn != null) // this variable is used for dialogs
+            ret.setVariable("player_name", pn);
         ret.setVariable("player_color_id", colorIdToTypingString(Current.player().getColorIdentity()));
         return ret;
     }
@@ -521,7 +532,7 @@ public class Controls {
         public AccountingLabel(TextraLabel target, boolean isShards) {
             target.setVisible(false);
             placeholder = target;
-            label = Controls.newTextraLabel(target.getName() + "Replacement");
+            label = newTextraLabel(target.getName() + "Replacement");
             currencyAmount = isShards ? Current.player().getShards() : Current.player().getGold();
             this.isShards = isShards;
 
@@ -600,13 +611,13 @@ public class Controls {
         }
 
         private TextraLabel getDefaultLabel() {
-            return Controls.newTextraLabel(getLabelText(currencyAmount));
+            return newTextraLabel(getLabelText(currencyAmount));
         }
 
         private TextraLabel getUpdateLabel(int newAmount) {
             int delta = newAmount - currencyAmount;
             String updateText = delta == 0 ? "" : (delta < 0 ? NEGDECOR + delta * -1 : POSDECOR + delta);
-            return Controls.newTextraLabel(getLabelText(newAmount, updateText));
+            return newTextraLabel(getLabelText(newAmount, updateText));
         }
 
         private String getLabelText(int amount) {

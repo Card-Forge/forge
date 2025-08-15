@@ -12,7 +12,6 @@ import org.apache.commons.lang3.mutable.MutableBoolean;
 
 import com.google.common.collect.Lists;
 
-import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardRarity;
 import forge.card.CardRulesPredicates;
@@ -281,7 +280,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
             String set = sa.getOriginalHost().getSetCode();
             copy.getCurrentState().setRarity(CardRarity.Token);
             copy.getCurrentState().setSetCode(set);
-            copy.getCurrentState().setImageKey(ImageKeys.getTokenKey(name + "_" + set.toLowerCase()));
+            copy.getCurrentState().setImageKey(StaticData.instance().getOtherImageKey(name, set));
         } else {
             final Card host = sa.getHostCard();
 
@@ -303,7 +302,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
             copy.setStates(CardFactory.getCloneStates(original, copy, sa));
             // force update the now set State
             if (original.isTransformable()) {
-                copy.setState(original.isTransformed() ? CardStateName.Transformed : CardStateName.Original, true, true);
+                copy.setState(original.isTransformed() ? CardStateName.Backside : CardStateName.Original, true, true);
             } else {
                 copy.setState(copy.getCurrentStateName(), true, true);
             }

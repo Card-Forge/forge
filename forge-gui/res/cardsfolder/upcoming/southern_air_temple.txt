@@ -1,0 +1,12 @@
+Name:Southern Air Temple
+ManaCost:3 W
+Types:Legendary Enchantment Shrine
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounterAll1 | TriggerDescription$ When CARDNAME enters, put X +1/+1 counters on each creature you control, where X is the number of Shrines you control.
+SVar:TrigPutCounterAll1:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ X
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Shrine.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll2 | TriggerDescription$ Whenever another Shrine you control enters, put a +1/+1 counter on each creature you control.
+SVar:TrigPutCounterAll2:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+SVar:X:Count$Valid Shrine.YouCtrl
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
+DeckHints:Type$Shrine
+Oracle:When Southern Air Temple enters, put X +1/+1 counters on each creature you control, where X is the number of Shrines you control.\nWhenever another Shrine you control enters, put a +1/+1 counter on each creature you control.

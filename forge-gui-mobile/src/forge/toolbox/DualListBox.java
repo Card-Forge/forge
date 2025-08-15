@@ -58,6 +58,8 @@ public class DualListBox<T> extends FDialog {
                     destList.addItem(item);
                 }
                 sourceList.cleanUpSelections();
+                sourceList.revalidate(true);
+                destList.revalidate(true);
                 setButtonState();
             }
         };
@@ -75,6 +77,8 @@ public class DualListBox<T> extends FDialog {
                     sourceList.addItem(item);
                 }
                 destList.cleanUpSelections();
+                destList.revalidate(true);
+                sourceList.revalidate(true);
                 setButtonState();
             }
         };

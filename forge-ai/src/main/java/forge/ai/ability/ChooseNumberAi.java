@@ -1,21 +1,18 @@
 package forge.ai.ability;
 
-import forge.ai.AiAttackController;
-import forge.ai.ComputerUtilCard;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.util.MyRandom;
 
 public class ChooseNumberAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player aiPlayer, SpellAbility sa) {
         String aiLogic = sa.getParamOrDefault("AILogic", "");
 
         if (aiLogic.isEmpty()) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.MissingLogic);
         } else if (aiLogic.equals("SweepCreatures")) {
             int maxChoiceLimit = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Max"), sa);
             int ownCreatureCount = aiPlayer.getCreaturesInPlay().size();
@@ -30,17 +27,24 @@ public class ChooseNumberAi extends SpellAbilityAi {
             }
 
             if (refOpp == null) {
-                return false; // no opponent has any creatures
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             int evalAI = ComputerUtilCard.evaluateCreatureList(aiPlayer.getCreaturesInPlay());
             int evalOpp = ComputerUtilCard.evaluateCreatureList(refOpp.getCreaturesInPlay());
 
             if (aiPlayer.getLifeLostLastTurn() + aiPlayer.getLifeLostThisTurn() == 0 && evalAI > evalOpp) {
-                return false; // we're not pressured and our stuff seems better, don't do it yet
+                // we're not pressured and our stuff seems better, don't do it yet
+                return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
             }
 
-            return ownCreatureCount > oppMaxCreatureCount + 2 || ownCreatureCount < Math.min(oppMaxCreatureCount, maxChoiceLimit);
+            if (ownCreatureCount > oppMaxCreatureCount + 2 || ownCreatureCount < Math.min(oppMaxCreatureCount, maxChoiceLimit)) {
+                // we have more creatures than the opponent, or we have less than the opponent but more than the max choice limit
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                // we have less creatures than the opponent and less than the max choice limit
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
         }
 
         if (sa.usesTargeting()) {
@@ -49,16 +53,17 @@ public class ChooseNumberAi extends SpellAbilityAi {
             if (sa.canTarget(opp)) {
                 sa.getTargets().add(opp);
             } else {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
-        boolean chance = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
-        return chance;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        return mandatory || canPlayAI(ai, sa);
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        if (mandatory) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+        return canPlay(ai, sa);
     }
-
 }

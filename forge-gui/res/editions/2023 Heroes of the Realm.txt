@@ -1,0 +1,9 @@
+[metadata]
+Code=PH23
+Date=2025-08-24
+Name=2023 Heroes of the Realm
+Type=Funny
+ScryfallCode=PH23
+
+[cards]
+2 M Ormacar, Relic Wraith @Anna Podedworna

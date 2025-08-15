@@ -102,7 +102,7 @@ public class CardFactory {
         copy.setStates(getCloneStates(original, copy, sourceSA));
         // force update the now set State
         if (original.isTransformable()) {
-            copy.setState(original.isTransformed() ? CardStateName.Transformed : CardStateName.Original, true, true);
+            copy.setState(original.isTransformed() ? CardStateName.Backside : CardStateName.Original, true, true);
         } else {
             copy.setState(copy.getCurrentStateName(), true, true);
         }
@@ -198,7 +198,9 @@ public class CardFactory {
         if (c.hasAlternateState()) {
             if (c.isFlipCard()) {
                 c.setState(CardStateName.Flipped, false);
-                c.setImageKey(cp.getImageKey(true));
+                // set the imagekey altstate to false since the rotated image is handled by graphics renderer
+                // setting this to true will download the original image with different name.
+                c.setImageKey(cp.getImageKey(false));
             }
             else if (c.isDoubleFaced() && cardRules != null) {
                 c.setState(cardRules.getSplitType().getChangedStateName(), false);
@@ -549,9 +551,9 @@ public class CardFactory {
             ret1.copyFrom(in.getState(CardStateName.Original), false, sa);
             result.put(CardStateName.Original, ret1);
 
-            final CardState ret2 = new CardState(out, CardStateName.Transformed);
-            ret2.copyFrom(in.getState(CardStateName.Transformed), false, sa);
-            result.put(CardStateName.Transformed, ret2);
+            final CardState ret2 = new CardState(out, CardStateName.Backside);
+            ret2.copyFrom(in.getState(CardStateName.Backside), false, sa);
+            result.put(CardStateName.Backside, ret2);
         } else if (in.isSplitCard()) {
             // for split cards, copy all three states
             final CardState ret1 = new CardState(out, CardStateName.Original);
@@ -722,29 +724,32 @@ public class CardFactory {
 
             // Special Rules for Embalm and Eternalize
             if (sa.isEmbalm() && sa.isIntrinsic()) {
-                String name = TextUtil.fastReplace(
+                String name = "embalm_" + TextUtil.fastReplace(
                         TextUtil.fastReplace(host.getName(), ",", ""),
                         " ", "_").toLowerCase();
-                String set = host.getSetCode().toLowerCase();
-                state.setImageKey(ImageKeys.getTokenKey("embalm_" + name + "_" + set));
+                state.setImageKey(StaticData.instance().getOtherImageKey(name, host.getSetCode()));
             }
 
             if (sa.isEternalize() && sa.isIntrinsic()) {
-                String name = TextUtil.fastReplace(
+                String name = "eternalize_" + TextUtil.fastReplace(
                     TextUtil.fastReplace(host.getName(), ",", ""),
                         " ", "_").toLowerCase();
-                String set = host.getSetCode().toLowerCase();
-                state.setImageKey(ImageKeys.getTokenKey("eternalize_" + name + "_" + set));
+                state.setImageKey(StaticData.instance().getOtherImageKey(name, host.getSetCode()));
             }
 
             if (sa.isKeyword(Keyword.OFFSPRING) && sa.isIntrinsic()) {
-                String name = TextUtil.fastReplace(
+                String name = "offspring_" + TextUtil.fastReplace(
                         TextUtil.fastReplace(host.getName(), ",", ""),
                         " ", "_").toLowerCase();
-                String set = host.getSetCode().toLowerCase();
-                state.setImageKey(ImageKeys.getTokenKey("offspring_" + name + "|" + set));
+                state.setImageKey(StaticData.instance().getOtherImageKey(name, host.getSetCode()));
             }
 
+            if (sa.isKeyword(Keyword.SQUAD) && sa.isIntrinsic()) {
+                String name = "squad_" + TextUtil.fastReplace(
+                        TextUtil.fastReplace(host.getName(), ",", ""),
+                        " ", "_").toLowerCase();
+                state.setImageKey(StaticData.instance().getOtherImageKey(name, host.getSetCode()));
+            }
             
             if (sa.hasParam("GainTextOf") && originalState != null) {
                 state.setSetCode(originalState.getSetCode());

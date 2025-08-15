@@ -2,7 +2,6 @@
 Code=C18
 Date=2018-08-09
 Name=Commander 2018
-Code2=C18
 Type=Commander
 ScryfallCode=C18
 
@@ -341,3 +340,6 @@ ScryfallCode=C18
 24 c_1_1_a_servo @Igor Kieryluk
 25 c_1_1_a_thopter_flying @Richard Wright
 26 c_1_1_a_thopter_flying @Richard Wright
+
+[other]
+1 manifest @Raymond Swanland
