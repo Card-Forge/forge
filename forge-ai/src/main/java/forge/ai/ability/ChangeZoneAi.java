@@ -380,7 +380,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     return true;
                 });
             }
-            // TODO: prevent ai searching its own library when Ob Nixilis, Unshackled is in play
+            // prevent ai searching its own library when Ob Nixilis, Unshackled is in play
+            for (final Player op : ai.getOpponents()) {
+                if (op.isCardInPlay("Ob Nixilis, Unshackled")) {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
+            }
             if (origin != null && origin.size() == 1 && origin.get(0).isKnown()) {
                 // FIXME: make this properly interact with several origin zones
                 list = CardLists.getValidCards(list, type, source.getController(), source, sa);
