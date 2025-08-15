@@ -2,6 +2,7 @@ Name:Iron Spider, Stark Upgrade
 ManaCost:3
 Types:Legendary Artifact Creature Spider Hero
 PT:2/3
+K:Vigilance
 A:AB$ PutCounterAll | Cost$ T | ValidCards$ Artifact.Creature+YouCtrl,Vehicle.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ AtEOTOrBlock | SpellDescription$ Put a +1/+1 counter on each artifact creature and/or Vehicle you control.
 A:AB$ Draw | Cost$ 2 RemoveAnyCounter<2/P1P1/Artifact.YouCtrl/among artifacts you control> | SpellDescription$ Draw a card.
 SVar:UntapMe:True

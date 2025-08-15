@@ -984,7 +984,7 @@ public class CardProperty {
             final String[] res = restrictions.split("_");
             final ZoneType origin = ZoneType.smartValueOf(res[0]);
 
-            if (card.getTurnInZone() != game.getPhaseHandler().getTurn()) {
+            if (!card.enteredThisTurn()) {
                 return false;
             }
 
@@ -993,7 +993,7 @@ public class CardProperty {
             }
         } else if (property.startsWith("ThisTurnEntered")) {
             // only check if it entered the Zone this turn
-            if (card.getTurnInZone() != game.getPhaseHandler().getTurn()) {
+            if (!card.enteredThisTurn()) {
                 return false;
             }
             if (!property.equals("ThisTurnEntered")) { // to confirm specific zones / player
@@ -1010,21 +1010,21 @@ public class CardProperty {
                 }
             }
         } else if (property.equals("DiscardedThisTurn")) {
-            if (card.getTurnInZone() != game.getPhaseHandler().getTurn()) {
+            if (!card.enteredThisTurn()) {
                 return false;
             }
             if (!card.wasDiscarded()) {
                 return false;
             }
         } else if (property.equals("surveilledThisTurn")) {
-            if (card.getTurnInZone() != game.getPhaseHandler().getTurn()) {
+            if (!card.enteredThisTurn()) {
                 return false;
             }
             if (!card.wasSurveilled()) {
                 return false;
             }
         } else if (property.equals("milledThisTurn")) {
-            if (card.getTurnInZone() != game.getPhaseHandler().getTurn()) {
+            if (!card.enteredThisTurn()) {
                 return false;
             }
             if (!card.wasMilled()) {
@@ -2136,11 +2136,8 @@ public class CardProperty {
                 }
             }
             return new CheckCanPayManaCost().check();
-        } else {
-            // StringType done in CardState
-            if (!card.getCurrentState().hasProperty(property, sourceController, source, spellAbility)) {
-                return false;
-            }
+        } else if (!card.getCurrentState().hasProperty(property, sourceController, source, spellAbility)) {
+            return false;
         }
         return true;
     }

@@ -17,14 +17,15 @@ import java.util.Map;
 public class CopySpellAbilityAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player aiPlayer, SpellAbility sa) {
         Game game = aiPlayer.getGame();
         int chance = ((PlayerControllerAi)aiPlayer.getController()).getAi().getIntProperty(AiProps.CHANCE_TO_COPY_OWN_SPELL_WHILE_ON_STACK);
         int diff = ((PlayerControllerAi)aiPlayer.getController()).getAi().getIntProperty(AiProps.ALWAYS_COPY_SPELL_IF_CMC_DIFF);
         String logic = sa.getParamOrDefault("AILogic", "");
 
         if (game.getStack().isEmpty()) {
-            return sa.isMandatory() || "Always".equals(logic);
+            boolean result = sa.isMandatory() || "Always".equals(logic);
+            return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         final SpellAbility top = game.getStack().peekAbility();
@@ -41,47 +42,40 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
         }
 
         if (!MyRandom.percentTrue(chance)
-                && !"AlwaysIfViable".equals(logic)
-                && !"OnceIfViable".equals(logic)
+                && !"Always".equals(logic)
                 && !"AlwaysCopyActivatedAbilities".equals(logic)) {
-            return false;
-        }
-
-        if ("OnceIfViable".equals(logic)) {
-            if (AiCardMemory.isRememberedCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
-                return false;
-            }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (sa.usesTargeting()) {
             // Filter AI-specific targets if provided
             if ("OnlyOwned".equals(sa.getParam("AITgts"))) {
                 if (!top.getActivatingPlayer().equals(aiPlayer)) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }
 
             if (top.isWrapper() || top.isActivatedAbility()) {
                 // Shouldn't even try with triggered or wrapped abilities at this time, will crash
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (top.getApi() == ApiType.CopySpellAbility) {
                 // Don't try to copy a copy ability, too complex for the AI to handle
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (top.getApi() == ApiType.Mana) {
                 // would lead to Stack Overflow by trying to play this again
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (top.getApi() == ApiType.DestroyAll || top.getApi() == ApiType.SacrificeAll || top.getApi() == ApiType.ChangeZoneAll || top.getApi() == ApiType.TapAll || top.getApi() == ApiType.UnattachAll) {
                 if (!top.usesTargeting() || top.getActivatingPlayer().equals(aiPlayer)) {
                     // If we activated a mass removal / mass tap / mass bounce / etc. spell, or if the opponent activated it but
                     // it can't be retargeted, no reason to copy this spell since it'll probably do the same thing and is useless as a copy
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             } else if (top.hasParam("ConditionManaSpent") || top.getHostCard().hasSVar("AINoCopy")) {
                 // Mana spent is not copied, so these spells generally do nothing when copied.
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (ComputerUtilCard.isCardRemAIDeck(top.getHostCard())) {
                 // Don't try to copy anything you can't understand how to handle
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             // A copy is necessary to properly test the SA before targeting the copied spell, otherwise the copy SA will fizzle.
@@ -99,32 +93,49 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
                 }
                 if (decision == AiPlayDecision.WillPlay) {
                     sa.getTargets().add(top);
-                    AiCardMemory.rememberCard(aiPlayer, sa.getHostCard(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
+                return new AiAbilityDecision(0, decision);
             }
         }
 
         // the AI should not miss mandatory activations
-        return sa.isMandatory() || "Always".equals(logic);
+        boolean result = sa.isMandatory() || "Always".equals(logic);
+        return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         // the AI should not miss mandatory activations (e.g. Precursor Golem trigger)
         String logic = sa.getParamOrDefault("AILogic", "");
-        return mandatory || logic.contains("Always"); // this includes logic like AlwaysIfViable
+
+        if (mandatory) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        if (logic.contains("Always")) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
-    public boolean chkAIDrawback(final SpellAbility sa, final Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(final SpellAbility sa, final Player aiPlayer) {
         if ("ChainOfSmog".equals(sa.getParam("AILogic"))) {
             return SpecialCardAi.ChainOfSmog.consider(aiPlayer, sa);
-        } else if ("ChainOfAcid".equals(sa.getParam("AILogic"))) {
+        }
+        if ("ChainOfAcid".equals(sa.getParam("AILogic"))) {
             return SpecialCardAi.ChainOfAcid.consider(aiPlayer, sa);
         }
 
-        return canPlayAI(aiPlayer, sa) || (sa.isMandatory() && super.chkAIDrawback(sa, aiPlayer));
+        AiAbilityDecision decision = canPlay(aiPlayer, sa);
+        if (!decision.willingToPlay()) {
+            if (sa.isMandatory()) {
+                return super.chkDrawback(sa, aiPlayer);
+            }
+        }
+        return decision;
     }
 
     @Override
@@ -138,7 +149,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
         // Chain of Acid requires special attention here since otherwise the AI will confirm the copy and then
         // run into the necessity of confirming a mandatory Destroy, thus destroying all of its own permanents.
         if ("ChainOfAcid".equals(sa.getParam("AILogic"))) {
-            return SpecialCardAi.ChainOfAcid.consider(player, sa);
+            return SpecialCardAi.ChainOfAcid.consider(player, sa).willingToPlay();
         }
 
         return true;

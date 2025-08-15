@@ -202,7 +202,6 @@ public class AnimateEffect extends AnimateEffectBase {
 
             if (sa.isCrew()) {
                 gameCard.becomesCrewed(sa);
-                gameCard.updatePTforView();
             }
 
             game.fireEvent(new GameEventCardStatsChanged(gameCard));

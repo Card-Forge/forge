@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -11,8 +13,8 @@ import forge.game.spellability.SpellAbility;
 public class AddPhaseAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        return false;
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
 }

@@ -472,3 +472,6 @@ A255 R A-Dungeon Descent @Kasia 'Kafis' Zielińska
 17 emblem_lolth_spider_queen @Tyler Jacobson
 18 emblem_mordenkainen @Ryan Pancoast
 19 emblem_zariel_archduke_of_avernus @Heonhwa Choe
+20 Dungeon of the Mad Mage
+21 Lost Mine of Phandelver
+22 Tomb of Annihilation

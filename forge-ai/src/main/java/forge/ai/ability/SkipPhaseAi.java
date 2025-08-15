@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import forge.ai.AiAbilityDecision;
 import forge.ai.AiAttackController;
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
@@ -10,12 +11,12 @@ import java.util.Map;
 
 public class SkipPhaseAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         return targetPlayer(aiPlayer, sa, false);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         return targetPlayer(aiPlayer, sa, mandatory);
     }
 
@@ -24,7 +25,7 @@ public class SkipPhaseAi extends SpellAbilityAi {
         return true;
     }
     
-    public boolean targetPlayer(Player ai, SpellAbility sa, boolean mandatory) {
+    private AiAbilityDecision targetPlayer(Player ai, SpellAbility sa, boolean mandatory) {
         if (sa.usesTargeting()) {
             final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
             sa.resetTargets();
@@ -38,9 +39,9 @@ public class SkipPhaseAi extends SpellAbilityAi {
                 sa.getTargets().add(ai); 
             }
             else {
-                return false;
+                return new AiAbilityDecision(0, forge.ai.AiPlayDecision.CantPlayAi);
             }
         }
-        return true;
+        return new AiAbilityDecision(100, forge.ai.AiPlayDecision.WillPlay);
     }
 }
