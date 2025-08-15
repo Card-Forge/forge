@@ -29,7 +29,7 @@ public class EarthbendEffect extends SpellAbilityEffect {
         final Card card = sa.getHostCard();
         final int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("Num", "1"), sa);
 
-        sb.append(amount).append(". (Target land you control becomes a 0/0 creature with haste that’s still a land. Put  ");
+        sb.append(amount).append(". (Target land you control becomes a 0/0 creature with haste that's still a land. Put  ");
         sb.append(Lang.nounWithNumeral(amount, "+1/+1 counter"));
         sb.append(" on it. When it dies or is exiled, return it to the battlefield tapped.)");
 
