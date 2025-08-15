@@ -191,6 +191,10 @@
                     <groupId>androidx.core</groupId>
                     <artifactId>core</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>io.sentry</groupId>
+                    <artifactId>sentry-native-ndk</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -214,6 +218,10 @@
                 <exclusion>
                     <groupId>androidx.core</groupId>
                     <artifactId>core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.sentry</groupId>
+                    <artifactId>sentry-native-ndk</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
