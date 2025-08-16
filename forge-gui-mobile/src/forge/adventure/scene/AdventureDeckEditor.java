@@ -437,6 +437,7 @@ public class AdventureDeckEditor extends FDeckEditor {
             cardManager.setBtnAdvancedSearchOptions(true);
             cardManager.setCatalogDisplay(true);
             cardManager.setPool(getCardPool(), false); //Need to update this early for the caption.
+            this.updateCaption();
         }
 
         @Override
