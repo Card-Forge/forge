@@ -41,6 +41,9 @@ public class NewDraftScreen extends LaunchScreen {
 
     @Override
     protected void startMatch() {
+        // initialize custom cubes first to fill the menus, will be instant if preloaded
+        LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewDraft"), true, BoosterDraft::initializeCustomDrafts);
+
         //must run in game thread to prevent blocking UI thread
         ThreadUtil.invokeInGameThread(() -> {
             final LimitedPoolType poolType = SGuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblChooseDraftFormat"), LimitedPoolType.values(true));
@@ -49,11 +52,7 @@ public class NewDraftScreen extends LaunchScreen {
             final BoosterDraft draft = BoosterDraft.createDraft(poolType);
             if (draft == null) { return; }
 
-            FThreads.invokeInEdtLater(() ->
-                    LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewDraft"), true,
-                            () -> Forge.openScreen(new DraftingProcessScreen(draft, FDeckEditor.EditorConfigDraft))
-                    )
-            );
+            FThreads.invokeInEdtLater(() -> Forge.openScreen(new DraftingProcessScreen(draft, FDeckEditor.EditorConfigDraft)));
         });
     }
 }
