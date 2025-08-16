@@ -8,7 +8,7 @@ K:Deathtouch
 K:Lifelink
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigReveal | TriggerDescription$ When CARDNAME enters, reveal the top ten cards of your library. For each card type, you may put a card of that type from among the revealed cards into your hand. Put the rest on the bottom of your library in a random order. (Artifact, battle, creature, enchantment, instant, kindred, land, planeswalker, and sorcery are card types.)
 SVar:TrigReveal:DB$ PeekAndReveal | PeekAmount$ 10 | Reveal$ True | ImprintRevealed$ True | SubAbility$ TrigRepeatTypes
-SVar:TrigRepeatTypes:DB$ RepeatEach | RepeatTypesFrom$ Card.IsImprinted | TypesFromZone$ Library | RepeatSubAbility$ ChooseCard | SubAbility$ DBChangeZone
+SVar:TrigRepeatTypes:DB$ RepeatEach | RepeatTypesFrom$ ValidLibrary Card.IsImprinted | RepeatSubAbility$ ChooseCard | SubAbility$ DBChangeZone
 SVar:ChooseCard:DB$ ChooseCard | Choices$ Card.ChosenType+YouOwn+IsImprinted | ChoiceZone$ Library | RememberChosen$ True
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | Defined$ Remembered | SubAbility$ ShuffleRest
 SVar:ShuffleRest:DB$ ChangeZoneAll | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | ChangeType$ Card.IsImprinted+!IsRemembered | SubAbility$ DBCleanup

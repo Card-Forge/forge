@@ -400,5 +400,9 @@ ScryfallCode=M20
 6 b_2_2_zombie @Anna Steinbauer
 7 r_1_1_elemental @Winona Nelson
 8 g_2_2_wolf @Aaron Miller
-9 c_3_3_a_phyrexian_golem @Daarken
+9 c_3_3_a_golem @Daarken
 10 c_a_treasure_sac @Alayna Danner
+
+[other]
+11 emblem_chandra_awakened_inferno @Chris Rahn
+12 emblem_mu_yanling_sky_dancer @g-host Lee
