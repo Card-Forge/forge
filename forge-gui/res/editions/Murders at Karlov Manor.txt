@@ -552,3 +552,6 @@ Base=Any:fromsheet("MKM prerelease promo")
 18 c_a_clue_draw @Mike Burns
 19 c_0_0_a_thopter_flying @David Sondered
 20 c_1_1_a_thopter_flying @Samuel Perin
+
+[other]
+21 cloaked @Ben Hill

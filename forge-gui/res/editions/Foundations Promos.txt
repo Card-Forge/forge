@@ -1,0 +1,9 @@
+[metadata]
+Code=PFDN
+Date=2024-11-15
+Name=Foundations Promos
+Type=Promo
+ScryfallCode=PFDN
+
+[cards]
+1 R Sol Ring @Mike Bierek
