@@ -471,7 +471,7 @@ public class AdventureDeckEditor extends FDeckEditor {
                 ));
             }
             if(parentScreen instanceof AdventureDeckEditor adventureEditor && adventureEditor.getCatalogPage() != null) {
-                CollectionCatalogPage catalogPage = (CollectionCatalogPage) adventureEditor.getCatalogPage();
+                CatalogPage catalogPage = adventureEditor.getCatalogPage();
                 int autoSellCount = cardManager.getItemCount(card);
                 int amountInCollection = player.getCards().count(card);
                 int safeToSellCount = amountInCollection - player.getCopiesUsedInDecks(card);
