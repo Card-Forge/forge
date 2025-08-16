@@ -48,7 +48,7 @@ public class CubeImporter {
         }
     }
 
-    public static CustomLimited parseFromURL(final URL url) {
+    private static CustomLimited parseFromURL(final URL url) {
         // Use a generic 15-cards booster template with no rarity slots
         // Nice to have: Infos about the slots and the draft format can be found on the platform and imported via JSON api.
         List<Pair<String, Integer>> slots = SealedTemplate.genericNoSlotBooster.getSlots();
