@@ -171,7 +171,7 @@
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="INSTALLATION.txt" />
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="GAMEPAD_README.txt" />
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="ISSUES.txt" />
-                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="CHANGES.txt" />
+                                            <fileset dir="${basedir}/../forge-gui-desktop/target/" includes="CHANGES.txt" />
                                             <fileset dir="${basedir}/../forge-gui/">
                                                 <include name="res/**" />
                                                 <exclude name="res/cardsfolder/**" />
