@@ -1,7 +1,7 @@
 Name:The Cabbage Merchant
 ManaCost:2 G
 Types:Legendary Creature Human Citizen
-PT:3/5
+PT:2/2
 K:Reach
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ DBToken | TriggerDescription$ Whenever an opponent casts a noncreature spell, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
