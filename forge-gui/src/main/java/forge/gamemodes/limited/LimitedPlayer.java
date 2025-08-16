@@ -10,6 +10,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.util.SGuiChoose;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.TextUtil;
 
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 public class LimitedPlayer {
     // A Player class for inside some type of limited environment, like Draft.
     final protected int order;
+    protected String name;
     protected int currentPack;
     protected int draftedThisRound;
     protected Deck deck;
@@ -70,6 +72,16 @@ public class LimitedPlayer {
         this.draft = draft;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        if(this.name == null)
+            return "Player " + (this.order + 1);
+        return name;
+    }
+
     public Map<String, List<String>> getDraftNotes() {
         return noted;
     }
@@ -108,6 +120,7 @@ public class LimitedPlayer {
             return null;
         }
 
+        debugPrint("Picked: " + bestPick);
         DraftPack chooseFrom = packQueue.peek();
         if (chooseFrom == null) {
             return null;
@@ -186,8 +199,9 @@ public class LimitedPlayer {
         }
 
         if ((playerFlags & IllusionaryInformantPeek) == IllusionaryInformantPeek) {
-            if (handleIllusionaryInformant()) {
-                addLog(name() + " peeked at " + fromPlayer.name() + "'s next pick with Illusionary Informant and turned it face down.");
+            LimitedPlayer peekAt = handleIllusionaryInformant();
+            if (peekAt != null) {
+                addLog(name() + " peeked at " + peekAt.name() + "'s next pick with Illusionary Informant and turned it face down.");
                 playerFlags &= ~IllusionaryInformantPeek;
             }
         }
@@ -370,10 +384,7 @@ public class LimitedPlayer {
     }
 
     public void addLog(String message) {
-        if (this.draft.getDraftLog() != null) {
-            this.draft.getDraftLog().addLogEntry(message);
-        }
-        // Mobile doesnt have a draft log yet
+        this.draft.addLog(message);
     }
 
     public DraftPack nextChoice() {
@@ -446,9 +457,12 @@ public class LimitedPlayer {
         return SGuiChoose.one("Reveal this " + bestPick + " for Smuggler Captain?", Lists.newArrayList("Yes", "No")).equals("Yes");
     }
 
-    public String name() {
+    /**
+     * @return Name to insert into draft messages.
+     */
+    protected String name() {
         if (this instanceof LimitedPlayerAI) {
-            return "Player[" + order + "]";
+            return getName();
         }
 
         return "You";
@@ -621,26 +635,20 @@ public class LimitedPlayer {
             round = SGuiChoose.getInteger("Which round would you like to peek at?", draft.getRound(), 3);
         }
 
-        int playerId = SGuiChoose.getInteger("Which player would you like to peek at?", 0, draft.getOpposingPlayers().length);
-        SGuiChoose.reveal("Peeked booster", peekAtBoosterPack(round, playerId));
+        LimitedPlayer targetPlayer = SGuiChoose.one("Which player would you like to peek at?", draft.getAllPlayers(), null, LimitedPlayer::getName);
+        SGuiChoose.reveal("Peeked booster", peekAtBoosterPack(round, targetPlayer));
         // This reveal popup doesn't update the card detail panel in draft
         // How do we get to do that?
         return true;
     }
 
-    protected DraftPack peekAtBoosterPack(int round, int playerNumber) {
-        if (draft.getRound() > round) {
+    protected DraftPack peekAtBoosterPack(int round, LimitedPlayer player) {
+        if (draft.getRound() > round || player == null) {
             // There aren't any unopened packs from earlier rounds
             return null;
         }
 
         int relativeRound = round - draft.getRound();
-        LimitedPlayer player;
-        if (playerNumber == 0) {
-            player = this.draft.getHumanPlayer();
-        } else {
-            player = this.draft.getOpposingPlayers()[playerNumber - 1];
-        }
         if (relativeRound == 0) {
             // I want to see a pack from the current round
             return player.packQueue.peek();
@@ -649,20 +657,15 @@ public class LimitedPlayer {
         }
     }
 
-    public boolean handleIllusionaryInformant() {
-        Integer player = SGuiChoose.getInteger("Peek at another player's last pick?", 0, draft.getOpposingPlayers().length);
-        if (Objects.equals(player, null)) {
-            return false;
-        }
-
-        LimitedPlayer peekAt = draft.getPlayer(player);
+    public LimitedPlayer handleIllusionaryInformant() {
+        LimitedPlayer peekAt = SGuiChoose.oneOrNone("Peek at another player's last pick?", draft.getAllPlayers(), null, LimitedPlayer::getName);
         if (peekAt == null) {
-            return false;
+            return null;
         }
 
-        SGuiChoose.reveal("Player " + player + " lastPicked: ",  Lists.newArrayList(peekAt.getLastPick()));
+        SGuiChoose.reveal("Player " + peekAt + " lastPicked: ",  Lists.newArrayList(peekAt.getLastPick()));
 
-        return true;
+        return peekAt;
     }
 
     public PaperCard handleSpirePhantasm(DraftPack chooseFrom) {
@@ -674,6 +677,9 @@ public class LimitedPlayer {
     }
 
     public boolean handleLeovoldsOperative(DraftPack pack, PaperCard drafted) {
+        if(pack.isEmpty())
+            return false;
+
         if (Objects.equals(SGuiChoose.one("Draft an extra pick with Leovold's Operative?", Lists.newArrayList("Yes", "No")), "No")) {
             return false;
         }
@@ -683,6 +689,8 @@ public class LimitedPlayer {
     }
 
     public boolean handleCogworkLibrarian(DraftPack pack, PaperCard drafted) {
+        if(pack.isEmpty())
+            return false;
         return !Objects.equals(SGuiChoose.one("Draft an extra pick with Cogwork Librarian?", Lists.newArrayList("Yes", "No")), "No");
     }
 
@@ -791,7 +799,7 @@ public class LimitedPlayer {
     }
 
     protected PaperCard chooseCardToExchange(PaperCard exchangeCard, Map<PaperCard, LimitedPlayer> offers) {
-        return SGuiChoose.oneOrNone("Choose a card to accept trade of " + exchangeCard + ": ", offers.keySet());
+        return SGuiChoose.oneOrNone("Choose a card to accept trade of " + exchangeCard + ": ", offers.keySet(), null, (card) -> card.getName() + " (" + offers.get(card).getName() + ")");
     }
 
     protected void exchangeAcceptedOffer(PaperCard exchangeCard, LimitedPlayer player, PaperCard offer) {
@@ -812,5 +820,11 @@ public class LimitedPlayer {
             List<String> noteList = player.getDraftNotes().computeIfAbsent(exchangeCard.getName(), k -> Lists.newArrayList());
             noteList.add(note);
         });
+    }
+
+    public void debugPrint(String text) {
+        if(!ForgePreferences.DEV_MODE)
+            return;
+        System.out.println("Player[" + order + "] - " + text);
     }
 }

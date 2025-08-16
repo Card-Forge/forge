@@ -21,8 +21,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.assets.FBufferedImage;
 import forge.assets.FSkin;
-import forge.deck.Deck;
-import forge.deck.DeckProxy;
+import forge.deck.*;
 import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.player.Player;
@@ -32,6 +31,7 @@ import forge.gamemodes.quest.QuestUtil;
 import forge.gui.FThreads;
 import forge.gui.interfaces.IGuiGame;
 import forge.item.IPaperCard;
+import forge.item.PaperCard;
 import forge.player.GamePlayerUtil;
 import forge.player.PlayerControllerHuman;
 import forge.screens.FScreen;
@@ -140,7 +140,7 @@ public class DuelScene extends ForgeScene {
             dungeonEffect = null;
             callbackExit = false;
             Forge.clearTransitionScreen();
-            Forge.clearCurrentScreen();
+            Forge.clearScreenStack();
             Forge.advFreezePlayerControls = false;
             Scene last = Forge.switchToLast();
             Current.player().getStatistic().setResult(enemyName, winner);
@@ -210,9 +210,7 @@ public class DuelScene extends ForgeScene {
 
         List<RegisteredPlayer> players = new ArrayList<>();
 
-        int missingCards = Config.instance().getConfigData().minDeckSize - playerDeck.getMain().countAll();
-        if (missingCards > 0) //Replace unknown cards for a Wastes.
-            playerDeck.getMain().add("Wastes", missingCards);
+        applyAdventureDeckRules();
         int playerCount = 1;
         EnemyData currentEnemy = enemy.getData();
         for (int i = 0; i < 8 && currentEnemy != null; i++) {
@@ -347,6 +345,11 @@ public class DuelScene extends ForgeScene {
 
         players.add(humanPlayer);
 
+        if(eventData != null && eventData.draft != null) {
+            for(RegisteredPlayer p : players)
+                p.assignConspiracies();
+        }
+
         final Map<RegisteredPlayer, IGuiGame> guiMap = new HashMap<>();
         guiMap.put(humanPlayer, MatchController.instance);
 
@@ -391,6 +394,47 @@ public class DuelScene extends ForgeScene {
         }
         super.enter();
         matchOverlay.show();
+    }
+
+    private static final String PLACEHOLDER_MAIN = "Wastes";
+    private static final String PLACEHOLDER_ATTRACTION = "Coin-Operated Pony";
+    private static final String PLACEHOLDER_CONTRAPTION = "Automatic Fidget Spinner";
+
+    private void applyAdventureDeckRules() {
+        //Can't just keep the player from entering a battle if their deck is invalid. So instead we'll just edit their deck.
+        CardPool mainSection = playerDeck.getMain(), attractions = playerDeck.get(DeckSection.Attractions), contraptions = playerDeck.get(DeckSection.Contraptions);
+        DeckFormat format = DeckFormat.Adventure;
+
+        removeExcessCopies(mainSection, format);
+        removeExcessCopies(attractions, format);
+        removeExcessCopies(contraptions, format);
+
+        int missingCards = Config.instance().getConfigData().minDeckSize - mainSection.countAll();
+        if (missingCards > 0) //Replace unknown cards for a Wastes.
+            mainSection.add(PLACEHOLDER_MAIN, missingCards);
+
+        if(attractions != null && !attractions.isEmpty()) {
+            int missingAttractions = 10 - attractions.countAll(); //TODO: These shouldn't be hard coded but DeckFormat's gonna need some reorganizing to fetch this dynamically
+            if(missingAttractions > 0)
+                attractions.add(PLACEHOLDER_ATTRACTION, missingAttractions);
+        }
+        if(contraptions != null && !contraptions.isEmpty()) {
+            int missingContraptions = 15 - contraptions.countAll();
+            if(missingContraptions > 0)
+                contraptions.add(PLACEHOLDER_CONTRAPTION, missingContraptions);
+        }
+    }
+
+    private static void removeExcessCopies(CardPool section, DeckFormat format) {
+        if(section == null)
+            return;
+        for(Map.Entry<PaperCard, Integer> e : section) {
+            PaperCard card = e.getKey();
+            int amount = e.getValue();
+            int limit = format.getMaxCardCopies(card);
+            if(amount > limit)
+                section.remove(card, amount - limit);
+        }
     }
 
     @Override

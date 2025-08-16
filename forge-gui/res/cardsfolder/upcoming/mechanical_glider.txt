@@ -1,0 +1,8 @@
+Name:Mechanical Glider
+ManaCost:1
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When this Equipment enters, attach it to target creature you control.
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Flying | Description$ Equipped creature has flying. (It can't be blocked except by creatures with flying or reach.)
+K:Equip:2
+Oracle:When this Equipment enters, attach it to target creature you control.\nEquipped creature has flying. (It can't be blocked except by creatures with flying or reach.)\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

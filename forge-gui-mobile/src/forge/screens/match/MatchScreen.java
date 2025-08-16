@@ -144,7 +144,7 @@ public class MatchScreen extends FScreen {
         players.setDropDownContainer(this);
         revealed = new VReveal();
         revealed.setDropDownContainer(this);
-        log = new VLog();
+        log = new VLog(() -> MatchController.instance.getGameView().getGameLog());
         log.setDropDownContainer(this);
         devMenu = new VDevMenu();
         devMenu.setDropDownContainer(this);

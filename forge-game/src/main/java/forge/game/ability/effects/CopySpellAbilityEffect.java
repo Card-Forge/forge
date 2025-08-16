@@ -23,6 +23,12 @@ import java.util.Map;
 
 
 public class CopySpellAbilityEffect extends SpellAbilityEffect {
+    @Override
+    public void buildSpellAbility(SpellAbility sa) {
+        if (sa.usesTargeting()) {
+            sa.getTargetRestrictions().setZone(ZoneType.Stack);
+        }
+    }
 
     @Override
     protected String getStackDescription(SpellAbility sa) {

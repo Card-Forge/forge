@@ -12,7 +12,7 @@ A:AB$ Dig | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | 
 SVar:DBEffect2:DB$ Effect | Name$ Chandra, Dressed to Kill's Effect — Ultimate May Play | RememberObjects$ RememberedCard | StaticAbilities$ STPlay2 | SubAbility$ DBEffect3 | ForgetOnMoved$ Exile
 SVar:DBEffect3:DB$ Effect | Name$ Emblem — Chandra, Dressed to Kill | Triggers$ TRSpellCast | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:STPlay2:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered+Red+nonLand | AffectedZone$ Exile | Description$ You may cast red spells from among the exiled cards this turn.
-SVar:TRSpellCast:Mode$ SpellCast | ValidCard$ Card.Red | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a red spell, this emblem deals X damage to any target, where X is the amount of mana spent to cast that spell."
+SVar:TRSpellCast:Mode$ SpellCast | ValidCard$ Card.Red | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a red spell, this emblem deals X damage to any target, where X is the amount of mana spent to cast that spell.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
 SVar:X:TriggeredCard$CastTotalManaSpent
 SVar:BuffedBy:Card.Red

@@ -22,6 +22,13 @@ import java.util.Map;
 
 public class CounterEffect extends SpellAbilityEffect {
     @Override
+    public void buildSpellAbility(SpellAbility sa) {
+        if (sa.usesTargeting()) {
+            sa.getTargetRestrictions().setZone(ZoneType.Stack);
+        }
+    }
+
+    @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 

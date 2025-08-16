@@ -1,0 +1,6 @@
+Name:Abandon Attachments
+ManaCost:1 UR
+Types:Instant Lesson
+A:SP$ Draw | NumCards$ 2 | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ You may discard a card. If you do, draw two cards.
+DeckHas:Ability$Discard
+Oracle:You may discard a card. If you do, draw two cards.

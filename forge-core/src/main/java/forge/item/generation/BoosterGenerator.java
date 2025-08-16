@@ -254,7 +254,7 @@ public class BoosterGenerator {
 
             if (sheetKey.startsWith("wholeSheet")) {
                 PrintSheet ps = getPrintSheet(sheetKey);
-                result.addAll(ps.all());
+                result.addAll(ps.toFlatList());
                 continue;
             }
 
@@ -384,7 +384,7 @@ public class BoosterGenerator {
                 PrintSheet replaceThis = tryGetStaticSheet(split[0]);
                 List<PaperCard> candidates = Lists.newArrayList();
                 for (PaperCard p : result) {
-                    if (replaceThis.all().contains(p)) {
+                    if (replaceThis.contains(p)) {
                         candidates.add(candidates.size(), p);
                     }
                 }
@@ -398,7 +398,7 @@ public class BoosterGenerator {
                 PrintSheet replaceThis = tryGetStaticSheet(split[0]);
                 List<PaperCard> candidates = Lists.newArrayList();
                 for (PaperCard p : result) {
-                    if (replaceThis.all().contains(p)) {
+                    if (replaceThis.contains(p)) {
                         candidates.add(candidates.size(), p);
                     }
                 }

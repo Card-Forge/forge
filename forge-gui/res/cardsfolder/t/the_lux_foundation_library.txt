@@ -8,4 +8,4 @@ T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDesc
 SVar:RolledChaos:DB$ PutCounter | CounterType$ Shadow | ValidTgts$ Creature
 SVar:AIRollPlanarDieParams:Mode$ Always | HasCreatureInPlay$ True | RollInMain1$ True
 DeckHas:Ability$Counters
-Oracle:Players have no maximum hand size.\nWhenever a creature you control deals combat damage to a player, you may draw a card.\nWhenever chaos ensues, put a shadow counter on target creature. (A creature with shadow can block or be blocked by only creatures with shadow.
+Oracle:Players have no maximum hand size.\nWhenever a creature you control deals combat damage to a player, you may draw a card.\nWhenever chaos ensues, put a shadow counter on target creature. (A creature with shadow can block or be blocked by only creatures with shadow.)

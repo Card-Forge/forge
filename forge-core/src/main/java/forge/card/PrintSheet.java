@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 
 /**
  * TODO: Write javadoc for this type.
@@ -68,6 +69,13 @@ public class PrintSheet {
             cardsWithWeights.remove(card);
     }
 
+    public boolean contains(PaperCard pc) {
+        return cardsWithWeights.contains(pc);
+    }
+    public PaperCard find(Predicate<PaperCard> filter) {
+        return cardsWithWeights.find(filter);
+    }
+
     private PaperCard fetchRoulette(int start, int roulette, Collection<PaperCard> toSkip) {
         int sum = start;
         boolean isSecondRun = start > 0;
@@ -85,15 +93,6 @@ public class PrintSheet {
         return fetchRoulette(sum + 1, roulette, toSkip); // start over from beginning, in case last cards were to skip
     }
 
-    public List<PaperCard> all() {
-        List<PaperCard> result = new ArrayList<>();
-        for (Entry<PaperCard, Integer> kv : cardsWithWeights) {
-            for (int i = 0; i < kv.getValue(); i++) {
-                result.add(kv.getKey());
-            }
-        }
-        return result;
-    }
     public boolean containsCardNamed(String name,int atLeast) {
         int count=0;
         for (Entry<PaperCard, Integer> kv : cardsWithWeights) {
@@ -144,7 +143,7 @@ public class PrintSheet {
         return cardsWithWeights.isEmpty();
     }
 
-    public Iterable<PaperCard> toFlatList() {
+    public List<PaperCard> toFlatList() {
         return cardsWithWeights.toFlatList();
     }
 

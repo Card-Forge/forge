@@ -1,0 +1,8 @@
+Name:Zuko, Avatar Hunter
+ManaCost:3 R R
+Types:Legendary Creature Human Noble
+PT:4/5
+K:Reach
+T:Mode$ SpellCast | ValidCard$ Card.Red | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a red spell, create a 2/2 red Soldier creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_2_2_soldier | TokenOwner$ You
+Oracle:Reach (This creature can block creatures with flying.)\nWhenever you cast a red spell, create a 2/2 red Soldier creature token.
