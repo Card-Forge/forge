@@ -202,7 +202,6 @@
                         <allowTimestampedSnapshots>true</allowTimestampedSnapshots>
                         <checkModificationExcludes>
                           <checkModificationExclude>.mvn/local-settings.xml</checkModificationExclude>
-                          <checkModificationExclude>forge-gui/release-files/CHANGES.txt</checkModificationExclude>
                         </checkModificationExcludes>
                     </configuration>
                 </plugin>
