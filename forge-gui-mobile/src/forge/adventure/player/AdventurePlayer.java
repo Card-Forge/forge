@@ -1022,7 +1022,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         int earned = performSale(card, amountToSell);
 
         if(earned > 0)
-            takeGold(earned);
+            giveGold(earned);
         return amountToSell;
     }
 
@@ -1036,7 +1036,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             profit += AdventurePlayer.current().performSale(cardToSell, 1);
             cards.remove(cardToSell);
         }
-        takeGold(profit); //do this as one transaction so as not to get multiple copies of sound effect
+        giveGold(profit); //do this as one transaction so as not to get multiple copies of sound effect
     }
 
     /**
