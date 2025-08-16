@@ -310,5 +310,5 @@ Simic Guildgate|RNA
 11 c_1_1_a_thopter_flying @Darren Tan
 12 c_a_treasure_sac @Mark Behm
 
-[emblem]
+[other]
 13 emblem_domri_chaos_bringer @Zack Stella
