@@ -2,7 +2,6 @@
 Code=SOM
 Date=2010-10-01
 Name=Scars of Mirrodin
-Code2=SOM
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
@@ -266,7 +265,7 @@ ScryfallCode=SOM
 1 w_2_2_cat @Scott Chou
 2 w_1_1_soldier @Goran Josic
 3 r_1_1_goblin @Goran Josic
-4 g_1_1_phyrexian_insect_infect @Adrian Smith
+4 g_1_1_insect_infect @Adrian Smith
 5 g_2_2_wolf @Chris Rahn
 6 c_3_3_a_golem @Nic Klein
 7 c_1_1_a_myr @Ryan Pancoast
