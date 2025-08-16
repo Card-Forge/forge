@@ -171,12 +171,8 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         
         List<PrintSheet> sheets = StaticData.instance().getCardEdition(this.edition).getPrintSheetsBySection();
         for (PrintSheet sheet : sheets) {
-            if (sheet.all().contains(this) && sheet.containsCardNamed(meldWith, 1)) {
-                for (PaperCard card : sheet.all()) {
-                    if (card.getName().equals(meldWith)) {
-                        return card;
-                    }
-                }
+            if (sheet.contains(this)) {
+                return sheet.find(PaperCardPredicates.name(meldWith));
             }
         }
 
