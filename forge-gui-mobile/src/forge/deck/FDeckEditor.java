@@ -1793,7 +1793,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             DeckSection destination = DeckSection.matchingSection(card);
             final DeckSectionPage destinationPage = parentScreen.getPageForSection(destination);
 
-            if (!needsCommander() && !canOnlyBePartnerCommander(card)) {
+            if (!needsCommander() && !canOnlyBePartnerCommander(card) && destinationPage != null) {
                 addMoveCardMenuItem(menu, card, this, destinationPage);
                 if (canSideboard(card) && destination != DeckSection.Sideboard) {
                     addMoveCardMenuItem(menu, card, this, parentScreen.getSideboardPage());
