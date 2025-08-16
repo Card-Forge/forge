@@ -552,26 +552,16 @@ public final class CardEdition implements Comparable<CardEdition> {
 
     public List<PrintSheet> getPrintSheetsBySection() {
         final CardDb cardDb = StaticData.instance().getCommonCards();
-        Map<String, Integer> cardToIndex = new HashMap<>();
 
         List<PrintSheet> sheets = Lists.newArrayList();
-        for (String sectionName : cardMap.keySet()) {
-            if (sectionName.equals(EditionSectionWithCollectorNumbers.CONJURED.getName())) {
+        for (Map.Entry<String, java.util.Collection<EditionEntry>> section : cardMap.asMap().entrySet()) {
+            if (section.getKey().equals(EditionSectionWithCollectorNumbers.CONJURED.getName())) {
                 continue;
             }
-            PrintSheet sheet = new PrintSheet(String.format("%s %s", this.getCode(), sectionName));
+            PrintSheet sheet = new PrintSheet(String.format("%s %s", this.getCode(), section.getKey()));
 
-            List<EditionEntry> cards = cardMap.get(sectionName);
-            for (EditionEntry card : cards) {
-                int index = 1;
-                if (cardToIndex.containsKey(card.name)) {
-                    index = cardToIndex.get(card.name) + 1;
-                }
-
-                cardToIndex.put(card.name, index);
-
-                PaperCard pCard = cardDb.getCard(card.name, this.getCode(), index);
-                sheet.add(pCard);
+            for (EditionEntry card : section.getValue()) {
+                sheet.add(cardDb.getCard(card.name, this.getCode(), card.collectorNumber));
             }
 
             sheets.add(sheet);
