@@ -11,10 +11,7 @@ import forge.CardStorageReader;
 import forge.Forge;
 import forge.ImageKeys;
 import forge.adventure.data.*;
-import forge.card.CardEdition;
-import forge.card.CardRarity;
-import forge.card.CardRules;
-import forge.card.ColorSet;
+import forge.card.*;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.deck.DeckgenUtil;
@@ -365,7 +362,8 @@ public class Config {
                         return ImageKeys.ADVENTURECARD_PREFIX + getName();
                     }
                 };
-                FModel.getMagicDb().getCommonCards().addCard(card);
+                CardDb db = rules.isVariant() ? FModel.getMagicDb().getVariantCards() : FModel.getMagicDb().getCommonCards();
+                db.addCard(card);
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }

@@ -253,7 +253,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         } while(s == null || s.isEmpty());
 
         // Construct computer's decks and save draft
-        final Deck[] computer = this.boosterDraft.getDecks();
+        final Deck[] computer = this.boosterDraft.getComputerDecks();
         final LimitedPlayer[] players = this.boosterDraft.getOpposingPlayers();
 
         for(int i = 0; i < computer.length; i++) {
