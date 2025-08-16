@@ -28,6 +28,8 @@ import forge.item.PaperCard;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.io.ObjectStreamException;
+import java.io.Serial;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -215,7 +217,9 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         }
         result.setAiHints(StringUtils.join(aiHints, " | "));
         result.setDraftNotes(draftNotes);
-        tags.addAll(result.getTags());
+        //noinspection ConstantValue
+        if(tags != null) //Can happen deserializing old Decks.
+            result.tags.addAll(this.tags);
     }
 
     /*
@@ -622,6 +626,14 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
     @Override
     public Deck getHumanDeck() {
+        return this;
+    }
+
+    @Serial
+    private Object readResolve() throws ObjectStreamException {
+        //If we deserialized an old deck that doesn't have tags, fix it here.
+        if(this.tags == null)
+            return new Deck(this);
         return this;
     }
 
