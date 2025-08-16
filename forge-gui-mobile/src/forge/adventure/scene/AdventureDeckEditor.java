@@ -671,7 +671,7 @@ public class AdventureDeckEditor extends FDeckEditor {
     }
 
     public AdventureDeckEditor(Deck deckToPreview) {
-        super(new DeckPreviewConfig(deckToPreview), deckToPreview.getName());
+        super(new DeckPreviewConfig(deckToPreview), deckToPreview);
     }
 
     @Override
