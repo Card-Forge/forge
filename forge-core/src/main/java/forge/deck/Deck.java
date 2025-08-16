@@ -210,10 +210,13 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         super.cloneFieldsTo(clone);
         final Deck result = (Deck) clone;
         loadDeferredSections();
-        for (Entry<DeckSection, CardPool> kv : parts.entrySet()) {
-            CardPool cp = new CardPool();
-            result.parts.put(kv.getKey(), cp);
-            cp.addAll(kv.getValue());
+        // parts shouldn't be null
+        if (parts != null) {
+            for (Entry<DeckSection, CardPool> kv : parts.entrySet()) {
+                CardPool cp = new CardPool();
+                result.parts.put(kv.getKey(), cp);
+                cp.addAll(kv.getValue());
+            }
         }
         result.setAiHints(StringUtils.join(aiHints, " | "));
         result.setDraftNotes(draftNotes);
@@ -633,7 +636,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     private Object readResolve() throws ObjectStreamException {
         //If we deserialized an old deck that doesn't have tags, fix it here.
         if(this.tags == null)
-            return new Deck(this);
+            return new Deck(this, this.getName() == null ? "" : this.getName());
         return this;
     }
 
