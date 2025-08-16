@@ -633,7 +633,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     private Object readResolve() throws ObjectStreamException {
         //If we deserialized an old deck that doesn't have tags, fix it here.
         if(this.tags == null)
-            return new Deck(this);
+            return new Deck(this, this.getName() == null ? "" : this.getName());
         return this;
     }
 
