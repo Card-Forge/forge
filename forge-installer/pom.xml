@@ -161,7 +161,7 @@
                                         <mkdir dir="${project.build.directory}/${project.build.finalName}" />
                                         <copy todir="${project.build.directory}/${project.build.finalName}">
                                             <fileset dir="${project.build.directory}/../../forge-gui-desktop/target" includes="forge.sh" />
-                                            <fileset dir="${project.build.directory}/../../forge-gui-desktop/target" includes="forge.command" />
+
                                             <fileset dir="${project.build.directory}/../../forge-gui-desktop/target" includes="forge.cmd" />
                                             <fileset dir="${basedir}/../forge-gui/" includes="forge.profile.properties.example" />
                                             <fileset dir="${basedir}/" includes="sentry.properties" />
@@ -181,12 +181,12 @@
                                             <fileset dir="${project.build.directory}/../../adventure-editor/tools" includes="gdx-particle-editor.jar" />
                                             <fileset dir="${project.build.directory}/../../adventure-editor/target" includes="adventure-editor.exe" />
                                             <fileset dir="${project.build.directory}/../../adventure-editor/target" includes="adventure-editor.sh" />
-                                            <fileset dir="${project.build.directory}/../../adventure-editor/target" includes="adventure-editor.command" />
+
                                             <fileset dir="${project.build.directory}/../../adventure-editor/target" includes="adventure-editor.cmd" />
                                             <fileset dir="${project.build.directory}/../../adventure-editor/target" includes="adventure-editor-jar-with-dependencies.jar" />
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.exe" />
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.sh" />
-                                            <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.command" />
+
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.cmd" />
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-gui-mobile-dev-${project.version}-jar-with-dependencies.jar" />
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target/classes" includes="build.txt" />
@@ -206,28 +206,28 @@
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.exe" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/adventure-editor.exe" perm="a+rx" />
                                         <copy todir="${basedir}/target">
-                                            <fileset dir="${project.build.directory}/../../forge-gui-desktop/target" includes="forge.sh,forge.command" />
-                                            <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.sh,forge-adventure.command" />
-                                            <fileset dir="${project.build.directory}/../../adventure-editor/target" includes="adventure-editor.sh,adventure-editor.command" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-desktop/target" includes="forge.sh" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.sh" />
+                                            <fileset dir="${project.build.directory}/../../adventure-editor/target" includes="adventure-editor.sh" />
                                         </copy>
                                         <chmod file="${basedir}/target/forge.sh" perm="a+rx" />
-                                        <chmod file="${basedir}/target/forge.command" perm="a+rx" />
+
                                         <chmod file="${basedir}/target/forge-adventure.sh" perm="a+rx" />
-                                        <chmod file="${basedir}/target/forge-adventure.command" perm="a+rx" />
+
                                         <chmod file="${basedir}/target/adventure-editor.sh" perm="a+rx" />
-                                        <chmod file="${basedir}/target/adventure-editor.command" perm="a+rx" />
+
                                         <tar destfile="${basedir}/target/${project.build.finalName}.tar.bz2" compression="bzip2">
                                             <tarfileset filemode="755" dir="${project.build.directory}/${project.build.finalName}">
                                                 <include name="forge.sh" />
-                                                <include name="forge.command" />
+
                                                 <include name="forge.cmd" />
                                                 <include name="forge.exe" />
                                                 <include name="forge-adventure.sh" />
-                                                <include name="forge-adventure.command" />
+
                                                 <include name="forge-adventure.cmd" />
                                                 <include name="forge-adventure.exe" />
                                                 <include name="adventure-editor.sh" />
-                                                <include name="adventure-editor.command" />
+
                                                 <include name="adventure-editor.cmd" />
                                                 <include name="adventure-editor.exe" />
                                                 <exclude name="**/*.xcf" />
@@ -235,15 +235,15 @@
                                             <tarfileset dir="${project.build.directory}/${project.build.finalName}">
                                                 <include name="**" />
                                                 <exclude name="forge.sh" />
-                                                <exclude name="forge.command" />
+
                                                 <exclude name="forge.cmd" />
                                                 <exclude name="forge.exe" />
                                                 <exclude name="forge-adventure.sh" />
-                                                <exclude name="forge-adventure.command" />
+
                                                 <exclude name="forge-adventure.cmd" />
                                                 <exclude name="forge-adventure.exe" />
                                                 <exclude name="adventure-editor.sh" />
-                                                <exclude name="adventure-editor.command" />
+
                                                 <exclude name="adventure-editor.cmd" />
                                                 <exclude name="adventure-editor.exe" />
                                                 <exclude name="**/*.xcf" />
@@ -325,5 +325,176 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>macos</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>ant-contrib</groupId>
+                                <artifactId>ant-contrib</artifactId>
+                                <version>1.0b3</version>
+                                <exclusions>
+                                    <exclusion>
+                                        <groupId>ant</groupId>
+                                        <artifactId>ant</artifactId>
+                                    </exclusion>
+                                </exclusions>
+                            </dependency>
+                        </dependencies>
+                        <executions>
+                            <execution>
+                                <id>macos-app-bundle</id>
+                                <phase>package</phase>
+                                <configuration>
+                                    <target>
+                                        <taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="maven.plugin.classpath" />
+                                        <!-- Create macOS app bundle structure -->
+                                        <property name="app.name" value="Forge.app" />
+                                        <property name="app.dir" value="${project.build.directory}/${app.name}" />
+                                        <property name="contents.dir" value="${app.dir}/Contents" />
+                                        <property name="macos.dir" value="${contents.dir}/MacOS" />
+                                        <property name="resources.dir" value="${contents.dir}/Resources" />
+
+                                        <mkdir dir="${macos.dir}" />
+                                        <mkdir dir="${resources.dir}" />
+
+                                        <!-- Copy Info.plist -->
+                                        <copy file="${project.basedir}/src/main/resources/macos/Info.plist" todir="${contents.dir}" />
+
+                                        <!-- Copy and process executable launcher -->
+                                        <copy file="${project.basedir}/src/main/resources/macos/forge" todir="${macos.dir}" />
+                                        <replace file="${macos.dir}/forge" token="$project.build.finalName$" value="forge-gui-desktop-${project.version}" />
+                                        <chmod file="${macos.dir}/forge" perm="755" />
+
+                                        <!-- Copy application resources -->
+                                        <copy todir="${resources.dir}">
+                                            <fileset dir="${project.build.directory}/../../forge-gui-desktop/target" includes="forge-gui-desktop-${project.version}-jar-with-dependencies.jar" />
+                                            <fileset dir="${basedir}/../forge-gui/" includes="forge.profile.properties.example" />
+                                            <fileset dir="${basedir}/" includes="sentry.properties" />
+                                            <fileset dir="${basedir}/../forge-gui/" includes="LICENSE.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/" includes="MANUAL.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="CONTRIBUTORS.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="INSTALLATION.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="GAMEPAD_README.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="ISSUES.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="CHANGES.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/">
+                                                <include name="res/**" />
+                                                <exclude name="res/cardsfolder/**" />
+                                            </fileset>
+                                        </copy>
+
+                                        <!-- Create cardsfolder zip -->
+                                        <mkdir dir="${resources.dir}/res/cardsfolder" />
+                                        <zip destfile="${resources.dir}/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/../forge-gui/res/cardsfolder" level="1" />
+
+                                        <!-- Copy icon if exists -->
+                                        <copy file="${basedir}/../forge-gui/src/main/config/Forge.icns" tofile="${resources.dir}/forge.icns" failonerror="false" />
+
+                                        <!-- Create Adventure app bundle -->
+                                        <property name="adventure.app.name" value="Forge Adventure.app" />
+                                        <property name="adventure.app.dir" value="${project.build.directory}/${adventure.app.name}" />
+                                        <property name="adventure.contents.dir" value="${adventure.app.dir}/Contents" />
+                                        <property name="adventure.macos.dir" value="${adventure.contents.dir}/MacOS" />
+                                        <property name="adventure.resources.dir" value="${adventure.contents.dir}/Resources" />
+
+                                        <mkdir dir="${adventure.macos.dir}" />
+                                        <mkdir dir="${adventure.resources.dir}" />
+
+                                        <!-- Copy Adventure Info.plist -->
+                                        <copy file="${project.basedir}/src/main/resources/macos/Info-adventure.plist" tofile="${adventure.contents.dir}/Info.plist" />
+
+                                        <!-- Copy and process Adventure executable launcher -->
+                                        <copy file="${project.basedir}/src/main/resources/macos/forge-adventure" todir="${adventure.macos.dir}" />
+                                        <replace file="${adventure.macos.dir}/forge-adventure" token="$project.build.finalName$" value="forge-gui-mobile-dev-${project.version}" />
+                                        <chmod file="${adventure.macos.dir}/forge-adventure" perm="755" />
+
+                                        <!-- Copy Adventure application resources -->
+                                        <copy todir="${adventure.resources.dir}">
+                                            <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-gui-mobile-dev-${project.version}-jar-with-dependencies.jar" />
+                                            <fileset dir="${basedir}/../forge-gui/" includes="forge.profile.properties.example" />
+                                            <fileset dir="${basedir}/" includes="sentry.properties" />
+                                            <fileset dir="${basedir}/../forge-gui/" includes="LICENSE.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/" includes="MANUAL.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="CONTRIBUTORS.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="INSTALLATION.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="GAMEPAD_README.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="ISSUES.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="CHANGES.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/">
+                                                <include name="res/**" />
+                                                <exclude name="res/cardsfolder/**" />
+                                            </fileset>
+                                        </copy>
+
+                                        <!-- Create cardsfolder zip for Adventure -->
+                                        <mkdir dir="${adventure.resources.dir}/res/cardsfolder" />
+                                        <zip destfile="${adventure.resources.dir}/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/../forge-gui/res/cardsfolder" level="1" />
+
+                                        <!-- Copy icon for Adventure -->
+                                        <copy file="${basedir}/../forge-gui/src/main/config/Forge.icns" tofile="${adventure.resources.dir}/forge-adventure.icns" failonerror="false" />
+
+                                        <!-- Create DMG if on macOS -->
+                                        <condition property="is.mac">
+                                            <os family="mac" />
+                                        </condition>
+                                        <if>
+                                            <isset property="is.mac" />
+                                            <then>
+                                                <mkdir dir="${project.build.directory}/dmg-contents" />
+                                                <copy todir="${project.build.directory}/dmg-contents">
+                                                    <fileset dir="${project.build.directory}" includes="Forg*.app/**" />
+                                                </copy>
+                                                <exec executable="hdiutil" failonerror="false">
+                                                    <arg value="create" />
+                                                    <arg value="-srcfolder" />
+                                                    <arg value="${project.build.directory}/dmg-contents" />
+                                                    <arg value="-volname" />
+                                                    <arg value="Forge" />
+                                                    <arg value="${project.build.directory}/${project.build.finalName}.dmg" />
+                                                </exec>
+                                            </then>
+                                        </if>
+                                    </target>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <version>3.6.0</version>
+                        <executions>
+                            <execution>
+                                <id>attach-macos-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>attach-artifact</goal>
+                                </goals>
+                                <configuration>
+                                    <artifacts>
+                                        <artifact>
+                                            <file>${project.build.directory}/${project.build.finalName}.dmg</file>
+                                            <type>dmg</type>
+                                            <optional>true</optional>
+                                        </artifact>
+                                    </artifacts>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
     </profiles>
 </project>
