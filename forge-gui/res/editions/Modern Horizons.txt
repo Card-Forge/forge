@@ -2,7 +2,6 @@
 Code=MH1
 Date=2019-06-14
 Name=Modern Horizons
-Code2=MH1
 Type=Draft
 BoosterCovers=5
 Booster=10 Common:fromSheet("MH1 cards"), 3 Uncommon:fromSheet("MH1 cards"), 1 RareMythic:fromSheet("MH1 cards"), 1 BasicLand:fromSheet("MH1 cards")
@@ -287,7 +286,7 @@ ScryfallCode=MH1
 15 g_1_1_squirrel @Daniel Ljunggren
 16 wb_1_1_spirit_flying @Josh Hass
 17 c_0_0_a_construct_total_artifacts @Victor Adame Minguez
-18 c_3_3_a_phyrexian_golem @Volkan Baǵa
+18 c_3_3_a_golem @Volkan Baǵa
 19 c_1_1_a_myr @Ryan Pancoast
 
 [other]

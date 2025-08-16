@@ -2,7 +2,6 @@
 Code=ME3
 Date=2009-09-07
 Name=Masters Edition III
-Code2=ME3
 Type=Online
 BoosterCovers=1
 Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
@@ -239,9 +238,3 @@ ScryfallCode=ME3
 228 L Forest @Ji Yong
 229 L Forest @Ji Yong
 230 L Forest @Ji Yong
-
-[tokens]
-minor_demon
-stangg_twin
-u_0_1_starfish
-rgw_1_1_sand_warrior
