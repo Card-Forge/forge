@@ -8,7 +8,6 @@ import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
 import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -48,7 +47,6 @@ public class AirbendEffect extends SpellAbilityEffect {
         final Player pl = sa.getActivatingPlayer();
 
         final CardZoneTable triggerList = CardZoneTable.getSimultaneousInstance(sa);
-        final CardCollectionView lastStateBattlefield = triggerList.getLastStateBattlefield();
         
         for (Card c : getTargetCards(sa)) {
             final Card gameCard = game.getCardState(c, null);
@@ -66,19 +64,13 @@ public class AirbendEffect extends SpellAbilityEffect {
 
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
             AbilityKey.addCardZoneTableParams(moveParams, triggerList);
-            
+
             Card movedCard = game.getAction().exile(gameCard, sa, moveParams);
 
             if (movedCard == null || !movedCard.isInZone(ZoneType.Exile)) {
                 continue;
             }
-            
-            // most airbend cards can't target itself
-            if (lastStateBattlefield.contains(gameCard) && hostCard.equals(gameCard)) {
-                // support Parallax Wave returning itself
-                handleExiledWith(movedCard, sa, lastStateBattlefield.get(gameCard));
-            }
-            
+
             // Effect to cast for 2 from exile
             Card eff = createEffect(sa, movedCard.getOwner(), "Airbend" + movedCard, hostCard.getImageKey());
             eff.addRemembered(movedCard);
