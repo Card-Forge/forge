@@ -28,6 +28,8 @@ import forge.item.PaperCard;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.io.ObjectStreamException;
+import java.io.Serial;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -241,14 +243,19 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         super.cloneFieldsTo(clone);
         final Deck result = (Deck) clone;
         loadDeferredSections();
-        for (Entry<DeckSection, CardPool> kv : parts.entrySet()) {
-            CardPool cp = new CardPool();
-            result.parts.put(kv.getKey(), cp);
-            cp.addAll(kv.getValue());
+        // parts shouldn't be null
+        if (parts != null) {
+            for (Entry<DeckSection, CardPool> kv : parts.entrySet()) {
+                CardPool cp = new CardPool();
+                result.parts.put(kv.getKey(), cp);
+                cp.addAll(kv.getValue());
+            }
         }
         result.setAiHints(StringUtils.join(aiHints, " | "));
         result.setDraftNotes(draftNotes);
-        tags.addAll(result.getTags());
+        //noinspection ConstantValue
+        if(tags != null) //Can happen deserializing old Decks.
+            result.tags.addAll(this.tags);
     }
 
     /*
@@ -655,6 +662,14 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
     @Override
     public Deck getHumanDeck() {
+        return this;
+    }
+
+    @Serial
+    private Object readResolve() throws ObjectStreamException {
+        //If we deserialized an old deck that doesn't have tags, fix it here.
+        if(this.tags == null)
+            return new Deck(this, this.getName() == null ? "" : this.getName());
         return this;
     }
 
