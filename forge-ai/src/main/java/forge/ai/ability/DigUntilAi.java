@@ -1,8 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.AiAttackController;
-import forge.ai.ComputerUtilCost;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -11,7 +9,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 
 import java.util.List;
 import java.util.Map;
@@ -19,7 +16,7 @@ import java.util.Map;
 public class DigUntilAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         Card source = sa.getHostCard();
         final String logic = sa.getParamOrDefault("AILogic", "");
         double chance = .4; // 40 percent chance with instant speed stuff
@@ -42,7 +39,7 @@ public class DigUntilAi extends SpellAbilityAi {
             // material in the library after using it several times.
             // TODO: maybe this should happen for any DigUntil SA with RevealedDestination$ Graveyard?
             if (ai.getCardsIn(ZoneType.Library).size() < 20) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
             if ("Land.Basic".equals(sa.getParam("Valid"))
                     && ai.getZone(ZoneType.Hand).contains(CardPredicates.LANDS_PRODUCING_MANA)) {
@@ -52,7 +49,7 @@ public class DigUntilAi extends SpellAbilityAi {
                 // This is important for Replenish/Living Death type decks
                 if (!ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)
                         && !ai.getGame().getPhaseHandler().isPlayerTurn(ai)) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }
         }
@@ -60,7 +57,7 @@ public class DigUntilAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             sa.resetTargets();
             if (!sa.canTarget(opp)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
             sa.getTargets().add(opp);
             libraryOwner = opp;
@@ -68,7 +65,7 @@ public class DigUntilAi extends SpellAbilityAi {
             if (sa.hasParam("Valid")) {
                 final String valid = sa.getParam("Valid");
                 if (CardLists.getValidCards(ai.getCardsIn(ZoneType.Library), valid, source.getController(), source, sa).isEmpty()) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }
         }
@@ -80,7 +77,7 @@ public class DigUntilAi extends SpellAbilityAi {
             if (root.getXManaCostPaid() == null) {
                 int numCards = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
                 if (numCards <= 0) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 root.setXManaCostPaid(numCards);
             }
@@ -88,15 +85,14 @@ public class DigUntilAi extends SpellAbilityAi {
 
         // return false if nothing to dig into
         if (libraryOwner.getCardsIn(ZoneType.Library).isEmpty()) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        final boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
-        return randomReturn;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (sa.usesTargeting()) {
             sa.resetTargets();
             if (sa.isCurse()) {
@@ -116,7 +112,7 @@ public class DigUntilAi extends SpellAbilityAi {
             }
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /* (non-Javadoc)

@@ -3,6 +3,7 @@ package forge;
 import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.game.card.Card;
 import forge.gamemodes.limited.DraftPack;
 import forge.gamemodes.limited.IBoosterDraft;
@@ -32,7 +33,7 @@ public class BoosterDraftTest implements IBoosterDraft {
 
     @Override
     @Test(timeOut = 1000)
-    public Deck[] getDecks() {
+    public Deck[] getComputerDecks() {
         return null;
     }
 
@@ -66,9 +67,14 @@ public class BoosterDraftTest implements IBoosterDraft {
      * @return
      */
     @Override
-    public boolean setChoice(final PaperCard c) {
+    public boolean setChoice(final PaperCard c, DeckSection section) {
         System.out.println(c.getName());
         return false;
+    }
+
+    @Override
+    public void skipChoice() {
+        System.out.println("Skip.");
     }
 
     @Override
@@ -100,14 +106,20 @@ public class BoosterDraftTest implements IBoosterDraft {
     }
 
     @Override
-    public void setLogEntry(IDraftLog draftingProcess) {
-
-    }
+    public void setLogEntry(IDraftLog draftingProcess) {}
 
     @Override
     public IDraftLog getDraftLog() {
         return null;
     }
+
+    @Override
+    public boolean shouldShowDraftLog() {
+        return false;
+    }
+
+    @Override
+    public void addLog(String message) {}
 
     @Override
     public LimitedPlayer getNeighbor(LimitedPlayer p, boolean left) {

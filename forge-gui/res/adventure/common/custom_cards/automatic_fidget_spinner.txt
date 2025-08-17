@@ -1,0 +1,8 @@
+Name:Automatic Fidget Spinner
+ManaCost:no cost
+Types:Basic Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, choose a permanent at random. If that permanent is untapped, tap it. Otherwise, untap it.
+SVar:TrigCrank:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Permanent | AtRandom$ True | SubAbility$ DBTap
+SVar:DBTap:DB$ TapOrUntap | Defined$ ChosenCard | Toggle$ True
+Text:[A contraption deck must have at least 15 contraptions.]
+Oracle:Whenever you crank Automatic Fidget Spinner, choose a permanent at random. If that permanent is untapped, tap it. Otherwise, untap it.

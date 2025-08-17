@@ -8,9 +8,8 @@ import forge.deck.DeckSection;
 import forge.deck.generation.DeckGeneratorBase;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
-import forge.localinstance.properties.ForgePreferences;
 import forge.util.IterableUtil;
-import forge.util.MyRandom;
+import forge.util.StreamUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Collections;
@@ -36,18 +35,18 @@ public class LimitedPlayerAI extends LimitedPlayer {
         }
 
         DraftPack chooseFrom = packQueue.peek();
+        debugPrint(chooseFrom.toString());
         if (chooseFrom.isEmpty()) {
+            debugPrint("Skipped (Empty pack)");
             return null;
         }
 
         CardPool pool = deck.getOrCreate(DeckSection.Sideboard);
-        if (ForgePreferences.DEV_MODE) {
-            System.out.println("Player[" + order + "] pack: " + chooseFrom);
-        }
 
         PaperCard bestPick;
         if (hasArchdemonCurse()) {
             bestPick = pickFromArchdemonCurse(chooseFrom);
+            debugPrint("Pick forced by Archdemon Curse.");
         } else {
             final ColorSet chosenColors = deckCols.getChosenColors();
             final boolean canAddMoreColors = deckCols.canChoseMoreColors();
@@ -58,10 +57,6 @@ public class LimitedPlayerAI extends LimitedPlayer {
             if (canAddMoreColors) {
                 deckCols.addColorsOf(bestPick);
             }
-        }
-
-        if (ForgePreferences.DEV_MODE) {
-            System.out.println("Player[" + order + "] picked: " + bestPick);
         }
 
         return bestPick;
@@ -158,7 +153,7 @@ public class LimitedPlayerAI extends LimitedPlayer {
     protected boolean revealWithSmuggler(PaperCard bestPick) {
         // Note a name we haven't noted yet
         List<String> notedNames = getDraftNotes().getOrDefault("Smuggler Captain", null);
-        if (!notedNames.isEmpty() && notedNames.contains(bestPick.getName())) {
+        if (notedNames != null && !notedNames.isEmpty() && notedNames.contains(bestPick.getName())) {
             return false;
         }
 
@@ -180,34 +175,25 @@ public class LimitedPlayerAI extends LimitedPlayer {
         // Always choose the next pack I will open
         // What do I do with this information? Great question. I have no idea.
         List<PaperCard> cards;
-        if (draft.getRound() == 3) {
-            // Take a peek at the pack you are about to get if its the last round
-            cards = peekAtBoosterPack(this.order, 1);
+        int round = draft.getRound();
+        if (this.unopenedPacks.isEmpty()) {
+            // Take a peek at the pack you are about to get if it's the last round
+            cards = peekAtBoosterPack(round, draft.getNeighbor(this, round % 2 == 1));
         } else {
-            cards = peekAtBoosterPack(this.order, draft.getRound() + 1);
+            cards = peekAtBoosterPack(round + 1, this);
         }
 
         return true;
     }
 
     @Override
-    public boolean handleIllusionaryInformant() {
+    public LimitedPlayer handleIllusionaryInformant() {
         // Always choose the next pack I will open
         // What do I do with this information? Great question. I have no idea.
-        int player;
-        do {
-            player = MyRandom.getRandom().nextInt(draft.getOpposingPlayers().length + 1);
-        } while(player == this.order);
-
-
-        LimitedPlayer peekAt = draft.getPlayer(player);
-        if (peekAt == null) {
-            return false;
-        }
-
+        LimitedPlayer peekAt = draft.getAllPlayers().stream().filter((s) -> s != this).collect(StreamUtil.random()).orElse(null);
         // Not really sure what the AI does with this information. But its' known now.
         //peekAt.getLastPick();
-        return true;
+        return peekAt;
     }
 
     @Override
@@ -313,4 +299,5 @@ public class LimitedPlayerAI extends LimitedPlayer {
 
         return null;
     }
+
 }

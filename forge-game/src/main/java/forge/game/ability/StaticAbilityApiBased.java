@@ -2,8 +2,6 @@ package forge.game.ability;
 
 import java.util.Map;
 
-import forge.game.ability.effects.ChangeZoneAllEffect;
-import forge.game.ability.effects.ChangeZoneEffect;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.spellability.AbilityStatic;
@@ -20,9 +18,7 @@ public class StaticAbilityApiBased extends AbilityStatic {
         api = api0;
         effect = api.getSpellEffect();
 
-        if (effect instanceof ChangeZoneEffect || effect instanceof ChangeZoneAllEffect) {
-            AbilityFactory.adjustChangeZoneTarget(mapParams, this);
-        }
+        effect.buildSpellAbility(this);
     }
 
     @Override

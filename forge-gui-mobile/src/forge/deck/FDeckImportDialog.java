@@ -64,7 +64,7 @@ public class FDeckImportDialog extends FDialog {
 
     private final static ImmutableList<String> importOrCancel = ImmutableList.of(Forge.getLocalizer().getMessage("lblImport"), Forge.getLocalizer().getMessage("lblCancel"));
 
-    public FDeckImportDialog(final boolean replacingDeck, final FDeckEditor.EditorType editorType) {
+    public FDeckImportDialog(final boolean replacingDeck, final FDeckEditor.DeckEditorConfig editorConfig) {
         super(Forge.getLocalizer().getMessage("lblImportFromClipboard"), 2);
         controller = new DeckImportController(dateTimeCheck, monthDropdown, yearDropdown, replacingDeck);
         String contents = Forge.getClipboard().getContents();
@@ -72,15 +72,15 @@ public class FDeckImportDialog extends FDialog {
             contents = ""; //prevent NPE
         txtInput.setText(contents);
 
-        if (FDeckEditor.allowsReplacement(editorType)) {
-            GameType gameType = GameType.valueOf(editorType.name());
+        if (editorConfig.allowsCardReplacement()) {
+            GameType gameType = editorConfig.getGameType();
             controller.setGameFormat(gameType);
             List<DeckSection> supportedSections = new ArrayList<>();
             supportedSections.add(DeckSection.Main);
             supportedSections.add(DeckSection.Sideboard);
-            if (editorType != FDeckEditor.EditorType.Constructed)
+            if (editorConfig.hasCommander())
                 supportedSections.add(DeckSection.Commander);
-            supportedSections.addAll(Lists.newArrayList(FDeckEditor.getExtraSections(editorType)));
+            supportedSections.addAll(Lists.newArrayList(editorConfig.getExtraSections()));
             controller.setAllowedSections(supportedSections);
         }
 

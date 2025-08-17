@@ -1,6 +1,7 @@
 package forge.screens.match.views;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 import com.badlogic.gdx.utils.Align;
 
@@ -10,12 +11,13 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.TextRenderer;
+import forge.game.GameLog;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menu.FDropDown;
+import forge.menu.FMenuTab;
 import forge.model.FModel;
-import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
 
@@ -36,12 +38,32 @@ public class VLog extends FDropDown {
         return FSkinColor.get(Colors.CLR_TEXT);
     }
 
-    public VLog() {
+    protected final Supplier<GameLog> logSupplier;
+
+    protected FDisplayObject owner;
+
+    public VLog(Supplier<GameLog> logSupplier) {
+        this.logSupplier = logSupplier;
     }
 
     @Override
     protected boolean autoHide() {
         return true;
+    }
+
+    @Override
+    public void setMenuTab(FMenuTab menuTab) {
+        super.setMenuTab(menuTab);
+        this.owner = menuTab;
+    }
+
+    public void setDropdownOwner(FDisplayObject owner) {
+        this.owner = owner;
+    }
+
+    @Override
+    protected FDisplayObject getDropDownOwner() {
+        return owner;
     }
 
     @Override
@@ -56,10 +78,10 @@ public class VLog extends FDropDown {
         clear();
 
         GameLogEntryType logVerbosityFilter = GameLogEntryType.valueOf(FModel.getPreferences().getPref(FPref.DEV_LOG_ENTRY_TYPE));
-        List<GameLogEntry> logEntrys = MatchController.instance.getGameView().getGameLog().getLogEntries(logVerbosityFilter);
+        List<GameLogEntry> logEntrys = logSupplier.get().getLogEntries(logVerbosityFilter);
 
         LogEntryDisplay logEntryDisplay;
-        float width = maxWidth - getMenuTab().screenPos.x; //stretch from tab to edge of screen
+        float width = maxWidth - getDropDownOwner().screenPos.x; //stretch from tab to edge of screen
         float minWidth = 4 * Utils.AVG_FINGER_WIDTH;
         if (width < minWidth) {
             width = minWidth;

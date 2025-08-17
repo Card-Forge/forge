@@ -351,12 +351,14 @@ public class FOptionPane extends FDialog {
         switch (keyCode) {
         case Keys.ENTER:
         case Keys.SPACE:
+        case Keys.BUTTON_A:
             if (isButtonEnabled(defaultOption)) {
                 setResult(defaultOption); //set result to default option on Enter/Space
             }
             return true;
         case Keys.ESCAPE:
         case Keys.BACK:
+        case Keys.BUTTON_B:
             if (Forge.endKeyInput()) { return true; }
             if (defaultOption == -1) {
                 hide();

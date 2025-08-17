@@ -30,6 +30,8 @@ import forge.localinstance.skin.FSkinProp;
 import java.util.HashMap;
 import java.util.Map;
 
+import static forge.assets.FSkin.getDefaultSkinFile;
+
 public class Assets implements Disposable {
     private MemoryTrackingAssetManager manager;
     private HashMap<Integer, FSkinFont> fonts;
@@ -51,6 +53,7 @@ public class Assets implements Disposable {
     private TextureParameter textureParameter;
     private ObjectMap<String, Font> textrafonts;
     private int cFB = 0, cFBVal = 0, cTM = 0, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0;
+    private Texture holofoil;
 
     public Assets() {
         String titleFilename = Forge.isLandscapeMode() ? "title_bg_lq.png" : "title_bg_lq_portrait.png";
@@ -354,6 +357,12 @@ public class Assets implements Disposable {
         return dummy;
     }
 
+    public Texture getHolofoil() {
+        if (holofoil == null) {
+            holofoil = getTexture(getDefaultSkinFile("holofoil.png"));
+        }
+        return holofoil;
+    }
     public Font getTextraFont(BitmapFont bitmapFont, TextureAtlas item_atlas, TextureAtlas pixelmana_atlas) {
         if (textrafonts == null)
             textrafonts = new ObjectMap<>();

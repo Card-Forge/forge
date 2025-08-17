@@ -30,6 +30,14 @@ import io.sentry.Sentry;
 public class ManaEffect extends SpellAbilityEffect {
 
     @Override
+    public void buildSpellAbility(SpellAbility sa) {
+        sa.setManaPart(new AbilityManaPart(sa, sa.getMapParams()));
+        if (sa.getParent() == null) {
+            sa.setUndoable(true); // will try at least
+        }
+    }
+
+    @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
         final Game game = card.getGame();
