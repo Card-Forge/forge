@@ -418,6 +418,12 @@ public class CardPool extends ItemPool<PaperCard> {
         return pool;
     }
 
+    public static CardPool fromSingleCardRequest(String cardRequest) {
+        if(StringUtils.isBlank(cardRequest))
+            return new CardPool();
+        return fromCardList(List.of(cardRequest));
+    }
+
     public static List<Pair<String, Integer>> processCardList(final Iterable<String> lines) {
         List<Pair<String, Integer>> cardRequests = new ArrayList<>();
         if (lines == null)
