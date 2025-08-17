@@ -1050,7 +1050,6 @@ public class PhaseHandler implements java.io.Serializable {
             do {
                 if (checkStateBasedEffects()) {
                     // state-based effects check could lead to game over
-                    // TODO: handle game over return
                     return;
                 }
                 game.stashGameState();
@@ -1123,7 +1122,6 @@ public class PhaseHandler implements java.io.Serializable {
         // of Priority
         Player nextPlayer = game.getNextPlayerAfter(getPriorityPlayer());
 
-        // TODO handle concession return
         if (game.isGameOver() || nextPlayer == null) { return; } // conceded?
 
         if (DEBUG_PHASES) {
@@ -1156,7 +1154,6 @@ public class PhaseHandler implements java.io.Serializable {
             setPhase(null);
             game.updatePhaseForView();
             game.fireEvent(new GameEventGameRestarted(playerTurn));
-            // TODO: handle karn restart return
             return;
         }
 
