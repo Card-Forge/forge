@@ -77,7 +77,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private boolean viewUpdating, needSecondUpdate;
     private Supplier<List<ItemColumn>> sortCols = Suppliers.memoize(ArrayList::new);
     private final TextSearchFilter<? extends T> searchFilter;
-    private CardFormatFilter cardFormatFilter;
 
     private final FLabel btnSearch = new FLabel.ButtonBuilder()
             .icon(Forge.hdbuttons ? FSkinImage.HDSEARCH : FSkinImage.SEARCH).iconScaleFactor(0.9f).selectable().build();
@@ -638,25 +637,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         btnAdvancedSearchOptions.setEnabled(enable);
     }
 
-    public void setCatalogDisplay(boolean enable) {
-        if (cardFormatFilter == null)
-            return;
-        if (cardFormatFilter.getMainComponent() instanceof FComboBox<?>) {
-            if (!enable)
-                ((FComboBox<?>) cardFormatFilter.getMainComponent()).setSelectedIndex(0);
-            cardFormatFilter.getMainComponent().setEnabled(enable);
-        }
-    }
-
-    public int getCatalogSelectedIndex() {
-        if (cardFormatFilter == null)
-            return 0;
-        if (cardFormatFilter.getMainComponent() instanceof FComboBox<?>) {
-            return((FComboBox<?>) cardFormatFilter.getMainComponent()).getSelectedIndex();
-        }
-        return 0;
-    }
-
     public void scrollSelectionIntoView() {
         currentView.scrollSelectionIntoView();
     }
@@ -678,8 +658,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     public void addFilter(final ItemFilter<? extends T> filter) {
         filters.get().add(filter);
         add(filter.getWidget());
-        if (filter instanceof CardFormatFilter)
-            cardFormatFilter = (CardFormatFilter) filter;
 
         boolean visible = !hideFilters;
         filter.getWidget().setVisible(visible);

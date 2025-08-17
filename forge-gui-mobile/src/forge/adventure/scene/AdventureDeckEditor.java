@@ -317,7 +317,6 @@ public class AdventureDeckEditor extends FDeckEditor {
         protected void initialize() {
             super.initialize();
             cardManager.setBtnAdvancedSearchOptions(true);
-            cardManager.setCatalogDisplay(true);
             scheduleRefresh();
         }
 
@@ -435,7 +434,6 @@ public class AdventureDeckEditor extends FDeckEditor {
         protected void initialize() {
             super.initialize();
             cardManager.setBtnAdvancedSearchOptions(true);
-            cardManager.setCatalogDisplay(true);
             cardManager.setPool(getCardPool(), false); //Need to update this early for the caption.
             this.updateCaption();
         }
@@ -945,7 +943,6 @@ public class AdventureDeckEditor extends FDeckEditor {
         protected AdventureDeckSectionPage(DeckSection deckSection, ItemManagerConfig config) {
             super(new AdventureCardManager(), deckSection, config, deckSection.getLocalizedShortName(), iconFromDeckSection(deckSection));
             cardManager.setBtnAdvancedSearchOptions(deckSection == DeckSection.Main);
-            cardManager.setCatalogDisplay(false);
         }
     }
 
