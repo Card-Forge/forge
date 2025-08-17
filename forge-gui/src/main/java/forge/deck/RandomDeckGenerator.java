@@ -174,8 +174,11 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
         if (Iterables.isEmpty(decks)) {
             return getGeneratedDeck(); //fall back to generated deck if no decks in filtered list
         }
-        Iterable<DeckProxy> AIDecks = IterableUtil.filter(decks, deckProxy -> deckProxy.getAI().inMainDeck == 0);
-        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_AUTO_AIDECK_SELECTION) && isAi && Iterables.size(AIDecks) > 10) return Aggregates.random(AIDecks).getDeck();
+        if (isAi && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_AUTO_AIDECK_SELECTION)) {
+            Iterable<DeckProxy> AIDecks = IterableUtil.filter(decks, deckProxy -> deckProxy.getAI().inMainDeck == 0);
+            if (Iterables.size(AIDecks) > 10)
+                return Aggregates.random(AIDecks).getDeck();
+        }
         return Aggregates.random(decks).getDeck();
     }
 
