@@ -1,0 +1,12 @@
+Name:Appa, Steadfast Guardian
+ManaCost:2 W W
+Types:Legendary Creature Bison Ally
+PT:3/4
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAirbend | TriggerDescription$ When NICKNAME enters, airbend any number of other target nonland permanents you control. (Exile them. While each one is exiled, its owner may cast it for {2} rather than its mana cost.)
+SVar:TrigAirbend:DB$ Airbend | ValidTgts$ Permanent.nonLand+Other+YouCtrl | TgtPrompt$ Select another target nonland permanent you control | TargetMin$ 0 | TargetMax$ MaxTgts
+T:Mode$ SpellCast | ValidCard$ Card.wasCastFromExile | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell from exile, create a 1/1 white Ally creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_ally
+SVar:MaxTgts:Count$Valid Permanent.nonLand+Other+YouCtrl
+Oracle:Flash\nFlying\nWhen Appa enters, airbend any number of other target nonland permanents you control. (Exile them. While each one is exiled, its owner may cast it for {2} rather than its mana cost.)\nWhenever you cast a spell from exile, create a 1/1 white Ally creature token.
