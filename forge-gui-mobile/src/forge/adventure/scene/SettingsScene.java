@@ -262,7 +262,7 @@ public class SettingsScene extends UIScene {
             addCheckBox(Forge.getLocalizer().getMessage("lblAltZoneTabs"), ForgePreferences.FPref.UI_ALT_PLAYERZONETABS);
         } else {
             addCheckBox(Forge.getLocalizer().getMessage("lblLandscapeMode") + " (" +
-                            Forge.getLocalizer().getMessage("lblRestartRequired") + ")",
+                Forge.getLocalizer().getMessage("lblRestartRequired") + ")",
                     ForgePreferences.FPref.UI_LANDSCAPE_MODE, () -> {
                         boolean landscapeMode = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_LANDSCAPE_MODE);
                         //ensure device able to save off ini file so landscape change takes effect
@@ -295,6 +295,12 @@ public class SettingsScene extends UIScene {
 
             addCheckBox(Forge.getLocalizer().getMessage("lblPreloadExtendedArtCards"), ForgePreferences.FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
             addCheckBox(Forge.getLocalizer().getMessage("lblAutoCacheSize"), ForgePreferences.FPref.UI_AUTO_CACHE_SIZE);
+            addCheckBox(Forge.getLocalizer().getMessage("lblEnableUnknownCards") + " (" +
+                Forge.getLocalizer().getMessage("lblRestartRequired") + ")", ForgePreferences.FPref.UI_LOAD_UNKNOWN_CARDS, this::restartForge);
+            addCheckBox(Forge.getLocalizer().getMessage("lblEnableNonLegalCards") + " (" +
+                Forge.getLocalizer().getMessage("lblRestartRequired") + ")", ForgePreferences.FPref.UI_LOAD_NONLEGAL_CARDS, this::restartForge);
+            addCheckBox(Forge.getLocalizer().getMessage("lblAllowCustomCardsInDecks") + " (" +
+                Forge.getLocalizer().getMessage("lblRestartRequired") + ")", ForgePreferences.FPref.ALLOW_CUSTOM_CARDS_IN_DECKS_CONFORMANCE, this::restartForge);
             addCheckBox(Forge.getLocalizer().getMessage("lblDisposeTextures"), ForgePreferences.FPref.UI_ENABLE_DISPOSE_TEXTURES);
         }
 
