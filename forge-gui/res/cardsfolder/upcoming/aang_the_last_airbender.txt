@@ -1,0 +1,12 @@
+Name:Aang, the Last Airbender
+ManaCost:3 W
+Types:Legendary Creature Human Avatar Ally
+PT:3/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAirbend | TriggerDescription$ When NICKNAME enters, airbend up to one other target nonland permanent. (Exile it. While it's exiled, its owner may cast it for {2} rather than its mana cost.)
+SVar:TrigAirbend:DB$ Airbend | ValidTgts$ Permanent.nonLand+Other | TgtPrompt$ Select up to one another target nonland permanent | TargetMin$ 0 | TargetMax$ 1
+T:Mode$ SpellCast | ValidCard$ Lesson | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a Lesson spell, NICKNAME gains lifelink until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Lifelink
+SVar:BuffedBy:Lesson
+DeckHints:Type$Lesson
+Oracle:Flying\nWhen Aang enters, airbend up to one other target nonland permanent. (Exile it. While it's exiled, its owner may cast it for {2} rather than its mana cost.)\nWhenever you cast a Lesson spell, Aang gains lifelink until end of turn.

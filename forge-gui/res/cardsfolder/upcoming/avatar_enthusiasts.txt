@@ -1,0 +1,10 @@
+Name:Avatar Enthusiasts
+ManaCost:2 W
+Types:Creature Human Peasant Ally
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another Ally you control enters, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Ally
+DeckHas:Ability$Counters
+DeckNeeds:Type$Ally
+Oracle:Whenever another Ally you control enters, put a +1/+1 counter on this creature.

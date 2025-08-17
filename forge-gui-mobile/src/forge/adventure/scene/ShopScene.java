@@ -49,7 +49,7 @@ public class ShopScene extends ForgeScene {
 
     @Override
     public FScreen getScreen() {
-        return screen == null ? screen = new AdventureDeckEditor(true, null) : screen;
+        return screen == null ? screen = new AdventureDeckEditor(true) : screen;
     }
 
     private void processAutoSell() {
@@ -79,7 +79,7 @@ public class ShopScene extends ForgeScene {
     }
 
     private void doAutosell() {
-        AdventurePlayer.current().doAutosell();
+        AdventurePlayer.current().doBulkSell(AdventurePlayer.current().autoSellCards);
         if (screen != null)
             screen.refresh();
     }

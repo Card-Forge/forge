@@ -1,0 +1,5 @@
+Name:Warship Scout
+ManaCost:R
+Types:Creature Human Scout
+PT:2/1
+Oracle:

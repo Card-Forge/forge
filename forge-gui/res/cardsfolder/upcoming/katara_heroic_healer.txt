@@ -1,0 +1,10 @@
+Name:Katara, Heroic Healer
+ManaCost:4 W
+Types:Legendary Creature Human Warrior Ally
+PT:2/3
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ When NICKNAME enters, put a +1/+1 counter on each other creature you control.
+SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+StrictlyOther | CounterType$ P1P1 | CounterNum$ 1
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
+Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)\nWhen Katara enters, put a +1/+1 counter on each other creature you control.

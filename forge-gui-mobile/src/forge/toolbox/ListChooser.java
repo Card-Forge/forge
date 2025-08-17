@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Keys;
 import com.google.common.collect.ImmutableList;
 
 import forge.Forge;
@@ -293,23 +293,28 @@ public class ListChooser<T> extends FContainer {
 
     @Override
     public boolean keyDown(int keyCode) {
-        if (Forge.hasGamepad()) {
-            if (keyCode == Input.Keys.DPAD_DOWN) {
-                setNextSelected();
-            } else if (keyCode == Input.Keys.DPAD_UP) {
-                setPreviousSelected();
-            }
-            return true;
+        boolean horizontal = lstChoices.getListItemRenderer().layoutHorizontal();
+        switch (keyCode) {
+            case Keys.DPAD_DOWN:
+                moveSelection(horizontal ? 10 : 1);
+                break;
+            case Keys.DPAD_UP:
+                moveSelection(horizontal ? -10 : -1);
+                break;
+            case Keys.DPAD_RIGHT:
+                moveSelection(horizontal ? 1 : 10);
+                break;
+            case Keys.DPAD_LEFT:
+                moveSelection(horizontal ? -1 : -10);
+                break;
+            default:
+                return super.keyDown(keyCode);
         }
-        return super.keyDown(keyCode);
+        return true;
     }
-    public void setNextSelected() {
-        if ((lstChoices.getSelectedIndex()+1) < lstChoices.getCount())
-            lstChoices.setSelectedIndex(lstChoices.getSelectedIndex()+1);
-    }
-    public void setPreviousSelected() {
-        if ((lstChoices.getSelectedIndex()-1) > -1) {
-            lstChoices.setSelectedIndex(lstChoices.getSelectedIndex() - 1);
-        }
+
+    public void moveSelection(int offset) {
+        int target = Math.min(lstChoices.getCount(), Math.max(lstChoices.getSelectedIndex() + offset, 0));
+        lstChoices.setSelectedIndex(target);
     }
 }

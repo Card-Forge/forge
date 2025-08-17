@@ -5,6 +5,6 @@ K:Hideaway:4
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-A:AB$ Play | Cost$ W T | Defined$ ExiledWith | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE3 | PlayerTurn$ True | AILogic$ CheckCondition | SpellDescription$ You may play the exiled card without paying its mana cost if you attacked with three or more creatures this turn.
+A:AB$ Play | Cost$ W T | Defined$ ExiledWith | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE3 | PlayerTurn$ True | SpellDescription$ You may play the exiled card without paying its mana cost if you attacked with three or more creatures this turn.
 SVar:X:Count$AttackersDeclared
 Oracle:Hideaway 4 (When this permanent enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)\nWindbrisk Heights enters tapped.\n{T}: Add {W}.\n{W}, {T}: You may play the exiled card without paying its mana cost if you attacked with three or more creatures this turn.

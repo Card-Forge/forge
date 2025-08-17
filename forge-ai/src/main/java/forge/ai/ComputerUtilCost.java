@@ -140,11 +140,13 @@ public class ComputerUtilCost {
                     if (type.equals("CARDNAME")) {
                         if (source.getAbilityText().contains("Bloodrush")) {
                             continue;
-                        } else if (ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN, ai)
+                        }
+                        if (ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN, ai)
                                 && !ai.isUnlimitedHandSize() && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize()) {
                             // Better do something than just discard stuff
                             return true;
                         }
+                        return false;
                     }
                     typeList = CardLists.getValidCards(hand, type, source.getController(), source, sa);
                     if (typeList.size() > ai.getMaxHandSize()) {
@@ -249,11 +251,7 @@ public class ComputerUtilCost {
                     // Does the AI want to use Sacrifice All?
                     return false;
                 } else {
-                    Integer c = part.convertAmount();
-
-                    if (c == null) {
-                        c = part.getAbilityAmount(sourceAbility);
-                    }
+                    int c = part.getAbilityAmount(sourceAbility);
                     final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
                     CardCollectionView choices = aic.chooseSacrificeType(part.getType(), sourceAbility, effect, c, exclude);
                     if (choices != null) {
@@ -578,7 +576,9 @@ public class ComputerUtilCost {
                 }
             }
 
-            // Ward - will be accounted for when rechecking a targeted ability
+            // Account for possible Ward after the spell is fully targeted
+            // TODO: ideally, this should be done while targeting, so that a different target can be preferred if the best
+            // one is warded and can't be paid for. (currently it will be stuck with the target until it could pay)
             if (!sa.isTrigger() && !cannotBeCountered) {
                 Set<GameObject> distinctObjects = Sets.newHashSet();
                 for (TargetChoices tc : sa.getAllTargetChoices()) {
@@ -586,8 +586,14 @@ public class ComputerUtilCost {
                         if (!distinctObjects.add(tgt)) {
                             continue;
                         }
+                        // TODO some older cards don't use the keyword, so check for trigger instead
                         if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(sa.getHostCard().getController())) {
                             Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
+                            // don't use API converter since it might have special part logic not meant for Ward cost
+                            SpellAbilityAi topAI = new SpellAbilityAi() {};
+                            if (!topAI.willPayCosts(player, sa, wardCost, sa.getHostCard())) {
+                                return false;
+                            }
                             if (wardCost.hasManaCost()) {
                                 extraManaNeeded += wardCost.getTotalMana().getCMC();
                             }
@@ -611,6 +617,7 @@ public class ComputerUtilCost {
             }
         }
 
+        // TODO both of these call CostAdjustment.adjust, try to reuse instead
         return ComputerUtilMana.canPayManaCost(cost, sa, player, extraManaNeeded, effect)
                 && CostPayment.canPayAdditionalCosts(cost, sa, effect, player);
     }

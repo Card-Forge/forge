@@ -48,6 +48,10 @@ public class SGuiChoose {
     }
 
     public static <T> T one(final String message, final Collection<T> choices) {
+        return one(message, choices, null, null);
+    }
+
+    public static <T> T one(final String message, final Collection<T> choices, T selected, Function<T, String> display) {
         if (choices == null || choices.isEmpty()) {
             return null;
         }
@@ -55,7 +59,7 @@ public class SGuiChoose {
             return Iterables.getFirst(choices, null);
         }
 
-        final List<T> choice = SGuiChoose.getChoices(message, 1, 1, choices);
+        final List<T> choice = SGuiChoose.getChoices(message, 1, 1, choices, selected == null ? null : List.of(selected), display);
         assert choice.size() == 1;
         return choice.get(0);
     }

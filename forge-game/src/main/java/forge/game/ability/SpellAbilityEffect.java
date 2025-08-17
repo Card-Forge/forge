@@ -49,6 +49,8 @@ public abstract class SpellAbilityEffect {
         return sa.getDescription();
     }
 
+    public void buildSpellAbility(final SpellAbility sa) {}
+
     /**
      * Returns this effect description with needed prelude and epilogue.
      * @param params
@@ -1067,6 +1069,8 @@ public abstract class SpellAbilityEffect {
         // if ability was granted use that source so they can be kept apart later
         if (cause.isCopiedTrait()) {
             exilingSource = cause.getOriginalHost();
+        } else if (cause.getKeyword() != null && cause.getKeyword().getStatic() != null) {
+            exilingSource = cause.getKeyword().getStatic().getOriginalHost();
         }
         movedCard.setExiledWith(exilingSource);
         Player exiler = cause.hasParam("DefinedExiler") ?

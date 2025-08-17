@@ -6,9 +6,9 @@ Name=fire_elemental
 1 Bonfire of the Damned|MM3|1
 1 Charging Cinderhorn|C16|1
 1 Ember Swallower|THS|1
-1 Fervent Strike|MB1|1
-1 Fiery Hellhound|MB1|1
-1 Fire Elemental|MB1|1
+1 Fervent Strike|PLST|1
+1 Fiery Hellhound|PLST|1
+1 Fire Elemental|PLST|1
 1 Fire Urchin|GRN|1
 4 Flame Jet|UDS|1
 1 Flame Wave|TPR|1
@@ -39,7 +39,7 @@ Name=fire_elemental
 1 Rage Nimbus|ROE|1
 1 Regathan Firecat|M14|1
 1 Rekindling Phoenix|RIX|1
-1 Stigma Lasher|FMB1|1
+1 Stigma Lasher|PLST|1
 1 Sunflare Shaman|MOR|1
 1 Underworld Rage-Hound|THB|1
 [Sideboard]

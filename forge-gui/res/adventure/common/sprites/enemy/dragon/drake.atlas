@@ -5,7 +5,7 @@ filter: Nearest,Nearest
 repeat: none
 Avatar
  xy: 0, 0
- size: 30,30
+ size: 16,16
 Idle
  xy: 0,34
  size: 30,34
