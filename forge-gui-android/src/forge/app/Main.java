@@ -63,6 +63,8 @@ import forge.Forge;
 import forge.interfaces.IDeviceAdapter;
 import forge.util.FileUtil;
 import forge.util.ThreadUtil;
+import io.sentry.Sentry;
+import io.sentry.protocol.Device;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jupnp.DefaultUpnpServiceConfiguration;
 import org.jupnp.android.AndroidUpnpServiceConfiguration;
@@ -191,6 +193,16 @@ public class Main extends AndroidApplication {
 
         boolean permissiongranted = checkPermission();
         Gadapter = new AndroidAdapter(getContext());
+
+        Sentry.configureScope(scope -> {
+            Device device = new Device();
+            device.setId(Build.ID);
+            device.setName(getDeviceName());
+            device.setBrand(Build.BRAND);
+            device.setChipset(Build.SOC_MANUFACTURER + " " + Build.SOC_MODEL);
+            scope.getContexts().setDevice(device);
+        });
+
         initForge(Gadapter, permissiongranted, totalMemory, isTabletDevice(getContext()));
     }
 
@@ -694,11 +706,6 @@ public class Main extends AndroidApplication {
             return new GitLogs().getLatestReleaseTag(releaseAtom);
         }
 
-        private String fileProviderAuthority() {
-            // Works for both prod (forge.app) and dev (forge.app.dev)
-            return getPackageName() + ".publicfileprovider";
-        }
-
         @Override
         public boolean openFile(String filename) {
             try {
@@ -713,8 +720,7 @@ public class Main extends AndroidApplication {
                     return true;
                 } else {
                     Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
-                    intent.setData(PublicFileProvider.getUriForFile(
-                          getContext(), fileProviderAuthority(), new File(filename)));
+                    intent.setData(PublicFileProvider.getUriForFile(getContext(), "com.mydomain.publicfileprovider", new File(filename)));
                     intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     startActivity(intent);
                     return true;
