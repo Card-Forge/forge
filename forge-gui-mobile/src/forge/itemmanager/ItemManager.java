@@ -37,10 +37,7 @@ import forge.assets.FSkinImage;
 import forge.card.CardZoom.ActivateHandler;
 import forge.gui.FThreads;
 import forge.item.InventoryItem;
-import forge.itemmanager.filters.AdvancedSearchFilter;
-import forge.itemmanager.filters.CardFormatFilter;
-import forge.itemmanager.filters.ItemFilter;
-import forge.itemmanager.filters.TextSearchFilter;
+import forge.itemmanager.filters.*;
 import forge.itemmanager.views.ImageView;
 import forge.itemmanager.views.ItemListView;
 import forge.itemmanager.views.ItemView;
@@ -372,6 +369,8 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         }
         if (!hideFilters) {
             for (ItemFilter<? extends T> filter : filters.get()) {
+                if (!Forge.isLandscapeMode() && filter instanceof CardTypeFilter)
+                    helper.newLine();
                 helper.include(filter.getWidget(), filter.getPreferredWidth(helper.getRemainingLineWidth(), fieldHeight), fieldHeight);
             }
             if (allowSortChange()) {
