@@ -5,6 +5,7 @@ import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.game.IHasGameType;
 import forge.gamemodes.quest.QuestController;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
@@ -174,7 +175,7 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
             return getGeneratedDeck(); //fall back to generated deck if no decks in filtered list
         }
         Iterable<DeckProxy> AIDecks = IterableUtil.filter(decks, deckProxy -> deckProxy.getAI().inMainDeck == 0);
-        if (isAi && Iterables.size(AIDecks) > 10) return Aggregates.random(AIDecks).getDeck();
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_AUTO_AIDECK_SELECTION) && isAi && Iterables.size(AIDecks) > 10) return Aggregates.random(AIDecks).getDeck();
         return Aggregates.random(decks).getDeck();
     }
 
