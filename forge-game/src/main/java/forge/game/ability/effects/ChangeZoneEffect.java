@@ -19,7 +19,6 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.staticability.StaticAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -765,7 +764,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     StringBuilder sbPlay = new StringBuilder();
                     sbPlay.append("Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand+!ThisTurnEntered");
                     sbPlay.append(" | AffectedZone$ Exile | Description$ You may cast the card.");
-                    final StaticAbility st = eff.addStaticAbility(sbPlay.toString());
+                    eff.addStaticAbility(sbPlay.toString());
                     eff.addRemembered(movedCard);
                     addForgetOnMovedTrigger(eff, "Exile");
                     addForgetOnCastTrigger(eff, "Card.IsRemembered");
