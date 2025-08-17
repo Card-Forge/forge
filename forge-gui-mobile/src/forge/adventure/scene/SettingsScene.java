@@ -293,7 +293,6 @@ public class SettingsScene extends UIScene {
             addLabel(Forge.getLocalizer().getMessage("lblBorderMaskOption"));
             settingGroup.add(borderMask).align(Align.right).pad(2);
 
-            addCheckBox(Forge.getLocalizer().getMessage("lblPreloadExtendedArtCards"), ForgePreferences.FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
             addCheckBox(Forge.getLocalizer().getMessage("lblAutoCacheSize"), ForgePreferences.FPref.UI_AUTO_CACHE_SIZE);
             addCheckBox(Forge.getLocalizer().getMessage("lblEnableUnknownCards") + " (" +
                 Forge.getLocalizer().getMessage("lblRestartRequired") + ")", ForgePreferences.FPref.UI_LOAD_UNKNOWN_CARDS, this::restartForge);
