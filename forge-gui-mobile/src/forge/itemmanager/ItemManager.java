@@ -37,10 +37,7 @@ import forge.assets.FSkinImage;
 import forge.card.CardZoom.ActivateHandler;
 import forge.gui.FThreads;
 import forge.item.InventoryItem;
-import forge.itemmanager.filters.AdvancedSearchFilter;
-import forge.itemmanager.filters.CardFormatFilter;
-import forge.itemmanager.filters.ItemFilter;
-import forge.itemmanager.filters.TextSearchFilter;
+import forge.itemmanager.filters.*;
 import forge.itemmanager.views.ImageView;
 import forge.itemmanager.views.ItemListView;
 import forge.itemmanager.views.ItemView;
@@ -370,8 +367,11 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             helper.fillLine(advancedSearchFilter.getWidget(), fieldHeight);
         }
         if (!hideFilters) {
-            for (ItemFilter<? extends T> filter : filters.get()) {
-                helper.include(filter.getWidget(), filter.getPreferredWidth(helper.getRemainingLineWidth(), fieldHeight), fieldHeight);
+            List<ItemFilter<? extends T>> filters = this.filters.get();
+            if(!tryConsolidateButtonFilters(filters, helper, fieldHeight)) {
+                for (ItemFilter<? extends T> filter : filters) {
+                    helper.include(filter.getWidget(), filter.getPreferredWidth(helper.getRemainingLineWidth(), fieldHeight), fieldHeight);
+                }
             }
             if (allowSortChange()) {
                 helper.fillLine(cbxSortOptions, fieldHeight);
@@ -384,6 +384,25 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             }
         }
         helper.fill(currentView.getScroller());
+    }
+
+    /**
+     * If the only available filters are button filters, try and put them both on one line.
+     * And if we can, stretch them across the line and squish them all proportionally rather than only the last item.
+     */
+    private boolean tryConsolidateButtonFilters(List<ItemFilter<? extends T>> filters, LayoutHelper helper, float fieldHeight) {
+        if(filters.size() < 2 || !filters.stream().allMatch(o -> o instanceof ToggleButtonsFilter<? extends T>))
+            return false;
+        float width = helper.getParentWidth();
+        double total = filters.stream().mapToDouble(i -> i.getPreferredWidth(width, fieldHeight)).sum();
+        total += helper.getGapX() * (filters.size() - 1);
+        if(total > width * 1.2 || total < width * 0.6)
+            return false;
+        for(ItemFilter<? extends T> filter : filters) {
+            double percent = filter.getPreferredWidth(width, fieldHeight) / total;
+            helper.include(filter.getWidget(), percent, fieldHeight);
+        }
+        return true;
     }
 
     public Class<T> getGenericType() {
