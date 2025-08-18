@@ -21,13 +21,13 @@ ScryfallCode=AA2
 13 U Eternal Witness @Chris Rahn
 14 R Ignoble Hierarch @Mark Zug
 15 U Life // Death @Anthony S. Waters & Scott Murphy
-16 R Rofellos, Llnowar Emissary @Michael Sutfin
+16 R Rofellos, Llanowar Emissary @Michael Sutfin
 17 M Grist, the Hunger Tide @Yongjae Choi
 18 M Wrenn and Six @Chase Stone
 19 R Currency Converter @Sean Murray
 20 M Mox Opal @Volkan Baǵa
 21 C Pyrite Spellbomb @Jim Nelson
-22 R  Triplicate Titan @Andrew Mar
+22 R Triplicate Titan @Andrew Mar
 23 C Ancient Den @Rob Alexander
 24 C Great Furnace @Rob Alexander
 25 C Tree of Tales @John Avon
