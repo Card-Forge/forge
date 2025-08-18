@@ -150,7 +150,7 @@ public class EffectEffect extends SpellAbilityEffect {
                 // try to get the image from name
                 String imageKey = TextUtil.fastReplace(
                     TextUtil.fastReplace(
-                        TextUtil.fastReplace(name.toLowerCase()," — ", "_"),
+                        TextUtil.fastReplace(name.toLowerCase(), " — ", "_"),
                         ",", ""),
                         " ", "_");
                 image = StaticData.instance().getOtherImageKey(imageKey, hostCard.getSetCode());
