@@ -231,7 +231,27 @@ public class ImageUtil {
         }
         String versionParam = useArtCrop ? "art_crop" : "normal";
         String faceParam = "";
-        if (cp.getRules().getOtherPart() != null) {
+        if (cp.getRules().getSplitType() == CardSplitType.Meld) {
+            if (face.equals("back")) {
+                PaperCard meldBasePc = cp.getMeldBaseCard();
+                cardCollectorNumber = meldBasePc.getCollectorNumber();
+                String collectorNumberSuffix = "";
+
+                if (cardCollectorNumber.endsWith("a")) {
+                    cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 1);
+                } else if (cardCollectorNumber.endsWith("as")) {
+                    cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 2);
+                    collectorNumberSuffix = "s";
+                } else if (cardCollectorNumber.endsWith("ap")) {
+                    cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 2);
+                    collectorNumberSuffix = "p";
+                }
+
+                cardCollectorNumber += "b" + collectorNumberSuffix;
+            }
+
+            faceParam = "&face=front";
+        } else if (cp.getRules().getOtherPart() != null) {
             faceParam = (face.equals("back") && cp.getRules().getSplitType() != CardSplitType.Flip
                     ? "&face=back"
                     : "&face=front");

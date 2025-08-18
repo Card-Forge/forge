@@ -16,6 +16,7 @@ import forge.game.GameLog;
 import forge.game.GameLogEntryType;
 import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
+import forge.gamemodes.limited.DraftPack;
 import forge.gamemodes.limited.IDraftLog;
 import forge.gamemodes.limited.LimitedPlayer;
 import forge.gamemodes.planarconquest.ConquestUtil;
@@ -77,7 +78,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             DeckFormat deckFormat = getDeckFormat();
             return deckFormat != null && deckFormat.hasCommander();
         }
-        public boolean allowsCardReplacement() { return hasInfiniteCardPool(); }
+        public boolean allowsCardReplacement() { return hasInfiniteCardPool() || usePlayerInventory(); }
 
         public List<CardEdition> getBasicLandSets(Deck currentDeck) {
             return List.of(DeckProxy.getDefaultLandSet(currentDeck));
@@ -629,8 +630,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     );
                 }
                 addItem(new FMenuItem(localizer.getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e -> FDeckViewer.copyDeckToClipboard(deck)));
-                if(!FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY) || FModel.getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED))
+                boolean devMode = FModel.getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED);
+                if(!FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY) || devMode)
                     addItem(new FCheckBoxMenuItem(localizer.getMessage("cbEnforceDeckLegality"), shouldEnforceConformity(), e -> toggleConformity()));
+                if(devMode && !editorConfig.hasInfiniteCardPool()) {
+                    String devSuffix = " (" + localizer.getMessage("lblDev") + ")";
+                    addItem(new FMenuItem(localizer.getMessage("lblAddcard") + devSuffix, FSkinImage.HDPLUS, e -> showDevAddCardDialog()));
+                }
                 ((DeckEditorPage) getSelectedPage()).buildDeckMenu(this);
             }
         };
@@ -677,6 +683,32 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             tags.add(DECK_TAG_SUPPRESS_CONFORMITY);
         if(getCatalogPage() != null)
             getCatalogPage().scheduleRefresh(); //Refresh to update commander options.
+    }
+
+    protected void showDevAddCardDialog() {
+        FOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblPromptCardRequest"), new Callback<>() {
+            @Override
+            public void run(String result) {
+                if(StringUtils.isBlank(result))
+                    return;
+                CardPool requested = CardPool.fromSingleCardRequest(result);
+                devAddCards(requested);
+            }
+        });
+    }
+
+
+    /**
+     * Adds cards to the catalog and data pool.
+     */
+    protected void devAddCards(CardPool cards) {
+        if(this.getDraft() != null) {
+            DraftPack pack = this.getDraft().getHumanPlayer().nextChoice();
+            pack.addAll(cards.toFlatList());
+            this.catalogPage.scheduleRefresh();
+            return;
+        }
+        System.err.println("Adding cards not supported in this editor variant - " + this);
     }
 
     public DeckEditorConfig getEditorConfig() {
@@ -2002,8 +2034,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             }
                         }
                     });
+                    addReplaceVariantItems(menu, card);
                 }
-                addReplaceVariantItems(menu, card);
                 break;
             case Avatar:
                 addMoveCardMenuItem(menu, card, this, cardSourcePage);
@@ -2049,7 +2081,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             FSkinImage iconReplaceCard = Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST;
             final Localizer localizer = Forge.getLocalizer();
             final ItemPool<PaperCard> cardOptions = parentScreen.getCardSourcePage().cardManager.getPool().getFilteredPool((c) -> c.getName().equals(card.getName()));
-            if (cardOptions.countDistinct() > 1) {
+            cardOptions.removeAll(card);
+            if (!cardOptions.isEmpty()) {
                 String lblReplaceCard = localizer.getMessage("lblReplaceCard");
                 menu.addItem(new FMenuItem(lblReplaceCard, iconReplaceCard, e -> handleReplaceCard(e, card, cardOptions)));
             }
@@ -2069,10 +2102,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             List<PaperCard> sortedOptions = new ArrayList<>();
             sortedOptions.add(card);
             for (Entry<PaperCard, Integer> optionEntry : cardOptions) {
-                PaperCard option = optionEntry.getKey();
-                if (!option.equals(card)) {
-                    sortedOptions.add(option);
-                }
+                sortedOptions.add(optionEntry.getKey());
             }
             final Localizer localizer = Forge.getLocalizer();
             String lblReplaceCard = localizer.getMessage("lblReplace");
