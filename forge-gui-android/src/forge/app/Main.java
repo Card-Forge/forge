@@ -65,6 +65,7 @@ import forge.util.FileUtil;
 import forge.util.ThreadUtil;
 import io.sentry.Sentry;
 import io.sentry.protocol.Device;
+import io.sentry.protocol.OperatingSystem;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jupnp.DefaultUpnpServiceConfiguration;
 import org.jupnp.android.AndroidUpnpServiceConfiguration;
@@ -194,13 +195,25 @@ public class Main extends AndroidApplication {
         boolean permissiongranted = checkPermission();
         Gadapter = new AndroidAdapter(getContext());
 
+        // Get Basic Device and OS info for scope
         Sentry.configureScope(scope -> {
+            // Device Info
             Device device = new Device();
             device.setId(Build.ID);
             device.setName(getDeviceName());
+            device.setModel(Build.MODEL);
             device.setBrand(Build.BRAND);
+            device.setManufacturer(Build.MANUFACTURER);
+            device.setMemorySize(memInfo.totalMem);
             device.setChipset(Build.SOC_MANUFACTURER + " " + Build.SOC_MODEL);
+            // OS Info
+            OperatingSystem os = new OperatingSystem();
+            os.setName("Android");
+            os.setVersion(Build.VERSION.RELEASE);
+            os.setBuild(Build.DISPLAY);
+            // Set Contexts
             scope.getContexts().setDevice(device);
+            scope.getContexts().setOperatingSystem(os);
         });
 
         initForge(Gadapter, permissiongranted, totalMemory, isTabletDevice(getContext()));
