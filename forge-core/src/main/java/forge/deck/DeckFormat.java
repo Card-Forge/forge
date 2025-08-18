@@ -112,7 +112,13 @@ public enum DeckFormat {
         }
     },
     PlanarConquest ( Range.of(40, Integer.MAX_VALUE), Range.is(0), 1),
-    Adventure      ( Range.of(40, Integer.MAX_VALUE), Range.of(0, Integer.MAX_VALUE), 4),
+    Adventure      ( Range.of(40, Integer.MAX_VALUE), Range.of(0, Integer.MAX_VALUE), 4) {
+        @Override
+        public boolean allowCustomCards() {
+            //If the player has them, may as well allow them.
+            return true;
+        }
+    },
     Vanguard       ( Range.of(60, Integer.MAX_VALUE), Range.is(0), 4),
     Planechase     ( Range.of(60, Integer.MAX_VALUE), Range.is(0), 4),
     Archenemy      ( Range.of(60, Integer.MAX_VALUE), Range.is(0), 4),
@@ -402,7 +408,7 @@ public enum DeckFormat {
         // Should group all cards by name, so that different editions of same card are really counted as the same card
         for (final Entry<String, Integer> cp : Aggregates.groupSumBy(allCards, pc -> StaticData.instance().getCommonCards().getName(pc.getName(), true))) {
             IPaperCard simpleCard = StaticData.instance().getCommonCards().getCard(cp.getKey());
-            if (simpleCard != null && simpleCard.getRules().isCustom() && !StaticData.instance().allowCustomCardsInDecksConformance())
+            if (simpleCard != null && simpleCard.getRules().isCustom() && !allowCustomCards())
                 return TextUtil.concatWithSpace("contains a Custom Card:", cp.getKey(), "\nPlease Enable Custom Cards in Forge Preferences to use this deck.");
             // Might cause issues since it ignores "Special" Cards
             if (simpleCard == null) {
@@ -531,6 +537,10 @@ public enum DeckFormat {
 
     public void adjustCMCLevels(List<ImmutablePair<FilterCMC, Integer>> cmcLevels) {
         // Not needed by default
+    }
+
+    public boolean allowCustomCards() {
+        return StaticData.instance().allowCustomCardsInDecksConformance();
     }
 
     public boolean isLegalCard(PaperCard pc) {

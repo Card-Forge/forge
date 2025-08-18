@@ -27,7 +27,7 @@ public class Main {
                this is an indicator if the LWJGL3 has booted up succesfully. */
             closeSplash();
         }
-        new GameLauncher(versionString);
+        new GameLauncher(versionString, args);
     }
     public static void closeSplash() {
         try {
