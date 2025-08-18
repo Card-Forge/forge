@@ -413,7 +413,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         btnExpandCollapseAll.setBounds(x, y, h, h);
         x += h + padding;
 
-        float pileByWidth = itemManager.getPileByWidth();
+        float pileByWidth = Math.min(itemManager.getPileByWidth(), (width - x - padding) / 2.0f);
         float groupByWidth = width - x - padding - pileByWidth;
 
         cbGroupByOptions.setBounds(x, y, groupByWidth, h);

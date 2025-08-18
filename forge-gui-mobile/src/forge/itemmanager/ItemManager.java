@@ -1132,13 +1132,15 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     }
 
     public float getPileByWidth() {
-        if (cbxSortOptions != null) {
-            return cbxSortOptions.getWidth();
-        }
         if (filters.get().isEmpty()) {
             return 0f;
         }
-        return filters.get().get(filters.get().size() - 1).getWidget().getWidth();
+        float preferredSize = filters.get().get(filters.get().size() - 1).getWidget().getWidth();
+        if (cbxSortOptions != null && Math.abs(1 - (cbxSortOptions.getWidth() / preferredSize)) < 0.25) {
+            //Match the size of the sort box if it's not too far off from what we'd prefer.
+            return cbxSortOptions.getWidth();
+        }
+        return preferredSize;
     }
 
     @Override
