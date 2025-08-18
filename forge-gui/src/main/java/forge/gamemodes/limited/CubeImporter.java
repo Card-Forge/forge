@@ -3,6 +3,8 @@ package forge.gamemodes.limited;
 import forge.deck.Deck;
 import forge.deck.io.DeckSerializer;
 import forge.item.SealedTemplate;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 import org.apache.commons.lang3.tuple.Pair;
@@ -66,6 +68,11 @@ public class CubeImporter {
         cd.setSingleton(true);
         cd.setCustomRankingsFile("rankings_cubecobra.txt");
         cd.setCardPool(deckCube.getMain());
+
+        // Save the cube ID in preferences as the last imported cube
+        FModel.getPreferences().setPref(ForgePreferences.FPref.LAST_IMPORTED_CUBE_ID, deckCube.getName());
+        FModel.getPreferences().save();
+
         return cd;
     }
 

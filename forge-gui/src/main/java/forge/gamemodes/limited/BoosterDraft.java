@@ -233,10 +233,13 @@ public class BoosterDraft implements IBoosterDraft {
                  * Import a cube from CubeCobra.
                  * Default settings are 3 boosters with a size of 15 cards.
                  */
+
+                String lastCubeId = FModel.getPreferences().getPref(ForgePreferences.FPref.LAST_IMPORTED_CUBE_ID);
                 String inputCubeId = SOptionPane.showInputDialog(
                         Localizer.getInstance().getMessage("lblEnterCubeCobraURL") + ":",
                         Localizer.getInstance().getMessage("lblImportCube"),
-                        null);
+                        null,
+                        lastCubeId);
 
                 if (inputCubeId == null) {
                     return false;
