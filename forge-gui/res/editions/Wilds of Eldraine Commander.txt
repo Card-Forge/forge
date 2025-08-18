@@ -187,16 +187,10 @@ ScryfallCode=WOC
 0 role_virtuous @Unknown
 0 role_virtuous @Unknown
 0 role_virtuous @Unknown
-5 w_2_2_cat @April Prime
-6 w_1_1_cat_lifelink @Filip Burburan
 7 w_1_1_human_soldier @Kimonas Theodossiou
-8 w_2_4_ox @Aaron Miller
 9 w_2_2_pegasus_flying @Lars Grant-West
 10 u_1_1_faerie_flying @Irina Nordsol
 11 b_1_1_faerie_rogue_flying @Dave Allsop
 12 r_4_2_pirate_noblock @Igor Krstic
-13 g_3_3_elephant @Lars Grant-West
-14 g_1_1_human_monk_g @Anastasia Ovchinnikova
 15 g_1_1_saproling @Joseph Meehan
 16 ub_1_1_faerie_rogue_flying @E. M. Gist
-17 wb_1_1_spirit_flying @Josh Hass

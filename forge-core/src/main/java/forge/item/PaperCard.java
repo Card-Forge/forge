@@ -154,6 +154,31 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         return this.noSellVersion;
     }
 
+    public PaperCard getMeldBaseCard() {
+        if (getRules().getSplitType() != CardSplitType.Meld) {
+            return null;
+        }
+
+        // This is the base part of the meld duo
+        if (getRules().getOtherPart() == null) {
+            return this;
+        }
+
+        String meldWith = getRules().getMeldWith();
+        if (meldWith == null) {
+            return null;
+        }
+        
+        List<PrintSheet> sheets = StaticData.instance().getCardEdition(this.edition).getPrintSheetsBySection();
+        for (PrintSheet sheet : sheets) {
+            if (sheet.contains(this)) {
+                return sheet.find(PaperCardPredicates.name(meldWith));
+            }
+        }
+
+        return null;
+    }
+
     public PaperCard copyWithoutFlags() {
         if(this.flaglessVersion == null) {
             if(this.flags == PaperCardFlags.IDENTITY_FLAGS)

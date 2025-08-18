@@ -578,7 +578,7 @@ ScryfallCode=J25
 571 C Kindled Fury @Craig J Spearing
 572 R Krenko, Tin Street Kingpin @Viko Menezes
 573 C Kruin Striker @Christopher Moeller
-574 R Markov Blademaster @Jana Schirmer
+574 R Markov Blademaster @Jana Schirmer & Johannes Voss
 575 R Markov Enforcer @Wisnu Tan
 576 U Markov Retribution @Uriah Voth
 577 U Markov Warlord @Cynthia Sheppard
