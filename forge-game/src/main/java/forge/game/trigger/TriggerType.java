@@ -79,6 +79,7 @@ public enum TriggerType {
     Evolved(TriggerEvolved.class),
     ExcessDamage(TriggerExcessDamage.class),
     ExcessDamageAll(TriggerExcessDamageAll.class),
+    ElementalBend(TriggerElementalbend.class),
     Enlisted(TriggerEnlisted.class),
     Exerted(TriggerExerted.class),
     Exiled(TriggerExiled.class),
