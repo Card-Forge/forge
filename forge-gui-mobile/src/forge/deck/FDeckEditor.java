@@ -78,7 +78,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             DeckFormat deckFormat = getDeckFormat();
             return deckFormat != null && deckFormat.hasCommander();
         }
-        public boolean allowsCardReplacement() { return hasInfiniteCardPool(); }
+        public boolean allowsCardReplacement() { return hasInfiniteCardPool() || usePlayerInventory(); }
 
         public List<CardEdition> getBasicLandSets(Deck currentDeck) {
             return List.of(DeckProxy.getDefaultLandSet(currentDeck));
@@ -2034,8 +2034,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             }
                         }
                     });
+                    addReplaceVariantItems(menu, card);
                 }
-                addReplaceVariantItems(menu, card);
                 break;
             case Avatar:
                 addMoveCardMenuItem(menu, card, this, cardSourcePage);
@@ -2081,7 +2081,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             FSkinImage iconReplaceCard = Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST;
             final Localizer localizer = Forge.getLocalizer();
             final ItemPool<PaperCard> cardOptions = parentScreen.getCardSourcePage().cardManager.getPool().getFilteredPool((c) -> c.getName().equals(card.getName()));
-            if (cardOptions.countDistinct() > 1) {
+            cardOptions.removeAll(card);
+            if (!cardOptions.isEmpty()) {
                 String lblReplaceCard = localizer.getMessage("lblReplaceCard");
                 menu.addItem(new FMenuItem(lblReplaceCard, iconReplaceCard, e -> handleReplaceCard(e, card, cardOptions)));
             }
@@ -2101,10 +2102,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             List<PaperCard> sortedOptions = new ArrayList<>();
             sortedOptions.add(card);
             for (Entry<PaperCard, Integer> optionEntry : cardOptions) {
-                PaperCard option = optionEntry.getKey();
-                if (!option.equals(card)) {
-                    sortedOptions.add(option);
-                }
+                sortedOptions.add(optionEntry.getKey());
             }
             final Localizer localizer = Forge.getLocalizer();
             String lblReplaceCard = localizer.getMessage("lblReplace");

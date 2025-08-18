@@ -47,7 +47,6 @@ public class AdventureDeckEditor extends FDeckEditor {
         @Override public DeckFormat getDeckFormat() { return DeckFormat.Adventure; }
         @Override protected IDeckController getController() { return ADVENTURE_DECK_CONTROLLER; }
         @Override public boolean usePlayerInventory() { return true; }
-        @Override public boolean allowsCardReplacement() { return true; }
 
         @Override
         protected DeckEditorPage[] getInitialPages() {
