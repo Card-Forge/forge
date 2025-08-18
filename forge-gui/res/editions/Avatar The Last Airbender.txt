@@ -16,7 +16,7 @@ ScryfallCode=TLA
 25 C Jeong Jeong's Deserters @Leonardo Borazio
 28 U Master Piandao @Brian Yuen
 29 R Momo, Friendly Flier @Brandon L. Hunt
-31 C Path to Redemption
+31 C Path to Redemption @Hokyoung Kim
 32 C Rabaroo Troop @Mizutametori
 33 C Razor Rings @Norikatsu Miyoshi
 36 U Southern Air Temple @Salvatorre Zee Yazzie
@@ -90,6 +90,11 @@ ScryfallCode=TLA
 249 C Vindictive Warden @Jo Cordisco
 254 C Barrels of Blasting Jelly @Salvatorre Zee Yazzie
 255 C Bender's Waterskin @Dee Nguyen
+282 L Plains @Slawek Fedorczuk
+283 L Island @Maojin Lee
+284 L Swamp @Matteo Bassini
+285 L Mountain @Salvatorre Zee Yazzie
+286 L Forest @Maojin Lee
 287 L Plains @Salvatorre Zee Yazzie
 288 L Island @Grady Frederick
 289 L Swamp @John Di Giovanni
@@ -109,4 +114,5 @@ ScryfallCode=TLA
 361 R Katara, the Fearless @Flavio Girón
 362 R Toph, the First Metalbender @Flavio Girón
 363 M Avatar Aang @Bryan Konietzko
+366 R Hakoda, Selfless Commander @Rafater
 383 R Sokka, Bold Boomeranger @Toni Infante
