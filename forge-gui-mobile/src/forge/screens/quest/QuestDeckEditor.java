@@ -3,10 +3,10 @@ package forge.screens.quest;
 import java.util.HashMap;
 import java.util.Map;
 
+import forge.deck.CardPool;
 import forge.deck.DeckProxy;
 import forge.deck.FDeckEditor;
 import forge.gamemodes.quest.QuestSpellShop;
-import forge.item.PaperCard;
 import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManagerConfig;
@@ -44,13 +44,9 @@ public class QuestDeckEditor extends FDeckEditor {
         return colOverrides;
     }
 
-    /**
-     * Adds any card to the catalog and data pool.
-     * 
-     * @param card {@link forge.item.PaperCard}
-     */
-    public void addCheatCard(final PaperCard card, int qty) {
-        getCatalogPage().addCard(card, qty);
-        FModel.getQuest().getCards().getCardpool().add(card, qty);
+    @Override
+    protected void devAddCards(CardPool cards) {
+        FModel.getQuest().getCards().getCardpool().addAll(cards);
+        getCatalogPage().scheduleRefresh();
     }
 }

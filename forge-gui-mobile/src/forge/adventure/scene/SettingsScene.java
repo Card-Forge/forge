@@ -298,8 +298,6 @@ public class SettingsScene extends UIScene {
                 Forge.getLocalizer().getMessage("lblRestartRequired") + ")", ForgePreferences.FPref.UI_LOAD_UNKNOWN_CARDS, this::restartForge);
             addCheckBox(Forge.getLocalizer().getMessage("lblEnableNonLegalCards") + " (" +
                 Forge.getLocalizer().getMessage("lblRestartRequired") + ")", ForgePreferences.FPref.UI_LOAD_NONLEGAL_CARDS, this::restartForge);
-            addCheckBox(Forge.getLocalizer().getMessage("lblAllowCustomCardsInDecks") + " (" +
-                Forge.getLocalizer().getMessage("lblRestartRequired") + ")", ForgePreferences.FPref.ALLOW_CUSTOM_CARDS_IN_DECKS_CONFORMANCE, this::restartForge);
             addCheckBox(Forge.getLocalizer().getMessage("lblDisposeTextures"), ForgePreferences.FPref.UI_ENABLE_DISPOSE_TEXTURES);
         }
 
