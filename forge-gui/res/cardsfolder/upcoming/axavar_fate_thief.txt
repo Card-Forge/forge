@@ -1,0 +1,10 @@
+Name:Axavar, Fate Thief
+ManaCost:2 B R
+Types:Legendary Creature Drix Pirate
+PT:4/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigDiscard | TriggerDescription$ Void — At the beginning of your end step, if a nonland permanent left the battlefield this turn or a spell was warped this turn, discard a card, then heist target opponent's library.
+SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBHeist
+SVar:DBHeist:DB$ Heist | ValidTgts$ Opponent
+SVar:X:Count$Void.1.0
+K:Warp:BR
+Oracle:Void — At the beginning of your end step, if a nonland permanent left the battlefield this turn or a spell was warped this turn, discard a card, then heist target opponent's library.\nWarp {B/R}

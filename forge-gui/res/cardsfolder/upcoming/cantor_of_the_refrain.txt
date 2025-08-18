@@ -1,0 +1,10 @@
+Name:Cantor of the Refrain
+ManaCost:B
+Types:Creature Human Pilot
+PT:2/1
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ This creature can't block.
+T:Mode$ SpellCast | ValidCard$ Card | ValidSA$ Spell.Warp | ValidActivatingPlayer$ You | TriggerZones$ Graveyard | Execute$ TrigChangeZone | TriggerDescription$ When you cast a spell for its warp cost, return this card from your graveyard to the battlefield under its owner's control. It perpetually gets +1/+0.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ Self | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Pump | ConditionDefined$ Remembered | ConditionPresent$ Card.Self | NumAtt$ +1 | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:This creature can't block.\nWhen you cast a spell for its warp cost, return this card from your graveyard to the battlefield under its owner's control. It perpetually gets +1/+0.

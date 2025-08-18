@@ -1,0 +1,14 @@
+Name:Candela, Aegis of Adagia
+ManaCost:W
+Types:Legendary Artifact Spacecraft
+PT:2/3
+K:Flash
+K:Station:8
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When NICKNAME enters, return up to one target creature you control to its owner's hand. It perpetually gets +1/+1.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature.YouCtrl | RememberChanged$ True | TgtPrompt$ Select up to one target creature you control. | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | PumpZone$ Hand | Defined$ Remembered | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE8_CHARGE | AddType$ Creature | AddKeyword$ Flying | AddTrigger$ DamageTrig | Description$ STATION 8+ Flying,,,,,,Whenever NICKNAME deals combat damage to a player, you may put a creature card with mana value 3 or less from your hand onto the battlefield.
+SVar:DamageTrig:Mode$ DamageDoneOnce | CombatDamage$ True | OptionalDecider$ You | ValidSource$ Card.Self | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, you may put a creature card with mana value 3 or less from your hand onto the battlefield.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChoiceZone$ Hand | Amount$ 1 | ChangeType$ Creature.cmcLE3+YouCtrl | ChangeNum$ 1 | AILogic$ BestCard
+Oracle:Flash\nWhen Candela enters, return up to one target creature you control to its owner's hand. It perpetually gets +1/+1.\nSTATION 8+\nFlying\nWhenever Candela deals combat damage to a player, you may put a creature card with mana value 3 or less from your hand onto the battlefield.
