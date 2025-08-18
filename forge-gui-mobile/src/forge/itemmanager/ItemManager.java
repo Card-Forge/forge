@@ -74,7 +74,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private boolean viewUpdating, needSecondUpdate;
     private Supplier<List<ItemColumn>> sortCols = Suppliers.memoize(ArrayList::new);
     private final TextSearchFilter<? extends T> searchFilter;
-    private CardFormatFilter cardFormatFilter;
 
     private final FLabel btnSearch = new FLabel.ButtonBuilder()
             .icon(Forge.hdbuttons ? FSkinImage.HDSEARCH : FSkinImage.SEARCH).iconScaleFactor(0.9f).selectable().build();
@@ -368,10 +367,11 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             helper.fillLine(advancedSearchFilter.getWidget(), fieldHeight);
         }
         if (!hideFilters) {
-            for (ItemFilter<? extends T> filter : filters.get()) {
-                if (!Forge.isLandscapeMode() && filter instanceof CardTypeFilter)
-                    helper.newLine();
-                helper.include(filter.getWidget(), filter.getPreferredWidth(helper.getRemainingLineWidth(), fieldHeight), fieldHeight);
+            List<ItemFilter<? extends T>> filters = this.filters.get();
+            if(!tryConsolidateButtonFilters(filters, helper, fieldHeight)) {
+                for (ItemFilter<? extends T> filter : filters) {
+                    helper.include(filter.getWidget(), filter.getPreferredWidth(helper.getRemainingLineWidth(), fieldHeight), fieldHeight);
+                }
             }
             if (allowSortChange()) {
                 helper.fillLine(cbxSortOptions, fieldHeight);
@@ -384,6 +384,25 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             }
         }
         helper.fill(currentView.getScroller());
+    }
+
+    /**
+     * If the only available filters are button filters, try and put them both on one line.
+     * And if we can, stretch them across the line and squish them all proportionally rather than only the last item.
+     */
+    private boolean tryConsolidateButtonFilters(List<ItemFilter<? extends T>> filters, LayoutHelper helper, float fieldHeight) {
+        if(filters.size() < 2 || !filters.stream().allMatch(o -> o instanceof ToggleButtonsFilter<? extends T>))
+            return false;
+        float width = helper.getParentWidth();
+        double total = filters.stream().mapToDouble(i -> i.getPreferredWidth(width, fieldHeight)).sum();
+        total += helper.getGapX() * (filters.size() - 1);
+        if(total > width * 1.2 || total < width * 0.6)
+            return false;
+        for(ItemFilter<? extends T> filter : filters) {
+            double percent = filter.getPreferredWidth(width, fieldHeight) / total;
+            helper.include(filter.getWidget(), percent, fieldHeight);
+        }
+        return true;
     }
 
     public Class<T> getGenericType() {
@@ -637,25 +656,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         btnAdvancedSearchOptions.setEnabled(enable);
     }
 
-    public void setCatalogDisplay(boolean enable) {
-        if (cardFormatFilter == null)
-            return;
-        if (cardFormatFilter.getMainComponent() instanceof FComboBox<?>) {
-            if (!enable)
-                ((FComboBox<?>) cardFormatFilter.getMainComponent()).setSelectedIndex(0);
-            cardFormatFilter.getMainComponent().setEnabled(enable);
-        }
-    }
-
-    public int getCatalogSelectedIndex() {
-        if (cardFormatFilter == null)
-            return 0;
-        if (cardFormatFilter.getMainComponent() instanceof FComboBox<?>) {
-            return((FComboBox<?>) cardFormatFilter.getMainComponent()).getSelectedIndex();
-        }
-        return 0;
-    }
-
     public void scrollSelectionIntoView() {
         currentView.scrollSelectionIntoView();
     }
@@ -677,8 +677,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     public void addFilter(final ItemFilter<? extends T> filter) {
         filters.get().add(filter);
         add(filter.getWidget());
-        if (filter instanceof CardFormatFilter)
-            cardFormatFilter = (CardFormatFilter) filter;
 
         boolean visible = !hideFilters;
         filter.getWidget().setVisible(visible);
@@ -1134,13 +1132,15 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     }
 
     public float getPileByWidth() {
-        if (cbxSortOptions != null) {
-            return cbxSortOptions.getWidth();
-        }
         if (filters.get().isEmpty()) {
             return 0f;
         }
-        return filters.get().get(filters.get().size() - 1).getWidget().getWidth();
+        float preferredSize = filters.get().get(filters.get().size() - 1).getWidget().getWidth();
+        if (cbxSortOptions != null && Math.abs(1 - (cbxSortOptions.getWidth() / preferredSize)) < 0.25) {
+            //Match the size of the sort box if it's not too far off from what we'd prefer.
+            return cbxSortOptions.getWidth();
+        }
+        return preferredSize;
     }
 
     @Override
