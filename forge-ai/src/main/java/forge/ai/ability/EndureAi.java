@@ -1,14 +1,14 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Sets;
-
 import forge.ai.*;
-import forge.game.ability.AbilityUtils;
 import forge.game.Game;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.cost.CostPayLife;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -35,8 +35,7 @@ public class EndureAi extends SpellAbilityAi {
         }
 
         // Card-specific logic
-        String aiLogic = sa.getParamOrDefault("AILogic", "");
-        if ("EndureWithLife".equals(aiLogic)) {
+        if (sa.getPayCosts().hasSpecificCostType(CostPayLife.class)) {
             if (!aiPlayer.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
                 return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
             }
@@ -49,6 +48,8 @@ public class EndureAi extends SpellAbilityAi {
             int maxEndureX = Math.min(availableMana, curLife - dangerLife);
             if (maxEndureX > 0) {
                 sa.setXManaCostPaid(maxEndureX);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
             }
         }
 
