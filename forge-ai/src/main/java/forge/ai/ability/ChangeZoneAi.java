@@ -1594,7 +1594,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             } else if (logic.startsWith("ExilePreference")) {
                 return doExilePreferenceLogic(decider, sa, fetchList);
             } else if (logic.equals("BounceOwnTrigger")) {
-                return doBounceOwnTriggerLogic(decider, fetchList);
+                return doBounceOwnTriggerLogic(decider, sa, fetchList);
             }
         }
         if (fetchList.isEmpty()) {
@@ -2158,16 +2158,18 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return AiCardMemory.isRememberedCard(ai, c, AiCardMemory.MemorySet.BOUNCED_THIS_TURN);
     }
 
-    private static Card doBounceOwnTriggerLogic(Player ai, CardCollection choices) {
+    private static Card doBounceOwnTriggerLogic(Player ai, SpellAbility sa, CardCollection choices) {
         CardCollection unprefChoices = CardLists.filter(choices, c -> !c.isToken() && c.getOwner().equals(ai));
+        // TODO check for threatened cards
         CardCollection prefChoices = CardLists.filter(unprefChoices, c -> c.hasETBTrigger(false));
         if (!prefChoices.isEmpty()) {
             return ComputerUtilCard.getBestAI(prefChoices);
-        } else if (!unprefChoices.isEmpty()) {
-            return ComputerUtilCard.getWorstAI(unprefChoices);
-        } else {
-            return null;
         }
+        if (!unprefChoices.isEmpty() && sa.getSubAbility() != null) {
+            // some extra benefit like First Responder
+            return ComputerUtilCard.getWorstAI(unprefChoices);
+        }
+        return null;
     }
 
     @Override
