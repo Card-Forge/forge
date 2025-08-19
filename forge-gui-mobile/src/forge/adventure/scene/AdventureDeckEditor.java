@@ -403,6 +403,10 @@ public class AdventureDeckEditor extends FDeckEditor {
             if (!(parentScreen instanceof AdventureDeckEditor adventureEditor) || adventureEditor.getAutoSellPage() == null)
                 return;
             menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("btnCopyCollectionToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e1 -> FDeckViewer.copyCollectionToClipboard(AdventurePlayer.current().getCards())));
+            menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("btnAddExtrasToAutoSell"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e1 -> {
+                FDeckViewer.addExtrasToAutoSell();
+                refresh();
+            }));
             FMenuItem sellCurrentFilters = new FMenuItem(Forge.getLocalizer().getMessage("lblAutoSellCurrentFilters"), FSkinImage.QUEST_COINSTACK, e1 -> autoSellAllByFilter(adventureEditor.getAutoSellPage()));
             sellCurrentFilters.setTextColor(255, 0, 0);
             menu.addItem(sellCurrentFilters);
