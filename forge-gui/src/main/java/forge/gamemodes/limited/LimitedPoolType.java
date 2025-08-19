@@ -8,7 +8,8 @@ public enum LimitedPoolType {
     Prerelease(Localizer.getInstance().getMessage("lblLimitedPrerelease"), false),
     FantasyBlock(Localizer.getInstance().getMessage("lblLimitedFantasy")),
     Custom(Localizer.getInstance().getMessage("lblLimitedCustom")),
-    Chaos(Localizer.getInstance().getMessage("lblLimitedChaos"));
+    Chaos(Localizer.getInstance().getMessage("lblLimitedChaos")),
+    Import(Localizer.getInstance().getMessage("lblLimitedImportFromUrl"));
 
     private final String displayName;
     private final boolean draftable;

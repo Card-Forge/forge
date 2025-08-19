@@ -228,6 +228,37 @@ public class BoosterDraft implements IBoosterDraft {
                 }
                 break;
 
+            case Import:
+                /*
+                 * Import a cube from CubeCobra.
+                 * Default settings are 3 boosters with a size of 15 cards.
+                 */
+
+                String lastCubeId = FModel.getPreferences().getPref(ForgePreferences.FPref.LAST_IMPORTED_CUBE_ID);
+                String inputCubeId = SOptionPane.showInputDialog(
+                        Localizer.getInstance().getMessage("lblEnterCubeCobraURL") + ":",
+                        Localizer.getInstance().getMessage("lblImportCube"),
+                        null,
+                        lastCubeId);
+
+                if (inputCubeId == null) {
+                    return false;
+                }
+
+                try {
+                    CubeImporter importer = new CubeImporter(inputCubeId);
+                    CustomLimited importedDraft = importer.importCube();
+                    if (importedDraft == null) {
+                        SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblFailedToImportCube") + ": " + inputCubeId);
+                        return false;
+                    }
+                    this.setupCustomDraft(importedDraft);
+                } catch (Exception e) {
+                    SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblErrorImportingCube") + ": " + e.getMessage());
+                    return false;
+                }
+                break;
+
             default:
                 throw new NoSuchElementException("Draft for mode " + this.draftFormat + " has not been set up!");
         }

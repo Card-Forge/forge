@@ -7,7 +7,6 @@ import forge.card.RemoveType;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityFactory;
-import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -67,7 +66,7 @@ public class EarthbendEffect extends SpellAbilityEffect {
             buildTrigger(sa, c, sbTrigA, "Graveyard");
             buildTrigger(sa, c, sbTrigB, "Exile");
         }
-        game.getTriggerHandler().runTrigger(TriggerType.Earthbend, AbilityKey.mapFromPlayer(pl), false);
+        pl.triggerElementalBend(TriggerType.Earthbend);
     }
     
     protected void buildTrigger(SpellAbility sa, Card c, String sbTrig, String zone) {
