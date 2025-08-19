@@ -2,6 +2,7 @@ package forge.itemmanager;
 
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
+import forge.card.CardSplitType;
 import forge.card.CardRulesPredicates.LeafNumber;
 import forge.card.MagicColor;
 import forge.item.PaperCard;
@@ -302,7 +303,32 @@ public abstract class AdvancedSearchParser {
                         break;
                 }
                 break;
-        }
+
+            case "is":
+                if (opUsed.equals(":")) {
+                    switch(valueStr) {
+                        case "meld":
+                            predicate = CardRulesPredicates.isSplitType(CardSplitType.Meld);
+                            break;
+                        
+                        case "flip":
+                            predicate = CardRulesPredicates.isSplitType(CardSplitType.Flip);
+                            break;
+
+                        case "split":
+                            predicate = CardRulesPredicates.isSplitType(CardSplitType.Split);
+                            break;
+
+                        case "modal":
+                            predicate = CardRulesPredicates.isSplitType(CardSplitType.Modal);
+                            break;
+
+                        case "transform":
+                            predicate = CardRulesPredicates.isSplitType(CardSplitType.Transform);
+                            break;
+                    }
+                }
+                break;
 
         if (predicate == null) {
             return null;
