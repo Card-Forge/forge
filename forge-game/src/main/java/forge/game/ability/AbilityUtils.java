@@ -436,6 +436,9 @@ public class AbilityUtils {
             svarval = ability.getSVar(amount);
         }
         if (StringUtils.isBlank(svarval)) {
+            if (Set.of("Any", "Double", "Result", "Triple").contains(amount)) {
+                return 0;
+            }
             if ((ability != null) && (ability instanceof SpellAbility) && !(ability instanceof SpellPermanent)) {
                 System.err.printf("SVar '%s' not found in ability, fallback to Card (%s). Ability is (%s)%n", amount, card.getName(), ability);
             }
