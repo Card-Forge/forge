@@ -499,19 +499,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // Fetching should occur fairly often as it helps cast more spells, and
         // have access to more mana
 
-        if (sa.hasParam("AILogic")) {
-            if (sa.getParam("AILogic").equals("Never")) {
-                /*
-                 * Hack to stop AI from using Aviary Mechanic's "may bounce" trigger.
-                 * Ideally it should look for a good bounce target like "Pacifism"-victims
-                 * but there is no simple way to check that. It is preferable for the AI
-                 * to make sub-optimal choices (waste bounce) than to make obvious mistakes
-                 * (bounce useful permanent).
-                 */
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            }
-        }
-
         List<ZoneType> origin = new ArrayList<>();
         if (sa.hasParam("Origin")) {
             origin = ZoneType.listValueOf(sa.getParam("Origin"));
