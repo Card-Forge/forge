@@ -22,6 +22,6 @@ public class GameEventShuffle extends GameEvent {
      */
     @Override
     public String toString() {
-        return TextUtil.concatWithSpace(player.toString(), Lang.joinVerb(player.getName(), "shuffle"),"his/her/its library");
+        return TextUtil.concatWithSpace(player.toString(), Lang.joinVerb(player.getName(), "shuffle"), "their library");
     }
 }
