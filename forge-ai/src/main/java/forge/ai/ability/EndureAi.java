@@ -2,16 +2,14 @@ package forge.ai.ability;
 
 import com.google.common.collect.Sets;
 
-import forge.ai.AiAbilityDecision;
-import forge.ai.AiPlayDecision;
-import forge.ai.ComputerUtilCard;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.Game;
 import forge.game.card.*;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
@@ -34,6 +32,24 @@ public class EndureAi extends SpellAbilityAi {
 
             sa.resetTargets();
             sa.getTargets().add(bestCreature);
+        }
+
+        // Card-specific logic
+        String aiLogic = sa.getParamOrDefault("AILogic", "");
+        if ("EndureWithLife".equals(aiLogic)) {
+            if (!aiPlayer.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
+                return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
+            }
+            int curLife = aiPlayer.getLife();
+            int dangerLife = (((PlayerControllerAi) aiPlayer.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD));
+            if (curLife <= dangerLife) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
+            }
+            int availableMana = ComputerUtilMana.getAvailableManaEstimate(aiPlayer) - 1;
+            int maxEndureX = Math.min(availableMana, curLife - dangerLife);
+            if (maxEndureX > 0) {
+                sa.setXManaCostPaid(maxEndureX);
+            }
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
