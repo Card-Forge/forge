@@ -64,6 +64,8 @@ forge-gui-mobile-dev/**/Thumbs.db
 forge-gui-mobile-dev/res
 forge-gui-mobile-dev/testAssets
 
+forge-gui/src/main/resources/logging.properties
+
 forge-gui/res/cardsfolder/*.bat
 
 forge-gui/res/PerSetTrackingResults
