@@ -8,7 +8,7 @@ ScryfallCode=YEOE
 [cards]
 1 R Candela, Aegis of Adagia @Sergey Glushakov
 2 U Squadron Carrier @Sergey Glushakov
-3 M Stoic Star-Captain @Eelis Kyttanen
+3 R Stoic Star-Captain @Eelis Kyttanen
 4 U Thought Partition @Michele Giorgi
 5 R Cloudsculpt Armorer @Michele Giorgi
 6 U Hydroponics Architect @Joshua Cairos

@@ -266,7 +266,14 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         public void refresh() {
-            cardManager.setPool(Current.player().getSellableCards());
+            cardManager.setPool(getCardPool());
+        }
+
+        @Override
+        public ItemPool<PaperCard> getCardPool() {
+            ItemPool<PaperCard> pool = Current.player().getSellableCards();
+            pool.removeAll(Current.player().autoSellCards);
+            return pool;
         }
 
         public void sellAllByFilter() {
@@ -317,6 +324,13 @@ public class AdventureDeckEditor extends FDeckEditor {
             super.initialize();
             cardManager.setBtnAdvancedSearchOptions(true);
             scheduleRefresh();
+        }
+
+        @Override
+        public ItemPool<PaperCard> getCardPool() {
+            ItemPool<PaperCard> pool = super.getCardPool();
+            pool.removeAll(Current.player().autoSellCards);
+            return pool;
         }
 
         @Override
@@ -444,6 +458,12 @@ public class AdventureDeckEditor extends FDeckEditor {
             return Current.player().getAutoSellCards();
         }
 
+        @Override
+        public void refresh() {
+            super.refresh();
+            //Used when executing an auto-sell.
+            this.updateCaption();
+        }
 
         protected boolean isShop() {
             return parentScreen.getEditorConfig() instanceof ShopConfig;
@@ -637,10 +657,12 @@ public class AdventureDeckEditor extends FDeckEditor {
     public void refresh() {
         FThreads.invokeInBackgroundThread(() -> {
             for (TabPage<FDeckEditor> page : tabPages) {
-                if (page instanceof CatalogPage)
-                    ((CatalogPage) page).scheduleRefresh();
-                else if (page instanceof CardManagerPage)
-                    ((CardManagerPage) page).refresh();
+                if (page instanceof CollectionAutoSellPage p)
+                    p.refresh();
+                else if (page instanceof CatalogPage p)
+                    p.scheduleRefresh();
+                else if (page instanceof CardManagerPage p)
+                    p.refresh();
             }
         });
     }
