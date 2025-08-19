@@ -1,0 +1,6 @@
+Name:Hog-Monkey Rampage
+ManaCost:1 RG
+Types:Instant
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | ConditionDefined$ Targeted | ConditionPresent$ Creature.powerGE4 | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ Fight | SubAbility$ DBFight | SpellDescription$ Choose target creature you control and target creature you don't control. Put a +1/+1 counter on the creature you control if it has power 4 or greater. Then those creatures fight each other. (Each deals damage equal to its power to the other.)
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control
+Oracle:Choose target creature you control and target creature you don't control. Put a +1/+1 counter on the creature you control if it has power 4 or greater. Then those creatures fight each other. (Each deals damage equal to its power to the other.)

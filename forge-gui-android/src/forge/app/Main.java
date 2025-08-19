@@ -63,6 +63,9 @@ import forge.Forge;
 import forge.interfaces.IDeviceAdapter;
 import forge.util.FileUtil;
 import forge.util.ThreadUtil;
+import io.sentry.Sentry;
+import io.sentry.protocol.Device;
+import io.sentry.protocol.OperatingSystem;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jupnp.DefaultUpnpServiceConfiguration;
 import org.jupnp.android.AndroidUpnpServiceConfiguration;
@@ -89,6 +92,26 @@ public class Main extends AndroidApplication {
     private ProgressBar progressBar;
     private TextView progressText;
     private String versionString;
+
+    // The package name the resources are compiled under (stable across dev/prod).
+    // If you ever change the base app package, update this constant once.
+    private static final String RES_PKG_FALLBACK = "forge.app";
+
+    private int resId(String type, String name) {
+        // 1) Try fully-qualified with *runtime* package
+        int id = getResources().getIdentifier(name, type, getPackageName());
+        if (id != 0) return id;
+
+        // 2) Try fully-qualified with *fallback* resource package
+        if (!RES_PKG_FALLBACK.equals(getPackageName())) {
+            id = getResources().getIdentifier(name, type, RES_PKG_FALLBACK);
+            if (id != 0) return id;
+        }
+
+        android.util.Log.e("ForgeRes", "Missing resource " + type + "/" + name +
+                " for pkg=" + getPackageName() + " (also tried " + RES_PKG_FALLBACK + ")");
+        return 0;
+    }
 
     private AndroidClipboard getAndroidClipboard() {
         if (androidClipboard == null)
@@ -148,13 +171,13 @@ public class Main extends AndroidApplication {
         } catch (Exception e) {
             versionString = "0.0";
         }
-        setContentView(getResources().getIdentifier("main", "layout", getPackageName()));
+        setContentView(resId("layout", "main"));
         mShortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
         sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-        progressBar = findViewById(getResources().getIdentifier("pBar", "id", getPackageName()));
+        progressBar = findViewById(resId("id", "pBar"));
         progressBar.setIndeterminate(true);
         progressBar.setVisibility(View.GONE);
-        progressText = findViewById(getResources().getIdentifier("pText", "id", getPackageName()));
+        progressText = findViewById(resId("id", "pText"));
         progressText.setVisibility(View.GONE);
 
         isMIUI = isMiUi();
@@ -171,6 +194,28 @@ public class Main extends AndroidApplication {
 
         boolean permissiongranted = checkPermission();
         Gadapter = new AndroidAdapter(getContext());
+
+        // Get Basic Device and OS info for scope
+        Sentry.configureScope(scope -> {
+            // Device Info
+            Device device = new Device();
+            device.setId(Build.ID);
+            device.setName(getDeviceName());
+            device.setModel(Build.MODEL);
+            device.setBrand(Build.BRAND);
+            device.setManufacturer(Build.MANUFACTURER);
+            device.setMemorySize(memInfo.totalMem);
+            device.setChipset(Build.SOC_MANUFACTURER + " " + Build.SOC_MODEL);
+            // OS Info
+            OperatingSystem os = new OperatingSystem();
+            os.setName("Android");
+            os.setVersion(Build.VERSION.RELEASE);
+            os.setBuild(Build.DISPLAY);
+            // Set Contexts
+            scope.getContexts().setDevice(device);
+            scope.getContexts().setOperatingSystem(os);
+        });
+
         initForge(Gadapter, permissiongranted, totalMemory, isTabletDevice(getContext()));
     }
 
@@ -308,8 +353,8 @@ public class Main extends AndroidApplication {
     private void loadGame(final String title, final String steps, boolean isLandscape, AndroidAdapter adapter, boolean permissiongranted, int totalRAM, boolean isTabletDevice, AndroidApplicationConfiguration config, boolean exception, String msg) {
         try {
             final Handler handler = new Handler();
-            forgeLogo = findViewById(getResources().getIdentifier("logo_id", "id", getPackageName()));
-            activeView = findViewById(getResources().getIdentifier("mainview", "id", getPackageName()));
+            forgeLogo = findViewById(resId("id", "logo_id"));
+            activeView = findViewById(resId("id", "mainview"));
             activeView.setBackgroundColor(Color.WHITE);
             forgeView = initializeForView(Forge.getApp(getAndroidClipboard(), adapter, ASSETS_DIR, false, !isLandscape, totalRAM, isTabletDevice, Build.VERSION.SDK_INT, Build.VERSION.RELEASE, getDeviceName()), config);
 

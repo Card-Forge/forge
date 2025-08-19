@@ -15,7 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class GameLauncher {
-    public GameLauncher(final String versionString) {
+    public GameLauncher(final String versionString, final String[] args) {
         String assetsDir = Files.exists(Paths.get("./res")) ? "./" : "../forge-gui/";
 
         // Place the file "switch_orientation.ini" to your assets folder to make the game switch to landscape orientation (unless desktopMode = true)
@@ -29,12 +29,22 @@ public class GameLauncher {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         ApplicationListener start = Forge.getApp(new Lwjgl3Clipboard(), new Main.DesktopAdapter(switchOrientationFile),//todo get totalRAM && isTabletDevice
                 assetsDir, false, false, 0, false, 0, "", "");
+
+        int windowWidth = Config.instance().getSettingData().width;
+        int windowHeight = Config.instance().getSettingData().height;
+        for(String arg : args) {
+            if(arg.startsWith("width="))
+                windowWidth = Integer.parseInt(arg.substring(6));
+            if(arg.startsWith("height="))
+                windowHeight = Integer.parseInt(arg.substring(7));
+        }
+
         if (Config.instance().getSettingData().fullScreen) {
             config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
             config.setAutoIconify(true);
             config.setHdpiMode(HdpiMode.Logical);
         } else {
-            config.setWindowedMode(Config.instance().getSettingData().width, Config.instance().getSettingData().height);
+            config.setWindowedMode(windowWidth, windowHeight);
             config.setResizable(false);
         }
         config.setTitle("Forge - " + versionString);

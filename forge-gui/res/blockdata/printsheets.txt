@@ -7444,8 +7444,8 @@ Gandalf the White|LTR
 1 Reckless Amplimancer|J25
 1 Defend the Celestus|J25
 1 Snakeskin Veil|J25
-1 Cultivate|J25
-1 Declare Dominance|J25
+1 Cultivate|J22
+1 Declare Dominance|J22
 1 Audacity|J25
 1 Warbriar Blessing|J25
 1 Wolfrider's Saddle|J25

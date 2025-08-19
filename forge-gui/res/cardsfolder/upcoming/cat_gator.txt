@@ -1,0 +1,9 @@
+Name:Cat-Gator
+ManaCost:6 B
+Types:Creature Fish Crocodile
+PT:3/2
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ When this creature enters, it deals damage equal to the number of Swamps you control to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
+SVar:X:Count$Valid Swamp.YouCtrl
+Oracle:Lifelink\nWhen this creature enters, it deals damage equal to the number of Swamps you control to any target.

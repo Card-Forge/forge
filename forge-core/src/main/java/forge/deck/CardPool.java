@@ -37,7 +37,6 @@ import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 public class CardPool extends ItemPool<PaperCard> {
     private static final long serialVersionUID = -5379091255613968393L;
 
@@ -419,6 +418,12 @@ public class CardPool extends ItemPool<PaperCard> {
         return pool;
     }
 
+    public static CardPool fromSingleCardRequest(String cardRequest) {
+        if(StringUtils.isBlank(cardRequest))
+            return new CardPool();
+        return fromCardList(List.of(cardRequest));
+    }
+
     public static List<Pair<String, Integer>> processCardList(final Iterable<String> lines) {
         List<Pair<String, Integer>> cardRequests = new ArrayList<>();
         if (lines == null)
@@ -468,6 +473,7 @@ public class CardPool extends ItemPool<PaperCard> {
      * @param predicate the Predicate to apply to this CardPool
      * @return a new CardPool made from this CardPool with only the cards that agree with the provided Predicate
      */
+    @Override
     public CardPool getFilteredPool(Predicate<PaperCard> predicate) {
         CardPool filteredPool = new CardPool();
         for (PaperCard c : this.items.keySet()) {

@@ -1,0 +1,11 @@
+Name:The Cabbage Merchant
+ManaCost:2 G
+Types:Legendary Creature Human Citizen
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ DBToken | TriggerDescription$ Whenever an opponent casts a noncreature spell, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+T:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ You | CombatDamage$ True | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature deals combat damage to you, sacrifice a Food token.
+SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Food.token | SacMessage$ Food token
+A:AB$ Mana | Cost$ tapXType<2/Food> | Produced$ Any | SpellDescription$ Add one mana of any color.
+DeckHas:Ability$Token
+Oracle:Whenever an opponent casts a noncreature spell, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")\nWhenever a creature deals combat damage to you, sacrifice a Food token.\nTap two untapped Foods you control: Add one mana of any color.
