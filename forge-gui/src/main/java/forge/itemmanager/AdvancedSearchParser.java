@@ -329,6 +329,7 @@ public abstract class AdvancedSearchParser {
                     }
                 }
                 break;
+        }
 
         if (predicate == null) {
             return null;
