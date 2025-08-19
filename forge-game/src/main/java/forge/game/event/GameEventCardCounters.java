@@ -20,4 +20,12 @@ public class GameEventCardCounters extends GameEvent {
     public <T> T visit(IGameEventVisitor<T> visitor) {
         return visitor.visit(this);
     }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "" + card + " " + type + " counters: " + oldValue + " -> " + newValue;
+    }
 }
