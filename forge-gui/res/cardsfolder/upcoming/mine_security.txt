@@ -1,0 +1,11 @@
+Name:Mine Security
+ManaCost:1 R
+Types:Creature Kavu Soldier
+PT:3/1
+K:Trample
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigConjure | TriggerDescription$ When this creature enters, conjure a card named Flametongue Kavu into the top eight cards of your library at random. It perpetually gains "You may pay {0} rather than pay this spell's mana cost."
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Flametongue Kavu | Zone$ Library | LibraryPosition$ Count$Random.0.8 | RememberMade$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | staticAbilities$ FreeCast | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:FreeCast:Mode$ Continuous | MayPlay$ True | MayPlayAltManaCost$ 0 | MayPlayDontGrantZonePermissions$ True | Affected$ Card.Self | AffectedZone$ Hand,Graveyard,Exile,Library,Command | EffectZone$ All | Description$ You may pay {0} rather than pay this spell's mana cost.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Trample\nWhen this creature enters, conjure a card named Flametongue Kavu into the top eight cards of your library at random. It perpetually gains "You may pay {0} rather than pay this spell's mana cost."
