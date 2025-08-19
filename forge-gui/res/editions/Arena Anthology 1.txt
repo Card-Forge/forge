@@ -7,7 +7,7 @@ ScryfallCode=AA1
 
 [cards]
 1 U Azorius Signet @Raoul Vitale
-2 U Boros Signet @Ron Spears
+2 U Boros Signet @Greg Hildebrandt
 3 R Champion's Helm @Alan Pollack
 4 R Darksteel Plate @Daniel Ljunggren
 5 U Dimir Signet @Greg Hildebrandt

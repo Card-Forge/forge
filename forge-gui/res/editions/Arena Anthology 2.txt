@@ -20,9 +20,9 @@ ScryfallCode=AA2
 12 R Pyrogoyf @Xabi Gaztelua
 13 U Eternal Witness @Chris Rahn
 14 R Ignoble Hierarch @Mark Zug
-15 U Life // Death @Anthony S. Waters & Scott Murphy
-16 R Rofellos, Llanowar Emissary @Michael Sutfin
-17 M Grist, the Hunger Tide @Yongjae Choi
+15 R Rofellos, Llanowar Emissary @Michael Sutfin
+16 M Grist, the Hunger Tide @Yongjae Choi
+17 U Life // Death @Anthony S. Waters & Scott Murphy
 18 M Wrenn and Six @Chase Stone
 19 R Currency Converter @Sean Murray
 20 M Mox Opal @Volkan Baǵa
