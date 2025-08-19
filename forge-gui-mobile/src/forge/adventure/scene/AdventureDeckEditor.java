@@ -47,7 +47,6 @@ public class AdventureDeckEditor extends FDeckEditor {
         @Override public DeckFormat getDeckFormat() { return DeckFormat.Adventure; }
         @Override protected IDeckController getController() { return ADVENTURE_DECK_CONTROLLER; }
         @Override public boolean usePlayerInventory() { return true; }
-        @Override public boolean allowsCardReplacement() { return true; }
 
         @Override
         protected DeckEditorPage[] getInitialPages() {
@@ -267,7 +266,14 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         public void refresh() {
-            cardManager.setPool(Current.player().getSellableCards());
+            cardManager.setPool(getCardPool());
+        }
+
+        @Override
+        public ItemPool<PaperCard> getCardPool() {
+            ItemPool<PaperCard> pool = Current.player().getSellableCards();
+            pool.removeAll(Current.player().autoSellCards);
+            return pool;
         }
 
         public void sellAllByFilter() {
@@ -317,8 +323,14 @@ public class AdventureDeckEditor extends FDeckEditor {
         protected void initialize() {
             super.initialize();
             cardManager.setBtnAdvancedSearchOptions(true);
-            cardManager.setCatalogDisplay(true);
             scheduleRefresh();
+        }
+
+        @Override
+        public ItemPool<PaperCard> getCardPool() {
+            ItemPool<PaperCard> pool = super.getCardPool();
+            pool.removeAll(Current.player().autoSellCards);
+            return pool;
         }
 
         @Override
@@ -435,7 +447,6 @@ public class AdventureDeckEditor extends FDeckEditor {
         protected void initialize() {
             super.initialize();
             cardManager.setBtnAdvancedSearchOptions(true);
-            cardManager.setCatalogDisplay(true);
             cardManager.setPool(getCardPool(), false); //Need to update this early for the caption.
             this.updateCaption();
         }
@@ -447,6 +458,12 @@ public class AdventureDeckEditor extends FDeckEditor {
             return Current.player().getAutoSellCards();
         }
 
+        @Override
+        public void refresh() {
+            super.refresh();
+            //Used when executing an auto-sell.
+            this.updateCaption();
+        }
 
         protected boolean isShop() {
             return parentScreen.getEditorConfig() instanceof ShopConfig;
@@ -640,10 +657,12 @@ public class AdventureDeckEditor extends FDeckEditor {
     public void refresh() {
         FThreads.invokeInBackgroundThread(() -> {
             for (TabPage<FDeckEditor> page : tabPages) {
-                if (page instanceof CatalogPage)
-                    ((CatalogPage) page).scheduleRefresh();
-                else if (page instanceof CardManagerPage)
-                    ((CardManagerPage) page).refresh();
+                if (page instanceof CollectionAutoSellPage p)
+                    p.refresh();
+                else if (page instanceof CatalogPage p)
+                    p.scheduleRefresh();
+                else if (page instanceof CardManagerPage p)
+                    p.refresh();
             }
         });
     }
@@ -692,8 +711,11 @@ public class AdventureDeckEditor extends FDeckEditor {
                     FMenuItem addBasic = new FMenuItem(localizer.getMessage("lblAddBasicLands"), FSkinImage.LANDLOGO, e1 -> showAddBasicLandsDialog());
                     addItem(addBasic);
                 }
-                if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.DEV_MODE_ENABLED))
+                if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.DEV_MODE_ENABLED)) {
                     addItem(new FCheckBoxMenuItem(localizer.getMessage("cbEnforceDeckLegality"), shouldEnforceConformity(), e -> toggleConformity()));
+                    String devSuffix = " (" + localizer.getMessage("lblDev") + ")";
+                    addItem(new FMenuItem(localizer.getMessage("lblAddcard") + devSuffix, FSkinImage.HDPLUS, e -> showDevAddCardDialog()));
+                }
                 ((DeckEditorPage) getSelectedPage()).buildDeckMenu(this);
             }
         };
@@ -836,6 +858,16 @@ public class AdventureDeckEditor extends FDeckEditor {
             canCloseCallback.run(result);
     }
 
+    @Override
+    protected void devAddCards(CardPool cards) {
+        if(!getEditorConfig().usePlayerInventory()) {
+            //Drafting.
+            super.devAddCards(cards);
+            return;
+        }
+        Current.player().addCards(cards);
+        getCatalogPage().scheduleRefresh();
+    }
 
     protected static class AdventureCardManager extends CardManager {
 
@@ -932,7 +964,6 @@ public class AdventureDeckEditor extends FDeckEditor {
         protected AdventureDeckSectionPage(DeckSection deckSection, ItemManagerConfig config) {
             super(new AdventureCardManager(), deckSection, config, deckSection.getLocalizedShortName(), iconFromDeckSection(deckSection));
             cardManager.setBtnAdvancedSearchOptions(deckSection == DeckSection.Main);
-            cardManager.setCatalogDisplay(false);
         }
     }
 

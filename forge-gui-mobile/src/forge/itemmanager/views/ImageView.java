@@ -413,8 +413,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         btnExpandCollapseAll.setBounds(x, y, h, h);
         x += h + padding;
 
-        float pileByWidth = itemManager.getPileByWidth();
-        float groupByWidth = width - x - padding - pileByWidth;
+        // hide piles only for deckmanager since its unusable unlike group
+        float newWidth = itemManager instanceof DeckManager ? 0f : width / 2f;
+        float pileByWidth = newWidth - padding;
+        float groupByWidth = width - x - newWidth;
 
         cbGroupByOptions.setBounds(x, y, groupByWidth, h);
         x += groupByWidth + padding;

@@ -14,14 +14,17 @@ import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
 import io.sentry.Breadcrumb;
@@ -273,6 +276,9 @@ public class ManaEffect extends SpellAbilityEffect {
 
         // Only clear express choice after mana has been produced
         abMana.clearExpressChoice();
+        if (sa.isKeyword(Keyword.FIREBENDING)) {
+            game.getTriggerHandler().runTrigger(TriggerType.Firebend, AbilityKey.mapFromPlayer(activator), false);
+        }
     }
 
     /**

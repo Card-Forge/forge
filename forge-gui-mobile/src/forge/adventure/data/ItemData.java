@@ -67,9 +67,9 @@ public class ItemData {
         return itemList;
     }
     public static ItemData getItem(String name) {
-        for(ItemData data: new Array.ArrayIterator<>(getAllItems()))
+        for(ItemData data : new Array.ArrayIterator<>(getAllItems()))
         {
-            if(data.name.equals(name))
+            if(data.name.equalsIgnoreCase(name))
                 return data;
         }
         return null;

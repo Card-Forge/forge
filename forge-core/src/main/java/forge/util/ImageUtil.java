@@ -231,22 +231,34 @@ public class ImageUtil {
         }
         String versionParam = useArtCrop ? "art_crop" : "normal";
         String faceParam = "";
-        if (cp.getRules().getOtherPart() != null) {
+
+        if (cp.getRules().getSplitType() == CardSplitType.Meld) {
+            if (face.equals("back")) {
+                PaperCard meldBasePc = cp.getMeldBaseCard();
+                cardCollectorNumber = meldBasePc.getCollectorNumber();
+                String collectorNumberSuffix = "";
+
+                if (cardCollectorNumber.endsWith("a")) {
+                    cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 1);
+                } else if (cardCollectorNumber.endsWith("as")) {
+                    cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 2);
+                    collectorNumberSuffix = "s";
+                } else if (cardCollectorNumber.endsWith("ap")) {
+                    cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 2);
+                    collectorNumberSuffix = "p";
+                } else if (cp.getCollectorNumber().endsWith("a")) {
+                    // SIR
+                    cardCollectorNumber = cp.getCollectorNumber().substring(0, cp.getCollectorNumber().length() - 1);
+                }
+
+                cardCollectorNumber += "b" + collectorNumberSuffix;
+            }
+
+            faceParam = "&face=front";
+        } else if (cp.getRules().getOtherPart() != null) {
             faceParam = (face.equals("back") && cp.getRules().getSplitType() != CardSplitType.Flip
                     ? "&face=back"
                     : "&face=front");
-        } else if (cp.getRules().getSplitType() == CardSplitType.Meld
-                    && !cardCollectorNumber.endsWith("a")
-                    && !cardCollectorNumber.endsWith("b")) {
-
-                // Only the bottom half of a meld card shares a collector number.
-                // Hanweir Garrison EMN already has a appended.
-                // Exception: The front facing card doesn't use a in FIN
-                if (face.equals("back")) {
-                    cardCollectorNumber += "b";
-                } else if (!editionCode.equals("fin")) {
-                    cardCollectorNumber += "a";
-                }
         }
 
         return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, encodeUtf8(cardCollectorNumber),
