@@ -1,0 +1,7 @@
+Name:Loyal Fire Sage
+ManaCost:2 R
+Types:Creature Human Cleric Ally
+PT:3/3
+K:Firebending:1
+A:AB$ Token | Cost$ 5 | TokenAmount$ 1 | TokenScript$ w_1_1_ally | SpellDescription$ Create a 1/1 white Ally creature token.
+Oracle:Firebending 1 (Whenever this creature attacks, add {R}. This mana lasts until end of combat.)\n{5}: Create a 1/1 white Ally creature token.

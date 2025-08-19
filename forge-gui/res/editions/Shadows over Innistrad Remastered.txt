@@ -170,7 +170,7 @@ ScryfallCode=SIR
 158 C Gatstaf Arsonists @Greg Staples
 159 U Geier Reach Bandit @Slawomir Maniak
 160 M Goldnight Castigator @Zack Stella
-161 R Hanweir Garrison @Vincent Proce
+161a R Hanweir Garrison @Vincent Proce
 162 C Howlpack Wolf @Svetlin Velinov
 163 C Incendiary Flow @Raymond Swanland
 164 C Insatiable Gorgers @Nils Hamm

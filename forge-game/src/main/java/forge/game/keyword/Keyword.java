@@ -81,6 +81,7 @@ public enum Keyword {
     FABRICATE("Fabricate", KeywordWithAmount.class, false, "When this creature enters, put {%1$d:+1/+1 counter} on it, or create {%1$d:1/1 colorless Servo artifact creature token}."),
     FADING("Fading", KeywordWithAmount.class, false, "This permanent enters with {%d:fade counter} on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it."),
     FEAR("Fear", SimpleKeyword.class, true, "This creature can't be blocked except by artifact creatures and/or black creatures."),
+    FIREBENDING("Firebending", Firebending.class, false, "Whenever this creature attacks, add %s. This mana lasts until end of combat."),
     FIRST_STRIKE("First Strike", SimpleKeyword.class, true, "This creature deals combat damage before creatures without first strike."),
     FLANKING("Flanking", SimpleKeyword.class, false, "Whenever this creature becomes blocked by a creature without flanking, the blocking creature gets -1/-1 until end of turn."),
     FLASH("Flash", SimpleKeyword.class, true, "You may cast this spell any time you could cast an instant."),
