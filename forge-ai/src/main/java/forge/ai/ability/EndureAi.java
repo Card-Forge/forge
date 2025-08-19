@@ -35,7 +35,8 @@ public class EndureAi extends SpellAbilityAi {
         }
 
         // Card-specific logic
-        if (sa.getPayCosts().hasSpecificCostType(CostPayLife.class)) {
+        final String num = sa.getParamOrDefault("Num", "1");
+        if ("X".equals(num) && sa.getPayCosts().hasSpecificCostType(CostPayLife.class)) {
             if (!aiPlayer.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
                 return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
             }
