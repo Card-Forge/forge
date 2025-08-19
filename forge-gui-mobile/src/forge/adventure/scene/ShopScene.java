@@ -11,6 +11,7 @@ import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
+import forge.util.ItemPool;
 
 /**
  * DeckEditScene
@@ -79,7 +80,9 @@ public class ShopScene extends ForgeScene {
     }
 
     private void doAutosell() {
-        AdventurePlayer.current().doBulkSell(AdventurePlayer.current().autoSellCards);
+        ItemPool<PaperCard> autoSellCards = AdventurePlayer.current().autoSellCards;
+        AdventurePlayer.current().doBulkSell(autoSellCards);
+        autoSellCards.clear();
         if (screen != null)
             screen.refresh();
     }
