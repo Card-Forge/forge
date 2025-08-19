@@ -239,15 +239,16 @@ public class ImageUtil {
 
                 if (cardCollectorNumber.endsWith("a")) {
                     cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 1);
+                    collectorNumberSuffix = "b";
                 } else if (cardCollectorNumber.endsWith("as")) {
                     cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 2);
-                    collectorNumberSuffix = "s";
+                    collectorNumberSuffix = "bs";
                 } else if (cardCollectorNumber.endsWith("ap")) {
                     cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 2);
-                    collectorNumberSuffix = "p";
+                    collectorNumberSuffix = "bp";
                 }
 
-                cardCollectorNumber += "b" + collectorNumberSuffix;
+                cardCollectorNumber += collectorNumberSuffix;
             }
 
             faceParam = "&face=front";
