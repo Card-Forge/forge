@@ -1,0 +1,7 @@
+Name:Soldier Token
+ManaCost:no cost
+Colors:red
+Types:Creature Soldier
+PT:2/2
+K:Firebending:1
+Oracle:Firebending 1 (Whenever this token attacks, add {R}. This mana lasts until end of combat.)
