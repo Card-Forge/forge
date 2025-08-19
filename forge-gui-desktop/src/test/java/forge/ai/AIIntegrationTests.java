@@ -1,12 +1,10 @@
 package forge.ai;
 
 import forge.game.Game;
-import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import org.testng.AssertJUnit;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 public class AIIntegrationTests extends AITest {
