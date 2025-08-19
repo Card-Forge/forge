@@ -18,6 +18,7 @@
 package forge.gamemodes.limited;
 
 import forge.card.CardEdition;
+import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.item.PaperCard;
@@ -159,6 +160,14 @@ public class CustomLimited extends DeckBase {
         return this.cardPool;
     }
 
+    /**
+     * Sets the card pool.
+     *
+     * @param cardPoolIn
+     *            the cardPool to set
+     */
+    public void setCardPool(CardPool cardPoolIn) { this.cardPool = cardPoolIn; }
+
     /*
      * (non-Javadoc)
      * 
@@ -181,8 +190,18 @@ public class CustomLimited extends DeckBase {
         return singleton;
     }
 
+    public void setSingleton(boolean bIn) { this.singleton = bIn; }
+
     public String getCustomRankingsFileName() {
         return customRankingsFile;
+    }
+
+    public void setCustomRankingsFile(String fileName) {
+        if (fileName == null) {
+            // Default to a known fileName if none is specified
+            fileName = "rankings_cubecobra.txt";
+        }
+        this.customRankingsFile = fileName;
     }
 
     @Override

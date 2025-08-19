@@ -19,6 +19,11 @@ public class SealedTemplate {
             Pair.of(BoosterSlots.RARE_MYTHIC, 1), Pair.of(BoosterSlots.BASIC_LAND, 1)
     ));
 
+    // This is a generic cube booster. 15 cards, no rarity slots.
+    public final static SealedTemplate genericNoSlotBooster = new SealedTemplate(null, Lists.newArrayList(
+            Pair.of(BoosterSlots.ANY, 15)
+    ));
+
     protected final List<Pair<String, Integer>> slots;
 
     protected final String name;
