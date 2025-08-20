@@ -157,9 +157,3 @@ ScryfallCode=LGN
 143 R Vexing Beetle @Matt Thompson
 144 U Wirewood Channeler @Alan Pollack
 145 U Wirewood Hivemaster @Darrell Riche
-
-[tokens]
-c_1_1_sliver
-r_1_1_goblin
-g_2_2_bear
-g_1_1_insect
