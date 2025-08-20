@@ -148,16 +148,6 @@ public class Forge implements ApplicationListener {
                     scope.getContexts().setDevice(hwInfo.device());
                     scope.getContexts().setOperatingSystem(hwInfo.os());
                 });
-                //init hwInfo to log
-                System.out.println(
-                    "---------------------------------------\n" +
-                    "APP: Forge v." + GuiBase.getInterface().getCurrentVersion() + " (" + GuiBase.getInterface() + ")" +
-                    "\nDEV: " + hwInfo.device().getName() +
-                    "\nCPU: " + hwInfo.device().getCpuDescription() +
-                    "\nRAM: " + totalRAM + " MB" +
-                    "\nOS: " + hwInfo.os().getName() +
-                    "\n---------------------------------------"
-                );
             }
             GuiBase.setDeviceInfo(hwInfo, AndroidAPI, totalRAM);
         }
@@ -179,6 +169,21 @@ public class Forge implements ApplicationListener {
     public void create() {
         //install our error handler
         ExceptionHandler.registerErrorHandling();
+        //init hwInfo to log
+        Gdx.app.postRunnable(() -> {
+            HWInfo info = GuiBase.getHWInfo();
+            if (info != null) {
+                System.out.println(
+                    "---------------------------------------\n" +
+                    "APP: Forge v." + GuiBase.getInterface().getCurrentVersion() + " (" + GuiBase.getInterface() + ")" +
+                    "\nDEV: " + info.device().getName() +
+                    "\nCPU: " + info.device().getCpuDescription() +
+                    "\nRAM: " + GuiBase.getDeviceRAM() + " MB" +
+                    "\nOS: " + info.os().getName() +
+                    "\n---------------------------------------"
+                );
+            }
+        });
         // closeSplashScreen() is called early on non-Windows OS so it will not crash, LWJGL3 bug on AWT Splash.
         if (OperatingSystem.isWindows())
             getDeviceAdapter().closeSplashScreen();
