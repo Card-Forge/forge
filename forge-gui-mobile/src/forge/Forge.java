@@ -47,6 +47,8 @@ import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.*;
 import forge.util.*;
+import io.sentry.ScopeType;
+import io.sentry.Sentry;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -126,13 +128,14 @@ public class Forge implements ApplicationListener {
     public static boolean createNewAdventureMap = false;
     private static Localizer localizer;
 
-    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean propertyConfig, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
+    public static ApplicationListener getApp(HWInfo hwInfo, Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean propertyConfig, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI) {
         if (app == null) {
             app = new Forge();
             if (GuiBase.getInterface() == null) {
                 clipboard = clipboard0;
                 deviceAdapter = deviceAdapter0;
-                GuiBase.setUsingAppDirectory(assetDir0.contains("forge.app")); //obb directory on android uses the package name as entrypoint
+                //obb directory on android uses the package name as entrypoint
+                GuiBase.setUsingAppDirectory(assetDir0.contains("forge.app"));
                 GuiBase.setInterface(new GuiMobile(assetDir0));
                 GuiBase.enablePropertyConfig(propertyConfig);
                 isPortraitMode = androidOrientation;
@@ -140,7 +143,20 @@ public class Forge implements ApplicationListener {
                 isTabletDevice = isTablet;
                 androidVersion = AndroidAPI;
             }
-            GuiBase.setDeviceInfo(deviceName, AndroidRelease, AndroidAPI, totalRAM);
+            if (hwInfo != null) {
+                Sentry.configureScope(ScopeType.GLOBAL, scope -> {
+                    scope.getContexts().setDevice(hwInfo.device());
+                    scope.getContexts().setOperatingSystem(hwInfo.os());
+                });
+                //init hwInfo to log
+                System.out.println(
+                    "---------------------------------------\n" + "APP: Forge v." + GuiBase.getInterface().getCurrentVersion() +
+                    " (" + GuiBase.getInterface() + ")" + "\nDEV: " + hwInfo.device().getName() +
+                    "\nCPU: " + hwInfo.device().getCpuDescription() + "\nRAM: " + totalRAM + " MB" + "\nOS: " + hwInfo.os().getName() +
+                    "\n---------------------------------------"
+                );
+            }
+            GuiBase.setDeviceInfo(hwInfo, AndroidAPI, totalRAM);
         }
         return app;
     }
