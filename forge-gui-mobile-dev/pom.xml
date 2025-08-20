@@ -239,5 +239,10 @@
             <version>1.13.5</version>
             <classifier>natives-desktop</classifier>
         </dependency>
+        <dependency>
+            <groupId>com.github.oshi</groupId>
+            <artifactId>oshi-core</artifactId>
+            <version>6.8.3</version>
+        </dependency>
     </dependencies>
 </project>
