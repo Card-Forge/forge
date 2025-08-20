@@ -7,9 +7,13 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3WindowAdapter;
 import com.badlogic.gdx.graphics.glutils.HdpiMode;
 import com.badlogic.gdx.utils.SharedLibraryLoader;
+import forge.util.HWInfo;
 import forge.Forge;
 import forge.adventure.util.Config;
+import io.sentry.protocol.Device;
+import io.sentry.protocol.OperatingSystem;
 import org.lwjgl.system.Configuration;
+import oshi.SystemInfo;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -27,8 +31,31 @@ public class GameLauncher {
         //increase MemoryStack to 1MB, default is 64kb
         Configuration.STACK_SIZE.set(1024);
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-        ApplicationListener start = Forge.getApp(new Lwjgl3Clipboard(), new Main.DesktopAdapter(switchOrientationFile),//todo get totalRAM && isTabletDevice
-                assetsDir, false, false, 0, false, 0, "", "");
+        HWInfo hw = null;
+        int totalRAM = 0;
+        try {
+            SystemInfo si = new SystemInfo();
+            // Device Info
+            Device device = new Device();
+            device.setId(si.getHardware().getComputerSystem().getHardwareUUID());
+            device.setName(si.getHardware().getComputerSystem().getManufacturer() + " - " + si.getHardware().getComputerSystem().getModel());
+            device.setModel(si.getHardware().getComputerSystem().getModel());
+            device.setManufacturer(si.getHardware().getComputerSystem().getManufacturer());
+            device.setMemorySize(si.getHardware().getMemory().getTotal());
+            device.setChipset(si.getHardware().getComputerSystem().getBaseboard().getManufacturer() + " " + si.getHardware().getComputerSystem().getBaseboard().getModel());
+            device.setCpuDescription(si.getHardware().getProcessor().getProcessorIdentifier().getName());
+            // OS Info
+            OperatingSystem os = new OperatingSystem();
+            os.setName(si.getOperatingSystem() + " x" + si.getOperatingSystem().getBitness());
+            os.setVersion(si.getOperatingSystem().getVersionInfo().getVersion());
+            os.setBuild(si.getOperatingSystem().getVersionInfo().getBuildNumber());
+            totalRAM = Math.round(si.getHardware().getMemory().getTotal() / 1024f / 1024f);
+            hw = new HWInfo(device, os);
+        } catch (Exception e) {
+             e.printStackTrace();
+        }
+        ApplicationListener start = Forge.getApp(hw, new Lwjgl3Clipboard(), new Main.DesktopAdapter(switchOrientationFile),
+            assetsDir, false, false, totalRAM, false, 0);
 
         int windowWidth = Config.instance().getSettingData().width;
         int windowHeight = Config.instance().getSettingData().height;

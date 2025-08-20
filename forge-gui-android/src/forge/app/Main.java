@@ -59,11 +59,11 @@ import com.badlogic.gdx.backends.android.AndroidAudio;
 import com.badlogic.gdx.backends.android.AsynchronousAndroidAudio;
 import com.getkeepsafe.relinker.ReLinker;
 import de.cketti.fileprovider.PublicFileProvider;
+import forge.util.HWInfo;
 import forge.Forge;
 import forge.interfaces.IDeviceAdapter;
 import forge.util.FileUtil;
 import forge.util.ThreadUtil;
-import io.sentry.Sentry;
 import io.sentry.protocol.Device;
 import io.sentry.protocol.OperatingSystem;
 import org.apache.commons.lang3.tuple.Pair;
@@ -195,28 +195,24 @@ public class Main extends AndroidApplication {
         boolean permissiongranted = checkPermission();
         Gadapter = new AndroidAdapter(getContext());
 
-        // Get Basic Device and OS info for scope
-        Sentry.configureScope(scope -> {
-            // Device Info
-            Device device = new Device();
-            device.setId(Build.ID);
-            device.setName(getDeviceName());
-            device.setModel(Build.MODEL);
-            device.setBrand(Build.BRAND);
-            device.setManufacturer(Build.MANUFACTURER);
-            device.setMemorySize(memInfo.totalMem);
-            device.setChipset(Build.SOC_MANUFACTURER + " " + Build.SOC_MODEL);
-            // OS Info
-            OperatingSystem os = new OperatingSystem();
-            os.setName("Android");
-            os.setVersion(Build.VERSION.RELEASE);
-            os.setBuild(Build.DISPLAY);
-            // Set Contexts
-            scope.getContexts().setDevice(device);
-            scope.getContexts().setOperatingSystem(os);
-        });
+        // Device Info
+        Device device = new Device();
+        device.setId(Build.ID);
+        device.setName(getDeviceName());
+        device.setModel(Build.MODEL);
+        device.setBrand(Build.BRAND);
+        device.setManufacturer(Build.MANUFACTURER);
+        device.setMemorySize(memInfo.totalMem);
+        String cpuDesc = Build.VERSION.SDK_INT > Build.VERSION_CODES.R ? Build.SOC_MANUFACTURER + " " + Build.SOC_MODEL : Build.UNKNOWN;
+        device.setCpuDescription(cpuDesc);
+        device.setChipset(Build.HARDWARE + " " + Build.BOARD);
+        // OS Info
+        OperatingSystem os = new OperatingSystem();
+        os.setName("Android " + Build.VERSION.RELEASE);
+        os.setVersion(Build.VERSION.RELEASE);
+        os.setBuild(Build.DISPLAY);
 
-        initForge(Gadapter, permissiongranted, totalMemory, isTabletDevice(getContext()));
+        initForge(Gadapter, new HWInfo(device, os), permissiongranted, totalMemory, isTabletDevice(getContext()));
     }
 
     private void crossfade(View contentView, View previousView) {
@@ -350,13 +346,13 @@ public class Main extends AndroidApplication {
         crossfade(TL, previousView);
     }
 
-    private void loadGame(final String title, final String steps, boolean isLandscape, AndroidAdapter adapter, boolean permissiongranted, int totalRAM, boolean isTabletDevice, AndroidApplicationConfiguration config, boolean exception, String msg) {
+    private void loadGame(final HWInfo hwInfo, final String title, final String steps, boolean isLandscape, AndroidAdapter adapter, boolean permissiongranted, int totalRAM, boolean isTabletDevice, AndroidApplicationConfiguration config, boolean exception, String msg) {
         try {
             final Handler handler = new Handler();
             forgeLogo = findViewById(resId("id", "logo_id"));
             activeView = findViewById(resId("id", "mainview"));
             activeView.setBackgroundColor(Color.WHITE);
-            forgeView = initializeForView(Forge.getApp(getAndroidClipboard(), adapter, ASSETS_DIR, false, !isLandscape, totalRAM, isTabletDevice, Build.VERSION.SDK_INT, Build.VERSION.RELEASE, getDeviceName()), config);
+            forgeView = initializeForView(Forge.getApp(hwInfo, getAndroidClipboard(), adapter, ASSETS_DIR, false, !isLandscape, totalRAM, isTabletDevice, Build.VERSION.SDK_INT), config);
 
             getAnimator(ObjectAnimator.ofFloat(forgeLogo, "alpha", 1f, 1f).setDuration(800), ObjectAnimator.ofObject(activeView, "backgroundColor", new ArgbEvaluator(), Color.WHITE, Color.BLACK).setDuration(1600), new AnimatorListenerAdapter() {
                 @Override
@@ -490,7 +486,7 @@ public class Main extends AndroidApplication {
         }
     }
 
-    private void initForge(AndroidAdapter adapter, boolean permissiongranted, int totalRAM, boolean isTabletDevice) {
+    private void initForge(AndroidAdapter adapter, HWInfo hwInfo, boolean permissiongranted, int totalRAM, boolean isTabletDevice) {
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
         config.useAccelerometer = false;
         config.useCompass = false;
@@ -502,14 +498,14 @@ public class Main extends AndroidApplication {
         if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             String message = getDeviceName() + "\n" + "Android " + Build.VERSION.RELEASE + "\n" + "RAM " + totalRAM + "MB" + "\n" + "LibGDX " + Version.VERSION + "\n" + "Can't access external storage";
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
-            loadGame("", "", false, adapter, permissiongranted, totalRAM, isTabletDevice, config, true, message);
+            loadGame(hwInfo, "", "", false, adapter, permissiongranted, totalRAM, isTabletDevice, config, true, message);
             return;
         }
         ASSETS_DIR = Build.VERSION.SDK_INT > Build.VERSION_CODES.Q ? getContext().getObbDir() + "/Forge/" : Environment.getExternalStorageDirectory() + "/Forge/";
         if (!FileUtil.ensureDirectoryExists(ASSETS_DIR)) {
             String message = getDeviceName() + "\n" + "Android " + Build.VERSION.RELEASE + "\n" + "RAM " + totalRAM + "MB" + "\n" + "LibGDX " + Version.VERSION + "\n" + "Can't access external storage\nPath: " + ASSETS_DIR;
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
-            loadGame("", "", false, adapter, permissiongranted, totalRAM, isTabletDevice, config, true, message);
+            loadGame(hwInfo, "", "", false, adapter, permissiongranted, totalRAM, isTabletDevice, config, true, message);
             return;
         }
         //ensure .nomedia file exists in Forge directory so its images
@@ -521,7 +517,7 @@ public class Main extends AndroidApplication {
             } catch (Exception e) {
                 String message = getDeviceName() + "\n" + "Android " + Build.VERSION.RELEASE + "\n" + "RAM " + totalRAM + "MB" + "\n" + "LibGDX " + Version.VERSION + "\n" + "Can't read/write to storage";
                 Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
-                loadGame("", "", false, adapter, permissiongranted, totalRAM, isTabletDevice, config, true, message);
+                loadGame(hwInfo, "", "", false, adapter, permissiongranted, totalRAM, isTabletDevice, config, true, message);
                 return;
             }
         }
@@ -538,7 +534,7 @@ public class Main extends AndroidApplication {
         if (landscapeMode && Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) { //Android 11 onwards
             Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         }
-        loadGame(info, lowV + lowM, landscapeMode, adapter, permissiongranted, totalRAM, isTabletDevice, config, false, "");
+        loadGame(hwInfo, info, lowV + lowM, landscapeMode, adapter, permissiongranted, totalRAM, isTabletDevice, config, false, "");
     }
 
     @Override
