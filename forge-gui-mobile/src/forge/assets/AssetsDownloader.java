@@ -88,20 +88,23 @@ public class AssetsDownloader {
                 String snapsBuildDate = "", buildDate = "";
                 if (isSnapshots) {
                     URL url = new URL(snapsURL + "build.txt");
-                    snapsTimestamp = format.parse(FileUtil.readFileToString(url));
-                    snapsBuildDate = snapsTimestamp.toString();
-                    if (!GuiBase.isAndroid()) {
-                        buildDate = BuildInfo.getTimestamp().toString();
-                        verifyUpdatable = BuildInfo.verifyTimestamp(snapsTimestamp);
-                    } else {
-                        if (buildTxtFileHandle.exists()) {
-                            buildTimeStamp = format.parse(buildTxtFileHandle.readString());
-                            buildDate = buildTimeStamp.toString();
-                            // if morethan 23 hours the difference, then allow to update..
-                            verifyUpdatable = DateUtil.getElapsedHours(buildTimeStamp, snapsTimestamp) > 23;
+                    String snapsTimestampStr = FileUtil.readFileToString(url);
+                    if (!snapsTimestampStr.isBlank()) {
+                        snapsTimestamp = format.parse(snapsTimestampStr);
+                        snapsBuildDate = snapsTimestamp.toString();
+                        if (!GuiBase.isAndroid()) {
+                            buildDate = BuildInfo.getTimestamp().toString();
+                            verifyUpdatable = BuildInfo.verifyTimestamp(snapsTimestamp);
                         } else {
-                            //fallback to old version comparison
-                            verifyUpdatable = !StringUtils.isEmpty(version) && !versionString.equals(version);
+                            if (buildTxtFileHandle.exists()) {
+                                buildTimeStamp = format.parse(buildTxtFileHandle.readString());
+                                buildDate = buildTimeStamp.toString();
+                                // if morethan 23 hours the difference, then allow to update..
+                                verifyUpdatable = DateUtil.getElapsedHours(buildTimeStamp, snapsTimestamp) > 23;
+                            } else {
+                                //fallback to old version comparison
+                                verifyUpdatable = !StringUtils.isEmpty(version) && !versionString.equals(version);
+                            }
                         }
                     }
                 } else {

@@ -308,6 +308,9 @@ public final class FileUtil {
                     lines.add(line);
                 }
             }
+            catch (FileNotFoundException e) {
+                System.out.println(e.getMessage());
+            }
             return null;
         }, 5000); //abort reading file if it takes longer than 5 seconds
         return lines;
