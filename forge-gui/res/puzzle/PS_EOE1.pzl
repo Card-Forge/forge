@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - Edge of Eternities #01
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2025/08/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Assume you have basic Forest and Islands in your library, but you can't be sure any are in the top three cards. Ensure your solution satisfies all blocks. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Mockingbird;Prishe's Wanderings;Aftermath Analyst;Trash the Town
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Island;Island;Island;Forest;Forest;Forest
+p0battlefield=Mightform Harmonizer;Spelunking;Mirrorpool|NoETBTrigs;Blinkmoth Nexus;Strip Mine;Sunken Citadel|NoETBTrigs|ChosenColor:Green;Sunken Citadel|NoETBTrigs|ChosenColor:Green;Breeding Pool|NoETBTrigs;Breeding Pool|NoETBTrigs
+p1life=30
+p1battlefield=Dawnstrike Vanguard;Germinating Wurm
+# Randomize the order of cards in the library
+p0precast=Ancestral Knowledge:TrigShuffle
