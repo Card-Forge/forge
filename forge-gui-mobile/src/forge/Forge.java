@@ -150,9 +150,12 @@ public class Forge implements ApplicationListener {
                 });
                 //init hwInfo to log
                 System.out.println(
-                    "---------------------------------------\n" + "APP: Forge v." + GuiBase.getInterface().getCurrentVersion() +
-                    " (" + GuiBase.getInterface() + ")" + "\nDEV: " + hwInfo.device().getName() +
-                    "\nCPU: " + hwInfo.device().getCpuDescription() + "\nRAM: " + totalRAM + " MB" + "\nOS: " + hwInfo.os().getName() +
+                    "---------------------------------------\n" +
+                    "APP: Forge v." + GuiBase.getInterface().getCurrentVersion() + " (" + GuiBase.getInterface() + ")" +
+                    "\nDEV: " + hwInfo.device().getName() +
+                    "\nCPU: " + hwInfo.device().getCpuDescription() +
+                    "\nRAM: " + totalRAM + " MB" +
+                    "\nOS: " + hwInfo.os().getName() +
                     "\n---------------------------------------"
                 );
             }
