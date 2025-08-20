@@ -392,6 +392,10 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
 
+        if (condition == null) {
+            return true;
+        }
+
         if ("LifePaid".equals(condition)) {
             final SpellAbility trigSA = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
             if (trigSA != null && trigSA.getAmountLifePaid() <= 0) {
@@ -442,7 +446,15 @@ public abstract class Trigger extends TriggerReplacementBase {
             if (game.getCombat().getAttackersAndDefenders().values().containsAll(attacker.getOpponents())) {
                 return false;
             }
+        } else if (condition.startsWith("FromNamedAbility")) {
+            var rest = condition.substring(16);
+            final SpellAbility trigSA = (SpellAbility) runParams.get(AbilityKey.Cause);
+
+            if (trigSA != null && !trigSA.getName().equals(rest)) {
+                return false;
+            }
         }
+        
         return true;
     }
 

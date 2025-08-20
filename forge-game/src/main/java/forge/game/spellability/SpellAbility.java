@@ -174,6 +174,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private CardZoneTable changeZoneTable;
     private Map<Player, Integer> loseLifeMap;
 
+    private String name = "";
+
     public CardCollection getLastStateBattlefield() {
         return lastStateBattlefield;
     }
@@ -2654,5 +2656,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void clearOptionalKeywordAmount() {
         optionalKeywordAmount.clear();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
