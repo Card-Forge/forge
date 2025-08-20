@@ -332,7 +332,7 @@ ScryfallCode=WAR
 275 M Tezzeret, Master of the Bridge @Chase Stone
 
 [rebalanced]
-A221 R A-Teferi, Time Raveler @Chris Rallis
+A-221 R A-Teferi, Time Raveler @Chris Rallis
 
 [tokens]
 1 c_2_2_spirit @Johann Bodin

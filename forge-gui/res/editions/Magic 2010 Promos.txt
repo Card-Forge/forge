@@ -4,12 +4,9 @@ Date=2009-07-16
 Name=Magic 2010 Promos
 Type=Promo
 ScryfallCode=PM10
-TokensCode=TM10
+TokenFallbackCode=M10
 
 [cards]
 16★ R Honor of the Pure @Ralph Horsley
 118★ M Vampire Nocturnus @Andrew Robinson
 166★ R Ant Queen @Ron Spencer
-
-[tokens]
-6 g_1_1_insect @Ron Spencer

@@ -4,6 +4,7 @@ Date=2013-01-01
 Name=Judge Gift Cards 2013
 Type=Promo
 ScryfallCode=J13
+TokensCode=J13
 
 [cards]
 1 R Swords to Plowshares @Sam Wolfe Connelly
@@ -16,4 +17,4 @@ ScryfallCode=J13
 8 R Show and Tell @Zack Stella
 
 [tokens]
-c_3_3_e_a_golem
+9 c_3_3_e_a_golem @Yeong-Hao Han

@@ -862,8 +862,8 @@ ScryfallCode=LTR
 301 M Sauron, the Dark Lord @Anton Solovianchyk
 
 [rebalanced]
-A103 R A-Orcish Bowmasters @Maxim Kostin
-A246 M A-The One Ring @Veli Nyström
+A-103 R A-Orcish Bowmasters @Maxim Kostin
+A-246 M A-The One Ring @Veli Nyström
 
 [tokens]
 1 w_1_1_human_soldier @Anastasia Balakchina

@@ -2,7 +2,6 @@
 Code=KHM
 Date=2021-02-05
 Name=Kaldheim
-Code2=KHM
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:!fromSheet("KHM Snow Lands"):fromsheet("KHM cards"), 3 Uncommon:fromSheet("KHM cards"), 1 RareMythic:fromSheet("KHM cards"), 1 fromSheet("KHM Snow Lands")
@@ -433,28 +432,25 @@ ScryfallCode=KHM
 407 M Vorinclex, Monstrous Raider @Richard Whitters
 
 [rebalanced]
-A40 M A-Alrund, God of the Cosmos @Kieran Yanner
-A41 M A-Alrund's Epiphany @Kieran Yanner
-A51 R A-Cosmos Charger @Nils Hamm
-A106 U A-Return Upon the Tide @Martina Fačková
-A109 R A-Skemfar Avenger @Randy Vargas
-A139 M A-Goldspan Dragon @Andrew Mar
-A165 C A-Elderleaf Mentor @Zoltan Boros
-A166 U A-Elven Bow @Dallas Williams
-A169 R A-Esika's Chariot @Raoul Vitale
-A198 M A-Tyvar Kell @Chris Rallis
-A208 U A-Fall of the Impostor @Eric Deschamps
-A212 U A-Harald, King of Skemfar @Grzegorz Rutkowski
-A213 R A-Harald Unites the Elves @Ryan Pancoast
-A224 U A-Narfi, Betrayer King @Daarken
-A233 U A-Vega, the Watcher @Paul Scott Canavan
-A237 R A-Cosmos Elixir @Volkan Baǵa
-A253 U A-Bretagard Stronghold @Jung Park
-A255 R A-Faceless Haven @Titus Lunter
-A268 U A-Skemfar Elderhall @Johannes Voss
-A378 R A-Canopy Tactician @Ekaterina Burmak
-A385 U A-Elderfang Ritualist @Wisnu Tan
-A387 U A-Thornmantle Striker @Magali Villeneuve
+A-40 M A-Alrund, God of the Cosmos @Kieran Yanner
+A-41 M A-Alrund's Epiphany @Kieran Yanner
+A-51 R A-Cosmos Charger @Nils Hamm
+A-106 U A-Return Upon the Tide @Martina Fačková
+A-109 R A-Skemfar Avenger @Randy Vargas
+A-165 C A-Elderleaf Mentor @Zoltan Boros
+A-166 U A-Elven Bow @Dallas Williams
+A-198 M A-Tyvar Kell @Chris Rallis
+A-208 U A-Fall of the Impostor @Eric Deschamps
+A-212 U A-Harald, King of Skemfar @Grzegorz Rutkowski
+A-213 R A-Harald Unites the Elves @Ryan Pancoast
+A-224 U A-Narfi, Betrayer King @Daarken
+A-233 U A-Vega, the Watcher @Paul Scott Canavan
+A-237 R A-Cosmos Elixir @Volkan Baǵa
+A-253 U A-Bretagard Stronghold @Jung Park
+A-268 U A-Skemfar Elderhall @Johannes Voss
+A-378 R A-Canopy Tactician @Ekaterina Burmak
+A-385 U A-Elderfang Ritualist @Wisnu Tan
+A-387 U A-Thornmantle Striker @Magali Villeneuve
 
 [Snow Lands]
 5 Snow-Covered Plains|KHM|1
@@ -503,4 +499,4 @@ A387 U A-Thornmantle Striker @Magali Villeneuve
 20 emblem_kaya_the_inexorable @Tyler Jacobson
 21 emblem_tibalt_cosmic_impostor @Yongjae Choi
 22 emblem_tyvar_kell @Chris Rallis
-23 foretell
+23 foretell @

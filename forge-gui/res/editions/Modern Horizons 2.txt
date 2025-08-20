@@ -2,7 +2,6 @@
 Code=MH2
 Date=2021-06-18
 Name=Modern Horizons 2
-Code2=MH2
 Type=Draft
 Booster=10 Common:fromSheet("MH2 cards"), 3 Uncommon:fromSheet("MH2 cards"), 1 RareMythic:fromSheet("MH2 cards"), 1 fromSheet("MH2 Lands")
 BoosterReplaceSlotFromPrintSheet=MH2 NewToModern
@@ -590,6 +589,10 @@ ScryfallCode=MH2
 6 Patchwork Gnomes|MH2|1
 6 Zuran Orb|MH2|1
 
+[rebalanced]
+A-121 U A-Dragon's Rage Channeler @Martina Fačková
+A-145 C A-Unholy Heat @Kari Christensen
+
 [tokens]
 1 w_1_1_bird_flying @Howard Lyon
 2 u_0_3_crab @Yeong-Hao Han
@@ -603,13 +606,13 @@ ScryfallCode=MH2
 12 rw_4_4_a_golem @Matt Stewart
 13 bg_1_1_insect @Kim Sokol
 14 c_a_clue_draw @John Avon
-15 c_a_clue_draw @John Avon
+15 c_a_clue_draw @Yeong-Hao Han
 16 c_0_0_a_construct_total_artifacts @Mark Behm
 17 c_a_food_sac @Steven Belledin
-18 c_a_food_sac @Steven Belledin
+18 c_a_food_sac @Aaron Miller
 19 c_1_1_a_thopter_flying @Richard Wright
 20 c_a_treasure_sac @Alayna Danner
-21 c_a_treasure_sac @Alayna Danner
+21 c_a_treasure_sac @Anna Fehr
 
 [other]
 4 eternalize_timeless_dragon @Anastasia Ovchinnikova
