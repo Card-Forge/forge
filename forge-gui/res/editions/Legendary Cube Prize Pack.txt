@@ -1,8 +1,7 @@
 [metadata]
 Code=PZ1
 Date=2015-11-18
-Name=Legendary Cube
-Code2=PZ1
+Name=Legendary Cube Prize Pack
 Type=Online
 ScryfallCode=PZ1
 
@@ -156,20 +155,3 @@ ScryfallCode=PZ1
 147 U Savage Lands @Vance Kovacs
 148 U Seaside Citadel @Volkan Baǵa
 149 R Temple of the False God @Brian Snõddy
-
-[tokens]
-c_0_1_eldrazi_spawn_sac
-w_2_2_knight_vigilance
-w_1_1_kor_soldier
-b_5_5_demon_flying
-b_0_0_phyrexian_germ
-b_2_2_zombie
-r_5_5_dragon_flying
-g_4_4_beast
-g_5_3_elemental
-g_1_1_elf_druid_g
-g_1_1_insect
-g_0_1_plant
-g_1_1_saproling
-g_1_2_spider_reach
-wb_x_x_e_spirit_experience

@@ -2,8 +2,8 @@ Name:Magma Sliver
 ManaCost:3 R
 Types:Creature Sliver
 PT:3/3
-S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Pump | AddSVar$ SliversOnFieldX | Description$ All Slivers have "{T}: Target Sliver creature gets +X/+0 until end of turn, where X is the number of Slivers on the battlefield."
-SVar:Pump:AB$ Pump | Cost$ T | ValidTgts$ Creature.Sliver | TgtPrompt$ Select target Sliver creature | NumAtt$ +SliversOnFieldX | SpellDescription$ Target Sliver creature gets +X/+0 until end of turn, where X is the number of Slivers on the battlefield.
+S:Mode$ Continuous | Affected$ Sliver | AddAbility$ ABMagma | Description$ All Slivers have "{T}: Target Sliver creature gets +X/+0 until end of turn, where X is the number of Slivers on the battlefield."
+SVar:ABMagma:AB$ Pump | Cost$ T | ValidTgts$ Creature.Sliver | TgtPrompt$ Select target Sliver creature | NumAtt$ +SliversOnFieldX | SpellDescription$ Target Sliver creature gets +X/+0 until end of turn, where X is the number of Slivers on the battlefield.
 SVar:SliversOnFieldX:Count$Valid Sliver
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Sliver
