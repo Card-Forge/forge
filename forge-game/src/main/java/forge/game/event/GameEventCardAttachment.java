@@ -7,12 +7,12 @@ public class GameEventCardAttachment extends GameEvent {
 
     public final Card equipment;
     public final GameEntity newTarget; // can enchant player, I'm ssaving a class to enchants - it could be incorrect.
-    public final GameEntity oldEntiy;
+    public final GameEntity oldEntity;
 
     public GameEventCardAttachment(Card attachment, GameEntity formerEntity, GameEntity newEntity) {
         this.equipment = attachment;
         this.newTarget = newEntity;
-        this.oldEntiy = formerEntity;
+        this.oldEntity = formerEntity;
     }
 
     @Override
