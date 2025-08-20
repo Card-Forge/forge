@@ -3219,6 +3219,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", getEffectSource().getName());
         }
 
+        // Ensure no more escaped linebreak are present
+        desc = desc.replace("\\r", "\r")
+            .replace("\\n", "\n");
+
         return desc.trim();
     }
 
