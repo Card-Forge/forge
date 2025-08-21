@@ -50,6 +50,13 @@ public abstract class PaperCardPredicates {
         return new PredicateNames(what);
     }
 
+    /**
+     * Filters on a card foil status
+     */
+    public static Predicate<PaperCard> isFoil(final boolean isFoil) {
+        return new PredicateFoil(isFoil);
+    }
+
     private static final class PredicatePrintedWithRarity implements Predicate<PaperCard> {
         private final CardRarity matchingRarity;
 
@@ -90,6 +97,17 @@ public abstract class PaperCardPredicates {
                 }
             }
             return false;
+        }
+    }
+
+    private static final class PredicateFoil implements Predicate<PaperCard> {
+        private final boolean operand;
+
+        @Override
+        public boolean test(final PaperCard card) { return card.isFoil() == operand; }
+
+        private PredicateFoil(final boolean isFoil) {
+            this.operand = isFoil;
         }
     }
 

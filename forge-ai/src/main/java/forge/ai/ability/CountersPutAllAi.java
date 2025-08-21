@@ -1,12 +1,13 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Lists;
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
-import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -15,17 +16,15 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 
 import java.util.List;
 import java.util.Map;
 
 public class CountersPutAllAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the expected targets could be
-        final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
         List<Card> hList;
         List<Card> cList;
@@ -44,28 +43,9 @@ public class CountersPutAllAi extends SpellAbilityAi {
             cList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source, sa);
         }
 
-        if (abCost != null) {
-            // AI currently disabled for these costs
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 8, sa)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source, sa)) {
-                return false;
-            }
-
-            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa)) {
-                return false;
-            }
-        }
-
         if (logic.equals("AtEOTOrBlock")) {
             if (!ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && !ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-                return false;
-            }
-        } else if (logic.equals("AtOppEOT")) {
-            if (!(ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && ai.getGame().getPhaseHandler().getNextTurn() == ai)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
             }
         }
 
@@ -88,26 +68,23 @@ public class CountersPutAllAi extends SpellAbilityAi {
             amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }
 
-        // prevent run-away activations - first time will always return true
-        boolean chance = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
-
         if (curse) {
             if (type.equals("M1M1")) {
                 final List<Card> killable = CardLists.filter(hList, c -> c.getNetToughness() <= amount);
-                if (!(killable.size() > 2)) {
-                    return false;
+                if (killable.size() <= 2) {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             } else {
                 // make sure compy doesn't harm his stuff more than human's
                 // stuff
                 if (cList.size() > hList.size()) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }
         } else {
             // human has more things that will benefit, don't play
             if (hList.size() >= cList.size()) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             //Check for cards that could profit from the ability
@@ -125,21 +102,21 @@ public class CountersPutAllAi extends SpellAbilityAi {
                     }
                 }
                 if (!combatants) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }
         }
 
         if (playReusable(ai, sa)) {
-            return chance;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        return ((MyRandom.getRandom().nextFloat() < .6667) && chance);
+        return super.checkApiLogic(ai, sa);
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        return canPlayAI(ai, sa);
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+        return canPlay(ai, sa);
     }
     /* (non-Javadoc)
      * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
@@ -150,7 +127,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         if (sa.usesTargeting()) {
             List<Player> players = Lists.newArrayList();
             if (!sa.isCurse()) {
@@ -168,11 +145,23 @@ public class CountersPutAllAi extends SpellAbilityAi {
                     preferred = (sa.isCurse() && p.isOpponentOf(aiPlayer)) || (!sa.isCurse() && p == aiPlayer);
                     sa.resetTargets();
                     sa.getTargets().add(p);
-                    return preferred || mandatory;
+                    if (preferred) {
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                    }
+
+                    if (mandatory) {
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                    } else {
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                    }
                 }
             }
         }
 
-        return mandatory || canPlayAI(aiPlayer, sa);
+        if (mandatory) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        return canPlay(aiPlayer, sa);
     }
 }

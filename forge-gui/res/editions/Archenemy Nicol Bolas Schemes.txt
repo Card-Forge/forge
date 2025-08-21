@@ -1,0 +1,28 @@
+[metadata]
+Code=OE01
+Date=2017-06-16
+Name=Archenemy: Nicol Bolas Schemes
+Type=Multiplayer
+ScryfallCode=OE01
+
+[cards]
+1* C Because I Have Willed It @Adrian Majkrzak
+2* C Behold My Grandeur @Zack Stella
+3* C Bow to My Command @Dan Murayama Scott
+4* C Choose Your Demise @Nils Hamm
+5* C Delight in the Hunt @Titus Lunter
+6* C Every Dream a Nightmare @Mathias Kollros
+7* C For Each of You, a Gift @Marco Nelor
+8* C Know Evil @Anthony Palumbo
+9* C Make Yourself Useful @David Gaillet
+10* C The Mighty Will Fall @Volkan Baǵa
+11* C My Forces Are Innumerable @Seb McKinnon
+12* C My Laughter Echoes @Steve Argyle
+13* C No One Will Hear Your Cries @McLean Kendree
+14* C Pay Tribute to Me @Aaron Miller
+15* C Power Without Equal @Christine Choi
+16* C A Reckoning Approaches @Yeong-Hao Han
+17* C There Is No Refuge @Tomasz Jedruszek
+18* C This World Belongs to Me @Min Yum
+19* C What's Yours Is Now Mine @Steve Argyle
+20* C When Will You Learn? @Yohann Schepacz

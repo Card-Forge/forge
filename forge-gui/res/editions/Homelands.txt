@@ -151,9 +151,3 @@ ScryfallCode=HML
 113 U Castle Sengir @Pete Venters
 114 U Koskun Keep @Pat Lewis
 115 U Wizards' School @Pat Lewis
-
-[tokens]
-kelp
-b_0_1_serf
-b_1_1_skeleton_regenerate
-b_x_x_spirit

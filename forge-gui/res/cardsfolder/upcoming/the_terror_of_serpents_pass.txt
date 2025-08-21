@@ -1,0 +1,6 @@
+Name:The Terror of Serpent's Pass
+ManaCost:5 U U
+Types:Legendary Creature Serpent
+PT:8/8
+K:Hexproof
+Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)

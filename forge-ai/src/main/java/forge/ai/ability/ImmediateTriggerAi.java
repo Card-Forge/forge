@@ -10,60 +10,65 @@ public class ImmediateTriggerAi extends SpellAbilityAi {
     // TODO: this class is largely reused from DelayedTriggerAi, consider updating
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         String logic = sa.getParamOrDefault("AILogic", "");
         if (logic.equals("Always")) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         SpellAbility trigsa = sa.getAdditionalAbility("Execute");
         if (trigsa == null) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         trigsa.setActivatingPlayer(ai);
 
         if (trigsa instanceof AbilitySub) {
             return SpellApiToAi.Converter.get(trigsa).chkDrawbackWithSubs(ai, (AbilitySub)trigsa);
-        } else {
-            return AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(trigsa);
         }
+
+        AiPlayDecision decision = ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(trigsa);
+        if (decision == AiPlayDecision.WillPlay) {
+            return new AiAbilityDecision(100, decision);
+        }
+
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         // always add to stack, targeting happens after payment
         if (mandatory) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         SpellAbility trigsa = sa.getAdditionalAbility("Execute");
         if (trigsa == null) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
         trigsa.setActivatingPlayer(ai);
 
-        return aic.doTrigger(trigsa, !"You".equals(sa.getParamOrDefault("OptionalDecider", "You")));
+        return aic.doTrigger(trigsa, !"You".equals(sa.getParamOrDefault("OptionalDecider", "You"))) ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         String logic = sa.getParamOrDefault("AILogic", "");
         if (logic.equals("Always")) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         SpellAbility trigsa = sa.getAdditionalAbility("Execute");
         if (trigsa == null) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (logic.equals("WeakerCreature")) {
             Card ownCreature = ComputerUtilCard.getWorstCreatureAI(ai.getCreaturesInPlay());
             if (ownCreature == null) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             int eval = ComputerUtilCard.evaluateCreature(ownCreature);
@@ -75,12 +80,12 @@ public class ImmediateTriggerAi extends SpellAbilityAi {
                 }
             }
             if (!foundWorse) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
         trigsa.setActivatingPlayer(ai);
-        return AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(trigsa);
+        return ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(trigsa) == AiPlayDecision.WillPlay ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
 }

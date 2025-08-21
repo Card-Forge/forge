@@ -5,8 +5,8 @@ A:SP$ Mill | NumCards$ 2 | Defined$ Player | SubAbility$ DBChangeZone | SpellDes
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | Mandatory$ True | GainControl$ True | StaticEffect$ Animate | SubAbility$ DBSpace | SelectPrompt$ Select a creature card in a graveyard | Hidden$ True | StackDescription$ SpellDescription | SpellDescription$ Then you put a creature card from a graveyard onto the battlefield under your control. It's an artifact in addition to its other types.
 SVar:Animate:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Artifact
 SVar:DBSpace:DB$ BlankLine | SubAbility$ DBVote | SpellDescription$ ,,,,,,
-SVar:DBVote:DB$ Vote | Defined$ Player | VoteType$ Planeswalk,Chaos | VotePlaneswalk$ DBPlaneswalk | VoteChaos$ DBChaos | Tied$ DBChaos | StackDescription$ SpellDescription | SpellDescription$ Will of the Planeswalkers — Starting with you, each player votes for planeswalk or chaos. If planeswalk gets more votes, planeswalk. If chaos gets more votes or the vote is tied, chaos ensues.
-SVar:DBPlaneswalk:DB$ Planeswalk
-SVar:DBChaos:DB$ ChaosEnsues
+SVar:DBVote:DB$ Vote | Defined$ Player | Choices$ DBPlaneswalk,DBChaos | VoteTiedAbility$ DBChaos | StackDescription$ SpellDescription | SpellDescription$ Will of the Planeswalkers — Starting with you, each player votes for planeswalk or chaos. If planeswalk gets more votes, planeswalk. If chaos gets more votes or the vote is tied, chaos ensues.
+SVar:DBPlaneswalk:DB$ Planeswalk | SpellDescription$ Planeswalk
+SVar:DBChaos:DB$ ChaosEnsues | SpellDescription$ Chaos
 DeckHas:Ability$Mill|Graveyard
 Oracle:Each player mills two cards. Then you put a creature card from a graveyard onto the battlefield under your control. It's an artifact in addition to its other types.\nWill of the Planeswalkers — Starting with you, each player votes for planeswalk or chaos. If planeswalk gets more votes, planeswalk. If chaos gets more votes or the vote is tied, chaos ensues.

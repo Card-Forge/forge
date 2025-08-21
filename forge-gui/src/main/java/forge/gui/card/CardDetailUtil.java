@@ -67,20 +67,20 @@ public class CardDetailUtil {
 
     public static DetailColors getBorderColor(final CardStateView card, final boolean canShow) {
         if (card == null) {
-            return getBorderColors(null, false, false, false).iterator().next();
+            return getBorderColors(null, false, false, false, false).iterator().next();
         }
-        return getBorderColors(card.getColors(), card.isLand(), canShow, false).iterator().next();
+        return getBorderColors(card.getColors(), card.isLand(), canShow, false, card.isEnchantment()).iterator().next();
     }
     public static List<DetailColors> getBorderColors(final CardStateView card, final boolean canShow) {
         if (card == null) {
-            return getBorderColors(null, false, false, true);
+            return getBorderColors(null, false, false, true, false);
         }
-        return getBorderColors(card.getColors(), card.isLand(), canShow, true);
+        return getBorderColors(card.getColors(), card.isLand(), canShow, true, card.isEnchantment());
     }
     public static List<DetailColors> getBorderColors(final ColorSet colorSet) {
-        return getBorderColors(colorSet, false, true, true);
+        return getBorderColors(colorSet, false, true, true, false);
     }
-    private static List<DetailColors> getBorderColors(final ColorSet cardColors, final boolean isLand, final boolean canShow, final boolean supportMultiple) {
+    private static List<DetailColors> getBorderColors(final ColorSet cardColors, final boolean isLand, final boolean canShow, final boolean supportMultiple, final boolean isEnchantment) {
         final List<DetailColors> borderColors = new ArrayList<>();
 
         if (cardColors == null || !canShow) {

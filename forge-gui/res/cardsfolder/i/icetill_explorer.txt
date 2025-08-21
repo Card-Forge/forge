@@ -1,7 +1,7 @@
 Name:Icetill Explorer
 ManaCost:2 G G
 Types:Creature Insect Scout
-PT:2/3
+PT:2/4
 S:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land on each of your turns.
 S:Mode$ Continuous | Affected$ Land.YouOwn | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may play lands from your graveyard.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigMill | TriggerDescription$ Landfall — Whenever a land you control enters, mill a card.

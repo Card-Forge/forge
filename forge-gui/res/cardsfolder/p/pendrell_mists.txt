@@ -2,7 +2,7 @@ Name:Pendrell Mists
 ManaCost:3 U
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature | AddTrigger$ UpkeepCostTrigger | Description$ All creatures have "At the beginning of your upkeep, sacrifice this creature unless you pay {1}."
-SVar:UpkeepCostTrigger:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay {21.
+SVar:UpkeepCostTrigger:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay {1}.
 SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ 1
 AI:RemoveDeck:Random
 Oracle:All creatures have "At the beginning of your upkeep, sacrifice this creature unless you pay {1}."

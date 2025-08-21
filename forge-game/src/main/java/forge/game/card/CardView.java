@@ -142,9 +142,8 @@ public class CardView extends GameEntityView {
     }
 
     public boolean isFlipped() {
-        return get(TrackableProperty.Flipped); // getCurrentState().getState() == CardStateName.Flipped;
+        return get(TrackableProperty.Flipped);
     }
-
     public boolean isSplitCard() {
         return get(TrackableProperty.SplitCard);
     }
@@ -428,6 +427,12 @@ public class CardView extends GameEntityView {
     }
     void updateChosenColors(Card c) {
         set(TrackableProperty.ChosenColors, c.getChosenColors());
+    }
+    public boolean hasPaperFoil() {
+        return get(TrackableProperty.PaperFoil);
+    }
+    void updatePaperFoil(boolean v) {
+        set(TrackableProperty.PaperFoil, v);
     }
     public ColorSet getMarkedColors() {
         return get(TrackableProperty.MarkedColors);
@@ -1021,6 +1026,7 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Cloned, c.isCloned());
         set(TrackableProperty.SplitCard, isSplitCard);
         set(TrackableProperty.FlipCard, c.isFlipCard());
+        set(TrackableProperty.Flipped, c.getCurrentStateName() == CardStateName.Flipped);
         set(TrackableProperty.Facedown, c.isFaceDown());
         set(TrackableProperty.Foretold, c.isForetold());
         set(TrackableProperty.Secondary, c.hasState(CardStateName.Secondary));
@@ -1098,7 +1104,7 @@ public class CardView extends GameEntityView {
         currentState.getView().setOriginalColors(c); //set original Colors
 
         currentStateView.updateAttractionLights(currentState);
-        currentStateView.updateHasPrintedPT(c.getRules() != null && c.getRules().hasPrintedPT());
+        currentStateView.updateHasPrintedPT((currentStateView.isVehicle() || currentStateView.isSpaceCraft()) && c.getRules() != null && c.getRules().hasPrintedPT());
 
         CardState alternateState = isSplitCard && isFaceDown() ? c.getState(CardStateName.RightSplit) : c.getAlternateState();
 
@@ -1520,8 +1526,8 @@ public class CardView extends GameEntityView {
         public boolean hasPrintedPT() {
             return get(TrackableProperty.HasPrintedPT);
         }
-        void updateHasPrintedPT(boolean val) {
-            set(TrackableProperty.HasPrintedPT, val);
+        void updateHasPrintedPT(boolean v) {
+            set(TrackableProperty.HasPrintedPT, v);
         }
 
         public String getSetCode() {

@@ -171,7 +171,7 @@ public class WinstonDraft extends BoosterDraft {
     }
 
     @Override
-    public Deck[] getDecks() {
+    public Deck[] getComputerDecks() {
         this.determineAIDeckColors();
         return this.draftAI.getDecks();
     }

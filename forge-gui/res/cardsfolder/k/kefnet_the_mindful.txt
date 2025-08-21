@@ -6,8 +6,6 @@ K:Flying
 K:Indestructible
 S:Mode$ CantAttack,CantBlock | ValidCard$ Card.Self | IsPresent$ Card.YouOwn | PresentZone$ Hand | PresentCompare$ LE6 | Description$ NICKNAME can't attack or block unless you have seven or more cards in hand.
 SVar:X:Count$ValidHand Card.YouOwn
-A:AB$ Draw | Cost$ 3 U | NumCards$ 1 | Defined$ You | SubAbility$ DBChooseCard | SpellDescription$ Draw a card, then you may return a land you control to its owner's hand.
-SVar:DBChooseCard:DB$ ChooseCard | Choices$ Land.YouCtrl | ChoiceZone$ Battlefield | Amount$ 1 | SubAbility$ DBChangeZone
-SVar:DBChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ ChosenCard | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+A:AB$ Draw | Cost$ 3 U | NumCards$ 1 | Defined$ You | SubAbility$ DBChangeZone | SpellDescription$ Draw a card, then you may return a land you control to its owner's hand.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ChangeType$ Land.YouCtrl | Hidden$ True
 Oracle:Flying, indestructible\nKefnet the Mindful can't attack or block unless you have seven or more cards in hand.\n{3}{U}: Draw a card, then you may return a land you control to its owner's hand.

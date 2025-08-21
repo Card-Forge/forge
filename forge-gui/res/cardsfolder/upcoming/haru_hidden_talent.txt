@@ -1,0 +1,9 @@
+Name:Haru, Hidden Talent
+ManaCost:1 G
+Types:Legendary Creature Human Peasant Ally
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigEarthbend | TriggerDescription$ Whenever another Ally you control enters, earthbend 1. (Target land you control becomes a 0/0 creature with haste that's still a land. Put a +1/+1 counter on it. When it dies or is exiled, return it to the battlefield tapped.)
+SVar:TrigEarthbend:DB$ Earthbend | Num$ 1
+DeckHas:Ability$Counters
+DeckNeeds:Type$Ally
+Oracle:Whenever another Ally you control enters, earthbend 1. (Target land you control becomes a 0/0 creature with haste that's still a land. Put a +1/+1 counter on it. When it dies or is exiled, return it to the battlefield tapped.)

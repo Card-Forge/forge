@@ -5,10 +5,7 @@ import java.io.IOException;
 
 import forge.Forge;
 import forge.assets.FSkinImage;
-import forge.deck.Deck;
-import forge.deck.DeckGroup;
-import forge.deck.FDeckEditor.DeckController;
-import forge.deck.FDeckEditor.EditorType;
+import forge.deck.FDeckEditor;
 import forge.gamemodes.quest.IVQuestStats;
 import forge.gamemodes.quest.QuestUtil;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
@@ -132,9 +129,8 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
                     return;
                 }
 
-                ((DeckController<Deck>)EditorType.Quest.getController()).setRootFolder(FModel.getQuest().getMyDecks());
-                ((DeckController<Deck>)EditorType.QuestCommander.getController()).setRootFolder(FModel.getQuest().getMyDecks());
-                ((DeckController<DeckGroup>)EditorType.QuestDraft.getController()).setRootFolder(FModel.getQuest().getDraftDecks());
+                FDeckEditor.DECK_CONTROLLER_QUEST.setRootFolder(FModel.getQuest().getMyDecks());
+                FDeckEditor.DECK_CONTROLLER_QUEST_DRAFT.setRootFolder(FModel.getQuest().getDraftDecks());
                 if (reason == LaunchReason.StartQuestMode) {
                     if (QuestUtil.getCurrentDeck() == null) {
                         Forge.openScreen(decksScreen); //if quest doesn't have a deck specified, open decks screen by default

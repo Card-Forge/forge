@@ -2,7 +2,6 @@
 Code=XLN
 Date=2017-09-29
 Name=Ixalan
-Code2=XLN
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common:fromSheet("XLN cards"), 3 Uncommon:fromSheet("XLN cards"), 1 RareMythic:fromSheet("XLN cards"), 1 BasicLand
@@ -311,7 +310,6 @@ ScryfallCode=XLN
 5 g_3_3_dinosaur_trample @Filip Burburan
 6 g_0_2_plant_defender @Florian de Gesincourt
 7 c_a_treasure_sac @Florian de Gesincourt
-8 c_a_treasure_sac @Florian de Gesincourt
-9 c_a_treasure_sac @Florian de Gesincourt
-10 c_a_treasure_sac @Florian de Gesincourt
-11 c_a_treasure_sac @Florian de Gesincourt
+8 c_a_treasure_sac @Zoltan Boros
+9 c_a_treasure_sac @Jason Felix
+10 c_a_treasure_sac @Milivoj Ćeran

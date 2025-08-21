@@ -368,8 +368,7 @@ public final class CardUtil {
         final Game game = ability.getActivatingPlayer().getGame();
         final List<ZoneType> zone = tgt.getZone();
 
-        List<Card> validCards = CardLists.getValidCards(game.getCardsIn(zone), tgt.getValidTgts(), ability.getActivatingPlayer(), activatingCard, ability);
-        List<Card> choices = CardLists.getTargetableCards(validCards, ability);
+        List<Card> choices = CardLists.getTargetableCards(game.getCardsIn(zone), ability);
         final boolean canTgtStack = zone.contains(ZoneType.Stack);
         if (canTgtStack) {
             // Since getTargetableCards doesn't have additional checks if one of the Zones is stack

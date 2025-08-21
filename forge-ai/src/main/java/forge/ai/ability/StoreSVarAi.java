@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.SpellAbilityAi;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
@@ -10,12 +12,12 @@ import forge.util.collect.FCollectionView;
 public class StoreSVarAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        return true;
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         if (sa instanceof WrappedAbility) {
             SpellAbility origSa = ((WrappedAbility)sa).getWrappedAbility();
             if (origSa.getHostCard().getName().equals("Maralen of the Mornsong Avatar")) {
@@ -23,7 +25,7 @@ public class StoreSVarAi extends SpellAbilityAi {
             }
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override

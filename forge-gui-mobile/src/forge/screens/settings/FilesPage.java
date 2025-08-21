@@ -1,15 +1,19 @@
 package forge.screens.settings;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.badlogic.gdx.files.FileHandle;
 import com.google.common.collect.ImmutableList;
 import forge.StaticData;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.screens.LoadingOverlay;
+import forge.util.ZipUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.utils.Align;
@@ -44,11 +48,54 @@ public class FilesPage extends TabPage<SettingsScreen> {
 
         lstItems.setListItemRenderer(new FilesItemRenderer());
 
+        lstItems.addGroup(Forge.getLocalizer().getMessage("lblDataManagement"));
         lstItems.addGroup(Forge.getLocalizer().getMessage("lblCardAudit"));
         lstItems.addGroup(Forge.getLocalizer().getMessage("ContentDownloaders"));
         lstItems.addGroup(Forge.getLocalizer().getMessage("lblStorageLocations"));
-        //lstItems.addGroup("Data Import");
 
+        //Backup and Restore
+        lstItems.addItem(new Extra(Forge.getLocalizer().getMessage("lblBackupRestore"), Forge.getLocalizer().getMessage("lblBackupRestoreDescription")) {
+            @Override
+            public void select() {
+                if (Forge.getDeviceAdapter().needFileAccess()) {
+                    Forge.getDeviceAdapter().requestFileAcces();
+                    return;
+                }
+                FOptionPane.showOptionDialog(Forge.getLocalizer().getMessage("lblPlsSelectActions"), "", FOptionPane.QUESTION_ICON, ImmutableList.of(Forge.getLocalizer().getMessage("lblBackup"), Forge.getLocalizer().getMessage("lblRestore"), Forge.getLocalizer().getMessage("lblCancel")), 2, new Callback<Integer>() {
+                    @Override
+                    public void run(Integer result) {
+                    switch (result) {
+                        case 0:
+                            FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblBackupMsg"), true, () -> {
+                                File source = new FileHandle(ForgeProfileProperties.getUserDir()).file();
+                                File target = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir()).file();
+                                try {
+                                    ZipUtil.zip(source, target, ZipUtil.backupClsFile);
+                                    FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblSuccess") + "\n" + target.getAbsolutePath() + File.separator + ZipUtil.backupClsFile, Forge.getLocalizer().getMessage("lblBackup"), FOptionPane.INFORMATION_ICON);
+                                } catch (IOException e) {
+                                    FOptionPane.showMessageDialog(e.toString(), Forge.getLocalizer().getMessage("lblError"), FOptionPane.ERROR_ICON);
+                                 }
+                            }));
+                            break;
+                        case 1:
+                            FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblRestoreMsg"), true, () -> {
+                                File source = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir() + ZipUtil.backupClsFile).file();
+                                File target = new FileHandle(ForgeProfileProperties.getUserDir()).file().getParentFile();
+                                try {
+                                    String msg = ZipUtil.unzip(source, target);
+                                    FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblSuccess") + "\n" + msg, Forge.getLocalizer().getMessage("lblRestore"), FOptionPane.INFORMATION_ICON);
+                                } catch (IOException e) {
+                                    FOptionPane.showMessageDialog(e.toString(), Forge.getLocalizer().getMessage("lblError"), FOptionPane.ERROR_ICON);
+                                }
+                            }));
+                            break;
+                        default:
+                            break;
+                    }
+                    }
+                });
+            }
+        }, 0);
         //Auditer
         lstItems.addItem(new Extra(Forge.getLocalizer().getMessage("btnListImageData"), Forge.getLocalizer().getMessage("lblListImageData")) {
             @Override
@@ -74,7 +121,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
                     });
                 }));
             }
-        }, 0);
+        }, 1);
         //content downloaders
 //        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadPics"),
 //                Forge.getLocalizer().getMessage("lblDownloadPics")) {
@@ -82,35 +129,35 @@ public class FilesPage extends TabPage<SettingsScreen> {
 //            protected GuiDownloadService createService() {
 //                return new GuiDownloadPicturesLQ();
 //            }
-//        }, 1);
+//        }, 2);
 //        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadSetPics"),
 //                Forge.getLocalizer().getMessage("lblDownloadSetPics")) {
 //            @Override
 //            protected GuiDownloadService createService() {
 //                return new GuiDownloadSetPicturesLQ();
 //            }
-//        }, 1);
+//        }, 2);
 //        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadQuestImages"),
 //                Forge.getLocalizer().getMessage("lblDownloadQuestImages")) {
 //            @Override
 //            protected GuiDownloadService createService() {
 //                return new GuiDownloadQuestImages();
 //            }
-//        }, 1);
+//        }, 2);
 //        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadAchievementImages"),
 //                Forge.getLocalizer().getMessage("lblDownloadAchievementImages")) {
 //            @Override
 //            protected GuiDownloadService createService() {
 //                return new GuiDownloadAchievementImages();
 //            }
-//        }, 1);
+//        }, 2);
         lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadPrices"),
                 Forge.getLocalizer().getMessage("lblDownloadPrices")) {
             @Override
             protected GuiDownloadService createService() {
                 return new GuiDownloadPrices();
             }
-        }, 1);
+        }, 2);
         lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadSkins"),
                 Forge.getLocalizer().getMessage("lblDownloadSkins")) {
             @Override
@@ -121,7 +168,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
             protected void finishCallback() {
                 SettingsScreen.getSettingsScreen().getSettingsPage().refreshSkinsList();
             }
-        }, 1);
+        }, 2);
         lstItems.addItem(new OptionContentDownloader(Forge.getLocalizer().getMessage("btnDownloadCJKFonts"),
                 Forge.getLocalizer().getMessage("lblDownloadCJKFonts"),
                 Forge.getLocalizer().getMessage("lblDownloadCJKFontPrompt")) {
@@ -146,7 +193,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
             protected void finishCallback() {
                 SettingsScreen.getSettingsScreen().getSettingsPage().refreshCJKFontsList();
             }
-        }, 1);
+        }, 2);
         //storage locations
         final StorageOption cardPicsOption = new StorageOption(Forge.getLocalizer().getMessage("lblCardPicsLocation"), ForgeProfileProperties.getCardPicsDir()) {
             @Override
@@ -169,7 +216,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
                     //ensure decks option is updated if needed
                     decksOption.updateDir(ForgeProfileProperties.getDecksDir());
                 }
-            }, 2);
+            }, 3);
             lstItems.addItem(new StorageOption(Forge.getLocalizer().getMessage("lblImageCacheLocation"), ForgeProfileProperties.getCacheDir()) {
                 @Override
                 protected void onDirectoryChanged(String newDir) {
@@ -178,7 +225,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
                     //ensure card pics option is updated if needed
                     cardPicsOption.updateDir(ForgeProfileProperties.getCardPicsDir());
                 }
-            }, 2);
+            }, 3);
             lstItems.addItem(cardPicsOption, 2);
             lstItems.addItem(decksOption, 2);
         }

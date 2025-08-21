@@ -12,7 +12,6 @@ import forge.deck.DeckGroup;
 import forge.deck.DeckProxy;
 import forge.deck.FDeckChooser;
 import forge.deck.FDeckEditor;
-import forge.deck.FDeckEditor.EditorType;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
@@ -80,7 +79,7 @@ public class LoadDraftScreen extends LaunchScreen {
         if (deck == null) { return; }
 
         DeckPreferences.setDraftDeck(deck.getName());
-        Forge.openScreen(new FDeckEditor(EditorType.Draft, deck, true));
+        Forge.openScreen(new FDeckEditor(FDeckEditor.EditorConfigDraft, deck));
     }
 
     @Override

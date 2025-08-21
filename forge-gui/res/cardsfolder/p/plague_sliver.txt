@@ -2,7 +2,7 @@ Name:Plague Sliver
 ManaCost:2 B B
 Types:Creature Sliver
 PT:5/5
-S:Mode$ Continuous | Affected$ Sliver | AddTrigger$ TrigPhase | AddSVar$ PlagueTrigDamage | Description$ All Slivers have "At the beginning of your upkeep, this permanent deals 1 damage to you."
-SVar:TrigPhase:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ PlagueTrigDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 1 damage to you.
-SVar:PlagueTrigDamage:DB$ DealDamage | NumDmg$ 1 | Defined$ You
+S:Mode$ Continuous | Affected$ Sliver | AddTrigger$ PlaguePhaseTrig | Description$ All Slivers have "At the beginning of your upkeep, this permanent deals 1 damage to you."
+SVar:PlaguePhaseTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ PlagueTrigDmg | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 1 damage to you.
+SVar:PlagueTrigDmg:DB$ DealDamage | NumDmg$ 1 | Defined$ You
 Oracle:All Slivers have "At the beginning of your upkeep, this permanent deals 1 damage to you."

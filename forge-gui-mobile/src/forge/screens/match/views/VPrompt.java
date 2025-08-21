@@ -88,7 +88,15 @@ public class VPrompt extends FContainer {
     @Override
     protected void doLayout(float width, float height) {
         lblMessage.setWidth(width - 2 * BTN_WIDTH);
-        btnCancel.setLeft(lblMessage.getRight());
+        if (Forge.reversedPrompt) {
+            btnOk.setCorner(Corner.BottomRight);
+            btnCancel.setCorner(Corner.BottomLeft);
+            btnOk.setLeft(lblMessage.getRight());
+        } else {
+            btnOk.setCorner(Corner.BottomLeft);
+            btnCancel.setCorner(Corner.BottomRight);
+            btnCancel.setLeft(lblMessage.getRight());
+        }
     }
 
     @Override

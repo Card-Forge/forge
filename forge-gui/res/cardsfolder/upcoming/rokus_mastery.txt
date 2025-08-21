@@ -1,0 +1,7 @@
+Name:Roku's Mastery
+ManaCost:X R R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ X | SubAbility$ DBScry | SpellDescription$ CARDNAME deals X damage to target creature. If X is 4 or greater, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)
+SVar:DBScry:DB$ Scry | ScryNum$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE4
+SVar:X:Count$xPaid
+Oracle:Roku's Mastery deals X damage to target creature. If X is 4 or greater, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)

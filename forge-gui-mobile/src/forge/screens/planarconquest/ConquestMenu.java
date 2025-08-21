@@ -2,9 +2,7 @@ package forge.screens.planarconquest;
 
 import forge.Forge;
 import forge.assets.FSkinImage;
-import forge.deck.Deck;
-import forge.deck.FDeckEditor.DeckController;
-import forge.deck.FDeckEditor.EditorType;
+import forge.deck.FDeckEditor;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
@@ -62,7 +60,7 @@ public class ConquestMenu extends FPopupMenu {
     public static void launchPlanarConquest(final LaunchReason reason) {
         Forge.lastButtonIndex = 7;
         LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingCurrentConquest"), true, () -> {
-            ((DeckController<Deck>)EditorType.PlanarConquest.getController()).setRootFolder(FModel.getConquest().getDecks());
+            FDeckEditor.DECK_CONTROLLER_PLANAR_CONQUEST.setRootFolder(FModel.getConquest().getDecks());
             if (reason == LaunchReason.StartPlanarConquest) {
                 Forge.openScreen(multiverseScreen);
             }

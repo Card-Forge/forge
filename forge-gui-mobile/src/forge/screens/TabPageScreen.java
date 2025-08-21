@@ -74,6 +74,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
             tabPage.parentScreen = (T)this;
             add(tabPage);
             tabPage.setVisible(false);
+            tabPage.onAdd();
         }
         setSelectedPage(tabPages.get(0));
     }
@@ -85,6 +86,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         tabPage.parentScreen = (T) this;
         add(tabPage);
         tabPage.setVisible(false);
+        tabPage.onAdd();
         this.revalidate();
     }
 
@@ -96,6 +98,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
 
         if (selectedPage != null) {
             selectedPage.setVisible(false);
+            selectedPage.onDeactivate();
         }
         selectedPage = tabPage0;
         if (selectedPage != null) {
@@ -329,6 +332,9 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         public void hideTab() {
             tab.setVisible(false);
         }
+        public boolean isTabVisible() {
+            return tab.isVisible();
+        }
 
         public String getCaption() {
             return caption;
@@ -338,8 +344,21 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
             return icon;
         }
 
-        protected void onActivate() {
-        }
+        /**
+         * Called when this tab is added to its TabPageScreen.
+         * Can perform initialization using parentScreen here.
+         */
+        protected void onAdd() {}
+
+        /**
+         * Called when this tab is switched to, or its parent screen becomes visible.
+         */
+        protected void onActivate() {}
+
+        /**
+         * Called when a different tab is selected and this one becomes inactive.
+         */
+        protected void onDeactivate() {}
 
         @Override
         public boolean fling(float velocityX, float velocityY) {

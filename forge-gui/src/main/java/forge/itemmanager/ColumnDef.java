@@ -237,7 +237,12 @@ public enum ColumnDef {
                 }
                 return CardPreferences.getPrefs(card).getStarCount();
             },
-            from -> toCard(from.getKey())),
+            from -> {
+                IPaperCard card = toCard(from.getKey());
+                if (card == null)
+                    return 0;
+                return CardPreferences.getPrefs(card).getStarCount();
+            }),
     /**
      * The favorite deck flag column.
      */

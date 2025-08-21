@@ -51,7 +51,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
                     if (source.hasNamedCard()) {
                         names.addAll(source.getNamedCards());
                     } else {
-                        System.err.println("Malformed MakeCard entry! - " + source.toString());
+                        System.err.println("Malformed MakeCard entry! - " + source);
                     }
                 } else {
                     names.add(n);
@@ -72,7 +72,8 @@ public class MakeCardEffect extends SpellAbilityEffect {
                     cards = AbilityUtils.getDefinedCards(source, def, sa);
                 }
                 for (final Card c : cards) {
-                    names.add(c.getName());
+                    //get the original papercard name
+                    names.add(c.getPaperCard().getName());
                 }
             } else if (sa.hasParam("Spellbook")) {
                 faces.addAll(parseFaces(sa, "Spellbook"));

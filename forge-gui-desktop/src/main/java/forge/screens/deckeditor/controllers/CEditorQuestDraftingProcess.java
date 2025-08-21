@@ -210,7 +210,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
         saved = true;
 
         // Construct computer's decks and save draft
-        final Deck[] computer = boosterDraft.getDecks();
+        final Deck[] computer = boosterDraft.getComputerDecks();
 
         final DeckGroup finishedDraft = new DeckGroup(QuestEventDraft.DECK_NAME);
         finishedDraft.setHumanDeck((Deck) getPlayersDeck().copyTo(QuestEventDraft.DECK_NAME));

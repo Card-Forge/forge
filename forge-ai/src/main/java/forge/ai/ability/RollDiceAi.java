@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
-
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.card.Card;
@@ -15,7 +16,7 @@ import java.util.Map;
 
 public class RollDiceAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player aiPlayer, SpellAbility sa) {
         Card source = sa.getHostCard();
         Game game = aiPlayer.getGame();
         PhaseHandler ph = game.getPhaseHandler();
@@ -23,25 +24,27 @@ public class RollDiceAi extends SpellAbilityAi {
         String logic = sa.getParamOrDefault("AILogic", "");
 
         if (logic.equals("Combat")) {
-            return ph.inCombat() && ((game.getCombat().isAttacking(source) && game.getCombat().isUnblocked(source)) || game.getCombat().isBlocking(source));
+            boolean result = ph.inCombat() && ((game.getCombat().isAttacking(source) && game.getCombat().isUnblocked(source)) || game.getCombat().isBlocking(source));
+            return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else if (logic.equals("CombatEarly")) {
-            return ph.inCombat() && (game.getCombat().isAttacking(source) || game.getCombat().isBlocking(source));
+            boolean result = ph.inCombat() && (game.getCombat().isAttacking(source) || game.getCombat().isBlocking(source));
+            return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else if (logic.equals("Main2")) {
-            return ph.is(PhaseType.MAIN2, aiPlayer);
-        } else if (logic.equals("AtOppEOT")) {
-            return ph.getNextTurn() == aiPlayer && ph.is(PhaseType.END_OF_TURN);
+            boolean result = ph.is(PhaseType.MAIN2, aiPlayer);
+            return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (cost != null && (sa.getPayCosts().hasManaCost() || sa.getPayCosts().hasTapCost())) {
-            return ph.getNextTurn() == aiPlayer && ph.is(PhaseType.END_OF_TURN);
+            boolean result = ph.getNextTurn() == aiPlayer && ph.is(PhaseType.END_OF_TURN);
+            return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        return true;
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override

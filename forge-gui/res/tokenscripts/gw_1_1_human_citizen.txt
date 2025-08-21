@@ -1,0 +1,6 @@
+Name:Human Citizen Token
+ManaCost:no cost
+Colors:green,white
+Types:Creature Human Citizen
+PT:1/1
+Oracle:

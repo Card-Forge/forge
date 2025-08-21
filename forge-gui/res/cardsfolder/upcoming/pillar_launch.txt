@@ -1,0 +1,6 @@
+Name:Pillar Launch
+ManaCost:G
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +2 | KW$ Reach | SubAbility$ DBUntap | SpellDescription$ Target creature gets +2/+2 and gains reach until end of turn. Untap it.
+SVar:DBUntap:DB$ Untap | Defined$ Targeted
+Oracle:Target creature gets +2/+2 and gains reach until end of turn. Untap it.

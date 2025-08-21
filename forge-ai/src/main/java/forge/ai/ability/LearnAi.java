@@ -1,9 +1,7 @@
 package forge.ai.ability;
 
 
-import forge.ai.ComputerUtilCard;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
@@ -17,20 +15,22 @@ import java.util.Map;
 
 public class LearnAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         // For the time being, Learn is treated as universally positive due to being optional
-
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        return mandatory || canPlayAI(aiPlayer, sa);
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+        if (mandatory) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+        return canPlay(aiPlayer, sa);
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        return canPlayAI(aiPlayer, sa);
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+        return canPlay(aiPlayer, sa);
     }
 
     @Override

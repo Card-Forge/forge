@@ -17,6 +17,14 @@ import forge.util.Localizer;
 
 public class ManaReflectedEffect extends SpellAbilityEffect {
 
+    @Override
+    public void buildSpellAbility(SpellAbility sa) {
+        sa.setManaPart(new AbilityManaPart(sa, sa.getMapParams()));
+        if (sa.getParent() == null) {
+            sa.setUndoable(true); // will try at least
+        }
+    }
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */

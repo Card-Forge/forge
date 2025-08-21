@@ -1,0 +1,5 @@
+Name:Kyoshi Warrior Guard
+ManaCost:1 W
+Types:Creature Human Warrior Ally
+PT:2/3
+Oracle:

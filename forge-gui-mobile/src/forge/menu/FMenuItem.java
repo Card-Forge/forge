@@ -45,12 +45,13 @@ public class FMenuItem extends FDisplayObject implements IButton {
         return Header.getBackColor().stepColor(-40);
     }
 
-    private final String text;
+    private String text;
     private final FImage icon;
     private final FEventHandler handler;
     private boolean pressed, allowForIcon, selected, tabMode;
     private float textWidth;
     private TextRenderer textRenderer;
+    private FSkinColor textColor;
 
     public FMenuItem(String text0, FEventHandler handler0) {
         this(text0, null, handler0, true);
@@ -128,6 +129,12 @@ public class FMenuItem extends FDisplayObject implements IButton {
         return (pressed && !tabMode) || selected;
     }
 
+    public FSkinColor getTextColor() {
+        if(this.textColor != null)
+            return this.textColor;
+        return getForeColor();
+    }
+
     @Override
     public void draw(Graphics g) {
         float w = getWidth();
@@ -151,10 +158,10 @@ public class FMenuItem extends FDisplayObject implements IButton {
         }
 
         if (textRenderer == null) {
-            g.drawText(text, FONT, getForeColor(), x, 0, w - x - GAP_X, h, false, Align.left, true);
+            g.drawText(text, FONT, getTextColor(), x, 0, w - x - GAP_X, h, false, Align.left, true);
         }
         else {
-            textRenderer.drawText(g, text, FONT, getForeColor(), x, 0, w - x - GAP_X, h, 0, h, false, Align.left, true);
+            textRenderer.drawText(g, text, FONT, getTextColor(), x, 0, w - x - GAP_X, h, 0, h, false, Align.left, true);
         }
 
         //draw separator line
@@ -168,6 +175,7 @@ public class FMenuItem extends FDisplayObject implements IButton {
 
     @Override
     public void setText(String text0) {
+        this.text = text0;
     }
     @Override
     public boolean isSelected() {
@@ -189,5 +197,6 @@ public class FMenuItem extends FDisplayObject implements IButton {
     }
     @Override
     public void setTextColor(int r, int g, int b) {
+        this.textColor = FSkinColor.getStandardColor(r, g, b);
     }
 }

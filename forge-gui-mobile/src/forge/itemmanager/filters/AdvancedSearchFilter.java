@@ -247,6 +247,11 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
             }
         }
 
+        @Override
+        public FScreen getLandscapeBackdropScreen() {
+            return null;
+        }
+
         private class Filter extends FContainer implements AdvancedSearch.IFilterControl<T> {
             private final FLabel btnNotBeforeParen, btnOpenParen, btnNotAfterParen;
             private final FLabel btnFilter;

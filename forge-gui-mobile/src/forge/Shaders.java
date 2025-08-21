@@ -181,6 +181,66 @@ public class Shaders {
             "    }\n" +
             "    gl_FragColor = col*alpha;\n" +
             "}";
+    public static final String fragRoundedRect2 = "#ifdef GL_ES\n" +
+            "#define LOWP lowp\n" +
+            "precision mediump float;\n" +
+            "#else\n" +
+            "#define LOWP \n" +
+            "#endif\n" +
+            "varying vec2 v_texCoords;\n" +
+            "uniform sampler2D u_texture;\n" +
+            "uniform vec2 u_resolution;\n" +
+            "uniform float edge_radius;\n" +
+            "uniform float u_time;\n" +
+            "LOWP vec4 color = vec4(1.0,1.0,1.0,1.0);\n" +
+            "float gradientIntensity = 0.5;\n" +
+            "const float contrast =    1.5   ;\n" +
+            "vec3 barronSpline(vec3 x, float shape) {\n" +
+            "        const float turning = 0.5;\n" +
+            "        vec3 d = turning - x;\n" +
+            "        return mix(\n" +
+            "          ((1. - turning) * (x - 1.)) / (1. - (x + shape * d)) + 1.,\n" +
+            "          (turning * x) / (1.0e-20 + (x + shape * d)),\n" +
+            "          step(0.0, d));\n" +
+            "}\n" +
+            "\n" +
+            "vec3 hs(vec3 c, float s) {\n" +
+            "    vec3 m=vec3(cos(s),s=sin(s)*.5774,-s);\n" +
+            "    return c*mat3(m+=(1.-m.x)/3.,m.zxy,m.yzx);\n" +
+            "}\n" +
+            "vec3 applyHue(vec3 rgb, float hue)\n" +
+            "{\n" +
+            "    //rgb = ((rgb + 0.5f) * 1f) - 0.5f;\n" +
+            "    //rgb = barronSpline(rgb, contrast);\n" +
+            "    vec3 k = vec3(0.5774);\n" +
+            "    float c = cos(hue);\n" +
+            "    //Rodrigues' rotation formula\n" +
+            "    return rgb * c + cross(k, rgb) * sin(hue) + k * dot(k, rgb) * (1.0 - c);\n" +
+            "}\n"+
+            "void main() {\n" +
+            "    vec2 uv = v_texCoords;\n" +
+            "    vec2 uv_base_center = uv * 2.0 - 1.0;\n" +
+            "\n" +
+            "    vec2 half_resolution = u_resolution.xy * 0.5;\n" +
+            "    vec2 abs_rounded_center = half_resolution.xy - edge_radius;\n" +
+            "    vec2 abs_pixel_coord = vec2( abs(uv_base_center.x * half_resolution.x), abs(uv_base_center.y * half_resolution.y) );\n" +
+            "\n" +
+            "    float alpha = 1.0;\n" +
+            "    LOWP vec4 orig = color * texture2D(u_texture, uv);\n" +
+            "    vec3 col = orig.rgb;\n" +
+            "    vec4 col2 = vec4(applyHue(col, u_time), 1.);\n" +
+            "    //multiply the original texture alpha to render only opaque shifted colors \n" +
+            "    col2.a *= orig.a;\n" +
+            "    uv.y = -1.0 - uv.y;" +
+            "    uv.x += sin(uv.y*12.0+u_time)/4.0;" +
+            "    if (abs_pixel_coord.x > abs_rounded_center.x && abs_pixel_coord.y > abs_rounded_center.y) {\n" +
+            "         float r = length(abs_pixel_coord - abs_rounded_center);\n" +
+            "         alpha = smoothstep(edge_radius, edge_radius - gradientIntensity, r);\n" +
+            "         \n" +
+            "    }\n" +
+            "    //alpha here is the rounded edges to be removed \n" +
+            "    gl_FragColor = col2*alpha;\n" +
+            "}";
     public static final String fragHueShift = "#ifdef GL_ES\n" +
             "#define LOWP lowp\n" +
             "precision mediump float;\n" +

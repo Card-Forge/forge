@@ -1,0 +1,9 @@
+Name:Match the Odds
+ManaCost:2 G
+Types:Sorcery Lesson
+A:SP$ Token | TokenScript$ w_1_1_ally | TokenAmount$ 1 | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBPutCounter | SpellDescription$ Create a 1/1 white Ally creature token. Put a +1/+1 counter on it for each creature your opponents control.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Creature.OppCtrl
+DeckHas:Ability$Token
+Oracle:Create a 1/1 white Ally creature token. Put a +1/+1 counter on it for each creature your opponents control.

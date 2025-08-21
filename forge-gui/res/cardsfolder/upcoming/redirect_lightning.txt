@@ -1,0 +1,6 @@
+Name:Redirect Lightning
+ManaCost:R
+Types:Instant Lesson
+K:AlternateAdditionalCost:PayLife<5>:2
+A:SP$ ChangeTargets | TargetType$ SpellAbility.singleTarget | ValidTgts$ Card,Emblem | TgtPrompt$ Select target spell or ability with a single target | SpellDescription$ Change the target of target spell or ability with a single target.
+Oracle:As an additional cost to cast this spell, pay 5 life or pay {2}.\nChange the target of target spell or ability with a single target.

@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -41,8 +43,8 @@ public abstract class RevealAiBase extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         revealHandTargetAI(ai, sa, false);
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 }

@@ -190,6 +190,13 @@ public final class CardRulesPredicates {
     }
 
     /**
+     * @return a Predicate that matches cards that are of the split type.
+     */
+    public static Predicate<CardRules> isSplitType(final CardSplitType type) {
+        return card -> card.getSplitType().equals(type);
+    }
+
+    /**
      * Checks for color.
      *
      * @param thatColor

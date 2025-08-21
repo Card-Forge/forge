@@ -1,10 +1,7 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -26,10 +23,10 @@ import java.util.Map;
 public abstract class ManifestBaseAi extends SpellAbilityAi {
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         // Manifest doesn't have any "Pay X to manifest X triggers"
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
     /* (non-Javadoc)
      * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
@@ -84,12 +81,9 @@ public abstract class ManifestBaseAi extends SpellAbilityAi {
     abstract protected boolean shouldApply(final Card card, final Player ai, final SpellAbility sa);
 
     @Override
-    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
         final Game game = ai.getGame();
         final Card host = sa.getHostCard();
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false;
-        }
 
         if (sa.hasParam("Choices") || sa.hasParam("ChoiceZone")) {
             ZoneType choiceZone = ZoneType.Hand;
@@ -101,36 +95,42 @@ public abstract class ManifestBaseAi extends SpellAbilityAi {
                 choices = CardLists.getValidCards(choices, sa.getParam("Choices"), ai, host, sa);
             }
             if (choices.isEmpty()) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlaySa);
             }
         } else if ("TopOfLibrary".equals(sa.getParamOrDefault("Defined", "TopOfLibrary"))) {
             // Library is empty, no Manifest
             final CardCollectionView library = ai.getCardsIn(ZoneType.Library);
             if (library.isEmpty())
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
 
             // try not to mill himself with Manifest
             if (library.size() < 5 && !ai.isCardInPlay("Laboratory Maniac")) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             if (!shouldApply(library.getFirst(), ai, sa)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
-        // Probably should be a little more discerning on playing during OPPs turn
+        // TODO Probably should be a little more discerning on playing during OPPs turn
         if (playReusable(ai, sa)) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             // Add blockers?
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.AddBoardPresence);
         }
         if (sa.isAbility()) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        return MyRandom.getRandom().nextFloat() < .8;
+        if ( MyRandom.getRandom().nextFloat() < .8) {
+            // 80% chance to play a Manifest spell
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else {
+            // 20% chance to not play a Manifest spell
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
     }
 
     @Override

@@ -1,9 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilMana;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -14,16 +11,16 @@ import forge.game.zone.ZoneType;
 
 public class ConniveAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         if (!ai.canDraw()) {
-            return false; // can't draw anything
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         Card host = sa.getHostCard();
 
         final int num = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("ConniveNum", "1"), sa);
         if (num == 0) {
-            return false; // Won't do anything
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         CardCollection list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
@@ -41,7 +38,7 @@ public class ConniveAi extends SpellAbilityAi {
         sa.resetTargets();
         while (sa.canAddMoreTarget()) {
             if ((list.isEmpty() && sa.isTargetNumberValid() && !sa.getTargets().isEmpty())) {
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
             if (list.isEmpty()) {
@@ -53,7 +50,7 @@ public class ConniveAi extends SpellAbilityAi {
             if (list.isEmpty()) {
                 // Not mandatory, or the the list was regenerated and is still empty,
                 // so return whether or not we found enough targets
-                return sa.isTargetNumberValid();
+                return new AiAbilityDecision(sa.isTargetNumberValid() ? 100 : 0, sa.isTargetNumberValid() ? AiPlayDecision.WillPlay : AiPlayDecision.CantPlayAi);
             }
 
             Card choice = ComputerUtilCard.getBestCreatureAI(list);
@@ -66,13 +63,17 @@ public class ConniveAi extends SpellAbilityAi {
                 list.clear();
             }
         }
-        return !sa.getTargets().isEmpty() && sa.isTargetNumberValid();
+        if (!sa.getTargets().isEmpty() && sa.isTargetNumberValid()) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else {
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+        }
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (!ai.canDraw() && !mandatory) {
-            return false; // can't draw anything
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         boolean preferred = true;
@@ -85,7 +86,7 @@ public class ConniveAi extends SpellAbilityAi {
         while (sa.canAddMoreTarget()) {
             if (mandatory) {
                 if ((list.isEmpty() || !preferred) && sa.isTargetNumberValid()) {
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
 
                 if (list.isEmpty() && preferred) {
@@ -98,14 +99,13 @@ public class ConniveAi extends SpellAbilityAi {
                     // Still an empty list, but we have to choose something (mandatory); expand targeting to
                     // include AI's own cards to see if there's anything targetable (e.g. Plague Belcher).
                     list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
-                    preferred = false;
                 }
             }
 
             if (list.isEmpty()) {
                 // Not mandatory, or the the list was regenerated and is still empty,
                 // so return whether or not we found enough targets
-                return sa.isTargetNumberValid();
+                return new AiAbilityDecision(sa.isTargetNumberValid() ? 100 : 0, sa.isTargetNumberValid() ? AiPlayDecision.WillPlay : AiPlayDecision.CantPlayAi);
             }
 
             Card choice = ComputerUtilCard.getBestCreatureAI(list);
@@ -118,7 +118,10 @@ public class ConniveAi extends SpellAbilityAi {
                 list.clear();
             }
         }
-        return true;
+        return new AiAbilityDecision(
+                sa.isTargetNumberValid() && !sa.getTargets().isEmpty() ? 100 : 0,
+                sa.isTargetNumberValid() ? AiPlayDecision.WillPlay : AiPlayDecision.TargetingFailed
+        );
     }
 
 }

@@ -63,7 +63,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ Tr
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ +X | KW$ First Strike
 SVar:X:Count$CardPower
 SVar:HasAttackEffect:TRUE
-DeckHas:Keyword$FirstStrike
+DeckHas:Keyword$First Strike
 Oracle:First strike\nWhenever Skanos, Red Dragon Vassal attacks, another target attacking creature gains first strike and gets +X/+0 until end of turn, where X is Skanos's power.
 
 SPECIALIZE:GREEN

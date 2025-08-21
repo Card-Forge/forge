@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -16,7 +18,7 @@ import java.util.Map;
 public class AlterAttributeAi extends SpellAbilityAi {
 
     @Override
-    protected boolean checkApiLogic(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player aiPlayer, SpellAbility sa) {
         final Card source = sa.getHostCard();
         boolean activate = Boolean.parseBoolean(sa.getParamOrDefault("Activate", "true"));
         String[] attributes = sa.getParam("Attributes").split(",");
@@ -24,7 +26,7 @@ public class AlterAttributeAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             // TODO add targeting logic
             // needed for Suspected
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
         final List<Card> defined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
@@ -36,7 +38,7 @@ public class AlterAttributeAi extends SpellAbilityAi {
                     case "Solved":
                         // there is currently no effect that would un-solve something
                         if (!c.isSolved() && activate) {
-                            return true;
+                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                         }
                         break;
                     case "Suspect":
@@ -44,21 +46,21 @@ public class AlterAttributeAi extends SpellAbilityAi {
                         // is Suspected good or bad?
                         // currently Suspected is better
                         if (!activate) {
-                            return false;
+                            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                         }
-                        return true;
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
 
                     case "Saddle":
                     case "Saddled":
                         // AI should not try to Saddle again?
                         if (c.isSaddled()) {
-                            return false;
+                            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                         }
-                        return true;
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
         }
-        return false;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override

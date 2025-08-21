@@ -3,9 +3,9 @@ ManaCost:2 U U
 Types:Creature Shapeshifter
 PT:*/*
 K:Morph:2 U
-R:Event$ TurnFaceUp | ValidCard$ Card.Self | ReplaceWith$ MorphChoice | ActiveZones$ Battlefield
-K:ETBReplacement:Other:MorphChoice
-SVar:MorphChoice:DB$ GenericChoice | Defined$ You | Choices$ BigTough,BigPower | SpellDescription$ As CARDNAME enters or is turned face up, it becomes your choice of 5/1 or 1/5.
-SVar:BigPower:DB$ Animate | Defined$ Self | Duration$ Permanent | Power$ 5 | Toughness$ 1 | SpellDescription$ CARDNAME is 5/1
-SVar:BigTough:DB$ Animate | Defined$ Self | Duration$ Permanent | Power$ 1 | Toughness$ 5 | SpellDescription$ CARDNAME is 1/5
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Layer$ Copy | ReplacementResult$ Updated | ReplaceWith$ MorphChoice | Description$ As CARDNAME enters or is turned face up, it becomes your choice of 5/1 or 1/5.
+R:Event$ TurnFaceUp | ValidCard$ Card.Self | ActiveZones$ Battlefield | Layer$ Copy | Secondary$ True | ReplaceWith$ MorphChoice | Description$ As CARDNAME enters or is turned face up, it becomes your choice of 5/1 or 1/5.
+SVar:MorphChoice:DB$ GenericChoice | Defined$ You | Choices$ BigTough,BigPower
+SVar:BigPower:DB$ Clone | Defined$ Self | SetPower$ 5 | SetToughness$ 1 | SpellDescription$ CARDNAME is 5/1
+SVar:BigTough:DB$ Clone | Defined$ Self | SetPower$ 1 | SetToughness$ 5 | SpellDescription$ CARDNAME is 1/5
 Oracle:As Aquamorph Entity enters or is turned face up, it becomes your choice of 5/1 or 1/5.\nMorph {2}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

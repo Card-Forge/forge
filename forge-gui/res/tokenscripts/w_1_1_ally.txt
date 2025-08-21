@@ -1,0 +1,6 @@
+Name:Ally Token
+ManaCost:no cost
+Colors:white
+Types:Creature Ally
+PT:1/1
+Oracle:

@@ -1,0 +1,11 @@
+Name:Lion Vulture
+ManaCost:3 B
+Types:Creature Cat Bird
+PT:2/2
+K:Flying
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ X | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, if an opponent lost life this turn, put a +1/+1 counter on this creature and draw a card. (Damage causes loss of life.)
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+SVar:X:Count$LifeOppsLostThisTurn
+DeckHas:Ability$Counters
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nAt the beginning of your end step, if an opponent lost life this turn, put a +1/+1 counter on this creature and draw a card. (Damage causes loss of life.)

@@ -4,7 +4,7 @@ Date=2013-07-18
 Name=Magic 2014 Promos
 Type=Promo
 ScryfallCode=PM14
-TokensCode=TM14
+TokenFallbackCode=M14
 
 [cards]
 A12 R Xathrid Necromancer @Maciej Kuciara
@@ -13,7 +13,3 @@ A12 R Xathrid Necromancer @Maciej Kuciara
 141★ R Goblin Diplomats @Jesper Ejsing
 185★ R Megantic Sliver @Lucas Graciano
 215★ R Ratchet Bomb @Dan Murayama Scott
-
-[tokens]
-1 c_1_1_sliver @Igor Kieryluk
-5 b_2_2_zombie @Lucas Graciano

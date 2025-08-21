@@ -1,0 +1,8 @@
+Name:Sokka, Lateral Strategist
+ManaCost:1 WU WU
+Types:Legendary Creature Human Warrior Ally
+PT:2/4
+K:Vigilance
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Creature.attacking+Other | NoResolvingCheck$ True | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME and at least one other creature attack, draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:Vigilance\nWhenever Sokka and at least one other creature attack, draw a card.

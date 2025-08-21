@@ -18,6 +18,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.MagicStack;
+import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Localizer;
 
@@ -26,6 +27,13 @@ import forge.util.Localizer;
  *
  */
 public class ChangeTargetsEffect extends SpellAbilityEffect {
+
+    @Override
+    public void buildSpellAbility(SpellAbility sa) {
+        if (sa.usesTargeting()) {
+            sa.getTargetRestrictions().setZone(ZoneType.Stack);
+        }
+    }
 
     /* (non-Javadoc)
      * @see forge.card.ability.SpellAbilityEffect#resolve(forge.card.spellability.SpellAbility)

@@ -169,6 +169,8 @@ public enum CounterEnumType {
 
     FINALITY("FINAL", 255, 255, 255),
 
+    FIRE("FIRE", 240, 30, 35),
+
     FLAME("FLAME", 255, 143, 43),
     
     FLAVOR("FLAVOR", 208, 152, 97), ///adventure only

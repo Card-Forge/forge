@@ -1,0 +1,9 @@
+Name:Coin-Operated Pony
+ManaCost:no cost
+Types:Basic Artifact Attraction Vehicle
+PT:0/2
+Lights:2 6
+K:Visit:TrigAnimate
+SVar:TrigAnimate:DB$ Animate | Types$ Artifact,Creature | StackDescription$ SpellDescription | SpellDescription$ CARDNAME becomes an artifact creature until end of turn.
+Text:[An attraction deck must have at least 10 attractions.]
+Oracle:Visit — This Vehicle becomes an Artifact Creature until end of turn.

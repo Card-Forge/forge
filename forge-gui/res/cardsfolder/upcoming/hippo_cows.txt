@@ -1,0 +1,6 @@
+Name:Hippo-Cows
+ManaCost:4 G
+Types:Creature Hippo Ox
+PT:5/4
+K:Trample
+Oracle:Trample (This creature can deal excess combat damage to the player it's attacking.)

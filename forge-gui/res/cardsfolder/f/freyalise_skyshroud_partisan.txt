@@ -4,7 +4,7 @@ Types:Legendary Planeswalker Freyalise
 Loyalty:4
 A:AB$ Untap | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Elf | TgtPrompt$ Select up to one target Elf | TargetMin$ 0 | TargetMax$ 1 | RememberTargets$ True | SubAbility$ DBRandom | StackDescription$ REP up to one target Elf_{c:Targeted} | SpellDescription$ Untap up to one target Elf. That Elf and a random Elf creature card in your hand perpetually get +1/+1.
 SVar:DBRandom:DB$ ChooseCard | Defined$ You | Choices$ Elf.YouOwn | ChoiceZone$ Hand | AtRandom$ True | RememberChosen$ True | SubAbility$ DBPump | StackDescription$ None
-SVar:DBPump:DB$ Pump | Defined$ Remembered | PumpZone$ Battlefield, Hand | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBPump:DB$ Pump | Defined$ Remembered | PumpZone$ Battlefield,Hand | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
 A:AB$ Seek | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | Type$ Card.Elf | StackDescription$ REP Seek_{p:You} seeks | SpellDescription$ Seek an Elf card.
 A:AB$ MakeCard | Conjure$ True | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Regal Force | Zone$ Battlefield | SpellDescription$ Conjure a card named Regal Force onto the battlefield.

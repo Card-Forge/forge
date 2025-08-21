@@ -1,8 +1,8 @@
 package forge.game.keyword;
 
 public class KeywordWithAmount extends KeywordInstance<KeywordWithAmount> {
-    private int amount;
-    private boolean withX;
+    protected int amount;
+    protected boolean withX;
     private String extra = "";
 
     @Override

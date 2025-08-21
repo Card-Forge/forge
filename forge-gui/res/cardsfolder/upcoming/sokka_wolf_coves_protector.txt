@@ -1,0 +1,6 @@
+Name:Sokka, Wolf Cove's Protector
+ManaCost:2 W
+Types:Legendary Creature Human Warrior Ally
+PT:3/3
+K:Vigilance
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)

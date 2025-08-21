@@ -28,6 +28,20 @@ public class ReplaceMoved extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
+        if (hasParam("Destination")) {
+            ZoneType zt = (ZoneType) runParams.get(AbilityKey.Destination);
+            if (!ZoneType.listValueOf(getParam("Destination")).contains(zt)) {
+                return false;
+            }
+        }
+
+        if (hasParam("Origin")) {
+            ZoneType zt = (ZoneType) runParams.get(AbilityKey.Origin);
+            if (!ZoneType.listValueOf(getParam("Origin")).contains(zt)) {
+                return false;
+            }
+        }
+
         if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Affected))) {
             return false;
         }
@@ -39,20 +53,6 @@ public class ReplaceMoved extends ReplacementEffect {
         }
         if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
             return false;
-        }
-
-        if (hasParam("Origin")) {
-            ZoneType zt = (ZoneType) runParams.get(AbilityKey.Origin);
-            if (!ZoneType.listValueOf(getParam("Origin")).contains(zt)) {
-                return false;
-            }
-        }        
-
-        if (hasParam("Destination")) {
-            ZoneType zt = (ZoneType) runParams.get(AbilityKey.Destination);
-            if (!ZoneType.listValueOf(getParam("Destination")).contains(zt)) {
-                return false;
-            }
         }
         
         if (hasParam("ExcludeDestination")) {

@@ -21,6 +21,7 @@ import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimaps;
+import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardEdition.EditionEntry;
 import forge.card.CardEdition.Type;
@@ -200,7 +201,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
 
         private static boolean isArtIndex(String s) {
-            return StringUtils.isNumeric(s) && s.length() <= 2 ; // only artIndex between 1-99
+            return StringUtils.isNumeric(s) && s.length() <= 2; // only artIndex between 1-99
         }
 
         private static boolean isSetCode(String s) {
@@ -241,8 +242,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 setCode = info[index];
                 index++;
             }
-            if(info.length > index && isArtIndex(info[index])) {
-                artIndex = Integer.parseInt(info[index]);
+            if(info.length > index && isArtIndex(info[index].replace(ImageKeys.BACKFACE_POSTFIX, ""))) {
+                artIndex = Integer.parseInt(info[index].replace(ImageKeys.BACKFACE_POSTFIX, ""));
                 index++;
             }
             if(info.length > index && isCollectorNumber(info[index])) {
@@ -434,13 +435,13 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
 
         if (upcomingSet != null) {
-            System.err.println("Upcoming set " + upcomingSet + " dated in the future. All unaccounted cards will be added to this set with unknown rarity.");
+            System.err.println("Upcoming set " + upcomingSet + " dated in the future. All `upcoming` cards will be added to this set with unknown rarity.");
         }
 
         for (CardRules cr : rulesByName.values()) {
             if (!contains(cr.getName())) {
                 if (!cr.isCustom()) {
-                    if (upcomingSet != null) {
+                    if (upcomingSet != null && cr.getPath() != null && cr.getPath().contains("upcoming/")) {
                         addCard(new PaperCard(cr, upcomingSet.getCode(), CardRarity.Unknown));
                     } else if (enableUnknownCards && !this.filtered.contains(cr.getName())) {
                         System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/editions/ folder. ");

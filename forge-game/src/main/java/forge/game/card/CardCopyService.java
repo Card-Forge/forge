@@ -150,7 +150,7 @@ public class CardCopyService {
         }
 
         final boolean fromIsFlipCard = copyFrom.isFlipCard();
-        final boolean fromIsTransformedCard = copyFrom.getCurrentStateName() == CardStateName.Transformed || copyFrom.getCurrentStateName() == CardStateName.Meld;
+        final boolean fromIsTransformedCard = copyFrom.getCurrentStateName() == CardStateName.Backside || copyFrom.getCurrentStateName() == CardStateName.Meld;
 
         if (fromIsFlipCard) {
             if (to.getCurrentStateName().equals(CardStateName.Flipped)) {
@@ -163,7 +163,7 @@ public class CardCopyService {
                 && sourceSA != null && ApiType.CopySpellAbility.equals(sourceSA.getApi())
                 && targetSA != null && targetSA.isSpell() && targetSA.getHostCard().isPermanent()) {
             copyState(copyFrom, CardStateName.Original, to, CardStateName.Original);
-            copyState(copyFrom, CardStateName.Transformed, to, CardStateName.Transformed);
+            copyState(copyFrom, CardStateName.Backside, to, CardStateName.Backside);
             // 707.10g If an effect creates a copy of a transforming permanent spell, the copy is also a transforming permanent spell that has both a front face and a back face.
             // The characteristics of its front and back face are determined by the copiable values of the same face of the spell it is a copy of, as modified by any other copy effects.
             // If the spell it is a copy of has its back face up, the copy is created with its back face up. The token that’s put onto the battlefield as that spell resolves is a transforming token.
@@ -257,8 +257,8 @@ public class CardCopyService {
             newCopy.getState(CardStateName.Flipped).copyFrom(copyFrom.getState(CardStateName.Flipped), true);
         } else if (copyFrom.isTransformable()) {
             newCopy.getState(CardStateName.Original).copyFrom(copyFrom.getState(CardStateName.Original), true);
-            newCopy.addAlternateState(CardStateName.Transformed, false);
-            newCopy.getState(CardStateName.Transformed).copyFrom(copyFrom.getState(CardStateName.Transformed), true);
+            newCopy.addAlternateState(CardStateName.Backside, false);
+            newCopy.getState(CardStateName.Backside).copyFrom(copyFrom.getState(CardStateName.Backside), true);
         } else if (copyFrom.hasState(CardStateName.Secondary)) {
             newCopy.getState(CardStateName.Original).copyFrom(copyFrom.getState(CardStateName.Original), true);
             newCopy.addAlternateState(CardStateName.Secondary, false);

@@ -50,7 +50,7 @@ public class CardImage implements FImage {
         } else {
             if (Forge.enableUIMask.equals("Full")) {
                 if (ImageCache.getInstance().isFullBorder(image))
-                    g.drawCardRoundRect(image, null, x, y, w, h, false, false);
+                    g.drawCardRoundRect(image, null, x, y, w, h, false, false, false);
                 else {
                     float radius = (h - w) / 8;
                     g.drawborderImage(ImageCache.getInstance().borderColor(image), x, y, w, h);

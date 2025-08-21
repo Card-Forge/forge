@@ -334,7 +334,7 @@ public class CardFactoryUtil {
      *            a {@link forge.game.card.CardCollectionView} object.
      * @return a boolean.
      */
-    public static byte getMostProminentColorsFromList(final CardCollectionView list, final List<String> restrictedToColors) {
+    public static byte getMostProminentColorsFromList(final CardCollectionView list, final Iterable<String> restrictedToColors) {
         List<Byte> colorRestrictions = Lists.newArrayList();
         for (final String col : restrictedToColors) {
             colorRestrictions.add(MagicColor.fromName(col));
@@ -1171,6 +1171,29 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(removeCounterSA);
 
             inst.addTrigger(trigger);
+        } else if (keyword.startsWith("Firebending")) {
+            final String[] k = keyword.split(":");
+            final String n = k[1];
+
+            StringBuilder desc = new StringBuilder("Firebending ");
+            desc.append(n);
+            if (k.length > 2) {
+                desc.append(" ").append(k[2]);
+            }
+
+            desc.append(" (").append(inst.getReminderText()).append(")");
+
+            final String trigStr = "Mode$ Attacks | ValidCard$ Card.Self | TriggerDescription$ " + desc.toString();
+
+            final String manaStr = "DB$ Mana | Defined$ You | CombatMana$ True | Produced$ R | Amount$ " + n;
+
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+            SpellAbility manaSA = AbilityFactory.getAbility(manaStr, card);
+
+            manaSA.setIntrinsic(intrinsic);
+            trigger.setOverridingAbility(manaSA);
+
+            inst.addTrigger(trigger);
         } else if (keyword.equals("Flanking")) {
             final StringBuilder trigFlanking = new StringBuilder(
                     "Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature.withoutFlanking " +
@@ -1354,9 +1377,6 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Hideaway")) {
             final String[] k = keyword.split(":");
             String n = k[1];
-
-            // The exiled card gains ‘Any player who has controlled the permanent that exiled this card may look at this card in the exile zone.’
-            // this is currently not possible because the StaticAbility currently has no information about the OriginalHost
 
             List<Trigger> triggers = Lists.newArrayList();
             StringBuilder sb = new StringBuilder();
@@ -3808,6 +3828,31 @@ public class CardFactoryUtil {
 
             newSA.getRestrictions().setZone(ZoneType.Hand);
             newSA.setAlternativeCost(AlternativeCost.Warp);
+            newSA.setIntrinsic(intrinsic);
+            inst.addSpellAbility(newSA);
+        } else if (keyword.startsWith("Web-slinging")) {
+            final String[] k = keyword.split(":");
+            final String manaCost = k[1];
+            final Cost webCost = new Cost(manaCost + " Return<1/Creature.tapped>", false);
+
+            final SpellAbility newSA = card.getFirstSpellAbilityWithFallback().copyWithManaCostReplaced(host.getController(), webCost);
+
+            if (k.length > 2) {
+                newSA.getMapParams().put("ValidAfterStack", k[2]);
+            }
+
+            final StringBuilder desc = new StringBuilder();
+            desc.append("Web-Slinging ").append(ManaCostParser.parse(manaCost)).append(" (");
+            desc.append(inst.getReminderText());
+            desc.append(")");
+
+            newSA.setDescription(desc.toString());
+
+            final StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" (Web-Slinging)");
+            newSA.setStackDescription(sb.toString());
+
+            newSA.setAlternativeCost(AlternativeCost.WebSlinging);
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Crew")) {

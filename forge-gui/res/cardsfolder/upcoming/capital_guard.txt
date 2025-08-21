@@ -1,0 +1,5 @@
+Name:Capital Guard
+ManaCost:1 R
+Types:Creature Human Soldier
+PT:2/2
+Oracle:

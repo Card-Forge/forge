@@ -1,0 +1,6 @@
+Name:Bender's Waterskin
+ManaCost:3
+Types:Artifact
+K:CARDNAME untaps during each other player's untap step.
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:Untap this artifact during each other player's untap step.\n{T}: Add one mana of any color.

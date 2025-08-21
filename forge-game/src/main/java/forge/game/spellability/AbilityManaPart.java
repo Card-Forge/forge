@@ -77,6 +77,7 @@ public class AbilityManaPart implements java.io.Serializable {
     private final String addsCounters;
     private final String triggersWhenSpent;
     private final boolean persistentMana;
+    private final boolean combatMana;
 
     private transient List<Mana> lastManaProduced = Lists.newArrayList();
 
@@ -107,7 +108,8 @@ public class AbilityManaPart implements java.io.Serializable {
         this.addsKeywordsUntil = params.get("AddsKeywordsUntil");
         this.addsCounters = params.get("AddsCounters");
         this.triggersWhenSpent = params.get("TriggersWhenSpent");
-        this.persistentMana = null != params.get("PersistentMana") && "True".equalsIgnoreCase(params.get("PersistentMana"));
+        this.persistentMana = params.containsKey("PersistentMana");
+        this.combatMana = params.containsKey("CombatMana");
     }
 
     public AbilityManaPart(final Card newSource, AbilityManaPart oldMana) {
@@ -121,6 +123,7 @@ public class AbilityManaPart implements java.io.Serializable {
         this.addsCounters = oldMana.addsCounters;
         this.triggersWhenSpent = oldMana.triggersWhenSpent;
         this.persistentMana = oldMana.persistentMana;
+        this.combatMana = oldMana.combatMana;
         // Do we need to copy over last mana produced somehow? Its kinda gross
     }
 
@@ -739,6 +742,9 @@ public class AbilityManaPart implements java.io.Serializable {
      */
     public boolean isPersistentMana() {
         return this.persistentMana;
+    }
+    public boolean isCombatMana() {
+        return this.combatMana;
     }
 
     boolean abilityProducesManaColor(final SpellAbility am, final byte neededColor) {

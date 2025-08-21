@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import forge.ai.*;
-import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayLife;
 import forge.game.phase.PhaseHandler;
@@ -21,13 +20,8 @@ public class SurveilAi extends SpellAbilityAi {
      * @see forge.ai.SpellAbilityAi#doTriggerAINoCost(forge.game.player.Player, forge.game.spellability.SpellAbility, boolean)
      */
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        if (sa.usesTargeting()) { // TODO: It doesn't appear that Surveil ever targets, is this necessary?
-            sa.resetTargets();
-            sa.getTargets().add(ai);
-        }
-
-        return true;
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /*
@@ -35,8 +29,8 @@ public class SurveilAi extends SpellAbilityAi {
      * @see forge.ai.SpellAbilityAi#chkAIDrawback(forge.game.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        return doTriggerAINoCost(ai, sa, false);
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+        return doTriggerNoCost(ai, sa, false);
     }
 
     /**
@@ -66,29 +60,11 @@ public class SurveilAi extends SpellAbilityAi {
         return true;
     }
 
-    /**
-     * Checks if the AI will play a SpellAbility with the specified AiLogic
-     */
     @Override
-    protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        final Card source = sa.getHostCard();
-
-        if ("Never".equals(aiLogic)) {
-            return false;
-        } else if ("Once".equals(aiLogic)) {
-            return !AiCardMemory.isRememberedCard(ai, source, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
-        }
-
-        // TODO: add card-specific Surveil AI logic here when/if necessary
-
-        return true;
-    }
-
-    @Override
-    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         // Makes no sense to do Surveil when there's nothing in the library
         if (ai.getCardsIn(ZoneType.Library).isEmpty()) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
         }
 
         // Only Surveil for life when at decent amount of life remaining
@@ -96,25 +72,26 @@ public class SurveilAi extends SpellAbilityAi {
         if (cost != null && cost.hasSpecificCostType(CostPayLife.class)) {
             final int maxLife = ((PlayerControllerAi)ai.getController()).getAi().getIntProperty(AiProps.SURVEIL_LIFEPERC_AFTER_PAYING_LIFE);
             if (!ComputerUtilCost.checkLifeCost(ai, cost, sa.getHostCard(), ai.getStartingLife() * maxLife / 100, sa)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
             }
         }
 
+        // TODO If EOT and I'm the next turn, the percent should probably be higher
         double chance = .4; // 40 percent chance for instant speed
         if (isSorcerySpeed(sa, ai)) {
             chance = .667; // 66.7% chance for sorcery speed (since it will never activate EOT)
         }
 
-        boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
+        boolean randomReturn = MyRandom.getRandom().nextFloat() <= chance;
         if (playReusable(ai, sa)) {
             randomReturn = true;
         }
 
         if (randomReturn) {
-            AiCardMemory.rememberCard(ai, sa.getHostCard(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        return randomReturn;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override

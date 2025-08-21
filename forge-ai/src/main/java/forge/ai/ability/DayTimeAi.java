@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.SpellAbilityAi;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -11,24 +13,34 @@ import java.util.Map;
 
 public class DayTimeAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         PhaseHandler ph = aiPlayer.getGame().getPhaseHandler();
 
         if ((sa.getHostCard().isCreature() && sa.getPayCosts().hasTapCost()) || sa.getPayCosts().hasManaCost()) {
             // If it involves a cost that may put us at a disadvantage, better activate before own turn if possible
             if (!isSorcerySpeed(sa, aiPlayer)) {
-                return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == aiPlayer;
+                if (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == aiPlayer) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                } else {
+                    return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
+                }
             } else {
-                return ph.is(PhaseType.MAIN2, aiPlayer); // Give other things a chance to be cast (e.g. Celestus)
+                if (ph.is(PhaseType.MAIN2, aiPlayer)) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                } else {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
             }
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        return true; // TODO: more logic if it's ever a bad idea to trigger this (when non-mandatory)
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+
     }
 
     @Override

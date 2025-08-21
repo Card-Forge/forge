@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
-
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -16,55 +17,51 @@ import forge.game.zone.ZoneType;
 
 public class BecomesBlockedAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Game game = aiPlayer.getGame();
 
         if (!game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)
                 || !game.getPhaseHandler().getPlayerTurn().isOpponentOf(aiPlayer)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (tgt != null) {
-        	sa.resetTargets();
-	        CardCollection list = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), aiPlayer.getOpponents());
-	        list = CardLists.getTargetableCards(list, sa);
-	        list = CardLists.getNotKeyword(list, Keyword.TRAMPLE);
+            sa.resetTargets();
+            CardCollection list = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), aiPlayer.getOpponents());
+            list = CardLists.getTargetableCards(list, sa);
+            list = CardLists.getNotKeyword(list, Keyword.TRAMPLE);
 
-	        while (sa.canAddMoreTarget()) {
-	            Card choice = null;
+            while (sa.canAddMoreTarget()) {
+                Card choice = null;
 
-	            if (list.isEmpty()) {
-	                return false;
-	            }
+                if (list.isEmpty()) {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
 
-	            choice = ComputerUtilCard.getBestCreatureAI(list);
+                choice = ComputerUtilCard.getBestCreatureAI(list);
 
-	            if (choice == null) { // can't find anything left
-	                return false;
-	            }
+                if (choice == null) { // can't find anything left
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
 
-	            list.remove(choice);
-	            sa.getTargets().add(choice);
-	        }
+                list.remove(choice);
+                sa.getTargets().add(choice);
+            }
         }
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         // TODO - implement AI
-        return false;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        boolean chance;
-
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         // TODO - implement AI
-        chance = false;
-
-        return chance;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 }

@@ -3,12 +3,13 @@ package forge.screens.limited;
 import forge.Forge;
 import forge.assets.FSkinFont;
 import forge.deck.DeckGroup;
+import forge.deck.DeckSection;
 import forge.deck.FDeckEditor;
-import forge.deck.FDeckEditor.EditorType;
 import forge.deck.io.DeckPreferences;
 import forge.gamemodes.limited.SealedCardPoolGenerator;
 import forge.gui.FThreads;
 import forge.screens.LaunchScreen;
+import forge.screens.home.LoadGameMenu;
 import forge.screens.home.NewGameMenu;
 import forge.toolbox.FLabel;
 import forge.toolbox.FTextArea;
@@ -48,7 +49,10 @@ public class NewSealedScreen extends LaunchScreen {
 
             FThreads.invokeInEdtLater(() -> {
                 DeckPreferences.setSealedDeck(sealed.getName());
-                Forge.openScreen(new FDeckEditor(EditorType.Sealed, sealed.getName(), false, e -> Forge.openScreen(new LoadSealedScreen(), false)));
+                FDeckEditor deckEditor = new FDeckEditor(FDeckEditor.EditorConfigSealed, sealed.getName());
+                deckEditor.setSelectedSection(DeckSection.Sideboard);
+                Forge.openScreen(deckEditor);
+                LoadGameMenu.LoadGameScreen.SealedDeck.setAsBackScreen(true);
             });
         });
     }

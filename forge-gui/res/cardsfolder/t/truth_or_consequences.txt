@@ -1,9 +1,9 @@
 Name:Truth or Consequences
 ManaCost:2 U R
 Types:Sorcery
-A:SP$ Vote | Defined$ Player | Secretly$ True | VoteType$ Truth,Consequences | StoreVoteNum$ True | SubAbility$ DBDraw | SpellDescription$ Secret council — Each player secretly votes for truth or consequences, then those votes are revealed. You draw cards equal to the number of truth votes. Then choose an opponent at random. CARDNAME deals 3 damage to that player for each consequences vote.
-SVar:DBDraw:DB$ Draw | NumCards$ VoteNumTruth | SubAbility$ DBChoose
-SVar:DBChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | Random$ True | SubAbility$ DBDamage
+A:SP$ Vote | Defined$ Player | Secretly$ True | Choices$ DBDraw,DBChoose | StoreVoteNum$ True | SpellDescription$ Secret council — Each player secretly votes for truth or consequences, then those votes are revealed. You draw cards equal to the number of truth votes. Then choose an opponent at random. CARDNAME deals 3 damage to that player for each consequences vote.
+SVar:DBDraw:DB$ Draw | NumCards$ VoteNum | SubAbility$ DBChoose | SpellDescription$ Truth
+SVar:DBChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | Random$ True | SubAbility$ DBDamage | SpellDescription$ Consequences
 SVar:DBDamage:DB$ DealDamage | Defined$ ChosenPlayer | NumDmg$ X
-SVar:X:SVar$VoteNumConsequences/Times.3
+SVar:X:SVar$VoteNum/Times.3
 Oracle:Secret council — Each player secretly votes for truth or consequences, then those votes are revealed. You draw cards equal to the number of truth votes. Then choose an opponent at random. Truth or Consequences deals 3 damage to that player for each consequences vote.

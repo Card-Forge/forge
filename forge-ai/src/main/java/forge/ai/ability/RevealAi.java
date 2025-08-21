@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
+import forge.ai.AiAbilityDecision;
 import forge.ai.AiPlayDecision;
 import forge.ai.PlayerControllerAi;
 import forge.game.ability.AbilityUtils;
@@ -9,29 +10,24 @@ import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
-import forge.util.MyRandom;
 
 public class RevealAi extends RevealAiBase {
 
     @Override
-    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
-        // we can reuse this function here...
-        final boolean bFlag = revealHandTargetAI(ai, sa, false);
-
-        if (!bFlag) {
-            return false;
+    protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
+        if (!revealHandTargetAI(ai, sa, false)) {
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
-
-        boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(.667, sa.getActivationsThisTurn() + 1);
 
         if (playReusable(ai, sa)) {
-            randomReturn = true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
-        return randomReturn;
+
+        return super.checkApiLogic(ai, sa);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         // logic to see if it should reveal Miracle Card
         if (sa.hasParam("MiracleCost")) {
             final Card c = sa.getHostCard();
@@ -44,12 +40,14 @@ public class RevealAi extends RevealAiBase {
 
                 spell = (Spell) spell.copyWithDefinedCost(new Cost(sa.getParam("MiracleCost"), false));
 
-                if (AiPlayDecision.WillPlay == ((PlayerControllerAi) ai.getController()).getAi()
-                        .canPlayFromEffectAI(spell, false, false)) {
-                    return true;
+                AiPlayDecision decision = ((PlayerControllerAi) ai.getController()).getAi()
+                        .canPlayFromEffectAI(spell, false, false);
+
+                if (AiPlayDecision.WillPlay == decision) {
+                    return new AiAbilityDecision(100, decision);
                 }
             }
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if ("Kefnet".equals(sa.getParam("AILogic"))) {
@@ -58,7 +56,7 @@ public class RevealAi extends RevealAiBase {
             );
 
             if (c == null || (!c.isInstant() && !c.isSorcery())) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
             for (SpellAbility s : c.getBasicSpells()) {
                 Spell spell = (Spell) s.copy(ai);
@@ -68,21 +66,21 @@ public class RevealAi extends RevealAiBase {
 
                 // use hard coded reduce cost
                 spell.putParam("ReduceCost", "2");
+                AiPlayDecision decision = ((PlayerControllerAi) ai.getController()).getAi()
+                        .canPlayFromEffectAI(spell, false, false);
 
-                if (AiPlayDecision.WillPlay == ((PlayerControllerAi) ai.getController()).getAi()
-                        .canPlayFromEffectAI(spell, false, false)) {
-                    return true;
+                if (AiPlayDecision.WillPlay == decision) {
+                    return new AiAbilityDecision(100, decision);
                 }
             }
-            return false;
-
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (!revealHandTargetAI(ai, sa, mandatory)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
 }

@@ -491,6 +491,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             min = 0;
         }
         GameEntityViewMap<Card, CardView> gameCacheExile = GameEntityView.getMap(list);
+        // CR 406.4 technically if you can't see their face some randomness should be involved
         List<CardView> views = controller.getGui().many(
                 Localizer.getInstance().getMessage("lblChooseAnExiledCardPutIntoGraveyard"),
                 Localizer.getInstance().getMessage("lblToGraveyard"), min, c, CardView.getCollection(list), CardView.get(source));

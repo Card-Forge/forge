@@ -38,7 +38,7 @@ import java.util.Map;
 
 public class DamageDealAi extends DamageAiBase {
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         final SpellAbility root = sa.getRootAbility();
         final String damage = sa.getParam("NumDmg");
         Card source = sa.getHostCard();
@@ -65,15 +65,19 @@ public class DamageDealAi extends DamageAiBase {
                             continue; // in case the calculation gets messed up somewhere
                         }
                         root.setSVar("EnergyToPay", "Number$" + dmg);
-                        return true;
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                     }
                 }
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
             if (sa.getSVar(damage).equals("Count$xPaid")) {
                 // Life Drain
                 if ("XLifeDrain".equals(logic)) {
-                    return doXLifeDrainLogic(ai, sa);
+                    if (doXLifeDrainLogic(ai, sa)) {
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                    } else {
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                    }
                 }
 
                 // Set PayX here to maximum value.
@@ -83,11 +87,15 @@ public class DamageDealAi extends DamageAiBase {
                 dmg--; // the card will be spent casting the spell, so actual damage is 1 less
             }
         }
-        return damageTargetAI(ai, sa, dmg, true);
+        if (damageTargetAI(ai, sa, dmg, true)) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else {
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+        }
     }
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
@@ -108,7 +116,7 @@ public class DamageDealAi extends DamageAiBase {
                         boolean inDanger = ComputerUtil.aiLifeInDanger(ai, false, 0);
                         boolean isLethal = sa.usesTargeting() && sa.getTargetRestrictions().canTgtPlayer() && dmg >= ai.getWeakestOpponent().getLife() && !ai.getWeakestOpponent().cantLoseForZeroOrLessLife();
                         if (dmg < threshold && ai.getGame().getPhaseHandler().getTurn() / 2 < threshold && !inDanger && !isLethal) {
-                            return false;
+                            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                         }
                     }
                 }
@@ -134,10 +142,10 @@ public class DamageDealAi extends DamageAiBase {
                         if (shouldTgtP(ai, sa, maxDmg, false)) {
                             sa.resetTargets();
                             sa.getTargets().add(maxDamaged);
-                            return true;
+                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                         }
                     } else {
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                     }
                 }
             }
@@ -154,7 +162,7 @@ public class DamageDealAi extends DamageAiBase {
             if (ai.getGame().getPhaseHandler().isPlayerTurn(ai) && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 for (Card potentialAtkr : ai.getCreaturesInPlay()) {
                     if (ComputerUtilCard.doesCreatureAttackAI(ai, potentialAtkr)) {
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
                 }
             }
@@ -175,16 +183,24 @@ public class DamageDealAi extends DamageAiBase {
                      * Mostly used to ping the player with remaining counters. The issue with
                      * stacked effects might appear here.
                      */
-                    return damageTargetAI(ai, sa, n, true);
+                     if (damageTargetAI(ai, sa, n, true)) {
+                         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                     } else {
+                         return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+                     }
                 } else {
                     /*
                      * Only ping when stack is clear to avoid hassle of evaluating stacked effects
                      * like protection/pumps or over-killing target.
                      */
-                    return ai.getGame().getStack().isEmpty() && damageTargetAI(ai, sa, n, false);
+                    if (ai.getGame().getStack().isEmpty() && damageTargetAI(ai, sa, n, false)) {
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                    } else {
+                        return new AiAbilityDecision(0, AiPlayDecision.StackNotEmpty);
+                    }
                 }
             } else {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         } else if ("NinThePainArtist".equals(logic)) {
             // Make sure not to mana lock ourselves + make the opponent draw cards into an immediate discard
@@ -193,11 +209,15 @@ public class DamageDealAi extends DamageAiBase {
                 if (doTarget) {
                     Card tgt = sa.getTargetCard();
                     if (tgt != null) {
-                        return ai.getGame().getPhaseHandler().getPlayerTurn() == tgt.getController();
+                        if (ai.getGame().getPhaseHandler().getPlayerTurn() == tgt.getController()) {
+                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                        } else {
+                            return new AiAbilityDecision(0, AiPlayDecision.WaitForEndOfTurn);
+                        }
                     }
                 }
             }
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.WaitForEndOfTurn);
         }
 
         if (sourceName.equals("Sorin, Grim Nemesis")) {
@@ -209,35 +229,35 @@ public class DamageDealAi extends DamageAiBase {
                         continue;   // in case the calculation gets messed up somewhere
                     }
                     sa.setXManaCostPaid(dmg);
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (dmg <= 0) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         // temporarily disabled until better AI
         if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
         }
 
         if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
         }
 
         if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source, sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
         }
 
         if ("DiscardLands".equals(sa.getParam("AILogic")) && !ComputerUtilCost.checkDiscardCost(ai, abCost, source, sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
         }
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         // Try to chain damage/debuff effects
@@ -248,13 +268,13 @@ public class DamageDealAi extends DamageAiBase {
             int extraDmg = chainDmg.getValue();
             boolean willTargetIfChained = damageTargetAI(ai, sa, dmg + extraDmg, false);
             if (!willTargetIfChained) {
-                return false; // won't play it even in chain
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed); // won't play it even in chain
             } else if (willTargetIfChained && chainDmg.getKey().getApi() == ApiType.Pump && sa.getTargets().isTargetingAnyPlayer()) {
                 // we're trying to chain a pump spell to a damage spell targeting a player, that won't work
                 // so run an additional check to ensure that we want to cast the current spell separately
                 sa.resetTargets();
                 if (!damageTargetAI(ai, sa, dmg, false)) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
             } else {
                 // we are about to decide to play this damage spell; if there's something chained to it, reserve mana for
@@ -264,7 +284,7 @@ public class DamageDealAi extends DamageAiBase {
             }
         } else if (!damageTargetAI(ai, sa, dmg, false)) {
             // simple targeting when there is no spell chaining plan
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
         if ((damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) ||
@@ -288,10 +308,12 @@ public class DamageDealAi extends DamageAiBase {
 
         if ("DiscardCMCX".equals(sa.getParam("AILogic"))) {
             final int cmc = sa.getXManaCostPaid();
-            return ai.getZone(ZoneType.Hand).contains(CardPredicates.hasCMC(cmc));
+             if (!ai.getZone(ZoneType.Hand).contains(CardPredicates.hasCMC(cmc))) {
+                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+             }
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /**
@@ -932,14 +954,14 @@ public class DamageDealAi extends DamageAiBase {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
         final String damage = sa.getParam("NumDmg");
         int dmg = calculateDamageAmount(sa, source, damage);
 
         // Remove all damage
         if (sa.hasParam("Remove")) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
@@ -950,10 +972,18 @@ public class DamageDealAi extends DamageAiBase {
 
         if (!sa.usesTargeting()) {
             // If it's not mandatory check a few things
-            return mandatory || damageChooseNontargeted(ai, sa, dmg);
+            if (mandatory) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+
+            if (damageChooseNontargeted(ai, sa, dmg)) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
         } else {
             if (!damageChoosingTargets(ai, sa, sa.getTargetRestrictions(), dmg, mandatory, true) && !mandatory) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
             if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid") && !sa.isDividedAsYouChoose()) {
@@ -976,7 +1006,7 @@ public class DamageDealAi extends DamageAiBase {
             }
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     private static int calculateDamageAmount(SpellAbility sa, Card source, String damage) {

@@ -345,6 +345,10 @@ public class ComputerUtilAbility {
                 if (source.hasSVar("AIPriorityModifier")) {
                     p += Integer.parseInt(source.getSVar("AIPriorityModifier"));
                 }
+                // try to use it before it's gone
+                if (source.isInPlay() && source.hasSVar("EndOfTurnLeavePlay")) {
+                    p += 1;
+                }
                 if (ComputerUtilCard.isCardRemAIDeck(sa.getOriginalHost() != null ? sa.getOriginalHost() : source)) {
                     p -= 10;
                 }

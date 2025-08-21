@@ -125,7 +125,7 @@ public class ConquestUtil {
         return name;
     }
 
-    public static CardPool getAvailablePool(Deck deck) {
+    public static CardPool getAvailablePool() {
         Set<PaperCard> availableCards = Sets.newHashSet();
         ConquestData model = FModel.getConquest().getModel();
         for (PaperCard pc : model.getUnlockedCards()) {
@@ -135,25 +135,6 @@ public class ConquestUtil {
         // Remove all exiled cards
         for (PaperCard pc : model.getExiledCards()) {
             availableCards.remove(pc);
-        }
-
-        // Remove all cards in the main deck
-        for (Entry<PaperCard, Integer> e : deck.getMain()) {
-            availableCards.remove(e.getKey());
-        }
-
-        // Remove commander
-        byte colorIdentity = 0; 
-        for (PaperCard commander : deck.getCommanders()) {
-            colorIdentity |=  commander.getRules().getColorIdentity().getColor();
-            availableCards.remove(commander);
-        }
-
-        // Remove any cards that aren't allowed in deck due to color identity
-        if (colorIdentity != MagicColor.ALL_COLORS) {
-            Predicate<PaperCard> pred = DeckFormat.Commander.isLegalCardForCommanderPredicate(deck.getCommanders());
-
-            availableCards.removeIf(pred.negate());
         }
 
         // Create pool from available cards
