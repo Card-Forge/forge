@@ -170,20 +170,18 @@ public class Forge implements ApplicationListener {
         //install our error handler
         ExceptionHandler.registerErrorHandling();
         //init hwInfo to log
-        Gdx.app.postRunnable(() -> {
-            HWInfo info = GuiBase.getHWInfo();
-            if (info != null) {
-                System.out.println(
-                    "---------------------------------------\n" +
-                    "APP: Forge v." + GuiBase.getInterface().getCurrentVersion() + " (" + GuiBase.getInterface() + ")" +
-                    "\nDEV: " + info.device().getName() +
-                    "\nCPU: " + info.device().getCpuDescription() +
-                    "\nRAM: " + GuiBase.getDeviceRAM() + " MB" +
-                    "\nOS: " + info.os().getName() +
-                    "\n---------------------------------------"
-                );
-            }
-        });
+        HWInfo info = GuiBase.getHWInfo();
+        if (info != null) {
+            System.out.println(
+                "##########################################\n" +
+                "APP: Forge v." + GuiBase.getInterface().getCurrentVersion() +
+                "\nDEV: " + info.device().getName() +
+                "\nCPU: " + info.device().getCpuDescription() +
+                "\nRAM: " + GuiBase.getDeviceRAM() + " MB" +
+                "\nOS: " + info.os().getRawDescription() +
+                "\n##########################################"
+            );
+        }
         // closeSplashScreen() is called early on non-Windows OS so it will not crash, LWJGL3 bug on AWT Splash.
         if (OperatingSystem.isWindows())
             getDeviceAdapter().closeSplashScreen();
