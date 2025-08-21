@@ -418,7 +418,7 @@ public enum DeckFormat {
                 }
             }
 
-            if (canHaveAnyNumberOf(simpleCard)) {
+            if (this == DeckFormat.Limited || canHaveAnyNumberOf(simpleCard)) {
                 continue;
             }
 
