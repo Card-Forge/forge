@@ -408,8 +408,7 @@ public final class FModel {
             
             final List<String> typeListFile = FileUtil.readFile(ForgeConstants.TYPE_LIST_FILE);
 
-            Set<String> addTo = null;
-            loadTypes(addTo, typeListFile);
+            loadTypes(typeListFile);
 
             File customTypesFilesDir = new File(ForgeConstants.USER_CUSTOM_TYPE_LIST_DIR);
             if (customTypesFilesDir.exists() && customTypesFilesDir.isDirectory()) {
@@ -423,7 +422,7 @@ public final class FModel {
                     for (File file : txtFiles) {
                         try {
                             final List<String> customTypeListFile = FileUtil.readFile(file);
-                            loadTypes(addTo, customTypeListFile);
+                            loadTypes(customTypeListFile);
                         } catch (Exception e) {
                             System.err.println("Failed to load custom types from file " + file.getAbsolutePath());
                         }
@@ -448,7 +447,9 @@ public final class FModel {
         }
     }
 
-    private static void loadTypes(Set<String> addTo, List<String> fileContent) {
+    private static void loadTypes(List<String> fileContent) {
+        Set<String> addTo = null;
+
         for (final String s : fileContent) {
             if (s.equals("[BasicTypes]")) {
                 addTo = CardType.Constant.BASIC_TYPES;
@@ -471,6 +472,10 @@ public final class FModel {
             } else if (s.equals("[PlanarTypes]")) {
                 addTo = CardType.Constant.PLANAR_TYPES;
             } else if (s.length() > 1) {
+                if (addTo == null) {
+                    continue;
+                }
+
                 if (s.contains(":")) {
                     String[] k = s.split(":");
 
