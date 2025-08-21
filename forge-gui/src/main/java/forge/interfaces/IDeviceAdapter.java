@@ -27,4 +27,6 @@ public interface IDeviceAdapter {
     Pair<Integer, Integer> getRealScreenSize(boolean real);
     ArrayList<String> getGamepads();
     UpnpServiceConfiguration getUpnpPlatformService();
+    boolean needFileAccess();
+    void requestFileAcces();
 }
