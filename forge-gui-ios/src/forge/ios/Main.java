@@ -145,5 +145,15 @@ public class Main extends IOSApplication.Delegate {
             // not used
             return null;
         }
+
+        @Override
+        public boolean needFileAccess() {
+            return false;
+        }
+
+        @Override
+        public void requestFileAcces() {
+
+        }
     }
 }

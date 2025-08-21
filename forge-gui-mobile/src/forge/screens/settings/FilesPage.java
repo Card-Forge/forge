@@ -57,37 +57,41 @@ public class FilesPage extends TabPage<SettingsScreen> {
         lstItems.addItem(new Extra(Forge.getLocalizer().getMessage("lblBackupRestore"), Forge.getLocalizer().getMessage("lblBackupRestoreDescription")) {
             @Override
             public void select() {
+                if (Forge.getDeviceAdapter().needFileAccess()) {
+                    Forge.getDeviceAdapter().requestFileAcces();
+                    return;
+                }
                 FOptionPane.showOptionDialog(Forge.getLocalizer().getMessage("lblPlsSelectActions"), "", FOptionPane.QUESTION_ICON, ImmutableList.of(Forge.getLocalizer().getMessage("lblBackup"), Forge.getLocalizer().getMessage("lblRestore"), Forge.getLocalizer().getMessage("lblCancel")), 2, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
-                        switch (result) {
-                            case 0:
-                                FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblBackupMsg"), true, () -> {
-                                    File source = new FileHandle(ForgeProfileProperties.getUserDir()).file();
-                                    File target = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir()).file();
-                                    try {
-                                        ZipUtil.zip(source, target, ZipUtil.backupClsFile);
-                                        FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblSuccess") + "\n" + target.getAbsolutePath() + File.separator + ZipUtil.backupClsFile, Forge.getLocalizer().getMessage("lblBackup"), FOptionPane.INFORMATION_ICON);
-                                    } catch (IOException e) {
-                                        FOptionPane.showMessageDialog(e.toString(), Forge.getLocalizer().getMessage("lblError"), FOptionPane.ERROR_ICON);
-                                    }
-                                }));
-                                break;
-                            case 1:
-                                FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblRestoreMsg"), true, () -> {
-                                    File source = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir() + ZipUtil.backupClsFile).file();
-                                    File target = new FileHandle(ForgeProfileProperties.getUserDir()).file().getParentFile();
-                                    try {
-                                        String msg = ZipUtil.unzip(source, target);
-                                        FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblSuccess") + "\n" + msg, Forge.getLocalizer().getMessage("lblRestore"), FOptionPane.INFORMATION_ICON);
-                                    } catch (IOException e) {
-                                        FOptionPane.showMessageDialog(e.toString(), Forge.getLocalizer().getMessage("lblError"), FOptionPane.ERROR_ICON);
-                                    }
-                                }));
-                                break;
-                            default:
-                                break;
-                        }
+                    switch (result) {
+                        case 0:
+                            FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblBackupMsg"), true, () -> {
+                                File source = new FileHandle(ForgeProfileProperties.getUserDir()).file();
+                                File target = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir()).file();
+                                try {
+                                    ZipUtil.zip(source, target, ZipUtil.backupClsFile);
+                                    FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblSuccess") + "\n" + target.getAbsolutePath() + File.separator + ZipUtil.backupClsFile, Forge.getLocalizer().getMessage("lblBackup"), FOptionPane.INFORMATION_ICON);
+                                } catch (IOException e) {
+                                    FOptionPane.showMessageDialog(e.toString(), Forge.getLocalizer().getMessage("lblError"), FOptionPane.ERROR_ICON);
+                                 }
+                            }));
+                            break;
+                        case 1:
+                            FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblRestoreMsg"), true, () -> {
+                                File source = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir() + ZipUtil.backupClsFile).file();
+                                File target = new FileHandle(ForgeProfileProperties.getUserDir()).file().getParentFile();
+                                try {
+                                    String msg = ZipUtil.unzip(source, target);
+                                    FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblSuccess") + "\n" + msg, Forge.getLocalizer().getMessage("lblRestore"), FOptionPane.INFORMATION_ICON);
+                                } catch (IOException e) {
+                                    FOptionPane.showMessageDialog(e.toString(), Forge.getLocalizer().getMessage("lblError"), FOptionPane.ERROR_ICON);
+                                }
+                            }));
+                            break;
+                        default:
+                            break;
+                    }
                     }
                 });
             }

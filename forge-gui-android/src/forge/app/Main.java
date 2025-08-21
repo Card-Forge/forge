@@ -70,12 +70,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.jupnp.DefaultUpnpServiceConfiguration;
 import org.jupnp.android.AndroidUpnpServiceConfiguration;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Date;
@@ -203,14 +198,14 @@ public class Main extends AndroidApplication {
         device.setBrand(Build.BRAND);
         device.setManufacturer(Build.MANUFACTURER);
         device.setMemorySize(memInfo.totalMem);
-        String cpuDesc = Build.VERSION.SDK_INT > Build.VERSION_CODES.R ? Build.SOC_MANUFACTURER + " " + Build.SOC_MODEL : Build.UNKNOWN;
-        device.setCpuDescription(cpuDesc);
+        device.setCpuDescription(getCpuName());
         device.setChipset(Build.HARDWARE + " " + Build.BOARD);
         // OS Info
         OperatingSystem os = new OperatingSystem();
-        os.setName("Android " + Build.VERSION.RELEASE);
+        os.setName("Android");
         os.setVersion(Build.VERSION.RELEASE);
         os.setBuild(Build.DISPLAY);
+        os.setRawDescription(getAndroidOSName());
 
         initForge(Gadapter, new HWInfo(device, os), permissiongranted, totalMemory, isTabletDevice(getContext()));
     }
@@ -258,9 +253,7 @@ public class Main extends AndroidApplication {
         text.setGravity(Gravity.LEFT);
         text.setTypeface(Typeface.SERIF);
         String SP = "Storage Permission";
-        if (needExternalFileAccess()) {
-          SP = "All File Access Permission";
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             SP = "Photos and Videos, Music and Audio Permissions";
         } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
             SP = "Files & Media Permissions";
@@ -272,11 +265,8 @@ public class Main extends AndroidApplication {
                 " 2) Tap Permissions\n" +
                 " 3) Enable the " + SP + ".\n\n" +
                 "(You can tap anywhere to exit and restart the app)\n\n";
-        String allFileAccessSteps =  " 1) Tap \"App Settings\" Button.\n" +
-                " 2) Enable the " + SP + ".\n\n" +
-                "(You can tap anywhere to exit and restart the app)\n\n";
         if (ex) {
-            title = needExternalFileAccess() ? "All File Access Permission" : manageApp ? "Forge AutoUpdater Permission...\n" : "Forge didn't initialize!\n";
+            title = manageApp ? "Forge AutoUpdater Permission...\n" : "Forge didn't initialize!\n";
             steps = manageApp ? " 1) Tap \"App Settings\" Button.\n" +
                     " 2) Enable \"Allow apps from this source\"\n" +
                     "(You can tap anywhere to exit and restart the app)\n\n" : msg + "\n\n";
@@ -285,7 +275,7 @@ public class Main extends AndroidApplication {
         SpannableString ss1 = new SpannableString(title);
         ss1.setSpan(new StyleSpan(Typeface.BOLD), 0, ss1.length(), 0);
         text.append(ss1);
-        text.append(needExternalFileAccess() ? allFileAccessSteps : steps);
+        text.append(steps);
         row.addView(text);
         row.setGravity(Gravity.CENTER);
 
@@ -314,16 +304,7 @@ public class Main extends AndroidApplication {
 
         button.setTextColor(Color.RED);
         button.setOnClickListener(v -> {
-            if (needExternalFileAccess()) {
-                /*
-                  This is needed for Android 11 and upwards to have access on external storage (direct file path)
-                  ie adventure mode -> data -> restore. Though its not fast like the app-specific storage...
-                */
-                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                Uri uri = Uri.fromParts("package", getPackageName(), null);
-                intent.setData(uri).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            } else if (manageApp) {
+            if (manageApp) {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES)
                         .setData(Uri.parse(String.format("package:%s", getPackageName())))
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -359,7 +340,7 @@ public class Main extends AndroidApplication {
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
                     handler.postDelayed(() -> {
-                        if (needExternalFileAccess() || !permissiongranted || exception) {
+                        if (!permissiongranted || exception) {
                             displayMessage(forgeLogo, adapter, exception, msg, false);
                         } else if (title.isEmpty() && steps.isEmpty()) {
                             if (isLandscape) {
@@ -684,6 +665,21 @@ public class Main extends AndroidApplication {
         }
 
         @Override
+        public boolean needFileAccess() {
+            return needExternalFileAccess();
+        }
+
+        @Override
+        public void requestFileAcces() {
+            /* This is needed for Android 11 and upwards to have access on external storage (direct file path)
+            ie adventure mode -> data -> restore. Though it's not fast like the app-specific storage...*/
+            Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+            Uri uri = Uri.fromParts("package", getPackageName(), null);
+            intent.setData(uri).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+
+        @Override
         public boolean isConnectedToInternet() {
             //if it can't determine Internet connection within two seconds, assume not connected
             return Boolean.TRUE.equals(ThreadUtil.executeWithTimeout(this::hasInternet, 2000));
@@ -869,6 +865,75 @@ public class Main extends AndroidApplication {
             }
         }
         return gameControllerDeviceIds;
+    }
+
+    public final String getAndroidOSName() {
+        final String codename;
+        switch (Build.VERSION.SDK_INT) {
+            case Build.VERSION_CODES.O:
+                codename = "Android 8 (Oreo)";
+                break;
+            case Build.VERSION_CODES.O_MR1:
+                codename = "Android 8.1 (Oreo)";
+                break;
+            case Build.VERSION_CODES.P:
+                codename = "Android 9 (Pie)";
+                break;
+            case Build.VERSION_CODES.Q:
+                codename = "Android 10 (Quince Tart)";
+                break;
+            case Build.VERSION_CODES.R:
+                codename = "Android 11 (Red Velvet)";
+                break;
+            case Build.VERSION_CODES.S:
+                codename = "Android 12 (Snow Cone)";
+                break;
+            case Build.VERSION_CODES.S_V2:
+                codename = "Android 12L (Snow Cone V2)";
+                break;
+            case Build.VERSION_CODES.TIRAMISU:
+                codename = "Android 13 (Tiramisu)";
+                break;
+            case Build.VERSION_CODES.UPSIDE_DOWN_CAKE:
+                codename = "Android 14 (Upside Down Cake)";
+                break;
+            case Build.VERSION_CODES.VANILLA_ICE_CREAM:
+                codename = "Android 15 (Vanilla Ice Cream)";
+                break;
+            case 36:
+                codename = "Android 16 (Baklava)";
+                break;
+            default:
+                codename = "Android " + Build.VERSION.SDK_INT;
+                break;
+        }
+        return codename;
+    }
+
+    public String getCpuName() {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.R)
+            return Build.SOC_MANUFACTURER + " " + Build.SOC_MODEL;
+        try {
+            FileReader fr = new FileReader("/proc/cpuinfo");
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            String cpuName = null;
+
+            while ((line = br.readLine()) != null) {
+                if (line.contains("Processor") || line.contains("model name")) {
+                    // Extract the part after the colon and trim whitespace
+                    String[] parts = line.split(":", 2);
+                    if (parts.length > 1) {
+                        cpuName = parts[1].trim();
+                        break; // Found the CPU name, no need to read further
+                    }
+                }
+            }
+            br.close();
+            return capitalize(cpuName);
+        } catch (IOException e) {
+            return Build.UNKNOWN;
+        }
     }
 
     public String getDeviceName() {

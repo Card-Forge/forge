@@ -46,9 +46,10 @@ public class GameLauncher {
             device.setCpuDescription(si.getHardware().getProcessor().getProcessorIdentifier().getName());
             // OS Info
             OperatingSystem os = new OperatingSystem();
-            os.setName(si.getOperatingSystem() + " x" + si.getOperatingSystem().getBitness());
+            os.setName(si.getOperatingSystem().getFamily());
             os.setVersion(si.getOperatingSystem().getVersionInfo().getVersion());
             os.setBuild(si.getOperatingSystem().getVersionInfo().getBuildNumber());
+            os.setRawDescription(si.getOperatingSystem() + " x" + si.getOperatingSystem().getBitness());
             totalRAM = Math.round(si.getHardware().getMemory().getTotal() / 1024f / 1024f);
             hw = new HWInfo(device, os);
         } catch (Exception e) {
