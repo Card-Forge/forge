@@ -24,8 +24,8 @@ Base=Uncommon:fromSheet("BLB cards")
 Base=RareMythic:fromSheet("BLB cards")
 
 [FullArtLand]
-Base=Land:fromSheet("BLB full art")
-Replace=.20F Land:fromSheet("BLB full art")+
+Base=Land:fromSheet("BLB fullart")
+Replace=.20F Land:fromSheet("BLB fullart")+
 
 [Wildcard]
 Base=Common:fromSheet("BLB cards")
@@ -457,7 +457,7 @@ A-138 U A-Heartfire Hero @Jakub Kasper
 1 Ledger Shredder|SPG
 1 Swords to Plowshares|SPG
 
-[full art]
+[fullart]
 4 Plains|BLB|1
 3 Plains|BLB|2
 2 Plains|BLB|3
