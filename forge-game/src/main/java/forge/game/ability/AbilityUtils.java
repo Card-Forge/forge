@@ -113,13 +113,6 @@ public class AbilityUtils {
             }
         } else if (defined.equals("Enchanted")) {
             c = hostCard.getEnchantingCard();
-            if (c == null && sa instanceof SpellAbility) {
-                SpellAbility root = ((SpellAbility)sa).getRootAbility();
-                CardCollection sacrificed = root.getPaidList("Sacrificed", true);
-                if (sacrificed != null && !sacrificed.isEmpty()) {
-                    c = sacrificed.getFirst().getEnchantingCard();
-                }
-            }
         } else if (defined.equals("TopOfGraveyard")) {
             final CardCollectionView grave = player.getCardsIn(ZoneType.Graveyard);
 
