@@ -153,5 +153,15 @@ public class Main {
             // shouldn't be reached
             return null;
         }
+
+        @Override
+        public boolean needFileAccess() {
+            return false;
+        }
+
+        @Override
+        public void requestFileAcces() {
+
+        }
     }
 }
