@@ -253,9 +253,7 @@ public class Main extends AndroidApplication {
         text.setGravity(Gravity.LEFT);
         text.setTypeface(Typeface.SERIF);
         String SP = "Storage Permission";
-        if (needExternalFileAccess()) {
-          SP = "All File Access Permission";
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             SP = "Photos and Videos, Music and Audio Permissions";
         } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
             SP = "Files & Media Permissions";
@@ -267,11 +265,8 @@ public class Main extends AndroidApplication {
                 " 2) Tap Permissions\n" +
                 " 3) Enable the " + SP + ".\n\n" +
                 "(You can tap anywhere to exit and restart the app)\n\n";
-        String allFileAccessSteps =  " 1) Tap \"App Settings\" Button.\n" +
-                " 2) Enable the " + SP + ".\n\n" +
-                "(You can tap anywhere to exit and restart the app)\n\n";
         if (ex) {
-            title = needExternalFileAccess() ? "All File Access Permission" : manageApp ? "Forge AutoUpdater Permission...\n" : "Forge didn't initialize!\n";
+            title = manageApp ? "Forge AutoUpdater Permission...\n" : "Forge didn't initialize!\n";
             steps = manageApp ? " 1) Tap \"App Settings\" Button.\n" +
                     " 2) Enable \"Allow apps from this source\"\n" +
                     "(You can tap anywhere to exit and restart the app)\n\n" : msg + "\n\n";
@@ -280,7 +275,7 @@ public class Main extends AndroidApplication {
         SpannableString ss1 = new SpannableString(title);
         ss1.setSpan(new StyleSpan(Typeface.BOLD), 0, ss1.length(), 0);
         text.append(ss1);
-        text.append(needExternalFileAccess() ? allFileAccessSteps : steps);
+        text.append(steps);
         row.addView(text);
         row.setGravity(Gravity.CENTER);
 
@@ -309,16 +304,7 @@ public class Main extends AndroidApplication {
 
         button.setTextColor(Color.RED);
         button.setOnClickListener(v -> {
-            if (needExternalFileAccess()) {
-                /*
-                  This is needed for Android 11 and upwards to have access on external storage (direct file path)
-                  ie adventure mode -> data -> restore. Though its not fast like the app-specific storage...
-                */
-                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                Uri uri = Uri.fromParts("package", getPackageName(), null);
-                intent.setData(uri).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            } else if (manageApp) {
+            if (manageApp) {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES)
                         .setData(Uri.parse(String.format("package:%s", getPackageName())))
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -354,7 +340,7 @@ public class Main extends AndroidApplication {
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
                     handler.postDelayed(() -> {
-                        if (needExternalFileAccess() || !permissiongranted || exception) {
+                        if (!permissiongranted || exception) {
                             displayMessage(forgeLogo, adapter, exception, msg, false);
                         } else if (title.isEmpty() && steps.isEmpty()) {
                             if (isLandscape) {
@@ -676,6 +662,21 @@ public class Main extends AndroidApplication {
         @Override
         public DefaultUpnpServiceConfiguration getUpnpPlatformService() {
             return new AndroidUpnpServiceConfiguration();
+        }
+
+        @Override
+        public boolean needFileAccess() {
+            return needExternalFileAccess();
+        }
+
+        @Override
+        public void requestFileAcces() {
+            /* This is needed for Android 11 and upwards to have access on external storage (direct file path)
+            ie adventure mode -> data -> restore. Though it's not fast like the app-specific storage...*/
+            Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+            Uri uri = Uri.fromParts("package", getPackageName(), null);
+            intent.setData(uri).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
 
         @Override
