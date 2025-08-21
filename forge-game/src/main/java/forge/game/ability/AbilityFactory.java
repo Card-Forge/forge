@@ -63,7 +63,9 @@ public final class AbilityFactory {
             "CantChooseSubAbility", // Can't choose a player via ChoosePlayer
             "RegenerationAbility", // for Regeneration Effect
             "ReturnAbility", // for Delayed Trigger on Magpie
-            "GiftAbility" // for Promise Gift
+            "GiftAbility", // for Promise Gift
+            "VoteSubAbility", // for Vote with VoteCard
+            "VoteTiedAbility" // for fallback to Choices
         );
 
     public enum AbilityRecordType {
@@ -200,15 +202,6 @@ public final class AbilityFactory {
         final Card hostCard = state.getCard();
         TargetRestrictions abTgt = mapParams.containsKey("ValidTgts") ? readTarget(mapParams) : null;
 
-        if (api == ApiType.CopySpellAbility || api == ApiType.Counter || api == ApiType.ChangeTargets || api == ApiType.ControlSpell) {
-            // Since all "CopySpell" ABs copy things on the Stack no need for it to be everywhere
-            // Since all "Counter" or "ChangeTargets" abilities only target the Stack Zone
-            // No need to have each of those scripts have that info
-            if (abTgt != null) {
-                abTgt.setZone(ZoneType.Stack);
-            }
-        }
-
         if (abCost == null) {
             abCost = parseAbilityCost(state, mapParams, type);
         }
@@ -268,7 +261,7 @@ public final class AbilityFactory {
             }
         }
 
-        if (api == ApiType.Charm || api == ApiType.GenericChoice || api == ApiType.AssignGroup || api == ApiType.VillainousChoice) {
+        if (api == ApiType.Charm || api == ApiType.GenericChoice || api == ApiType.AssignGroup || api == ApiType.VillainousChoice || api == ApiType.Vote) {
             final String key = "Choices";
             if (mapParams.containsKey(key)) {
                 List<String> names = Lists.newArrayList(mapParams.get(key).split(","));

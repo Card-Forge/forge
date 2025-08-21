@@ -1,6 +1,8 @@
 package forge.ai.ability;
 
 
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.SpecialCardAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.player.Player;
@@ -14,7 +16,7 @@ public class DamageEachAi extends DamageAiBase {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         final String logic = sa.getParam("AILogic");
 
         PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
@@ -22,30 +24,41 @@ public class DamageEachAi extends DamageAiBase {
 
         if (sa.usesTargeting() && weakestOpp != null) {
             if ("MadSarkhanUltimate".equals(logic) && !SpecialCardAi.SarkhanTheMad.considerUltimate(ai, sa, weakestOpp)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
             sa.resetTargets();
-            sa.getTargets().add(weakestOpp);
-            return weakestOpp.canLoseLife() && !weakestOpp.cantLoseForZeroOrLessLife();
+            if (weakestOpp.canLoseLife() && !weakestOpp.cantLoseForZeroOrLessLife()) {
+                sa.getTargets().add(weakestOpp);
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
         }
         
         final String damage = sa.getParam("NumDmg");
         final int iDmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
-        return shouldTgtP(ai, sa, iDmg, false);
+
+        if (shouldTgtP(ai, sa, iDmg, false)) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         // check AI life before playing this drawback?
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        return mandatory || canPlayAI(ai, sa);
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        if (mandatory) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        return canPlay(ai, sa);
     }
 
 }

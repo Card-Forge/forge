@@ -1,0 +1,17 @@
+Name:Dyadrine, Synthesis Amalgam
+ManaCost:X G W
+Types:Legendary Artifact Creature Construct
+PT:0/1
+K:Trample
+K:etbCounter:P1P1:Y:no Condition:NICKNAME enters with a number of +1/+1 counters on it equal to the amount of mana spent to cast it.
+SVar:X:Count$xPaid
+SVar:Y:Count$CastTotalManaSpent
+SVar:Z:Count$RememberedNumber
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounters | OptionalDecider$ You | TriggerDescription$ Whenever you attack, you may remove a +1/+1 counter from each of two creatures you control. If you do, draw a card and create a colorless 2/2 Robot artifact creature token.
+SVar:TrigCounters:DB$ RemoveCounter | CounterType$ P1P1 | Choices$ Creature.YouCtrl+counters_GE1_P1P1 | ChoiceNum$ 2 | RememberAmount$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ Z | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | ConditionCheckSVar$ Z | TokenScript$ c_2_2_a_robot | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token|Counters
+Oracle:Trample\nDyadrine enters with a number of +1/+1 counters on it equal to the amount of mana spent to cast it.\nWhenever you attack, you may remove a +1/+1 counter from each of two creatures you control. If you do, draw a card and create a colorless 2/2 Robot artifact creature token.

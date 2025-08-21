@@ -7,7 +7,12 @@ ScryfallCode=PW25
 
 [cards]
 1 R Rishkar's Expertise @Magali Villeneuve
-2 R Dragon's Hoard @Adam Paquette
+1p R Dragon's Hoard @Adam Paquette
+2 U Despark @Maji
 3 R Dragonspeaker Shaman @Yigit Koroglu
 4 R Culling Ritual @AKAGI
-5 U Despark @Maji
+5 R Zidane, Tantalus Thief @Eiji Kaneda
+6 R Palladium Myr @Alan Pollack
+7 R Spectacular Spider-Man @Julian Totino Tedesco
+8 R Trinket Mage @Scott Chou
+9 R Monstrous Rage @Borja Pindado

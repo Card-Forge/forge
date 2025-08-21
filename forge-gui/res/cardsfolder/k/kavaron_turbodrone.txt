@@ -1,0 +1,6 @@
+Name:Kavaron Turbodrone
+ManaCost:2 R
+Types:Artifact Creature Robot Scout
+PT:2/3
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +1 | NumDef$ +1 | KW$ Haste | SorcerySpeed$ True | TgtPrompt$ Select target creature you control | SpellDescription$ Target creature you control gets +1/+1 and gains haste until end of turn. Activate only as a sorcery.
+Oracle:{T}: Target creature you control gets +1/+1 and gains haste until end of turn. Activate only as a sorcery.

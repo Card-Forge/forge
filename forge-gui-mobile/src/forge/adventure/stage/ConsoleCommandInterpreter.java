@@ -11,11 +11,13 @@ import forge.adventure.data.EnemyData;
 import forge.adventure.data.PointOfInterestData;
 import forge.adventure.data.WorldData;
 import forge.adventure.pointofintrest.PointOfInterest;
+import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.Current;
 import forge.adventure.util.Paths;
 import forge.adventure.world.WorldSave;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
+import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.game.GameType;
@@ -176,7 +178,7 @@ public class ConsoleCommandInterpreter {
             catch (Exception e){
                 return "Can not convert " +s[0]+" to number";
             }
-            Current.player().addQuest(ID);
+            Current.player().addQuest(ID, false);
             return "Quest generated";
         });
         registerCommand(new String[]{"give", "shards"}, s -> {
@@ -260,7 +262,53 @@ public class ConsoleCommandInterpreter {
                 catch(NumberFormatException ignored) {}
             }
             Current.player().addCard(card);
-            return "Added card: "+ card.getName();
+            return "Added card: " + card.getName();
+        });
+        registerCommand(new String[]{"give", "set"}, s -> {
+            if (s.length < 1) return "Command needs 1 parameter: Edition code.";
+            CardEdition edition = StaticData.instance().getCardEdition(s[0]);
+            if (edition == null) return "Cannot find edition: " + s[0];
+
+            for(CardEdition.EditionEntry entry : edition.getObtainableCards()) {
+                PaperCard card = StaticData.instance().fetchCard(entry.name(), edition.getCode(), entry.collectorNumber());
+
+                if (card != null) {
+                    Current.player().addCard(card.getNoSellVersion(), 4);
+                } else {
+                    System.out.println("Card " + entry.name() + " (" + entry.collectorNumber() + ") does not exist.");
+                }
+            }
+
+            return "Added all cards from: " + edition.getCode();
+        });
+        registerCommand(new String[]{"give", "boosters"}, s -> {
+            if (s.length < 1)
+                return "Command needs at least 1 parameter: Edition code.";
+            CardEdition edition = StaticData.instance().getCardEdition(s[0]);
+            if (edition == null)
+                return "Cannot find edition: " + s[0];
+            if (!edition.hasBoosterTemplate())
+                return edition.getCode() + " doesn't have a booster template.";
+
+            int amount = 1;
+            if (s.length >= 2) {
+                try {
+                    amount = Integer.parseInt(s[1]);
+                } catch (NumberFormatException ignored) {}
+            }
+
+            for(int i=0; i<amount; i++) {
+                Current.player().addBooster(AdventureEventController.instance().generateBooster(edition.getCode()));
+            }
+
+            return "Added " + amount + " " + edition.getCode() + " booster(s)";
+        });
+        registerCommand(new String[]{"clearnosell"}, s -> {
+            CardPool cards = Current.player().getCards();
+            for(PaperCard c : cards.getFilteredPool(c -> c.getMarkedFlags().noSellValue).toFlatList()) {
+                cards.remove(c);
+            }
+            return "Removed all no sell flagged cards.";
         });
         registerCommand(new String[]{"give", "item"}, s -> {
             if (s.length < 1) return "Command needs 1 parameter: Item name.";
@@ -386,12 +434,16 @@ public class ConsoleCommandInterpreter {
             return "Debug  OFF";
         });
         registerCommand(new String[]{"remove", "enemy", "all"}, s -> {
-            //TODO: Remove all overworld enemies if not inside a map.
             if (!MapStage.getInstance().isInMap()) {
-                return "Only supported for PoI";
+                WorldStage ws = WorldStage.getInstance();
+                int enemiesCount = ws.enemies.size();
+                for(int i = 0; i < enemiesCount; i++) {
+                    ws.removeNearestEnemy();
+                }
+            } else {
+                MapStage.getInstance().removeAllEnemies();
             }
-            MapStage.getInstance().removeAllEnemies();
-            return "removed all enemies";
+            return "Removed all enemies";
         });
 
         registerCommand(new String[]{"hide"}, s -> {

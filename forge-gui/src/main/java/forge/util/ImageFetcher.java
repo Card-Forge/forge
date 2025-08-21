@@ -33,23 +33,23 @@ public abstract class ImageFetcher {
         langCodeMap.put("ru-RU", "ru");
         langCodeMap.put("zh-CN", "zhs");
         langCodeMap.put("zh-HK", "zht");
-    };
+    }
+
     private HashMap<String, HashSet<Callback>> currentFetches = new HashMap<>();
-    private HashMap<String, String> tokenImages;
 
     private String getScryfallDownloadURL(PaperCard c, String face, boolean useArtCrop, boolean hasSetLookup, String imagePath, ArrayList<String> downloadUrls) {
         StaticData data = StaticData.instance();
         CardEdition edition = data.getEditions().get(c.getEdition());
-        if (edition == null) // edition does not exist - some error occurred with card data
+        if (edition == null) // Edition does not exist - some error occurred with card data
             return null;
         if (hasSetLookup) {
             List<PaperCard> clones = StaticData.instance().getCommonCards().getAllCards(c.getName());
             for (PaperCard pc : clones) {
-                if (clones.size() > 1) {//clones only
+                if (clones.size() > 1) { // Clones only
                     if (!c.getEdition().equalsIgnoreCase(pc.getEdition())) {
                         CardEdition ed = data.getEditions().get(pc.getEdition());
                         if (ed != null) {
-                            String setCode =ed.getScryfallCode();
+                            String setCode = ed.getScryfallCode();
                             String langCode = ed.getCardsLangCode();
                             downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(pc, face, setCode, langCode, useArtCrop));
                         }
@@ -57,7 +57,7 @@ public abstract class ImageFetcher {
                 } else {// original from set
                     CardEdition ed = data.getEditions().get(pc.getEdition());
                     if (ed != null) {
-                        String setCode =ed.getScryfallCode();
+                        String setCode = ed.getScryfallCode();
                         String langCode = ed.getCardsLangCode();
                         downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(pc, face, setCode, langCode, useArtCrop));
                     }
@@ -72,13 +72,17 @@ public abstract class ImageFetcher {
             // It seems like the scryfall lookup might be better if we didn't include the language code at all?
             downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(c, face, setCode, "", useArtCrop));
 
-            String alternateUrl = ImageUtil.getScryfallDownloadUrl(c, face, setCode, langCode, useArtCrop, true);
-            if (alternateUrl != null && !alternateUrl.equals(primaryUrl)) {
+            String alternateUrl = ImageUtil.getScryfallDownloadUrl(c, face, setCode, langCode, useArtCrop);
+            if (!alternateUrl.equals(primaryUrl)) {
                 downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + alternateUrl);
-                downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(c, face, setCode, "", useArtCrop, true));
             }
         }
         return null;
+    }
+
+    public static String getPlanechaseFilename(final String cardName) {
+        return cardName.replace(" ", "_").replace("'", "")
+                .replace("-", "").replace("!", "").replace(":", "") + ".jpg";
     }
 
     public void fetchImage(final String imageKey, final Callback callback) {
@@ -93,36 +97,45 @@ public abstract class ImageFetcher {
         // Fake card (like the ante prompt) trying to be "fetched"
         if (imageKey.length() < 2)
             return;
-        if (imageKey.startsWith(ImageKeys.BOOSTER_PREFIX))
-        {
+        if (imageKey.startsWith(ImageKeys.BOOSTER_PREFIX)) {
             final ArrayList<String> downloadUrls = new ArrayList<>();
             final String filename = imageKey.substring(ImageKeys.BOOSTER_PREFIX.length());
-            downloadUrls.add("https://downloads.cardforge.org/images/products/boosters/"+ filename);
-            System.out.println("Fetching from "+downloadUrls);
+            // TODO Update image server or alternative hosting
+            downloadUrls.add("https://downloads.cardforge.org/images/products/boosters/" + filename);
+            System.out.println("Fetching from " + downloadUrls);
 
 
             FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_BOOSTER_PICS_DIR);
             File destFile = new File(ForgeConstants.CACHE_BOOSTER_PICS_DIR, filename);
-            System.out.println("Destination File "+ destFile.getAbsolutePath()+" exists: " + destFile.exists());
-            if(destFile.exists())
+            System.out.println("Destination File " + destFile.getAbsolutePath() + " exists: " + destFile.exists());
+            if (destFile.exists())
                 return;
-            setupObserver(destFile.getAbsolutePath(),callback,downloadUrls);
+            setupObserver(destFile.getAbsolutePath(), callback, downloadUrls);
             return;
         }
         if (imageKey.equalsIgnoreCase("t:null"))
             return;
 
-        //planechaseBG file...
+        // PlanechaseBG file...
         final ArrayList<String> downloadUrls = new ArrayList<>();
         if (imageKey.startsWith("PLANECHASEBG:")) {
-            final String filename = imageKey.substring("PLANECHASEBG:".length());
-            downloadUrls.add("https://downloads.cardforge.org/images/planes/" + filename);
-            FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_PLANECHASE_PICS_DIR);
-            File destFile = new File(ForgeConstants.CACHE_PLANECHASE_PICS_DIR, filename);
-            if (destFile.exists())
-                return;
+            final String cardName = imageKey.substring("PLANECHASEBG:".length());
+            PaperCard pc = StaticData.instance().getVariantCards().getCard(cardName);
+            if (pc != null) {
+                CardEdition ed = StaticData.instance().getEditions().get(pc.getEdition());
+                if (ed != null) {
+                    String setCode = ed.getScryfallCode();
+                    String langCode = ed.getCardsLangCode();
+                    downloadUrls.add("PLANECHASEBG:" + ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(pc, "", setCode, langCode, true));
+                    FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_PLANECHASE_PICS_DIR);
+                    File destFile = new File(ForgeConstants.CACHE_PLANECHASE_PICS_DIR, getPlanechaseFilename(cardName));
+                    if (destFile.exists())
+                        return;
 
-            setupObserver(destFile.getAbsolutePath(), callback, downloadUrls);
+                    setupObserver(destFile.getAbsolutePath(), callback, downloadUrls);
+                    return;
+                }
+            }
             return;
         }
 
@@ -136,7 +149,7 @@ public abstract class ImageFetcher {
                 System.err.println("Paper card not found for: " + imageKey);
                 return;
             }
-            //Skip fetching if it's a custom user card.
+            // Skip fetching if it's a custom user card.
             if (paperCard.getRules().isCustom()) {
                 return;
             }
@@ -186,7 +199,7 @@ public abstract class ImageFetcher {
                 filename = TextUtil.fastReplace(filename, ".full", ".artcrop");
             }
             boolean updateLink = false;
-            if ("back".equals(face)) {// seems getimage relative path don't process variants for back faces.
+            if ("back".equals(face)) { // Seems getimage relative path don't process variants for back faces.
                 try {
                     filename = TextUtil.fastReplace(filename, "1.full", imageKey.substring(imageKey.lastIndexOf('|') + 1, imageKey.indexOf('$')) + ".full");
                     updateLink = true;
@@ -196,9 +209,9 @@ public abstract class ImageFetcher {
             }
             destFile = new File(ForgeConstants.CACHE_CARD_PICS_DIR, filename + ".jpg");
 
-            //skip ftp if using art crop
+            // Skip ftp if using art crop
             if (!useArtCrop) {
-                //move priority of ftp image here
+                // Move priority of ftp image here
                 StringBuilder setDownload = new StringBuilder(ForgeConstants.URL_PIC_DOWNLOAD);
                 if (!hasSetLookup) {
                     if (!updateLink) {
@@ -227,11 +240,11 @@ public abstract class ImageFetcher {
                 this.getScryfallDownloadURL(paperCard, face, useArtCrop, hasSetLookup, filename, downloadUrls);
             }
         } else if (ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD).equals(imageKey)) {
-            // extra logic for hidden card to not clog the other logic
+            // Extra logic for hidden card to not clog the other logic
             final String filename = "hidden.png";
             if (ImageKeys.missingCards.contains(filename))
                 return;
-            // scryfall only as png version
+            // Scryfall only as png version
             downloadUrls.add("https://cards.scryfall.io/back.png");
             ImageKeys.missingCards.add(filename);
             destFile = new File(ForgeConstants.CACHE_TOKEN_PICS_DIR, filename);
@@ -241,7 +254,7 @@ public abstract class ImageFetcher {
                 face = "back";
                 tmp = tmp.substring(0, tmp.length() - ImageKeys.BACKFACE_POSTFIX.length());
             }
-            String[] tempdata = tmp.substring(2).split("\\|"); //We want to check the edition first.
+            String[] tempdata = tmp.substring(2).split("\\|"); // We want to check the edition first.
             String tokenName = tempdata[0];
             String setCode = tempdata.length > 1 ? tempdata[1] : CardEdition.UNKNOWN_CODE;
 
@@ -259,28 +272,31 @@ public abstract class ImageFetcher {
             sb.append(".jpg");
 
             final String filename = sb.toString();
-            if (ImageKeys.missingCards.contains(filename))
-                return;
-
-            if (filename.equalsIgnoreCase("null.jpg"))
+            destFile = new File(ForgeConstants.CACHE_TOKEN_PICS_DIR, filename);
+            if (ImageKeys.missingCards.contains(filename)
+                    || filename.equalsIgnoreCase("null.jpg")
+                    || destFile.exists())
                 return;
 
             if (tempdata.length < 2) {
-                System.err.println("Token image key is malformed: " + imageKey);
+                if (!"planechase".equals(tempdata[0]))
+                    System.err.println("Token image key is malformed: " + imageKey);
+                ImageKeys.missingCards.add(filename);
                 return;
             }
 
             // Load the paper token from filename + edition
             CardEdition edition = StaticData.instance().getEditions().get(setCode);
-            if (edition == null || edition.getType() == CardEdition.Type.CUSTOM_SET) return; //Custom set token, skip fetching.
+            if (edition == null || edition.getType() == CardEdition.Type.CUSTOM_SET)
+                return; //Custom set token, skip fetching.
 
-            //PaperToken pt = StaticData.instance().getAllTokens().getToken(tokenName, setCode);
+            // PaperToken pt = StaticData.instance().getAllTokens().getToken(tokenName, setCode);
             Collection<CardEdition.EditionEntry> allTokens = edition.getTokens().get(tokenName);
 
             if (tempdata.length > 2) {
                 String tokenCode = edition.getTokensCode();
                 String langCode = edition.getCardsLangCode();
-                // just assume the CNr from the token image is valid
+                // Just assume the CNr from the token image is valid
                 downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallTokenDownloadUrl(tempdata[2], tokenCode, langCode, face));
             } else if (!allTokens.isEmpty()) {
                 // This loop is going to try to download all the arts until it finds one
@@ -289,9 +305,9 @@ public abstract class ImageFetcher {
                 // Ideally we would have some mapping for generating card to determine which art indexed/collector number to try to fetch
                 // Token art we're downloading and which location we're storing it in.
                 // Once we're pulling from PaperTokens this section will change a bit
-                Iterator <CardEdition.EditionEntry> it = allTokens.iterator();
+                Iterator<CardEdition.EditionEntry> it = allTokens.iterator();
                 CardEdition.EditionEntry tis;
-                while(it.hasNext()) {
+                while (it.hasNext()) {
                     tis = it.next();
                     String tokenCode = edition.getTokensCode();
                     String langCode = edition.getCardsLangCode();
@@ -304,17 +320,19 @@ public abstract class ImageFetcher {
             }
 
             ImageKeys.missingCards.add(filename);
-            destFile = new File(ForgeConstants.CACHE_TOKEN_PICS_DIR, filename);
         }
 
         if (downloadUrls.isEmpty()) {
             System.err.println("No download URLs for: " + imageKey);
+            if (destFile != null) {
+                System.err.println("  You may put your own image in: " + destFile.getAbsolutePath());
+            }
             return;
         }
 
         if (destFile.exists()) {
             // TODO: Figure out why this codepath gets reached.
-            //  Ideally, fetchImage() wouldn't be called if we already have the image.
+            // Ideally, fetchImage() wouldn't be called if we already have the image.
             if (prefix.equals(ImageKeys.CARD_PREFIX)) {
                 PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(imageKey);
                 if (paperCard != null)
@@ -325,6 +343,7 @@ public abstract class ImageFetcher {
 
         setupObserver(destFile.getAbsolutePath(), callback, downloadUrls);
     }
+
     private void setupObserver(final String destPath, final Callback callback, final ArrayList<String> downloadUrls) {
         // Note: No synchronization is needed here because this is executed on
         // EDT thread (see assert on top) and so is the notification of observers.

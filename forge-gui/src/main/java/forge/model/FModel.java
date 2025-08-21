@@ -18,11 +18,8 @@
 package forge.model;
 
 import com.google.common.collect.Maps;
-import forge.CardStorageReader;
+import forge.*;
 import forge.CardStorageReader.ProgressObserver;
-import forge.ImageKeys;
-import forge.MulliganDefs;
-import forge.StaticData;
 import forge.ai.AiProfileUtil;
 import forge.card.CardRulesPredicates;
 import forge.card.CardType;
@@ -108,14 +105,9 @@ public final class FModel {
             avatarPool, conspiracyPool, dungeonPool, attractionPool, contraptionPool;
 
     public static void initialize(final IProgressBar progressBar, Function<ForgePreferences, Void> adjustPrefs) {
-        //init version to log
-        System.out.println("Forge v." + GuiBase.getInterface().getCurrentVersion() + " (" + GuiBase.getInterface() + ")");
-        //Device
-        if (GuiBase.isAndroid()) //todo get device on other mobile platforms
-            System.out.println(GuiBase.getDeviceName() + " (RAM: " + GuiBase.getDeviceRAM() + "MB, Android " + GuiBase.getAndroidRelease() + " API Level " + GuiBase.getAndroidAPILevel() + ")");
-        else {
-            System.out.println(System.getProperty("os.name") + " (" + System.getProperty("os.version") + " " + System.getProperty("os.arch") + ")\n" + System.getProperty("java.vendor") + " (Java " + System.getProperty("java.runtime.version") + ", " + System.getProperty("java.vm.name") + ")");
-        }
+        initialize(progressBar, adjustPrefs, false);
+    }
+    public static void initialize(final IProgressBar progressBar, Function<ForgePreferences, Void> adjustPrefs, boolean isSimTest) {
         ImageKeys.initializeDirs(
                 ForgeConstants.CACHE_CARD_PICS_DIR, ForgeConstants.CACHE_CARD_PICS_SUBDIR,
                 ForgeConstants.CACHE_TOKEN_PICS_DIR, ForgeConstants.CACHE_ICON_PICS_DIR,

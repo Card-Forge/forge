@@ -1,9 +1,7 @@
 package forge.game.ability.effects;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import forge.util.*;
@@ -22,6 +20,8 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardUtil;
+import forge.game.card.perpetual.PerpetualKeywords;
+import forge.game.card.perpetual.PerpetualPTBoost;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -59,12 +59,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
         if (a != 0 || d != 0) {
             if (perpetual) {
-                Map <String, Object> params = new HashMap<>();
-                params.put("Power", a);
-                params.put("Toughness", d);
-                params.put("Timestamp", timestamp);
-                params.put("Category", "PTBoost");
-                gameCard.addPerpetual(params);
+                gameCard.addPerpetual(new PerpetualPTBoost(timestamp, a, d));
             }
             gameCard.addPTBoost(a, d, timestamp, 0);
             redrawPT = true;
@@ -72,11 +67,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
         if (!kws.isEmpty()) {
             if (perpetual) {
-                Map <String, Object> params = new HashMap<>();
-                params.put("AddKeywords", kws);
-                params.put("Timestamp", timestamp);
-                params.put("Category", "Keywords");
-                gameCard.addPerpetual(params);
+                gameCard.addPerpetual(new PerpetualKeywords(timestamp, kws, Lists.newArrayList(), false));
             }
             gameCard.addChangedCardKeywords(kws, Lists.newArrayList(), false, timestamp, null);
         }

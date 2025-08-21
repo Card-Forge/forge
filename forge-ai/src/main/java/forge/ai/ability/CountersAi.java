@@ -45,13 +45,13 @@ public abstract class CountersAi extends SpellAbilityAi {
      * </p>
      *
      * @param list
-     *            a {@link forge.CardList} object.
+     *            a {@link CardCollectionView} object.
      * @param type
-     *            a {@link java.lang.String} object.
+     *            a {@link String} object.
      * @param amount
      *            a int.
-     * @param newParam TODO
-     * @return a {@link forge.game.card.Card} object.
+     * @param ai a {@link Player} object.
+     * @return a {@link Card} object.
      */
     public static Card chooseCursedTarget(final CardCollectionView list, final String type, final int amount, final Player ai) {
         Card choice;
@@ -65,7 +65,7 @@ public abstract class CountersAi extends SpellAbilityAi {
             // try to kill the best killable creature, or reduce the best one
             // but try not to target a Undying Creature
             final List<Card> killable = CardLists.getNotKeyword(CardLists.filterToughness(list, amount), Keyword.UNDYING);
-            if (killable.size() > 0) {
+            if (!killable.isEmpty()) {
                 choice = ComputerUtilCard.getBestCreatureAI(killable);
             } else {
                 choice = ComputerUtilCard.getBestCreatureAI(list);
@@ -83,10 +83,10 @@ public abstract class CountersAi extends SpellAbilityAi {
      * </p>
      *
      * @param list
-     *            a {@link forge.CardList} object.
+     *            a {@link CardCollectionView} object.
      * @param type
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.game.card.Card} object.
+     *            a {@link String} object.
+     * @return a {@link Card} object.
      */
     public static Card chooseBoonTarget(final CardCollectionView list, final String type) {
         Card choice = null;

@@ -6,6 +6,7 @@ import com.google.common.collect.Maps;
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.game.*;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -18,7 +19,6 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.staticability.StaticAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -33,6 +33,11 @@ import java.util.List;
 import java.util.Map;
 
 public class ChangeZoneEffect extends SpellAbilityEffect {
+
+    @Override
+    public void buildSpellAbility(SpellAbility sa) {
+        AbilityFactory.adjustChangeZoneTarget(sa.getMapParams(), sa);
+    }
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
@@ -755,13 +760,14 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
 
                 if (sa.isTrigger() && sa.getTrigger().isKeyword(Keyword.WARP)) {
-                    Card eff = createEffect(sa, activator, "Warped " + sa.getHostCard(), sa.getHostCard().getImageKey());
+                    Card eff = createEffect(sa, sa.getHostCard().getOwner(), "Warped " + sa.getHostCard(), sa.getHostCard().getImageKey());
                     StringBuilder sbPlay = new StringBuilder();
                     sbPlay.append("Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand+!ThisTurnEntered");
                     sbPlay.append(" | AffectedZone$ Exile | Description$ You may cast the card.");
-                    final StaticAbility st = eff.addStaticAbility(sbPlay.toString());
+                    eff.addStaticAbility(sbPlay.toString());
                     eff.addRemembered(movedCard);
                     addForgetOnMovedTrigger(eff, "Exile");
+                    addForgetOnCastTrigger(eff, "Card.IsRemembered");
                     game.getAction().moveToCommand(eff, sa);
                 }
 
@@ -914,6 +920,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
             if (sa.usesTargeting() && !sa.hasParam("DefinedPlayer")) {
                 player = sa.getTargets().getFirstTargetedPlayer();
+            }
+
+            if (!player.isInGame()) {
+                continue;
             }
 
             List<ZoneType> origin = Lists.newArrayList();

@@ -127,6 +127,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         statistic.clear();
         newCards.clear();
         autoSellCards.clear();
+        favoriteCards.clear();
         AdventureEventController.clear();
         AdventureQuestController.clear();
     }
@@ -137,8 +138,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     private final CardPool cards = new CardPool();
 
-    private final ItemPool<PaperCard> newCards = new ItemPool<>(PaperCard.class);
+    public final ItemPool<PaperCard> newCards = new ItemPool<>(PaperCard.class);
     public final ItemPool<PaperCard> autoSellCards = new ItemPool<>(PaperCard.class);
+    public final Set<PaperCard> favoriteCards = new HashSet<>();
 
     public void create(String n, Deck startingDeck, boolean male, int race, int avatar, boolean isFantasy, boolean isUsingCustomDeck, DifficultyData difficultyData) {
         clear();
@@ -148,7 +150,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         deck = startingDeck;
         decks.set(0, deck);
 
-        cards.addAllFlat(deck.getAllCardsInASinglePool().toFlatList());
+        cards.addAllFlat(deck.getAllCardsInASinglePool(true, true).toFlatList());
 
         this.difficultyData.startingLife = difficultyData.startingLife;
         this.difficultyData.startingMoney = difficultyData.startingMoney;
@@ -265,10 +267,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public Collection<String> getEquippedItems() {
         return equippedItems.values();
-    }
-
-    public ItemPool<PaperCard> getNewCards() {
-        return newCards;
     }
 
     public ColorSet getColorIdentity() {
@@ -423,6 +421,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         deck.getMain().addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deckCards"))));
         if (data.containsKey("sideBoardCards"))
             deck.getOrCreate(DeckSection.Sideboard).addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("sideBoardCards"))));
+        if(data.containsKey("attractionDeckCards"))
+            deck.getOrCreate(DeckSection.Attractions).addAll(CardPool.fromCardList(List.of((String[]) data.readObject("attractionDeckCards"))));
+        if(data.containsKey("contraptionDeckCards")) //TODO: Generalize this. Can't we just serialize the whole deck?
+            deck.getOrCreate(DeckSection.Contraptions).addAll(CardPool.fromCardList(List.of((String[]) data.readObject("contraptionDeckCards"))));
 
         if (data.containsKey("characterFlagsKey") && data.containsKey("characterFlagsValue")) {
             String[] keys = (String[]) data.readObject("characterFlagsKey");
@@ -477,6 +479,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                 decks.get(i).getMain().addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deck_" + i))));
                 if (data.containsKey("sideBoardCards_" + i))
                     decks.get(i).getOrCreate(DeckSection.Sideboard).addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("sideBoardCards_" + i))));
+                if (data.containsKey("attractionDeckCards_" + i))
+                    decks.get(i).getOrCreate(DeckSection.Attractions).addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("attractionDeckCards_" + i))));
+                if (data.containsKey("contraptionDeckCards_" + i))
+                    decks.get(i).getOrCreate(DeckSection.Contraptions).addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("contraptionDeckCards_" + i))));
             }
             // In case we allow removing decks from the deck selection GUI, populate up to the minimum
             for (int i = dynamicDeckCount++; i < MIN_DECK_COUNT; i++) {
@@ -548,9 +554,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         }
         if (data.containsKey("autoSellCards")) {
             PaperCard[] items = (PaperCard[]) data.readObject("autoSellCards");
-            for (PaperCard item : items) {
-                autoSellCards.add(item);
-            }
+            autoSellCards.addAllFlat(Arrays.asList(items));
+        }
+        if (data.containsKey("favoriteCards")) {
+            PaperCard[] items = (PaperCard[]) data.readObject("favoriteCards");
+            favoriteCards.addAll(Arrays.asList(items));
         }
 
         fantasyMode = data.containsKey("fantasyMode") && data.readBool("fantasyMode");
@@ -640,6 +648,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.storeObject("deckCards", deck.getMain().toCardList("\n").split("\n"));
         if (deck.get(DeckSection.Sideboard) != null)
             data.storeObject("sideBoardCards", deck.get(DeckSection.Sideboard).toCardList("\n").split("\n"));
+        if (deck.get(DeckSection.Attractions) != null)
+            data.storeObject("attractionDeckCards", deck.get(DeckSection.Attractions).toCardList("\n").split("\n"));
+        if (deck.get(DeckSection.Contraptions) != null)
+            data.storeObject("contraptionDeckCards", deck.get(DeckSection.Contraptions).toCardList("\n").split("\n"));
 
         // save decks dynamically
         data.store("deckCount", getDeckCount());
@@ -648,12 +660,17 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             data.storeObject("deck_" + i, decks.get(i).getMain().toCardList("\n").split("\n"));
             if (decks.get(i).get(DeckSection.Sideboard) != null)
                 data.storeObject("sideBoardCards_" + i, decks.get(i).get(DeckSection.Sideboard).toCardList("\n").split("\n"));
+            if (decks.get(i).get(DeckSection.Attractions) != null)
+                data.storeObject("attractionDeckCards_" + i, decks.get(i).get(DeckSection.Attractions).toCardList("\n").split("\n"));
+            if (decks.get(i).get(DeckSection.Contraptions) != null)
+                data.storeObject("contraptionDeckCards_" + i, decks.get(i).get(DeckSection.Contraptions).toCardList("\n").split("\n"));
         }
         data.store("selectedDeckIndex", selectedDeckIndex);
         data.storeObject("cards", cards.toCardList("\n").split("\n"));
 
         data.storeObject("newCards", newCards.toFlatList().toArray(new PaperCard[0]));
         data.storeObject("autoSellCards", autoSellCards.toFlatList().toArray(new PaperCard[0]));
+        data.storeObject("favoriteCards", favoriteCards.toArray(new PaperCard[0]));
 
         return data;
     }
@@ -701,6 +718,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public void addCard(PaperCard card, int amount) {
         cards.add(card, amount);
         newCards.add(card, amount);
+    }
+
+    public void addCards(ItemPool<PaperCard> cardPool) {
+        cards.addAll(cardPool);
+        newCards.addAll(cardPool);
     }
 
     public void addReward(Reward reward) {
@@ -988,24 +1010,44 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return (int) (basePrice * (2.0f - townPriceModifier));
     }
 
-    public int sellCard(PaperCard card, Integer result, boolean addGold) {
-        if (result == null || result < 1)
+    /**
+     * Sells a number of copies of a card.
+     * @return the number of copies successfully sold.
+     */
+    public int sellCard(PaperCard card, Integer amount) {
+        if (amount == null || amount < 1)
             return 0;
 
-        int amountToSell = Math.min(result, cards.count(card));
-        if(!cards.remove(card, amountToSell))
-            return 0; //Failed to sell?
-        float earned = cardSellPrice(card) * amountToSell;
+        int amountToSell = Math.min(amount, cards.count(card));
+        int earned = performSale(card, amountToSell);
 
-        if (addGold) {
-            addGold((int) earned);
-        }
-
-        return (int) earned;
+        if(earned > 0)
+            giveGold(earned);
+        return amountToSell;
     }
 
-    public int sellOneCard(PaperCard card) {
-        return sellCard(card, 1, false);
+    /**
+     * Sells all cards in the given card pool and adds the resulting amount of gold.
+     * The given card pool will be emptied.
+     */
+    public void doBulkSell(ItemPool<PaperCard> cards) {
+        int profit = 0;
+        for (PaperCard cardToSell : cards.toFlatList()) {
+            profit += AdventurePlayer.current().performSale(cardToSell, 1);
+            cards.remove(cardToSell);
+        }
+        giveGold(profit); //do this as one transaction so as not to get multiple copies of sound effect
+    }
+
+    /**
+     * Removes a number of copies of a card from the player's inventory and returns the amount of gold they sold for.
+     * Does *not* update the player's gold. Can be used as part of bulk-sell operations that update the amount all at once.
+     */
+    private int performSale(PaperCard card, int amount) {
+        int amountToSell = Math.min(amount, cards.count(card));
+        if(!cards.remove(card, amountToSell))
+            return 0; //Failed to sell?
+        return cardSellPrice(card) * amountToSell;
     }
 
     public void removeItem(String name) {
@@ -1160,20 +1202,20 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         questFlags.clear();
     }
 
-    public void addQuest(String questID) {
+    public void addQuest(String questID, boolean isNewGame) {
         int id = Integer.parseInt(questID);
-        addQuest(id);
+        addQuest(id, isNewGame);
     }
 
-    public void addQuest(int questID) {
+    public void addQuest(int questID, boolean isNewGame) {
         AdventureQuestData toAdd = AdventureQuestController.instance().generateQuest(questID);
 
         if (toAdd != null) {
-            addQuest(toAdd);
+            addQuest(toAdd, isNewGame);
         }
     }
 
-    public void addQuest(AdventureQuestData q) {
+    public void addQuest(AdventureQuestData q, boolean isNewGame) {
         //TODO: add a config flag for this
         boolean noTrackedQuests = true;
         for (AdventureQuestData existing : quests) {
@@ -1186,7 +1228,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if (noTrackedQuests || q.autoTrack)
             AdventureQuestController.trackQuest(q);
         q.activateNextStages();
-        AdventureQuestController.instance().showQuestDialogs(MapStage.getInstance());
+        if (!isNewGame)
+            AdventureQuestController.instance().showQuestDialogs(MapStage.getInstance());
     }
 
     public List<AdventureQuestData> getQuests() {
@@ -1270,6 +1313,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return autoSellCards;
     }
 
+    /**
+     * Gets a list of cards that can be safely sold without taking copies out of the player's decks.
+     */
     public ItemPool<PaperCard> getSellableCards() {
         ItemPool<PaperCard> sellableCards = new ItemPool<>(PaperCard.class);
         sellableCards.addAllFlat(cards.toFlatList());
@@ -1281,11 +1327,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
         // 2. Count max cards across all decks in excess of unsellable
         Map<PaperCard, Integer> maxCardCounts = new HashMap<>();
-        for (int i = 0; i < getDeckCount(); i++) {
-            for (final Map.Entry<PaperCard, Integer> cp : decks.get(i).getAllCardsInASinglePool()) {
+
+        for (Deck deck : decks) {
+            for (final Map.Entry<PaperCard, Integer> cp : deck.getAllCardsInASinglePool(true, true)) {
                 int count = cp.getValue();
                 if (count > maxCardCounts.getOrDefault(cp.getKey(), 0)) {
-                    maxCardCounts.put(cp.getKey(), cp.getValue());
+                    maxCardCounts.put(cp.getKey(), count);
                 }
             }
         }
@@ -1296,6 +1343,18 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         }
 
         return sellableCards;
+    }
+
+    /**
+     * Gets the number of copies of this card that the player needs to keep for their decks to remain valid.
+     * Copies are shared between decks, so if one deck uses 1 copy and another deck uses 2, the player needs 2 copies.
+     */
+    public int getCopiesUsedInDecks(PaperCard card) {
+        int copiesUsed = 0;
+        for(Deck deck : decks) {
+            copiesUsed = Math.max(copiesUsed, deck.count(card));
+        }
+        return copiesUsed;
     }
 
 
@@ -1311,14 +1370,5 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public void loadChanges(PointOfInterestChanges changes) {
         this.currentLocationChanges = changes;
-    }
-
-    public void doAutosell() {
-        int profit = 0;
-        for (PaperCard cardToSell : autoSellCards.toFlatList()) {
-            profit += AdventurePlayer.current().sellOneCard(cardToSell);
-            autoSellCards.remove(cardToSell);
-        }
-        addGold(profit); //do this as one transaction so as not to get multiple copies of sound effect
     }
 }

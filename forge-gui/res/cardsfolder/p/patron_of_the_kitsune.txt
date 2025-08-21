@@ -2,7 +2,7 @@ Name:Patron of the Kitsune
 ManaCost:4 W W
 Types:Legendary Creature Spirit
 PT:5/6
-K:Fox offering
+K:Offering:Fox
 T:Mode$ Attacks | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ PatronLife | OptionalDecider$ You | TriggerDescription$ Whenever a creature attacks, you gain 1 life.
 SVar:PatronLife:DB$ GainLife | LifeAmount$ 1
 AI:RemoveDeck:All

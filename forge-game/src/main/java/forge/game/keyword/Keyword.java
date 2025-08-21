@@ -52,7 +52,7 @@ public enum Keyword {
     DELVE("Delve", SimpleKeyword.class, true, "As an additional cost to cast this spell, you may exile any number of cards from your graveyard. Each card exiled this way reduces the cost to cast this spell by {1}."),
     DEMONSTRATE("Demonstrate", SimpleKeyword.class, false, "When you cast this spell, you may copy it. If you do, choose an opponent to also copy it. Players may choose new targets for their copies."),
     DETHRONE("Dethrone", SimpleKeyword.class, false, "Whenever this creature attacks the player with the most life or tied for the most life, put a +1/+1 counter on it."),
-    DEVOUR("Devour", KeywordWithAmount.class, false, "As this creature enters, you may sacrifice any number of creatures. This creature enters with {%d:+1/+1 counter} on it for each creature sacrificed this way."),
+    DEVOUR("Devour", Devour.class, false, "As this object enters, you may sacrifice any number of %2$s. This permanent enters with {%1$s:+1/+1 counter} on it for each permanent sacrificed this way."),
     DEVOID("Devoid", SimpleKeyword.class, true, "This card has no color."),
     DISGUISE("Disguise", KeywordWithCost.class, false, "You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost."),
     DISTURB("Disturb", KeywordWithCost.class, false, "You may cast this card from your graveyard transformed for its disturb cost."),
@@ -81,6 +81,7 @@ public enum Keyword {
     FABRICATE("Fabricate", KeywordWithAmount.class, false, "When this creature enters, put {%1$d:+1/+1 counter} on it, or create {%1$d:1/1 colorless Servo artifact creature token}."),
     FADING("Fading", KeywordWithAmount.class, false, "This permanent enters with {%d:fade counter} on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it."),
     FEAR("Fear", SimpleKeyword.class, true, "This creature can't be blocked except by artifact creatures and/or black creatures."),
+    FIREBENDING("Firebending", Firebending.class, false, "Whenever this creature attacks, add %s. This mana lasts until end of combat."),
     FIRST_STRIKE("First Strike", SimpleKeyword.class, true, "This creature deals combat damage before creatures without first strike."),
     FLANKING("Flanking", SimpleKeyword.class, false, "Whenever this creature becomes blocked by a creature without flanking, the blocking creature gets -1/-1 until end of turn."),
     FLASH("Flash", SimpleKeyword.class, true, "You may cast this spell any time you could cast an instant."),
@@ -118,6 +119,7 @@ public enum Keyword {
     LIVING_METAL("Living metal", SimpleKeyword.class, true, "During your turn, this Vehicle is also a creature."),
     LIVING_WEAPON("Living Weapon", SimpleKeyword.class, true, "When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach this to it."),
     MADNESS("Madness", KeywordWithCost.class, false, "If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard."),
+    MAYHEM("Mayhem", KeywordWithCost.class, false, "You may cast this card from your graveyard for %s if you discarded it this turn. Timing rules still apply."),
     MELEE("Melee", SimpleKeyword.class, false, "Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat."),
     MENTOR("Mentor", SimpleKeyword.class, false, "Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power."),
     MENACE("Menace", SimpleKeyword.class, true, "This creature can't be blocked except by two or more creatures."),
@@ -201,6 +203,7 @@ public enum Keyword {
     VIGILANCE("Vigilance", SimpleKeyword.class, true, "Attacking doesn't cause this creature to tap."),
     WARD("Ward", KeywordWithCost.class, false, "Whenever this permanent becomes the target of a spell or ability an opponent controls, counter it unless that player pays %s."),
     WARP("Warp", KeywordWithCost.class, false, "You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn."),
+    WEB_SLINGING("Web-slinging", KeywordWithCost.class, false, "You may cast this spell for %s if you also return a tapped creature you control to its owner’s hand."),
     WITHER("Wither", SimpleKeyword.class, true, "This deals damage to creatures in the form of -1/-1 counters."),
 
     // mayflash additional cast
@@ -228,6 +231,9 @@ public enum Keyword {
             final String[] x = k.split(":", 2);
             keyword = smartValueOf(x[0]);
             details = x[1];
+            // Flavor keyword titles should be last in the card script K: line
+            if (details.contains(":Flavor ")) details = details.substring(0, details.indexOf(":Flavor "));
+            // Simply remove flavor here so it doesn't goof up parsing details
         } else if (k.contains(" ")) {
             // First strike
             keyword = smartValueOf(k);
@@ -250,20 +256,6 @@ public enum Keyword {
             details = "";
         }
 
-        if (keyword == Keyword.UNDEFINED) {
-            //check for special keywords that have a prefix before the keyword enum name
-            int idx = k.indexOf(' ');
-            String enumName = k.replace(" ", "_").toUpperCase(Locale.ROOT);
-            String firstWord = idx == -1 ? enumName : enumName.substring(0, idx);
-            if (idx != -1) {
-                idx = k.indexOf(' ', idx + 1);
-                String secondWord = idx == -1 ? enumName.substring(firstWord.length() + 1) : enumName.substring(firstWord.length() + 1, idx);
-                if (secondWord.equalsIgnoreCase("OFFERING")) {
-                    keyword = Keyword.OFFERING;
-                    details = firstWord;
-                }
-            }
-        }
         KeywordInstance<?> inst;
         try {
             inst = keyword.type.getConstructor().newInstance();

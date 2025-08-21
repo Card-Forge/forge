@@ -1,0 +1,6 @@
+Name:Flying Dolphin-Fish
+ManaCost:1 U
+Types:Creature Whale Fish
+PT:1/3
+K:Flying
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)

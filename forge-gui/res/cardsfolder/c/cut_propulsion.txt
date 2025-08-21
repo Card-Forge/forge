@@ -1,0 +1,9 @@
+Name:Cut Propulsion
+ManaCost:2 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ X | DamageSource$ Targeted | SpellDescription$ Target creature deals damage to itself equal to its power. If that creature has flying, it deals twice that much damage to itself instead.
+SVar:X:Count$Compare W GE1.Y.Z
+SVar:Y:Targeted$CardPower/Times.2
+SVar:Z:Targeted$CardPower
+SVar:W:Targeted$Valid Creature.withFlying
+Oracle:Target creature deals damage to itself equal to its power. If that creature has flying, it deals twice that much damage to itself instead.

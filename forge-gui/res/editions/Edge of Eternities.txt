@@ -4,23 +4,77 @@ Date=2025-08-01
 Name=Edge of Eternities
 Type=Expansion
 ScryfallCode=EOE
+#https://mtgscribe.com/2025/07/16/edge-of-eternities-play-booster-fact-sheet/
+BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,BasicLand,Wildcard,WildcardFoil
+Booster=6 Common,1 Common-Guest,3 Uncommon, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 BasicLand
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=30
+
+[Common]
+Base=Common:fromSheet("EOE cards"):!BasicLand
+
+[Common-Guest]
+Base=Common:fromSheet("EOE cards"):!BasicLand
+Replace=.018F fromSheet("EOE special guests")
+
+[Uncommon]
+Base=Uncommon:fromSheet("EOE cards")
+
+[RareMythic]
+Base=Rare:fromSheet("EOE cards")
+Replace=.142F Mythic:fromSheet("EOE cards")
+Replace=.036F Rare:fromSheet("EOE borderless")
+Replace=.018F Mythic:fromSheet("EOE borderless")
+
+[Wildcard]
+Base=Uncommon:fromSheet("EOE cards")
+Replace=0.125F Common:fromSheet("EOE cards"):!BasicLand
+Replace=0.106F Rare:fromSheet("EOE cards")
+Replace=0.003F Mythic:fromSheet("EOE cards")
+Replace=0.1F Rare:fromSheet("EOS cards")
+Replace=0.025F Mythic:fromSheet("EOS cards")
+Replace=0.01F Rare:fromSheet("EOE borderless")
+Replace=0.005F Mythic:fromSheet("EOE borderless")
+
+[WildcardFoil]
+Base=Common:fromSheet("EOE cards"):!BasicLand
+Replace=0.32F Uncommon:fromSheet("EOE cards")
+Replace=0.064F Rare:fromSheet("EOE cards")
+Replace=0.011F Mythic:fromSheet("EOE cards")
+Replace=0.01F Rare:fromSheet("EOS cards")
+Replace=0.0075F Mythic:fromSheet("EOS cards")
+Replace=0.0075F fromSheet("EOE borderless"):!BasicLand
+
+[BasicLand]
+Base=BasicLand:fromSheet("EOE cards")
+Replace=0.16F BasicLand:fromSheet("EOE cards")+
+Replace=0.16F BasicLand:fromSheet("EOE borderless")
+Replace=0.04F BasicLand:fromSheet("EOE borderless")+
 
 [cards]
 1 R Anticausal Vestige @Chase Stone
 2 M Tezzeret, Cruel Captain @Chris Rahn
 3 U All-Fates Stalker @Lius Lasahido
 4 R Astelli Reclaimer @Carly Milligan
+5 C Auxiliary Boosters @Dmitry Burmak
 6 C Banishing Light @Rovina Cai
 7 R Beyond the Quiet @Yohann Schepacz
+8 C Brightspear Zealot @Bryan Sola
 9 M Cosmogrand Zenith @Anna Steinbauer
+10 U Dawnstrike Vanguard @Arif Wijaya
+11 C Dockworker Drone @Marco Gorlei
+12 U Dual-Sun Adepts @Ioannis Fiore
 13 U Dual-Sun Technique @Ioannis Fiore
 14 U Emergency Eject @Leon Tukker
 15 M Exalted Sunborn @Scott M. Fischer
+16 C Exosuit Savior @Benjamin Ee
+17 C Flight-Deck Coordinator @Diego Gisbert
 18 C Focus Fire @Borja Pindado
 19 R Haliya, Guided by Light @Kieran Yanner
 20 R Hardlight Containment @Dominik Mayer
 21 U Honor @Eli Minaya
 22 U Honored Knight-Captain @Forrest Imel
+23 C Knight Luminary @Aaron Miller
 24 R Lightstall Inquisitor @Arif Wijaya
 25 R Lumen-Class Frigate @Zezhou Chen
 26 C Luxknight Breacher @Cristi Balanescu
@@ -31,30 +85,48 @@ ScryfallCode=EOE
 31 U Reroute Systems @Sergey Glushakov
 32 U Rescue Skiff @Viko Menezes
 33 U Scout for Survivors @Greg Staples
+34 U Seam Rip @Sam Guay
 35 R The Seriema @Sergey Glushakov
+36 C Squire's Lightblade @Edgar Sánchez Hidalgo
 37 U Starfield Shepherd @Marta Nael
 38 C Starfighter Pilot @Nathaniel Himawan
 39 C Starport Security @Lie Setiawan
 40 R Sunstar Chaplain @Valera Lutfullina
 41 U Sunstar Expansionist @Mark Poole
+42 U Sunstar Lightsmith @Jarel Threat
 43 U Wedgelight Rammer @Nadia Hurianova
+44 C Weftblade Enhancer @Nathaniel Himawan
+45 C Zealous Display @Chris Rallis
 46 U Annul @Carlos Palma Cruchaga
 47 U Atomic Microsizer @Gabor Szikszai
 48 U Cerebral Download @Antonio José Manzanedo
+49 C Cloudsculpt Technician @Elizabeth Peiró
 50 U Codecracker Hound @Julia Metzger
 51 R Consult the Star Charts @Antonio José Manzanedo
 52 C Cryogen Relic @Eelis Kyttanen
+53 C Cryoshatter @Jeremy Wilson
 54 U Desculpting Blast @Jeremy Wilson
+55 C Divert Disaster @David Álvarez
 56 R Emissary Escort @Igor Grechanyi
 57 U Gigastorm Titan @Bryan Sola
 58 C Illvoi Galeblade @Nathaniel Himawan
+59 U Illvoi Infiltrator @Paolo Parente
+60 C Illvoi Light Jammer @David Álvarez
+61 C Illvoi Operative @Quintin Gleim
+62 C Lost in Space @Allen Panakal
 63 U Mechan Assembler @Mirko Failoni
 64 U Mechan Navigator @Konstantin Porubov
+65 C Mechan Shieldmate @Daniel Ljunggren
 66 C Mechanozoa @Daarken
+67 C Mental Modulation @Andreia Ugrai
 68 R Mm'menon, the Right Hand @Joshua Raphael
 69 R Moonlit Meditation @Liiga Smilshkalne
 70 U Mouth of the Storm @Domenico Cava
+71 C Nanoform Sentinel @Tianxing Xu
 72 M Quantum Riddler @Izzy
+73 U Scour for Scrap @Filip Burburan
+74 C Selfcraft Mechan @Milivoj Ćeran
+75 C Sinister Cryologist @Domenico Cava
 76 U Specimen Freighter @Sergey Glushakov
 77 C Starbreach Whale @Sam Burley
 78 R Starfield Vocalist @Nathaniel Himawan
@@ -68,88 +140,129 @@ ScryfallCode=EOE
 86 M Weftwalking @Rovina Cai
 87 M Alpharael, Stonechosen @Kieran Yanner
 88 R Archenemy's Charm @Brigitte Roka & Clifton Stommel
+89 C Beamsaw Prospector @Aurore Folny
 90 U Blade of the Swarm @Nino Is
 91 R Chorale of the Void @Alix Branwyn
+92 C Comet Crawler @Cristi Balanescu
+93 C Dark Endurance @Leon Tukker
 94 C Decode Transmissions @Josh Hass
+95 C Depressurize @Danny Schwartz
 96 U Dubious Delicacy @Tianxing Xu
 97 R Elegy Acolyte @Diana Franco
 98 C Embrace Oblivion @Andreas Zafiratos
 99 R Entropic Battlecruiser @Josiah "Jo" Cameron
 100 U Faller's Faithful @Lie Setiawan
 101 U Fell Gravship @David Álvarez
+102 C Gravblade Heavy @Andrew Mar
 103 C Gravkill @Dominik Mayer
+104 C Gravpack Monoist @Edgar Sánchez Hidalgo
 105 C Hullcarver @Michal Ivan
 106 U Hylderblade @Viko Menezes
 107 U Hymn of the Faller @Danny Schwartz
 108 C Insatiable Skittermaw @Diego Gisbert
 109 U Lightless Evangel @Viko Menezes
 110 U Monoist Circuit-Feeder @Quintin Gleim
+111 U Monoist Sentry @Nino Is
+112 C Perigee Beckoner @Dmitry Burmak
 113 R Requiem Monolith @Warren Mahy
+114 U Scrounge for Eternity @Konstantin Porubov
 115 M Sothera, the Supervoid @Dominik Mayer
 116 R Sunset Saboteur @Mirko Failoni
+117 U Susurian Dirgecraft @Mark Poole
+118 U Susurian Voidborn @Jehan Choo
+119 C Swarm Culler @April Prime
 120 C Temporal Intervention @Chris Rallis
 121 U Timeline Culler @Alfonso Santano
 122 U Tragic Trajectory @Ovidio Cartagena
 123 U Umbral Collar Zealot @Dmitry Burmak
 124 C Virus Beetle @Leesha Hannigan
 125 U Voidforged Titan @Diego Gisbert
+126 U Vote Out @David Álvarez
 127 R Xu-Ifit, Osteoharmonist @Michal Ivan
+128 R Zero Point Ballad @David Astruga
+129 C Bombard @Diego Gisbert
 130 U Cut Propulsion @Andrea Piparo
 131 U Debris Field Crusher @David Álvarez
 132 M Devastating Onslaught @Chris Seaman
+133 C Drill Too Deep @Bartek Fedyczak
+134 C Frontline War-Rager @Jason Rainville
 135 U Full Bore @Olivier Bernard
 136 U Galvanizing Sawship @Constantin Marin
 137 U Invasive Maneuvers @Leon Tukker
 138 C Kav Landseeker @Karl Kopinski
 139 U Kavaron Harrier @Hardy Fowler
+140 C Kavaron Skywarden @Diana Franco
+141 C Kavaron Turbodrone @Leesha Hannigan
 142 U Lithobraking @Andrew Mar
 143 C Melded Moxite @Alexandr Leskinen
 144 U Memorial Team Leader @Andrew Mar
-145 R "Forgotten Sock Closet" @Javier Charro
+145 R Memorial Vault @Javier Charro
+146 U Molecular Modifier @Konstantin Porubov
+147 C Nebula Dragon @Greg Staples
 148 R Nova Hellkite @Raymond Swanland
+149 C Orbital Plunge @Inkognit
+150 C Oreplate Pangolin @Dmitry Burmak
 151 R Pain for All @Dmitry Burmak
 152 C Plasma Bolt @Viko Menezes
 153 R Possibility Technician @Antonio José Manzanedo
 154 C Red Tiger Mechan @Simon Dominic
 155 U Remnant Elemental @Nereida
+156 C Rig for War @Diana Franco
 157 U Roving Actuator @Sergey Glushakov
 158 U Ruinous Rampage @David Astruga
 159 R Rust Harvester @Jake Murray
+160 C Slagdrill Scrapper @Edgar Sánchez Hidalgo
 161 U Systems Override @Hardy Fowler
 162 M Tannuk, Steadfast Second @Raymond Swanland
+163 R Terminal Velocity @Xabi Gaztelua
 164 U Terrapact Intimidator @Slawomir Maniak
+165 U Territorial Bruntar @Julie Dillon
+166 U Vaultguard Trooper @David Palumbo
 167 R Warmaker Gunship @Julian Kok Joon Wen
 168 R Weapons Manufacturing @Marco Gorlei
 169 U Weftstalker Ardent @Valera Lutfullina
+170 C Zookeeper Mechan @Justyna Dura
 171 U Atmospheric Greenhouse @Sergey Glushakov
 172 R Bioengineered Future @Constantin Marin
+173 C Biosynthic Burst @Loïc Canavaggia
+174 C Blooming Stinger @Alexandre Honoré
 175 U Broodguard Elite @Paolo Parente
 176 U Close Encounter @Inkognit
+177 C Diplomatic Relations @Néstor Ossandón Leal
 178 C Drix Fatemaker @Anna Pavleeva
 179 U Edge Rover @Francisco Badilla
+180 U Eumidian Terrabotanist @Loïc Canavaggia
 181 U Eusocial Engineering @Francisco Badilla
 182 M Famished Worldsire @Kev Walker
 183 R Frenzied Baloth @Diana Franco
 184 C Fungal Colossus @Sergey Glushakov
 185 C Galactic Wayfarer @Quintin Gleim
-188 U Glacier Godmaw @
+186 C Gene Pollinator @Milivoj Ćeran
+187 C Germinating Wurm @Monztre
+188 U Glacier Godmaw @Bruce Brenneise
 189 U Harmonious Grovestrider @Ron Spencer
 190 U Hemosymbic Mite @Amanda Lee
+191 C Icecave Crasher @Julia Metzger
 192 R Icetill Explorer @Warren Mahy
+193 C Intrepid Tenderfoot @Xavier Ribeiro
 194 U Larval Scoutlander @Javier Charro
 195 U Lashwhip Predator @Brian Valeza
 196 R Loading Zone @Matt Stewart
 197 U Meltstrider Eulogist @Jason A. Engle
+198 C Meltstrider's Gear @Camille Alquier
 199 U Meltstrider's Resolve @Carlos Palma Cruchaga
 200 R Mightform Harmonizer @Bartek Fedyczak
 201 M Ouroboroid @Samuel Perin
 202 U Pull Through the Weft @Andrew Mar
 203 C Sami's Curiosity @Tuan Duong Chu
+204 U Seedship Agrarian @Helge C. Balzer
 205 U Seedship Impact @Constantin Marin
 206 C Shattered Wings @Sergey Glushakov
+207 C Skystinger @Carlos Palma Cruchaga
 208 R Sledge-Class Seedship @Leon Tukker
 209 U Tapestry Warden @Andreas Zafiratos
 210 R Terrasymbiosis @Viko Menezes
+211 C Thawbringer @Olivier Bernard
 212 U Alpharael, Dreaming Acolyte @Cristi Balanescu
 213 U Biomechan Engineer @Monztre
 214 R Biotech Specialist @Alexandre Honoré
@@ -184,6 +297,7 @@ ScryfallCode=EOE
 243 C Nutrient Block @Francisco Miyara
 244 C Pinnacle Kill-Ship @Alexandre Honoré
 245 U Survey Mechan @Johann Bodin
+246 C Thaumaton Torpedo @Madeline Boni
 247 R Thrumming Hivepool @Rob Rey
 248 U Virulent Silencer @Kenn Yap
 249 C Wurmwall Sweeper @Hardy Fowler
@@ -214,6 +328,8 @@ ScryfallCode=EOE
 274 L Mountain @Julian Kok Joon Wen
 275 L Forest @Sergey Glushakov
 276 L Forest @Julian Kok Joon Wen
+
+[borderless]
 277 M Adagia, Windswept Bastion @Piotr Dura
 278 R Breeding Pool @Chris Ostrowski
 279 M Evendo, Waking Haven @Piotr Dura
@@ -254,53 +370,6 @@ ScryfallCode=EOE
 314 R Mutinous Massacre @Jack Hughes
 315 R Space-Time Anomaly @Princess Hidir
 316 R Secluded Starforge @Jaime A. Zuverza
-317 R Anticausal Vestige @Chase Stone
-318 M Exalted Sunborn @Scott M. Fischer
-319 R Hardlight Containment @Dominik Mayer
-321 R Lumen-Class Frigate @Zezhou Chen
-322 R Pinnacle Starcage @Leon Tukker
-323 R The Seriema @Sergey Glushakov
-324 R Sunstar Chaplain @Valera Lutfullina
-325 R Consult the Star Charts @Antonio José Manzanedo
-326 R Emissary Escort @Igor Grechanyi
-327 R Moonlit Meditation @Liiga Smilshkalne
-328 R Starfield Vocalist @Nathaniel Himawan
-329 R Synthesizer Labship @Adrián Rodríguez Pérez
-330 M Weftwalking @Rovina Cai
-331 R Chorale of the Void @Alix Branwyn
-332 R Entropic Battlecruiser @Josiah "Jo" Cameron
-333 R Requiem Monolith @Warren Mahy
-334 R Sunset Saboteur @Mirko Failoni
-335 R Zero Point Ballad @David Astruga
-337 R Pain for All @Dmitry Burmak
-338 R Terminal Velocity @Xabi Gaztelua
-339 R Warmaker Gunship @Julian Kok Joon Wen
-340 R Bioengineered Future @Constantin Marin
-341 M Famished Worldsire @Kev Walker
-342 R Frenzied Baloth @Diana Franco
-343 R Icetill Explorer @Warren Mahy
-345 M Ouroboroid @Samuel Perin
-346 R Sledge-Class Seedship @Leon Tukker
-347 R Biotech Specialist @Alexandre Honoré
-348 R Infinite Guideline Station @Piotr Dura
-349 R Pinnacle Emissary @Alejandro Pacheco
-350 R Singularity Rupture @Liiga Smilshkalne
-351 M Dawnsire, Sunstar Dreadnought @Jaime Jones
-352 M The Dominion Bracelet @Nathaniel Himawan
-353 M The Endstone @Ryan Pancoast
-354 R The Eternity Elevator @Josu Solano
-355 R Extinguisher Battleship @Danny Schwartz
-356 R Thrumming Hivepool @Rob Rey
-357 M Anticausal Vestige @Nottsuo
-358 M Exalted Sunborn @Makoron
-359 M Starfield Vocalist @nina
-360 M Sothera, the Supervoid @Mateusz Urbanowicz
-361 M Devastating Onslaught @Naochika Morishita
-362 M Icetill Explorer @Raimaru
-363 M Mutinous Massacre @Aogachou
-364 M The Dominion Bracelet @Mai Minamiura
-365 M The Endstone @Hidetaka Tenjin
-366 M Secluded Starforge @Makoto Yukimura
 367 L Plains @Adam Paquette
 368 L Island @Adam Paquette
 369 L Swamp @Adam Paquette
@@ -316,23 +385,104 @@ ScryfallCode=EOE
 379 M Susur Secundi, Void Altar @Piotr Dura
 380 M Uthros, Titanic Godcore @Piotr Dura
 381 R Watery Grave @Chris Ostrowski
+
+[extended art]
+317 R Anticausal Vestige @Chase Stone
+318 M Exalted Sunborn @Scott M. Fischer
+319 R Hardlight Containment @Dominik Mayer
+320 R Lightstall Inquisitor @Arif Wijaya
+321 R Lumen-Class Frigate @Zezhou Chen
+322 R Pinnacle Starcage @Leon Tukker
+323 R The Seriema @Sergey Glushakov
+324 R Sunstar Chaplain @Valera Lutfullina
+325 R Consult the Star Charts @Antonio José Manzanedo
+326 R Emissary Escort @Igor Grechanyi
+327 R Moonlit Meditation @Liiga Smilshkalne
+328 R Starfield Vocalist @Nathaniel Himawan
+329 R Synthesizer Labship @Adrián Rodríguez Pérez
+330 M Weftwalking @Rovina Cai
+331 R Chorale of the Void @Alix Branwyn
+332 R Entropic Battlecruiser @Josiah "Jo" Cameron
+333 R Requiem Monolith @Warren Mahy
+334 R Sunset Saboteur @Mirko Failoni
+335 R Zero Point Ballad @David Astruga
+336 R Memorial Vault @Javier Charro
+337 R Pain for All @Dmitry Burmak
+338 R Terminal Velocity @Xabi Gaztelua
+339 R Warmaker Gunship @Julian Kok Joon Wen
+340 R Bioengineered Future @Constantin Marin
+341 M Famished Worldsire @Kev Walker
+342 R Frenzied Baloth @Diana Franco
+343 R Icetill Explorer @Warren Mahy
+344 R Loading Zone @Matt Stewart
+345 M Ouroboroid @Samuel Perin
+346 R Sledge-Class Seedship @Leon Tukker
+347 R Biotech Specialist @Alexandre Honoré
+348 R Infinite Guideline Station @Piotr Dura
+349 R Pinnacle Emissary @Alejandro Pacheco
+350 R Singularity Rupture @Liiga Smilshkalne
+351 M Dawnsire, Sunstar Dreadnought @Jaime Jones
+352 M The Dominion Bracelet @Nathaniel Himawan
+353 M The Endstone @Ryan Pancoast
+354 R The Eternity Elevator @Josu Solano
+355 R Extinguisher Battleship @Danny Schwartz
+356 R Thrumming Hivepool @Rob Rey
+
+[showcase]
+357 M Anticausal Vestige @Nottsuo
+358 M Exalted Sunborn @Makoron
+359 M Starfield Vocalist @nina
+360 M Sothera, the Supervoid @Mateusz Urbanowicz
+361 M Devastating Onslaught @Naochika Morishita
+362 M Icetill Explorer @Raimaru
+363 M Mutinous Massacre @Aogachou
+364 M The Dominion Bracelet @Mai Minamiura
+365 M The Endstone @Hidetaka Tenjin
+366 M Secluded Starforge @Makoto Yukimura
 382 M Sothera, the Supervoid @Micha Huigen
 383 M Anticausal Vestige @Nottsuo
 384 M Exalted Sunborn @Makoron
 385 M Starfield Vocalist @nina
 386 M Sothera, the Supervoid @Mateusz Urbanowicz
+387 M Devastating Onslaught @Naochika Morishita
 388 M Icetill Explorer @Raimaru
 389 M Mutinous Massacre @Aogachou
 390 M The Dominion Bracelet @Mai Minamiura
 391 M The Endstone @Hidetaka Tenjin
 392 M Secluded Starforge @Makoto Yukimura
+
+[promo]
 393 U Starfield Shepherd @Marta Nael
 394 U Annul @Carlos Palma Cruchaga
 395 U Umbral Collar Zealot @Dmitry Burmak
 396 U Kavaron Harrier @Hardy Fowler
+397 U Pull Through the Weft @Andrew Mar
 398 R Singularity Rupture @Néstor Ossandón Leal
 399 R Emissary Escort @Lius Lasahido
 
+[special guests]
+1 Warping Wail|SPG
+1 Nexus of Fate|SPG
+1 Paradox Haze|SPG
+1 Magus of the Moon|SPG
+1 Sliver Overlord|SPG
+1 Darkness|SPG
+1 Green Sun's Zenith|SPG
+1 Deafening Silence|SPG
+1 Robe of Stars|SPG
+1 Burgeoning|SPG
+
 [tokens]
 1 c_1_1_sliver @Igor Grechanyi
+2 w_1_1_human_soldier @Allen Morris
+3 c_1_1_a_drone_flying_blockflying @Artur Nakhodkin
+4 c_a_lander_sac_search @Titus Lunter
+5 c_a_lander_sac_search @Madeline Boni
+6 c_a_lander_sac_search @Martin de Diego Sádaba
+7 c_a_lander_sac_search @David Astruga
 8 c_a_lander_sac_search @Jorge Jacinto
+9 munitions @Leonardo Santanna
+10 c_2_2_a_robot @Leonardo Santanna
+
+[other]
+11 emblem_tezzeret_cruel_captain @Chris Rahn

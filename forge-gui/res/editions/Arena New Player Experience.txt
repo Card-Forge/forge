@@ -6,42 +6,49 @@ Type=Online
 ScryfallCode=ANA
 
 [cards]
-1 U Angelic Reward
-2 U Blinding Radiance
-3 U Confront the Assault
-4 R Inspiring Commander
-5 C Knight's Pledge
-7 C Loxodon Line Breaker
-8 C Sanctuary Cat
-9 U Serra Angel
-10 C Shrine Keeper
-11 C Spiritual Guardian
-12 C Tactical Advantage
-13 C Take Vengeance
-14 C Divination
-16 M Overflowing Insight
-18 C Shorecomber Crab
-19 C River's Favor
-19 U Titanic Pelagosaur
-22 C Waterknot
-23 C Zephyr Gull
-24 C Altar's Reap
-25 U Ambition's Cost
-26 C Cruel Cut
-29 C Miasmic Mummy
-31 C Nimble Pilferer
-33 C Renegade Demon
-34 U Rise from the Grave
-35 R Soulhunter Rakshasa
-36 R Chaos Maw
-37 U Doublecast
-39 U Goblin Bruiser
-40 U Goblin Gang Leader
-41 U Goblin Grenade
-42 R Ogre Painbringer
-43 C Raging Goblin
-44 U Seismic Rupture
-45 U Volcanic Dragon
-46 C Feral Roar
-47 C Rumbling Baloth
-48 C Treetop Warden
+1a L Plains @John Avon
+2a L Plains @Rebecca Guay
+3a L Island @John Avon
+4a L Island @Rebecca Guay
+5a L Swamp @John Avon
+6 L Plains @Eric Peterson
+6a L Swamp @Rebecca Guay
+6b U Encroaching Wastes @Richard Wright
+7 L Plains @Ben Thompson
+7a L Mountain @John Avon
+8 L Plains @Mike Ploog
+8a L Mountain @Rebecca Guay
+9 L Island @Ben Thompson
+9a L Forest @John Avon
+10 L Island @Eric Peterson
+10a L Forest @Rebecca Guay
+11 L Island @Ben Thompson
+12 L Swamp @Kev Walker
+13 L Swamp @Scott Bailey
+14 L Swamp @Mike Ploog
+15 L Mountain @Kev Walker
+16 L Mountain @Scott Bailey
+17 L Mountain @Eric Peterson
+18 L Forest @Scott Bailey
+19 L Forest @Kev Walker
+20 L Forest @Mike Ploog
+21 L Plains @Colin MacNeil
+22 L Plains @Ron Spears
+23 L Plains @Rebecca Guay
+24 L Island @Rob Alexander
+25 L Island @Bob Eggleton
+26 L Island @Edward P. Beard, Jr.
+27 L Swamp @Ron Spears
+28 L Swamp @Ron Spears
+29 L Swamp @Edward P. Beard, Jr.
+30 L Mountain @Rebecca Guay
+31 L Mountain @Heather Hudson
+32 L Mountain @Edward P. Beard, Jr.
+33 L Forest @Edward P. Beard, Jr.
+34 L Forest @Christopher Rush
+35 L Forest @Pete Venters
+95846 C Snow-Covered Plains @Mark Romanoski
+95847 C Snow-Covered Island @Franz Vohwinkel
+95848 C Snow-Covered Swamp @Rob Alexander
+95849 C Snow-Covered Mountain @John Zeleznik
+95850 C Snow-Covered Forest @Jim Nelson

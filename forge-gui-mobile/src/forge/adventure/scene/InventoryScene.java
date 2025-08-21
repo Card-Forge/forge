@@ -269,7 +269,7 @@ public class InventoryScene extends UIScene {
             useButton.layout();
             equipButton.setDisabled(true);
 
-            itemDescription.setText(data.getName() + "\n[%98]" + (data.getComment() == null?"":data.getComment()+" - ") + data.getAllCardsInASinglePool().countAll() + " cards");
+            itemDescription.setText(data.getName() + "\n[%98]" + (data.getComment() == null?"":data.getComment()+" - ") + data.getAllCardsInASinglePool(true, true).countAll() + " cards");
         }
 
 

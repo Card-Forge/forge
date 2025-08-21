@@ -31,20 +31,20 @@ public class PermanentEffect extends SpellAbilityEffect {
         final Card c = game.getAction().moveToPlay(host, sa, moveParams);
         sa.setHostCard(c);
 
+        // CR 608.3g
         if (sa.isIntrinsic() || c.wasCast()) {
-            // some extra for Dashing
             if (sa.isDash() && c.isInPlay()) {
-                c.addChangedSVars(Collections.singletonMap("EndOfTurnLeavePlay", "Dash"), c.getGame().getNextTimestamp(), 0);
                 registerDelayedTrigger(sa, "Hand", Lists.newArrayList(c));
+                // add AI hint
+                c.addChangedSVars(Collections.singletonMap("EndOfTurnLeavePlay", "Dash"), c.getGame().getNextTimestamp(), 0);
             }
-            // similar for Blitz keyword
             if (sa.isBlitz() && c.isInPlay()) {
-                c.addChangedSVars(Collections.singletonMap("EndOfTurnLeavePlay", "Blitz"), c.getGame().getNextTimestamp(), 0);
                 registerDelayedTrigger(sa, "Sacrifice", Lists.newArrayList(c));
+                c.addChangedSVars(Collections.singletonMap("EndOfTurnLeavePlay", "Blitz"), c.getGame().getNextTimestamp(), 0);
             }
             if (sa.isWarp() && c.isInPlay()) {
-                c.addChangedSVars(Collections.singletonMap("EndOfTurnLeavePlay", "Warp"), c.getGame().getNextTimestamp(), 0);
                 registerDelayedTrigger(sa, "Exile", Lists.newArrayList(c));
+                c.addChangedSVars(Collections.singletonMap("EndOfTurnLeavePlay", "Warp"), c.getGame().getNextTimestamp(), 0);
             }
         }
 

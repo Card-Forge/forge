@@ -42,43 +42,41 @@ public class DrawAi extends SpellAbilityAi {
      * @see forge.ai.SpellAbilityAi#checkApiLogic(forge.game.player.Player, forge.game.spellability.SpellAbility)
      */
     @Override
-    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         if (!targetAI(ai, sa, false)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
         if (sa.usesTargeting()) {
             final Player player = sa.getTargets().getFirstTargetedPlayer();
             if (player != null && player.isOpponentOf(ai)) {
-                return true;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
-        // prevent run-away activations - first time will always return true
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false;
-        }
-
         if (ComputerUtil.playImmediately(ai, sa)) {
-            return true;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         // Don't tap creatures that may be able to block
         if (ComputerUtil.waitForBlocking(sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.WaitForCombat);
         }
 
         if (!canLoot(ai, sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())) {
             // Canopy lands and other cards that sacrifice themselves to draw cards
-            return ai.getCardsIn(ZoneType.Hand).isEmpty()
-                    || (sa.getHostCard().isLand() && ai.getLandsInPlay().size() >= 5); // TODO: make this configurable in the AI profile
+            if (ai.getCardsIn(ZoneType.Hand).isEmpty()
+                    || (sa.getHostCard().isLand() && ai.getLandsInPlay().size() >= 5)) {
+                // TODO: make this configurable in the AI profile
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
         }
 
-        return true;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     /*
@@ -161,8 +159,6 @@ public class DrawAi extends SpellAbilityAi {
             // LifeLessThan logic presupposes activation as soon as possible in an
             // attempt to save the AI from dying
             return true;
-        } else if (logic.equals("AtOppEOT")) {
-            return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai);
         } else if (logic.equals("RespondToOwnActivation")) {
             return !ai.getGame().getStack().isEmpty() && ai.getGame().getStack().peekAbility().getHostCard().equals(sa.getHostCard());
         } else if ((!ph.getNextTurn().equals(ai) || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
@@ -175,8 +171,12 @@ public class DrawAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        return targetAI(ai, sa, sa.isTrigger() && sa.getHostCard().isInPlay());
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+        if (targetAI(ai, sa, sa.isTrigger() && sa.getHostCard().isInPlay())) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else {
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+        }
     }
 
     /**
@@ -534,12 +534,16 @@ public class DrawAi extends SpellAbilityAi {
     } // drawTargetAI()
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (!mandatory && !willPayCosts(ai, sa, sa.getPayCosts(), sa.getHostCard())) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        return targetAI(ai, sa, mandatory);
+        if (targetAI(ai, sa, mandatory)) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else {
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+        }
     }
 
     /* (non-Javadoc)

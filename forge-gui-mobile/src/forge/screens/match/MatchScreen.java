@@ -18,6 +18,7 @@ import forge.gui.interfaces.IGuiGame;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VReveal;
 import forge.toolbox.FDisplayObject;
+import forge.util.CardRendererUtils;
 import forge.util.Utils;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.tuple.Pair;
@@ -143,7 +144,7 @@ public class MatchScreen extends FScreen {
         players.setDropDownContainer(this);
         revealed = new VReveal();
         revealed.setDropDownContainer(this);
-        log = new VLog();
+        log = new VLog(() -> MatchController.instance.getGameView().getGameLog());
         log.setDropDownContainer(this);
         devMenu = new VDevMenu();
         devMenu.setDropDownContainer(this);
@@ -404,36 +405,43 @@ public class MatchScreen extends FScreen {
                         if (object instanceof FCardPanel cardPanel) {
                             try {
                                 if (cardPanel.isHovered()) {
-                                    VPlayerPanel vPlayerPanel = getPlayerPanel(cardPanel.getCard().getController());
+                                    CardView cardView = cardPanel.getCard();
+                                    VPlayerPanel vPlayerPanel = getPlayerPanel(cardView.getController());
                                     if (vPlayerPanel == null)
-                                        vPlayerPanel = getPlayerPanel(cardPanel.getCard().getOwner());
+                                        vPlayerPanel = getPlayerPanel(cardView.getOwner());
                                     if (vPlayerPanel != null) {
-                                        float cardW = getHeight() * 0.45f;
+                                        boolean rotate = CardRendererUtils.needsRotation(cardView) && !Forge.magnifyShowDetails;
+                                        boolean inBattlefield = ZoneType.Battlefield.equals(cardView.getZone());
+                                        float mul = 0.45f;
+                                        float div = inBattlefield ? cardPanel.isTapped() ? 2.7f : 2.4f : 1.6f;
+                                        float adjX = rotate ? cardPanel.getWidth() / div : 0f;
+                                        float adjY = rotate ? cardPanel.getHeight() / 2.2f : 0f;
+                                        float cardW = getHeight() * mul;
                                         float cardH = FCardPanel.ASPECT_RATIO * cardW;
-                                        float cardX = !ZoneType.Battlefield.equals(cardPanel.getCard().getZone())
-                                                ? cardPanel.screenPos.x - cardW : cardPanel.screenPos.x + (cardPanel.isTapped()
-                                                ? cardPanel.getWidth() : cardPanel.getWidth() / 1.4f);
+                                        float cardX = !inBattlefield ? cardPanel.screenPos.x - (cardW + adjX)
+                                                : cardPanel.screenPos.x + (cardPanel.isTapped() ? cardPanel.getWidth()
+                                                : cardPanel.getWidth() / 1.4f) + adjX;
                                         if (vPlayerPanel.getSelectedTab() != null && vPlayerPanel.getSelectedTab().isVisible()
                                                 && cardX > vPlayerPanel.getSelectedTab().getDisplayArea().getLeft()) {
-                                            cardX = cardPanel.screenPos.x - cardW;
+                                            cardX = cardPanel.screenPos.x - (cardW + adjX);
                                         }
-                                        if ((cardX + cardW) > scroller.getWidth() + scroller.getLeft())
-                                            cardX = cardPanel.screenPos.x - cardW;
+                                        if ((cardX + cardW + adjX) > scroller.getWidth() + scroller.getLeft())
+                                            cardX = cardPanel.screenPos.x - (cardW + adjX);
                                         if (vPlayerPanel.getCommandZone() != null
                                                 && vPlayerPanel.getCommandZone().isVisible() && cardX > vPlayerPanel.getCommandZone().screenPos.x)
-                                            cardX = cardPanel.screenPos.x - cardW;
-                                        float cardY = (cardPanel.screenPos.y - cardH) + cardPanel.getHeight();
+                                            cardX = cardPanel.screenPos.x - (cardW + adjX);
+                                        float cardY = (cardPanel.screenPos.y - (cardH - adjY)) + cardPanel.getHeight();
                                         if (vPlayerPanel.getPlayer() == bottomPlayerPanel.getPlayer()) {
-                                            cardY = bottomPlayerPrompt.screenPos.y - cardH;
+                                            cardY = bottomPlayerPrompt.screenPos.y - (cardH - adjY);
                                         } else if (cardY < vPlayerPanel.getField().screenPos.y && vPlayerPanel.getPlayer() != bottomPlayerPanel.getPlayer()) {
-                                            cardY = vPlayerPanel.getField().screenPos.y;
-                                            if ((cardY + cardH) > bottomPlayerPrompt.screenPos.y)
-                                                cardY = bottomPlayerPrompt.screenPos.y - cardH;
+                                            cardY = vPlayerPanel.getField().screenPos.y - adjY;
+                                            if ((cardY + (cardH - adjY)) > bottomPlayerPrompt.screenPos.y)
+                                                cardY = bottomPlayerPrompt.screenPos.y - (cardH - adjY);
                                         }
                                         if (Forge.magnifyShowDetails)
-                                            CardImageRenderer.drawDetails(g, cardPanel.getCard(), MatchController.instance.getGameView(), false, cardX, cardY, cardW, cardH);
+                                            CardImageRenderer.drawDetails(g, cardView, MatchController.instance.getGameView(), false, cardX, cardY, cardW, cardH);
                                         else
-                                            CardRenderer.drawCard(g, cardPanel.getCard(), cardX, cardY, cardW, cardH, CardRenderer.CardStackPosition.Top, false, false, false, true);
+                                            CardRenderer.drawCard(g, cardView, cardX, cardY, cardW, cardH, CardRenderer.CardStackPosition.Top, rotate, false, false, true);
                                     }
                                 }
                             } catch (Exception e) {
@@ -888,11 +896,11 @@ public class MatchScreen extends FScreen {
                             g.drawRipple(image, x, y, w, h, 1 - percentage);
                         if ("Day".equalsIgnoreCase(dt)) {
                             g.setAlphaComposite(percentage);
-                            g.drawNightDay(image, x, y, w, h, 100f, true, 1 - percentage);
+                            g.drawNightDay(image, x, y, w, h, 100f, true, 0/*1 - percentage*/); // disable extra ripples
                             g.setAlphaComposite(oldAlpha);
                         } else if ("Night".equalsIgnoreCase(dt)) {
                             g.setAlphaComposite(percentage);
-                            g.drawNightDay(image, x, y, w, h, -100f, true, 1 - percentage);
+                            g.drawNightDay(image, x, y, w, h, -100f, true, 0/*1 - percentage*/); // disable extra ripples
                             g.setAlphaComposite(oldAlpha);
                         }
                     } else {
@@ -969,8 +977,7 @@ public class MatchScreen extends FScreen {
             //overrideBG
             if (!Forge.isMobileAdventureMode) {
                 if (hasActivePlane()) {
-                    imageName = getPlaneName().replace(" ", "_").replace("'", "")
-                            .replace("-", "").replace("!", "");
+                    imageName = getPlaneName();
                     if (!plane.equals(imageName)) {
                         plane = imageName;
                         bgAnimation.progress = 0;

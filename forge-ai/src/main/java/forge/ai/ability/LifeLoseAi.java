@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
@@ -26,7 +28,7 @@ public class LifeLoseAi extends SpellAbilityAi {
      * SpellAbility, forge.game.player.Player)
      */
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         final PlayerCollection tgtPlayers = getPlayers(ai, sa);
 
         final Card source = sa.getHostCard();
@@ -48,14 +50,13 @@ public class LifeLoseAi extends SpellAbilityAi {
         }
 
         if (tgtPlayers.contains(ai) && amount > 0 && amount + 3 > ai.getLife()) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
-
         if (sa.usesTargeting()) {
-            return doTgt(ai, sa, false);
+            boolean result = doTgt(ai, sa, false);
+            return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
-
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /*
@@ -93,7 +94,7 @@ public class LifeLoseAi extends SpellAbilityAi {
      * forge.game.spellability.SpellAbility)
      */
     @Override
-    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final String amountStr = sa.getParam("LifeAmount");
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
@@ -101,7 +102,7 @@ public class LifeLoseAi extends SpellAbilityAi {
 
         if (sa.usesTargeting()) {
             if (!doTgt(ai, sa, false)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
         }
 
@@ -114,15 +115,11 @@ public class LifeLoseAi extends SpellAbilityAi {
         }
 
         if (amount <= 0) {
-            return false;
-        }
-
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (ComputerUtil.playImmediately(ai, sa)) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         final PlayerCollection tgtPlayers = getPlayers(ai, sa);
@@ -131,7 +128,7 @@ public class LifeLoseAi extends SpellAbilityAi {
                 .filter(PlayerPredicates.isOpponentOf(ai).and(PlayerPredicates.lifeLessOrEqualTo(amount)));
         // killing opponents asap
         if (!filteredPlayer.isEmpty()) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         // Sacrificing a creature in response to something dangerous is generally good in any phase
@@ -143,20 +140,20 @@ public class LifeLoseAi extends SpellAbilityAi {
         // Don't use loselife before main 2 if possible
         if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
                 && !ComputerUtil.castSpellInMain1(ai, sa) && !aiLogic.contains("AnyPhase") && !isSacCost) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.WaitForMain2);
         }
 
         // Don't tap creatures that may be able to block
         if (ComputerUtil.waitForBlocking(sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.WaitForCombat);
         }
 
         if (isSorcerySpeed(sa, ai) || sa.hasParam("ActivationPhases") || playReusable(ai, sa)
                 || ComputerUtil.activateForCost(sa, ai)) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        return false;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     /*
@@ -166,11 +163,11 @@ public class LifeLoseAi extends SpellAbilityAi {
      * forge.game.spellability.SpellAbility, boolean)
      */
     @Override
-    protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa,
-    final boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player ai, final SpellAbility sa,
+                                                final boolean mandatory) {
         if (sa.usesTargeting()) {
             if (!doTgt(ai, sa, mandatory)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
@@ -191,7 +188,15 @@ public class LifeLoseAi extends SpellAbilityAi {
                 : AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
 
         // For cards like Foul Imp, ETB you lose life
-        return mandatory || !tgtPlayers.contains(ai) || amount <= 0 || amount + 3 <= ai.getLife();
+        if (mandatory) {
+            return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
+        }
+
+        if (!tgtPlayers.contains(ai) || amount <= 0 || amount + 3 <= ai.getLife()) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
     }
 
     @Override

@@ -1,8 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.card.CardStateName;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
@@ -19,19 +17,19 @@ import java.util.Map;
 
 public class SetStateAi extends SpellAbilityAi {
     @Override
-    protected boolean checkApiLogic(final Player aiPlayer, final SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(final Player aiPlayer, final SpellAbility sa) {
         final Card source = sa.getHostCard();
         final String mode = sa.getParam("Mode");
 
         // turning face is most likely okay
         // TODO only do this at beneficial moment (e.g. surprise during combat or morph trigger), might want to reserve mana to protect them from easy removal
         if ("TurnFaceUp".equals(mode) || "TurnFaceDown".equals(mode)) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         // Prevent transform into legendary creature if copy already exists
         if (!isSafeToTransformIntoLegendary(aiPlayer, source)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.WouldDestroyLegend);
         }
 
         if (sa.getSVar("X").equals("Count$xPaid")) {
@@ -40,20 +38,15 @@ public class SetStateAi extends SpellAbilityAi {
         }
 
         if ("Transform".equals(mode) || "Flip".equals(mode)) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
-        return false;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
-    protected boolean checkAiLogic(final Player aiPlayer, final SpellAbility sa, final String aiLogic) {
-        return super.checkAiLogic(aiPlayer, sa, aiLogic);
-    }
-
-    @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         // Gross generalization, but this always considers alternate states more powerful
-        return !sa.getHostCard().isInAlternateState();
+        return sa.getHostCard().isInAlternateState() ? new AiAbilityDecision(0, AiPlayDecision.CantPlayAi) : new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override

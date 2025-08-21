@@ -2,7 +2,7 @@ Name:Scrib Nibblers
 ManaCost:2 B
 Types:Creature Rat
 PT:1/1
-A:AB$ Dig | Cost$ T | DigNum$ 1 | ChangeNum$ All | ValidTgts$ Player | TgtPrompt$ Choose a player | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBGainLife | AILogic$ EndOfOppTurn | SpellDescription$ Exile the top card of target player's library. If it's a land card, you gain 1 life.
+A:AB$ Dig | Cost$ T | DigNum$ 1 | ChangeNum$ All | ValidTgts$ Player | TgtPrompt$ Choose a player | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBGainLife | AILogic$ AtOppEOT | SpellDescription$ Exile the top card of target player's library. If it's a land card, you gain 1 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Landfall — Whenever a land you control enters, you may untap CARDNAME.

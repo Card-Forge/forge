@@ -7,6 +7,7 @@ ScryfallCode=EOS
 
 [cards]
 1 M Ancient Tomb @Bruce Brenneise
+2 R Blast Zone @Chad Weatherford
 3 R Blinkmoth Nexus @Calder Moore
 4 R Bonders' Enclave @Eleonor Piteira
 5 R Cascading Cataracts @Andrew Mar
@@ -51,11 +52,13 @@ ScryfallCode=EOS
 44 R Thespian's Stage @Bruce Brenneise
 45 R Wandering Fumarole @Cristi Balanescu
 46 M Ancient Tomb @Meel Tamphanon
+47 R Blast Zone @William Phifer
 48 R Blinkmoth Nexus @Meel Tamphanon
 49 R Bonders' Enclave @BEMOCS
 50 R Cascading Cataracts @Sam Chivers
 51 R Cathedral of War @William Phifer
 52 R Celestial Colonnade @Ann-Sophie De Steur
+53 R Contested War Zone @Aeron Ng
 54 R Creeping Tar Pit @Matteo Bassini
 55 R Crystal Quarry @Jack Hughes
 56 M Deserted Temple @BEMOCS
@@ -85,7 +88,7 @@ ScryfallCode=EOS
 80 R Raging Ravine @BEMOCS
 81 M Reflecting Pool @Sam Chivers
 82 R Scavenger Grounds @BEMOCS
-83 R Shambling Vent @
+83 R Shambling Vent @Denis Freitas
 84 R Stirring Wildwood @Hurca!
 85 M Strip Mine @Matteo Bassini
 86 R Sunken Citadel @Lazare Gvimradze
@@ -94,21 +97,26 @@ ScryfallCode=EOS
 89 R Thespian's Stage @William Phifer
 90 R Wandering Fumarole @Sam Chivers
 91 M Ancient Tomb @Bruce Brenneise
+92 R Blast Zone @Chad Weatherford
 93 R Blinkmoth Nexus @Calder Moore
 94 R Bonders' Enclave @Eleonor Piteira
+95 R Cascading Cataracts @Andrew Mar
 96 R Cathedral of War @Jason A. Engle
 97 R Celestial Colonnade @Andrew Mar
+98 R Contested War Zone @Josu Solano
 99 R Creeping Tar Pit @Calder Moore
 100 R Crystal Quarry @Craig Elliott
 101 M Deserted Temple @Jason A. Engle
 102 M Dust Bowl @Jonas De Ro
 103 R Echoing Deeps @Alayna Danner
 104 R Eldrazi Temple @Calder Moore
+105 R Endless Sands @Tim Brumley
 106 M Gemstone Caverns @Mark Poole
 107 M Grove of the Burnwillows @Aenami
 108 R High Market @Andrew Theophilopoulos
 109 R Hissing Quagmire @John Thacker
 110 M Inkmoth Nexus @Piotr Dura
+111 M Inventors' Fair @Finnian MacManus
 112 R Lavaclaw Reaches @Jinho Bae
 113 M Lotus Field @Andrew Mar
 114 R Lumbering Falls @Daniel Romanovsky
@@ -119,9 +127,12 @@ ScryfallCode=EOS
 119 R Mystifying Maze @Pierre Loyvet
 120 R Needle Spires @Lorenzo Lanfranconi
 121 R Nesting Grounds @John Thacker
+122 M Petrified Field @Finnian MacManus
 123 M Plaza of Heroes @John Thacker
+124 R Power Depot @Daniel Romanovsky
 125 R Raging Ravine @Calder Moore
 126 M Reflecting Pool @Craig Elliott
+127 R Scavenger Grounds @Andrew Theophilopoulos
 128 R Shambling Vent @Mark Poole
 129 R Stirring Wildwood @Erikas Perl
 130 M Strip Mine @Daniel Romanovsky
@@ -131,21 +142,26 @@ ScryfallCode=EOS
 134 R Thespian's Stage @Bruce Brenneise
 135 R Wandering Fumarole @Cristi Balanescu
 136 M Ancient Tomb @Meel Tamphanon
+137 R Blast Zone @William Phifer
 138 R Blinkmoth Nexus @Meel Tamphanon
 139 R Bonders' Enclave @BEMOCS
+140 R Cascading Cataracts @Sam Chivers
 141 R Cathedral of War @William Phifer
 142 R Celestial Colonnade @Ann-Sophie De Steur
+143 R Contested War Zone @Aeron Ng
 144 R Creeping Tar Pit @Matteo Bassini
 145 R Crystal Quarry @Jack Hughes
 146 M Deserted Temple @BEMOCS
 147 M Dust Bowl @Aeron Ng
 148 R Echoing Deeps @Sam Chivers
 149 R Eldrazi Temple @BEMOCS
+150 R Endless Sands @WFlemming Illustration
 151 M Gemstone Caverns @BEMOCS
 152 M Grove of the Burnwillows @Sam Chivers
 153 R High Market @WFlemming Illustration
 154 R Hissing Quagmire @William Phifer
 155 M Inkmoth Nexus @Matteo Bassini
+156 M Inventors' Fair @Sylvia Liu
 157 R Lavaclaw Reaches @Matteo Bassini
 158 M Lotus Field @Jack Hughes
 159 R Lumbering Falls @Aeron Ng
@@ -156,14 +172,17 @@ ScryfallCode=EOS
 164 R Mystifying Maze @Lee Art
 165 R Needle Spires @BEMOCS
 166 R Nesting Grounds @WFlemming Illustration
+167 M Petrified Field @WFlemming Illustration
 168 M Plaza of Heroes @Elaine Lee
+169 R Power Depot @Lazare Gvimradze
 170 R Raging Ravine @BEMOCS
 171 M Reflecting Pool @Sam Chivers
-173 M Strip Mine @Matteo Bassini
-174 R Stirring Wildwood @
+172 R Scavenger Grounds @BEMOCS
+173 R Shambling Vent @Denis Freitas
+174 R Stirring Wildwood @Hurca!
 175 M Strip Mine @Matteo Bassini
 176 R Sunken Citadel @Lazare Gvimradze
 177 R Swarmyard @Matteo Bassini
-178 R Terrain Generator @
+178 R Terrain Generator @BEMOCS
 179 R Thespian's Stage @William Phifer
 180 R Wandering Fumarole @Sam Chivers

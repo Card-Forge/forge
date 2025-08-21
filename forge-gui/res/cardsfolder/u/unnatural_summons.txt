@@ -4,5 +4,5 @@ Types:Sorcery
 K:Rebound
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ If you weren't the starting player, this spell costs {1} less to cast.
 SVar:X:Count$StartingPlayer.0.1
-A:SP$ ManifestDread | SpellDescription$ Maniest dread.
+A:SP$ ManifestDread | SpellDescription$ Manifest dread.
 Oracle:If you weren't the starting player, this spell costs {1} less to cast.\nManifest dread.\nRebound

@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigSearch:DB$ ChangeZone | OriginAlternative$ Graveyard,Hand | Hidden$ True | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.namedThe Animus | ChangeNum$ 1 | ShuffleNonMandatory$ True
 A:AB$ Mana | Cost$ T | Produced$ C | SubAbility$ DBImmediateTrig | SpellDescription$ Add {C}. When you do, mill two cards.
 SVar:DBImmediateTrig:DB$ ImmediateTrigger | Execute$ TrigMill | TriggerDescription$ When you do, mill two cards.
-SVar:TrigMill:DB$ Mill | NumCards$ 2 | ValidTgts$ You
+SVar:TrigMill:DB$ Mill | NumCards$ 2
 DeckHints:Name$The Animus
 DeckHas:Ability$Mill
 Oracle:Vigilance\nWhen Shaun & Rebecca, Agents enters, search your graveyard, hand, and library for a card named The Animus and put it onto the battlefield, then shuffle.\n{T}: Add {C}. When you do, mill two cards.

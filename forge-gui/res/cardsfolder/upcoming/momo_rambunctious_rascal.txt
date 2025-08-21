@@ -1,0 +1,8 @@
+Name:Momo, Rambunctious Rascal
+ManaCost:2 W
+Types:Legendary Creature Lemur Bat Ally
+PT:1/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When NICKNAME enters, he deals 4 damage to target tapped creature an opponent controls.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.tapped+OppCtrl | TgtPrompt$ Select target tapped creature an opponent controls | NumDmg$ 4
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen Momo enters, he deals 4 damage to target tapped creature an opponent controls.

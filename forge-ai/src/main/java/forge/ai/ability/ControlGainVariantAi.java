@@ -18,6 +18,8 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
@@ -41,24 +43,22 @@ import java.util.Map;
  */
 public class ControlGainVariantAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
-
+    protected AiAbilityDecision canPlay(final Player ai, final SpellAbility sa) {
         String logic = sa.getParam("AILogic");
 
         if ("GainControlOwns".equals(logic)) {
             List<Card> list = CardLists.filter(ai.getGame().getCardsIn(ZoneType.Battlefield), crd -> crd.isCreature() && !crd.getController().equals(crd.getOwner()));
             if (list.isEmpty()) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
             for (final Card c : list) {
                 if (ai.equals(c.getController())) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
                 }
             }
         }
 
-        return true;
-
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override

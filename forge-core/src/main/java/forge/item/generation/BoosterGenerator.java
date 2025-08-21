@@ -45,7 +45,7 @@ import java.util.function.Predicate;
  * @version $Id: BoosterGenerator.java 35014 2017-08-13 00:40:48Z Max mtg $
  */
 public class BoosterGenerator {
-
+    private final static Map<String, String> staticSheetsCorrespondance = new HashMap<>();
     private final static Map<String, PrintSheet> cachedSheets = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
     private static synchronized PrintSheet getPrintSheet(String key) {
         if (!cachedSheets.containsKey(key))
@@ -62,6 +62,28 @@ public class BoosterGenerator {
         Collections.shuffle(cardList, MyRandom.getRandom());
         PaperCard randomCard = cardList.get(0);
         return randomCard.getFoiled();
+    }
+
+    public static PrintSheet tryGetStaticSheet(String sheetName) {
+        if (staticSheetsCorrespondance.containsKey(sheetName)) {
+            return StaticData.instance().getPrintSheets().get(staticSheetsCorrespondance.get(sheetName));
+        };
+
+        String passedEdition = sheetName.split(" ")[0];
+        CardEdition realEdition = StaticData.instance().getEditions().get(passedEdition);
+
+        if (realEdition.getCode().equals(passedEdition)) {
+            staticSheetsCorrespondance.put(sheetName, sheetName);
+
+            return StaticData.instance().getPrintSheets().get(sheetName);
+        }
+        
+        String realEditionCode = realEdition.getCode();
+        String alteredSheetName = sheetName.replaceFirst(passedEdition, realEditionCode);
+
+        staticSheetsCorrespondance.put(sheetName, alteredSheetName);
+
+        return StaticData.instance().getPrintSheets().get(alteredSheetName);
     }
 
     public static List<PaperCard> getBoosterPack(SealedTemplate template) {
@@ -232,7 +254,7 @@ public class BoosterGenerator {
 
             if (sheetKey.startsWith("wholeSheet")) {
                 PrintSheet ps = getPrintSheet(sheetKey);
-                result.addAll(ps.all());
+                result.addAll(ps.toFlatList());
                 continue;
             }
 
@@ -359,10 +381,10 @@ public class BoosterGenerator {
             String sheetReplaceCardFromSheet = edition.getSheetReplaceCardFromSheet();
             if (!sheetReplaceCardFromSheet.isEmpty()) {
                 String[] split = sheetReplaceCardFromSheet.split("_");
-                PrintSheet replaceThis = StaticData.instance().getPrintSheets().get(split[0]);
+                PrintSheet replaceThis = tryGetStaticSheet(split[0]);
                 List<PaperCard> candidates = Lists.newArrayList();
                 for (PaperCard p : result) {
-                    if (replaceThis.all().contains(p)) {
+                    if (replaceThis.contains(p)) {
                         candidates.add(candidates.size(), p);
                     }
                 }
@@ -373,10 +395,10 @@ public class BoosterGenerator {
             String sheetReplaceCardFromSheet2 = edition.getSheetReplaceCardFromSheet2();
             if (!sheetReplaceCardFromSheet2.isEmpty()) {
                 String[] split = sheetReplaceCardFromSheet2.split("_");
-                PrintSheet replaceThis = StaticData.instance().getPrintSheets().get(split[0]);
+                PrintSheet replaceThis = tryGetStaticSheet(split[0]);
                 List<PaperCard> candidates = Lists.newArrayList();
                 for (PaperCard p : result) {
-                    if (replaceThis.all().contains(p)) {
+                    if (replaceThis.contains(p)) {
                         candidates.add(candidates.size(), p);
                     }
                 }
@@ -440,9 +462,8 @@ public class BoosterGenerator {
                 } else {
                     paperCards.addAll(ps.random(numCardsToGenerate, true));
                 }
-
-                result.addAll(paperCards);
             }
+            result.addAll(paperCards);
         }
 
         return result;
@@ -487,8 +508,9 @@ public class BoosterGenerator {
             for (Pair<String, Integer> slot : template.getSlots()) {
                 String slotType = slot.getLeft();
                 String setCode = template.getEdition();
-                String sheetKey = StaticData.instance().getEditions().contains(setCode) ? slotType.trim() + " " + setCode
-                        : slotType.trim();
+                String sheetKey = StaticData.instance().getEditions().contains(setCode)
+                    ? slotType.trim() + " " + setCode
+                    : slotType.trim();
 
                 PrintSheet ps = getPrintSheet(sheetKey);
                 List<PaperCard> cardsInSlot = Lists.newArrayList(ps.toFlatList());
@@ -521,7 +543,7 @@ public class BoosterGenerator {
      * @param printSheetKey print sheet key from which take the replacement card
      */
     public static void replaceCardFromExtraSheet(List<PaperCard> booster, String printSheetKey) {
-        PrintSheet replacementSheet = StaticData.instance().getPrintSheets().get(printSheetKey);
+        PrintSheet replacementSheet = tryGetStaticSheet(printSheetKey);
         PaperCard toAdd = replacementSheet.random(1, false).get(0);
         BoosterGenerator.replaceCard(booster, toAdd);
     }
@@ -593,7 +615,9 @@ public class BoosterGenerator {
     public static PrintSheet makeSheet(String sheetKey, Iterable<PaperCard> src) {
         PrintSheet ps = new PrintSheet(sheetKey);
         String[] sKey = TextUtil.splitWithParenthesis(sheetKey, ' ', 2);
-        Predicate<PaperCard> setPred = sKey.length > 1 ? PaperCardPredicates.printedInSets(sKey[1].split(" ")) : x1 -> true;
+        Predicate<PaperCard> setPred = sKey.length > 1
+            ? PaperCardPredicates.printedInSets(sKey[1].split(" "))
+            : x1 -> true;
 
         List<String> operators = new LinkedList<>(Arrays.asList(TextUtil.splitWithParenthesis(sKey[0], ':')));
         Predicate<PaperCard> extraPred = buildExtraPredicate(operators);
@@ -609,7 +633,7 @@ public class BoosterGenerator {
                 System.out.println("Parsing from main code: " + mainCode);
                 String sheetName = StringUtils.strip(mainCode.substring(10), "()\" ");
                 System.out.println("Attempting to lookup: " + sheetName);
-                src = StaticData.instance().getPrintSheets().get(sheetName).toFlatList();
+                src = tryGetStaticSheet(sheetName).toFlatList();
                 setPred = x -> true;
 
             } else if (mainCode.startsWith("promo") || mainCode.startsWith("name")) { // get exactly the named cards, that's a tiny inlined print sheet
@@ -735,7 +759,7 @@ public class BoosterGenerator {
                 toAdd = PaperCardPredicates.printedInSets(sets);
             } else if (operator.startsWith("fromSheet(") && invert) {
                 String sheetName = StringUtils.strip(operator.substring(9), "()\" ");
-                Set<PaperCard> cards = Sets.newHashSet(StaticData.instance().getPrintSheets().get(sheetName).toFlatList());
+                Set<PaperCard> cards = Sets.newHashSet(tryGetStaticSheet(sheetName).toFlatList());
                 toAdd = cards::contains;
             }
 

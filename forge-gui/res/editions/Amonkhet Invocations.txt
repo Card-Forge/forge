@@ -65,7 +65,3 @@ ScryfallCode=MP2
 52 S Lord of Extinction @Jason A. Engle
 53 S The Scarab God @Grzegorz Rutkowski
 54 S The Scorpion God @Grzegorz Rutkowski
-
-[tokens]
-w_1_1_warrior_vigilance
-ur_1_1_insect_flying_haste

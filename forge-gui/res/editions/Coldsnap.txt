@@ -166,11 +166,3 @@ ScryfallCode=CSP
 153 C Snow-Covered Swamp @Rob Alexander
 154 C Snow-Covered Mountain @John Zeleznik
 155 C Snow-Covered Forest @Jim Nelson
-
-[tokens]
-marit_lage
-w_1_1_bird_flying
-w_0_1_deserter
-w_1_1_soldier
-g_1_1_wolf_sound_the_call
-br_3_1_graveborn_haste

@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilAbility;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
@@ -21,9 +23,11 @@ public class PermanentNoncreatureAi extends PermanentAi {
      * here
      */
     @Override
-    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
-        if (!super.checkApiLogic(ai, sa))
-            return false;
+    protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
+        AiAbilityDecision decision = super.checkApiLogic(ai, sa);
+        if (!decision.willingToPlay()) {
+            return decision;
+        }
 
         final Card host = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
@@ -41,9 +45,10 @@ public class PermanentNoncreatureAi extends PermanentAi {
                 // TODO: consider replacing the condition with host.hasSVar("OblivionRing")
                 targets = CardLists.filterControlledBy(targets, ai.getOpponents());
             }
-            // AiPlayDecision.AnotherTime
-            return !targets.isEmpty();
+            if (targets.isEmpty()) {
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
         }
-        return true;
+        return decision;
     }
 }

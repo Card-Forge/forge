@@ -2,7 +2,6 @@
 Code=BRO
 Date=2022-11-18
 Name=The Brothers' War
-Code2=BRO
 Type=Expansion
 BoosterCovers=3
 Booster=9 Common:fromsheet("BRO cards"), 3 Uncommon:fromSheet("BRO cards"), 1 RareMythic:fromSheet("BRO cards"), 1 fromSheet("BRO lands"), 1 fromSheet("BRR cards")
@@ -173,7 +172,7 @@ ScryfallCode=BRO
 160 U Heavyweight Demolisher @Svetlin Velinov
 161 C Mishra's Juggernaut @Steve Prescott
 162 U Mishra's Research Desk @Matt Stewart
-163 R Phyrexian Dragon Engine @Chris Rahn
+163a R Phyrexian Dragon Engine @Chris Rahn
 164 C Scrapwork Mutt @Sidharth Chaturvedi
 165 M Skitterbeam Battalion @Leon Tukker
 166 U Alloy Animist @Kim Sokol
@@ -266,7 +265,7 @@ ScryfallCode=BRO
 253 U Thran Power Suit @Raf Kayupov
 254 R Thran Spider @Joshua Cairos
 255 C Tower Worker @Gaboleps
-256 R Argoth, Sanctum of Nature @Cristi Balanescu
+256a R Argoth, Sanctum of Nature @Cristi Balanescu
 257 R Battlefield Forge @Thomas Stoop
 258 R Blast Zone @Jorge Jacinto
 259 R Brushland @Thomas Stoop
@@ -407,18 +406,18 @@ ScryfallCode=BRO
 384 U Blanchwood Armor @Manuel Castañón
 
 [rebalanced]
-A58 C A-Mightstone's Animation @Igor Kieryluk
-A63 U A-Splitting the Powerstone @Campbell White
-A69 U A-Urza, Powerstone Prodigy @Donato Giancola
-A70 R A-Urza's Command @Dominik Mayer
-A132 C A-Excavation Explosion @Campbell White
-A140 U A-Mishra, Excavation Prodigy @Donato Giancola
-A156 R A-Visions of Phyrexia @Dominik Mayer
-A199 U A-Haywire Mite @Izzy
-A219 M A-Saheeli, Filigree Master @Aurore Folny
-A254 R A-Thran Spider @Joshua Cairos
-A263 R A-Hall of Tagsin @Christian Dimitrov
-A289 R A-Geology Enthusiast @Fajareka Setiawan
+A-58 C A-Mightstone's Animation @Igor Kieryluk
+A-63 U A-Splitting the Powerstone @Campbell White
+A-69 U A-Urza, Powerstone Prodigy @Donato Giancola
+A-70 R A-Urza's Command @Dominik Mayer
+A-132 C A-Excavation Explosion @Campbell White
+A-140 U A-Mishra, Excavation Prodigy @Donato Giancola
+A-156 R A-Visions of Phyrexia @Dominik Mayer
+A-199 U A-Haywire Mite @Izzy
+A-219 M A-Saheeli, Filigree Master @Aurore Folny
+A-254 R A-Thran Spider @Joshua Cairos
+A-263 R A-Hall of Tagsin @Christian Dimitrov
+A-289 R A-Geology Enthusiast @Fajareka Setiawan
 
 [lands]
 2 Plains|BRO|1

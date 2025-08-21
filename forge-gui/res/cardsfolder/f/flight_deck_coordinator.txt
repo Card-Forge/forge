@@ -1,0 +1,8 @@
+Name:Flight-Deck Coordinator
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:3/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | IsPresent$ Creature.YouCtrl+tapped | PresentCompare$ GE2 | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your end step, if you control two or more tapped creatures, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+DeckHas:Ability$LifeGain
+Oracle:At the beginning of your end step, if you control two or more tapped creatures, you gain 2 life.

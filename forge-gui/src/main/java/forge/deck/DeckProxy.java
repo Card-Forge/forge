@@ -782,7 +782,7 @@ public class DeckProxy implements InventoryItem {
         CardEdition randomLandSet = CardEdition.Predicates.getRandomSetWithAllBasicLands(availableEditions);
         if (randomLandSet == null) {
             CardEdition preferredArtEdition = CardEdition.Predicates.getPreferredArtEditionWithAllBasicLands();
-            return preferredArtEdition != null ? preferredArtEdition : FModel.getMagicDb().getEditions().get("ZEN");
+            return preferredArtEdition != null ? preferredArtEdition : FModel.getMagicDb().getEditions().get("JMP");
         }
         return randomLandSet;
     }

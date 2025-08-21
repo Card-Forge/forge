@@ -650,11 +650,39 @@
 	"spriteAtlas":"maps/tileset/buildings.atlas",
 	"sprite":"LandShop",
 	   "restockPrice": 1,
-	  "rewards": [
-	       { "count": 5, "cardTypes": ["Land"], "subTypes": ["Swamp"]},
-	       { "count": 1, "cardName": "Snow-Covered Swamp" },
-	       { "count": 2, "cardTypes": ["Land"], "subTypes": ["Swamp"], "rarity": ["C", "U", "R"] }
-	     ]
+		"rewards": [
+			{
+				"count":4,
+				"type":"Union",
+				"cardUnion":[
+					{
+						"sourceDeck":"decks/shops/landShop_Black.dck"
+					}]
+			},
+			{
+				"count":2,
+				"type":"Union",
+				"cardUnion":[
+					{
+						"sourceDeck":"decks/shops/landShop_Black_U.dck"
+					}]
+			},
+			{
+				"count":1,
+				"type":"Union",
+				"cardUnion":[
+					{
+						"sourceDeck":"decks/shops/landShop_Black_R.dck"
+					}]
+			},
+			{
+				"count":1,
+				"type":"Union",
+				"cardUnion":[
+					{
+						"sourceDeck":"decks/shops/landShop_Black_S.dck"
+					}]
+			}]
 	
 	},{                                      
 	"name":"Forest",
@@ -662,11 +690,39 @@
 	"spriteAtlas":"maps/tileset/buildings.atlas",
 	"sprite":"LandShop",
 	   "restockPrice": 1,
-	  "rewards": [
-	       { "count": 5, "cardTypes": ["Land"], "subTypes": ["Forest"]},
-	       { "count": 1, "cardName": "Snow-Covered Forest" },
-	       { "count": 2, "cardTypes": ["Land"], "subTypes": ["Forest"], "rarity": ["C", "U", "R"] }
-	     ]
+	"rewards": [
+		{
+			"count":4,
+			"type":"Union",
+			"cardUnion":[
+				{
+					"sourceDeck":"decks/shops/landShop_Green.dck"
+				}]
+		},
+		{
+			"count":2,
+			"type":"Union",
+			"cardUnion":[
+				{
+					"sourceDeck":"decks/shops/landShop_Green_U.dck"
+				}]
+		},
+		{
+			"count":1,
+			"type":"Union",
+			"cardUnion":[
+				{
+					"sourceDeck":"decks/shops/landShop_Green_R.dck"
+				}]
+		},
+		{
+			"count":1,
+			"type":"Union",
+			"cardUnion":[
+				{
+					"sourceDeck":"decks/shops/landShop_Green_S.dck"
+				}]
+		}]
 	
 	},{                                      
 	"name":"Mountain",   
@@ -674,11 +730,39 @@
 	"spriteAtlas":"maps/tileset/buildings.atlas",
 	"sprite":"LandShop",
 	   "restockPrice": 1,
-	  "rewards": [
-		{ "count": 5, "cardTypes": ["Land"], "subTypes": ["Mountain"]},
-	       { "count": 1, "cardName": "Snow-Covered Mountain" },
-	       { "count": 2, "cardTypes": ["Land"], "subTypes": ["Mountain"], "rarity": ["C", "U", "R"] }
-	     ]
+	"rewards": [
+		{
+			"count":4,
+			"type":"Union",
+			"cardUnion":[
+				{
+					"sourceDeck":"decks/shops/landShop_Red.dck"
+				}]
+		},
+		{
+			"count":2,
+			"type":"Union",
+			"cardUnion":[
+				{
+					"sourceDeck":"decks/shops/landShop_Red_U.dck"
+				}]
+		},
+		{
+			"count":1,
+			"type":"Union",
+			"cardUnion":[
+				{
+					"sourceDeck":"decks/shops/landShop_Red_R.dck"
+				}]
+		},
+		{
+			"count":1,
+			"type":"Union",
+			"cardUnion":[
+				{
+					"sourceDeck":"decks/shops/landShop_Red_S.dck"
+				}]
+		}]
 	
 	},{                                      
 	"name":"Island",                  
@@ -686,11 +770,39 @@
 	"spriteAtlas":"maps/tileset/buildings.atlas",
 	"sprite":"LandShop",
 	   "restockPrice": 1,
-	  "rewards": [
-	       { "count": 5, "cardTypes": ["Land"], "subTypes": ["Island"] },
-	       { "count": 1, "cardName": "Snow-Covered Island" },
-	       { "count": 2, "cardTypes": ["Land"], "subTypes": ["Island"], "rarity": ["C", "U", "R"] }
-	     ]
+	"rewards": [
+		{
+			"count":4,
+			"type":"Union",
+			"cardUnion":[
+				{
+					"sourceDeck":"decks/shops/landShop_Blue.dck"
+				}]
+		},
+		{
+			"count":2,
+			"type":"Union",
+			"cardUnion":[
+				{
+					"sourceDeck":"decks/shops/landShop_Blue_U.dck"
+				}]
+		},
+		{
+			"count":1,
+			"type":"Union",
+			"cardUnion":[
+				{
+					"sourceDeck":"decks/shops/landShop_Blue_R.dck"
+				}]
+		},
+		{
+			"count":1,
+			"type":"Union",
+			"cardUnion":[
+				{
+					"sourceDeck":"decks/shops/landShop_Blue_S.dck"
+				}]
+		}]
 	
 	},{                                      
 	"name":"Plains",                  
@@ -699,10 +811,38 @@
 	"sprite":"LandShop",
 	   "restockPrice": 1,
 	  "rewards": [
-	       { "count": 5, "cardTypes": ["Land"], "subTypes": ["Plains"] },
-	       { "count": 1, "cardName": "Snow-Covered Plains" },
-	       { "count": 2, "cardTypes": ["Land"], "subTypes": ["Plains"], "rarity": ["C", "U", "R"] }
-	     ]
+		  {
+			  "count":4,
+			  "type":"Union",
+			  "cardUnion":[
+				  {
+					  "sourceDeck":"decks/shops/landShop_White.dck"
+				  }]
+		  },
+		  {
+			  "count":2,
+			  "type":"Union",
+			  "cardUnion":[
+				  {
+					  "sourceDeck":"decks/shops/landShop_White_U.dck"
+				  }]
+		  },
+		  {
+			  "count":1,
+			  "type":"Union",
+			  "cardUnion":[
+				  {
+					  "sourceDeck":"decks/shops/landShop_White_R.dck"
+				  }]
+		  },
+		  {
+			  "count":1,
+			  "type":"Union",
+			  "cardUnion":[
+				  {
+					  "sourceDeck":"decks/shops/landShop_White_S.dck"
+				  }]
+		  }]
 	
 	},{                                      
 	"name":"Instant",                  

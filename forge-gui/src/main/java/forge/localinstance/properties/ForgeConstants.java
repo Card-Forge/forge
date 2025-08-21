@@ -64,7 +64,6 @@ public final class ForgeConstants {
     public static final String NET_DECKS_BRAWL_LIST_FILE             = LISTS_DIR + "net-decks-brawl.txt";
     public static final String NET_DECKS_OATHBREAKER_LIST_FILE       = LISTS_DIR + "net-decks-oathbreaker.txt";
     public static final String NET_DECKS_TINYLEADERS_LIST_FILE       = LISTS_DIR + "net-decks-tinyleaders.txt";
-    public static final String BORDERLESS_CARD_LIST_FILE             = LISTS_DIR + "borderlessCardList.txt";
     public static final String CLASSIC_MODULE_CARD_TO_CROP_FILE      = LISTS_DIR + "classicModuleCardtoCrop.txt";
     public static final String SKINS_LIST_FILE                       = LISTS_DIR + "skinsList.txt";
     public static final String CJK_FONTS_LIST_FILE                   = LISTS_DIR + "font-list.txt";
@@ -280,6 +279,7 @@ public final class ForgeConstants {
     // data that has defaults in the program dir but overrides/additions in the user dir
     private static final String _DEFAULTS_DIR = RES_DIR + "defaults" + PATH_SEPARATOR;
     public static final String NO_CARD_FILE   = _DEFAULTS_DIR + "no_card.jpg";
+    public static final String STARS_FILE     = _DEFAULTS_DIR + "stars.png";
     public static final FileLocation WINDOW_LAYOUT_FILE      = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "window.xml");
     public static final FileLocation MATCH_LAYOUT_FILE       = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "match.xml");
     public static final FileLocation WORKSHOP_LAYOUT_FILE    = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "workshop.xml");

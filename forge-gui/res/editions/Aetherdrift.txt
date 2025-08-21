@@ -646,3 +646,6 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 10 c_1_1_a_thopter_flying @Kev Fang
 11 c_a_treasure_sac @Racrufi
 12 c_3_2_a_vehicle_crew_1 @Devin Elle Kurtz
+
+[other]
+14 emblem_chandra_spark_hunter @Devin Elle Kurtz

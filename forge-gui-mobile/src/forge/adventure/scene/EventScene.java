@@ -190,7 +190,8 @@ public class EventScene extends MenuScene implements IAfterMatch {
         editDeck.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (currentEvent.format == AdventureEventController.EventFormat.Draft && currentEvent.eventStatus == Ready) {
+                if (currentEvent.format == AdventureEventController.EventFormat.Draft
+                        && (currentEvent.eventStatus == Ready || currentEvent.eventStatus == Started)) {
                     DraftScene.instance().loadEvent(currentEvent);
                     Forge.switchScene(DraftScene.instance());
                 } else if (currentEvent.format == AdventureEventController.EventFormat.Jumpstart && currentEvent.eventStatus == Ready) {
@@ -369,8 +370,8 @@ public class EventScene extends MenuScene implements IAfterMatch {
             case Started:
                 advance.setText("Play round " + currentEvent.currentRound);
                 advance.setVisible(true);
-                editDeck.setDisabled(true);
-                editDeck.setVisible(false);
+                editDeck.setDisabled(false);
+                editDeck.setVisible(true);
                 nextPage.setDisabled(false);
                 previousPage.setDisabled(false);
                 break;

@@ -1,0 +1,6 @@
+Name:Zealous Display
+ManaCost:2 W
+Types:Instant
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SubAbility$ DBUntapAll | SpellDescription$ Creatures you control get +2/+0 until end of turn. If it's not your turn, untap those creatures.
+SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl | ConditionPlayerTurn$ False
+Oracle:Creatures you control get +2/+0 until end of turn. If it's not your turn, untap those creatures.

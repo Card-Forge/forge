@@ -1,0 +1,7 @@
+Name:First-Time Flyer
+ManaCost:1 U
+Types:Creature Human Pilot Ally
+PT:1/2
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Lesson.YouOwn | PresentZone$ Graveyard | Description$ This creature gets +1/+1 as long as there's a Lesson card in your graveyard.
+Oracle:Flying\nThis creature gets +1/+1 as long as there's a Lesson card in your graveyard.

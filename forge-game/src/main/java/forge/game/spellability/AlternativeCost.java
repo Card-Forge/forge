@@ -15,15 +15,16 @@ public enum AlternativeCost {
     Freerunning,
     Impending,
     Madness,
+    Mayhem,
     MTMtE, // More Than Meets the Eye (Transformers Universes Beyond)
     Mutate,
-    Offering,
     Overload,
     Prowl,
     Plotted,
     Spectacle,
     Surge,
     Warp,
+    WebSlinging
     ;
 
 }

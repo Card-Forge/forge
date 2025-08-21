@@ -26,17 +26,6 @@ import org.apache.commons.lang3.StringUtils;
 public class PermanentCreatureAi extends PermanentAi {
 
     /**
-     * Checks if the AI will play a SpellAbility with the specified AiLogic
-     */
-    @Override
-    protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        if ("Never".equals(aiLogic)) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
      * Checks if the AI will play a SpellAbility based on its phase restrictions
      */
     @Override
@@ -44,7 +33,6 @@ public class PermanentCreatureAi extends PermanentAi {
         final Card card = sa.getHostCard();
         final Game game = ai.getGame();
 
-        // FRF Dash Keyword
         if (sa.isDash()) {
             //only checks that the dashed creature will attack
             if (ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
@@ -195,9 +183,10 @@ public class PermanentCreatureAi extends PermanentAi {
     }
 
     @Override
-    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
-        if (!super.checkApiLogic(ai, sa)) {
-            return false;
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
+        AiAbilityDecision decision = super.checkApiLogic(ai, sa);
+        if (!decision.willingToPlay()) {
+            return decision;
         }
 
         final Card card = sa.getHostCard();
@@ -220,16 +209,15 @@ public class PermanentCreatureAi extends PermanentAi {
         // AiPlayDecision.WouldBecomeZeroToughnessCreature
         if (card.hasStartOfKeyword("etbCounter") || mana.countX() != 0
                 || card.hasETBTrigger(false) || card.hasETBReplacement() || card.hasSVar("NoZeroToughnessAI")) {
-                return true;
+                return decision;
         }
 
         final Card copy = CardCopyService.getLKICopy(card);
         ComputerUtilCard.applyStaticContPT(game, copy, null);
         if (copy.getNetToughness() > 0) {
-            return true;
+            return decision;
         }
 
-        return false;
+        return new AiAbilityDecision(0, AiPlayDecision.WouldBecomeZeroToughnessCreature);
     }
-
 }

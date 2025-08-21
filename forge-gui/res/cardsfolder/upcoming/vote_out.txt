@@ -1,6 +1,0 @@
-Name:Vote Out
-ManaCost:3 B
-Types:Instant
-K:Convoke
-A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
-Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDestroy target creature.

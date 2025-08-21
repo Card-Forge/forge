@@ -2,7 +2,6 @@
 Code=CHK
 Date=2004-10-01
 Name=Champions of Kamigawa
-Code2=CHK
 Type=Expansion
 BoosterCovers=5
 Booster=11 Common, 3 Uncommon, 1 Rare
@@ -261,7 +260,7 @@ ScryfallCode=CHK
 247 U Time of Need @Dany Orizio
 248 C Venerable Kumo @Carl Critchlow
 249 C Vine Kami @Tsutomu Kawade
-250 C Wear Away @Tim Hildebrandt
+250 C Wear Away @Greg Hildebrandt
 251 R General's Kabuto @Alex Horley-Orlandelli
 252 R Hair-Strung Koto @Rebecca Guay
 253 U Hankyu @Ben Thompson
@@ -318,11 +317,3 @@ ScryfallCode=CHK
 304 L Forest @Rob Alexander
 305 L Forest @Rob Alexander
 306 L Forest @Rob Alexander
-
-[tokens]
-c_1_1_spirit
-u_5_5_dragon_spirit_flying
-u_1_1_illusion_flying
-b_1_1_rat
-g_x_x_elemental
-g_1_1_snake

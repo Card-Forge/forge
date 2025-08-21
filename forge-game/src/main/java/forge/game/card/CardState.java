@@ -416,10 +416,14 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
 
         // SpellPermanent only for Original State
         switch(getStateName()) {
+        case Backside:
+            if (!getCard().isModal()) {
+                return;
+            }
+            break;
         case Original:
         case LeftSplit:
         case RightSplit:
-        case Modal:
         case SpecializeB:
         case SpecializeG:
         case SpecializeR:
@@ -746,11 +750,21 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
                 triggers.add(tr.copy(card, lki));
             }
         }
+        ReplacementEffect runRE = null;
+        if (ctb instanceof SpellAbility sp && sp.isReplacementAbility()
+            && source.getCard().equals(ctb.getHostCard())) {
+            runRE = sp.getReplacementEffect();
+        }
 
         replacementEffects.clear();
         for (ReplacementEffect re : source.replacementEffects) {
             if (re.isIntrinsic()) {
-                replacementEffects.add(re.copy(card, lki));
+                ReplacementEffect reCopy = re.copy(card, lki);
+                if (re.equals(runRE) && runRE.hasRun()) {
+                    // CR 208.2b prevent loop from card copying itself
+                    reCopy.setHasRun(true);
+                }
+                replacementEffects.add(reCopy);
             }
         }
 
