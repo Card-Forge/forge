@@ -416,7 +416,7 @@ public final class FModel {
             
             final List<String> typeListFile = FileUtil.readFile(ForgeConstants.TYPE_LIST_FILE);
 
-            Set<String> addTo = null;
+            Set<String> addTo = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
             loadTypes(addTo, typeListFile);
 
             File customTypesFilesDir = new File(ForgeConstants.USER_CUSTOM_TYPE_LIST_DIR);
@@ -457,71 +457,33 @@ public final class FModel {
     }
 
     private static void loadTypes(Set<String> addTo, List<String> fileContent) {
-        boolean checkSubtype = false;
-
         for (final String s : fileContent) {
             if (s.equals("[BasicTypes]")) {
-                checkSubtype = false;
                 addTo = CardType.Constant.BASIC_TYPES;
             } else if (s.equals("[LandTypes]")) {
-                checkSubtype = true;
                 addTo = CardType.Constant.LAND_TYPES;
             } else if (s.equals("[CreatureTypes]")) {
-                checkSubtype = true;
                 addTo = CardType.Constant.CREATURE_TYPES;
             } else if (s.equals("[SpellTypes]")) {
-                checkSubtype = false;
                 addTo = CardType.Constant.SPELL_TYPES;
             } else if (s.equals("[EnchantmentTypes]")) {
-                checkSubtype = true;
                 addTo = CardType.Constant.ENCHANTMENT_TYPES;
             } else if (s.equals("[ArtifactTypes]")) {
-                checkSubtype = true;
                 addTo = CardType.Constant.ARTIFACT_TYPES;
             } else if (s.equals("[WalkerTypes]")) {
-                checkSubtype = false;
                 addTo = CardType.Constant.WALKER_TYPES;
             } else if (s.equals("[DungeonTypes]")) {
-                checkSubtype = false;
                 addTo = CardType.Constant.DUNGEON_TYPES;
             } else if (s.equals("[BattleTypes]")) {
-                checkSubtype = false;
                 addTo = CardType.Constant.BATTLE_TYPES;
             } else if (s.equals("[PlanarTypes]")) {
-                checkSubtype = false;
                 addTo = CardType.Constant.PLANAR_TYPES;
             } else if (s.length() > 1) {
-                if (addTo == null) {
-                    continue;
-                }
-
                 if (s.contains(":")) {
                     String[] k = s.split(":");
 
                     if (addTo.contains(k[0])) {
-                        System.err.println("Cannot add type \"" + k[0] + "\": Type already exists.");
                         continue;
-                    }
-                    if (checkSubtype) {
-                        if (CardType.Constant.LAND_TYPES.contains(k[0])) {
-                            System.err.println("Cannot add type \"" + k[0] + "\": Type already exists in Lands.");
-                            continue;
-                        }
-
-                        if (CardType.Constant.CREATURE_TYPES.contains(k[0])) {
-                            System.err.println("Cannot add type \"" + k[0] + "\": Type already exists in Creatures.");
-                            continue;
-                        }
-
-                        if (CardType.Constant.ENCHANTMENT_TYPES.contains(k[0])) {
-                            System.err.println("Cannot add type \"" + k[0] + "\": Type already exists in Enchantments.");
-                            continue;
-                        }
-
-                        if (CardType.Constant.ARTIFACT_TYPES.contains(k[0])) {
-                            System.err.println("Cannot add type \"" + k[0] + "\": Type already exists in Artifacts.");
-                            continue;
-                        }
                     }
 
                     addTo.add(k[0]);
@@ -532,29 +494,7 @@ public final class FModel {
                     }
                 } else {
                     if (addTo.contains(s)) {
-                        System.err.println("Cannot add type \"" + s + "\": Type already exists.");
                         continue;
-                    }
-                    if (checkSubtype) {
-                        if (CardType.Constant.LAND_TYPES.contains(s)) {
-                            System.err.println("Cannot add type \"" + s + "\": Type already exists in Lands.");
-                            continue;
-                        }
-
-                        if (CardType.Constant.CREATURE_TYPES.contains(s)) {
-                            System.err.println("Cannot add type \"" + s + "\": Type already exists in Creatures.");
-                            continue;
-                        }
-
-                        if (CardType.Constant.ENCHANTMENT_TYPES.contains(s)) {
-                            System.err.println("Cannot add type \"" + s + "\": Type already exists in Enchantments.");
-                            continue;
-                        }
-
-                        if (CardType.Constant.ARTIFACT_TYPES.contains(s)) {
-                            System.err.println("Cannot add type \"" + s + "\": Type already exists in Artifacts.");
-                            continue;
-                        }
                     }
 
                     addTo.add(s);
