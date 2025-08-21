@@ -96,7 +96,8 @@
         <dependency>
             <groupId>org.robolectric</groupId>
             <artifactId>android-all</artifactId>
-            <version>15-robolectric-12468137</version>
+            <!-- update version: 16-robolectric-13921718 but needs to fix Android 16 Edge to edge enforcement -->
+            <version>15-robolectric-12650502</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

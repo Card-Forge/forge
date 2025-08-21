@@ -208,9 +208,10 @@ public class Main extends AndroidApplication {
         device.setChipset(Build.HARDWARE + " " + Build.BOARD);
         // OS Info
         OperatingSystem os = new OperatingSystem();
-        os.setName("Android " + Build.VERSION.RELEASE);
+        os.setName("Android");
         os.setVersion(Build.VERSION.RELEASE);
         os.setBuild(Build.DISPLAY);
+        os.setRawDescription(getAndroidOSName());
 
         initForge(Gadapter, new HWInfo(device, os), permissiongranted, totalMemory, isTabletDevice(getContext()));
     }
@@ -869,6 +870,49 @@ public class Main extends AndroidApplication {
             }
         }
         return gameControllerDeviceIds;
+    }
+
+    public final String getAndroidOSName() {
+        final String codename;
+        switch (Build.VERSION.SDK_INT) {
+            case Build.VERSION_CODES.O:
+                codename = "Android 8 (Oreo)";
+                break;
+            case Build.VERSION_CODES.O_MR1:
+                codename = "Android 8.1 (Oreo)";
+                break;
+            case Build.VERSION_CODES.P:
+                codename = "Android 9 (Pie)";
+                break;
+            case Build.VERSION_CODES.Q:
+                codename = "Android 10 (Quince Tart)";
+                break;
+            case Build.VERSION_CODES.R:
+                codename = "Android 11 (Red Velvet)";
+                break;
+            case Build.VERSION_CODES.S:
+                codename = "Android 12 (Snow Cone)";
+                break;
+            case Build.VERSION_CODES.S_V2:
+                codename = "Android 12L (Snow Cone V2)";
+                break;
+            case Build.VERSION_CODES.TIRAMISU:
+                codename = "Android 13 (Tiramisu)";
+                break;
+            case Build.VERSION_CODES.UPSIDE_DOWN_CAKE:
+                codename = "Android 14 (Upside Down Cake)";
+                break;
+            case Build.VERSION_CODES.VANILLA_ICE_CREAM:
+                codename = "Android 15 (Vanilla Ice Cream)";
+                break;
+            case 36:
+                codename = "Android 16 (Baklava)";
+                break;
+            default:
+                codename = "Android " + Build.VERSION.SDK_INT;
+                break;
+        }
+        return codename;
     }
 
     public String getDeviceName() {
