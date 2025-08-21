@@ -70,12 +70,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.jupnp.DefaultUpnpServiceConfiguration;
 import org.jupnp.android.AndroidUpnpServiceConfiguration;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Date;
@@ -203,8 +198,7 @@ public class Main extends AndroidApplication {
         device.setBrand(Build.BRAND);
         device.setManufacturer(Build.MANUFACTURER);
         device.setMemorySize(memInfo.totalMem);
-        String cpuDesc = Build.VERSION.SDK_INT > Build.VERSION_CODES.R ? Build.SOC_MANUFACTURER + " " + Build.SOC_MODEL : Build.UNKNOWN;
-        device.setCpuDescription(cpuDesc);
+        device.setCpuDescription(getCpuName());
         device.setChipset(Build.HARDWARE + " " + Build.BOARD);
         // OS Info
         OperatingSystem os = new OperatingSystem();
@@ -913,6 +907,32 @@ public class Main extends AndroidApplication {
                 break;
         }
         return codename;
+    }
+
+    public String getCpuName() {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.R)
+            return Build.SOC_MANUFACTURER + " " + Build.SOC_MODEL;
+        try {
+            FileReader fr = new FileReader("/proc/cpuinfo");
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            String cpuName = null;
+
+            while ((line = br.readLine()) != null) {
+                if (line.contains("Processor") || line.contains("model name")) {
+                    // Extract the part after the colon and trim whitespace
+                    String[] parts = line.split(":", 2);
+                    if (parts.length > 1) {
+                        cpuName = parts[1].trim();
+                        break; // Found the CPU name, no need to read further
+                    }
+                }
+            }
+            br.close();
+            return capitalize(cpuName);
+        } catch (IOException e) {
+            return Build.UNKNOWN;
+        }
     }
 
     public String getDeviceName() {
