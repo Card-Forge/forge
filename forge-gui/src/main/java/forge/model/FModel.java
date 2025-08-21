@@ -408,7 +408,7 @@ public final class FModel {
             
             final List<String> typeListFile = FileUtil.readFile(ForgeConstants.TYPE_LIST_FILE);
 
-            Set<String> addTo = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+            Set<String> addTo = null;
             loadTypes(addTo, typeListFile);
 
             File customTypesFilesDir = new File(ForgeConstants.USER_CUSTOM_TYPE_LIST_DIR);
