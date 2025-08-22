@@ -361,12 +361,14 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public boolean isDoctor() {
+        Set<String> subtypes = new HashSet<>();
         for (String type : mainPart.getType().getSubtypes()) {
-            if (!type.equals("Time Lord") && !type.equals("Doctor")) {
-                return false;
-            }
+            subtypes.add(type);
         }
-        return true;
+
+        return subtypes.size() == 2 &&
+                subtypes.contains("Time Lord") &&
+                subtypes.contains("Doctor");
     }
 
     public boolean canBeOathbreaker() {

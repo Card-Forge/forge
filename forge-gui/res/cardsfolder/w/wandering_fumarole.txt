@@ -1,9 +1,9 @@
 Name:Wandering Fumarole
 ManaCost:no cost
 Types:Land
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ Combo U R | SpellDescription$ Add {U} or {R}.
-A:AB$ Animate | Cost$ 2 U R | Defined$ Self | Power$ 1 | Toughness$ 4 | Types$ Creature,Elemental | Colors$ Blue,Red | OverwriteColors$ True | Abilities$ ABPump | SpellDescription$ Until end of turn, CARDNAME becomes a 1/4 blue and red Elemental creature with "{0}: Switch this creature's power and toughness until end of turn." It's still a land.
+A:AB$ Animate | Cost$ 2 U R | Defined$ Self | Power$ 1 | Toughness$ 4 | Types$ Creature,Elemental | Colors$ Blue,Red | OverwriteColors$ True | Abilities$ ABPump | SpellDescription$ Until end of turn, this land becomes a 1/4 blue and red Elemental creature with "{0}: Switch this creature's power and toughness until end of turn." It's still a land.
 SVar:ABPump:AB$ Pump | Cost$ 0 | Defined$ Self | AILogic$ SwitchPT | KW$ HIDDEN CARDNAME's power and toughness are switched | SpellDescription$ Switch this creature's power and toughness until end of turn.
-Oracle:Wandering Fumarole enters tapped.\n{T}: Add {U} or {R}.\n{2}{U}{R}: Until end of turn, Wandering Fumarole becomes a 1/4 blue and red Elemental creature with "{0}: Switch this creature's power and toughness until end of turn." It's still a land.
+Oracle:This land enters tapped.\n{T}: Add {U} or {R}.\n{2}{U}{R}: Until end of turn, this land becomes a 1/4 blue and red Elemental creature with "{0}: Switch this creature's power and toughness until end of turn." It's still a land.
