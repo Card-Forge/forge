@@ -61,7 +61,6 @@ public class InventoryScene extends UIScene {
 
         Array<Actor> children = ui.getChildren();
         for (int i = 0, n = children.size; i < n; i++) {
-
             if (children.get(i).getName() != null && children.get(i).getName().startsWith("Equipment")) {
                 String slotName = children.get(i).getName().split("_")[1];
                 equipmentSlots.put(slotName, (Button) children.get(i));
@@ -69,29 +68,31 @@ public class InventoryScene extends UIScene {
                 slot.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
-                    Button button = ((Button) actor);
-                    if (button.isChecked()) {
-                        for (Button otherButton : equipmentSlots.values()) {
-                            if (button != otherButton && otherButton.isChecked()) {
-                                otherButton.setChecked(false);
-                            }
-                        }
-                        String item = Current.player().itemInSlot(slotName);
-                        if (item != null && !item.isEmpty()) {
-                            Button changeButton = null;
-                            for (Button invButton : inventoryButtons) {
-                                if (itemLocation.get(invButton) != null && itemLocation.get(invButton).equals(item)) {
-                                    changeButton = invButton;
-                                    break;
+                        Button button = ((Button) actor);
+                        if (button.isChecked()) {
+                            for (Button otherButton : equipmentSlots.values()) {
+                                if (button != otherButton && otherButton.isChecked()) {
+                                    otherButton.setChecked(false);
                                 }
                             }
-                            if (changeButton != null)
-                                changeButton.setChecked(true);
-                        } else {
-                        setSelected(null);
+                            String item = Current.player().itemInSlot(slotName);
+                            if (item != null && !item.isEmpty()) {
+                                Button changeButton = null;
+                                for (Button invButton : inventoryButtons) {
+                                    if(itemLocation.get(invButton) == null)
+                                        continue;
+                                    ItemData data = itemLocation.get(invButton).getRight();
+                                    if (data != null && item.equals(data.equipmentSlot)) {
+                                        changeButton = invButton;
+                                        break;
+                                    }
+                                }
+                                if (changeButton != null)
+                                    changeButton.setChecked(true);
+                            } else {
+                                setSelected(null);
+                            }
                         }
-                    }
-
                     }
                 });
             }
@@ -120,6 +121,8 @@ public class InventoryScene extends UIScene {
 
     private void repair() {
         if (selected == null)
+            return;
+        if (itemLocation.get(selected) == null)
             return;
         ItemData data = itemLocation.get(selected).getRight();
         if (data == null)
@@ -166,6 +169,10 @@ public class InventoryScene extends UIScene {
     }
 
     public void delete() {
+        if (selected == null)
+            return;
+        if (itemLocation.get(selected) == null)
+            return;
         ItemData data = itemLocation.get(selected).getRight();
         if (data != null) {
             data.isEquipped = false;
@@ -176,7 +183,10 @@ public class InventoryScene extends UIScene {
     }
 
     public void equip() {
-        if (selected == null) return;
+        if (selected == null)
+            return;
+        if (itemLocation.get(selected) == null)
+            return;
         ItemData data = itemLocation.get(selected).getRight();
         if (data == null) return;
         Current.player().equip(data);
@@ -189,8 +199,10 @@ public class InventoryScene extends UIScene {
     }
 
     private void triggerUse() {
-        if (selected == null) return;
-
+        if (selected == null)
+            return;
+        if (itemLocation.get(selected) == null)
+            return;
         ItemData data = itemLocation.get(selected).getRight();
         if (data == null) return;
         Current.player().addShards(-data.shardsNeeded);
@@ -324,7 +336,6 @@ public class InventoryScene extends UIScene {
     }
 
     private void updateInventory() {
-        clearItemDescription();
         clearSelectable();
         inventoryButtons.clear();
         inventory.clear();
@@ -454,6 +465,7 @@ public class InventoryScene extends UIScene {
 
     @Override
     public void enter() {
+        clearItemDescription();
         updateInventory();
         //inventory.add().expand();
         super.enter();
