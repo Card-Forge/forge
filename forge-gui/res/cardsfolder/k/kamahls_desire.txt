@@ -4,5 +4,5 @@ Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ First Strike | Description$ Enchanted creature has first strike.
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | Condition$ Threshold | Description$ Threshold — Enchanted creature gets +3/+0 as long as seven or more cards are in your graveyard.
-Oracle:Enchant creature\nEnchanted creature has first strike.\nThreshold — Enchanted creature gets +3/+0 as long as seven or more cards are in your graveyard.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | Condition$ Threshold | Description$ Threshold — Enchanted creature gets +3/+0 as long as there are seven or more cards in your graveyard.
+Oracle:Enchant creature\nEnchanted creature has first strike.\nThreshold — Enchanted creature gets +3/+0 as long as there are seven or more cards in your graveyard.
