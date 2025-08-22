@@ -7,12 +7,15 @@ import com.badlogic.gdx.utils.Json;
 import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
 
+import java.io.Serializable;
+
 /**
  * Data class that will be used to read Json configuration files
  * ItemData
  * contains the information for equipment and items.
  */
-public class ItemData {
+public class ItemData implements Serializable {
+    private static final long serialVersionUID = 1L;
     public String name;
     public String equipmentSlot;
     public EffectData effect;
@@ -24,6 +27,7 @@ public class ItemData {
     public boolean usableOnWorldMap;
     public boolean usableInPoi;
     public boolean isCracked;
+    public boolean isEquipped;
     public String commandOnUse;
     public int shardsNeeded;
     public DialogData dialogOnUse;

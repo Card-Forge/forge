@@ -138,6 +138,15 @@
       "height": 30,
       "x": 205,
       "y": 363
+    },
+    {
+      "type": "TextButton",
+      "name": "repair",
+      "text": "[%80][+ToolBox] tr(lblRepair)",
+      "width": 42,
+      "height": 22,
+      "x": 16,
+      "y": 80
     }
   ]
 }

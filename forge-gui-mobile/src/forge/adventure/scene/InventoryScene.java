@@ -16,6 +16,7 @@ import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.MapStage;
 import forge.adventure.util.*;
 import forge.deck.Deck;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,12 +29,13 @@ public class InventoryScene extends UIScene {
     private final Table inventory;
     private final Array<Button> inventoryButtons = new Array<>();
     private final HashMap<String, Button> equipmentSlots = new HashMap<>();
-    HashMap<Button, String> itemLocation = new HashMap<>();
+    HashMap<Button, Pair<String, ItemData>> itemLocation = new HashMap<>();
     HashMap<Button, Deck> deckLocation = new HashMap<>();
     Button selected;
     Button deleteButton;
+    TextraButton repairButton;
     Texture equipOverlay;
-    Dialog useDialog, deleteDialog, openDialog;
+    Dialog useDialog, deleteDialog;
     int columns = 0;
 
     public InventoryScene() {
@@ -41,6 +43,8 @@ public class InventoryScene extends UIScene {
         equipOverlay = Forge.getAssets().getTexture(Config.instance().getFile(Paths.ITEMS_EQUIP));
         ui.onButtonPress("return", this::done);
         leave = ui.findActor("return");
+        repairButton = ui.findActor("repair");
+        ui.onButtonPress("repair", this::repair);
         ui.onButtonPress("delete", this::showConfirm);
         ui.onButtonPress("equip", this::equip);
         ui.onButtonPress("use", this::use);
@@ -65,28 +69,28 @@ public class InventoryScene extends UIScene {
                 slot.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
-                        Button button = ((Button) actor);
-                        if (button.isChecked()) {
-                            for (Button otherButton : equipmentSlots.values()) {
-                                if (button != otherButton && otherButton.isChecked()) {
-                                    otherButton.setChecked(false);
-                                }
-                            }
-                            String item = Current.player().itemInSlot(slotName);
-                            if (item != null && !item.isEmpty()) {
-                                Button changeButton = null;
-                                for (Button invButton : inventoryButtons) {
-                                    if (itemLocation.get(invButton) != null && itemLocation.get(invButton).equals(item)) {
-                                        changeButton = invButton;
-                                        break;
-                                    }
-                                }
-                                if (changeButton != null)
-                                    changeButton.setChecked(true);
-                            } else {
-                                setSelected(null);
+                    Button button = ((Button) actor);
+                    if (button.isChecked()) {
+                        for (Button otherButton : equipmentSlots.values()) {
+                            if (button != otherButton && otherButton.isChecked()) {
+                                otherButton.setChecked(false);
                             }
                         }
+                        String item = Current.player().itemInSlot(slotName);
+                        if (item != null && !item.isEmpty()) {
+                            Button changeButton = null;
+                            for (Button invButton : inventoryButtons) {
+                                if (itemLocation.get(invButton) != null && itemLocation.get(invButton).equals(item)) {
+                                    changeButton = invButton;
+                                    break;
+                                }
+                            }
+                            if (changeButton != null)
+                                changeButton.setChecked(true);
+                        } else {
+                        setSelected(null);
+                        }
+                    }
 
                     }
                 });
@@ -105,13 +109,46 @@ public class InventoryScene extends UIScene {
     private void showConfirm() {
         if (deleteDialog == null) {
             deleteDialog = createGenericDialog("", Forge.getLocalizer().getMessage("lblDelete"),
-                    Forge.getLocalizer().getMessage("lblYes"),
-                    Forge.getLocalizer().getMessage("lblNo"), () -> {
-                        this.delete();
-                        removeDialog();
-                    }, this::removeDialog);
+                Forge.getLocalizer().getMessage("lblYes"),
+                Forge.getLocalizer().getMessage("lblNo"), () -> {
+                    this.delete();
+                    removeDialog();
+                }, this::removeDialog);
         }
         showDialog(deleteDialog);
+    }
+
+    private void repair() {
+        if (selected == null)
+            return;
+        ItemData data = itemLocation.get(selected).getRight();
+        if (data == null)
+            return;
+        int initialCost;
+        try {
+            //TODO apply modifiers from reputation..
+            initialCost = (int) (data.cost * 0.4f);
+        } catch (Exception e) {
+            initialCost = 500;
+        }
+        if (Current.player().getGold() < initialCost) {
+            showDialog(createGenericDialog("", Forge.getLocalizer().getMessage("lblNotEnoughCredits") + "\n[+GoldCoin] " + initialCost,
+                Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null));
+            return;
+        }
+        final int cost = initialCost;
+        showDialog(createGenericDialog("", "[+" + data.iconName + "] " + data.name + "\n" +
+            Forge.getLocalizer().getMessage("lblRepairCost", "[+GoldCoin] " + cost),
+            Forge.getLocalizer().getMessage("lblYes"),
+            Forge.getLocalizer().getMessage("lblNo"), () -> {
+                if (data.isCracked) {
+                    data.isCracked = false;
+                    setSelected(selected);
+                    Current.player().takeGold(cost);
+                }
+                removeDialog();
+            }, this::removeDialog)
+        );
     }
 
     private static InventoryScene object;
@@ -129,9 +166,10 @@ public class InventoryScene extends UIScene {
     }
 
     public void delete() {
-        ItemData data = ItemData.getItem(itemLocation.get(selected));
+        ItemData data = itemLocation.get(selected).getRight();
         if (data != null) {
-            Current.player().removeItem(data.name);
+            data.isEquipped = false;
+            Current.player().removeItem(data);
         }
         updateInventory();
 
@@ -139,7 +177,7 @@ public class InventoryScene extends UIScene {
 
     public void equip() {
         if (selected == null) return;
-        ItemData data = ItemData.getItem(itemLocation.get(selected));
+        ItemData data = itemLocation.get(selected).getRight();
         if (data == null) return;
         Current.player().equip(data);
         updateInventory();
@@ -153,7 +191,7 @@ public class InventoryScene extends UIScene {
     private void triggerUse() {
         if (selected == null) return;
 
-        ItemData data = ItemData.getItem(itemLocation.get(selected));
+        ItemData data = itemLocation.get(selected).getRight();
         if (data == null) return;
         Current.player().addShards(-data.shardsNeeded);
         done();
@@ -189,7 +227,7 @@ public class InventoryScene extends UIScene {
 
     private void use() {
         if (itemLocation.containsKey(selected)) {
-            ItemData data = ItemData.getItem(itemLocation.get(selected));
+            ItemData data = itemLocation.get(selected).getRight();
             if (data == null)
                 return;
             if (useDialog == null) {
@@ -220,13 +258,14 @@ public class InventoryScene extends UIScene {
             deleteButton.setDisabled(true);
             equipButton.setDisabled(true);
             useButton.setDisabled(true);
+            repairButton.setVisible(false);
             for (Button button : inventoryButtons) {
                 button.setChecked(false);
             }
             return;
         }
         if (itemLocation.containsKey(actor)) {
-            ItemData data = ItemData.getItem(itemLocation.get(actor));
+            ItemData data = itemLocation.get(actor).getRight();
             if (data == null) return;
 
             deleteButton.setDisabled(data.questItem);
@@ -248,7 +287,7 @@ public class InventoryScene extends UIScene {
                 if (equipButton instanceof TextraButton) {
                     TextraButton button = (TextraButton) equipButton;
                     String item = Current.player().itemInSlot(data.equipmentSlot);
-                    if (item != null && item.equals(data.name)) {
+                    if (item != null && item.equals(data.name) && data.isEquipped) {
                         button.setText("Unequip");
                     } else {
                         button.setText("Equip");
@@ -256,6 +295,7 @@ public class InventoryScene extends UIScene {
                     button.layout();
                 }
             }
+            repairButton.setVisible(data.isCracked);
             String status = data.isCracked ? " (" + Forge.getLocalizer().getMessage("lblCracked") + ")" : "";
             itemDescription.setText(data.name + status + "\n[%98]" + data.getDescription());
         }
@@ -268,6 +308,7 @@ public class InventoryScene extends UIScene {
             useButton.setText("Open");
             useButton.layout();
             equipButton.setDisabled(true);
+            repairButton.setVisible(false);
 
             itemDescription.setText(data.getName() + "\n[%98]" + (data.getComment() == null?"":data.getComment()+" - ") + data.getAllCardsInASinglePool(true, true).countAll() + " cards");
         }
@@ -283,20 +324,17 @@ public class InventoryScene extends UIScene {
     }
 
     private void updateInventory() {
+        clearItemDescription();
         clearSelectable();
         inventoryButtons.clear();
         inventory.clear();
+        repairButton.setVisible(false);
 
         int itemSlotsUsed = 0;
-        // Turn item strings into actual ItemData
-        // THen sort but these by slot type and name
-
         Array<ItemData> items = new Array<>();
         for (int i = 0; i < Current.player().getItems().size; i++) {
-            String name = Current.player().getItems().get(i);
-            ItemData item = ItemData.getItem(name);
+            ItemData item = Current.player().getItems().get(i);
             if (item == null) {
-                System.err.print("Can not find item name " + name + "\n");
                 continue;
             }
             if (item.sprite() == null) {
@@ -306,6 +344,7 @@ public class InventoryScene extends UIScene {
 
             items.add(item);
         }
+        // sort these by slot type and name
         items.sort((o1, o2) -> {
             if (o1.equipmentSlot == null && o2.equipmentSlot == null) {
                 return o1.name.compareTo(o2.name);
@@ -342,8 +381,8 @@ public class InventoryScene extends UIScene {
             img.setX((newActor.getWidth() - img.getWidth()) / 2);
             img.setY((newActor.getHeight() - img.getHeight()) / 2);
             newActor.addActor(img);
-            itemLocation.put(newActor, item.name);
-            if (Current.player().getEquippedItems().contains(item.name)) {
+            itemLocation.put(newActor, Pair.of(item.name, item));
+            if (item.isEquipped && Current.player().getEquippedItems().contains(item.name)) {
                 Image overlay = new Image(equipOverlay);
                 overlay.setX((newActor.getWidth() - img.getWidth()) / 2);
                 overlay.setY((newActor.getHeight() - img.getHeight()) / 2);
@@ -361,7 +400,6 @@ public class InventoryScene extends UIScene {
         }
 
         for (int i = 0; i < Current.player().getBoostersOwned().size; i++) {
-
             if ((i + itemSlotsUsed) % columns == 0)
                 inventory.row();
             Button newActor = createInventorySlot();
@@ -396,14 +434,13 @@ public class InventoryScene extends UIScene {
             });
         }
 
-
         for (Map.Entry<String, Button> slot : equipmentSlots.entrySet()) {
             if (slot.getValue().getChildren().size >= 2)
                 slot.getValue().removeActorAt(1, false);
             String equippedItem = Current.player().itemInSlot(slot.getKey());
             if (equippedItem == null || equippedItem.isEmpty())
                 continue;
-            ItemData item = ItemData.getItem(equippedItem);
+            ItemData item = Current.player().getEquippedItem(equippedItem);
             if (item != null) {
                 Image img = new Image(item.sprite());
                 img.setX((slot.getValue().getWidth() - img.getWidth()) / 2);
@@ -411,6 +448,8 @@ public class InventoryScene extends UIScene {
                 slot.getValue().addActor(img);
             }
         }
+        // make sure repair is clickable
+        repairButton.setZIndex(ui.getChildren().size);
     }
 
     @Override

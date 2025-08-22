@@ -65,7 +65,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private final Map<String, Byte> characterFlags = new HashMap<>();
     private final Map<String, Byte> tutorialFlags = new HashMap<>();
 
-    private final Array<String> inventoryItems = new Array<>();
+    private final Array<ItemData> inventoryItems = new Array<>();
     private final Array<Deck> boostersOwned = new Array<>();
     private final HashMap<String, String> equippedItems = new HashMap<>();
     private final List<AdventureQuestData> quests = new ArrayList<>();
@@ -174,7 +174,13 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         life = maxLife = difficultyData.startingLife;
         shards = difficultyData.startingShards;
 
-        inventoryItems.addAll(difficultyData.startItems);
+        for (String s : difficultyData.startItems) {
+            ItemData i = ItemData.getItem(s);
+            if (i == null)
+                continue;
+            inventoryItems.add(i);
+        }
+
         onGoldChangeList.emit();
         onLifeTotalChangeList.emit();
         onShardsChangeList.emit();
@@ -213,8 +219,28 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return deck;
     }
 
-    public Array<String> getItems() {
+    public Array<ItemData> getItems() {
         return inventoryItems;
+    }
+
+    public ItemData getItemFromInventory(String name) {
+        for (ItemData data : inventoryItems) {
+            if (data == null)
+                continue;
+            if (data.name.equals(name))
+                return data;
+        }
+        return null;
+    }
+
+    public ItemData getEquippedItem(String name) {
+        for (ItemData data : inventoryItems) {
+            if (data == null)
+                continue;
+            if (data.name.equals(name) && data.isEquipped)
+                return data;
+        }
+        return null;
     }
 
     public Array<Deck> getBoostersOwned() {
@@ -374,16 +400,32 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         }
 
         if (data.containsKey("inventory")) {
-            String[] inv = (String[]) data.readObject("inventory");
-            // Prevent items with wrong names from getting through. Hell breaks loose if it causes null pointers.
-            // This only needs to be done on load.
-            for (String i : inv) {
-                if (ItemData.getItem(i) != null) inventoryItems.add(i);
-                else {
-                    System.err.printf("Cannot find item name %s\n", i);
-                    // Allow official© permission for the player to get a refund. We will allow it this time.
-                    // TODO: Divine retribution if the player refunds too much. Use the orbital laser cannon.
-                    System.out.println("Developers have blessed you! You are allowed to cheat the cost of the item back!");
+            try {
+                ItemData[] inv = (ItemData[]) data.readObject("inventory");
+                for (ItemData itemData : inv) {
+                    if (itemData != null)
+                        inventoryItems.add(itemData);
+                }
+            } catch (Exception ignored) {
+                // migrate from string..
+                try {
+                    String[] inv = (String[]) data.readObject("inventory");
+                    // Prevent items with wrong names from getting through. Hell breaks loose if it causes null pointers.
+                    // This only needs to be done on load.
+                    for (String i : inv) {
+                        ItemData itemData = ItemData.getItem(i);
+                        if (itemData != null)
+                            inventoryItems.add(itemData);
+                        else {
+                            System.err.printf("Cannot find item name %s\n", i);
+                            // Allow official© permission for the player to get a refund. We will allow it this time.
+                            // TODO: Divine retribution if the player refunds too much. Use the orbital laser cannon.
+                            System.out.println("Developers have blessed you! You are allowed to cheat the cost of the item back!");
+                        }
+                    }
+                } catch (Exception e) {
+                    //shouldn't crash if coming from string...
+                    e.printStackTrace();
                 }
             }
         }
@@ -394,9 +436,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             assert (slots.length == items.length);
             // Prevent items with wrong names. If it triggered in inventory, it'll trigger here as well.
             for (int i = 0; i < slots.length; i++) {
-                if (ItemData.getItem(items[i]) != null)
+                ItemData itemData = getItemFromInventory(items[i]);
+                if (itemData != null) {
+                    itemData.isEquipped = true;
                     equippedItems.put(slots[i], items[i]);
-                else {
+                } else {
                     System.err.printf("Cannot find equip name %s\n", items[i]);
                 }
             }
@@ -608,7 +652,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.store("shards", shards);
         data.store("deckName", deck.getName());
 
-        data.storeObject("inventory", inventoryItems.toArray(String.class));
+        data.storeObject("inventory", inventoryItems.toArray(ItemData.class));
 
         ArrayList<String> slots = new ArrayList<>();
         ArrayList<String> items = new ArrayList<>();
@@ -939,18 +983,22 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return false;
     }
 
-    public ItemData getRandomEquippedArmor() {
-        Array<ItemData> armor = new Array<>();
+    public ItemData getRandomEquippedItem() {
+        Array<ItemData> items = new Array<>();
         for (String name : equippedItems.values()) {
-            ItemData data = ItemData.getItem(name);
-            if (data != null
-                    && ("Boots".equalsIgnoreCase(data.equipmentSlot)
-                    || "Body".equalsIgnoreCase(data.equipmentSlot)
-                    || "Neck".equalsIgnoreCase(data.equipmentSlot))) {
-                armor.add(data);
+            ItemData item = getEquippedItem(name);
+            if (item == null)
+                continue;
+            if (isHardorInsaneDifficulty()) {
+                items.add(item);
+            } else {
+                switch (item.equipmentSlot) {
+                    // limit to these for easy and normal
+                    case "Boots", "Body", "Neck" -> items.add(item);
+                }
             }
         }
-        return armor.random();
+        return items.random();
     }
 
     public ItemData getEquippedAbility1() {
@@ -1051,17 +1099,27 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void removeItem(String name) {
-        if (name == null || name.isEmpty()) return;
-        inventoryItems.removeValue(name, false);
-        if (equippedItems.values().contains(name) && !inventoryItems.contains(name, false)) {
-            equippedItems.values().remove(name);
+        ItemData item = ItemData.getItem(name);
+        if (item != null)
+            removeItem(item);
+    }
+
+    public void removeItem(ItemData item) {
+        if (item == null)
+            return;
+        inventoryItems.removeValue(item, false);
+        if (equippedItems.values().contains(item.name) && !inventoryItems.contains(item, false)) {
+            item.isEquipped = false;
+            equippedItems.values().remove(item.name);
         }
     }
 
     public void equip(ItemData item) {
         if (equippedItems.get(item.equipmentSlot) != null && equippedItems.get(item.equipmentSlot).equals(item.name)) {
+            item.isEquipped = false;
             equippedItems.remove(item.equipmentSlot);
         } else {
+            item.isEquipped = true;
             equippedItems.put(item.equipmentSlot, item.name);
         }
         onEquipmentChange.emit();
@@ -1105,34 +1163,42 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public boolean hasItem(String name) {
-        return inventoryItems.contains(name, false);
+        ItemData itemData = ItemData.getItem(name);
+        if (itemData == null)
+            return false;
+        return inventoryItems.contains(itemData, false);
     }
 
     public int countItem(String name) {
         int count = 0;
         if (!hasItem(name))
             return count;
-        for (String s : inventoryItems) {
-            if (s.equals(name))
+        for (ItemData i : inventoryItems) {
+            if (i == null)
+                continue;
+            if (i.name.equals(name))
                 count++;
         }
         return count;
     }
 
     public boolean addItem(String name) {
+        return addItem(name, true);
+    }
+    public boolean addItem(String name, boolean updateEvent) {
         ItemData item = ItemData.getItem(name);
         if (item == null)
             return false;
-        inventoryItems.add(name);
-        AdventureQuestController.instance().updateItemReceived(item);
+        inventoryItems.add(item);
+        if (updateEvent)
+            AdventureQuestController.instance().updateItemReceived(item);
         return true;
     }
 
     public void removeAllQuestItems(){
-        for (String s : inventoryItems) {
-            ItemData data = ItemData.getItem(s);
+        for (ItemData data : inventoryItems) {
             if(data != null && data.questItem){
-                removeItem(data.name);
+                removeItem(data);
             }
         }
     }
