@@ -8,7 +8,7 @@ import forge.StaticData;
 import forge.adventure.character.PlayerSprite;
 import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterest;
-import forge.adventure.scene.InventoryScene;
+import forge.adventure.scene.InnScene;
 import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.Current;
 import forge.adventure.util.Paths;
@@ -21,7 +21,10 @@ import forge.deck.DeckProxy;
 import forge.game.GameType;
 import forge.gui.FThreads;
 import forge.item.PaperCard;
+import forge.model.CardBlock;
+import forge.model.FModel;
 import forge.screens.CoverScreen;
+import forge.util.Aggregates;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -509,6 +512,27 @@ public class ConsoleCommandInterpreter {
                 message = itemData.name + " " + Forge.getLocalizer().getMessage("lblCracked");
             }
             return message;
+        });
+        registerCommand(new String[]{"set", "event"}, s -> {
+            if(s.length < 1) return "Command needs 1 parameter: Block or edition name. ";
+            String blockName = s[0];
+            if(MapStage.getInstance().findLocalInn() == null)
+                return "Must be used within a town with an inn.";
+            CardBlock eventCardBlock = FModel.getBlocks().find(b -> b.getName().equalsIgnoreCase(blockName));
+            if(eventCardBlock == null) {
+                CardEdition edition = FModel.getMagicDb().getEditions().find(e -> e.getCode().equalsIgnoreCase(blockName) || e.getName().equalsIgnoreCase(blockName));
+                if(edition == null)
+                    return "Unable to find edition or block: " + blockName;
+                eventCardBlock = Aggregates.random(AdventureEventData.getValidDraftBlocks(List.of(edition)));
+                if(eventCardBlock == null)
+                    return "Unable to find a valid event block that exclusively contains edition " + edition.getName();
+            }
+            AdventureEventController.EventFormat eventFormat = s.length > 1 ? AdventureEventController.EventFormat.smartValueOf(s[1])
+                    : eventCardBlock.getName().contains("Jumpstart") ? AdventureEventController.EventFormat.Jumpstart : AdventureEventController.EventFormat.Draft;
+            if(eventFormat == null)
+                return "Unknown event format: " + s[1];
+            InnScene.replaceLocalEvent(eventFormat, eventCardBlock);
+            return "Replaced local event with " + eventFormat.name() + " - " + eventCardBlock.getName();
         });
     }
 }
