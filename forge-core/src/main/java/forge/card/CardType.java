@@ -1071,7 +1071,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             Set<String> addToSection = null;
 
             switch (sectionName) {
-                case "BasicType":
+                case "BasicTypes":
                     addToSection = CardType.Constant.BASIC_TYPES;
                     break;
                 case "LandTypes":
