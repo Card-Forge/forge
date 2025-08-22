@@ -42,8 +42,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static forge.card.CardDb.NameSetSeparator;
-
 /**
  * <p>
  * CardSet class.
@@ -563,37 +561,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             PrintSheet sheet = new PrintSheet(String.format("%s %s", this.getCode(), section.getKey()));
 
             for (EditionEntry card : section.getValue()) {
-                PaperCard cardFound = null;
-
-                if (card.name.indexOf(NameSetSeparator) > -1) {
-                    // Card name is a query so ignore CollectorNumber even if present
-                    var split = card.name.split("\\" + NameSetSeparator);
-
-                    var cardName = split[0].trim();
-                    var setCode = split[1].trim();
-
-                    if (split.length > 2) {
-                        // Search within a set with ArtIndex
-                        try {
-                            var artIndex = Integer.parseInt(split[2]);
-                            cardFound = cardDb.getCard(cardName, setCode, artIndex);
-                        } catch (NumberFormatException  e) {
-                            // Invalid ArtIndex so ignore
-                            cardFound = cardDb.getCard(cardName, setCode);
-                        }
-                    } else {
-                        // Search within a set
-                        cardFound = cardDb.getCard(cardName, setCode);
-                    }
-                } else {
-                    cardFound = cardDb.getCard(card.name, this.getCode(), card.collectorNumber);
-                }
-
-                if (cardFound == null) {
-                    continue;
-                }
-
-                sheet.add(cardFound);
+                sheet.add(cardDb.getCard(card.name, this.getCode(), card.collectorNumber));
             }
 
             sheets.add(sheet);
