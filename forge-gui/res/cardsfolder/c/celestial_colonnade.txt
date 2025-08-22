@@ -1,7 +1,7 @@
 Name:Celestial Colonnade
 ManaCost:no cost
 Types:Land
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ Combo W U | SpellDescription$ Add {W} or {U}.
 A:AB$ Animate | Cost$ 3 W U | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Creature,Elemental | Colors$ White,Blue | OverwriteColors$ True | Keywords$ Flying & Vigilance | SpellDescription$ Until end of turn, this land becomes a 4/4 white and blue Elemental creature with flying and vigilance. It's still a land.
