@@ -650,7 +650,7 @@ public final class CardEdition implements Comparable<CardEdition> {
                 }
 
                 if (sectionName.endsWith("Types")) {
-                    parseTypes(sectionName, contents.get(sectionName));
+                    CardType.Helper.parseTypes(sectionName, boosterSlotsToParse);
                 } else {
                     // Parse cards
 
@@ -825,75 +825,6 @@ public final class CardEdition implements Comparable<CardEdition> {
         }
 
         public static final FilenameFilter TXT_FILE_FILTER = (dir, name) -> name.endsWith(".txt");
-
-        private void parseTypes(String sectionName, List<String> content) {
-            Set<String> addToSection = null;
-
-            switch (sectionName) {
-                case "BasicType":
-                    addToSection = CardType.Constant.BASIC_TYPES;
-                    break;
-                case "LandTypes":
-                    addToSection = CardType.Constant.LAND_TYPES;
-                    break;
-                case "CreatureTypes":
-                    addToSection = CardType.Constant.CREATURE_TYPES;
-                    break;
-                case "SpellTypes":
-                    addToSection = CardType.Constant.SPELL_TYPES;
-                    break;
-                case "EnchantmentTypes":
-                    addToSection = CardType.Constant.ENCHANTMENT_TYPES;
-                    break;
-                case "ArtifactTypes":
-                    addToSection = CardType.Constant.ARTIFACT_TYPES;
-                    break;
-                case "WalkerTypes":
-                    addToSection = CardType.Constant.WALKER_TYPES;
-                    break;
-                case "DungeonTypes":
-                    addToSection = CardType.Constant.DUNGEON_TYPES;
-                    break;
-                case "BattleTypes":
-                    addToSection = CardType.Constant.BATTLE_TYPES;
-                    break;
-                case "PlanarTypes":
-                    addToSection = CardType.Constant.PLANAR_TYPES;
-                    break;
-            }
-
-            if (addToSection == null) {
-                return;
-            }
-
-            for(String line : content) {
-                if (line.length() == 0) continue;
-
-                if (line.contains(":")) {
-                    String[] k = line.split(":");
-
-                    if (addToSection.contains(k[0])) {
-                        continue;
-                    }
-
-                    addToSection.add(k[0]);
-                    CardType.Constant.pluralTypes.put(k[0], k[1]);
-
-                    if (k[0].contains(" ")) {
-                        CardType.Constant.MultiwordTypes.add(k[0]);
-                    }
-                } else {
-                    if (addToSection.contains(line)) {
-                        continue;
-                    }
-
-                    addToSection.add(line);
-                    if (line.contains(" ")) {
-                        CardType.Constant.MultiwordTypes.add(line);
-                    }
-                }
-            }
-        }
     }
 
     public static class Collection extends StorageBase<CardEdition> {
