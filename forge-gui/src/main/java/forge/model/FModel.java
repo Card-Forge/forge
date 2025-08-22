@@ -61,7 +61,6 @@ import forge.util.storage.StorageBase;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Function;
 
 /**
@@ -405,9 +404,11 @@ public final class FModel {
     public static void loadDynamicGamedata() {
         if (!CardType.Constant.LOADED.isSet()) {
             
-            final List<String> typeListFile = FileUtil.readFile(ForgeConstants.TYPE_LIST_FILE);
-
-            loadTypes(typeListFile);
+            final Map<String, List<String>> contents = FileSection.parseSections(FileUtil.readFile(ForgeConstants.TYPE_LIST_FILE));
+            
+            for (String sectionName: contents.keySet()) {
+                CardType.Helper.parseTypes(sectionName, contents.get(sectionName));
+            }
 
             CardType.Constant.LOADED.set();
         }
@@ -423,62 +424,6 @@ public final class FModel {
                 }
             }
             keywordsLoaded = true;
-        }
-    }
-
-    private static void loadTypes(List<String> fileContent) {
-        Set<String> addTo = null;
-
-        for (final String s : fileContent) {
-            if (s.equals("[BasicTypes]")) {
-                addTo = CardType.Constant.BASIC_TYPES;
-            } else if (s.equals("[LandTypes]")) {
-                addTo = CardType.Constant.LAND_TYPES;
-            } else if (s.equals("[CreatureTypes]")) {
-                addTo = CardType.Constant.CREATURE_TYPES;
-            } else if (s.equals("[SpellTypes]")) {
-                addTo = CardType.Constant.SPELL_TYPES;
-            } else if (s.equals("[EnchantmentTypes]")) {
-                addTo = CardType.Constant.ENCHANTMENT_TYPES;
-            } else if (s.equals("[ArtifactTypes]")) {
-                addTo = CardType.Constant.ARTIFACT_TYPES;
-            } else if (s.equals("[WalkerTypes]")) {
-                addTo = CardType.Constant.WALKER_TYPES;
-            } else if (s.equals("[DungeonTypes]")) {
-                addTo = CardType.Constant.DUNGEON_TYPES;
-            } else if (s.equals("[BattleTypes]")) {
-                addTo = CardType.Constant.BATTLE_TYPES;
-            } else if (s.equals("[PlanarTypes]")) {
-                addTo = CardType.Constant.PLANAR_TYPES;
-            } else if (s.length() > 1) {
-                if (addTo == null) {
-                    continue;
-                }
-
-                if (s.contains(":")) {
-                    String[] k = s.split(":");
-
-                    if (addTo.contains(k[0])) {
-                        continue;
-                    }
-
-                    addTo.add(k[0]);
-                    CardType.Constant.pluralTypes.put(k[0], k[1]);
-
-                    if (k[0].contains(" ")) {
-                        CardType.Constant.MultiwordTypes.add(k[0]);
-                    }
-                } else {
-                    if (addTo.contains(s)) {
-                        continue;
-                    }
-
-                    addTo.add(s);
-                    if (s.contains(" ")) {
-                        CardType.Constant.MultiwordTypes.add(s);
-                    }
-                }
-            }
         }
     }
 
