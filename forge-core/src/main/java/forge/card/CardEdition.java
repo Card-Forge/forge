@@ -650,7 +650,7 @@ public final class CardEdition implements Comparable<CardEdition> {
                 }
 
                 if (sectionName.endsWith("Types")) {
-                    CardType.Helper.parseTypes(sectionName, boosterSlotsToParse);
+                    CardType.Helper.parseTypes(sectionName, contents.get(sectionName));
                 } else {
                     // Parse cards
 
