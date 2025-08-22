@@ -415,7 +415,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return false;
     }
 
-    protected final void setManaPart(AbilityManaPart manaPart0) {
+    public final void setManaPart(AbilityManaPart manaPart0) {
         manaPart = manaPart0;
     }
 

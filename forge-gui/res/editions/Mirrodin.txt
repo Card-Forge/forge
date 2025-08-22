@@ -318,14 +318,3 @@ ScryfallCode=MRD
 304 L Forest @Rob Alexander
 305 L Forest @Martina Pilcerova
 306 L Forest @John Avon
-
-[tokens]
-w_1_1_soldier
-w_1_1_spirit_flying
-b_x_x_demon_flying
-r_3_1_elemental_haste
-g_5_5_beast
-g_1_1_insect
-c_1_1_a_myr
-c_1_1_a_pentavite_flying
-c_0_1_a_pest

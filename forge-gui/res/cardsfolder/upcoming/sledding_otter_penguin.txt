@@ -1,0 +1,6 @@
+Name:Sledding Otter-Penguin
+ManaCost:2 W
+Types:Creature Otter Bird
+PT:2/3
+A:AB$ PutCounter | Cost$ 3 | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on this creature.
+Oracle:{3}: Put a +1/+1 counter on this creature.

@@ -145,22 +145,23 @@ public abstract class FDropDown extends FScrollPane {
     protected abstract ScrollBounds updateAndGetPaneSize(float maxWidth, float maxVisibleHeight);
 
     protected void updateSizeAndPosition() {
-        if (menuTab == null) {
+        FDisplayObject dropdownOwner = getDropDownOwner();
+        if (dropdownOwner == null) {
             return;
         }
 
         Rectangle boundary = Forge.getCurrentScreen().getDropDownBoundary();
 
-        float x = menuTab.screenPos.x;
-        float y = menuTab.screenPos.y + menuTab.getHeight();
+        float x = dropdownOwner.screenPos.x;
+        float y = dropdownOwner.screenPos.y + dropdownOwner.getHeight();
         boolean showAbove;
         float maxVisibleHeight;
         if (y < boundary.y + boundary.height / 2) {
             showAbove = false;
             maxVisibleHeight = boundary.y + boundary.height - y; //prevent covering prompt
-        } else { //handle drop downs at near bottom of screen
+        } else { //handle dropdown menus that open near the bottom of screen
             showAbove = true;
-            y = menuTab.screenPos.y;
+            y = dropdownOwner.screenPos.y;
             maxVisibleHeight = y - boundary.y;
         }
 

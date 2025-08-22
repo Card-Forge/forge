@@ -239,7 +239,7 @@ public class ConquestCommandersScreen extends FScreen {
         }
     }
 
-    private static class CommanderColorFilter extends StatTypeFilter<ConquestCommander> {
+    public static class CommanderColorFilter extends StatTypeFilter<ConquestCommander> {
         public CommanderColorFilter(ItemManager<? super ConquestCommander> itemManager0) {
             super(itemManager0);
         }
@@ -273,7 +273,7 @@ public class ConquestCommandersScreen extends FScreen {
         }
     }
 
-    private static class CommanderOriginFilter extends ComboBoxFilter<ConquestCommander, ConquestPlane> {
+    public static class CommanderOriginFilter extends ComboBoxFilter<ConquestCommander, ConquestPlane> {
         public CommanderOriginFilter(ItemManager<? super ConquestCommander> itemManager0) {
             super(Forge.getLocalizer().getMessage("lblAllPlanes"), FModel.getPlanes(), itemManager0);
         }

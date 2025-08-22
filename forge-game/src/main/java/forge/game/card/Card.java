@@ -1051,7 +1051,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         // it was always created), adjust threshold based on its existence.
         int threshold = states.containsKey(CardStateName.FaceDown) ? 2 : 1;
 
-        int numStates = states.keySet().size();
+        int numStates = states.size();
 
         return numStates > threshold;
     }
@@ -2762,7 +2762,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")
                         || keyword.startsWith("Encore") || keyword.startsWith("Mutate") || keyword.startsWith("Dungeon")
                         || keyword.startsWith("Class") || keyword.startsWith("Blitz") || keyword.startsWith("Web-slinging")
-                        || keyword.startsWith("Specialize") || keyword.equals("Ravenous")
+                        || keyword.startsWith("Specialize") || keyword.equals("Ravenous") || keyword.startsWith("Firebending")
                         || keyword.equals("For Mirrodin") || keyword.equals("Job select") || keyword.startsWith("Craft")
                         || keyword.startsWith("Landwalk") || keyword.startsWith("Visit") || keyword.startsWith("Mobilize")
                         || keyword.startsWith("Station") || keyword.startsWith("Warp") || keyword.startsWith("Devour")) {
@@ -3564,7 +3564,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return false;
         }
         for (SpellAbility sa : getSpellAbilities()) {
-            if (!(sa instanceof SpellPermanent && sa.isBasicSpell()) && !sa.isMorphUp() && !sa.isDisguiseUp()) {
+            // morph up and disguise up are not part of the card
+            if (sa.isMorphUp() || sa.isDisguiseUp()) {
+                continue;
+            }
+            // while Adventure and Omen are part of Secondary
+            if ((sa.isAdventure() || sa.isOmen()) && !getCurrentStateName().equals(sa.getCardState())) {
+                continue;
+            }
+            if (!(sa instanceof SpellPermanent && sa.isBasicSpell())) {
                 return false;
             }
         }
@@ -3601,13 +3609,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     }
                 }
             }
-        } else {
+        } else if (hasState(CardStateName.Secondary) && state.getStateName() == CardStateName.Original) {
             // Adventure and Omen may only be cast not from Battlefield
-            if (hasState(CardStateName.Secondary) && state.getStateName() == CardStateName.Original) {
-                for (SpellAbility sa : getState(CardStateName.Secondary).getSpellAbilities()) {
-                    if (mana == null || mana == sa.isManaAbility()) {
-                        list.add(sa);
-                    }
+            for (SpellAbility sa : getState(CardStateName.Secondary).getSpellAbilities()) {
+                if (mana == null || mana == sa.isManaAbility()) {
+                    list.add(sa);
                 }
             }
         }

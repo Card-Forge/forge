@@ -149,6 +149,10 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
                     if (mana.getManaAbility() != null && mana.getManaAbility().isPersistentMana()) {
                         pMana.add(mana);
                     }
+                    if (mana.getManaAbility() != null && mana.getManaAbility().isCombatMana() &&
+                            !owner.getGame().getPhaseHandler().is(PhaseType.COMBAT_END)) {
+                        pMana.add(mana);
+                    }
                 }
             }
             cm.removeAll(pMana);

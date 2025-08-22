@@ -62,36 +62,44 @@ public class CardManager extends ItemManager<PaperCard> {
 
     @Override
     public ItemRenderer getListItemRenderer(final CompactModeHandler compactModeHandler) {
-        return new ItemRenderer() {
-            @Override
-            public float getItemHeight() {
-                return CardRenderer.getCardListItemHeight(compactModeHandler.isCompactMode());
-            }
+        return new CardListItemRenderer(compactModeHandler);
+    }
 
-            @Override
-            public void drawValue(Graphics g, Entry<PaperCard, Integer> value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
-                CardRenderer.drawCardListItem(g, font, foreColor, value.getKey(), isInfinite() ? 0 : value.getValue(), getItemSuffix(value), x, y, w, h, compactModeHandler.isCompactMode());
-            }
+    protected class CardListItemRenderer extends ItemRenderer {
+        private final CompactModeHandler compactModeHandler;
 
-            @Override
-            public boolean tap(Integer index, Entry<PaperCard, Integer> value, float x, float y, int count) {
-                return CardRenderer.cardListItemTap(model.getOrderedList(), index, CardManager.this, x, y, count, compactModeHandler.isCompactMode());
-            }
+        public CardListItemRenderer(CompactModeHandler compactModeHandler) {
+            this.compactModeHandler = compactModeHandler;
+        }
 
-            @Override
-            public boolean longPress(Integer index, Entry<PaperCard, Integer> value, float x, float y) {
-                if (CardRenderer.cardListItemTap(model.getOrderedList(), index, CardManager.this, x, y, 1, compactModeHandler.isCompactMode())) {
-                    return true; //avoid calling onCardLongPress if user long presses on card art
-                }
-                onCardLongPress(index, value, x, y);
-                return true;
-            }
+        @Override
+        public float getItemHeight() {
+            return CardRenderer.getCardListItemHeight(compactModeHandler.isCompactMode());
+        }
 
-            @Override
-            public boolean allowPressEffect(FList<Entry<PaperCard, Integer>> list, float x, float y) {
-                //only allow press effect if right of card art
-                return x > CardRenderer.getCardListItemHeight(compactModeHandler.isCompactMode()) * CardRenderer.CARD_ART_RATIO;
+        @Override
+        public void drawValue(Graphics g, Entry<PaperCard, Integer> value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
+            CardRenderer.drawCardListItem(g, font, foreColor, value.getKey(), isInfinite() ? 0 : value.getValue(), getItemSuffix(value), x, y, w, h, compactModeHandler.isCompactMode());
+        }
+
+        @Override
+        public boolean tap(Integer index, Entry<PaperCard, Integer> value, float x, float y, int count) {
+            return CardRenderer.cardListItemTap(model.getOrderedList(), index, CardManager.this, x, y, count, compactModeHandler.isCompactMode());
+        }
+
+        @Override
+        public boolean longPress(Integer index, Entry<PaperCard, Integer> value, float x, float y) {
+            if (CardRenderer.cardListItemTap(model.getOrderedList(), index, CardManager.this, x, y, 1, compactModeHandler.isCompactMode())) {
+                return true; //avoid calling onCardLongPress if user long presses on card art
             }
-        };
+            onCardLongPress(index, value, x, y);
+            return true;
+        }
+
+        @Override
+        public boolean allowPressEffect(FList<Entry<PaperCard, Integer>> list, float x, float y) {
+            //only allow press effect if right of card art
+            return x > CardRenderer.getCardListItemHeight(compactModeHandler.isCompactMode()) * CardRenderer.CARD_ART_RATIO;
+        }
     }
 }

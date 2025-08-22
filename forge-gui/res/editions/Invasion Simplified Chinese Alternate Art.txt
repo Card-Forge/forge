@@ -1,0 +1,12 @@
+[metadata]
+Code=INV_AA
+Date=2000-10-02
+Name=Invasion Simplified Chinese Alternate Art
+Type=Promo
+ScryfallCode=INV
+
+[cards]
+124s C Soul Burn @Andrew Goldhawk
+124★ C Soul Burn @Andrew Goldhawk
+134s C Urborg Skeleton @Tom Wänerstrand
+134★ C Urborg Skeleton @Tom Wänerstrand
