@@ -59,7 +59,6 @@ import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -409,26 +408,6 @@ public final class FModel {
             final List<String> typeListFile = FileUtil.readFile(ForgeConstants.TYPE_LIST_FILE);
 
             loadTypes(typeListFile);
-
-            File customTypesFilesDir = new File(ForgeConstants.USER_CUSTOM_TYPE_LIST_DIR);
-            if (customTypesFilesDir.exists() && customTypesFilesDir.isDirectory()) {
-                File[] txtFiles = customTypesFilesDir.listFiles(new FilenameFilter() {
-                    public boolean accept(File dir, String name) {
-                        return name.toLowerCase().endsWith(".txt");
-                    }
-                });
-
-                if (txtFiles != null) {
-                    for (File file : txtFiles) {
-                        try {
-                            final List<String> customTypeListFile = FileUtil.readFile(file);
-                            loadTypes(customTypeListFile);
-                        } catch (Exception e) {
-                            System.err.println("Failed to load custom types from file " + file.getAbsolutePath());
-                        }
-                    }
-                }
-            }
 
             CardType.Constant.LOADED.set();
         }
