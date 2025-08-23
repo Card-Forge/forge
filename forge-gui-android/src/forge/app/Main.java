@@ -571,7 +571,7 @@ public class Main extends AndroidApplication {
             if (clipData.getItemCount() > 0) {
                 try {
                     String text = clipData.getItemAt(0).coerceToText(getContext()).toString();
-                    return Normalizer.normalize(text, Normalizer.Form.NFD);
+                    return text;//Normalizer.normalize(text, Normalizer.Form.NFD);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
