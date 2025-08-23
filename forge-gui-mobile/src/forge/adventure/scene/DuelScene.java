@@ -9,10 +9,7 @@ import forge.Graphics;
 import forge.LobbyPlayer;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.character.PlayerSprite;
-import forge.adventure.data.AdventureEventData;
-import forge.adventure.data.EffectData;
-import forge.adventure.data.EnemyData;
-import forge.adventure.data.ItemData;
+import forge.adventure.data.*;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.IAfterMatch;
@@ -246,13 +243,13 @@ public class DuelScene extends ForgeScene {
 
         if (eventData == null || eventData.eventRules.allowsItems) {
             //Collect and add items effects first.
-            for (String playerItem : advPlayer.getEquippedItems()) {
-                ItemData item = ItemData.getItem(playerItem);
+            for (Long id : advPlayer.getEquippedItems()) {
+                ItemData item = Current.player().getEquippedItem(id);
                 if (item != null && item.effect != null) {
                     playerEffects.add(item.effect);
                     if (item.effect.opponent != null) oppEffects.add(item.effect.opponent);
                 } else {
-                    System.err.printf("Item %s not found.", playerItem);
+                    System.err.printf("Item %s not found.", id);
                 }
             }
         }
@@ -317,7 +314,7 @@ public class DuelScene extends ForgeScene {
             if (eventData != null && eventData.eventRules.allowsItems) {
                 if (currentEnemy.equipment != null) {
                     for (String oppItem : currentEnemy.equipment) {
-                        ItemData item = ItemData.getItem(oppItem);
+                        ItemData item = ItemListData.getItem(oppItem);
                         if (item == null)
                             continue;
                         equipmentEffects.add(item.effect);
