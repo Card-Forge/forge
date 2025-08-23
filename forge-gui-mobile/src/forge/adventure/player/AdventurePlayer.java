@@ -1182,10 +1182,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public boolean hasItem(String name) {
-        ItemData itemData = ItemListData.getItem(name);
-        if (itemData == null)
-            return false;
-        return inventoryItems.contains(itemData);
+        return inventoryItems.stream().anyMatch(itemData -> name.equalsIgnoreCase(itemData.name));
     }
 
     public int countItem(String name) {
