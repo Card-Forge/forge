@@ -1,20 +1,17 @@
 package forge.adventure.data;
 
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Json;
 import forge.adventure.util.Config;
-import forge.adventure.util.Paths;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * Data class that will be used to read Json configuration files
  * ItemData
  * contains the information for equipment and items.
  */
-public class ItemData implements Serializable {
+public class ItemData implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
     public String name;
     public String equipmentSlot;
@@ -28,6 +25,7 @@ public class ItemData implements Serializable {
     public boolean usableInPoi;
     public boolean isCracked;
     public boolean isEquipped;
+    public Long longID;
     public String commandOnUse;
     public int shardsNeeded;
     public DialogData dialogOnUse;
@@ -56,28 +54,6 @@ public class ItemData implements Serializable {
     public Sprite sprite() {
         return Config.instance().getItemSprite(iconName);
     }
-    private static Array<ItemData> itemList;
-    public static Array<ItemData> getAllItems() {
-        if (itemList == null) {
-            Json json = new Json();
-            FileHandle handle = Config.instance().getFile(Paths.ITEMS);
-            if (handle.exists()) {
-                Array<ItemData> readJson = json.fromJson(Array.class, ItemData.class, handle);
-                itemList = readJson;
-
-            }
-
-        }
-        return itemList;
-    }
-    public static ItemData getItem(String name) {
-        for(ItemData data : new Array.ArrayIterator<>(getAllItems()))
-        {
-            if(data.name.equalsIgnoreCase(name))
-                return data;
-        }
-        return null;
-    }
 
     public String getDescription() {
         String result = "";
@@ -96,4 +72,14 @@ public class ItemData implements Serializable {
         return name;
     }
 
+    @Override
+    public ItemData clone() {
+        try {
+            ItemData clone = (ItemData) super.clone();
+            clone.longID = UUID.randomUUID().getMostSignificantBits();
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
 }

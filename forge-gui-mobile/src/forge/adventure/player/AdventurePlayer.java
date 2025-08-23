@@ -65,9 +65,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private final Map<String, Byte> characterFlags = new HashMap<>();
     private final Map<String, Byte> tutorialFlags = new HashMap<>();
 
-    private final Array<ItemData> inventoryItems = new Array<>();
+    private final ArrayList<ItemData> inventoryItems = new ArrayList<>();
     private final Array<Deck> boostersOwned = new Array<>();
-    private final HashMap<String, String> equippedItems = new HashMap<>();
+    private final HashMap<String, Long> equippedItems = new HashMap<>();
     private final List<AdventureQuestData> quests = new ArrayList<>();
     private final List<AdventureEventData> events = new ArrayList<>();
 
@@ -175,7 +175,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         shards = difficultyData.startingShards;
 
         for (String s : difficultyData.startItems) {
-            ItemData i = ItemData.getItem(s);
+            ItemData i = ItemListData.getItem(s);
             if (i == null)
                 continue;
             inventoryItems.add(i);
@@ -219,25 +219,29 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return deck;
     }
 
-    public Array<ItemData> getItems() {
+    public ArrayList<ItemData> getItems() {
         return inventoryItems;
     }
 
-    public ItemData getItemFromInventory(String name) {
+    public ItemData getItemFromInventory(Long id) {
+        if (id == null)
+            return null;
         for (ItemData data : inventoryItems) {
             if (data == null)
                 continue;
-            if (data.name.equals(name))
+            if (id.equals(data.longID))
                 return data;
         }
         return null;
     }
 
-    public ItemData getEquippedItem(String name) {
+    public ItemData getEquippedItem(Long id) {
+        if (id == null)
+            return null;
         for (ItemData data : inventoryItems) {
             if (data == null)
                 continue;
-            if (data.name.equals(name) && data.isEquipped)
+            if (id.equals(data.longID) && data.isEquipped)
                 return data;
         }
         return null;
@@ -291,7 +295,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return blessing;
     }
 
-    public Collection<String> getEquippedItems() {
+    public Collection<Long> getEquippedItems() {
         return equippedItems.values();
     }
 
@@ -324,6 +328,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     @Override
     public void load(SaveFileData data) {
+        boolean migration = false;
         clear(); // Reset player data.
         this.statistic.load(data.readSubData("statistic"));
         this.difficultyData.startingLife = data.readInt("startingLife");
@@ -402,21 +407,25 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if (data.containsKey("inventory")) {
             try {
                 ItemData[] inv = (ItemData[]) data.readObject("inventory");
-                for (ItemData itemData : inv) {
-                    if (itemData != null)
+                for (int i = 0; i < inv.length; i++) {
+                    ItemData itemData = inv[i];
+                    if (itemData != null) {
                         inventoryItems.add(itemData);
+                    }
                 }
             } catch (Exception ignored) {
+                migration = true;
                 // migrate from string..
                 try {
                     String[] inv = (String[]) data.readObject("inventory");
                     // Prevent items with wrong names from getting through. Hell breaks loose if it causes null pointers.
                     // This only needs to be done on load.
-                    for (String i : inv) {
-                        ItemData itemData = ItemData.getItem(i);
-                        if (itemData != null)
+                    for (int j = 0; j < inv.length; j++) {
+                        String i = inv[j];
+                        ItemData itemData = ItemListData.getItem(i);
+                        if (itemData != null) {
                             inventoryItems.add(itemData);
-                        else {
+                        } else {
                             System.err.printf("Cannot find item name %s\n", i);
                             // Allow official© permission for the player to get a refund. We will allow it this time.
                             // TODO: Divine retribution if the player refunds too much. Use the orbital laser cannon.
@@ -430,20 +439,27 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             }
         }
         if (data.containsKey("equippedSlots") && data.containsKey("equippedItems")) {
-            String[] slots = (String[]) data.readObject("equippedSlots");
-            String[] items = (String[]) data.readObject("equippedItems");
+            try {
+                String[] slots = (String[]) data.readObject("equippedSlots");
+                Long[] items = (Long[]) data.readObject("equippedItems");
 
-            assert (slots.length == items.length);
-            // Prevent items with wrong names. If it triggered in inventory, it'll trigger here as well.
-            for (int i = 0; i < slots.length; i++) {
-                ItemData itemData = getItemFromInventory(items[i]);
-                if (itemData != null) {
-                    itemData.isEquipped = true;
-                    equippedItems.put(slots[i], items[i]);
-                } else {
-                    System.err.printf("Cannot find equip name %s\n", items[i]);
+                assert (slots.length == items.length);
+                // Prevent items with wrong names. If it triggered in inventory, it'll trigger here as well.
+                for (int i = 0; i < slots.length; i++) {
+                    ItemData itemData = getItemFromInventory(items[i]);
+                    if (itemData != null) {
+                        if (itemData.longID == null)
+                            itemData = itemData.clone();
+                        if (itemData.longID != null) {
+                            itemData.isEquipped = true;
+                            equippedItems.put(slots[i], itemData.longID);
+                        } else {
+                            itemData.isEquipped = false;
+                            System.err.println("Missing ID: " + itemData.name);
+                        }
+                    }
                 }
-            }
+            } catch (Exception ignored) {}
         }
         if (data.containsKey("boosters")) {
             Deck[] decks = (Deck[]) data.readObject("boosters");
@@ -609,6 +625,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         announceFantasy = data.containsKey("announceFantasy") && data.readBool("announceFantasy");
         usingCustomDeck = data.containsKey("usingCustomDeck") && data.readBool("usingCustomDeck");
         announceCustom = data.containsKey("announceCustom") && data.readBool("announceCustom");
+        if (migration) {
+            getCurrentGameStage().setExtraAnnouncement(Forge.getLocalizer().getMessage("lblDataMigrationMsg"));
+        }
 
         onLifeTotalChangeList.emit();
         onShardsChangeList.emit();
@@ -652,16 +671,16 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.store("shards", shards);
         data.store("deckName", deck.getName());
 
-        data.storeObject("inventory", inventoryItems.toArray(ItemData.class));
+        data.storeObject("inventory", inventoryItems.toArray(new ItemData[0]));
 
         ArrayList<String> slots = new ArrayList<>();
-        ArrayList<String> items = new ArrayList<>();
-        for (Map.Entry<String, String> entry : equippedItems.entrySet()) {
+        ArrayList<Long> items = new ArrayList<>();
+        for (Map.Entry<String, Long> entry : equippedItems.entrySet()) {
             slots.add(entry.getKey());
             items.add(entry.getValue());
         }
         data.storeObject("equippedSlots", slots.toArray(new String[0]));
-        data.storeObject("equippedItems", items.toArray(new String[0]));
+        data.storeObject("equippedItems", items.toArray(new Long[0]));
 
         data.storeObject("boosters", boostersOwned.toArray(Deck.class));
 
@@ -973,8 +992,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public boolean hasColorView() {
-        for (String name : equippedItems.values()) {
-            ItemData data = ItemData.getItem(name);
+        for (Long id : equippedItems.values()) {
+            ItemData data = getEquippedItem(id);
             if (data != null && data.effect != null && data.effect.colorView) return true;
         }
         if (blessing != null) {
@@ -985,8 +1004,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public ItemData getRandomEquippedItem() {
         Array<ItemData> items = new Array<>();
-        for (String name : equippedItems.values()) {
-            ItemData item = getEquippedItem(name);
+        for (Long id : equippedItems.values()) {
+            ItemData item = getEquippedItem(id);
             if (item == null)
                 continue;
             if (isHardorInsaneDifficulty()) {
@@ -1002,8 +1021,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public ItemData getEquippedAbility1() {
-        for (String name : equippedItems.values()) {
-            ItemData data = ItemData.getItem(name);
+        for (Long id : equippedItems.values()) {
+            ItemData data = getEquippedItem(id);
             if (data != null && "Ability1".equalsIgnoreCase(data.equipmentSlot)) {
                 return data;
             }
@@ -1012,8 +1031,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public ItemData getEquippedAbility2() {
-        for (String name : equippedItems.values()) {
-            ItemData data = ItemData.getItem(name);
+        for (Long id : equippedItems.values()) {
+            ItemData data = getEquippedItem(id);
             if (data != null && "Ability2".equalsIgnoreCase(data.equipmentSlot)) {
                 return data;
             }
@@ -1023,8 +1042,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public int bonusDeckCards() {
         int result = 0;
-        for (String name : equippedItems.values()) {
-            ItemData data = ItemData.getItem(name);
+        for (Long id : equippedItems.values()) {
+            ItemData data = getEquippedItem(id);
             if (data != null && data.effect != null && data.effect.cardRewardBonus > 0)
                 result += data.effect.cardRewardBonus;
         }
@@ -1099,7 +1118,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void removeItem(String name) {
-        ItemData item = ItemData.getItem(name);
+        ItemData item = ItemListData.getItem(name);
         if (item != null)
             removeItem(item);
     }
@@ -1107,32 +1126,32 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public void removeItem(ItemData item) {
         if (item == null)
             return;
-        inventoryItems.removeValue(item, false);
-        if (equippedItems.values().contains(item.name) && !inventoryItems.contains(item, false)) {
+        inventoryItems.remove(item);
+        if (getEquippedItems().contains(item.longID) && !inventoryItems.contains(item)) {
             item.isEquipped = false;
-            equippedItems.values().remove(item.name);
+            getEquippedItems().remove(item.longID);
         }
     }
 
     public void equip(ItemData item) {
-        if (equippedItems.get(item.equipmentSlot) != null && equippedItems.get(item.equipmentSlot).equals(item.name)) {
+        if (equippedItems.get(item.equipmentSlot) != null && equippedItems.get(item.equipmentSlot) == item.longID) {
             item.isEquipped = false;
             equippedItems.remove(item.equipmentSlot);
         } else {
             item.isEquipped = true;
-            equippedItems.put(item.equipmentSlot, item.name);
+            equippedItems.put(item.equipmentSlot, item.longID);
         }
         onEquipmentChange.emit();
     }
 
-    public String itemInSlot(String key) {
+    public Long itemInSlot(String key) {
         return equippedItems.get(key);
     }
 
     public float equipmentSpeed() {
         float factor = 1.0f;
-        for (String name : equippedItems.values()) {
-            ItemData data = ItemData.getItem(name);
+        for (Long id : equippedItems.values()) {
+            ItemData data = getEquippedItem(id);
             if (data != null && data.effect != null && data.effect.moveSpeed > 0.0)  //Avoid negative speeds. It would be silly.
                 factor *= data.effect.moveSpeed;
         }
@@ -1145,8 +1164,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public float goldModifier(boolean sale) {
         float factor = 1.0f;
-        for (String name : equippedItems.values()) {
-            ItemData data = ItemData.getItem(name);
+        for (Long id: equippedItems.values()) {
+            ItemData data = getEquippedItem(id);
             if (data != null && data.effect != null && data.effect.goldModifier > 0.0)  //Avoid negative modifiers.
                 factor *= data.effect.goldModifier;
         }
@@ -1163,10 +1182,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public boolean hasItem(String name) {
-        ItemData itemData = ItemData.getItem(name);
+        ItemData itemData = ItemListData.getItem(name);
         if (itemData == null)
             return false;
-        return inventoryItems.contains(itemData, false);
+        return inventoryItems.contains(itemData);
     }
 
     public int countItem(String name) {
@@ -1186,7 +1205,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return addItem(name, true);
     }
     public boolean addItem(String name, boolean updateEvent) {
-        ItemData item = ItemData.getItem(name);
+        ItemData item = ItemListData.getItem(name);
         if (item == null)
             return false;
         inventoryItems.add(item);

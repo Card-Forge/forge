@@ -18,6 +18,7 @@ import forge.adventure.util.*;
 import forge.deck.Deck;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -75,14 +76,14 @@ public class InventoryScene extends UIScene {
                                     otherButton.setChecked(false);
                                 }
                             }
-                            String item = Current.player().itemInSlot(slotName);
-                            if (item != null && !item.isEmpty()) {
+                            Long id = Current.player().itemInSlot(slotName);
+                            if (id != null) {
                                 Button changeButton = null;
                                 for (Button invButton : inventoryButtons) {
                                     if(itemLocation.get(invButton) == null)
                                         continue;
                                     ItemData data = itemLocation.get(invButton).getRight();
-                                    if (data != null && item.equals(data.equipmentSlot)) {
+                                    if (data != null && id.equals(data.longID)) {
                                         changeButton = invButton;
                                         break;
                                     }
@@ -298,8 +299,8 @@ public class InventoryScene extends UIScene {
                 equipButton.setDisabled(false);
                 if (equipButton instanceof TextraButton) {
                     TextraButton button = (TextraButton) equipButton;
-                    String item = Current.player().itemInSlot(data.equipmentSlot);
-                    if (item != null && item.equals(data.name) && data.isEquipped) {
+                    Long id = Current.player().itemInSlot(data.equipmentSlot);
+                    if (id != null && id.equals(data.longID) && data.isEquipped) {
                         button.setText("Unequip");
                     } else {
                         button.setText("Equip");
@@ -342,8 +343,8 @@ public class InventoryScene extends UIScene {
         repairButton.setVisible(false);
 
         int itemSlotsUsed = 0;
-        Array<ItemData> items = new Array<>();
-        for (int i = 0; i < Current.player().getItems().size; i++) {
+        ArrayList<ItemData> items = new ArrayList<>();
+        for (int i = 0; i < Current.player().getItems().size(); i++) {
             ItemData item = Current.player().getItems().get(i);
             if (item == null) {
                 continue;
@@ -373,7 +374,7 @@ public class InventoryScene extends UIScene {
         });
 
 
-        for (int i = 0; i < items.size; i++) {
+        for (int i = 0; i < items.size(); i++) {
             if (i % columns == 0)
                 inventory.row();
             Button newActor = createInventorySlot();
@@ -393,7 +394,7 @@ public class InventoryScene extends UIScene {
             img.setY((newActor.getHeight() - img.getHeight()) / 2);
             newActor.addActor(img);
             itemLocation.put(newActor, Pair.of(item.name, item));
-            if (item.isEquipped && Current.player().getEquippedItems().contains(item.name)) {
+            if (item.isEquipped && item.longID != null && Current.player().getEquippedItems().contains(item.longID)) {
                 Image overlay = new Image(equipOverlay);
                 overlay.setX((newActor.getWidth() - img.getWidth()) / 2);
                 overlay.setY((newActor.getHeight() - img.getHeight()) / 2);
@@ -448,10 +449,10 @@ public class InventoryScene extends UIScene {
         for (Map.Entry<String, Button> slot : equipmentSlots.entrySet()) {
             if (slot.getValue().getChildren().size >= 2)
                 slot.getValue().removeActorAt(1, false);
-            String equippedItem = Current.player().itemInSlot(slot.getKey());
-            if (equippedItem == null || equippedItem.isEmpty())
+            Long id = Current.player().itemInSlot(slot.getKey());
+            if (id == null)
                 continue;
-            ItemData item = Current.player().getEquippedItem(equippedItem);
+            ItemData item = Current.player().getEquippedItem(id);
             if (item != null) {
                 Image img = new Image(item.sprite());
                 img.setX((slot.getValue().getWidth() - img.getWidth()) / 2);
