@@ -367,7 +367,7 @@ public class FDeckChooser extends FScreen {
             editor = new FDeckEditor(getEditorConfig(), generatedDeck);
         } else {
             editor = new FDeckEditor(getEditorConfig(), "");
-            editor.setSelectedSection(DeckSection.Sideboard);
+            //editor.setSelectedSection(DeckSection.Sideboard);
         }
         editor.setSaveHandler(event -> {
             //ensure user returns to proper deck type and that list is refreshed if new deck is saved

@@ -77,7 +77,7 @@ public abstract class GameStage extends Stage {
     public static float maximumScrollDistance=1.5f;
     public static float minimumScrollDistance=0.3f;
 
-
+    private String extraAnnouncement = "";
 
     protected final Dialog dialog;
     protected Stage dialogStage;
@@ -601,6 +601,9 @@ public abstract class GameStage extends Stage {
 
     public void enter() {
         stop();
+        if (!extraAnnouncement.isEmpty()) {
+            showImageDialog(extraAnnouncement, null, this::clearExtraAnnouncement);
+        }
     }
 
     public void leave() {
@@ -674,14 +677,14 @@ public abstract class GameStage extends Stage {
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
-                    showImageDialog(Current.generateDefeatMessage(), getDefeatBadge(),
-                            () -> FThreads.invokeInEdtNowOrLater(() -> Forge.setTransitionScreen(new CoverScreen(() -> {
-                                Forge.advFreezePlayerControls = false;
-                                WorldStage.getInstance().setPosition(new Vector2(poi.getPosition().x - 16f, poi.getPosition().y + 16f));
-                                WorldStage.getInstance().loadPOI(poi);
-                                WorldSave.getCurrentSave().autoSave();
-                                Forge.clearTransitionScreen();
-                            }, Forge.takeScreenshot()))));
+                showImageDialog(Current.generateDefeatMessage(), getDefeatBadge(),
+                    () -> FThreads.invokeInEdtNowOrLater(() -> Forge.setTransitionScreen(new CoverScreen(() -> {
+                        Forge.advFreezePlayerControls = false;
+                        WorldStage.getInstance().setPosition(new Vector2(poi.getPosition().x - 16f, poi.getPosition().y + 16f));
+                        WorldStage.getInstance().loadPOI(poi);
+                        WorldSave.getCurrentSave().autoSave();
+                        Forge.clearTransitionScreen();
+                    }, Forge.takeScreenshot()))));
                 }
             }, 1f);
         }//Spawn shouldn't be null
@@ -701,4 +704,11 @@ public abstract class GameStage extends Stage {
         return null;
     }
 
+    public void setExtraAnnouncement(String message) {
+        extraAnnouncement = message;
+    }
+
+    public void clearExtraAnnouncement() {
+        extraAnnouncement = "";
+    }
 }

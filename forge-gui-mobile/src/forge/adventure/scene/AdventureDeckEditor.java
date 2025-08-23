@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
 import forge.adventure.data.AdventureEventData;
+import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.Config;
@@ -77,7 +78,10 @@ public class AdventureDeckEditor extends FDeckEditor {
             }
 
             String sketchbookPrefix = "landscape sketchbook - ";
-            for (String itemName : AdventurePlayer.current().getItems()) {
+            for (ItemData itemData : AdventurePlayer.current().getItems()) {
+                if (itemData == null)
+                    continue;
+                String itemName = itemData.name;
                 if (!itemName.toLowerCase().startsWith(sketchbookPrefix)) {
                     continue;
                 }

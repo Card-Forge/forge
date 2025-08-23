@@ -938,7 +938,9 @@ public class CardView extends GameEntityView {
             sb.append("\r\n\r\nMerged Cards: ").append(mergedCards);
         }
 
-        return sb.toString().trim();
+        return sb.toString().trim()
+            .replace("\\r", "\r")
+            .replace("\\n", "\n");
     }
 
     public CardStateView getCurrentState() {

@@ -250,7 +250,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         this.artIndex = Math.max(artIndex, IPaperCard.DEFAULT_ART_INDEX);
         this.foil = foil;
         this.rarity = rarity;
-        this.artist = TextUtil.normalizeText(artist);
+        this.artist = artist;
         this.collectorNumber = (collectorNumber != null && !collectorNumber.isEmpty()) ? collectorNumber : IPaperCard.NO_COLLECTOR_NUMBER;
         // If the user changes the language this will make cards sort by the old language until they restart the game.
         // This is a good tradeoff

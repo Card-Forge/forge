@@ -86,7 +86,7 @@ public class DialogData implements Serializable {
 
         public ActionData(ActionData other){
             removeItem = other.removeItem;
-            addItem = other.removeItem;
+            addItem = other.addItem;
             addLife = other.addLife;
             addGold = other.addGold;
             addShards = other.addShards;
