@@ -71,7 +71,6 @@ import org.jupnp.DefaultUpnpServiceConfiguration;
 import org.jupnp.android.AndroidUpnpServiceConfiguration;
 
 import java.io.*;
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Date;
 
