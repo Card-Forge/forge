@@ -252,7 +252,9 @@ public class VStack extends FDropDown {
             stackInstance = stackInstance0;
             CardView card = stackInstance.getSourceCard();
 
-            text = stackInstance.getText();
+            text = stackInstance.getText()
+                .replace("\\r", "\r")
+                .replace("\\n", "\n");
             if (stackInstance.isOptionalTrigger() &&
                     stackInstance0.getActivatingPlayer().equals(MatchController.instance.getCurrentPlayer())) {
                 text = "(OPTIONAL) " + text;
