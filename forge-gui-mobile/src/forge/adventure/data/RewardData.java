@@ -259,7 +259,6 @@ public class RewardData implements Serializable {
                     {
                         for(int i=0;i<count+addedCount;i++) {
                             ret.add(new Reward(AdventureEventController.instance().generateBoosterByColor(colors[0])));
-
                         }
                     }
                     break;
@@ -268,9 +267,9 @@ public class RewardData implements Serializable {
                     Array<ItemData> sketchbookItems = ItemListData.getSketchBooks();
                     for(int i=0; i < count + addedCount; i++) {
                         ItemData item = sketchbookItems.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(sketchbookItems.size));
-                        ret.add(new Reward(item));
+                        if (item != null)
+                            ret.add(new Reward(item));
                     }
-
                     break;
                 case "cardPack":
                     if(cardPack!=null)

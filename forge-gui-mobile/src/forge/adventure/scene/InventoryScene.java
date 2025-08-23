@@ -35,13 +35,14 @@ public class InventoryScene extends UIScene {
     Button selected;
     Button deleteButton;
     TextraButton repairButton;
-    Texture equipOverlay;
+    Texture equipOverlay, unusableOverlay;
     Dialog useDialog, deleteDialog;
     int columns = 0;
 
     public InventoryScene() {
         super(Forge.isLandscapeMode() ? "ui/inventory.json" : "ui/inventory_portrait.json");
         equipOverlay = Forge.getAssets().getTexture(Config.instance().getFile(Paths.ITEMS_EQUIP));
+        unusableOverlay = Forge.getAssets().getTexture(Config.instance().getFile(Paths.ITEMS_UNUSABLE));
         ui.onButtonPress("return", this::done);
         leave = ui.findActor("return");
         repairButton = ui.findActor("repair");
@@ -396,6 +397,11 @@ public class InventoryScene extends UIScene {
             itemLocation.put(newActor, Pair.of(item.name, item));
             if (item.isEquipped && item.longID != null && Current.player().getEquippedItems().contains(item.longID)) {
                 Image overlay = new Image(equipOverlay);
+                overlay.setX((newActor.getWidth() - img.getWidth()) / 2);
+                overlay.setY((newActor.getHeight() - img.getHeight()) / 2);
+                newActor.addActor(overlay);
+            } else if (item.isCracked) {
+                Image overlay = new Image(unusableOverlay);
                 overlay.setX((newActor.getWidth() - img.getWidth()) / 2);
                 overlay.setY((newActor.getHeight() - img.getHeight()) / 2);
                 newActor.addActor(overlay);
