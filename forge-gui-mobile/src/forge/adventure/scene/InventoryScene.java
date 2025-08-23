@@ -148,6 +148,7 @@ public class InventoryScene extends UIScene {
             Forge.getLocalizer().getMessage("lblNo"), () -> {
                 if (data.isCracked) {
                     data.isCracked = false;
+                    updateInventory();
                     setSelected(selected);
                     Current.player().takeGold(cost);
                 }
