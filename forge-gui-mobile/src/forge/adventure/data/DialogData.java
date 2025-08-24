@@ -11,7 +11,7 @@ import java.util.List;
  * Carries all text, branches and effects of dialogs.
  */
 public class DialogData implements Serializable {
-    //private static final long SerialVersionUID = 1; // TODO: set to current value
+    private static final long serialVersionUID = 1L;
 
     public ActionData[] action = new ActionData[0];       //List of effects to cause when the dialog shows.
     public ConditionData[] condition = new ConditionData[0]; //List of conditions for the action to show.
@@ -116,8 +116,9 @@ public class DialogData implements Serializable {
     }
 
     static public class ConditionData implements Serializable {
-        private static final long SerialVersionUID = 1L;
-        static public class QueryQuestFlag{
+        private static final long serialVersionUID = 1L;
+        static public class QueryQuestFlag implements Serializable {
+            private static final long serialVersionUID = 1L;
             public String key;
             public String op;
             public int val;

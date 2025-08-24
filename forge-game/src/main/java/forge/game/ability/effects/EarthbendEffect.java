@@ -40,6 +40,7 @@ public class EarthbendEffect extends SpellAbilityEffect {
         TargetRestrictions abTgt = new TargetRestrictions("Select target land you control", "Land.YouCtrl".split(","), "1", "1");
         sa.setTargetRestrictions(abTgt);
     }
+
     @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
