@@ -497,10 +497,11 @@ public class ConsoleCommandInterpreter {
             MapStage.getInstance().deleteObject(id);
             return "Removed enemy " + s[0];
         });
-        // this is for test purpposes
+        // this is for test purposes unless you want to crack your items
         registerCommand(new String[]{"crack"}, s -> {
             ItemData itemData = Current.player().getRandomEquippedItem();
-            String message = "Ok, no equipped items to crack... :)";
+            String value = Current.player().isHardorInsaneDifficulty() ? "items" : "armor";
+            String message = "Ok, no equipped " + value + " to crack... :)";
             if (itemData != null) {
                 itemData.isCracked = true;
                 Current.player().equip(itemData); //unequip...
