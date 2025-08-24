@@ -89,7 +89,7 @@ public class ConsoleCommandInterpreter {
             return "Command not found. Available commands:\n" + String.join(" ", Arrays.copyOfRange(words, 0, i)) + "\n" + String.join("\n", currentCommand.children.keySet());
         }
         String[] parameters = Arrays.copyOfRange(words, i, words.length);
-        // this removes apostrophy...
+        // this removes apostrophe...
         /*for (int j = 0; j < parameters.length; j++)
             parameters[j] = parameters[j].replaceAll("[\"']", "");*/
         return currentCommand.function.apply(parameters);
@@ -132,7 +132,7 @@ public class ConsoleCommandInterpreter {
                 WorldStage.getInstance().player.playEffect(Paths.EFFECT_TELEPORT, 10);
                 return "teleport to (" + s[0] + "," + s[1] + ")";
             } catch (Exception e) {
-                return "Exception occured, Invalid input";
+                return "Exception occurred, Invalid input";
             }
         });
         registerCommand(new String[]{"teleport", "to", "poi"}, s -> {
@@ -504,7 +504,7 @@ public class ConsoleCommandInterpreter {
             String message = "Ok, no equipped " + value + " to crack... :)";
             if (itemData != null) {
                 itemData.isCracked = true;
-                Current.player().equip(itemData); //unequip...
+                Current.player().equip(itemData); //Unequipped the itemData
                 InventoryScene.instance().clearItemDescription();
                 message = itemData.name + " " + Forge.getLocalizer().getMessage("lblCracked");
             }
