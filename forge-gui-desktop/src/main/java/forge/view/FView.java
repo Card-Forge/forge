@@ -103,6 +103,12 @@ public enum FView {
 		frmDocument.setMinimumSize(new Dimension(800, 600));
 		frmDocument.setLocationRelativeTo(null);
 		frmDocument.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		frmDocument.addWindowListener(new java.awt.event.WindowAdapter() {
+			@Override
+			public void windowClosing(java.awt.event.WindowEvent e) {
+				System.exit(0);
+			}
+		});
 		frmDocument.setIconImage(FSkin.getIcon(FSkinProp.ICO_FAVICON));
 
 		// Frame components
