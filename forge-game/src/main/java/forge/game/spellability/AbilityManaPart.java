@@ -17,7 +17,6 @@
  */
 package forge.game.spellability;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import forge.card.ColorSet;
@@ -659,13 +658,7 @@ public class AbilityManaPart implements java.io.Serializable {
         }
         // replace Chosen for Spire colors
         if (origProduced.contains("ColorID")) {
-            Iterator<String> colors = Iterators.transform(sa.getHostCard().getMarkedColors().iterator(),
-                    new Function<>() {
-                        @Override
-                        public String apply(Byte b) {
-                            return MagicColor.toLongString(b);
-                        }
-                    });
+            Iterator<String> colors = Iterators.transform(sa.getHostCard().getMarkedColors().iterator(), MagicColor::toLongString);
             origProduced = origProduced.replace("ColorID", getChosenColor(sa, () -> colors));
         }
         if (origProduced.contains("NotedColors")) {
