@@ -2,7 +2,6 @@
 Code=NPH
 Date=2011-05-13
 Name=New Phyrexia
-Code2=NPH
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
@@ -191,6 +190,6 @@ TokenFallbackCode=MBS
 
 [tokens]
 1 g_3_3_beast @Dave Allsop
-2 r_1_1_phyrexian_goblin_haste @Jaime Jones
-3 c_3_3_a_phyrexian_golem @Volkan Baǵa
-4 c_1_1_a_phyrexian_myr @Matt Stewart
+2 r_1_1_goblin @Jaime Jones
+3 c_3_3_a_golem @Volkan Baǵa
+4 c_1_1_myr @Matt Stewart

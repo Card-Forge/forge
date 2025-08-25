@@ -363,12 +363,3 @@ ScryfallCode=ONS
 348 L Forest @John Matson
 349 L Forest @John Avon
 350 L Forest @David Martin
-
-[tokens]
-w_1_1_soldier
-b_2_2_zombie
-r_5_5_dragon_flying
-g_2_2_bear
-g_3_3_centaur
-g_7_7_elemental_trample
-g_1_1_insect

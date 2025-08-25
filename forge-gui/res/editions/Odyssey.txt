@@ -363,12 +363,3 @@ ScryfallCode=ODY
 348 L Forest @Rob Alexander
 349 L Forest @Jerry Tiritilli
 350 L Forest @Tony Szczudlo
-
-[tokens]
-w_1_1_spirit_flying
-b_2_2_zombie
-g_2_2_bear
-g_4_4_beast
-g_3_3_elephant
-g_1_1_squirrel
-g_6_6_wurm
