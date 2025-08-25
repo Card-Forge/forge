@@ -39,4 +39,11 @@ public class GameEventPlayerDamaged extends GameEvent {
         return visitor.visit(this);
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "" + target + " took " + amount + (infect ? " infect" : combat ? " combat" : "") + " damage from " + source;
+    }
 }
