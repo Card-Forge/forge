@@ -9,6 +9,7 @@ import forge.adventure.character.PlayerSprite;
 import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.scene.InnScene;
+import forge.adventure.scene.InventoryScene;
 import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.Current;
 import forge.adventure.util.Paths;
