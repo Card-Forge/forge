@@ -561,25 +561,22 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 if (editorConfig.getGameType() != null && editorConfig.hasInfiniteCardPool()) {
                     addItem(new FMenuItem(localizer.getMessage("lblImportFromClipboard"), Forge.hdbuttons ? FSkinImage.HDIMPORT : FSkinImage.OPEN, e -> {
                         FDeckImportDialog dialog = new FDeckImportDialog(!deck.isEmpty(), FDeckEditor.this.editorConfig);
-                        dialog.setCallback(new Callback<>() {
-                            @Override
-                            public void run(Deck importedDeck) {
-                                if (deck != null && importedDeck.hasName()) {
-                                    deck.setName(importedDeck.getName());
-                                    setHeaderText(importedDeck.getName());
+                        dialog.setCallback(importedDeck -> {
+                            if (deck != null && importedDeck.hasName()) {
+                                deck.setName(importedDeck.getName());
+                                setHeaderText(importedDeck.getName());
+                            }
+                            if (dialog.createNewDeck()) {
+                                for (Entry<DeckSection, CardPool> section : importedDeck) {
+                                    DeckSectionPage page = getPageForSection(section.getKey());
+                                    if (page != null)
+                                        page.setCards(section.getValue());
                                 }
-                                if (dialog.createNewDeck()) {
-                                    for (Entry<DeckSection, CardPool> section : importedDeck) {
-                                        DeckSectionPage page = getPageForSection(section.getKey());
-                                        if (page != null)
-                                            page.setCards(section.getValue());
-                                    }
-                                } else {
-                                    for (Entry<DeckSection, CardPool> section : importedDeck) {
-                                        DeckSectionPage page = getPageForSection(section.getKey());
-                                        if (page != null)
-                                            page.addCards(section.getValue());
-                                    }
+                            } else {
+                                for (Entry<DeckSection, CardPool> section : importedDeck) {
+                                    DeckSectionPage page = getPageForSection(section.getKey());
+                                    if (page != null)
+                                        page.addCards(section.getValue());
                                 }
                             }
                         });
@@ -1828,16 +1825,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                 sortedOptions.add(option);
                             }
                         }
-                        GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblSelectPreferredArt") + " " + card.getName(), sortedOptions, new Callback<>() {
-                            @Override
-                            public void run(PaperCard result) {
-                                if (result != null) {
-                                    if (result != card) {
-                                        cardManager.replaceAll(card, result);
-                                    }
-                                    prefs.setPreferredArt(result.getEdition(), result.getArtIndex());
-                                    CardPreferences.save();
+                        GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblSelectPreferredArt") + " " + card.getName(), sortedOptions, result -> {
+                            if (result != null) {
+                                if (result != card) {
+                                    cardManager.replaceAll(card, result);
                                 }
+                                prefs.setPreferredArt(result.getEdition(), result.getArtIndex());
+                                CardPreferences.save();
                             }
                         });
                     }));

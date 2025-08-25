@@ -112,7 +112,7 @@ public class FDeckChooser extends FScreen {
         deckChooser.optionPane = new FOptionPane(null, null, title, null, container, ImmutableList.of(Forge.getLocalizer().getInstance().getMessage("lblOK"), Forge.getLocalizer().getInstance().getMessage("lblCancel")), 0, result -> {
             if (result == 0) {
                 if (callback != null) {
-                    callback.run(deckChooser.getDeck());
+                    callback.accept(deckChooser.getDeck());
                 }
             }
         }) {

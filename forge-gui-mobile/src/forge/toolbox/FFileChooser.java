@@ -77,8 +77,8 @@ public class FFileChooser extends FDialog {
                         refreshFileList();
                         return;
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (Exception e1) {
+                    e1.printStackTrace();
                 }
                 FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblEnterFolderNameNotValid", result), Forge.getLocalizer().getMessage("lblInvalidName"));
             });
@@ -229,8 +229,8 @@ public class FFileChooser extends FDialog {
                     return;
                 }
             }
-            catch (Exception e) {
-                e.printStackTrace();
+            catch (Exception e2) {
+                e2.printStackTrace();
             }
             FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblEnterNameNotValid", result), Forge.getLocalizer().getMessage("lblInvalidName"));
         });
@@ -259,8 +259,8 @@ public class FFileChooser extends FDialog {
                             return;
                         }
                     }
-                    catch (Exception ex) {
-                        ex.printStackTrace();
+                    catch (Exception e3) {
+                        e3.printStackTrace();
                     }
                     FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblCouldBotDeleteFile"));
                 }
