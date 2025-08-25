@@ -278,15 +278,3 @@ ScryfallCode=TPR
 267 L Forest @Douglas Shuler
 268 L Forest @Douglas Shuler
 269 L Forest @Douglas Shuler
-
-[tokens]
-c_1_1_sliver
-w_1_1_pegasus_flying
-w_2_2_reflection
-w_1_1_spirit_flying
-b_1_1_rat
-b_2_2_zombie
-r_1_1_goblin
-g_1_1_saproling
-g_1_1_spike
-c_1_1_a_thopter_flying
