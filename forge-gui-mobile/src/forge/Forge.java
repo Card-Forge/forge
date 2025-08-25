@@ -639,13 +639,10 @@ public class Forge implements ApplicationListener {
             return;
         } //don't allow exiting multiple times
 
-        Callback<Boolean> callback = new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
-                if (result) {
-                    exited = true;
-                    exitAnimation(true);
-                }
+        Callback<Boolean> callback = result -> {
+            if (result) {
+                exited = true;
+                exitAnimation(true);
             }
         };
 
@@ -668,13 +665,10 @@ public class Forge implements ApplicationListener {
         options.add(getLocalizer().getMessage("lblExit"));
         options.add(getLocalizer().getMessage("lblCancel"));
 
-        Callback<Integer> callback = new Callback<Integer>() {
-            @Override
-            public void run(Integer result) {
-                if (result == 0) {
-                    exited = true;
-                    exitAnimation(false);
-                }
+        Callback<Integer> callback = result -> {
+            if (result == 0) {
+                exited = true;
+                exitAnimation(false);
             }
         };
 
@@ -701,30 +695,27 @@ public class Forge implements ApplicationListener {
             return;
         }
 
-        currentScreen.onSwitchAway(new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
-                if (result) {
-                    if (replaceBackScreen && !Dscreens.isEmpty()) {
-                        Dscreens.removeFirst();
-                    }
-                    if (Dscreens.peekFirst() != screen0) { //prevent screen being its own back screen
-                        Dscreens.addFirst(screen0);
-                    }
-                    setCurrentScreen(screen0);
-                    if (screen0 instanceof MatchScreen) {
-                        //set cursor for classic mode
-                        if (!isMobileAdventureMode) {
-                            if (magnifyToggle) {
-                                setCursor(FSkin.getCursor().get(1), "1");
-                            } else {
-                                setCursor(FSkin.getCursor().get(2), "2");
-                            }
+        currentScreen.onSwitchAway(result -> {
+            if (result) {
+                if (replaceBackScreen && !Dscreens.isEmpty()) {
+                    Dscreens.removeFirst();
+                }
+                if (Dscreens.peekFirst() != screen0) { //prevent screen being its own back screen
+                    Dscreens.addFirst(screen0);
+                }
+                setCurrentScreen(screen0);
+                if (screen0 instanceof MatchScreen) {
+                    //set cursor for classic mode
+                    if (!isMobileAdventureMode) {
+                        if (magnifyToggle) {
+                            setCursor(FSkin.getCursor().get(1), "1");
+                        } else {
+                            setCursor(FSkin.getCursor().get(2), "2");
                         }
                     }
-                    deltaTime = 0f;
-                    hueFragTime = 0f;
                 }
+                deltaTime = 0f;
+                hueFragTime = 0f;
             }
         });
     }

@@ -150,14 +150,11 @@ public class FSideboardDialog extends FDialog {
 
             @Override
             protected void buildMenu(FDropDownMenu menu, final PaperCard card) {
-                addItem(menu, Forge.getLocalizer().getMessage("lblMove"), Forge.getLocalizer().getMessage("lblToMainDeck"), FDeckEditor.MAIN_DECK_ICON, new Callback<Integer>() {
-                    @Override
-                    public void run(Integer result) {
-                        if (result == null || result <= 0) { return; }
+                addItem(menu, Forge.getLocalizer().getMessage("lblMove"), Forge.getLocalizer().getMessage("lblToMainDeck"), FDeckEditor.MAIN_DECK_ICON, result -> {
+                    if (result == null || result <= 0) { return; }
 
-                        removeCard(card, result);
-                        parent.getMainDeckPage().addCard(card, result);
-                    }
+                    removeCard(card, result);
+                    parent.getMainDeckPage().addCard(card, result);
                 });
             }
         }
@@ -181,14 +178,11 @@ public class FSideboardDialog extends FDialog {
 
             @Override
             protected void buildMenu(FDropDownMenu menu, final PaperCard card) {
-                addItem(menu, Forge.getLocalizer().getMessage("lblMove"), Forge.getLocalizer().getMessage("lbltosideboard"), FDeckEditor.SIDEBOARD_ICON, new Callback<Integer>() {
-                    @Override
-                    public void run(Integer result) {
-                        if (result == null || result <= 0) { return; }
+                addItem(menu, Forge.getLocalizer().getMessage("lblMove"), Forge.getLocalizer().getMessage("lbltosideboard"), FDeckEditor.SIDEBOARD_ICON, result -> {
+                    if (result == null || result <= 0) { return; }
 
-                        removeCard(card, result);
-                        parent.getSideboardPage().addCard(card, result);
-                    }
+                    removeCard(card, result);
+                    parent.getSideboardPage().addCard(card, result);
                 });
             }
         }

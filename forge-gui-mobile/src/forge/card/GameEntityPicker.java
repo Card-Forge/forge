@@ -34,15 +34,12 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
         setHeight(FOptionPane.getMaxDisplayObjHeight());
 
         optionPane = new FOptionPane(null, null, title, null, this,
-                isOptional ? ImmutableList.of(Forge.getLocalizer().getMessage("lblOK"), Forge.getLocalizer().getMessage("lblCancel")) : ImmutableList.of(Forge.getLocalizer().getMessage("lblOK")), 0, new Callback<Integer>() {
-                    @Override
-                    public void run(Integer result) {
-                        if (result == 0) {
-                            callback.run(((PickerTab) tabPages.get(0)).list.getSelectedItem());
-                        }
-                        else {
-                            callback.run(null);
-                        }
+                isOptional ? ImmutableList.of(Forge.getLocalizer().getMessage("lblOK"), Forge.getLocalizer().getMessage("lblCancel")) : ImmutableList.of(Forge.getLocalizer().getMessage("lblOK")), 0, result -> {
+                    if (result == 0) {
+                        callback.run(((PickerTab) tabPages.get(0)).list.getSelectedItem());
+                    }
+                    else {
+                        callback.run(null);
                     }
                 }) {
             @Override

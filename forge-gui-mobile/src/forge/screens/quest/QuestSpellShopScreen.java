@@ -205,19 +205,16 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
             final int max = itemManager.getItemCount(item);
             if (max == 0) { return; }
 
-            final Callback<Integer> callback = new Callback<Integer>() {
-                @Override
-                public void run(final Integer result) {
-                    if (result == null || result <= 0) { return; }
+            final Callback<Integer> callback = result -> {
+                if (result == null || result <= 0) { return; }
 
-                    //invoke in background thread so other dialogs can be shown properly
-                    FThreads.invokeInBackgroundThread(() -> {
-                        ItemPool<InventoryItem> items = new ItemPool<>(InventoryItem.class);
-                        items.add(item, result);
-                        activateItems(items);
-                        FThreads.invokeInEdtLater(() -> parentScreen.updateCreditsLabel());
-                    });
-                }
+                //invoke in background thread so other dialogs can be shown properly
+                FThreads.invokeInBackgroundThread(() -> {
+                    ItemPool<InventoryItem> items = new ItemPool<>(InventoryItem.class);
+                    items.add(item, result);
+                    activateItems(items);
+                    FThreads.invokeInEdtLater(() -> parentScreen.updateCreditsLabel());
+                });
             };
             if (max == 1) {
                 callback.run(max);

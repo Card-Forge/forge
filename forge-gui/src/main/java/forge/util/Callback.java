@@ -1,5 +1,6 @@
 package forge.util;
 
-public abstract class Callback<T> {
-    public abstract void run(T result);
+@FunctionalInterface
+public interface Callback<T> {
+    void run(T result);
 }

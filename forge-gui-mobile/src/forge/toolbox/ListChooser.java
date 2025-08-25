@@ -120,19 +120,16 @@ public class ListChooser<T> extends FContainer {
 
         updateHeight();
 
-        optionPane = new FOptionPane(null, null, title, null, this, options, 0, new Callback<Integer>() {
-            @Override
-            public void run(Integer result) {
-                called = false;
-                if (result == 0) {
-                    callback.run(lstChoices.getSelectedItems());
-                }
-                else if (minChoices > 0) {
-                    show(); //show if user tries to cancel when input is mandatory
-                }
-                else {
-                    callback.run(new ArrayList<>());
-                }
+        optionPane = new FOptionPane(null, null, title, null, this, options, 0, result -> {
+            called = false;
+            if (result == 0) {
+                callback.run(lstChoices.getSelectedItems());
+            }
+            else if (minChoices > 0) {
+                show(); //show if user tries to cancel when input is mandatory
+            }
+            else {
+                callback.run(new ArrayList<>());
             }
         }) {
             @Override

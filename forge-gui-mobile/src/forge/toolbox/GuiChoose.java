@@ -35,12 +35,7 @@ public class GuiChoose {
             callback.run(null);
             return;
         }
-        getChoices(message, 0, 1, choices, new Callback<List<T>>() {
-            @Override
-            public void run(final List<T> result) {
-                callback.run(result.isEmpty() ? null : result.get(0));
-            }
-        });
+        getChoices(message, 0, 1, choices, result -> callback.run(result.isEmpty() ? null : result.get(0)));
     }
 
     public static <T> void oneOrNone(final String message, final Collection<T> choices, final Callback<T> callback) {
@@ -48,12 +43,7 @@ public class GuiChoose {
             callback.run(null);
             return;
         }
-        getChoices(message, 0, 1, choices, new Callback<List<T>>() {
-            @Override
-            public void run(final List<T> result) {
-                callback.run(result.isEmpty() ? null : result.get(0));
-            }
-        });
+        getChoices(message, 0, 1, choices, result -> callback.run(result.isEmpty() ? null : result.get(0)));
     } // getChoiceOptional(String,T...)
 
     // returned Object will never be null
@@ -80,12 +70,9 @@ public class GuiChoose {
             return;
         }
 
-        getChoices(message, 1, 1, choices, new Callback<List<T>>() {
-            @Override
-            public void run(final List<T> result) {
-                assert result.size() == 1;
-                callback.run(result.get(0));
-            }
+        getChoices(message, 1, 1, choices, result -> {
+            assert result.size() == 1;
+            callback.run(result.get(0));
         });
     }
 
@@ -99,12 +86,9 @@ public class GuiChoose {
             return;
         }
 
-        getChoices(message, 1, 1, choices, new Callback<List<T>>() {
-            @Override
-            public void run(final List<T> result) {
-                assert result.size() == 1;
-                callback.run(result.get(0));
-            }
+        getChoices(message, 1, 1, choices, result -> {
+            assert result.size() == 1;
+            callback.run(result.get(0));
         });
     }
 
@@ -172,52 +156,46 @@ public class GuiChoose {
         }
         choices.add(Forge.getLocalizer().getMessage("lblOther") + "...");
 
-        oneOrNone(message, choices, new Callback<Object>() {
-            @Override
-            public void run(Object choice) {
-                if (choice instanceof Integer || choice == null) {
-                    callback.run((Integer)choice);
-                    return;
-                }
-
-                //if Other option picked, prompt for number input
-                String prompt = "Enter a number";
-                if (min != Integer.MIN_VALUE) {
-                    if (max != Integer.MAX_VALUE) {
-                        prompt += " between " + min + " and " + max;
-                    }
-                    else {
-                        prompt += " greater than or equal to " + min;
-                    }
-                }
-                else if (max != Integer.MAX_VALUE) {
-                    prompt += " less than or equal to " + max;
-                }
-                prompt += ":";
-                getNumberInput(prompt, message, min, max, callback);
+        oneOrNone(message, choices, choice -> {
+            if (choice instanceof Integer || choice == null) {
+                callback.run((Integer)choice);
+                return;
             }
+
+            //if Other option picked, prompt for number input
+            String prompt = "Enter a number";
+            if (min != Integer.MIN_VALUE) {
+                if (max != Integer.MAX_VALUE) {
+                    prompt += " between " + min + " and " + max;
+                }
+                else {
+                    prompt += " greater than or equal to " + min;
+                }
+            }
+            else if (max != Integer.MAX_VALUE) {
+                prompt += " less than or equal to " + max;
+            }
+            prompt += ":";
+            getNumberInput(prompt, message, min, max, callback);
         });
     }
     
     private static void getNumberInput(final String prompt, final String message, final int min, final int max, final Callback<Integer> callback) {
-        FOptionPane.showInputDialog(prompt, message, new Callback<String>() {
-            @Override
-            public void run(String result) {
-                if (result == null) { //that is 'cancel'
-                    callback.run(null);
+        FOptionPane.showInputDialog(prompt, message, result -> {
+            if (result == null) { //that is 'cancel'
+                callback.run(null);
+                return;
+            }
+            if (StringUtils.isNumeric(result)) {
+                int val = Integer.parseInt(result);
+                if (val >= min && val <= max) {
+                    callback.run(val);
                     return;
                 }
-                if (StringUtils.isNumeric(result)) {
-                    int val = Integer.parseInt(result);
-                    if (val >= min && val <= max) {
-                        callback.run(val);
-                        return;
-                    }
-                }
-
-                //re-prompt if invalid input
-                getNumberInput(prompt, message, min, max, callback);
             }
+
+            //re-prompt if invalid input
+            getNumberInput(prompt, message, min, max, callback);
         });
     }
 
@@ -271,12 +249,7 @@ public class GuiChoose {
             callback.run(null);
             return;
         }
-        sortedGetChoices(message, 0, 1, choices, comparer, new Callback<List<T>>() {
-            @Override
-            public void run(List<T> result) {
-                callback.run(result.isEmpty() ? null : result.get(0));
-            }
-        });
+        sortedGetChoices(message, 0, 1, choices, comparer, result -> callback.run(result.isEmpty() ? null : result.get(0)));
     }
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
@@ -285,12 +258,7 @@ public class GuiChoose {
             callback.run(null);
             return;
         }
-        sortedGetChoices(message, 0, 1, choices, comparer, new Callback<List<T>>() {
-            @Override
-            public void run(List<T> result) {
-                callback.run(result.isEmpty() ? null : result.get(0));
-            }
-        });
+        sortedGetChoices(message, 0, 1, choices, comparer, result -> callback.run(result.isEmpty() ? null : result.get(0)));
     }
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
@@ -299,12 +267,9 @@ public class GuiChoose {
             callback.run(null);
             return;
         }
-        sortedGetChoices(message, 1, 1, choices, comparer, new Callback<List<T>>() {
-            @Override
-            public void run(List<T> result) {
-                assert result.size() == 1;
-                callback.run(result.get(0));
-            }
+        sortedGetChoices(message, 1, 1, choices, comparer, result -> {
+            assert result.size() == 1;
+            callback.run(result.get(0));
         });
     }
 
@@ -314,12 +279,9 @@ public class GuiChoose {
             callback.run(null);
             return;
         }
-        sortedGetChoices(message, 1, 1, choices, comparer, new Callback<List<T>>() {
-            @Override
-            public void run(List<T> result) {
-                assert result.size() == 1;
-                callback.run(result.get(0));
-            }
+        sortedGetChoices(message, 1, 1, choices, comparer, result -> {
+            assert result.size() == 1;
+            callback.run(result.get(0));
         });
     }
 

@@ -69,40 +69,34 @@ public class DraftingProcessScreen extends FDeckEditor {
         }
 
         FThreads.invokeInEdtNowOrLater(() -> {
-            FOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblSaveDraftAs") + "?", new Callback<>() {
-                @Override
-                public void run(final String name) {
-                    if (StringUtils.isEmpty(name)) {
-                        save(callback); //re-prompt if user doesn't pick a name
+            FOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblSaveDraftAs") + "?", name -> {
+                if (StringUtils.isEmpty(name)) {
+                    save(callback); //re-prompt if user doesn't pick a name
+                    return;
+                }
+
+                // Check for overwrite case
+                for (DeckGroup d : FModel.getDecks().getDraft()) {
+                    if (name.equalsIgnoreCase(d.getName())) {
+                        FOptionPane.showConfirmDialog(
+                                Forge.getLocalizer().getMessage("lblAlreadyDeckName") + name + Forge.getLocalizer().getMessage("lblOverwriteConfirm"),
+                                Forge.getLocalizer().getMessage("lblOverwriteDeck"), false, result -> {
+                                    if (result) {
+                                        finishSave(name);
+                                        if (callback != null) {
+                                            callback.run(true);
+                                        }
+                                    } else {
+                                        save(callback); //If no overwrite, recurse
+                                    }
+                                });
                         return;
                     }
+                }
 
-                    // Check for overwrite case
-                    for (DeckGroup d : FModel.getDecks().getDraft()) {
-                        if (name.equalsIgnoreCase(d.getName())) {
-                            FOptionPane.showConfirmDialog(
-                                    Forge.getLocalizer().getMessage("lblAlreadyDeckName") + name + Forge.getLocalizer().getMessage("lblOverwriteConfirm"),
-                                    Forge.getLocalizer().getMessage("lblOverwriteDeck"), false, new Callback<>() {
-                                        @Override
-                                        public void run(Boolean result) {
-                                            if (result) {
-                                                finishSave(name);
-                                                if (callback != null) {
-                                                    callback.run(true);
-                                                }
-                                            } else {
-                                                save(callback); //If no overwrite, recurse
-                                            }
-                                        }
-                                    });
-                            return;
-                        }
-                    }
-
-                    finishSave(name);
-                    if (callback != null) {
-                        callback.run(true);
-                    }
+                finishSave(name);
+                if (callback != null) {
+                    callback.run(true);
                 }
             });
         });

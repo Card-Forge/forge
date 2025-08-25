@@ -29,11 +29,7 @@ public class GuiDialog {
         final String title = c == null ? "Question" : c + " - Ability";
         String questionToUse = StringUtils.isBlank(question) ? "Activate card's ability?" : question;
         final List<String> opts = options == null ? defaultConfirmOptions : options;
-        FOptionPane.showCardOptionDialog(c, questionToUse, title, FOptionPane.QUESTION_ICON, opts, defaultIsYes ? 0 : 1, new Callback<Integer>() {
-            @Override public void run(final Integer result) {
-                callback.run(result == 0);
-            }
-        });
+        FOptionPane.showCardOptionDialog(c, questionToUse, title, FOptionPane.QUESTION_ICON, opts, defaultIsYes ? 0 : 1, result -> callback.run(result == 0));
     }
 
     /**

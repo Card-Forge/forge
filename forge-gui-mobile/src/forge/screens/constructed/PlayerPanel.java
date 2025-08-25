@@ -534,18 +534,15 @@ public class PlayerPanel extends FContainer {
     private FEventHandler avatarCommand = new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            AvatarSelector.show(getPlayerName(), avatarIndex, screen.getUsedAvatars(), new Callback<Integer>() {
-                @Override
-                public void run(Integer result) {
-                    setAvatarIndex(result);
+            AvatarSelector.show(getPlayerName(), avatarIndex, screen.getUsedAvatars(), result -> {
+                setAvatarIndex(result);
 
-                    if (index < 2) {
-                        screen.updateAvatar(index, result);
-                        screen.updateAvatarPrefs();
-                    }
-                    if (allowNetworking) {
-                        screen.firePlayerChangeListener(index);
-                    }
+                if (index < 2) {
+                    screen.updateAvatar(index, result);
+                    screen.updateAvatarPrefs();
+                }
+                if (allowNetworking) {
+                    screen.firePlayerChangeListener(index);
                 }
             });
         }
@@ -554,18 +551,15 @@ public class PlayerPanel extends FContainer {
     private FEventHandler sleeveCommand = new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            SleevesSelector.show(getPlayerName(), sleeveIndex, screen.getUsedSleeves(), new Callback<Integer>() {
-                @Override
-                public void run(Integer result) {
-                    setSleeveIndex(result);
+            SleevesSelector.show(getPlayerName(), sleeveIndex, screen.getUsedSleeves(), result -> {
+                setSleeveIndex(result);
 
-                    if (index < 2) {
-                        screen.updateSleeve(index, result);
-                        screen.updateSleevePrefs();
-                    }
-                    if (allowNetworking) {
-                        screen.firePlayerChangeListener(index);
-                    }
+                if (index < 2) {
+                    screen.updateSleeve(index, result);
+                    screen.updateSleevePrefs();
+                }
+                if (allowNetworking) {
+                    screen.firePlayerChangeListener(index);
                 }
             });
         }
@@ -804,21 +798,18 @@ public class PlayerPanel extends FContainer {
     private FLabel createNameRandomizer() {
         final FLabel newNameBtn = new FLabel.Builder().iconInBackground(false)
                 .icon(Forge.hdbuttons ? FSkinImage.HDEDIT : FSkinImage.EDIT).opaque(false).build();
-        newNameBtn.setCommand(e -> getNewName(new Callback<String>() {
-            @Override
-            public void run(String newName) {
-                if (newName == null) { return; }
+        newNameBtn.setCommand(e -> getNewName(newName -> {
+            if (newName == null) { return; }
 
-                txtPlayerName.setText(newName);
+            txtPlayerName.setText(newName);
 
-                if (index == 0) {
-                    prefs.setPref(FPref.PLAYER_NAME, newName);
-                    prefs.save();
-                    screen.getLobby().applyToSlot(index, UpdateLobbyPlayerEvent.nameUpdate(newName));
-                }
-                if (allowNetworking) {
-                    screen.firePlayerChangeListener(index);
-                }
+            if (index == 0) {
+                prefs.setPref(FPref.PLAYER_NAME, newName);
+                prefs.save();
+                screen.getLobby().applyToSlot(index, UpdateLobbyPlayerEvent.nameUpdate(newName));
+            }
+            if (allowNetworking) {
+                screen.firePlayerChangeListener(index);
             }
         }));
         return newNameBtn;
@@ -1070,41 +1061,32 @@ public class PlayerPanel extends FContainer {
         final String message = Forge.getLocalizer().getMessage("lbltypeofName");
         final FSkinImage icon = FOptionPane.QUESTION_ICON;
 
-        FOptionPane.showOptionDialog(message, title, icon, genderOptions, 2, new Callback<Integer>() {
-            @Override
-            public void run(final Integer genderIndex) {
-                if (genderIndex == null || genderIndex < 0) {
+        FOptionPane.showOptionDialog(message, title, icon, genderOptions, 2, genderIndex -> {
+            if (genderIndex == null || genderIndex < 0) {
+                callback.run(null);
+                return;
+            }
+
+            FOptionPane.showOptionDialog(message, title, icon, typeOptions, 2, typeIndex -> {
+                if (typeIndex == null || typeIndex < 0) {
                     callback.run(null);
                     return;
                 }
-                
-                FOptionPane.showOptionDialog(message, title, icon, typeOptions, 2, new Callback<Integer>() {
-                    @Override
-                    public void run(final Integer typeIndex) {
-                        if (typeIndex == null || typeIndex < 0) {
-                            callback.run(null);
-                            return;
-                        }
 
-                        generateRandomName(genderOptions.get(genderIndex), typeOptions.get(typeIndex), screen.getPlayerNames(), title, callback);
-                    }
-                });
-            }
+                generateRandomName(genderOptions.get(genderIndex), typeOptions.get(typeIndex), screen.getPlayerNames(), title, callback);
+            });
         });
     }
 
     private void generateRandomName(final String gender, final String type, final List<String> usedNames, final String title, final Callback<String> callback) {
         final String newName = NameGenerator.getRandomName(gender, type, usedNames);
         String confirmMsg = Forge.getLocalizer().getMessage("lblconfirmName").replace("%s", newName);
-        FOptionPane.showConfirmDialog(confirmMsg, title, Forge.getLocalizer().getMessage("lblUseThisName"), Forge.getLocalizer().getMessage("lblTryAgain"), true, new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
-                if (result) {
-                    callback.run(newName);
-                }
-                else {
-                    generateRandomName(gender, type, usedNames, title, callback);
-                }
+        FOptionPane.showConfirmDialog(confirmMsg, title, Forge.getLocalizer().getMessage("lblUseThisName"), Forge.getLocalizer().getMessage("lblTryAgain"), true, result -> {
+            if (result) {
+                callback.run(newName);
+            }
+            else {
+                generateRandomName(gender, type, usedNames, title, callback);
             }
         });
     }

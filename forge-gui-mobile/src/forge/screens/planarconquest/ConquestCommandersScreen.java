@@ -95,12 +95,7 @@ public class ConquestCommandersScreen extends FScreen {
         String problem = DeckFormat.PlanarConquest.getDeckConformanceProblem(commander.getDeck());
         if (problem != null) {
             //prevent selecting a commander with an invalid deck
-            FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblCantSelectDeckBecause", commander.getName(), problem), Forge.getLocalizer().getMessage("lblInvalidDeck"), FOptionPane.INFORMATION_ICON, new Callback<Integer>() {
-                @Override
-                public void run(Integer result) {
-                    canCloseCallback.run(false);
-                }
-            });
+            FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblCantSelectDeckBecause", commander.getName(), problem), Forge.getLocalizer().getMessage("lblInvalidDeck"), FOptionPane.INFORMATION_ICON, result -> canCloseCallback.run(false));
             return;
         }
 

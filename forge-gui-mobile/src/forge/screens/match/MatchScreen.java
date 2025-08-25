@@ -1188,12 +1188,9 @@ public class MatchScreen extends FScreen {
     }
 
     private void confirmUserConcedes() {
-        final Callback<Boolean> callback = new Callback<>() {
-            @Override
-            public void run(Boolean result) {
-                if (result) {
-                    getGameController().concede();
-                }
+        final Callback<Boolean> callback = result -> {
+            if (result) {
+                getGameController().concede();
             }
         };
 

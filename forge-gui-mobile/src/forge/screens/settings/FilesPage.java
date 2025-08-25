@@ -296,12 +296,9 @@ public class FilesPage extends TabPage<SettingsScreen> {
 
         @Override
         public void select() {
-            new GuiDownloader(createService(), new Callback<Boolean>() {
-                @Override
-                public void run(Boolean finished) {
-                    if (finished) {
-                        finishCallback();
-                    }
+            new GuiDownloader(createService(), finished -> {
+                if (finished) {
+                    finishCallback();
                 }
             }).show();
         }
@@ -322,20 +319,14 @@ public class FilesPage extends TabPage<SettingsScreen> {
         @Override
         public void select() {
             final Map<String, String> categories = getCategories();
-            GuiChoose.one(prompt, categories.keySet(), new Callback<String>() {
-                @Override
-                public void run(String result) {
-                    final String url = categories.get(result);
-                    final String name = url.substring(url.lastIndexOf("/") + 2);
-                    new GuiDownloader(new GuiDownloadZipService(name, name, url, ForgeConstants.FONTS_DIR, null, null), new Callback<Boolean>() {
-                        @Override
-                        public void run(Boolean finished) {
-                            if (finished) {
-                                finishCallback();
-                            }
-                        }
-                    }).show();
-                }
+            GuiChoose.one(prompt, categories.keySet(), result -> {
+                final String url = categories.get(result);
+                final String name = url.substring(url.lastIndexOf("/") + 2);
+                new GuiDownloader(new GuiDownloadZipService(name, name, url, ForgeConstants.FONTS_DIR, null, null), finished -> {
+                    if (finished) {
+                        finishCallback();
+                    }
+                }).show();
             });
         }
         protected abstract Map<String, String> getCategories();
@@ -355,14 +346,11 @@ public class FilesPage extends TabPage<SettingsScreen> {
 
         @Override
         public void select() {
-            FFileChooser.show(Forge.getLocalizer().getMessage("lblSelect").replace("%s", label), ChoiceType.GetDirectory, description, new Callback<String>() {
-                @Override
-                public void run(String result) {
-                    if (StringUtils.isEmpty(result) || description.equals(result)) { return; }
-                    updateDir(result);
-                    onDirectoryChanged(result);
-                    FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblRestartForgeMoveFilesNewLocation"), Forge.getLocalizer().getMessage("lblRestartRequired"), FOptionPane.INFORMATION_ICON);
-                }
+            FFileChooser.show(Forge.getLocalizer().getMessage("lblSelect").replace("%s", label), ChoiceType.GetDirectory, description, result -> {
+                if (StringUtils.isEmpty(result) || description.equals(result)) { return; }
+                updateDir(result);
+                onDirectoryChanged(result);
+                FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblRestartForgeMoveFilesNewLocation"), Forge.getLocalizer().getMessage("lblRestartRequired"), FOptionPane.INFORMATION_ICON);
             });
         }
         protected abstract void onDirectoryChanged(String newDir);

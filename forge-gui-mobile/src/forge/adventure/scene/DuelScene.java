@@ -39,7 +39,6 @@ import forge.sound.MusicPlaylist;
 import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
 import forge.util.Aggregates;
-import forge.util.Callback;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -153,12 +152,9 @@ public class DuelScene extends ForgeScene {
     }
 
     private FOptionPane createFOption(String message, String title, FBufferedImage icon, Runnable runnable) {
-        return new FOptionPane(message, null, title, icon, null, ImmutableList.of(Forge.getLocalizer().getMessage("lblOK")), -1, new Callback<Integer>() {
-            @Override
-            public void run(Integer result) {
-                if (runnable != null)
-                    runnable.run();
-            }
+        return new FOptionPane(message, null, title, icon, null, ImmutableList.of(Forge.getLocalizer().getMessage("lblOK")), -1, result -> {
+            if (runnable != null)
+                runnable.run();
         });
     }
 

@@ -83,12 +83,7 @@ public class FOptionPane extends FDialog {
 
     public static void showConfirmDialog(final String message, final String title, final String yesButtonText, final String noButtonText, final boolean defaultYes, final Callback<Boolean> callback) {
         final List<String> options = ImmutableList.of(yesButtonText, noButtonText);
-        showOptionDialog(message, title, QUESTION_ICON, options, defaultYes ? 0 : 1, new Callback<Integer>() {
-            @Override
-            public void run(final Integer result) {
-                callback.run(result == 0);
-            }
-        });
+        showOptionDialog(message, title, QUESTION_ICON, options, defaultYes ? 0 : 1, result -> callback.run(result == 0));
     }
 
     public static void showOptionDialog(final String message, final String title, final FImage icon, final List<String> options, final Callback<Integer> callback) {
@@ -189,19 +184,15 @@ public class FOptionPane extends FDialog {
         container.add(inputField);
         container.setHeight(inputField.getHeight() + padTop + PADDING);
 
-        final FOptionPane optionPane = new FOptionPane(message, null, title, null, container, ImmutableList.of(Forge.getLocalizer().getMessage("lblOK"), Forge.getLocalizer().getMessage("lblCancel")), 0, new Callback<Integer>() {
-            @SuppressWarnings("unchecked")
-            @Override
-            public void run(final Integer result) {
-                if (result == 0) {
-                    if (txtInput != null) {
-                        callback.run((T)txtInput.getText());
-                    } else {
-                        callback.run(cbInput.getSelectedItem());
-                    }
+        final FOptionPane optionPane = new FOptionPane(message, null, title, null, container, ImmutableList.of(Forge.getLocalizer().getMessage("lblOK"), Forge.getLocalizer().getMessage("lblCancel")), 0, result -> {
+            if (result == 0) {
+                if (txtInput != null) {
+                    callback.run((T)txtInput.getText());
                 } else {
-                    callback.run(null);
+                    callback.run(cbInput.getSelectedItem());
                 }
+            } else {
+                callback.run(null);
             }
         }) {
             @Override
