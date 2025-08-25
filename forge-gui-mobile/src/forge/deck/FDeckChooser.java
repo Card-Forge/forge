@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.function.Consumer;
 
 import forge.game.GameFormat;
 import forge.util.MyRandom;
@@ -108,13 +109,10 @@ public class FDeckChooser extends FScreen {
         container.add(deckChooser.lstDecks);
         container.setHeight(FOptionPane.getMaxDisplayObjHeight());
 
-        deckChooser.optionPane = new FOptionPane(null, null, title, null, container, ImmutableList.of(Forge.getLocalizer().getInstance().getMessage("lblOK"), Forge.getLocalizer().getInstance().getMessage("lblCancel")), 0, new Callback<Integer>() {
-            @Override
-            public void run(Integer result) {
-                if (result == 0) {
-                    if (callback != null) {
-                        callback.run(deckChooser.getDeck());
-                    }
+        deckChooser.optionPane = new FOptionPane(null, null, title, null, container, ImmutableList.of(Forge.getLocalizer().getInstance().getMessage("lblOK"), Forge.getLocalizer().getInstance().getMessage("lblCancel")), 0, result -> {
+            if (result == 0) {
+                if (callback != null) {
+                    callback.run(deckChooser.getDeck());
                 }
             }
         }) {
