@@ -5,7 +5,7 @@ PT:5/5
 K:Flying
 K:Trample
 K:ETBReplacement:Other:DBRemoveCounter
-SVar:DBRemoveCounter:DB$ RemoveCounter | Choices$ Artifact.HasCounters,Creature.HasCounters,Enchantment.HasCounters | ChoiceOptional$ True | CounterType$ All | CounterNum$ All | SubAbility$ DBPutCounters | RememberAmount$ True | SpellDescription$ As NICKNAME enters, remove all counters from any number of artifacts, creatures, and enchantments. NICKNAME enters with X +1/+1 counters on it, where X is twice the number of counters removed this way.
+SVar:DBRemoveCounter:DB$ RemoveCounter | Choices$ Artifact.HasCounters,Creature.HasCounters,Enchantment.HasCounters | ChoiceOptional$ True | CounterType$ All | SubAbility$ DBPutCounters | RememberAmount$ True | SpellDescription$ As NICKNAME enters, remove all counters from any number of artifacts, creatures, and enchantments. NICKNAME enters with X +1/+1 counters on it, where X is twice the number of counters removed this way.
 SVar:DBPutCounters:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When NICKNAME dies, put its counters on target creature you control, then shuffle this card into its owner's library.
