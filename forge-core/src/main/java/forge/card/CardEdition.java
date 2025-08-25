@@ -840,7 +840,7 @@ public final class CardEdition implements Comparable<CardEdition> {
         @Override
         public void add(CardEdition item) { //Even though we want it to be read only, make an exception for custom content.
             if(lock) throw new UnsupportedOperationException("This is a read-only storage");
-            else map.put(item.getName(), item);
+            else map.put(item.getCode(), item);
         }
         public void append(CardEdition.Collection C){ //Append custom editions
             if (lock) throw new UnsupportedOperationException("This is a read-only storage");
