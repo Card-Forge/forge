@@ -52,6 +52,14 @@ import java.util.stream.Collectors;
  */
 public final class CardEdition implements Comparable<CardEdition> {
 
+    public DraftOptions getDraftOptions() {
+        return draftOptions;
+    }
+
+    public void setDraftOptions(DraftOptions draftOptions) {
+        this.draftOptions = draftOptions;
+    }
+
     // immutable
     public enum Type {
         UNKNOWN,
@@ -275,18 +283,22 @@ public final class CardEdition implements Comparable<CardEdition> {
     // Booster/draft info
     private List<BoosterSlot> boosterSlots = null;
     private boolean smallSetOverride = false;
-    private boolean foilAlwaysInCommonSlot = false;
+    private String additionalUnlockSet = "";
     private FoilType foilType = FoilType.NOT_SUPPORTED;
+
+    // Replace all of these things with booster slots
+    private boolean foilAlwaysInCommonSlot = false;
     private double foilChanceInBooster = 0;
     private double chanceReplaceCommonWith = 0;
     private String slotReplaceCommonWith = "Common";
     private String additionalSheetForFoils = "";
-    private String additionalUnlockSet = "";
     private String boosterMustContain = "";
     private String boosterReplaceSlotFromPrintSheet = "";
     private String sheetReplaceCardFromSheet = "";
     private String sheetReplaceCardFromSheet2 = "";
-    private String doublePickDuringDraft = "";
+
+    // Draft options
+    private DraftOptions draftOptions = null;
     private String[] chaosDraftThemes = new String[0];
 
     private final ListMultimap<String, EditionEntry> cardMap;
@@ -373,7 +385,6 @@ public final class CardEdition implements Comparable<CardEdition> {
     public String getSlotReplaceCommonWith() { return slotReplaceCommonWith; }
     public String getAdditionalSheetForFoils() { return additionalSheetForFoils; }
     public String getAdditionalUnlockSet() { return additionalUnlockSet; }
-    public String getDoublePickDuringDraft() { return doublePickDuringDraft; }
     public String getBoosterMustContain() { return boosterMustContain; }
     public String getBoosterReplaceSlotFromPrintSheet() { return boosterReplaceSlotFromPrintSheet; }
     public String getSheetReplaceCardFromSheet() { return sheetReplaceCardFromSheet; }
@@ -802,13 +813,29 @@ public final class CardEdition implements Comparable<CardEdition> {
             res.additionalUnlockSet = metadata.get("AdditionalSetUnlockedInQuest", ""); // e.g. Time Spiral Timeshifted (TSB) for Time Spiral
 
             res.smallSetOverride = metadata.getBoolean("TreatAsSmallSet", false); // for "small" sets with over 200 cards (e.g. Eldritch Moon)
-            res.doublePickDuringDraft = metadata.get("DoublePick", ""); // "FirstPick" or "Always"
 
             res.boosterMustContain = metadata.get("BoosterMustContain", ""); // e.g. Dominaria guaranteed legendary creature
             res.boosterReplaceSlotFromPrintSheet = metadata.get("BoosterReplaceSlotFromPrintSheet", ""); // e.g. Zendikar Rising guaranteed double-faced card
             res.sheetReplaceCardFromSheet = metadata.get("SheetReplaceCardFromSheet", "");
             res.sheetReplaceCardFromSheet2 = metadata.get("SheetReplaceCardFromSheet2", "");
             res.chaosDraftThemes = metadata.get("ChaosDraftThemes", "").split(";"); // semicolon separated list of theme names
+
+            // Draft options
+            String doublePick = metadata.get("DoublePick", "Never");
+            int maxPodSize = metadata.getInt("MaxPodSize", 8);
+            int recommendedPodSize = metadata.getInt("RecommendedPodSize", 8);
+            int maxMatchPlayers = metadata.getInt("MaxMatchPlayers", 2);
+            String deckType = metadata.get("DeckType", "Normal");
+            String freeCommander = metadata.get("FreeCommander", "");
+
+            res.draftOptions = new DraftOptions(
+                    doublePick,
+                    maxPodSize,
+                    recommendedPodSize,
+                    maxMatchPlayers,
+                    deckType,
+                    freeCommander
+            );
 
             return res;
         }
