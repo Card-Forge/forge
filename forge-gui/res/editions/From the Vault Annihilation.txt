@@ -21,6 +21,3 @@ ScryfallCode=V14
 13 M Upheaval @Kev Walker
 14 M Virtue's Ruin @Mike Dringenberg
 15 M Wrath of God @Willian Murai
-
-[tokens]
-w_1_1_soldier

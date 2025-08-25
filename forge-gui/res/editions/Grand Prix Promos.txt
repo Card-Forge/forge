@@ -1,6 +1,5 @@
 [metadata]
 Code=PGPX
-Code2=PGPX
 Date=2007-02-24
 Name=Grand Prix Promos
 Type=Promo
@@ -22,8 +21,8 @@ ScryfallCode=PGPX
 2016b R Sword of Feast and Famine @Efrem Palacios
 2017 M Progenitus @Jaime Jones
 2018 R Mutavault @John Avon
-2018a L Plains @Donato Giancola
-2018b L Island @Donato Giancola
-2018c L Swamp @Donato Giancola
-2018d L Mountain @Donato Giancola
-2018f L Forest @Donato Giancola
+2018a R Plains @Donato Giancola
+2018b R Island @Donato Giancola
+2018c R Swamp @Donato Giancola
+2018d R Mountain @Donato Giancola
+2018f R Forest @Donato Giancola

@@ -21,6 +21,3 @@ ScryfallCode=V15
 13 M Platinum Angel @Brom
 14 M Serra Angel @Rebecca Guay
 15 M Tariel, Reckoner of Souls @Wayne Reynolds
-
-[tokens]
-w_4_4_angel_flying
