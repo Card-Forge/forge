@@ -3,6 +3,7 @@ package forge.screens.constructed;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import org.apache.commons.lang3.StringUtils;
@@ -41,7 +42,6 @@ import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
 import forge.toolbox.FToggleSwitch;
-import forge.util.Callback;
 import forge.util.Lang;
 import forge.util.NameGenerator;
 import forge.util.TextUtil;
@@ -1054,22 +1054,22 @@ public class PlayerPanel extends FContainer {
         return new FLabel.Builder().text(title).font(LABEL_FONT).align(Align.right).build();
     }
     
-    private static final ImmutableList<String> genderOptions = ImmutableList.of(Forge.getLocalizer().getInstance().getMessage("lblMale"), Forge.getLocalizer().getInstance().getMessage("lblFemale"), Forge.getLocalizer().getInstance().getMessage("lblAny"));
-    private static final ImmutableList<String> typeOptions   = ImmutableList.of(Forge.getLocalizer().getInstance().getMessage("lblFantasy"), Forge.getLocalizer().getInstance().getMessage("lblGeneric"), Forge.getLocalizer().getInstance().getMessage("lblAny"));
-    private void getNewName(final Callback<String> callback) {
+    private static final ImmutableList<String> genderOptions = ImmutableList.of(Forge.getLocalizer().getMessage("lblMale"), Forge.getLocalizer().getMessage("lblFemale"), Forge.getLocalizer().getMessage("lblAny"));
+    private static final ImmutableList<String> typeOptions   = ImmutableList.of(Forge.getLocalizer().getMessage("lblFantasy"), Forge.getLocalizer().getMessage("lblGeneric"), Forge.getLocalizer().getMessage("lblAny"));
+    private void getNewName(final Consumer<String> callback) {
         final String title = Forge.getLocalizer().getMessage("lblGetNewRandomName");
         final String message = Forge.getLocalizer().getMessage("lbltypeofName");
         final FSkinImage icon = FOptionPane.QUESTION_ICON;
 
         FOptionPane.showOptionDialog(message, title, icon, genderOptions, 2, genderIndex -> {
             if (genderIndex == null || genderIndex < 0) {
-                callback.run(null);
+                callback.accept(null);
                 return;
             }
 
             FOptionPane.showOptionDialog(message, title, icon, typeOptions, 2, typeIndex -> {
                 if (typeIndex == null || typeIndex < 0) {
-                    callback.run(null);
+                    callback.accept(null);
                     return;
                 }
 
@@ -1078,12 +1078,12 @@ public class PlayerPanel extends FContainer {
         });
     }
 
-    private void generateRandomName(final String gender, final String type, final List<String> usedNames, final String title, final Callback<String> callback) {
+    private void generateRandomName(final String gender, final String type, final List<String> usedNames, final String title, final Consumer<String> callback) {
         final String newName = NameGenerator.getRandomName(gender, type, usedNames);
         String confirmMsg = Forge.getLocalizer().getMessage("lblconfirmName").replace("%s", newName);
         FOptionPane.showConfirmDialog(confirmMsg, title, Forge.getLocalizer().getMessage("lblUseThisName"), Forge.getLocalizer().getMessage("lblTryAgain"), true, result -> {
             if (result) {
-                callback.run(newName);
+                callback.accept(newName);
             }
             else {
                 generateRandomName(gender, type, usedNames, title, callback);

@@ -52,7 +52,6 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.GuiChoose;
 import forge.toolbox.ListChooser;
-import forge.util.Callback;
 import forge.util.Utils;
 import forge.util.storage.IStorage;
 
@@ -62,7 +61,7 @@ public class FDeckChooser extends FScreen {
     private FComboBox<DeckType> cmbDeckTypes;
     private DeckType selectedDeckType;
     private boolean needRefreshOnActivate;
-    private Callback<Deck> callback;
+    private Consumer<Deck> callback;
     private NetDeckCategory netDeckCategory;
     private NetDeckArchiveStandard NetDeckArchiveStandard;
     private NetDeckArchivePioneer NetDeckArchivePioneer;
@@ -88,7 +87,7 @@ public class FDeckChooser extends FScreen {
     private FOptionPane optionPane;
 
     //Show dialog to select a deck
-    public static void promptForDeck(String title, GameType gameType, boolean forAi, final Callback<Deck> callback) {
+    public static void promptForDeck(String title, GameType gameType, boolean forAi, final Consumer<Deck> callback) {
         FThreads.assertExecutedByEdt(true);
 
         final FDeckChooser deckChooser = new FDeckChooser(gameType, forAi, null);
@@ -230,7 +229,7 @@ public class FDeckChooser extends FScreen {
         if (optionPane == null) {
             Forge.back();
             if (callback != null) {
-                callback.run(getDeck());
+                callback.accept(getDeck());
             }
         }
         else {
@@ -429,36 +428,33 @@ public class FDeckChooser extends FScreen {
 
             //prompt to duplicate deck if deck doesn't exist already
             FOptionPane.showConfirmDialog(selectedDeckType + " " + Forge.getLocalizer().getMessage("lblCannotEditDuplicateCustomDeck").replace("%s", deck.getName()),
-                    Forge.getLocalizer().getMessage("lblDuplicateDeck"), Forge.getLocalizer().getMessage("lblDuplicate"), Forge.getLocalizer().getMessage("lblCancel"), new Callback<Boolean>() {
-                @Override
-                public void run(Boolean result) {
-                    if (result) {
-                        Deck copiedDeck = (Deck)deck.getDeck().copyTo(deck.getName());
-                        IStorage<Deck> storage;
+                    Forge.getLocalizer().getMessage("lblDuplicateDeck"), Forge.getLocalizer().getMessage("lblDuplicate"), Forge.getLocalizer().getMessage("lblCancel"), result -> {
+                        if (result) {
+                            Deck copiedDeck = (Deck)deck.getDeck().copyTo(deck.getName());
+                            IStorage<Deck> storage;
 
-                        switch(lstDecks.getGameType()) {
-                            case Commander:
-                                storage = FModel.getDecks().getCommander();
-                                break;
-                            case Brawl:
-                                storage = FModel.getDecks().getBrawl();
-                                break;
-                            case TinyLeaders:
-                                storage = FModel.getDecks().getTinyLeaders();
-                                break;
-                            case Oathbreaker:
-                                storage = FModel.getDecks().getOathbreaker();
-                                break;
-                            default:
-                                storage = FModel.getDecks().getConstructed();
-                                break;
+                            switch(lstDecks.getGameType()) {
+                                case Commander:
+                                    storage = FModel.getDecks().getCommander();
+                                    break;
+                                case Brawl:
+                                    storage = FModel.getDecks().getBrawl();
+                                    break;
+                                case TinyLeaders:
+                                    storage = FModel.getDecks().getTinyLeaders();
+                                    break;
+                                case Oathbreaker:
+                                    storage = FModel.getDecks().getOathbreaker();
+                                    break;
+                                default:
+                                    storage = FModel.getDecks().getConstructed();
+                                    break;
+                            }
+                            storage.add(copiedDeck);
+                            setSelectedDeckType(fallbackType);
+                            editDeck(new DeckProxy(copiedDeck, "Constructed", lstDecks.getGameType(), storage));
                         }
-                        storage.add(copiedDeck);
-                        setSelectedDeckType(fallbackType);
-                        editDeck(new DeckProxy(copiedDeck, "Constructed", lstDecks.getGameType(), storage));
-                    }
-                }
-            });
+                    });
             break;
         }
     }

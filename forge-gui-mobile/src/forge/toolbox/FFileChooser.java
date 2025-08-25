@@ -2,6 +2,7 @@ package forge.toolbox;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.function.Consumer;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -15,7 +16,6 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
-import forge.util.Callback;
 import forge.util.FileUtil;
 import forge.util.Utils;
 
@@ -28,25 +28,25 @@ public class FFileChooser extends FDialog {
         GetDirectory
     }
 
-    public static void show(String title0, ChoiceType choiceType0, Callback<String> callback0) {
+    public static void show(String title0, ChoiceType choiceType0, Consumer<String> callback0) {
         show(title0, choiceType0, "", "", callback0);
     }
-    public static void show(String title0, ChoiceType choiceType0, String defaultFilename0, Callback<String> callback0) {
+    public static void show(String title0, ChoiceType choiceType0, String defaultFilename0, Consumer<String> callback0) {
         show(title0, choiceType0, defaultFilename0, "", callback0);
     }
-    public static void show(String title0, ChoiceType choiceType0, String defaultFilename0, String baseDir0, Callback<String> callback0) {
+    public static void show(String title0, ChoiceType choiceType0, String defaultFilename0, String baseDir0, Consumer<String> callback0) {
         FFileChooser dialog = new FFileChooser(title0, choiceType0, defaultFilename0, baseDir0, callback0);
         dialog.show();
     }
 
     private final ChoiceType choiceType;
     private final String baseDir;
-    private final Callback<String> callback;
+    private final Consumer<String> callback;
 
     private final FList<File> lstFiles   = add(new FileList());
     private final FTextField txtFilename = add(new FilenameField());
 
-    private FFileChooser(String title0, ChoiceType choiceType0, String defaultFilename0, String baseDir0, Callback<String> callback0) {
+    private FFileChooser(String title0, ChoiceType choiceType0, String defaultFilename0, String baseDir0, Consumer<String> callback0) {
         super(title0, 3);
         choiceType = choiceType0;
         if (choiceType == ChoiceType.GetDirectory) {
@@ -195,7 +195,7 @@ public class FFileChooser extends FDialog {
         if (returnDirectory) {
             filename += File.separator; //re-append separator if returning directory
         }
-        callback.run(filename);
+        callback.accept(filename);
     }
 
     private void back() {

@@ -892,7 +892,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         saveHandler = saveHandler0;
     }
 
-    public void save(final Callback<Boolean> callback) {
+    public void save(final Consumer<Boolean> callback) {
         IDeckController deckController = getDeckController();
         if(deckController.supportsSave()) {
             if (!StringUtils.isEmpty(deck.getName())) {
@@ -907,7 +907,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
                         deckController.saveAs(result);
                         if (callback != null) {
-                            callback.run(true);
+                            callback.accept(true);
                         }
                     });
                 });
@@ -916,7 +916,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         if (callback != null) {
-            callback.run(true);
+            callback.accept(true);
         }
     }
 
@@ -948,7 +948,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     );
 
     @Override
-    public void onClose(final Callback<Boolean> canCloseCallback) {
+    public void onClose(final Consumer<Boolean> canCloseCallback) {
         if (getDeckController().isSaved() || !allowSave() || canCloseCallback == null) {
             super.onClose(canCloseCallback); //can skip prompt if draft saved
             return;
@@ -959,9 +959,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         save(canCloseCallback);
                     } else if (result == 1) {
                         getDeckController().exitWithoutSaving(); //reload if not saving changes
-                        canCloseCallback.run(true);
+                        canCloseCallback.accept(true);
                     } else {
-                        canCloseCallback.run(false);
+                        canCloseCallback.accept(false);
                     }
                 });
     }
@@ -1318,7 +1318,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected abstract void onCardActivated(PaperCard card);
         protected abstract void buildMenu(final FDropDownMenu menu, final PaperCard card);
 
-        protected void addMoveCardMenuItem(FDropDownMenu menu, CardManagerPage source, CardManagerPage destination, final Callback<Integer> callback) {
+        protected void addMoveCardMenuItem(FDropDownMenu menu, CardManagerPage source, CardManagerPage destination, final Consumer<Integer> callback) {
             //Determine how many we can actually move.
             ItemPool<PaperCard> selectedItemPool = parentScreen.getAllowedAdditions(cardManager.getSelectedItemPool(), source, destination);
 
@@ -1381,7 +1381,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             final int max = maxMovable;
             menu.addItem(new FMenuItem(label, icon, (e) -> {
                 if(max < 2)
-                    callback.run(1);
+                    callback.accept(1);
                 else
                     GuiChoose.getInteger(prompt, 1, max, 20, callback);
             }));
@@ -1403,7 +1403,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             this.addMoveCardMenuItem(menu, source, destination, new MoveCardCallback(card, source, destination));
         }
 
-        protected static class MoveCardCallback implements Callback<Integer> {
+        protected static class MoveCardCallback implements Consumer<Integer> {
             public final PaperCard card;
             public final CardManagerPage from;
             public final CardManagerPage to;
@@ -1414,7 +1414,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 this.to = to;
             }
             @Override
-            public void run(Integer result) {
+            public void accept(Integer result) {
                 if(result == null || result == 0)
                     return;
                 from.moveCard(card, to, result);

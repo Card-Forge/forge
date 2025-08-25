@@ -53,6 +53,7 @@ import io.sentry.Sentry;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.function.Consumer;
 
 public class Forge implements ApplicationListener {
     private static ApplicationListener app = null;
@@ -639,7 +640,7 @@ public class Forge implements ApplicationListener {
             return;
         } //don't allow exiting multiple times
 
-        Callback<Boolean> callback = result -> {
+        Consumer<Boolean> callback = result -> {
             if (result) {
                 exited = true;
                 exitAnimation(true);
@@ -648,7 +649,7 @@ public class Forge implements ApplicationListener {
 
 
         if (silent) {
-            callback.run(true);
+            callback.accept(true);
         } else {
             FOptionPane.showConfirmDialog(
                     getLocalizer().getMessage("lblAreYouSureYouWishRestartForge"), getLocalizer().getMessage("lblRestartForge"),
@@ -665,7 +666,7 @@ public class Forge implements ApplicationListener {
         options.add(getLocalizer().getMessage("lblExit"));
         options.add(getLocalizer().getMessage("lblCancel"));
 
-        Callback<Integer> callback = result -> {
+        Consumer<Integer> callback = result -> {
             if (result == 0) {
                 exited = true;
                 exitAnimation(false);
@@ -673,7 +674,7 @@ public class Forge implements ApplicationListener {
         };
 
         if (silent) {
-            callback.run(0);
+            callback.accept(0);
         } else {
             FOptionPane.showOptionDialog(getLocalizer().getMessage("lblAreYouSureYouWishExitForge"), "",
                     FOptionPane.QUESTION_ICON, options, 0, callback);

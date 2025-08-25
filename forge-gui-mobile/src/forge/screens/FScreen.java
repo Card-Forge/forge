@@ -1,6 +1,7 @@
 package forge.screens;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
@@ -23,7 +24,6 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
-import forge.util.Callback;
 import forge.util.Utils;
 
 public abstract class FScreen extends FContainer {
@@ -66,13 +66,13 @@ public abstract class FScreen extends FContainer {
         Forge.startContinuousRendering();
     }
 
-    public void onSwitchAway(Callback<Boolean> canSwitchCallback) {
-        canSwitchCallback.run(true);
+    public void onSwitchAway(Consumer<Boolean> canSwitchCallback) {
+        canSwitchCallback.accept(true);
     }
 
-    public void onClose(Callback<Boolean> canCloseCallback) {
+    public void onClose(Consumer<Boolean> canCloseCallback) {
         if (canCloseCallback != null) { //will be null if app exited
-            canCloseCallback.run(true);
+            canCloseCallback.accept(true);
         }
     }
 

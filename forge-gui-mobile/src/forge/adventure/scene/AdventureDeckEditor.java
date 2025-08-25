@@ -34,12 +34,12 @@ import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.toolbox.*;
-import forge.util.Callback;
 import forge.util.ItemPool;
 import forge.util.Localizer;
 import forge.util.Utils;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class AdventureDeckEditor extends FDeckEditor {
@@ -809,7 +809,7 @@ public class AdventureDeckEditor extends FDeckEditor {
     }
 
     @Override
-    public void onClose(final Callback<Boolean> canCloseCallback) {
+    public void onClose(final Consumer<Boolean> canCloseCallback) {
         if(canCloseCallback == null) {
             resolveClose(null, true);
             return;
@@ -836,14 +836,14 @@ public class AdventureDeckEditor extends FDeckEditor {
         resolveClose(canCloseCallback, true);
     }
 
-    private void resolveClose(final Callback<Boolean> canCloseCallback, boolean result) {
+    private void resolveClose(final Consumer<Boolean> canCloseCallback, boolean result) {
         if(result) {
             Current.player().newCards.clear();
             if(isDrafting())
                 getCurrentEvent().eventStatus = AdventureEventController.EventStatus.Abandoned;
         }
         if(canCloseCallback != null)
-            canCloseCallback.run(result);
+            canCloseCallback.accept(result);
     }
 
     @Override

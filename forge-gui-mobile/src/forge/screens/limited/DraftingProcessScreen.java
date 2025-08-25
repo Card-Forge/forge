@@ -14,7 +14,8 @@ import forge.gui.FThreads;
 import forge.model.FModel;
 import forge.screens.home.LoadGameMenu.LoadGameScreen;
 import forge.toolbox.FOptionPane;
-import forge.util.Callback;
+
+import java.util.function.Consumer;
 
 public class DraftingProcessScreen extends FDeckEditor {
     private boolean isDraftSaved;
@@ -54,7 +55,7 @@ public class DraftingProcessScreen extends FDeckEditor {
     }
 
     @Override
-    public void save(final Callback<Boolean> callback) {
+    public void save(final Consumer<Boolean> callback) {
         if (isDraftSaved) { //if draft itself is saved, let base class handle saving deck changes
             super.save(callback);
             return;
@@ -63,7 +64,7 @@ public class DraftingProcessScreen extends FDeckEditor {
         if (isQuestDraft()) {
             finishSave(QuestEventDraft.DECK_NAME);
             if (callback != null) {
-                callback.run(true);
+                callback.accept(true);
             }
             return;
         }
@@ -84,7 +85,7 @@ public class DraftingProcessScreen extends FDeckEditor {
                                     if (result) {
                                         finishSave(name);
                                         if (callback != null) {
-                                            callback.run(true);
+                                            callback.accept(true);
                                         }
                                     } else {
                                         save(callback); //If no overwrite, recurse
@@ -96,7 +97,7 @@ public class DraftingProcessScreen extends FDeckEditor {
 
                 finishSave(name);
                 if (callback != null) {
-                    callback.run(true);
+                    callback.accept(true);
                 }
             });
         });
@@ -131,7 +132,7 @@ public class DraftingProcessScreen extends FDeckEditor {
     }
 
     @Override
-    public void onClose(final Callback<Boolean> canCloseCallback) {
+    public void onClose(final Consumer<Boolean> canCloseCallback) {
         if (isDraftSaved || canCloseCallback == null) {
             super.onClose(canCloseCallback); //can skip prompt if draft saved
             return;
@@ -140,7 +141,7 @@ public class DraftingProcessScreen extends FDeckEditor {
         if (isQuestDraft()) {
             FThreads.invokeInBackgroundThread(() -> {
                 if (questDraftController.cancelDraft()) {
-                    FThreads.invokeInEdtLater(() -> canCloseCallback.run(true));
+                    FThreads.invokeInEdtLater(() -> canCloseCallback.accept(true));
                 }
             });
             return;

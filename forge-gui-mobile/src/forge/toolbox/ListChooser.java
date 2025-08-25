@@ -21,6 +21,7 @@ package forge.toolbox;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -77,10 +78,10 @@ public class ListChooser<T> extends FContainer {
     private FOptionPane optionPane;
     private final Collection<T> list;
     private final Function<T, String> display;
-    private final Callback<List<T>> callback;
+    private final Consumer<List<T>> callback;
     private AdvancedSearchFilter<? extends InventoryItem> advancedSearchFilter;
 
-    public ListChooser(final String title, final int minChoices, final int maxChoices, final Collection<T> list0, final Function<T, String> display0, final Callback<List<T>> callback0) {
+    public ListChooser(final String title, final int minChoices, final int maxChoices, final Collection<T> list0, final Function<T, String> display0, final Consumer<List<T>> callback0) {
         FThreads.assertExecutedByEdt(true);
         list = list0;
         lstChoices = add(new ChoiceList(list, minChoices, maxChoices));
@@ -123,13 +124,13 @@ public class ListChooser<T> extends FContainer {
         optionPane = new FOptionPane(null, null, title, null, this, options, 0, result -> {
             called = false;
             if (result == 0) {
-                callback.run(lstChoices.getSelectedItems());
+                callback.accept(lstChoices.getSelectedItems());
             }
             else if (minChoices > 0) {
                 show(); //show if user tries to cancel when input is mandatory
             }
             else {
-                callback.run(new ArrayList<>());
+                callback.accept(new ArrayList<>());
             }
         }) {
             @Override
