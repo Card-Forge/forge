@@ -1212,11 +1212,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void removeAllQuestItems(){
-        for (ItemData data : inventoryItems) {
-            if(data != null && data.questItem){
-                removeItem(data);
-            }
-        }
+        inventoryItems.removeIf(data -> data != null && data.questItem);
     }
 
     public boolean addBooster(Deck booster) {
