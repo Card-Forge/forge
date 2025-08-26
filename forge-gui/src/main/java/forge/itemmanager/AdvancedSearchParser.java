@@ -330,6 +330,10 @@ public abstract class AdvancedSearchParser {
                         case "vanilla":
                             predicate = CardRulesPredicates.isVanilla();
                             break;
+
+                        case "custom":
+                            predicate = card -> card.isCustom();
+                            break;
                     }
                 }
                 break;
