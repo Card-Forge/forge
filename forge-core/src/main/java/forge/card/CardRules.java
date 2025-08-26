@@ -373,6 +373,9 @@ public final class CardRules implements ICardCharacteristics {
 
     public boolean canBeOathbreaker() {
         CardType type = mainPart.getType();
+        if (mainPart.getOracleText().contains("can be your commander")) {
+            return true;
+        }
         return type.isPlaneswalker();
     }
 
