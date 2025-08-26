@@ -214,18 +214,20 @@ public class GameView extends TrackableObject {
         return get(TrackableProperty.Dependencies);
     }
     public void setDependencies(Table<StaticAbility, StaticAbility, Set<StaticAbilityLayer>> dependencies) {
+        if (dependencies.isEmpty()) {
+            set(TrackableProperty.Dependencies, "");
+            return;
+        }
         StringBuilder sb = new StringBuilder();
-        if (!dependencies.isEmpty()) {
-            StaticAbilityLayer layer = null;
-            for (StaticAbilityLayer sal : StaticAbilityLayer.CONTINUOUS_LAYERS_WITH_DEPENDENCY) {
-                for (Cell<StaticAbility, StaticAbility, Set<StaticAbilityLayer>> dep : dependencies.cellSet()) {
-                    if (dep.getValue().contains(sal)) {
-                        if (layer != sal) {
-                            layer = sal;
-                            sb.append("Layer " + layer.num).append(": ");
-                        }
-                        sb.append(dep.getColumnKey().getHostCard().toString()).append(" <- ").append(dep.getRowKey().getHostCard().toString()).append("\n");
+        StaticAbilityLayer layer = null;
+        for (StaticAbilityLayer sal : StaticAbilityLayer.CONTINUOUS_LAYERS_WITH_DEPENDENCY) {
+            for (Cell<StaticAbility, StaticAbility, Set<StaticAbilityLayer>> dep : dependencies.cellSet()) {
+                if (dep.getValue().contains(sal)) {
+                    if (layer != sal) {
+                        layer = sal;
+                        sb.append("Layer " + layer.num).append(": ");
                     }
+                    sb.append(dep.getColumnKey().getHostCard().toString()).append(" <- ").append(dep.getRowKey().getHostCard().toString()).append("\n");
                 }
             }
         }
