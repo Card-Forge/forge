@@ -9,8 +9,9 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.screens.LaunchScreen;
 import forge.toolbox.FLabel;
 import forge.toolbox.FTextArea;
-import forge.util.Callback;
 import forge.util.Utils;
+
+import java.util.function.Consumer;
 
 public class AdventureScreen extends LaunchScreen {
     private static final float PADDING = Utils.scale(10);
@@ -46,7 +47,7 @@ public class AdventureScreen extends LaunchScreen {
     }
 
     @Override
-    public void onSwitchAway(Callback<Boolean> canSwitchCallback) {
+    public void onSwitchAway(Consumer<Boolean> canSwitchCallback) {
         if (animation != null) {
             animation.stop();
         }

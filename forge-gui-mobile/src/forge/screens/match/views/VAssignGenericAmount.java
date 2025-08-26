@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import com.badlogic.gdx.utils.Align;
 
@@ -45,7 +46,6 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
-import forge.util.Callback;
 import forge.util.CardTranslation;
 import forge.util.TextUtil;
 import forge.util.Utils;
@@ -55,7 +55,7 @@ public class VAssignGenericAmount extends FDialog {
     private static final float CARD_GAP_X = Utils.scale(10);
     private static final float ADD_BTN_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.75f;
 
-    private final Callback<Map<Object, Integer>> callback;
+    private final Consumer<Map<Object, Integer>> callback;
     private final int totalAmountToAssign;
 
     private final String lblAmount;
@@ -360,7 +360,7 @@ public class VAssignGenericAmount extends FDialog {
             return;
         }
         hide();
-        callback.run(getAssignedMap());
+        callback.accept(getAssignedMap());
     }
 
     public Map<Object, Integer> getAssignedMap() {

@@ -102,24 +102,29 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
 
         int totalRemoved = 0;
         CardCollectionView srcCards;
-
         if (sa.hasParam("Choices")) {
             ZoneType choiceZone = sa.hasParam("ChoiceZone") ? ZoneType.smartValueOf(sa.getParam("ChoiceZone"))
                     : ZoneType.Battlefield;
-
-            CardCollection choices = CardLists.getValidCards(game.getCardsIn(choiceZone), sa.getParam("Choices"),
+            srcCards = CardLists.getValidCards(game.getCardsIn(choiceZone), sa.getParam("Choices"),
                     activator, source, sa);
+        } else {
+            srcCards = getTargetCards(sa);
+        }
+        if (sa.isReplacementAbility()) {
+            srcCards = new CardCollection(srcCards).filter(c -> !c.isInPlay() || sa.getLastStateBattlefield().contains(c));
+        }
 
+        if (sa.hasParam("Choices")) {
             int min = 1;
             int max = 1;
             if (sa.hasParam("ChoiceOptional")) {
                 min = 0;
-                max = choices.size();
+                max = srcCards.size();
             }
             if (sa.hasParam("ChoiceNum")) {
                 min = max = AbilityUtils.calculateAmount(source, sa.getParam("ChoiceNum"), sa);
             }
-            if (choices.size() < min) {
+            if (srcCards.size() < min) {
                 return;
             }
 
@@ -128,13 +133,12 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             title = title.replace("  ", " ");
             Map<String, Object> params = Maps.newHashMap();
             params.put("CounterType", counterType);
-            srcCards = pc.chooseCardsForEffect(choices, sa, title, min, max, min == 0, params);
+            srcCards = pc.chooseCardsForEffect(srcCards, sa, title, min, max, min == 0, params);
         } else {
             for (final Player tgtPlayer : getTargetPlayers(sa)) {
                 if (!tgtPlayer.isInGame()) {
                     continue;
                 }
-                // Removing energy
                 if (type.equals("All")) {
                     for (Map.Entry<CounterType, Integer> e : Lists.newArrayList(tgtPlayer.getCounters().entrySet())) {
                         totalRemoved += tgtPlayer.subtractCounter(e.getKey(), e.getValue(), activator);
@@ -150,8 +154,6 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                     }
                 }
             }
-
-            srcCards = getTargetCards(sa);
         }
 
         for (final Card tgtCard : srcCards) {

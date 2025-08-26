@@ -7,7 +7,6 @@ import forge.localinstance.skin.FSkinProp;
 import forge.localinstance.skin.ISkinImage;
 import forge.sound.IAudioClip;
 import forge.sound.IAudioMusic;
-import forge.util.Callback;
 import forge.util.ImageFetcher;
 
 import java.io.File;
@@ -15,6 +14,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 import org.jupnp.UpnpServiceConfiguration;
@@ -42,7 +42,7 @@ public interface IGuiBase {
     <T> List<T> order(String title, String top, int remainingObjectsMin, int remainingObjectsMax, List<T> sourceChoices, List<T> destChoices);
     String showFileDialog(String title, String defaultDir);
     File getSaveFile(File defaultFile);
-    void download(GuiDownloadService service, Callback<Boolean> callback);
+    void download(GuiDownloadService service, Consumer<Boolean> callback);
     void refreshSkin();
     void showCardList(String title, String message, List<PaperCard> list);
     boolean showBoxedProduct(String title, String message, List<PaperCard> list);

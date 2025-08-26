@@ -421,7 +421,7 @@ public class Game {
         // Don't use getPlayersInTurnOrder to prevent copying the player collection twice
         final PlayerCollection players = new PlayerCollection(ingamePlayers);
         players.remove(phaseHandler.getPlayerTurn());
-        if (!getTurnOrder().isDefaultDirection()) {
+        if (players.size() > 1 && !getTurnOrder().isDefaultDirection()) {
             Collections.reverse(players);
         }
         return players;
