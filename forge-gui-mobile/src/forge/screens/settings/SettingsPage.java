@@ -28,7 +28,6 @@ import forge.toolbox.FCheckBox;
 import forge.toolbox.FGroupList;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
-import forge.util.Callback;
 import forge.util.Utils;
 
 import java.util.*;
@@ -75,12 +74,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
 
                 FLanguage.changeLanguage(newValue);
 
-                FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblRestartForgeDescription"), Forge.getLocalizer().getMessage("lblRestartForge"), Forge.getLocalizer().getMessage("lblRestart"), Forge.getLocalizer().getMessage("lblLater"), new Callback<Boolean>() {
-                    @Override
-                    public void run(Boolean result) {
-                        if (result) {
-                            Forge.restart(true);
-                        }
+                FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblRestartForgeDescription"), Forge.getLocalizer().getMessage("lblRestartForge"), Forge.getLocalizer().getMessage("lblRestart"), Forge.getLocalizer().getMessage("lblLater"), result -> {
+                    if (result) {
+                        Forge.restart(true);
                     }
                 });
             }
@@ -125,12 +121,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         boolean landscapeMode = FModel.getPreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE);
                         Forge.getDeviceAdapter().setLandscapeMode(landscapeMode); //ensure device able to save off ini file so landscape change takes effect
                         if (Forge.isLandscapeMode() != landscapeMode) {
-                            FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblRestartForgeDescription"), Forge.getLocalizer().getMessage("lblRestartForge"), Forge.getLocalizer().getMessage("lblRestart"), Forge.getLocalizer().getMessage("lblLater"), new Callback<Boolean>() {
-                                @Override
-                                public void run(Boolean result) {
-                                    if (result) {
-                                        Forge.restart(true);
-                                    }
+                            FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblRestartForgeDescription"), Forge.getLocalizer().getMessage("lblRestartForge"), Forge.getLocalizer().getMessage("lblRestart"), Forge.getLocalizer().getMessage("lblLater"), result -> {
+                                if (result) {
+                                    Forge.restart(true);
                                 }
                             });
                         }
@@ -376,12 +369,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                             Forge.getLocalizer().getMessage("lblRestartForgeDescription"),
                             Forge.getLocalizer().getMessage("lblRestartForge"),
                             Forge.getLocalizer().getMessage("lblRestart"),
-                            Forge.getLocalizer().getMessage("lblLater"), new Callback<Boolean>() {
-                                @Override
-                                public void run(Boolean result) {
-                                    if (result) {
-                                        Forge.restart(true);
-                                    }
+                            Forge.getLocalizer().getMessage("lblLater"), result -> {
+                                if (result) {
+                                    Forge.restart(true);
                                 }
                             }
                         );
@@ -397,12 +387,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         Forge.getLocalizer().getMessage("lblRestartForgeDescription"),
                         Forge.getLocalizer().getMessage("lblRestartForge"),
                         Forge.getLocalizer().getMessage("lblRestart"),
-                        Forge.getLocalizer().getMessage("lblLater"), new Callback<Boolean>() {
-                            @Override
-                            public void run(Boolean result) {
-                                if (result) {
-                                    Forge.restart(true);
-                                }
+                        Forge.getLocalizer().getMessage("lblLater"), result -> {
+                            if (result) {
+                                Forge.restart(true);
                             }
                         }
                     );
@@ -418,12 +405,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         Forge.getLocalizer().getMessage("lblRestartForgeDescription"),
                         Forge.getLocalizer().getMessage("lblRestartForge"),
                         Forge.getLocalizer().getMessage("lblRestart"),
-                        Forge.getLocalizer().getMessage("lblLater"), new Callback<Boolean>() {
-                            @Override
-                            public void run(Boolean result) {
-                                if (result) {
-                                    Forge.restart(true);
-                                }
+                        Forge.getLocalizer().getMessage("lblLater"), result -> {
+                            if (result) {
+                                Forge.restart(true);
                             }
                         }
                     );
@@ -458,12 +442,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                             Forge.getLocalizer().getMessage("lblRestartForgeDescription"),
                             Forge.getLocalizer().getMessage("lblRestartForge"),
                             Forge.getLocalizer().getMessage("lblRestart"),
-                            Forge.getLocalizer().getMessage("lblLater"), new Callback<Boolean>() {
-                                @Override
-                                public void run(Boolean result) {
-                                    if (result) {
-                                        Forge.restart(true);
-                                    }
+                            Forge.getLocalizer().getMessage("lblLater"), result -> {
+                                if (result) {
+                                    Forge.restart(true);
                                 }
                             }
                         );
@@ -495,12 +476,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         Forge.getLocalizer().getMessage("lblRestartForgeDescription"),
                         Forge.getLocalizer().getMessage("lblRestartForge"),
                         Forge.getLocalizer().getMessage("lblRestart"),
-                        Forge.getLocalizer().getMessage("lblLater"), new Callback<Boolean>() {
-                            @Override
-                            public void run(Boolean result) {
-                                if (result) {
-                                    Forge.restart(true);
-                                }
+                        Forge.getLocalizer().getMessage("lblLater"), result -> {
+                            if (result) {
+                                Forge.restart(true);
                             }
                         }
                     );
@@ -958,21 +936,18 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     description,
                     currentValue,
                     null,
-                    new Callback<String>() {
-                        @Override
-                        public void run(String input) {
-                            if (input == null) return; // cancelled
-                            if (!input.matches("\\d+")) {
-                                FOptionPane.showMessageDialog("Please enter a valid number.", "Invalid Input");
-                                return;
-                            }
-                            int value = Integer.parseInt(input);
-                            if (value < minValue || value > maxValue) {
-                                FOptionPane.showMessageDialog("Value must be between " + minValue + " and " + maxValue + ".", "Invalid Input");
-                                return;
-                            }
-                            valueChanged(input);
+                    input -> {
+                        if (input == null) return; // cancelled
+                        if (!input.matches("\\d+")) {
+                            FOptionPane.showMessageDialog("Please enter a valid number.", "Invalid Input");
+                            return;
                         }
+                        int value = Integer.parseInt(input);
+                        if (value < minValue || value > maxValue) {
+                            FOptionPane.showMessageDialog("Value must be between " + minValue + " and " + maxValue + ".", "Invalid Input");
+                            return;
+                        }
+                        valueChanged(input);
                     },
                     true // isNumeric
             );

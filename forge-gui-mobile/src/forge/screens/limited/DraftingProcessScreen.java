@@ -14,7 +14,8 @@ import forge.gui.FThreads;
 import forge.model.FModel;
 import forge.screens.home.LoadGameMenu.LoadGameScreen;
 import forge.toolbox.FOptionPane;
-import forge.util.Callback;
+
+import java.util.function.Consumer;
 
 public class DraftingProcessScreen extends FDeckEditor {
     private boolean isDraftSaved;
@@ -54,7 +55,7 @@ public class DraftingProcessScreen extends FDeckEditor {
     }
 
     @Override
-    public void save(final Callback<Boolean> callback) {
+    public void save(final Consumer<Boolean> callback) {
         if (isDraftSaved) { //if draft itself is saved, let base class handle saving deck changes
             super.save(callback);
             return;
@@ -63,46 +64,40 @@ public class DraftingProcessScreen extends FDeckEditor {
         if (isQuestDraft()) {
             finishSave(QuestEventDraft.DECK_NAME);
             if (callback != null) {
-                callback.run(true);
+                callback.accept(true);
             }
             return;
         }
 
         FThreads.invokeInEdtNowOrLater(() -> {
-            FOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblSaveDraftAs") + "?", new Callback<>() {
-                @Override
-                public void run(final String name) {
-                    if (StringUtils.isEmpty(name)) {
-                        save(callback); //re-prompt if user doesn't pick a name
+            FOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblSaveDraftAs") + "?", name -> {
+                if (StringUtils.isEmpty(name)) {
+                    save(callback); //re-prompt if user doesn't pick a name
+                    return;
+                }
+
+                // Check for overwrite case
+                for (DeckGroup d : FModel.getDecks().getDraft()) {
+                    if (name.equalsIgnoreCase(d.getName())) {
+                        FOptionPane.showConfirmDialog(
+                                Forge.getLocalizer().getMessage("lblAlreadyDeckName") + name + Forge.getLocalizer().getMessage("lblOverwriteConfirm"),
+                                Forge.getLocalizer().getMessage("lblOverwriteDeck"), false, result -> {
+                                    if (result) {
+                                        finishSave(name);
+                                        if (callback != null) {
+                                            callback.accept(true);
+                                        }
+                                    } else {
+                                        save(callback); //If no overwrite, recurse
+                                    }
+                                });
                         return;
                     }
+                }
 
-                    // Check for overwrite case
-                    for (DeckGroup d : FModel.getDecks().getDraft()) {
-                        if (name.equalsIgnoreCase(d.getName())) {
-                            FOptionPane.showConfirmDialog(
-                                    Forge.getLocalizer().getMessage("lblAlreadyDeckName") + name + Forge.getLocalizer().getMessage("lblOverwriteConfirm"),
-                                    Forge.getLocalizer().getMessage("lblOverwriteDeck"), false, new Callback<>() {
-                                        @Override
-                                        public void run(Boolean result) {
-                                            if (result) {
-                                                finishSave(name);
-                                                if (callback != null) {
-                                                    callback.run(true);
-                                                }
-                                            } else {
-                                                save(callback); //If no overwrite, recurse
-                                            }
-                                        }
-                                    });
-                            return;
-                        }
-                    }
-
-                    finishSave(name);
-                    if (callback != null) {
-                        callback.run(true);
-                    }
+                finishSave(name);
+                if (callback != null) {
+                    callback.accept(true);
                 }
             });
         });
@@ -137,7 +132,7 @@ public class DraftingProcessScreen extends FDeckEditor {
     }
 
     @Override
-    public void onClose(final Callback<Boolean> canCloseCallback) {
+    public void onClose(final Consumer<Boolean> canCloseCallback) {
         if (isDraftSaved || canCloseCallback == null) {
             super.onClose(canCloseCallback); //can skip prompt if draft saved
             return;
@@ -146,7 +141,7 @@ public class DraftingProcessScreen extends FDeckEditor {
         if (isQuestDraft()) {
             FThreads.invokeInBackgroundThread(() -> {
                 if (questDraftController.cancelDraft()) {
-                    FThreads.invokeInEdtLater(() -> canCloseCallback.run(true));
+                    FThreads.invokeInEdtLater(() -> canCloseCallback.accept(true));
                 }
             });
             return;

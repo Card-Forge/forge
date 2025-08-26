@@ -53,6 +53,7 @@ import io.sentry.Sentry;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.function.Consumer;
 
 public class Forge implements ApplicationListener {
     private static ApplicationListener app = null;
@@ -599,22 +600,19 @@ public class Forge implements ApplicationListener {
         }
         if(currentScreen == null)
             return;
-        currentScreen.onClose(new Callback<>() {
-            @Override
-            public void run(Boolean result) {
-                if (result) {
-                    Dscreens.pollFirst();
-                    setCurrentScreen(Dscreens.peekFirst());
-                    if (clearLastMatch) {
-                        try {
-                            Dscreens.remove(lastMatch);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        //check
-                        /*for (FScreen fScreen : Dscreens)
-                            System.out.println(fScreen.toString());*/
+        currentScreen.onClose(result -> {
+            if (result) {
+                Dscreens.pollFirst();
+                setCurrentScreen(Dscreens.peekFirst());
+                if (clearLastMatch) {
+                    try {
+                        Dscreens.remove(lastMatch);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
+                    //check
+                    /*for (FScreen fScreen : Dscreens)
+                        System.out.println(fScreen.toString());*/
                 }
             }
         });
@@ -639,19 +637,16 @@ public class Forge implements ApplicationListener {
             return;
         } //don't allow exiting multiple times
 
-        Callback<Boolean> callback = new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
-                if (result) {
-                    exited = true;
-                    exitAnimation(true);
-                }
+        Consumer<Boolean> callback = result -> {
+            if (result) {
+                exited = true;
+                exitAnimation(true);
             }
         };
 
 
         if (silent) {
-            callback.run(true);
+            callback.accept(true);
         } else {
             FOptionPane.showConfirmDialog(
                     getLocalizer().getMessage("lblAreYouSureYouWishRestartForge"), getLocalizer().getMessage("lblRestartForge"),
@@ -668,18 +663,15 @@ public class Forge implements ApplicationListener {
         options.add(getLocalizer().getMessage("lblExit"));
         options.add(getLocalizer().getMessage("lblCancel"));
 
-        Callback<Integer> callback = new Callback<Integer>() {
-            @Override
-            public void run(Integer result) {
-                if (result == 0) {
-                    exited = true;
-                    exitAnimation(false);
-                }
+        Consumer<Integer> callback = result -> {
+            if (result == 0) {
+                exited = true;
+                exitAnimation(false);
             }
         };
 
         if (silent) {
-            callback.run(0);
+            callback.accept(0);
         } else {
             FOptionPane.showOptionDialog(getLocalizer().getMessage("lblAreYouSureYouWishExitForge"), "",
                     FOptionPane.QUESTION_ICON, options, 0, callback);
@@ -701,30 +693,27 @@ public class Forge implements ApplicationListener {
             return;
         }
 
-        currentScreen.onSwitchAway(new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
-                if (result) {
-                    if (replaceBackScreen && !Dscreens.isEmpty()) {
-                        Dscreens.removeFirst();
-                    }
-                    if (Dscreens.peekFirst() != screen0) { //prevent screen being its own back screen
-                        Dscreens.addFirst(screen0);
-                    }
-                    setCurrentScreen(screen0);
-                    if (screen0 instanceof MatchScreen) {
-                        //set cursor for classic mode
-                        if (!isMobileAdventureMode) {
-                            if (magnifyToggle) {
-                                setCursor(FSkin.getCursor().get(1), "1");
-                            } else {
-                                setCursor(FSkin.getCursor().get(2), "2");
-                            }
+        currentScreen.onSwitchAway(result -> {
+            if (result) {
+                if (replaceBackScreen && !Dscreens.isEmpty()) {
+                    Dscreens.removeFirst();
+                }
+                if (Dscreens.peekFirst() != screen0) { //prevent screen being its own back screen
+                    Dscreens.addFirst(screen0);
+                }
+                setCurrentScreen(screen0);
+                if (screen0 instanceof MatchScreen) {
+                    //set cursor for classic mode
+                    if (!isMobileAdventureMode) {
+                        if (magnifyToggle) {
+                            setCursor(FSkin.getCursor().get(1), "1");
+                        } else {
+                            setCursor(FSkin.getCursor().get(2), "2");
                         }
                     }
-                    deltaTime = 0f;
-                    hueFragTime = 0f;
                 }
+                deltaTime = 0f;
+                hueFragTime = 0f;
             }
         });
     }
