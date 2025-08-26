@@ -2,11 +2,11 @@ Name:Primal Clay
 ManaCost:4
 Types:Artifact Creature Shapeshifter
 PT:*/*
-K:ETBReplacement:Other:MoldChoice
-SVar:MoldChoice:DB$ GenericChoice | Defined$ You | Choices$ GroundMold,AirMold,WallMold | SpellDescription$ As CARDNAME enters, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types.
-SVar:GroundMold:DB$ Animate | Defined$ Self | Duration$ Permanent | Power$ 3 | Toughness$ 3 | SpellDescription$ CARDNAME is 3/3.
-SVar:AirMold:DB$ Animate | Defined$ Self | Duration$ Permanent | Power$ 2 | Toughness$ 2 | Keywords$ Flying | SpellDescription$ CARDNAME is 2/2 with flying.
-SVar:WallMold:DB$ Animate | Defined$ Self | Duration$ Permanent | Power$ 1 | Toughness$ 6 | Types$ Wall | Keywords$ Defender | SpellDescription$ CARDNAME is 1/6 with defender and is a Wall in addition to its other types.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Layer$ Copy | ReplacementResult$ Updated | ReplaceWith$ MoldChoice | Description$ As CARDNAME enters, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types.
+SVar:MoldChoice:DB$ GenericChoice | Defined$ You | Choices$ GroundMold,AirMold,WallMold
+SVar:GroundMold:DB$ Clone | Defined$ Self | SetPower$ 3 | SetToughness$ 3 | SpellDescription$ CARDNAME is 3/3.
+SVar:AirMold:DB$ Clone | Defined$ Self | SetPower$ 2 | SetToughness$ 2 | AddKeywords$ Flying | SpellDescription$ CARDNAME is 2/2 with flying.
+SVar:WallMold:DB$ Clone | Defined$ Self | SetPower$ 1 | SetToughness$ 6 | AddTypes$ Wall | AddKeywords$ Defender | SpellDescription$ CARDNAME is 1/6 with defender and is a Wall in addition to its other types.
 AI:RemoveDeck:Random
 DeckHas:Keyword$Defender|Flying & Type$Wall
 Oracle:As Primal Clay enters, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types. (A creature with defender can't attack.)

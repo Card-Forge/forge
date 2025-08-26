@@ -18,6 +18,8 @@
 package forge.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
@@ -67,7 +69,7 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
     public Object getDisplayed() { return displayed; }
 
     public void setItem(final InventoryItem item) {
-        setImage(item, true);
+        setImage(item, true, false);
     }
 
     public void setItem(final BufferedImage image) {
@@ -82,10 +84,14 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
     }
 
     public void setCard(final CardStateView c, final boolean mayView) {
-        setImage(c, mayView);
+        setCard(c, mayView, false);
     }
 
-    private void setImage(final Object display, final boolean mayView) {
+    public void setCard(final CardStateView c, final boolean mayView, boolean isFlipped) {
+        setImage(c, mayView, isFlipped);
+    }
+
+    private void setImage(final Object display, final boolean mayView, final boolean isFlipped) {
         this.displayed = display;
         this.mayView = mayView;
 
@@ -98,7 +104,7 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
                 final BufferedImage displayedimage = new BufferedImage(cm, raster, isAlphaPremultiplied, null)
                         .getSubimage(0, 0, image.getWidth(), image.getHeight());
                 this.currentImage = displayedimage;
-                this.panel.setImage(displayedimage, getAutoSizeImageMode());
+                this.panel.setImage(isFlipped ? rotateImage180(displayedimage) : image, getAutoSizeImageMode());
                 PaperCard card = (PaperCard) displayed;
                 if (FModel.getPreferences().getPrefBoolean(FPref.UI_OVERLAY_FOIL_EFFECT)) {
                     if (card.isFoil()) {
@@ -108,7 +114,7 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
                 }
             } else {
                 this.currentImage = image;
-                this.panel.setImage(image, getAutoSizeImageMode());
+                this.panel.setImage(isFlipped ? rotateImage180(image) : image, getAutoSizeImageMode());
             }
         }
     }
@@ -140,7 +146,7 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
 
     @Override
     public void onImageFetched() {
-        setImage(displayed, mayView);
+        setImage(displayed, mayView, false);
         repaint();
     }
 
@@ -157,4 +163,25 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
     }
 
     public void showAsEnabled(){ this.panel.setAlpha(0.0f); }
+
+    private BufferedImage rotateImage180(BufferedImage image) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        // Create a new image to hold the rotated version
+        BufferedImage rotated = new BufferedImage(width, height, image.getType());
+
+        // Graphics2D to draw the rotated image
+        Graphics2D g2d = rotated.createGraphics();
+
+        // Rotate 180 degrees around the center of the image
+        AffineTransform transform = new AffineTransform();
+        transform.rotate(Math.toRadians(180), width / 2.0, height / 2.0);
+
+        // Draw the original image onto the rotated canvas
+        g2d.drawImage(image, transform, null);
+        g2d.dispose();
+
+        return rotated;
+    }
 }

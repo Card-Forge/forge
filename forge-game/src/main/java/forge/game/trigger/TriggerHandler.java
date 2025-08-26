@@ -262,9 +262,16 @@ public class TriggerHandler {
             return;
         }
 
+        // too many waiting triggers might cause OutOfMemory exception
+        // such high amount usually happens from looping on one type:
+        // e.g. Heroes' Bane counters ability
+        // we can just run further triggers directly, side effects are highly unlikely
+        // (could also make this depend on Runtime.getRuntime().freeMemory()
+        // - but probably overkill)
+        boolean canWait = waitingTriggers.size() < 9999;
         if (mode == TriggerType.Always) {
             runStateTrigger(runParams);
-        } else if ((game.getStack().isFrozen() || holdTrigger) && mode != TriggerType.TapsForMana && mode != TriggerType.ManaAdded) {
+        } else if (canWait && (game.getStack().isFrozen() || holdTrigger) && mode != TriggerType.TapsForMana && mode != TriggerType.ManaAdded) {
             waitingTriggers.add(new TriggerWaiting(mode, runParams));
         } else {
             runWaitingTrigger(new TriggerWaiting(mode, runParams));

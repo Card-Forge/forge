@@ -1,0 +1,8 @@
+Name:Pretending Poxbearers
+ManaCost:1 WB
+Types:Creature Human Citizen Ally
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature dies, create a 1/1 white Ally creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_ally | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:When this creature dies, create a 1/1 white Ally creature token.

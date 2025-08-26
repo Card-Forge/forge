@@ -7,4 +7,5 @@ ScryfallCode=PSPM
 
 [cards]
 1 M Peter Parker @Randy Gallegos
-3 R Carnage, Crimson Chaos @
+3 R J. Jonah Jameson @Borja Pindado
+3? R Carnage, Crimson Chaos @

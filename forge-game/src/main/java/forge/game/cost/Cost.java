@@ -621,8 +621,11 @@ public class Cost implements Serializable {
     }
 
     public final Cost copyWithDefinedMana(String manaCost) {
+        return copyWithDefinedMana(new ManaCost(new ManaCostParser(manaCost)));
+    }
+    public final Cost copyWithDefinedMana(ManaCost manaCost) {
         Cost toRet = copyWithNoMana();
-        toRet.costParts.add(new CostPartMana(new ManaCost(new ManaCostParser(manaCost)), null));
+        toRet.costParts.add(new CostPartMana(manaCost, null));
         toRet.cacheTapCost();
         return toRet;
     }

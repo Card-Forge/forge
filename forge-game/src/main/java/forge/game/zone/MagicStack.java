@@ -847,32 +847,26 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     public boolean addAllTriggeredAbilitiesToStack() {
-        boolean result = false;
-        Player playerTurn = game.getPhaseHandler().getPlayerTurn();
+        if (!hasSimultaneousStackEntries()) {
+            return false;
+        }
 
+        Player playerTurn = game.getPhaseHandler().getPlayerTurn();
         if (playerTurn == null) {
             // caused by DevTools before first turn
             return false;
         }
-
         if (!playerTurn.isInGame()) {
             playerTurn = game.getNextPlayerAfter(playerTurn);
         }
-
-        // Grab players in turn order starting with the active player
         List<Player> players = game.getPlayersInTurnOrder(playerTurn);
 
+        boolean result = false;
+        // CR 603.3b
         for (Player p : players) {
-            if (p.hasLost()) {
-                continue;
-            }
             result |= chooseOrderOfSimultaneousStackEntry(p, false);
         }
-
         for (Player p : players) {
-            if (p.hasLost()) {
-                continue;
-            }
             result |= chooseOrderOfSimultaneousStackEntry(p, true);
         }
 
@@ -880,10 +874,12 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     private boolean chooseOrderOfSimultaneousStackEntry(final Player activePlayer, boolean isAbilityTriggered) {
-        if (simultaneousStackEntryList.isEmpty()) {
+        if (!activePlayer.isInGame()) {
             return false;
         }
-
+        if (!hasSimultaneousStackEntries()) {
+            return false;
+        }
         activePlayerSAs.clear();
         for (SpellAbility sa : simultaneousStackEntryList) {
             if (isAbilityTriggered != (sa.isTrigger() && sa.getTrigger().getMode() == TriggerType.AbilityTriggered)) {

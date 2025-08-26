@@ -41,6 +41,7 @@ import forge.assets.FSkinImage;
 import forge.assets.ImageCache;
 import forge.card.CardImageRenderer;
 import forge.card.CardRenderer;
+import forge.card.CardSplitType;
 import forge.deck.DeckSection;
 import forge.game.card.CardView;
 import forge.gui.GuiBase;
@@ -547,8 +548,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     }
 
     private void generateBackFace(Reward r, Texture t) {
+        generateBackFace(r, t, false);
+    }
+
+    private void generateBackFace(Reward r, Texture t, boolean displayFlipped) {
         try {
-            alternateToolTipImage = new RewardImage(processDrawable(t));
+            alternateToolTipImage = new RewardImage(processDrawable(t, displayFlipped));
 
             if (holdTooltip != null) {
                 if (holdTooltip.tooltip_actor.getChildren().size <= 2) {
@@ -575,7 +580,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 }
                 if (back != null) {
                     ImageCache.getInstance().updateSynqCount(backFace, 1);
-                    generateBackFace(reward, back);
+                    generateBackFace(reward, back, reward.getCard().getRules().getSplitType() == CardSplitType.Flip);
                 } else {
                     generateBackFace(reward, getRenderedBackface(reward));
                 }
@@ -627,7 +632,15 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     }
 
     private TextureRegionDrawable processDrawable(Texture texture) {
-        TextureRegionDrawable drawable = new TextureRegionDrawable(ImageCache.getInstance().croppedBorderImage(texture));
+        return processDrawable(texture, false);
+    }
+
+    private TextureRegionDrawable processDrawable(Texture texture, boolean displayFlipped) {
+        TextureRegion textureRegion = ImageCache.getInstance().croppedBorderImage(texture);
+        if (displayFlipped) {
+            textureRegion.flip(true, true);
+        }
+        TextureRegionDrawable drawable = new TextureRegionDrawable(textureRegion);
         float origW = texture.getWidth();
         float origH = texture.getHeight();
         float boundW = GuiBase.isAndroid() ? Scene.getIntendedWidth() * 0.95f : Scene.getIntendedWidth() * 0.7f; // Use smaller size for Desktop
