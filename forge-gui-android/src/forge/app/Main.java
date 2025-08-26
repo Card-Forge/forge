@@ -71,7 +71,6 @@ import org.jupnp.DefaultUpnpServiceConfiguration;
 import org.jupnp.android.AndroidUpnpServiceConfiguration;
 
 import java.io.*;
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -571,7 +570,7 @@ public class Main extends AndroidApplication {
             if (clipData.getItemCount() > 0) {
                 try {
                     String text = clipData.getItemAt(0).coerceToText(getContext()).toString();
-                    return Normalizer.normalize(text, Normalizer.Form.NFD);
+                    return text;//Normalizer.normalize(text, Normalizer.Form.NFD);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }

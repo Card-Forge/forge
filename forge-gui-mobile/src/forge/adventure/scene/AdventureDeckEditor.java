@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
 import forge.adventure.data.AdventureEventData;
+import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.Config;
@@ -33,12 +34,12 @@ import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.toolbox.*;
-import forge.util.Callback;
 import forge.util.ItemPool;
 import forge.util.Localizer;
 import forge.util.Utils;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class AdventureDeckEditor extends FDeckEditor {
@@ -77,7 +78,10 @@ public class AdventureDeckEditor extends FDeckEditor {
             }
 
             String sketchbookPrefix = "landscape sketchbook - ";
-            for (String itemName : AdventurePlayer.current().getItems()) {
+            for (ItemData itemData : AdventurePlayer.current().getItems()) {
+                if (itemData == null)
+                    continue;
+                String itemName = itemData.name;
                 if (!itemName.toLowerCase().startsWith(sketchbookPrefix)) {
                     continue;
                 }
@@ -291,13 +295,10 @@ public class AdventureDeckEditor extends FDeckEditor {
             if(toSell.isEmpty())
                 return;
 
-            FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblSellAllConfirm", toSell.countAll(), value), Forge.getLocalizer().getMessage("lblSellCurrentFilters"), Forge.getLocalizer().getMessage("lblSell"), Forge.getLocalizer().getMessage("lblCancel"), false, new Callback<>() {
-                @Override
-                public void run(Boolean result) {
-                    if (result) {
-                        Current.player().doBulkSell(toSell);
-                        refresh();
-                    }
+            FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblSellAllConfirm", toSell.countAll(), value), Forge.getLocalizer().getMessage("lblSellCurrentFilters"), Forge.getLocalizer().getMessage("lblSell"), Forge.getLocalizer().getMessage("lblCancel"), false, result -> {
+                if (result) {
+                    Current.player().doBulkSell(toSell);
+                    refresh();
                 }
             });
         }
@@ -419,12 +420,9 @@ public class AdventureDeckEditor extends FDeckEditor {
             if(toMove.isEmpty())
                 return;
 
-            FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblAutoSellCurrentFiltersConfirm", toMove.countAll()), Forge.getLocalizer().getMessage("lblAutoSellCurrentFilters"), Forge.getLocalizer().getMessage("lblAutoSell"), Forge.getLocalizer().getMessage("lblCancel"), false, new Callback<>() {
-                @Override
-                public void run(Boolean result) {
-                    if (result) {
-                        moveCards(toMove, autoSellPage);
-                    }
+            FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblAutoSellCurrentFiltersConfirm", toMove.countAll()), Forge.getLocalizer().getMessage("lblAutoSellCurrentFilters"), Forge.getLocalizer().getMessage("lblAutoSell"), Forge.getLocalizer().getMessage("lblCancel"), false, result -> {
+                if (result) {
+                    moveCards(toMove, autoSellPage);
                 }
             });
         }
@@ -811,7 +809,7 @@ public class AdventureDeckEditor extends FDeckEditor {
     }
 
     @Override
-    public void onClose(final Callback<Boolean> canCloseCallback) {
+    public void onClose(final Consumer<Boolean> canCloseCallback) {
         if(canCloseCallback == null) {
             resolveClose(null, true);
             return;
@@ -819,12 +817,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         Localizer localizer = Forge.getLocalizer();
         if (isDrafting()) {
-            FOptionPane.showConfirmDialog(localizer.getMessage("lblEndAdventureEventConfirm"), localizer.getMessage("lblLeaveDraft"), localizer.getMessage("lblLeave"), localizer.getMessage("lblCancel"), false, new Callback<>() {
-                @Override
-                public void run(Boolean result) {
-                    resolveClose(canCloseCallback, result == true);
-                }
-            });
+            FOptionPane.showConfirmDialog(localizer.getMessage("lblEndAdventureEventConfirm"), localizer.getMessage("lblLeaveDraft"), localizer.getMessage("lblLeave"), localizer.getMessage("lblCancel"), false, result -> resolveClose(canCloseCallback, result == true));
             return;
         }
         else if(getEditorConfig().isLimited() || getDeck().isEmpty()) {
@@ -836,26 +829,21 @@ public class AdventureDeckEditor extends FDeckEditor {
         if (deckError != null) {
             //Allow the player to close the editor with an invalid deck, but warn them that cards may be swapped out.
             String warning = localizer.getMessage("lblAdventureDeckError", deckError);
-            FOptionPane.showConfirmDialog(warning, localizer.getMessage("lblInvalidDeck"), false, new Callback<>() {
-                @Override
-                public void run(Boolean result) {
-                    resolveClose(canCloseCallback, result == true);
-                }
-            });
+            FOptionPane.showConfirmDialog(warning, localizer.getMessage("lblInvalidDeck"), false, result -> resolveClose(canCloseCallback, result == true));
             return;
         }
 
         resolveClose(canCloseCallback, true);
     }
 
-    private void resolveClose(final Callback<Boolean> canCloseCallback, boolean result) {
+    private void resolveClose(final Consumer<Boolean> canCloseCallback, boolean result) {
         if(result) {
             Current.player().newCards.clear();
             if(isDrafting())
                 getCurrentEvent().eventStatus = AdventureEventController.EventStatus.Abandoned;
         }
         if(canCloseCallback != null)
-            canCloseCallback.run(result);
+            canCloseCallback.accept(result);
     }
 
     @Override

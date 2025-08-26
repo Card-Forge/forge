@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.function.Consumer;
 
 import forge.game.GameFormat;
 import forge.util.MyRandom;
@@ -52,7 +53,6 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.GuiChoose;
 import forge.toolbox.ListChooser;
-import forge.util.Callback;
 import forge.util.Utils;
 import forge.util.storage.IStorage;
 
@@ -62,7 +62,7 @@ public class FDeckChooser extends FScreen {
     private FComboBox<DeckType> cmbDeckTypes;
     private DeckType selectedDeckType;
     private boolean needRefreshOnActivate;
-    private Callback<Deck> callback;
+    private Consumer<Deck> callback;
     private NetDeckCategory netDeckCategory;
     private NetDeckArchiveStandard NetDeckArchiveStandard;
     private NetDeckArchivePioneer NetDeckArchivePioneer;
@@ -88,7 +88,7 @@ public class FDeckChooser extends FScreen {
     private FOptionPane optionPane;
 
     //Show dialog to select a deck
-    public static void promptForDeck(String title, GameType gameType, boolean forAi, final Callback<Deck> callback) {
+    public static void promptForDeck(String title, GameType gameType, boolean forAi, final Consumer<Deck> callback) {
         FThreads.assertExecutedByEdt(true);
 
         final FDeckChooser deckChooser = new FDeckChooser(gameType, forAi, null);
@@ -109,13 +109,10 @@ public class FDeckChooser extends FScreen {
         container.add(deckChooser.lstDecks);
         container.setHeight(FOptionPane.getMaxDisplayObjHeight());
 
-        deckChooser.optionPane = new FOptionPane(null, null, title, null, container, ImmutableList.of(Forge.getLocalizer().getInstance().getMessage("lblOK"), Forge.getLocalizer().getInstance().getMessage("lblCancel")), 0, new Callback<Integer>() {
-            @Override
-            public void run(Integer result) {
-                if (result == 0) {
-                    if (callback != null) {
-                        callback.run(deckChooser.getDeck());
-                    }
+        deckChooser.optionPane = new FOptionPane(null, null, title, null, container, ImmutableList.of(Forge.getLocalizer().getInstance().getMessage("lblOK"), Forge.getLocalizer().getInstance().getMessage("lblCancel")), 0, result -> {
+            if (result == 0) {
+                if (callback != null) {
+                    callback.accept(deckChooser.getDeck());
                 }
             }
         }) {
@@ -230,7 +227,7 @@ public class FDeckChooser extends FScreen {
         if (optionPane == null) {
             Forge.back();
             if (callback != null) {
-                callback.run(getDeck());
+                callback.accept(getDeck());
             }
         }
         else {
@@ -367,7 +364,7 @@ public class FDeckChooser extends FScreen {
             editor = new FDeckEditor(getEditorConfig(), generatedDeck);
         } else {
             editor = new FDeckEditor(getEditorConfig(), "");
-            editor.setSelectedSection(DeckSection.Sideboard);
+            //editor.setSelectedSection(DeckSection.Sideboard);
         }
         editor.setSaveHandler(event -> {
             //ensure user returns to proper deck type and that list is refreshed if new deck is saved
@@ -429,36 +426,33 @@ public class FDeckChooser extends FScreen {
 
             //prompt to duplicate deck if deck doesn't exist already
             FOptionPane.showConfirmDialog(selectedDeckType + " " + Forge.getLocalizer().getMessage("lblCannotEditDuplicateCustomDeck").replace("%s", deck.getName()),
-                    Forge.getLocalizer().getMessage("lblDuplicateDeck"), Forge.getLocalizer().getMessage("lblDuplicate"), Forge.getLocalizer().getMessage("lblCancel"), new Callback<Boolean>() {
-                @Override
-                public void run(Boolean result) {
-                    if (result) {
-                        Deck copiedDeck = (Deck)deck.getDeck().copyTo(deck.getName());
-                        IStorage<Deck> storage;
+                    Forge.getLocalizer().getMessage("lblDuplicateDeck"), Forge.getLocalizer().getMessage("lblDuplicate"), Forge.getLocalizer().getMessage("lblCancel"), result -> {
+                        if (result) {
+                            Deck copiedDeck = (Deck)deck.getDeck().copyTo(deck.getName());
+                            IStorage<Deck> storage;
 
-                        switch(lstDecks.getGameType()) {
-                            case Commander:
-                                storage = FModel.getDecks().getCommander();
-                                break;
-                            case Brawl:
-                                storage = FModel.getDecks().getBrawl();
-                                break;
-                            case TinyLeaders:
-                                storage = FModel.getDecks().getTinyLeaders();
-                                break;
-                            case Oathbreaker:
-                                storage = FModel.getDecks().getOathbreaker();
-                                break;
-                            default:
-                                storage = FModel.getDecks().getConstructed();
-                                break;
+                            switch(lstDecks.getGameType()) {
+                                case Commander:
+                                    storage = FModel.getDecks().getCommander();
+                                    break;
+                                case Brawl:
+                                    storage = FModel.getDecks().getBrawl();
+                                    break;
+                                case TinyLeaders:
+                                    storage = FModel.getDecks().getTinyLeaders();
+                                    break;
+                                case Oathbreaker:
+                                    storage = FModel.getDecks().getOathbreaker();
+                                    break;
+                                default:
+                                    storage = FModel.getDecks().getConstructed();
+                                    break;
+                            }
+                            storage.add(copiedDeck);
+                            setSelectedDeckType(fallbackType);
+                            editDeck(new DeckProxy(copiedDeck, "Constructed", lstDecks.getGameType(), storage));
                         }
-                        storage.add(copiedDeck);
-                        setSelectedDeckType(fallbackType);
-                        editDeck(new DeckProxy(copiedDeck, "Constructed", lstDecks.getGameType(), storage));
-                    }
-                }
-            });
+                    });
             break;
         }
     }
@@ -1421,50 +1415,46 @@ public class FDeckChooser extends FScreen {
             return;
         }
 
-        GuiChoose.getInteger(Forge.getLocalizer().getMessage("lblHowManyOpponents"), 1, 50, new Callback<Integer>() {
-            @Override
-            public void run(final Integer numOpponents) {
-                if (numOpponents == null) { return; }
-                List<DeckType> deckTypes = Lists.newArrayList(
-                        DeckType.CUSTOM_DECK,
-                        DeckType.PRECONSTRUCTED_DECK,
-                        DeckType.QUEST_OPPONENT_DECK,
-                        DeckType.COLOR_DECK,
-                        DeckType.STANDARD_COLOR_DECK,
-                        DeckType.STANDARD_CARDGEN_DECK,
-                        DeckType.MODERN_COLOR_DECK,
-                        DeckType.PAUPER_COLOR_DECK,
-                        DeckType.PIONEER_CARDGEN_DECK,
-                        DeckType.HISTORIC_CARDGEN_DECK,
-                        DeckType.MODERN_CARDGEN_DECK,
-                        DeckType.LEGACY_CARDGEN_DECK,
-                        DeckType.VINTAGE_CARDGEN_DECK,
-                        DeckType.PAUPER_CARDGEN_DECK,
-                        DeckType.THEME_DECK,
-                        DeckType.NET_DECK,
-                        DeckType.NET_ARCHIVE_STANDARD_DECK,
-                        DeckType.NET_ARCHIVE_PIONEER_DECK,
-                        DeckType.NET_ARCHIVE_MODERN_DECK,
-                        DeckType.NET_ARCHIVE_PAUPER_DECK,
-                        DeckType.NET_ARCHIVE_VINTAGE_DECK,
-                        DeckType.NET_ARCHIVE_LEGACY_DECK,
-                        DeckType.NET_ARCHIVE_BLOCK_DECK
+        GuiChoose.getInteger(Forge.getLocalizer().getMessage("lblHowManyOpponents"), 1, 50, numOpponents -> {
+            if (numOpponents == null) { return; }
+            List<DeckType> deckTypes = Lists.newArrayList(
+                    DeckType.CUSTOM_DECK,
+                    DeckType.PRECONSTRUCTED_DECK,
+                    DeckType.QUEST_OPPONENT_DECK,
+                    DeckType.COLOR_DECK,
+                    DeckType.STANDARD_COLOR_DECK,
+                    DeckType.STANDARD_CARDGEN_DECK,
+                    DeckType.MODERN_COLOR_DECK,
+                    DeckType.PAUPER_COLOR_DECK,
+                    DeckType.PIONEER_CARDGEN_DECK,
+                    DeckType.HISTORIC_CARDGEN_DECK,
+                    DeckType.MODERN_CARDGEN_DECK,
+                    DeckType.LEGACY_CARDGEN_DECK,
+                    DeckType.VINTAGE_CARDGEN_DECK,
+                    DeckType.PAUPER_CARDGEN_DECK,
+                    DeckType.THEME_DECK,
+                    DeckType.NET_DECK,
+                    DeckType.NET_ARCHIVE_STANDARD_DECK,
+                    DeckType.NET_ARCHIVE_PIONEER_DECK,
+                    DeckType.NET_ARCHIVE_MODERN_DECK,
+                    DeckType.NET_ARCHIVE_PAUPER_DECK,
+                    DeckType.NET_ARCHIVE_VINTAGE_DECK,
+                    DeckType.NET_ARCHIVE_LEGACY_DECK,
+                    DeckType.NET_ARCHIVE_BLOCK_DECK
 
-                );
-                if (!FModel.isdeckGenMatrixLoaded()) {
-                    deckTypes.remove(DeckType.STANDARD_CARDGEN_DECK);
-                    deckTypes.remove(DeckType.PIONEER_CARDGEN_DECK);
-                    deckTypes.remove(DeckType.HISTORIC_CARDGEN_DECK);
-                    deckTypes.remove(DeckType.MODERN_CARDGEN_DECK);
-                    deckTypes.remove(DeckType.LEGACY_CARDGEN_DECK);
-                    deckTypes.remove(DeckType.VINTAGE_CARDGEN_DECK);
-                    deckTypes.remove(DeckType.PAUPER_CARDGEN_DECK);
-                }
+            );
+            if (!FModel.isdeckGenMatrixLoaded()) {
+                deckTypes.remove(DeckType.STANDARD_CARDGEN_DECK);
+                deckTypes.remove(DeckType.PIONEER_CARDGEN_DECK);
+                deckTypes.remove(DeckType.HISTORIC_CARDGEN_DECK);
+                deckTypes.remove(DeckType.MODERN_CARDGEN_DECK);
+                deckTypes.remove(DeckType.LEGACY_CARDGEN_DECK);
+                deckTypes.remove(DeckType.VINTAGE_CARDGEN_DECK);
+                deckTypes.remove(DeckType.PAUPER_CARDGEN_DECK);
+            }
 
-                ListChooser<DeckType> chooser = new ListChooser<>(
-                        Forge.getLocalizer().getMessage("lblChooseAllowedDeckTypeOpponents"), 0, deckTypes.size(), deckTypes, null, new Callback<List<DeckType>>() {
-                    @Override
-                    public void run(final List<DeckType> allowedDeckTypes) {
+            ListChooser<DeckType> chooser = new ListChooser<>(
+                    Forge.getLocalizer().getMessage("lblChooseAllowedDeckTypeOpponents"), 0, deckTypes.size(), deckTypes, null, allowedDeckTypes -> {
                         if (allowedDeckTypes == null || allowedDeckTypes.isEmpty()) {
                             return;
                         }
@@ -1490,38 +1480,33 @@ public class FDeckChooser extends FScreen {
                                 gauntlet.startRound(players, humanPlayer);
                             }));
                         });
-                    }
-                });
-                chooser.show(null, false); /*setting selectMax to true will select all available option*/
-            }
+                    });
+            chooser.show(null, false); /*setting selectMax to true will select all available option*/
         });
     }
 
     private void testVariantDeck(final Deck userDeck, final GameType variant) {
-        promptForDeck(Forge.getLocalizer().getMessage("lblSelectOpponentDeck"), variant, true, new Callback<Deck>() {
-            @Override
-            public void run(final Deck aiDeck) {
-                if (aiDeck == null) { return; }
+        promptForDeck(Forge.getLocalizer().getMessage("lblSelectOpponentDeck"), variant, true, aiDeck -> {
+            if (aiDeck == null) { return; }
 
-                LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewGame"), true, () -> {
-                    Set<GameType> appliedVariants = new HashSet<>();
-                    appliedVariants.add(variant);
+            LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewGame"), true, () -> {
+                Set<GameType> appliedVariants = new HashSet<>();
+                appliedVariants.add(variant);
 
-                    List<RegisteredPlayer> players = new ArrayList<>();
-                    RegisteredPlayer humanPlayer = RegisteredPlayer.forVariants(2, appliedVariants, userDeck, null, false, null, null);
-                    humanPlayer.setPlayer(GamePlayerUtil.getGuiPlayer());
-                    RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(2, appliedVariants, aiDeck, null, false, null, null);
-                    aiPlayer.setPlayer(GamePlayerUtil.createAiPlayer());
-                    players.add(humanPlayer);
-                    players.add(aiPlayer);
+                List<RegisteredPlayer> players = new ArrayList<>();
+                RegisteredPlayer humanPlayer = RegisteredPlayer.forVariants(2, appliedVariants, userDeck, null, false, null, null);
+                humanPlayer.setPlayer(GamePlayerUtil.getGuiPlayer());
+                RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(2, appliedVariants, aiDeck, null, false, null, null);
+                aiPlayer.setPlayer(GamePlayerUtil.createAiPlayer());
+                players.add(humanPlayer);
+                players.add(aiPlayer);
 
-                    final Map<RegisteredPlayer, IGuiGame> guiMap = new HashMap<>();
-                    guiMap.put(humanPlayer, MatchController.instance);
+                final Map<RegisteredPlayer, IGuiGame> guiMap = new HashMap<>();
+                guiMap.put(humanPlayer, MatchController.instance);
 
-                    final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
-                    hostedMatch.startMatch(GameType.Constructed, appliedVariants, players, guiMap);
-                });
-            }
+                final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
+                hostedMatch.startMatch(GameType.Constructed, appliedVariants, players, guiMap);
+            });
         });
     }
 
