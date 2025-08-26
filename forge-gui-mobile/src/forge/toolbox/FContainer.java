@@ -23,6 +23,7 @@ public abstract class FContainer extends FDisplayObject {
 
     public void clear() {
         children.clear();
+        ((ArrayList<FDisplayObject>) children).trimToSize();
     }
 
     public int indexOf(FDisplayObject child) {
