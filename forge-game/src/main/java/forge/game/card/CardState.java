@@ -91,7 +91,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
 
     private ReplacementEffect loyaltyRep;
     private ReplacementEffect defenseRep;
-    protected ReplacementEffect sagaRep;
+    private ReplacementEffect sagaRep;
     private ReplacementEffect adventureRep;
     private ReplacementEffect omenRep;
 
