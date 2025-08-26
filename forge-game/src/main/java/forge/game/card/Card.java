@@ -3561,7 +3561,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (!getStaticAbilities().isEmpty()) {
             return false;
         }
-        if (!getReplacementEffects().isEmpty()) {
+        if (!getReplacementEffects().isEmpty()
+                && getReplacementEffects().size() == 1 && getReplacementEffects().get(0) != getCurrentState().sagaRep) {
             return false;
         }
         if (!getTriggers().isEmpty()) {
