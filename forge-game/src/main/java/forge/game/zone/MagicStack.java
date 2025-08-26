@@ -854,6 +854,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             // caused by DevTools before first turn
             return false;
         }
+        if (!hasSimultaneousStackEntries()) {
+            return false;
+        }
 
         if (!playerTurn.isInGame()) {
             playerTurn = game.getNextPlayerAfter(playerTurn);
