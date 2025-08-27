@@ -385,3 +385,7 @@ ScryfallCode=SCD
 23 g_1_1_saproling @Joseph Meehan
 24 c_1_1_a_thopter_flying @Richard Wright
 25 c_a_treasure_sac @Alayna Danner
+
+[other]
+26 emblem_ob_nixilis_reignited @Chris Rahn
+27 emblem_sarkhan_the_dragonspeaker @Daarken
