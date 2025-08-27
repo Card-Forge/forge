@@ -537,17 +537,6 @@ public class ImageCache {
         return Pair.of(c, brightness > 155);
     }
 
-    private static class ImageRecord {
-        String colorValue;
-        Boolean isCloserToWhite;
-        Integer cardRadius;
-        boolean isFullBorder;
-
-        ImageRecord(String colorString, Boolean closetoWhite, int radius, boolean fullborder) {
-            colorValue = colorString;
-            isCloserToWhite = closetoWhite;
-            cardRadius = radius;
-            isFullBorder = fullborder;
-        }
+    private record ImageRecord(String colorValue, Boolean isCloserToWhite, int cardRadius, boolean isFullBorder) {
     }
 }
