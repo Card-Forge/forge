@@ -350,6 +350,14 @@ public class AdventureDeckEditor extends FDeckEditor {
             int safeToSellCount = amountInCollection - copiesUsedInDecks; //Number we can sell without losing cards from a deck.
             int autoSellCount = Current.player().autoSellCards.count(card); //Number currently in auto-sell.
             int canMoveToAutoSell = safeToSellCount - autoSellCount; //Number that can be moved to auto-sell from here.
+            
+            if (card.getRules().isUnsupported()) {
+                menu.clearItems();
+                FMenuItem removeItem = new FMenuItem(localizer.getMessage("lblRemoveUnsupportedCard"), FSkinImage.HDDELETE, e ->
+                    removeCard(card, safeToSellCount));
+                menu.addItem(removeItem);
+                return;
+            }
 
             if (copiesUsedInDecks > 0) {
                 String text = localizer.getMessage("lblCopiesInUse", copiesUsedInDecks);
