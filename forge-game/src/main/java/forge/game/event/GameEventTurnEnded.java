@@ -1,6 +1,6 @@
 package forge.game.event;
 
-public class GameEventTurnEnded extends GameEvent {
+public record GameEventTurnEnded() implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

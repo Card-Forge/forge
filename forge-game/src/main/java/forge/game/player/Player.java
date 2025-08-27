@@ -547,7 +547,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         life -= toLose;
         view.updateLife(this);
         if (manaBurn) {
-            game.fireEvent(new GameEventManaBurn(this, toLose, true));
+            game.fireEvent(new GameEventManaBurn(this, true, toLose));
         } else {
             game.fireEvent(new GameEventPlayerLivesChanged(this, oldLife, life));
         }

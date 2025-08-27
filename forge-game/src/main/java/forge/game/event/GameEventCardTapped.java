@@ -2,14 +2,7 @@ package forge.game.event;
 
 import forge.game.card.Card;
 
-public class GameEventCardTapped extends GameEvent {
-    public final boolean tapped;
-    public final Card card;
-
-    public GameEventCardTapped(final Card card, final boolean tapped) {
-        this.tapped = tapped;
-        this.card = card;
-    }
+public record GameEventCardTapped(Card card, boolean tapped) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

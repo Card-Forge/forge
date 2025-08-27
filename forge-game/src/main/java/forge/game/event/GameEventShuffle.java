@@ -4,13 +4,7 @@ import forge.game.player.Player;
 import forge.util.Lang;
 import forge.util.TextUtil;
 
-public class GameEventShuffle extends GameEvent {
-
-    public final Player player;
-
-    public GameEventShuffle(Player player) {
-        this.player = player;
-    }
+public record GameEventShuffle(Player player) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

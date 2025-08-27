@@ -3,17 +3,7 @@ package forge.game.event;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 
-public class GameEventCardAttachment extends GameEvent {
-
-    public final Card equipment;
-    public final GameEntity newTarget; // can enchant player, I'm saving a class to enchants - it could be incorrect.
-    public final GameEntity oldEntity;
-
-    public GameEventCardAttachment(Card attachment, GameEntity formerEntity, GameEntity newEntity) {
-        this.equipment = attachment;
-        this.newTarget = newEntity;
-        this.oldEntity = formerEntity;
-    }
+public record GameEventCardAttachment(Card equipment, GameEntity newTarget, GameEntity oldEntity) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

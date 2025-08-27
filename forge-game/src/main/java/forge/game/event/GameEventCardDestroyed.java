@@ -1,6 +1,6 @@
 package forge.game.event;
 
-public class GameEventCardDestroyed extends GameEvent {
+public record GameEventCardDestroyed() implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
