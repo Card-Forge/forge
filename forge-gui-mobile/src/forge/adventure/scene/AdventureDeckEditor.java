@@ -501,9 +501,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
                 String action = localizer.getMessage("lblFromAutoSell", autoSellCount, safeToSellCount);
                 String prompt = String.format("%s - %s %s", card, action, localizer.getMessage("lblHowMany"));
-                FMenuItem moveToCatalog = new FMenuItem(action, CATALOG_ICON, new MoveQuantityPrompt(prompt, autoSellCount, amount -> {
-                    moveCard(card, catalogPage, amount);
-                }));
+                FMenuItem moveToCatalog = new FMenuItem(action, CATALOG_ICON, new MoveQuantityPrompt(prompt, autoSellCount, amount -> moveCard(card, catalogPage, amount)));
                 menu.addItem(moveToCatalog);
             }
 
@@ -658,6 +656,15 @@ public class AdventureDeckEditor extends FDeckEditor {
 //            if (currentEvent.registeredDeck!=null && !currentEvent.registeredDeck.isEmpty()){
 //                //Use this deck instead of selected deck
 //            }
+
+        for (TabPage<FDeckEditor> page : tabPages) {
+            if (page instanceof CollectionCatalogPage) {
+                if (!Current.player().getUnsupportedCards().isEmpty())
+                    GuiChoose.getChoices(Forge.getLocalizer().getMessage("lblRemoveAllUnsupportedCards"),
+                        -1, -1, Current.player().getUnsupportedCards(), result -> Current.player().getUnsupportedCards().clear());
+                break;
+            }
+        }
     }
 
     public void refresh() {
