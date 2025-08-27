@@ -4,17 +4,7 @@ import forge.game.card.Card;
 import forge.game.zone.Zone;
 import forge.util.TextUtil;
 
-public class GameEventCardChangeZone extends GameEvent {
-    
-    public final Card card;
-    public final Zone from;
-    public final Zone to;
-
-    public GameEventCardChangeZone(Card c, Zone zoneFrom, Zone zoneTo) {
-        card = c;
-        from = zoneFrom;
-        to = zoneTo;
-    }
+public record GameEventCardChangeZone(Card card, Zone from, Zone to) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
