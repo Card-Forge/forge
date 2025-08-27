@@ -261,30 +261,35 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
                 if (ImageCache.getInstance().imageKeyFileExists(reward.getCard().getImageKey(false)) && !Forge.enableUIMask.equals("Art")) {
                     int count = 0;
-                    PaperCard card = ImageUtil.getPaperCardFromImageKey(reward.getCard().getImageKey(false));
-                    File frontFace = ImageKeys.getImageFile(card.getCardImageKey());
-                    if (frontFace != null) {
-                        try {
-                            Texture front = Forge.getAssets().manager().get(frontFace.getPath(), Texture.class, false);
-                            if (front == null) {
-                                Forge.getAssets().manager().load(frontFace.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
-                                Forge.getAssets().manager().finishLoadingAsset(frontFace.getPath());
-                                front = Forge.getAssets().manager().get(frontFace.getPath(), Texture.class, false);
-                            }
-                            if (front != null) {
-                                count += 1;
-                                setCardImage(front);
-                            } else {
+                    try {
+                        PaperCard card = ImageUtil.getPaperCardFromImageKey(reward.getCard().getImageKey(false));
+                        File frontFace = ImageKeys.getImageFile(card.getCardImageKey());
+                        if (frontFace != null) {
+                            try {
+                                Texture front = Forge.getAssets().manager().get(frontFace.getPath(), Texture.class, false);
+                                if (front == null) {
+                                    Forge.getAssets().manager().load(frontFace.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
+                                    Forge.getAssets().manager().finishLoadingAsset(frontFace.getPath());
+                                    front = Forge.getAssets().manager().get(frontFace.getPath(), Texture.class, false);
+                                }
+                                if (front != null) {
+                                    count += 1;
+                                    setCardImage(front);
+                                } else {
+                                    loaded = false;
+                                }
+                            } catch (Exception e) {
+                                System.err.println("Failed to load image: " + frontFace.getPath());
                                 loaded = false;
                             }
-                        } catch (Exception e) {
-                            System.err.println("Failed to load image: " + frontFace.getPath());
+                        } else {
                             loaded = false;
                         }
-                    } else {
+                        ImageCache.getInstance().updateSynqCount(frontFace, count);
+                    } catch (Exception e) {
+                        System.err.println("Failed to load image: " + reward.getCard());
                         loaded = false;
                     }
-                    ImageCache.getInstance().updateSynqCount(frontFace, count);
                 } else {
                     String imagePath = ImageUtil.getImageRelativePath(reward.getCard(), "", true, false);
                     File lookup = ImageKeys.hasSetLookup(imagePath) ? ImageKeys.setLookUpFile(imagePath, imagePath + "border") : null;
@@ -322,8 +327,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                                     }
                                     ImageCache.getInstance().updateSynqCount(file, 1);
                                 }
-                            } catch (Exception e) {
-                            }
+                            } catch (Exception ignored) {}
                         }
                         T = renderPlaceholder(new Graphics(), reward.getCard(), false); //Now we can render the card.
                         setCardImage(T);
@@ -587,7 +591,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             } catch (Exception e) {
                 System.err.println("Failed to load image: " + backFace.getPath());
             }
-        };
+        }
     }
 
     private void switchTooltip() {

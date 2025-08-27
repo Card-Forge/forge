@@ -10,4 +10,11 @@ public class GameEventCombatChanged extends GameEvent {
         return visitor.visit(this);
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "Combat changed";
+    }
 }

@@ -19,4 +19,11 @@ public class GameEventCombatEnded extends GameEvent {
         return visitor.visit(this);
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "Combat ended. Attackers: " + attackers + " Blockers: " + blockers;
+    }
 }
