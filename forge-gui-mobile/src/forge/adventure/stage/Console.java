@@ -103,7 +103,7 @@ public class Console extends Window {
                         case Input.Keys.V:
                             if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
                                 if (Forge.getClipboard().hasContents()) {
-                                    textField.setText(Forge.getClipboard().getContents());
+                                    textField.appendText(Forge.getClipboard().getContents());
                                     textField.setCursorPosition(Integer.MAX_VALUE);
                                 }
                             }
