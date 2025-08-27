@@ -177,9 +177,3 @@ ScryfallCode=VIS
 165 U Karoo @Zina Saunders
 166 U Quicksand @Roger Raupp
 167 R Undiscovered Paradise @David O'Connor
-
-[tokens]
-butterfly
-c_0_1_a_prism
-g_0_1_sheep
-g_1_1_snake
