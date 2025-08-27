@@ -265,9 +265,15 @@ public class HostedMatch {
             // After game is over...
             isMatchOver = match.isMatchOver();
             if (humanCount == 0) {
-                // ... if no human players, let AI decide next game
+                // ... if no human players, pause and let AI decide next game
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 if (isMatchOver) {
-                    addNextGameDecision(null, NextGameDecision.QUIT);
+                    // Keep open last game tab to show match results.
+                    // addNextGameDecision(null, NextGameDecision.QUIT);
                 } else {
                     addNextGameDecision(null, NextGameDecision.CONTINUE);
                 }
