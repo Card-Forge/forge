@@ -342,12 +342,9 @@ public class TriggerHandler {
             }
         }
 
-        // AP
-        checkStatics |= runNonStaticTriggersForPlayer(playerAP, wt, delayedTriggersWorkingCopy);
-
-        // NAPs
-        for (final Player nap : game.getNonactivePlayers()) {
-            checkStatics |= runNonStaticTriggersForPlayer(nap, wt, delayedTriggersWorkingCopy);
+        // the trigger will be ordered later in MagicStack
+        for (final Player player : game.getPlayers()) {
+            checkStatics |= runNonStaticTriggersForPlayer(player, wt, delayedTriggersWorkingCopy);
         }
         return checkStatics;
     }
