@@ -362,7 +362,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         clearSelection();
 
         if (model.getOrderedList() != null) {
-            for (Entry<T, Integer> itemEntry : model.getOrderedList()) {
+            for (Entry<T, Integer> itemEntry : new ArrayList<>(model.getOrderedList())) {
                 T item = itemEntry.getKey();
                 int qty = itemEntry.getValue();
                 int groupIndex = groupBy == null ? -1 : groupBy.getItemGroupIndex(item);
@@ -897,6 +897,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             float visibleLeft = getScrollLeft();
             float visibleRight = visibleLeft + getWidth();
             for (Pile pile : piles) {
+                if (pile == null)
+                    continue;
                 if (pile.getRight() < visibleLeft) {
                     continue;
                 }
