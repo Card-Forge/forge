@@ -2,6 +2,7 @@ package forge.adventure.data;
 
 import com.badlogic.gdx.utils.Array;
 import com.google.common.collect.Iterables;
+import forge.ImageKeys;
 import forge.StaticData;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
@@ -113,6 +114,12 @@ public class RewardData implements Serializable {
                     return false;
             } else if (Arrays.asList(configData.restrictedEditions).contains(input.getEdition()))
                 return false;
+
+            if (input.getRules().isCustom() &&
+                    input.getImageKey(false).startsWith(ImageKeys.ADVENTURECARD_PREFIX)) {
+                return false;
+            }
+
             return !Arrays.asList(configData.restrictedCards).contains(input.getName());
         });
 

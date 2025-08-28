@@ -28,4 +28,11 @@ public class GameEventCardDamaged extends GameEvent {
         return visitor.visit(this);
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "" + source + " dealt " + amount + " " + type + " damage to " + card;
+    }
 }
