@@ -445,7 +445,7 @@ public class TriggerHandler {
             controller = regtrig.getHostCard().getController();
         }
         // If the runParams contains MergedCards, it is called from GameAction.changeZone()
-        if (runParams.containsKey(AbilityKey.MergedCards)) {
+        if (runParams.get(AbilityKey.MergedCards) != null) {
             // Check if the trigger cares the origin is from battlefield
             Card original = (Card) runParams.get(AbilityKey.Card);
             CardCollection mergedCards = (CardCollection) runParams.get(AbilityKey.MergedCards);
