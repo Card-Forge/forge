@@ -170,7 +170,7 @@ public class CountersPutAi extends CountersAi {
                     CardCollection oppCreatM1 = CardLists.filter(oppCreat, CardPredicates.hasCounter(CounterEnumType.M1M1));
                     oppCreatM1 = CardLists.getNotKeyword(oppCreatM1, Keyword.UNDYING);
 
-                    oppCreatM1 = CardLists.filter(oppCreatM1, input -> input.getNetToughness() <= 1 && input.canReceiveCounters(CounterType.get(CounterEnumType.M1M1)));
+                    oppCreatM1 = CardLists.filter(oppCreatM1, input -> input.getNetToughness() <= 1 && input.canReceiveCounters(CounterEnumType.M1M1));
 
                     Card best = ComputerUtilCard.getBestAI(oppCreatM1);
                     if (best != null) {
@@ -336,7 +336,7 @@ public class CountersPutAi extends CountersAi {
             Game game = ai.getGame();
             Combat combat = game.getCombat();
 
-            if (!source.canReceiveCounters(CounterType.get(CounterEnumType.P1P1)) || source.getCounters(CounterEnumType.P1P1) > 0) {
+            if (!source.canReceiveCounters(CounterEnumType.P1P1) || source.getCounters(CounterEnumType.P1P1) > 0) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (combat != null && ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 return doCombatAdaptLogic(source, amount, combat);
@@ -961,8 +961,8 @@ public class CountersPutAi extends CountersAi {
     protected Card chooseSingleCard(final Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         // Bolster does use this
         // TODO need more or less logic there?
-        final CounterType m1m1 = CounterType.get(CounterEnumType.M1M1);
-        final CounterType p1p1 = CounterType.get(CounterEnumType.P1P1);
+        final CounterType m1m1 = CounterEnumType.M1M1;
+        final CounterType p1p1 = CounterEnumType.P1P1;
 
         // no logic if there is no options or no to choice
         if (!isOptional && Iterables.size(options) <= 1) {
@@ -1083,8 +1083,8 @@ public class CountersPutAi extends CountersAi {
         if (e instanceof Card) {
             Card c = (Card) e;
             if (c.getController().isOpponentOf(ai)) {
-                if (options.contains(CounterType.get(CounterEnumType.M1M1)) && !c.hasKeyword(Keyword.UNDYING)) {
-                    return CounterType.get(CounterEnumType.M1M1);
+                if (options.contains(CounterEnumType.M1M1) && !c.hasKeyword(Keyword.UNDYING)) {
+                    return CounterEnumType.M1M1;
                 }
                 for (CounterType type : options) {
                     if (ComputerUtil.isNegativeCounter(type, c)) {
@@ -1101,12 +1101,12 @@ public class CountersPutAi extends CountersAi {
         } else if (e instanceof Player) {
             Player p = (Player) e;
             if (p.isOpponentOf(ai)) {
-                if (options.contains(CounterType.get(CounterEnumType.POISON))) {
-                    return CounterType.get(CounterEnumType.POISON);
+                if (options.contains(CounterEnumType.POISON)) {
+                    return CounterEnumType.POISON;
                 }
             } else {
-                if (options.contains(CounterType.get(CounterEnumType.EXPERIENCE))) {
-                    return CounterType.get(CounterEnumType.EXPERIENCE);
+                if (options.contains(CounterEnumType.EXPERIENCE)) {
+                    return CounterEnumType.EXPERIENCE;
                 }
             }
 

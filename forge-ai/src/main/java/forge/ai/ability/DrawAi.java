@@ -26,7 +26,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
 import forge.game.cost.*;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -370,7 +369,7 @@ public class DrawAi extends SpellAbilityAi {
 
                 // try to make opponent lose to poison
                 // currently only Caress of Phyrexia
-                if (getPoison != null && oppA.canReceiveCounters(CounterType.get(CounterEnumType.POISON))) {
+                if (getPoison != null && oppA.canReceiveCounters(CounterEnumType.POISON)) {
                     if (oppA.getPoisonCounters() + numCards > 9) {
                         sa.getTargets().add(oppA);
                         return true;
@@ -414,7 +413,7 @@ public class DrawAi extends SpellAbilityAi {
                     }
                 }
 
-                if (getPoison != null && ai.canReceiveCounters(CounterType.get(CounterEnumType.POISON))) {
+                if (getPoison != null && ai.canReceiveCounters(CounterEnumType.POISON)) {
                     if (numCards + ai.getPoisonCounters() >= 8) {
                         aiTarget = false;
                     }
@@ -472,7 +471,7 @@ public class DrawAi extends SpellAbilityAi {
                 }
 
                 // ally would lose because of poison
-                if (getPoison != null && ally.canReceiveCounters(CounterType.get(CounterEnumType.POISON)) && ally.getPoisonCounters() + numCards > 9) {
+                if (getPoison != null && ally.canReceiveCounters(CounterEnumType.POISON) && ally.getPoisonCounters() + numCards > 9) {
                         continue;
                 }
 
