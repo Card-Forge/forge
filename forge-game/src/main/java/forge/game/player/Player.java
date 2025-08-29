@@ -2349,9 +2349,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void resetSpellCastSinceBegOfYourLastTurn() {
         spellsCastSinceBeginningOfLastTurn = Lists.newArrayList();
     }
-    public final void setSpellCastSinceBegOfYourLastTurn(List<Card> spells) {
-        spellsCastSinceBeginningOfLastTurn = new ArrayList<>(spells);
-    }
     public final void addSpellCastSinceBegOfYourLastTurn(List<Card> spells) {
         spellsCastSinceBeginningOfLastTurn.addAll(spells);
     }
