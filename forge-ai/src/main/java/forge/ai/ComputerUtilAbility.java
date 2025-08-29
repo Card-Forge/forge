@@ -360,6 +360,7 @@ public class ComputerUtilAbility {
                 if (source.isInPlay() && source.hasSVar("EndOfTurnLeavePlay")) {
                     p += 1;
                 }
+                // avoid cards AI is bad at
                 if (ComputerUtilCard.isCardRemAIDeck(sa.getOriginalHost() != null ? sa.getOriginalHost() : source)) {
                     p -= 10;
                 }
@@ -391,7 +392,15 @@ public class ComputerUtilAbility {
                     }
                     final TriggerType mode = trig.getMode();
                     // benefit from Magecraft abilities
-                    if ((mode == TriggerType.SpellCast || mode == TriggerType.SpellCastOrCopy) && "You".equals(sa.getParam("ValidActivatingPlayer"))) {
+                    if ((mode == TriggerType.SpellCast || mode == TriggerType.SpellCastOrCopy) && "You".equals(trig.getParam("ValidActivatingPlayer"))) {
+                        p += 1;
+                    }
+                    // ETB triggers
+                    // Weapons Manufactoring before Breya, Etherium Shaper etc.
+                    // 528+ cards match `Mode\$ ChangesZone.*?Destination\$ Battlefield.*?ValidCard.*?YouCtrl.*?TriggerZones\$ Battlefield`
+                    if ("Battlefield".equals(trig.getParam("Destination"))
+                        && ((mode == TriggerType.ChangesZone && trig.getParamOrDefault("ValidCard", "").contains("YouCtrl"))
+                        || (mode == TriggerType.ChangesZoneAll && trig.getParamOrDefault("ValidCards", "").contains("YouCtrl")))) {
                         p += 1;
                     }
                 }
@@ -400,6 +409,11 @@ public class ComputerUtilAbility {
                     final Set<StaticAbilityMode> mode = sta.getMode();
                     // reduce cost to enable more plays
                     if (mode.contains(StaticAbilityMode.ReduceCost) && "You".equals(sta.getParam("Activator"))) {
+                        p += 1;
+                    }
+                    // double triggers
+                    // 32+ cards match `S:Mode\$ Panharmonicon`
+                    if (mode.contains(StaticAbilityMode.Panharmonicon)) {
                         p += 1;
                     }
                 }
