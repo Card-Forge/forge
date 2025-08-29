@@ -3,17 +3,24 @@ package forge.game.ability.effects;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Iterables;
+
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.ability.AbilityKey;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.CardTranslation;
 import forge.util.Lang;
+import forge.util.Localizer;
+import forge.util.TextUtil;
 
 public class DestroyEffect extends SpellAbilityEffect {
     @Override
@@ -47,6 +54,9 @@ public class DestroyEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
 
+        final boolean optional = sa.hasParam("Optional") || sa.hasParam("OptionalDecider");
+        final String optionalAbilityPrompt = sa.getParam("OptionalAbilityPrompt");
+
         if (sa.hasParam("RememberDestroyed")) {
             host.clearRemembered();
         }
@@ -56,6 +66,19 @@ public class DestroyEffect extends SpellAbilityEffect {
 
         tgtCards = GameActionUtil.orderCardsByTheirOwners(game, tgtCards, ZoneType.Graveyard, sa);
         untargetedCards = GameActionUtil.orderCardsByTheirOwners(game, untargetedCards, ZoneType.Graveyard, sa);
+
+        if (optional && !tgtCards.isEmpty()) {
+            String prompt = optionalAbilityPrompt != null ? optionalAbilityPrompt : Localizer.getInstance().getMessage("lblWouldYouLikeProceedWithOptionalAbility") + " " + host + "?\n\n(" + sa.getDescription() + ")";
+            Player decider = sa.getActivatingPlayer();
+
+            if (sa.hasParam("OptionalDecider")) {
+                decider = Iterables.getFirst(AbilityUtils.getDefinedPlayers(host, sa.getParam("OptionalDecider"), sa), decider);
+            }
+            
+            if (!decider.getController().confirmAction(sa, null, TextUtil.fastReplace(prompt, "CARDNAME", CardTranslation.getTranslatedName(host.getName())), null)) {
+                return;
+            }
+        }
 
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(params, sa);
