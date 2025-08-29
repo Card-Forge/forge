@@ -7,4 +7,6 @@ SVar:DBClearRemembered:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBSeek
 SVar:DBSeek:DB$ Seek | Condition$ Threshold | Num$ 1 | Type$ Rat | RememberFound$ True | SubAbility$ DBAnimate | StackDescription$ None
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | staticAbilities$ ReduceCost | Duration$ Perpetual | StackDescription$ None | SubAbility$ DBGainLife
 SVar:ReduceCost:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | Description$ This spell costs {1} less to cast.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X
+SVar:X:Count$ValidHand Card.YouOwn+Rat
 Oracle:Target opponent reveals each nonland card in their hand. You choose one of those cards. Exile that card.\nThreshold — If there are seven or more cards are in your graveyard, seek a Rat card. It perpetually gains "This spell costs {1} less to cast."\nYou gain 1 life for each Rat card in your hand.
