@@ -2,7 +2,7 @@ Name:Displaced Dinosaurs
 ManaCost:5 G G
 Types:Creature Dinosaur
 PT:7/7
-R:Event$ Moved | ValidCard$ Permanent.Historic+YouCtrl | ActiveZones$ Battlefield | Destination$ Battlefield | ReplaceWith$ BecomeDino | ReplacementResult$ Updated | Description$ As a historic permanent you control enters, it becomes a 7/7 Dinosaur creature in addition to its other types. (Artifacts, legendaries, and Sagas are historic.)
-SVar:BecomeDino:DB$ Animate | Defined$ ReplacedCard | Toughness$ 7 | Power$ 7 | Types$ Creature,Dinosaur | Duration$ Permanent
+R:Event$ Moved | ValidCard$ Permanent.Historic+YouCtrl | ActiveZones$ Battlefield | Destination$ Battlefield | ReplaceWith$ BecomeDino | Layer$ Copy | ReplacementResult$ Updated | Description$ As a historic permanent you control enters, it becomes a 7/7 Dinosaur creature in addition to its other types. (Artifacts, legendaries, and Sagas are historic.)
+SVar:BecomeDino:DB$ Clone | Defined$ ReplacedCard | CloneTarget$ ReplacedCard | SetPower$ 7 | SetToughness$ 7 | AddTypes$ Creature & Dinosaur
 DeckHints:Type$Legendary|Artifact|Saga
 Oracle:As a historic permanent you control enters, it becomes a 7/7 Dinosaur creature in addition to its other types. (Artifacts, legendaries, and Sagas are historic.)

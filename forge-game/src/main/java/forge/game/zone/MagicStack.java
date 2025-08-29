@@ -957,16 +957,15 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         final Player active = game.getPhaseHandler().getPlayerTurn();
         game.getStackZone().resetCardsAddedThisTurn();
         this.thisTurnActivated.clear();
+        active.resetSpellCastSinceBegOfYourLastTurn();
         if (thisTurnCast.isEmpty()) {
             lastTurnCast = Lists.newArrayList();
-            active.resetSpellCastSinceBegOfYourLastTurn();
             return;
         }
-        for (Player nonActive : game.getNonactivePlayers()) {
-            nonActive.addSpellCastSinceBegOfYourLastTurn(thisTurnCast);
+        for (Player player : game.getPlayers()) {
+            player.addSpellCastSinceBegOfYourLastTurn(thisTurnCast);
         }
         lastTurnCast = Lists.newArrayList(thisTurnCast);
-        active.setSpellCastSinceBegOfYourLastTurn(thisTurnCast);
         thisTurnCast.clear();
         game.updateStackForView();
     }
