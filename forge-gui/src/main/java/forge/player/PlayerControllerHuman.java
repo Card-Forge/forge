@@ -285,7 +285,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             // maindeck and max sideboard sizes
             // No longer need 1:1 sideboarding in non-limited formats
             List<PaperCard> resp = getGui().sideboard(sideboard, main, message);
-            newMain = ObjectUtils.defaultIfNull(resp, main.toFlatList());
+            newMain = ObjectUtils.getIfNull(resp, main.toFlatList());
         } while (conform && (newMain.size() < deckMinSize || combinedDeckSize - newMain.size() > sbMax));
 
         return newMain;

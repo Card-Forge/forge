@@ -608,7 +608,7 @@ public class CountersPutAi extends CountersAi {
                 return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
 
-            final int currCounters = cards.get(0).getCounters(CounterType.get(type));
+            final int currCounters = cards.get(0).getCounters(CounterType.getType(type));
             // each non +1/+1 counter on the card is a 10% chance of not
             // activating this ability.
 
@@ -623,7 +623,7 @@ public class CountersPutAi extends CountersAi {
             }
 
             // Useless since the card already has the keyword (or for another reason)
-            if (ComputerUtil.isUselessCounter(CounterType.get(type), cards.get(0))) {
+            if (ComputerUtil.isUselessCounter(CounterType.getType(type), cards.get(0))) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
