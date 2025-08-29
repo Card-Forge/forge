@@ -302,29 +302,25 @@ public class TriggerHandler {
     }
 
     private boolean runWaitingTrigger(final TriggerWaiting wt) {
-        final TriggerType mode = wt.getMode();
-        final Map<AbilityKey, Object> runParams = wt.getParams();
-
         final Player playerAP = game.getPhaseHandler().getPlayerTurn();
         if (playerAP == null) {
             // This should only happen outside of games, so it's safe to abort.
             return false;
         }
 
+        final TriggerType mode = wt.getMode();
+        final Map<AbilityKey, Object> runParams = wt.getParams();
         // Copy triggers here, so things can be modified just in case
         final List<Trigger> delayedTriggersWorkingCopy = new ArrayList<>(delayedTriggers);
-
         boolean checkStatics = false;
 
-        // Static triggers
+        // Static ones should happen first
         for (final Trigger t : Lists.newArrayList(activeTriggers)) {
             if (t.isStatic() && canRunTrigger(t, mode, runParams)) {
-                int x = 1 + StaticAbilityPanharmonicon.handlePanharmonicon(game, t, runParams);
-
-                for (int i = 0; i < x; ++i) {
+                int trigAmt = 1 + StaticAbilityPanharmonicon.handlePanharmonicon(game, t, runParams);
+                for (int i = 0; i < trigAmt; ++i) {
                     runSingleTrigger(t, runParams);
                 }
-
                 checkStatics = true;
             }
         }
@@ -342,33 +338,17 @@ public class TriggerHandler {
             }
         }
 
-        // the trigger will be ordered later in MagicStack
-        for (final Player player : game.getPlayers()) {
-            checkStatics |= runNonStaticTriggersForPlayer(player, wt, delayedTriggersWorkingCopy);
-        }
-        return checkStatics;
-    }
-
-    public void clearWaitingTriggers() {
-        waitingTriggers.clear();
-    }
-
-    private boolean runNonStaticTriggersForPlayer(final Player player, final TriggerWaiting wt, final List<Trigger> delayedTriggersWorkingCopy) {
-        final TriggerType mode = wt.getMode();
-        final Map<AbilityKey, Object> runParams = wt.getParams();
         final boolean wasCollected = wt.getTriggers() != null;
         final Iterable<Trigger> triggers = wasCollected ? wt.getTriggers() : activeTriggers;
 
-        boolean checkStatics = false;
-
+        // the trigger will be ordered later in MagicStack
         for (final Trigger t : triggers) {
-            if (!t.isStatic() && t.getHostCard().getController().equals(player) && (wasCollected || canRunTrigger(t, mode, runParams))) {
+            if (!t.isStatic() && (wasCollected || canRunTrigger(t, mode, runParams))) {
                 if (wasCollected && !t.checkActivationLimit()) {
                     continue;
                 }
-                int x = 1 + StaticAbilityPanharmonicon.handlePanharmonicon(game, t, runParams);
-
-                for (int i = 0; i < x; ++i) {
+                int trigAmt = 1 + StaticAbilityPanharmonicon.handlePanharmonicon(game, t, runParams);
+                for (int i = 0; i < trigAmt; ++i) {
                     runSingleTrigger(t, runParams, wt.getController(t));
                 }
                 checkStatics = true;
@@ -376,13 +356,17 @@ public class TriggerHandler {
         }
 
         for (final Trigger deltrig : delayedTriggersWorkingCopy) {
-            if (deltrig.getHostCard().getController().equals(player) &&
-                    isTriggerActive(deltrig) && canRunTrigger(deltrig, mode, runParams)) {
+            if (isTriggerActive(deltrig) && canRunTrigger(deltrig, mode, runParams)) {
                 delayedTriggers.remove(deltrig);
                 runSingleTrigger(deltrig, runParams);
             }
         }
+
         return checkStatics;
+    }
+
+    public void clearWaitingTriggers() {
+        waitingTriggers.clear();
     }
 
     private boolean isTriggerActive(final Trigger regtrig) {
@@ -461,7 +445,7 @@ public class TriggerHandler {
             controller = regtrig.getHostCard().getController();
         }
         // If the runParams contains MergedCards, it is called from GameAction.changeZone()
-        if (runParams.get(AbilityKey.MergedCards) != null) {
+        if (runParams.containsKey(AbilityKey.MergedCards)) {
             // Check if the trigger cares the origin is from battlefield
             Card original = (Card) runParams.get(AbilityKey.Card);
             CardCollection mergedCards = (CardCollection) runParams.get(AbilityKey.MergedCards);
@@ -633,7 +617,7 @@ public class TriggerHandler {
         List<Trigger> lost = new ArrayList<>(delayedTriggers);
         for (Trigger t : lost) {
             // CR 800.4d trigger controller lost game
-            if (t.getHostCard().getOwner().equals(p)) {
+            if (p.equals(t.getSpawningAbility().getActivatingPlayer())) {
                 delayedTriggers.remove(t);
             }
         }
