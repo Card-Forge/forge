@@ -359,6 +359,9 @@ ScryfallCode=M20
 343 C Titanic Growth @Ryan Pancoast
 344 C Woodland Mystic @Uriah Voth
 
+[rebalanced]
+A-115 A-Sorin, Imperious Bloodlord @Chase Stone
+
 [Lands]
 6 Bloodfell Caves|M20
 6 Blossoming Sands|M20

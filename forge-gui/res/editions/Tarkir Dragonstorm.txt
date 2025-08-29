@@ -489,6 +489,9 @@ Replace=.012F Mythic:fromSheet("TDM cards")
 425 R Temur Battlecrier @Valera Lutfullina
 426 R Qarsi Revenant @Diana Franco
 
+[rebalanced]
+A-103 A-Cori-Steel Cutter @Xabi Gaztelua
+
 [gain lands]
 1 Bloodfell Caves|TDM
 1 Blossoming Sands|TDM

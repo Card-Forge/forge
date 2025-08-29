@@ -2,12 +2,7 @@ package forge.game.event;
 
 import forge.game.player.Player;
 
-public class GameEventCardForetold extends GameEvent {
-    public final Player activatingPlayer;
-
-    public GameEventCardForetold(Player player) {
-        activatingPlayer = player;
-    }
+public record GameEventCardForetold(Player activatingPlayer) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

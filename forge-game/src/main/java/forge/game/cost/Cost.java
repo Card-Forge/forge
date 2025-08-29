@@ -997,9 +997,9 @@ public class Cost implements Serializable {
                                 Integer counters = otherAmount - part.convertAmount();
                                 // the cost can turn positive if multiple Carth raise it
                                 if (counters < 0) {
-                                    costParts.add(new CostPutCounter(String.valueOf(counters *-1), CounterType.get(CounterEnumType.LOYALTY), part.getType(), part.getTypeDescription()));
+                                    costParts.add(new CostPutCounter(String.valueOf(counters *-1), CounterEnumType.LOYALTY, part.getType(), part.getTypeDescription()));
                                 } else {
-                                    costParts.add(new CostRemoveCounter(String.valueOf(counters), CounterType.get(CounterEnumType.LOYALTY), part.getType(), part.getTypeDescription(), Lists.newArrayList(ZoneType.Battlefield) , false));
+                                    costParts.add(new CostRemoveCounter(String.valueOf(counters), CounterEnumType.LOYALTY, part.getType(), part.getTypeDescription(), Lists.newArrayList(ZoneType.Battlefield) , false));
                                 }
                             } else {
                                 continue;

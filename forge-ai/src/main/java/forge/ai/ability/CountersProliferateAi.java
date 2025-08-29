@@ -110,7 +110,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
     public <T extends GameEntity> T chooseSingleEntity(Player ai, SpellAbility sa, Collection<T> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         // Proliferate is always optional for all, no need to select best
 
-        final CounterType poison = CounterType.get(CounterEnumType.POISON);
+        final CounterType poison = CounterEnumType.POISON;
 
         boolean aggroAI = (((PlayerControllerAi) ai.getController()).getAi()).getBooleanProperty(AiProps.PLAY_AGGRO);
         // because countertype can't be chosen anymore, only look for poison counters

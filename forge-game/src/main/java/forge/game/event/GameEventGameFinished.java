@@ -1,6 +1,7 @@
 package forge.game.event;
 
-public class GameEventGameFinished extends GameEvent {
+public record GameEventGameFinished() implements GameEvent {
+
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
         return visitor.visit(this);

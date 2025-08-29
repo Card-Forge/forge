@@ -5,22 +5,7 @@ import forge.game.player.Player;
 import forge.util.Lang;
 import forge.util.TextUtil;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
-public class GameEventGameStarted extends GameEvent {
-
-    public final Player firstTurn;
-    public final Iterable<Player> players;
-    public final GameType gameType;
-
-    public GameEventGameStarted(GameType type, Player firstTurn, Iterable<Player> players) {
-        super();
-        this.gameType = type;
-        this.firstTurn = firstTurn;
-        this.players = players;
-    }
+public record GameEventGameStarted(GameType gameType, Player firstTurn, Iterable<Player> players) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

@@ -4,16 +4,7 @@ import forge.game.player.Player;
 import forge.util.Lang;
 import forge.util.TextUtil;
 
-public class GameEventPlayerShardsChanged extends GameEvent {
-    public final Player player;
-    public final int oldShards;
-    public final int newShards;
-
-    public GameEventPlayerShardsChanged(Player who, int oldValue, int newValue) {
-        player = who;
-        oldShards = oldValue;
-        newShards = newValue;
-    }
+public record GameEventPlayerShardsChanged(Player player, int oldShards, int newShards) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

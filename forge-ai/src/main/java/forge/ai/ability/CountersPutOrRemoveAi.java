@@ -218,18 +218,18 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
         Card tgt = (Card) params.get("Target");
 
         // planeswalker has high priority for loyalty counters
-        if (tgt.isPlaneswalker() && options.contains(CounterType.get(CounterEnumType.LOYALTY))) {
-            return CounterType.get(CounterEnumType.LOYALTY);
+        if (tgt.isPlaneswalker() && options.contains(CounterEnumType.LOYALTY)) {
+            return CounterEnumType.LOYALTY;
         }
 
         if (tgt.getController().isOpponentOf(ai)) {
             // creatures with BaseToughness below or equal zero might be
             // killed if their counters are removed
             if (tgt.isCreature() && tgt.getBaseToughness() <= 0) {
-                if (options.contains(CounterType.get(CounterEnumType.P1P1))) {
-                    return CounterType.get(CounterEnumType.P1P1);
-                } else if (options.contains(CounterType.get(CounterEnumType.M1M1))) {
-                    return CounterType.get(CounterEnumType.M1M1);
+                if (options.contains(CounterEnumType.P1P1)) {
+                    return CounterEnumType.P1P1;
+                } else if (options.contains(CounterEnumType.M1M1)) {
+                    return CounterEnumType.M1M1;
                 }
             }
 
@@ -241,17 +241,17 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
             }
         } else {
             // this counters are treat first to be removed
-            if ("Dark Depths".equals(tgt.getName()) && options.contains(CounterType.get(CounterEnumType.ICE))) {
+            if ("Dark Depths".equals(tgt.getName()) && options.contains(CounterEnumType.ICE)) {
                 CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
                 boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, (Predicate<Card>) Card::ignoreLegendRule);
 
                 if (maritEmpty) {
-                    return CounterType.get(CounterEnumType.ICE);
+                    return CounterEnumType.ICE;
                 }
-            } else if (tgt.hasKeyword(Keyword.UNDYING) && options.contains(CounterType.get(CounterEnumType.P1P1))) {
-                return CounterType.get(CounterEnumType.P1P1);
-            } else if (tgt.hasKeyword(Keyword.PERSIST) && options.contains(CounterType.get(CounterEnumType.M1M1))) {
-                return CounterType.get(CounterEnumType.M1M1);
+            } else if (tgt.hasKeyword(Keyword.UNDYING) && options.contains(CounterEnumType.P1P1)) {
+                return CounterEnumType.P1P1;
+            } else if (tgt.hasKeyword(Keyword.PERSIST) && options.contains(CounterEnumType.M1M1)) {
+                return CounterEnumType.M1M1;
             }
 
             // fallback logic, select positive counter to add more

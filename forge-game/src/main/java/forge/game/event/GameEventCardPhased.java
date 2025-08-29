@@ -2,19 +2,7 @@ package forge.game.event;
 
 import forge.game.card.Card;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
-public class GameEventCardPhased extends GameEvent {
-
-    public final Card card; 
-    public final boolean phaseState;
-
-    public GameEventCardPhased(Card card, boolean state) {
-        this.card = card;
-        phaseState = state;
-    }
+public record GameEventCardPhased(Card card, boolean phaseState) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

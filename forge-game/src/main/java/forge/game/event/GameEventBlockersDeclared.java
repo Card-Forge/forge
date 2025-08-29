@@ -12,23 +12,10 @@ import forge.util.Lang;
 import forge.util.TextUtil;
 import forge.util.maps.MapOfLists;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
-public class GameEventBlockersDeclared extends GameEvent {
-
-    public final Map<GameEntity, MapOfLists<Card, Card>> blockers;
-    public final Player defendingPlayer;
-
-    public GameEventBlockersDeclared(Player who, Map<GameEntity, MapOfLists<Card, Card>> blockers) {
-        this.blockers = blockers;
-        defendingPlayer = who;
-    }
+public record GameEventBlockersDeclared(Player defendingPlayer, Map<GameEntity, MapOfLists<Card, Card>> blockers) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
-        // TODO Auto-generated method stub
         return visitor.visit(this);
     }
 

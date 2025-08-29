@@ -3,16 +3,7 @@ package forge.game.event;
 import forge.game.player.Player;
 import forge.util.TextUtil;
 
-public class GameEventTurnBegan extends GameEvent {
-
-    public final Player turnOwner;
-    public final int turnNumber;
-
-    public GameEventTurnBegan(Player turnOwner, int turnNumber) {
-        super();
-        this.turnOwner = turnOwner;
-        this.turnNumber = turnNumber;
-    }
+public record GameEventTurnBegan(Player turnOwner, int turnNumber) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

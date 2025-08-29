@@ -369,8 +369,8 @@ public class RollDiceEffect extends SpellAbilityEffect {
         List<Card> canIncrementDice = new ArrayList<>();
         for (Card c : xenosquirrels) {
             // Xenosquirrels must have a P1P1 counter on it to remove in order to modify
-            Integer P1P1Counters = c.getCounters().get(CounterType.get(CounterEnumType.P1P1));
-            if (P1P1Counters != null && P1P1Counters > 0 && c.canRemoveCounters(CounterType.get(CounterEnumType.P1P1))) {
+            Integer P1P1Counters = c.getCounters().get(CounterEnumType.P1P1);
+            if (P1P1Counters != null && P1P1Counters > 0 && c.canRemoveCounters(CounterEnumType.P1P1)) {
                 canIncrementDice.add(c);
             }
         }
@@ -399,6 +399,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
      * @param repParams       replacement effect parameters
      * @return list of final roll results after applying ignores and replacements, sorted in ascending order
      */
+    @SuppressWarnings("unchecked")
     private static List<Integer> rollAction(int amount, int sides, int ignore, List<Integer> rollsResult, List<Integer> ignored, Map<Player, Integer> ignoreChosenMap, Set<Card> dicePTExchanges, Player player, Map<AbilityKey, Object> repParams) {
 
         repParams.put(AbilityKey.Sides, sides);
@@ -416,6 +417,8 @@ public class RollDiceEffect extends SpellAbilityEffect {
                 ignoreChosenMap = (Map<Player, Integer>) repParams.get(AbilityKey.IgnoreChosen);
                 break;
             }
+            default:
+                break;
         }
 
         List<Integer> naturalRolls = (rollsResult == null ? new ArrayList<>() : rollsResult);
