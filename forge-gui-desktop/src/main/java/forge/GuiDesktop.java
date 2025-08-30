@@ -15,6 +15,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 import javax.swing.ImageIcon;
@@ -53,7 +54,6 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.util.BuildInfo;
-import forge.util.Callback;
 import forge.util.FileUtil;
 import forge.util.ImageFetcher;
 import forge.util.OperatingSystem;
@@ -264,7 +264,7 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public void download(final GuiDownloadService service, final Callback<Boolean> callback) {
+    public void download(final GuiDownloadService service, final Consumer<Boolean> callback) {
         new GuiDownloader(service, callback).show();
     }
 

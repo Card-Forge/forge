@@ -59,24 +59,18 @@ import com.badlogic.gdx.backends.android.AndroidAudio;
 import com.badlogic.gdx.backends.android.AsynchronousAndroidAudio;
 import com.getkeepsafe.relinker.ReLinker;
 import de.cketti.fileprovider.PublicFileProvider;
+import forge.util.HWInfo;
 import forge.Forge;
 import forge.interfaces.IDeviceAdapter;
 import forge.util.FileUtil;
 import forge.util.ThreadUtil;
-import io.sentry.Sentry;
 import io.sentry.protocol.Device;
 import io.sentry.protocol.OperatingSystem;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jupnp.DefaultUpnpServiceConfiguration;
 import org.jupnp.android.AndroidUpnpServiceConfiguration;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.text.Normalizer;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -195,28 +189,24 @@ public class Main extends AndroidApplication {
         boolean permissiongranted = checkPermission();
         Gadapter = new AndroidAdapter(getContext());
 
-        // Get Basic Device and OS info for scope
-        Sentry.configureScope(scope -> {
-            // Device Info
-            Device device = new Device();
-            device.setId(Build.ID);
-            device.setName(getDeviceName());
-            device.setModel(Build.MODEL);
-            device.setBrand(Build.BRAND);
-            device.setManufacturer(Build.MANUFACTURER);
-            device.setMemorySize(memInfo.totalMem);
-            device.setChipset(Build.SOC_MANUFACTURER + " " + Build.SOC_MODEL);
-            // OS Info
-            OperatingSystem os = new OperatingSystem();
-            os.setName("Android");
-            os.setVersion(Build.VERSION.RELEASE);
-            os.setBuild(Build.DISPLAY);
-            // Set Contexts
-            scope.getContexts().setDevice(device);
-            scope.getContexts().setOperatingSystem(os);
-        });
+        // Device Info
+        Device device = new Device();
+        device.setId(Build.ID);
+        device.setName(getDeviceName());
+        device.setModel(Build.MODEL);
+        device.setBrand(Build.BRAND);
+        device.setManufacturer(Build.MANUFACTURER);
+        device.setMemorySize(memInfo.totalMem);
+        device.setCpuDescription(getCpuName());
+        device.setChipset(Build.HARDWARE + " " + Build.BOARD);
+        // OS Info
+        OperatingSystem os = new OperatingSystem();
+        os.setName("Android");
+        os.setVersion(Build.VERSION.RELEASE);
+        os.setBuild(Build.DISPLAY);
+        os.setRawDescription(getAndroidOSName());
 
-        initForge(Gadapter, permissiongranted, totalMemory, isTabletDevice(getContext()));
+        initForge(Gadapter, new HWInfo(device, os), permissiongranted, totalMemory, isTabletDevice(getContext()));
     }
 
     private void crossfade(View contentView, View previousView) {
@@ -262,9 +252,7 @@ public class Main extends AndroidApplication {
         text.setGravity(Gravity.LEFT);
         text.setTypeface(Typeface.SERIF);
         String SP = "Storage Permission";
-        if (needExternalFileAccess()) {
-          SP = "All File Access Permission";
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             SP = "Photos and Videos, Music and Audio Permissions";
         } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
             SP = "Files & Media Permissions";
@@ -276,11 +264,8 @@ public class Main extends AndroidApplication {
                 " 2) Tap Permissions\n" +
                 " 3) Enable the " + SP + ".\n\n" +
                 "(You can tap anywhere to exit and restart the app)\n\n";
-        String allFileAccessSteps =  " 1) Tap \"App Settings\" Button.\n" +
-                " 2) Enable the " + SP + ".\n\n" +
-                "(You can tap anywhere to exit and restart the app)\n\n";
         if (ex) {
-            title = needExternalFileAccess() ? "All File Access Permission" : manageApp ? "Forge AutoUpdater Permission...\n" : "Forge didn't initialize!\n";
+            title = manageApp ? "Forge AutoUpdater Permission...\n" : "Forge didn't initialize!\n";
             steps = manageApp ? " 1) Tap \"App Settings\" Button.\n" +
                     " 2) Enable \"Allow apps from this source\"\n" +
                     "(You can tap anywhere to exit and restart the app)\n\n" : msg + "\n\n";
@@ -289,7 +274,7 @@ public class Main extends AndroidApplication {
         SpannableString ss1 = new SpannableString(title);
         ss1.setSpan(new StyleSpan(Typeface.BOLD), 0, ss1.length(), 0);
         text.append(ss1);
-        text.append(needExternalFileAccess() ? allFileAccessSteps : steps);
+        text.append(steps);
         row.addView(text);
         row.setGravity(Gravity.CENTER);
 
@@ -318,16 +303,7 @@ public class Main extends AndroidApplication {
 
         button.setTextColor(Color.RED);
         button.setOnClickListener(v -> {
-            if (needExternalFileAccess()) {
-                /*
-                  This is needed for Android 11 and upwards to have access on external storage (direct file path)
-                  ie adventure mode -> data -> restore. Though its not fast like the app-specific storage...
-                */
-                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                Uri uri = Uri.fromParts("package", getPackageName(), null);
-                intent.setData(uri).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            } else if (manageApp) {
+            if (manageApp) {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES)
                         .setData(Uri.parse(String.format("package:%s", getPackageName())))
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -350,20 +326,20 @@ public class Main extends AndroidApplication {
         crossfade(TL, previousView);
     }
 
-    private void loadGame(final String title, final String steps, boolean isLandscape, AndroidAdapter adapter, boolean permissiongranted, int totalRAM, boolean isTabletDevice, AndroidApplicationConfiguration config, boolean exception, String msg) {
+    private void loadGame(final HWInfo hwInfo, final String title, final String steps, boolean isLandscape, AndroidAdapter adapter, boolean permissiongranted, int totalRAM, boolean isTabletDevice, AndroidApplicationConfiguration config, boolean exception, String msg) {
         try {
             final Handler handler = new Handler();
             forgeLogo = findViewById(resId("id", "logo_id"));
             activeView = findViewById(resId("id", "mainview"));
             activeView.setBackgroundColor(Color.WHITE);
-            forgeView = initializeForView(Forge.getApp(getAndroidClipboard(), adapter, ASSETS_DIR, false, !isLandscape, totalRAM, isTabletDevice, Build.VERSION.SDK_INT, Build.VERSION.RELEASE, getDeviceName()), config);
+            forgeView = initializeForView(Forge.getApp(hwInfo, getAndroidClipboard(), adapter, ASSETS_DIR, false, !isLandscape, totalRAM, isTabletDevice, Build.VERSION.SDK_INT), config);
 
             getAnimator(ObjectAnimator.ofFloat(forgeLogo, "alpha", 1f, 1f).setDuration(800), ObjectAnimator.ofObject(activeView, "backgroundColor", new ArgbEvaluator(), Color.WHITE, Color.BLACK).setDuration(1600), new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
                     handler.postDelayed(() -> {
-                        if (needExternalFileAccess() || !permissiongranted || exception) {
+                        if (!permissiongranted || exception) {
                             displayMessage(forgeLogo, adapter, exception, msg, false);
                         } else if (title.isEmpty() && steps.isEmpty()) {
                             if (isLandscape) {
@@ -490,7 +466,7 @@ public class Main extends AndroidApplication {
         }
     }
 
-    private void initForge(AndroidAdapter adapter, boolean permissiongranted, int totalRAM, boolean isTabletDevice) {
+    private void initForge(AndroidAdapter adapter, HWInfo hwInfo, boolean permissiongranted, int totalRAM, boolean isTabletDevice) {
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
         config.useAccelerometer = false;
         config.useCompass = false;
@@ -502,14 +478,14 @@ public class Main extends AndroidApplication {
         if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             String message = getDeviceName() + "\n" + "Android " + Build.VERSION.RELEASE + "\n" + "RAM " + totalRAM + "MB" + "\n" + "LibGDX " + Version.VERSION + "\n" + "Can't access external storage";
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
-            loadGame("", "", false, adapter, permissiongranted, totalRAM, isTabletDevice, config, true, message);
+            loadGame(hwInfo, "", "", false, adapter, permissiongranted, totalRAM, isTabletDevice, config, true, message);
             return;
         }
         ASSETS_DIR = Build.VERSION.SDK_INT > Build.VERSION_CODES.Q ? getContext().getObbDir() + "/Forge/" : Environment.getExternalStorageDirectory() + "/Forge/";
         if (!FileUtil.ensureDirectoryExists(ASSETS_DIR)) {
             String message = getDeviceName() + "\n" + "Android " + Build.VERSION.RELEASE + "\n" + "RAM " + totalRAM + "MB" + "\n" + "LibGDX " + Version.VERSION + "\n" + "Can't access external storage\nPath: " + ASSETS_DIR;
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
-            loadGame("", "", false, adapter, permissiongranted, totalRAM, isTabletDevice, config, true, message);
+            loadGame(hwInfo, "", "", false, adapter, permissiongranted, totalRAM, isTabletDevice, config, true, message);
             return;
         }
         //ensure .nomedia file exists in Forge directory so its images
@@ -521,7 +497,7 @@ public class Main extends AndroidApplication {
             } catch (Exception e) {
                 String message = getDeviceName() + "\n" + "Android " + Build.VERSION.RELEASE + "\n" + "RAM " + totalRAM + "MB" + "\n" + "LibGDX " + Version.VERSION + "\n" + "Can't read/write to storage";
                 Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
-                loadGame("", "", false, adapter, permissiongranted, totalRAM, isTabletDevice, config, true, message);
+                loadGame(hwInfo, "", "", false, adapter, permissiongranted, totalRAM, isTabletDevice, config, true, message);
                 return;
             }
         }
@@ -538,7 +514,7 @@ public class Main extends AndroidApplication {
         if (landscapeMode && Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) { //Android 11 onwards
             Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         }
-        loadGame(info, lowV + lowM, landscapeMode, adapter, permissiongranted, totalRAM, isTabletDevice, config, false, "");
+        loadGame(hwInfo, info, lowV + lowM, landscapeMode, adapter, permissiongranted, totalRAM, isTabletDevice, config, false, "");
     }
 
     @Override
@@ -594,7 +570,7 @@ public class Main extends AndroidApplication {
             if (clipData.getItemCount() > 0) {
                 try {
                     String text = clipData.getItemAt(0).coerceToText(getContext()).toString();
-                    return Normalizer.normalize(text, Normalizer.Form.NFD);
+                    return text;//Normalizer.normalize(text, Normalizer.Form.NFD);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -685,6 +661,21 @@ public class Main extends AndroidApplication {
         @Override
         public DefaultUpnpServiceConfiguration getUpnpPlatformService() {
             return new AndroidUpnpServiceConfiguration();
+        }
+
+        @Override
+        public boolean needFileAccess() {
+            return needExternalFileAccess();
+        }
+
+        @Override
+        public void requestFileAcces() {
+            /* This is needed for Android 11 and upwards to have access on external storage (direct file path)
+            ie adventure mode -> data -> restore. Though it's not fast like the app-specific storage...*/
+            Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+            Uri uri = Uri.fromParts("package", getPackageName(), null);
+            intent.setData(uri).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
 
         @Override
@@ -873,6 +864,75 @@ public class Main extends AndroidApplication {
             }
         }
         return gameControllerDeviceIds;
+    }
+
+    public final String getAndroidOSName() {
+        final String codename;
+        switch (Build.VERSION.SDK_INT) {
+            case Build.VERSION_CODES.O:
+                codename = "Android 8 (Oreo)";
+                break;
+            case Build.VERSION_CODES.O_MR1:
+                codename = "Android 8.1 (Oreo)";
+                break;
+            case Build.VERSION_CODES.P:
+                codename = "Android 9 (Pie)";
+                break;
+            case Build.VERSION_CODES.Q:
+                codename = "Android 10 (Quince Tart)";
+                break;
+            case Build.VERSION_CODES.R:
+                codename = "Android 11 (Red Velvet)";
+                break;
+            case Build.VERSION_CODES.S:
+                codename = "Android 12 (Snow Cone)";
+                break;
+            case Build.VERSION_CODES.S_V2:
+                codename = "Android 12L (Snow Cone V2)";
+                break;
+            case Build.VERSION_CODES.TIRAMISU:
+                codename = "Android 13 (Tiramisu)";
+                break;
+            case Build.VERSION_CODES.UPSIDE_DOWN_CAKE:
+                codename = "Android 14 (Upside Down Cake)";
+                break;
+            case Build.VERSION_CODES.VANILLA_ICE_CREAM:
+                codename = "Android 15 (Vanilla Ice Cream)";
+                break;
+            case 36:
+                codename = "Android 16 (Baklava)";
+                break;
+            default:
+                codename = "Android " + Build.VERSION.SDK_INT;
+                break;
+        }
+        return codename;
+    }
+
+    public String getCpuName() {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.R)
+            return Build.SOC_MANUFACTURER + " " + Build.SOC_MODEL;
+        try {
+            FileReader fr = new FileReader("/proc/cpuinfo");
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            String cpuName = null;
+
+            while ((line = br.readLine()) != null) {
+                if (line.contains("Processor") || line.contains("model name")) {
+                    // Extract the part after the colon and trim whitespace
+                    String[] parts = line.split(":", 2);
+                    if (parts.length > 1) {
+                        cpuName = parts[1].trim();
+                        break; // Found the CPU name, no need to read further
+                    }
+                }
+            }
+            br.close();
+            return capitalize(cpuName);
+        } catch (IOException e) {
+            return Build.UNKNOWN;
+        }
     }
 
     public String getDeviceName() {

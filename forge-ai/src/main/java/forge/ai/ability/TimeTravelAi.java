@@ -8,7 +8,6 @@ import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerController;
@@ -40,7 +39,7 @@ public class TimeTravelAi extends SpellAbilityAi {
         // so removing them is good; stuff on the battlefield is usually stuff like Vanishing or As Foretold, which favors adding Time
         // counters for better effect, but exceptions should be added here).
         Card target = (Card)params.get("Target");
-        return !ComputerUtil.isNegativeCounter(CounterType.get(CounterEnumType.TIME), target);
+        return !ComputerUtil.isNegativeCounter(CounterEnumType.TIME, target);
     }
 
     @Override

@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - Edge of Eternities #02
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2025/08/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Assume you have basic Mountains, Swamps, and Forests in your library, but disregard any cards you could draw. Ensure your solution satisfies all blocks. Remember that your graveyard starts empty. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Crash Through;Abrade;Poison the Waters;Frantic Scapegoat;Ygra, Eater of All;Hill Gigas
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Forest;Forest;Forest;Swamp;Swamp;Swamp;Mountain;Mountain;Mountain
+p0battlefield=Xu-Ifit, Osteoharmonist;Umbral Collar Zealot;Kavaron Turbodrone;Swamp;Swamp;Mountain;Mountain;Mountain;Forest
+p1life=9
+p1battlefield=T:b_0_1_wizard_snipe;T:b_0_1_wizard_snipe;T:b_0_1_wizard_snipe|Tapped;Kuja, Genome Sorcerer|Transformed
+# Randomize the order of cards in the library
+p0precast=Ancestral Knowledge:TrigShuffle

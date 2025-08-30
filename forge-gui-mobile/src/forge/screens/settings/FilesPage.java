@@ -36,7 +36,6 @@ import forge.toolbox.FGroupList;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.GuiChoose;
-import forge.util.Callback;
 import forge.util.FileUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -57,38 +56,39 @@ public class FilesPage extends TabPage<SettingsScreen> {
         lstItems.addItem(new Extra(Forge.getLocalizer().getMessage("lblBackupRestore"), Forge.getLocalizer().getMessage("lblBackupRestoreDescription")) {
             @Override
             public void select() {
-                FOptionPane.showOptionDialog(Forge.getLocalizer().getMessage("lblPlsSelectActions"), "", FOptionPane.QUESTION_ICON, ImmutableList.of(Forge.getLocalizer().getMessage("lblBackup"), Forge.getLocalizer().getMessage("lblRestore"), Forge.getLocalizer().getMessage("lblCancel")), 2, new Callback<Integer>() {
-                    @Override
-                    public void run(Integer result) {
-                        switch (result) {
-                            case 0:
-                                FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblBackupMsg"), true, () -> {
-                                    File source = new FileHandle(ForgeProfileProperties.getUserDir()).file();
-                                    File target = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir()).file();
-                                    try {
-                                        ZipUtil.zip(source, target, ZipUtil.backupClsFile);
-                                        FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblSuccess") + "\n" + target.getAbsolutePath() + File.separator + ZipUtil.backupClsFile, Forge.getLocalizer().getMessage("lblBackup"), FOptionPane.INFORMATION_ICON);
-                                    } catch (IOException e) {
-                                        FOptionPane.showMessageDialog(e.toString(), Forge.getLocalizer().getMessage("lblError"), FOptionPane.ERROR_ICON);
-                                    }
-                                }));
-                                break;
-                            case 1:
-                                FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblRestoreMsg"), true, () -> {
-                                    File source = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir() + ZipUtil.backupClsFile).file();
-                                    File target = new FileHandle(ForgeProfileProperties.getUserDir()).file().getParentFile();
-                                    try {
-                                        String msg = ZipUtil.unzip(source, target);
-                                        FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblSuccess") + "\n" + msg, Forge.getLocalizer().getMessage("lblRestore"), FOptionPane.INFORMATION_ICON);
-                                    } catch (IOException e) {
-                                        FOptionPane.showMessageDialog(e.toString(), Forge.getLocalizer().getMessage("lblError"), FOptionPane.ERROR_ICON);
-                                    }
-                                }));
-                                break;
-                            default:
-                                break;
-                        }
-                    }
+                if (Forge.getDeviceAdapter().needFileAccess()) {
+                    Forge.getDeviceAdapter().requestFileAcces();
+                    return;
+                }
+                FOptionPane.showOptionDialog(Forge.getLocalizer().getMessage("lblPlsSelectActions"), "", FOptionPane.QUESTION_ICON, ImmutableList.of(Forge.getLocalizer().getMessage("lblBackup"), Forge.getLocalizer().getMessage("lblRestore"), Forge.getLocalizer().getMessage("lblCancel")), 2, result -> {
+                switch (result) {
+                    case 0:
+                        FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblBackupMsg"), true, () -> {
+                            File source = new FileHandle(ForgeProfileProperties.getUserDir()).file();
+                            File target = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir()).file();
+                            try {
+                                ZipUtil.zip(source, target, ZipUtil.backupClsFile);
+                                FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblSuccess") + "\n" + target.getAbsolutePath() + File.separator + ZipUtil.backupClsFile, Forge.getLocalizer().getMessage("lblBackup"), FOptionPane.INFORMATION_ICON);
+                            } catch (IOException e) {
+                                FOptionPane.showMessageDialog(e.toString(), Forge.getLocalizer().getMessage("lblError"), FOptionPane.ERROR_ICON);
+                             }
+                        }));
+                        break;
+                    case 1:
+                        FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblRestoreMsg"), true, () -> {
+                            File source = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir() + ZipUtil.backupClsFile).file();
+                            File target = new FileHandle(ForgeProfileProperties.getUserDir()).file().getParentFile();
+                            try {
+                                String msg = ZipUtil.unzip(source, target);
+                                FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblSuccess") + "\n" + msg, Forge.getLocalizer().getMessage("lblRestore"), FOptionPane.INFORMATION_ICON);
+                            } catch (IOException e) {
+                                FOptionPane.showMessageDialog(e.toString(), Forge.getLocalizer().getMessage("lblError"), FOptionPane.ERROR_ICON);
+                            }
+                        }));
+                        break;
+                    default:
+                        break;
+                }
                 });
             }
         }, 0);
@@ -103,16 +103,13 @@ public class FilesPage extends TabPage<SettingsScreen> {
                     Pair<Integer, Integer> totalAudit = StaticData.instance().audit(nifSB, cniSB);
                     String msg = nifSB.toString();
                     String title = "Missing images: " + totalAudit.getLeft() + "\nUnimplemented cards: " + totalAudit.getRight();
-                    FOptionPane.showOptionDialog(msg, title, FOptionPane.INFORMATION_ICON, ImmutableList.of(Forge.getLocalizer().getMessage("lblCopy"), Forge.getLocalizer().getMessage("lblClose")), -1, new Callback<Integer>() {
-                        @Override
-                        public void run(Integer result) {
-                            switch (result) {
-                                case 0:
-                                    Forge.getClipboard().setContents(msg);
-                                    break;
-                                default:
-                                    break;
-                            }
+                    FOptionPane.showOptionDialog(msg, title, FOptionPane.INFORMATION_ICON, ImmutableList.of(Forge.getLocalizer().getMessage("lblCopy"), Forge.getLocalizer().getMessage("lblClose")), -1, result -> {
+                        switch (result) {
+                            case 0:
+                                Forge.getClipboard().setContents(msg);
+                                break;
+                            default:
+                                break;
                         }
                     });
                 }));
@@ -292,12 +289,9 @@ public class FilesPage extends TabPage<SettingsScreen> {
 
         @Override
         public void select() {
-            new GuiDownloader(createService(), new Callback<Boolean>() {
-                @Override
-                public void run(Boolean finished) {
-                    if (finished) {
-                        finishCallback();
-                    }
+            new GuiDownloader(createService(), finished -> {
+                if (finished) {
+                    finishCallback();
                 }
             }).show();
         }
@@ -318,20 +312,14 @@ public class FilesPage extends TabPage<SettingsScreen> {
         @Override
         public void select() {
             final Map<String, String> categories = getCategories();
-            GuiChoose.one(prompt, categories.keySet(), new Callback<String>() {
-                @Override
-                public void run(String result) {
-                    final String url = categories.get(result);
-                    final String name = url.substring(url.lastIndexOf("/") + 2);
-                    new GuiDownloader(new GuiDownloadZipService(name, name, url, ForgeConstants.FONTS_DIR, null, null), new Callback<Boolean>() {
-                        @Override
-                        public void run(Boolean finished) {
-                            if (finished) {
-                                finishCallback();
-                            }
-                        }
-                    }).show();
-                }
+            GuiChoose.one(prompt, categories.keySet(), result -> {
+                final String url = categories.get(result);
+                final String name = url.substring(url.lastIndexOf("/") + 2);
+                new GuiDownloader(new GuiDownloadZipService(name, name, url, ForgeConstants.FONTS_DIR, null, null), finished -> {
+                    if (finished) {
+                        finishCallback();
+                    }
+                }).show();
             });
         }
         protected abstract Map<String, String> getCategories();
@@ -351,14 +339,11 @@ public class FilesPage extends TabPage<SettingsScreen> {
 
         @Override
         public void select() {
-            FFileChooser.show(Forge.getLocalizer().getMessage("lblSelect").replace("%s", label), ChoiceType.GetDirectory, description, new Callback<String>() {
-                @Override
-                public void run(String result) {
-                    if (StringUtils.isEmpty(result) || description.equals(result)) { return; }
-                    updateDir(result);
-                    onDirectoryChanged(result);
-                    FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblRestartForgeMoveFilesNewLocation"), Forge.getLocalizer().getMessage("lblRestartRequired"), FOptionPane.INFORMATION_ICON);
-                }
+            FFileChooser.show(Forge.getLocalizer().getMessage("lblSelect").replace("%s", label), ChoiceType.GetDirectory, description, result -> {
+                if (StringUtils.isEmpty(result) || description.equals(result)) { return; }
+                updateDir(result);
+                onDirectoryChanged(result);
+                FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblRestartForgeMoveFilesNewLocation"), Forge.getLocalizer().getMessage("lblRestartRequired"), FOptionPane.INFORMATION_ICON);
             });
         }
         protected abstract void onDirectoryChanged(String newDir);

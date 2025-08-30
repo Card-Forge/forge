@@ -220,6 +220,10 @@ public class CardRenderer {
         if (pc.getRules() == null)
             return getCardArt(pc.getImageKey(backFace), false, false, false, false, false, false, false, false, true, false);
 
+        if (pc.getRules().isUnsupported()) {
+            return CardImageRenderer.forgeArt;
+        }
+
         CardType type = pc.getRules().getType();
         return getCardArt(pc.getImageKey(backFace), pc.getRules().getSplitType() == CardSplitType.Split,
                 type.isPlane() || type.isPhenomenon(), pc.getRules().getOracleText().contains("Aftermath"),

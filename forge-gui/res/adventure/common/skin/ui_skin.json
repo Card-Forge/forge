@@ -470,6 +470,15 @@
 		"focused": "item_frame_selected",
 		"checked": "item_frame_selected",
 		"checkedOver": "item_frame_selected_hover"
+	},
+	"item_frame_static": {
+		"imageCheckedOver": "item_frame",
+		"up": "item_frame",
+		"over": "item_frame",
+		"focused": "item_frame",
+		"checked": "item_frame",
+		"checkedOver": "item_frame",
+		"checkedDown": "item_frame"
 	}
 },
 "ImageTextButtonStyle": {

@@ -13,6 +13,7 @@ public class Paths {
     public static final String QUESTS = "world/quests.json";
     public static final String SKIN = "skin/ui_skin.json";
     public static final String ITEMS_EQUIP = "skin/equip.png";
+    public static final String ITEMS_UNUSABLE = "skin/unusable.png";
     public static final String ITEMS_ATLAS = "sprites/items.atlas";
     public static final String PIXELMANA_ATLAS = "sprites/pixelmana.atlas";
     public static final String KEYS_ATLAS = "skin/keys.atlas";

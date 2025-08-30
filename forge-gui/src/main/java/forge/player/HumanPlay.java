@@ -425,7 +425,7 @@ public class HumanPlay {
                 }
             }
             else if (part instanceof CostPayEnergy) {
-                CounterType counterType = CounterType.get(CounterEnumType.ENERGY);
+                CounterType counterType = CounterEnumType.ENERGY;
                 int amount = part.getAbilityAmount(sourceAbility);
 
                 if (!mandatory && !p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantSpendNTargetTypeCounter", String.valueOf(amount), counterType.getName()), sourceAbility)) {
