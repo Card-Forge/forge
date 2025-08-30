@@ -66,6 +66,9 @@ forge-gui-mobile-dev/testAssets
 
 forge-gui/res/cardsfolder/*.bat
 
+# Generated changelog file
+forge-gui/release-files/CHANGES.txt
+
 forge-gui/res/PerSetTrackingResults
 forge-gui/res/decks
 forge-gui/res/layouts
