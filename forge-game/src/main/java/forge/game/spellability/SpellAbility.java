@@ -1510,7 +1510,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
             if (tr.isDifferentNames() && entity instanceof Card) {
                 for (final Card c : getTargets().getTargetCards()) {
-                    if (entity != c && c.getName().equals(((Card) entity).getName())) {
+                    if (entity != c && c.sharesNameWith(((Card) entity).getName())) {
                         return false;
                     }
                 }
