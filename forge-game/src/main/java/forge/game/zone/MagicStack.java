@@ -508,7 +508,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             sp.getActivatingPlayer().commitCrime();
         }
 
-        game.fireEvent(new GameEventZone(ZoneType.Stack, sp.getActivatingPlayer(), EventValueChangeType.Added, source));
+        game.fireEvent(new GameEventZone(ZoneType.Stack, sp, EventValueChangeType.Added));
 
         if (sp.getActivatingPlayer() != null && !game.getCardsPlayerCanActivateInStack().isEmpty()) {
             // This is a bit of a hack that forces the update of externally activatable cards in flashback zone (e.g. Lightning Storm).
@@ -957,16 +957,15 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         final Player active = game.getPhaseHandler().getPlayerTurn();
         game.getStackZone().resetCardsAddedThisTurn();
         this.thisTurnActivated.clear();
+        active.resetSpellCastSinceBegOfYourLastTurn();
         if (thisTurnCast.isEmpty()) {
             lastTurnCast = Lists.newArrayList();
-            active.resetSpellCastSinceBegOfYourLastTurn();
             return;
         }
-        for (Player nonActive : game.getNonactivePlayers()) {
-            nonActive.addSpellCastSinceBegOfYourLastTurn(thisTurnCast);
+        for (Player player : game.getPlayers()) {
+            player.addSpellCastSinceBegOfYourLastTurn(thisTurnCast);
         }
         lastTurnCast = Lists.newArrayList(thisTurnCast);
-        active.setSpellCastSinceBegOfYourLastTurn(thisTurnCast);
         thisTurnCast.clear();
         game.updateStackForView();
     }

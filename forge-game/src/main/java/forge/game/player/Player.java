@@ -547,7 +547,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         life -= toLose;
         view.updateLife(this);
         if (manaBurn) {
-            game.fireEvent(new GameEventManaBurn(this, toLose, true));
+            game.fireEvent(new GameEventManaBurn(this, true, toLose));
         } else {
             game.fireEvent(new GameEventPlayerLivesChanged(this, oldLife, life));
         }
@@ -944,10 +944,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         getGame().fireEvent(new GameEventPlayerCounters(this, null, 0, 0));
     }
 
-    public void setCounters(final CounterEnumType counterType, final Integer num, Player source, boolean fireEvents) {
-        this.setCounters(CounterType.get(counterType), num, source, fireEvents);
-    }
-
     public void setCounters(final CounterType counterType, final Integer num, Player source, boolean fireEvents) {
         int old = getCounters(counterType);
         setCounters(counterType, num);
@@ -973,7 +969,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         getGame().fireEvent(new GameEventPlayerCounters(this, null, 0, 0));
 
         // create Radiation Effect for GameState
-        if (counters.getOrDefault(CounterType.get(CounterEnumType.RAD), 0) > 0) {
+        if (counters.getOrDefault(CounterEnumType.RAD, 0) > 0) {
             this.createRadiationEffect(null);
         } else {
             this.removeRadiationEffect();
@@ -2321,7 +2317,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final void addSacrificedThisTurn(final Card cpy, final SpellAbility source) {
         // Play the Sacrifice sound
-        game.fireEvent(new GameEventCardSacrificed());
+        game.fireEvent(new GameEventCardSacrificed(cpy));
 
         sacrificedThisTurn.add(cpy);
 
@@ -2348,9 +2344,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void resetSpellCastSinceBegOfYourLastTurn() {
         spellsCastSinceBeginningOfLastTurn = Lists.newArrayList();
-    }
-    public final void setSpellCastSinceBegOfYourLastTurn(List<Card> spells) {
-        spellsCastSinceBeginningOfLastTurn = new ArrayList<>(spells);
     }
     public final void addSpellCastSinceBegOfYourLastTurn(List<Card> spells) {
         spellsCastSinceBeginningOfLastTurn.addAll(spells);

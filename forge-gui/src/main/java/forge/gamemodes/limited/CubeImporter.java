@@ -50,7 +50,7 @@ public class CubeImporter {
         }
     }
 
-    private static CustomLimited parseFromURL(final URL url) {
+    private CustomLimited parseFromURL(final URL url) {
         // Use a generic 15-cards booster template with no rarity slots
         // Nice to have: Infos about the slots and the draft format can be found on the platform and imported via JSON api.
         List<Pair<String, Integer>> slots = SealedTemplate.genericNoSlotBooster.getSlots();
@@ -70,7 +70,7 @@ public class CubeImporter {
         cd.setCardPool(deckCube.getMain());
 
         // Save the cube ID in preferences as the last imported cube
-        FModel.getPreferences().setPref(ForgePreferences.FPref.LAST_IMPORTED_CUBE_ID, deckCube.getName());
+        FModel.getPreferences().setPref(ForgePreferences.FPref.LAST_IMPORTED_CUBE_ID, parseCubeId(url.toString()));
         FModel.getPreferences().save();
 
         return cd;
@@ -83,7 +83,7 @@ public class CubeImporter {
      * "https://cubecobra.com/cube/list/cubeid",
      * it returns "cubeid".
      * Otherwise, it returns the string as is considering it as a plain cube ID.
-     * @param inputStr
+     * @param inputStr the input string which can be a cube ID or a URL
      * @return string representing the cube ID
      */
     private String parseCubeId(String inputStr) {
@@ -92,10 +92,8 @@ public class CubeImporter {
                 String[] parts = inputStr.trim().split("/");
                 yield parts[parts.length - 1];
             }
-            case CUBEARTISAN -> {
-                // Not implemented yet, but could be similar to CubeCobra
-                yield null;
-            }
+            case CUBEARTISAN -> // Not implemented yet, but could be similar to CubeCobra
+                null;
         };
 
         // Check if parsedStr is alphanumeric only, allow hyphens as well since full Cube IDs can contain them

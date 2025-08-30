@@ -3,21 +3,18 @@ package forge.game.event;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 
-public class GameEventPlayerCounters extends GameEvent {
-        public final Player receiver;
-        public final CounterType type;
-        public final int oldValue;
-        public final int amount;
+public record GameEventPlayerCounters(Player receiver, CounterType type, int oldValue, int amount) implements GameEvent {
 
-        public GameEventPlayerCounters(Player recv, CounterType t, int old, int num) {
-            receiver = recv;
-            type = t;
-            oldValue = old;
-            amount = num;
-        }
+    @Override
+    public <T> T visit(IGameEventVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
 
-        @Override
-        public <T> T visit(IGameEventVisitor<T> visitor) {
-            return visitor.visit(this);
-        }
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "" + receiver + " got " + oldValue + " plus " + amount + " " + type;
+    }
 }

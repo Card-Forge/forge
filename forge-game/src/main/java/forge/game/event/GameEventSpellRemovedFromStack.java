@@ -2,21 +2,18 @@ package forge.game.event;
 
 import forge.game.spellability.SpellAbility;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
-public class GameEventSpellRemovedFromStack extends GameEvent {
-    public final SpellAbility sa;
-
-    public GameEventSpellRemovedFromStack(SpellAbility spellAbility) {
-        sa = spellAbility;
-    }
+public record GameEventSpellRemovedFromStack(SpellAbility sa) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
-        // TODO Auto-generated method stub
         return visitor.visit(this);
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "Stack removed " + sa;
+    }
 }
