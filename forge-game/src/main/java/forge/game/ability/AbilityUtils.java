@@ -1328,6 +1328,12 @@ public class AbilityUtils {
             game.getTriggerHandler().resetActiveTriggers();
         }
 
+        if (sa.hasParam("Precalc")) {
+            for (String s : sa.getParam("Precalc").split(",")) {
+                sa.setSVar(s, String.valueOf(calculateAmount(sa.getHostCard(), s, sa)));
+            }
+        }
+
         resolvePreAbilities(sa, game);
 
         // count times ability resolves this turn
