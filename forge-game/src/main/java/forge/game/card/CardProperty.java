@@ -1244,7 +1244,8 @@ public class CardProperty {
             if (property.contains("ControlledBy")) {
                 FCollectionView<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], spellAbility);
                 cards = CardLists.filterControlledBy(cards, p);
-                if (!cards.contains(card)) {
+                // Kraven the Hunter LTB trigger
+                if (!card.isLKI() && !cards.contains(card)) {
                     return false;
                 }
             }

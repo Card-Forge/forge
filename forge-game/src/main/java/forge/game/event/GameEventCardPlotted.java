@@ -3,16 +3,7 @@ package forge.game.event;
 import forge.game.card.Card;
 import forge.game.player.Player;
 
-public class GameEventCardPlotted extends GameEvent {
-
-    public final Card card;
-
-    public final Player activatingPlayer;
-
-    public GameEventCardPlotted(Card card, Player player) {
-        this.card = card;
-        activatingPlayer = player;
-    }
+public record GameEventCardPlotted(Card card, Player activatingPlayer) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

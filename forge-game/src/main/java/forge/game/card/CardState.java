@@ -468,6 +468,9 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
         return Iterables.getFirst(getIntrinsicSpellAbilities(), null);
     }
     public final SpellAbility getFirstSpellAbility() {
+        if (this.card.getCastSA() != null) {
+            return this.card.getCastSA();
+        }
         return Iterables.getFirst(getNonManaAbilities(), null);
     }
 

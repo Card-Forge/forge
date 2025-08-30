@@ -3,14 +3,7 @@ package forge.gui.events;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
 
-public class UiEventAttackerDeclared extends UiEvent {
-    public final CardView attacker; 
-    public final GameEntityView defender;
-
-    public UiEventAttackerDeclared(final CardView card, final GameEntityView currentDefender) {
-        attacker = card;
-        defender = currentDefender;
-    }
+public record UiEventAttackerDeclared(CardView attacker, GameEntityView defender) implements UiEvent {
 
     @Override
     public <T> T visit(final IUiEventVisitor<T> visitor) {

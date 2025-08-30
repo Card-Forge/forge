@@ -2,16 +2,7 @@ package forge.game.event;
 
 import forge.game.card.Card;
 
-public class GameEventCardSacrificed extends GameEvent {
-    public final Card card;
-
-    /**
-     * TODO: Write javadoc for Constructor.
-     * @param card
-     */
-    public GameEventCardSacrificed(Card card) {
-        this.card = card;
-    }
+public record GameEventCardSacrificed(Card card) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
