@@ -260,6 +260,7 @@ try {
                             <goal>git-changelog</goal>
                         </goals>
                         <configuration>
+							<skip>true</skip>
                             <!-- Generate changelog from the appropriate tag -->
                             <fromRef>refs/tags/${changelog.from.tag}</fromRef>
                             <file>${project.build.directory}/CHANGES.txt</file>
