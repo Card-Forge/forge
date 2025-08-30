@@ -396,7 +396,6 @@ PLA014 C The Food Court @
 RB14 R Another Night in Vegas @
 UU14a U Tax Draw @
 UU14b U Tax Sweeper @
-CR15a C T-Fast // T-Furious @
 PLA015 C High Noon At Thunder Junction @
 RR15 R Force of Rowan @
 RW15 R Crux of Mirrodin @
@@ -455,3 +454,6 @@ RR66 R The Crafter @
 RU72 R The Rhystic Storyteller @
 RW90 R The Keeper of Favorite Cards @
 MZ99 M The Collector @
+
+[eternal]
+CR15a C Fast // Furious @ $UNSUPPORTED

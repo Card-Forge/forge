@@ -360,7 +360,7 @@ ScryfallCode=J21
 725 U Thundering Djinn @Anastasia Ovchinnikova
 726 C Wavesifter @Nils Hamm
 728 U Ravenous Squirrel @Dan Murayama Scott
-730 U Fast // Furious @Deruchenko Alexander
+730 U Fast // Furious @Deruchenko Alexander $A
 733 U Altar of the Goyf @Yeong-Hao Han
 734 C Amorphous Axe @Martina Pilcerova
 735 U Batterbone @Nicholas Gregory
