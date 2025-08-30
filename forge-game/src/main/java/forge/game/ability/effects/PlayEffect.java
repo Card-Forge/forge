@@ -428,6 +428,10 @@ public class PlayEffect extends SpellAbilityEffect {
                 tgtSA.getTargetRestrictions().setMandatory(true);
             }
 
+            if (sa.hasParam("Named")) {
+                tgtSA.setName(sa.getName());
+            }
+
             // can't be done later
             if (sa.hasParam("ReplaceGraveyard")) {
                 if (!sa.hasParam("ReplaceGraveyardValid")
