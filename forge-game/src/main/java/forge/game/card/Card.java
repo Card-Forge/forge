@@ -203,6 +203,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private boolean unearthed;
     private boolean ringbearer;
     private boolean monstrous;
+    private boolean harnessed;
     private boolean renowned;
     private boolean solved;
     private boolean tributed;
@@ -2968,6 +2969,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         if (monstrous) {
             sb.append("Monstrous\r\n");
+        }
+        if (harnessed) {
+            sb.append("Harnessed\r\n");
         }
         if (renowned) {
             sb.append("Renowned\r\n");
@@ -6691,6 +6695,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
     public final void clearRingBearer() {
         setRingBearer(false);
+    }
+
+    public final boolean isHarnessed() {
+        return harnessed;
+    }
+    public final boolean setHarnessed(final boolean harnessed0) {
+        harnessed = harnessed0;
+        return true;
     }
 
     public final boolean isMonstrous() {
