@@ -139,6 +139,7 @@ public enum TriggerType {
     SpellCast(TriggerSpellAbilityCastOrCopy.class),
     SpellCastOrCopy(TriggerSpellAbilityCastOrCopy.class),
     SpellCopy(TriggerSpellAbilityCastOrCopy.class),
+    Stationed(TriggerCrewedSaddled.class),
     Surveil(TriggerSurveil.class),
     TakesInitiative(TriggerTakesInitiative.class),
     TapAll(TriggerTapAll.class),

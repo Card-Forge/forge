@@ -453,6 +453,16 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                     }
                 }
             }
+            if (sp.isKeyword(Keyword.STATION) && (sp.getHostCard().getType().hasSubtype("Spacecraft") || (sp.getHostCard().getType().hasSubtype("Planet")))) {
+                Iterable<Card> crews = sp.getPaidList("Tapped", true);
+                if (crews != null) {
+                    for (Card c : crews) {
+                        Map<AbilityKey, Object> stationParams = AbilityKey.mapFromCard(sp.getHostCard());
+                        stationParams.put(AbilityKey.Crew, c);
+                        game.getTriggerHandler().runTrigger(TriggerType.Stationed, stationParams, false);
+                    }
+                }
+            }
         } else {
             // Run Copy triggers
             if (sp.isSpell()) {
