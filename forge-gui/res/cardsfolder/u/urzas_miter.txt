@@ -1,10 +1,13 @@
 Name:Urza's Miter
 ManaCost:3
 Types:Artifact
-T:Mode$ Sacrificed | Static$ True | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | ValidPlayer$ You | RememberTriggeringCard$ True | Execute$ DelTrigChangeZone
-SVar:DelTrigChangeZone:DB$ DelayedTrigger | Mode$ ChangesZone | Static$ True | ValidCard$ Artifact.YouCtrl+IsRemembered | Origin$ Battlefield | Destination$ Any | TriggerZones$ Battlefield | Execute$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearTriggered$ True
-T:Mode$ ChangesZone | ValidCard$ Artifact.YouCtrl+IsNotRemembered | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever an artifact you control is put into a graveyard from the battlefield, if it wasn't sacrificed, you may pay {3}. If you do, draw a card.
-SVar:TrigDraw:AB$ Draw | Cost$ 3 | NumCards$ 1 | Defined$ You
+T:Mode$ Sacrificed | Static$ True | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ RemSac
+SVar:RemSac:DB$ Pump | RememberObjects$ TriggeredCard
+T:Mode$ ChangesZone | Static$ True | ValidCard$ Artifact.YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigBranch
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE1 | TrueSubAbility$ DBCleanup | FalseSubAbility$ ImmTrig
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:ImmTrig:DB$ ImmediateTrigger | Execute$ ABDraw | OptionalDecider$ You | TriggerDescription$ Whenever an artifact you control is put into a graveyard from the battlefield, if it wasn't sacrificed, you may pay {3}. If you do, draw a card.
+SVar:ABDraw:AB$ Draw | Cost$ 3 | NumCards$ 1 | Defined$ You
+SVar:X:TriggeredCard$Valid Artifact.IsRemembered
 DeckHints:Type$Artifact
 Oracle:Whenever an artifact you control is put into a graveyard from the battlefield, if it wasn't sacrificed, you may pay {3}. If you do, draw a card.
