@@ -1,0 +1,8 @@
+Name:Worldweave
+ManaCost:2 G
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigSeek | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell, seek a land card and put it onto the battlefield tapped.
+SVar:TrigSeek:DB$ Seek | Type$ Land | RememberFound$ True | SubAbility$ DBPut
+SVar:DBPut:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ Remembered | Tapped$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Whenever you cast a creature spell, seek a land card and put it onto the battlefield tapped.

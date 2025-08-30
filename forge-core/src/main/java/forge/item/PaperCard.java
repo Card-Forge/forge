@@ -375,7 +375,8 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
                 System.out.println("PaperCard: " + name + " not found with set and index " + edition + ", " + artIndex);
                 pc = readObjectAlternate(name, edition);
                 if (pc == null) {
-                    throw new IOException(TextUtil.concatWithSpace("Card", name, "not found with set and index", edition, Integer.toString(artIndex)));
+                    pc = StaticData.instance().getCommonCards().createUnsupportedCard(name);
+                    //throw new IOException(TextUtil.concatWithSpace("Card", name, "not found with set and index", edition, Integer.toString(artIndex)));
                 }
                 System.out.println("Alternate object found: " + pc.getName() + ", " + pc.getEdition() + ", " + pc.getArtIndex());
             }

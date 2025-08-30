@@ -1,0 +1,13 @@
+Name:Val, Marooned Surveyor
+ManaCost:R GW
+Types:Legendary Creature Human Scout
+PT:2/3
+K:Vigilance
+T:Mode$ Discover | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever you discover, investigate, scry, surveil, or seek one or more cards, NICKNAME deals 1 damage to each opponent and you gain 1 life.
+T:Mode$ Investigated | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDmg | Secondary$ True | TriggerDescription$ Whenever you discover, investigate, scry, surveil, or seek one or more cards, NICKNAME deals 1 damage to each opponent and you gain 1 life.
+T:Mode$ Scry | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDmg | Secondary$ True | TriggerDescription$ Whenever you discover, investigate, scry, surveil, or seek one or more cards, NICKNAME deals 1 damage to each opponent and you gain 1 life.
+T:Mode$ Surveil | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDmg | Secondary$ True | TriggerDescription$ Whenever you discover, investigate, scry, surveil, or seek one or more cards, NICKNAME deals 1 damage to each opponent and you gain 1 life.
+T:Mode$ SeekAll | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDmg | Secondary$ True | TriggerDescription$ Whenever you discover, investigate, scry, surveil, or seek one or more cards, NICKNAME deals 1 damage to each opponent and you gain 1 life.
+SVar:TrigDmg:DB$ DamageAll | ValidPlayers$ Opponent | NumDmg$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:Vigilance\nWhenever you discover, investigate, scry, surveil, or seek one or more cards, Val deals 1 damage to each opponent and you gain 1 life.
