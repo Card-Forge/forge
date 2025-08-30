@@ -46,6 +46,9 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                 boolean altered = false;
 
                 switch (attr.trim()) {
+                    case "Harnessed":
+                        altered = gameCard.setHarnessed(activate);
+                        break;
                     case "Plotted":
                         altered = gameCard.setPlotted(activate);
 
