@@ -383,6 +383,9 @@ public final class AbilityFactory {
         if (mapParams.containsKey("TargetsWithDifferentCMC")) {
             abTgt.setDifferentCMC(true);
         }
+        if (mapParams.containsKey("TargetsWithDifferentNames")) {
+            abTgt.setDifferentNames(true);
+        }
         if (mapParams.containsKey("TargetsWithEqualToughness")) {
             abTgt.setEqualToughness(true);
         }
