@@ -514,11 +514,6 @@ public class TriggerHandler {
             sa.setActivatingPlayer(p);
         }
 
-        if (regtrig.hasParam("RememberTriggeringCard")) {
-            Card triggeredCard = ((Card) sa.getTriggeringObject(AbilityKey.Card));
-            host.addRemembered(triggeredCard);
-        }
-
         if (!sa.getActivatingPlayer().isInGame()) {
             return;
         }
