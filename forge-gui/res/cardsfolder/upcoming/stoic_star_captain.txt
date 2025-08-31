@@ -1,0 +1,7 @@
+Name:Stoic Star-Captain
+ManaCost:1 W
+Types:Creature Human Pilot
+PT:2/3
+S:Mode$ TapPowerValue | ValidSA$ Activated.Crew+Vehicle,Activated.Station | ValidCard$ Creature.YouCtrl | Value$ 1 | Description$ Each creature you control crews Vehicles and stations permanents as though its power were 1 greater.
+A:AB$ Seek | Cost$ 1 W | Type$ Spacecraft | Exhaust$ True | SpellDescription$ Seek a Spacecraft card.
+Oracle:Each creature you control crews Vehicles and stations permanents as though its power were 1 greater.\nExhaust — {1}{W}: Seek a Spacecraft card.

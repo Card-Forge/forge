@@ -489,6 +489,9 @@ Star
 TreasureChest
   xy: 464, 32
   size: 16, 16
+ToolBox
+  xy: 448, 79
+  size: 16, 16
 UnderworldCookbook
   xy: 304, 960
   size: 16, 16

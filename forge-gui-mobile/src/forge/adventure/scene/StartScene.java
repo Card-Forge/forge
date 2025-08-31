@@ -126,6 +126,10 @@ public class StartScene extends UIScene {
     }
 
     public boolean backup() {
+        if (Forge.getDeviceAdapter().needFileAccess()) {
+            Forge.getDeviceAdapter().requestFileAcces();
+            return true;
+        }
         if (backupDialog == null) {
             backupDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblData"),
                     null, Forge.getLocalizer().getMessage("lblBackup"),
