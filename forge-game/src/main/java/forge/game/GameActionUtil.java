@@ -242,6 +242,7 @@ public final class GameActionUtil {
                     }
                     stackCopy.setLastKnownZone(game.getStackZone());
                     stackCopy.setCastFrom(oldZone);
+                    stackCopy.setCastSA(sa);
                     lkicheck = true;
 
                     stackCopy.clearStaticChangedCardKeywords(false);

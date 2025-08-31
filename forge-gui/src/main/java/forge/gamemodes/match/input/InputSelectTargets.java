@@ -273,7 +273,6 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 showMessage(sa.getHostCard() + " - Cannot target this card (must have equal toughness)");
                 return false;
             }
-
         }
 
         // If all cards must have different mana values
@@ -288,6 +287,15 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             if (targetedCMCs.contains(card.getCMC())) {
                 showMessage(sa.getHostCard() + " - Cannot target this card (must have different mana values)");
                 return false;
+            }
+        }
+
+        if (tgt.isDifferentNames()) {
+            for (final GameObject o : targets) {
+                if (o instanceof Card c && c.sharesNameWith(card)) {
+                    showMessage(sa.getHostCard() + " - Cannot target this card (must have different names)");
+                    return false;
+                }
             }
         }
 

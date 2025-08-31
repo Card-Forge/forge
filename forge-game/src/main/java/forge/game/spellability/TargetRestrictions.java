@@ -59,6 +59,7 @@ public class TargetRestrictions {
     private boolean forEachPlayer = false;
     private boolean differentControllers = false;
     private boolean differentCMC = false;
+    private boolean differentNames = false;
     private boolean equalToughness = false;
     private boolean sameController = false;
     private boolean withoutSameCreatureType = false;
@@ -619,6 +620,13 @@ public class TargetRestrictions {
      */
     public void setDifferentCMC(boolean different) {
         this.differentCMC = different;
+    }
+
+    public boolean isDifferentNames() {
+        return differentNames;
+    }
+    public void setDifferentNames(boolean different) {
+        this.differentNames = different;
     }
 
     /**
