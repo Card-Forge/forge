@@ -8,6 +8,8 @@ SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:ImmTrig:DB$ ImmediateTrigger | Execute$ ABDraw | OptionalDecider$ You | TriggerDescription$ Whenever an artifact you control is put into a graveyard from the battlefield, if it wasn't sacrificed, you may pay {3}. If you do, draw a card.
 SVar:ABDraw:AB$ Draw | Cost$ 3 | NumCards$ 1 | Defined$ You
+T:Mode$ ChangesZone | Static$ True | ValidCard$ Artifact.IsRemembered | Origin$ Battlefield | Destination$ Any | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 SVar:X:TriggeredCard$Valid Artifact.IsRemembered
 DeckHints:Type$Artifact
 Oracle:Whenever an artifact you control is put into a graveyard from the battlefield, if it wasn't sacrificed, you may pay {3}. If you do, draw a card.
