@@ -207,6 +207,7 @@ public class GameAction {
             copied.setGameTimestamp(c.getGameTimestamp());
 
             if (zoneTo.is(ZoneType.Stack)) {
+                copied.setCastFrom(zoneFrom);
                 // try not to copy changed stats when moving to stack
 
                 // copy exiled properties when adding to stack
@@ -450,7 +451,7 @@ public class GameAction {
                 if (c.getCastSA() != null && !c.getCastSA().isIntrinsic() && c.getKeywords().contains(c.getCastSA().getKeyword())) {
                     KeywordInterface ki = c.getCastSA().getKeyword();
                     ki.setHostCard(copied);
-                    copied.addChangedCardKeywordsInternal(ImmutableList.of(ki), null, false, copied.getGameTimestamp(), null, true);
+                    copied.addChangedCardKeywordsInternal(ImmutableList.of(ki), null, false, copied.getGameTimestamp(), ki.getStatic(), true);
                 }
                 // TODO hot fix for non-intrinsic offspring
                 Multimap<StaticAbility, KeywordInterface> addKw = MultimapBuilder.hashKeys().arrayListValues().build();
@@ -564,7 +565,8 @@ public class GameAction {
         // 400.7g try adding keyword back into card if it doesn't already have it
         if (zoneTo.is(ZoneType.Stack) && cause != null && cause.isSpell() && !cause.isIntrinsic() && c.equals(cause.getHostCard())) {
             if (cause.getKeyword() != null && !copied.getKeywords().contains(cause.getKeyword())) {
-                copied.addChangedCardKeywordsInternal(ImmutableList.of(cause.getKeyword()), null, false, game.getNextTimestamp(), null, true);
+                KeywordInterface kw = cause.getKeyword();
+                copied.addChangedCardKeywordsInternal(ImmutableList.of(cause.getKeyword()), null, false, copied.getGameTimestamp(), kw.getStatic(), true);
             }
         }
 
