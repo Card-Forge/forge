@@ -202,15 +202,6 @@ public final class AbilityFactory {
         final Card hostCard = state.getCard();
         TargetRestrictions abTgt = mapParams.containsKey("ValidTgts") ? readTarget(mapParams) : null;
 
-        if (api == ApiType.CopySpellAbility || api == ApiType.Counter || api == ApiType.ChangeTargets || api == ApiType.ControlSpell) {
-            // Since all "CopySpell" ABs copy things on the Stack no need for it to be everywhere
-            // Since all "Counter" or "ChangeTargets" abilities only target the Stack Zone
-            // No need to have each of those scripts have that info
-            if (abTgt != null) {
-                abTgt.setZone(ZoneType.Stack);
-            }
-        }
-
         if (abCost == null) {
             abCost = parseAbilityCost(state, mapParams, type);
         }
@@ -391,6 +382,9 @@ public final class AbilityFactory {
         }
         if (mapParams.containsKey("TargetsWithDifferentCMC")) {
             abTgt.setDifferentCMC(true);
+        }
+        if (mapParams.containsKey("TargetsWithDifferentNames")) {
+            abTgt.setDifferentNames(true);
         }
         if (mapParams.containsKey("TargetsWithEqualToughness")) {
             abTgt.setEqualToughness(true);

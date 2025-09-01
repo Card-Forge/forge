@@ -362,9 +362,3 @@ ScryfallCode=INV
 348 L Forest @Alan Pollack
 349 L Forest @Alan Pollack
 350 L Forest @Glen Angus
-
-[tokens]
-w_x_x_reflection
-u_1_1_bird_flying
-g_3_3_elephant
-g_1_1_saproling

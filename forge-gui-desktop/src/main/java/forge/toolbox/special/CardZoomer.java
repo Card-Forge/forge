@@ -239,6 +239,10 @@ public enum CardZoomer {
             return thisCard.getCard().isFaceDown() || isSplitRotated ? 0 : isAftermath ? 270 : 90; // rotate Aftermath splits the other way to correctly show the right split (graveyard) half
         }
 
+        if (thisCard.getCard().isFlipped()) {
+            return 180;
+        }
+
         return thisCard.getType().isPlane() || thisCard.getType().isPhenomenon() ? 90 : 0;
     }
 

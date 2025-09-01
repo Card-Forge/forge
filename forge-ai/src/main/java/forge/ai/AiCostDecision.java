@@ -563,7 +563,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 int thisRemove = Math.min(prefCard.getCounters(cType), stillToRemove);
                 if (thisRemove > 0) {
                     removed += thisRemove;
-                    table.put(null, prefCard, CounterType.get(cType), thisRemove);
+                    table.put(null, prefCard, cType, thisRemove);
                 }
             }
         }
@@ -573,7 +573,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
     @Override
     public PaymentDecision visit(CostRemoveAnyCounter cost) {
         final int c = cost.getAbilityAmount(ability);
-        final Card originalHost = ObjectUtils.defaultIfNull(ability.getOriginalHost(), source);
+        final Card originalHost = ObjectUtils.getIfNull(ability.getOriginalHost(), source);
 
         if (c <= 0) {
             return null;
@@ -716,7 +716,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 int over = Math.min(crd.getCounters(CounterEnumType.QUEST) - e, c - toRemove);
                 if (over > 0) {
                     toRemove += over;
-                    table.put(null, crd, CounterType.get(CounterEnumType.QUEST), over);
+                    table.put(null, crd, CounterEnumType.QUEST, over);
                 }
             }
         }

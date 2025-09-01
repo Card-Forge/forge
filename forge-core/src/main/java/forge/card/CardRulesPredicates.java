@@ -190,6 +190,38 @@ public final class CardRulesPredicates {
     }
 
     /**
+     * @return a Predicate that matches cards that are of the split type.
+     */
+    public static Predicate<CardRules> isSplitType(final CardSplitType type) {
+        return card -> card.getSplitType().equals(type);
+    }
+
+    /**
+     * @return a Predicate that matches cards that are vanilla.
+     */
+    public static Predicate<CardRules> isVanilla() {
+        return card -> {
+            if (!(card.getType().isCreature() || card.getType().isLand()) ||
+                card.getSplitType() != CardSplitType.None ||
+                card.hasFunctionalVariants()) {
+                return false;
+            }
+
+            ICardFace mainPart = card.getMainPart();
+
+            boolean hasAny =
+                mainPart.getKeywords().iterator().hasNext() ||
+                mainPart.getAbilities().iterator().hasNext() ||
+                mainPart.getStaticAbilities().iterator().hasNext() ||
+                mainPart.getTriggers().iterator().hasNext() ||
+                (mainPart.getDraftActions() != null && mainPart.getDraftActions().iterator().hasNext()) ||
+                mainPart.getReplacements().iterator().hasNext();
+
+            return !hasAny;
+        };
+    }
+
+    /**
      * Checks for color.
      *
      * @param thatColor

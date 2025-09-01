@@ -415,19 +415,6 @@ public class Game {
     }
 
     /**
-     * Gets the nonactive players who are still fighting to win, in turn order.
-     */
-    public final PlayerCollection getNonactivePlayers() {
-        // Don't use getPlayersInTurnOrder to prevent copying the player collection twice
-        final PlayerCollection players = new PlayerCollection(ingamePlayers);
-        players.remove(phaseHandler.getPlayerTurn());
-        if (!getTurnOrder().isDefaultDirection()) {
-            Collections.reverse(players);
-        }
-        return players;
-    }
-
-    /**
      * Gets the players who participated in match (regardless of outcome).
      * <i>Use this in UI and after match calculations</i>
      */

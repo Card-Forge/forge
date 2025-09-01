@@ -11,19 +11,20 @@ import forge.gamemodes.planarconquest.ConquestEvent.ChaosWheelOutcome;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FOverlay;
 import forge.util.Aggregates;
-import forge.util.Callback;
 import forge.util.PhysicsObject;
 
+import java.util.function.Consumer;
+
 public class ConquestChaosWheel extends FOverlay {
-    public static void spin(Callback<ChaosWheelOutcome> callback0) {
+    public static void spin(Consumer<ChaosWheelOutcome> callback0) {
         ConquestChaosWheel wheel = new ConquestChaosWheel(callback0);
         wheel.show();
     }
 
     private final WheelSpinAnimation animation = new WheelSpinAnimation();
-    private final Callback<ChaosWheelOutcome> callback;
+    private final Consumer<ChaosWheelOutcome> callback;
 
-    private ConquestChaosWheel(Callback<ChaosWheelOutcome> callback0) {
+    private ConquestChaosWheel(Consumer<ChaosWheelOutcome> callback0) {
         callback = callback0;
     }
 
@@ -97,7 +98,7 @@ public class ConquestChaosWheel extends FOverlay {
         @Override
         protected void onEnd(boolean endingAll) {
             hide();
-            callback.run(ChaosWheelOutcome.getWheelOutcome(getWheelRotation()));
+            callback.accept(ChaosWheelOutcome.getWheelOutcome(getWheelRotation()));
         }
     }
 

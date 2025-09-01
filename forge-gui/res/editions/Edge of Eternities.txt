@@ -463,7 +463,7 @@ Replace=0.04F BasicLand:fromSheet("EOE borderless")+
 [special guests]
 1 Warping Wail|SPG
 1 Nexus of Fate|SPG
-1 Paradox of Haze|SPG
+1 Paradox Haze|SPG
 1 Magus of the Moon|SPG
 1 Sliver Overlord|SPG
 1 Darkness|SPG

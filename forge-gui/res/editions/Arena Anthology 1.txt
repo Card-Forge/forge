@@ -1,0 +1,34 @@
+[metadata]
+Code=AA1
+Date=2025-08-19
+Name=Arena Anthology 1
+Type=Online
+ScryfallCode=AA1
+
+[cards]
+1 U Azorius Signet @Raoul Vitale
+2 U Boros Signet @Greg Hildebrandt
+3 R Champion's Helm @Alan Pollack
+4 R Darksteel Plate @Daniel Ljunggren
+5 U Dimir Signet @Greg Hildebrandt
+6 U Golgari Signet @Raoul Vitale
+7 U Gruul Signet @Efrem Palacios
+8 U Izzet Signet @Raoul Vitale
+9 U Orzhov Signet @Greg Hildebrandt
+10 U Rakdos Signet @Martina Pilcerova
+11 U Selesnya Signet @Greg Hildebrandt
+12 U Simic Signet @Greg Hildebrandt
+13 M Sword of Feast and Famine @Chris Rahn
+14 M Sword of Light and Shadow @Chris Rahn
+15 M Sword of Truth and Justice @Chris Rahn
+16 M Sword of War and Peace @Chris Rahn
+17 U Talisman of Conviction @Lindsey Look
+18 U Talisman of Creativity @Lindsey Look
+19 U Talisman of Curiosity @Lindsey Look
+20 U Talisman of Dominance @Mike Dringenberg
+21 U Talisman of Hierarchy @Lindsey Look
+22 U Talisman of Impulse @Mike Dringenberg
+23 U Talisman of Indulgence @Mike Dringenberg
+24 U Talisman of Progress @Mike Dringenberg
+25 U Talisman of Resilience @Lindsey Look
+26 U Talisman of Unity @Mike Dringenberg

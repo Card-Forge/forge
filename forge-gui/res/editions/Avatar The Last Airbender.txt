@@ -6,5 +6,113 @@ Type=Expansion
 ScryfallCode=TLA
 
 [cards]
+1 C Aang's Journey @Kotakan
+4 U Aang, the Last Airbender @Yueko
+5 R Aang's Iceberg @Matteo Bassini
+8 C Airbending Lesson @Pisukev
+10 M Appa, Steadfast Guardian @Maël Ollivier-Henry
+11 C Avatar Enthusiasts @Leanna Crossan
+21 C Glider Kids @ikeda_cpt
+25 C Jeong Jeong's Deserters @Leonardo Borazio
+28 U Master Piandao @Brian Yuen
+29 R Momo, Friendly Flier @Brandon L. Hunt
+31 C Path to Redemption @Hokyoung Kim
+32 C Rabaroo Troop @Mizutametori
+33 C Razor Rings @Norikatsu Miyoshi
+36 U Southern Air Temple @Salvatorre Zee Yazzie
+49 C First-Time Flyer @Mizutametori
+50 C Flexible Waterbender @Rafater
+52 C Geyser Leaper @Norikatsu Miyoshi
+53 C Giant Koi @Nathaniel Himawan
+56 C Iguana Parrot @Tyler Smith
+58 C It'll Quench Ya! @Nathaniel Himawan
+59 U Katara, Bending Prodigy @Mephisto
+63 U Master Pakku @Olena Richards
+67 C Otter-Penguin @Eilene Cherie
+68 C Rowdy Snowballers @Mizutametori
+70 U Serpent of the Pass @Eiji Kaneda
+71 U Sokka's Haiku @Bun Toujo
+80 C Waterbending Lesson @Sylvain Sarrailh
+82 C Watery Grasp @Rose Benjamin
+83 R Yue, the Moon Spirit @Yuumei
+84 C Azula Always Lies @Robin Har
+86 C Beetle-Headed Merchants @Norikatsu Miyoshi
+88 U Buzzard-Wasp Colony @Thomas Chamberlain-Keen
+91 U Cat-Gator @Joseph Weston
+92 C Corrupt Court Official @Norikatsu Miyoshi
+93 C Dai Li Indoctrination @Lius Lasahido
+96 U Epic Downfall @Hristo D. Chukov
+99 U Fire Nation Engineer @Norikatsu Miyoshi
+103 U Heartless Act @Sylvain Sarrailh
+104 C Hog-Monkey @Miho Midorikawa
+110 C Merchant of Many Hats @Boell Oyino
+113 U Ozai's Cruelty @ikeda_cpt
+117 M The Rise of Sozin @Mitori
+131 C Deserter's Disciple @HAIKEI
+132 M Fated Firepower @Toshiaki Takayama
+133 U Fire Nation Attacks @Claudiu-Antoniu Magherusan
+136 U Fire Sages @Yuu Fujiki
+140 C How to Start a Riot @Robin Olausson
+146 C Lightning Strike @Jo Cordisco
+148 C Mongoose Lizard @Joseph Weston
+151 R Redirect Lightning @Toni Infante
+152 C Rough Rhino Cavalry @Yuhong Ding
+161 C Yuyan Archers @Domco.
+163 U Zuko, Exiled Prince @Nijihayashi
+166 C Badgermole @Matteo Bassini
+174 U Earth Rumble @Olena Richards
+176 C Earthbending Lesson @Toni Infante
+179 U Flopsie, Bumi's Buddy @Alexandr Leskinen
+182 U Haru, Hidden Talent @Mitori
+188 C Ostrich-Horse @Pablo Rivera
+189 C Pillar Launch @Jo Cordisco
+190 C Raucous Audience @ikeda_cpt
+191 C Rebellious Captives @Ittoku
+193 C Rocky Rebuke @Hokyoung Kim
+194 C Saber-Tooth Moose-Lion @Shiren
+198 U Toph, the Blind Bandit @Yueko
+200 C Turtle-Duck @Sylvain Sarrailh
+205 C Abandon Attachments @Shahab Alizadeh
+207 M Avatar Aang @Fahmi Fauzi
+212 C Cat-Owl @Thomas Chamberlain-Keen
+216 C Earth Kingdom Soldier @Rafater
+219 C Earth Village Ruffians @Dom Lay
+221 R Fire Lord Zuko @Jo Cordisco
+225 U Hei Bai, Spirit of Balance @Tyler Smith
+230 R Katara, the Fearless @Hisashi Momose
+231 R Katara, Water Tribe's Hope @Toraji
+233 U Long Feng, Grand Secretariat @Robin Har
+237 C Pretending Poxbearers @Salvatorre Zee Yazzie
+240 R Sokka, Bold Boomeranger @Toni Infante
+241 U Sokka, Lateral Strategist @Axel Sauerwald
+243 U Suki, Kyoshi Warrior @Yuhong Ding
+247 R Toph, the First Metalbender @Eilene Cherie
+249 C Vindictive Warden @Jo Cordisco
+254 C Barrels of Blasting Jelly @Salvatorre Zee Yazzie
+255 C Bender's Waterskin @Dee Nguyen
+282 L Plains @Slawek Fedorczuk
+283 L Island @Maojin Lee
+284 L Swamp @Matteo Bassini
+285 L Mountain @Salvatorre Zee Yazzie
+286 L Forest @Maojin Lee
+287 L Plains @Salvatorre Zee Yazzie
+288 L Island @Grady Frederick
+289 L Swamp @John Di Giovanni
+290 L Mountain @Lorenzo Lanfranconi
+291 L Forest @Luc Courtois
+316 M Appa, Steadfast Guardian @Ilse Gort
+317 R Momo, Friendly Flier @Filip Burburan
+336 R Aang's Iceberg @Brigitte Roka & Clifton Stommel
 338 R Yue, the Moon Spirit @Barbara Rosiak
+341 M Fated Firepower @Brigitte Roka
+343 R Redirect Lightning @Perci Chen
+350 R Katara, the Fearless @Barbara Rosiak
+351 R Katara, Water Tribe's Hope @Chun Lo
+353 R Toph, the First Metalbender @Barbara Rosiak
+356 M The Rise of Sozin @Barbara Rosiak
+360 R Fire Lord Zuko @Flavio Girón
+361 R Katara, the Fearless @Flavio Girón
+362 R Toph, the First Metalbender @Flavio Girón
 363 M Avatar Aang @Bryan Konietzko
+366 R Hakoda, Selfless Commander @Rafater
+383 R Sokka, Bold Boomeranger @Toni Infante

@@ -29,7 +29,6 @@ import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
 import forge.gui.FThreads;
 import forge.screens.TransitionScreen;
-import forge.util.Callback;
 import forge.util.MyRandom;
 
 import java.util.Arrays;
@@ -124,26 +123,17 @@ public class EventScene extends MenuScene implements IAfterMatch {
         //todo: add translation
         decline.name = "Do not enter event";
 
-        enterWithCoin.callback = new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
-                currentEvent.eventStatus = AdventureEventController.EventStatus.Entered;
-                refresh();
-            }
+        enterWithCoin.callback = (result) -> {
+            currentEvent.eventStatus = AdventureEventController.EventStatus.Entered;
+            refresh();
         };
-        enterWithShards.callback = new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
-                currentEvent.eventStatus = AdventureEventController.EventStatus.Entered;
-                refresh();
-            }
+        enterWithShards.callback = (result) -> {
+            currentEvent.eventStatus = AdventureEventController.EventStatus.Entered;
+            refresh();
         };
-        enterWithGold.callback = new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
-                currentEvent.eventStatus = AdventureEventController.EventStatus.Entered;
-                refresh();
-            }
+        enterWithGold.callback = (result) -> {
+            currentEvent.eventStatus = AdventureEventController.EventStatus.Entered;
+            refresh();
         };
 
         introDialog.options = new DialogData[4];
@@ -190,7 +180,8 @@ public class EventScene extends MenuScene implements IAfterMatch {
         editDeck.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (currentEvent.format == AdventureEventController.EventFormat.Draft && currentEvent.eventStatus == Ready) {
+                if (currentEvent.format == AdventureEventController.EventFormat.Draft
+                        && (currentEvent.eventStatus == Ready || currentEvent.eventStatus == Started)) {
                     DraftScene.instance().loadEvent(currentEvent);
                     Forge.switchScene(DraftScene.instance());
                 } else if (currentEvent.format == AdventureEventController.EventFormat.Jumpstart && currentEvent.eventStatus == Ready) {
@@ -369,8 +360,8 @@ public class EventScene extends MenuScene implements IAfterMatch {
             case Started:
                 advance.setText("Play round " + currentEvent.currentRound);
                 advance.setVisible(true);
-                editDeck.setDisabled(true);
-                editDeck.setVisible(false);
+                editDeck.setDisabled(false);
+                editDeck.setVisible(true);
                 nextPage.setDisabled(false);
                 previousPage.setDisabled(false);
                 break;

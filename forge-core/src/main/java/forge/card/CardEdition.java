@@ -552,26 +552,16 @@ public final class CardEdition implements Comparable<CardEdition> {
 
     public List<PrintSheet> getPrintSheetsBySection() {
         final CardDb cardDb = StaticData.instance().getCommonCards();
-        Map<String, Integer> cardToIndex = new HashMap<>();
 
         List<PrintSheet> sheets = Lists.newArrayList();
-        for (String sectionName : cardMap.keySet()) {
-            if (sectionName.equals(EditionSectionWithCollectorNumbers.CONJURED.getName())) {
+        for (Map.Entry<String, java.util.Collection<EditionEntry>> section : cardMap.asMap().entrySet()) {
+            if (section.getKey().equals(EditionSectionWithCollectorNumbers.CONJURED.getName())) {
                 continue;
             }
-            PrintSheet sheet = new PrintSheet(String.format("%s %s", this.getCode(), sectionName));
+            PrintSheet sheet = new PrintSheet(String.format("%s %s", this.getCode(), section.getKey()));
 
-            List<EditionEntry> cards = cardMap.get(sectionName);
-            for (EditionEntry card : cards) {
-                int index = 1;
-                if (cardToIndex.containsKey(card.name)) {
-                    index = cardToIndex.get(card.name) + 1;
-                }
-
-                cardToIndex.put(card.name, index);
-
-                PaperCard pCard = cardDb.getCard(card.name, this.getCode(), index);
-                sheet.add(pCard);
+            for (EditionEntry card : section.getValue()) {
+                sheet.add(cardDb.getCard(card.name, this.getCode(), card.collectorNumber));
             }
 
             sheets.add(sheet);
@@ -659,31 +649,37 @@ public final class CardEdition implements Comparable<CardEdition> {
                     continue;
                 }
 
-                // parse sections of the format "<collector number> <rarity> <name>"
-                if (editionSectionsWithCollectorNumbers.contains(sectionName)) {
-                    for(String line : contents.get(sectionName)) {
-                        Matcher matcher = pattern.matcher(line);
-
-                        if (!matcher.matches()) {
-                            continue;
-                        }
-
-                        String collectorNumber = matcher.group(2);
-                        CardRarity r = CardRarity.smartValueOf(matcher.group(4));
-                        String cardName = matcher.group(5);
-                        String artistName = matcher.group(7);
-                        String functionalVariantName = matcher.group(9);
-                        EditionEntry cis = new EditionEntry(cardName, collectorNumber, r, artistName, functionalVariantName);
-
-                        cardMap.put(sectionName, cis);
-                    }
-                } else if (boosterSlotsToParse.contains(sectionName)) {
-                    // parse booster slots of the format "Base=N\n|Replace=<amount> <sheet>"
-                    boosterSlots.add(BoosterSlot.parseSlot(sectionName, contents.get(sectionName)));
+                if (sectionName.endsWith("Types")) {
+                    CardType.Helper.parseTypes(sectionName, contents.get(sectionName));
                 } else {
-                    // save custom print sheets of the format "<amount> <name>|<setcode>|<art index>"
-                    // to parse later when printsheets are loaded lazily (and the cardpool is already initialized)
-                    customPrintSheetsToParse.put(sectionName, contents.get(sectionName));
+                    // Parse cards
+
+                    // parse sections of the format "<collector number> <rarity> <name>"
+                    if (editionSectionsWithCollectorNumbers.contains(sectionName)) {
+                        for(String line : contents.get(sectionName)) {
+                            Matcher matcher = pattern.matcher(line);
+
+                            if (!matcher.matches()) {
+                                continue;
+                            }
+
+                            String collectorNumber = matcher.group(2);
+                            CardRarity r = CardRarity.smartValueOf(matcher.group(4));
+                            String cardName = matcher.group(5);
+                            String artistName = matcher.group(7);
+                            String functionalVariantName = matcher.group(9);
+                            EditionEntry cis = new EditionEntry(cardName, collectorNumber, r, artistName, functionalVariantName);
+
+                            cardMap.put(sectionName, cis);
+                        }
+                    } else if (boosterSlotsToParse.contains(sectionName)) {
+                        // parse booster slots of the format "Base=N\n|Replace=<amount> <sheet>"
+                        boosterSlots.add(BoosterSlot.parseSlot(sectionName, contents.get(sectionName)));
+                    } else {
+                        // save custom print sheets of the format "<amount> <name>|<setcode>|<art index>"
+                        // to parse later when printsheets are loaded lazily (and the cardpool is already initialized)
+                        customPrintSheetsToParse.put(sectionName, contents.get(sectionName));
+                    }
                 }
             }
 
@@ -850,7 +846,7 @@ public final class CardEdition implements Comparable<CardEdition> {
         @Override
         public void add(CardEdition item) { //Even though we want it to be read only, make an exception for custom content.
             if(lock) throw new UnsupportedOperationException("This is a read-only storage");
-            else map.put(item.getName(), item);
+            else map.put(item.getCode(), item);
         }
         public void append(CardEdition.Collection C){ //Append custom editions
             if (lock) throw new UnsupportedOperationException("This is a read-only storage");

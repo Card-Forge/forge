@@ -1,9 +1,5 @@
 package forge.game.event;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
 public interface IGameEventVisitor<T> {
     T visit(GameEventAnteCardsSelected event);
     T visit(GameEventAttackersDeclared event);
