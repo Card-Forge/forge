@@ -609,6 +609,20 @@ public class CountersPutAi extends CountersAi {
             }
 
             final int currCounters = cards.get(0).getCounters(CounterType.getType(type));
+
+            // adding counters would cause counter amount to overflow
+            if (Integer.MAX_VALUE - currCounters <= amount) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
+            if (type.equals("P1P1")) {
+                if (Integer.MAX_VALUE - cards.get(0).getNetPower() <= amount) {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
+                if (Integer.MAX_VALUE - cards.get(0).getNetToughness() <= amount) {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
+            }
+
             // each non +1/+1 counter on the card is a 10% chance of not
             // activating this ability.
 
