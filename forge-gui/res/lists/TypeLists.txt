@@ -368,12 +368,14 @@ Food:Foods
 Fortification
 Gold
 Incubator:Incubators
+Infinity
 Junk
 Key:Keys
 Lander:Landers
 Map
 Powerstone:Powerstones
 Spacecraft:Spacecraft
+Stone:Stones
 Treasure:Treasures
 Vehicle:Vehicles
 [WalkerTypes]

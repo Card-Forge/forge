@@ -1828,6 +1828,10 @@ public class CardProperty {
             if (card.getDevouredCards().isEmpty()) {
                 return false;
             }
+        } else if (property.equals("harnessed")) {
+            if (!card.isHarnessed()) {
+                return false;
+            }
         } else if (property.equals("IsMonstrous")) {
             if (!card.isMonstrous()) {
                 return false;
