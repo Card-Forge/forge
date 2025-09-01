@@ -6850,6 +6850,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return exiledSA.isKeyword(Keyword.WARP);
     }
 
+    public boolean isWebSlinged() {
+        return getCastSA() != null & getCastSA().isAlternativeCost(AlternativeCost.WebSlinging);
+    }
+
     public boolean isSpecialized() {
         return specialized;
     }
