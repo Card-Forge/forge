@@ -6,6 +6,5 @@ K:Web-slinging:R G
 K:Trample
 K:ETBReplacement:Other:AddExtraCounter
 SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ Self | IsPresent$ Card.Self+wasCast+webSlinged | CounterType$ P1P1 | CounterNum$ X | SpellDescription$ Sensational Save — If NICKNAME was cast using web-slinging, he enters with X +1/+1 counters on him, where X is the mana value of the returned creature.
-K:etbCounter:P1P1:X:CheckSVar$ WS:Sensational Save — If NICKNAME was cast using web-slinging, he enters with X +1/+1 counters on him, where X is the mana value of the returned creature.
 SVar:X:CastSA>Returned$CardManaCost
 Oracle:Web-slinging {R}{G} (You may cast this spell for {R}{G} if you also return a tapped creature you control to its owner's hand.)\nTrample\nSensational Save — If Scarlet Spider was cast using web-slinging, he enters with X +1/+1 counters on him, where X is the mana value of the returned creature.
