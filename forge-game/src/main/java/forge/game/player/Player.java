@@ -1966,10 +1966,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         CardState speedFront = speedEffect.getState(CardStateName.Original);
         CardState speedBack = speedEffect.getState(CardStateName.Backside);
 
-        speedFront.setImageKey("t:speed");
+        speedFront.setImageKey("t:speed|DFT|14");
         speedFront.setName("Start Your Engines!");
-
-        speedBack.setImageKey("t:max_speed");
+        // TODO: Set actual back side from card_faces[1] of https://api.scryfall.com/cards/tdft/14/en
+        speedBack.setImageKey("t:max_speed|DFT|14");
         speedBack.setName("Max Speed!");
 
         String label = Localizer.getInstance().getMessage("lblSpeed", this.speed);
