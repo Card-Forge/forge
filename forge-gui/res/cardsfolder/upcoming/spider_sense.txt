@@ -1,0 +1,7 @@
+Name:Spider-Sense
+ManaCost:1 U
+Types:Instant
+K:Web-slinging:U
+A:SP$ Counter | TargetType$ Instant,Sorcery,Triggered | TgtPrompt$ Select target spell or ability | ValidTgts$ Card,Emblem | SpellDescription$ Counter target instant spell, sorcery spell, or triggered ability.
+AI:RemoveDeck:All
+Oracle:Web-slinging {U} (You may cast this spell for {U} if you also return a tapped creature you control to its owner's hand.)\nCounter target instant spell, sorcery spell, or triggered ability.
