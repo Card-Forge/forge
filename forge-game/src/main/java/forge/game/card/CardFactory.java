@@ -381,7 +381,7 @@ public class CardFactory {
             CardTranslation.buildOracleMapping(face.getName(), face.getOracleText(), variantName);
         }
 
-        // Name first so Senty has the Card name
+        // Name first so Sentry has it
         c.setName(face.getName());
 
         for (Entry<String, String> v : face.getVariables())  c.setSVar(v.getKey(), v.getValue());
