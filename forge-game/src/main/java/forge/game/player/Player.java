@@ -1720,7 +1720,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
             final Zone zone = game.getZoneOf(land);
             if (zone != null && (zone.is(ZoneType.Battlefield) || (!zone.is(ZoneType.Hand) && !mayPlay
-                    && (landSa == null || landSa.isAlternativeCost(AlternativeCost.Mayhem))))) {
+                    && (landSa == null || !landSa.isAlternativeCost(AlternativeCost.Mayhem))))) {
                 return false;
             }
         }
