@@ -236,7 +236,6 @@ public abstract class ImageFetcher {
             }
             final String cardCollectorNumber = paperCard.getCollectorNumber();
             if (!cardCollectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
-                // This function adds to downloadUrls for us
                 this.getScryfallDownloadURL(paperCard, face, useArtCrop, hasSetLookup, filename, downloadUrls);
             }
         } else if (ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD).equals(imageKey)) {
