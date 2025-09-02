@@ -1966,10 +1966,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         CardState speedFront = speedEffect.getState(CardStateName.Original);
         CardState speedBack = speedEffect.getState(CardStateName.Backside);
 
-        speedFront.setImageKey("t:speed");
+
+        speedFront.setImageKey(StaticData.instance().getOtherImageKey(ImageKeys.SPEED_IMAGE, CardEdition.UNKNOWN_CODE));
         speedFront.setName("Start Your Engines!");
 
-        speedBack.setImageKey("t:max_speed");
+        speedBack.setImageKey(StaticData.instance().getOtherImageKey(ImageKeys.MAX_SPEED_IMAGE, CardEdition.UNKNOWN_CODE));
         speedBack.setName("Max Speed!");
 
         String label = Localizer.getInstance().getMessage("lblSpeed", this.speed);
