@@ -1,0 +1,42 @@
+[metadata]
+Code=MD1
+Date=2014-05-30
+Name=Modern Event Deck 2014
+Type=Boxed_Set
+ScryfallCode=MD1
+
+[cards]
+1 C Soul Warden @Randy Gallegos
+2 U Tidehollow Sculler @rk post
+3 U Path to Exile @Todd Lockwood
+4 U Inquisition of Kozilek @Tomasz Jedruszek
+5 U Shrine of Loyal Legions @Igor Kieryluk
+6 R Honor of the Pure @Greg Staples
+7 U Intangible Virtue @Clint Cearley
+8 C Raise the Alarm @John Matson
+9 U Zealous Persecution @Christopher Moeller
+10 M Sword of Feast and Famine @Chris Rahn
+11 U Lingering Souls @Bud Cook
+12 U Spectral Procession @Tomasz Jedruszek
+13 M Elspeth, Knight-Errant @Volkan Baǵa
+14 R Caves of Koilos @Jim Nelson
+15 R City of Brass @Jung Park
+16 R Isolated Chapel @Cliff Childs
+17 R Vault of the Archangel @John Avon
+18 R Windbrisk Heights @Omar Rayyan
+19 L Plains @Adam Paquette
+20 L Swamp @Adam Paquette
+21 U Relic of Progenitus @Jean-Sébastien Rossbach
+22 U Burrenton Forge-Tender @Chuck Lukacs
+23 C Duress @Steven Belledin
+24 R Kataki, War's Wage @Matt Thompson
+25 U Dismember @Terese Nielsen
+26 U Ghost Quarter @Peter Mohrbacher
+
+[tokens]
+1 w_1_1_soldier @Goran Josic
+2 w_1_1_spirit_flying @Kev Walker
+3 c_1_1_a_myr @Matt Stewart
+
+[other]
+4 emblem_elspeth_knight_errant @Volkan Baǵa

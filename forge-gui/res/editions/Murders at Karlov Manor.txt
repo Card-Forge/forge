@@ -546,9 +546,12 @@ Base=Any:fromsheet("MKM prerelease promo")
 12 wb_1_1_spirit_flying @Christina Kraus
 13 voja_fenstalker @Samuel Perin
 14 c_a_clue_draw @Mike Burns
-15 c_a_clue_draw @Mike Burns
-16 c_a_clue_draw @Mike Burns
-17 c_a_clue_draw @Mike Burns
-18 c_a_clue_draw @Mike Burns
+15 c_a_clue_draw @Alfven Ato
+16 c_a_clue_draw @Ernanda Souza
+17 c_a_clue_draw @J.P. Targete
+18 c_a_clue_draw @Daneen Wilkerson
 19 c_0_0_a_thopter_flying @David Sondered
 20 c_1_1_a_thopter_flying @Samuel Perin
+
+[other]
+21 cloaked @Ben Hill

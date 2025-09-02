@@ -4,4 +4,4 @@ Types:Sorcery
 K:Improvise
 A:SP$ DestroyAll | ValidCards$ Creature.nonArtifact | SpellDescription$ Destroy all nonartifact creatures.
 DeckNeeds:Type$Artifact
-Oracle:Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.\nDestroy all nonartifact creatures.
+Oracle:Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nDestroy all nonartifact creatures.

@@ -47,10 +47,13 @@ import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.*;
 import forge.util.*;
+import io.sentry.ScopeType;
+import io.sentry.Sentry;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.function.Consumer;
 
 public class Forge implements ApplicationListener {
     private static ApplicationListener app = null;
@@ -126,13 +129,14 @@ public class Forge implements ApplicationListener {
     public static boolean createNewAdventureMap = false;
     private static Localizer localizer;
 
-    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean propertyConfig, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
+    public static ApplicationListener getApp(HWInfo hwInfo, Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean propertyConfig, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI) {
         if (app == null) {
             app = new Forge();
             if (GuiBase.getInterface() == null) {
                 clipboard = clipboard0;
                 deviceAdapter = deviceAdapter0;
-                GuiBase.setUsingAppDirectory(assetDir0.contains("forge.app")); //obb directory on android uses the package name as entrypoint
+                //obb directory on android uses the package name as entrypoint
+                GuiBase.setUsingAppDirectory(assetDir0.contains("forge.app"));
                 GuiBase.setInterface(new GuiMobile(assetDir0));
                 GuiBase.enablePropertyConfig(propertyConfig);
                 isPortraitMode = androidOrientation;
@@ -140,7 +144,13 @@ public class Forge implements ApplicationListener {
                 isTabletDevice = isTablet;
                 androidVersion = AndroidAPI;
             }
-            GuiBase.setDeviceInfo(deviceName, AndroidRelease, AndroidAPI, totalRAM);
+            if (hwInfo != null) {
+                Sentry.configureScope(ScopeType.GLOBAL, scope -> {
+                    scope.getContexts().setDevice(hwInfo.device());
+                    scope.getContexts().setOperatingSystem(hwInfo.os());
+                });
+            }
+            GuiBase.setDeviceInfo(hwInfo, AndroidAPI, totalRAM);
         }
         return app;
     }
@@ -160,6 +170,19 @@ public class Forge implements ApplicationListener {
     public void create() {
         //install our error handler
         ExceptionHandler.registerErrorHandling();
+        //init hwInfo to log
+        HWInfo info = GuiBase.getHWInfo();
+        if (info != null) {
+            System.out.println(
+                "##########################################\n" +
+                "APP: Forge v." + GuiBase.getInterface().getCurrentVersion() +
+                "\nDEV: " + info.device().getName() +
+                "\nCPU: " + info.device().getCpuDescription() +
+                "\nRAM: " + GuiBase.getDeviceRAM() + " MB" +
+                "\nOS: " + info.os().getRawDescription() +
+                "\n##########################################"
+            );
+        }
         // closeSplashScreen() is called early on non-Windows OS so it will not crash, LWJGL3 bug on AWT Splash.
         if (OperatingSystem.isWindows())
             getDeviceAdapter().closeSplashScreen();
@@ -306,6 +329,7 @@ public class Forge implements ApplicationListener {
         //default to English only if CJK is missing
         getLocalizer().setEnglish(forcedEnglishonCJKMissing);
         GuiBase.setIsAdventureMode(false);
+        clearScreenStack();
         openHomeScreen(-1, null); //default for startup
         isMobileAdventureMode = false;
         MusicPlaylist.invalidateMusicPlaylist();
@@ -559,40 +583,36 @@ public class Forge implements ApplicationListener {
     }
 
     public static boolean onHomeScreen() {
-        return Dscreens.size() == 1;
+        return currentScreen == HomeScreen.instance;
     }
 
     public static void back() {
         back(false);
     }
 
-    public static void back(boolean clearlastMatch) {
-        if (isMobileAdventureMode) {
-            return;
-        }
+    public static void back(boolean clearLastMatch) {
         FScreen lastMatch = currentScreen;
         if (destroyThis && isLandscapeMode())
             return;
-        if (Dscreens.size() < 2 || (currentScreen == HomeScreen.instance && isPortraitMode)) {
+        if ((Dscreens.size() <= 1 && !isMobileAdventureMode) || (onHomeScreen() && isPortraitMode)) {
             exit(false); //prompt to exit if attempting to go back from home screen
             return;
         }
-        currentScreen.onClose(new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
-                if (result) {
-                    Dscreens.pollFirst();
-                    setCurrentScreen(Dscreens.peekFirst());
-                    if (clearlastMatch) {
-                        try {
-                            Dscreens.remove(lastMatch);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        //check
-                        /*for (FScreen fScreen : Dscreens)
-                            System.out.println(fScreen.toString());*/
+        if(currentScreen == null)
+            return;
+        currentScreen.onClose(result -> {
+            if (result) {
+                Dscreens.pollFirst();
+                setCurrentScreen(Dscreens.peekFirst());
+                if (clearLastMatch) {
+                    try {
+                        Dscreens.remove(lastMatch);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
+                    //check
+                    /*for (FScreen fScreen : Dscreens)
+                        System.out.println(fScreen.toString());*/
                 }
             }
         });
@@ -600,14 +620,16 @@ public class Forge implements ApplicationListener {
 
     //set screen that will be gone to on pressing Back before going to current Back screen
     public static void setBackScreen(final FScreen screen0, boolean replace) {
+        if(Dscreens.peekFirst() == screen0)
+            return;
         Dscreens.remove(screen0); //remove screen from previous position in navigation history
-        int index = Dscreens.size() - 1;
-        if (index > 0) {
-            Dscreens.addLast(screen0);
-            if (replace) { //remove previous back screen if replacing back screen
-                Dscreens.removeFirst();
-            }
-        }
+        if (Dscreens.size() <= 1)
+            return;
+        FScreen front = Dscreens.removeFirst();
+        if (replace && Dscreens.peekFirst() != HomeScreen.instance) //remove previous back screen if replacing back screen
+            Dscreens.pollFirst();
+        Dscreens.addFirst(screen0);
+        Dscreens.addFirst(front);
     }
 
     public static void restart(boolean silent) {
@@ -615,19 +637,16 @@ public class Forge implements ApplicationListener {
             return;
         } //don't allow exiting multiple times
 
-        Callback<Boolean> callback = new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
-                if (result) {
-                    exited = true;
-                    exitAnimation(true);
-                }
+        Consumer<Boolean> callback = result -> {
+            if (result) {
+                exited = true;
+                exitAnimation(true);
             }
         };
 
 
         if (silent) {
-            callback.run(true);
+            callback.accept(true);
         } else {
             FOptionPane.showConfirmDialog(
                     getLocalizer().getMessage("lblAreYouSureYouWishRestartForge"), getLocalizer().getMessage("lblRestartForge"),
@@ -644,18 +663,15 @@ public class Forge implements ApplicationListener {
         options.add(getLocalizer().getMessage("lblExit"));
         options.add(getLocalizer().getMessage("lblCancel"));
 
-        Callback<Integer> callback = new Callback<Integer>() {
-            @Override
-            public void run(Integer result) {
-                if (result == 0) {
-                    exited = true;
-                    exitAnimation(false);
-                }
+        Consumer<Integer> callback = result -> {
+            if (result == 0) {
+                exited = true;
+                exitAnimation(false);
             }
         };
 
         if (silent) {
-            callback.run(0);
+            callback.accept(0);
         } else {
             FOptionPane.showOptionDialog(getLocalizer().getMessage("lblAreYouSureYouWishExitForge"), "",
                     FOptionPane.QUESTION_ICON, options, 0, callback);
@@ -677,30 +693,27 @@ public class Forge implements ApplicationListener {
             return;
         }
 
-        currentScreen.onSwitchAway(new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
-                if (result) {
-                    if (replaceBackScreen && !Dscreens.isEmpty()) {
-                        Dscreens.removeFirst();
-                    }
-                    if (Dscreens.peekFirst() != screen0) { //prevent screen being its own back screen
-                        Dscreens.addFirst(screen0);
-                    }
-                    setCurrentScreen(screen0);
-                    if (screen0 instanceof MatchScreen) {
-                        //set cursor for classic mode
-                        if (!isMobileAdventureMode) {
-                            if (magnifyToggle) {
-                                setCursor(FSkin.getCursor().get(1), "1");
-                            } else {
-                                setCursor(FSkin.getCursor().get(2), "2");
-                            }
+        currentScreen.onSwitchAway(result -> {
+            if (result) {
+                if (replaceBackScreen && !Dscreens.isEmpty()) {
+                    Dscreens.removeFirst();
+                }
+                if (Dscreens.peekFirst() != screen0) { //prevent screen being its own back screen
+                    Dscreens.addFirst(screen0);
+                }
+                setCurrentScreen(screen0);
+                if (screen0 instanceof MatchScreen) {
+                    //set cursor for classic mode
+                    if (!isMobileAdventureMode) {
+                        if (magnifyToggle) {
+                            setCursor(FSkin.getCursor().get(1), "1");
+                        } else {
+                            setCursor(FSkin.getCursor().get(2), "2");
                         }
                     }
-                    deltaTime = 0f;
-                    hueFragTime = 0f;
                 }
+                deltaTime = 0f;
+                hueFragTime = 0f;
             }
         });
     }
@@ -739,6 +752,11 @@ public class Forge implements ApplicationListener {
         currentScreen = null;
     }
 
+    public static void clearScreenStack() {
+        currentScreen = null;
+        Dscreens.clear();
+    }
+
     public static void switchToClassic() {
         if (switchClassic)
             return;
@@ -760,7 +778,7 @@ public class Forge implements ApplicationListener {
     public static void switchToAdventure() {
         setTransitionScreen(new TransitionScreen(() -> {
             ImageCache.getInstance().disposeTextures();
-            clearCurrentScreen();
+            clearScreenStack();
             clearTransitionScreen();
             openAdventure();
             exited = false;
@@ -820,6 +838,9 @@ public class Forge implements ApplicationListener {
             if (currentScreen != null) {
                 currentScreen.setSize(screenWidth, screenHeight);
                 currentScreen.onActivate();
+            }
+            else if(isMobileAdventureMode) {
+                switchToLast();
             }
         } catch (Exception ex) {
             graphics.end();

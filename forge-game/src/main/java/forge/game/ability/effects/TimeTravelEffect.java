@@ -11,6 +11,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CounterType;
 import forge.game.card.CounterEnumType;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
@@ -37,7 +38,7 @@ public class TimeTravelEffect extends SpellAbilityEffect {
 
         PlayerController pc = activator.getController();
 
-        final CounterEnumType counterType = CounterEnumType.TIME;
+        final CounterType counterType = CounterEnumType.TIME;
 
         for (int i = 0; i < num; i++) {
             FCollection<Card> list = new FCollection<>();

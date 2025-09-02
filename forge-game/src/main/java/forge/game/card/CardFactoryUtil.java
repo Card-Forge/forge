@@ -1171,6 +1171,29 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(removeCounterSA);
 
             inst.addTrigger(trigger);
+        } else if (keyword.startsWith("Firebending")) {
+            final String[] k = keyword.split(":");
+            final String n = k[1];
+
+            StringBuilder desc = new StringBuilder("Firebending ");
+            desc.append(n);
+            if (k.length > 2) {
+                desc.append(" ").append(k[2]);
+            }
+
+            desc.append(" (").append(inst.getReminderText()).append(")");
+
+            final String trigStr = "Mode$ Attacks | ValidCard$ Card.Self | TriggerDescription$ " + desc.toString();
+
+            final String manaStr = "DB$ Mana | Defined$ You | CombatMana$ True | Produced$ R | Amount$ " + n;
+
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+            SpellAbility manaSA = AbilityFactory.getAbility(manaStr, card);
+
+            manaSA.setIntrinsic(intrinsic);
+            trigger.setOverridingAbility(manaSA);
+
+            inst.addTrigger(trigger);
         } else if (keyword.equals("Flanking")) {
             final StringBuilder trigFlanking = new StringBuilder(
                     "Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature.withoutFlanking " +
@@ -2545,7 +2568,7 @@ public class CardFactoryUtil {
         }  else if (keyword.equals("Sunburst")) {
             // Rule 702.43a If this object is entering the battlefield as a creature,
             // ignoring any type-changing effects that would affect it
-            CounterType t = CounterType.get(host.isCreature() ? CounterEnumType.P1P1 : CounterEnumType.CHARGE);
+            CounterType t = host.isCreature() ? CounterEnumType.P1P1 : CounterEnumType.CHARGE;
 
             StringBuilder sb = new StringBuilder("etbCounter:");
             sb.append(t).append(":Sunburst:no Condition:");

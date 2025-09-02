@@ -415,7 +415,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return false;
     }
 
-    protected final void setManaPart(AbilityManaPart manaPart0) {
+    public final void setManaPart(AbilityManaPart manaPart0) {
         manaPart = manaPart0;
     }
 
@@ -1495,6 +1495,22 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             if (tr.isEqualToughness() && entity instanceof Card) {
                 for (final Card c : getTargets().getTargetCards()) {
                     if (entity != c && c.getNetToughness() != (((Card) entity).getNetToughness())) {
+                        return false;
+                    }
+                }
+            }
+
+            if (tr.isDifferentCMC() && entity instanceof Card) {
+                for (final Card c : getTargets().getTargetCards()) {
+                    if (entity != c && c.getCMC() == (((Card) entity).getCMC())) {
+                        return false;
+                    }
+                }
+            }
+
+            if (tr.isDifferentNames() && entity instanceof Card) {
+                for (final Card c : getTargets().getTargetCards()) {
+                    if (entity != c && c.sharesNameWith(((Card) entity).getName())) {
                         return false;
                     }
                 }

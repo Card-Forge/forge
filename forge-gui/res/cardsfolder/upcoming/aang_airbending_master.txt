@@ -1,0 +1,12 @@
+Name:Aang, Airbending Master
+ManaCost:4 W
+Types:Legendary Creature Human Avatar Ally
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAirbend | TriggerDescription$ When NICKNAME enters, airbend another target creature. (Exile it. While it's exiled, its owner may cast it for {2} rather than its mana cost.)
+SVar:TrigAirbend:DB$ Airbend | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature
+T:Mode$ ChangesZoneAll | ValidCards$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Ante,Command,Exile,Hand,Library | TriggerZones$ Battlefield | Execute$ TrigExperience | TriggerDescription$ Whenever one or more creatures you control leave the battlefield without dying, you get an experience counter.
+SVar:TrigExperience:DB$ PutCounter | Defined$ You | CounterType$ Experience | CounterNum$ 1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a 1/1 white Ally creature token for each experience counter you have.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_ally | TokenOwner$ You
+SVar:X:Count$YourCountersExperience
+Oracle:When Aang enters, airbend another target creature. (Exile it. While it's exiled, its owner may cast it for {2} rather than its mana cost.)\nWhenever one or more creatures you control leave the battlefield without dying, you get an experience counter.\nAt the beginning of your upkeep, create a 1/1 white Ally creature token for each experience counter you have.

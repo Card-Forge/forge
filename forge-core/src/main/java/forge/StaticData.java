@@ -29,8 +29,6 @@ import java.util.stream.Collectors;
 public class StaticData {
     private final CardStorageReader cardReader;
     private final CardStorageReader tokenReader;
-    private final CardStorageReader customCardReader;
-
     private final String blockDataFolder;
     private final CardDb commonCards;
     private final CardDb variantCards;
@@ -79,7 +77,6 @@ public class StaticData {
         this.tokenReader = tokenReader;
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
         this.blockDataFolder = blockDataFolder;
-        this.customCardReader = customCardReader;
         this.allowCustomCardsInDecksConformance = allowCustomCardsInDecksConformance;
         this.enableSmartCardArtSelection = enableSmartCardArtSelection;
         this.loadNonLegalCards = loadNonLegalCards;

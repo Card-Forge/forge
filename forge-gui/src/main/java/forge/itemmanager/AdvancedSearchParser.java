@@ -2,6 +2,7 @@ package forge.itemmanager;
 
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
+import forge.card.CardSplitType;
 import forge.card.CardRulesPredicates.LeafNumber;
 import forge.card.MagicColor;
 import forge.item.PaperCard;
@@ -300,6 +301,40 @@ public abstract class AdvancedSearchParser {
                     case ":":
                         predicate = CardRulesPredicates.name(StringOp.CONTAINS_IC, valueStr);
                         break;
+                }
+                break;
+
+            case "is":
+                if (opUsed.equals(":")) {
+                    switch(valueStr) {
+                        case "meld":
+                            predicate = CardRulesPredicates.isSplitType(CardSplitType.Meld);
+                            break;
+                        
+                        case "flip":
+                            predicate = CardRulesPredicates.isSplitType(CardSplitType.Flip);
+                            break;
+
+                        case "split":
+                            predicate = CardRulesPredicates.isSplitType(CardSplitType.Split);
+                            break;
+
+                        case "modal":
+                            predicate = CardRulesPredicates.isSplitType(CardSplitType.Modal);
+                            break;
+
+                        case "transform":
+                            predicate = CardRulesPredicates.isSplitType(CardSplitType.Transform);
+                            break;
+
+                        case "vanilla":
+                            predicate = CardRulesPredicates.isVanilla();
+                            break;
+
+                        case "custom":
+                            predicate = card -> card.isCustom();
+                            break;
+                    }
                 }
                 break;
         }

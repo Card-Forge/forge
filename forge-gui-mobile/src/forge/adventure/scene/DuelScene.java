@@ -9,10 +9,7 @@ import forge.Graphics;
 import forge.LobbyPlayer;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.character.PlayerSprite;
-import forge.adventure.data.AdventureEventData;
-import forge.adventure.data.EffectData;
-import forge.adventure.data.EnemyData;
-import forge.adventure.data.ItemData;
+import forge.adventure.data.*;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.IAfterMatch;
@@ -21,8 +18,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.assets.FBufferedImage;
 import forge.assets.FSkin;
-import forge.deck.Deck;
-import forge.deck.DeckProxy;
+import forge.deck.*;
 import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.player.Player;
@@ -32,6 +28,7 @@ import forge.gamemodes.quest.QuestUtil;
 import forge.gui.FThreads;
 import forge.gui.interfaces.IGuiGame;
 import forge.item.IPaperCard;
+import forge.item.PaperCard;
 import forge.player.GamePlayerUtil;
 import forge.player.PlayerControllerHuman;
 import forge.screens.FScreen;
@@ -42,7 +39,6 @@ import forge.sound.MusicPlaylist;
 import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
 import forge.util.Aggregates;
-import forge.util.Callback;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -140,7 +136,7 @@ public class DuelScene extends ForgeScene {
             dungeonEffect = null;
             callbackExit = false;
             Forge.clearTransitionScreen();
-            Forge.clearCurrentScreen();
+            Forge.clearScreenStack();
             Forge.advFreezePlayerControls = false;
             Scene last = Forge.switchToLast();
             Current.player().getStatistic().setResult(enemyName, winner);
@@ -156,12 +152,9 @@ public class DuelScene extends ForgeScene {
     }
 
     private FOptionPane createFOption(String message, String title, FBufferedImage icon, Runnable runnable) {
-        return new FOptionPane(message, null, title, icon, null, ImmutableList.of(Forge.getLocalizer().getMessage("lblOK")), -1, new Callback<Integer>() {
-            @Override
-            public void run(Integer result) {
-                if (runnable != null)
-                    runnable.run();
-            }
+        return new FOptionPane(message, null, title, icon, null, ImmutableList.of(Forge.getLocalizer().getMessage("lblOK")), -1, result -> {
+            if (runnable != null)
+                runnable.run();
         });
     }
 
@@ -210,9 +203,7 @@ public class DuelScene extends ForgeScene {
 
         List<RegisteredPlayer> players = new ArrayList<>();
 
-        int missingCards = Config.instance().getConfigData().minDeckSize - playerDeck.getMain().countAll();
-        if (missingCards > 0) //Replace unknown cards for a Wastes.
-            playerDeck.getMain().add("Wastes", missingCards);
+        applyAdventureDeckRules();
         int playerCount = 1;
         EnemyData currentEnemy = enemy.getData();
         for (int i = 0; i < 8 && currentEnemy != null; i++) {
@@ -248,13 +239,13 @@ public class DuelScene extends ForgeScene {
 
         if (eventData == null || eventData.eventRules.allowsItems) {
             //Collect and add items effects first.
-            for (String playerItem : advPlayer.getEquippedItems()) {
-                ItemData item = ItemData.getItem(playerItem);
+            for (Long id : advPlayer.getEquippedItems()) {
+                ItemData item = Current.player().getEquippedItem(id);
                 if (item != null && item.effect != null) {
                     playerEffects.add(item.effect);
                     if (item.effect.opponent != null) oppEffects.add(item.effect.opponent);
                 } else {
-                    System.err.printf("Item %s not found.", playerItem);
+                    System.err.printf("Item %s not found.", id);
                 }
             }
         }
@@ -319,7 +310,7 @@ public class DuelScene extends ForgeScene {
             if (eventData != null && eventData.eventRules.allowsItems) {
                 if (currentEnemy.equipment != null) {
                     for (String oppItem : currentEnemy.equipment) {
-                        ItemData item = ItemData.getItem(oppItem);
+                        ItemData item = ItemListData.getItem(oppItem);
                         if (item == null)
                             continue;
                         equipmentEffects.add(item.effect);
@@ -346,6 +337,11 @@ public class DuelScene extends ForgeScene {
         }
 
         players.add(humanPlayer);
+
+        if(eventData != null && eventData.draft != null) {
+            for(RegisteredPlayer p : players)
+                p.assignConspiracies();
+        }
 
         final Map<RegisteredPlayer, IGuiGame> guiMap = new HashMap<>();
         guiMap.put(humanPlayer, MatchController.instance);
@@ -391,6 +387,47 @@ public class DuelScene extends ForgeScene {
         }
         super.enter();
         matchOverlay.show();
+    }
+
+    private static final String PLACEHOLDER_MAIN = "Wastes";
+    private static final String PLACEHOLDER_ATTRACTION = "Coin-Operated Pony";
+    private static final String PLACEHOLDER_CONTRAPTION = "Automatic Fidget Spinner";
+
+    private void applyAdventureDeckRules() {
+        //Can't just keep the player from entering a battle if their deck is invalid. So instead we'll just edit their deck.
+        CardPool mainSection = playerDeck.getMain(), attractions = playerDeck.get(DeckSection.Attractions), contraptions = playerDeck.get(DeckSection.Contraptions);
+        DeckFormat format = DeckFormat.Adventure;
+
+        removeExcessCopies(mainSection, format);
+        removeExcessCopies(attractions, format);
+        removeExcessCopies(contraptions, format);
+
+        int missingCards = Config.instance().getConfigData().minDeckSize - mainSection.countAll();
+        if (missingCards > 0) //Replace unknown cards for a Wastes.
+            mainSection.add(PLACEHOLDER_MAIN, missingCards);
+
+        if(attractions != null && !attractions.isEmpty()) {
+            int missingAttractions = 10 - attractions.countAll(); //TODO: These shouldn't be hard coded but DeckFormat's gonna need some reorganizing to fetch this dynamically
+            if(missingAttractions > 0)
+                attractions.add(PLACEHOLDER_ATTRACTION, missingAttractions);
+        }
+        if(contraptions != null && !contraptions.isEmpty()) {
+            int missingContraptions = 15 - contraptions.countAll();
+            if(missingContraptions > 0)
+                contraptions.add(PLACEHOLDER_CONTRAPTION, missingContraptions);
+        }
+    }
+
+    private static void removeExcessCopies(CardPool section, DeckFormat format) {
+        if(section == null)
+            return;
+        for(Map.Entry<PaperCard, Integer> e : section) {
+            PaperCard card = e.getKey();
+            int amount = e.getValue();
+            int limit = format.getMaxCardCopies(card);
+            if(amount > limit)
+                section.remove(card, amount - limit);
+        }
     }
 
     @Override

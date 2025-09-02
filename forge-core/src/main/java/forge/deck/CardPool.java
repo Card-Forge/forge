@@ -77,12 +77,20 @@ public class CardPool extends ItemPool<PaperCard> {
         Map<String, CardDb> dbs = StaticData.instance().getAvailableDatabases();
         for (Map.Entry<String, CardDb> entry: dbs.entrySet()){
             CardDb db = entry.getValue();
+
             PaperCard paperCard = db.getCard(cardName, setCode, collectorNumber, flags);
             if (paperCard != null) {
                 this.add(paperCard, amount);
                 return;
             }
         }
+
+        // Try to get non-Alchemy version if it cannot find it.
+        if (cardName.startsWith("A-")) {
+            System.out.println("Alchemy card not found for '" + cardName + "'. Trying to get its non-Alchemy equivalent.");
+            cardName = cardName.replaceFirst("A-", "");
+        }
+
         //Failed to find it. Fall back accordingly?
         this.add(cardName, setCode, IPaperCard.NO_ART_INDEX, amount, addAny, flags);
     }
@@ -418,6 +426,12 @@ public class CardPool extends ItemPool<PaperCard> {
         return pool;
     }
 
+    public static CardPool fromSingleCardRequest(String cardRequest) {
+        if(StringUtils.isBlank(cardRequest))
+            return new CardPool();
+        return fromCardList(List.of(cardRequest));
+    }
+
     public static List<Pair<String, Integer>> processCardList(final Iterable<String> lines) {
         List<Pair<String, Integer>> cardRequests = new ArrayList<>();
         if (lines == null)
@@ -467,6 +481,7 @@ public class CardPool extends ItemPool<PaperCard> {
      * @param predicate the Predicate to apply to this CardPool
      * @return a new CardPool made from this CardPool with only the cards that agree with the provided Predicate
      */
+    @Override
     public CardPool getFilteredPool(Predicate<PaperCard> predicate) {
         CardPool filteredPool = new CardPool();
         for (PaperCard c : this.items.keySet()) {

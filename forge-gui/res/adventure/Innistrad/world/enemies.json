@@ -460,6 +460,59 @@
 		]
 	},
 	{
+		"name": "Gavony Farmhand",
+		"sprite": "sprites/enemy/humanoid/human/peasant/farmer.atlas",
+		"deck": [
+			"decks/standard/INN/inn_peasant_easy.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.7,
+		"difficulty": 0.1,
+		"speed": 25,
+		"life": 17,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 2,
+				"addMaxCount": 3
+			},
+			{
+				"type": "gold",
+				"probability": 0.7,
+				"count": 70,
+				"addMaxCount": 80
+			},
+			{
+				"type": "card",
+				"count": 3,
+				"colors": [
+					"White",
+					"Green"
+				],
+				"rarity": [
+					"Common",
+					"Uncommon"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD",
+					"AVR",
+					"MID"
+				]
+			}
+		],
+		"colors": "W",
+		"questTags": [
+			"Human",
+			"Humanoid",
+			"Peasant",
+			"IdentityWhite",
+			"BiomeWhite"
+		]
+	},
+	{
 		"name": "The Gitrog Monster",
 		"sprite": "sprites/enemy/undead/zombie.atlas",
 		"deck": [
@@ -521,6 +574,58 @@
 		"colors": "BG",
 		"questTags": [
 			"Gitrog"
+		]
+	},
+	{
+		"name": "Hobbling Zombie",
+		"sprite": "sprites/enemy/undead/zombie_2.atlas",
+		"deck": [
+			"decks/standard/INN/inn_zombie_easy.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.7,
+		"difficulty": 0.1,
+		"speed": 18,
+		"life": 10,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 2,
+				"addMaxCount": 3
+			},
+			{
+				"type": "gold",
+				"probability": 0.7,
+				"count": 50,
+				"addMaxCount": 80
+			},
+			{
+				"type": "card",
+				"count": 2,
+				"colors": [
+					"Blue",
+					"Black"
+				],
+				"rarity": [
+					"Common",
+					"Uncommon"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD",
+					"AVR"
+				]
+			}
+		],
+		"colors": "B",
+		"questTags": [
+			"Undead",
+			"Zombie",
+			"Humanoid",
+			"IdentityBlack",
+			"BiomeColorless"
 		]
 	},
 	{
@@ -948,6 +1053,61 @@
 			"IdentityBlue",
 			"IdentityRed",
 			"BiomeBlue"
+		]
+	},
+	{
+		"name": "Scarecrow",
+		"sprite": "sprites/enemy/construct/scarecrow.atlas",
+		"deck": [
+			"decks/standard/INN/inn_scarecrow_easy.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.45,
+		"difficulty": 0.1,
+		"speed": 10,
+		"life": 20,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 0.75,
+				"count": 3,
+				"rarity": [
+					"Common"
+				],
+				"addMaxCount": 2
+			},
+			{
+				"type": "deckCard",
+				"probability": 0.55,
+				"count": 1,
+				"addMaxCount": 2
+			},
+			{
+				"type": "gold",
+				"probability": 0.3,
+				"count": 13,
+				"addMaxCount": 80
+			},
+			{
+				"type": "card",
+				"count": 1,
+				"rarity": [
+					"Common",
+					"Uncommon"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD",
+					"MID"
+				]
+			}
+		],
+		"questTags": [
+			"Artifact",
+			"BiomeColorless",
+			"BiomeGreen",
+			"BiomeWhite"
 		]
 	},
 	{

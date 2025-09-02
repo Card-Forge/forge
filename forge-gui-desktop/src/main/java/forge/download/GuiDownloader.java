@@ -37,8 +37,9 @@ import forge.toolbox.FRadioButton;
 import forge.toolbox.FSkin;
 import forge.toolbox.FTextField;
 import forge.toolbox.JXButtonPanel;
-import forge.util.Callback;
 import net.miginfocom.swing.MigLayout;
+
+import java.util.function.Consumer;
 
 @SuppressWarnings("serial")
 public class GuiDownloader extends DefaultBoundedRangeModel {
@@ -57,7 +58,7 @@ public class GuiDownloader extends DefaultBoundedRangeModel {
             SOverlayUtils.hideOverlay();
 
             if (callback != null) {
-                callback.run(btnStart.getText() == "OK"); //determine result based on whether download finished
+                callback.accept(btnStart.getText() == "OK"); //determine result based on whether download finished
             }
         }
     };
@@ -70,12 +71,12 @@ public class GuiDownloader extends DefaultBoundedRangeModel {
     private final FRadioButton radProxyHTTP = new FRadioButton("HTTP Proxy");
 
     private final GuiDownloadService service;
-    private final Callback<Boolean> callback;
+    private final Consumer<Boolean> callback;
 
     public GuiDownloader(final GuiDownloadService service0) {
         this(service0, null);
     }
-    public GuiDownloader(final GuiDownloadService service0, final Callback<Boolean> callback0) {
+    public GuiDownloader(final GuiDownloadService service0, final Consumer<Boolean> callback0) {
         service = service0;
         callback = callback0;
 

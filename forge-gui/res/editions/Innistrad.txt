@@ -2,7 +2,6 @@
 Code=ISD
 Date=2011-09-30
 Name=Innistrad
-Code2=ISD
 Type=Expansion
 BoosterCovers=5
 Booster=9 Common:!dfc, 3 Uncommon:!dfc, 1 RareMythic:!dfc, 1 dfc, 1 BasicLand
@@ -285,8 +284,9 @@ ScryfallCode=ISD
 5 b_2_2_vampire_flying @Svetlin Velinov
 6 b_1_1_wolf_deathtouch @Daniel Ljunggren
 7 b_2_2_zombie @Lucas Graciano
-7 b_2_2_zombie @Lucas Graciano
-7 b_2_2_zombie @Lucas Graciano
+8 b_2_2_zombie @Christopher Moeller
+9 b_2_2_zombie @Cynthia Sheppard
+# Technically a g_x_x_ooze, but it has unique art and g_x_x_ooze_gutter_grime doesn't exist
 10 g_x_x_ooze_gutter_grime @Erica Yang
 11 g_1_2_spider_reach @Daniel Ljunggren
 12 g_2_2_wolf @David Palumbo

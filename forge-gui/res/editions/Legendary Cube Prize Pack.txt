@@ -1,0 +1,157 @@
+[metadata]
+Code=PZ1
+Date=2015-11-18
+Name=Legendary Cube Prize Pack
+Type=Online
+ScryfallCode=PZ1
+
+[cards]
+1 U Bastion Protector @Victor Adame Minguez
+2 R Containment Priest @John Stanko
+3 R Dawnbreak Reclaimer @Tyler Jacobson
+4 U Ghostly Prison @Wayne England
+5 U Grasp of Fate @Tomasz Jedruszek
+6 U Herald of the Host @Nils Hamm
+7 R Kalemne's Captain @Tomasz Jedruszek
+8 R Loyal Retainers @Solomon Au Yeung
+9 M Nahiri, the Lithomancer @Eric Deschamps
+10 U Oreskos Explorer @Winona Nelson
+11 M Reya Dawnbringer @Matthew D. Wilson
+12 R Righteous Confluence @Kieran Yanner
+13 U Shielded by Faith @David Palumbo
+14 U Spirit Mantle @Izzy
+15 U Vow of Duty @Wayne Reynolds
+16 U Wall of Omens @James Paick
+17 R Wrath of God @Kev Walker
+18 R Aethersnatch @Aaron Miller
+19 U Brainstorm @DiTerlizzi
+20 U Broodbirth Viper @Mathias Kollros
+21 U Compulsive Research @Michael Sutfin
+22 U Deceiver Exarch @Izzy
+23 U Deep Analysis @Daren Bader
+24 R Desertion @Richard Kane Ferguson
+25 U Fact or Fiction @Matt Cavotta
+26 R Flusterstorm @Erica Yang
+27 R Gigantoplasm @Kev Walker
+28 R Illusory Ambusher @Steve Argyle
+29 R Mirror Match @Steve Prescott
+30 R Mystic Confluence @Kieran Yanner
+31 U Propaganda @Jeff Miracola
+32 R Rhystic Study @Terese Nielsen
+33 R Synthetic Destiny @Dave Kendall
+34 M Teferi, Temporal Archmage @Tyler Jacobson
+35 M True-Name Nemesis @Zack Stella
+36 U Vow of Flight @Erica Yang
+37 U Wonder @Rebecca Guay
+38 M Abyssal Persecutor @Chippy
+39 U Banshee of the Dread Choir @Anthony Palumbo
+40 R Corpse Augur @Scott M. Fischer
+41 R Daxos's Torment @Jakub Kasper
+42 R Deadly Tempest @Cliff Childs
+43 R Decree of Pain @Mathias Kollros
+44 R Dread Summons @Izzy
+45 M Ob Nixilis of the Black Oath @Daarken
+46 R Scourge of Nel Toth @Mark Winters
+47 R Thief of Blood @Cynthia Sheppard
+48 R Toxic Deluge @Svetlin Velinov
+49 U Tragic Slip @Christopher Moeller
+50 U Viscera Seer @John Stanko
+51 U Vow of Malice @Jesper Ejsing
+52 R Wretched Confluence @Kieran Yanner
+53 U Anger @John Avon
+54 R Awaken the Sky Tyrant @Adam Paquette
+55 R Chaos Warp @Trevor Claxton
+56 M Daretti, Scrap Savant @Dan Murayama Scott
+57 R Diaochan, Artful Beauty @Miao Aili
+58 R Dream Pillager @Min Yum
+59 U Faithless Looting @Gabor Szikszai
+60 R Fiery Confluence @Kieran Yanner
+61 U Flametongue Kavu @Slawomir Maniak
+62 R Goblin Sharpshooter @Wayne Reynolds
+63 R Magus of the Wheel @Carl Frank
+64 R Meteor Blast @Mike Sass
+65 R Mizzix's Mastery @Dan Murayama Scott
+66 U Punishing Fire @Christopher Moeller
+67 R Rite of the Raging Storm @Svetlin Velinov
+68 U Vow of Lightning @Svetlin Velinov
+69 U Warchief Giant @Slawomir Maniak
+70 U Arachnogenesis @Johannes Voss
+71 R Bloodspore Thrinax @Ralph Horsley
+72 U Brawn @Matt Cavotta
+73 U Caller of the Pack @Ryan Yee
+74 R Centaur Vinecrasher @Robbie Trevino
+75 U Cultivate @Anthony Palumbo
+76 U Eternal Witness @Terese Nielsen
+77 R Ezuri's Predation @Svetlin Velinov
+78 M Freyalise, Llanowar's Fury @Adam Paquette
+79 U Great Oak Guardian @Steven Belledin
+80 U Harmonize @Paul Lee
+81 U Invigorate @Mark Zug
+82 U Krosan Grip @Zoltan Boros & Gabor Szikszai
+83 U Nest Invader @Trevor Claxton
+84 R Pathbreaker Ibex @Christopher Moeller
+85 U Rancor @Kev Walker
+86 U Sakura-Tribe Elder @Carl Critchlow
+87 U Skullwinder @James Paick
+88 R Sylvan Library @Yeong-Hao Han
+89 R Titania, Protector of Argoth @Magali Villeneuve
+90 R Verdant Confluence @Kieran Yanner
+91 U Vow of Wildness @Jim Pavelec
+92 U Wall of Blossoms @Heather Hudson
+93 M Animar, Soul of Elements @Peter Mohrbacher
+94 R Anya, Merciless Angel @Alisa Lee
+95 R Arjun, the Shifting Flame @Willian Murai
+96 U Behemoth Sledge @Steve Prescott
+97 M Dack Fayden @Eric Deschamps
+98 R Daxos the Returned @Adam Paquette
+99 R Dragonlair Spider @Carl Critchlow
+100 R Edric, Spymaster of Trest @Volkan Baǵa
+101 U Electrolyze @Zoltan Boros & Gabor Szikszai
+102 R Ezuri, Claw of Progress @James Ryman
+103 U Firespout @Jeff Miracola
+104 M Ghave, Guru of Spores @James Paick
+105 U Hull Breach @Brian Snõddy
+106 M Kaalia of the Vast @Michael Komarck
+107 R Kalemne, Disciple of Iroas @Jason Chan
+108 R Karlov of the Ghost Council @Volkan Baǵa
+109 R Kaseto, Orochi Archmage @Aaron Miller
+110 M Maelstrom Wanderer @Thomas M. Baxa
+111 M Marchesa, the Black Rose @Matt Stewart
+112 R Mazirek, Kraul Death Priest @Mathias Kollros
+113 R Meren of Clan Nel Toth @Mark Winters
+114 M The Mimeoplasm @Svetlin Velinov
+115 R Mirari's Wake @Volkan Baǵa
+116 R Mizzix of the Izmagnus @Cliff Childs
+117 R Shardless Agent @Izzy
+118 R Vela the Night-Clad @Allen Williams
+119 M Zedruu the Greathearted @Mark Zug
+120 U Basalt Monolith @Yeong-Hao Han
+121 U Blade of Selves @Alan Pollack
+122 R Duplicant @Marco Nelor
+123 U Lightning Greaves @Jeremy Jarvis
+124 R Mind's Eye @Karl Kopinski
+125 R Sandstone Oracle @Eric Deschamps
+126 R Scroll Rack @Heather Hudson
+127 R Scytheclaw @James Paick
+128 R Seal of the Guildpact @Franz Vohwinkel
+129 U Sol Ring @Mike Bierek
+130 U Swiftfoot Boots @Svetlin Velinov
+131 U Thought Vessel @rk post
+132 U Thran Dynamo @Ron Spears
+133 U Worn Powerstone @Henry G. Higginbotham
+134 U Arcane Sanctum @Anthony Francisco
+135 U Bojuka Bog @Howard Lyon
+136 U Command Beacon @Jonas De Ro
+137 U Command Tower @Adam Paquette
+138 U Crumbling Necropolis @Dave Kendall
+139 U Dreadship Reef @Lars Grant-West
+140 U Fungal Reaches @Martina Pilcerova
+141 R Homeward Path @Tomasz Jedruszek
+142 U Jungle Shrine @Wayne Reynolds
+143 U Khalni Garden @Ryan Pancoast
+144 U Krosan Verge @Tony Szczudlo
+145 U Molten Slagheap @Daren Bader
+146 U Saltcrusted Steppe @Greg Staples
+147 U Savage Lands @Vance Kovacs
+148 U Seaside Citadel @Volkan Baǵa
+149 R Temple of the False God @Brian Snõddy

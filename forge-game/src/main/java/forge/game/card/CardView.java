@@ -142,9 +142,8 @@ public class CardView extends GameEntityView {
     }
 
     public boolean isFlipped() {
-        return get(TrackableProperty.Flipped); // getCurrentState().getState() == CardStateName.Flipped;
+        return get(TrackableProperty.Flipped);
     }
-
     public boolean isSplitCard() {
         return get(TrackableProperty.SplitCard);
     }
@@ -939,7 +938,9 @@ public class CardView extends GameEntityView {
             sb.append("\r\n\r\nMerged Cards: ").append(mergedCards);
         }
 
-        return sb.toString().trim();
+        return sb.toString().trim()
+            .replace("\\r", "\r")
+            .replace("\\n", "\n");
     }
 
     public CardStateView getCurrentState() {
@@ -1027,6 +1028,7 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Cloned, c.isCloned());
         set(TrackableProperty.SplitCard, isSplitCard);
         set(TrackableProperty.FlipCard, c.isFlipCard());
+        set(TrackableProperty.Flipped, c.getCurrentStateName() == CardStateName.Flipped);
         set(TrackableProperty.Facedown, c.isFaceDown());
         set(TrackableProperty.Foretold, c.isForetold());
         set(TrackableProperty.Secondary, c.hasState(CardStateName.Secondary));
@@ -1104,7 +1106,7 @@ public class CardView extends GameEntityView {
         currentState.getView().setOriginalColors(c); //set original Colors
 
         currentStateView.updateAttractionLights(currentState);
-        currentStateView.updateHasPrintedPT(c.getRules() != null && c.getRules().hasPrintedPT());
+        currentStateView.updateHasPrintedPT((currentStateView.isVehicle() || currentStateView.isSpaceCraft()) && c.getRules() != null && c.getRules().hasPrintedPT());
 
         CardState alternateState = isSplitCard && isFaceDown() ? c.getState(CardStateName.RightSplit) : c.getAlternateState();
 
