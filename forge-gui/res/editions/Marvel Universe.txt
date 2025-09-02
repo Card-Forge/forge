@@ -14,3 +14,5 @@ ScryfallCode=MAR
 27 M Shock @John Romita Sr.
 31 M Arachnogenesis @Todd McFarlane
 34 M Heroic Intervention @Jack Kirby & Steve Ditko
+35 M Hunter's Insight @Sergio Davila & Sean Parsons
+40 M Terminate @Mark Bagley & Randy Emberlin

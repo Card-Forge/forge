@@ -1820,6 +1820,10 @@ public class CardProperty {
             if (!card.isWarped()) {
                 return false;
             }
+        } else if (property.equals("webSlinged")) {
+            if (!card.isWebSlinged()) {
+                return false;
+            }
         } else if (property.equals("CrewedThisTurn")) {
             if (!hasTimestampMatch(card, source.getCrewedByThisTurn())) return false;
         } else if (property.equals("CrewedBySourceThisTurn")) {
