@@ -1,0 +1,8 @@
+Name:Rhino's Rampage
+ManaCost:GR
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ Fight | TgtPrompt$ Select target creature you control | SubAbility$ DBFight | NumAtt$ +1 | SpellDescription$ Target creature you control gets +1/+0 until end of turn. It fights target creature an opponent controls.
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.OppCtrl | ExcessSVar$ Excess | ExcessSVarCondition$ Creature.targetedBy+OppCtrl | SubAbility$ DBImmediateTrig | TgtPrompt$ Select target creature an opponent controls.
+SVar:DBImmediateTrig:DB$ ImmediateTrigger | ConditionCheckSVar$ Excess | ConditionSVarCompare$ GE1 | Execute$ TrigDestroy | SpellDescription$ When excess damage is dealt to the creature an opponent controls this way, destroy up to one target noncreature artifact with mana value 3 or less.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.nonCreature+cmcLE3 | TgtPrompt$ Select up to one target noncreature artifact with mana value 3 or less | TargetMin$ 0 | TargetMax$ 1
+Oracle:Target creature you control gets +1/+0 until end of turn. It fights target creature an opponent controls. When excess damage is dealt to the creature an opponent controls this way, destroy up to one target noncreature artifact with mana value 3 or less.
