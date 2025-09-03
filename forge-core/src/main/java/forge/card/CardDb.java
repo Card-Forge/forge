@@ -45,8 +45,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     public final static char NameSetSeparator = '|';
     public final static String FlagPrefix = "#";
     public static final String FlagSeparator = "\t";
-    private final String exlcudedCardName = "Concentrate";
-    private final String exlcudedCardSet = "DS0";
 
     // need this to obtain cardReference by name+set+artindex
     private final ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER), Lists::newArrayList);
@@ -303,7 +301,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
         // create faces list from rules
         for (final CardRules rule : rules.values()) {
-            if (filteredCards.contains(rule.getName()) && !exlcudedCardName.equalsIgnoreCase(rule.getName()))
+            if (filteredCards.contains(rule.getName()))
                 continue;
             for (ICardFace face : rule.getAllFaces()) {
                 addFaceToDbNames(face);
@@ -501,9 +499,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public void addCard(PaperCard paperCard) {
-        if (excludeCard(paperCard.getName(), paperCard.getEdition()))
-            return;
-
         allCardsByName.put(paperCard.getName(), paperCard);
 
         if (paperCard.getRules().getSplitType() == CardSplitType.None) {
@@ -521,17 +516,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             //also include specialize faces
             for (ICardFace face : paperCard.getRules().getSpecializeParts().values()) allCardsByName.put(face.getName(), paperCard);
         }
-    }
-
-    private boolean excludeCard(String cardName, String cardEdition) {
-        if (filtered.isEmpty())
-            return false;
-        if (filtered.contains(cardName)) {
-            if (exlcudedCardSet.equalsIgnoreCase(cardEdition) && exlcudedCardName.equalsIgnoreCase(cardName))
-                return true;
-            else return !exlcudedCardName.equalsIgnoreCase(cardName);
-        }
-        return false;
     }
 
     private void reIndex() {

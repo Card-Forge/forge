@@ -10,4 +10,6 @@ Type=Funny
 2 U Concentrate
 3 U Distract
 4 U Enthrall
+
+[eternal]
 5 M Drake Stone
