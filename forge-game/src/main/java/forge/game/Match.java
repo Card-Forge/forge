@@ -23,6 +23,7 @@ import forge.item.PaperCard;
 import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -224,6 +225,7 @@ public class Match {
         // friendliness
         Map<Player, Map<DeckSection, List<? extends PaperCard>>> rAICards = new HashMap<>();
         Multimap<Player, PaperCard> removedAnteCards = ArrayListMultimap.create();
+        Map<Player, List<PaperCard>> unsupported = new HashMap<>();
 
         final FCollectionView<Player> players = game.getPlayers();
         final List<RegisteredPlayer> playersConditions = game.getMatch().getPlayers();
@@ -293,17 +295,17 @@ public class Match {
 
             Set<PaperCard> myRemovedAnteCards = null;
             if (!rules.useAnte()) {
-                myRemovedAnteCards = getRemovedAnteCards(myDeck);
+                myRemovedAnteCards = getRemovedAnteCards(myDeck.getLeft());
                 for (PaperCard cp: myRemovedAnteCards) {
-                    for (Entry<DeckSection, CardPool> ds : myDeck) {
+                    for (Entry<DeckSection, CardPool> ds : myDeck.getLeft()) {
                         ds.getValue().removeAll(cp);
                     }
                 }
             }
 
-            preparePlayerZone(player, ZoneType.Library, myDeck.getMain(), psc.useRandomFoil());
-            if (myDeck.has(DeckSection.Sideboard)) {
-                preparePlayerZone(player, ZoneType.Sideboard, myDeck.get(DeckSection.Sideboard), psc.useRandomFoil());
+            preparePlayerZone(player, ZoneType.Library, myDeck.getLeft().getMain(), psc.useRandomFoil());
+            if (myDeck.getLeft().has(DeckSection.Sideboard)) {
+                preparePlayerZone(player, ZoneType.Sideboard, myDeck.getLeft().get(DeckSection.Sideboard), psc.useRandomFoil());
 
                 // Assign Companion
                 Card companion = player.assignCompanion(game, person);
@@ -322,7 +324,7 @@ public class Match {
             player.shuffle(null);
 
             if (isFirstGame) {
-                Map<DeckSection, List<? extends PaperCard>> cardsComplained = player.getController().complainCardsCantPlayWell(myDeck);
+                Map<DeckSection, List<? extends PaperCard>> cardsComplained = player.getController().complainCardsCantPlayWell(myDeck.getLeft());
                 if (cardsComplained != null && !cardsComplained.isEmpty()) {
                     rAICards.put(player, cardsComplained);
                 }
@@ -337,6 +339,7 @@ public class Match {
             if (myRemovedAnteCards != null && !myRemovedAnteCards.isEmpty()) {
                 removedAnteCards.putAll(player, myRemovedAnteCards);
             }
+            unsupported.put(player, myDeck.getRight());
         }
 
         final Localizer localizer = Localizer.getInstance();
@@ -346,6 +349,10 @@ public class Match {
 
         if (!removedAnteCards.isEmpty()) {
             game.getAction().revealAnte(localizer.getMessage("lblAnteCardsRemoved"), removedAnteCards);
+        }
+
+        if (!unsupported.isEmpty()) {
+            game.getAction().revealUnsupported(unsupported);
         }
     }
 
