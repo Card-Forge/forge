@@ -2505,7 +2505,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                                 sbLong.append(".");
                             }
                             if (k.length > 3) {
-                                sbLong.append(". " + k[3]);
+                                sbLong.append(". ").append(k[3]);
                             }
                         }
                         sbLong.append(" (").append(inst.getReminderText()).append(")");
