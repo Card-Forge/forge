@@ -282,6 +282,17 @@ public class PumpEffect extends SpellAbilityEffect {
         List<Card> tgtCards = getCardsfromTargets(sa);
         List<Player> tgtPlayers = getTargetPlayers(sa);
 
+        if (sa.hasParam("Optional")) {
+            final String targets = Lang.joinHomogenous(tgtCards);
+            final String message = sa.hasParam("OptionQuestion")
+                    ? TextUtil.fastReplace(sa.getParam("OptionQuestion"), "TARGETS", targets)
+                    : Localizer.getInstance().getMessage("lblApplyPumpToTarget", targets);
+
+            if (!activator.getController().confirmAction(sa, null, message, null)) {
+                return;
+            }
+        }
+
         List<String> keywords = Lists.newArrayList();
         if (sa.hasParam("KW")) {
             keywords.addAll(Arrays.asList(sa.getParam("KW").split(" & ")));
@@ -306,8 +317,6 @@ public class PumpEffect extends SpellAbilityEffect {
             String[] restrictions = sa.hasParam("SharedRestrictions") ? sa.getParam("SharedRestrictions").split(",") : new String[]{"Card"};
             keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, host, sa);
         }
-
-        final CardCollection untargetedCards = CardUtil.getRadiance(sa);
 
         if (sa.hasParam("DefinedKW")) {
             String defined = sa.getParam("DefinedKW");
@@ -392,17 +401,6 @@ public class PumpEffect extends SpellAbilityEffect {
                 total.remove(random);
             }
             keywords = choice;
-        }
-
-        if (sa.hasParam("Optional")) {
-            final String targets = Lang.joinHomogenous(tgtCards);
-            final String message = sa.hasParam("OptionQuestion")
-                    ? TextUtil.fastReplace(sa.getParam("OptionQuestion"), "TARGETS", targets)
-                    : Localizer.getInstance().getMessage("lblApplyPumpToTarget", targets);
-
-            if (!activator.getController().confirmAction(sa, null, message, null)) {
-                return;
-            }
         }
 
         if (sa.hasParam("RememberObjects")) {
@@ -494,7 +492,7 @@ public class PumpEffect extends SpellAbilityEffect {
             registerDelayedTrigger(sa, sa.getParam("AtEOT"), tgtCards);
         }
 
-        for (final Card tgtC : untargetedCards) {
+        for (final Card tgtC : CardUtil.getRadiance(sa)) {
             // only pump things in PumpZone
             if (!tgtC.isInZones(pumpZones)) {
                 continue;
