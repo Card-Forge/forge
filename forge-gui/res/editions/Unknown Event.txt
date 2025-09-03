@@ -396,6 +396,7 @@ PLA014 C The Food Court @
 RB14 R Another Night in Vegas @
 UU14a U Tax Draw @
 UU14b U Tax Sweeper @
+# CR15a C Fast // Furious @
 PLA015 C High Noon At Thunder Junction @
 RR15 R Force of Rowan @
 RW15 R Crux of Mirrodin @
