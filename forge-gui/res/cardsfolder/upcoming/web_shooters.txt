@@ -5,7 +5,7 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$
 SVar:TrigDamageDone:Mode$ DamageDone | CombatDamage$ True | ValidSource$ Card.Self | ValidTarget$ Creature | Execute$ TrigChangeZone | TriggerDescription$ Whenever this creature deals combat damage to a creature, exile that creature.
 SVar:TrigChangeZone:DB$ ChangeZone | Defined$ TriggeredTarget | Origin$ Battlefield | Destination$ Exile
 SVar:AttackTrig:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Whenever this creature attacks, tap target creature an opponent controls.
-SVar:HieroTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
 K:Equip:2
 SVar:AE:SVar:HasAttackEffect:TRUE
 Oracle:Equipped creature gets +1/+1 and has reach and "Whenever this creature attacks, tap target creature an opponent controls."\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
