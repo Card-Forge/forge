@@ -499,6 +499,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public void addCard(PaperCard paperCard) {
+        if (filtered.contains(paperCard.getName())) {
+            return;
+        }
+
         allCardsByName.put(paperCard.getName(), paperCard);
 
         if (paperCard.getRules().getSplitType() == CardSplitType.None) {
