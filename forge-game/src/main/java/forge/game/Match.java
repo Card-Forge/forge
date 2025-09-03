@@ -290,8 +290,18 @@ public class Match {
                 }
             }
 
-            Deck myDeck = psc.getDeck();
-            player.setDraftNotes(myDeck.getDraftNotes());
+            Deck toCheck = psc.getDeck();
+            if (toCheck == null) {
+                try {
+                    System.err.println(psc.getPlayer().getName() + " Deck is NULL...");
+                    int val = rules.getGameType().getDeckFormat().getMainRange().getMinimum();
+                    toCheck = new Deck("NULL");
+                    if (val > 0)
+                        toCheck.getMain().add("Wastes", val);
+                } catch (Exception ignored) {}
+            }
+            Pair<Deck, List<PaperCard>> myDeck = toCheck.getValid();
+            player.setDraftNotes(myDeck.getLeft().getDraftNotes());
 
             Set<PaperCard> myRemovedAnteCards = null;
             if (!rules.useAnte()) {
