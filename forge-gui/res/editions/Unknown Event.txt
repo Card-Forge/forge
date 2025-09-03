@@ -454,6 +454,3 @@ RR66 R The Crafter @
 RU72 R The Rhystic Storyteller @
 RW90 R The Keeper of Favorite Cards @
 MZ99 M The Collector @
-
-[eternal]
-CR15a C Fast // Furious @ $UNSUPPORTED

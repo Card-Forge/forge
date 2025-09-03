@@ -133,7 +133,7 @@ ScryfallCode=MH2
 120 R Chef's Kiss @Iain McCaig
 121 U Dragon's Rage Channeler @Martina Fačková
 122 C Faithless Salvaging @Bud Cook
-123 U Fast // Furious @Deruchenko Alexander $A
+123 U Fast // Furious @Deruchenko Alexander
 124 U Flame Blitz @Colin Boyer
 125 U Flametongue Yearling @Milivoj Ćeran
 126 M Fury @Raoul Vitale
