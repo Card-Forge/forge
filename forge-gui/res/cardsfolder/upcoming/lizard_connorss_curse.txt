@@ -4,5 +4,5 @@ Types:Legendary Creature Lizard Villain
 PT:5/5
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ Lizard Formula — When CARDNAME enters, up to one other target creature loses all abilities and becomes a green Lizard creature with base power and toughness 4/4.
-SVar:DBAnimate:DB$ Animate | ValidTgts$ Creature.Other | TgtPrompt$ Select up to one other target creature | TargetMin$ 0 | TargetMax$ 1 | Power$ 4 | Toughness$ 4 | RemoveAllAbilities$ True | Colors$ Green | Types$ Lizard |Types$ Creature | OverwriteColors$ True | RemoveCreatureTypes$ True | RemoveCardTypes$ True | Duration$ Permanent
+SVar:DBAnimate:DB$ Animate | ValidTgts$ Creature.Other | TgtPrompt$ Select up to one other target creature | TargetMin$ 0 | TargetMax$ 1 | Power$ 4 | Toughness$ 4 | RemoveAllAbilities$ True | Colors$ Green | Types$ Lizard,Creature | OverwriteColors$ True | RemoveCreatureTypes$ True | RemoveCardTypes$ True | Duration$ Permanent
 Oracle:Trample\nLizard Formula — When Lizard, Connors's Curse enters, up to one other target creature loses all abilities and becomes a green Lizard creature with base power and toughness 4/4.
