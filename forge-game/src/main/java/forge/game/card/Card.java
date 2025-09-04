@@ -6867,7 +6867,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public boolean isMayhem() {
-        return getCastSA() != null & getCastSA().isAlternativeCost(AlternativeCost.Mayhem);
+        return getCastSA() != null & getCastSA().isMayhem();
     }
 
     public boolean isSpecialized() {
