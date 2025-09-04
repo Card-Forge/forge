@@ -6866,6 +6866,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return getCastSA() != null & getCastSA().isAlternativeCost(AlternativeCost.WebSlinging);
     }
 
+    public boolean isCastWithMayhem() {
+        return getCastSA() != null & getCastSA().isAlternativeCost(AlternativeCost.Mayhem);
+    }
+
     public boolean isSpecialized() {
         return specialized;
     }
