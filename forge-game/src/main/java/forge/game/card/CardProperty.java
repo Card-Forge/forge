@@ -1824,6 +1824,10 @@ public class CardProperty {
             if (!card.isWebSlinged()) {
                 return false;
             }
+        } else if (property.equals("mayhemCostPaid")) {
+            if (!card.isMayhemCostPaid()) {
+                return false;
+            }
         } else if (property.equals("CrewedThisTurn")) {
             if (!hasTimestampMatch(card, source.getCrewedByThisTurn())) return false;
         } else if (property.equals("CrewedBySourceThisTurn")) {
