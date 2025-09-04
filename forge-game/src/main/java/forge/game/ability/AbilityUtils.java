@@ -1725,6 +1725,11 @@ public class AbilityUtils {
                     return doXMath(calculateAmount(c, sq[sa.isMadness() ? 1 : 2], ctb), expr, c, ctb);
                 }
 
+                // Count$Mayhem.<True>.<False>
+                if (sq[0].startsWith("Mayhem")) {
+                    return doXMath(calculateAmount(c, sq[sa.isMayhem() ? 1 : 2], ctb), expr, c, ctb);
+                }
+
                 //Count$HasNumChosenColors.<DefinedCards related to spellability>
                 if (sq[0].contains("HasNumChosenColors")) {
                     int sum = 0;
