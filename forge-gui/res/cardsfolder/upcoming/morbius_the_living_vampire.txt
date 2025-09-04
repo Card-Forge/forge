@@ -1,4 +1,4 @@
-Name:Morbius, the Living Vampire
+Name:Morbius the Living Vampire
 ManaCost:2 U B
 Types:Legendary Creature Vampire Scientist Villain
 PT:3/1
