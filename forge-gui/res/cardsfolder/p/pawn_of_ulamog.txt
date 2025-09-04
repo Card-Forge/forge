@@ -2,7 +2,7 @@ Name:Pawn of Ulamog
 ManaCost:1 B B
 Types:Creature Vampire Shaman
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+!token+YouCtrl,Card.Self | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another nontoken creature you control dies, create a 0/1 colorless Eldrazi Spawn creature token. It has "Sacrifice this creature: Add {C}."
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+!token+YouCtrl,Card.Self | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another nontoken creature you control dies, you may create a 0/1 colorless Eldrazi Spawn creature token. It has "Sacrifice this creature: Add {C}."
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You
 DeckHints:Type$Eldrazi
 DeckHas:Ability$Mana.Colorless|Token
