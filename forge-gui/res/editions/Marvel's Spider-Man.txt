@@ -15,6 +15,7 @@ RecommendedPodSize=4
 5 U Costume Closet @Bastien Grivet
 6 C Daily Bugle Reporters @Zoltan Boros
 7 U Flash Thompson, Spider-Fan @Gal Or
+8 R Friendly Neighborhood @
 9 R Origin of Spider-Man @Bill Sienkiewicz
 10 M Peter Parker @Thanh Tuấn
 11 R Rent Is Due @Gal Or
