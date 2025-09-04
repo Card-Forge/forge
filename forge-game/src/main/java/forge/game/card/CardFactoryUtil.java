@@ -2776,10 +2776,9 @@ public class CardFactoryUtil {
             final String cost = params[1];
 
             final StringBuilder sbAttach = new StringBuilder();
-            sbAttach.append("SP$ Attach | Cost$ ");
+            sbAttach.append("SP$ Attach | ValidTgts$ Creature | Cost$ ");
             sbAttach.append(cost);
             sbAttach.append(" | AILogic$ ").append(params.length > 2 ? params[2] : "Pump");
-            sbAttach.append(" | Bestow$ True | ValidTgts$ Creature");
 
             final SpellAbility sa = AbilityFactory.getAbility(sbAttach.toString(), card);
             final StringBuilder sbDesc = new StringBuilder();

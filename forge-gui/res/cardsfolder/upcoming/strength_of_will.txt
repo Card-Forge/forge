@@ -1,0 +1,9 @@
+Name:Strength of Will
+ManaCost:1 G
+Types:Instant
+A:SP$ Animate | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Keywords$ Indestructible | Triggers$ DamageTrigger | SpellDescription$ Until end of turn, target creature you control gains indestructible and "Whenever this creature is dealt damage, put that many +1/+1 counters on it."
+SVar:DamageTrigger:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever this creature is dealt damage, put that many +1/+1 counters on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
+SVar:X:TriggerCount$DamageAmount
+DeckHas:Ability$Counters
+Oracle:Until end of turn, target creature you control gains indestructible and "Whenever this creature is dealt damage, put that many +1/+1 counters on it."
