@@ -376,22 +376,28 @@ public class CardFactory {
             }
         }
 
-        // Build English oracle and translated oracle mapping
+        // Negative card Id's are for view purposes only
         if (c.getId() >= 0) {
+            // Build English oracle and translated oracle mapping
             CardTranslation.buildOracleMapping(face.getName(), face.getOracleText(), variantName);
         }
 
-        // Name first so Sentry has it
+        // Set name for Sentry reports to be identifiable
         c.setName(face.getName());
 
-        for (Entry<String, String> v : face.getVariables())  c.setSVar(v.getKey(), v.getValue());
+        if (c.getId() >= 0) { // Set Triggers & Abilities if not for view
+            for (Entry<String, String> v : face.getVariables())
+                c.setSVar(v.getKey(), v.getValue());
+            for (String r : face.getReplacements())
+                c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true, c.getCurrentState()));
+            for (String s : face.getStaticAbilities())
+                c.addStaticAbility(s);
+            for (String t : face.getTriggers())
+                c.addTrigger(TriggerHandler.parseTrigger(t, c, true, c.getCurrentState()));
 
-        for (String r : face.getReplacements())              c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true, c.getCurrentState()));
-        for (String s : face.getStaticAbilities())           c.addStaticAbility(s);
-        for (String t : face.getTriggers())                  c.addTrigger(TriggerHandler.parseTrigger(t, c, true, c.getCurrentState()));
-
-        // keywords not before variables
-        c.addIntrinsicKeywords(face.getKeywords(), false);
+            // keywords not before variables
+            c.addIntrinsicKeywords(face.getKeywords(), false);
+        }
         if (face.getDraftActions() != null) {
             face.getDraftActions().forEach(c::addDraftAction);
         }
@@ -420,7 +426,8 @@ public class CardFactory {
 
         c.setAttractionLights(face.getAttractionLights());
 
-        CardFactoryUtil.addAbilityFactoryAbilities(c, face.getAbilities());
+        if (c.getId() > 0) // Set FactoryAbilities if not for view
+            CardFactoryUtil.addAbilityFactoryAbilities(c, face.getAbilities());
     }
 
     public static void copySpellAbility(SpellAbility from, SpellAbility to, final Card host, final Player p, final boolean lki, final boolean keepTextChanges) {
