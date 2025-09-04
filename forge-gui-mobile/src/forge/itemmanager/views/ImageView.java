@@ -455,6 +455,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 ColumnDef groupPileBy = groupBy == null ? pileBy : groupBy.getGroupPileBy(i, pileBy);
                 Map<Comparable<?>, Pile> piles = new TreeMap<>();
                 for (ItemInfo itemInfo : group.items) {
+                    if (itemInfo == null)
+                        continue;
                     Comparable<?> key = groupPileBy.fnSort.apply(itemInfo);
                     if (key != null && !piles.containsKey(key)) {
                         piles.put(key, new Pile());
