@@ -31,7 +31,13 @@ public class AdventureEventController implements Serializable {
         Draft,
         Sealed,
         Jumpstart,
-        Constructed
+        Constructed;
+
+        public static EventFormat smartValueOf(String name) {
+            return Arrays.stream(EventFormat.values())
+                    .filter(e -> e.name().equalsIgnoreCase(name))
+                    .findFirst().orElse(null);
+        }
     }
 
     public enum EventStyle {
@@ -78,12 +84,39 @@ public class AdventureEventController implements Serializable {
         object = null;
     }
 
-    public AdventureEventData createEvent(EventStyle style, String pointID, int eventOrigin, PointOfInterestChanges changes) {
+    public AdventureEventData createEvent(EventStyle style, String pointID) {
         if (nextEventDate.containsKey(pointID) && nextEventDate.get(pointID) >= LocalDate.now().toEpochDay()) {
             //No event currently available here
             return null;
         }
 
+        long eventSeed = getEventSeed(pointID);
+        Random random = new Random(eventSeed);
+
+        AdventureEventData e;
+        // TODO After a certain amount of wins, stop offering jump start events
+        if (random.nextInt(10) <= 2) {
+            e = new AdventureEventData(eventSeed, EventFormat.Jumpstart, style);
+        } else {
+            e = new AdventureEventData(eventSeed, EventFormat.Draft, style);
+        }
+
+        if (e.cardBlock == null) {
+            //covers cases where (somehow) editions that do not match the event style have been picked up
+            return null;
+        }
+        return e;
+    }
+
+    public AdventureEventData createEvent(EventStyle style, EventFormat format, CardBlock cardBlock, String pointID) {
+        long eventSeed = getEventSeed(pointID);
+        AdventureEventData e = new AdventureEventData(eventSeed, format, style, cardBlock);
+        if(e.cardBlock == null)
+             return null;
+        return e;
+    }
+
+    private static long getEventSeed(String pointID) {
         long eventSeed;
         long timeSeed = LocalDate.now().toEpochDay();
         long placeSeed = Long.parseLong(pointID.replaceAll("[^0-9]", ""));
@@ -94,40 +127,16 @@ public class AdventureEventController implements Serializable {
         } else {
             eventSeed = timeSeed + placeSeed;
         }
+        return eventSeed;
+    }
 
-        Random random = new Random(eventSeed);
-
-        AdventureEventData e;
-
-        // TODO After a certain amount of wins, stop offering jump start events
-        if (random.nextInt(10) <= 2) {
-            e = new AdventureEventData(eventSeed, EventFormat.Jumpstart);
-        } else {
-            e = new AdventureEventData(eventSeed, EventFormat.Draft);
-        }
-
-        if (e.cardBlock == null) {
-            //covers cases where (somehow) editions that do not match the event style have been picked up
-            return null;
-        }
+    public void initializeEvent(AdventureEventData e, String pointID, int eventOrigin, PointOfInterestChanges changes) {
         e.sourceID = pointID;
         e.eventOrigin = eventOrigin;
         e.eventRules = new AdventureEventData.AdventureEventRules(e.format, changes == null ? 1f : changes.getTownPriceModifier());
-        e.style = style;
-
-        switch (style) {
-            case Swiss:
-            case Bracket:
-                e.rounds = (e.participants.length / 2) - 1;
-                break;
-            case RoundRobin:
-                e.rounds = e.participants.length - 1;
-                break;
-        }
 
         AdventurePlayer.current().addEvent(e);
         nextEventDate.put(pointID, LocalDate.now().toEpochDay() + new Random().nextInt(2)); //next local event availability date
-        return e;
     }
 
     public Deck generateBooster(String setCode) {
@@ -141,7 +150,6 @@ public class AdventureEventController implements Serializable {
     }
     public Deck generateBoosterByColor(String color)
     {
-
         List<PaperCard> cards = BoosterPack.fromColor(color).getCards();
         Deck output = new Deck();
         output.getMain().add(cards);
