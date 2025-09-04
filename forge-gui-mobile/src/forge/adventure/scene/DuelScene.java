@@ -413,9 +413,8 @@ public class DuelScene extends ForgeScene {
 
         int minDeckSize = format == DeckFormat.Adventure ? Config.instance().getConfigData().minDeckSize : format.getMainRange().getMinimum();
         int missingCards = minDeckSize - mainSize;
-            if (missingCards > 0) //Replace unknown cards for a Wastes.
-                mainSection.add(PLACEHOLDER_MAIN, missingCards);
-        }
+        if (missingCards > 0) //Replace unknown cards for a Wastes.
+            mainSection.add(PLACEHOLDER_MAIN, missingCards);
 
         if (attractions != null && !attractions.isEmpty()) {
             int missingAttractions = 10 - attractions.countAll(); //TODO: These shouldn't be hard coded but DeckFormat's gonna need some reorganizing to fetch this dynamically
