@@ -287,6 +287,8 @@ public abstract class PlayerController {
     public abstract void revealAnte(String message, Multimap<Player, PaperCard> removedAnteCards);
     public abstract void revealAISkipCards(String message, Map<Player, Map<DeckSection, List<? extends PaperCard>>> deckCards);
 
+    public abstract void revealUnsupported(Map<Player, List<PaperCard>> unsupported);
+
     // These 2 are for AI
     public CardCollectionView cheatShuffle(CardCollectionView list) { return list; }
     public Map<DeckSection, List<? extends PaperCard>> complainCardsCantPlayWell(Deck myDeck) { return null; }

@@ -194,7 +194,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     protected void onRefresh() {
-        list.setListData(model.getOrderedList());
+        list.setListData(new ArrayList<>(model.getOrderedList()));
     }
 
     @Override

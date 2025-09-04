@@ -380,10 +380,6 @@ ScryfallCode=J21
 770 C Khalni Garden @Ryan Pancoast
 776 R Sliver Hive @Igor Kieryluk
 
-[rebalanced]
-A-438 U A-Dragon's Rage Channeler @Martina Fackova
-A-529 C A-Unholy Heat @Kari Christensen
-
 [conjured]
 777 C Light of Hope @Kimonas Theodossiou
 778 U Stormfront Pegasus @rk post
