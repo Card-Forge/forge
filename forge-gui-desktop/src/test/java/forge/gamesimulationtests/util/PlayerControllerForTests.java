@@ -665,6 +665,11 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
+    public void revealUnsupported(Map<Player, List<PaperCard>> unsupported) {
+        // test this!
+    }
+
+    @Override
     public List<PaperCard> chooseCardsYouWonToAddToDeck(List<PaperCard> losses) {
         // TODO Auto-generated method stub
         return losses;
