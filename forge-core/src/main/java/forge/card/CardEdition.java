@@ -630,7 +630,7 @@ public final class CardEdition implements Comparable<CardEdition> {
                     * functional variant name - grouping #9
              */
 //                "(^(.?[0-9A-Z]+.?))?(([SCURML]) )?(.*)$"
-                    "(^(.?[0-9A-Z-]+\\S?[A-Z]*)\\s)?(([SCURML])\\s)?([^@\\$]*)( @([^\\$]*))?( \\$(.+))?$"
+                    "(^(.?[0-9A-Z-]+\\S*[A-Z]*)\\s)?(([SCURML])\\s)?([^@\\$]*)( @([^\\$]*))?( \\$(.+))?$"
             );
 
             final Pattern tokenPattern = Pattern.compile(
