@@ -1,5 +1,4 @@
 Name:Cosmic Spider-Man
-AltName:Scions of the Ur-Spider
 ManaCost:W U B R G
 Types:Legendary Creature Spider Human Hero
 PT:5/5
