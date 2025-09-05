@@ -282,3 +282,14 @@ RecommendedPodSize=4
 284 R Spider-Sense @David Álvarez
 285 R Radioactive Spider @Toni Infante
 286 M Gwenom, Remorseless @Jesper Ejsing
+
+[tokens]
+2 u_3_3_illusion_villain @Anthony Devine
+3 g_2_1_spider_reach @Domenico Cava
+4 gw_1_1_human_citizen @Bartek Fedyczak
+5 c_a_food_sac @David Szabo
+6 c_1_1_a_robot_flying @Kevin Glint
+7 c_a_treasure_sac @Pablo Mendoza
+
+[other]
+1 copy @Javier Charro
