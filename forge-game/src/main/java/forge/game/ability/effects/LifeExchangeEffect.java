@@ -70,6 +70,9 @@ public class LifeExchangeEffect extends SpellAbilityEffect {
                 lossMap.put(p1, lost);
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPIMap(lossMap);
                 source.getGame().getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams, false);
+                if (sa.hasParam("RememberOwnLoss") && p1.equals(sa.getActivatingPlayer())) {
+                    source.addRemembered(lost);
+                }
             }
         }
         if (sa.hasParam("RememberDifference")) {
