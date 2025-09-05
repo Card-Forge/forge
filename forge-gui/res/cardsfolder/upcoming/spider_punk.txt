@@ -1,4 +1,5 @@
 Name:Spider-Punk
+AltName:Kraza, the Swarm as One
 ManaCost:1 R
 Types:Legendary Creature Spider Human Hero
 PT:2/1
