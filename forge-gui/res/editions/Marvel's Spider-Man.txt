@@ -139,7 +139,7 @@ RecommendedPodSize=4
 132 U Kraven, Proud Predator @Alexander Mokhov
 133 R Kraven the Hunter @Greg Staples
 134 R Mary Jane Watson @Steve Argyle
-135 M Mr. Negative @Thanh Tuấn
+135 M Mister Negative @Thanh Tuấn
 136 C Mob Lookout @David Palumbo
 137 U Morbius the Living Vampire @Borja Pindado
 138 U Prowler, Clawed Thief @Anthony Devine
@@ -149,7 +149,7 @@ RecommendedPodSize=4
 142 R Scarlet Spider, Ben Reilly @Javier Charro
 143 U Scarlet Spider, Kaine @Forrest Imel
 144 U Shriek, Treblemaker @Borja Pindado
-145 R Silk the Webspinner @Carissa Susilo
+145 R Silk, Web Weaver @Carissa Susilo
 146 C Skyward Spider @Bachzim
 147 U SP//dr, Piloted by Peni @Toni Infante
 148 C Spider Manifestation @Helge C. Balzer
@@ -216,6 +216,7 @@ RecommendedPodSize=4
 212 R Radioactive Spider @Tyler Walpole
 213 R Araña, Heart of the Spider @Logan Lubera
 214 R Scarlet Spider, Ben Reilly @Logan Lubera
+215 R Silk, Web Weaver @Veronica Fish
 216 R Spider-Man 2099 @Jim Cheung & Jay David Ramos
 217 R Symbiote Spider-Man @Tyler Walpole
 218 R Origin of Spider-Man @Jim Cheung & Jay David Ramos
@@ -273,6 +274,7 @@ RecommendedPodSize=4
 271 M Cosmic Spider-Man @Zoltan Boros
 272 R Jackal, Genius Geneticist @Pavel Kolomeyets
 273 R Kraven the Hunter @Greg Staples
+274 M Mister Negative @Thanh Tuấn
 275 R Superior Spider-Man @Carlos Dattoli
 276 R Ultimate Green Goblin @Jesper Ejsing
 277 R Doc Ock's Tentacles @David Álvarez
