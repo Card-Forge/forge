@@ -20,6 +20,7 @@ RecommendedPodSize=4
 10 M Peter Parker @Thanh Tuấn
 11 R Rent Is Due @Gal Or
 12 C Selfless Police Captain @Aniekan Udofia
+13 U Silver Sable, Mercenary Leader @JB Casacop
 14 R Spectacular Spider-Man @Roberta Ingranata
 15 C Spectacular Tactics @Zoltan Boros
 16 C Spider-Man, Web-Slinger @Ryan Pancoast
@@ -43,22 +44,28 @@ RecommendedPodSize=4
 35 R Lady Octopus, Inspired Inventor @Fariba Khamseh
 36 U Madame Web, Clairvoyant @Pavel Kolomeyets
 37 R Mysterio, Master of Illusion @Alexander Gering
+38 C Mysterio's Phantasm @Piotr Dura
 39 M Norman Osborn @Scott M. Fischer
 40 C Oscorp Research Team @Gal Or
 41 U Robotics Mastery @Domenico Cava
 42 U School Daze @Domenico Cava
+43 U Secret Identity @rk post
 44 U Spider-Byte, Web Warden @Thanh Tuấn
+45 C Spider-Man No More @Aniekan Udofia
 46 R Spider-Sense @Borja Pindado
 47 C Unstable Experiment @David Palumbo
 48 C Whoosh! @Nathaniel Himawan
 49 R Agent Venom @Kevin Sidharta
+50 U Alien Symbiosis @JB Casacop
 51 M Behold the Sinister Six! @Nathaniel Himawan
 52 R Black Cat, Cunning Thief @Alessandra Pisano
 53 C Common Crook @Ben Harvey
+54 R The Death of Gwen Stacy @Bill Sienkiewicz
 55 M Eddie Brock @Greg Staples
 56 M Gwenom, Remorseless @Lordigan
 57 C Inner Demons Gangsters @Nathaniel Himawan
 58 C Merciless Enforcers @Alex Horley-Orlandelli
+59 R Morlun, Devourer of Spiders @Randy Gallegos
 60 R Parker Luck @Raoul Vitale
 61 U Prison Break @John Tyler Christopher
 62 C Risky Research @Rafater
@@ -67,6 +74,7 @@ RecommendedPodSize=4
 65 C Scorpion's Sting @Lee Woo-chul
 66 M The Soul Stone @Volkan Baǵa
 67 U Spider-Man Noir @Xabi Gaztelua
+68 U The Spot's Portal @Carlos Dattoli
 69 C Swarm, Being of Bees @Alex Horley-Orlandelli
 70 U Tombstone, Career Criminal @Bartek Fedyczak
 71 C Venom, Evil Unleashed @Jesper Ejsing
@@ -79,7 +87,8 @@ RecommendedPodSize=4
 79 U Heroes' Hangout @Smirtouille
 81 R J. Jonah Jameson @Paolo Rivera
 82 C Masked Meower @Narendra Bintara Adi
-84 U Molten Man, Incarnation of Hellfire @Lie Setiawan
+83 R Maximum Carnage @Bill Sienkiewicz
+84 U Molten Man, Inferno Incarnate @Lie Setiawan
 85 U Raging Goblinoids @Filipe Pagliuso
 86 C Romantic Rendezvous @Nereida
 87 R Shadow of the Goblin @Pavel Kolomeyets
@@ -91,6 +100,7 @@ RecommendedPodSize=4
 93 M Spider-Verse @Alexander Gering
 94 R Spinneret and Spiderling @Le Vuong
 95 C Stegron the Dinosaur Man @John Tyler Christopher
+96 U Superior Foes of Spider-Man @Ben Harvey
 97 C Taxi Driver @Néstor Ossandón Leal
 98 U Wisecrack @Wayne Reynolds
 99 U Damage Control Crew @Borja Pindado
@@ -115,8 +125,10 @@ RecommendedPodSize=4
 118 R Strength of Will @Ryan Pancoast
 119 U Supportive Parents @Kim Sokol
 120 U Terrific Team-Up @InHyuk Lee
+121 U Wall Crawl @Alexander Gering
 122 M Web of Life and Destiny @Jonas De Ro
 123 R Araña, Heart of the Spider @Kevin Glint
+124 R Biorganic Carapace @David Álvarez
 125 R Carnage, Crimson Chaos @Lordigan
 126 R Cheering Crowd @Kim Sokol
 127 M Cosmic Spider-Man @Zoltan Boros
@@ -129,6 +141,7 @@ RecommendedPodSize=4
 134 R Mary Jane Watson @Steve Argyle
 135 M Mr. Negative @Thanh Tuấn
 136 C Mob Lookout @David Palumbo
+137 U Morbius the Living Vampire @Borja Pindado
 138 U Prowler, Clawed Thief @Anthony Devine
 139 C Pumpkin Bombardment @Leon Tukker
 140 U Rhino, Barreling Brute @Filipe Pagliuso
@@ -136,13 +149,16 @@ RecommendedPodSize=4
 142 R Scarlet Spider, Ben Reilly @Javier Charro
 143 U Scarlet Spider, Kaine @Forrest Imel
 144 U Shriek, Treblemaker @Borja Pindado
+145 R Silk the Webspinner @Carissa Susilo
 146 C Skyward Spider @Bachzim
 147 U SP//dr, Piloted by Peni @Toni Infante
 148 C Spider Manifestation @Helge C. Balzer
+149 U Spider-Girl, Legacy Hero @Lixin Yin
 150 R Spider-Man 2099 @Toni Infante
 151 U Spider-Man India @Lie Setiawan
 152 R Spider-Woman, Stunning Savior @Justyna Dura
 153 R The Spot, Living Portal @Bastien Grivet
+154 U Sun-Spider, Nimble Webber @Justyna Dura
 155 R Superior Spider-Man @Carlos Dattoli
 156 R Symbiote Spider-Man @Paolo Rivera
 157 R Ultimate Green Goblin @Jesper Ejsing
@@ -172,6 +188,8 @@ RecommendedPodSize=4
 181 C Ominous Asylum @Pavel Kolomeyets
 182 R Oscorp Industries @Bastien Grivet
 185 C Suburban Sanctuary @David Frasheski
+186 C University Campus @David Álvarez
+187 R Urban Retreat @Jonas De Ro
 188 C Vibrant Cityscape @Wei Guan
 189 L Plains @Sarah Finnigan
 190 L Island @Sarah Finnigan
@@ -207,6 +225,7 @@ RecommendedPodSize=4
 222 R Black Cat, Cunning Thief @Veronica Fish
 223 R The Death of Gwen Stacy @Nicola Scott
 224 M Eddie Brock @Logan Lubera
+225 R Maximum Carnage @Jim Cheung & Jay David Ramos
 226 R Kraven's Last Hunt @Leinil Francis Yu & Sunny Gho
 227 R Carnage, Crimson Chaos @Leinil Francis Yu & Sunny Gho
 228 M Doctor Octopus, Master Planner @Jim Cheung & Jay David Ramos
@@ -237,17 +256,22 @@ RecommendedPodSize=4
 254 R Spider-Sense @Borja Pindado
 255 R Agent Venom @Kevin Sidharta
 256 M Gwenom, Remorseless @Lordigan
+257 R Morlun, Devourer of Spiders @Randy Gallegos
 258 R Parker Luck @Raoul Vitale
 259 R Villainous Wrath @InHyuk Lee
 260 R Electro, Assaulting Battery @Piotr Dura
 261 R J. Jonah Jameson @Paolo Rivera
 262 R Shadow of the Goblin @Pavel Kolomeyets
+263 M Spider-Verse @Alexander Gering
 264 R Spinneret and Spiderling @Le Vuong
 265 R Lizard, Connors's Curse @Steve Prescott
 266 R Sandman, Shifting Scoundrel @Bartek Fedyczak
 267 R Strength of Will @Ryan Pancoast
 268 M Web of Life and Destiny @Jonas De Ro
+269 R Biorganic Carapace @David Álvarez
+270 R Cheering Crowd @Kim Sokol
 271 M Cosmic Spider-Man @Zoltan Boros
+272 R Jackal, Genius Geneticist @Pavel Kolomeyets
 273 R Kraven the Hunter @Greg Staples
 275 R Superior Spider-Man @Carlos Dattoli
 276 R Ultimate Green Goblin @Jesper Ejsing
