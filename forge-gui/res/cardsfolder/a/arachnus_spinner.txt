@@ -3,6 +3,7 @@ ManaCost:5 G
 Types:Creature Spider
 PT:5/7
 K:Reach
-A:AB$ ChangeZone | Cost$ tapXType<1/Spider> | Hidden$ True | Origin$ Library | OriginAlternative$ Graveyard | Destination$ Battlefield | ChangeType$ Card.YouOwn+namedArachnus Web | SpellDescription$ Search your graveyard and/or library for a card named Arachnus Web and put it onto the battlefield attached to target creature. If you search your library this way, shuffle.
+A:AB$ Pump | Cost$ tapXType<1/Spider> | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | SubAbility$ DBChange
+SVar:DBChange:DB$ ChangeZone | Hidden$ True | Origin$ Library | OriginAlternative$ Graveyard | Destination$ Battlefield | ChangeType$ Card.YouOwn+namedArachnus Web | AttachedTo$ ParentTarget | SpellDescription$ Search your graveyard and/or library for a card named Arachnus Web and put it onto the battlefield attached to target creature. If you search your library this way, shuffle.
 DeckHints:Name$Arachnus Web & Type$Spider
 Oracle:Reach\nTap an untapped Spider you control: Search your graveyard and/or library for a card named Arachnus Web and put it onto the battlefield attached to target creature. If you search your library this way, shuffle.

@@ -331,6 +331,12 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         }
 
+        if (sp instanceof AbilityStatic || (sp.isTrigger() && sp.getTrigger().getOverridingAbility() instanceof AbilityStatic)) {
+            AbilityUtils.resolve(sp);
+            // AbilityStatic should do nothing below
+            return;
+        }
+
         if (si == null && sp.isActivatedAbility() && !sp.isCopied()) {
             // if not already copied use a fresh instance
             SpellAbility original = sp;
@@ -352,12 +358,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         if (sp.isAbility() && !sp.isCopied() && !sp.isTrigger()) {
             addAbilityActivatedThisTurn(sp, source);
-        }
-
-        if (sp instanceof AbilityStatic || (sp.isTrigger() && sp.getTrigger().getOverridingAbility() instanceof AbilityStatic)) {
-            AbilityUtils.resolve(sp);
-            // AbilityStatic should do nothing below
-            return;
         }
 
         // The ability is added to stack HERE

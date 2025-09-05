@@ -83,7 +83,7 @@ public class DeckSelectScene extends UIScene {
 
     private void layoutDeckButtons() {
         for (int i = 0; i < AdventurePlayer.current().getDeckCount(); i++)
-            addDeckButton(Forge.getLocalizer().getMessage("lblDeck") + ": " + (i + 1), i);
+            addDeckButton(i);
     }
 
     private void addDeck(){
@@ -144,6 +144,7 @@ public class DeckSelectScene extends UIScene {
     }
 
     private void updateDeckButton(int index) {
+        if (!buttons.containsKey(index)) addDeckButton(index);
         buttons.get(index).setText(Current.player().getDeck(index).getName());
         buttons.get(index).getTextraLabel().layout();
         buttons.get(index).layout();
@@ -177,8 +178,9 @@ public class DeckSelectScene extends UIScene {
         }
     }
 
-    private TextraButton addDeckButton(String name, int i) {
+    private TextraButton addDeckButton(int i) {
         TextraButton button = Controls.newTextButton("-");
+        String name = Forge.getLocalizer().getMessage("lblDeck") + ": " + (i + 1);
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

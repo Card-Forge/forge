@@ -1,0 +1,9 @@
+Name:Voidcalled Devotee
+ManaCost:1 B B
+Types:Creature Human Soldier
+PT:3/3
+K:Haste
+K:Warp:1 B
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigConjure | TriggerDescription$ Whenever this creature attacks, conjure a card named Cantor of the Refrain into your graveyard.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Cantor of the Refrain | Zone$ Graveyard
+Oracle:Haste\nWhenever this creature attacks, conjure a card named Cantor of the Refrain into your graveyard.\nWarp {1}{B}
