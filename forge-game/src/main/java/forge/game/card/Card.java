@@ -2464,7 +2464,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     }
                     sbLong.append("Enchant ").append(desc).append("\r\n");
                 } else if (keyword.startsWith("Morph") || keyword.startsWith("Megamorph")
-                        || keyword.startsWith("Disguise")
+                        || keyword.startsWith("Disguise") || keyword.startsWith("Reflect")
                         || keyword.startsWith("Escape") || keyword.startsWith("Foretell:")
                         || keyword.startsWith("Madness:")|| keyword.startsWith("Recover")
                         || keyword.startsWith("Reconfigure") || keyword.startsWith("Squad")
@@ -2512,11 +2512,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         sbLong.append(" (").append(inst.getReminderText()).append(")");
                         sbLong.append("\r\n");
                     }
-                } else if (keyword.startsWith("Reflect")) {
-                    final String[] k = keyword.split(":");
-                    sbLong.append(k[0]).append(" ").append(ManaCostParser.parse(k[1]));
-                    sbLong.append(" (").append(inst.getReminderText()).append(")");
-                    sbLong.append("\r\n");
                 } else if (keyword.startsWith("Echo")) {
                     sbLong.append("Echo ");
                     final String[] upkeepCostParams = keyword.split(":");
