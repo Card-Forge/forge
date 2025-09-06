@@ -1,0 +1,11 @@
+[metadata]
+Code=OM1
+Date=2025-09-23
+Name=Through the Omenpaths 1
+Type=Online
+ScryfallCode=OM1
+
+[cards]
+0 M The Terminus of Return @Adam Paquette
+0 R Kraza, the Swarm as One @Vincent Proce
+0 M Scions of the Ur-Spider @Jesper Ejsing

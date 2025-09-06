@@ -455,7 +455,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             return false;
         }
 
-        // Run any applicable replacement effects.
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
         repParams.put(AbilityKey.LifeGained, lifeGain);
         repParams.put(AbilityKey.SourceSA, sa);
@@ -521,7 +520,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return 0;
         }
         int oldLife = life;
-        // Run applicable replacement effects
+
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
         repParams.put(AbilityKey.Amount, toLose);
         repParams.put(AbilityKey.IsDamage, damage);
@@ -554,7 +553,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         boolean firstLost = lifeLostThisTurn == 0;
-
         lifeLostThisTurn += toLose;
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
