@@ -271,10 +271,11 @@ public class ManaEffect extends SpellAbilityEffect {
             producedMana.append(abMana.produceMana(mana, p, sa));
         }
 
-        abMana.tapsForMana(sa.getRootAbility(), producedMana.toString());
-
         // Only clear express choice after mana has been produced
         abMana.clearExpressChoice();
+
+        abMana.tapsForMana(sa.getRootAbility(), producedMana.toString());
+
         if (sa.isKeyword(Keyword.FIREBENDING)) {
             activator.triggerElementalBend(TriggerType.Firebend);
         }
