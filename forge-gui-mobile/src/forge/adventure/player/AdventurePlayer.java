@@ -1419,6 +1419,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
      */
     public int copyDeck() {
         for (int i = 0; i < MAX_DECK_COUNT; i++) {
+            if (i >= getDeckCount()) addDeck();
             if (isEmptyDeck(i)) {
                 decks.set(i, (Deck) deck.copyTo(deck.getName() + " (" + Forge.getLocalizer().getMessage("lblCopy") + ")"));
                 return i;

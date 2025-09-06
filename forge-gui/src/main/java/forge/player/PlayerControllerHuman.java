@@ -2307,6 +2307,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public void revealUnsupported(final Map<Player, List<PaperCard>> unsupported) {
+        for (final Player p : unsupported.keySet()) {
+            List<PaperCard> removed = unsupported.get(p);
+            if (removed == null || removed.isEmpty())
+                continue;
+            getGui().getChoices(localizer.getMessage("lblActionFromPlayerDeck", localizer.getMessage("lblRemoved"), Lang.getInstance().getPossessedObject(MessageUtil.mayBeYou(player, p), "")), -1, -1, ImmutableList.copyOf(removed));
+        }
+    }
+
+    @Override
     public List<PaperCard> chooseCardsYouWonToAddToDeck(final List<PaperCard> losses) {
         return getGui().many(localizer.getMessage("lblSelectCardstoAddtoYourDeck"), localizer.getMessage("lblAddTheseToMyDeck"), 0, losses.size(), losses, null);
     }

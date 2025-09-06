@@ -44,6 +44,7 @@ import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilitySub;
 
+import forge.game.spellability.AlternativeCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.*;
 import forge.game.trigger.Trigger;
@@ -454,7 +455,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             return false;
         }
 
-        // Run any applicable replacement effects.
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
         repParams.put(AbilityKey.LifeGained, lifeGain);
         repParams.put(AbilityKey.SourceSA, sa);
@@ -520,7 +520,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return 0;
         }
         int oldLife = life;
-        // Run applicable replacement effects
+
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
         repParams.put(AbilityKey.Amount, toLose);
         repParams.put(AbilityKey.IsDamage, damage);
@@ -553,7 +553,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         boolean firstLost = lifeLostThisTurn == 0;
-
         lifeLostThisTurn += toLose;
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
@@ -1718,7 +1717,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
 
             final Zone zone = game.getZoneOf(land);
-            if (zone != null && (zone.is(ZoneType.Battlefield) || (!zone.is(ZoneType.Hand) && !mayPlay))) {
+            if (zone != null && (zone.is(ZoneType.Battlefield) || (!zone.is(ZoneType.Hand) && !mayPlay
+                    && (landSa == null || !landSa.isAlternativeCost(AlternativeCost.Mayhem))))) {
                 return false;
             }
         }
@@ -1966,10 +1966,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         CardState speedFront = speedEffect.getState(CardStateName.Original);
         CardState speedBack = speedEffect.getState(CardStateName.Backside);
 
-        speedFront.setImageKey("t:speed");
+
+        speedFront.setImageKey(StaticData.instance().getOtherImageKey(ImageKeys.SPEED_IMAGE, CardEdition.UNKNOWN_CODE));
         speedFront.setName("Start Your Engines!");
 
-        speedBack.setImageKey("t:max_speed");
+        speedBack.setImageKey(StaticData.instance().getOtherImageKey(ImageKeys.MAX_SPEED_IMAGE, CardEdition.UNKNOWN_CODE));
         speedBack.setName("Max Speed!");
 
         String label = Localizer.getInstance().getMessage("lblSpeed", this.speed);

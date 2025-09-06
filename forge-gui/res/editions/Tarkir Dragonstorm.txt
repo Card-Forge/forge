@@ -3,7 +3,7 @@ Code=TDM
 Date=2025-04-11
 Name=Tarkir: Dragonstorm
 Type=Expansion
-TokensCode=TTDM
+ScryfallCode=TDM
 # https://mtgscribe.com/2025/03/20/play-booster-fact-sheet-dragonstorm/
 BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,AnyLand,Wildcard,FoilWildcard
 Booster=6 Common, 1 Common-Guest, 3 Uncommon, 1 RareMythic, 1 AnyLand, 1 Wildcard, 1 FoilWildcard
@@ -427,17 +427,17 @@ Replace=.012F Mythic:fromSheet("TDM cards")
 375 R Yathan Roadwatcher @Kevin Glint
 376 R Zurgo, Thunder's Decree @Chuck Lukacs
 377 R Clarion Conqueror @Crystal Sully
-377b R Clarion Conqueror @Crystal Sully
+377☇ R Clarion Conqueror @Crystal Sully
 378 R Marang River Regent @Brian Valeza
-378b R Marang River Regent @Brian Valeza
+378☇ R Marang River Regent @Brian Valeza
 379 R Scavenger Regent @Allen Douglas
-379b R Scavenger Regent @Allen Douglas
+379☇ R Scavenger Regent @Allen Douglas
 380 R Magmatic Hellkite @Alison Johnstun
-380b R Magmatic Hellkite @Alison Johnstun
+380☇ R Magmatic Hellkite @Alison Johnstun
 381 R Bloomvine Regent @Brooklyn Smith
-381b R Bloomvine Regent @Brooklyn Smith
+381☇ R Bloomvine Regent @Brooklyn Smith
 382 M Ugin, Eye of the Storms @Antonio José Manzanedo
-382b M Ugin, Eye of the Storms @Antonio José Manzanedo
+382☇ M Ugin, Eye of the Storms @Antonio José Manzanedo
 399 M Ugin, Eye of the Storms @Joshua Raphael
 400 M Clarion Conqueror @Nathaniel Himawan
 401 M Elspeth, Storm Slayer @Ekaterina Burmak
