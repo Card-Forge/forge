@@ -1,0 +1,11 @@
+Name:Wall Crawl
+ManaCost:3 G
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this enchantment enters, create a 2/1 green Spider creature token with reach, then you gain 1 life for each Spider you control.
+SVar:TrigToken:DB$ Token | TokenScript$ g_2_1_spider_reach | TokenOwner$ You | TokenAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+S:Mode$ Continuous | Affected$ Spider.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Spiders you control get +1/+1 and can't be blocked by creatures with defender.
+S:Mode$ CantBlockBy | ValidAttacker$ Spider.YouCtrl | ValidBlocker$ Creature.withDefender | Secondary$ True | Description$ Spiders you control get +1/+1 and can't be blocked by creatures with defender.
+SVar:X:Count$Valid Spider.YouCtrl
+DeckHints:Type$Spider
+Oracle:When this enchantment enters, create a 2/1 green Spider creature token with reach, then you gain 1 life for each Spider you control.\nSpiders you control get +1/+1 and can't be blocked by creatures with defender.

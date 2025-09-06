@@ -192,18 +192,19 @@ public class DuelScene extends ForgeScene {
     @Override
     public void enter() {
         GameHUD.getInstance().unloadAudio();
-        Set<GameType> appliedVariants = new HashSet<>();
+        GameType mainGameType;
         if (eventData != null && eventData.eventRules != null) {
-            appliedVariants.add(eventData.eventRules.gameType);
+            mainGameType = eventData.eventRules.gameType;
         } else {
-            appliedVariants.add(GameType.Adventure);
+            mainGameType = GameType.Adventure;
         }
+        Set<GameType> appliedVariants = EnumSet.of(mainGameType);
 
         AdventurePlayer advPlayer = Current.player();
 
         List<RegisteredPlayer> players = new ArrayList<>();
 
-        applyAdventureDeckRules();
+        applyAdventureDeckRules(mainGameType.getDeckFormat());
         int playerCount = 1;
         EnemyData currentEnemy = enemy.getData();
         for (int i = 0; i < 8 && currentEnemy != null; i++) {
@@ -393,16 +394,25 @@ public class DuelScene extends ForgeScene {
     private static final String PLACEHOLDER_ATTRACTION = "Coin-Operated Pony";
     private static final String PLACEHOLDER_CONTRAPTION = "Automatic Fidget Spinner";
 
-    private void applyAdventureDeckRules() {
+    private void applyAdventureDeckRules(DeckFormat format) {
         //Can't just keep the player from entering a battle if their deck is invalid. So instead we'll just edit their deck.
         CardPool mainSection = playerDeck.getMain(), attractions = playerDeck.get(DeckSection.Attractions), contraptions = playerDeck.get(DeckSection.Contraptions);
-        DeckFormat format = DeckFormat.Adventure;
 
         removeExcessCopies(mainSection, format);
         removeExcessCopies(attractions, format);
         removeExcessCopies(contraptions, format);
 
-        int missingCards = Config.instance().getConfigData().minDeckSize - mainSection.countAll();
+        int mainSize = mainSection.countAll();
+
+        int maxDeckSize = format == DeckFormat.Adventure ? Integer.MAX_VALUE : format.getMainRange().getMaximum();
+        int excessCards = mainSize - maxDeckSize;
+        if (excessCards > 0) {
+            List<PaperCard> removals = Aggregates.random(mainSection.toFlatList(), excessCards);
+            mainSection.removeAllFlat(removals);
+        }
+
+        int minDeckSize = format == DeckFormat.Adventure ? Config.instance().getConfigData().minDeckSize : format.getMainRange().getMinimum();
+        int missingCards = minDeckSize - mainSize;
         if (missingCards > 0) //Replace unknown cards for a Wastes.
             mainSection.add(PLACEHOLDER_MAIN, missingCards);
 

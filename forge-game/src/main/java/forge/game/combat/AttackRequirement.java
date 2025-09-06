@@ -1,6 +1,5 @@
 package forge.game.combat;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -39,10 +38,12 @@ public class AttackRequirement {
 
         //MustAttack static check
         final List<GameEntity> mustAttack = StaticAbilityMustAttack.entitiesMustAttack(attacker);
-        nAttackAnything += Collections.frequency(mustAttack, attacker);
         for (GameEntity e : mustAttack) {
-            if (e.equals(attacker)) continue;
-            defenderSpecific.add(e);
+            if (e.equals(attacker)) {
+                nAttackAnything++;
+            } else {
+                defenderSpecific.add(e);
+            }
         }
 
         for (final GameEntity defender : possibleDefenders) {

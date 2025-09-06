@@ -125,9 +125,21 @@ public final class GameActionUtil {
 
             // need to be done there before static abilities does reset the card
             // These Keywords depend on the Mana Cost of for Split Cards
-            if (sa.isBasicSpell() && !sa.isLandAbility()) {
+            if (sa.isBasicSpell()) {
                 for (final KeywordInterface inst : source.getKeywords()) {
                     final String keyword = inst.getOriginal();
+
+                    if (keyword.startsWith("Mayhem")) {
+                        if (!source.isInZone(ZoneType.Graveyard) || !source.wasDiscarded() || !source.enteredThisTurn()) {
+                            continue;
+                        }
+
+                        alternatives.add(getGraveyardSpellByKeyword(inst, sa, activator, AlternativeCost.Mayhem));
+                    }
+
+                    if (sa.isLandAbility()) {
+                        continue;
+                    }
 
                     if (keyword.startsWith("Escape")) {
                         if (!source.isInZone(ZoneType.Graveyard)) {
@@ -166,18 +178,6 @@ public final class GameActionUtil {
                         }
 
                         alternatives.add(getGraveyardSpellByKeyword(inst, sa, activator, AlternativeCost.Flashback));
-                    } else if (keyword.startsWith("Mayhem")) {
-                        if (!source.isInZone(ZoneType.Graveyard) || !source.wasDiscarded() || !source.enteredThisTurn()) {
-                            continue;
-                        }
-
-                        // if source has No Mana cost, and Mayhem doesn't have own one,
-                        // Mayhem can't work
-                        if (keyword.equals("Mayhem") && source.getManaCost().isNoCost()) {
-                            continue;
-                        }
-
-                        alternatives.add(getGraveyardSpellByKeyword(inst, sa, activator, AlternativeCost.Mayhem));
                     } else if (keyword.startsWith("Harmonize")) {
                         if (!source.isInZone(ZoneType.Graveyard)) {
                             continue;

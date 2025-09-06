@@ -34,6 +34,9 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
+
+        // CR 603.12a if the trigger event or events occur multiple times during the resolution of the spell or ability that created it,
+        // the reflexive triggered ability will trigger once for each of those times
         int amt = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("TriggerAmount", "1"), sa);
         if (amt <= 0) {
             return;
