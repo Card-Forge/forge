@@ -289,6 +289,7 @@ public final class CMatchUI
         return FSkin.getAvatars().get(avatarIdx >= 0 ? avatarIdx : defaultIndex);
     }
     private java.util.Set<PlayerView> initiallyControlled = new java.util.HashSet<>();
+    private boolean hasSaved = false;
     private void initMatch(final FCollectionView<PlayerView> sortedPlayers, final Collection<PlayerView> myPlayers) {
         this.sortedPlayers = sortedPlayers;
         allHands = sortedPlayers.size() == getLocalPlayerCount();
@@ -297,6 +298,7 @@ public final class CMatchUI
         if (myPlayers != null) {
             initiallyControlled.addAll(myPlayers);
         }
+        hasSaved = false;
 
         final String[] indices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
 
@@ -828,7 +830,10 @@ public final class CMatchUI
         final GameView gameView = getGameView();
         if (hasLocalPlayers() || gameView.isMatchOver()) {
             //Otherwise only the host will save in a multiplayer match.
-            writeMatchPreferences();
+            if (!hasSaved) {
+                writeMatchPreferences();
+            }
+
             new ViewWinLose(gameView, this).show();
         }
         if (showOverlay) {
@@ -1176,9 +1181,12 @@ public final class CMatchUI
      * For both the non-local (ai or multiplayer) and local player(s)
      */
     public void writeMatchPreferences() {
+        hasSaved = true;
         final ForgePreferences prefs = FModel.getPreferences();
         final List<VField> fieldViews = getFieldViews();
 
+        //TODO: this new solution will still override data if there is more then 1 non controlled player
+        // or more then one controlled player.
 
         //loops over all fields
         for (int playerIndex = 0; playerIndex < fieldViews.size(); playerIndex++) {
