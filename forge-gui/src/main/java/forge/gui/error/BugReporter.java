@@ -26,6 +26,8 @@ import forge.util.Localizer;
 import io.sentry.Sentry;
 
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * The class ErrorViewer. Enables showing and saving error messages that
@@ -86,7 +88,7 @@ public class BugReporter {
         if (isSentryEnabled()) {
             sendSentry();
         } else {
-            GuiBase.getInterface().showBugReportDialog(Localizer.getInstance().getMessage("lblReportCrash"), sb.toString(), true);
+            GuiBase.getInterface().showBugReportDialog(Localizer.getInstance().getMessageorUseDefault("lblReportCrash", "Report a Crash"), sb.toString(), true);
         }
     }
 
@@ -121,22 +123,31 @@ public class BugReporter {
         if (isSentryEnabled()) {
             sendSentry();
         } else {
-            GuiBase.getInterface().showBugReportDialog(Localizer.getInstance().getMessage("btnReportBug"), message, false);
+            GuiBase.getInterface().showBugReportDialog(Localizer.getInstance().getMessageorUseDefault("btnReportBug", "Report a Bug"), message, false);
         }
     }
 
-    public static void saveToFile(final String text) {
+    public static void saveToFile(final String error) {
         File f;
-        final long curTime = System.currentTimeMillis();
-        for (int i = 0;; i++) {
-            final String name = String.format("%TF-%02d.txt", curTime, i);
-            f = new File(name);
-            if (!f.exists()) {
-                break;
+        String text;
+        if (GuiBase.getInterface().isLibgdxPort()) {
+            text = GuiBase.getHWInfo() + "\n\n" + error;
+            // Save in downloads directory instead for easy access without filepicker
+            String filename = "forge-bug-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HHmmss")) + ".txt";
+            f = new File(GuiBase.getDownloadsDir() + filename);
+        } else {
+            text = error;
+            final long curTime = System.currentTimeMillis();
+            for (int i = 0; ; i++) {
+                final String name = String.format("%TF-%02d.txt", curTime, i);
+                f = new File(name);
+                if (!f.exists()) {
+                    break;
+                }
             }
-        }
 
-        f = GuiBase.getInterface().getSaveFile(f);
+            f = GuiBase.getInterface().getSaveFile(f);
+        }
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(f))){
             bw.write(text);
@@ -147,11 +158,13 @@ public class BugReporter {
     }
 
     public static void sendSentry() {
-        if (exception != null) {
-            Sentry.captureException(exception);
-        } else if (message !=null) {
-            Sentry.captureMessage(message);
-        }
+        try {
+            if (exception != null) {
+                Sentry.captureException(exception);
+            } else if (message !=null) {
+                Sentry.captureMessage(message);
+            }
+        } catch (Exception ignored) {}
     }
 
     /**

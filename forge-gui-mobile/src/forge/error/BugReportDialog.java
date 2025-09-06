@@ -44,7 +44,10 @@ public class BugReportDialog extends FScreen { //use screen rather than dialog s
             BugReporter.sendSentry();
             Forge.back();
         });
-        btnSave.setCommand(e -> BugReporter.saveToFile(tvDetails.text));
+        btnSave.setCommand(e -> {
+            BugReporter.saveToFile(tvDetails.text);
+            Forge.back();
+        });
         btnDiscard.setCommand(e -> Forge.back());
         if (showExitAppBtn) {
             btnExit.setCommand(e -> Forge.exit(true));
