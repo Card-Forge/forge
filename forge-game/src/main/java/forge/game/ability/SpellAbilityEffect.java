@@ -49,6 +49,8 @@ public abstract class SpellAbilityEffect {
         return sa.getDescription();
     }
 
+    public void buildSpellAbility(final SpellAbility sa) {}
+
     /**
      * Returns this effect description with needed prelude and epilogue.
      * @param params

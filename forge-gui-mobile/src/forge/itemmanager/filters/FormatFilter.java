@@ -5,13 +5,12 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
-import forge.adventure.scene.AdventureDeckEditor;
-import forge.adventure.scene.DeckEditScene;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.card.CardEdition;
@@ -26,7 +25,6 @@ import forge.toolbox.FComboBox;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FGroupList;
 import forge.toolbox.FList;
-import forge.util.Callback;
 import forge.util.TextUtil;
 import forge.util.Utils;
 
@@ -35,8 +33,7 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
     protected GameFormat format;
     private String selectedFormat;
     private boolean preventHandling = false;
-    private FComboBox<Object> cbxFormats = new FComboBox<>();
-    private FComboBox<Object> catalogDisplay = new FComboBox<>();
+    private final FComboBox<Object> cbxFormats = new FComboBox<>();
 
     public FormatFilter(ItemManager<? super T> itemManager0) {
         super(itemManager0);
@@ -48,16 +45,6 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
         }
         cbxFormats.addItem(Forge.getLocalizer().getMessage("lblOtherFormats"));
         cbxFormats.addItem(Forge.getLocalizer().getMessage("lblChooseSets"));
-        cbxFormats.setEnabled(!Forge.isMobileAdventureMode);
-        cbxFormats.setVisible(!Forge.isMobileAdventureMode);
-
-        catalogDisplay.setFont(FSkinFont.get(12));
-        catalogDisplay.addItem(Forge.getLocalizer().getMessage("lblCollection"));
-        catalogDisplay.addItem(Forge.getLocalizer().getMessage("lblSellable"));
-        catalogDisplay.addItem(Forge.getLocalizer().getMessage("lblAutoSellable"));
-        catalogDisplay.addItem(Forge.getLocalizer().getMessage("lblNonSellable"));
-        catalogDisplay.setEnabled(Forge.isMobileAdventureMode);
-        catalogDisplay.setVisible(Forge.isMobileAdventureMode);
 
         selectedFormat = cbxFormats.getText();
 
@@ -93,20 +80,6 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
                 applyChange();
             }
         });
-        catalogDisplay.setChangedHandler(e -> {
-            if (preventHandling)
-                return;
-            int index = catalogDisplay.getSelectedIndex();
-            if (index == -1) {
-                //Do nothing when index set to -1
-            }
-            switch (index) {
-                case 0 -> ((AdventureDeckEditor) DeckEditScene.getInstance().getScreen()).showDefault();
-                case 1 -> ((AdventureDeckEditor) DeckEditScene.getInstance().getScreen()).showCollection();
-                case 2 -> ((AdventureDeckEditor) DeckEditScene.getInstance().getScreen()).showAutoSell();
-                case 3 -> ((AdventureDeckEditor) DeckEditScene.getInstance().getScreen()).showNoSell();
-            }
-        });
     }
 
     @Override
@@ -119,15 +92,12 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
     public void reset() {
         preventHandling = true;
         cbxFormats.setSelectedIndex(0);
-        catalogDisplay.setSelectedIndex(0);
         preventHandling = false;
         format = null;
     }
 
     @Override
     public FDisplayObject getMainComponent() {
-        if (Forge.isMobileAdventureMode)
-            return catalogDisplay;
         return cbxFormats;
     }
 
@@ -138,12 +108,11 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
 
     @Override
     protected void buildWidget(Widget widget) {
-        widget.add(Forge.isMobileAdventureMode ? catalogDisplay : cbxFormats);
+        widget.add(cbxFormats);
     }
 
     @Override
     protected void doWidgetLayout(float width, float height) {
-        catalogDisplay.setSize(width, height);
         cbxFormats.setSize(width, height);
     }
 
@@ -230,7 +199,7 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
         }
 
         @Override
-        public void onClose(Callback<Boolean> canCloseCallback) {
+        public void onClose(Consumer<Boolean> canCloseCallback) {
             if (selectedSets.size() > 0) {
                 List<String> setCodes = new ArrayList<>();
                 List<CardEdition> sortedSets = new ArrayList<>(selectedSets);

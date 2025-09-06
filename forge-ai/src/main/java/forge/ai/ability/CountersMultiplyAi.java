@@ -20,41 +20,40 @@ public class CountersMultiplyAi extends SpellAbilityAi {
 
     @Override
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
+        if (sa.usesTargeting()) {
+            return setTargets(ai, sa);
+        }
+
         final CounterType counterType = getCounterType(sa);
+        // defined are mostly Self or Creatures you control
+        CardCollection list = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
 
-        if (!sa.usesTargeting()) {
-            // defined are mostly Self or Creatures you control
-            CardCollection list = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+        list = CardLists.filter(list, c -> {
+            if (!c.hasCounters()) {
+                return false;
+            }
 
-            list = CardLists.filter(list, c -> {
-                if (!c.hasCounters()) {
+            if (counterType != null) {
+                if (c.getCounters(counterType) <= 0) {
                     return false;
                 }
-
-                if (counterType != null) {
-                    if (c.getCounters(counterType) <= 0) {
+                if (!c.canReceiveCounters(counterType)) {
+                    return false;
+                }
+            } else {
+                for (Map.Entry<CounterType, Integer> e : c.getCounters().entrySet()) {
+                    // has negative counter it would double
+                    if (ComputerUtil.isNegativeCounter(e.getKey(), c)) {
                         return false;
-                    }
-                    if (!c.canReceiveCounters(counterType)) {
-                        return false;
-                    }
-                } else {
-                    for (Map.Entry<CounterType, Integer> e : c.getCounters().entrySet()) {
-                        // has negative counter it would double
-                        if (ComputerUtil.isNegativeCounter(e.getKey(), c)) {
-                            return false;
-                        }
                     }
                 }
-
-                return true;
-            });
-
-            if (list.isEmpty()) {
-                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
-        } else {
-            return setTargets(ai, sa);
+
+            return true;
+        });
+
+        if (list.isEmpty()) {
+            return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
         }
 
         return super.checkApiLogic(ai, sa);
@@ -155,7 +154,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
                 }
 
                 if (counterType == null || counterType.is(type)) {
-                    addTargetsByCounterType(ai, sa, aiList, CounterType.get(type));
+                    addTargetsByCounterType(ai, sa, aiList, type);
                 }
             }
         }
@@ -164,7 +163,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
         if (!oppList.isEmpty()) {
             // not enough targets
             if (sa.canAddMoreTarget()) {
-                final CounterType type = CounterType.get(CounterEnumType.M1M1);
+                final CounterType type = CounterEnumType.M1M1;
                 if (counterType == null || counterType == type) {
                     addTargetsByCounterType(ai, sa, oppList, type);
                 }

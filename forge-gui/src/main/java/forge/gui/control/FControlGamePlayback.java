@@ -75,9 +75,9 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventTurnPhase ev) {
         try {
-            final boolean isUiToStop = !humanController.getGui().isUiSetToSkipPhase(ev.playerTurn.getView(), ev.phase);
+            final boolean isUiToStop = !humanController.getGui().isUiSetToSkipPhase(ev.playerTurn().getView(), ev.phase());
 
-            switch (ev.phase) {
+            switch (ev.phase()) {
             case COMBAT_END:
             case COMBAT_DECLARE_ATTACKERS:
             case COMBAT_DECLARE_BLOCKERS:
@@ -121,7 +121,7 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventSpellResolved event) {
-        FThreads.invokeInEdtNowOrLater(() -> humanController.getGui().setCard(CardView.get(event.spell.getHostCard())));
+        FThreads.invokeInEdtNowOrLater(() -> humanController.getGui().setCard(CardView.get(event.spell().getHostCard())));
         pauseForEvent(resolveDelay);
         return null;
     }
@@ -131,7 +131,7 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
      */
     @Override
     public Void visit(final GameEventSpellAbilityCast event) {
-        FThreads.invokeInEdtNowOrLater(() -> humanController.getGui().setCard(CardView.get(event.sa.getHostCard())));
+        FThreads.invokeInEdtNowOrLater(() -> humanController.getGui().setCard(CardView.get(event.sa().getHostCard())));
         pauseForEvent(castDelay);
         return null;
     }

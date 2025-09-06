@@ -1,0 +1,6 @@
+Name:Soldier Token
+ManaCost:no cost
+Colors:red,white
+Types:Creature Soldier
+PT:1/1
+Oracle:

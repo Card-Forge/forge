@@ -202,6 +202,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     private SortedSet<Long> controlVotes = Sets.newTreeSet();
     private Map<Long, Integer> additionalVillainousChoices = Maps.newHashMap();
 
+    private EnumSet<TriggerType> elementalBendThisTurn = EnumSet.noneOf(TriggerType.class);
+
     private NavigableMap<Long, Player> declaresAttackers = Maps.newTreeMap();
     private NavigableMap<Long, Player> declaresBlockers = Maps.newTreeMap();
 
@@ -545,7 +547,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         life -= toLose;
         view.updateLife(this);
         if (manaBurn) {
-            game.fireEvent(new GameEventManaBurn(this, toLose, true));
+            game.fireEvent(new GameEventManaBurn(this, true, toLose));
         } else {
             game.fireEvent(new GameEventPlayerLivesChanged(this, oldLife, life));
         }
@@ -942,10 +944,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         getGame().fireEvent(new GameEventPlayerCounters(this, null, 0, 0));
     }
 
-    public void setCounters(final CounterEnumType counterType, final Integer num, Player source, boolean fireEvents) {
-        this.setCounters(CounterType.get(counterType), num, source, fireEvents);
-    }
-
     public void setCounters(final CounterType counterType, final Integer num, Player source, boolean fireEvents) {
         int old = getCounters(counterType);
         setCounters(counterType, num);
@@ -971,7 +969,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         getGame().fireEvent(new GameEventPlayerCounters(this, null, 0, 0));
 
         // create Radiation Effect for GameState
-        if (counters.getOrDefault(CounterType.get(CounterEnumType.RAD), 0) > 0) {
+        if (counters.getOrDefault(CounterEnumType.RAD, 0) > 0) {
             this.createRadiationEffect(null);
         } else {
             this.removeRadiationEffect();
@@ -2319,7 +2317,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final void addSacrificedThisTurn(final Card cpy, final SpellAbility source) {
         // Play the Sacrifice sound
-        game.fireEvent(new GameEventCardSacrificed());
+        game.fireEvent(new GameEventCardSacrificed(cpy));
 
         sacrificedThisTurn.add(cpy);
 
@@ -2346,9 +2344,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void resetSpellCastSinceBegOfYourLastTurn() {
         spellsCastSinceBeginningOfLastTurn = Lists.newArrayList();
-    }
-    public final void setSpellCastSinceBegOfYourLastTurn(List<Card> spells) {
-        spellsCastSinceBeginningOfLastTurn = new ArrayList<>(spells);
     }
     public final void addSpellCastSinceBegOfYourLastTurn(List<Card> spells) {
         spellsCastSinceBeginningOfLastTurn.addAll(spells);
@@ -2561,6 +2556,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         damageReceivedThisTurn.clear();
         planeswalkedToThisTurn.clear();
+
+        elementalBendThisTurn.clear();
 
         // set last turn nr
         if (game.getPhaseHandler().isPlayerTurn(this)) {
@@ -4081,5 +4078,18 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         devotionMod = StaticAbilityDevotion.getDevotionMod(this);
+    }
+
+    public void triggerElementalBend(TriggerType type) {
+        elementalBendThisTurn.add(type);
+
+        Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
+
+        getGame().getTriggerHandler().runTrigger(TriggerType.ElementalBend, runParams, false);
+        getGame().getTriggerHandler().runTrigger(type, runParams, false);
+    }
+
+    public boolean hasAllElementBend() {
+        return elementalBendThisTurn.size() >= 4;
     }
 }

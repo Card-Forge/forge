@@ -293,7 +293,7 @@ public class RewardScene extends UIScene {
 
     public void loadRewards(Deck deck, Type type, ShopActor shopActor, boolean noSell) {
         Array<Reward> rewards = new Array<>();
-        for (PaperCard card : deck.getAllCardsInASinglePool().toFlatList()) {
+        for (PaperCard card : deck.getAllCardsInASinglePool(true, true).toFlatList()) {
             rewards.add(new Reward(card, noSell));
         }
         loadRewards(rewards, type, shopActor);

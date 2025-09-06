@@ -1,0 +1,7 @@
+Name:Deserter's Disciple
+ManaCost:1 R
+Types:Creature Human Rebel Ally
+PT:2/2
+A:AB$ Effect | Cost$ T | ValidTgts$ Creature.Other+YouCtrl+powerLE2 | TgtPrompt$ Select another target creature you control with power 2 or less | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Another target creature you control with power 2 or less can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+Oracle:{T}: Another target creature you control with power 2 or less can't be blocked this turn.

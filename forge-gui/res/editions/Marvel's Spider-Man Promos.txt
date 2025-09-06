@@ -1,0 +1,11 @@
+[metadata]
+Code=PSPM
+Date=2025-09-26
+Name=Marvel's Spider-Man Promos
+Type=Promo
+ScryfallCode=PSPM
+
+[cards]
+1 M Peter Parker @Randy Gallegos
+3 R J. Jonah Jameson @Borja Pindado
+3? R Carnage, Crimson Chaos @

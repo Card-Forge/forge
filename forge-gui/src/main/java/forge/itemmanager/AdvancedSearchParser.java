@@ -2,6 +2,7 @@ package forge.itemmanager;
 
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
+import forge.card.CardSplitType;
 import forge.card.CardRulesPredicates.LeafNumber;
 import forge.card.MagicColor;
 import forge.item.PaperCard;
@@ -43,7 +44,7 @@ public abstract class AdvancedSearchParser {
         }
 
         String key = token.substring(0, index).trim().toLowerCase();
-        String valueStr = token.substring(index + opUsed.length()).trim().toLowerCase();
+        String valueStr = token.substring(index + opUsed.length()).toLowerCase();
         boolean creatureOnly = false;
 
         Predicate<CardRules> predicate = null;
@@ -302,6 +303,40 @@ public abstract class AdvancedSearchParser {
                         break;
                 }
                 break;
+
+            case "is":
+                if (opUsed.equals(":")) {
+                    switch(valueStr) {
+                        case "meld":
+                            predicate = CardRulesPredicates.isSplitType(CardSplitType.Meld);
+                            break;
+                        
+                        case "flip":
+                            predicate = CardRulesPredicates.isSplitType(CardSplitType.Flip);
+                            break;
+
+                        case "split":
+                            predicate = CardRulesPredicates.isSplitType(CardSplitType.Split);
+                            break;
+
+                        case "modal":
+                            predicate = CardRulesPredicates.isSplitType(CardSplitType.Modal);
+                            break;
+
+                        case "transform":
+                            predicate = CardRulesPredicates.isSplitType(CardSplitType.Transform);
+                            break;
+
+                        case "vanilla":
+                            predicate = CardRulesPredicates.isVanilla();
+                            break;
+
+                        case "custom":
+                            predicate = card -> card.isCustom();
+                            break;
+                    }
+                }
+                break;
         }
 
         if (predicate == null) {
@@ -406,6 +441,20 @@ public abstract class AdvancedSearchParser {
                     case "<=":
                         predicate = RarityParser.handleLessOrEqual(valueStr);
                         break;
+                }
+                break;
+
+            case "is":
+                if (opUsed.equals(":")) {
+                    switch(valueStr) {
+                        case "foil":
+                            predicate = PaperCardPredicates.isFoil(true);
+                            break;
+
+                        case "nonfoil":
+                            predicate = PaperCardPredicates.isFoil(false);
+                            break;
+                    }
                 }
                 break;
         }

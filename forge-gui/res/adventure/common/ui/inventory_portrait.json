@@ -19,8 +19,8 @@
     },
     {
       "type": "ImageButton",
-      "name": "Equipment_Ability1",      
-      "style": "item_frame",      
+      "name": "Equipment_Ability1",
+      "style": "item_frame_static",
       "width": 20,
       "height": 20,
       "x": 17,
@@ -29,7 +29,7 @@
     {
       "type": "ImageButton",
       "name": "Equipment_Ability2",      
-      "style": "item_frame",      
+      "style": "item_frame_static",
       "width": 20,
       "height": 20,
       "x": 107,
@@ -38,7 +38,7 @@
     {
       "type": "ImageButton",
       "name": "Equipment_Neck",      
-      "style": "item_frame",      
+      "style": "item_frame_static",
       "width": 20,
       "height": 20,
       "x": 62,
@@ -47,7 +47,7 @@
     {
       "type": "ImageButton",
       "name": "Equipment_Body",      
-      "style": "item_frame",      
+      "style": "item_frame_static",
       "width": 20,
       "height": 20,
       "x": 62,
@@ -56,7 +56,7 @@
     {
       "type": "ImageButton",
       "name": "Equipment_Boots",      
-      "style": "item_frame",      
+      "style": "item_frame_static",
       "width": 20,
       "height": 20,
       "x": 62,
@@ -65,7 +65,7 @@
     {
       "type": "ImageButton",
       "name": "Equipment_Left",      
-      "style": "item_frame",      
+      "style": "item_frame_static",
       "width": 20,
       "height": 20,
       "x": 17,
@@ -74,7 +74,7 @@
     {
       "type": "ImageButton",
       "name": "Equipment_Right",      
-      "style": "item_frame",      
+      "style": "item_frame_static",
       "width": 20,
       "height": 20,
       "x": 107,
@@ -138,6 +138,15 @@
       "height": 30,
       "x": 205,
       "y": 363
+    },
+    {
+      "type": "TextButton",
+      "name": "repair",
+      "text": "[%80][+ToolBox] tr(lblRepair)",
+      "width": 42,
+      "height": 22,
+      "x": 16,
+      "y": 80
     }
   ]
 }

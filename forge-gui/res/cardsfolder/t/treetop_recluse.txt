@@ -1,0 +1,7 @@
+Name:Treetop Recluse
+ManaCost:1 G G
+Types:Creature Spider
+PT:1/6
+K:Vigilance
+K:Reach
+Oracle:Vigilance, reach

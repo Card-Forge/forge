@@ -1,0 +1,7 @@
+Name:Allied Teamwork
+ManaCost:2 W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this enchantment enters, create a 1/1 white Ally creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_ally | TokenOwner$ You
+S:Mode$ Continuous | Affected$ Ally.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Allies you control get +1/+1.
+Oracle:When this enchantment enters, create a 1/1 white Ally creature token.\nAllies you control get +1/+1.
