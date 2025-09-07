@@ -2222,6 +2222,13 @@ public class GameAction {
         }
     }
 
+    public void revealUnsupported(Map<Player, List<PaperCard>> unsupported) {
+        // Notify players
+        for (Player p : game.getPlayers()) {
+            p.getController().revealUnsupported(unsupported);
+        }
+    }
+
     /** Delivers a message to all players. (use reveal to show Cards) */
     public void notifyOfValue(SpellAbility saSource, GameObject relatedTarget, String value, Player playerExcept) {
         if (saSource != null) {

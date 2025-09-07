@@ -974,17 +974,13 @@ public class ComputerUtilCombat {
                 continue;
             }
 
+            int pBonus = 0;
             if (ability.getApi() == ApiType.Pump) {
                 if (!ability.hasParam("NumAtt")) {
                     continue;
                 }
 
-                if (ComputerUtilCost.canPayCost(ability, blocker.getController(), false)) {
-                    int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("NumAtt"), ability);
-                    if (pBonus > 0) {
-                        power += pBonus;
-                    }
-                }
+                pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("NumAtt"), ability);
             } else if (ability.getApi() == ApiType.PutCounter) {
                 if (!ability.hasParam("CounterType") || !ability.getParam("CounterType").equals("P1P1")) {
                     continue;
@@ -998,12 +994,11 @@ public class ComputerUtilCombat {
                     continue;
                 }
 
-                if (ComputerUtilCost.canPayCost(ability, blocker.getController(), false)) {
-                    int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParamOrDefault("CounterNum", "1"), ability);
-                    if (pBonus > 0) {
-                        power += pBonus;
-                    }
-                }
+                pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParamOrDefault("CounterNum", "1"), ability);
+            }
+
+            if (pBonus > 0 && ComputerUtilCost.canPayCost(ability, blocker.getController(), false)) {
+                power += pBonus;
             }
         }
 
@@ -1107,17 +1102,13 @@ public class ComputerUtilCombat {
                 continue;
             }
 
+            int tBonus = 0;
             if (ability.getApi() == ApiType.Pump) {
                 if (!ability.hasParam("NumDef")) {
                     continue;
                 }
 
-                if (ComputerUtilCost.canPayCost(ability, blocker.getController(), false)) {
-                    int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("NumDef"), ability);
-                    if (tBonus > 0) {
-                        toughness += tBonus;
-                    }
-                }
+                tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("NumDef"), ability);
             } else if (ability.getApi() == ApiType.PutCounter) {
                 if (!ability.hasParam("CounterType") || !ability.getParam("CounterType").equals("P1P1")) {
                     continue;
@@ -1131,12 +1122,11 @@ public class ComputerUtilCombat {
                     continue;
                 }
 
-                if (ComputerUtilCost.canPayCost(ability, blocker.getController(), false)) {
-                    int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParamOrDefault("CounterNum", "1"), ability);
-                    if (tBonus > 0) {
-                        toughness += tBonus;
-                    }
-                }
+                tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParamOrDefault("CounterNum", "1"), ability);
+            }
+
+            if (tBonus > 0 && ComputerUtilCost.canPayCost(ability, blocker.getController(), false)) {
+                toughness += tBonus;
             }
         }
         return toughness;
@@ -1305,6 +1295,7 @@ public class ComputerUtilCombat {
                 continue;
             }
 
+            int pBonus = 0;
             if (ability.getApi() == ApiType.Pump) {
                 if (!ability.hasParam("NumAtt")) {
                     continue;
@@ -1314,11 +1305,8 @@ public class ComputerUtilCombat {
                     continue;
                 }
 
-                if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController(), false)) {
-                    int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("NumAtt"), ability);
-                    if (pBonus > 0) {
-                        power += pBonus;
-                    }
+                if (!ability.getPayCosts().hasTapCost()) {
+                    pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("NumAtt"), ability);
                 }
             } else if (ability.getApi() == ApiType.PutCounter) {
                 if (!ability.hasParam("CounterType") || !ability.getParam("CounterType").equals("P1P1")) {
@@ -1333,12 +1321,13 @@ public class ComputerUtilCombat {
                     continue;
                 }
 
-                if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController(), false)) {
-                    int pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParamOrDefault("CounterNum", "1"), ability);
-                    if (pBonus > 0) {
-                        power += pBonus;
-                    }
+                if (!ability.getPayCosts().hasTapCost()) {
+                    pBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParamOrDefault("CounterNum", "1"), ability);
                 }
+            }
+
+            if (pBonus > 0 && ComputerUtilCost.canPayCost(ability, attacker.getController(), false)) {
+                power += pBonus;
             }
         }
         return power;
@@ -1530,16 +1519,14 @@ public class ComputerUtilCombat {
             if (ability.getPayCosts().hasTapCost() && !attacker.hasKeyword(Keyword.VIGILANCE)) {
                 continue;
             }
-            if (!ComputerUtilCost.canPayCost(ability, attacker.getController(), false)) {
-                continue;
-            }
 
+            int tBonus = 0;
             if (ability.getApi() == ApiType.Pump) {
                 if (!ability.hasParam("NumDef")) {
                     continue;
                 }
 
-                toughness += AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("NumDef"), ability, true);
+                tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParam("NumDef"), ability, true);
             } else if (ability.getApi() == ApiType.PutCounter) {
                 if (!ability.hasParam("CounterType") || !ability.getParam("CounterType").equals("P1P1")) {
                     continue;
@@ -1553,10 +1540,11 @@ public class ComputerUtilCombat {
                     continue;
                 }
 
-                int tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParamOrDefault("CounterNum", "1"), ability);
-                if (tBonus > 0) {
-                    toughness += tBonus;
-                }
+                tBonus = AbilityUtils.calculateAmount(ability.getHostCard(), ability.getParamOrDefault("CounterNum", "1"), ability);
+            }
+
+            if (tBonus > 0 && ComputerUtilCost.canPayCost(ability, attacker.getController(), false)) {
+                toughness += tBonus;
             }
         }
         return toughness;

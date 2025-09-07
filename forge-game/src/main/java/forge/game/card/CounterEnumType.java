@@ -167,6 +167,8 @@ public enum CounterEnumType implements CounterType {
 
     FILIBUSTER("FLBTR", 255, 179, 119),
 
+    FILM("FILM", 255, 255, 255),
+
     FINALITY("FINAL", 255, 255, 255),
 
     FIRE("FIRE", 240, 30, 35),
