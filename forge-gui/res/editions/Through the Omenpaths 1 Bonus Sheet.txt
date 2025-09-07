@@ -1,0 +1,48 @@
+[metadata]
+Code=OMB
+Date=2025-09-23
+Name=Through the Omenpaths 1 Bonus Sheet
+Type=Online
+ScryfallCode=OMB
+
+[cards]
+1 M Comeuppance @
+2 M Leyline Binding @
+3 M Nine Lives @
+4 M Path to Exile @
+5 M Reprieve @
+6 M Rest in Peace @
+7 M Wedding Ring @
+8 M Clever Impersonator @
+9 M Counterspell @
+10 M Lorthos, the Tidemaker @
+11 M Mindbreak Trap @
+12 M Mystic Confluence @
+13 M Ponder @
+14 M Rite of Replication @
+15 M Traumatize @
+16 M Feed the Swarm @
+17 M Hex @
+18 M Infernal Grasp @
+19 M Opposition Agent @
+20 M Reanimate @
+21 M Saw in Half @
+22 M Skithiryx, the Blight Dragon @
+23 M Goblin Bombardment @
+24 M Najeela, the Blade-Blossom @
+25 M Relentless Assault @
+26 M Savage Beating @
+27 M Shock @
+28 M Thrill of Possibility @
+29 M Unexpected Windfall @
+30 M Winds of Change @
+31 M Arachnogenesis @
+32 M Arasta of the Endless Web @
+33 M Beast Within @
+34 M Heroic Intervention @
+35 M Hunter's Insight @
+36 M Parallel Lives @
+37 M Silkguard @
+38 M Tangle @
+39 M Alibou, Ancient Witness @
+40 M Terminate @

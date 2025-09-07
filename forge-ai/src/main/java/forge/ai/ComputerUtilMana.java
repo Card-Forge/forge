@@ -291,6 +291,12 @@ public class ComputerUtilMana {
                 continue;
             }
 
+            int amount = ma.hasParam("Amount") ? AbilityUtils.calculateAmount(ma.getHostCard(), ma.getParam("Amount"), ma) : 1;
+            if (amount <= 0) {
+                // wrong gamestate for variable amount
+                continue;
+            }
+
             if (sa.getApi() == ApiType.Animate) {
                 // For abilities like Genju of the Cedars, make sure that we're not activating the aura ability by tapping the enchanted card for mana
                 if (saHost.isAura() && "Enchanted".equals(sa.getParam("Defined"))
@@ -443,7 +449,6 @@ public class ComputerUtilMana {
                         manaProduced = manaProduced.replace(s, color);
                     }
                 } else if (saMana.hasParam("ReplaceColor")) {
-                    // replace color
                     String color = saMana.getParam("ReplaceColor");
                     if ("Chosen".equals(color)) {
                         if (card.hasChosenColor()) {
@@ -735,7 +740,8 @@ public class ComputerUtilMana {
 
             if (saPayment != null && ComputerUtilCost.isSacrificeSelfCost(saPayment.getPayCosts())) {
                 if (sa.getTargets() != null && sa.getTargets().contains(saPayment.getHostCard())) {
-                    saExcludeList.add(saPayment); // not a good idea to sac a card that you're targeting with the SA you're paying for
+                    // not a good idea to sac a card that you're targeting with the SA you're paying for
+                    saExcludeList.add(saPayment);
                     continue;
                 }
             }
@@ -1496,7 +1502,7 @@ public class ComputerUtilMana {
                     }
 
                     if (!cost.isReusuableResource()) {
-                        for(CostPart part : cost.getCostParts()) {
+                        for (CostPart part : cost.getCostParts()) {
                             if (part instanceof CostSacrifice && !part.payCostFromSource()) {
                                 unpreferredCost = true;
                             }
@@ -1587,10 +1593,8 @@ public class ComputerUtilMana {
 
                 // don't use abilities with dangerous drawbacks
                 AbilitySub sub = m.getSubAbility();
-                if (sub != null) {
-                    if (!SpellApiToAi.Converter.get(sub).chkDrawbackWithSubs(ai, sub).willingToPlay()) {
-                        continue;
-                    }
+                if (sub != null && !SpellApiToAi.Converter.get(sub).chkDrawbackWithSubs(ai, sub).willingToPlay()) {
+                    continue;
                 }
 
                 manaMap.get(ManaAtom.GENERIC).add(m); // add to generic source list

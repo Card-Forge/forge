@@ -78,6 +78,59 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private Supplier<List<Group>> groups = Suppliers.memoize(ArrayList::new);
     private Function<Entry<? extends InventoryItem, Integer>, ?> fnIsFavorite = ColumnDef.FAVORITE.fnDisplay, fnPrice = null;
 
+    private class SafeList<T> {
+        private final List<T> internalList;
+        private final Object lock = new Object(); // Object for synchronization
+
+        private SafeList() {
+            this.internalList = new ArrayList<>();
+        }
+
+        private void add(T element) {
+            synchronized (lock) {
+                internalList.add(element);
+            }
+        }
+
+        private T get(int index) {
+            synchronized (lock) {
+                return internalList.get(index);
+            }
+        }
+
+        private T remove(int index) {
+            synchronized (lock) {
+                return internalList.remove(index);
+            }
+        }
+
+        private int size() {
+            synchronized (lock) {
+                return internalList.size();
+            }
+        }
+
+        private void clear() {
+            synchronized (lock) {
+                internalList.clear();
+            }
+        }
+
+        private boolean isEmpty() {
+            synchronized (lock) {
+                return internalList.isEmpty();
+            }
+        }
+
+        private boolean addAll(Collection c) {
+            synchronized (lock) {
+                return internalList.addAll(c);
+            }
+        }
+
+        // Add other list operations as needed, ensuring synchronization
+    }
+
     private class ExpandCollapseButton extends FLabel {
         private boolean isAllCollapsed;
 
@@ -330,11 +383,17 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             if (group.getBottom() < visibleTop) {
                 continue;
             }
-            for (Pile pile : group.piles) {
+            for (int i = 0; i < group.piles.size(); i++) {
+                Pile pile = group.piles.get(i);
+                if (pile == null)
+                    continue;
                 if (group.getBottom() < visibleTop) {
                     continue;
                 }
-                for (ItemInfo item : pile.items) {
+                for (int j = 0; j < pile.items.size(); j++) {
+                    ItemInfo item = pile.items.get(j);
+                    if (item == null)
+                        continue;
                     if (item.getTop() >= visibleTop) {
                         return item;
                     }
@@ -454,7 +513,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 //use TreeMap to build pile set so iterating below sorts on key
                 ColumnDef groupPileBy = groupBy == null ? pileBy : groupBy.getGroupPileBy(i, pileBy);
                 Map<Comparable<?>, Pile> piles = new TreeMap<>();
-                for (ItemInfo itemInfo : group.items) {
+                for (int j = 0; j < group.items.size(); j++) {
+                    ItemInfo itemInfo = group.items.get(j);
                     if (itemInfo == null)
                         continue;
                     Comparable<?> key = groupPileBy.fnSort.apply(itemInfo);
@@ -492,7 +552,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 Pile pile = new Pile();
                 x = 0;
 
-                for (ItemInfo itemInfo : group.items) {
+                for (int j = 0; j < group.items.size(); j++) {
+                    ItemInfo itemInfo = group.items.get(j);
+                    if (itemInfo == null)
+                        continue;
                     itemInfo.pos = CardStackPosition.Top;
 
                     if (pile.items.size() == columnCount) {
@@ -519,7 +582,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 for (int j = 0; j < group.piles.size(); j++) {
                     Pile pile = group.piles.get(j);
                     y = pileY;
-                    for (ItemInfo itemInfo : pile.items) {
+                    for (int k = 0; k < pile.items.size(); k++) {
+                        ItemInfo itemInfo = pile.items.get(k);
+                        if (itemInfo == null)
+                            continue;
                         itemInfo.pos = CardStackPosition.BehindVert;
                         itemInfo.setBounds(x, y, itemWidth, itemHeight);
                         y += dy;
@@ -551,15 +617,24 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
                 if (group.isCollapsed && pileBy == null) {
                     //Piles won't have been generated in this case.
-                    for(ItemInfo itemInfo : group.items) {
+                    for (int i = 0; i < group.items.size(); i++) {
+                        ItemInfo itemInfo = group.items.get(i);
+                        if (itemInfo == null)
+                            continue;
                         itemInfo.index = index++;
                         orderedItems.get().add(itemInfo);
                     }
                     continue;
                 }
 
-                for (Pile pile : group.piles) {
-                    for (ItemInfo itemInfo : pile.items) {
+                for (int i = 0; i < group.piles.size(); i++) {
+                    Pile pile = group.piles.get(i);
+                    if (pile == null)
+                        continue;
+                    for (int j = 0; j < pile.items.size(); j++) {
+                        ItemInfo itemInfo = pile.items.get(j);
+                        if (itemInfo == null)
+                            continue;
                         itemInfo.index = index++;
                         orderedItems.get().add(itemInfo);
                     }
@@ -657,7 +732,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     @Override
     public int getIndexOfItem(T item) {
         for (Group group : groups.get()) {
-            for (ItemInfo itemInfo : group.items) {
+            for (int i = 0; i <  group.items.size(); i++) {
+                ItemInfo itemInfo =  group.items.get(i);
+                if (itemInfo == null)
+                    continue;
                 if (itemInfo.item == item) {
                     //if group containing item is collapsed, expand it so the item can be selected and has a valid index
                     if (group.isCollapsed) {
@@ -840,8 +918,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     private class Group extends FScrollPane {
-        private final List<ItemInfo> items = new ArrayList<>();
-        private final List<Pile> piles = new ArrayList<>();
+        private final SafeList<ItemInfo> items = new SafeList<>();
+        private final SafeList<Pile> piles = new SafeList<>();
         private final String name;
         private boolean isCollapsed;
         private float scrollWidth;
@@ -898,7 +976,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
             float visibleLeft = getScrollLeft();
             float visibleRight = visibleLeft + getWidth();
-            for (Pile pile : piles) {
+            for (int i = 0; i < piles.size(); i++) {
+                Pile pile = piles.get(i);
                 if (pile == null)
                     continue;
                 if (pile.getRight() < visibleLeft) {
@@ -966,7 +1045,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     private class Pile extends FDisplayObject {
-        private final List<ItemInfo> items = new ArrayList<>();
+        private final SafeList<ItemInfo> items = new SafeList<>();
 
         @Override
         public void draw(Graphics g) {
@@ -974,7 +1053,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             final float visibleBottom = visibleTop + getScroller().getHeight();
 
             ItemInfo skippedItem = null;
-            for (ItemInfo itemInfo : items) {
+            for (int i = 0; i < items.size(); i++) {
+                ItemInfo itemInfo = items.get(i);
+                if (itemInfo == null)
+                    continue;
                 if (itemInfo.getBottom() < visibleTop) {
                     continue;
                 }
