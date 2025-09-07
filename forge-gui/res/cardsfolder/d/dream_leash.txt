@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Enchant:Permanent
 SVar:AttachAITgts:Permanent.tapped
 SVar:AttachAILogic:GainControl
-S:Mode$ CantTarget | EffectZone$ Stack | ValidSource$ Spell.Self | ValidCard$ Permanent.untapped | Description$ You can't choose an untapped permanent as this spell's target as you cast it.
+S:Mode$ CantTarget | ValidTarget$ Permanent.untapped | EffectZone$ Stack | ValidSource$ Spell.Self | Description$ You can't choose an untapped permanent as this spell's target as you cast it.
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted permanent.
 Oracle:Enchant permanent\nYou can't choose an untapped permanent as this spell's target as you cast it.\nYou control enchanted permanent.
