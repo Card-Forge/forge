@@ -62,6 +62,9 @@ import java.util.*;
 public class PhaseHandler implements java.io.Serializable {
     private static final long serialVersionUID = 5207222278370963197L;
 
+    // used for debugging phase timing
+    private final StopWatch sw = new StopWatch();
+
     // Start turn at 0, since we start even before first untap
     private PhaseType phase = null;
     private int turn = 0;
@@ -91,6 +94,7 @@ public class PhaseHandler implements java.io.Serializable {
     private boolean givePriorityToPlayer = false;
 
     private final transient Game game;
+
 
     public PhaseHandler(final Game game0) {
         game = game0;
@@ -1037,7 +1041,6 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public void mainLoopStep() {
-        StopWatch sw = new StopWatch();
         if (givePriorityToPlayer) {
             if (DEBUG_PHASES) {
                 sw.start();
