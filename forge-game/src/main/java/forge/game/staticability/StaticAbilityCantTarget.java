@@ -83,6 +83,8 @@ public class StaticAbilityCantTarget {
                     return false;
                 }
             }
+        } else if (stAb.hasParam("AffectedZone")) {
+            return false;
         }
 
         final Card source = spellAbility.getHostCard();
