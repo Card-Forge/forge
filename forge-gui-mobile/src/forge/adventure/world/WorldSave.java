@@ -156,7 +156,12 @@ public class WorldSave {
         header.name = text;
 
         String fileName = WorldSave.getSaveFile(currentSlot);
+        String oldFileName = fileName.replace(".sav", ".old");
         new File(getSaveDir()).mkdirs();
+        File currentFile = new File(fileName);
+        File backupFile = new File(oldFileName);
+        if (currentFile.exists())
+            currentFile.renameTo(backupFile);
 
         try {
             try (FileOutputStream fos = new FileOutputStream(fileName);
@@ -169,8 +174,11 @@ public class WorldSave {
 
                 String message = getExceptionMessage(player, world, worldStage, poiChanges);
                 if (!message.isEmpty()) {
+                    oos.close();
+                    fos.close();
+                    restoreBackup(oldFileName, fileName);
                     announceError(message);
-                    return false;
+                    return true;
                 }
 
                 SaveFileData mainData = new SaveFileData();
@@ -180,8 +188,11 @@ public class WorldSave {
                 mainData.store("pointOfInterestChanges", poiChanges);
 
                 if (mainData.readString("IOException") != null) {
+                    oos.close();
+                    fos.close();
+                    restoreBackup(oldFileName, fileName);
                     announceError("Please check forge.log for errors.");
-                    return false;
+                    return true;
                 }
 
                 header.saveDate = new Date();
@@ -190,13 +201,25 @@ public class WorldSave {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
-            return false;
+            restoreBackup(oldFileName, fileName);
+            announceError("Please check forge.log for errors.");
+            return true;
         }
 
         Config.instance().getSettingData().lastActiveSave = WorldSave.filename(currentSlot);
         Config.instance().saveSettings();
+        if (backupFile.exists())
+            backupFile.delete();
         return true;
+    }
+
+    public void restoreBackup(String oldFilename, String currentFilename) {
+        File f = new File(currentFilename);
+        if (f.exists())
+            f.delete();
+        File b = new File(oldFilename);
+        if (b.exists())
+            b.renameTo(new File(currentFilename));
     }
 
     public String getExceptionMessage(SaveFileData... datas) {
