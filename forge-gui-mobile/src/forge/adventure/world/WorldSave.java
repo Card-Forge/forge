@@ -179,6 +179,7 @@ public class WorldSave {
                 mainData.store("pointOfInterestChanges", poiChanges);
                 if (mainData.hasError) {
                     announceError();
+                    return false;
                 }
                 header.saveDate = new Date();
                 oos.writeObject(header);
