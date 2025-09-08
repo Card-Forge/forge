@@ -201,8 +201,9 @@ public class WorldSave {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
-            return false;
+            restoreBackup(oldFileName, fileName);
+            announceError("Please check forge.log for errors.");
+            return true;
         }
 
         Config.instance().getSettingData().lastActiveSave = WorldSave.filename(currentSlot);
