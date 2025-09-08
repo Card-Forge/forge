@@ -167,20 +167,20 @@ public class WorldSave {
                 SaveFileData worldStage = WorldStage.getInstance().save();
                 SaveFileData poiChanges = currentSave.pointOfInterestChanges.save();
 
-                if (player.hasError || world.hasError || worldStage.hasError || poiChanges.hasError) {
+                /*if (player.hasError || world.hasError || worldStage.hasError || poiChanges.hasError) {
                     announceError();
                     return false;
-                }
+                }*/
 
                 SaveFileData mainData = new SaveFileData();
                 mainData.store("player", player);
                 mainData.store("world", world);
                 mainData.store("worldStage", worldStage);
                 mainData.store("pointOfInterestChanges", poiChanges);
-                if (mainData.hasError) {
+                /*if (mainData.hasError) {
                     announceError();
                     return false;
-                }
+                }*/
                 header.saveDate = new Date();
                 oos.writeObject(header);
                 oos.writeObject(mainData);
