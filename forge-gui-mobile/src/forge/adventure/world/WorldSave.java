@@ -26,53 +26,50 @@ import java.util.zip.InflaterInputStream;
 /**
  * Represents everything that will be saved, like the player and the world.
  */
-public class WorldSave   {
+public class WorldSave {
 
-    static final public int AUTO_SAVE_SLOT =-1;
-    static final public int QUICK_SAVE_SLOT =-2;
-    static final public int INVALID_SAVE_SLOT =-3;
-    static final WorldSave currentSave=new WorldSave();
+    static final public int AUTO_SAVE_SLOT = -1;
+    static final public int QUICK_SAVE_SLOT = -2;
+    static final public int INVALID_SAVE_SLOT = -3;
+    static final WorldSave currentSave = new WorldSave();
     public WorldSaveHeader header = new WorldSaveHeader();
-    private final AdventurePlayer player=new AdventurePlayer();
-    private final World world=new World();
-    private final PointOfInterestChanges.Map pointOfInterestChanges=  new PointOfInterestChanges.Map();
+    private final AdventurePlayer player = new AdventurePlayer();
+    private final World world = new World();
+    private final PointOfInterestChanges.Map pointOfInterestChanges = new PointOfInterestChanges.Map();
 
 
-    private final SignalList onLoadList=new SignalList();
+    private final SignalList onLoadList = new SignalList();
 
-    public final World getWorld()
-    {
+    public final World getWorld() {
         return world;
     }
-    public AdventurePlayer getPlayer()
-    {
+
+    public AdventurePlayer getPlayer() {
         return player;
     }
 
-    public void onLoad(Runnable run)
-    {
+    public void onLoad(Runnable run) {
         onLoadList.add(run);
     }
-    public PointOfInterestChanges getPointOfInterestChanges(String id)
-    {
-        if(!pointOfInterestChanges.containsKey(id))
-            pointOfInterestChanges.put(id,new PointOfInterestChanges());
+
+    public PointOfInterestChanges getPointOfInterestChanges(String id) {
+        if (!pointOfInterestChanges.containsKey(id))
+            pointOfInterestChanges.put(id, new PointOfInterestChanges());
         return pointOfInterestChanges.get(id);
     }
 
     static public boolean load(int currentSlot) {
 
         String fileName = WorldSave.getSaveFile(currentSlot);
-        if(!new File(fileName).exists())
+        if (!new File(fileName).exists())
             return false;
         new File(getSaveDir()).mkdirs();
         try {
-            try(FileInputStream fos  = new FileInputStream(fileName);
-                InflaterInputStream inf = new InflaterInputStream(fos);
-                ObjectInputStream oos = new ObjectInputStream(inf))
-            {
+            try (FileInputStream fos = new FileInputStream(fileName);
+                 InflaterInputStream inf = new InflaterInputStream(fos);
+                 ObjectInputStream oos = new ObjectInputStream(inf)) {
                 currentSave.header = (WorldSaveHeader) oos.readObject();
-                SaveFileData mainData=(SaveFileData)oos.readObject();
+                SaveFileData mainData = (SaveFileData) oos.readObject();
                 currentSave.player.load(mainData.readSubData("player"));
                 GamePlayerUtil.getGuiPlayer().setName(currentSave.player.getName());
                 try {
@@ -95,9 +92,11 @@ public class WorldSave   {
         }
         return true;
     }
+
     public static boolean isSafeFile(String name) {
-        return filenameToSlot(name)!= INVALID_SAVE_SLOT;
+        return filenameToSlot(name) != INVALID_SAVE_SLOT;
     }
+
     static public int filenameToSlot(String name) {
         if (name.equals("auto_save.sav"))
             return AUTO_SAVE_SLOT;
@@ -131,10 +130,10 @@ public class WorldSave   {
     public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, ColorSet startingColorIdentity, DifficultyData diff, AdventureModes mode, int customDeckIndex, CardEdition starterEdition, long seed) {
         currentSave.world.generateNew(seed);
         currentSave.pointOfInterestChanges.clear();
-        boolean chaos=mode==AdventureModes.Chaos;
-        boolean custom=mode==AdventureModes.Custom;
-        Deck starterDeck = Config.instance().starterDeck(startingColorIdentity,diff,mode,customDeckIndex,starterEdition);
-        currentSave.player.create(name,  starterDeck, male, race, avatarIndex, chaos, custom, diff);
+        boolean chaos = mode == AdventureModes.Chaos;
+        boolean custom = mode == AdventureModes.Custom;
+        Deck starterDeck = Config.instance().starterDeck(startingColorIdentity, diff, mode, customDeckIndex, starterEdition);
+        currentSave.player.create(name, starterDeck, male, race, avatarIndex, chaos, custom, diff);
         currentSave.player.setWorldPosY((int) (currentSave.world.getData().playerStartPosY * currentSave.world.getData().height * currentSave.world.getTileSize()));
         currentSave.player.setWorldPosX((int) (currentSave.world.getData().playerStartPosX * currentSave.world.getData().width * currentSave.world.getTileSize()));
         currentSave.onLoadList.emit();
@@ -142,14 +141,17 @@ public class WorldSave   {
     }
 
     public boolean autoSave() {
-        return save("auto save"+ SaveLoadScene.instance().getSaveFileSuffix(),AUTO_SAVE_SLOT);
+        return save("auto save" + SaveLoadScene.instance().getSaveFileSuffix(), AUTO_SAVE_SLOT);
     }
+
     public boolean quickSave() {
-        return save("quick save"+ SaveLoadScene.instance().getSaveFileSuffix(),QUICK_SAVE_SLOT);
+        return save("quick save" + SaveLoadScene.instance().getSaveFileSuffix(), QUICK_SAVE_SLOT);
     }
+
     public boolean quickLoad() {
         return load(QUICK_SAVE_SLOT);
     }
+
     public boolean save(String text, int currentSlot) {
         header.name = text;
 
@@ -157,18 +159,30 @@ public class WorldSave   {
         new File(getSaveDir()).mkdirs();
 
         try {
-            try(FileOutputStream fos =  new FileOutputStream(fileName);
-                DeflaterOutputStream def= new DeflaterOutputStream(fos);
-                ObjectOutputStream oos = new ObjectOutputStream(def))
-            {
-                header.saveDate= new Date();
-                oos.writeObject(header);
-                SaveFileData mainData=new SaveFileData();
-                mainData.store("player",currentSave.player.save());
-                mainData.store("world",currentSave.world.save());
-                mainData.store("worldStage", WorldStage.getInstance().save());
-                mainData.store("pointOfInterestChanges",currentSave.pointOfInterestChanges.save());
+            try (FileOutputStream fos = new FileOutputStream(fileName);
+                 DeflaterOutputStream def = new DeflaterOutputStream(fos);
+                 ObjectOutputStream oos = new ObjectOutputStream(def)) {
+                SaveFileData player = currentSave.player.save();
+                SaveFileData world = currentSave.world.save();
+                SaveFileData worldStage = WorldStage.getInstance().save();
+                SaveFileData poiChanges = currentSave.pointOfInterestChanges.save();
 
+                if (player.hasError || world.hasError || worldStage.hasError || poiChanges.hasError) {
+                    announceError();
+                    return false;
+                }
+
+                SaveFileData mainData = new SaveFileData();
+                mainData.store("player", player);
+                mainData.store("world", world);
+                mainData.store("worldStage", worldStage);
+                mainData.store("pointOfInterestChanges", poiChanges);
+                if (mainData.hasError) {
+                    announceError();
+                    return false;
+                }
+                header.saveDate = new Date();
+                oos.writeObject(header);
                 oos.writeObject(mainData);
             }
 
@@ -180,6 +194,10 @@ public class WorldSave   {
         Config.instance().getSettingData().lastActiveSave = WorldSave.filename(currentSlot);
         Config.instance().saveSettings();
         return true;
+    }
+
+    private void announceError() {
+        currentSave.player.getCurrentGameStage().setExtraAnnouncement("Error Saving File!\nPlease check forge.log");
     }
 
     public void clearChanges() {
