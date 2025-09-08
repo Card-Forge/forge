@@ -167,20 +167,23 @@ public class WorldSave {
                 SaveFileData worldStage = WorldStage.getInstance().save();
                 SaveFileData poiChanges = currentSave.pointOfInterestChanges.save();
 
-                /*if (player.hasError || world.hasError || worldStage.hasError || poiChanges.hasError) {
-                    announceError();
+                String message = getExceptionMessage(player, world, worldStage, poiChanges);
+                if (!message.isEmpty()) {
+                    announceError(message);
                     return false;
-                }*/
+                }
 
                 SaveFileData mainData = new SaveFileData();
                 mainData.store("player", player);
                 mainData.store("world", world);
                 mainData.store("worldStage", worldStage);
                 mainData.store("pointOfInterestChanges", poiChanges);
-                /*if (mainData.hasError) {
-                    announceError();
+
+                if (mainData.readString("IOException") != null) {
+                    announceError("Please check forge.log for errors.");
                     return false;
-                }*/
+                }
+
                 header.saveDate = new Date();
                 oos.writeObject(header);
                 oos.writeObject(mainData);
@@ -196,8 +199,20 @@ public class WorldSave {
         return true;
     }
 
-    private void announceError() {
-        currentSave.player.getCurrentGameStage().setExtraAnnouncement("Error Saving File!\nPlease check forge.log");
+    public String getExceptionMessage(SaveFileData... datas) {
+        StringBuilder message = new StringBuilder();
+
+        for (SaveFileData data : datas) {
+          String s = data.readString("IOException");
+          if (s != null)
+              message.append(s).append("\n");
+        }
+
+        return message.toString();
+    }
+
+    private void announceError(String message) {
+        currentSave.player.getCurrentGameStage().setExtraAnnouncement("Error Saving File!\n" + message);
     }
 
     public void clearChanges() {
