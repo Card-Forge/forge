@@ -302,7 +302,7 @@ public final class ConquestData {
                 }
             }
 
-            if (commandersUsingCard.length() > 0) {
+            if (!commandersUsingCard.isEmpty()) {
                 SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblCommandersCardCannotBeExiledByCard", CardTranslation.getTranslatedName(card.getName()), commandersUsingCard), title, SOptionPane.INFORMATION_ICON);
                 return false;
             }

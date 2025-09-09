@@ -189,19 +189,16 @@ public class ConquestUtil {
     public static int getShardValue(CardRarity rarity, CQPref baseValuePref) {
         ConquestPreferences prefs = FModel.getConquestPreferences();
         int baseValue = prefs.getPrefInt(baseValuePref);
-        switch (rarity) {
-        case Common:
-            return baseValue;
-        case Uncommon:
-            return Math.round((float)baseValue * (float)prefs.getPrefInt(CQPref.AETHER_UNCOMMON_MULTIPLIER));
-        case Rare:
-        case Special:
-            return Math.round((float)baseValue * (float)prefs.getPrefInt(CQPref.AETHER_RARE_MULTIPLIER));
-        case MythicRare:
-            return Math.round((float)baseValue * (float)prefs.getPrefInt(CQPref.AETHER_MYTHIC_MULTIPLIER));
-        default:
-            return 0;
-        }
+        return switch (rarity) {
+            case Common -> baseValue;
+            case Uncommon ->
+                    Math.round((float) baseValue * (float) prefs.getPrefInt(CQPref.AETHER_UNCOMMON_MULTIPLIER));
+            case Rare, Special ->
+                    Math.round((float) baseValue * (float) prefs.getPrefInt(CQPref.AETHER_RARE_MULTIPLIER));
+            case MythicRare ->
+                    Math.round((float) baseValue * (float) prefs.getPrefInt(CQPref.AETHER_MYTHIC_MULTIPLIER));
+            default -> 0;
+        };
     }
 
     public enum AEtherFilter implements IHasSkinProp {
