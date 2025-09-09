@@ -46,7 +46,6 @@ import forge.toolbox.*;
 import forge.util.Localizer;
 import forge.view.FDialog;
 import net.miginfocom.swing.MigLayout;
-import org.apache.commons.lang3.StringUtils;
 
 import static forge.deck.DeckRecognizer.TokenType.*;
 
