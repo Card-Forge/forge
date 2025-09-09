@@ -1018,16 +1018,13 @@ public final class CardEdition implements Comparable<CardEdition> {
 
         public static final Predicate<CardEdition> HAS_BOOSTER_BOX = edition -> edition.getBoosterBoxCount() > 0;
 
+        @Deprecated //Use CardEdition::hasBasicLands and a nonnull test.
         public static final Predicate<CardEdition> hasBasicLands = ed -> {
             if (ed == null) {
                 // Happens for new sets with "???" code
                 return false;
             }
-            for(String landName : MagicColor.Constant.BASIC_LANDS) {
-                if (null == StaticData.instance().getCommonCards().getCard(landName, ed.getCode(), 0))
-                    return false;
-            }
-            return true;
+            return ed.hasBasicLands();
         };
     }
 

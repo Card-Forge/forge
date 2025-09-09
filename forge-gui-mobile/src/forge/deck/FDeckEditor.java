@@ -82,7 +82,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         public List<CardEdition> getBasicLandSets(Deck currentDeck) {
             if(hasInfiniteCardPool())
-                return FModel.getMagicDb().getEditions().stream().filter(CardEdition::hasBasicLands).collect(Collectors.toList());
+                return FModel.getMagicDb().getSortedEditions().stream().filter(CardEdition::hasBasicLands).collect(Collectors.toList());
             return List.of(DeckProxy.getDefaultLandSet(currentDeck));
         }
 
