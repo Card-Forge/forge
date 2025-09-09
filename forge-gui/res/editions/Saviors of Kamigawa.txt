@@ -2,7 +2,6 @@
 Code=SOK
 Date=2005-06-03
 Name=Saviors of Kamigawa
-Code2=SOK
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare
@@ -176,10 +175,3 @@ ScryfallCode=SOK
 163 R Miren, the Moaning Well @Rob Alexander
 164 R Oboro, Palace in the Clouds @Rob Alexander
 165 R Tomb of Urami @Alex Horley-Orlandelli
-
-[tokens]
-urami
-c_1_1_spirit
-r_3_1_elemental_haste
-r_1_1_warrior
-g_1_1_snake

@@ -577,9 +577,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean payLife(final int lifePayment, final SpellAbility cause, final boolean effect) {
-        return payLife(lifePayment, cause, effect, null);
-    }
-    public final boolean payLife(final int lifePayment, final SpellAbility cause, final boolean effect, Map<AbilityKey, Object> params) {
         // fast check for pay zero life
         if (lifePayment <= 0) {
             cause.setPaidLife(0);
@@ -598,9 +595,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         // copy replacement params?
         if (cause.isReplacementAbility() && effect) {
             replaceParams.putAll(cause.getReplacingObjects());
-        }
-        if (params != null) {
-            replaceParams.putAll(params);
         }
         switch (getGame().getReplacementHandler().run(ReplacementType.PayLife, replaceParams)) {
         case Replaced:
