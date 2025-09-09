@@ -1,0 +1,8 @@
+Name:Cosmogoyf
+ManaCost:B G
+Types:Creature Elemental Lhurgoyf
+PT:*/1+*
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ Y | Description$ CARDNAME's power is equal to the number of cards you own in exile and its toughness is equal to that number plus 1.
+SVar:X:Count$ValidExile Card.YouOwn
+SVar:Y:Count$ValidExile Card.YouOwn/Plus.1
+Oracle:Cosmogoyf's power is equal to the number of cards you own in exile and its toughness is equal to that number plus 1.

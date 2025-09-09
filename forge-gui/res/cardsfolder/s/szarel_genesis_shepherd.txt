@@ -1,0 +1,10 @@
+Name:Szarel, Genesis Shepherd
+ManaCost:2 B R G
+Types:Legendary Creature Insect Druid
+PT:2/5
+K:Flying
+S:Mode$ Continuous | Affected$ Land.YouOwn | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may play lands from your graveyard.
+T:Mode$ Sacrificed | ValidCard$ Permanent.Other+!token | ValidPlayer$ You | PlayerTurn$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice another nontoken permanent during your turn, put a number of +1/+1 counters equal to NICKNAME's power on up to one other target creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.Other+YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one other target creature you control | CounterType$ P1P1 | CounterNum$ X
+SVar:X:Count$CardPower
+Oracle:Flying\nYou may play lands from your graveyard.\nWhenever you sacrifice another nontoken permanent during your turn, put a number of +1/+1 counters equal to Szarel's power on up to one other target creature.

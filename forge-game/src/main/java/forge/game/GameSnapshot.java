@@ -293,6 +293,12 @@ public class GameSnapshot {
             Card newCard = toGame.findById(fromCard.getId());
             Player toPlayer = findBy(toGame, fromCard.getController());
             ZoneType fromType = fromCard.getZone().getZoneType();
+            int zonePosition = 0;
+            if (ZoneType.ORDERED_ZONES.contains(fromType)) {
+                // If the card is in an ordered zone, we need to find its position in the zone
+                // and set it in the new game.
+                zonePosition = fromCard.getZone().getCards().indexOf(fromCard);
+            }
 
             if (newCard == null) {
                 // Storing a game uses this path...
@@ -309,10 +315,10 @@ public class GameSnapshot {
             }
 
             if (fromType.equals(ZoneType.Stack)) {
-                toGame.getStackZone().add(newCard);
+                toGame.getStackZone().add(newCard, zonePosition);
                 newCard.setZone(toGame.getStackZone());
             } else {
-                toPlayer.getZone(fromType).add(newCard);
+                toPlayer.getZone(fromType).add(newCard, zonePosition);
                 newCard.setZone(toPlayer.getZone(fromType));
             }
 

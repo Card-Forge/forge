@@ -1,0 +1,12 @@
+Name:Scouring Swarm
+ManaCost:1 B G
+Types:Creature Insect
+PT:1/1
+K:Flying
+T:Mode$ Sacrificed | ValidCard$ Land | Execute$ TrigBranch | TriggerZones$ Battlefield | ValidPlayer$ You | TriggerDescription$ Whenever you sacrifice a land, create a tapped token that's a copy of this creature if seven or more land cards are in your graveyard. Otherwise, create a tapped 1/1 black Insect creature token with flying.
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE7 | TrueSubAbility$ DBCopy | FalseSubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_insect_flying | TokenTapped$ True | TokenOwner$ You
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Self | NumCopies$ 1 | TokenTapped$ True
+SVar:X:Count$ValidGraveyard Land.YouOwn
+DeckHas:Ability$Token
+Oracle:Flying\nWhenever you sacrifice a land, create a tapped token that's a copy of this creature if seven or more land cards are in your graveyard. Otherwise, create a tapped 1/1 black Insect creature token with flying.

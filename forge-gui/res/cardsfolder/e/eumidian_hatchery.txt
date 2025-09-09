@@ -1,0 +1,10 @@
+Name:Eumidian Hatchery
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T PayLife<1> | Produced$ B | SubAbility$ DBPutCounter | SpellDescription$ Add {B}. Put a hatchling counter on this land.
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ HATCHLING | CounterNum$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this land is put into a graveyard from the battlefield, for each hatchling counter on it, create a 1/1 black Insect creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ b_1_1_insect_flying | TokenOwner$ You
+SVar:X:Count$CardCounters.HATCHLING
+DeckHas:Ability$Counters|Token
+Oracle:{T}, Pay 1 life: Add {B}. Put a hatchling counter on this land.\nWhen this land is put into a graveyard from the battlefield, for each hatchling counter on it, create a 1/1 black Insect creature token with flying.

@@ -199,7 +199,6 @@ public final class BoosterUtils {
         }
 
         return output;
-
     }
 
     private static List<Predicate<CardRules>> getColorFilters(final StartingPoolPreferences userPrefs, final List<PaperCard> cardPool) {
@@ -241,7 +240,6 @@ public final class BoosterUtils {
         }
 
         return colorFilters;
-
     }
 
     private static void populateRandomFilters(final List<Predicate<CardRules>> colorFilters) {

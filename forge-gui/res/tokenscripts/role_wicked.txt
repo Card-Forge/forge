@@ -4,6 +4,6 @@ Types:Enchantment Aura Role
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDamage | TriggerDescription$ When this Aura is put into a graveyard, each opponent loses 1 life.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDamage | TriggerDescription$ When this token is put into a graveyard, each opponent loses 1 life.
 SVar:TrigDamage:DB$ LoseLife | LifeAmount$ 1 | Defined$ Opponent
-Oracle:Enchant Creature\nEnchanted creature gets +1/+1.\nWhen this Aura is put into a graveyard, each opponent loses 1 life.
+Oracle:Enchant Creature\nEnchanted creature gets +1/+1.\nWhen this token is put into a graveyard, each opponent loses 1 life.

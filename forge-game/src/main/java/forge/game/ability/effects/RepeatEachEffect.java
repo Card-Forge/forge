@@ -137,12 +137,8 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                 final String[] workingCopy = def.split("_");
                 final String validFilter = workingCopy[1];
                 res = CardUtil.getThisTurnCast(validFilter, source, sa, activator);
-            } else if (def.startsWith("Defined ")) {
-                res = AbilityUtils.getDefinedCards(source, def.substring(8), sa);
             } else {
-                final ZoneType zone = sa.hasParam("TypesFromZone") ?
-                        ZoneType.smartValueOf(sa.getParam("TypesFromZone")) : ZoneType.Battlefield;
-                res = CardLists.getValidCards(game.getCardsIn(zone), def, source.getController(), source, sa);
+                res = AbilityUtils.getDefinedCards(source, def, sa);
             }
             for (final Card c : res) {
                 for (CardType.CoreType type : c.getType().getCoreTypes()) {

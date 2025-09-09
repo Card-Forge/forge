@@ -2,7 +2,6 @@
 Code=SNC
 Date=2022-04-29
 Name=Streets of New Capenna
-Code2=SNC
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:fromsheet("SNC cards"), 3 Uncommon:fromSheet("SNC cards"), 1 RareMythic:fromSheet("SNC cards"), 1 fromSheet("SNC lands")
@@ -496,50 +495,50 @@ ScryfallCode=SNC
 469 M Urabrask, Heretic Praetor @Richard Whitters
 
 [rebalanced]
-A6 C A-Buy Your Silence @Tony Foti
-A7 C A-Celebrity Fencer @Inka Schulz
-A20 U A-Knockout Blow @Zoltan Boros
-A32 C A-Speakeasy Server @Scott Murphy
-A37 C A-Case the Joint @Stella Spente
-A53 C A-Psionic Snoop @Marcela Medeiros
-A55 U A-Public Enemy @Dominik Mayer
-A60 C A-Sewer Crocodile @Milivoj Ćeran
-A74 C A-Deal Gone Bad @Mathias Kollros
-A75 C A-Demon's Due @Slawomir Maniak
-A81 U A-Graveyard Shift @Liiga Smilshkalne
-A84 C A-Incriminate @Kieran Yanner
-A87 C A-Midnight Assassin @Christina Davis
-A91 C A-Revel Ruiner @Christina Davis
-A98 U A-Vampire Scrivener @Bastien L. Deharme
-A106 C A-Exhibition Magician @Greg Staples
-A111 C A-Jackhammer @John Severin Brassell
-A118 U A-Pyre-Sledge Arsonist @Kekai Kotaki
-A119 C A-Ready to Rumble @Josu Hernaiz
-A120 C A-Riveteers Initiate @Svetlin Velinov
-A123 U A-Sizzling Soloist @Véronique Meignaud
-A139 C A-Capenna Express @Viko Menezes
-A149 C A-Glittermonger @Evyn Fong
-A150 C A-High-Rise Sawjack @Randy Vargas
-A153 C A-Most Wanted @Rémi Jacquot
-A157 C A-Social Climber @Carly Mazur
-A164 C A-Warm Welcome @Inka Schulz
-A173 U A-Cabaretti Charm @Steve Argyle
-A174 C A-Celestial Regulator @Mathias Kollros
-A176 C A-Civil Servant @Tony Foti
-A189 U A-Forge Boss @Igor Kieryluk
-A190 C A-Glamorous Outlaw @Maria Zolotukhina
-A201 C A-Masked Bandits @Micah Epstein
-A203 U A-Metropolis Angel @Lie Setiawan
-A204 U A-Mr. Orfeo, the Boulder @Daarken
-A212 U A-Queza, Augur of Agonies @Josh Hass
-A214 C A-Rakish Revelers @Alessandra Pisano
-A220 U A-Security Rhox @Lie Setiawan
-A221 C A-Shattered Seraph @Bastien L. Deharme
-A224 C A-Spara's Adjudicators @Aaron J. Riley
-A225 U A-Stimulus Package @Robin Olausson
-A226 U A-Syndicate Infiltrator @Mila Pesic
-A241 C A-Ominous Parcel @Joe Slucher
-A242 C A-Paragon of Modernity @Volkan Baǵa
+A-6 C A-Buy Your Silence @Tony Foti
+A-7 C A-Celebrity Fencer @Inka Schulz
+A-20 U A-Knockout Blow @Zoltan Boros
+A-32 C A-Speakeasy Server @Scott Murphy
+A-37 C A-Case the Joint @Stella Spente
+A-53 C A-Psionic Snoop @Marcela Medeiros
+A-55 U A-Public Enemy @Dominik Mayer
+A-60 C A-Sewer Crocodile @Milivoj Ćeran
+A-74 C A-Deal Gone Bad @Mathias Kollros
+A-75 C A-Demon's Due @Slawomir Maniak
+A-81 U A-Graveyard Shift @Liiga Smilshkalne
+A-84 C A-Incriminate @Kieran Yanner
+A-87 C A-Midnight Assassin @Christina Davis
+A-91 C A-Revel Ruiner @Christina Davis
+A-98 U A-Vampire Scrivener @Bastien L. Deharme
+A-106 C A-Exhibition Magician @Greg Staples
+A-111 C A-Jackhammer @John Severin Brassell
+A-118 U A-Pyre-Sledge Arsonist @Kekai Kotaki
+A-119 C A-Ready to Rumble @Josu Hernaiz
+A-120 C A-Riveteers Initiate @Svetlin Velinov
+A-123 U A-Sizzling Soloist @Véronique Meignaud
+A-139 C A-Capenna Express @Viko Menezes
+A-149 C A-Glittermonger @Evyn Fong
+A-150 C A-High-Rise Sawjack @Randy Vargas
+A-153 C A-Most Wanted @Rémi Jacquot
+A-157 C A-Social Climber @Carly Mazur
+A-164 C A-Warm Welcome @Inka Schulz
+A-173 U A-Cabaretti Charm @Steve Argyle
+A-174 C A-Celestial Regulator @Mathias Kollros
+A-176 C A-Civil Servant @Tony Foti
+A-189 U A-Forge Boss @Igor Kieryluk
+A-190 C A-Glamorous Outlaw @Maria Zolotukhina
+A-201 C A-Masked Bandits @Micah Epstein
+A-203 U A-Metropolis Angel @Lie Setiawan
+A-204 U A-Mr. Orfeo, the Boulder @Daarken
+A-212 U A-Queza, Augur of Agonies @Josh Hass
+A-214 C A-Rakish Revelers @Alessandra Pisano
+A-220 U A-Security Rhox @Lie Setiawan
+A-221 C A-Shattered Seraph @Bastien L. Deharme
+A-224 C A-Spara's Adjudicators @Aaron J. Riley
+A-225 U A-Stimulus Package @Robin Olausson
+A-226 U A-Syndicate Infiltrator @Mila Pesic
+A-241 C A-Ominous Parcel @Joe Slucher
+A-242 C A-Paragon of Modernity @Volkan Baǵa
 
 [lands]
 2 Plains|SNC|1
@@ -576,10 +575,10 @@ A242 C A-Paragon of Modernity @Volkan Baǵa
 11 g_4_4_rhino_warrior @Zoltan Boros
 12 gw_1_1_citizen @Maria Poliakova
 13 c_a_treasure_sac @Nadia Hurianova
-14 c_a_treasure_sac @Nadia Hurianova
-15 c_a_treasure_sac @Nadia Hurianova
-16 c_a_treasure_sac @Nadia Hurianova
-17 c_a_treasure_sac @Nadia Hurianova
+14 c_a_treasure_sac @Alex Stone
+15 c_a_treasure_sac @Minttu Hynninen
+16 c_a_treasure_sac @Brigitte Roka
+17 c_a_treasure_sac @Forrest Imel
 
 [other]
 1 copy @David Palumbo

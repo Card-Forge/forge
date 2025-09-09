@@ -1,0 +1,6 @@
+Name:Romantic Rendezvous
+ManaCost:1 R
+Types:Sorcery
+A:SP$ Discard | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBDraw | SpellDescription$ Discard a card, then draw two cards.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2
+Oracle:Discard a card, then draw two cards.

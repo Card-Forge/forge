@@ -477,6 +477,12 @@ public class Cost implements Serializable {
             return new CostReturn(splitStr[0], splitStr[1], description);
         }
 
+        if (parse.startsWith("ChooseCard<")) {
+            final String[] splitStr = abCostParse(parse, 3);
+            final String description = splitStr.length > 2 ? splitStr[2] : null;
+            return new CostReveal(splitStr[0], splitStr[1], description, "All");
+        }
+
         if (parse.startsWith("Reveal<")) {
             final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
@@ -615,8 +621,11 @@ public class Cost implements Serializable {
     }
 
     public final Cost copyWithDefinedMana(String manaCost) {
+        return copyWithDefinedMana(new ManaCost(new ManaCostParser(manaCost)));
+    }
+    public final Cost copyWithDefinedMana(ManaCost manaCost) {
         Cost toRet = copyWithNoMana();
-        toRet.costParts.add(new CostPartMana(new ManaCost(new ManaCostParser(manaCost)), null));
+        toRet.costParts.add(new CostPartMana(manaCost, null));
         toRet.cacheTapCost();
         return toRet;
     }
@@ -988,9 +997,9 @@ public class Cost implements Serializable {
                                 Integer counters = otherAmount - part.convertAmount();
                                 // the cost can turn positive if multiple Carth raise it
                                 if (counters < 0) {
-                                    costParts.add(new CostPutCounter(String.valueOf(counters *-1), CounterType.get(CounterEnumType.LOYALTY), part.getType(), part.getTypeDescription()));
+                                    costParts.add(new CostPutCounter(String.valueOf(counters *-1), CounterEnumType.LOYALTY, part.getType(), part.getTypeDescription()));
                                 } else {
-                                    costParts.add(new CostRemoveCounter(String.valueOf(counters), CounterType.get(CounterEnumType.LOYALTY), part.getType(), part.getTypeDescription(), Lists.newArrayList(ZoneType.Battlefield) , false));
+                                    costParts.add(new CostRemoveCounter(String.valueOf(counters), CounterEnumType.LOYALTY, part.getType(), part.getTypeDescription(), Lists.newArrayList(ZoneType.Battlefield) , false));
                                 }
                             } else {
                                 continue;

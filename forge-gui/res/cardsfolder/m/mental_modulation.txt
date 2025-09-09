@@ -1,0 +1,7 @@
+Name:Mental Modulation
+ManaCost:1 U
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | PlayerTurn$ You | EffectZone$ All | Description$ This spell costs {1} less to cast during your turn.
+A:SP$ Tap | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | SubAbility$ DBDraw | SpellDescription$ Tap target artifact or creature. Draw a card.
+SVar:DBDraw:DB$ Draw
+Oracle:This spell costs {1} less to cast during your turn.\nTap target artifact or creature.\nDraw a card.

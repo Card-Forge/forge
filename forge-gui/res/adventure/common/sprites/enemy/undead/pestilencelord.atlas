@@ -1,11 +1,11 @@
 pestilencelord.png
-size: 288,32
+size: 272,32
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none          
 Avatar
-  xy: 268, 10
-  size: 20, 22      
+  xy: 256, 0
+  size: 16, 16
 Idle 
   xy: 0, 0
   size: 32, 32      

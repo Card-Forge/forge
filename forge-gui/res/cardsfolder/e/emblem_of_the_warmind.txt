@@ -2,6 +2,6 @@ Name:Emblem of the Warmind
 ManaCost:1 R
 Types:Enchantment Aura
 K:Enchant:Creature.YouCtrl:creature you control
-SVar:AttachAILogic:Pump | TgtPrompt$ Select target you control
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste.
 Oracle:Enchant creature you control\nCreatures you control have haste.

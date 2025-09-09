@@ -77,7 +77,7 @@ public abstract class GameStage extends Stage {
     public static float maximumScrollDistance=1.5f;
     public static float minimumScrollDistance=0.3f;
 
-
+    private String extraAnnouncement = "";
 
     protected final Dialog dialog;
     protected Stage dialogStage;
@@ -135,7 +135,9 @@ public abstract class GameStage extends Stage {
         dialog.clearListeners();
         TextraButton ok = Controls.newTextButton("OK", this::hideDialog);
         ok.setVisible(false);
-        TypingLabel L = Controls.newTypingLabel("{GRADIENT=CYAN;WHITE;1;1}Strange magical energies flow within this place...{ENDGRADIENT}\nAll opponents get:\n" + effectData.getDescription());
+        TypingLabel L = Controls.newTypingLabel("{GRADIENT=CYAN;WHITE;1;1}" +
+                Forge.getLocalizer().getMessage("lblEffectDialogDescription") + "{ENDGRADIENT}\n" +
+                Forge.getLocalizer().getMessage("lblEffectDataHeader") + "\n" + effectData.getDescription());
         L.setWrap(true);
         L.setTypingListener(new TypingAdapter() {
             @Override
@@ -191,7 +193,7 @@ public abstract class GameStage extends Stage {
         showDialog();
     }
 
-    public void showDeckAwardDialog(String message, Deck deck) {
+    public void showDeckAwardDialog(String message, Deck deck, Runnable runnable) {
         dialog.getContentTable().clear();
         dialog.getButtonTable().clear();
         dialog.clearListeners();
@@ -236,7 +238,11 @@ public abstract class GameStage extends Stage {
         L.skipToTheEnd();
 
         dialog.getContentTable().add(L).width(250);
-        dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog)).width(240);
+        dialog.getButtonTable().add(Controls.newTextButton("OK", () -> {
+            hideDialog();
+            if (runnable != null)
+                runnable.run();
+        })).width(240);
         dialog.setKeepWithinStage(true);
         setDialogStage(GameHUD.getInstance());
         showDialog();
@@ -595,6 +601,9 @@ public abstract class GameStage extends Stage {
 
     public void enter() {
         stop();
+        if (!extraAnnouncement.isEmpty()) {
+            showImageDialog(extraAnnouncement, null, this::clearExtraAnnouncement);
+        }
     }
 
     public void leave() {
@@ -668,14 +677,14 @@ public abstract class GameStage extends Stage {
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
-                    showImageDialog(Current.generateDefeatMessage(), getDefeatBadge(),
-                            () -> FThreads.invokeInEdtNowOrLater(() -> Forge.setTransitionScreen(new CoverScreen(() -> {
-                                Forge.advFreezePlayerControls = false;
-                                WorldStage.getInstance().setPosition(new Vector2(poi.getPosition().x - 16f, poi.getPosition().y + 16f));
-                                WorldStage.getInstance().loadPOI(poi);
-                                WorldSave.getCurrentSave().autoSave();
-                                Forge.clearTransitionScreen();
-                            }, Forge.takeScreenshot()))));
+                showImageDialog(Current.generateDefeatMessage(), getDefeatBadge(),
+                    () -> FThreads.invokeInEdtNowOrLater(() -> Forge.setTransitionScreen(new CoverScreen(() -> {
+                        Forge.advFreezePlayerControls = false;
+                        WorldStage.getInstance().setPosition(new Vector2(poi.getPosition().x - 16f, poi.getPosition().y + 16f));
+                        WorldStage.getInstance().loadPOI(poi);
+                        WorldSave.getCurrentSave().autoSave();
+                        Forge.clearTransitionScreen();
+                    }, Forge.takeScreenshot()))));
                 }
             }, 1f);
         }//Spawn shouldn't be null
@@ -695,4 +704,11 @@ public abstract class GameStage extends Stage {
         return null;
     }
 
+    public void setExtraAnnouncement(String message) {
+        extraAnnouncement = message;
+    }
+
+    public void clearExtraAnnouncement() {
+        extraAnnouncement = "";
+    }
 }

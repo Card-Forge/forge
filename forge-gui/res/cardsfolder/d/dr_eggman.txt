@@ -1,0 +1,12 @@
+Name:Dr. Eggman
+ManaCost:2 U B R
+Types:Legendary Creature Human Scientist
+PT:3/6
+K:Flying
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, draw a card. Then each opponent faces a villainous choice — That player discards a card, or you may put a Construct, Robot, or Vehicle card from your hand onto the battlefield.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBVillainousChoice
+SVar:DBVillainousChoice:DB$ VillainousChoice | Defined$ Opponent | Choices$ DBDiscard,DBChangeZone
+SVar:DBDiscard:DB$ Discard | Defined$ Remembered | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Opponent discards a card.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Optional$ You | ChangeType$ Construct,Robot,Vehicle | ChangeNum$ 1 | SpellDescription$ You may put a Construct, Robot, or Vehicle card from your hand onto the battlefield.
+DeckHints:Type$Construct|Robot|Vehicle
+Oracle:Flying\nAt the beginning of your end step, draw a card. Then each opponent faces a villainous choice — That player discards a card, or you may put a Construct, Robot, or Vehicle card from your hand onto the battlefield.

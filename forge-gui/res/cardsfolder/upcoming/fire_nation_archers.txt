@@ -1,0 +1,8 @@
+Name:Fire Nation Archers
+ManaCost:3 R
+Types:Creature Human Archer
+PT:3/4
+K:Reach
+A:AB$ DealDamage | Cost$ 5 | NumDmg$ 2 | Defined$ Player.Opponent | SubAbility$ DBToken | SpellDescription$ This creature deals 2 damage to each opponent. Create a 2/2 red Soldier creature token.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_2_2_soldier | TokenOwner$ You
+Oracle:Reach\n{5}: This creature deals 2 damage to each opponent. Create a 2/2 red Soldier creature token.

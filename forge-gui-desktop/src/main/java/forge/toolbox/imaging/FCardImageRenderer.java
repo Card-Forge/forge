@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import forge.ImageCache;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.CardRarity;
@@ -287,6 +288,11 @@ public class FCardImageRenderer {
         //determine colors for borders
         final List<DetailColors> borderColors = CardDetailUtil.getBorderColors(state, true);
         Color[] colors = fillColorBackground(g, borderColors, x, y, w, h, BLACK_BORDER_THICKNESS);
+        if (state.isEnchantment()) {
+            //draw fake nyx effect
+            g.drawImage(state.getColors().hasWhite() && state.getColors().countColors() == 1 ?
+                    ImageCache.getInvertedStarsImage() :  ImageCache.getStarsImage(), x, y, w, h, null);
+        }
 
         x += OUTER_BORDER_THICKNESS;
         y += OUTER_BORDER_THICKNESS;
@@ -294,7 +300,7 @@ public class FCardImageRenderer {
         int headerHeight = NAME_SIZE + 2 * HEADER_PADDING;
         int typeBoxHeight = TYPE_SIZE + 2 * TYPE_PADDING;
         int ptBoxHeight = 0;
-        if (state.isCreature() || state.isPlaneswalker() | state.isBattle() || state.isVehicle()) {
+        if (state.isCreature() || state.isPlaneswalker() | state.isBattle() || state.hasPrintedPT()) {
             //if P/T box needed, make room for it
             ptBoxHeight = headerHeight;
         }
@@ -682,7 +688,6 @@ public class FCardImageRenderer {
             new Rectangle(x, y, w, h), NAME_FONT, NAME_SIZE);
     }
 
-
     private static void drawArt(Graphics2D g, Color[] colors, int x, int y, int w, int h, BufferedImage art) {
         if (art != null) {
             int artWidth = art.getWidth();
@@ -840,6 +845,14 @@ public class FCardImageRenderer {
                 pieces.add("/");
                 pieces.add(String.valueOf(state.getToughness()));
             }
+        }
+        else if (state.isSpaceCraft()) {
+            Color [] scColor = { Color.BLACK };
+            colors = scColor;
+            TEXT_COLOR = Color.WHITE;
+            pieces.add(String.valueOf(state.getPower()));
+            pieces.add("/");
+            pieces.add(String.valueOf(state.getToughness()));
         }
         else if (state.isPlaneswalker()) {
             Color [] pwColor = { Color.BLACK };

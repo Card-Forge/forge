@@ -153,10 +153,3 @@ ScryfallCode=STH
 141 R Sword of the Chosen @Adam Rex
 142 R Volrath's Laboratory @Brom
 143 R Volrath's Stronghold @Kev Walker
-
-[tokens]
-hornet
-c_1_1_sliver
-b_1_1_rat
-r_1_1_goblin
-g_1_1_spike

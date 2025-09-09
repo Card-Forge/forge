@@ -1,0 +1,10 @@
+Name:The Endstone
+ManaCost:7
+Types:Legendary Artifact
+T:Mode$ LandPlayed | ValidCard$ Land.YouCtrl | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you play a land or cast a spell, draw a card.
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever you play a land or cast a spell, draw a card.
+SVar:TrigDraw:DB$ Draw
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSetLife | TriggerDescription$ At the beginning of your end step, your life total becomes half your starting life total, rounded up.
+SVar:TrigSetLife:DB$ SetLife | Defined$ You | LifeAmount$ X
+SVar:X:Count$YourStartingLife/HalfUp
+Oracle:Whenever you play a land or cast a spell, draw a card.\nAt the beginning of your end step, your life total becomes half your starting life total, rounded up.

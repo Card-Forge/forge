@@ -32,11 +32,8 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.function.Predicate;
 
 /**
@@ -59,6 +56,13 @@ public enum DeckFormat {
         public String getContraptionDeckConformanceProblem(Deck deck) {
             //Limited contraption decks have no restrictions.
             return null;
+        }
+
+        @Override
+        public int getExtraSectionMaxCopies(DeckSection section) {
+            if(section == DeckSection.Attractions || section == DeckSection.Contraptions)
+                return Integer.MAX_VALUE;
+            return super.getExtraSectionMaxCopies(section);
         }
     },
     Commander      ( Range.is(99),                         Range.of(0, 10), 1, null,
@@ -108,7 +112,13 @@ public enum DeckFormat {
         }
     },
     PlanarConquest ( Range.of(40, Integer.MAX_VALUE), Range.is(0), 1),
-    Adventure      ( Range.of(40, Integer.MAX_VALUE), Range.of(0, 15), 4),
+    Adventure      ( Range.of(40, Integer.MAX_VALUE), Range.of(0, Integer.MAX_VALUE), 4) {
+        @Override
+        public boolean allowCustomCards() {
+            //If the player has them, may as well allow them.
+            return true;
+        }
+    },
     Vanguard       ( Range.of(60, Integer.MAX_VALUE), Range.is(0), 4),
     Planechase     ( Range.of(60, Integer.MAX_VALUE), Range.is(0), 4),
     Archenemy      ( Range.of(60, Integer.MAX_VALUE), Range.is(0), 4),
@@ -191,10 +201,55 @@ public enum DeckFormat {
     }
 
     /**
-     * @return the maxCardCopies
+     * @return the default maximum copies of a card in this format.
      */
     public int getMaxCardCopies() {
         return maxCardCopies;
+    }
+
+    /**
+     * @return the maximum copies of the specified card allowed in this format. This does not include ban or restricted lists.
+     */
+    public int getMaxCardCopies(PaperCard card) {
+        if(canHaveSpecificNumberInDeck(card) != null)
+            return canHaveSpecificNumberInDeck(card);
+        else if (canHaveAnyNumberOf(card))
+            return Integer.MAX_VALUE;
+        else if (card.getRules().isVariant()) {
+            DeckSection section = DeckSection.matchingSection(card);
+            if(section == DeckSection.Planes && card.getRules().getType().isPhenomenon())
+                return 2; //These are two-of.
+            return getExtraSectionMaxCopies(section);
+        }
+        else
+            return this.getMaxCardCopies();
+    }
+
+    public int getExtraSectionMaxCopies(DeckSection section) {
+        return switch (section) {
+            case Avatar, Commander, Planes, Dungeon, Attractions, Contraptions -> 1;
+            case Schemes -> 2;
+            case Conspiracy -> Integer.MAX_VALUE;
+            default -> maxCardCopies;
+        };
+    }
+
+    /**
+     * @return the deck sections used by most decks in this format.
+     */
+    public EnumSet<DeckSection> getPrimaryDeckSections() {
+        if(this == Planechase)
+            return EnumSet.of(DeckSection.Planes);
+        if(this == Archenemy)
+            return EnumSet.of(DeckSection.Schemes);
+        if(this == Vanguard)
+            return EnumSet.of(DeckSection.Avatar);
+        EnumSet<DeckSection> out = EnumSet.of(DeckSection.Main);
+        if(sideRange == null || sideRange.getMaximum() > 0)
+            out.add(DeckSection.Sideboard);
+        if(hasCommander())
+            out.add(DeckSection.Commander);
+        return out;
     }
 
     public String getDeckConformanceProblem(Deck deck) {
@@ -353,7 +408,7 @@ public enum DeckFormat {
         // Should group all cards by name, so that different editions of same card are really counted as the same card
         for (final Entry<String, Integer> cp : Aggregates.groupSumBy(allCards, pc -> StaticData.instance().getCommonCards().getName(pc.getName(), true))) {
             IPaperCard simpleCard = StaticData.instance().getCommonCards().getCard(cp.getKey());
-            if (simpleCard != null && simpleCard.getRules().isCustom() && !StaticData.instance().allowCustomCardsInDecksConformance())
+            if (simpleCard != null && simpleCard.getRules().isCustom() && !allowCustomCards())
                 return TextUtil.concatWithSpace("contains a Custom Card:", cp.getKey(), "\nPlease Enable Custom Cards in Forge Preferences to use this deck.");
             // Might cause issues since it ignores "Special" Cards
             if (simpleCard == null) {
@@ -484,6 +539,10 @@ public enum DeckFormat {
         // Not needed by default
     }
 
+    public boolean allowCustomCards() {
+        return StaticData.instance().allowCustomCardsInDecksConformance();
+    }
+
     public boolean isLegalCard(PaperCard pc) {
         if (cardPoolFilter == null) {
             if (paperCardPoolFilter == null) {
@@ -498,13 +557,13 @@ public enum DeckFormat {
         if (cardPoolFilter != null && !cardPoolFilter.test(rules)) {
             return false;
         }
-        if (this.equals(DeckFormat.Oathbreaker)) {
+        if (this == DeckFormat.Oathbreaker) {
             return rules.canBeOathbreaker();
         }
-        if (this.equals(DeckFormat.Brawl)) {
+        if (this == DeckFormat.Brawl) {
             return rules.canBeBrawlCommander();
         }
-        if (this.equals(DeckFormat.TinyLeaders)) {
+        if (this == DeckFormat.TinyLeaders) {
             return rules.canBeTinyLeadersCommander();
         }
         return rules.canBeCommander();
@@ -553,6 +612,8 @@ public enum DeckFormat {
         for (final PaperCard p : commanders) {
             cmdCI |= p.getRules().getColorIdentity().getColor();
         }
+        if(cmdCI == MagicColor.ALL_COLORS)
+            return x -> true;
         Predicate<CardRules> predicate = CardRulesPredicates.hasColorIdentity(cmdCI);
         if (commanders.size() == 1 && commanders.get(0).getRules().canBePartnerCommander()) {
             // Also show available partners a commander can have a partner.

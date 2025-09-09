@@ -1,0 +1,10 @@
+Name:Shadow the Hedgehog
+ManaCost:B B R R
+Types:Legendary Creature Hedgehog Mercenary
+PT:4/2
+K:Haste
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Creature.Other+YouCtrl+withFlash,Creature.Other+YouCtrl+withHaste | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME or another creature you control with flash or haste dies, draw a card.
+SVar:TrigDraw:DB$ Draw
+S:Mode$ Continuous | Affected$ Card.wasCastByYou+CastSa Spell.ManaFromArtifact | AffectedZone$ Stack | AddKeyword$ Split second | Description$ Chaos Control — Each spell you cast has split second if mana from an artifact was spent to cast it. (As long as it's on the stack, players can't cast spells or activate abilities that aren't mana abilities.)
+DeckHints:Ability$Flash|Haste & Type$Artifact
+Oracle:Haste\nWhenever Shadow the Hedgehog or another creature you control with flash or haste dies, draw a card.\nChaos Control — Each spell you cast has split second if mana from an artifact was spent to cast it. (As long as it's on the stack, players can't cast spells or activate abilities that aren't mana abilities.)

@@ -107,8 +107,7 @@ public class CostPartMana extends CostPart {
 
     @Override
     public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
-        // For now, this will always return true. But this should probably be
-        // checked at some point
+        // For now, always return true. But this should probably be checked at some point
         return true;
     }
 

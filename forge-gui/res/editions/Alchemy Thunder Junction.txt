@@ -37,6 +37,3 @@ ScryfallCode=YOTJ
 28 R Vona de Iedo, the Antifex @Fajareka Setiawan
 29 U Weave the Nightmare @Wayne Wu
 30 U Runecarved Obelisk @Jorge Jacinto
-
-[tokens]
-w_x_x_avatar

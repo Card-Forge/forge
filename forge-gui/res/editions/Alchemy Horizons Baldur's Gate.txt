@@ -13,7 +13,7 @@ ScryfallCode=HBG
 1 R Klement, Novice Acolyte @Maria Poliakova
 2 R Lae'zel, Githyanki Warrior @John Stanko
 3 U Lulu, Forgetful Hollyphant @Jakob Eirich
-4 U Rasaad, Monk of Selûne @Dan Scott
+4 U Rasaad, Monk of Selûne @Dan Murayama Scott
 5 U Alora, Rogue Companion @Aaron Miller
 6 M Gale, Conduit of the Arcane @Cristi Balanescu
 7 R Imoen, Trickster Friend @Alix Branwyn
@@ -276,58 +276,56 @@ ScryfallCode=HBG
 264 C Prophetic Prism @Diego Gisbert
 265 C Spiked Pit Trap @Deruchenko Alexander
 266 R Baldur's Gate @Titus Lunter
-267 L Plains @Bruce Brenneise
-268 L Plains @Leanna Crossan
-269 L Plains @Titus Lunter
-270 L Plains @Emmanuel Shiu
-271 L Island @Bruce Brenneise
-272 L Island @Piotr Dura
-273 L Island @James Paick
-274 L Island @Sam White
-275 L Swamp @Piotr Dura
-276 L Swamp @Logan Feliciano
-277 L Swamp @Grady Frederick
-278 L Swamp @Sam White
-279 L Mountain @Matt Gaser
-280 L Mountain @Lucas Graciano
-281 L Mountain @Muhammad Firdaus
-282 L Mountain @Sam White
-283 L Forest @Bruce Brenneise
-284 L Forest @Muhammad Firdaus
-285 L Forest @Lucas Graciano
-286 L Forest @Julian Kok Joon Wen
+289 L Plains @Bruce Brenneise
+290 L Plains @Leanna Crossan
+291 L Plains @Titus Lunter
+292 L Plains @Emmanuel Shiu
+293 L Island @Bruce Brenneise
+294 L Island @Piotr Dura
+295 L Island @James Paick
+296 L Island @Sam White
+297 L Swamp @Piotr Dura
+298 L Swamp @Logan Feliciano
+299 L Swamp @Grady Frederick
+300 L Swamp @Sam White
+301 L Mountain @Matt Gaser
+302 L Mountain @Lucas Graciano
+303 L Mountain @Muhammad Firdaus
+304 L Mountain @Sam White
+305 L Forest @Bruce Brenneise
+306 L Forest @Muhammad Firdaus
+307 L Forest @Lucas Graciano
+308 L Forest @Julian Kok Joon Wen
 
 [rebalanced]
-A85 C A-Blessed Hippogriff @Leanna Crossan
-A87 C A-Dawnbringer Cleric @Lie Setiawan
-A104 C A-Steadfast Unicorn @John Thacker
-A117 C A-Dragonborn Looter @Julio Reyna
-A120 U A-Goggles of Night @Forrest Imel
-A125 U A-Kenku Artificer @Dave Greco
-A127 U A-Lapis Orb of Dragonkind @Olena Richards
-A128 C A-Pseudodragon Familiar @Campbell White
-A136 C A-You Come to a River @Viko Menezes
-A138 C A-Young Blue Dragon @Tuan Duong Chu
-A143 C A-Baleful Beholder @Lars Grant-West
-A154 C A-Eyes of the Beholder @Kari Christensen
-A160 C A-Guildsworn Prowler @Fariba Khamseh
-A163 C A-Manticore @Billy Christian
-A166 C A-Sepulcher Ghoul @Jason A. Engle
-A168 U A-Sigil of Myrkul @David Astruga
-A177 U A-Carnelian Orb of Dragonkind @Olena Richards
-A197 C A-Young Red Dragon @Adam Vehige
-A203 C A-Circle of the Land Druid @Alexandre Honoré
-A208 C A-Druidic Ritual @Vincent Christiaens
-A209 R A-Earthquake Dragon @Johan Grenier
-A210 U A-Emerald Dragon @Diego Gisbert
-A215 U A-Jade Orb of Dragonkind @Olena Richards
-A217 R A-Monster Manual @David Gaillet
-A223 U A-Split the Spoils @Edgar Sánchez Hidalgo
-A232 R A-Baba Lysaga, Night Witch @Slawomir Maniak
-A239 U A-Krydle of Baldur's Gate @Bryan Sola
-A243 M A-Minsc & Boo, Timeless Heroes @Andreas Zafiratos
-A259 C A-Lantern of Revealing @Eytan Zana
-A262 U A-Navigation Orb @Robin Olausson
+A-85 C A-Blessed Hippogriff @Leanna Crossan
+A-87 C A-Dawnbringer Cleric @Lie Setiawan
+A-104 C A-Steadfast Unicorn @John Thacker
+A-117 C A-Dragonborn Looter @Julio Reyna
+A-120 U A-Goggles of Night @Forrest Imel
+A-125 U A-Kenku Artificer @Dave Greco
+A-127 U A-Lapis Orb of Dragonkind @Olena Richards
+A-128 C A-Pseudodragon Familiar @Campbell White
+A-136 C A-You Come to a River @Viko Menezes
+A-138 C A-Young Blue Dragon @Tuan Duong Chu
+A-143 C A-Baleful Beholder @Lars Grant-West
+A-154 C A-Eyes of the Beholder @Kari Christensen
+A-160 C A-Guildsworn Prowler @Fariba Khamseh
+A-163 C A-Manticore @Billy Christian
+A-166 C A-Sepulcher Ghoul @Jason A. Engle
+A-168 U A-Sigil of Myrkul @David Astruga
+A-177 U A-Carnelian Orb of Dragonkind @Olena Richards
+A-197 C A-Young Red Dragon @Adam Vehige
+A-203 C A-Circle of the Land Druid @Alexandre Honoré
+A-208 C A-Druidic Ritual @Vincent Christiaens
+A-209 R A-Earthquake Dragon @Johan Grenier
+A-210 U A-Emerald Dragon @Diego Gisbert
+A-215 U A-Jade Orb of Dragonkind @Olena Richards
+A-223 U A-Split the Spoils @Edgar Sánchez Hidalgo
+A-239 U A-Krydle of Baldur's Gate @Bryan Sola
+A-243 M A-Minsc & Boo, Timeless Heroes @Andreas Zafiratos
+A-259 C A-Lantern of Revealing @Eytan Zana
+A-262 U A-Navigation Orb @Robin Olausson
 
 [conjured]
 45a R Hag of Ceaseless Torment @Konstantin Porubov
@@ -339,4 +337,21 @@ A262 U A-Navigation Orb @Robin Olausson
 45g R Hag of Scoured Thoughts @Konstantin Porubov
 45h R Hag of Syphoned Breath @Konstantin Porubov
 45i R Hag of Twisted Visions @Konstantin Porubov
-
+902 U Archipelagore @Svetlin Velinov
+903 U Junk Winder @Campbell White
+904 C Moat Piranhas @Rudy Siswanto
+905 C Mystic Skyfish @Alayna Danner
+906 R Nadir Kraken @Dan Murayama Scott
+907 R Nezahal, Primal Tide @Sam Burley
+908 U Pouncing Shoreshark @Dan Murayama Scott
+909 R Pursued Whale @Jonathan Kuo
+910 C Riptide Turtle @Brian Valeza
+911 U Ruin Crab @Simon Dominic
+912 R Sea-Dasher Octopus @Chris Seaman
+913 U Sigiled Starfish @Nils Hamm
+914 C Spined Megalodon @Daniel Ljunggren
+915 U Stinging Lionfish @Christopher Burdett
+916 R Voracious Greatshark @Mathias Kollros
+926 R Lightning Bolt @Irina Nordsol
+927 C Naturalize @Tim Hildebrandt
+928 C Plummet @Alix Branwyn

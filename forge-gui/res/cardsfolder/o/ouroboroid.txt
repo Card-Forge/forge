@@ -1,0 +1,9 @@
+Name:Ouroboroid
+ManaCost:2 G G
+Types:Creature Plant Wurm
+PT:1/3
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ At the beginning of combat on your turn, put X +1/+1 counters on each creature you control, where X is this creature's power.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ X
+SVar:X:Count$CardPower
+DeckHas:Ability$Counters
+Oracle:At the beginning of combat on your turn, put X +1/+1 counters on each creature you control, where X is this creature's power.

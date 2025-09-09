@@ -6,16 +6,16 @@ import com.badlogic.gdx.utils.Array;
 import forge.Forge;
 import forge.StaticData;
 import forge.adventure.character.PlayerSprite;
-import forge.adventure.data.BiomeData;
-import forge.adventure.data.EnemyData;
-import forge.adventure.data.PointOfInterestData;
-import forge.adventure.data.WorldData;
+import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterest;
+import forge.adventure.scene.InventoryScene;
+import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.Current;
 import forge.adventure.util.Paths;
 import forge.adventure.world.WorldSave;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
+import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.game.GameType;
@@ -89,8 +89,9 @@ public class ConsoleCommandInterpreter {
             return "Command not found. Available commands:\n" + String.join(" ", Arrays.copyOfRange(words, 0, i)) + "\n" + String.join("\n", currentCommand.children.keySet());
         }
         String[] parameters = Arrays.copyOfRange(words, i, words.length);
-        for (int j = 0; j < parameters.length; j++)
-            parameters[j] = parameters[j].replaceAll("[\"']", "");
+        // this removes apostrophe...
+        /*for (int j = 0; j < parameters.length; j++)
+            parameters[j] = parameters[j].replaceAll("[\"']", "");*/
         return currentCommand.function.apply(parameters);
     }
 
@@ -131,7 +132,7 @@ public class ConsoleCommandInterpreter {
                 WorldStage.getInstance().player.playEffect(Paths.EFFECT_TELEPORT, 10);
                 return "teleport to (" + s[0] + "," + s[1] + ")";
             } catch (Exception e) {
-                return "Exception occured, Invalid input";
+                return "Exception occurred, Invalid input";
             }
         });
         registerCommand(new String[]{"teleport", "to", "poi"}, s -> {
@@ -168,15 +169,14 @@ public class ConsoleCommandInterpreter {
             return "Added " + amount + " gold";
         });
         registerCommand(new String[]{"give", "quest"}, s -> {
-            if (s.length<1) return "Command needs 1 parameter: QuestID";
+            if (s.length < 1) return "Command needs 1 parameter: QuestID";
             int ID;
-            try{
-                ID =Integer.parseInt(s[0]);
+            try {
+                ID = Integer.parseInt(s[0]);
+            } catch (Exception e) {
+                return "Can not convert " + s[0] + " to number";
             }
-            catch (Exception e){
-                return "Can not convert " +s[0]+" to number";
-            }
-            Current.player().addQuest(ID);
+            Current.player().addQuest(ID, false);
             return "Quest generated";
         });
         registerCommand(new String[]{"give", "shards"}, s -> {
@@ -214,13 +214,13 @@ public class ConsoleCommandInterpreter {
             if (s.length < 1) return "Command needs 1 parameter: Card name.";
             PaperCard card = StaticData.instance().fetchCard(s[0]);
             if (card == null) return "Cannot find card: " + s[0];
-            if(s.length >= 2) {
+            if (s.length >= 2) {
                 try {
                     int amount = Integer.parseInt(s[1]);
                     Current.player().addCard(card, amount);
                     return String.format("Added %d cards: %s", amount, card.getName());
+                } catch (NumberFormatException ignored) {
                 }
-                catch(NumberFormatException ignored) {}
             }
             Current.player().addCard(card);
             return "Added card: " + card.getName();
@@ -229,13 +229,13 @@ public class ConsoleCommandInterpreter {
             if (s.length < 1) return "Command needs 1 parameter: Card name.";
             PaperCard card = StaticData.instance().fetchCard(s[0]);
             if (card == null) return "Cannot find card: " + s[0];
-            if(s.length >= 2) {
+            if (s.length >= 2) {
                 try {
                     int amount = Integer.parseInt(s[1]);
                     Current.player().addCard(card.getNoSellVersion(), amount);
                     return String.format("Added %d cards: %s", amount, card.getName());
+                } catch (NumberFormatException ignored) {
                 }
-                catch(NumberFormatException ignored) {}
             }
             Current.player().addCard(card.getNoSellVersion());
             return "Added card: " + card.getName();
@@ -245,22 +245,70 @@ public class ConsoleCommandInterpreter {
             CardEdition edition = StaticData.instance().getCardEdition(s[0]);
             if (edition == null) return "Cannot find edition: " + s[0];
             CardEdition.EditionEntry cis = edition.getCardFromCollectorNumber(s[1]);
-            if (cis == null) return String.format("Set '%s' does not have a card with collector number '%s'.", edition.getName(), s[1]);
+            if (cis == null)
+                return String.format("Set '%s' does not have a card with collector number '%s'.", edition.getName(), s[1]);
             PaperCard card = StaticData.instance().fetchCard(cis.name(), edition.getCode(), cis.collectorNumber());
-            if(card == null) {
+            if (card == null) {
                 //Found in the set, not supported.
                 return String.format("Failed to fetch (%s, %s, %s) - Not currently supported.", cis.name(), edition.getCode(), cis.collectorNumber());
             }
-            if(s.length >= 3) {
+            if (s.length >= 3) {
                 try {
                     int amount = Integer.parseInt(s[2]);
                     Current.player().addCard(card, amount);
                     return String.format("Added %d cards: %s", amount, card.getName());
+                } catch (NumberFormatException ignored) {
                 }
-                catch(NumberFormatException ignored) {}
             }
             Current.player().addCard(card);
-            return "Added card: "+ card.getName();
+            return "Added card: " + card.getName();
+        });
+        registerCommand(new String[]{"give", "set"}, s -> {
+            if (s.length < 1) return "Command needs 1 parameter: Edition code.";
+            CardEdition edition = StaticData.instance().getCardEdition(s[0]);
+            if (edition == null) return "Cannot find edition: " + s[0];
+
+            for (CardEdition.EditionEntry entry : edition.getObtainableCards()) {
+                PaperCard card = StaticData.instance().fetchCard(entry.name(), edition.getCode(), entry.collectorNumber());
+
+                if (card != null) {
+                    Current.player().addCard(card.getNoSellVersion(), 4);
+                } else {
+                    System.out.println("Card " + entry.name() + " (" + entry.collectorNumber() + ") does not exist.");
+                }
+            }
+
+            return "Added all cards from: " + edition.getCode();
+        });
+        registerCommand(new String[]{"give", "boosters"}, s -> {
+            if (s.length < 1)
+                return "Command needs at least 1 parameter: Edition code.";
+            CardEdition edition = StaticData.instance().getCardEdition(s[0]);
+            if (edition == null)
+                return "Cannot find edition: " + s[0];
+            if (!edition.hasBoosterTemplate())
+                return edition.getCode() + " doesn't have a booster template.";
+
+            int amount = 1;
+            if (s.length >= 2) {
+                try {
+                    amount = Integer.parseInt(s[1]);
+                } catch (NumberFormatException ignored) {
+                }
+            }
+
+            for (int i = 0; i < amount; i++) {
+                Current.player().addBooster(AdventureEventController.instance().generateBooster(edition.getCode()));
+            }
+
+            return "Added " + amount + " " + edition.getCode() + " booster(s)";
+        });
+        registerCommand(new String[]{"clearnosell"}, s -> {
+            CardPool cards = Current.player().getCards();
+            for (PaperCard c : cards.getFilteredPool(c -> c.getMarkedFlags().noSellValue).toFlatList()) {
+                cards.remove(c);
+            }
+            return "Removed all no sell flagged cards.";
         });
         registerCommand(new String[]{"give", "item"}, s -> {
             if (s.length < 1) return "Command needs 1 parameter: Item name.";
@@ -331,13 +379,13 @@ public class ConsoleCommandInterpreter {
                 Deck D = E.generateDeck(Current.player().isFantasyMode(), Current.player().isUsingCustomDeck() || Current.player().isHardorInsaneDifficulty());
                 DeckProxy DP = new DeckProxy(D, "Constructed", GameType.Constructed, null);
                 System.out.printf("%s Colors: %s | Deck Colors: %s (%s)%s\n", E.name, E.colors, DP.getColorIdentity().toEnumSet().toString(), DP.getName()
-                , E.boss ? " - BOSS" : "");
+                        , E.boss ? " - BOSS" : "");
             }
             return "Enemy color Identity dumped to stdout.";
         });
         registerCommand(new String[]{"heal", "amount"}, s -> {
             if (s.length < 1) return "Command needs 1 parameter: Amount";
-            int N = 0;
+            int N;
             try {
                 N = Integer.parseInt(s[0]);
             } catch (Exception e) {
@@ -349,7 +397,7 @@ public class ConsoleCommandInterpreter {
         });
         registerCommand(new String[]{"heal", "percent"}, s -> {
             if (s.length < 1) return "Command needs 1 parameter: Amount";
-            float value = 0;
+            float value;
             try {
                 value = Float.parseFloat(s[0]);
             } catch (Exception e) {
@@ -376,7 +424,7 @@ public class ConsoleCommandInterpreter {
             Current.player().addShards(value);
             return "Player now has " + Current.player().getShards() + " shards";
         });
-        registerCommand(new String[]{"debug","map"}, s -> {
+        registerCommand(new String[]{"debug", "map"}, s -> {
             GameHUD.getInstance().setDebug(true);
             return "Debug map ON";
         });
@@ -386,17 +434,21 @@ public class ConsoleCommandInterpreter {
             return "Debug  OFF";
         });
         registerCommand(new String[]{"remove", "enemy", "all"}, s -> {
-            //TODO: Remove all overworld enemies if not inside a map.
             if (!MapStage.getInstance().isInMap()) {
-                return "Only supported for PoI";
+                WorldStage ws = WorldStage.getInstance();
+                int enemiesCount = ws.enemies.size();
+                for (int i = 0; i < enemiesCount; i++) {
+                    ws.removeNearestEnemy();
+                }
+            } else {
+                MapStage.getInstance().removeAllEnemies();
             }
-            MapStage.getInstance().removeAllEnemies();
-            return "removed all enemies";
+            return "Removed all enemies";
         });
 
         registerCommand(new String[]{"hide"}, s -> {
             if (s.length < 1) return "Command needs 1 parameter: Amount";
-            float value = 0;
+            float value;
             try {
                 value = Float.parseFloat(s[0]);
             } catch (Exception e) {
@@ -408,7 +460,7 @@ public class ConsoleCommandInterpreter {
 
         registerCommand(new String[]{"fly"}, s -> {
             if (s.length < 1) return "Command needs 1 parameter: Amount";
-            float value = 0;
+            float value;
             try {
                 value = Float.parseFloat(s[0]);
             } catch (Exception e) {
@@ -419,7 +471,7 @@ public class ConsoleCommandInterpreter {
         });
         registerCommand(new String[]{"sprint"}, s -> {
             if (s.length < 1) return "Command needs 1 parameter: Amount";
-            float value = 0;
+            float value;
             try {
                 value = Float.parseFloat(s[0]);
             } catch (Exception e) {
@@ -444,6 +496,19 @@ public class ConsoleCommandInterpreter {
                 return "Only supported for PoI";
             MapStage.getInstance().deleteObject(id);
             return "Removed enemy " + s[0];
+        });
+        // this is for test purposes unless you want to crack your items
+        registerCommand(new String[]{"crack"}, s -> {
+            ItemData itemData = Current.player().getRandomEquippedItem();
+            String value = Current.player().isHardorInsaneDifficulty() ? "items" : "armor";
+            String message = "Ok, no equipped " + value + " to crack... :)";
+            if (itemData != null) {
+                itemData.isCracked = true;
+                Current.player().equip(itemData); //Unequipped the itemData
+                InventoryScene.instance().clearItemDescription();
+                message = itemData.name + " " + Forge.getLocalizer().getMessage("lblCracked");
+            }
+            return message;
         });
     }
 }

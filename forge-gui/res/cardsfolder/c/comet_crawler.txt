@@ -1,0 +1,10 @@
+Name:Comet Crawler
+ManaCost:2 B
+Types:Creature Insect Horror
+PT:2/3
+K:Lifelink
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever this creature attacks, you may sacrifice another creature or artifact. If you do, this creature gets +2/+0 until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ Sac<1/Artifact.Other;Creature.Other/another creature or artifact> | Defined$ Self | NumAtt$ +2
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Sacrifice
+Oracle:Lifelink\nWhenever this creature attacks, you may sacrifice another creature or artifact. If you do, this creature gets +2/+0 until end of turn.

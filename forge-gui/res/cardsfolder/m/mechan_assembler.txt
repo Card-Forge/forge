@@ -1,0 +1,8 @@
+Name:Mechan Assembler
+ManaCost:4 U
+Types:Artifact Creature Robot Artificer
+PT:4/4
+T:Mode$ ChangesZone | ValidCard$ Artifact.Other+YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigToken | ActivationLimit$ 1 | TriggerDescription$ Whenever another artifact you control enters, create a 2/2 colorless Robot artifact creature token. This ability triggers only once each turn.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_2_2_a_robot
+DeckHas:Ability$Token
+Oracle:Whenever another artifact you control enters, create a 2/2 colorless Robot artifact creature token. This ability triggers only once each turn.

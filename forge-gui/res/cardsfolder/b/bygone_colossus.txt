@@ -1,0 +1,6 @@
+Name:Bygone Colossus
+ManaCost:9
+Types:Artifact Creature Robot Giant
+PT:9/9
+K:Warp:3
+Oracle:Warp {3} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)

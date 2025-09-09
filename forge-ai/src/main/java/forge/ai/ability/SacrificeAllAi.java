@@ -1,53 +1,37 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
-import forge.game.card.Card;
-import forge.game.cost.Cost;
+import forge.ai.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.util.MyRandom;
 
 public class SacrificeAllAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the expected targets could be
-        final Cost abCost = sa.getPayCosts();
-        final Card source = sa.getHostCard();
         final String logic = sa.getParamOrDefault("AILogic", "");
 
-        if (abCost != null) {
-            // AI currently disabled for some costs
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
-                return false;
-            }
-        }
-        
         if (logic.equals("HellionEruption")) {
             if (ai.getCreaturesInPlay().size() < 5 || ai.getCreaturesInPlay().size() * 150 < ComputerUtilCard.evaluateCreatureList(ai.getCreaturesInPlay())) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         } else if (logic.equals("MadSarkhanDragon")) {
             return SpecialCardAi.SarkhanTheMad.considerMakeDragon(ai, sa);
         }
 
-        if (!DestroyAllAi.doMassRemovalLogic(ai, sa)) {
-            return false;
+        AiAbilityDecision decision = DestroyAllAi.doMassRemovalLogic(ai, sa);
+        if (!decision.willingToPlay()) {
+            return decision;
         }
 
-        // prevent run-away activations - first time will always return true
-        boolean chance = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
-
-        return ((MyRandom.getRandom().nextFloat() < .9667) && chance);
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         //TODO: Add checks for bad outcome
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+
     }
 }

@@ -1,0 +1,9 @@
+Name:Cloudsculpt Technician
+ManaCost:2 U
+Types:Creature Jellyfish Artificer
+PT:1/4
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | IsPresent$ Artifact.YouCtrl | Description$ As long as you control an artifact, this creature gets +1/+0.
+SVar:BuffedBy:Artifact
+DeckHints:Type$Artifact
+Oracle:Flying\nAs long as you control an artifact, this creature gets +1/+0.

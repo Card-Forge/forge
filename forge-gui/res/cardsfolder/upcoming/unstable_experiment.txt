@@ -1,0 +1,6 @@
+Name:Unstable Experiment
+ManaCost:1 U
+Types:Instant
+A:SP$ Draw | ValidTgts$ Player | SubAbility$ DBConnive | SpellDescription$ Target player draws a card, then up to one target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+SVar:DBConnive:DB$ Connive | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to one target creature you control | TargetMin$ 0 | TargetMax$ 1
+Oracle:Target player draws a card, then up to one target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)

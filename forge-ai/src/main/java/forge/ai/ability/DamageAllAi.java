@@ -5,38 +5,24 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
-import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 
 import java.util.function.Predicate;
 
 public class  DamageAllAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the expected targets could be
         final Card source = sa.getHostCard();
 
-        // prevent run-away activations - first time will always return true
-        if (MyRandom.getRandom().nextFloat() > Math.pow(.9, sa.getActivationsThisTurn())) {
-            return false;
-        }
-        // abCost stuff that should probably be centralized...
-        final Cost abCost = sa.getPayCosts();
-        if (abCost != null) {
-            // AI currently disabled for some costs
-            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
-                return false;
-            }
-        }
         // wait until stack is empty (prevents duplicate kills)
         if (!ai.getGame().getStack().isEmpty()) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.StackNotEmpty);
         }
 
         int x = -1;
@@ -51,11 +37,15 @@ public class  DamageAllAi extends SpellAbilityAi {
         if (x == -1) {
             if (determineOppToKill(ai, sa, source, dmg) != null) {
                 // we already know we can kill a player, so go for it
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
             // look for other value in this (damaging creatures or
             // creatures + player, e.g. Pestilence, etc.)
-            return evaluateDamageAll(ai, sa, source, dmg) > 0;
+             if (evaluateDamageAll(ai, sa, source, dmg) > 0) {
+                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+             } else {
+                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+             }
         } else {
             int best = -1, best_x = -1;
             Player bestOpp = determineOppToKill(ai, sa, source, x);
@@ -81,9 +71,9 @@ public class  DamageAllAi extends SpellAbilityAi {
                 if (sa.getSVar(damage).equals("Count$xPaid")) {
                     sa.setXManaCostPaid(best_x);
                 }
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
     }
 
@@ -143,9 +133,9 @@ public class  DamageAllAi extends SpellAbilityAi {
                     if (ComputerUtilCombat.predictDamageTo(opp, dmg, source, false) > 0) {
                         // When using Pestilence to hurt players, do it at
                         // the end of the opponent's turn only
-                        if ((!"DmgAllCreaturesAndPlayers".equals(sa.getParam("AILogic")))
-                                || ((ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)
-                                && (ai.getGame().getNonactivePlayers().contains(ai)))))
+                        if (!"DmgAllCreaturesAndPlayers".equals(sa.getParam("AILogic"))
+                                || (ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)
+                                && !ai.getGame().getPhaseHandler().isPlayerTurn(ai)))
                         // Need further improvement : if able to kill immediately with repeated activations, do not wait
                         // for phases! Will also need to implement considering repeated activations for killed creatures!
                         // || (ai.sa.getPayCosts(). ??? )
@@ -185,7 +175,7 @@ public class  DamageAllAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         final Card source = sa.getHostCard();
         final String validP = sa.getParamOrDefault("ValidPlayers", "");
 
@@ -211,21 +201,21 @@ public class  DamageAllAi extends SpellAbilityAi {
         }
         // Don't get yourself killed
         if (validP.equals("Player") && (ai.getLife() <= ComputerUtilCombat.predictDamageTo(ai, dmg, source, false))) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         // if we can kill human, do it
         if ((validP.equals("Player") || validP.equals("Opponent") || validP.contains("Targeted"))
                 && (enemy.getLife() <= ComputerUtilCombat.predictDamageTo(enemy, dmg, source, false))) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         if (!computerList.isEmpty() && ComputerUtilCard.evaluateCreatureList(computerList) > ComputerUtilCard
                 .evaluateCreatureList(humanList)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /**
@@ -258,7 +248,7 @@ public class  DamageAllAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
         final String validP = sa.getParamOrDefault("ValidPlayers", "");
 
@@ -287,24 +277,24 @@ public class  DamageAllAi extends SpellAbilityAi {
 
         // If it's not mandatory check a few things
         if (mandatory) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         // Don't get yourself killed
         if (validP.equals("Player") && (ai.getLife() <= ComputerUtilCombat.predictDamageTo(ai, dmg, source, false))) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         // if we can kill human, do it
         if ((validP.equals("Player") || validP.contains("Opponent") || validP.contains("Targeted"))
                 && (enemy.getLife() <= ComputerUtilCombat.predictDamageTo(enemy, dmg, source, false))) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         if (!computerList.isEmpty() && ComputerUtilCard.evaluateCreatureList(computerList) + 50 >= ComputerUtilCard
                 .evaluateCreatureList(humanList)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 }

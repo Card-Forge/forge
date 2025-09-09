@@ -1,5 +1,6 @@
 package forge.player;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.card.CardType;
@@ -10,6 +11,7 @@ import forge.game.card.*;
 import forge.game.cost.*;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
+import forge.game.player.PlayerController;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -489,6 +491,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             min = 0;
         }
         GameEntityViewMap<Card, CardView> gameCacheExile = GameEntityView.getMap(list);
+        // CR 406.4 technically if you can't see their face some randomness should be involved
         List<CardView> views = controller.getGui().many(
                 Localizer.getInstance().getMessage("lblChooseAnExiledCardPutIntoGraveyard"),
                 Localizer.getInstance().getMessage("lblToGraveyard"), min, c, CardView.getCollection(list), CardView.get(source));
@@ -1096,6 +1099,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     public PaymentDecision visit(final CostRemoveCounter cost) {
         final String amount = cost.getAmount();
         final String type = cost.getType();
+        final CounterType cntrs = cost.counter;
+        final boolean anyCounters = cntrs == null;
+        GameEntityCounterTable counterTable;
 
         int cntRemoved = 1;
         if (!amount.equals("All")) {
@@ -1103,9 +1109,10 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         if (cost.payCostFromSource()) {
-            final int maxCounters = source.getCounters(cost.counter);
+            final int maxCounters = anyCounters ? source.getNumAllCounters() : source.getCounters(cntrs);
             if (amount.equals("All")) {
-                if (!InputConfirm.confirm(controller, ability, Localizer.getInstance().getMessage("lblRemoveAllCountersConfirm"))) {
+                String prompt = Localizer.getInstance().getMessage("lblRemoveAllCountersConfirm") + (anyCounters ? "" : " (" + cntrs.getName() + ")");
+                if (!InputConfirm.confirm(controller, ability, prompt)) {
                     return null;
                 }
                 cntRemoved = maxCounters;
@@ -1114,7 +1121,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 if (maxCounters < cntRemoved) {
                     return null;
                 }
-                if (!confirmAction(cost, Localizer.getInstance().getMessage("lblRemoveNTargetCounterFromCardPayCostConfirm", amount, cost.counter.getName().toLowerCase(), CardTranslation.getTranslatedName(source.getName())))) {
+                if (!confirmAction(cost, Localizer.getInstance().getMessage("lblRemoveNTargetCounterFromCardPayCostConfirm", amount, anyCounters ? "" : cntrs.getName().toLowerCase(), CardTranslation.getTranslatedName(source.getName())))) {
                     return null;
                 }
             }
@@ -1122,10 +1129,13 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             if (maxCounters < cntRemoved) {
                 return null;
             }
-            return PaymentDecision.card(source, cntRemoved >= 0 ? cntRemoved : maxCounters);
+            counterTable = generateCounterTable(source, cntrs, cntRemoved >= 0 ? cntRemoved : maxCounters, ability);
+            if (counterTable.isEmpty()) return null;
+            return PaymentDecision.counters(counterTable);
 
         } else if (type.equals("OriginalHost")) {
-            final int maxCounters = ability.getOriginalHost().getCounters(cost.counter);
+            final Card origHost = ability.getOriginalHost();
+            final int maxCounters = anyCounters ? origHost.getNumAllCounters() : origHost.getCounters(cntrs);
             if (amount.equals("All")) {
                 cntRemoved = maxCounters;
             }
@@ -1133,12 +1143,15 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 return null;
             }
 
-            return PaymentDecision.card(ability.getOriginalHost(), cntRemoved >= 0 ? cntRemoved : maxCounters);
+            counterTable = generateCounterTable(origHost, cntrs, cntRemoved >= 0 ? cntRemoved : maxCounters, ability);
+            if (counterTable.isEmpty()) return null;
+            return PaymentDecision.counters(counterTable);
         }
 
         CardCollectionView validCards = CardLists.getValidCards(player.getCardsIn(cost.zone), type.split(";"), player, source, ability);
         // you can only select 1 card to remove N counters from
-        validCards = CardLists.filter(validCards, CardPredicates.hasCounter(cost.counter, cntRemoved));
+        validCards = anyCounters ? CardLists.filterAnyCounters(validCards, cntRemoved) :
+                CardLists.filter(validCards, CardPredicates.hasCounter(cntrs, cntRemoved));
         if (validCards.isEmpty()) {
             return null;
         }
@@ -1157,7 +1170,45 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
-        return PaymentDecision.card(selected, cntRemoved);
+        counterTable = generateCounterTable(selected, cntrs, cntRemoved, ability);
+        if (counterTable.isEmpty()) return null;
+        return PaymentDecision.counters(counterTable);
+    }
+
+    private GameEntityCounterTable generateCounterTable (final Card c, final CounterType cType, int cntToRemove, final SpellAbility sa) {
+        final GameEntityCounterTable counterTable = new GameEntityCounterTable();
+        if (cType != null) {
+            counterTable.put(null, c, cType, cntToRemove);
+        } else {
+            Map<CounterType, Integer> cMap = counterTable.filterToRemove(c);
+            for (CounterType ct : ImmutableList.copyOf(cMap.keySet())) {
+                if (!c.canRemoveCounters(ct)) {
+                    cMap.remove(ct);
+                }
+            }
+            if (cMap.isEmpty()) return counterTable;
+            if (cMap.size() == 1) {
+                counterTable.put(null, c, cMap.entrySet().iterator().next().getKey(), cntToRemove);
+            } else while (cntToRemove > 0) {
+                final PlayerController pc = c.getController().getController();
+
+                String prompt = Localizer.getInstance().getMessage("lblSelectCountersTypeToRemove");
+                CounterType chosen = pc.chooseCounterType(Lists.newArrayList(cMap.keySet()), sa, prompt, null);
+
+                int max = Math.min(cntToRemove, cMap.get(chosen));
+                int remaining = Aggregates.sum(cMap.values());
+                int min = Math.max(1, max - remaining);
+                prompt = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget", chosen.getName());
+                int chosenAmount = pc.chooseNumber(sa, prompt, min, max, null);
+
+                if (chosenAmount > 0) {
+                    counterTable.put(null, c, chosen, chosenAmount);
+                    cMap = counterTable.filterToRemove(c);
+                }
+                cntToRemove -= chosenAmount;
+            }
+        }
+        return counterTable;
     }
 
     @Override
@@ -1342,7 +1393,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     public PaymentDecision visit(final CostUntapType cost) {
         CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"),
                 player, source, ability);
-        typeList = CardLists.filter(typeList, CardPredicates.TAPPED, c -> c.getCounters(CounterEnumType.STUN) == 0 || c.canRemoveCounters(CounterType.get(CounterEnumType.STUN)));
+        typeList = CardLists.filter(typeList, CardPredicates.TAPPED, c -> c.getCounters(CounterEnumType.STUN) == 0 || c.canRemoveCounters(CounterEnumType.STUN));
         int c = cost.getAbilityAmount(ability);
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, typeList, ability);
         inp.setCancelAllowed(true);

@@ -1,0 +1,11 @@
+[metadata]
+Code=6ED_AA
+Date=1999-04-21
+Name=Classic Sixth Edition Simplified Chinese Alternate Art
+Type=Promo
+Border=White
+ScryfallCode=6ED
+CardLang=zhs
+
+[cards]
+123s C Drudge Skeletons @Carl Critchlow

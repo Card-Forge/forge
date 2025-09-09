@@ -1,0 +1,8 @@
+Name:Luxknight Breacher
+ManaCost:3 W
+Types:Creature Human Knight
+PT:2/2
+K:etbCounter:P1P1:X:no Condition:This creature enters with a +1/+1 counter on it for each other creature and/or artifact you control.
+SVar:X:Count$Valid Artifact.Other+YouCtrl,Creature.Other+YouCtrl
+DeckHas:Ability$Counters
+Oracle:This creature enters with a +1/+1 counter on it for each other creature and/or artifact you control.

@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Lists;
+import forge.ai.AiAbilityDecision;
 import forge.ai.AiPlayDecision;
 import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
@@ -16,23 +17,34 @@ import java.util.Map;
 
 public class VentureAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         // If this has a mana cost, do it at opponent's EOT if able to prevent spending mana early; if sorcery, do it in Main2
         PhaseHandler ph = aiPlayer.getGame().getPhaseHandler();
         if (sa.getPayCosts().hasManaCost() || sa.getPayCosts().hasTapCost()) {
             if (isSorcerySpeed(sa, aiPlayer)) {
-                return ph.is(PhaseType.MAIN2, aiPlayer);
+                if (ph.is(PhaseType.MAIN2, aiPlayer)) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                } else {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
             } else {
-                return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == aiPlayer;
+                if (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == aiPlayer) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                } else {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
             }
         }
-
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        return mandatory || canPlayAI(aiPlayer, sa);
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+        if (mandatory) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+        AiAbilityDecision decision = canPlay(aiPlayer, sa);
+        return decision;
     }
 
     @Override
@@ -46,20 +58,20 @@ public class VentureAi extends SpellAbilityAi {
         List<SpellAbility> viableRooms = Lists.newArrayList();
 
         for (SpellAbility room : spells) {
-            if (player.getController().isAI()) { // FIXME: is this needed? Can simulation ever run this for a non-AI player?
+            if (player.getController().isAI()) {
                 room.setActivatingPlayer(player);
-                if (((PlayerControllerAi)player.getController()).getAi().canPlaySa(room) == AiPlayDecision.WillPlay) {
+                AiPlayDecision playDecision = ((PlayerControllerAi)player.getController()).getAi().canPlaySa(room);
+                if (playDecision == AiPlayDecision.WillPlay) {
                     viableRooms.add(room);
                 }
             }
         }
 
         if (!viableRooms.isEmpty()) {
-            // choose a room at random from the ones that are deemed playable
             return Aggregates.random(viableRooms);
         }
 
-        return Aggregates.random(spells); // If we're here, we should choose at least something, so choose a random thing then
+        return Aggregates.random(spells);
     }
 
 }

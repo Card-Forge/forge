@@ -1,0 +1,7 @@
+Name:Galvanizing Sawship
+ManaCost:5 R
+Types:Artifact Spacecraft
+PT:6/5
+K:Station:3
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE3_CHARGE | AddType$ Creature | AddKeyword$ Flying & Haste | Description$ STATION 3+ Flying, haste
+Oracle:Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 3+.)\nSTATION 3+\nFlying, haste

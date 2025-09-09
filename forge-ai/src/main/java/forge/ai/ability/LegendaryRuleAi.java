@@ -1,6 +1,8 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
@@ -21,8 +23,8 @@ public class LegendaryRuleAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#canPlayAI(forge.game.player.Player, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        return false; // should not get here
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi); // should not get here
     }
 
     @Override

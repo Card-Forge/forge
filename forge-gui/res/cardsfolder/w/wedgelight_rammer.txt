@@ -1,0 +1,10 @@
+Name:Wedgelight Rammer
+ManaCost:3 W
+Types:Artifact Spacecraft
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this Spacecraft enters, create a 2/2 colorless Robot artifact creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_2_2_a_robot | TokenOwner$ You
+K:Station:9
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE9_CHARGE | AddType$ Creature | AddKeyword$ Flying & First Strike | Description$ STATION 9+ Flying, first strike
+DeckHas:Ability$Token
+Oracle:When this Spacecraft enters, create a 2/2 colorless Robot artifact creature token.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 9+.)\nSTATION 9+\nFlying, first strike

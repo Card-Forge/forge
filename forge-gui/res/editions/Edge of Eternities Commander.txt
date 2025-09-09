@@ -30,15 +30,25 @@ ScryfallCode=EOC
 22 R Glittering Massif @Cristi Balanescu
 23 R Radiant Summit @Marco Gorlei
 24 R Vernal Fen @Titus Lunter
+25 R Patrolling Peacemaker @Michal Ivan
+26 R Insight Engine @Gaboleps
+27 R Uthros Research Craft @Piotr Dura
 28 R Eumidian Wastewaker @Mathias Kollros
+29 R Depthshaker Titan @PINDURSKI
 30 R Evendo Brushrazer @Igor Grechanyi
+31 R Long-Range Sensor @Artur Treffner
 32 R Planetary Annihilation @Cristi Balanescu
 33 R Baloth Prime @Joshua Raphael
 34 R Exploration Broodship @Borja Pindado
 35 R Horizon Explorer @Filip Burburan
 36 R Scouring Swarm @Diana Franco
+37 R Moxite Refinery @Nadia Hurianova
+38 R Solar Array @Sergey Glushakov
+39 R Surge Conductor @Alexandr Leskinen
 40 R Eumidian Hatchery @Valera Lutfullina
 41 R Festering Thicket @Jakob Eirich
+42 R Glittering Massif @Cristi Balanescu
+43 R Radiant Summit @Marco Gorlei
 44 R Vernal Fen @Titus Lunter
 45 U Swords to Plowshares @Nadia Hurianova
 46 R Swan Song @Lorenzo Mastroianni
@@ -50,7 +60,7 @@ ScryfallCode=EOC
 52 U Binding the Old Gods @Daniel Ljunggren
 53 C Arcane Signet @Constantin Marin
 54 R Cloud Key @Matt Stewart
-55 R Gavel of the Righteous @Milivoj Ćeran
+55 R Gavel of the Righteous @David Palumbo
 56 U Pentad Prism @Lindsey Look
 57 U Sol Ring @Steven Belledin
 58 R Battlefield Forge @Manuel Castañón
@@ -58,7 +68,7 @@ ScryfallCode=EOC
 60 R Fabled Passage @Rob Rey
 61 U Mountain Valley @Tim Brumley
 62 C Terramorphic Expanse @Allen Panakal
-63 U Angel of the Ruins @Viko Menezes
+63 R Angel of the Ruins @Viko Menezes
 64 U Dispatch @Erica Yang
 65 R Fumigate @Svetlin Velinov
 66 R Organic Extinction @Cristi Balanescu
@@ -187,3 +197,23 @@ ScryfallCode=EOC
 189 R Twilight Mire @Rob Alexander
 190 R Viridescent Bog @Piotr Dura
 191 C Wastes @Raymond Swanland
+
+[tokens]
+2 c_x_x_shapeshifter_changeling_deathtouch @Carlos Palma Cruchaga
+3 u_2_2_bird_flying @Alessandra Pisano
+4 b_1_1_insect_flying @Deruchenko Alexander
+5 g_3_3_beast @Dave Allsop
+6 g_4_4_beast @Xabi Gaztelua
+7 g_5_3_elemental @Nils Hamm
+8 rg_5_5_elemental @Brad Rigney
+9 bg_1_1_pest_lifegain @Ilse Gort
+10 c_a_clue_draw @John Avon
+11 c_1_1_a_gnome @Racrufi
+12 c_3_3_a_golem @Nic Klein
+13 c_3_3_e_a_golem @Yeong-Hao Han
+14 c_9_9_a_golem @Svetlin Velinov
+15 incubator_c_0_0_a_phyrexian @Johann Bodin
+16 c_1_1_a_thopter_flying @Svetlin Velinov
+
+[other]
+1 copy @Martin de Diego Sádaba

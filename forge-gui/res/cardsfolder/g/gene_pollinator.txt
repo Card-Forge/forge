@@ -1,0 +1,6 @@
+Name:Gene Pollinator
+ManaCost:G
+Types:Artifact Creature Robot Insect
+PT:1/2
+A:AB$ Mana | Cost$ T tapXType<1/Permanent> | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:{T}, Tap an untapped permanent you control: Add one mana of any color.

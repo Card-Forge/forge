@@ -16,7 +16,6 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
-import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.stage.GameHUD;
@@ -65,8 +64,8 @@ public class UIScene extends Scene {
             //actor.fire(UIScene.eventExit());
         }
 
-        public void onPressDown(UIScene scene) {
-            if (actor instanceof TextField) {
+        public void onPressDown(UIScene scene, int keycode) {
+            if (actor instanceof TextField && Input.Keys.ENTER != keycode) {
                 scene.requestTextInput(((TextField) actor).getText(), text -> ((TextField) actor).setText(text));
 
             }
@@ -247,18 +246,18 @@ public class UIScene extends Scene {
     public Dialog createGenericDialog(String title, String label, String stringYes, String stringNo, Runnable runnableYes, Runnable runnableNo, boolean cancelButton, String stringCancel) {
         Dialog dialog = new Dialog(title == null ? "" : title, Controls.getSkin());
         textboxOpen = true;
+
         if (label != null)
-            dialog.text(label);
-        TextraButton yes = Controls.newTextButton(stringYes, runnableYes);
-        dialog.button(yes);
-        if (stringNo != null) {
-            TextraButton no = Controls.newTextButton(stringNo, runnableNo);
-            dialog.button(no);
-        }
-        if (cancelButton) {
-            TextraButton cancel = Controls.newTextButton(stringCancel, this::removeDialog);
-            dialog.button(cancel);
-        }
+            dialog.getContentTable().add(Controls.newTextraLabel(label));
+
+        dialog.button(Controls.newTextButton(stringYes, runnableYes));
+
+        if (stringNo != null)
+            dialog.button(Controls.newTextButton(stringNo, runnableNo));
+
+        if (cancelButton)
+            dialog.button(Controls.newTextButton(stringCancel, this::removeDialog));
+
         return dialog;
     }
 
@@ -347,7 +346,7 @@ public class UIScene extends Scene {
         Selectable selection = getSelected();
         if (KeyBinding.Use.isPressed(keycode)) {
             if (selection != null) {
-                selection.onPressDown(this);
+                selection.onPressDown(this, keycode);
             }
         }
 

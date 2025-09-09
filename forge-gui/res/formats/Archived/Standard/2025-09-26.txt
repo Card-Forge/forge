@@ -1,0 +1,7 @@
+[format]
+Name:Standard (SPM)
+Type:Archived
+Subtype:Standard
+Effective:2025-09-26
+Sets:WOE, LCI, MKM, OTJ, BIG, BLB, DSK, FDN, DFT, TDM, FIN, EOE, SPM
+Banned:Abuelo's Awakening; Cori-Steel Cutter; Heartfire Hero; Hopeless Nightmare; Monstrous Rage; This Town Ain't Big Enough; Up the Beanstalk

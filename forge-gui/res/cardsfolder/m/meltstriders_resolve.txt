@@ -1,0 +1,10 @@
+Name:Meltstrider's Resolve
+ManaCost:G
+Types:Enchantment Aura
+K:Enchant:Creature.YouCtrl:creature you control
+SVar:AttachAILogic:Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFight | TriggerDescription$ When this Aura enters, enchanted creature fights up to one target creature an opponent controls. (Each deals damage equal to its power to the other.)
+SVar:TrigFight:DB$ Fight | Defined$ Enchanted | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose up to one target creature an opponent controls | TargetMin$ 0 | TargetMax$ 1
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 2 | Description$ Enchanted creature gets +0/+2 and can't be blocked by more than one creature.
+S:Mode$ MinMaxBlocker | ValidCard$ Creature.EnchantedBy | Max$ 1 | Secondary$ True | Description$ Enchanted creature gets +0/+2 and can't be blocked by more than one creature.
+Oracle:Enchant creature you control\nWhen this Aura enters, enchanted creature fights up to one target creature an opponent controls. (Each deals damage equal to its power to the other.)\nEnchanted creature gets +0/+2 and can't be blocked by more than one creature.

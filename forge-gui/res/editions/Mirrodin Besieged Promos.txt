@@ -4,6 +4,7 @@ Date=2011-02-03
 Name=Mirrodin Besieged Promos
 Type=Promo
 ScryfallCode=PMBS
+TokenFallbackCode=MBS
 
 [cards]
 8★ M Hero of Bladehold @Scott Chou

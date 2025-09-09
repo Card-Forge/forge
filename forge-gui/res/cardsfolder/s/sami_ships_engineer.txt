@@ -1,0 +1,8 @@
+Name:Sami, Ship's Engineer
+ManaCost:2 R W
+Types:Legendary Creature Human Artificer
+PT:2/4
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | IsPresent$ Creature.YouCtrl+tapped | PresentCompare$ GE2 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, if you control two or more tapped creatures, create a tapped 2/2 colorless Robot artifact creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_2_2_a_robot | TokenTapped$ True
+DeckHas:Ability$Token & Type$Robot
+Oracle:At the beginning of your end step, if you control two or more tapped creatures, create a tapped 2/2 colorless Robot artifact creature token.

@@ -16,7 +16,5 @@ ScryfallCode=PURL
 23 R Kor Skyfisher @Dan Murayama Scott
 34★ U Shepherd of the Lost @Kekai Kotaki
 445 M Ral, Monsoon Mage @Borja Pindado
-2025-1 Hylda of the Icy Crown @Yakotakos
-
-[tokens]
-wu_4_4_elemental
+2025-1 M Hylda of the Icy Crown @Yakotakos
+2025-3 R Katara, the Fearless @Yueko

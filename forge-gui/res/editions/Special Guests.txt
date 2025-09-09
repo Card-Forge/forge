@@ -130,5 +130,13 @@ ScryfallCode=SPG
 116 M Misty Rainforest @Livia Prima
 117 M Scalding Tarn @Marco Gorlei
 118 M Verdant Catacombs @Johannes Voss
+119 M Warping Wail @Alex Horley-Orlandelli
+120 M Deafening Silence @Skinnyelbows
+121 M Robe of Stars @Stephen Andrade
+122 M Nexus of Fate @Gaboleps
+123 M Paradox Haze @Stephen Andrade
+124 M Darkness @Wojtek Łebski
 125 R Magus of the Moon @David Robert Hovey
+126 M Burgeoning @Stephen Andrade
+127 M Green Sun's Zenith @Warren Mahy
 128 R Sliver Overlord @James Bousema

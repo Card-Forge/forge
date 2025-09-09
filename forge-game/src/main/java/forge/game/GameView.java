@@ -215,6 +215,7 @@ public class GameView extends TrackableObject {
     }
     public void setDependencies(Table<StaticAbility, StaticAbility, Set<StaticAbilityLayer>> dependencies) {
         if (dependencies.isEmpty()) {
+            set(TrackableProperty.Dependencies, "");
             return;
         }
         StringBuilder sb = new StringBuilder();

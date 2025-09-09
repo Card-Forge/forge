@@ -1,0 +1,9 @@
+Name:Rust Harvester
+ManaCost:R
+Types:Artifact Creature Robot
+PT:1/1
+K:Menace
+A:AB$ PutCounter | Cost$ 2 T ExileFromGrave<1/Artifact/artifact card> | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDamage | SpellDescription$ Put a +1/+1 counter on this creature, then it deals damage equal to its power to any target.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
+SVar:X:Count$CardPower
+Oracle:Menace\n{2}, {T}, Exile an artifact card from your graveyard: Put a +1/+1 counter on this creature, then it deals damage equal to its power to any target.

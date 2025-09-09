@@ -1,0 +1,6 @@
+Name:Tragic Trajectory
+ManaCost:B
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn. Void — That creature gets -10/-10 until end of turn instead if a nonland permanent left the battlefield this turn or a spell was warped this turn.
+SVar:X:Count$Void.10.2
+Oracle:Target creature gets -2/-2 until end of turn.\nVoid — That creature gets -10/-10 until end of turn instead if a nonland permanent left the battlefield this turn or a spell was warped this turn.

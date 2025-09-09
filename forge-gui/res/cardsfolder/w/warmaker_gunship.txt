@@ -1,0 +1,10 @@
+Name:Warmaker Gunship
+ManaCost:2 R
+Types:Artifact Spacecraft
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When this Spacecraft enters, it deals damage equal to the number of artifacts you control to target creature an opponent controls.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ X
+K:Station:6
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE6_CHARGE | AddType$ Creature | AddKeyword$ Flying | Description$ STATION 6+ Flying
+SVar:X:Count$Valid Artifact.YouCtrl
+Oracle:When this Spacecraft enters, it deals damage equal to the number of artifacts you control to target creature an opponent controls.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 6+.)\nSTATION 6+\nFlying

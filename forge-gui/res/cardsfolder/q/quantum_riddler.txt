@@ -1,0 +1,12 @@
+Name:Quantum Riddler
+ManaCost:3 U U
+Types:Creature Sphinx
+PT:4/6
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this creature enters, draw a card.
+SVar:TrigDraw:DB$ Draw
+R:Event$ DrawCards | ActiveZones$ Battlefield | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ LE1 | ReplaceWith$ DrawPlusOne | Description$ As long as you have one or fewer cards in hand, if you would draw one or more cards, you draw that many cards plus one instead.
+SVar:DrawPlusOne:DB$ Draw | NumCards$ ReplaceCount$Number/Plus.1
+SVar:X:Count$ValidHand Card.YouOwn
+K:Warp:1 U
+Oracle:Flying\nWhen this creature enters, draw a card.\nAs long as you have one or fewer cards in hand, if you would draw one or more cards, you draw that many cards plus one instead.\nWarp {1}{U}

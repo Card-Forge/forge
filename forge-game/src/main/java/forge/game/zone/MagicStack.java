@@ -256,6 +256,15 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             System.out.println(source.getName() + " - activatingPlayer not set before adding to stack.");
         }
 
+        // Stop infinite loop. E.g. Scalelord Reckoner mirrormatch with only triggering targets is a draw.
+        if (game.getStack().size() > 999) {
+            for (Player p : game.getPlayers()) {
+                p.intentionalDraw();
+            }
+            game.setGameOver(GameEndReason.Draw);
+            return;
+        }
+
         recordUndoableActions(sp, activator);
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through
@@ -322,6 +331,12 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         }
 
+        if (sp instanceof AbilityStatic || (sp.isTrigger() && sp.getTrigger().getOverridingAbility() instanceof AbilityStatic)) {
+            AbilityUtils.resolve(sp);
+            // AbilityStatic should do nothing below
+            return;
+        }
+
         if (si == null && sp.isActivatedAbility() && !sp.isCopied()) {
             // if not already copied use a fresh instance
             SpellAbility original = sp;
@@ -343,12 +358,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         if (sp.isAbility() && !sp.isCopied() && !sp.isTrigger()) {
             addAbilityActivatedThisTurn(sp, source);
-        }
-
-        if (sp instanceof AbilityStatic || (sp.isTrigger() && sp.getTrigger().getOverridingAbility() instanceof AbilityStatic)) {
-            AbilityUtils.resolve(sp);
-            // AbilityStatic should do nothing below
-            return;
         }
 
         // The ability is added to stack HERE
@@ -499,7 +508,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             sp.getActivatingPlayer().commitCrime();
         }
 
-        game.fireEvent(new GameEventZone(ZoneType.Stack, sp.getActivatingPlayer(), EventValueChangeType.Added, source));
+        game.fireEvent(new GameEventZone(ZoneType.Stack, sp, EventValueChangeType.Added));
 
         if (sp.getActivatingPlayer() != null && !game.getCardsPlayerCanActivateInStack().isEmpty()) {
             // This is a bit of a hack that forces the update of externally activatable cards in flashback zone (e.g. Lightning Storm).
@@ -838,32 +847,26 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     public boolean addAllTriggeredAbilitiesToStack() {
-        boolean result = false;
-        Player playerTurn = game.getPhaseHandler().getPlayerTurn();
+        if (!hasSimultaneousStackEntries()) {
+            return false;
+        }
 
+        Player playerTurn = game.getPhaseHandler().getPlayerTurn();
         if (playerTurn == null) {
             // caused by DevTools before first turn
             return false;
         }
-
         if (!playerTurn.isInGame()) {
             playerTurn = game.getNextPlayerAfter(playerTurn);
         }
-
-        // Grab players in turn order starting with the active player
         List<Player> players = game.getPlayersInTurnOrder(playerTurn);
 
+        boolean result = false;
+        // CR 603.3b
         for (Player p : players) {
-            if (p.hasLost()) {
-                continue;
-            }
             result |= chooseOrderOfSimultaneousStackEntry(p, false);
         }
-
         for (Player p : players) {
-            if (p.hasLost()) {
-                continue;
-            }
             result |= chooseOrderOfSimultaneousStackEntry(p, true);
         }
 
@@ -871,10 +874,12 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     private boolean chooseOrderOfSimultaneousStackEntry(final Player activePlayer, boolean isAbilityTriggered) {
-        if (simultaneousStackEntryList.isEmpty()) {
+        if (!activePlayer.isInGame()) {
             return false;
         }
-
+        if (!hasSimultaneousStackEntries()) {
+            return false;
+        }
         activePlayerSAs.clear();
         for (SpellAbility sa : simultaneousStackEntryList) {
             if (isAbilityTriggered != (sa.isTrigger() && sa.getTrigger().getMode() == TriggerType.AbilityTriggered)) {
@@ -952,16 +957,15 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         final Player active = game.getPhaseHandler().getPlayerTurn();
         game.getStackZone().resetCardsAddedThisTurn();
         this.thisTurnActivated.clear();
+        active.resetSpellCastSinceBegOfYourLastTurn();
         if (thisTurnCast.isEmpty()) {
             lastTurnCast = Lists.newArrayList();
-            active.resetSpellCastSinceBegOfYourLastTurn();
             return;
         }
-        for (Player nonActive : game.getNonactivePlayers()) {
-            nonActive.addSpellCastSinceBegOfYourLastTurn(thisTurnCast);
+        for (Player player : game.getPlayers()) {
+            player.addSpellCastSinceBegOfYourLastTurn(thisTurnCast);
         }
         lastTurnCast = Lists.newArrayList(thisTurnCast);
-        active.setSpellCastSinceBegOfYourLastTurn(thisTurnCast);
         thisTurnCast.clear();
         game.updateStackForView();
     }

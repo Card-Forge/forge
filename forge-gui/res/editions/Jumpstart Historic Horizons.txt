@@ -380,6 +380,20 @@ ScryfallCode=J21
 770 C Khalni Garden @Ryan Pancoast
 776 R Sliver Hive @Igor Kieryluk
 
-[rebalanced]
-A438 U A-Dragon's Rage Channeler @Martina Fackova
-A529 C A-Unholy Heat @Kari Christensen
+[conjured]
+777 C Light of Hope @Kimonas Theodossiou
+778 U Stormfront Pegasus @rk post
+779 U Swords to Plowshares @Sam Wolfe Connelly
+780 C Force Spike @Nelson DeCastro
+781 C Kraken Hatchling @Jason Felix
+782 C Ponder @Dan Murayama Scott
+783 C Dark Ritual @Clint Langley
+784 C Duress @Steven Belledin
+785 U Reassembling Skeleton @Austin Hsu
+786 C Assault Strobe @Kev Walker
+787 C Lightning Bolt @Christopher Moeller
+788 R Shivan Dragon @Donato Giancola
+789 C Fog @Jaime Jones
+790 C Giant Growth @Matt Cavotta
+791 R Regal Force @Brandon Kitkouski
+792 R Tropical Island @Franz Vohwinkel

@@ -1,0 +1,11 @@
+Name:Syr Vondam, the Lucent
+ManaCost:2 W B B
+Types:Legendary Creature Human Knight
+PT:4/4
+K:Deathtouch
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever NICKNAME enters or attacks, other creatures you control get +1/+0 and gain deathtouch until end of turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, other creatures you control get +1/+0 and gain deathtouch until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl+StrictlyOther | NumAtt$ +1 | KW$ Deathtouch
+SVar:HasAttackEffect:TRUE
+Oracle:Deathtouch, lifelink\nWhenever Syr Vondam enters or attacks, other creatures you control get +1/+0 and gain deathtouch until end of turn.

@@ -416,10 +416,14 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
 
         // SpellPermanent only for Original State
         switch(getStateName()) {
+        case Backside:
+            if (!getCard().isModal()) {
+                return;
+            }
+            break;
         case Original:
         case LeftSplit:
         case RightSplit:
-        case Modal:
         case SpecializeB:
         case SpecializeG:
         case SpecializeR:
@@ -464,6 +468,9 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
         return Iterables.getFirst(getIntrinsicSpellAbilities(), null);
     }
     public final SpellAbility getFirstSpellAbility() {
+        if (this.card.getCastSA() != null) {
+            return this.card.getCastSA();
+        }
         return Iterables.getFirst(getNonManaAbilities(), null);
     }
 
@@ -601,18 +608,18 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
             result.add(loyaltyRep);
         }
         if (type.isBattle()) {
-            // TODO This is currently breaking for Battle/Defense
-            // Going to script the cards to work but ideally it would happen here
             if (defenseRep == null) {
                 defenseRep = CardFactoryUtil.makeEtbCounter("etbCounter:DEFENSE:" + this.baseDefense, this, true);
             }
             result.add(defenseRep);
-
-            // TODO add Siege "Choose a player to protect it"
         }
+
+        card.updateReplacementEffects(result, this);
+
+        // below are global rules
         if (type.hasSubtype("Saga") && !hasKeyword(Keyword.READ_AHEAD)) {
             if (sagaRep == null) {
-                sagaRep = CardFactoryUtil.makeEtbCounter("etbCounter:LORE:1", this, true);
+                sagaRep = CardFactoryUtil.makeEtbCounter("etbCounter:LORE:1", this, false);
             }
             result.add(sagaRep);
         }
@@ -629,7 +636,6 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
             result.add(omenRep);
         }
 
-        card.updateReplacementEffects(result, this);
         return result;
     }
     public boolean addReplacementEffect(final ReplacementEffect replacementEffect) {
@@ -746,11 +752,21 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
                 triggers.add(tr.copy(card, lki));
             }
         }
+        ReplacementEffect runRE = null;
+        if (ctb instanceof SpellAbility sp && sp.isReplacementAbility()
+            && source.getCard().equals(ctb.getHostCard())) {
+            runRE = sp.getReplacementEffect();
+        }
 
         replacementEffects.clear();
         for (ReplacementEffect re : source.replacementEffects) {
             if (re.isIntrinsic()) {
-                replacementEffects.add(re.copy(card, lki));
+                ReplacementEffect reCopy = re.copy(card, lki);
+                if (re.equals(runRE) && runRE.hasRun()) {
+                    // CR 208.2b prevent loop from card copying itself
+                    reCopy.setHasRun(true);
+                }
+                replacementEffects.add(reCopy);
             }
         }
 

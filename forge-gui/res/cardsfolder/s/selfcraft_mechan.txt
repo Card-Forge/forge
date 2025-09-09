@@ -1,0 +1,11 @@
+Name:Selfcraft Mechan
+ManaCost:3 U
+Types:Artifact Creature Robot Artificer
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When this creature enters, you may sacrifice an artifact. When you do, put a +1/+1 counter on target creature and draw a card.
+SVar:TrigSac:AB$ ImmediateTrigger | Cost$ Sac<1/Artifact/artifact> | Execute$ TrigPutCounter | TriggerDescription$ When you do, put a +1/+1 counter on target creature and draw a card.
+SVar:TrigPutCounter:DB$ PutCounter | CounterNum$ 1 | CounterType$ P1P1 | ValidTgts$ Creature | SubAbility$ DBDraw | TgtPrompt$ Select target creature
+SVar:DBDraw:DB$ Draw
+DeckHas:Ability$Counters|Sacrifice
+DeckHints:Type$Artifact
+Oracle:When this creature enters, you may sacrifice an artifact. When you do, put a +1/+1 counter on target creature and draw a card.

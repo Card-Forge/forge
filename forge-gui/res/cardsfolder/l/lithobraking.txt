@@ -1,0 +1,7 @@
+Name:Lithobraking
+ManaCost:2 R
+Types:Instant
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ c_a_lander_sac_search | TokenOwner$ You | SubAbility$ DBImmediateTrig | SpellDescription$ Create a Lander token. Then you may sacrifice an artifact. When you do, CARDNAME deals 2 damage to each creature. (A Lander token is an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")
+SVar:DBImmediateTrig:DB$ ImmediateTrigger | UnlessCost$ Sac<1/Artifact> | UnlessPayer$ You | UnlessSwitched$ True | Execute$ TrigDamageAll | TriggerDescription$ When you do, CARDNAME deals 2 damage to each creature.
+SVar:TrigDamageAll:DB$ DamageAll | ValidCards$ Creature | ValidDescription$ each creature. | NumDmg$ 2
+Oracle:Create a Lander token. Then you may sacrifice an artifact. When you do, Lithobraking deals 2 damage to each creature. (A Lander token is an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")

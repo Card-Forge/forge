@@ -33,7 +33,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.event.GameEventCardAttachment;
 import forge.game.keyword.Keyword;
@@ -290,12 +289,20 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         return counters;
     }
 
+    // get total number of all counters on an entity
+    public final int getNumAllCounters() {
+        int count = 0;
+        for (Integer i : getCounters().values()) {
+            if (i != null && i > 0) {
+                count += i;
+            }
+        }
+        return count;
+    }
+
     public final int getCounters(final CounterType counterName) {
         Integer value = counters.get(counterName);
         return value == null ? 0 : value;
-    }
-    public final int getCounters(final CounterEnumType counterType) {
-        return getCounters(CounterType.get(counterType));
     }
 
     public void setCounters(final CounterType counterType, final Integer num) {
@@ -305,9 +312,6 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             counters.put(counterType, num);
         }
     }
-    public void setCounters(final CounterEnumType counterType, final Integer num) {
-        setCounters(CounterType.get(counterType), num);
-    }
 
     abstract public void setCounters(final Map<CounterType, Integer> allCounters);
 
@@ -316,10 +320,6 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     abstract public boolean canReceiveCounters(final CounterType type);
     abstract public int subtractCounter(final CounterType counterName, final int n, final Player remover);
     abstract public void clearCounters();
-
-    public boolean canReceiveCounters(final CounterEnumType type) {
-        return canReceiveCounters(CounterType.get(type));
-    }
 
     public final void addCounter(final CounterType counterType, int n, final Player source, GameEntityCounterTable table) {
         if (n <= 0 || !canReceiveCounters(counterType)) {
@@ -340,18 +340,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         table.put(source, this, counterType, n);
     }
 
-    public final void addCounter(final CounterEnumType counterType, final int n, final Player source, GameEntityCounterTable table) {
-        addCounter(CounterType.get(counterType), n, source, table);
-    }
-
-    public int subtractCounter(final CounterEnumType counterName, final int n, final Player remover) {
-        return subtractCounter(CounterType.get(counterName), n, remover);
-    }
-
     abstract public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params);
-    public void addCounterInternal(final CounterEnumType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params) {
-        addCounterInternal(CounterType.get(counterType), n, source, fireEvents, table, params);
-    }
     public Integer getCounterMax(final CounterType counterType) {
         return null;
     }
