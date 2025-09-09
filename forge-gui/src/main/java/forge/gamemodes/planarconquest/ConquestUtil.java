@@ -1,22 +1,16 @@
 package forge.gamemodes.planarconquest;
 
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
-import forge.card.CardRarity;
-import forge.card.CardRules;
-import forge.card.CardType;
+import forge.card.*;
 import forge.card.CardType.CoreType;
-import forge.card.ColorSet;
-import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -141,6 +135,25 @@ public class ConquestUtil {
         CardPool pool = new CardPool();
         pool.addAllFlat(availableCards);
         return pool;
+    }
+
+    public static List<CardEdition> getBasicLandSets(Deck currentDeck) {
+        ConquestData model = FModel.getConquest().getModel();
+        List<ConquestPlane> planes = new ArrayList<>(model.getUnlockedPlanes());
+        ConquestPlane currentPlane = model.getCurrentPlane();
+        //Move the current plane to the front.
+        if(currentPlane != null && planes.contains(currentPlane)) {
+            planes.remove(currentPlane);
+            planes.add(0, currentPlane);
+        }
+        //Move editions of cards already in the deck to the front.
+        Map<CardEdition, Integer> editionStats = currentDeck.getAllCardsInASinglePool().getCardEditionStatistics(true);
+        List<CardEdition> out = planes.stream()
+                .<CardEdition>mapMulti((p, c) -> p.getEditions().forEach(c))
+                .filter(CardEdition::hasBasicLands)
+                .sorted(Comparator.comparing(e -> editionStats.getOrDefault(e, 0)))
+                .collect(Collectors.toList());
+        return out;
     }
 
     public static ConquestPlane getPlaneByName(String planeName) {

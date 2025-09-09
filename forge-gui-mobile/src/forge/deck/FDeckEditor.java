@@ -301,6 +301,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected DeckSection[] getExtraSections() {
             return gameType.getSupplimentalDeckSections().toArray(new DeckSection[0]);
         }
+
+        @Override
+        public List<CardEdition> getBasicLandSets(Deck currentDeck) {
+            if(this.fnGetBasicLandSet != null)
+                return List.copyOf(fnGetBasicLandSet.apply(currentDeck));
+            return super.getBasicLandSets(currentDeck);
+        }
     }
 
     public static DeckEditorConfig EditorConfigConstructed = new GameTypeDeckEditorConfig(GameType.Constructed,
@@ -361,7 +368,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     public static DeckEditorConfig EditorConfigPlanarConquest = new GameTypeDeckEditorConfig(GameType.PlanarConquest, DECK_CONTROLLER_PLANAR_CONQUEST)
             .setCatalogConfig(ItemManagerConfig.CONQUEST_COLLECTION)
             .setMainSectionConfig(ItemManagerConfig.CONQUEST_DECK_EDITOR)
-            .setPlayerInventorySupplier(ConquestUtil::getAvailablePool);
+            .setPlayerInventorySupplier(ConquestUtil::getAvailablePool)
+            .setBasicLandSetFunction(ConquestUtil::getBasicLandSets);
 
     protected static DeckSectionPage createPageForExtraSection(DeckSection deckSection, DeckEditorConfig editorConfig) {
         CardManager cm = new CardManager(false);
@@ -697,6 +705,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             showExtraSectionTab(section);
         if(pagesBySection.containsKey(section))
             setSelectedPage(pagesBySection.get(section));
+        else if(section == DeckSection.Main && pagesBySection.containsKey(mainDeckPage.deckSection))
+            //Tried to switch to the Main page in a Planar or Scheme deck.
+            setSelectedPage(pagesBySection.get(mainDeckPage.deckSection));
     }
 
     public void notifyNewControllerModel() {
