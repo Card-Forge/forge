@@ -54,33 +54,29 @@ public class LifeExchangeEffect extends SpellAbilityEffect {
 
         final int life1 = p1.getLife();
         final int life2 = p2.getLife();
+        final int diff = Math.abs(life1 - life2);
 
-        if (sa.hasParam("RememberDifference")) {
-            final int diff = life1 - life2;
-            source.addRemembered(diff);
+        if (life2 > life1) {
+            // swap players
+            Player tmp = p2;
+            p2 = p1;
+            p1 = tmp;
         }
-
-        final Map<Player, Integer> lossMap = Maps.newHashMap();
-        if ((life1 > life2) && p1.canLoseLife() && p2.canGainLife()) {
-            final int diff = life1 - life2;
+        if (diff > 0 && p1.canLoseLife() && p2.canGainLife()) {
             final int lost = p1.loseLife(diff, false, false);
             p2.gainLife(diff, source, sa);
             if (lost > 0) {
+                final Map<Player, Integer> lossMap = Maps.newHashMap();
                 lossMap.put(p1, lost);
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPIMap(lossMap);
+                source.getGame().getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams, false);
+                if (sa.hasParam("RememberOwnLoss") && p1.equals(sa.getActivatingPlayer())) {
+                    source.addRemembered(lost);
+                }
             }
-        } else if ((life2 > life1) && p2.canLoseLife() && p1.canGainLife()) {
-            final int diff = life2 - life1;
-            final int lost = p2.loseLife(diff, false, false);
-            p1.gainLife(diff, source, sa);
-            if (lost > 0) {
-                lossMap.put(p2, lost);
-            }
-        } else {
-            // they are equal or can't be exchanged, so nothing to do
         }
-        if (!lossMap.isEmpty()) { // Run triggers if any player actually lost life
-            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPIMap(lossMap);
-            source.getGame().getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams, false);
+        if (sa.hasParam("RememberDifference")) {
+            source.addRemembered(p1.getLife() - p2.getLife());
         }
     }
 }

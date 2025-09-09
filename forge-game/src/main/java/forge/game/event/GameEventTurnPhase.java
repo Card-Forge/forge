@@ -5,20 +5,7 @@ import forge.game.player.Player;
 import forge.util.Lang;
 import forge.util.TextUtil;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
-public class GameEventTurnPhase extends GameEvent {
-    public final Player playerTurn;
-    public final PhaseType phase;
-    public final String phaseDesc;
-
-    public GameEventTurnPhase(Player player, PhaseType ph, String desc) {
-        playerTurn = player;
-        phase = ph;
-        phaseDesc = desc;
-    }
+public record GameEventTurnPhase(Player playerTurn, PhaseType phase, String phaseDesc) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

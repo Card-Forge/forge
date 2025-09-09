@@ -78,7 +78,7 @@ public class PermanentCreatureAi extends PermanentAi {
                         || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
                         && ai.getManaPool().totalMana() <= 0
                         && (ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS))
-                        && (!card.hasETBTrigger(true) && !card.hasSVar("AmbushAI"))
+                        && !card.hasETBTrigger(true) && !card.hasSVar("AmbushAI")
                         && game.getStack().isEmpty()
                         && !ComputerUtil.castPermanentInMain1(ai, sa)) {
                     // AiPlayDecision.AnotherTime;

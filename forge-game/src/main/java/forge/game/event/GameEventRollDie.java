@@ -1,6 +1,6 @@
 package forge.game.event;
 
-public class GameEventRollDie extends GameEvent {
+public record GameEventRollDie() implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

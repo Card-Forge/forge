@@ -1,11 +1,6 @@
 package forge.game.event;
 
-public class GameEventDayTimeChanged extends GameEvent {
-    public final boolean daytime;
-
-    public GameEventDayTimeChanged(final boolean daytime) {
-        this.daytime = daytime;
-    }
+public record GameEventDayTimeChanged(boolean daytime) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

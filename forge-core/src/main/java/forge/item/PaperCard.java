@@ -250,7 +250,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         this.artIndex = Math.max(artIndex, IPaperCard.DEFAULT_ART_INDEX);
         this.foil = foil;
         this.rarity = rarity;
-        this.artist = TextUtil.normalizeText(artist);
+        this.artist = artist;
         this.collectorNumber = (collectorNumber != null && !collectorNumber.isEmpty()) ? collectorNumber : IPaperCard.NO_COLLECTOR_NUMBER;
         // If the user changes the language this will make cards sort by the old language until they restart the game.
         // This is a good tradeoff
@@ -375,7 +375,8 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
                 System.out.println("PaperCard: " + name + " not found with set and index " + edition + ", " + artIndex);
                 pc = readObjectAlternate(name, edition);
                 if (pc == null) {
-                    throw new IOException(TextUtil.concatWithSpace("Card", name, "not found with set and index", edition, Integer.toString(artIndex)));
+                    pc = StaticData.instance().getCommonCards().createUnsupportedCard(name);
+                    //throw new IOException(TextUtil.concatWithSpace("Card", name, "not found with set and index", edition, Integer.toString(artIndex)));
                 }
                 System.out.println("Alternate object found: " + pc.getName() + ", " + pc.getEdition() + ", " + pc.getArtIndex());
             }

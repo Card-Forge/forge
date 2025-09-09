@@ -5,6 +5,7 @@ import static forge.Forge.getLocalizer;
 import forge.toolbox.FOptionPane;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Consumer;
 
 import com.badlogic.gdx.math.Vector2;
 import forge.adventure.scene.GameScene;
@@ -67,7 +68,6 @@ import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FScrollPane;
-import forge.util.Callback;
 
 public class MatchScreen extends FScreen {
     public static FSkinColor getBorderColor() {
@@ -314,7 +314,7 @@ public class MatchScreen extends FScreen {
     }
 
     @Override
-    public void onClose(Callback<Boolean> canCloseCallback) {
+    public void onClose(Consumer<Boolean> canCloseCallback) {
         MatchController.writeMatchPreferences();
         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
         super.onClose(canCloseCallback);
@@ -1188,12 +1188,9 @@ public class MatchScreen extends FScreen {
     }
 
     private void confirmUserConcedes() {
-        final Callback<Boolean> callback = new Callback<>() {
-            @Override
-            public void run(Boolean result) {
-                if (result) {
-                    getGameController().concede();
-                }
+        final Consumer<Boolean> callback = result -> {
+            if (result) {
+                getGameController().concede();
             }
         };
 

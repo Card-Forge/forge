@@ -113,7 +113,10 @@ public class LoadDraftScreen extends LaunchScreen {
         FThreads.invokeInBackgroundThread(() -> {
             final DeckProxy humanDeck = lstDecks.getSelectedItem();
             if (humanDeck == null) {
-                FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblYouMustSelectExistingDeck"), Forge.getLocalizer().getMessage("lblNoDeck"));
+                FThreads.invokeInEdtLater(() -> { //should be in EDT...
+                    FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblYouMustSelectExistingDeck"),
+                        Forge.getLocalizer().getMessage("lblNoDeck"));
+                });
                 return;
             }
 

@@ -133,9 +133,9 @@ public class  DamageAllAi extends SpellAbilityAi {
                     if (ComputerUtilCombat.predictDamageTo(opp, dmg, source, false) > 0) {
                         // When using Pestilence to hurt players, do it at
                         // the end of the opponent's turn only
-                        if ((!"DmgAllCreaturesAndPlayers".equals(sa.getParam("AILogic")))
-                                || ((ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)
-                                && (ai.getGame().getNonactivePlayers().contains(ai)))))
+                        if (!"DmgAllCreaturesAndPlayers".equals(sa.getParam("AILogic"))
+                                || (ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)
+                                && !ai.getGame().getPhaseHandler().isPlayerTurn(ai)))
                         // Need further improvement : if able to kill immediately with repeated activations, do not wait
                         // for phases! Will also need to implement considering repeated activations for killed creatures!
                         // || (ai.sa.getPayCosts(). ??? )

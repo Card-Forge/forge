@@ -1822,8 +1822,8 @@ public class GameAction {
 
     private boolean stateBasedAction704_5q(Card c) {
         boolean checkAgain = false;
-        final CounterType p1p1 = CounterType.get(CounterEnumType.P1P1);
-        final CounterType m1m1 = CounterType.get(CounterEnumType.M1M1);
+        final CounterType p1p1 = CounterEnumType.P1P1;
+        final CounterType m1m1 = CounterEnumType.M1M1;
         int plusOneCounters = c.getCounters(p1p1);
         int minusOneCounters = c.getCounters(m1m1);
         if (plusOneCounters > 0 && minusOneCounters > 0) {
@@ -1843,7 +1843,7 @@ public class GameAction {
         return checkAgain;
     }
     private boolean stateBasedAction704_5r(Card c) {
-        final CounterType dreamType = CounterType.get(CounterEnumType.DREAM);
+        final CounterType dreamType = CounterEnumType.DREAM;
 
         int old = c.getCounters(dreamType);
         if (old <= 0) {
@@ -2219,6 +2219,13 @@ public class GameAction {
         // Notify both players
         for (Player p : game.getPlayers()) {
             p.getController().revealAnte(title, removedAnteCards);
+        }
+    }
+
+    public void revealUnsupported(Map<Player, List<PaperCard>> unsupported) {
+        // Notify players
+        for (Player p : game.getPlayers()) {
+            p.getController().revealUnsupported(unsupported);
         }
     }
 

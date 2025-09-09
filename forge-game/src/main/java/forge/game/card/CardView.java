@@ -60,13 +60,12 @@ public class CardView extends GameEntityView {
     }
 
     public static TrackableCollection<CardView> getCollection(Iterable<Card> cards) {
-        if (cards == null) {
-            return null;
-        }
         TrackableCollection<CardView> collection = new TrackableCollection<>();
-        for (Card c : cards) {
-            if (c.getRenderForUI()) { //only add cards that match their card for UI
-                collection.add(c.getView());
+        if (cards != null) {
+            for (Card c : cards) {
+                if (c != null && c.getRenderForUI()) { //only add cards that match their card for UI
+                    collection.add(c.getView());
+                }
             }
         }
         return collection;
@@ -938,7 +937,9 @@ public class CardView extends GameEntityView {
             sb.append("\r\n\r\nMerged Cards: ").append(mergedCards);
         }
 
-        return sb.toString().trim();
+        return sb.toString().trim()
+            .replace("\\r", "\r")
+            .replace("\\n", "\n");
     }
 
     public CardStateView getCurrentState() {

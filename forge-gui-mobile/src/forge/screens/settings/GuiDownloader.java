@@ -18,6 +18,7 @@
 package forge.screens.settings;
 
 import java.net.Proxy;
+import java.util.function.Consumer;
 
 import forge.Forge;
 import forge.gui.UiCommand;
@@ -30,7 +31,6 @@ import forge.toolbox.FProgressBar;
 import forge.toolbox.FRadioButton;
 import forge.toolbox.FRadioButton.RadioButtonGroup;
 import forge.toolbox.FTextField;
-import forge.util.Callback;
 import forge.util.Utils;
 
 public class GuiDownloader extends FDialog {
@@ -52,18 +52,18 @@ public class GuiDownloader extends FDialog {
             service.setCancel(true);
             hide();
             if (callback != null) {
-                callback.run(getButton(0).getText() == "OK"); //determine result based on whether download finished
+                callback.accept(getButton(0).getText() == "OK"); //determine result based on whether download finished
             }
         }
     };
 
     private final GuiDownloadService service;
-    private final Callback<Boolean> callback;
+    private final Consumer<Boolean> callback;
 
     public GuiDownloader(final GuiDownloadService service0) {
         this(service0, null);
     }
-    public GuiDownloader(final GuiDownloadService service0, final Callback<Boolean> callback0) {
+    public GuiDownloader(final GuiDownloadService service0, final Consumer<Boolean> callback0) {
         super(service0.getTitle(), 2);
         service = service0;
         callback = callback0;

@@ -1348,6 +1348,11 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public void revealUnsupported(Map<Player, List<PaperCard>> unsupported) {
+        // Ai won't understand that anyway
+    }
+
+    @Override
     public Map<DeckSection, List<? extends PaperCard>> complainCardsCantPlayWell(Deck myDeck) {
         // TODO check if profile detection set to Auto
         setupAutoProfile(myDeck);

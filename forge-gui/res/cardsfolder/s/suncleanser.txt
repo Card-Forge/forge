@@ -5,7 +5,7 @@ PT:1/4
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ CreatureDBRemoveCounter,OpponentDBRemoveCounter | CharmNum$ 1
 SVar:CreatureDBRemoveCounter:DB$ RemoveCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ All | CounterNum$ All | SubAbility$ DBPumpCreature | SpellDescription$ Remove all counters from target creature. It can't have counters put on it for as long as CARDNAME remains on the battlefield.
-SVar:OpponentDBRemoveCounter:DB$ RemoveCounter | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | CounterType$ All | CounterNum$ All | SubAbility$ DBPumpOpponent | SpellDescription$ Target opponent loses all counters. That player can't get counters for as long as CARDNAME remains on the battlefield.
+SVar:OpponentDBRemoveCounter:DB$ RemoveCounter | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | CounterType$ All | SubAbility$ DBPumpOpponent | SpellDescription$ Target opponent loses all counters. That player can't get counters for as long as CARDNAME remains on the battlefield.
 SVar:DBPumpCreature:DB$ Effect | StaticAbilities$ DBCantPutCounterCreature | RememberObjects$ Targeted | Duration$ AsLongAsInPlay
 SVar:DBCantPutCounterCreature:Mode$ CantPutCounter | ValidCard$ Card.IsRemembered | Description$ That creature can't have counters put on it for as long as EFFECTSOURCE remains on the battlefield.
 SVar:DBPumpOpponent:DB$ Effect | StaticAbilities$ DBCantPutCounterPlayer | RememberObjects$ Targeted | Duration$ AsLongAsInPlay

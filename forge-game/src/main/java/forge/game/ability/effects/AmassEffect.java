@@ -17,7 +17,6 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
 import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
 import forge.game.card.token.TokenInfo;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.event.GameEventTokenCreated;
@@ -86,7 +85,7 @@ public class AmassEffect extends TokenEffectBase {
         }
 
         Map<String, Object> params = Maps.newHashMap();
-        params.put("CounterType", CounterType.get(CounterEnumType.P1P1));
+        params.put("CounterType", CounterEnumType.P1P1);
         params.put("Amount", amount);
         Card tgt = activator.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblChooseAnArmy"), false, params);
 

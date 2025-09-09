@@ -32,6 +32,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 import org.jupnp.DefaultUpnpServiceConfiguration;
@@ -282,7 +283,7 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public void download(final GuiDownloadService service, final Callback<Boolean> callback) {
+    public void download(final GuiDownloadService service, final Consumer<Boolean> callback) {
         new GuiDownloader(service, callback).show();
     }
 

@@ -1,0 +1,10 @@
+Name:J. Jonah Jameson
+ManaCost:2 R
+Types:Legendary Creature Human Citizen
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSuspect | TriggerDescription$ When CARDNAME enters, suspect up to one target creature. (A suspected creature has menace and can't block.)
+SVar:TrigSuspect:DB$ AlterAttribute | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | Defined$ Targeted | Attributes$ Suspected
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+withMenace | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a creature you control with menace attacks, create a Treasure token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+SVar:PlayMain1:TRUE
+Oracle:When J. Jonah Jameson enters, suspect up to one target creature. (A suspected creature has menace and can't block.)\nWhenever a creature you control with menace attacks, create a Treasure token.

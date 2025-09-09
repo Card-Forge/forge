@@ -1,0 +1,6 @@
+Name:Illusion Villain Token
+ManaCost:no cost
+Colors:blue
+Types:Creature Illusion Villain
+PT:3/3
+Oracle:

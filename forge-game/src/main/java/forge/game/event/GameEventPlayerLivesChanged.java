@@ -4,16 +4,7 @@ import forge.game.player.Player;
 import forge.util.Lang;
 import forge.util.TextUtil;
 
-public class GameEventPlayerLivesChanged extends GameEvent {
-    public final Player player;
-    public final int oldLives;
-    public final int newLives;
-
-    public GameEventPlayerLivesChanged(Player who, int oldValue, int newValue) {
-        player = who;
-        oldLives = oldValue;
-        newLives = newValue;
-    }
+public record GameEventPlayerLivesChanged(Player player, int oldLives, int newLives) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

@@ -22,7 +22,6 @@ import java.util.Map;
 import com.google.common.collect.Iterables;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
-import forge.game.card.CardLists;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
@@ -60,17 +59,8 @@ public class TriggerAttackerBlocked extends Trigger {
             return false;
         }
 
-        if (hasParam("ValidBlocker")) {
-            @SuppressWarnings("unchecked")
-            int count = CardLists.getValidCardCount(
-                    (Iterable<Card>) runParams.get(AbilityKey.Blockers),
-                    getParam("ValidBlocker"),
-                    getHostCard().getController(), getHostCard(), this
-            );
-
-            if (count == 0) {
-                return false;
-            }
+        if (!matchesValidParam("ValidBlocker", runParams.get(AbilityKey.Blockers))) {
+            return false;
         }
 
         return true;

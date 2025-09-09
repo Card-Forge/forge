@@ -13,7 +13,6 @@ import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.toolbox.FOptionPane;
-import forge.util.Callback;
 
 public class OnlineMenu extends FPopupMenu {
     public enum OnlineScreen {
@@ -31,23 +30,20 @@ public class OnlineMenu extends FPopupMenu {
                 if(screenClass == null) {
                     FOptionPane.showConfirmDialog(
                             Forge.getLocalizer().getMessage("lblLeaveLobbyDescription"),
-                            Forge.getLocalizer().getMessage("lblDisconnect"), new Callback<Boolean>() {
-                                @Override
-                                public void run(Boolean result) {
-                                    if (result) {
-                                        if (FServerManager.getInstance() != null)
-                                            if(FServerManager.getInstance().isHosting()) {
-                                                FServerManager.getInstance().unsetReady();
-                                                FServerManager.getInstance().stopServer();
-                                            }
+                            Forge.getLocalizer().getMessage("lblDisconnect"), result -> {
+                                if (result) {
+                                    if (FServerManager.getInstance() != null)
+                                        if(FServerManager.getInstance().isHosting()) {
+                                            FServerManager.getInstance().unsetReady();
+                                            FServerManager.getInstance().stopServer();
+                                        }
 
-                                        if (OnlineLobbyScreen.getfGameClient() != null)
-                                            OnlineLobbyScreen.closeClient();
+                                    if (OnlineLobbyScreen.getfGameClient() != null)
+                                        OnlineLobbyScreen.closeClient();
 
-                                        Forge.back();
-                                        screen = null;
-                                        OnlineLobbyScreen.clearGameLobby();
-                                    }
+                                    Forge.back();
+                                    screen = null;
+                                    OnlineLobbyScreen.clearGameLobby();
                                 }
                             });
                     return;

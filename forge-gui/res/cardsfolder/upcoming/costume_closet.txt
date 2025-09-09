@@ -1,0 +1,9 @@
+Name:Costume Closet
+ManaCost:1 W
+Types:Artifact
+K:etbCounter:P1P1:2
+A:AB$ MoveCounter | Cost$ T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Source$ Self | CounterType$ P1P1 | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Move a +1/+1 counter from this artifact onto target creature you control. Activate only as a sorcery.
+T:Mode$ ChangesZone | ValidCard$ Creature.modified+YouCtrl | Origin$ Battlefield | Destination$ Any | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a modified creature you control leaves the battlefield, put a +1/+1 counter on this artifact. (Equipment, Auras you control, and counters are modifications.)
+SVar:TrigCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:This artifact enters with two +1/+1 counters on it.\n{T}: Move a +1/+1 counter from this artifact onto target creature you control. Activate only as a sorcery.\nWhenever a modified creature you control leaves the battlefield, put a +1/+1 counter on this artifact. (Equipment, Auras you control, and counters are modifications.)

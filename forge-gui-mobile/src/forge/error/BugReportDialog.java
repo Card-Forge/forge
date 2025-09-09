@@ -12,9 +12,10 @@ import forge.screens.FScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextArea;
-import forge.util.Callback;
 import forge.util.TextBounds;
 import forge.util.Utils;
+
+import java.util.function.Consumer;
 
 public class BugReportDialog extends FScreen { //use screen rather than dialog so screen with bug isn't rendered
     private static final float PADDING = Utils.scale(5);
@@ -43,7 +44,10 @@ public class BugReportDialog extends FScreen { //use screen rather than dialog s
             BugReporter.sendSentry();
             Forge.back();
         });
-        btnSave.setCommand(e -> BugReporter.saveToFile(tvDetails.text));
+        btnSave.setCommand(e -> {
+            BugReporter.saveToFile(tvDetails.text);
+            Forge.back();
+        });
         btnDiscard.setCommand(e -> Forge.back());
         if (showExitAppBtn) {
             btnExit.setCommand(e -> Forge.exit(true));
@@ -59,7 +63,7 @@ public class BugReportDialog extends FScreen { //use screen rather than dialog s
     }
 
     @Override
-    public void onClose(Callback<Boolean> canCloseCallback) {
+    public void onClose(Consumer<Boolean> canCloseCallback) {
         super.onClose(canCloseCallback);
         isOpen = false;
     }

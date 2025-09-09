@@ -115,6 +115,20 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return parts.get(DeckSection.Main);
     }
 
+    public Pair<Deck, List<PaperCard>> getValid() {
+        List<PaperCard> unsupported = new ArrayList<>();
+        for (Entry<DeckSection, CardPool> kv : parts.entrySet()) {
+            CardPool pool = kv.getValue();
+            for (Entry<PaperCard, Integer> pc : pool) {
+                if (pc.getKey().getRules() != null && pc.getKey().getRules().isUnsupported()) {
+                    unsupported.add(pc.getKey());
+                    pool.remove(pc.getKey());
+                }
+            }
+        }
+        return Pair.of(this, unsupported);
+    }
+
     public List<PaperCard> getCommanders() {
         List<PaperCard> result = Lists.newArrayList();
         final CardPool cp = get(DeckSection.Commander);

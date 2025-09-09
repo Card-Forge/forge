@@ -203,6 +203,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private boolean unearthed;
     private boolean ringbearer;
     private boolean monstrous;
+    private boolean harnessed;
     private boolean renowned;
     private boolean solved;
     private boolean tributed;
@@ -2462,10 +2463,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         }
                     }
                     sbLong.append("Enchant ").append(desc).append("\r\n");
-                } else if (keyword.startsWith("Ripple")) {
-                    sbLong.append(TextUtil.fastReplace(keyword, ":", " ")).append("\r\n");
                 } else if (keyword.startsWith("Morph") || keyword.startsWith("Megamorph")
-                        || keyword.startsWith("Disguise")
+                        || keyword.startsWith("Disguise") || keyword.startsWith("Reflect")
                         || keyword.startsWith("Escape") || keyword.startsWith("Foretell:")
                         || keyword.startsWith("Madness:")|| keyword.startsWith("Recover")
                         || keyword.startsWith("Reconfigure") || keyword.startsWith("Squad")
@@ -2504,17 +2503,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                                 sbLong.append(".");
                             }
                             if (k.length > 3) {
-                                sbLong.append(". " + k[3]);
+                                sbLong.append(". ").append(k[3]);
                             }
                         }
                         sbLong.append(" (").append(inst.getReminderText()).append(")");
                         sbLong.append("\r\n");
+                    } else if (keyword.equals("Mayhem")) {
+                        sbLong.append(" (").append(inst.getReminderText()).append(")");
+                        sbLong.append("\r\n");
                     }
-                } else if (keyword.startsWith("Reflect")) {
-                    final String[] k = keyword.split(":");
-                    sbLong.append(k[0]).append(" ").append(ManaCostParser.parse(k[1]));
-                    sbLong.append(" (").append(inst.getReminderText()).append(")");
-                    sbLong.append("\r\n");
                 } else if (keyword.startsWith("Echo")) {
                     sbLong.append("Echo ");
                     final String[] upkeepCostParams = keyword.split(":");
@@ -2653,7 +2650,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Graft") || keyword.startsWith("Fading") || keyword.startsWith("Vanishing:")
                         || keyword.startsWith("Afterlife") || keyword.startsWith("Hideaway") || keyword.startsWith("Toxic")
                         || keyword.startsWith("Afflict") || keyword.startsWith ("Poisonous") || keyword.startsWith("Rampage")
-                        || keyword.startsWith("Renown") || keyword.startsWith("Annihilator")) {
+                        || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Ripple")) {
                     final String[] k = keyword.split(":");
                     sbLong.append(k[0]).append(" ").append(k[1]).append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Crew")) {
@@ -2969,6 +2966,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (monstrous) {
             sb.append("Monstrous\r\n");
         }
+        if (harnessed) {
+            sb.append("Harnessed\r\n");
+        }
         if (renowned) {
             sb.append("Renowned\r\n");
         }
@@ -3218,6 +3218,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (getEffectSource() != null) {
             desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", getEffectSource().getName());
         }
+
+        // Ensure no more escaped linebreak are present
+        desc = desc.replace("\\r", "\r")
+            .replace("\\n", "\n");
 
         return desc.trim();
     }
@@ -3557,7 +3561,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (!getStaticAbilities().isEmpty()) {
             return false;
         }
-        if (!getReplacementEffects().isEmpty()) {
+        if (!getReplacementEffects().isEmpty()
+                && (getReplacementEffects().size() > 1 || !isSaga() || hasKeyword(Keyword.READ_AHEAD))) {
             return false;
         }
         if (!getTriggers().isEmpty()) {
@@ -6437,10 +6442,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         DamageType damageType = DamageType.Normal;
         if (isPlaneswalker()) { // 120.3c
-            subtractCounter(CounterType.get(CounterEnumType.LOYALTY), damageIn, null, true);
+            subtractCounter(CounterEnumType.LOYALTY, damageIn, null, true);
         }
         if (isBattle()) {
-            subtractCounter(CounterType.get(CounterEnumType.DEFENSE), damageIn, null, true);
+            subtractCounter(CounterEnumType.DEFENSE, damageIn, null, true);
         }
         if (isCreature()) {
             if (source.isWitherDamage()) { // 120.3d
@@ -6688,6 +6693,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         setRingBearer(false);
     }
 
+    public final boolean isHarnessed() {
+        return harnessed;
+    }
+    public final boolean setHarnessed(final boolean harnessed0) {
+        harnessed = harnessed0;
+        return true;
+    }
+
     public final boolean isMonstrous() {
         return monstrous;
     }
@@ -6843,6 +6856,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return false;
         }
         return exiledSA.isKeyword(Keyword.WARP);
+    }
+
+    public boolean isWebSlinged() {
+        return getCastSA() != null & getCastSA().isAlternativeCost(AlternativeCost.WebSlinging);
     }
 
     public boolean isSpecialized() {
@@ -7140,7 +7157,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return false;
         }
 
-        if (StaticAbilityCantTarget.cantTarget(this, sa)) {
+        if (StaticAbilityCantTarget.cantTarget(this, sa) != null) {
             return false;
         }
 

@@ -154,7 +154,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
                 }
 
                 if (counterType == null || counterType.is(type)) {
-                    addTargetsByCounterType(ai, sa, aiList, CounterType.get(type));
+                    addTargetsByCounterType(ai, sa, aiList, type);
                 }
             }
         }
@@ -163,7 +163,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
         if (!oppList.isEmpty()) {
             // not enough targets
             if (sa.canAddMoreTarget()) {
-                final CounterType type = CounterType.get(CounterEnumType.M1M1);
+                final CounterType type = CounterEnumType.M1M1;
                 if (counterType == null || counterType == type) {
                     addTargetsByCounterType(ai, sa, oppList, type);
                 }

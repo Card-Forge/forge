@@ -2,29 +2,18 @@ package forge.game.event;
 
 import forge.game.spellability.SpellAbility;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
-public class GameEventSpellResolved extends GameEvent {
-
-    public final SpellAbility spell;
-    public final boolean hasFizzled;
-
-    /**
-     * TODO: Write javadoc for Constructor.
-     * @param source
-     * @param sa
-     * @param hasFizzled 
-     */
-    public GameEventSpellResolved(SpellAbility sa, boolean hasFizzled) {
-        // TODO Auto-generated constructor stub
-        this.spell = sa;
-        this.hasFizzled = hasFizzled;
-    }
+public record GameEventSpellResolved(SpellAbility spell, boolean hasFizzled) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
         return visitor.visit(this);
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "Stack resolved " + spell + (hasFizzled ? " (fizzled)" : "");
     }
 }

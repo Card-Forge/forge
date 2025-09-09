@@ -207,8 +207,6 @@ public class ImageUtil {
         else
             editionCode = cp.getEdition().toLowerCase();
         String cardCollectorNumber = cp.getCollectorNumber();
-        // Hack to account for variations in Arabian Nights
-        cardCollectorNumber = cardCollectorNumber.replace("+", "†");
         // override old planechase sets from their modified id since scryfall move the planechase cards outside their original setcode
         if (cardCollectorNumber.startsWith("OHOP")) {
             editionCode = "ohop";
@@ -252,6 +250,11 @@ public class ImageUtil {
                     : "&face=front");
         }
 
+        if (cardCollectorNumber.endsWith("☇")) {
+            faceParam = "&face=back";
+            cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 1);
+        }
+
         return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, encodeUtf8(cardCollectorNumber),
                 langCode, versionParam, faceParam);
     }
@@ -260,6 +263,10 @@ public class ImageUtil {
         String versionParam = "normal";
         if (!faceParam.isEmpty()) {
             faceParam = (faceParam.equals("back") ? "&face=back" : "&face=front");
+        }
+        if (collectorNumber.endsWith("☇")) {
+            faceParam = "&face=back";
+            collectorNumber = collectorNumber.substring(0, collectorNumber.length() - 1);
         }
         return String.format("%s/%s/%s?format=image&version=%s%s", setCode, encodeUtf8(collectorNumber),
                 langCode, versionParam, faceParam);
@@ -281,8 +288,7 @@ public class ImageUtil {
         char c;
         for (int i = 0; i < in.length(); i++) {
             c = in.charAt(i);
-            if ((c == '"') || (c == '/') || (c == ':') || (c == '?')) {
-            } else {
+            if ((c != '"') && (c != '/') && (c != ':') && (c != '?')) {
                 out.append(c);
             }
         }

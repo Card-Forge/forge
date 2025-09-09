@@ -5,11 +5,7 @@ import com.google.common.collect.Multimap;
 import forge.game.card.Card;
 import forge.game.player.Player;
 
-public class GameEventAnteCardsSelected extends GameEvent {
-    public final Multimap<Player, Card> cards;
-    public GameEventAnteCardsSelected(Multimap<Player, Card> list) {
-        cards = list;
-    }
+public record GameEventAnteCardsSelected(Multimap<Player, Card> cards) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

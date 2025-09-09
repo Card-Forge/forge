@@ -24,8 +24,8 @@ Base=Uncommon:fromSheet("BLB cards")
 Base=RareMythic:fromSheet("BLB cards")
 
 [FullArtLand]
-Base=Land:fromSheet("BLB full art")
-Replace=.20F Land:fromSheet("BLB full art")+
+Base=Land:fromSheet("BLB fullart")
+Replace=.20F Land:fromSheet("BLB fullart")+
 
 [Wildcard]
 Base=Common:fromSheet("BLB cards")
@@ -446,38 +446,38 @@ Replace=.012F RareMythic:fromSheet("BLB cards")
 A-138 U A-Heartfire Hero @Jakub Kasper
 
 [special guests]
-1 Sword of Fire and Ice|SPG
-1 Secluded Courtyard|SPG
-1 Frogmite|SPG
-1 Toski, Bearer of Secrets|SPG
-1 Sylvan Tutor|SPG
-1 Kindred Charge|SPG
-1 Relentless Rats|SPG
-1 Rat Colony|SPG
-1 Ledger Shredder|SPG
-1 Swords to Plowshares|SPG
+1 Sword of Fire and Ice|SPG|[62]
+1 Secluded Courtyard|SPG|[63]
+1 Frogmite|SPG|[61]
+1 Toski, Bearer of Secrets|SPG|[60]
+1 Sylvan Tutor|SPG|[59]
+1 Kindred Charge|SPG|[58]
+1 Relentless Rats|SPG|[57]
+1 Rat Colony|SPG|[56]
+1 Ledger Shredder|SPG|[55]
+1 Swords to Plowshares|SPG|[54]
 
-[full art]
-4 Plains|BLB|1
-3 Plains|BLB|2
-2 Plains|BLB|3
-1 Plains|BLB|4
-4 Mountain|BLB|1
-3 Mountain|BLB|2
-2 Mountain|BLB|3
-1 Mountain|BLB|4
-4 Swamp|BLB|1
-3 Swamp|BLB|2
-2 Swamp|BLB|3
-1 Swamp|BLB|4
-4 Island|BLB|1
-3 Island|BLB|2
-2 Island|BLB|3
-1 Island|BLB|4
-4 Forest|BLB|1
-3 Forest|BLB|2
-2 Forest|BLB|3
-1 Forest|BLB|4
+[fullart]
+4 Plains|BLB|[262]
+3 Plains|BLB|[263]
+2 Plains|BLB|[264]
+1 Plains|BLB|[265]
+4 Mountain|BLB|[274]
+3 Mountain|BLB|[275]
+2 Mountain|BLB|[276]
+1 Mountain|BLB|[277]
+4 Swamp|BLB|[270]
+3 Swamp|BLB|[271]
+2 Swamp|BLB|[272]
+1 Swamp|BLB|[273]
+4 Island|BLB|[266]
+3 Island|BLB|[267]
+2 Island|BLB|[268]
+1 Island|BLB|[269]
+4 Forest|BLB|[278]
+3 Forest|BLB|[279]
+2 Forest|BLB|[280]
+1 Forest|BLB|[281]
 
 [tokens]
 3 w_1_1_rabbit @Gina Matarazzo

@@ -213,15 +213,9 @@ public final class CardPredicates {
     public static Predicate<Card> hasCounter(final CounterType type) {
         return hasCounter(type, 1);
     }
-    public static Predicate<Card> hasCounter(final CounterEnumType type) {
-        return hasCounter(type, 1);
-    }
 
     public static Predicate<Card> hasCounter(final CounterType type, final int n) {
         return c -> c.getCounters(type) >= n;
-    }
-    public static Predicate<Card> hasCounter(final CounterEnumType type, final int n) {
-        return hasCounter(CounterType.get(type), n);
     }
 
     public static Predicate<Card> hasLessCounter(final CounterType type, final int n) {
@@ -230,15 +224,9 @@ public final class CardPredicates {
             return x > 0 && x <= n;
         };
     }
-    public static Predicate<Card> hasLessCounter(final CounterEnumType type, final int n) {
-        return hasLessCounter(CounterType.get(type), n);
-    }
 
     public static Predicate<Card> canReceiveCounters(final CounterType counter) {
         return c -> c.canReceiveCounters(counter);
-    }
-    public static Predicate<Card> canReceiveCounters(final CounterEnumType counter) {
-        return canReceiveCounters(CounterType.get(counter));
     }
 
     public static Predicate<Card> hasGreaterPowerThan(final int minPower) {
@@ -247,9 +235,6 @@ public final class CardPredicates {
 
     public static Comparator<Card> compareByCounterType(final CounterType type) {
         return Comparator.comparingInt(arg0 -> arg0.getCounters(type));
-    }
-    public static Comparator<Card> compareByCounterType(final CounterEnumType type) {
-        return compareByCounterType(CounterType.get(type));
     }
 
     public static Predicate<Card> hasSVar(final String name) {

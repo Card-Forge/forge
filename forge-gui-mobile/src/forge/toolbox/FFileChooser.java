@@ -2,6 +2,7 @@ package forge.toolbox;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.function.Consumer;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -15,7 +16,6 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
-import forge.util.Callback;
 import forge.util.FileUtil;
 import forge.util.Utils;
 
@@ -28,25 +28,25 @@ public class FFileChooser extends FDialog {
         GetDirectory
     }
 
-    public static void show(String title0, ChoiceType choiceType0, Callback<String> callback0) {
+    public static void show(String title0, ChoiceType choiceType0, Consumer<String> callback0) {
         show(title0, choiceType0, "", "", callback0);
     }
-    public static void show(String title0, ChoiceType choiceType0, String defaultFilename0, Callback<String> callback0) {
+    public static void show(String title0, ChoiceType choiceType0, String defaultFilename0, Consumer<String> callback0) {
         show(title0, choiceType0, defaultFilename0, "", callback0);
     }
-    public static void show(String title0, ChoiceType choiceType0, String defaultFilename0, String baseDir0, Callback<String> callback0) {
+    public static void show(String title0, ChoiceType choiceType0, String defaultFilename0, String baseDir0, Consumer<String> callback0) {
         FFileChooser dialog = new FFileChooser(title0, choiceType0, defaultFilename0, baseDir0, callback0);
         dialog.show();
     }
 
     private final ChoiceType choiceType;
     private final String baseDir;
-    private final Callback<String> callback;
+    private final Consumer<String> callback;
 
     private final FList<File> lstFiles   = add(new FileList());
     private final FTextField txtFilename = add(new FilenameField());
 
-    private FFileChooser(String title0, ChoiceType choiceType0, String defaultFilename0, String baseDir0, Callback<String> callback0) {
+    private FFileChooser(String title0, ChoiceType choiceType0, String defaultFilename0, String baseDir0, Consumer<String> callback0) {
         super(title0, 3);
         choiceType = choiceType0;
         if (choiceType == ChoiceType.GetDirectory) {
@@ -66,24 +66,21 @@ public class FFileChooser extends FDialog {
                 return;
             }
 
-            FOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblEnterNewFolderName"), new Callback<String>() {
-                @Override
-                public void run(String result) {
-                    if (StringUtils.isEmpty(result)) { return; }
-
-                    try {
-                        File newDir = new File(dir, result);
-                        if (newDir.mkdirs()) {
-                            txtFilename.setText(newDir.getAbsolutePath());
-                            refreshFileList();
-                            return;
-                        }
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblEnterFolderNameNotValid", result), Forge.getLocalizer().getMessage("lblInvalidName"));
+            FOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblEnterNewFolderName"), result -> {
+                if (StringUtils.isEmpty(result)) { 
+                    return;
                 }
+                try {
+                    File newDir = new File(dir, result);
+                    if (newDir.mkdirs()) {
+                        txtFilename.setText(newDir.getAbsolutePath());
+                        refreshFileList();
+                        return;
+                    }
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+                FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblEnterFolderNameNotValid", result), Forge.getLocalizer().getMessage("lblInvalidName"));
             });
         });
         initButton(2, Forge.getLocalizer().getMessage("lblCancel"), e -> hide());
@@ -195,7 +192,7 @@ public class FFileChooser extends FDialog {
         if (returnDirectory) {
             filename += File.separator; //re-append separator if returning directory
         }
-        callback.run(filename);
+        callback.accept(filename);
     }
 
     private void back() {
@@ -220,33 +217,29 @@ public class FFileChooser extends FDialog {
         else {
             title = Forge.getLocalizer().getMessage("lblEnterNewNameForFile");
         }
-        FOptionPane.showInputDialog(title, file.getName(), new Callback<String>() {
-            @Override
-            public void run(String result) {
-                if (StringUtils.isEmpty(result)) { return; }
-
-                try {
-                    File newFile = new File(dir, result);
-                    if (file.renameTo(newFile)) {
-                        txtFilename.setText(newFile.getAbsolutePath());
-                        refreshFileList();
-                        return;
-                    }
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-                FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblEnterNameNotValid", result), Forge.getLocalizer().getMessage("lblInvalidName"));
+        FOptionPane.showInputDialog(title, file.getName(), result -> {
+            if (StringUtils.isEmpty(result)) {
+                return;
             }
+            try {
+                File newFile = new File(dir, result);
+                if (file.renameTo(newFile)) {
+                    txtFilename.setText(newFile.getAbsolutePath());
+                    refreshFileList();
+                    return;
+                }
+            }
+            catch (Exception e2) {
+                e2.printStackTrace();
+            }
+            FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblEnterNameNotValid", result), Forge.getLocalizer().getMessage("lblInvalidName"));
         });
     }
 
     private void deleteFile(final Integer index, final File file) {
         final String deleteBehavior = file.isDirectory() ? Forge.getLocalizer().getMessage("lblDeleteFolder") : Forge.getLocalizer().getMessage("lblDeleteFile");
         FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblAreYouSureProceedDelete"), deleteBehavior,
-                Forge.getLocalizer().getMessage("lblDelete"), Forge.getLocalizer().getMessage("lblCancel"), new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
+            Forge.getLocalizer().getMessage("lblDelete"), Forge.getLocalizer().getMessage("lblCancel"), result -> {
                 if (result) {
                     try {
                         if (FileUtil.deleteDirectory(file)) { //this will ensure directory or file deleted
@@ -266,12 +259,11 @@ public class FFileChooser extends FDialog {
                             return;
                         }
                     }
-                    catch (Exception ex) {
-                        ex.printStackTrace();
+                    catch (Exception e3) {
+                        e3.printStackTrace();
                     }
                     FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblCouldBotDeleteFile"));
                 }
-            }
         });
     }
 

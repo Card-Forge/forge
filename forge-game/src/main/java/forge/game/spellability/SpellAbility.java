@@ -354,7 +354,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public int totalAmountOfManaGenerated(SpellAbility saPaidFor, boolean multiply) {
         int result = 0;
         AbilityManaPart mp = getManaPart();
-        if (mp != null && metConditions() && mp.meetsManaRestrictions(saPaidFor)) {
+        if (mp != null && mp.meetsManaRestrictions(saPaidFor)) {
             result += amountOfManaGenerated(multiply);
         }
         result += subAbility != null ? subAbility.totalAmountOfManaGenerated(saPaidFor, multiply) : 0;
@@ -670,6 +670,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public final boolean isMadness() {
         return isAlternativeCost(AlternativeCost.Madness);
+    }
+    
+    public final boolean isMayhem() {
+        return isAlternativeCost(AlternativeCost.Mayhem);
     }
 
     public final boolean isMutate() {
@@ -1495,6 +1499,22 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             if (tr.isEqualToughness() && entity instanceof Card) {
                 for (final Card c : getTargets().getTargetCards()) {
                     if (entity != c && c.getNetToughness() != (((Card) entity).getNetToughness())) {
+                        return false;
+                    }
+                }
+            }
+
+            if (tr.isDifferentCMC() && entity instanceof Card) {
+                for (final Card c : getTargets().getTargetCards()) {
+                    if (entity != c && c.getCMC() == (((Card) entity).getCMC())) {
+                        return false;
+                    }
+                }
+            }
+
+            if (tr.isDifferentNames() && entity instanceof Card) {
+                for (final Card c : getTargets().getTargetCards()) {
+                    if (entity != c && c.sharesNameWith(((Card) entity).getName())) {
                         return false;
                     }
                 }

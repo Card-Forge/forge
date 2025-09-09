@@ -120,6 +120,7 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
         grpPanel.add(radAll, "w 200px!, h 30px!");
         radSingle.setSelected(true);
         grpPanel.add(cbOpponent, "w 200px!, h 30px!");
+        pnlStart.removeAll();
         pnlStart.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
         pnlStart.setOpaque(false);
         pnlStart.add(grpPanel, "gapright 20");

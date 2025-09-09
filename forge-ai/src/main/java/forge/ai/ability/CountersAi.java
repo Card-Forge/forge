@@ -102,7 +102,7 @@ public abstract class CountersAi extends SpellAbilityAi {
         } else if (type.equals("DIVINITY")) {
             final CardCollection boon = CardLists.filter(list, c -> c.getCounters(CounterEnumType.DIVINITY) == 0);
             choice = ComputerUtilCard.getMostExpensivePermanentAI(boon);
-        } else if (CounterType.get(type).isKeywordCounter()) {
+        } else if (CounterType.getType(type).isKeywordCounter()) {
             choice = ComputerUtilCard.getBestCreatureAI(CardLists.getNotKeyword(list, type));
         } else {
             // The AI really should put counters on cards that can use it.

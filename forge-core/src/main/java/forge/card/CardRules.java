@@ -53,6 +53,7 @@ public final class CardRules implements ICardCharacteristics {
     private boolean addsWildCardColor;
     private int setColorID;
     private boolean custom;
+    private boolean unsupported;
     private String path;
 
     public CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
@@ -220,7 +221,9 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public boolean isCustom() { return custom; }
-    public void setCustom() { custom = true;   }
+    public void setCustom() { custom = true; }
+
+    public boolean isUnsupported() { return unsupported; }
 
     @Override
     public CardType getType() {
@@ -361,16 +364,21 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public boolean isDoctor() {
+        Set<String> subtypes = new HashSet<>();
         for (String type : mainPart.getType().getSubtypes()) {
-            if (!type.equals("Time Lord") && !type.equals("Doctor")) {
-                return false;
-            }
+            subtypes.add(type);
         }
-        return true;
+
+        return subtypes.size() == 2 &&
+                subtypes.contains("Time Lord") &&
+                subtypes.contains("Doctor");
     }
 
     public boolean canBeOathbreaker() {
         CardType type = mainPart.getType();
+        if (mainPart.getOracleText().contains("can be your commander")) {
+            return true;
+        }
         return type.isPlaneswalker();
     }
 
@@ -822,6 +830,8 @@ public final class CardRules implements ICardCharacteristics {
         faces[0].setNonAbilityText("This card is not supported by Forge.\nWhenever you start a game with this card, it will be bugged.");
         faces[0].assignMissingFields();
         final CardRules result = new CardRules(faces, CardSplitType.None, cah);
+
+        result.unsupported = true;
 
         return result;
     }

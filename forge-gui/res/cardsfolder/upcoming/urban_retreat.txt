@@ -1,0 +1,8 @@
+Name:Urban Retreat
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ Mana | Cost$ T | Produced$ Combo G W U | SpellDescription$ Add {G}, {W}, or {U}.
+A:AB$ ChangeZone | Cost$ 2 Return<1/Creature.tapped/tapped creature> | ActivationZone$ Hand | Origin$ Hand | Defined$ Self | Destination$ Battlefield | SorcerySpeed$ True | SpellDescription$ Put this card from your hand onto the battlefield. Activate only as a sorcery.
+Oracle:This land enters tapped.\n{T}: Add {G}, {W}, or {U}.\n{2}, Return a tapped creature you control to its owner's hand: Put this card from your hand onto the battlefield. Activate only as a sorcery.

@@ -384,7 +384,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
             if (targetCard.getController().isOpponentOf(ai)) {
                 // if its a Planeswalker try to remove Loyality first
                 if (targetCard.isPlaneswalker()) {
-                    return CounterType.get(CounterEnumType.LOYALTY);
+                    return CounterEnumType.LOYALTY;
                 }
                 for (CounterType type : options) {
                     if (!ComputerUtil.isNegativeCounter(type, targetCard)) {
@@ -392,10 +392,10 @@ public class CountersRemoveAi extends SpellAbilityAi {
                     }
                 }
             } else {
-                if (options.contains(CounterType.get(CounterEnumType.M1M1)) && targetCard.hasKeyword(Keyword.PERSIST)) {
-                    return CounterType.get(CounterEnumType.M1M1);
-                } else if (options.contains(CounterType.get(CounterEnumType.P1P1)) && targetCard.hasKeyword(Keyword.UNDYING)) {
-                    return CounterType.get(CounterEnumType.P1P1);
+                if (options.contains(CounterEnumType.M1M1) && targetCard.hasKeyword(Keyword.PERSIST)) {
+                    return CounterEnumType.M1M1;
+                } else if (options.contains(CounterEnumType.P1P1) && targetCard.hasKeyword(Keyword.UNDYING)) {
+                    return CounterEnumType.P1P1;
                 }
                 for (CounterType type : options) {
                     if (ComputerUtil.isNegativeCounter(type, targetCard)) {

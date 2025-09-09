@@ -1,10 +1,10 @@
 Name:Kirtar's Wrath
 ManaCost:4 W W
 Types:Sorcery
-A:SP$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE7 | TrueSubAbility$ ThreshDestruction | FalseSubAbility$ Destruction | SpellDescription$ Destroy all creatures. They can't be regenerated. Threshold — If seven or more cards are in your graveyard, instead destroy all creatures, then create two 1/1 white Spirit creature tokens with flying. Creatures destroyed this way can't be regenerated.
+A:SP$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE7 | TrueSubAbility$ ThreshDestruction | FalseSubAbility$ Destruction | SpellDescription$ Destroy all creatures. They can't be regenerated. Threshold — If there are seven or more cards in your graveyard, instead destroy all creatures, then create two 1/1 white Spirit creature tokens with flying. Creatures destroyed this way can't be regenerated.
 SVar:Destruction:DB$ DestroyAll | ValidCards$ Creature | NoRegen$ True
 SVar:ThreshDestruction:DB$ DestroyAll | ValidCards$ Creature | NoRegen$ True | SubAbility$ ThreshToken
 SVar:ThreshToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
 SVar:X:Count$ValidGraveyard Card.YouOwn
 DeckHas:Ability$Token
-Oracle:Destroy all creatures. They can't be regenerated.\nThreshold — If seven or more cards are in your graveyard, instead destroy all creatures, then create two 1/1 white Spirit creature tokens with flying. Creatures destroyed this way can't be regenerated.
+Oracle:Destroy all creatures. They can't be regenerated.\nThreshold — If there are seven or more cards in your graveyard, instead destroy all creatures, then create two 1/1 white Spirit creature tokens with flying. Creatures destroyed this way can't be regenerated.

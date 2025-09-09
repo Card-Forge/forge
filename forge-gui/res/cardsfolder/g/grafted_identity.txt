@@ -5,6 +5,6 @@ K:Enchant:Creature
 S:Mode$ RaiseCost | ValidCard$ Card.Self | Activator$ You | Type$ Spell | Cost$ Sac<1/Creature/creature> | EffectZone$ All | Description$ As an additional cost to cast this spell, sacrifice a creature.
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
-SVar:AttachAILogic$ GainControl
+SVar:AttachAILogic:GainControl
 DeckHas:Ability$Sacrifice
 Oracle:As an additional cost to cast this spell, sacrifice a creature.\nEnchant creature\nYou control enchanted creature.\nEnchanted creature gets +1/+1.

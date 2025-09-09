@@ -1393,7 +1393,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     public PaymentDecision visit(final CostUntapType cost) {
         CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"),
                 player, source, ability);
-        typeList = CardLists.filter(typeList, CardPredicates.TAPPED, c -> c.getCounters(CounterEnumType.STUN) == 0 || c.canRemoveCounters(CounterType.get(CounterEnumType.STUN)));
+        typeList = CardLists.filter(typeList, CardPredicates.TAPPED, c -> c.getCounters(CounterEnumType.STUN) == 0 || c.canRemoveCounters(CounterEnumType.STUN));
         int c = cost.getAbilityAmount(ability);
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, typeList, ability);
         inp.setCancelAllowed(true);

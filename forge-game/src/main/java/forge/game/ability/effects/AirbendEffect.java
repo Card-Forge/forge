@@ -39,7 +39,6 @@ public class AirbendEffect extends SpellAbilityEffect {
         return sb.toString();
     }
 
-    
     @Override
     public void resolve(SpellAbility sa) {
         final Card hostCard = sa.getHostCard();

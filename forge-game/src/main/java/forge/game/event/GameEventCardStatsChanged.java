@@ -11,23 +11,20 @@ import forge.game.card.Card;
 /**
  * This means card's characteristics have changed on server, clients must re-request them
  */
-public class GameEventCardStatsChanged extends GameEvent {
+public record GameEventCardStatsChanged(Collection<Card> cards, boolean transform) implements GameEvent {
 
-    public final Collection<Card> cards;
-    public boolean transform = false;
     public GameEventCardStatsChanged(Card affected) {
         this(affected, false);
     }
 
     public GameEventCardStatsChanged(Card affected, boolean isTransform) {
-        cards = Arrays.asList(affected);
+        this(Arrays.asList(affected), false);
         //the transform should only fire once so the flip effect sound will trigger once every transformation...
         // disable for now
-        transform = false;
     }
 
     public GameEventCardStatsChanged(Collection<Card> affected) {
-        cards = affected;
+        this(affected, false);
     }
 
     /* (non-Javadoc)
@@ -35,7 +32,6 @@ public class GameEventCardStatsChanged extends GameEvent {
      */
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
-        // TODO Auto-generated method stub
         return visitor.visit(this);
     }
 

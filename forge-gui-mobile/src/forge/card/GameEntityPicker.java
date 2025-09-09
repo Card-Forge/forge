@@ -3,6 +3,7 @@ package forge.card;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Consumer;
 
 import com.google.common.collect.ImmutableList;
 
@@ -20,12 +21,11 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
-import forge.util.Callback;
 
 public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
     private final FOptionPane optionPane;
 
-    public GameEntityPicker(String title, Collection<? extends GameEntityView> choiceList, Collection<CardView> revealList, String revealListCaption, FImage revealListImage, boolean isOptional, final Callback<GameEntityView> callback) {
+    public GameEntityPicker(String title, Collection<? extends GameEntityView> choiceList, Collection<CardView> revealList, String revealListCaption, FImage revealListImage, boolean isOptional, final Consumer<GameEntityView> callback) {
         super(new PickerTab[] {
                 new PickerTab(choiceList, Forge.getLocalizer().getMessage("lblChoices"), Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST, 1),
                 new PickerTab(revealList, revealListCaption, revealListImage, 0)
@@ -34,15 +34,12 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
         setHeight(FOptionPane.getMaxDisplayObjHeight());
 
         optionPane = new FOptionPane(null, null, title, null, this,
-                isOptional ? ImmutableList.of(Forge.getLocalizer().getMessage("lblOK"), Forge.getLocalizer().getMessage("lblCancel")) : ImmutableList.of(Forge.getLocalizer().getMessage("lblOK")), 0, new Callback<Integer>() {
-                    @Override
-                    public void run(Integer result) {
-                        if (result == 0) {
-                            callback.run(((PickerTab) tabPages.get(0)).list.getSelectedItem());
-                        }
-                        else {
-                            callback.run(null);
-                        }
+                isOptional ? ImmutableList.of(Forge.getLocalizer().getMessage("lblOK"), Forge.getLocalizer().getMessage("lblCancel")) : ImmutableList.of(Forge.getLocalizer().getMessage("lblOK")), 0, result -> {
+                    if (result == 0) {
+                        callback.accept(((PickerTab) tabPages.get(0)).list.getSelectedItem());
+                    }
+                    else {
+                        callback.accept(null);
                     }
                 }) {
             @Override

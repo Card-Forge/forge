@@ -1,0 +1,9 @@
+Name:Spider-Girl, Legacy Hero
+ManaCost:G W
+Types:Legendary Creature Spider Human Hero
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | Condition$ PlayerTurn | Description$ During your turn, NICKNAME has flying.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME leaves the battlefield, create a 1/1 green and white Human Citizen creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ gw_1_1_human_citizen | TokenOwner$ You
+DeckHas:Ability$Token & Type$Citizen
+Oracle:During your turn, Spider-Girl has flying.\nWhen Spider-Girl leaves the battlefield, create a 1/1 green and white Human Citizen creature token.

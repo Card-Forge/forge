@@ -468,6 +468,9 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
         return Iterables.getFirst(getIntrinsicSpellAbilities(), null);
     }
     public final SpellAbility getFirstSpellAbility() {
+        if (this.card.getCastSA() != null) {
+            return this.card.getCastSA();
+        }
         return Iterables.getFirst(getNonManaAbilities(), null);
     }
 
@@ -605,18 +608,18 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
             result.add(loyaltyRep);
         }
         if (type.isBattle()) {
-            // TODO This is currently breaking for Battle/Defense
-            // Going to script the cards to work but ideally it would happen here
             if (defenseRep == null) {
                 defenseRep = CardFactoryUtil.makeEtbCounter("etbCounter:DEFENSE:" + this.baseDefense, this, true);
             }
             result.add(defenseRep);
-
-            // TODO add Siege "Choose a player to protect it"
         }
+
+        card.updateReplacementEffects(result, this);
+
+        // below are global rules
         if (type.hasSubtype("Saga") && !hasKeyword(Keyword.READ_AHEAD)) {
             if (sagaRep == null) {
-                sagaRep = CardFactoryUtil.makeEtbCounter("etbCounter:LORE:1", this, true);
+                sagaRep = CardFactoryUtil.makeEtbCounter("etbCounter:LORE:1", this, false);
             }
             result.add(sagaRep);
         }
@@ -633,7 +636,6 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
             result.add(omenRep);
         }
 
-        card.updateReplacementEffects(result, this);
         return result;
     }
     public boolean addReplacementEffect(final ReplacementEffect replacementEffect) {
