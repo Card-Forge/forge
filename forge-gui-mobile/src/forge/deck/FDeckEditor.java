@@ -81,6 +81,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         public boolean allowsCardReplacement() { return hasInfiniteCardPool() || usePlayerInventory(); }
 
         public List<CardEdition> getBasicLandSets(Deck currentDeck) {
+            if(hasInfiniteCardPool())
+                return FModel.getMagicDb().getEditions().stream().filter(CardEdition::hasBasicLands).collect(Collectors.toList());
             return List.of(DeckProxy.getDefaultLandSet(currentDeck));
         }
 
@@ -144,7 +146,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         ItemManagerConfig catalogConfig = null;
         ItemManagerConfig mainSectionConfig = null;
         ItemManagerConfig sideboardConfig = null;
-        Function<Deck, CardEdition> fnGetBasicLandSet = null;
+        Function<Deck, Collection<CardEdition>> fnGetBasicLandSet = null;
         Supplier<ItemPool<PaperCard>> itemPoolSupplier = null;
         String catalogCaption = null;
 
@@ -196,7 +198,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             this.sideboardConfig = sideboardConfig;
             return this;
         }
-        public GameTypeDeckEditorConfig setBasicLandSetFunction(Function<Deck, CardEdition> fnGetBasicLandSet) {
+        public GameTypeDeckEditorConfig setBasicLandSetFunction(Function<Deck, Collection<CardEdition>> fnGetBasicLandSet) {
             this.fnGetBasicLandSet = fnGetBasicLandSet;
             return this;
         }
@@ -348,13 +350,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             .setMainSectionConfig(ItemManagerConfig.QUEST_DECK_EDITOR)
             .setSideboardConfig(ItemManagerConfig.QUEST_DECK_EDITOR)
             .setPlayerInventorySupplier(() -> FModel.getQuest().getCards().getCardpool())
-            .setBasicLandSetFunction(d -> FModel.getQuest().getDefaultLandSet());
+            .setBasicLandSetFunction(d -> FModel.getQuest().getAvailableLandSets());
     public static DeckEditorConfig EditorConfigQuestCommander = new GameTypeDeckEditorConfig(GameType.QuestCommander, DECK_CONTROLLER_QUEST)
             .setCatalogConfig(ItemManagerConfig.QUEST_EDITOR_POOL)
             .setMainSectionConfig(ItemManagerConfig.QUEST_DECK_EDITOR)
             .setSideboardConfig(ItemManagerConfig.QUEST_DECK_EDITOR)
             .setPlayerInventorySupplier(() -> FModel.getQuest().getCards().getCardpool())
-            .setBasicLandSetFunction(d -> FModel.getQuest().getDefaultLandSet());
+            .setBasicLandSetFunction(d -> FModel.getQuest().getAvailableLandSets());
     public static DeckEditorConfig EditorConfigQuestDraft = new GameTypeDeckEditorConfig(GameType.QuestDraft, DECK_CONTROLLER_QUEST_DRAFT);
     public static DeckEditorConfig EditorConfigPlanarConquest = new GameTypeDeckEditorConfig(GameType.PlanarConquest, DECK_CONTROLLER_PLANAR_CONQUEST)
             .setCatalogConfig(ItemManagerConfig.CONQUEST_COLLECTION)
@@ -542,7 +544,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             @Override
             protected void buildMenu() {
                 final Localizer localizer = Forge.getLocalizer();
-                if (allowsAddBasic())
+                if (allowAddBasic())
                     addItem(new FMenuItem(localizer.getMessage("lblAddBasicLands"), FSkinImage.LANDLOGO, e -> showAddBasicLandsDialog()));
                 if (showAddExtraSectionOption()) {
                     addItem(new FMenuItem(localizer.getMessage("lblAddDeckSection"), FSkinImage.CHAOS, e -> {
@@ -1027,7 +1029,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     protected boolean allowSaveAs() {
         return allowSave() && allowRename();
     }
-    protected boolean allowsAddBasic() {
+    protected boolean allowAddBasic() {
         return !isDrafting();
     }
 

@@ -1048,7 +1048,7 @@ public final class CardEdition implements Comparable<CardEdition> {
 
     public boolean hasBasicLands() {
         for(String landName : MagicColor.Constant.BASIC_LANDS) {
-            if (null == StaticData.instance().getCommonCards().getCard(landName, this.getCode(), 0))
+            if (this.getCardInSet(landName).isEmpty())
                 return false;
         }
         return true;

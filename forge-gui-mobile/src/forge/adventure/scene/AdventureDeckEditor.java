@@ -41,6 +41,7 @@ import forge.util.Utils;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class AdventureDeckEditor extends FDeckEditor {
     protected static class AdventureEditorConfig extends DeckEditorConfig {
@@ -146,7 +147,8 @@ public class AdventureDeckEditor extends FDeckEditor {
             if(event.cardBlock != null) {
                 if(event.cardBlock.getLandSet() != null)
                     return List.of(event.cardBlock.getLandSet());
-                List<CardEdition> eventSets = event.cardBlock.getSets();
+                List<CardEdition> eventSets = new ArrayList<>(event.cardBlock.getSets());
+                eventSets.removeIf(Predicate.not(CardEdition::hasBasicLands));
                 if(!eventSets.isEmpty())
                     return eventSets;
             }
@@ -558,7 +560,7 @@ public class AdventureDeckEditor extends FDeckEditor {
             currentEvent.participants[i].setDeck(opponentDecks[i]);
         }
         currentEvent.draftedDeck = (Deck) currentEvent.registeredDeck.copyTo("Draft Deck");
-        if (allowsAddBasic()) {
+        if (allowAddBasic()) {
             showAddBasicLandsDialog();
             //Might be annoying if you haven't pruned your deck yet, but best to remind player that
             //this probably needs to be done since it's there since it's not normally part of Adventure
@@ -775,7 +777,9 @@ public class AdventureDeckEditor extends FDeckEditor {
     }
 
     @Override
-    protected boolean allowsAddBasic() {
+    protected boolean allowAddBasic() {
+        if(getEditorConfig() instanceof DeckPreviewConfig)
+            return false;
         AdventureEventData currentEvent = getCurrentEvent();
         if (currentEvent == null)
             return true;
