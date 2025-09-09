@@ -27,8 +27,6 @@ import forge.item.PaperCard;
 import forge.itemmanager.*;
 import forge.itemmanager.filters.CardColorFilter;
 import forge.itemmanager.filters.CardTypeFilter;
-import forge.localinstance.properties.ForgePreferences;
-import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
@@ -717,23 +715,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
     @Override
     protected FPopupMenu createMoreOptionsMenu() {
-        return new FPopupMenu() {
-            @Override
-            protected void buildMenu() {
-                Localizer localizer = Forge.getLocalizer();
-                addItem(new FMenuItem(localizer.getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e1 -> FDeckViewer.copyDeckToClipboard(getDeck())));
-                if (allowsAddBasic()) {
-                    FMenuItem addBasic = new FMenuItem(localizer.getMessage("lblAddBasicLands"), FSkinImage.LANDLOGO, e1 -> showAddBasicLandsDialog());
-                    addItem(addBasic);
-                }
-                if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.DEV_MODE_ENABLED)) {
-                    addItem(new FCheckBoxMenuItem(localizer.getMessage("cbEnforceDeckLegality"), shouldEnforceConformity(), e -> toggleConformity()));
-                    String devSuffix = " (" + localizer.getMessage("lblDev") + ")";
-                    addItem(new FMenuItem(localizer.getMessage("lblAddcard") + devSuffix, FSkinImage.HDPLUS, e -> showDevAddCardDialog()));
-                }
-                ((DeckEditorPage) getSelectedPage()).buildDeckMenu(this);
-            }
-        };
+        return super.createMoreOptionsMenu();
     }
 
     @Override
@@ -765,6 +747,12 @@ public class AdventureDeckEditor extends FDeckEditor {
             Current.player().addCards(requiredNewLands);
         catalog.refresh();
         catalog.moveCards(landsToMove, getMainDeckPage());
+    }
+
+    @Override
+    protected PaperCard supplyPrintForImporter(PaperCard missingCard) {
+        PaperCard out = super.supplyPrintForImporter(missingCard);
+        return out == null ? null : out.getNoSellVersion();
     }
 
     @Override

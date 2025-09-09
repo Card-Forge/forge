@@ -49,6 +49,16 @@ public class DeckRecognizer {
         LIMITED_CARD,
         CARD_FROM_NOT_ALLOWED_SET,
         CARD_FROM_INVALID_SET,
+        /**
+         * Valid card request, but can't be imported because the player does not have enough copies.
+         * Should be replaced with a different printing if possible.
+         */
+        CARD_NOT_IN_INVENTORY,
+        /**
+         * Valid card request for a card that isn't in the player's inventory, but new copies can be acquired freely.
+         * Usually used for basic lands. Should be supplied to the import controller by the editor.
+         */
+        FREE_CARD_NOT_IN_INVENTORY,
         // Warning messages
         WARNING_MESSAGE,
         UNKNOWN_CARD,
@@ -63,10 +73,14 @@ public class DeckRecognizer {
         CARD_TYPE,
         CARD_RARITY,
         CARD_CMC,
-        MANA_COLOUR
+        MANA_COLOUR;
+
+        public static final EnumSet<TokenType> CARD_TOKEN_TYPES = EnumSet.of(LEGAL_CARD, LIMITED_CARD, CARD_FROM_NOT_ALLOWED_SET, CARD_FROM_INVALID_SET, CARD_NOT_IN_INVENTORY, FREE_CARD_NOT_IN_INVENTORY);
+        public static final EnumSet<TokenType> IN_DECK_TOKEN_TYPES = EnumSet.of(LEGAL_CARD, LIMITED_CARD, DECK_NAME, FREE_CARD_NOT_IN_INVENTORY);
+        public static final EnumSet<TokenType> CARD_PLACEHOLDER_TOKEN_TYPES = EnumSet.of(CARD_TYPE, CARD_RARITY, CARD_CMC, MANA_COLOUR);
     }
 
-    public enum LimitedCardType{
+    public enum LimitedCardType {
         BANNED,
         RESTRICTED,
     }
@@ -108,6 +122,10 @@ public class DeckRecognizer {
             return new Token(TokenType.CARD_FROM_INVALID_SET, count, card, cardRequestHasSetCode);
         }
 
+        public static Token NotInInventoryFree(final PaperCard card, final int count, final DeckSection section) {
+            return new Token(TokenType.FREE_CARD_NOT_IN_INVENTORY, count, card, section, true);
+        }
+
         // WARNING MESSAGES
         // ================
         public static Token UnknownCard(final String cardName, final String setCode, final int count) {
@@ -124,6 +142,10 @@ public class DeckRecognizer {
 
         public static Token WarningMessage(String msg) {
            return new Token(TokenType.WARNING_MESSAGE, msg);
+        }
+
+        public static Token NotInInventory(final PaperCard card, final int count, final DeckSection section) {
+            return new Token(TokenType.CARD_NOT_IN_INVENTORY, count, card, section, false);
         }
 
         /* =================================
@@ -239,14 +261,11 @@ public class DeckRecognizer {
         /**
          * Filters all token types that have a PaperCard instance set (not null)
          * @return true for tokens of type:
-         * LEGAL_CARD, LIMITED_CARD, CARD_FROM_NOT_ALLOWED_SET and CARD_FROM_INVALID_SET.
+         * LEGAL_CARD, LIMITED_CARD, CARD_FROM_NOT_ALLOWED_SET and CARD_FROM_INVALID_SET, CARD_NOT_IN_INVENTORY, FREE_CARD_NOT_IN_INVENTORY.
          * False otherwise.
          */
         public boolean isCardToken() {
-            return (this.type == TokenType.LEGAL_CARD ||
-                    this.type == TokenType.LIMITED_CARD ||
-                    this.type == TokenType.CARD_FROM_NOT_ALLOWED_SET ||
-                    this.type == TokenType.CARD_FROM_INVALID_SET);
+            return TokenType.CARD_TOKEN_TYPES.contains(this.type);
         }
 
         /**
@@ -255,9 +274,7 @@ public class DeckRecognizer {
          * LEGAL_CARD, LIMITED_CARD, DECK_NAME; false otherwise.
          */
         public boolean isTokenForDeck() {
-            return (this.type == TokenType.LEGAL_CARD ||
-                    this.type == TokenType.LIMITED_CARD ||
-                    this.type == TokenType.DECK_NAME);
+            return TokenType.IN_DECK_TOKEN_TYPES.contains(this.type);
         }
 
         /**
@@ -266,7 +283,7 @@ public class DeckRecognizer {
          * False otherwise.
          */
         public boolean isCardTokenForDeck() {
-            return (this.type == TokenType.LEGAL_CARD || this.type == TokenType.LIMITED_CARD);
+            return isCardToken() && isTokenForDeck();
         }
 
         /**
@@ -276,10 +293,7 @@ public class DeckRecognizer {
          * CARD_RARITY, CARD_CMC, CARD_TYPE, MANA_COLOUR
          */
         public boolean isCardPlaceholder(){
-            return (this.type == TokenType.CARD_RARITY ||
-                    this.type == TokenType.CARD_CMC ||
-                    this.type == TokenType.MANA_COLOUR ||
-                    this.type == TokenType.CARD_TYPE);
+            return TokenType.CARD_PLACEHOLDER_TOKEN_TYPES.contains(this.type);
         }
 
         /** Determines if current token is a Deck Section token
