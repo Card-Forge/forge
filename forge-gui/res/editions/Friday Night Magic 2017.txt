@@ -19,9 +19,8 @@ TokensCode=F17
 
 [tokens]
 10 w_1_1_vampire_lifelink @John Severin Brassell
-# Double-faced tokens are not supported yet
-# 10☇ c_a_treasure_sac @Zoltan Boros
+10☇ c_a_treasure_sac @Zoltan Boros
 11 g_3_3_dinosaur_trample @Filip Burburan
-# 11☇ c_a_treasure_sac @Florian de Gesincourt
+11☇ c_a_treasure_sac @Florian de Gesincourt
 12 b_2_2_pirate_menace @Matt Stewart
-# 12☇ c_a_treasure_sac @Milivoj Ćeran
+12☇ c_a_treasure_sac @Milivoj Ćeran

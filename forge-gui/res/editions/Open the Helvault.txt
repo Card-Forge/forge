@@ -15,5 +15,4 @@ TokensCode=PHEL
 
 [tokens]
 1★ w_4_4_angel_flying @James Ryman
-# Double-faced tokens are not supported yet
-# 1★☇ b_5_5_demon_flying @Karl Kopinski
+1★☇ b_5_5_demon_flying @Karl Kopinski
