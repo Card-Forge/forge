@@ -714,11 +714,6 @@ public class AdventureDeckEditor extends FDeckEditor {
     }
 
     @Override
-    protected FPopupMenu createMoreOptionsMenu() {
-        return super.createMoreOptionsMenu();
-    }
-
-    @Override
     protected void addChosenBasicLands(CardPool landsToAdd) {
         if(isLimitedEditor())
             super.addChosenBasicLands(landsToAdd);
