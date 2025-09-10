@@ -633,9 +633,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         announceFantasy = data.containsKey("announceFantasy") && data.readBool("announceFantasy");
         usingCustomDeck = data.containsKey("usingCustomDeck") && data.readBool("usingCustomDeck");
         announceCustom = data.containsKey("announceCustom") && data.readBool("announceCustom");
-        if (migration) {
-            getCurrentGameStage().setExtraAnnouncement(Forge.getLocalizer().getMessage("lblDataMigrationMsg"));
-        }
 
         for (Deck entries : decks) {
             ItemPool<PaperCard> missingDeckCards = entries.getAllCardsInASinglePool(true, true).skimOverflow(cards);
@@ -655,6 +652,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
         if(saveVersion < WorldSave.ADVENTURE_SAVE_VERSION)
             onSaveVersionBump(data, saveVersion);
+
+        if (migration) {
+            getCurrentGameStage().setExtraAnnouncement(Forge.getLocalizer().getMessage("lblDataMigrationMsg"));
+        }
 
         onLifeTotalChangeList.emit();
         onShardsChangeList.emit();
