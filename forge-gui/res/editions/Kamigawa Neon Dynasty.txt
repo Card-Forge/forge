@@ -2,7 +2,6 @@
 Code=NEO
 Date=2022-02-18
 Name=Kamigawa: Neon Dynasty
-Code2=NEO
 Type=Expansion
 BoosterCovers=3
 Booster=9 Common:!dfc:!fromSheet("NEO lands"):fromSheet("NEO cards"), 3 Uncommon:!dfc:!fromSheet("NEO lands"):fromSheet("NEO cards"), 1 dfc:!Rare:!Mythic:fromSheet("NEO cards"), 1 RareMythic:fromSheet("NEO cards"), 1 fromSheet("NEO lands")
@@ -539,24 +538,23 @@ ScryfallCode=NEO
 514 M Jin-Gitaxias, Progress Tyrant @Richard Whitters
 
 [rebalanced]
-A1 C A-Ancestral Katana @Daniel Ljunggren
-A10 C A-Eiganjo Exemplar @Ernanda Souza
-A19 C A-Imperial Subduer @Zara Alfonso
-A53 U A-Futurist Operative @Justine Cruz
-A67 C A-Moon-Circuit Hacker @Tia Masic
-A73 U A-Prosperous Thief @Fajareka Setiawan
-A86 R A-Thousand-Faced Shadow @Ekaterina Burmak
-A95 U A-Dokuchi Silencer @David Rapoza
-A114 M A-Nashi, Moon Sage's Scion @Valera Lutfullina
-A116 U A-Nezumi Prowler @Joseph Weston
-A131 C A-Akki Ronin @Olivier Bernard
-A152 U A-Kumano Faces Kakkazan @Mike Bierek
-A156 C A-Peerless Samurai @Micah Epstein
-A215 U A-Asari Captain @Donato Giancola
-A232 R A-Raiyuu, Storm's Edge @Heonhwa Choe
-A234 R A-Satoru Umezawa @Anna Pavleeva
-A236 U A-Silver-Fur Master @Carl Critchlow
-A242 U A-Circuit Mender @Hector Ortiz
+A-1 C A-Ancestral Katana @Daniel Ljunggren
+A-10 C A-Eiganjo Exemplar @Ernanda Souza
+A-19 C A-Imperial Subduer @Zara Alfonso
+A-53 U A-Futurist Operative @Justine Cruz
+A-67 C A-Moon-Circuit Hacker @Tia Masic
+A-73 U A-Prosperous Thief @Fajareka Setiawan
+A-86 R A-Thousand-Faced Shadow @Ekaterina Burmak
+A-95 U A-Dokuchi Silencer @David Rapoza
+A-114 M A-Nashi, Moon Sage's Scion @Valera Lutfullina
+A-116 U A-Nezumi Prowler @Joseph Weston
+A-131 C A-Akki Ronin @Olivier Bernard
+A-156 C A-Peerless Samurai @Micah Epstein
+A-215 U A-Asari Captain @Donato Giancola
+A-232 R A-Raiyuu, Storm's Edge @Heonhwa Choe
+A-234 R A-Satoru Umezawa @Anna Pavleeva
+A-236 U A-Silver-Fur Master @Carl Critchlow
+A-242 U A-Circuit Mender @Hector Ortiz
 
 [lands]
 1 Plains|NEO|1

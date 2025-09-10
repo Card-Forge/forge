@@ -1,0 +1,7 @@
+Name:Spirit Token
+ManaCost:no cost
+Types:Creature Spirit
+PT:1/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.nonSpirit | ValidBlocker$ Creature.Self | Description$ This token can't block or be blocked by non-Spirit creatures.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonSpirit | Secondary$ True | Description$ This token can't block or be blocked by non-Spirit creatures.
+Oracle:This token can't block or be blocked by non-Spirit creatures.

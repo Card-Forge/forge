@@ -32,6 +32,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 import org.jupnp.DefaultUpnpServiceConfiguration;
@@ -154,7 +155,7 @@ public class GuiMobile implements IGuiBase {
                 } else if (paperCard != null) {
                     Texture cardImage = ImageCache.getInstance().getImage(paperCard.getCardImageKey(), false);
                     if (cardImage != null)
-                        g.drawCardRoundRect(cardImage, null, (background.getWidth() - cardImageWidth) / 2, (background.getHeight() - cardImageHeight) / 3.8f, cardImageWidth, cardImageHeight, false, false);
+                        g.drawCardRoundRect(cardImage, null, (background.getWidth() - cardImageWidth) / 2, (background.getHeight() - cardImageHeight) / 3.8f, cardImageWidth, cardImageHeight, false, false, paperCard.isFoil());
                 }
 
                 Gdx.graphics.requestRendering(); //ensure image appears right away
@@ -282,7 +283,7 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public void download(final GuiDownloadService service, final Callback<Boolean> callback) {
+    public void download(final GuiDownloadService service, final Consumer<Boolean> callback) {
         new GuiDownloader(service, callback).show();
     }
 

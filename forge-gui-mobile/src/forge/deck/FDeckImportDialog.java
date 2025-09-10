@@ -19,6 +19,7 @@ package forge.deck;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -35,11 +36,10 @@ import forge.toolbox.FComboBox;
 import forge.toolbox.FDialog;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextArea;
-import forge.util.Callback;
 
 
 public class FDeckImportDialog extends FDialog {
-    private Callback<Deck> callback;
+    private Consumer<Deck> callback;
 
     private final FTextArea txtInput = add(new FTextArea(true));
     private final FCheckBox newEditionCheck = add(new FCheckBox(Forge.getLocalizer().getMessage("lblImportLatestVersionCard"), false));
@@ -64,7 +64,7 @@ public class FDeckImportDialog extends FDialog {
 
     private final static ImmutableList<String> importOrCancel = ImmutableList.of(Forge.getLocalizer().getMessage("lblImport"), Forge.getLocalizer().getMessage("lblCancel"));
 
-    public FDeckImportDialog(final boolean replacingDeck, final FDeckEditor.EditorType editorType) {
+    public FDeckImportDialog(final boolean replacingDeck, final FDeckEditor.DeckEditorConfig editorConfig) {
         super(Forge.getLocalizer().getMessage("lblImportFromClipboard"), 2);
         controller = new DeckImportController(dateTimeCheck, monthDropdown, yearDropdown, replacingDeck);
         String contents = Forge.getClipboard().getContents();
@@ -72,15 +72,15 @@ public class FDeckImportDialog extends FDialog {
             contents = ""; //prevent NPE
         txtInput.setText(contents);
 
-        if (FDeckEditor.allowsReplacement(editorType)) {
-            GameType gameType = GameType.valueOf(editorType.name());
+        if (editorConfig.allowsCardReplacement()) {
+            GameType gameType = editorConfig.getGameType();
             controller.setGameFormat(gameType);
             List<DeckSection> supportedSections = new ArrayList<>();
             supportedSections.add(DeckSection.Main);
             supportedSections.add(DeckSection.Sideboard);
-            if (editorType != FDeckEditor.EditorType.Constructed)
+            if (editorConfig.hasCommander())
                 supportedSections.add(DeckSection.Commander);
-            supportedSections.addAll(Lists.newArrayList(FDeckEditor.getExtraSections(editorType)));
+            supportedSections.addAll(Lists.newArrayList(editorConfig.getExtraSections()));
             controller.setAllowedSections(supportedSections);
         }
 
@@ -121,7 +121,7 @@ public class FDeckImportDialog extends FDialog {
             FThreads.invokeInEdtLater(() -> {
                 hide();
                 if (callback != null)
-                    callback.run(deck);
+                    callback.accept(deck);
             });
         }));
         initButton(1, Forge.getLocalizer().getMessage("lblCancel"), e -> hide());
@@ -165,7 +165,7 @@ public class FDeckImportDialog extends FDialog {
         yearDropdown.setEnabled(enabled);
     }
 
-    public void setCallback(Callback<Deck> callback0){
+    public void setCallback(Consumer<Deck> callback0){
         callback = callback0;
     }
 

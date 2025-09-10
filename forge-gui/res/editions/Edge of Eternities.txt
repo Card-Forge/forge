@@ -4,6 +4,52 @@ Date=2025-08-01
 Name=Edge of Eternities
 Type=Expansion
 ScryfallCode=EOE
+#https://mtgscribe.com/2025/07/16/edge-of-eternities-play-booster-fact-sheet/
+BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,BasicLand,Wildcard,WildcardFoil
+Booster=6 Common,1 Common-Guest,3 Uncommon, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 BasicLand
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=30
+
+[Common]
+Base=Common:fromSheet("EOE cards"):!BasicLand
+
+[Common-Guest]
+Base=Common:fromSheet("EOE cards"):!BasicLand
+Replace=.018F fromSheet("EOE special guests")
+
+[Uncommon]
+Base=Uncommon:fromSheet("EOE cards")
+
+[RareMythic]
+Base=Rare:fromSheet("EOE cards")
+Replace=.142F Mythic:fromSheet("EOE cards")
+Replace=.036F Rare:fromSheet("EOE borderless")
+Replace=.018F Mythic:fromSheet("EOE borderless")
+
+[Wildcard]
+Base=Uncommon:fromSheet("EOE cards")
+Replace=0.125F Common:fromSheet("EOE cards"):!BasicLand
+Replace=0.106F Rare:fromSheet("EOE cards")
+Replace=0.003F Mythic:fromSheet("EOE cards")
+Replace=0.1F Rare:fromSheet("EOS cards")
+Replace=0.025F Mythic:fromSheet("EOS cards")
+Replace=0.01F Rare:fromSheet("EOE borderless")
+Replace=0.005F Mythic:fromSheet("EOE borderless")
+
+[WildcardFoil]
+Base=Common:fromSheet("EOE cards"):!BasicLand
+Replace=0.32F Uncommon:fromSheet("EOE cards")
+Replace=0.064F Rare:fromSheet("EOE cards")
+Replace=0.011F Mythic:fromSheet("EOE cards")
+Replace=0.01F Rare:fromSheet("EOS cards")
+Replace=0.0075F Mythic:fromSheet("EOS cards")
+Replace=0.0075F fromSheet("EOE borderless"):!BasicLand
+
+[BasicLand]
+Base=BasicLand:fromSheet("EOE cards")
+Replace=0.16F BasicLand:fromSheet("EOE cards")+
+Replace=0.16F BasicLand:fromSheet("EOE borderless")
+Replace=0.04F BasicLand:fromSheet("EOE borderless")+
 
 [cards]
 1 R Anticausal Vestige @Chase Stone
@@ -414,6 +460,18 @@ ScryfallCode=EOE
 398 R Singularity Rupture @Néstor Ossandón Leal
 399 R Emissary Escort @Lius Lasahido
 
+[special guests]
+1 Warping Wail|SPG
+1 Nexus of Fate|SPG
+1 Paradox Haze|SPG
+1 Magus of the Moon|SPG
+1 Sliver Overlord|SPG
+1 Darkness|SPG
+1 Green Sun's Zenith|SPG
+1 Deafening Silence|SPG
+1 Robe of Stars|SPG
+1 Burgeoning|SPG
+
 [tokens]
 1 c_1_1_sliver @Igor Grechanyi
 2 w_1_1_human_soldier @Allen Morris
@@ -425,3 +483,6 @@ ScryfallCode=EOE
 8 c_a_lander_sac_search @Jorge Jacinto
 9 munitions @Leonardo Santanna
 10 c_2_2_a_robot @Leonardo Santanna
+
+[other]
+11 emblem_tezzeret_cruel_captain @Chris Rahn

@@ -8,6 +8,7 @@ import java.util.Map;
 import com.google.common.collect.Lists;
 
 import forge.ImageKeys;
+import forge.StaticData;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
@@ -142,15 +143,20 @@ public class EffectEffect extends SpellAbilityEffect {
         }
 
         String image;
-        if (sa.hasParam("Image")) {
-            image = ImageKeys.getTokenKey(sa.getParam("Image"));
-        } else if (name.startsWith("Emblem")) { // try to get the image from name
-            image = ImageKeys.getTokenKey(
-            TextUtil.fastReplace(
-                TextUtil.fastReplace(
-                    TextUtil.fastReplace(name.toLowerCase(), " — ", "_"),
+        if (name.startsWith("Emblem")) {
+            if (sa.hasParam("Image")) {
+                image = StaticData.instance().getOtherImageKey(sa.getParam("Image"), hostCard.getSetCode());
+            } else {
+                // try to get the image from name
+                String imageKey = TextUtil.fastReplace(
+                    TextUtil.fastReplace(
+                        TextUtil.fastReplace(name.toLowerCase(), " — ", "_"),
                         ",", ""),
-                    " ", "_").toLowerCase());
+                        " ", "_");
+                image = StaticData.instance().getOtherImageKey(imageKey, hostCard.getSetCode());
+            }
+        } else if (sa.hasParam("Image")) {
+            image = ImageKeys.getTokenKey(sa.getParam("Image"));
         } else { // use host image
             image = hostCard.getImageKey();
         }

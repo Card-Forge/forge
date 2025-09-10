@@ -97,12 +97,15 @@ public enum CSubmenuDraft implements ICDoc {
                 view.getBtnBuildDeck().requestFocusInWindow();
             }
         });
+
+        view.getGamesInMatchBinder().load();
     }
 
     private void startGame(final GameType gameType) {
         final Localizer localizer = Localizer.getInstance();
-        final boolean gauntlet = VSubmenuDraft.SINGLETON_INSTANCE.isGauntlet();
-        final DeckProxy humanDeck = VSubmenuDraft.SINGLETON_INSTANCE.getLstDecks().getSelectedItem();
+        final VSubmenuDraft view = VSubmenuDraft.SINGLETON_INSTANCE;
+        final boolean gauntlet = view.isGauntlet();
+        final DeckProxy humanDeck = view.getLstDecks().getSelectedItem();
 
         if (humanDeck == null) {
             FOptionPane.showErrorDialog(localizer.getMessage("lblNoDeckSelected"), localizer.getMessage("lblNoDeck"));
@@ -225,9 +228,9 @@ public enum CSubmenuDraft implements ICDoc {
             return;
         }
 
+        final DeckGroup opponentDecks = FModel.getDecks().getDraft().get(humanDeck.getName());
         if (VSubmenuDraft.SINGLETON_INSTANCE.isSingleSelected()) {
             // Single opponent
-            final DeckGroup opponentDecks = FModel.getDecks().getDraft().get(humanDeck.getName());
             int indx = 0;
             for (@SuppressWarnings("unused") Deck d : opponentDecks.getAiDecks()) {
                 indx++;
@@ -239,11 +242,16 @@ public enum CSubmenuDraft implements ICDoc {
             combo.addItem("Gauntlet");
             //combo.addItem("Tournament");
         } else {
+            int size = opponentDecks.getAiDecks().size();
             combo.addItem("2");
-            combo.addItem("3");
-            combo.addItem("4");
-            combo.addItem("5");
+            if (size > 2) {
+                combo.addItem("3");
+            }
+
+            if (size >= 4) {
+                combo.addItem("4");
+                combo.addItem("5");
+            }
         }
     }
-
 }

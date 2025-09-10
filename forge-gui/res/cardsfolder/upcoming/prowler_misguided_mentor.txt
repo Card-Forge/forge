@@ -1,0 +1,9 @@
+Name:Prowler, Misguided Mentor
+ManaCost:2 G
+Types:Legendary Creature Human Rogue Villain
+PT:3/3
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ NICKNAME can't be blocked by creatures with power 2 or less.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigPutCounter | CombatDamage$ True | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, put a +1/+1 counter on another target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Prowler can't be blocked by creatures with power 2 or less.\nWhenever Prowler deals combat damage to a player, put a +1/+1 counter on another target creature you control.

@@ -1,0 +1,9 @@
+Name:Future Flight
+ManaCost:2 U U
+Types:Enchantment Aura
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this Aura enters, draw two cards.
+SVar:TrigDraw:DB$ Draw | NumCards$ 2
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddKeyword$ Flying | Description$ Enchanted creature gets +2/+0 and has flying. (It can't be blocked except by creatures with flying or reach.)
+Oracle:Enchant creature\nWhen this Aura enters, draw two cards.\nEnchanted creature gets +2/+0 and has flying. (It can't be blocked except by creatures with flying or reach.)

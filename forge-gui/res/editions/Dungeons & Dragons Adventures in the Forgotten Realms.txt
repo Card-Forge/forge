@@ -2,7 +2,6 @@
 Code=AFR
 Date=2021-07-23
 Name=Dungeons & Dragons: Adventures in the Forgotten Realms
-Code2=AFR
 Type=Expansion
 ScryfallCode=AFR
 BoosterCovers=5
@@ -425,31 +424,33 @@ FatPackExtraSlots=20 BasicLands, 20 BasicLands+
 402 U Prosperous Innkeeper @Eric Deschamps
 
 [rebalanced]
-A7 U A-Cloister Gargoyle @Mark Zug
-A14 C A-Dwarfhold Champion @Miguel Mercado
-A32 U A-Plate Armor @Martina Pilcerova
-A53 M A-Demilich @Daniel Zrom
-A81 U A-Wizard Class @Marta Nael
-A87 M A-Acererak the Archlich @Andrey Kuzinskiy
-A95 U A-Death-Priest of Myrkul @Lius Lasahido
-A102 C A-Fates' Reversal @Alix Branwyn
-A115 C A-Precipitous Drop @Gabor Szikszai
-A118 C A-Sepulcher Ghoul @Jason A. Engle
-A130 C A-Armory Veteran @Caio Monteiro
-A180 U A-Druid Class @Svetlin Velinov
-A181 M A-Ellywick Tumblestrum @Anna Steinbauer
-A183 C A-Find the Path @Lindsey Look
-A196 R A-Ochre Jelly @Daarken
-A219 U A-Bruenor Battlehammer @Wayne Reynolds
-A231 U A-Shessra, Death's Whisper @Marie Magny
-A233 R A-Sorcerer Class @Alexander Mokhov
-A237 R A-Triumphant Adventurer @Alexander Mokhov
-A255 R A-Dungeon Descent @Kasia 'Kafis' Zielińska
+A-7 U A-Cloister Gargoyle @Mark Zug
+A-9 C A-Dawnbringer Cleric @Lie Setiawan
+A-14 C A-Dwarfhold Champion @Miguel Mercado
+A-32 U A-Plate Armor @Martina Pilcerova
+A-53 M A-Demilich @Daniel Zrom
+A-81 U A-Wizard Class @Marta Nael
+A-87 M A-Acererak the Archlich @Andrey Kuzinskiy
+A-95 U A-Death-Priest of Myrkul @Lius Lasahido
+A-102 C A-Fates' Reversal @Alix Branwyn
+A-115 C A-Precipitous Drop @Gabor Szikszai
+A-118 C A-Sepulcher Ghoul @Jason A. Engle
+A-130 C A-Armory Veteran @Caio Monteiro
+A-180 U A-Druid Class @Svetlin Velinov
+A-181 M A-Ellywick Tumblestrum @Anna Steinbauer
+A-183 C A-Find the Path @Lindsey Look
+A-196 R A-Ochre Jelly @Daarken
+A-219 U A-Bruenor Battlehammer @Wayne Reynolds
+A-226 U A-Krydle of Baldur's Gate @Bryan Sola
+A-231 U A-Shessra, Death's Whisper @Marie Magny
+A-233 R A-Sorcerer Class @Alexander Mokhov
+A-237 R A-Triumphant Adventurer @Alexander Mokhov
+A-255 R A-Dungeon Descent @Kasia 'Kafis' Zielińska
 
 [dungeons]
-S Dungeon of the Mad Mage
-S Lost Mine of Phandelver
-S Tomb of Annihilation
+20 Dungeon of the Mad Mage
+21 Lost Mine of Phandelver
+22 Tomb of Annihilation
 
 [tokens]
 1 w_3_3_angel_flying @Irina Nordsol
@@ -467,3 +468,12 @@ S Tomb of Annihilation
 13 guenhwyvar @Brian Valeza
 14 g_2_2_wolf @Daren Bader
 15 c_a_treasure_sac @Dan Murayama Scott
+
+[other]
+16 emblem_ellywick_tumblestrum @Anna Steinbauer
+17 emblem_lolth_spider_queen @Tyler Jacobson
+18 emblem_mordenkainen @Ryan Pancoast
+19 emblem_zariel_archduke_of_avernus @Heonhwa Choe
+20 Dungeon of the Mad Mage
+21 Lost Mine of Phandelver
+22 Tomb of Annihilation

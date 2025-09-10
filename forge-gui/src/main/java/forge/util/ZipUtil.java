@@ -14,7 +14,10 @@ import java.util.zip.ZipOutputStream;
 */
 public class ZipUtil {
     public static String backupAdvFile = "forge.adv";
+    public static String backupClsFile = "forge.cls";
+    private static boolean isClassic = false;
     public static void zip(File source, File dest, String name) throws IOException {
+        isClassic = backupClsFile.equalsIgnoreCase(name);
         try(
         FileOutputStream fos = new FileOutputStream(dest.getAbsolutePath() + File.separator + name);
         ZipOutputStream zipOut = new ZipOutputStream(fos)) {
@@ -26,7 +29,13 @@ public class ZipUtil {
         if (fileToZip.isHidden()) {
             return;
         }
+        //skip loose files like forge.log, etc
+        if (fileToZip.isFile() && isClassic && "Forge".equalsIgnoreCase(fileToZip.getParentFile().getName()))
+            return;
         if (fileToZip.isDirectory()) {
+            //skip adventure since we don't want to overwrite it and adventure has its own backup method
+            if (isClassic && "adventure".equalsIgnoreCase(fileToZip.getName()) && "Forge".equalsIgnoreCase(fileToZip.getParentFile().getName()))
+                return;
             if (fileName.endsWith("/")) {
                 zipOut.putNextEntry(new ZipEntry(fileName));
                 zipOut.closeEntry();
@@ -54,6 +63,7 @@ public class ZipUtil {
     }
 
     public static String unzip(File fileZip, File destDir) throws IOException {
+        isClassic = backupClsFile.equalsIgnoreCase(fileZip.getName());
         StringBuilder val = new StringBuilder();
         byte[] buffer = new byte[1024];
         ZipInputStream zis = new ZipInputStream(Files.newInputStream(fileZip.toPath()));
@@ -64,6 +74,8 @@ public class ZipUtil {
                 if (!newFile.isDirectory() && !newFile.mkdirs()) {
                     throw new IOException("Failed to create directory " + newFile);
                 }
+                if (isClassic && "Forge".equalsIgnoreCase(newFile.getParentFile().getName()))
+                    val.append(" * "). append(newFile.getName()).append("\n");
             } else {
                 // fix for Windows-created archives
                 File parent = newFile.getParentFile();
@@ -71,8 +83,9 @@ public class ZipUtil {
                     throw new IOException("Failed to create directory " + parent);
                 }
 
+                if (!isClassic)
+                    val.append(" * "). append(newFile.getName()).append("\n");
                 // write file content
-                val.append(" * "). append(newFile.getName()).append("\n");
                 try(FileOutputStream fos = new FileOutputStream(newFile)) {
                     int len;
                     while ((len = zis.read(buffer)) > 0) {

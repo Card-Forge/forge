@@ -1,9 +1,9 @@
 [metadata]
-Code=FVL
+Code=V11
+Code2=FVL
 Date=2011-08-26
 Name=From the Vault: Legends
 Type=Collector_Edition
-Alias=V11
 ScryfallCode=V11
 
 [cards]
@@ -22,6 +22,3 @@ ScryfallCode=V11
 13 M Teferi, Mage of Zhalfir @Volkan Baǵa
 14 M Ulamog, the Infinite Gyre @Aleksi Briclot
 15 M Visara the Dreadful @Brad Rigney
-
-[tokens]
-ub_1_1_faerie_rogue_flying

@@ -2,7 +2,6 @@
 Code=MID
 Date=2021-09-24
 Name=Innistrad: Midnight Hunt
-Code2=MID
 Type=Expansion
 ScryfallCode=MID
 Booster=10 Common:fromSheet("MID cards"), 3 Uncommon:fromSheet("MID cards"), 1 RareMythic:fromSheet("MID cards"), 1 BasicLand
@@ -417,14 +416,14 @@ Prerelease=6 Boosters, 1 RareMythic+
 391 U Join the Dance @Raoul Vitale
 
 [rebalanced]
-A52 C A-Falcon Abomination @Brent Hollowell
-A59 M A-Lier, Disciple of the Drowned @Ekaterina Burmak
-A69 R A-Patrician Geist @Marta Nael
-A70 U A-Phantom Carriage @Igor Kieryluk
-A74 C A-Shipwreck Sifters @Svetlin Velinov
-A106 C A-Hobbling Zombie @Josh Hass
-A112 M A-The Meathook Massacre @Chris Seaman
-A218 U A-Devoted Grafkeeper @Raoul Vitale
+A-52 C A-Falcon Abomination @Brent Hollowell
+A-59 M A-Lier, Disciple of the Drowned @Ekaterina Burmak
+A-69 R A-Patrician Geist @Marta Nael
+A-70 U A-Phantom Carriage @Igor Kieryluk
+A-74 C A-Shipwreck Sifters @Svetlin Velinov
+A-106 C A-Hobbling Zombie @Josh Hass
+A-112 M A-The Meathook Massacre @Chris Seaman
+A-218 U A-Devoted Grafkeeper @Raoul Vitale
 
 [tokens]
 1 w_1_1_human @Kari Christensen
@@ -448,4 +447,4 @@ A218 U A-Devoted Grafkeeper @Raoul Vitale
 17 emblem_teferi_who_slows_the_sunset @Heonhwa Choe
 18 emblem_wrenn_and_seven @Heonhwa Choe
 19 day @Johan Grenier
-19 night @Johan Grenier
+21☇ night @Johan Grenier

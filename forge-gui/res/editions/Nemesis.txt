@@ -156,9 +156,3 @@ FoilAlwaysInCommonSlot=False
 141 R Kor Haven @Darrell Riche
 142 R Rath's Edge @Ron Spencer
 143 U Terrain Generator @Alan Pollack
-
-[tokens]
-w_4_4_angel_flying
-r_1_1_goblin
-g_1_1_saproling
-g_x_x_saproling_burst

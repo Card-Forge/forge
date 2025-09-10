@@ -18,9 +18,7 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
@@ -52,9 +50,13 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
      * forge.game.spellability.SpellAbility)
      */
     @Override
-    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         if (sa.usesTargeting()) {
-            return doTgt(ai, sa, false);
+            if (doTgt(ai, sa, false)) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
         }
         return super.checkApiLogic(ai, sa);
     }
@@ -180,11 +182,27 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (sa.usesTargeting()) {
-            return doTgt(ai, sa, mandatory);
+            if (doTgt(ai, sa, mandatory)) {
+                // if we can target, then we can play it
+                if (sa.isTargetNumberValid()) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                } else {
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+                }
+            } else {
+                // if we can't target, then we can't play it
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
         }
-        return mandatory;
+        if (mandatory) {
+            // if mandatory, just play it
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else {
+            // if not mandatory, check if we can play it
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
     }
 
     /*
@@ -200,18 +218,18 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
         Card tgt = (Card) params.get("Target");
 
         // planeswalker has high priority for loyalty counters
-        if (tgt.isPlaneswalker() && options.contains(CounterType.get(CounterEnumType.LOYALTY))) {
-            return CounterType.get(CounterEnumType.LOYALTY);
+        if (tgt.isPlaneswalker() && options.contains(CounterEnumType.LOYALTY)) {
+            return CounterEnumType.LOYALTY;
         }
 
         if (tgt.getController().isOpponentOf(ai)) {
             // creatures with BaseToughness below or equal zero might be
             // killed if their counters are removed
             if (tgt.isCreature() && tgt.getBaseToughness() <= 0) {
-                if (options.contains(CounterType.get(CounterEnumType.P1P1))) {
-                    return CounterType.get(CounterEnumType.P1P1);
-                } else if (options.contains(CounterType.get(CounterEnumType.M1M1))) {
-                    return CounterType.get(CounterEnumType.M1M1);
+                if (options.contains(CounterEnumType.P1P1)) {
+                    return CounterEnumType.P1P1;
+                } else if (options.contains(CounterEnumType.M1M1)) {
+                    return CounterEnumType.M1M1;
                 }
             }
 
@@ -223,17 +241,17 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
             }
         } else {
             // this counters are treat first to be removed
-            if ("Dark Depths".equals(tgt.getName()) && options.contains(CounterType.get(CounterEnumType.ICE))) {
+            if ("Dark Depths".equals(tgt.getName()) && options.contains(CounterEnumType.ICE)) {
                 CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
                 boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, (Predicate<Card>) Card::ignoreLegendRule);
 
                 if (maritEmpty) {
-                    return CounterType.get(CounterEnumType.ICE);
+                    return CounterEnumType.ICE;
                 }
-            } else if (tgt.hasKeyword(Keyword.UNDYING) && options.contains(CounterType.get(CounterEnumType.P1P1))) {
-                return CounterType.get(CounterEnumType.P1P1);
-            } else if (tgt.hasKeyword(Keyword.PERSIST) && options.contains(CounterType.get(CounterEnumType.M1M1))) {
-                return CounterType.get(CounterEnumType.M1M1);
+            } else if (tgt.hasKeyword(Keyword.UNDYING) && options.contains(CounterEnumType.P1P1)) {
+                return CounterEnumType.P1P1;
+            } else if (tgt.hasKeyword(Keyword.PERSIST) && options.contains(CounterEnumType.M1M1)) {
+                return CounterEnumType.M1M1;
             }
 
             // fallback logic, select positive counter to add more

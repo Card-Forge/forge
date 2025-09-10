@@ -98,10 +98,29 @@ public class TileMapScene extends HudScene {
             if (Current.player().fullHeal())
                 autoheal = true; // to play sound/effect on act
         }
+        if (WorldSave.getCurrentSave().getPlayer().hasAnnounceFantasy()) {
+            WorldSave.getCurrentSave().getPlayer().clearAnnounceFantasy();
+            MapStage.getInstance().showDeckAwardDialog("{BLINK=WHITE;RED}" +
+                Forge.getLocalizer().getMessage("lblMode") + " " +
+                Forge.getLocalizer().getMessage("lblChaos") + "{ENDBLINK}\n" +
+                Forge.getLocalizer().getMessage("lblChaosModeDescription"),
+                WorldSave.getCurrentSave().getPlayer().getSelectedDeck(), this::initializeDialogs);
+        } else if (WorldSave.getCurrentSave().getPlayer().hasAnnounceCustom()) {
+            WorldSave.getCurrentSave().getPlayer().clearAnnounceCustom();
+            MapStage.getInstance().showDeckAwardDialog("{GRADIENT}" +
+                Forge.getLocalizer().getMessage("lblMode") + " " +
+                Forge.getLocalizer().getMessage("lblCustom") + "{ENDGRADIENT}\n" +
+                Forge.getLocalizer().getMessage("lblCustomModeDescription"),
+                WorldSave.getCurrentSave().getPlayer().getSelectedDeck(), this::initializeDialogs);
+        } else {
+            initializeDialogs();
+        }
+    }
+
+    private void initializeDialogs() {
         AdventureQuestController.instance().updateEnteredPOI(rootPoint);
         AdventureQuestController.instance().showQuestDialogs(stage);
     }
-
     @Override
     public boolean leave() {
         // clear player collision on WorldStage and the GameHUD will restore it after the flicker animation.

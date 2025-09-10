@@ -17,27 +17,31 @@ import java.util.Map;
 public class RepeatAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         String logic = sa.getParamOrDefault("AILogic", "");
 
         if (sa.usesTargeting()) {
             if (!sa.canTarget(opp)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
             sa.resetTargets();
             sa.getTargets().add(opp);
         }
         if ("MaxX".equals(logic) || "MaxXAtOppEOT".equals(logic)) {
             if ("MaxXAtOppEOT".equals(logic) && !(ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && ai.getGame().getPhaseHandler().getNextTurn() == ai)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
             // Set PayX here to maximum value.
             final int max = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
             sa.setXManaCostPaid(max);
-            return max > 0;
+            if (max <= 0) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
+            } else {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
         }
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
     
     @Override
@@ -47,7 +51,7 @@ public class RepeatAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         String logic = sa.getParamOrDefault("AILogic", "");
 
         if (sa.usesTargeting()) {
@@ -65,9 +69,9 @@ public class RepeatAi extends SpellAbilityAi {
                 if (best != null) {
                     sa.resetTargets();
                     sa.getTargets().add(best);
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
@@ -76,7 +80,7 @@ public class RepeatAi extends SpellAbilityAi {
                 sa.resetTargets();
                 sa.getTargets().add(opp);
             } else if (!mandatory) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
         }
@@ -85,10 +89,18 @@ public class RepeatAi extends SpellAbilityAi {
         final SpellAbility repeat = sa.getAdditionalAbility("RepeatSubAbility");
 
         if (repeat == null) {
-        	return mandatory;
+            if (mandatory) {
+                return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
         }
 
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-        return aic.doTrigger(repeat, mandatory);
+        if (aic.doTrigger(repeat, mandatory)) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
     }
 }

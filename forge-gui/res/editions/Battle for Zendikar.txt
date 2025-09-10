@@ -2,7 +2,6 @@
 Name=Battle for Zendikar
 Date=2015-10-02
 Code=BFZ
-Code2=BFZ
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common:fromSheet("BFZ cards"), 3 Uncommon:fromSheet("BFZ cards"), 1 RareMythic:fromSheet("BFZ cards"), 1 BasicLand BFZ
@@ -325,3 +324,8 @@ ScryfallCode=BFZ
 9 r_3_1_elemental_trample_haste @Victor Adame Minguez
 10 g_1_1_plant @Sam Burley
 11 rg_5_5_elemental @Brad Rigney
+
+[other]
+12 emblem_gideon_ally_of_zendikar @Eric Deschamps
+13 emblem_ob_nixilis_reignited @Chris Rahn
+14 emblem_kiora_master_of_the_depths @Jason Chan

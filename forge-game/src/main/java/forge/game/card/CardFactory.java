@@ -102,7 +102,7 @@ public class CardFactory {
         copy.setStates(getCloneStates(original, copy, sourceSA));
         // force update the now set State
         if (original.isTransformable()) {
-            copy.setState(original.isTransformed() ? CardStateName.Transformed : CardStateName.Original, true, true);
+            copy.setState(original.isTransformed() ? CardStateName.Backside : CardStateName.Original, true, true);
         } else {
             copy.setState(copy.getCurrentStateName(), true, true);
         }
@@ -198,7 +198,9 @@ public class CardFactory {
         if (c.hasAlternateState()) {
             if (c.isFlipCard()) {
                 c.setState(CardStateName.Flipped, false);
-                c.setImageKey(cp.getImageKey(true));
+                // set the imagekey altstate to false since the rotated image is handled by graphics renderer
+                // setting this to true will download the original image with different name.
+                c.setImageKey(cp.getImageKey(false));
             }
             else if (c.isDoubleFaced() && cardRules != null) {
                 c.setState(cardRules.getSplitType().getChangedStateName(), false);
@@ -374,22 +376,28 @@ public class CardFactory {
             }
         }
 
-        // Build English oracle and translated oracle mapping
+        // Negative card Id's are for view purposes only
         if (c.getId() >= 0) {
+            // Build English oracle and translated oracle mapping
             CardTranslation.buildOracleMapping(face.getName(), face.getOracleText(), variantName);
         }
 
-        // Name first so Senty has the Card name
+        // Set name for Sentry reports to be identifiable
         c.setName(face.getName());
 
-        for (Entry<String, String> v : face.getVariables())  c.setSVar(v.getKey(), v.getValue());
+        if (c.getId() >= 0) { // Set Triggers & Abilities if not for view
+            for (Entry<String, String> v : face.getVariables())
+                c.setSVar(v.getKey(), v.getValue());
+            for (String r : face.getReplacements())
+                c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true, c.getCurrentState()));
+            for (String s : face.getStaticAbilities())
+                c.addStaticAbility(s);
+            for (String t : face.getTriggers())
+                c.addTrigger(TriggerHandler.parseTrigger(t, c, true, c.getCurrentState()));
 
-        for (String r : face.getReplacements())              c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true, c.getCurrentState()));
-        for (String s : face.getStaticAbilities())           c.addStaticAbility(s);
-        for (String t : face.getTriggers())                  c.addTrigger(TriggerHandler.parseTrigger(t, c, true, c.getCurrentState()));
-
-        // keywords not before variables
-        c.addIntrinsicKeywords(face.getKeywords(), false);
+            // keywords not before variables
+            c.addIntrinsicKeywords(face.getKeywords(), false);
+        }
         if (face.getDraftActions() != null) {
             face.getDraftActions().forEach(c::addDraftAction);
         }
@@ -418,7 +426,8 @@ public class CardFactory {
 
         c.setAttractionLights(face.getAttractionLights());
 
-        CardFactoryUtil.addAbilityFactoryAbilities(c, face.getAbilities());
+        if (c.getId() > 0) // Set FactoryAbilities if not for view
+            CardFactoryUtil.addAbilityFactoryAbilities(c, face.getAbilities());
     }
 
     public static void copySpellAbility(SpellAbility from, SpellAbility to, final Card host, final Player p, final boolean lki, final boolean keepTextChanges) {
@@ -549,9 +558,9 @@ public class CardFactory {
             ret1.copyFrom(in.getState(CardStateName.Original), false, sa);
             result.put(CardStateName.Original, ret1);
 
-            final CardState ret2 = new CardState(out, CardStateName.Transformed);
-            ret2.copyFrom(in.getState(CardStateName.Transformed), false, sa);
-            result.put(CardStateName.Transformed, ret2);
+            final CardState ret2 = new CardState(out, CardStateName.Backside);
+            ret2.copyFrom(in.getState(CardStateName.Backside), false, sa);
+            result.put(CardStateName.Backside, ret2);
         } else if (in.isSplitCard()) {
             // for split cards, copy all three states
             final CardState ret1 = new CardState(out, CardStateName.Original);
@@ -722,29 +731,32 @@ public class CardFactory {
 
             // Special Rules for Embalm and Eternalize
             if (sa.isEmbalm() && sa.isIntrinsic()) {
-                String name = TextUtil.fastReplace(
+                String name = "embalm_" + TextUtil.fastReplace(
                         TextUtil.fastReplace(host.getName(), ",", ""),
                         " ", "_").toLowerCase();
-                String set = host.getSetCode().toLowerCase();
-                state.setImageKey(ImageKeys.getTokenKey("embalm_" + name + "_" + set));
+                state.setImageKey(StaticData.instance().getOtherImageKey(name, host.getSetCode()));
             }
 
             if (sa.isEternalize() && sa.isIntrinsic()) {
-                String name = TextUtil.fastReplace(
+                String name = "eternalize_" + TextUtil.fastReplace(
                     TextUtil.fastReplace(host.getName(), ",", ""),
                         " ", "_").toLowerCase();
-                String set = host.getSetCode().toLowerCase();
-                state.setImageKey(ImageKeys.getTokenKey("eternalize_" + name + "_" + set));
+                state.setImageKey(StaticData.instance().getOtherImageKey(name, host.getSetCode()));
             }
 
             if (sa.isKeyword(Keyword.OFFSPRING) && sa.isIntrinsic()) {
-                String name = TextUtil.fastReplace(
+                String name = "offspring_" + TextUtil.fastReplace(
                         TextUtil.fastReplace(host.getName(), ",", ""),
                         " ", "_").toLowerCase();
-                String set = host.getSetCode().toLowerCase();
-                state.setImageKey(ImageKeys.getTokenKey("offspring_" + name + "|" + set));
+                state.setImageKey(StaticData.instance().getOtherImageKey(name, host.getSetCode()));
             }
 
+            if (sa.isKeyword(Keyword.SQUAD) && sa.isIntrinsic()) {
+                String name = "squad_" + TextUtil.fastReplace(
+                        TextUtil.fastReplace(host.getName(), ",", ""),
+                        " ", "_").toLowerCase();
+                state.setImageKey(StaticData.instance().getOtherImageKey(name, host.getSetCode()));
+            }
             
             if (sa.hasParam("GainTextOf") && originalState != null) {
                 state.setSetCode(originalState.getSetCode());

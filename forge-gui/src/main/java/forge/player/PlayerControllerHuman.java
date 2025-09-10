@@ -285,7 +285,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             // maindeck and max sideboard sizes
             // No longer need 1:1 sideboarding in non-limited formats
             List<PaperCard> resp = getGui().sideboard(sideboard, main, message);
-            newMain = ObjectUtils.defaultIfNull(resp, main.toFlatList());
+            newMain = ObjectUtils.getIfNull(resp, main.toFlatList());
         } while (conform && (newMain.size() < deckMinSize || combinedDeckSize - newMain.size() > sbMax));
 
         return newMain;
@@ -1463,10 +1463,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public Object vote(final SpellAbility sa, final String prompt, final List<Object> options,
                        final ListMultimap<Object, Player> votes, Player forPlayer, boolean optional) {
-        if (optional) {
-            return getGui().oneOrNone(prompt, options);
+        if (sa.hasParam("Choices")) {
+            return chooseSpellAbilitiesForEffect(Lists.newArrayList(IterableUtil.filter(options, SpellAbility.class)), sa, prompt, 1, null).get(0);
         }
-        return getGui().one(prompt, options);
+        return chooseSingleEntityForEffect(new FCollection<>(IterableUtil.filter(options, GameEntity.class)), sa, prompt, optional, null);
     }
 
     /*
@@ -2307,6 +2307,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public void revealUnsupported(final Map<Player, List<PaperCard>> unsupported) {
+        for (final Player p : unsupported.keySet()) {
+            List<PaperCard> removed = unsupported.get(p);
+            if (removed == null || removed.isEmpty())
+                continue;
+            getGui().getChoices(localizer.getMessage("lblActionFromPlayerDeck", localizer.getMessage("lblRemoved"), Lang.getInstance().getPossessedObject(MessageUtil.mayBeYou(player, p), "")), -1, -1, ImmutableList.copyOf(removed));
+        }
+    }
+
+    @Override
     public List<PaperCard> chooseCardsYouWonToAddToDeck(final List<PaperCard> losses) {
         return getGui().many(localizer.getMessage("lblSelectCardstoAddtoYourDeck"), localizer.getMessage("lblAddTheseToMyDeck"), 0, losses.size(), losses, null);
     }
@@ -2700,7 +2710,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final Card card = gameCacheCounters.get(cv);
 
             final ImmutableList<CounterType> counters = subtract ? ImmutableList.copyOf(card.getCounters().keySet())
-                    : ImmutableList.copyOf(Collections2.transform(CounterEnumType.values, CounterType::get));
+                    : ImmutableList.copyOf(CounterEnumType.values);
 
             final CounterType counter = getGui().oneOrNone(localizer.getMessage("lblWhichTypeofCounter"), counters);
             if (counter == null) {
@@ -2964,8 +2974,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                             }
                         } else {
                             forgeCard.changeToState(forgeCard.getRules().getSplitType().getChangedStateName());
-                            if (forgeCard.getCurrentStateName().equals(CardStateName.Transformed) ||
-                                    forgeCard.getCurrentStateName().equals(CardStateName.Modal)) {
+                            if (forgeCard.getCurrentStateName().equals(CardStateName.Backside)) {
                                 forgeCard.setBackSide(true);
                             }
                         }

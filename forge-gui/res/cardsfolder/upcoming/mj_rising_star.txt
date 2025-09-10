@@ -1,0 +1,10 @@
+Name:MJ, Rising Star
+ManaCost:2 W
+Types:Legendary Creature Human Performer
+PT:2/3
+K:Vigilance
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+DeckHints:Ability$LifeGain
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nWhenever you gain life, put a +1/+1 counter on MJ.

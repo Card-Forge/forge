@@ -69,7 +69,6 @@ public class RewardScene extends UIScene {
     private int remainingSelections = 0;
 
     private RewardScene() {
-
         super(Forge.isLandscapeMode() ? "ui/items.json" : "ui/items_portrait.json");
 
         playerGold = Controls.newAccountingLabel(ui.findActor("playerGold"), false);
@@ -103,7 +102,6 @@ public class RewardScene extends UIScene {
     }
 
     private void toggleToolTip() {
-
         Selectable selectable = getSelected();
         if (selectable == null)
             return;
@@ -165,7 +163,6 @@ public class RewardScene extends UIScene {
         if (type != null) {
             switch (type) {
                 case Shop:
-                    break;
                 case QuestReward:
                 case Loot:
                     break;
@@ -186,7 +183,7 @@ public class RewardScene extends UIScene {
             if (type == Type.Loot)
                 AdventurePlayer.current().addReward(reward.getReward());
             if (type == Type.QuestReward)
-                AdventurePlayer.current().addReward(reward.getReward()); // Want to customize this soon to have selectable rewards which will be handled different here
+                AdventurePlayer.current().addReward(reward.getReward()); // TODO Want to customize this soon to have selectable rewards which will be handled different here
             reward.clearHoldToolTip();
             try {
                 stage.getActors().removeValue(reward, true);
@@ -296,7 +293,7 @@ public class RewardScene extends UIScene {
 
     public void loadRewards(Deck deck, Type type, ShopActor shopActor, boolean noSell) {
         Array<Reward> rewards = new Array<>();
-        for (PaperCard card : deck.getAllCardsInASinglePool().toFlatList()) {
+        for (PaperCard card : deck.getAllCardsInASinglePool(true, true).toFlatList()) {
             rewards.add(new Reward(card, noSell));
         }
         loadRewards(rewards, type, shopActor);
@@ -470,7 +467,9 @@ public class RewardScene extends UIScene {
                 mul *= 0.8f;
         }
         cardHeight = bestCardHeight * 0.90f;
-        Float custom = Forge.isLandscapeMode() ? Config.instance().getSettingData().rewardCardAdjLandscape : Config.instance().getSettingData().rewardCardAdj;
+        Float custom = Forge.isLandscapeMode()
+            ? Config.instance().getSettingData().rewardCardAdjLandscape
+            : Config.instance().getSettingData().rewardCardAdj;
         if (custom != null && custom != 1f) {
             mul *= custom;
         } else {
@@ -484,7 +483,6 @@ public class RewardScene extends UIScene {
                     mul *= Forge.isLandscapeMode() ? 1.05f : 1.5f;
                 else if (fW / fH >= 2f)
                     mul *= Forge.isLandscapeMode() ? 1f : 1.4f;
-
             }
         }
         cardWidth = (cardHeight / CARD_WIDTH_TO_HEIGHT) * mul;
@@ -501,7 +499,6 @@ public class RewardScene extends UIScene {
                     skipCard = true;
                 }
             }
-
 
             int currentRow = (i / numberOfColumns);
             float lastRowXAdjust = 0;
@@ -546,7 +543,6 @@ public class RewardScene extends UIScene {
             updateRestockButton();
         }
     }
-
 
     private void updateBuyButtons() {
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
@@ -636,7 +632,6 @@ public class RewardScene extends UIScene {
         private final int index;
         public RewardActor rewardActor;
         private Reward reward;
-        int price;
         boolean isSold;
 
         void update() {
@@ -655,7 +650,6 @@ public class RewardScene extends UIScene {
             else if (Reward.Type.Item.equals(reward.getType()))
                 setText("Pick Reward" + "\n" + Forge.getLocalizer().getMessage("lblOwned") + ": " + AdventurePlayer.current().countItem(reward.getItem().name));
         }
-
 
         public ChooseRewardButton(int i, RewardActor actor, Reward reward, TextraButton style) {
             super("", style.getStyle(), Controls.getTextraFont());

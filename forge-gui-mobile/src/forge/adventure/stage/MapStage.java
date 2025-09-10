@@ -820,7 +820,7 @@ public class MapStage extends GameStage {
         dialog.clearListeners();
         TextraButton ok = Controls.newTextButton("OK", this::hideDialog);
         ok.setVisible(false);
-        TypingLabel L = Controls.newTypingLabel("{GRADIENT=RED;WHITE;1;1}Defeated and unable to continue, you use the last of your power to escape the area.");
+        TypingLabel L = Controls.newTypingLabel("{GRADIENT=RED;WHITE;1;1}" + Forge.getLocalizer().getMessage("lblDefeatedDescription"));
         L.setWrap(true);
         L.setTypingListener(new TypingAdapter() {
             @Override

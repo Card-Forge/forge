@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -16,7 +15,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.game.Game;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -38,8 +36,8 @@ public class VoteEffect extends SpellAbilityEffect {
     protected String getStackDescription(final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         sb.append(Lang.joinHomogenous(getDefinedPlayersOrTargeted(sa))).append(" vote ");
-        if (sa.hasParam("VoteType")) {
-            sb.append("for ").append(StringUtils.join(sa.getParam("VoteType").split(","), " or "));
+        if (sa.hasParam("Choices")) {
+            sb.append("for ").append(StringUtils.join(sa.getAdditionalAbilityList("Choices"), " or "));
         } else if (sa.hasParam("VoteMessage")) {
             sb.append(sa.getParam("VoteMessage"));
         }
@@ -62,8 +60,8 @@ public class VoteEffect extends SpellAbilityEffect {
         final boolean other = sa.hasParam("VotePlayer") && sa.getParam("VotePlayer").equals("Other");
         final StringBuilder record = new StringBuilder();
 
-        if (sa.hasParam("VoteType")) {
-            voteType.addAll(Arrays.asList(sa.getParam("VoteType").split(",")));
+        if (sa.hasParam("Choices")) {
+            voteType.addAll(sa.getAdditionalAbilityList("Choices"));
         } else if (sa.hasParam("VoteCard")) {
             ZoneType zone = sa.hasParam("Zone") ? ZoneType.smartValueOf(sa.getParam("Zone")) : ZoneType.Battlefield;
             voteType.addAll(CardLists.getValidCards(game.getCardsIn(zone), sa.getParam("VoteCard"), activator, host, sa));
@@ -131,7 +129,7 @@ public class VoteEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("EachVote")) {
             for (Map.Entry<Object, Collection<Player>> e : votes.asMap().entrySet()) {
-                final SpellAbility action = AbilityFactory.getAbility(host, sa.getParam("Vote" + e.getKey().toString()));
+                final SpellAbility action = (SpellAbility)e.getKey();
 
                 action.setActivatingPlayer(sa.getActivatingPlayer());
                 ((AbilitySub) action).setParent(sa);
@@ -143,28 +141,35 @@ public class VoteEffect extends SpellAbilityEffect {
                 }
             }
         } else {
-            List<String> subAbs = Lists.newArrayList();
-            final List<Object> mostVotes = getMostVotes(votes);
-            if (sa.hasParam("Tied") && mostVotes.size() > 1) {
-                subAbs.add(sa.getParam("Tied"));
-            } else if (sa.hasParam("VoteSubAbility")) {
-                host.addRemembered(mostVotes);
-                subAbs.add(sa.getParam("VoteSubAbility"));
+            List<SpellAbility> subAbs = Lists.newArrayList();
+            if (sa.hasParam("StoreVoteNum") && sa.hasParam("Choices")) {
+                for (final Object type : voteType) {
+                    SpellAbility subAb = (SpellAbility) type;
+                    subAb.setSVar("VoteNum", "Number$" + votes.get(type).size());
+                    subAbs.add((SpellAbility)type);
+                }
             } else {
-                for (Object type : mostVotes) {
-                    subAbs.add(sa.getParam("Vote" + type.toString()));
+                final List<Object> mostVotes = getMostVotes(votes);
+                if (sa.hasAdditionalAbility("VoteTiedAbility") && mostVotes.size() > 1) {
+                    subAbs.add(sa.getAdditionalAbility("VoteTiedAbility"));
+                } else if (sa.hasAdditionalAbility("VoteSubAbility")) {
+                    host.addRemembered(mostVotes);
+                    subAbs.add(sa.getAdditionalAbility("VoteSubAbility"));
+                } else if (sa.hasParam("Choices")) {
+                    for (Object type : mostVotes) {
+                        subAbs.add((SpellAbility)type);
+                    }
                 }
             }
-            if (sa.hasParam("StoreVoteNum")) {
+            if (sa.hasParam("StoreVoteNum") && !sa.hasParam("Choices")) {
                 for (final Object type : voteType) {
                     sa.setSVar("VoteNum" + type, "Number$" + votes.get(type).size());
                 }
             } else {
-                for (final String subAb : subAbs) {
-                    final SpellAbility action = AbilityFactory.getAbility(host, subAb);
-                    action.setActivatingPlayer(sa.getActivatingPlayer());
-                    ((AbilitySub) action).setParent(sa);
-                    AbilityUtils.resolve(action);
+                for (final SpellAbility subAb : subAbs) {
+                    subAb.setActivatingPlayer(sa.getActivatingPlayer());
+                    ((AbilitySub) subAb).setParent(sa);
+                    AbilityUtils.resolve(subAb);
                 }
             }
             if (sa.hasParam("VoteSubAbility")) {

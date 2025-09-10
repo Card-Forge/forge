@@ -2,7 +2,6 @@
 Code=AVR
 Date=2012-05-04
 Name=Avacyn Restored
-Code2=AVR
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
@@ -265,3 +264,6 @@ ScryfallCode=AVR
 5 b_5_5_demon_flying @Kev Walker
 6 b_2_2_zombie @Lucas Graciano
 7 r_1_1_human_haste @Ryan Pancoast
+
+[other]
+8 emblem_tamiyo_the_moon_sage @Eric Deschamps

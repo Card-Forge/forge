@@ -1,0 +1,196 @@
+[metadata]
+Code=OM1
+Date=2025-09-23
+Name=Through the Omenpaths 1
+Type=Online
+ScryfallCode=OM1
+
+[cards]
+1 R Ademi of the Silkchutes @Filip Burburan
+2 U Archangler's Skyrod @Camille Alquier
+3 U Basil, Cabaretti Loudmouth @Elizabeth Peiró
+4 R Chosen by Valgavoth @Nils Hamm
+5 C City Pigeon @Michele Giorgi
+6 R Confessor's Bindings @Campbell White
+7 U Costume Closet @Ben Maier
+8 C Crime-Scene Instructor @Loïc Canavaggia
+9 C Darval, Whose Web Protects @Xavier Ribeiro
+10 C Eztli of the Thousand Moons @Justyna Dura
+11 C Freestrider Aces @Bartek Fedyczak
+12 U Generous Betty Wray @Caio Cacau
+13 C Lively Leap @Alexandre Honoré
+14 R A Most Helpful Weaver @Caio Cacau
+15 C Mothwing Shroud @Andrew Mar
+16 C Principled Referee @Leonardo Santanna
+17 R Remarkable Readings @Carlos Palma Cruchaga
+18 U Sarn of the Silken Throne @Jodie Muir
+19 C Spectacular Tactics @Cristi Balanescu
+20 U Sudden Strike @Edgar Sánchez Hidalgo
+21 M Surris, Spidersilk Innovator @Chris Mangum
+22 M Verilax the Havenskin @Raoul Vitale
+23 R Yera and Oski, Weaver and Guide @Julia Metzger
+24 U Zora, Spider Fancier @Chris Mangum
+25 C Arala, Hedron Scaler @Andreia Ugrai
+26 U Argyr, Tidal Spinner @Randy Gallegos
+27 R Belion, the Parched @David Palumbo
+28 R Detect Intrusion @Diana Franco
+29 C Drix Interception @Francis Tneh
+30 M Goben, Gene-Splice Savant @Nicholas Gregory
+31 C Hide in Mundanity @Julia Metzger
+32 M Impostor Syndrome @Tehani Farr
+33 R Lost in Littjara @Slawomir Maniak
+34 R Merata, Neuron Hacker @Claudio Pozas
+35 C Obscura Alleylurkers @Matheus Graef
+36 U Olx, Mouth to Many Eyes @Mathias Kollros
+37 U Outsmart the Amateur @Mark Behm
+38 C Ozor, Chronicler of Collapse @Kev Fang
+39 C Phantasmal Vision @Igor Krstic
+40 C Pinnacle Research Team @Nino Vecia
+41 U Robotics Mastery @Andrew Mar
+42 U Secret Identity @Bram Sels
+43 C Snatch Back @Maxime Minard
+44 R Spectral Restitching @Justyna Dura
+45 C Unstable Experiment @Adrián Rodríguez Pérez
+46 U Vazin, Two-Faced Trickster @Andrey Kuzinskiy
+47 U Vexed Bots @Jonathan Wayshak
+48 R The Watcher on the Road @Leonardo Santanna
+49 U Aggressive Symbiosis @Helge C. Balzer
+50 C Bane-Marked Leonin @Kev Walker
+51 C Caldaia Brawlers @Warren Mahy
+52 C Clandestine Work @Will Gist
+53 C Common Crook @Gil Martimiano
+54 C Damning Caress @Marko Manev
+55 R Duskmourn's Claim @Camille Alquier
+56 M Egrix the Bile Bulwark @Lars Grant-West
+57 M Hex of Undeath @Karl Kopinski
+58 R The House Grows Hungry @Carlos Palma Cruchaga
+59 U Kroble, Envoy of the Bog @Michele Giorgi
+60 R Luis, Pompous Pillager @Loïc Canavaggia
+61 C Merciless Enforcers @Cristi Balanescu
+62 U Miasmic Mist @Mathias Kollros
+63 U Nill, Vessel of Valgavoth @Carlos Palma Cruchaga
+64 U Prison Break @Hristo D. Chukov
+65 U Remorseless Coup @Warren Mahy
+66 R Rhilex the Accursed @Diana Franco
+67 C Scorpion's Sting @Inkognit
+68 U Scorvus Ames, Crimelord @Dmitry Burmak
+69 M The Terminus of Return @Adam Paquette
+70 C Tethex, Gift of Malice @Javier Charro
+71 M Viggo, Enforcer of Ig's Crossing @Michael Phillippi
+72 R Villainous Wrath @Jonathan Wayshak
+73 C Wekhdu, Midnight Hunter @Inkognit
+74 R Wrench, Speedway Saboteur @Yohann Schepacz
+75 M Arachnomania @Karl Kopinski
+76 R Bayo, Irritable Instructor @Dmitry Burmak
+77 U Cam and Farrik, Havoc Duo @Warren Mahy
+78 C Deathflame Burst @Claudio Pozas
+79 U Fire-Brained Scheme @Simon Dominic
+80 C Full-Throttle Fanatic @Caio Monteiro
+81 C Galvanized Workforce @Diego Gisbert
+82 U The Infernus @Tuan Duong Chu
+83 U Kazuo, Ruthless Rival @Julian Kok Joon Wen
+84 C Kephon, Rage Incubator @Lars Grant-West
+85 R Kraza, the Swarm as One @Vincent Proce
+86 U Lavaborn Goblins @Tuan Duong Chu
+87 R Lavabrink Repels the Magmaloth @Tiffany Turrill
+88 R Lazlo, Enthusiastic Accuser @Olivier Bernard
+89 M Nia, Skysail Storyteller @Jakob Eirich
+90 R Quint's Insight @Dallas Williams
+91 U Restless Razorkin @Mirko Failoni
+92 R Rizna, the Spider-Crowned @Igor Krstic
+93 C Romantic Rendezvous @Mariah Tekulve
+94 C Sadistic String-Puller @Helge C. Balzer
+95 C Shock @Jason Rainville
+96 C Skittering Kitten @Deruchenko Alexander
+97 C Wardens of Silverweb Summit @Jesper Ejsing
+98 U Wisecrack @Xabi Gaztelua
+99 U Ancestral Carvings @Andrew Mar
+100 C Chizak, Apex Arachnosaur @Caio Monteiro
+101 U The Clutter Cluster @Michele Giorgi
+102 M Cren, Undercity Dreamer @Loïc Canavaggia
+103 C Cruel Caracals @Warren Mahy
+104 C Eccentric Arachnologist @Ben Maier
+105 R Fateweaver @Gonzalo Kenny
+106 C Favored Fighter @Chris Mangum
+107 C Grow Extra Arms @Mathias Kollros
+108 R King of the Coldblood Curse @Andrew Mar
+109 C Lurking Lizards @Henry Peters
+110 U Orris, Last of the Web Lords @Yohann Schepacz
+111 C Perilous Lunge @Arif Wijaya
+112 U Rouse the Swarm @Vincent Proce
+113 R The Scouring Stormsoul @Bartek Fedyczak
+114 C Scout the City @Caio Monteiro
+115 U Selesnya Archivist @Caio Cacau
+116 R Strength of Will @Rhonda Libbey
+117 U Supportive Parents @Elizabeth Peiró
+118 R Tarantusk, Unwisely Awoken @Andrew Mar
+119 U Terrific Team-Up @Hristo D. Chukov
+120 M Through the Omenpath @Allen Panakal
+121 R A Trail of Teacups @Volkan Baǵa
+122 C Zan, Tunnelweb Explorer @John Tedrick
+123 R Alenni, Brood Recruiter @Dmitry Burmak
+124 U Alessos and Pras, Acrobats @Viko Menezes
+125 R Angler's Shield @Randy Gallegos
+126 R Borys, the Spider Rider @Alexandre Honoré
+127 R Brako, Heartless Hunter @Diego Gisbert
+128 U Carlo, Suave Schemer @Cristi Balanescu
+129 R Cheering Crowd @Deruchenko Alexander
+130 U Cirina Bargainspinner @Alexandre Honoré
+131 U Crash, Reckless Endrider @Billy Christian
+132 R Demera, Soul of a Spider @Inkognit
+133 R Desecrex, Gift of Servitude @Diana Franco
+134 U Diligent Webkeepers @Michele Giorgi
+135 U Dreadfang, Loathed by Fans @Inkognit
+136 R Druneth, Reviver of the Hive @Arif Wijaya
+137 C Gallant Citizen @Mirko Failoni
+138 R Gloria, the Great Armorer @Alexander Mokhov
+139 U Janai and Hoppy, Roofskippers @Mathias Kollros
+140 R Kavaero, Mind-Bitten @Claudio Pozas
+141 U Kivni, Orb Weaver @Alexander Mokhov
+142 C Knife Trick @Javier Charro
+143 U Kumonosu, the Watchful @Joe Slucher
+144 C Leyline Weaver @Xavier Ribeiro
+145 R Makdee and Itla, Skysnarers @Mirko Failoni
+146 U Margot, On the Case @Andreia Ugrai
+147 C Mob Lookout @Francisco Badilla
+148 M Neach, Pinnacle Pariah @Artur Nakhodkin
+149 U Nu and Sumi, Career Criminals @Daren Bader
+150 R Qoneus, Horizon Splicer @Andreas Zafiratos
+151 U Rhino's Rampage @Gonzalo Kenny
+152 U Rishei, Getaway Accomplice @Josh Hass
+153 R Ruzic, Booed but Victorious @Caio Cacau
+154 M Scions of the Ur-Spider @Jesper Ejsing
+155 R Skv'x the Augmenter @Igor Krstic
+156 U Tearle, Entropic Hunger @Andrey Kuzinskiy
+157 R Uharis, the Stormspinner @Slawomir Maniak
+158 M Withar, Cocoon Keeper @Vincent Proce
+159 C Wonderweave Aerialist @Eelis Kyttanen
+160 U Xecau, Predation's Shadow @Inkognit
+161 U Cactarantula Saddle @Daniel Ljunggren
+162 C Carriage of Dreams @Carlos Palma Cruchaga
+163 C Data Scrubber @Caio Monteiro
+164 C Eerie Gravestone @Francisco Badilla
+165 U Error-9, Viral Node @Steve Ellis
+166 R Fizik, Etherium Mechanic @Joshua Cairos
+167 R Giantcraft Helm @Claudio Pozas
+168 U Goro Rel, Scourge to Spiders @Warren Mahy
+169 C Opulent Valet @Victor Sales
+170 C Perfected Pastry @Henry Peters
+171 R Phenomena Recorder @Tianxing Xu
+172 R Reality Fulcrum @Alex Konstad
+173 U Scuttling Spidercoach @Filip Burburan
+174 C Steelweb Surveyor @Joshua Cairos
+175 R Stitcher's Wings @Kev Fang
+176 C Temple Trap @Kev Fang
+177 C Treat Trolley @Josiah "Jo" Cameron
+178 C Vinewoven Chariot @Camille Alquier
+179 R Exclusive Nightclub @Francisco Badilla
+180 U Fearsome Ridgeline @Adam Paquette
+181 R Multiversal Passage @Daren Bader
+182 C Ominous Asylum @Daniel Ljunggren
+183 C Savage Mansion @Vincent Proce
+184 C Sinister Hideout @Julian Kok Joon Wen
+185 C Suburban Sanctuary @Victor Sales
+186 C University Campus @Randy Gallegos
+187 R Urban Retreat @Julia Metzger
+188 C Vibrant Cityscape @Julian Kok Joon Wen

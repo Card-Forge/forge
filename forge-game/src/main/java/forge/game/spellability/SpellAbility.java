@@ -114,7 +114,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private Trigger triggerObj;
     private boolean optionalTrigger = false;
     private ReplacementEffect replacementEffect;
-    private int sourceTrigger = -1;
     private List<Object> triggerRemembered = Lists.newArrayList();
 
     private AlternativeCost altCost = null;
@@ -355,7 +354,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public int totalAmountOfManaGenerated(SpellAbility saPaidFor, boolean multiply) {
         int result = 0;
         AbilityManaPart mp = getManaPart();
-        if (mp != null && metConditions() && mp.meetsManaRestrictions(saPaidFor)) {
+        if (mp != null && mp.meetsManaRestrictions(saPaidFor)) {
             result += amountOfManaGenerated(multiply);
         }
         result += subAbility != null ? subAbility.totalAmountOfManaGenerated(saPaidFor, multiply) : 0;
@@ -416,7 +415,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return false;
     }
 
-    protected final void setManaPart(AbilityManaPart manaPart0) {
+    public final void setManaPart(AbilityManaPart manaPart0) {
         manaPart = manaPart0;
     }
 
@@ -671,6 +670,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public final boolean isMadness() {
         return isAlternativeCost(AlternativeCost.Madness);
+    }
+    
+    public final boolean isMayhem() {
+        return isAlternativeCost(AlternativeCost.Mayhem);
     }
 
     public final boolean isMutate() {
@@ -1347,10 +1350,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public int getSourceTrigger() {
-        return sourceTrigger;
-    }
-    public void setSourceTrigger(final int id) {
-        sourceTrigger = id;
+        return isTrigger() ? getTrigger().getId() : -1;
     }
 
     public boolean isReplacementAbility() {
@@ -1504,6 +1504,22 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 }
             }
 
+            if (tr.isDifferentCMC() && entity instanceof Card) {
+                for (final Card c : getTargets().getTargetCards()) {
+                    if (entity != c && c.getCMC() == (((Card) entity).getCMC())) {
+                        return false;
+                    }
+                }
+            }
+
+            if (tr.isDifferentNames() && entity instanceof Card) {
+                for (final Card c : getTargets().getTargetCards()) {
+                    if (entity != c && c.sharesNameWith(((Card) entity).getName())) {
+                        return false;
+                    }
+                }
+            }
+
             if (tr.isSameController() && entity instanceof Card) {
                 Player newController;
                 newController = ((Card) entity).getController();
@@ -1609,10 +1625,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isOffering() {
-        return isAlternativeCost(AlternativeCost.Offering);
+        return isOptionalCostPaid(OptionalCost.Offering);
     }
 
-    public Card getSacrificedAsOffering() { //for Patron offering
+    public Card getSacrificedAsOffering() {
         return sacrificedAsOffering;
     }
     public void setSacrificedAsOffering(final Card c) {

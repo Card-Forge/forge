@@ -59,6 +59,7 @@ public class TargetRestrictions {
     private boolean forEachPlayer = false;
     private boolean differentControllers = false;
     private boolean differentCMC = false;
+    private boolean differentNames = false;
     private boolean equalToughness = false;
     private boolean sameController = false;
     private boolean withoutSameCreatureType = false;
@@ -289,7 +290,7 @@ public class TargetRestrictions {
      */
     public final boolean isMinTargetsChosen(final Card c, final SpellAbility sa) {
         int min = getMinTargets(c, sa);
-        if (min == 0 || (sa.isDividedAsYouChoose() && ObjectUtils.defaultIfNull(sa.getDividedValue(), 0) == 0)) {
+        if (min == 0 || (sa.isDividedAsYouChoose() && ObjectUtils.getIfNull(sa.getDividedValue(), 0) == 0)) {
             return true;
         }
         return min <= sa.getTargets().size();
@@ -619,6 +620,13 @@ public class TargetRestrictions {
      */
     public void setDifferentCMC(boolean different) {
         this.differentCMC = different;
+    }
+
+    public boolean isDifferentNames() {
+        return differentNames;
+    }
+    public void setDifferentNames(boolean different) {
+        this.differentNames = different;
     }
 
     /**

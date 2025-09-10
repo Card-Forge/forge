@@ -241,7 +241,7 @@ public class FCardPanel extends FDisplayObject {
                 CardRenderer.drawCardWithOverlays(g, card, x2, y, w2, h, getStackPosition());
             } else {
                 //transform
-                if (card.getCurrentState().getState() == CardStateName.Transformed || card.getCurrentState().getState() == CardStateName.Flipped) {
+                if (card.getCurrentState().getState() == CardStateName.Backside || card.getCurrentState().getState() == CardStateName.Flipped) {
                     DURATION = 0.16f;
                     CardRenderer.drawCardWithOverlays(g, card, x2, y, w2, h, getStackPosition());
                 } else if (card.getCurrentState().getState() == CardStateName.Meld) {

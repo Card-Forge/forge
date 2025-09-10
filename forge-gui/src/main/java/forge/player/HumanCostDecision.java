@@ -491,6 +491,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             min = 0;
         }
         GameEntityViewMap<Card, CardView> gameCacheExile = GameEntityView.getMap(list);
+        // CR 406.4 technically if you can't see their face some randomness should be involved
         List<CardView> views = controller.getGui().many(
                 Localizer.getInstance().getMessage("lblChooseAnExiledCardPutIntoGraveyard"),
                 Localizer.getInstance().getMessage("lblToGraveyard"), min, c, CardView.getCollection(list), CardView.get(source));
@@ -1392,7 +1393,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     public PaymentDecision visit(final CostUntapType cost) {
         CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"),
                 player, source, ability);
-        typeList = CardLists.filter(typeList, CardPredicates.TAPPED, c -> c.getCounters(CounterEnumType.STUN) == 0 || c.canRemoveCounters(CounterType.get(CounterEnumType.STUN)));
+        typeList = CardLists.filter(typeList, CardPredicates.TAPPED, c -> c.getCounters(CounterEnumType.STUN) == 0 || c.canRemoveCounters(CounterEnumType.STUN));
         int c = cost.getAbilityAmount(ability);
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, typeList, ability);
         inp.setCancelAllowed(true);

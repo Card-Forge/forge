@@ -377,3 +377,8 @@ ScryfallCode=M19
 12 g_3_3_beast @Jason Felix
 13 g_1_1_elf_warrior @William O'Connor
 14 c_1_1_a_thopter_flying @Svetlin Velinov
+
+[other]
+15 emblem_ajani_adversary_of_tyrants @Victor Adame Minguez
+16 emblem_tezzeret_artifice_master @Josh Hass
+17 emblem_vivien_reid @Anna Steinbauer

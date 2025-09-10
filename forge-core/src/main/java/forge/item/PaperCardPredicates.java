@@ -4,12 +4,15 @@ import com.google.common.collect.Lists;
 
 import forge.StaticData;
 import forge.card.*;
+import forge.card.CardEdition.EditionEntry;
 import forge.util.PredicateString;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.Predicate;
 
 /**
@@ -35,6 +38,10 @@ public abstract class PaperCardPredicates {
         return new PredicateSets(Lists.newArrayList(value), true);
     }
 
+    public static Predicate<PaperCard> printedWithRarity(final CardRarity rarity) {
+        return new PredicatePrintedWithRarity(rarity);
+    }
+
     public static Predicate<PaperCard> name(final String what) {
         return new PredicateName(what);
     }
@@ -43,8 +50,32 @@ public abstract class PaperCardPredicates {
         return new PredicateNames(what);
     }
 
-    private static final class PredicateColor implements Predicate<PaperCard> {
+    /**
+     * Filters on a card foil status
+     */
+    public static Predicate<PaperCard> isFoil(final boolean isFoil) {
+        return new PredicateFoil(isFoil);
+    }
 
+    private static final class PredicatePrintedWithRarity implements Predicate<PaperCard> {
+        private final CardRarity matchingRarity;
+
+        @Override
+        public boolean test(final PaperCard card) {
+            return StaticData.instance().getEditions().stream()
+                .anyMatch(ce -> {
+                    List<EditionEntry> entries = ce.getCardInSet(card.getName());
+                    return entries != null && entries.stream()
+                        .anyMatch(ee -> ee.rarity() == matchingRarity);
+                });
+        }
+
+        private PredicatePrintedWithRarity(final CardRarity rarity) {
+            this.matchingRarity = rarity;
+        }
+    }
+
+    private static final class PredicateColor implements Predicate<PaperCard> {
         private final byte operand;
 
         private PredicateColor(final byte color) {
@@ -67,7 +98,17 @@ public abstract class PaperCardPredicates {
             }
             return false;
         }
+    }
 
+    private static final class PredicateFoil implements Predicate<PaperCard> {
+        private final boolean operand;
+
+        @Override
+        public boolean test(final PaperCard card) { return card.isFoil() == operand; }
+
+        private PredicateFoil(final boolean isFoil) {
+            this.operand = isFoil;
+        }
     }
 
     private static final class PredicateRarity implements Predicate<PaperCard> {
@@ -75,11 +116,24 @@ public abstract class PaperCardPredicates {
 
         @Override
         public boolean test(final PaperCard card) {
-            return (card.getRarity() == this.operand);
+            return card.getRarity() == this.operand;
         }
 
-        private PredicateRarity(final CardRarity type) {
-            this.operand = type;
+        private PredicateRarity(final CardRarity rarity) {
+            this.operand = rarity;
+        }
+    }
+
+    public static final class PredicateRarities implements Predicate<PaperCard> {
+        private final HashSet<CardRarity> operand;
+
+        @Override
+        public boolean test(final PaperCard card) {
+            return this.operand.contains(card.getRarity());
+        }
+
+        public PredicateRarities(CardRarity... rarities) {
+            this.operand = new HashSet<>(Arrays.asList(rarities));
         }
     }
 
@@ -94,7 +148,8 @@ public abstract class PaperCardPredicates {
         }
 
         private PredicateSets(final List<String> wantSets, final boolean shouldContain) {
-            this.sets = new HashSet<>(wantSets);
+            this.sets = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+            this.sets.addAll(wantSets);
             this.mustContain = shouldContain;
         }
     }

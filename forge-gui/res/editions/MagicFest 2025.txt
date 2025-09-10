@@ -18,5 +18,8 @@ F8 R All-You-Can-Eat Buffet @Mark Rosewater
 9 R Tifa Lockhart @Nijihayashi
 10 R Arcane Signet @David Astruga
 11 R Rograkh, Son of Rohgahh @Square Enix
-12 R Rograkh, Son of Rohgahh @Square Enix
-13 R Swords to Plowshares @Kodai Okamoto
+12 R Swords to Plowshares @Kodai Okamoto
+13 R Lightning Bolt @Christopher Moeller
+14 R Scourge of Valkas @Svetlin Velinov
+15 M The Ur-Dragon @Jaime Jones
+F16 R Spaghetti Junction @Mark Rosewater

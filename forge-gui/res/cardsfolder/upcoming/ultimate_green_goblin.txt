@@ -1,0 +1,9 @@
+Name:Ultimate Green Goblin
+ManaCost:1 BR BR
+Types:Legendary Creature Goblin Villain
+PT:5/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of your upkeep, discard a card, then create a Treasure token.
+SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+K:Mayhem:2 BR
+Oracle:At the beginning of your upkeep, discard a card, then create a Treasure token.\nMayhem {2}{B/R} (You may cast this card from your graveyard for {2}{B/R} if you discarded it this turn. Timing rules still apply.)

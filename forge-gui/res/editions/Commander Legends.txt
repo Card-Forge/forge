@@ -1337,7 +1337,7 @@ Guildless Commons|CMR
 6 b_2_2_zombie @Paul Scott Canavan
 7 r_2_2_dragon_flying_firebreathing @Lars Grant-West
 8 g_1_1_elf_warrior @William O'Connor
-9 c_3_3_a_phyrexian_golem @Volkan Baǵa
+9 c_3_3_a_golem @Volkan Baǵa
 10 c_x_x_a_horror @Scott Chou
 11 rock @Tomasz Jedruszek
 12 c_a_treasure_sac @Alayna Danner

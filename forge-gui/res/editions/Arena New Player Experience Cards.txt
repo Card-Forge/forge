@@ -1,0 +1,22 @@
+[metadata]
+Code=OANA
+Date=2018-07-14
+Name=Arena New Player Experience Cards
+Type=Online
+ScryfallCode=OANA
+
+[cards]
+1 U Angelic Reward @Denman Rooke
+3 U Confront the Assault @J.P. Targete
+4 R Inspiring Commander @Antonio José Manzanedo
+5 C Knight's Pledge @Magali Villeneuve
+8 C Sanctuary Cat @David Palumbo
+9 U Serra Angel @Donato Giancola
+10 C Shrine Keeper @Craig J Spearing
+11 C Spiritual Guardian @J.P. Targete
+12 C Tactical Advantage @Lie Setiawan
+19 C River's Favor @Lie Setiawan
+23 C Zephyr Gull @Antonio José Manzanedo
+43 C Raging Goblin @Jakub Kasper
+46 C Feral Roar @Jonathan Kuo
+48 C Treetop Warden @Colin Boyer
