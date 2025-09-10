@@ -10,7 +10,6 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.CardPool;
 import forge.deck.Deck;
-import forge.deck.DeckRecognizer;
 import forge.deck.DeckSection;
 import forge.game.*;
 import forge.game.ability.AbilityKey;
@@ -1833,9 +1832,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public List<String> chooseColors(final String message, final SpellAbility sa, final int min, final int max,
                                      List<String> options) {
-        options = options.stream().map(DeckRecognizer::getLocalisedMagicColorName).collect(Collectors.toList());
-        List<String> choices = getGui().getChoices(message, min, max, options);
-        return choices.stream().map(DeckRecognizer::getColorNameByLocalisedName).collect(Collectors.toList());
+        List<MagicColor.Color> enumOptions = options.stream().map(s -> MagicColor.Color.fromByte(MagicColor.fromName(s))).collect(Collectors.toList());
+        List<MagicColor.Color> enumChoices = getGui().getChoices(message, min, max, enumOptions);
+        return enumChoices.stream().map(MagicColor.Color::getName).collect(Collectors.toList());
     }
 
     @Override
