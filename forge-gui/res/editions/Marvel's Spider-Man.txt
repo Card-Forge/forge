@@ -254,10 +254,6 @@ Replace=0.05F BasicLand:fromSheet("SPM cards")!fromSheet("SPM allied lands")
 184 L Sinister Hideout @Pavel Kolomeyets
 185 L Suburban Sanctuary @David Frasheski
 186 L University Campus @David Álvarez
-183 C Savage Mansion @David Álvarez
-184 C Sinister Hideout @Pavel Kolomeyets
-185 C Suburban Sanctuary @David Frasheski
-186 C University Campus @David Álvarez
 187 R Urban Retreat @Jonas De Ro
 188 C Vibrant Cityscape @Wei Guan
 194 L Plains @Jonas De Ro
