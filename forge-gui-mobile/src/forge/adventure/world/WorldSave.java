@@ -19,7 +19,6 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.player.GamePlayerUtil;
 import forge.util.BuildInfo;
-import forge.util.BuildInfo;
 
 import java.io.*;
 import java.util.Date;
