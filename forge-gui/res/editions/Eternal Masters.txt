@@ -276,3 +276,6 @@ ScryfallCode=EMA
 13 g_6_6_wurm @Anthony Francisco
 14 ur_5_5_elemental_flying @Randy Gallegos
 15 rw_1_1_goblin_soldier @Filip Burburan
+
+[other]
+16 emblem_dack_fayden @Eric Deschamps

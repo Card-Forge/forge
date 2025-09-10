@@ -45,8 +45,9 @@ public class GuiBase {
         if (hwInfo != null) {
             return "##########################################\n" +
                     "APP: Forge v." + getInterface().getCurrentVersion() +
-                    "\nDEV: " + hwInfo.device().getName() +
-                    "\nCPU: " + hwInfo.device().getCpuDescription() +
+                    "\nDEV: " + hwInfo.device().getName() + (hwInfo.getChipset() ?
+                    "\nSOC: " + hwInfo.device().getChipset() :
+                    "\nCPU: " + hwInfo.device().getCpuDescription()) +
                     "\nRAM: " + deviceRAM + " MB" +
                     "\nOS: " + hwInfo.os().getRawDescription() +
                     "\n##########################################";

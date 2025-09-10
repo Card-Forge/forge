@@ -26,7 +26,7 @@ ScryfallCode=DST
 12 U Purge @Pete Venters
 13 C Ritual of Restoration @Dany Orizio
 14 R Soulscour @Kev Walker
-15 R Steelshaper Apprentice @Tim Hildebrandt
+15 R Steelshaper Apprentice @Greg Hildebrandt
 16 U Stir the Pride @Matt Cavotta
 17 U Test of Faith @Vance Kovacs
 18 R Turn the Tables @Christopher Moeller
@@ -41,7 +41,7 @@ ScryfallCode=DST
 27 U Neurok Transmuter @Mark Zug
 28 U Psychic Overload @Jeremy Jarvis
 29 R Pulse of the Grid @Wayne England
-30 C Quicksilver Behemoth @Anthony S. Waters
+30 C Quicksilver Behemoth @Anthony S. Waters & Cara Mitten
 31 R Reshape @Jon Foster
 32 R Retract @Matt Cavotta
 33 U Second Sight @Luca Zontini
@@ -141,7 +141,7 @@ ScryfallCode=DST
 127 C Leonin Bola @Christopher Moeller
 128 R Lich's Tomb @Matt Cavotta
 129 R Memnarch @Carl Critchlow
-130 R Mycosynth Lattice @Anthony S. Waters
+130 R Mycosynth Lattice @Anthony S. Waters & Cara Mitten
 131 C Myr Landshaper @Greg Staples
 132 R Myr Matrix @Mark Tedin
 133 C Myr Moonvessel @Dany Orizio
@@ -177,13 +177,3 @@ ScryfallCode=DST
 163 R Blinkmoth Nexus @Brian Snõddy
 164 C Darksteel Citadel @John Avon
 165 U Mirrodin's Core @Greg Staples
-
-[tokens]
-twin
-wirefly
-u_2_2_elemental_flying
-r_3_3_elemental
-g_3_3_beast
-g_1_1_insect
-c_1_1_a_myr
-c_2_2_a_spawn

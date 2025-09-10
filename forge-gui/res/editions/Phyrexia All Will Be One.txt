@@ -510,6 +510,8 @@ ScryfallCode=ONE
 1 w_2_2_cat @April Prime
 2 w_2_2_samurai_double_strike @Gaboleps
 3 r_1_1_phyrexian_goblin @Jokubas Uogintas
+# Duplicated as there is no r_1_1_phyrexian_goblin_haste token yet
+3 r_1_1_phyrexian_goblin_haste @Jokubas Uogintas
 4 r_x_1_phyrexian_horror_trample_haste @Camille Alquier
 5 r_2_2_rebel @Bram Sels
 6 g_3_3_phyrexian_beast_toxic @Uriah Voth
@@ -518,4 +520,7 @@ ScryfallCode=ONE
 9 the_hollow_sentinel @Igor Kieryluk
 10 c_3_3_a_phyrexian_golem @Samuel Araya
 11 c_1_1_a_phyrexian_mite_toxic_noblock @Oriana Menendez
-12 c_1_1_a_phyrexian_mite_toxic_noblock @Oriana Menendez
+12 c_1_1_a_phyrexian_mite_toxic_noblock @Dave Kendall
+
+[other]
+13 emblem_koth_fire_of_resistance @Eric Wilkerson
