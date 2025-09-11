@@ -3,7 +3,7 @@ import json
 import requests
 
 
-def draftsimRankings(edition='FIN', extra=None):
+def draftsimRankings(edition='SPM', extra=None):
 	edition = edition.upper()
 	url1 = 'https://draftsim.com/generated/%s/' % (edition)
 	url2 = '%s' % edition
