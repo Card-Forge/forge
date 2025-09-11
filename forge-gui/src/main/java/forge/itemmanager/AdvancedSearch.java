@@ -110,7 +110,7 @@ public class AdvancedSearch {
                         if (input.getRules().getOtherPart().getKeywords() != null) {
                             for (String key : input.getRules().getOtherPart().getKeywords()) {
                                 Keyword keyword = Keyword.get(key);
-                                if (keyword != null)
+                                if (!Keyword.UNDEFINED.equals(keyword))
                                     keywords.add(keyword);
                             }
                         }
@@ -119,7 +119,7 @@ public class AdvancedSearch {
                 if (input.getRules().getMainPart().getKeywords() != null) {
                     for (String key : input.getRules().getMainPart().getKeywords()) {
                         Keyword keyword = Keyword.get(key);
-                        if (keyword != null)
+                        if (!Keyword.UNDEFINED.equals(keyword))
                             keywords.add(keyword);
                     }
                 }
