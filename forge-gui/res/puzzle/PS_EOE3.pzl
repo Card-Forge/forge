@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Edge of Eternities #03
+URL:https://www.cardforge.org
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Your opponent has 10000 life! Deal at least that much damage this turn to win. Ensure your solution satisfies all possible blocks. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=-1
+p0hand=Welcome the Darkness;Bloodthirsty Conqueror;Vayne's Treachery;Syr Vondam, Sunstar Exemplar
+p0battlefield=Herald of Eternal Dawn;Jumbo Cactuar;The Masamune;Enduring Tenacity;Plains;Plains;Plains;Swamp;Swamp;Swamp;Forest;Forest
+p1life=10000
+p1battlefield=Zidane, Tantalus Thief;Absolute Virtue|Id:1;Pain for All|AttachedTo:1

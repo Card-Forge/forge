@@ -774,7 +774,7 @@ public class DeckProxy implements InventoryItem {
 
         for (PaperCard c : deck.getAllCardsInASinglePool().toFlatList()) {
             CardEdition edition = FModel.getMagicDb().getEditions().get(c.getEdition());
-            if (edition == null)
+            if (edition == null || !edition.hasBasicLands())
                 continue;
             availableEditions.add(edition);
         }

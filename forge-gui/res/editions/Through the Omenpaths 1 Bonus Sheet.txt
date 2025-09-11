@@ -6,43 +6,43 @@ Type=Online
 ScryfallCode=OMB
 
 [cards]
-1 M Comeuppance @
-2 M Leyline Binding @
-3 M Nine Lives @
-4 M Path to Exile @
-5 M Reprieve @
-6 M Rest in Peace @
-7 M Wedding Ring @
-8 M Clever Impersonator @
-9 M Counterspell @
-10 M Lorthos, the Tidemaker @
-11 M Mindbreak Trap @
-12 M Mystic Confluence @
-13 M Ponder @
-14 M Rite of Replication @
-15 M Traumatize @
-16 M Feed the Swarm @
-17 M Hex @
-18 M Infernal Grasp @
-19 M Opposition Agent @
-20 M Reanimate @
-21 M Saw in Half @
-22 M Skithiryx, the Blight Dragon @
-23 M Goblin Bombardment @
-24 M Najeela, the Blade-Blossom @
-25 M Relentless Assault @
-26 M Savage Beating @
-27 M Shock @
-28 M Thrill of Possibility @
-29 M Unexpected Windfall @
-30 M Winds of Change @
-31 M Arachnogenesis @
-32 M Arasta of the Endless Web @
-33 M Beast Within @
-34 M Heroic Intervention @
-35 M Hunter's Insight @
-36 M Parallel Lives @
-37 M Silkguard @
-38 M Tangle @
-39 M Alibou, Ancient Witness @
-40 M Terminate @
+1 R Comeuppance @Igor Krstic
+2 R Leyline Binding @Cristi Balanescu
+3 R Nine Lives @Paul Scott Canavan
+4 R Path to Exile @Todd Lockwood
+5 U Reprieve @Mariah Tekulve
+6 R Rest in Peace @Jarel Threat
+7 M Wedding Ring @Olena Richards
+8 M Clever Impersonator @Slawomir Maniak
+9 R Counterspell @Gao Yan
+10 M Lorthos, the Tidemaker @Kekai Kotaki
+11 M Mindbreak Trap @Christopher Moeller
+12 R Mystic Confluence @Kieran Yanner
+13 C Ponder @Ernanda Souza
+14 R Rite of Replication @Matt Cavotta
+15 R Traumatize @Greg Staples
+16 C Feed the Swarm @Nino Is
+17 R Hex @Michael Sutfin
+18 U Infernal Grasp @Naomi Baker
+19 M Opposition Agent @Scott Murphy
+20 R Reanimate @Johann Bodin
+21 R Saw in Half @Alexander Mokhov
+22 M Skithiryx, the Blight Dragon @Chippy
+23 R Goblin Bombardment @Dave Kendall
+24 M Najeela, the Blade-Blossom @Matt Stewart
+25 R Relentless Assault @Greg Hildebrandt
+26 M Savage Beating @Matt Thompson
+27 C Shock @Jon Foster
+28 C Thrill of Possibility @Izzy
+29 C Unexpected Windfall @Lorenzo Mastroianni
+30 U Winds of Change @Adam Rex
+31 R Arachnogenesis @Johannes Voss
+32 R Arasta of the Endless Web @Sam Rowan
+33 U Beast Within @Jesper Ejsing
+34 R Heroic Intervention @James Ryman
+35 U Hunter's Insight @Jim Murray
+36 M Parallel Lives @Steve Prescott
+37 R Silkguard @Dan Murayama Scott
+38 U Tangle @Néstor Ossandón Leal
+39 M Alibou, Ancient Witness @Matt Stewart
+40 U Terminate @Wayne Reynolds

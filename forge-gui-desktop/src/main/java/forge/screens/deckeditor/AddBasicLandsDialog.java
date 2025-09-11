@@ -68,7 +68,7 @@ public class AddBasicLandsDialog {
     private static final int LAND_PANEL_PADDING = 3;
 
     private final FComboBoxPanel<CardEdition> cbLandSet = new FComboBoxPanel<>(Localizer.getInstance().getMessage("lblLandSet") + ":", FlowLayout.CENTER,
-            IterableUtil.filter(StaticData.instance().getSortedEditions(), CardEdition.Predicates.hasBasicLands));
+            IterableUtil.filter(StaticData.instance().getSortedEditions(), CardEdition::hasBasicLands));
 
     private final MainPanel panel = new MainPanel();
     private final LandPanel pnlPlains = new LandPanel("Plains");
