@@ -1077,6 +1077,25 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return items.random();
     }
 
+    public boolean hasEquippedItem() {
+        for (Long id : equippedItems.values()) {
+            ItemData item = getEquippedItem(id);
+            if (item == null)
+                continue;
+            if (isHardorInsaneDifficulty()) {
+                return true;
+            } else {
+                switch (item.equipmentSlot) {
+                    // limit to these for easy and normal
+                    case "Boots", "Body", "Neck" -> {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     public ItemData getEquippedAbility1() {
         for (Long id : equippedItems.values()) {
             ItemData data = getEquippedItem(id);
