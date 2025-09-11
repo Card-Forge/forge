@@ -67,10 +67,12 @@ import forge.util.ThreadUtil;
 import io.sentry.protocol.Device;
 import io.sentry.protocol.OperatingSystem;
 import org.apache.commons.lang3.tuple.Pair;
+import org.json.JSONObject;
 import org.jupnp.DefaultUpnpServiceConfiguration;
 import org.jupnp.android.AndroidUpnpServiceConfiguration;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -188,7 +190,26 @@ public class Main extends AndroidApplication {
 
         boolean permissiongranted = checkPermission();
         Gadapter = new AndroidAdapter(getContext());
-
+        String cpu = "";
+        String soc = "";
+        boolean getChipset = false;
+        // database.json source: https://github.com/xTheEc0/Android-Device-Hardware-Specs-Database
+        try {
+            InputStream is = getAssets().open("database.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            JSONObject db = new JSONObject(new String(buffer, StandardCharsets.UTF_8));
+            JSONObject board = db.getJSONObject(Build.BOARD);
+            cpu = board.get("CPU").toString();
+            soc = board.get("SoC").toString();
+            getChipset = true;
+        } catch (Exception e) {
+            cpu = getCpuName();
+            soc = Build.BOARD;
+            getChipset = false;
+        }
         // Device Info
         Device device = new Device();
         device.setId(Build.ID);
@@ -197,8 +218,8 @@ public class Main extends AndroidApplication {
         device.setBrand(Build.BRAND);
         device.setManufacturer(Build.MANUFACTURER);
         device.setMemorySize(memInfo.totalMem);
-        device.setCpuDescription(getCpuName());
-        device.setChipset(Build.HARDWARE + " " + Build.BOARD);
+        device.setCpuDescription(cpu);
+        device.setChipset(soc);
         // OS Info
         OperatingSystem os = new OperatingSystem();
         os.setName("Android");
@@ -206,7 +227,7 @@ public class Main extends AndroidApplication {
         os.setBuild(Build.DISPLAY);
         os.setRawDescription(getAndroidOSName());
 
-        initForge(Gadapter, new HWInfo(device, os), permissiongranted, totalMemory, isTabletDevice(getContext()));
+        initForge(Gadapter, new HWInfo(device, os, getChipset), permissiongranted, totalMemory, isTabletDevice(getContext()));
     }
 
     private void crossfade(View contentView, View previousView) {

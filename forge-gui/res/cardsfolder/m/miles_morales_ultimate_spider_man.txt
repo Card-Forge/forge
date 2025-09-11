@@ -19,6 +19,6 @@ K:Haste
 A:AB$ PutCounter | PrecostDesc$ Camouflage — | Cost$ 2 | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on CARDNAME. He gains hexproof and becomes colorless until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Hexproof | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ Self | Colors$ Colorless | OverwriteColors$ True
-T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigDoubleCounters | TriggerZones$ Battlefield | TriggerDescription$ nWhenever you attack, double the number of each kind of counter on each Spider and legendary creature you control.
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigDoubleCounters | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, double the number of each kind of counter on each Spider and legendary creature you control.
 SVar:TrigDoubleCounters:DB$ MultiplyCounter | Defined$ Valid Spider.YouCtrl,Creature.Legendary+YouCtrl | Multiplier$ 2
 Oracle:First strike, haste\nCamouflage — {2}: Put a +1/+1 counter on Ultimate Spider-Man. He gains hexproof and becomes colorless until end of turn.\nWhenever you attack, double the number of each kind of counter on each Spider and legendary creature you control.
