@@ -278,10 +278,36 @@ public enum Keyword {
         return keywords;
     }
 
-    public static Keyword get(String key) {
-        if (key.isEmpty())
-            return null;
-        return Arrays.stream(values()).filter(k -> key.equalsIgnoreCase(k.displayName)).findFirst().orElse(null);
+    public static Keyword get(String k) {
+        Keyword keyword = Keyword.UNDEFINED;
+
+        if (k == null || k.isEmpty())
+            return keyword;
+
+        // try to get real part
+        if (k.contains(":")) {
+            final String[] x = k.split(":", 2);
+            keyword = smartValueOf(x[0]);
+        } else if (k.contains(" ")) {
+            // First strike
+            keyword = smartValueOf(k);
+
+            // other keywords that contains other stuff like Enchant
+            if (keyword == Keyword.UNDEFINED) {
+                final String[] x = k.split(" ", 2);
+
+                final Keyword k2 = smartValueOf(x[0]);
+                // Keywords that needs to be undefined
+                if (k2 != Keyword.UNDEFINED) {
+                    keyword = k2;
+                }
+            }
+        } else {
+            // Simple Keyword
+            keyword = smartValueOf(k);
+        }
+
+        return keyword;
     }
 
     private static final Map<String, Set<Keyword>> cardKeywordSetLookup = new HashMap<>();
