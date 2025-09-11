@@ -339,7 +339,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public void load(SaveFileData data) {
         boolean migration = false;
         clear(); // Reset player data.
+
         int saveVersion = WorldSave.getSaveVersion();
+        if(saveVersion < WorldSave.ADVENTURE_SAVE_VERSION)
+            saveVersionBumpPreProcess(data, saveVersion);
+
         this.statistic.load(data.readSubData("statistic"));
         this.difficultyData.startingLife = data.readInt("startingLife");
         this.difficultyData.startingMoney = data.readInt("startingMoney");
@@ -537,61 +541,41 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         }
 
         // Load decks
-        // Check if this save has dynamic deck count, use set-count load if not
-        boolean hasDynamicDeckCount = data.containsKey("deckCount");
-        if (hasDynamicDeckCount) {
-            int dynamicDeckCount = data.readInt("deckCount");
-            // In case the save had previously saved more decks than the current version allows (in case of the max being lowered)
-            dynamicDeckCount = Math.min(MAX_DECK_COUNT, dynamicDeckCount);
-            for (int i = 0; i < dynamicDeckCount; i++){
-                // The first x elements are pre-created
-                if (i < MIN_DECK_COUNT) {
-                    decks.set(i, new Deck(data.readString("deck_name_" + i)));
-                }
-                else {
-                    decks.add(new Deck(data.readString("deck_name_" + i)));
-                }
-                CardPool mainCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deck_" + i)));
-                decks.get(i).getMain().addAll(mainCards.getFilteredPool(isValid));
-                unsupportedCards.addAll(mainCards.getFilteredPool(isUnsupported).toFlatList());
-                if (data.containsKey("sideBoardCards_" + i)) {
-                    CardPool sideBoardCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("sideBoardCards_" + i)));
-                    decks.get(i).getOrCreate(DeckSection.Sideboard).addAll(sideBoardCards.getFilteredPool(isValid));
-                    unsupportedCards.addAll(sideBoardCards.getFilteredPool(isUnsupported).toFlatList());
-                }
-                if (data.containsKey("attractionDeckCards_" + i)) {
-                    CardPool attractionCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("attractionDeckCards_" + i)));
-                    decks.get(i).getOrCreate(DeckSection.Attractions).addAll(attractionCards.getFilteredPool(isValid));
-                    unsupportedCards.addAll(attractionCards.getFilteredPool(isUnsupported).toFlatList());
-                }
-                if (data.containsKey("contraptionDeckCards_" + i)) {
-                    CardPool contraptionCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("contraptionDeckCards_" + i)));
-                    decks.get(i).getOrCreate(DeckSection.Contraptions).addAll(contraptionCards.getFilteredPool(isValid));
-                    unsupportedCards.addAll(contraptionCards.getFilteredPool(isUnsupported).toFlatList());
-                }
-            }
-            // In case we allow removing decks from the deck selection GUI, populate up to the minimum
-            for (int i = dynamicDeckCount++; i < MIN_DECK_COUNT; i++) {
-                decks.set(i, new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
-            }
-        // Legacy load
-        } else {
-            for (int i = 0; i < MIN_DECK_COUNT; i++) {
-                if (!data.containsKey("deck_name_" + i)) {
-                    if (i == 0) decks.set(i, deck);
-                    else decks.set(i, new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
-                    continue;
-                }
+        int deckCount = data.readInt("deckCount");
+        // In case the save had previously saved more decks than the current version allows (in case of the max being lowered)
+        deckCount = Math.min(MAX_DECK_COUNT, deckCount);
+        for (int i = 0; i < deckCount; i++){
+            // The first x elements are pre-created
+            if (i < MIN_DECK_COUNT) {
                 decks.set(i, new Deck(data.readString("deck_name_" + i)));
-                CardPool mainCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deck_" + i)));
-                decks.get(i).getMain().addAll(mainCards.getFilteredPool(isValid));
-                unsupportedCards.addAll(mainCards.getFilteredPool(isUnsupported).toFlatList());
-                if (data.containsKey("sideBoardCards_" + i)) {
-                    CardPool sideBoardCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("sideBoardCards_" + i)));
-                    decks.get(i).getOrCreate(DeckSection.Sideboard).addAll(sideBoardCards.getFilteredPool(isValid));
-                    unsupportedCards.addAll(sideBoardCards.getFilteredPool(isUnsupported).toFlatList());
-                }
             }
+            else {
+                decks.add(new Deck(data.readString("deck_name_" + i)));
+            }
+            if (!data.containsKey("deck_" + i))
+                continue;
+            CardPool mainCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deck_" + i)));
+            decks.get(i).getMain().addAll(mainCards.getFilteredPool(isValid));
+            unsupportedCards.addAll(mainCards.getFilteredPool(isUnsupported).toFlatList());
+            if (data.containsKey("sideBoardCards_" + i)) {
+                CardPool sideBoardCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("sideBoardCards_" + i)));
+                decks.get(i).getOrCreate(DeckSection.Sideboard).addAll(sideBoardCards.getFilteredPool(isValid));
+                unsupportedCards.addAll(sideBoardCards.getFilteredPool(isUnsupported).toFlatList());
+            }
+            if (data.containsKey("attractionDeckCards_" + i)) {
+                CardPool attractionCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("attractionDeckCards_" + i)));
+                decks.get(i).getOrCreate(DeckSection.Attractions).addAll(attractionCards.getFilteredPool(isValid));
+                unsupportedCards.addAll(attractionCards.getFilteredPool(isUnsupported).toFlatList());
+            }
+            if (data.containsKey("contraptionDeckCards_" + i)) {
+                CardPool contraptionCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("contraptionDeckCards_" + i)));
+                decks.get(i).getOrCreate(DeckSection.Contraptions).addAll(contraptionCards.getFilteredPool(isValid));
+                unsupportedCards.addAll(contraptionCards.getFilteredPool(isUnsupported).toFlatList());
+            }
+        }
+        // In case we allow removing decks from the deck selection GUI, populate up to the minimum
+        for (int i = deckCount; i < MIN_DECK_COUNT; i++) {
+            decks.set(i, new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
         }
 
         setSelectedDeckSlot(data.readInt("selectedDeckIndex"));
@@ -651,7 +635,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         }
 
         if(saveVersion < WorldSave.ADVENTURE_SAVE_VERSION)
-            onSaveVersionBump(data, saveVersion);
+            saveVersionBumpPostProcess(data, saveVersion);
 
         if (migration) {
             getCurrentGameStage().setExtraAnnouncement(Forge.getLocalizer().getMessage("lblDataMigrationMsg"));
@@ -768,12 +752,27 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     /**
      * Called when ADVENTURE_SAVE_VERSION has been incremented, and a save from before the increment is loaded.
-     * Can house logic for migrating from older save data.
+     * Handles data from fields that have had their format changed, by replacing them in the data map before loading.
      * @param data Save data being loaded.
      * @param oldVersion The ADVENTURE_SAVE_VERSION used when the save file was written.
      */
-    protected void onSaveVersionBump(SaveFileData data, int oldVersion) {
-        System.out.printf("Migrating save version %d -> %d%n", oldVersion, WorldSave.ADVENTURE_SAVE_VERSION);
+    protected void saveVersionBumpPreProcess(SaveFileData data, int oldVersion) {
+        System.out.printf("Migrating save version %d -> %d%n (pre-stage)", oldVersion, WorldSave.ADVENTURE_SAVE_VERSION);
+        if (oldVersion < 1) {
+            // Used to always be 10 decks.
+            if (!data.containsKey("deckCount"))
+                data.store("deckCount", 10);
+        }
+    }
+
+    /**
+     * Called when ADVENTURE_SAVE_VERSION has been incremented, and a save from before the increment is loaded.
+     * Loads additional data from deprecated fields into the player fields.
+     * @param data Save data being loaded.
+     * @param oldVersion The ADVENTURE_SAVE_VERSION used when the save file was written.
+     */
+    protected void saveVersionBumpPostProcess(SaveFileData data, int oldVersion) {
+        System.out.printf("Migrating save version %d -> %d%n (post-stage)", oldVersion, WorldSave.ADVENTURE_SAVE_VERSION);
         //This function is only run after processing SaveFileData, but we could also have one run before processing if
         //we needed to convert raw fields.
         if (oldVersion < 1) {
