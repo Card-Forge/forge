@@ -1,4 +1,4 @@
 #!/bin/sh
 git pull
-mvn -U -T 4 -DskipTests clean package
+mvn -U -T $1 -DskipTests clean package
 
