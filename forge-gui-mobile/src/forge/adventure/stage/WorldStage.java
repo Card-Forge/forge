@@ -162,7 +162,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
     }
 
     @Override
-    public void setWinner(boolean playerIsWinner) {
+    public void setWinner(boolean playerIsWinner, boolean isArena) {
         if (playerIsWinner) {
             currentMob.clearCollisionHeight();
             Current.player().win();
@@ -192,10 +192,13 @@ public class WorldStage extends GameStage implements SaveFileContent {
                 boolean defeated = Current.player().defeated();
                 AdventureQuestController.instance().updateQuestsLose(currentMob);
                 AdventureQuestController.instance().showQuestDialogs(MapStage.getInstance());
+                boolean defeatedFromBoss = currentMob.getData().boss && !isArena;
                 WorldStage.this.removeEnemy(currentMob);
                 currentMob = null;
                 if (defeated) {
                     WorldStage.getInstance().resetPlayerLocation();
+                } else if (defeatedFromBoss) {
+                    WorldStage.getInstance().defeatedFromBoss();
                 }
             });
         }

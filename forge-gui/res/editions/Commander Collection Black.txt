@@ -18,5 +18,4 @@ TokensCode=CC2
 
 [tokens]
 9 b_1_1_snake_deathtouch @Caroline Gariba
-# Double sided tokens are not supported yet.
-# 9☇ b_2_2_zombie @Xavier Ribeiro
+9☇ b_2_2_zombie @Xavier Ribeiro

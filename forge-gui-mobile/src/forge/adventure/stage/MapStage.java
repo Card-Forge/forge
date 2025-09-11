@@ -606,7 +606,7 @@ public class MapStage extends GameStage {
                         }));
                         break;
                     case "exit":
-                        addMapActor(obj, new OnCollide(() -> MapStage.this.exitDungeon(false)));
+                        addMapActor(obj, new OnCollide(() -> MapStage.this.exitDungeon(false, false)));
                         break;
                     case "dialog":
                         if (obj instanceof TiledMapTileMapObject) {
@@ -750,7 +750,7 @@ public class MapStage extends GameStage {
         }
     }
 
-    public boolean exitDungeon(boolean defeated) {
+    public boolean exitDungeon(boolean defeated, boolean defeatedByBoss) {
         AdventureQuestController.instance().updateQuestsLeave();
         clearIsInMap();
         AdventureQuestController.instance().showQuestDialogs(this);
@@ -758,6 +758,8 @@ public class MapStage extends GameStage {
         effect = null; //Reset dungeon effects.
         if (defeated)
             WorldStage.getInstance().resetPlayerLocation();
+        else if (defeatedByBoss)
+            WorldStage.getInstance().defeatedFromBoss();
         Forge.switchScene(GameScene.instance());
         isPlayerLeavingDungeon = false;
         dialogOnlyInput = false;
@@ -766,7 +768,7 @@ public class MapStage extends GameStage {
 
 
     @Override
-    public void setWinner(boolean playerWins) {
+    public void setWinner(boolean playerWins, boolean isArena) {
         isLoadingMatch = false;
         freezeAllEnemyBehaviors = true;
         if (playerWins) {
@@ -805,16 +807,16 @@ public class MapStage extends GameStage {
                 boolean defeated = Current.player().defeated();
                 //If hardcore mode is added, check and redirect to game over screen here
                 if (canFailDungeon && !defeated)
-                    dungeonFailedDialog(true);
+                    dungeonFailedDialog(true, currentMob.getData().boss && !isArena);
                 else
-                    exitDungeon(defeated);
+                    exitDungeon(defeated, currentMob.getData().boss && !isArena);
                 MapStage.this.stop();
                 currentMob = null;
             });
         }
     }
 
-    private void dungeonFailedDialog(boolean exit) {
+    private void dungeonFailedDialog(boolean exit, boolean defeatedByBoss) {
         dialog.getButtonTable().clear();
         dialog.getContentTable().clear();
         dialog.clearListeners();
@@ -834,7 +836,7 @@ public class MapStage extends GameStage {
                 L.skipToTheEnd();
                 super.clicked(event, x, y);
                 if (exit)
-                    exitDungeon(false);
+                    exitDungeon(false, defeatedByBoss);
             }
         });
         dialog.getButtonTable().add(ok).width(240f);

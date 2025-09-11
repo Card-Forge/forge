@@ -192,4 +192,4 @@ TokenFallbackCode=MBS
 1 g_3_3_beast @Dave Allsop
 2 r_1_1_goblin @Jaime Jones
 3 c_3_3_a_golem @Volkan Baǵa
-4 c_1_1_myr @Matt Stewart
+4 c_1_1_a_myr @Matt Stewart

@@ -447,5 +447,4 @@ A-218 U A-Devoted Grafkeeper @Raoul Vitale
 17 emblem_teferi_who_slows_the_sunset @Heonhwa Choe
 18 emblem_wrenn_and_seven @Heonhwa Choe
 19 day @Johan Grenier
-# Double-faced tokens are not supported yet
-# 21☇ night @Johan Grenier
+21☇ night @Johan Grenier

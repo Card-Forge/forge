@@ -470,5 +470,4 @@ A-248 U A-Skull Skaab @Nicholas Gregory
 19 copy @Brian Valeza
 20 emblem_chandra_dressed_to_kill @Viktor Titov
 21 day @Johan Grenier
-# Double-faced tokens are not supported yet
-# 21☇ night @Johan Grenier
+21☇ night @Johan Grenier

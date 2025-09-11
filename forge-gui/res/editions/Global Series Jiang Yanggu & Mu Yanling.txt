@@ -50,5 +50,4 @@ TokensCode=GS1
 
 [tokens]
 T1 mowu @XiaoDi Jin
-# Double-faced tokens are not supported yet
-# T1☇ mowu @XiaoDi Jin
+T1☇ mowu @XiaoDi Jin

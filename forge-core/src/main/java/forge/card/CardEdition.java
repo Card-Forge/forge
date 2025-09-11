@@ -639,7 +639,7 @@ public final class CardEdition implements Comparable<CardEdition> {
                      * name - grouping #3
                      * artist name - grouping #5
                      */
-                    "(^(.?[0-9A-Z-]+\\S?[A-Z]*)\\s)?([^@]*)( @(.*))?$"
+                    "(^(.?[0-9A-Z-]+\\S?[A-Z☇]*)\\s)?([^@]*)( @(.*))?$"
             );
 
             ListMultimap<String, EditionEntry> cardMap = ArrayListMultimap.create();
