@@ -278,6 +278,12 @@ public enum Keyword {
         return keywords;
     }
 
+    public static Keyword get(String key) {
+        if (key.isEmpty())
+            return null;
+        return Arrays.stream(values()).filter(k -> key.equalsIgnoreCase(k.displayName)).findFirst().orElse(null);
+    }
+
     private static final Map<String, Set<Keyword>> cardKeywordSetLookup = new HashMap<>();
 
     public static Set<Keyword> getKeywordSet(PaperCard card) {
