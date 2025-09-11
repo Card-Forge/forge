@@ -115,7 +115,6 @@ public class AdvancedSearch {
                             }
                         }
                     }
-                    return keywords;
                 }
                 if (input.getRules().getMainPart().getKeywords() != null) {
                     for (String key : input.getRules().getMainPart().getKeywords()) {
