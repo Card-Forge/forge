@@ -541,7 +541,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
 
     AdventureEventData.AdventureEventMatch humanMatch = null;
 
-    public void setWinner(boolean winner) {
+    public void setWinner(boolean winner, boolean isArena) {
         if (winner) {
             humanMatch.winner = humanMatch.p1;
             humanMatch.p1.wins++;
