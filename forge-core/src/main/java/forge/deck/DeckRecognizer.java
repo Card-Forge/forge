@@ -1055,31 +1055,6 @@ public class DeckRecognizer {
 
         return "";
     }
-
-
-    private static Pair<String, String> getManaNameAndSymbol(String matchedMana) {
-        if (matchedMana == null)
-            return null;
-
-        Localizer localizer = Localizer.getInstance();
-        return switch (matchedMana.toLowerCase()) {
-            case MagicColor.Constant.WHITE, "w" ->
-                    Pair.of(localizer.getMessage("lblWhite"), MagicColor.Color.WHITE.getSymbol());
-            case MagicColor.Constant.BLUE, "u" ->
-                    Pair.of(localizer.getMessage("lblBlue"), MagicColor.Color.BLUE.getSymbol());
-            case MagicColor.Constant.BLACK, "b" ->
-                    Pair.of(localizer.getMessage("lblBlack"), MagicColor.Color.BLACK.getSymbol());
-            case MagicColor.Constant.RED, "r" ->
-                    Pair.of(localizer.getMessage("lblRed"), MagicColor.Color.RED.getSymbol());
-            case MagicColor.Constant.GREEN, "g" ->
-                    Pair.of(localizer.getMessage("lblGreen"), MagicColor.Color.GREEN.getSymbol());
-            case MagicColor.Constant.COLORLESS, "c" ->
-                    Pair.of(localizer.getMessage("lblColorless"), MagicColor.Color.COLORLESS.getSymbol());
-            default -> // Multicolour
-                    Pair.of(localizer.getMessage("lblMulticolor"), "");
-        };
-    }
-
     public static boolean isDeckName(final String lineAsIs) {
         if (lineAsIs == null)
             return false;
