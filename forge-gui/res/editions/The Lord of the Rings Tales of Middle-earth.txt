@@ -867,14 +867,14 @@ A-246 M A-The One Ring @Veli Nyström
 
 [tokens]
 1 w_1_1_human_soldier @Anastasia Balakchina
-1 w_1_1_human_soldier @Anastasia Balakchina
+2 w_1_1_human_soldier @Axel Sauerwald
 3 w_1_1_spirit_flying @Nino Is
 4 u_1_1_tentacle @Chris Cold
 5 b_0_0_orc_army @Veli Nyström
-5 b_0_0_orc_army @Veli Nyström
+6 b_0_0_orc_army @Veli Nyström
 7 smaug @Jarel Threat
 8 ballistic_boulder @Alexander Forssberg
 9 c_a_food_sac @Randy Gallegos
-10 c_a_food_sac @Randy Gallegos
-11 c_a_food_sac @Randy Gallegos
+10 c_a_food_sac @Claudiu-Antoniu Magherusan
+11 c_a_food_sac @L J Koh
 12 c_a_treasure_sac @Valera Lutfullina
