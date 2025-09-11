@@ -2,5 +2,5 @@ Name:Martial Law
 ManaCost:2 W W
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ Detain | TriggerDescription$ At the beginning of your upkeep, detain target creature an opponent controls. (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)
-SVar:Detain:DB$ Pump | KW$ HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated. | IsCurse$ True | Duration$ UntilYourNextTurn | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature your opponent controls to detain.
+SVar:Detain:DB$ Detain | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature your opponent controls to detain.
 Oracle:At the beginning of your upkeep, detain target creature an opponent controls. (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)
