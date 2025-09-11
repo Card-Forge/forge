@@ -337,7 +337,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     @Override
     public void load(SaveFileData data) {
-        boolean migration = false;
         clear(); // Reset player data.
 
         int saveVersion = WorldSave.getSaveVersion();
@@ -416,35 +415,13 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if (data.containsKey("inventory")) {
             try {
                 ItemData[] inv = (ItemData[]) data.readObject("inventory");
-                for (int i = 0; i < inv.length; i++) {
-                    ItemData itemData = inv[i];
+                for (ItemData itemData : inv) {
                     if (itemData != null) {
                         inventoryItems.add(itemData);
                     }
                 }
-            } catch (Exception ignored) {
-                migration = true;
-                // migrate from string..
-                try {
-                    String[] inv = (String[]) data.readObject("inventory");
-                    // Prevent items with wrong names from getting through. Hell breaks loose if it causes null pointers.
-                    // This only needs to be done on load.
-                    for (int j = 0; j < inv.length; j++) {
-                        String i = inv[j];
-                        ItemData itemData = ItemListData.getItem(i);
-                        if (itemData != null) {
-                            inventoryItems.add(itemData);
-                        } else {
-                            System.err.printf("Cannot find item name %s\n", i);
-                            // Allow official© permission for the player to get a refund. We will allow it this time.
-                            // TODO: Divine retribution if the player refunds too much. Use the orbital laser cannon.
-                            System.out.println("Developers have blessed you! You are allowed to cheat the cost of the item back!");
-                        }
-                    }
-                } catch (Exception e) {
-                    //shouldn't crash if coming from string...
-                    e.printStackTrace();
-                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
         if (data.containsKey("equippedSlots") && data.containsKey("equippedItems")) {
@@ -637,10 +614,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if(saveVersion < WorldSave.ADVENTURE_SAVE_VERSION)
             saveVersionBumpPostProcess(data, saveVersion);
 
-        if (migration) {
-            getCurrentGameStage().setExtraAnnouncement(Forge.getLocalizer().getMessage("lblDataMigrationMsg"));
-        }
-
         onLifeTotalChangeList.emit();
         onShardsChangeList.emit();
         onGoldChangeList.emit();
@@ -757,11 +730,32 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
      * @param oldVersion The ADVENTURE_SAVE_VERSION used when the save file was written.
      */
     protected void saveVersionBumpPreProcess(SaveFileData data, int oldVersion) {
-        System.out.printf("Migrating save version %d -> %d%n (pre-stage)", oldVersion, WorldSave.ADVENTURE_SAVE_VERSION);
+        System.out.printf("Migrating save version %d -> %d (pre-stage)%n", oldVersion, WorldSave.ADVENTURE_SAVE_VERSION);
         if (oldVersion < 1) {
             // Used to always be 10 decks.
             if (!data.containsKey("deckCount"))
                 data.store("deckCount", 10);
+            if (data.containsKey("inventory") && data.readObject("inventory") instanceof String[] inv) {
+                System.out.println("Replacing string inventory with object inventory.");
+                // migrate from string if needed.
+                try {
+                    // Prevent items with wrong names from getting through. Hell breaks loose if it causes null pointers.
+                    // This only needs to be done on load.
+                    List<ItemData> newInventory = new ArrayList<>(inv.length);
+                    for (String i : inv) {
+                        ItemData itemData = ItemListData.getItem(i);
+                        if (itemData != null)
+                            newInventory.add(itemData);
+                        else
+                            System.err.printf(" - Cannot find item name %s\n", i);
+                    }
+                    data.storeObject("inventory", newInventory.toArray(new ItemData[0]));
+                    getCurrentGameStage().setExtraAnnouncement(Forge.getLocalizer().getMessage("lblDataMigrationMsg"));
+                } catch (Exception e) {
+                    //shouldn't crash if coming from string...
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -772,7 +766,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
      * @param oldVersion The ADVENTURE_SAVE_VERSION used when the save file was written.
      */
     protected void saveVersionBumpPostProcess(SaveFileData data, int oldVersion) {
-        System.out.printf("Migrating save version %d -> %d%n (post-stage)", oldVersion, WorldSave.ADVENTURE_SAVE_VERSION);
+        System.out.printf("Migrating save version %d -> %d (post-stage)%n", oldVersion, WorldSave.ADVENTURE_SAVE_VERSION);
         //This function is only run after processing SaveFileData, but we could also have one run before processing if
         //we needed to convert raw fields.
         if (oldVersion < 1) {
