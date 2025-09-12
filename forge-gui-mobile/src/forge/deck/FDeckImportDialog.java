@@ -251,10 +251,11 @@ public class FDeckImportDialog extends FDialog {
             tokens = controller.optimiseCardArtInTokens();
 
         //if there are any cards that cannot be imported, let user know this and give them the option to cancel
+        // Android API StringBuilder isEmpty() is unavailable. https://developer.android.com/reference/java/lang/StringBuilder
         StringBuilder sb = new StringBuilder();
         for (DeckRecognizer.Token token : tokens) {
             if (MISSING_TOKENS.contains(token.getType())) {
-                if (!sb.isEmpty())
+                if (sb.length() != 0)
                     sb.append("\n");
                 String message = controller.getTokenMessage(token);
                 String statusMessage = controller.getTokenStatusMessage(token);
@@ -264,7 +265,7 @@ public class FDeckImportDialog extends FDialog {
                     sb.append(statusMessage);
             }
         }
-        if (!sb.isEmpty()) {
+        if (sb.length() != 0) {
             Localizer localizer = Forge.getLocalizer();
             if (SOptionPane.showOptionDialog(localizer.getMessage("lblFollowingCardsCannotBeImported") + "\n\n" + sb, localizer.getMessage("lblImportRemainingCards"), SOptionPane.WARNING_ICON, importOrCancel) == 1) {
                 return;
