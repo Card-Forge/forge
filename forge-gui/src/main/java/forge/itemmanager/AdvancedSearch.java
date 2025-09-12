@@ -103,27 +103,7 @@ public class AdvancedSearch {
 
             @Override
             protected Set<Keyword> getItemValues(PaperCard input) {
-                CardSplitType cardSplitType = input.getRules().getSplitType();
-                Set<Keyword> keywords = new HashSet<>();
-                if (cardSplitType != CardSplitType.None && cardSplitType != CardSplitType.Split) {
-                    if (input.getRules().getOtherPart() != null) {
-                        if (input.getRules().getOtherPart().getKeywords() != null) {
-                            for (String key : input.getRules().getOtherPart().getKeywords()) {
-                                Keyword keyword = Keyword.get(key);
-                                if (!Keyword.UNDEFINED.equals(keyword))
-                                    keywords.add(keyword);
-                            }
-                        }
-                    }
-                }
-                if (input.getRules().getMainPart().getKeywords() != null) {
-                    for (String key : input.getRules().getMainPart().getKeywords()) {
-                        Keyword keyword = Keyword.get(key);
-                        if (!Keyword.UNDEFINED.equals(keyword))
-                            keywords.add(keyword);
-                    }
-                }
-                return keywords;
+                return Keyword.getKeywordSet(input);
             }
         }),
         CARD_SET("lblSet", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<PaperCard, CardEdition>(FModel.getMagicDb().getSortedEditions(), CardEdition::getCode) {
