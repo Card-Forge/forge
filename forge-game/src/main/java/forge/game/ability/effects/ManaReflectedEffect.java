@@ -95,7 +95,7 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
         }
 
         if (mask == 0 && !expressChoiceColors.isEmpty() && colors.contains("colorless")) {
-            baseMana = MagicColor.toShortString(player.getController().chooseColorAllowColorless(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa.getHostCard(), ColorSet.fromMask(mask)));
+            baseMana = player.getController().chooseColorAllowColorless(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa.getHostCard(), ColorSet.fromMask(mask)).getShortName();
         } else {
             // Nothing set previously so ask player if needed
             if (mask == 0) {
@@ -105,18 +105,18 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
                     baseMana = MagicColor.toShortString(colors.iterator().next());
                 } else {
                     if (colors.contains("colorless")) {
-                        baseMana = MagicColor.toShortString(player.getController().chooseColorAllowColorless(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa.getHostCard(), ColorSet.fromNames(colors)));
+                        baseMana = player.getController().chooseColorAllowColorless(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa.getHostCard(), ColorSet.fromNames(colors)).getShortName();
                     } else {
-                        baseMana = MagicColor.toShortString(player.getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa, ColorSet.fromNames(colors)));
+                        baseMana = player.getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa, ColorSet.fromNames(colors)).getShortName();
                     }
                 }
             } else {
                 colorMenu = ColorSet.fromMask(mask);
-                byte color = sa.getActivatingPlayer().getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa, colorMenu);
-                if (color == 0) {
+                MagicColor.Color color = sa.getActivatingPlayer().getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa, colorMenu);
+                if (color == null) {
                     System.err.println("Unexpected behavior in ManaReflectedEffect: " + sa.getActivatingPlayer() + " - color mana choice is empty for " + sa.getHostCard().getName());
                 }
-                baseMana = MagicColor.toShortString(color);
+                baseMana = color.getShortName();
             }
         }
 

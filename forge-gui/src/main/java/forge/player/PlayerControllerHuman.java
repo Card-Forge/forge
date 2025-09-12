@@ -1838,30 +1838,30 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public byte chooseColor(final String message, final SpellAbility sa, final ColorSet colors) {
+    public MagicColor.Color chooseColor(final String message, final SpellAbility sa, final ColorSet colors) {
         final int cntColors = colors.countColors();
         switch (cntColors) {
             case 0:
-                return 0;
+                return null;
             case 1:
-                return colors.getColor();
+                return MagicColor.Color.fromByte(colors.getColor());
             default:
                 return chooseColorCommon(message, sa == null ? null : sa.getHostCard(), colors, false);
         }
     }
 
     @Override
-    public byte chooseColorAllowColorless(final String message, final Card c, final ColorSet colors) {
+    public MagicColor.Color chooseColorAllowColorless(final String message, final Card c, final ColorSet colors) {
         final int cntColors = 1 + colors.countColors();
         switch (cntColors) {
             case 1:
-                return 0;
+                return MagicColor.Color.COLORLESS;
             default:
                 return chooseColorCommon(message, c, colors, true);
         }
     }
 
-    private byte chooseColorCommon(final String message, final Card c, final ColorSet colors,
+    private MagicColor.Color chooseColorCommon(final String message, final Card c, final ColorSet colors,
                                    final boolean withColorless) {
         List<MagicColor.Color> options = Lists.newArrayList(colors.toEnumSet());
         if (withColorless && colors.countColors() > 0) {
@@ -1869,14 +1869,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         if (options.size() > 2) {
-            return getGui().one(message, options).getColormask();
+            return getGui().one(message, options);
         }
 
         boolean confirmed = false;
         confirmed = InputConfirm.confirm(this, CardView.get(c), message, true,
                 options.stream().map(MagicColor.Color::toString).collect(Collectors.toList()));
         final int idxChosen = confirmed ? 0 : 1;
-        return options.get(idxChosen).getColormask();
+        return options.get(idxChosen);
     }
 
     @Override

@@ -77,7 +77,7 @@ public final class InputSelectCardsForConvokeOrImprovise extends InputSelectMany
                 }
                 if (colors.isMulticolor()) {
                     //prompt user if more than one option for which color to pay towards convoke
-                    chosenColor = player.getController().chooseColorAllowColorless("Convoke " + card.toString() + "  for which color?", card, colors);
+                    chosenColor = player.getController().chooseColorAllowColorless("Convoke " + card.toString() + "  for which color?", card, colors).getColormask();
                 } else {
                     // Since the convoke mana logic can use colored mana as generic if needed,
                     // there is no need to prompt the user when convoking with a mono-color creature.
