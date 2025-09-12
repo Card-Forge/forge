@@ -1863,22 +1863,20 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     private byte chooseColorCommon(final String message, final Card c, final ColorSet colors,
                                    final boolean withColorless) {
-        final ImmutableList.Builder<String> colorNamesBuilder = ImmutableList.builder();
-        if (withColorless) {
-            colorNamesBuilder.add(MagicColor.toLongString(MagicColor.COLORLESS));
+        List<MagicColor.Color> options = Lists.newArrayList(colors.toEnumSet());
+        if (withColorless && colors.countColors() > 0) {
+            options.add(MagicColor.Color.COLORLESS);
         }
-        for (final Byte b : colors) {
-            colorNamesBuilder.add(MagicColor.toLongString(b));
-        }
-        final ImmutableList<String> colorNames = colorNamesBuilder.build();
-        if (colorNames.size() > 2) {
-            return MagicColor.fromName(getGui().one(message, colorNames));
+
+        if (options.size() > 2) {
+            return getGui().one(message, options).getColormask();
         }
 
         boolean confirmed = false;
-        confirmed = InputConfirm.confirm(this, CardView.get(c), message, true, colorNames);
+        confirmed = InputConfirm.confirm(this, CardView.get(c), message, true,
+                options.stream().map(MagicColor.Color::toString).collect(Collectors.toList()));
         final int idxChosen = confirmed ? 0 : 1;
-        return MagicColor.fromName(colorNames.get(idxChosen));
+        return options.get(idxChosen).getColormask();
     }
 
     @Override
