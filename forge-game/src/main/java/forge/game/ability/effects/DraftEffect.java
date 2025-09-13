@@ -73,6 +73,11 @@ import java.util.*;
              }
 
              Card made = game.getAction().moveTo(zone, c, sa, moveParams);
+             if (zone.equals(ZoneType.Battlefield)) {
+                 if (sa.hasParam("Tapped")) {
+                     made.setTapped(true);
+                 }
+             }
              if (zone.equals(ZoneType.Exile)) {
                  handleExiledWith(made, sa);
                  if (sa.hasParam("ExileFaceDown")) {
