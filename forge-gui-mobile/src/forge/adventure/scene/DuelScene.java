@@ -142,7 +142,7 @@ public class DuelScene extends ForgeScene {
             Current.player().getStatistic().setResult(enemyName, winner);
 
             if (last instanceof IAfterMatch) {
-                ((IAfterMatch) last).setWinner(winner);
+                ((IAfterMatch) last).setWinner(winner, isArena);
             }
         });
     }

@@ -6,6 +6,66 @@ Type=Expansion
 ScryfallCode=SPM
 DoublePick=WhenPodSizeIs4
 RecommendedPodSize=4
+#https://magic.wizards.com/en/news/feature/collecting-marvels-spider-man
+BoosterSlots=Common,Common-Borderless,Uncommon,RareMythic,Land,Wildcard,WildcardFoil
+Booster=6 Common, 1 Common-Borderless, 3 Uncommon, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 Land
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=30
+
+[Common]
+Base=Common:fromSheet("SPM cards")
+
+[Common-Borderless]
+Base=Common:fromSheet("SPM cards")
+Replace=.0416F fromSheet("SPM borderless")
+
+[Uncommon]
+Base=Uncommon:fromSheet("SPM cards")
+Replace=0.0517 Uncommon:fromSheet("SPM scene cards")
+
+[RareMythic]
+Base=Rare:fromSheet("SPM cards")
+Replace=.117F Mythic:fromSheet("SPM cards")
+Replace=.012F Rare:fromSheet("SPM webslinger")
+Replace=.004F Mythic:fromSheet("SPM webslinger")
+Replace=.021F Rare:fromSheet("SPM panel cards")
+Replace=.004F Mythic:fromSheet("SPM panel cards")
+Replace=.01F Rare:fromSheet("SPM scene cards")
+Replace=.0005F Mythic:fromSheet("SPM scene cards")
+
+[Wildcard]
+Base=Common:fromSheet("SPM cards")
+Replace=0.041F Uncommon:fromSheet("SPM cards")
+Replace=0.209F Rare:fromSheet("SPM cards")
+Replace=0.0029F Mythic:fromSheet("SPM cards")
+Replace=.0012F Rare:fromSheet("SPM webslinger")
+Replace=.0004F Mythic:fromSheet("SPM webslinger")
+Replace=.0021F Rare:fromSheet("SPM panel cards")
+Replace=.0004F Mythic:fromSheet("SPM panel cards")
+Replace=.007F Uncommon:fromSheet("SPM scene cards")
+Replace=.001F Rare:fromSheet("SPM scene cards")
+Replace=.00005F Mythic:fromSheet("SPM scene cards")
+
+[WildcardFoil]
+Base=Common:fromSheet("SPM cards")
+Replace=0.241F Uncommon:fromSheet("SPM cards")
+Replace=0.078F Rare:fromSheet("SPM cards")
+Replace=0.011F Mythic:fromSheet("SPM cards")
+Replace=.0012F Rare:fromSheet("SPM webslinger")
+Replace=.0004F Mythic:fromSheet("SPM webslinger")
+Replace=.0021F Rare:fromSheet("SPM panel cards")
+Replace=.0004F Mythic:fromSheet("SPM panel cards")
+Replace=.007F Uncommon:fromSheet("SPM scene cards")
+Replace=.001F Rare:fromSheet("SPM scene cards")
+Replace=.00005F Mythic:fromSheet("SPM scene cards")
+
+[Land]
+Base=fromSheet("SPM allied lands")
+Replace=0.125F fromSheet("SPM allied lands")+
+Replace=0.20F BasicLand:fromSheet("SPM full art")
+Replace=0.05F BasicLand:fromSheet("SPM full art")+
+Replace=0.20F BasicLand:fromSheet("SPM cards"):!fromSheet("SPM allied lands")
+Replace=0.05F BasicLand:fromSheet("SPM cards")!fromSheet("SPM allied lands")
 
 [cards]
 1 M Anti-Venom, Horrifying Healer @Néstor Ossandón Leal
@@ -188,24 +248,28 @@ RecommendedPodSize=4
 178 C Subway Train @Jonas De Ro
 179 U Daily Bugle Building @David Álvarez
 180 R Multiversal Passage @Pablo Mendoza
-181 C Ominous Asylum @Pavel Kolomeyets
+181 L Ominous Asylum @Pavel Kolomeyets
 182 R Oscorp Industries @Bastien Grivet
-183 C Savage Mansion @David Álvarez
-184 C Sinister Hideout @Pavel Kolomeyets
-185 C Suburban Sanctuary @David Frasheski
-186 C University Campus @David Álvarez
+183 L Savage Mansion @David Álvarez
+184 L Sinister Hideout @Pavel Kolomeyets
+185 L Suburban Sanctuary @David Frasheski
+186 L University Campus @David Álvarez
 187 R Urban Retreat @Jonas De Ro
 188 C Vibrant Cityscape @Wei Guan
-189 L Plains @Sarah Finnigan
-190 L Island @Sarah Finnigan
-191 L Swamp @Sarah Finnigan
-192 L Mountain @Sarah Finnigan
-193 L Forest @Sarah Finnigan
 194 L Plains @Jonas De Ro
 195 L Island @Jonas De Ro
 196 L Swamp @Jonas De Ro
 197 L Mountain @Jonas De Ro
 198 L Forest @Jonas De Ro
+
+[full art]
+189 L Plains @Sarah Finnigan
+190 L Island @Sarah Finnigan
+191 L Swamp @Sarah Finnigan
+192 L Mountain @Sarah Finnigan
+193 L Forest @Sarah Finnigan
+
+[borderless]
 199 U SP//dr, Piloted by Peni @Jim Cheung & Jay David Ramos
 200 M Miles Morales @Jim Cheung & Jay David Ramos
 201 R Spider-Ham, Peter Porker @Jim Cheung & Jay David Ramos
@@ -242,6 +306,9 @@ RecommendedPodSize=4
 232 M Peter Parker @Jack Kirby & Steve Ditko
 233 M Eddie Brock @Todd McFarlane & Bob Sharen
 234 M Miles Morales @Sara Pichelli & Justin Ponsor
+242 M The Soul Stone @Madeline Boni
+
+[etched]
 235 R Spectacular Spider-Man @Roberta Ingranata
 236 R Spectacular Spider-Man @Roberta Ingranata
 237 R Spectacular Spider-Man @Roberta Ingranata
@@ -249,7 +316,8 @@ RecommendedPodSize=4
 239 R Spectacular Spider-Man @Roberta Ingranata
 240 R Spectacular Spider-Man @Roberta Ingranata
 241 R Spectacular Spider-Man @Roberta Ingranata
-242 M The Soul Stone @Madeline Boni
+
+[extended art]
 243 M The Soul Stone @Leinil Francis Yu & Sunny Gho
 244 M Anti-Venom, Horrifying Healer @Néstor Ossandón Leal
 245 R Arachne, Psionic Weaver @Steve Argyle
@@ -291,9 +359,62 @@ RecommendedPodSize=4
 281 R Rocket-Powered Goblin Glider @Pavel Kolomeyets
 282 R Oscorp Industries @Bastien Grivet
 283 R Urban Retreat @Jonas De Ro
+
+[promo]
 284 R Spider-Sense @David Álvarez
 285 R Radioactive Spider @Toni Infante
 286 M Gwenom, Remorseless @Jesper Ejsing
+
+[allied lands]
+1 Ominous Asylum|SPM
+1 Savage Mansion|SPM
+1 Sinister Hideout|SPM
+1 Suburban Sanctuary|SPM
+1 University Campus|SPM
+
+[scene cards]
+1 SP//dr, Piloted by Peni|SPM|[199]
+1 Miles Morales|SPM|[200]
+1 Spider-Ham, Peter Porker|SPM|[201]
+1 Gwen Stacy|SPM|[202]
+1 Web-Warriors|SPM|[203]
+1 Spider-Man Noir|SPM|[204]
+1 Spider-Man 2099|SPM|[205]
+1 Multiversal Passage|SPM|[206]
+1 Spider-Punk|SPM|[207]
+
+[webslinger]
+1 Peter Parker|SPM|[208]
+1 Gwen Stacy|SPM|[209]
+1 Spider-Punk|SPM|[210]
+1 Miles Morales|SPM|[211]
+1 Radioactive Spider|SPM|[212]
+1 Araña, Heart of the Spider|SPM|[213]
+1 Scarlet Spider, Ben Reilly|SPM|[214]
+1 Silk, Web Weaver|SPM|[215]
+1 Spider-Man 2099|SPM|[216]
+1 Symbiote Spider-Man|SPM|[217]
+
+[panel cards]
+1 Origin of Spider-Man|SPM|[218]
+1 The Clone Saga|SPM|[219]
+1 Norman Osborn|SPM|[220]
+1 Behold the Sinister Six!|SPM|[221]
+1 Black Cat, Cunning Thief|SPM|[222]
+1 The Death of Gwen Stacy|SPM|[223]
+1 Eddie Brock|SPM|[224]
+1 Maximum Carnage|SPM|[225]
+1 Kraven's Last Hunt|SPM|[226]
+1 Carnage, Crimson Chaos|SPM|[227]
+1 Doctor Octopus, Master Planner|SPM|[228]
+1 Mary Jane Watson|SPM|[229]
+1 Spider-Woman, Stunning Savior|SPM|[230]
+1 The Spot, Living Portal|SPM|[231]
+
+[classic comic]
+1 Peter Parker|SPM|[232]
+1 Eddie Brock|SPM|[233]
+1 Miles Morales|SPM|[234]
 
 [tokens]
 2 u_3_3_illusion_villain @Anthony Devine

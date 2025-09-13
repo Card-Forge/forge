@@ -1,5 +1,5 @@
 package forge.adventure.stage;
 
 public interface IAfterMatch {
-    void setWinner(boolean winner);
+    void setWinner(boolean winner, boolean isArena);
 }
