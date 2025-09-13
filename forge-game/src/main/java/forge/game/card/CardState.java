@@ -367,7 +367,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     public final FCollectionView<SpellAbility> getManaAbilities() {
         FCollection<SpellAbility> newCol = new FCollection<>();
         updateSpellAbilities(newCol, true);
-        // stream().toList() causes crash on Android, use Collectors.toList()
+        // stream().toList() causes crash on Android 8-13, use Collectors.toList()
         newCol.addAll(abilities.stream().filter(SpellAbility::isManaAbility).collect(Collectors.toList()));
         card.updateSpellAbilities(newCol, this, true);
         return newCol;
@@ -375,7 +375,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     public final FCollectionView<SpellAbility> getNonManaAbilities() {
         FCollection<SpellAbility> newCol = new FCollection<>();
         updateSpellAbilities(newCol, false);
-        // stream().toList() causes crash on Android, use Collectors.toList()
+        // stream().toList() causes crash on Android 8-13, use Collectors.toList()
         newCol.addAll(abilities.stream().filter(Predicate.not(SpellAbility::isManaAbility)).collect(Collectors.toList()));
         card.updateSpellAbilities(newCol, this, false);
         return newCol;
@@ -390,7 +390,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
                 if (null != mana) {
                     leftAbilities = leftAbilities.stream()
                             .filter(mana ? SpellAbility::isManaAbility : Predicate.not(SpellAbility::isManaAbility))
-                            // stream().toList() causes crash on Android, use Collectors.toList()
+                            // stream().toList() causes crash on Android 8-13, use Collectors.toList()
                             .collect(Collectors.toList());
                 }
                 newCol.addAll(leftAbilities);
@@ -402,7 +402,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
                 if (null != mana) {
                     rightAbilities = rightAbilities.stream()
                             .filter(mana ? SpellAbility::isManaAbility : Predicate.not(SpellAbility::isManaAbility))
-                            // stream().toList() causes crash on Android, use Collectors.toList()
+                            // stream().toList() causes crash on Android 8-13, use Collectors.toList()
                             .collect(Collectors.toList());
                 }
                 newCol.addAll(rightAbilities);
