@@ -19,8 +19,9 @@ package forge.game;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+
+import forge.card.ColorSet;
 import forge.card.GamePieceType;
-import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -787,7 +788,7 @@ public final class GameActionUtil {
         eff.setOwner(controller);
 
         eff.setImageKey(sourceCard.getImageKey());
-        eff.setColor(MagicColor.COLORLESS);
+        eff.setColor(ColorSet.NO_COLORS);
         eff.setGamePieceType(GamePieceType.EFFECT);
         // try to get the SpellAbility from the mana ability
         //eff.setEffectSource((SpellAbility)null);

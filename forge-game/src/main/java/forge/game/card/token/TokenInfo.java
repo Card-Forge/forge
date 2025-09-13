@@ -6,6 +6,7 @@ import com.google.common.collect.Lists;
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardType;
+import forge.card.ColorSet;
 import forge.card.GamePieceType;
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -39,7 +40,7 @@ public class TokenInfo {
         this.name = c.getName();
         this.imageName = ImageKeys.getTokenImageName(c.getImageKey());
         this.manaCost = c.getManaCost().toString();
-        this.color = MagicColor.toShortString(c.getCurrentState().getColor());
+        this.color = MagicColor.toShortString(c.getCurrentState().getColor().getColor());
         this.types = getCardTypes(c);
 
         List<String> list = Lists.newArrayList();
@@ -189,7 +190,7 @@ public class TokenInfo {
                     }
                 }
 
-                result.setColor(color);
+                result.setColor(ColorSet.fromMask(color));
             }
         }
         if (!typeMap.isEmpty()) {

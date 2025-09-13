@@ -311,7 +311,7 @@ public class CardCopyService {
 
         newCopy.setCounters(Maps.newHashMap(copyFrom.getCounters()));
 
-        newCopy.setColor(copyFrom.getColor().getColor());
+        newCopy.setColor(copyFrom.getColor());
         newCopy.setPhasedOut(copyFrom.getPhasedOut());
         newCopy.setTapped(copyFrom.isTapped());
         newCopy.setTributed(copyFrom.isTributed());

@@ -33,7 +33,7 @@ public class ColorSetRenderer extends ItemCellRenderer {
             this.cs = (ColorSet) value;
         }
         else {
-            this.cs = ColorSet.getNullColor();
+            this.cs = ColorSet.NO_COLORS;
         }
         this.setToolTipText(cs.toString());
         return super.getTableCellRendererComponent(table, "", isSelected, hasFocus, row, column);

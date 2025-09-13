@@ -47,7 +47,7 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
     private static final ColorSet[] cache = new ColorSet[32];
 
     public static final ColorSet ALL_COLORS = fromMask(MagicColor.ALL_COLORS);
-    private static final ColorSet NO_COLORS = fromMask(MagicColor.COLORLESS);
+    public static final ColorSet NO_COLORS = fromMask(MagicColor.COLORLESS);
 
     private ColorSet(final byte mask) {
         this.myColor = mask;
@@ -295,15 +295,6 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
     public String toString() {
         final ManaCostShard[] orderedShards = getOrderedShards();
         return Arrays.stream(orderedShards).map(ManaCostShard::toShortString).collect(Collectors.joining());
-    }
-
-    /**
-     * Gets the null color.
-     *
-     * @return the nullColor
-     */
-    public static ColorSet getNullColor() {
-        return NO_COLORS;
     }
 
     /**

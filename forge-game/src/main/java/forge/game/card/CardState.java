@@ -58,7 +58,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     private String name = "";
     private CardType type = new CardType(false);
     private ManaCost manaCost = ManaCost.NO_COST;
-    private byte color = MagicColor.COLORLESS;
+    private ColorSet color = ColorSet.NO_COLORS;
     private String oracleText = "";
     private String functionalVariantName = null;
     private int basePower = 0;
@@ -189,14 +189,14 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
         view.updateManaCost(this);
     }
 
-    public final byte getColor() {
+    public final ColorSet getColor() {
         return color;
     }
-    public final void addColor(final byte color) {
-        this.color |= color;
+    public final void addColor(final ColorSet color) {
+        this.color = ColorSet.fromMask(this.color.getColor() | color.getColor());
         view.updateColors(card);
     }
-    public final void setColor(final byte color) {
+    public final void setColor(final ColorSet color) {
         this.color = color;
         view.updateColors(card);
     }

@@ -6,8 +6,8 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 import forge.GameCommand;
 import forge.card.CardRarity;
+import forge.card.ColorSet;
 import forge.card.GamePieceType;
-import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -617,10 +617,10 @@ public abstract class SpellAbilityEffect {
         if (name.startsWith("Emblem")) {
             eff.setEmblem(true);
             // Emblem needs to be colorless
-            eff.setColor(MagicColor.COLORLESS);
+            eff.setColor(ColorSet.NO_COLORS);
             eff.setRarity(CardRarity.Common);
         } else {
-            eff.setColor(hostCard.getColor().getColor());
+            eff.setColor(hostCard.getColor());
             eff.setRarity(hostCard.getRarity());
         }
 
