@@ -30,26 +30,27 @@ public class ChangeTextEffect extends SpellAbilityEffect {
 
         final String changedColorWordOriginal, changedColorWordNew;
         if (sa.hasParam("ChangeColorWord")) {
-            byte originalColor = 0;
+            // all instances are Choose Choose
+            MagicColor.Color originalColor = null;
             final String[] changedColorWordsArray = sa.getParam("ChangeColorWord").split(" ");
             if (changedColorWordsArray[0].equals("Choose")) {
                 originalColor = sa.getActivatingPlayer().getController().chooseColor(
                         Localizer.getInstance().getMessage("lblChooseColorReplace"), sa, ColorSet.ALL_COLORS);
-                changedColorWordOriginal = TextUtil.capitalize(MagicColor.toLongString(originalColor));
+                changedColorWordOriginal = TextUtil.capitalize(originalColor.getName());
             } else {
                 changedColorWordOriginal = changedColorWordsArray[0];
-                originalColor = MagicColor.fromName(changedColorWordOriginal);
+                originalColor = MagicColor.Color.fromByte(MagicColor.fromName(changedColorWordOriginal));
             }
 
             if (changedColorWordsArray[1].equals("Choose")) {
                 final ColorSet possibleNewColors;
-                if (originalColor == 0) { // no original color (ie. any or absent)
+                if (originalColor == null) { // no original color (ie. any or absent)
                     possibleNewColors = ColorSet.ALL_COLORS;
                 } else { // may choose any except original color
-                    possibleNewColors = ColorSet.fromMask(originalColor).inverse();
+                    possibleNewColors = ColorSet.fromMask(originalColor.getColormask()).inverse();
                 }
                 final byte newColor = sa.getActivatingPlayer().getController().chooseColor(
-                        Localizer.getInstance().getMessage("lblChooseNewColor"), sa, possibleNewColors);
+                        Localizer.getInstance().getMessage("lblChooseNewColor"), sa, possibleNewColors).getColormask();
                 changedColorWordNew = TextUtil.capitalize(MagicColor.toLongString(newColor));
             } else {
                 changedColorWordNew = changedColorWordsArray[1];

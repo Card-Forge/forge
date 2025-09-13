@@ -114,15 +114,15 @@ public class ManaEffect extends SpellAbilityEffect {
                             // just use the first possible color.
                             choice = colorsProduced[differentChoice ? nMana : 0];
                         } else {
-                            byte chosenColor = chooser.getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa,
+                            MagicColor.Color chosenColor = chooser.getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa,
                                     differentChoice && (colorsNeeded == null || colorsNeeded.length <= nMana) ? fullOptions : colorOptions);
-                            if (chosenColor == 0)
+                            if (chosenColor == null)
                                 throw new RuntimeException("ManaEffect::resolve() /*combo mana*/ - " + p + " color mana choice is empty for " + card.getName());
 
                             if (differentChoice) {
-                                fullOptions = ColorSet.fromMask(fullOptions.getColor() - chosenColor);
+                                fullOptions = ColorSet.fromMask(fullOptions.getColor() - chosenColor.getColormask());
                             }
-                            choice = MagicColor.toShortString(chosenColor);
+                            choice = chosenColor.getShortName();
                         }
 
                         if (nMana > 0) {
@@ -157,13 +157,13 @@ public class ManaEffect extends SpellAbilityEffect {
                     mask |= MagicColor.fromName(colorsNeeded.charAt(nChar));
                 }
                 colorMenu = mask == 0 ? ColorSet.ALL_COLORS : ColorSet.fromMask(mask);
-                byte val = chooser.getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa, colorMenu);
-                if (0 == val) {
+                MagicColor.Color val = chooser.getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa, colorMenu);
+                if (val == null) {
                     throw new RuntimeException("ManaEffect::resolve() /*any mana*/ - " + p + " color mana choice is empty for " + card.getName());
                 }
 
-                game.getAction().notifyOfValue(sa, card, MagicColor.toSymbol(val), p);
-                abMana.setExpressChoice(MagicColor.toShortString(val));
+                game.getAction().notifyOfValue(sa, card, val.getSymbol(), p);
+                abMana.setExpressChoice(val.getShortName());
             }
             else if (abMana.isSpecialMana()) {
                 String type = abMana.getOrigProduced().split("Special ")[1];
@@ -178,22 +178,22 @@ public class ManaEffect extends SpellAbilityEffect {
 
                     for (ManaCostShard s : enchanted.getManaCost()) {
                         ColorSet cs = ColorSet.fromMask(s.getColorMask());
-                        byte chosenColor;
+                        MagicColor.Color chosenColor;
                         if (cs.isColorless())
                             continue;
                         if (s.isOr2Generic()) { // CR 106.8
                             chosenColor = chooser.getController().chooseColorAllowColorless(Localizer.getInstance().getMessage("lblChooseSingleColorFromTarget", s.toString()), card, cs);
-                            if (chosenColor == MagicColor.COLORLESS) {
+                            if (chosenColor == MagicColor.Color.COLORLESS) {
                                 generic += 2;
                                 continue;
                             }
                         }
                         else if (cs.isMonoColor())
-                            chosenColor = s.getColorMask();
+                            chosenColor = MagicColor.Color.fromByte(s.getColorMask());
                         else /* (cs.isMulticolor()) */ {
                             chosenColor = chooser.getController().chooseColor(Localizer.getInstance().getMessage("lblChooseSingleColorFromTarget", s.toString()), sa, cs);
                         }
-                        sb.append(MagicColor.toShortString(chosenColor));
+                        sb.append(chosenColor.getShortName());
                         sb.append(' ');
                     }
                     if (generic > 0) {
@@ -239,8 +239,8 @@ public class ManaEffect extends SpellAbilityEffect {
                             if (cs.isMonoColor())
                                 sb.append(MagicColor.toShortString(s.getColorMask()));
                             else /* (cs.isMulticolor()) */ {
-                                byte chosenColor = chooser.getController().chooseColor(Localizer.getInstance().getMessage("lblChooseSingleColorFromTarget", s.toString()), sa, cs);
-                                sb.append(MagicColor.toShortString(chosenColor));
+                                MagicColor.Color chosenColor = chooser.getController().chooseColor(Localizer.getInstance().getMessage("lblChooseSingleColorFromTarget", s.toString()), sa, cs);
+                                sb.append(chosenColor.getShortName());
                             }
                         }
                     }

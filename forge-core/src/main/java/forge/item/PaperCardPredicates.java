@@ -76,24 +76,20 @@ public abstract class PaperCardPredicates {
     }
 
     private static final class PredicateColor implements Predicate<PaperCard> {
-        private final byte operand;
+        private final MagicColor.Color operand;
 
-        private PredicateColor(final byte color) {
+        private PredicateColor(final MagicColor.Color color) {
             this.operand = color;
         }
 
         @Override
         public boolean test(final PaperCard card) {
-            for (final byte color : card.getRules().getColor()) {
-                if (color == operand) {
-                    return true;
-                }
+            if (card.getRules().getColor().toEnumSet().contains(operand)) {
+                return true;
             }
             if (card.getRules().getType().hasType(CardType.CoreType.Land)) {
-                for (final byte color : card.getRules().getColorIdentity()) {
-                    if (color == operand) {
-                        return true;
-                    }
+                if (card.getRules().getColorIdentity().toEnumSet().contains(operand)) {
+                    return true;
                 }
             }
             return false;
@@ -199,11 +195,11 @@ public abstract class PaperCardPredicates {
     public static final Predicate<PaperCard> IS_RARE_OR_MYTHIC = PaperCardPredicates.IS_RARE.or(PaperCardPredicates.IS_MYTHIC_RARE);
     public static final Predicate<PaperCard> IS_SPECIAL = new PredicateRarity(CardRarity.Special);
     public static final Predicate<PaperCard> IS_BASIC_LAND_RARITY = new PredicateRarity(CardRarity.BasicLand);
-    public static final Predicate<PaperCard> IS_BLACK = new PredicateColor(MagicColor.BLACK);
-    public static final Predicate<PaperCard> IS_BLUE = new PredicateColor(MagicColor.BLUE);
-    public static final Predicate<PaperCard> IS_GREEN = new PredicateColor(MagicColor.GREEN);
-    public static final Predicate<PaperCard> IS_RED = new PredicateColor(MagicColor.RED);
-    public static final Predicate<PaperCard> IS_WHITE = new PredicateColor(MagicColor.WHITE);
+    public static final Predicate<PaperCard> IS_BLACK = new PredicateColor(MagicColor.Color.BLACK);
+    public static final Predicate<PaperCard> IS_BLUE = new PredicateColor(MagicColor.Color.BLUE);
+    public static final Predicate<PaperCard> IS_GREEN = new PredicateColor(MagicColor.Color.GREEN);
+    public static final Predicate<PaperCard> IS_RED = new PredicateColor(MagicColor.Color.RED);
+    public static final Predicate<PaperCard> IS_WHITE = new PredicateColor(MagicColor.Color.WHITE);
     public static final Predicate<PaperCard> IS_COLORLESS = paperCard -> paperCard.getRules().getColor().isColorless();
     public static final Predicate<PaperCard> IS_UNREBALANCED = PaperCard::isUnRebalanced;
     public static final Predicate<PaperCard> IS_REBALANCED = PaperCard::isRebalanced;

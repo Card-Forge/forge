@@ -241,7 +241,8 @@ public class PlayerControllerAi extends PlayerController {
     public Map<Byte, Integer> specifyManaCombo(SpellAbility sa, ColorSet colorSet, int manaAmount, boolean different) {
         Map<Byte, Integer> result = new HashMap<>();
         for (int i = 0; i < manaAmount; ++i) {
-            Byte chosen = chooseColor("", sa, colorSet);
+            MagicColor.Color chosenColor = chooseColor("", sa, colorSet);
+            Byte chosen = chosenColor == null ? (byte)0 : chosenColor.getColormask();
             if (result.containsKey(chosen)) {
                 result.put(chosen, result.get(chosen) + 1);
             } else {
@@ -1018,19 +1019,22 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public byte chooseColorAllowColorless(String message, Card card, ColorSet colors) {
+    public MagicColor.Color chooseColorAllowColorless(String message, Card card, ColorSet colors) {
         final String c = ComputerUtilCard.getMostProminentColor(player.getCardsIn(ZoneType.Hand));
         byte chosenColorMask = MagicColor.fromName(c);
         if ((colors.getColor() & chosenColorMask) != 0) {
-            return chosenColorMask;
+            return MagicColor.Color.fromByte(chosenColorMask);
         }
-        return Iterables.getFirst(colors, (byte)0);
+        return Iterables.getFirst(colors.toEnumSet(), MagicColor.Color.COLORLESS);
     }
 
     @Override
-    public byte chooseColor(String message, SpellAbility sa, ColorSet colors) {
+    public MagicColor.Color chooseColor(String message, SpellAbility sa, ColorSet colors) {
+        if (colors.countColors() == 0) {
+            return null;
+        }
         if (colors.countColors() < 2) {
-            return Iterables.getFirst(colors, MagicColor.WHITE);
+            return Iterables.getFirst(colors.toEnumSet(), MagicColor.Color.WHITE);
         }
         // You may switch on sa.getApi() here and use sa.getParam("AILogic")
         CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
@@ -1041,9 +1045,9 @@ public class PlayerControllerAi extends PlayerController {
         byte chosenColorMask = MagicColor.fromName(c);
 
         if ((colors.getColor() & chosenColorMask) != 0) {
-            return chosenColorMask;
+            return MagicColor.Color.fromByte(chosenColorMask);
         }
-        return Iterables.getFirst(colors, MagicColor.WHITE);
+        return Iterables.getFirst(colors.toEnumSet(), MagicColor.Color.WHITE);
     }
 
     @Override
