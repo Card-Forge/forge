@@ -17,6 +17,7 @@
  */
 package forge.card.mana;
 
+import forge.card.ColorSet;
 import forge.util.BinaryUtil;
 
 /**
@@ -184,6 +185,10 @@ public enum ManaCostShard {
      */
     public final byte getColorMask() {
         return (byte)(this.shard & COLORS_SUPERPOSITION);
+    }
+
+    public final ColorSet getColor() {
+        return ColorSet.fromMask(getColorMask());
     }
 
     /**
