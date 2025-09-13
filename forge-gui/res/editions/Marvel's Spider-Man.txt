@@ -65,7 +65,7 @@ Replace=0.125F fromSheet("SPM allied lands")+
 Replace=0.20F BasicLand:fromSheet("SPM full art")
 Replace=0.05F BasicLand:fromSheet("SPM full art")+
 Replace=0.20F BasicLand:fromSheet("SPM cards"):!fromSheet("SPM allied lands")
-Replace=0.05F BasicLand:fromSheet("SPM cards")!fromSheet("SPM allied lands")
+Replace=0.05F BasicLand:fromSheet("SPM cards"):!fromSheet("SPM allied lands")
 
 [cards]
 1 M Anti-Venom, Horrifying Healer @Néstor Ossandón Leal
