@@ -517,8 +517,8 @@ public class DeckImportController {
             PaperCard card = token.getCard();
             String cardName = card.getName();
             CardPool substitutes = availableInventory.getFilteredPool(c -> c.getName().equals(cardName));
-            // Stream.toList() is only supported on Android 14 and above ref: https://developer.android.com/reference/java/util/stream/Stream#toList()
-            // use Collectors.toList() to support Android 8 to 13....
+            // stream().toList() causes crash on Android 8-13, use Collectors.toList()
+            // ref: https://developer.android.com/reference/java/util/stream/Stream#toList()
             List<Map.Entry<PaperCard, Integer>> sortedSubstitutes = StreamUtil.stream(substitutes).sorted(Comparator.comparingInt(Map.Entry::getValue)).collect(Collectors.toList());
             int neededQuantity = token.getQuantity();
             for(Token found : replacementList) {
