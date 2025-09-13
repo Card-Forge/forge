@@ -809,6 +809,11 @@ public class CardUtil {
         return generateBoosterPackAsDeck(edition);
     }
 
+    private static PaperCard getReplacement(String missingCard, String replacementCard) {
+        System.err.println(missingCard + " : Not found in the database.\nReplacement card: " + replacementCard);
+        return FModel.getMagicDb().getCommonCards().getCard(replacementCard);
+    }
+
     public static PaperCard getCardByName(String cardName) {
         List<PaperCard> validCards;
         //Faster to ask the CardDB for a card name than it is to search the pool.
@@ -816,6 +821,10 @@ public class CardUtil {
             validCards = FModel.getMagicDb().getCommonCards().getAllCards(cardName);
         else
             validCards = FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(cardName);
+
+        if (validCards.isEmpty()) {
+            return getReplacement(cardName, "Wastes");
+        }
 
         return validCards.get(Current.world().getRandom().nextInt(validCards.size()));
     }
@@ -828,7 +837,7 @@ public class CardUtil {
                 .filter(input -> input.getEdition().equals(edition)).collect(Collectors.toList());
 
         if (validCards.isEmpty()) {
-            System.err.println("Unexpected behavior: tried to call getCardByNameAndEdition for card " + cardName + " from the edition " + edition + ", but didn't find it in the DB. A random existing instance will be returned.");
+            System.err.println("Unexpected behavior: tried to call getCardByNameAndEdition for card " + cardName + " from the edition " + edition + ", but didn't find it in the DB. A random existing instance will be returned if found.");
             return getCardByName(cardName);
         }
 
