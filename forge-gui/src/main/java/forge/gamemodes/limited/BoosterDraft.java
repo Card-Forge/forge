@@ -437,7 +437,7 @@ public class BoosterDraft implements IBoosterDraft {
                 CompletableFuture.allOf(futuresArray).join();
                 futures.clear();
             }
-            // stream().toList() causes crash on Android, use Collectors.toList()
+            // stream().toList() causes crash on Android 8-13, use Collectors.toList()
             customs.addAll(queue.stream().collect(Collectors.toList()));
         }
         return customs;

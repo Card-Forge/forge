@@ -22,6 +22,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.text.DateFormatSymbols;
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class DeckImportController {
     public enum ImportBehavior {
@@ -516,7 +517,9 @@ public class DeckImportController {
             PaperCard card = token.getCard();
             String cardName = card.getName();
             CardPool substitutes = availableInventory.getFilteredPool(c -> c.getName().equals(cardName));
-            List<Map.Entry<PaperCard, Integer>> sortedSubstitutes = StreamUtil.stream(substitutes).sorted(Comparator.comparingInt(Map.Entry::getValue)).toList();
+            // stream().toList() causes crash on Android 8-13, use Collectors.toList()
+            // ref: https://developer.android.com/reference/java/util/stream/Stream#toList()
+            List<Map.Entry<PaperCard, Integer>> sortedSubstitutes = StreamUtil.stream(substitutes).sorted(Comparator.comparingInt(Map.Entry::getValue)).collect(Collectors.toList());
             int neededQuantity = token.getQuantity();
             for(Token found : replacementList) {
                 //If there's an item in the replacement list already it means we've already found some of the needed copies.
