@@ -193,6 +193,8 @@ public class DuelScene extends ForgeScene {
     public void enter() {
         GameHUD.getInstance().unloadAudio();
         GameType mainGameType;
+        boolean isDeckMissing = false;
+        String isDeckMissingMsg = "";
         if (eventData != null && eventData.eventRules != null) {
             mainGameType = eventData.eventRules.gameType;
         } else {
@@ -295,6 +297,19 @@ public class DuelScene extends ForgeScene {
             } else {
                 deck = currentEnemy.copyPlayerDeck ? this.playerDeck : currentEnemy.generateDeck(Current.player().isFantasyMode(), Current.player().isUsingCustomDeck() || Current.player().isHardorInsaneDifficulty());
             }
+            if (deck == null) {
+                isDeckMissing = true;
+                // copy player deck...
+                if (this.eventData != null) {
+                    isDeckMissingMsg = "Deck for " + currentEnemy.getName() + " is missing! Player deck will be used.";
+                    System.err.println(isDeckMissingMsg);
+                    deck = this.playerDeck;
+                } else {
+                    isDeckMissingMsg = "Deck for " + currentEnemy.getName() + " is missing! Genetic AI deck will be used.";
+                    System.err.println(isDeckMissingMsg);
+                    deck = Aggregates.random(DeckProxy.getAllGeneticAIDecks()).getDeck();
+                }
+            }
             RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(playerCount, appliedVariants, deck, null, false, null, null);
 
             LobbyPlayer enemyPlayer = GamePlayerUtil.createAiPlayer(currentEnemy.getName(), selectAI(currentEnemy.ai));
@@ -368,9 +383,9 @@ public class DuelScene extends ForgeScene {
         hostedMatch.startMatch(rules, appliedVariants, players, guiMap, bossBattle ? MusicPlaylist.BOSS : MusicPlaylist.MATCH);
         MatchController.instance.setGameView(hostedMatch.getGameView());
         boolean showMessages = enemy.getData().boss || (enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck());
-        if (chaosBattle || showMessages) {
+        if (chaosBattle || showMessages || isDeckMissing) {
             final FBufferedImage fb = getFBEnemyAvatar();
-            bossDialogue = createFOption(Forge.getLocalizer().getMessage("AdvBossIntro" + Aggregates.randomInt(1, 35)),
+            bossDialogue = createFOption(isDeckMissing ? isDeckMissingMsg : Forge.getLocalizer().getMessage("AdvBossIntro" + Aggregates.randomInt(1, 35)),
                     enemy.getName(), fb, fb::dispose);
             matchOverlay = new LoadingOverlay(() -> FThreads.delayInEDT(300, () -> FThreads.invokeInEdtNowOrLater(() ->
                     bossDialogue.show())), false, true);
