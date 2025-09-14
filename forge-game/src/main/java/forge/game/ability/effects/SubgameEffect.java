@@ -1,16 +1,13 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import com.google.common.collect.Lists;
 
-import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameOutcome;
 import forge.game.ability.AbilityKey;
-import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
@@ -24,7 +21,6 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.CardTranslation;
-import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.collect.FCollectionView;
 
@@ -75,15 +71,7 @@ public class SubgameEffect extends SpellAbilityEffect {
         for (final Card card : commandCards) {
             if (card.isCommander()) {
                 Card cmd = Card.fromPaperCard(card.getPaperCard(), player);
-                if (cmd.hasKeyword("If CARDNAME is your commander, choose a color before the game begins.")) {
-                    List<String> colorChoices = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
-                    String prompt = Localizer.getInstance().getMessage("lblChooseAColorFor", cmd.getName());
-                    List<String> chosenColors;
-                    SpellAbility cmdColorsa = new SpellAbility.EmptySa(ApiType.ChooseColor, cmd, player);
-                    chosenColors = player.getController().chooseColors(prompt,cmdColorsa, 1, 1, colorChoices);
-                    cmd.setChosenColors(chosenColors);
-                    subgame.getAction().notifyOfValue(cmdColorsa, cmd, Localizer.getInstance().getMessage("lblPlayerPickedChosen", player.getName(), Lang.joinHomogenous(chosenColors)), player);
-                }
+                player.initCommanderColor(cmd);
                 com.add(cmd);
                 player.addCommander(cmd);
             }

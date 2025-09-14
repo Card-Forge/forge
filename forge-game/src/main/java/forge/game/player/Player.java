@@ -3005,26 +3005,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (!registeredPlayer.getCommanders().isEmpty()) {
             for (PaperCard pc : registeredPlayer.getCommanders()) {
                 Card cmd = Card.fromPaperCard(pc, this);
-                boolean color = false;
-                for (StaticAbility stAb : cmd.getStaticAbilities()) {
-                    if (stAb.hasParam("Description") && stAb.getParam("Description")
-                            .contains("If CARDNAME is your commander, choose a color before the game begins.")) {
-                        color = true;
-                        break;
-                    }
-                }
-                if (color) {
-                    Player p = cmd.getController();
-                    List<String> colorChoices = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
-                    String prompt = Localizer.getInstance().getMessage("lblChooseAColorFor", cmd.getName());
-                    List<String> chosenColors;
-                    SpellAbility cmdColorsa = new SpellAbility.EmptySa(ApiType.ChooseColor, cmd, p);
-                    chosenColors = p.getController().chooseColors(prompt,cmdColorsa, 1, 1, colorChoices);
-                    cmd.setChosenColors(chosenColors);
-                    p.getGame().getAction().notifyOfValue(cmdColorsa, cmd,
-                            Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(),
-                                    Lang.joinHomogenous(chosenColors)), p);
-                }
+                initCommanderColor(cmd);
                 cmd.setCollectible(true);
                 com.add(cmd);
                 this.addCommander(cmd);
@@ -3109,6 +3090,22 @@ public class Player extends GameEntity implements Comparable<Player> {
                     getController().playSpellAbilityNoStack(effect, true);
                 }
             }
+        }
+    }
+
+    public void initCommanderColor(Card cmd) {
+        if (cmd.getStaticAbilities().stream().anyMatch(stAb -> stAb.hasParam("Description") && stAb.getParam("Description")
+                .contains("If CARDNAME is your commander, choose a color before the game begins."))) {
+            Player p = cmd.getController();
+            List<String> colorChoices = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
+            String prompt = Localizer.getInstance().getMessage("lblChooseAColorFor", cmd.getName());
+            List<String> chosenColors;
+            SpellAbility cmdColorsa = new SpellAbility.EmptySa(ApiType.ChooseColor, cmd, p);
+            chosenColors = p.getController().chooseColors(prompt,cmdColorsa, 1, 1, colorChoices);
+            cmd.setChosenColors(chosenColors);
+            p.getGame().getAction().notifyOfValue(cmdColorsa, cmd,
+                    Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(),
+                            Lang.joinHomogenous(chosenColors)), p);
         }
     }
 
