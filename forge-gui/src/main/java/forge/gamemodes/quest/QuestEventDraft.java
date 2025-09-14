@@ -661,7 +661,7 @@ public class QuestEventDraft implements IQuestEvent {
     public BoosterDraft enter() {
         FModel.getQuest().getAchievements().setCurrentDraft(this);
         FModel.getQuest().getAssets().subtractCredits(getEntryFee());
-        return BoosterDraft.createDraft(LimitedPoolType.Block, FModel.getBlocks().get(getBlock()), getBoosterConfiguration());
+        return BoosterDraft.createDraft(LimitedPoolType.Block, FModel.getBlocks().get(getBlock()), getBoosterConfiguration(), 8);
     }
 
     public boolean isStarted() {
