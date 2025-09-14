@@ -633,7 +633,10 @@ public class BoosterGenerator {
                 System.out.println("Parsing from main code: " + mainCode);
                 String sheetName = StringUtils.strip(mainCode.substring(10), "()\" ");
                 System.out.println("Attempting to lookup: " + sheetName);
-                src = tryGetStaticSheet(sheetName).toFlatList();
+                PrintSheet fromSheet = tryGetStaticSheet(sheetName);
+                if (fromSheet == null)
+                    throw new RuntimeException("PrintSheet Error: " + ps.getName() + " didn't find " + sheetName + " from " + mainCode);
+                src = fromSheet.toFlatList();
                 setPred = x -> true;
 
             } else if (mainCode.startsWith("promo") || mainCode.startsWith("name")) { // get exactly the named cards, that's a tiny inlined print sheet
