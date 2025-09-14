@@ -299,16 +299,9 @@ public class DuelScene extends ForgeScene {
             }
             if (deck == null) {
                 isDeckMissing = true;
-                // copy player deck...
-                if (this.eventData != null) {
-                    isDeckMissingMsg = "Deck for " + currentEnemy.getName() + " is missing! Player deck will be used.";
-                    System.err.println(isDeckMissingMsg);
-                    deck = this.playerDeck;
-                } else {
-                    isDeckMissingMsg = "Deck for " + currentEnemy.getName() + " is missing! Genetic AI deck will be used.";
-                    System.err.println(isDeckMissingMsg);
-                    deck = Aggregates.random(DeckProxy.getAllGeneticAIDecks()).getDeck();
-                }
+                isDeckMissingMsg = "Deck for " + currentEnemy.getName() + " is missing! " + (this.eventData == null ? "Genetic AI deck will be used." : "Player deck will be used.");
+                System.err.println(isDeckMissingMsg);
+                deck = this.eventData == null ? Aggregates.random(DeckProxy.getAllGeneticAIDecks()).getDeck() : this.playerDeck;
             }
             RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(playerCount, appliedVariants, deck, null, false, null, null);
 
