@@ -275,15 +275,19 @@ public class BoosterDraft implements IBoosterDraft {
     }
 
     public static BoosterDraft createDraft(final LimitedPoolType draftType, final CardBlock block, final String[] boosters) {
-        // quest draft
+        return createDraft(draftType, block, boosters, null);
+    }
+
+    public static BoosterDraft createDraft(final LimitedPoolType draftType, final CardBlock block, final String[] boosters, Integer numPlayers) {
         final BoosterDraft draft = new BoosterDraft(draftType);
 
         String setCode = boosters[0];
         CardEdition edition = FModel.getMagicDb().getEditions().get(setCode);
         // If this is metaset, edtion will be null
         if (edition != null) {
-            if (draft.getPodSize() != edition.getDraftOptions().getRecommendedPodSize()) {
-                // Auto choosing recommended pod size. In the future we may want to allow user to choose
+            // Auto choosing recommended pod size. If we've chosen the podsize it should be passed in via numPlayers
+            int newPodSize = Objects.requireNonNullElseGet(numPlayers, () -> edition.getDraftOptions().getRecommendedPodSize());
+            if (newPodSize != draft.getPodSize()) {
                 draft.setPodSize(edition.getDraftOptions().getRecommendedPodSize());
             }
             draft.doublePickDuringDraft = edition.getDraftOptions().isDoublePick(draft.getPodSize());
