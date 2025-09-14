@@ -3097,15 +3097,12 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (cmd.getStaticAbilities().stream().anyMatch(stAb -> stAb.hasParam("Description") && stAb.getParam("Description")
                 .contains("If CARDNAME is your commander, choose a color before the game begins."))) {
             Player p = cmd.getController();
-            List<String> colorChoices = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
             String prompt = Localizer.getInstance().getMessage("lblChooseAColorFor", cmd.getName());
-            List<String> chosenColors;
             SpellAbility cmdColorsa = new SpellAbility.EmptySa(ApiType.ChooseColor, cmd, p);
-            chosenColors = p.getController().chooseColors(prompt,cmdColorsa, 1, 1, colorChoices);
-            cmd.setChosenColors(chosenColors);
+            MagicColor.Color chosenColor = p.getController().chooseColor(prompt, cmdColorsa, ColorSet.ALL_COLORS);
+            cmd.setChosenColors(List.of(chosenColor.getName()));
             p.getGame().getAction().notifyOfValue(cmdColorsa, cmd,
-                    Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(),
-                            Lang.joinHomogenous(chosenColors)), p);
+                    Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), chosenColor.getName()), p);
         }
     }
 
