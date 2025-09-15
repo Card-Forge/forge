@@ -2,8 +2,7 @@ Name:Wake the Dead
 ManaCost:X B B
 Types:Instant
 Text:Cast this spell only during combat on an opponent's turn.
-A:SP$ ChangeZone | TargetMin$ X | TargetMax$ X | OpponentTurn$ True | ActivationPhases$ BeginCombat->EndCombat | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select X target creatures in your graveyard | GainControl$ True | SubAbility$ DBPump | StackDescription$ Return X target creature cards [{c:Targeted}] from your graveyard to the battlefield. Sacrifice those creatures at the beginning of the next end step. | SpellDescription$ Return X target creature cards from your graveyard to the battlefield. Sacrifice those creatures at the beginning of the next end step.
-SVar:DBPump:DB$ Pump | Defined$ Targeted | AtEOT$ Sacrifice
+A:SP$ ChangeZone | TargetMin$ X | TargetMax$ X | OpponentTurn$ True | ActivationPhases$ BeginCombat->EndCombat | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select X target creatures in your graveyard | GainControl$ True | AtEOT$ Sacrifice | StackDescription$ Return X target creature cards [{c:Targeted}] from your graveyard to the battlefield. Sacrifice those creatures at the beginning of the next end step. | SpellDescription$ Return X target creature cards from your graveyard to the battlefield. Sacrifice those creatures at the beginning of the next end step.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 DeckHas:Ability$Graveyard|Sacrifice
