@@ -9,6 +9,7 @@ import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterType;
@@ -20,7 +21,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
-import forge.util.collect.FCollection;
 
 public class TimeTravelEffect extends SpellAbilityEffect {
 
@@ -41,10 +41,8 @@ public class TimeTravelEffect extends SpellAbilityEffect {
         final CounterType counterType = CounterEnumType.TIME;
 
         for (int i = 0; i < num; i++) {
-            FCollection<Card> list = new FCollection<>();
-
             // card you own that is suspended
-            list.addAll(CardLists.filter(activator.getCardsIn(ZoneType.Exile), CardPredicates.hasSuspend()));
+            CardCollection list = CardLists.filter(activator.getCardsIn(ZoneType.Exile), CardPredicates.hasSuspend());
             // permanent you control with time counter
             list.addAll(CardLists.filter(activator.getCardsIn(ZoneType.Battlefield), CardPredicates.hasCounter(counterType)));
 
