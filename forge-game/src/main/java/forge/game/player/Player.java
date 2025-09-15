@@ -1120,13 +1120,14 @@ public class Player extends GameEntity implements Comparable<Player> {
             getGame().fireEvent(new GameEventSurveil(this, numToTop, numToGrave));
         }
 
-        surveilThisTurn++;
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
-        runParams.put(AbilityKey.FirstTime, surveilThisTurn == 1);
+        runParams.put(AbilityKey.FirstTime, surveilThisTurn == 0);
         if (params != null) {
             runParams.putAll(params);
         }
         getGame().getTriggerHandler().runTrigger(TriggerType.Surveil, runParams, false);
+
+        surveilThisTurn++;
     }
 
     public int getSurveilThisTurn() {

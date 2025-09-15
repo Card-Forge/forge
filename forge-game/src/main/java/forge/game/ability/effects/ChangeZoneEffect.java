@@ -928,7 +928,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
             List<ZoneType> origin = Lists.newArrayList();
             if (sa.hasParam("Origin")) {
-                origin = ZoneType.listValueOf(sa.getParam("Origin"));
+                origin.addAll(ZoneType.listValueOf(sa.getParam("Origin")));
             }
             ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
 

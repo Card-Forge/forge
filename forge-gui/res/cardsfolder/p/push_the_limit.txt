@@ -1,11 +1,9 @@
 Name:Push the Limit
 ManaCost:5 R R
 Types:Sorcery
-A:SP$ ChangeZoneAll | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Mount.YouOwn,Vehicle.YouOwn | RememberChanged$ True | SubAbility$ DBPump | SpellDescription$ Return all Mount and Vehicle cards from your graveyard to the battlefield. Sacrifice them at the beginning of the next end step. Vehicles you control become artifact creatures until end of turn. Creatures you control gain haste until end of turn.
-SVar:DBPump:DB$ Pump | Defined$ Remembered | AtEOT$ Sacrifice | SubAbility$ DBAnimateAll
+A:SP$ ChangeZoneAll | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Mount.YouOwn,Vehicle.YouOwn | AtEOT$ Sacrifice | SubAbility$ DBAnimateAll | SpellDescription$ Return all Mount and Vehicle cards from your graveyard to the battlefield. Sacrifice them at the beginning of the next end step. Vehicles you control become artifact creatures until end of turn. Creatures you control gain haste until end of turn.
 SVar:DBAnimateAll:DB$ AnimateAll | Types$ Artifact,Creature | ValidCards$ Vehicle.YouCtrl | SubAbility$ DBPumpAll
-SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Haste | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Haste
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Graveyard
 DeckHints:Ability$Discard|Sacrifice

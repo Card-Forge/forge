@@ -47,7 +47,7 @@ public class EarthbendEffect extends SpellAbilityEffect {
         final Game game = source.getGame();
         final Player pl = sa.getActivatingPlayer();
         int num = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("Num", "1"), sa);
-        
+
         long ts = game.getNextTimestamp();
 
         String desc = "When it dies or is exiled, return it to the battlefield tapped.";
@@ -59,17 +59,17 @@ public class EarthbendEffect extends SpellAbilityEffect {
             c.addNewPT(0, 0, ts, 0);
             c.addChangedCardTypes(Arrays.asList("Creature"), null, false, EnumSet.noneOf(RemoveType.class), ts, 0, true, false);
             c.addChangedCardKeywords(Arrays.asList("Haste"), null, false, ts, null);
-            
+
             GameEntityCounterTable table = new GameEntityCounterTable();
             c.addCounter(CounterEnumType.P1P1, num, pl, table);
             table.replaceCounterEffect(game, sa, true);
-            
+
             buildTrigger(sa, c, sbTrigA, "Graveyard");
             buildTrigger(sa, c, sbTrigB, "Exile");
         }
         pl.triggerElementalBend(TriggerType.Earthbend);
     }
-    
+
     protected void buildTrigger(SpellAbility sa, Card c, String sbTrig, String zone) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();

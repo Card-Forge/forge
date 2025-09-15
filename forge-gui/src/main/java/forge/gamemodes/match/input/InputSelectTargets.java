@@ -408,15 +408,18 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     private void removeTarget(final GameEntity ge) {
+        if (divisionValues != null) {
+            divisionValues.add(sa.getDividedValue(ge));
+        }
         targets.remove(ge);
         sa.getTargets().remove(ge);
-        if (ge instanceof Card) {
-            getController().getGui().setUsedToPay(CardView.get((Card) ge), false);
+        if (ge instanceof Card c) {
+            getController().getGui().setUsedToPay(CardView.get(c), false);
             // try to get last selected card
             lastTarget = Iterables.getLast(IterableUtil.filter(targets, Card.class), null);
         }
-        else if (ge instanceof Player) {
-            getController().getGui().setHighlighted(PlayerView.get((Player) ge), false);
+        else if (ge instanceof Player p) {
+            getController().getGui().setHighlighted(PlayerView.get(p), false);
         }
 
         this.showMessage();
