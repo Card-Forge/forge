@@ -2,9 +2,9 @@
 Code=DDP
 Date=2015-08-28
 Name=Duel Decks: Zendikar vs. Eldrazi
-Code2=DDP
 Type=Duel_Deck
 ScryfallCode=DDP
+TokensCode=DDP
 
 [cards]
 1 M Avenger of Zendikar @Aleksi Briclot
@@ -84,8 +84,8 @@ ScryfallCode=DDP
 75 L Mountain @James Paick
 
 [tokens]
-c_0_1_eldrazi_spawn_sac
-c_0_1_eldrazi_spawn_sac
-c_0_1_eldrazi_spawn_sac
-r_4_4_hellion
-g_0_1_plant
+76 c_0_1_eldrazi_spawn_sac @Aleksi Briclot
+77 c_0_1_eldrazi_spawn_sac @Véronique Meignaud
+78 c_0_1_eldrazi_spawn_sac @Mark Tedin
+79 r_4_4_hellion @Anthony Francisco
+80 g_0_1_plant @Daren Bader

@@ -198,10 +198,3 @@ ScryfallCode=FEM
 100 U Ruins of Trokair @Mark Poole
 101 R Sand Silos @Pat Lewis
 102 U Svyelunite Temple @Mark Poole
-
-[tokens]
-w_1_1_citizen
-u_1_1_camarid
-b_0_1_thrull
-r_1_1_goblin
-g_1_1_saproling

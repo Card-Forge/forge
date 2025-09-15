@@ -21,11 +21,3 @@ ScryfallCode=V17
 13 M Kytheon, Hero of Akros @Willian Murai
 14 M Liliana, Heretical Healer @Karla Ortiz
 15 M Nissa, Vastwood Seer @Wesley Burt
-
-[tokens]
-ashaya_the_awoken_world
-b_2_2_vampire_flying
-b_1_1_wolf_deathtouch
-b_2_2_zombie
-g_2_2_wolf
-g_2_2_wolf

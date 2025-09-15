@@ -27,8 +27,6 @@ import forge.item.PaperCard;
 import forge.itemmanager.*;
 import forge.itemmanager.filters.CardColorFilter;
 import forge.itemmanager.filters.CardTypeFilter;
-import forge.localinstance.properties.ForgePreferences;
-import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
@@ -41,6 +39,7 @@ import forge.util.Utils;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class AdventureDeckEditor extends FDeckEditor {
     protected static class AdventureEditorConfig extends DeckEditorConfig {
@@ -146,7 +145,8 @@ public class AdventureDeckEditor extends FDeckEditor {
             if(event.cardBlock != null) {
                 if(event.cardBlock.getLandSet() != null)
                     return List.of(event.cardBlock.getLandSet());
-                List<CardEdition> eventSets = event.cardBlock.getSets();
+                List<CardEdition> eventSets = new ArrayList<>(event.cardBlock.getSets());
+                eventSets.removeIf(Predicate.not(CardEdition::hasBasicLands));
                 if(!eventSets.isEmpty())
                     return eventSets;
             }
@@ -558,7 +558,7 @@ public class AdventureDeckEditor extends FDeckEditor {
             currentEvent.participants[i].setDeck(opponentDecks[i]);
         }
         currentEvent.draftedDeck = (Deck) currentEvent.registeredDeck.copyTo("Draft Deck");
-        if (allowsAddBasic()) {
+        if (allowAddBasic()) {
             showAddBasicLandsDialog();
             //Might be annoying if you haven't pruned your deck yet, but best to remind player that
             //this probably needs to be done since it's there since it's not normally part of Adventure
@@ -714,27 +714,6 @@ public class AdventureDeckEditor extends FDeckEditor {
     }
 
     @Override
-    protected FPopupMenu createMoreOptionsMenu() {
-        return new FPopupMenu() {
-            @Override
-            protected void buildMenu() {
-                Localizer localizer = Forge.getLocalizer();
-                addItem(new FMenuItem(localizer.getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e1 -> FDeckViewer.copyDeckToClipboard(getDeck())));
-                if (allowsAddBasic()) {
-                    FMenuItem addBasic = new FMenuItem(localizer.getMessage("lblAddBasicLands"), FSkinImage.LANDLOGO, e1 -> showAddBasicLandsDialog());
-                    addItem(addBasic);
-                }
-                if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.DEV_MODE_ENABLED)) {
-                    addItem(new FCheckBoxMenuItem(localizer.getMessage("cbEnforceDeckLegality"), shouldEnforceConformity(), e -> toggleConformity()));
-                    String devSuffix = " (" + localizer.getMessage("lblDev") + ")";
-                    addItem(new FMenuItem(localizer.getMessage("lblAddcard") + devSuffix, FSkinImage.HDPLUS, e -> showDevAddCardDialog()));
-                }
-                ((DeckEditorPage) getSelectedPage()).buildDeckMenu(this);
-            }
-        };
-    }
-
-    @Override
     protected void addChosenBasicLands(CardPool landsToAdd) {
         if(isLimitedEditor())
             super.addChosenBasicLands(landsToAdd);
@@ -766,6 +745,12 @@ public class AdventureDeckEditor extends FDeckEditor {
     }
 
     @Override
+    protected PaperCard supplyPrintForImporter(PaperCard missingCard) {
+        PaperCard out = super.supplyPrintForImporter(missingCard);
+        return out == null ? null : out.getNoSellVersion();
+    }
+
+    @Override
     protected void cacheTabPages() {
         super.cacheTabPages();
         for(TabPage<FDeckEditor> page : tabPages) {
@@ -775,7 +760,9 @@ public class AdventureDeckEditor extends FDeckEditor {
     }
 
     @Override
-    protected boolean allowsAddBasic() {
+    protected boolean allowAddBasic() {
+        if(getEditorConfig() instanceof DeckPreviewConfig)
+            return false;
         AdventureEventData currentEvent = getCurrentEvent();
         if (currentEvent == null)
             return true;

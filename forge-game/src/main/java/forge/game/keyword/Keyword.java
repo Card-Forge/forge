@@ -1,8 +1,8 @@
 package forge.game.keyword;
 
-import forge.StaticData;
-import forge.game.card.Card;
+import forge.card.CardSplitType;
 import forge.item.PaperCard;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 
@@ -223,7 +223,7 @@ public enum Keyword {
         displayName = displayName0;
     }
 
-    public static KeywordInterface getInstance(String k) {
+    private static Pair<Keyword, String> getKeywordDetails(String k) {
         Keyword keyword = Keyword.UNDEFINED;
         String details = k;
         // try to get real part
@@ -255,15 +255,20 @@ public enum Keyword {
             keyword = smartValueOf(k);
             details = "";
         }
+        return Pair.of(keyword, details);
+    }
+
+    public static KeywordInterface getInstance(String k) {
+        Pair<Keyword, String> p = getKeywordDetails(k);
 
         KeywordInstance<?> inst;
         try {
-            inst = keyword.type.getConstructor().newInstance();
+            inst = p.getKey().type.getConstructor().newInstance();
         }
         catch (Exception e) {
             inst = new UndefinedKeyword();
         }
-        inst.initialize(k, keyword, details);
+        inst.initialize(k, p.getKey(), p.getValue());
         return inst;
     }
 
@@ -278,34 +283,42 @@ public enum Keyword {
         return keywords;
     }
 
+    private static Keyword get(String k) {
+        if (k == null || k.isEmpty())
+            return Keyword.UNDEFINED;
+
+        return getKeywordDetails(k).getKey();
+    }
+
     private static final Map<String, Set<Keyword>> cardKeywordSetLookup = new HashMap<>();
 
     public static Set<Keyword> getKeywordSet(PaperCard card) {
-        String key = card.getName();
-        Set<Keyword> keywordSet = cardKeywordSetLookup.get(key);
+        String name = card.getName();
+        Set<Keyword> keywordSet = cardKeywordSetLookup.get(name);
         if (keywordSet == null) {
-            keywordSet = new HashSet<>();
-            for (KeywordInterface inst : Card.getCardForUi(card).getKeywords()) {
-                final Keyword keyword = inst.getKeyword();
-                if (keyword != Keyword.UNDEFINED) {
-                    keywordSet.add(keyword);
+            CardSplitType cardSplitType = card.getRules().getSplitType();
+            keywordSet = EnumSet.noneOf(Keyword.class);
+            if (cardSplitType != CardSplitType.None && cardSplitType != CardSplitType.Split) {
+                if (card.getRules().getOtherPart() != null) {
+                    if (card.getRules().getOtherPart().getKeywords() != null) {
+                        for (String key : card.getRules().getOtherPart().getKeywords()) {
+                            Keyword keyword = get(key);
+                            if (!Keyword.UNDEFINED.equals(keyword))
+                                keywordSet.add(keyword);
+                        }
+                    }
                 }
             }
-            cardKeywordSetLookup.put(card.getName(), keywordSet);
+            if (card.getRules().getMainPart().getKeywords() != null) {
+                for (String key : card.getRules().getMainPart().getKeywords()) {
+                    Keyword keyword = get(key);
+                    if (!Keyword.UNDEFINED.equals(keyword))
+                        keywordSet.add(keyword);
+                }
+            }
+            cardKeywordSetLookup.put(name, keywordSet);
         }
         return keywordSet;
-    }
-
-    public static Runnable getPreloadTask() {
-        if (cardKeywordSetLookup.size() < 10000) { //allow preloading even if some but not all cards loaded
-            return () -> {
-                final Collection<PaperCard> cards = StaticData.instance().getCommonCards().getUniqueCards();
-                for (PaperCard card : cards) {
-                    getKeywordSet(card);
-                }
-            };
-        }
-        return null;
     }
 
     public static Keyword smartValueOf(String value) {

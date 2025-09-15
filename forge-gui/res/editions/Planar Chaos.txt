@@ -2,7 +2,6 @@
 Code=PLC
 Date=2007-02-02
 Name=Planar Chaos
-Code2=PLC
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare
@@ -176,11 +175,3 @@ ScryfallCode=PLC
 163 R Teneb, the Harvester @Zoltan Boros & Gabor Szikszai
 164 R Vorosh, the Hunter @Mark Zug
 165 R Urborg, Tomb of Yawgmoth @John Avon
-
-[tokens]
-w_1_1_soldier
-b_2_2_knight_flanking_pro_white_haste
-g_3_3_ape
-g_2_2_cat_warrior_forestwalk
-g_6_1_insect_shroud
-g_1_1_saproling

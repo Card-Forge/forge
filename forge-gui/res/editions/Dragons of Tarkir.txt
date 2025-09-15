@@ -2,7 +2,6 @@
 Code=DTK
 Date=2015-03-27
 Name=Dragons of Tarkir
-Code2=DTK
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand DTK
@@ -283,3 +282,7 @@ ScryfallCode=DTK
 4 b_x_x_zombie_horror @Nils Hamm
 5 r_4_4_dragon_flying @Gabor Szikszai
 6 r_1_1_goblin @Mike Bierek
+
+[other]
+7 morph @Raymond Swanland
+8 emblem_narset_transcendent @Magali Villeneuve

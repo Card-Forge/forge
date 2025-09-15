@@ -38,7 +38,12 @@
   <object id="49" template="../../obj/gold.tx" x="106" y="216"/>
   <object id="50" template="../../obj/enemy.tx" x="182.772" y="284.992" width="64" height="64">
    <properties>
+    <property name="effect" value="{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Emrakul's Presence&quot;]}"/>
     <property name="enemy" value="Emrakul"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Insane" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
    </properties>
   </object>
   <object id="51" template="../../obj/entry_up.tx" x="209" y="480">
@@ -46,6 +51,16 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
+  <object id="52" template="../../obj/enemy.tx" x="182.772" y="284.992" width="64" height="64">
+     <properties>
+      <property name="effect" value="{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Emrakul's Awakening&quot;]}"/>
+      <property name="enemy" value="Emrakul"/>
+      <property name="spawn.Easy" type="bool" value="true"/>
+      <property name="spawn.Hard" type="bool" value="false"/>
+      <property name="spawn.Insane" type="bool" value="false"/>
+      <property name="spawn.Normal" type="bool" value="true"/>
+     </properties>
+    </object>
   <object id="69" template="../../obj/enemy.tx" x="132.844" y="401.619">
    <properties>
     <property name="dialog">[{

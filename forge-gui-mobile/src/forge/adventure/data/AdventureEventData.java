@@ -292,7 +292,7 @@ public class AdventureEventData implements Serializable {
         Random placeholder = MyRandom.getRandom();
         MyRandom.setRandom(getEventRandom());
         if (draft == null && (eventStatus == AdventureEventController.EventStatus.Available || eventStatus == AdventureEventController.EventStatus.Entered)) {
-            draft = BoosterDraft.createDraft(LimitedPoolType.Block, getCardBlock(), packConfiguration);
+            draft = BoosterDraft.createDraft(LimitedPoolType.Block, getCardBlock(), packConfiguration, 8);
             registeredDeck = draft.getHumanPlayer().getDeck();
             assignPlayerNames(draft);
         }

@@ -2,7 +2,6 @@
 Code=SNC
 Date=2022-04-29
 Name=Streets of New Capenna
-Code2=SNC
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:fromsheet("SNC cards"), 3 Uncommon:fromSheet("SNC cards"), 1 RareMythic:fromSheet("SNC cards"), 1 fromSheet("SNC lands")
@@ -576,10 +575,10 @@ A-242 C A-Paragon of Modernity @Volkan Baǵa
 11 g_4_4_rhino_warrior @Zoltan Boros
 12 gw_1_1_citizen @Maria Poliakova
 13 c_a_treasure_sac @Nadia Hurianova
-14 c_a_treasure_sac @Nadia Hurianova
-15 c_a_treasure_sac @Nadia Hurianova
-16 c_a_treasure_sac @Nadia Hurianova
-17 c_a_treasure_sac @Nadia Hurianova
+14 c_a_treasure_sac @Alex Stone
+15 c_a_treasure_sac @Minttu Hynninen
+16 c_a_treasure_sac @Brigitte Roka
+17 c_a_treasure_sac @Forrest Imel
 
 [other]
 1 copy @David Palumbo
