@@ -2,6 +2,7 @@ package forge.screens.match.views;
 
 import java.util.*;
 
+import forge.Forge;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
@@ -33,6 +34,7 @@ public class VField extends FContainer {
     public boolean isFlipped() {
         return flipped;
     }
+
     public void setFlipped(boolean flipped0) {
         flipped = flipped0;
     }
@@ -61,7 +63,9 @@ public class VField extends FContainer {
             clear();
 
             Iterable<CardView> model = player.getBattlefield();
-            if (model == null) { return; }
+            if (model == null) {
+                return;
+            }
 
             for (CardView card : model) {
                 CardAreaPanel cardPanel = CardAreaPanel.get(card);
@@ -84,18 +88,15 @@ public class VField extends FContainer {
                         if (!tryStackCard(card, creatures)) {
                             creatures.add(card);
                         }
-                    }
-                    else if (details.isLand()) {
+                    } else if (details.isLand()) {
                         if (!tryStackCard(card, lands)) {
                             lands.add(card);
                         }
-                    }
-                    else if (details.isArtifact() && (details.isContraption() || details.isAttraction())) {
+                    } else if (details.isArtifact() && (details.isContraption() || details.isAttraction())) {
                         if (contraptions == null)
                             contraptions = new ArrayList<>();
                         contraptions.add(card); //Arrange these later.
-                    }
-                    else {
+                    } else {
                         if (!tryStackCard(card, otherPermanents)) {
                             otherPermanents.add(card);
                         }
@@ -103,7 +104,7 @@ public class VField extends FContainer {
                 }
             }
 
-            if(contraptions != null) {
+            if (contraptions != null) {
                 contraptions = arrangeContraptions(contraptions);
                 otherPermanents.addAll(contraptions);
             }
@@ -111,8 +112,7 @@ public class VField extends FContainer {
             if (creatures.isEmpty()) {
                 row1.refreshCardPanels(otherPermanents);
                 row2.refreshCardPanels(lands);
-            }
-            else {
+            } else {
                 row1.refreshCardPanels(creatures);
                 lands.addAll(otherPermanents);
                 row2.refreshCardPanels(lands);
@@ -173,13 +173,14 @@ public class VField extends FContainer {
         TreeSet<CardView> row = new TreeSet<>((c1, c2) -> {
             //Order is sprocket-less cards, then sprocket 1, sprocket 2, sprocket 3, and finally attractions.
             int sprocket1 = c1.getSprocket(), sprocket2 = c2.getSprocket();
-            if(sprocket1 == 0 && c1.getCurrentState().isAttraction())
+            if (sprocket1 == 0 && c1.getCurrentState().isAttraction())
                 sprocket1 = 4;
-            if(sprocket2 == 0 && c2.getCurrentState().isAttraction())
+            if (sprocket2 == 0 && c2.getCurrentState().isAttraction())
                 sprocket2 = 4;
             return sprocket1 - sprocket2;
         });
-        outer: for (CardView card : contraptions) {
+        outer:
+        for (CardView card : contraptions) {
             if (card.hasCardAttachments()) {
                 row.add(card); //Don't stack contraptions or attractions with attachments.
                 continue;
@@ -187,7 +188,7 @@ public class VField extends FContainer {
             if (card.getCurrentState().isAttraction()) {
                 //Stack attractions with other attractions.
                 for (CardView c : row) {
-                    if(c.getCurrentState().isAttraction() && !c.hasCardAttachments()) {
+                    if (c.getCurrentState().isAttraction() && !c.hasCardAttachments()) {
                         stackOnto(card, c);
                         continue outer;
                     }
@@ -240,13 +241,17 @@ public class VField extends FContainer {
         if (flipped) {
             y1 = cardSize;
             y2 = 0;
-        }
-        else {
+        } else {
             y1 = 0;
             y2 = cardSize;
         }
-        row1.setBounds(0, y1, width-fieldModifier, cardSize);
-        row2.setBounds(0, y2, (width - commandZoneWidth)-fieldModifier, cardSize);
+        if (Forge.altZoneTabs && "Horizontal".equalsIgnoreCase(Forge.altZoneTabMode)) {
+            row1.setBounds(0, y1, width, cardSize);
+            row2.setBounds(0, y2, width, cardSize);
+        } else {
+            row1.setBounds(0, y1, width - fieldModifier, cardSize);
+            row2.setBounds(0, y2, (width - commandZoneWidth) - fieldModifier, cardSize);
+        }
     }
 
     public class FieldRow extends VCardDisplayArea {
@@ -270,13 +275,14 @@ public class VField extends FContainer {
         public void setNextSelected(int val) {
             this.selected++;
             if (this.selected >= this.getChildCount())
-                this.selected = this.getChildCount()-1;
+                this.selected = this.getChildCount() - 1;
             if (this.selectedChild != null)
                 this.selectedChild.setHovered(false);
             this.selectedChild = getChildAt(this.selected);
             this.selectedChild.setHovered(true);
             MatchScreen.setPotentialListener(Arrays.asList(this.selectedChild));
         }
+
         public void selectCurrent() {
             if (this.selectedChild != null) {
                 this.selectedChild.setHovered(true);
@@ -285,6 +291,7 @@ public class VField extends FContainer {
                 this.setNextSelected(1);
             }
         }
+
         public void unselectCurrent() {
             if (this.selectedChild != null) {
                 this.selectedChild.setHovered(false);

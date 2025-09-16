@@ -69,7 +69,7 @@ public class VManaPool extends VDisplayArea {
         float x = 0;
         float y = 0;
 
-        if (Forge.isLandscapeMode()) {
+        if (Forge.isLandscapeMode() && !Forge.altZoneTabs) {
             float labelWidth = visibleWidth / 2;
             float labelHeight = visibleHeight / 3;
 
@@ -146,17 +146,19 @@ public class VManaPool extends VDisplayArea {
             if (h > maxImageHeight) {
                 h /= 2;
             }
-            float w = image.getWidth() * h / image.getHeight();
+            float w2 = Forge.altZoneTabs && "Horizontal".equalsIgnoreCase(Forge.altZoneTabMode)
+                ? image.getWidth() * h * 0.7f / image.getHeight() : image.getWidth() * h / image.getHeight();
+            float w =  w2;
             while (w > getWidth()) {
                 h /= 2;
-                w = image.getWidth() * h / image.getHeight();
+                w = w2;
             }
             float x = (getWidth() - w) / 2;
             float y = gapY + (maxImageHeight - h) / 2;
 
             if (isHovered())
                 g.fillRect(FSkinColor.getStandardColor(50, 200, 150).alphaColor(0.3f), 0, 0, getWidth(), getHeight());
-            g.drawImage(image, x, y, w, h);
+            g.drawImage(image, x, y, w, Forge.altZoneTabs && "Horizontal".equalsIgnoreCase(Forge.altZoneTabMode) ? w : h);
 
             x = 0;
             y += h + gapY;
