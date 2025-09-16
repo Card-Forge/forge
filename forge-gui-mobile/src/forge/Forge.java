@@ -346,9 +346,11 @@ public class Forge implements ApplicationListener {
         GuiBase.setIsAdventureMode(true);
         advStartup = false;
         isMobileAdventureMode = true;
-        //force it for adventure mode if not set to Off
-        if (!"Off".equalsIgnoreCase(FModel.getPreferences().getPref(FPref.UI_ALT_PLAYERZONETABS)))
+        //force it for adventure mode if the prefs is not updated from boolean value to string value
+        if ("true".equalsIgnoreCase(FModel.getPreferences().getPref(FPref.UI_ALT_PLAYERZONETABS)) ||
+            "false".equalsIgnoreCase(FModel.getPreferences().getPref(FPref.UI_ALT_PLAYERZONETABS))) {
             setAltZoneTabMode("Vertical");
+        }
         //pixl cursor for adventure
         setCursor(null, "0");
         if (!GuiBase.isAndroid() || !getDeviceAdapter().getGamepads().isEmpty())
