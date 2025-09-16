@@ -242,7 +242,7 @@ public class PlayerControllerAi extends PlayerController {
         Map<Byte, Integer> result = new HashMap<>();
         for (int i = 0; i < manaAmount; ++i) {
             MagicColor.Color chosenColor = chooseColor("", sa, colorSet);
-            Byte chosen = chosenColor == null ? (byte)0 : chosenColor.getColormask();
+            Byte chosen = chosenColor == null ? (byte)0 : chosenColor.getColorMask();
             if (result.containsKey(chosen)) {
                 result.put(chosen, result.get(chosen) + 1);
             } else {
