@@ -100,10 +100,10 @@ public class ConquestAEtherScreen extends FScreen {
     }
 
     private void updateFilteredPool() {
-        Predicate<PaperCard> predicate = btnColorFilter.buildFilterPredicate(null);
-        predicate = btnTypeFilter.buildFilterPredicate(predicate);
-        predicate = btnRarityFilter.buildFilterPredicate(predicate);
-        predicate = btnCMCFilter.buildFilterPredicate(predicate);
+        Predicate<PaperCard> predicate = btnColorFilter
+                .and(btnTypeFilter)
+                .and(btnRarityFilter)
+                .and(btnCMCFilter);
 
         final CardRarity selectedRarity = btnRarityFilter.selectedOption.getRarity();
 
@@ -344,7 +344,7 @@ public class ConquestAEtherScreen extends FScreen {
         }
     }
 
-    private class FilterButton extends FLabel {
+    private class FilterButton extends FLabel implements Predicate<PaperCard> {
         private final String caption;
         private final List<AEtherFilter> options;
         private AEtherFilter selectedOption;
@@ -383,11 +383,9 @@ public class ConquestAEtherScreen extends FScreen {
             }
         }
 
-        private Predicate<PaperCard> buildFilterPredicate(Predicate<PaperCard> predicate) {
-            if (predicate == null) {
-                return selectedOption.getPredicate();
-            }
-            return predicate.and(selectedOption.getPredicate());
+        @Override
+        public boolean test(PaperCard card) {
+            return selectedOption.test(card);
         }
 
         @Override
