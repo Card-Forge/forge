@@ -8,6 +8,7 @@ import java.util.StringTokenizer;
 import com.esotericsoftware.minlog.Log;
 
 import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.gui.GuiBase;
@@ -204,9 +205,9 @@ public class CardFaceSymbols {
     }
 
     public static void drawColorSet(Graphics g, ColorSet colorSet, int x, int y, int imageSize, boolean vertical) {
-        for (final ManaCostShard s : colorSet.getOrderedShards()) {
-            if (DECK_COLORSET.get(s.getImageKey())!=null)
-                FSkin.drawImage(g, DECK_COLORSET.get(s.getImageKey()), x, y, imageSize, imageSize);
+        for (final MagicColor.Color s : colorSet.getOrderedColors()) {
+            if (DECK_COLORSET.get(s.getShortName())!=null)
+                FSkin.drawImage(g, DECK_COLORSET.get(s.getShortName()), x, y, imageSize, imageSize);
             if (!vertical)
                 x += imageSize;
             else

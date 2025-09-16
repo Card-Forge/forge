@@ -186,8 +186,8 @@ public class CardFaceSymbols {
     public static void drawColorSet(Graphics g, ColorSet colorSet, float x, float y, final float imageSize, boolean vertical) {
         final float dx = imageSize;
 
-        for (final ManaCostShard s : colorSet.getOrderedShards()) {
-            drawSymbol(s.getImageKey(), g, x, y, imageSize, imageSize);
+        for (final MagicColor.Color s : colorSet.getOrderedColors()) {
+            drawSymbol(s.getShortName(), g, x, y, imageSize, imageSize);
             if (!vertical)
                 x += dx;
             else

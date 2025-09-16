@@ -11,7 +11,6 @@ import com.google.common.collect.Sets;
 
 import forge.card.*;
 import forge.card.CardType.CoreType;
-import forge.card.mana.ManaCostShard;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckFormat;
@@ -320,10 +319,9 @@ public class ConquestUtil {
 
     public static AEtherFilter getColorFilter(ColorSet color) {
         StringBuilder name = new StringBuilder();
-        for (ManaCostShard s : color.getOrderedShards()) {
-            name.append(s.toString());
+        for (MagicColor.Color s : color.getOrderedColors()) {
+            name.append(s.getShortName());
         }
-        name = new StringBuilder(name.toString().replaceAll("[{}]", "")); //remove all brackets
         try {
             return AEtherFilter.valueOf(name.toString());
         }

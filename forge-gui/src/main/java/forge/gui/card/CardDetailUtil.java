@@ -5,7 +5,6 @@ import forge.card.CardRarity;
 import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.card.mana.ManaCostShard;
 import forge.deck.DeckRecognizer;
 import forge.game.GameView;
 import forge.game.card.Card;
@@ -100,7 +99,7 @@ public class CardDetailUtil {
                 borderColors.add(DetailColors.MULTICOLOR);
             }
             else { //for 3 colors or fewer, return all colors in shard order
-                for (ManaCostShard shard : cardColors.getOrderedShards()) {
+                for (MagicColor.Color shard : cardColors.getOrderedColors()) {
                     switch (shard.getColorMask()) {
                     case MagicColor.WHITE:
                         borderColors.add(DetailColors.WHITE);

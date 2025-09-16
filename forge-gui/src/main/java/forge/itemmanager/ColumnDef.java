@@ -377,7 +377,7 @@ public enum ColumnDef {
     }
 
     private static ColorSet toColor(final InventoryItem i) {
-        return i instanceof IPaperCard ? ((IPaperCard) i).getRules().getColor() : ColorSet.getNullColor();
+        return i instanceof IPaperCard ? ((IPaperCard) i).getRules().getColor() : ColorSet.NO_COLORS;
     }
 
     private static Integer toPower(final InventoryItem i) {

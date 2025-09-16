@@ -1015,7 +1015,7 @@ public class DeckRecognizer {
             return String.format("%s // %s", getMagicColourLabel(magicColor1), getMagicColourLabel(magicColor2));
         String localisedName1 = magicColor1.getLocalizedName();
         String localisedName2 = magicColor2.getLocalizedName();
-        String comboManaSymbol = manaSymbolsMap.get(magicColor1.getColormask() | magicColor2.getColormask());
+        String comboManaSymbol = manaSymbolsMap.get(magicColor1.getColorMask() | magicColor2.getColorMask());
         return String.format("%s/%s {%s}", localisedName1, localisedName2, comboManaSymbol);
     }
 

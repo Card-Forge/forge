@@ -2263,7 +2263,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public final ColorSet getMarkedColors() {
         if (markedColor == null) {
-            return ColorSet.getNullColor();
+            return ColorSet.NO_COLORS;
         }
         return markedColor;
     }
