@@ -1474,7 +1474,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
                 if (ZoneType.Exile.equals(destination) && sa.hasParam("WithCountersType")) {
                     CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
-                    int cAmount = AbilityUtils.calculateAmount(sa.getOriginalHost(), sa.getParamOrDefault("WithCountersAmount", "1"), sa);
+                    int cAmount = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
                     GameEntityCounterTable table = new GameEntityCounterTable();
                     movedCard.addCounter(cType, cAmount, player, table);
                     table.replaceCounterEffect(game, sa, true);
