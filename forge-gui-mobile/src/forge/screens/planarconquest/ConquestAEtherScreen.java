@@ -110,7 +110,7 @@ public class ConquestAEtherScreen extends FScreen {
         filteredPool.clear();
         strictPool.clear();
         for (PaperCard card : pool) {
-            if (predicate == null || predicate.test(card)) {
+            if (predicate.test(card)) {
                 filteredPool.add(card);
                 if (selectedRarity == card.getRarity()) {
                     strictPool.add(card);
