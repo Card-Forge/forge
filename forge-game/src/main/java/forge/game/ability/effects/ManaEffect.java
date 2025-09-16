@@ -120,7 +120,7 @@ public class ManaEffect extends SpellAbilityEffect {
                                 throw new RuntimeException("ManaEffect::resolve() /*combo mana*/ - " + p + " color mana choice is empty for " + card.getName());
 
                             if (differentChoice) {
-                                fullOptions = ColorSet.fromMask(fullOptions.getColor() - chosenColor.getColormask());
+                                fullOptions = ColorSet.fromMask(fullOptions.getColor() - chosenColor.getColorMask());
                             }
                             choice = chosenColor.getShortName();
                         }
