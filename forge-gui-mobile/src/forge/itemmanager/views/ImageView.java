@@ -1099,10 +1099,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 deckSelectMode = true;
                 deckProxy = (DeckProxy) item;
             }
-            if (item instanceof PaperCard) {
+            if (item instanceof PaperCard pc) {
                 showRanking = itemManager.getShowRanking() && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_OVERLAY_DRAFT_RANKING);
                 if (showRanking) {
-                    double score = CardRanker.getRawScore((PaperCard) item);
+                    double score = CardRanker.getRawScore(pc);
                     draftRank = score <= 0 ? 0 : score > 99 ? 99 : (int) Math.round(CardRanker.getRawScore((PaperCard) item));
                     if (draftRank >= 90) {
                         draftRankImage = FSkinImage.DRAFTRANK_S;
@@ -1114,10 +1114,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         draftRankImage = FSkinImage.DRAFTRANK_C;
                     }
                 }
-                if (((PaperCard) item).getMarkedColors() != null) {
-                    markedColors = Arrays.stream(((PaperCard) item).getMarkedColors().getOrderedColors())
-                            .map(MagicColor.Color::getShortName)
-                            .collect(Collectors.joining());
+                if (pc.getMarkedColors() != null) {
+                    markedColors = pc.getMarkedColors().toString();
                 }
             }
             if(fnPrice != null) {
