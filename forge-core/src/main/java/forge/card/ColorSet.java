@@ -112,15 +112,10 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
 
     private ColorSet(Collection<Color> ordered) {
         this.orderedShards = ordered;
-        try {
         this.myColor = ordered.stream().map(Color::getColorMask).reduce((byte)0, (a, b) -> (byte)(a | b));
         this.orderWeight = this.getOrderWeight();
         this.enumSet = EnumSet.copyOf(ordered);
         this.desc = ordered.stream().map(Color::getShortName).collect(Collectors.joining());
-        } catch (Throwable e) {
-            e.printStackTrace();
-            throw e;
-        }
     }
 
     public static ColorSet fromMask(final int mask) {
