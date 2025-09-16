@@ -47,11 +47,11 @@ public class ChangeTextEffect extends SpellAbilityEffect {
                 if (originalColor == null) { // no original color (ie. any or absent)
                     possibleNewColors = ColorSet.ALL_COLORS;
                 } else { // may choose any except original color
-                    possibleNewColors = ColorSet.fromMask(originalColor.getColormask()).inverse();
+                    possibleNewColors = ColorSet.fromEnums(originalColor).inverse();
                 }
-                final byte newColor = sa.getActivatingPlayer().getController().chooseColor(
-                        Localizer.getInstance().getMessage("lblChooseNewColor"), sa, possibleNewColors).getColormask();
-                changedColorWordNew = TextUtil.capitalize(MagicColor.toLongString(newColor));
+                MagicColor.Color newColor = sa.getActivatingPlayer().getController().chooseColor(
+                        Localizer.getInstance().getMessage("lblChooseNewColor"), sa, possibleNewColors);
+                changedColorWordNew = TextUtil.capitalize(newColor.getName());
             } else {
                 changedColorWordNew = changedColorWordsArray[1];
             }
