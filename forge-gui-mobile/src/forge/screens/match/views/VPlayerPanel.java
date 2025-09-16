@@ -79,6 +79,7 @@ public class VPlayerPanel extends FContainer {
     private boolean forMultiPlayer = false;
     public int adjustHeight = 1;
     private int selected = 0;
+    private boolean isBottomPlayer = false;
     public VPlayerPanel(PlayerView player0, boolean showHand, int playerCount) {
         player = player0;
         phaseIndicator = add(new VPhaseIndicator());
@@ -114,6 +115,10 @@ public class VPlayerPanel extends FContainer {
 
     public PlayerView getPlayer() {
         return player;
+    }
+
+    public void setBottomPlayer(boolean val) {
+        isBottomPlayer = val;
     }
 
     public void addZoneDisplay(ZoneType zoneType) {
@@ -429,32 +434,51 @@ public class VPlayerPanel extends FContainer {
         }
 
         //account for command zone if needed
+        float commandZoneWidth = 0f;
         int commandZoneCount = commandZone.getCount();
         if (commandZoneCount > 0) {
             float commandZoneHeight = height / 2;
-            float commandZoneWidth = Math.min(commandZoneCount, 2) * commandZone.getCardWidth(commandZoneHeight);
-            commandZone.setBounds(x + fieldWidth - commandZoneWidth, height - commandZoneHeight, commandZoneWidth, commandZoneHeight);
+            float minCommandCards = Forge.altZoneTabs && "Horizontal".equalsIgnoreCase(Forge.altZoneTabMode) ? 5 : 2;
+            commandZoneWidth = Math.min(commandZoneCount, minCommandCards) * commandZone.getCardWidth(commandZoneHeight);
+            float x2 = x + fieldWidth - commandZoneWidth;
+            float y2 = height - commandZoneHeight;
+            if (Forge.altZoneTabs && "Horizontal".equalsIgnoreCase(Forge.altZoneTabMode)) {
+                x2 = width - avatarWidth - commandZoneWidth;
+                y2 = 0;
+            }
+            commandZone.setBounds(x2, y2, commandZoneWidth, commandZoneHeight);
             if (isFlipped()) { //flip across x-axis if needed
                 commandZone.setTop(height - commandZone.getBottom());
             }
 
             field.setCommandZoneWidth(commandZoneWidth + 1); //ensure second row of field accounts for width of command zone and its border
-        }
-        else {
+        } else {
             field.setCommandZoneWidth(0);
         }
-
-        field.setBounds(x, 0, fieldWidth, height);
+        if (Forge.altZoneTabs && "Horizontal".equalsIgnoreCase(Forge.altZoneTabMode)) {
+            field.setBounds(x, 0, width - (avatarWidth / 16f), height);
+            field.getRow1().setWidth(width - (avatarWidth / 16f) - (commandZoneCount > 0 ? commandZoneWidth + 1 : 0));
+            field.getRow2().setWidth(width - (avatarWidth / 16f) - (selectedTab == null ? 0 : width / 2.25f));
+        } else
+            field.setBounds(x, 0, fieldWidth, height);
 
         x = width - displayAreaWidth-avatarWidth;
         for (InfoTab tab : tabs) {
-            tab.setDisplayBounds(x, 0, displayAreaWidth, height);
+            if (Forge.altZoneTabs && "Horizontal".equalsIgnoreCase(Forge.altZoneTabMode)) {
+                float w = (width / 2.25f);
+                float h = height / 2f;
+                tab.setDisplayBounds(width - w - avatarWidth, isBottomPlayer ? h : 0, w, h);
+            } else {
+                tab.setDisplayBounds(x, 0, displayAreaWidth, height);
+            }
         }
 
-        if (!Forge.altZoneTabs)
+        if (!Forge.altZoneTabs) {
             field.setFieldModifier(0);
-        else
-            field.setFieldModifier(avatarWidth/16);
+        } else {
+            if (!"Horizontal".equalsIgnoreCase(Forge.altZoneTabMode))
+                field.setFieldModifier(avatarWidth / 16);
+        }
     }
 
     @Override

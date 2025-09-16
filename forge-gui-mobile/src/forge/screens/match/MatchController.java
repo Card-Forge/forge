@@ -174,10 +174,13 @@ public class MatchController extends AbstractGuiGame {
             final VPlayerPanel playerPanel = new VPlayerPanel(p, isLocal || noHumans, players.size());
             if (isLocal && !init) {
                 playerPanels.add(0, playerPanel); //ensure local player always first among player panels
+                playerPanel.setBottomPlayer(true);
                 init = true;
             }
             else {
                 playerPanels.add(playerPanel);
+                if (playerPanel.equals(playerPanels.get(0)))
+                    playerPanel.setBottomPlayer(true);
             }
         }
         view = new MatchScreen(playerPanels);

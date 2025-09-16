@@ -53,6 +53,12 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         rotateCards180 = b0;
     }
 
+    private float getCardStackOffset() {
+        if (Forge.altZoneTabs && "Horizontal".equalsIgnoreCase(Forge.altZoneTabMode))
+            return 0.125f;
+        return CARD_STACK_OFFSET;
+    }
+
     protected void refreshCardPanels(Iterable<CardView> model) {
         clear();
 
@@ -78,7 +84,9 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
     @Override
     public void setVisible(boolean b0) {
-        if (isVisible() == b0) { return; }
+        if (isVisible() == b0) {
+            return;
+        }
         super.setVisible(b0);
         if (b0) { //when zone becomes visible, ensure display area of panels is updated and panels layed out
             for (CardAreaPanel pnl : cardPanels.get()) {
@@ -146,7 +154,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
                 CardAreaPanel attachedPanel = attachedPanels.get(i);
                 if (attachedPanel != null) {
                     int count = addCards(attachedPanel, x, y, cardWidth, cardHeight);
-                    x += count * cardWidth * CARD_STACK_OFFSET;
+                    x += count * cardWidth * getCardStackOffset();
                     totalCount += count;
                 }
             }
@@ -156,7 +164,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         cardPanel.setBounds(x, y, cardWidth, cardHeight);
 
         if (cardPanel.getNextPanelInStack() != null) { //add next panel in stack if needed
-            x += cardWidth * CARD_STACK_OFFSET;
+            x += cardWidth * getCardStackOffset();
             totalCount += addCards(cardPanel.getNextPanelInStack(), x, y, cardWidth, cardHeight);
         }
         return totalCount + 1;
@@ -165,6 +173,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
     protected float getCardWidth(float cardHeight) {
         return (cardHeight - 2 * FCardPanel.PADDING) / FCardPanel.ASPECT_RATIO + 2 * FCardPanel.PADDING; //ensure aspect ratio maintained after padding applied
     }
+
     protected float getCardHeight(float cardWidth) {
         return (cardWidth - 2 * FCardPanel.PADDING) * FCardPanel.ASPECT_RATIO + 2 * FCardPanel.PADDING; //ensure aspect ratio maintained after padding applied
     }
@@ -181,7 +190,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         for (CardAreaPanel cardPanel : new ArrayList<>(cardPanels.get())) {
             if (cardPanel != null) {
                 int count = addCards(cardPanel, x, y, cardWidth, cardHeight);
-                x += cardWidth + (count - 1) * cardWidth * CARD_STACK_OFFSET;
+                x += cardWidth + (count - 1) * cardWidth * getCardStackOffset();
             }
         }
 
@@ -197,7 +206,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
     @Override
     public String getActivateAction(int index) {
-        if(!GuiBase.isNetworkplay()) {
+        if (!GuiBase.isNetworkplay()) {
             //causes lag on netplay client side, also index shouldn't be out of bounds
             if (index >= 0 && index < orderedCards.get().size())
                 return MatchController.instance.getGameController().getActivateDescription(orderedCards.get().get(index));
@@ -266,9 +275,11 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         public CardAreaPanel getAttachedToPanel() {
             return attachedToPanel;
         }
+
         public void setAttachedToPanel(final CardAreaPanel attachedToPanel0) {
             attachedToPanel = attachedToPanel0;
         }
+
         public List<CardAreaPanel> getAttachedPanels() {
             if (attachedPanels == null) {
                 attachedPanels = new ArrayList<>();
@@ -278,15 +289,19 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             }
             return attachedPanels;
         }
+
         public CardAreaPanel getNextPanelInStack() {
             return nextPanelInStack;
         }
+
         public void setNextPanelInStack(CardAreaPanel nextPanelInStack0) {
             nextPanelInStack = nextPanelInStack0;
         }
+
         public CardAreaPanel getPrevPanelInStack() {
             return prevPanelInStack;
         }
+
         public void setPrevPanelInStack(CardAreaPanel prevPanelInStack0) {
             prevPanelInStack = prevPanelInStack0;
         }
@@ -324,8 +339,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
                     attachedPanels.remove(CardAreaPanel.get(getAttachedto));
                     setAttachedToPanel(null);
                 }
-            }
-            else {
+            } else {
                 setAttachedToPanel(null);
             }
         }
@@ -423,7 +437,9 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         }
 
         public void showZoom() {
-            if (displayArea == null) { return; }
+            if (displayArea == null) {
+                return;
+            }
 
             final List<CardView> cards = displayArea.orderedCards.get();
             CardZoom.show(cards, cards.indexOf(getCard()), displayArea);
@@ -444,10 +460,14 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         }
 
         private List<CardView> getOtherCardsToSelect(boolean selectOtherCardsInStack) {
-            if (!selectOtherCardsInStack) { return null; }
+            if (!selectOtherCardsInStack) {
+                return null;
+            }
 
             //on double-tap select all other cards in stack if any
-            if (prevPanelInStack == null && nextPanelInStack == null) { return null; }
+            if (prevPanelInStack == null && nextPanelInStack == null) {
+                return null;
+            }
 
             List<CardView> cards = new ArrayList<>();
 
@@ -490,7 +510,9 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
         public Vector2 getTargetingArrowOrigin() {
             //don't show targeting arrow unless in display area that's visible
-            if (displayArea == null || !displayArea.isVisible()) { return null; }
+            if (displayArea == null || !displayArea.isVisible()) {
+                return null;
+            }
 
             return getTargetingArrowOrigin(this, isTapped());
         }
@@ -517,8 +539,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
                 g.startRotateTransform(x + w / 2, y + h / 2, 180);
                 super.draw(g);
                 g.endTransform();
-            }
-            else {
+            } else {
                 super.draw(g);
             }
         }

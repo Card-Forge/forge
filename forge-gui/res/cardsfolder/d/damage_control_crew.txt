@@ -4,7 +4,7 @@ Types:Creature Human Citizen
 PT:3/3
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigCharm | TriggerDescription$ When this creature enters, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBRepair,DBImpound | CharmNum$ 1
-SVar:DBRepair:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.cmcGE4 | SpellDescription$ Repair — Return target card with mana value 4 or greater from your graveyard to your hand.
+SVar:DBRepair:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.YouCtrl+cmcGE4 | SpellDescription$ Repair — Return target card with mana value 4 or greater from your graveyard to your hand.
 SVar:DBImpound:DB$ ChangeZone | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Impound — Exile target artifact or enchantment.
 DeckHas:Ability$Graveyard
 Oracle:When this creature enters, choose one —\n• Repair — Return target card with mana value 4 or greater from your graveyard to your hand.\n• Impound — Exile target artifact or enchantment.
