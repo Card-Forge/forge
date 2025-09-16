@@ -298,13 +298,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         boolean activateForCost = ComputerUtil.activateForCost(sa, ai);
 
         if (sa.hasParam("Origin")) {
-            try {
-                origin = ZoneType.listValueOf(sa.getParam("Origin"));
-            } catch (IllegalArgumentException ex) {
-                // This happens when Origin is something like
-                // "Graveyard,Library" (Doomsday)
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            }
+            origin = ZoneType.listValueOf(sa.getParam("Origin"));
         }
         final String destination = sa.getParam("Destination");
 

@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import javax.swing.JTable;
 
 import forge.card.ColorSet;
-import forge.card.mana.ManaCostShard;
+import forge.card.MagicColor;
 import forge.toolbox.CardFaceSymbols;
 
 public class ColorSetRenderer extends ItemCellRenderer {
@@ -57,8 +57,8 @@ public class ColorSetRenderer extends ItemCellRenderer {
         final int offsetIfNoSpace = cntGlyphs > 1 ? (cellWidth - padding0 - elemtWidth) / (cntGlyphs - 1) : elemtWidth + elemtGap;
         final int dx = Math.min(elemtWidth + elemtGap, offsetIfNoSpace);
 
-        for (final ManaCostShard s : cs.getOrderedShards()) {
-            CardFaceSymbols.drawManaSymbol(s.getImageKey(), g, x, y);
+        for (final MagicColor.Color s : cs.getOrderedColors()) {
+            CardFaceSymbols.drawManaSymbol(s.getShortName(), g, x, y);
             x += dx;
         }
     }

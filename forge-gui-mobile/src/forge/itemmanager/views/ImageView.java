@@ -16,7 +16,6 @@ import forge.assets.*;
 import forge.assets.FSkinColor.Colors;
 import forge.card.*;
 import forge.card.CardRenderer.CardStackPosition;
-import forge.card.mana.ManaCostShard;
 import forge.deck.*;
 import forge.deck.io.DeckPreferences;
 import forge.game.card.CardView;
@@ -37,7 +36,6 @@ import forge.util.Utils;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static forge.assets.FSkin.getDefaultSkinFile;
@@ -1100,10 +1098,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 deckSelectMode = true;
                 deckProxy = (DeckProxy) item;
             }
-            if (item instanceof PaperCard) {
+            if (item instanceof PaperCard pc) {
                 showRanking = itemManager.getShowRanking() && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_OVERLAY_DRAFT_RANKING);
                 if (showRanking) {
-                    double score = CardRanker.getRawScore((PaperCard) item);
+                    double score = CardRanker.getRawScore(pc);
                     draftRank = score <= 0 ? 0 : score > 99 ? 99 : (int) Math.round(CardRanker.getRawScore((PaperCard) item));
                     if (draftRank >= 90) {
                         draftRankImage = FSkinImage.DRAFTRANK_S;
@@ -1115,10 +1113,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         draftRankImage = FSkinImage.DRAFTRANK_C;
                     }
                 }
-                if (((PaperCard) item).getMarkedColors() != null) {
-                    markedColors = Arrays.stream(((PaperCard) item).getMarkedColors().getOrderedShards())
-                            .map(ManaCostShard::toString)
-                            .collect(Collectors.joining());
+                if (pc.getMarkedColors() != null) {
+                    markedColors = pc.getMarkedColors().toString();
                 }
             }
             if(fnPrice != null) {

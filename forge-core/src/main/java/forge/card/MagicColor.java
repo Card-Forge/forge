@@ -166,7 +166,7 @@ public final class MagicColor {
         COLORLESS(Constant.COLORLESS, MagicColor.COLORLESS, "C", "lblColorless");
 
         private final String name, shortName, symbol;
-        private final String localizedName;
+        private final String label;
         private final byte colormask;
 
         Color(String name0, byte colormask0, String shortName, String label) {
@@ -174,7 +174,7 @@ public final class MagicColor {
             colormask = colormask0;
             this.shortName = shortName;
             symbol = "{" + shortName + "}";
-            localizedName = Localizer.getInstance().getMessage(label);
+            this.label = label;
         }
 
         public static Color fromByte(final byte color) {
@@ -196,10 +196,10 @@ public final class MagicColor {
         }
 
         public String getLocalizedName() {
-            return localizedName;
+            return Localizer.getInstance().getMessage(label);
         }
 
-        public byte getColormask() {
+        public byte getColorMask() {
             return colormask;
         }
         public String getSymbol() {

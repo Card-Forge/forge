@@ -274,14 +274,15 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         MatchController.instance.resetPlayerPanels();
                 }
             }, 1);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_PLAYERZONETABS,
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_ALT_PLAYERZONETABS,
             Forge.getLocalizer().getMessage("lblAltZoneTabs"),
-            Forge.getLocalizer().getMessage("nlAltZoneTabs")) {
+            Forge.getLocalizer().getMessage("nlAltZoneTabs"),
+            Lists.newArrayList("Off", "Vertical", "Horizontal")) {
                 @Override
-                public void select() {
-                    super.select();
+                public void valueChanged(String newValue) {
+                    super.valueChanged(newValue);
                     //update
-                    Forge.altZoneTabs = FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_PLAYERZONETABS);
+                    Forge.setAltZoneTabMode(FModel.getPreferences().getPref(FPref.UI_ALT_PLAYERZONETABS));
                     if (MatchController.instance != null)
                         MatchController.instance.resetPlayerPanels();
                 }
