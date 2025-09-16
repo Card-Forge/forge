@@ -41,7 +41,7 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
     private static final long serialVersionUID = 794691267379929080L;
 
     // needs to be before other static
-    private static final Color[][] colorOrderLookup = new Color[MagicColor.ALL_COLORS + 1][];
+    private static final ColorSet[] cache = new ColorSet[MagicColor.ALL_COLORS + 1];
     static {
         byte COLORLESS = MagicColor.COLORLESS;
         byte WHITE = MagicColor.WHITE;
@@ -57,50 +57,51 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
         Color G = Color.GREEN;
 
         //colorless
-        colorOrderLookup[COLORLESS] = new Color[] { C };
+        cache[COLORLESS] = new ColorSet(Arrays.asList(C));
 
         //mono-color
-        colorOrderLookup[WHITE] = new Color[] { W };
-        colorOrderLookup[BLUE] = new Color[] { U };
-        colorOrderLookup[BLACK] = new Color[] { B };
-        colorOrderLookup[RED] = new Color[] { R };
-        colorOrderLookup[GREEN] = new Color[] { G };
+        cache[WHITE] = new ColorSet(Arrays.asList(W));
+        cache[BLUE] = new ColorSet(Arrays.asList(U));
+        cache[BLACK] = new ColorSet(Arrays.asList(B));
+        cache[RED] = new ColorSet(Arrays.asList(R));
+        cache[GREEN] = new ColorSet(Arrays.asList(G));
 
         //two-color
-        colorOrderLookup[WHITE | BLUE] = new Color[] { W, U };
-        colorOrderLookup[WHITE | BLACK] = new Color[] { W, B };
-        colorOrderLookup[BLUE | BLACK] = new Color[] { U, B };
-        colorOrderLookup[BLUE | RED] = new Color[] { U, R };
-        colorOrderLookup[BLACK | RED] = new Color[] { B, R };
-        colorOrderLookup[BLACK | GREEN] = new Color[] { B, G };
-        colorOrderLookup[RED | GREEN] = new Color[] { R, G };
-        colorOrderLookup[RED | WHITE] = new Color[] { R, W };
-        colorOrderLookup[GREEN | WHITE] = new Color[] { G, W };
-        colorOrderLookup[GREEN | BLUE] = new Color[] { G, U };
+        cache[WHITE | BLUE] = new ColorSet(Arrays.asList(W, U));
+        cache[WHITE | BLACK] = new ColorSet(Arrays.asList(W, B));
+        cache[BLUE | BLACK] = new ColorSet(Arrays.asList(U, B));
+        cache[BLUE | RED] = new ColorSet(Arrays.asList(U, R));
+        cache[BLACK | RED] = new ColorSet(Arrays.asList(B, R));
+        cache[BLACK | GREEN] = new ColorSet(Arrays.asList(B, G));
+        cache[RED | GREEN] = new ColorSet(Arrays.asList(R, G));
+        cache[RED | WHITE] = new ColorSet(Arrays.asList(R, W));
+        cache[GREEN | WHITE] = new ColorSet(Arrays.asList(G, W));
+        cache[GREEN | BLUE] = new ColorSet(Arrays.asList(G, U));
 
         //three-color
-        colorOrderLookup[WHITE | BLUE | BLACK] = new Color[] { W, U, B };
-        colorOrderLookup[WHITE | BLACK | GREEN] = new Color[] { W, B, G };
-        colorOrderLookup[BLUE | BLACK | RED] = new Color[] { U, B, R };
-        colorOrderLookup[BLUE | RED | WHITE] = new Color[] { U, R, W };
-        colorOrderLookup[BLACK | RED | GREEN] = new Color[] { B, R, G };
-        colorOrderLookup[BLACK | GREEN | BLUE] = new Color[] { B, G, U };
-        colorOrderLookup[RED | GREEN | WHITE] = new Color[] { R, G, W };
-        colorOrderLookup[RED | WHITE | BLACK] = new Color[] { R, W, B };
-        colorOrderLookup[GREEN | WHITE | BLUE] = new Color[] { G, W, U };
-        colorOrderLookup[GREEN | BLUE | RED] = new Color[] { G, U, R };
+        cache[WHITE | BLUE | BLACK] = new ColorSet(Arrays.asList(W, U, B));
+        cache[WHITE | BLACK | GREEN] = new ColorSet(Arrays.asList(W, B, G));
+        cache[BLUE | BLACK | RED] = new ColorSet(Arrays.asList(U, B, R));
+        cache[BLUE | RED | WHITE] = new ColorSet(Arrays.asList(U, R, W));
+        cache[BLACK | RED | GREEN] = new ColorSet(Arrays.asList(B, R, G));
+        cache[BLACK | GREEN | BLUE] = new ColorSet(Arrays.asList(B, G, U));
+        cache[RED | GREEN | WHITE] = new ColorSet(Arrays.asList(R, G, W));
+        cache[RED | WHITE | BLACK] = new ColorSet(Arrays.asList(R, W, B));
+        cache[GREEN | WHITE | BLUE] = new ColorSet(Arrays.asList(G, W, U));
+        cache[GREEN | BLUE | RED] = new ColorSet(Arrays.asList(G, U, R));
 
         //four-color
-        colorOrderLookup[WHITE | BLUE | BLACK | RED] = new Color[] { W, U, B, R };
-        colorOrderLookup[BLUE | BLACK | RED | GREEN] = new Color[] { U, B, R, G };
-        colorOrderLookup[BLACK | RED | GREEN | WHITE] = new Color[] { B, R, G, W };
-        colorOrderLookup[RED | GREEN | WHITE | BLUE] = new Color[] { R, G, W, U };
-        colorOrderLookup[GREEN | WHITE | BLUE | BLACK] = new Color[] { G, W, U, B };
+        cache[WHITE | BLUE | BLACK | RED] = new ColorSet(Arrays.asList(W, U, B, R));
+        cache[BLUE | BLACK | RED | GREEN] = new ColorSet(Arrays.asList(U, B, R, G));
+        cache[BLACK | RED | GREEN | WHITE] = new ColorSet(Arrays.asList(B, R, G, W));
+        cache[RED | GREEN | WHITE | BLUE] = new ColorSet(Arrays.asList(R, G, W, U));
+        cache[GREEN | WHITE | BLUE | BLACK] = new ColorSet(Arrays.asList(G, W, U, B));
 
         //five-color
-        colorOrderLookup[WHITE | BLUE | BLACK | RED | GREEN] = new Color[] { W, U, B, R, G };
+        cache[WHITE | BLUE | BLACK | RED | GREEN] = new ColorSet(Arrays.asList(W, U, B, R, G));
     }
 
+    private final Collection<Color> orderedShards;
     private final byte myColor;
     private final float orderWeight;
     private final Set<Color> enumSet;
@@ -111,29 +112,16 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
     public static final ColorSet ALL_COLORS = fromMask(MagicColor.ALL_COLORS);
     public static final ColorSet NO_COLORS = fromMask(MagicColor.COLORLESS);
 
-    private ColorSet(final byte mask) {
-        this.myColor = mask;
+    private ColorSet(Collection<Color> ordered) {
+        this.orderedShards = ordered;
+        this.myColor = ordered.stream().map(Color::getColorMask).reduce(0, (a, b) -> a | b);
         this.orderWeight = this.getOrderWeight();
-        if (this.isColorless()) {
-            enumSet = EnumSet.of(Color.COLORLESS);
-        } else {
-            List<Color> list = new ArrayList<>();
-            for (Color c : Color.values()) {
-                if (hasAnyColor(c.getColorMask())) {
-                    list.add(c);
-                }
-            }
-            enumSet = EnumSet.copyOf(list);
-        }
-        final Color[] orderedShards = getOrderedColors();
-        desc = Arrays.stream(orderedShards).map(Color::getShortName).collect(Collectors.joining());
+        this.enumSet = EnumSet.copyOf(ordered);
+        this.desc = ordered.stream().map(Color::getShortName).collect(Collectors.joining());
     }
 
     public static ColorSet fromMask(final int mask) {
         final int mask32 = mask & MagicColor.ALL_COLORS;
-        if (cache[mask32] == null) {
-            cache[mask32] = new ColorSet((byte) mask32);
-        }
         return cache[mask32];
     }
 
@@ -441,7 +429,7 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
     }
 
     //Get array of mana cost shards for color set in the proper order
-    public Color[] getOrderedColors() {
-        return colorOrderLookup[myColor];
+    public Collection<Color> getOrderedColors() {
+        return orderedShards;
     }
 }
