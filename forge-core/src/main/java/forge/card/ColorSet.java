@@ -107,8 +107,6 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
     private final Set<Color> enumSet;
     private final String desc;
 
-    private static final ColorSet[] cache = new ColorSet[32];
-
     public static final ColorSet ALL_COLORS = fromMask(MagicColor.ALL_COLORS);
     public static final ColorSet NO_COLORS = fromMask(MagicColor.COLORLESS);
 
