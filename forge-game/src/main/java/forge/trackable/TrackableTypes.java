@@ -464,7 +464,7 @@ public class TrackableTypes {
     public static final TrackableType<ColorSet> ColorSetType = new TrackableType<ColorSet>() {
         @Override
         public ColorSet getDefaultValue() {
-            return ColorSet.getNullColor();
+            return ColorSet.NO_COLORS;
         }
 
         @Override

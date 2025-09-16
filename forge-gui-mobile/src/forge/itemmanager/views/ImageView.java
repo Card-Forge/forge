@@ -16,7 +16,6 @@ import forge.assets.*;
 import forge.assets.FSkinColor.Colors;
 import forge.card.*;
 import forge.card.CardRenderer.CardStackPosition;
-import forge.card.mana.ManaCostShard;
 import forge.deck.*;
 import forge.deck.io.DeckPreferences;
 import forge.game.card.CardView;
@@ -1116,8 +1115,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     }
                 }
                 if (((PaperCard) item).getMarkedColors() != null) {
-                    markedColors = Arrays.stream(((PaperCard) item).getMarkedColors().getOrderedShards())
-                            .map(ManaCostShard::toString)
+                    markedColors = Arrays.stream(((PaperCard) item).getMarkedColors().getOrderedColors())
+                            .map(MagicColor.Color::getShortName)
                             .collect(Collectors.joining());
                 }
             }

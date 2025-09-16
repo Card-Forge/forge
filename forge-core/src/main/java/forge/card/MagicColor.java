@@ -199,7 +199,7 @@ public final class MagicColor {
             return localizedName;
         }
 
-        public byte getColormask() {
+        public byte getColorMask() {
             return colormask;
         }
         public String getSymbol() {
