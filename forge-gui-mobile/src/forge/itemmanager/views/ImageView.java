@@ -36,7 +36,6 @@ import forge.util.Utils;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static forge.assets.FSkin.getDefaultSkinFile;
