@@ -114,7 +114,7 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
         this.orderedShards = Arrays.asList(ordered);
         this.myColor = orderedShards.stream().map(Color::getColorMask).reduce((byte)0, (a, b) -> (byte)(a | b));
         this.orderWeight = this.getOrderWeight();
-        this.enumSet = EnumSet.copyOf(ordered);
+        this.enumSet = EnumSet.copyOf(orderedShards);
         this.desc = orderedShards.stream().map(Color::getShortName).collect(Collectors.joining());
     }
 
