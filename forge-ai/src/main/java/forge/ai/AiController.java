@@ -97,6 +97,7 @@ public class AiController {
     private int lastAttackAggression;
     private boolean useLivingEnd;
     private List<SpellAbility> skipped;
+    private boolean timeoutReached;
 
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
@@ -1664,6 +1665,9 @@ public class AiController {
             Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
         }
 
+        // in case of infinite loop reset below would not be reached
+        timeoutReached = false;
+
         FutureTask<SpellAbility> future = new FutureTask<>(() -> {
             //avoid ComputerUtil.aiLifeInDanger in loops as it slows down a lot.. call this outside loops will generally be fast...
             boolean isLifeInDanger = useLivingEnd && ComputerUtil.aiLifeInDanger(player, true, 0);
@@ -1671,6 +1675,11 @@ public class AiController {
                 // Don't add Counterspells to the "normal" playcard lookups
                 if (skipCounter && sa.getApi() == ApiType.Counter) {
                     continue;
+                }
+
+                if (timeoutReached) {
+                    timeoutReached = false;
+                    break;
                 }
 
                 if (sa.getHostCard().hasKeyword(Keyword.STORM)
@@ -1752,7 +1761,10 @@ public class AiController {
                 t.stop();
             } catch (UnsupportedOperationException ex) {
                 // Android and Java 20 dropped support to stop so sadly thread will keep running
+                timeoutReached = true;
                 future.cancel(true);
+                // TODO wait a few more seconds to try and exit at a safe point before letting the engine continue
+                // TODO mark some as skipped to increase chance to find something playable next priority
             }
             return null;
         }
