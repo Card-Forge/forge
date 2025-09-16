@@ -111,14 +111,15 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
     public static final ColorSet NO_COLORS = fromMask(MagicColor.COLORLESS);
 
     private ColorSet(Collection<Color> ordered) {
-        try {
         this.orderedShards = ordered;
+        try {
         this.myColor = ordered.stream().map(Color::getColorMask).reduce((byte)0, (a, b) -> (byte)(a | b));
         this.orderWeight = this.getOrderWeight();
         this.enumSet = EnumSet.copyOf(ordered);
         this.desc = ordered.stream().map(Color::getShortName).collect(Collectors.joining());
         } catch (Throwable e) {
             e.printStackTrace();
+            throw e;
         }
     }
 
