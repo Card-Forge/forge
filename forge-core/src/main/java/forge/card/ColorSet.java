@@ -57,48 +57,48 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
         Color G = Color.GREEN;
 
         //colorless
-        cache[COLORLESS] = new ColorSet(Arrays.asList(C));
+        cache[COLORLESS] = new ColorSet(C);
 
         //mono-color
-        cache[WHITE] = new ColorSet(Arrays.asList(W));
-        cache[BLUE] = new ColorSet(Arrays.asList(U));
-        cache[BLACK] = new ColorSet(Arrays.asList(B));
-        cache[RED] = new ColorSet(Arrays.asList(R));
-        cache[GREEN] = new ColorSet(Arrays.asList(G));
+        cache[WHITE] = new ColorSet(W);
+        cache[BLUE] = new ColorSet(U);
+        cache[BLACK] = new ColorSet(B);
+        cache[RED] = new ColorSet(R);
+        cache[GREEN] = new ColorSet(G);
 
         //two-color
-        cache[WHITE | BLUE] = new ColorSet(Arrays.asList(W, U));
-        cache[WHITE | BLACK] = new ColorSet(Arrays.asList(W, B));
-        cache[BLUE | BLACK] = new ColorSet(Arrays.asList(U, B));
-        cache[BLUE | RED] = new ColorSet(Arrays.asList(U, R));
-        cache[BLACK | RED] = new ColorSet(Arrays.asList(B, R));
-        cache[BLACK | GREEN] = new ColorSet(Arrays.asList(B, G));
-        cache[RED | GREEN] = new ColorSet(Arrays.asList(R, G));
-        cache[RED | WHITE] = new ColorSet(Arrays.asList(R, W));
-        cache[GREEN | WHITE] = new ColorSet(Arrays.asList(G, W));
-        cache[GREEN | BLUE] = new ColorSet(Arrays.asList(G, U));
+        cache[WHITE | BLUE] = new ColorSet(W, U);
+        cache[WHITE | BLACK] = new ColorSet(W, B);
+        cache[BLUE | BLACK] = new ColorSet(U, B);
+        cache[BLUE | RED] = new ColorSet(U, R);
+        cache[BLACK | RED] = new ColorSet(B, R);
+        cache[BLACK | GREEN] = new ColorSet(B, G);
+        cache[RED | GREEN] = new ColorSet(R, G);
+        cache[RED | WHITE] = new ColorSet(R, W);
+        cache[GREEN | WHITE] = new ColorSet(G, W);
+        cache[GREEN | BLUE] = new ColorSet(G, U);
 
         //three-color
-        cache[WHITE | BLUE | BLACK] = new ColorSet(Arrays.asList(W, U, B));
-        cache[WHITE | BLACK | GREEN] = new ColorSet(Arrays.asList(W, B, G));
-        cache[BLUE | BLACK | RED] = new ColorSet(Arrays.asList(U, B, R));
-        cache[BLUE | RED | WHITE] = new ColorSet(Arrays.asList(U, R, W));
-        cache[BLACK | RED | GREEN] = new ColorSet(Arrays.asList(B, R, G));
-        cache[BLACK | GREEN | BLUE] = new ColorSet(Arrays.asList(B, G, U));
-        cache[RED | GREEN | WHITE] = new ColorSet(Arrays.asList(R, G, W));
-        cache[RED | WHITE | BLACK] = new ColorSet(Arrays.asList(R, W, B));
-        cache[GREEN | WHITE | BLUE] = new ColorSet(Arrays.asList(G, W, U));
-        cache[GREEN | BLUE | RED] = new ColorSet(Arrays.asList(G, U, R));
+        cache[WHITE | BLUE | BLACK] = new ColorSet(W, U, B);
+        cache[WHITE | BLACK | GREEN] = new ColorSet(W, B, G);
+        cache[BLUE | BLACK | RED] = new ColorSet(U, B, R);
+        cache[BLUE | RED | WHITE] = new ColorSet(U, R, W);
+        cache[BLACK | RED | GREEN] = new ColorSet(B, R, G);
+        cache[BLACK | GREEN | BLUE] = new ColorSet(B, G, U);
+        cache[RED | GREEN | WHITE] = new ColorSet(R, G, W);
+        cache[RED | WHITE | BLACK] = new ColorSet(R, W, B);
+        cache[GREEN | WHITE | BLUE] = new ColorSet(G, W, U);
+        cache[GREEN | BLUE | RED] = new ColorSet(G, U, R);
 
         //four-color
-        cache[WHITE | BLUE | BLACK | RED] = new ColorSet(Arrays.asList(W, U, B, R));
-        cache[BLUE | BLACK | RED | GREEN] = new ColorSet(Arrays.asList(U, B, R, G));
-        cache[BLACK | RED | GREEN | WHITE] = new ColorSet(Arrays.asList(B, R, G, W));
-        cache[RED | GREEN | WHITE | BLUE] = new ColorSet(Arrays.asList(R, G, W, U));
-        cache[GREEN | WHITE | BLUE | BLACK] = new ColorSet(Arrays.asList(G, W, U, B));
+        cache[WHITE | BLUE | BLACK | RED] = new ColorSet(W, U, B, R);
+        cache[BLUE | BLACK | RED | GREEN] = new ColorSet(U, B, R, G);
+        cache[BLACK | RED | GREEN | WHITE] = new ColorSet(B, R, G, W);
+        cache[RED | GREEN | WHITE | BLUE] = new ColorSet(R, G, W, U);
+        cache[GREEN | WHITE | BLUE | BLACK] = new ColorSet(G, W, U, B);
 
         //five-color
-        cache[WHITE | BLUE | BLACK | RED | GREEN] = new ColorSet(Arrays.asList(W, U, B, R, G));
+        cache[WHITE | BLUE | BLACK | RED | GREEN] = new ColorSet(W, U, B, R, G);
     }
 
     private final Collection<Color> orderedShards;
@@ -110,12 +110,12 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
     public static final ColorSet ALL_COLORS = fromMask(MagicColor.ALL_COLORS);
     public static final ColorSet NO_COLORS = fromMask(MagicColor.COLORLESS);
 
-    private ColorSet(Collection<Color> ordered) {
-        this.orderedShards = ordered;
-        this.myColor = ordered.stream().map(Color::getColorMask).reduce((byte)0, (a, b) -> (byte)(a | b));
+    private ColorSet(final Color... ordered) {
+        this.orderedShards = Arrays.asList(ordered);
+        this.myColor = orderedShards.stream().map(Color::getColorMask).reduce((byte)0, (a, b) -> (byte)(a | b));
         this.orderWeight = this.getOrderWeight();
         this.enumSet = EnumSet.copyOf(ordered);
-        this.desc = ordered.stream().map(Color::getShortName).collect(Collectors.joining());
+        this.desc = orderedShards.stream().map(Color::getShortName).collect(Collectors.joining());
     }
 
     public static ColorSet fromMask(final int mask) {
@@ -123,9 +123,9 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
         return cache[mask32];
     }
 
-    public static ColorSet fromEnums(final MagicColor.Color... colors) {
+    public static ColorSet fromEnums(final Color... colors) {
         byte mask = 0;
-        for (MagicColor.Color e : colors) {
+        for (Color e : colors) {
             mask |= e.getColorMask();
         }
         return fromMask(mask);
@@ -422,7 +422,7 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
         }
     }
 
-    public Stream<MagicColor.Color> stream() {
+    public Stream<Color> stream() {
         return this.toEnumSet().stream();
     }
 
