@@ -845,6 +845,8 @@ public class Game {
             p.revealFaceDownCards();
         }
 
+        // TODO free any mindslaves
+
         for (Card c : cards) {
             // CR 800.4d if card is controlled by opponent, LTB should trigger
             if (c.getOwner().equals(p) && c.getController().equals(p)) {
@@ -880,8 +882,6 @@ public class Game {
                         }
                         triggerList.put(c.getZone().getZoneType(), null, c);
                         getAction().ceaseToExist(c, false);
-                        // CR 603.2f owner of trigger source lost game
-                        getTriggerHandler().clearDelayedTrigger(c);
                     }
                 } else {
                     // return stolen permanents

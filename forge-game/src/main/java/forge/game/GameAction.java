@@ -974,6 +974,7 @@ public class GameAction {
         // in some corner cases there's no zone yet (copied spell that failed targeting)
         if (z != null) {
             z.remove(c);
+            c.setZone(c.getOwner().getZone(ZoneType.None));
             if (z.is(ZoneType.Battlefield)) {
                 c.runLeavesPlayCommands();
             }
