@@ -146,12 +146,12 @@ public class VManaPool extends VDisplayArea {
             if (h > maxImageHeight) {
                 h /= 2;
             }
-            float w2 = Forge.altZoneTabs && "Horizontal".equalsIgnoreCase(Forge.altZoneTabMode)
+            float w = Forge.altZoneTabs && "Horizontal".equalsIgnoreCase(Forge.altZoneTabMode)
                 ? image.getWidth() * h * 0.7f / image.getHeight() : image.getWidth() * h / image.getHeight();
-            float w =  w2;
             while (w > getWidth()) {
                 h /= 2;
-                w = w2;
+                w = Forge.altZoneTabs && "Horizontal".equalsIgnoreCase(Forge.altZoneTabMode)
+                    ? image.getWidth() * h * 0.7f / image.getHeight() : image.getWidth() * h / image.getHeight();
             }
             float x = (getWidth() - w) / 2;
             float y = gapY + (maxImageHeight - h) / 2;
