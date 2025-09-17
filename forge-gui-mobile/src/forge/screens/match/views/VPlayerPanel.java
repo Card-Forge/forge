@@ -388,11 +388,15 @@ public class VPlayerPanel extends FContainer {
         field.setFieldModifier(0);
     }
 
+    private float initW, initH, commandZoneWidth, commandZoneCount, avatarWidth, prefWidth;
+    private final float mod = 2.4f;
     private void doLandscapeLayout(float width, float height) {
+        initW = width;
+        initH = height;
         float x = 0;
         float y = 0;
         float yAlt = 0;
-        float avatarWidth = Forge.altZoneTabs ? avatar.getWidth() : 0;
+        avatarWidth = Forge.altZoneTabs ? avatar.getWidth() : 0;
         avatar.setPosition(x, y);
         y += avatar.getHeight();
 
@@ -434,8 +438,8 @@ public class VPlayerPanel extends FContainer {
         }
 
         //account for command zone if needed
-        float commandZoneWidth = 0f;
-        int commandZoneCount = commandZone.getCount();
+        commandZoneWidth = 0f;
+        commandZoneCount = commandZone.getCount();
         if (commandZoneCount > 0) {
             float commandZoneHeight = height / 2;
             float minCommandCards = Forge.altZoneTabs && "Horizontal".equalsIgnoreCase(Forge.altZoneTabMode) ? 5 : 2;
@@ -455,19 +459,17 @@ public class VPlayerPanel extends FContainer {
         } else {
             field.setCommandZoneWidth(0);
         }
+        prefWidth = width / mod;
         if (Forge.altZoneTabs && "Horizontal".equalsIgnoreCase(Forge.altZoneTabMode)) {
             field.setBounds(x, 0, width - (avatarWidth / 16f), height);
-            field.getRow1().setWidth(width - (avatarWidth / 16f) - (commandZoneCount > 0 ? commandZoneWidth + 1 : 0));
-            field.getRow2().setWidth(width - (avatarWidth / 16f) - (selectedTab == null ? 0 : width / 2.25f));
+            updateFieldDisplayArea(width);
         } else
             field.setBounds(x, 0, fieldWidth, height);
 
         x = width - displayAreaWidth-avatarWidth;
         for (InfoTab tab : tabs) {
             if (Forge.altZoneTabs && "Horizontal".equalsIgnoreCase(Forge.altZoneTabMode)) {
-                float w = (width / 2.25f);
-                float h = height / 2f;
-                tab.setDisplayBounds(width - w - avatarWidth, isBottomPlayer ? h : 0, w, h);
+                updateTabDisplayArea(tab, width, height);
             } else {
                 tab.setDisplayBounds(x, 0, displayAreaWidth, height);
             }
@@ -479,6 +481,17 @@ public class VPlayerPanel extends FContainer {
             if (!"Horizontal".equalsIgnoreCase(Forge.altZoneTabMode))
                 field.setFieldModifier(avatarWidth / 16);
         }
+    }
+
+    private void updateFieldDisplayArea(float width) {
+        field.getRow1().setWidth(width - (avatarWidth / 8f) - (commandZoneCount > 0 ? commandZoneWidth + 1 : 0));
+        field.getRow2().setWidth(width - (avatarWidth / 8f) - (selectedTab == null ? 0 : selectedTab.getIdealWidth(prefWidth) + 1) - avatarWidth * mod);
+    }
+
+    private void updateTabDisplayArea(InfoTab tab, float width, float height) {
+        float w = tab.getIdealWidth(prefWidth);
+        float h = height / 2f;
+        tab.setDisplayBounds(width - w - avatarWidth, isBottomPlayer ? h : 0, w, h);
     }
 
     @Override
@@ -687,6 +700,7 @@ public class VPlayerPanel extends FContainer {
         public abstract void setRotate180(boolean rotate180);
         public abstract void update();
         public abstract void reset();
+        public abstract float getIdealWidth(float pref);
 
         protected boolean isSelected() {
             return selectedTab == this;
@@ -852,6 +866,11 @@ public class VPlayerPanel extends FContainer {
 
         @Override
         public void reset() {} //Mana Display does not get cleared.
+
+        @Override
+        public float getIdealWidth(float pref) {
+            return pref;
+        }
     }
 
     /**
@@ -880,6 +899,25 @@ public class VPlayerPanel extends FContainer {
         @Override
         public void reset() {
             displayArea.clear();
+        }
+
+        @Override
+        public float getIdealWidth(float pref) {
+            if (displayArea instanceof VCardDisplayArea vCardDisplayArea) {
+                float cardWidth = vCardDisplayArea.getCardWidth(vCardDisplayArea.getHeight());
+                float size = vCardDisplayArea.getCount();
+                return Math.min(cardWidth * size, pref);
+            }
+            return pref;
+        }
+
+        @Override
+        public void update() {
+            super.update();
+            if (selectedTab != null && Forge.altZoneTabs && "Horizontal".equalsIgnoreCase(Forge.altZoneTabMode)) {
+                updateFieldDisplayArea(initW);
+                updateTabDisplayArea(selectedTab, initW, initH);
+            }
         }
     }
 
@@ -1009,6 +1047,11 @@ public class VPlayerPanel extends FContainer {
                 //iterator.remove();
             }
             activeZone = ZoneType.Sideboard;
+        }
+
+        @Override
+        public float getIdealWidth(float pref) {
+            return pref;
         }
 
         @Override
