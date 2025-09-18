@@ -3,9 +3,7 @@ ManaCost:3
 Types:Artifact
 A:AB$ Pump | Cost$ 1 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't attack. | SubAbility$ DBPutCounter | IsCurse$ True | SpellDescription$ Target creature can't attack this turn. Put a brick counter on CARDNAME.
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ BRICK | CounterNum$ 1
-A:AB$ Effect | Cost$ 1 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberObjects$ Targeted | StaticAbilities$ DBCantAttack,DBCantBlockBy,DBCantBeActivated | ForgetOnMoved$ Battlefield | IsCurse$ True | Duration$ UntilYourNextTurn | CheckSVar$ X | SVarCompare$ GE3 | SpellDescription$ Until your next turn, target creature can't attack or block and its activated abilities can't be activated. Activate only if there are three or more brick counters on CARDNAME.
-SVar:DBCantAttack:Mode$ CantAttack | ValidCard$ Card.IsRemembered | Description$ Remembered can't attack or block.
-SVar:DBCantBlockBy:Mode$ CantBlockBy | ValidBlocker$ Card.IsRemembered | Secondary$ True | Description$ Remembered can't attack or block.
-SVar:DBCantBeActivated:Mode$ CantBeActivated | ValidCard$ Card.IsRemembered | Description$ Remembered activated abilities can't be activated.
+A:AB$ Effect | Cost$ 1 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberObjects$ Targeted | StaticAbilities$ DBCantStatic | ForgetOnMoved$ Battlefield | IsCurse$ True | Duration$ UntilYourNextTurn | CheckSVar$ X | SVarCompare$ GE3 | SpellDescription$ Until your next turn, target creature can't attack or block and its activated abilities can't be activated. Activate only if there are three or more brick counters on CARDNAME.
+SVar:DBCantStatic:Mode$ CantAttack,CantBlock,CantBeActivated | ValidCard$ Card.IsRemembered | Description$ Remembered can't attack or block and activated abilities can't be activated.
 SVar:X:Count$CardCounters.BRICK
 Oracle:{1}, {T}: Target creature can't attack this turn. Put a brick counter on Edifice of Authority.\n{1}, {T}: Until your next turn, target creature can't attack or block and its activated abilities can't be activated. Activate only if there are three or more brick counters on Edifice of Authority.
