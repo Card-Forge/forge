@@ -1,6 +1,5 @@
 [metadata]
 Code=UND
-Code2=UND
 Date=2020-02-29
 Name=Unsanctioned
 Type=Funny
@@ -109,3 +108,5 @@ ScryfallCode=UND
 1 u_1_1_beeble @Jeff Miracola
 2 r_1_1_goblin @Dave Allsop
 3 g_1_1_squirrel @Daniel Ljunggren
+4 c_4_4_dragon_flying @Autumn Rain Turkel
+5 c_5_5_giant_teddy_bear @Andrea Radeck
