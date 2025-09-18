@@ -1,5 +1,6 @@
 package forge.screens.planarconquest;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,25 +17,27 @@ import com.google.common.collect.Iterables;
 import forge.Forge;
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
+import forge.assets.FImage;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
 import forge.assets.TextRenderer;
+import forge.card.CardFaceSymbols;
 import forge.card.CardRarity;
 import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardZoom;
 import forge.card.ColorSet;
-import forge.card.ColorSetImage;
 import forge.card.MagicColor;
 import forge.gamemodes.planarconquest.ConquestCommander;
 import forge.gamemodes.planarconquest.ConquestData;
 import forge.gamemodes.planarconquest.ConquestPlane;
 import forge.gamemodes.planarconquest.ConquestPreferences.CQPref;
 import forge.gamemodes.planarconquest.ConquestUtil;
-import forge.gamemodes.planarconquest.ConquestUtil.AEtherFilter;
 import forge.item.PaperCard;
+import forge.localinstance.skin.FSkinProp;
+import forge.localinstance.skin.IHasSkinProp;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.toolbox.FCardPanel;
@@ -57,9 +60,9 @@ public class ConquestAEtherScreen extends FScreen {
     private final Set<PaperCard> strictPool = new HashSet<>();
 
     private final ColorButton btnColorFilter = add(new ColorButton(Forge.getLocalizer().getMessage("lblColor")));
-    private final FilterButton btnTypeFilter = add(new FilterButton(Forge.getLocalizer().getMessage("lblType"), ConquestUtil.TYPE_FILTERS));
-    private final FilterButton btnRarityFilter = add(new FilterButton(Forge.getLocalizer().getMessage("lblRarity"), ConquestUtil.RARITY_FILTERS));
-    private final FilterButton btnCMCFilter = add(new FilterButton(Forge.getLocalizer().getMessage("lblCMC"), ConquestUtil.CMC_FILTERS));
+    private final FilterButton<ConquestUtil.TypeFilter> btnTypeFilter = add(new FilterButton<ConquestUtil.TypeFilter>(Forge.getLocalizer().getMessage("lblType"), ConquestUtil.TypeFilter.values()));
+    private final FilterButton<ConquestUtil.RarityFilter> btnRarityFilter = add(new FilterButton<ConquestUtil.RarityFilter>(Forge.getLocalizer().getMessage("lblRarity"), ConquestUtil.RarityFilter.values()));
+    private final FilterButton<ConquestUtil.CMCFilter> btnCMCFilter = add(new FilterButton<ConquestUtil.CMCFilter>(Forge.getLocalizer().getMessage("lblCMC"), ConquestUtil.CMCFilter.values()));
 
     private final FLabel lblShards = add(new FLabel.Builder().font(LABEL_FONT).align(Align.center).parseSymbols().build());
 
@@ -96,9 +99,9 @@ public class ConquestAEtherScreen extends FScreen {
 
     private void resetFilters() {
         btnColorFilter.setSelectedOption(commander.getCard().getRules().getColorIdentity());
-        btnTypeFilter.setSelectedOption(AEtherFilter.CREATURE);
-        btnRarityFilter.setSelectedOption(AEtherFilter.COMMON);
-        btnCMCFilter.setSelectedOption(AEtherFilter.CMC_LOW_MID);
+        btnTypeFilter.setSelectedOption(ConquestUtil.TypeFilter.CREATURE);
+        btnRarityFilter.setSelectedOption(ConquestUtil.RarityFilter.COMMON);
+        btnCMCFilter.setSelectedOption(ConquestUtil.CMCFilter.CMC_LOW_MID);
     }
 
     private void updateFilteredPool() {
@@ -365,7 +368,13 @@ public class ConquestAEtherScreen extends FScreen {
             }));
         }
 
-        abstract public void setSelectedOption(T selectedOption0);
+        public void setSelectedOption(T selectedOption0) {
+            if (selectedOption == selectedOption0) {
+                return;
+            }
+            selectedOption = selectedOption0;
+        }
+
 
         @Override
         protected void drawContent(Graphics g, float w, float h, final boolean pressed) {
@@ -375,16 +384,16 @@ public class ConquestAEtherScreen extends FScreen {
             super.drawContent(g, w, h, pressed);
         }
     }
+
     private class ColorButton extends AbstractFilterButton<ColorSet> {
         private ColorButton(String caption0) {
-            super(caption0, ColorSet.allOptions(),
-                    c -> "Playable in " + c.stream().map(MagicColor.Color::getSymbol).collect(Collectors.joining())
-            );
+            super(caption0, Arrays.stream(ColorSet.allOptions()).sorted().toArray(ColorSet[]::new),
+                    c -> "Playable in " + c.stream().map(MagicColor.Color::getSymbol).collect(Collectors.joining()));
         }
 
+        @Override
         public void setSelectedOption(ColorSet selectedOption0) {
-            if (selectedOption == selectedOption0) { return; }
-            selectedOption = selectedOption0;
+            super.setSelectedOption(selectedOption0);
 
             setIcon(new ColorSetImage(selectedOption));
         }
@@ -393,14 +402,44 @@ public class ConquestAEtherScreen extends FScreen {
         public boolean test(PaperCard card) {
             return card.getRules().getColorIdentity().hasNoColorsExcept(selectedOption);
         }
+
+        private record ColorSetImage(ColorSet colorSet, int shardCount) implements FImage {
+            public ColorSetImage(ColorSet colorSet0) {
+                this(colorSet0, colorSet0.getOrderedColors().size());
+            }
+
+            @Override
+            public float getWidth() {
+                return Forge.getAssets().images().get(FSkinProp.IMG_MANA_W).getWidth() * shardCount;
+            }
+
+            @Override
+            public float getHeight() {
+                return Forge.getAssets().images().get(FSkinProp.IMG_MANA_W).getHeight();
+            }
+
+            @Override
+            public void draw(Graphics g, float x, float y, float w, float h) {
+                float imageSize = w / shardCount;
+                if (imageSize > h) {
+                    imageSize = h;
+                    float w0 = imageSize * shardCount;
+                    x += (w - w0) / 2;
+                    w = w0;
+                }
+                CardFaceSymbols.drawColorSet(g, colorSet, x, y, imageSize);
+            }
+        }
     }
-    private class FilterButton extends AbstractFilterButton<AEtherFilter> {
-        private FilterButton(String caption0, AEtherFilter[] options0) {
+
+    private class FilterButton<T extends Enum<T> & IHasSkinProp & Predicate<PaperCard>> extends AbstractFilterButton<T> {
+        private FilterButton(String caption0, T[] options0) {
             super(caption0, options0, null);
         }
-        public void setSelectedOption(AEtherFilter selectedOption0) {
-            if (selectedOption == selectedOption0) { return; }
-            selectedOption = selectedOption0;
+
+        @Override
+        public void setSelectedOption(T selectedOption0) {
+            super.setSelectedOption(selectedOption0);
 
             setIcon(FSkin.getImages().get(selectedOption.getSkinProp()));
         }
