@@ -875,7 +875,10 @@ public class CountersPutAi extends CountersAi {
                     list = ComputerUtil.getSafeTargets(ai, sa, list);
                     choice = chooseBoonTarget(list, type);
                     if (choice == null && mandatory) {
-                        choice = Aggregates.random(list);
+                        if (source.getName().equals("Athreos, Shroud-Veiled")) {
+                            choice = chooseBoonTarget(CardLists.getTargetableCards(ai.getOpponents().getCreaturesInPlay(), sa), type);
+                        }
+                        if (choice == null) choice = Aggregates.random(list);
                     }
                 } else if (type.equals("P1P1")) {
                     choice = ComputerUtilCard.getWorstCreatureAI(list);
