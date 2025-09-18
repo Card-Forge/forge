@@ -245,7 +245,7 @@ public class VField extends FContainer {
             y1 = 0;
             y2 = cardSize;
         }
-        if (Forge.altZoneTabs && "Horizontal".equalsIgnoreCase(Forge.altZoneTabMode)) {
+        if (Forge.isHorizontalTabLayout()) {
             row1.setBounds(0, y1, width, cardSize);
             row2.setBounds(0, y2, width, cardSize);
         } else {
