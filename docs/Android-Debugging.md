@@ -1,0 +1,139 @@
+1. Setup IntelliJ with Android (plugin, SDKs etc).
+2. Get the Android 13 image for the emulator (important: Android 13), then run the emulator. *Skip this step if you use a physical device.*
+3. Make sure you can build the APK.  
+    a. `mvn clean verify -P android-debug` using the working directory forge-gui-android/
+4. Use `android-debug` profile for creating the debug version from below in the forge-gui-android/pom.xml
+5. Use this maven command: `mvn android:deploy-apk android:run`
+6. Look at the emulator (or device), it should say "Waiting for debugger to connect".
+7. CRTL+SHIFT+A in IntelliJ and type in `attach android` and click on "Attach Debugger to Android Process".
+8. Tick "Show all processes" and you should be able to pick `forge.app` from the list and click "Okay".
+9. Ready to debug  
+
+Profile XML for debugging:
+```
+        <profile>
+            <id>android-debug</id>
+            <properties>
+                <android.debug>true</android.debug>
+                <android.run.debug>true</android.run.debug>
+                <android.deployapk.filename>target\forge-android-${snapshot-version}-aligned-debugSigned.apk</android.deployapk.filename>
+                <packaging.type>apk</packaging.type>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.4.1</version>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <executions>
+                            <execution>
+                                <id>SignV2</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <workingDirectory>${pom.basedir}</workingDirectory>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>-jar</argument>
+                                <argument>${pom.basedir}/tools/uber-apk-signer.jar</argument>
+                                <argument>-a</argument>
+                                <argument>${pom.basedir}/target/</argument>
+                                <argument>--debug</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.github.cardforge.maven.plugins</groupId>
+                        <artifactId>android-maven-plugin</artifactId>
+                        <dependencies>
+                            <dependency>
+                                <groupId>javax.xml.bind</groupId>
+                                <artifactId>jaxb-api</artifactId>
+                                <version>2.3.1</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>com.sun.xml.bind</groupId>
+                                <artifactId>jaxb-impl</artifactId>
+                                <version>2.3.4</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>sun</groupId>
+                                <artifactId>misc</artifactId>
+                                <version>1</version>
+                                <scope>system</scope>
+                                <systemPath>${pom.basedir}/libs/sun-misc.jar</systemPath>
+                            </dependency>
+                        </dependencies>
+                        <version>4.6.2</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <sign>
+                                <debug>false</debug>
+                            </sign>
+                            <sdk>
+                                <platform>${androidPlatform}</platform>
+                                <buildTools>${androidBuildTools}</buildTools>
+                            </sdk>
+                            <dexForceJumbo>true</dexForceJumbo>
+                            <assetsDirectory>${project.basedir}/assets</assetsDirectory>
+                            <resourceDirectory>${project.basedir}/res</resourceDirectory>
+                            <nativeLibrariesDirectory>${project.basedir}/libs</nativeLibrariesDirectory>
+                            <extractDuplicates>true</extractDuplicates>
+                            <proguard>
+                                <skip>false</skip>
+                                <config>${project.basedir}/proguard.cfg</config>
+                            </proguard>
+                            <proguardProguardJarPath>${pom.basedir}/tools/proguard.jar</proguardProguardJarPath>
+                            <release>false</release>
+                            <dexCompiler>d8</dexCompiler>
+                            <d8>
+                                <minApi>26</minApi>
+                                <jvmArguments>
+                                    <argument>${build.min.memory}</argument>
+                                    <argument>${build.max.memory}</argument>
+                                </jvmArguments>
+                            </d8>
+                            <dex>
+                                <multi-dex>true</multi-dex>
+                                <jvmArguments>
+                                    <argument>${build.min.memory}</argument>
+                                    <argument>${build.max.memory}</argument>
+                                </jvmArguments>
+                                <dexArguments>--min-sdk-version=26</dexArguments>
+                            </dex>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>update-manifest</id>
+                                <goals>
+                                    <goal>manifest-merger</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>se.bjurr.gitchangelog</groupId>
+                        <artifactId>git-changelog-maven-plugin</artifactId>
+                        <version>2.2.0</version>
+                        <inherited>false</inherited>
+                        <executions>
+                            <execution>
+                                <id>GenerateGitChangelog</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>git-changelog</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>true</skip>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+```
