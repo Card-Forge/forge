@@ -1248,6 +1248,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             clone.mayChooseNewTargets = false;
 
             clone.triggeringObjects = AbilityKey.newMap(this.triggeringObjects);
+            if (!lki) {
+                clone.replacingObjects = AbilityKey.newMap();
+            }
 
             clone.setPayCosts(getPayCosts().copy());
             if (manaPart != null) {
