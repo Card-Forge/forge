@@ -100,6 +100,7 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
         //five-color
         cache[WHITE | BLUE | BLACK | RED | GREEN] = new ColorSet(W, U, B, R, G);
     }
+    public static ColorSet[] allOptions() { return cache; }
 
     private final Collection<Color> orderedShards;
     private final byte myColor;

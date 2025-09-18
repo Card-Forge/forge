@@ -216,42 +216,6 @@ public class ConquestUtil {
     }
 
     public enum AEtherFilter implements IHasSkinProp, Predicate<PaperCard> {
-        C (null, new ColorFilter(MagicColor.COLORLESS)),
-        W (null, new ColorFilter(MagicColor.WHITE)),
-        U (null, new ColorFilter(MagicColor.BLUE)),
-        B (null, new ColorFilter(MagicColor.BLACK)),
-        R (null, new ColorFilter(MagicColor.RED)),
-        G (null, new ColorFilter(MagicColor.GREEN)),
-
-        WU (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLUE)),
-        WB (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLACK)),
-        UB (null, new ColorFilter(MagicColor.BLUE | MagicColor.BLACK)),
-        UR (null, new ColorFilter(MagicColor.BLUE | MagicColor.RED)),
-        BR (null, new ColorFilter(MagicColor.BLACK | MagicColor.RED)),
-        BG (null, new ColorFilter(MagicColor.BLACK | MagicColor.GREEN)),
-        RG (null, new ColorFilter(MagicColor.RED | MagicColor.GREEN)),
-        RW (null, new ColorFilter(MagicColor.RED | MagicColor.WHITE)),
-        GW (null, new ColorFilter(MagicColor.GREEN | MagicColor.WHITE)),
-        GU (null, new ColorFilter(MagicColor.GREEN | MagicColor.BLUE)),
-
-        WUB (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK)),
-        WBG (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLACK | MagicColor.GREEN)),
-        UBR (null, new ColorFilter(MagicColor.BLUE | MagicColor.BLACK | MagicColor.RED)),
-        URW (null, new ColorFilter(MagicColor.BLUE | MagicColor.RED | MagicColor.WHITE)),
-        BRG (null, new ColorFilter(MagicColor.BLACK | MagicColor.RED | MagicColor.GREEN)),
-        BGU (null, new ColorFilter(MagicColor.BLACK | MagicColor.GREEN | MagicColor.BLUE)),
-        RGW (null, new ColorFilter(MagicColor.RED | MagicColor.GREEN | MagicColor.WHITE)),
-        RWB (null, new ColorFilter(MagicColor.RED | MagicColor.WHITE | MagicColor.BLACK)),
-        GWU (null, new ColorFilter(MagicColor.GREEN | MagicColor.WHITE | MagicColor.BLUE)),
-        GUR (null, new ColorFilter(MagicColor.GREEN | MagicColor.BLUE | MagicColor.RED)),
-
-        WUBR (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK | MagicColor.RED)),
-        WUBG (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK | MagicColor.GREEN)),
-        WURG (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLUE | MagicColor.RED | MagicColor.GREEN)),
-        WBRG (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLACK | MagicColor.RED | MagicColor.GREEN)),
-        UBRG (null, new ColorFilter(MagicColor.BLUE | MagicColor.BLACK | MagicColor.RED | MagicColor.GREEN)),
-
-        WUBRG     (null, new ColorFilter(MagicColor.ALL_COLORS)),
 
         CREATURE              (FSkinProp.IMG_CREATURE, new TypeFilter(EnumSet.of(CoreType.Creature), "Creature")),
         NONCREATURE_PERMANENT (FSkinProp.IMG_ENCHANTMENT, new TypeFilter(EnumSet.of(CoreType.Artifact, CoreType.Enchantment, CoreType.Planeswalker, CoreType.Land), EnumSet.of(CoreType.Creature), "Noncreature Permanent")),
@@ -285,13 +249,6 @@ public class ConquestUtil {
             return predicate.test(card);
         }
 
-        public ColorSet getColor() {
-            if (predicate instanceof ColorFilter cf) {
-                return cf.color;
-            }
-            return null;
-        }
-
         public CardRarity getRarity() {
             return getRarity(0d);
         }
@@ -308,22 +265,7 @@ public class ConquestUtil {
         }
     }
 
-    public static AEtherFilter getColorFilter(ColorSet color) {
-        StringBuilder name = new StringBuilder();
-        for (MagicColor.Color s : color.getOrderedColors()) {
-            name.append(s.getShortName());
-        }
-        try {
-            return AEtherFilter.valueOf(name.toString());
-        }
-        catch (Exception e) {
-            System.err.println("No color filter with name " + name);
-            return AEtherFilter.WUBRG; //return 5-color filter as fallback
-        }
-    }
-
     public static void updateRarityFilterOdds(ConquestPreferences prefs) {
-
         Map<CardRarity, Double> odds = Maps.newEnumMap(CardRarity.class);
         if (prefs.getPrefBoolean(CQPref.AETHER_USE_DEFAULT_RARITY_ODDS)) {
             odds.put(CardRarity.Common, 1d);
@@ -347,40 +289,6 @@ public class ConquestUtil {
         }
     }
 
-    public static final AEtherFilter[] COLOR_FILTERS = new AEtherFilter[] {
-        AEtherFilter.C,
-        AEtherFilter.W,
-        AEtherFilter.U,
-        AEtherFilter.B,
-        AEtherFilter.R,
-        AEtherFilter.G,
-        AEtherFilter.WU,
-        AEtherFilter.WB,
-        AEtherFilter.UB,
-        AEtherFilter.UR,
-        AEtherFilter.BR,
-        AEtherFilter.BG,
-        AEtherFilter.RG,
-        AEtherFilter.RW,
-        AEtherFilter.GW,
-        AEtherFilter.GU,
-        AEtherFilter.WUB,
-        AEtherFilter.WBG,
-        AEtherFilter.UBR,
-        AEtherFilter.URW,
-        AEtherFilter.BRG,
-        AEtherFilter.BGU,
-        AEtherFilter.RGW,
-        AEtherFilter.RWB,
-        AEtherFilter.GWU,
-        AEtherFilter.GUR,
-        AEtherFilter.WUBR,
-        AEtherFilter.WUBG,
-        AEtherFilter.WURG,
-        AEtherFilter.WBRG,
-        AEtherFilter.UBRG,
-        AEtherFilter.WUBRG};
-
     public static final AEtherFilter[] TYPE_FILTERS = new AEtherFilter[] {
         AEtherFilter.CREATURE,
         AEtherFilter.NONCREATURE_PERMANENT,
@@ -397,27 +305,6 @@ public class ConquestUtil {
         AEtherFilter.CMC_LOW_MID,
         AEtherFilter.CMC_MID_HIGH,
         AEtherFilter.CMC_HIGH };
-
-    private static class ColorFilter implements Predicate<PaperCard> {
-        private final ColorSet color;
-
-        private ColorFilter(int colorMask0) {
-            color = ColorSet.fromMask(colorMask0);
-        }
-
-        @Override
-        public boolean test(PaperCard card) {
-            return card.getRules().getColorIdentity().hasNoColorsExcept(color);
-        }
-        @Override
-        public String toString() {
-            StringBuilder sb = new StringBuilder("Playable in ");
-            for (MagicColor.Color c : color.getOrderedColors()) {
-                sb.append(c.getSymbol());
-            }
-            return sb.toString();
-        }
-    }
 
     private static class TypeFilter implements Predicate<PaperCard> {
         private final Iterable<CoreType> types;
