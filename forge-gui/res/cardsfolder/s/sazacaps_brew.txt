@@ -3,7 +3,8 @@ ManaCost:1 R
 Types:Instant
 K:Gift
 SVar:GiftAbility:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_fish | TokenTapped$ True | TokenOwner$ Promised | LockTokenScript$ True | GiftDescription$ a tapped Fish
-A:SP$ Draw | Cost$ 1 R Discard<1/Card> | CostDesc$ As an additional cost to cast this spell, discard a card. | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBPump | SpellDescription$ Target player draws two cards. If the gift was promised, target creature you control gets +2/+0 until end of turn.
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Activator$ You | Type$ Spell | Cost$ Discard<1/Card> | EffectZone$ All | Description$ As an additional cost to cast this spell, discard a card.
+A:SP$ Draw | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBPump | SpellDescription$ Target player draws two cards. If the gift was promised, target creature you control gets +2/+0 until end of turn.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TargetMin$ X | TargetMax$ X | TgtPrompt$ Select target creature you control | NumAtt$ +2
 SVar:X:Count$PromisedGift.1.0
 DeckHas:Ability$Discard
