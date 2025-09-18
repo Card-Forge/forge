@@ -1870,6 +1870,14 @@ public class AbilityUtils {
                     }
                     return doXMath(v, expr, c, ctb);
                 }
+                
+                // Count$FromNamedAbility[abilityName].<True>.<False>
+                if (sq[0].startsWith("FromNamedAbility")) {
+                    String abilityNamed = sq[0].substring(16);
+                    SpellAbility trigSA = sa.getHostCard().getCastSA();
+                    boolean fromNamedAbility = trigSA != null && trigSA.getName().equals(abilityNamed);
+                    return doXMath(calculateAmount(c, sq[fromNamedAbility ? 1 : 2], ctb), expr, c, ctb);
+                }
             } else {
                 // fallback if ctb isn't a spellability
                 if (sq[0].startsWith("LastStateBattlefield")) {
