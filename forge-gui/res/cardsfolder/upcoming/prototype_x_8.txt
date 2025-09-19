@@ -1,0 +1,12 @@
+Name:Prototype X-8
+ManaCost:6 U B
+Types:Legendary Artifact Creature Robot Octopus
+PT:8/8
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature card in your graveyard.
+SVar:X:Count$ValidGraveyard Creature.YouOwn
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Creature.wasCastByYou+YouCtrl+Other | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever another creature you control enters, if you cast it, sacrifice it. Conjure a duplicate of it onto the battlefield. The duplicate perpetually becomes a Robot artifact in addition to its other types.
+SVar:TrigSac:DB$ SacrificeAll | Defined$ TriggeredCardLKICopy | SubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | Conjure$ True | DefinedName$ TriggeredCardLKICopy | Zone$ Battlefield | RememberMade$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Types$ Artifact,Robot | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:This spell costs {1} less to cast for each creature card in your graveyard.\nWhenever another creature you control enters, if you cast it, sacrifice it. Conjure a duplicate of it onto the battlefield. The duplicate perpetually becomes a Robot artifact in addition to its other types.
