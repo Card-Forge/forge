@@ -320,8 +320,7 @@ public class ConquestUtil {
         }
     }
 
-    public static void updateRarityFilterOdds() {
-        ConquestPreferences prefs = FModel.getConquestPreferences();
+    public static void updateRarityFilterOdds(ConquestPreferences prefs) {
 
         Map<CardRarity, Double> odds = Maps.newEnumMap(CardRarity.class);
         if (prefs.getPrefBoolean(CQPref.AETHER_USE_DEFAULT_RARITY_ODDS)) {
