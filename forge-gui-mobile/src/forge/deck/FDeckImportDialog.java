@@ -76,7 +76,7 @@ public class FDeckImportDialog extends FDialog {
         boolean replacingDeck = !currentDeck.isEmpty() || usingInventory;
         this.currentDeck = currentDeck;
         this.editorConfig = editorConfig;
-        ItemPool<PaperCard> cardPool = editorConfig.getCardPool(false);
+        ItemPool<PaperCard> cardPool = editorConfig.getCardPool();
         controller = new DeckImportController(dateTimeCheck, monthDropdown, yearDropdown, replacingDeck);
         String contents = Forge.getClipboard().getContents();
         if (contents == null)
