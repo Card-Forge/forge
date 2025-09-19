@@ -499,6 +499,24 @@ public class VPlayerPanel extends FContainer {
     }
 
     @Override
+    protected void drawOverlay(Graphics g) {
+        if (Forge.isHorizontalTabLayout()) {
+            InfoTab infoTab = selectedTab;
+            if (infoTab != null) {
+                VDisplayArea selectedDisplayArea = infoTab.getDisplayArea();
+                if (selectedDisplayArea != null && selectedDisplayArea.getCount() > 0) {
+                    float scale = avatarWidth / 2f;
+                    float x = selectedDisplayArea.getLeft();
+                    float y = selectedDisplayArea.getBottom() - scale;
+                    g.fillRect(getAltDisplayAreaBackColor(), x, y, scale, scale);
+                    infoTab.icon.draw(g, x, y, scale, scale);
+                }
+            }
+        }
+        super.drawOverlay(g);
+    }
+
+    @Override
     public void drawBackground(Graphics g) {
         float y;
         InfoTab infoTab = selectedTab;
@@ -1069,6 +1087,11 @@ public class VPlayerPanel extends FContainer {
 
         @Override
         public float getIdealWidth(float pref) {
+            if (getDisplayArea() instanceof VCardDisplayArea vCardDisplayArea) {
+                float cardWidth = vCardDisplayArea.getCardWidth(vCardDisplayArea.getHeight());
+                float size = vCardDisplayArea.getCount();
+                return Math.min(cardWidth * size, pref);
+            }
             return pref;
         }
 
