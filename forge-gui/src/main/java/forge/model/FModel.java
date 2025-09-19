@@ -220,15 +220,12 @@ public final class FModel {
         for (final CardBlock b : blocks) {
             magicDb.getBlockLands().add(b.getLandSet().getCode());
         }
-        netPreferences = new ForgeNetPreferences();
         fantasyBlocks = new StorageBase<>("Custom blocks", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "fantasyblocks.txt", magicDb.getEditions()));
         themedChaosDrafts = new StorageBase<>("Themed Chaos Drafts", new ThemedChaosDraft.Reader(ForgeConstants.BLOCK_DATA_DIR + "chaosdraftthemes.txt"));
         planes = new StorageBase<>("Conquest planes", new ConquestPlane.Reader(ForgeConstants.CONQUEST_PLANES_DIR + "planes.txt"));
         Map<String, QuestWorld> standardWorlds = new QuestWorld.Reader(ForgeConstants.QUEST_WORLD_DIR + "worlds.txt").readAll();
         Map<String, QuestWorld> customWorlds = new QuestWorld.Reader(ForgeConstants.USER_QUEST_WORLD_DIR + "customworlds.txt").readAll();
-        for (QuestWorld world:customWorlds.values()){
-            world.setCustom(true);
-        }
+        customWorlds.values().forEach(world -> world.setCustom(true));
         standardWorlds.putAll(customWorlds);
         worlds = new StorageBase<>("Quest worlds", null, standardWorlds);
 
@@ -237,10 +234,6 @@ public final class FModel {
         if (progressBar != null) {
             FThreads.invokeInEdtLater(() -> progressBar.setDescription(Localizer.getInstance().getMessage("splash.loading.decks")));
         }
-
-        decks = new CardCollections();
-        quest = new QuestController();
-        conquest = new ConquestController();
 
         CardPreferences.load();
         DeckPreferences.load();
@@ -297,10 +290,14 @@ public final class FModel {
     }
 
     public static QuestController getQuest() {
+        if (quest == null)
+            quest = new QuestController();
         return quest;
     }
 
     public static ConquestController getConquest() {
+        if (conquest == null)
+            conquest = new ConquestController();
         return conquest;
     }
 
@@ -432,6 +429,8 @@ public final class FModel {
         return preferences;
     }
     public static ForgeNetPreferences getNetPreferences() {
+        if (netPreferences == null)
+            netPreferences = new ForgeNetPreferences();
         return netPreferences;
     }
 
@@ -463,7 +462,7 @@ public final class FModel {
     }
 
     public static QuestPreferences getQuestPreferences() {
-        if (conquestPreferences == null)
+        if (questPreferences == null)
             questPreferences = new QuestPreferences();
         return questPreferences;
     }
@@ -493,6 +492,8 @@ public final class FModel {
     }
 
     public static CardCollections getDecks() {
+        if (decks == null)
+            decks = new CardCollections();
         return decks;
     }
 
