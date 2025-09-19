@@ -220,8 +220,6 @@ public final class FModel {
         for (final CardBlock b : blocks) {
             magicDb.getBlockLands().add(b.getLandSet().getCode());
         }
-        questPreferences = new QuestPreferences();
-        conquestPreferences = new ConquestPreferences();
         netPreferences = new ForgeNetPreferences();
         fantasyBlocks = new StorageBase<>("Custom blocks", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "fantasyblocks.txt", magicDb.getEditions()));
         themedChaosDrafts = new StorageBase<>("Themed Chaos Drafts", new ThemedChaosDraft.Reader(ForgeConstants.BLOCK_DATA_DIR + "chaosdraftthemes.txt"));
@@ -247,7 +245,6 @@ public final class FModel {
         CardPreferences.load();
         DeckPreferences.load();
         ItemManagerConfig.load();
-        ConquestUtil.updateRarityFilterOdds();
 
         achievements = Maps.newHashMap();
         achievements.put(GameType.Constructed, new ConstructedAchievements());
@@ -466,10 +463,17 @@ public final class FModel {
     }
 
     public static QuestPreferences getQuestPreferences() {
+        if (conquestPreferences == null)
+            questPreferences = new QuestPreferences();
         return questPreferences;
     }
 
     public static ConquestPreferences getConquestPreferences() {
+        if (conquestPreferences == null) {
+            conquestPreferences = new ConquestPreferences();
+            // initialize on first call...
+            ConquestUtil.updateRarityFilterOdds(conquestPreferences);
+        }
         return conquestPreferences;
     }
 
