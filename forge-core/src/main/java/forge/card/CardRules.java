@@ -168,21 +168,7 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public boolean isTransformable() {
-        if (CardSplitType.Transform == getSplitType()) {
-            return true;
-        }
-        if (CardSplitType.Modal != getSplitType()) {
-            return false;
-        }
-        for (ICardFace face : getAllFaces()) {
-            for (String spell : face.getAbilities()) {
-                if (spell.contains("AB$ SetState") && spell.contains("Mode$ Transform")) {
-                    return true;
-                }
-            }
-            // TODO check keywords if needed
-        }
-        return false;
+        return CardSplitType.Transform == getSplitType() || CardSplitType.Modal == getSplitType();
     }
 
     public ICardFace getWSpecialize() {

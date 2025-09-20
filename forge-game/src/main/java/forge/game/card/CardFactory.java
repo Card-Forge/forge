@@ -87,22 +87,16 @@ public class CardFactory {
         // need to create a physical card first, i need the original card faces
         final Card copy = getCard(original.getPaperCard(), controller, id, game);
 
+        copy.setStates(getCloneStates(original, copy, sourceSA));
+        // force update the now set State
         if (original.isTransformable()) {
+            copy.setState(original.isTransformed() ? CardStateName.Backside : CardStateName.Original, true, true);
             // 707.8a If an effect creates a token that is a copy of a transforming permanent or a transforming double-faced card not on the battlefield,
             // the resulting token is a transforming token that has both a front face and a back face.
             // The characteristics of each face are determined by the copiable values of the same face of the permanent it is a copy of, as modified by any other copy effects that apply to that permanent.
             // If the token is a copy of a transforming permanent with its back face up, the token enters the battlefield with its back face up.
             // This rule does not apply to tokens that are created with their own set of characteristics and enter the battlefield as a copy of a transforming permanent due to a replacement effect.
             copy.setBackSide(original.isBackSide());
-            if (original.isTransformed()) {
-                copy.incrementTransformedTimestamp();
-            }
-        }
-
-        copy.setStates(getCloneStates(original, copy, sourceSA));
-        // force update the now set State
-        if (original.isTransformable()) {
-            copy.setState(original.isTransformed() ? CardStateName.Backside : CardStateName.Original, true, true);
         } else {
             copy.setState(copy.getCurrentStateName(), true, true);
         }
