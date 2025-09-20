@@ -1,0 +1,7 @@
+Name:Kavaron Consumed
+ManaCost:3 R R
+Types:Sorcery
+A:SP$ ChangeZone | Hidden$ True | Origin$ Hand | Destination$ Battlefield | ChangeType$ Artifact.YouOwn,Creature.YouOwn | SelectPrompt$ Select an artifact or creature card in your hand | RememberChanged$ True | AtEOT$ Sacrifice | Optional$ True | SubAbility$ DBAnimatePerpetual | StackDescription$ REP You_{p:You} & your hand_their hand & Sacrifice_{p:You} sacrifices | SpellDescription$ You may put an artifact or creature card from your hand onto the battlefield. It perpetually becomes an artifact creature with base power and toughness 4/4 and gains haste. Sacrifice it at the beginning of the next end step.
+SVar:DBAnimatePerpetual:DB$ Animate | Defined$ Remembered | Types$ Creature,Artifact | Keywords$ Haste | Power$ 4 | Toughness$ 4 | Duration$ Perpetual | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:You may put an artifact or creature card from your hand onto the battlefield. It perpetually becomes an artifact creature with base power and toughness 4/4 and gains haste. Sacrifice it at the beginning of the next end step.
