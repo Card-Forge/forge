@@ -156,7 +156,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
             return false;
         CardSplitType cst = this.cardRules.getSplitType();
         //expand this on future for other tokens that has other backsides besides transform..
-        return cst == CardSplitType.Transform;
+        return cst == CardSplitType.Transform || cst == CardSplitType.Modal;
     }
 
     @Override

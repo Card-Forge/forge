@@ -220,10 +220,6 @@ public class GameAction {
                     //copied.setGamePieceType(GamePieceType.COPIED_SPELL);
                 }
 
-                if (c.isTransformed()) {
-                    copied.incrementTransformedTimestamp();
-                }
-
                 if (cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
                     copied.setCastSA(cause);
                     copied.setSplitStateToPlayAbility(cause);
