@@ -344,7 +344,7 @@ public class CardFactory {
 
             // Combined card color
             final byte combinedColor = (byte) (rules.getMainPart().getColor().getColor() | rules.getOtherPart().getColor().getColor());
-            card.setColor(combinedColor);
+            card.setColor(ColorSet.fromMask(combinedColor));
             card.setType(new CardType(rules.getType()));
 
             // Combined text based on Oracle text -  might not be necessary
@@ -407,7 +407,7 @@ public class CardFactory {
         // Super and 'middle' types should use enums.
         c.setType(new CardType(face.getType()));
 
-        c.setColor(face.getColor().getColor());
+        c.setColor(face.getColor());
 
         if (face.getIntPower() != Integer.MAX_VALUE) {
             c.setBasePower(face.getIntPower());
@@ -594,11 +594,11 @@ public class CardFactory {
             }
 
             if (sa.hasParam("AddColors")) {
-                state.addColor(colors.getColor());
+                state.addColor(colors);
             }
 
             if (sa.hasParam("SetColor") || sa.hasParam("SetColorByManaCost")) {
-                state.setColor(colors.getColor());
+                state.setColor(colors);
             }
 
             if (sa.hasParam("NonLegendary")) {
