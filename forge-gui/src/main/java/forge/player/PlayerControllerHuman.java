@@ -1872,7 +1872,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             colorNamesBuilder.add(MagicColor.toLongString(MagicColor.COLORLESS));
         }
         for (final MagicColor.Color color : colors) {
-            colorNamesBuilder.add(color.getShortName());
+            colorNamesBuilder.add(color.getName());
         }
         final ImmutableList<String> colorNames = colorNamesBuilder.build();
         if (colorNames.size() > 2) {
