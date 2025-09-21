@@ -45,7 +45,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private int heroRace;
     private int avatarIndex;
     private boolean isFemale;
-    private ColorSet colorIdentity = ColorSet.ALL_COLORS;
+    private ColorSet colorIdentity = ColorSet.WUBRG;
 
     // Deck data
     private Deck deck;
@@ -396,9 +396,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             if (temp != null)
                 setColorIdentity(temp);
             else
-                colorIdentity = ColorSet.ALL_COLORS;
+                colorIdentity = ColorSet.WUBRG;
         } else
-            colorIdentity = ColorSet.ALL_COLORS;
+            colorIdentity = ColorSet.WUBRG;
 
         gold = data.readInt("gold");
         maxLife = data.readInt("maxLife");

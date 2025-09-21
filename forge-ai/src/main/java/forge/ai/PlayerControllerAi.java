@@ -1024,13 +1024,13 @@ public class PlayerControllerAi extends PlayerController {
         if ((colors.getColor() & chosenColorMask) != 0) {
             return chosenColorMask;
         }
-        return Iterables.getFirst(colors, (byte)0);
+        return Iterables.getFirst(colors, MagicColor.Color.COLORLESS).getColorMask();
     }
 
     @Override
     public byte chooseColor(String message, SpellAbility sa, ColorSet colors) {
         if (colors.countColors() < 2) {
-            return Iterables.getFirst(colors, MagicColor.WHITE);
+            return Iterables.getFirst(colors, MagicColor.Color.WHITE).getColorMask();
         }
         // You may switch on sa.getApi() here and use sa.getParam("AILogic")
         CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
@@ -1043,7 +1043,7 @@ public class PlayerControllerAi extends PlayerController {
         if ((colors.getColor() & chosenColorMask) != 0) {
             return chosenColorMask;
         }
-        return Iterables.getFirst(colors, MagicColor.WHITE);
+        return Iterables.getFirst(colors, MagicColor.Color.WHITE).getColorMask();
     }
 
     @Override

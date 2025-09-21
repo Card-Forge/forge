@@ -441,7 +441,7 @@ public class SFilterUtil {
         final byte colors = colors0;
         final boolean wantColorless = buttonMap.get(StatTypes.COLORLESS).isSelected();
         final boolean wantMulticolor = buttonMap.get(StatTypes.MULTICOLOR).isSelected();
-        final boolean wantAllColors = colors == ColorSet.ALL_COLORS.getColor();
+        final boolean wantAllColors = colors == ColorSet.WUBRG.getColor();
         //Use color identity instead of color for lands, unless all colors are filtered out anyway.
         final boolean filterLandsByCI = colors != 0 && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_FILTER_LANDS_BY_COLOR_IDENTITY);
 
