@@ -5,7 +5,7 @@ PT:3/5
 K:Flying
 K:Deathtouch
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this creature enters, exile up to two target cards from a single graveyard.
-SVar:TrigExile:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 2 | TargetsFromSingleZone$ True | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card
+SVar:TrigExile:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 2 | TargetsWithSameController$ True | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card
 AlternateMode:Omen
 Oracle:Flying, deathtouch\nWhen this creature enters, exile up to two target cards from a single graveyard.
 

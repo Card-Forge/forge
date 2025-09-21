@@ -269,6 +269,9 @@ public class Forge implements ApplicationListener {
             default -> Forge.altZoneTabs = false;
         }
     }
+    public static boolean isHorizontalTabLayout() {
+        return Forge.altZoneTabs && "Horizontal".equalsIgnoreCase(Forge.altZoneTabMode);
+    }
     public static boolean hasGamepad() {
         //Classic Mode Various Screen GUI are not yet supported, needs control mapping for each screens
         if (isMobileAdventureMode) {

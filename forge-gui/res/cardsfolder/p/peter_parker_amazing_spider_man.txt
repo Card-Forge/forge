@@ -17,5 +17,4 @@ PT:4/4
 K:Vigilance
 K:Reach
 S:Mode$ Continuous | Affected$ Legendary.YouCtrl+wasCast+nonColorless | AffectedZone$ Stack | AddKeyword$ Web-slinging:G W U:Spell.Legendary+nonColorless | Description$ Each legendary spell you cast that's one or more colors has web-slinging {G}{W}{U}. (You may cast a spell for its web-slinging cost if you also return a tapped creature you control to its owner's hand.)
-Oracle:Vigilance, reach\nEach legendary spell you cast that’s one or more colors has web-slinging {G}{W}{U}. (You may cast a spell for its web-slinging cost if you also return a tapped creature you control to its owner's hand.)
-
+Oracle:Vigilance, reach\nEach legendary spell you cast that's one or more colors has web-slinging {G}{W}{U}. (You may cast a spell for its web-slinging cost if you also return a tapped creature you control to its owner's hand.)

@@ -220,10 +220,6 @@ public class GameAction {
                     //copied.setGamePieceType(GamePieceType.COPIED_SPELL);
                 }
 
-                if (c.isTransformed()) {
-                    copied.incrementTransformedTimestamp();
-                }
-
                 if (cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
                     copied.setCastSA(cause);
                     copied.setSplitStateToPlayAbility(cause);
@@ -974,6 +970,7 @@ public class GameAction {
         // in some corner cases there's no zone yet (copied spell that failed targeting)
         if (z != null) {
             z.remove(c);
+            c.setZone(c.getOwner().getZone(ZoneType.None));
             if (z.is(ZoneType.Battlefield)) {
                 c.runLeavesPlayCommands();
             }

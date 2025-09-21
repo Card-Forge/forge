@@ -239,6 +239,10 @@ public final class AbilityFactory {
             spellAbility.putParam("PrecostDesc", "Exhaust — ");
         }
 
+        if (mapParams.containsKey("Named")) {
+            spellAbility.setName(mapParams.get("Named"));
+        }
+
         // *********************************************
         // set universal properties of the SpellAbility
 
@@ -358,9 +362,6 @@ public final class AbilityFactory {
 
         if (mapParams.containsKey("TargetUnique")) {
             abTgt.setUniqueTargets(true);
-        }
-        if (mapParams.containsKey("TargetsFromSingleZone")) {
-            abTgt.setSingleZone(true);
         }
         if (mapParams.containsKey("TargetsWithoutSameCreatureType")) {
             abTgt.setWithoutSameCreatureType(true);

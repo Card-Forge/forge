@@ -257,7 +257,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     private long worldTimestamp = -1;
     private long bestowTimestamp = -1;
-    private long transformedTimestamp = 0;
+    private long transformedTimestamp = -1;
     private long prototypeTimestamp = -1;
     private long mutatedTimestamp = -1;
     private int timesMutated = 0;
@@ -425,8 +425,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public long getPrototypeTimestamp() { return prototypeTimestamp; }
 
     public long getTransformedTimestamp() { return transformedTimestamp; }
-    public void incrementTransformedTimestamp() { this.transformedTimestamp++; }
-    public void undoIncrementTransformedTimestamp() { this.transformedTimestamp--; }
+    public void setTransformedTimestamp(long ts) { this.transformedTimestamp = ts; }
 
     // The following methods are used to selectively update certain view components (text,
     // P/T, card types) in order to avoid card flickering due to aggressive full update
@@ -696,7 +695,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
                 getGame().getTriggerHandler().runTrigger(TriggerType.Transformed, runParams, false);
             }
-            incrementTransformedTimestamp();
+            setTransformedTimestamp(ts);
 
             return retResult;
         } else if (mode.equals("Flip")) {
@@ -1070,7 +1069,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final boolean isDoubleFaced() {
-        return isTransformable() || isMeldable() || isModal();
+        return isTransformable() || isMeldable();
     }
 
     public final boolean isFlipCard() {
@@ -1132,7 +1131,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final boolean isTransformed() {
-        return getTransformedTimestamp() != 0;
+        if (isMeldable() || hasMergedCard()) {
+            return false;
+        }
+        return this.isTransformable() && isBackSide();
     }
 
     public final boolean isFlipped() {
@@ -7637,9 +7639,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
         if (sa.isBestow()) {
             animateBestow();
-        }
-        if (sa.isDisturb() || sa.hasParam("CastTransformed")) {
-            incrementTransformedTimestamp();
         }
         if (sa.hasParam("Prototype") && prototypeTimestamp == -1) {
             long next = game.getNextTimestamp();

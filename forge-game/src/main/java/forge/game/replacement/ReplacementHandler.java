@@ -280,15 +280,8 @@ public class ReplacementHandler {
             host = game.getCardState(host);
         }
 
-        if (replacementEffect.getOverridingAbility() == null && replacementEffect.hasParam("ReplaceWith")) {
-            // TODO: the source of replacement effect should be the source of the original effect
-            effectSA = AbilityFactory.getAbility(host, replacementEffect.getParam("ReplaceWith"), replacementEffect);
-            //replacementEffect.setOverridingAbility(effectSA);
-            //effectSA.setTrigger(true);
-        } else if (replacementEffect.getOverridingAbility() != null) {
-            effectSA = replacementEffect.getOverridingAbility();
-        }
-
+        // TODO: the source of replacement effect should be the source of the original effect
+        effectSA = replacementEffect.ensureAbility();
         if (effectSA != null) {
             SpellAbility tailend = effectSA;
             do {

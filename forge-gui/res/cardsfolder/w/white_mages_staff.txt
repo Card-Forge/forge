@@ -8,4 +8,4 @@ SVar:TrigAttack:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigGainLife | T
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 SVar:AE:SVar:HasAttackEffect:TRUE
 DeckHas:Ability$LifeGain|Token & Type$Cleric
-Oracle:Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)\nEquipped creature gets +1/+1, has "Whenever this creature attacks, you gain 1 life," and is a Cleric in addition to its other types.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery)
+Oracle:Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)\nEquipped creature gets +1/+1, has "Whenever this creature attacks, you gain 1 life," and is a Cleric in addition to its other types.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)
