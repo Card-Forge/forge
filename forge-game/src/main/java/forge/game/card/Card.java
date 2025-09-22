@@ -4213,6 +4213,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         // Handle Bestowed Aura part
         unanimateBestow();
 
+        getGame().fireEvent(new GameEventCardAttachment(this, entity, null));
+
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Attach, this);
         runParams.put(AbilityKey.Object, old);
