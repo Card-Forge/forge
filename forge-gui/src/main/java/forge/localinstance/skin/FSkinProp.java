@@ -24,6 +24,7 @@ import com.google.common.collect.Maps;
 
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
+import forge.deck.DeckSection;
 import forge.game.zone.ZoneType;
 import forge.localinstance.properties.ForgeConstants;
 
@@ -734,6 +735,21 @@ public enum FSkinProp {
             case Ante -> IMG_ZONE_ANTE;
             case Junkyard ->IMG_ZONE_JUNKYARD;
             default -> IMG_HDZONE_LIBRARY;
+        };
+    }
+
+    public static FSkinProp iconFromDeckSection(DeckSection deckSection, boolean hdbuttons) {
+        return switch (deckSection) {
+            case Main -> hdbuttons ? IMG_HDZONE_LIBRARY : ICO_DECKLIST;
+            case Sideboard -> hdbuttons ? IMG_HDZONE_SIDEBOARD : IMG_ZONE_SIDEBOARD;
+            case Commander -> IMG_ZONE_COMMAND;
+            case Avatar -> IMG_ZONE_AVATAR;
+            case Conspiracy -> IMG_ZONE_CONSPIRACY;
+            case Planes -> IMG_ZONE_PLANAR;
+            case Schemes -> IMG_ZONE_SCHEME;
+            case Attractions -> IMG_ZONE_ATTRACTION;
+            case Contraptions -> IMG_ZONE_CONTRAPTION;
+            default -> IMG_HDZONE_SIDEBOARD;
         };
     }
 
