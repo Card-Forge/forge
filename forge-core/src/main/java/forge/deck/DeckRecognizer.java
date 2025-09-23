@@ -994,7 +994,7 @@ public class DeckRecognizer {
     private static String getMagicColourLabel(MagicColor.Color magicColor) {
         if (magicColor == null) // Multicolour
             return String.format("%s {W}{U}{B}{R}{G}", getLocalisedMagicColorName("Multicolour"));
-        return String.format("%s %s", magicColor.getLocalizedName(), magicColor.getSymbol());
+        return String.format("%s %s", magicColor.getTranslatedName(), magicColor.getSymbol());
     }
 
     private static final HashMap<Integer, String> manaSymbolsMap = new HashMap<Integer, String>() {{
@@ -1013,8 +1013,8 @@ public class DeckRecognizer {
         if (magicColor2 == null || magicColor2 == MagicColor.Color.COLORLESS
                 || magicColor1 == MagicColor.Color.COLORLESS)
             return String.format("%s // %s", getMagicColourLabel(magicColor1), getMagicColourLabel(magicColor2));
-        String localisedName1 = magicColor1.getLocalizedName();
-        String localisedName2 = magicColor2.getLocalizedName();
+        String localisedName1 = magicColor1.getTranslatedName();
+        String localisedName2 = magicColor2.getTranslatedName();
         String comboManaSymbol = manaSymbolsMap.get(magicColor1.getColorMask() | magicColor2.getColorMask());
         return String.format("%s/%s {%s}", localisedName1, localisedName2, comboManaSymbol);
     }

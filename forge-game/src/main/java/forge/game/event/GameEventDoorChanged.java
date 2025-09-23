@@ -3,7 +3,6 @@ package forge.game.event;
 import forge.card.CardStateName;
 import forge.game.card.Card;
 import forge.game.player.Player;
-import forge.util.CardTranslation;
 import forge.util.Lang;
 
 public record GameEventDoorChanged(Player activatingPlayer, Card card, CardStateName state, boolean unlock) implements GameEvent {
@@ -15,7 +14,7 @@ public record GameEventDoorChanged(Player activatingPlayer, Card card, CardState
 
     @Override
     public String toString() {
-        String doorName = CardTranslation.getTranslatedName(card.getState(state));
+        String doorName = card.getState(state).getTranslatedName();
 
         StringBuilder sb = new StringBuilder();
         sb.append(activatingPlayer);

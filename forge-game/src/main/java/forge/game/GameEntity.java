@@ -34,7 +34,6 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterType;
-import forge.game.event.GameEventCardAttachment;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
@@ -196,14 +195,12 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     public final void addAttachedCard(final Card c) {
         if (attachedCards.add(c)) {
             updateAttachedCards();
-            getGame().fireEvent(new GameEventCardAttachment(c, null, this));
         }
     }
 
     public final void removeAttachedCard(final Card c) {
         if (attachedCards.remove(c)) {
             updateAttachedCards();
-            getGame().fireEvent(new GameEventCardAttachment(c, this, null));
         }
     }
 

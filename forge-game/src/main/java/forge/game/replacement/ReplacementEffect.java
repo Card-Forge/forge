@@ -242,7 +242,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             String desc = AbilityUtils.applyDescriptionTextChangeEffects(getParam("Description"), this);
             ITranslatable nameSource = getHostName(this);
             desc = CardTranslation.translateMultipleDescriptionText(desc, nameSource);
-            String translatedName = CardTranslation.getTranslatedName(nameSource);
+            String translatedName = nameSource.getTranslatedName();
             desc = TextUtil.fastReplace(desc, "CARDNAME", translatedName);
             desc = TextUtil.fastReplace(desc, "NICKNAME", Lang.getInstance().getNickName(translatedName));
             if (desc.contains("EFFECTSOURCE")) {

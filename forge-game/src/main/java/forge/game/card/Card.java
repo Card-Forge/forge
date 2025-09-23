@@ -7849,8 +7849,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return currentState.getUntranslatedType();
     }
     @Override
-    public String getUntranslatedOracle() {
-        return currentState.getUntranslatedOracle();
+    public String getTranslatedName() {
+        return CardTranslation.getTranslatedName(this);
     }
 
     @Override

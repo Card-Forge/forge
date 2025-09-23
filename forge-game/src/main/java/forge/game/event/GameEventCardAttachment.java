@@ -3,7 +3,7 @@ package forge.game.event;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 
-public record GameEventCardAttachment(Card equipment, GameEntity newTarget, GameEntity oldEntity) implements GameEvent {
+public record GameEventCardAttachment(Card equipment, GameEntity oldEntity, GameEntity newTarget) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

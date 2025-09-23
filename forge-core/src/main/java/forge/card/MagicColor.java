@@ -1,6 +1,8 @@
 package forge.card;
 
 import com.google.common.collect.ImmutableList;
+
+import forge.util.ITranslatable;
 import forge.util.Localizer;
 
 /**
@@ -157,7 +159,7 @@ public final class MagicColor {
         }
     }
 
-    public enum Color {
+    public enum Color implements ITranslatable {
         WHITE(Constant.WHITE, MagicColor.WHITE, "W", "lblWhite"),
         BLUE(Constant.BLUE, MagicColor.BLUE, "U", "lblBlue"),
         BLACK(Constant.BLACK, MagicColor.BLACK, "B", "lblBlack"),
@@ -188,6 +190,7 @@ public final class MagicColor {
             }
         }
 
+        @Override
         public String getName() {
             return name;
         }
@@ -195,7 +198,8 @@ public final class MagicColor {
             return shortName;
         }
 
-        public String getLocalizedName() {
+        @Override
+        public String getTranslatedName() {
             return Localizer.getInstance().getMessage(label);
         }
 
@@ -204,10 +208,6 @@ public final class MagicColor {
         }
         public String getSymbol() {
             return symbol;
-        }
-        @Override
-        public String toString() {
-            return getLocalizedName();
         }
     }
 

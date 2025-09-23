@@ -1841,8 +1841,8 @@ public class CardView extends GameEntityView {
         }
 
         @Override
-        public String getUntranslatedOracle() {
-            return getOracleText();
+        public String getTranslatedName() {
+            return CardTranslation.getTranslatedName(this);
         }
     }
 
