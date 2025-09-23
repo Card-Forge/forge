@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import forge.adventure.util.Config;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -81,5 +82,38 @@ public class ItemData implements Serializable, Cloneable {
         } catch (CloneNotSupportedException e) {
             throw new AssertionError();
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        ItemData itemData = (ItemData) o;
+        return Objects.equals(name, itemData.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(name);
+    }
+
+    @Override
+    public String toString() {
+        return "ItemData{" +
+                "name='" + name + '\'' +
+                ", equipmentSlot='" + equipmentSlot + '\'' +
+                ", effect=" + effect +
+                ", description='" + description + '\'' +
+                ", iconName='" + iconName + '\'' +
+                ", questItem=" + questItem +
+                ", cost=" + cost +
+                ", usableOnWorldMap=" + usableOnWorldMap +
+                ", usableInPoi=" + usableInPoi +
+                ", isCracked=" + isCracked +
+                ", isEquipped=" + isEquipped +
+                ", longID=" + longID +
+                ", commandOnUse='" + commandOnUse + '\'' +
+                ", shardsNeeded=" + shardsNeeded +
+                ", dialogOnUse=" + dialogOnUse +
+                '}';
     }
 }
