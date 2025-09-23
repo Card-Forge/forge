@@ -2,8 +2,8 @@ Name:Woodland Champion
 ManaCost:1 G
 Types:Creature Elf Scout
 PT:2/2
-T:Mode$ ChangesZoneAll | ValidCards$ Card.token+YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigPutcounter | TriggerDescription$ Whenever one or more tokens you control enter, put that many +1/+1 counters on CARDNAME.
-SVar:TrigPutcounter:DB$ PutCounter | CounterType$ P1P1 | Defined$ Self | CounterNum$ X
+T:Mode$ ChangesZoneAll | ValidCards$ Card.token+YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more tokens you control enter, put that many +1/+1 counters on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | Defined$ Self | CounterNum$ X
 SVar:X:TriggerCount$Amount
 DeckHints:Ability$Token
 DeckHas:Ability$Counters

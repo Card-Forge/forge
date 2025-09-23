@@ -58,8 +58,8 @@ SVar:DBChangeLands11M:DB$ ChangeZoneAll | ChangeType$ Card.Land+IsRemembered | O
 SVar:DBChangeRest11M:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Graveyard | ForgetChanged$ True
 SVar:Tutor12M:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ Search your library for a card and put that card into your hand. Then shuffle your library.
 SVar:Sacrifice13M:DB$ Sacrifice | ValidTgts$ Player | Amount$ 2 | SacValid$ Creature | SpellDescription$ Target player sacrifices two creatures.
-SVar:Token14M:DB$ Token | TokenScript$ b_5_5_demon_flying | SubAbility$ DBLoselife14M | SpellDescription$ Create a 5/5 black Demon creature token with flying. You lose 2 life.
-SVar:DBLoselife14M:DB$ LoseLife | LifeAmount$ 2
+SVar:Token14M:DB$ Token | TokenScript$ b_5_5_demon_flying | SubAbility$ DBLoseLife14M | SpellDescription$ Create a 5/5 black Demon creature token with flying. You lose 2 life.
+SVar:DBLoseLife14M:DB$ LoseLife | LifeAmount$ 2
 SVar:Token15M:DB$ Token | TokenScript$ c_4_4_dragon_flying | SpellDescription$ Create a 4/4 gold Dragon creature token with flying.
 SVar:SetLife16M:DB$ SetLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 10 | SpellDescription$ Target player's life total becomes 10.
 SVar:Destroy17M:DB$ Destroy | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SpellDescription$ Destroy target nonland permanent.

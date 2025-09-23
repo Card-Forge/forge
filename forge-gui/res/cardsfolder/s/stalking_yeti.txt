@@ -5,7 +5,7 @@ PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Card.StrictlySelf | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters, if it's on the battlefield, it deals damage equal to its power to target creature an opponent controls and that creature deals damage equal to its power to CARDNAME.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ X | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y
-A:AB$ ChangeZone | Cost$ 2 S | Origin$ Battlefield | Destination$ Hand | SorcerySpeed$ True | SpellDescription$ Return CARDNAME to its owner's hand. Activate only any time you could cast a sorcery.
+A:AB$ ChangeZone | Cost$ 2 S | Origin$ Battlefield | Destination$ Hand | SorcerySpeed$ True | SpellDescription$ Return CARDNAME to its owner's hand. Activate only as a sorcery.
 SVar:X:Count$CardPower
 SVar:Y:Targeted$CardPower
 AI:RemoveDeck:All
