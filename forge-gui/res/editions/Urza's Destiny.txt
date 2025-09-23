@@ -154,6 +154,3 @@ ScryfallCode=UDS
 141 R Thran Golem @Ron Spears
 142 R Urza's Incubator @Pete Venters
 143 R Yavimaya Hollow @Douglas Shuler
-
-[tokens]
-r_1_1_goblin
