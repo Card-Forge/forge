@@ -92,7 +92,12 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         private T get(int index) {
             synchronized (lock) {
-                return internalList.get(index);
+                try {
+                    // TODO: Find cause why index is invalid on some cases...
+                    return internalList.get(index);
+                } catch (Exception e) {
+                    return null;
+                }
             }
         }
 
@@ -579,6 +584,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 maxPileHeight = 0;
                 for (int j = 0; j < group.piles.size(); j++) {
                     Pile pile = group.piles.get(j);
+                    if (pile == null)
+                        continue;
                     y = pileY;
                     for (int k = 0; k < pile.items.size(); k++) {
                         ItemInfo itemInfo = pile.items.get(k);
@@ -588,7 +595,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         itemInfo.setBounds(x, y, itemWidth, itemHeight);
                         y += dy;
                     }
-                    pile.items.get(pile.items.size() - 1).pos = CardStackPosition.Top;
+                    ItemInfo itemInfo = pile.items.get(pile.items.size() - 1);
+                    if (itemInfo == null)
+                        continue;
+                    itemInfo.pos = CardStackPosition.Top;
                     pileHeight = y + itemHeight - dy - pileY;
                     if (pileHeight > maxPileHeight) {
                         maxPileHeight = pileHeight;
@@ -705,9 +715,13 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     float relX = x + group.getScrollLeft() - group.getLeft();
                     float relY = y + getScrollValue();
                     Pile pile = group.piles.get(j);
+                    if (pile == null)
+                        continue;
                     if (pile.contains(relX, relY)) {
                         for (int k = pile.items.size() - 1; k >= 0; k--) {
                             ItemInfo item = pile.items.get(k);
+                            if (item == null)
+                                continue;
                             if (item.contains(relX, relY)) {
                                 return item;
                             }
