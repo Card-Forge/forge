@@ -7171,23 +7171,31 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     @Override
-    protected final boolean canBeEnchantedBy(final Card aura) {
+    public final String cantBeEnchantedByMsg(final Card aura) {
         if (!aura.hasKeyword(Keyword.ENCHANT)) {
-            return false;
+            return "No Enchant Keyword";
         }
         for (KeywordInterface ki : aura.getKeywords(Keyword.ENCHANT)) {
             String k = ki.getOriginal();
             String m[] = k.split(":");
             String v = m[1];
-            if (!isValid(v.split(","), aura.getController(), aura, null)) {
-                return false;
-            }
-            if (!v.contains("inZone") && !isInPlay()) {
-                return false;
+            if (!isValid(v.split(","), aura.getController(), aura, null) || (!v.contains("inZone") && !isInPlay())) {
+                String desc;
+                if (m.length > 2) {
+                    desc = m[2];
+                } else {
+                    desc = m[1];
+                    if (CardType.isACardType(desc) || "Permanent".equals(desc) || "Player".equals(desc) || "Opponent".equals(desc)) {
+                        desc = desc.toLowerCase();
+                    }
+                }
+
+                return "Not " + desc;
             }
         }
-        return true;
+        return null;
     }
+
 
     @Override
     protected final boolean canBeEquippedBy(final Card equip, SpellAbility sa) {

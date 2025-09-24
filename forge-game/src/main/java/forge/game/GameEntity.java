@@ -25,6 +25,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import forge.card.CardType;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -240,7 +241,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         }
 
         // check for can't attach static
-        if (StaticAbilityCantAttach.cantAttach(this, attach, checkSBA)) {
+        if (StaticAbilityCantAttach.cantAttach(this, attach, checkSBA) != null) {
             return false;
         }
 
@@ -262,19 +263,33 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         return false;
     }
 
-    protected boolean canBeEnchantedBy(final Card aura) {
+    protected final boolean canBeEnchantedBy(final Card aura) {
+        return cantBeEnchantedByMsg(aura) == null;
+    }
+
+    public String cantBeEnchantedByMsg(final Card aura) {
         if (!aura.hasKeyword(Keyword.ENCHANT)) {
-            return false;
+            return "No Enchant Keyword";
         }
         for (KeywordInterface ki : aura.getKeywords(Keyword.ENCHANT)) {
             String k = ki.getOriginal();
             String m[] = k.split(":");
             String v = m[1];
             if (!isValid(v.split(","), aura.getController(), aura, null)) {
-                return false;
+                String desc;
+                if (m.length > 2) {
+                    desc = m[2];
+                } else {
+                    desc = m[1];
+                    if (CardType.isACardType(desc) || "Permanent".equals(desc) || "Player".equals(desc) || "Opponent".equals(desc)) {
+                        desc = desc.toLowerCase();
+                    }
+                }
+
+                return "Not " + desc;
             }
         }
-        return true;
+        return null;
     }
 
     public boolean hasCounters() {
