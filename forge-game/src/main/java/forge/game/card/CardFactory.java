@@ -466,7 +466,7 @@ public class CardFactory {
         return new WrappedAbility(sa.getTrigger(), sa.getWrappedAbility().copy(newHost, controller, false), sa.getDecider());
     }
 
-    public static CardCloneStates getCloneStates(final Card in, final Card out, final CardTraitBase sa) {
+    public static CardCloneStates getCloneStates(final Card in, final Card out, final SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Map<String,String> origSVars = host.getSVars();
         final List<String> types = Lists.newArrayList();
@@ -542,11 +542,10 @@ public class CardFactory {
             final CardState ret2 = new CardState(out, CardStateName.Secondary);
             ret2.copyFrom(in.getState(CardStateName.Secondary), false, sa);
             result.put(CardStateName.Secondary, ret2);
-        } else if (in.isTransformable() && sa instanceof SpellAbility && (
-                ApiType.CopyPermanent.equals(((SpellAbility)sa).getApi()) ||
-                ApiType.CopySpellAbility.equals(((SpellAbility)sa).getApi()) ||
-                ApiType.ReplaceToken.equals(((SpellAbility)sa).getApi())
-                )) {
+        } else if (in.isTransformable() && (
+                ApiType.CopyPermanent.equals(sa.getApi()) ||
+                ApiType.CopySpellAbility.equals(sa.getApi()) ||
+                ApiType.ReplaceToken.equals(sa.getApi()))) {
             // CopyPermanent can copy token
             final CardState ret1 = new CardState(out, CardStateName.Original);
             ret1.copyFrom(in.getState(CardStateName.Original), false, sa);
@@ -706,8 +705,8 @@ public class CardFactory {
                 }
             }
 
-            if (sa.hasParam("GainThisAbility") && sa instanceof SpellAbility) {
-                SpellAbility root = ((SpellAbility) sa).getRootAbility();
+            if (sa.hasParam("GainThisAbility")) {
+                SpellAbility root = sa.getRootAbility();
 
                 // Aurora Shifter
                 if (root.isTrigger() && root.getTrigger().getSpawningAbility() != null) {
