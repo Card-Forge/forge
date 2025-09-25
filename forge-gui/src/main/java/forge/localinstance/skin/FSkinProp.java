@@ -22,7 +22,10 @@ import java.util.Map;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
+import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
+import forge.deck.DeckSection;
+import forge.game.zone.ZoneType;
 import forge.localinstance.properties.ForgeConstants;
 
 /**
@@ -703,6 +706,51 @@ public enum FSkinProp {
         MANA_IMG.put("AL4OFF", FSkinProp.IMG_ATTR_4_OFF);
         MANA_IMG.put("AL5OFF", FSkinProp.IMG_ATTR_5_OFF);
         MANA_IMG.put("AL6OFF", FSkinProp.IMG_ATTR_6_OFF);
+    }
+
+    public static FSkinProp iconFromColor(MagicColor.Color color) {
+        return switch (color) {
+            case WHITE -> IMG_MANA_W;
+            case BLUE -> IMG_MANA_U;
+            case BLACK -> IMG_MANA_B;
+            case RED -> IMG_MANA_R;
+            case GREEN -> IMG_MANA_G;
+            case COLORLESS -> IMG_MANA_COLORLESS;
+        };
+    }
+
+    public static FSkinProp iconFromZone(ZoneType zoneType, boolean hdbuttons) {
+        return switch (zoneType) {
+            case Hand -> hdbuttons ? IMG_HDZONE_HAND : IMG_ZONE_HAND;
+            case Library -> hdbuttons ? IMG_HDZONE_LIBRARY : IMG_ZONE_LIBRARY;
+            case Graveyard -> hdbuttons ? IMG_HDZONE_GRAVEYARD : IMG_ZONE_GRAVEYARD;
+            case Exile -> hdbuttons ? IMG_HDZONE_EXILE : IMG_ZONE_EXILE;
+            case Sideboard -> hdbuttons ? IMG_HDZONE_SIDEBOARD : IMG_ZONE_SIDEBOARD;
+            case Flashback -> hdbuttons ? IMG_HDZONE_FLASHBACK : IMG_ZONE_FLASHBACK;
+            case Command -> IMG_ZONE_COMMAND; //IMG_PLANESWALKER
+            case PlanarDeck -> IMG_ZONE_PLANAR;
+            case SchemeDeck -> IMG_ZONE_SCHEME;
+            case AttractionDeck -> IMG_ZONE_ATTRACTION;
+            case ContraptionDeck -> IMG_ZONE_CONTRAPTION;
+            case Ante -> IMG_ZONE_ANTE;
+            case Junkyard ->IMG_ZONE_JUNKYARD;
+            default -> IMG_HDZONE_LIBRARY;
+        };
+    }
+
+    public static FSkinProp iconFromDeckSection(DeckSection deckSection, boolean hdbuttons) {
+        return switch (deckSection) {
+            case Main -> hdbuttons ? IMG_HDZONE_LIBRARY : ICO_DECKLIST;
+            case Sideboard -> hdbuttons ? IMG_HDZONE_SIDEBOARD : IMG_ZONE_SIDEBOARD;
+            case Commander -> IMG_ZONE_COMMAND;
+            case Avatar -> IMG_ZONE_AVATAR;
+            case Conspiracy -> IMG_ZONE_CONSPIRACY;
+            case Planes -> IMG_ZONE_PLANAR;
+            case Schemes -> IMG_ZONE_SCHEME;
+            case Attractions -> IMG_ZONE_ATTRACTION;
+            case Contraptions -> IMG_ZONE_CONTRAPTION;
+            default -> IMG_HDZONE_SIDEBOARD;
+        };
     }
 
     public enum PropType {

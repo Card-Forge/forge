@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
@@ -19,6 +20,7 @@ import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.localinstance.skin.FSkinProp;
 import forge.menu.FMenuBar;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
@@ -139,23 +141,8 @@ public class VPlayerPanel extends FContainer {
         tabs.add(zoneTab);
     }
 
-    public static FSkinImage iconFromZone(ZoneType zoneType) {
-        return switch (zoneType) {
-            case Hand -> Forge.hdbuttons ? FSkinImage.HDHAND : FSkinImage.HAND;
-            case Library -> Forge.hdbuttons ? FSkinImage.HDLIBRARY : FSkinImage.LIBRARY;
-            case Graveyard -> Forge.hdbuttons ? FSkinImage.HDGRAVEYARD : FSkinImage.GRAVEYARD;
-            case Exile -> Forge.hdbuttons ? FSkinImage.HDEXILE : FSkinImage.EXILE;
-            case Sideboard -> Forge.hdbuttons ? FSkinImage.HDSIDEBOARD : FSkinImage.SIDEBOARD;
-            case Flashback -> Forge.hdbuttons ? FSkinImage.HDFLASHBACK : FSkinImage.FLASHBACK;
-            case Command -> FSkinImage.COMMAND;
-            case PlanarDeck -> FSkinImage.PLANAR;
-            case SchemeDeck -> FSkinImage.SCHEME;
-            case AttractionDeck -> FSkinImage.ATTRACTION;
-            case ContraptionDeck -> FSkinImage.CONTRAPTION;
-            case Ante -> FSkinImage.ANTE;
-            case Junkyard -> FSkinImage.JUNKYARD;
-            default -> FSkinImage.HDLIBRARY;
-        };
+    public static FSkinImageInterface iconFromZone(ZoneType zoneType) {
+        return FSkin.getImages().get(FSkinProp.iconFromZone(zoneType, Forge.hdbuttons));
     }
 
     public Iterable<InfoTab> getTabs() {
@@ -308,6 +295,7 @@ public class VPlayerPanel extends FContainer {
         tabManaPool.update();
     }
 
+    @SuppressWarnings("incomplete-switch")
     public void updateZone(ZoneType zoneType) {
         if (zoneType == ZoneType.Battlefield) {
             field.update(true);

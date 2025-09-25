@@ -1194,9 +1194,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void removeItem(String name) {
-        ItemData item = ItemListData.getItem(name);
-        if (item != null)
-            removeItem(item);
+        inventoryItems.stream().filter(itemData -> name.equalsIgnoreCase(itemData.name)).findFirst().ifPresent(this::removeItem);
     }
 
     public void removeItem(ItemData item) {

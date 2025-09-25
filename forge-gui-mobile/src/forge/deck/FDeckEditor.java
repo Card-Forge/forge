@@ -30,6 +30,7 @@ import forge.itemmanager.ItemManager.ContextMenuBuilder;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.filters.ItemFilter;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.localinstance.skin.FSkinProp;
 import forge.menu.*;
 import forge.model.FModel;
 import forge.screens.FScreen;
@@ -409,18 +410,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     }
 
     public static FImage iconFromDeckSection(DeckSection deckSection) {
-        return switch (deckSection) {
-            case Main -> MAIN_DECK_ICON;
-            case Sideboard -> SIDEBOARD_ICON;
-            case Commander -> FSkinImage.COMMAND;
-            case Avatar -> FSkinImage.AVATAR;
-            case Conspiracy -> FSkinImage.CONSPIRACY;
-            case Planes -> FSkinImage.PLANAR;
-            case Schemes -> FSkinImage.SCHEME;
-            case Attractions -> FSkinImage.ATTRACTION;
-            case Contraptions -> FSkinImage.CONTRAPTION;
-            default -> FSkinImage.HDSIDEBOARD;
-        };
+        return FSkin.getImages().get(FSkinProp.iconFromDeckSection(deckSection, Forge.hdbuttons));
     }
 
     private final DeckEditorConfig editorConfig;

@@ -4,4 +4,3 @@ Type:Archived
 Subtype:Arena
 Effective:2025-08-19
 Sets:ANA, ANB, BLB, YBLB, DSK, YDSK, FDN, DFT, YDFT, TDM, YTDM, FIN, EOE, YEOE
-Banned:Monstrous Rage
