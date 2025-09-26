@@ -815,7 +815,7 @@ public class ComputerUtilMana {
                 String manaProduced = predictManafromSpellAbility(saPayment, ai, toPay);
                 payMultipleMana(cost, manaProduced, ai);
 
-                // remove from available lists
+                // remove to prevent re-usage since resources don't get consumed
                 sourcesForShards.values().removeIf(CardTraitPredicates.isHostCard(saPayment.getHostCard()));
             } else {
                 final CostPayment pay = new CostPayment(saPayment.getPayCosts(), saPayment);
@@ -828,8 +828,10 @@ public class ComputerUtilMana {
                 // subtract mana from mana pool
                 manapool.payManaFromAbility(sa, cost, saPayment);
 
-                // no need to remove abilities from resource map,
-                // once their costs are paid and consume resources, they can not be used again
+                // need to consider if another use is now prevented
+                if (!cost.isPaid() && saPayment.isActivatedAbility() && !saPayment.getRestrictions().canPlay(saPayment.getHostCard(), saPayment)) {
+                    sourcesForShards.values().removeIf(s -> s == saPayment);
+                }
 
                 if (hasConverge) {
                     // hack to prevent converge re-using sources
@@ -1662,7 +1664,6 @@ public class ComputerUtilMana {
                                 if (replaced.contains("C")) {
                                     manaMap.put(ManaAtom.COLORLESS, m);
                                 }
-
                             }
                         }
                     }
