@@ -29,12 +29,15 @@ public class AiCostDecision extends CostDecisionMakerBase {
     private final CardCollection tapped;
 
     public AiCostDecision(Player ai0, SpellAbility sa, final boolean effect) {
+        this(ai0, sa, effect, false);
+    }
+    public AiCostDecision(Player ai0, SpellAbility sa, final boolean effect, final boolean payMana) {
         super(ai0, effect, sa, sa.getHostCard());
 
         discarded = new CardCollection();
         tapped = new CardCollection();
         Set<Card> tappedForMana = AiCardMemory.getMemorySet(ai0, MemorySet.PAYS_TAP_COST);
-        if (tappedForMana != null) {
+        if (!payMana && tappedForMana != null) {
             tapped.addAll(tappedForMana);
         }
     }
