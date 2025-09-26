@@ -6,28 +6,28 @@ Type=Online
 ScryfallCode=AA3
 
 [cards]
-1 U Flickerwisp @Jeremy Enecio
-2 R Staff of the Storyteller @Dan Scott
-3 C Force Spike @Nelson DeCastro
-4 C Miscalculation @Jeff Laubenstein
-5 C Peek @Adam Rex
-6 R Dauthi Voidwalker @Sidharth Chaturyedi
-7 U Necromancy @Pete Venters
-8 C Assault Strobe @Kev Walker
-9 R Broadside Bombardiers @Tomek Larek
-10 C Chain Lightning @Christopher Moeller
-11 U Gut, True Soul Zealot @Wayne Reynolds
-12 U Oxidda Scrapmelter @Igor Kieryluk
-13 C Ambush Viper @Alan Pollack
-14 C Crop Rotation @DiTerlizzi
-15 R Exploration @Lindsey Look
-16 R Noble Hierarch @Mark Zug
-17 R Fallen Shinobi @Dmitry Burmak
-18 M Batterskull @Mark Zug
-19 M Emrakul, the Aeons Torn @Mark Tedin
-20 M Kaldra Compleat @Vincent Proce
-21 R Memory Jar @Donato Giancola
-22 M Ulamog, the Infinite Gyre @Aleksi Briclot
+1 M Emrakul, the Aeons Torn @Mark Tedin
+2 M Ulamog, the Infinite Gyre @Aleksi Briclot
+3 U Flickerwisp @Jeremy Enecio
+4 R Staff of the Storyteller @Dan Murayama Scott
+5 C Force Spike @Nelson DeCastro
+6 C Miscalculation @Jeff Laubenstein
+7 C Peek @Adam Rex
+8 R Dauthi Voidwalker @Sidharth Chaturvedi
+9 U Necromancy @Pete Venters
+10 C Assault Strobe @Kev Walker
+11 R Broadside Bombardiers @Tomek Larek
+12 C Chain Lightning @Christopher Moeller
+13 U Gut, True Soul Zealot @Wayne Reynolds
+14 U Oxidda Scrapmelter @Igor Kieryluk
+15 C Ambush Viper @Alan Pollack
+16 C Crop Rotation @DiTerlizzi
+17 R Exploration @Lindsey Look
+18 R Noble Hierarch @Mark Zug
+19 R Fallen Shinobi @Dmitry Burmak
+20 M Batterskull @Mark Zug
+21 M Kaldra Compleat @Vincent Proce
+22 R Memory Jar @Donato Giancola
 23 R Umezawa's Jitte @Christopher Moeller
 24 R Shelldock Isle @Mark Tedin
 25 R Yavimaya, Cradle of Growth @Sarah Finnigan
