@@ -728,6 +728,10 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     protected abstract AdvancedSearchFilter<? extends T> createAdvancedSearchFilter();
 
+    protected Iterable<Entry<T, Integer>> getUnique(final Iterable<Entry<T, Integer>> items) {
+        return Aggregates.uniqueByLast(items, from -> from.getKey().getName());
+    }
+
     public void addFilter(final ItemFilter<? extends T> filter) {
         filters.get().add(filter);
         add(filter.getWidget());
@@ -908,19 +912,29 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     }
 
     public void updateView(final boolean forceFilter, final Iterable<T> itemsToSelect) {
+        //TO-maybe-DO: Share logic between this and identical method in desktop.
         final boolean useFilter = (forceFilter && (filterPredicate != null)) || !isUnfiltered();
 
-        if (useFilter || forceFilter) {
-            model.clear();
-
-            Iterable<Entry<T, Integer>> items = pool;
-            if (useFilter) {
-                Predicate<Entry<T, Integer>> pred = x -> x != null && filterPredicate.test(x.getKey());
-                items = IterableUtil.filter(pool, pred);
-            }
-            model.addItems(items);
+        if (useFilter || this.wantUnique || forceFilter) {
+            this.model.clear();
         }
 
+        if (useFilter && this.wantUnique) {
+            final Predicate<Entry<T, Integer>> filterForPool = x -> this.filterPredicate.test(x.getKey());
+            final Iterable<Entry<T, Integer>> items = getUnique(IterableUtil.filter(this.pool, filterForPool));
+            this.model.addItems(items);
+        }
+        else if (useFilter) {
+            final Predicate<Entry<T, Integer>> pred = x -> this.filterPredicate.test(x.getKey());
+            this.model.addItems(IterableUtil.filter(this.pool, pred));
+        }
+        else if (this.wantUnique) {
+            final Iterable<Entry<T, Integer>> items = getUnique(this.pool);
+            this.model.addItems(items);
+        }
+        else if (forceFilter) {
+            this.model.addItems(this.pool);
+        }
         currentView.refresh(itemsToSelect, getSelectedIndex(), forceFilter ? 0 : currentView.getScrollValue());
 
         //update ratio of # in filtered pool / # in total pool
