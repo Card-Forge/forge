@@ -324,6 +324,12 @@ public final class CardRules implements ICardCharacteristics {
         }
         if (hasKeyword("Friends forever") && b.hasKeyword("Friends forever")) {
             legal = true; // Stranger Things Secret Lair gimmick partner commander
+        }  
+        if (hasKeyword("Partner - Survivors") && b.hasKeyword("Partner - Survivors")) {
+            legal = true; // The Last of Us Secret Lair gimmick partner commander
+        }
+        if (hasKeyword("Partner - Father & Son") && b.hasKeyword("Partner - Father & Son")) {
+            legal = true; // God of War Secret Lair gimmick partner commander
         }
         if (hasKeyword("Choose a Background") && b.canBeBackground()
                 || b.hasKeyword("Choose a Background") && canBeBackground()) {
@@ -342,6 +348,7 @@ public final class CardRules implements ICardCharacteristics {
         }
         return canBeCommander() && (hasKeyword("Partner") || !this.partnerWith.isEmpty() ||
                 hasKeyword("Friends forever") || hasKeyword("Choose a Background") ||
+                hasKeyword("Partner - Father & Son") || hasKeyword("Partner - Survivors") ||
                 hasKeyword("Doctor's companion") || isDoctor());
     }
 

@@ -1,0 +1,10 @@
+Name:Atreus, Impulsive Son
+ManaCost:1 U R
+Types:Legendary Creature God Archer
+PT:2/4
+K:Reach
+K:Partner - Father & Son
+A:AB$ Draw | Cost$ 3 T | NumCards$ X | SubAbility$ DBDamage | SpellDescription$ Draw a card for each experience counter you have, then discard a card. 
+SVar:DBDamage:DB$ DealDamage | NumDmg$ 2 | Defined$ Opponent | SpellDescription$ CARDNAME deals 2 damage to each opponent.
+SVar:X:Count$YourCountersExperience
+Oracle:Reach\n{3}, {T}: Draw a card for each experience counter you have, then discard a card. Atreus, Impulsive Son deals 2 damage to each opponent.\nPartner-Father & son
