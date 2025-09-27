@@ -205,12 +205,12 @@ public final class StaticAbilityContinuous {
                     if (input.contains("CommanderColorID")) {
                         if (!hostCard.getController().getCommanders().isEmpty()) {
                             if (input.contains("NotCommanderColorID")) {
-                                for (Byte color : hostCard.getController().getNotCommanderColorID()) {
-                                    newKeywords.add(input.replace("NotCommanderColorID", MagicColor.toLongString(color)));
+                                for (MagicColor.Color color : hostCard.getController().getNotCommanderColorID()) {
+                                    newKeywords.add(input.replace("NotCommanderColorID", color.getName()));
                                 }
                                 return true;
-                            } else for (Byte color : hostCard.getController().getCommanderColorID()) {
-                                newKeywords.add(input.replace("CommanderColorID", MagicColor.toLongString(color)));
+                            } else for (MagicColor.Color color : hostCard.getController().getCommanderColorID()) {
+                                newKeywords.add(input.replace("CommanderColorID", color.getName()));
                             }
                             return true;
                         }
@@ -218,12 +218,9 @@ public final class StaticAbilityContinuous {
                     }
                     // two variants for Red vs. red in keyword
                     if (input.contains("ColorsYouCtrl") || input.contains("colorsYouCtrl")) {
-                        final ColorSet colorsYouCtrl = CardUtil.getColorsFromCards(controller.getCardsIn(ZoneType.Battlefield));
-
-                        for (byte color : colorsYouCtrl) {
-                            final String colorWord = MagicColor.toLongString(color);
-                            String y = input.replaceAll("ColorsYouCtrl", StringUtils.capitalize(colorWord));
-                            y = y.replaceAll("colorsYouCtrl", colorWord);
+                        for (MagicColor.Color color : CardUtil.getColorsFromCards(controller.getCardsIn(ZoneType.Battlefield))) {
+                            String y = input.replaceAll("ColorsYouCtrl", StringUtils.capitalize(color.getName()));
+                            y = y.replaceAll("colorsYouCtrl", color.getName());
                             newKeywords.add(y);
                         }
                         return true;
@@ -706,8 +703,8 @@ public final class StaticAbilityContinuous {
                     newKeywords.removeIf(input -> {
                         // replace one Keyword with list of keywords
                         if (input.startsWith("Protection") && input.contains("CardColors")) {
-                            for (Byte color : affectedCard.getColor()) {
-                                extraKeywords.add(input.replace("CardColors", MagicColor.toLongString(color)));
+                            for (MagicColor.Color color : affectedCard.getColor()) {
+                                extraKeywords.add(input.replace("CardColors", color.getName()));
                             }
                             return true;
                         }
@@ -921,7 +918,7 @@ public final class StaticAbilityContinuous {
                 addColors = ColorSet.fromNames(hostCard.getChosenColors());
             }
         } else if (colors.equals("All")) {
-            addColors = ColorSet.ALL_COLORS;
+            addColors = ColorSet.WUBRG;
         } else {
             addColors = ColorSet.fromNames(colors.split(" & "));
         }

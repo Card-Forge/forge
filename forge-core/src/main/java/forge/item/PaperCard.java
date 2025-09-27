@@ -593,7 +593,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
 
         public PaperCardFlags withMarkedColors(ColorSet markedColors) {
             if(markedColors == null)
-                markedColors = ColorSet.NO_COLORS;
+                markedColors = ColorSet.C;
             return new PaperCardFlags(this, markedColors, null);
         }
 

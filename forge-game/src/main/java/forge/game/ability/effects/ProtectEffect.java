@@ -124,8 +124,8 @@ public class ProtectEffect extends SpellAbilityEffect {
                 }
             } else if (sa.getParam("Gains").startsWith("Defined")) {
                 CardCollection def = AbilityUtils.getDefinedCards(host, sa.getParam("Gains").substring(8), sa);
-                for (final Byte color : def.get(0).getColor()) {
-                    gains.add(MagicColor.toLongString(color));
+                for (final MagicColor.Color color : def.get(0).getColor()) {
+                    gains.add(color.getName());
                 }
             } else {
                 gains.addAll(choices);
