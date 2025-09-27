@@ -7,6 +7,6 @@ SVar:PlayMain1:TRUE
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of combat on your turn, create a 2/1 blue Phyrexian Myr artifact creature token. Then you may choose a token you control. If you do, each other token you control becomes a copy of that token.
 SVar:TrigToken:DB$ Token | TokenScript$ u_2_1_a_phyrexian_myr | SubAbility$ DBClone
 SVar:DBClone:DB$ Clone | Choices$ Card.token+YouCtrl | ChoiceTitle$ You may choose a token you control | ChoiceOptional$ True | ExcludeChosen$ True | CloneTarget$ Valid Card.token+YouCtrl
-DeckHints:Type$Token
-DeckHas:Type$Token & Type$Artifact|Myr
+DeckHints:Ability$Token
+DeckHas:Ability$Token & Type$Artifact|Myr
 Oracle:Creature tokens you control have haste.\nAt the beginning of combat on your turn, create a 2/1 blue Phyrexian Myr artifact creature token. Then you may choose a token you control. If you do, each other token you control becomes a copy of that token.
