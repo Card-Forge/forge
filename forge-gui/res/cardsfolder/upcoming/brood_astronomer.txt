@@ -1,0 +1,10 @@
+Name:Brood Astronomer
+ManaCost:1 G
+Types:Creature Insect Scientist
+PT:2/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDraft | TriggerDescription$ When this creature enters, you may sacrifice a land. If you do, draft a card from the Planets spellbook and put it onto the battlefield tapped.
+SVar:TrigDraft:AB$ Draft | Cost$ Sac<1/Land> | SpellbookName$ Planets | Spellbook$ Adagia; Windswept Bastion,Evendo; Waking Haven,Kavaron; Memorial World,Susur Secundi; Void Altar,Uthros; Titanic Godcore | Zone$ Battlefield | Tapped$ True
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | SpellDescription$ Add one mana of any color. If you control a Planet with twelve or more charge counters on it, add three mana of any one color instead.
+SVar:X:Count$Compare Y GE1.3.1
+SVar:Y:Count$Valid Planet.YouCtrl+counters_GE12_CHARGE
+Oracle:When this creature enters, you may sacrifice a land. If you do, draft a card from the Planets spellbook and put it onto the battlefield tapped.\n{T}: Add one mana of any color. If you control a Planet with twelve or more charge counters on it, add three mana of any one color instead.
