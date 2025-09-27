@@ -1,0 +1,9 @@
+Name:Mutable Explorer
+ManaCost:2 G
+Types:Creature Shapeshifter
+PT:1/1
+K:Changeling
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a tapped Mutavault token. (It's a land with "{T}: Add {C}" and "{1}: This token becomes a 2/2 creature with all creature types until end of turn. It's still a land.")
+SVar:TrigToken:DB$ CopyPermanent |  DefinedName$ Mutavault | TokenTapped$ True 
+DeckHas:Ability$Token & Type$Land
+Oracle:Changeling (This card is every creature type.)\nWhen this creature enters, create a tapped Mutavault token. (It's a land with "{T}: Add {C}" and "{1}: This token becomes a 2/2 creature with all creature types until end of turn. It's still a land.")
