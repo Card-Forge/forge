@@ -12,7 +12,7 @@ public record PerpetualColors(long timestamp, ColorSet colors, boolean overwrite
 
     @Override
     public void applyEffect(Card c) {
-        c.addColor(colors, !overwrite, timestamp, (long) 0, false);
+        c.addColor(colors, !overwrite, timestamp, null);
     }
 
 }
