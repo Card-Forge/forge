@@ -4,12 +4,12 @@ Types:Legendary Creature Elemental God
 PT:5/5
 K:Flying
 K:Lifelink
-S:Mode$ Continuous | Affected$ Card.Creature+YouCtrl+wasCast | AffectedZone$ Stack | AddKeyword$ Convoke | Description$ Creature spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting a creature spell pays for 1 or one mana of that creature's color.)
+S:Mode$ Continuous | Affected$ Card.Creature+YouCtrl+wasCast | AffectedZone$ Stack | AddKeyword$ Convoke | Description$ Creature spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting a creature spell pays for {1} or one mana of that creature's color.)
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your first main phase, you may pay {B}. If you do, transform NICKNAME.
 SVar:TrigTransform:AB$ SetState | Cost$ B | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 DeckHas:Ability$LifeGain|Counters
-Oracle:Flying, lifelink\nCreature spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting a creature spell pays for 1 or one mana of that creature's color.)\nAt the beginning of your first main phase, you may pay {B}. If you do, transform Eirdu.
+Oracle:Flying, lifelink\nCreature spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting a creature spell pays for {1} or one mana of that creature's color.)\nAt the beginning of your first main phase, you may pay {B}. If you do, transform Eirdu.
 
 ALTERNATE
 

@@ -21,9 +21,8 @@ Colors:white
 Types:Legendary Creature Merfolk Rogue
 PT:2/2
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
-T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigProt | TriggerDescription$ Whenever this creature enters or transforms into CARDNAME, target creature you control gains protection from each color until your next turn.
-T:Mode$ Phase | Phase$ Main1 | Secondary$ True | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigProt | TriggerDescription$ Whenever this creature enters or transforms into CARDNAME, target creature you control gains protection from each color until your next turn.
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigProt | TriggerDescription$ Whenever this creature transforms into CARDNAME, target creature you control gains protection from each color until your next turn.
 SVar:TrigProt:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Protection from each color | Duration$ UntilYourNextTurn
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your first main phase, you may pay {U}. If you do, transform NICKNAME.
 SVar:TrigTransform:AB$ SetState | Cost$ U | Defined$ Self | Mode$ Transform
-Oracle:Sygg can't be blocked.\nWhenever this creature enters or transforms into Sygg, Wanderbrine Shield, target creature you control gains protection from each color until your next turn.\nAt the beginning of your first main phase, you may pay {U}. If you do, transform Sygg.
+Oracle:Sygg can't be blocked.\nWhenever this creature transforms into Sygg, Wanderbrine Shield, target creature you control gains protection from each color until your next turn.\nAt the beginning of your first main phase, you may pay {U}. If you do, transform Sygg.
