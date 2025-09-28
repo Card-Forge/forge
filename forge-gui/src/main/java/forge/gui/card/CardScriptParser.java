@@ -485,7 +485,7 @@ public final class CardScriptParser {
             "wasNotCast", "ChosenType", "IsNotChosenType", "IsCommander",
             "IsRenowned");
     private static final Set<String> VALID_EXCLUSIVE_STARTSWITH = ImmutableSortedSet
-            .of("named", "!named", "OwnedBy", "ControlledBy",
+            .of("named", "OwnedBy", "ControlledBy",
                     "ControllerControls", "AttachedTo", "EnchantedBy",
                     "TopGraveyard", "SharesColorWith",
                     "MostProminentColor", "notSharesColorWith",
