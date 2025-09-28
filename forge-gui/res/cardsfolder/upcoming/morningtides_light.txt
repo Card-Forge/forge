@@ -7,6 +7,6 @@ SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Tapp
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ PreventDamage | AILogic$ Fog | Duration$ UntilYourNextTurn | SubAbility$ DBExileSelf | SpellDescription$ Until your next turn, prevent all damage that would be dealt to you.
 SVar:PreventDamage:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ You | Description$ Until your next turn, prevent all damage that would be dealt to you.
-SVar:DBExileSelf:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | StackDescription$ None | SpellDescription$ Exile CARDNAME
+SVar:DBExileSelf:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | StackDescription$ None | SpellDescription$ Exile CARDNAME.
 SVar:X:Count$Valid Creature
 Oracle:Exile any number of target creatures. At the beginning of the next end step, return those cards to the battlefield tapped under their owners' control.\nUntil your next turn, prevent all damage that would be dealt to you.\nExile Morningtide's Light.
