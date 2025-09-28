@@ -66,12 +66,6 @@ public class CardProperty {
             if (!card.sharesNameWith(name)) {
                 return false;
             }
-        } else if (property.startsWith("notnamed")) {
-            String name = TextUtil.fastReplace(property.substring(8), ";", ","); // workaround for card name with ","
-            name = TextUtil.fastReplace(name, "_", " ");
-            if (card.sharesNameWith(name)) {
-                return false;
-            }
         } else if (property.equals("NamedCard")) {
             boolean found = false;
             for (String name : source.getNamedCards()) {

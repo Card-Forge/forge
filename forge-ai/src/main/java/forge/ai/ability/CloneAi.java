@@ -188,7 +188,7 @@ public class CloneAi extends SpellAbilityAi {
         final boolean canCloneLegendary = "True".equalsIgnoreCase(sa.getParam("NonLegendary"));
 
         String filter = !isVesuva ? "Permanent.YouDontCtrl,Permanent.nonLegendary"
-                : "Permanent.YouDontCtrl+notnamed" + name + ",Permanent.nonLegendary+notnamed" + name;
+                : "Permanent.YouDontCtrl+!named" + name + ",Permanent.nonLegendary+!named" + name;
 
         // TODO: rewrite this block so that this is done somehow more elegantly
         if (canCloneLegendary) {
