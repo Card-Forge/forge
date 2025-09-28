@@ -142,7 +142,7 @@ public enum Keyword {
     OVERLOAD("Overload", KeywordWithCost.class, false, "You may cast this spell for its overload cost. If you do, change its text by replacing all instances of \"target\" with \"each.\""),
     PARTNER("Partner", Partner.class, true, "You can have two commanders if both have partner."),
     PARTNER_SURVIVOR("Partner - Survivors", Partner.class, true, "You can have two commanders if both have this ability."),
-    PARTNER_FATHER_AND_SON("Partner - Father & Son", Partner.class, true, "You can have two commanders if both have this ability ."),    
+    PARTNER_FATHER_AND_SON("Partner - Father & Son", Partner.class, true, "You can have two commanders if both have this ability."),    
     PERSIST("Persist", SimpleKeyword.class, false, "When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it."),
     PHASING("Phasing", SimpleKeyword.class, true, "This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist."),
     PLOT("Plot", KeywordWithCost.class, false, "You may pay %s and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery."),
