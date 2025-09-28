@@ -7162,7 +7162,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     @Override
-    public final String cantBeEnchantedByMsg(final Card aura) {
+    protected final String cantBeEnchantedByMsg(final Card aura) {
         if (!aura.hasKeyword(Keyword.ENCHANT)) {
             return "No Enchant Keyword";
         }
@@ -7212,18 +7212,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return null;
     }
 
-    /* (non-Javadoc)
-     * @see forge.game.GameEntity#canBeAttached(forge.game.card.Card, boolean)
-     */
     @Override
-    public boolean canBeAttached(Card attach, SpellAbility sa, boolean checkSBA) {
-        // phase check there
-        if (isPhasedOut() && !attach.isPhasedOut()) {
-            return false;
-        }
-
-        return super.canBeAttached(attach, sa, checkSBA);
-    }
     public String cantBeAttachedMsg(final Card attach, SpellAbility sa, boolean checkSBA) {
         if (isPhasedOut() && !attach.isPhasedOut()) {
             return getName() + " is phased out";
