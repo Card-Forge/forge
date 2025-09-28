@@ -169,9 +169,12 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         // TODO should use sa.canTarget(card) instead?
         // it doesn't have messages
 
-        if (sa.isSpell() && sa.getHostCard().isAura() && !card.canBeAttached(sa.getHostCard(), sa)) {
-            showMessage(sa.getHostCard() + " - Cannot enchant this card (Shroud? Protection? Restrictions?).");
-            return false;
+        if (sa.isSpell() && sa.getHostCard().isAura()) {
+            String msg = card.cantBeAttachedMsg(sa.getHostCard(), sa);
+            if (msg != null) {
+                showMessage(sa.getHostCard() + " - " + msg);
+                return false;
+            }
         }
         //If the card is not a valid target
         if (!card.canBeTargetedBy(sa)) {
