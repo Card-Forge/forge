@@ -1564,8 +1564,6 @@ public class CardProperty {
                     return false;
                 }
             }
-        } else if (property.startsWith("notattacking")) {
-            return null == combat || !combat.isAttacking(card);
         } else if (property.startsWith("enlistedThisCombat")) {
             if (card.getEnlistedThisCombat() == false) return false;
         } else if (property.startsWith("attackedThisCombat")) {
@@ -1619,8 +1617,6 @@ public class CardProperty {
             if (Collections.disjoint(combat.getAttackersBlockedBy(source), combat.getAttackersBlockedBy(card))) {
                 return false;
             }
-        } else if (property.startsWith("notblocking")) {
-            return null == combat || !combat.isBlocking(card);
         }
         // Nex predicates refer to past combat and don't need a reference to actual combat
         else if (property.equals("blocked")) {
