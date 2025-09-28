@@ -3,6 +3,6 @@ ManaCost:1
 Types:Artifact
 K:ETBReplacement:Other:DBNameCard
 SVar:DBNameCard:DB$ NameCard | Defined$ You | AILogic$ PithingNeedle | SpellDescription$ As CARDNAME enters, choose a card name.
-S:Mode$ CantBeActivated | ValidCard$ Card.NamedCard | ValidSA$ Activated.nonManaAbility | Description$ Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.
+S:Mode$ CantBeActivated | ValidCard$ Card.NamedCard | ValidSA$ Activated.!ManaAbility | Description$ Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.
 AI:RemoveDeck:Random
 Oracle:As Pithing Needle enters, choose a card name.\nActivated abilities of sources with the chosen name can't be activated unless they're mana abilities.
