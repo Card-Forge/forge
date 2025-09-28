@@ -2073,16 +2073,6 @@ public class CardProperty {
             } else {
                 return false;
             }
-        } else if (property.startsWith("NotTriggered")) {
-            final String key = property.substring("NotTriggered".length());
-            if (spellAbility instanceof SpellAbility) {
-                SpellAbility sa = (SpellAbility) spellAbility;
-                if (card.equals(sa.getRootAbility().getTriggeringObject(AbilityKey.fromString(key)))) {
-                    return false;
-                }
-            } else {
-                return false;
-            }
         } else if (property.startsWith("NotDefined")) {
             final String key = property.substring("NotDefined".length());
             if (AbilityUtils.getDefinedCards(source, key, spellAbility).contains(card)) {
