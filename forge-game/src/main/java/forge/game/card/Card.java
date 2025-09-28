@@ -2453,17 +2453,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 } else if (keyword.startsWith("DeckLimit")) {
                     final String[] k = keyword.split(":");
                     sbLong.append(k[2]).append("\r\n");
-                } else if (keyword.startsWith("Enchant")) {
-                    String m[] = keyword.split(":");
-                    String desc;
-                    if (m.length > 2) {
-                        desc = m[2];
-                    } else {
-                        desc = m[1];
-                        if (CardType.isACardType(desc) || "Permanent".equals(desc) || "Player".equals(desc) || "Opponent".equals(desc)) {
-                            desc = desc.toLowerCase();
-                        }
-                    }
+                } else if (keyword.startsWith("Enchant") && inst instanceof KeywordWithType kwt) {
+                    String desc = kwt.getTypeDescription();
                     sbLong.append("Enchant ").append(desc).append("\r\n");
                 } else if (keyword.startsWith("Morph") || keyword.startsWith("Megamorph")
                         || keyword.startsWith("Disguise") || keyword.startsWith("Reflect")
@@ -3797,7 +3788,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final void addLeavesPlayCommand(final GameCommand c) {
         leavePlayCommandList.add(c);
     }
- 
+
     public void addStaticCommandList(Object[] objects) {
         staticCommandList.add(objects);
     }
@@ -4812,7 +4803,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public void addDraftAction(String s) {
         draftActions.add(s);
     }
- 
+
     private int intensity = 0;
     public final void addIntensity(final int n) {
         intensity += n;
@@ -7171,51 +7162,62 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     @Override
-    protected final boolean canBeEnchantedBy(final Card aura) {
+    protected final String cantBeEnchantedByMsg(final Card aura) {
         if (!aura.hasKeyword(Keyword.ENCHANT)) {
-            return false;
+            return "No Enchant Keyword";
         }
         for (KeywordInterface ki : aura.getKeywords(Keyword.ENCHANT)) {
-            String k = ki.getOriginal();
-            String m[] = k.split(":");
-            String v = m[1];
-            if (!isValid(v.split(","), aura.getController(), aura, null)) {
-                return false;
-            }
-            if (!v.contains("inZone") && !isInPlay()) {
-                return false;
+            if (ki instanceof KeywordWithType kwt) {
+                String v = kwt.getValidType();
+                String desc = kwt.getTypeDescription();
+                if (!isValid(v.split(","), aura.getController(), aura, null) || (!v.contains("inZone") && !isInPlay())) {
+                    return getName() + " is not " + Lang.nounWithAmount(1, desc);
+                }
             }
         }
-        return true;
+        return null;
     }
 
+
     @Override
-    protected final boolean canBeEquippedBy(final Card equip, SpellAbility sa) {
+    protected String cantBeEquippedByMsg(final Card equip, SpellAbility sa) {
         if (!isInPlay()) {
-            return false;
+            return getName() + " is not in play";
         }
         if (sa != null && sa.isEquip()) {
-            return isValid(sa.getTargetRestrictions().getValidTgts(), sa.getActivatingPlayer(), equip, sa);
+            if (!isValid(sa.getTargetRestrictions().getValidTgts(), sa.getActivatingPlayer(), equip, sa)) {
+                Equip eq = (Equip) sa.getKeyword();
+                return getName() + " is not " + Lang.nounWithAmount(1, eq.getValidDescription());
+            }
+            return null;
         }
-        return isCreature();
+        if (!isCreature()) {
+            return getName() + " is not a creature";
+        }
+        return null;
     }
 
     @Override
-    protected boolean canBeFortifiedBy(final Card fort) {
-        return isLand() && isInPlay() && !fort.isLand();
+    protected String cantBeFortifiedByMsg(final Card fort) {
+        if (!isLand()) {
+            return getName() + " is not a Land";
+        }
+        if (!isInPlay()) {
+            return getName() + " is not in play";
+        }
+        if (fort.isLand()) {
+            return fort.getName() + " is a Land";
+        }
+
+        return null;
     }
 
-    /* (non-Javadoc)
-     * @see forge.game.GameEntity#canBeAttached(forge.game.card.Card, boolean)
-     */
     @Override
-    public boolean canBeAttached(Card attach, SpellAbility sa, boolean checkSBA) {
-        // phase check there
+    public String cantBeAttachedMsg(final Card attach, SpellAbility sa, boolean checkSBA) {
         if (isPhasedOut() && !attach.isPhasedOut()) {
-            return false;
+            return getName() + " is phased out";
         }
-
-        return super.canBeAttached(attach, sa, checkSBA);
+        return super.cantBeAttachedMsg(attach, sa, checkSBA);
     }
 
     public final boolean canBeSacrificedBy(final SpellAbility source, final boolean effect) {
