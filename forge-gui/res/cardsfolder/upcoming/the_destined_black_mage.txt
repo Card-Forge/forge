@@ -11,5 +11,4 @@ SVar:Y:Count$Party
 SVar:BuffedBy:Cleric,Rogue,Warrior
 DeckHas:Ability$Party
 DeckHints:Type$Cleric|Rogue|Warrior
-
 Oracle:Deathtouch\n{B}, {T}: Another target creature you control gains deathtouch until end of turn.\nWhenever you cast a noncreature spell, The Destined Black Mage deals 1 damage to each opponent. If you have a full party, it deals 3 damage to each opponent instead.
