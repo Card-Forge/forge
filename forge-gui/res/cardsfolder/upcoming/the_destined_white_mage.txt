@@ -11,5 +11,4 @@ SVar:Y:Count$Party
 SVar:BuffedBy:Rogue,Warrior,Wizard
 DeckHas:Ability$Party
 DeckHints:Type$Rogue|Warrior|Wizard
-
 Oracle:Lifelink\n{W}, {T}: Another target creature you control gains lifelink until end of turn.\nWhenever you gain life, put a +1/+1 counter on target creature you control. If you have a full party, put three +1/+1 counters on that creature instead.
