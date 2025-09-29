@@ -1,0 +1,8 @@
+Name:Warrior's Resolve
+ManaCost:2 W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Training | Description$ Creatures you control have training. (Whenever a creature you control attacks with another creature with greater power, put a +1/+1 counter on the creature with lesser power.)
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl+counters_GE1_P1P1+attackedThisTurn | PresentCompare$ GE1 | TriggerDescription$ At the beginning of your end step, if you control a creature with a +1/+1 counter on it that attacked this turn, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control have training. (Whenever a creature you control attacks with another creature with greater power, put a +1/+1 counter on the creature with lesser power.)\nAt the beginning of your end step, if you control a creature with a +1/+1 counter on it that attacked this turn, draw a card.
