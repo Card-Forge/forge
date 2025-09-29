@@ -449,7 +449,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public final void updateColorForView() {
         currentState.getView().updateColors(this);
-        currentState.getView().updateHasChangeColors(!Iterables.isEmpty(getChangedCardColors()));
+        currentState.getView().updateHasChangeColors(hasChangedCardColors());
     }
 
     public void updateAttackingForView() {
@@ -4291,18 +4291,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public boolean clearChangedCardColors() {
-        boolean changed = false;
+        boolean changed = hasChangedCardColors();
 
-        if (!changedCardColorsByText.isEmpty())
-            changed = true;
         changedCardColorsByText.clear();
-
-        if (!changedCardTypesCharacterDefining.isEmpty())
-            changed = true;
         changedCardTypesCharacterDefining.clear();
-
-        if (!changedCardColors.isEmpty())
-            changed = true;
         changedCardColors.clear();
 
         return changed;
@@ -4388,17 +4380,19 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
     }
 
-    public Iterable<CardColor> getChangedCardColors() {
-        return Iterables.concat(changedCardColorsByText.values(), changedCardColorsCharacterDefining.values(), changedCardColors.values());
+    public boolean hasChangedCardColors() {
+        return !changedCardColorsByText.isEmpty() || !changedCardColorsCharacterDefining.isEmpty() || !changedCardColors.isEmpty();
     }
 
-    public void addColorByText(final ColorSet color, final long timestamp, final long staticId) {
-        changedCardColorsByText.put(timestamp, staticId, new CardColor(color, false));
+    public void addColorByText(final ColorSet color, final long timestamp, final StaticAbility stAb) {
+        changedCardColorsByText.put(timestamp, (long)stAb.getId(), new CardColor(color, false));
         updateColorForView();
     }
 
-    public final void addColor(final ColorSet color, final boolean addToColors, final long timestamp, final long staticId, final boolean cda) {
-        (cda ? changedCardColorsCharacterDefining : changedCardColors).put(timestamp, staticId, new CardColor(color, addToColors));
+    public final void addColor(final ColorSet color, final boolean addToColors, final long timestamp, final StaticAbility stAb) {
+        (stAb != null && stAb.isCharacteristicDefining() ? changedCardColorsCharacterDefining : changedCardColors).put(
+                timestamp, stAb != null ? stAb.getId() : (long)0, new CardColor(color, addToColors)
+        );
         updateColorForView();
     }
 
@@ -4425,14 +4419,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
     public final ColorSet getColor(CardState state) {
         byte colors = state.getColor();
-        for (final CardColor cc : getChangedCardColors()) {
-            if (cc.isAdditional()) {
-                colors |= cc.getColorMask();
+        for (final CardColor cc : Iterables.concat(changedCardColorsByText.values(), changedCardColorsCharacterDefining.values(), changedCardColors.values())) {
+            if (cc.additional()) {
+                colors |= cc.color().getColor();
             } else {
-                colors = cc.getColorMask();
+                colors = cc.color().getColor();
             }
         }
         return ColorSet.fromMask(colors);
+    }
+
+    private record CardColor(ColorSet color, boolean additional) {
+
     }
 
     public final int getCurrentLoyalty() {
