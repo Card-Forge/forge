@@ -152,6 +152,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             } else {
                 sb.append(" for ");
             }
+            if (num != 1) {
+                sb.append(" up to ");
+            }
             sb.append(Lang.nounWithNumeralExceptOne(num, type + cardTag)).append(", ");
             if (!sa.hasParam("NoReveal") && ZoneType.smartValueOf(destination) != null && ZoneType.smartValueOf(destination).isHidden()) {
                 if (choosers.size() == 1) {
