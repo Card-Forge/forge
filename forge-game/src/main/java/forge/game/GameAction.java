@@ -57,6 +57,8 @@ import forge.item.PaperCard;
 import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import io.sentry.Breadcrumb;
+import io.sentry.Sentry;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jgrapht.alg.cycle.SzwarcfiterLauerSimpleCycles;
 import org.jgrapht.graph.DefaultDirectedGraph;
@@ -218,10 +220,6 @@ public class GameAction {
                     copied.setCopiedPermanent(c.getCopiedPermanent());
                     //TODO: Feels like this should fit here and seems to work but it'll take a fair bit more testing to be sure.
                     //copied.setGamePieceType(GamePieceType.COPIED_SPELL);
-                }
-
-                if (c.isTransformed()) {
-                    copied.incrementTransformedTimestamp();
                 }
 
                 if (cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
@@ -753,26 +751,29 @@ public class GameAction {
 
     public final Card moveTo(final ZoneType name, final Card c, final int libPosition, SpellAbility cause, Map<AbilityKey, Object> params) {
         // Call specific functions to set PlayerZone, then move onto moveTo
-        switch(name) {
-            case Hand:          return moveToHand(c, cause, params);
-            case Library:       return moveToLibrary(c, libPosition, cause, params);
-            case Battlefield:   return moveToPlay(c, c.getController(), cause, params);
-            case Graveyard:     return moveToGraveyard(c, cause, params);
-            case Exile:
-                if (!c.canExiledBy(cause, true)) {
-                    return null;
-                }
-                return exile(c, cause, params);
-            case Stack:         return moveToStack(c, cause, params);
-            case PlanarDeck:
-            case SchemeDeck:
-            case AttractionDeck:
-            case ContraptionDeck:
-                return moveToVariantDeck(c, name, libPosition, cause, params);
-            case Junkyard:
-                return moveToJunkyard(c, cause, params);
-            default: // sideboard will also get there
-                return moveTo(c.getOwner().getZone(name), c, cause);
+        try {
+            return switch (name) {
+                case Hand -> moveToHand(c, cause, params);
+                case Library -> moveToLibrary(c, libPosition, cause, params);
+                case Battlefield -> moveToPlay(c, c.getController(), cause, params);
+                case Graveyard -> moveToGraveyard(c, cause, params);
+                case Exile -> !c.canExiledBy(cause, true) ? null : exile(c, cause, params);
+                case Stack -> moveToStack(c, cause, params);
+                case PlanarDeck, SchemeDeck, AttractionDeck, ContraptionDeck -> moveToVariantDeck(c, name, libPosition, cause, params);
+                case Junkyard -> moveToJunkyard(c, cause, params);
+                default -> moveTo(c.getOwner().getZone(name), c, cause); // sideboard will also get there
+            };
+        } catch (Exception e) {
+            String msg = "GameAction:moveTo: Exception occured";
+
+            Breadcrumb bread = new Breadcrumb(msg);
+            bread.setData("Card", c.getName());
+            bread.setData("SA", cause.toString());
+            bread.setData("ZoneType", name.name());
+            bread.setData("Player", c.getOwner());
+            Sentry.addBreadcrumb(bread);
+
+            throw new RuntimeException("Error in GameAction moveTo " + c.getName() + " to Player Zone " + name.name(), e);
         }
     }
 
@@ -974,6 +975,7 @@ public class GameAction {
         // in some corner cases there's no zone yet (copied spell that failed targeting)
         if (z != null) {
             z.remove(c);
+            c.setZone(c.getOwner().getZone(ZoneType.None));
             if (z.is(ZoneType.Battlefield)) {
                 c.runLeavesPlayCommands();
             }

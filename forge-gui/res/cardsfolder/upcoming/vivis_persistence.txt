@@ -1,0 +1,9 @@
+Name:Vivi's Persistence
+ManaCost:1 R
+Types:Instant
+A:SP$ Token | TokenScript$ b_0_1_wizard_snipe | TokenAmount$ 1 | TokenOwner$ You | SpellDescription$ Create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent."
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.IsCommander+YouOwn | Execute$ TrigChangeZone | TriggerZones$ Graveyard | TriggerDescription$ Whenever your commander enters or attacks, you may pay {2}. If you do, return this card from your graveyard to your hand.
+T:Mode$ Attacks | ValidCard$ Card.IsCommander+YouOwn | Execute$ TrigChangeZone | TriggerZones$ Graveyard | Secondary$ True | TriggerDescription$ Whenever your commander enters or attacks, you may pay {2}. If you do, return this card from your graveyard to your hand.
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 2 | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+DeckHas:Ability$Token
+Oracle:Create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent."\nWhenever your commander enters or attacks, you may pay {2}. If you do, return this card from your graveyard to your hand.

@@ -11,7 +11,7 @@ public class ColorSetImage implements FImage {
 
     public ColorSetImage(ColorSet colorSet0) {
         colorSet = colorSet0;
-        shardCount = colorSet.getOrderedShards().length;
+        shardCount = colorSet.getOrderedColors().size();
     }
 
     @Override
