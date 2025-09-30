@@ -12,4 +12,4 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:X:PlayerCountRememberedPlayer$HasPropertyisMonarch
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+YouDontOwn| AddPower$ 2 | AddToughness$ 2 | Description$ Creatures you control but don't own get +2/+2 and can't be sacrificed. 
 S:Mode$ CantSacrifice | ValidCard$ Creature.YouCtrl+YouDontOwn | Secondary$ True | SpellDescription$ Creatures you control but don't own get +2/+2 and can't be sacrificed. 
-Oracle:When Garland enters, you become the monarch.\nWhenever an opponent becomes the monarch, gain control of target creature that player controls for as long as they're the monarch\nCreatures you control but don't own get +2/+2 and can't be sacrificed. 
+Oracle:When Garland enters, you become the monarch.\nWhenever an opponent becomes the monarch, gain control of target creature that player controls for as long as they're the monarch.\nCreatures you control but don't own get +2/+2 and can't be sacrificed. 
