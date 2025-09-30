@@ -1,10 +1,10 @@
 Name:Foreshadow
 ManaCost:1 U
 Types:Instant
-A:SP$ NameCard | SubAbility$ DBMill | SpellDescription$ Choose a card name, then target opponent mills a card. If a card with the chosen name was milled this way, you draw a card. Draw a card at the beginning of the next turn's upkeep.
+A:SP$ NameCard | SubAbility$ DBMill | SpellDescription$ Choose a card name, then target opponent mills a card. If a card with the chosen name was milled this way, you draw a card.
 SVar:DBMill:DB$ Mill | ValidTgts$ Opponent | NumCards$ 1 | RememberMilled$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Card.NamedCard | SubAbility$ DelTrigSlowtrip
-SVar:DelTrigSlowtrip:DB$ DelayedTrigger | NextTurn$ True | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | SubAbility$ DBCleanup | TriggerDescription$ Draw a card.
+SVar:DelTrigSlowtrip:DB$ DelayedTrigger | NextTurn$ True | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | SubAbility$ DBCleanup | TriggerDescription$ Draw a card. | StackDescription$ REP Draw_{p:You} draws | SpellDescription$ Draw a card at the beginning of the next turn's upkeep.
 SVar:DrawSlowtrip:DB$ Draw
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearNamedCard$ True
 AI:RemoveDeck:All
