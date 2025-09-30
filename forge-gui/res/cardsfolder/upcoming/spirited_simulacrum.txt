@@ -1,0 +1,12 @@
+Name:Spirited Simulacrum
+ManaCost:4
+Types:Artifact Creature Robot
+PT:2/1
+K:Warp:4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSeekLand | TriggerDescription$ When this creature enters, seek a land card and put it onto the battlefield tapped.
+SVar:TrigSeekLand:DB$ Seek | Type$ Card.Land | RememberFound$ True | SubAbility$ DBPut
+SVar:DBPut:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ Remembered | Tapped$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigSeekNonLand | TriggerDescription$ When this creature leaves the battlefield, seek a nonland card.
+SVar:TrigSeekNonLand:DB$ Seek | Type$ Card.nonLand
+Oracle:When this creature enters, seek a land card and put it onto the battlefield tapped.\nWhen this creature leaves the battlefield, seek a nonland card.\nWarp {4}
