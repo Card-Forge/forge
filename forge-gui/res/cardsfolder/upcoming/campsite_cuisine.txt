@@ -9,4 +9,4 @@ SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking | TargetMin$ 0 | TargetMa
 SVar:X:Count$xPaid
 DeckHas:Ability$Token|Sacrifice & Type$Artifact|Food
 DeckHints:Type$Legendary & Type$Creature
-Oracle:Whenever this enchantment or a legendary creature you control enters, create a Food token.\nWhenever you attack, you may sacrifice X Foods. When you do, up to X target attacking creatures each get +3/+3 and gain trample and indestructible until end of turn 
+Oracle:Whenever this enchantment or a legendary creature you control enters, create a Food token.\nWhenever you attack, you may sacrifice X Foods. When you do, up to X target attacking creatures each get +3/+3 and gain trample and indestructible until end of turn. 
