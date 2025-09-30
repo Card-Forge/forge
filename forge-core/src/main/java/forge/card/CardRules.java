@@ -27,6 +27,7 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static forge.card.MagicColor.Constant.BASIC_LANDS;
 import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
@@ -43,8 +44,9 @@ public final class CardRules implements ICardCharacteristics {
     private CardSplitType splitType;
     private ICardFace mainPart;
     private ICardFace otherPart;
-
     private Map<CardStateName, ICardFace> specializedParts = Maps.newHashMap();
+    private List<ICardFace> allFaces;
+
     private CardAiHints aiHints;
     private ColorSet colorIdentity;
     private ColorSet deckbuildingColors;
@@ -68,6 +70,8 @@ public final class CardRules implements ICardCharacteristics {
             specializedParts.put(CardStateName.SpecializeR, faces[5]);
             specializedParts.put(CardStateName.SpecializeG, faces[6]);
         }
+
+        allFaces = Arrays.stream(faces).filter(Objects::nonNull).collect(Collectors.toUnmodifiableList());
 
         aiHints = cah;
         meldWith = "";
@@ -93,6 +97,7 @@ public final class CardRules implements ICardCharacteristics {
         mainPart = newRules.mainPart;
         otherPart = newRules.otherPart;
         specializedParts = Maps.newHashMap(newRules.specializedParts);
+        allFaces = newRules.allFaces;
         aiHints = newRules.aiHints;
         colorIdentity = newRules.colorIdentity;
         meldWith = newRules.meldWith;
@@ -163,8 +168,8 @@ public final class CardRules implements ICardCharacteristics {
         return specializedParts;
     }
 
-    public Iterable<ICardFace> getAllFaces() {
-        return Iterables.concat(Arrays.asList(mainPart, otherPart), specializedParts.values());
+    public List<ICardFace> getAllFaces() {
+        return allFaces;
     }
 
     public boolean isTransformable() {

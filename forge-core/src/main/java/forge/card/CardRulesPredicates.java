@@ -141,7 +141,7 @@ public final class CardRulesPredicates {
      * @return the predicate
      */
     public static Predicate<CardRules> hasKeyword(final String keyword) {
-        return card -> IterableUtil.any(card.getAllFaces(), cf -> cf != null && card.hasStartOfKeyword(keyword, cf));
+        return card -> IterableUtil.any(card.getAllFaces(), cf -> card.hasStartOfKeyword(keyword, cf));
     }
 
     /**
@@ -363,7 +363,7 @@ public final class CardRulesPredicates {
             switch (this.field) {
             case NAME:
                 for (ICardFace face : card.getAllFaces()) {
-                    if (face != null && checkName(face.getName())) {
+                    if (checkName(face.getName())) {
                         return true;
                     }
                 }
