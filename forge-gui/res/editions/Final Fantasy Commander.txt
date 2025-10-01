@@ -202,7 +202,7 @@ ScryfallCode=FIC
 194 R Summon: Good King Mog XII @Minoru
 195 R Summon: Ixion @Yoshiya
 196 R Summon: Yojimbo @Hisashi Momose
-197 R Summon: Valefor @SENNSU
+197 R Summon: Valefor @Maiko Aoji
 198 R Summon: Esper Valigarmanda @TAKUMI
 199 R Summon: Kujata @Yoshiya
 200 R Summon: Magus Sisters @Karo ARAI
@@ -254,7 +254,7 @@ ScryfallCode=FIC
 246 M Luminous Broodmoth @Kazto Furuya
 247 U Palace Jailer @Touge369
 248 U Path to Exile @Yumi Yaoshida
-249 R Promise of Loyalty @Lack
+249 R Promise of Loyalty @KOHEI YAMADA
 250 R Puresteel Paladin @Ignatius Budi
 251 R Resourceful Defense @Shiyu
 252 R Scholar of New Horizons @Allen Morris
@@ -340,7 +340,7 @@ ScryfallCode=FIC
 332 C Arcane Signet @Grace Zhu
 333 C Arcane Signet @Randy Gallegos
 334 C Arcane Signet @Russell Lu
-335 C Arcane Signet @Russell Lu
+335 C Arcane Signet @Madeline Boni
 336 R Armory Automaton @Gas1
 337 R Champion's Helm @Russell Lu
 338 U Colossus Hammer @Kevin Sidharta
@@ -447,6 +447,48 @@ ScryfallCode=FIC
 439 R Underground River @Shahab Alizadeh
 440 R Vineglimmer Snarl @Mauricio Calle
 441 C Wooded Ridgeline @Hristo D. Chukov
+442 R Garland, Royal Kidnapper @David Rapoza
+443 R The Destined Warrior @David Rapoza
+444 R The Destined White Mage @David Rapoza
+445 R Chaos Shrine's Black Crystal @David Rapoza
+446 R The Destined Thief @David Rapoza
+447 R The Destined Black Mage @David Rapoza
+448 R Edea, Possessed Sorceress @Lius Lasahido
+449 R Fated Clash @Lius Lasahido
+450 R Rinoa, Angel Wing @Lius Lasahido
+451 R Seifer, Balamb Rival @Lius Lasahido
+452 R Duelist's Flame @Lius Lasahido
+453 R Squall, Gunblade Duelist @Lius Lasahido
+454 R Brilliant Wings @Erion Makuo
+455 R Judgment of Alexander @Erion Makuo
+456 R Mega Flare @Erion Makuo
+457 R Amarant Coral @Erion Makuo
+458 R Vivi's Persistence @Erion Makuo
+459 R Search for Dagger @Erion Makuo
+460 R Noctis, Heir Apparent @Winona Nelson
+461 R Fishing Gear @Winona Nelson
+462 R Chocobo Camp @Winona Nelson
+463 R Flash Photography @Winona Nelson
+464 R Campsite Cuisine @Winona Nelson
+465 R Warrior's Resolve @Winona Nelson
+466 R Tataru Taru @Domco.
+467 R Lulu, Stern Guardian @Hiromu
+468 R Rikku, Resourceful Guardian @Ayuko
+469 M Snapcaster Mage @Canata Katana
+470 R Yuffie, Materia Hunter @Nijihayashi
+471 R Aerith, Last Ancient @MiDQN
+472 R Barret, Avalanche Leader @Dai-XT
+473 R Emet-Selch of the Third Seat @Kuregure
+474 R Estinien Varlineau @Yakotakos
+475 R Locke, Treasure Hunter @Kato Ayaka
+476 R Mog, Moogle Warrior @Rorubei
+477 R Wakka, Devoted Guardian @Dai-XT
+478 L Plains @Fuzichoco
+479 L Island @Ai Nanahira
+480 L Swamp @Ryuichi Sakuma
+481 L Mountain @Nao Miyoshi
+482 L Forest @ZOUNOSE
+483 R Birds of Paradise @Takotto
 484 C Command Tower @Anthony Devine
 485 C Command Tower @Eduardo Francisco
 486 C Command Tower @Jonas De Ro
