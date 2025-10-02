@@ -1,7 +1,7 @@
 Name:Flower
 ManaCost:GW
 Types:Sorcery
-A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Forest+Basic,Land.Plains+Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic Forest or Plains card, reveal it, put it into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Forest.Basic,Plains.Basic | ChangeTypeDesc$ basic Forest or Plains | SpellDescription$ Search your library for a basic Forest or Plains card, reveal it, put it into your hand, then shuffle.
 AlternateMode:Split
 Oracle:Search your library for a basic Forest or Plains card, reveal it, put it into your hand, then shuffle.
 

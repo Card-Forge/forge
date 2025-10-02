@@ -138,7 +138,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             if (perpetual) {
                 c.addPerpetual(new PerpetualColors(timestamp, colors, overwrite));
             }
-            c.addColor(colors, !overwrite, timestamp, 0, false);
+            c.addColor(colors, !overwrite, timestamp, null);
         }
 
         if (sa.hasParam("LeaveBattlefield")) {

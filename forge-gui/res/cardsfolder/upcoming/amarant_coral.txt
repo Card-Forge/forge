@@ -1,0 +1,10 @@
+Name:Amarant Coral 
+ManaCost:2 R G
+Types:Legendary Creature Human Monk
+PT:5/4
+K:Trample
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigDmg | TriggerDescription$ No Mercy - Whenever CARDNAME deals combat damage to an opponent, it deals that much damage to each other opponent
+SVar:TrigDmg:DB$ DamageAll | ValidPlayers$ OppNonTriggeredTarget | NumDmg$ X
+SVar:X:TriggerCount$DamageAmount
+Oracle:Trample\nAmarant Coral attacks each combat if able.\nNo Mercy - Whenever Amarant Coral deals combat damage to an opponent, it deals that much damage to each other opponent. 

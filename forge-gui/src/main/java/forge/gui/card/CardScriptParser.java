@@ -469,11 +469,11 @@ public final class CardScriptParser {
             "leastPower", "leastToughness", "greatestCMC",
             "greatestRememberedCMC", "lowestRememberedCMC", "lowestCMC",
             "enchanted", "enchanting", "equipped",
-            "equipping", "modified", "token", "nonToken", "hasXCost", "suspended",
-            "delved", "attacking", "attackingYou", "notattacking",
+            "equipping", "modified", "token", "hasXCost", "suspended",
+            "delved", "attacking", "attackingYou",
             "attackedBySourceThisCombat", "blocking", "blockingSource",
             "blockingCreatureYouCtrl", "blockingRemembered",
-            "sharesBlockingAssignmentWith", "notblocking", "blocked",
+            "sharesBlockingAssignmentWith", "blocked",
             "blockedBySource", "blockedThisTurn", "blockedByThisTurn",
             "blockedBySourceThisTurn", "isBlockedByRemembered", "blockedRemembered",
             "blockedByRemembered", "unblocked", "attackersBandedWith",
@@ -485,7 +485,7 @@ public final class CardScriptParser {
             "wasNotCast", "ChosenType", "IsNotChosenType", "IsCommander",
             "IsRenowned");
     private static final Set<String> VALID_EXCLUSIVE_STARTSWITH = ImmutableSortedSet
-            .of("named", "notnamed", "OwnedBy", "ControlledBy",
+            .of("named", "OwnedBy", "ControlledBy",
                     "ControllerControls", "AttachedTo", "EnchantedBy",
                     "TopGraveyard", "SharesColorWith",
                     "MostProminentColor", "notSharesColorWith",

@@ -453,7 +453,7 @@ public class PumpAi extends PumpAiBase {
             }
 
             if (isFight) {
-                return FightAi.canFightAi(ai, sa, attack, defense).willingToPlay();
+                return FightAi.canFight(ai, sa, attack, defense).willingToPlay();
             }
         }
 

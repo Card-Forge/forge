@@ -51,6 +51,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
     static PointOfInterestChanges changes;
 
     private Array<DialogData> entryDialog;
+    private AdventureEventData.AdventureEventMatch humanMatch = null;
 
     private int packsSelected = 0; //Used for meta drafts, booster drafts will use existing logic.
 
@@ -490,7 +491,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
     }
 
     public void startRound() {
-        for (AdventureEventData.AdventureEventMatch match : currentEvent.matches.get(currentEvent.currentRound)) {
+        for (AdventureEventData.AdventureEventMatch match : currentEvent.getMatches(currentEvent.currentRound)) {
             match.round = currentEvent.currentRound;
             if (match.winner != null) continue;
 
@@ -538,8 +539,6 @@ public class EventScene extends MenuScene implements IAfterMatch {
             advance.setDisabled(false);
         }
     }
-
-    AdventureEventData.AdventureEventMatch humanMatch = null;
 
     public void setWinner(boolean winner, boolean isArena) {
         if (winner) {

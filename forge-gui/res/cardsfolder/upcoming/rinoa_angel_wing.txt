@@ -1,0 +1,9 @@
+Name:Rinoa, Angel Wing
+ManaCost:2 W
+Types:Legendary Creature Human Rebel Warlock
+PT:2/4
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ At the beginning of combat on your turn, creatures you control with flying get +1/+1 and gain vigilance until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl+withFlying | NumAtt$ +1 | NumDef$ +1 | KW$ Vigilance
+T:Mode$ ChangesZoneAll | ValidCards$ Creature.attacking+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | OptionalDecider$ You | ResolvedLimit$ 1 | Execute$ TrigChangeZone | TriggerDescription$ Whenever one or more attacking creatures you control die, you may return one of them to the battlefield tapped under its owner's control with a flying counter on it. Do this only once each turn.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | ChangeNum$ 1 | Destination$ Battlefield | Hidden$ True | Tapped$ True | ChooseFromDefined$ TriggeredCards | Mandatory$ True | WithCountersType$ Flying
+Oracle:At the beginning of combat on your turn, creatures you control with flying get +1/+1 and gain vigilance until end of turn.\nWhenever one or more attacking creatures you control die, you may return one of them to the battlefield tapped under its owner's control with a flying counter on it. Do this only once each turn.

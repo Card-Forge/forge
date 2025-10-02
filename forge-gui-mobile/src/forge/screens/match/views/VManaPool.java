@@ -70,7 +70,7 @@ public class VManaPool extends VDisplayArea {
         float x = 0;
         float y = 0;
 
-        if (Forge.isLandscapeMode() && !Forge.altZoneTabs) {
+        if (Forge.isLandscapeMode() && (!Forge.altZoneTabs || !"Horizontal".equalsIgnoreCase(Forge.altZoneTabMode))) {
             float labelWidth = visibleWidth / 2;
             float labelHeight = visibleHeight / 3;
 

@@ -1,0 +1,8 @@
+Name:Thought Partition
+ManaCost:W
+Types:Sorcery
+A:SP$ Reveal | ValidTgts$ Opponent | RevealAllValid$ Card.nonLand+TargetedPlayerCtrl | RememberRevealed$ True | SubAbility$ DBChooseCard | StackDescription$ REP Target opponent_{p:Targeted} & You may_{p:You} may & If you_If they | SpellDescription$ Target opponent reveals all nonland cards in their hand. You may choose one of those cards. If you do, it perpetually becomes white and its mana cost perpetually becomes {5}.
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ You | ChoiceZone$ Hand | Choices$ Card.IsRemembered | ChoiceTitle$ Choose a card that was revealed in targeted player's hand | SubAbility$ DBAnimate | StackDescription$ None
+SVar:DBAnimate:DB$ Animate | Defined$ ChosenCard | Colors$ White | OverwriteColors$ True | ManaCost$ 5 | Duration$ Perpetual | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Target opponent reveals all nonland cards in their hand. You may choose one of those cards. If you do, it perpetually becomes white and its mana cost perpetually becomes {5}.

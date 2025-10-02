@@ -1,0 +1,9 @@
+Name:Brilliant Wings
+ManaCost:1 W
+Types:Enchantment Aura
+K:Flash
+K:Enchant:Creature.YouCtrl:creature you control
+S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | AddKeyword$ Flying & Hexproof | Description$ Enchanted permanent has flying and hexproof.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigAttach | TriggerDescription$ Whenever a creature you control enters, you may pay {1}. If you do, attach this Aura to that creature. 
+SVar:TrigAttach:AB$ Attach | Cost$ 1 | Defined$ TriggeredCardLKICopy
+Oracle:Flash\nEnchant creature you control\nEnchanted permanent has flying and hexproof.\nWhenever a creature you control enters, you may pay {1}. If you do, attach this Aura to that creature. 

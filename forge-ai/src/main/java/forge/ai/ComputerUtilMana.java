@@ -287,10 +287,6 @@ public class ComputerUtilMana {
                 continue;
             }
 
-            if (!ComputerUtilCost.checkTapTypeCost(ai, ma.getPayCosts(), ma.getHostCard(), sa, AiCardMemory.getMemorySet(ai, MemorySet.PAYS_TAP_COST))) {
-                continue;
-            }
-
             int amount = ma.hasParam("Amount") ? AbilityUtils.calculateAmount(ma.getHostCard(), ma.getParam("Amount"), ma) : 1;
             if (amount <= 0) {
                 // wrong gamestate for variable amount
@@ -357,7 +353,12 @@ public class ComputerUtilMana {
                 continue;
             }
 
+            // these should come last since they reserve the paying cards
+            // (this means if a mana ability has both parts it doesn't currently undo reservations if the second part fails)
             if (!ComputerUtilCost.checkForManaSacrificeCost(ai, ma.getPayCosts(), ma, ma.isTrigger())) {
+                continue;
+            }
+            if (!ComputerUtilCost.checkTapTypeCost(ai, ma.getPayCosts(), ma.getHostCard(), sa, AiCardMemory.getMemorySet(ai, MemorySet.PAYS_TAP_COST))) {
                 continue;
             }
 
@@ -815,11 +816,11 @@ public class ComputerUtilMana {
                 String manaProduced = predictManafromSpellAbility(saPayment, ai, toPay);
                 payMultipleMana(cost, manaProduced, ai);
 
-                // remove from available lists
+                // remove to prevent re-usage since resources don't get consumed
                 sourcesForShards.values().removeIf(CardTraitPredicates.isHostCard(saPayment.getHostCard()));
             } else {
                 final CostPayment pay = new CostPayment(saPayment.getPayCosts(), saPayment);
-                if (!pay.payComputerCosts(new AiCostDecision(ai, saPayment, effect))) {
+                if (!pay.payComputerCosts(new AiCostDecision(ai, saPayment, effect, true))) {
                     saList.remove(saPayment);
                     continue;
                 }
@@ -828,8 +829,10 @@ public class ComputerUtilMana {
                 // subtract mana from mana pool
                 manapool.payManaFromAbility(sa, cost, saPayment);
 
-                // no need to remove abilities from resource map,
-                // once their costs are paid and consume resources, they can not be used again
+                // need to consider if another use is now prevented
+                if (!cost.isPaid() && saPayment.isActivatedAbility() && !saPayment.getRestrictions().canPlay(saPayment.getHostCard(), saPayment)) {
+                    sourcesForShards.values().removeIf(s -> s == saPayment);
+                }
 
                 if (hasConverge) {
                     // hack to prevent converge re-using sources
@@ -1662,7 +1665,6 @@ public class ComputerUtilMana {
                                 if (replaced.contains("C")) {
                                     manaMap.put(ManaAtom.COLORLESS, m);
                                 }
-
                             }
                         }
                     }

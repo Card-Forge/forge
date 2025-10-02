@@ -891,9 +891,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
         CardCollection list = CardLists.getTargetableCards(game.getCardsIn(origin), sa);
 
         list = ComputerUtil.filterAITgts(sa, ai, list, true);
-        if (sa.hasParam("AITgtsOnlyBetterThanSelf")) {
-            list = CardLists.filter(list, card -> ComputerUtilCard.evaluateCreature(card) > ComputerUtilCard.evaluateCreature(source) + 30);
-        }
 
         if (source.isInZone(ZoneType.Hand)) {
             list = CardLists.filter(list, CardPredicates.nameNotEquals(source.getName())); // Don't get the same card back.

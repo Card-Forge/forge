@@ -92,7 +92,7 @@ public abstract class AbilityActivated extends SpellAbility implements Cloneable
             return false;
         }
 
-        if (!(this.getRestrictions().canPlay(c, this))) {
+        if (!getRestrictions().canPlay(c, this)) {
             return false;
         }
 

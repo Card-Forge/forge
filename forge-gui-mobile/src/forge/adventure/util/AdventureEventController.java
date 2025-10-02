@@ -5,6 +5,7 @@ import forge.StaticData;
 import forge.adventure.data.AdventureEventData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
+import forge.card.CardEdition;
 import forge.deck.Deck;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
@@ -99,8 +100,9 @@ public class AdventureEventController implements Serializable {
 
         AdventureEventData e;
 
-        // TODO After a certain amount of wins, stop offering jump start events
-        if (random.nextInt(10) <= 2) {
+        // After a certain amount of wins, stop offering jump start events
+        if (Current.player().getStatistic().totalWins() < 10 &&
+                random.nextInt(10) <= 2) {
             e = new AdventureEventData(eventSeed, EventFormat.Jumpstart);
         } else {
             e = new AdventureEventData(eventSeed, EventFormat.Draft);
@@ -110,12 +112,26 @@ public class AdventureEventController implements Serializable {
             //covers cases where (somehow) editions that do not match the event style have been picked up
             return null;
         }
+
+        // If chosen event seed recommends a 4 person pod, run it as a RoundRobin
+        CardEdition firstSet = e.cardBlock.getSets().get(0);
+        int podSize = firstSet.getDraftOptions().getRecommendedPodSize();
+
         e.sourceID = pointID;
         e.eventOrigin = eventOrigin;
-        e.eventRules = new AdventureEventData.AdventureEventRules(e.format, changes == null ? 1f : changes.getTownPriceModifier());
-        e.style = style;
+        e.style = podSize == 4 ? EventStyle.RoundRobin : style;
 
-        switch (style) {
+        AdventureEventData.PairingStyle pairingStyle;
+        if (e.style == EventStyle.RoundRobin) {
+            pairingStyle = AdventureEventData.PairingStyle.RoundRobin;
+        } else {
+            pairingStyle = AdventureEventData.PairingStyle.SingleElimination;
+        }
+
+        e.eventRules = new AdventureEventData.AdventureEventRules(e.format, pairingStyle, changes == null ? 1f : changes.getTownPriceModifier());
+        e.generateParticipants(podSize - 1); //-1 to account for the player
+
+        switch (e.style) {
             case Swiss:
             case Bracket:
                 e.rounds = (e.participants.length / 2) - 1;
@@ -139,9 +155,8 @@ public class AdventureEventController implements Serializable {
         output.setComment(setCode);
         return output;
     }
-    public Deck generateBoosterByColor(String color)
-    {
 
+    public Deck generateBoosterByColor(String color) {
         List<PaperCard> cards = BoosterPack.fromColor(color).getCards();
         Deck output = new Deck();
         output.getMain().add(cards);

@@ -1,0 +1,13 @@
+Name:Abby, Merciless Soldier
+ManaCost:1 R G
+Types:Legendary Creature Human Survivor
+PT:4/4
+K:Partner - Survivors
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you cast this spell, create a number of 1/1 black Fungus Zombie creature tokens named Cordyceps Infected equal to the amount of mana spent to cast it.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ cordyceps_infected | TokenOwner$ You
+SVar:X:Count$CastTotalManaSpent
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBChooseOpp | Layer$ Control | Description$ NICKNAME enters under the control of an opponent of your choice.
+SVar:DBChooseOpp:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to give control to | AILogic$ Curse | SubAbility$ MoveToPlay
+SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard | GainControl$ ChosenPlayer
+DeckHas:Ability$Token & Type$Zombie|Fungus
+Oracle:When you cast this spell, create a number of 1/1 black Fungus Zombie creature tokens named Cordyceps Infected equal to the amount of mana spent to cast it.\nAbby enters under the control of an opponent of your choice.\nPartner—Survivors (You can have two commanders if both have this ability.)
