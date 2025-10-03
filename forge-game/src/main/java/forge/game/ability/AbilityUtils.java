@@ -2888,12 +2888,6 @@ public class AbilityUtils {
             return max;
         }
 
-        if (sq[0].startsWith("DifferentCardNames_")) {
-            final String restriction = l[0].substring(19);
-            CardCollection list = CardLists.getValidCards(game.getCardsInGame(), restriction, player, c, ctb);
-            return doXMath(CardLists.getDifferentNamesCount(list), expr, c, ctb);
-        }
-
         if (sq[0].startsWith("MostProminentCreatureType")) {
             String restriction = l[0].split(" ")[1];
             CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
