@@ -61,10 +61,19 @@ public class CostDiscard extends CostPartWithList {
     public Integer getMaxAmountX(SpellAbility ability, Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
         String type = this.getType();
+
+        boolean differentNames = false;
+        if (type.contains("+WithDifferentNames")) {
+            type = type.replace("+WithDifferentNames", "");
+            differentNames = true;
+        }
         CardCollectionView handList = payer.canDiscardBy(ability, effect) ? payer.getCardsIn(ZoneType.Hand) : CardCollection.EMPTY;
 
         if (!type.equals("Random")) {
             handList = CardLists.getValidCards(handList, type.split(";"), payer, source, ability);
+        }
+        if (differentNames) {
+            return CardLists.getDifferentNamesCount(handList);
         }
         return handList.size();
     }
