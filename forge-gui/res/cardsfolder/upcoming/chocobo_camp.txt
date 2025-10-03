@@ -10,7 +10,7 @@ SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Bird | ValidActivatingPlayer$ Yo
 SVar:TrigCounter:DB$ Effect | ReplacementEffects$ ETBCounters | RememberObjects$ TriggeredCard | ForgetOnMoved$ Stack
 SVar:ETBCounters:Event$ Moved | Origin$ Stack | Destination$ Battlefield | ValidCard$ Card.IsRemembered | ReplaceWith$ ETBAddExtraCounter | ReplacementResult$ Updated | Description$ That creature enters with an additional +1/+1 counters on it.
 SVar:ETBAddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1
-A:AB$ Token | Cost$ 4 G G T | TokenScript$ g_2_2_bird_landfall | SpellDescription$ Creature a 2/2 green Bird creature token with "Whenever a land you control enters, this token gets +1/+0 until end of turn".
+A:AB$ Token | Cost$ 2 G G T | TokenScript$ g_2_2_bird_landfall | SpellDescription$ Creature a 2/2 green Bird creature token with "Whenever a land you control enters, this token gets +1/+0 until end of turn".
 DeckHas:Ability$Token & Type$Artifact|Bird
 DeckHints:Type$Legendary
-Oracle:This Land enters tapped unless you control a legendary creature.\n{T}: Add {G}. When you next cast a Bird creature spell this turn, it enters with an additional +1/+1 counter on it.\n{4}{G}{G}, {T}, Creature a 2/2 green Bird creature token with "Whenever a land you control enters, this token gets +1/+0 until end of turn".  
+Oracle:This Land enters tapped unless you control a legendary creature.\n{T}: Add {G}. When you next cast a Bird creature spell this turn, it enters with an additional +1/+1 counter on it.\n{2}{G}{G}, {T}, Creature a 2/2 green Bird creature token with "Whenever a land you control enters, this token gets +1/+0 until end of turn".  
