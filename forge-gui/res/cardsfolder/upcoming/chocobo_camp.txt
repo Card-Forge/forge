@@ -1,7 +1,6 @@
 Name:Chocobo Camp
 ManaCost:no cost
 Types:Land
-Types:Legendary Land
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ CARDNAME enters tapped unless you control a legendary creature.
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Creature.Legendary+YouCtrl | ConditionCompare$ EQ0
 A:AB$ Mana | Cost$ T | Produced$ G | SubAbility$ DBEffect | SpellDescription$ Add {G}.
