@@ -113,7 +113,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 randomSubset = ability.getActivatingPlayer().getController().orderMoveToZoneList(randomSubset, ZoneType.Graveyard, ability);
             }
             return PaymentDecision.card(randomSubset);
-        } else if (type.equals("DifferentNames")) {
+        } else if (type.contains("+WithDifferentNames")) {
             CardCollection differentNames = new CardCollection();
             CardCollection discardMe = CardLists.filter(hand, CardPredicates.hasSVar("DiscardMe"));
             while (c > 0) {
