@@ -43,7 +43,6 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 public class AbilityUtils {
     private final static ImmutableList<String> cmpList = ImmutableList.of("LT", "LE", "EQ", "GE", "GT", "NE");
 
@@ -2890,18 +2889,9 @@ public class AbilityUtils {
         }
 
         if (sq[0].startsWith("DifferentCardNames_")) {
-            final List<String> crdname = Lists.newArrayList();
             final String restriction = l[0].substring(19);
             CardCollection list = CardLists.getValidCards(game.getCardsInGame(), restriction, player, c, ctb);
-            // TODO rewrite with sharesName to respect Spy Kit
-            for (final Card card : list) {
-                String name = card.getName();
-                // CR 201.2b Those objects have different names only if each of them has at least one name and no two objects in that group have a name in common
-                if (!crdname.contains(name) && !name.isEmpty()) {
-                    crdname.add(name);
-                }
-            }
-            return doXMath(crdname.size(), expr, c, ctb);
+            return doXMath(CardLists.getDifferentNamesCount(list), expr, c, ctb);
         }
 
         if (sq[0].startsWith("MostProminentCreatureType")) {
@@ -3758,6 +3748,10 @@ public class AbilityUtils {
 
         if (string.equals("Colors")) {
             return CardUtil.getColorsFromCards(paidList).countColors();
+        }
+
+        if (string.equals("DifferentCardNames")) {
+            return CardLists.getDifferentNamesCount(paidList);
         }
 
         if (string.equals("DifferentColorPair")) {
