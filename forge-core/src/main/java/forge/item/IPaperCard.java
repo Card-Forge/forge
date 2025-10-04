@@ -54,9 +54,4 @@ public interface IPaperCard extends InventoryItem, Serializable {
     default String getUntranslatedType() {
         return getRules().getType().toString();
     }
-
-    @Override
-    default String getUntranslatedOracle() {
-        return getRules().getOracleText();
-    }
 }

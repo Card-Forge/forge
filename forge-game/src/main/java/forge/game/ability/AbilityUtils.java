@@ -43,7 +43,6 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 public class AbilityUtils {
     private final static ImmutableList<String> cmpList = ImmutableList.of("LT", "LE", "EQ", "GE", "GT", "NE");
 
@@ -1870,6 +1869,14 @@ public class AbilityUtils {
                     }
                     return doXMath(v, expr, c, ctb);
                 }
+                
+                // Count$FromNamedAbility[abilityName].<True>.<False>
+                if (sq[0].startsWith("FromNamedAbility")) {
+                    String abilityNamed = sq[0].substring(16);
+                    SpellAbility trigSA = sa.getHostCard().getCastSA();
+                    boolean fromNamedAbility = trigSA != null && trigSA.getName().equals(abilityNamed);
+                    return doXMath(calculateAmount(c, sq[fromNamedAbility ? 1 : 2], ctb), expr, c, ctb);
+                }
             } else {
                 // fallback if ctb isn't a spellability
                 if (sq[0].startsWith("LastStateBattlefield")) {
@@ -2881,21 +2888,6 @@ public class AbilityUtils {
             return max;
         }
 
-        if (sq[0].startsWith("DifferentCardNames_")) {
-            final List<String> crdname = Lists.newArrayList();
-            final String restriction = l[0].substring(19);
-            CardCollection list = CardLists.getValidCards(game.getCardsInGame(), restriction, player, c, ctb);
-            // TODO rewrite with sharesName to respect Spy Kit
-            for (final Card card : list) {
-                String name = card.getName();
-                // CR 201.2b Those objects have different names only if each of them has at least one name and no two objects in that group have a name in common
-                if (!crdname.contains(name) && !name.isEmpty()) {
-                    crdname.add(name);
-                }
-            }
-            return doXMath(crdname.size(), expr, c, ctb);
-        }
-
         if (sq[0].startsWith("MostProminentCreatureType")) {
             String restriction = l[0].split(" ")[1];
             CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
@@ -3750,6 +3742,10 @@ public class AbilityUtils {
 
         if (string.equals("Colors")) {
             return CardUtil.getColorsFromCards(paidList).countColors();
+        }
+
+        if (string.equals("DifferentCardNames")) {
+            return CardLists.getDifferentNamesCount(paidList);
         }
 
         if (string.equals("DifferentColorPair")) {

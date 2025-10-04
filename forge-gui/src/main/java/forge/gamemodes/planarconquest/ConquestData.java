@@ -294,8 +294,8 @@ public final class ConquestData {
                     commandersUsingCard.append("\n").append(CardTranslation.getTranslatedName(commander.getDisplayName()));
                 }
             }
-
-            if (!commandersUsingCard.isEmpty()) {
+            // Android API StringBuilder isEmpty() is unavailable. https://developer.android.com/reference/java/lang/StringBuilder
+            if (commandersUsingCard.length() != 0) {
                 SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblCommandersCardCannotBeExiledByCard", CardTranslation.getTranslatedName(card.getDisplayName()), commandersUsingCard), title, SOptionPane.INFORMATION_ICON);
                 return false;
             }

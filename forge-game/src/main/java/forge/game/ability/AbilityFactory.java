@@ -239,6 +239,10 @@ public final class AbilityFactory {
             spellAbility.putParam("PrecostDesc", "Exhaust — ");
         }
 
+        if (mapParams.containsKey("Named")) {
+            spellAbility.setName(mapParams.get("Named"));
+        }
+
         // *********************************************
         // set universal properties of the SpellAbility
 

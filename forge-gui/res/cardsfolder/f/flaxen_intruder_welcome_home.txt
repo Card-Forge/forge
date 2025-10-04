@@ -2,8 +2,8 @@ Name:Flaxen Intruder
 ManaCost:G
 Types:Creature Human Berserker
 PT:1/2
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ Trigtrig | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may sacrifice it. When you do, destroy target artifact or enchantment.
-SVar:Trigtrig:AB$ ImmediateTrigger | Cost$ Sac<1/CARDNAME> | Execute$ TrigDestroy | TriggerDescription$ When you do, destroy target artifact or enchantment.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigTrig | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may sacrifice it. When you do, destroy target artifact or enchantment.
+SVar:TrigTrig:AB$ ImmediateTrigger | Cost$ Sac<1/CARDNAME> | Execute$ TrigDestroy | TriggerDescription$ When you do, destroy target artifact or enchantment.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment
 AlternateMode:Adventure
 Oracle:Whenever Flaxen Intruder deals combat damage to a player, you may sacrifice it. When you do, destroy target artifact or enchantment.

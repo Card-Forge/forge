@@ -147,11 +147,13 @@ public class ConquestUtil {
         }
         //Move editions of cards already in the deck to the front.
         Map<CardEdition, Integer> editionStats = currentDeck.getAllCardsInASinglePool().getCardEditionStatistics(true);
+        // use flatMap instead of mapMulti for Android 13 and below
+        //https://developer.android.com/reference/java/util/stream/Stream#mapMulti
         List<CardEdition> out = planes.stream()
-                .<CardEdition>mapMulti((p, c) -> p.getEditions().forEach(c))
-                .filter(CardEdition::hasBasicLands)
-                .sorted(Comparator.comparing(e -> editionStats.getOrDefault(e, 0)))
-                .collect(Collectors.toList());
+            .flatMap(p -> p.getEditions().stream())
+            .filter(CardEdition::hasBasicLands)
+            .sorted(Comparator.comparing(e -> editionStats.getOrDefault(e, 0)))
+            .collect(Collectors.toList());
         return out;
     }
 
@@ -320,8 +322,7 @@ public class ConquestUtil {
         }
     }
 
-    public static void updateRarityFilterOdds() {
-        ConquestPreferences prefs = FModel.getConquestPreferences();
+    public static void updateRarityFilterOdds(ConquestPreferences prefs) {
 
         Map<CardRarity, Double> odds = Maps.newEnumMap(CardRarity.class);
         if (prefs.getPrefBoolean(CQPref.AETHER_USE_DEFAULT_RARITY_ODDS)) {

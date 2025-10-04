@@ -3104,41 +3104,38 @@ public class ComputerUtil {
 
     public static CardCollection filterAITgts(SpellAbility sa, Player ai, CardCollection srcList, boolean alwaysStrict) {
         final Card source = sa.getHostCard();
-        if (source == null) { return srcList; }
-
-        if (sa.hasParam("AITgts")) {
-            CardCollection list;
-            String aiTgts = sa.getParam("AITgts");
-            if (aiTgts.startsWith("BetterThan")) {
-                int value = 0;
-                if (aiTgts.endsWith("Source")) {
-                    value = ComputerUtilCard.evaluateCreature(source);
-                    if (source.isEnchanted()) {
-                        for (Card enc : source.getEnchantedBy()) {
-                            if (enc.getController().equals(ai)) {
-                                value += 100; // is 100 per AI's own aura enough?
-                            }
-                        }
-                    }
-                } else if (aiTgts.contains("EvalRating.")) {
-                    value = AbilityUtils.calculateAmount(source, aiTgts.substring(aiTgts.indexOf(".") + 1), sa);
-                } else {
-                    System.err.println("Warning: Unspecified AI target evaluation rating for SA " + sa);
-                    value = ComputerUtilCard.evaluateCreature(source);
-                }
-                final int totalValue = value;
-                list = CardLists.filter(srcList, c -> ComputerUtilCard.evaluateCreature(c) > totalValue + 30);
-            } else {
-                list = CardLists.getValidCards(srcList, sa.getParam("AITgts"), sa.getActivatingPlayer(), source, sa);
-            }
-
-            if (!list.isEmpty() || sa.hasParam("AITgtsStrict") || alwaysStrict) {
-                return list;
-            } else {
-                return srcList;
-            }
+        if (source == null || !sa.hasParam("AITgts")) {
+            return srcList;
         }
 
+        CardCollection list;
+        String aiTgts = sa.getParam("AITgts");
+        if (aiTgts.startsWith("BetterThan")) {
+            int value = 0;
+            if (aiTgts.endsWith("Source")) {
+                value = ComputerUtilCard.evaluateCreature(source);
+                if (source.isEnchanted()) {
+                    for (Card enc : source.getEnchantedBy()) {
+                        if (enc.getController().equals(ai)) {
+                            value += 100; // is 100 per AI's own aura enough?
+                        }
+                    }
+                }
+            } else if (aiTgts.contains("EvalRating.")) {
+                value = AbilityUtils.calculateAmount(source, aiTgts.substring(aiTgts.indexOf(".") + 1), sa);
+            } else {
+                System.err.println("Warning: Unspecified AI target evaluation rating for SA " + sa);
+                value = ComputerUtilCard.evaluateCreature(source);
+            }
+            final int totalValue = value;
+            list = CardLists.filter(srcList, c -> ComputerUtilCard.evaluateCreature(c) > totalValue + 30);
+        } else {
+            list = CardLists.getValidCards(srcList, sa.getParam("AITgts"), sa.getActivatingPlayer(), source, sa);
+        }
+
+        if (!list.isEmpty() || sa.hasParam("AITgtsStrict") || alwaysStrict) {
+            return list;
+        }
         return srcList;
     }
 

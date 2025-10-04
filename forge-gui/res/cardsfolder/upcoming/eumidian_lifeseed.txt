@@ -1,0 +1,7 @@
+Name:Eumidian Lifeseed
+ManaCost:G
+Types:Artifact
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDraft | TriggerDescription$ When this artifact enters, draft a card from CARDNAME's spellbook.
+SVar:TrigDraft:DB$ Draft | Spellbook$ Adagia; Windswept Bastion,Blast Zone,Cascading Cataracts,Contested War Zone,Deserted Temple,Dust Bowl,Kavaron; Memorial World,Mutavault,Nesting Grounds,Plaza of Heroes,Sunken Citadel,Susur Secundi; Void Altar,Terrain Generator,Uthros; Titanic Godcore
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | RestrictValid$ Activated.Land | SpellDescription$ Add one mana of any color. Spend this mana only to activate abilities of land sources.
+Oracle:When this artifact enters, draft a card from Eumidian Lifeseed's spellbook.\n{T}: Add one mana of any color. Spend this mana only to activate abilities of land sources.

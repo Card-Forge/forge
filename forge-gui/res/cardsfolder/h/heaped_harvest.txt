@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Artifact Food
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters and when you sacrifice it, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
 T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Card.Self | Execute$ TrigChange | Secondary$ True | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters and when you sacrifice it, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
-SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | ShuffleNonMandatory$ True
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | ShuffleNonMandatory$ True
 A:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME> | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 SVar:SacMe:5
 DeckHas:Ability$LifeGain|Food

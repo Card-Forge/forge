@@ -166,8 +166,6 @@ public class ForgeScript {
             Card source, CardTraitBase spellAbility) {
         if (property.equals("ManaAbility")) {
             return sa.isManaAbility();
-        } else if (property.equals("nonManaAbility")) {
-            return !sa.isManaAbility();
         } else if (property.equals("withoutXCost")) {
             return !sa.costHasManaX();
         } else if (property.startsWith("XCost")) {
@@ -412,6 +410,8 @@ public class ForgeScript {
                 return !sa.isPwAbility() && !sa.getRestrictions().isSorcerySpeed();
             }
             return true;
+        } else if(property.startsWith("NamedAbility")) {
+            return sa.getName().equals(property.substring(12));
         } else if (sa.getHostCard() != null) {
             return sa.getHostCard().hasProperty(property, sourceController, source, spellAbility);
         }

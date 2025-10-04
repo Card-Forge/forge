@@ -1,0 +1,8 @@
+Name:Fated Clash  
+ManaCost:3 W W
+Types:Sorcery
+S:Mode$ CastWithFlash | ValidCard$ Card.Self | ValidSA$ Spell | IsPresent$ Creature.attacking | IsPresent2$ Creature.blocking | EffectZone$ All | Caster$ You | Description$ You may cast this spell as though it had flash if a creature is attacking and a creature is blocking. 
+A:SP$ Pump | KW$ Indestructible | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBPumpOpp | SpellDescription$ Target creature you control and target creature an opponent controls each gain indestructible until end of turn. 
+SVar:DBPumpOpp:DB$ Pump | KW$ Indestructible | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | SubAbility$ DBDestroyAll
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature | SpellDescription$ Then destroy all creatures. 
+Oracle:You may cast this spell as though it had flash if a creature is attacking and a creature is blocking.\nTarget creature you control and target creature an opponent controls each gain indestructible until end of turn. Then destoy all creatures. 

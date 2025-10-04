@@ -1,0 +1,11 @@
+Name:Deceit
+ManaCost:4 UB UB
+Types:Creature Elemental Incarnation
+PT:5/5
+K:Evoke:UB UB
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | CheckSVar$ CastSA>Count$Adamant_2.Blue.2.0 | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When this creature enters, if {U}{U} was spent to cast it, return up to one other target nonland permanent to its owner's hand.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Permanent.nonLand+Other | TgtPrompt$ Select up to one other target nonland permanent
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | CheckSVar$ CastSA>Count$Adamant_2.Black.2.0 | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When this creature enters, if {B}{B} was spent to cast it, target opponent reveals their hand. You choose a nonland card from it. That player discards that card.
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand | NumCards$ 1 
+DeckHas:Ability$Discard
+Oracle:When this creature enters, if {U}{U} was spent to cast it, return up to one other target nonland permanent to its owner's hand.\nWhen this creature enters, if {B}{B} was spent to cast it, target opponent reveals their hand. You choose a nonland card from it. That player discards that card.\nEvoke {U/B}{U/B}

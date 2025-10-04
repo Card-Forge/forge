@@ -1,0 +1,26 @@
+Name:Eirdu, Carrier of Dawn
+ManaCost:3 W W
+Types:Legendary Creature Elemental God
+PT:5/5
+K:Flying
+K:Lifelink
+S:Mode$ Continuous | Affected$ Card.Creature+YouCtrl+wasCast | AffectedZone$ Stack | AddKeyword$ Convoke | Description$ Creature spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting a creature spell pays for {1} or one mana of that creature's color.)
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your first main phase, you may pay {B}. If you do, transform NICKNAME.
+SVar:TrigTransform:AB$ SetState | Cost$ B | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+DeckHas:Ability$LifeGain|Counters
+Oracle:Flying, lifelink\nCreature spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting a creature spell pays for {1} or one mana of that creature's color.)\nAt the beginning of your first main phase, you may pay {B}. If you do, transform Eirdu.
+
+ALTERNATE
+
+Name:Isilu, Carrier of Twilight
+ManaCost:no cost
+Colors:black
+Types:Legendary Creature Elemental God
+PT:5/5
+K:Flying
+K:Lifelink
+S:Mode$ Continuous | Affected$ Card.Creature+YouCtrl+!token+Other | AffectedZone$ Battlefield | AddKeyword$ Persist | Description$ Each other nontoken creature you control has persist. (When it dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner’s control with a -1/-1 counter on it.)
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your first main phase, you may pay {W}. If you do, transform NICKNAME.
+SVar:TrigTransform:AB$ SetState | Cost$ W | Defined$ Self | Mode$ Transform
+Oracle:Flying, lifelink\nEach other nontoken creature you control has persist. (When it dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.) At the beginning of your first main phase, you may pay {W}. If you do, transform Isilu.

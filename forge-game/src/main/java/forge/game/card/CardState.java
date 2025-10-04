@@ -32,6 +32,7 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
 import forge.game.keyword.KeywordInterface;
+import forge.game.keyword.KeywordWithType;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.LandAbility;
@@ -40,6 +41,7 @@ import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
+import forge.util.CardTranslation;
 import forge.util.ITranslatable;
 import forge.util.IterableUtil;
 import forge.util.collect.FCollection;
@@ -510,15 +512,8 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
             String desc = "";
             String extra = "";
             for (KeywordInterface ki : this.getCachedKeyword(Keyword.ENCHANT)) {
-                String o = ki.getOriginal();
-                String m[] = o.split(":");
-                if (m.length > 2) {
-                    desc = m[2];
-                } else {
-                    desc = m[1];
-                    if (CardType.isACardType(desc) || "Permanent".equals(desc) || "Player".equals(desc) || "Opponent".equals(desc)) {
-                        desc = desc.toLowerCase();
-                    }
+                if (ki instanceof KeywordWithType kwt) {
+                    desc = kwt.getTypeDescription();
                 }
                 break;
             }
@@ -958,7 +953,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     }
 
     @Override
-    public String getUntranslatedOracle() {
-        return getOracleText();
+    public String getTranslatedName() {
+        return CardTranslation.getTranslatedName(this);
     }
 }
