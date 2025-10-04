@@ -153,7 +153,7 @@ public class CardDetailUtil {
         if (item instanceof PreconDeck) {
             return ((PreconDeck) item).getDescription();
         }
-        return item.getName();
+        return item.getDisplayName();
     }
 
     public static String formatCardName(final CardView card, final boolean canShow, final boolean forAltState) {

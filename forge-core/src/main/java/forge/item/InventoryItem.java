@@ -27,6 +27,14 @@ public interface InventoryItem extends ITranslatable {
     String getItemType();
     String getImageKey(boolean altState);
 
+    /**
+     * Supplies the user-facing name of this item. Usually the same as `getName()`, but may be overwritten in cases such
+     * as flavor names for cards.
+     */
+    default String getDisplayName() {
+        return getName();
+    }
+
     @Override
     default String getUntranslatedType() {
         return getItemType();

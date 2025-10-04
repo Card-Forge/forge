@@ -6,6 +6,7 @@ import forge.card.ColorSet;
 import forge.card.ICardFace;
 
 import java.io.Serializable;
+import java.util.List;
 
 public interface IPaperCard extends InventoryItem, Serializable {
 
@@ -31,6 +32,7 @@ public interface IPaperCard extends InventoryItem, Serializable {
     boolean hasBackFace();
     ICardFace getMainFace();
     ICardFace getOtherFace();
+    List<ICardFace> getAllFaces();
     String getCardImageKey();
     String getCardAltImageKey();
     String getCardWSpecImageKey();
@@ -44,8 +46,8 @@ public interface IPaperCard extends InventoryItem, Serializable {
     @Override
     default String getTranslationKey() {
         if(!NO_FUNCTIONAL_VARIANT.equals(getFunctionalVariant()))
-            return getName() + " $" + getFunctionalVariant();
-        return getName();
+            return getDisplayName() + " $" + getFunctionalVariant();
+        return getDisplayName();
     }
 
     @Override
