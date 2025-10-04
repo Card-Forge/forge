@@ -8,6 +8,7 @@ T:Mode$ ElementalBend | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerD
 SVar:TrigDraw:DB$ Draw | SubAbility$ DBTransform
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | ConditionCheckSVar$ X
 SVar:X:Count$AllFourBend.1.0
+AlternateMode:DoubleFaced
 Oracle:Flying, firebending 2\nWhenever you waterbend, earthbend, firebend, or airbend, draw a card. Then if you've done all four this turn, transform Avatar Aang.
 
 ALTERNATE
