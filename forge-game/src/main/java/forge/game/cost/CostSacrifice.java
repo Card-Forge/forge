@@ -18,7 +18,6 @@
 package forge.game.cost;
 
 import com.google.common.collect.Sets;
-import forge.card.CardType;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
@@ -29,6 +28,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
+import forge.util.MessageUtil;
 
 import java.util.Map;
 import java.util.Set;
@@ -104,22 +104,33 @@ public class CostSacrifice extends CostPartWithList {
 
         if (payCostFromSource()) {
             sb.append(getTypeDescription() == null || !getTypeDescription().startsWith("this")
-                    ? getType() : getTypeDescription());
-        } else if (getAmount().equals("X")) {
-            String typeDesc = getType().toLowerCase().replace(";","s and/or ");
-            sb.append("any number of ").append(typeDesc).append("s");
+                ? getType()
+                : getTypeDescription());
         } else {
-            String desc;
             if (this.getTypeDescription() == null) {
-                final String typeS = this.getType();
-                desc = typeS.equals("Permanent") || CardType.CoreType.isValidEnum(typeS) ? typeS.toLowerCase() : typeS;
-            } else {
-                desc = this.getTypeDescription();
-            }
+                Integer convertAmount = convertAmount();
+                boolean isPlural = convertAmount == null || convertAmount != 1;
 
-            if (desc.startsWith("another")) sb.append(desc);
-            else sb.append(convertAmount() == null ? Lang.nounWithNumeralExceptOne(getAmount(), desc)
-                    : Lang.nounWithNumeralExceptOne(convertAmount(), desc));
+                String typeString = MessageUtil.complexTargetTypesToString(this.getType(), isPlural);
+
+                if (getAmount().equals("X")) {
+                    sb.append("any number of ");
+                } else if (convertAmount == null) {
+                    sb.append(getAmount()).append(" ");
+                } else {
+                    if (convertAmount == 1) {
+                        if (!typeString.startsWith("another")) {
+                            sb.append(Lang.startsWithVowel(typeString) ? "an " : "a ");
+                        }
+                    } else {
+                        sb.append(Lang.getNumeral(convertAmount)).append(" ");
+                    }
+                }
+
+                sb.append(MessageUtil.complexTargetTypesToString(this.getType(), isPlural));
+            } else {
+                sb.append(this.getTypeDescription());
+            }
         }
         return sb.toString();
     }

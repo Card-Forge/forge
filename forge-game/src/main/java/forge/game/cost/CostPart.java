@@ -17,12 +17,13 @@
  */
 package forge.game.cost;
 
-import forge.card.CardType;
 import forge.game.CardTraitBase;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.Lang;
+import forge.util.MessageUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
@@ -108,11 +109,30 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable, Seria
 
     public final String getDescriptiveType() {
         String typeDesc = this.getTypeDescription();
-        if (typeDesc == null) {
-            String typeS = this.getType();
-            typeDesc = CardType.CoreType.isValidEnum(typeS) || typeS.equals("Card") ? typeS.toLowerCase() : typeS;
+        if (typeDesc != null) {
+            return typeDesc;
         }
-        return typeDesc;
+
+        Integer convertAmount = convertAmount();
+        boolean isPlural = convertAmount == null || convertAmount != 1;
+        String typeString = MessageUtil.complexTargetTypesToString(this.getType(), isPlural);
+        StringBuilder sb = new StringBuilder();
+
+        if (convertAmount == null) {
+            sb.append(getAmount()).append(" ");
+        } else {
+            if (convertAmount == 1) {
+                if (!typeString.startsWith("another")) {
+                    sb.append(Lang.startsWithVowel(typeString) ? "an " : "a ");
+                }
+            } else {
+                sb.append(Lang.getNumeral(convertAmount)).append(" ");
+            }
+        }
+
+        sb.append(typeString);
+
+        return sb.toString();
     }
 
     /**
