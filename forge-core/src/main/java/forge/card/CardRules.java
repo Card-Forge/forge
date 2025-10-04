@@ -631,8 +631,6 @@ public final class CardRules implements ICardCharacteristics {
                         this.altMode = CardSplitType.smartValueOf(value);
                     } else if ("ALTERNATE".equals(key)) {
                         this.curFace = 1;
-                    } else if ("AltName".equals(key)) {
-                        face.setAltName(value);
                     }
                     break;
 
@@ -656,6 +654,11 @@ public final class CardRules implements ICardCharacteristics {
                         face.addDraftAction(value);
                     }
                     break;
+
+                case 'F':
+                    if("FlavorName".equals(key)) {
+                        face.setFlavorName(value);
+                    }
 
                 case 'H':
                     if ("HandLifeModifier".equals(key)) {

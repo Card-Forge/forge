@@ -68,10 +68,6 @@ public class StaticData {
         this(cardReader, null, customCardReader, null, editionFolder, customEditionsFolder, blockDataFolder, "", cardArtPreference, enableUnknownCards, loadNonLegalCards, false, false);
     }
 
-    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, CardStorageReader customTokenReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String setLookupFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance){
-        this(cardReader, tokenReader, customCardReader, customTokenReader, editionFolder, customEditionsFolder, blockDataFolder, setLookupFolder, cardArtPreference, enableUnknownCards, loadNonLegalCards, allowCustomCardsInDecksConformance, false);
-    }
-
     public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, CardStorageReader customTokenReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String setLookupFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance, boolean enableSmartCardArtSelection) {
         this.cardReader = cardReader;
         this.tokenReader = tokenReader;
@@ -83,6 +79,8 @@ public class StaticData {
         lastInstance = this;
         List<String> funnyCards = new ArrayList<>();
         List<String> filtered = new ArrayList<>();
+        Set<String> funnyCards = new HashSet<>();
+        Set<String> filtered = new HashSet<>();
         editions.append(new CardEdition.Collection(new CardEdition.Reader(new File(customEditionsFolder), true)));
 
         {
@@ -108,7 +106,7 @@ public class StaticData {
 
                 final String cardName = card.getName();
 
-                if (!loadNonLegalCards && !card.getType().isLand() && funnyCards.contains(cardName))
+                if (!loadNonLegalCards && funnyCards.contains(cardName) && !card.getType().isBasicLand())
                     filtered.add(cardName);
 
                 if (card.isVariant()) {
@@ -131,12 +129,13 @@ public class StaticData {
                 }
             }
 
-            if (!filtered.isEmpty()) {
-                Collections.sort(filtered);
-            }
+            commonCards = new CardDb(regularCards, editions, filtered);
+            variantCards = new CardDb(variantsCards, editions, filtered);
 
             commonCards = new CardDb(regularCards, editions, filtered, cardArtPreference);
             variantCards = new CardDb(variantsCards, editions, filtered, cardArtPreference);
+            commonCards.setCardArtPreference(cardArtPreference);
+            variantCards.setCardArtPreference(cardArtPreference);
 
             //must initialize after establish field values for the sake of card image logic
             commonCards.initialize(false, false, enableUnknownCards);
@@ -561,7 +560,6 @@ public class StaticData {
      * @param allowedSetCodes The list of the allowed set codes to consider when looking for alternative card art
      *                        candidates. If the list is not null and not empty, will be used in combination with the
      *                        <code>isLegal</code> predicate.
-     * @see CardDb#isLegal(List<String>)
      * @return an instance of <code>PaperCard</code> that is the selected alternative candidate, or <code>null</code>
      *          if None could be found.
      */

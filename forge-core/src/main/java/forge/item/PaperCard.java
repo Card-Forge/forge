@@ -20,10 +20,7 @@ package forge.item;
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.*;
-import forge.util.CardTranslation;
-import forge.util.ImageUtil;
-import forge.util.Localizer;
-import forge.util.TextUtil;
+import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;

@@ -17,20 +17,12 @@ import java.util.stream.Collectors;
  * <i>Do not use reference to class except for card parsing.<br>Always use reference to interface type outside of package.</i>
  */
 final class CardFace implements ICardFace, Cloneable {
-
-    public enum FaceSelectionMethod { // 
-        USE_ACTIVE_FACE,
-        USE_PRIMARY_FACE,
-        COMBINE
-    }
-
-    
     private final static List<String> emptyList = Collections.unmodifiableList(new ArrayList<>());
     private final static Map<String, String> emptyMap = Collections.unmodifiableMap(new TreeMap<>());
     private final static Set<Integer> emptySet = Collections.unmodifiableSet(new HashSet<>());
 
     private String name;
-    private String altName = null;
+    private String flavorName = null;
     private CardType type = null;
     private ManaCost manaCost = null;
     private ColorSet color = null;
@@ -85,7 +77,7 @@ final class CardFace implements ICardFace, Cloneable {
         return variables.entrySet();
     }
 
-    @Override public String getAltName()              { return this.altName; }
+    @Override public String getFlavorName()              { return this.flavorName; }
 
     public CardFace(String name0) {
         this.name = name0; 
@@ -94,7 +86,7 @@ final class CardFace implements ICardFace, Cloneable {
     }
     // Here come setters to allow parser supply values
     void setName(String name)                { this.name = name; }
-    void setAltName(String name)             { this.altName = name; }
+    void setFlavorName(String name)          { this.flavorName = name; }
     void setType(CardType type0)             { this.type = type0; }
     void setManaCost(ManaCost manaCost0)     { this.manaCost = manaCost0; }
     void setColor(ColorSet color0)           { this.color = color0; }
@@ -227,7 +219,7 @@ final class CardFace implements ICardFace, Cloneable {
                 if(variant.nonAbilityText == null) variant.nonAbilityText = this.nonAbilityText;
                 if(variant.draftActions == null) variant.draftActions = this.draftActions;
                 if(variant.attractionLights == null) variant.attractionLights = this.attractionLights;
-                if(variant.altName == null) variant.altName = this.altName;
+                //if(variant.flavorName == null) variant.flavorName = this.flavorName; //Probably shouldn't be setting this on the main variant to begin with?
             }
         }
     }
