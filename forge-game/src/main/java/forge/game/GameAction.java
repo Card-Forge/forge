@@ -1602,9 +1602,7 @@ public class GameAction {
         }
 
         // recheck the game over condition at this point to make sure no other win conditions apply now.
-        if (!game.isGameOver()) {
-            checkGameOverCondition();
-        }
+        checkGameOverCondition();
 
         if (game.getAge() != GameStage.Play) {
             return false;
@@ -1885,6 +1883,10 @@ public class GameAction {
     }
 
     public void checkGameOverCondition() {
+        if (game.isGameOver()) {
+            return;
+        }
+
         // award loses as SBE
         GameEndReason reason = null;
         List<Player> losers = null;
