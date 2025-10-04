@@ -1,5 +1,5 @@
 Name:Simon, Wild Magic Sorcerer
-AltName:Mathise, Surge Channeler
+Variant:UniversesWithin:FlavorName:Mathise, Surge Channeler
 ManaCost:2 U
 Types:Legendary Creature Human Elf Shaman
 PT:1/1

@@ -1,5 +1,5 @@
 Name:Dhalsim, Pliable Pacifist
-AltName:Tadeas, Juniper Ascendant
+Variant:UniversesWithin:FlavorName:Tadeas, Juniper Ascendant
 ManaCost:2 G W
 Types:Legendary Creature Human Monk
 PT:1/3

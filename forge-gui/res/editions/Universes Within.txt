@@ -6,33 +6,33 @@ Type=Collector_Edition
 ScryfallCode=SLX
 
 [cards]
-1 M Arvinox, the Mind Flail @Nikola Matkovic
-2 R Bjorna, Nightfall Alchemist @Jamroz Gary
-3 R Cecily, Haunted Mage @Anastasia Balakchina
-4 R Elmar, Ulvenwald Informant @Eliz Roxs
-5 R Hargilde, Kindly Runechanter @David Sondered
-6 R Othelm, Sigardian Outcast @Alexey Kruglov
-7 R Sophina, Spearsage Deserter @Bartek Fedyczak
-8 R Wernog, Rider's Chaplain @Diego Gisbert
-9 R Havengul Laboratory @Rafater
-10 R Baldin, Century Herdmaster @Zoltan Boros
-11 R Vikya, Scorching Stalwart @Zoltan Boros
-12 R Aisha of Sparks and Smoke @Evyn Fong
-13 R The Howling Abomination @Helge C. Balzer
-14 R Immard, the Stormcleaver @Kai Carpenter
-15 R Maarika, Brutal Gladiator @Wisnu Tan
-16 R Tadeas, Juniper Ascendant @Alexander Mokhov
-17 R Zethi, Arcane Blademaster @Billy Christian
-18 M Greymond, Avacyn's Stalwart @Bram Sels
-19 M Gisa's Favorite Shovel @Svetlin Velinov
-20 M Enkira, Hostile Scavenger @Matt Stewart
-21 M Gregor, Shrewd Magistrate @Filipe Pagliuso
-22 M Hansk, Slayer Zealot @Michal Ivan
-23 M Malik, Grim Manipulator @Joshua Raphael
-24 R Rashel, Fist of Torm @Chuck Lukacs
-25 R Mathise, Surge Channeler @Michele Giorgi
-26 R Evin, Waterdeep Opportunist @Igor Grechanyi
-27 R Jurin, Leading the Charge @Craig J Spearing
+1 M Arvinox, the Mind Flail @Nikola Matkovic ${"variant": "UniversesWithin"}
+2 R Bjorna, Nightfall Alchemist @Jamroz Gary ${"variant": "UniversesWithin"}
+3 R Cecily, Haunted Mage @Anastasia Balakchina ${"variant": "UniversesWithin"}
+4 R Elmar, Ulvenwald Informant @Eliz Roxs ${"variant": "UniversesWithin"}
+5 R Hargilde, Kindly Runechanter @David Sondered ${"variant": "UniversesWithin"}
+6 R Othelm, Sigardian Outcast @Alexey Kruglov ${"variant": "UniversesWithin"}
+7 R Sophina, Spearsage Deserter @Bartek Fedyczak ${"variant": "UniversesWithin"}
+8 R Wernog, Rider's Chaplain @Diego Gisbert ${"variant": "UniversesWithin"}
+9 R Havengul Laboratory @Rafater ${"variant": "UniversesWithin"}
+10 R Baldin, Century Herdmaster @Zoltan Boros ${"variant": "UniversesWithin"}
+11 R Vikya, Scorching Stalwart @Zoltan Boros ${"variant": "UniversesWithin"}
+12 R Aisha of Sparks and Smoke @Evyn Fong ${"variant": "UniversesWithin"}
+13 R The Howling Abomination @Helge C. Balzer ${"variant": "UniversesWithin"}
+14 R Immard, the Stormcleaver @Kai Carpenter ${"variant": "UniversesWithin"}
+15 R Maarika, Brutal Gladiator @Wisnu Tan ${"variant": "UniversesWithin"}
+16 R Tadeas, Juniper Ascendant @Alexander Mokhov ${"variant": "UniversesWithin"}
+17 R Zethi, Arcane Blademaster @Billy Christian ${"variant": "UniversesWithin"}
+18 M Greymond, Avacyn's Stalwart @Bram Sels ${"variant": "UniversesWithin"}
+19 M Gisa's Favorite Shovel @Svetlin Velinov ${"variant": "UniversesWithin"}
+20 M Enkira, Hostile Scavenger @Matt Stewart ${"variant": "UniversesWithin"}
+21 M Gregor, Shrewd Magistrate @Filipe Pagliuso ${"variant": "UniversesWithin"}
+22 M Hansk, Slayer Zealot @Michal Ivan ${"variant": "UniversesWithin"}
+23 M Malik, Grim Manipulator @Joshua Raphael ${"variant": "UniversesWithin"}
+24 R Rashel, Fist of Torm @Chuck Lukacs ${"variant": "UniversesWithin"}
+25 R Mathise, Surge Channeler @Michele Giorgi ${"variant": "UniversesWithin"}
+26 R Evin, Waterdeep Opportunist @Igor Grechanyi ${"variant": "UniversesWithin"}
+27 R Jurin, Leading the Charge @Craig J Spearing ${"variant": "UniversesWithin"}
 28 R Themberchaud @Edgar Sánchez Hidalgo
-29 R Casal, Lurkwood Pathfinder @Victor Adame Minguez
-30 R Bohn, Beguiling Balladeer @Alix Branwyn
+29 R Casal, Lurkwood Pathfinder @Victor Adame Minguez ${"variant": "UniversesWithin"}
+30 R Bohn, Beguiling Balladeer @Alix Branwyn ${"variant": "UniversesWithin"}
