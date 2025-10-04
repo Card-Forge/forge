@@ -44,7 +44,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
                 // Not at EOT phase
                 return new AiAbilityDecision(0, AiPlayDecision.WaitForEndOfTurn);
             }
-        } if ("DuplicatePerms".equals(aiLogic)) {
+        } else if ("DuplicatePerms".equals(aiLogic)) {
             final List<Card> valid = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
             if (valid.size() < 2) {
                 return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
@@ -212,7 +212,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
                 if (mandatory) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+                    return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
                 }
             }
         }
