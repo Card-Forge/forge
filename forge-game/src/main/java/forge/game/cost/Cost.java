@@ -237,17 +237,17 @@ public class Cost implements Serializable {
         CostPartMana parsedMana = null;
         for (String part : parts) {
             if (part.startsWith("XMin")) {
-                xMin = (part);
+                xMin = part;
             } else if ("Mandatory".equals(part)) {
                 this.isMandatory = true;
             } else {
                 CostPart cp = parseCostPart(part, tapCost, untapCost);
                 if (null != cp)
-                    if (cp instanceof CostPartMana) {
-                        parsedMana = (CostPartMana) cp;
+                    if (cp instanceof CostPartMana p) {
+                        parsedMana = p;
                     } else {
-                        if (cp instanceof CostPartWithList) {
-                            ((CostPartWithList)cp).setIntrinsic(intrinsic);
+                        if (cp instanceof CostPartWithList p) {
+                            p.setIntrinsic(intrinsic);
                         }
                         this.costParts.add(cp);
                     }
