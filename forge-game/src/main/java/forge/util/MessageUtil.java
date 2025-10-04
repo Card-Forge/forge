@@ -153,15 +153,27 @@ public class MessageUtil {
                 }
 
                 // Prefixes
-                if (pOrS.equals("Other")) {
-                    if (hasOther) {
+                switch (pOrS) {
+                    case "Other" -> {
+                        if (hasOther) {
+                            continue;
+                        }
+
+                        currentTerm += pluralize ? "other " : "another ";
+                        prefixes.append(currentTerm);
+                        hasOther = true;
                         continue;
                     }
-
-                    currentTerm += pluralize ? "other " : "another ";
-                    prefixes.append(currentTerm);
-                    hasOther = true;
-                    continue;
+                    case "untapped" -> {
+                        currentTerm += " untapped";
+                        prefixes.append(currentTerm);
+                        continue;
+                    }
+                    case "tapped" -> {
+                        currentTerm += " tapped";
+                        prefixes.append(currentTerm);
+                        continue;
+                    }
                 }
 
                 if (CardType.Supertype.isValidEnum(pOrS) ||
@@ -223,6 +235,18 @@ public class MessageUtil {
                     }
 
                     currentTerm += value;
+                    suffixes.append(currentTerm);
+                    continue;
+                }
+
+                if (pOrS.startsWith("named")) {
+                    if (!isNegated) {
+                        currentTerm += " not ";
+                    }
+
+                    currentTerm += " named " + pOrS.substring(5);
+                    suffixes.append(currentTerm);
+                    continue;
                 }
 
                 // Special case: token
