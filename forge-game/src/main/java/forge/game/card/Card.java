@@ -953,23 +953,28 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     @Override
     public final String getName() {
-        return getName(currentState, false);
+        return getName(currentState);
     }
 
-    public final String getName(boolean alt) {
-        return getName(currentState, alt);
-    }
-    public final String getName(CardStateName stateName) {
-        return getName(getState(stateName), false);
-    }
-    public final String getName(CardState state, boolean alt) {
+    public final String getName(CardState state) {
         String name = state.getName();
         for (CardChangedName change : this.changedCardNames.values()) {
             if (change.isOverwrite()) {
                 name = change.getNewName();
             }
         }
-        return alt ? StaticData.instance().getCommonCards().getName(name, true) :  name;
+        return name;
+    }
+
+    public final String getDisplayName() {
+        return getDisplayName(currentState);
+    }
+
+    public final String getDisplayName(CardState state) {
+        //If this card has a changed name, don't use flavor names.
+        if(state.getFlavorName() == null || hasNameOverwrite())
+            return getName(state);
+        return state.getFlavorName();
     }
 
     public final boolean hasNameOverwrite() {
@@ -6065,7 +6070,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 return true;
             }
         }
-        return sharesNameWith(c1.getName(true));
+        return sharesNameWith(c1.getName());
     }
 
     public final boolean sharesNameWith(final String name) {
@@ -6074,7 +6079,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return false;
         }
 
-        boolean shares = getName(true).equals(name);
+        boolean shares = getName().equals(name);
 
         // Split cards has extra logic to check if it does share a name with
         if (!shares && !hasNameOverwrite()) {
@@ -7843,7 +7848,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
     @Override
     public String getUntranslatedName() {
-        return this.getName();
+        return this.getDisplayName();
     }
     @Override
     public String getUntranslatedType() {

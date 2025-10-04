@@ -61,6 +61,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     private byte color = MagicColor.COLORLESS;
     private String oracleText = "";
     private String functionalVariantName = null;
+    private String flavorName = null;
     private int basePower = 0;
     private int baseToughness = 0;
     private String basePowerString = null;
@@ -217,6 +218,15 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
             functionalVariantName = null;
         this.functionalVariantName = functionalVariantName;
         view.setFunctionalVariantName(functionalVariantName);
+    }
+
+    public String getFlavorName() {
+        return flavorName;
+    }
+
+    public void setFlavorName(String flavorName) {
+        this.flavorName = flavorName;
+        view.updateName(this);
     }
 
     public final int getBasePower() {
@@ -721,6 +731,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
         setBaseLoyalty(source.getBaseLoyalty());
         setBaseDefense(source.getBaseDefense());
         setAttractionLights(source.getAttractionLights());
+        setFlavorName(source.getFlavorName());
         setSVars(source.getSVars());
 
         abilities.clear();
@@ -935,9 +946,10 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
 
     @Override
     public String getTranslationKey() {
+        String displayName = flavorName == null ? name : flavorName;
         if(StringUtils.isNotEmpty(functionalVariantName))
-            return name + " $" + functionalVariantName;
-        return name;
+            return displayName + " $" + functionalVariantName;
+        return displayName;
     }
 
     @Override

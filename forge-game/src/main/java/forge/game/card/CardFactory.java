@@ -410,6 +410,8 @@ public class CardFactory {
 
         c.getCurrentState().setOracleText(face.getOracleText());
 
+        c.getCurrentState().setFlavorName(face.getFlavorName());
+
         // Super and 'middle' types should use enums.
         c.setType(new CardType(face.getType()));
 
