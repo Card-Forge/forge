@@ -335,6 +335,57 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         return face.getName();
     }
 
+    private transient Set<String> searchableNames = null;
+    private transient String searchableNameLang = null;
+
+    public Set<String> getAllSearchableNames() {
+        if(this.searchableNames != null && CardTranslation.getLanguageSelected().equals(searchableNameLang))
+            return searchableNames;
+        if(searchableNameLang != null) //Changed the language. May as well update this.
+            sortableName = TextUtil.toSortableName(CardTranslation.getTranslatedName(displayName));
+        searchableNameLang = CardTranslation.getLanguageSelected();
+        searchableNames = computeSearchableNames(searchableNameLang);
+        return searchableNames;
+    }
+
+    private Set<String> computeSearchableNames(String language) {
+        ICardFace otherFace = this.getOtherFace();
+        if(otherFace == null && NO_FUNCTIONAL_VARIANT.equals(this.functionalVariant))
+        {
+            //99% of cases will land here. This could possibly be optimized further by computing and storing this on
+            //the CardRules instead, but flavor names will still need to work per-print, or at least per-variant.
+            if("en-US".equals(language))
+                return Set.of(this.name);
+            else {
+                String translatedName = CardTranslation.getTranslatedName(this.name);
+                return Set.of(this.name, translatedName, StringUtils.stripAccents(translatedName));
+            }
+        }
+        Set<String> names = new HashSet<>();
+        ICardFace mainFace = this.getMainFace();
+        names.add(mainFace.getName());
+        String mainFlavor = mainFace.getFlavorName();
+        if(mainFlavor != null)
+            names.add(mainFlavor);
+        if(otherFace != null) {
+            names.add(otherFace.getName());
+            String otherFlavor = otherFace.getFlavorName();
+            if(otherFlavor != null)
+                names.add(otherFlavor);
+
+            names.add(mainFace.getName() + " // " + otherFace.getName());
+            if(mainFlavor != null && otherFlavor != null)
+                names.add(mainFlavor + " // " + otherFlavor);
+        }
+        if(!"en-US".equals(language)) {
+            Set<String> translated = names.stream().map(CardTranslation::getTranslatedName).filter(Objects::nonNull).collect(Collectors.toSet());
+            names.addAll(translated);
+        }
+        Set<String> noAccents = names.stream().map(StringUtils::stripAccents).collect(Collectors.toSet());
+        names.addAll(noAccents);
+        return names;
+    }
+
     /*
      * This (utility) method transform a collectorNumber String into a key string for sorting.
      * This method proxies the same strategy implemented in CardEdition.CardInSet class from which the

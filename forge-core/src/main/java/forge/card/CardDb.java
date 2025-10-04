@@ -17,10 +17,7 @@
  */
 package forge.card;
 
-import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimaps;
+import com.google.common.collect.*;
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardEdition.EditionEntry;
@@ -30,7 +27,6 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.Lang;
 import forge.util.TextUtil;
-import forge.util.lang.LangEnglish;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
