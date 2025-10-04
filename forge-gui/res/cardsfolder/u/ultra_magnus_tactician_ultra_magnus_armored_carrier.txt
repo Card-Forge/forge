@@ -25,6 +25,6 @@ K:Haste
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Formidable — Whenever NICKNAME attacks, attacking creatures you control gain indestructible until end of turn. If those creatures have total power 8 or greater, convert NICKNAME.
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.attacking+YouCtrl | KW$ Indestructible | SubAbility$ DBConvert
 SVar:DBConvert:DB$ SetState | Mode$ Transform | ConditionCheckSVar$ FormidableTest | ConditionSVarCompare$ GE8
-SVar:FormidableTest:Count$SumPower_Creature.attacking+YouCtrl
+SVar:FormidableTest:Count$Valid Creature.attacking+YouCtrl$SumPower
 SVar:HasAttackEffect:TRUE
 Oracle:Living metal (During your turn, this Vehicle is also a creature.)\nHaste\nFormidable — Whenever Ultra Magnus attacks, attacking creatures you control gain indestructible until end of turn. If those creatures have total power 8 or greater, convert Ultra Magnus.

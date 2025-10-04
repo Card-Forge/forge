@@ -2902,13 +2902,6 @@ public class AbilityUtils {
         }
 
         // TODO move below to handlePaid
-        if (sq[0].startsWith("SumPower")) {
-            final String[] restrictions = l[0].split("_");
-            int sumPower = game.getCardsIn(ZoneType.Battlefield).stream()
-                    .filter(CardPredicates.restriction(restrictions[1], player, c, ctb))
-                    .mapToInt(Card::getNetPower).sum();
-            return doXMath(sumPower, expr, c, ctb);
-        }
         if (sq[0].startsWith("DifferentPower_")) {
             final String restriction = l[0].substring(15);
             final int uniquePowers = (int) game.getCardsIn(ZoneType.Battlefield).stream()
@@ -3732,6 +3725,9 @@ public class AbilityUtils {
             return CardLists.getTotalPower(paidList, ctb);
         }
 
+        if (string.startsWith("SumPower")) {
+            return Aggregates.sum(paidList, Card::getNetPower);
+        }
         if (string.startsWith("SumToughness")) {
             return Aggregates.sum(paidList, Card::getNetToughness);
         }
