@@ -18,7 +18,6 @@
 package forge.game.cost;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import forge.game.ability.AbilityKey;
 import forge.game.card.*;
 import forge.game.player.Player;
@@ -29,7 +28,6 @@ import forge.util.TextUtil;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * The Class CostDiscard.
@@ -63,10 +61,19 @@ public class CostDiscard extends CostPartWithList {
     public Integer getMaxAmountX(SpellAbility ability, Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
         String type = this.getType();
+
+        boolean differentNames = false;
+        if (type.contains("+WithDifferentNames")) {
+            type = type.replace("+WithDifferentNames", "");
+            differentNames = true;
+        }
         CardCollectionView handList = payer.canDiscardBy(ability, effect) ? payer.getCardsIn(ZoneType.Hand) : CardCollection.EMPTY;
 
         if (!type.equals("Random")) {
             handList = CardLists.getValidCards(handList, type.split(";"), payer, source, ability);
+        }
+        if (differentNames) {
+            return CardLists.getDifferentNamesCount(handList);
         }
         return handList.size();
     }
@@ -92,7 +99,7 @@ public class CostDiscard extends CostPartWithList {
         else if (this.getType().equals("LastDrawn")) {
             sb.append("the last card you drew this turn");
         }
-        else if (this.getType().equals("DifferentNames")) {
+        else if (this.getType().contains("+WithDifferentNames")) {
             sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), "Card")).append(" with different names");
         }
         else {
@@ -145,20 +152,16 @@ public class CostDiscard extends CostPartWithList {
             final Card c = payer.getLastDrawnCard();
             return handList.contains(c);
         }
-        else if (type.equals("DifferentNames")) {
-            Set<String> cardNames = Sets.newHashSet();
-            for (Card c : handList) {
-                if (!c.hasNoName()) {
-                    cardNames.add(c.getName());
-                }
-            }
-            return cardNames.size() >= amount;
-        }
         else {
             boolean sameName = false;
+            boolean differentNames = false;
             if (type.contains("+WithSameName")) {
                 sameName = true;
                 type = TextUtil.fastReplace(type, "+WithSameName", "");
+            }
+            if (type.contains("+WithDifferentNames")) {
+                type = type.replace("+WithDifferentNames", "");
+                differentNames = true;
             }
             if (type.contains("ChosenColor") && !source.hasChosenColor()) {
                 //color hasn't been chosen yet, so skip getValidCards
@@ -173,6 +176,10 @@ public class CostDiscard extends CostPartWithList {
                     }
                 }
                 return false;
+            } else if (differentNames) {
+                if (CardLists.getDifferentNamesCount(handList) < amount) {
+                    return false;
+                }
             }
             int adjustment = 0;
             if (source.isInZone(ZoneType.Hand) && payer.equals(source.getOwner())) {
