@@ -3421,6 +3421,7 @@ public class AbilityUtils {
     }
 
     public static int playerXProperty(final Player player, final String s, final Card source, CardTraitBase ctb) {
+
         final String[] l = s.split("/");
         final String m = CardFactoryUtil.extractOperators(s);
 
@@ -3472,6 +3473,7 @@ public class AbilityUtils {
 
         final String[] sq = l[0].split("\\.");
         final String value = sq[0];
+        final String[] calcX = value.split("\\$", 2);
 
         if (value.contains("NumPowerSurgeLands")) {
             return doXMath(player.getNumPowerSurgeLands(), m, source, ctb);
@@ -3607,8 +3609,8 @@ public class AbilityUtils {
             return doXMath(player.hasBeenDealtCombatDamageSinceLastTurn() ? 1 : 0, m, source, ctb);
         }
 
-        if (value.equals("DungeonsCompleted")) {
-            return doXMath(player.getCompletedDungeons().size(), m, source, ctb);
+        if (calcX[0].equals("DungeonsCompleted")) {
+            return doXMath(handlePaid(player.getCompletedDungeons(), calcX[1], source, ctb), m, source, ctb);
         }
 
         if (value.equals("RingTemptedYou")) {
