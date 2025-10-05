@@ -15,6 +15,6 @@ ManaCost:no cost
 Colors:black
 Types:Creature Zombie
 PT:2/6
-A:AB$ LoseLife | Cost$ 2 B T Sac<1/Creature.Other/another creature> | ValidTgts$ Opponent | LifeAmount$ X | TgtPrompt$ Select target opponent | SpellDescription$ Target opponent loses life equal to the sacrificed creature's toughness.
+A:AB$ LoseLife | Cost$ 2 B T Sac<1/Creature.Other> | ValidTgts$ Opponent | LifeAmount$ X | TgtPrompt$ Select target opponent | SpellDescription$ Target opponent loses life equal to the sacrificed creature's toughness.
 SVar:X:Sacrificed$CardToughness
 Oracle:{2}{B}, {T}, Sacrifice another creature: Target opponent loses life equal to the sacrificed creature's toughness.

@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Devil
 PT:4/3
 R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
-A:AB$ Untap | Cost$ 1 Sac<1/Creature.Other/another creature> | PlayerTurn$ True | SpellDescription$ Untap this creature. Activate only during your turn.
+A:AB$ Untap | Cost$ 1 Sac<1/Creature.Other> | PlayerTurn$ True | SpellDescription$ Untap this creature. Activate only during your turn.
 SVar:AIPreference:SacCost$Creature.token+powerLE2+toughnessLE2,Creature.cmcLE2+powerLE1+toughnessLE2+inZoneBattlefield
 DeckHas:Ability$Sacrifice
 Oracle:This creature doesn't untap during your untap step.\n{1}, Sacrifice another creature: Untap this creature. Activate only during your turn.
