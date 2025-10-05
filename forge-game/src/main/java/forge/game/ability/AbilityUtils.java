@@ -3475,7 +3475,6 @@ public class AbilityUtils {
 
         final String[] sq = l[0].split("\\.");
         final String value = sq[0];
-        final String[] calcX = value.split("\\$", 2);
 
         if (value.contains("NumPowerSurgeLands")) {
             return doXMath(player.getNumPowerSurgeLands(), m, source, ctb);
