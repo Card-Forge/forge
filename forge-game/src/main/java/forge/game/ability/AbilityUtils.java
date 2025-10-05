@@ -3725,10 +3725,6 @@ public class AbilityUtils {
             return CardLists.getTotalPower(paidList, ctb);
         }
 
-        if (string.startsWith("SumToughness")) {
-            return Aggregates.sum(paidList, Card::getNetToughness);
-        }
-
         if (string.startsWith("GreatestCMC")) {
             return Aggregates.max(paidList, Card::getCMC);
         }
