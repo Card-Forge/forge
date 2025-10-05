@@ -762,7 +762,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         } else if (aiLogic.equals("Main1") && ph.is(PhaseType.MAIN1, ai)) {
             return true;
         } else if (aiLogic.equals("BeforeCombat")) {
-            return ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN);
+            return !ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN);
         }
 
         if (sa.isHidden()) {

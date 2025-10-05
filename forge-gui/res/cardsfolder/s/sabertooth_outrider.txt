@@ -5,5 +5,5 @@ PT:4/2
 K:Trample
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE8 | Execute$ TrigFormidable | TriggerDescription$ Formidable — Whenever CARDNAME attacks, if creatures you control have total power 8 or greater, CARDNAME gains first strike until end of turn.
 SVar:TrigFormidable:DB$ Pump | Defined$ Self | KW$ First Strike
-SVar:X:Count$SumPower_Creature.YouCtrl
+SVar:X:Count$Valid Creature.YouCtrl$CardPower
 Oracle:Trample\nFormidable — Whenever Sabertooth Outrider attacks, if creatures you control have total power 8 or greater, Sabertooth Outrider gains first strike until end of turn.
