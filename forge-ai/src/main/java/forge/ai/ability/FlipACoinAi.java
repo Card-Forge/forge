@@ -18,9 +18,7 @@ public class FlipACoinAi extends SpellAbilityAi {
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         if (sa.hasParam("AILogic")) {
             String ailogic = sa.getParam("AILogic");
-            if (ailogic.equals("Never")) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            } else if (ailogic.equals("PhaseOut")) {
+            if (ailogic.equals("PhaseOut")) {
                 if (!ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa).contains(sa.getHostCard())) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
