@@ -3725,9 +3725,6 @@ public class AbilityUtils {
             return CardLists.getTotalPower(paidList, ctb);
         }
 
-        if (string.startsWith("SumPower")) {
-            return Aggregates.sum(paidList, Card::getNetPower);
-        }
         if (string.startsWith("SumToughness")) {
             return Aggregates.sum(paidList, Card::getNetToughness);
         }
