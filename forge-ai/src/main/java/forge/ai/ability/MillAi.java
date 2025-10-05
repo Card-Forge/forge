@@ -24,12 +24,7 @@ public class MillAi extends SpellAbilityAi {
 
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        PhaseHandler ph = ai.getGame().getPhaseHandler();
-
-        if (aiLogic.equals("Main1")) {
-            return !ph.getPhase().isBefore(PhaseType.MAIN2) || sa.hasParam("ActivationPhases")
-                    || ComputerUtil.castSpellInMain1(ai, sa);
-        } else if (aiLogic.equals("LilianaMill")) {
+        if (aiLogic.equals("LilianaMill")) {
             // TODO convert to AICheckSVar
             // Only mill if a "Raise Dead" target is available, in case of control decks with few creatures
             return CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.CREATURES).size() >= 1;
@@ -55,9 +50,10 @@ public class MillAi extends SpellAbilityAi {
             // because they are also potentially useful for combat
             return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai);
         }
-        return true;
+        return !ph.getPhase().isBefore(PhaseType.MAIN2) || sa.hasParam("ActivationPhases")
+                || ComputerUtil.castSpellInMain1(ai, sa);
     }
-    
+
     @Override
     protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
         /*
