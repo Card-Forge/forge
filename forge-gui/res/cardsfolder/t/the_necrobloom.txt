@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.Y
 SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE7 | TrueSubAbility$ DBZombie | FalseSubAbility$ DBPlant
 SVar:DBPlant:DB$ Token | TokenAmount$ 1 | TokenScript$ g_0_1_plant | TokenOwner$ You
 SVar:DBZombie:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You
-SVar:X:Count$DifferentCardNames_Land.YouCtrl+inZoneBattlefield
+SVar:X:Count$Valid Land.YouCtrl$DifferentCardNames
 S:Mode$ Continuous | AffectedZone$ Graveyard | Affected$ Land.YouOwn | AddKeyword$ Dredge:2 | Description$ Land cards in your graveyard have dredge 2. (You may return a land card from your graveyard to your hand and mill two cards instead of drawing a card.)
 DeckHas:Ability$Token & Type$Zombie
 DeckHints:Ability$Mill
