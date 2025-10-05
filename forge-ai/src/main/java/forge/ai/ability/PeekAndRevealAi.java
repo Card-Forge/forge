@@ -28,11 +28,6 @@ public class PeekAndRevealAi extends SpellAbilityAi {
             if (aiPlayer.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
-        } else if ("AtOppEOT".equals(logic)) {
-            if (!(aiPlayer.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)
-                    && aiPlayer.getGame().getPhaseHandler().getNextTurn().equals(aiPlayer))) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            }
         }
         // So far this only appears on Triggers, but will expand
         // once things get converted from Dig + NoMove
