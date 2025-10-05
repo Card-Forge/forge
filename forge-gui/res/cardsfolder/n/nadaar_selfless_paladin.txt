@@ -7,5 +7,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBVenture | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters or attacks, venture into the dungeon. (Enter the first room or advance to the next room.)
 SVar:DBVenture:DB$ Venture | Defined$ You
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ Other creatures you control get +1/+1 as long as you've completed a dungeon.
-SVar:X:PlayerCountPropertyYou$DungeonsCompleted
+SVar:X:DungeonsCompleted$Amount
 Oracle:Vigilance\nWhenever Nadaar, Selfless Paladin enters or attacks, venture into the dungeon. (Enter the first room or advance to the next room.)\nOther creatures you control get +1/+1 as long as you've completed a dungeon.

@@ -522,6 +522,8 @@ public class AbilityUtils {
             }
         } else if (calcX[0].equals("OriginalHost")) {
             val = xCount(ability.getOriginalHost(), calcX[1], ability);
+        } else if (calcX[0].equals("DungeonsCompleted")) {
+            val = handlePaid(player.getCompletedDungeons(), calcX[1], card, ability);
         } else if (calcX[0].startsWith("ExiledWith")) {
             val = handlePaid(card.getExiledCards(), calcX[1], card, ability);
         } else if (calcX[0].startsWith("Convoked")) {
@@ -3609,44 +3611,8 @@ public class AbilityUtils {
             return doXMath(player.hasBeenDealtCombatDamageSinceLastTurn() ? 1 : 0, m, source, ctb);
         }
 
-        if (calcX[0].equals("DungeonsCompleted")) {
-            return doXMath(handlePaid(player.getCompletedDungeons(), calcX[1], source, ctb), m, source, ctb);
-        }
-
         if (value.equals("RingTemptedYou")) {
             return doXMath(player.getNumRingTemptedYou(), m, source, ctb);
-        }
-
-        if (value.startsWith("DungeonCompletedNamed")) {
-            String [] full = value.split("_");
-            String name = full[1];
-            int completed = 0;
-            List<Card> dungeons = player.getCompletedDungeons();
-            for (Card c : dungeons) {
-                if (c.getName().equals(name)) {
-                    ++completed;
-                }
-            }
-            return doXMath(completed, m, source, ctb);
-        }
-        if (value.equals("DifferentlyNamedDungeonsCompleted")) {
-            int amount = 0;
-            List<Card> dungeons = player.getCompletedDungeons();
-            for (int i = 0; i < dungeons.size(); ++i) {
-                Card d1 = dungeons.get(i);
-                boolean hasSameName = false;
-                for (int j = i - 1; j >= 0; --j) {
-                    Card d2 = dungeons.get(j);
-                    if (d1.getName().equals(d2.getName())) {
-                        hasSameName = true;
-                        break;
-                    }
-                }
-                if (!hasSameName) {
-                    ++amount;
-                }
-            }
-            return doXMath(amount, m, source, ctb);
         }
 
         if (value.equals("AttractionsVisitedThisTurn")) {
@@ -3735,8 +3701,8 @@ public class AbilityUtils {
             return CardUtil.getColorsFromCards(paidList).countColors();
         }
 
-        if (string.equals("DifferentCardNames")) {
-            return CardLists.getDifferentNamesCount(paidList);
+        if (string.startsWith("DifferentCardNames")) {
+            return doXMath(CardLists.getDifferentNamesCount(paidList), CardFactoryUtil.extractOperators(string), source, ctb);
         }
 
         if (string.equals("DifferentColorPair")) {
