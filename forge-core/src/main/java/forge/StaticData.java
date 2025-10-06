@@ -79,7 +79,6 @@ public class StaticData {
         lastInstance = this;
         Set<String> funnyCards = new HashSet<>();
         Set<String> filtered = new HashSet<>();
-        List<CardRules> auxiliaryScripts = new ArrayList<>();
 
         editions.append(new CardEdition.Collection(new CardEdition.Reader(new File(customEditionsFolder), true)));
 
@@ -134,9 +133,6 @@ public class StaticData {
 
             commonCards.setCardArtPreference(cardArtPreference);
             variantCards.setCardArtPreference(cardArtPreference);
-
-            commonCards.addAuxiliaryScripts(auxiliaryScripts);
-            variantCards.addAuxiliaryScripts(auxiliaryScripts);
 
             //must initialize after establish field values for the sake of card image logic
             commonCards.initialize(false, false, enableUnknownCards);
