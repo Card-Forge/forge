@@ -19,9 +19,9 @@ Types:Legendary Creature Avatar Ally
 PT:6/6
 K:Flying
 S:Mode$ ReduceCost | ValidCard$ Card | Type$ Spell | Activator$ You | Amount$ 1 | Color$ W U B R G | Description$ Spells you cast cost {W}{U}{B}{R}{G} less to cast. (This can reduce generic costs.)
-T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ At the beginning of each upkeep, you may transform CARDNAME. If you do, you gain 4 life, draw four cards, put four +1/+1 counters on him, and he deals 4 damage to each opponent.
-SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | RememberChanged$ True | SubAbility$ DBGainLife
-SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBDraw
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigTransform | OptionalDecider$ You | TriggerDescription$ At the beginning of each upkeep, you may transform CARDNAME. If you do, you gain 4 life, draw four cards, put four +1/+1 counters on him, and he deals 4 damage to each opponent.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform | RememberChanged$ True | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 4 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 4 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 4 | CounterNum$ 4 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup

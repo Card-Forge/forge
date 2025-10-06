@@ -99,7 +99,10 @@ public final class BoosterUtils {
 
         if (userPrefs != null && userPrefs.getPoolType() == StartingPoolPreferences.PoolType.BOOSTERS) {
 
-            for (InventoryItem inventoryItem : generateRandomBoosterPacks(userPrefs.getNumberOfBoosters(), formatStartingPool.editionLegalPredicate)) {
+            Predicate<CardEdition> editionLegalPredicate = formatStartingPool == null
+                    ? cardEdition -> true
+                    : formatStartingPool.editionLegalPredicate;
+            for (InventoryItem inventoryItem : generateRandomBoosterPacks(userPrefs.getNumberOfBoosters(), editionLegalPredicate)) {
                 cards.addAll(((BoosterPack) inventoryItem).getCards());
             }
 
