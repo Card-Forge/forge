@@ -8,5 +8,5 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefiel
 SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | TrueSubAbility$ DBUntapAll | FalseSubAbility$ DBUntap
 SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl
 SVar:DBUntap:DB$ Untap | UntapExactly$ True | UntapType$ Creature.YouCtrl+tapped | Amount$ 1
-SVar:X:PlayerCountPropertyYou$DungeonsCompleted
+SVar:X:DungeonsCompleted$Amount
 Oracle:When White Plume Adventurer enters battlefield, you take the initiative.\nAt the beginning of each opponent's upkeep, untap a creature you control. If you've completed a dungeon, untap all creatures you control instead.

@@ -7,5 +7,5 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$
 SVar:TrigVenture:DB$ Venture
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | CheckSVar$ X | Execute$ TrigAnimate | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, if you've completed a dungeon, up to one target creature becomes a Bird with base power and toughness 1/1 and flying until end of turn.
 SVar:TrigAnimate:DB$ Animate | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | Power$ 1 | Toughness$ 1 | Types$ Bird | RemoveCreatureTypes$ True | Keywords$ Flying
-SVar:X:PlayerCountPropertyYou$DungeonsCompleted
+SVar:X:DungeonsCompleted$Amount
 Oracle:Flying\nWhen Eccentric Apprentice enters, venture into the dungeon. (Enter the first room or advance to the next room.)\nAt the beginning of combat on your turn, if you've completed a dungeon, up to one target creature becomes a Bird with base power and toughness 1/1 and flying until end of turn.
