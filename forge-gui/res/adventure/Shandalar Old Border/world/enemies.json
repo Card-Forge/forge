@@ -5154,7 +5154,7 @@
 			"Aberration",
 			"Animal",
 			"Chandra",
-			"FIre",
+			"Fire",
 			"IdentityRed"
 		]
 	},
@@ -5259,7 +5259,7 @@
 			"Human",
 			"Pyromancer",
 			"Wizard",
-			"FIre",
+			"Fire",
 			"IdentityRed"
 		]
 	},
@@ -5364,7 +5364,7 @@
 			"Pyromancer",
 			"Human",
 			"Wizard",
-			"FIre",
+			"Fire",
 			"IdentityRed"
 		]
 	},
@@ -5469,7 +5469,7 @@
 			"Wizard",
 			"Chandra",
 			"Human",
-			"FIre",
+			"Fire",
 			"IdentityRed"
 		]
 	},
@@ -10837,7 +10837,7 @@
 		],
 		"colors": "R",
 		"questTags": [
-			"FIre",
+			"Fire",
 			"Elemental",
 			"Humanoid",
 			"Flying",
@@ -16103,7 +16103,7 @@
 	},
 	{
 		"name": "Human elite",
-		"nameOverride": "Legionaire",
+		"nameOverride": "Legionnaire",
 		"sprite": "sprites/enemy/humanoid/human/soldier/legionite.atlas",
 		"deck": [
 			"decks/standard/human_good.json"
