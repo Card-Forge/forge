@@ -6,9 +6,9 @@ R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | D
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of each upkeep, create a 1/1 Phyrexian Serpent Squirrel artifact creature token named Toski's Coil with "Whenever this creature deals combat damage to a player, draw a card."
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ toskis_coil | TokenOwner$ You
 A:AB$ Charm | Cost$ Sac<1/Serpent.Other;Squirrel.Other/another Serpent or Squirrel> | Choices$ DBEffect,DBPump
-SVar:DBEffect:DB$ Effect | ValidTgts$ Creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ MustAttack | SubAbility$ DBConstrict | SpellDescription$ Target creature attacks this turn if able. Its activated abilities can't be activated this turn.
+SVar:DBEffect:DB$ Effect | ValidTgts$ Creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ MustAttack,DBCantBeActivated | SpellDescription$ Target creature attacks this turn if able. Its activated abilities can't be activated this turn.
 SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.IsRemembered | Description$ This creature attacks this turn if able.
-SVar:DBConstrict:DB$ Pump | Defined$ ParentTarget | KW$ HIDDEN CARDNAME's activated abilities can't be activated. | StackDescription$ None
+SVar:DBCantBeActivated:Mode$ CantBeActivated | ValidCard$ Card.IsRemembered | Description$ Remembered activated abilities can't be activated.
 SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Indestructible | SpellDescription$ CARDNAME gains indestructible until end of turn.
 DeckHas:Ability$Token|Sacrifice & Type$Artifact
 Oracle:This spell can't be countered.\nAt the beginning of each upkeep, create a 1/1 Phyrexian Serpent Squirrel artifact creature token named Toski's Coil with "Whenever this creature deals combat damage to a player, draw a card."\nSacrifice another Serpent or Squirrel: Choose one —\n• Target creature attacks this turn if able. Its activated abilities can't be activated this turn.\n• Koma and Toski, Compleated gains indestructible until end of turn.
