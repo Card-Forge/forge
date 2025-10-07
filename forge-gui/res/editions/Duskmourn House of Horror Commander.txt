@@ -135,7 +135,7 @@ ScryfallCode=DSC
 127 R Shark Typhoon @Caio Monteiro
 128 M Skaab Ruinator @Chris Rahn
 129 C Thirst for Meaning @Brian Valeza
-130 M Arvinox, the Mind Flail @Nikola Matkovic ${"variant": "UniversesWithin"}
+130 M Arvinox, the Mind Flail @Nikola Matkovic
 131 U Bastion of Remembrance @Volkan Baǵa
 132 U Blood Artist @LA Draws
 133 R Braids, Arisen Nightmare @Heonhwa Choe

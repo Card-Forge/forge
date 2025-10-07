@@ -49,6 +49,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     private final Map<String, ICardFace> facesByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, String> normalizedNames = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private static Map<String, String> artPrefs = Maps.newHashMap();
+    /**
+     * Map of flavor names to the identifier of the functional variant on which they appear in their respective card rules.
+     */
+    private final Map<String, String> flavorNameMappings = Maps.newHashMap();
 
     private final Map<String, Integer> artIds = Maps.newHashMap();
 
@@ -310,7 +314,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             }
         }
 
-        rules.putAll(extraRuleMappings);
+        rulesByName.putAll(extraRuleMappings);
     }
 
     private void addFaceToDbNames(ICardFace face) {
@@ -351,12 +355,16 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             String mainPartName = rules.getMainPart().getFunctionalVariant(variantName).getFlavorName();
             if(mainPartName == null)
                 continue;
+            String name;
             if(rules.getSplitType().getAggregationMethod() == CardSplitType.FaceSelectionMethod.COMBINE) {
                 String otherPartName = rules.getOtherPart().getFunctionalVariant(variantName).getFlavorName();
-                map.put(mainPartName + " // " + otherPartName, rules);
+                name = mainPartName + " // " + otherPartName;
             }
             else
-                map.put(mainPartName, rules);
+                name = mainPartName;
+
+            map.put(name, rules);
+            flavorNameMappings.put(name, variantName);
         }
     }
 
@@ -366,9 +374,16 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         if (artIds.containsKey(key)) {
             artIdx = artIds.get(key) + 1;
         }
-
         artIds.put(key, artIdx);
-        addCard(new PaperCard(cr, e.getCode(), cis.rarity(), artIdx, false, cis.collectorNumber(), cis.artistName(), cis.getFunctionalVariantName()));
+
+        String variantName = cis.getFunctionalVariantName();
+        if(variantName == null && !cr.getName().equals(cis.name())) {
+            //If an edition entry uses a known flavor name without specifying the variant, swap to that variant.
+            variantName = flavorNameMappings.get(cis.name());
+            //System.out.printf("Auto-mapping flavor name \"%s\" -> \"%s\" $%s\n", cis.name(), cr.getName(), variantName);
+        }
+
+        addCard(new PaperCard(cr, e.getCode(), cis.rarity(), artIdx, false, cis.collectorNumber(), cis.artistName(), variantName));
     }
 
     private boolean addFromSetByName(String cardName, CardEdition ed, CardRules cr) {

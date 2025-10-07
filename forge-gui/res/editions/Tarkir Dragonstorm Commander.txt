@@ -115,7 +115,7 @@ ScryfallCode=TDC
 107 C Command Tower @Marina Ortega Lorente
 108 R Adeline, Resplendent Cathar @Bryan Sola
 109 M Angel of Invention @Volkan Baǵa
-110 R Baldin, Century Herdmaster @Zoltan Boros ${"variant": "UniversesWithin"}
+110 R Baldin, Century Herdmaster @Zoltan Boros
 111 R Commander's Insignia @Anastasia Ovchinnikova
 112 R Dismantling Wave @Raoul Vitale
 113 M Divine Visitation @Victor Adame Minguez
