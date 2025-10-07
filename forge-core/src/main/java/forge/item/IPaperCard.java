@@ -45,8 +45,9 @@ public interface IPaperCard extends InventoryItem, Serializable {
 
     @Override
     default String getTranslationKey() {
-        if(!NO_FUNCTIONAL_VARIANT.equals(getFunctionalVariant()))
-            return getDisplayName() + " $" + getFunctionalVariant();
+        //Cards with flavor names will use that flavor name as their translation key. Other variants are just appended as a suffix.
+        if(!NO_FUNCTIONAL_VARIANT.equals(getFunctionalVariant()) && getAllFaces().stream().noneMatch(pc -> pc.getFlavorName() != null))
+            return getName() + " $" + getFunctionalVariant();
         return getDisplayName();
     }
 
