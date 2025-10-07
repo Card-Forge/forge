@@ -451,7 +451,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_snake.tmx",
+		"map": "maps/map/cave/cave_snake.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -467,7 +467,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_zombie.tmx",
+		"map": "maps/map/cave/cave_zombie.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -482,7 +482,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_kobold.tmx",
+		"map": "maps/map/cave/cave_kobold.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -497,7 +497,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_multilevel_2/cave_18.tmx",
+		"map": "maps/map/cave/cave_multilevel_2/cave_18.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -512,7 +512,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_multilevel_3/cave_21.tmx",
+		"map": "maps/map/cave/cave_multilevel_3/cave_21.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -527,7 +527,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_multilevel/cave_16.tmx",
+		"map": "maps/map/cave/cave_multilevel/cave_16.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -542,7 +542,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_treasure.tmx",
+		"map": "maps/map/cave/cave_treasure.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -556,7 +556,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_devil.tmx",
+		"map": "maps/map/cave/cave_devil.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -572,7 +572,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_skeleton.tmx",
+		"map": "maps/map/cave/cave_skeleton.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -588,7 +588,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_bigzombie.tmx",
+		"map": "maps/map/cave/cave_bigzombie.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -604,7 +604,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_merfolk.tmx",
+		"map": "maps/map/cave/cave_merfolk.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -620,7 +620,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_bluewiz.tmx",
+		"map": "maps/map/cave/cave_bluewiz.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -636,7 +636,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_mimic.tmx",
+		"map": "maps/map/cave/cave_mimic.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -652,7 +652,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_huge.tmx",
+		"map": "maps/map/cave/cave_huge.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -668,7 +668,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_snake.tmx",
+		"map": "maps/map/cave/cave_snake.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -684,7 +684,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_treasure.tmx",
+		"map": "maps/map/cave/cave_treasure.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -698,7 +698,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_devil.tmx",
+		"map": "maps/map/cave/cave_devil.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -714,7 +714,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_bear.tmx",
+		"map": "maps/map/cave/cave_bear.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -730,7 +730,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_minotaur.tmx",
+		"map": "maps/map/cave/cave_minotaur.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -746,7 +746,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_skeleton.tmx",
+		"map": "maps/map/cave/cave_skeleton.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -762,7 +762,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_spider.tmx",
+		"map": "maps/map/cave/cave_spider.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -778,7 +778,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_bandit.tmx",
+		"map": "maps/map/cave/cave_bandit.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -794,7 +794,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_merfolk.tmx",
+		"map": "maps/map/cave/cave_merfolk.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -810,7 +810,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_bluewiz.tmx",
+		"map": "maps/map/cave/cave_bluewiz.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -826,7 +826,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_goblin.tmx",
+		"map": "maps/map/cave/cave_goblin.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -842,7 +842,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_mimic.tmx",
+		"map": "maps/map/cave/cave_mimic.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -858,7 +858,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_huge.tmx",
+		"map": "maps/map/cave/cave_huge.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -874,7 +874,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_fog.tmx",
+		"map": "maps/map/cave/cave_fog.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -890,7 +890,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_snake.tmx",
+		"map": "maps/map/cave/cave_snake.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -906,7 +906,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_treasure.tmx",
+		"map": "maps/map/cave/cave_treasure.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -920,7 +920,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_devil.tmx",
+		"map": "maps/map/cave/cave_devil.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -936,7 +936,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_bear.tmx",
+		"map": "maps/map/cave/cave_bear.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -952,7 +952,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_spider.tmx",
+		"map": "maps/map/cave/cave_spider.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -968,7 +968,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_merfolk.tmx",
+		"map": "maps/map/cave/cave_merfolk.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -984,7 +984,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_dino.tmx",
+		"map": "maps/map/cave/cave_dino.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -1000,7 +1000,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_mimic.tmx",
+		"map": "maps/map/cave/cave_mimic.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -1016,7 +1016,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_huge.tmx",
+		"map": "maps/map/cave/cave_huge.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -1032,7 +1032,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_cerodon.tmx",
+		"map": "maps/map/cave/cave_cerodon.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -1049,7 +1049,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_eldrazi.tmx",
+		"map": "maps/map/cave/cave_eldrazi.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -1065,7 +1065,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_amphin.tmx",
+		"map": "maps/map/cave/cave_amphin.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -1082,7 +1082,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_rat.tmx",
+		"map": "maps/map/cave/cave_rat.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -1099,7 +1099,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_treasure.tmx",
+		"map": "maps/map/cave/cave_treasure.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -1113,7 +1113,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_merfolk.tmx",
+		"map": "maps/map/cave/cave_merfolk.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1129,7 +1129,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_bluewiz.tmx",
+		"map": "maps/map/cave/cave_bluewiz.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1145,7 +1145,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_djinn.tmx",
+		"map": "maps/map/cave/cave_djinn.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1161,7 +1161,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_mimic.tmx",
+		"map": "maps/map/cave/cave_mimic.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1177,7 +1177,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_snake.tmx",
+		"map": "maps/map/cave/cave_snake.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1193,7 +1193,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_treasure.tmx",
+		"map": "maps/map/cave/cave_treasure.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -1207,7 +1207,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_devil.tmx",
+		"map": "maps/map/cave/cave_devil.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1223,7 +1223,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_orc.tmx",
+		"map": "maps/map/cave/cave_orc.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1239,7 +1239,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_bear.tmx",
+		"map": "maps/map/cave/cave_bear.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1255,7 +1255,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_minotaur.tmx",
+		"map": "maps/map/cave/cave_minotaur.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1271,7 +1271,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_bigzombie.tmx",
+		"map": "maps/map/cave/cave_bigzombie.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1287,7 +1287,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_spider.tmx",
+		"map": "maps/map/cave/cave_spider.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1303,7 +1303,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_bandit.tmx",
+		"map": "maps/map/cave/cave_bandit.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1319,7 +1319,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_bluewiz.tmx",
+		"map": "maps/map/cave/cave_bluewiz.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1335,7 +1335,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_goblin.tmx",
+		"map": "maps/map/cave/cave_goblin.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1351,7 +1351,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_dino.tmx",
+		"map": "maps/map/cave/cave_dino.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1367,7 +1367,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_barbarian.tmx",
+		"map": "maps/map/cave/cave_barbarian.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1383,7 +1383,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_dwarf.tmx",
+		"map": "maps/map/cave/cave_dwarf.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1399,7 +1399,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_mimic.tmx",
+		"map": "maps/map/cave/cave_mimic.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1415,7 +1415,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_huge.tmx",
+		"map": "maps/map/cave/cave_huge.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1431,7 +1431,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_snake.tmx",
+		"map": "maps/map/cave/cave_snake.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1447,7 +1447,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_treasure.tmx",
+		"map": "maps/map/cave/cave_treasure.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -1461,7 +1461,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_bear.tmx",
+		"map": "maps/map/cave/cave_bear.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1477,7 +1477,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_bluewiz.tmx",
+		"map": "maps/map/cave/cave_bluewiz.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1493,7 +1493,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_dino.tmx",
+		"map": "maps/map/cave/cave_dino.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1509,7 +1509,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_dwarf.tmx",
+		"map": "maps/map/cave/cave_dwarf.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1525,7 +1525,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_mimic.tmx",
+		"map": "maps/map/cave/cave_mimic.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1571,7 +1571,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlue",
-		"map": "../common/maps/map/magetower/magetower_10_crawlspace.tmx",
+		"map": "maps/map/magetower/magetower_10_crawlspace.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"DungeonEffect",
@@ -1622,7 +1622,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlue",
-		"map": "../common/maps/map/magetower/magetower_11_dreamhalls.tmx",
+		"map": "maps/map/magetower/magetower_11_dreamhalls.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"DungeonEffect",
@@ -2530,7 +2530,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_kavu.tmx",
+		"map": "maps/map/cave/cave_kavu.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -2545,7 +2545,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Kiora",
-		"map": "../common/maps/map/minibosses/kiora_island.tmx",
+		"map": "maps/map/minibosses/kiora_island.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Boss",
@@ -2561,7 +2561,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "LavaForge",
-		"map": "../common/maps/map/lavaforge/lavaforge_3_vulcanodragon.tmx",
+		"map": "maps/map/lavaforge/lavaforge_3_vulcanodragon.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -2576,7 +2576,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "LavaForge",
-		"map": "../common/maps/map/lavaforge/lavaforge_1_sulfuricvortex.tmx",
+		"map": "maps/map/lavaforge/lavaforge_1_sulfuricvortex.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"DungeonEffect",
@@ -2593,7 +2593,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "LavaForge",
-		"map": "../common/maps/map/lavaforge/lavaforge_2_burningsands.tmx",
+		"map": "maps/map/lavaforge/lavaforge_2_burningsands.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"DungeonEffect",
@@ -2610,7 +2610,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlack",
-		"map": "../common/maps/map/magetower/magetower_12_lichsmirror.tmx",
+		"map": "maps/map/magetower/magetower_12_lichsmirror.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -2625,7 +2625,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerRed",
-		"map": "../common/maps/map/magetower/magetower_1_djinn.tmx",
+		"map": "maps/map/magetower/magetower_1_djinn.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"BiomeColorless",
@@ -2642,7 +2642,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlack",
-		"map": "../common/maps/map/magetower/magetower_2_blackwiz.tmx",
+		"map": "maps/map/magetower/magetower_2_blackwiz.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"BiomeColorless",
@@ -2659,7 +2659,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerRed",
-		"map": "../common/maps/map/magetower/magetower_3_redwiz.tmx",
+		"map": "maps/map/magetower/magetower_3_redwiz.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"BiomeColorless",
@@ -2676,7 +2676,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerWhite",
-		"map": "../common/maps/map/magetower/magetower_4_monastery.tmx",
+		"map": "maps/map/magetower/magetower_4_monastery.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"BiomeColorless",
@@ -2693,7 +2693,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerGreen",
-		"map": "../common/maps/map/magetower/magetower_5_greenhouse.tmx",
+		"map": "maps/map/magetower/magetower_5_greenhouse.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"BiomeColorless",
@@ -2710,7 +2710,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlack",
-		"map": "../common/maps/map/magetower/magetower_6_infernalgenesis.tmx",
+		"map": "maps/map/magetower/magetower_6_infernalgenesis.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"MageTower",
@@ -2727,7 +2727,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerWhite",
-		"map": "../common/maps/map/magetower/magetower_7_church.tmx",
+		"map": "maps/map/magetower/magetower_7_church.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"MageTower",
@@ -2744,7 +2744,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlue",
-		"map": "../common/maps/map/magetower/magetower_8_illusion.tmx",
+		"map": "maps/map/magetower/magetower_8_illusion.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"BiomeColorless",
@@ -2761,7 +2761,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlue",
-		"map": "../common/maps/map/magetower/magetower_13_doppelganger.tmx",
+		"map": "maps/map/magetower/magetower_13_doppelganger.tmx",
 		"radiusFactor": 0.2,
 		"questTags": [
 			"BiomeColorless",
@@ -2777,7 +2777,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlue",
-		"map": "../common/maps/map/magetower/magetower_14_horrors.tmx",
+		"map": "maps/map/magetower/magetower_14_horrors.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"BiomeColorless",
@@ -2794,7 +2794,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlue",
-		"map": "../common/maps/map/magetower/magetower_1_djinn.tmx",
+		"map": "maps/map/magetower/magetower_1_djinn.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"MageTower",
@@ -2811,7 +2811,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlack",
-		"map": "../common/maps/map/magetower/magetower_2_blackwiz.tmx",
+		"map": "maps/map/magetower/magetower_2_blackwiz.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"MageTower",
@@ -2828,7 +2828,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerRed",
-		"map": "../common/maps/map/magetower/magetower_3_redwiz.tmx",
+		"map": "maps/map/magetower/magetower_3_redwiz.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"MageTower",
@@ -2845,7 +2845,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerWhite",
-		"map": "../common/maps/map/magetower/magetower_4_monastery.tmx",
+		"map": "maps/map/magetower/magetower_4_monastery.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"MageTower",
@@ -2862,7 +2862,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerGreen",
-		"map": "../common/maps/map/magetower/magetower_5_greenhouse.tmx",
+		"map": "maps/map/magetower/magetower_5_greenhouse.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"MageTower",
@@ -2879,7 +2879,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlack",
-		"map": "../common/maps/map/magetower/magetower_6_infernalgenesis.tmx",
+		"map": "maps/map/magetower/magetower_6_infernalgenesis.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"MageTower",
@@ -2896,7 +2896,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlue",
-		"map": "../common/maps/map/magetower/magetower_8_illusion.tmx",
+		"map": "maps/map/magetower/magetower_8_illusion.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"MageTower",
@@ -2913,7 +2913,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlack",
-		"map": "../common/maps/map/magetower/magetower_14_horrors.tmx",
+		"map": "maps/map/magetower/magetower_14_horrors.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"MageTower",
@@ -2930,7 +2930,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlack",
-		"map": "../common/maps/map/magetower/magetower_9_ninjarats.tmx",
+		"map": "maps/map/magetower/magetower_9_ninjarats.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"MageTower",
@@ -3683,7 +3683,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Slimefoot",
-		"map": "../common/maps/map/minibosses/slimefoot_boss.tmx",
+		"map": "maps/map/minibosses/slimefoot_boss.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -3699,7 +3699,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "SlimeCave",
-		"map": "../common/maps/map/minibosses/slime_hive.tmx",
+		"map": "maps/map/minibosses/slime_hive.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -3729,7 +3729,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Slobad",
-		"map": "../common/maps/map/minibosses/slobad_factory.tmx",
+		"map": "maps/map/minibosses/slobad_factory.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Boss",
@@ -3892,7 +3892,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Jace",
-		"map": "../common/maps/map/minibosses/teferi.tmx",
+		"map": "maps/map/minibosses/teferi.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -3992,7 +3992,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "VampireCastle",
-		"map": "../common/maps/map/vampirecastle/vampirecastle_1.tmx",
+		"map": "maps/map/vampirecastle/vampirecastle_1.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"VampireCastle",
@@ -4009,7 +4009,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "VampireCastle",
-		"map": "../common/maps/map/vampirecastle/vampirecastle_2.tmx",
+		"map": "maps/map/vampirecastle/vampirecastle_2.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"VampireCastle",
@@ -4026,7 +4026,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "VampireCastle",
-		"map": "../common/maps/map/vampirecastle/vampirecastle_3.tmx",
+		"map": "maps/map/vampirecastle/vampirecastle_3.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"VampireCastle",
@@ -4043,7 +4043,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "VampireCastle",
-		"map": "../common/maps/map/vampirecastle/vampirecastle_4.tmx",
+		"map": "maps/map/vampirecastle/vampirecastle_4.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"VampireCastle",
@@ -4147,7 +4147,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Xira",
-		"map": "../common/maps/map/minibosses/xira.tmx",
+		"map": "maps/map/minibosses/xira.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",

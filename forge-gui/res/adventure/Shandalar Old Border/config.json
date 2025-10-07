@@ -129,146 +129,157 @@
       "startingShards": 5,
       "startingMoney": 500,
       "enemyLifeFactor": 0.8,
-      "spawnRank": 0,          
-      "goldLoss": 0.02,          
+      "spawnRank": 0,
+      "goldLoss": 0.02,
       "lifeLoss": 0.1,
-      "rewardMaxFactor" : 1.5,
-      "sellFactor": 0.6,  
+      "rewardMaxFactor": 1.5,
+      "sellFactor": 0.6,
       "shardSellRatio": 0.95,
       "starterDecks": {
-        "W":"decks/starter/MMQ - White.dck",
-        "B":"decks/starter/MIR - Black.dck",
-        "U":"decks/starter/MMQ - BlueWhite.dck",
-        "R":"decks/starter/MIR - BlueRed.dck",
-        "G":"decks/starter/MIR - GreenWhite - Jungle_Jam.dck"
+        "W": "decks/starter/MMQ - White.dck",
+        "B": "decks/starter/MIR - Black.dck",
+        "U": "decks/starter/MMQ - BlueWhite.dck",
+        "R": "decks/starter/MIR - BlueRed.dck",
+        "G": "decks/starter/MIR - GreenWhite - Jungle_Jam.dck"
       },
       "constructedStarterDecks": {
-        "W":"decks/starter/MIR - RedWhite.dck",
-        "U":"decks/starter/TMP - BlueWhite.dck",
-        "B":"decks/starter/USG - BlackWhite.dck",
-        "R":"decks/starter/MMQ - RedBlack - Disrupter.dck",
-        "G":"decks/starter/TMP - GreenWhite.dck"
+        "W": "decks/starter/MIR - RedWhite.dck",
+        "U": "decks/starter/TMP - BlueWhite.dck",
+        "B": "decks/starter/USG - BlackWhite.dck",
+        "R": "decks/starter/MMQ - RedBlack - Disrupter.dck",
+        "G": "decks/starter/TMP - GreenWhite.dck"
       },
       "pileDecks": {
-        "W":"decks/starter/pile_white_e.json",
-        "B":"decks/starter/pile_black_e.json",
-        "U":"decks/starter/pile_blue_e.json",
-        "R":"decks/starter/pile_red_e.json",
-        "G":"decks/starter/pile_green_e.json"
+        "W": "decks/starter/pile_white_e.json",
+        "B": "decks/starter/pile_black_e.json",
+        "U": "decks/starter/pile_blue_e.json",
+        "R": "decks/starter/pile_red_e.json",
+        "G": "decks/starter/pile_green_e.json"
       },
       "startItems": [
         "Manasight Amulet",
-        "Leather Boots"
+        "Leather Boots",
+        "Landscape Sketchbook - Seventh Edition"
       ]
-    },{
+    },
+    {
       "name": "Normal",
       "startingLife": 12,
       "startingShards": 2,
       "startingMoney": 250,
       "startingDifficulty": true,
       "enemyLifeFactor": 1.0,
-      "rewardMaxFactor" : 1.0,
-      "spawnRank": 1,                   
-      "goldLoss": 0.1,             
-      "lifeLoss": 0.2,  
-      "sellFactor": 0.5,      
+      "rewardMaxFactor": 1.0,
+      "spawnRank": 1,
+      "goldLoss": 0.1,
+      "lifeLoss": 0.2,
+      "sellFactor": 0.5,
       "shardSellRatio": 0.8,
       "starterDecks": {
-        "W":"decks/starter/USG - White.dck",
-        "B":"decks/starter/TMP - BlueBlack.dck",
-        "U":"decks/starter/USG - BlueBlack.dck",
-        "R":"decks/starter/TMP - RedWhite.dck",
-        "G":"decks/starter/USG GreenRed.dck"
+        "W": "decks/starter/USG - White.dck",
+        "B": "decks/starter/TMP - BlueBlack.dck",
+        "U": "decks/starter/USG - BlueBlack.dck",
+        "R": "decks/starter/TMP - RedWhite.dck",
+        "G": "decks/starter/USG GreenRed.dck"
       },
       "constructedStarterDecks": {
-        "W":"decks/starter/USG - BlackWhite.dck",
-        "U":"decks/starter/TMP - BlueWhite.dck",
-        "B":"decks/starter/MMQ - RedBlack - Disrupter.dck",
-        "R":"decks/starter/MIR - RedWhite.dck",
-        "G":"decks/starter/MMQ - GreenRed.dck"
+        "W": "decks/starter/USG - BlackWhite.dck",
+        "U": "decks/starter/TMP - BlueWhite.dck",
+        "B": "decks/starter/MMQ - RedBlack - Disrupter.dck",
+        "R": "decks/starter/MIR - RedWhite.dck",
+        "G": "decks/starter/MMQ - GreenRed.dck"
       },
       "pileDecks": {
-        "W":"decks/starter/pile_white_n.json",
-        "B":"decks/starter/pile_black_n.json",
-        "U":"decks/starter/pile_blue_n.json",
-        "R":"decks/starter/pile_red_n.json",
-        "G":"decks/starter/pile_green_n.json"
+        "W": "decks/starter/pile_white_n.json",
+        "B": "decks/starter/pile_black_n.json",
+        "U": "decks/starter/pile_blue_n.json",
+        "R": "decks/starter/pile_red_n.json",
+        "G": "decks/starter/pile_green_n.json"
       },
       "startItems": [
-        "Leather Boots"
+        "Leather Boots",
+        "Landscape Sketchbook - Seventh Edition"
       ]
-    },{
+    },
+    {
       "name": "Hard",
       "startingLife": 8,
       "startingShards": 0,
       "startingMoney": 125,
       "enemyLifeFactor": 1.5,
-      "rewardMaxFactor" : 0.5,
-      "spawnRank": 2,         
+      "rewardMaxFactor": 0.5,
+      "spawnRank": 2,
       "goldLoss": 0.3,
-      "lifeLoss": 0.3,  
+      "lifeLoss": 0.3,
       "sellFactor": 0.25,
       "shardSellRatio": 0.6,
       "starterDecks": {
-        "W":"decks/starter/7ED - White.dck",
-        "B":"decks/starter/7ED - Black.dck",
-        "U":"decks/starter/7ED - Blue.dck",
-        "R":"decks/starter/7ED - Red.dck",
-        "G":"decks/starter/7ED - Green.dck"
+        "W": "decks/starter/7ED - White.dck",
+        "B": "decks/starter/7ED - Black.dck",
+        "U": "decks/starter/7ED - Blue.dck",
+        "R": "decks/starter/7ED - Red.dck",
+        "G": "decks/starter/7ED - Green.dck"
       },
       "constructedStarterDecks": {
-        "W":"decks/starter/Portal Second Age - White.dck",
-        "U":"decks/starter/Portal Second Age - Blue.dck",
-        "B":"decks/starter/Portal Second Age - Black.dck",
-        "R":"decks/starter/Portal Second Age - Red.dck",
-        "G":"decks/starter/Portal Second Age - Green.dck"
+        "W": "decks/starter/Portal Second Age - White.dck",
+        "U": "decks/starter/Portal Second Age - Blue.dck",
+        "B": "decks/starter/Portal Second Age - Black.dck",
+        "R": "decks/starter/Portal Second Age - Red.dck",
+        "G": "decks/starter/Portal Second Age - Green.dck"
       },
       "pileDecks": {
-        "W":"decks/starter/pile_white_h.json",
-        "B":"decks/starter/pile_black_h.json",
-        "U":"decks/starter/pile_blue_h.json",
-        "R":"decks/starter/pile_red_h.json",
-        "G":"decks/starter/pile_green_h.json"
-      }
-    },{
+        "W": "decks/starter/pile_white_h.json",
+        "B": "decks/starter/pile_black_h.json",
+        "U": "decks/starter/pile_blue_h.json",
+        "R": "decks/starter/pile_red_h.json",
+        "G": "decks/starter/pile_green_h.json"
+      },
+      "startItems": [
+        "Landscape Sketchbook - Seventh Edition"
+      ]
+    },
+    {
       "name": "Insane",
       "startingLife": 7,
       "startingShards": 0,
       "startingMoney": 0,
       "enemyLifeFactor": 2.5,
-      "rewardMaxFactor" : 0.0,
+      "rewardMaxFactor": 0.0,
       "spawnRank": 2,
       "goldLoss": 0.5,
       "lifeLoss": 0.3,
       "sellFactor": 0.05,
       "shardSellRatio": 0.3,
       "starterDecks": {
-        "W":"decks/starter/Starter 1999 - White.dck",
-        "B":"decks/starter/Starter 1999 - Black.dck",
-        "U":"decks/starter/Starter 1999 - Blue.dck",
-        "R":"decks/starter/Starter 1999 - Red.dck",
-        "G":"decks/starter/Starter 1999 - Green.dck"
+        "W": "decks/starter/Starter 1999 - White.dck",
+        "B": "decks/starter/Starter 1999 - Black.dck",
+        "U": "decks/starter/Starter 1999 - Blue.dck",
+        "R": "decks/starter/Starter 1999 - Red.dck",
+        "G": "decks/starter/Starter 1999 - Green.dck"
       },
       "constructedStarterDecks": {
-        "W":"decks/starter/Portal - Boros.dck",
-        "U":"decks/starter/Portal - Dimir.dck",
-        "B":"decks/starter/6ED - GreenBlack.dck",
-        "R":"decks/starter/6ED - BlueRed.dck",
-        "G":"decks/starter/6ED - GreenBlack.dck"
+        "W": "decks/starter/Portal - Boros.dck",
+        "U": "decks/starter/Portal - Dimir.dck",
+        "B": "decks/starter/6ED - GreenBlack.dck",
+        "R": "decks/starter/6ED - BlueRed.dck",
+        "G": "decks/starter/6ED - GreenBlack.dck"
       },
       "pileDecks": {
-        "W":"decks/starter/pile_white_h.json",
-        "B":"decks/starter/pile_black_h.json",
-        "U":"decks/starter/pile_blue_h.json",
-        "R":"decks/starter/pile_red_h.json",
-        "G":"decks/starter/pile_green_h.json"
-      }
+        "W": "decks/starter/pile_white_h.json",
+        "B": "decks/starter/pile_black_h.json",
+        "U": "decks/starter/pile_blue_h.json",
+        "R": "decks/starter/pile_red_h.json",
+        "G": "decks/starter/pile_green_h.json"
+      },
+      "startItems": [
+        "Landscape Sketchbook - Seventh Edition"
+      ]
     }
   ],
   "starterEditions": [
-	"***"
+    "7ED"
   ],
   "starterEditionNames": [
-	"Old Border"
-	]
+    "Seventh Edition"
+  ]
 }
