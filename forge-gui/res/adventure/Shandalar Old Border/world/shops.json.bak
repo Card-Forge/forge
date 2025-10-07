@@ -467,7 +467,7 @@
 		}]
 	},{                                      
 	"name":"White4",                  
-	"description":"Only mostly dead",
+	"description":"Only Mostly Dead",
 	"spriteAtlas":"maps/tileset/buildings.atlas",   
 	"sprite":"RotatingShop",
 	"overlaySprite":"Overlay6White",
@@ -1341,7 +1341,7 @@
 		}]
 	},{                                    
 	"name":"Blue",                  
-	"description":"Hermitic Study",
+	"description":"Hermetic Study",
 	"spriteAtlas":"maps/tileset/buildings.atlas",   
 	"sprite":"BlueShop",
 	  "rewards": [
@@ -1756,7 +1756,7 @@
 		}]
 	},{
 	  "name":"Angel",
-	  "description":"Halos R' Us",
+	  "description":"Halos 'R' Us",
 	  "spriteAtlas":"maps/tileset/buildings.atlas",
 	  "sprite":"AngelShop",
 	  "rewards": [ { "count":8, "subTypes": ["Angel"] } ]
@@ -2431,7 +2431,7 @@
 	  "rewards": [ { "count":4, "type":"Union", "cardUnion": [ { "subTypes": ["Rogue"] }, { "cardText": "Rogue" } ] }, { "count":4, "type":"Union", "cardUnion": [ { "subTypes": ["Rogue"], "colors": ["blue"] }, { "cardText": "Rogue", "colors": ["blue"] } ] } ]
 	},{
 	  "name":"Shaman",
-	  "description":"Shaman for ya man",
+	  "description":"Shaman for Ya Man",
 	  "spriteAtlas":"maps/tileset/buildings.atlas",
 	  "sprite":"ShamanShop",
 	  "rewards": [ { "count":8, "type":"Union", "cardUnion": [ { "subTypes": ["Shaman"] }, { "cardText": "Shaman" } ] } ]
@@ -2525,7 +2525,7 @@
 	  },
 	  {
 		"name": "GreenBoosterPackShop",
-		"description":"Nature’s Nurture Packs",
+		"description":"Nature's Nurture Packs",
 		"spriteAtlas":"maps/tileset/buildings.atlas",
 		"overlaySprite": "Overlay4Green",
 		"sprite": "BoosterShop",

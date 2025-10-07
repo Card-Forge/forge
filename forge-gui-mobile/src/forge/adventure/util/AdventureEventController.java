@@ -113,9 +113,10 @@ public class AdventureEventController implements Serializable {
             return null;
         }
 
-        // If chosen event seed recommends a 4 person pod, run it as a RoundRobin
-        CardEdition firstSet = e.cardBlock.getSets().get(0);
-        int podSize = firstSet.getDraftOptions().getRecommendedPodSize();
+        // If the chosen event seed recommends a four-person pod, run it as a RoundRobin
+        // Set can be null when it is only a meta set such as some Jumpstart events.
+        CardEdition firstSet = e.cardBlock.getSets().isEmpty() ? null : e.cardBlock.getSets().get(0);
+        int podSize = firstSet == null ? 8 : firstSet.getDraftOptions().getRecommendedPodSize();
 
         e.sourceID = pointID;
         e.eventOrigin = eventOrigin;

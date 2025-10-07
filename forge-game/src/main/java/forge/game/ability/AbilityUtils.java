@@ -2543,34 +2543,13 @@ public class AbilityUtils {
             return doXMath(CardLists.getValidCardCount(game.getLeftGraveyardThisTurn(), validFilter, player, c, ctb), expr, c, ctb);
         }
 
-        // Count$UnlockedDoors <Valid>
-        if (sq[0].startsWith("UnlockedDoors")) {
-            final String[] workingCopy = l[0].split(" ", 2);
-            final String validFilter = workingCopy[1];
-
-            int unlocked = 0;
-            for (Card doorCard : CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), validFilter, player, c, ctb)) {
-                unlocked += doorCard.getUnlockedRooms().size();
-            }
-
-            return doXMath(unlocked, expr, c, ctb);
+        if (sq[0].equals("UnlockedDoors")) {
+            return doXMath(player.getUnlockedDoors().size(), expr, c, ctb);
         }
 
-        // Count$DistinctUnlockedDoors <Valid>
         // Counts the distinct names of unlocked doors. Used for the "Promising Stairs"
-        if (sq[0].startsWith("DistinctUnlockedDoors")) {
-            final String[] workingCopy = l[0].split(" ", 2);
-            final String validFilter = workingCopy[1];
-
-            Set<String> viewedNames = new HashSet<>();
-            for (Card doorCard : CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), validFilter, player, c, ctb)) {
-                for(CardStateName stateName : doorCard.getUnlockedRooms()) {
-                    viewedNames.add(doorCard.getState(stateName).getName());
-                }
-            }
-            int distinctUnlocked = viewedNames.size();
-
-            return doXMath(distinctUnlocked, expr, c, ctb);
+        if (sq[0].equals("DistinctUnlockedDoors")) {
+            return doXMath(Sets.newHashSet(player.getUnlockedDoors()).size(), expr, c, ctb);
         }
 
         // Manapool
