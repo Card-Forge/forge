@@ -2,7 +2,6 @@
 Code=AKH
 Date=2017-04-28
 Name=Amonkhet
-Code2=AKH
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common:fromSheet("AKH cards"), 3 Uncommon:fromSheet("AKH cards"), 1 RareMythic:fromSheet("AKH cards"), 1 BasicLand AKH
@@ -11,7 +10,6 @@ FatPack=10
 FatPackExtraSlots=80 BasicLands
 AdditionalSetUnlockedInQuest=MPS_AKH
 ChaosDraftThemes=GRAVEYARD_MATTERS
-ScryfallCode=AKH
 
 [cards]
 1 M Angel of Sanctions @Min Yum
@@ -316,18 +314,18 @@ ScryfallCode=AKH
 24 g_5_5_wurm @Slawomir Maniak
 
 [other]
-embalm_angel_of_sanctions
-embalm_anointer_priest
-embalm_aven_initiate
-embalm_aven_wind_guide
-embalm_glyph_keeper
-embalm_heart-piercer_manticore
-embalm_honored_hydra
-embalm_labyrinth_guardian
-embalm_oketra's_attendant
-embalm_sacred_cat
-embalm_tah-crop_skirmisher
-embalm_temmet_vizier_of_naktamun
-embalm_trueheart_duelist
-embalm_unwavering_initiate
-embalm_vizier_of_many_faces
+1 embalm_angel_of_sanctions @Min Yum
+2 embalm_anointer_priest @Lake Hurwitz
+3 embalm_aven_initiate @Jakub Kasper
+4 embalm_aven_wind_guide @Sidharth Chaturvedi
+5 embalm_glyph_keeper @Chris Rahn
+6 embalm_heart-piercer_manticore @Scott Murphy
+7 embalm_honored_hydra @Todd Lockwood
+8 embalm_labyrinth_guardian @Yeong-Hao Han
+9 embalm_oketra's_attendant @Lake Hurwitz
+10 embalm_sacred_cat @Zezhou Chen
+11 embalm_tah-crop_skirmisher @Victor Adame Minguez
+12 embalm_temmet_vizier_of_naktamun @Anna Steinbauer
+13 embalm_trueheart_duelist @Izzy
+14 embalm_unwavering_initiate @Greg Opalinski
+15 embalm_vizier_of_many_faces @Ryan Yee
