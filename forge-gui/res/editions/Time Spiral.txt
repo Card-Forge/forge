@@ -2,7 +2,6 @@
 Code=TSP
 Date=2006-10-06
 Name=Time Spiral
-Code2=TSP
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 Rare, 1 TimeShifted TSB
@@ -313,17 +312,3 @@ ScryfallCode=TSP
 299 L Forest @Vance Kovacs
 300 L Forest @Craig Mullins
 301 L Forest @Stephen Tappin
-
-[tokens]
-kobolds_of_kher_keep
-w_1_1_citizen
-w_2_2_griffin_flying
-u_1_1_camarid
-b_1_2_bat_flying_nosferatu
-b_2_4_spider_reach
-b_1_1_thrull
-r_1_1_goblin
-g_1_1_saproling
-g_x_x_wurm
-c_2_2_a_assembly_worker
-c_1_1_a_triskelavite_flying_ammo

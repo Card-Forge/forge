@@ -2,7 +2,6 @@
 Code=TSB
 Date=2006-10-06
 Name=Time Spiral "Timeshifted"
-Code2=TSB
 Type=Expansion
 ScryfallCode=TSB
 BoosterBox=0
@@ -130,10 +129,3 @@ FatPack=0
 119 S Gemstone Mine @Brom
 120 S Pendelhaven @Bryon Wackwitz
 121 S Safe Haven @Christopher Rush
-
-[tokens]
-w_1_1_pegasus_flying
-b_0_1_serf
-g_3_3_elephant
-g_1_1_saproling
-g_0_1_sheep

@@ -104,4 +104,5 @@ ScryfallCode=UGL
 2 w_1_1_soldier @Daren Bader
 3 b_2_2_zombie @Christopher Rush
 4 r_1_1_goblin @Pete Venters
+5 g_2_2_sheep @Kev Walker
 6 g_1_1_squirrel @Ron Spencer

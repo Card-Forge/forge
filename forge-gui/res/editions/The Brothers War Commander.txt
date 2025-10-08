@@ -229,3 +229,6 @@ ScryfallCode=BRC
 12 scrap @Drew Tucker
 13 c_1_1_a_servo @Igor Kieryluk
 14 g_5_3_elemental @Nils Hamm
+
+[other]
+1 copy @David Palumbo
