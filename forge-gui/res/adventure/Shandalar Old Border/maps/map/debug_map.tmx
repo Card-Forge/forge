@@ -11,9 +11,9 @@
   }
 }</property>
  </properties>
- <tileset firstgid="1" source="../tileset/main.tsx" />
- <tileset firstgid="10113" source="../tileset/buildings.tsx" />
- <tileset firstgid="11905" source="../tileset/buildings-nocollide.tsx" />
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../common/maps/tileset/buildings-nocollide.tsx" />
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJxjYGBgkBCiL4aBUXtH7R21d3ja+0AUFdPC3mmcEDwS7IXZaciFaTe5WAMN47MXm5+Hq71TBtC/Axm/IH4aJwIjm6UggImR5cs4ERjEn8CO3150TE17QRhXPqKVvdgwOeUzIXuJwaP2kmY/OfpG7R21dzjaCwBbaKfR
@@ -38,8 +38,8 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="47" template="../obj/gold.tx" x="48" y="352" />
-  <object id="50" template="../obj/enemy.tx" x="128" y="192" width="64" height="64">
+  <object id="47" template="../../../common/maps/obj/gold.tx" x="48" y="352" />
+  <object id="50" template="../../../common/maps/obj/enemy.tx" x="128" y="192" width="64" height="64">
    <properties>
     <property name="effect">{
  "lifeModifier": -25,
@@ -51,12 +51,12 @@
     <property name="name" value="Emrakul, the promised rest" />
    </properties>
   </object>
-  <object id="51" template="../obj/entry_up.tx" x="208" y="480" width="48" height="16">
+  <object id="51" template="../../../common/maps/obj/entry_up.tx" x="208" y="480" width="48" height="16">
    <properties>
     <property name="teleport" value="" />
    </properties>
   </object>
-  <object id="52" template="../obj/gate.tx" x="224" y="384">
+  <object id="52" template="../../../common/maps/obj/gate.tx" x="224" y="384">
    <properties>
     <property name="dialog">[{
   "text":"I am a big gate. Greetings.",
@@ -65,7 +65,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="54" template="../obj/treasure.tx" x="336" y="176">
+  <object id="54" template="../../../common/maps/obj/treasure.tx" x="336" y="176">
    <properties>
     <property name="reward">[
   {
@@ -79,12 +79,12 @@
     <property name="sprite" value="sprites/3life.atlas" />
    </properties>
   </object>
-  <object id="69" template="../obj/treasure.tx" x="64" y="336" />
-  <object id="74" template="../obj/treasure.tx" x="240" y="64" />
-  <object id="70" template="../obj/booster.tx" x="48" y="336" />
-  <object id="72" template="../obj/booster.tx" x="208" y="64" />
-  <object id="71" template="../obj/gold.tx" x="64" y="352" />
-  <object id="79" template="../obj/gate.tx" x="144" y="208" width="32" height="16" visible="1">
+  <object id="69" template="../../../common/maps/obj/treasure.tx" x="64" y="336" />
+  <object id="74" template="../../../common/maps/obj/treasure.tx" x="240" y="64" />
+  <object id="70" template="../../../common/maps/obj/booster.tx" x="48" y="336" />
+  <object id="72" template="../../../common/maps/obj/booster.tx" x="208" y="64" />
+  <object id="71" template="../../../common/maps/obj/gold.tx" x="64" y="352" />
+  <object id="79" template="../../../common/maps/obj/gate.tx" x="144" y="208" width="32" height="16" visible="1">
    <properties>
     <property name="dialog">[{
  "text":"Don't mind me, just chilling.",
@@ -92,7 +92,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="80" template="../obj/enemy.tx" x="112" y="304">
+  <object id="80" template="../../../common/maps/obj/enemy.tx" x="112" y="304">
    <properties>
     <property name="defeatDialog">[
   {
@@ -200,7 +200,7 @@
     <property name="name" value="Debug Elf" />
    </properties>
   </object>
-  <object id="81" template="../obj/enemy.tx" x="64" y="224">
+  <object id="81" template="../../../common/maps/obj/enemy.tx" x="64" y="224">
    <properties>
     <property name="dialog">[
   {
@@ -234,7 +234,7 @@
     <property name="enemy" value="Goblin" />
    </properties>
   </object>
-  <object id="82" template="../obj/enemy.tx" gid="2147495067" x="48" y="224">
+  <object id="82" template="../../../common/maps/obj/enemy.tx" gid="2147495067" x="48" y="224">
    <properties>
     <property name="dialog">[
   {
@@ -248,8 +248,8 @@
     <property name="enemy" value="Goblin" />
    </properties>
   </object>
-  <object id="83" template="../obj/gate.tx" type="dummy" gid="3651" x="80" y="336" width="16" height="16" />
-  <object id="84" template="../obj/enemy.tx" x="336" y="304">
+  <object id="83" template="../../../common/maps/obj/gate.tx" type="dummy" gid="3651" x="80" y="336" width="16" height="16" />
+  <object id="84" template="../../../common/maps/obj/enemy.tx" x="336" y="304">
    <properties>
     <property name="dialog">[
   {
@@ -314,7 +314,7 @@
     <property name="name" value="Debug Demon" />
    </properties>
   </object>
-  <object id="85" template="../obj/scroll.tx" x="224" y="96">
+  <object id="85" template="../../../common/maps/obj/scroll.tx" x="224" y="96">
    <properties>
     <property name="reward">[
 ]</property>
@@ -323,7 +323,7 @@
     <property name="spawn.Normal" type="bool" value="false" />
    </properties>
   </object>
-  <object id="86" template="../obj/treasure.tx" x="336" y="368" visible="0">
+  <object id="86" template="../../../common/maps/obj/treasure.tx" x="336" y="368" visible="0">
    <properties>
     <property name="reward">[{
  "type": "randomCard",
@@ -332,7 +332,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="87" template="../obj/enemy.tx" x="48" y="384">
+  <object id="87" template="../../../common/maps/obj/enemy.tx" x="48" y="384">
    <properties>
     <property name="enemy" value="Geist" />
     <property name="pursueRange" type="int" value="80" />
@@ -341,21 +341,21 @@
     <property name="threatRange" type="int" value="40" />
    </properties>
   </object>
-  <object id="88" template="../obj/enemy.tx" x="48" y="400">
+  <object id="88" template="../../../common/maps/obj/enemy.tx" x="48" y="400">
    <properties>
     <property name="enemy" value="Geist" />
     <property name="spawn.Easy" type="bool" value="false" />
     <property name="spawn.Hard" type="bool" value="true" />
    </properties>
   </object>
-  <object id="89" template="../obj/enemy.tx" x="48" y="416">
+  <object id="89" template="../../../common/maps/obj/enemy.tx" x="48" y="416">
    <properties>
     <property name="enemy" value="Geist" />
     <property name="spawn.Easy" type="bool" value="false" />
     <property name="spawn.Normal" type="bool" value="false" />
    </properties>
   </object>
-  <object id="93" template="../obj/enemy.tx" x="304" y="400">
+  <object id="93" template="../../../common/maps/obj/enemy.tx" x="304" y="400">
    <properties>
     <property name="enemy" value="Geist" />
     <property name="reward" value="" />
@@ -363,19 +363,19 @@
     <property name="spawn.Normal" type="bool" value="true" />
    </properties>
   </object>
-  <object id="90" template="../obj/treasure.tx" x="32" y="400">
+  <object id="90" template="../../../common/maps/obj/treasure.tx" x="32" y="400">
    <properties>
     <property name="spawn.Hard" type="bool" value="false" />
    </properties>
   </object>
-  <object id="92" template="../obj/treasure.tx" x="32" y="416">
+  <object id="92" template="../../../common/maps/obj/treasure.tx" x="32" y="416">
    <properties>
     <property name="spawn.Hard" type="bool" value="false" />
     <property name="spawn.Normal" type="bool" value="false" />
    </properties>
   </object>
-  <object id="91" template="../obj/treasure.tx" x="32" y="384" />
-  <object id="94" template="../obj/enemy.tx" x="400" y="240">
+  <object id="91" template="../../../common/maps/obj/treasure.tx" x="32" y="384" />
+  <object id="94" template="../../../common/maps/obj/enemy.tx" x="400" y="240">
    <properties>
     <property name="dialog">[
   {
@@ -401,18 +401,18 @@
     <property name="enemy" value="Merfolk Soldier" />
    </properties>
   </object>
-  <object id="95" template="../obj/enemy.tx" x="288" y="224">
+  <object id="95" template="../../../common/maps/obj/enemy.tx" x="288" y="224">
    <properties>
     <property name="enemy" value="Doppelganger" />
    </properties>
   </object>
-  <object id="96" template="../obj/enemy.tx" x="304" y="224">
+  <object id="96" template="../../../common/maps/obj/enemy.tx" x="304" y="224">
    <properties>
     <property name="enemy" value="Doppelganger" />
    </properties>
   </object>
-  <object id="97" template="../obj/inn.tx" type="spellsmith" gid="10499" x="224" y="368" width="16" height="16" />
-  <object id="98" template="../obj/portal.tx" type="portal" x="176" y="272">
+  <object id="97" template="../../../common/maps/obj/inn.tx" type="spellsmith" gid="10499" x="224" y="368" width="16" height="16" />
+  <object id="98" template="../../../common/maps/obj/portal.tx" type="portal" x="176" y="272">
    <properties>
     <property name="portalState" value="active" />
     <property name="sprite" value="sprites/portal.atlas" />
@@ -420,7 +420,7 @@
     <property name="teleportObjectId" value="99" />
    </properties>
   </object>
-  <object id="99" template="../obj/portal.tx" type="portal" x="272" y="272">
+  <object id="99" template="../../../common/maps/obj/portal.tx" type="portal" x="272" y="272">
    <properties>
     <property name="portalState" value="active" />
     <property name="sprite" value="sprites/portal.atlas" />
@@ -428,7 +428,7 @@
     <property name="teleportObjectId" value="98" />
    </properties>
   </object>
-  <object id="101" template="../obj/enemy.tx" x="128" y="400">
+  <object id="101" template="../../../common/maps/obj/enemy.tx" x="128" y="400">
    <properties>
     <property name="enemy" value="Plague Rat Swarm" />
    </properties>

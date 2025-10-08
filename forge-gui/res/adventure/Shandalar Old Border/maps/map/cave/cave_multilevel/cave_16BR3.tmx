@@ -24,19 +24,19 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="75" template="../../../obj/door_right.tx" x="1" y="111.667">
+  <object id="75" template="../../../../../common/maps/obj/door_right.tx" x="1" y="111.667">
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel/cave_16BR2.tmx"/>
     <property name="teleportObjectId" value="73"/>
    </properties>
   </object>
-  <object id="76" template="../../../obj/door_down.tx" x="193.333" y="16.3333">
+  <object id="76" template="../../../../../common/maps/obj/door_down.tx" x="193.333" y="16.3333">
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel/cave_16BR3U.tmx"/>
     <property name="teleportObjectId" value="77"/>
    </properties>
   </object>
-  <object id="78" template="../../../obj/enemy.tx" x="314.961" y="166.653" visible="1">
+  <object id="78" template="../../../../../common/maps/obj/enemy.tx" x="314.961" y="166.653" visible="1">
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Dralnu's Crusade|PLS|1&quot; ] }"/>
     <property name="enemy" value="Undead Goblin"/>
@@ -45,7 +45,7 @@
     <property name="threatRange" type="float" value="30"/>
    </properties>
   </object>
-  <object id="81" template="../../../obj/treasure.tx" x="375.728" y="217.222">
+  <object id="81" template="../../../../../common/maps/obj/treasure.tx" x="375.728" y="217.222">
    <properties>
     <property name="reward">[
   {
@@ -57,6 +57,6 @@
 ]</property>
    </properties>
   </object>
-  <object id="82" template="../../../obj/manashards.tx" x="336.208" y="234.22"/>
+  <object id="82" template="../../../../../common/maps/obj/manashards.tx" x="336.208" y="234.22"/>
  </objectgroup>
 </map>

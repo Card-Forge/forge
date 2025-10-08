@@ -3,11 +3,11 @@
  <editorsettings>
   <export format="tmx" />
  </editorsettings>
- <tileset firstgid="1" source="../../tileset/main.tsx" />
- <tileset firstgid="10113" source="../../tileset/buildings.tsx" />
- <tileset firstgid="11905" source="../../tileset/FarmFood.tsx" />
- <tileset firstgid="16001" source="../../tileset/buildings-nocollide.tsx" />
- <tileset firstgid="17793" source="../../tileset/dungeon/DarkAbbeyTiles.tsx" />
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/FarmFood.tsx" />
+ <tileset firstgid="16001" source="../../../../common/maps/tileset/buildings-nocollide.tsx" />
+ <tileset firstgid="17793" source="../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx" />
  <layer id="6" name="Ground" width="100" height="86">
   <data encoding="base64" compression="zlib">
    eJzt2ktOwzAURuEMkJqIcffAShgixJwNsBCGXQM7oDx2xXMJxKqsuGlC7MSJfzfnk65UMWrviZOqoigAAAAAAADmt98cD9KggZahFleXzWBePueCHuG69tp+HvTNEHqE6dptrBYIw641cN1r6LsnYXmchfS4L2lg9xrYP4Cl8QzWoPZ96LE6nTVRahHLmIYPAr89nluH3NFCBw20jOmwq04HcYT26GpAk3iGevh8R6GHFloAAAAAAFJ6LovipzrMvn79UqZ+R+ti9292b+a3fn3jzHdFkyV91Pv+dOa9PO5h5pbfcjot8RuX6fNWNm1e6/mih4Q7zsYkse/z5qxwNsZjd0CY7eYw0EAPPTTRY5u4A+D85XbWc3u/vp62zeToHLvk3gQAAAAAAACY4rpqBjroocX24KxgKveey/WU3tT9z9HPvd+0//7f9bPWa2ru80SP8ZQ/+/1F6ncwTHl/Xcb8H4HpYEdZjmc5tIfbQbVHzt+ffHrYz2Vb2M+o2iNnvj3cFvSYj+3hPhN895zDMyQ3bg+r3aZv7/SIr+98tDv4Nlq7P/Unops=
@@ -42,7 +42,7 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="57" template="../../obj/enemy.tx" x="841.833" y="798.667" width="16" height="16" visible="1">
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="841.833" y="798.667" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[
   {
@@ -127,21 +127,21 @@
     <property name="spawn.Normal" type="bool" value="true" />
    </properties>
   </object>
-  <object id="59" template="../../obj/gold.tx" x="34" y="655" visible="1">
+  <object id="59" template="../../../../common/maps/obj/gold.tx" x="34" y="655" visible="1">
    <properties>
     <property name="reward">[{
  "type": "gold", "count": 250
 }]</property>
    </properties>
   </object>
-  <object id="64" template="../../obj/gold.tx" x="960" y="193" visible="1">
+  <object id="64" template="../../../../common/maps/obj/gold.tx" x="960" y="193" visible="1">
    <properties>
     <property name="reward">[{
  "type": "gold", "count": 250
 }]</property>
    </properties>
   </object>
-  <object id="65" template="../../obj/enemy.tx" x="473.5" y="789.333" width="16" height="16" visible="1">
+  <object id="65" template="../../../../common/maps/obj/enemy.tx" x="473.5" y="789.333" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Blue Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -151,7 +151,7 @@
     <property name="waypoints" value="81,205,206,80,80,206,205" />
    </properties>
   </object>
-  <object id="66" template="../../obj/enemy.tx" x="638" y="624.5" width="16" height="16" visible="1">
+  <object id="66" template="../../../../common/maps/obj/enemy.tx" x="638" y="624.5" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Blue Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -161,7 +161,7 @@
     <property name="waypoints" value="83,202,203,162,203,202,83" />
    </properties>
   </object>
-  <object id="67" template="../../obj/enemy.tx" x="884.5" y="555" width="16" height="16" visible="1">
+  <object id="67" template="../../../../common/maps/obj/enemy.tx" x="884.5" y="555" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Blue Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -171,7 +171,7 @@
     <property name="waypoints" value="85,224,85,225,226,225,84,225" />
    </properties>
   </object>
-  <object id="68" template="../../obj/enemy.tx" x="1374.33" y="741.333" width="16" height="16" visible="1">
+  <object id="68" template="../../../../common/maps/obj/enemy.tx" x="1374.33" y="741.333" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Blue Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -181,7 +181,7 @@
     <property name="waypoints" value="184,220,223,172,172,222,221,172,223,220" />
    </properties>
   </object>
-  <object id="69" template="../../obj/enemy.tx" x="1344.83" y="963.667" width="16" height="16" visible="1">
+  <object id="69" template="../../../../common/maps/obj/enemy.tx" x="1344.83" y="963.667" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Blue Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -191,7 +191,7 @@
     <property name="waypoints" value="185,186,185,184,178,184,185" />
    </properties>
   </object>
-  <object id="70" template="../../obj/enemy.tx" x="1535" y="877" width="16" height="16" visible="1">
+  <object id="70" template="../../../../common/maps/obj/enemy.tx" x="1535" y="877" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Blue Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -201,7 +201,7 @@
     <property name="waypoints" value="158,159,158,157,156,187,155,187,156,157" />
    </properties>
   </object>
-  <object id="71" template="../../obj/enemy.tx" x="960.333" y="223.833" width="16" height="16" visible="1">
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="960.333" y="223.833" width="16" height="16" visible="1">
    <properties>
     <property name="defeatDialog">[
    {
@@ -219,7 +219,7 @@
     <property name="spawn.Normal" type="bool" value="true" />
    </properties>
   </object>
-  <object id="72" template="../../obj/enemy.tx" x="477.5" y="389.667" width="16" height="16" visible="1">
+  <object id="72" template="../../../../common/maps/obj/enemy.tx" x="477.5" y="389.667" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Blue Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -229,7 +229,7 @@
     <property name="waypoints" value="160,164,161,162,161,189" />
    </properties>
   </object>
-  <object id="73" template="../../obj/enemy.tx" x="1378.5" y="1327.75" width="16" height="16" visible="1">
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="1378.5" y="1327.75" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[
   {
@@ -249,20 +249,20 @@
     <property name="waypoints" value="90,89,88,91,88,89,90" />
    </properties>
   </object>
-  <object id="74" template="../../obj/waypoint.tx" x="492" y="1081.33" />
-  <object id="75" template="../../obj/waypoint.tx" x="225.833" y="1333" />
-  <object id="76" template="../../obj/waypoint.tx" x="650.5" y="1217.5" />
-  <object id="77" template="../../obj/waypoint.tx" x="873" y="1207" />
-  <object id="78" template="../../obj/waypoint.tx" x="777.5" y="1223" />
-  <object id="79" template="../../obj/waypoint.tx" x="847" y="985.167" />
-  <object id="80" template="../../obj/waypoint.tx" x="553" y="1100.5" />
-  <object id="81" template="../../obj/waypoint.tx" x="448.5" y="818" />
-  <object id="82" template="../../obj/waypoint.tx" x="362" y="645.167" />
-  <object id="83" template="../../obj/waypoint.tx" x="578.333" y="746" />
-  <object id="84" template="../../obj/waypoint.tx" x="735.5" y="584" />
-  <object id="85" template="../../obj/waypoint.tx" x="937.333" y="530.667" />
-  <object id="86" template="../../obj/waypoint.tx" x="1111" y="509.5" />
-  <object id="87" template="../../obj/dialog.tx" type="dialog" gid="11530" x="320.75" y="1104.33" width="16" height="16" visible="1">
+  <object id="74" template="../../../../common/maps/obj/waypoint.tx" x="492" y="1081.33" />
+  <object id="75" template="../../../../common/maps/obj/waypoint.tx" x="225.833" y="1333" />
+  <object id="76" template="../../../../common/maps/obj/waypoint.tx" x="650.5" y="1217.5" />
+  <object id="77" template="../../../../common/maps/obj/waypoint.tx" x="873" y="1207" />
+  <object id="78" template="../../../../common/maps/obj/waypoint.tx" x="777.5" y="1223" />
+  <object id="79" template="../../../../common/maps/obj/waypoint.tx" x="847" y="985.167" />
+  <object id="80" template="../../../../common/maps/obj/waypoint.tx" x="553" y="1100.5" />
+  <object id="81" template="../../../../common/maps/obj/waypoint.tx" x="448.5" y="818" />
+  <object id="82" template="../../../../common/maps/obj/waypoint.tx" x="362" y="645.167" />
+  <object id="83" template="../../../../common/maps/obj/waypoint.tx" x="578.333" y="746" />
+  <object id="84" template="../../../../common/maps/obj/waypoint.tx" x="735.5" y="584" />
+  <object id="85" template="../../../../common/maps/obj/waypoint.tx" x="937.333" y="530.667" />
+  <object id="86" template="../../../../common/maps/obj/waypoint.tx" x="1111" y="509.5" />
+  <object id="87" template="../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="320.75" y="1104.33" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[
   {
@@ -274,20 +274,20 @@
 ]</property>
    </properties>
   </object>
-  <object id="88" template="../../obj/waypoint.tx" x="703.25" y="1342.92" />
-  <object id="89" template="../../obj/waypoint.tx" x="431.75" y="1341.75" />
-  <object id="90" template="../../obj/waypoint.tx" x="432.5" y="1267" />
-  <object id="91" template="../../obj/waypoint.tx" x="703.75" y="1373.75" />
-  <object id="92" template="../../obj/entry_up.tx" x="208.75" y="1376.5" width="48" height="16">
+  <object id="88" template="../../../../common/maps/obj/waypoint.tx" x="703.25" y="1342.92" />
+  <object id="89" template="../../../../common/maps/obj/waypoint.tx" x="431.75" y="1341.75" />
+  <object id="90" template="../../../../common/maps/obj/waypoint.tx" x="432.5" y="1267" />
+  <object id="91" template="../../../../common/maps/obj/waypoint.tx" x="703.75" y="1373.75" />
+  <object id="92" template="../../../../common/maps/obj/entry_up.tx" x="208.75" y="1376.5" width="48" height="16">
    <properties>
     <property name="teleport" value="" />
    </properties>
   </object>
-  <object id="93" template="../../obj/collision.tx" x="-0.75" y="1376" width="1600.5" height="16" />
-  <object id="94" template="../../obj/collision.tx" x="-0.25" y="-15.5" width="1600.5" height="16" />
-  <object id="95" template="../../obj/collision.tx" x="-16.75" y="-2" width="17" height="1395" />
-  <object id="97" template="../../obj/collision.tx" x="1600" y="3" width="17" height="1395" />
-  <object id="98" template="../../obj/enemy.tx" x="329.333" y="1215.33" width="16" height="16" visible="1">
+  <object id="93" template="../../../../common/maps/obj/collision.tx" x="-0.75" y="1376" width="1600.5" height="16" />
+  <object id="94" template="../../../../common/maps/obj/collision.tx" x="-0.25" y="-15.5" width="1600.5" height="16" />
+  <object id="95" template="../../../../common/maps/obj/collision.tx" x="-16.75" y="-2" width="17" height="1395" />
+  <object id="97" template="../../../../common/maps/obj/collision.tx" x="1600" y="3" width="17" height="1395" />
+  <object id="98" template="../../../../common/maps/obj/enemy.tx" x="329.333" y="1215.33" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[
   {
@@ -306,7 +306,7 @@
     <property name="threatRange" type="int" value="0" />
    </properties>
   </object>
-  <object id="99" template="../../obj/enemy.tx" x="360" y="1215.33" width="16" height="16" visible="1">
+  <object id="99" template="../../../../common/maps/obj/enemy.tx" x="360" y="1215.33" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[
   {
@@ -325,7 +325,7 @@
     <property name="threatRange" type="int" value="0" />
    </properties>
   </object>
-  <object id="100" template="../../obj/enemy.tx" x="400" y="1216" width="16" height="16" visible="1">
+  <object id="100" template="../../../../common/maps/obj/enemy.tx" x="400" y="1216" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[
   {
@@ -344,7 +344,7 @@
     <property name="threatRange" type="int" value="0" />
    </properties>
   </object>
-  <object id="101" template="../../obj/enemy.tx" x="357.667" y="1185.66" width="16" height="16" visible="1">
+  <object id="101" template="../../../../common/maps/obj/enemy.tx" x="357.667" y="1185.66" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[
   {
@@ -446,28 +446,28 @@
     <property name="threatRange" type="int" value="0" />
    </properties>
   </object>
-  <object id="103" template="../../obj/gold.tx" x="1527.67" y="945.667" visible="1">
+  <object id="103" template="../../../../common/maps/obj/gold.tx" x="1527.67" y="945.667" visible="1">
    <properties>
     <property name="reward">[{
  "type": "gold", "count": 250
 }]</property>
    </properties>
   </object>
-  <object id="104" template="../../obj/gold.tx" x="1050.33" y="1245" visible="1">
+  <object id="104" template="../../../../common/maps/obj/gold.tx" x="1050.33" y="1245" visible="1">
    <properties>
     <property name="reward">[{
  "type": "gold", "count": 250
 }]</property>
    </properties>
   </object>
-  <object id="105" template="../../obj/gold.tx" x="1504.33" y="1103.33" visible="1">
+  <object id="105" template="../../../../common/maps/obj/gold.tx" x="1504.33" y="1103.33" visible="1">
    <properties>
     <property name="reward">[{
  "type": "gold", "count": 250
 }]</property>
    </properties>
   </object>
-  <object id="106" template="../../obj/enemy.tx" x="373.667" y="577" width="16" height="16" visible="1">
+  <object id="106" template="../../../../common/maps/obj/enemy.tx" x="373.667" y="577" width="16" height="16" visible="1">
    <properties>
     <property name="defeatDialog">[
    {
@@ -485,30 +485,30 @@
     <property name="spawn.Normal" type="bool" value="true" />
    </properties>
   </object>
-  <object id="107" template="../../obj/manashards.tx" x="1073.33" y="304.333" />
-  <object id="108" template="../../obj/manashards.tx" x="1437" y="630" />
-  <object id="109" template="../../obj/manashards.tx" x="1558" y="1151" />
-  <object id="110" template="../../obj/manashards.tx" x="1141" y="1008.67" />
-  <object id="111" template="../../obj/manashards.tx" x="1125" y="1163" />
-  <object id="112" template="../../obj/manashards.tx" x="660" y="868" />
-  <object id="113" template="../../obj/manashards.tx" x="351" y="921" />
-  <object id="114" template="../../obj/manashards.tx" x="86" y="765" />
-  <object id="115" template="../../obj/manashards.tx" x="399" y="586" />
-  <object id="116" template="../../obj/gold.tx" x="1098" y="808" visible="1">
+  <object id="107" template="../../../../common/maps/obj/manashards.tx" x="1073.33" y="304.333" />
+  <object id="108" template="../../../../common/maps/obj/manashards.tx" x="1437" y="630" />
+  <object id="109" template="../../../../common/maps/obj/manashards.tx" x="1558" y="1151" />
+  <object id="110" template="../../../../common/maps/obj/manashards.tx" x="1141" y="1008.67" />
+  <object id="111" template="../../../../common/maps/obj/manashards.tx" x="1125" y="1163" />
+  <object id="112" template="../../../../common/maps/obj/manashards.tx" x="660" y="868" />
+  <object id="113" template="../../../../common/maps/obj/manashards.tx" x="351" y="921" />
+  <object id="114" template="../../../../common/maps/obj/manashards.tx" x="86" y="765" />
+  <object id="115" template="../../../../common/maps/obj/manashards.tx" x="399" y="586" />
+  <object id="116" template="../../../../common/maps/obj/gold.tx" x="1098" y="808" visible="1">
    <properties>
     <property name="reward">[{
  "type": "gold", "count": 250
 }]</property>
    </properties>
   </object>
-  <object id="117" template="../../obj/gold.tx" x="628" y="537" visible="1">
+  <object id="117" template="../../../../common/maps/obj/gold.tx" x="628" y="537" visible="1">
    <properties>
     <property name="reward">[{
  "type": "gold", "count": 250
 }]</property>
    </properties>
   </object>
-  <object id="118" template="../../obj/booster.tx" x="1224" y="744">
+  <object id="118" template="../../../../common/maps/obj/booster.tx" x="1224" y="744">
    <properties>
     <property name="reward">[
   {
@@ -529,7 +529,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="121" template="../../obj/booster.tx" x="1119" y="1277">
+  <object id="121" template="../../../../common/maps/obj/booster.tx" x="1119" y="1277">
    <properties>
     <property name="reward">[
   {
@@ -550,7 +550,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="122" template="../../obj/booster.tx" x="47" y="817">
+  <object id="122" template="../../../../common/maps/obj/booster.tx" x="47" y="817">
    <properties>
     <property name="reward">[
   {
@@ -571,7 +571,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="123" template="../../obj/enemy.tx" x="1263" y="814" width="16" height="16" visible="1">
+  <object id="123" template="../../../../common/maps/obj/enemy.tx" x="1263" y="814" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Green Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -581,7 +581,7 @@
     <property name="waypoints" value="178,177,176,177,178,184,220,184,178" />
    </properties>
   </object>
-  <object id="124" template="../../obj/enemy.tx" x="508" y="699" width="16" height="16" visible="1">
+  <object id="124" template="../../../../common/maps/obj/enemy.tx" x="508" y="699" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Green Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -591,7 +591,7 @@
     <property name="waypoints" value="83,84,85,86,85,84,83" />
    </properties>
   </object>
-  <object id="125" template="../../obj/enemy.tx" x="175.333" y="820" width="16" height="16" visible="1">
+  <object id="125" template="../../../../common/maps/obj/enemy.tx" x="175.333" y="820" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Green Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -601,7 +601,7 @@
     <property name="waypoints" value="199,200,193,194,193" />
    </properties>
   </object>
-  <object id="126" template="../../obj/enemy.tx" x="672" y="1069" width="16" height="16" visible="1">
+  <object id="126" template="../../../../common/maps/obj/enemy.tx" x="672" y="1069" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Green Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -611,7 +611,7 @@
     <property name="waypoints" value="207,208,209,79,126,208,207" />
    </properties>
   </object>
-  <object id="127" template="../../obj/enemy.tx" x="642" y="925.667" width="16" height="16" visible="1">
+  <object id="127" template="../../../../common/maps/obj/enemy.tx" x="642" y="925.667" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Black Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -621,7 +621,7 @@
     <property name="waypoints" value="210,211,210,209,168,79,208,79,168,209" />
    </properties>
   </object>
-  <object id="128" template="../../obj/enemy.tx" x="1019" y="910" width="16" height="16" visible="1">
+  <object id="128" template="../../../../common/maps/obj/enemy.tx" x="1019" y="910" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Black Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -631,7 +631,7 @@
     <property name="waypoints" value="166,167,166,212,214,212,165" />
    </properties>
   </object>
-  <object id="129" template="../../obj/enemy.tx" x="1157.33" y="591.333" width="16" height="16" visible="1">
+  <object id="129" template="../../../../common/maps/obj/enemy.tx" x="1157.33" y="591.333" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Black Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -641,7 +641,7 @@
     <property name="waypoints" value="172,222,221,172,223,220,184,220,223,172" />
    </properties>
   </object>
-  <object id="130" template="../../obj/enemy.tx" x="530.334" y="440.666" width="16" height="16" visible="1">
+  <object id="130" template="../../../../common/maps/obj/enemy.tx" x="530.334" y="440.666" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Black Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -651,7 +651,7 @@
     <property name="waypoints" value="160,164,161,162,161,189" />
    </properties>
   </object>
-  <object id="131" template="../../obj/enemy.tx" x="776" y="395" width="20" height="17" visible="1">
+  <object id="131" template="../../../../common/maps/obj/enemy.tx" x="776" y="395" width="20" height="17" visible="1">
    <properties>
     <property name="enemy" value="White Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -661,7 +661,7 @@
     <property name="waypoints" value="160,164,161,162" />
    </properties>
   </object>
-  <object id="132" template="../../obj/enemy.tx" x="286" y="483.5" width="20" height="17" visible="1">
+  <object id="132" template="../../../../common/maps/obj/enemy.tx" x="286" y="483.5" width="20" height="17" visible="1">
    <properties>
     <property name="enemy" value="Green Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -671,7 +671,7 @@
     <property name="waypoints" value="161,162,163,162,161,189" />
    </properties>
   </object>
-  <object id="133" template="../../obj/enemy.tx" x="0.666667" y="746.833" width="20" height="17" visible="1">
+  <object id="133" template="../../../../common/maps/obj/enemy.tx" x="0.666667" y="746.833" width="20" height="17" visible="1">
    <properties>
     <property name="enemy" value="White Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -681,7 +681,7 @@
     <property name="waypoints" value="192,193,194,193,192,191" />
    </properties>
   </object>
-  <object id="134" template="../../obj/enemy.tx" x="1401" y="1100.5" width="20" height="17" visible="1">
+  <object id="134" template="../../../../common/maps/obj/enemy.tx" x="1401" y="1100.5" width="20" height="17" visible="1">
    <properties>
     <property name="enemy" value="White Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -691,7 +691,7 @@
     <property name="waypoints" value="181,180,236,175,174,179,181" />
    </properties>
   </object>
-  <object id="135" template="../../obj/enemy.tx" x="769" y="989.833" width="20" height="17" visible="1">
+  <object id="135" template="../../../../common/maps/obj/enemy.tx" x="769" y="989.833" width="20" height="17" visible="1">
    <properties>
     <property name="enemy" value="White Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -701,7 +701,7 @@
     <property name="waypoints" value="209,210,209,79,231,79,209,210" />
    </properties>
   </object>
-  <object id="136" template="../../obj/enemy.tx" x="373" y="673.833" width="20" height="17" visible="1">
+  <object id="136" template="../../../../common/maps/obj/enemy.tx" x="373" y="673.833" width="20" height="17" visible="1">
    <properties>
     <property name="enemy" value="White Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -711,7 +711,7 @@
     <property name="waypoints" value="201,82,202,82" />
    </properties>
   </object>
-  <object id="137" template="../../obj/enemy.tx" x="950.333" y="328.166" width="20" height="17" visible="1">
+  <object id="137" template="../../../../common/maps/obj/enemy.tx" x="950.333" y="328.166" width="20" height="17" visible="1">
    <properties>
     <property name="enemy" value="Black Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -721,7 +721,7 @@
     <property name="waypoints" value="155,156,155,160,164,161,162" />
    </properties>
   </object>
-  <object id="139" template="../../obj/enemy.tx" x="1116.67" y="1108.5" width="20" height="17" visible="1">
+  <object id="139" template="../../../../common/maps/obj/enemy.tx" x="1116.67" y="1108.5" width="20" height="17" visible="1">
    <properties>
     <property name="enemy" value="Red Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -731,7 +731,7 @@
     <property name="waypoints" value="173,218,169,170,171,170,169,218,173" />
    </properties>
   </object>
-  <object id="140" template="../../obj/enemy.tx" x="1021" y="1165.17" width="20" height="17" visible="1">
+  <object id="140" template="../../../../common/maps/obj/enemy.tx" x="1021" y="1165.17" width="20" height="17" visible="1">
    <properties>
     <property name="enemy" value="Red Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -741,7 +741,7 @@
     <property name="waypoints" value="165,166,167,166,212,214,212" />
    </properties>
   </object>
-  <object id="141" template="../../obj/enemy.tx" x="1018.67" y="752.833" width="20" height="17" visible="1">
+  <object id="141" template="../../../../common/maps/obj/enemy.tx" x="1018.67" y="752.833" width="20" height="17" visible="1">
    <properties>
     <property name="enemy" value="Red Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -751,7 +751,7 @@
     <property name="waypoints" value="234,226,234,233,232,171,170,171,232,233" />
    </properties>
   </object>
-  <object id="142" template="../../obj/enemy.tx" x="758" y="590" width="16" height="16" visible="1">
+  <object id="142" template="../../../../common/maps/obj/enemy.tx" x="758" y="590" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Black Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -761,7 +761,7 @@
     <property name="waypoints" value="84,225,85,224,85,225,226,225" />
    </properties>
   </object>
-  <object id="143" template="../../obj/enemy.tx" x="106" y="885" width="16" height="16" visible="1">
+  <object id="143" template="../../../../common/maps/obj/enemy.tx" x="106" y="885" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Black Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -771,7 +771,7 @@
     <property name="waypoints" value="194,193,192,192,193" />
    </properties>
   </object>
-  <object id="144" template="../../obj/enemy.tx" x="365.333" y="1051" width="16" height="16" visible="1">
+  <object id="144" template="../../../../common/maps/obj/enemy.tx" x="365.333" y="1051" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Black Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -781,7 +781,7 @@
     <property name="waypoints" value="198,80,76,78,77,78,76,80" />
    </properties>
   </object>
-  <object id="145" template="../../obj/enemy.tx" x="697" y="1227" width="16" height="16" visible="1">
+  <object id="145" template="../../../../common/maps/obj/enemy.tx" x="697" y="1227" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Black Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -791,7 +791,7 @@
     <property name="waypoints" value="78,77,78,76,80,198,80,76" />
    </properties>
   </object>
-  <object id="146" template="../../obj/enemy.tx" x="899" y="1104" width="16" height="16" visible="1">
+  <object id="146" template="../../../../common/maps/obj/enemy.tx" x="899" y="1104" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Black Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -801,7 +801,7 @@
     <property name="waypoints" value="77,78,77,231,79,231,77,78" />
    </properties>
   </object>
-  <object id="147" template="../../obj/enemy.tx" x="537.667" y="1058.5" width="20" height="17" visible="1">
+  <object id="147" template="../../../../common/maps/obj/enemy.tx" x="537.667" y="1058.5" width="20" height="17" visible="1">
    <properties>
     <property name="enemy" value="White Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -811,7 +811,7 @@
     <property name="waypoints" value="80,206,205,81,205,206,80" />
    </properties>
   </object>
-  <object id="148" template="../../obj/enemy.tx" x="343.334" y="772.5" width="20" height="17" visible="1">
+  <object id="148" template="../../../../common/maps/obj/enemy.tx" x="343.334" y="772.5" width="20" height="17" visible="1">
    <properties>
     <property name="enemy" value="White Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -821,7 +821,7 @@
     <property name="waypoints" value="199,201,204,201" />
    </properties>
   </object>
-  <object id="149" template="../../obj/enemy.tx" x="167" y="595.833" width="20" height="17" visible="1">
+  <object id="149" template="../../../../common/maps/obj/enemy.tx" x="167" y="595.833" width="20" height="17" visible="1">
    <properties>
     <property name="enemy" value="White Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -831,7 +831,7 @@
     <property name="waypoints" value="161,189,190,189,191,192,191,189" />
    </properties>
   </object>
-  <object id="150" template="../../obj/enemy.tx" x="1131" y="1334" width="16" height="16" visible="1">
+  <object id="150" template="../../../../common/maps/obj/enemy.tx" x="1131" y="1334" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[
   {
@@ -850,7 +850,7 @@
     <property name="threatRange" type="int" value="0" />
    </properties>
   </object>
-  <object id="151" template="../../obj/enemy.tx" x="1439" y="1308" width="16" height="16" visible="1">
+  <object id="151" template="../../../../common/maps/obj/enemy.tx" x="1439" y="1308" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[
   {
@@ -869,14 +869,14 @@
     <property name="threatRange" type="int" value="0" />
    </properties>
   </object>
-  <object id="153" template="../../obj/entry_up.tx" x="648.667" y="783" width="48" height="16">
+  <object id="153" template="../../../../common/maps/obj/entry_up.tx" x="648.667" y="783" width="48" height="16">
    <properties>
     <property name="direction" value="down" />
     <property name="teleport" value="../common/maps/map/skep/sliverqueen.tmx" />
     <property name="teleportObjectId" value="38" />
    </properties>
   </object>
-  <object id="154" template="../../obj/enemy.tx" x="1156.33" y="768.833" width="20" height="17" visible="1">
+  <object id="154" template="../../../../common/maps/obj/enemy.tx" x="1156.33" y="768.833" width="20" height="17" visible="1">
    <properties>
     <property name="enemy" value="Red Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -886,40 +886,40 @@
     <property name="waypoints" value="170,171,232,233,234,226,234,233,232,171" />
    </properties>
   </object>
-  <object id="155" template="../../obj/waypoint.tx" x="1155.67" y="437.667" />
-  <object id="156" template="../../obj/waypoint.tx" x="1455.67" y="676.333" />
-  <object id="157" template="../../obj/waypoint.tx" x="1548" y="740.667" />
-  <object id="158" template="../../obj/waypoint.tx" x="1537.67" y="915" />
-  <object id="159" template="../../obj/waypoint.tx" x="1417.67" y="803.333" />
-  <object id="160" template="../../obj/waypoint.tx" x="976.667" y="265" />
-  <object id="161" template="../../obj/waypoint.tx" x="335.667" y="412" />
-  <object id="162" template="../../obj/waypoint.tx" x="681" y="367" />
-  <object id="163" template="../../obj/waypoint.tx" x="801.333" y="264" />
-  <object id="164" template="../../obj/waypoint.tx" x="922.333" y="446.333" />
-  <object id="165" template="../../obj/waypoint.tx" x="1050.33" y="1221.33" />
-  <object id="166" template="../../obj/waypoint.tx" x="1018" y="861.667" />
-  <object id="167" template="../../obj/waypoint.tx" x="969.333" y="821.667" />
-  <object id="168" template="../../obj/waypoint.tx" x="795.333" y="895" />
-  <object id="169" template="../../obj/waypoint.tx" x="1103" y="958.333" />
-  <object id="170" template="../../obj/waypoint.tx" x="1188.67" y="814.667" />
-  <object id="171" template="../../obj/waypoint.tx" x="1159" y="704.667" />
-  <object id="172" template="../../obj/waypoint.tx" x="1161" y="622.667" />
-  <object id="173" template="../../obj/waypoint.tx" x="1129" y="1230.33" />
-  <object id="174" template="../../obj/waypoint.tx" x="1252" y="1098.33" />
-  <object id="175" template="../../obj/waypoint.tx" x="1243.67" y="1026.67" />
-  <object id="176" template="../../obj/waypoint.tx" x="1161" y="1023.67" />
-  <object id="177" template="../../obj/waypoint.tx" x="1188" y="918.333" />
-  <object id="178" template="../../obj/waypoint.tx" x="1271" y="840" />
-  <object id="179" template="../../obj/waypoint.tx" x="1361.33" y="1178.33" />
-  <object id="180" template="../../obj/waypoint.tx" x="1466.33" y="1077.33" />
-  <object id="181" template="../../obj/waypoint.tx" x="1553" y="1013" />
-  <object id="182" template="../../obj/waypoint.tx" x="1570" y="1154.33" />
-  <object id="183" template="../../obj/waypoint.tx" x="1341.33" y="1003.67" />
-  <object id="184" template="../../obj/waypoint.tx" x="1349.67" y="841" />
-  <object id="185" template="../../obj/waypoint.tx" x="1389" y="964.667" />
-  <object id="186" template="../../obj/waypoint.tx" x="1388.33" y="868" />
-  <object id="187" template="../../obj/waypoint.tx" x="1281" y="545" />
-  <object id="188" template="../../obj/enemy.tx" x="1374" y="597.667" width="16" height="16" visible="1">
+  <object id="155" template="../../../../common/maps/obj/waypoint.tx" x="1155.67" y="437.667" />
+  <object id="156" template="../../../../common/maps/obj/waypoint.tx" x="1455.67" y="676.333" />
+  <object id="157" template="../../../../common/maps/obj/waypoint.tx" x="1548" y="740.667" />
+  <object id="158" template="../../../../common/maps/obj/waypoint.tx" x="1537.67" y="915" />
+  <object id="159" template="../../../../common/maps/obj/waypoint.tx" x="1417.67" y="803.333" />
+  <object id="160" template="../../../../common/maps/obj/waypoint.tx" x="976.667" y="265" />
+  <object id="161" template="../../../../common/maps/obj/waypoint.tx" x="335.667" y="412" />
+  <object id="162" template="../../../../common/maps/obj/waypoint.tx" x="681" y="367" />
+  <object id="163" template="../../../../common/maps/obj/waypoint.tx" x="801.333" y="264" />
+  <object id="164" template="../../../../common/maps/obj/waypoint.tx" x="922.333" y="446.333" />
+  <object id="165" template="../../../../common/maps/obj/waypoint.tx" x="1050.33" y="1221.33" />
+  <object id="166" template="../../../../common/maps/obj/waypoint.tx" x="1018" y="861.667" />
+  <object id="167" template="../../../../common/maps/obj/waypoint.tx" x="969.333" y="821.667" />
+  <object id="168" template="../../../../common/maps/obj/waypoint.tx" x="795.333" y="895" />
+  <object id="169" template="../../../../common/maps/obj/waypoint.tx" x="1103" y="958.333" />
+  <object id="170" template="../../../../common/maps/obj/waypoint.tx" x="1188.67" y="814.667" />
+  <object id="171" template="../../../../common/maps/obj/waypoint.tx" x="1159" y="704.667" />
+  <object id="172" template="../../../../common/maps/obj/waypoint.tx" x="1161" y="622.667" />
+  <object id="173" template="../../../../common/maps/obj/waypoint.tx" x="1129" y="1230.33" />
+  <object id="174" template="../../../../common/maps/obj/waypoint.tx" x="1252" y="1098.33" />
+  <object id="175" template="../../../../common/maps/obj/waypoint.tx" x="1243.67" y="1026.67" />
+  <object id="176" template="../../../../common/maps/obj/waypoint.tx" x="1161" y="1023.67" />
+  <object id="177" template="../../../../common/maps/obj/waypoint.tx" x="1188" y="918.333" />
+  <object id="178" template="../../../../common/maps/obj/waypoint.tx" x="1271" y="840" />
+  <object id="179" template="../../../../common/maps/obj/waypoint.tx" x="1361.33" y="1178.33" />
+  <object id="180" template="../../../../common/maps/obj/waypoint.tx" x="1466.33" y="1077.33" />
+  <object id="181" template="../../../../common/maps/obj/waypoint.tx" x="1553" y="1013" />
+  <object id="182" template="../../../../common/maps/obj/waypoint.tx" x="1570" y="1154.33" />
+  <object id="183" template="../../../../common/maps/obj/waypoint.tx" x="1341.33" y="1003.67" />
+  <object id="184" template="../../../../common/maps/obj/waypoint.tx" x="1349.67" y="841" />
+  <object id="185" template="../../../../common/maps/obj/waypoint.tx" x="1389" y="964.667" />
+  <object id="186" template="../../../../common/maps/obj/waypoint.tx" x="1388.33" y="868" />
+  <object id="187" template="../../../../common/maps/obj/waypoint.tx" x="1281" y="545" />
+  <object id="188" template="../../../../common/maps/obj/enemy.tx" x="1374" y="597.667" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Red Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -929,37 +929,37 @@
     <property name="waypoints" value="156,187,155,187,156,157,158,159,158,157" />
    </properties>
   </object>
-  <object id="189" template="../../obj/waypoint.tx" x="186.333" y="525.667" />
-  <object id="190" template="../../obj/waypoint.tx" x="189.333" y="734.333" />
-  <object id="191" template="../../obj/waypoint.tx" x="3.33333" y="705" />
-  <object id="192" template="../../obj/waypoint.tx" x="3.66667" y="898.667" />
-  <object id="193" template="../../obj/waypoint.tx" x="126.667" y="896.333" />
-  <object id="194" template="../../obj/waypoint.tx" x="111.333" y="694.667" />
-  <object id="195" template="../../obj/waypoint.tx" x="223.667" y="947" />
-  <object id="196" template="../../obj/waypoint.tx" x="275.667" y="858.667" />
-  <object id="197" template="../../obj/waypoint.tx" x="294.667" y="1012.67" />
-  <object id="198" template="../../obj/waypoint.tx" x="434.333" y="1115.33" />
-  <object id="199" template="../../obj/waypoint.tx" x="302" y="781" />
-  <object id="200" template="../../obj/waypoint.tx" x="297.333" y="593.333" />
-  <object id="201" template="../../obj/waypoint.tx" x="371.667" y="760.667" />
-  <object id="202" template="../../obj/waypoint.tx" x="462.333" y="644.667" />
-  <object id="203" template="../../obj/waypoint.tx" x="463.333" y="554.667" />
-  <object id="204" template="../../obj/waypoint.tx" x="338.333" y="941" />
-  <object id="205" template="../../obj/waypoint.tx" x="440.333" y="936" />
-  <object id="206" template="../../obj/waypoint.tx" x="538.333" y="955.667" />
-  <object id="207" template="../../obj/waypoint.tx" x="570.667" y="1051.33" />
-  <object id="208" template="../../obj/waypoint.tx" x="748.333" y="1051.33" />
-  <object id="209" template="../../obj/waypoint.tx" x="736.667" y="908" />
-  <object id="210" template="../../obj/waypoint.tx" x="578.333" y="889.333" />
-  <object id="211" template="../../obj/waypoint.tx" x="666" y="680.667" />
-  <object id="212" template="../../obj/waypoint.tx" x="1039.67" y="1043" />
-  <object id="213" template="../../obj/waypoint.tx" x="988.333" y="1156.33" />
-  <object id="214" template="../../obj/waypoint.tx" x="1034.33" y="1139" />
-  <object id="215" template="../../obj/waypoint.tx" x="1117.33" y="1177.33" />
-  <object id="216" template="../../obj/waypoint.tx" x="986" y="1226.67" />
-  <object id="217" template="../../obj/waypoint.tx" x="1217.33" y="1158.33" />
-  <object id="218" template="../../obj/waypoint.tx" x="1118.67" y="1074" />
-  <object id="219" template="../../obj/enemy.tx" x="1549.33" y="1048.67" width="16" height="16" visible="1">
+  <object id="189" template="../../../../common/maps/obj/waypoint.tx" x="186.333" y="525.667" />
+  <object id="190" template="../../../../common/maps/obj/waypoint.tx" x="189.333" y="734.333" />
+  <object id="191" template="../../../../common/maps/obj/waypoint.tx" x="3.33333" y="705" />
+  <object id="192" template="../../../../common/maps/obj/waypoint.tx" x="3.66667" y="898.667" />
+  <object id="193" template="../../../../common/maps/obj/waypoint.tx" x="126.667" y="896.333" />
+  <object id="194" template="../../../../common/maps/obj/waypoint.tx" x="111.333" y="694.667" />
+  <object id="195" template="../../../../common/maps/obj/waypoint.tx" x="223.667" y="947" />
+  <object id="196" template="../../../../common/maps/obj/waypoint.tx" x="275.667" y="858.667" />
+  <object id="197" template="../../../../common/maps/obj/waypoint.tx" x="294.667" y="1012.67" />
+  <object id="198" template="../../../../common/maps/obj/waypoint.tx" x="434.333" y="1115.33" />
+  <object id="199" template="../../../../common/maps/obj/waypoint.tx" x="302" y="781" />
+  <object id="200" template="../../../../common/maps/obj/waypoint.tx" x="297.333" y="593.333" />
+  <object id="201" template="../../../../common/maps/obj/waypoint.tx" x="371.667" y="760.667" />
+  <object id="202" template="../../../../common/maps/obj/waypoint.tx" x="462.333" y="644.667" />
+  <object id="203" template="../../../../common/maps/obj/waypoint.tx" x="463.333" y="554.667" />
+  <object id="204" template="../../../../common/maps/obj/waypoint.tx" x="338.333" y="941" />
+  <object id="205" template="../../../../common/maps/obj/waypoint.tx" x="440.333" y="936" />
+  <object id="206" template="../../../../common/maps/obj/waypoint.tx" x="538.333" y="955.667" />
+  <object id="207" template="../../../../common/maps/obj/waypoint.tx" x="570.667" y="1051.33" />
+  <object id="208" template="../../../../common/maps/obj/waypoint.tx" x="748.333" y="1051.33" />
+  <object id="209" template="../../../../common/maps/obj/waypoint.tx" x="736.667" y="908" />
+  <object id="210" template="../../../../common/maps/obj/waypoint.tx" x="578.333" y="889.333" />
+  <object id="211" template="../../../../common/maps/obj/waypoint.tx" x="666" y="680.667" />
+  <object id="212" template="../../../../common/maps/obj/waypoint.tx" x="1039.67" y="1043" />
+  <object id="213" template="../../../../common/maps/obj/waypoint.tx" x="988.333" y="1156.33" />
+  <object id="214" template="../../../../common/maps/obj/waypoint.tx" x="1034.33" y="1139" />
+  <object id="215" template="../../../../common/maps/obj/waypoint.tx" x="1117.33" y="1177.33" />
+  <object id="216" template="../../../../common/maps/obj/waypoint.tx" x="986" y="1226.67" />
+  <object id="217" template="../../../../common/maps/obj/waypoint.tx" x="1217.33" y="1158.33" />
+  <object id="218" template="../../../../common/maps/obj/waypoint.tx" x="1118.67" y="1074" />
+  <object id="219" template="../../../../common/maps/obj/enemy.tx" x="1549.33" y="1048.67" width="16" height="16" visible="1">
    <properties>
     <property name="defeatDialog">[
    {
@@ -977,14 +977,14 @@
     <property name="spawn.Normal" type="bool" value="true" />
    </properties>
   </object>
-  <object id="220" template="../../obj/waypoint.tx" x="1349.33" y="721.333" />
-  <object id="221" template="../../obj/waypoint.tx" x="1048.67" y="509.667" />
-  <object id="222" template="../../obj/waypoint.tx" x="1059.33" y="647.333" />
-  <object id="223" template="../../obj/waypoint.tx" x="1249.33" y="670.333" />
-  <object id="224" template="../../obj/waypoint.tx" x="985.333" y="674" />
-  <object id="225" template="../../obj/waypoint.tx" x="844" y="600" />
-  <object id="226" template="../../obj/waypoint.tx" x="932.333" y="696.667" />
-  <object id="227" template="../../obj/enemy.tx" x="1071.67" y="510" width="16" height="16" visible="1">
+  <object id="220" template="../../../../common/maps/obj/waypoint.tx" x="1349.33" y="721.333" />
+  <object id="221" template="../../../../common/maps/obj/waypoint.tx" x="1048.67" y="509.667" />
+  <object id="222" template="../../../../common/maps/obj/waypoint.tx" x="1059.33" y="647.333" />
+  <object id="223" template="../../../../common/maps/obj/waypoint.tx" x="1249.33" y="670.333" />
+  <object id="224" template="../../../../common/maps/obj/waypoint.tx" x="985.333" y="674" />
+  <object id="225" template="../../../../common/maps/obj/waypoint.tx" x="844" y="600" />
+  <object id="226" template="../../../../common/maps/obj/waypoint.tx" x="932.333" y="696.667" />
+  <object id="227" template="../../../../common/maps/obj/enemy.tx" x="1071.67" y="510" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Green Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -994,9 +994,9 @@
     <property name="waypoints" value="221,172,223,172,221,85,224" />
    </properties>
   </object>
-  <object id="228" template="../../obj/waypoint.tx" x="752.333" y="756" />
-  <object id="229" template="../../obj/waypoint.tx" x="608.667" y="607.667" />
-  <object id="230" template="../../obj/enemy.tx" x="673.333" y="580.667" width="16" height="16" visible="1">
+  <object id="228" template="../../../../common/maps/obj/waypoint.tx" x="752.333" y="756" />
+  <object id="229" template="../../../../common/maps/obj/waypoint.tx" x="608.667" y="607.667" />
+  <object id="230" template="../../../../common/maps/obj/enemy.tx" x="673.333" y="580.667" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Blue Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -1006,12 +1006,12 @@
     <property name="waypoints" value="84,83,211,228,211,83" />
    </properties>
   </object>
-  <object id="231" template="../../obj/waypoint.tx" x="894.667" y="1079" />
-  <object id="232" template="../../obj/waypoint.tx" x="1111.67" y="731" />
-  <object id="233" template="../../obj/waypoint.tx" x="1031.33" y="710.333" />
-  <object id="234" template="../../obj/waypoint.tx" x="1041" y="786" />
-  <object id="236" template="../../obj/waypoint.tx" x="1291" y="996.667" />
-  <object id="237" template="../../obj/enemy.tx" x="535" y="1132" width="16" height="16" visible="1">
+  <object id="231" template="../../../../common/maps/obj/waypoint.tx" x="894.667" y="1079" />
+  <object id="232" template="../../../../common/maps/obj/waypoint.tx" x="1111.67" y="731" />
+  <object id="233" template="../../../../common/maps/obj/waypoint.tx" x="1031.33" y="710.333" />
+  <object id="234" template="../../../../common/maps/obj/waypoint.tx" x="1041" y="786" />
+  <object id="236" template="../../../../common/maps/obj/waypoint.tx" x="1291" y="996.667" />
+  <object id="237" template="../../../../common/maps/obj/enemy.tx" x="535" y="1132" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Green Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -1021,7 +1021,7 @@
     <property name="waypoints" value="80,76,198,74" />
    </properties>
   </object>
-  <object id="238" template="../../obj/enemy.tx" x="81.6667" y="975.333" width="16" height="16" visible="1">
+  <object id="238" template="../../../../common/maps/obj/enemy.tx" x="81.6667" y="975.333" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[
   {
@@ -1040,7 +1040,7 @@
     <property name="threatRange" type="int" value="0" />
    </properties>
   </object>
-  <object id="239" template="../../obj/enemy.tx" x="110.667" y="1151" width="16" height="16" visible="1">
+  <object id="239" template="../../../../common/maps/obj/enemy.tx" x="110.667" y="1151" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[
   {
@@ -1059,7 +1059,7 @@
     <property name="threatRange" type="int" value="0" />
    </properties>
   </object>
-  <object id="240" template="../../obj/enemy.tx" x="17.6667" y="1343.67" width="16" height="16" visible="1">
+  <object id="240" template="../../../../common/maps/obj/enemy.tx" x="17.6667" y="1343.67" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[
   {
@@ -1078,7 +1078,7 @@
     <property name="threatRange" type="int" value="0" />
    </properties>
   </object>
-  <object id="241" template="../../obj/enemy.tx" x="1516.33" y="1365.67" width="16" height="16" visible="1">
+  <object id="241" template="../../../../common/maps/obj/enemy.tx" x="1516.33" y="1365.67" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[
 	{
@@ -1105,14 +1105,14 @@
     <property name="waypoints" value="75,242,243,244,245,246,247,248,247,246,245,244,243,242" />
    </properties>
   </object>
-  <object id="242" template="../../obj/waypoint.tx" x="224.333" y="1086.67" />
-  <object id="243" template="../../obj/waypoint.tx" x="207" y="1055.67" />
-  <object id="244" template="../../obj/waypoint.tx" x="176.333" y="1054.67" />
-  <object id="245" template="../../obj/waypoint.tx" x="176.333" y="991" />
-  <object id="246" template="../../obj/waypoint.tx" x="144.667" y="992.333" />
-  <object id="247" template="../../obj/waypoint.tx" x="144" y="975" />
-  <object id="248" template="../../obj/waypoint.tx" x="114" y="976" />
-  <object id="249" template="../../obj/gate.tx" x="481" y="1192">
+  <object id="242" template="../../../../common/maps/obj/waypoint.tx" x="224.333" y="1086.67" />
+  <object id="243" template="../../../../common/maps/obj/waypoint.tx" x="207" y="1055.67" />
+  <object id="244" template="../../../../common/maps/obj/waypoint.tx" x="176.333" y="1054.67" />
+  <object id="245" template="../../../../common/maps/obj/waypoint.tx" x="176.333" y="991" />
+  <object id="246" template="../../../../common/maps/obj/waypoint.tx" x="144.667" y="992.333" />
+  <object id="247" template="../../../../common/maps/obj/waypoint.tx" x="144" y="975" />
+  <object id="248" template="../../../../common/maps/obj/waypoint.tx" x="114" y="976" />
+  <object id="249" template="../../../../common/maps/obj/gate.tx" x="481" y="1192">
    <properties>
     <property name="dialog">[{
     "text":"This gate is locked",
@@ -1128,7 +1128,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="250" template="../../obj/enemy.tx" x="550.667" y="1260.67" width="16" height="16" visible="1">
+  <object id="250" template="../../../../common/maps/obj/enemy.tx" x="550.667" y="1260.67" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[
   {
@@ -1147,7 +1147,7 @@
     <property name="threatRange" type="int" value="0" />
    </properties>
   </object>
-  <object id="251" template="../../obj/shop.tx" x="303.667" y="1248.29" width="31.3333" height="32.4167">
+  <object id="251" template="../../../../common/maps/obj/shop.tx" x="303.667" y="1248.29" width="31.3333" height="32.4167">
    <properties>
     <property name="commonShopList" value="Soldier4Red" />
     <property name="noRestock" type="bool" value="false" />
@@ -1155,7 +1155,7 @@
     <property name="signYOffset" type="float" value="-5" />
    </properties>
   </object>
-  <object id="252" template="../../obj/shop.tx" x="336.334" y="1248.46" width="31.3333" height="32.4167">
+  <object id="252" template="../../../../common/maps/obj/shop.tx" x="336.334" y="1248.46" width="31.3333" height="32.4167">
    <properties>
     <property name="commonShopList" value="Equip" />
     <property name="noRestock" type="bool" value="false" />
@@ -1163,7 +1163,7 @@
     <property name="signYOffset" type="float" value="-5" />
    </properties>
   </object>
-  <object id="253" template="../../obj/shop.tx" x="370" y="1248.46" width="31.3333" height="32.4167">
+  <object id="253" template="../../../../common/maps/obj/shop.tx" x="370" y="1248.46" width="31.3333" height="32.4167">
    <properties>
     <property name="commonShopList" value="Nobles" />
     <property name="noRestock" type="bool" value="false" />
@@ -1171,7 +1171,7 @@
     <property name="signYOffset" type="float" value="-5" />
    </properties>
   </object>
-  <object id="256" template="../../obj/dialog.tx" x="628.999" y="811.666" width="116" height="44.3333">
+  <object id="256" template="../../../../common/maps/obj/dialog.tx" x="628.999" y="811.666" width="116" height="44.3333">
    <properties>
     <property name="dialog">[
   {
@@ -1197,7 +1197,7 @@
 </property>
    </properties>
   </object>
-  <object id="257" template="../../obj/treasure.tx" x="751.667" y="508.667">
+  <object id="257" template="../../../../common/maps/obj/treasure.tx" x="751.667" y="508.667">
    <properties>
     <property name="reward">[{
   "type": "randomCard",
@@ -1216,7 +1216,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="258" template="../../obj/treasure.tx" x="1422.33" y="1018.33">
+  <object id="258" template="../../../../common/maps/obj/treasure.tx" x="1422.33" y="1018.33">
    <properties>
     <property name="reward">[{
   "type": "randomCard",
@@ -1235,7 +1235,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="259" template="../../obj/treasure.tx" x="1081" y="943.667">
+  <object id="259" template="../../../../common/maps/obj/treasure.tx" x="1081" y="943.667">
    <properties>
     <property name="reward">[{
   "type": "randomCard",
@@ -1255,7 +1255,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="260" template="../../obj/treasure.tx" x="166.667" y="668.667">
+  <object id="260" template="../../../../common/maps/obj/treasure.tx" x="166.667" y="668.667">
    <properties>
     <property name="reward">[{
   "type": "randomCard",
@@ -1274,7 +1274,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="263" template="../../obj/enemy.tx" x="1525.67" y="1161.67" width="16" height="16" visible="1">
+  <object id="263" template="../../../../common/maps/obj/enemy.tx" x="1525.67" y="1161.67" width="16" height="16" visible="1">
    <properties>
     <property name="enemy" value="Blue Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -1284,7 +1284,7 @@
     <property name="waypoints" value="182,181,182,179,180,181" />
    </properties>
   </object>
-  <object id="264" template="../../obj/shop.tx" x="272" y="1247.79" width="31.3333" height="32.4167">
+  <object id="264" template="../../../../common/maps/obj/shop.tx" x="272" y="1247.79" width="31.3333" height="32.4167">
    <properties>
     <property name="commonShopList" value="Soldier" />
     <property name="noRestock" type="bool" value="false" />
@@ -1292,7 +1292,7 @@
     <property name="signYOffset" type="float" value="-5" />
    </properties>
   </object>
-  <object id="265" template="../../obj/shop.tx" x="401.667" y="1249.12" width="31.3333" height="32.4167">
+  <object id="265" template="../../../../common/maps/obj/shop.tx" x="401.667" y="1249.12" width="31.3333" height="32.4167">
    <properties>
     <property name="commonShopList" value="Sliver" />
     <property name="noRestock" type="bool" value="false" />
@@ -1300,7 +1300,7 @@
     <property name="signYOffset" type="float" value="-5" />
    </properties>
   </object>
-  <object id="266" template="../../obj/enemy.tx" x="333" y="1328" width="16" height="16" visible="1">
+  <object id="266" template="../../../../common/maps/obj/enemy.tx" x="333" y="1328" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[
   {
