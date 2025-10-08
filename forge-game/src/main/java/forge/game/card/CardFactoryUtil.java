@@ -2864,6 +2864,7 @@ public class CardFactoryUtil {
             desc.append(")");
 
             newSA.setDescription(desc.toString());
+            newSA.putParam("Secondary", "True");
 
             newSA.setAlternativeCost(AlternativeCost.Cleave);
             newSA.setIntrinsic(intrinsic);
