@@ -426,11 +426,9 @@ public class CountersMoveAi extends SpellAbilityAi {
             // try to move to something useless or something that would leave play
             boolean isNegative = ComputerUtil.isNegativeCounter(cType, src);
             List<Card> filteredTgtList;
-            if (isNegative) {
-                filteredTgtList = CardLists.filterControlledBy(tgtCards, ai.getOpponents());
-            } else {
-                filteredTgtList = CardLists.filter(tgtCards, CardPredicates.isControlledByAnyOf(ai.getAllies()).or(CardPredicates.isController(ai)));
-            }
+            filteredTgtList = isNegative ? CardLists.filterControlledBy(tgtCards, ai.getOpponents()) :
+                CardLists.filter(tgtCards, CardPredicates.isControlledByAnyOf(ai.getAllies()).or(CardPredicates.isController(ai)));
+
             if (!filteredTgtList.isEmpty()) {
                 List<Card> best = CardLists.filter(filteredTgtList, card -> {
                     // gain from useless
