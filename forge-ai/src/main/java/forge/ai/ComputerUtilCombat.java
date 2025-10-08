@@ -2020,7 +2020,6 @@ public class ComputerUtilCombat {
         Map<Card, Integer> damageMap = Maps.newHashMap();
         Combat combat = attacker.getGame().getCombat();
 
-        // Order the combatants in preferred order
         boolean isAttacking = defender != null;
 
         // Check for Banding, Defensive Formation
@@ -2047,6 +2046,7 @@ public class ComputerUtilCombat {
             // TODO sort remaining tramplers for DamageDone triggers
         }
 
+        // Order the combatants in preferred order
         final CardCollection orderedBlockers = new CardCollection(block);
         ComputerUtilCard.sortByEvaluateCreature(orderedBlockers);
 
