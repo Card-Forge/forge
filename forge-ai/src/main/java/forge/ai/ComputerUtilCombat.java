@@ -2048,9 +2048,9 @@ public class ComputerUtilCombat {
 
         // Order the combatants in preferred order in case legacy ordering is disabled
         final boolean legacyOrderCombatants = self.getGame().getRules().hasOrderCombatants();
-        final CardCollection orderedBlockers = new CardCollection(block);
+        CardCollection orderedBlockers = new CardCollection(block);
         if (!legacyOrderCombatants) {
-            AiBlockController.orderBlockers(attacker, orderedBlockers); // assume sorted in case the legacy option is enabled
+            orderedBlockers = AiBlockController.orderBlockers(attacker, orderedBlockers); // assume sorted in case the legacy option is enabled
         }
 
         if (orderedBlockers.size() == 1) {
