@@ -427,7 +427,7 @@ public class CountersMoveAi extends SpellAbilityAi {
             boolean isNegative = ComputerUtil.isNegativeCounter(cType, src);
             List<Card> filteredTgtList;
             filteredTgtList = isNegative ? CardLists.filterControlledBy(tgtCards, ai.getOpponents()) :
-                CardLists.filter(tgtCards, CardPredicates.isControlledByAnyOf(ai.getAllies()).or(CardPredicates.isController(ai)));
+                CardLists.filterControlledBy(tgtCards, ai.getYourTeam());
 
             if (!filteredTgtList.isEmpty()) {
                 List<Card> best = CardLists.filter(filteredTgtList, card -> {
