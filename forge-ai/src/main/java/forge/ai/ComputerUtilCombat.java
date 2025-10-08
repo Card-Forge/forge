@@ -2051,9 +2051,8 @@ public class ComputerUtilCombat {
             if (combatant.isAttacking()) { 
                 opposedCombatants = AiBlockController.orderBlockers(combatant, new CardCollection(opposedCombatants));
             } else {
-                 opposedCombatants = AiBlockController.orderAttackers(combatant, new CardCollection(opposedCombatants));
+                opposedCombatants = AiBlockController.orderAttackers(combatant, new CardCollection(opposedCombatants));
             }
-            opposedCombatants = AiBlockController.orderBlockers(combatant, new CardCollection(opposedCombatants)); // assume sorted in case the legacy option is enabled
         }
 
         if (opposedCombatants.size() == 1) {
