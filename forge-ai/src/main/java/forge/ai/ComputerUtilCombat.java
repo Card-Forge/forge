@@ -2016,7 +2016,7 @@ public class ComputerUtilCombat {
      * @param defender
      * @param overrideOrder overriding combatant order
      */
-    public static Map<Card, Integer> distributeAIDamage(final Player self, final Card attacker, final CardCollectionView block, final CardCollectionView remaining, int dmgCanDeal, GameEntity defender, boolean overrideOrder) {
+    public static Map<Card, Integer> distributeAIDamage(final Player self, final Card attacker, CardCollectionView block, final CardCollectionView remaining, int dmgCanDeal, GameEntity defender, boolean overrideOrder) {
         Map<Card, Integer> damageMap = Maps.newHashMap();
         Combat combat = attacker.getGame().getCombat();
 
@@ -2047,14 +2047,12 @@ public class ComputerUtilCombat {
         }
 
         // Order the combatants in preferred order in case legacy ordering is disabled
-        final boolean legacyOrderCombatants = self.getGame().getRules().hasOrderCombatants();
-        CardCollection orderedBlockers = new CardCollection(block);
-        if (!legacyOrderCombatants) {
-            orderedBlockers = AiBlockController.orderBlockers(attacker, orderedBlockers); // assume sorted in case the legacy option is enabled
+        if (!self.getGame().getRules().hasOrderCombatants()) {
+            block = AiBlockController.orderBlockers(attacker, new CardCollection(block)); // assume sorted in case the legacy option is enabled
         }
 
-        if (orderedBlockers.size() == 1) {
-            final Card blocker = orderedBlockers.getFirst();
+        if (block.size() == 1) {
+            final Card blocker = block.getFirst();
             int dmgToBlocker = dmgCanDeal;
 
             if (hasTrample && isAttacking && !aiDistributesBandingDmg) { // otherwise no entity to deliver damage via trample
@@ -2077,7 +2075,7 @@ public class ComputerUtilCombat {
             // Does the attacker deal lethal damage to all blockers
             //Blocking Order now determined after declare blockers
             Card lastBlocker = null;
-            for (final Card b : orderedBlockers) {
+            for (final Card b : block) {
                 lastBlocker = b;
                 final int dmgToKill = getEnoughDamageToKill(b, dmgCanDeal, attacker, true);
                 if (dmgToKill <= dmgCanDeal) {
@@ -2104,7 +2102,7 @@ public class ComputerUtilCombat {
         } else {
             // In the event of Banding or Defensive Formation, assign max damage to the blocker who
             // can tank all the damage or to the worst blocker to lose as little as possible
-            for (final Card b : orderedBlockers) {
+            for (final Card b : block) {
                 final int dmgToKill = getEnoughDamageToKill(b, dmgCanDeal, attacker, true);
                 if (dmgToKill > dmgCanDeal) {
                     damageMap.put(b, dmgCanDeal);
@@ -2112,7 +2110,7 @@ public class ComputerUtilCombat {
                 }
             }
             if (damageMap.isEmpty()) {
-                damageMap.put(ComputerUtilCard.getWorstCreatureAI(orderedBlockers), dmgCanDeal);
+                damageMap.put(ComputerUtilCard.getWorstCreatureAI(block), dmgCanDeal);
             }
         }
         return damageMap;
