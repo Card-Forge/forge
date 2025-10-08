@@ -57,6 +57,42 @@ public abstract class PaperCardPredicates {
         return new PredicateFoil(isFoil);
     }
 
+    /**
+     * Filters cards that were printed in any of the specified editions.
+     */
+    public static Predicate<PaperCard> printedInAnyEditions(final String[] editionCodes) {
+        Set<String> editions = new HashSet<>(Arrays.asList(editionCodes));
+
+        return card -> StaticData.instance().getCommonCards().getAllCards(card.getName()).stream()
+            .map(PaperCard::getEdition).anyMatch(editionCode ->
+                editions.contains(editionCode) &&
+                    StaticData.instance().getCardEdition(editionCode).isCardObtainable(card.getName())
+        );
+    }
+
+    /**
+     * Filters cards that only printed in any of the specified editions.
+     */
+    public static Predicate<PaperCard> onlyPrintedInEditions(final String[] editionCodes) {
+        Set<String> editions = new HashSet<>(Arrays.asList(editionCodes));
+
+        return card -> StaticData.instance().getCommonCards().getAllCards(card.getName()).stream()
+            .map(PaperCard::getEdition).allMatch(editionCode ->
+                editions.contains(editionCode) &&
+                    StaticData.instance().getCardEdition(editionCode).isCardObtainable(card.getName())
+        );
+    }
+
+    /**
+     * Filters cards that are obtainable in any edition.
+     */
+    public static Predicate<PaperCard> isObtainableAnyEdition() {
+        return card -> StaticData.instance().getCommonCards().getAllCards(card.getName()).stream()
+            .map(PaperCard::getEdition).anyMatch(editionCode ->
+                StaticData.instance().getCardEdition(editionCode).isCardObtainable(card.getName())
+            );
+    }
+
     private static final class PredicatePrintedWithRarity implements Predicate<PaperCard> {
         private final CardRarity matchingRarity;
 
