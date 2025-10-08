@@ -492,7 +492,7 @@ public class Combat {
 
     /** If there are multiple blockers, the Attacker declares the Assignment Order */
     public void orderBlockersForDamageAssignment(Card attacker, CardCollection blockers) { // this method performs controller's role
-        if (blockers.size() <= 1 || (!this.legacyOrderCombatants && !playerWhoAttacks.isAI())) {
+        if (blockers.size() <= 1 || !this.legacyOrderCombatants) {
             blockersOrderedForDamageAssignment.get().put(attacker, new CardCollection(blockers));
             return;
         }
@@ -529,7 +529,7 @@ public class Combat {
         final CardCollection oldBlockers = blockersOrderedForDamageAssignment.get().get(attacker);
         if (oldBlockers == null || oldBlockers.isEmpty()) {
             blockersOrderedForDamageAssignment.get().put(attacker, new CardCollection(blocker));
-        } else if (this.legacyOrderCombatants || playerWhoAttacks.isAI()) {
+        } else if (this.legacyOrderCombatants) {
             CardCollection orderedBlockers = playerWhoAttacks.getController().orderBlocker(attacker, blocker, oldBlockers);
             blockersOrderedForDamageAssignment.get().put(attacker, orderedBlockers);
         } else {
@@ -550,7 +550,7 @@ public class Combat {
         // They need a reverse map here: Blocker => List<Attacker>
 
         Player blockerCtrl = blocker.getController();
-        CardCollection orderedAttacker = attackers.size() <= 1 || (!this.legacyOrderCombatants && !blockerCtrl.getController().isAI()) ? attackers : blockerCtrl.getController().orderAttackers(blocker, attackers);
+        CardCollection orderedAttacker = attackers.size() <= 1 || !this.legacyOrderCombatants ? attackers : blockerCtrl.getController().orderAttackers(blocker, attackers);
 
         // Damage Ordering needs to take cards like Melee into account, is that happening?
         attackersOrderedForDamageAssignment.get().put(blocker, orderedAttacker);
