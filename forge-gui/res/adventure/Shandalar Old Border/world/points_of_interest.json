@@ -45,7 +45,7 @@
 			"BarbarianCamp",
 			"BiomeRed",
 			"Sidequest"
-	]
+		]
 	},
 	{
 		"name": "KorEncampment",
@@ -62,7 +62,7 @@
 			"BiomeRed",
 			"BiomeWhite",
 			"Sidequest"
-	]
+		]
 	},
 	{
 		"name": "BarbarianCamp2",
@@ -135,7 +135,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "black_castle",
-		"map": "../common/maps/map/main_story/castles/black_castle.tmx",
+		"map": "maps/map/main_story/castles/black_castle.tmx",
 		"radiusFactor": 0.01,
 		"offsetX": 0.1,
 		"offsetY": -0.1,
@@ -162,7 +162,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "blue_castle",
-		"map": "../common/maps/map/main_story/castles/blue_castle.tmx",
+		"map": "maps/map/main_story/castles/blue_castle.tmx",
 		"radiusFactor": 0.01,
 		"offsetX": 0.1,
 		"offsetY": 0.1,
@@ -189,7 +189,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "FortBlue",
-		"map": "../common/maps/map/fort/fort_blue_1_pirate.tmx",
+		"map": "maps/map/fort/fort_blue_1_pirate.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -268,7 +268,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "FortBlue",
-		"map": "../common/maps/map/fort/fort_blue_5_temple.tmx",
+		"map": "maps/map/fort/fort_blue_5_temple.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -458,7 +458,7 @@
 			"Hostile",
 			"BiomeBlack",
 			"Sidequest"
-	]
+		]
 	},
 	{
 		"name": "CaveZombie",
@@ -473,7 +473,7 @@
 			"Cave",
 			"Hostile",
 			"BiomeBlack"
-	]
+		]
 	},
 	{
 		"name": "CaveKobold",
@@ -488,7 +488,7 @@
 			"Cave",
 			"Hostile",
 			"BiomeBlack"
-	]
+		]
 	},
 	{
 		"name": "CaveReptile",
@@ -503,7 +503,7 @@
 			"Cave",
 			"Hostile",
 			"BiomeGreen"
-	]
+		]
 	},
 	{
 		"name": "CaveTroll",
@@ -518,7 +518,7 @@
 			"Cave",
 			"Hostile",
 			"BiomeColorless"
-	]
+		]
 	},
 	{
 		"name": "CaveLarge1",
@@ -1541,7 +1541,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "colorless_castle",
-		"map": "../common/maps/map/emrakul/emrakul_legacy.tmx",
+		"map": "maps/map/emrakul/emrakul_legacy.tmx",
 		"radiusFactor": 0.4,
 		"questTags": [
 			"Castle",
@@ -1584,7 +1584,7 @@
 		"type": "dungeon",
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "WurmPond",
-		"map": "../common/maps/map/debug_map.tmx",
+		"map": "maps/map/debug_map.tmx",
 		"radiusFactor": 5
 	},
 	{
@@ -1594,7 +1594,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "DjinnPalace",
-		"map": "../common/maps/map/djinnpalace/djinpalace_entrance.tmx",
+		"map": "maps/map/djinnpalace/djinpalace_entrance.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"DjinnPalace",
@@ -1608,7 +1608,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "DjinnPalace",
-		"map": "../common/maps/map/djinnpalace/djinpalace_entrance.tmx",
+		"map": "maps/map/djinnpalace/djinpalace_entrance.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"DjinnPalace",
@@ -1669,7 +1669,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "EvilGrove",
-		"map": "../common/maps/map/evilgrove/evilgrove_1_zombie.tmx",
+		"map": "maps/map/evilgrove/evilgrove_1_zombie.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"EvilGrove",
@@ -1701,7 +1701,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "EvilGrove",
-		"map": "../common/maps/map/evilgrove/evilgrove_3_gravetitan.tmx",
+		"map": "maps/map/evilgrove/evilgrove_3_gravetitan.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"EvilGrove",
@@ -1966,7 +1966,7 @@
 			"Dungeon",
 			"Fort",
 			"Sidequest"
-	]
+		]
 	},
 	{
 		"name": "Fort3",
@@ -2103,7 +2103,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Garruk",
-		"map": "../common/maps/map/garruk/garruk.tmx",
+		"map": "maps/map/garruk/garruk.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Boss",
@@ -2134,7 +2134,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "green_castle",
-		"map": "../common/maps/map/main_story/castles/green_castle.tmx",
+		"map": "maps/map/main_story/castles/green_castle.tmx",
 		"radiusFactor": 0.01,
 		"offsetX": -0.1,
 		"offsetY": 0.1,
@@ -2236,7 +2236,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Grolnok",
-		"map": "../common/maps/map/grolnok/grolnok.tmx",
+		"map": "maps/map/grolnok/grolnok.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Boss",
@@ -2251,7 +2251,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Grove",
-		"map": "../common/maps/map/grove/grove_1_bears.tmx",
+		"map": "maps/map/grove/grove_1_bears.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"BiomeGreen",
@@ -2363,7 +2363,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Grove",
-		"map": "../common/maps/map/grove/grove_8_hydra.tmx",
+		"map": "maps/map/grove/grove_8_hydra.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"BiomeGreen",
@@ -2515,7 +2515,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Jace",
-		"map": "../common/maps/map/jacetower/jacehold.tmx",
+		"map": "maps/map/jacetower/jacehold.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Boss",
@@ -3017,7 +3017,7 @@
 			"MerfolkPool",
 			"Hostile",
 			"Sidequest"
-	]
+		]
 	},
 	{
 		"name": "MerfolkPool5",
@@ -3031,7 +3031,7 @@
 		"questTags": [
 			"MerfolkPool",
 			"Hostile"
-	]
+		]
 	},
 	{
 		"name": "MerfolkPool1",
@@ -3252,7 +3252,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Nahiri",
-		"map": "../common/maps/map/nahiri/nahiri.tmx",
+		"map": "maps/map/nahiri/nahiri.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Boss",
@@ -3540,7 +3540,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "red_castle",
-		"map": "../common/maps/map/main_story/castles/red_castle.tmx",
+		"map": "maps/map/main_story/castles/red_castle.tmx",
 		"radiusFactor": 0.01,
 		"offsetX": -0.1,
 		"offsetY": -0.1,
@@ -3584,7 +3584,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "SkullCave",
-		"map": "../common/maps/map/skullcave/skullcave_2.tmx",
+		"map": "maps/map/skullcave/skullcave_2.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -3714,7 +3714,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "farm",
-		"map": "../common/maps/map/fort/fort_green_4_scarecrowfarm.tmx",
+		"map": "maps/map/fort/fort_green_4_scarecrowfarm.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Boss",
@@ -3745,7 +3745,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Skep",
-		"map": "../common/maps/map/skep/skep_outer.tmx",
+		"map": "maps/map/skep/skep_outer.tmx",
 		"radiusFactor": 0.5,
 		"questTags": [
 			"Boss",
@@ -3777,7 +3777,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "SkullCave",
-		"map": "../common/maps/map/skullcave/skullcave_2.tmx",
+		"map": "maps/map/skullcave/skullcave_2.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -3908,7 +3908,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "hall_of_flame",
-		"map": "../common/maps/map/main_story/templeofchandra.tmx",
+		"map": "maps/map/main_story/templeofchandra.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Story",
@@ -4034,7 +4034,7 @@
 			"BiomeBlack",
 			"Dungeon",
 			"Sidequest"
-	]
+		]
 	},
 	{
 		"name": "VampireCastle3",
@@ -4050,7 +4050,7 @@
 			"Hostile",
 			"BiomeBlack",
 			"Dungeon"
-	]
+		]
 	},
 	{
 		"name": "Waste Town Generic",
@@ -4107,7 +4107,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "white_castle",
-		"map": "../common/maps/map/main_story/castles/white_castle.tmx",
+		"map": "maps/map/main_story/castles/white_castle.tmx",
 		"radiusFactor": 0.01,
 		"offsetY": 0.1,
 		"questTags": [
