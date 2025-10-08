@@ -2852,6 +2852,22 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(sbClass.toString(), card);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
+        } else if (keyword.startsWith("Cleave")) {
+            final String[] k = keyword.split(":");
+            final Cost cost = new Cost(k[1], false);
+
+            final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(cost);
+
+            final StringBuilder desc = new StringBuilder();
+            desc.append("Cleave ").append(cost.toSimpleString()).append(" (");
+            desc.append(inst.getReminderText());
+            desc.append(")");
+
+            newSA.setDescription(desc.toString());
+
+            newSA.setAlternativeCost(AlternativeCost.Cleave);
+            newSA.setIntrinsic(intrinsic);
+            inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Dash")) {
             final String[] k = keyword.split(":");
             final Cost dashCost = new Cost(k[1], false);
