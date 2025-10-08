@@ -2050,7 +2050,7 @@ public class ComputerUtilCombat {
         final boolean legacyOrderCombatants = self.getGame().getRules().hasOrderCombatants();
         final CardCollection orderedBlockers = new CardCollection(block);
         if (!legacyOrderCombatants) {
-            ComputerUtilCard.sortByEvaluateCreature(orderedBlockers); // assume sorted in case the legacy option is enabled
+            AiBlockController.orderBlockers(attacker, orderedBlockers); // assume sorted in case the legacy option is enabled
         }
 
         if (orderedBlockers.size() == 1) {
