@@ -424,16 +424,20 @@ public class CountersMoveAi extends SpellAbilityAi {
 
             // move counter to opponents creature but only if you can not steal them
             // try to move to something useless or something that would leave play
-            List<Card> oppList = CardLists.filterControlledBy(tgtCards, ai.getOpponents());
-            if (!oppList.isEmpty()) {
-                List<Card> best = CardLists.filter(oppList, card -> {
+            boolean isNegative = ComputerUtil.isNegativeCounter(cType, src);
+            List<Card> filteredTgtList;
+            filteredTgtList = isNegative ? CardLists.filterControlledBy(tgtCards, ai.getOpponents()) :
+                CardLists.filter(tgtCards, CardPredicates.isControlledByAnyOf(ai.getAllies()).or(CardPredicates.isController(ai)));
+
+            if (!filteredTgtList.isEmpty()) {
+                List<Card> best = CardLists.filter(filteredTgtList, card -> {
                     // gain from useless
-                    if (!ComputerUtilCard.isUselessCreature(ai, card)) {
+                    if (isNegative && !ComputerUtilCard.isUselessCreature(ai, card)) {
                         return true;
                     }
 
                     // source would leave the game
-                    if (!card.hasSVar("EndOfTurnLeavePlay")) {
+                    if (isNegative && !card.hasSVar("EndOfTurnLeavePlay")) {
                         return true;
                     }
 
@@ -441,7 +445,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                 });
 
                 if (best.isEmpty()) {
-                    best = oppList;
+                    best = filteredTgtList;
                 }
 
                 Card card = ComputerUtilCard.getBestCreatureAI(best);
