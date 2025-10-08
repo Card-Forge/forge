@@ -2046,9 +2046,12 @@ public class ComputerUtilCombat {
             // TODO sort remaining tramplers for DamageDone triggers
         }
 
-        // Order the combatants in preferred order
+        // Order the combatants in preferred order in case legacy ordering is disabled
+        final boolean legacyOrderCombatants = self.getGame().getRules().hasOrderCombatants();
         final CardCollection orderedBlockers = new CardCollection(block);
-        ComputerUtilCard.sortByEvaluateCreature(orderedBlockers);
+        if (!legacyOrderCombatants) {
+            ComputerUtilCard.sortByEvaluateCreature(orderedBlockers); // assume sorted in case the legacy option is enabled
+        }
 
         if (orderedBlockers.size() == 1) {
             final Card blocker = orderedBlockers.getFirst();
