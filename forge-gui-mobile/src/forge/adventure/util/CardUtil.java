@@ -9,6 +9,7 @@ import forge.adventure.data.GeneratedDeckData;
 import forge.adventure.data.GeneratedDeckTemplateData;
 import forge.adventure.data.RewardData;
 import forge.card.*;
+import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -499,67 +500,83 @@ public class CardUtil {
     }
 
     private static List<PaperCard> fillWithLands(List<PaperCard> nonLands, GeneratedDeckTemplateData template) {
-        int red=0;
-        int blue=0;
-        int green=0;
-        int white=0;
-        int black=0;
-        int colorLess=0;
-        int cardCount=nonLands.size();
-        List<PaperCard> cards=new ArrayList<>();
-        boolean allCardVariants=Config.instance().getSettingData().useAllCardVariants;
+        int red = 0, blue = 0, green = 0, white = 0, black = 0, colorless = 0;
+        int cardCount = nonLands.size();
+        List<PaperCard> cards = new ArrayList<>();
+        boolean allCardVariants = Config.instance().getSettingData().useAllCardVariants;
+        boolean useSnowLands = false;
 
-        for(PaperCard nonLand:nonLands)
-        {
-            red+=nonLand.getRules().getManaCost().getShardCount(ManaCostShard.RED);
-            green+=nonLand.getRules().getManaCost().getShardCount(ManaCostShard.GREEN);
-            white+=nonLand.getRules().getManaCost().getShardCount(ManaCostShard.WHITE);
-            blue+=nonLand.getRules().getManaCost().getShardCount(ManaCostShard.BLUE);
-            black+=nonLand.getRules().getManaCost().getShardCount(ManaCostShard.BLACK);
-            colorLess+=nonLand.getRules().getManaCost().getShardCount(ManaCostShard.GENERIC);
+        for (PaperCard nonLand : nonLands) {
+            CardRules rules = nonLand.getRules();
+            ManaCost manaCost = rules.getManaCost();
+
+            red += manaCost.getShardCount(ManaCostShard.RED);
+            green += manaCost.getShardCount(ManaCostShard.GREEN);
+            white += manaCost.getShardCount(ManaCostShard.WHITE);
+            blue += manaCost.getShardCount(ManaCostShard.BLUE);
+            black += manaCost.getShardCount(ManaCostShard.BLACK);
+            colorless += manaCost.getShardCount(ManaCostShard.COLORLESS);
+
+            // Check for Snow lands requirement
+            if (!useSnowLands) {
+                if (manaCost.getShardCount(ManaCostShard.S) > 0) {
+                    useSnowLands = true;
+                    continue;
+                }
+
+                if (rules.getAiHints() != null && rules.getAiHints().getDeckHints() != null) {
+                    useSnowLands = rules.getAiHints().getDeckHints().contains(Type.TYPE, "Snow");
+                }
+            }
         }
-        float sum= red+ blue+ green+ white+ black;
-        int neededLands=template.count-cardCount;
-        int neededDualLands= Math.round (neededLands*template.rares);
-        int neededBase=neededLands-neededDualLands;
+
+        float sumColoredCost = red + blue + green + white + black;
+        int neededLands = template.count - cardCount;
+        int neededDualLands = Math.round(neededLands * template.rares);
+        int neededBase = neededLands - neededDualLands;
         String edition = "";
+
         if (allCardVariants) {
             PaperCard templateLand = CardUtil.getCardByName("Plains");
             edition = templateLand.getEdition();
         }
-        if(sum==0.)
-        {
-            cards.addAll(generateLands("Wastes",neededLands));
-        }
-        else
-        {
-            int mount=Math.round(neededBase*(red/sum));
-            int island=Math.round(neededBase*(blue/sum));
-            int forest=Math.round(neededBase*(green/sum));
-            int plains=Math.round(neededBase*(white/sum));
-            int swamp=Math.round(neededBase*(black/sum));
-            cards.addAll(generateLands("Plains",plains,edition));
-            cards.addAll(generateLands("Island",island,edition));
-            cards.addAll(generateLands("Forest",forest,edition));
-            cards.addAll(generateLands("Mountain",mount,edition));
-            cards.addAll(generateLands("Swamp",swamp,edition));
-            List<String> landTypes=new ArrayList<>();
-            if(mount>0)
-                landTypes.add("Mountain");
-            if(island>0)
-                landTypes.add("Island");
-            if(plains>0)
-                landTypes.add("Plains");
-            if(swamp>0)
-                landTypes.add("Swamp");
-            if(forest>0)
-                landTypes.add("Forest");
-            cards.addAll(generateDualLands(landTypes,neededDualLands));
 
+        if (sumColoredCost == 0) {
+            cards.addAll(generateLands("Wastes", neededLands));
+        } else {
+            float sumTotalCost = sumColoredCost + colorless;
+
+            int mountain = Math.round(neededBase * (red / sumTotalCost));
+            int island = Math.round(neededBase * (blue / sumTotalCost));
+            int forest = Math.round(neededBase * (green / sumTotalCost));
+            int plains = Math.round(neededBase * (white / sumTotalCost));
+            int swamp = Math.round(neededBase * (black / sumTotalCost));
+            int wastes = Math.round(neededBase * (colorless / sumTotalCost));
+
+            cards.addAll(generateLands(useSnowLands ? "Snow-Covered Plains" : "Plains", plains, edition));
+            cards.addAll(generateLands(useSnowLands ? "Snow-Covered Island" : "Island", island, edition));
+            cards.addAll(generateLands(useSnowLands ? "Snow-Covered Forest" : "Forest", forest, edition));
+            cards.addAll(generateLands(useSnowLands ? "Snow-Covered Mountain" : "Mountain", mountain, edition));
+            cards.addAll(generateLands(useSnowLands ? "Snow-Covered Swamp" : "Swamp", swamp, edition));
+            cards.addAll(generateLands(useSnowLands ? "Snow-Covered Wastes" : "Wastes", wastes, edition));
+
+            List<String> landTypes = new ArrayList<>();
+            if (mountain > 0)
+                landTypes.add("Mountain");
+            if (island > 0)
+                landTypes.add("Island");
+            if (plains > 0)
+                landTypes.add("Plains");
+            if (swamp > 0)
+                landTypes.add("Swamp");
+            if (forest > 0)
+                landTypes.add("Forest");
+
+            cards.addAll(generateDualLands(landTypes, neededDualLands));
         }
+
         return cards;
     }
-
     private static Collection<PaperCard> generateDualLands(List<String> landName, int count) {
         ArrayList<RewardData> rewards=new ArrayList<>();
         RewardData base= new RewardData();
@@ -737,14 +754,14 @@ public class CardUtil {
             if (deck != null)
                 return deck;
         }
+        
         Json json = new Json();
         FileHandle handle = Config.instance().getFile(path);
         if (handle.exists())
             return generateDeck(json.fromJson(GeneratedDeckData.class, handle), starterEdition, discourageDuplicates);
         Deck deck = DeckgenUtil.getRandomOrPreconOrThemeDeck(colors, true, false, true);
-        System.err.println("Error loading JSON: " + handle.path() + "\nGenerating random deck: "+deck.getName());
+        System.err.println("Error loading JSON: " + handle.path() + "\nGenerating random deck: " + deck.getName());
         return deck;
-
     }
 
     private static final GameFormat.Collection  formats   = FModel.getFormats();
