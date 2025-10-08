@@ -2020,6 +2020,7 @@ public class ComputerUtilCombat {
         Map<Card, Integer> damageMap = Maps.newHashMap();
         Combat combat = attacker.getGame().getCombat();
 
+        // Order the combatants in preferred order
         boolean isAttacking = defender != null;
 
         // Check for Banding, Defensive Formation
@@ -2046,8 +2047,11 @@ public class ComputerUtilCombat {
             // TODO sort remaining tramplers for DamageDone triggers
         }
 
-        if (block.size() == 1) {
-            final Card blocker = block.getFirst();
+        final CardCollection orderedBlockers = new CardCollection(block);
+        ComputerUtilCard.sortByEvaluateCreature(orderedBlockers);
+
+        if (orderedBlockers.size() == 1) {
+            final Card blocker = orderedBlockers.getFirst();
             int dmgToBlocker = dmgCanDeal;
 
             if (hasTrample && isAttacking && !aiDistributesBandingDmg) { // otherwise no entity to deliver damage via trample
@@ -2070,7 +2074,7 @@ public class ComputerUtilCombat {
             // Does the attacker deal lethal damage to all blockers
             //Blocking Order now determined after declare blockers
             Card lastBlocker = null;
-            for (final Card b : block) {
+            for (final Card b : orderedBlockers) {
                 lastBlocker = b;
                 final int dmgToKill = getEnoughDamageToKill(b, dmgCanDeal, attacker, true);
                 if (dmgToKill <= dmgCanDeal) {
@@ -2097,7 +2101,7 @@ public class ComputerUtilCombat {
         } else {
             // In the event of Banding or Defensive Formation, assign max damage to the blocker who
             // can tank all the damage or to the worst blocker to lose as little as possible
-            for (final Card b : block) {
+            for (final Card b : orderedBlockers) {
                 final int dmgToKill = getEnoughDamageToKill(b, dmgCanDeal, attacker, true);
                 if (dmgToKill > dmgCanDeal) {
                     damageMap.put(b, dmgCanDeal);
@@ -2105,7 +2109,7 @@ public class ComputerUtilCombat {
                 }
             }
             if (damageMap.isEmpty()) {
-                damageMap.put(ComputerUtilCard.getWorstCreatureAI(block), dmgCanDeal);
+                damageMap.put(ComputerUtilCard.getWorstCreatureAI(orderedBlockers), dmgCanDeal);
             }
         }
         return damageMap;
