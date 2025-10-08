@@ -177,16 +177,16 @@ public class ComputerUtilCombat {
     public static int damageIfUnblocked(final Card attacker, final GameEntity attacked, final Combat combat, boolean withoutAbilities) {
         int damage = attacker.getNetCombatDamage();
         int sum = 0;
-        if (attacked instanceof Player player && !player.canLoseLife()) {
-            return 0;
-        }
-
-        // ask ReplacementDamage directly
-        if (isCombatDamagePrevented(attacker, attacked, damage)) {
+        if (attacked instanceof Player p && !p.canLoseLife()) {
             return 0;
         }
 
         if (!attacker.hasKeyword(Keyword.INFECT)) {
+            // ask ReplacementDamage directly
+            if (isCombatDamagePrevented(attacker, attacked, damage)) {
+                return 0;
+            }
+
             damage += predictPowerBonusOfAttacker(attacker, null, combat, withoutAbilities);
             sum = predictDamageTo(attacked, damage, attacker, true);
             if (attacker.hasDoubleStrike()) {
