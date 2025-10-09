@@ -106,7 +106,11 @@ public class MessageUtil {
         for (int i = 0; i < parts.length; i++) {
             if (i > 0) {
                 if (i == parts.length - 1) {
-                    sb.append(" or ");
+                    if (pluralize) {
+                        sb.append(" and/or ");
+                    } else {
+                        sb.append(" or ");
+                    }
                 } else {
                     sb.append(", ");
                 }
@@ -154,7 +158,8 @@ public class MessageUtil {
 
                 // Prefixes
                 switch (pOrS) {
-                    case "Other" -> {
+                    case "Other":
+                    case "NotDefinedOriginalHost":
                         if (hasOther) {
                             continue;
                         }
@@ -163,17 +168,14 @@ public class MessageUtil {
                         prefixes.append(currentTerm);
                         hasOther = true;
                         continue;
-                    }
-                    case "untapped" -> {
+                    case "untapped":
                         currentTerm += " untapped";
                         prefixes.append(currentTerm);
                         continue;
-                    }
-                    case "tapped" -> {
+                    case "tapped":
                         currentTerm += " tapped";
                         prefixes.append(currentTerm);
                         continue;
-                    }
                 }
 
                 if (CardType.Supertype.isValidEnum(pOrS) ||
@@ -183,15 +185,6 @@ public class MessageUtil {
                     continue;
                 }
 
-                if (CardType.isASubType(pOrS)) {
-                    if (isNegated) {
-                        currentTerm += "-";
-                    }
-                    currentTerm += StringUtils.capitalize(pOrS.toLowerCase());
-                    prefixes.append(currentTerm);
-                    continue;
-                }
-                
                 // Suffixes
                 switch (pOrS) {
                     case "YouOwn" -> {
@@ -271,6 +264,22 @@ public class MessageUtil {
                         suffixes.append(currentTerm);
                     }
 
+                    continue;
+                }
+
+                // Special case: subtype
+                if (CardType.isASubType(pOrS)) {
+                    if (isNegated) {
+                        currentTerm += "-";
+                    }
+                    currentTerm += StringUtils.capitalize(pOrS.toLowerCase());
+
+                    if (!isNegated && !isCoreType) {
+                        suffixes.append(currentTerm);
+                    } else {
+                        prefixes.append(currentTerm);
+                    }
+                    
                     continue;
                 }
 
