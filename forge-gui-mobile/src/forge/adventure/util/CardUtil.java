@@ -250,8 +250,7 @@ public class CardUtil {
                 this.colors = 0;
                 for (String color : type.colors) {
                     if ("colorID".equals(color))
-                        for (byte c : Current.player().getColorIdentity())
-                            colors |= c;
+                        colors |= Current.player().getColorIdentity().getColor();
                     else
                         colors |= MagicColor.fromName(color.toLowerCase());
                 }
