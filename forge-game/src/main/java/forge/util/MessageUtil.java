@@ -101,7 +101,7 @@ public class MessageUtil {
     public static String complexTargetTypesToString(String types, boolean pluralize, String splitRegex) {
         String[] parts = types.split(splitRegex);
         StringBuilder sb = new StringBuilder();
-        boolean hasOther = false;
+        boolean hasOtherGlobal = false;
 
         for (int i = 0; i < parts.length; i++) {
             if (i > 0) {
@@ -130,6 +130,10 @@ public class MessageUtil {
             }
 
             if (currentTypeTargetParts.length == 1) {
+                // Handle cases where the first one is "other" and not the rest
+                if (hasOtherGlobal) {
+                    baseType = (Lang.startsWithVowel(baseType) ? "an " : "a ") + baseType;
+                }
                 sb.append(baseType);
                 continue;
             }
@@ -137,6 +141,7 @@ public class MessageUtil {
             StringBuilder prefixes = new StringBuilder();
             StringBuilder suffixes = new StringBuilder();
             String[] prefixesAndSuffixesParts = currentTypeTargetParts[1].split("\\+");
+            boolean hasOtherCurrent = false;
 
             for (String pOrS : prefixesAndSuffixesParts) {
                 String currentTerm = "";
@@ -160,13 +165,15 @@ public class MessageUtil {
                 switch (pOrS) {
                     case "Other":
                     case "NotDefinedOriginalHost":
-                        if (hasOther) {
+                        hasOtherCurrent = true;
+
+                        if (hasOtherGlobal) {
                             continue;
                         }
 
                         currentTerm += pluralize ? "other " : "another ";
                         prefixes.append(currentTerm);
-                        hasOther = true;
+                        hasOtherGlobal = true;
                         continue;
                     case "untapped":
                         currentTerm += " untapped";
@@ -204,6 +211,11 @@ public class MessageUtil {
                     }
                     case "OppOwn" -> {
                         currentTerm += " an opponent owns";
+                        suffixes.append(currentTerm);
+                        continue;
+                    }
+                    case "ChosenType" -> {
+                        currentTerm += " of the chosen type";
                         suffixes.append(currentTerm);
                         continue;
                     }
@@ -289,12 +301,19 @@ public class MessageUtil {
                 System.out.println("Warning: unsupported term found: \"" + pOrS + "\"");
             }
 
-            sb.append(prefixes).append(" ");
-            // Anje, Maid of Dishonor
-            if (!isCoreType && i > 0) {
-                baseType = Lang.startsWithVowel(baseType) ? "an " : "a " + baseType;
+            // Handle cases where the first one is "other" and not the rest
+            if (hasOtherGlobal && !hasOtherCurrent) {
+                if (!prefixes.isEmpty()) {
+                    prefixes.insert(0, Lang.startsWithVowel(prefixes.toString()) ? "an " : "a ");
+                } else {
+                    baseType = (Lang.startsWithVowel(baseType) ? "an " : "a ") + baseType;
+                }
             }
-            sb.append(baseType).append(" ");
+
+            sb.append(prefixes).append(" ");
+            if (!baseType.isEmpty()) {
+                sb.append(baseType).append(" ");
+            }
             sb.append(suffixes);
         }
 
