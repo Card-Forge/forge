@@ -115,7 +115,7 @@ public abstract class CostPart implements Comparable<CostPart>, Cloneable, Seria
 
         Integer convertAmount = convertAmount();
         boolean isPlural = convertAmount == null || convertAmount != 1;
-        String typeString = MessageUtil.complexTargetTypesToString(this.getType(), isPlural);
+        String typeString = MessageUtil.complexTargetTypesToString(this.getType(), isPlural, ";");
         StringBuilder sb = new StringBuilder();
 
         if (convertAmount == null) {

@@ -98,8 +98,8 @@ public class MessageUtil {
         return what == null ? "(null)" : what == player ? Localizer.getInstance().getMessage("lblYou") : what.toString();
     }
 
-    public static String complexTargetTypesToString(String types, boolean pluralize) {
-        String[] parts = types.split(";");
+    public static String complexTargetTypesToString(String types, boolean pluralize, String splitRegex) {
+        String[] parts = types.split(splitRegex);
         StringBuilder sb = new StringBuilder();
         boolean hasOther = false;
 

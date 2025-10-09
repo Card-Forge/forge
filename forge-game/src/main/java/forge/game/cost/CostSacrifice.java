@@ -100,7 +100,7 @@ public class CostSacrifice extends CostPartWithList {
                 Integer convertAmount = convertAmount();
                 boolean isPlural = convertAmount == null || convertAmount != 1;
 
-                String typeString = MessageUtil.complexTargetTypesToString(this.getType(), isPlural);
+                String typeString = MessageUtil.complexTargetTypesToString(this.getType(), isPlural, ";");
 
                 if (getAmount().equals("X")) {
                     sb.append("any number of ");
@@ -116,7 +116,7 @@ public class CostSacrifice extends CostPartWithList {
                     }
                 }
 
-                sb.append(MessageUtil.complexTargetTypesToString(this.getType(), isPlural));
+                sb.append(MessageUtil.complexTargetTypesToString(this.getType(), isPlural, ";"));
             } else {
                 sb.append(this.getTypeDescription());
             }
