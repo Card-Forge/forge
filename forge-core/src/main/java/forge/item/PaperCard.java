@@ -251,7 +251,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         this.artist = artist;
         this.collectorNumber = (collectorNumber != null && !collectorNumber.isEmpty()) ? collectorNumber : IPaperCard.NO_COLLECTOR_NUMBER;
         this.functionalVariant = functionalVariant != null ? functionalVariant : IPaperCard.NO_FUNCTIONAL_VARIANT;
-        this.displayName = resolveDisplayName(rules, functionalVariant);
+        this.displayName = rules.getDisplayNameForVariant(functionalVariant);
         // If the user changes the language this will make cards sort by the old language until they restart the game.
         // This is a good tradeoff
         this.sortableName = TextUtil.toSortableName(CardTranslation.getTranslatedName(displayName));
@@ -315,24 +315,6 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     @Override
     public String getDisplayName() {
         return this.displayName;
-    }
-
-    private static String resolveDisplayName(CardRules rules, String functionalVariant) {
-        if(functionalVariant == null) {
-            return CardTranslation.getTranslatedName(rules.getName());
-        }
-        ICardFace mainFace = getVariantForFace(rules.getMainPart(), functionalVariant);
-        if(rules.getSplitType().getAggregationMethod() == CardSplitType.FaceSelectionMethod.COMBINE) {
-            ICardFace otherFace = getVariantForFace(rules.getOtherPart(), functionalVariant);
-            return resolveDisplayName(mainFace) + " // " + resolveDisplayName(otherFace);
-        }
-        else
-            return resolveDisplayName(mainFace);
-    }
-    private static String resolveDisplayName(ICardFace face) {
-        if(face.getFlavorName() != null)
-            return face.getFlavorName();
-        return face.getName();
     }
 
     private transient Set<String> searchableNames = null;
@@ -602,14 +584,11 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     }
 
     private ICardFace getVariantForFace(ICardFace face) {
-        return getVariantForFace(face, this.functionalVariant);
-    }
-    private static ICardFace getVariantForFace(ICardFace face, String functionalVariant) {
-        if(!face.hasFunctionalVariants() || functionalVariant.equals(NO_FUNCTIONAL_VARIANT))
+        if(!face.hasFunctionalVariants() || this.functionalVariant.equals(NO_FUNCTIONAL_VARIANT))
             return face;
-        ICardFace variant = face.getFunctionalVariant(functionalVariant);
+        ICardFace variant = face.getFunctionalVariant(this.functionalVariant);
         if(variant == null) {
-            System.err.printf("Tried to apply unknown or unsupported variant - Card: \"%s\"; Variant: %s\n", face.getName(), functionalVariant);
+            System.err.printf("Tried to apply unknown or unsupported variant - Card: \"%s\"; Variant: %s\n", face.getName(), this.functionalVariant);
             return face;
         }
         return variant;

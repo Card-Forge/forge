@@ -466,6 +466,22 @@ public final class CardRules implements ICardCharacteristics {
         return this.supportedFunctionalVariants;
     }
 
+    public String getDisplayNameForVariant(String variantName) {
+        if(supportedFunctionalVariants == null || !supportedFunctionalVariants.contains(variantName))
+            return getName();
+
+        ICardFace mainFace = Objects.requireNonNullElse(mainPart.getFunctionalVariant(variantName), mainPart);
+        String mainPartName = Objects.requireNonNullElse(mainFace.getFlavorName(), mainFace.getName());
+
+        if(splitType.getAggregationMethod() == CardSplitType.FaceSelectionMethod.COMBINE) {
+            ICardFace otherFace = Objects.requireNonNullElse(otherPart.getFunctionalVariant(variantName), otherPart);
+            String otherPartName = Objects.requireNonNullElse(otherFace.getFlavorName(), otherFace.getName());
+            return mainPartName + " // " + otherPartName;
+        }
+        else
+            return mainPartName;
+    }
+
     public ColorSet getColorIdentity() {
         return colorIdentity;
     }

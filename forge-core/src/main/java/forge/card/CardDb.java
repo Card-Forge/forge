@@ -351,18 +351,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         if(rules.getSupportedFunctionalVariants() == null)
             return;
         for(String variantName : rules.getSupportedFunctionalVariants()) {
-            //Could be broadened to support the weird case where one face is a variant and the other isn't, but that's not currently needed.
-            String mainPartName = rules.getMainPart().getFunctionalVariant(variantName).getFlavorName();
-            if(mainPartName == null)
-                continue;
-            String name;
-            if(rules.getSplitType().getAggregationMethod() == CardSplitType.FaceSelectionMethod.COMBINE) {
-                String otherPartName = rules.getOtherPart().getFunctionalVariant(variantName).getFlavorName();
-                name = mainPartName + " // " + otherPartName;
-            }
-            else
-                name = mainPartName;
-
+            String name = rules.getDisplayNameForVariant(variantName);
             map.put(name, rules);
             flavorNameMappings.put(name, variantName);
         }
