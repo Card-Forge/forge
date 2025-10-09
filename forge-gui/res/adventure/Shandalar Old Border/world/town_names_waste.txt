@@ -45,7 +45,7 @@ Celestine Crossing
 Celestine Town
 Celestine Village
 Celestine Market
-Camp Celestine 
+Camp Celestine
 Celestine Tower
 Celestine Bazaar
 Celestine Forge
@@ -73,7 +73,7 @@ Eloren Crossing
 Eloren Town
 Eloren Village
 Eloren Market
-Camp Eloren 
+Camp Eloren
 Eloren Tower
 Eloren Bazaar
 Eloren Forge
@@ -87,7 +87,7 @@ Hornwall Crossing
 Hornwall Town
 Hornwall Village
 Hornwall Market
-Camp Hornwall 
+Camp Hornwall
 Hornwall Tower
 Hornwall Bazaar
 Hornwall Forge
@@ -101,7 +101,7 @@ Kraag Crossing
 Kraagtown
 Kraag Village
 Kraag Market
-Camp Kraag 
+Camp Kraag
 Kraag Tower
 Kraag Bazaar
 Kraag Forge
@@ -385,7 +385,7 @@ Merrowcreek
 Crookedbrook
 Warrior's Rest
 Golemstooth
-Gobspike 
+Gobspike
 Rabbitsden
 Greyrock
 Rabbitpath

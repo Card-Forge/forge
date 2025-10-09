@@ -1,0 +1,7 @@
+Name:Machinist's Dismissal
+ManaCost:4 U
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each artifact you control and each artifact card in your hand.
+SVar:X:Count$ValidBattlefield,Hand Artifact.YouCtrl
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target noncreature spell | ValidTgts$ Card.nonCreature | SpellDescription$ Counter target noncreature spell.
+Oracle:This spell costs {1} less to cast for each artifact you control and each artifact card in your hand.\nCounter target noncreature spell.

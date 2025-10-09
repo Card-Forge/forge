@@ -460,7 +460,11 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, GameEntity affected, String question) {
-        return brains.aiShouldRun(replacementEffect, effectSA, affected);
+        Card host = replacementEffect.getHostCard();
+        if (host.hasAlternateState()) {
+            host = host.getGame().getCardState(host);
+        }
+        return brains.aiShouldRun(replacementEffect, effectSA, host, affected);
     }
 
     @Override

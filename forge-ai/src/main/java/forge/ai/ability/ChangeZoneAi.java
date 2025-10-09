@@ -101,11 +101,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             sa.getHostCard().removeSVar("AIPreferenceOverride");
         }
 
-        if (aiLogic.equals("BeforeCombat")) {
-            if (ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN)) {
-                return false;
-            }
-        } else if (aiLogic.equals("SurpriseBlock")) {
+        if (aiLogic.equals("SurpriseBlock")) {
             if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
             }
@@ -765,6 +761,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return ph.getNextTurn().equals(ai) && ph.is(PhaseType.END_OF_TURN);
         } else if (aiLogic.equals("Main1") && ph.is(PhaseType.MAIN1, ai)) {
             return true;
+        } else if (aiLogic.equals("BeforeCombat")) {
+            return !ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN);
         }
 
         if (sa.isHidden()) {
@@ -891,9 +889,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
         CardCollection list = CardLists.getTargetableCards(game.getCardsIn(origin), sa);
 
         list = ComputerUtil.filterAITgts(sa, ai, list, true);
-        if (sa.hasParam("AITgtsOnlyBetterThanSelf")) {
-            list = CardLists.filter(list, card -> ComputerUtilCard.evaluateCreature(card) > ComputerUtilCard.evaluateCreature(source) + 30);
-        }
 
         if (source.isInZone(ZoneType.Hand)) {
             list = CardLists.filter(list, CardPredicates.nameNotEquals(source.getName())); // Don't get the same card back.

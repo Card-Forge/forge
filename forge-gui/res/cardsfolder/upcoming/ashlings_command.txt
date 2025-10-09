@@ -1,0 +1,11 @@
+Name:Ashling's Command
+ManaCost:3 U R
+Types:Kindred Instant Elemental
+A:SP$ Charm | Choices$ DBToken,DBDraw,DBDamage,DBTreasure | CharmNum$ 2
+SVar:DBToken:DB$ CopyPermanent | ValidTgts$ Card.Elemental+YouCtrl | TgtPrompt$ Select target Elemental you control | SpellDescription$ Create a token that's a copy of target Elemental you control.
+SVar:DBDraw:DB$ Draw  | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws two cards.
+SVar:DBDamage:DB$ DamageAll | ValidTgts$ Player | NumDmg$ 2 | ValidCards$ Creature | ValidDescription$ each creature target player controls | SpellDescription$ CARDNAME deals 2 damage to each creature target player controls.
+SVar:DBTreasure:DB$ Token | ValidTgts$ Player | TokenOwner$ ThisTargetedPlayer | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | SpellDescription$ Target player creates two Treasure tokens.
+DeckHas:Ability$Token & Type$Treasure|Artifact
+DeckHints:Type$Elemental
+Oracle:Choose two —\n• Create a token that's a copy of target Elemental you control.\n• Target player draws two cards.\n• Ashling's Command deals 2 damage to each creature target player controls.\n• Target player creates two Treasure tokens.

@@ -10,13 +10,11 @@ public interface ITranslatable extends IHasName {
     default String getUntranslatedName() {
         return getName();
     }
+    default String getTranslatedName() {
+        return getName();
+    }
 
     default String getUntranslatedType() {
         return "";
     }
-
-    default String getUntranslatedOracle() {
-        return "";
-    }
-
 }

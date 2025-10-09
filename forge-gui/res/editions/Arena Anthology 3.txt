@@ -1,0 +1,33 @@
+[metadata]
+Code=AA3
+Date=2025-09-23
+Name=Arena Anthology 3
+Type=Online
+ScryfallCode=AA3
+
+[cards]
+1 M Emrakul, the Aeons Torn @Mark Tedin
+2 M Ulamog, the Infinite Gyre @Aleksi Briclot
+3 U Flickerwisp @Jeremy Enecio
+4 R Staff of the Storyteller @Dan Murayama Scott
+5 C Force Spike @Nelson DeCastro
+6 C Miscalculation @Jeff Laubenstein
+7 C Peek @Adam Rex
+8 R Dauthi Voidwalker @Sidharth Chaturvedi
+9 U Necromancy @Pete Venters
+10 C Assault Strobe @Kev Walker
+11 R Broadside Bombardiers @Tomek Larek
+12 C Chain Lightning @Christopher Moeller
+13 U Gut, True Soul Zealot @Wayne Reynolds
+14 U Oxidda Scrapmelter @Igor Kieryluk
+15 C Ambush Viper @Alan Pollack
+16 C Crop Rotation @DiTerlizzi
+17 R Exploration @Lindsey Look
+18 R Noble Hierarch @Mark Zug
+19 R Fallen Shinobi @Dmitry Burmak
+20 M Batterskull @Mark Zug
+21 M Kaldra Compleat @Vincent Proce
+22 R Memory Jar @Donato Giancola
+23 R Umezawa's Jitte @Christopher Moeller
+24 R Shelldock Isle @Mark Tedin
+25 R Yavimaya, Cradle of Growth @Sarah Finnigan

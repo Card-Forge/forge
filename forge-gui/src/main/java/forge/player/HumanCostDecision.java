@@ -113,7 +113,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             }
             return PaymentDecision.card(randomSubset);
         }
-        if (discardType.equals("DifferentNames")) {
+        if (discardType.contains("+WithDifferentNames")) {
             final CardCollection discarded = new CardCollection();
             while (c > 0) {
                 final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, hand, ability);

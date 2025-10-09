@@ -170,9 +170,11 @@ public final class StaticAbilityContinuous {
                 addKeywords = Lists.newArrayList(Arrays.asList(params.get("AddKeyword").split(" & ")));
                 final List<String> newKeywords = Lists.newArrayList();
 
-                // update keywords with Chosen parts
-                final String hostCardUID = Integer.toString(hostCard.getId()); // Protection with "doesn't remove" effect
+                // Protection with "doesn't remove" effect
+                final String hostCardUID = Integer.toString(hostCard.getId());
+                final String hostCardControllerUID = Integer.toString(hostCard.getController().getId());
 
+                // update keywords with Chosen parts
                 addKeywords.removeIf(input -> {
                     if (!hostCard.hasChosenColor() && input.contains("ChosenColor")) {
                         return true;
@@ -282,6 +284,7 @@ public final class StaticAbilityContinuous {
                         input = input.replaceAll("chosenEvenOdd", hostCard.getChosenEvenOdd().toString().toLowerCase());
                     }
                     input = input.replace("HostCardUID", hostCardUID);
+                    input = input.replace("HostCardControllerUID", hostCardControllerUID);
                     if (params.containsKey("CalcKeywordN")) {
                         input = input.replace("N", String.valueOf(AbilityUtils.calculateAmount(hostCard, params.get("CalcKeywordN"), stAb)));
                     }
@@ -620,7 +623,7 @@ public final class StaticAbilityContinuous {
                         // Mana cost
                         affectedCard.addChangedManaCost(state.getManaCost(), se.getTimestamp(), stAb.getId());
                         // color
-                        affectedCard.addColorByText(ColorSet.fromMask(state.getColor()), se.getTimestamp(), stAb.getId());
+                        affectedCard.addColorByText(ColorSet.fromMask(state.getColor()), se.getTimestamp(), stAb);
                         // type
                         affectedCard.addChangedCardTypesByText(new CardType(state.getType()), se.getTimestamp(), stAb.getId());
                         // abilities
@@ -853,7 +856,7 @@ public final class StaticAbilityContinuous {
 
             // add colors
             if (addColors != null) {
-                affectedCard.addColor(addColors, !overwriteColors, se.getTimestamp(), stAb.getId(), stAb.isCharacteristicDefining());
+                affectedCard.addColor(addColors, !overwriteColors, se.getTimestamp(), stAb);
             }
 
             if (layer == StaticAbilityLayer.RULES) {

@@ -277,7 +277,7 @@ public class DuelScene extends ForgeScene {
 
         currentEnemy = enemy.getData();
         boolean bossBattle = currentEnemy.boss;
-        for (int i = 0; i < 8 && currentEnemy != null; i++) {
+        for (int i = 0; i < playerCount && currentEnemy != null; i++) {
             Deck deck;
 
             if (this.chaosBattle) { //random challenge for chaos mode

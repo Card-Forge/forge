@@ -135,9 +135,7 @@ public class CounterAi extends SpellAbilityAi {
 
         if (sa.hasParam("AILogic")) {
             String logic = sa.getParam("AILogic");
-            if ("Never".equals(logic)) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            } else if (logic.startsWith("MinCMC.")) { // TODO fix Daze and fold into AITgts
+            if (logic.startsWith("MinCMC.")) { // TODO fix Daze and fold into AITgts
                 int minCMC = Integer.parseInt(logic.substring(7));
                 if (tgtCMC < minCMC) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
