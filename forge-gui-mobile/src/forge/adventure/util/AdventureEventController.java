@@ -1,6 +1,5 @@
 package forge.adventure.util;
 
-import com.badlogic.gdx.utils.Array;
 import forge.StaticData;
 import forge.adventure.data.AdventureEventData;
 import forge.adventure.player.AdventurePlayer;
@@ -21,11 +20,9 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class AdventureEventController implements Serializable {
-
     public void finalizeEvent(AdventureEventData completedEvent) {
         Current.player().getStatistic().setResult(completedEvent);
         Current.player().removeEvent(completedEvent);
-
     }
 
     public enum EventFormat {
@@ -42,13 +39,13 @@ public class AdventureEventController implements Serializable {
     }
 
     public enum EventStatus {
-        Available, //New event
-        Entered, //Entry fee paid, deck not locked in
-        Ready,   //Deck is registered but can still be edited
-        Started, //Matches available
-        Completed, //All matches complete, rewards pending
-        Awarded, //Rewards distributed
-        Abandoned //Ended without completing all matches
+        Available, // New event
+        Entered,   // Entry fee paid, deck not locked in
+        Ready,     // Deck is registered but can still be edited
+        Started,   // Matches available
+        Completed, // All matches complete, rewards pending
+        Awarded,   // Rewards distributed
+        Abandoned  // Ended without completing all matches
     }
 
     private static AdventureEventController object;
@@ -64,16 +61,7 @@ public class AdventureEventController implements Serializable {
 
     }
 
-    private transient Array<AdventureEventData> allEvents = new Array<>();
-    private Map<String, Long> nextEventDate = new HashMap<>();
-
-    public AdventureEventController(AdventureEventController other) {
-        if (object == null) {
-            object = this;
-        } else {
-            System.out.println("Could not initialize AdventureEventController. An instance already exists and cannot be merged.");
-        }
-    }
+    private final Map<String, Long> nextEventDate = new HashMap<>();
 
     public static void clear() {
         object = null;
@@ -81,7 +69,7 @@ public class AdventureEventController implements Serializable {
 
     public AdventureEventData createEvent(EventStyle style, String pointID, int eventOrigin, PointOfInterestChanges changes) {
         if (nextEventDate.containsKey(pointID) && nextEventDate.get(pointID) >= LocalDate.now().toEpochDay()) {
-            //No event currently available here
+            // No event currently available here
             return null;
         }
 
@@ -100,7 +88,7 @@ public class AdventureEventController implements Serializable {
 
         AdventureEventData e;
 
-        // After a certain amount of wins, stop offering jump start events
+        // After a certain number of wins, stop offering Jumpstart events
         if (Current.player().getStatistic().totalWins() < 10 &&
                 random.nextInt(10) <= 2) {
             e = new AdventureEventData(eventSeed, EventFormat.Jumpstart);
@@ -113,9 +101,10 @@ public class AdventureEventController implements Serializable {
             return null;
         }
 
-        // If chosen event seed recommends a 4 person pod, run it as a RoundRobin
-        CardEdition firstSet = e.cardBlock.getSets().get(0);
-        int podSize = firstSet.getDraftOptions().getRecommendedPodSize();
+        // If the chosen event seed recommends a four-person pod, run it as a RoundRobin
+        // Set can be null when it is only a meta set such as some Jumpstart events.
+        CardEdition firstSet = e.cardBlock.getSets().isEmpty() ? null : e.cardBlock.getSets().get(0);
+        int podSize = firstSet == null ? 8 : firstSet.getDraftOptions().getRecommendedPodSize();
 
         e.sourceID = pointID;
         e.eventOrigin = eventOrigin;
@@ -167,8 +156,8 @@ public class AdventureEventController implements Serializable {
     }
 
     public List<Deck> getJumpstartBoosters(CardBlock block, int count) {
-        //Get all candidates then remove at random until no more than count are included
-        //This will prevent duplicate choices within a round of a Jumpstart draft
+        // Get all candidates, then remove at random until no more than count are included
+        // This will prevent duplicate choices within a round of a Jumpstart draft
         List<Deck> packsAsDecks = new ArrayList<>();
         for (SealedTemplate template : StaticData.instance().getSpecialBoosters()) {
             if (!template.getEdition().contains(block.getLandSet().getCode()))

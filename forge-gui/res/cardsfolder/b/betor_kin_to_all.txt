@@ -9,5 +9,5 @@ SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl | ConditionCheckSVar
 SVar:RepeatLoseLife:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBLoseLife | ConditionCheckSVar$ X | ConditionSVarCompare$ GE40
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ HalfUp
 SVar:HalfUp:PlayerCountRemembered$LifeTotal/HalfUp
-SVar:X:Count$Valid Creature.YouCtrl$SumToughness
+SVar:X:Count$Valid Creature.YouCtrl$CardToughness
 Oracle:Flying\nAt the beginning of your end step, if creatures you control have total toughness 10 or greater, draw a card. Then if creatures you control have total toughness 20 or greater, untap each creature you control. Then if creatures you control have total toughness 40 or greater, each opponent loses half their life, rounded up.
