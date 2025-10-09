@@ -256,6 +256,14 @@ public class MessageUtil {
                     }
 
                     currentTerm += "token";
+                    
+                    if (!isNegated && baseType.startsWith("permanent")) {
+                        // Prevents "token permanent", leaving only "token"
+                        baseType = "";
+                        if (pluralize) {
+                            currentTerm += "s";
+                        }
+                    }
 
                     if (isCoreType) {
                         prefixes.append(currentTerm);
