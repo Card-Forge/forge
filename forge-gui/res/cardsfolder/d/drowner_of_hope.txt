@@ -5,7 +5,7 @@ PT:5/5
 K:Devoid
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create two 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: Add {C}."
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You
-A:AB$ Tap | Cost$ Sac<1/Card.Eldrazi+Scion> | CostDesc$ Sacrifice an Eldrazi Scion: | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
+A:AB$ Tap | Cost$ Sac<1/Eldrazi.Scion> | CostDesc$ Sacrifice an Eldrazi Scion: | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 DeckHints:Type$Eldrazi
 DeckHas:Ability$Mana.Colorless|Token
 Oracle:Devoid (This card has no color.)\nWhen Drowner of Hope enters, create two 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: Add {C}."\nSacrifice an Eldrazi Scion: Tap target creature.
