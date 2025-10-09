@@ -387,7 +387,7 @@ public class ConquestAEtherScreen extends FScreen {
 
     private class ColorButton extends AbstractFilterButton<ColorSet> {
         private ColorButton(String caption0) {
-            super(caption0, Arrays.stream(ColorSet.values()).sorted(Comparator.comparing(ColorSet::getOrderWeight()).toArray(ColorSet[]::new),
+            super(caption0, Arrays.stream(ColorSet.values()).sorted(Comparator.comparing(ColorSet::getOrderWeight).toArray(ColorSet[]::new),
                     c -> "Playable in " + c.stream().map(MagicColor.Color::getSymbol).collect(Collectors.joining()));
         }
 
