@@ -1,0 +1,10 @@
+Name:Mega Flare
+ManaCost:2 R
+Types:Sorcery
+K:Kicker:3 R R
+A:SP$ Token | Condition$ Kicked | TokenScript$ r_6_6_dragon_flying | SubAbility$ DBDamage | SpellDescription$ If this spell was kicked, create a 6/6 red Dragon creature token with flying. For each opponent, choose up to one target creature that player controls. CARDNAME deals damage equal to the greatest power among creatures you control to each of the chosen creatures.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ For each opponent, choose up to one target creature that player controls | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | NumDmg$ X
+SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
+SVar:OneEach:PlayerCountOpponents$Amount
+DeckHas:Ability$Token
+Oracle:Kicker {3}{R}{R}\nIf this spell was kicked, create a 6/6 red Dragon creature token with flying.\nFor each opponent, choose up to one target creature that player controls. Mega Flare deals damage equal to the greatest power among creatures you control to each of the chosen creatures.

@@ -1,0 +1,11 @@
+Name:Sliver Weftwinder
+ManaCost:W U B R G
+Types:Legendary Creature Sliver
+PT:6/6
+K:Warp:3
+S:Mode$ Continuous | Affected$ Sliver.YouOwn | AffectedZone$ Hand | AddKeyword$ Warp:3 | Description$ Sliver cards in your hand have warp {3}.
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddTrigger$ WeftwinderTrig | Description$ Sliver creatures you control have "When this creature enters, conjure a random card from the Slivers spellbook into the top ten cards of your library at random, then draw a card."
+SVar:WeftwinderTrig:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ WeftwinderConjure | TriggerDescription$ When this creature enters, conjure a random card from the Slivers spellbook into the top ten cards of your library at random, then draw a card.
+SVar:WeftwinderConjure:DB$ MakeCard | Conjure$ True | AtRandom$ True | Zone$ Library | LibraryPosition$ Count$Random.0.10 | SpellbookName$ Slivers | Spellbook$ Belligerent Sliver,Bladeback Sliver,Blur Sliver,Bonescythe Sliver,Cleaving Sliver,Cloudshredder Sliver,Diffusion Sliver,Dregscape Sliver,Enduring Sliver,First Sliver's Chosen,Hollowhead Sliver,Lancer Sliver,Lavabelly Sliver,Leeching Sliver,Manaweft Sliver,Predatory Sliver,Scuttling Sliver,Sentinel Sliver,Sliver Hivelord,Spiteful Sliver,Steelform Sliver,Striking Sliver,Tempered Sliver,The First Sliver | SubAbility$ WeftwinderDraw
+SVar:WeftwinderDraw:DB$ Draw
+Oracle:Sliver cards in your hand have warp {3}.\nSliver creatures you control have "When this creature enters, conjure a random card from the Slivers spellbook into the top ten cards of your library at random, then draw a card."\nWarp {3}

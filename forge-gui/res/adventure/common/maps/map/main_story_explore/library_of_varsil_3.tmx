@@ -94,7 +94,7 @@
    <properties>
     <property name="dialog">[
     {
-        &quot;text&quot;: &quot;'Shandalaar’s Most Burnable Cities'. Well, this one sounds like light reading...&quot;,
+        &quot;text&quot;: &quot;'Shandalaar's Most Burnable Cities'. Well, this one sounds like light reading...&quot;,
         &quot;options&quot;: [
             {
                 &quot;name&quot;: &quot;(Continue)&quot;,

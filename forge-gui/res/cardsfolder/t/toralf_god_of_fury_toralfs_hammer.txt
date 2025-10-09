@@ -4,7 +4,7 @@ Types:Legendary Creature God
 PT:5/4
 K:Trample
 T:Mode$ ExcessDamage | ValidTarget$ Creature.OppCtrl,Planeswalker.OppCtrl | CombatDamage$ False | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature or planeswalker an opponent controls is dealt excess noncombat damage, NICKNAME deals damage equal to the excess to any target other than that permanent.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.NotTriggeredTarget,Player,Planeswalker.NotTriggeredTarget | TgtPrompt$ Select any target | NumDmg$ X
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.!TriggeredTarget,Player,Planeswalker.!TriggeredTarget | TgtPrompt$ Select any target | NumDmg$ X
 SVar:X:TriggerCount$DamageAmount
 AlternateMode:Modal
 Oracle:Trample\nWhenever a creature or planeswalker an opponent controls is dealt excess noncombat damage, Toralf deals damage equal to the excess to any target other than that permanent.

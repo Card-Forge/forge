@@ -4,7 +4,7 @@ Types:Legendary Creature Crocodile Elk Turtle
 PT:2/15
 K:Defender
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {X} less to cast, where X is the total toughness of creatures you control.
-SVar:X:Count$Valid Creature.YouCtrl$SumToughness
+SVar:X:Count$Valid Creature.YouCtrl$CardToughness
 A:AB$ Pump | Cost$ 2 U U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +1 | SubAbility$ DBEffect | SpellDescription$ Until end of turn, target creature you control gets +1/+0, gains "Whenever this creature deals combat damage to a player, draw cards equal to its toughness," and can attack as though it didn't have defender.
 SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | Triggers$ TrigDamage | StaticAbilities$ CanAttack | ForgetOnMoved$ Battlefield | SubAbility$ DBAnimate
 SVar:CanAttack:Mode$ CanAttackDefender | ValidCard$ Card.IsRemembered | Description$ CARDNAME can attack as though it didn't have defender.

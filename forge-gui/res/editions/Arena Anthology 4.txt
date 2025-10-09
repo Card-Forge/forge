@@ -9,28 +9,28 @@ ScryfallCode=AA4
 1 R Blazing Archon @Zoltan Boros & Gabor Szikszai
 2 R Bringer of the White Dawn @Kev Walker
 3 M Iona, Shield of Emeria @Jason Chan
-4 C Scaled Wurm @Wayne England
-5 C Stormfront Pegasus @rk post
-6 R Bringer of the Blue Dawn @Greg Staples
-7 R Chromescale Drake @Ben Thompson
-8 R Hoverguard Sweepers @Mark A. Nelson
-9 C Kraken Hatchling @Jason Felix
-10 R Thing from the Deep @Parente
-11 R Tidespout Tyrant @Dany Orizio
-12 R Baleful Force @Eytan Zana
-13 R Bringer of the Black Dawn @Carl Critchlow
-14 M Demon of Death's Gate @Vance Kovacs
-15 R Dread Cacodemon @Izzy
-16 R Kuro, Pitlord @Jon Foster
-17 R Bringer of the Red Dawn @Christopher Moeller
-18 R Dragon Tyrant @Kev Walker
-19 R Fire Dragon @William Simpson
-20 R Furnace Dragon @Matthew D. Wilson
-21 R Magmatic Force @Jung Park
-22 R Bringer of the Green Dawn @Jim Murray
-23 C Crash of Rhinos @Steve White
-24 R Gigantomancer @Chippy
-25 R Regal Force @Brandon Kitkouski
+4 C Stormfront Pegasus @rk post
+5 R Bringer of the Blue Dawn @Greg Staples
+6 R Chromescale Drake @Ben Thompson
+7 R Hoverguard Sweepers @Mark A. Nelson
+8 C Kraken Hatchling @Jason Felix
+9 R Thing from the Deep @Paolo Parente
+10 R Tidespout Tyrant @Dany Orizio
+11 R Baleful Force @Eytan Zana
+12 R Bringer of the Black Dawn @Carl Critchlow
+13 M Demon of Death's Gate @Vance Kovacs
+14 R Dread Cacodemon @Izzy
+15 R Kuro, Pitlord @Jon Foster
+16 R Bringer of the Red Dawn @Christopher Moeller
+17 R Dragon Tyrant @Kev Walker
+18 R Fire Dragon @William Simpson
+19 R Furnace Dragon @Matthew D. Wilson
+20 R Magmatic Force @Jung Park
+21 R Bringer of the Green Dawn @Jim Murray
+22 C Crash of Rhinos @Steve White
+23 R Gigantomancer @Chippy
+24 R Regal Force @Brandon Kitkouski
+25 C Scaled Wurm @Wayne England
 26 R Wolf Pack @Yang Jun Kwon
 27 R Colossus of Sardia @Greg Staples
-28 U Stratadon @Brian Snoddy
+28 U Stratadon @Brian Snõddy

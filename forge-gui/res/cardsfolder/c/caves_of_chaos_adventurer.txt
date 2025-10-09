@@ -13,6 +13,6 @@ SVar:STPlay2:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | A
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play that card this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:PlayerCountPropertyYou$DungeonsCompleted
+SVar:X:DungeonsCompleted$Amount
 SVar:HasAttackEffect:TRUE
 Oracle:Trample\nWhen Caves of Chaos Adventurer enters, you take the initiative.\nWhenever Caves of Chaos Adventurer attacks, exile the top card of your library. If you've completed a dungeon, you may play that card this turn without paying its mana cost. Otherwise, you may play that card this turn.

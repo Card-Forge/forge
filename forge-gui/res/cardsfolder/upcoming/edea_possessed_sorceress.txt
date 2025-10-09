@@ -1,0 +1,11 @@
+Name:Edea, Possessed Sorceress 
+ManaCost:2 U B R
+Types:Legendary Creature Human Warlock
+PT:2/5
+K:Ward:2
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigGainControl | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.
+SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | LoseControl$ EOT | Untap$ True | AddKWs$ Haste
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ValidCard$ Creature.YouDontOwn+YouCtrl | Execute$ TrigReturn | TriggerDescription$ Whenever a creature you control but don't own dies, return it to the battlefield under it's owner's control and you draw a card. 
+SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy  | Origin$ All | Destination$ Battlefield | SubAbility$ TrigDraw
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+Oracle:Ward {2}\nAt the beginning of combat on your turn, gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.\nWhenever a creature you control but don't own dies, return it to the battlefield under it's owner's control and you draw a card. 

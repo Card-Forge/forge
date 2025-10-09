@@ -1,0 +1,11 @@
+Name:Emptiness
+ManaCost:4 WB WB
+Types:Creature Elemental Incarnation
+PT:3/5
+K:Evoke:WB WB
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | CheckSVar$ CastSA>Count$Adamant_2.White.2.0 | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When this creature enters, if {W}{W} was spent to cast it, return target creature card with mana value 3 or less from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl+cmcLE3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | CheckSVar$ CastSA>Count$Adamant_2.Black.2.0 | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ When this creature enters, if {B}{B} was spent to cast it, put three -1/-1 counters on up to one target creature.
+SVar:TrigPutCounters:DB$ PutCounter | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | CounterNum$ 3 | TgtPrompt$ Select up to one target creature | CounterType$ M1M1 
+DeckHas:Ability$Graveyard|Counters
+Oracle:When this creature enters, if {W}{W} was spent to cast it, return target creature card with mana value 3 or less from your graveyard to the battlefield.\nWhen this creature enters, if {B}{B} was spent to cast it, put three -1/-1 counters on up to one target creature.\nEvoke {W/B}{W/B}

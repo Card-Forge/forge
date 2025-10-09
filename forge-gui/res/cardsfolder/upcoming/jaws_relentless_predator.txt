@@ -1,0 +1,15 @@
+Name:Jaws, Relentless Predator
+ManaCost:3 R R
+Types:Legendary Creature Shark
+PT:5/5
+K:Trample
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, create that many Blood tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_blood_draw | TokenOwner$ You
+SVar:X:TriggerCount$DamageAmount
+T:Mode$ Sacrificed | ValidCard$ Artifact.nonCreature | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a noncreature artifact is sacrificed or destroyed, NICKNAME deals 1 damage to each opponent.
+T:Mode$ Destroyed | ValidCard$ Artifact.nonCreature | Execute$ TrigDamage | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever a noncreature artifact is sacrificed or destroyed, NICKNAME deals 1 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ 1 | Defined$ Opponent
+DeckHints:Ability$Sacrifice|Token & Type$Blood|Treasure|Map|Clue
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Blood
+Oracle:Trample, haste\nWhenever Jaws deals combat damage to a player, create that many Blood tokens.\nWhenever a noncreature artifact is sacrificed or destroyed, Jaws deals 1 damage to each opponent.

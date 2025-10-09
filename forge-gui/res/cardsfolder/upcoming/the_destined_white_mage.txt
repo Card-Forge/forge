@@ -1,0 +1,14 @@
+Name:The Destined White Mage
+ManaCost:2 W
+Types:Legendary Creature Human Cleric
+PT:2/3
+K:Lifelink
+A:AB$ Pump | Cost$ W T | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | KW$ Lifelink | SpellDescription$ Another target creature you control gains lifelink until end of turn.
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put a +1/+1 counter on target creature you control. If you have a full party, put three +1/+1 counters on that creature instead.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ X
+SVar:X:Count$Compare Y EQ4.3.1
+SVar:Y:Count$Party
+SVar:BuffedBy:Rogue,Warrior,Wizard
+DeckHas:Ability$Party
+DeckHints:Type$Rogue|Warrior|Wizard
+Oracle:Lifelink\n{W}, {T}: Another target creature you control gains lifelink until end of turn.\nWhenever you gain life, put a +1/+1 counter on target creature you control. If you have a full party, put three +1/+1 counters on that creature instead.

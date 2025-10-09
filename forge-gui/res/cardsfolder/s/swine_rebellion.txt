@@ -6,7 +6,7 @@ SVar:DBConjureAll:DB$ MakeCard | Conjure$ True | Names$ First Little Pig,Second 
 SVar:DBConjureTwo:DB$ MakeCard | Conjure$ True | SpellbookName$ the Three Pigs | Spellbook$ First Little Pig,Second Little Pig,Third Little Pig | SpellbookAmount$ 2 | RememberMade$ True | Zone$ Hand | SubAbility$ DBPutBattlefield
 SVar:DBPutBattlefield:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Card.IsRemembered | ChangeNum$ 1 | Mandatory$ True | SelectPrompt$ Select a card to put onto the battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$DifferentCardNames_Boar.YouCtrl+inRealZoneBattlefield
+SVar:X:Count$Valid Boar.YouCtrl$DifferentCardNames
 DeckHints:Type$Boar
 DeckHas:Type$Boar
 Oracle:If you control three or more Boars with different names, conjure each card from the Three Pigs spellbook onto the battlefield.\nIf you control two or fewer Boars with different names, conjure two cards of your choice from the Three Pigs spellbook into your hand, then put one of them onto the battlefield.

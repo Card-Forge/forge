@@ -1,0 +1,15 @@
+Name:Chocobo Camp
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ CARDNAME enters tapped unless you control a legendary creature.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Creature.Legendary+YouCtrl | ConditionCompare$ EQ0
+A:AB$ Mana | Cost$ T | Produced$ G | SubAbility$ DBEffect | SpellDescription$ Add {G}.
+SVar:DBEffect:DB$ Effect | Triggers$ SpellCastTrig | SpellDescription$ When you next cast a Bird creature spell this turn, it enters with an additional +1/+1 counter on it.
+SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Bird | ValidActivatingPlayer$ You | Execute$ TrigCounter | OneOff$ True | TriggerDescription$ When you next cast a Bird creature spell this turn, it enters with an additional +1/+1 counter on it.
+SVar:TrigCounter:DB$ Effect | ReplacementEffects$ ETBCounters | RememberObjects$ TriggeredCard | ForgetOnMoved$ Stack
+SVar:ETBCounters:Event$ Moved | Origin$ Stack | Destination$ Battlefield | ValidCard$ Card.IsRemembered | ReplaceWith$ ETBAddExtraCounter | ReplacementResult$ Updated | Description$ That creature enters with an additional +1/+1 counters on it.
+SVar:ETBAddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ Token | Cost$ 2 G G T | TokenScript$ g_2_2_bird_landfall | SpellDescription$ Creature a 2/2 green Bird creature token with "Whenever a land you control enters, this token gets +1/+0 until end of turn".
+DeckHas:Ability$Token & Type$Artifact|Bird
+DeckHints:Type$Legendary
+Oracle:This Land enters tapped unless you control a legendary creature.\n{T}: Add {G}. When you next cast a Bird creature spell this turn, it enters with an additional +1/+1 counter on it.\n{2}{G}{G}, {T}, Creature a 2/2 green Bird creature token with "Whenever a land you control enters, this token gets +1/+0 until end of turn".  

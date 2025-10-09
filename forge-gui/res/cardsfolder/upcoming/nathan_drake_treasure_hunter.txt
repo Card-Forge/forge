@@ -1,0 +1,11 @@
+Name:Nathan Drake, Treasure Hunter
+ManaCost:U B R
+Types:Legendary Creature Human Rogue
+PT:3/2
+K:First Strike
+S:Mode$ ManaConvert | ValidPlayer$ You | ValidCard$ Card.YouDontOwn+YouCtrl | ValidSA$ Spell,Activated | ManaConversion$ AnyType->AnyColor | Description$ You may spend mana as though it were mana of any color to cast spells you don't own or to activate abilities of permanents you control but don't own.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever NICKNAME attacks, exile the top card of each player's library. You may cast a spell from among those cards.
+SVar:TrigExile:DB$ Dig | Defined$ Player | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered | ValidSA$ Spell | ValidZone$ Exile | Controller$ You | Optional$ True | Amount$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:First strike\nYou may spend mana as though it were mana of any color to cast spells you don't own or to activate abilities of permanents you control but don't own.\nWhenever Nathan Drake attacks, exile the top card of each player's library. You may cast a spell from among those cards.

@@ -1,0 +1,15 @@
+Name:Garland, Royal Kidnapper 
+ManaCost:2 U B
+Types:Legendary Creature Human Knight
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When NICKNAME enters, target opponent becomes the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | ValidTgts$ Opponent
+T:Mode$ BecomeMonarch | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever an opponent becomes the monarch, gain control of target creature that player controls for as long as they're the monarch.
+SVar:TrigEffect:DB$ Effect | ImprintCards$ Targeted | ValidTgts$ Creature.ControlledBy TriggeredPlayer | TgtPrompt$ Choose target creature that player controls | RememberObjects$ TriggeredPlayer | Triggers$ ExileMe | StaticAbilities$ GainControl | Duration$ Permanent 
+SVar:GainControl:Mode$ Continuous | Affected$ Card.IsImprinted | CheckSVar$ X | SVarCompare$ EQ1 | GainControl$ You | Description$ You gain control of that creature for as long as that player is the monarch. 
+SVar:ExileMe:Mode$ Always | Static$ True | Execute$ ExileEffect | CheckSVar$ X | SVarCompare$ EQ0 
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:X:PlayerCountRememberedPlayer$HasPropertyisMonarch
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+YouDontOwn| AddPower$ 2 | AddToughness$ 2 | Description$ Creatures you control but don't own get +2/+2 and can't be sacrificed. 
+S:Mode$ CantSacrifice | ValidCard$ Creature.YouCtrl+YouDontOwn | Secondary$ True | SpellDescription$ Creatures you control but don't own get +2/+2 and can't be sacrificed. 
+Oracle:When Garland enters, target opponent becomes the monarch.\nWhenever an opponent becomes the monarch, gain control of target creature that player controls for as long as they're the monarch.\nCreatures you control but don't own get +2/+2 and can't be sacrificed. 

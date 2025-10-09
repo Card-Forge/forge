@@ -35,7 +35,7 @@ public class ForgeScript {
         boolean withSource = property.endsWith("Source");
         final ColorSet colors;
         if (withSource && StaticAbilityColorlessDamageSource.colorlessDamageSource(cardState)) {
-            colors = ColorSet.NO_COLORS;
+            colors = ColorSet.C;
         } else {
             colors = cardState.getCard().getColor(cardState);
         }
@@ -166,8 +166,6 @@ public class ForgeScript {
             Card source, CardTraitBase spellAbility) {
         if (property.equals("ManaAbility")) {
             return sa.isManaAbility();
-        } else if (property.equals("nonManaAbility")) {
-            return !sa.isManaAbility();
         } else if (property.equals("withoutXCost")) {
             return !sa.costHasManaX();
         } else if (property.startsWith("XCost")) {

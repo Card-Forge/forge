@@ -16,5 +16,5 @@ ALTERNATE
 Name:Birthright Boon
 ManaCost:1 W
 Types:Sorcery Adventure
-A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Aura,Equipment | ChangeNum$ 1 | SpellDescription$ Search your library for an Aura or Equipment card, reveal it, put it into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Aura,Equipment | SpellDescription$ Search your library for an Aura or Equipment card, reveal it, put it into your hand, then shuffle.
 Oracle:Search your library for an Aura or Equipment card, reveal it, put it into your hand, then shuffle.

@@ -177,7 +177,7 @@ public class FightAi extends SpellAbilityAi {
      * @param power	bonus to power
      * @return true if fight effect should be played, false otherwise
      */
-    public static AiAbilityDecision canFightAi(final Player ai, final SpellAbility sa, int power, int toughness) {
+    public static AiAbilityDecision canFight(final Player ai, final SpellAbility sa, int power, int toughness) {
     	final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         AbilitySub tgtFight = sa.getSubAbility();

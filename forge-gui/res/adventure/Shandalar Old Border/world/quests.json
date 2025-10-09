@@ -41,7 +41,7 @@
 					},
 					{
 						"name": "\"And what if I find the right people myself?\"",
-						"text": "He shrugs as though that wouldn't bother him. \"Then I'll have to find someone bigger, badder, and most importantly, faster than you to work with.\"",
+						"text": "He shrugs as though that wouldn't bother him. \"Then I'll have to find someone bigger, badder, and, most importantly, faster than you to work with.\"",
 						"options": [
 							{
 								"name": "\"Good luck with that.\" (Decline Quest)"
@@ -591,7 +591,7 @@
 												]
 											}
 										],
-										"name": "Quickly and discretely help yourself to a spell before continuing.",
+										"name": "Quickly and discreetly help yourself to a spell before continuing.",
 										"text": "You receive a spell of dubious quality.",
 										"options": [
 											{
@@ -1268,7 +1268,7 @@
 							}
 						],
 						"name": "You shrug your shoulders. It's not your problem. (Decline Quest)",
-						"text": "The criminal glances at you and hurredly scampers off. (-1 Reputation)",
+						"text": "The criminal glances at you and hurriedly scampers off. (-1 Reputation)",
 						"options": [
 							{
 								"name": "(Continue)"
@@ -1327,7 +1327,7 @@
 						]
 					},
 					{
-						"name": "You clear your throat in an exagerated manner.",
+						"name": "You clear your throat in an exaggerated manner.",
 						"text": "The $(enemy_2) drops a small satchel as they begin to run away.",
 						"options": [
 							{
@@ -2200,7 +2200,7 @@
 							},
 							{
 								"name": "Curious as to why this would be on the board, your gaze lingers for a moment.",
-								"text": "As you look at the wordless paper, words find their way into your mind by unknown, other, means. 'FIND.' '{COLOR=red}KILL!{ENDCOLOR}' 'REWARD.'",
+								"text": "As you look at the wordless paper, words find their way into your mind by unknown means. 'FIND.' '{COLOR=red}KILL!{ENDCOLOR}' 'REWARD.'",
 								"options": [
 									{
 										"action": [
@@ -2285,7 +2285,7 @@
 						"options": [
 							{
 								"name": "You continue to read.",
-								"text": "Secondly, another's handwriting has scrawled over what might have actually been a romantic bit, with the following. \"Don't bother. I killed him yesterday\"",
+								"text": "Secondly, another's handwriting was scrawled over what might have actually been a romantic bit with the following. \"Don't bother. I killed him yesterday\"",
 								"options": [
 									{
 										"name": "You shake your head and walk away. (Decline Quest)"
@@ -2870,7 +2870,7 @@
 		"options": [
 			{
 				"name": "\"Capable just so happens to be my middle name.\"",
-				"text": "He looks perplexed for a moment, but glances back at the wagon as though distracted by it. \"I was hoping you could handle some business for me\"",
+				"text": "He looks perplexed for a moment, but glances back at the wagon as though distracted by it. \"I was hoping you could handle some business for me.\"",
 				"options": [
 					{
 						"name": "Business? What sort of business?",
@@ -3646,7 +3646,7 @@
 				"POIReference": "$(poi_2)"
 			}
 		],
-		"text": "Despite the insistance of the compass needle, you decide that you will not finish clearing the $(poi_2). As if it could sense this somehow, the onyx compass disappears. (-2 Local Reputation)",
+		"text": "Despite the insistence of the compass needle, you decide that you will not finish clearing the $(poi_2). As if it could sense this somehow, the onyx compass disappears. (-2 Local Reputation)",
 		"options": [
 			{
 				"name": "(Quest Failed)"
@@ -3749,7 +3749,7 @@
 	"name": "A Vision of Destruction",
 	"description": "Clear out all enemies in the $(poi_1) and report back.",
 	"offerDialog": {
-		"text": "Walking in to the village, an old man looks up as if expecting you and rushes over (to the extent that he is able) \"$(playername). I need you to turn around and leave. NOW.\"",
+		"text": "Walking into the village, an old man looks up as if expecting you and rushes over (to the extent that he is able) \"$(playername). I need you to turn around and leave. NOW.\"",
 		"options": [
 			{
 				"name": "You take a good look at the old man, but do not recognize his features. \"Should I know you?\"",
@@ -4339,7 +4339,7 @@
 												"POIReference": ""
 											}
 										],
-										"name": "\"So long as I get to keep whatever I find along the way, too.\" (Accept Quest)."
+										"name": "\"So long as I get to keep whatever I find along the way too.\" (Accept Quest)."
 									},
 									{
 										"name": "\"I don't think I'm interested. Sorry.\" (Decline Quest)"
@@ -4558,7 +4558,7 @@
 				"text": "Most of the ads are nondescript, weather worn, or written in an unfamiliar language. A few catch your eye, however.",
 				"options": [
 					{
-						"name": "You look at what seems to be an advertisement of some sort, off to one side.",
+						"name": "You look at what seems to be an advertisement of some sort off to one side.",
 						"text": "It reads: \"Gimgee's self-replicating paper. When you need unlimited paper or to clear a forest from afar, it's got to be Gimgee's.\"",
 						"options": [
 							{
@@ -4627,7 +4627,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "You feel awkward pulling your $(enemy_1)s in to town, but it doesn't actually seem that out of place here with other macabre scenes around. (This quest will only given in black biome in the future).",
+		"text": "You feel awkward pulling your $(enemy_1)s into town, but it doesn't actually seem that out of place here with other macabre scenes around. (This quest will only given in black biome in the future).",
 		"options": [
 			{
 				"name": "You look around for someone that seems to be expecting bodies.",
@@ -4678,7 +4678,7 @@
 					},
 					{
 						"name": "You take a closer look at the carts.",
-						"text": "$(enemy_1)s and a few random creatures are filling most of one cart., while the other holds a few identical satchels of goods.",
+						"text": "$(enemy_1)s and a few random creatures are filling most of one cart, while the other holds a few identical satchels of goods.",
 						"options": [
 							{
 								"name": "Turn your attention to the carts' attendant.",
@@ -5116,7 +5116,7 @@
 													}
 												],
 												"name": "\"And if I bring in six?\" (Accept Quest)",
-												"text": "\"Then you will have brought down too many.We're thinning them, not removing them.\"",
+												"text": "\"Then you will have brought down too many. We're thinning them, not removing them.\"",
 												"options": [
 													{
 														"name": "You nod and prepare to leave. (Continue)"
@@ -5600,7 +5600,7 @@
 										"name": "\"I can do that.\" (Accept Quest)"
 									},
 									{
-										"name": "\"Sorry, I just decided that I'm more in to magic than science.\" (Decline Quest)"
+										"name": "\"Sorry, I just decided that I'm more into magic than science.\" (Decline Quest)"
 									}
 								]
 							}
@@ -5892,7 +5892,7 @@
 	"name": "Heart of a Champion",
 	"description": "Enter and win an upcoming arena event.",
 	"offerDialog": {
-		"text": "\"DO YOU HAVE WHAT IT TAKES? ARE YOU THE BEST IN SHANDALAR???\" A young girl yells at the top of her lungs at each passer by in the town. Most people come in to view already covering their ears, having heard this plenty of times before.",
+		"text": "\"DO YOU HAVE WHAT IT TAKES? ARE YOU THE BEST IN SHANDALAR???\" A young girl yells at the top of her lungs at each passer by in the town. Most people come into view already covering their ears, having heard this plenty of times before.",
 		"options": [
 			{
 				"name": "You walk over to her. \"Okay kid, settle down, I heard you. What's this about?\"",
@@ -6119,7 +6119,7 @@
 				]
 			},
 			{
-				"name": "Let me guess, you want to me to deal with this situation ?",
+				"name": "Let me guess, you want to me to deal with this situation?",
 				"text": "Well yes. Let me explain the situation; Xira's balls have become a bit of a problem. She has been hosting them every night, and they're becoming increasingly extravagant and disruptive. The townspeople are getting tired of the constant noise and commotion, and it's affecting their daily lives.",
 				"options": [
 					{
@@ -6314,7 +6314,7 @@
 						"POIReference": ""
 					}
 				],
-				"name": "Sorry, I don't have to the time for this. (Decline Quest)",
+				"name": "Sorry, I don't have the time for this. (Decline Quest)",
 				"text": "Figured you weren't up to the challenge, come back to me when you are.",
 				"options": [
 					{
@@ -6323,11 +6323,11 @@
 				]
 			},
 			{
-				"name": "Let me guess, you want to me to deal with this situation ?",
+				"name": "Let me guess, you want to me to deal with this situation?",
 				"text": "The factory, now infested with an array of peculiar mechs and skilled artificers, poses a grave threat to our community and the delicate balance of technology. Slobad, once hailed as a genius, was known for his unorthodox creations and their volatile nature. However, a catastrophic incident occurred years ago, leading to the factory's abandonment. Now, the mechanical monstrosities have been reactivated, wreaking havoc on unsuspecting wanderers and nearby settlements.",
 				"options": [
 					{
-						"name": "I see. So you want me to go to his factory and defeat him ?",
+						"name": "I see. So you want me to go to his factory and defeat him?",
 						"text": "Your task, should you accept it, is to venture into Slobad's factory and cleanse it of its mechanical menaces. You will face a myriad of strange mechs, each with its unique capabilities and behaviors. Additionally, the factory's artificers, skilled engineers corrupted by their own creations, will fiercely defend their inventions. Making your mission all the more challenging.",
 						"options": [
 							{
@@ -6347,7 +6347,7 @@
 										"POIReference": ""
 									}
 								],
-								"name": "I'll take care of it, note the location of the factory on my map.(Accept Quest) (WARNING HARD QUEST)",
+								"name": "I'll take care of it. If you'd note the location of the factory on my map... (Accept Quest) (WARNING HARD QUEST)",
 								"text": "Once you have vanquished the mechanical threat and quelled the chaos within the factory, return to me, Maven the Alchemist, and you shall be rewarded handsomely for your bravery and service to our community. Be warned, however, for the path ahead will test your mettle, cunning, and combat prowess. May fortune favor you on this perilous undertaking!"
 							},
 							{
@@ -6367,7 +6367,7 @@
 										"POIReference": ""
 									}
 								],
-								"name": "\"Do you really think I have nothing better to do ? Find someone else to take care of it\" (Decline Quest)",
+								"name": "\"Do you really think I have nothing better to do? Find someone else to take care of it\" (Decline Quest)",
 								"text": "Maven the Alchemist keeps a passive look on his face. \"Soon those things will be balanced as well.\"",
 								"options": [
 									{
@@ -6518,7 +6518,7 @@
 						"POIReference": ""
 					}
 				],
-				"name": "Sorry, I don't have to the time for this. (Decline Quest)",
+				"name": "Sorry, I don't have the time for this. (Decline Quest)",
 				"text": "Figured you weren't up to the challenge, come back to me when you are. (-1 Local Reputation)",
 				"options": [
 					{
@@ -6531,7 +6531,7 @@
 				"text": "Thank you, noble adventurer. Slimefoot is a creature of pure malevolence. A monstrous being that has taken root in the heart of the treacherous swamp. Its corrosive touch and toxic aura have brought devastation to our lands. To defeat it, you must journey through the perilous swamp, filled with treacherous terrain and deadly creatures lurking within.",
 				"options": [
 					{
-						"name": "I see. So you want me to travel to Slimefoots swamp and defeat him ?",
+						"name": "I see. So you want me to travel to Slimefoot's swamp and defeat him?",
 						"text": "Slimefoot is a formidable foe, adept at both offense and defense. Its body secretes a corrosive slime, and its tentacles strike with lightning speed. Prepare yourself for a challenging battle, my friend. Draw upon your combat skills, use potions and magical abilities wisely, and exploit any weaknesses you can find. Only then can you hope to overcome this vile creature.",
 						"options": [
 							{
@@ -6674,7 +6674,7 @@
 		{
 			"id": 2,
 			"name": "Travel",
-			"description": "Return to town and report your success in clearing Slimefoots Lair.",
+			"description": "Return to town and report your success in clearing Slimefoot's Lair.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"here": true,
@@ -6717,7 +6717,7 @@
 						"POIReference": ""
 					}
 				],
-				"name": "Sorry, I don't have to the time for this. (Decline Quest)",
+				"name": "Sorry, I don't have the time for this. (Decline Quest)",
 				"text": "Figured you weren't up to the challenge, come back to me when you are.",
 				"options": [
 					{
@@ -6726,7 +6726,7 @@
 				]
 			},
 			{
-				"name": "Let me guess, you want to me to deal with this situation ?",
+				"name": "Let me guess, you want to me to deal with this situation?",
 				"text": "The town council seeks the aid of a skilled and courageous individual like yourself to venture into the depths of the old sewer near this town and eradicate this slimy menace once and for all.",
 				"options": [
 					{
@@ -6750,7 +6750,7 @@
 										"POIReference": ""
 									}
 								],
-								"name": "Consider it done, note the location of the old sewers on my map. (Accept Quest) (WARNING HARD QUEST)"
+								"name": "Consider it done. If you'd note the location of the old sewers on my map... (Accept Quest) (WARNING HARD QUEST)"
 							},
 							{
 								"action": [
@@ -7344,7 +7344,7 @@
 			],
 			"objective": "Travel",
 			"prologue": {
-				"text": "All major locations in Shandalar can be divided up in to one of two categories: towns and dungeons.",
+				"text": "All major locations in Shandalar can be divided up into one of two categories: towns and dungeons.",
 				"options": [
 					{
 						"name": "(Continue)",
@@ -7381,7 +7381,7 @@
 				"options": [
 					{
 						"name": "(Continue)",
-						"text": "The inn contains some special events. You can also sell extra cards there, or buy temporary extra health.\n\nThe '?' sign denotes a town square / job board where you can obtain side quests.\n\nAll of the other buildings with signs out front are shops, most of them sell cards.\n\nTo leave town, walk back toward the edge of the screen just below your current location.",
+						"text": "The inn contains some special events. You can also sell extra cards there, or buy temporary extra health.\n\nThe '?' sign denotes a town square or a job board where you can obtain side quests.\n\nAll of the other buildings with signs out front are shops, most of them sell cards.\n\nTo leave town, walk back toward the edge of the screen just below your current location.",
 						"options": [
 							{
 								"name": "(Continue)",
@@ -7441,7 +7441,7 @@
 				"options": [
 					{
 						"name": "(Continue)",
-						"text": "Your next objective is to defeat any single enemy in a duel. You can find them in a dungeon like this one, or wandering around outside on the world map. To begin a duel, simply walk in to the enemy.",
+						"text": "Your next objective is to defeat any single enemy in a duel. You can find them in a dungeon like this one, or wandering around outside on the world map. To begin a duel, simply walk into the enemy.",
 						"options": [
 							{
 								"name": "(Continue)",
@@ -7713,7 +7713,7 @@
 						"POIReference": ""
 					}
 				],
-				"name": "Sorry, I don't have to the time for this. (Decline Quest)",
+				"name": "Sorry, I don't have the time for this. (Decline Quest)",
 				"text": "Figured you weren't up to the challenge, come back to me when you are.",
 				"options": [
 					{
@@ -7921,7 +7921,7 @@
 						"POIReference": ""
 					}
 				],
-				"name": "Sorry, I don't have to the time for this. (Decline Quest)",
+				"name": "Sorry, I don't have the time for this. (Decline Quest)",
 				"text": "Figured you weren't up to the challenge, come back to me when you are.",
 				"options": [
 					{
@@ -8127,7 +8127,7 @@
 						"POIReference": ""
 					}
 				],
-				"name": "Sorry, I don't have to the time for this. (Decline Quest)",
+				"name": "Sorry, I don't have the time for this. (Decline Quest)",
 				"text": "Figured you weren't up to the challenge, come back to me when you are.",
 				"options": [
 					{
@@ -8367,7 +8367,7 @@
 						"POIReference": "$(poi_3)"
 					}
 				],
-				"name": "(Quest complete)"
+				"name": "(Quest Complete)"
 			}
 		]
 	},
@@ -8551,7 +8551,7 @@
 						"POIReference": "$(poi_3)"
 					}
 				],
-				"name": "(Quest complete)"
+				"name": "(Quest Complete)"
 			}
 		]
 	},
@@ -8735,7 +8735,7 @@
 						"POIReference": "$(poi_3)"
 					}
 				],
-				"name": "(Quest complete)"
+				"name": "(Quest Complete)"
 			}
 		]
 	},
@@ -8918,7 +8918,7 @@
 						"POIReference": "$(poi_3)"
 					}
 				],
-				"name": "(Quest complete)"
+				"name": "(Quest Complete)"
 			}
 		]
 	},
@@ -9102,7 +9102,7 @@
 						"POIReference": "$(poi_3)"
 					}
 				],
-				"name": "(Quest complete)"
+				"name": "(Quest Complete)"
 			}
 		]
 	},
@@ -9260,7 +9260,7 @@
 			],
 			"objective": "CompleteQuest",
 			"prologue": {
-				"text": "Note: Since this quest objective is to complete other quests, your navigation arrow will lead you to quest sources while you are tracking it. Once you accept a side quest, go in to your quest log and track that quest in order to update navigation hints.",
+				"text": "Note: Since this quest objective is to complete other quests, your navigation arrow will lead you to quest sources while you are tracking it. Once you accept a side quest, go into your quest log and track that quest in order to update navigation hints.",
 				"options": [
 					{
 						"name": "(Continue)"
@@ -9715,7 +9715,7 @@
 			"prerequisiteIDs": [ 4 ],
 			"prologue": {},
 			"epilogue": {
-				"text": "Within moments of walking in to town, a wiry young elf approaches you. Or at least he looks young, it's so hard to tell with elves. He briefly holds out an amulet identical to the one Donovan gave you, and beckons you to follow him to the inn.",
+				"text": "Within moments of walking into town, a wiry young elf approaches you. Or at least he looks young, it's so hard to tell with elves. He briefly holds out an amulet identical to the one Donovan gave you, and beckons you to follow him to the inn.",
 				"options": [
 					{
 						"action": [
@@ -9925,7 +9925,7 @@
 				"options": [
 					{
 						"name": "(Continue)",
-						"text": "A small group of scholars carrying books around the entrance seems to confirm the building's purpose, but something odd about their manerisms has you on edge as you approach.",
+						"text": "A small group of scholars carrying books around the entrance seems to confirm the building's purpose, but something odd about their mannerisms has you on edge as you approach.",
 						"options": [
 							{
 								"name": "(Continue)"
@@ -10492,7 +10492,7 @@
 						"POIReference": ""
 					}
 				],
-				"text": "As you walk in to town, a familiar cloaked figure is waiting and watching for you.",
+				"text": "As you walk into town, a familiar cloaked figure is waiting and watching for you.",
 				"options": [
 					{
 						"name": "(Continue)"

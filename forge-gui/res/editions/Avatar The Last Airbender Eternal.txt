@@ -56,7 +56,7 @@ ScryfallCode=TLE
 251 C Frog-Squirrels @Daniel Romanovsky
 252 C Hippo-Cows @Brandon L. Hunt
 253 U Match the Odds @Eilene Cherie
-254 R Seismic Tutelage
+254 R Seismic Tutelage @Florent Lebrun
 255 U Hog-Monkey Rampage @Daniel Romanovsky
 256 C Mechanical Glider @Salvatorre Zee Yazzie
 257 C Feed the Swarm @Kotakan

@@ -63,7 +63,6 @@ public enum ManaCostShard {
     S(ManaAtom.IS_SNOW, "S"),
     GENERIC(ManaAtom.GENERIC, "1"),
 
-
     /* Phyrexian */
     WP(ManaAtom.WHITE | ManaAtom.OR_2_LIFE, "W/P", "WP"),
     UP(ManaAtom.BLUE | ManaAtom.OR_2_LIFE, "U/P", "UP"),

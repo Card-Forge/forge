@@ -1,0 +1,9 @@
+Name:Figure of Fable
+ManaCost:GW
+Types:Creature Kithkin
+PT:1/1
+A:AB$ Animate | Cost$ GW | Types$ Kithkin,Scout | RemoveCreatureTypes$ True | Duration$ Permanent | Power$ 2 | Toughness$ 3 | SpellDescription$ This creature becomes a Kithkin Scout with base power and toughness 2/3.
+A:AB$ Animate | Cost$ 1 GW GW | ConditionPresent$ Card.Self+Scout | Types$ Kithkin,Soldier | RemoveCreatureTypes$ True | Duration$ Permanent | Power$ 4 | Toughness$ 5 | SpellDescription$ If this creature is a Scout, it becomes a Kithkin Soldier with base power and toughness 4/5.
+A:AB$ Animate | Cost$ 3 GW GW GW | ConditionPresent$ Card.Self+Soldier | Types$ Kithkin,Avatar | RemoveCreatureTypes$ True | Duration$ Permanent | Power$ 7 | Toughness$ 8 | Keywords$ Protection:Player.Opponent:each of your opponents | SpellDescription$ If this creature is a Soldier, it becomes a Kithkin Avatar with base power and toughness 7/8 and protection from each of your opponents.
+DeckHas:Type$Soldier|Scout|Avatar
+Oracle:{G/W}: This creature becomes a Kithkin Scout with base power and toughness 2/3.\n{1}{G/W}{G/W}: If this creature is a Scout, it becomes a Kithkin Soldier with base power and toughness 4/5.\n{3}{G/W}{G/W}{G/W}: If this creature is a Soldier, it becomes a Kithkin Avatar with base power and toughness 7/8 and protection from each of your opponents.

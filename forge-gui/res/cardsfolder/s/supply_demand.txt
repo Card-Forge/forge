@@ -12,5 +12,5 @@ ALTERNATE
 Name:Demand
 ManaCost:1 W U
 Types:Sorcery
-A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.MultiColor | ChangeNum$ 1 | SpellDescription$ Search your library for a multicolored card, reveal it, put it into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.MultiColor | ChangeTypeDesc$ multicolored | SpellDescription$ Search your library for a multicolored card, reveal it, put it into your hand, then shuffle.
 Oracle:Search your library for a multicolored card, reveal it, put it into your hand, then shuffle.

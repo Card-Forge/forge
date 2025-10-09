@@ -4,6 +4,6 @@ Types:Land
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 T:Mode$ ChangesZone | ValidCard$ Mountain.YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigDamage | IsPresent$ Mountain.YouCtrl | PresentCompare$ GE6 | NoResolvingCheck$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Mountain you control enters, if you control at least five other Mountains, you may have CARDNAME deal 3 damage to any target.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | ConditionPresent$ Mountain.YouCtrl+NotTriggeredCard | ConditionCompare$ GE5 | OptionalDecider$ You
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | ConditionPresent$ Mountain.YouCtrl+!TriggeredCard | ConditionCompare$ GE5 | OptionalDecider$ You
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
 Oracle:Valakut, the Molten Pinnacle enters tapped.\nWhenever a Mountain you control enters, if you control at least five other Mountains, you may have Valakut, the Molten Pinnacle deal 3 damage to any target.\n{T}: Add {R}.

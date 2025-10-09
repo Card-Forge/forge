@@ -1,0 +1,16 @@
+Name:The Destined Warrior
+ManaCost:1 W U B
+Types:Legendary Creature Human Warrior
+PT:3/3
+K:First Strike
+K:Vigilance
+K:Menace
+S:Mode$ ReduceCost | ValidCard$ Cleric,Rogue,Warrior,Wizard | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Cleric, Rogue, Warrior, and Wizard spells you cast cost {1} less to cast.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ At the beginning of combat on your turn, creatures you control get +1/+0 until end of turn. If you have a full party, creatures you control get +3/+0 until end of turn instead.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +X
+SVar:X:Count$Compare Y EQ4.3.1
+SVar:Y:Count$Party
+SVar:BuffedBy:Cleric,Rogue,Wizard
+DeckHas:Ability$Party
+DeckHints:Type$Cleric|Rogue|Warrior|Wizard
+Oracle:First strike, vigilance, menace\nCleric, Rogue, Warrior, and Wizard spells you cast cost {1} less to cast.\nAt the beginning of combat on your turn, creatures you control get +1/+0 until end of turn. If you have a full party, creatures you control get +3/+0 until end of turn instead.
