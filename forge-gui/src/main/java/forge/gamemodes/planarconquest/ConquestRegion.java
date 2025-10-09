@@ -105,7 +105,7 @@ public class ConquestRegion {
         protected ConquestRegion read(String line) {
             String name = null;
             String artCardName = null;
-            ColorSet colorSet = ColorSet.ALL_COLORS;
+            ColorSet colorSet = ColorSet.WUBRG;
             Predicate<PaperCard> pred = x -> true;
 
             String key, value;

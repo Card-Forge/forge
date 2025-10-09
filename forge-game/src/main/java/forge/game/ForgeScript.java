@@ -35,7 +35,7 @@ public class ForgeScript {
         boolean withSource = property.endsWith("Source");
         final ColorSet colors;
         if (withSource && StaticAbilityColorlessDamageSource.colorlessDamageSource(cardState)) {
-            colors = ColorSet.NO_COLORS;
+            colors = ColorSet.C;
         } else {
             colors = cardState.getCard().getColor(cardState);
         }
