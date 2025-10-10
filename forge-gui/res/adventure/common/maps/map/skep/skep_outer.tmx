@@ -108,7 +108,7 @@
       { &quot;checkQuestFlag&quot;: &quot;SliverQueenDefeated&quot; }
     ],
     &quot;name&quot;: &quot;The Sliver Queen has been defeated!&quot;,
-    &quot;text&quot;: &quot;My .... my gratitude to you stranger. I feel my strength slowly returning. As promised I'll take control of the Slivers again as her queen, the people of Shandalar shouldn't fear the Slivers of the Skep anymore. Though be warned adventurer, my children will still defend against any intruder why goes into the skep. Goodbye Adventurer&quot;,
+    &quot;text&quot;: &quot;My .... my gratitude to you stranger. I feel my strength slowly returning. As promised, I'll take control of the Slivers again as their queen. The people of Shandalar shouldn't fear the Slivers of the Skep anymore. Though be warned, adventurer, my children will still defend against any intruder who goes into the Skep. Goodbye, adventurer!&quot;,
     &quot;options&quot;: [
       {
         &quot;name&quot;: &quot;(Continue)&quot;,
