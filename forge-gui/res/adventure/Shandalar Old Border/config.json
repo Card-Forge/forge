@@ -3,7 +3,7 @@
   "screenHeight": 270,
   "skin": "skin/ui_skin.json",
   "playerBaseSpeed": 45,
-  "minDeckSize": 40,         
+  "minDeckSize": 40,
   "colorIds":["W","U","B","R","G"],
   "colorIdNames":["tr(lblWhite) [+W]","tr(lblBlue) [+U]","tr(lblBlack) [+B]","tr(lblRed) [+R]","tr(lblGreen) [+G]"],
   "restrictedCards": [

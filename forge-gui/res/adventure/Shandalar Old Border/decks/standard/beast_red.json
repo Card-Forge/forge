@@ -1,10 +1,36 @@
-{                                    
-"name":"Red Beast",
-  "template":
-  {
-   "count":60,
-   "colors":["Red"],
-   "tribe":"Beast",        
-   "rares":0.8
-  }
+{
+  "name": "Red Beast",
+  "mainDeck": [
+    {
+      "count": 8,
+      "colors": [
+        "Red"
+      ],
+      "subTypes": [
+        "Beast"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 30,
+      "colors": [
+        "Red"
+      ],
+      "subTypes": [
+        "Beast"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 22,
+      "cardName": "Mountain|USG"
+    }
+  ]
 }
