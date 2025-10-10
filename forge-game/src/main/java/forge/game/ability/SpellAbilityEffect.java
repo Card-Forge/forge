@@ -617,7 +617,7 @@ public abstract class SpellAbilityEffect {
         if (name.startsWith("Emblem")) {
             eff.setEmblem(true);
             // Emblem needs to be colorless
-            eff.setColor(ColorSet.NO_COLORS);
+            eff.setColor(ColorSet.C);
             eff.setRarity(CardRarity.Common);
         } else {
             eff.setColor(hostCard.getColor());
