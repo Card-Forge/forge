@@ -54,7 +54,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
 
     // might support different order via preference later
     private static final Comparator<Card> COMPARATOR = Comparator.comparingInt((Card c) -> c.getCMC())
-            .thenComparing(c -> c.getColor())
+            .thenComparing(c -> c.getColor().getOrderWeight())
             .thenComparing(Comparator.comparing(Card::getName))
             .thenComparing(Card::hasPerpetual);
 

@@ -66,12 +66,6 @@ public class CardProperty {
             if (!card.sharesNameWith(name)) {
                 return false;
             }
-        } else if (property.startsWith("notnamed")) {
-            String name = TextUtil.fastReplace(property.substring(8), ";", ","); // workaround for card name with ","
-            name = TextUtil.fastReplace(name, "_", " ");
-            if (card.sharesNameWith(name)) {
-                return false;
-            }
         } else if (property.equals("NamedCard")) {
             boolean found = false;
             for (String name : source.getNamedCards()) {
@@ -1564,8 +1558,6 @@ public class CardProperty {
                     return false;
                 }
             }
-        } else if (property.startsWith("notattacking")) {
-            return null == combat || !combat.isAttacking(card);
         } else if (property.startsWith("enlistedThisCombat")) {
             if (card.getEnlistedThisCombat() == false) return false;
         } else if (property.startsWith("attackedThisCombat")) {
@@ -1619,8 +1611,6 @@ public class CardProperty {
             if (Collections.disjoint(combat.getAttackersBlockedBy(source), combat.getAttackersBlockedBy(card))) {
                 return false;
             }
-        } else if (property.startsWith("notblocking")) {
-            return null == combat || !combat.isBlocking(card);
         }
         // Nex predicates refer to past combat and don't need a reference to actual combat
         else if (property.equals("blocked")) {
@@ -2068,16 +2058,6 @@ public class CardProperty {
                     }
                 }
                 if (!found) {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        } else if (property.startsWith("NotTriggered")) {
-            final String key = property.substring("NotTriggered".length());
-            if (spellAbility instanceof SpellAbility) {
-                SpellAbility sa = (SpellAbility) spellAbility;
-                if (card.equals(sa.getRootAbility().getTriggeringObject(AbilityKey.fromString(key)))) {
                     return false;
                 }
             } else {

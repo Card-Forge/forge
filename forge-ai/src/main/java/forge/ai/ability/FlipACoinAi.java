@@ -12,15 +12,13 @@ import forge.game.spellability.SpellAbility;
 public class FlipACoinAi extends SpellAbilityAi {
 
     /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
+     * @see forge.card.abilityfactory.SpellAiLogic#checkApiLogic(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         if (sa.hasParam("AILogic")) {
             String ailogic = sa.getParam("AILogic");
-            if (ailogic.equals("Never")) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            } else if (ailogic.equals("PhaseOut")) {
+            if (ailogic.equals("PhaseOut")) {
                 if (!ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa).contains(sa.getHostCard())) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }

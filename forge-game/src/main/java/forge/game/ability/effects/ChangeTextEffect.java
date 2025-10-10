@@ -35,7 +35,7 @@ public class ChangeTextEffect extends SpellAbilityEffect {
             final String[] changedColorWordsArray = sa.getParam("ChangeColorWord").split(" ");
             if (changedColorWordsArray[0].equals("Choose")) {
                 originalColor = sa.getActivatingPlayer().getController().chooseColor(
-                        Localizer.getInstance().getMessage("lblChooseColorReplace"), sa, ColorSet.ALL_COLORS);
+                        Localizer.getInstance().getMessage("lblChooseColorReplace"), sa, ColorSet.WUBRG);
                 changedColorWordOriginal = TextUtil.capitalize(originalColor.getName());
             } else {
                 changedColorWordOriginal = changedColorWordsArray[0];
@@ -45,7 +45,7 @@ public class ChangeTextEffect extends SpellAbilityEffect {
             if (changedColorWordsArray[1].equals("Choose")) {
                 final ColorSet possibleNewColors;
                 if (originalColor == null) { // no original color (ie. any or absent)
-                    possibleNewColors = ColorSet.ALL_COLORS;
+                    possibleNewColors = ColorSet.WUBRG;
                 } else { // may choose any except original color
                     possibleNewColors = ColorSet.fromEnums(originalColor).inverse();
                 }

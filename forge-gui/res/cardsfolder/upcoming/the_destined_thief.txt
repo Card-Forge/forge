@@ -1,0 +1,17 @@
+Name:The Destined Thief
+ManaCost:2 U
+Types:Legendary Creature Human Rogue
+PT:2/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+A:AB$ Effect | Cost$ U T | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Another target creature you control can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+T:Mode$ DamageAll | CombatDamage$ True | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigBranch | TriggerDescription$ Whenever one or more creatures you control deal combat damage to one or more players, draw a card, then discard a card. If you have a full party, instead draw three cards.
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$EQ4 | TrueSubAbility$ DBDraw1 | FalseSubAbility$ DBDraw2
+SVar:DBDraw1:DB$ Draw | NumCards$ 3
+SVar:DBDraw2:DB$ Draw | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+SVar:X:Count$Party
+SVar:BuffedBy:Cleric,Warrior,Wizard
+DeckHas:Ability$Party
+DeckHints:Type$Cleric|Warrior|Wizard
+Oracle:The Destined Thief can't be blocked.\n{U}, {T}: Another target creature you control can't be blocked this turn.\nWhenever one or more creatures you control deal combat damage to one or more players, draw a card, then discard a card. If you have a full party, instead draw three cards.

@@ -102,9 +102,9 @@ public class ConquestUtil {
         while (true) {
             name = SOptionPane.showInputDialog(Localizer.getInstance().getMessage("lblHistoriiansWillRecallYourConquestAs"), Localizer.getInstance().getMessage("lblConquestName"));
             if (name == null) { return null; }
-    
+
             name = QuestUtil.cleanString(name);
-    
+
             if (name.isEmpty()) {
                 SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblPleaseSpecifyConquestName"));
                 continue;
@@ -147,11 +147,13 @@ public class ConquestUtil {
         }
         //Move editions of cards already in the deck to the front.
         Map<CardEdition, Integer> editionStats = currentDeck.getAllCardsInASinglePool().getCardEditionStatistics(true);
+        // use flatMap instead of mapMulti for Android 13 and below
+        //https://developer.android.com/reference/java/util/stream/Stream#mapMulti
         List<CardEdition> out = planes.stream()
-                .<CardEdition>mapMulti((p, c) -> p.getEditions().forEach(c))
-                .filter(CardEdition::hasBasicLands)
-                .sorted(Comparator.comparing(e -> editionStats.getOrDefault(e, 0)))
-                .collect(Collectors.toList());
+            .flatMap(p -> p.getEditions().stream())
+            .filter(CardEdition::hasBasicLands)
+            .sorted(Comparator.comparing(e -> editionStats.getOrDefault(e, 0)))
+            .collect(Collectors.toList());
         return out;
     }
 
@@ -213,66 +215,64 @@ public class ConquestUtil {
         };
     }
 
-    public enum AEtherFilter implements IHasSkinProp {
-        C (null, new ColorFilter(MagicColor.COLORLESS), "Playable in {C}"),
-        W (null, new ColorFilter(MagicColor.WHITE), "Playable in {W}"),
-        U (null, new ColorFilter(MagicColor.BLUE), "Playable in {U}"),
-        B (null, new ColorFilter(MagicColor.BLACK), "Playable in {B}"),
-        R (null, new ColorFilter(MagicColor.RED), "Playable in {R}"),
-        G (null, new ColorFilter(MagicColor.GREEN), "Playable in {G}"),
+    public enum AEtherFilter implements IHasSkinProp, Predicate<PaperCard> {
+        C (null, new ColorFilter(MagicColor.COLORLESS)),
+        W (null, new ColorFilter(MagicColor.WHITE)),
+        U (null, new ColorFilter(MagicColor.BLUE)),
+        B (null, new ColorFilter(MagicColor.BLACK)),
+        R (null, new ColorFilter(MagicColor.RED)),
+        G (null, new ColorFilter(MagicColor.GREEN)),
 
-        WU (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLUE), "Playable in {W}{U}"),
-        WB (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLACK), "Playable in {W}{B}"),
-        UB (null, new ColorFilter(MagicColor.BLUE | MagicColor.BLACK), "Playable in {U}{B}"),
-        UR (null, new ColorFilter(MagicColor.BLUE | MagicColor.RED), "Playable in {U}{R}"),
-        BR (null, new ColorFilter(MagicColor.BLACK | MagicColor.RED), "Playable in {B}{R}"),
-        BG (null, new ColorFilter(MagicColor.BLACK | MagicColor.GREEN), "Playable in {B}{G}"),
-        RG (null, new ColorFilter(MagicColor.RED | MagicColor.GREEN), "Playable in {R}{G}"),
-        RW (null, new ColorFilter(MagicColor.RED | MagicColor.WHITE), "Playable in {R}{W}"),
-        GW (null, new ColorFilter(MagicColor.GREEN | MagicColor.WHITE), "Playable in {G}{W}"),
-        GU (null, new ColorFilter(MagicColor.GREEN | MagicColor.BLUE), "Playable in {G}{U}"),
+        WU (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLUE)),
+        WB (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLACK)),
+        UB (null, new ColorFilter(MagicColor.BLUE | MagicColor.BLACK)),
+        UR (null, new ColorFilter(MagicColor.BLUE | MagicColor.RED)),
+        BR (null, new ColorFilter(MagicColor.BLACK | MagicColor.RED)),
+        BG (null, new ColorFilter(MagicColor.BLACK | MagicColor.GREEN)),
+        RG (null, new ColorFilter(MagicColor.RED | MagicColor.GREEN)),
+        RW (null, new ColorFilter(MagicColor.RED | MagicColor.WHITE)),
+        GW (null, new ColorFilter(MagicColor.GREEN | MagicColor.WHITE)),
+        GU (null, new ColorFilter(MagicColor.GREEN | MagicColor.BLUE)),
 
-        WUB (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK), "Playable in {W}{U}{B}"),
-        WBG (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLACK | MagicColor.GREEN), "Playable in {W}{B}{G}"),
-        UBR (null, new ColorFilter(MagicColor.BLUE | MagicColor.BLACK | MagicColor.RED), "Playable in {U}{B}{R}"),
-        URW (null, new ColorFilter(MagicColor.BLUE | MagicColor.RED | MagicColor.WHITE), "Playable in {U}{R}{W}"),
-        BRG (null, new ColorFilter(MagicColor.BLACK | MagicColor.RED | MagicColor.GREEN), "Playable in {B}{R}{G}"),
-        BGU (null, new ColorFilter(MagicColor.BLACK | MagicColor.GREEN | MagicColor.BLUE), "Playable in {B}{G}{U}"),
-        RGW (null, new ColorFilter(MagicColor.RED | MagicColor.GREEN | MagicColor.WHITE), "Playable in {R}{G}{W}"),
-        RWB (null, new ColorFilter(MagicColor.RED | MagicColor.WHITE | MagicColor.BLACK), "Playable in {R}{W}{B}"),
-        GWU (null, new ColorFilter(MagicColor.GREEN | MagicColor.WHITE | MagicColor.BLUE), "Playable in {G}{W}{U}"),
-        GUR (null, new ColorFilter(MagicColor.GREEN | MagicColor.BLUE | MagicColor.RED), "Playable in {G}{U}{R}"),
+        WUB (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK)),
+        WBG (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLACK | MagicColor.GREEN)),
+        UBR (null, new ColorFilter(MagicColor.BLUE | MagicColor.BLACK | MagicColor.RED)),
+        URW (null, new ColorFilter(MagicColor.BLUE | MagicColor.RED | MagicColor.WHITE)),
+        BRG (null, new ColorFilter(MagicColor.BLACK | MagicColor.RED | MagicColor.GREEN)),
+        BGU (null, new ColorFilter(MagicColor.BLACK | MagicColor.GREEN | MagicColor.BLUE)),
+        RGW (null, new ColorFilter(MagicColor.RED | MagicColor.GREEN | MagicColor.WHITE)),
+        RWB (null, new ColorFilter(MagicColor.RED | MagicColor.WHITE | MagicColor.BLACK)),
+        GWU (null, new ColorFilter(MagicColor.GREEN | MagicColor.WHITE | MagicColor.BLUE)),
+        GUR (null, new ColorFilter(MagicColor.GREEN | MagicColor.BLUE | MagicColor.RED)),
 
-        WUBR (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK | MagicColor.RED), "Playable in {W}{U}{B}{R}"),
-        WUBG (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK | MagicColor.GREEN), "Playable in {W}{U}{B}{G}"),
-        WURG (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLUE | MagicColor.RED | MagicColor.GREEN), "Playable in {W}{U}{R}{G}"),
-        WBRG (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLACK | MagicColor.RED | MagicColor.GREEN), "Playable in {W}{B}{R}{G}"),
-        UBRG (null, new ColorFilter(MagicColor.BLUE | MagicColor.BLACK | MagicColor.RED | MagicColor.GREEN), "Playable in {U}{B}{R}{G}"),
+        WUBR (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK | MagicColor.RED)),
+        WUBG (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK | MagicColor.GREEN)),
+        WURG (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLUE | MagicColor.RED | MagicColor.GREEN)),
+        WBRG (null, new ColorFilter(MagicColor.WHITE | MagicColor.BLACK | MagicColor.RED | MagicColor.GREEN)),
+        UBRG (null, new ColorFilter(MagicColor.BLUE | MagicColor.BLACK | MagicColor.RED | MagicColor.GREEN)),
 
-        WUBRG     (null, new ColorFilter(MagicColor.ALL_COLORS), "Playable in {W}{U}{B}{R}{G}"),
+        WUBRG     (null, new ColorFilter(MagicColor.ALL_COLORS)),
 
-        CREATURE              (FSkinProp.IMG_CREATURE, new TypeFilter(EnumSet.of(CoreType.Creature)), "Creature"),
-        NONCREATURE_PERMANENT (FSkinProp.IMG_ENCHANTMENT, new TypeFilter(EnumSet.of(CoreType.Artifact, CoreType.Enchantment, CoreType.Planeswalker, CoreType.Land), EnumSet.of(CoreType.Creature)), "Noncreature Permanent"),
-        INSTANT_SORCERY       (FSkinProp.IMG_SORCERY, new TypeFilter(EnumSet.of(CoreType.Instant, CoreType.Sorcery)), "Instant or Sorcery"),
+        CREATURE              (FSkinProp.IMG_CREATURE, new TypeFilter(EnumSet.of(CoreType.Creature), "Creature")),
+        NONCREATURE_PERMANENT (FSkinProp.IMG_ENCHANTMENT, new TypeFilter(EnumSet.of(CoreType.Artifact, CoreType.Enchantment, CoreType.Planeswalker, CoreType.Land), EnumSet.of(CoreType.Creature), "Noncreature Permanent")),
+        INSTANT_SORCERY       (FSkinProp.IMG_SORCERY, new TypeFilter(EnumSet.of(CoreType.Instant, CoreType.Sorcery), "Instant or Sorcery")),
 
-        COMMON   (FSkinProp.IMG_PW_BADGE_COMMON, new RarityFilter(EnumSet.of(CardRarity.Common, CardRarity.Uncommon, CardRarity.Rare, CardRarity.Special, CardRarity.MythicRare)), "Common"),
-        UNCOMMON (FSkinProp.IMG_PW_BADGE_UNCOMMON, new RarityFilter(EnumSet.of(CardRarity.Uncommon, CardRarity.Rare, CardRarity.Special, CardRarity.MythicRare)), "Uncommon"),
-        RARE     (FSkinProp.IMG_PW_BADGE_RARE, new RarityFilter(EnumSet.of(CardRarity.Rare, CardRarity.Special, CardRarity.MythicRare)), "Rare"),
-        MYTHIC   (FSkinProp.IMG_PW_BADGE_MYTHIC, new RarityFilter(EnumSet.of(CardRarity.MythicRare)), "Mythic Rare (100%)"),
+        COMMON   (FSkinProp.IMG_PW_BADGE_COMMON, new RarityFilter(EnumSet.of(CardRarity.Common, CardRarity.Uncommon, CardRarity.Rare, CardRarity.Special, CardRarity.MythicRare))),
+        UNCOMMON (FSkinProp.IMG_PW_BADGE_UNCOMMON, new RarityFilter(EnumSet.of(CardRarity.Uncommon, CardRarity.Rare, CardRarity.Special, CardRarity.MythicRare))),
+        RARE     (FSkinProp.IMG_PW_BADGE_RARE, new RarityFilter(EnumSet.of(CardRarity.Rare, CardRarity.Special, CardRarity.MythicRare))),
+        MYTHIC   (FSkinProp.IMG_PW_BADGE_MYTHIC, new RarityFilter(EnumSet.of(CardRarity.MythicRare))),
 
-        CMC_LOW      (FSkinProp.IMG_CMC_LOW, new CMCFilter(0, 3), "Mana Value 0-3"),
-        CMC_LOW_MID  (FSkinProp.IMG_CMC_LOW_MID, new CMCFilter(2, 5), "Mana Value 2-5"),
-        CMC_MID_HIGH (FSkinProp.IMG_CMC_MID_HIGH, new CMCFilter(4, 7), "Mana Value 4-7"),
-        CMC_HIGH     (FSkinProp.IMG_CMC_HIGH, new CMCFilter(6, -1), "Mana Value 6+");
+        CMC_LOW      (FSkinProp.IMG_CMC_LOW, new CMCFilter(0, 3)),
+        CMC_LOW_MID  (FSkinProp.IMG_CMC_LOW_MID, new CMCFilter(2, 5)),
+        CMC_MID_HIGH (FSkinProp.IMG_CMC_MID_HIGH, new CMCFilter(4, 7)),
+        CMC_HIGH     (FSkinProp.IMG_CMC_HIGH, new CMCFilter(6, -1));
 
         private final FSkinProp skinProp;
         private final Predicate<PaperCard> predicate;
-        private String caption;
 
-        AEtherFilter(final FSkinProp skinProp0, final Predicate<PaperCard> predicate0, final String caption0) {
+        AEtherFilter(final FSkinProp skinProp0, final Predicate<PaperCard> predicate0) {
             skinProp = skinProp0;
             predicate = predicate0;
-            caption = caption0;
         }
 
         @Override
@@ -280,13 +280,14 @@ public class ConquestUtil {
             return skinProp;
         }
 
-        public Predicate<PaperCard> getPredicate() {
-            return predicate;
+        @Override
+        public boolean test(PaperCard card) {
+            return predicate.test(card);
         }
 
         public ColorSet getColor() {
-            if (predicate instanceof ColorFilter) {
-                return ((ColorFilter)predicate).color;
+            if (predicate instanceof ColorFilter cf) {
+                return cf.color;
             }
             return null;
         }
@@ -295,25 +296,15 @@ public class ConquestUtil {
             return getRarity(0d);
         }
         public CardRarity getRarity(double random) {
-            if (predicate instanceof RarityFilter) {
-                double total = 0d;
-                CardRarity rarity = null;
-                Map<CardRarity, Double> rarityOdds = ((RarityFilter)predicate).rarityOdds;
-                for (final Entry<CardRarity, Double> entry : rarityOdds.entrySet()) {
-                    rarity = entry.getKey();
-                    total += entry.getValue();
-                    if (random < total) {
-                        return rarity;
-                    }
-                }
-                return rarity;
+            if (predicate instanceof RarityFilter rf) {
+                return rf.getRarity(random);
             }
             return null;
         }
 
         @Override
         public String toString() {
-            return caption;
+            return predicate.toString();
         }
     }
 
@@ -331,8 +322,7 @@ public class ConquestUtil {
         }
     }
 
-    public static void updateRarityFilterOdds() {
-        ConquestPreferences prefs = FModel.getConquestPreferences();
+    public static void updateRarityFilterOdds(ConquestPreferences prefs) {
 
         Map<CardRarity, Double> odds = Maps.newEnumMap(CardRarity.class);
         if (prefs.getPrefBoolean(CQPref.AETHER_USE_DEFAULT_RARITY_ODDS)) {
@@ -353,7 +343,7 @@ public class ConquestUtil {
         }
 
         for (AEtherFilter filter : RARITY_FILTERS) {
-            filter.caption = ((RarityFilter)filter.predicate).updateOdds(odds);
+            ((RarityFilter)filter.predicate).updateOdds(odds);
         }
     }
 
@@ -419,20 +409,29 @@ public class ConquestUtil {
         public boolean test(PaperCard card) {
             return card.getRules().getColorIdentity().hasNoColorsExcept(color);
         }
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder("Playable in ");
+            for (MagicColor.Color c : color.getOrderedColors()) {
+                sb.append(c.getSymbol());
+            }
+            return sb.toString();
+        }
     }
 
     private static class TypeFilter implements Predicate<PaperCard> {
         private final Iterable<CoreType> types;
         private final Iterable<CoreType> nonTypes;
+        private final String caption;
 
-        private TypeFilter(Iterable<CoreType> types0) {
-            types = types0;
-            nonTypes = null;
+        private TypeFilter(Iterable<CoreType> types0, final String caption0) {
+            this(types0, null, caption0);
         }
 
-        private TypeFilter(Iterable<CoreType> types0, Iterable<CoreType> nonTypes0) {
+        private TypeFilter(Iterable<CoreType> types0, Iterable<CoreType> nonTypes0, final String caption0) {
             types = types0;
             nonTypes = nonTypes0;
+            caption = caption0;
         }
 
         @Override
@@ -452,10 +451,15 @@ public class ConquestUtil {
             }
             return false;
         }
+        @Override
+        public String toString() {
+            return caption;
+        }
     }
 
     private static class RarityFilter implements Predicate<PaperCard> {
         private final Map<CardRarity, Double> rarityOdds;
+        private String caption = "";
 
         private RarityFilter(Iterable<CardRarity> rarities0) {
             rarityOdds = Maps.newEnumMap(CardRarity.class);
@@ -464,11 +468,24 @@ public class ConquestUtil {
             }
         }
 
-        private String updateOdds(Map<CardRarity, Double> oddsLookup) {
+        public CardRarity getRarity(double random) {
+            double total = 0d;
+            CardRarity rarity = null;
+            for (final Entry<CardRarity, Double> entry : rarityOdds.entrySet()) {
+                rarity = entry.getKey();
+                total += entry.getValue();
+                if (random < total) {
+                    return rarity;
+                }
+            }
+            return rarity;
+        }
+
+        private void updateOdds(Map<CardRarity, Double> oddsLookup) {
             double baseOdds = 0;
             double remainingOdds = 1;
             CardRarity baseRarity = null;
-            StringBuilder caption = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
 
             for (CardRarity rarity : rarityOdds.keySet()) {
                 Double odds = oddsLookup.get(rarity);
@@ -485,21 +502,26 @@ public class ConquestUtil {
                     final String display = rounded < 1d
                             ? Double.toString(rounded) // Display decimal if < 1%
                             : Long.toString(Math.round(rounded));
-                    caption.append(", ").append(rarity.getLongName()).append(" (").append(display).append("%)");
+                    sb.append(", ").append(rarity.getLongName()).append(" (").append(display).append("%)");
                     rarityOdds.put(rarity, odds);
                 }
             }
 
             //prepend base rarity and odds
-            caption.insert(0, baseRarity.getLongName() + " (" + (Math.round(1000 * remainingOdds) / 10) + "%)");
+            sb.insert(0, baseRarity.getLongName() + " (" + (Math.round(1000 * remainingOdds) / 10) + "%)");
             rarityOdds.put(baseRarity, remainingOdds);
 
-            return caption.toString();
+            caption = sb.toString();
         }
 
         @Override
         public boolean test(PaperCard card) {
             return rarityOdds.containsKey(card.getRarity());
+        }
+
+        @Override
+        public String toString() {
+            return caption;
         }
     }
 
@@ -516,6 +538,14 @@ public class ConquestUtil {
             int cardCmc = card.getRules().getManaCost().getCMC();
             if (cardCmc < cmcMin) { return false; }
             return cmcMax == -1 || cardCmc <= cmcMax;
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder("Mana Value ");
+            sb.append(cmcMin);
+            sb.append(cmcMax == -1 ? "+" : "-" + cmcMax);
+            return sb.toString();
         }
     }
 }

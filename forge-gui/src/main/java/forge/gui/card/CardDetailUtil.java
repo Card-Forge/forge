@@ -451,7 +451,7 @@ public class CardDetailUtil {
         if (card.getMarkedColors() != null && !card.getMarkedColors().isColorless()) {
             area.append("\n");
             area.append("(").append(Localizer.getInstance().getMessage("lblSelected")).append(": ");
-            area.append(Lang.joinHomogenous(card.getMarkedColors().stream().map(MagicColor.Color::getLocalizedName).collect(Collectors.toList())));
+            area.append(Lang.joinHomogenous(card.getMarkedColors().stream().map(MagicColor.Color::getTranslatedName).collect(Collectors.toList())));
             area.append(")");
         }
 

@@ -461,7 +461,11 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, GameEntity affected, String question) {
-        return brains.aiShouldRun(replacementEffect, effectSA, affected);
+        Card host = replacementEffect.getHostCard();
+        if (host.hasAlternateState()) {
+            host = host.getGame().getCardState(host);
+        }
+        return brains.aiShouldRun(replacementEffect, effectSA, host, affected);
     }
 
     @Override
@@ -1025,7 +1029,7 @@ public class PlayerControllerAi extends PlayerController {
         if ((colors.getColor() & chosenColorMask) != 0) {
             return MagicColor.Color.fromByte(chosenColorMask);
         }
-        return Iterables.getFirst(colors.toEnumSet(), MagicColor.Color.COLORLESS);
+        return Iterables.getFirst(colors, MagicColor.Color.COLORLESS);
     }
 
     @Override
@@ -1034,7 +1038,7 @@ public class PlayerControllerAi extends PlayerController {
             return null;
         }
         if (colors.countColors() < 2) {
-            return Iterables.getFirst(colors.toEnumSet(), MagicColor.Color.WHITE);
+            return Iterables.getFirst(colors, MagicColor.Color.WHITE);
         }
         // You may switch on sa.getApi() here and use sa.getParam("AILogic")
         CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
@@ -1047,7 +1051,7 @@ public class PlayerControllerAi extends PlayerController {
         if ((colors.getColor() & chosenColorMask) != 0) {
             return MagicColor.Color.fromByte(chosenColorMask);
         }
-        return Iterables.getFirst(colors.toEnumSet(), MagicColor.Color.WHITE);
+        return Iterables.getFirst(colors, MagicColor.Color.WHITE);
     }
 
     @Override

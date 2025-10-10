@@ -6,6 +6,6 @@ SVar:DBChoose:DB$ ChooseCard | Defined$ You | Amount$ 1 | AtRandom$ True | Choic
 SVar:DBChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | Defined$ ChosenCard | StackDescription$ None | SubAbility$ DBShuffle | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ3
 SVar:DBShuffle:DB$ Shuffle | Defined$ You | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$DifferentCardNames_Creature.IsRemembered
+SVar:X:Remembered$DifferentCardNames
 AI:RemoveDeck:All
 Oracle:Search your library for three creature cards and reveal them. If you reveal three cards with different names, choose one of them at random and put that card into your hand. Shuffle the rest into your library.

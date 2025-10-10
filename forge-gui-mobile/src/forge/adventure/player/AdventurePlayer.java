@@ -45,7 +45,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private int heroRace;
     private int avatarIndex;
     private boolean isFemale;
-    private ColorSet colorIdentity = ColorSet.ALL_COLORS;
+    private ColorSet colorIdentity = ColorSet.WUBRG;
 
     // Deck data
     private Deck deck;
@@ -396,9 +396,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             if (temp != null)
                 setColorIdentity(temp);
             else
-                colorIdentity = ColorSet.ALL_COLORS;
+                colorIdentity = ColorSet.WUBRG;
         } else
-            colorIdentity = ColorSet.ALL_COLORS;
+            colorIdentity = ColorSet.WUBRG;
 
         gold = data.readInt("gold");
         maxLife = data.readInt("maxLife");
@@ -1194,9 +1194,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void removeItem(String name) {
-        ItemData item = ItemListData.getItem(name);
-        if (item != null)
-            removeItem(item);
+        inventoryItems.stream().filter(itemData -> name.equalsIgnoreCase(itemData.name)).findFirst().ifPresent(this::removeItem);
     }
 
     public void removeItem(ItemData item) {

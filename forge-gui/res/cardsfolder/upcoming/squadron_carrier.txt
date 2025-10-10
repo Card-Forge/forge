@@ -1,0 +1,10 @@
+Name:Squadron Carrier
+ManaCost:2 W
+Types:Artifact Spacecraft
+PT:4/4
+K:Station:10
+S:Mode$ Continuous | Affected$ Spacecraft.YouCtrl | AddAbility$ ABConjureExh | Description$ Spacecraft you control have "Exhaust — {W}: Conjure a card named Starfighter Pilot onto the battlefield."
+SVar:ABConjureExh:AB$ MakeCard | Cost$ W | Conjure$ True | Name$ Starfighter Pilot | Zone$ Battlefield | Exhaust$ True | SpellDescription$ Conjure a card named Starfighter Pilot onto the battlefield.
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE10_CHARGE | AddType$ Creature | AddStaticAbility$ CarrierStatic | Description$ STATION 10+ Creatures you control have flying.
+SVar:CarrierStatic:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Flying | Description$ Creatures you control have flying.
+Oracle:Spacecraft you control have "Exhaust — {W}: Conjure a card named Starfighter Pilot onto the battlefield."\nStation\nSTATION 10+\nCreatures you control have flying.

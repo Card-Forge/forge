@@ -283,6 +283,7 @@ Snail:Snails
 Snake:Snakes
 Soldier:Soldiers
 Soltari:Soltaris
+Sorcerer:Sorcerers
 Spawn:Spawns
 Specter:Specters
 Spellshaper:Spellshapers

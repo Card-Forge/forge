@@ -31,6 +31,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ChangeZoneEffect extends SpellAbilityEffect {
 
@@ -103,6 +104,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
         final String destination = sa.getParam("Destination");
 
+        final int num = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(host, sa.getParam("ChangeNum"), sa) : 1;
         String type = "card";
         boolean defined = false;
         if (sa.hasParam("ChangeTypeDesc")) {
@@ -117,12 +119,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             type = Lang.joinHomogenous(tgts);
             defined = true;
         } else if (sa.hasParam("ChangeType") && !sa.getParam("ChangeType").equals("Card")) {
-            final String ct = sa.getParam("ChangeType");
-            type = CardType.CoreType.isValidEnum(ct) ? ct.toLowerCase() : ct;
+            List<String> typeList = Arrays.stream(sa.getParam("ChangeType").split(",")).map(ct -> CardType.isACardType(ct) ? ct.toLowerCase() : ct).collect(Collectors.toList());
+            type = Lang.joinHomogenous(typeList, null, num == 1 ? "or" : "and/or");
         }
         final String cardTag = type.contains("card") ? "" : " card";
 
-        final int num = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(host, sa.getParam("ChangeNum"), sa) : 1;
         boolean tapped = sa.hasParam("Tapped");
         boolean attacking = sa.hasParam("Attacking");
         if (sa.isNinjutsu()) {
@@ -151,6 +152,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                                 " and/or graveyard for ");
             } else {
                 sb.append(" for ");
+            }
+            if (num != 1) {
+                sb.append(" up to ");
             }
             sb.append(Lang.nounWithNumeralExceptOne(num, type + cardTag)).append(", ");
             if (!sa.hasParam("NoReveal") && ZoneType.smartValueOf(destination) != null && ZoneType.smartValueOf(destination).isHidden()) {
@@ -1474,7 +1478,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
                 if (ZoneType.Exile.equals(destination) && sa.hasParam("WithCountersType")) {
                     CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
-                    int cAmount = AbilityUtils.calculateAmount(sa.getOriginalHost(), sa.getParamOrDefault("WithCountersAmount", "1"), sa);
+                    int cAmount = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
                     GameEntityCounterTable table = new GameEntityCounterTable();
                     movedCard.addCounter(cType, cAmount, player, table);
                     table.replaceCounterEffect(game, sa, true);

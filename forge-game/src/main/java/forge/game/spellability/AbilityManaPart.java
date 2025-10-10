@@ -17,7 +17,6 @@
  */
 package forge.game.spellability;
 
-import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import forge.card.ColorSet;
 import forge.card.GamePieceType;
@@ -49,9 +48,9 @@ import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -658,8 +657,8 @@ public class AbilityManaPart implements java.io.Serializable {
         }
         // replace Chosen for Spire colors
         if (origProduced.contains("ColorID")) {
-            Iterator<String> colors = Iterators.transform(sa.getHostCard().getMarkedColors().iterator(), MagicColor::toLongString);
-            origProduced = origProduced.replace("ColorID", getChosenColor(sa, () -> colors));
+            String str = sa.getHostCard().getMarkedColors().stream().map(c -> c.getShortName()).collect(Collectors.joining(" "));
+            origProduced = origProduced.replace("ColorID", str);
         }
         if (origProduced.contains("NotedColors")) {
             // Should only be used for Paliano, the High City

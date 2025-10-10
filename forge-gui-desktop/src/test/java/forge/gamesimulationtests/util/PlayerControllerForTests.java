@@ -471,15 +471,15 @@ public class PlayerControllerForTests extends PlayerController {
 
     @Override
     public MagicColor.Color chooseColor(String message, SpellAbility sa, ColorSet colors) {
-        if (colors.countColors()==0) {
+        if (colors.countColors() == 0) {
             return null;
         }
-        return Iterables.getFirst(colors.toEnumSet(), MagicColor.Color.WHITE);
+        return Iterables.getFirst(colors, MagicColor.Color.WHITE);
     }
 
     @Override
     public MagicColor.Color chooseColorAllowColorless(String message, Card card, ColorSet colors) {
-        return Iterables.getFirst(colors.toEnumSet(), MagicColor.Color.COLORLESS);
+        return Iterables.getFirst(colors, MagicColor.Color.COLORLESS);
     }
 
     private CardCollection chooseItems(CardCollectionView items, int amount) {
