@@ -325,13 +325,13 @@ public final class CardRules implements ICardCharacteristics {
         if (hasKeyword("Friends forever") && b.hasKeyword("Friends forever")) {
             legal = true; // Stranger Things Secret Lair gimmick partner commander
         }  
-        if (hasKeyword("Partner—Survivors") && b.hasKeyword("Partner—Survivors")) {
+        if (hasKeyword("Partner - Survivors") && b.hasKeyword("Partner - Survivors")) {
             legal = true; // The Last of Us Secret Lair gimmick partner commander
         }
-        if (hasKeyword("Partner—Father & Son") && b.hasKeyword("Partner—Father & Son")) {
+        if (hasKeyword("Partner - Father & Son") && b.hasKeyword("Partner - Father & Son")) {
             legal = true; // God of War Secret Lair gimmick partner commander
         }
-        if (hasKeyword("Partner—Character select") && b.hasKeyword("Partner—Character select")) {
+        if (hasKeyword("Partner - Character select") && b.hasKeyword("Partner - Character select")) {
             legal = true; // TMNT Commander deck gimmick partner commander
         }
         if (hasKeyword("Choose a Background") && b.canBeBackground()
