@@ -342,7 +342,7 @@
                 <executions>
                     <execution>
                         <id>flatten</id>
-                        <phase>deploy</phase>
+                        <phase>process-resources</phase>
                         <goals>
                             <goal>flatten</goal>
                         </goals>
