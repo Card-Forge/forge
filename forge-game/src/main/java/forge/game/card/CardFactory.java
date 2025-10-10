@@ -592,11 +592,11 @@ public class CardFactory {
                 state.setName(newName);
             }
 
-            if (sa.hasParam("AddColors")) {
+            if (cause.hasParam("AddColors")) {
                 state.addColor(colors);
             }
 
-            if (sa.hasParam("SetColor") || sa.hasParam("SetColorByManaCost")) {
+            if (cause.hasParam("SetColor") || cause.hasParam("SetColorByManaCost")) {
                 state.setColor(colors);
             }
 
