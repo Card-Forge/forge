@@ -788,7 +788,7 @@ public final class GameActionUtil {
         eff.setOwner(controller);
 
         eff.setImageKey(sourceCard.getImageKey());
-        eff.setColor(ColorSet.NO_COLORS);
+        eff.setColor(ColorSet.C);
         eff.setGamePieceType(GamePieceType.EFFECT);
         // try to get the SpellAbility from the mana ability
         //eff.setEffectSource((SpellAbility)null);
