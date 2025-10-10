@@ -993,7 +993,7 @@ public class DeckRecognizer {
 
     private static String getMagicColourLabel(MagicColor.Color magicColor) {
         if (magicColor == null) // Multicolour
-            return String.format("%s {W}{U}{B}{R}{G}", getLocalisedMagicColorName("Multicolour"));
+            return String.format("%s {W}{U}{B}{R}{G}", Localizer.getInstance().getMessage("lblMulticolor"));
         return String.format("%s %s", magicColor.getTranslatedName(), magicColor.getSymbol());
     }
 
