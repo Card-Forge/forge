@@ -6,6 +6,7 @@ import com.google.common.collect.Multimap;
 import forge.LobbyPlayer;
 import forge.card.ColorSet;
 import forge.card.ICardFace;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
@@ -265,8 +266,8 @@ public abstract class PlayerController {
 
     public abstract boolean chooseFlipResult(SpellAbility sa, Player flipper, boolean[] results, boolean call);
 
-    public abstract byte chooseColor(String message, SpellAbility sa, ColorSet colors);
-    public abstract byte chooseColorAllowColorless(String message, Card c, ColorSet colors);
+    public abstract MagicColor.Color chooseColor(String message, SpellAbility sa, ColorSet colors);
+    public abstract MagicColor.Color chooseColorAllowColorless(String message, Card c, ColorSet colors);
     public abstract List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options);
 
     public abstract ICardFace chooseSingleCardFace(SpellAbility sa, String message, Predicate<ICardFace> cpp, String name);
