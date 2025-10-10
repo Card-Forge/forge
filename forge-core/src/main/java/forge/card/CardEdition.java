@@ -248,6 +248,12 @@ public final class CardEdition implements Comparable<CardEdition> {
             return rarity.compareTo(o.rarity);
         }
 
+        public String getFlavorName() {
+            if(extraParams == null)
+                return null;
+            return extraParams.get("flavorname");
+        }
+
         public String getFunctionalVariantName() {
             if(extraParams == null)
                 return null;

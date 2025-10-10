@@ -179,49 +179,52 @@ final class CardFace implements ICardFace, Cloneable {
         if(this.functionalVariants != null) {
             //Copy fields to undefined ones in functional variants
             for (CardFace variant : this.functionalVariants.values()) {
-                if(variant.oracleText == null) variant.oracleText = this.oracleText;
-                if(variant.manaCost == null) variant.manaCost = this.manaCost;
-                if(variant.color == null) variant.color = ColorSet.fromManaCost(variant.manaCost);
-
-                if(variant.type == null) variant.type = this.type;
-
-                if(variant.power == null) {
-                    variant.power = this.power;
-                    variant.iPower = this.iPower;
-                }
-                if(variant.toughness == null) {
-                    variant.toughness = this.toughness;
-                    variant.iToughness = this.iToughness;
-                }
-
-                if("".equals(variant.initialLoyalty)) variant.initialLoyalty = this.initialLoyalty;
-                if("".equals(variant.defense)) variant.defense = this.defense;
-
-                //variant.assignMissingFields();
-                if(variant.keywords == null) variant.keywords = this.keywords;
-                else variant.keywords.addAll(0, this.keywords);
-
-                if(variant.abilities == null) variant.abilities = this.abilities;
-                else variant.abilities.addAll(0, this.abilities);
-
-                if(variant.staticAbilities == null) variant.staticAbilities = this.staticAbilities;
-                else variant.staticAbilities.addAll(0, this.staticAbilities);
-
-                if(variant.triggers == null) variant.triggers = this.triggers;
-                else variant.triggers.addAll(0, this.triggers);
-
-                if(variant.replacements == null) variant.replacements = this.replacements;
-                else variant.replacements.addAll(0, this.replacements);
-
-                if(variant.variables == null) variant.variables = this.variables;
-                else this.variables.forEach((k, v) -> variant.variables.putIfAbsent(k, v));
-
-                if(variant.nonAbilityText == null) variant.nonAbilityText = this.nonAbilityText;
-                if(variant.draftActions == null) variant.draftActions = this.draftActions;
-                if(variant.attractionLights == null) variant.attractionLights = this.attractionLights;
-                //if(variant.flavorName == null) variant.flavorName = this.flavorName; //Probably shouldn't be setting this on the main variant to begin with?
+                assignMissingFieldsToVariant(variant);
             }
         }
+    }
+
+    void assignMissingFieldsToVariant(CardFace variant) {
+        if(variant.oracleText == null) variant.oracleText = this.oracleText;
+        if(variant.manaCost == null) variant.manaCost = this.manaCost;
+        if(variant.color == null) variant.color = ColorSet.fromManaCost(variant.manaCost);
+
+        if(variant.type == null) variant.type = this.type;
+
+        if(variant.power == null) {
+            variant.power = this.power;
+            variant.iPower = this.iPower;
+        }
+        if(variant.toughness == null) {
+            variant.toughness = this.toughness;
+            variant.iToughness = this.iToughness;
+        }
+
+        if("".equals(variant.initialLoyalty)) variant.initialLoyalty = this.initialLoyalty;
+        if("".equals(variant.defense)) variant.defense = this.defense;
+
+        if(variant.keywords == null) variant.keywords = this.keywords;
+        else variant.keywords.addAll(0, this.keywords);
+
+        if(variant.abilities == null) variant.abilities = this.abilities;
+        else variant.abilities.addAll(0, this.abilities);
+
+        if(variant.staticAbilities == null) variant.staticAbilities = this.staticAbilities;
+        else variant.staticAbilities.addAll(0, this.staticAbilities);
+
+        if(variant.triggers == null) variant.triggers = this.triggers;
+        else variant.triggers.addAll(0, this.triggers);
+
+        if(variant.replacements == null) variant.replacements = this.replacements;
+        else variant.replacements.addAll(0, this.replacements);
+
+        if(variant.variables == null) variant.variables = this.variables;
+        else this.variables.forEach((k, v) -> variant.variables.putIfAbsent(k, v));
+
+        if(variant.nonAbilityText == null) variant.nonAbilityText = this.nonAbilityText;
+        if(variant.draftActions == null) variant.draftActions = this.draftActions;
+        if(variant.attractionLights == null) variant.attractionLights = this.attractionLights;
+        //if(variant.flavorName == null) variant.flavorName = this.flavorName; //Probably shouldn't be setting this on the main variant to begin with?
     }
 
 

@@ -482,6 +482,40 @@ public final class CardRules implements ICardCharacteristics {
             return mainPartName;
     }
 
+    /* package */ String findOrCreateVariantForFlavorName(String flavorName, String suggestedVariantName) {
+        Objects.requireNonNull(flavorName);
+        String[] nameParts = flavorName.trim().split("\\s*//\\s*");
+        flavorName = String.join(" // ", nameParts); //Normalize this just in case.
+        if(otherPart != null && nameParts.length < 2)
+            throw new IllegalArgumentException("Tried to assign a single flavor name to a multi-faced card. Use ' // ' as a separator in the flavorName parameter.");
+        if(supportedFunctionalVariants == null)
+            supportedFunctionalVariants = new HashSet<>();
+        for(String variantName : this.supportedFunctionalVariants) {
+            if(getDisplayNameForVariant(variantName).equals(flavorName))
+                return variantName;
+        }
+        String variantName = suggestedVariantName != null ? suggestedVariantName : "FlavorName" + flavorName.hashCode();
+        if(supportedFunctionalVariants.contains(variantName))
+            variantName = variantName + flavorName.hashCode();
+
+        CardFace variantMain = ((CardFace) mainPart).getOrCreateFunctionalVariant(variantName);
+        variantMain.setFlavorName(nameParts[0]);
+        //Rudimentary name replacement. Can't do nicknames, pronouns, ability words, or flavored keywords. Need to define variants manually for that.
+        if(mainPart.getOracleText().contains(mainPart.getName()))
+            variantMain.setOracleText(mainPart.getOracleText().replace(mainPart.getName(), nameParts[0]));
+        ((CardFace) mainPart).assignMissingFieldsToVariant(variantMain);
+
+        if(otherPart != null) {
+            CardFace variantOther = ((CardFace) otherPart).getOrCreateFunctionalVariant(variantName);
+            variantOther.setFlavorName(nameParts[1]);
+            if(otherPart.getOracleText().contains(otherPart.getName()))
+                variantMain.setOracleText(otherPart.getOracleText().replace(otherPart.getName(), nameParts[1]));
+            ((CardFace) otherPart).assignMissingFieldsToVariant(variantOther);
+        }
+
+        return variantName;
+    }
+
     public ColorSet getColorIdentity() {
         return colorIdentity;
     }

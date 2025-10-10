@@ -366,10 +366,27 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         artIds.put(key, artIdx);
 
         String variantName = cis.getFunctionalVariantName();
+        String flavorName = cis.getFlavorName();
+        assert(variantName == null || flavorName == null); //Can't currently assign both this way.
+
         if(variantName == null && !cr.getName().equals(cis.name())) {
             //If an edition entry uses a known flavor name without specifying the variant, swap to that variant.
             variantName = flavorNameMappings.get(cis.name());
             //System.out.printf("Auto-mapping flavor name \"%s\" -> \"%s\" $%s\n", cis.name(), cr.getName(), variantName);
+        }
+        if(flavorName != null) {
+            String suggestedFlavorName = e.getCode().startsWith("OM") ? "Alchemy"
+                    : e.getCode().equals("SLX") ? "UniversesWithin"
+                    : null;
+            variantName = cr.findOrCreateVariantForFlavorName(flavorName, suggestedFlavorName);
+            String normalizedFlavorName = cr.getDisplayNameForVariant(variantName);
+            if(!flavorNameMappings.containsKey(normalizedFlavorName)) {
+                flavorNameMappings.put(normalizedFlavorName, variantName);
+                rulesByName.put(normalizedFlavorName, cr);
+                cacheFlavorName(cr.getMainPart().getFunctionalVariant(variantName));
+                if(cr.getOtherPart() != null)
+                    cacheFlavorName(cr.getOtherPart().getFunctionalVariant(variantName));
+            }
         }
 
         addCard(new PaperCard(cr, e.getCode(), cis.rarity(), artIdx, false, cis.collectorNumber(), cis.artistName(), variantName));
