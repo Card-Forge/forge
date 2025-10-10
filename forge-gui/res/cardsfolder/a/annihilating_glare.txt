@@ -1,7 +1,7 @@
 Name:Annihilating Glare
 ManaCost:B
 Types:Sorcery
-K:AlternateAdditionalCost:Sac<1/Creature;Artifact/artifact or creature>:4
+K:AlternateAdditionalCost:Sac<1/Artifact;Creature>:4
 SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE3
 A:SP$ Destroy | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SpellDescription$ Destroy target creature or planeswalker.
 DeckHas:Ability$Sacrifice

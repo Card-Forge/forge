@@ -37,7 +37,9 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -856,6 +858,8 @@ public class Cost implements Serializable {
      */
     private static final String[] NUM_NAMES = { "zero", "a", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten" };
 
+    private static final Set<String> PLURAL_TEXT_AMOUNTS = new HashSet<>(Arrays.asList("X", "Y", "Z"));
+
     /**
      * Convert amount type to words.
      *
@@ -905,10 +909,7 @@ public class Cost implements Serializable {
 
         sb.append(" ");
         if (1 != i) {
-            String [] typewords = type.split(" ");
-            String lastWord = typewords[typewords.length - 1];
-            sb.append(CardType.isASubType(lastWord) ? type.replace(lastWord, CardType.getPluralType(lastWord))
-                    : type + "s");
+            sb.append(tryPluralizeLastType(type));
         } else {
             sb.append(type);
         }
@@ -930,9 +931,22 @@ public class Cost implements Serializable {
 
         sb.append(amount);
         sb.append(" ");
-        sb.append(type);
+
+        if (PLURAL_TEXT_AMOUNTS.contains(amount)) {
+            sb.append(tryPluralizeLastType(type));
+        } else {
+            sb.append(type);
+        }
 
         return sb.toString();
+    }
+
+    private static String tryPluralizeLastType(String type) {
+        String[] typewords = type.split(" ");
+        String lastWord = typewords[typewords.length - 1];
+        return CardType.isASubType(lastWord) 
+            ? type.replace(lastWord, CardType.getPluralType(lastWord))
+            : type + "s";
     }
 
     public void mergeTo(Cost source, int amt, final SpellAbility sa) {

@@ -187,8 +187,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-
-        final List<Player> tgts = getTargetPlayers(sa);
+        final List<Player> targets = getTargetPlayers(sa);
 
         String valid = sa.getParamOrDefault("SacValid", "Self");
         String num = sa.getParamOrDefault("Amount", "1");
@@ -200,13 +199,13 @@ public class SacrificeEffect extends SpellAbilityEffect {
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), num, sa);
 
         if (valid.equals("Self")) {
-            sb.append("Sacrifices ").append(sa.getHostCard());
+            sb.append("Sacrifice ").append(sa.getHostCard());
         } else if (valid.equals("Card.AttachedBy")) {
             final Card toSac = sa.getHostCard().getEnchantingCard();
             sb.append(toSac.getController()).append(" sacrifices ").append(toSac).append(".");
         } else {
-            sb.append(Lang.joinHomogenous(tgts)).append(" ");
-            boolean oneTgtP = tgts.size() == 1;
+            sb.append(Lang.joinHomogenous(targets)).append(" ");
+            boolean oneTgtP = targets.size() == 1;
 
             String msg = sa.getParamOrDefault("SacMessage", valid);
             msg = CardType.CoreType.isValidEnum(msg) ? msg.toLowerCase() : msg;
