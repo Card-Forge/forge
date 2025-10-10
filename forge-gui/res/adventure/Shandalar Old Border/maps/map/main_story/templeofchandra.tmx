@@ -617,7 +617,7 @@
   <object id="36" template="../../../../common/maps/obj/enemy.tx" x="112.333" y="517.67">
    <properties>
     <property name="effect">{
- "startBattleWithCard": [ "Prodigal Pyromancer" ]
+ "startBattleWithCard": [ "Goblin Sharpshooter|ONS" ]
 }</property>
     <property name="enemy" value="Chandra's Pyromancer" />
     <property name="reward">[
@@ -650,7 +650,7 @@
   <object id="38" template="../../../../common/maps/obj/enemy.tx" x="253.333" y="305">
    <properties>
     <property name="effect">{
- "startBattleWithCard": [ "Fervor" ]
+ "startBattleWithCard": [ "Fires of Yavimaya|INV" ]
 }</property>
     <property name="enemy" value="Chandra's Pyromancer" />
     <property name="reward">[
@@ -717,7 +717,7 @@
   <object id="42" template="../../../../common/maps/obj/enemy.tx" x="737" y="427.33">
    <properties>
     <property name="effect">{
- "startBattleWithCard": [ "Prodigal Pyromancer" ]
+ "startBattleWithCard": [ "Goblin Sharpshooter|ONS" ]
 }</property>
     <property name="enemy" value="Chandra's Pyromancer" />
     <property name="reward">[
@@ -734,7 +734,7 @@
   <object id="43" template="../../../../common/maps/obj/enemy.tx" x="737" y="452.33">
    <properties>
     <property name="effect">{
- "startBattleWithCard": [ "Prodigal Pyromancer" ]
+ "startBattleWithCard": [ "Goblin Sharpshooter|ONS" ]
 }</property>
     <property name="enemy" value="Chandra's Immolator" />
     <property name="reward">[
@@ -1084,7 +1084,7 @@
   <object id="68" template="../../../../common/maps/obj/enemy.tx" x="369.333" y="657.33">
    <properties>
     <property name="effect">{
- "startBattleWithCard": [ "Prodigal Pyromancer" ]
+ "startBattleWithCard": [ "Goblin Sharpshooter|ONS" ]
 }</property>
     <property name="enemy" value="Chandra's Acolyte" />
     <property name="reward">[
@@ -1407,7 +1407,7 @@
   <object id="180" template="../../../../common/maps/obj/enemy.tx" x="482.545" y="130.36">
    <properties>
     <property name="effect">{
- "startBattleWithCard": [ "Taurean Mauler", "Torchling"]
+ "startBattleWithCard": [ "Shivan Dragon|LEB", "Shivan Dragon|LEB"]
 }</property>
     <property name="enemy" value="Mimic" />
     <property name="reward">[

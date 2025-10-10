@@ -6,7 +6,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Aerie",
-		"map": "../common/maps/map/aerie/aerie_0.tmx",
+		"map": "../Shandalar Old Border/maps/map/aerie/aerie_0.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",

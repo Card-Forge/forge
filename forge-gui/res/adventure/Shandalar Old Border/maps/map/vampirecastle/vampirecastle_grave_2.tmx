@@ -151,7 +151,7 @@
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Murder|PRM|1&quot;
+		&quot;cardName&quot;: &quot;Snuff Out|MMQ|1&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
@@ -163,7 +163,7 @@
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Sign in Blood|PRM|1&quot;
+		&quot;cardName&quot;: &quot;Ambition's Cost|MIR|1&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
@@ -187,13 +187,13 @@
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Diabolic Edict|PMEI|1&quot;
+		&quot;cardName&quot;: &quot;Diabolic Edict|TMP|1&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Murder|PRM|1&quot;
+		&quot;cardName&quot;: &quot;Snuff Out|MMQ|1&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
@@ -205,7 +205,7 @@
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Sign in Blood|PRM|1&quot;
+		&quot;cardName&quot;: &quot;Ambition's Cost|MIR|1&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
@@ -229,7 +229,7 @@
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Diabolic Edict|PMEI|1&quot;
+		&quot;cardName&quot;: &quot;Diabolic Edict|TMP|1&quot;
 	}
 ]</property>
    </properties>
