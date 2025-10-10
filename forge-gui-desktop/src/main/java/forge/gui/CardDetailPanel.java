@@ -142,7 +142,7 @@ public class CardDetailPanel extends SkinnedPanel {
     }
 
     public final void setItem(final InventoryItemFromSet item) {
-        nameCostLabel.setText(item.getName());
+        nameCostLabel.setText(item.getDisplayName());
         typeLabel.setVisible(false);
         powerToughnessLabel.setVisible(false);
         idLabel.setText("");

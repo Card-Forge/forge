@@ -1251,9 +1251,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         g.drawImage(Forge.getAssets().getTexture(getDefaultSkinFile("cover.png"), false), x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
                     }
                     //fake labelname shadow
-                    g.drawText(item.getName(), GROUP_HEADER_FONT, Color.BLACK, (x + PADDING) - 1f, (y + PADDING * 2) + 1f, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);
+                    g.drawText(item.getDisplayName(), GROUP_HEADER_FONT, Color.BLACK, (x + PADDING) - 1f, (y + PADDING * 2) + 1f, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);
                     //labelname
-                    g.drawText(item.getName(), GROUP_HEADER_FONT, Color.WHITE, x + PADDING, y + PADDING * 2, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);
+                    g.drawText(item.getDisplayName(), GROUP_HEADER_FONT, Color.WHITE, x + PADDING, y + PADDING * 2, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);
                 } else {
                     if (!deckProxy.isGeneratedDeck()) {
                         if (deckProxy.getDeck().isEmpty()) {
@@ -1326,13 +1326,13 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         String key = item.getImageKey(false);
                         if (key.startsWith(ImageKeys.PRECON_PREFIX) || key.startsWith(ImageKeys.FATPACK_PREFIX)
                                 || key.startsWith(ImageKeys.BOOSTERBOX_PREFIX) || key.startsWith(ImageKeys.BOOSTER_PREFIX) || key.startsWith(ImageKeys.TOURNAMENTPACK_PREFIX)) {
-                            CardView cv = new CardView(-1, null, item.getName(), null, item.getImageKey(false));
+                            CardView cv = new CardView(-1, null, item.getDisplayName(), null, item.getImageKey(false));
                             CardImageRenderer.drawCardImage(g, cv, false, x, y, w, h, CardStackPosition.Top, false, false);
                             return;
                         }
                     }
                     g.fillRect(Color.BLACK, x, y, w, h);
-                    g.drawText(item.getName(), GROUP_HEADER_FONT, Color.WHITE, x + PADDING, y + PADDING, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);
+                    g.drawText(item.getDisplayName(), GROUP_HEADER_FONT, Color.WHITE, x + PADDING, y + PADDING, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);
                 }
             }
 

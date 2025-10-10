@@ -1,5 +1,5 @@
 Name:Guile, Sonic Soldier
-AltName:Immard, the Stormcleaver
+Variant:UniversesWithin:FlavorName:Immard, the Stormcleaver
 ManaCost:1 U R W
 Types:Legendary Creature Human Soldier
 PT:4/4

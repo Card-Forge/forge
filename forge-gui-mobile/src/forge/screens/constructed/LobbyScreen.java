@@ -777,7 +777,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             CardPool avatarPool = new CardPool();
             avatarPool.add(playerPanel.getVanguardAvatar());
             playerDeck.putSection(DeckSection.Avatar, avatarPool);
-            VanguardAvatar = Forge.getLocalizer().getMessage("lblVanguard") + ": " + playerPanel.getVanguardAvatar().getName();
+            VanguardAvatar = Forge.getLocalizer().getMessage("lblVanguard") + ": " + playerPanel.getVanguardAvatar().getDisplayName();
             playerPanel.setVanguarAvatarName(VanguardAvatar);
         }
 
