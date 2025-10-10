@@ -60,7 +60,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     private String name = "";
     private CardType type = new CardType(false);
     private ManaCost manaCost = ManaCost.NO_COST;
-    private ColorSet color = ColorSet.NO_COLORS;
+    private ColorSet color = ColorSet.C;
     private String oracleText = "";
     private String functionalVariantName = null;
     private int basePower = 0;
