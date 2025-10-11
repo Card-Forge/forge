@@ -5,8 +5,6 @@
  </editorsettings>
  <properties>
   <property name="canFailDungeon" type="bool" value="true" />
-  <property name="dungeonEffect">{"startBattleWithCardInCommandZone": [ "Griselbrand's Presence" ]
-}</property>
   <property name="respawnEnemies" type="bool" value="true" />
  </properties>
  <tileset firstgid="1" source="../../../../../common/maps/tileset/main.tsx" />

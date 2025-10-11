@@ -697,9 +697,6 @@
   </object>
   <object id="41" template="../../../../common/maps/obj/enemy.tx" x="736" y="508.33">
    <properties>
-    <property name="effect">{
- "startBattleWithCardInCommandZone": [ "Fire of Kaladesh" ]
-}</property>
     <property name="enemy" value="Chandra" />
     <property name="ignoreDungeonEffect" type="bool" value="false" />
     <property name="reward">[
@@ -862,9 +859,6 @@
   </object>
   <object id="51" template="../../../../common/maps/obj/enemy.tx" x="922.25" y="634.5">
    <properties>
-    <property name="effect">{
- "startBattleWithCardInCommandZone": [ "Pack Alpha" ]
-}</property>
     <property name="enemy" value="Chandra's Hellhound" />
     <property name="reward">[
   {
@@ -881,9 +875,6 @@
   </object>
   <object id="52" template="../../../../common/maps/obj/enemy.tx" x="511.167" y="928.92">
    <properties>
-    <property name="effect">{
- "startBattleWithCardInCommandZone": [ "Pack Alpha" ]
-}</property>
     <property name="enemy" value="Chandra's Hellhound" />
     <property name="reward">[
   {
@@ -900,9 +891,6 @@
   </object>
   <object id="53" template="../../../../common/maps/obj/enemy.tx" x="223.667" y="545.33">
    <properties>
-    <property name="effect">{
- "startBattleWithCardInCommandZone": [ "Pack Alpha" ]
-}</property>
     <property name="enemy" value="Chandra's Hellhound" />
     <property name="reward">[
   {
@@ -922,9 +910,6 @@
   <object id="56" template="../../../../common/maps/obj/gold.tx" x="343" y="145" />
   <object id="57" template="../../../../common/maps/obj/enemy.tx" x="175.5" y="192">
    <properties>
-    <property name="effect">{
- "startBattleWithCardInCommandZone": [ "Pack Alpha" ]
-}</property>
     <property name="enemy" value="Chandra's Hellhound" />
     <property name="reward">[
   {
@@ -1221,9 +1206,6 @@
   </object>
   <object id="171" template="../../../../common/maps/obj/enemy.tx" x="736.083" y="497.25">
    <properties>
-    <property name="effect">{
- "startBattleWithCardInCommandZone": [ "Fire of Kaladesh" ]
-}</property>
     <property name="enemy" value="Chandra" />
     <property name="ignoreDungeonEffect" type="bool" value="true" />
     <property name="reward">[

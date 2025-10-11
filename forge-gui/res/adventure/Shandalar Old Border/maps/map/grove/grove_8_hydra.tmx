@@ -148,10 +148,9 @@
   <object id="121" template="../../../../common/maps/obj/enemy.tx" x="222.406" y="242.409">
    <properties>
     <property name="effect">{
-	"startBattleWithCard": [ "First Head of the Hydra", "Second Head of the Hydra", "Third Head of the Hydra", "Fourth Head of the Hydra", "Fifth Head of the Hydra", "Sixth Head of the Hydra" ],
-	"startBattleWithCardInCommandZone": [ "The Hydra of Shandalar" ]
+	"startBattleWithCard": [ "First Head of the Hydra", "Second Head of the Hydra", "Third Head of the Hydra", "Fourth Head of the Hydra", "Fifth Head of the Hydra", "Sixth Head of the Hydra" ]
 }</property>
-    <property name="enemy" value="The Hydra of Shandalaar" />
+<property name="enemy" value="The Hydra of Shandalaar" />
     <property name="reward">[
   {
     "type": "item",

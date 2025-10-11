@@ -63,8 +63,6 @@
   <object id="100" template="../../../../common/maps/obj/enemy.tx" x="182.005" y="187.221">
    <properties>
     <property name="displayNameOverride" value="The Mother Slime"/>
-    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Slime Boss Effect&quot;]
-}</property>
     <property name="enemy" value="Ooze Boss"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>

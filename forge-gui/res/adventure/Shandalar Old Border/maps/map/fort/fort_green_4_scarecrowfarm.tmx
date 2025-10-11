@@ -52,8 +52,6 @@
   </object>
   <object id="56" template="../../../../common/maps/obj/enemy.tx" x="190.83" y="157.846">
    <properties>
-    <property name="effect">{ "startBattleWithCardInCommandZone": ["Scarecrow Totem"]
-}</property>
     <property name="enemy" value="Scarecrow Captain" />
     <property name="threatRange" type="int" value="60" />
     <property name="waypoints" value="98,117,118,117" />

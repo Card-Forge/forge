@@ -44,8 +44,6 @@
   <object id="49" template="../../../../common/maps/obj/gold.tx" x="681.038" y="604.87"/>
   <object id="53" template="../../../../common/maps/obj/enemy.tx" x="217.438" y="187.194" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Fungus of Slimefoot's Boss Effect&quot;]
-}</property>
     <property name="enemy" value="Slimefoot"/>
    </properties>
   </object>

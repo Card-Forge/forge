@@ -106,8 +106,6 @@
   </object>
   <object id="54" template="../../../../common/maps/obj/enemy.tx" gid="11419" x="323.079" y="72.763">
    <properties>
-    <property name="effect">{ "startBattleWithCardInCommandZone": [ "Jace Boss Effect" ]
-}</property>
     <property name="enemy" value="Jace" />
    </properties>
   </object>

@@ -71,7 +71,7 @@
     "Volcanic Island"
   ],
   "restrictedEditions": [
-
+    "30A"
   ],
   "allowedEditions": [
     "LEA",
@@ -120,7 +120,8 @@
     "JUD",
     "ONS",
     "LGN",
-    "SCG"
+    "SCG",
+    "PHPR"
   ],
   "difficulties": [
     {

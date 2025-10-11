@@ -4,8 +4,6 @@
   <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
  <properties>
-  <property name="dungeonEffect">{"startBattleWithCardInCommandZone": [ "Ghalta's Presence" ]
-}</property>
   <property name="respawnEnemies" type="bool" value="true" />
  </properties>
  <tileset firstgid="1" source="../../../../../common/maps/tileset/main.tsx" />

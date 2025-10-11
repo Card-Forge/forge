@@ -27,12 +27,16 @@
         },
         {
           "condition": [
-            { "checkQuestFlag": "Quest_ShardMines_Epilogue" },
+            {
+              "checkQuestFlag": "Quest_ShardMines_Epilogue"
+            },
             {
               "checkQuestFlag": "Quest_ShardMines_EpilogueComplete",
               "not": true
             },
-            { "hasShards": 3 }
+            {
+              "hasShards": 3
+            }
           ],
           "name": "Contact Sir Donovan (Requires 3 Mana Shards)",
           "action": [
@@ -59,7 +63,9 @@
         },
         {
           "condition": [
-            { "checkQuestFlag": "Quest_ShardMines_Epilogue" },
+            {
+              "checkQuestFlag": "Quest_ShardMines_Epilogue"
+            },
             {
               "checkQuestFlag": "Quest_ShardMines_EpilogueComplete",
               "not": true
@@ -89,7 +95,9 @@
               },
               "not": true
             },
-            { "hasShards": 5 }
+            {
+              "hasShards": 5
+            }
           ],
           "name": "Contact Sir Donovan (Requires 5 Mana Shards)",
           "text": "You funnel the power of your mana shards into the artifact. It takes using a few more of them before the device reacts this time, but eventually it glows in multiple colors once again.",
@@ -173,7 +181,6 @@
     }
   },
   {
-
     "name": "Ring of Renewal",
     "description": "Draft a Phoenix card, or conjure one to be cast with mana of any color.",
     "equipmentSlot": "Neck",
@@ -277,7 +284,7 @@
     "iconName": "SolRing",
     "effect": {
       "startBattleWithCard": [
-        "Sol Ring"
+        "Sol Ring|LEA"
       ]
     }
   },
@@ -287,7 +294,7 @@
     "iconName": "MoxEmerald",
     "effect": {
       "startBattleWithCard": [
-        "Mox Emerald"
+        "Mox Emerald|LEA"
       ]
     }
   },
@@ -297,7 +304,7 @@
     "iconName": "BlackLotus",
     "effect": {
       "startBattleWithCard": [
-        "Black Lotus"
+        "Black Lotus|LEA"
       ]
     }
   },
@@ -307,7 +314,7 @@
     "iconName": "MoxJet",
     "effect": {
       "startBattleWithCard": [
-        "Mox Jet"
+        "Mox Jet|LEA"
       ]
     }
   },
@@ -317,7 +324,7 @@
     "iconName": "MoxPearl",
     "effect": {
       "startBattleWithCard": [
-        "Mox Pearl"
+        "Mox Pearl|LEA"
       ]
     }
   },
@@ -327,7 +334,7 @@
     "iconName": "MoxRuby",
     "effect": {
       "startBattleWithCard": [
-        "Mox Ruby"
+        "Mox Ruby|LEA"
       ]
     }
   },
@@ -337,7 +344,7 @@
     "iconName": "MoxSapphire",
     "effect": {
       "startBattleWithCard": [
-        "Mox Sapphire"
+        "Mox Sapphire|LEA"
       ]
     }
   },
@@ -562,10 +569,10 @@
       "startBattleWithCard": [
         "Living Armor"
       ]
-  }
+    }
   },
   {
-   "name": "Soul Warden",
+    "name": "Soul Warden",
     "equipmentSlot": "Neck",
     "iconName": "SorinAmulet",
     "effect": {
@@ -573,7 +580,7 @@
       "startBattleWithCard": [
         "Soul Warden"
       ]
-  }
+    }
   },
   {
     "name": "Dagger",
@@ -648,7 +655,6 @@
         "Wall of Wood"
       ]
     }
-
   },
   {
     "name": "Mithril Armor",
@@ -742,7 +748,9 @@
     "iconName": "WoodBow",
     "cost": 1000,
     "effect": {
-      "startBattleWithCard": [ "Fyndhorn Bow" ]
+      "startBattleWithCard": [
+        "Fyndhorn Bow"
+      ]
     }
   },
   {
@@ -1122,7 +1130,6 @@
     },
     "iconName": "ShellWand"
   },
-
   {
     "name": "Manasight Amulet",
     "equipmentSlot": "Neck",
@@ -1335,7 +1342,7 @@
     "iconName": "SteelBoots",
     "effect": {
       "lifeModifier": -1,
-      "moveSpeed": 1.20,
+      "moveSpeed": 1.2,
       "startBattleWithCard": [
         "Gaea's Touch"
       ]
@@ -1347,7 +1354,7 @@
     "iconName": "MoxJet",
     "effect": {
       "lifeModifier": -1,
-      "moveSpeed": 1.20,
+      "moveSpeed": 1.2,
       "startBattleWithCard": [
         "Snake Basket"
       ],

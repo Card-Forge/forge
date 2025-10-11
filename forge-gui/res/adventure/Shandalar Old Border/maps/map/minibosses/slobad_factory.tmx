@@ -72,8 +72,6 @@
   </object>
   <object id="74" template="../../../../common/maps/obj/enemy.tx" x="398.667" y="110">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Slobad's Boss Effect&quot;]
-}</property>
     <property name="enemy" value="Slobad"/>
     <property name="threatRange" type="int" value="90"/>
     <property name="waypoints" value="92,93,95,94"/>
