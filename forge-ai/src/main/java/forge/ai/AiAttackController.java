@@ -850,6 +850,23 @@ public class AiAttackController {
         // Determine who will be attacked
         GameEntity defender = chooseDefender(combat, bAssault);
 
+        // Avoid creating an enemy army
+        // Darien, King of Kjeldor; Kazuul, Tyrant of the Cliffs etc
+        if (!bAssault && defender instanceof Player) {
+            for (Card c : ((Player)defender).getCardsIn(ZoneType.Battlefield)) {
+                for (Trigger t : c.getTriggers()) {
+                    if ((TriggerType.Attacks.equals(t.getMode())
+                            && t.getParamOrDefault("Attacked", "").contains("You"))
+                        || (TriggerType.DamageDoneOnce.equals(t.getMode())
+                            && t.getParamOrDefault("ValidTarget", "").contains("You")
+                            && ("" + c.getSVar("TrigToken")).contains("TokenAmount$ X"))
+                        && "TrigToken".equals(t.getParam("Execute"))) {
+                            return aiAggression;
+                    }
+                }
+            }
+        }
+
         // decided to attack another defender so related lists need to be updated
         // (though usually rather try to avoid this situation for performance reasons)
         if (defender != defendingOpponent) {
