@@ -1,0 +1,8 @@
+Name:Leonardo, Worldly Warrior
+ManaCost:7 W
+Types:Legendary Creature Mutant Ninja Turtle
+PT:5/5
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature you control.
+K:Double Strike
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:This spell costs {1} less to cast for each creature you control.\nDouble strike

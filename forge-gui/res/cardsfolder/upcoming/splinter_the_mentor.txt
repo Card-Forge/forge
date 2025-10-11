@@ -1,0 +1,10 @@
+Name:Splinter, the Mentor
+ManaCost:1 B
+Types:Legendary Creature Mutant Ninja Rat
+PT:2/2
+K:Menace
+T:Mode$ ChangesZone | ValidCard$ Card.Self,Creature.Other+!token+YouCtrl | Origin$ Battlefield | Destination$ Any | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME or another nontoken creature you control leaves the battlefield, create a Mutagen token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_mutagen_sac | TokenOwner$ You
+K:Partner - Character select
+DeckHas:Ability$Token & Type$Artifact|Mutagen
+Oracle:Menace\nWhenever Splinter or another nontoken creature you control leaves the battlefield, create a Mutagen token.\nPartner—Character select (You can have two commanders if both have this ability.)
