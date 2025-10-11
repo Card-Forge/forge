@@ -76,7 +76,7 @@ public class GameLauncher {
         }
 
         // Check if the manually supplied window size indicates portrait mode
-        if ((windowHeight > 0) & (windowWidth > 0)) {
+        if ((windowHeight > 0) && (windowWidth > 0)) {
             if (windowHeight > windowWidth) {
                 isPortrait = true;
             }
