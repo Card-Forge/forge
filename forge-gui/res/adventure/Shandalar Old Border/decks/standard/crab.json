@@ -1,12 +1,36 @@
-{                                    
-"name":"Crab",
-  "template":
-  {
-   "count":60,
-   "colors":["Blue"],
-   "tribe":"Crab",    
-   "tribeCards":1.0,
-   "tribeSynergyCards":0.2,
-   "rares":0.4
-  }
+{
+  "name": "Crab",
+  "mainDeck": [
+    {
+      "count": 23,
+      "colors": [
+        "Blue"
+      ],
+      "subTypes": [
+        "Crab"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 15,
+      "colors": [
+        "Blue"
+      ],
+      "subTypes": [
+        "Crab"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 22,
+      "cardName": "Island|LEB"
+    }
+  ]
 }

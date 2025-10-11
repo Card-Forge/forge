@@ -1,12 +1,36 @@
-{                                    
-"name":"Rogue",
-  "template":
-  {
-   "count":60,
-   "colors":["Black"],
-   "tribe":"Assassin",        
-   "tribeCards":1.0,
-   "tribeSynergyCards":0.2,
-   "rares":0.4
-  }
+{
+  "name": "Rogue",
+  "mainDeck": [
+    {
+      "count": 23,
+      "colors": [
+        "Black"
+      ],
+      "subTypes": [
+        "Assassin"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 15,
+      "colors": [
+        "Black"
+      ],
+      "subTypes": [
+        "Assassin"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 22,
+      "cardName": "Swamp|INV"
+    }
+  ]
 }

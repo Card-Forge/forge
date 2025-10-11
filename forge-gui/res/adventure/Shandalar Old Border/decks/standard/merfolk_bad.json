@@ -1,10 +1,36 @@
-{                                    
-"name":"Merfolk bad",
-  "template":
-  {
-   "count":80,
-   "colors":["Blue"],
-   "tribe":"Merfolk",
-   "rares":0.1
-  }
+{
+  "name": "Merfolk bad",
+  "mainDeck": [
+    {
+      "count": 34,
+      "colors": [
+        "Blue"
+      ],
+      "subTypes": [
+        "Merfolk"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 4,
+      "colors": [
+        "Blue"
+      ],
+      "subTypes": [
+        "Merfolk"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 22,
+      "cardName": "Island|UGL"
+    }
+  ]
 }
