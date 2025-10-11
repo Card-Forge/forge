@@ -429,15 +429,19 @@ public class QuestEventDraft implements IQuestEvent {
 
     private void awardSelectedRare(final QuestDraftPrizes prizes) {
         final List<PaperCard> possibleCards = new ArrayList<>();
-        final List<String> cardNames = new ArrayList<>();
+        final HashSet<String> cardNames = new HashSet<>();
 
         for (final CardEdition edition : getAllEditions()) {
             for (final EditionEntry card : edition.getObtainableCards()) {
+                if (cardNames.contains(card.name())) {
+                    continue;
+                }
+
                 if (card.rarity() == CardRarity.Rare || card.rarity() == CardRarity.MythicRare) {
-                    final PaperCard cardToAdd = FModel.getMagicDb().getCommonCards().getCard(card.name(), edition.getCode());
-                    if (cardToAdd != null && !cardNames.contains(cardToAdd.getName())) {
+                    final PaperCard cardToAdd = FModel.getMagicDb().getCommonCards().getCard(card.name(), edition.getCode(), card.collectorNumber());
+                    if (cardToAdd != null) {
                         possibleCards.add(cardToAdd);
-                        cardNames.add(cardToAdd.getName());
+                        cardNames.add(card.name());
                     }
                 }
             }
@@ -455,18 +459,20 @@ public class QuestEventDraft implements IQuestEvent {
     private PaperCard getPromoCard() {
         final CardEdition randomEdition = getRandomEdition();
         final List<EditionEntry> cardsInEdition = new ArrayList<>();
-        final List<String> cardNames = new ArrayList<>();
+        final HashSet<String> cardNames = new HashSet<>();
 
         for (final EditionEntry card : randomEdition.getObtainableCards()) {
+            if (cardNames.contains(card.name())) {
+                continue;
+            }
+
             if (card.rarity() == CardRarity.Rare || card.rarity() == CardRarity.MythicRare) {
-                if (!cardNames.contains(card.name())) {
-                    cardsInEdition.add(card);
-                    cardNames.add(card.name());
-                }
+                cardsInEdition.add(card);
+                cardNames.add(card.name());
             }
         }
 
-        // For sets such as MB1 that only have cards from PLST.
+        // For sets such as MB1 that only have cards from PLST, or without any rare+ at all
         if (cardsInEdition.isEmpty()) {
             return FModel.getQuest().getCards().addRandomRare();
         }
@@ -478,7 +484,7 @@ public class QuestEventDraft implements IQuestEvent {
 
         while (promo == null && attempts-- > 0) {
             randomCard = cardsInEdition.get((int) (MyRandom.getRandom().nextDouble() * cardsInEdition.size()));
-            promo = FModel.getMagicDb().getCommonCards().getCard(randomCard.name(), randomEdition.getCode());
+            promo = FModel.getMagicDb().getCommonCards().getCard(randomCard.name(), randomEdition.getCode(), randomCard.collectorNumber());
         }
 
         if (promo == null) {
