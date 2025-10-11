@@ -1,0 +1,27 @@
+[metadata]
+Code=TMT
+Date=2026-03-06
+Name=Teenage Mutant Ninja Turtles
+Type=Expansion
+
+[cards]
+17 M Leonardo, Sewer Samurai @Ryan Pancoast
+27 R Turtles Forever @Devin Elle Kurtz
+29 R April O'Neil, Hacktivist @Xabi Gaztelua
+43 R Krang, Master Mind @Narendra Bintara Adi
+83 M Super Shredder @Néstor Ossandón Leal
+87 U Casey Jones, Jury-Rig Justiciar @Lordigan
+105 R Raphael's Technique @Andreas Zafiratos
+140 R Bebop & Rocksteady @Néstor Ossandón Leal
+253 L Plains @Gaboleps
+254 L Island @Gaboleps
+255 L Swamp @Gaboleps
+256 L Mountain @Gaboleps
+257 L Forest @Gaboleps
+261 R Turtles Forever @Devin Elle Kurtz
+301 M Leonardo, Sewer Samurai @Kevin Eastman
+310 L Plains @Gaboleps
+311 L Island @Gaboleps
+312 L Swamp @Gaboleps
+313 L Mountain @Gaboleps
+314 L Forest @Gaboleps
