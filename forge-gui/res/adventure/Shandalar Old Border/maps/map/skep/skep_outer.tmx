@@ -211,7 +211,7 @@
     ]
    }
 ]</property>
-    <property name="effect">{ "startBattleWithCard": [ "Metallic Sliver","Metallic Sliver"]
+    <property name="effect">{ "startBattleWithCard": [ "Metallic Sliver|TMP","Metallic Sliver|TMP"]
 }</property>
     <property name="enemy" value="Metallic Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -477,7 +477,7 @@
     ]
    }
 ]</property>
-    <property name="effect">{ "startBattleWithCard": [ "Ancient Tomb"]
+    <property name="effect">{ "startBattleWithCard": [ "Ancient Tomb|TMP"]
 }</property>
     <property name="enemy" value="Slivdrazi Experiment" />
     <property name="spawn.Easy" type="bool" value="true" />
@@ -969,7 +969,7 @@
     ]
    }
 ]</property>
-    <property name="effect">{ "startBattleWithCard": [ "Plated Sliver"]
+    <property name="effect">{ "startBattleWithCard": [ "Plated Sliver|LGN"]
 }</property>
     <property name="enemy" value="Recruiter Sliver" />
     <property name="spawn.Easy" type="bool" value="true" />

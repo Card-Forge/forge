@@ -200,7 +200,7 @@
   </object>
   <object id="101" template="../../../../common/maps/obj/enemy.tx" x="425" y="477.497" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Dense Foliage","Treatop Village"]
+    <property name="effect">{ "startBattleWithCard": [ "Dense Foliage|WTH","Treatop Village"]
 }</property>
     <property name="enemy" value="Swamp Troll" />
     <property name="threatRange" type="int" value="60" />
@@ -291,7 +291,7 @@
   </object>
   <object id="155" template="../../../../common/maps/obj/enemy.tx" x="585" y="524.664" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Enchantress's Presence"]
+    <property name="effect">{ "startBattleWithCard": [ "Enchantress's Presence|ONS"]
 }</property>
     <property name="enemy" value="Dark Enchanter" />
     <property name="reward">[
@@ -442,14 +442,14 @@
   </object>
   <object id="197" template="../../../../common/maps/obj/enemy.tx" x="40" y="55.1638" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Ashen Ghoul"]
+    <property name="effect">{ "startBattleWithCard": [ "Ashen Ghoul|ICE"]
 }</property>
     <property name="enemy" value="Bone Dragon" />
    </properties>
   </object>
   <object id="198" template="../../../../common/maps/obj/enemy.tx" x="148" y="155.164" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Bull Hippo"]
+    <property name="effect">{ "startBattleWithCard": [ "Bull Hippo|POR"]
 }</property>
     <property name="enemy" value="Hippo" />
     <property name="threatRange" type="int" value="20" />

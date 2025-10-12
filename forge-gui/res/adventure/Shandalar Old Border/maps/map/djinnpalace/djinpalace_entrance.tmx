@@ -151,7 +151,7 @@
   </object>
   <object id="105" template="../../../../common/maps/obj/enemy.tx" x="213.333" y="333.333">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Sky Diamond"]
+    <property name="effect">{ "startBattleWithCard": [ "Sky Diamond|MIR"]
 }</property>
     <property name="enemy" value="Ancient Silver Dragon" />
     <property name="threatRange" type="int" value="40" />

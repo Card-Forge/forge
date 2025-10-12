@@ -3,7 +3,7 @@
  <properties>
   <property name="canFailDungeon" type="bool" value="true" />
   <property name="dungeonEffect">{
-  "startBattleWithCard": [ "Ancient Tomb" ],
+  "startBattleWithCard": [ "Ancient Tomb|TMP" ],
 }</property>
   <property name="respawnEnemies" type="bool" value="true" />
  </properties>
@@ -581,7 +581,7 @@
   <object id="34" template="../../../../common/maps/obj/enemy.tx" x="64.3333" y="830.67">
    <properties>
     <property name="effect">{
- "startBattleWithCard": [ "Shard Phoenix" ]
+ "startBattleWithCard": [ "Shard Phoenix|STH" ]
 }</property>
     <property name="enemy" value="Phoenix" />
     <property name="ignoreDungeonEffect" type="bool" value="true" />
@@ -600,7 +600,7 @@
   <object id="35" template="../../../../common/maps/obj/enemy.tx" x="575.667" y="879.67">
    <properties>
     <property name="effect">{
- "startBattleWithCard": [ "Shard Phoenix" ]
+ "startBattleWithCard": [ "Shard Phoenix|STH" ]
 }</property>
     <property name="enemy" value="Phoenix" />
     <property name="reward">[
@@ -633,7 +633,7 @@
   <object id="37" template="../../../../common/maps/obj/enemy.tx" x="22.5" y="480.33">
    <properties>
     <property name="effect">{
- "startBattleWithCard": [ "Shard Phoenix" ]
+ "startBattleWithCard": [ "Shard Phoenix|STH" ]
 }</property>
     <property name="enemy" value="Phoenix" />
     <property name="reward">[
@@ -681,7 +681,7 @@
   <object id="40" template="../../../../common/maps/obj/enemy.tx" x="354.667" y="507.67">
    <properties>
     <property name="effect">{
- "startBattleWithCard": [ "Lightning Cloud" ]
+ "startBattleWithCard": [ "Lightning Cloud|VIS" ]
 }</property>
     <property name="enemy" value="Lightning Elemental" />
     <property name="reward">[
@@ -809,7 +809,7 @@
   <object id="48" template="../../../../common/maps/obj/enemy.tx" x="488.5" y="175.5">
    <properties>
     <property name="effect">{
- "startBattleWithCard": [ "Phyrexian Processor" ]
+ "startBattleWithCard": [ "Phyrexian Processor|USG" ]
 }</property>
     <property name="enemy" value="Lightning Elemental" />
     <property name="reward">[
@@ -827,7 +827,7 @@
   <object id="49" template="../../../../common/maps/obj/enemy.tx" x="509.333" y="510.83">
    <properties>
     <property name="effect">{
- "startBattleWithCard": [ "Caltrops" ]
+ "startBattleWithCard": [ "Caltrops|UDS" ]
 }</property>
     <property name="enemy" value="Chandra's Scorcher" />
     <property name="reward">[
@@ -928,7 +928,7 @@
   <object id="58" template="../../../../common/maps/obj/enemy.tx" x="671.5" y="159">
    <properties>
     <property name="effect">{
- "startBattleWithCard": [ "Shard Phoenix" ]
+ "startBattleWithCard": [ "Shard Phoenix|STH" ]
 }</property>
     <property name="enemy" value="Phoenix" />
     <property name="reward">[
@@ -946,7 +946,7 @@
   <object id="59" template="../../../../common/maps/obj/enemy.tx" x="64.3334" y="299">
    <properties>
     <property name="effect">{
- "startBattleWithCard": [ "Iron Star" ]
+ "startBattleWithCard": [ "Iron Star|LEA" ]
 }</property>
     <property name="enemy" value="Chandra's Pyromancer" />
     <property name="reward">[
@@ -963,7 +963,7 @@
   <object id="60" template="../../../../common/maps/obj/enemy.tx" x="39.5" y="131.5">
    <properties>
     <property name="effect">{
- "startBattleWithCard": [ "Ruby Medallion" ]
+ "startBattleWithCard": [ "Ruby Medallion|TMP" ]
 }</property>
     <property name="enemy" value="Chandra's Acolyte" />
     <property name="reward">[
@@ -980,7 +980,7 @@
   <object id="61" template="../../../../common/maps/obj/enemy.tx" x="585.591" y="591.36">
    <properties>
     <property name="effect">{
- "startBattleWithCard": [ "Blood Moon" ]
+ "startBattleWithCard": [ "Blood Moon|DRK" ]
 }</property>
     <property name="enemy" value="Chandra's Lavamancer" />
     <property name="reward">[
@@ -1014,7 +1014,7 @@
   <object id="63" template="../../../../common/maps/obj/enemy.tx" x="557.5" y="772.83">
    <properties>
     <property name="effect">{
- "startBattleWithCard": [ "Skirk Prospector" ]
+ "startBattleWithCard": [ "Skirk Prospector|ONS" ]
 }</property>
     <property name="enemy" value="Chandra's Scorcher" />
     <property name="reward">[
@@ -1032,7 +1032,7 @@
   <object id="64" template="../../../../common/maps/obj/enemy.tx" x="231" y="874">
    <properties>
     <property name="effect">{
- "startBattleWithCard": [ "Ghitu Encampment" ]
+ "startBattleWithCard": [ "Ghitu Encampment|ULG" ]
 }</property>
     <property name="enemy" value="Volcano Elemental" />
     <property name="reward">[
@@ -1049,7 +1049,7 @@
   <object id="65" template="../../../../common/maps/obj/enemy.tx" x="552.5" y="376">
    <properties>
     <property name="effect">{
- "startBattleWithCard": [ "Shard Phoenix" ]
+ "startBattleWithCard": [ "Shard Phoenix|STH" ]
 }</property>
     <property name="enemy" value="Phoenix" />
     <property name="reward">[
@@ -1115,7 +1115,7 @@
   <object id="71" template="../../../../common/maps/obj/enemy.tx" x="29.8333" y="632">
    <properties>
     <property name="effect">{
- "startBattleWithCard": [ "Dwarven Blastminer" ]
+ "startBattleWithCard": [ "Dwarven Blastminer|ONS" ]
 }</property>
     <property name="enemy" value="Dwarf" />
     <property name="reward">[
@@ -1133,7 +1133,7 @@
   <object id="72" template="../../../../common/maps/obj/enemy.tx" x="526.818" y="626.45">
    <properties>
     <property name="effect">{
- "startBattleWithCard": [ "Dwarven Blastminer" ]
+ "startBattleWithCard": [ "Dwarven Blastminer|ONS" ]
 }</property>
     <property name="enemy" value="Dwarf" />
     <property name="reward">[
@@ -1150,7 +1150,7 @@
   <object id="73" template="../../../../common/maps/obj/enemy.tx" x="575.5" y="688">
    <properties>
     <property name="effect">{
- "startBattleWithCard": [ "Shard Phoenix" ]
+ "startBattleWithCard": [ "Shard Phoenix|STH" ]
 }</property>
     <property name="enemy" value="Phoenix" />
     <property name="reward">[

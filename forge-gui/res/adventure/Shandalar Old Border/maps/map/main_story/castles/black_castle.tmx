@@ -192,7 +192,7 @@
 ]</property>
     <property name="effect">{
  "lifeModifier": 15,
- "startBattleWithCard": [ "Swamp" ]
+ "startBattleWithCard": [ "Swamp|LEA" ]
 }</property>
     <property name="enemy" value="Grave Titan" />
     <property name="pursueRange" type="int" value="10" />
