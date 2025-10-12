@@ -497,7 +497,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_multilevel_2/cave_18.tmx",
+		"map": "../common/maps/map/cave/cave_multilevel_2/cave_18.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -512,7 +512,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_multilevel_3/cave_21.tmx",
+		"map": "../common/maps/map/cave/cave_multilevel_3/cave_21.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -527,7 +527,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_multilevel/cave_16.tmx",
+		"map": "../common/maps/map/cave/cave_multilevel/cave_16.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
