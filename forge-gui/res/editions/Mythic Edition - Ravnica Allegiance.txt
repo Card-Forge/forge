@@ -22,3 +22,4 @@ R1 c_0_0_a_construct_total_artifacts @Victor Adame Minguez
 R2 emblem_dack_fayden @Jason Rainville
 R3 emblem_domri_chaos_bringer @Jason Rainville
 R4 emblem_jaya_ballard @Kieran Yanner
+R5 emblem_tamiyo_the_moon_sage @Lius Lasahido
