@@ -147,10 +147,13 @@ public class AdventureEventData implements Serializable {
         return draft;
     }
 
-    private static final Predicate<CardEdition> filterPioneer = FModel.getFormats().getPioneer().editionLegalPredicate;
-    private static final Predicate<CardEdition> filterModern = FModel.getFormats().getModern().editionLegalPredicate;
-    private static final Predicate<CardEdition> filterVintage = FModel.getFormats().getVintage().editionLegalPredicate;
     private static final Predicate<CardEdition> filterStandard = FModel.getFormats().getStandard().editionLegalPredicate;
+    private static final Predicate<CardEdition> filterPioneer =
+            FModel.getFormats().getPioneer().editionLegalPredicate.and(filterStandard.negate());
+    private static final Predicate<CardEdition> filterModern =
+            FModel.getFormats().getModern().editionLegalPredicate.and(FModel.getFormats().getPioneer().editionLegalPredicate.negate());
+    private static final Predicate<CardEdition> filterVintage =
+            FModel.getFormats().getVintage().editionLegalPredicate.and(FModel.getFormats().getModern().editionLegalPredicate.negate());
 
     public static Predicate<CardEdition> selectSetPool() {
         // Should we negate any of these to avoid overlap?
