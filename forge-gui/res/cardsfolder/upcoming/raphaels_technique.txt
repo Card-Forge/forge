@@ -1,0 +1,11 @@
+Name:Raphael's Technique
+ManaCost:4 R R
+Types:Instant
+K:Sneak:2 R
+A:SP$ GenericChoice | TempRemember$ Chooser | ShowChoice$ ExceptSelf | Defined$ Player | Choices$ Discard,No | SubAbility$ DBDiscard | SpellDescription$ Each player may discard their hand and draw seven cards.
+SVar:Discard:DB$ Pump | Defined$ Remembered | NoteCards$ Self | NoteCardsFor$ Discard | SpellDescription$ I will discard my hand.
+SVar:No:DB$ Pump | SpellDescription$ I will NOT discard my hand.
+SVar:DBDiscard:DB$ Discard | Mode$ Hand | Defined$ Player.NotedForDiscard | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ Player.NotedForDiscard | NumCards$ 7 | SubAbility$ DBClearNotes
+SVar:DBClearNotes:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ Discard
+Oracle:Sneak {2}{R} (You may cast this spell for {2}{R} if you also return an unblocked attacker you control to hand during the declare blockers step.)\nEach player may discard their hand and draw seven cards.

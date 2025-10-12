@@ -337,6 +337,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 return false;
             }
         }
+        if (sa.isSneak()) {
+            if (!game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                return false;
+            }
+        }
         return true;
     }
 
