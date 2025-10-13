@@ -1,0 +1,11 @@
+Name:Raphael, the Muscle
+ManaCost:4 R
+Types:Legendary Creature Mutant Ninja Turtle
+PT:4/4
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Creature.YouCtrl+HasCounters | ValidTarget$ Permanent,Player | ReplaceWith$ DmgTwice | Description$ Double all damage that creatures you control with counters on them would deal.
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, create a Mutagen token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_mutagen_sac | TokenOwner$ You
+K:Partner - Character select
+SVar:X:ReplaceCount$DamageAmount/Twice
+Oracle:Double all damage that creatures you control with counters on them would deal.\nWhen Raphael enters, create a Mutagen token.\nPartner—Character select (You can have two commanders if both have this ability.)
