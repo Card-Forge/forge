@@ -428,7 +428,7 @@ public class AbilityUtils {
             svarval = ability.getSVar(amount);
         }
         if (StringUtils.isBlank(svarval)) {
-            if ((ability != null) && (ability instanceof SpellAbility) && !(ability instanceof SpellPermanent)) {
+            if ((ability instanceof SpellAbility) && !(ability instanceof SpellPermanent)) {
                 System.err.printf("SVar '%s' not found in ability, fallback to Card (%s). Ability is (%s)%n", amount, card.getName(), ability);
             }
             svarval = card.getSVar(amount);
@@ -1598,9 +1598,9 @@ public class AbilityUtils {
         }
 
         if (player != null) {
-            Integer cached = player.getFromCache(s);
-            if (cached != null) {
-                return cached;
+            Integer cachedValue = player.getFromCache(s);
+            if (cachedValue != null) {
+                return cachedValue;
             }
         }
 
@@ -1618,13 +1618,7 @@ public class AbilityUtils {
             String n = l[0].substring(5);
             String v = ctb == null ? c.getSVar(n) : ctb.getSVar(n);
 
-            int value = doXMath(xCount(c, v, ctb), expr, c, ctb);
-
-            if (player != null) {
-                player.putInCache(s, value);
-            }
-
-            return value;
+            return computeAndCache(player, s, doXMath(xCount(c, v, ctb), expr, c, ctb));
         }
 
         final String[] sq;
@@ -1962,13 +1956,7 @@ public class AbilityUtils {
                 }
                 colorOccurrences += player.getDevotionMod();
 
-                int value = doXMath(colorOccurrences, expr, c, ctb);
-
-                if (player != null) {
-                    player.putInCache(s, value);
-                }
-
-                return value;
+                return computeAndCache(player, s, doXMath(colorOccurrences, expr, c, ctb));
             }
         } // end ctb != null
 
@@ -2608,13 +2596,7 @@ public class AbilityUtils {
                 }
             }
 
-            int value = doXMath(count, expr, c, ctb);
-
-            if (player != null) {
-                player.putInCache(s, value);
-            }
-
-            return value;
+            return computeAndCache(player, s, doXMath(count, expr, c, ctb));
         }
 
         if (sq[0].contains("Party")) {
@@ -2746,13 +2728,7 @@ public class AbilityUtils {
                 }
             }
 
-            int value = doXMath(colorOcurrencices, expr, c, ctb);
-
-            if (player != null) {
-                player.putInCache(s, value);
-            }
-
-            return value;
+            return computeAndCache(player, s, doXMath(colorOcurrencices, expr, c, ctb));
         }
 
         if (l[0].contains("ExactManaCost")) {
@@ -2771,13 +2747,7 @@ public class AbilityUtils {
             }
             manaCost.remove(ManaCost.NO_COST.getShortString());
 
-            int value = doXMath(manaCost.size(), expr, c, ctb);
-
-            if (player != null) {
-                player.putInCache(s, value);
-            }
-
-            return value;
+            return computeAndCache(player, s, doXMath(manaCost.size(), expr, c, ctb));
         }
 
         if (sq[0].equals("StormCount")) {
@@ -2907,11 +2877,7 @@ public class AbilityUtils {
                 }
             }
 
-            if (player != null) {
-                player.putInCache(s, max);
-            }
-
-            return max;
+            return computeAndCache(player, s, max);
         }
 
         if (sq[0].startsWith("MostProminentCreatureType")) {
@@ -2935,13 +2901,7 @@ public class AbilityUtils {
                     .map(Card::getNetPower)
                     .distinct().count();
 
-            int value = doXMath(uniquePowers, expr, c, ctb);
-
-            if (player != null) {
-                player.putInCache(s, value);
-            }
-
-            return value;
+            return computeAndCache(player, s, doXMath(uniquePowers, expr, c, ctb));
         }
         if (sq[0].startsWith("DifferentCounterKinds_")) {
             final Set<CounterType> kinds = Sets.newHashSet();
@@ -2951,13 +2911,7 @@ public class AbilityUtils {
                 kinds.addAll(card.getCounters().keySet());
             }
 
-            int value = doXMath(kinds.size(), expr, c, ctb);
-
-            if (player != null) {
-                player.putInCache(s, value);
-            }
-
-            return value;
+            return computeAndCache(player, s, doXMath(kinds.size(), expr, c, ctb));
         }
 
         // Complex counting methods
@@ -2971,13 +2925,18 @@ public class AbilityUtils {
             num = Iterables.size(someCards);
         }
 
-        int numValue = doXMath(num, expr, c, ctb);
+        return computeAndCache(player, s, doXMath(num, expr, c, ctb));
+    }
 
-        if (player != null) {
-            player.putInCache(s, numValue);
+    /** 
+        Caches the computed value if possible and returns it.
+     */
+    private static Integer computeAndCache(Player p, String key, int value) {
+        if (p != null) {
+            p.putInCache(key, value);
         }
 
-        return numValue;
+        return value;
     }
 
     public static final void applyManaColorConversion(ManaConversionMatrix matrix, String conversion) {
@@ -3473,11 +3432,15 @@ public class AbilityUtils {
 
         final Game game = player.getGame();
 
+        if (player.getFromCache(s) != null) {
+            return player.getFromCache(s);
+        }
+
         // count valid cards on the battlefield
         if (l[0].startsWith("Valid ")) {
             final String restrictions = l[0].substring(6);
             int num = CardLists.getValidCardCount(game.getCardsIn(ZoneType.Battlefield), restrictions, player, source, ctb);
-            return doXMath(num, m, source, ctb);
+            return computeAndCache(player, s, doXMath(num, m, source, ctb));
         }
 
         // count valid cards in any specified zone/s
@@ -3486,7 +3449,7 @@ public class AbilityUtils {
             final List<ZoneType> vZone = ZoneType.listValueOf(lparts[0].split("Valid")[1]);
             String restrictions = TextUtil.fastReplace(l[0], TextUtil.addSuffix(lparts[0]," "), "");
             int num = CardLists.getValidCardCount(game.getCardsIn(vZone), restrictions, player, source, ctb);
-            return doXMath(num, m, source, ctb);
+            return computeAndCache(player, s, doXMath(num, m, source, ctb));
         }
 
         if (l[0].startsWith("ThisTurnEntered")) {
