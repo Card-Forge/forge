@@ -325,9 +325,15 @@ public final class CardRulesPredicates {
                 return false;
             }
             if (face.hasFunctionalVariants()) {
+                //Couple quirks here - an ICardFace doesn't have a specific variant, so they all need to be checked.
+                //This means text matching the rules of one variant will match prints with any variant. In the case of
+                //flavor names though, we exclude their oracle modified text from matching, so that searching a flavor
+                //name will return only the card matching that name.
+                //TODO: Fix all that someday by doing rules searches by the PaperCard rather than the CardRules.
                 for (Map.Entry<String, ? extends ICardFace> v : face.getFunctionalVariants().entrySet()) {
-                    //Not a very pretty implementation, but an ICardFace doesn't have a specific variant, so they all need to be checked.
                     ICardFace vFace = v.getValue();
+                    if(vFace.getFlavorName() != null)
+                        continue;
                     String origOracle = vFace.getOracleText();
                     if(op(origOracle, operand))
                         return true;
