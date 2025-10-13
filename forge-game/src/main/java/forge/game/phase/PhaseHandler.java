@@ -175,6 +175,7 @@ public class PhaseHandler implements java.io.Serializable {
             if (turnEnded) {
                 turn++;
                 extraPhases.clear();
+                game.clearPlayersCache();
                 game.updateTurnForView();
                 game.fireEvent(new GameEventTurnBegan(playerTurn, turn));
 

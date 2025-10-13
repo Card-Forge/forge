@@ -1583,6 +1583,7 @@ public class AbilityUtils {
      * @return a int.
      */
     public static int xCount(Card c, final String s, final CardTraitBase ctb) {
+        String cacheKey = "xCount_" + s;
         final String s2 = applyAbilityTextChangeEffects(s, ctb);
         final String[] l = s2.split("/");
         final String expr = CardFactoryUtil.extractOperators(s2);
@@ -1598,7 +1599,7 @@ public class AbilityUtils {
         }
 
         if (player != null) {
-            Integer cachedValue = player.getFromCache(s);
+            Integer cachedValue = player.getFromCache(cacheKey);
             if (cachedValue != null) {
                 return cachedValue;
             }
@@ -1618,7 +1619,7 @@ public class AbilityUtils {
             String n = l[0].substring(5);
             String v = ctb == null ? c.getSVar(n) : ctb.getSVar(n);
 
-            return computeAndCache(player, s, doXMath(xCount(c, v, ctb), expr, c, ctb));
+            return doXMath(xCount(c, v, ctb), expr, c, ctb);
         }
 
         final String[] sq;
@@ -1956,7 +1957,7 @@ public class AbilityUtils {
                 }
                 colorOccurrences += player.getDevotionMod();
 
-                return computeAndCache(player, s, doXMath(colorOccurrences, expr, c, ctb));
+                return computeAndCache(player, cacheKey, doXMath(colorOccurrences, expr, c, ctb));
             }
         } // end ctb != null
 
@@ -2596,7 +2597,7 @@ public class AbilityUtils {
                 }
             }
 
-            return computeAndCache(player, s, doXMath(count, expr, c, ctb));
+            return computeAndCache(player, cacheKey, doXMath(count, expr, c, ctb));
         }
 
         if (sq[0].contains("Party")) {
@@ -2728,7 +2729,7 @@ public class AbilityUtils {
                 }
             }
 
-            return computeAndCache(player, s, doXMath(colorOcurrencices, expr, c, ctb));
+            return computeAndCache(player, cacheKey, doXMath(colorOcurrencices, expr, c, ctb));
         }
 
         if (l[0].contains("ExactManaCost")) {
@@ -2747,7 +2748,7 @@ public class AbilityUtils {
             }
             manaCost.remove(ManaCost.NO_COST.getShortString());
 
-            return computeAndCache(player, s, doXMath(manaCost.size(), expr, c, ctb));
+            return computeAndCache(player, cacheKey, doXMath(manaCost.size(), expr, c, ctb));
         }
 
         if (sq[0].equals("StormCount")) {
@@ -2877,7 +2878,7 @@ public class AbilityUtils {
                 }
             }
 
-            return computeAndCache(player, s, max);
+            return computeAndCache(player, cacheKey, max);
         }
 
         if (sq[0].startsWith("MostProminentCreatureType")) {
@@ -2901,7 +2902,7 @@ public class AbilityUtils {
                     .map(Card::getNetPower)
                     .distinct().count();
 
-            return computeAndCache(player, s, doXMath(uniquePowers, expr, c, ctb));
+            return computeAndCache(player, cacheKey, doXMath(uniquePowers, expr, c, ctb));
         }
         if (sq[0].startsWith("DifferentCounterKinds_")) {
             final Set<CounterType> kinds = Sets.newHashSet();
@@ -2911,7 +2912,7 @@ public class AbilityUtils {
                 kinds.addAll(card.getCounters().keySet());
             }
 
-            return computeAndCache(player, s, doXMath(kinds.size(), expr, c, ctb));
+            return computeAndCache(player, cacheKey, doXMath(kinds.size(), expr, c, ctb));
         }
 
         // Complex counting methods
@@ -2925,16 +2926,24 @@ public class AbilityUtils {
             num = Iterables.size(someCards);
         }
 
-        return computeAndCache(player, s, doXMath(num, expr, c, ctb));
+        return computeAndCache(player, cacheKey, doXMath(num, expr, c, ctb));
     }
 
     /** 
         Caches the computed value if possible and returns it.
      */
     private static Integer computeAndCache(Player p, String key, int value) {
-        if (p != null) {
-            p.putInCache(key, value);
+        if (p == null){
+            return value;
         }
+
+        if (key.contains("Remembered") ||
+            key.contains("Triggered") ||
+            key.contains("Chosen")) {
+            return value;
+        }
+
+        p.putInCache(key, value);
 
         return value;
     }
@@ -3426,21 +3435,21 @@ public class AbilityUtils {
     }
 
     public static int playerXProperty(final Player player, final String s, final Card source, CardTraitBase ctb) {
-
+        final String cacheKey = "playerXProperty_" + s;
         final String[] l = s.split("/");
         final String m = CardFactoryUtil.extractOperators(s);
 
         final Game game = player.getGame();
 
-        if (player.getFromCache(s) != null) {
-            return player.getFromCache(s);
+        if (player.getFromCache(cacheKey) != null) {
+            return player.getFromCache(cacheKey);
         }
 
         // count valid cards on the battlefield
         if (l[0].startsWith("Valid ")) {
             final String restrictions = l[0].substring(6);
             int num = CardLists.getValidCardCount(game.getCardsIn(ZoneType.Battlefield), restrictions, player, source, ctb);
-            return computeAndCache(player, s, doXMath(num, m, source, ctb));
+            return computeAndCache(player, cacheKey, doXMath(num, m, source, ctb));
         }
 
         // count valid cards in any specified zone/s
@@ -3449,7 +3458,7 @@ public class AbilityUtils {
             final List<ZoneType> vZone = ZoneType.listValueOf(lparts[0].split("Valid")[1]);
             String restrictions = TextUtil.fastReplace(l[0], TextUtil.addSuffix(lparts[0]," "), "");
             int num = CardLists.getValidCardCount(game.getCardsIn(vZone), restrictions, player, source, ctb);
-            return computeAndCache(player, s, doXMath(num, m, source, ctb));
+            return computeAndCache(player, cacheKey, doXMath(num, m, source, ctb));
         }
 
         if (l[0].startsWith("ThisTurnEntered")) {

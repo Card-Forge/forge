@@ -825,6 +825,7 @@ public class Game {
     }
 
     public void onPlayerLost(Player p) {
+        clearPlayersCache();
         //set for Avatar
         p.setHasLost(true);
         // Rule 800.4 Losing a Multiplayer game
@@ -1379,7 +1380,10 @@ public class Game {
         return AI_CAN_USE_TIMEOUT;
     }
 
-    public void resetCache() {
+    /**
+     * Reset players' cache.
+     */
+    public void clearPlayersCache() {
         getPlayers().forEach(p -> p.resetCache());
     }
 }
