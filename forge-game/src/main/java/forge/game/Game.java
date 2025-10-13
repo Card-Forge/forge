@@ -1378,4 +1378,8 @@ public class Game {
     public boolean canUseTimeout() {
         return AI_CAN_USE_TIMEOUT;
     }
+
+    public void resetCache() {
+        getPlayers().forEach(p -> p.resetCache());
+    }
 }

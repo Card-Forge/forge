@@ -1597,6 +1597,13 @@ public class AbilityUtils {
             }
         }
 
+        if (player != null) {
+            Integer cached = player.getFromCache(s);
+            if (cached != null) {
+                return cached;
+            }
+        }
+
         // accept straight numbers
         if (l[0].startsWith("Number$")) {
             final String number = l[0].substring(7);
@@ -1610,7 +1617,14 @@ public class AbilityUtils {
         if (l[0].startsWith("SVar$")) {
             String n = l[0].substring(5);
             String v = ctb == null ? c.getSVar(n) : ctb.getSVar(n);
-            return doXMath(xCount(c, v, ctb), expr, c, ctb);
+
+            int value = doXMath(xCount(c, v, ctb), expr, c, ctb);
+
+            if (player != null) {
+                player.putInCache(s, value);
+            }
+
+            return value;
         }
 
         final String[] sq;
@@ -1947,7 +1961,14 @@ public class AbilityUtils {
                     }
                 }
                 colorOccurrences += player.getDevotionMod();
-                return doXMath(colorOccurrences, expr, c, ctb);
+
+                int value = doXMath(colorOccurrences, expr, c, ctb);
+
+                if (player != null) {
+                    player.putInCache(s, value);
+                }
+
+                return value;
             }
         } // end ctb != null
 
@@ -2586,7 +2607,14 @@ public class AbilityUtils {
                     count++;
                 }
             }
-            return doXMath(count, expr, c, ctb);
+
+            int value = doXMath(count, expr, c, ctb);
+
+            if (player != null) {
+                player.putInCache(s, value);
+            }
+
+            return value;
         }
 
         if (sq[0].contains("Party")) {
@@ -2718,7 +2746,13 @@ public class AbilityUtils {
                 }
             }
 
-            return doXMath(colorOcurrencices, expr, c, ctb);
+            int value = doXMath(colorOcurrencices, expr, c, ctb);
+
+            if (player != null) {
+                player.putInCache(s, value);
+            }
+
+            return value;
         }
 
         if (l[0].contains("ExactManaCost")) {
@@ -2737,7 +2771,13 @@ public class AbilityUtils {
             }
             manaCost.remove(ManaCost.NO_COST.getShortString());
 
-            return doXMath(manaCost.size(), expr, c, ctb);
+            int value = doXMath(manaCost.size(), expr, c, ctb);
+
+            if (player != null) {
+                player.putInCache(s, value);
+            }
+
+            return value;
         }
 
         if (sq[0].equals("StormCount")) {
@@ -2866,6 +2906,11 @@ public class AbilityUtils {
                     max = entry.getValue();
                 }
             }
+
+            if (player != null) {
+                player.putInCache(s, max);
+            }
+
             return max;
         }
 
@@ -2889,7 +2934,14 @@ public class AbilityUtils {
                     .filter(CardPredicates.restriction(restriction, player, c, ctb))
                     .map(Card::getNetPower)
                     .distinct().count();
-            return doXMath(uniquePowers, expr, c, ctb);
+
+            int value = doXMath(uniquePowers, expr, c, ctb);
+
+            if (player != null) {
+                player.putInCache(s, value);
+            }
+
+            return value;
         }
         if (sq[0].startsWith("DifferentCounterKinds_")) {
             final Set<CounterType> kinds = Sets.newHashSet();
@@ -2898,7 +2950,14 @@ public class AbilityUtils {
             for (final Card card : list) {
                 kinds.addAll(card.getCounters().keySet());
             }
-            return doXMath(kinds.size(), expr, c, ctb);
+
+            int value = doXMath(kinds.size(), expr, c, ctb);
+
+            if (player != null) {
+                player.putInCache(s, value);
+            }
+
+            return value;
         }
 
         // Complex counting methods
@@ -2912,7 +2971,13 @@ public class AbilityUtils {
             num = Iterables.size(someCards);
         }
 
-        return doXMath(num, expr, c, ctb);
+        int numValue = doXMath(num, expr, c, ctb);
+
+        if (player != null) {
+            player.putInCache(s, numValue);
+        }
+
+        return numValue;
     }
 
     public static final void applyManaColorConversion(ManaConversionMatrix matrix, String conversion) {
