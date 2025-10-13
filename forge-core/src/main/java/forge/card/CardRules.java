@@ -351,7 +351,7 @@ public final class CardRules implements ICardCharacteristics {
         }
         return canBeCommander() && (hasKeyword("Partner") || !this.partnerWith.isEmpty() ||
                 hasKeyword("Friends forever") || hasKeyword("Choose a Background") ||
-                hasKeyword("Partner—Father & Son") || hasKeyword("Partner—Survivors") || hasKeyword("Partner—Character select") ||
+                hasKeyword("Partner - Father & Son") || hasKeyword("Partner - Survivors") || hasKeyword("Partner - Character select") ||
                 hasKeyword("Doctor's companion") || isDoctor());
     }
 
