@@ -2,7 +2,6 @@
 Code=ZNR
 Date=2020-09-25
 Name=Zendikar Rising
-Code2=ZNR
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:!dfc:fromSheet("ZNR cards"), 3 Uncommon:!dfc:fromSheet("ZNR cards"), 1 RareMythic:!dfc:fromSheet("ZNR cards"), 1 BasicLand
@@ -486,3 +485,6 @@ A-257 U A-Base Camp @Jokubas Uogintas
 9 bg_x_x_hydra @Filip Burburan
 10 c_1_1_a_construct @Jokubas Uogintas
 11 c_0_1_a_goblin_construct_noblock_ping @Johan Grenier
+
+[other]
+12 copy @Jason Rainville
