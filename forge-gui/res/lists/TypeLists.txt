@@ -316,6 +316,7 @@ Troll:Trolls
 Turtle:Turtles
 Tyranid:Tyranids
 Unicorn:Unicorns
+Utrom:Utroms
 Vampire:Vampires
 Varmint:Varmints
 Vedalken:Vedalkens
@@ -374,6 +375,7 @@ Junk
 Key:Keys
 Lander:Landers
 Map
+Mutagen
 Powerstone:Powerstones
 Spacecraft:Spacecraft
 Stone:Stones

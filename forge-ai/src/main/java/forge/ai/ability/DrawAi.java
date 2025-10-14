@@ -54,7 +54,7 @@ public class DrawAi extends SpellAbilityAi {
         }
 
         if (ComputerUtil.playImmediately(ai, sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         // Don't tap creatures that may be able to block
@@ -73,9 +73,10 @@ public class DrawAi extends SpellAbilityAi {
                 // TODO: make this configurable in the AI profile
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
         }
 
-        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /*
@@ -173,9 +174,8 @@ public class DrawAi extends SpellAbilityAi {
     public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         if (targetAI(ai, sa, sa.isTrigger() && sa.getHostCard().isInPlay())) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
+        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
     }
 
     /**
@@ -540,9 +540,8 @@ public class DrawAi extends SpellAbilityAi {
 
         if (targetAI(ai, sa, mandatory)) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
+        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
     }
 
     /* (non-Javadoc)

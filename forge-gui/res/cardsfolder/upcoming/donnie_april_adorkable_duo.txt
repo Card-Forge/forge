@@ -1,0 +1,9 @@
+Name:Donnie & April, Adorkable Duo
+ManaCost:4 U
+Types:Legendary Creature Mutant Ninja Human Turtle
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When NICKNAME enters, ABILITY
+SVar:TrigCharm:DB$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBDraw,DBChangeZone | AdditionalDescription$ or both. Each mode must target a different player.
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | ValidTgts$ Player | TargetUnique$ True | SpellDescription$ Target player draws two cards.
+SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Player | TargetUnique$ True | Hidden$ True | Mandatory$ True | ChangeType$ Artifact.TargetedPlayerOwn,Instant.TargetedPlayerOwn,Sorcery.TargetedPlayerOwn | ChangeTypeDesc$ artifact, instant or sorcery | ChangeNum$ 1 | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Target player returns an artifact, instant, or sorcery card from their graveyard to their hand.
+Oracle:When Donnie & April enter, choose one or both. Each mode must target a different player.\n• Target player draws two cards.\n• Target player returns an artifact, instant, or sorcery card from their graveyard to their hand.

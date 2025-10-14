@@ -11,4 +11,4 @@ SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | C
 SVar:X:Count$YourCountersExperience
 DeckHas:Ability$Counters
 DeckHints:Type$God
-Oracle:Whenever you attack with one or more Gods and whenever a God dies, you get an experience counter.\nAt the beginning of your end step, put a number of +1/+1 counters on target creature equal to the number of experience counters you have.\nPartner-Father & son (You can have two commanders if both have this ability.)
+Oracle:Whenever you attack with one or more Gods and whenever a God dies, you get an experience counter.\nAt the beginning of your end step, put a number of +1/+1 counters on target creature equal to the number of experience counters you have.\nPartner—Father & son (You can have two commanders if both have this ability.)

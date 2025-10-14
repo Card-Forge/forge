@@ -1,0 +1,9 @@
+Name:Donatello, the Brains
+ManaCost:2 U
+Types:Legendary Creature Mutant Ninja Turtle
+PT:2/4
+R:Event$ CreateToken | ActiveZones$ Battlefield | ValidToken$ Card.YouCtrl | ReplaceWith$ DBReplace | Description$ If one or more tokens would be created under your control, those tokens plus an additional Mutagen token are created instead.
+SVar:DBReplace:DB$ ReplaceToken | Type$ AddToken | Amount$ 1 | TokenScript$ c_a_mutagen_sac
+K:Partner - Character select
+DeckHas:Ability$Sacrifice|Token & Type$Mutagen
+Oracle:If one or more tokens would be created under your control, those tokens plus an additional Mutagen token are created instead.\nPartner—Character select (You can have two commanders if both have this ability.)

@@ -1,0 +1,10 @@
+Name:Leonardo, the Balance
+ManaCost:3 W
+Types:Legendary Creature Mutant Ninja Turtle
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.token+YouCtrl | TriggerZones$ Battlefield | Execute$ DBPutCounterAll | OptionalDecider$ You | ResolvedLimit$ 1 | TriggerDescription$ Whenever a token you control enters, you may put a +1/+1 counter on each creature you control. Do this only once each turn.
+SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ PumpAll | Cost$ W U B R G | ValidCards$ Creature.YouCtrl | KW$ Menace & Trample & Lifelink | SpellDescription$ Creatures you control gain menace, trample, and lifelink until end of turn.
+K:Partner - Character select
+DeckHints:Ability$Token
+Oracle:Whenever a token you control enters, you may put a +1/+1 counter on each creature you control. Do this only once each turn.\n{W}{U}{B}{R}{G}: Creatures you control gain menace, trample, and lifelink until end of turn.\nPartner—Character select (You can have two commanders if both have this ability.)
