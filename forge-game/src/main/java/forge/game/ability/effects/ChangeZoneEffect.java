@@ -1103,7 +1103,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (changeType.startsWith("EACH")) {
                 String[] eachTypes = changeType.substring(5).split(" & ");
                 for (String thisType : eachTypes) {
-                    for (int i = 0; i < changeNum && destination != null; i++) {
+                    for (int i = 0; i < changeNum; i++) {
                         CardCollection thisList = (CardCollection) AbilityUtils.filterListByType(fetchList, thisType, sa);
                         if (!chosenCards.isEmpty()) {
                             thisList.removeAll(chosenCards);
@@ -1138,7 +1138,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 // maybe prompt the user if they selected fewer than the maximum possible?
             } else {
                 // one at a time
-                for (int i = 0; i < changeNum && destination != null; i++) {
+                for (int i = 0; i < changeNum; i++) {
                     if (sa.hasParam("DifferentNames")) {
                         for (Card c : chosenCards) {
                             fetchList = CardLists.filter(fetchList, CardPredicates.sharesNameWith(c).negate());
@@ -1252,6 +1252,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 player.removeController(controlTimestamp);
             }
 
+            if (sa.hasParam("Exactly") && chosenCards.size() < changeNum) {
+                continue;
+            }
+
             HiddenOriginChoices choices = new HiddenOriginChoices();
             choices.searchedLibrary = searchedLibrary;
             choices.shuffleMandatory = shuffleMandatory;
@@ -1281,7 +1285,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             Player decider = ObjectUtils.firstNonNull(chooser, player);
 
             for (final Card c : chosenCards) {
-                Card movedCard = null;
+                Card movedCard;
                 final Zone originZone = game.getZoneOf(c);
                 Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                 moveParams.put(AbilityKey.FoundSearchingLibrary, searchedLibrary);
@@ -1412,6 +1416,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("WithMayLook") || sa.hasParam("Foretold")) {
                         movedCard.addMayLookFaceDownExile(sa.getActivatingPlayer());
                     }
+                }
+                else if (destination == null) {
+                    movedCard = c;
                 }
                 else {
                     movedCard = game.getAction().moveTo(destination, c, 0, sa, moveParams);
