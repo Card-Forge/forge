@@ -96,6 +96,10 @@ public class CloneAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             chance = cloneTgtAI(sa);
         } else {
+            if (sa.isReplacementAbility() && host.isCloned()) {
+                // prevent StackOverflow from infinite loop copying another ETB RE
+                return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
+            }
             if (sa.hasParam("Choices")) {
                 CardCollectionView choices = CardLists.getValidCards(host.getGame().getCardsIn(ZoneType.Battlefield),
                         sa.getParam("Choices"), host.getController(), host, sa);

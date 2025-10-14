@@ -965,7 +965,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         String name = state.getName();
         for (CardChangedName change : this.changedCardNames.values()) {
             if (change.isOverwrite()) {
-                name = change.getNewName();
+                name = change.newName();
             }
         }
         return alt ? StaticData.instance().getCommonCards().getName(name, true) :  name;
@@ -980,7 +980,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         for (CardChangedName change : this.changedCardNames.values()) {
             if (change.isOverwrite()) {
                 result = false;
-            } else if (change.isAddNonLegendaryCreatureNames()) {
+            } else if (change.addNonLegendaryCreatureNames()) {
                 result = true;
             }
         }
@@ -1011,6 +1011,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public void updateNameforView() {
         currentState.getView().updateName(currentState);
+    }
+
+    private record CardChangedName(String newName, boolean addNonLegendaryCreatureNames) {
+        public boolean isOverwrite() {
+            return newName != null;
+        }
     }
 
     public void setGamePieceType(GamePieceType gamePieceType) {
@@ -2265,7 +2271,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public final ColorSet getMarkedColors() {
         if (markedColor == null) {
-            return ColorSet.NO_COLORS;
+            return ColorSet.C;
         }
         return markedColor;
     }

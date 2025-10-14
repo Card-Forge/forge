@@ -269,22 +269,22 @@ public class EffectEffect extends SpellAbilityEffect {
                 }
             }
 
-            // Set Chosen Color(s)
             if (hostCard.hasChosenColor()) {
                 eff.setChosenColors(Lists.newArrayList(hostCard.getChosenColors()));
             }
 
-            // Set Chosen Cards
             if (hostCard.hasChosenCard()) {
                 eff.setChosenCards(hostCard.getChosenCards());
             }
 
-            // Set Chosen Player
             if (hostCard.hasChosenPlayer()) {
                 eff.setChosenPlayer(hostCard.getChosenPlayer());
             }
 
-            // Set Chosen Type
+            if (hostCard.getChosenDirection() != null) {
+                eff.setChosenDirection(hostCard.getChosenDirection());
+            }
+
             if (hostCard.hasChosenType()) {
                 eff.setChosenType(hostCard.getChosenType());
             }
@@ -292,12 +292,10 @@ public class EffectEffect extends SpellAbilityEffect {
                 eff.setChosenType2(hostCard.getChosenType2());
             }
 
-            // Set Chosen name
             if (hostCard.hasNamedCard()) {
                 eff.setNamedCards(Lists.newArrayList(hostCard.getNamedCards()));
             }
 
-            // chosen number
             if (sa.hasParam("SetChosenNumber")) {
                 eff.setChosenNumber(AbilityUtils.calculateAmount(hostCard, sa.getParam("SetChosenNumber"), sa));
             } else if (hostCard.hasChosenNumber()) {

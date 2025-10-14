@@ -331,6 +331,9 @@ public final class CardRules implements ICardCharacteristics {
         if (hasKeyword("Partner - Father & Son") && b.hasKeyword("Partner - Father & Son")) {
             legal = true; // God of War Secret Lair gimmick partner commander
         }
+        if (hasKeyword("Partner - Character select") && b.hasKeyword("Partner - Character select")) {
+            legal = true; // TMNT Commander deck gimmick partner commander
+        }
         if (hasKeyword("Choose a Background") && b.canBeBackground()
                 || b.hasKeyword("Choose a Background") && canBeBackground()) {
             legal = true; // commander with background
@@ -348,7 +351,7 @@ public final class CardRules implements ICardCharacteristics {
         }
         return canBeCommander() && (hasKeyword("Partner") || !this.partnerWith.isEmpty() ||
                 hasKeyword("Friends forever") || hasKeyword("Choose a Background") ||
-                hasKeyword("Partner - Father & Son") || hasKeyword("Partner - Survivors") ||
+                hasKeyword("Partner - Father & Son") || hasKeyword("Partner - Survivors") || hasKeyword("Partner - Character select") ||
                 hasKeyword("Doctor's companion") || isDoctor());
     }
 
