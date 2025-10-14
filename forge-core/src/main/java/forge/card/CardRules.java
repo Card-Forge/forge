@@ -513,6 +513,8 @@ public final class CardRules implements ICardCharacteristics {
             ((CardFace) otherPart).assignMissingFieldsToVariant(variantOther);
         }
 
+        supportedFunctionalVariants.add(variantName);
+
         return variantName;
     }
 

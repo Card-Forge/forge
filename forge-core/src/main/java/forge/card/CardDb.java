@@ -350,11 +350,18 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     private void cacheFlavorNames(CardRules rules, Map<String, CardRules> map) {
         if(rules.getSupportedFunctionalVariants() == null)
             return;
+        boolean hasFlavorName = false;
+        String baseName = rules.getName();
         for(String variantName : rules.getSupportedFunctionalVariants()) {
             String name = rules.getDisplayNameForVariant(variantName);
+            if(baseName.equals(name))
+                continue;
+            hasFlavorName = true;
             map.put(name, rules);
             flavorNameMappings.put(name, variantName);
         }
+        if(hasFlavorName)
+            flavorNameMappings.put(baseName, IPaperCard.NO_FUNCTIONAL_VARIANT);
     }
 
     private void addSetCard(CardEdition e, EditionEntry cis, CardRules cr) {
@@ -869,9 +876,16 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             cardQueryFilter = card -> card.getArtIndex() == cr.artIndex;
         cardQueryFilter = cardQueryFilter.and(filter);
         cards = getAllCards(cr.cardName, cardQueryFilter);
-        // Note: No need to check whether "cards" is empty; the next for loop will validate condition at L699
+        if (cards.isEmpty())
+            return null;
         if (cards.size() == 1)  // if only one candidate, there much else we should do
             return cr.isFoil ? cards.get(0).getFoiled() : cards.get(0);
+
+        if (flavorNameMappings.containsKey(cr.cardName)) {
+            Collection<PaperCard> matchingNames = cards.stream().filter(c -> c.getDisplayName().equals(cr.cardName)).collect(Collectors.toSet());
+            if(!matchingNames.isEmpty())
+                cards.retainAll(matchingNames);
+        }
 
         /* 2. Retrieve cards based of [Frame]Set Preference
            ================================================ */
