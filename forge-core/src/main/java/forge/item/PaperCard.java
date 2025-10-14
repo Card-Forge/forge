@@ -62,6 +62,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     private transient Boolean hasImage;
     private transient String displayName;
     private transient String sortableName;
+    private transient boolean hasFlavorName;
 
     @Override
     public String getName() {
@@ -252,6 +253,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         this.collectorNumber = (collectorNumber != null && !collectorNumber.isEmpty()) ? collectorNumber : IPaperCard.NO_COLLECTOR_NUMBER;
         this.functionalVariant = functionalVariant != null ? functionalVariant : IPaperCard.NO_FUNCTIONAL_VARIANT;
         this.displayName = rules.getDisplayNameForVariant(functionalVariant);
+        this.hasFlavorName = !name.equals(displayName);
         // If the user changes the language this will make cards sort by the old language until they restart the game.
         // This is a good tradeoff
         this.sortableName = TextUtil.toSortableName(CardTranslation.getTranslatedName(displayName));
@@ -315,6 +317,11 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     @Override
     public String getDisplayName() {
         return this.displayName;
+    }
+
+    @Override
+    public boolean hasFlavorName() {
+        return this.hasFlavorName;
     }
 
     private transient Set<String> searchableNames = null;
@@ -439,6 +446,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         rules = pc.getRules();
         rarity = pc.getRarity();
         displayName = pc.getDisplayName();
+        hasFlavorName = pc.hasFlavorName();
         sortableName = TextUtil.toSortableName(CardTranslation.getTranslatedName(displayName));
     }
 

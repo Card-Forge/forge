@@ -35,6 +35,13 @@ public interface InventoryItem extends ITranslatable {
         return getName();
     }
 
+    /**
+     * @return true if this item's display name is different from its actual name. False otherwise.
+     */
+    default boolean hasFlavorName() {
+        return false;
+    }
+
     @Override
     default String getUntranslatedType() {
         return getItemType();

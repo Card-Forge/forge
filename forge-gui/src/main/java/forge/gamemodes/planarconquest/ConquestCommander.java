@@ -73,6 +73,11 @@ public class ConquestCommander implements InventoryItem, IXmlWritable {
         return card.getDisplayName();
     }
 
+    @Override
+    public boolean hasFlavorName() {
+        return card.hasFlavorName();
+    }
+
     public String getPlayerName() {
         String name = card.getDisplayName();
         int idx = name.indexOf(',');
