@@ -95,6 +95,8 @@ public class PhaseHandler implements java.io.Serializable {
 
     private final transient Game game;
 
+    // Cached values for this phase
+    private transient Map<String, CardCollectionView> cachedValuesMap = Maps.newHashMap();
 
     public PhaseHandler(final Game game0) {
         game = game0;
@@ -150,6 +152,8 @@ public class PhaseHandler implements java.io.Serializable {
         boolean isTopsy = playerTurn.isPhasesReversed();
         boolean turnEnded = false;
 
+        cachedValuesMap.clear();
+
         game.getStack().clearUndoStack(); //can't undo action from previous phase
 
         if (bRepeatCleanup) { // for when Cleanup needs to repeat itself
@@ -175,7 +179,7 @@ public class PhaseHandler implements java.io.Serializable {
             if (turnEnded) {
                 turn++;
                 extraPhases.clear();
-                game.clearPlayersCache();
+                game.clearShortLivedCaches();
                 game.updateTurnForView();
                 game.fireEvent(new GameEventTurnBegan(playerTurn, turn));
 
@@ -1324,5 +1328,20 @@ public class PhaseHandler implements java.io.Serializable {
                 game.getCleanup().executeUntil(p);
             }
         }
+    }
+
+    /**
+     * Get the cache of CardCollectionView objects used to optimize repeated calls
+     * @return
+     */
+    public Map<String, CardCollectionView> getCache() {
+        return cachedValuesMap;
+    }
+
+    /**
+     * Clear the cache of CardCollectionView objects
+     */
+    public void clearCache() {
+        cachedValuesMap.clear();
     }
 }

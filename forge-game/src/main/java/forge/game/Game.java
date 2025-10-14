@@ -825,7 +825,7 @@ public class Game {
     }
 
     public void onPlayerLost(Player p) {
-        clearPlayersCache();
+        clearShortLivedCaches();
         //set for Avatar
         p.setHasLost(true);
         // Rule 800.4 Losing a Multiplayer game
@@ -1381,9 +1381,10 @@ public class Game {
     }
 
     /**
-     * Reset players' cache.
+     * Reset short lived caches that should not persist between turns or phases.
      */
-    public void clearPlayersCache() {
-        getPlayers().forEach(p -> p.resetCache());
+    public void clearShortLivedCaches() {
+        getPlayers().forEach(p -> p.clearCache());
+        phaseHandler.clearCache();
     }
 }

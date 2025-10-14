@@ -17,6 +17,9 @@
  */
 package forge.game.staticability;
 
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -25,13 +28,14 @@ import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 /**
- * The Class StaticAbility_CantBeCast.
+ * The Class StaticAbility_CantAttackBlock.
  */
 public class StaticAbilityCantAttackBlock {
 
@@ -42,7 +46,22 @@ public class StaticAbilityCantAttackBlock {
             return true;
         }
 
-        for (final Card ca : attacker.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+        final String cacheKey = "cantAttack_CantAttackAbilities_" + attacker.getGame().getPhaseHandler().getPhase();
+        final Map<String, CardCollectionView> cache = attacker.getGame().getPhaseHandler().getCache();
+        CardCollectionView collectionView = null;
+        
+        if (cache.containsKey(cacheKey)) {
+            collectionView = cache.get(cacheKey);
+        } else {
+            collectionView = attacker.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)
+                .stream()
+                .filter(c -> c.getStaticAbilities().stream()
+                    .anyMatch(ab -> ab.checkConditions(StaticAbilityMode.CantAttack)))
+                    .collect(Collectors.toCollection(CardCollection::new));
+            cache.put(cacheKey, collectionView);
+        }
+
+        for (final Card ca : collectionView) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.CantAttack)) {
                     continue;

@@ -4101,7 +4101,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         queryCache.put(queryKey, value);
     }
 
-    public void resetCache() {
+    public void clearCache() {
         queryCache.clear();
     }
 }
