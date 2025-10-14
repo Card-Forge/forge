@@ -522,6 +522,8 @@ public class AbilityUtils {
             }
         } else if (calcX[0].equals("OriginalHost")) {
             val = xCount(ability.getOriginalHost(), calcX[1], ability);
+        } else if (calcX[0].equals("DungeonsCompleted")) {
+            val = handlePaid(player.getCompletedDungeons(), calcX[1], card, ability);
         } else if (calcX[0].startsWith("ExiledWith")) {
             val = handlePaid(card.getExiledCards(), calcX[1], card, ability);
         } else if (calcX[0].startsWith("Convoked")) {
@@ -2541,34 +2543,13 @@ public class AbilityUtils {
             return doXMath(CardLists.getValidCardCount(game.getLeftGraveyardThisTurn(), validFilter, player, c, ctb), expr, c, ctb);
         }
 
-        // Count$UnlockedDoors <Valid>
-        if (sq[0].startsWith("UnlockedDoors")) {
-            final String[] workingCopy = l[0].split(" ", 2);
-            final String validFilter = workingCopy[1];
-
-            int unlocked = 0;
-            for (Card doorCard : CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), validFilter, player, c, ctb)) {
-                unlocked += doorCard.getUnlockedRooms().size();
-            }
-
-            return doXMath(unlocked, expr, c, ctb);
+        if (sq[0].equals("UnlockedDoors")) {
+            return doXMath(player.getUnlockedDoors().size(), expr, c, ctb);
         }
 
-        // Count$DistinctUnlockedDoors <Valid>
         // Counts the distinct names of unlocked doors. Used for the "Promising Stairs"
-        if (sq[0].startsWith("DistinctUnlockedDoors")) {
-            final String[] workingCopy = l[0].split(" ", 2);
-            final String validFilter = workingCopy[1];
-
-            Set<String> viewedNames = new HashSet<>();
-            for (Card doorCard : CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), validFilter, player, c, ctb)) {
-                for(CardStateName stateName : doorCard.getUnlockedRooms()) {
-                    viewedNames.add(doorCard.getState(stateName).getName());
-                }
-            }
-            int distinctUnlocked = viewedNames.size();
-
-            return doXMath(distinctUnlocked, expr, c, ctb);
+        if (sq[0].equals("DistinctUnlockedDoors")) {
+            return doXMath(Sets.newHashSet(player.getUnlockedDoors()).size(), expr, c, ctb);
         }
 
         // Manapool
@@ -2902,13 +2883,6 @@ public class AbilityUtils {
         }
 
         // TODO move below to handlePaid
-        if (sq[0].startsWith("SumPower")) {
-            final String[] restrictions = l[0].split("_");
-            int sumPower = game.getCardsIn(ZoneType.Battlefield).stream()
-                    .filter(CardPredicates.restriction(restrictions[1], player, c, ctb))
-                    .mapToInt(Card::getNetPower).sum();
-            return doXMath(sumPower, expr, c, ctb);
-        }
         if (sq[0].startsWith("DifferentPower_")) {
             final String restriction = l[0].substring(15);
             final int uniquePowers = (int) game.getCardsIn(ZoneType.Battlefield).stream()
@@ -3428,6 +3402,7 @@ public class AbilityUtils {
     }
 
     public static int playerXProperty(final Player player, final String s, final Card source, CardTraitBase ctb) {
+
         final String[] l = s.split("/");
         final String m = CardFactoryUtil.extractOperators(s);
 
@@ -3614,44 +3589,8 @@ public class AbilityUtils {
             return doXMath(player.hasBeenDealtCombatDamageSinceLastTurn() ? 1 : 0, m, source, ctb);
         }
 
-        if (value.equals("DungeonsCompleted")) {
-            return doXMath(player.getCompletedDungeons().size(), m, source, ctb);
-        }
-
         if (value.equals("RingTemptedYou")) {
             return doXMath(player.getNumRingTemptedYou(), m, source, ctb);
-        }
-
-        if (value.startsWith("DungeonCompletedNamed")) {
-            String [] full = value.split("_");
-            String name = full[1];
-            int completed = 0;
-            List<Card> dungeons = player.getCompletedDungeons();
-            for (Card c : dungeons) {
-                if (c.getName().equals(name)) {
-                    ++completed;
-                }
-            }
-            return doXMath(completed, m, source, ctb);
-        }
-        if (value.equals("DifferentlyNamedDungeonsCompleted")) {
-            int amount = 0;
-            List<Card> dungeons = player.getCompletedDungeons();
-            for (int i = 0; i < dungeons.size(); ++i) {
-                Card d1 = dungeons.get(i);
-                boolean hasSameName = false;
-                for (int j = i - 1; j >= 0; --j) {
-                    Card d2 = dungeons.get(j);
-                    if (d1.getName().equals(d2.getName())) {
-                        hasSameName = true;
-                        break;
-                    }
-                }
-                if (!hasSameName) {
-                    ++amount;
-                }
-            }
-            return doXMath(amount, m, source, ctb);
         }
 
         if (value.equals("AttractionsVisitedThisTurn")) {
@@ -3732,10 +3671,6 @@ public class AbilityUtils {
             return CardLists.getTotalPower(paidList, ctb);
         }
 
-        if (string.startsWith("SumToughness")) {
-            return Aggregates.sum(paidList, Card::getNetToughness);
-        }
-
         if (string.startsWith("GreatestCMC")) {
             return Aggregates.max(paidList, Card::getCMC);
         }
@@ -3744,8 +3679,8 @@ public class AbilityUtils {
             return CardUtil.getColorsFromCards(paidList).countColors();
         }
 
-        if (string.equals("DifferentCardNames")) {
-            return CardLists.getDifferentNamesCount(paidList);
+        if (string.startsWith("DifferentCardNames")) {
+            return doXMath(CardLists.getDifferentNamesCount(paidList), CardFactoryUtil.extractOperators(string), source, ctb);
         }
 
         if (string.equals("DifferentColorPair")) {

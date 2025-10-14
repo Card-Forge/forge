@@ -156,7 +156,7 @@ public class ManaEffect extends SpellAbilityEffect {
                 for (int nChar = 0; nChar < colorsNeeded.length(); nChar++) {
                     mask |= MagicColor.fromName(colorsNeeded.charAt(nChar));
                 }
-                colorMenu = mask == 0 ? ColorSet.ALL_COLORS : ColorSet.fromMask(mask);
+                colorMenu = mask == 0 ? ColorSet.WUBRG : ColorSet.fromMask(mask);
                 byte val = chooser.getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa, colorMenu);
                 if (0 == val) {
                     throw new RuntimeException("ManaEffect::resolve() /*any mana*/ - " + p + " color mana choice is empty for " + card.getName());

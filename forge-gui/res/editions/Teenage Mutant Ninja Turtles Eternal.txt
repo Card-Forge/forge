@@ -1,0 +1,19 @@
+[metadata]
+Code=TMC
+Date=2026-03-06
+Name=Teenage Mutant Ninja Turtles Eternal
+Type=Expansion
+
+[cards]
+1 M Leonardo, the Balance @Inkognit
+2 M Donatello, the Brains @Jason Rainville
+3 M Splinter, the Mentor @Andrea Tentori Montalto
+4 M Raphael, the Muscle @Ryan Pancoast
+5 M Michelangelo, the Heart @Néstor Ossandón Leal
+6 M Heroes in a Half Shell @Victor Maury
+101 M Leonardo, Worldly Warrior @Nathaniel Himawan
+109 M Donatello, Rad Scientist @Thomas Chamberlain-Keen
+111 R Donnie & April, Adorkable Duo @Le Vuong
+118 M Raphael, Tag Team Tough @Randy Vargas
+124 M Michelangelo, On the Scene @Lie Setiawan
+131 M Dark Ritual @Filipe Pagliuso
