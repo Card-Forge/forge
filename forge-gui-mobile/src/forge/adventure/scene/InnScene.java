@@ -158,7 +158,7 @@ public class InnScene extends UIScene {
             }
         }
         AdventureEventController controller = AdventureEventController.instance();
-        localEvent = controller.createEvent(AdventureEventController.EventStyle.Bracket, localPointOfInterestId);
+        localEvent = controller.createEvent(localPointOfInterestId);
         if(localEvent != null)
             controller.initializeEvent(localEvent, localPointOfInterestId, localObjectId, changes);
     }
@@ -166,7 +166,7 @@ public class InnScene extends UIScene {
     public static void replaceLocalEvent(AdventureEventController.EventFormat format, CardBlock cardBlock) {
         AdventurePlayer.current().getEvents().removeIf((data) -> data.sourceID.equals(localPointOfInterestId) && data.eventOrigin == localObjectId);
         AdventureEventController controller = AdventureEventController.instance();
-        localEvent = controller.createEvent(AdventureEventController.EventStyle.Bracket, format, cardBlock, localPointOfInterestId);
+        localEvent = controller.createEvent(format, cardBlock, localPointOfInterestId);
         if(localEvent != null)
             controller.initializeEvent(localEvent, localPointOfInterestId, localObjectId, changes);
     }

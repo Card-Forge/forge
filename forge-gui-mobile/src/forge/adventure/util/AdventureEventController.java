@@ -4,7 +4,6 @@ import forge.StaticData;
 import forge.adventure.data.AdventureEventData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
-import forge.card.CardEdition;
 import forge.deck.Deck;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
@@ -73,7 +72,7 @@ public class AdventureEventController implements Serializable {
         object = null;
     }
 
-    public AdventureEventData createEvent(EventStyle style, String pointID) {
+    public AdventureEventData createEvent(String pointID) {
         if (nextEventDate.containsKey(pointID) && nextEventDate.get(pointID) >= LocalDate.now().toEpochDay()) {
             // No event currently available here
             return null;
@@ -86,9 +85,9 @@ public class AdventureEventController implements Serializable {
         // After a certain number of wins, stop offering Jumpstart events
         if (Current.player().getStatistic().totalWins() < 10 &&
                 random.nextInt(10) <= 2) {
-            e = new AdventureEventData(eventSeed, EventFormat.Jumpstart, style);
+            e = new AdventureEventData(eventSeed, EventFormat.Jumpstart);
         } else {
-            e = new AdventureEventData(eventSeed, EventFormat.Draft, style);
+            e = new AdventureEventData(eventSeed, EventFormat.Draft);
         }
 
         if (e.cardBlock == null) {
@@ -98,9 +97,9 @@ public class AdventureEventController implements Serializable {
         return e;
     }
 
-    public AdventureEventData createEvent(EventStyle style, EventFormat format, CardBlock cardBlock, String pointID) {
+    public AdventureEventData createEvent(EventFormat format, CardBlock cardBlock, String pointID) {
         long eventSeed = getEventSeed(pointID);
-        AdventureEventData e = new AdventureEventData(eventSeed, format, style, cardBlock);
+        AdventureEventData e = new AdventureEventData(eventSeed, format, cardBlock);
         if(e.cardBlock == null)
              return null;
         return e;
@@ -121,16 +120,8 @@ public class AdventureEventController implements Serializable {
     }
 
     public void initializeEvent(AdventureEventData e, String pointID, int eventOrigin, PointOfInterestChanges changes) {
-        // If the chosen event seed recommends a four-person pod, run it as a RoundRobin
-        // Set can be null when it is only a meta set such as some Jumpstart events.
-        ///TODO: Move some of this into the event
-        CardEdition firstSet = e.cardBlock.getSets().isEmpty() ? null : e.cardBlock.getSets().get(0);
-        int podSize = firstSet == null ? 8 : firstSet.getDraftOptions().getRecommendedPodSize();
-
         e.sourceID = pointID;
         e.eventOrigin = eventOrigin;
-        if(podSize == 4)
-            e.style = EventStyle.RoundRobin;
 
         AdventureEventData.PairingStyle pairingStyle;
         if (e.style == EventStyle.RoundRobin) {
@@ -141,7 +132,7 @@ public class AdventureEventController implements Serializable {
 
         e.eventRules = new AdventureEventData.AdventureEventRules(e.format, pairingStyle, changes == null ? 1f : changes.getTownPriceModifier());
 
-        e.generateParticipants(podSize - 1); //-1 to account for the player
+        e.generateParticipants();
 
         AdventurePlayer.current().addEvent(e);
         nextEventDate.put(pointID, LocalDate.now().toEpochDay() + new Random().nextInt(2)); //next local event availability date

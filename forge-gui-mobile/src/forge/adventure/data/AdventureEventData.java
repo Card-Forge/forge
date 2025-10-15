@@ -96,11 +96,11 @@ public class AdventureEventData implements Serializable {
     }
 
     public AdventureEventData(Long seed, AdventureEventController.EventFormat selectedFormat) {
-        this(seed, selectedFormat, AdventureEventController.EventStyle.Bracket, pickCardBlockByFormat(selectedFormat));
+        this(seed, selectedFormat, null, pickCardBlockByFormat(selectedFormat));
     }
 
-    public AdventureEventData(Long seed, AdventureEventController.EventFormat selectedFormat, AdventureEventController.EventStyle style) {
-        this(seed, selectedFormat, style, pickCardBlockByFormat(selectedFormat));
+    public AdventureEventData(Long seed, AdventureEventController.EventFormat selectedFormat, CardBlock cardBlock) {
+        this(seed, selectedFormat, null, cardBlock);
     }
 
     public AdventureEventData(Long seed, AdventureEventController.EventFormat selectedFormat, AdventureEventController.EventStyle style, CardBlock cardBlock) {
@@ -120,6 +120,15 @@ public class AdventureEventData implements Serializable {
 
             setupJumpstartRewards();
         }
+
+        if(style == null) {
+            // If the chosen event seed recommends a four-person pod, run it as a RoundRobin
+            if (getRecommendedPodSize(cardBlock) == 4)
+                style = AdventureEventController.EventStyle.RoundRobin;
+            else
+                style = AdventureEventController.EventStyle.Bracket;
+        }
+        this.style = style;
 
         switch (style) {
             case Swiss:
@@ -372,6 +381,10 @@ public class AdventureEventData implements Serializable {
         }
     }
 
+    public void generateParticipants() {
+        this.generateParticipants(getRecommendedPodSize(this.cardBlock) - 1); //-1 to account for the player
+    }
+
     public void generateParticipants(int numberOfOpponents) {
         participants = new AdventureEventParticipant[numberOfOpponents + 1];
 
@@ -481,6 +494,12 @@ public class AdventureEventData implements Serializable {
                 }
             }
         }
+    }
+
+    public static int getRecommendedPodSize(CardBlock cardBlock) {
+        // Set can be null when it is only a meta set such as some Jumpstart events.
+        CardEdition firstSet = cardBlock.getSets().isEmpty() ? null : cardBlock.getSets().get(0);
+        return firstSet == null ? 8 : firstSet.getDraftOptions().getRecommendedPodSize();
     }
 
     private void assignPlayerNames(BoosterDraft draft) {
