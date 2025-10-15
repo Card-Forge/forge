@@ -86,7 +86,7 @@ public class CostUntapType extends CostPartWithList {
         if (!canUntapSource) {
             typeList.remove(source);
         }
-        typeList = CardLists.filter(typeList, CardPredicates.TAPPED, c -> c.getCounters(CounterEnumType.STUN) == 0 || c.canRemoveCounters(CounterType.get(CounterEnumType.STUN)));
+        typeList = CardLists.filter(typeList, CardPredicates.TAPPED, c -> c.getCounters(CounterEnumType.STUN) == 0 || c.canRemoveCounters(CounterEnumType.STUN));
 
         final int amount = this.getAbilityAmount(ability);
         return (typeList.size() != 0) && (typeList.size() >= amount);

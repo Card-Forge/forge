@@ -283,6 +283,7 @@ Snail:Snails
 Snake:Snakes
 Soldier:Soldiers
 Soltari:Soltaris
+Sorcerer:Sorcerers
 Spawn:Spawns
 Specter:Specters
 Spellshaper:Spellshapers
@@ -315,6 +316,7 @@ Troll:Trolls
 Turtle:Turtles
 Tyranid:Tyranids
 Unicorn:Unicorns
+Utrom:Utroms
 Vampire:Vampires
 Varmint:Varmints
 Vedalken:Vedalkens
@@ -368,12 +370,15 @@ Food:Foods
 Fortification
 Gold
 Incubator:Incubators
+Infinity
 Junk
 Key:Keys
 Lander:Landers
 Map
+Mutagen
 Powerstone:Powerstones
 Spacecraft:Spacecraft
+Stone:Stones
 Treasure:Treasures
 Vehicle:Vehicles
 [WalkerTypes]

@@ -7,6 +7,6 @@ SVar:DBRem:DB$ Pump | ImprintCards$ Valid Permanent.sharesNameWith Remembered+Is
 SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Card.IsImprinted | NoRegen$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.nonBasic | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever a permanent other than a basic land enters, destroy all other permanents with that name. They can't be regenerated.
-SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Permanent.NotTriggeredCard+sharesNameWith TriggeredCard | NoRegen$ True
+SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Permanent.!TriggeredCard+sharesNameWith TriggeredCard | NoRegen$ True
 AI:RemoveDeck:All
 Oracle:When Eye of Singularity enters, destroy each permanent with the same name as another permanent, except for basic lands. They can't be regenerated.\nWhenever a permanent other than a basic land enters, destroy all other permanents with that name. They can't be regenerated.

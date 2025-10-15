@@ -2,7 +2,6 @@
 Code=OGW
 Date=2016-01-22
 Name=Oath of the Gatewatch
-Code2=OGW
 Type=Expansion
 BoosterCovers=4
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand BFZ
@@ -203,13 +202,13 @@ TokenFallbackCode=BFZ
 
 [tokens]
 1 c_1_1_eldrazi_scion_sac @Izzy
-2 c_1_1_eldrazi_scion_sac @Izzy
-3 c_1_1_eldrazi_scion_sac @Izzy
+2 c_1_1_eldrazi_scion_sac @Craig J Spearing
+3 c_1_1_eldrazi_scion_sac @Svetlin Velinov
 4 c_1_1_eldrazi_scion_sac @Izzy
-5 c_1_1_eldrazi_scion_sac @Izzy
-6 c_1_1_eldrazi_scion_sac @Izzy
+5 c_1_1_eldrazi_scion_sac @Winona Nelson
+6 c_1_1_eldrazi_scion_sac @Svetlin Velinov
 7 w_3_3_angel_flying @Anastasia Ovchinnikova
 8 b_2_2_zombie @Kev Walker
-9 r_3_1_elemental_haste @Raymond Swanland
+9 r_3_1_elemental @Raymond Swanland
 10 g_x_x_elemental @Vincent Proce
 11 g_0_1_plant @Daren Bader

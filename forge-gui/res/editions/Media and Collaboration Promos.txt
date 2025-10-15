@@ -83,3 +83,6 @@ ScryfallCode=PMEI
 2025-16 R Spectacular Spider-Man @Alex Horley-Orlandelli
 2025-17 R Huntmaster of the Fells @Mark Spears
 2025-18 R Iron Spider, Stark Upgrade @Bachzim
+2025-19 M Kaalia of the Vast @Justyna Dura
+2025-20 R Chrome Host Seedshark @Donato Giancola
+2025-21 M Cloud, Midgar Mercenary @Square Enix

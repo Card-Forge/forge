@@ -190,9 +190,9 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventTurnPhase ev) {
         needPhaseUpdate = true;
-        needSaveState = !"dev".equals(ev.phaseDesc);
+        needSaveState = !"dev".equals(ev.phaseDesc());
 
-        Player ap = ev.playerTurn;
+        Player ap = ev.playerTurn();
         boolean refreshField = !ap.getTokensInPlay().isEmpty() || (FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES) && !ap.getCreaturesInPlay().isEmpty());
         if (refreshField) {
             updateZone(ap, ZoneType.Battlefield);
@@ -209,15 +209,15 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventTurnBegan event) {
-        turnUpdate = event.turnOwner.getView();
-        processPlayer(event.turnOwner, livesUpdate);
+        turnUpdate = event.turnOwner().getView();
+        processPlayer(event.turnOwner(), livesUpdate);
         return processEvent();
     }
 
     @Override
     public Void visit(final GameEventAnteCardsSelected ev) {
         final List<CardView> options = Lists.newArrayList();
-        for (final Entry<Player, Card> kv : ev.cards.entries()) {
+        for (final Entry<Player, Card> kv : ev.cards().entries()) {
             //use fake card so real cards appear with proper formatting
             final CardView fakeCard = new CardView(-1, null, "  -- From " + Lang.getInstance().getPossesive(kv.getKey().getName()) + " deck --");
             options.add(fakeCard);
@@ -229,17 +229,17 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventPlayerControl ev) {
-        if (ev.player.getGame().isGameOver()) {
+        if (ev.player().getGame().isGameOver()) {
             return null;
         }
 
         final PlayerControllerHuman newController;
-        if (ev.newController instanceof PlayerControllerHuman) {
-            newController = (PlayerControllerHuman) ev.newController;
+        if (ev.newController() instanceof PlayerControllerHuman) {
+            newController = (PlayerControllerHuman) ev.newController();
         } else {
             newController = null;
         }
-        matchController.setGameController(PlayerView.get(ev.player), newController);
+        matchController.setGameController(PlayerView.get(ev.player()), newController);
 
         needPlayerControlUpdate = true;
         return processEvent();
@@ -293,8 +293,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventSubgameEnd event) {
-        if (event.maingame != null) {
-            for (Player p : event.maingame.getPlayers()) {
+        if (event.maingame() != null) {
+            for (Player p : event.maingame().getPlayers()) {
                 updateZone(p, ZoneType.Battlefield);
                 updateZone(p, ZoneType.Hand);
                 updateZone(p, ZoneType.Graveyard);
@@ -302,9 +302,9 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                 updateZone(p, ZoneType.Command);
             }
             //update matchscreen view to reflect maingame/previous daytime
-            if (event.maingame.isDay())
+            if (event.maingame().isDay())
                 matchController.updateDayTime("Day");
-            else if (event.maingame.isNight())
+            else if (event.maingame().isNight())
                 matchController.updateDayTime("Night");
             return processEvent();
         }
@@ -313,9 +313,9 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventZone event) {
-        if (event.player != null) {
+        if (event.player() != null) {
             // anything except stack will get here
-            updateZone(event.player, event.zoneType);
+            updateZone(event.player(), event.zoneType());
             return processEvent();
         }
         return null;
@@ -323,13 +323,13 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventCardAttachment event) {
-        final Game game = event.equipment.getGame();
-        final Zone zEq = game.getZoneOf(event.equipment);
-        if (event.oldEntiy instanceof Card) {
-            updateZone(game.getZoneOf((Card)event.oldEntiy));
+        final Game game = event.equipment().getGame();
+        final Zone zEq = game.getZoneOf(event.equipment());
+        if (event.oldEntity() instanceof Card oldCard) {
+            updateZone(game.getZoneOf(oldCard));
         }
-        if (event.newTarget instanceof Card) {
-            updateZone(game.getZoneOf((Card)event.newTarget));
+        if (event.newTarget() instanceof Card newCard) {
+            updateZone(game.getZoneOf(newCard));
         }
         updateZone(zEq);
         return processEvent();
@@ -338,32 +338,32 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventCardTapped event) {
         refreshFieldUpdate = true; //update all players field when event un/tapped
-        processCard(event.card, cardsUpdate);
+        processCard(event.card(), cardsUpdate);
         return processEvent();
     }
 
     @Override
     public Void visit(final GameEventCardPhased event) {
-        processCard(event.card, cardsUpdate);
+        processCard(event.card(), cardsUpdate);
         return processEvent();
     }
 
     @Override
     public Void visit(final GameEventCardDamaged event) {
-        processCard(event.card, cardsUpdate);
+        processCard(event.card(), cardsUpdate);
         return processEvent();
     }
 
     @Override
     public Void visit(final GameEventCardCounters event) {
-        processCard(event.card, cardsUpdate);
+        processCard(event.card(), cardsUpdate);
         return processEvent();
     }
 
     @Override
     public Void visit(final GameEventBlockersDeclared event) {
         final Set<Card> cards = new HashSet<>();
-        for (final MapOfLists<Card, Card> kv : event.blockers.values()) {
+        for (final MapOfLists<Card, Card> kv : event.blockers().values()) {
             for (final Collection<Card> blockers : kv.values()) {
                 cards.addAll(blockers);
             }
@@ -373,7 +373,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventAttackersDeclared event) {
-        return processCards(event.attackersMap.values(), cardsUpdate);
+        return processCards(event.attackersMap().values(), cardsUpdate);
     }
 
     @Override
@@ -387,8 +387,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         needCombatUpdate = true;
 
         // This should remove sword/shield icons from combatants by the time game moves to M2
-        processCards(event.attackers, cardsUpdate);
-        return processCards(event.blockers, cardsUpdate);
+        processCards(event.attackers(), cardsUpdate);
+        return processCards(event.blockers(), cardsUpdate);
     }
 
     @Override
@@ -397,8 +397,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             return null; //not needed if single player only...
 
         final CardCollection cards = new CardCollection();
-        cards.addAll(event.attackers);
-        cards.addAll(event.blockers);
+        cards.addAll(event.attackers());
+        cards.addAll(event.blockers());
 
         refreshFieldUpdate = true;
 
@@ -409,8 +409,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventCardChangeZone event) {
         if (GuiBase.getInterface().isLibgdxPort()) {
-            updateZone(event.from);
-            return updateZone(event.to);
+            updateZone(event.from());
+            return updateZone(event.to());
         } else {
             return processEvent();
         }
@@ -419,14 +419,14 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventCardStatsChanged event) {
         refreshFieldUpdate = true;
-        processCards(event.cards, cardsRefreshDetails);
-        return processCards(event.cards, cardsUpdate);
+        processCards(event.cards(), cardsRefreshDetails);
+        return processCards(event.cards(), cardsUpdate);
     }
 
     @Override
     public Void visit(final GameEventCardForetold event) {
         showExileUpdate = true;
-        activatingPlayer = event.activatingPlayer.getView();
+        activatingPlayer = event.activatingPlayer().getView();
         playersWithValidTargets.put(activatingPlayer, null);
         return processEvent();
     }
@@ -434,7 +434,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventCardPlotted event) {
         showExileUpdate = true;
-        activatingPlayer = event.activatingPlayer.getView();
+        activatingPlayer = event.activatingPlayer().getView();
         playersWithValidTargets.put(activatingPlayer, null);
         return processEvent();
     }
@@ -442,8 +442,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventPlayerStatsChanged event) {
         final CardCollection cards = new CardCollection();
-        for (final Player p : event.players) {
-            if (event.updateCards) {
+        for (final Player p : event.players()) {
+            if (event.updateCards()) {
                 cards.addAll(p.getAllCards());
             }
             processPlayer(p, livesUpdate);
@@ -453,22 +453,22 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     public Void visit(final GameEventLandPlayed event) {
-        processPlayer(event.player, livesUpdate);
-        matchController.handleLandPlayed(event.land);
-        return processCard(event.land, cardsRefreshDetails);
+        processPlayer(event.player(), livesUpdate);
+        matchController.handleLandPlayed(event.land());
+        return processCard(event.land(), cardsRefreshDetails);
     }
 
     @Override
     public Void visit(final GameEventCardRegenerated event) {
         refreshFieldUpdate = true;
-        processCards(event.cards, cardsRefreshDetails);
-        return processCards(event.cards, cardsUpdate);
+        processCards(event.cards(), cardsRefreshDetails);
+        return processCards(event.cards(), cardsUpdate);
     }
 
     @Override
     public Void visit(final GameEventShuffle event) {
         if (GuiBase.getInterface().isLibgdxPort()) {
-            return updateZone(event.player.getZone(ZoneType.Library));
+            return updateZone(event.player().getZone(ZoneType.Library));
         } else {
             return processEvent();
         }
@@ -476,44 +476,44 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventDayTimeChanged event) {
-        matchController.updateDayTime(event.daytime ? "Day" : "Night");
+        matchController.updateDayTime(event.daytime() ? "Day" : "Night");
         return processEvent();
     }
 
     @Override
     public Void visit(GameEventSprocketUpdate event) {
-        updateZone(event.contraption.getZone());
+        updateZone(event.contraption().getZone());
         return processEvent();
     }
 
     @Override
     public Void visit(final GameEventManaPool event) {
-        return processPlayer(event.player, manaPoolUpdate);
+        return processPlayer(event.player(), manaPoolUpdate);
     }
 
     @Override
     public Void visit(final GameEventPlayerLivesChanged event) {
-        return processPlayer(event.player, livesUpdate);
+        return processPlayer(event.player(), livesUpdate);
     }
 
     @Override
     public Void visit(final GameEventPlayerShardsChanged event) {
-        return processPlayer(event.player, shardsUpdate);
+        return processPlayer(event.player(), shardsUpdate);
     }
 
     @Override
     public Void visit(GameEventManaBurn event) {
-        return processPlayer(event.player, livesUpdate);
+        return processPlayer(event.player(), livesUpdate);
     }
 
     @Override
     public Void visit(final GameEventPlayerPoisoned event) {
-        return processPlayer(event.receiver, livesUpdate);
+        return processPlayer(event.receiver(), livesUpdate);
     }
 
     @Override
     public Void visit(final GameEventPlayerRadiation event) {
-        return processPlayer(event.receiver, livesUpdate);
+        return processPlayer(event.receiver(), livesUpdate);
     }
 
     @Override
@@ -523,6 +523,6 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventPlayerCounters event) {
-        return processPlayer(event.receiver, livesUpdate);
+        return processPlayer(event.receiver(), livesUpdate);
     }
 }

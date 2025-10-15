@@ -53,6 +53,7 @@ import io.sentry.Sentry;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.function.Consumer;
 
 public class Forge implements ApplicationListener {
     private static ApplicationListener app = null;
@@ -100,6 +101,7 @@ public class Forge implements ApplicationListener {
     public static boolean allowCardBG = false;
     public static boolean altPlayerLayout = false;
     public static boolean altZoneTabs = false;
+    public static String altZoneTabMode = "Off";
     public static boolean animatedCardTapUntap = false;
     public static String enableUIMask = "Crop";
     public static String selector = "Default";
@@ -149,7 +151,7 @@ public class Forge implements ApplicationListener {
                     scope.getContexts().setOperatingSystem(hwInfo.os());
                 });
             }
-            GuiBase.setDeviceInfo(hwInfo, AndroidAPI, totalRAM);
+            GuiBase.setDeviceInfo(hwInfo, AndroidAPI, totalRAM, deviceAdapter.getDownloadsDir());
         }
         return app;
     }
@@ -170,18 +172,7 @@ public class Forge implements ApplicationListener {
         //install our error handler
         ExceptionHandler.registerErrorHandling();
         //init hwInfo to log
-        HWInfo info = GuiBase.getHWInfo();
-        if (info != null) {
-            System.out.println(
-                "##########################################\n" +
-                "APP: Forge v." + GuiBase.getInterface().getCurrentVersion() +
-                "\nDEV: " + info.device().getName() +
-                "\nCPU: " + info.device().getCpuDescription() +
-                "\nRAM: " + GuiBase.getDeviceRAM() + " MB" +
-                "\nOS: " + info.os().getRawDescription() +
-                "\n##########################################"
-            );
-        }
+        System.out.println(GuiBase.getHWInfo());
         // closeSplashScreen() is called early on non-Windows OS so it will not crash, LWJGL3 bug on AWT Splash.
         if (OperatingSystem.isWindows())
             getDeviceAdapter().closeSplashScreen();
@@ -232,7 +223,7 @@ public class Forge implements ApplicationListener {
         reversedPrompt = getForgePreferences().getPrefBoolean(FPref.UI_REVERSE_PROMPT_BUTTON);
         autoAIDeckSelection = getForgePreferences().getPrefBoolean(FPref.UI_AUTO_AIDECK_SELECTION);
         altPlayerLayout = getForgePreferences().getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
-        altZoneTabs = getForgePreferences().getPrefBoolean(FPref.UI_ALT_PLAYERZONETABS);
+        setAltZoneTabMode(getForgePreferences().getPref(FPref.UI_ALT_PLAYERZONETABS));
         animatedCardTapUntap = getForgePreferences().getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP);
         enableUIMask = getForgePreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING);
         if (getForgePreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("true")) //override old settings if not updated
@@ -269,6 +260,17 @@ public class Forge implements ApplicationListener {
             //see if app or assets need updating
             FThreads.invokeInBackgroundThread(() -> AssetsDownloader.checkForUpdates(exited, runnable));
         }
+    }
+    public static void setAltZoneTabMode(String mode) {
+        Forge.altZoneTabMode = mode;
+        switch (Forge.altZoneTabMode) {
+            case "Vertical", "Horizontal" -> Forge.altZoneTabs = true;
+            case "Off" -> Forge.altZoneTabs = false;
+            default -> Forge.altZoneTabs = false;
+        }
+    }
+    public static boolean isHorizontalTabLayout() {
+        return Forge.altZoneTabs && "Horizontal".equalsIgnoreCase(Forge.altZoneTabMode);
     }
     public static boolean hasGamepad() {
         //Classic Mode Various Screen GUI are not yet supported, needs control mapping for each screens
@@ -347,8 +349,11 @@ public class Forge implements ApplicationListener {
         GuiBase.setIsAdventureMode(true);
         advStartup = false;
         isMobileAdventureMode = true;
-        if (GuiBase.isAndroid()) //force it for adventure mode
-            altZoneTabs = true;
+        //force it for adventure mode if the prefs is not updated from boolean value to string value
+        if ("true".equalsIgnoreCase(FModel.getPreferences().getPref(FPref.UI_ALT_PLAYERZONETABS)) ||
+            "false".equalsIgnoreCase(FModel.getPreferences().getPref(FPref.UI_ALT_PLAYERZONETABS))) {
+            setAltZoneTabMode("Vertical");
+        }
         //pixl cursor for adventure
         setCursor(null, "0");
         if (!GuiBase.isAndroid() || !getDeviceAdapter().getGamepads().isEmpty())
@@ -599,22 +604,19 @@ public class Forge implements ApplicationListener {
         }
         if(currentScreen == null)
             return;
-        currentScreen.onClose(new Callback<>() {
-            @Override
-            public void run(Boolean result) {
-                if (result) {
-                    Dscreens.pollFirst();
-                    setCurrentScreen(Dscreens.peekFirst());
-                    if (clearLastMatch) {
-                        try {
-                            Dscreens.remove(lastMatch);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        //check
-                        /*for (FScreen fScreen : Dscreens)
-                            System.out.println(fScreen.toString());*/
+        currentScreen.onClose(result -> {
+            if (result) {
+                Dscreens.pollFirst();
+                setCurrentScreen(Dscreens.peekFirst());
+                if (clearLastMatch) {
+                    try {
+                        Dscreens.remove(lastMatch);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
+                    //check
+                    /*for (FScreen fScreen : Dscreens)
+                        System.out.println(fScreen.toString());*/
                 }
             }
         });
@@ -639,19 +641,16 @@ public class Forge implements ApplicationListener {
             return;
         } //don't allow exiting multiple times
 
-        Callback<Boolean> callback = new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
-                if (result) {
-                    exited = true;
-                    exitAnimation(true);
-                }
+        Consumer<Boolean> callback = result -> {
+            if (result) {
+                exited = true;
+                exitAnimation(true);
             }
         };
 
 
         if (silent) {
-            callback.run(true);
+            callback.accept(true);
         } else {
             FOptionPane.showConfirmDialog(
                     getLocalizer().getMessage("lblAreYouSureYouWishRestartForge"), getLocalizer().getMessage("lblRestartForge"),
@@ -668,18 +667,15 @@ public class Forge implements ApplicationListener {
         options.add(getLocalizer().getMessage("lblExit"));
         options.add(getLocalizer().getMessage("lblCancel"));
 
-        Callback<Integer> callback = new Callback<Integer>() {
-            @Override
-            public void run(Integer result) {
-                if (result == 0) {
-                    exited = true;
-                    exitAnimation(false);
-                }
+        Consumer<Integer> callback = result -> {
+            if (result == 0) {
+                exited = true;
+                exitAnimation(false);
             }
         };
 
         if (silent) {
-            callback.run(0);
+            callback.accept(0);
         } else {
             FOptionPane.showOptionDialog(getLocalizer().getMessage("lblAreYouSureYouWishExitForge"), "",
                     FOptionPane.QUESTION_ICON, options, 0, callback);
@@ -701,30 +697,27 @@ public class Forge implements ApplicationListener {
             return;
         }
 
-        currentScreen.onSwitchAway(new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
-                if (result) {
-                    if (replaceBackScreen && !Dscreens.isEmpty()) {
-                        Dscreens.removeFirst();
-                    }
-                    if (Dscreens.peekFirst() != screen0) { //prevent screen being its own back screen
-                        Dscreens.addFirst(screen0);
-                    }
-                    setCurrentScreen(screen0);
-                    if (screen0 instanceof MatchScreen) {
-                        //set cursor for classic mode
-                        if (!isMobileAdventureMode) {
-                            if (magnifyToggle) {
-                                setCursor(FSkin.getCursor().get(1), "1");
-                            } else {
-                                setCursor(FSkin.getCursor().get(2), "2");
-                            }
+        currentScreen.onSwitchAway(result -> {
+            if (result) {
+                if (replaceBackScreen && !Dscreens.isEmpty()) {
+                    Dscreens.removeFirst();
+                }
+                if (Dscreens.peekFirst() != screen0) { //prevent screen being its own back screen
+                    Dscreens.addFirst(screen0);
+                }
+                setCurrentScreen(screen0);
+                if (screen0 instanceof MatchScreen) {
+                    //set cursor for classic mode
+                    if (!isMobileAdventureMode) {
+                        if (magnifyToggle) {
+                            setCursor(FSkin.getCursor().get(1), "1");
+                        } else {
+                            setCursor(FSkin.getCursor().get(2), "2");
                         }
                     }
-                    deltaTime = 0f;
-                    hueFragTime = 0f;
                 }
+                deltaTime = 0f;
+                hueFragTime = 0f;
             }
         });
     }
@@ -777,7 +770,7 @@ public class Forge implements ApplicationListener {
             isMobileAdventureMode = false;
             GuiBase.setIsAdventureMode(false);
             setCursor(FSkin.getCursor().get(0), "0");
-            altZoneTabs = FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_PLAYERZONETABS);
+            setAltZoneTabMode(FModel.getPreferences().getPref(FPref.UI_ALT_PLAYERZONETABS));
             Gdx.input.setInputProcessor(getInputProcessor());
             clearTransitionScreen();
             openHomeDefault();
@@ -1490,7 +1483,7 @@ public class Forge implements ApplicationListener {
 
             boolean handled;
             if (KeyInputAdapter.isShiftKeyDown()) {
-                handled = pan(mouseMovedX, mouseMovedY, -Utils.AVG_FINGER_WIDTH * amountX, 0, false);
+                handled = pan(mouseMovedX, mouseMovedY, -Utils.AVG_FINGER_WIDTH * amountY, 0, false);
             } else {
                 handled = pan(mouseMovedX, mouseMovedY, 0, -Utils.AVG_FINGER_HEIGHT * amountY, true);
             }

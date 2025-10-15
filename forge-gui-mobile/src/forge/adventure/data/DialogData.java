@@ -1,10 +1,9 @@
 package forge.adventure.data;
 
-import forge.util.Callback;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Dialog Data JSON loader class.
@@ -22,7 +21,7 @@ public class DialogData implements Serializable {
     public DialogData[] options = new DialogData[0];      //List of sub-dialogs. Show up as options in the current one.
     public boolean isDisabled = false;
 
-    public transient Callback callback;
+    public transient Consumer callback;
 
     public DialogData(){}
     public DialogData(DialogData other){

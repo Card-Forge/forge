@@ -1,0 +1,8 @@
+Name:School Daze
+ManaCost:3 U U
+Types:Instant
+A:SP$ Charm | Choices$ DBDoHomework,DBFightCrime | CharmNum$ 1
+SVar:DBDoHomework:DB$ Draw | NumCards$ 3 | SpellDescription$ Do Homework — Draw three cards.
+SVar:DBFightCrime:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDraw | SpellDescription$ Fight Crime — Counter target spell. Draw a card.
+SVar:DBDraw:DB$ Draw
+Oracle:Choose one —\n• Do Homework — Draw three cards.\n• Fight Crime — Counter target spell. Draw a card.

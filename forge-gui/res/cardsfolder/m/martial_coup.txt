@@ -6,6 +6,6 @@ SVar:CoupDestroy:DB$ DestroyAll | ValidCards$ Creature.IsNotRemembered | Conditi
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 SVar:NeedsToPlayVar:OwnCreats LEOppCreats
-SVar:OwnCreats:Count$SumPower_Creature.YouCtrl
-SVar:OppCreats:Count$SumPower_Creature.OppCtrl
+SVar:OwnCreats:Count$Valid Creature.YouCtrl$CardPower
+SVar:OppCreats:Count$Valid Creature.OppCtrl$CardPower
 Oracle:Create X 1/1 white Soldier creature tokens. If X is 5 or more, destroy all other creatures.

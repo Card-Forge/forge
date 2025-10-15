@@ -415,19 +415,6 @@ public class Game {
     }
 
     /**
-     * Gets the nonactive players who are still fighting to win, in turn order.
-     */
-    public final PlayerCollection getNonactivePlayers() {
-        // Don't use getPlayersInTurnOrder to prevent copying the player collection twice
-        final PlayerCollection players = new PlayerCollection(ingamePlayers);
-        players.remove(phaseHandler.getPlayerTurn());
-        if (!getTurnOrder().isDefaultDirection()) {
-            Collections.reverse(players);
-        }
-        return players;
-    }
-
-    /**
      * Gets the players who participated in match (regardless of outcome).
      * <i>Use this in UI and after match calculations</i>
      */
@@ -858,6 +845,8 @@ public class Game {
             p.revealFaceDownCards();
         }
 
+        // TODO free any mindslaves
+
         for (Card c : cards) {
             // CR 800.4d if card is controlled by opponent, LTB should trigger
             if (c.getOwner().equals(p) && c.getController().equals(p)) {
@@ -893,8 +882,6 @@ public class Game {
                         }
                         triggerList.put(c.getZone().getZoneType(), null, c);
                         getAction().ceaseToExist(c, false);
-                        // CR 603.2f owner of trigger source lost game
-                        getTriggerHandler().clearDelayedTrigger(c);
                     }
                 } else {
                     // return stolen permanents

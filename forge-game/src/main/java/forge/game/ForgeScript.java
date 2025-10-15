@@ -35,7 +35,7 @@ public class ForgeScript {
         boolean withSource = property.endsWith("Source");
         final ColorSet colors;
         if (withSource && StaticAbilityColorlessDamageSource.colorlessDamageSource(cardState)) {
-            colors = ColorSet.getNullColor();
+            colors = ColorSet.C;
         } else {
             colors = cardState.getCard().getColor(cardState);
         }
@@ -166,8 +166,6 @@ public class ForgeScript {
             Card source, CardTraitBase spellAbility) {
         if (property.equals("ManaAbility")) {
             return sa.isManaAbility();
-        } else if (property.equals("nonManaAbility")) {
-            return !sa.isManaAbility();
         } else if (property.equals("withoutXCost")) {
             return !sa.costHasManaX();
         } else if (property.startsWith("XCost")) {
@@ -195,7 +193,7 @@ public class ForgeScript {
             return sa.isKeyword(Keyword.SADDLE);
         } else if (property.equals("Station")) {
             return sa.isKeyword(Keyword.STATION);
-        }else if (property.equals("Cycling")) {
+        } else if (property.equals("Cycling")) {
             return sa.isCycling();
         } else if (property.equals("Dash")) {
             return sa.isDash();
@@ -237,6 +235,8 @@ public class ForgeScript {
             return sa.isBoast();
         } else if (property.equals("Exhaust")) {
             return sa.isExhaust();
+        } else if (property.equals("Mayhem")) {
+            return sa.isMayhem();
         } else if (property.equals("Mutate")) {
             return sa.isMutate();
         } else if (property.equals("Ninjutsu")) {
@@ -410,6 +410,8 @@ public class ForgeScript {
                 return !sa.isPwAbility() && !sa.getRestrictions().isSorcerySpeed();
             }
             return true;
+        } else if(property.startsWith("NamedAbility")) {
+            return sa.getName().equals(property.substring(12));
         } else if (sa.getHostCard() != null) {
             return sa.getHostCard().hasProperty(property, sourceController, source, spellAbility);
         }

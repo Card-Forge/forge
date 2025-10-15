@@ -1,0 +1,12 @@
+Name:Joel, Resolute Survivor
+ManaCost:3 B G
+Types:Legendary Creature Human Survivor
+PT:4/4
+K:Menace
+K:Partner - Survivors
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.token | Execute$ TrigPutCounter | ActivationLimit$ 1 | TriggerDescription$ Whenever a creature token dies, put a +1/+1 counter on NICKNAME and draw a card. This ability triggers only once each turn.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterNum$ 1 | CounterType$ P1P1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+DeckHas:Ability$Counters
+DeckHints:Ability$Sacrifice|Token
+Oracle:Menace\nWhenever a creature token dies, put a +1/+1 counter on Joel and draw a card. This ability triggers only once each turn.\nPartner—Survivors (You can have two commanders if both have this ability.)

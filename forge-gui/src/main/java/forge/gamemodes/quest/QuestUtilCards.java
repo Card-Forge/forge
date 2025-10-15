@@ -792,6 +792,11 @@ public final class QuestUtilCards {
         Predicate<PaperCard> filter = PaperCardPredicates.printedInSet(edition);
         Iterable<PaperCard> editionCards = IterableUtil.filter(FModel.getMagicDb().getCommonCards().getAllCards(), filter);
 
+        // For editions such as MB1 which only contains PLST cards.
+        if (!editionCards.iterator().hasNext()) {
+            return 0;
+        }
+
         ItemPool<PaperCard> ownedCards = questAssets.getCardPool();
         // 100% means at least one of every basic land and at least 4 of every other card in the set
         int completeCards = 0;

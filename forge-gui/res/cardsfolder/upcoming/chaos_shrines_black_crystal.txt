@@ -1,0 +1,8 @@
+Name:Chaos Shrine's Black Crystal
+ManaCost:3 B
+Types:Legendary Artifact
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+!token | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ Whenever a nontoken creature you control dies, exile it. 
+SVar:TrigChange:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Exile
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may put a creature card exiled with CARDNAME onto the battlefield under your control with a finality counter on it. 
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Hidden$ True | ChangeType$ Creature.ExiledWithSource | GainControl$ True | WithCountersType$ FINALITY | WithCountersAmount$ 1 | ChangeNum$ 1
+Oracle:Whenever a nontoken creature you control dies, exile it.\nAt the beginning of your upkeep, you may put a creature card exiled with Chaos Shrine's Black Crystal onto the battlefield under your control with a finality counter on it. 

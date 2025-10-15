@@ -460,7 +460,11 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, GameEntity affected, String question) {
-        return brains.aiShouldRun(replacementEffect, effectSA, affected);
+        Card host = replacementEffect.getHostCard();
+        if (host.hasAlternateState()) {
+            host = host.getGame().getCardState(host);
+        }
+        return brains.aiShouldRun(replacementEffect, effectSA, host, affected);
     }
 
     @Override
@@ -1024,13 +1028,13 @@ public class PlayerControllerAi extends PlayerController {
         if ((colors.getColor() & chosenColorMask) != 0) {
             return chosenColorMask;
         }
-        return Iterables.getFirst(colors, (byte)0);
+        return Iterables.getFirst(colors, MagicColor.Color.COLORLESS).getColorMask();
     }
 
     @Override
     public byte chooseColor(String message, SpellAbility sa, ColorSet colors) {
         if (colors.countColors() < 2) {
-            return Iterables.getFirst(colors, MagicColor.WHITE);
+            return Iterables.getFirst(colors, MagicColor.Color.WHITE).getColorMask();
         }
         // You may switch on sa.getApi() here and use sa.getParam("AILogic")
         CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
@@ -1043,7 +1047,7 @@ public class PlayerControllerAi extends PlayerController {
         if ((colors.getColor() & chosenColorMask) != 0) {
             return chosenColorMask;
         }
-        return Iterables.getFirst(colors, MagicColor.WHITE);
+        return Iterables.getFirst(colors, MagicColor.Color.WHITE).getColorMask();
     }
 
     @Override
@@ -1344,6 +1348,11 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public void revealAISkipCards(String message, Map<Player, Map<DeckSection, List<? extends PaperCard>>> deckCards) {
+        // Ai won't understand that anyway
+    }
+
+    @Override
+    public void revealUnsupported(Map<Player, List<PaperCard>> unsupported) {
         // Ai won't understand that anyway
     }
 

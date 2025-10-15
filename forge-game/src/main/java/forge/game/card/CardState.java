@@ -32,6 +32,7 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
 import forge.game.keyword.KeywordInterface;
+import forge.game.keyword.KeywordWithType;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.LandAbility;
@@ -40,6 +41,7 @@ import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
+import forge.util.CardTranslation;
 import forge.util.ITranslatable;
 import forge.util.IterableUtil;
 import forge.util.collect.FCollection;
@@ -367,7 +369,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     public final FCollectionView<SpellAbility> getManaAbilities() {
         FCollection<SpellAbility> newCol = new FCollection<>();
         updateSpellAbilities(newCol, true);
-        // stream().toList() causes crash on Android, use Collectors.toList()
+        // stream().toList() causes crash on Android 8-13, use Collectors.toList()
         newCol.addAll(abilities.stream().filter(SpellAbility::isManaAbility).collect(Collectors.toList()));
         card.updateSpellAbilities(newCol, this, true);
         return newCol;
@@ -375,7 +377,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     public final FCollectionView<SpellAbility> getNonManaAbilities() {
         FCollection<SpellAbility> newCol = new FCollection<>();
         updateSpellAbilities(newCol, false);
-        // stream().toList() causes crash on Android, use Collectors.toList()
+        // stream().toList() causes crash on Android 8-13, use Collectors.toList()
         newCol.addAll(abilities.stream().filter(Predicate.not(SpellAbility::isManaAbility)).collect(Collectors.toList()));
         card.updateSpellAbilities(newCol, this, false);
         return newCol;
@@ -390,7 +392,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
                 if (null != mana) {
                     leftAbilities = leftAbilities.stream()
                             .filter(mana ? SpellAbility::isManaAbility : Predicate.not(SpellAbility::isManaAbility))
-                            // stream().toList() causes crash on Android, use Collectors.toList()
+                            // stream().toList() causes crash on Android 8-13, use Collectors.toList()
                             .collect(Collectors.toList());
                 }
                 newCol.addAll(leftAbilities);
@@ -402,7 +404,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
                 if (null != mana) {
                     rightAbilities = rightAbilities.stream()
                             .filter(mana ? SpellAbility::isManaAbility : Predicate.not(SpellAbility::isManaAbility))
-                            // stream().toList() causes crash on Android, use Collectors.toList()
+                            // stream().toList() causes crash on Android 8-13, use Collectors.toList()
                             .collect(Collectors.toList());
                 }
                 newCol.addAll(rightAbilities);
@@ -468,6 +470,9 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
         return Iterables.getFirst(getIntrinsicSpellAbilities(), null);
     }
     public final SpellAbility getFirstSpellAbility() {
+        if (this.card.getCastSA() != null) {
+            return this.card.getCastSA();
+        }
         return Iterables.getFirst(getNonManaAbilities(), null);
     }
 
@@ -497,15 +502,8 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
             String desc = "";
             String extra = "";
             for (KeywordInterface ki : this.getCachedKeyword(Keyword.ENCHANT)) {
-                String o = ki.getOriginal();
-                String m[] = o.split(":");
-                if (m.length > 2) {
-                    desc = m[2];
-                } else {
-                    desc = m[1];
-                    if (CardType.isACardType(desc) || "Permanent".equals(desc) || "Player".equals(desc) || "Opponent".equals(desc)) {
-                        desc = desc.toLowerCase();
-                    }
+                if (ki instanceof KeywordWithType kwt) {
+                    desc = kwt.getTypeDescription();
                 }
                 break;
             }
@@ -605,18 +603,18 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
             result.add(loyaltyRep);
         }
         if (type.isBattle()) {
-            // TODO This is currently breaking for Battle/Defense
-            // Going to script the cards to work but ideally it would happen here
             if (defenseRep == null) {
                 defenseRep = CardFactoryUtil.makeEtbCounter("etbCounter:DEFENSE:" + this.baseDefense, this, true);
             }
             result.add(defenseRep);
-
-            // TODO add Siege "Choose a player to protect it"
         }
+
+        card.updateReplacementEffects(result, this);
+
+        // below are global rules
         if (type.hasSubtype("Saga") && !hasKeyword(Keyword.READ_AHEAD)) {
             if (sagaRep == null) {
-                sagaRep = CardFactoryUtil.makeEtbCounter("etbCounter:LORE:1", this, true);
+                sagaRep = CardFactoryUtil.makeEtbCounter("etbCounter:LORE:1", this, false);
             }
             result.add(sagaRep);
         }
@@ -633,7 +631,6 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
             result.add(omenRep);
         }
 
-        card.updateReplacementEffects(result, this);
         return result;
     }
     public boolean addReplacementEffect(final ReplacementEffect replacementEffect) {
@@ -944,7 +941,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     }
 
     @Override
-    public String getUntranslatedOracle() {
-        return getOracleText();
+    public String getTranslatedName() {
+        return CardTranslation.getTranslatedName(this);
     }
 }

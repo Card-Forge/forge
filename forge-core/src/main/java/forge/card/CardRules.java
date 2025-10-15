@@ -53,6 +53,7 @@ public final class CardRules implements ICardCharacteristics {
     private boolean addsWildCardColor;
     private int setColorID;
     private boolean custom;
+    private boolean unsupported;
     private String path;
 
     public CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
@@ -167,21 +168,7 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public boolean isTransformable() {
-        if (CardSplitType.Transform == getSplitType()) {
-            return true;
-        }
-        if (CardSplitType.Modal != getSplitType()) {
-            return false;
-        }
-        for (ICardFace face : getAllFaces()) {
-            for (String spell : face.getAbilities()) {
-                if (spell.contains("AB$ SetState") && spell.contains("Mode$ Transform")) {
-                    return true;
-                }
-            }
-            // TODO check keywords if needed
-        }
-        return false;
+        return CardSplitType.Transform == getSplitType() || CardSplitType.Modal == getSplitType();
     }
 
     public ICardFace getWSpecialize() {
@@ -220,7 +207,9 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public boolean isCustom() { return custom; }
-    public void setCustom() { custom = true;   }
+    public void setCustom() { custom = true; }
+
+    public boolean isUnsupported() { return unsupported; }
 
     @Override
     public CardType getType() {
@@ -335,6 +324,15 @@ public final class CardRules implements ICardCharacteristics {
         }
         if (hasKeyword("Friends forever") && b.hasKeyword("Friends forever")) {
             legal = true; // Stranger Things Secret Lair gimmick partner commander
+        }  
+        if (hasKeyword("Partner - Survivors") && b.hasKeyword("Partner - Survivors")) {
+            legal = true; // The Last of Us Secret Lair gimmick partner commander
+        }
+        if (hasKeyword("Partner - Father & Son") && b.hasKeyword("Partner - Father & Son")) {
+            legal = true; // God of War Secret Lair gimmick partner commander
+        }
+        if (hasKeyword("Partner - Character select") && b.hasKeyword("Partner - Character select")) {
+            legal = true; // TMNT Commander deck gimmick partner commander
         }
         if (hasKeyword("Choose a Background") && b.canBeBackground()
                 || b.hasKeyword("Choose a Background") && canBeBackground()) {
@@ -353,6 +351,7 @@ public final class CardRules implements ICardCharacteristics {
         }
         return canBeCommander() && (hasKeyword("Partner") || !this.partnerWith.isEmpty() ||
                 hasKeyword("Friends forever") || hasKeyword("Choose a Background") ||
+                hasKeyword("Partner - Father & Son") || hasKeyword("Partner - Survivors") || hasKeyword("Partner - Character select") ||
                 hasKeyword("Doctor's companion") || isDoctor());
     }
 
@@ -373,6 +372,9 @@ public final class CardRules implements ICardCharacteristics {
 
     public boolean canBeOathbreaker() {
         CardType type = mainPart.getType();
+        if (mainPart.getOracleText().contains("can be your commander")) {
+            return true;
+        }
         return type.isPlaneswalker();
     }
 
@@ -824,6 +826,8 @@ public final class CardRules implements ICardCharacteristics {
         faces[0].setNonAbilityText("This card is not supported by Forge.\nWhenever you start a game with this card, it will be bugged.");
         faces[0].assignMissingFields();
         final CardRules result = new CardRules(faces, CardSplitType.None, cah);
+
+        result.unsupported = true;
 
         return result;
     }

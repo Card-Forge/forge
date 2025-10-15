@@ -91,7 +91,7 @@ public enum ColumnDef {
      * The color column.
      */
     COLOR("lblColor", "ttColor", 46, true, SortState.ASC,
-            from -> toColor(from.getKey()),
+            from -> toColor(from.getKey()).getOrderWeight(),
             from -> toColor(from.getKey())),
     /**
      * The power column.
@@ -271,7 +271,7 @@ public enum ColumnDef {
      * The deck color column.
      */
     DECK_COLOR("lblColor", "ttColor", 70, true, SortState.ASC,
-            from -> toDeckColor(from.getKey()),
+            from -> toDeckColor(from.getKey()).getOrderWeight(),
             from -> toDeckColor(from.getKey())),
     /**
      * The deck format column.
@@ -377,7 +377,7 @@ public enum ColumnDef {
     }
 
     private static ColorSet toColor(final InventoryItem i) {
-        return i instanceof IPaperCard ? ((IPaperCard) i).getRules().getColor() : ColorSet.getNullColor();
+        return i instanceof IPaperCard ? ((IPaperCard) i).getRules().getColor() : ColorSet.C;
     }
 
     private static Integer toPower(final InventoryItem i) {

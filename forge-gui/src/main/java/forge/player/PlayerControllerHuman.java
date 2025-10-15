@@ -285,7 +285,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             // maindeck and max sideboard sizes
             // No longer need 1:1 sideboarding in non-limited formats
             List<PaperCard> resp = getGui().sideboard(sideboard, main, message);
-            newMain = ObjectUtils.defaultIfNull(resp, main.toFlatList());
+            newMain = ObjectUtils.getIfNull(resp, main.toFlatList());
         } while (conform && (newMain.size() < deckMinSize || combinedDeckSize - newMain.size() > sbMax));
 
         return newMain;
@@ -353,16 +353,19 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final CardView vSource = CardView.get(sa.getHostCard());
         final Map<Object, Integer> vAffected = new LinkedHashMap<>(manaAmount);
         Integer maxAmount = different ? 1 : manaAmount;
-        for (Byte color : colorSet) {
+        for (MagicColor.Color color : colorSet) {
+            if (color == MagicColor.Color.COLORLESS) {
+                continue;
+            }
             vAffected.put(color, maxAmount);
         }
         final Map<Object, Integer> vResult = getGui().assignGenericAmount(vSource, vAffected, manaAmount, false,
                 localizer.getMessage("lblMana").toLowerCase());
         Map<Byte, Integer> result = new HashMap<>();
         if (vResult != null) { //fix for netplay
-            for (Byte color : colorSet) {
+            for (MagicColor.Color  color : colorSet) {
                 if (vResult.containsKey(color)) {
-                    result.put(color, vResult.get(color));
+                    result.put(color.getColorMask(), vResult.get(color));
                 }
             }
         }
@@ -1868,8 +1871,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (withColorless) {
             colorNamesBuilder.add(MagicColor.toLongString(MagicColor.COLORLESS));
         }
-        for (final Byte b : colors) {
-            colorNamesBuilder.add(MagicColor.toLongString(b));
+        for (final MagicColor.Color color : colors) {
+            colorNamesBuilder.add(color.getName());
         }
         final ImmutableList<String> colorNames = colorNamesBuilder.build();
         if (colorNames.size() > 2) {
@@ -2307,6 +2310,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public void revealUnsupported(final Map<Player, List<PaperCard>> unsupported) {
+        for (final Player p : unsupported.keySet()) {
+            List<PaperCard> removed = unsupported.get(p);
+            if (removed == null || removed.isEmpty())
+                continue;
+            getGui().getChoices(localizer.getMessage("lblActionFromPlayerDeck", localizer.getMessage("lblRemoved"), Lang.getInstance().getPossessedObject(MessageUtil.mayBeYou(player, p), "")), -1, -1, ImmutableList.copyOf(removed));
+        }
+    }
+
+    @Override
     public List<PaperCard> chooseCardsYouWonToAddToDeck(final List<PaperCard> losses) {
         return getGui().many(localizer.getMessage("lblSelectCardstoAddtoYourDeck"), localizer.getMessage("lblAddTheseToMyDeck"), 0, losses.size(), losses, null);
     }
@@ -2700,7 +2713,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final Card card = gameCacheCounters.get(cv);
 
             final ImmutableList<CounterType> counters = subtract ? ImmutableList.copyOf(card.getCounters().keySet())
-                    : ImmutableList.copyOf(Collections2.transform(CounterEnumType.values, CounterType::get));
+                    : ImmutableList.copyOf(CounterEnumType.values);
 
             final CounterType counter = getGui().oneOrNone(localizer.getMessage("lblWhichTypeofCounter"), counters);
             if (counter == null) {

@@ -1,9 +1,0 @@
-Name:Spider-Man, Brooklyn Visionary
-ManaCost:4 G
-Types:Creature Spider Human Hero
-PT:4/3
-K:Web-slinging:2 G
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When NICKNAME enters, search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
-SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1
-Oracle:Web-slinging {2}{G} (You may cast this spell for {2}{G} if you also return a tapped creature you control to its owner’s hand.)\nWhen Spider-Man enters, search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
-

@@ -29,7 +29,6 @@ import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
 import forge.gui.FThreads;
 import forge.screens.TransitionScreen;
-import forge.util.Callback;
 import forge.util.MyRandom;
 
 import java.util.Arrays;
@@ -52,6 +51,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
     static PointOfInterestChanges changes;
 
     private Array<DialogData> entryDialog;
+    private AdventureEventData.AdventureEventMatch humanMatch = null;
 
     private int packsSelected = 0; //Used for meta drafts, booster drafts will use existing logic.
 
@@ -124,26 +124,17 @@ public class EventScene extends MenuScene implements IAfterMatch {
         //todo: add translation
         decline.name = "Do not enter event";
 
-        enterWithCoin.callback = new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
-                currentEvent.eventStatus = AdventureEventController.EventStatus.Entered;
-                refresh();
-            }
+        enterWithCoin.callback = (result) -> {
+            currentEvent.eventStatus = AdventureEventController.EventStatus.Entered;
+            refresh();
         };
-        enterWithShards.callback = new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
-                currentEvent.eventStatus = AdventureEventController.EventStatus.Entered;
-                refresh();
-            }
+        enterWithShards.callback = (result) -> {
+            currentEvent.eventStatus = AdventureEventController.EventStatus.Entered;
+            refresh();
         };
-        enterWithGold.callback = new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
-                currentEvent.eventStatus = AdventureEventController.EventStatus.Entered;
-                refresh();
-            }
+        enterWithGold.callback = (result) -> {
+            currentEvent.eventStatus = AdventureEventController.EventStatus.Entered;
+            refresh();
         };
 
         introDialog.options = new DialogData[4];
@@ -500,7 +491,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
     }
 
     public void startRound() {
-        for (AdventureEventData.AdventureEventMatch match : currentEvent.matches.get(currentEvent.currentRound)) {
+        for (AdventureEventData.AdventureEventMatch match : currentEvent.getMatches(currentEvent.currentRound)) {
             match.round = currentEvent.currentRound;
             if (match.winner != null) continue;
 
@@ -549,9 +540,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
         }
     }
 
-    AdventureEventData.AdventureEventMatch humanMatch = null;
-
-    public void setWinner(boolean winner) {
+    public void setWinner(boolean winner, boolean isArena) {
         if (winner) {
             humanMatch.winner = humanMatch.p1;
             humanMatch.p1.wins++;

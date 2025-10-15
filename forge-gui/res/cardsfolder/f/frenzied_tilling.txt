@@ -2,5 +2,5 @@ Name:Frenzied Tilling
 ManaCost:3 R G
 Types:Sorcery
 A:SP$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBSearch | SpellDescription$ Destroy target land. Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.
-SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | Tapped$ True
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | Tapped$ True
 Oracle:Destroy target land. Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.

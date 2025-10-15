@@ -60,13 +60,12 @@ public class CardView extends GameEntityView {
     }
 
     public static TrackableCollection<CardView> getCollection(Iterable<Card> cards) {
-        if (cards == null) {
-            return null;
-        }
         TrackableCollection<CardView> collection = new TrackableCollection<>();
-        for (Card c : cards) {
-            if (c.getRenderForUI()) { //only add cards that match their card for UI
-                collection.add(c.getView());
+        if (cards != null) {
+            for (Card c : cards) {
+                if (c != null && c.getRenderForUI()) { //only add cards that match their card for UI
+                    collection.add(c.getView());
+                }
             }
         }
         return collection;
@@ -1096,7 +1095,7 @@ public class CardView extends GameEntityView {
             if (c.getGame() != null) {
                 if (c.hasPerpetual()) currentStateView.updateColors(c);
                 else currentStateView.updateColors(currentState);
-                currentStateView.updateHasChangeColors(!Iterables.isEmpty(c.getChangedCardColors()));
+                currentStateView.updateHasChangeColors(c.hasChangedCardColors());
             }
         } else {
             currentStateView.updateLoyalty(currentState);
@@ -1842,8 +1841,8 @@ public class CardView extends GameEntityView {
         }
 
         @Override
-        public String getUntranslatedOracle() {
-            return getOracleText();
+        public String getTranslatedName() {
+            return CardTranslation.getTranslatedName(this);
         }
     }
 

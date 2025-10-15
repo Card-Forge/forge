@@ -29,12 +29,15 @@ public class AiCostDecision extends CostDecisionMakerBase {
     private final CardCollection tapped;
 
     public AiCostDecision(Player ai0, SpellAbility sa, final boolean effect) {
+        this(ai0, sa, effect, false);
+    }
+    public AiCostDecision(Player ai0, SpellAbility sa, final boolean effect, final boolean payMana) {
         super(ai0, effect, sa, sa.getHostCard());
 
         discarded = new CardCollection();
         tapped = new CardCollection();
         Set<Card> tappedForMana = AiCardMemory.getMemorySet(ai0, MemorySet.PAYS_TAP_COST);
-        if (tappedForMana != null) {
+        if (!payMana && tappedForMana != null) {
             tapped.addAll(tappedForMana);
         }
     }
@@ -110,7 +113,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 randomSubset = ability.getActivatingPlayer().getController().orderMoveToZoneList(randomSubset, ZoneType.Graveyard, ability);
             }
             return PaymentDecision.card(randomSubset);
-        } else if (type.equals("DifferentNames")) {
+        } else if (type.contains("+WithDifferentNames")) {
             CardCollection differentNames = new CardCollection();
             CardCollection discardMe = CardLists.filter(hand, CardPredicates.hasSVar("DiscardMe"));
             while (c > 0) {
@@ -563,7 +566,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 int thisRemove = Math.min(prefCard.getCounters(cType), stillToRemove);
                 if (thisRemove > 0) {
                     removed += thisRemove;
-                    table.put(null, prefCard, CounterType.get(cType), thisRemove);
+                    table.put(null, prefCard, cType, thisRemove);
                 }
             }
         }
@@ -573,7 +576,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
     @Override
     public PaymentDecision visit(CostRemoveAnyCounter cost) {
         final int c = cost.getAbilityAmount(ability);
-        final Card originalHost = ObjectUtils.defaultIfNull(ability.getOriginalHost(), source);
+        final Card originalHost = ObjectUtils.getIfNull(ability.getOriginalHost(), source);
 
         if (c <= 0) {
             return null;
@@ -716,7 +719,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 int over = Math.min(crd.getCounters(CounterEnumType.QUEST) - e, c - toRemove);
                 if (over > 0) {
                     toRemove += over;
-                    table.put(null, crd, CounterType.get(CounterEnumType.QUEST), over);
+                    table.put(null, crd, CounterEnumType.QUEST, over);
                 }
             }
         }

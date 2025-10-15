@@ -1,0 +1,7 @@
+Name:Volatile Orbit
+ManaCost:R G
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | IsPresent$ Planet.YouCtrl | TriggerDescription$ When this enchantment enters, if you control a Planet, this enchantment deals 4 damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 4
+A:AB$ MakeCard | Cost$ 1 R G Sac<1/CARDNAME/this enchantment> | Conjure$ True | SorcerySpeed$ True | SpellbookName$ Planets | Spellbook$ Adagia; Windswept Bastion,Evendo; Waking Haven,Kavaron; Memorial World,Susur Secundi; Void Altar,Uthros; Titanic Godcore | Zone$ Battlefield | Tapped$ True | WithCounter$ CHARGE | WithCounterNum$ 8 | SpellDescription$ Conjure a card of your choice from the Planets spellbook onto the battlefield tapped with eight charge counters on it. Activate only as a sorcery.
+Oracle:When this enchantment enters, if you control a Planet, this enchantment deals 4 damage to any target.\n{1}{R}{G}, Sacrifice this enchantment: Conjure a card of your choice from the Planets spellbook onto the battlefield tapped with eight charge counters on it. Activate only as a sorcery.

@@ -1,0 +1,12 @@
+Name:Hydroponics Architect
+ManaCost:U
+Types:Creature Insect
+PT:1/2
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigRandom | TriggerDescription$ Whenever this creature attacks, a random land card in your library perpetually becomes a basic Island in addition to its other types and gains "When this land enters, draw a card."
+SVar:TrigRandom:DB$ ChooseCard | Choices$ Land.YouOwn | ChoiceZone$ Library | AtRandom$ True | Amount$ 1 | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ ChosenCard | Types$ Basic,Island | Triggers$ LandETBDraw | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:LandETBDraw:Mode$ ChangesZone | ValidCard$ Card.Self | Execute$ TrigDraw | Origin$ Any | Destination$ Battlefield | TriggerDescription$ When this land enters, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+Oracle:Flying\nWhenever this creature attacks, a random land card in your library perpetually becomes a basic Island in addition to its other types and gains "When this land enters, draw a card."

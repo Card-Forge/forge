@@ -2238,7 +2238,7 @@ public class CardFactoryUtil {
             final String actualRep = "Event$ Draw | ActiveZones$ Graveyard | ValidPlayer$ You | "
                     + "Secondary$ True | Optional$ True | CheckSVar$ "
                     + "DredgeCheckLib | SVarCompare$ GE" + dredgeAmount
-                    + " | AICheckDredge$ True | Description$ CARDNAME - Dredge " + dredgeAmount;
+                    + " | Description$ CARDNAME - Dredge " + dredgeAmount;
 
             final String abString = "DB$ Mill | Defined$ You | NumCards$ " + dredgeAmount;
 
@@ -2568,7 +2568,7 @@ public class CardFactoryUtil {
         }  else if (keyword.equals("Sunburst")) {
             // Rule 702.43a If this object is entering the battlefield as a creature,
             // ignoring any type-changing effects that would affect it
-            CounterType t = CounterType.get(host.isCreature() ? CounterEnumType.P1P1 : CounterEnumType.CHARGE);
+            CounterType t = host.isCreature() ? CounterEnumType.P1P1 : CounterEnumType.CHARGE;
 
             StringBuilder sb = new StringBuilder("etbCounter:");
             sb.append(t).append(":Sunburst:no Condition:");
@@ -2776,10 +2776,9 @@ public class CardFactoryUtil {
             final String cost = params[1];
 
             final StringBuilder sbAttach = new StringBuilder();
-            sbAttach.append("SP$ Attach | Cost$ ");
+            sbAttach.append("SP$ Attach | ValidTgts$ Creature | Cost$ ");
             sbAttach.append(cost);
             sbAttach.append(" | AILogic$ ").append(params.length > 2 ? params[2] : "Pump");
-            sbAttach.append(" | Bestow$ True | ValidTgts$ Creature");
 
             final SpellAbility sa = AbilityFactory.getAbility(sbAttach.toString(), card);
             final StringBuilder sbDesc = new StringBuilder();
@@ -4113,7 +4112,7 @@ public class CardFactoryUtil {
                 sbValid.append("| ").append(param).append(k[1]);
             }
 
-            String effect = "Mode$ CantTarget | ValidCard$ Card.Self | Secondary$ True"
+            String effect = "Mode$ CantTarget | ValidTarget$ Card.Self | Secondary$ True"
                     + sbValid.toString() + " | Activator$ Opponent | Description$ "
                     + sbDesc.toString() + " (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
@@ -4154,7 +4153,7 @@ public class CardFactoryUtil {
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
 
             // Target
-            effect = "Mode$ CantTarget | Protection$ True | ValidCard$ Card.Self | Secondary$ True ";
+            effect = "Mode$ CantTarget | ValidTarget$ Card.Self | Secondary$ True ";
             if (!valid.isEmpty()) {
                 effect += "| ValidSource$ " + valid;
             }
@@ -4162,7 +4161,7 @@ public class CardFactoryUtil {
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
 
             // Attach
-            effect = "Mode$ CantAttach | Protection$ True | Target$ Card.Self | Secondary$ True ";
+            effect = "Mode$ CantAttach | Target$ Card.Self | Secondary$ True ";
             if (!valid.isEmpty()) {
                 effect += "| ValidCard$ " + valid;
             }
@@ -4183,7 +4182,7 @@ public class CardFactoryUtil {
                     " | Description$ Chapter abilities of this Saga can't trigger the turn it entered the battlefield unless it has exactly the number of lore counters on it specified in the chapter symbol of that ability.";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Shroud")) {
-            String effect = "Mode$ CantTarget | ValidCard$ Card.Self | Secondary$ True"
+            String effect = "Mode$ CantTarget | ValidTarget$ Card.Self | Secondary$ True"
                     + " | Description$ Shroud (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Skulk")) {

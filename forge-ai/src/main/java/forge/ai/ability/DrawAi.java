@@ -26,7 +26,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
 import forge.game.cost.*;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -55,7 +54,7 @@ public class DrawAi extends SpellAbilityAi {
         }
 
         if (ComputerUtil.playImmediately(ai, sa)) {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         // Don't tap creatures that may be able to block
@@ -74,9 +73,10 @@ public class DrawAi extends SpellAbilityAi {
                 // TODO: make this configurable in the AI profile
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
         }
 
-        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /*
@@ -174,9 +174,8 @@ public class DrawAi extends SpellAbilityAi {
     public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         if (targetAI(ai, sa, sa.isTrigger() && sa.getHostCard().isInPlay())) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
+        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
     }
 
     /**
@@ -370,7 +369,7 @@ public class DrawAi extends SpellAbilityAi {
 
                 // try to make opponent lose to poison
                 // currently only Caress of Phyrexia
-                if (getPoison != null && oppA.canReceiveCounters(CounterType.get(CounterEnumType.POISON))) {
+                if (getPoison != null && oppA.canReceiveCounters(CounterEnumType.POISON)) {
                     if (oppA.getPoisonCounters() + numCards > 9) {
                         sa.getTargets().add(oppA);
                         return true;
@@ -414,7 +413,7 @@ public class DrawAi extends SpellAbilityAi {
                     }
                 }
 
-                if (getPoison != null && ai.canReceiveCounters(CounterType.get(CounterEnumType.POISON))) {
+                if (getPoison != null && ai.canReceiveCounters(CounterEnumType.POISON)) {
                     if (numCards + ai.getPoisonCounters() >= 8) {
                         aiTarget = false;
                     }
@@ -472,7 +471,7 @@ public class DrawAi extends SpellAbilityAi {
                 }
 
                 // ally would lose because of poison
-                if (getPoison != null && ally.canReceiveCounters(CounterType.get(CounterEnumType.POISON)) && ally.getPoisonCounters() + numCards > 9) {
+                if (getPoison != null && ally.canReceiveCounters(CounterEnumType.POISON) && ally.getPoisonCounters() + numCards > 9) {
                         continue;
                 }
 
@@ -541,9 +540,8 @@ public class DrawAi extends SpellAbilityAi {
 
         if (targetAI(ai, sa, mandatory)) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
+        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
     }
 
     /* (non-Javadoc)

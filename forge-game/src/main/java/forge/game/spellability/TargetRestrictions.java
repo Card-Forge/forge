@@ -55,10 +55,10 @@ public class TargetRestrictions {
 
     // Additional restrictions that may not fit into Valid
     private boolean uniqueTargets = false;
-    private boolean singleZone = false;
     private boolean forEachPlayer = false;
     private boolean differentControllers = false;
     private boolean differentCMC = false;
+    private boolean differentNames = false;
     private boolean equalToughness = false;
     private boolean sameController = false;
     private boolean withoutSameCreatureType = false;
@@ -99,7 +99,6 @@ public class TargetRestrictions {
         this.tgtZone = target.getZone();
         this.saValidTargeting = target.getSAValidTargeting();
         this.uniqueTargets = target.isUniqueTargets();
-        this.singleZone = target.isSingleZone();
         this.forEachPlayer = target.isForEachPlayer();
         this.differentControllers = target.isDifferentControllers();
         this.differentCMC = target.isDifferentCMC();
@@ -537,12 +536,6 @@ public class TargetRestrictions {
     public final void setUniqueTargets(final boolean unique) {
         this.uniqueTargets = unique;
     }
-    public final boolean isSingleZone() {
-        return this.singleZone;
-    }
-    public final void setSingleZone(final boolean single) {
-        this.singleZone = single;
-    }
     public boolean isWithoutSameCreatureType() {
         return withoutSameCreatureType;
     }
@@ -619,6 +612,13 @@ public class TargetRestrictions {
      */
     public void setDifferentCMC(boolean different) {
         this.differentCMC = different;
+    }
+
+    public boolean isDifferentNames() {
+        return differentNames;
+    }
+    public void setDifferentNames(boolean different) {
+        this.differentNames = different;
     }
 
     /**

@@ -20,14 +20,14 @@ public class AirbendEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder("Airbend ");
-        
+
         Iterable<Card> tgts;
         if (sa.usesTargeting()) {
             tgts = getCardsfromTargets(sa);
         } else { // otherwise add self to list and go from there
             tgts = sa.knownDetermineDefined(sa.getParam("Defined"));
         }
-        
+
         sb.append(sa.getParamOrDefault("DefinedDesc", Lang.joinHomogenous(tgts)));
         sb.append(".");
         if (Iterables.size(tgts) > 1) {
@@ -46,7 +46,7 @@ public class AirbendEffect extends SpellAbilityEffect {
         final Player pl = sa.getActivatingPlayer();
 
         final CardZoneTable triggerList = CardZoneTable.getSimultaneousInstance(sa);
-        
+
         for (Card c : getTargetCards(sa)) {
             final Card gameCard = game.getCardState(c, null);
             // gameCard is LKI in that case, the card is not in game anymore
@@ -55,7 +55,7 @@ public class AirbendEffect extends SpellAbilityEffect {
             if (gameCard == null || !c.equalsWithGameTimestamp(gameCard) || gameCard.isPhasedOut()) {
                 continue;
             }
-            
+
             if (!gameCard.canExiledBy(sa, true)) {
                 continue;
             }
@@ -86,7 +86,7 @@ public class AirbendEffect extends SpellAbilityEffect {
         }
         triggerList.triggerChangesZoneAll(game, sa);
         handleExiledWith(triggerList.allCards(), sa);
-        
+
         pl.triggerElementalBend(TriggerType.Airbend);
     }
 

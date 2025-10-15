@@ -17,6 +17,7 @@
  */
 package forge.card.mana;
 
+import forge.card.ColorSet;
 import forge.util.BinaryUtil;
 
 /**
@@ -34,52 +35,51 @@ public enum ManaCostShard {
     COLORLESS(ManaAtom.COLORLESS, "C"),
 
     /* Hybrid */
-    WU(ManaAtom.WHITE | ManaAtom.BLUE, "W/U", "WU"),
-    WB(ManaAtom.WHITE | ManaAtom.BLACK, "W/B", "WB"),
-    UB(ManaAtom.BLUE | ManaAtom.BLACK, "U/B", "UB"),
-    UR(ManaAtom.BLUE | ManaAtom.RED, "U/R", "UR"),
-    BR(ManaAtom.BLACK | ManaAtom.RED, "B/R", "BR"),
-    BG(ManaAtom.BLACK | ManaAtom.GREEN, "B/G", "BG"),
-    RW(ManaAtom.RED | ManaAtom.WHITE, "R/W", "RW"),
-    RG(ManaAtom.RED | ManaAtom.GREEN, "R/G", "RG"),
-    GW(ManaAtom.GREEN | ManaAtom.WHITE, "G/W", "GW"),
-    GU(ManaAtom.GREEN | ManaAtom.BLUE, "G/U", "GU"),
+    WU(ManaAtom.WHITE | ManaAtom.BLUE, "W/U"),
+    WB(ManaAtom.WHITE | ManaAtom.BLACK, "W/B"),
+    UB(ManaAtom.BLUE | ManaAtom.BLACK, "U/B"),
+    UR(ManaAtom.BLUE | ManaAtom.RED, "U/R"),
+    BR(ManaAtom.BLACK | ManaAtom.RED, "B/R"),
+    BG(ManaAtom.BLACK | ManaAtom.GREEN, "B/G"),
+    RW(ManaAtom.RED | ManaAtom.WHITE, "R/W"),
+    RG(ManaAtom.RED | ManaAtom.GREEN, "R/G"),
+    GW(ManaAtom.GREEN | ManaAtom.WHITE, "G/W"),
+    GU(ManaAtom.GREEN | ManaAtom.BLUE, "G/U"),
 
     /* Or 2 generic */
-    W2(ManaAtom.WHITE | ManaAtom.OR_2_GENERIC, "2/W", "2W"),
-    U2(ManaAtom.BLUE | ManaAtom.OR_2_GENERIC, "2/U", "2U"),
-    B2(ManaAtom.BLACK | ManaAtom.OR_2_GENERIC, "2/B", "2B"),
-    R2(ManaAtom.RED | ManaAtom.OR_2_GENERIC, "2/R", "2R"),
-    G2(ManaAtom.GREEN | ManaAtom.OR_2_GENERIC, "2/G", "2G"),
+    W2(ManaAtom.WHITE | ManaAtom.OR_2_GENERIC, "2/W"),
+    U2(ManaAtom.BLUE | ManaAtom.OR_2_GENERIC, "2/U"),
+    B2(ManaAtom.BLACK | ManaAtom.OR_2_GENERIC, "2/B"),
+    R2(ManaAtom.RED | ManaAtom.OR_2_GENERIC, "2/R"),
+    G2(ManaAtom.GREEN | ManaAtom.OR_2_GENERIC, "2/G"),
 
     /* Or Colorless */
-    CW(ManaAtom.WHITE | ManaAtom.COLORLESS, "C/W", "CW"),
-    CU(ManaAtom.BLUE | ManaAtom.COLORLESS, "C/U", "CU"),
-    CB(ManaAtom.BLACK | ManaAtom.COLORLESS, "C/B", "CB"),
-    CR(ManaAtom.RED | ManaAtom.COLORLESS, "C/R", "CR"),
-    CG(ManaAtom.GREEN | ManaAtom.COLORLESS, "C/G", "CG"),
+    CW(ManaAtom.WHITE | ManaAtom.COLORLESS, "C/W"),
+    CU(ManaAtom.BLUE | ManaAtom.COLORLESS, "C/U"),
+    CB(ManaAtom.BLACK | ManaAtom.COLORLESS, "C/B"),
+    CR(ManaAtom.RED | ManaAtom.COLORLESS, "C/R"),
+    CG(ManaAtom.GREEN | ManaAtom.COLORLESS, "C/G"),
 
     // Snow and colorless
     S(ManaAtom.IS_SNOW, "S"),
     GENERIC(ManaAtom.GENERIC, "1"),
 
-
     /* Phyrexian */
-    WP(ManaAtom.WHITE | ManaAtom.OR_2_LIFE, "W/P", "WP"),
-    UP(ManaAtom.BLUE | ManaAtom.OR_2_LIFE, "U/P", "UP"),
-    BP(ManaAtom.BLACK | ManaAtom.OR_2_LIFE, "B/P", "BP"),
-    RP(ManaAtom.RED | ManaAtom.OR_2_LIFE, "R/P", "RP"),
-    GP(ManaAtom.GREEN | ManaAtom.OR_2_LIFE, "G/P", "GP"),
-    BGP(ManaAtom.BLACK | ManaAtom.GREEN | ManaAtom.OR_2_LIFE, "B/G/P", "BGP"),
-    BRP(ManaAtom.BLACK | ManaAtom.RED | ManaAtom.OR_2_LIFE, "B/R/P", "BRP"),
-    GUP(ManaAtom.GREEN | ManaAtom.BLUE | ManaAtom.OR_2_LIFE, "G/U/P", "GUP"),
-    GWP(ManaAtom.GREEN | ManaAtom.WHITE | ManaAtom.OR_2_LIFE, "G/W/P", "GWP"),
-    RGP(ManaAtom.RED | ManaAtom.GREEN | ManaAtom.OR_2_LIFE, "R/G/P", "RGP"),
-    RWP(ManaAtom.RED | ManaAtom.WHITE | ManaAtom.OR_2_LIFE, "R/W/P", "RWP"),
-    UBP(ManaAtom.BLUE | ManaAtom.BLACK | ManaAtom.OR_2_LIFE, "U/B/P", "UBP"),
-    URP(ManaAtom.BLUE | ManaAtom.RED | ManaAtom.OR_2_LIFE, "U/R/P", "URP"),
-    WBP(ManaAtom.WHITE | ManaAtom.BLACK | ManaAtom.OR_2_LIFE, "W/B/P", "WBP"),
-    WUP(ManaAtom.WHITE | ManaAtom.BLUE | ManaAtom.OR_2_LIFE, "W/U/P", "WUP"),
+    WP(ManaAtom.WHITE | ManaAtom.OR_2_LIFE, "W/P"),
+    UP(ManaAtom.BLUE | ManaAtom.OR_2_LIFE, "U/P"),
+    BP(ManaAtom.BLACK | ManaAtom.OR_2_LIFE, "B/P"),
+    RP(ManaAtom.RED | ManaAtom.OR_2_LIFE, "R/P"),
+    GP(ManaAtom.GREEN | ManaAtom.OR_2_LIFE, "G/P"),
+    BGP(ManaAtom.BLACK | ManaAtom.GREEN | ManaAtom.OR_2_LIFE, "B/G/P"),
+    BRP(ManaAtom.BLACK | ManaAtom.RED | ManaAtom.OR_2_LIFE, "B/R/P"),
+    GUP(ManaAtom.GREEN | ManaAtom.BLUE | ManaAtom.OR_2_LIFE, "G/U/P"),
+    GWP(ManaAtom.GREEN | ManaAtom.WHITE | ManaAtom.OR_2_LIFE, "G/W/P"),
+    RGP(ManaAtom.RED | ManaAtom.GREEN | ManaAtom.OR_2_LIFE, "R/G/P"),
+    RWP(ManaAtom.RED | ManaAtom.WHITE | ManaAtom.OR_2_LIFE, "R/W/P"),
+    UBP(ManaAtom.BLUE | ManaAtom.BLACK | ManaAtom.OR_2_LIFE, "U/B/P"),
+    URP(ManaAtom.BLUE | ManaAtom.RED | ManaAtom.OR_2_LIFE, "U/R/P"),
+    WBP(ManaAtom.WHITE | ManaAtom.BLACK | ManaAtom.OR_2_LIFE, "W/B/P"),
+    WUP(ManaAtom.WHITE | ManaAtom.BLUE | ManaAtom.OR_2_LIFE, "W/U/P"),
 
     X(ManaAtom.IS_X, "X"),
 
@@ -108,26 +108,12 @@ public enum ManaCostShard {
      *            the s value
      */
     ManaCostShard(final int value, final String sValue) {
-        this(value, sValue, sValue);
-    }
-
-    /**
-     * Instantiates a new card mana cost shard.
-     * 
-     * @param value
-     *            the value
-     * @param sValue
-     *            the s value
-     * @param imgKey
-     *            the img key
-     */
-    ManaCostShard(final int value, final String sValue, final String imgKey) {
         this.shard = value;
         this.cmc = this.getCMC();
         this.cmpc = this.getCmpCost();
         this.stringValue = "{" + sValue + "}";
         this.shortStringValue = sValue;
-        this.imageKey = imgKey;
+        this.imageKey = sValue.replace("/", "");
     }
 
     public static final int COLORS_SUPERPOSITION = ManaAtom.WHITE | ManaAtom.BLUE | ManaAtom.BLACK | ManaAtom.RED | ManaAtom.GREEN;
@@ -184,6 +170,10 @@ public enum ManaCostShard {
      */
     public final byte getColorMask() {
         return (byte)(this.shard & COLORS_SUPERPOSITION);
+    }
+
+    public final ColorSet getColor() {
+        return ColorSet.fromMask(getColorMask());
     }
 
     /**

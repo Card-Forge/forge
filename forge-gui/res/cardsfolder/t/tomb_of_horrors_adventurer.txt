@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigInitiative:DB$ TakeInitiative
 T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigCopy | ActivatorThisTurnCast$ EQ2 | ValidActivatingPlayer$ You | TriggerDescription$ Whenever you cast your second spell each turn, copy it. If you've completed a dungeon, copy that spell twice instead. You may choose new targets for the copies. (A copy of a permanent spell becomes a token.)
 SVar:TrigCopy:DB$ CopySpellAbility | Amount$ Y | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
-SVar:X:PlayerCountPropertyYou$DungeonsCompleted
+SVar:X:DungeonsCompleted$Amount
 SVar:Y:Count$Compare X GE1.2.1
 DeckHas:Ability$Token
 Oracle:When Tomb of Horrors Adventurer enters, you take the initiative.\nWhenever you cast your second spell each turn, copy it. If you've completed a dungeon, copy that spell twice instead. You may choose new targets for the copies. (A copy of a permanent spell becomes a token.)

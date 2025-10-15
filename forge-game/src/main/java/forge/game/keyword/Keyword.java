@@ -1,8 +1,8 @@
 package forge.game.keyword;
 
-import forge.StaticData;
-import forge.game.card.Card;
+import forge.card.CardSplitType;
 import forge.item.PaperCard;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 
@@ -119,7 +119,7 @@ public enum Keyword {
     LIVING_METAL("Living metal", SimpleKeyword.class, true, "During your turn, this Vehicle is also a creature."),
     LIVING_WEAPON("Living Weapon", SimpleKeyword.class, true, "When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach this to it."),
     MADNESS("Madness", KeywordWithCost.class, false, "If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard."),
-    MAYHEM("Mayhem", KeywordWithCost.class, false, "You may cast this card from your graveyard for %s if you discarded it this turn. Timing rules still apply."),
+    MAYHEM("Mayhem", Mayhem.class, false, "You may cast this card from your graveyard for %s if you discarded it this turn. Timing rules still apply."),
     MELEE("Melee", SimpleKeyword.class, false, "Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat."),
     MENTOR("Mentor", SimpleKeyword.class, false, "Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power."),
     MENACE("Menace", SimpleKeyword.class, true, "This creature can't be blocked except by two or more creatures."),
@@ -141,6 +141,9 @@ public enum Keyword {
     OFFSPRING("Offspring", KeywordWithCost.class, false, "You may pay an additional %s as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it."),
     OVERLOAD("Overload", KeywordWithCost.class, false, "You may cast this spell for its overload cost. If you do, change its text by replacing all instances of \"target\" with \"each.\""),
     PARTNER("Partner", Partner.class, true, "You can have two commanders if both have partner."),
+    PARTNER_SURVIVORS("Partner - Survivors", Partner.class, true, "You can have two commanders if both have this ability."),
+    PARTNER_FATHER_AND_SON("Partner - Father & Son", Partner.class, true, "You can have two commanders if both have this ability."),    
+    PARTNER_CHARACTER_SELECT("Partner - Character select", Partner.class, true, "You can have two commanders if both have this ability."),    
     PERSIST("Persist", SimpleKeyword.class, false, "When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it."),
     PHASING("Phasing", SimpleKeyword.class, true, "This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist."),
     PLOT("Plot", KeywordWithCost.class, false, "You may pay %s and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery."),
@@ -223,7 +226,7 @@ public enum Keyword {
         displayName = displayName0;
     }
 
-    public static KeywordInterface getInstance(String k) {
+    private static Pair<Keyword, String> getKeywordDetails(String k) {
         Keyword keyword = Keyword.UNDEFINED;
         String details = k;
         // try to get real part
@@ -255,15 +258,20 @@ public enum Keyword {
             keyword = smartValueOf(k);
             details = "";
         }
+        return Pair.of(keyword, details);
+    }
+
+    public static KeywordInterface getInstance(String k) {
+        Pair<Keyword, String> p = getKeywordDetails(k);
 
         KeywordInstance<?> inst;
         try {
-            inst = keyword.type.getConstructor().newInstance();
+            inst = p.getKey().type.getConstructor().newInstance();
         }
         catch (Exception e) {
             inst = new UndefinedKeyword();
         }
-        inst.initialize(k, keyword, details);
+        inst.initialize(k, p.getKey(), p.getValue());
         return inst;
     }
 
@@ -278,34 +286,42 @@ public enum Keyword {
         return keywords;
     }
 
+    private static Keyword get(String k) {
+        if (k == null || k.isEmpty())
+            return Keyword.UNDEFINED;
+
+        return getKeywordDetails(k).getKey();
+    }
+
     private static final Map<String, Set<Keyword>> cardKeywordSetLookup = new HashMap<>();
 
     public static Set<Keyword> getKeywordSet(PaperCard card) {
-        String key = card.getName();
-        Set<Keyword> keywordSet = cardKeywordSetLookup.get(key);
+        String name = card.getName();
+        Set<Keyword> keywordSet = cardKeywordSetLookup.get(name);
         if (keywordSet == null) {
-            keywordSet = new HashSet<>();
-            for (KeywordInterface inst : Card.getCardForUi(card).getKeywords()) {
-                final Keyword keyword = inst.getKeyword();
-                if (keyword != Keyword.UNDEFINED) {
-                    keywordSet.add(keyword);
+            CardSplitType cardSplitType = card.getRules().getSplitType();
+            keywordSet = EnumSet.noneOf(Keyword.class);
+            if (cardSplitType != CardSplitType.None && cardSplitType != CardSplitType.Split) {
+                if (card.getRules().getOtherPart() != null) {
+                    if (card.getRules().getOtherPart().getKeywords() != null) {
+                        for (String key : card.getRules().getOtherPart().getKeywords()) {
+                            Keyword keyword = get(key);
+                            if (!Keyword.UNDEFINED.equals(keyword))
+                                keywordSet.add(keyword);
+                        }
+                    }
                 }
             }
-            cardKeywordSetLookup.put(card.getName(), keywordSet);
+            if (card.getRules().getMainPart().getKeywords() != null) {
+                for (String key : card.getRules().getMainPart().getKeywords()) {
+                    Keyword keyword = get(key);
+                    if (!Keyword.UNDEFINED.equals(keyword))
+                        keywordSet.add(keyword);
+                }
+            }
+            cardKeywordSetLookup.put(name, keywordSet);
         }
         return keywordSet;
-    }
-
-    public static Runnable getPreloadTask() {
-        if (cardKeywordSetLookup.size() < 10000) { //allow preloading even if some but not all cards loaded
-            return () -> {
-                final Collection<PaperCard> cards = StaticData.instance().getCommonCards().getUniqueCards();
-                for (PaperCard card : cards) {
-                    getKeywordSet(card);
-                }
-            };
-        }
-        return null;
     }
 
     public static Keyword smartValueOf(String value) {

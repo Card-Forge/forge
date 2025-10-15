@@ -2,7 +2,6 @@ package forge.toolbox;
 
 import forge.Forge;
 import forge.toolbox.FEvent.FEventType;
-import forge.util.Callback;
 
 
 public class FSpinner extends FTextField {
@@ -36,16 +35,13 @@ public class FSpinner extends FTextField {
 
     @Override
     public boolean tap(float x, float y, int count) {
-        GuiChoose.getInteger(Forge.getLocalizer().getMessage("lblSelectANumber"), minValue, maxValue, new Callback<Integer>() {
-            @Override
-            public void run(Integer result) {
-                if (result != null && result != value) {
-                    int oldValue = value;
-                    setValue(result);
-                    if (getChangedHandler() != null) {
-                        //handle change event if value changed from input
-                        getChangedHandler().handleEvent(new FEvent(FSpinner.this, FEventType.CHANGE, oldValue));
-                    }
+        GuiChoose.getInteger(Forge.getLocalizer().getMessage("lblSelectANumber"), minValue, maxValue, result -> {
+            if (result != null && result != value) {
+                int oldValue = value;
+                setValue(result);
+                if (getChangedHandler() != null) {
+                    //handle change event if value changed from input
+                    getChangedHandler().handleEvent(new FEvent(FSpinner.this, FEventType.CHANGE, oldValue));
                 }
             }
         });

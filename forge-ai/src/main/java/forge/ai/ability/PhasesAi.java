@@ -33,10 +33,8 @@ public class PhasesAi extends SpellAbilityAi {
                 final boolean isThreatened = ComputerUtil.predictThreatenedObjects(aiPlayer, null, true).contains(source);
                 if (isThreatened) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-
                 }
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);

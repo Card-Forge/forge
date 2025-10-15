@@ -66,12 +66,6 @@ public class CardProperty {
             if (!card.sharesNameWith(name)) {
                 return false;
             }
-        } else if (property.startsWith("notnamed")) {
-            String name = TextUtil.fastReplace(property.substring(8), ";", ","); // workaround for card name with ","
-            name = TextUtil.fastReplace(name, "_", " ");
-            if (card.sharesNameWith(name)) {
-                return false;
-            }
         } else if (property.equals("NamedCard")) {
             boolean found = false;
             for (String name : source.getNamedCards()) {
@@ -1244,7 +1238,8 @@ public class CardProperty {
             if (property.contains("ControlledBy")) {
                 FCollectionView<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], spellAbility);
                 cards = CardLists.filterControlledBy(cards, p);
-                if (!cards.contains(card)) {
+                // Kraven the Hunter LTB trigger
+                if (!card.isLKI() && !cards.contains(card)) {
                     return false;
                 }
             }
@@ -1563,8 +1558,6 @@ public class CardProperty {
                     return false;
                 }
             }
-        } else if (property.startsWith("notattacking")) {
-            return null == combat || !combat.isAttacking(card);
         } else if (property.startsWith("enlistedThisCombat")) {
             if (card.getEnlistedThisCombat() == false) return false;
         } else if (property.startsWith("attackedThisCombat")) {
@@ -1618,8 +1611,6 @@ public class CardProperty {
             if (Collections.disjoint(combat.getAttackersBlockedBy(source), combat.getAttackersBlockedBy(card))) {
                 return false;
             }
-        } else if (property.startsWith("notblocking")) {
-            return null == combat || !combat.isBlocking(card);
         }
         // Nex predicates refer to past combat and don't need a reference to actual combat
         else if (property.equals("blocked")) {
@@ -1819,12 +1810,20 @@ public class CardProperty {
             if (!card.isWarped()) {
                 return false;
             }
+        } else if (property.equals("webSlinged")) {
+            if (!card.isWebSlinged()) {
+                return false;
+            }
         } else if (property.equals("CrewedThisTurn")) {
             if (!hasTimestampMatch(card, source.getCrewedByThisTurn())) return false;
         } else if (property.equals("CrewedBySourceThisTurn")) {
             if (!hasTimestampMatch(source, card.getCrewedByThisTurn())) return false;
         } else if (property.equals("HasDevoured")) {
             if (card.getDevouredCards().isEmpty()) {
+                return false;
+            }
+        } else if (property.equals("harnessed")) {
+            if (!card.isHarnessed()) {
                 return false;
             }
         } else if (property.equals("IsMonstrous")) {
@@ -2059,16 +2058,6 @@ public class CardProperty {
                     }
                 }
                 if (!found) {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        } else if (property.startsWith("NotTriggered")) {
-            final String key = property.substring("NotTriggered".length());
-            if (spellAbility instanceof SpellAbility) {
-                SpellAbility sa = (SpellAbility) spellAbility;
-                if (card.equals(sa.getRootAbility().getTriggeringObject(AbilityKey.fromString(key)))) {
                     return false;
                 }
             } else {

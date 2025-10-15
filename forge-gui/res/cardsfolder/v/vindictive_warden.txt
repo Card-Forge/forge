@@ -1,0 +1,8 @@
+Name:Vindictive Warden
+ManaCost:2 BR
+Types:Creature Human Soldier
+PT:2/3
+K:Menace
+K:Firebending:1
+A:AB$ DealDamage | Cost$ 3 | Defined$ Player.Opponent | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each opponent.
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nFirebending 1 (Whenever this creature attacks, add {R}. This mana lasts until end of combat.)\n{3}: This creature deals 1 damage to each opponent.

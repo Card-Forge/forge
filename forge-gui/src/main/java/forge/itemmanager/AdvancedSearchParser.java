@@ -326,6 +326,14 @@ public abstract class AdvancedSearchParser {
                         case "transform":
                             predicate = CardRulesPredicates.isSplitType(CardSplitType.Transform);
                             break;
+
+                        case "vanilla":
+                            predicate = CardRulesPredicates.isVanilla();
+                            break;
+
+                        case "custom":
+                            predicate = card -> card.isCustom();
+                            break;
                     }
                 }
                 break;

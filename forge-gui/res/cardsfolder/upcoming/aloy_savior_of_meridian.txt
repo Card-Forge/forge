@@ -1,0 +1,11 @@
+Name:Aloy, Savior of Meridian
+ManaCost:3 G U 
+Types:Legendary Creature Human Warrior
+PT:3/5
+K:Vigilance
+K:Reach
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | ValidAttackers$ Creature.Artifact+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDiscover | TriggerDescription$ In You, All Things Are Possible — Whenever one or more artifact creatures you control attack, discover X, where X is the greatest power among them. (Exile cards from the top of your library until you exile a nonland card with that mana value or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+SVar:TrigDiscover:DB$ Discover | Num$ X
+SVar:X:TriggerObjectsAttackers$GreatestPower
+DeckNeeds:Type$Artifact & Type$Creature
+Oracle:Vigilance, reach\nIn You, All Things Are Possible — Whenever one or more artifact creatures you control attack, discover X, where X is the greatest power among them. (Exile cards from the top of your library until you exile a nonland card with that mana value or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)

@@ -174,6 +174,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private CardZoneTable changeZoneTable;
     private Map<Player, Integer> loseLifeMap;
 
+    private String name = "";
+
     public CardCollection getLastStateBattlefield() {
         return lastStateBattlefield;
     }
@@ -354,7 +356,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public int totalAmountOfManaGenerated(SpellAbility saPaidFor, boolean multiply) {
         int result = 0;
         AbilityManaPart mp = getManaPart();
-        if (mp != null && metConditions() && mp.meetsManaRestrictions(saPaidFor)) {
+        if (mp != null && mp.meetsManaRestrictions(saPaidFor)) {
             result += amountOfManaGenerated(multiply);
         }
         result += subAbility != null ? subAbility.totalAmountOfManaGenerated(saPaidFor, multiply) : 0;
@@ -670,6 +672,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public final boolean isMadness() {
         return isAlternativeCost(AlternativeCost.Madness);
+    }
+    
+    public final boolean isMayhem() {
+        return isAlternativeCost(AlternativeCost.Mayhem);
     }
 
     public final boolean isMutate() {
@@ -1115,7 +1121,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             if (node.getHostCard() != null && !desc.isEmpty()) {
                 ITranslatable nameSource = getHostName(node);
                 desc = CardTranslation.translateMultipleDescriptionText(desc, nameSource);
-                String translatedName = CardTranslation.getTranslatedName(nameSource);
+                String translatedName = nameSource.getTranslatedName();
                 desc = TextUtil.fastReplace(desc, "CARDNAME", translatedName);
                 desc = TextUtil.fastReplace(desc, "NICKNAME", Lang.getInstance().getNickName(translatedName));
                 if (node.getOriginalHost() != null) {
@@ -1242,6 +1248,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             clone.mayChooseNewTargets = false;
 
             clone.triggeringObjects = AbilityKey.newMap(this.triggeringObjects);
+            if (!lki) {
+                clone.replacingObjects = AbilityKey.newMap();
+            }
 
             clone.setPayCosts(getPayCosts().copy());
             if (manaPart != null) {
@@ -1495,6 +1504,22 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             if (tr.isEqualToughness() && entity instanceof Card) {
                 for (final Card c : getTargets().getTargetCards()) {
                     if (entity != c && c.getNetToughness() != (((Card) entity).getNetToughness())) {
+                        return false;
+                    }
+                }
+            }
+
+            if (tr.isDifferentCMC() && entity instanceof Card) {
+                for (final Card c : getTargets().getTargetCards()) {
+                    if (entity != c && c.getCMC() == (((Card) entity).getCMC())) {
+                        return false;
+                    }
+                }
+            }
+
+            if (tr.isDifferentNames() && entity instanceof Card) {
+                for (final Card c : getTargets().getTargetCards()) {
+                    if (entity != c && c.sharesNameWith(((Card) entity).getName())) {
                         return false;
                     }
                 }
@@ -2654,5 +2679,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void clearOptionalKeywordAmount() {
         optionalKeywordAmount.clear();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

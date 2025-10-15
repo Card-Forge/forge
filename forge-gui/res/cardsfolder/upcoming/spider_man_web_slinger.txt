@@ -1,7 +1,0 @@
-Name:Spider-Man, Web-Slinger
-ManaCost:2 W
-Types:Creature Spider Human Hero
-PT:3/3
-K:Web-slinging:W
-Oracle:Web-slinging {W} (You may cast this spell for {W} if you also return a tapped creature you control to its owner’s hand.)
-

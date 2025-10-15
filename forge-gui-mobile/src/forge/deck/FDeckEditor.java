@@ -30,6 +30,7 @@ import forge.itemmanager.ItemManager.ContextMenuBuilder;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.filters.ItemFilter;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.localinstance.skin.FSkinProp;
 import forge.menu.*;
 import forge.model.FModel;
 import forge.screens.FScreen;
@@ -81,13 +82,21 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         public boolean allowsCardReplacement() { return hasInfiniteCardPool() || usePlayerInventory(); }
 
         public List<CardEdition> getBasicLandSets(Deck currentDeck) {
+            if(hasInfiniteCardPool())
+                return FModel.getMagicDb().getSortedEditions().stream().filter(CardEdition::hasBasicLands).collect(Collectors.toList());
             return List.of(DeckProxy.getDefaultLandSet(currentDeck));
         }
 
         protected abstract IDeckController getController();
         protected abstract DeckEditorPage[] getInitialPages();
 
-        protected DeckSection[] getExtraSections() {
+        public DeckSection[] getPrimarySections() {
+            if(getGameType() != null)
+                return getGameType().getPrimaryDeckSections().toArray(new DeckSection[0]);
+            return new DeckSection[]{DeckSection.Main, DeckSection.Sideboard};
+        }
+
+        public DeckSection[] getExtraSections() {
             if(getGameType() != null)
                 return getGameType().getSupplimentalDeckSections().toArray(new DeckSection[0]);
             return new DeckSection[]{DeckSection.Attractions, DeckSection.Contraptions};
@@ -144,7 +153,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         ItemManagerConfig catalogConfig = null;
         ItemManagerConfig mainSectionConfig = null;
         ItemManagerConfig sideboardConfig = null;
-        Function<Deck, CardEdition> fnGetBasicLandSet = null;
+        Function<Deck, Collection<CardEdition>> fnGetBasicLandSet = null;
         Supplier<ItemPool<PaperCard>> itemPoolSupplier = null;
         String catalogCaption = null;
 
@@ -196,7 +205,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             this.sideboardConfig = sideboardConfig;
             return this;
         }
-        public GameTypeDeckEditorConfig setBasicLandSetFunction(Function<Deck, CardEdition> fnGetBasicLandSet) {
+        public GameTypeDeckEditorConfig setBasicLandSetFunction(Function<Deck, Collection<CardEdition>> fnGetBasicLandSet) {
             this.fnGetBasicLandSet = fnGetBasicLandSet;
             return this;
         }
@@ -296,8 +305,20 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         @Override
-        protected DeckSection[] getExtraSections() {
+        public DeckSection[] getPrimarySections() {
+            return gameType.getPrimaryDeckSections().toArray(new DeckSection[0]);
+        }
+
+        @Override
+        public DeckSection[] getExtraSections() {
             return gameType.getSupplimentalDeckSections().toArray(new DeckSection[0]);
+        }
+
+        @Override
+        public List<CardEdition> getBasicLandSets(Deck currentDeck) {
+            if(this.fnGetBasicLandSet != null)
+                return List.copyOf(fnGetBasicLandSet.apply(currentDeck));
+            return super.getBasicLandSets(currentDeck);
         }
     }
 
@@ -348,18 +369,19 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             .setMainSectionConfig(ItemManagerConfig.QUEST_DECK_EDITOR)
             .setSideboardConfig(ItemManagerConfig.QUEST_DECK_EDITOR)
             .setPlayerInventorySupplier(() -> FModel.getQuest().getCards().getCardpool())
-            .setBasicLandSetFunction(d -> FModel.getQuest().getDefaultLandSet());
+            .setBasicLandSetFunction(d -> FModel.getQuest().getAvailableLandSets());
     public static DeckEditorConfig EditorConfigQuestCommander = new GameTypeDeckEditorConfig(GameType.QuestCommander, DECK_CONTROLLER_QUEST)
             .setCatalogConfig(ItemManagerConfig.QUEST_EDITOR_POOL)
             .setMainSectionConfig(ItemManagerConfig.QUEST_DECK_EDITOR)
             .setSideboardConfig(ItemManagerConfig.QUEST_DECK_EDITOR)
             .setPlayerInventorySupplier(() -> FModel.getQuest().getCards().getCardpool())
-            .setBasicLandSetFunction(d -> FModel.getQuest().getDefaultLandSet());
+            .setBasicLandSetFunction(d -> FModel.getQuest().getAvailableLandSets());
     public static DeckEditorConfig EditorConfigQuestDraft = new GameTypeDeckEditorConfig(GameType.QuestDraft, DECK_CONTROLLER_QUEST_DRAFT);
     public static DeckEditorConfig EditorConfigPlanarConquest = new GameTypeDeckEditorConfig(GameType.PlanarConquest, DECK_CONTROLLER_PLANAR_CONQUEST)
             .setCatalogConfig(ItemManagerConfig.CONQUEST_COLLECTION)
             .setMainSectionConfig(ItemManagerConfig.CONQUEST_DECK_EDITOR)
-            .setPlayerInventorySupplier(ConquestUtil::getAvailablePool);
+            .setPlayerInventorySupplier(ConquestUtil::getAvailablePool)
+            .setBasicLandSetFunction(ConquestUtil::getBasicLandSets);
 
     protected static DeckSectionPage createPageForExtraSection(DeckSection deckSection, DeckEditorConfig editorConfig) {
         CardManager cm = new CardManager(false);
@@ -388,18 +410,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     }
 
     public static FImage iconFromDeckSection(DeckSection deckSection) {
-        return switch (deckSection) {
-            case Main -> MAIN_DECK_ICON;
-            case Sideboard -> SIDEBOARD_ICON;
-            case Commander -> FSkinImage.COMMAND;
-            case Avatar -> FSkinImage.AVATAR;
-            case Conspiracy -> FSkinImage.CONSPIRACY;
-            case Planes -> FSkinImage.PLANAR;
-            case Schemes -> FSkinImage.SCHEME;
-            case Attractions -> FSkinImage.ATTRACTION;
-            case Contraptions -> FSkinImage.CONTRAPTION;
-            default -> FSkinImage.HDSIDEBOARD;
-        };
+        return FSkin.getImages().get(FSkinProp.iconFromDeckSection(deckSection, Forge.hdbuttons));
     }
 
     private final DeckEditorConfig editorConfig;
@@ -542,74 +553,73 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             @Override
             protected void buildMenu() {
                 final Localizer localizer = Forge.getLocalizer();
-                if (allowsAddBasic())
+                if (allowAddBasic())
                     addItem(new FMenuItem(localizer.getMessage("lblAddBasicLands"), FSkinImage.LANDLOGO, e -> showAddBasicLandsDialog()));
                 if (showAddExtraSectionOption()) {
                     addItem(new FMenuItem(localizer.getMessage("lblAddDeckSection"), FSkinImage.CHAOS, e -> {
                         List<String> options = hiddenExtraSections.stream().map(DeckSection::getLocalizedName).collect(Collectors.toList());
-                        GuiChoose.oneOrNone(localizer.getMessage("lblAddDeckSectionSelect"), options, new Callback<>() {
-                            @Override
-                            public void run(String result) {
-                                if (result == null || !options.contains(result))
-                                    return;
-                                DeckSection newSection = hiddenExtraSections.get(options.indexOf(result));
-                                showExtraSectionTab(newSection);
-                                filterCatalogForExtraSection(newSection);
-                                getCatalogPage().scheduleRefresh();
-                                setSelectedPage(getCatalogPage());
-                            }
+                        GuiChoose.oneOrNone(localizer.getMessage("lblAddDeckSectionSelect"), options, result -> {
+                            if (result == null || !options.contains(result))
+                                return;
+                            DeckSection newSection = hiddenExtraSections.get(options.indexOf(result));
+                            showExtraSectionTab(newSection);
+                            filterCatalogForExtraSection(newSection);
+                            getCatalogPage().scheduleRefresh();
+                            setSelectedPage(getCatalogPage());
                         });
                     }));
                 }
-                if (editorConfig.getGameType() != null && editorConfig.hasInfiniteCardPool()) {
+                if (editorConfig.hasInfiniteCardPool() || editorConfig.usePlayerInventory()) {
                     addItem(new FMenuItem(localizer.getMessage("lblImportFromClipboard"), Forge.hdbuttons ? FSkinImage.HDIMPORT : FSkinImage.OPEN, e -> {
-                        FDeckImportDialog dialog = new FDeckImportDialog(!deck.isEmpty(), FDeckEditor.this.editorConfig);
-                        dialog.setCallback(new Callback<>() {
-                            @Override
-                            public void run(Deck importedDeck) {
-                                if (deck != null && importedDeck.hasName()) {
-                                    deck.setName(importedDeck.getName());
-                                    setHeaderText(importedDeck.getName());
-                                }
-                                if (dialog.createNewDeck()) {
-                                    for (Entry<DeckSection, CardPool> section : importedDeck) {
-                                        DeckSectionPage page = getPageForSection(section.getKey());
-                                        if (page != null)
-                                            page.setCards(section.getValue());
+                        FDeckImportDialog dialog = new FDeckImportDialog(deck, FDeckEditor.this.editorConfig);
+                        if(editorConfig.usePlayerInventory())
+                            dialog.setFreePrintConverter(FDeckEditor.this::supplyPrintForImporter);
+                        dialog.setImportBannedCards(!FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY));
+                        dialog.setCallback(importedDeck -> {
+                            if (deck != null && importedDeck.hasName()) {
+                                deck.setName(importedDeck.getName());
+                                setHeaderText(importedDeck.getName());
+                            }
+                            switch (dialog.getImportBehavior()) {
+                                case REPLACE_CURRENT:
+                                    for(DeckSectionPage page : pagesBySection.values()) {
+                                        if(importedDeck.has(page.deckSection)) {
+                                            page.setCards(importedDeck.get(page.deckSection));
+                                            if(hiddenExtraSections.contains(page.deckSection))
+                                                showExtraSectionTab(page.deckSection);
+                                        }
+                                        else
+                                            page.setCards(new CardPool());
                                     }
-                                } else {
+                                    break;
+                                case CREATE_NEW:
+                                    deckController.setDeck(importedDeck);
+                                    break;
+                                case MERGE:
                                     for (Entry<DeckSection, CardPool> section : importedDeck) {
                                         DeckSectionPage page = getPageForSection(section.getKey());
                                         if (page != null)
                                             page.addCards(section.getValue());
                                     }
-                                }
                             }
                         });
+                        dialog.initParse();
                         dialog.show();
                         setSelectedPage(getMainDeckPage()); //select main deck page if needed so main deck if visible below dialog
                     }));
                     if (allowSaveAs())
                         addItem(new FMenuItem(localizer.getMessage("lblSaveAs"), Forge.hdbuttons ? FSkinImage.HDSAVEAS : FSkinImage.SAVEAS, e -> {
                             String defaultName = deckController.getNextAvailableName();
-                            FOptionPane.showInputDialog(localizer.getMessage("lblNameNewCopyDeck"), defaultName, new Callback<>() {
-                                @Override
-                                public void run(String result) {
-                                    if (!StringUtils.isEmpty(result)) {
-                                        deckController.saveAs(result);
-                                    }
+                            FOptionPane.showInputDialog(localizer.getMessage("lblNameNewCopyDeck"), defaultName, result -> {
+                                if (!StringUtils.isEmpty(result)) {
+                                    deckController.saveAs(result);
                                 }
                             });
                         }));
                 }
                 if (allowRename()) {
                     addItem(new FMenuItem(localizer.getMessage("lblRenameDeck"), Forge.hdbuttons ? FSkinImage.HDEDIT : FSkinImage.EDIT, e -> FOptionPane.showInputDialog(
-                            localizer.getMessage("lblNewNameDeck"), deck.getName(), new Callback<>() {
-                                @Override
-                                public void run(String result) {
-                                    deckController.rename(result);
-                                }
-                            }))
+                            localizer.getMessage("lblNewNameDeck"), deck.getName(), deckController::rename))
                     );
                 }
                 if (allowDelete()) {
@@ -618,13 +628,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             localizer.getMessage("lblDeleteDeck"),
                             localizer.getMessage("lblDelete"),
                             localizer.getMessage("lblCancel"), false,
-                            new Callback<>() {
-                                @Override
-                                public void run(Boolean result) {
-                                    if (result) {
-                                        deckController.delete();
-                                        Forge.back();
-                                    }
+                            result -> {
+                                if (result) {
+                                    deckController.delete();
+                                    Forge.back();
                                 }
                             }))
                     );
@@ -649,12 +656,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         CardEdition defaultLandSet = allowedLandSets.get(0);
         List<CardEdition> finalAllowedLandSets = allowedLandSets;
         FThreads.invokeInEdtNowOrLater(() -> {
-            AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet, new Callback<>() {
-                @Override
-                public void run(CardPool landsToAdd) {
-                    addChosenBasicLands(landsToAdd);
-                }
-            }, editorConfig.hasInfiniteCardPool() ? null : finalAllowedLandSets); //Null allows any lands to be selected
+            AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet, this::addChosenBasicLands, editorConfig.hasInfiniteCardPool() ? null : finalAllowedLandSets); //Null allows any lands to be selected
             dialog.show();
 
         });
@@ -663,6 +665,20 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
     protected void addChosenBasicLands(CardPool landsToAdd) {
         getMainDeckPage().addCards(landsToAdd);
+    }
+
+    /**
+     * If a card is missing from a player's inventory while importing a deck, it gets run through here.
+     * Returning a PaperCard will let unlimited copies of that card be used as a substitute. Returning null
+     * will leave the card missing from the import.
+     */
+    protected PaperCard supplyPrintForImporter(PaperCard missingCard) {
+        //Could support dungeons here too? Not that we really use them in the editor...
+        if(!missingCard.isVeryBasicLand())
+            return null;
+        List<CardEdition> basicSets = editorConfig.getBasicLandSets(deck);
+        String setCode = basicSets.isEmpty() ? "JMP" : basicSets.get(0).getCode();
+        return FModel.getMagicDb().fetchCard(missingCard.getCardName(), setCode, null);
     }
 
     protected boolean shouldEnforceConformity() {
@@ -686,14 +702,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     }
 
     protected void showDevAddCardDialog() {
-        FOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblPromptCardRequest"), new Callback<>() {
-            @Override
-            public void run(String result) {
-                if(StringUtils.isBlank(result))
-                    return;
-                CardPool requested = CardPool.fromSingleCardRequest(result);
-                devAddCards(requested);
-            }
+        FOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblPromptCardRequest"), result -> {
+            if(StringUtils.isBlank(result))
+                return;
+            CardPool requested = CardPool.fromSingleCardRequest(result);
+            devAddCards(requested);
         });
     }
 
@@ -720,6 +733,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             showExtraSectionTab(section);
         if(pagesBySection.containsKey(section))
             setSelectedPage(pagesBySection.get(section));
+        else if(section == DeckSection.Main && pagesBySection.containsKey(mainDeckPage.deckSection))
+            //Tried to switch to the Main page in a Planar or Scheme deck.
+            setSelectedPage(pagesBySection.get(mainDeckPage.deckSection));
     }
 
     public void notifyNewControllerModel() {
@@ -914,7 +930,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         saveHandler = saveHandler0;
     }
 
-    public void save(final Callback<Boolean> callback) {
+    public void save(final Consumer<Boolean> callback) {
         IDeckController deckController = getDeckController();
         if(deckController.supportsSave()) {
             if (!StringUtils.isEmpty(deck.getName())) {
@@ -924,15 +940,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 List<PaperCard> commanders = deck.getCommanders(); //use commander name as default deck name
                 String initialInput = commanders.isEmpty() ? "New Deck" : Lang.joinHomogenous(commanders);
                 FThreads.invokeInEdtNowOrLater(() -> {
-                    FOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblNameNewDeck"), initialInput, new Callback<>() {
-                        @Override
-                        public void run(String result) {
-                            if (StringUtils.isEmpty(result)) { return; }
+                    FOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblNameNewDeck"), initialInput, result -> {
+                        if (StringUtils.isEmpty(result)) { return; }
 
-                            deckController.saveAs(result);
-                            if (callback != null) {
-                                callback.run(true);
-                            }
+                        deckController.saveAs(result);
+                        if (callback != null) {
+                            callback.accept(true);
                         }
                     });
                 });
@@ -941,7 +954,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         if (callback != null) {
-            callback.run(true);
+            callback.accept(true);
         }
     }
 
@@ -973,23 +986,20 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     );
 
     @Override
-    public void onClose(final Callback<Boolean> canCloseCallback) {
+    public void onClose(final Consumer<Boolean> canCloseCallback) {
         if (getDeckController().isSaved() || !allowSave() || canCloseCallback == null) {
             super.onClose(canCloseCallback); //can skip prompt if draft saved
             return;
         }
         FOptionPane.showOptionDialog(Forge.getLocalizer().getMessage("lblSaveChangesCurrentDeck"), "",
-                FOptionPane.QUESTION_ICON, onCloseOptions, new Callback<>() {
-                    @Override
-                    public void run(Integer result) {
-                        if (result == 0) {
-                            save(canCloseCallback);
-                        } else if (result == 1) {
-                            getDeckController().exitWithoutSaving(); //reload if not saving changes
-                            canCloseCallback.run(true);
-                        } else {
-                            canCloseCallback.run(false);
-                        }
+                FOptionPane.QUESTION_ICON, onCloseOptions, result -> {
+                    if (result == 0) {
+                        save(canCloseCallback);
+                    } else if (result == 1) {
+                        getDeckController().exitWithoutSaving(); //reload if not saving changes
+                        canCloseCallback.accept(true);
+                    } else {
+                        canCloseCallback.accept(false);
                     }
                 });
     }
@@ -1058,7 +1068,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     protected boolean allowSaveAs() {
         return allowSave() && allowRename();
     }
-    protected boolean allowsAddBasic() {
+    protected boolean allowAddBasic() {
         return !isDrafting();
     }
 
@@ -1346,7 +1356,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected abstract void onCardActivated(PaperCard card);
         protected abstract void buildMenu(final FDropDownMenu menu, final PaperCard card);
 
-        protected void addMoveCardMenuItem(FDropDownMenu menu, CardManagerPage source, CardManagerPage destination, final Callback<Integer> callback) {
+        protected void addMoveCardMenuItem(FDropDownMenu menu, CardManagerPage source, CardManagerPage destination, final Consumer<Integer> callback) {
             //Determine how many we can actually move.
             ItemPool<PaperCard> selectedItemPool = parentScreen.getAllowedAdditions(cardManager.getSelectedItemPool(), source, destination);
 
@@ -1409,7 +1419,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             final int max = maxMovable;
             menu.addItem(new FMenuItem(label, icon, (e) -> {
                 if(max < 2)
-                    callback.run(1);
+                    callback.accept(1);
                 else
                     GuiChoose.getInteger(prompt, 1, max, 20, callback);
             }));
@@ -1431,7 +1441,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             this.addMoveCardMenuItem(menu, source, destination, new MoveCardCallback(card, source, destination));
         }
 
-        protected static class MoveCardCallback extends Callback<Integer> {
+        protected static class MoveCardCallback implements Consumer<Integer> {
             public final PaperCard card;
             public final CardManagerPage from;
             public final CardManagerPage to;
@@ -1442,7 +1452,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 this.to = to;
             }
             @Override
-            public void run(Integer result) {
+            public void accept(Integer result) {
                 if(result == null || result == 0)
                     return;
                 from.moveCard(card, to, result);
@@ -1465,13 +1475,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 if(max < 2)
                     callback.accept(1);
                 else
-                    GuiChoose.getInteger(prompt, 1, max, 20, new Callback<>() {
-                        @Override
-                        public void run(Integer result) {
-                            if (result == null || result == 0)
-                                return;
-                            callback.accept(result);
-                        }
+                    GuiChoose.getInteger(prompt, 1, max, 20, result -> {
+                        if (result == null || result == 0)
+                            return;
+                        callback.accept(result);
                     });
             }
         }
@@ -1859,16 +1866,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                 sortedOptions.add(option);
                             }
                         }
-                        GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblSelectPreferredArt") + " " + card.getName(), sortedOptions, new Callback<>() {
-                            @Override
-                            public void run(PaperCard result) {
-                                if (result != null) {
-                                    if (result != card) {
-                                        cardManager.replaceAll(card, result);
-                                    }
-                                    prefs.setPreferredArt(result.getEdition(), result.getArtIndex());
-                                    CardPreferences.save();
+                        GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblSelectPreferredArt") + " " + card.getName(), sortedOptions, result -> {
+                            if (result != null) {
+                                if (result != card) {
+                                    cardManager.replaceAll(card, result);
                                 }
+                                prefs.setPreferredArt(result.getEdition(), result.getArtIndex());
+                                CardPreferences.save();
                             }
                         });
                     }));
@@ -2024,14 +2028,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 break;
             case Commander:
                 if (canEditMainCommander() || isPartnerCommander(card)) {
-                    addMoveCardMenuItem(menu, this, cardSourcePage, new Callback<>() {
-                        @Override
-                        public void run(Integer result) {
-                            moveCard(card, cardSourcePage, result);
-                            if(cardSourcePage == parentScreen.getCatalogPage()) {
-                                parentScreen.getCatalogPage().refresh(); //refresh so commander options shown again
-                                parentScreen.setSelectedPage(parentScreen.getCatalogPage());
-                            }
+                    addMoveCardMenuItem(menu, this, cardSourcePage, result -> {
+                        moveCard(card, cardSourcePage, result);
+                        if(cardSourcePage == parentScreen.getCatalogPage()) {
+                            parentScreen.getCatalogPage().refresh(); //refresh so commander options shown again
+                            parentScreen.setSelectedPage(parentScreen.getCatalogPage());
                         }
                     });
                     addReplaceVariantItems(menu, card);
@@ -2063,12 +2064,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     else
                         currentColors = null;
                     String prompt = Forge.getLocalizer().getMessage("lblChooseAColor", Lang.getNumeral(markedColorCount));
-                    GuiChoose.getChoices(prompt, markedColorCount, markedColorCount, MagicColor.Constant.ONLY_COLORS, currentColors, null, new Callback<>() {
-                        @Override
-                        public void run(List<String> result) {
-                            addCard(card.copyWithMarkedColors(ColorSet.fromNames(result)));
-                            removeCard(card);
-                        }
+                    GuiChoose.getChoices(prompt, markedColorCount, markedColorCount, MagicColor.Constant.ONLY_COLORS, currentColors, null, result -> {
+                        addCard(card.copyWithMarkedColors(ColorSet.fromNames(result)));
+                        removeCard(card);
                     });
                 }));
             }
@@ -2109,21 +2107,18 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             String prompt = localizer.getMessage("lblSelectReplacementCard") + " " + card.getName();
             String promptQuantity = String.format("%s - %s %s", card, lblReplaceCard, localizer.getMessage("lblHowMany"));
             //First have the player choose which card to swap in.
-            GuiChoose.oneOrNone(prompt, sortedOptions, new Callback<>() {
-                @Override
-                public void run(PaperCard replacement) {
-                    if (replacement == null || replacement == card)
-                        return;
-                    //Next, ask how many copies they'd like to swap, taking into account the number available.
-                    int available = parentScreen.getCardSourcePage().cardManager.isInfinite() ? Integer.MAX_VALUE : cardOptions.count(replacement);
-                    int maxMovable = Math.min(available, cardManager.getItemCount(card));
-                    new MoveQuantityPrompt(promptQuantity, maxMovable, (amount) -> {
-                        CardManagerPage sourcePage = parentScreen.getCardSourcePage();
-                        //Finally, swap the cards.
-                        DeckSectionPage.this.moveCard(card, sourcePage, amount);
-                        sourcePage.moveCard(replacement, DeckSectionPage.this, amount);
-                    }).handleEvent(e);
-                }
+            GuiChoose.oneOrNone(prompt, sortedOptions, replacement -> {
+                if (replacement == null || replacement == card)
+                    return;
+                //Next, ask how many copies they'd like to swap, taking into account the number available.
+                int available = parentScreen.getCardSourcePage().cardManager.isInfinite() ? Integer.MAX_VALUE : cardOptions.count(replacement);
+                int maxMovable = Math.min(available, cardManager.getItemCount(card));
+                new MoveQuantityPrompt(promptQuantity, maxMovable, (amount) -> {
+                    CardManagerPage sourcePage = parentScreen.getCardSourcePage();
+                    //Finally, swap the cards.
+                    DeckSectionPage.this.moveCard(card, sourcePage, amount);
+                    sourcePage.moveCard(replacement, DeckSectionPage.this, amount);
+                }).handleEvent(e);
             });
         }
 
@@ -2294,29 +2289,23 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             if(!cardManager.isEnabled())
                 return;
             if(draftingFaceDown) {
-                addMoveCardMenuItem(menu, this, parentScreen.getSideboardPage(), new Callback<>() {
-                    @Override
-                    public void run(Integer result) { //ignore quantity
-                        PaperCard realCard = getDraftPlayer().pickFromArchdemonCurse(getDraftPlayer().nextChoice());
-                        moveCard(realCard, parentScreen.getSideboardPage());
-                    }
+                addMoveCardMenuItem(menu, this, parentScreen.getSideboardPage(), result -> { //ignore quantity
+                    PaperCard realCard = getDraftPlayer().pickFromArchdemonCurse(getDraftPlayer().nextChoice());
+                    moveCard(realCard, parentScreen.getSideboardPage());
                 });
                 return;
             }
             DeckSection destination = DeckSection.matchingSection(card);
             final DeckSectionPage destinationPage = parentScreen.getPageForSection(destination, true);
-            addMoveCardMenuItem(menu, this, destinationPage, new Callback<>() {
-                @Override
-                public void run(Integer result) { //ignore quantity
-                    moveCard(card, destinationPage);
-                }
+            addMoveCardMenuItem(menu, this, destinationPage, result -> { //ignore quantity
+                moveCard(card, destinationPage);
             });
-            addMoveCardMenuItem(menu, this, parentScreen.getSideboardPage(), new Callback<>() {
-                @Override
-                public void run(Integer result) { //ignore quantity
-                    moveCard(card, parentScreen.getSideboardPage());
-                }
-            });
+            addMoveCardMenuItem(menu,
+                    this,
+                    parentScreen.getSideboardPage(),
+                    result -> { //ignore quantity
+                        moveCard(card, parentScreen.getSideboardPage());
+                    });
         }
 
         @Override

@@ -17,7 +17,6 @@
  */
 package forge.game.cost;
 
-import com.google.common.collect.Sets;
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
@@ -31,7 +30,6 @@ import forge.game.zone.ZoneType;
 import forge.util.Lang;
 
 import java.util.Map;
-import java.util.Set;
 
 /**
  * The Class CostSacrifice.
@@ -74,16 +72,7 @@ public class CostSacrifice extends CostPartWithList {
         }
         typeList = CardLists.filter(typeList, CardPredicates.canBeSacrificedBy(ability, effect));
         if (differentNames) {
-            // TODO rewrite with sharesName to respect Spy Kit
-            final Set<String> crdname = Sets.newHashSet();
-            for (final Card card : typeList) {
-                String name = card.getName();
-                // CR 201.2b Those objects have different names only if each of them has at least one name and no two objects in that group have a name in common
-                if (!card.hasNoName()) {
-                    crdname.add(name);
-                }
-            }
-            return crdname.size();
+            return CardLists.getDifferentNamesCount(typeList);
         }
         return typeList.size();
     }

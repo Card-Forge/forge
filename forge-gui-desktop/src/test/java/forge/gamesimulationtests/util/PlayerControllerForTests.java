@@ -471,12 +471,12 @@ public class PlayerControllerForTests extends PlayerController {
 
     @Override
     public byte chooseColor(String message, SpellAbility sa, ColorSet colors) {
-        return Iterables.getFirst(colors, MagicColor.WHITE);
+        return Iterables.getFirst(colors, MagicColor.Color.WHITE).getColorMask();
     }
 
     @Override
     public byte chooseColorAllowColorless(String message, Card card, ColorSet colors) {
-        return Iterables.getFirst(colors, (byte)0);
+        return Iterables.getFirst(colors, MagicColor.Color.COLORLESS).getColorMask();
     }
 
     private CardCollection chooseItems(CardCollectionView items, int amount) {
@@ -556,7 +556,7 @@ public class PlayerControllerForTests extends PlayerController {
 
     @Override
     public CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, String prompt, Map<String, Object> params) {
-        return Iterables.getFirst(options, CounterType.get(CounterEnumType.P1P1));
+        return Iterables.getFirst(options, CounterEnumType.P1P1);
     }
 
     @Override
@@ -662,6 +662,11 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public void revealAISkipCards(final String message, final Map<Player, Map<DeckSection, List<? extends PaperCard>>> unplayable) {
         // TODO test this!
+    }
+
+    @Override
+    public void revealUnsupported(Map<Player, List<PaperCard>> unsupported) {
+        // test this!
     }
 
     @Override
