@@ -273,7 +273,7 @@ public class DiscardEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("RememberDiscardingPlayers")) {
-            sa.getHostCard().addRemembered(discardedMap.keySet());
+            source.addRemembered(discardedMap.keySet());
         }
 
         Map<AbilityKey, Object> params = AbilityKey.newMap();
