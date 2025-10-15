@@ -92,6 +92,14 @@ public class TriggerChangesZone extends Trigger {
             }
         }
 
+        if (hasParam("ExcludedOrigins")) {
+            if (ArrayUtils.contains(
+                    getParam("ExcludedOrigins").split(","), runParams.get(AbilityKey.Origin)
+            )) {
+                return false;
+            }
+        }
+
         if (hasParam("ExcludedDestinations")) {
             if (ArrayUtils.contains(
                 getParam("ExcludedDestinations").split(","), runParams.get(AbilityKey.Destination)

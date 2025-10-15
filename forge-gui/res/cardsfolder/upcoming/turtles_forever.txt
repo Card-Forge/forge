@@ -1,0 +1,8 @@
+Name:Turtles Forever
+ManaCost:3 W
+Types:Instant
+A:SP$ ChangeZone | Origin$ Library,Sideboard | ChangeType$ Creature.Legendary | ChangeNum$ 4 | RememberChanged$ True | Exactly$ True | Reveal$ True | Shuffle$ False | DifferentNames$ True | SubAbility$ DBChangeZone | SpellDescription$ Search your library and/or outside the game for exactly four legendary creature cards you own with different names, then reveal those cards. An opponent chooses two of them. Put the chosen cards into your hand and shuffle the rest into your library.
+SVar:DBChangeZone:DB$ ChangeZone | Chooser$ Opponent | SelectPrompt$ Choose two cards for the hand | NoLooking$ True | Hidden$ True | Origin$ Library,Sideboard | Destination$ Hand | ChangeType$ Card.IsRemembered | ChangeNum$ 2 | Mandatory$ True | SelectPrompt$ Select two cards for the hand | Shuffle$ False | ForgetChanged$ True | SubAbility$ DBChangeZoneAll
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Library,Sideboard | Destination$ Library | ChangeType$ Card.IsRemembered | Shuffle$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Search your library and/or outside the game for exactly four legendary creature cards you own with different names, then reveal those cards. An opponent chooses two of them. Put the chosen cards into your hand and shuffle the rest into your library.

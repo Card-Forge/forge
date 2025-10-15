@@ -1,0 +1,7 @@
+Name:Faerie Token
+ManaCost:no cost
+Colors:blue,black
+Types:Creature Faerie
+PT:1/1
+K:Flying
+Oracle:Flying
