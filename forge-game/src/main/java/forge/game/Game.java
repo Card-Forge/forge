@@ -1293,16 +1293,8 @@ public class Game {
     }
 
     public int getSingleMaxDamageDoneThisTurn() {
-        List<Integer> instances = Lists.newArrayList();
-        for (CardDamageHistory cdh : globalDamageHistory) {
-            for (Pair<Integer, Boolean> dmg : cdh.getAllDmgInstances()) {
-                instances.add(dmg.getLeft());
-            }
-        }
-        if (instances.isEmpty()) {
-            return 0;
-        }
-        return Collections.max(instances);
+        return globalDamageHistory.stream().flatMap(cdh -> cdh.getAllDmgInstances().stream()).
+                mapToInt(dmg -> dmg.getLeft()).max().orElse(0);
     }
 
     public void addGlobalDamageHistory(CardDamageHistory cdh, Pair<Integer, Boolean> dmg, Card source, GameEntity target) {
