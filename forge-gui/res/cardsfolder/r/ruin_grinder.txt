@@ -5,7 +5,7 @@ PT:7/4
 K:Menace
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME dies, each player may discard their hand and draw seven cards.
 SVar:TrigDiscard:DB$ Discard | Mode$ Hand | Defined$ Player | Optional$ True | RememberDiscardingPlayers$ True | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | Defined$ Player.IsRemembered | NumCards$ 7 | SubAbility$ DBCleanup
+SVar:DBDraw:DB$ Draw | Defined$ Remembered | NumCards$ 7 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:TypeCycling:Mountain:2
 DeckHas:Ability$Discard
