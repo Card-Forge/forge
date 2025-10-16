@@ -129,16 +129,6 @@ public class AdventureEventData implements Serializable {
                 style = AdventureEventController.EventStyle.Bracket;
         }
         this.style = style;
-
-        switch (style) {
-            case Swiss:
-            case Bracket:
-                this.rounds = (participants.length / 2) - 1;
-                break;
-            case RoundRobin:
-                this.rounds = participants.length - 1;
-                break;
-        }
     }
 
     public void setEventSeed(long seed) {
@@ -493,6 +483,16 @@ public class AdventureEventData implements Serializable {
                     participant.registeredDeck.getMain().addAllFlat(chosen.getMain().toFlatList());
                 }
             }
+        }
+
+        switch (this.style) {
+            case Swiss:
+            case Bracket:
+                this.rounds = (participants.length / 2) - 1;
+                break;
+            case RoundRobin:
+                this.rounds = participants.length - 1;
+                break;
         }
     }
 
