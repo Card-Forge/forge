@@ -1,0 +1,9 @@
+Name:Raphael, Tag Team Tough
+ManaCost:4 R R
+Types:Legendary Creature Mutant Ninja Turtle
+PT:5/6
+K:Menace
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player.wasDealtCombatDamageThisTurnBySourceTimes EQ1 | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever NICKNAME deals combat damage to a player for the first time each turn, untap all attacking creatures. After this combat phase, there is an additional combat phase.
+SVar:TrigUntap:DB$ UntapAll | ValidCards$ Creature.attacking | SubAbility$ DBAddCombat
+SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat
+Oracle:Menace (This creature can’t be blocked except by two or more creatures.)\nWhenever Raphael deals combat damage to a player for the first time each turn, untap all attacking creatures. After this combat phase, there is an additional combat phase.
