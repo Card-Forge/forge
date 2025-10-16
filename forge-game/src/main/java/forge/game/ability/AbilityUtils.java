@@ -2426,6 +2426,11 @@ public class AbilityUtils {
             return doXMath(sum, expr, c, ctb);
         }
 
+        if (sq[0].equals("SingleMaxDamageThisTurn")) {
+            int sum = game.getSingleMaxDamageDoneThisTurn();
+            return doXMath(sum, expr, c, ctb);
+        }
+
         if (sq[0].contains("DamageThisTurn")) {
             String[] props = l[0].split(" ");
             Boolean isCombat = null;
