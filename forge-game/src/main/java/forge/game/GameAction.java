@@ -821,19 +821,6 @@ public class GameAction {
             }
         }
 
-        if (zoneTo.is(ZoneType.Stack)) {
-            c.setCastFrom(zoneFrom);
-            if (cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
-                c.setCastSA(cause);
-            } else {
-                c.setCastSA(null);
-            }
-        } else if (zoneFrom == null || !(zoneFrom.is(ZoneType.Stack) &&
-                (zoneTo.is(ZoneType.Battlefield) || zoneTo.is(ZoneType.Merged)))) {
-            c.setCastFrom(null);
-            c.setCastSA(null);
-        }
-
         if (c.isRealCommander()) {
             c.setMoveToCommandZone(true);
         }
