@@ -207,7 +207,6 @@ public class GameAction {
             copied.setGameTimestamp(c.getGameTimestamp());
 
             if (zoneTo.is(ZoneType.Stack)) {
-                copied.setCastFrom(zoneFrom);
                 // try not to copy changed stats when moving to stack
 
                 // copy exiled properties when adding to stack
@@ -224,6 +223,7 @@ public class GameAction {
                 }
 
                 if (cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
+                    copied.setCastFrom(zoneFrom);
                     copied.setCastSA(cause);
                     copied.setSplitStateToPlayAbility(cause);
 
@@ -233,6 +233,13 @@ public class GameAction {
                     KeywordInterface kw = cause.getKeyword();
                     if (kw != null) {
                         copied.addKeywordForStaticAbility(kw);
+
+                        // CR 400.7g If an effect grants a nonland card an ability that allows it to be cast,
+                        // that ability will continue to apply to the new object that card became after it moved to the stack as a result of being cast this way.
+                        if (!cause.isIntrinsic()) {
+                            kw.setHostCard(copied);
+                            copied.addChangedCardKeywordsInternal(ImmutableList.of(kw), null, false, copied.getGameTimestamp(), kw.getStatic(), false);
+                        }
                     }
                 }
             } else {
@@ -301,7 +308,6 @@ public class GameAction {
             // Temporary disable commander replacement effect
             // 903.9a
             if (fromBattlefield && !toBattlefield && c.isCommander() && c.hasMergedCard()) {
-                // Disable the commander replacement effect
                 c.getOwner().setCommanderReplacementSuppressed(true);
             }
 
@@ -447,14 +453,8 @@ public class GameAction {
 
             if (zoneFrom.is(ZoneType.Stack) && toBattlefield) {
                 Multimap<StaticAbility, KeywordInterface> addKw = MultimapBuilder.hashKeys().arrayListValues().build();
-                // 400.7a Effects from static abilities that give a permanent spell on the stack an ability
-                // that allows it to be cast for an alternative cost continue to apply to the permanent that spell becomes.
-                if (c.getCastSA() != null && !c.getCastSA().isIntrinsic() && c.getKeywords().contains(c.getCastSA().getKeyword())) {
-                    KeywordInterface ki = c.getCastSA().getKeyword();
-                    ki.setHostCard(copied);
-                    addKw.put(ki.getStatic(), ki);
-                }
-                // TODO hot fix for non-intrinsic offspring
+                // CR 400.7b Effects from static abilities that grant an ability to a permanent spell that functions on the battlefield
+                // continue to apply to the permanent that spell becomes
                 for (KeywordInterface kw : c.getKeywords(Keyword.OFFSPRING)) {
                     if (!kw.isIntrinsic()) {
                         addKw.put(kw.getStatic(), kw);
@@ -466,7 +466,7 @@ public class GameAction {
                     }
                 }
 
-                // 607.2q linked ability can find cards exiled as cost while it was a spell
+                // CR 607.2q linked ability can find cards exiled as cost while it was a spell
                 copied.addExiledCards(c.getExiledCards());
             }
 
@@ -487,7 +487,7 @@ public class GameAction {
                 if (card.isRealCommander()) {
                     card.setMoveToCommandZone(true);
                 }
-                // 727.3e & 903.9a
+                // CR 727.3e & 903.9a
                 if (wasToken && !card.isRealToken() || card.isRealCommander()) {
                     Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(card);
                     repParams.put(AbilityKey.CardLKI, card);
@@ -561,14 +561,6 @@ public class GameAction {
 
         // update static abilities after etb counters have been placed
         checkStaticAbilities();
-
-        // 400.7g try adding keyword back into card if it doesn't already have it
-        if (zoneTo.is(ZoneType.Stack) && cause != null && cause.isSpell() && !cause.isIntrinsic() && c.equals(cause.getHostCard())) {
-            if (cause.getKeyword() != null && !copied.getKeywords().contains(cause.getKeyword())) {
-                KeywordInterface kw = cause.getKeyword();
-                copied.addChangedCardKeywordsInternal(ImmutableList.of(cause.getKeyword()), null, false, copied.getGameTimestamp(), kw.getStatic(), true);
-            }
-        }
 
         // CR 603.6b
         if (toBattlefield) {
