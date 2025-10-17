@@ -452,9 +452,9 @@ public class GameAction {
             }
 
             if (zoneFrom.is(ZoneType.Stack) && toBattlefield) {
-                Multimap<StaticAbility, KeywordInterface> addKw = MultimapBuilder.hashKeys().arrayListValues().build();
                 // CR 400.7b Effects from static abilities that grant an ability to a permanent spell that functions on the battlefield
                 // continue to apply to the permanent that spell becomes
+                Multimap<StaticAbility, KeywordInterface> addKw = MultimapBuilder.hashKeys().arrayListValues().build();
                 for (KeywordInterface kw : c.getKeywords(Keyword.OFFSPRING)) {
                     if (!kw.isIntrinsic()) {
                         addKw.put(kw.getStatic(), kw);
