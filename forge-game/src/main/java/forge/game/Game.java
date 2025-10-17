@@ -1292,6 +1292,11 @@ public class Game {
         return dmgList;
     }
 
+    public int getSingleMaxDamageDoneThisTurn() {
+        return globalDamageHistory.stream().flatMap(cdh -> cdh.getAllDmgInstances().stream()).
+                mapToInt(dmg -> dmg.getLeft()).max().orElse(0);
+    }
+
     public void addGlobalDamageHistory(CardDamageHistory cdh, Pair<Integer, Boolean> dmg, Card source, GameEntity target) {
         globalDamageHistory.add(cdh);
         damageThisTurnLKI.put(dmg, Pair.of(source, target));

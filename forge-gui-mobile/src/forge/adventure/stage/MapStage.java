@@ -260,6 +260,7 @@ public class MapStage extends GameStage {
         spawnClassified.clear();
         sourceMapMatch.clear();
         enemies.clear();
+        localInnID = -1;
         for (MapLayer layer : map.getLayers()) {
             if (layer.getProperties().containsKey("spriteLayer") && layer.getProperties().get("spriteLayer", boolean.class)) {
                 spriteLayer = layer;
@@ -578,6 +579,7 @@ public class MapStage extends GameStage {
                         //TODO: Ability to move them (using a sequence such as "UULU" for up, up, left, up).
                         break;
                     case "inn":
+                        localInnID = id;
                         addMapActor(obj, new OnCollide(() -> Forge.switchScene(InnScene.instance(TileMapScene.instance(), TileMapScene.instance().rootPoint.getID(), changes, id))));
                         break;
                     case "spellsmith":
@@ -748,6 +750,14 @@ public class MapStage extends GameStage {
                 }
             }
         }
+    }
+
+    //We could track MapObject IDs more generally but for now this is the only one we might need.
+    private int localInnID = -1;
+    public InnScene findLocalInn() {
+        if(localInnID == -1)
+            return null;
+        return InnScene.instance(TileMapScene.instance(), TileMapScene.instance().rootPoint.getID(), changes, localInnID);
     }
 
     public boolean exitDungeon(boolean defeated, boolean defeatedByBoss) {
