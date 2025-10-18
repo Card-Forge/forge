@@ -204,7 +204,7 @@ public class PlayerPanel extends FContainer {
         });
         lstVanguardAvatars = new FVanguardChooser(isAi, e -> {
             btnVanguardAvatar.setText(Forge.getLocalizer().getMessage("lblVanguard")
-                    + ":" + (Forge.isLandscapeMode() ? " " : "\n") + ((CardManager)e.getSource()).getSelectedItem().getName());
+                    + ":" + (Forge.isLandscapeMode() ? " " : "\n") + ((CardManager)e.getSource()).getSelectedItem().getDisplayName());
             if (allowNetworking && btnVanguardAvatar.isEnabled() && humanAiSwitch.isToggled()) {
                 screen.updateMyDeck(index);
             }

@@ -1215,7 +1215,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 g.setColor(Color.white);
                 Shape clip = g.getClip();
                 g.setClip(bounds);
-                g.drawString(item.getName(), bounds.x + 10, bounds.y + 20);
+                g.drawString(item.getDisplayName(), bounds.x + 10, bounds.y + 20);
                 g.setClip(clip);
             }
 

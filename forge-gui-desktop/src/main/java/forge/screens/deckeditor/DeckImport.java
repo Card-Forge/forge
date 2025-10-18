@@ -622,7 +622,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
         cardPreviewLabel.setText(String.format("<html>%s %s<br>%s</html>", STYLESHEET, editionLbl, statusLbl));
 
         // set tooltip
-        String tooltip = String.format("%s [%s] #%s", card.getName(), card.getEdition(),
+        String tooltip = String.format("%s [%s] #%s", card.getDisplayName(), card.getEdition(),
                 card.getCollectorNumber());
         cardImagePreview.setToolTipText(tooltip);
     }

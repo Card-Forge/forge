@@ -56,14 +56,14 @@ public enum ColumnDef {
                 if (from.getKey() instanceof PaperCard) {
                     String spire = ((PaperCard) from.getKey()).getMarkedColors() == null ? "" : ((PaperCard) from.getKey()).getMarkedColors().toString();
                     String sortableName = ((PaperCard)from.getKey()).getSortableName();
-                    return sortableName == null ? TextUtil.toSortableName(from.getKey().getName() + spire) : sortableName + spire;
+                    return sortableName == null ? TextUtil.toSortableName(from.getKey().getDisplayName() + spire) : sortableName + spire;
                 }
-                return TextUtil.toSortableName(from.getKey().getName());
+                return TextUtil.toSortableName(from.getKey().getDisplayName());
             },
             from -> {
                 if (from.getKey() instanceof PaperCard)
-                    return from.getKey().toString();
-                return from.getKey().getName();
+                    return CardTranslation.getTranslatedName(from.getKey().getDisplayName());
+                return from.getKey().getDisplayName();
             }),
 
     /**

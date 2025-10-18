@@ -42,6 +42,10 @@ public abstract class PaperCardPredicates {
         return new PredicatePrintedWithRarity(rarity);
     }
 
+    public static Predicate<PaperCard> searchableName(final PredicateString.StringOp op, final String what) {
+        return new PredicateSearchableName(op, what);
+    }
+
     public static Predicate<PaperCard> name(final String what) {
         return new PredicateName(what);
     }
@@ -181,6 +185,20 @@ public abstract class PaperCardPredicates {
             this.sets = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
             this.sets.addAll(wantSets);
             this.mustContain = shouldContain;
+        }
+    }
+
+    private static final class PredicateSearchableName extends PredicateString<PaperCard> {
+        private final String operand;
+
+        PredicateSearchableName(final StringOp operator, final String operand) {
+            super(operator);
+            this.operand = operand;
+        }
+
+        @Override
+        public boolean test(PaperCard paperCard) {
+            return paperCard.getAllSearchableNames().stream().anyMatch(name -> this.op(name, this.operand));
         }
     }
 

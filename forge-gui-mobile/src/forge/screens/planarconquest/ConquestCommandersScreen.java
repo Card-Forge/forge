@@ -202,7 +202,7 @@ public class ConquestCommandersScreen extends FScreen {
                     float imageSize = CardRenderer.MANA_SYMBOL_SIZE;
                     ColorSet cardColor = card.getRules().getColorIdentity();
                     float availableWidth = w - cardArtWidth - CardFaceSymbols.getWidth(cardColor, imageSize) - FList.PADDING;
-                    g.drawText(card.getName(), font, foreColor, x, y, availableWidth, imageSize, false, Align.left, true);
+                    g.drawText(card.getDisplayName(), font, foreColor, x, y, availableWidth, imageSize, false, Align.left, true);
                     CardFaceSymbols.drawColorSet(g, cardColor, x + availableWidth + FList.PADDING, y, imageSize);
 
                     if (compactModeHandler.isCompactMode()) {

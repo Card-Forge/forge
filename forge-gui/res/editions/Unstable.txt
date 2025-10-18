@@ -21,12 +21,12 @@ ScryfallCode=UST
 9 U Half-Kitten, Half- @Andrea Radeck
 10 C Humming- @Mark Behm
 11 R Jackknight @Ben Wootten
-12a U Knight of the Kitchen Sink @Mark A. Nelson $A
-12b U Knight of the Kitchen Sink @Mark A. Nelson $B
-12c U Knight of the Kitchen Sink @Mark A. Nelson $C
-12d U Knight of the Kitchen Sink @Mark A. Nelson $D
-12e U Knight of the Kitchen Sink @Mark A. Nelson $E
-12f U Knight of the Kitchen Sink @Mark A. Nelson $F
+12a U Knight of the Kitchen Sink @Mark A. Nelson ${"variant": "A"}
+12b U Knight of the Kitchen Sink @Mark A. Nelson ${"variant": "B"}
+12c U Knight of the Kitchen Sink @Mark A. Nelson ${"variant": "C"}
+12d U Knight of the Kitchen Sink @Mark A. Nelson ${"variant": "D"}
+12e U Knight of the Kitchen Sink @Mark A. Nelson ${"variant": "E"}
+12f U Knight of the Kitchen Sink @Mark A. Nelson ${"variant": "F"}
 13 U Knight of the Widget @Emrah Elmasli
 14 U Midlife Upgrade @Hector Ortiz
 15 R Oddly Uneven @Ben Wootten
@@ -66,12 +66,12 @@ ScryfallCode=UST
 46 U Spy Eye @Ben Wootten
 47 U Suspicious Nanny @Chris Seaman
 48 C Time Out @Dave Allsop
-49a R Very Cryptic Command @Wayne England $A
-49b R Very Cryptic Command @Zoltan Boros $B
-49c R Very Cryptic Command @Zoltan Boros $C
-49d R Very Cryptic Command @Zoltan Boros $D
-49e R Very Cryptic Command @Zoltan Boros $E
-49f R Very Cryptic Command @Zoltan Boros $F
+49a R Very Cryptic Command @Wayne England ${"variant": "A"}
+49b R Very Cryptic Command @Zoltan Boros ${"variant": "B"}
+49c R Very Cryptic Command @Zoltan Boros ${"variant": "C"}
+49d R Very Cryptic Command @Zoltan Boros ${"variant": "D"}
+49e R Very Cryptic Command @Zoltan Boros ${"variant": "E"}
+49f R Very Cryptic Command @Zoltan Boros ${"variant": "F"}
 50 C Wall of Fortune @Tom Babbey
 51 C Big Boa Constrictor @Kari Christensen
 52 C capital offense @Matt Dixon
@@ -92,12 +92,12 @@ ScryfallCode=UST
 64 U Overt Operative @Bram Sels
 65 U "Rumors of My Death..." @Alex Konstad
 66 U Skull Saucer @Mike Burns
-67a U Sly Spy @Michael Phillippi $A
-67b U Sly Spy @Michael Phillippi $B
-67c U Sly Spy @Michael Phillippi $C
-67d U Sly Spy @Michael Phillippi $D
-67e U Sly Spy @Michael Phillippi $E
-67f U Sly Spy @Michael Phillippi $F
+67a U Sly Spy @Michael Phillippi ${"variant": "A"}
+67b U Sly Spy @Michael Phillippi ${"variant": "B"}
+67c U Sly Spy @Michael Phillippi ${"variant": "C"}
+67d U Sly Spy @Michael Phillippi ${"variant": "D"}
+67e U Sly Spy @Michael Phillippi ${"variant": "E"}
+67f U Sly Spy @Michael Phillippi ${"variant": "F"}
 68 C Snickering Squirrel @Michael Phillippi
 69 R Spike, Tournament Grinder @Zoltan Boros
 70 U Squirrel-Powered Scheme @Even Amundsen
@@ -112,12 +112,12 @@ ScryfallCode=UST
 79 C Common Iguana @Brynn Metheney
 80 R The Countdown Is at One @Jesper Ejsing
 81 C Feisty Stegosaurus @Kari Christensen
-82a U Garbage Elemental @Hector Ortiz $A
-82b U Garbage Elemental @Hector Ortiz $B
-82c U Garbage Elemental @Hector Ortiz $C
-82d U Garbage Elemental @Hector Ortiz $D
-82e U Garbage Elemental @Hector Ortiz $E
-82f U Garbage Elemental @Hector Ortiz $F
+82a U Garbage Elemental @Hector Ortiz ${"variant": "A"}
+82b U Garbage Elemental @Hector Ortiz ${"variant": "B"}
+82c U Garbage Elemental @Hector Ortiz ${"variant": "C"}
+82d U Garbage Elemental @Hector Ortiz ${"variant": "D"}
+82e U Garbage Elemental @Hector Ortiz ${"variant": "E"}
+82f U Garbage Elemental @Hector Ortiz ${"variant": "F"}
 83 U Goblin Haberdasher @Jesper Ejsing
 84 U Half-Orc, Half- @Kev Walker
 85 C Hammer Helper @Dave Allsop
@@ -153,12 +153,12 @@ ScryfallCode=UST
 110 C Ground Pounder @Warren Mahy
 111 U Half-Squirrel, Half- @Andrea Radeck
 112 R Hydradoodle @Mathias Kollros
-113a R Ineffable Blessing @Milivoj Ćeran $A
-113b R Ineffable Blessing @Milivoj Ćeran $B
-113c R Ineffable Blessing @Milivoj Ćeran $C
-113d R Ineffable Blessing @Milivoj Ćeran $D
-113e R Ineffable Blessing @Milivoj Ćeran $E
-113f R Ineffable Blessing @Milivoj Ćeran $F
+113a R Ineffable Blessing @Milivoj Ćeran ${"variant": "A"}
+113b R Ineffable Blessing @Milivoj Ćeran ${"variant": "B"}
+113c R Ineffable Blessing @Milivoj Ćeran ${"variant": "C"}
+113d R Ineffable Blessing @Milivoj Ćeran ${"variant": "D"}
+113e R Ineffable Blessing @Milivoj Ćeran ${"variant": "E"}
+113f R Ineffable Blessing @Milivoj Ćeran ${"variant": "F"}
 114 C Joyride Rigger @Wayne Reynolds
 115 U Monkey- @Andrea Radeck
 116 C Mother Kangaroo @Andrea Radeck
@@ -195,12 +195,12 @@ ScryfallCode=UST
 145c C Despondent Killbot @Alex Konstad
 145d C Enraged Killbot @Alex Konstad
 146 U Entirely Normal Armchair @Tom Babbey
-147a R Everythingamajig @Chris Seaman $A
-147b R Everythingamajig @Chris Seaman $B
-147c R Everythingamajig @Chris Seaman $C
-147d R Everythingamajig @Chris Seaman $D
-147e R Everythingamajig @Chris Seaman $E
-147f R Everythingamajig @Chris Seaman $F
+147a R Everythingamajig @Chris Seaman ${"variant": "A"}
+147b R Everythingamajig @Chris Seaman ${"variant": "B"}
+147c R Everythingamajig @Chris Seaman ${"variant": "C"}
+147d R Everythingamajig @Chris Seaman ${"variant": "D"}
+147e R Everythingamajig @Chris Seaman ${"variant": "E"}
+147f R Everythingamajig @Chris Seaman ${"variant": "F"}
 148 C Gnome-Made Engine @Sean Murray
 149 R Handy Dandy Clone Machine @Mike Burns
 150 R Kindslaver @Zoltan Boros

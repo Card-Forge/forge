@@ -20,10 +20,7 @@ package forge.item;
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.*;
-import forge.util.CardTranslation;
-import forge.util.ImageUtil;
-import forge.util.Localizer;
-import forge.util.TextUtil;
+import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
@@ -56,7 +53,6 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     private final int artIndex;
     private final boolean foil;
     private final PaperCardFlags flags;
-    private final String sortableName;
     private final String functionalVariant;
 
     // Calculated fields are below:
@@ -64,6 +60,9 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     // Reference to a new instance of Self, but foiled!
     private transient PaperCard foiledVersion, noSellVersion, flaglessVersion;
     private transient Boolean hasImage;
+    private transient String displayName;
+    private transient String sortableName;
+    private transient boolean hasFlavorName;
 
     @Override
     public String getName() {
@@ -252,10 +251,12 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         this.rarity = rarity;
         this.artist = artist;
         this.collectorNumber = (collectorNumber != null && !collectorNumber.isEmpty()) ? collectorNumber : IPaperCard.NO_COLLECTOR_NUMBER;
+        this.functionalVariant = functionalVariant != null ? functionalVariant : IPaperCard.NO_FUNCTIONAL_VARIANT;
+        this.displayName = rules.getDisplayNameForVariant(functionalVariant);
+        this.hasFlavorName = !name.equals(displayName);
         // If the user changes the language this will make cards sort by the old language until they restart the game.
         // This is a good tradeoff
-        sortableName = TextUtil.toSortableName(CardTranslation.getTranslatedName(rules.getName()));
-        this.functionalVariant = functionalVariant != null ? functionalVariant : IPaperCard.NO_FUNCTIONAL_VARIANT;
+        this.sortableName = TextUtil.toSortableName(CardTranslation.getTranslatedName(displayName));
 
         if(flags == null || flags.equals(PaperCardFlags.IDENTITY_FLAGS))
             this.flags = PaperCardFlags.IDENTITY_FLAGS;
@@ -311,6 +312,67 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     }
     public String getCardName() {
         return name;
+    }
+
+    @Override
+    public String getDisplayName() {
+        return this.displayName;
+    }
+
+    @Override
+    public boolean hasFlavorName() {
+        return this.hasFlavorName;
+    }
+
+    private transient Set<String> searchableNames = null;
+    private transient String searchableNameLang = null;
+
+    public Set<String> getAllSearchableNames() {
+        if(this.searchableNames != null && CardTranslation.getLanguageSelected().equals(searchableNameLang))
+            return searchableNames;
+        if(searchableNameLang != null) //Changed the language. May as well update this.
+            sortableName = TextUtil.toSortableName(CardTranslation.getTranslatedName(displayName));
+        searchableNameLang = CardTranslation.getLanguageSelected();
+        searchableNames = computeSearchableNames(searchableNameLang);
+        return searchableNames;
+    }
+
+    private Set<String> computeSearchableNames(String language) {
+        ICardFace otherFace = this.getOtherFace();
+        if(otherFace == null && NO_FUNCTIONAL_VARIANT.equals(this.functionalVariant))
+        {
+            //99% of cases will land here. This could possibly be optimized further by computing and storing this on
+            //the CardRules instead, but flavor names will still need to work per-print, or at least per-variant.
+            if("en-US".equals(language))
+                return Set.of(this.name);
+            else {
+                String translatedName = CardTranslation.getTranslatedName(this.name);
+                return Set.of(this.name, translatedName, StringUtils.stripAccents(translatedName));
+            }
+        }
+        Set<String> names = new HashSet<>();
+        ICardFace mainFace = this.getMainFace();
+        names.add(mainFace.getName());
+        String mainFlavor = mainFace.getFlavorName();
+        if(mainFlavor != null)
+            names.add(mainFlavor);
+        if(otherFace != null) {
+            names.add(otherFace.getName());
+            String otherFlavor = otherFace.getFlavorName();
+            if(otherFlavor != null)
+                names.add(otherFlavor);
+
+            names.add(mainFace.getName() + " // " + otherFace.getName());
+            if(mainFlavor != null && otherFlavor != null)
+                names.add(mainFlavor + " // " + otherFlavor);
+        }
+        if(!"en-US".equals(language)) {
+            Set<String> translated = names.stream().map(CardTranslation::getTranslatedName).filter(Objects::nonNull).collect(Collectors.toSet());
+            names.addAll(translated);
+        }
+        Set<String> noAccents = names.stream().map(StringUtils::stripAccents).collect(Collectors.toSet());
+        names.addAll(noAccents);
+        return names;
     }
 
     /*
@@ -383,6 +445,9 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         }
         rules = pc.getRules();
         rarity = pc.getRarity();
+        displayName = pc.getDisplayName();
+        hasFlavorName = pc.hasFlavorName();
+        sortableName = TextUtil.toSortableName(CardTranslation.getTranslatedName(displayName));
     }
 
     private IPaperCard readObjectAlternate(String name, String edition) throws ClassNotFoundException, IOException {
@@ -516,7 +581,14 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     @Override
     public ICardFace getOtherFace() {
         ICardFace face = this.rules.getOtherPart();
+        if(face == null)
+            return null;
         return this.getVariantForFace(face);
+    }
+
+    @Override
+    public List<ICardFace> getAllFaces() {
+        return StreamUtil.stream(this.rules.getAllFaces()).map(this::getVariantForFace).collect(Collectors.toList());
     }
 
     private ICardFace getVariantForFace(ICardFace face) {

@@ -797,7 +797,7 @@ public class FCardImageRenderer {
         if (state.isBasicLand()) {
             //draw icons for basic lands
             String imageKey;
-            switch (state.getName().replaceFirst("^Snow-Covered ", "")) {
+            switch (state.getOracleName().replaceFirst("^Snow-Covered ", "")) {
             case "Plains":
                 imageKey = "W";
                 break;
