@@ -1,7 +1,7 @@
 Name:Eviscerator's Insight
 ManaCost:1 B
 Types:Instant
-A:SP$ Draw | Cost$ 1 B Sac<1/Artifact;Creature/artifact or creature> | NumCards$ 2 | SpellDescription$ Draw two cards.
+A:SP$ Draw | Cost$ 1 B Sac<1/Artifact;Creature> | NumCards$ 2 | SpellDescription$ Draw two cards.
 K:Flashback:4 B
 DeckHas:Ability$Sacrifice|Graveyard
 DeckHints:Type$Artifact & Ability$Token

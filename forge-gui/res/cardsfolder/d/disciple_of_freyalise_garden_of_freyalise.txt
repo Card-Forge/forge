@@ -3,7 +3,7 @@ ManaCost:3 G G G
 Types:Creature Elf Druid
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, you may sacrifice another creature. If you do, you gain X life and draw X cards, where X is that creature's power.
-SVar:TrigGainLife:AB$ GainLife | Cost$ Sac<1/Creature.Other/another creature> | LifeAmount$ X | SubAbility$ DBDraw
+SVar:TrigGainLife:AB$ GainLife | Cost$ Sac<1/Creature.Other> | LifeAmount$ X | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ X
 SVar:X:Sacrificed$CardPower
 DeckHas:Ability$Sacrifice|LifeGain
