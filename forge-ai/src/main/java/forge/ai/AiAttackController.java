@@ -275,27 +275,6 @@ public class AiAttackController {
             return false;
         }
 
-        // the attacker will die to a triggered ability (e.g. Sarkhan the Masterless)
-        for (Card c : ai.getOpponents().getCardsIn(ZoneType.Battlefield)) {
-            for (Trigger t : c.getTriggers()) {
-                if (t.getMode() == TriggerType.Attacks) {
-                    SpellAbility sa = t.ensureAbility();
-                    if (sa == null) {
-                        continue;
-                    }
-
-                    if (sa.getApi() == ApiType.EachDamage && "TriggeredAttacker".equals(sa.getParam("Defined"))) {
-                        List<Card> valid = CardLists.getValidCards(c.getController().getCreaturesInPlay(), sa.getParam("ValidCards"), c.getController(), c, sa);
-                        // TODO: this assumes that 1 damage is dealt per creature. Improve this to check the parameter/X to determine
-                        // how much damage is dealt by each of the creatures in the valid list.
-                        if (attacker.getNetToughness() <= valid.size()) {
-                            return false;
-                        }
-                    }
-                }
-            }
-        }
-
         if ("TRUE".equals(attacker.getSVar("HasAttackEffect"))) {
             return true;
         }
@@ -1005,7 +984,7 @@ public class AiAttackController {
                 if (attackMax != -1 && combat.getAttackers().size() >= attackMax)
                     return aiAggression;
 
-                // TODO if lifeInDanger use chance to hold back some
+                // TODO if lifeInDanger use chance to hold back some (especially in multiplayer)
                 if (canAttackWrapper(attacker, defender) && isEffectiveAttacker(ai, attacker, combat, defender)) {
                     combat.addAttacker(attacker, defender);
                 }
