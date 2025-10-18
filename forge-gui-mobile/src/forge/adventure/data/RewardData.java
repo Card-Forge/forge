@@ -2,13 +2,14 @@ package forge.adventure.data;
 
 import com.badlogic.gdx.utils.Array;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
+import forge.ImageKeys;
 import forge.StaticData;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.card.CardEdition;
 import forge.deck.Deck;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.model.FModel;
 import forge.util.IterableUtil;
 import forge.util.StreamUtil;
@@ -16,7 +17,6 @@ import forge.util.StreamUtil;
 import java.io.Serializable;
 import java.util.*;
 import java.util.function.Predicate;
-
 
 /**
  * Data class that will be used to read Json configuration files
@@ -61,33 +61,33 @@ public class RewardData implements Serializable {
         if (rewardData == null)
             return;
 
-        type        =rewardData.type;
-        probability =rewardData.probability;
-        count       =rewardData.count;
-        addMaxCount =rewardData.addMaxCount;
-        cardName    =rewardData.cardName;
-        itemName    =rewardData.itemName;
-        startDate   =rewardData.startDate;
-        endDate     =rewardData.endDate;
-        itemNames    =rewardData.itemNames==null?null:rewardData.itemNames.clone();
-        editions    =rewardData.editions==null?null:rewardData.editions.clone();
-        colors      =rewardData.colors==null?null:rewardData.colors.clone();
-        rarity      =rewardData.rarity==null?null:rewardData.rarity.clone();
-        subTypes    =rewardData.subTypes==null?null:rewardData.subTypes.clone();
-        cardTypes   =rewardData.cardTypes==null?null:rewardData.cardTypes.clone();
-        superTypes  =rewardData.superTypes==null?null:rewardData.superTypes.clone();
-        manaCosts   =rewardData.manaCosts==null?null:rewardData.manaCosts.clone();
-        keyWords    =rewardData.keyWords==null?null:rewardData.keyWords.clone();
-        colorType   =rewardData.colorType;
-        cardText    =rewardData.cardText;
-        matchAllSubTypes    =rewardData.matchAllSubTypes;
-        matchAllColors =rewardData.matchAllColors;
-        cardUnion         =rewardData.cardUnion==null?null:rewardData.cardUnion.clone();
-        rotation          =rewardData.rotation==null?null:rewardData.rotation.clone();
-        deckNeeds         =rewardData.deckNeeds==null?null:rewardData.deckNeeds.clone();
-        cardPack          = rewardData.cardPack;
-        sourceDeck  =rewardData.sourceDeck;
-        minDate     =rewardData.minDate;
+        type             = rewardData.type;
+        probability      = rewardData.probability;
+        count            = rewardData.count;
+        addMaxCount      = rewardData.addMaxCount;
+        cardName         = rewardData.cardName;
+        itemName         = rewardData.itemName;
+        startDate        = rewardData.startDate;
+        endDate          = rewardData.endDate;
+        itemNames        = rewardData.itemNames == null ? null : rewardData.itemNames.clone();
+        editions         = rewardData.editions == null ? null : rewardData.editions.clone();
+        colors           = rewardData.colors == null ? null : rewardData.colors.clone();
+        rarity           = rewardData.rarity == null ? null : rewardData.rarity.clone();
+        subTypes         = rewardData.subTypes == null ? null : rewardData.subTypes.clone();
+        cardTypes        = rewardData.cardTypes == null ? null : rewardData.cardTypes.clone();
+        superTypes       = rewardData.superTypes == null ? null : rewardData.superTypes.clone();
+        manaCosts        = rewardData.manaCosts == null ? null : rewardData.manaCosts.clone();
+        keyWords         = rewardData.keyWords == null ? null : rewardData.keyWords.clone();
+        colorType        = rewardData.colorType;
+        cardText         = rewardData.cardText;
+        matchAllSubTypes = rewardData.matchAllSubTypes;
+        matchAllColors   = rewardData.matchAllColors;
+        cardUnion        = rewardData.cardUnion == null ? null : rewardData.cardUnion.clone();
+        rotation         = rewardData.rotation == null ? null : rewardData.rotation.clone();
+        deckNeeds        = rewardData.deckNeeds == null ? null : rewardData.deckNeeds.clone();
+        cardPack         = rewardData.cardPack;
+        sourceDeck       = rewardData.sourceDeck;
+        minDate          = rewardData.minDate;
     }
 
     private static Iterable<PaperCard> allCards;
@@ -97,36 +97,48 @@ public class RewardData implements Serializable {
         ConfigData configData = Config.instance().getConfigData();
         RewardData legals = configData.legalCards;
 
-        if(legals==null)
-            allCards = CardUtil.getFullCardPool(false); // we need unique cards only here, so that a unique card can be chosen before a set variant is determined
-        else
-            allCards = IterableUtil.filter(CardUtil.getFullCardPool(false), new CardUtil.CardPredicate(legals, true));
-        //Filter out specific cards.
+        allCards = CardUtil.getFullCardPool(false);
+
+        if(legals != null)
+            allCards = IterableUtil.filter(allCards, new CardUtil.CardPredicate(legals, true));
+
+        // Filter out by editions and obtainability
+        if (configData.allowedEditions != null && configData.allowedEditions.length > 0) {
+            allCards = IterableUtil.filter(allCards, PaperCardPredicates.printedInAnyEditions(configData.allowedEditions));
+        } else if (configData.restrictedEditions != null && configData.restrictedEditions.length > 0) {
+            allCards = IterableUtil.filter(allCards, PaperCardPredicates.onlyPrintedInEditions(configData.restrictedEditions).negate());
+        } else {
+            allCards = IterableUtil.filter(allCards, PaperCardPredicates.isObtainableAnyEdition());
+        }
+
+        Set<String> restrictedCards = new HashSet<>(Arrays.asList(configData.restrictedCards));
+
+        // Filter out specific cards.
         allCards = IterableUtil.filter(allCards, input -> {
-            if(input == null)
+            if (input == null)
                 return false;
             if (Iterables.contains(input.getRules().getMainPart().getKeywords(), "Remove CARDNAME from your deck before playing if you're not playing for ante."))
                 return false;
-            if(input.getRules().getAiHints().getRemNonCommanderDecks())
+            if (input.getRules().getAiHints().getRemNonCommanderDecks())
                 return false;
-            if(configData.allowedEditions != null) {
-                if (!Arrays.asList(configData.allowedEditions).contains(input.getEdition()))
-                    return false;
-            } else if(Arrays.asList(configData.restrictedEditions).contains(input.getEdition()))
+            if (input.getRules().isCustom() &&
+                    input.getImageKey(false).startsWith(ImageKeys.ADVENTURECARD_PREFIX)) {
                 return false;
-            if(input.getRules().isCustom())
-                return false;
-            return !Arrays.asList(configData.restrictedCards).contains(input.getName());
+            }
+
+            return !restrictedCards.contains(input.getName());
         });
+
         //Filter AI cards for enemies.
-        allEnemyCards= IterableUtil.filter(allCards, input -> {
+        allEnemyCards = IterableUtil.filter(allCards, input -> {
             if (input == null) return false;
             return !input.getRules().getAiHints().getRemAIDecks();
         });
     }
 
     static public Iterable<PaperCard> getAllCards() {
-        if(allCards == null) initializeAllCards();
+        if (allCards == null)
+            initializeAllCards();
         return allCards;
     }
 
@@ -145,152 +157,160 @@ public class RewardData implements Serializable {
     public Array<Reward> generate(boolean isForEnemy, Iterable<PaperCard> cards, boolean useSeedlessRandom, boolean isNoSell) {
 
         boolean allCardVariants = Config.instance().getSettingData().useAllCardVariants;
-        Random rewardRandom = useSeedlessRandom?new Random():WorldSave.getCurrentSave().getWorld().getRandom();
+        Random rewardRandom = useSeedlessRandom ? new Random() : WorldSave.getCurrentSave().getWorld().getRandom();
         //Keep using same generation method for shop rewards, but fully randomize loot drops by not using the instance pre-seeded by the map
 
-        if(allCards==null) initializeAllCards();
+        if (allCards==null)
+            initializeAllCards();
         Array<Reward> ret=new Array<>();
 
-
-        if(probability == 0 || rewardRandom.nextFloat() <= probability) {
-            if(type==null || type.isEmpty())
+        if (probability == 0 || rewardRandom.nextFloat() <= probability) {
+            if(type == null || type.isEmpty())
                 type="randomCard";
-            int maxCount=Math.round(addMaxCount*Current.player().getDifficulty().rewardMaxFactor);
+            int maxCount = Math.round(addMaxCount * Current.player().getDifficulty().rewardMaxFactor);
             int addedCount = (maxCount > 0 ? rewardRandom.nextInt(maxCount) : 0);
 
             switch(type) {
                 case "Union":
                     HashSet<PaperCard> pool = new HashSet<>();
                     for (RewardData r : cardUnion) {
-                        if( r.cardName != null && !r.cardName.isEmpty() ) {
+                        if (r.cardName != null && !r.cardName.isEmpty() ) {
                             PaperCard pc = allCardVariants ? CardUtil.getCardByName(r.cardName)
-                                    : StaticData.instance().getCommonCards().getCard(r.cardName);
+                                : StaticData.instance().getCommonCards().getCard(r.cardName);
                             if (pc != null)
                                 pool.add(pc);
-                        } else if( r.sourceDeck != null && ! r.sourceDeck.isEmpty() ) {
+                        } else if (r.sourceDeck != null && !r.sourceDeck.isEmpty() ) {
                             pool.addAll(CardUtil.getDeck(r.sourceDeck, false, false, "", false, false).getAllCardsInASinglePool().toFlatList());
                         } else {
                             pool.addAll(CardUtil.getPredicateResult(allCards, r));
                         }
                     }
-                    ArrayList<PaperCard> finalPool = new ArrayList(pool);
+                    ArrayList<PaperCard> finalPool = new ArrayList<>(pool);
 
                     if (finalPool.size() > 0){
                         for (int i = 0; i < count; i++) {
                             if (allCardVariants) {
                                 PaperCard cardTemplate = finalPool.get(rewardRandom.nextInt(finalPool.size()));
-                                PaperCard finalCard = CardUtil.getCardByName(cardTemplate.getCardName());
-                                ret.add(new Reward(finalCard, isNoSell));
+                                if (cardTemplate != null) {
+                                    PaperCard finalCard = CardUtil.getCardByName(cardTemplate.getCardName());
+                                    if (finalCard != null)
+                                        ret.add(new Reward(finalCard, isNoSell));
+                                }
                             } else {
-                                ret.add(new Reward(finalPool.get(rewardRandom.nextInt(finalPool.size())), isNoSell));
+                                PaperCard card = finalPool.get(rewardRandom.nextInt(finalPool.size()));
+                                if (card != null)
+                                    ret.add(new Reward(card, isNoSell));
                             }
                         }
                     }
                     break;
                 case "card":
                 case "randomCard":
-                    if( cardName != null && !cardName.isEmpty() ) {
+                    if (cardName != null && !cardName.isEmpty()) {
                         if (allCardVariants) {
                             PaperCard card = CardUtil.getCardByName(cardName);
-                            for (int i = 0; i < count + addedCount; i++) {
-                                ret.add(new Reward(CardUtil.getCardByNameAndEdition(cardName, card.getEdition()), isNoSell));
+                            if (card != null) {
+                                for (int i = 0; i < count + addedCount; i++) {
+                                    PaperCard finalCard = CardUtil.getCardByNameAndEdition(cardName, card.getEdition());
+                                    if (finalCard != null)
+                                        ret.add(new Reward(finalCard, isNoSell));
+                                }
                             }
                         } else {
                             for (int i = 0; i < count + addedCount; i++) {
-                                ret.add(new Reward(StaticData.instance().getCommonCards().getCard(cardName), isNoSell));
+                                PaperCard card = StaticData.instance().getCommonCards().getCard(cardName);
+                                if (card != null)
+                                    ret.add(new Reward(card, isNoSell));
+                                else
+                                    System.err.println("Missing card: " + cardName);
                             }
                         }
-                    } else if( sourceDeck != null && ! sourceDeck.isEmpty() ) {
-                        for(PaperCard card:CardUtil.generateCards(CardUtil.getDeck(sourceDeck, false, false, "", false, false).getAllCardsInASinglePool().toFlatList() ,this, count+addedCount, rewardRandom)) {
-                            ret.add(new Reward(card, isNoSell));
+                    } else if (sourceDeck != null && !sourceDeck.isEmpty()) {
+                        for( PaperCard card : CardUtil.generateCards(CardUtil.getDeck(sourceDeck, false, false, "", false, false).getAllCardsInASinglePool().toFlatList() ,this, count+addedCount, rewardRandom)) {
+                            if (card != null)
+                                ret.add(new Reward(card, isNoSell));
                         }
                     } else {
-                        for(PaperCard card:CardUtil.generateCards(isForEnemy ? allEnemyCards:allCards,this, count+addedCount, rewardRandom)) {
-                            ret.add(new Reward(card, isNoSell));
+                        for (PaperCard card : CardUtil.generateCards(isForEnemy ? allEnemyCards:allCards,this, count + addedCount, rewardRandom)) {
+                            if (card != null)
+                                ret.add(new Reward(card, isNoSell));
                         }
                     }
                     break;
                 case "item":
-                    if(itemNames!=null)
-                    {
-                        for(int i=0;i<count+addedCount;i++) {
-                            ret.add(new Reward(ItemData.getItem(itemNames[WorldSave.getCurrentSave().getWorld().getRandom().nextInt(itemNames.length)])));
+                    if(itemNames!=null) {
+                        for (int i = 0; i < count + addedCount; i++) {
+                            String itemName = itemNames[WorldSave.getCurrentSave().getWorld().getRandom().nextInt(itemNames.length)];
+                            ItemData itemData = ItemListData.getItem(itemName);
+                            if (itemData != null)
+                                ret.add(new Reward(itemData));
+                            else
+                                System.err.println("Missing item: " + itemName);
                         }
-                    }
-                    else if(itemName!=null&&!itemName.isEmpty()) {
-                        for(int i=0;i<count+addedCount;i++) {
-                            ret.add(new Reward(ItemData.getItem(itemName)));
+                    } else if (itemName != null && !itemName.isEmpty()) {
+                        for (int i = 0; i < count + addedCount; i++) {
+                            ItemData itemData = ItemListData.getItem(itemName);
+                            if (itemData != null)
+                                ret.add(new Reward(itemData));
+                            else
+                                System.err.println("Missing item: " + itemName);
                         }
                     }
                     break;
-                case "cardPackShop":
-                {
-                    if(colors == null) {
+                case "cardPackShop": {
+                    if (colors == null) {
                         CardEdition.Collection editions = FModel.getMagicDb().getEditions();
                         Predicate<CardEdition> filter = CardEdition.Predicates.CAN_MAKE_BOOSTER;
                         List<CardEdition> allEditions = new ArrayList<>();
                         StreamUtil.stream(editions)
-                                .filter(filter)
-                                .filter(CardEdition::hasBoosterTemplate)
-                                .forEach(allEditions::add);
+                            .filter(filter)
+                            .filter(CardEdition::hasBoosterTemplate)
+                            .forEach(allEditions::add);
                         ConfigData configData = Config.instance().getConfigData();
 
                         for (String restricted : configData.restrictedEditions) {
                             allEditions.removeIf(q -> q.getCode().equals(restricted));
                         }
-                        for(String restrictedCard: configData.restrictedCards)
-                        {
-                            allEditions.removeIf(
-                                    cardEdition -> cardEdition.getAllCardsInSet().stream().anyMatch(
-                                            o -> o.name().equals(restrictedCard))
-                            );
+                        for (String restrictedCard : configData.restrictedCards) {
+                            allEditions.removeIf(cardEdition -> cardEdition.getObtainableCards().stream().anyMatch(
+                                o -> o.name().equals(restrictedCard)));
                         }
 
                         endDate = endDate == 0 ? 9999 : endDate;
                         allEditions.removeIf(q -> q.getDate().getYear()+1900 < startDate || q.getDate().getYear()+1900 > endDate);
-                        for(int i=0;i<count+addedCount;i++) {
-                            ret.add(new Reward(AdventureEventController.instance().generateBooster(allEditions.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(allEditions.size())).getCode())));
+                        for (int i = 0; i < count + addedCount; i++) {
+                            ret.add(new Reward(AdventureEventController.instance().generateBooster(
+                                allEditions.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(allEditions.size())).getCode())));
                         }
-                    }
-                    else
-                    {
-                        for(int i=0;i<count+addedCount;i++) {
+                    } else {
+                        for (int i = 0; i < count + addedCount; i++) {
                             ret.add(new Reward(AdventureEventController.instance().generateBoosterByColor(colors[0])));
-
                         }
                     }
-
-
                     break;
                 }
                 case "landSketchbookShop":
-                    List<ItemData> sketchbookItems = Lists.newArrayList(ItemData.getAllItems());
-                    sketchbookItems.removeIf(new Predicate<ItemData>() {
-                        @Override
-                        public boolean test(ItemData itemData) {
-                            return itemData.questItem || !itemData.getName().contains("Landscape Sketchbook");
-                        }
-                    });
-
-                    for(int i=0; i < count + addedCount; i++) {
-                        ItemData item = sketchbookItems.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(sketchbookItems.size()));
-                        ret.add(new Reward(item));
+                    Array<ItemData> sketchbookItems = ItemListData.getSketchBooks();
+                    for (int i = 0; i < count + addedCount; i++) {
+                        ItemData item = sketchbookItems.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(sketchbookItems.size));
+                        if (item != null)
+                            ret.add(new Reward(item));
                     }
-
                     break;
                 case "cardPack":
-                    if(cardPack!=null)
-                    {
-                        if (isNoSell){
+                    if (cardPack!=null) {
+                        if (isNoSell) {
                             cardPack.getTags().add("noSell");
                         }
                         ret.add(new Reward(cardPack, isNoSell));
                     }
                     break;
                 case "deckCard":
-                    if(cards == null) return ret;
-                    for(PaperCard card: CardUtil.generateCards(cards,this, count + addedCount + Current.player().bonusDeckCards() ,rewardRandom)) {
-                        ret.add(new Reward(card, isNoSell));
+                    if (cards == null)
+                        return ret;
+                    for (PaperCard card : CardUtil.generateCards(cards,this, count + addedCount + Current.player().bonusDeckCards(), rewardRandom)) {
+                        if (card != null)
+                            ret.add(new Reward(card, isNoSell));
                     }
                     break;
                 case "gold":
@@ -312,13 +332,13 @@ public class RewardData implements Serializable {
         return rewardsToCards(generateAll(dataList, isForEnemy));
     }
     static public Iterable<Reward> generateAll(Iterable<RewardData> dataList, boolean isForEnemy) {
-        Array<Reward> ret=new Array<Reward>();
-        for (RewardData data:dataList)
+        Array<Reward> ret = new Array<Reward>();
+        for (RewardData data : dataList)
             ret.addAll(data.generate(isForEnemy, false));
         return ret;
     }
     static public List<PaperCard> rewardsToCards(Iterable<Reward> dataList) {
-        ArrayList<PaperCard> ret=new ArrayList<PaperCard>();
+        ArrayList<PaperCard> ret = new ArrayList<PaperCard>();
 
         boolean allCardVariants = Config.instance().getSettingData().useAllCardVariants;
 
@@ -343,5 +363,4 @@ public class RewardData implements Serializable {
         }
         return ret;
     }
-
 }

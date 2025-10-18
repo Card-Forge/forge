@@ -28,6 +28,8 @@ import forge.item.PaperCard;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.io.ObjectStreamException;
+import java.io.Serial;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -111,6 +113,20 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     public CardPool getMain() {
         loadDeferredSections();
         return parts.get(DeckSection.Main);
+    }
+
+    public Pair<Deck, List<PaperCard>> getValid() {
+        List<PaperCard> unsupported = new ArrayList<>();
+        for (Entry<DeckSection, CardPool> kv : parts.entrySet()) {
+            CardPool pool = kv.getValue();
+            for (Entry<PaperCard, Integer> pc : pool) {
+                if (pc.getKey().getRules() != null && pc.getKey().getRules().isUnsupported()) {
+                    unsupported.add(pc.getKey());
+                    pool.remove(pc.getKey());
+                }
+            }
+        }
+        return Pair.of(this, unsupported);
     }
 
     public List<PaperCard> getCommanders() {
@@ -208,14 +224,19 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         super.cloneFieldsTo(clone);
         final Deck result = (Deck) clone;
         loadDeferredSections();
-        for (Entry<DeckSection, CardPool> kv : parts.entrySet()) {
-            CardPool cp = new CardPool();
-            result.parts.put(kv.getKey(), cp);
-            cp.addAll(kv.getValue());
+        // parts shouldn't be null
+        if (parts != null) {
+            for (Entry<DeckSection, CardPool> kv : parts.entrySet()) {
+                CardPool cp = new CardPool();
+                result.parts.put(kv.getKey(), cp);
+                cp.addAll(kv.getValue());
+            }
         }
         result.setAiHints(StringUtils.join(aiHints, " | "));
         result.setDraftNotes(draftNotes);
-        tags.addAll(result.getTags());
+        //noinspection ConstantValue
+        if(tags != null) //Can happen deserializing old Decks.
+            result.tags.addAll(this.tags);
     }
 
     /*
@@ -521,6 +542,17 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return sum;
     }
 
+    /**
+     * Counts the number of copies of this exact card print across all deck sections.
+     */
+    public int count(PaperCard card) {
+        int sum = 0;
+        for (Entry<DeckSection, CardPool> section : this) {
+            sum += section.getValue().count(card);
+        }
+        return sum;
+    }
+
     public void setAiHints(String aiHintsInfo) {
         if (aiHintsInfo == null || aiHintsInfo.trim().isEmpty()) {
             return;
@@ -611,6 +643,14 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
     @Override
     public Deck getHumanDeck() {
+        return this;
+    }
+
+    @Serial
+    private Object readResolve() throws ObjectStreamException {
+        //If we deserialized an old deck that doesn't have tags, fix it here.
+        if(this.tags == null)
+            return new Deck(this, this.getName() == null ? "" : this.getName());
         return this;
     }
 

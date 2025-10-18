@@ -2,7 +2,6 @@ Name:Yuna's Decision
 ManaCost:3 G
 Types:Sorcery
 A:SP$ Charm | Choices$ DBSacrifice,DBReturn
-SVar:DBSacrifice:DB$
 SVar:DBSacrifice:DB$ Sacrifice | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ DBDraw | SpellDescription$ Continue the Pilgrimage — Sacrifice a creature. If you do, draw a card, then you may put a creature card and/or a land card from your hand onto the battlefield.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | SubAbility$ DBChangeZone | StackDescription$ None
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ EACH Creature & Land | ChangeTypeDesc$ creature and/or land card | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | Optional$ True | SubAbility$ DBCleanup | StackDescription$ None

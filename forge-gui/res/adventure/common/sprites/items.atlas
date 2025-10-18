@@ -459,6 +459,9 @@ Dot
 GoldCoin
   xy: 464, 63
   size: 16, 16
+Sell
+  xy: 464, 79
+  size: 16, 16
 Magnifier
   xy: 448, 63
   size: 16, 16
@@ -485,6 +488,9 @@ Star
   size: 16, 16
 TreasureChest
   xy: 464, 32
+  size: 16, 16
+ToolBox
+  xy: 448, 79
   size: 16, 16
 UnderworldCookbook
   xy: 304, 960

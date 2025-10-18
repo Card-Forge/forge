@@ -18,6 +18,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.MagicStack;
+import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Localizer;
 
@@ -26,6 +27,13 @@ import forge.util.Localizer;
  *
  */
 public class ChangeTargetsEffect extends SpellAbilityEffect {
+
+    @Override
+    public void buildSpellAbility(SpellAbility sa) {
+        if (sa.usesTargeting()) {
+            sa.getTargetRestrictions().setZone(ZoneType.Stack);
+        }
+    }
 
     /* (non-Javadoc)
      * @see forge.card.ability.SpellAbilityEffect#resolve(forge.card.spellability.SpellAbility)
@@ -37,7 +45,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
         final Player chooser = sa.hasParam("Chooser") ? getDefinedPlayersOrTargeted(sa, "Chooser").get(0) : activator;
 
         final MagicStack stack = activator.getGame().getStack();
-        
+
         for (final SpellAbility tgtSA : sas) {
             SpellAbilityStackInstance si = stack.getInstanceMatchingSpellAbilityID(tgtSA);
             if (si == null) {
@@ -72,8 +80,8 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                 // 2. prepare new target choices
                 SpellAbilityStackInstance replaceIn = chosenTarget.getKey();
                 GameObject oldTarget = chosenTarget.getValue();
-                TargetChoices oldTargetBlock = replaceIn.getTargetChoices();
-                TargetChoices newTargetBlock = oldTargetBlock.clone();
+                TargetChoices newTargetBlock = replaceIn.getTargetChoices();
+                TargetChoices oldTargetBlock = newTargetBlock.clone();
                 // gets the divided value from old target
                 Integer div = oldTargetBlock.getDividedValue(oldTarget);
                 // 3. test if updated choices would be correct.
@@ -87,7 +95,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                     if (div != null) {
                         newTargetBlock.addDividedAllocation(newTarget, div);
                     }
-                    replaceIn.updateTarget(newTargetBlock, sa.getHostCard());
+                    replaceIn.updateTarget(oldTargetBlock, sa.getHostCard());
                 }
             } else {
                 while (changingTgtSI != null) {
@@ -104,25 +112,26 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                             if (candidates.isEmpty()) {
                                 return;
                             }
-                            changingTgtSA.resetTargets();
                             GameEntity choice = Aggregates.random(candidates);
+                            TargetChoices oldTarget = changingTgtSA.getTargets();
+                            changingTgtSA.resetTargets();
                             changingTgtSA.getTargets().add(choice);
                             if (changingTgtSA.isDividedAsYouChoose()) {
                                 changingTgtSA.addDividedAllocation(choice, div);
                             }
-
-                            changingTgtSI.updateTarget(changingTgtSA.getTargets(), sa.getHostCard());
+                            changingTgtSI.updateTarget(oldTarget, sa.getHostCard());
                         }
                         else if (sa.hasParam("DefinedMagnet")) {
                             GameObject newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa, "DefinedMagnet"), null);
                             if (newTarget != null && changingTgtSA.canTarget(newTarget)) {
                                 int div = changingTgtSA.getTotalDividedValue();
+                                TargetChoices oldTarget = changingTgtSA.getTargets();
                                 changingTgtSA.resetTargets();
                                 changingTgtSA.getTargets().add(newTarget);
-                                changingTgtSI.updateTarget(changingTgtSA.getTargets(), sa.getHostCard());
                                 if (changingTgtSA.isDividedAsYouChoose()) {
                                     changingTgtSA.addDividedAllocation(newTarget, div);
                                 }
+                                changingTgtSI.updateTarget(oldTarget, sa.getHostCard());
                             }
                         } else {
                             // Update targets, with a potential new target
@@ -132,8 +141,9 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                                 source = changingTgtSA.getTargetCard();
                             }
                             Predicate<GameObject> filter = sa.hasParam("TargetRestriction") ? GameObjectPredicates.restriction(sa.getParam("TargetRestriction").split(","), activator, source, sa) : null;
-                            TargetChoices newTarget = chooser.getController().chooseNewTargetsFor(changingTgtSA, filter, false);
-                            changingTgtSI.updateTarget(newTarget, sa.getHostCard());
+                            TargetChoices oldTarget = changingTgtSA.getTargets();
+                            chooser.getController().chooseNewTargetsFor(changingTgtSA, filter, false);
+                            changingTgtSI.updateTarget(oldTarget, sa.getHostCard());
                         }
                     }
                     changingTgtSI = changingTgtSI.getSubInstance();

@@ -1046,7 +1046,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         else if (state.isCreature()) {
             sPt = state.getPower() + "/" + state.getToughness();
         }
-        else if (state.getType().hasSubtype("Vehicle")) {
+        else if (state.isVehicle()) {
             sPt = "[" + state.getPower() + "/" + state.getToughness() + "]";
         }
         else if (state.isPlaneswalker()) {

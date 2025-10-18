@@ -1,0 +1,15 @@
+[metadata]
+Code=PSPM
+Date=2025-09-26
+Name=Marvel's Spider-Man Promos
+Type=Promo
+ScryfallCode=PSPM
+
+[cards]
+1 M Peter Parker @Randy Gallegos
+2 M Behold the Sinister Six! @Jonas De Ro
+2b R Spider-Ham, Peter Porker @Paolo Rivera
+3a R J. Jonah Jameson @Borja Pindado
+3b R Carnage, Crimson Chaos @Lucio Parrillo
+4 R Mary Jane Watson @Paolo Rivera
+5 R Ultimate Green Goblin @Tyler Walpole

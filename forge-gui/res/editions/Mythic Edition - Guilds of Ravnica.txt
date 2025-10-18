@@ -3,7 +3,7 @@ Code=MPS_GRN
 Date=2018-10-05
 Name=Mythic Edition - Guilds of Ravnica
 Type=Collector_Edition
-ScryfallCode=med
+ScryfallCode=MED
 
 [cards]
 GR1 M Elspeth, Knight-Errant @Zack Stella
@@ -19,3 +19,10 @@ GR8 M Vraska, Golgari Queen @Livia Prima
 G1 w_1_1_soldier @Goran Josic
 G2 b_2_2_zombie @Anna Steinbauer
 G3 c_1_1_a_construct_defender @Victor Adame Minguez
+
+[other]
+G4 emblem_elspeth_knight_errant @Zack Stella
+G5 emblem_liliana_the_last_hope @Kieran Yanner
+G6 emblem_ral_izzet_viceroy @Daniel Ljunggren
+G7 emblem_teferi_hero_of_dominaria @Yongjae Choi
+G8 emblem_vraska_golgari_queen @Livia Prima

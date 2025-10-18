@@ -1,0 +1,6 @@
+Name:Munitions
+ManaCost:no cost
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When this token leaves the battlefield, it deals 2 damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2
+Oracle:When this token leaves the battlefield, it deals 2 damage to any target.

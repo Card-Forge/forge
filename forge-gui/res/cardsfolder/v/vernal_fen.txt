@@ -1,0 +1,6 @@
+Name:Vernal Fen
+ManaCost:no cost
+Types:Land Swamp Forest
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ This land enters tapped unless you control two or more basic lands.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Land.Basic+YouCtrl | ConditionCompare$ LE1
+Oracle:({T}: Add {B} or {G}.)\nThis land enters tapped unless you control two or more basic lands.

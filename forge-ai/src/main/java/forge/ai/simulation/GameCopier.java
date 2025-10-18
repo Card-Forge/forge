@@ -97,7 +97,6 @@ public class GameCopier {
             newPlayer.setCounters(Maps.newHashMap(origPlayer.getCounters()));
             newPlayer.setSpeed(origPlayer.getSpeed());
             newPlayer.setBlessing(origPlayer.hasBlessing(), null);
-            newPlayer.setRevolt(origPlayer.hasRevolt());
             newPlayer.setDescended(origPlayer.getDescended());
             newPlayer.setLibrarySearched(origPlayer.getLibrarySearched());
             newPlayer.setSpellsCastLastTurn(origPlayer.getSpellsCastLastTurn());

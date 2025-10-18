@@ -1,0 +1,10 @@
+Name:Adagia, Windswept Bastion
+ManaCost:no cost
+Types:Land Planet
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+K:Station:12
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE12_CHARGE | AddAbility$ AdagioCopy | Description$ STATION 12+ {3}{W}, {T}: Create a token that's a copy of target artifact or enchantment you control, except it's legendary. Activate only as a sorcery.
+SVar:AdagioCopy:AB$ CopyPermanent | Cost$ 3 W T | ValidTgts$ Artifact.YouCtrl,Enchantment.YouCtrl | TgtPrompt$ Select target artifact or enchantment you control | Defined$ Targeted | AddTypes$ Legendary | SorcerySpeed$ True | SpellDescription$ Create a token that's a copy of target artifact or enchantment you control, except it's legendary. Activate only as a sorcery.
+Oracle:This land enters tapped.\n{T}: Add {W}.\nStation (Tap another creature you control: Put charge counters equal to its power on this Planet. Station only as a sorcery.)\nSTATION 12+\n{3}{W}, {T}: Create a token that's a copy of target artifact or enchantment you control, except it's legendary. Activate only as a sorcery.

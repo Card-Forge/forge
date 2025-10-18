@@ -145,13 +145,15 @@ public class AiAttackController {
                 sa.setActivatingPlayer(defender);
                 if (sa.isCrew() && !ComputerUtilCost.checkTapTypeCost(defender, sa.getPayCosts(), c, sa, tappedDefenders)) {
                     continue;
-                } else if (!ComputerUtilCost.canPayCost(sa, defender, false) || !sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
+                }
+                if (!ComputerUtilCost.canPayCost(sa, defender, false) || !sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
                     continue;
                 }
                 Card animatedCopy = AnimateAi.becomeAnimated(c, sa);
                 if (animatedCopy.isCreature()) {
+                    // TODO imprecise, only works 100% for colorless mana
                     int saCMC = sa.getPayCosts() != null && sa.getPayCosts().hasManaCost() ?
-                            sa.getPayCosts().getTotalMana().getCMC() : 0; // FIXME: imprecise, only works 100% for colorless mana
+                            sa.getPayCosts().getTotalMana().getCMC() : 0;
                     if (totalMana - manaReserved >= saCMC) {
                         manaReserved += saCMC;
                         defenders.add(animatedCopy);
@@ -1100,7 +1102,8 @@ public class AiAttackController {
         for (final Card pCard : myList) {
             // if the creature can attack then it's a potential attacker this
             // turn, assume summoning sickness creatures will be able to
-            if (ComputerUtilCombat.canAttackNextTurn(pCard) && pCard.getNetCombatDamage() > 0) {
+            // TODO: Account for triggered power boosts.
+            if (ComputerUtilCombat.canAttackNextTurn(pCard) && (pCard.getNetCombatDamage() > 0 || "TRUE".equals(pCard.getSVar("HasAttackEffect")))) {
                 candidateAttackers.add(pCard);
                 candidateUnblockedDamage += ComputerUtilCombat.damageIfUnblocked(pCard, defendingOpponent, null, false);
                 computerForces++;

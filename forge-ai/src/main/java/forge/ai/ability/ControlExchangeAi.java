@@ -1,9 +1,7 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Lists;
-import forge.ai.ComputerUtilCard;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -13,7 +11,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 
 public class ControlExchangeAi extends SpellAbilityAi {
 
@@ -21,7 +18,7 @@ public class ControlExchangeAi extends SpellAbilityAi {
  * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
  */
     @Override
-    protected boolean canPlayAI(Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, final SpellAbility sa) {
         Card object1 = null;
         Card object2 = null;
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -41,35 +38,38 @@ public class ControlExchangeAi extends SpellAbilityAi {
             sa.getTargets().add(object2);
         }
         if (object1 == null || object2 == null) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
         if (ComputerUtilCard.evaluateCreature(object1) > ComputerUtilCard.evaluateCreature(object2) + 40) {
             sa.getTargets().add(object1);
-            return MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
-        return false;
+        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         if (!sa.usesTargeting()) {
             if (mandatory) {
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
+        } else if (mandatory) {
+            AiAbilityDecision decision = chkDrawback(sa, aiPlayer);
+            if (sa.isTargetNumberValid()) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+
+            return decision;
         } else {
-            if (mandatory) {
-                return chkAIDrawback(sa, aiPlayer) || sa.isTargetNumberValid();
-            } else {
-                return canPlayAI(aiPlayer, sa);
-            }
+            return canPlay(aiPlayer, sa);
         }
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         if (!sa.usesTargeting()) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -90,7 +90,7 @@ public class ControlExchangeAi extends SpellAbilityAi {
         list = CardLists.getTargetableCards(list, sa);
 
         if (list.isEmpty())
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
 
         Card best = ComputerUtilCard.getBestAI(list);
 
@@ -106,7 +106,7 @@ public class ControlExchangeAi extends SpellAbilityAi {
 
             // Defined card is better than this one, try to avoid trade
             if (!best.equals(realBest)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
         }
 
@@ -115,10 +115,10 @@ public class ControlExchangeAi extends SpellAbilityAi {
             return doTrigTwoTargetsLogic(aiPlayer, sa, best);
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }   
 
-    private boolean doTrigTwoTargetsLogic(Player ai, SpellAbility sa, Card bestFirstTgt) {
+    private AiAbilityDecision doTrigTwoTargetsLogic(Player ai, SpellAbility sa, Card bestFirstTgt) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final int creatureThreshold = 100; // TODO: make this configurable from the AI profile
         final int nonCreatureThreshold = 2;
@@ -130,30 +130,30 @@ public class ControlExchangeAi extends SpellAbilityAi {
         list = CardLists.getTargetableCards(list, sa);
 
         if (list.isEmpty()) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
         Card aiWorst = ComputerUtilCard.getWorstAI(list);
         if (aiWorst == null) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
         if (aiWorst != bestFirstTgt) {
             if (bestFirstTgt.isCreature() && aiWorst.isCreature()) {
                 if ((ComputerUtilCard.evaluateCreature(bestFirstTgt) > ComputerUtilCard.evaluateCreature(aiWorst) + creatureThreshold) || sa.isMandatory()) {
                     sa.getTargets().add(aiWorst);
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             } else {
                 // TODO: compare non-creatures by CMC - can be improved, at least shouldn't give control of things like the Power Nine
                 if ((bestFirstTgt.getCMC() > aiWorst.getCMC() + nonCreatureThreshold) || sa.isMandatory()) {
                     sa.getTargets().add(aiWorst);
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
         }
 
         sa.clearTargets();
-        return false;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 }

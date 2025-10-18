@@ -5,7 +5,6 @@ import forge.card.CardRarity;
 import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.card.mana.ManaCostShard;
 import forge.deck.DeckRecognizer;
 import forge.game.GameView;
 import forge.game.card.Card;
@@ -67,20 +66,20 @@ public class CardDetailUtil {
 
     public static DetailColors getBorderColor(final CardStateView card, final boolean canShow) {
         if (card == null) {
-            return getBorderColors(null, false, false, false).iterator().next();
+            return getBorderColors(null, false, false, false, false).iterator().next();
         }
-        return getBorderColors(card.getColors(), card.isLand(), canShow, false).iterator().next();
+        return getBorderColors(card.getColors(), card.isLand(), canShow, false, card.isEnchantment()).iterator().next();
     }
     public static List<DetailColors> getBorderColors(final CardStateView card, final boolean canShow) {
         if (card == null) {
-            return getBorderColors(null, false, false, true);
+            return getBorderColors(null, false, false, true, false);
         }
-        return getBorderColors(card.getColors(), card.isLand(), canShow, true);
+        return getBorderColors(card.getColors(), card.isLand(), canShow, true, card.isEnchantment());
     }
     public static List<DetailColors> getBorderColors(final ColorSet colorSet) {
-        return getBorderColors(colorSet, false, true, true);
+        return getBorderColors(colorSet, false, true, true, false);
     }
-    private static List<DetailColors> getBorderColors(final ColorSet cardColors, final boolean isLand, final boolean canShow, final boolean supportMultiple) {
+    private static List<DetailColors> getBorderColors(final ColorSet cardColors, final boolean isLand, final boolean canShow, final boolean supportMultiple, final boolean isEnchantment) {
         final List<DetailColors> borderColors = new ArrayList<>();
 
         if (cardColors == null || !canShow) {
@@ -100,7 +99,7 @@ public class CardDetailUtil {
                 borderColors.add(DetailColors.MULTICOLOR);
             }
             else { //for 3 colors or fewer, return all colors in shard order
-                for (ManaCostShard shard : cardColors.getOrderedShards()) {
+                for (MagicColor.Color shard : cardColors.getOrderedColors()) {
                     switch (shard.getColorMask()) {
                     case MagicColor.WHITE:
                         borderColors.add(DetailColors.WHITE);
@@ -174,17 +173,16 @@ public class CardDetailUtil {
             return "";
         }
         final StringBuilder ptText = new StringBuilder();
-        boolean vehicle = card.getType().hasSubtype("Vehicle");
-        if (vehicle && !card.isCreature()) {
-            ptText.append("{");
+        if (card.hasPrintedPT() && !card.isCreature()) {
+            ptText.append("[");
         }
 
-        if (card.isCreature() || vehicle) {
+        if (card.isCreature() || card.hasPrintedPT()) {
             ptText.append(card.getPower()).append(" / ").append(card.getToughness());
         }
 
-        if (vehicle && !card.isCreature()) {
-            ptText.append("}");
+        if (card.hasPrintedPT() && !card.isCreature()) {
+            ptText.append("]");
         }
 
         if (card.isPlaneswalker()) {
@@ -453,7 +451,7 @@ public class CardDetailUtil {
         if (card.getMarkedColors() != null && !card.getMarkedColors().isColorless()) {
             area.append("\n");
             area.append("(").append(Localizer.getInstance().getMessage("lblSelected")).append(": ");
-            area.append(Lang.joinHomogenous(card.getMarkedColors().stream().map(MagicColor.Color::getLocalizedName).collect(Collectors.toList())));
+            area.append(Lang.joinHomogenous(card.getMarkedColors().stream().map(MagicColor.Color::getTranslatedName).collect(Collectors.toList())));
             area.append(")");
         }
 

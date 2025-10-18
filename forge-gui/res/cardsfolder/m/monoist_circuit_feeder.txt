@@ -1,0 +1,11 @@
+Name:Monoist Circuit-Feeder
+ManaCost:4 B B
+Types:Artifact Creature Nautilus
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this creature enters, until end of turn, target creature you control gets +X/+0 and target creature an opponent controls gets -0/-X, where X is the number of artifacts you control.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +X | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDef$ -X | IsCurse$ True
+SVar:X:Count$Valid Artifact.YouCtrl
+SVar:PlayMain1:TRUE
+Oracle:Flying\nWhen this creature enters, until end of turn, target creature you control gets +X/+0 and target creature an opponent controls gets -0/-X, where X is the number of artifacts you control.

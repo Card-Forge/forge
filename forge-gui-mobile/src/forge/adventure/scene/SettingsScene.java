@@ -32,12 +32,12 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 public class SettingsScene extends UIScene {
     private final Table settingGroup;
     TextraButton backButton;
-    //TextraButton newPlane;
+    TextraButton newPlane;
     ScrollPane scrollPane;
 
     SelectBox<String> selectSourcePlane;
     TextField newPlaneName;
-    Dialog createNewPlane, copyPlane, errorDialog;
+    Dialog createNewPlane, copyPlane, errorDialog, restartDialog;
 
     private void copyNewPlane() {
         String plane = selectSourcePlane.getSelected();
@@ -98,27 +98,31 @@ public class SettingsScene extends UIScene {
         super(Forge.isLandscapeMode() ? "ui/settings.json" : "ui/settings_portrait.json");
 
         settingGroup = new Table();
-        //temporary disable custom world until it works correctly on each update
-        /*selectSourcePlane = Controls.newComboBox();
+        selectSourcePlane = Controls.newComboBox();
         newPlaneName = Controls.newTextField("");
-
         selectSourcePlane.setItems(Config.instance().getAllAdventures());
         SelectBox plane = Controls.newComboBox(Config.instance().getAllAdventures(), Config.instance().getSettingData().plane, o -> {
             Config.instance().getSettingData().plane = (String) o;
             Config.instance().saveSettings();
             return null;
         });
-        newPlane = Controls.newTextButton("Create own plane");
+        plane.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                restartForge();
+            }
+        });
+        /*newPlane = Controls.newTextButton("Create own plane");
         newPlane.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 createNewPlane();
             }
-        });
-        addLabel(Forge.getLocalizer().getMessage("lblWorld"));
+        });*/
+        addLabel(Forge.getLocalizer().getMessage("lblWorld") + " (" + Forge.getLocalizer().getMessage("lblRestartRequired") + ")");
         settingGroup.add(plane).align(Align.right).pad(2);
-        addLabel(Forge.getLocalizer().getMessage("lblCreate") + Forge.getLocalizer().getMessage("lblWorld"));
-        settingGroup.add(newPlane).align(Align.right).pad(2);*/
+        //addLabel(Forge.getLocalizer().getMessage("lblCreate") + Forge.getLocalizer().getMessage("lblWorld"));
+        settingGroup.add(newPlane).align(Align.right).pad(2);
 
         if (!GuiBase.isAndroid()) {
             SelectBox<String> videomode = Controls.newComboBox(ForgeConstants.VIDEO_MODES, Config.instance().getSettingData().videomode, o -> {
@@ -255,10 +259,20 @@ public class SettingsScene extends UIScene {
 
         if (!GuiBase.isAndroid()) {
             addCheckBox(Forge.getLocalizer().getMessage("lblBattlefieldTextureFiltering"), ForgePreferences.FPref.UI_LIBGDX_TEXTURE_FILTERING);
-            addCheckBox(Forge.getLocalizer().getMessage("lblAltZoneTabs"), ForgePreferences.FPref.UI_ALT_PLAYERZONETABS);
+            //addCheckBox(Forge.getLocalizer().getMessage("lblAltZoneTabs"), ForgePreferences.FPref.UI_ALT_PLAYERZONETABS);
+        } else {
+            addCheckBox(Forge.getLocalizer().getMessage("lblLandscapeMode") + " (" +
+                Forge.getLocalizer().getMessage("lblRestartRequired") + ")",
+                    ForgePreferences.FPref.UI_LANDSCAPE_MODE, () -> {
+                        boolean landscapeMode = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_LANDSCAPE_MODE);
+                        //ensure device able to save off ini file so landscape change takes effect
+                        Forge.getDeviceAdapter().setLandscapeMode(landscapeMode);
+                        if (Forge.isLandscapeMode() != landscapeMode) {
+                            restartForge();
+                        }
+                    });
         }
 
-        addCheckBox(Forge.getLocalizer().getMessage("lblLandscapeMode"), ForgePreferences.FPref.UI_LANDSCAPE_MODE);
         addCheckBox(Forge.getLocalizer().getMessage("lblAnimatedCardTapUntap"), ForgePreferences.FPref.UI_ANIMATED_CARD_TAPUNTAP);
         if (!GuiBase.isAndroid()) {
             final String[] item = {FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING)};
@@ -279,8 +293,11 @@ public class SettingsScene extends UIScene {
             addLabel(Forge.getLocalizer().getMessage("lblBorderMaskOption"));
             settingGroup.add(borderMask).align(Align.right).pad(2);
 
-            addCheckBox(Forge.getLocalizer().getMessage("lblPreloadExtendedArtCards"), ForgePreferences.FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
             addCheckBox(Forge.getLocalizer().getMessage("lblAutoCacheSize"), ForgePreferences.FPref.UI_AUTO_CACHE_SIZE);
+            addCheckBox(Forge.getLocalizer().getMessage("lblEnableUnknownCards") + " (" +
+                Forge.getLocalizer().getMessage("lblRestartRequired") + ")", ForgePreferences.FPref.UI_LOAD_UNKNOWN_CARDS, this::restartForge);
+            addCheckBox(Forge.getLocalizer().getMessage("lblEnableNonLegalCards") + " (" +
+                Forge.getLocalizer().getMessage("lblRestartRequired") + ")", ForgePreferences.FPref.UI_LOAD_NONLEGAL_CARDS, this::restartForge);
             addCheckBox(Forge.getLocalizer().getMessage("lblDisposeTextures"), ForgePreferences.FPref.UI_ENABLE_DISPOSE_TEXTURES);
         }
 
@@ -316,6 +333,10 @@ public class SettingsScene extends UIScene {
     }
 
     private void addCheckBox(String name, ForgePreferences.FPref pref) {
+        addCheckBox(name, pref, null);
+    }
+
+    private void addCheckBox(String name, ForgePreferences.FPref pref, Runnable runnable) {
         CheckBox box = Controls.newCheckBox("");
         box.setChecked(FModel.getPreferences().getPrefBoolean(pref));
         box.addListener(new ChangeListener() {
@@ -323,6 +344,8 @@ public class SettingsScene extends UIScene {
             public void changed(ChangeEvent event, Actor actor) {
                 FModel.getPreferences().setPref(pref, ((CheckBox) actor).isChecked());
                 FModel.getPreferences().save();
+                if (runnable != null)
+                    runnable.run();
             }
         });
 
@@ -370,6 +393,18 @@ public class SettingsScene extends UIScene {
         settingGroup.add(label).align(Align.left).pad(2, 2, 2, 5).width(w).expand();
     }
 
+    private void restartForge() {
+        if (restartDialog == null) {
+            restartDialog = createGenericDialog("",
+                    Forge.getLocalizer().getMessage("lblAreYouSureYouWishRestartForge"),
+                    Forge.getLocalizer().getMessage("lblOK"),
+                    Forge.getLocalizer().getMessage("lblAbort"), () -> {
+                        Forge.restart(true);
+                        removeDialog();
+                    }, this::removeDialog);
+        }
+        showDialog(restartDialog);
+    }
 
     private static SettingsScene object;
 

@@ -101,7 +101,7 @@
                     <plugin>
                         <groupId>org.codehaus.izpack</groupId>
                         <artifactId>izpack-maven-plugin</artifactId>
-                        <version>5.2.3</version>
+                        <version>5.2.4</version>
                         <executions>
                             <execution>
                                 <phase>post-integration-test</phase>
@@ -171,7 +171,7 @@
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="INSTALLATION.txt" />
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="GAMEPAD_README.txt" />
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="ISSUES.txt" />
-                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="CHANGES.txt" />
+                                            <fileset dir="${basedir}/../forge-gui-desktop/target/" includes="CHANGES.txt" />
                                             <fileset dir="${basedir}/../forge-gui/">
                                                 <include name="res/**" />
                                                 <exclude name="res/cardsfolder/**" />
@@ -230,6 +230,7 @@
                                                 <include name="adventure-editor.command" />
                                                 <include name="adventure-editor.cmd" />
                                                 <include name="adventure-editor.exe" />
+                                                <exclude name="**/*.xcf" />
                                             </tarfileset>
                                             <tarfileset dir="${project.build.directory}/${project.build.finalName}">
                                                 <include name="**" />
@@ -245,6 +246,7 @@
                                                 <exclude name="adventure-editor.command" />
                                                 <exclude name="adventure-editor.cmd" />
                                                 <exclude name="adventure-editor.exe" />
+                                                <exclude name="**/*.xcf" />
                                             </tarfileset>
                                         </tar>
                                     </target>

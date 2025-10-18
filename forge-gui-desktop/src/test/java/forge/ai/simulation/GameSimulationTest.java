@@ -1755,7 +1755,7 @@ public class GameSimulationTest extends SimulationTest {
 
         AssertJUnit.assertFalse(outlaw.isCloned());
         AssertJUnit.assertTrue(outlaw.isTransformable());
-        AssertJUnit.assertTrue(outlaw.hasState(CardStateName.Transformed));
+        AssertJUnit.assertTrue(outlaw.hasState(CardStateName.Backside));
         AssertJUnit.assertTrue(outlaw.canTransform(null));
         AssertJUnit.assertFalse(outlaw.isBackSide());
 
@@ -1788,7 +1788,7 @@ public class GameSimulationTest extends SimulationTest {
 
         AssertJUnit.assertTrue(clonedOutLaw.isCloned());
         AssertJUnit.assertTrue(clonedOutLaw.isTransformable());
-        AssertJUnit.assertTrue(clonedOutLaw.hasState(CardStateName.Transformed));
+        AssertJUnit.assertTrue(clonedOutLaw.hasState(CardStateName.Backside));
         AssertJUnit.assertTrue(clonedOutLaw.canTransform(null));
         AssertJUnit.assertFalse(clonedOutLaw.isBackSide());
 
@@ -1807,7 +1807,7 @@ public class GameSimulationTest extends SimulationTest {
 
         AssertJUnit.assertTrue(transformOutLaw.isCloned());
         AssertJUnit.assertTrue(transformOutLaw.isTransformable());
-        AssertJUnit.assertTrue(transformOutLaw.hasState(CardStateName.Transformed));
+        AssertJUnit.assertTrue(transformOutLaw.hasState(CardStateName.Backside));
         AssertJUnit.assertTrue(transformOutLaw.canTransform(null));
         AssertJUnit.assertTrue(transformOutLaw.isBackSide());
 
@@ -1822,7 +1822,7 @@ public class GameSimulationTest extends SimulationTest {
 
         AssertJUnit.assertFalse(transformOutLaw.isCloned());
         AssertJUnit.assertTrue(transformOutLaw.isTransformable());
-        AssertJUnit.assertTrue(transformOutLaw.hasState(CardStateName.Transformed));
+        AssertJUnit.assertTrue(transformOutLaw.hasState(CardStateName.Backside));
         AssertJUnit.assertTrue(transformOutLaw.canTransform(null));
         AssertJUnit.assertTrue(transformOutLaw.isBackSide());
 
@@ -2608,6 +2608,35 @@ public class GameSimulationTest extends SimulationTest {
 
         AssertJUnit.assertTrue(nonBasicForest.isCreature());
         AssertJUnit.assertTrue(nonBasicForest.getType().hasSubtype("Mountain"));
+    }
+
+    @Test
+    public void testHenzie() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+
+        addCard("Henzie \"Toolbox\" Torre", p);
+        addCardToZone("Wastes", p, ZoneType.Library);
+        addCards("Plains", 5, p);
+        Card spell = addCardToZone("Serra Angel", p, ZoneType.Hand);
+
+        game.getAction().checkStaticAbilities();
+        List<SpellAbility> sas = spell.getAllPossibleAbilities(p, true);
+        SpellAbility blitz = sas.get(1);
+
+        GameSimulator sim = createSimulator(game, p);
+        game = sim.getSimulatedGameState();
+        sim.simulateSpellAbility(blitz);
+        spell = findCardWithName(game, "Serra Angel");
+
+        AssertJUnit.assertEquals(1, spell.getAmountOfKeyword(Keyword.BLITZ));
+        AssertJUnit.assertTrue(spell.hasKeyword(Keyword.HASTE));
+
+        playUntilNextTurn(game);
+
+        AssertJUnit.assertEquals(1, game.getPlayers().get(0).getCardsIn(ZoneType.Hand).size());
+        AssertJUnit.assertTrue(spell.isInZone(ZoneType.Graveyard));
     }
 
     /**

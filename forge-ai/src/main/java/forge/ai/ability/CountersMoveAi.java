@@ -1,9 +1,7 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
@@ -21,19 +19,25 @@ import java.util.Map;
 
 public class CountersMoveAi extends SpellAbilityAi {
     @Override
-    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
+        AiAbilityDecision decision = new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         if (sa.usesTargeting()) {
             sa.resetTargets();
-            if (!moveTgtAI(ai, sa)) {
-                return false;
+            decision = moveTgtAI(ai, sa);
+            if (!decision.willingToPlay()) {
+                return decision;
             }
         }
 
         if (!playReusable(ai, sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        return MyRandom.getRandom().nextFloat() < .8f; // random success
+        if (MyRandom.getRandom().nextFloat() < .8f) {
+            return decision;
+        }
+
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
@@ -109,12 +113,13 @@ public class CountersMoveAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(final Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player ai, SpellAbility sa, boolean mandatory) {
         if (sa.usesTargeting()) {
             sa.resetTargets();
 
-            if (!moveTgtAI(ai, sa) && !mandatory) {
-                return false;
+            AiAbilityDecision decision = moveTgtAI(ai, sa);
+            if (!decision.willingToPlay() && !mandatory) {
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
             if (!sa.isTargetNumberValid() && mandatory) {
@@ -122,18 +127,18 @@ public class CountersMoveAi extends SpellAbilityAi {
                 List<Card> tgtCards = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
 
                 if (tgtCards.isEmpty()) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
 
                 final Card card = ComputerUtilCard.getWorstAI(tgtCards);
                 sa.getTargets().add(card);
             }
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else {
             // no target Probably something like Graft
 
             if (mandatory) {
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
             final Card host = sa.getHostCard();
@@ -145,7 +150,7 @@ public class CountersMoveAi extends SpellAbilityAi {
             final List<Card> destCards = AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa);
 
             if (srcCards.isEmpty() || destCards.isEmpty()) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
 
             final Card src = srcCards.get(0);
@@ -153,21 +158,21 @@ public class CountersMoveAi extends SpellAbilityAi {
 
             // for such Trigger, do not move counter to another players creature
             if (!dest.getController().equals(ai)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (ComputerUtilCard.isUselessCreature(ai, dest)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (dest.hasSVar("EndOfTurnLeavePlay")) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             if (cType != null) {
                 if (!dest.canReceiveCounters(cType)) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 final int amount = calcAmount(sa, cType);
                 int a = src.getCounters(cType);
                 if (a < amount) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
 
                 final Card srcCopy = CardCopyService.getLKICopy(src);
@@ -181,27 +186,31 @@ public class CountersMoveAi extends SpellAbilityAi {
                 int newEval = ComputerUtilCard.evaluateCreature(srcCopy) + ComputerUtilCard.evaluateCreature(destCopy);
 
                 if (newEval < oldEval) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
                 }
 
                 // check for some specific AI preferences
                 if ("DontMoveCounterIfLethal".equals(sa.getParam("AILogic"))) {
-                    return !cType.is(CounterEnumType.P1P1) || src.getNetToughness() - src.getTempToughnessBoost() - 1 > 0;
+                    if  (!cType.is(CounterEnumType.P1P1) || src.getNetToughness() - src.getTempToughnessBoost() - 1 > 0) {
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                    } else {
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                    }
                 }
             }
             // no target
-            return true;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         if (sa.usesTargeting()) {
             sa.resetTargets();
             return moveTgtAI(ai, sa);
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     private static int calcAmount(final SpellAbility sa, final CounterType cType) {
@@ -226,7 +235,7 @@ public class CountersMoveAi extends SpellAbilityAi {
         return amount;
     }
 
-    private boolean moveTgtAI(final Player ai, final SpellAbility sa) {
+    private AiAbilityDecision moveTgtAI(final Player ai, final SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Game game = ai.getGame();
         final String type = sa.getParam("CounterType");
@@ -244,7 +253,7 @@ public class CountersMoveAi extends SpellAbilityAi {
 
             if (destCards.isEmpty()) {
                 // something went wrong
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
 
             final Card dest = destCards.get(0);
@@ -253,7 +262,7 @@ public class CountersMoveAi extends SpellAbilityAi {
             tgtCards.remove(dest);
 
             if (cType != null && !dest.canReceiveCounters(cType)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             // prefered logic for this: try to steal counter
@@ -285,7 +294,7 @@ public class CountersMoveAi extends SpellAbilityAi {
 
                 if (card != null) {
                     sa.getTargets().add(card);
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
 
             }
@@ -329,14 +338,14 @@ public class CountersMoveAi extends SpellAbilityAi {
 
                 if (card != null) {
                     sa.getTargets().add(card);
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
 
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         } else if (sa.getMaxTargets() == 2) {
             // TODO
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         } else {
             // SA uses target for Defined
             // Source => Targeted
@@ -344,12 +353,12 @@ public class CountersMoveAi extends SpellAbilityAi {
 
             if (srcCards.isEmpty()) {
                 // something went wrong
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
 
             final Card src = srcCards.get(0);
             if (cType != null && src.getCounters(cType) <= 0) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             Card lkiWithCounters = CardCopyService.getLKICopy(src);
@@ -402,29 +411,33 @@ public class CountersMoveAi extends SpellAbilityAi {
 
                     if (card != null) {
                         sa.getTargets().add(card);
-                        return true;
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                     }
                 }
                 final boolean isMandatoryTrigger = (sa.isTrigger() && !sa.isOptionalTrigger())
                         || (sa.getRootAbility().isTrigger() && !sa.getRootAbility().isOptionalTrigger());
                 if (!isMandatoryTrigger) {
                     // no good target
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
             }
 
             // move counter to opponents creature but only if you can not steal them
             // try to move to something useless or something that would leave play
-            List<Card> oppList = CardLists.filterControlledBy(tgtCards, ai.getOpponents());
-            if (!oppList.isEmpty()) {
-                List<Card> best = CardLists.filter(oppList, card -> {
+            boolean isNegative = ComputerUtil.isNegativeCounter(cType, src);
+            List<Card> filteredTgtList;
+            filteredTgtList = isNegative ? CardLists.filterControlledBy(tgtCards, ai.getOpponents()) :
+                CardLists.filterControlledBy(tgtCards, ai.getYourTeam());
+
+            if (!filteredTgtList.isEmpty()) {
+                List<Card> best = CardLists.filter(filteredTgtList, card -> {
                     // gain from useless
-                    if (!ComputerUtilCard.isUselessCreature(ai, card)) {
+                    if (isNegative && !ComputerUtilCard.isUselessCreature(ai, card)) {
                         return true;
                     }
 
                     // source would leave the game
-                    if (!card.hasSVar("EndOfTurnLeavePlay")) {
+                    if (isNegative && !card.hasSVar("EndOfTurnLeavePlay")) {
                         return true;
                     }
 
@@ -432,17 +445,17 @@ public class CountersMoveAi extends SpellAbilityAi {
                 });
 
                 if (best.isEmpty()) {
-                    best = oppList;
+                    best = filteredTgtList;
                 }
 
                 Card card = ComputerUtilCard.getBestCreatureAI(best);
 
                 if (card != null) {
                     sa.getTargets().add(card);
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
     }
 

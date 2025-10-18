@@ -1,0 +1,6 @@
+Name:Umbral Collar Zealot
+ManaCost:1 B
+Types:Creature Human Cleric
+PT:3/2
+A:AB$ Surveil | Cost$ Sac<1/Creature.Other;Artifact.Other/another creature or artifact> | Amount$ 1 | SpellDescription$ Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+Oracle:Sacrifice another creature or artifact: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)

@@ -1,0 +1,7 @@
+Name:Fungal Colossus
+ManaCost:6 G
+Types:Creature Fungus Beast
+PT:5/5
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {X} less to cast, where X is the number of differently named lands you control.
+SVar:X:Count$Valid Land.YouCtrl$DifferentCardNames
+Oracle:This spell costs {X} less to cast, where X is the number of differently named lands you control.

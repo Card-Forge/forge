@@ -66,13 +66,11 @@ import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
 import java.util.*;
+import java.util.concurrent.FutureTask;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
@@ -99,6 +97,7 @@ public class AiController {
     private int lastAttackAggression;
     private boolean useLivingEnd;
     private List<SpellAbility> skipped;
+    private boolean timeoutReached;
 
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
@@ -483,7 +482,7 @@ public class AiController {
 
             if (lands.size() >= Math.max(maxCmcInHand, 6)) {
                 // don't play MDFC land if other side is spell and enough lands are available
-                if (!c.isLand() || (c.isModal() && !c.getState(CardStateName.Modal).getType().isLand())) {
+                if (!c.isLand() || (c.isModal() && !c.getState(CardStateName.Backside).getType().isLand())) {
                     return false;
                 }
 
@@ -888,79 +887,18 @@ public class AiController {
     private AiPlayDecision canPlayAndPayForFace(final SpellAbility sa) {
         final Card host = sa.getHostCard();
 
-        // Check a predefined condition
-        if (sa.hasParam("AICheckSVar")) {
-            final String svarToCheck = sa.getParam("AICheckSVar");
-            String comparator = "GE";
-            int compareTo = 1;
-
-            if (sa.hasParam("AISVarCompare")) {
-                final String fullCmp = sa.getParam("AISVarCompare");
-                comparator = fullCmp.substring(0, 2);
-                final String strCmpTo = fullCmp.substring(2);
-                try {
-                    compareTo = Integer.parseInt(strCmpTo);
-                } catch (final Exception ignored) {
-                    compareTo = AbilityUtils.calculateAmount(host, host.getSVar(strCmpTo), sa);
-                }
-            }
-
-            int left = AbilityUtils.calculateAmount(host, svarToCheck, sa);
-            if (!Expressions.compare(left, comparator, compareTo)) {
-                return AiPlayDecision.AnotherTime;
-            }
+        if (sa.hasParam("AICheckSVar") && !aiShouldRun(sa, sa, host, null)) {
+            return AiPlayDecision.AnotherTime;
         }
 
-        int oldCMC = -1;
-        boolean xCost = sa.costHasX() || host.hasKeyword(Keyword.STRIVE) || sa.getApi() == ApiType.Charm;
-        if (!xCost) {
-            if (!ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
-                // for most costs, it's OK to check if they can be paid early in order to avoid running a heavy API check
-                // when the AI won't even be able to play the spell in the first place (even if it could afford it)
-                return AiPlayDecision.CantAfford;
-            }
-            // TODO check for Reduce too, e.g. Battlefield Thaumaturge could make it castable
-            if (!sa.getAllTargetChoices().isEmpty()) {
-                oldCMC = CostAdjustment.adjust(sa.getPayCosts(), sa, false).getTotalMana().getCMC();
-            }
-        }
-
-        AiPlayDecision canPlay = canPlaySa(sa); // this is the "heaviest" check, which also sets up targets, defines X, etc.
+        // this is the "heaviest" check, which also sets up targets, defines X, etc.
+        AiPlayDecision canPlay = canPlaySa(sa);
 
         if (canPlay != AiPlayDecision.WillPlay) {
             return canPlay;
         }
 
-        // Account for possible Ward after the spell is fully targeted
-        // TODO: ideally, this should be done while targeting, so that a different target can be preferred if the best
-        // one is warded and can't be paid for. (currently it will be stuck with the target until it could pay)
-        if (!sa.isSpell() || sa.isCounterableBy(null)) {
-            for (TargetChoices tc : sa.getAllTargetChoices()) {
-                for (Card tgt : tc.getTargetCards()) {
-                    // TODO some older cards don't use the keyword, so check for trigger instead
-                    if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(host.getController())) {
-                        Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
-                        if (wardCost.hasManaCost()) {
-                            xCost |= wardCost.getTotalMana().getCMC() > 0;
-                        }
-                        SpellAbilityAi topAI = new SpellAbilityAi() {};
-                        if (!topAI.willPayCosts(player, sa, wardCost, host)) {
-                            return AiPlayDecision.CostNotAcceptable;
-                        }
-                    }
-                }
-            }
-        }
-
-        // check if some target raised cost
-        if (!xCost && oldCMC > -1) {
-            int finalCMC = CostAdjustment.adjust(sa.getPayCosts(), sa, false).getTotalMana().getCMC();
-            if (finalCMC > oldCMC) {
-                xCost = true;
-            }
-        }
-
-        if (xCost && !ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
+        if (!ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
             // for dependent costs with X, e.g. Repeal, which require a valid target to be specified before a decision can be made
             // on whether the cost can be paid, this can only be checked late after canPlaySa has been run (or the AI will misplay)
             return AiPlayDecision.CantAfford;
@@ -968,13 +906,11 @@ public class AiController {
 
         // check if enough left (pass memory indirectly because we don't want to include those)
         Set<Card> tappedForMana = AiCardMemory.getMemorySet(player, MemorySet.PAYS_TAP_COST);
-        if (tappedForMana != null && tappedForMana.isEmpty() &&
+        if (tappedForMana != null && !tappedForMana.isEmpty() &&
                 !ComputerUtilCost.checkTapTypeCost(player, sa.getPayCosts(), host, sa, new CardCollection(tappedForMana))) {
             return AiPlayDecision.CantAfford;
         }
 
-        // if we got here, looks like we can play the final cost and we could properly set up and target the API and
-        // are willing to play the SA
         return AiPlayDecision.WillPlay;
     }
 
@@ -1017,7 +953,7 @@ public class AiController {
             Sentry.setExtra("Card", card.getName());
             Sentry.setExtra("SA", sa.toString());
 
-            boolean canPlay = SpellApiToAi.Converter.get(sa).canPlayAIWithSubs(player, sa);
+            boolean canPlay = SpellApiToAi.Converter.get(sa).canPlayWithSubs(player, sa).willingToPlay();
 
             // remove added extra
             Sentry.removeExtra("Card");
@@ -1395,9 +1331,9 @@ public class AiController {
         if (spell instanceof SpellApiBased) {
             boolean chance = false;
             if (withoutPayingManaCost) {
-                chance = SpellApiToAi.Converter.get(spell).doTriggerNoCostWithSubs(player, spell, mandatory);
+                chance = SpellApiToAi.Converter.get(spell).doTriggerNoCostWithSubs(player, spell, mandatory).willingToPlay();
             } else {
-                chance = SpellApiToAi.Converter.get(spell).doTriggerAI(player, spell, mandatory);
+                chance = SpellApiToAi.Converter.get(spell).doTrigger(player, spell, mandatory);
             }
             if (!chance) {
                 return AiPlayDecision.TargetingFailed;
@@ -1710,14 +1646,21 @@ public class AiController {
             Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
         }
 
-        final ExecutorService executor = Executors.newSingleThreadExecutor();
-        Future<SpellAbility> future = executor.submit(() -> {
+        // in case of infinite loop reset below would not be reached
+        timeoutReached = false;
+
+        FutureTask<SpellAbility> future = new FutureTask<>(() -> {
             //avoid ComputerUtil.aiLifeInDanger in loops as it slows down a lot.. call this outside loops will generally be fast...
             boolean isLifeInDanger = useLivingEnd && ComputerUtil.aiLifeInDanger(player, true, 0);
             for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
                 // Don't add Counterspells to the "normal" playcard lookups
                 if (skipCounter && sa.getApi() == ApiType.Counter) {
                     continue;
+                }
+
+                if (timeoutReached) {
+                    timeoutReached = false;
+                    break;
                 }
 
                 if (sa.getHostCard().hasKeyword(Keyword.STORM)
@@ -1789,11 +1732,21 @@ public class AiController {
             return null;
         });
 
-        // instead of computing all available concurrently just add a simple timeout depending on the user prefs
+        Thread t = new Thread(future);
+        t.start();
         try {
+            // instead of computing all available concurrently just add a simple timeout depending on the user prefs
             return future.get(game.getAITimeout(), TimeUnit.SECONDS);
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
-            future.cancel(true);
+            try {
+                t.stop();
+            } catch (UnsupportedOperationException ex) {
+                // Android and Java 20 dropped support to stop so sadly thread will keep running
+                timeoutReached = true;
+                future.cancel(true);
+                // TODO wait a few more seconds to try and exit at a safe point before letting the engine continue
+                // TODO mark some as skipped to increase chance to find something playable next priority
+            }
             return null;
         }
     }
@@ -1804,9 +1757,9 @@ public class AiController {
 
         for (int i = 0; i < numToExile; i++) {
             Card chosen = null;
-            for (final Card c : grave) { // Exile noncreatures first in
-                // case we can revive. Might wanna do some additional
-                // checking here for Flashback and the like.
+            for (final Card c : grave) {
+                // Exile noncreatures first in case we can revive
+                // Might wanna do some additional checking here for Flashback and the like
                 if (!c.isCreature()) {
                     chosen = c;
                     break;
@@ -1827,12 +1780,12 @@ public class AiController {
         return toExile;
     }
 
-    public boolean doTrigger(SpellAbility spell, boolean mandatory) {
-        if (spell instanceof WrappedAbility)
-            return doTrigger(((WrappedAbility) spell).getWrappedAbility(), mandatory);
-        if (spell.getApi() != null)
-            return SpellApiToAi.Converter.get(spell).doTriggerAI(player, spell, mandatory);
-        if (spell.getPayCosts() == Cost.Zero && !spell.usesTargeting()) {
+    public boolean doTrigger(SpellAbility sa, boolean mandatory) {
+        if (sa instanceof WrappedAbility)
+            return doTrigger(((WrappedAbility) sa).getWrappedAbility(), mandatory);
+        if (sa.getApi() != null)
+            return SpellApiToAi.Converter.get(sa).doTrigger(player, sa, mandatory);
+        if (sa.getPayCosts() == Cost.Zero && !sa.usesTargeting()) {
             // For non-converted triggers (such as Cumulative Upkeep) that don't have costs or targets to worry about
             return true;
         }
@@ -1845,14 +1798,9 @@ public class AiController {
      * @param sa the sa
      * @return true, if successful
      */
-    public final boolean aiShouldRun(final ReplacementEffect effect, final SpellAbility sa, GameEntity affected) {
-        Card hostCard = effect.getHostCard();
-        if (hostCard.hasAlternateState()) {
-            hostCard = game.getCardState(hostCard);
-        }
-
+    public final boolean aiShouldRun(final CardTraitBase effect, final SpellAbility sa, final Card host, final GameEntity affected) {
         if (effect.hasParam("AILogic") && effect.getParam("AILogic").equalsIgnoreCase("ProtectFriendly")) {
-            final Player controller = hostCard.getController();
+            final Player controller = host.getController();
             if (affected instanceof Player) {
                 return !((Player) affected).isOpponentOf(controller);
             }
@@ -1861,7 +1809,6 @@ public class AiController {
             }
         }
         if (effect.hasParam("AICheckSVar")) {
-            System.out.println("aiShouldRun?" + sa);
             final String svarToCheck = effect.getParam("AICheckSVar");
             String comparator = "GE";
             int compareTo = 1;
@@ -1874,9 +1821,9 @@ public class AiController {
                     compareTo = Integer.parseInt(strCmpTo);
                 } catch (final Exception ignored) {
                     if (sa == null) {
-                        compareTo = AbilityUtils.calculateAmount(hostCard, hostCard.getSVar(strCmpTo), effect);
+                        compareTo = AbilityUtils.calculateAmount(host, host.getSVar(strCmpTo), effect);
                     } else {
-                        compareTo = AbilityUtils.calculateAmount(hostCard, hostCard.getSVar(strCmpTo), sa);
+                        compareTo = AbilityUtils.calculateAmount(host, host.getSVar(strCmpTo), sa);
                     }
                 }
             }
@@ -1884,13 +1831,12 @@ public class AiController {
             int left = 0;
 
             if (sa == null) {
-                left = AbilityUtils.calculateAmount(hostCard, svarToCheck, effect);
+                left = AbilityUtils.calculateAmount(host, svarToCheck, effect);
             } else {
-                left = AbilityUtils.calculateAmount(hostCard, svarToCheck, sa);
+                left = AbilityUtils.calculateAmount(host, svarToCheck, sa);
             }
-            System.out.println("aiShouldRun?" + left + comparator + compareTo);
             return Expressions.compare(left, comparator, compareTo);
-        } else if (effect.hasParam("AICheckDredge")) {
+        } else if (effect.isKeyword(Keyword.DREDGE)) {
             return player.getCardsIn(ZoneType.Library).size() > 8 || player.isCardInPlay("Laboratory Maniac");
         } else return sa != null && doTrigger(sa, false);
     }

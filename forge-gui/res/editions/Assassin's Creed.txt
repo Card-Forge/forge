@@ -313,3 +313,15 @@ ScryfallCode=ACR
 305 L Mountain @Jeremy Paillotin
 306 R Royal Assassin @Wei Guan
 307 U Hidden Blade @Evyn Fong
+
+[tokens]
+2 c_3_2_shapeshifter_changeling @Filipe Pagliuso
+3 w_1_1_human_rogue @Elizabeth Peiró
+4 b_1_1_assassin_menace @Rimas Valeikis
+5 phobos @Daniel Correia
+6 c_a_treasure_sac @Xabi Gaztelua
+
+[other]
+1 copy @Miklós Ligeti
+7 emblem_the_capitoline_triad @Syd Mills
+8 cloaked @Allen Morris

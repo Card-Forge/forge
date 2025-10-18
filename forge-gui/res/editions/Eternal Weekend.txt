@@ -12,3 +12,5 @@ ScryfallCode=PEWK
 2023b R Dragon's Rage Channeler @Patrik Hell
 2024a M Tinker @Jason Rainville
 2024b R Crop Rotation @Samuele Bandini
+2025a R Tendrils of Agony @Chuck Lukacs
+2025b M Trinisphere @Steven Belledin

@@ -246,10 +246,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 int maAmount = ma.totalAmountOfManaGenerated(saPaidFor, true);
                 if (amountOfMana == -1) {
                     amountOfMana = maAmount;
-                } else {
-                    if (amountOfMana != maAmount) {
-                        guessAbilityWithRequiredColors = false;
-                    }
+                } else if (amountOfMana != maAmount) {
+                    guessAbilityWithRequiredColors = false;
                 }
 
                 abilitiesMap.put(ma.getView(), ma);
@@ -278,7 +276,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
             // If the card has any ability that tracks mana spent, skip express Mana choice
             if (saPaidFor.tracksManaSpent()) {
-                colorCanUse = ColorSet.ALL_COLORS.getColor();
+                colorCanUse = ColorSet.WUBRG.getColor();
                 guessAbilityWithRequiredColors = false;
             }
 
@@ -290,8 +288,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                     //avoid unnecessary prompt by pretending we need White
                     //for the sake of "Add one mana of any color" effects
                     colorNeeded = MagicColor.WHITE;
-                }
-                else {
+                } else {
                     final HashMap<SpellAbilityView, SpellAbility> colorMatches = new HashMap<>();
                     for (SpellAbility sa : abilitiesMap.values()) {
                         if (sa.isManaAbilityFor(saPaidFor, colorNeeded)) {

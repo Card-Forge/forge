@@ -1,0 +1,10 @@
+Name:Susurian Dirgecraft
+ManaCost:4 B
+Types:Artifact Spacecraft
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When this Spacecraft enters, each opponent sacrifices a nontoken creature of their choice.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Opponent | SacValid$ Creature.!token
+K:Station:7
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE7_CHARGE | AddType$ Creature | AddKeyword$ Flying | Description$ STATION 7+ Flying
+DeckHas:Ability$Sacrifice
+Oracle:When this Spacecraft enters, each opponent sacrifices a nontoken creature of their choice.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 7+.)\nSTATION 7+\nFlying

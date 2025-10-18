@@ -19,6 +19,7 @@ package forge.gamemodes.quest;
 
 import java.io.File;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
@@ -549,9 +550,9 @@ public class QuestController {
         if (ev instanceof GameEventMulligan) {
             GameEventMulligan mev = (GameEventMulligan) ev;
             // First mulligan is free
-            if (mev.player.getLobbyPlayer() == GamePlayerUtil.getGuiPlayer()
-                    && getAssets().hasItem(QuestItemType.SLEIGHT) && mev.player.getStats().getMulliganCount() < 7) {
-                mev.player.drawCard();
+            if (mev.player().getLobbyPlayer().equals(GamePlayerUtil.getGuiPlayer())
+                    && getAssets().hasItem(QuestItemType.SLEIGHT) && mev.player().getStats().getMulliganCount() < 7) {
+                mev.player().drawCard();
             }
         }
     }
@@ -620,15 +621,19 @@ public class QuestController {
     }
 
     public CardEdition getDefaultLandSet() {
-        List<String> availableEditionCodes = questFormat != null ? questFormat.getAllowedSetCodes() : Lists.newArrayList(FModel.getMagicDb().getEditions().getItemNames());
-        List<CardEdition> availableEditions = new ArrayList<>();
-
-        for (String s : availableEditionCodes) {
-            availableEditions.add(FModel.getMagicDb().getEditions().get(s));
-        }
+        List<CardEdition> availableEditions = getAvailableLandSets();
 
         CardEdition randomLandSet = CardEdition.Predicates.getRandomSetWithAllBasicLands(availableEditions);
         return randomLandSet == null ? FModel.getMagicDb().getEditions().get("ZEN") : randomLandSet;
+    }
+
+    public List<CardEdition> getAvailableLandSets() {
+        List<String> availableEditionCodes = questFormat != null ? questFormat.getAllowedSetCodes() : Lists.newArrayList(FModel.getMagicDb().getEditions().getItemNames());
+        CardEdition.Collection editions = FModel.getMagicDb().getEditions();
+        return availableEditionCodes.stream()
+                .map(editions::get)
+                .filter(CardEdition::hasBasicLands)
+                .collect(Collectors.toList());
     }
 
     public String getCurrentDeck() {

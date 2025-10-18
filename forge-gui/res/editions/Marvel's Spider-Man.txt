@@ -1,0 +1,428 @@
+[metadata]
+Code=SPM
+Date=2025-09-26
+Name=Marvel's Spider-Man
+Type=Expansion
+ScryfallCode=SPM
+DoublePick=WhenPodSizeIs4
+RecommendedPodSize=4
+#https://magic.wizards.com/en/news/feature/collecting-marvels-spider-man
+BoosterSlots=Common,Common-Borderless,Uncommon,RareMythic,Land,Wildcard,WildcardFoil
+Booster=6 Common, 1 Common-Borderless, 3 Uncommon, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 Land
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=30
+
+[Common]
+Base=Common:fromSheet("SPM cards")
+
+[Common-Borderless]
+Base=Common:fromSheet("SPM cards")
+Replace=.0416F fromSheet("SPM borderless")
+
+[Uncommon]
+Base=Uncommon:fromSheet("SPM cards")
+Replace=0.0517 Uncommon:fromSheet("SPM scene cards")
+
+[RareMythic]
+Base=Rare:fromSheet("SPM cards")
+Replace=.117F Mythic:fromSheet("SPM cards")
+Replace=.012F Rare:fromSheet("SPM webslinger")
+Replace=.004F Mythic:fromSheet("SPM webslinger")
+Replace=.021F Rare:fromSheet("SPM panel cards")
+Replace=.004F Mythic:fromSheet("SPM panel cards")
+Replace=.01F Rare:fromSheet("SPM scene cards")
+Replace=.0005F Mythic:fromSheet("SPM scene cards")
+
+[Wildcard]
+Base=Common:fromSheet("SPM cards")
+Replace=0.041F Uncommon:fromSheet("SPM cards")
+Replace=0.209F Rare:fromSheet("SPM cards")
+Replace=0.0029F Mythic:fromSheet("SPM cards")
+Replace=.0012F Rare:fromSheet("SPM webslinger")
+Replace=.0004F Mythic:fromSheet("SPM webslinger")
+Replace=.0021F Rare:fromSheet("SPM panel cards")
+Replace=.0004F Mythic:fromSheet("SPM panel cards")
+Replace=.007F Uncommon:fromSheet("SPM scene cards")
+Replace=.001F Rare:fromSheet("SPM scene cards")
+Replace=.00005F Mythic:fromSheet("SPM scene cards")
+
+[WildcardFoil]
+Base=Common:fromSheet("SPM cards")
+Replace=0.241F Uncommon:fromSheet("SPM cards")
+Replace=0.078F Rare:fromSheet("SPM cards")
+Replace=0.011F Mythic:fromSheet("SPM cards")
+Replace=.0012F Rare:fromSheet("SPM webslinger")
+Replace=.0004F Mythic:fromSheet("SPM webslinger")
+Replace=.0021F Rare:fromSheet("SPM panel cards")
+Replace=.0004F Mythic:fromSheet("SPM panel cards")
+Replace=.007F Uncommon:fromSheet("SPM scene cards")
+Replace=.001F Rare:fromSheet("SPM scene cards")
+Replace=.00005F Mythic:fromSheet("SPM scene cards")
+
+[Land]
+Base=fromSheet("SPM allied lands")
+Replace=0.125F fromSheet("SPM allied lands")+
+Replace=0.20F BasicLand:fromSheet("SPM full art")
+Replace=0.05F BasicLand:fromSheet("SPM full art")+
+Replace=0.20F BasicLand:fromSheet("SPM cards"):!fromSheet("SPM allied lands")
+Replace=0.05F BasicLand:fromSheet("SPM cards"):!fromSheet("SPM allied lands")
+
+[cards]
+1 M Anti-Venom, Horrifying Healer @Néstor Ossandón Leal
+2 R Arachne, Psionic Weaver @Steve Argyle
+3 U Aunt May @Randy Gallegos
+4 C City Pigeon @David Szabo
+5 U Costume Closet @Bastien Grivet
+6 C Daily Bugle Reporters @Zoltan Boros
+7 U Flash Thompson, Spider-Fan @Gal Or
+8 R Friendly Neighborhood @Pablo Mendoza
+9 R Origin of Spider-Man @Bill Sienkiewicz
+10 M Peter Parker @Thanh Tuấn
+11 R Rent Is Due @Gal Or
+12 C Selfless Police Captain @Aniekan Udofia
+13 U Silver Sable, Mercenary Leader @JB Casacop
+14 R Spectacular Spider-Man @Roberta Ingranata
+15 C Spectacular Tactics @Zoltan Boros
+16 C Spider-Man, Web-Slinger @Ryan Pancoast
+17 U Spider-UK @Allen Morris
+18 C Starling, Aerial Ally @Aniekan Udofia
+19 U Sudden Strike @Le Vuong
+20 C Thwip! @Lordigan
+21 C Web Up @David Palumbo
+22 U Web-Shooters @Javier Charro
+23 C Wild Pack Squad @John Tyler Christopher
+24 R With Great Power... @E. M. Gist
+25 C Amazing Acrobatics @Justyna Dura
+26 C Beetle, Legacy Criminal @Carlos Dattoli
+27 U Chameleon, Master of Disguise @Javier Charro
+28 R The Clone Saga @Bill Sienkiewicz
+29 C Doc Ock, Sinister Scientist @Piotr Dura
+30 C Doc Ock's Henchmen @Nathaniel Himawan
+31 U Flying Octobot @John Tyler Christopher
+32 R Hide on the Ceiling @Fariba Khamseh
+33 R Hydro-Man, Fluid Felon @Borja Pindado
+34 M Impostor Syndrome @Javier Charro
+35 R Lady Octopus, Inspired Inventor @Fariba Khamseh
+36 U Madame Web, Clairvoyant @Pavel Kolomeyets
+37 R Mysterio, Master of Illusion @Alexander Gering
+38 C Mysterio's Phantasm @Piotr Dura
+39 M Norman Osborn @Scott M. Fischer
+40 C Oscorp Research Team @Gal Or
+41 U Robotics Mastery @Domenico Cava
+42 U School Daze @Domenico Cava
+43 U Secret Identity @rk post
+44 U Spider-Byte, Web Warden @Thanh Tuấn
+45 C Spider-Man No More @Aniekan Udofia
+46 R Spider-Sense @Borja Pindado
+47 C Unstable Experiment @David Palumbo
+48 C Whoosh! @Nathaniel Himawan
+49 R Agent Venom @Kevin Sidharta
+50 U Alien Symbiosis @JB Casacop
+51 M Behold the Sinister Six! @Nathaniel Himawan
+52 R Black Cat, Cunning Thief @Alessandra Pisano
+53 C Common Crook @Ben Harvey
+54 R The Death of Gwen Stacy @Bill Sienkiewicz
+55 M Eddie Brock @Greg Staples
+56 M Gwenom, Remorseless @Lordigan
+57 C Inner Demons Gangsters @Nathaniel Himawan
+58 C Merciless Enforcers @Alex Horley-Orlandelli
+59 R Morlun, Devourer of Spiders @Randy Gallegos
+60 R Parker Luck @Raoul Vitale
+61 U Prison Break @John Tyler Christopher
+62 C Risky Research @Rafater
+63 U Sandman's Quicksand @Michele Giorgi
+64 U Scorpion, Seething Striker @Simon Dominic
+65 C Scorpion's Sting @Lee Woo-chul
+66 M The Soul Stone @Volkan Baǵa
+67 U Spider-Man Noir @Xabi Gaztelua
+68 U The Spot's Portal @Carlos Dattoli
+69 C Swarm, Being of Bees @Alex Horley-Orlandelli
+70 U Tombstone, Career Criminal @Bartek Fedyczak
+71 C Venom, Evil Unleashed @Jesper Ejsing
+72 C Venomized Cat @Jessica Fong
+73 C Venom's Hunger @Dave DeVries
+74 R Villainous Wrath @InHyuk Lee
+75 C Angry Rabble @Bartek Fedyczak
+76 R Electro, Assaulting Battery @Piotr Dura
+77 C Electro's Bolt @JB Casacop
+78 M Gwen Stacy @Victor Adame Minguez
+79 U Heroes' Hangout @Smirtouille
+80 U Hobgoblin, Mantled Marauder @Dave DeVries
+81 R J. Jonah Jameson @Paolo Rivera
+82 C Masked Meower @Narendra Bintara Adi
+83 R Maximum Carnage @Bill Sienkiewicz
+84 U Molten Man, Inferno Incarnate @Lie Setiawan
+85 U Raging Goblinoids @Filipe Pagliuso
+86 C Romantic Rendezvous @Nereida
+87 R Shadow of the Goblin @Pavel Kolomeyets
+88 C Shock @Piotr Dura
+89 U Shocker, Unshakable @Kevin Glint
+90 C Spider-Gwen, Free Spirit @Lie Setiawan
+91 C Spider-Islanders @Helge C. Balzer
+92 R Spider-Punk @Forrest Imel
+93 M Spider-Verse @Alexander Gering
+94 R Spinneret and Spiderling @Le Vuong
+95 C Stegron the Dinosaur Man @John Tyler Christopher
+96 U Superior Foes of Spider-Man @Ben Harvey
+97 C Taxi Driver @Néstor Ossandón Leal
+98 U Wisecrack @Wayne Reynolds
+99 U Damage Control Crew @Borja Pindado
+100 U Ezekiel Sims, Spider-Totem @Wei Guan
+101 C Grow Extra Arms @Kevin Sidharta
+102 C Guy in the Chair @Zoltan Boros
+103 C Kapow! @Jessica Fong
+104 C Kraven's Cats @Kevin Glint
+105 R Kraven's Last Hunt @Bill Sienkiewicz
+106 R Lizard, Connors's Curse @Steve Prescott
+107 C Lurking Lizards @Rafater
+108 M Miles Morales @LA Draws
+109 U Pictures of Spider-Man @Rafater
+110 C Professional Wrestler @Kevin Sidharta
+111 R Radioactive Spider @Pavel Kolomeyets
+112 R Sandman, Shifting Scoundrel @Bartek Fedyczak
+113 C Scout the City @Rafater
+114 R Spider-Ham, Peter Porker @Filipe Pagliuso
+115 C Spider-Man, Brooklyn Visionary @Aniekan Udofia
+116 C Spider-Rex, Daring Dino @Narendra Bintara Adi
+117 U Spiders-Man, Heroic Horde @Lars Grant-West
+118 R Strength of Will @Ryan Pancoast
+119 U Supportive Parents @Kim Sokol
+120 U Terrific Team-Up @InHyuk Lee
+121 U Wall Crawl @Alexander Gering
+122 M Web of Life and Destiny @Jonas De Ro
+123 R Araña, Heart of the Spider @Kevin Glint
+124 R Biorganic Carapace @David Álvarez
+125 R Carnage, Crimson Chaos @Lordigan
+126 R Cheering Crowd @Kim Sokol
+127 M Cosmic Spider-Man @Zoltan Boros
+128 M Doctor Octopus, Master Planner @Xabi Gaztelua
+129 C Gallant Citizen @Allen Morris
+130 U Green Goblin, Revenant @Chris Rahn
+131 R Jackal, Genius Geneticist @Pavel Kolomeyets
+132 U Kraven, Proud Predator @Alexander Mokhov
+133 R Kraven the Hunter @Greg Staples
+134 R Mary Jane Watson @Steve Argyle
+135 M Mister Negative @Thanh Tuấn
+136 C Mob Lookout @David Palumbo
+137 U Morbius the Living Vampire @Borja Pindado
+138 U Prowler, Clawed Thief @Anthony Devine
+139 C Pumpkin Bombardment @Leon Tukker
+140 U Rhino, Barreling Brute @Filipe Pagliuso
+141 U Rhino's Rampage @Nino Is
+142 R Scarlet Spider, Ben Reilly @Javier Charro
+143 U Scarlet Spider, Kaine @Forrest Imel
+144 U Shriek, Treblemaker @Borja Pindado
+145 R Silk, Web Weaver @Carissa Susilo
+146 C Skyward Spider @Bachzim
+147 U SP//dr, Piloted by Peni @Toni Infante
+148 C Spider Manifestation @Helge C. Balzer
+149 U Spider-Girl, Legacy Hero @Lixin Yin
+150 R Spider-Man 2099 @Toni Infante
+151 U Spider-Man India @Lie Setiawan
+152 R Spider-Woman, Stunning Savior @Justyna Dura
+153 R The Spot, Living Portal @Bastien Grivet
+154 U Sun-Spider, Nimble Webber @Justyna Dura
+155 R Superior Spider-Man @Carlos Dattoli
+156 R Symbiote Spider-Man @Paolo Rivera
+157 R Ultimate Green Goblin @Jesper Ejsing
+158 U Vulture, Scheming Scavenger @Kevin Sidharta
+159 U Web-Warriors @Thanh Tuấn
+160 U Wraith, Vicious Vigilante @Nereida
+161 C Bagel and Schmear @Javier Charro
+162 R Doc Ock's Tentacles @David Álvarez
+163 C Eerie Gravestone @Lordigan
+164 C Hot Dog Cart @David Álvarez
+165 R Interdimensional Web Watch @Toni Infante
+166 R Iron Spider, Stark Upgrade @Kevin Glint
+167 U Living Brain, Mechanical Marvel @Nathaniel Himawan
+168 C Mechanical Mobster @David Szabo
+169 C News Helicopter @Lee Woo-chul
+170 C Passenger Ferry @Leon Tukker
+171 R Peter Parker's Camera @Lixin Yin
+172 R Rocket-Powered Goblin Glider @Pavel Kolomeyets
+173 C Spider-Bot @Carlos Dattoli
+174 U Spider-Mobile @Bastien Grivet
+175 U Spider-Slayer, Hatred Honed @David Álvarez
+176 U Spider-Suit @Alex Horley-Orlandelli
+177 C Steel Wrecking Ball @Michele Giorgi
+178 C Subway Train @Jonas De Ro
+179 U Daily Bugle Building @David Álvarez
+180 R Multiversal Passage @Pablo Mendoza
+181 L Ominous Asylum @Pavel Kolomeyets
+182 R Oscorp Industries @Bastien Grivet
+183 L Savage Mansion @David Álvarez
+184 L Sinister Hideout @Pavel Kolomeyets
+185 L Suburban Sanctuary @David Frasheski
+186 L University Campus @David Álvarez
+187 R Urban Retreat @Jonas De Ro
+188 C Vibrant Cityscape @Wei Guan
+194 L Plains @Jonas De Ro
+195 L Island @Jonas De Ro
+196 L Swamp @Jonas De Ro
+197 L Mountain @Jonas De Ro
+198 L Forest @Jonas De Ro
+
+[full art]
+189 L Plains @Sarah Finnigan
+190 L Island @Sarah Finnigan
+191 L Swamp @Sarah Finnigan
+192 L Mountain @Sarah Finnigan
+193 L Forest @Sarah Finnigan
+
+[borderless]
+199 U SP//dr, Piloted by Peni @Jim Cheung & Jay David Ramos
+200 M Miles Morales @Jim Cheung & Jay David Ramos
+201 R Spider-Ham, Peter Porker @Jim Cheung & Jay David Ramos
+202 M Gwen Stacy @Jim Cheung & Jay David Ramos
+203 U Web-Warriors @Jim Cheung & Jay David Ramos
+204 U Spider-Man Noir @Jim Cheung & Jay David Ramos
+205 R Spider-Man 2099 @Jim Cheung & Jay David Ramos
+206 R Multiversal Passage @Jim Cheung & Jay David Ramos
+207 R Spider-Punk @Jim Cheung & Jay David Ramos
+208 M Peter Parker @Lucas Werneck
+209 M Gwen Stacy @Roberta Ingranata
+210 R Spider-Punk @Chris Bachalo
+211 M Miles Morales @Ivan Shavrin
+212 R Radioactive Spider @Tyler Walpole
+213 R Araña, Heart of the Spider @Logan Lubera
+214 R Scarlet Spider, Ben Reilly @Logan Lubera
+215 R Silk, Web Weaver @Veronica Fish
+216 R Spider-Man 2099 @Jim Cheung & Jay David Ramos
+217 R Symbiote Spider-Man @Tyler Walpole
+218 R Origin of Spider-Man @Jim Cheung & Jay David Ramos
+219 R The Clone Saga @Logan Lubera
+220 M Norman Osborn @Steve Ellis
+221 M Behold the Sinister Six! @Leinil Francis Yu & Sunny Gho
+222 R Black Cat, Cunning Thief @Veronica Fish
+223 R The Death of Gwen Stacy @Nicola Scott
+224 M Eddie Brock @Logan Lubera
+225 R Maximum Carnage @Jim Cheung & Jay David Ramos
+226 R Kraven's Last Hunt @Leinil Francis Yu & Sunny Gho
+227 R Carnage, Crimson Chaos @Leinil Francis Yu & Sunny Gho
+228 M Doctor Octopus, Master Planner @Jim Cheung & Jay David Ramos
+229 R Mary Jane Watson @Roberta Ingranata
+230 R Spider-Woman, Stunning Savior @Roberta Ingranata
+231 R The Spot, Living Portal @Tyler Walpole
+232 M Peter Parker @Jack Kirby & Steve Ditko
+233 M Eddie Brock @Todd McFarlane & Bob Sharen
+234 M Miles Morales @Sara Pichelli & Justin Ponsor
+242 M The Soul Stone @Madeline Boni
+
+[etched]
+235 R Spectacular Spider-Man @Roberta Ingranata
+236 R Spectacular Spider-Man @Roberta Ingranata
+237 R Spectacular Spider-Man @Roberta Ingranata
+238 R Spectacular Spider-Man @Roberta Ingranata
+239 R Spectacular Spider-Man @Roberta Ingranata
+240 R Spectacular Spider-Man @Roberta Ingranata
+241 R Spectacular Spider-Man @Roberta Ingranata
+
+[extended art]
+243 M The Soul Stone @Leinil Francis Yu & Sunny Gho
+244 M Anti-Venom, Horrifying Healer @Néstor Ossandón Leal
+245 R Arachne, Psionic Weaver @Steve Argyle
+246 R Friendly Neighborhood @Pablo Mendoza
+247 R Rent Is Due @Gal Or
+248 R With Great Power... @E. M. Gist
+249 R Hide on the Ceiling @Fariba Khamseh
+250 R Hydro-Man, Fluid Felon @Borja Pindado
+251 M Impostor Syndrome @Javier Charro
+252 R Lady Octopus, Inspired Inventor @Fariba Khamseh
+253 R Mysterio, Master of Illusion @Alexander Gering
+254 R Spider-Sense @Borja Pindado
+255 R Agent Venom @Kevin Sidharta
+256 M Gwenom, Remorseless @Lordigan
+257 R Morlun, Devourer of Spiders @Randy Gallegos
+258 R Parker Luck @Raoul Vitale
+259 R Villainous Wrath @InHyuk Lee
+260 R Electro, Assaulting Battery @Piotr Dura
+261 R J. Jonah Jameson @Paolo Rivera
+262 R Shadow of the Goblin @Pavel Kolomeyets
+263 M Spider-Verse @Alexander Gering
+264 R Spinneret and Spiderling @Le Vuong
+265 R Lizard, Connors's Curse @Steve Prescott
+266 R Sandman, Shifting Scoundrel @Bartek Fedyczak
+267 R Strength of Will @Ryan Pancoast
+268 M Web of Life and Destiny @Jonas De Ro
+269 R Biorganic Carapace @David Álvarez
+270 R Cheering Crowd @Kim Sokol
+271 M Cosmic Spider-Man @Zoltan Boros
+272 R Jackal, Genius Geneticist @Pavel Kolomeyets
+273 R Kraven the Hunter @Greg Staples
+274 M Mister Negative @Thanh Tuấn
+275 R Superior Spider-Man @Carlos Dattoli
+276 R Ultimate Green Goblin @Jesper Ejsing
+277 R Doc Ock's Tentacles @David Álvarez
+278 R Interdimensional Web Watch @Toni Infante
+279 R Iron Spider, Stark Upgrade @Kevin Glint
+280 R Peter Parker's Camera @Lixin Yin
+281 R Rocket-Powered Goblin Glider @Pavel Kolomeyets
+282 R Oscorp Industries @Bastien Grivet
+283 R Urban Retreat @Jonas De Ro
+
+[promo]
+284 R Spider-Sense @David Álvarez
+285 R Radioactive Spider @Toni Infante
+286 M Gwenom, Remorseless @Jesper Ejsing
+
+[allied lands]
+1 Ominous Asylum|SPM
+1 Savage Mansion|SPM
+1 Sinister Hideout|SPM
+1 Suburban Sanctuary|SPM
+1 University Campus|SPM
+
+[scene cards]
+1 SP//dr, Piloted by Peni|SPM|[199]
+1 Miles Morales|SPM|[200]
+1 Spider-Ham, Peter Porker|SPM|[201]
+1 Gwen Stacy|SPM|[202]
+1 Web-Warriors|SPM|[203]
+1 Spider-Man Noir|SPM|[204]
+1 Spider-Man 2099|SPM|[205]
+1 Multiversal Passage|SPM|[206]
+1 Spider-Punk|SPM|[207]
+
+[webslinger]
+1 Peter Parker|SPM|[208]
+1 Gwen Stacy|SPM|[209]
+1 Spider-Punk|SPM|[210]
+1 Miles Morales|SPM|[211]
+1 Radioactive Spider|SPM|[212]
+1 Araña, Heart of the Spider|SPM|[213]
+1 Scarlet Spider, Ben Reilly|SPM|[214]
+1 Silk, Web Weaver|SPM|[215]
+1 Spider-Man 2099|SPM|[216]
+1 Symbiote Spider-Man|SPM|[217]
+
+[panel cards]
+1 Origin of Spider-Man|SPM|[218]
+1 The Clone Saga|SPM|[219]
+1 Norman Osborn|SPM|[220]
+1 Behold the Sinister Six!|SPM|[221]
+1 Black Cat, Cunning Thief|SPM|[222]
+1 The Death of Gwen Stacy|SPM|[223]
+1 Eddie Brock|SPM|[224]
+1 Maximum Carnage|SPM|[225]
+1 Kraven's Last Hunt|SPM|[226]
+1 Carnage, Crimson Chaos|SPM|[227]
+1 Doctor Octopus, Master Planner|SPM|[228]
+1 Mary Jane Watson|SPM|[229]
+1 Spider-Woman, Stunning Savior|SPM|[230]
+1 The Spot, Living Portal|SPM|[231]
+
+[classic comic]
+1 Peter Parker|SPM|[232]
+1 Eddie Brock|SPM|[233]
+1 Miles Morales|SPM|[234]
+
+[tokens]
+2 u_3_3_illusion_villain @Anthony Devine
+3 g_2_1_spider_reach @Domenico Cava
+4 gw_1_1_human_citizen @Bartek Fedyczak
+5 c_a_food_sac @David Szabo
+6 c_1_1_a_robot_flying @Kevin Glint
+7 c_a_treasure_sac @Pablo Mendoza
+
+[other]
+1 copy @Javier Charro

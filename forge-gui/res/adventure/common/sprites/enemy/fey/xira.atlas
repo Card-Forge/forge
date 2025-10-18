@@ -1,11 +1,20 @@
 xira.png
-size: 63,53
+size: 64,32
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none          
 Avatar
-  xy: 14,4
-  size: 32,32
-Idle 
-  xy: 3,4
-  size: 56, 46
+  xy: 0, 0
+  size: 16, 16
+Idle
+  xy: 0, 16
+  size: 16, 16
+Idle
+  xy: 16, 16
+  size: 16, 16
+Idle
+  xy: 32, 16
+  size: 16, 16
+Idle
+  xy: 48, 16
+  size: 16, 16

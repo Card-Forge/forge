@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
@@ -19,6 +20,7 @@ import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.localinstance.skin.FSkinProp;
 import forge.menu.FMenuBar;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
@@ -38,21 +40,31 @@ public class VPlayerPanel extends FContainer {
     private static final FSkinFont LIFE_FONT_ALT = FSkinFont.get(22);
     private static final FSkinFont INFO_FONT = FSkinFont.get(12);
     private static final FSkinFont INFO2_FONT = FSkinFont.get(14);
+
     private static FSkinColor getInfoForeColor() {
         if (Forge.isMobileAdventureMode)
             return FSkinColor.get(Colors.ADV_CLR_TEXT);
         return FSkinColor.get(Colors.CLR_TEXT);
     }
+
     private static FSkinColor getDisplayAreaBackColor() {
         if (Forge.isMobileAdventureMode)
             return FSkinColor.get(Colors.ADV_CLR_INACTIVE).alphaColor(0.5f);
         return FSkinColor.get(Colors.CLR_INACTIVE).alphaColor(0.5f);
     }
+
+    private static FSkinColor getAltDisplayAreaBackColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_PHASE_INACTIVE_ENABLED).alphaColor(0.3f);
+        return FSkinColor.get(Colors.CLR_PHASE_INACTIVE_ENABLED).alphaColor(0.3f);
+    }
+
     private static FSkinColor getDeliriumHighlight() {
         if (Forge.isMobileAdventureMode)
             return FSkinColor.get(Colors.ADV_CLR_PHASE_ACTIVE_ENABLED).alphaColor(0.5f);
         return FSkinColor.get(Colors.CLR_PHASE_ACTIVE_ENABLED).alphaColor(0.5f);
     }
+
     private static final float INFO_TAB_PADDING_X = Utils.scale(2);
     private static final float INFO_TAB_PADDING_Y = Utils.scale(2);
 
@@ -79,11 +91,13 @@ public class VPlayerPanel extends FContainer {
     private boolean forMultiPlayer = false;
     public int adjustHeight = 1;
     private int selected = 0;
+    private boolean isBottomPlayer = false;
+
     public VPlayerPanel(PlayerView player0, boolean showHand, int playerCount) {
         player = player0;
         phaseIndicator = add(new VPhaseIndicator());
 
-        if(playerCount > 2){
+        if (playerCount > 2) {
             forMultiPlayer = true;
             avatarHeight *= 0.5f;
             //displayAreaHeightFactor *= 0.7f;
@@ -116,6 +130,10 @@ public class VPlayerPanel extends FContainer {
         return player;
     }
 
+    public void setBottomPlayer(boolean val) {
+        isBottomPlayer = val;
+    }
+
     public void addZoneDisplay(ZoneType zoneType) {
         VZoneDisplay zoneDisplay = add(new VZoneDisplay(player, zoneType));
         InfoTabZone zoneTab = add(new InfoTabZone(zoneDisplay, zoneType));
@@ -123,23 +141,8 @@ public class VPlayerPanel extends FContainer {
         tabs.add(zoneTab);
     }
 
-    public static FSkinImage iconFromZone(ZoneType zoneType) {
-        switch (zoneType) {
-            case Hand: return Forge.hdbuttons ? FSkinImage.HDHAND : FSkinImage.HAND;
-            case Library: return Forge.hdbuttons ? FSkinImage.HDLIBRARY : FSkinImage.LIBRARY;
-            case Graveyard: return Forge.hdbuttons ? FSkinImage.HDGRAVEYARD : FSkinImage.GRAVEYARD;
-            case Exile: return Forge.hdbuttons ? FSkinImage.HDEXILE : FSkinImage.EXILE;
-            case Sideboard: return Forge.hdbuttons ? FSkinImage.HDSIDEBOARD :FSkinImage.SIDEBOARD;
-            case Flashback: return Forge.hdbuttons ? FSkinImage.HDFLASHBACK :FSkinImage.FLASHBACK;
-            case Command: return FSkinImage.COMMAND;
-            case PlanarDeck: return FSkinImage.PLANAR;
-            case SchemeDeck: return FSkinImage.SCHEME;
-            case AttractionDeck: return FSkinImage.ATTRACTION;
-            case ContraptionDeck: return FSkinImage.CONTRAPTION;
-            case Ante: return FSkinImage.ANTE;
-            case Junkyard: return FSkinImage.JUNKYARD;
-            default: return FSkinImage.HDLIBRARY;
-        }
+    public static FSkinImageInterface iconFromZone(ZoneType zoneType) {
+        return FSkin.getImages().get(FSkinProp.iconFromZone(zoneType, Forge.hdbuttons));
     }
 
     public Iterable<InfoTab> getTabs() {
@@ -151,12 +154,12 @@ public class VPlayerPanel extends FContainer {
     }
 
     public void resetZoneTabs() {
-        for(InfoTab tab : tabs)
+        for (InfoTab tab : tabs)
             tab.reset();
     }
 
     public void setSelectedZone(ZoneType zoneType) {
-        if(zoneTabs.containsKey(zoneType))
+        if (zoneTabs.containsKey(zoneType))
             setSelectedTab(zoneTabs.get(zoneType));
         else {
             extraTab.setActiveZone(zoneType);
@@ -189,6 +192,7 @@ public class VPlayerPanel extends FContainer {
             MatchController.getView().revalidate();
         }
     }
+
     public void setNextSelectedTab(boolean change) {
         if (change) {
             if (selectedTab != null) {
@@ -207,13 +211,13 @@ public class VPlayerPanel extends FContainer {
         int numExtraTabs = extraTab.displayAreas.size();
         if (selected < 0 || selected >= numTabs + numExtraTabs)
             selected = 0;
-        if(selected >= numTabs) {
+        if (selected >= numTabs) {
             extraTab.setActiveZoneByIndex(selected - numTabs);
             setSelectedTab(extraTab);
-        }
-        else
+        } else
             setSelectedTab(tabs.get(selected));
     }
+
     public void closeSelectedTab() {
         if (selectedTab != null) {
             selectedTab.setDisplayVisible(false);
@@ -234,6 +238,7 @@ public class VPlayerPanel extends FContainer {
     public boolean isFlipped() {
         return field.isFlipped();
     }
+
     public void setFlipped(boolean flipped0) {
         field.setFlipped(flipped0);
     }
@@ -254,9 +259,11 @@ public class VPlayerPanel extends FContainer {
     public VField getField() {
         return field;
     }
+
     public VField.FieldRow getSelectedRow() {
         return selectedRow;
     }
+
     public void switchRow() {
         if (selectedRow == field.getRow1())
             selectedRow = field.getRow2();
@@ -288,30 +295,24 @@ public class VPlayerPanel extends FContainer {
         tabManaPool.update();
     }
 
+    @SuppressWarnings("incomplete-switch")
     public void updateZone(ZoneType zoneType) {
-        if (zoneType == ZoneType.Battlefield ) {
+        if (zoneType == ZoneType.Battlefield) {
             field.update(true);
-        }
-        else if (zoneType == ZoneType.Command) {
+        } else if (zoneType == ZoneType.Command) {
             commandZone.update();
-        }
-        else {
-            if(zoneTabs.containsKey(zoneType))
+            if (selectedTab != null && Forge.isHorizontalTabLayout())
+                updateTabLayout(initW, initH);
+        } else {
+            if (zoneTabs.containsKey(zoneType))
                 zoneTabs.get(zoneType).update();
-            else if(EXTRA_ZONES.contains(zoneType)) {
+            else if (EXTRA_ZONES.contains(zoneType)) {
                 extraTab.update(zoneType);
             }
 
             //update flashback zone when graveyard, library, exile, or stack zones updated
             switch (zoneType) {
-            case Graveyard:
-            case Library:
-            case Exile:
-            case Stack:
-                zoneTabs.get(ZoneType.Flashback).update();
-                break;
-            default:
-                break;
+                case Graveyard, Library, Exile, Stack -> zoneTabs.get(ZoneType.Flashback).update();
             }
         }
     }
@@ -327,7 +328,7 @@ public class VPlayerPanel extends FContainer {
         float x = avatarHeight;
         float w = width - avatarHeight;
         float indicatorScale = 1f;
-        if(avatarHeight<VAvatar.HEIGHT){
+        if (avatarHeight < VAvatar.HEIGHT) {
             indicatorScale = 0.6f;
         }
         float h = phaseIndicator.getPreferredHeight(w) * indicatorScale;
@@ -366,8 +367,7 @@ public class VPlayerPanel extends FContainer {
             commandZone.setBounds(width - commandZoneWidth, y - commandZoneHeight, commandZoneWidth, commandZoneHeight);
 
             field.setCommandZoneWidth(commandZoneWidth + 1); //ensure second row of field accounts for width of command zone and its border
-        }
-        else {
+        } else {
             field.setCommandZoneWidth(0);
         }
 
@@ -383,18 +383,23 @@ public class VPlayerPanel extends FContainer {
         field.setFieldModifier(0);
     }
 
+    private float initW, initH, commandZoneWidth, commandZoneCount, avatarWidth, prefWidth;
+    private final float mod = 2.4f;
+
     private void doLandscapeLayout(float width, float height) {
+        initW = width;
+        initH = height;
         float x = 0;
         float y = 0;
         float yAlt = 0;
-        float avatarWidth = Forge.altZoneTabs ? avatar.getWidth() : 0;
+        avatarWidth = Forge.altZoneTabs ? avatar.getWidth() : 0;
         avatar.setPosition(x, y);
         y += avatar.getHeight();
 
         lblLife.setBounds(x, (Forge.altPlayerLayout && !Forge.altZoneTabs) ? 0 : y, avatar.getWidth(), (Forge.altPlayerLayout && !Forge.altZoneTabs) ? INFO_FONT.getLineHeight() : Forge.altZoneTabs ? LIFE_FONT_ALT.getLineHeight() : LIFE_FONT.getLineHeight());
         if (Forge.altPlayerLayout && !Forge.altZoneTabs) {
             if (adjustHeight > 2)
-                y += INFO_FONT.getLineHeight()/2;
+                y += INFO_FONT.getLineHeight() / 2;
         } else
             y += lblLife.getHeight();
 
@@ -412,12 +417,16 @@ public class VPlayerPanel extends FContainer {
                     tab.setBounds(x, y, infoTabWidth, infoTabHeight);
                     y += infoTabHeight;
                 } else {
-                    tab.setBounds(x+width-avatarWidth, yAlt, avatarWidth, infoTabHeightAlt);
+                    tab.setBounds(x + width - avatarWidth, yAlt, avatarWidth, infoTabHeightAlt);
                     yAlt += infoTabHeightAlt;
                 }
             }
         }
-        x = avatar.getRight();
+        updateTabLayout(width, height);
+    }
+
+    private void updateTabLayout(float width, float height) {
+        float x = avatar.getRight();
         phaseIndicator.resetFont();
         phaseIndicator.setBounds(x, 0, avatar.getWidth() * 0.6f, height);
         x += phaseIndicator.getWidth();
@@ -429,38 +438,77 @@ public class VPlayerPanel extends FContainer {
         }
 
         //account for command zone if needed
-        int commandZoneCount = commandZone.getCount();
+        commandZoneWidth = 0f;
+        commandZoneCount = commandZone.getCount();
         if (commandZoneCount > 0) {
             float commandZoneHeight = height / 2;
-            float commandZoneWidth = Math.min(commandZoneCount, 2) * commandZone.getCardWidth(commandZoneHeight);
-            commandZone.setBounds(x + fieldWidth - commandZoneWidth, height - commandZoneHeight, commandZoneWidth, commandZoneHeight);
+            float minCommandCards = Forge.isHorizontalTabLayout() ? 5 : 2;
+            commandZoneWidth = Math.min(commandZoneCount, minCommandCards) * commandZone.getCardWidth(commandZoneHeight);
+            float x2 = x + fieldWidth - commandZoneWidth;
+            float y2 = height - commandZoneHeight;
+            if (Forge.isHorizontalTabLayout()) {
+                x2 = width - avatarWidth - commandZoneWidth;
+                y2 = 0;
+            }
+            commandZone.setBounds(x2, y2, commandZoneWidth, commandZoneHeight);
             if (isFlipped()) { //flip across x-axis if needed
                 commandZone.setTop(height - commandZone.getBottom());
             }
 
             field.setCommandZoneWidth(commandZoneWidth + 1); //ensure second row of field accounts for width of command zone and its border
-        }
-        else {
+        } else {
             field.setCommandZoneWidth(0);
         }
+        prefWidth = width / mod;
+        if (Forge.isHorizontalTabLayout()) {
+            field.setBounds(x, 0, width - avatarWidth, height);
+            field.getRow1().setWidth(width - (commandZoneCount > 0 ? commandZone.getWidth() + (avatarWidth * commandZoneCount) : avatarWidth));
+            field.getRow2().setWidth(width - (avatarWidth / 4f) - (selectedTab == null ? 0 : selectedTab.getIdealWidth(prefWidth) + 1) - avatarWidth * mod);
+        } else
+            field.setBounds(x, 0, fieldWidth, height);
 
-        field.setBounds(x, 0, fieldWidth, height);
-
-        x = width - displayAreaWidth-avatarWidth;
+        x = width - displayAreaWidth - avatarWidth;
         for (InfoTab tab : tabs) {
-            tab.setDisplayBounds(x, 0, displayAreaWidth, height);
+            if (Forge.isHorizontalTabLayout()) {
+                float w = tab.getIdealWidth(prefWidth);
+                float h = height / 2f;
+                tab.setDisplayBounds(width - w - avatarWidth, isBottomPlayer ? h : 0, w, h);
+            } else {
+                tab.setDisplayBounds(x, 0, displayAreaWidth, height);
+            }
         }
 
-        if (!Forge.altZoneTabs)
+        if (!Forge.altZoneTabs) {
             field.setFieldModifier(0);
-        else
-            field.setFieldModifier(avatarWidth/16);
+        } else {
+            if (!"Horizontal".equalsIgnoreCase(Forge.altZoneTabMode))
+                field.setFieldModifier(avatarWidth / 16);
+        }
+    }
+
+    @Override
+    protected void drawOverlay(Graphics g) {
+        if (Forge.isHorizontalTabLayout()) {
+            InfoTab infoTab = selectedTab;
+            if (infoTab != null) {
+                VDisplayArea selectedDisplayArea = infoTab.getDisplayArea();
+                if (selectedDisplayArea != null && selectedDisplayArea.getCount() > 0) {
+                    float scale = avatarWidth / 2f;
+                    float x = selectedDisplayArea.getLeft();
+                    float y = selectedDisplayArea.getBottom() - scale;
+                    g.fillRect(getAltDisplayAreaBackColor(), x, y, scale, scale);
+                    infoTab.icon.draw(g, x, y, scale, scale);
+                }
+            }
+        }
+        super.drawOverlay(g);
     }
 
     @Override
     public void drawBackground(Graphics g) {
         float y;
         InfoTab infoTab = selectedTab;
+        float pad = Forge.isHorizontalTabLayout() ? avatarWidth / 16f : 0f;
         if (infoTab != null) { //draw background and border for selected zone if needed
             VDisplayArea selectedDisplayArea = infoTab.getDisplayArea();
             float x = selectedDisplayArea == null ? 0 : selectedDisplayArea.getLeft();
@@ -468,12 +516,13 @@ public class VPlayerPanel extends FContainer {
             float top = selectedDisplayArea == null ? 0 : selectedDisplayArea.getTop();
             float h = selectedDisplayArea == null ? 0 : selectedDisplayArea.getHeight();
             float bottom = selectedDisplayArea == null ? 0 : selectedDisplayArea.getBottom();
-            g.fillRect(getDisplayAreaBackColor(), x, top, w, h);
+            g.fillRect(Forge.isHorizontalTabLayout() ? getAltDisplayAreaBackColor() : getDisplayAreaBackColor(), x - pad, top, w + pad, h + pad);
+            if (Forge.isHorizontalTabLayout())
+                g.drawLine(1, MatchScreen.getBorderColor(), x, isFlipped() ? bottom : top, x + w, isFlipped() ? bottom : top);
 
             if (Forge.isLandscapeMode()) {
                 g.drawLine(1, MatchScreen.getBorderColor(), x, top, x, bottom);
-            }
-            else {
+            } else {
                 y = isFlipped() ? top + 1 : bottom;
                 //don't know why infotab gets null here, either way don't crash the gui..
                 float left = infoTab == null ? 0 : infoTab.getLeft();
@@ -487,6 +536,8 @@ public class VPlayerPanel extends FContainer {
             float x = commandZone.getLeft();
             y = commandZone.getTop();
             g.drawLine(1, MatchScreen.getBorderColor(), x, y, x, y + commandZone.getHeight());
+            /*if (Forge.isHorizontalTabLayout())
+                g.fillRect(getAltDisplayAreaBackColor(), x - pad, y, commandZoneWidth + pad, commandZone.getHeight() + pad);*/
             if (isFlipped()) {
                 y += commandZone.getHeight();
             }
@@ -499,7 +550,7 @@ public class VPlayerPanel extends FContainer {
         ArrayList<FScrollPane> out = new ArrayList<>();
         out.add(field.getRow1());
         out.add(field.getRow2());
-        for(InfoTabZone tab : zoneTabs.values())
+        for (InfoTabZone tab : zoneTabs.values())
             out.add(tab.displayArea);
         out.add(commandZone);
         out.addAll(extraTab.displayAreas.values());
@@ -522,7 +573,7 @@ public class VPlayerPanel extends FContainer {
         private void update() {
             int vibrateDuration = 0;
             int delta = player.getLife() - life;
-            player.setAvatarLifeDifference(player.getAvatarLifeDifference()+delta);
+            player.setAvatarLifeDifference(player.getAvatarLifeDifference() + delta);
             if (delta != 0) {
                 if (delta < 0) {
                     vibrateDuration += delta * -100;
@@ -553,6 +604,7 @@ public class VPlayerPanel extends FContainer {
                 Gdx.input.vibrate(Math.min(vibrateDuration, 2000));
             }
         }
+
         private void updateShards() {
             manaShards = player.getNumManaShards();
         }
@@ -567,55 +619,55 @@ public class VPlayerPanel extends FContainer {
         public void draw(Graphics g) {
             adjustHeight = 1;
             float divider = Gdx.app.getGraphics().getHeight() > 900 ? 1.2f : 2f;
-            if(Forge.altPlayerLayout && !Forge.altZoneTabs && Forge.isLandscapeMode()) {
+            if (Forge.altPlayerLayout && !Forge.altZoneTabs && Forge.isLandscapeMode()) {
                 if (poisonCounters == 0 && energyCounters == 0 && experienceCounters == 0 && ticketCounters == 0 && radCounters == 0 && manaShards == 0) {
-                    g.fillRect(Color.DARK_GRAY, 0, 0, INFO2_FONT.getBounds(lifeStr).width+1, INFO2_FONT.getBounds(lifeStr).height+1);
+                    g.fillRect(Color.DARK_GRAY, 0, 0, INFO2_FONT.getBounds(lifeStr).width + 1, INFO2_FONT.getBounds(lifeStr).height + 1);
                     g.drawText(lifeStr, INFO2_FONT, getInfoForeColor().getColor(), 0, 0, getWidth(), getHeight(), false, Align.left, false);
                 } else {
                     float halfHeight = getHeight() / divider;
                     float textStart = halfHeight + Utils.scale(1);
                     float textWidth = getWidth() - textStart;
                     int mod = 1;
-                    g.fillRect(Color.DARK_GRAY, 0, 0, INFO_FONT.getBounds(lifeStr).width+halfHeight+1, INFO_FONT.getBounds(lifeStr).height+1);
+                    g.fillRect(Color.DARK_GRAY, 0, 0, INFO_FONT.getBounds(lifeStr).width + halfHeight + 1, INFO_FONT.getBounds(lifeStr).height + 1);
                     g.drawImage(FSkinImage.QUEST_LIFE, 0, 0, halfHeight, halfHeight);
                     g.drawText(lifeStr, INFO_FONT, getInfoForeColor().getColor(), textStart, 0, textWidth, halfHeight, false, Align.left, false);
                     if (poisonCounters > 0) {
-                        g.fillRect(Color.DARK_GRAY, 0, halfHeight+2, INFO_FONT.getBounds(String.valueOf(poisonCounters)).width+halfHeight+1, INFO_FONT.getBounds(String.valueOf(poisonCounters)).height+1);
-                        g.drawImage(FSkinImage.POISON, 0, halfHeight+2, halfHeight, halfHeight);
-                        g.drawText(String.valueOf(poisonCounters), INFO_FONT, getInfoForeColor().getColor(), textStart, halfHeight+2, textWidth, halfHeight, false, Align.left, false);
-                        mod+=1;
+                        g.fillRect(Color.DARK_GRAY, 0, halfHeight + 2, INFO_FONT.getBounds(String.valueOf(poisonCounters)).width + halfHeight + 1, INFO_FONT.getBounds(String.valueOf(poisonCounters)).height + 1);
+                        g.drawImage(FSkinImage.POISON, 0, halfHeight + 2, halfHeight, halfHeight);
+                        g.drawText(String.valueOf(poisonCounters), INFO_FONT, getInfoForeColor().getColor(), textStart, halfHeight + 2, textWidth, halfHeight, false, Align.left, false);
+                        mod += 1;
                     }
                     if (energyCounters > 0) {
-                        g.fillRect(Color.DARK_GRAY, 0, (halfHeight*mod)+2, INFO_FONT.getBounds(String.valueOf(energyCounters)).width+halfHeight+1, INFO_FONT.getBounds(String.valueOf(energyCounters)).height+1);
-                        g.drawImage(FSkinImage.ENERGY, 0, (halfHeight*mod)+2, halfHeight, halfHeight);
-                        g.drawText(String.valueOf(energyCounters), INFO_FONT, getInfoForeColor().getColor(), textStart, (halfHeight*mod)+2, textWidth, halfHeight, false, Align.left, false);
-                        mod+=1;
+                        g.fillRect(Color.DARK_GRAY, 0, (halfHeight * mod) + 2, INFO_FONT.getBounds(String.valueOf(energyCounters)).width + halfHeight + 1, INFO_FONT.getBounds(String.valueOf(energyCounters)).height + 1);
+                        g.drawImage(FSkinImage.ENERGY, 0, (halfHeight * mod) + 2, halfHeight, halfHeight);
+                        g.drawText(String.valueOf(energyCounters), INFO_FONT, getInfoForeColor().getColor(), textStart, (halfHeight * mod) + 2, textWidth, halfHeight, false, Align.left, false);
+                        mod += 1;
                     }
                     if (experienceCounters > 0) {
-                        g.fillRect(Color.DARK_GRAY, 0, (halfHeight*mod)+2, INFO_FONT.getBounds(String.valueOf(experienceCounters)).width+halfHeight+1, INFO_FONT.getBounds(String.valueOf(experienceCounters)).height+1);
-                        g.drawImage(FSkinImage.COMMANDER, 0, (halfHeight*mod)+2, halfHeight, halfHeight);
-                        g.drawText(String.valueOf(experienceCounters), INFO_FONT, getInfoForeColor().getColor(), textStart, (halfHeight*mod)+2, textWidth, halfHeight, false, Align.left, false);
-                        mod+=1;
+                        g.fillRect(Color.DARK_GRAY, 0, (halfHeight * mod) + 2, INFO_FONT.getBounds(String.valueOf(experienceCounters)).width + halfHeight + 1, INFO_FONT.getBounds(String.valueOf(experienceCounters)).height + 1);
+                        g.drawImage(FSkinImage.COMMANDER, 0, (halfHeight * mod) + 2, halfHeight, halfHeight);
+                        g.drawText(String.valueOf(experienceCounters), INFO_FONT, getInfoForeColor().getColor(), textStart, (halfHeight * mod) + 2, textWidth, halfHeight, false, Align.left, false);
+                        mod += 1;
                     }
                     if (radCounters > 0) {
-                        g.fillRect(Color.DARK_GRAY, 0, (halfHeight*mod)+2, INFO_FONT.getBounds(String.valueOf(radCounters)).width+halfHeight+1, INFO_FONT.getBounds(String.valueOf(radCounters)).height+1);
-                        g.drawImage(FSkinImage.RAD, 0, (halfHeight*mod)+2, halfHeight, halfHeight);
-                        g.drawText(String.valueOf(radCounters), INFO_FONT, getInfoForeColor().getColor(), textStart, (halfHeight*mod)+2, textWidth, halfHeight, false, Align.left, false);
-                        mod+=1;
+                        g.fillRect(Color.DARK_GRAY, 0, (halfHeight * mod) + 2, INFO_FONT.getBounds(String.valueOf(radCounters)).width + halfHeight + 1, INFO_FONT.getBounds(String.valueOf(radCounters)).height + 1);
+                        g.drawImage(FSkinImage.RAD, 0, (halfHeight * mod) + 2, halfHeight, halfHeight);
+                        g.drawText(String.valueOf(radCounters), INFO_FONT, getInfoForeColor().getColor(), textStart, (halfHeight * mod) + 2, textWidth, halfHeight, false, Align.left, false);
+                        mod += 1;
                     }
                     if (ticketCounters > 0) {
-                        g.fillRect(Color.DARK_GRAY, 0, (halfHeight*mod)+2, INFO_FONT.getBounds(String.valueOf(ticketCounters)).width+halfHeight+1, INFO_FONT.getBounds(String.valueOf(ticketCounters)).height+1);
-                        g.drawImage(FSkinImage.TICKET, 0, (halfHeight*mod)+2, halfHeight, halfHeight);
-                        g.drawText(String.valueOf(ticketCounters), INFO_FONT, getInfoForeColor().getColor(), textStart, (halfHeight*mod)+2, textWidth, halfHeight, false, Align.left, false);
-                        mod+=1;
+                        g.fillRect(Color.DARK_GRAY, 0, (halfHeight * mod) + 2, INFO_FONT.getBounds(String.valueOf(ticketCounters)).width + halfHeight + 1, INFO_FONT.getBounds(String.valueOf(ticketCounters)).height + 1);
+                        g.drawImage(FSkinImage.TICKET, 0, (halfHeight * mod) + 2, halfHeight, halfHeight);
+                        g.drawText(String.valueOf(ticketCounters), INFO_FONT, getInfoForeColor().getColor(), textStart, (halfHeight * mod) + 2, textWidth, halfHeight, false, Align.left, false);
+                        mod += 1;
                     }
                     if (manaShards > 0) {
-                        g.fillRect(Color.DARK_GRAY, 0, (halfHeight*mod)+2, INFO_FONT.getBounds(String.valueOf(manaShards)).width+halfHeight+1, INFO_FONT.getBounds(String.valueOf(manaShards)).height+1);
-                        g.drawImage(FSkinImage.AETHER_SHARD, 0, (halfHeight*mod)+2, halfHeight, halfHeight);
-                        g.drawText(String.valueOf(manaShards), INFO_FONT, getInfoForeColor().getColor(), textStart, (halfHeight*mod)+2, textWidth, halfHeight, false, Align.left, false);
-                        mod+=1;
+                        g.fillRect(Color.DARK_GRAY, 0, (halfHeight * mod) + 2, INFO_FONT.getBounds(String.valueOf(manaShards)).width + halfHeight + 1, INFO_FONT.getBounds(String.valueOf(manaShards)).height + 1);
+                        g.drawImage(FSkinImage.AETHER_SHARD, 0, (halfHeight * mod) + 2, halfHeight, halfHeight);
+                        g.drawText(String.valueOf(manaShards), INFO_FONT, getInfoForeColor().getColor(), textStart, (halfHeight * mod) + 2, textWidth, halfHeight, false, Align.left, false);
+                        mod += 1;
                     }
-                    adjustHeight = (mod > 2) && (avatar.getHeight() < halfHeight*mod)? mod : 1;
+                    adjustHeight = (mod > 2) && (avatar.getHeight() < halfHeight * mod) ? mod : 1;
                 }
             } else {
                 if (poisonCounters == 0 && energyCounters == 0 && manaShards == 0) {
@@ -632,8 +684,7 @@ public class VPlayerPanel extends FContainer {
                     } else if (energyCounters > 0) { //prioritize showing energy counters over mana shards
                         g.drawImage(FSkinImage.ENERGY, 0, halfHeight, halfHeight, halfHeight);
                         g.drawText(String.valueOf(energyCounters), INFO_FONT, getInfoForeColor(), textStart, halfHeight, textWidth, halfHeight, false, Align.center, true);
-                    }
-                    else {
+                    } else {
                         g.drawImage(FSkinImage.MANASHARD, 0, halfHeight, halfHeight, halfHeight);
                         g.drawText(String.valueOf(manaShards), INFO_FONT, getInfoForeColor(), textStart, halfHeight, textWidth, halfHeight, false, Align.center, true);
                     }
@@ -658,18 +709,27 @@ public class VPlayerPanel extends FContainer {
         }
 
         public abstract VDisplayArea getDisplayArea();
+
         public abstract void setDisplayVisible(boolean visible);
+
         public abstract void setDisplayBounds(float x, float y, float width, float height);
+
         public abstract void setRotate180(boolean rotate180);
+
         public abstract void update();
+
         public abstract void reset();
+
+        public abstract float getIdealWidth(float pref);
 
         protected boolean isSelected() {
             return selectedTab == this;
         }
+
         protected FSkinColor getSelectedBackgroundColor() {
             return getDisplayAreaBackColor();
         }
+
         protected boolean isAlignedRightForAltDisplay() {
             return false;
         }
@@ -745,8 +805,8 @@ public class VPlayerPanel extends FContainer {
                 if (lblLife.getRotate180()) {
                     g.startRotateTransform(x + w / 2, y + h / 2, 180);
                 }
-                float mod = isHovered() ? w/8f:0;
-                g.drawImage(icon, x-mod/2, y-mod/2, w+mod, h+mod);
+                float mod = isHovered() ? w / 8f : 0;
+                g.drawImage(icon, x - mod / 2, y - mod / 2, w + mod, h + mod);
                 if (lblLife.getRotate180()) {
                     g.endTransform();
                 }
@@ -773,8 +833,8 @@ public class VPlayerPanel extends FContainer {
                 h = icon.getHeight() * w / icon.getWidth();
                 x = (getWidth() - w) / 2;
                 y = INFO_TAB_PADDING_Y;
-                float mod = isHovered() ? w/8f:0;
-                g.drawImage(icon, x-mod/2, y-mod/2, w+mod, h+mod);
+                float mod = isHovered() ? w / 8f : 0;
+                g.drawImage(icon, x - mod / 2, y - mod / 2, w + mod, h + mod);
 
                 y += h + INFO_TAB_PADDING_Y;
                 g.drawText(value, INFO_FONT, getInfoForeColor(), 0, y, getWidth(), getHeight() - y + 1, false, Align.center, false);
@@ -827,7 +887,13 @@ public class VPlayerPanel extends FContainer {
         }
 
         @Override
-        public void reset() {} //Mana Display does not get cleared.
+        public void reset() {
+        } //Mana Display does not get cleared.
+
+        @Override
+        public float getIdealWidth(float pref) {
+            return pref;
+        }
     }
 
     /**
@@ -842,6 +908,7 @@ public class VPlayerPanel extends FContainer {
         }
 
         private final EnumSet<ZoneType> altDisplayZones = EnumSet.of(ZoneType.Hand, ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile);
+
         public boolean isAlignedRightForAltDisplay() {
             return altDisplayZones.contains(this.zoneType);
         }
@@ -856,6 +923,23 @@ public class VPlayerPanel extends FContainer {
         @Override
         public void reset() {
             displayArea.clear();
+        }
+
+        @Override
+        public float getIdealWidth(float pref) {
+            if (displayArea instanceof VCardDisplayArea vCardDisplayArea) {
+                float cardWidth = vCardDisplayArea.getCardWidth(vCardDisplayArea.getHeight());
+                float size = vCardDisplayArea.getCount();
+                return Math.min(cardWidth * size, pref);
+            }
+            return pref;
+        }
+
+        @Override
+        public void update() {
+            super.update();
+            if (selectedTab != null && Forge.isHorizontalTabLayout())
+                updateTabLayout(initW, initH);
         }
     }
 
@@ -873,9 +957,9 @@ public class VPlayerPanel extends FContainer {
         private InfoTabExtra() {
             super(DEFAULT_ICON);
             this.displayAreas = new EnumMap<>(ZoneType.class);
-            for(ZoneType zoneType : EXTRA_ZONES) {
+            for (ZoneType zoneType : EXTRA_ZONES) {
                 FCollectionView<CardView> cards = player.getCards(zoneType);
-                if(cards == null || cards.isEmpty())
+                if (cards == null || cards.isEmpty())
                     continue;
                 createZoneIfMissing(zoneType);
                 hasCardsInExtraZone = true;
@@ -887,38 +971,39 @@ public class VPlayerPanel extends FContainer {
         }
 
         public void createZoneIfMissing(ZoneType zone) {
-            if(this.displayAreas.containsKey(zone))
+            if (this.displayAreas.containsKey(zone))
                 return;
             VZoneDisplay display = VPlayerPanel.this.add(new VZoneDisplay(player, zone));
             this.displayAreas.put(zone, display);
             this.hasCardsInExtraZone = true;
-            if(zone == ZoneType.AttractionDeck || zone == ZoneType.ContraptionDeck)
+            if (zone == ZoneType.AttractionDeck || zone == ZoneType.ContraptionDeck)
                 createZoneIfMissing(ZoneType.Junkyard); //If the game uses one, it uses both.
         }
 
         public void setActiveZone(ZoneType zone) {
-            if(this.activeZone == zone)
+            if (this.activeZone == zone)
                 return;
             createZoneIfMissing(zone);
             getDisplayArea().setVisible(false);
             this.activeZone = zone;
-            if(isSelected())
+            if (isSelected())
                 getDisplayArea().setVisible(true);
             updateTab();
         }
+
         public void setActiveZoneByIndex(int index) {
             List<ZoneType> keyList = List.copyOf(displayAreas.keySet());
             setActiveZone(keyList.get(index % keyList.size()));
         }
 
         private void updateTab() {
-            if(!hasCardsInExtraZone)
+            if (!hasCardsInExtraZone)
                 this.value = "";
-            else if(!getDisplayArea().isVisible())
+            else if (!getDisplayArea().isVisible())
                 this.value = "+";
             else
                 this.value = String.valueOf(displayAreas.get(this.activeZone).getCount());
-            if(getDisplayArea().isVisible())
+            if (getDisplayArea().isVisible())
                 this.icon = iconFromZone(this.activeZone);
             else
                 this.icon = DEFAULT_ICON;
@@ -932,7 +1017,7 @@ public class VPlayerPanel extends FContainer {
 
         @Override
         public void setDisplayVisible(boolean visible) {
-            if(!visible)
+            if (!visible)
                 displayAreas.values().forEach(d -> d.setVisible(false));
             else
                 getDisplayArea().setVisible(true);
@@ -954,12 +1039,13 @@ public class VPlayerPanel extends FContainer {
             displayAreas.values().forEach(VDisplayArea::update);
             updateTab();
         }
+
         public void update(ZoneType zoneType) {
-            if(!displayAreas.containsKey(zoneType)) {
-                if(!EXTRA_ZONES.contains(zoneType))
+            if (!displayAreas.containsKey(zoneType)) {
+                if (!EXTRA_ZONES.contains(zoneType))
                     return;
                 FCollectionView<CardView> cards = player.getCards(zoneType);
-                if(cards == null || cards.isEmpty())
+                if (cards == null || cards.isEmpty())
                     return;
                 createZoneIfMissing(zoneType);
             }
@@ -988,17 +1074,27 @@ public class VPlayerPanel extends FContainer {
         }
 
         @Override
+        public float getIdealWidth(float pref) {
+            if (getDisplayArea() instanceof VCardDisplayArea vCardDisplayArea) {
+                float cardWidth = vCardDisplayArea.getCardWidth(vCardDisplayArea.getHeight());
+                float size = vCardDisplayArea.getCount();
+                return Math.min(cardWidth * size, pref);
+            }
+            return pref;
+        }
+
+        @Override
         public boolean tap(float x, float y, int count) {
-            if(this.displayAreas.isEmpty())
+            if (this.displayAreas.isEmpty())
                 return false;
-            if(count >= 2) {
+            if (count >= 2) {
                 onClickZone(this.activeZone);
                 return true;
             }
             FPopupMenu menu = new FPopupMenu() {
                 @Override
                 protected void buildMenu() {
-                    for(ZoneType zone : displayAreas.keySet()) {
+                    for (ZoneType zone : displayAreas.keySet()) {
                         String label = WordUtils.capitalize(zone.getTranslatedName());
                         addItem(new FMenuItem(label, iconFromZone(zone), (e) -> onClickZone(zone)));
                     }
@@ -1009,7 +1105,7 @@ public class VPlayerPanel extends FContainer {
         }
 
         public void onClickZone(ZoneType zone) {
-            if(activeZone == zone && this.isSelected()) {
+            if (activeZone == zone && this.isSelected()) {
                 setSelectedTab(null);
                 return;
             }
@@ -1042,7 +1138,7 @@ public class VPlayerPanel extends FContainer {
 
     @Override
     public boolean keyDown(int keyCode) {
-        if (MatchController.getView().selectedPlayerPanel() == this && !((FMenuBar)MatchController.getView().getHeader()).isShowingMenu(true)) {
+        if (MatchController.getView().selectedPlayerPanel() == this && !((FMenuBar) MatchController.getView().getHeader()).isShowingMenu(true)) {
             if (keyCode == Input.Keys.BUTTON_B) {
                 MatchScreen.nullPotentialListener();
                 closeSelectedTab();

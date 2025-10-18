@@ -169,19 +169,16 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         // TODO should use sa.canTarget(card) instead?
         // it doesn't have messages
 
-        if (sa.isSpell() && sa.getHostCard().isAura() && !card.canBeAttached(sa.getHostCard(), sa)) {
-            showMessage(sa.getHostCard() + " - Cannot enchant this card (Shroud? Protection? Restrictions?).");
-            return false;
+        if (sa.isSpell() && sa.getHostCard().isAura()) {
+            String msg = card.cantBeAttachedMsg(sa.getHostCard(), sa);
+            if (msg != null) {
+                showMessage(sa.getHostCard() + " - " + msg);
+                return false;
+            }
         }
         //If the card is not a valid target
         if (!card.canBeTargetedBy(sa)) {
             showMessage(sa.getHostCard() + " - Cannot target this card (Shroud? Protection? Restrictions).");
-            return false;
-        }
-
-        // If all cards must be from the same zone
-        if (tgt.isSingleZone() && lastTarget != null && !card.getController().equals(lastTarget.getController())) {
-            showMessage(sa.getHostCard() + " - Cannot target this card (not in the same zone)");
             return false;
         }
 
@@ -273,7 +270,6 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 showMessage(sa.getHostCard() + " - Cannot target this card (must have equal toughness)");
                 return false;
             }
-
         }
 
         // If all cards must have different mana values
@@ -288,6 +284,15 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             if (targetedCMCs.contains(card.getCMC())) {
                 showMessage(sa.getHostCard() + " - Cannot target this card (must have different mana values)");
                 return false;
+            }
+        }
+
+        if (tgt.isDifferentNames()) {
+            for (final GameObject o : targets) {
+                if (o instanceof Card c && c.sharesNameWith(card)) {
+                    showMessage(sa.getHostCard() + " - Cannot target this card (must have different names)");
+                    return false;
+                }
             }
         }
 
@@ -400,15 +405,18 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     private void removeTarget(final GameEntity ge) {
+        if (divisionValues != null) {
+            divisionValues.add(sa.getDividedValue(ge));
+        }
         targets.remove(ge);
         sa.getTargets().remove(ge);
-        if (ge instanceof Card) {
-            getController().getGui().setUsedToPay(CardView.get((Card) ge), false);
+        if (ge instanceof Card c) {
+            getController().getGui().setUsedToPay(CardView.get(c), false);
             // try to get last selected card
             lastTarget = Iterables.getLast(IterableUtil.filter(targets, Card.class), null);
         }
-        else if (ge instanceof Player) {
-            getController().getGui().setHighlighted(PlayerView.get((Player) ge), false);
+        else if (ge instanceof Player p) {
+            getController().getGui().setHighlighted(PlayerView.get(p), false);
         }
 
         this.showMessage();

@@ -32,7 +32,7 @@
         <dependency>
             <groupId>io.sentry</groupId>
             <artifactId>sentry-logback</artifactId>
-            <version>7.15.0</version>
+            <version>8.21.1</version>
         </dependency>
         <dependency>
             <groupId>org.jgrapht</groupId>

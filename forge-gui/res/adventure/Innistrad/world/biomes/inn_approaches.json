@@ -1,0 +1,155 @@
+{
+"startPointX": 0.79,
+"startPointY": 0.53,
+"noiseWeight": 0.3,
+"distWeight": 1.2,
+"name": "Kessig Approaches",
+"tilesetAtlas": "world/tilesets/terrain.atlas",
+"tilesetName": "Colorless",
+"terrain": [
+	{
+		"spriteName": "Colorless_1",
+		"max": 0.2,
+		"resolution": 5
+	},
+	{
+		"spriteName": "Colorless_2",
+		"min": 0.8,
+		"max": 1,
+		"resolution": 5
+	}
+],
+"width": 0.85,
+"height": 0.85,
+"color": "aeaeae",
+"spriteNames": [
+	"Stone"
+],
+"enemies": [
+	"Avacynian Preacher",
+	"Bog Hermit",
+	"Borderland Ranger",
+	"Escaped Skaab",
+	"Falkenrath Neonate",
+	"Hobbling Zombie",
+	"Howlpack Exile",
+	"Loam Dryad",
+	"Missionary of Saint Traft",
+	"Sigardian Priest",
+	"Wandering Geist",
+	"Watcher in the Web",
+	"Wolfkin Outcast"
+],
+"pointsOfInterest": [
+	"Spawn",
+	"inn_ulvenwald_hamlet",
+	"inn_ulvenwald_town",
+	"inn_ulvenwald_village",
+	"inn_Cave_river",
+	"inn_lodge_1",
+	"inn_forgotten_lodge_1",
+	"inn_dark_forest",
+	"inn_abbey"
+],
+"structures": [
+	{
+		"N": 1,
+		"x": 0.5,
+		"y": 0.2,
+		"structureAtlasPath": "world/structures/colorless_structures.atlas",
+		"sourcePath": "world/structures/models/colorless.png",
+		"maskPath": "world/structures/masks/inn_app_mountains.png",
+		"height": 0.5,
+		"width": 0.5,
+		"symmetry": 8,
+		"mappingInfo": [
+			{
+				"name": "rock",
+				"color": "ff00ff",
+				"collision": true
+			},
+			{
+				"name": "tree3",
+				"color": "0000ff",
+				"collision": true
+			},
+			{
+				"name": "mountain",
+				"color": "000000",
+				"collision": true
+			}
+		]
+	},
+	{
+		"N": 1,
+		"x": 0.5,
+		"y": 0.7,
+		"structureAtlasPath": "world/structures/colorless_structures.atlas",
+		"sourcePath": "world/structures/models/colorless.png",
+		"maskPath": "world/structures/masks/moon4.png",
+		"height": 0.5,
+		"width": 0.5,
+		"symmetry": 8,
+		"mappingInfo": [
+			{
+				"name": "crater",
+				"color": "808080",
+				"collision": true
+			},
+			{
+				"name": "tree",
+				"color": "ff0000",
+				"collision": true
+			},
+			{
+				"name": "rock",
+				"color": "ff00ff",
+				"collision": true
+			},
+			{
+				"name": "hole",
+				"color": "808080",
+				"collision": true
+			}
+		]
+	},
+	{
+		"N": 1,
+		"x": 0.5,
+		"y": 0.5,
+		"structureAtlasPath": "world/structures/inn_colorless_structures.atlas",
+		"sourcePath": "world/structures/models/colorless.png",
+		"maskPath": "world/structures/masks/inn_app_forest.png",
+		"height": 0.5,
+		"width": 0.5,
+		"symmetry": 8,
+		"mappingInfo": [
+			{
+				"name": "tree",
+				"color": "ff0000",
+				"collision": true
+			},
+			{
+				"name": "tree2",
+				"color": "00ff00",
+				"collision": true
+			},
+			{
+				"name": "tree3",
+				"color": "0000ff",
+				"collision": true
+			},
+			{
+				"name": "tree4",
+				"color": "00ffff",
+				"collision": true
+			},
+			{
+				"name": "rock",
+				"color": "ff00ff",
+				"collision": true
+			}
+		]
+	}
+]
+}

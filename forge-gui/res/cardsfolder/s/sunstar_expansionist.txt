@@ -1,0 +1,12 @@
+Name:Sunstar Expansionist
+ManaCost:1 W
+Types:Creature Human Knight
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | CheckSVar$ X | SVarCompare$ GTY | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, if an opponent controls more lands than you, create a Lander token. (It's an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_lander_sac_search | TokenOwner$ You
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Landfall — Whenever a land you control enters, this creature gets +1/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1
+SVar:X:PlayerCountOpponents$HighestValid Land.YouCtrl
+SVar:Y:Count$Valid Land.YouCtrl
+SVar:BuffedBy:Land
+Oracle:When this creature enters, if an opponent controls more lands than you, create a Lander token. (It's an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")\nLandfall — Whenever a land you control enters, this creature gets +1/+0 until end of turn.

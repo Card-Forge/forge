@@ -46,7 +46,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
 
     // These fields are kinda PK for PrintedCard
     private final String name;
-    private final String edition;
+    private String edition;
     /* [NEW] Attribute to store reference to CollectorNumber of each PaperCard.
        By default the attribute is marked as "unset" so that it could be retrieved and set.
        (see getCollectorNumber())
@@ -154,6 +154,31 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         return this.noSellVersion;
     }
 
+    public PaperCard getMeldBaseCard() {
+        if (getRules().getSplitType() != CardSplitType.Meld) {
+            return null;
+        }
+
+        // This is the base part of the meld duo
+        if (getRules().getOtherPart() == null) {
+            return this;
+        }
+
+        String meldWith = getRules().getMeldWith();
+        if (meldWith == null) {
+            return null;
+        }
+        
+        List<PrintSheet> sheets = StaticData.instance().getCardEdition(this.edition).getPrintSheetsBySection();
+        for (PrintSheet sheet : sheets) {
+            if (sheet.contains(this)) {
+                return sheet.find(PaperCardPredicates.name(meldWith));
+            }
+        }
+
+        return null;
+    }
+
     public PaperCard copyWithoutFlags() {
         if(this.flaglessVersion == null) {
             if(this.flags == PaperCardFlags.IDENTITY_FLAGS)
@@ -225,7 +250,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         this.artIndex = Math.max(artIndex, IPaperCard.DEFAULT_ART_INDEX);
         this.foil = foil;
         this.rarity = rarity;
-        this.artist = TextUtil.normalizeText(artist);
+        this.artist = artist;
         this.collectorNumber = (collectorNumber != null && !collectorNumber.isEmpty()) ? collectorNumber : IPaperCard.NO_COLLECTOR_NUMBER;
         // If the user changes the language this will make cards sort by the old language until they restart the game.
         // This is a good tradeoff
@@ -350,7 +375,8 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
                 System.out.println("PaperCard: " + name + " not found with set and index " + edition + ", " + artIndex);
                 pc = readObjectAlternate(name, edition);
                 if (pc == null) {
-                    throw new IOException(TextUtil.concatWithSpace("Card", name, "not found with set and index", edition, Integer.toString(artIndex)));
+                    pc = StaticData.instance().getCommonCards().createUnsupportedCard(name);
+                    //throw new IOException(TextUtil.concatWithSpace("Card", name, "not found with set and index", edition, Integer.toString(artIndex)));
                 }
                 System.out.println("Alternate object found: " + pc.getName() + ", " + pc.getEdition() + ", " + pc.getArtIndex());
             }
@@ -567,7 +593,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
 
         public PaperCardFlags withMarkedColors(ColorSet markedColors) {
             if(markedColors == null)
-                markedColors = ColorSet.getNullColor();
+                markedColors = ColorSet.C;
             return new PaperCardFlags(this, markedColors, null);
         }
 

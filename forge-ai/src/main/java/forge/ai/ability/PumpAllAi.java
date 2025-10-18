@@ -1,9 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilCost;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
@@ -29,7 +26,7 @@ public class PumpAllAi extends PumpAiBase {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
@@ -40,17 +37,13 @@ public class PumpAllAi extends PumpAiBase {
             PhaseHandler ph = ai.getGame().getPhaseHandler();
             if (!(ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS, ai)
                     || (!ph.getPlayerTurn().equals(ai) && ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS)))) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
-        }
-
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false;
         }
 
         if (abCost != null && source.hasSVar("AIPreference")) {
             if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa, true)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
         
@@ -60,13 +53,13 @@ public class PumpAllAi extends PumpAiBase {
             if (sa.canTarget(opp) && sa.isCurse()) {
                 sa.resetTargets();
                 sa.getTargets().add(opp);
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
             if (sa.canTarget(ai) && !sa.isCurse()) {
                 sa.resetTargets();
                 sa.getTargets().add(ai);
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
         }
 
@@ -100,7 +93,7 @@ public class PumpAllAi extends PumpAiBase {
                         || phase.isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                         || game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())
                         || game.getReplacementHandler().isPreventCombatDamageThisTurn()) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 int totalPower = 0;
                 for (Card c : human) {
@@ -110,47 +103,54 @@ public class PumpAllAi extends PumpAiBase {
                     totalPower += Math.min(c.getNetPower(), power * -1);
                     if (phase == PhaseType.COMBAT_DECLARE_BLOCKERS && combat.isUnblocked(c)) {
                         if (ComputerUtilCombat.lifeInDanger(sa.getActivatingPlayer(), combat)) {
-                            return true;
+                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                         }
                         totalPower += Math.min(c.getNetPower(), power * -1);
                     }
                     if (totalPower >= power * -2) {
-                        return true;
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                     }
                 }
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } // -X/-0 end
             
             if (comp.isEmpty() && ComputerUtil.activateForCost(sa, ai)) {
-            	return true;
+            	return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
             // evaluate both lists and pass only if human creatures are more valuable
-            return (ComputerUtilCard.evaluateCreatureList(comp) + 200) < ComputerUtilCard.evaluateCreatureList(human);
+            boolean result = (ComputerUtilCard.evaluateCreatureList(comp) + 200) < ComputerUtilCard.evaluateCreatureList(human);
+            return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } // end Curse
 
         if (!game.getStack().isEmpty()) {
-            return pumpAgainstRemoval(ai, sa, comp);
+            boolean result = pumpAgainstRemoval(ai, sa, comp);
+            return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        return ai.getCreaturesInPlay().anyMatch(c -> c.isValid(valid, source.getController(), source, sa)
+        boolean result = ai.getCreaturesInPlay().anyMatch(c -> c.isValid(valid, source.getController(), source, sa)
                 && ComputerUtilCard.shouldPumpCard(ai, sa, c, defense, power, keywords));
-    } // pumpAllCanPlayAI()
-
-    @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        return true;
+        return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+    }
+
+    @Override
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         // it might help so take it
         if (!sa.usesTargeting() && !sa.isCurse() && sa.hasParam("ValidCards") && sa.getParam("ValidCards").contains("YouCtrl")) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         // important to call canPlay first so targets are added if needed
-        return canPlayAI(ai, sa) || mandatory;
+        AiAbilityDecision decision = canPlay(ai, sa);
+        if (mandatory && !decision.decision().willingToPlay()) {
+            return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
+        }
+        return decision;
     }
 
     boolean pumpAgainstRemoval(Player ai, SpellAbility sa, List<Card> comp) {

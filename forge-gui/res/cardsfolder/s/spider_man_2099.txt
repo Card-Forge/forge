@@ -1,0 +1,18 @@
+Name:Spider-Man 2099
+ManaCost:U R
+Types:Legendary Creature Spider Human Hero
+PT:2/3
+K:Double Strike
+K:Vigilance
+S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | Caster$ Player.Active | CheckSVar$ Z | SVarCompare$ LE3 | Description$ You can't cast CARDNAME during your first, second, or third turns of the game.
+SVar:Z:Count$YourTurns
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ Y | SVarCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of your end step, if you've played a land or cast a spell this turn from anywhere other than your hand, CARDNAME deals damage equal to his power to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X | AILogic$ PowerDmg
+SVar:X:Count$CardPower
+T:Mode$ LandPlayed | Origin$ Exile,Library,Graveyard | ValidCard$ Land.YouCtrl | Execute$ StoreVar | Static$ True
+SVar:StoreVar:DB$ StoreSVar | SVar$ LandsPlayedFromNotHand | Type$ Number | Expression$ 1
+T:Mode$ Phase | Phase$ Cleanup | Execute$ TrigReset | Static$ True
+SVar:TrigReset:DB$ StoreSVar | SVar$ LandsPlayedFromNotHand | Type$ Number | Expression$ 0
+SVar:Y:Count$ThisTurnCast_Card.YouCtrl+!wasCastFromYourHand/Plus.LandsPlayedFromNotHand
+SVar:LandsPlayedFromNotHand:Number$0
+Oracle:From the Future — You can't cast Spider-Man 2099 during your first, second, or third turns of the game.\nDouble strike, vigilance\nAt the beginning of your end step, if you've played a land or cast a spell this turn from anywhere other than your hand, Spider-Man 2099 deals damage equal to his power to any target.

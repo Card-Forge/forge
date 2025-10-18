@@ -1,0 +1,116 @@
+{
+"startPointX": 0.68,
+"startPointY": 0.68,
+"noiseWeight": 0.5,
+"distWeight": 1.5,
+"name": "Gavony",
+"tilesetAtlas": "world/tilesets/terrain.atlas",
+"tilesetName": "White",
+"terrain": [
+	{
+		"spriteName": "White_1",
+		"max": 0.2,
+		"resolution": 10
+	},
+	{
+		"spriteName": "White_2",
+		"min": 0.8,
+		"max": 1,
+		"resolution": 10
+	}
+],
+"width": 0.7,
+"height": 0.7,
+"color": "efe697",
+"spriteNames": [
+	"DarkGras"
+],
+"enemies": [
+	"Gavony Farmhand",
+	"Scarecrow"
+],
+"pointsOfInterest": [
+	"inn_abbey",
+	"inn_gavony_chapelry",
+	"inn_gavony_parish"
+
+],
+"structures": [
+	{
+		"N": 2,
+		"x": 0.5,
+		"y": 0.5,
+		"structureAtlasPath": "world/structures/white_structures.atlas",
+		"sourcePath": "world/structures/models/white.png",
+		"maskPath": "world/structures/masks/circle.png",
+		"height": 0.20000002,
+		"width": 0.20000002,
+		"symmetry": 8,
+		"mappingInfo": [
+			{
+				"name": "tree",
+				"color": "ff8000",
+				"collision": true
+			},
+			{
+				"name": "tree2",
+				"color": "008000",
+				"collision": true
+			},
+			{
+				"name": "tree3",
+				"color": "00ff00",
+				"collision": true
+			}
+		]
+	},
+	{
+		"N": 2,
+		"x": 0.5,
+		"y": 0.5,
+		"symmetry": 8,
+		"structureAtlasPath": "world/structures/white_structures.atlas",
+		"sourcePath": "world/structures/models/desert.png",
+		"maskPath": "world/structures/masks/ring.png",
+		"height": 0.5,
+		"width": 0.5,
+		"mappingInfo": [
+			{
+				"name": "plateau",
+				"color": "804000",
+				"collision": true
+			},
+			{
+				"name": "rock",
+				"color": "402000",
+				"collision": true
+			},
+			{
+				"name": "mesa",
+				"color": "201000",
+				"collision": true
+			},
+			{
+				"name": "plateau",
+				"color": "804000",
+				"collision": true
+			},
+			{
+				"name": "cactus",
+				"color": "00ff00",
+				"collision": true
+			},
+			{
+				"name": "cactus2",
+				"color": "008000",
+				"collision": true
+			},
+			{
+				"name": "cactus3",
+				"color": "004000",
+				"collision": true
+			}
+		]
+	}
+]
+}

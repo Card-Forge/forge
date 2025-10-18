@@ -1,18 +1,15 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
-import forge.ai.AiCardMemory;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
+import forge.game.card.CardUtil;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.keyword.Keyword;
-import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -22,60 +19,52 @@ import java.util.Map;
 public class MustBlockAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Game game = aiPlayer.getGame();
         final Combat combat = game.getCombat();
         final boolean onlyLethal = !"AllowNonLethal".equals(sa.getParam("AILogic"));
 
         if (combat == null || !combat.isAttacking(source)) {
-            return false;
-        } else if (AiCardMemory.isRememberedCard(aiPlayer, source, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+        if (source.getAbilityActivatedThisTurn().getActivators(sa).contains(aiPlayer)) {
             // The AI can meaningfully do it only to one creature per card yet, trying to do it to multiple cards
             // may result in overextending and losing the attacker
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         final List<Card> list = determineGoodBlockers(source, aiPlayer, combat.getDefenderPlayerByAttacker(source), sa, onlyLethal,false);
 
         if (!list.isEmpty()) {
             final Card blocker = ComputerUtilCard.getBestCreatureAI(list);
-            if (blocker == null) {
-                return false;
-            }
             sa.getTargets().add(blocker);
-            AiCardMemory.rememberCard(aiPlayer, source, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        return false;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         if (sa.hasParam("DefinedAttacker")) {
             // The AI can't handle "target creature blocks another target creature" abilities yet
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         // Otherwise it's a standard targeted "target creature blocks CARDNAME" ability, so use the main canPlayAI code path
-        return canPlayAI(aiPlayer, sa);
+        return canPlay(aiPlayer, sa);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(final Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
-
-        // only use on creatures that can attack
-        if (!ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
-            return false;
-        }
 
         Card attacker = source;
         if (sa.hasParam("DefinedAttacker")) {
             final List<Card> cards = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedAttacker"), sa);
             if (cards.isEmpty()) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             attacker = cards.get(0);
@@ -84,16 +73,20 @@ public class MustBlockAi extends SpellAbilityAi {
         boolean chance = false;
 
         if (sa.usesTargeting()) {
-            final List<Card> list = determineGoodBlockers(attacker, ai, ai.getWeakestOpponent(), sa, true, true);
-            if (list.isEmpty()) {
-                return sa.isTargetNumberValid();
+            List<Card> list = determineGoodBlockers(attacker, ai, ai.getWeakestOpponent(), sa, true, true);
+            if (list.isEmpty() && mandatory) {
+                list = CardUtil.getValidCardsToTarget(sa);
             }
             final Card blocker = ComputerUtilCard.getBestCreatureAI(list);
             if (blocker == null) {
-                return false;
+                if (sa.isTargetNumberValid()) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                } else {
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+                }
             }
 
-            if (source.hasKeyword(Keyword.PROVOKE) && blocker.isTapped()) {
+            if (!mandatory && sa.isKeyword(Keyword.PROVOKE) && blocker.isTapped()) {
                 // Don't provoke if the attack is potentially lethal
                 Combat combat = ai.getGame().getCombat();
                 if (combat != null) {
@@ -101,7 +94,7 @@ public class MustBlockAi extends SpellAbilityAi {
                     if (defender != null && combat.getAttackingPlayer().equals(ai)
                             && defender.canLoseLife() && !defender.cantLoseForZeroOrLessLife()
                             && ComputerUtilCombat.lifeThatWouldRemain(defender, combat) <= 0) {
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
                 }
             }
@@ -110,22 +103,22 @@ public class MustBlockAi extends SpellAbilityAi {
             chance = true;
         } else if (sa.hasParam("Choices")) {
             // currently choice is attacked player
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        return chance;
+        if (chance) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
     }
 
     private List<Card> determineBlockerFromList(final Card attacker, final Player ai, Iterable<Card> options, SpellAbility sa,
             final boolean onlyLethal, final boolean testTapped) {
         List<Card> list = CardLists.filter(options, c -> {
-            boolean tapped = c.isTapped();
-            if (testTapped) {
-                c.setTapped(false);
-            }
-            if (!CombatUtil.canBlock(attacker, c)) {
+            if (!CombatUtil.canBlock(attacker, c, testTapped)) {
                 return false;
             }
             if (ComputerUtilCombat.canDestroyAttacker(ai, attacker, c, null, false)) {
@@ -133,9 +126,6 @@ public class MustBlockAi extends SpellAbilityAi {
             }
             if (onlyLethal && !ComputerUtilCombat.canDestroyBlocker(ai, c, attacker, null, false)) {
                 return false;
-            }
-            if (testTapped) {
-                c.setTapped(tapped);
             }
             return true;
         });

@@ -1,0 +1,9 @@
+Name:Super Shredder
+ManaCost:1 B
+Types:Legendary Creature Mutant Ninja Human
+PT:1/1
+K:Menace
+T:Mode$ ChangesZone | ValidCard$ Permanent.Other | Origin$ Battlefield | Destination$ Any | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever another permanent leaves the battlefield, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Menace\nWhenever another permanent leaves the battlefield, put a +1/+1 counter on Super Shredder.

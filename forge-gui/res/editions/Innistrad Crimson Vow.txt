@@ -2,7 +2,6 @@
 Code=VOW
 Date=2021-11-19
 Name=Innistrad: Crimson Vow
-Code2=VOW
 Type=Expansion
 ScryfallCode=VOW
 Booster=10 Common:fromSheet("VOW cards"), 3 Uncommon:fromSheet("VOW cards"), 1 RareMythic:fromSheet("VOW cards"), 1 BasicLand
@@ -435,18 +434,17 @@ Prerelease=6 Boosters, 1 RareMythic+
 412 L Forest @Pig Hands
 
 [rebalanced]
-A48 C A-Binding Geist @Campbell White
-A52 U A-Cobbled Lancer @Igor Kieryluk
-A58 R A-Dreamshackle Geist @Andreas Zafiratos
-A62 U A-Gutter Skulker @Viko Menezes
-A63 R A-Hullbreaker Horror @Svetlin Velinov
-A66 C A-Lantern Bearer @Zoltan Boros
-A69 U A-Mischievous Catgeist @Denman Rooke
-A81 C A-Stitched Assistant @Andrey Kuzinskiy
-A233 U A-Brine Comber @Olena Richards
-A235 R A-Dorothea, Vengeful Victim @Marta Nael
-A247 U A-Sigardian Paladin @Slawomir Maniak
-A248 U A-Skull Skaab @Nicholas Gregory
+A-48 C A-Binding Geist @Campbell White
+A-52 U A-Cobbled Lancer @Igor Kieryluk
+A-58 R A-Dreamshackle Geist @Andreas Zafiratos
+A-62 U A-Gutter Skulker @Viko Menezes
+A-66 C A-Lantern Bearer @Zoltan Boros
+A-69 U A-Mischievous Catgeist @Denman Rooke
+A-81 C A-Stitched Assistant @Andrey Kuzinskiy
+A-233 U A-Brine Comber @Olena Richards
+A-235 R A-Dorothea, Vengeful Victim @Marta Nael
+A-247 U A-Sigardian Paladin @Slawomir Maniak
+A-248 U A-Skull Skaab @Nicholas Gregory
 
 [tokens]
 1 w_1_1_human @Miguel Mercado
@@ -472,4 +470,4 @@ A248 U A-Skull Skaab @Nicholas Gregory
 19 copy @Brian Valeza
 20 emblem_chandra_dressed_to_kill @Viktor Titov
 21 day @Johan Grenier
-21 night @Johan Grenier
+21☇ night @Johan Grenier

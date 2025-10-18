@@ -162,7 +162,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
     }
 
     @Override
-    public void setWinner(boolean playerIsWinner) {
+    public void setWinner(boolean playerIsWinner, boolean isArena) {
         if (playerIsWinner) {
             currentMob.clearCollisionHeight();
             Current.player().win();
@@ -192,10 +192,13 @@ public class WorldStage extends GameStage implements SaveFileContent {
                 boolean defeated = Current.player().defeated();
                 AdventureQuestController.instance().updateQuestsLose(currentMob);
                 AdventureQuestController.instance().showQuestDialogs(MapStage.getInstance());
+                boolean defeatedFromBoss = currentMob.getData().boss && !isArena;
                 WorldStage.this.removeEnemy(currentMob);
                 currentMob = null;
                 if (defeated) {
                     WorldStage.getInstance().resetPlayerLocation();
+                } else if (defeatedFromBoss) {
+                    WorldStage.getInstance().defeatedFromBoss();
                 }
             });
         }
@@ -364,16 +367,6 @@ public class WorldStage extends GameStage implements SaveFileContent {
         background.setPlayerPos(player.getX(), player.getY());
         //spriteGroup.setCullingArea(new Rectangle(player.getX()-getViewport().getWorldHeight()/2,player.getY()-getViewport().getWorldHeight()/2,getViewport().getWorldHeight(),getViewport().getWorldHeight()));
         super.draw();
-        if (WorldSave.getCurrentSave().getPlayer().hasAnnounceFantasy()) {
-            MapStage.getInstance().showDeckAwardDialog("{BLINK=WHITE;RED}Chaos Mode!{ENDBLINK}\n" +
-                            "Enemy will use Preconstructed or Random Generated Decks. Genetic AI Decks will be available to some enemies on Hard difficulty.",
-                    WorldSave.getCurrentSave().getPlayer().getSelectedDeck());
-            WorldSave.getCurrentSave().getPlayer().clearAnnounceFantasy();
-        } else if (WorldSave.getCurrentSave().getPlayer().hasAnnounceCustom()) {
-            MapStage.getInstance().showDeckAwardDialog("{GRADIENT}Custom Deck Mode!{ENDGRADIENT}\n" +
-                    "Some enemies will use Genetic AI Decks randomly.", WorldSave.getCurrentSave().getPlayer().getSelectedDeck());
-            WorldSave.getCurrentSave().getPlayer().clearAnnounceCustom();
-        }
     }
 
     public void enterSpawnPOI(){
@@ -402,6 +395,8 @@ public class WorldStage extends GameStage implements SaveFileContent {
             PointOfInterest poi = Current.world().findPointsOfInterest("Spawn");
             if (poi != null) { //shouldn't be null
                 WorldStage.getInstance().loadPOI(poi);
+                // adjust player sprite to prevent triggering the poi collision point when leaving the spawn on New Game
+                WorldStage.getInstance().getPlayerSprite().storePos(poi.getPosition().x, poi.getPosition().y + 18f);
             }
         }
         else {
@@ -417,6 +412,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
         setBounds(WorldSave.getCurrentSave().getWorld().getWidthInPixels(), WorldSave.getCurrentSave().getWorld().getHeightInPixels());
         GridPoint2 pos = background.translateFromWorldToChunk(player.getX(), player.getY());
         background.loadChunk(pos.x, pos.y);
+        super.enter();
     }
 
     @Override

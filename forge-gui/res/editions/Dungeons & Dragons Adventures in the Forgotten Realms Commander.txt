@@ -352,4 +352,5 @@ ScryfallCode=AFC
 12 c_1_1_a_thopter_flying @Richard Wright
 
 [other]
-eternalize_champion_of_wits
+4 eternalize_champion_of_wits @Even Amundsen
+13 monarch @Volkan Baǵa

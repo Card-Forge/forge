@@ -249,9 +249,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 }
                 return true; //original can always be shown if not a face down that can't be shown
             case Flipped:
-            case Transformed:
             case Meld:
-            case Modal:
+            case Backside:
                 return true;
             case Secondary:
                 if (cv.isFaceDown()) {

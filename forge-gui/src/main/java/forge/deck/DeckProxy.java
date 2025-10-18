@@ -774,7 +774,7 @@ public class DeckProxy implements InventoryItem {
 
         for (PaperCard c : deck.getAllCardsInASinglePool().toFlatList()) {
             CardEdition edition = FModel.getMagicDb().getEditions().get(c.getEdition());
-            if (edition == null)
+            if (edition == null || !edition.hasBasicLands())
                 continue;
             availableEditions.add(edition);
         }
@@ -782,7 +782,7 @@ public class DeckProxy implements InventoryItem {
         CardEdition randomLandSet = CardEdition.Predicates.getRandomSetWithAllBasicLands(availableEditions);
         if (randomLandSet == null) {
             CardEdition preferredArtEdition = CardEdition.Predicates.getPreferredArtEditionWithAllBasicLands();
-            return preferredArtEdition != null ? preferredArtEdition : FModel.getMagicDb().getEditions().get("ZEN");
+            return preferredArtEdition != null ? preferredArtEdition : FModel.getMagicDb().getEditions().get("JMP");
         }
         return randomLandSet;
     }

@@ -1,8 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.AiAttackController;
-import forge.ai.ComputerUtil;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -14,13 +12,12 @@ import forge.game.zone.ZoneType;
 
 import java.util.Map;
 
-
 public class DigMultipleAi extends SpellAbilityAi {
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final Game game = ai.getGame();
         Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         final Card host = sa.getHostCard();
@@ -29,7 +26,7 @@ public class DigMultipleAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             sa.resetTargets();
             if (!opp.canBeTargetedBy(sa)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
             sa.getTargets().add(opp);
             libraryOwner = opp;
@@ -37,33 +34,25 @@ public class DigMultipleAi extends SpellAbilityAi {
 
         // return false if nothing to dig into
         if (libraryOwner.getCardsIn(ZoneType.Library).isEmpty()) {
-            return false;
-        }
-
-        if ("Never".equals(sa.getParam("AILogic"))) {
-            return false;
-        } else if ("AtOppEOT".equals(sa.getParam("AILogic"))) {
-            if (!(game.getPhaseHandler().getNextTurn() == ai && game.getPhaseHandler().is(PhaseType.END_OF_TURN))) {
-                return false;
-            }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         // don't deck yourself
         if (sa.hasParam("DestinationZone2") && !"Library".equals(sa.getParam("DestinationZone2"))) {
             int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
             if (libraryOwner == ai && ai.getCardsIn(ZoneType.Library).size() <= numToDig + 2) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
         // Don't use draw abilities before main 2 if possible
         if (game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
                 && !sa.hasParam("DestinationZone") && !ComputerUtil.castSpellInMain1(ai, sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (playReusable(ai, sa)) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         if ((!game.getPhaseHandler().getNextTurn().equals(ai)
@@ -71,14 +60,14 @@ public class DigMultipleAi extends SpellAbilityAi {
                 && !sa.hasParam("PlayerTurn") && !isSorcerySpeed(sa, ai)
                 && (ai.getCardsIn(ZoneType.Hand).size() > 1 || game.getPhaseHandler().getPhase().isBefore(PhaseType.DRAW))
                 && !ComputerUtil.activateForCost(sa, ai)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        return !ComputerUtil.preventRunAwayActivations(sa);
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         if (sa.usesTargeting()) {
             sa.resetTargets();
@@ -89,7 +78,7 @@ public class DigMultipleAi extends SpellAbilityAi {
             }
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /* (non-Javadoc)

@@ -43,6 +43,7 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
+import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 
 /**
@@ -169,9 +170,11 @@ public final class StaticAbilityContinuous {
                 addKeywords = Lists.newArrayList(Arrays.asList(params.get("AddKeyword").split(" & ")));
                 final List<String> newKeywords = Lists.newArrayList();
 
-                // update keywords with Chosen parts
-                final String hostCardUID = Integer.toString(hostCard.getId()); // Protection with "doesn't remove" effect
+                // Protection with "doesn't remove" effect
+                final String hostCardUID = Integer.toString(hostCard.getId());
+                final String hostCardControllerUID = Integer.toString(hostCard.getController().getId());
 
+                // update keywords with Chosen parts
                 addKeywords.removeIf(input -> {
                     if (!hostCard.hasChosenColor() && input.contains("ChosenColor")) {
                         return true;
@@ -204,12 +207,12 @@ public final class StaticAbilityContinuous {
                     if (input.contains("CommanderColorID")) {
                         if (!hostCard.getController().getCommanders().isEmpty()) {
                             if (input.contains("NotCommanderColorID")) {
-                                for (Byte color : hostCard.getController().getNotCommanderColorID()) {
-                                    newKeywords.add(input.replace("NotCommanderColorID", MagicColor.toLongString(color)));
+                                for (MagicColor.Color color : hostCard.getController().getNotCommanderColorID()) {
+                                    newKeywords.add(input.replace("NotCommanderColorID", color.getName()));
                                 }
                                 return true;
-                            } else for (Byte color : hostCard.getController().getCommanderColorID()) {
-                                newKeywords.add(input.replace("CommanderColorID", MagicColor.toLongString(color)));
+                            } else for (MagicColor.Color color : hostCard.getController().getCommanderColorID()) {
+                                newKeywords.add(input.replace("CommanderColorID", color.getName()));
                             }
                             return true;
                         }
@@ -217,12 +220,9 @@ public final class StaticAbilityContinuous {
                     }
                     // two variants for Red vs. red in keyword
                     if (input.contains("ColorsYouCtrl") || input.contains("colorsYouCtrl")) {
-                        final ColorSet colorsYouCtrl = CardUtil.getColorsFromCards(controller.getCardsIn(ZoneType.Battlefield));
-
-                        for (byte color : colorsYouCtrl) {
-                            final String colorWord = MagicColor.toLongString(color);
-                            String y = input.replaceAll("ColorsYouCtrl", StringUtils.capitalize(colorWord));
-                            y = y.replaceAll("colorsYouCtrl", colorWord);
+                        for (MagicColor.Color color : CardUtil.getColorsFromCards(controller.getCardsIn(ZoneType.Battlefield))) {
+                            String y = input.replaceAll("ColorsYouCtrl", StringUtils.capitalize(color.getName()));
+                            y = y.replaceAll("colorsYouCtrl", color.getName());
                             newKeywords.add(y);
                         }
                         return true;
@@ -273,7 +273,7 @@ public final class StaticAbilityContinuous {
                     if (hostCard.hasChosenPlayer()) {
                         Player cp = hostCard.getChosenPlayer();
                         input = input.replaceAll("ChosenPlayerUID", String.valueOf(cp.getId()));
-                        input = input.replaceAll("ChosenPlayerName", cp.getName());
+                        input = input.replaceAll("ChosenPlayerName", Matcher.quoteReplacement(cp.getName()));
                     }
                     if (hostCard.hasNamedCard()) {
                         final String chosenName = hostCard.getNamedCard().replace(",", ";");
@@ -284,6 +284,7 @@ public final class StaticAbilityContinuous {
                         input = input.replaceAll("chosenEvenOdd", hostCard.getChosenEvenOdd().toString().toLowerCase());
                     }
                     input = input.replace("HostCardUID", hostCardUID);
+                    input = input.replace("HostCardControllerUID", hostCardControllerUID);
                     if (params.containsKey("CalcKeywordN")) {
                         input = input.replace("N", String.valueOf(AbilityUtils.calculateAmount(hostCard, params.get("CalcKeywordN"), stAb)));
                     }
@@ -465,9 +466,11 @@ public final class StaticAbilityContinuous {
             if (params.containsKey("MayLookAt")) {
                 String look = params.get("MayLookAt");
                 if ("True".equals(look)) {
-                    look = "You";
+                    // shortcut when combined with MayPlay
+                    mayLookAt = new PlayerCollection();
+                } else {
+                    mayLookAt = AbilityUtils.getDefinedPlayers(hostCard, look, stAb);
                 }
-                mayLookAt = AbilityUtils.getDefinedPlayers(hostCard, look, stAb);
             }
             if (params.containsKey("MayPlay")) {
                 controllerMayPlay = true;
@@ -620,7 +623,7 @@ public final class StaticAbilityContinuous {
                         // Mana cost
                         affectedCard.addChangedManaCost(state.getManaCost(), se.getTimestamp(), stAb.getId());
                         // color
-                        affectedCard.addColorByText(ColorSet.fromMask(state.getColor()), se.getTimestamp(), stAb.getId());
+                        affectedCard.addColorByText(ColorSet.fromMask(state.getColor()), se.getTimestamp(), stAb);
                         // type
                         affectedCard.addChangedCardTypesByText(new CardType(state.getType()), se.getTimestamp(), stAb.getId());
                         // abilities
@@ -703,8 +706,8 @@ public final class StaticAbilityContinuous {
                     newKeywords.removeIf(input -> {
                         // replace one Keyword with list of keywords
                         if (input.startsWith("Protection") && input.contains("CardColors")) {
-                            for (Byte color : affectedCard.getColor()) {
-                                extraKeywords.add(input.replace("CardColors", MagicColor.toLongString(color)));
+                            for (MagicColor.Color color : affectedCard.getColor()) {
+                                extraKeywords.add(input.replace("CardColors", color.getName()));
                             }
                             return true;
                         }
@@ -853,7 +856,7 @@ public final class StaticAbilityContinuous {
 
             // add colors
             if (addColors != null) {
-                affectedCard.addColor(addColors, !overwriteColors, se.getTimestamp(), stAb.getId(), stAb.isCharacteristicDefining());
+                affectedCard.addColor(addColors, !overwriteColors, se.getTimestamp(), stAb);
             }
 
             if (layer == StaticAbilityLayer.RULES) {
@@ -867,10 +870,6 @@ public final class StaticAbilityContinuous {
                     int v = AbilityUtils.calculateAmount(hostCard, params.get("CanBlockAmount"), stAb, true);
                     affectedCard.addCanBlockAdditional(v, se.getTimestamp());
                 }
-            }
-
-            if (mayLookAt != null && (!affectedCard.getOwner().getTopXCardsFromLibrary(1).contains(affectedCard) || game.getTopLibForPlayer(affectedCard.getOwner()) == null || game.getTopLibForPlayer(affectedCard.getOwner()) == affectedCard)) {
-                affectedCard.addMayLookAt(se.getTimestamp(), mayLookAt);
             }
 
             if (controllerMayPlay && (mayPlayLimit == null || stAb.getMayPlayTurn() < mayPlayLimit)) {
@@ -890,6 +889,10 @@ public final class StaticAbilityContinuous {
                         mayPlayAltCost != null ? new Cost(mayPlayAltCost, false, affectedCard.equals(hostCard)) : null, mayPlayWithFlash,
                         mayPlayGrantZonePermissions, stAb);
 
+                if (mayLookAt != null && mayLookAt.isEmpty()) {
+                    mayLookAt.add(mayPlayController);
+                }
+
                 // If the MayPlay effect only affected itself, check if it is in graveyard and give other player who cast Shaman's Trance MayPlay
                 if (stAb.hasParam("Affected") && stAb.getParam("Affected").equals("Card.Self") && affectedCard.isInZone(ZoneType.Graveyard)) {
                     for (final Player p : game.getPlayers()) {
@@ -900,6 +903,10 @@ public final class StaticAbilityContinuous {
                         }
                     }
                 }
+            }
+
+            if (mayLookAt != null && (!affectedCard.getOwner().getTopXCardsFromLibrary(1).contains(affectedCard) || game.getTopLibForPlayer(affectedCard.getOwner()) == null || game.getTopLibForPlayer(affectedCard.getOwner()) == affectedCard)) {
+                affectedCard.addMayLookAt(se.getTimestamp(), mayLookAt);
             }
         }
 
@@ -914,7 +921,7 @@ public final class StaticAbilityContinuous {
                 addColors = ColorSet.fromNames(hostCard.getChosenColors());
             }
         } else if (colors.equals("All")) {
-            addColors = ColorSet.ALL_COLORS;
+            addColors = ColorSet.WUBRG;
         } else {
             addColors = ColorSet.fromNames(colors.split(" & "));
         }

@@ -10,12 +10,13 @@ import forge.localinstance.achievements.PlaneswalkerAchievements;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.toolbox.FChoiceList;
-import forge.util.Callback;
+
+import java.util.function.Consumer;
 
 public class ConquestPlaneswalkersScreen extends FScreen {
     private static final float PADDING = FDeckChooser.PADDING;
 
-    private final FChoiceList<PaperCard> lstPlaneswalkers = add(new FChoiceList<PaperCard>(FModel.getPlanes().iterator().next().getCommanders()) { //just use commanders as temporary list
+    private final FChoiceList<PaperCard> lstPlaneswalkers = add(new FChoiceList<PaperCard>(FModel.getPlanes().iterator().next().getCommanders()) { // Just use commanders as temporary list
         @Override
         protected void onItemActivate(Integer index, PaperCard value) {
             Forge.back();
@@ -39,12 +40,12 @@ public class ConquestPlaneswalkersScreen extends FScreen {
     }
 
     @Override
-    public void onClose(final Callback<Boolean> canCloseCallback) {
+    public void onClose(final Consumer<Boolean> canCloseCallback) {
         if (canCloseCallback == null) { return; }
 
         final PaperCard planeswalker = lstPlaneswalkers.getSelectedItem();
         if (planeswalker == null) {
-            canCloseCallback.run(true); //shouldn't happen, but don't block closing screen if no commanders
+            canCloseCallback.accept(true); // Shouldn't happen, but don't block closing screen if no commanders
             return;
         }
 
@@ -53,7 +54,7 @@ public class ConquestPlaneswalkersScreen extends FScreen {
             model.setPlaneswalker(planeswalker);
             model.saveData();
         }
-        canCloseCallback.run(true);
+        canCloseCallback.accept(true);
     }
 
     private void refreshPlaneswalkers() {

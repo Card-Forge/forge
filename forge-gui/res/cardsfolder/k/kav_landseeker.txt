@@ -1,0 +1,11 @@
+Name:Kav Landseeker
+ManaCost:3 R
+Types:Creature Kavu Soldier
+PT:4/3
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a Lander token. At the beginning of the end step on your next turn, sacrifice that token. (It's an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_lander_sac_search | TokenOwner$ You | RememberTokens$ True | SubAbility$ DelTrig
+SVar:DelTrig:DB$ DelayedTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | DelayedTriggerDefinedPlayer$ You | RememberObjects$ RememberedLKI | ThisTurn$ True | Mode$ Phase | Phase$ End of Turn | Execute$ TrigSac | SubAbility$ DBCleanup | TriggerDescription$ At the beginning of the end step on your next turn, sacrifice that token.
+SVar:TrigSac:DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhen this creature enters, create a Lander token. At the beginning of the end step on your next turn, sacrifice that token. (It's an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")

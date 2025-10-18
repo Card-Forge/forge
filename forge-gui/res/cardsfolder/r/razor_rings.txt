@@ -1,0 +1,6 @@
+Name:Razor Rings
+ManaCost:1 W
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 4 | ExcessSVar$ Excess | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 4 damage to target attacking or blocking creature. You gain life equal to the excess damage dealt this way.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Excess
+Oracle:Razor Rings deals 4 damage to target attacking or blocking creature. You gain life equal to the excess damage dealt this way.

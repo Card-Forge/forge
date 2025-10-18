@@ -1,0 +1,10 @@
+{                                    
+"name":"Ape",
+  "template":
+  {
+   "count":60,
+   "colors":["Red","Green"],
+   "tribe":"Ape",        
+   "rares":0.6
+  }
+}

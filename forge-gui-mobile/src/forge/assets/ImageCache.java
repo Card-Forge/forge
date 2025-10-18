@@ -20,7 +20,6 @@ package forge.assets;
 import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 
@@ -32,8 +31,7 @@ import com.google.common.collect.Queues;
 import com.google.common.collect.Sets;
 import forge.deck.DeckProxy;
 import forge.gui.GuiBase;
-import forge.util.FileUtil;
-import forge.util.TextUtil;
+import forge.item.PaperToken;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -73,7 +71,6 @@ import forge.util.ImageUtil;
 public class ImageCache {
     private static ImageCache imageCache;
     private Supplier<HashSet<String>> missingIconKeys = Suppliers.memoize(HashSet::new);
-    private final List<String> borderlessCardlistKey = FileUtil.readFile(ForgeConstants.BORDERLESS_CARD_LIST_FILE);
     public int counter = 0;
     private int maxCardCapacity = 300; //default card capacity
     private EvictingQueue<String> q;
@@ -250,14 +247,18 @@ public class ImageCache {
             PaperCard card = ImageUtil.getPaperCardFromImageKey(imageKey);
             if (card != null)
                 imageKey = altState ? card.getCardAltImageKey() : card.getCardImageKey();
-            if (StringUtils.isBlank(imageKey)) {
-                if (useDefaultIfNotFound)
-                    return getDefaultImage();
-                else
-                    return null;
-            }
+        } else if (imageKey.startsWith(ImageKeys.TOKEN_PREFIX)) {
+            PaperToken token = ImageUtil.getPaperTokenFromImageKey(imageKey);
+            if (token != null)
+                imageKey = token.getCardImageKey();
         }
 
+        if (StringUtils.isBlank(imageKey)) {
+            if (useDefaultIfNotFound)
+                return getDefaultImage();
+            else
+                return null;
+        }
 
         Texture image;
         File imageFile = ImageKeys.getImageFile(imageKey);
@@ -295,7 +296,7 @@ public class ImageCache {
                   image fetcher to update automatically after the card image/s are downloaded*/
                 imageLoaded = false;
                 if (image != null && imageRecord.get().get(image.toString()) == null)
-                    imageRecord.get().put(image.toString(), new ImageRecord(Color.valueOf("#171717").toString(), false, getRadius(image))); //black border
+                    imageRecord.get().put(image.toString(), new ImageRecord(Color.valueOf("#171717").toString(), false, getRadius(image), image.toString().contains(".fullborder.") || image.toString().contains("tokens"))); //black border
             }
         }
         return image;
@@ -338,7 +339,6 @@ public class ImageCache {
             Texture cardTexture = Forge.getAssets().manager().get(fileName, Texture.class, false);
             //if full bordermasking is enabled, update the border color
             if (cardTexture != null) {
-                boolean borderless = isBorderless(imageKey);
                 String setCode = imageKey.split("/")[0].trim().toUpperCase();
                 int radius;
                 if (setCode.equals("A") || setCode.equals("LEA") || setCode.equals("B") || setCode.equals("LEB"))
@@ -347,9 +347,7 @@ public class ImageCache {
                     radius = 25;
                 else
                     radius = 22;
-                updateImageRecord(cardTexture.toString(),
-                        borderless ? Color.valueOf("#171717").toString() : isCloserToWhite(getpixelColor(cardTexture)).getLeft(),
-                        !borderless && isCloserToWhite(getpixelColor(cardTexture)).getRight(), radius);
+                updateImageRecord(cardTexture.toString(), isCloserToWhite(getpixelColor(cardTexture)), radius, cardTexture.toString().contains(".fullborder.") || cardTexture.toString().contains("tokens"));
             }
             return cardTexture;
         }
@@ -402,7 +400,7 @@ public class ImageCache {
     public void preloadCache(Deck deck) {
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_CARD_IMAGES))
             return;
-        if (deck == null || !Forge.enablePreloadExtendedArt)
+        if (deck == null)
             return;
         if (deck.getAllCardsInASinglePool().toFlatList().size() <= 100) {
             for (PaperCard p : deck.getAllCardsInASinglePool().toFlatList()) {
@@ -444,8 +442,8 @@ public class ImageCache {
             return 1;
         return 0;
     }
-    public void updateImageRecord(String textureString, String colorValue, Boolean isClosertoWhite, int radius) {
-        imageRecord.get().put(textureString, new ImageRecord(colorValue, isClosertoWhite, radius));
+    public void updateImageRecord(String textureString, Pair<String, Boolean> data, int radius, boolean fullborder) {
+        imageRecord.get().put(textureString, new ImageRecord(data.getLeft(), data.getRight(), radius, fullborder));
     }
 
     public int getRadius(Texture t) {
@@ -458,6 +456,15 @@ public class ImageCache {
         if (i == null)
             return 20;
         return i;
+    }
+
+    public boolean isFullBorder(Texture image) {
+        if (image == null)
+            return false;
+        ImageRecord record = imageRecord.get().get(image.toString());
+        if (record == null)
+            return false;
+        return record.isFullBorder;
     }
 
     public FImage getBorder(String textureString) {
@@ -508,16 +515,6 @@ public class ImageCache {
         return borderColor(t);
     }
 
-    public boolean isBorderless(String imagekey) {
-        if (borderlessCardlistKey.isEmpty())
-            return false;
-        if (imagekey.length() > 7) {
-            if ((!imagekey.substring(0, 7).contains("MPS_KLD")) && (imagekey.substring(0, 4).contains("MPS_"))) //MPS_ sets except MPD_KLD
-                return true;
-        }
-        return borderlessCardlistKey.contains(TextUtil.fastReplace(imagekey, ".full", ".fullborder"));
-    }
-
     public String getpixelColor(Texture i) {
         if (!i.getTextureData().isPrepared()) {
             i.getTextureData().prepare(); //prepare texture
@@ -540,15 +537,6 @@ public class ImageCache {
         return Pair.of(c, brightness > 155);
     }
 
-    private static class ImageRecord {
-        String colorValue;
-        Boolean isCloserToWhite;
-        Integer cardRadius;
-
-        ImageRecord(String colorString, Boolean closetoWhite, int radius) {
-            colorValue = colorString;
-            isCloserToWhite = closetoWhite;
-            cardRadius = radius;
-        }
+    private record ImageRecord(String colorValue, Boolean isCloserToWhite, int cardRadius, boolean isFullBorder) {
     }
 }

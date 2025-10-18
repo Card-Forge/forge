@@ -337,6 +337,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 return false;
             }
         }
+        if (sa.isSneak()) {
+            if (!game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                return false;
+            }
+        }
         return true;
     }
 
@@ -352,6 +357,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
      */
     public final boolean checkActivatorRestrictions(final Card c, final SpellAbility sa) {
         Player activator = sa.getActivatingPlayer();
+
+        if (sa.isCastFromPlayEffect()) {
+            return true;
+        }
 
         if (sa.isSpell()) {
             // Spells should always default to "controller" but use mayPlay check.
@@ -615,14 +624,12 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             return false;
         }
 
-        if (!sa.isCastFromPlayEffect()) {
-            if (!checkTimingRestrictions(c, sa)) {
-                return false;
-            }
+        if (!checkActivatorRestrictions(c, sa)) {
+            return false;
+        }
 
-            if (!checkActivatorRestrictions(c, sa)) {
-                return false;
-            }
+        if (!checkTimingRestrictions(c, sa)) {
+            return false;
         }
 
         if (!checkZoneRestrictions(c, sa)) {

@@ -1,0 +1,7 @@
+Name:Meltstrider Eulogist
+ManaCost:2 G
+Types:Creature Insect Soldier
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+counters_GE1_P1P1 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control with a +1/+1 counter on it dies, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Whenever a creature you control with a +1/+1 counter on it dies, draw a card.

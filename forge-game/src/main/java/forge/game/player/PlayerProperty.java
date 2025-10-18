@@ -132,32 +132,34 @@ public class PlayerProperty {
                 return false;
             }
         } else if (property.startsWith("wasDealt")) {
-            boolean found = false;
-            String validCard = null;
             Boolean combat = null;
             if (property.contains("CombatDamage")) {
                 combat = true;
             }
-            if (property.contains("ThisTurnBySource")) {
-                found = source.getDamageHistory().getDamageDoneThisTurn(combat, validCard == null, validCard, "You", source, player, spellAbility) > 0;
-            } else {
-                String comp = "GE";
-                int right = 1;
-                int numValid = 0;
+            String validCard = null;
+            String comp = "GE";
+            int right = 1;
 
-                if (property.contains("ThisTurnBy")) {
-                    String[] props = property.split(" ");
+            if (property.contains("ThisTurnBy")) {
+                int idx = 2;
+                String[] props = property.split(" ");
+                if (property.contains("BySource")) {
+                    idx--;
+                } else {
                     validCard = props[1];
-                    if (props.length > 2) {
-                        comp = props[2].substring(0, 2);
-                        right = AbilityUtils.calculateAmount(source, props[2].substring(2), spellAbility);
-                    }
                 }
-
-                numValid = game.getDamageDoneThisTurn(combat, validCard == null, validCard, "You", source, player, spellAbility).size();
-                found = Expressions.compare(numValid, comp, right);
+                if (props.length > idx) {
+                    comp = props[idx].substring(0, 2);
+                    right = AbilityUtils.calculateAmount(source, props[idx].substring(2), spellAbility);
+                }
             }
-            if (!found) {
+            int result;
+            if (property.contains("BySource")) {
+                result = source.getDamageHistory().getDamageDoneThisTurn(combat, false, property.contains("SourceTimes"), null, "You", source, player, spellAbility);
+            } else {
+                result = game.getDamageDoneThisTurn(combat, validCard == null, validCard, "You", source, player, spellAbility).size();
+            }
+            if (!Expressions.compare(result, comp, right)) {
                 return false;
             }
         } else if (property.equals("attackedBySourceThisCombat")) {
@@ -490,7 +492,10 @@ public class PlayerProperty {
                 }
             }
             return false;
-        }  
+        } else {
+            // could print error msg for unknown property here, though it'd need to check that it's not "Any" case
+            return false;
+        }
         return true;
     }
 

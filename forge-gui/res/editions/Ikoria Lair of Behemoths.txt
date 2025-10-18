@@ -2,14 +2,11 @@
 Code=IKO
 Date=2020-04-24
 Name=Ikoria: Lair of Behemoths
-Code2=IKO
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:fromSheet("IKO cards"):!fromSheet("IKO Lands"), 3 Uncommon:fromSheet("IKO cards"), 1 RareMythic:fromSheet("IKO cards"), 1 fromSheet("IKO Lands")
 Prerelease=6 Boosters, 1 RareMythic+
 FatPackExtraSlots=20 BasicLands, 20 BasicLands+
-#, 1 Colossification+|IKO|3
-ScryfallCode=IKO
 
 [cards]
 1 C Adaptive Shimmerer @Jason Felix
@@ -289,7 +286,7 @@ ScryfallCode=IKO
 
 [buy a box]
 275 M Zilortha, Strength Incarnate @Antonio José Manzanedo
-275a M Zilortha, Strength Incarnate @Chase Stone
+275y M Zilortha, Strength Incarnate @Chase Stone
 
 [borderless]
 276 M Lukka, Coppercoat Outcast @Kieran Yanner
@@ -412,7 +409,7 @@ ScryfallCode=IKO
 387 R Crystalline Giant @Kotakan
 
 [rebalanced]
-A216 M A-Winota, Joiner of Forces @Magali Villeneuve
+A-216 M A-Winota, Joiner of Forces @Magali Villeneuve
 
 [Lands]
 10 Bloodfell Caves|IKO
@@ -445,8 +442,8 @@ A216 M A-Winota, Joiner of Forces @Magali Villeneuve
 1 w_1_1_cat_lifelink @Kekai Kotaki
 2 w_1_1_cat_bird_flying @Leesha Hannigan
 3 w_1_1_human_soldier @Manuel Castañón
-4 w_1_1_human_soldier @Manuel Castañón
-5 w_1_1_human_soldier @Manuel Castañón
+4 w_1_1_human_soldier @Eric Deschamps
+5 w_1_1_human_soldier @Bram Sels
 6 u_8_8_kraken @Vincent Proce
 7 u_x_x_shark_flying @Caio Monteiro
 8 r_1_1_dinosaur_haste @Jakub Kasper

@@ -4,7 +4,7 @@ Types:Legendary Creature Human Ranger
 PT:3/4
 K:First Strike
 K:Reach
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME attacks, exile up to one target legendary artifact card or legendary land card from a graveyard and put a discovery counter on it. You may play a card from exile with a discovery counter on it this turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever NICKNAME attacks, exile up to one target legendary artifact card or legendary land card from a graveyard and put a discovery counter on it. You may play a card from exile with a discovery counter on it this turn.
 SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Artifact.Legendary,Land.Legendary | Origin$ Graveyard | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target legendary artifact card or legendary land card from a graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ DISCOVERY | CounterNum$ 1 | Defined$ Remembered | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ StaticPlay | SubAbility$ DBCleanup

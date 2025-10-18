@@ -1,0 +1,8 @@
+Name:Sunstar Chaplain
+ManaCost:1 W
+Types:Creature Human Cleric
+PT:3/2
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigPut | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl+tapped | PresentCompare$ GE2 | TriggerDescription$ At the beginning of your end step, if you control two or more tapped creatures, put a +1/+1 counter on target creature you control.
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ Tap | Cost$ 2 SubCounter<1/P1P1/Creature.YouCtrl/a creature you control> | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | SpellDescription$ Tap target artifact or creature.
+Oracle:At the beginning of your end step, if you control two or more tapped creatures, put a +1/+1 counter on target creature you control.\n{2}, Remove a +1/+1 counter from a creature you control: Tap target artifact or creature.

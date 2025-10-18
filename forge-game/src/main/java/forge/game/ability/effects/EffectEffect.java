@@ -8,6 +8,7 @@ import java.util.Map;
 import com.google.common.collect.Lists;
 
 import forge.ImageKeys;
+import forge.StaticData;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
@@ -142,15 +143,20 @@ public class EffectEffect extends SpellAbilityEffect {
         }
 
         String image;
-        if (sa.hasParam("Image")) {
-            image = ImageKeys.getTokenKey(sa.getParam("Image"));
-        } else if (name.startsWith("Emblem")) { // try to get the image from name
-            image = ImageKeys.getTokenKey(
-            TextUtil.fastReplace(
-                TextUtil.fastReplace(
-                    TextUtil.fastReplace(name.toLowerCase(), " — ", "_"),
+        if (name.startsWith("Emblem")) {
+            if (sa.hasParam("Image")) {
+                image = StaticData.instance().getOtherImageKey(sa.getParam("Image"), hostCard.getSetCode());
+            } else {
+                // try to get the image from name
+                String imageKey = TextUtil.fastReplace(
+                    TextUtil.fastReplace(
+                        TextUtil.fastReplace(name.toLowerCase(), " — ", "_"),
                         ",", ""),
-                    " ", "_").toLowerCase());
+                        " ", "_");
+                image = StaticData.instance().getOtherImageKey(imageKey, hostCard.getSetCode());
+            }
+        } else if (sa.hasParam("Image")) {
+            image = ImageKeys.getTokenKey(sa.getParam("Image"));
         } else { // use host image
             image = hostCard.getImageKey();
         }
@@ -263,22 +269,22 @@ public class EffectEffect extends SpellAbilityEffect {
                 }
             }
 
-            // Set Chosen Color(s)
             if (hostCard.hasChosenColor()) {
                 eff.setChosenColors(Lists.newArrayList(hostCard.getChosenColors()));
             }
 
-            // Set Chosen Cards
             if (hostCard.hasChosenCard()) {
                 eff.setChosenCards(hostCard.getChosenCards());
             }
 
-            // Set Chosen Player
             if (hostCard.hasChosenPlayer()) {
                 eff.setChosenPlayer(hostCard.getChosenPlayer());
             }
 
-            // Set Chosen Type
+            if (hostCard.getChosenDirection() != null) {
+                eff.setChosenDirection(hostCard.getChosenDirection());
+            }
+
             if (hostCard.hasChosenType()) {
                 eff.setChosenType(hostCard.getChosenType());
             }
@@ -286,12 +292,10 @@ public class EffectEffect extends SpellAbilityEffect {
                 eff.setChosenType2(hostCard.getChosenType2());
             }
 
-            // Set Chosen name
             if (hostCard.hasNamedCard()) {
                 eff.setNamedCards(Lists.newArrayList(hostCard.getNamedCards()));
             }
 
-            // chosen number
             if (sa.hasParam("SetChosenNumber")) {
                 eff.setChosenNumber(AbilityUtils.calculateAmount(hostCard, sa.getParam("SetChosenNumber"), sa));
             } else if (hostCard.hasChosenNumber()) {

@@ -225,7 +225,7 @@
         <dependency>
             <groupId>com.badlogicgames.gdx-controllers</groupId>
             <artifactId>gdx-controllers-desktop</artifactId>
-            <version>2.2.3</version>
+            <version>2.2.4</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.badlogicgames.gdx</groupId>
@@ -238,6 +238,11 @@
             <artifactId>gdx-box2d-platform</artifactId>
             <version>1.13.5</version>
             <classifier>natives-desktop</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.github.oshi</groupId>
+            <artifactId>oshi-core</artifactId>
+            <version>6.9.0</version>
         </dependency>
     </dependencies>
 </project>

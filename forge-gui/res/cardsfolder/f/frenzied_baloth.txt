@@ -1,0 +1,11 @@
+Name:Frenzied Baloth
+ManaCost:G G
+Types:Creature Beast
+PT:3/2
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
+K:Trample
+K:Haste
+R:Event$ Counter | ValidSA$ Spell.Creature+YouCtrl | Layer$ CantHappen | ActiveZones$ Battlefield | Description$ Creature spells you control can't be countered.
+S:Mode$ CantPreventDamage | IsCombat$ True | Description$ Combat damage can't be prevented.
+SVar:PlayMain1:TRUE
+Oracle:This spell can't be countered.\nTrample, haste\nCreature spells you control can't be countered.\nCombat damage can't be prevented.

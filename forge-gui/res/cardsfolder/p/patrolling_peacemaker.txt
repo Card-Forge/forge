@@ -1,0 +1,9 @@
+Name:Patrolling Peacemaker
+ManaCost:2 W
+Types:Artifact Creature Robot Soldier
+PT:0/0
+K:etbCounter:P1P1:2
+T:Mode$ CommitCrime | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigProliferate | TriggerDescription$ Whenever an opponent commits a crime, proliferate. (They commit a crime if they target an opponent, anything an opponent controls, and/or cards in an opponent's graveyard. To proliferate, you choose any number of permanents and/or players, then give each another counter of each kind already there.)
+SVar:TrigProliferate:DB$ Proliferate
+DeckHas:Ability$Proliferate|Counters
+Oracle:This creature enters with two +1/+1 counters on it.\nWhenever an opponent commits a crime, proliferate. (They commit a crime if they target an opponent, anything an opponent controls, and/or cards in an opponent's graveyard. To proliferate, you choose any number of permanents and/or players, then give each another counter of each kind already there.)

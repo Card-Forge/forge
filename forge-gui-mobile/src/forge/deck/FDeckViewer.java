@@ -72,6 +72,21 @@ public class FDeckViewer extends FScreen {
         FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblDeckListCopiedClipboard", deck.getName()));
     }
 
+    public static void copyCollectionToClipboard(CardPool pool) {
+        final String nl = System.lineSeparator();
+        final StringBuilder collectionList = new StringBuilder();
+        Set<String> accounted = new HashSet<>();
+        for (final Entry<PaperCard, Integer> entry : pool) {
+            String cardName = entry.getKey().getCardName();
+            if (!accounted.contains(cardName)) {
+                collectionList.append(pool.countByName(cardName)).append(" ").append(cardName).append(nl);
+                accounted.add(cardName);
+            }
+        }
+        Forge.getClipboard().setContents(collectionList.toString());
+        FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblCollectionCopiedClipboard"));
+    }
+
     private final Deck deck;
     private final CardManager cardManager;
     private DeckSection currentSection;

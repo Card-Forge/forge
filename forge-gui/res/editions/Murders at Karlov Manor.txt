@@ -6,7 +6,7 @@ Type=Expansion
 ScryfallCode=MKM
 BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,BasicLand,Wildcard,PrereleasePromo
 Booster=6 Common, 1 Common-Guest, 3 Uncommon, 1 RareMythic, 1 BasicLand, 1 Wildcard, 1 Wildcard+
-Prerelease=6 Boosters, 1 RareMythic+, 1 PrereleasePromo+
+Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=36
 
 [Common]
@@ -21,6 +21,7 @@ Base=Uncommon:fromSheet("MKM cards")
 
 [RareMythic]
 Base=RareMythic:fromSheet("MKM cards")
+Replace=.175F fromSheet("MKM prerelease promo")
 
 [BasicLand]
 Base=BasicLand:fromSheet("MKM cards")
@@ -545,9 +546,12 @@ Base=Any:fromsheet("MKM prerelease promo")
 12 wb_1_1_spirit_flying @Christina Kraus
 13 voja_fenstalker @Samuel Perin
 14 c_a_clue_draw @Mike Burns
-15 c_a_clue_draw @Mike Burns
-16 c_a_clue_draw @Mike Burns
-17 c_a_clue_draw @Mike Burns
-18 c_a_clue_draw @Mike Burns
+15 c_a_clue_draw @Alfven Ato
+16 c_a_clue_draw @Ernanda Souza
+17 c_a_clue_draw @J.P. Targete
+18 c_a_clue_draw @Daneen Wilkerson
 19 c_0_0_a_thopter_flying @David Sondered
 20 c_1_1_a_thopter_flying @Samuel Perin
+
+[other]
+21 cloaked @Ben Hill

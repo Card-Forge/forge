@@ -7,6 +7,8 @@ public class Equip extends KeywordWithCost {
     public Equip() {
     }
 
+    public String getValidDescription() { return type; }
+
     @Override
     protected void parse(String details) {
         String[] k = details.split(":");

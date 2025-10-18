@@ -68,7 +68,6 @@
     "Anax and Cymede & Kynaios and Tiro",
     "Call from the Grave",
     "Mise"
-    
   ],
   "restrictedEditions": [
     "HTR",
@@ -86,15 +85,25 @@
     "UND",
     "PUST",
     "DA1",
-    "UST",
     "UNF"
+  ],
+  "restrictedEvents": [
+    "LEA",
+    "LEB",
+    "2ED",
+    "30A",
+    "CNS",
+    "CN2",
+    "CMR",
+    "CLB",
+    "CMM"
   ],
   "difficulties": [
     {
       "name": "Easy",
       "startingLife": 16,
       "startingShards": 5,
-      "staringMoney": 500,
+      "startingMoney": 500,
       "enemyLifeFactor": 0.8,
       "spawnRank": 0,          
       "goldLoss": 0.02,          
@@ -131,7 +140,7 @@
       "name": "Normal",
       "startingLife": 12,
       "startingShards": 2,
-      "staringMoney": 250,
+      "startingMoney": 250,
       "startingDifficulty": true,
       "enemyLifeFactor": 1.0,
       "rewardMaxFactor" : 1.0,
@@ -168,7 +177,7 @@
       "name": "Hard",
       "startingLife": 8,
       "startingShards": 0,
-      "staringMoney": 125,
+      "startingMoney": 125,
       "enemyLifeFactor": 1.5,
       "rewardMaxFactor" : 0.5,
       "spawnRank": 2,         
@@ -201,7 +210,7 @@
       "name": "Insane",
       "startingLife": 7,
       "startingShards": 0,
-      "staringMoney": 0,
+      "startingMoney": 0,
       "enemyLifeFactor": 2.5,
       "rewardMaxFactor" : 0.0,
       "spawnRank": 2,

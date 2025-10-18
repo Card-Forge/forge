@@ -1,0 +1,87 @@
+{
+  "width": 270,
+  "height": 480,
+  "yDown": true,
+  "elements": [
+    {
+      "type": "Image",
+      "image": "ui/inn_shard.png",
+      "width": 270,
+      "height": 480
+    },      
+    {
+      "type": "Image",
+      "name": "shardIcon",
+      "image": "ui/buyshards.png",
+      "x": 60,
+      "y": 85,
+      "width": 100,
+      "height": 100
+    },
+    {
+      "type": "TextButton",
+      "name": "btnBuyShardsCost",
+      "text": "btnBuyShardsCost",
+      "width": 100,
+      "height": 30,
+      "x": 165,
+      "y": 105
+    },
+    {
+      "type": "Image",
+      "name": "sellIcon",
+      "image": "ui/sell.png",
+      "x": 60,
+      "y": 200,
+      "width": 100,
+      "height": 100
+    },
+    {
+      "type": "TextButton",
+      "name": "btnSellShardsQuantity",
+      "text": "btnSellShardsQuantity",
+      "width": 100,
+      "height": 30,
+      "x": 165,
+      "y": 220
+    },
+    {
+      "type": "Image",
+      "name": "leaveIcon",
+      "image": "ui/leave.png",
+      "x": 60,
+      "y": 315,
+      "width": 100,
+      "height": 100
+    },
+    {
+      "type": "TextButton",
+      "name": "done",
+      "text": "tr(lblBack)",
+      "width": 100,
+      "height": 30,
+      "x": 165,
+      "y": 335
+    },
+	{
+      "type": "Label",
+      "name": "playerGold",
+	  "style":"background",
+      "text": "[+Gold]",
+      "width": 128,
+      "height": 32,
+      "x": 16,
+      "y": 405
+    },
+	{
+      "type": "Label",
+      "name": "playerShards",
+	  "style":"background",
+      "text": "[+Shards]",
+      "width": 128,
+      "height": 32,
+      "x": 16,
+      "y": 435
+    }
+  ]
+}

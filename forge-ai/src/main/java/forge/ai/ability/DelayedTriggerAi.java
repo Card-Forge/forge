@@ -15,43 +15,56 @@ import forge.game.zone.ZoneType;
 public class DelayedTriggerAi extends SpellAbilityAi {
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         if ("Always".equals(sa.getParam("AILogic"))) {
-            // TODO: improve ai
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         SpellAbility trigsa = sa.getAdditionalAbility("Execute");
         if (trigsa == null) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
         trigsa.setActivatingPlayer(ai);
 
         if (trigsa instanceof AbilitySub) {
             return SpellApiToAi.Converter.get(trigsa).chkDrawbackWithSubs(ai, (AbilitySub)trigsa);
         } else {
-            return AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(trigsa);
+            AiPlayDecision decision = ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(trigsa);
+            if (decision == AiPlayDecision.WillPlay) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
         }
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         SpellAbility trigsa = sa.getAdditionalAbility("Execute");
         if (trigsa == null) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
         trigsa.setActivatingPlayer(ai);
 
         if (!sa.hasParam("OptionalDecider")) {
-            return aic.doTrigger(trigsa, true);
+            if (aic.doTrigger(trigsa, true)) {
+                // If the trigger is mandatory, we can play it
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
         } else {
-            return aic.doTrigger(trigsa, !sa.getParam("OptionalDecider").equals("You"));
+            if (aic.doTrigger(trigsa, !sa.getParam("OptionalDecider").equals("You"))) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
         }
     }
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         // Card-specific logic
         String logic = sa.getParamOrDefault("AILogic", "");
         if (logic.equals("SpellCopy")) {
@@ -90,9 +103,9 @@ public class DelayedTriggerAi extends SpellAbilityAi {
             });
 
             if (count == 0) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else if (logic.equals("NarsetRebound")) {
             // should be done in Main2, but it might broke for other cards
             //if (phase.getPhase().isBefore(PhaseType.MAIN2)) {
@@ -125,10 +138,10 @@ public class DelayedTriggerAi extends SpellAbilityAi {
             });
 
             if (count == 0) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else if (logic.equals("SaveCreature")) {
             CardCollection ownCreatures = ai.getCreaturesInPlay();
 
@@ -142,19 +155,25 @@ public class DelayedTriggerAi extends SpellAbilityAi {
 
             if (!ownCreatures.isEmpty()) {
                 sa.getTargets().add(ComputerUtilCard.getBestAI(ownCreatures));
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
         // Generic logic
         SpellAbility trigsa = sa.getAdditionalAbility("Execute");
         if (trigsa == null) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
         trigsa.setActivatingPlayer(ai);
-        return AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(trigsa);
+
+        AiPlayDecision decision = ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(trigsa);
+        if (decision == AiPlayDecision.WillPlay) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
     }
 
 }

@@ -2,7 +2,6 @@
 Code=M13
 Date=2012-07-13
 Name=Magic 2013
-Code2=M13
 Type=Core
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
@@ -270,7 +269,12 @@ ScryfallCode=M13
 5 b_2_2_zombie @Lucas Graciano
 6 r_1_1_goblin @Karl Kopinski
 6 r_1_1_goblin @Karl Kopinski
+7 r_4_4_hellion @Anthony Francisco
+# Duplicated as there is no r_4_4_hellion_haste token yet
 7 r_4_4_hellion_haste @Anthony Francisco
 8 g_3_3_beast @John Donahue
 9 g_1_1_saproling @Brad Rigney
 10 g_6_6_wurm @Anthony Francisco
+
+[other]
+11 emblem_liliana_of_the_dark_realms @D. Alexander Gregory

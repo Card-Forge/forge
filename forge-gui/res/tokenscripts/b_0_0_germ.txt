@@ -1,0 +1,6 @@
+Name:Germ Token
+ManaCost:no cost
+Colors:black
+Types:Creature Germ
+PT:0/0
+Oracle:

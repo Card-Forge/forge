@@ -1,0 +1,11 @@
+Name:Ragost, Deft Gastronaut
+ManaCost:R W
+Types:Legendary Creature Lobster Citizen
+PT:2/2
+S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AffectedZone$ Battlefield | AddType$ Food | AddAbility$ FoodSac | Description$ Artifacts you control are Foods in addition to their other types and have "{2}, {T}, Sacrifice this artifact: You gain 3 life."
+SVar:FoodSac:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME/this artifact> | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+A:AB$ DealDamage | Cost$ 1 T Sac<1/Food> | NumDmg$ 3 | Defined$ Player.Opponent | SpellDescription$ NICKNAME deals 3 damage to each opponent.
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigUntap | TriggerDescription$ At the beginning of each end step, if you gained life this turn, untap NICKNAME.
+SVar:TrigUntap:DB$ Untap | Defined$ Self
+SVar:X:Count$LifeYouGainedThisTurn
+Oracle:Artifacts you control are Foods in addition to their other types and have "{2}, {T}, Sacrifice this artifact: You gain 3 life."\n{1}, {T}, Sacrifice a Food: Ragost deals 3 damage to each opponent.\nAt the beginning of each end step, if you gained life this turn, untap Ragost.

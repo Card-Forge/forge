@@ -1,0 +1,117 @@
+{ 
+  "avatar":"sprites/heroes/avatar.atlas",  
+  "heroes":[
+  {
+    "name":"Devil",
+    "female":"sprites/heroes/devil_f.atlas",      
+    "male":"sprites/heroes/devil_m.atlas",      
+    "femaleAvatar":"Devil_f",      
+    "maleAvatar":"Devil_m" 
+  },
+  {
+    "name":"Kor",
+    "female":"sprites/heroes/kor_f.atlas",      
+    "male":"sprites/heroes/kor_m.atlas",      
+    "femaleAvatar":"Kor_f",      
+    "maleAvatar":"Kor_m" 
+  } ,
+  {
+    "name":"Human",
+    "female":"sprites/heroes/human_f.atlas",      
+    "male":"sprites/heroes/human_m.atlas",      
+    "femaleAvatar":"Human_f",      
+    "maleAvatar":"Human_m" 
+  },
+  {
+    "name":"Elf",
+    "female":"sprites/heroes/elf_f.atlas",      
+    "male":"sprites/heroes/elf_m.atlas",      
+    "femaleAvatar":"Elf_f",      
+    "maleAvatar":"Elf_m" 
+  },
+  {
+    "name":"Metathran",
+    "female":"sprites/heroes/metathran_f.atlas",      
+    "male":"sprites/heroes/metathran_m.atlas",      
+    "femaleAvatar":"Metathran_f",      
+    "maleAvatar":"Metathran_m" 
+  },
+  {
+    "name":"Undead",
+    "female":"sprites/heroes/undead_f.atlas",      
+    "male":"sprites/heroes/undead_m.atlas",      
+    "femaleAvatar":"Undead_f",      
+    "maleAvatar":"Undead_m" 
+  } ,
+  {
+    "name":"Viashino",
+    "female":"sprites/heroes/viashino_f.atlas",      
+    "male":"sprites/heroes/viashino_m.atlas",      
+    "femaleAvatar":"Viashino_f",      
+    "maleAvatar":"Viashino_m" 
+  }   ,
+  {
+    "name":"Phyrexian",
+    "female":"sprites/heroes/phyrexian_r.atlas",      
+    "male":"sprites/heroes/phyrexian_u.atlas",      
+    "femaleAvatar":"Phyrexian_f",      
+    "maleAvatar":"Phyrexian_m" 
+  }   ,
+  {
+    "name":"Dwarf",
+    "female":"sprites/heroes/dwarf_f.atlas",      
+    "male":"sprites/heroes/dwarf_m.atlas",      
+    "femaleAvatar":"Dwarf_f",      
+    "maleAvatar":"Dwarf_m" 
+  },
+  {
+    "name":"Werewolf",
+    "female":"sprites/heroes/werewolf_f.atlas",      
+    "male":"sprites/heroes/werewolf_m.atlas",      
+    "femaleAvatar":"Werewolf_f",      
+    "maleAvatar":"Werewolf_m" 
+  },
+  {
+    "name":"Leonin",
+    "female":"sprites/heroes/leonin_f.atlas",      
+    "male":"sprites/heroes/leonin_m.atlas",      
+    "femaleAvatar":"Leonin_f",      
+    "maleAvatar":"Leonin_m" 
+  },
+  {
+    "name":"Red Dragon",
+    "female":"sprites/heroes/dragonplayer_r.atlas",      
+    "male":"sprites/heroes/dragonplayer_r.atlas",      
+    "femaleAvatar":"Dragon_r",      
+    "maleAvatar":"Dragon_r" 
+  },
+  {
+    "name":"White Dragon",
+    "female":"sprites/heroes/dragonplayer_w.atlas",      
+    "male":"sprites/heroes/dragonplayer_w.atlas",      
+    "femaleAvatar":"Dragon_w",      
+    "maleAvatar":"Dragon_w"  
+  },
+  {
+    "name":"Blue Dragon",
+    "female":"sprites/heroes/dragonplayer_u.atlas",      
+    "male":"sprites/heroes/dragonplayer_u.atlas",      
+    "femaleAvatar":"Dragon_u",      
+    "maleAvatar":"Dragon_u" 
+  },
+  {
+    "name":"Green Dragon",
+    "female":"sprites/heroes/dragonplayer_g.atlas",      
+    "male":"sprites/heroes/dragonplayer_g.atlas",      
+    "femaleAvatar":"Dragon_g",      
+    "maleAvatar":"Dragon_g"  
+  },
+  {
+    "name":"Black Dragon",
+    "female":"sprites/heroes/dragonplayer_b.atlas",      
+    "male":"sprites/heroes/dragonplayer_b.atlas",      
+    "femaleAvatar":"Dragon_b",      
+    "maleAvatar":"Dragon_b" 
+   }
+  ]
+}

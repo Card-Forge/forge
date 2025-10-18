@@ -67,7 +67,7 @@ public class CostExileFromStack extends CostPart {
         final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
         sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
 
-        sb.append("from stack");
+        sb.append(" from stack");
 
         return sb.toString();
     }

@@ -36,7 +36,7 @@ import forge.util.ITranslatable;
  * Base class for Triggers,ReplacementEffects and StaticAbilities.
  *
  */
-public abstract class CardTraitBase extends GameObject implements IHasCardView, IHasSVars {
+public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVars {
 
     /** The host card. */
     protected Card hostCard;
@@ -62,7 +62,9 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
 
     /** Keys of descriptive (text) parameters. */
     private static final ImmutableList<String> descriptiveKeys = ImmutableList.<String>builder()
-            .add("Description", "SpellDescription", "StackDescription", "TriggerDescription").build();
+            .add("Description", "SpellDescription", "StackDescription", "TriggerDescription")
+            .add("ChangeTypeDesc")
+            .build();
 
     /**
      * Keys that should not changed

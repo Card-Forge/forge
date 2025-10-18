@@ -4,8 +4,10 @@ Date=2013-07-18
 Name=Magic 2014 Promos
 Type=Promo
 ScryfallCode=PM14
+TokenFallbackCode=M14
 
 [cards]
+A12 R Xathrid Necromancer @Maciej Kuciara
 21★ C Hive Stirrings @Johann Bodin
 48★ R Colossal Whale @Erica Yang
 141★ R Goblin Diplomats @Jesper Ejsing

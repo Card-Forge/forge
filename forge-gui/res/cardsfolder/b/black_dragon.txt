@@ -4,5 +4,5 @@ Types:Creature Dragon
 PT:4/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Acid Breath — When CARDNAME enters, target creature an opponent controls gets -3/-3 until end of turn.
-SVar:TrigPump:DB$ Pump | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature
+SVar:TrigPump:DB$ Pump | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
 Oracle:Flying\nAcid Breath — When Black Dragon enters, target creature an opponent controls gets -3/-3 until end of turn.

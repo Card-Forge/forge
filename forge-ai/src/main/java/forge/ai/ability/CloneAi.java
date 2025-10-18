@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -18,7 +20,7 @@ import java.util.Map;
 public class CloneAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
 
@@ -35,10 +37,6 @@ public class CloneAi extends SpellAbilityAi {
         // "Am I going to attack with this?"
         // TODO - add some kind of check for during human turn to answer
         // "Can I use this to block something?"
-
-        if (!checkPhaseRestrictions(ai, sa, game.getPhaseHandler())) {
-            return false;
-        }
 
         PhaseHandler phase = game.getPhaseHandler();
 
@@ -66,18 +64,19 @@ public class CloneAi extends SpellAbilityAi {
             }
 
             if (!bFlag) { // All of the defined stuff is cloned, not very useful
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
         } else {
             sa.resetTargets();
             useAbility &= cloneTgtAI(sa);
         }
 
-        return useAbility;
-    } // end cloneCanPlayAI()
+        return useAbility ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
+                : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+    }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
         // AI should only activate this during Human's turn
         boolean chance = true;
 
@@ -85,17 +84,22 @@ public class CloneAi extends SpellAbilityAi {
             chance = cloneTgtAI(sa);
         }
 
-        return chance;
+        return chance ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
+                : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         Card host = sa.getHostCard();
         boolean chance = true;
 
         if (sa.usesTargeting()) {
             chance = cloneTgtAI(sa);
         } else {
+            if (sa.isReplacementAbility() && host.isCloned()) {
+                // prevent StackOverflow from infinite loop copying another ETB RE
+                return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
+            }
             if (sa.hasParam("Choices")) {
                 CardCollectionView choices = CardLists.getValidCards(host.getGame().getCardsIn(ZoneType.Battlefield),
                         sa.getParam("Choices"), host.getController(), host, sa);
@@ -111,7 +115,11 @@ public class CloneAi extends SpellAbilityAi {
         // Eventually, we can call the trigger of ETB abilities with
         // not mandatory as part of the checks to cast something
 
-        return chance || mandatory;
+        if (mandatory || chance) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     /**
@@ -184,7 +192,7 @@ public class CloneAi extends SpellAbilityAi {
         final boolean canCloneLegendary = "True".equalsIgnoreCase(sa.getParam("NonLegendary"));
 
         String filter = !isVesuva ? "Permanent.YouDontCtrl,Permanent.nonLegendary"
-                : "Permanent.YouDontCtrl+notnamed" + name + ",Permanent.nonLegendary+notnamed" + name;
+                : "Permanent.YouDontCtrl+!named" + name + ",Permanent.nonLegendary+!named" + name;
 
         // TODO: rewrite this block so that this is done somehow more elegantly
         if (canCloneLegendary) {

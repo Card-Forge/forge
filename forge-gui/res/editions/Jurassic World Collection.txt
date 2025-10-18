@@ -27,17 +27,17 @@ ScryfallCode=REX
 19 R Swooping Pteranodon @Slawomir Maniak
 20 R Dino DNA @Leonardo Santanna
 21 L Plains @Véronique Meignaud
-21b L Plains @Véronique Meignaud
+21☇ L Plains @Véronique Meignaud
 22 L Island @Svetlin Velinov
-22b L Island @Svetlin Velinov
+22☇ L Island @Svetlin Velinov
 23 L Swamp @Pablo Mendoza
-23b L Swamp @Pablo Mendoza
+23☇ L Swamp @Pablo Mendoza
 24 L Mountain @Simon Dominic
-24b L Mountain @Simon Dominic
+24☇ L Mountain @Simon Dominic
 25 L Forest @Yeong-Hao Han
-25b L Forest @Yeong-Hao Han
+25☇ L Forest @Yeong-Hao Han
 26 C Command Tower @Xabi Gaztelua
-26b C Command Tower @Xabi Gaztelua
+26☇ C Command Tower @Xabi Gaztelua
 27 R Don't Move @Inkognit
 28 R Cresting Mosasaurus @Chris Rallis
 29 R Spitting Dilophosaurus @Francisco Badilla

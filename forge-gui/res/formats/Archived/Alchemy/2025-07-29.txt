@@ -1,0 +1,8 @@
+[format]
+Name:Alchemy (EOE)
+Type:Archived
+Subtype:Arena
+Effective:2025-07-29
+Sets:ANA, ANB, BLB, YBLB, DSK, YDSK, FDN, DFT, YDFT, TDM, YTDM, FIN, EOE
+// Due to format rotation, Alchemy loses access to several mana-fixing lands. Therefore, the following cards are legal ahead of schedule due to their inclusion in YEOE on 19 August 2025.
+Additional:Clifftop Retreat; Dragonskull Summit; Drowned Catacomb; Glacial Fortress; Hinterland Harbor; Isolated Chapel; Rootbound Crag; Sulfur Falls; Sunpetal Grove; Woodland Cemetery

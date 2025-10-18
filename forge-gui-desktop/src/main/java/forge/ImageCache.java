@@ -82,14 +82,52 @@ public class ImageCache {
             .expireAfterAccess(15, TimeUnit.MINUTES)
             .build(new ImageLoader());
     private static final BufferedImage _defaultImage;
+    private static final BufferedImage _stars;
+    private static final BufferedImage _inv_stars;
     static {
         BufferedImage defImage = null;
+        BufferedImage stars = null;
+        BufferedImage inv_stars = null;
         try {
             defImage = ImageIO.read(new File(ForgeConstants.NO_CARD_FILE));
         } catch (Exception ex) {
             System.err.println("could not load default card image");
         } finally {
             _defaultImage = (null == defImage) ? new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB) : defImage;
+        }
+        try {
+            stars = ImageIO.read(new File(ForgeConstants.STARS_FILE));
+            inv_stars =ImageIO.read(new File(ForgeConstants.STARS_FILE));
+            // https://github.com/yusufshakeel/Java-Image-Processing-Project/blob/master/example/Negative.java
+            //get image width and height
+            int width = inv_stars.getWidth();
+            int height = inv_stars.getHeight();
+
+            //convert to negative
+            for(int y = 0; y < height; y++){
+                for(int x = 0; x < width; x++){
+                    int p = inv_stars.getRGB(x,y);
+
+                    int a = (p>>24)&0xff;
+                    int r = (p>>16)&0xff;
+                    int g = (p>>8)&0xff;
+                    int b = p&0xff;
+
+                    //subtract RGB from 255
+                    r = 255 - r;
+                    g = 255 - g;
+                    b = 255 - b;
+
+                    //set new RGB value
+                    p = (a<<24) | (r<<16) | (g<<8) | b;
+                    inv_stars.setRGB(x, y, p);
+                }
+            }
+        } catch (Exception ex) {
+            System.err.println("could not load default stars image");
+        } finally {
+            _stars = (null == stars) ? new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB) : stars;
+            _inv_stars = (null == inv_stars) ? new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB) : inv_stars;
         }
     }
 
@@ -224,7 +262,7 @@ public class ImageCache {
             && ipc != null && !ipc.getArtist().isEmpty();
         String originalKey = imageKey;
         if (useArtCrop) {
-            if (ipc != null && ipc.getRules().getSplitType() == CardSplitType.Flip) {
+            if (ipc.getRules().getSplitType() == CardSplitType.Flip) {
                 // Art crop will always use front face as image key for flip cards
                 imageKey = ipc.getCardImageKey();
             }
@@ -464,4 +502,8 @@ public class ImageCache {
     }
 
     public static BufferedImage getDefaultImage() { return _defaultImage; }
+
+    public static BufferedImage getStarsImage() { return _stars; }
+
+    public static BufferedImage getInvertedStarsImage() { return _inv_stars; }
 }

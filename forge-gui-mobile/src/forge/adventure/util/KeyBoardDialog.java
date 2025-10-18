@@ -123,11 +123,11 @@ public class KeyBoardDialog extends Dialog {
         key0 = Controls.newTextButton("0", () -> kbLabel.setText(kbLabel.getText()+"0"));
         keyDot = Controls.newTextButton(".", () -> kbLabel.setText(kbLabel.getText()+"."));
         keyComma = Controls.newTextButton(",", () -> kbLabel.setText(kbLabel.getText()+","));
-        keyShift = Controls.newTextButton("Aa", this::shiftKey);
-        keyBackspace = Controls.newTextButton("<<", () -> kbLabel.setText(removeLastChar(String.valueOf(kbLabel.getText()))));
-        keySpace = Controls.newTextButton("SPACE", () -> kbLabel.setText(kbLabel.getText()+" "));
-        keyOK = Controls.newTextButton("OK", this::setKeyboardDialogText);
-        keyAbort = Controls.newTextButton("Abort", this::abortKeyInput);
+        keyShift = Controls.newTextButton("\u2191", this::shiftKey);
+        keyBackspace = Controls.newTextButton("\u2190", () -> kbLabel.setText(removeLastChar(String.valueOf(kbLabel.getText()))));
+        keySpace = Controls.newTextButton("_____", () -> kbLabel.setText(kbLabel.getText()+" "));
+        keyOK = Controls.newTextButton("[+OK]", this::setKeyboardDialogText);
+        keyAbort = Controls.newTextButton("[+Exit]", this::abortKeyInput);
         this.getContentTable().add(kbLabel).width(220).height(20).colspan(10).expandX().align(Align.center);
         this.getButtonTable().row();
         this.getButtonTable().add(key1).width(20).height(20);

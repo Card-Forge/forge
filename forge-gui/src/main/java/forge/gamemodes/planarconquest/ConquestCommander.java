@@ -36,7 +36,7 @@ public class ConquestCommander implements InventoryItem, IXmlWritable {
         }
         record = record0;
 
-        //determine origin of commander
+        // Determine origin of commander
         ConquestPlane originPlane0 = null;
         String originRegionName0 = null;
         for (ConquestPlane plane : FModel.getPlanes()) {

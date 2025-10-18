@@ -1,0 +1,14 @@
+Name:Eumidian Wastewaker
+ManaCost:2 B B
+Types:Creature Insect Cleric
+PT:4/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature attacks, you and defending player each discard a card or sacrifice a permanent. You draw a card for each land card put into a graveyard this way.
+SVar:TrigChoose:DB$ ChooseCard | Defined$ TriggeredDefendingPlayerAndYou | Mandatory$ True | Choices$ Card.inZoneHand,Permanent.CanBeSacrificedBy | ChoiceZone$ Hand,Battlefield | ControlledByPlayer$ Chooser | ChoiceTitle$ Choose a card or permanent | AILogic$ WorstCard | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | Defined$ TriggeredDefendingPlayerAndYou | DiscardValid$ Card.ChosenCard | SubAbility$ DBSac
+SVar:DBSac:DB$ SacrificeAll | ValidCards$ Card.ChosenCardStrict | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+K:Encore:6 B B
+SVar:X:Count$ValidGraveyard Land.ChosenCard
+DeckHas:Ability$Token
+Oracle:Whenever this creature attacks, you and defending player each discard a card or sacrifice a permanent. You draw a card for each land card put into a graveyard this way.\nEncore {6}{B}{B} ({6}{B}{B}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)

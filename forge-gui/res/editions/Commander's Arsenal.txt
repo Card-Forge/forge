@@ -3,8 +3,8 @@ Code=CM1
 Date=2012-11-02
 Name=Commander's Arsenal
 ScryfallCode=CM1
-
 Type=Commander
+
 [cards]
 1 R Chaos Warp @Trevor Claxton
 2 C Command Tower @Adam Paquette
@@ -24,7 +24,3 @@ Type=Commander
 16 R Scroll Rack @Heather Hudson
 17 R Sylvan Library @Yeong-Hao Han
 18 M Vela the Night-Clad @Allen Williams
-
-[tokens]
-c_1_1_sliver
-g_1_1_insect

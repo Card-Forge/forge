@@ -12,6 +12,7 @@ Lair
 Locus
 Mine
 Omenpath
+Planet:Planets
 Power-Plant
 Sphere:Spheres
 Tower
@@ -50,6 +51,7 @@ Beeble:Beebles
 Beholder:Beholders
 Berserker:Berserkers
 Bird:Birds
+Bison:Bisons
 Blinkmoth:Blinkmoths
 Boar:Boars
 Brainiac:Brainiacs
@@ -92,6 +94,7 @@ Dog:Dogs
 Dragon:Dragons
 Drake:Drakes
 Dreadnought:Dreadnoughts
+Drix:Drixes
 Drone:Drones
 Druid:Druids
 Dryad:Dryads
@@ -170,6 +173,7 @@ Kraken:Krakens
 Lamia:Lamias
 Lammasu:Lammasus
 Leech:Leeches
+Lemur:Lemurs
 Leviathan:Leviathans
 Lhurgoyf:Lhurgoyfs
 Licid:Licids
@@ -221,6 +225,7 @@ Pangolin:Pangolins
 Peasant:Peasants
 Pegasus:Pegasi
 Pentavite:Pentavites
+Performer:Performers
 Pest:Pests
 Phelddagrif:Phelddagrifs
 Phoenix:Phoenixes
@@ -278,6 +283,7 @@ Snail:Snails
 Snake:Snakes
 Soldier:Soldiers
 Soltari:Soltaris
+Sorcerer:Sorcerers
 Spawn:Spawns
 Specter:Specters
 Spellshaper:Spellshapers
@@ -310,6 +316,7 @@ Troll:Trolls
 Turtle:Turtles
 Tyranid:Tyranids
 Unicorn:Unicorns
+Utrom:Utroms
 Vampire:Vampires
 Varmint:Varmints
 Vedalken:Vedalkens
@@ -363,11 +370,15 @@ Food:Foods
 Fortification
 Gold
 Incubator:Incubators
+Infinity
 Junk
 Key:Keys
+Lander:Landers
 Map
+Mutagen
 Powerstone:Powerstones
-Spacecraft:Spacecrafts
+Spacecraft:Spacecraft
+Stone:Stones
 Treasure:Treasures
 Vehicle:Vehicles
 [WalkerTypes]

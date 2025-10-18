@@ -1,7 +1,7 @@
 Name:Scroll of Origins
 ManaCost:2
 Types:Artifact
-A:AB$ Draw | Cost$ 2 T | NumCards$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE7 | AILogic$ CheckCondition | SpellDescription$ Draw a card if you have seven or more cards in hand.
+A:AB$ Draw | Cost$ 2 T | NumCards$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE7 | SpellDescription$ Draw a card if you have seven or more cards in hand.
 SVar:X:Count$ValidHand Card.YouOwn
 AI:RemoveDeck:Random
 Oracle:{2}, {T}: Draw a card if you have seven or more cards in hand.

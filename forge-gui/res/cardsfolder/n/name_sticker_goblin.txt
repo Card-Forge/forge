@@ -1,0 +1,10 @@
+Name:"Name Sticker" Goblin
+ManaCost:2 R
+Types:Creature Goblin Guest
+PT:2/2
+T:Mode$ ChangesZone | ExcludedOrigins$ Graveyard,Exile | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Creature.YouCtrl+named"Name Sticker" Goblin | IsPresent2$ Card.Self | PresentCompare$ LE9 | Execute$ TrigRollDice | TriggerDescription$ When CARDNAME enters from anywhere other than a graveyard or exile, if it's on the battlefield and you control 9 or fewer creatures named "Name Sticker" Goblin, roll a 20-sided die.
+SVar:TrigRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-6:DBMana1,7-14:DBMana2,15-20:DBMana3
+SVar:DBMana1:DB$ Mana | Produced$ R | Amount$ 4 | SpellDescription$ 1-6 VERT Add {R}{R}{R}{R}.
+SVar:DBMana2:DB$ Mana | Produced$ R | Amount$ 5 | SpellDescription$ 7-14 VERT Add {R}{R}{R}{R}{R}.
+SVar:DBMana3:DB$ Mana | Produced$ R | Amount$ 6 | SpellDescription$ 15-20 VERT Add {R}{R}{R}{R}{R}{R}.
+Oracle:When this creature enters from anywhere other than a graveyard or exile, if it's on the battlefield and you control 9 or fewer creatures named "Name Sticker" Goblin, roll a 20-sided die.\n1-6 | Add {R}{R}{R}{R}.\n7-14 | Add {R}{R}{R}{R}{R}.\n15-20 | Add {R}{R}{R}{R}{R}{R}.

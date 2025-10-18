@@ -1,0 +1,9 @@
+Name:Alpharael, Dreaming Acolyte
+ManaCost:1 U B
+Types:Legendary Creature Human Cleric
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When NICKNAME enters, draw two cards. Then discard two cards unless you discard an artifact card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose | UnlessType$ Artifact
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Deathtouch | Condition$ PlayerTurn | Description$ During your turn, NICKNAME has deathtouch.
+Oracle:When Alpharael enters, draw two cards. Then discard two cards unless you discard an artifact card.\nDuring your turn, Alpharael has deathtouch.

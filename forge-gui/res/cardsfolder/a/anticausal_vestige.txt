@@ -1,0 +1,10 @@
+Name:Anticausal Vestige
+ManaCost:6
+Types:Creature Eldrazi
+PT:7/5
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When this creature leaves the battlefield, draw a card, then you may put a permanent card with mana value less than or equal to the number of lands you control from your hand onto the battlefield tapped.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | ChangeType$ Permanent.YouCtrl+cmcLEX | Origin$ Hand | Tapped$ True | Destination$ Battlefield | TgtPrompt$ Select permanent card with mana value less than or equal to the number of lands you control
+SVar:X:Count$Valid Land.YouCtrl
+K:Warp:4
+Oracle:When this creature leaves the battlefield, draw a card, then you may put a permanent card with mana value less than or equal to the number of lands you control from your hand onto the battlefield tapped.\nWarp {4} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)

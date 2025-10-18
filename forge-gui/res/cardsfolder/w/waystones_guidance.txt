@@ -1,0 +1,7 @@
+Name:Waystone's Guidance
+ManaCost:1 W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.token+attacking+YouCtrl | AddPower$ 1 | Description$ Attacking tokens you control get +1/+0.
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast your first creature spell each turn, that spell gains mobilize 2.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredCard | KW$ Mobilize:2 | PumpZone$ Stack | Duration$ Permanent
+Oracle:Attacking tokens you control get +1/+0.\nWhenever you cast your first creature spell each turn, that spell gains mobilize 2.

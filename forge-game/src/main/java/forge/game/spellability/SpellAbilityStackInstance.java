@@ -133,18 +133,16 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         return ability.getTargets();
     }
 
-    public void updateTarget(TargetChoices target, Card cause) {
-        if (target != null) {
-            TargetChoices oldTarget = ability.getTargets();
-            ability.setTargets(target);
+    public void updateTarget(TargetChoices oldTC, Card cause) {
+        if (oldTC != null) {
             stackDescription = ability.getStackDescription();
             view.updateTargetCards(this);
             view.updateTargetPlayers(this);
             view.updateText(this);
 
             Set<GameObject> distinctObjects = Sets.newHashSet();
-            for (final GameObject tgt : target) {
-                if (oldTarget != null && oldTarget.contains(tgt)) {
+            for (final GameObject tgt : ability.getTargets()) {
+                if (oldTC.contains(tgt)) {
                     // it was an old target, so don't trigger becomes target
                     continue;
                 }

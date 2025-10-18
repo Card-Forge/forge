@@ -1,0 +1,7 @@
+Name:Terrific Team-Up
+ManaCost:3 G
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | IsPresent$ Permanent.cmcGE4+YouCtrl | Description$ This spell costs {2} less to cast if you control a permanent with mana value 4 or greater.
+A:SP$ Pump | TargetMin$ 1 | TargetMax$ 2 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select one or two target creatures you control | NumAtt$ +1 | AILogic$ PowerDmg | SubAbility$ DBEachDamage | SpellDescription$ One or two target creatures you control each get +1/+0 until end of turn. They each deal damage equal to their power to target creature an opponent controls.
+SVar:DBEachDamage:DB$ EachDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | DefinedDamagers$ ParentTarget | NumDmg$ Count$CardPower
+Oracle:This spell costs {2} less to cast if you control a permanent with mana value 4 or greater.\nOne or two target creatures you control each get +1/+0 until end of turn. They each deal damage equal to their power to target creature an opponent controls.

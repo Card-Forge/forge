@@ -74,10 +74,10 @@ public abstract class GameStage extends Stage {
     private float touchY = -1;
     private final float timer = 0;
     private float animationTimeout = 0;
-    public static float maximumScrollDistance=1.5f;
-    public static float minimumScrollDistance=0.3f;
+    public static float maximumScrollDistance = 1.5f;
+    public static float minimumScrollDistance = 0.3f;
 
-
+    private String extraAnnouncement = "";
 
     protected final Dialog dialog;
     protected Stage dialogStage;
@@ -97,8 +97,9 @@ public abstract class GameStage extends Stage {
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
+
     public void showDialog() {
-        if (dialogStage == null){
+        if (dialogStage == null) {
             setDialogStage(GameHUD.getInstance());
         }
         GameHUD.getInstance().playerIdle();
@@ -123,6 +124,7 @@ public abstract class GameStage extends Stage {
 
     /**
      * Triggered when the hud is showing a dialog, which is tracked separately
+     *
      * @param isShowing Whether a dialog is currently showing
      */
     public void hudIsShowingDialog(boolean isShowing) {
@@ -135,7 +137,9 @@ public abstract class GameStage extends Stage {
         dialog.clearListeners();
         TextraButton ok = Controls.newTextButton("OK", this::hideDialog);
         ok.setVisible(false);
-        TypingLabel L = Controls.newTypingLabel("{GRADIENT=CYAN;WHITE;1;1}Strange magical energies flow within this place...{ENDGRADIENT}\nAll opponents get:\n" + effectData.getDescription());
+        TypingLabel L = Controls.newTypingLabel("{GRADIENT=CYAN;WHITE;1;1}" +
+                Forge.getLocalizer().getMessage("lblEffectDialogDescription") + "{ENDGRADIENT}\n" +
+                Forge.getLocalizer().getMessage("lblEffectDataHeader") + "\n" + effectData.getDescription());
         L.setWrap(true);
         L.setTypingListener(new TypingAdapter() {
             @Override
@@ -191,7 +195,7 @@ public abstract class GameStage extends Stage {
         showDialog();
     }
 
-    public void showDeckAwardDialog(String message, Deck deck) {
+    public void showDeckAwardDialog(String message, Deck deck, Runnable runnable) {
         dialog.getContentTable().clear();
         dialog.getButtonTable().clear();
         dialog.clearListeners();
@@ -236,30 +240,31 @@ public abstract class GameStage extends Stage {
         L.skipToTheEnd();
 
         dialog.getContentTable().add(L).width(250);
-        dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog)).width(240);
+        dialog.getButtonTable().add(Controls.newTextButton("OK", () -> {
+            hideDialog();
+            if (runnable != null)
+                runnable.run();
+        })).width(240);
         dialog.setKeepWithinStage(true);
         setDialogStage(GameHUD.getInstance());
         showDialog();
     }
 
-    
 
     public boolean axisMoved(Controller controller, int axisIndex, float value) {
 
-        if (MapStage.getInstance().isDialogOnlyInput()||isPaused()) {
+        if (MapStage.getInstance().isDialogOnlyInput() || isPaused()) {
             return true;
         }
         player.getMovementDirection().x = controller.getAxis(0);
         player.getMovementDirection().y = -controller.getAxis(1);
-        if(player.getMovementDirection().len()<0.2)
-        {
+        if (player.getMovementDirection().len() < 0.2) {
             player.stop();
         }
         return true;
     }
 
-    enum PlayerModification
-    {
+    enum PlayerModification {
         Sprint,
         Hide,
         Fly
@@ -267,29 +272,32 @@ public abstract class GameStage extends Stage {
     }
 
 
-    HashMap<PlayerModification,Float> currentModifications=new HashMap<>();
-    public void modifyPlayer(PlayerModification mod,float value) {
-        float currentValue=0;
-        if(currentModifications.containsKey(mod))
-        {
-            currentValue=currentModifications.get(mod);
+    HashMap<PlayerModification, Float> currentModifications = new HashMap<>();
+
+    public void modifyPlayer(PlayerModification mod, float value) {
+        float currentValue = 0;
+        if (currentModifications.containsKey(mod)) {
+            currentValue = currentModifications.get(mod);
         }
-        currentModifications.put(mod,currentValue+value);
+        currentModifications.put(mod, currentValue + value);
     }
 
     public void flyFor(float value) {
-        modifyPlayer(PlayerModification.Fly,value);
+        modifyPlayer(PlayerModification.Fly, value);
         player.playEffect(Paths.EFFECT_FLY);
     }
+
     public void hideFor(float value) {
-        modifyPlayer(PlayerModification.Hide,value);
-        player.setColor(player.getColor().r,player.getColor().g,player.getColor().b,0.5f);
+        modifyPlayer(PlayerModification.Hide, value);
+        player.setColor(player.getColor().r, player.getColor().g, player.getColor().b, 0.5f);
         player.playEffect(Paths.EFFECT_HIDE);
     }
+
     public void sprintFor(float value) {
-        modifyPlayer(PlayerModification.Sprint,value);
+        modifyPlayer(PlayerModification.Sprint, value);
         player.playEffect(Paths.EFFECT_SPRINT);
     }
+
     public void startPause(float i) {
         startPause(i, null);
     }
@@ -299,6 +307,7 @@ public abstract class GameStage extends Stage {
         animationTimeout = i;
         player.setMovementDirection(Vector2.Zero);
     }
+
     public boolean isPaused() {
         return animationTimeout > 0;
     }
@@ -324,7 +333,7 @@ public abstract class GameStage extends Stage {
         dialog = Controls.newDialog("");
     }
 
-    public void setWinner(boolean b) {
+    public void setWinner(boolean b, boolean a) {
     }
 
     public void setBounds(float width, float height) {
@@ -359,15 +368,13 @@ public abstract class GameStage extends Stage {
             animationTimeout -= delta;
             return;
         }
-        Array<PlayerModification> modsToRemove=new Array<>();
-        for(Map.Entry<PlayerModification, Float> mod:currentModifications.entrySet())
-        {
-            mod.setValue(mod.getValue()-delta);
-            if(mod.getValue()<0)
+        Array<PlayerModification> modsToRemove = new Array<>();
+        for (Map.Entry<PlayerModification, Float> mod : currentModifications.entrySet()) {
+            mod.setValue(mod.getValue() - delta);
+            if (mod.getValue() < 0)
                 modsToRemove.add(mod.getKey());
         }
-        for(PlayerModification mod:modsToRemove)
-        {
+        for (PlayerModification mod : modsToRemove) {
             currentModifications.remove(mod);
             onRemoveEffect(mod);
         }
@@ -402,10 +409,9 @@ public abstract class GameStage extends Stage {
     }
 
     private void onRemoveEffect(PlayerModification mod) {
-        switch (mod)
-        {
+        switch (mod) {
             case Hide:
-                player.setColor(player.getColor().r,player.getColor().g,player.getColor().b,1f);
+                player.setColor(player.getColor().r, player.getColor().g, player.getColor().b, 1f);
                 break;
             case Fly:
                 player.removeEffect(Paths.EFFECT_FLY);
@@ -424,20 +430,16 @@ public abstract class GameStage extends Stage {
         super.keyDown(keycode);
         if (isPaused())
             return true;
-        if (KeyBinding.Left.isPressed(keycode))
-        {
+        if (KeyBinding.Left.isPressed(keycode)) {
             player.getMovementDirection().x = -1;
         }
-        if (KeyBinding.Right.isPressed(keycode) )
-        {
+        if (KeyBinding.Right.isPressed(keycode)) {
             player.getMovementDirection().x = +1;
         }
-        if (KeyBinding.Up.isPressed(keycode))
-        {
+        if (KeyBinding.Up.isPressed(keycode)) {
             player.getMovementDirection().y = +1;
         }
-        if (KeyBinding.Down.isPressed(keycode))
-        {
+        if (KeyBinding.Down.isPressed(keycode)) {
             player.getMovementDirection().y = -1;
         }
         if (keycode == Input.Keys.F5)//todo config
@@ -477,9 +479,8 @@ public abstract class GameStage extends Stage {
             if (GameHUD.getInstance().isDebugMap()) {
                 TileMapScene S = TileMapScene.instance();
                 PointOfInterestData P = PointOfInterestData.getPointOfInterest("DEBUGZONE");
-                if( P != null)
-                {
-                    PointOfInterest PoI = new PointOfInterest(P,new Vector2(0,0), MyRandom.getRandom());
+                if (P != null) {
+                    PointOfInterest PoI = new PointOfInterest(P, new Vector2(0, 0), MyRandom.getRandom());
                     S.load(PoI);
                     Forge.switchScene(S);
                 }
@@ -565,14 +566,12 @@ public abstract class GameStage extends Stage {
     public boolean keyUp(int keycode) {
         if (isPaused())
             return true;
-        if (KeyBinding.Left.isPressed(keycode)||KeyBinding.Right.isPressed(keycode))
-        {
+        if (KeyBinding.Left.isPressed(keycode) || KeyBinding.Right.isPressed(keycode)) {
             player.getMovementDirection().x = 0;
             if (!player.isMoving())
                 stop();
         }
-        if (KeyBinding.Down.isPressed(keycode)||KeyBinding.Up.isPressed(keycode))
-        {
+        if (KeyBinding.Down.isPressed(keycode) || KeyBinding.Up.isPressed(keycode)) {
             player.getMovementDirection().y = 0;
             if (!player.isMoving())
                 stop();
@@ -595,6 +594,9 @@ public abstract class GameStage extends Stage {
 
     public void enter() {
         stop();
+        if (!extraAnnouncement.isEmpty()) {
+            showImageDialog(extraAnnouncement, null, this::clearExtraAnnouncement);
+        }
     }
 
     public void leave() {
@@ -649,17 +651,16 @@ public abstract class GameStage extends Stage {
         return Vector2.Zero.cpy();
     }
 
-    protected void teleported(Vector2 position)
-    {
+    protected void teleported(Vector2 position) {
 
     }
+
     public void setPosition(Vector2 position) {
         getPlayerSprite().setPosition(position);
         teleported(position);
     }
 
-    public void resetPlayerLocation()
-    {
+    public void resetPlayerLocation() {
         PointOfInterest poi = Current.world().findPointsOfInterest("Spawn");
         if (poi != null) {
             Forge.advFreezePlayerControls = true;
@@ -668,18 +669,33 @@ public abstract class GameStage extends Stage {
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
-                    showImageDialog(Current.generateDefeatMessage(), getDefeatBadge(),
-                            () -> FThreads.invokeInEdtNowOrLater(() -> Forge.setTransitionScreen(new CoverScreen(() -> {
-                                Forge.advFreezePlayerControls = false;
-                                WorldStage.getInstance().setPosition(new Vector2(poi.getPosition().x - 16f, poi.getPosition().y + 16f));
-                                WorldStage.getInstance().loadPOI(poi);
-                                WorldSave.getCurrentSave().autoSave();
-                                Forge.clearTransitionScreen();
-                            }, Forge.takeScreenshot()))));
+                showImageDialog(Current.generateDefeatMessage(true), getDefeatBadge(),
+                    () -> FThreads.invokeInEdtNowOrLater(() -> Forge.setTransitionScreen(new CoverScreen(() -> {
+                        Forge.advFreezePlayerControls = false;
+                        WorldStage.getInstance().setPosition(new Vector2(poi.getPosition().x - 16f, poi.getPosition().y + 16f));
+                        WorldStage.getInstance().loadPOI(poi);
+                        WorldSave.getCurrentSave().autoSave();
+                        Forge.clearTransitionScreen();
+                    }, Forge.takeScreenshot()))));
                 }
             }, 1f);
         }//Spawn shouldn't be null
     }
+
+    public void defeatedFromBoss() {
+        if (!Current.player().hasEquippedItem())
+            return;
+        Forge.advFreezePlayerControls = true;
+        getPlayerSprite().setAnimation(CharacterSprite.AnimationTypes.Hit);
+        getPlayerSprite().playEffect(Paths.EFFECT_BLOOD, 0.5f);
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                showImageDialog(Current.generateDefeatMessage(false), getDefeatBadge(), () -> Forge.advFreezePlayerControls = false);
+            }
+        }, 1f);
+    }
+
     private FBufferedImage getDefeatBadge() {
         FileHandle defeat = Config.instance().getFile("ui/defeat.png");
         if (defeat.exists()) {
@@ -695,4 +711,11 @@ public abstract class GameStage extends Stage {
         return null;
     }
 
+    public void setExtraAnnouncement(String message) {
+        extraAnnouncement = message;
+    }
+
+    public void clearExtraAnnouncement() {
+        extraAnnouncement = "";
+    }
 }

@@ -99,7 +99,10 @@ public final class BoosterUtils {
 
         if (userPrefs != null && userPrefs.getPoolType() == StartingPoolPreferences.PoolType.BOOSTERS) {
 
-            for (InventoryItem inventoryItem : generateRandomBoosterPacks(userPrefs.getNumberOfBoosters(), formatStartingPool.editionLegalPredicate)) {
+            Predicate<CardEdition> editionLegalPredicate = formatStartingPool == null
+                    ? cardEdition -> true
+                    : formatStartingPool.editionLegalPredicate;
+            for (InventoryItem inventoryItem : generateRandomBoosterPacks(userPrefs.getNumberOfBoosters(), editionLegalPredicate)) {
                 cards.addAll(((BoosterPack) inventoryItem).getCards());
             }
 
@@ -199,7 +202,6 @@ public final class BoosterUtils {
         }
 
         return output;
-
     }
 
     private static List<Predicate<CardRules>> getColorFilters(final StartingPoolPreferences userPrefs, final List<PaperCard> cardPool) {
@@ -241,7 +243,6 @@ public final class BoosterUtils {
         }
 
         return colorFilters;
-
     }
 
     private static void populateRandomFilters(final List<Predicate<CardRules>> colorFilters) {
@@ -559,7 +560,7 @@ public final class BoosterUtils {
     public static void sort(List<PaperCard> cards) {
         //sort cards alphabetically so colors appear together and rares appear on top
         cards.sort(Comparator.comparing(PaperCard::getName));
-        cards.sort(Comparator.comparing(c -> c.getRules().getColor()));
+        cards.sort(Comparator.comparing(c -> c.getRules().getColor().getOrderWeight()));
         cards.sort(Comparator.comparing(PaperCard::getRarity).reversed());
     }
 }

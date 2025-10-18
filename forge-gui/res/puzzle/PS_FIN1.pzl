@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Final Fantasy #01
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2025/05/latest-4-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Ensure your solution satisfies all possible blocks. Assume you have basic Forests and Mountains in your deck, but that the card on top of your library is not relevant to the puzzle. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Duskshell Crawler;Tifa Lockhart;Blitzball Shot;Haste Magic
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Mountain;Mountain;Mountain;Mountain;Mountain;Forest;Forest;Forest;Forest;Forest;Forest;Forest;Forest;Forest;Forest;Mountain;Mountain;Mountain;Mountain;Mountain
+p0battlefield=Conformer Shuriken;Sword of the Animist;Sazh Katzroy;Sazh's Chocobo|Counters:P1P1=2;Mountain;Mountain;Forest;Forest;Forest;Forest
+p1life=17
+p1battlefield=Shambling Cie'th;Shambling Cie'th

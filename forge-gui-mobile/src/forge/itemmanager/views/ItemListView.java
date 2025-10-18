@@ -192,7 +192,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     protected void onRefresh() {
-        list.setListData(model.getOrderedList());
+        list.setListData(new ArrayList<>(model.getOrderedList()));
     }
 
     @Override
@@ -249,6 +249,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                             }
                             else if (count == 2 && index == prevTapIndex) {
                                 itemManager.activateSelectedItems();
+                                itemManager.closeMenu();
                             }
                         }
                     }
@@ -276,6 +277,10 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                         w -= padding;
                     }
                     renderer.drawValue(g, value, font, foreColor, backColor, pressed, x + 1, y, w - 2, h); //x + 1 and w - 2 to account for left and right borders
+                    if(itemManager.itemIsFavorite(value)) {
+                        float starSize = h * 0.35f;
+                        g.drawImage(FSkinImage.HDSTAR_FILLED, x + 1, y, starSize, starSize);
+                    }
                 }
             });
             setFont(FSkinFont.get(14));

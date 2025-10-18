@@ -1,0 +1,8 @@
+Name:Seedship Broodtender
+ManaCost:B G
+Types:Creature Insect Citizen
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When this creature enters, mill three cards.
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 3
+A:AB$ ChangeZone | Cost$ 3 B G Sac<1/CARDNAME/this creature> | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn,Spacecraft.YouOwn | SorcerySpeed$ True | TgtPrompt$ Select target creature or Spacecraft card in your graveyard | SpellDescription$ Return target creature or Spacecraft card from your graveyard to the battlefield. Activate only as a sorcery.
+Oracle:When this creature enters, mill three cards. (Put the top three cards of your library into your graveyard.)\n{3}{B}{G}, Sacrifice this creature: Return target creature or Spacecraft card from your graveyard to the battlefield. Activate only as a sorcery.

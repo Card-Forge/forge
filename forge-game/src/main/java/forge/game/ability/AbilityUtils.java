@@ -43,7 +43,6 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 public class AbilityUtils {
     private final static ImmutableList<String> cmpList = ImmutableList.of("LT", "LE", "EQ", "GE", "GT", "NE");
 
@@ -113,13 +112,6 @@ public class AbilityUtils {
             }
         } else if (defined.equals("Enchanted")) {
             c = hostCard.getEnchantingCard();
-            if (c == null && sa instanceof SpellAbility) {
-                SpellAbility root = ((SpellAbility)sa).getRootAbility();
-                CardCollection sacrificed = root.getPaidList("Sacrificed", true);
-                if (sacrificed != null && !sacrificed.isEmpty()) {
-                    c = sacrificed.getFirst().getEnchantingCard();
-                }
-            }
         } else if (defined.equals("TopOfGraveyard")) {
             final CardCollectionView grave = player.getCardsIn(ZoneType.Graveyard);
 
@@ -530,6 +522,8 @@ public class AbilityUtils {
             }
         } else if (calcX[0].equals("OriginalHost")) {
             val = xCount(ability.getOriginalHost(), calcX[1], ability);
+        } else if (calcX[0].equals("DungeonsCompleted")) {
+            val = handlePaid(player.getCompletedDungeons(), calcX[1], card, ability);
         } else if (calcX[0].startsWith("ExiledWith")) {
             val = handlePaid(card.getExiledCards(), calcX[1], card, ability);
         } else if (calcX[0].startsWith("Convoked")) {
@@ -658,12 +652,12 @@ public class AbilityUtils {
                 val = playerXCount(getDefinedPlayers(card, key, sa), calcX[1], card, ability);
             }
             else if (calcX[0].startsWith("TriggeredPlayer") || calcX[0].startsWith("TriggeredTarget")
-                    || calcX[0].startsWith("TriggeredDefendingPlayer")) {
+                    || calcX[0].startsWith("TriggeredDefendingPlayer") || calcX[0].startsWith("TriggeredActivator")) {
                 final SpellAbility root = sa.getRootAbility();
                 Object o = root.getTriggeringObject(AbilityKey.fromString(calcX[0].substring(9)));
                 val = o instanceof Player ? playerXProperty((Player) o, calcX[1], card, ability) : 0;
             }
-            else if (calcX[0].equals("TriggeredSpellAbility") || calcX[0].equals("TriggeredStackInstance") || calcX[0].equals("SpellTargeted")) {
+            else if (calcX[0].equals("TriggeredSpellAbility") || calcX[0].equals("SpellTargeted")) {
                 final SpellAbility sat = Iterables.getFirst(getDefinedSpellAbilities(card, calcX[0], sa), null);
                 val = sat == null ? 0 : xCount(sat.getHostCard(), calcX[1], sat);
             }
@@ -794,7 +788,7 @@ public class AbilityUtils {
     public static List<GameEntity> getDefinedEntities(final Card card, final String[] def, final CardTraitBase sa) {
         final List<GameEntity> objects = new ArrayList<>();
         for (String d : def) {
-            objects.addAll(AbilityUtils.getDefinedEntities(card, d, sa));
+            objects.addAll(getDefinedEntities(card, d, sa));
         }
         return objects;
     }
@@ -1191,6 +1185,8 @@ public class AbilityUtils {
             if (sa.getHostCard().wasCast()) {
                 players.add((sa.getHostCard().getCastSA().getActivatingPlayer()));
             }
+        } else if (defined.equals("Exiler")) {
+            players.add(card.getExiledBy());
         } else if (defined.equals("ActivePlayer")) {
             players.add(game.getPhaseHandler().getPlayerTurn());
         } else if (defined.equals("You")) {
@@ -1281,8 +1277,6 @@ public class AbilityUtils {
             final Object o = root.getTriggeringObject(AbilityKey.fromString(triggeringType));
             if (o instanceof SpellAbility) {
                 s = (SpellAbility) o;
-            } else if (o instanceof SpellAbilityStackInstance) {
-                s = ((SpellAbilityStackInstance) o).getSpellAbility();
             }
         } else if (defined.endsWith("Targeted") && sa instanceof SpellAbility) {
             final List<TargetChoices> targets = defined.startsWith("This") ? Arrays.asList(((SpellAbility)sa).getTargets()) : ((SpellAbility)sa).getAllTargetChoices();
@@ -1353,7 +1347,7 @@ public class AbilityUtils {
             }
             return;
         }
-        AbilityUtils.resolveApiAbility(sa, game);
+        resolveApiAbility(sa, game);
     }
 
     private static void resolvePreAbilities(final SpellAbility sa, final Game game) {
@@ -1375,7 +1369,7 @@ public class AbilityUtils {
             AbilitySub giftAbility = (AbilitySub) sa.getAdditionalAbility("GiftAbility");
             if (giftAbility != null) {
                 giftAbility.setActivatingPlayer(controller);
-                AbilityUtils.resolveApiAbility(giftAbility, game);
+                resolveApiAbility(giftAbility, game);
             }
         }
     }
@@ -1397,7 +1391,7 @@ public class AbilityUtils {
         } else {
             game.getTriggerHandler().resetActiveTriggers();
         }
-        AbilityUtils.resolveApiAbility(abSub, game);
+        resolveApiAbility(abSub, game);
     }
 
     private static void resolveApiAbility(final SpellAbility sa, final Game game) {
@@ -1685,11 +1679,11 @@ public class AbilityUtils {
                            return doXMath(x, expr, c, ctb);
                         } else if (TriggerType.SpellCast.equals(t.getMode())) {
                             // Cast Trigger like Hydroid Krasis
-                            SpellAbilityStackInstance castSI = (SpellAbilityStackInstance) root.getTriggeringObject(AbilityKey.StackInstance);
-                            if (castSI == null || castSI.getSpellAbility().getXManaCostPaid() == null) {
+                            SpellAbility castSA = (SpellAbility) root.getTriggeringObject(AbilityKey.SpellAbility);
+                            if (castSA == null || castSA.getXManaCostPaid() == null) {
                                 return doXMath(0, expr, c, ctb);
                             }
-                            return doXMath(castSI.getSpellAbility().getXManaCostPaid(), expr, c, ctb);
+                            return doXMath(castSA.getXManaCostPaid(), expr, c, ctb);
                         } else if (TriggerType.Cycled.equals(t.getMode())) {
                             SpellAbility cycleSA = (SpellAbility) sa.getTriggeringObject(AbilityKey.Cause);
                             if (cycleSA == null || cycleSA.getXManaCostPaid() == null) {
@@ -1876,6 +1870,14 @@ public class AbilityUtils {
                         }
                     }
                     return doXMath(v, expr, c, ctb);
+                }
+                
+                // Count$FromNamedAbility[abilityName].<True>.<False>
+                if (sq[0].startsWith("FromNamedAbility")) {
+                    String abilityNamed = sq[0].substring(16);
+                    SpellAbility trigSA = sa.getHostCard().getCastSA();
+                    boolean fromNamedAbility = trigSA != null && trigSA.getName().equals(abilityNamed);
+                    return doXMath(calculateAmount(c, sq[fromNamedAbility ? 1 : 2], ctb), expr, c, ctb);
                 }
             } else {
                 // fallback if ctb isn't a spellability
@@ -2116,15 +2118,8 @@ public class AbilityUtils {
         if (sq[0].contains("CardCounters")) {
             // CardCounters.ALL to be used for Kinsbaile Borderguard and anything that cares about all counters
             int count = 0;
-            if (sq[1].equals("ALL")) {
-                for (Integer i : c.getCounters().values()) {
-                    if (i != null && i > 0) {
-                        count += i;
-                    }
-                }
-            } else {
-                count = c.getCounters(CounterType.getType(sq[1]));
-            }
+            if (sq[1].equals("ALL")) count = c.getNumAllCounters();
+            else count = c.getCounters(CounterType.getType(sq[1]));
             return doXMath(count, expr, c, ctb);
         }
 
@@ -2352,6 +2347,9 @@ public class AbilityUtils {
         if (sq[0].equals("YourSpeed")) {
             return doXMath(player.getSpeed(), expr, c, ctb);
         }
+        if (sq[0].equals("AllFourBend")) {
+            return doXMath(calculateAmount(c, sq[player.hasAllElementBend() ? 1 : 2], ctb), expr, c, ctb);
+        }
 
         if (sq[0].equals("Night")) {
             return doXMath(calculateAmount(c, sq[game.isNight() ? 1 : 2], ctb), expr, c, ctb);
@@ -2428,6 +2426,11 @@ public class AbilityUtils {
             return doXMath(sum, expr, c, ctb);
         }
 
+        if (sq[0].equals("SingleMaxDamageThisTurn")) {
+            int sum = game.getSingleMaxDamageDoneThisTurn();
+            return doXMath(sum, expr, c, ctb);
+        }
+
         if (sq[0].contains("DamageThisTurn")) {
             String[] props = l[0].split(" ");
             Boolean isCombat = null;
@@ -2488,7 +2491,7 @@ public class AbilityUtils {
         if (sq[0].startsWith("TypesSharedWith")) {
             Set<CardType.CoreType> thisTypes = Sets.newHashSet(c.getType().getCoreTypes());
             Set<CardType.CoreType> matches = new HashSet<>();
-            for (Card c1 : AbilityUtils.getDefinedCards(ctb.getHostCard(), l[0].split(" ", 2)[1], ctb)) {
+            for (Card c1 : getDefinedCards(ctb.getHostCard(), l[0].split(" ", 2)[1], ctb)) {
                 for (CardType.CoreType type : Sets.newHashSet(c1.getType().getCoreTypes())) {
                     if (thisTypes.contains(type)) {
                         matches.add(type);
@@ -2545,34 +2548,13 @@ public class AbilityUtils {
             return doXMath(CardLists.getValidCardCount(game.getLeftGraveyardThisTurn(), validFilter, player, c, ctb), expr, c, ctb);
         }
 
-        // Count$UnlockedDoors <Valid>
-        if (sq[0].startsWith("UnlockedDoors")) {
-            final String[] workingCopy = l[0].split(" ", 2);
-            final String validFilter = workingCopy[1];
-
-            int unlocked = 0;
-            for (Card doorCard : CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), validFilter, player, c, ctb)) {
-                unlocked += doorCard.getUnlockedRooms().size();
-            }
-
-            return doXMath(unlocked, expr, c, ctb);
+        if (sq[0].equals("UnlockedDoors")) {
+            return doXMath(player.getUnlockedDoors().size(), expr, c, ctb);
         }
 
-        // Count$DistinctUnlockedDoors <Valid>
         // Counts the distinct names of unlocked doors. Used for the "Promising Stairs"
-        if (sq[0].startsWith("DistinctUnlockedDoors")) {
-            final String[] workingCopy = l[0].split(" ", 2);
-            final String validFilter = workingCopy[1];
-
-            Set<String> viewedNames = new HashSet<>();
-            for (Card doorCard : CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), validFilter, player, c, ctb)) {
-                for(CardStateName stateName : doorCard.getUnlockedRooms()) {
-                    viewedNames.add(doorCard.getState(stateName).getName());
-                }
-            }
-            int distinctUnlocked = viewedNames.size();
-
-            return doXMath(distinctUnlocked, expr, c, ctb);
+        if (sq[0].equals("DistinctUnlockedDoors")) {
+            return doXMath(Sets.newHashSet(player.getUnlockedDoors()).size(), expr, c, ctb);
         }
 
         // Manapool
@@ -2711,6 +2693,10 @@ public class AbilityUtils {
         if (sq[0].startsWith("Morbid")) {
             final List<Card> res = CardUtil.getThisTurnEntered(ZoneType.Graveyard, ZoneType.Battlefield, "Creature", c, ctb, player);
             return doXMath(calculateAmount(c, sq[res.size() > 0 ? 1 : 2], ctb), expr, c, ctb);
+        }
+        // Count$Void.<True>.<False>
+        if (sq[0].startsWith("Void")) {
+            return doXMath(calculateAmount(c, sq[game.isVoid() ? 1 : 2], ctb), expr, c, ctb);
         }
 
         // Count$Chroma.<color name>
@@ -2888,21 +2874,6 @@ public class AbilityUtils {
             return max;
         }
 
-        if (sq[0].startsWith("DifferentCardNames_")) {
-            final List<String> crdname = Lists.newArrayList();
-            final String restriction = l[0].substring(19);
-            CardCollection list = CardLists.getValidCards(game.getCardsInGame(), restriction, player, c, ctb);
-            // TODO rewrite with sharesName to respect Spy Kit
-            for (final Card card : list) {
-                String name = card.getName();
-                // CR 201.2b Those objects have different names only if each of them has at least one name and no two objects in that group have a name in common
-                if (!crdname.contains(name) && !name.isEmpty()) {
-                    crdname.add(name);
-                }
-            }
-            return doXMath(crdname.size(), expr, c, ctb);
-        }
-
         if (sq[0].startsWith("MostProminentCreatureType")) {
             String restriction = l[0].split(" ")[1];
             CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
@@ -2917,13 +2888,6 @@ public class AbilityUtils {
         }
 
         // TODO move below to handlePaid
-        if (sq[0].startsWith("SumPower")) {
-            final String[] restrictions = l[0].split("_");
-            int sumPower = game.getCardsIn(ZoneType.Battlefield).stream()
-                    .filter(CardPredicates.restriction(restrictions[1], player, c, ctb))
-                    .mapToInt(Card::getNetPower).sum();
-            return doXMath(sumPower, expr, c, ctb);
-        }
         if (sq[0].startsWith("DifferentPower_")) {
             final String restriction = l[0].substring(15);
             final int uniquePowers = (int) game.getCardsIn(ZoneType.Battlefield).stream()
@@ -2992,14 +2956,14 @@ public class AbilityUtils {
         if (tgtCard.isFaceDown()) {
             collectSpellsForPlayEffect(list, original, controller, withAltCost);
         } else {
-            if (state == CardStateName.Transformed && tgtCard.isPermanent() && !tgtCard.isAura()) {
+            if (state == CardStateName.Backside && !tgtCard.isModal() && tgtCard.isPermanent() && !tgtCard.isAura()) {
                 // casting defeated battle
                 Spell sp = new SpellPermanent(tgtCard, original);
                 sp.setCardState(original);
                 list.add(sp);
             }
-            if (tgtCard.isModal() && tgtCard.hasState(CardStateName.Modal)) {
-                collectSpellsForPlayEffect(list, tgtCard.getState(CardStateName.Modal), controller, withAltCost);
+            if (tgtCard.isModal() && tgtCard.hasState(CardStateName.Backside)) {
+                collectSpellsForPlayEffect(list, tgtCard.getState(CardStateName.Backside), controller, withAltCost);
             }
         }
 
@@ -3012,18 +2976,10 @@ public class AbilityUtils {
                 }
             } else {
                 final Spell newSA = (Spell) s.copy(controller);
-                SpellAbilityRestriction res = new SpellAbilityRestriction();
-                // timing restrictions still apply
-                res.setPlayerTurn(s.getRestrictions().getPlayerTurn());
-                res.setOpponentTurn(s.getRestrictions().getOpponentTurn());
-                res.setPhases(s.getRestrictions().getPhases());
-                res.setZone(null);
-                newSA.setRestrictions(res);
-                // timing restrictions still apply
-                if (res.checkTimingRestrictions(tgtCard, newSA)
-                        // still need to check the other restrictions like Aftermath
-                        && res.checkOtherRestrictions(tgtCard, newSA, controller)) {
-                    newSA.setCastFromPlayEffect(true);
+                newSA.getRestrictions().setZone(null);
+                newSA.setCastFromPlayEffect(true);
+                // extra timing restrictions still apply
+                if (newSA.canPlay()) {
                     sas.add(newSA);
                 }
             }
@@ -3451,6 +3407,7 @@ public class AbilityUtils {
     }
 
     public static int playerXProperty(final Player player, final String s, final Card source, CardTraitBase ctb) {
+
         final String[] l = s.split("/");
         final String m = CardFactoryUtil.extractOperators(s);
 
@@ -3637,44 +3594,8 @@ public class AbilityUtils {
             return doXMath(player.hasBeenDealtCombatDamageSinceLastTurn() ? 1 : 0, m, source, ctb);
         }
 
-        if (value.equals("DungeonsCompleted")) {
-            return doXMath(player.getCompletedDungeons().size(), m, source, ctb);
-        }
-
         if (value.equals("RingTemptedYou")) {
             return doXMath(player.getNumRingTemptedYou(), m, source, ctb);
-        }
-
-        if (value.startsWith("DungeonCompletedNamed")) {
-            String [] full = value.split("_");
-            String name = full[1];
-            int completed = 0;
-            List<Card> dungeons = player.getCompletedDungeons();
-            for (Card c : dungeons) {
-                if (c.getName().equals(name)) {
-                    ++completed;
-                }
-            }
-            return doXMath(completed, m, source, ctb);
-        }
-        if (value.equals("DifferentlyNamedDungeonsCompleted")) {
-            int amount = 0;
-            List<Card> dungeons = player.getCompletedDungeons();
-            for (int i = 0; i < dungeons.size(); ++i) {
-                Card d1 = dungeons.get(i);
-                boolean hasSameName = false;
-                for (int j = i - 1; j >= 0; --j) {
-                    Card d2 = dungeons.get(j);
-                    if (d1.getName().equals(d2.getName())) {
-                        hasSameName = true;
-                        break;
-                    }
-                }
-                if (!hasSameName) {
-                    ++amount;
-                }
-            }
-            return doXMath(amount, m, source, ctb);
         }
 
         if (value.equals("AttractionsVisitedThisTurn")) {
@@ -3751,8 +3672,8 @@ public class AbilityUtils {
             return Aggregates.max(paidList, Card::getNetToughness);
         }
 
-        if (string.startsWith("SumToughness")) {
-            return Aggregates.sum(paidList, Card::getNetToughness);
+        if (string.startsWith("TapPowerValue")) {
+            return CardLists.getTotalPower(paidList, ctb);
         }
 
         if (string.startsWith("GreatestCMC")) {
@@ -3761,6 +3682,10 @@ public class AbilityUtils {
 
         if (string.equals("Colors")) {
             return CardUtil.getColorsFromCards(paidList).countColors();
+        }
+
+        if (string.startsWith("DifferentCardNames")) {
+            return doXMath(CardLists.getDifferentNamesCount(paidList), CardFactoryUtil.extractOperators(string), source, ctb);
         }
 
         if (string.equals("DifferentColorPair")) {

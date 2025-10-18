@@ -11,3 +11,7 @@ ScryfallCode=PLG24
 2J R Sleight of Hand @Scott Murphy
 3J R Cut Down @Dominik Mayer
 4J R Sheoldred's Edict @Helge C. Balzer
+
+[tokens]
+2J-b w_1_1_a_toy @Matthew Meyer
+5J-b c_a_treasure_sac @Matthew Meyer

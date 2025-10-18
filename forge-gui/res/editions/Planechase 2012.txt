@@ -2,7 +2,6 @@
 Code=PC2
 Date=2012-06-01
 Name=Planechase 2012
-Code2=PC2
 Type=Multiplayer
 ScryfallCode=PC2
 
@@ -27,7 +26,7 @@ ScryfallCode=PC2
 18 R Higure, the Still Wind @Christopher Moeller
 19 U Illusory Angel @Allen Williams
 20 C Mistblade Shinobi @Kev Walker
-21 C Ninja of the Deep Hours @Dan Scott
+21 C Ninja of the Deep Hours @Dan Murayama Scott
 22 U Peregrine Drake @Bob Eggleton
 23 C Primal Plasma @Luca Zontini
 24 R Sakashima's Student @Brian Snõddy
@@ -135,7 +134,7 @@ ScryfallCode=PC2
 126 C Shimmering Grotto @Cliff Childs
 127 U Skarrg, the Rage Pits @Martina Pilcerova
 128 U Tainted Isle @Alan Pollack
-129 C Terramorphic Expanse @Dan Scott
+129 C Terramorphic Expanse @Dan Murayama Scott
 130 U Vitu-Ghazi, the City-Tree @Martina Pilcerova
 131 U Vivid Creek @Fred Fields
 132 L Plains @John Avon
@@ -203,24 +202,3 @@ OPC237 C Trail of the Mage-Rings @Vincent Proce
 OPC238 C Truga Jungle @Jim Nelson
 OPC239 C Windriddle Palaces @Kekai Kotaki
 OPC240 C The Zephyr Maze @rk post
-
-[tokens]
-c_0_1_eldrazi_spawn_sac
-c_7_7_eldrazi_annihilator
-w_4_4_angel_flying
-b_0_0_phyrexian_germ
-b_2_4_spider_reach
-b_2_2_zombie
-r_1_1_goblin
-r_1_1_goblin
-r_4_4_hellion
-g_3_3_beast
-g_3_3_boar
-g_1_1_insect
-g_1_1_ooze
-g_2_2_ooze_mitotic
-g_0_1_plant
-g_1_1_saproling
-g_1_1_saproling
-g_1_1_saproling
-g_1_1_saproling

@@ -8,6 +8,6 @@ SVar:Intelligence:DB$ Pump | Defined$ Remembered | NoteCards$ Self | NoteCardsFo
 SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBBounce | StackDescription$ None
 SVar:DBBounce:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Hand | ChangeType$ Card.targetedBy+ControlledBy Player.NotedForDiversion | SubAbility$ DBClearNoted | StackDescription$ None
 SVar:DBClearNoted:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ Diversion,Intelligence | StackDescription$ None
-SVar:X:PlayerCountPropertyOpponents$HasPropertyNotedForIntelligence
+SVar:X:PlayerCountOpponents$HasPropertyNotedForIntelligence
 SVar:OneEach:PlayerCountOpponents$Amount
 Oracle:For each opponent, choose up to one target creature that player controls, then return that creature to its owner's hand unless its controller has you draw a card.

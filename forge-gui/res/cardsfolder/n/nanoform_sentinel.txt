@@ -1,0 +1,7 @@
+Name:Nanoform Sentinel
+ManaCost:2 U
+Types:Artifact Creature Robot
+PT:3/2
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigUntap | ActivationLimit$ 1 | TriggerDescription$ Whenever this creature becomes tapped, untap another target permanent. This ability triggers only once each turn.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Permanent.Other | TgtPrompt$ Choose another target permanent
+Oracle:Whenever this creature becomes tapped, untap another target permanent. This ability triggers only once each turn.

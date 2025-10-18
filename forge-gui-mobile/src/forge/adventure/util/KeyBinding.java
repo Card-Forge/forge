@@ -21,6 +21,7 @@ public enum KeyBinding {
     ExitToWorldMap("ExitToWorldMap", new int[]{Input.Keys.F4, Input.Keys.BUTTON_L2}),
     Bookmark("Bookmark", new int[]{Input.Keys.B, Input.Keys.BUTTON_R2}),
     Use("Use", new int[]{Input.Keys.ENTER, Input.Keys.BUTTON_A}),
+    Enter("Enter", new int[]{Input.Keys.ENTER, Input.Keys.BUTTON_START}),
     Back("Back", new int[]{Input.Keys.ESCAPE, Input.Keys.BUTTON_B, Input.Keys.BACK}),
     ScrollUp("ScrollUp", new int[]{Input.Keys.PAGE_UP, Input.Keys.BUTTON_L1}),
     ScrollDown("ScrollDown", new int[]{Input.Keys.PAGE_DOWN, Input.Keys.BUTTON_R1}),
@@ -34,9 +35,15 @@ public enum KeyBinding {
     }
 
     public boolean isPressed(int key) {
-        for (int i = 0; i < bindings.length; i++) {
-            if (key == bindings[i]) {
-                return true;
+        return isPressed(key, null);
+    }
+
+    public boolean isPressed(int key, Boolean requiredCondition) {
+        if (requiredCondition == null || requiredCondition) {
+            for (int i = 0; i < bindings.length; i++) {
+                if (key == bindings[i]) {
+                    return true;
+                }
             }
         }
         return false;

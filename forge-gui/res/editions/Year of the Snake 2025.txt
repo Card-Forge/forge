@@ -4,6 +4,7 @@ Date=2025-02-14
 Name=Year of the Snake 2025
 Type=Promo
 ScryfallCode=PL25
+TokensCode=PL25
 
 [cards]
 1 M Xyris, the Writhing Storm @Song Qijin
@@ -13,4 +14,4 @@ ScryfallCode=PL25
 6 L Forest @Ray
 
 [tokens]
-g_1_1_snake
+2 g_1_1_snake @Song Qijin

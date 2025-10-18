@@ -447,4 +447,5 @@ ScryfallCode=C21
 29 c_1_1_a_thopter_flying @Svetlin Velinov
 
 [other]
-eternalize_champion_of_wits
+6 eternalize_champion_of_wits @Eliteven Amundsen
+30 copy @David Palumbo

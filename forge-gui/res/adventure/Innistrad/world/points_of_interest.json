@@ -1,0 +1,164 @@
+[
+	{
+		"name": "inn_abbey",
+		"type": "town",
+		"count": 4,
+		"spriteAtlas": "../Innistrad/maps/tileset/inn_buildings.atlas",
+		"sprite": "abbey",
+		"map": "../Innistrad/maps/map/Innistrad/towns/inn_abbey.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Town",
+			"TownGeneric"
+		]
+	},
+	{
+		"name": "inn_gavony_chapelry",
+		"type": "town",
+		"count": 10,
+		"spriteAtlas": "../Innistrad/maps/tileset/inn_buildings.atlas",
+		"sprite": "parish",
+		"map": "../Innistrad/maps/map/Innistrad/towns/inn_gavony_chapelry.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Town",
+			"TownGeneric",
+			"BiomeWhite",
+			"Sidequest"
+		]
+	},
+	{
+		"name": "inn_gavony_parish",
+		"type": "town",
+		"count": 4,
+		"spriteAtlas": "../Innistrad/maps/tileset/inn_buildings.atlas",
+		"sprite": "parish",
+		"map": "../Innistrad/maps/map/Innistrad/towns/inn_gavony_parish.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Town",
+			"TownGeneric",
+			"BiomeWhite",
+			"Sidequest"
+		]
+	},
+	{
+		"name": "inn_Cave_river",
+		"type": "cave",
+		"count": 12,
+		"spriteAtlas": "../Innistrad/maps/tileset/inn_buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Innistrad/maps/map/Innistrad/cave/inn_cave_river_entrance.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Hostile",
+			"Cave",
+			"BiomeColorless",
+			"Sidequest"
+		]
+	},
+	{
+		"name": "inn_crescentus",
+		"type": "capital",
+		"count": 1,
+		"spriteAtlas": "../Innistrad/maps/tileset/inn_buildings.atlas",
+		"sprite": "crescentus",
+		"map": "../Innistrad/maps/map/Innistrad/main_story/inn_crescentus.tmx",
+		"radiusFactor": 0.5,
+		"questTags": [
+			"Capital",
+			"BiomeMoonlight"
+		]
+	},
+	{
+		"name": "inn_dark_forest",
+		"type": "cave",
+		"count": 10,
+		"spriteAtlas": "../Innistrad/maps/tileset/inn_buildings.atlas",
+		"sprite": "dark_forest",
+		"map": "../Innistrad/maps/map/Innistrad/inn_approaches/dark_forest.tmx",
+		"radiusFactor": 0.4,
+		"questTags": [
+			"Hostile",
+			"Cave",
+			"BiomeColorless",
+			"Sidequest"
+		]
+	},
+	{
+		"name": "inn_forgotten_lodge_1",
+		"type": "dungeon",
+		"count": 18,
+		"spriteAtlas": "../Innistrad/maps/tileset/inn_buildings.atlas",
+		"sprite": "lodge_1",
+		"map": "../Innistrad/maps/map/Innistrad/hunting_lodge/inn_forgotten_lodge_1.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Hostile",
+			"Dungeon",
+			"BiomeColorless",
+			"Sidequest"
+		]
+	},
+	{
+		"name": "inn_lodge_1",
+		"type": "dungeon",
+		"count": 12,
+		"spriteAtlas": "../Innistrad/maps/tileset/inn_buildings.atlas",
+		"sprite": "lodge_1",
+		"map": "../Innistrad/maps/map/Innistrad/hunting_lodge/inn_lodge_1.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Hostile",
+			"Dungeon",
+			"BiomeColorless",
+			"Sidequest"
+		]
+	},
+	{
+		"name": "inn_ulvenwald_hamlet",
+		"type": "town",
+		"count": 4,
+		"spriteAtlas": "../Innistrad/maps/tileset/inn_buildings.atlas",
+		"sprite": "ulvenwaldtown",
+		"map": "../Innistrad/maps/map/Innistrad/towns/inn_ulvenwald_hamlet.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Town",
+			"BiomeColorless",
+			"TownGeneric",
+			"Sidequest"
+		]
+	},
+	{
+		"name": "inn_ulvenwald_town",
+		"type": "town",
+		"count": 1,
+		"spriteAtlas": "../Innistrad/maps/tileset/inn_buildings.atlas",
+		"sprite": "ulvenwaldtown",
+		"map": "../Innistrad/maps/map/Innistrad/towns/inn_ulvenwald_town.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Capital",
+			"BiomeColorless",
+			"TownGeneric",
+			"Sidequest"
+		]
+	},
+
+	{
+		"name": "inn_ulvenwald_village",
+		"type": "town",
+		"count": 6,
+		"spriteAtlas": "../Innistrad/maps/tileset/inn_buildings.atlas",
+		"sprite": "ulvenwaldtown",
+		"map": "../Innistrad/maps/map/Innistrad/towns/inn_ulvenwald_hamlet.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Town",
+			"BiomeColorless",
+			"TownGeneric",
+			"Sidequest"
+		]
+	}
+]

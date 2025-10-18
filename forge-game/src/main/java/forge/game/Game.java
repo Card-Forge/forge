@@ -415,19 +415,6 @@ public class Game {
     }
 
     /**
-     * Gets the nonactive players who are still fighting to win, in turn order.
-     */
-    public final PlayerCollection getNonactivePlayers() {
-        // Don't use getPlayersInTurnOrder to prevent copying the player collection twice
-        final PlayerCollection players = new PlayerCollection(ingamePlayers);
-        players.remove(phaseHandler.getPlayerTurn());
-        if (!getTurnOrder().isDefaultDirection()) {
-            Collections.reverse(players);
-        }
-        return players;
-    }
-
-    /**
      * Gets the players who participated in match (regardless of outcome).
      * <i>Use this in UI and after match calculations</i>
      */
@@ -744,7 +731,7 @@ public class Game {
             if (!visitor.visitAll(player.getZone(ZoneType.Exile).getCards())) {
                 return;
             }
-            if (!visitor.visitAll(player.getZone(ZoneType.Command).getCards())) {
+            if (!visitor.visitAll(player.getCardsIn(ZoneType.PART_OF_COMMAND_ZONE))) {
                 return;
             }
             if (withSideboard && !visitor.visitAll(player.getZone(ZoneType.Sideboard).getCards())) {
@@ -858,6 +845,8 @@ public class Game {
             p.revealFaceDownCards();
         }
 
+        // TODO free any mindslaves
+
         for (Card c : cards) {
             // CR 800.4d if card is controlled by opponent, LTB should trigger
             if (c.getOwner().equals(p) && c.getController().equals(p)) {
@@ -893,8 +882,6 @@ public class Game {
                         }
                         triggerList.put(c.getZone().getZoneType(), null, c);
                         getAction().ceaseToExist(c, false);
-                        // CR 603.2f owner of trigger source lost game
-                        getTriggerHandler().clearDelayedTrigger(c);
                     }
                 } else {
                     // return stolen permanents
@@ -1305,6 +1292,11 @@ public class Game {
         return dmgList;
     }
 
+    public int getSingleMaxDamageDoneThisTurn() {
+        return globalDamageHistory.stream().flatMap(cdh -> cdh.getAllDmgInstances().stream()).
+                mapToInt(dmg -> dmg.getLeft()).max().orElse(0);
+    }
+
     public void addGlobalDamageHistory(CardDamageHistory cdh, Pair<Integer, Boolean> dmg, Card source, GameEntity target) {
         globalDamageHistory.add(cdh);
         damageThisTurnLKI.put(dmg, Pair.of(source, target));
@@ -1379,6 +1371,12 @@ public class Game {
         if (!isNeitherDayNorNight())
             fireEvent(new GameEventDayTimeChanged(isDay()));
     }
+
+    public boolean isVoid() {
+        return getLeftBattlefieldThisTurn().stream().anyMatch(c -> !c.isLand()) ||
+                getStack().getSpellsCastThisTurn().stream().anyMatch(s -> s.getCastSA().isWarp());
+    }
+
     public int getAITimeout() {
         return AI_TIMEOUT;
     }

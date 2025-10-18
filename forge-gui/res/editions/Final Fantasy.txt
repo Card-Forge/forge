@@ -172,7 +172,7 @@ Replace=.18F BasicLand:fromSheet("FIN cards"):!fromSheet("FIN dual lands")+
 104 R Jecht, Reluctant Guardian @Michael MacRae
 105 R Kain, Traitorous Dragoon @Russell Dongjun Lu
 106 C Malboro @Dan Watson
-107 C Namazu Trader @Andrea Montalto
+107 C Namazu Trader @Andrea Tentori Montalto
 108 R Ninja's Blades @Immanuela Crovius
 109 U Overkill @Bachzim
 110 U Phantom Train @Gal Or
@@ -362,7 +362,7 @@ Replace=.18F BasicLand:fromSheet("FIN cards"):!fromSheet("FIN dual lands")+
 294 L Plains @Shahab Alizadeh
 295 L Plains @Jonas De Ro
 296 L Plains @Eddie Mendoza
-297 L Island @Fabira Khamesh
+297 L Island @Fariba Khamseh
 298 L Island @Eddie Mendoza
 299 L Island @Jeremy Paillotin
 300 L Swamp @Domenico Cava
@@ -426,7 +426,7 @@ Replace=.18F BasicLand:fromSheet("FIN cards"):!fromSheet("FIN dual lands")+
 340 R Triple Triad @Hagiya Kaoru
 341 U Clash of the Eikons @Hagiya Kaoru
 342 R The Earth Crystal @Kei Satsuki
-343 R Jumbo Cactuar @Yumeko
+343 R Jumbo Cactuar @Hisashi Momose
 344 R A Realm Reborn @Ono Tako
 345 U Torgal, A Fine Hound @Makura Tami
 346 R Jenova, Ancient Calamity @Karo ARAI
@@ -631,6 +631,14 @@ Replace=.18F BasicLand:fromSheet("FIN cards"):!fromSheet("FIN dual lands")+
 551c M Traveling Chocobo @Toni Infante
 551d M Traveling Chocobo @Toni Infante
 551f M Traveling Chocobo @Toni Infante
+564 M Cloud, Midgar Mercenary @Inuchiyo Meimaru
+565 R Stiltzkin, Moogle Merchant @Yukihiro Maruo
+566 R A Realm Reborn @Susumu Kuroi
+567 R Tifa Lockhart @Yoshiro Ambe
+568 M Traveling Chocobo @Ishikawa Kenta
+569 R Choco, Seeker of Paradise @Kemonomichi
+570 M Vivi Ornitier @Ryanroro
+571 M Yuna, Hope of Spira @Yuichi Murakami
 572 L Plains @Jonas De Ro
 573 L Island @Eddie Mendoza
 574 L Swamp @Domenico Cava

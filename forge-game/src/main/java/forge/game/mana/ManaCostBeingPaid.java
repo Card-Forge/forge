@@ -551,10 +551,10 @@ public class ManaCostBeingPaid {
                 // The generic portion of a 2/Colored mana, should be lower priority than generic mana
                 return !ColorSet.fromMask(bill.getColorMask() & paymentColor).isColorless() ? 9 : 1;
             }
-            if (!bill.isPhyrexian()) {
-                return 10;
+            if (bill.isPhyrexian()) {
+                return 8;
             }
-            return 8;
+            return 10;
         }
         return 5;
     }

@@ -21,23 +21,37 @@ import java.util.Set;
 
 public class ChooseTypeAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         String aiLogic = sa.getParamOrDefault("AILogic", "");
 
         if (aiLogic.isEmpty()) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.MissingLogic);
         } else if ("MostProminentComputerControls".equals(aiLogic)) {
             if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Mirror Entity Avatar")) {
-                return doMirrorEntityLogic(aiPlayer, sa);
+                if (doMirrorEntityLogic(aiPlayer, sa)) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                } else {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
             }
-            return !chooseType(sa, aiPlayer.getCardsIn(ZoneType.Battlefield)).isEmpty();
+
+
+            if (!chooseType(sa, aiPlayer.getCardsIn(ZoneType.Battlefield)).isEmpty()) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
         } else if ("MostProminentComputerControlsOrOwns".equals(aiLogic)) {
-            return !chooseType(sa, aiPlayer.getCardsIn(Arrays.asList(ZoneType.Hand, ZoneType.Battlefield))).isEmpty();
+            return !chooseType(sa, aiPlayer.getCardsIn(Arrays.asList(ZoneType.Hand, ZoneType.Battlefield))).isEmpty()
+                    ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
+                    : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else if ("MostProminentOppControls".equals(aiLogic)) {
-            return !chooseType(sa, aiPlayer.getOpponents().getCardsIn(ZoneType.Battlefield)).isEmpty();
+            return !chooseType(sa, aiPlayer.getOpponents().getCardsIn(ZoneType.Battlefield)).isEmpty()
+                    ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
+                    : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        return doTriggerAINoCost(aiPlayer, sa, false);
+        return doTriggerNoCost(aiPlayer, sa, false);
     }
 
     private boolean doMirrorEntityLogic(Player aiPlayer, SpellAbility sa) {
@@ -101,7 +115,7 @@ public class ChooseTypeAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         boolean isCurse = sa.isCurse();
 
         if (sa.usesTargeting()) {
@@ -133,16 +147,16 @@ public class ChooseTypeAi extends SpellAbilityAi {
             }
 
             if (!sa.isTargetNumberValid()) {
-                return false; // nothing to target?
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
         } else {
             for (final Player p : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa)) {
                 if (p.isOpponentOf(ai) && !mandatory && !isCurse) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }
         }
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     private String chooseType(SpellAbility sa, CardCollectionView cards) {

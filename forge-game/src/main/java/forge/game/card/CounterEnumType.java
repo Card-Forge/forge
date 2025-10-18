@@ -28,7 +28,7 @@ import java.util.Locale;
  * @author Clemens Koza
  * @version V0.0 17.02.2010
  */
-public enum CounterEnumType {
+public enum CounterEnumType implements CounterType {
 
     M1M1("-1/-1", "-1/-1", 255, 110, 106),
     P1P1("+1/+1", "+1/+1", 96, 226, 23),
@@ -167,7 +167,11 @@ public enum CounterEnumType {
 
     FILIBUSTER("FLBTR", 255, 179, 119),
 
+    FILM("FILM", 255, 255, 255),
+
     FINALITY("FINAL", 255, 255, 255),
+
+    FIRE("FIRE", 240, 30, 35),
 
     FLAME("FLAME", 255, 143, 43),
     
@@ -552,5 +556,15 @@ public enum CounterEnumType {
     }
 
     public static final ImmutableList<CounterEnumType> values = ImmutableList.copyOf(values());
+
+    @Override
+    public boolean is(CounterEnumType eType) {
+        return this == eType;
+    }
+
+    @Override
+    public boolean isKeywordCounter() {
+        return false;
+    }
 
 }

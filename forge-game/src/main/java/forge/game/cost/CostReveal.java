@@ -67,7 +67,7 @@ public class CostReveal extends CostPartWithList {
             modifiedHand.remove(source); // can't pay for itself
             handList = modifiedHand;
         }
-        handList = CardLists.getValidCards(handList, getType(), payer, source, ability);
+        handList = CardLists.getValidCards(handList, getType().split(";"), payer, source, ability);
 
         return handList.size();
     }

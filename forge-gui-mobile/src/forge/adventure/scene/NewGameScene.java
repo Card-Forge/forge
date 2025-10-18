@@ -268,7 +268,7 @@ public class NewGameScene extends MenuScene {
             SoundSystem.instance.changeBackgroundTrack();
             WorldStage.getInstance().enterSpawnPOI();
             if (AdventurePlayer.current().getQuests().stream().noneMatch(q -> q.getID() == 28)) {
-                AdventurePlayer.current().addQuest("28"); //Temporary link to Shandalar main questline
+                AdventurePlayer.current().addQuest("28", true); //Temporary link to Shandalar main questline
             }
             Forge.switchScene(GameScene.instance());
         };
@@ -354,7 +354,7 @@ public class NewGameScene extends MenuScene {
         matchImpacts.name = "Duels";
 
         DialogData economyImpacts = new DialogData();
-        economyImpacts.text = String.format("Difficulty: %s\nStarting Gold: %d\nStarting Mana Shards: %d\nCard Sale Price: %d%%\nMana Shard Sale Price: %d%%\nRandom loot rate: %d%%", selectedDifficulty.name, selectedDifficulty.staringMoney, selectedDifficulty.startingShards, (int) (selectedDifficulty.sellFactor * 100), (int) (selectedDifficulty.shardSellRatio * 100), (int) (selectedDifficulty.rewardMaxFactor * 100));
+        economyImpacts.text = String.format("Difficulty: %s\nStarting Gold: %d\nStarting Mana Shards: %d\nCard Sale Price: %d%%\nMana Shard Sale Price: %d%%\nRandom loot rate: %d%%", selectedDifficulty.name, selectedDifficulty.startingMoney, selectedDifficulty.startingShards, (int) (selectedDifficulty.sellFactor * 100), (int) (selectedDifficulty.shardSellRatio * 100), (int) (selectedDifficulty.rewardMaxFactor * 100));
         economyImpacts.name = "Economy";
 
         difficultySummary.options = new DialogData[3];

@@ -1,0 +1,7 @@
+Name:Temporal Intervention
+ManaCost:2 B
+Types:Sorcery
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | CheckSVar$ X | Description$ Void — This spell costs {2} less to cast if a nonland permanent left the battlefield this turn or a spell was warped this turn.
+A:SP$ Discard | ValidTgts$ Player | NumCards$ 1 | DiscardValid$ Card.nonLand | Mode$ RevealYouChoose | SpellDescription$ Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.
+SVar:X:Count$Void.1.0
+Oracle:Void — This spell costs {2} less to cast if a nonland permanent left the battlefield this turn or a spell was warped this turn.\nTarget opponent reveals their hand. You choose a nonland card from it. That player discards that card.

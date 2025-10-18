@@ -3,22 +3,8 @@ package forge.game.event;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.util.Lang;
-import forge.util.TextUtil;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
-public class GameEventManaPool extends GameEvent {
-    public final Player player;
-    public final EventValueChangeType mode;
-    public final Mana mana;
-
-    public GameEventManaPool(Player owner, EventValueChangeType changeMode, Mana mana) {
-        this.mana = mana;
-        player = owner;
-        mode = changeMode;
-    }
+public record GameEventManaPool(Player player, EventValueChangeType mode, Mana mana) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
@@ -30,6 +16,17 @@ public class GameEventManaPool extends GameEvent {
      */
     @Override
     public String toString() {
-        return TextUtil.concatWithSpace(Lang.getInstance().getPossesive(player.getName()),"mana pool",  mode.toString(), "-", TextUtil.addSuffix(mana.toString()," "));
+        StringBuilder sb = new StringBuilder(Lang.getInstance().getPossessedObject(player.getName(), "mana pool"));
+        sb.append(" ").append(mode);
+        switch (mode) {
+        case Added:
+        case Removed:
+            sb.append(" - ").append(mana);
+            break;
+        default:
+            break;
+        
+        }
+        return sb.toString();
     }
 }

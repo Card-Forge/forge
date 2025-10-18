@@ -13,6 +13,7 @@ public enum OptionalCost {
     PromiseGift("Promise Gift", ""),
     Retrace("Retrace", ""),
     Jumpstart("Jump-start", ""),
+    Offering("Offering", ""),
     ReduceW("(to reduce white mana)", "W"),
     ReduceU("(to reduce blue mana)", "U"),
     ReduceB("(to reduce black mana)", "B"),

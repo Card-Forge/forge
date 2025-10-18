@@ -1,0 +1,195 @@
+{
+"startPointX": 0.5,
+"startPointY": 0.22,
+"noiseWeight": 0.5,
+"distWeight": 1.5,
+"name": "FF9 The Mist Continent",
+"tilesetAtlas": "world/tilesets/terrain.atlas",
+"tilesetName": "White",
+"terrain": [
+	{
+		"spriteName": "White_1",
+		"max": 0.2,
+		"resolution": 10
+	},
+	{
+		"spriteName": "White_2",
+		"min": 0.8,
+		"max": 1,
+		"resolution": 10
+	}
+],
+"width": 0.7,
+"height": 0.7,
+"color": "efe697",
+"spriteNames": [
+	"DarkGras"
+],
+"enemies": [
+	"Adept White Wizard",
+	"Adventurer",
+	"Aether Channeler",
+	"Angelic Page",
+	"Angelic Overseer",
+	"Human Looter",
+	"Apprentice White Wizard",
+	"Archer",
+	"Armored Knight",
+	"Camel",
+	"Cathar",
+	"Cerodon",
+	"Challenger 20",
+	"Challenger 21",
+	"Challenger 22",
+	"Cleric",
+	"Criosphinx",
+	"Dawnhart Witch",
+	"Dog",
+	"Eldraine Knight",
+	"Elephant",
+	"Falcon",
+	"Falcon-headed Aven Warrior",
+	"Fox",
+	"Frost Titan",
+	"Griffin",
+	"Hellion",
+	"Horseman",
+	"Human",
+	"Human elite",
+	"Human guard",
+	"Ibis-headed Aven Warrior",
+	"Khenra Warrior",
+	"Leonin Warrior",
+	"Lion",
+	"Knight",
+	"Kor Warrior",
+	"Master White Wizard",
+	"Monk",
+	"Naga Warrior",
+	"Orthodoxy Duelist",
+	"Owl",
+	"Raven",
+	"Rhino",
+	"Runelord",
+	"Greater Sandwurm",
+	"Scorpion",
+	"Scarab",
+	"Sphinx",
+	"Stray Cat",
+	"Triceratops",
+	"Warrior",
+	"White Dwarf",
+	"White Sliver"
+],
+"pointsOfInterest": [
+	"White Castle",
+	"Plains Capital",
+	"Plains Town Generic",
+	"Plains Town Identity",
+	"Plains Town Tribal",
+	"Monastery",
+	"Monastery1",
+	"Monastery2",
+	"Monastery3",
+	"Monastery4",
+	"Castle",
+	"Castle1",
+	"Castle2",	
+	"Castle3",
+	"Aerie",
+	"CatLairW",
+	"CatLairW1",
+	"CatLairW2",
+	"NestW",
+	"CaveW",
+	"CaveW1",
+	"CaveW2",
+	"CaveW3",
+	"CaveW4",
+	"CaveW5",
+	"CaveW6",
+	"OrthodoxyBasilica",
+	"Nahiri Encampment",
+	"KorEncampment",
+	"MageTower White",
+	"UnhallowedAbbey"
+],
+"structures": [
+	{
+		"N": 2,
+		"x": 0.5,
+		"y": 0.5,
+		"structureAtlasPath": "world/structures/white_structures.atlas",
+		"sourcePath": "world/structures/models/white.png",
+		"maskPath": "world/structures/masks/circle.png",
+		"height": 0.20000002,
+		"width": 0.20000002,
+		"symmetry": 8,
+		"mappingInfo": [
+			{
+				"name": "tree",
+				"color": "ff8000",
+				"collision": true
+			},
+			{
+				"name": "tree2",
+				"color": "008000",
+				"collision": true
+			},
+			{
+				"name": "tree3",
+				"color": "00ff00",
+				"collision": true
+			}
+		]
+	},
+	{
+		"N": 2,
+		"x": 0.5,
+		"y": 0.5,
+		"symmetry": 8,
+		"structureAtlasPath": "world/structures/white_structures.atlas",
+		"sourcePath": "world/structures/models/desert.png",
+		"maskPath": "world/structures/masks/ring.png",
+		"height": 0.5,
+		"width": 0.5,
+		"mappingInfo": [
+			{
+				"name": "plateau",
+				"color": "804000",
+				"collision": true
+			},
+			{
+				"name": "rock",
+				"color": "402000",
+				"collision": true
+			},
+			{
+				"name": "mesa",
+				"color": "201000",
+				"collision": true
+			},
+			{
+				"name": "plateau",
+				"color": "804000",
+				"collision": true
+			},
+			{
+				"name": "cactus",
+				"color": "00ff00",
+				"collision": true
+			},
+			{
+				"name": "cactus2",
+				"color": "008000",
+				"collision": true
+			},
+			{
+				"name": "cactus3",
+				"color": "004000",
+				"collision": true
+			}
+		]
+	}
+]
+}

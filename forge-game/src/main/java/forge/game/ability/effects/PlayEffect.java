@@ -276,13 +276,13 @@ public class PlayEffect extends SpellAbilityEffect {
             CardStateName state = CardStateName.Original;
 
             if (sa.hasParam("CastTransformed")) {
-                if (!tgtCard.changeToState(CardStateName.Transformed)) {
+                if (!tgtCard.changeToState(CardStateName.Backside)) {
                     // Failed to transform. In the future, we might need to just remove this option and continue
                     amount--;
                     System.err.println("CastTransformed failed for '" + tgtCard + "'.");
                     continue;
                 }
-                state = CardStateName.Transformed;
+                state = CardStateName.Backside;
             }
 
             List<SpellAbility> sas = AbilityUtils.getSpellsFromPlayEffect(tgtCard, controller, state, !altCost);
@@ -426,6 +426,10 @@ public class PlayEffect extends SpellAbilityEffect {
 
             if (tgtSA.usesTargeting() && !optional) {
                 tgtSA.getTargetRestrictions().setMandatory(true);
+            }
+
+            if (sa.hasParam("Named")) {
+                tgtSA.setName(sa.getName());
             }
 
             // can't be done later

@@ -1,0 +1,48 @@
+[metadata]
+Code=YEOE
+Date=2025-08-19
+Name=Alchemy: Edge of Eternities
+Type=Online
+ScryfallCode=YEOE
+
+[cards]
+1 R Candela, Aegis of Adagia @Sergey Glushakov
+2 U Squadron Carrier @Sergey Glushakov
+3 R Stoic Star-Captain @Eelis Kyttanen
+4 U Thought Partition @Michele Giorgi
+5 R Cloudsculpt Armorer @Michele Giorgi
+6 U Hydroponics Architect @Joshua Cairos
+7 U Machinist's Dismissal @Anna Pavleeva
+8 R Network Marauder @Diana Franco
+9 U Cantor of the Refrain @Mathias Kollros
+10 R Gravitic Herald @Helge C. Balzer
+11 R Monoist Gravliner @Sergey Glushakov
+12 U Song of Point Prime @Bryan Sola
+13 R Voidcalled Devotee @Lius Lasahido
+14 M Cosmic Sovereign @Yohann Schepacz
+15 R Kavaron Consumed @Roman Kuteynikov
+16 U Mine Security @Xavier Ribeiro
+17 R Thendar, the Overminer @Lius Lasahido
+18 R Brood Astronomer @Antonio José Manzanedo
+19 U Eumidian Lifeseed @Sergey Glushakov
+20 U Mutable Pupa @Nicholas Gregory
+21 M Worldweave @Yohann Schepacz
+22 R Ambassador of Evendo @Paul Dainton
+23 R Axavar, Fate Thief @Tianxing Xu
+24 M Prototype X-8 @Sergey Glushakov
+25 M Sliver Weftwinder @Slawomir Maniak
+26 U Val, Marooned Surveyor @Cristi Balanescu
+27 R Volatile Orbit @Adam Paquette
+28 M Vv'viza, Orbital Overseer @Cristi Balanescu
+29 R Drix Interlacer @Volkan Baǵa
+30 R Spirited Simulacrum @Michal Ivan
+31 R Clifftop Retreat @Christine Choi
+32 R Dragonskull Summit @Alayna Danner
+33 R Drowned Catacomb @Jung Park
+34 R Glacial Fortress @James Paick
+35 R Hinterland Harbor @Daniel Ljunggren
+36 R Isolated Chapel @Richard Wright
+37 R Rootbound Crag @Grzegorz Rutkowski
+38 R Sulfur Falls @Cliff Childs
+39 R Sunpetal Grove @Dimitar Marinski
+40 R Woodland Cemetery @Christine Choi

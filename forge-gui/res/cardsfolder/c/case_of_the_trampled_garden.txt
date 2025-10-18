@@ -8,6 +8,6 @@ SVar:TrigSolve:DB$ AlterAttribute | Defined$ Self | Attributes$ Solved
 T:Mode$ AttackersDeclared | IsPresent$ Card.Self+IsSolved | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounterAttacker | TriggerDescription$ Solved — Whenever you attack, put a +1/+1 counter on target attacking creature. It gains trample until end of turn.
 SVar:TrigCounterAttacker:DB$ PutCounter | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Trample
-SVar:X:Count$SumPower_Creature.YouCtrl
+SVar:X:Count$Valid Creature.YouCtrl$CardPower
 DeckHas:Ability$Counters
 Oracle:When this Case enters, distribute two +1/+1 counters among one or two target creatures you control.\nTo solve — Creatures you control have total power 8 or greater. (If unsolved, solve at the beginning of your end step.)\nSolved — Whenever you attack, put a +1/+1 counter on target attacking creature. It gains trample until end of turn.

@@ -1,0 +1,8 @@
+Name:Spectacular Tactics
+ManaCost:1 W
+Types:Instant
+A:SP$ Charm | Choices$ DBPutCounter,DBDestroy
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | CounterType$ P1P1 | TgtPrompt$ Select target creature you control | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature you control. It gains hexproof until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ ParentTarget | KW$ Hexproof
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater.
+Oracle:Choose one —\n• Put a +1/+1 counter on target creature you control. It gains hexproof until end of turn.\n• Destroy target creature with power 4 or greater.

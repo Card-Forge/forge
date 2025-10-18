@@ -1,0 +1,8 @@
+Name:The Dominion Bracelet
+ManaCost:2
+Types:Legendary Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddAbility$ DominionControlPlayer | AddSVar$ DominionBraceletX | Description$ Equipped creature gets +1/+1 and has "{15}, Exile CARDNAME: You control target opponent during their next turn. This ability costs {X} less to activate, where X is this creature's power. Activate only as a sorcery." (You see all cards that player could see and make all decisions for them.)
+SVar:DominionControlPlayer:AB$ ControlPlayer | Cost$ 15 Exile<1/OriginalHost/The Dominion Bracelet> | ValidTgts$ Opponent | ReduceCost$ DominionBraceletX | SorcerySpeed$ True | SpellDescription$ You control target opponent during their next turn. This ability costs {X} less to activate, where X is this creature's power. Activate only as a sorcery.
+K:Equip:1
+SVar:DominionBraceletX:Count$CardPower
+Oracle:Equipped creature gets +1/+1 and has "{15}, Exile The Dominion Bracelet: You control target opponent during their next turn. This ability costs {X} less to activate, where X is this creature's power. Activate only as a sorcery." (You see all cards that player could see and make all decisions for them.)\nEquip {1}

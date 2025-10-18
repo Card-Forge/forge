@@ -1,0 +1,9 @@
+Name:Illvoi Operative
+ManaCost:1 U
+Types:Creature Jellyfish Rogue
+PT:2/1
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ DBPutCounter | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Whenever you cast your second spell each turn, put a +1/+1 counter on this creature.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Card
+DeckHas:Ability$Counters
+Oracle:Whenever you cast your second spell each turn, put a +1/+1 counter on this creature.

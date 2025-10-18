@@ -2,7 +2,6 @@
 Code=M14
 Date=2013-07-19
 Name=Magic 2014
-Code2=M14
 Type=Core
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
@@ -270,7 +269,11 @@ ScryfallCode=M14
 5 b_2_2_zombie @Lucas Graciano
 6 r_2_2_dragon_flying_firebreathing @Jack Wang
 7 r_1_1_elemental @Jaime Jones
-8 r_1_1_elemental @Jaime Jones
+8 r_1_1_elemental @Winona Nelson
 9 g_3_3_beast @John Donahue
 10 g_1_1_saproling @Brad Rigney
 11 g_2_2_wolf @Lars Grant-West
+
+[other]
+12 emblem_liliana_of_the_dark_realms @D. Alexander Gregory
+13 emblem_garruk_caller_of_beasts @Karl Kopinski

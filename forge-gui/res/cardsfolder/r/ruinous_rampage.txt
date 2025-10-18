@@ -1,0 +1,7 @@
+Name:Ruinous Rampage
+ManaCost:1 R R
+Types:Sorcery
+A:SP$ Charm | Choices$ DBDealDamage,DBExile | CharmNum$ 1
+SVar:DBDealDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to each opponent.
+SVar:DBExile:DB$ ChangeZoneAll | ChangeType$ Artifact.cmcLE3 | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile all artifacts with mana value 3 or less.
+Oracle:Choose one —\n• Ruinous Rampage deals 3 damage to each opponent.\n• Exile all artifacts with mana value 3 or less.

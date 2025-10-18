@@ -128,7 +128,6 @@ ScryfallCode=UST
 90 C Just Desserts @Zoltan Boros
 91 C Painiac @McLean Kendree
 92 U Party Crasher @Mike Burns
-93 R Steamflogger Boss @Warren Mahy
 94 R Steamflogger of the Month @Warren Mahy
 95 U Steamflogger Temp @Jeff Miracola
 96 U Steamfloggery @Emrah Elmasli
@@ -275,6 +274,9 @@ ScryfallCode=UST
 214 L Swamp @John Avon
 215 L Mountain @John Avon
 216 L Forest @John Avon
+
+[eternal]
+93 R Steamflogger Boss @Warren Mahy
 
 [tokens]
 1 w_4_4_angel_flying @Magali Villeneuve

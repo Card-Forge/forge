@@ -1,0 +1,644 @@
+buildings.png
+size: 448,800
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none               
+IslandTown 
+  xy: 144, 0
+  size: 48, 48
+MountainTown 
+  xy: 48, 0
+  size: 48, 48  
+SwampTown 
+  xy: 0, 0
+  size: 48, 48
+ForestTown 
+  xy: 352, 496
+  size: 32, 32    
+PlainsTown 
+  xy: 96, 0
+  size: 48, 48
+PirateShop
+  xy: 384, 704
+  size: 16, 16   
+WasteTown 
+  xy: 272, 128
+  size: 48, 48 
+SnowShop
+  xy: 368, 944
+  size: 16, 16 
+IslandCapital
+  xy: 128, 592
+  size: 64, 64
+MountainCapital
+  xy: 128, 720
+  size: 64, 64  
+SwampCapital
+  xy: 128, 464
+  size: 64, 64
+ForestCapital 
+  xy: 64, 656
+  size: 64, 64    
+PlainsCapital 
+  xy: 0, 464
+  size: 64, 64 
+Spawn 
+  xy: 304, 288
+  size: 16, 16   
+Gate 
+  xy: 384, 128
+  size: 64, 48
+InstantShop
+  xy: 304, 704
+  size: 16, 16       
+CreatureShop
+  xy: 320, 704
+  size: 16, 16        
+GreenShop
+  xy: 336, 704
+  size: 16, 16
+RedShop
+  xy: 352, 704
+  size: 16, 16    
+WhiteShop
+  xy: 368, 704
+  size: 16, 16  
+LandShop
+  xy: 304, 720
+  size: 16, 16       
+ColorlessShop
+  xy: 320, 720
+  size: 16, 16        
+BlackShop
+  xy: 336, 720
+  size: 16, 16
+BlueShop
+  xy: 352, 720
+  size: 16, 16    
+MultiColorShop
+  xy: 368, 720
+  size: 16, 16
+SelesnyaShop
+  xy: 304, 736
+  size: 16, 16       
+AzoriusShop
+  xy: 320, 736
+  size: 16, 16        
+DimirShop
+  xy: 336, 736
+  size: 16, 16
+RakdosShop
+  xy: 352, 736
+  size: 16, 16    
+GruulShop
+  xy: 368, 736
+  size: 16, 16 
+SimicShop
+  xy: 304, 752
+  size: 16, 16       
+OrzhovShop
+  xy: 320, 752
+  size: 16, 16        
+IzzetShop
+  xy: 336, 752
+  size: 16, 16
+GolgariShop
+  xy: 352, 752
+  size: 16, 16    
+BorosShop
+  xy: 368, 752
+  size: 16, 16
+GoblinShop
+  xy: 304, 768
+  size: 16, 16       
+ZombieShop
+  xy: 320, 768
+  size: 16, 16        
+HumanShop
+  xy: 336, 768
+  size: 16, 16
+ElfShop
+  xy: 352, 768
+  size: 16, 16    
+GiantShop
+  xy: 336, 944
+  size: 16, 16   
+SagaShop
+  xy: 304, 944
+  size: 16, 16   
+FlipShop
+  xy: 368, 928
+  size: 16, 16
+BattleShop
+  xy: 288, 944
+  size: 16, 16
+LargeSeaCreaturesShop
+  xy: 352, 944
+  size: 16, 16
+UBShop
+  xy: 384, 928
+  size: 16, 16
+NobleShop
+  xy: 320, 944
+  size: 16, 16   
+MerfolkShop
+  xy: 368, 768
+  size: 16, 16
+EquipmentShop
+  xy: 304, 784   
+  size: 16, 16   
+ItemShop
+  xy: 288, 912
+  size: 16, 16
+CapitalShop
+  xy: 304, 816   
+  size: 16, 16 
+ArtifactShop
+  xy: 320, 784   
+  size: 16, 16
+AngelShop
+  xy: 336, 784
+  size: 16, 16
+GolemShop
+  xy: 352, 784
+  size: 16, 16
+SphinxShop
+  xy: 320, 912
+  size: 16, 16
+HydraShop
+  xy: 336, 912
+  size: 16, 16
+InsectSpiderShop
+  xy: 352, 912
+  size: 16, 16
+SliverShop
+  xy: 368, 784
+  size: 16, 16
+RWBShop
+  xy: 304, 800   
+  size: 16, 16 
+RWUShop
+  xy: 320, 800   
+  size: 16, 16
+RWGShop
+  xy: 336, 800
+  size: 16, 16
+EnchantmentShop
+  xy: 352, 800
+  size: 16, 16
+WUBRGShop
+  xy: 368, 800
+  size: 16, 16
+RogueShop
+  xy: 288, 816   
+  size: 16, 16 
+NonbasicLandShop
+  xy: 304, 816   
+  size: 16, 16 
+SpaceMarineShop
+  xy: 320, 816   
+  size: 16, 16
+NecronShop
+  xy: 336, 816
+  size: 16, 16
+ChaosShop
+  xy: 352, 816
+  size: 16, 16
+InsectShop
+  xy: 368, 912
+  size: 16, 16
+CatShop
+  xy: 288, 928
+  size: 16, 16
+ShapeshifterShop
+  xy: 384, 912
+  size: 16, 16
+GodMinigodShop
+  xy: 320, 928
+  size: 16, 16
+MutantShop
+  xy: 336, 928
+  size: 16, 16
+HorrorShop
+  xy: 352, 928
+  size: 16, 16
+EldraziShop
+  xy: 304, 928
+  size: 16, 16
+TyranidShop
+  xy: 368, 816
+  size: 16, 16
+M22Shop
+  xy: 384, 720
+  size: 16, 16 
+M21Shop
+  xy: 384, 750
+  size: 16, 16 
+M20Shop
+  xy: 384, 766
+  size: 16, 16 
+AssassinShop
+  xy: 384, 784
+  size: 16, 16 
+SquirrelShop
+  xy: 384, 800
+  size: 16, 16
+DragonShop
+  xy: 384, 816
+  size: 16, 16
+AssemblyShop
+  xy: 288, 832   
+  size: 16, 16
+VampireShop
+  xy: 304, 832
+  size: 16, 16
+VehicleShop
+  xy: 320, 832   
+  size: 16, 16 
+RUBShop
+  xy: 336, 832
+  size: 16, 16
+RGBShop
+  xy: 352, 832
+  size: 16, 16
+RGUShop
+  xy: 368, 832
+  size: 16, 16
+MinotaurShop
+  xy: 384, 832
+  size: 16, 16
+DinosaurShop
+  xy: 288, 848   
+  size: 16, 16
+UWBShop
+  xy: 304, 848
+  size: 16, 16
+UGBShop
+  xy: 320, 848
+  size: 16, 16
+UWGShop
+  xy: 336, 848
+  size: 16, 16
+GWBShop
+  xy: 352, 848
+  size: 16, 16
+DwarfShop
+  xy: 368, 848
+  size: 16, 16
+DevilShop
+  xy: 384, 848
+  size: 16, 16 
+OgreShop
+  xy: 288, 864
+  size: 16, 16
+EquipShop
+  xy: 320, 864
+  size: 16, 16
+SoldierShop
+  xy: 336, 864
+  size: 16, 16
+CardShop
+  xy: 352, 864
+  size: 16, 16
+DnDShop
+  xy: 368, 864
+  size: 16, 16
+DemonShop
+  xy: 384, 864
+  size: 16, 16
+RotatingShop
+  xy: 288, 880
+  size: 16, 16
+DruidShop
+  xy: 304, 880
+  size: 16, 16
+WandShop
+  xy: 320, 880
+  size: 16, 16
+BirdShop
+  xy: 336, 880
+  size: 16, 16
+WolfShop
+  xy: 352, 880
+  size: 16, 16
+KnightShop
+  xy: 368, 880
+  size: 16, 16
+WallShop
+  xy: 384, 880
+  size: 16, 16 
+PlaneswalkerShop
+  xy: 304, 896
+  size: 16, 16
+SkeletonShop
+  xy: 320, 896
+  size: 16, 16
+SpiritShop
+  xy: 336, 896
+  size: 16, 16
+ShamanShop
+  xy: 352, 896
+  size: 16, 16
+WizardShop
+  xy: 368, 896
+  size: 16, 16
+LegendShop
+  xy: 384, 896
+  size: 16, 16
+ShardTrader  
+  xy: 288, 896
+  size: 16, 16
+Waypoint  
+  xy: 288, 912
+  size: 16, 16
+Overlay8Black
+  xy: 400, 704
+  size: 5, 16  
+Overlay6Black
+  xy: 405, 704
+  size: 5, 16  
+Overlay4Black
+  xy: 400, 800
+  size: 5,16 
+Overlay2Black
+  xy: 405, 800
+  size: 5, 16    
+Overlay8Green
+  xy: 400, 768
+  size: 5, 16  
+Overlay6Green
+  xy: 405, 768
+  size: 5, 16  
+Overlay4Green
+  xy: 405, 864
+  size: 5, 16   
+Overlay2Green
+  xy: 405, 864
+  size: 5, 16  
+Overlay8Colorless
+  xy: 400, 784
+  size: 5, 16  
+Overlay6Colorless
+  xy: 405, 784
+  size: 5, 16  
+Overlay4Colorless
+  xy: 400, 880
+  size: 5, 16  
+Overlay2Colorless
+  xy: 405, 880
+  size: 5, 16   
+Overlay8Blue
+  xy: 400, 720
+  size: 5, 16  
+Overlay6Blue
+  xy: 405, 720
+  size: 5, 16  
+Overlay4Blue
+  xy: 400, 816
+  size: 5, 16  
+Overlay2Blue
+  xy: 405, 816
+  size: 5, 16  
+Overlay8Red
+  xy: 400, 736
+  size: 5, 16  
+Overlay6Red
+  xy: 405, 736
+  size: 5, 16  
+Overlay4Red
+  xy: 400, 832
+  size: 5, 16  
+Overlay2Red
+  xy: 405, 832
+  size: 5, 16  
+Overlay8White
+  xy: 400, 752
+  size: 5, 16  
+Overlay6White
+  xy: 405, 752
+  size: 5, 16  
+Overlay4White
+  xy: 400, 848
+  size: 5, 16  
+Overlay2White
+  xy: 405, 848
+  size: 5, 16  
+PhyrexianShop
+  xy: 304, 912
+  size: 16, 16
+Test
+  xy: 128, 48
+  size: 32, 32 
+Cave
+  xy: 192, 272
+  size: 32, 32  
+Nest 
+  xy: 256, 304
+  size: 32, 32
+Nest 
+  xy: 321, 400
+  size: 32, 32
+Aerie 
+  xy: 289, 368
+  size: 32, 32
+Factory 
+  xy: 288, 433
+  size: 32, 32
+Factory 
+  xy: 0, 146
+  size: 32, 30  
+Factory 
+  xy: 192, 240
+  size: 32, 32
+Fort 
+  xy: 160, 274
+  size: 32, 32
+Fort 
+  xy: 224, 368
+  size: 32, 32
+Fort 
+  xy: 320, 368
+  size: 32, 32   
+Monastery 
+  xy: 352, 367
+  size: 32, 32   
+Castle 
+  xy: 160, 274
+  size: 32, 32
+Castle 
+  xy: 224, 368
+  size: 32, 32
+Castle 
+  xy: 320, 368
+  size: 32, 32
+CatLair 
+  xy: 161, 49
+  size: 32, 32
+CatLair 
+  xy: 351, 209
+  size: 32, 16
+CatLair 
+  xy: 351, 209
+  size: 32, 16
+CatLair 
+  xy: 96, 81
+  size: 32, 32
+CatLair 
+  xy: 96, 81
+  size: 32, 32 
+MageTower
+  xy:  289, 32
+  size: 32, 32
+MageTower
+  xy:  32, 304
+  size: 32, 32
+MageTower
+  xy:  0, 240
+  size: 32, 32
+MageTower
+  xy:  64, 304
+  size: 32, 32
+Portal
+  xy:  96, 48
+  size: 32, 32
+DjinnPalace 
+  xy: 128, 272
+  size: 32, 32
+DjinnPalace 
+  xy: 320, 432
+  size: 32, 32
+MerfolkPool  
+  xy: 320, 208
+  size: 32, 16
+MerfolkPool  
+  xy: 64, 112
+  size: 32, 32
+MerfolkPool  
+  xy: 352, 32
+  size: 32, 32
+BlueOrb
+  xy: 129, 48
+  size: 32, 32  
+Graveyard           
+  xy: 368, 96
+  size: 48, 32
+Graveyard           
+  xy: 256, 464
+  size: 32, 32
+Graveyard           
+  xy: 192, 400
+  size: 32, 32
+Graveyard           
+  xy: 32, 272
+  size: 32, 32
+EvilGrove 
+  xy: 256, 768
+  size: 32, 32
+Slobad 
+  xy: 416, 336
+  size: 32, 32
+Jace 
+  xy: 416, 432
+  size: 32, 32
+VampireCastle 
+  xy: 416, 464
+  size: 32, 32  
+SkullCave 
+  xy: 64, 272
+  size: 32, 32
+SkullCave 
+  xy: 240, 0
+  size: 48, 48
+SkullCave 
+  xy: 256, 336
+  size: 32, 32
+SkullCave 
+  xy: 352, 336
+  size: 32, 32   
+BarbarianCamp 
+  xy: 224, 304
+  size: 32, 32
+Maze 
+  xy: 0, 336
+  size: 32, 32
+YuleTown 
+  xy: 352, 592
+  size: 32, 32
+SnowAbbey 
+  xy: 192, 448
+  size: 32, 32  
+Grove 
+  xy: 416, 496
+  size: 32, 32 
+Grove 
+  xy: 256, 768
+  size: 32, 32 
+Grove 
+  xy: 224, 208
+  size: 32, 16
+Grove 
+  xy: 256, 208
+  size: 32, 16
+WurmPond 
+  xy: 224, 400
+  size: 32, 32  
+StonePyramid
+  xy: 384, 464
+  size: 32, 32
+Mine
+  xy: 96, 144
+  size: 32, 32
+LavaForge
+  xy: 384, 336
+  size: 32, 32
+black_castle 
+  xy: 0, 800
+  size: 64, 64       
+green_castle 
+  xy: 64, 800
+  size: 64, 64        
+blue_castle 
+  xy: 128, 800
+  size: 64, 64          
+colorless_castle 
+  xy: 192, 800
+  size: 64, 64    
+white_castle 
+  xy: 0, 864
+  size: 64, 64       
+red_castle 
+  xy: 64, 864
+  size: 64, 64        
+final_castle 
+  xy: 128, 864
+  size: 64, 64   
+farm
+  xy:351, 0
+  size: 33,33
+hall_of_flame
+  xy: 194, 864
+  size: 32, 32     
+hall_of_fear
+  xy: 320, 464
+  size: 32, 32     
+ruinedcity
+  xy: 321, 96
+  size: 45, 32
+ulvenwaldtown
+  xy: 320, 32
+  size: 32, 32
+crescentus
+  xy: 0, 80
+  size: 32, 32
+lodge_1
+  xy: 272, 528
+  size: 16, 16
+dark_forest
+  xy: 416, 496
+  size: 32, 32
+abbey
+    xy: 32, 80
+    size: 32, 32
+parish
+  xy: 352, 368
+  size: 32, 32

@@ -28,6 +28,7 @@ public class VManaPool extends VDisplayArea {
             return FSkinColor.get(Colors.ADV_CLR_TEXT);
         return FSkinColor.get(Colors.CLR_TEXT);
     }
+
     private static final FSkinFont FONT = FSkinFont.get(16);
 
     private final PlayerView player;
@@ -37,7 +38,7 @@ public class VManaPool extends VDisplayArea {
     public VManaPool(PlayerView player0) {
         player = player0;
 
-        addManaLabel(FSkinProp.IMG_MANA_COLORLESS, (byte)ManaAtom.COLORLESS);
+        addManaLabel(FSkinProp.IMG_MANA_COLORLESS, (byte) ManaAtom.COLORLESS);
         addManaLabel(FSkinProp.IMG_MANA_W, MagicColor.WHITE);
         addManaLabel(FSkinProp.IMG_MANA_U, MagicColor.BLUE);
         addManaLabel(FSkinProp.IMG_MANA_B, MagicColor.BLACK);
@@ -69,7 +70,7 @@ public class VManaPool extends VDisplayArea {
         float x = 0;
         float y = 0;
 
-        if (Forge.isLandscapeMode()) {
+        if (Forge.isLandscapeMode() && (!Forge.altZoneTabs || !"Horizontal".equalsIgnoreCase(Forge.altZoneTabMode))) {
             float labelWidth = visibleWidth / 2;
             float labelHeight = visibleHeight / 3;
 
@@ -79,13 +80,11 @@ public class VManaPool extends VDisplayArea {
                 if (++count % 2 == 0) {
                     x = 0;
                     y += labelHeight;
-                }
-                else {
+                } else {
                     x += labelWidth;
                 }
             }
-        }
-        else {
+        } else {
             float labelWidth = visibleWidth / manaLabels.size();
             float labelHeight = visibleHeight;
 
@@ -113,14 +112,16 @@ public class VManaPool extends VDisplayArea {
             activate();
             return true;
         }
+
         public void activate() {
-            if(!(MatchController.instance.getGameController() instanceof PlayerControllerHuman))
+            if (!(MatchController.instance.getGameController() instanceof PlayerControllerHuman))
                 return;
             PlayerControllerHuman controller = (PlayerControllerHuman) MatchController.instance.getGameController();
             final Input ipm = controller.getInputQueue().getInput();
-            if(ipm instanceof InputPayMana && ipm.getOwner().equals(player))
+            if (ipm instanceof InputPayMana && ipm.getOwner().equals(player))
                 controller.useMana(colorCode);
         }
+
         @Override
         public boolean flick(float x, float y) {
             if (player.isLobbyPlayer(GamePlayerUtil.getGuiPlayer())) {
@@ -146,17 +147,18 @@ public class VManaPool extends VDisplayArea {
             if (h > maxImageHeight) {
                 h /= 2;
             }
-            float w = image.getWidth() * h / image.getHeight();
+            float modifier = Forge.isHorizontalTabLayout() ? 0.7f : 1f;
+            float w = image.getWidth() * h * modifier / image.getHeight();
             while (w > getWidth()) {
                 h /= 2;
-                w = image.getWidth() * h / image.getHeight();
+                w = image.getWidth() * h * modifier / image.getHeight();
             }
             float x = (getWidth() - w) / 2;
             float y = gapY + (maxImageHeight - h) / 2;
 
             if (isHovered())
                 g.fillRect(FSkinColor.getStandardColor(50, 200, 150).alphaColor(0.3f), 0, 0, getWidth(), getHeight());
-            g.drawImage(image, x, y, w, h);
+            g.drawImage(image, x, y, w, Forge.isHorizontalTabLayout() ? w : h);
 
             x = 0;
             y += h + gapY;

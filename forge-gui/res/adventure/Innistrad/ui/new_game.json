@@ -1,0 +1,229 @@
+{
+  "width": 480,
+  "height": 270,
+  "yDown": true,
+  "elements": [
+    {
+      "type": "Image",
+      "image": "ui/inn_title_bg.png",
+      "width": 480,
+      "height": 270
+    },
+    {
+      "type": "Scroll",
+      "name" : "scroll",
+      "style": "paper",
+      "x": 56,
+      "y": 10,
+      "width": 280,
+      "height": 250
+    },
+    {
+      "type": "Label",
+      "name" : "titleL",
+      "text": "[%150][BLACK]tr(lblCreateACharacter)",
+      "width": 128,
+      "height": 16,
+      "scale": 2,
+      "x": 76,
+      "y": 16
+    } ,
+    {
+      "type": "Label",
+      "name" : "nameL",
+      "text": "[BLACK]tr(lblName):",
+      "width": 128,
+      "height": 16,
+      "x": 75,
+      "y": 96
+    },
+    {
+      "type": "Label",
+      "name" : "raceL",
+      "text": "[BLACK]tr(lblRace):",
+      "width": 128,
+      "height": 16,
+      "x": 75,
+      "yOffset": 8
+    },
+    {
+      "type": "Label",
+      "name" : "genderL",
+      "text": "[BLACK]tr(lblGender):",
+      "width": 128,
+      "height": 16,
+      "x": 75,
+      "yOffset": 8
+    },
+    {
+      "type": "Label",
+      "name" : "difficultyL",
+      "text": "[BLACK]tr(lblDifficulty):",
+      "width": 128,
+      "height": 16,
+      "x": 75,
+      "yOffset": 8
+    },
+	{
+      "type": "ImageButton",
+      "name": "difficultyHelp",
+      "style": "roundhint",
+      "selectable": true,
+      "width": 12,
+      "height": 15,
+      "x": 145,
+      "yOffset": -17
+    },
+    {
+      "type": "Label",
+      "name" : "colorIdL",
+      "text": "[BLACK]tr(lblColors):",
+      "width": 128,
+      "height": 16,
+      "x": 75,
+      "yOffset": 8
+    },
+    {
+      "type": "Label",
+      "name" : "modeL",
+      "text": "[BLACK]tr(lblMode)",
+      "width": 128,
+      "height": 16,
+      "x": 75,
+      "yOffset": 8
+    },
+	{
+      "type": "ImageButton",
+      "name": "modeHelp",
+      "style": "roundhint",
+      "selectable": true,
+      "width": 12,
+      "height": 15,
+      "x": 145,
+      "yOffset": -17
+    },
+	{
+      "type": "Label",
+      "name" : "starterEditionL",
+      "text": "[BLACK]tr(lblStarterEdition):",
+      "width": 128,
+      "height": 16,
+      "x": 75,
+      "yOffset": 8
+    },
+    {
+      "type": "ImageButton",
+      "name": "leftAvatar",
+      "style": "leftarrow",
+      "selectable": true,
+      "width": 16,
+      "height": 16,
+      "x": 174,
+      "y": 64
+    },
+    {
+      "type": "Image",
+      "name": "avatarPreview",
+      "width": 48,
+      "height": 48,
+      "x": 206,
+      "y": 48
+    },
+    {
+      "type": "ImageButton",
+      "name": "rightAvatar",
+      "style": "rightarrow",
+      "selectable": true,
+      "width": 16,
+      "height": 16,
+      "x": 270,
+      "y": 64
+    },
+    {
+      "type": "TextField",
+      "name": "nameField",
+      "selectable": true,
+      "align": 1,
+      "width": 112,
+      "height": 16,
+      "x": 174,
+      "y": 96
+    },
+    {
+      "type": "Selector",
+      "name": "race",
+      "selectable": true,
+      "width": 142,
+      "height": 14,
+      "x": 159,
+      "yOffset": 9
+    },
+    {
+      "type": "Selector",
+      "name": "gender",
+      "selectable": true,
+      "width": 142,
+      "height": 14,
+      "x": 159,
+      "yOffset": 9
+    },
+    {
+      "type": "Selector",
+      "name": "difficulty",
+      "selectable": true,
+      "width": 142,
+      "height": 14,
+      "x": 159,
+      "yOffset": 9
+    },
+    {
+      "type": "Selector",
+      "name": "colorId",
+      "selectable": true,
+      "width": 142,
+      "height": 14,
+      "x": 159,
+      "yOffset": 9
+    },
+    {
+      "type": "Selector",
+      "name": "mode",
+      "selectable": true,
+      "width": 142,
+      "height": 14,
+      "x": 159,
+      "yOffset": 9
+    },
+	{
+      "type": "Selector",
+      "name": "starterEdition",
+      "selectable": true,
+      "width": 142,
+      "height": 14,
+      "x": 159,
+      "yOffset": 9
+    },
+    {
+      "type": "TextButton",
+      "name": "back",
+      "text": "tr(lblBack)",
+      "selectable": true,
+      "binding": "Back",
+      "width": 100,
+      "height": 30,
+      "x": 376,
+      "y": 85
+    },
+    {
+      "type": "TextButton",
+      "name": "start",
+      "text": "tr(lblStart)",
+      "selectable": true,
+      "binding": "Enter",
+      "width": 100,
+      "height": 30,
+      "x": 376,
+      "y": 155
+    }
+  ]
+}

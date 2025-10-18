@@ -6,7 +6,7 @@ K:Flying
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Flying | Description$ Equipped creature has flying.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.EquippedBy,Creature.Self | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever CARDNAME or equipped creature dies, it perpetually gains "Whenever an equipped creature you control deals combat damage to a player or planeswalker, return this card from your graveyard to the battlefield tapped."
 SVar:TrigAnimate:DB$ Animate | Defined$ TriggeredCard | Triggers$ EquippedCombatDamage | Duration$ Perpetual
-SVar:EquippedCombatDamage:Mode$ DamageDone | ValidSource$ Creature.YouCtrl+equipped | ValidTarget$ Player,Planeswalker | CombatDamage$ True | TriggerZone$ Graveyard | Execute$ TrigReturn | TriggerDescription$ Whenever an equipped creature you control deals combat damage to a player or planeswalker, return this card from your graveyard to the battlefield tapped.
+SVar:EquippedCombatDamage:Mode$ DamageDone | ValidSource$ Creature.YouCtrl+equipped | ValidTarget$ Player,Planeswalker | CombatDamage$ True | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ Whenever an equipped creature you control deals combat damage to a player or planeswalker, return this card from your graveyard to the battlefield tapped.
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
 K:Reconfigure:R
 DeckHints:Type$Equipment

@@ -26,12 +26,17 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbilityTapPowerValue;
 import forge.util.IterableUtil;
 import forge.util.MyRandom;
+import forge.util.StreamUtil;
 import forge.util.collect.FCollectionView;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -61,6 +66,10 @@ public class CardLists {
 
     public static CardCollection filterLEPower(final Iterable<Card> in, final int lessthanPower) {
         return CardLists.filter(in, c -> c.getNetPower() <= lessthanPower);
+    }
+
+    public static CardCollection filterAnyCounters(final Iterable<Card> in, final int atLeastCounters) {
+        return CardLists.filter(in, c -> c.getNumAllCounters() >= atLeastCounters);
     }
 
     public static final Comparator<Card> ToughnessComparator = Comparator.comparingInt(Card::getNetToughness);
@@ -419,15 +428,14 @@ public class CardLists {
      * Given a list of cards, return their combined power
      * 
      * @param cardList the list of creature cards for which to sum the power
-     * @param crew for cards that crew with toughness rather than power
      */
-    public static int getTotalPower(Iterable<Card> cardList, SpellAbility sa) {
+    public static int getTotalPower(Iterable<Card> cardList, CardTraitBase ctb) {
         int total = 0;
         for (final Card crd : cardList) {
-            if (StaticAbilityTapPowerValue.withToughness(crd, sa)) {
+            if (StaticAbilityTapPowerValue.withToughness(crd, ctb)) {
                 total += Math.max(0, crd.getNetToughness());
             } else {
-                int m = StaticAbilityTapPowerValue.getMod(crd, sa);
+                int m = StaticAbilityTapPowerValue.getMod(crd, ctb);
                 total += Math.max(0, crd.getNetPower() + m);
             }
         }
@@ -476,5 +484,27 @@ public class CardLists {
         // (a) excluding the last element
         // (b) including the last element
         return isSubsetSum(numList, sum) || isSubsetSum(numList, sum - last);
+    }
+
+    public static int getDifferentNamesCount(Iterable<Card> cardList) {
+        // first part the ones with SpyKit, and already collect them via
+        Map<Boolean, List<Card>> parted = StreamUtil.stream(cardList).collect(Collectors
+                .partitioningBy(Card::hasNonLegendaryCreatureNames, Collector.of(ArrayList::new, (list, c) -> {
+                    if (!c.hasNoName() && list.stream().noneMatch(c2 -> c.sharesNameWith(c2))) {
+                        list.add(c);
+                    }
+                }, (l1, l2) -> {
+                    l1.addAll(l2);
+                    return l1;
+                })));
+        List<Card> preList = parted.get(Boolean.FALSE);
+
+        // then try to apply the SpyKit ones
+        for (Card c : parted.get(Boolean.TRUE)) {
+            if (preList.stream().noneMatch(c2 -> c.sharesNameWith(c2))) {
+                preList.add(c);
+            }
+        }
+        return preList.size();
     }
 }

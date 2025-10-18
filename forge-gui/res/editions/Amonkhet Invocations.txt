@@ -1,0 +1,67 @@
+[metadata]
+Code=MP2
+Code2=MPS_AKH
+Date=2017-04-28
+Name=Amonkhet Invocations
+Type=Collector_Edition
+ScryfallCode=MP2
+
+#Bonus cards for AKH Amonkhet
+[cards]
+1 S Austere Command @Richard Wright
+2 S Aven Mindcensor @Jose Cabrera
+3 S Containment Priest @Igor Kieryluk
+4 S Loyal Retainers @Bastien L. Deharme
+5 S Oketra the True @Bastien L. Deharme
+6 S Worship @Cliff Childs
+7 S Wrath of God @Titus Lunter
+8 S Consecrated Sphinx @Lius Lasahido
+9 S Counterbalance @Joseph Meehan
+10 S Counterspell @Chase Stone
+11 S Cryptic Command @Richard Wright
+12 S Daze @Richard Wright
+13 S Divert @Igor Kieryluk
+14 S Force of Will @Jaime Jones
+15 S Kefnet the Mindful @Jose Cabrera
+16 S Pact of Negation @Titus Lunter
+17 S Spell Pierce @Joseph Meehan
+18 S Stifle @Cliff Childs
+19 S Attrition @Jose Cabrera
+20 S Bontu the Glorified @Daniel Ljunggren
+21 S Dark Ritual @Richard Wright
+22 S Diabolic Intent @Joseph Meehan
+23 S Entomb @Eytan Zana
+24 S Mind Twist @Igor Kieryluk
+25 S Aggravated Assault @Greg Opalinski
+26 S Chain Lightning @Igor Kieryluk
+27 S Hazoret the Fervent @Joseph Meehan
+28 S Rhonas the Indomitable @Jack Wang
+29 S Maelstrom Pulse @Igor Kieryluk
+30 S Vindicate @Igor Kieryluk
+
+#Bonus cards for HOU Hour of Devastation
+[special slot]
+31 S Armageddon @Florian de Gesincourt
+32 S Capsize @Cliff Childs
+33 S Forbid @Richard Wright
+34 S Omniscience @Josh Hass
+35 S Opposition @Svetlin Velinov
+36 S Sunder @Titus Lunter
+37 S Threads of Disloyalty @Yongjae Choi
+38 S Avatar of Woe @Igor Kieryluk
+39 S Damnation @Zack Stella
+40 S Desolation Angel @Bastien L. Deharme
+41 S Diabolic Edict @Daarken
+42 S Doomsday @Jaime Jones
+43 S No Mercy @Jonas De Ro
+44 S Slaughter Pact @Josh Hass
+45 S Thoughtseize @James Ryman
+46 S Blood Moon @Christine Choi
+47 S Boil @Philip Straub
+48 S Shatterstorm @Johann Bodin
+49 S Through the Breach @Darek Zabrocki
+50 S Choke @Florian de Gesincourt
+51 S The Locust God @Grzegorz Rutkowski
+52 S Lord of Extinction @Jason A. Engle
+53 S The Scarab God @Grzegorz Rutkowski
+54 S The Scorpion God @Grzegorz Rutkowski

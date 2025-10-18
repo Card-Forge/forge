@@ -1,0 +1,52 @@
+
+
+
+#-----------------------------------------------SHEN CUSTOM JUMPSTART PACKS START HERE------------------------------------------------#
+
+# ISD Shen Custom Jumpstart for Innistrad plane
+ISD Dearly Departed 1: 1 wholeSheet("ISD Dearly Departed 1"), 1 RareMythic:fromSheet("ISD White Inserts")
+ISD Dearly Departed 2: 1 wholeSheet("ISD Dearly Departed 2"), 1 RareMythic:fromSheet("ISD White Inserts")
+ISD Fraying Sanity 1: 1 wholeSheet("ISD Fraying Sanity 1"), 1 RareMythic:fromSheet("ISD Blue Inserts")
+ISD Fraying Sanity 2: 1 wholeSheet("ISD Fraying Sanity 2"), 1 RareMythic:fromSheet("ISD Blue Inserts")
+ISD Undead Horde 1: 1 wholeSheet("ISD Undead Horde 1"), 1 RareMythic:fromSheet("ISD Black Inserts")
+ISD Undead Horde 2: 1 wholeSheet("ISD Undead Horde 2"), 1 RareMythic:fromSheet("ISD Black Inserts")
+ISD Bloody Marauders 1: 1 wholeSheet("ISD Bloody Marauders 1"), 1 RareMythic:fromSheet("ISD Red Inserts")
+ISD Bloody Marauders 2: 1 wholeSheet("ISD Bloody Marauders 2"), 1 RareMythic:fromSheet("ISD Red Inserts")
+ISD Transformations 1: 1 wholeSheet("ISD Transformations 1"), 1 RareMythic:fromSheet("ISD Green Inserts")
+ISD Transformations 2: 1 wholeSheet("ISD Transformations 2"), 1 RareMythic:fromSheet("ISD Green Inserts")
+
+# DKA Shen Custom Jumpstart for Innistrad plane
+DKA Fateful Hour 1: 1 wholeSheet("DKA Fateful Hour 1"), 1 RareMythic:fromSheet("DKA White Inserts")
+DKA Fateful Hour 2: 1 wholeSheet("DKA Fateful Hour 2"), 1 RareMythic:fromSheet("DKA White Inserts")
+DKA Undying Gifts 1: 1 wholeSheet("DKA Undying Gifts 1"), 1 RareMythic:fromSheet("DKA Blue Inserts")
+DKA Undying Gifts 2: 1 wholeSheet("DKA Undying Gifts 2"), 1 RareMythic:fromSheet("DKA Blue Inserts")
+DKA Death Unrelenting 1: 1 wholeSheet("DKA Death Unrelenting 1"), 1 RareMythic:fromSheet("DKA Black Inserts")
+DKA Death Unrelenting 2: 1 wholeSheet("DKA Death Unrelenting 2"), 1 RareMythic:fromSheet("DKA Black Inserts")
+DKA Devilish Mockery 1: 1 wholeSheet("DKA Devilish Mockery 1"), 1 RareMythic:fromSheet("DKA Red Inserts")
+DKA Devilish Mockery 2: 1 wholeSheet("DKA Devilish Mockery 2"), 1 RareMythic:fromSheet("DKA Red Inserts")
+DKA Beastly Killers 1: 1 wholeSheet("DKA Beastly Killers 1"), 1 RareMythic:fromSheet("DKA Green Inserts")
+DKA Beastly Killers 2: 1 wholeSheet("DKA Beastly Killers 2"), 1 RareMythic:fromSheet("DKA Green Inserts")
+
+# SOI Shen Custom Jumpstart for Innistrad plane
+SOI Spiritual Clues 1: 1 wholeSheet("SOI Spiritual Clues 1"), 1 RareMythic:fromSheet("SOI White Inserts")
+SOI Spiritual Clues 2: 1 wholeSheet("SOI Spiritual Clues 2"), 1 RareMythic:fromSheet("SOI White Inserts")
+SOI Skulking Horrors 1: 1 wholeSheet("SOI Skulking Horrors 1"), 1 RareMythic:fromSheet("SOI Blue Inserts")
+SOI Skulking Horrors 2: 1 wholeSheet("SOI Skulking Horrors 2"), 1 RareMythic:fromSheet("SOI Blue Inserts")
+SOI Splitting Headache 1: 1 wholeSheet("SOI Splitting Headache 1"), 1 RareMythic:fromSheet("SOI Black Inserts")
+SOI Splitting Headache 2: 1 wholeSheet("SOI Splitting Headache 2"), 1 RareMythic:fromSheet("SOI Black Inserts")
+SOI Bloody Insanity 1: 1 wholeSheet("SOI Bloody Insanity 1"), 1 RareMythic:fromSheet("SOI Red Inserts")
+SOI Bloody Insanity 2: 1 wholeSheet("SOI Bloody Insanity 2"), 1 RareMythic:fromSheet("SOI Red Inserts")
+SOI Howlpack Forces 1: 1 wholeSheet("SOI Howlpack Forces 1"), 1 RareMythic:fromSheet("SOI Green Inserts")
+SOI Howlpack Forces 2: 1 wholeSheet("SOI Howlpack Forces 2"), 1 RareMythic:fromSheet("SOI Green Inserts")
+
+# MID Shen Custom Jumpstart for Innistrad plane
+MID Coven of Hope 1: 1 wholeSheet("MID Coven of Hope 1"), 1 RareMythic:fromSheet("MID White Inserts")
+MID Coven of Hope 2: 1 wholeSheet("MID Coven of Hope 2"), 1 RareMythic:fromSheet("MID White Inserts")
+MID Disturbing Thoughts 1: 1 wholeSheet("MID Disturbing Thoughts 1"), 1 RareMythic:fromSheet("MID Blue Inserts")
+MID Disturbing Thoughts 2: 1 wholeSheet("MID Disturbing Thoughts 2"), 1 RareMythic:fromSheet("MID Blue Inserts")
+MID Morbid Decay 1: 1 wholeSheet("MID Morbid Decay 1"), 1 RareMythic:fromSheet("MID Black Inserts")
+MID Morbid Decay 2: 1 wholeSheet("MID Morbid Decay 2"), 1 RareMythic:fromSheet("MID Black Inserts")
+MID Playing with Fire 1: 1 wholeSheet("MID Playing with Fire 1"), 1 RareMythic:fromSheet("MID Red Inserts")
+MID Playing with Fire 2: 1 wholeSheet("MID Playing with Fire 2"), 1 RareMythic:fromSheet("MID Red Inserts")
+MID Token Aggression 1: 1 wholeSheet("MID Token Aggression 1"), 1 RareMythic:fromSheet("MID Green Inserts")
+MID Token Aggression 2: 1 wholeSheet("MID Token Aggression 2"), 1 RareMythic:fromSheet("MID Green Inserts")

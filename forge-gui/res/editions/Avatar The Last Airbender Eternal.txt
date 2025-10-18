@@ -1,0 +1,109 @@
+[metadata]
+Code=TLE
+Date=2025-11-21
+Name=Avatar: The Last Airbender Eternal
+Type=Expansion
+ScryfallCode=TLE
+
+[cards]
+13 M Force of Negation @Viacom
+41 M The Great Henge @Viacom
+74 M Aang, Airbending Master @Tomoyo Asatani
+93 M Katara, Waterbending Master @Yueko
+104 M Fire Lord Ozai @Ryuichi Sakuma
+134 R The Cabbage Merchant @Patrick Gañas
+210 R Aang, Air Nomad @Jinho Bae
+211 C Aang's Defense @Jo Cordisco
+212 C Aardvark Sloth @Ionomycin
+213 R Allied Teamwork @Gemi
+214 U Appa, Aang's Companion @Kieran Yanner
+215 U Katara, Heroic Healer @Pauline Voss
+216 C Kyoshi Warrior Guard @Yunomachi
+217 U Momo, Rambunctious Rascal @Tomoyo Asatani
+218 C Sledding Otter-Penguin @Maojin Lee
+219 U Sokka, Wolf Cove's Protector @Kinota Eishi
+220 C Tundra Wall @Slawek Fedorczuk
+221 C Wolf Cove Villager @Gemi
+222 C Deny Entry @Robin Olausson
+223 C Flying Dolphin-Fish @Daniel Romanovsky
+224 U Lost in the Spirit World @Shahab Alizadeh
+225 R The Terror of Serpent's Pass @Douzen
+226 C Turtle-Seals @Gemi
+227 R Water Whip @Rose Benjamin
+228 C Elephant-Rat @Eduardo Francisco
+229 C Fire Nation Ambushers @Logan Feliciano
+230 R Fire Nation Sentinels @Tition
+231 C Gilacorn @Robin Olausson
+232 R Lion Vulture @Nathaniel Himawan
+233 C Purple Pentapus @Devin Elle Kurtz
+234 C Capital Guard @Nathaniel Himawan
+235 C Dragon Moose @Daniel Romanovsky
+236 C Explosive Shot @Slawek Fedorczuk
+237 R Fire Nation Archers @Shiyu
+238 C Fire Nation Soldier @Boell Oyino
+239 U Fire Nation's Conquest @Eduardo Francisco
+240 U Iroh, Firebending Instructor @Eilene Cherie
+241 C Komodo Rhino @Alexander Forssberg
+242 U Loyal Fire Sage @Norikatsu Miyoshi
+243 U Roku's Mastery @Jo Cordisco
+244 C Warship Scout @Brandon L. Hunt
+245 U Zhao, the Seething Flame @Rafater
+246 R Zuko, Avatar Hunter @Rafater
+247 C Zuko's Offense @Jo Cordisco
+248 R Bumi, Eclectic Earthbender @Olena Richards
+249 U Earthbending Student @Le Vuong
+250 U Eel-Hounds @Miho Midorikawa
+251 C Frog-Squirrels @Daniel Romanovsky
+252 C Hippo-Cows @Brandon L. Hunt
+253 U Match the Odds @Eilene Cherie
+254 R Seismic Tutelage @Florent Lebrun
+255 U Hog-Monkey Rampage @Daniel Romanovsky
+256 C Mechanical Glider @Salvatorre Zee Yazzie
+257 C Feed the Swarm @Kotakan
+258 C Run Amok @Hristo D. Chukov
+259 C Explore @Maojin Lee
+260 C Thriving Bluff @Henry Wong
+261 C Thriving Grove @Robin Har
+262 C Thriving Heath @Dom Lay
+263 C Thriving Isle @Slawek Fedorczuk
+264 C Thriving Moor @Dom Lay
+265 R Aang, Air Nomad @Jinho Bae
+266 C Aang's Defense @Jo Cordisco
+267 C Aardvark Sloth @Ionomycin
+268 U Appa, Aang's Companion @Kieran Yanner
+269 U Katara, Heroic Healer @Pauline Voss
+270 U Momo, Rambunctious Rascal @Tomoyo Asatani
+271 C Path to Redemption @Hokyoung Kim
+272 C Razor Rings @Norikatsu Miyoshi
+273 C Sledding Otter-Penguin @Maojin Lee
+274 U Sokka, Wolf Cove's Protector @Kinota Eishi
+275 C Tundra Wall @Slawek Fedorczuk
+276 C Wolf Cove Villager @Gemi
+277 C Capital Guard @Nathaniel Himawan
+278 C Dragon Moose @Daniel Romanovsky
+279 C Explosive Shot @Slawek Fedorczuk
+280 C Fire Nation Soldier @Boell Oyino
+281 U Fire Nation's Conquest @Eduardo Francisco
+282 U Iroh, Firebending Instructor @Eilene Cherie
+283 C Komodo Rhino @Alexander Forssberg
+284 C Run Amok @Hristo D. Chukov
+285 C Warship Scout @Brandon L. Hunt
+286 U Zhao, the Seething Flame @Rafater
+287 R Zuko, Avatar Hunter @Rafater
+288 C Zuko's Offense @Jo Cordisco
+289 L Mountain @Salvatorre Zee Yazzie
+290 L Mountain @Salvatorre Zee Yazzie
+291 L Mountain @Salvatorre Zee Yazzie
+292 L Mountain @Salvatorre Zee Yazzie
+293 L Mountain @Salvatorre Zee Yazzie
+294 L Mountain @Salvatorre Zee Yazzie
+295 L Mountain @Salvatorre Zee Yazzie
+296 L Mountain @Salvatorre Zee Yazzie
+297 L Plains @Slawek Fedorczuk
+298 L Plains @Slawek Fedorczuk
+299 L Plains @Slawek Fedorczuk
+300 L Plains @Slawek Fedorczuk
+301 L Plains @Slawek Fedorczuk
+302 L Plains @Slawek Fedorczuk
+303 L Plains @Slawek Fedorczuk
+304 L Plains @Slawek Fedorczuk

@@ -16,7 +16,7 @@ import java.util.Map;
 public class CountersProliferateAi extends SpellAbilityAi {
 
     @Override
-    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final List<Card> cperms = Lists.newArrayList();
         boolean allyExpOrEnergy = false;
 
@@ -68,25 +68,34 @@ public class CountersProliferateAi extends SpellAbilityAi {
             }));
         }
 
-        return !cperms.isEmpty() || !hperms.isEmpty() || opponentPoison || allyExpOrEnergy;
+        if (!cperms.isEmpty() || !hperms.isEmpty() || opponentPoison || allyExpOrEnergy) {
+            // AI will play it if there are any counters to proliferate
+            // or if there are no counters, but AI has experience or energy counters
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         boolean chance = true;
 
         // TODO Make sure Human has poison counters or there are some counters
         // we want to proliferate
-        return chance;
+        return new AiAbilityDecision(
+            chance ? 100 : 0,
+            chance ? AiPlayDecision.WillPlay : AiPlayDecision.CantPlayAi
+        );
     }
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
         if ("Always".equals(sa.getParam("AILogic"))) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         return checkApiLogic(ai, sa);
@@ -101,7 +110,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
     public <T extends GameEntity> T chooseSingleEntity(Player ai, SpellAbility sa, Collection<T> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         // Proliferate is always optional for all, no need to select best
 
-        final CounterType poison = CounterType.get(CounterEnumType.POISON);
+        final CounterType poison = CounterEnumType.POISON;
 
         boolean aggroAI = (((PlayerControllerAi) ai.getController()).getAi()).getBooleanProperty(AiProps.PLAY_AGGRO);
         // because countertype can't be chosen anymore, only look for poison counters

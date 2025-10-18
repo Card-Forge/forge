@@ -69,22 +69,7 @@ public class PlayerDetailsPanel extends JPanel {
     }
 
     public static FSkinProp iconFromZone(ZoneType zoneType) {
-        switch (zoneType) {
-            case Hand: return FSkinProp.IMG_ZONE_HAND;
-            case Library: return FSkinProp.IMG_ZONE_LIBRARY;
-            case Graveyard: return FSkinProp.IMG_ZONE_GRAVEYARD;
-            case Exile: return FSkinProp.IMG_ZONE_EXILE;
-            case Sideboard: return FSkinProp.IMG_ZONE_SIDEBOARD;
-            case Flashback: return FSkinProp.IMG_ZONE_FLASHBACK;
-            case Command: return FSkinProp.IMG_ZONE_COMMAND; //IMG_PLANESWALKER
-            case PlanarDeck: return FSkinProp.IMG_ZONE_PLANAR;
-            case SchemeDeck: return FSkinProp.IMG_ZONE_SCHEME;
-            case AttractionDeck: return FSkinProp.IMG_ZONE_ATTRACTION;
-            case ContraptionDeck: return FSkinProp.IMG_ZONE_CONTRAPTION;
-            case Ante: return FSkinProp.IMG_ZONE_ANTE;
-            case Junkyard: return FSkinProp.IMG_ZONE_JUNKYARD;
-            default: return FSkinProp.IMG_HDZONE_LIBRARY;
-        }
+        return FSkinProp.iconFromZone(zoneType, false);
     }
 
     /** Adds various labels to pool area JPanel container. */

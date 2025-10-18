@@ -1,0 +1,9 @@
+[metadata]
+Code=PM21
+Date=2020-07-03
+Name=Core Set 2021 Promos
+Type=Promo
+ScryfallCode=PM21
+
+[cards]
+127★ Vito, Thorn of the Dusk Rose @Lie Setiawan

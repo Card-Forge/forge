@@ -35,7 +35,7 @@ import java.util.Map;
 
 public class EffectAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(final Player ai,final SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
         final Game game = ai.getGame();
         boolean randomReturn = MyRandom.getRandom().nextFloat() <= .6667;
         String logic = "";
@@ -45,12 +45,7 @@ public class EffectAi extends SpellAbilityAi {
             final PhaseHandler phase = game.getPhaseHandler();
             if (logic.equals("BeginningOfOppTurn")) {
                 if (!phase.getPlayerTurn().isOpponentOf(ai) || phase.getPhase().isAfter(PhaseType.DRAW)) {
-                    return false;
-                }
-                randomReturn = true;
-            } else if (logic.equals("EndOfOppTurn")) {
-                if (!phase.getPlayerTurn().isOpponentOf(ai) || phase.getPhase().isBefore(PhaseType.END_OF_TURN)) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 randomReturn = true;
             } else if (logic.equals("KeepOppCreatsLandsTapped")) {
@@ -64,20 +59,20 @@ public class EffectAi extends SpellAbilityAi {
                         worthHolding = true;
                     }
                     if (!worthHolding) {
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
                     randomReturn = true;
                 }
             } else if (logic.equals("RestrictBlocking")) {
                 if (!phase.isPlayerTurn(ai) || phase.getPhase().isBefore(PhaseType.COMBAT_BEGIN)
                         || phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
 
                 if (sa.getPayCosts().getTotalMana().countX() > 0 && sa.getHostCard().getSVar("X").equals("Count$xPaid")) {
                     // Set PayX here to half the remaining mana to allow for Main 2 and other combat shenanigans.
                     final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai, sa.isTrigger()) / 2;
-                    if (xPay == 0) { return false; }
+                    if (xPay == 0) { return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi); }
                     sa.setXManaCostPaid(xPay);
                 }
 
@@ -90,23 +85,27 @@ public class EffectAi extends SpellAbilityAi {
                 int potentialDmg = 0;
                 List<Card> currentAttackers = new ArrayList<>();
 
-                if (possibleBlockers.isEmpty()) { return false; }
+                if (possibleBlockers.isEmpty()) { return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi); }
 
                 for (final Card creat : possibleAttackers) {
                     if (CombatUtil.canAttack(creat, opp) && possibleBlockers.size() > 1) {
                         potentialDmg += creat.getCurrentPower();
-                        if (potentialDmg >= oppLife) { return true; }
+                        if (potentialDmg >= oppLife) { return new AiAbilityDecision(100, AiPlayDecision.WillPlay); }
                     }
                     if (combat != null && combat.isAttacking(creat)) {
                         currentAttackers.add(creat);
                     }
                 }
 
-                return currentAttackers.size() > possibleBlockers.size();
+                if (currentAttackers.size() > possibleBlockers.size()) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                } else {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
             } else if (logic.equals("Fog")) {
                 FogAi fogAi = new FogAi();
-                if (!fogAi.canPlayAI(ai, sa)) {
-                    return false;
+                if (!fogAi.canPlay(ai, sa).willingToPlay()) {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
 
                 final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -124,14 +123,14 @@ public class EffectAi extends SpellAbilityAi {
                         }
 
                         if (!canTgt) {
-                            return false;
+                            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                         }
                     } else {
                         List<Card> list = game.getCombat().getAttackers();
                         list = CardLists.getTargetableCards(list, sa);
                         Card target = ComputerUtilCard.getBestCreatureAI(list);
                         if (target == null) {
-                            return false;
+                            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                         }
                         sa.getTargets().add(target);
                     }
@@ -139,7 +138,7 @@ public class EffectAi extends SpellAbilityAi {
                 randomReturn = true;
             } else if (logic.equals("ChainVeil")) {
                 if (!phase.isPlayerTurn(ai) || !phase.getPhase().equals(PhaseType.MAIN2) || ai.getPlaneswalkersInPlay().isEmpty()) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 randomReturn = true;
             } else if (logic.equals("WillCastCreature") && ai.isAI()) {
@@ -150,17 +149,17 @@ public class EffectAi extends SpellAbilityAi {
                 randomReturn = true;
             } else if (logic.equals("Main1")) {
                 if (phase.getPhase().isBefore(PhaseType.MAIN1)) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 randomReturn = true;
             } else if (logic.equals("Main2")) {
                 if (phase.getPhase().isBefore(PhaseType.MAIN2)) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 randomReturn = true;
             } else if (logic.equals("Evasion")) {
             	if (!phase.isPlayerTurn(ai)) {
-            		return false;
+            		return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             	}
 
                 boolean shouldPlay = false;
@@ -185,10 +184,10 @@ public class EffectAi extends SpellAbilityAi {
                     break;
                 }
 
-                return shouldPlay;
+                return shouldPlay ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (logic.equals("RedirectSpellDamageFromPlayer")) {
                 if (game.getStack().isEmpty()) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 boolean threatened = false;
                 for (final SpellAbilityStackInstance stackInst : game.getStack()) {
@@ -204,7 +203,7 @@ public class EffectAi extends SpellAbilityAi {
                 randomReturn = threatened;
             } else if (logic.equals("Prevent")) { // prevent burn spell from opponent
                 if (game.getStack().isEmpty()) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 final SpellAbility saTop = game.getStack().peekAbility();
                 final Card host = saTop.getHostCard();
@@ -215,10 +214,10 @@ public class EffectAi extends SpellAbilityAi {
                     final ApiType type = saTop.getApi();
                     if (type == ApiType.DealDamage || type == ApiType.DamageAll) { // burn spell
                         sa.getTargets().add(saTop);
-                        return true;
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                     }
                 }
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (logic.equals("NoGain")) {
                 // basic logic to cancel GainLife on stack
                 if (!game.getStack().isEmpty()) {
@@ -228,14 +227,14 @@ public class EffectAi extends SpellAbilityAi {
                         while (topStack != null) {
                             if (topStack.getApi() == ApiType.GainLife) {
                                 if ("You".equals(topStack.getParam("Defined")) || topStack.isTargeting(activator) || (!topStack.usesTargeting() && !topStack.hasParam("Defined"))) {
-                                    return true;
+                                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                                 }
                             } else if (topStack.getApi() == ApiType.DealDamage && topStack.getHostCard().hasKeyword(Keyword.LIFELINK)) {
                                 Card host = topStack.getHostCard();
                                 for (GameEntity target : topStack.getTargets().getTargetEntities()) {
                                     if (ComputerUtilCombat.predictDamageTo(target,
                                             AbilityUtils.calculateAmount(host, topStack.getParam("NumDmg"), topStack), host, false) > 0) {
-                                        return true;
+                                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                                     }
                                 }
                             }
@@ -249,11 +248,11 @@ public class EffectAi extends SpellAbilityAi {
                     final Player attackingPlayer = combat.getAttackingPlayer();
                     if (attackingPlayer.isOpponentOf(ai) && attackingPlayer.canGainLife()) {
                         if (ComputerUtilCombat.checkAttackerLifelinkDamage(combat) > 0) {
-                            return true;
+                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                         }
                     }
                 }
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (logic.equals("NonCastCreature")) {
                 // TODO: add support for more cases with more convoluted API setups
                 if (!game.getStack().isEmpty()) {
@@ -265,13 +264,13 @@ public class EffectAi extends SpellAbilityAi {
                         boolean reanimator = "true".equalsIgnoreCase(topStack.getSVar("IsReanimatorCard"));
                         if (changeZone && (toBattlefield || reanimator)) {
                             if ("Creature".equals(topStack.getParam("ChangeType")) || topStack.getParamOrDefault("Defined", "").contains("Creature"))
-                                return true;
+                                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                         }
                     }
                 }
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (logic.equals("Fight")) {
-                return FightAi.canFightAi(ai, sa, 0, 0);
+                return FightAi.canFight(ai, sa, 0,0);
             } else if (logic.equals("Pump")) {
                 sa.resetTargets();
                 List<Card> options = CardUtil.getValidCardsToTarget(sa);
@@ -281,55 +280,55 @@ public class EffectAi extends SpellAbilityAi {
                 }
                 if (!options.isEmpty() && phase.isPlayerTurn(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                     sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(options));
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (logic.equals("Burn")) {
-                // for DamageDeal sub-abilities (eg. Wild Slash, Skullcrack)
                 SpellAbility burn = sa.getSubAbility();
-                return SpellApiToAi.Converter.get(burn).canPlayAIWithSubs(ai, burn);
+                return SpellApiToAi.Converter.get(burn).canPlayWithSubs(ai, burn).willingToPlay() ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (logic.equals("YawgmothsWill")) {
-                return SpecialCardAi.YawgmothsWill.consider(ai, sa);
+                return SpecialCardAi.YawgmothsWill.consider(ai, sa) ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (logic.startsWith("NeedCreatures")) {
+                // TODO convert to AiCheckSVar
                 if (ai.getCreaturesInPlay().isEmpty()) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 if (logic.contains(":")) {
                     String[] k = logic.split(":");
                     int i = Integer.parseInt(k[1]);
-                    return ai.getCreaturesInPlay().size() >= i;
+                    return ai.getCreaturesInPlay().size() >= i ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             } else if (logic.equals("ReplaySpell")) {
                 CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Graveyard), sa.getTargetRestrictions().getValidTgts(), ai, sa.getHostCard(), sa);
                 if (!ComputerUtil.targetPlayableSpellCard(ai, list, sa, false, false)) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             } else if (logic.equals("PeaceTalks")) {
                 Player nextPlayer = game.getNextPlayerAfter(ai);
 
                 // If opponent doesn't have creatures, preventing attacks don't mean as much
                 if (nextPlayer.getCreaturesInPlay().isEmpty()) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
 
                 // Only cast Peace Talks after you attack just in case you have creatures
                 if (!phase.is(PhaseType.MAIN2)) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
 
                 // Create a pseudo combat and see if my life is in danger
-                return randomReturn;
+                return randomReturn ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (logic.equals("Bribe")) {
                 Card host = sa.getHostCard();
                 Combat combat = game.getCombat();
                 if (combat != null && combat.isAttacking(host, ai) && !combat.isBlocked(host)
                         && phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                        && !AiCardMemory.isRememberedCard(ai, host, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
-                    AiCardMemory.rememberCard(ai, host, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN); // ideally needs once per combat or something
-                    return true;
+                        && !host.getAbilityActivatedThisTurn().getActivators(sa).contains(ai)) {
+                    // ideally needs once per combat or something
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (logic.equals("CantRegenerate")) {
                 if (sa.usesTargeting()) {
                     CardCollection list = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
@@ -350,19 +349,19 @@ public class EffectAi extends SpellAbilityAi {
                     });
 
                     if (list.isEmpty()) {
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
                     // TODO check Stack for Effects that would destroy the selected card?
                     sa.getTargets().add(ComputerUtilCard.getBestAI(list));
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 } else if (sa.getParent() != null) {
                     // sub ability should be okay
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 } else if ("Self".equals(sa.getParam("RememberObjects"))) {
                     // the ones affecting itself are Nimbus cards, were opponent can activate this effect
                     Card host = sa.getHostCard();
                     if (!host.canBeDestroyed()) {
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
 
                     Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(sa.getHostCard());
@@ -370,18 +369,18 @@ public class EffectAi extends SpellAbilityAi {
                     List<ReplacementEffect> repDestroyList = game.getReplacementHandler().getReplacementList(ReplacementType.Destroy, runParams, ReplacementLayer.Other);
                     // no Destroy Replacement, or one non-Regeneration one like Totem-Armor
                     if (repDestroyList.isEmpty() || repDestroyList.stream().anyMatch(CardTraitPredicates.hasParam("Regeneration").negate())) {
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
 
                     if (cantRegenerateCheckCombat(host) || cantRegenerateCheckStack(host)) {
-                        return true;
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                     }
 
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }
         } else { //no AILogic
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if ("False".equals(sa.getParam("Stackable"))) {
@@ -390,7 +389,7 @@ public class EffectAi extends SpellAbilityAi {
                 name = sa.getHostCard().getName() + "'s Effect";
             }
             if (sa.getActivatingPlayer().isCardInCommand(name)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
@@ -406,20 +405,20 @@ public class EffectAi extends SpellAbilityAi {
                         break;
                     }
                 }
-                return canTgt;
+                return canTgt ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else {
                 sa.getTargets().add(ai);
             }
         }
 
-        return randomReturn;
+        return randomReturn ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         if (sa.hasParam("AILogic")) {
-            if (canPlayAI(aiPlayer, sa)) {
-                return true; // if false, fall through further to do the mandatory stuff
+            if (canPlay(aiPlayer, sa).willingToPlay()) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
         }
 
@@ -431,7 +430,7 @@ public class EffectAi extends SpellAbilityAi {
             if (!oppPerms.isEmpty()) {
                 sa.resetTargets();
                 sa.getTargets().add(ComputerUtilCard.getBestAI(oppPerms));
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
             if (mandatory) {
@@ -441,14 +440,14 @@ public class EffectAi extends SpellAbilityAi {
                 if (!aiPerms.isEmpty()) {
                     sa.resetTargets();
                     sa.getTargets().add(ComputerUtilCard.getWorstAI(aiPerms));
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
 
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        return super.doTriggerAINoCost(aiPlayer, sa, mandatory);
+        return super.doTriggerNoCost(aiPlayer, sa, mandatory);
     }
 
     protected boolean cantRegenerateCheckCombat(Card host) {

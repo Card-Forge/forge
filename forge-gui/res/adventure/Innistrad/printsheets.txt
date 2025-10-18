@@ -1,0 +1,763 @@
+
+#----------------------SHEN CUSTOM JUMPSTART PACKS START HERE---------------------------------#
+
+[ISD Dearly Departed 1]
+1 Dearly Departed|ISD
+1 Doomed Traveler|ISD
+1 Unruly Mob|ISD
+1 Avacynian Priest|ISD
+1 Mausoleum Guard|ISD
+1 Elder Cathar|ISD
+1 Slayer of the Wicked|ISD
+1 Sharpened Pitchfork|ISD
+1 Blazing Torch|ISD
+1 Bonds of Faith|ISD
+1 Moment of Heroism|ISD
+8 Plains|ISD
+
+[ISD Dearly Departed 2]
+1 Dearly Departed|ISD
+1 Doomed Traveler|ISD
+1 Unruly Mob|ISD
+1 Avacynian Priest|ISD
+1 Mausoleum Guard|ISD
+1 Selfless Cathar|ISD
+1 Fiend Hunter|ISD
+1 Mask of Avacyn|ISD
+1 Blazing Torch|ISD
+1 Bonds of Faith|ISD
+1 Moment of Heroism|ISD
+8 Plains|ISD
+
+[ISD Fraying Sanity 1]
+1 Undead Alchemist|ISD
+1 Deranged Assistant|ISD
+1 Armored Skaab|ISD
+1 Makeshift Mauler|ISD
+1 Cobbled Wings|ISD
+1 Cellar Door|ISD
+1 Selhoff Occultist|ISD
+1 Murder of Crows|ISD
+1 Ghoulcaller's Bell|ISD
+1 Stitched Drake|ISD
+1 Skaab Goliath|ISD
+8 Island|ISD
+
+[ISD Fraying Sanity 2]
+1 Undead Alchemist|ISD
+1 Deranged Assistant|ISD
+1 Delver of Secrets|ISD
+1 Makeshift Mauler|ISD
+1 Cobbled Wings|ISD
+1 Cellar Door|ISD
+1 Curse of the Bloody Tome|ISD
+1 Murder of Crows|ISD
+1 Trepanation Blade|ISD
+1 Stitched Drake|ISD
+1 Skaab Goliath|ISD
+8 Island|ISD
+
+[ISD Undead Horde 1]
+1 Unbreathing Horde|ISD
+1 Diregraf Ghoul|ISD
+1 Ghoulraiser|ISD
+1 Moan of the Unhallowed|ISD
+1 Graveyard Shovel|ISD
+1 Walking Corpse|ISD
+1 Ghoulcaller's Chant|ISD
+1 Cellar Door|ISD
+1 Tribute to Hunger|ISD
+1 Dead Weight|ISD
+1 Manor Skeleton|ISD
+8 Swamp|ISD
+
+[ISD Undead Horde 2]
+1 Unbreathing Horde|ISD
+1 Diregraf Ghoul|ISD
+1 Ghoulraiser|ISD
+1 Moan of the Unhallowed|ISD
+1 Demonmail Hauberk|ISD
+1 Rotting Fensnake|ISD
+1 Ghoulcaller's Chant|ISD
+1 Cellar Door|ISD
+1 Tribute to Hunger|ISD
+1 Gruesome Deformity|ISD
+1 Manor Skeleton|ISD
+8 Swamp|ISD
+
+[ISD Bloody Marauders 1]
+1 Falkenrath Marauders|ISD
+1 Bloodcrazed Neonate|ISD
+1 Rakish Heir|ISD
+1 Inquisitor's Flail|ISD
+1 Night Revelers|ISD
+1 Vampiric Fury|ISD
+1 Crossway Vampire|ISD
+1 Rage Thrower|ISD
+1 Rolling Temblor|ISD
+1 Furor of the Bitten|ISD
+1 Nightbird's Clutches|ISD
+8 Mountain|ISD
+
+[ISD Bloody Marauders 2]
+1 Falkenrath Marauders|ISD
+1 Bloodcrazed Neonate|ISD
+1 Rakish Heir|ISD
+1 Demonmail Hauberk|ISD
+1 Night Revelers|ISD
+1 Vampiric Fury|ISD
+1 Crossway Vampire|ISD
+1 Rage Thrower|ISD
+1 Rolling Temblor|ISD
+1 Curse of the Pierced Heart|ISD
+1 Harvest Pyre|ISD
+8 Mountain|ISD
+
+[ISD Transformations 1]
+1 Villagers of Estwald|ISD
+1 Ulvenwald Mystics|ISD
+1 Mayor of Avabruck|ISD
+1 Gatstaf Shepherd|ISD
+1 Ambush Viper|ISD
+1 Grizzled Outcasts|ISD
+1 Lumberknot|ISD
+1 Moonmist|ISD
+1 Full Moon's Rise|ISD
+1 Somberwald Spider|ISD
+1 Prey Upon|ISD
+8 Forest|ISD
+
+[ISD Transformations 2]
+1 Villagers of Estwald|ISD
+1 Ulvenwald Mystics|ISD
+1 Mayor of Avabruck|ISD
+1 Gatstaf Shepherd|ISD
+1 Darkthicket Wolf|ISD
+1 Grizzled Outcasts|ISD
+1 Boneyard Wurm|ISD
+1 Moonmist|ISD
+1 Full Moon's Rise|ISD
+1 Woodland Sleuth|ISD
+1 Prey Upon|ISD
+8 Forest|ISD
+
+[ISD Black Inserts]
+Skirsdag High Priest|ISD
+Endless Ranks of the Dead|ISD
+Heartless Summoning|ISD
+Bloodline Keeper|ISD
+Bloodgift Demon|ISD
+Curse of Death's Hold|ISD
+Army of the Damned|ISD
+Grimoire of the Dead|ISD
+
+[ISD Blue Inserts]
+Back from the Brink|ISD
+Laboratory Maniac|ISD
+Rooftop Storm|ISD
+Snapcaster Mage|ISD
+Sturmgeist|ISD
+Runechanter's Pike|ISD
+Skaab Ruinator|ISD
+Mirror-Mad Phantasm|ISD
+
+[ISD Green Inserts]
+Kessig Cagebreakers|ISD
+Moldgraf Monstrosity|ISD
+Gutter Grime|ISD
+Elder of Laurels|ISD
+Creeping Renaissance|ISD
+Splinterfright|ISD
+Essence of the Wild|ISD
+Tree of Redemption|ISD
+
+[ISD Red Inserts]
+Blasphemous Act|ISD
+Curse of Stalked Prey|ISD
+Instigator Gang|ISD
+Kruin Outlaw|ISD
+Charmbreaker Devils|ISD
+Devil's Play|ISD
+Past in Flames|ISD
+Balefire Dragon|ISD
+
+[ISD White Inserts]
+Angel of Flight Alabaster|ISD
+Champion of the Parish|ISD
+Divine Reckoning|ISD
+Mentor of the Meek|ISD
+Geist-Honored Monk|ISD
+Witchbane Orb|ISD
+Mikaeus, the Lunarch|ISD
+Angelic Overseer|ISD
+
+[DKA Fateful Hour 1]
+1 Thraben Doomsayer|DKA
+1 Midnight Guard|DKA
+1 Elgaud Inquisitor|DKA
+1 Gavony Ironwright|DKA
+1 Sanctuary Cat|DKA
+1 Elder Cathar|ISD
+1 Thraben Heretic|DKA
+1 Avacyn's Collar|DKA
+1 Blazing Torch|ISD
+1 Break of Day|DKA
+1 Gather the Townsfolk|DKA
+8 Plains|ISD
+
+[DKA Fateful Hour 2]
+1 Thraben Doomsayer|DKA
+1 Midnight Guard|DKA
+1 Elgaud Inquisitor|DKA
+1 Gavony Ironwright|DKA
+1 Sanctuary Cat|DKA
+1 Unruly Mob|ISD
+1 Thraben Heretic|DKA
+1 Avacyn's Collar|DKA
+1 Mask of Avacyn|ISD
+1 Break of Day|DKA
+1 Gather the Townsfolk|DKA
+8 Plains|ISD
+
+[DKA Undying Gifts 1]
+1 Havengul Runebinder|DKA
+1 Stormbound Geist|DKA
+1 Shriekgeist|DKA
+1 Nephalia Seakite|DKA
+1 Executioner's Hood|DKA
+1 Relentless Skaabs|DKA
+1 Selhoff Occultist|ISD
+1 Soul Seizer|DKA
+1 Ghoulcaller's Bell|ISD
+1 Screeching Skaab|DKA
+1 Chant of the Skifsang|DKA
+8 Island|ISD
+
+[DKA Undying Gifts 2]
+1 Havengul Runebinder|DKA
+1 Stormbound Geist|DKA
+1 Shriekgeist|DKA
+1 Nephalia Seakite|DKA
+1 Executioner's Hood|DKA
+1 Relentless Skaabs|DKA
+1 Delver of Secrets|ISD
+1 Soul Seizer|DKA
+1 Curse of the Bloody Tome|ISD
+1 Screeching Skaab|DKA
+1 Chant of the Skifsang|DKA
+8 Island|ISD
+
+[DKA Death Unrelenting 1]
+1 Gravecrawler|DKA
+1 Wakedancer|DKA
+1 Ghoulraiser|ISD
+1 Highborn Ghoul|DKA
+1 Farbog Boneflinger|DKA
+1 Walking Corpse|ISD
+1 Black Cat|DKA
+1 Chalice of Life|DKA
+1 Skirsdag Flayer|DKA
+1 Gravepurge|DKA
+1 Sightless Ghoul|DKA
+8 Swamp|ISD
+
+[DKA Death Unrelenting 2]
+1 Gravecrawler|DKA
+1 Wakedancer|DKA
+1 Undying Evil|DKA
+1 Highborn Ghoul|DKA
+1 Farbog Boneflinger|DKA
+1 Tragic Slip|DKA
+1 Black Cat|DKA
+1 Chalice of Life|DKA
+1 Skirsdag Flayer|DKA
+1 Gravepurge|DKA
+1 Sightless Ghoul|DKA
+8 Swamp|ISD
+
+[DKA Devilish Mockery 1]
+1 Hellrider|DKA
+1 Forge Devil|DKA
+1 Heckling Fiends|DKA
+1 Afflicted Deserter|DKA
+1 Pitchburn Devils|ISD
+1 Torch Fiend|DKA
+1 Wrack with Madness|DKA
+1 Pyreheart Wolf|DKA
+1 Skirsdag Cultist|ISD
+1 Fling|DKA
+1 Talons of Falkenrath|DKA
+8 Mountain|ISD
+
+[DKA Devilish Mockery 2]
+1 Hellrider|DKA
+1 Forge Devil|DKA
+1 Heckling Fiends|DKA
+1 Afflicted Deserter|DKA
+1 Riot Devils|ISD
+1 Torch Fiend|DKA
+1 Wrack with Madness|DKA
+1 Pyreheart Wolf|DKA
+1 Scourge of Geier Reach|ISD
+1 Fling|DKA
+1 Talons of Falkenrath|DKA
+8 Mountain|ISD
+
+[DKA Beastly Killers 1]
+1 Young Wolf|DKA
+1 Briarpack Alpha|DKA
+1 Predator Ooze|DKA
+1 Strangleroot Geist|DKA
+1 Ambush Viper|ISD
+1 Kessig Recluse|DKA
+1 Ulvenwald Bear|DKA
+1 Dawntreader Elk|DKA
+1 Gravetiller Wurm|DKA
+1 Somberwald Spider|ISD
+1 Hunger of the Howlpack|DKA
+8 Forest|ISD
+
+[DKA Beastly Killers 2]
+1 Young Wolf|DKA
+1 Briarpack Alpha|DKA
+1 Predator Ooze|DKA
+1 Strangleroot Geist|DKA
+1 Festerhide Boar|ISD
+1 Kessig Recluse|DKA
+1 Ulvenwald Bear|DKA
+1 Dawntreader Elk|DKA
+1 Gravetiller Wurm|DKA
+1 Darkthicket Wolf|ISD
+1 Hunger of the Howlpack|DKA
+8 Forest|ISD
+
+[DKA Black Inserts]
+Curse of Misfortunes|DKA
+Fiend of the Shadows|DKA
+Geralf's Messenger|DKA
+Increasing Ambition|DKA
+Ravenous Demon|DKA
+Zombie Apocalypse|DKA
+Mikaeus, the Unhallowed|DKA
+Elbrus, the Binding Blade|DKA
+
+[DKA Blue Inserts]
+Increasing Confusion|DKA
+Geralf's Mindcrusher|DKA
+Dungeon Geists|DKA
+Curse of Echoes|DKA
+Counterlash|DKA
+Call to the Kindred|DKA
+Jar of Eyeballs|DKA
+Beguiler of Wills|DKA
+
+[DKA Green Inserts]
+Wolfbitten Captive|DKA
+Lost in the Woods|DKA
+Increasing Savagery|DKA
+Ghoultree|DKA
+Feed the Pack|DKA
+Deranged Outcast|DKA
+Vorapede|DKA
+Jar of Eyeballs|DKA
+
+[DKA Red Inserts]
+Mondronen Shaman|DKA
+Markov Blademaster|DKA
+Increasing Vengeance|DKA
+Flayer of the Hatebound|DKA
+Curse of Bloodletting|DKA
+Alpha Brawl|DKA
+Helvault|DKA
+Moonveil Dragon|DKA
+
+[DKA White Inserts]
+Requiem Angel|DKA
+Seance|DKA
+Thalia, Guardian of Thraben|DKA
+Sudden Disappearance|DKA
+Increasing Devotion|DKA
+Helvault|DKA
+Grafdigger's Cage|DKA
+Archangel's Light|DKA
+
+[SOI Spiritual Clues 1]
+1 Bygone Bishop|SOI
+1 Topplegeist|SOI
+1 Magnifying Glass|SOI
+1 Nearheath Chaplain|SOI
+1 Thraben Inspector|SOI
+1 Expose Evil|SOI
+1 Apothecary Geist|SOI
+1 Moorland Drifter|SOI
+1 Emissary of the Sleepless|SOI
+1 Puncturing Light|SOI
+1 Survive the Night|SOI
+8 Plains|SOI
+
+[SOI Spiritual Clues 2]
+1 Bygone Bishop|SOI
+1 Topplegeist|SOI
+1 Magnifying Glass|SOI
+1 Nearheath Chaplain|SOI
+1 Dauntless Cathar|SOI
+1 Expose Evil|SOI
+1 Apothecary Geist|SOI
+1 Vessel of Ephemera|SOI
+1 Emissary of the Sleepless|SOI
+1 Strength of Arms|SOI
+1 Survive the Night|SOI
+8 Plains|SOI
+
+[SOI Skulking Horrors 1]
+1 Forgotten Creation|SOI
+1 Aberrant Researcher|SOI
+1 Stitchwing Skaab|SOI
+1 Uninvited Geist|SOI
+1 Deny Existence|SOI
+1 Lamplighter of Selhoff|SOI
+1 Furtive Homunculus|SOI
+1 Press for Answers|SOI
+1 Jace's Scrutiny|SOI
+1 Pieces of the Puzzle|SOI
+1 Seagraf Skaab|SOI
+8 Island|SOI
+
+[SOI Skulking Horrors 2]
+1 Forgotten Creation|SOI
+1 Aberrant Researcher|SOI
+1 Stitchwing Skaab|SOI
+1 Uninvited Geist|SOI
+1 Deny Existence|SOI
+1 Stitched Mangler|SOI
+1 Furtive Homunculus|SOI
+1 Press for Answers|SOI
+1 Just the Wind|SOI
+1 Pieces of the Puzzle|SOI
+1 Wicker Witch|SOI
+8 Island|SOI
+
+[SOI Splitting Headache 1]
+1 Markov Dreadknight|SOI
+1 Call the Bloodline|SOI
+1 Gisa's Bidding|SOI
+1 Pick the Brain|SOI
+1 Ghoulcaller's Accomplice|SOI
+1 Murderous Compulsion|SOI
+1 Sanitarium Skeleton|SOI
+1 Rottenheart Ghoul|SOI
+1 Twins of Maurer Estate|SOI
+1 Shamble Back|SOI
+1 Macabre Waltz|SOI
+8 Swamp|SOI
+
+[SOI Splitting Headache 2]
+1 Markov Dreadknight|SOI
+1 Call the Bloodline|SOI
+1 Gisa's Bidding|SOI
+1 Creeping Dread|SOI
+1 Ghoulcaller's Accomplice|SOI
+1 Murderous Compulsion|SOI
+1 Sanitarium Skeleton|SOI
+1 Farbog Revenant|SOI
+1 Twins of Maurer Estate|SOI
+1 Alms of the Vein|SOI
+1 Macabre Waltz|SOI
+8 Swamp|SOI
+
+[SOI Bloody Insanity 1]
+1 Falkenrath Gorger|SOI
+1 Incorrigible Youths|SOI
+1 Mad Prophet|SOI
+1 Ravenous Bloodseeker|SOI
+1 Bloodmad Vampire|SOI
+1 Insolent Neonate|SOI
+1 Reduce to Ashes|SOI
+1 Voldaren Duelist|SOI
+1 Uncaged Fury|SOI
+1 Fiery Temper|SOI
+1 Senseless Rage|SOI
+8 Mountain|SOI
+
+[SOI Bloody Insanity 2]
+1 Falkenrath Gorger|SOI
+1 Incorrigible Youths|SOI
+1 Stensia Masquerade|SOI
+1 Ravenous Bloodseeker|SOI
+1 Bloodmad Vampire|SOI
+1 Insolent Neonate|SOI
+1 Reduce to Ashes|SOI
+1 Sanguinary Mage|SOI
+1 Uncaged Fury|SOI
+1 Fiery Temper|SOI
+1 Rush of Adrenaline|SOI
+8 Mountain|SOI
+
+[SOI Howlpack Forces 1]
+1 Silverfur Partisan|SOI
+1 Howlpack Resurgence|SOI
+1 Cult of the Waxing Moon|SOI
+1 Hermit of the Natterknolls|SOI
+1 Hinterland Logger|SOI
+1 Solitary Hunter|SOI
+1 Loam Dryad|SOI
+1 Quilled Wolf|SOI
+1 True-Faith Censer|SOI
+1 Equestrian Skill|SOI
+1 Aim High|SOI
+8 Forest|SOI
+
+[SOI Howlpack Forces 2]
+1 Silverfur Partisan|SOI
+1 Howlpack Resurgence|SOI
+1 Cult of the Waxing Moon|SOI
+1 Hermit of the Natterknolls|SOI
+1 Hinterland Logger|SOI
+1 Solitary Hunter|SOI
+1 Fork in the Road|SOI
+1 Quilled Wolf|SOI
+1 True-Faith Censer|SOI
+1 Equestrian Skill|SOI
+1 Stoic Builder|SOI
+8 Forest|SOI
+
+[SOI Black Inserts]
+To the Slaughter|SOI
+From Under the Floorboards|SOI
+Ever After|SOI
+Diregraf Colossus|SOI
+Asylum Visitor|SOI
+Corrupted Grafstone|SOI
+Relentless Dead|SOI
+Mindwrack Demon|SOI
+
+[SOI Blue Inserts]
+Confirm Suspicions|SOI
+Rattlechains|SOI
+Thing in the Ice|SOI
+Tamiyo's Journal|SOI
+Nephalia Moondrakes|SOI
+Engulf the Shore|SOI
+Startled Awake|SOI
+Geralf's Masterpiece|SOI
+
+[SOI Green Inserts]
+Tireless Tracker|SOI
+Traverse the Ulvenwald|SOI
+Soul Swallower|SOI
+Sage of Ancient Lore|SOI
+Inexorable Blob|SOI
+Cryptolith Rite|SOI
+Ulvenwald Hydra|SOI
+Seasons Past|SOI
+
+[SOI Red Inserts]
+Avacyn's Judgment|SOI
+Burn from Within|SOI
+Geier Reach Bandit|SOI
+Flameblade Angel|SOI
+Harness the Storm|SOI
+Scourge Wolf|SOI
+Wolf of Devil's Breach|SOI
+Goldnight Castigator|SOI
+
+[SOI White Inserts]
+Always Watching|SOI
+Angel of Deliverance|SOI
+Declaration in Stone|SOI
+Drogskol Cavalry|SOI
+Eerie Interlude|SOI
+Hanweir Militia Captain|SOI
+Thalia's Lieutenant|SOI
+Descend upon the Sinful|SOI
+
+[MID Coven of Hope 1]
+1 Adeline, Resplendent Cathar|MID
+1 Ambitious Farmhand|MID
+1 Bereaved Survivor|MID
+1 Duelcraft Trainer|MID
+1 Candlegrove Witch|MID
+1 Gavony Silversmith|MID
+1 Ritual Guardian|MID
+1 Unruly Mob|MID
+1 Homestead Courage|MID
+1 Hedgewitch's Mask|MID
+1 Flare of Faith|MID
+8 Plains|MID
+
+[MID Coven of Hope 2]
+1 Adeline, Resplendent Cathar|MID
+1 Ambitious Farmhand|MID
+1 Bereaved Survivor|MID
+1 Duelcraft Trainer|MID
+1 Candlegrove Witch|MID
+1 Lunarch Veteran|MID
+1 Ritual Guardian|MID
+1 Unruly Mob|MID
+1 Homestead Courage|MID
+1 Mourning Patrol|MID
+1 Clarion Cathars|MID
+8 Plains|MID
+
+[MID Disturbing Thoughts 1]
+1 Patrician Geist|MID
+1 Covetous Castaway|MID
+1 Overwhelmed Archivist|MID
+1 Baithook Angler|MID
+1 Galedrifter|MID
+1 Otherworldly Gaze|MID
+1 Shipwreck Sifters|MID
+1 Unblinking Observer|MID
+1 Secrets of the Key|MID
+1 Stormrider Spirit|MID
+1 Consider|MID
+8 Island|MID
+
+[MID Disturbing Thoughts 2]
+1 Patrician Geist|MID
+1 Phantom Carriage|MID
+1 Overwhelmed Archivist|MID
+1 Baithook Angler|MID
+1 Galedrifter|MID
+1 Otherworldly Gaze|MID
+1 Shipwreck Sifters|MID
+1 Unblinking Observer|MID
+1 Secrets of the Key|MID
+1 Component Collector|MID
+1 Startle|MID
+8 Island|MID
+
+
+[MID Morbid Decay 1]
+1 Jadar, Ghoulcaller of Nephalia|MID
+1 Ghoulish Procession|MID
+1 Morbid Opportunist|MID
+1 Necrosynthesis|MID
+1 Diregraf Horde|MID
+1 Hobbling Zombie|MID
+1 Siege Zombie|MID
+1 Blood Pact|MID
+1 Rotten Reunion|MID
+1 No Way Out|MID
+1 Crawl from the Cellar|MID
+8 Swamp|MID
+
+[MID Morbid Decay 2]
+1 Jadar, Ghoulcaller of Nephalia|MID
+1 Ghoulish Procession|MID
+1 Morbid Opportunist|MID
+1 Vengeful Strangler|MID
+1 Morkrut Behemoth|MID
+1 Hobbling Zombie|MID
+1 Siege Zombie|MID
+1 Defenestrate|MID
+1 Rotten Reunion|MID
+1 No Way Out|MID
+1 Crawl from the Cellar|MID
+8 Swamp|MID
+
+[MID Playing with Fire 1]
+1 Smoldering Egg|MID
+1 Thermo-Alchemist|MID
+1 Seize the Storm|MID
+1 Play with Fire|MID
+1 Brimstone Vandal|MID
+1 Ardent Elementalist|MID
+1 Falkenrath Perforator|MID
+1 Festival Crasher|MID
+1 Moonrager's Slash|MID
+1 Pack's Betrayal|MID
+1 Raze the Effigy|MID
+8 Mountain|MID
+
+[MID Playing with Fire 2]
+1 Smoldering Egg|MID
+1 Thermo-Alchemist|MID
+1 Seize the Storm|MID
+1 Play with Fire|MID
+1 Brimstone Vandal|MID
+1 Ardent Elementalist|MID
+1 Falkenrath Perforator|MID
+1 Voldaren Stinger|MID
+1 Moonrager's Slash|MID
+1 Stolen Vitality|MID
+1 Neonate's Rush|MID
+8 Mountain|MID
+
+[MID Token Aggression 1]
+1 Tovolar's Huntmaster|MID
+1 Brood Weaver|MID
+1 Dawnhart Mentor|MID
+1 Hound Tamer|MID
+1 Bounding Wolf|MID
+1 Howl of the Hunt|MID
+1 Pestilent Wolf|MID
+1 Snarling Wolf|MID
+1 Tireless Hauler|MID
+1 Shadowbeast Sighting|MID
+1 Duel for Dominance|MID
+8 Forest|MID
+
+[MID Token Aggression 2]
+1 Tovolar's Huntmaster|MID
+1 Brood Weaver|MID
+1 Dawnhart Mentor|MID
+1 Hound Tamer|MID
+1 Bounding Wolf|MID
+1 Bramble Armor|MID
+1 Pestilent Wolf|MID
+1 Snarling Wolf|MID
+1 Bird Admirer|MID
+1 Candlelit Cavalry|MID
+1 Duel for Dominance|MID
+8 Forest|MID
+
+[MID Black Inserts]
+Slaughter Specialist|MID
+Mask of Griselbrand|MID
+Graveyard Trespasser|MID
+Gisa, Glorious Resurrector|MID
+Champion of the Perished|MID
+Bloodline Culling|MID
+Tainted Adversary|MID
+The Meathook Massacre|MID
+
+[MID Blue Inserts]
+Triskaidekaphile|MID
+Sludge Monster|MID
+Memory Deluge|MID
+Malevolent Hermit|MID
+Curse of Surveillance|MID
+Grafted Identity|MID
+Spectral Adversary|MID
+Lier, Disciple of the Drowned|MID
+
+[MID Green Inserts]
+Willow Geist|MID
+Unnatural Growth|MID
+Storm the Festival|MID
+Saryth, the Viper's Fang|MID
+Briarbridge Tracker|MID
+Augur of Autumn|MID
+Primal Adversary|MID
+Consuming Blob|MID
+
+[MID Red Inserts]
+Reckless Stormseeker|MID
+Light Up the Night|MID
+Geistflame Reservoir|MID
+Falkenrath Pit Fighter|MID
+Curse of Shaken Faith|MID
+Burn Down the House|MID
+Bloodthirsty Adversary|MID
+Moonveil Regent|MID
+
+[MID White Inserts]
+Vanquish the Horde|MID
+Sungold Sentinel|MID
+Sigarda's Splendor|MID
+Fateful Absence|MID
+The Celestus|MID
+Curse of Silence|MID
+Intrepid Adversary|MID
+Enduring Angel|MID

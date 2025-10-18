@@ -1,0 +1,9 @@
+Name:Ellie, Vengeful Hunter
+ManaCost:1 B R
+Types:Legendary Creature Human Survivor
+PT:3/1
+K:Partner - Survivors
+A:AB$ DealDamage | Cost$ PayLife<2> Sac<1/Creature.Other/another creature> | NumDmg$ 2 | ValidTgts$ Player | SubAbility$ DBPump | SpellDescription$ NICKNAME deals 2 damage to target player and gains indestructible until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Indestructible
+DeckHas:Ability$Sacrifice
+Oracle:Pay 2 life, Sacrifice another creature: Ellie deals 2 damage to target player and gains indestructible until end of turn.\nPartner—Survivors (You can have two commanders if both have this ability.)

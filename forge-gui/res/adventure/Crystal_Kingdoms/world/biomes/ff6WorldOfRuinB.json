@@ -1,0 +1,218 @@
+{
+"startPointX": 0.7,
+"startPointY": 0.78,
+"noiseWeight": 0.5,
+"distWeight": 1.5,
+"name": "FF6 World of Ruin",
+"tilesetAtlas": "world/tilesets/terrain.atlas",
+"tilesetName": "Black",
+"terrain": [
+	{
+		"spriteName": "Black_1",
+		"max": 0.2,
+		"resolution": 10
+	},
+	{
+		"spriteName": "Black_2",
+		"min": 0.8,
+		"max": 1,
+		"resolution": 10
+	}
+],
+"width": 0.7,
+"height": 0.7,
+"color": "110903",
+"spriteNames": [
+	"DarkGras",
+	"Skull",
+	"DarkWood",
+	"Reed",
+	"Waterlily",
+	"Shroom",
+	"Shroom2"
+],
+"enemies": [
+	"Adept Black Wizard",
+	"Apprentice Black Wizard",
+	"Bat",
+	"Beholder",
+	"Minor Demon",
+	"Ancient Demon",
+	"Big Zombie",
+	"Black Sliver",
+	"Challenger 20",
+	"Challenger 21",
+	"Challenger 22",
+	"Curselord",
+	"Dark Knight",
+	"Death Knight",
+	"Demon",
+	"Dross Gladiator",
+	"Eye",
+	"Fallen Angel",
+	"Fungus",
+	"Frog",
+	"Ghoul",
+	"Ghost",
+	"Golgari Fungus",
+	"Harpy",
+	"Harpy 2",
+	"High Vampire",
+	"Horror",
+	"Giant Fly",
+	"Ibis",
+	"Lich",
+	"Master Black Wizard",
+	"Mindclaw Shaman",
+	"Mummy",
+	"Nezumi Ninja",
+	"Nightmare",
+	"Rakdos Devil",
+	"Shade",
+	"Skeleton",
+	"Skeleton Soldier",
+	"Vampire",
+	"Zombie",
+	"Zombie Lord",
+	"Walking Brain",
+	"Wild Rat"
+],
+	"pointsOfInterest": [
+		"Black Castle",
+		"Swamp Capital",
+		"Swamp Town Generic",
+		"Swamp Town Identity",
+		"Swamp Town Tribal",
+		"Swamp Town2",
+		"Zombie Town",
+		"Graveyard",
+		"Graveyard1",
+		"Graveyard2",
+		"Graveyard3",
+		"Graveyard4",
+		"VampireCastle",
+		"VampireCastle1",
+		"VampireCastle2",
+		"VampireCastle3",
+		"EvilGrove",
+		"EvilGrove1",
+		"EvilGrove2",
+		"EvilGrove3",
+		"EvilGrove4",
+		"EvilGrove5",
+		"EvilGrove6",
+		"SkullCaveB",
+		"SkullCaveB1",
+		"SkullCaveB2",
+		"DrossOutpost",
+		"CaveB",
+		"CaveB1",
+		"CaveB2",
+		"CaveB3",
+		"CaveB4",
+		"CaveB5",
+		"CaveB6",
+		"CaveB8",
+		"CaveRat",
+		"CaveLarge1",
+		"Slimefoots Lair",
+		"Temple of Liliana",
+		"Grolnoks Bog",
+		"Lich's Mirror",
+		"DemonTower",
+		"CaveZombie"
+	],
+"structures": [
+	{
+		"N": 2,
+		"x": 0.5,
+		"y": 0.5,
+		"structureAtlasPath": "world/structures/black_structures.atlas",
+		"sourcePath": "world/structures/models/black.png",
+		"maskPath": "world/structures/masks/ring.png",
+		"height": 0.5,
+		"width": 0.5,
+		"symmetry": 8,
+		"mappingInfo": [
+			{
+				"name": "water",
+				"color": "00ffff",
+				"collision": true
+			},
+			{
+				"name": "tree",
+				"color": "004000",
+				"collision": true
+			},
+			{
+				"name": "tree2",
+				"color": "008000",
+				"collision": true
+			},
+			{
+				"name": "tree3",
+				"color": "ff00ff",
+				"collision": true
+			},
+			{
+				"name": "tree4",
+				"color": "00f000",
+				"collision": true
+			},
+			{
+				"name": "rock",
+				"color": "808080",
+				"collision": true
+			},
+			{
+				"name": "rock2",
+				"color": "ff0000",
+				"collision": true
+			}
+		]
+	},
+	{
+		"N": 2,
+		"x": 0.5,
+		"y": 0.5,
+		"structureAtlasPath": "world/structures/black_structures.atlas",
+		"sourcePath": "world/structures/models/black.png",
+		"maskPath": "world/structures/masks/circle.png",
+		"height": 0.20000002,
+		"width": 0.20000002,
+		"symmetry": 8,
+		"mappingInfo": [
+			{
+				"name": "muck",
+				"color": "00ffff",
+				"collision": true
+			},
+			{
+				"name": "dead_tree",
+				"color": "004000",
+				"collision": true
+			},
+			{
+				"name": "dead_tree2",
+				"color": "008000",
+				"collision": true
+			},
+			{
+				"name": "dead_tree3",
+				"color": "ff00ff",
+				"collision": true
+			},
+			{
+				"name": "rock",
+				"color": "808080",
+				"collision": true
+			},
+			{
+				"name": "rock2",
+				"color": "ff0000",
+				"collision": true
+			}
+		]
+	}
+]
+}

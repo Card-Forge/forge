@@ -1,8 +1,8 @@
 Name:Needle Spires
 ManaCost:no cost
 Types:Land
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ Combo R W | SpellDescription$ Add {R} or {W}.
-A:AB$ Animate | Cost$ 2 R W | Defined$ Self | Power$ 2 | Toughness$ 1 | Types$ Creature,Elemental | Colors$ Red,White | OverwriteColors$ True | Keywords$ Double Strike | SpellDescription$ CARDNAME becomes a 2/1 red and white Elemental creature with double strike until end of turn. It's still a land.
-Oracle:Needle Spires enters tapped.\n{T}: Add {R} or {W}.\n{2}{R}{W}: Needle Spires becomes a 2/1 red and white Elemental creature with double strike until end of turn. It's still a land.
+A:AB$ Animate | Cost$ 2 R W | Defined$ Self | Power$ 2 | Toughness$ 1 | Types$ Creature,Elemental | Colors$ Red,White | OverwriteColors$ True | Keywords$ Double Strike | SpellDescription$ Until end of turn, this land becomes a 2/1 red and white Elemental creature with double strike. It's still a land.
+Oracle:This land enters tapped.\n{T}: Add {R} or {W}.\n{2}{R}{W}: Until end of turn, this land becomes a 2/1 red and white Elemental creature with double strike. It's still a land.

@@ -12,7 +12,6 @@ import org.apache.commons.lang3.mutable.MutableBoolean;
 
 import com.google.common.collect.Lists;
 
-import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardRarity;
 import forge.card.CardRulesPredicates;
@@ -281,29 +280,24 @@ public class CopyPermanentEffect extends TokenEffectBase {
             String set = sa.getOriginalHost().getSetCode();
             copy.getCurrentState().setRarity(CardRarity.Token);
             copy.getCurrentState().setSetCode(set);
-            copy.getCurrentState().setImageKey(ImageKeys.getTokenKey(name + "_" + set.toLowerCase()));
+            copy.getCurrentState().setImageKey(StaticData.instance().getOtherImageKey(name, set));
         } else {
             final Card host = sa.getHostCard();
 
             int id = newOwner == null ? 0 : newOwner.getGame().nextCardId();
             // need to create a physical card first, i need the original card faces
             copy = CardFactory.getCard(original.getPaperCard(), newOwner, id, host.getGame());
+
+            copy.setStates(CardFactory.getCloneStates(original, copy, sa));
+            // force update the now set State
             if (original.isTransformable()) {
+                copy.setState(original.isTransformed() ? CardStateName.Backside : CardStateName.Original, true, true);
                 // 707.8a If an effect creates a token that is a copy of a transforming permanent or a transforming double-faced card not on the battlefield,
                 // the resulting token is a transforming token that has both a front face and a back face.
                 // The characteristics of each face are determined by the copiable values of the same face of the permanent it is a copy of, as modified by any other copy effects that apply to that permanent.
                 // If the token is a copy of a transforming permanent with its back face up, the token enters the battlefield with its back face up.
                 // This rule does not apply to tokens that are created with their own set of characteristics and enter the battlefield as a copy of a transforming permanent due to a replacement effect.
                 copy.setBackSide(original.isBackSide());
-                if (original.isTransformed()) {
-                    copy.incrementTransformedTimestamp();
-                }
-            }
-
-            copy.setStates(CardFactory.getCloneStates(original, copy, sa));
-            // force update the now set State
-            if (original.isTransformable()) {
-                copy.setState(original.isTransformed() ? CardStateName.Transformed : CardStateName.Original, true, true);
             } else {
                 copy.setState(copy.getCurrentStateName(), true, true);
             }

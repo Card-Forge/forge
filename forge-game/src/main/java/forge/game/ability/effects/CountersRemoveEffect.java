@@ -66,8 +66,8 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card card = sa.getHostCard();
-        final Game game = card.getGame();
+        final Card source = sa.getHostCard();
+        final Game game = source.getGame();
         final Player activator = sa.getActivatingPlayer();
 
         PlayerController pc = activator.getController();
@@ -76,7 +76,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
 
         int cntToRemove = 0;
         if (!num.equals("All") && !num.equals("Any")) {
-            cntToRemove = AbilityUtils.calculateAmount(card, num, sa);
+            cntToRemove = AbilityUtils.calculateAmount(source, num, sa);
         }
 
         if (sa.hasParam("Optional")) {
@@ -102,32 +102,43 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
 
         int totalRemoved = 0;
         CardCollectionView srcCards;
-
-        String typeforPrompt = counterType == null ? "" : counterType.getName();
-        String title = Localizer.getInstance().getMessage("lblChooseCardsToTakeTargetCounters", typeforPrompt);
-        title = title.replace("  ", " ");
         if (sa.hasParam("Choices")) {
             ZoneType choiceZone = sa.hasParam("ChoiceZone") ? ZoneType.smartValueOf(sa.getParam("ChoiceZone"))
                     : ZoneType.Battlefield;
+            srcCards = CardLists.getValidCards(game.getCardsIn(choiceZone), sa.getParam("Choices"),
+                    activator, source, sa);
+        } else {
+            srcCards = getTargetCards(sa);
+        }
+        if (sa.isReplacementAbility()) {
+            srcCards = new CardCollection(srcCards).filter(c -> !c.isInPlay() || sa.getLastStateBattlefield().contains(c));
+        }
 
-            CardCollection choices = CardLists.getValidCards(game.getCardsIn(choiceZone), sa.getParam("Choices"),
-                    activator, card, sa);
-
+        if (sa.hasParam("Choices")) {
             int min = 1;
             int max = 1;
             if (sa.hasParam("ChoiceOptional")) {
                 min = 0;
-                max = choices.size();
+                max = srcCards.size();
             }
+            if (sa.hasParam("ChoiceNum")) {
+                min = max = AbilityUtils.calculateAmount(source, sa.getParam("ChoiceNum"), sa);
+            }
+            if (srcCards.size() < min) {
+                return;
+            }
+
+            String typeforPrompt = counterType == null ? "" : counterType.getName();
+            String title = Localizer.getInstance().getMessage("lblChooseCardsToTakeTargetCounters", typeforPrompt);
+            title = title.replace("  ", " ");
             Map<String, Object> params = Maps.newHashMap();
             params.put("CounterType", counterType);
-            srcCards = pc.chooseCardsForEffect(choices, sa, title, min, max, min == 0, params);
+            srcCards = pc.chooseCardsForEffect(srcCards, sa, title, min, max, min == 0, params);
         } else {
             for (final Player tgtPlayer : getTargetPlayers(sa)) {
                 if (!tgtPlayer.isInGame()) {
                     continue;
                 }
-                // Removing energy
                 if (type.equals("All")) {
                     for (Map.Entry<CounterType, Integer> e : Lists.newArrayList(tgtPlayer.getCounters().entrySet())) {
                         totalRemoved += tgtPlayer.subtractCounter(e.getKey(), e.getValue(), activator);
@@ -143,8 +154,6 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                     }
                 }
             }
-
-            srcCards = getTargetCards(sa);
         }
 
         for (final Card tgtCard : srcCards) {
@@ -187,15 +196,14 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                     Map<String, Object> params = Maps.newHashMap();
                     params.put("Target", gameCard);
                     params.put("CounterType", counterType);
-                    title = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget", type);
-                    removeFromCard = pc.chooseNumber(sa, title, 0, removeFromCard, params);
+                    removeFromCard = pc.chooseNumber(sa, Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget", type), 0, removeFromCard, params);
                 }
                 if (removeFromCard > 0) {
                     gameCard.subtractCounter(counterType, removeFromCard, activator);
                     if (rememberRemoved) {
                         for (int i = 0; i < removeFromCard; i++) {
                             // TODO might need to be more specific
-                            card.addRemembered(Pair.of(counterType, i));
+                            source.addRemembered(Pair.of(counterType, i));
                         }
                     }
                     game.updateLastStateForCard(gameCard);
@@ -207,7 +215,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
 
         if (totalRemoved > 0 && rememberAmount) {
             // TODO use SpellAbility Remember later
-            card.addRemembered(totalRemoved);
+            source.addRemembered(totalRemoved);
         }
     }
 
@@ -215,8 +223,8 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
         boolean rememberRemoved = sa.hasParam("RememberRemoved");
         int removed = 0;
 
-        final Card card = sa.getHostCard();
-        final Game game = card.getGame();
+        final Card source = sa.getHostCard();
+        final Game game = source.getGame();
         final Player activator = sa.getActivatingPlayer();
         final PlayerController pc = activator.getController();
         final Map<CounterType, Integer> tgtCounters = Maps.newHashMap(entity.getCounters());
@@ -254,7 +262,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
 
                 if (rememberRemoved) {
                     for (int i = 0; i < chosenAmount; i++) {
-                        card.addRemembered(Pair.of(chosenType, i));
+                        source.addRemembered(Pair.of(chosenType, i));
                     }
                 }
                 cntToRemove -= chosenAmount;

@@ -60,13 +60,12 @@ public class CardView extends GameEntityView {
     }
 
     public static TrackableCollection<CardView> getCollection(Iterable<Card> cards) {
-        if (cards == null) {
-            return null;
-        }
         TrackableCollection<CardView> collection = new TrackableCollection<>();
-        for (Card c : cards) {
-            if (c.getRenderForUI()) { //only add cards that match their card for UI
-                collection.add(c.getView());
+        if (cards != null) {
+            for (Card c : cards) {
+                if (c != null && c.getRenderForUI()) { //only add cards that match their card for UI
+                    collection.add(c.getView());
+                }
             }
         }
         return collection;
@@ -101,7 +100,6 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Controller, ownerAndController);
         set(TrackableProperty.ImageKey, imageKey);
     }
-
     public PlayerView getOwner() {
         return get(TrackableProperty.Owner);
     }
@@ -143,9 +141,8 @@ public class CardView extends GameEntityView {
     }
 
     public boolean isFlipped() {
-        return get(TrackableProperty.Flipped); // getCurrentState().getState() == CardStateName.Flipped;
+        return get(TrackableProperty.Flipped);
     }
-
     public boolean isSplitCard() {
         return get(TrackableProperty.SplitCard);
     }
@@ -429,6 +426,12 @@ public class CardView extends GameEntityView {
     }
     void updateChosenColors(Card c) {
         set(TrackableProperty.ChosenColors, c.getChosenColors());
+    }
+    public boolean hasPaperFoil() {
+        return get(TrackableProperty.PaperFoil);
+    }
+    void updatePaperFoil(boolean v) {
+        set(TrackableProperty.PaperFoil, v);
     }
     public ColorSet getMarkedColors() {
         return get(TrackableProperty.MarkedColors);
@@ -934,7 +937,9 @@ public class CardView extends GameEntityView {
             sb.append("\r\n\r\nMerged Cards: ").append(mergedCards);
         }
 
-        return sb.toString().trim();
+        return sb.toString().trim()
+            .replace("\\r", "\r")
+            .replace("\\n", "\n");
     }
 
     public CardStateView getCurrentState() {
@@ -1022,6 +1027,7 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Cloned, c.isCloned());
         set(TrackableProperty.SplitCard, isSplitCard);
         set(TrackableProperty.FlipCard, c.isFlipCard());
+        set(TrackableProperty.Flipped, c.getCurrentStateName() == CardStateName.Flipped);
         set(TrackableProperty.Facedown, c.isFaceDown());
         set(TrackableProperty.Foretold, c.isForetold());
         set(TrackableProperty.Secondary, c.hasState(CardStateName.Secondary));
@@ -1061,6 +1067,8 @@ public class CardView extends GameEntityView {
                     mergedCollection.add(card);
                 }
             }
+        } else {
+            set(TrackableProperty.MergedCards, null);
         }
         updateMergeCollections(mergedCollection);
 
@@ -1087,7 +1095,7 @@ public class CardView extends GameEntityView {
             if (c.getGame() != null) {
                 if (c.hasPerpetual()) currentStateView.updateColors(c);
                 else currentStateView.updateColors(currentState);
-                currentStateView.updateHasChangeColors(!Iterables.isEmpty(c.getChangedCardColors()));
+                currentStateView.updateHasChangeColors(c.hasChangedCardColors());
             }
         } else {
             currentStateView.updateLoyalty(currentState);
@@ -1097,6 +1105,7 @@ public class CardView extends GameEntityView {
         currentState.getView().setOriginalColors(c); //set original Colors
 
         currentStateView.updateAttractionLights(currentState);
+        currentStateView.updateHasPrintedPT((currentStateView.isVehicle() || currentStateView.isSpaceCraft()) && c.getRules() != null && c.getRules().hasPrintedPT());
 
         CardState alternateState = isSplitCard && isFaceDown() ? c.getState(CardStateName.RightSplit) : c.getAlternateState();
 
@@ -1405,7 +1414,7 @@ public class CardView extends GameEntityView {
         }
         void updatePower(Card c) {
             int num;
-            if (getType().hasSubtype("Vehicle") && !isCreature()) {
+            if (hasPrintedPT() && !isCreature()) {
                 // use printed value so user can still see it
                 num = c.getCurrentPower();
             } else {
@@ -1430,7 +1439,7 @@ public class CardView extends GameEntityView {
         }
         void updateToughness(Card c) {
             int num;
-            if (getType().hasSubtype("Vehicle") && !isCreature()) {
+            if (hasPrintedPT() && !isCreature()) {
                 // use printed value so user can still see it
                 num = c.getCurrentToughness();
             } else {
@@ -1479,7 +1488,6 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.Loyalty, "0"); //alternates don't need loyalty
         }
 
-
         public String getDefense() {
             return get(TrackableProperty.Defense);
         }
@@ -1514,6 +1522,13 @@ public class CardView extends GameEntityView {
         }
         void updateAttractionLights(CardState c) {
             set(TrackableProperty.AttractionLights, c.getAttractionLights());
+        }
+
+        public boolean hasPrintedPT() {
+            return get(TrackableProperty.HasPrintedPT);
+        }
+        void updateHasPrintedPT(boolean v) {
+            set(TrackableProperty.HasPrintedPT, v);
         }
 
         public String getSetCode() {
@@ -1798,10 +1813,11 @@ public class CardView extends GameEntityView {
         public boolean isArtifact() {
             return getType().isArtifact();
         }
-        public boolean isNyx() {
-            if (!getType().isEnchantment() || getType().getCoreTypes() == null)
-                return false;
-            return Iterables.size(getType().getCoreTypes()) > 1;
+        public boolean isEnchantment() {
+            return getType().isEnchantment();
+        }
+        public boolean isSpaceCraft() {
+            return getType().hasSubtype("Spacecraft");
         }
         public boolean isAttraction() {
             return getType().isAttraction();
@@ -1825,8 +1841,8 @@ public class CardView extends GameEntityView {
         }
 
         @Override
-        public String getUntranslatedOracle() {
-            return getOracleText();
+        public String getTranslatedName() {
+            return CardTranslation.getTranslatedName(this);
         }
     }
 

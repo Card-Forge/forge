@@ -264,12 +264,14 @@ public abstract class GameState {
             }
 
             if (c.hasMergedCard()) {
+                String suffix = c.getTopMergedCard().hasPaperFoil() ? "+" : "";
                 // we have to go by the current top card name here
-                newText.append(c.getTopMergedCard().getPaperCard().getName()).append("|Set:")
+                newText.append(c.getTopMergedCard().getPaperCard().getName()).append(suffix).append("|Set:")
                         .append(c.getTopMergedCard().getPaperCard().getEdition()).append("|Art:")
                         .append(c.getTopMergedCard().getPaperCard().getArtIndex());
             } else {
-                newText.append(c.getPaperCard().getName()).append("|Set:").append(c.getPaperCard().getEdition())
+                String suffix = c.hasPaperFoil() ? "+" : "";
+                newText.append(c.getPaperCard().getName()).append(suffix).append("|Set:").append(c.getPaperCard().getEdition())
                         .append("|Art:").append(c.getPaperCard().getArtIndex());
             }
         }
@@ -319,18 +321,21 @@ public abstract class GameState {
                     newText.append(":Cloaked");
                 }
             }
-            if (c.getCurrentStateName().equals(CardStateName.Transformed)) {
-                newText.append("|Transformed");
-            } else if (c.getCurrentStateName().equals(CardStateName.Flipped)) {
+            if (c.getCurrentStateName().equals(CardStateName.Flipped)) {
                 newText.append("|Flipped");
             } else if (c.getCurrentStateName().equals(CardStateName.Meld)) {
                 newText.append("|Meld");
                 if (c.getMeldedWith() != null) {
+                    String suffix = c.getMeldedWith().hasPaperFoil() ? "+" : "";
                     newText.append(":");
-                    newText.append(c.getMeldedWith().getName());
+                    newText.append(c.getMeldedWith().getName()).append(suffix);
                 }
-            } else if (c.getCurrentStateName().equals(CardStateName.Modal)) {
-                newText.append("|Modal");
+            } else if (c.getCurrentStateName().equals(CardStateName.Backside)) {
+                if (c.isModal()) {
+                    newText.append("|Modal");
+                } else {
+                    newText.append("|Transformed");
+                }
             }
 
             if (c.getPlayerAttachedTo() != null) {
@@ -1263,7 +1268,7 @@ public abstract class GameState {
             } else if (cardinfo[0].startsWith("T:")) {
                 String tokenStr = cardinfo[0].substring(2);
                 PaperToken token = StaticData.instance().getAllTokens().getToken(tokenStr,
-                        setCode != null ? setCode : CardEdition.UNKNOWN.getName());
+                        setCode != null ? setCode : CardEdition.UNKNOWN_CODE);
                 if (token == null) {
                     System.err.println("ERROR: Tried to create a non-existent token named " + cardinfo[0] + " when loading game state!");
                     continue;
@@ -1311,8 +1316,8 @@ public abstract class GameState {
                     if (info.endsWith("Cloaked")) {
                         c.setCloaked(new SpellAbility.EmptySa(ApiType.Cloak, c));
                     }
-                } else if (info.startsWith("Transformed")) {
-                    c.setState(CardStateName.Transformed, true);
+                } else if (info.startsWith("Transformed") || info.startsWith("Modal")) {
+                    c.setState(CardStateName.Backside, true);
                     c.setBackSide(true);
                 } else if (info.startsWith("Flipped")) {
                     c.setState(CardStateName.Flipped, true);
@@ -1329,9 +1334,6 @@ public abstract class GameState {
                         c.setMeldedWith(meldTarget);
                     }
                     c.setState(CardStateName.Meld, true);
-                    c.setBackSide(true);
-                } else if (info.startsWith("Modal")) {
-                    c.setState(CardStateName.Modal, true);
                     c.setBackSide(true);
                 }
                 else if (info.startsWith("OnAdventure")) {
