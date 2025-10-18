@@ -68,6 +68,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     }
 
     protected void onChanged() {
+        game.clearShortLivedCaches();
     }
 
     public Player getPlayer() { // generic zones like stack have no player associated

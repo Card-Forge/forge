@@ -215,6 +215,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     private final AchievementTracker achievementTracker = new AchievementTracker();
     private final PlayerView view;
 
+    // Query cache to avoid repeated expensive queries
+    private final Map<String, Integer> queryCache = new HashMap<>();
+
     public Player(String name0, Game game0, final int id0) {
         super(id0);
 
@@ -433,6 +436,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         else { // life == newLife
             change = false;
         }
+
         return change;
     }
 
@@ -4087,5 +4091,17 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public boolean hasAllElementBend() {
         return elementalBendThisTurn.size() >= 4;
+    }
+
+    public Integer getFromCache(String queryKey) {
+        return queryCache.get(queryKey);
+    }
+
+    public void putInCache(String queryKey, int value) {
+        queryCache.put(queryKey, value);
+    }
+
+    public void clearCache() {
+        queryCache.clear();
     }
 }

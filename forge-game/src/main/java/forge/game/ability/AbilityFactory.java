@@ -459,7 +459,7 @@ public final class AbilityFactory {
         if (sVarHolder.hasSVar(sSub)) {
             return (AbilitySub) AbilityFactory.getAbility(state, sSub, sVarHolder);
         }
-        System.out.println("SubAbility '"+ sSub +"' not found for: " + state.getName());
+        System.err.println("SubAbility '"+ sSub +"' not found for: " + state.getName());
 
         return null;
     }
