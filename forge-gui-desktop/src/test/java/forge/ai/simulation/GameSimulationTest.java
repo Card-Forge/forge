@@ -2610,6 +2610,35 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertTrue(nonBasicForest.getType().hasSubtype("Mountain"));
     }
 
+    @Test
+    public void testHenzie() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+
+        addCard("Henzie \"Toolbox\" Torre", p);
+        addCardToZone("Wastes", p, ZoneType.Library);
+        addCards("Plains", 5, p);
+        Card spell = addCardToZone("Serra Angel", p, ZoneType.Hand);
+
+        game.getAction().checkStaticAbilities();
+        List<SpellAbility> sas = spell.getAllPossibleAbilities(p, true);
+        SpellAbility blitz = sas.get(1);
+
+        GameSimulator sim = createSimulator(game, p);
+        game = sim.getSimulatedGameState();
+        sim.simulateSpellAbility(blitz);
+        spell = findCardWithName(game, "Serra Angel");
+
+        AssertJUnit.assertEquals(1, spell.getAmountOfKeyword(Keyword.BLITZ));
+        AssertJUnit.assertTrue(spell.hasKeyword(Keyword.HASTE));
+
+        playUntilNextTurn(game);
+
+        AssertJUnit.assertEquals(1, game.getPlayers().get(0).getCardsIn(ZoneType.Hand).size());
+        AssertJUnit.assertTrue(spell.isInZone(ZoneType.Graveyard));
+    }
+
     /**
      * Test for "Volo's Journal" usage by the AI. This test checks if the AI correctly
      * adds the correct types to the "Volo's Journal" when casting the spells in order

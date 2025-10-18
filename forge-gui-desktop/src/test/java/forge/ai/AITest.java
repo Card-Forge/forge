@@ -151,19 +151,19 @@ public class AITest {
         return c;
     }
 
-    void playUntilStackClear(Game game) {
+    protected void playUntilStackClear(Game game) {
         do {
             game.getPhaseHandler().mainLoopStep();
         } while (!game.isGameOver() && !game.getStack().isEmpty());
     }
 
-    void playUntilPhase(Game game, PhaseType phase) {
+    protected void playUntilPhase(Game game, PhaseType phase) {
         do {
             game.getPhaseHandler().mainLoopStep();
         } while (!game.isGameOver() && !game.getPhaseHandler().is(phase));
     }
 
-    void playUntilNextTurn(Game game) {
+    protected void playUntilNextTurn(Game game) {
         Player current = game.getPhaseHandler().getPlayerTurn();
         do {
             game.getPhaseHandler().mainLoopStep();
