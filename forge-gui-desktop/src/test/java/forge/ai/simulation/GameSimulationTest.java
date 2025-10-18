@@ -2628,8 +2628,9 @@ public class GameSimulationTest extends SimulationTest {
         GameSimulator sim = createSimulator(game, p);
         game = sim.getSimulatedGameState();
         sim.simulateSpellAbility(blitz);
-        spell = findCardWithName(game,"Serra Angel");
+        spell = findCardWithName(game, "Serra Angel");
 
+        AssertJUnit.assertEquals(1, spell.getAmountOfKeyword(Keyword.BLITZ));
         AssertJUnit.assertTrue(spell.hasKeyword(Keyword.HASTE));
 
         playUntilNextTurn(game);
