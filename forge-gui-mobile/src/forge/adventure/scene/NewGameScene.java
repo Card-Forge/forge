@@ -1,12 +1,7 @@
 package forge.adventure.scene;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -17,11 +12,9 @@ import com.badlogic.gdx.utils.Array;
 
 import java.util.*;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
-import forge.Graphics;
 import forge.StaticData;
 import forge.adventure.data.DialogData;
 import forge.adventure.data.DifficultyData;
@@ -30,18 +23,13 @@ import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
-import forge.assets.FSkin;
 import forge.card.*;
-import forge.game.card.CardFaceView;
-import forge.game.card.CardView;
-import forge.gui.card.CardDetailUtil;
 import forge.item.PaperCard;
 import forge.deck.DeckProxy;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.screens.TransitionScreen;
-import forge.screens.match.views.VCardDisplayArea;
 import forge.sound.SoundSystem;
 import forge.util.NameGenerator;
 
@@ -177,8 +165,7 @@ public class NewGameScene extends MenuScene {
         chooseCommander.addListener(new ClickListener() {
             @Override public void clicked(InputEvent event, float x, float y) {
                 removePreview();
-                ColorSet cs = colorIds[colorId.getCurrentIndex()];
-                PaperCard pc = commanderChoices.get(cs).get(chooseCommander.getCurrentIndex());
+                PaperCard pc = commanderChoices.get(colorIds[colorId.getCurrentIndex()]).get(chooseCommander.getCurrentIndex());
                 Reward reward = new Reward(pc, false);
                 previewActor = new RewardActor(reward, false, null, false);
                 previewActor.setBounds(75, 180, 40, 60); // pick your size
@@ -352,6 +339,9 @@ public class NewGameScene extends MenuScene {
         }
         Runnable runnable = () -> {
             started = false;
+            PaperCard commander_card = null;
+            if (AdventureModes.Commander.equals(modes.get(mode.getCurrentIndex())))
+                commander_card = commanderChoices.get(colorIds[colorId.getCurrentIndex()]).get(chooseCommander.getCurrentIndex());
             //FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC, false);
             WorldSave.generateNewWorld(selectedName.getText(),
                     gender.getCurrentIndex() == 0,
@@ -360,7 +350,8 @@ public class NewGameScene extends MenuScene {
                     colorIds[custom.isEmpty() || !AdventureModes.Custom.equals(modes.get(mode.getCurrentIndex())) ? colorId.getCurrentIndex() : 0],
                     Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
                     modes.get(mode.getCurrentIndex()), colorId.getCurrentIndex(),
-                    editionIds[starterEdition.getCurrentIndex()], 0);//maybe replace with enum
+                    editionIds[starterEdition.getCurrentIndex()], 0,
+                    commander_card);//maybe replace with enum
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             SoundSystem.instance.changeBackgroundTrack();
             WorldStage.getInstance().enterSpawnPOI();
@@ -399,7 +390,9 @@ public class NewGameScene extends MenuScene {
     @Override
     public void enter() {
         updateAvatar();
-
+        PaperCard commander_card = null;
+        if (AdventureModes.Commander.equals(modes.get(mode.getCurrentIndex())))
+            commander_card = commanderChoices.get(colorIds[colorId.getCurrentIndex()]).get(chooseCommander.getCurrentIndex());
         if (Forge.createNewAdventureMap) {
             FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC, false);
             WorldSave.generateNewWorld(selectedName.getText(),
@@ -409,7 +402,8 @@ public class NewGameScene extends MenuScene {
                     colorIds[colorId.getCurrentIndex()],
                     Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
                     modes.get(mode.getCurrentIndex()), colorId.getCurrentIndex(),
-                    editionIds[starterEdition.getCurrentIndex()], 0);
+                    editionIds[starterEdition.getCurrentIndex()], 0,
+                    commander_card);
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             Forge.switchScene(GameScene.instance());
         }
@@ -543,16 +537,32 @@ public class NewGameScene extends MenuScene {
                 }
                 break;
             case Chaos:
-                summaryText.append("Mode: Chaos\n\nYou (and all enemies) will receive a random preconstructed deck.\n\nWarning: This will make encounter difficulty vary wildly from the developers' intent");
+                summaryText.append("""
+                        Mode: Chaos
+                        
+                        You (and all enemies) will receive a random preconstructed deck.
+                        
+                        Warning: This will make encounter difficulty vary wildly from the developers' intent""");
                 break;
             case Custom:
-                summaryText.append("Mode: Custom\n\nChoose your own preconstructed deck. Enemies can receive a random genetic AI deck (difficult).\n\nWarning: This will make encounter difficulty vary wildly from the developers' intent");
+                summaryText.append("""
+                        Mode: Custom
+                        
+                        Choose your own preconstructed deck. Enemies can receive a random genetic AI deck (difficult).
+                        
+                        Warning: This will make encounter difficulty vary wildly from the developers' intent""");
                 break;
             case Commander:
-                summaryText.append("Mode: Commander\n\n" +
-                        "You will be presented with a choice of nine randomly chosen commanders that" +
-                        "share the selected color. You'll be given a pseudo-randomised 100-card pile" +
-                        "to start with.");
+                summaryText.append("""
+                        Mode: Commander
+                        
+                        You will be presented with a choice of nine randomly chosen commanders that \
+                        share the selected color. You'll be given a pseudo-randomised 100-card pile \
+                        to start with.
+                        
+                        You will not be able to change your commander throughout this playthrough \
+                        so choose wisely.""");
+                break;
             default:;
                 summaryText.append("No summary available for your this game mode.");
                 break;

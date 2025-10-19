@@ -52,6 +52,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private final ArrayList<Deck> decks = new ArrayList<Deck>(MIN_DECK_COUNT);
     private int selectedDeckIndex = 0;
     private final DifficultyData difficultyData = new DifficultyData();
+    private boolean commanderMode;
 
     // Game data.
     private float worldPosX;
@@ -147,7 +148,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public final ItemPool<PaperCard> autoSellCards = new ItemPool<>(PaperCard.class);
     public final Set<PaperCard> favoriteCards = new HashSet<>();
 
-    public void create(String n, Deck startingDeck, boolean male, int race, int avatar, boolean isFantasy, boolean isUsingCustomDeck, DifficultyData difficultyData) {
+    public void create(String n, Deck startingDeck, boolean male, int race, int avatar, boolean isFantasy,
+                       boolean isUsingCustomDeck, DifficultyData difficultyData, boolean isCommander) {
         clear();
         announceFantasy = fantasyMode = isFantasy; //Set Chaos mode first.
         announceCustom = usingCustomDeck = isUsingCustomDeck;
@@ -173,6 +175,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         heroRace = race;
         avatarIndex = avatar;
         isFemale = !male;
+
+        this.commanderMode = isCommander;
 
         setColorIdentity(DeckProxy.getColorIdentity(deck));
 
@@ -288,6 +292,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return life;
     }
 
+    public boolean isCommanderMode(){
+        return commanderMode;
+    }
+
     public int getMaxLife() {
         return maxLife;
     }
@@ -391,6 +399,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         heroRace = data.readInt("heroRace");
         avatarIndex = data.readInt("avatarIndex");
         isFemale = data.readBool("isFemale");
+        commanderMode = data.readBool("isCommander");
         if (data.containsKey("colorIdentity")) {
             String temp = data.readString("colorIdentity");
             if (temp != null)
@@ -713,6 +722,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.store("heroRace", heroRace);
         data.store("avatarIndex", avatarIndex);
         data.store("isFemale", isFemale);
+        data.store("isCommander", commanderMode);
         data.store("colorIdentity", colorIdentity.getColor());
 
         data.store("fantasyMode", fantasyMode);

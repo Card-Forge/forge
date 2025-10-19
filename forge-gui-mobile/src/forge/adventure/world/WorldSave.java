@@ -8,13 +8,11 @@ import forge.adventure.scene.MapViewScene;
 import forge.adventure.scene.SaveLoadScene;
 import forge.adventure.stage.PointOfInterestMapSprite;
 import forge.adventure.stage.WorldStage;
-import forge.adventure.util.AdventureModes;
-import forge.adventure.util.Config;
-import forge.adventure.util.SaveFileData;
-import forge.adventure.util.SignalList;
+import forge.adventure.util.*;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
 import forge.deck.Deck;
+import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.player.GamePlayerUtil;
 
@@ -127,13 +125,20 @@ public class WorldSave {
         return currentSave;
     }
 
-    public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, ColorSet startingColorIdentity, DifficultyData diff, AdventureModes mode, int customDeckIndex, CardEdition starterEdition, long seed) {
+    public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex,
+                                             ColorSet startingColorIdentity, DifficultyData diff, AdventureModes mode,
+                                             int customDeckIndex, CardEdition starterEdition, long seed,
+                                             PaperCard commander) {
         currentSave.world.generateNew(seed);
         currentSave.pointOfInterestChanges.clear();
         boolean chaos = mode == AdventureModes.Chaos;
         boolean custom = mode == AdventureModes.Custom;
+        boolean isCommander = mode == AdventureModes.Commander;
         Deck starterDeck = Config.instance().starterDeck(startingColorIdentity, diff, mode, customDeckIndex, starterEdition);
-        currentSave.player.create(name, starterDeck, male, race, avatarIndex, chaos, custom, diff);
+        currentSave.player.create(name, starterDeck, male, race, avatarIndex, chaos, custom, diff, isCommander);
+        if (isCommander){
+            currentSave.player.addReward(new Reward(commander, true));
+        }
         currentSave.player.setWorldPosY((int) (currentSave.world.getData().playerStartPosY * currentSave.world.getData().height * currentSave.world.getTileSize()));
         currentSave.player.setWorldPosX((int) (currentSave.world.getData().playerStartPosX * currentSave.world.getData().width * currentSave.world.getTileSize()));
         currentSave.onLoadList.emit();
