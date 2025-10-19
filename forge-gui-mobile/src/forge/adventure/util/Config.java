@@ -250,6 +250,7 @@ public class Config {
             case Custom:
                 return DeckProxy.getAllCustomStarterDecks().get(index).getDeck();
             case Pile:
+            case Commander:
                 for (ObjectMap.Entry<String, String> entry : difficultyData.pileDecks) {
                     if (ColorSet.fromNames(entry.key.toCharArray()).getColor() == color.getColor()) {
                         return CardUtil.getDeck(entry.value, false, false, "", false, false);

@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.github.tommyettinger.textra.TextraLabel;
+import com.github.tommyettinger.textra.TextraButton;
 import forge.Forge;
 import forge.adventure.data.DialogData;
 import forge.adventure.data.DifficultyData;
@@ -46,6 +47,8 @@ public class NewGameScene extends MenuScene {
     private final Selector difficulty;
     private final Selector starterEdition;
     private final TextraLabel starterEditionLabel;
+    private final Selector chooseCommander;
+    private final TextraLabel chooseCommanderLabel;
     private final Array<String> custom;
     private final TextraLabel colorLabel;
     private final ImageButton difficultyHelp;
@@ -112,6 +115,13 @@ public class NewGameScene extends MenuScene {
             editionNames.add(UIActor.localize(editionName));
         starterEdition.setTextList(editionNames);
 
+        chooseCommander = ui.findActor("chooseCommander");
+        chooseCommanderLabel = ui.findActor("chooseCommanderL");
+        Array<String> commanderNames = new Array<>(9);
+        for (int i = 0; i < 9; i++)
+            commanderNames.add("Test " + i);
+        chooseCommander.setTextList(commanderNames);
+
         modes.add(AdventureModes.Chaos);
         AdventureModes.Chaos.setSelectionName("[BLACK]" + Forge.getLocalizer().getMessage("lblDeck") + ":");
         AdventureModes.Chaos.setModes(new Array<>(new String[]{Forge.getLocalizer().getMessage("lblRandomDeck")}));
@@ -122,6 +132,12 @@ public class NewGameScene extends MenuScene {
             AdventureModes.Custom.setSelectionName("[BLACK]" + Forge.getLocalizer().getMessage("lblDeck") + ":");
             AdventureModes.Custom.setModes(custom);
         }
+
+        // Commander game mode in selection screen
+        modes.add(AdventureModes.Commander);
+        AdventureModes.Commander.setSelectionName(colorIdLabel);
+        AdventureModes.Commander.setModes(colorNames);
+
         String[] modeNames = new String[modes.size];
         int constructedIndex = -1;
 
@@ -138,6 +154,8 @@ public class NewGameScene extends MenuScene {
         AdventureModes initialMode = modes.get(mode.getCurrentIndex());
         starterEdition.setVisible(initialMode == AdventureModes.Standard);
         starterEditionLabel.setVisible(initialMode == AdventureModes.Standard);
+        chooseCommander.setVisible(initialMode == AdventureModes.Commander);
+        chooseCommanderLabel.setVisible(initialMode == AdventureModes.Commander);
 
         gender.setTextList(new String[]{Forge.getLocalizer().getMessage("lblMale") + "[%120][CYAN] \u2642",
                 Forge.getLocalizer().getMessage("lblFemale") + "[%120][MAGENTA] \u2640"});
@@ -158,6 +176,8 @@ public class NewGameScene extends MenuScene {
                 colorId.setTextList(smode.getModes());
                 starterEdition.setVisible(smode == AdventureModes.Standard);
                 starterEditionLabel.setVisible(smode == AdventureModes.Standard);
+                chooseCommander.setVisible(smode == AdventureModes.Commander);
+                chooseCommanderLabel.setVisible(smode == AdventureModes.Commander);
             }
         });
         race = ui.findActor("race");
@@ -193,6 +213,7 @@ public class NewGameScene extends MenuScene {
         ui.onButtonPress("start", NewGameScene.this::start);
         ui.onButtonPress("leftAvatar", NewGameScene.this::leftAvatar);
         ui.onButtonPress("rightAvatar", NewGameScene.this::rightAvatar);
+        ui.onButtonPress("chooseCommander", NewGameScene.this::assignCommander);
         difficultyHelp.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 showDifficultyHelp();
@@ -231,6 +252,10 @@ public class NewGameScene extends MenuScene {
         } else {
             nameTT = nameT;
         }
+    }
+
+    private void assignCommander() {
+        return;
     }
 
     private void generateAvatar() {
@@ -451,7 +476,12 @@ public class NewGameScene extends MenuScene {
             case Custom:
                 summaryText.append("Mode: Custom\n\nChoose your own preconstructed deck. Enemies can receive a random genetic AI deck (difficult).\n\nWarning: This will make encounter difficulty vary wildly from the developers' intent");
                 break;
-            default:
+            case Commander:
+                summaryText.append("Mode: Commander\n\n" +
+                        "You will be presented with a choice of nine randomly chosen commanders that" +
+                        "share the selected color. You'll be given a pseudo-randomised 100-card pile" +
+                        "to start with.");
+            default:;
                 summaryText.append("No summary available for your this game mode.");
                 break;
         }
