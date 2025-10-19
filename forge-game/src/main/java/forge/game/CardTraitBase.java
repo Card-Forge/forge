@@ -36,7 +36,7 @@ import forge.util.ITranslatable;
  * Base class for Triggers,ReplacementEffects and StaticAbilities.
  *
  */
-public abstract class CardTraitBase extends GameObject implements IHasCardView, IHasSVars {
+public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVars {
 
     /** The host card. */
     protected Card hostCard;
