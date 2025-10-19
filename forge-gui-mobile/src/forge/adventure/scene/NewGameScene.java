@@ -1,7 +1,12 @@
 package forge.adventure.scene;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -9,9 +14,15 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
+
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 import com.github.tommyettinger.textra.TextraLabel;
-import com.github.tommyettinger.textra.TextraButton;
 import forge.Forge;
+import forge.Graphics;
+import forge.StaticData;
 import forge.adventure.data.DialogData;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.data.HeroListData;
@@ -19,22 +30,26 @@ import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
-import forge.card.CardEdition;
-import forge.card.ColorSet;
+import forge.assets.FSkin;
+import forge.card.*;
+import forge.game.card.CardFaceView;
+import forge.game.card.CardView;
+import forge.gui.card.CardDetailUtil;
+import forge.item.PaperCard;
 import forge.deck.DeckProxy;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.screens.TransitionScreen;
+import forge.screens.match.views.VCardDisplayArea;
 import forge.sound.SoundSystem;
 import forge.util.NameGenerator;
-
-import java.util.Random;
 
 /**
  * NewGame scene that contains the character creation
  */
 public class NewGameScene extends MenuScene {
+    private static final int NUMBER_OF_COMMANDER_CANDIDATES = 5;
     TextField selectedName;
     ColorSet[] colorIds;
     CardEdition[] editionIds;
@@ -58,6 +73,7 @@ public class NewGameScene extends MenuScene {
     private final Random rand = new Random();
 
     private final Array<AdventureModes> modes = new Array<>();
+    private final Map<ColorSet, List<PaperCard>> commanderChoices = new LinkedHashMap<>();
 
     private NewGameScene() {
 
@@ -117,10 +133,11 @@ public class NewGameScene extends MenuScene {
 
         chooseCommander = ui.findActor("chooseCommander");
         chooseCommanderLabel = ui.findActor("chooseCommanderL");
-        Array<String> commanderNames = new Array<>(9);
-        for (int i = 0; i < 9; i++)
-            commanderNames.add("Test " + i);
-        chooseCommander.setTextList(commanderNames);
+
+        // Here, we create a random list of 5 commander candidates for each base color
+        for (ColorSet tmpColorId : colorIds){
+            commanderChoices.put(tmpColorId, getCommanderCandidatesForColor(tmpColorId));
+        }
 
         modes.add(AdventureModes.Chaos);
         AdventureModes.Chaos.setSelectionName("[BLACK]" + Forge.getLocalizer().getMessage("lblDeck") + ":");
@@ -157,6 +174,19 @@ public class NewGameScene extends MenuScene {
         chooseCommander.setVisible(initialMode == AdventureModes.Commander);
         chooseCommanderLabel.setVisible(initialMode == AdventureModes.Commander);
 
+        chooseCommander.addListener(new ClickListener() {
+            @Override public void clicked(InputEvent event, float x, float y) {
+                removePreview();
+                ColorSet cs = colorIds[colorId.getCurrentIndex()];
+                PaperCard pc = commanderChoices.get(cs).get(chooseCommander.getCurrentIndex());
+                Reward reward = new Reward(pc, false);
+                previewActor = new RewardActor(reward, false, null, false);
+                previewActor.setBounds(75, 180, 40, 60); // pick your size
+                stage.addActor(previewActor);
+                previewActor.toFront();
+            }
+        });
+
         gender.setTextList(new String[]{Forge.getLocalizer().getMessage("lblMale") + "[%120][CYAN] \u2642",
                 Forge.getLocalizer().getMessage("lblFemale") + "[%120][MAGENTA] \u2640"});
         gender.addListener(new ClickListener() {
@@ -178,6 +208,8 @@ public class NewGameScene extends MenuScene {
                 starterEditionLabel.setVisible(smode == AdventureModes.Standard);
                 chooseCommander.setVisible(smode == AdventureModes.Commander);
                 chooseCommanderLabel.setVisible(smode == AdventureModes.Commander);
+                if (smode != AdventureModes.Commander)
+                    removePreview();
             }
         });
         race = ui.findActor("race");
@@ -213,7 +245,6 @@ public class NewGameScene extends MenuScene {
         ui.onButtonPress("start", NewGameScene.this::start);
         ui.onButtonPress("leftAvatar", NewGameScene.this::leftAvatar);
         ui.onButtonPress("rightAvatar", NewGameScene.this::rightAvatar);
-        ui.onButtonPress("chooseCommander", NewGameScene.this::assignCommander);
         difficultyHelp.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
                 showDifficultyHelp();
@@ -224,6 +255,25 @@ public class NewGameScene extends MenuScene {
                 showModeHelp();
             }
         });
+        colorId.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                removePreview();
+                updateCommanderChoices();
+            }
+        });
+        updateCommanderChoices();
+    }
+
+    // class field
+    private RewardActor previewActor;
+
+    private void removePreview() {
+        if (previewActor == null) return;
+        previewActor.removeTooltip();
+        previewActor.dispose();
+        previewActor.remove();   // detach from stage
+        previewActor = null;
     }
 
     private static NewGameScene object;
@@ -254,8 +304,30 @@ public class NewGameScene extends MenuScene {
         }
     }
 
-    private void assignCommander() {
-        return;
+    private List<PaperCard> getCommanderCandidatesForColor(ColorSet _color) {
+        CardDb cardDb = StaticData.instance().getCommonCards();
+
+        Predicate<PaperCard> commander_filter = card -> {
+            ICardFace face = card.getRules().getMainPart();
+            boolean isLegendaryCreature = face.getType().isCreature() && face.getType().isLegendary();
+            boolean sharesColorInIdentity = face.getColor().sharesColorWith(_color);
+
+            return isLegendaryCreature && sharesColorInIdentity;
+
+        };
+        List<PaperCard> commanderCandidates = new ArrayList<>(cardDb.streamUniqueCardsNoAlt().filter(commander_filter).toList());
+
+        Collections.shuffle(commanderCandidates);
+        int selectionSize = Math.min(NewGameScene.NUMBER_OF_COMMANDER_CANDIDATES, commanderCandidates.size());
+        return commanderCandidates.subList(0, selectionSize);
+    }
+
+    private void updateCommanderChoices(){
+        ColorSet cs = colorIds[colorId.getCurrentIndex()];
+        String[] commanders = commanderChoices.get(cs).stream()
+                .map(PaperCard::getCardName)
+                .toArray(String[]::new);
+        chooseCommander.setTextList(commanders);
     }
 
     private void generateAvatar() {

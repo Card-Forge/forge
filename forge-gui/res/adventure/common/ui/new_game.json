@@ -216,9 +216,9 @@
       "type": "Selector",
       "name": "chooseCommander",
       "selectable": true,
-      "width": 142,
+      "width": 192,
       "height": 14,
-      "x": 159,
+      "x": 134,
       "yOffset": -14
     },
     {
