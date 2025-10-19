@@ -2051,7 +2051,7 @@ public class ComputerUtilCombat {
         }
 
         // Order the combatants in preferred order in case legacy ordering is disabled
-        if (!self.getGame().getRules().hasOrderCombatants()) {
+        if (!overrideOrder) {
             if (combatant.isAttacking()) { 
                 opposedCombatants = AiBlockController.orderBlockers(combatant, new CardCollection(opposedCombatants));
             } else {
