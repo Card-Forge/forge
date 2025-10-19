@@ -339,11 +339,10 @@ public class CardFactory {
             card.setName(rules.getName());
 
             // Combined mana cost
-            ManaCost combinedManaCost = ManaCost.combine(rules.getMainPart().getManaCost(), rules.getOtherPart().getManaCost());
-            card.setManaCost(combinedManaCost);
+            card.setManaCost(rules.getManaCost());
 
             // Combined card color
-            card.setColor(ColorSet.combine(rules.getMainPart().getColor(), rules.getOtherPart().getColor()));
+            card.setColor(rules.getColor());
             card.setType(new CardType(rules.getType()));
 
             // Combined text based on Oracle text -  might not be necessary
