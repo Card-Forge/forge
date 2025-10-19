@@ -235,7 +235,7 @@ public final class CardRules implements ICardCharacteristics {
     public ColorSet getColor() {
         switch (splitType.getAggregationMethod()) {
             case COMBINE:
-                return ColorSet.fromMask(mainPart.getColor().getColor() | otherPart.getColor().getColor());
+                return ColorSet.combine(mainPart.getColor(), otherPart.getColor());
             default:
                 return mainPart.getColor();
         }

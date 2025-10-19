@@ -253,7 +253,7 @@ public class AbilityManaPart implements java.io.Serializable {
         eff.setOwner(sourceCard.getController());
 
         eff.setImageKey(sourceCard.getImageKey());
-        eff.setColor(MagicColor.COLORLESS);
+        eff.setColor(ColorSet.C);
         eff.setGamePieceType(GamePieceType.EFFECT);
 
         String cantcounterstr = "Event$ Counter | ValidSA$ Spell.IsRemembered | Description$ That spell can't be countered.";

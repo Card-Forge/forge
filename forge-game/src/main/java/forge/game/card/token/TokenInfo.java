@@ -6,8 +6,11 @@ import com.google.common.collect.Lists;
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardType;
+import forge.card.ColorSet;
 import forge.card.GamePieceType;
 import forge.card.MagicColor;
+import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostParser;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -32,14 +35,14 @@ public class TokenInfo {
     final String[] intrinsicKeywords;
     final int basePower;
     final int baseToughness;
-    final String color;
+    final ColorSet color;
 
     public TokenInfo(Card c) {
         // TODO: Figure out how to handle legacy images?
         this.name = c.getName();
         this.imageName = ImageKeys.getTokenImageName(c.getImageKey());
         this.manaCost = c.getManaCost().toString();
-        this.color = MagicColor.toShortString(c.getCurrentState().getColor());
+        this.color = c.getCurrentState().getColor();
         this.types = getCardTypes(c);
 
         List<String> list = Lists.newArrayList();
@@ -60,7 +63,7 @@ public class TokenInfo {
         String[] types = null;
         String[] keywords = null;
         String imageName = null;
-        String color = "";
+        ColorSet color = ColorSet.C;
         for (String info : tokenInfo) {
             int index = info.indexOf(':');
             if (index == -1) {
@@ -80,7 +83,7 @@ public class TokenInfo {
             } else if (info.startsWith("Image:")) {
                 imageName = remainder;
             } else if (info.startsWith("Color:")) {
-                color = remainder;
+                color = ColorSet.fromNames(remainder);
             }
         }
 
@@ -115,7 +118,7 @@ public class TokenInfo {
         c.setName(name);
         c.setImageKey(ImageKeys.getTokenKey(imageName));
 
-        c.setColor(color.isEmpty() ? manaCost : color);
+        c.setColor(color == null ? ColorSet.fromManaCost(new ManaCost(new ManaCostParser(manaCost))) : color);
         c.setGamePieceType(GamePieceType.TOKEN);
 
         for (final String t : types) {
@@ -189,7 +192,7 @@ public class TokenInfo {
                     }
                 }
 
-                result.setColor(color);
+                result.setColor(ColorSet.fromMask(color));
             }
         }
         if (!typeMap.isEmpty()) {
