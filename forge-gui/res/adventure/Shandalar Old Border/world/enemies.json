@@ -459,7 +459,7 @@
 					"Land"
 				],
 				"colorType": "Colorless",
-				"cardText": "{R}"
+				"cardText": "\\{R\\}"
 			},
 			{
 				"type": "shards",
@@ -544,7 +544,7 @@
 					"Land"
 				],
 				"colorType": "Colorless",
-				"cardText": "{R}"
+				"cardText": "\\{R\\}"
 			},
 			{
 				"type": "shards",
@@ -1032,7 +1032,7 @@
 					"Land"
 				],
 				"colorType": "Colorless",
-				"cardText": "{W}"
+				"cardText": "\\{W\\}"
 			}
 		],
 		"colors": "W",
@@ -2149,7 +2149,7 @@
 					"Land"
 				],
 				"colorType": "Colorless",
-				"cardText": "{C}"
+				"cardText": "\\{C\\}"
 			}
 		],
 		"colors": "U",
@@ -3433,7 +3433,7 @@
 					"Land"
 				],
 				"colorType": "Colorless",
-				"cardText": "{C}"
+				"cardText": "\\{C\\}"
 			},
 			{
 				"type": "shards",
@@ -3508,7 +3508,7 @@
 					"Land"
 				],
 				"colorType": "Colorless",
-				"cardText": "{C}"
+				"cardText": "\\{C\\}"
 			},
 			{
 				"type": "shards",
@@ -3845,7 +3845,7 @@
 					"Land"
 				],
 				"colorType": "Colorless",
-				"cardText": "{R}"
+				"cardText": "\\{R\\}"
 			},
 			{
 				"type": "shards",
@@ -10749,7 +10749,7 @@
 					"Land"
 				],
 				"colorType": "Colorless",
-				"cardText": "{R}"
+				"cardText": "\\{R\\}"
 			}
 		],
 		"colors": "R",
@@ -13150,7 +13150,7 @@
 					"Land"
 				],
 				"colorType": "Colorless",
-				"cardText": "{C}"
+				"cardText": "\\{C\\}"
 			},
 			{
 				"type": "shards",
@@ -22301,7 +22301,7 @@
 					"Land"
 				],
 				"colorType": "Colorless",
-				"cardText": "{C}"
+				"cardText": "\\{C\\}"
 			},
 			{
 				"type": "shards",
@@ -22376,7 +22376,7 @@
 					"Land"
 				],
 				"colorType": "Colorless",
-				"cardText": "{C}"
+				"cardText": "\\{C\\}"
 			},
 			{
 				"type": "shards",
@@ -27417,7 +27417,7 @@
 					"Land"
 				],
 				"colorType": "Colorless",
-				"cardText": "{R}"
+				"cardText": "\\{R\\}"
 			}
 		],
 		"colors": "R",
