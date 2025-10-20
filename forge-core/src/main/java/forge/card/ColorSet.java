@@ -123,6 +123,14 @@ public enum ColorSet implements Iterable<Color>, Serializable {
         return fromMask(mana.getColorProfile());
     }
 
+    public static ColorSet combine(final ColorSet... colors) {
+        byte mask = 0;
+        for (ColorSet c : colors) {
+            mask |= c.getColor();
+        }
+        return fromMask(mask);
+    }
+
     /**
      * Checks for any color.
      *

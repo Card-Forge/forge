@@ -56,7 +56,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class CardState extends GameObject implements IHasSVars, ITranslatable {
+public class CardState implements GameObject, IHasSVars, ITranslatable {
     private String name = "";
     private CardType type = new CardType(false);
     private ManaCost manaCost = ManaCost.NO_COST;
@@ -195,7 +195,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
         return color;
     }
     public final void addColor(final ColorSet color) {
-        this.color = ColorSet.fromMask(this.color.getColor() | color.getColor());
+        this.color = ColorSet.combine(this.color, color);
         view.updateColors(card);
     }
     public final void setColor(final ColorSet color) {

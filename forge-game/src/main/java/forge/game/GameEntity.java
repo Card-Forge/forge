@@ -46,7 +46,7 @@ import forge.game.staticability.StaticAbilityCantAttach;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 
-public abstract class GameEntity extends GameObject implements IIdentifiable {
+public abstract class GameEntity implements GameObject, IIdentifiable {
     protected int id;
     private String name = "";
     protected CardCollection attachedCards = new CardCollection();

@@ -891,10 +891,6 @@ public abstract class SpellAbilityEffect {
                 runParams.put(AbilityKey.Cause, sa);
                 runParams.put(AbilityKey.DiscardedBefore, discardedBefore.get(p));
                 p.getGame().getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);
-
-                if (sa.hasParam("RememberDiscardingPlayers")) {
-                    sa.getHostCard().addRemembered(p);
-                }
             }
         }
     }

@@ -10,7 +10,7 @@ SVar:DBDiscard:DB$ Discard | Defined$ Player.NotedForDiscard | Mode$ TgtChoose |
 SVar:DBLoseLife:DB$ LoseLife | Defined$ NonRememberedOwner | LifeAmount$ 3 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBClearNotes
 SVar:DBClearNotes:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ Discard
-SVar:DBExile:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select any number of target players | TargetMin$ 0 | TargetMax$ MaxTgt | ChangeType$ Card | SubAbility$ DBDraw | StackDescription$ Exile graveyards ({p:Targeted}). | SpellDescription$ Exile any number of target players' graveyards.
+SVar:DBExile:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select any number of target players | TargetMin$ 0 | TargetMax$ MaxTgt | ChangeType$ Card | StackDescription$ Exile graveyards ({p:Targeted}). | SpellDescription$ Exile any number of target players' graveyards.
 DeckHas:Ability$Discard
 SVar:MaxTgt:PlayerCountPlayers$Amount
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Destroy target creature.\nII — Each player may discard a card. Each player who doesn't loses 3 life.\nIII — Exile any number of target players' graveyards.

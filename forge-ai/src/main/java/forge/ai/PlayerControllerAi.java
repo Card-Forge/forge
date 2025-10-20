@@ -1278,9 +1278,15 @@ public class PlayerControllerAi extends PlayerController {
         }
     }
 
-    private boolean prepareSingleSa(final Card host, final SpellAbility sa, boolean isMandatory) {
+    private boolean prepareSingleSa(final Card host, SpellAbility sa, boolean isMandatory) {
         if (sa.getApi() == ApiType.Charm) {
-            return CharmEffect.makeChoices(sa);
+            if (!CharmEffect.makeChoices(sa)) {
+                return false;
+            }
+            if (!sa.hasParam("Random")) {
+                return true;
+            }
+            sa = sa.getSubAbility();
         }
         if (sa.hasParam("TargetingPlayer")) {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(host, sa.getParam("TargetingPlayer"), sa).get(0);
