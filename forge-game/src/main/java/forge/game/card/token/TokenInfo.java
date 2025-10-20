@@ -63,7 +63,7 @@ public class TokenInfo {
         String[] types = null;
         String[] keywords = null;
         String imageName = null;
-        ColorSet color = ColorSet.C;
+        ColorSet color = null;
         for (String info : tokenInfo) {
             int index = info.indexOf(':');
             if (index == -1) {
