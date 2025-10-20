@@ -1538,7 +1538,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         protected boolean canEditMainCommander() {
             //Planar conquest sets the commander by other means.
-            return parentScreen.getEditorConfig().getGameType() != GameType.PlanarConquest;
+            return (parentScreen.getEditorConfig().getGameType() != GameType.PlanarConquest) &&
+                    (parentScreen.getEditorConfig().getGameType() != GameType.Adventure);
         }
 
         protected boolean needsCommander() {

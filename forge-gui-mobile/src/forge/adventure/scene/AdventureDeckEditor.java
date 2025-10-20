@@ -65,12 +65,22 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         protected DeckEditorPage[] getInitialPages() {
-            return new DeckEditorPage[]{
-                    new CollectionCatalogPage(),
-                    new AdventureDeckSectionPage(DeckSection.Main, ItemManagerConfig.ADVENTURE_EDITOR_POOL),
-                    new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.ADVENTURE_SIDEBOARD),
-                    new CollectionAutoSellPage()
-            };
+            if (AdventurePlayer.current().isCommanderMode())
+                return new DeckEditorPage[]{
+                        new CollectionCatalogPage(),
+                        new AdventureDeckSectionPage(DeckSection.Commander, ItemManagerConfig.ADVENTURE_EDITOR_POOL),
+                        new AdventureDeckSectionPage(DeckSection.Main, ItemManagerConfig.ADVENTURE_EDITOR_POOL),
+                        new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.ADVENTURE_SIDEBOARD),
+                        new CollectionAutoSellPage()
+                };
+            else {
+                return new DeckEditorPage[]{
+                        new CollectionCatalogPage(),
+                        new AdventureDeckSectionPage(DeckSection.Main, ItemManagerConfig.ADVENTURE_EDITOR_POOL),
+                        new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.ADVENTURE_SIDEBOARD),
+                        new CollectionAutoSellPage()
+                };
+            }
         }
 
         @Override

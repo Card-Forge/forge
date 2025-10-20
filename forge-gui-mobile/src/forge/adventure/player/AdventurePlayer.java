@@ -9,6 +9,7 @@ import com.github.tommyettinger.textra.TextraLabel;
 import com.google.common.collect.Lists;
 
 import forge.Forge;
+import forge.StaticData;
 import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.AdventureDeckEditor;
@@ -18,6 +19,7 @@ import forge.adventure.stage.MapStage;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
+import forge.card.CardDb;
 import forge.card.ColorSet;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -52,6 +54,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private final ArrayList<Deck> decks = new ArrayList<Deck>(MIN_DECK_COUNT);
     private int selectedDeckIndex = 0;
     private final DifficultyData difficultyData = new DifficultyData();
+
+    // Commander mode
+    private PaperCard commander;
     private boolean commanderMode;
 
     // Game data.
@@ -81,6 +86,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private boolean announceFantasy = false;
     private boolean usingCustomDeck = false;
     private boolean announceCustom = false;
+
 
     // Signals
     final SignalList onLifeTotalChangeList = new SignalList();
@@ -115,6 +121,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         fantasyMode = false;
         announceFantasy = false;
         usingCustomDeck = false;
+        commander = null;
+        commanderMode = false;
         blessing = null;
         gold = 0;
         maxLife = 20;
@@ -149,7 +157,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public final Set<PaperCard> favoriteCards = new HashSet<>();
 
     public void create(String n, Deck startingDeck, boolean male, int race, int avatar, boolean isFantasy,
-                       boolean isUsingCustomDeck, DifficultyData difficultyData, boolean isCommander) {
+                       boolean isUsingCustomDeck, DifficultyData difficultyData, PaperCard commander) {
         clear();
         announceFantasy = fantasyMode = isFantasy; //Set Chaos mode first.
         announceCustom = usingCustomDeck = isUsingCustomDeck;
@@ -176,7 +184,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         avatarIndex = avatar;
         isFemale = !male;
 
-        this.commanderMode = isCommander;
+        this.commanderMode = commander != null;
+        this.commander = commander;
 
         setColorIdentity(DeckProxy.getColorIdentity(deck));
 
@@ -399,7 +408,17 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         heroRace = data.readInt("heroRace");
         avatarIndex = data.readInt("avatarIndex");
         isFemale = data.readBool("isFemale");
-        commanderMode = data.readBool("isCommander");
+
+        String commander_name = data.readString("commander_name");
+        String commander_set = data.readString("commander_set");
+        int commander_art = data.readInt("commander_art");
+        if (commander_name != null) {
+            commander = StaticData.instance().getCommonCards().getCard(commander_name, commander_set, commander_art);
+            commanderMode = true;
+        } else {
+            commanderMode = false;
+        }
+
         if (data.containsKey("colorIdentity")) {
             String temp = data.readString("colorIdentity");
             if (temp != null)
@@ -514,6 +533,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             deck.getOrCreate(DeckSection.Contraptions).addAll(contraptionDeckCards.getFilteredPool(isValid));
             unsupportedCards.addAll(contraptionDeckCards.getFilteredPool(isUnsupported).toFlatList());
         }
+        if (data.containsKey("commanderCards")) {
+            CardPool commanderCards = CardPool.fromCardList(List.of((String[]) data.readObject("commanderCards")));
+            deck.getOrCreate(DeckSection.Commander).addAll(commanderCards.getFilteredPool(isValid));
+            unsupportedCards.addAll(commanderCards.getFilteredPool(isUnsupported).toFlatList());
+        }
         if (data.containsKey("characterFlagsKey") && data.containsKey("characterFlagsValue")) {
             String[] keys = (String[]) data.readObject("characterFlagsKey");
             Byte[] values = (Byte[]) data.readObject("characterFlagsValue");
@@ -582,6 +606,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                     decks.get(i).getOrCreate(DeckSection.Contraptions).addAll(contraptionCards.getFilteredPool(isValid));
                     unsupportedCards.addAll(contraptionCards.getFilteredPool(isUnsupported).toFlatList());
                 }
+                if (data.containsKey("commanderCards_" + i)) {
+                    CardPool commanderCards = CardPool.fromCardList(List.of((String[]) data.readObject("commanderCards_" + i)));
+                    decks.get(i).getOrCreate(DeckSection.Commander).addAll(commanderCards.getFilteredPool(isValid));
+                    unsupportedCards.addAll(commanderCards.getFilteredPool(isUnsupported).toFlatList());
+                }
             }
             // In case we allow removing decks from the deck selection GUI, populate up to the minimum
             for (int i = dynamicDeckCount++; i < MIN_DECK_COUNT; i++) {
@@ -603,6 +632,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                     CardPool sideBoardCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("sideBoardCards_" + i)));
                     decks.get(i).getOrCreate(DeckSection.Sideboard).addAll(sideBoardCards.getFilteredPool(isValid));
                     unsupportedCards.addAll(sideBoardCards.getFilteredPool(isUnsupported).toFlatList());
+                }
+                if (data.containsKey("commanderCards_" + i)) {
+                    CardPool commanderCards = CardPool.fromCardList(List.of((String[]) data.readObject("commanderCards_" + i)));
+                    decks.get(i).getOrCreate(DeckSection.Commander).addAll(commanderCards.getFilteredPool(isValid));
+                    unsupportedCards.addAll(commanderCards.getFilteredPool(isUnsupported).toFlatList());
                 }
             }
         }
@@ -722,8 +756,13 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.store("heroRace", heroRace);
         data.store("avatarIndex", avatarIndex);
         data.store("isFemale", isFemale);
-        data.store("isCommander", commanderMode);
         data.store("colorIdentity", colorIdentity.getColor());
+
+        if (commander != null) {
+            data.store("commander_name", commander.getCardName());
+            data.store("commander_set", commander.getEdition());
+            data.store("commander_art", commander.getArtIndex());
+        }
 
         data.store("fantasyMode", fantasyMode);
         data.store("announceFantasy", announceFantasy);
@@ -782,6 +821,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             data.storeObject("attractionDeckCards", deck.get(DeckSection.Attractions).toCardList("\n").split("\n"));
         if (deck.get(DeckSection.Contraptions) != null)
             data.storeObject("contraptionDeckCards", deck.get(DeckSection.Contraptions).toCardList("\n").split("\n"));
+        if (deck.get(DeckSection.Commander) != null)
+            data.storeObject("commanderCards", deck.get(DeckSection.Commander).toCardList("\n").split("\n"));
 
         // save decks dynamically
         data.store("deckCount", getDeckCount());
@@ -794,6 +835,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                 data.storeObject("attractionDeckCards_" + i, decks.get(i).get(DeckSection.Attractions).toCardList("\n").split("\n"));
             if (decks.get(i).get(DeckSection.Contraptions) != null)
                 data.storeObject("contraptionDeckCards_" + i, decks.get(i).get(DeckSection.Contraptions).toCardList("\n").split("\n"));
+            if (decks.get(i).get(DeckSection.Commander) != null)
+                data.storeObject("commanderCards_" + i, decks.get(i).get(DeckSection.Commander).toCardList("\n").split("\n"));
         }
         data.store("selectedDeckIndex", selectedDeckIndex);
         data.storeObject("cards", cards.toCardList("\n").split("\n"));

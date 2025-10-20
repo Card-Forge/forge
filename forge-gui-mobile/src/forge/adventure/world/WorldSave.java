@@ -11,13 +11,17 @@ import forge.adventure.stage.WorldStage;
 import forge.adventure.util.*;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
+import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.player.GamePlayerUtil;
 
 import java.io.*;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.zip.DeflaterOutputStream;
 import java.util.zip.InflaterInputStream;
 
@@ -134,11 +138,16 @@ public class WorldSave {
         boolean chaos = mode == AdventureModes.Chaos;
         boolean custom = mode == AdventureModes.Custom;
         boolean isCommander = mode == AdventureModes.Commander;
-        Deck starterDeck = Config.instance().starterDeck(startingColorIdentity, diff, mode, customDeckIndex, starterEdition);
-        currentSave.player.create(name, starterDeck, male, race, avatarIndex, chaos, custom, diff, isCommander);
+        Deck starterDeck;
         if (isCommander){
             currentSave.player.addReward(new Reward(commander, true));
+            starterDeck = Config.instance().starterDeck(startingColorIdentity, diff, mode, customDeckIndex, starterEdition);
+            starterDeck.putSection(DeckSection.Commander, new CardPool(List.of(Map.entry(commander, 1))));
+        } else {
+            starterDeck = Config.instance().starterDeck(startingColorIdentity, diff, mode, customDeckIndex, starterEdition);
         }
+        currentSave.player.create(name, starterDeck, male, race, avatarIndex, chaos, custom, diff, commander);
+
         currentSave.player.setWorldPosY((int) (currentSave.world.getData().playerStartPosY * currentSave.world.getData().height * currentSave.world.getTileSize()));
         currentSave.player.setWorldPosX((int) (currentSave.world.getData().playerStartPosX * currentSave.world.getData().width * currentSave.world.getTileSize()));
         currentSave.onLoadList.emit();
