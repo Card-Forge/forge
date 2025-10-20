@@ -921,7 +921,12 @@ public class AdventureDeckEditor extends FDeckEditor {
             return;
         }
 
-        String deckError = GameType.Adventure.getDeckFormat().getDeckConformanceProblem(getDeck());
+        String deckError;
+        if (AdventurePlayer.current().isCommanderMode())
+            deckError = GameType.Commander.getDeckFormat().getDeckConformanceProblem(getDeck());
+        else
+            deckError = GameType.Adventure.getDeckFormat().getDeckConformanceProblem(getDeck());
+        
         if (deckError != null) {
             //Allow the player to close the editor with an invalid deck, but warn them that cards may be swapped out.
             String warning = localizer.getMessage("lblAdventureDeckError", deckError);

@@ -141,10 +141,11 @@ public class WorldSave {
         Deck starterDeck;
         if (isCommander){
             currentSave.player.addReward(new Reward(commander, true));
-            starterDeck = Config.instance().starterDeck(startingColorIdentity, diff, mode, customDeckIndex, starterEdition);
+            starterDeck = Config.instance().starterDeck(startingColorIdentity, diff, mode, customDeckIndex,
+                    starterEdition, commander);
             starterDeck.putSection(DeckSection.Commander, new CardPool(List.of(Map.entry(commander, 1))));
         } else {
-            starterDeck = Config.instance().starterDeck(startingColorIdentity, diff, mode, customDeckIndex, starterEdition);
+            starterDeck = Config.instance().starterDeck(startingColorIdentity, diff, mode, customDeckIndex, starterEdition, null);
         }
         currentSave.player.create(name, starterDeck, male, race, avatarIndex, chaos, custom, diff, commander);
 
