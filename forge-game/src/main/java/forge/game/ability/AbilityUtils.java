@@ -42,6 +42,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class AbilityUtils {
     private final static ImmutableList<String> cmpList = ImmutableList.of("LT", "LE", "EQ", "GE", "GT", "NE");
@@ -2601,59 +2602,58 @@ public class AbilityUtils {
         }
 
         if (sq[0].contains("Party")) {
-            CardCollection adventurers = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield),
-                    "Creature.Cleric,Creature.Rogue,Creature.Warrior,Creature.Wizard", player, c, ctb);
-
-            Set<String> partyTypes = Sets.newHashSet("Cleric", "Rogue", "Warrior", "Wizard");
+            Set<String> partyTypes = Sets.newHashSet(CardType.Constant.PARTY_TYPES);
             int partySize = 0;
 
-            HashMap<String, Card> chosenParty = new HashMap<>();
-            List<Card> wildcard = Lists.newArrayList();
-            HashMap<Card, Set<String>> multityped = new HashMap<>();
+            Set<String> chosenParty = Sets.newHashSet();
+            int wildcard = 0;
+            List<Set<String>> multityped = Lists.newArrayList();
 
             // Figure out how to count each class separately.
-            for (Card card : adventurers) {
-                // cards with all creature types will just return full list
-                Set<String> creatureTypes = card.getType().getCreatureTypes();
-                creatureTypes.retainAll(partyTypes);
-
-                if (creatureTypes.size() == 4) {
-                    wildcard.add(card);
-
-                    if (wildcard.size() >= 4) {
-                        break;
-                    }
+            for (Card card : player.getCardsIn(ZoneType.Battlefield)) {
+                if (!card.isCreature()) {
                     continue;
-                } else if (creatureTypes.size() == 1) {
-                    String type = (String)(creatureTypes.toArray()[0]);
+                }
+                // cards with all creature types will just return full list
+                Set<String> creatureTypes = CardType.Constant.PARTY_TYPES.stream().filter(p -> card.getType().hasCreatureType(p)).collect(Collectors.toSet());
 
-                    if (!chosenParty.containsKey(type)) {
-                        chosenParty.put(type, card);
-                    }
-                } else {
-                    multityped.put(card, creatureTypes);
+                switch (creatureTypes.size()) {
+                case 0:
+                    continue;
+                case 4:
+                    wildcard++;
+                    break;
+                case 1:
+                    chosenParty.addAll(creatureTypes);
+                    break;
+                default:
+                    multityped.add(creatureTypes);
+                }
+
+                // found enough
+                if (chosenParty.size() + wildcard >= 4) {
+                    break;
                 }
             }
 
-            partySize = Math.min(chosenParty.size() + wildcard.size(), 4);
+            partySize = Math.min(chosenParty.size() + wildcard, 4);
 
             if (partySize < 4) {
-                partyTypes.removeAll(chosenParty.keySet());
+                partyTypes.removeAll(chosenParty);
 
                 // Here I'm left with just the party types that I haven't selected.
-                for (Card multi : multityped.keySet()) {
-                    Set<String> types = multityped.get(multi);
+                for (Set<String> types : multityped) {
                     types.retainAll(partyTypes);
 
                     for (String type : types) {
-                        chosenParty.put(type, multi);
+                        chosenParty.add(type);
                         partyTypes.remove(type);
                         break;
                     }
                 }
             }
 
-            partySize = Math.min(chosenParty.size() + wildcard.size(), 4);
+            partySize = Math.min(chosenParty.size() + wildcard, 4);
 
             return doXMath(partySize, expr, c, ctb);
         }
