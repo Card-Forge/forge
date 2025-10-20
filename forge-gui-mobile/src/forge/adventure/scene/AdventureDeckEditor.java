@@ -85,7 +85,22 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         public ItemPool<PaperCard> getCardPool(boolean wantUnique) {
-            return Current.player().getCards();
+
+            ItemPool<PaperCard> pool = new ItemPool<>(PaperCard.class);
+            pool.addAll(Current.player().getCards());
+
+            if (AdventurePlayer.current().isCommanderMode()) {
+                byte cmdMask = AdventurePlayer.current()
+                        .getCommander()
+                        .getRules()
+                        .getColorIdentity()
+                        .getColor();
+
+                pool.removeIf((pc) ->
+                        // remove if card has any colors outside the commander CI
+                        !pc.getRules().getColorIdentity().getMissingColors(cmdMask).isColorless()
+                );            }
+            return pool;
         }
 
         @Override

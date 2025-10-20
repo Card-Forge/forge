@@ -277,6 +277,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return cards;
     }
 
+    public PaperCard getCommander(){
+        return commander;
+    }
+
     public String getName() {
         return name;
     }
@@ -322,6 +326,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public ColorSet getColorIdentity() {
+        if (commanderMode)
+            return colorIdentity; //TODO: return the color identiy of the commander PaperCard
         return colorIdentity;
     }
 
