@@ -281,17 +281,14 @@ public class Config {
         return pc.getRules().getOracleText().toLowerCase(Locale.ROOT).contains(s);
     }
 
-    // Ramp via “tap: add …” (covers most rocks/dorks/lands with mana ability)
     static boolean isRampTapAdd(PaperCard pc) {
-        if (isLand(pc)) return false; // lands go to LANDS bucket
+        if (isLand(pc)) return false;
         String t = pc.getRules().getOracleText().toLowerCase(Locale.ROOT);
-        return t.contains("{t}: add") || t.matches("(?s).*\\{t}.*add\\s*\\{.*"); // loose but effective
+        return t.contains("{t}: add") || t.matches("(?s).*\\{t}.*add\\s*\\{.*");
     }
 
-    // Draw effects
     static boolean isDraw(PaperCard pc) { return textContains(pc,"draw"); }
 
-    // Removal “destroy” or “exile”
     static boolean isRemoval(PaperCard pc) {
         String t = pc.getRules().getOracleText().toLowerCase(Locale.ROOT);
         return t.contains("destroy target") || t.contains("exile target") || t.contains("exile all") || t.contains("destroy all");
@@ -354,7 +351,6 @@ public class Config {
         byte cmdMask = commander.getRules().getColorIdentity().getColor();
         int colors = Integer.bitCount(cmdMask);
 
-        // ---- LANDS: 40 total ----
         int basicsPct = switch (colors) { case 1->100; case 2->80; case 3->60; case 4->40; default->20; };
         int basics = Math.round(40 * basicsPct / 100f);
         int nonBasics = 40 - basics;
@@ -364,7 +360,7 @@ public class Config {
             PaperCard print = StaticData.instance().getCommonCards().getCard(e.getKey());
             d.getMain().add(print, e.getValue());
         }
-        List<PaperCard> fixers = poolWhere(all, pc -> isFixingMultiColorLand(pc, cmdMask));
+        List<PaperCard> fixers = poolWhere(all, pc -> inCI(pc, commander) && isFixingMultiColorLand(pc, cmdMask));
         Set<String> used = new HashSet<>();
         addSingletons(d, fixers, nonBasics, used);
         List<PaperCard> ramp = poolWhere(all, pc -> inCI(pc, commander) && !isLand(pc) && isRampTapAdd(pc) && cmcBetween(pc,2,4));
