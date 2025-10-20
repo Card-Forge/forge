@@ -1308,7 +1308,7 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.Colors, c.getColor());
         }
         void updateColors(CardState c) {
-            set(TrackableProperty.Colors, ColorSet.fromMask(c.getColor()));
+            set(TrackableProperty.Colors, c.getColor());
         }
         void setOriginalColors(Card c) {
             set(TrackableProperty.OriginalColors, c.getColor());
