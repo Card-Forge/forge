@@ -484,7 +484,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
                 // Want a card that has just one "off" color.
                 final ColorSet off = colors.getOffColors(card.getRules().getColor());
                 if (off.isMonoColor()) {
-                    colors = ColorSet.fromMask(colors.getColor() | off.getColor());
+                    colors = ColorSet.combine(colors, off);
                     break;
                 }
             }

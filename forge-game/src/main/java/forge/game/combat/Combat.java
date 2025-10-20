@@ -744,7 +744,7 @@ public class Combat {
                     assigningPlayer = attackingPlayer;
 
                 assignedDamage = true;
-                Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(blocker, attackers, null, damage, defender, divideCombatDamageAsChoose || assigningPlayer != blocker.getController());
+                Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(blocker, attackers, null, damage, defender, divideCombatDamageAsChoose || assigningPlayer != blocker.getController() || !this.legacyOrderCombatants);
                 for (Entry<Card, Integer> dt : map.entrySet()) {
                     // Butcher Orgg
                     if (dt.getKey() == null && dt.getValue() > 0) {

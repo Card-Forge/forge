@@ -4409,9 +4409,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final void setColor(final String... color) {
-        setColor(ColorSet.fromNames(color).getColor());
+        setColor(ColorSet.fromNames(color));
     }
-    public final void setColor(final byte color) {
+    public final void setColor(final ColorSet color) {
         currentState.setColor(color);
     }
 
@@ -4419,7 +4419,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return getColor(currentState);
     }
     public final ColorSet getColor(CardState state) {
-        byte colors = state.getColor();
+        byte colors = state.getColor().getColor();
         for (final CardColor cc : Iterables.concat(changedCardColorsByText.values(), changedCardColorsCharacterDefining.values(), changedCardColors.values())) {
             if (cc.additional()) {
                 colors |= cc.color().getColor();

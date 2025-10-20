@@ -377,7 +377,7 @@ public class AiController {
 
         if (card.isSaga()) {
             for (final Trigger tr : card.getTriggers()) {
-                if (tr.getMode() != TriggerType.CounterAdded || !tr.isChapter()) {
+                if (!tr.isChapter()) {
                     continue;
                 }
 
@@ -393,6 +393,7 @@ public class AiController {
                     return false;
                 }
 
+                // usually later chapters make use of an earlier one
                 break;
             }
         }

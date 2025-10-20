@@ -982,6 +982,9 @@ public class AbilityUtils {
             for (final Card c : getDefinedCards(card, "Targeted", sa)) {
                 players.add(c.getOwner());
             }
+            for (final SpellAbility s : getDefinedSpellAbilities(card, "Targeted", sa)) {
+                players.add(s.getHostCard().getOwner());
+            }
         } else if (defined.equals("TargetedAndYou") && sa instanceof SpellAbility) {
             final SpellAbility saTargeting = ((SpellAbility)sa).getSATargetingPlayer();
             if (saTargeting != null) {
@@ -1118,10 +1121,8 @@ public class AbilityUtils {
                 final String replacingType = defined.substring(8);
                 o = root.getReplacingObject(AbilityKey.fromString(replacingType));
             }
-            if (o != null) {
-                if (o instanceof Player) {
-                    players.add((Player) o);
-                }
+            if (o instanceof Player) {
+                players.add((Player) o);
             }
         } else if (defined.startsWith("Non")) {
             players.addAll(game.getPlayersInTurnOrder());

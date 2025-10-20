@@ -634,6 +634,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // not urgent, get the largest creature possible
+        // TODO checkETBEffects
         return ComputerUtilCard.getBestCreatureAI(list);
     }
 
@@ -1546,10 +1547,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (fetchList.isEmpty()) {
             return null;
         }
-        String type = sa.getParam("ChangeType");
-        if (type == null) {
-            type = "Card";
-        }
+        String type = sa.getParamOrDefault("ChangeType", "");
 
         Card c = null;
         final Player activator = sa.getActivatingPlayer();
