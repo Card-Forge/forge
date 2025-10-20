@@ -110,7 +110,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private void clearDecks() {
         decks.clear();
         for (int i = 0; i < MIN_DECK_COUNT; i++)
-            decks.add(new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
+            decks.add(newDeck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
         deck = decks.get(0);
         selectedDeckIndex = 0;
     }
@@ -159,9 +159,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public void create(String n, Deck startingDeck, boolean male, int race, int avatar, boolean isFantasy,
                        boolean isUsingCustomDeck, DifficultyData difficultyData, PaperCard commander) {
         clear();
+        this.commanderMode = commander != null;
+        this.commander = commander;
         announceFantasy = fantasyMode = isFantasy; //Set Chaos mode first.
         announceCustom = usingCustomDeck = isUsingCustomDeck;
 
+        clearDecks(); // Reset the empty decks to now already have the commander in the command zone.
         deck = startingDeck;
         decks.set(0, deck);
 
@@ -183,9 +186,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         heroRace = race;
         avatarIndex = avatar;
         isFemale = !male;
-
-        this.commanderMode = commander != null;
-        this.commander = commander;
 
         setColorIdentity(DeckProxy.getColorIdentity(deck));
 
@@ -351,6 +351,14 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         this.colorIdentity = set;
     }
 
+    private Deck newDeck(String deckname){
+        if (commanderMode) {
+            Deck n_deck = new Deck(deckname);
+            n_deck.putSection(DeckSection.Commander, new CardPool(List.of(Map.entry(commander, 1))));
+            return n_deck;
+        }
+        return new Deck(deckname);
+    }
 
     @Override
     public void load(SaveFileData data) {
@@ -514,7 +522,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             }
         }
 
-        deck = new Deck(data.readString("deckName"));
+        deck = newDeck(data.readString("deckName"));
         CardPool deckCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deckCards")));
         deck.getMain().addAll(deckCards.getFilteredPool(isValid));
         unsupportedCards.addAll(deckCards.getFilteredPool(isUnsupported).toFlatList());
@@ -583,10 +591,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             for (int i = 0; i < dynamicDeckCount; i++){
                 // The first x elements are pre-created
                 if (i < MIN_DECK_COUNT) {
-                    decks.set(i, new Deck(data.readString("deck_name_" + i)));
+                    decks.set(i, newDeck(data.readString("deck_name_" + i)));
                 }
                 else {
-                    decks.add(new Deck(data.readString("deck_name_" + i)));
+                    decks.add(newDeck(data.readString("deck_name_" + i)));
                 }
                 CardPool mainCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deck_" + i)));
                 decks.get(i).getMain().addAll(mainCards.getFilteredPool(isValid));
@@ -614,17 +622,17 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             }
             // In case we allow removing decks from the deck selection GUI, populate up to the minimum
             for (int i = dynamicDeckCount++; i < MIN_DECK_COUNT; i++) {
-                decks.set(i, new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
+                decks.set(i, newDeck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
             }
         // Legacy load
         } else {
             for (int i = 0; i < MIN_DECK_COUNT; i++) {
                 if (!data.containsKey("deck_name_" + i)) {
                     if (i == 0) decks.set(i, deck);
-                    else decks.set(i, new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
+                    else decks.set(i, newDeck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
                     continue;
                 }
-                decks.set(i, new Deck(data.readString("deck_name_" + i)));
+                decks.set(i, newDeck(data.readString("deck_name_" + i)));
                 CardPool mainCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deck_" + i)));
                 decks.get(i).getMain().addAll(mainCards.getFilteredPool(isValid));
                 unsupportedCards.addAll(mainCards.getFilteredPool(isUnsupported).toFlatList());
@@ -1466,7 +1474,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
      * Clears a deck by replacing the current selected deck with a new deck
      */
     public void clearDeck() {
-        deck = decks.set(selectedDeckIndex, new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
+        deck = decks.set(selectedDeckIndex, newDeck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
     }
 
     /**
@@ -1479,7 +1487,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void addDeck(){
-        decks.add(new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
+        decks.add(newDeck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
     }
 
     /**
