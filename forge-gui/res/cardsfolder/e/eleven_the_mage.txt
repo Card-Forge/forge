@@ -1,5 +1,5 @@
 Name:Eleven, the Mage
-AltName:Cecily, Haunted Mage
+Variant:UniversesWithin:FlavorName:Cecily, Haunted Mage
 ManaCost:1 U B R
 Types:Legendary Creature Human Wizard
 PT:3/5

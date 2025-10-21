@@ -4185,7 +4185,7 @@ SHM-258 C Pili-Pala @Ron Spencer
 SHM-260 R Reaper King @Jim Murray
 SHM-263 C Scuttlemutt @Jeremy Jarvis
 SHM-267 U Umbral Mantle @Richard Sardinha
-SLX-4 R Elmar, Ulvenwald Informant @Eliz Roxs
+SLX-4 R Elmar, Ulvenwald Informant @Eliz Roxs ${"variant": "UniversesWithin"}
 SNC-14 R Giada, Font of Hope @Eric Deschamps
 SNC-15 M Halo Fountain @Anastasia Ovchinnikova
 SNC-18 C Inspiring Overseer @Irina Nordsol

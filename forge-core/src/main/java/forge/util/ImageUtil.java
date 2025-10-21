@@ -185,6 +185,8 @@ public class ImageUtil {
             }
         } else if (CardSplitType.Split == cp.getRules().getSplitType()) {
             return card.getMainPart().getName() + card.getOtherPart().getName();
+        } else if (cp.hasFlavorName()) {
+            return cp.getDisplayName();
         } else if (!IPaperCard.NO_FUNCTIONAL_VARIANT.equals(cp.getFunctionalVariant())) {
             return cp.getName() + " " + cp.getFunctionalVariant();
         }

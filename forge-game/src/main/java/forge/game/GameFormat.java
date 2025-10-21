@@ -271,7 +271,7 @@ public class GameFormat implements Comparable<GameFormat> {
             if (erroneousCI.size() > 0) {
                 final StringBuilder sb = new StringBuilder("contains the following illegal cards:\n");
                 for (final PaperCard cp : erroneousCI) {
-                    sb.append("\n").append(cp.getName());
+                    sb.append("\n").append(cp.getDisplayName());
                 }
                 return sb.toString();
             }
@@ -290,7 +290,7 @@ public class GameFormat implements Comparable<GameFormat> {
             if (erroneousRestricted.size() > 0) {
                 final StringBuilder sb = new StringBuilder("contains more than one copy of the following restricted cards:\n");
                 for (final PaperCard cp : erroneousRestricted) {
-                    sb.append("\n").append(cp.getName());
+                    sb.append("\n").append(cp.getDisplayName());
                 }
                 return sb.toString();
             }

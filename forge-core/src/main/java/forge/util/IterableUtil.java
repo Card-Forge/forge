@@ -1,6 +1,7 @@
 package forge.util;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -19,6 +20,8 @@ public class IterableUtil {
      * which requires the subject to match each of the component predicates.
      */
     public static <T> Predicate<T> and(Iterable<? extends Predicate<? super T>> components) {
+        if(components instanceof List && ((List<?>) components).size() == 1)
+            return ((List<? extends Predicate<? super T>>) components).get(0)::test;
         return x -> all(components, i -> i.test(x));
     }
 
@@ -27,6 +30,8 @@ public class IterableUtil {
      * which requires the subject to match at least one of the component predicates.
      */
     public static <T> Predicate<T> or(Iterable<? extends Predicate<? super T>> components) {
+        if(components instanceof List && ((List<?>) components).size() == 1)
+            return ((List<? extends Predicate<? super T>>) components).get(0)::test;
         return x -> any(components, i -> i.test(x));
     }
 

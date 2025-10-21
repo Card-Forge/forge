@@ -524,7 +524,7 @@ public class VLobby implements ILobbyView {
         PaperCard vanguardAvatar = null;
         final Deck deck = decks[playerIndex];
         if (selected instanceof PaperCard) {
-            pp.setVanguardButtonText(((PaperCard) selected).getName());
+            pp.setVanguardButtonText(((PaperCard) selected).getDisplayName());
             cdp.setCard(CardView.getCardForUi((PaperCard) selected));
             cdp.setVisible(true);
             refreshPanels(false, true);

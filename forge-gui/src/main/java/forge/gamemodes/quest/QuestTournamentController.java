@@ -143,7 +143,7 @@ public class QuestTournamentController {
                 final PaperCard card = GuiBase.getInterface().chooseCard(localizer.getMessage("lblSelectACard"), localizer.getMessage("lblSelectKeepCard"), prizes.selectRareCards);
                 prizes.addSelectedCard(card);
 
-                SOptionPane.showMessageDialog("'" + card.getName() + "' " + localizer.getMessage("lblAddToCollection"), localizer.getMessage("lblCardAdded"), FSkinProp.ICO_QUEST_STAKES);
+                SOptionPane.showMessageDialog("'" + card.getDisplayName() + "' " + localizer.getMessage("lblAddToCollection"), localizer.getMessage("lblCardAdded"), FSkinProp.ICO_QUEST_STAKES);
             }
 
             if (draft.getPlayerPlacement() == 1) {

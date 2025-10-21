@@ -128,12 +128,12 @@ public class VField extends FContainer {
         if (!this.stackNonTokenCreatures && cardState.isCreature() && !card.isToken()) {
             return false;
         }
-        final String cardName = cardState.getName();
+        final String cardName = cardState.getOracleName();
         for (CardView c : cardsOfType) {
             CardStateView cState = c.getCurrentState();
             if (cState.isCreature()) {
                 if (!c.hasCardAttachments() &&
-                        cardName.equals(cState.getName()) &&
+                        cardName.equals(cState.getOracleName()) &&
                         card.hasSameCounters(c) &&
                         card.hasSamePT(c) && //don't stack token with different PT
                         cardState.getKeywordKey().equals(cState.getKeywordKey()) &&
@@ -145,7 +145,7 @@ public class VField extends FContainer {
                 }
             } else {
                 if (!c.hasCardAttachments() &&
-                        cardName.equals(cState.getName()) &&
+                        cardName.equals(cState.getOracleName()) &&
                         card.hasSameCounters(c) &&
                         cardState.getKeywordKey().equals(cState.getKeywordKey()) &&
                         cardState.getColors() == cState.getColors() &&
