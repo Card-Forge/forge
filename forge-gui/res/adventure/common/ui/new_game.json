@@ -114,7 +114,7 @@
     {
       "type": "Label",
       "name" : "chooseCommanderL",
-      "text": "[BLACK]tr(lblChooseCommander):",
+      "text": "[BLACK]tr(lblCommander):",
       "width": 128,
       "height": 16,
       "x": 75,

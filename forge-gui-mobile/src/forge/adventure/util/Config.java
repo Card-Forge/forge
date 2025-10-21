@@ -32,6 +32,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.regex.Pattern;
 
 /**
  * Main resource class to access files from the selected adventure
@@ -275,7 +276,8 @@ public class Config {
     static boolean typeIs(PaperCard pc, CardType.CoreType t) { return pc.getRules().getType().hasType(t); }
     static boolean isLand(PaperCard pc) { return typeIs(pc, CardType.CoreType.Land); }
     static boolean isCreature(PaperCard pc) { return typeIs(pc, CardType.CoreType.Creature); }
-    static boolean isNonlandPermanent(PaperCard pc) { return !isLand(pc) && pc.getRules().getType().isPermanent(); }
+    static boolean isNotLegendary(PaperCard pc) {return !pc.getRules().getType().isLegendary(); }
+    static boolean isCommonOrUncommon(PaperCard pc) { return pc.getRarity().equals(CardRarity.Common) || pc.getRarity().equals(CardRarity.Uncommon); }
 
     static boolean textContains(PaperCard pc, String s) {
         return pc.getRules().getOracleText().toLowerCase(Locale.ROOT).contains(s);
@@ -287,11 +289,24 @@ public class Config {
         return t.contains("{t}: add") || t.matches("(?s).*\\{t}.*add\\s*\\{.*");
     }
 
-    static boolean isDraw(PaperCard pc) { return textContains(pc,"draw"); }
+    private static final Pattern DRAW_POS =
+            Pattern.compile("(?is)\\bdraws?\\b(?:(?!step|n\\b).){0,60}\\bcards?\\b");
+
+    private static final Pattern DRAW_NEG =
+            Pattern.compile("(?i)\\bwhenever you draw a card\\b|\\bat the beginning of .* draw step\\b|\\bskip your draw step\\b");
+
+    static boolean isDraw(PaperCard pc) {
+        String t = pc.getRules().getOracleText().toLowerCase(Locale.ROOT);
+        if (!t.contains("draw")) return false;
+        if (DRAW_NEG.matcher(t).find()) return false;          // triggers/step/skip
+        return DRAW_POS.matcher(t).find();                     // “draw … card(s)”
+    }
 
     static boolean isRemoval(PaperCard pc) {
         String t = pc.getRules().getOracleText().toLowerCase(Locale.ROOT);
-        return t.contains("destroy target") || t.contains("exile target") || t.contains("exile all") || t.contains("destroy all");
+        return t.contains("destroy target") || t.contains("exile target") || t.contains("exile all") ||
+                t.contains("destroy all") || t.matches("(?s).*fights.*target creature.*") ||
+                        t.matches("(?s).*(deals damage equal to its power).*target creature.*");
     }
 
     static boolean isFixingMultiColorLand(PaperCard pc, byte cmdMask) {
@@ -322,6 +337,7 @@ public class Config {
         }
 
         int overlap = provided & cmdMask;
+        if (Integer.bitCount(overlap) == 1 && pc.getName().contains("Thriving")) return true;
         if (Integer.bitCount(overlap) < 2) return false;
 
         boolean tapped =
@@ -335,7 +351,9 @@ public class Config {
     }
 
     static List<PaperCard> poolWhere(CardDb pool, Predicate<PaperCard> p) {
-        return pool.getAllCards(p);
+        List<PaperCard> cards = pool.getAllCards(p);
+        System.out.println("Num cards found: " + cards.size());
+        return cards;
     }
     static void addSingletons(Deck d, Collection<PaperCard> picks, int n, Set<String> used) {
         Collections.shuffle((List<?>) picks, new Random());
@@ -360,19 +378,17 @@ public class Config {
             PaperCard print = StaticData.instance().getCommonCards().getCard(e.getKey());
             d.getMain().add(print, e.getValue());
         }
-        List<PaperCard> fixers = poolWhere(all, pc -> inCI(pc, commander) && isFixingMultiColorLand(pc, cmdMask));
+        List<PaperCard> fixers = poolWhere(all, pc -> inCI(pc, commander) && isNotLegendary(pc) && isFixingMultiColorLand(pc, cmdMask) & isCommonOrUncommon(pc));
         Set<String> used = new HashSet<>();
         addSingletons(d, fixers, nonBasics, used);
-        List<PaperCard> ramp = poolWhere(all, pc -> inCI(pc, commander) && !isLand(pc) && isRampTapAdd(pc) && cmcBetween(pc,2,4));
+        List<PaperCard> ramp = poolWhere(all, pc -> inCI(pc, commander) && isNotLegendary(pc) && !isLand(pc) && isRampTapAdd(pc) && cmcBetween(pc,1,3) & isCommonOrUncommon(pc));
         addSingletons(d, ramp, 10, used);
-        List<PaperCard> draw = poolWhere(all, pc -> inCI(pc, commander) && isDraw(pc) && cmcBetween(pc,1,4));
+        List<PaperCard> draw = poolWhere(all, pc -> inCI(pc, commander) && isNotLegendary(pc) && isDraw(pc) && cmcBetween(pc,1,4) & isCommonOrUncommon(pc));
         addSingletons(d, draw, 19, used);
-        List<PaperCard> kill = poolWhere(all, pc -> inCI(pc, commander) && isRemoval(pc) && cmcBetween(pc,1,6));
+        List<PaperCard> kill = poolWhere(all, pc -> inCI(pc, commander) && isNotLegendary(pc) && isRemoval(pc) && cmcBetween(pc,1,5) & isCommonOrUncommon(pc));
         addSingletons(d, kill, 10, used);
-        List<PaperCard> dudes = poolWhere(all, pc -> inCI(pc, commander) && isCreature(pc) && cmcBetween(pc,1,6));
-        addSingletons(d, dudes, 15, used);
-        List<PaperCard> perms = poolWhere(all, pc -> inCI(pc, commander) && isNonlandPermanent(pc) && cmcBetween(pc,1,6));
-        addSingletons(d, perms, 5, used);
+        List<PaperCard> dudes = poolWhere(all, pc -> inCI(pc, commander) && isNotLegendary(pc) && isCreature(pc) && cmcBetween(pc,1,5) & isCommonOrUncommon(pc));
+        addSingletons(d, dudes, 20, used);
 
         // Fill to 99 if short (not sure if this can happen?)
         int need = 99 - d.getMain().countAll();
