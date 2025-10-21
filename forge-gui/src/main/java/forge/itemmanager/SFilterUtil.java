@@ -155,33 +155,28 @@ public class SFilterUtil {
             }
         }
 
-        Predicate<CardRules> textFilter;
-        if (advancedCardRulesPredicates.isEmpty()) {
-            if (BooleanExpression.isExpression(segment)) {
-                BooleanExpression expression = new BooleanExpression(segment, inName, inType, inText, inCost);
-                
-                try {
-                    Predicate<CardRules> filter = expression.evaluate();
-                    if (filter != null) {
-                        textFilter = filter;
-                    } else {
-                        textFilter = buildRegularTextPredicate(regularTokens, inName, inType, inText, inCost);
-                    }
+        if (advancedCardRulesPredicates.isEmpty() && BooleanExpression.isExpression(segment)) {
+            BooleanExpression expression = new BooleanExpression(segment, inName, inType, inText, inCost);
+            try {
+                Predicate<CardRules> filter = expression.evaluate();
+                if (filter != null) {
+                    if(advancedPaperCardPredicates.isEmpty())
+                        return PaperCardPredicates.fromRules(filter);
+                    return IterableUtil.and(advancedPaperCardPredicates).and(PaperCardPredicates.fromRules(filter));
                 }
-                catch (Exception e) {
-                    e.printStackTrace();
-                    textFilter = buildRegularTextPredicate(regularTokens, inName, inType, inText, inCost);
-                }
-            } else {
-                textFilter = buildRegularTextPredicate(regularTokens, inName, inType, inText, inCost);
             }
-        } else {
-            Predicate<CardRules> advancedCardRulesPredicate = IterableUtil.and(advancedCardRulesPredicates);
-            Predicate<CardRules> regularPredicate = buildRegularTextPredicate(regularTokens, inName, inType, inText, inCost);
-            textFilter = advancedCardRulesPredicate.and(regularPredicate);
+            catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
-        return PaperCardPredicates.fromRules(textFilter).and(IterableUtil.and(advancedPaperCardPredicates));
+        Predicate<PaperCard> cardFilter = buildRegularTextPredicate(regularTokens, inName, inType, inText, inCost);
+        if(!advancedPaperCardPredicates.isEmpty())
+            cardFilter = cardFilter.and(IterableUtil.and(advancedPaperCardPredicates));
+        if(!advancedCardRulesPredicates.isEmpty())
+            cardFilter = cardFilter.and(PaperCardPredicates.fromRules(IterableUtil.and(advancedCardRulesPredicates)));
+
+        return cardFilter;
     }
 
     private static List<String> getSplitText(String text) {
@@ -224,21 +219,28 @@ public class SFilterUtil {
         return splitText;
     }
 
-    private static Predicate<CardRules> buildRegularTextPredicate(List<String> tokens, boolean inName, boolean inType, boolean inText, boolean inCost) {
+    private static Predicate<PaperCard> buildRegularTextPredicate(List<String> tokens, boolean inName, boolean inType, boolean inText, boolean inCost) {
         if (tokens.isEmpty()) {
             return x -> true;
         }
 
-        List<Predicate<CardRules>> terms = new ArrayList<>();
+        List<Predicate<PaperCard>> terms = new ArrayList<>();
         for (String s : tokens) {
             List<Predicate<CardRules>> subands = new ArrayList<>();
 
-            if (inName) { subands.add(CardRulesPredicates.name(StringOp.CONTAINS_IC, s));       }
             if (inType) { subands.add(CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, s)); }
             if (inText) { subands.add(CardRulesPredicates.rules(StringOp.CONTAINS_IC, s));      }
             if (inCost) { subands.add(CardRulesPredicates.cost(StringOp.CONTAINS_IC, s));       }
 
-            terms.add(IterableUtil.or(subands));
+            Predicate<PaperCard> term;
+            if (inName && subands.isEmpty())
+                term = PaperCardPredicates.searchableName(StringOp.CONTAINS_IC, s);
+            else if (inName)
+                term = PaperCardPredicates.searchableName(StringOp.CONTAINS_IC, s).or(PaperCardPredicates.fromRules(IterableUtil.or(subands)));
+            else
+                term = PaperCardPredicates.fromRules(IterableUtil.or(subands));
+
+            terms.add(term);
         }
         return IterableUtil.and(terms);
     }

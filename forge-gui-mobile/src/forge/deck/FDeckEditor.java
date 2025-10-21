@@ -1867,7 +1867,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                 sortedOptions.add(option);
                             }
                         }
-                        GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblSelectPreferredArt") + " " + card.getName(), sortedOptions, result -> {
+                        GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblSelectPreferredArt") + " " + card.getDisplayName(), sortedOptions, result -> {
                             if (result != null) {
                                 if (result != card) {
                                     cardManager.replaceAll(card, result);
@@ -2105,7 +2105,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             }
             final Localizer localizer = Forge.getLocalizer();
             String lblReplaceCard = localizer.getMessage("lblReplace");
-            String prompt = localizer.getMessage("lblSelectReplacementCard") + " " + card.getName();
+            String prompt = localizer.getMessage("lblSelectReplacementCard") + " " + card.getDisplayName();
             String promptQuantity = String.format("%s - %s %s", card, lblReplaceCard, localizer.getMessage("lblHowMany"));
             //First have the player choose which card to swap in.
             GuiChoose.oneOrNone(prompt, sortedOptions, replacement -> {

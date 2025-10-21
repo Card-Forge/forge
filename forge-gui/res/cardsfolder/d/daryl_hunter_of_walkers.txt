@@ -1,5 +1,5 @@
 Name:Daryl, Hunter of Walkers
-AltName:Hansk, Slayer Zealot
+Variant:UniversesWithin:FlavorName:Hansk, Slayer Zealot
 ManaCost:2 R G
 Types:Legendary Creature Human Archer
 PT:4/4

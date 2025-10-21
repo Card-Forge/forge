@@ -1433,7 +1433,11 @@ public class ComputerUtilCombat {
                 int damage = AbilityUtils.calculateAmount(source, sa.getParam("NumDmg"), sa);
 
                 toughness -= predictDamageTo(attacker, damage, source, false);
-                continue;
+            } else if (sa.getApi() == ApiType.EachDamage && "TriggeredAttackerLKICopy".equals(sa.getParam("Defined"))) {
+                List<Card> valid = CardLists.getValidCards(source.getController().getCreaturesInPlay(), sa.getParam("ValidCards"), source.getController(), source, sa);
+                // TODO: this assumes that 1 damage is dealt per creature. Improve this to check the parameter/X to determine
+                // how much damage is dealt by each of the creatures in the valid list.
+                toughness -= valid.size();
             } else if (ApiType.Pump.equals(sa.getApi())) {
                 if (!sa.hasParam("NumDef")) {
                     continue;
@@ -2047,7 +2051,7 @@ public class ComputerUtilCombat {
         }
 
         // Order the combatants in preferred order in case legacy ordering is disabled
-        if (!self.getGame().getRules().hasOrderCombatants()) {
+        if (isAttacking && overrideOrder) {
             if (combatant.isAttacking()) { 
                 opposedCombatants = AiBlockController.orderBlockers(combatant, new CardCollection(opposedCombatants));
             } else {

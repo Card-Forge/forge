@@ -185,7 +185,12 @@ public class AbilityUtils {
                 if (crd instanceof Card) {
                     c = game.getCardState((Card) crd);
                 } else if (crd instanceof Iterable) {
-                    cards.addAll(IterableUtil.filter((Iterable<?>) crd, Card.class));
+                    for (Card gameCard : IterableUtil.filter((Iterable<?>) crd, Card.class)) {
+                        if (gameCard.isLKI()) {
+                            gameCard = game.getCardState(gameCard);
+                        }
+                        cards.add(gameCard);
+                    }
                 }
             }
         } else if (defined.startsWith("Replaced") && sa instanceof SpellAbility) {
@@ -982,6 +987,9 @@ public class AbilityUtils {
             for (final Card c : getDefinedCards(card, "Targeted", sa)) {
                 players.add(c.getOwner());
             }
+            for (final SpellAbility s : getDefinedSpellAbilities(card, "Targeted", sa)) {
+                players.add(s.getHostCard().getOwner());
+            }
         } else if (defined.equals("TargetedAndYou") && sa instanceof SpellAbility) {
             final SpellAbility saTargeting = ((SpellAbility)sa).getSATargetingPlayer();
             if (saTargeting != null) {
@@ -1118,10 +1126,8 @@ public class AbilityUtils {
                 final String replacingType = defined.substring(8);
                 o = root.getReplacingObject(AbilityKey.fromString(replacingType));
             }
-            if (o != null) {
-                if (o instanceof Player) {
-                    players.add((Player) o);
-                }
+            if (o instanceof Player) {
+                players.add((Player) o);
             }
         } else if (defined.startsWith("Non")) {
             players.addAll(game.getPlayersInTurnOrder());

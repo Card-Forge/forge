@@ -1011,7 +1011,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         Reward.Type rewardType = reward.getType();
         switch (rewardType) {
             case Card:
-                display = reward.getCard() != null ? CardTranslation.getTranslatedName(reward.getCard().getName()) : "";
+                display = reward.getCard() != null ? CardTranslation.getTranslatedName(reward.getCard().getDisplayName()) : "";
                 //alignment = Align.topLeft;
                 labelStyle = "dialog";
                 break;

@@ -2496,7 +2496,7 @@ public class CardFactoryUtil {
             inst.addReplacement(re);
         } else if (keyword.equals("Read ahead")) {
             String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Secondary$ True | ReplacementResult$ Updated | Description$ Choose a chapter and start with that many lore counters.";
-            String effStr = "DB$ PutCounter | Defined$ Self | CounterType$ LORE | ETB$ True | UpTo$ True | UpToMin$ 1 | ReadAhead$ True | CounterNum$ FinalChapterNr";
+            String effStr = "DB$ PutCounter | Defined$ Self | CounterType$ LORE | ETB$ True | UpTo$ True | UpToMin$ 1 | CounterNum$ FinalChapterNr";
 
             SpellAbility saCounter = AbilityFactory.getAbility(effStr, card);
             saCounter.setSVar("FinalChapterNr", "Count$FinalChapterNr");
@@ -3645,6 +3645,7 @@ public class CardFactoryUtil {
             newSA.putParam("Secondary", "True");
             newSA.setAlternativeCost(AlternativeCost.Sneak);
             newSA.setIntrinsic(intrinsic);
+            newSA.getRestrictions().setInstantSpeed(true);
             inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Station")) {
             String effect = "AB$ PutCounter | Cost$ tapXType<1/Creature.Other> | Defined$ Self " +

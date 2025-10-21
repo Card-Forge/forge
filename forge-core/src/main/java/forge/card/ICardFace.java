@@ -7,7 +7,7 @@ import java.util.Map;
  *
  */
 public interface ICardFace extends ICardCharacteristics, ICardRawAbilites, Comparable<ICardFace> {
-    String getAltName();
+    String getFlavorName();
 
     boolean hasFunctionalVariants();
     ICardFace getFunctionalVariant(String variant);

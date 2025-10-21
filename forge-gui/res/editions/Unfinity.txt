@@ -102,54 +102,54 @@ F192 R Souvenir T-Shirt @Michael Phillippi
 F197 U The Big Top @Kirsten Zirngibl
 F198 C Nearby Planet @Bruce Brenneise
 F199 R Urza's Fun House @Dmitry Burmak
-F203a R Centrifuge @Greg Staples $A
-F203b R Centrifuge @Greg Staples $B
-F207a C Cover the Spot @Jeff Miracola $A
-F207b C Cover the Spot @Jeff Miracola $B
-F207c C Cover the Spot @Jeff Miracola $C
-F207d C Cover the Spot @Jeff Miracola $D
-F208a C Dart Throw @Gaboleps $A
-F208b C Dart Throw @Gaboleps $B
-F208c C Dart Throw @Gaboleps $C
-F208d C Dart Throw @Gaboleps $D
-F213a R Gallery of Legends @Jakub Kasper $A
-F213b R Gallery of Legends @Jakub Kasper $B
-F214a R Gift Shop @Matt Gaser $A
-F214b R Gift Shop @Matt Gaser $B
-F215a U Guess Your Fate @Bruce Brenneise $A
-F215b U Guess Your Fate @Bruce Brenneise $B
-F215c U Guess Your Fate @Bruce Brenneise $C
-F215d U Guess Your Fate @Bruce Brenneise $D
-F220a R Log Flume @Marco Bucci $A
-F220b R Log Flume @Marco Bucci $B
-F221a R Memory Test @Setor Fiadzigbey $A
-F221b R Memory Test @Setor Fiadzigbey $B
-F224a R Push Your Luck @Sebastian Giacobino $A
-F224b R Push Your Luck @Sebastian Giacobino $B
-F226a U Scavenger Hunt @Jamroz Gary $A
-F226b U Scavenger Hunt @Jamroz Gary $B
-F226c U Scavenger Hunt @Jamroz Gary $C
-F226d U Scavenger Hunt @Jamroz Gary $D
-F226e U Scavenger Hunt @Jamroz Gary $E
-F226f U Scavenger Hunt @Jamroz Gary $F
-F228a U Squirrel Stack @Andrea Radeck $A
-F228b U Squirrel Stack @Andrea Radeck $B
-F228c U Squirrel Stack @Andrea Radeck $C
-F228d U Squirrel Stack @Andrea Radeck $D
-F228e U Squirrel Stack @Andrea Radeck $E
-F228f U Squirrel Stack @Andrea Radeck $F
-F230a U The Superlatorium @Simon Dominic $A
-F230b U The Superlatorium @Simon Dominic $B
-F230c U The Superlatorium @Simon Dominic $C
-F230d U The Superlatorium @Simon Dominic $D
-F230e U The Superlatorium @Simon Dominic $E
-F230f U The Superlatorium @Simon Dominic $F
-F233a U Trivia Contest @Caroline Gariba $A
-F233b U Trivia Contest @Caroline Gariba $B
-F233c U Trivia Contest @Caroline Gariba $C
-F233d U Trivia Contest @Caroline Gariba $D
-F233e U Trivia Contest @Caroline Gariba $E
-F233f U Trivia Contest @Caroline Gariba $F
+F203a R Centrifuge @Greg Staples ${"variant": "A"}
+F203b R Centrifuge @Greg Staples ${"variant": "B"}
+F207a C Cover the Spot @Jeff Miracola ${"variant": "A"}
+F207b C Cover the Spot @Jeff Miracola ${"variant": "B"}
+F207c C Cover the Spot @Jeff Miracola ${"variant": "C"}
+F207d C Cover the Spot @Jeff Miracola ${"variant": "D"}
+F208a C Dart Throw @Gaboleps ${"variant": "A"}
+F208b C Dart Throw @Gaboleps ${"variant": "B"}
+F208c C Dart Throw @Gaboleps ${"variant": "C"}
+F208d C Dart Throw @Gaboleps ${"variant": "D"}
+F213a R Gallery of Legends @Jakub Kasper ${"variant": "A"}
+F213b R Gallery of Legends @Jakub Kasper ${"variant": "B"}
+F214a R Gift Shop @Matt Gaser ${"variant": "A"}
+F214b R Gift Shop @Matt Gaser ${"variant": "B"}
+F215a U Guess Your Fate @Bruce Brenneise ${"variant": "A"}
+F215b U Guess Your Fate @Bruce Brenneise ${"variant": "B"}
+F215c U Guess Your Fate @Bruce Brenneise ${"variant": "C"}
+F215d U Guess Your Fate @Bruce Brenneise ${"variant": "D"}
+F220a R Log Flume @Marco Bucci ${"variant": "A"}
+F220b R Log Flume @Marco Bucci ${"variant": "B"}
+F221a R Memory Test @Setor Fiadzigbey ${"variant": "A"}
+F221b R Memory Test @Setor Fiadzigbey ${"variant": "B"}
+F224a R Push Your Luck @Sebastian Giacobino ${"variant": "A"}
+F224b R Push Your Luck @Sebastian Giacobino ${"variant": "B"}
+F226a U Scavenger Hunt @Jamroz Gary ${"variant": "A"}
+F226b U Scavenger Hunt @Jamroz Gary ${"variant": "B"}
+F226c U Scavenger Hunt @Jamroz Gary ${"variant": "C"}
+F226d U Scavenger Hunt @Jamroz Gary ${"variant": "D"}
+F226e U Scavenger Hunt @Jamroz Gary ${"variant": "E"}
+F226f U Scavenger Hunt @Jamroz Gary ${"variant": "F"}
+F228a U Squirrel Stack @Andrea Radeck ${"variant": "A"}
+F228b U Squirrel Stack @Andrea Radeck ${"variant": "B"}
+F228c U Squirrel Stack @Andrea Radeck ${"variant": "C"}
+F228d U Squirrel Stack @Andrea Radeck ${"variant": "D"}
+F228e U Squirrel Stack @Andrea Radeck ${"variant": "E"}
+F228f U Squirrel Stack @Andrea Radeck ${"variant": "F"}
+F230a U The Superlatorium @Simon Dominic ${"variant": "A"}
+F230b U The Superlatorium @Simon Dominic ${"variant": "B"}
+F230c U The Superlatorium @Simon Dominic ${"variant": "C"}
+F230d U The Superlatorium @Simon Dominic ${"variant": "D"}
+F230e U The Superlatorium @Simon Dominic ${"variant": "E"}
+F230f U The Superlatorium @Simon Dominic ${"variant": "F"}
+F233a U Trivia Contest @Caroline Gariba ${"variant": "A"}
+F233b U Trivia Contest @Caroline Gariba ${"variant": "B"}
+F233c U Trivia Contest @Caroline Gariba ${"variant": "C"}
+F233d U Trivia Contest @Caroline Gariba ${"variant": "D"}
+F233e U Trivia Contest @Caroline Gariba ${"variant": "E"}
+F233f U Trivia Contest @Caroline Gariba ${"variant": "F"}
 F245 R Katerina of Myra's Marvels @David Semple
 F246 R Solaflora, Intergalactic Icon @Scooter
 F247 R Fluros of Myra's Marvels @David Semple
@@ -391,93 +391,93 @@ F538 R Water Gun Balloon Game @Ralph Horsley
 194 C Ticket Turbotubes @Matt Gaser
 195 C Ticketomaton @Michael Phillippi
 196 U Wicker Picker @Igor Grechanyi
-200a U Balloon Stand @Jakub Kasper $A
-200b U Balloon Stand @Jakub Kasper $B
-200c U Balloon Stand @Jakub Kasper $C
-200d U Balloon Stand @Jakub Kasper $D
-201a U Bounce Chamber @Dmitry Burmak $A
-201b U Bounce Chamber @Dmitry Burmak $B
-201c U Bounce Chamber @Dmitry Burmak $C
-201d U Bounce Chamber @Dmitry Burmak $D
-202a U Bumper Cars @Gabor Szikszai $A
-202b U Bumper Cars @Gabor Szikszai $B
-202c U Bumper Cars @Gabor Szikszai $C
-202d U Bumper Cars @Gabor Szikszai $D
-202e U Bumper Cars @Gabor Szikszai $E
-202f U Bumper Cars @Gabor Szikszai $F
-204a C Clown Extruder @Marco Bucci $A
-204b C Clown Extruder @Marco Bucci $B
-204c C Clown Extruder @Marco Bucci $C
-204d C Clown Extruder @Marco Bucci $D
-205a U Concession Stand @David Sladek $A
-205b U Concession Stand @David Sladek $B
-205c U Concession Stand @David Sladek $C
-205d U Concession Stand @David Sladek $D
-206a C Costume Shop @Raluca Marinescu $A
-206b C Costume Shop @Raluca Marinescu $B
-206c C Costume Shop @Raluca Marinescu $C
-206d C Costume Shop @Raluca Marinescu $D
-206e C Costume Shop @Raluca Marinescu $E
-206f C Costume Shop @Raluca Marinescu $F
-209a C Drop Tower @Dmitry Burmak $A
-209b C Drop Tower @Dmitry Burmak $B
-209c C Drop Tower @Dmitry Burmak $C
-209d C Drop Tower @Dmitry Burmak $D
-209e C Drop Tower @Dmitry Burmak $E
-209f C Drop Tower @Dmitry Burmak $F
+200a U Balloon Stand @Jakub Kasper ${"variant": "A"}
+200b U Balloon Stand @Jakub Kasper ${"variant": "B"}
+200c U Balloon Stand @Jakub Kasper ${"variant": "C"}
+200d U Balloon Stand @Jakub Kasper ${"variant": "D"}
+201a U Bounce Chamber @Dmitry Burmak ${"variant": "A"}
+201b U Bounce Chamber @Dmitry Burmak ${"variant": "B"}
+201c U Bounce Chamber @Dmitry Burmak ${"variant": "C"}
+201d U Bounce Chamber @Dmitry Burmak ${"variant": "D"}
+202a U Bumper Cars @Gabor Szikszai ${"variant": "A"}
+202b U Bumper Cars @Gabor Szikszai ${"variant": "B"}
+202c U Bumper Cars @Gabor Szikszai ${"variant": "C"}
+202d U Bumper Cars @Gabor Szikszai ${"variant": "D"}
+202e U Bumper Cars @Gabor Szikszai ${"variant": "E"}
+202f U Bumper Cars @Gabor Szikszai ${"variant": "F"}
+204a C Clown Extruder @Marco Bucci ${"variant": "A"}
+204b C Clown Extruder @Marco Bucci ${"variant": "B"}
+204c C Clown Extruder @Marco Bucci ${"variant": "C"}
+204d C Clown Extruder @Marco Bucci ${"variant": "D"}
+205a U Concession Stand @David Sladek ${"variant": "A"}
+205b U Concession Stand @David Sladek ${"variant": "B"}
+205c U Concession Stand @David Sladek ${"variant": "C"}
+205d U Concession Stand @David Sladek ${"variant": "D"}
+206a C Costume Shop @Raluca Marinescu ${"variant": "A"}
+206b C Costume Shop @Raluca Marinescu ${"variant": "B"}
+206c C Costume Shop @Raluca Marinescu ${"variant": "C"}
+206d C Costume Shop @Raluca Marinescu ${"variant": "D"}
+206e C Costume Shop @Raluca Marinescu ${"variant": "E"}
+206f C Costume Shop @Raluca Marinescu ${"variant": "F"}
+209a C Drop Tower @Dmitry Burmak ${"variant": "A"}
+209b C Drop Tower @Dmitry Burmak ${"variant": "B"}
+209c C Drop Tower @Dmitry Burmak ${"variant": "C"}
+209d C Drop Tower @Dmitry Burmak ${"variant": "D"}
+209e C Drop Tower @Dmitry Burmak ${"variant": "E"}
+209f C Drop Tower @Dmitry Burmak ${"variant": "F"}
 210 R Ferris Wheel @Kirsten Zirngibl
-211a C Foam Weapons Kiosk @Matt Gaser $A
-211b C Foam Weapons Kiosk @Matt Gaser $B
-211c C Foam Weapons Kiosk @Matt Gaser $C
-211d C Foam Weapons Kiosk @Matt Gaser $D
-212a C Fortune Teller @Jamroz Gary $A
-212b C Fortune Teller @Jamroz Gary $B
-212c C Fortune Teller @Jamroz Gary $C
-212d C Fortune Teller @Jamroz Gary $D
-212e C Fortune Teller @Jamroz Gary $E
-212f C Fortune Teller @Jamroz Gary $F
-216a R Hall of Mirrors @Vincent Christiaens $A
-216b R Hall of Mirrors @Vincent Christiaens $B
-217a R Haunted House @Dmitry Burmak $A
-217b R Haunted House @Dmitry Burmak $B
-218a U Information Booth @Gaboleps $A
-218b U Information Booth @Gaboleps $B
-218c U Information Booth @Gaboleps $C
-218d U Information Booth @Gaboleps $D
-219a C Kiddie Coaster @Marco Bucci $A
-219b C Kiddie Coaster @Marco Bucci $B
-219c C Kiddie Coaster @Marco Bucci $C
-219d C Kiddie Coaster @Marco Bucci $D
-219e C Kiddie Coaster @Marco Bucci $E
-219f C Kiddie Coaster @Marco Bucci $F
-222a R Merry-Go-Round @Carl Critchlow $A
-222b R Merry-Go-Round @Carl Critchlow $B
-223a C Pick-a-Beeble @Dave Greco $A
-223b C Pick-a-Beeble @Dave Greco $B
-223c C Pick-a-Beeble @Dave Greco $C
-223d C Pick-a-Beeble @Dave Greco $D
-223e C Pick-a-Beeble @Dave Greco $E
-223f C Pick-a-Beeble @Dave Greco $F
-225a U Roller Coaster @Gabor Szikszai $A
-225b U Roller Coaster @Gabor Szikszai $B
-225c U Roller Coaster @Gabor Szikszai $C
-225d U Roller Coaster @Gabor Szikszai $D
-227a C Spinny Ride @Aaron J. Riley $A
-227b C Spinny Ride @Aaron J. Riley $B
-227c C Spinny Ride @Aaron J. Riley $C
-227d C Spinny Ride @Aaron J. Riley $D
-227e C Spinny Ride @Aaron J. Riley $E
-227f C Spinny Ride @Aaron J. Riley $F
-229a R Storybook Ride @Dmitry Burmak $A
-229b R Storybook Ride @Dmitry Burmak $B
-231a R Swinging Ship @Mike Burns $A
-231b R Swinging Ship @Mike Burns $B
-232a U Trash Bin @Greg Bobrowski $A
-232b U Trash Bin @Greg Bobrowski $B
-232c U Trash Bin @Greg Bobrowski $C
-232d U Trash Bin @Greg Bobrowski $D
-234a R Tunnel of Love @Vladimir Krisetskiy $A
-234b R Tunnel of Love @Vladimir Krisetskiy $B
+211a C Foam Weapons Kiosk @Matt Gaser ${"variant": "A"}
+211b C Foam Weapons Kiosk @Matt Gaser ${"variant": "B"}
+211c C Foam Weapons Kiosk @Matt Gaser ${"variant": "C"}
+211d C Foam Weapons Kiosk @Matt Gaser ${"variant": "D"}
+212a C Fortune Teller @Jamroz Gary ${"variant": "A"}
+212b C Fortune Teller @Jamroz Gary ${"variant": "B"}
+212c C Fortune Teller @Jamroz Gary ${"variant": "C"}
+212d C Fortune Teller @Jamroz Gary ${"variant": "D"}
+212e C Fortune Teller @Jamroz Gary ${"variant": "E"}
+212f C Fortune Teller @Jamroz Gary ${"variant": "F"}
+216a R Hall of Mirrors @Vincent Christiaens ${"variant": "A"}
+216b R Hall of Mirrors @Vincent Christiaens ${"variant": "B"}
+217a R Haunted House @Dmitry Burmak ${"variant": "A"}
+217b R Haunted House @Dmitry Burmak ${"variant": "B"}
+218a U Information Booth @Gaboleps ${"variant": "A"}
+218b U Information Booth @Gaboleps ${"variant": "B"}
+218c U Information Booth @Gaboleps ${"variant": "C"}
+218d U Information Booth @Gaboleps ${"variant": "D"}
+219a C Kiddie Coaster @Marco Bucci ${"variant": "A"}
+219b C Kiddie Coaster @Marco Bucci ${"variant": "B"}
+219c C Kiddie Coaster @Marco Bucci ${"variant": "C"}
+219d C Kiddie Coaster @Marco Bucci ${"variant": "D"}
+219e C Kiddie Coaster @Marco Bucci ${"variant": "E"}
+219f C Kiddie Coaster @Marco Bucci ${"variant": "F"}
+222a R Merry-Go-Round @Carl Critchlow ${"variant": "A"}
+222b R Merry-Go-Round @Carl Critchlow ${"variant": "B"}
+223a C Pick-a-Beeble @Dave Greco ${"variant": "A"}
+223b C Pick-a-Beeble @Dave Greco ${"variant": "B"}
+223c C Pick-a-Beeble @Dave Greco ${"variant": "C"}
+223d C Pick-a-Beeble @Dave Greco ${"variant": "D"}
+223e C Pick-a-Beeble @Dave Greco ${"variant": "E"}
+223f C Pick-a-Beeble @Dave Greco ${"variant": "F"}
+225a U Roller Coaster @Gabor Szikszai ${"variant": "A"}
+225b U Roller Coaster @Gabor Szikszai ${"variant": "B"}
+225c U Roller Coaster @Gabor Szikszai ${"variant": "C"}
+225d U Roller Coaster @Gabor Szikszai ${"variant": "D"}
+227a C Spinny Ride @Aaron J. Riley ${"variant": "A"}
+227b C Spinny Ride @Aaron J. Riley ${"variant": "B"}
+227c C Spinny Ride @Aaron J. Riley ${"variant": "C"}
+227d C Spinny Ride @Aaron J. Riley ${"variant": "D"}
+227e C Spinny Ride @Aaron J. Riley ${"variant": "E"}
+227f C Spinny Ride @Aaron J. Riley ${"variant": "F"}
+229a R Storybook Ride @Dmitry Burmak ${"variant": "A"}
+229b R Storybook Ride @Dmitry Burmak ${"variant": "B"}
+231a R Swinging Ship @Mike Burns ${"variant": "A"}
+231b R Swinging Ship @Mike Burns ${"variant": "B"}
+232a U Trash Bin @Greg Bobrowski ${"variant": "A"}
+232b U Trash Bin @Greg Bobrowski ${"variant": "B"}
+232c U Trash Bin @Greg Bobrowski ${"variant": "C"}
+232d U Trash Bin @Greg Bobrowski ${"variant": "D"}
+234a R Tunnel of Love @Vladimir Krisetskiy ${"variant": "A"}
+234b R Tunnel of Love @Vladimir Krisetskiy ${"variant": "B"}
 235 L Plains @Adam Paquette
 236 L Island @Adam Paquette
 237 L Swamp @Adam Paquette
