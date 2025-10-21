@@ -38,7 +38,7 @@ import forge.util.NameGenerator;
  */
 public class NewGameScene extends MenuScene {
 
-    private static final int NUMBER_OF_COMMANDER_CANDIDATES = 5;
+    private static final int NUMBER_OF_COMMANDER_CANDIDATES = 3; // 3 * 5 colors = 15 commander choices
     TextField selectedName;
     ColorSet[] colorIds;
     CardEdition[] editionIds;
@@ -62,7 +62,7 @@ public class NewGameScene extends MenuScene {
     private final Random rand = new Random();
 
     private final Array<AdventureModes> modes = new Array<>();
-    private final Map<ColorSet, List<PaperCard>> commanderChoices = new LinkedHashMap<>();
+    private final List<PaperCard> commanderChoices = new ArrayList<>();
 
     private NewGameScene() {
 
@@ -125,7 +125,7 @@ public class NewGameScene extends MenuScene {
 
         // Here, we create a random list of 5 commander candidates for each base color
         for (ColorSet tmpColorId : colorIds){
-            commanderChoices.put(tmpColorId, getCommanderCandidatesForColor(tmpColorId));
+            commanderChoices.addAll(getCommanderCandidatesForColor(tmpColorId));
         }
 
         modes.add(AdventureModes.Chaos);
@@ -166,7 +166,7 @@ public class NewGameScene extends MenuScene {
         chooseCommander.addListener(new ClickListener() {
             @Override public void clicked(InputEvent event, float x, float y) {
                 removePreview();
-                PaperCard pc = commanderChoices.get(colorIds[colorId.getCurrentIndex()]).get(chooseCommander.getCurrentIndex());
+                PaperCard pc = commanderChoices.get(chooseCommander.getCurrentIndex());
                 Reward reward = new Reward(pc, false);
                 previewActor = new RewardActor(reward, false, null, false);
                 previewActor.setBounds(75, 180, 40, 60); // pick your size
@@ -243,13 +243,6 @@ public class NewGameScene extends MenuScene {
                 showModeHelp();
             }
         });
-        colorId.addListener(new ChangeListener(){
-            @Override
-            public void changed(ChangeEvent changeEvent, Actor actor) {
-                removePreview();
-                updateCommanderChoices();
-            }
-        });
         updateCommanderChoices();
     }
 
@@ -311,8 +304,7 @@ public class NewGameScene extends MenuScene {
     }
 
     private void updateCommanderChoices(){
-        ColorSet cs = colorIds[colorId.getCurrentIndex()];
-        String[] commanders = commanderChoices.get(cs).stream()
+        String[] commanders = commanderChoices.stream()
                 .map(PaperCard::getCardName)
                 .toArray(String[]::new);
         chooseCommander.setTextList(commanders);
@@ -342,7 +334,7 @@ public class NewGameScene extends MenuScene {
             started = false;
             PaperCard commander_card = null;
             if (AdventureModes.Commander.equals(modes.get(mode.getCurrentIndex())))
-                commander_card = commanderChoices.get(colorIds[colorId.getCurrentIndex()]).get(chooseCommander.getCurrentIndex());
+                commander_card = commanderChoices.get(chooseCommander.getCurrentIndex());
             //FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC, false);
             WorldSave.generateNewWorld(selectedName.getText(),
                     gender.getCurrentIndex() == 0,
@@ -393,7 +385,7 @@ public class NewGameScene extends MenuScene {
         updateAvatar();
         PaperCard commander_card = null;
         if (AdventureModes.Commander.equals(modes.get(mode.getCurrentIndex())))
-            commander_card = commanderChoices.get(colorIds[colorId.getCurrentIndex()]).get(chooseCommander.getCurrentIndex());
+            commander_card = commanderChoices.get(chooseCommander.getCurrentIndex());
         if (Forge.createNewAdventureMap) {
             FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC, false);
             WorldSave.generateNewWorld(selectedName.getText(),
@@ -557,12 +549,12 @@ public class NewGameScene extends MenuScene {
                 summaryText.append("""
                         Mode: Commander
                         
-                        You will be presented with a choice of nine randomly chosen commanders that \
-                        share the selected color. You'll be given a pseudo-randomised 100-card pile \
-                        to start with.
+                        You will be presented with a choice of 15 randomly chosen commanders to start the playthrough. \
+                        You'll also be given a pseudo-randomised 100-card pile to start with. \
                         
-                        You will not be able to change your commander throughout this playthrough \
-                        so choose wisely.""");
+                        Good luck on your quest of creating a coherent deck that can win consistently. \
+                        The beginning will be tough, but you can always swap your commander if you find a better one.
+                        """);
                 break;
             default:;
                 summaryText.append("No summary available for your this game mode.");

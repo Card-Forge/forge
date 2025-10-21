@@ -9,7 +9,6 @@ import com.github.tommyettinger.textra.TextraLabel;
 import com.google.common.collect.Lists;
 
 import forge.Forge;
-import forge.StaticData;
 import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.AdventureDeckEditor;
@@ -19,7 +18,6 @@ import forge.adventure.stage.MapStage;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
-import forge.card.CardDb;
 import forge.card.ColorSet;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -51,7 +49,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     // Deck data
     private Deck deck;
-    private final ArrayList<Deck> decks = new ArrayList<Deck>(MIN_DECK_COUNT);
+    private final ArrayList<Deck> decks = new ArrayList<>(MIN_DECK_COUNT);
     private int selectedDeckIndex = 0;
     private final DifficultyData difficultyData = new DifficultyData();
 
