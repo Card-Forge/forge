@@ -17,10 +17,7 @@
  */
 package forge.card;
 
-import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimaps;
+import com.google.common.collect.*;
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardEdition.EditionEntry;
@@ -30,7 +27,6 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.Lang;
 import forge.util.TextUtil;
-import forge.util.lang.LangEnglish;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -53,12 +49,15 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     private final Map<String, ICardFace> facesByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, String> normalizedNames = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private static Map<String, String> artPrefs = Maps.newHashMap();
+    /**
+     * Map of flavor names to the identifier of the functional variant on which they appear in their respective card rules.
+     */
+    private final Map<String, String> flavorNameMappings = Maps.newHashMap();
 
-    private final Map<String, String> alternateName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, Integer> artIds = Maps.newHashMap();
 
     private final CardEdition.Collection editions;
-    private List<String> filtered;
+    private final Set<String> filtered;
 
     private Map<String, Boolean> nonLegendaryCreatureNames = Maps.newHashMap();
 
@@ -294,10 +293,14 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
     }
 
-    public CardDb(Map<String, CardRules> rules, CardEdition.Collection editions0, List<String> filteredCards, String cardArtPreference) {
+    public CardDb(Map<String, CardRules> rules, CardEdition.Collection editions0, Set<String> filteredCards) {
         this.filtered = filteredCards;
         this.rulesByName = rules;
         this.editions = editions0;
+
+        //Collects additional mappings used for flavor names
+        //Need an extra map for these to avoid ConcurrentModificationException
+        Map<String, CardRules> extraRuleMappings = new HashMap<>();
 
         // create faces list from rules
         for (final CardRules rule : rules.values()) {
@@ -306,8 +309,12 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             for (ICardFace face : rule.getAllFaces()) {
                 addFaceToDbNames(face);
             }
+            if (rule.hasFunctionalVariants()){
+                cacheFlavorNames(rule, extraRuleMappings);
+            }
         }
-        setCardArtPreference(cardArtPreference);
+
+        rulesByName.putAll(extraRuleMappings);
     }
 
     private void addFaceToDbNames(ICardFace face) {
@@ -321,14 +328,40 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             normalizedNames.put(normalName, name);
         }
 
-        final String altName = face.getAltName();
-        if (altName != null) {
-            alternateName.put(altName, face.getName());
-            final String normalAltName = StringUtils.stripAccents(altName);
-            if (!normalAltName.equals(altName)) {
-                normalizedNames.put(normalAltName, altName);
-            }
+        if(face.hasFunctionalVariants()) {
+            for(ICardFace varFace : face.getFunctionalVariants().values())
+                cacheFlavorName(varFace);
         }
+        if (face.getFlavorName() != null) //Probably shouldn't be putting a flavor name on the main print?
+            cacheFlavorName(face);
+    }
+
+    private void cacheFlavorName(ICardFace face) {
+        String altName = face.getFlavorName();
+        if(altName == null)
+            return;
+        facesByName.putIfAbsent(altName, face);
+        final String normalAltName = StringUtils.stripAccents(altName);
+        if (!normalAltName.equals(altName)) {
+            normalizedNames.put(normalAltName, altName);
+        }
+    }
+
+    private void cacheFlavorNames(CardRules rules, Map<String, CardRules> map) {
+        if(rules.getSupportedFunctionalVariants() == null)
+            return;
+        boolean hasFlavorName = false;
+        String baseName = rules.getName();
+        for(String variantName : rules.getSupportedFunctionalVariants()) {
+            String name = rules.getDisplayNameForVariant(variantName);
+            if(baseName.equals(name))
+                continue;
+            hasFlavorName = true;
+            map.put(name, rules);
+            flavorNameMappings.put(name, variantName);
+        }
+        if(hasFlavorName)
+            flavorNameMappings.put(baseName, IPaperCard.NO_FUNCTIONAL_VARIANT);
     }
 
     private void addSetCard(CardEdition e, EditionEntry cis, CardRules cr) {
@@ -337,16 +370,40 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         if (artIds.containsKey(key)) {
             artIdx = artIds.get(key) + 1;
         }
-
         artIds.put(key, artIdx);
-        addCard(new PaperCard(cr, e.getCode(), cis.rarity(), artIdx, false, cis.collectorNumber(), cis.artistName(), cis.functionalVariantName()));
+
+        String variantName = cis.getFunctionalVariantName();
+        String flavorName = cis.getFlavorName();
+        assert(variantName == null || flavorName == null); //Can't currently assign both this way.
+
+        if(variantName == null && !cr.getName().equals(cis.name())) {
+            //If an edition entry uses a known flavor name without specifying the variant, swap to that variant.
+            variantName = flavorNameMappings.get(cis.name());
+            //System.out.printf("Auto-mapping flavor name \"%s\" -> \"%s\" $%s\n", cis.name(), cr.getName(), variantName);
+        }
+        if(flavorName != null) {
+            String suggestedFlavorName = e.getCode().startsWith("OM") ? "Alchemy"
+                    : e.getCode().equals("SLX") ? "UniversesWithin"
+                    : null;
+            variantName = cr.findOrCreateVariantForFlavorName(flavorName, suggestedFlavorName);
+            String normalizedFlavorName = cr.getDisplayNameForVariant(variantName);
+            if(!flavorNameMappings.containsKey(normalizedFlavorName)) {
+                flavorNameMappings.put(normalizedFlavorName, variantName);
+                rulesByName.put(normalizedFlavorName, cr);
+                cacheFlavorName(cr.getMainPart().getFunctionalVariant(variantName));
+                if(cr.getOtherPart() != null)
+                    cacheFlavorName(cr.getOtherPart().getFunctionalVariant(variantName));
+            }
+        }
+
+        addCard(new PaperCard(cr, e.getCode(), cis.rarity(), artIdx, false, cis.collectorNumber(), cis.artistName(), variantName));
     }
 
     private boolean addFromSetByName(String cardName, CardEdition ed, CardRules cr) {
         List<EditionEntry> cardsInSet = ed.getCardInSet(cardName);  // empty collection if not present
         if (cr.hasFunctionalVariants()) {
-            cardsInSet = cardsInSet.stream().filter(c -> StringUtils.isEmpty(c.functionalVariantName())
-                    || cr.getSupportedFunctionalVariants().contains(c.functionalVariantName())
+            cardsInSet = cardsInSet.stream().filter(c -> StringUtils.isEmpty(c.getFunctionalVariantName())
+                    || cr.getSupportedFunctionalVariants().contains(c.getFunctionalVariantName())
             ).collect(Collectors.toList());
         }
         if (cardsInSet.isEmpty())
@@ -383,9 +440,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         CardEdition upcomingSet = null;
         Date today = new Date();
 
-        // do this first so they're not considered missing
-        buildRenamedCards();
-
         for (CardEdition e : editions.getOrderedEditions()) {
             boolean coreOrExpSet = e.getType() == CardEdition.Type.CORE || e.getType() == CardEdition.Type.EXPANSION;
             boolean isCoreExpSet = coreOrExpSet || e.getType() == CardEdition.Type.REPRINT;
@@ -403,8 +457,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                     continue;
                 }
                 if (cr.hasFunctionalVariants()) {
-                    if (StringUtils.isNotEmpty(cis.functionalVariantName())
-                        && !cr.getSupportedFunctionalVariants().contains(cis.functionalVariantName())) {
+                    if (StringUtils.isNotEmpty(cis.getFunctionalVariantName())
+                        && !cr.getSupportedFunctionalVariants().contains(cis.getFunctionalVariantName())) {
                         //Supported card, unsupported variant.
                         //Could note the card as missing but since these are often un-cards,
                         //it's likely absent because it does something out of scope.
@@ -455,71 +509,28 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         reIndex();
     }
 
-    private void buildRenamedCards() {
-        Lang lang = Lang.getInstance();
-        if (lang == null) {
-            // for some tests
-            lang = new LangEnglish();
-        }
-        // for now just check Universes Within
-        for (EditionEntry cis : editions.get("SLX").getCards()) {
-            String orgName = alternateName.get(cis.name());
-            if (orgName != null) {
-                // found original (beyond) print
-                CardRules org = getRules(orgName);
-
-                CardFace renamedMain = (CardFace) ((CardFace) org.getMainPart()).clone();
-                renamedMain.setName(renamedMain.getAltName());
-                renamedMain.setAltName(null);
-                // TODO this could mess up some "named ..." cardname literals but there's no printing like that currently
-                renamedMain.setOracleText(renamedMain.getOracleText()
-                        .replace(orgName, renamedMain.getName())
-                        .replace(lang.getNickName(orgName), lang.getNickName(renamedMain.getName()))
-                        );
-                facesByName.put(renamedMain.getName(), renamedMain);
-                CardFace renamedOther = null;
-                if (org.getOtherPart() != null) {
-                    renamedOther = (CardFace) ((CardFace) org.getOtherPart()).clone();
-                    orgName = renamedOther.getName();
-                    renamedOther.setName(renamedOther.getAltName());
-                    renamedOther.setAltName(null);
-                    renamedOther.setOracleText(renamedOther.getOracleText()
-                            .replace(orgName, renamedOther.getName())
-                            .replace(lang.getNickName(orgName), lang.getNickName(renamedOther.getName()))
-                            );
-                    facesByName.put(renamedOther.getName(), renamedOther);
-                }
-
-                CardRules within = new CardRules(new ICardFace[] { renamedMain, renamedOther, null, null, null, null, null }, org.getSplitType(), org.getAiHints());
-                // so workshop can edit same script
-                within.setNormalizedName(org.getNormalizedName());
-                rulesByName.put(cis.name(), within);
-            }
-        }
-    }
-
     public void addCard(PaperCard paperCard) {
         if (filtered.contains(paperCard.getName())) {
             return;
         }
 
-        allCardsByName.put(paperCard.getName(), paperCard);
+        String mainName = paperCard.getName();
+        allCardsByName.put(mainName, paperCard);
 
-        if (paperCard.getRules().getSplitType() == CardSplitType.None) {
+        CardRules rules = paperCard.getRules();
+        if (rules.getSplitType() == CardSplitType.None && !rules.hasFunctionalVariants()) {
             return;
         }
 
-        if (paperCard.getRules().getOtherPart() != null) {
-            //allow looking up card by the name of other faces
-            allCardsByName.put(paperCard.getRules().getOtherPart().getName(), paperCard);
-        }
-        if (paperCard.getRules().getSplitType() == CardSplitType.Split) {
-            //also include main part for split cards
-            allCardsByName.put(paperCard.getRules().getMainPart().getName(), paperCard);
-        } else if (paperCard.getRules().getSplitType() == CardSplitType.Specialize) {
-            //also include specialize faces
-            for (ICardFace face : paperCard.getRules().getSpecializeParts().values()) allCardsByName.put(face.getName(), paperCard);
-        }
+        //Card may have multiple names. Add it under all of them.
+
+        List<ICardFace> allFaces = paperCard.getAllFaces();
+        Set<String> namesToAdd = new HashSet<>();
+        allFaces.stream().map(ICardCharacteristics::getName).forEach(namesToAdd::add);
+        allFaces.stream().map(ICardFace::getFlavorName).filter(Objects::nonNull).forEach(namesToAdd::add);
+        namesToAdd.remove(mainName);
+        for(String name : namesToAdd)
+            allCardsByName.put(name, paperCard);
     }
 
     private void reIndex() {
@@ -560,11 +571,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     public CardRules getRules(String cardName) {
         CardRules result = rulesByName.get(cardName);
-        if (result != null) {
-            return result;
-        } else {
-            return CardRules.getUnsupportedCardNamed(cardName);
-        }
+        return Objects.requireNonNullElseGet(result, () -> CardRules.getUnsupportedCardNamed(cardName));
     }
 
     public CardArtPreference getCardArtPreference(){ return this.defaultCardArtPreference; }
@@ -869,9 +876,16 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             cardQueryFilter = card -> card.getArtIndex() == cr.artIndex;
         cardQueryFilter = cardQueryFilter.and(filter);
         cards = getAllCards(cr.cardName, cardQueryFilter);
-        // Note: No need to check whether "cards" is empty; the next for loop will validate condition at L699
+        if (cards.isEmpty())
+            return null;
         if (cards.size() == 1)  // if only one candidate, there much else we should do
             return cr.isFoil ? cards.get(0).getFoiled() : cards.get(0);
+
+        if (flavorNameMappings.containsKey(cr.cardName)) {
+            Collection<PaperCard> matchingNames = cards.stream().filter(c -> c.getDisplayName().equals(cr.cardName)).collect(Collectors.toSet());
+            if(!matchingNames.isEmpty())
+                cards.retainAll(matchingNames);
+        }
 
         /* 2. Retrieve cards based of [Frame]Set Preference
            ================================================ */
@@ -967,11 +981,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public List<PaperCard> getUniqueCardsNoAlt(String cardName) {
-        return Lists.newArrayList(Maps.filterEntries(uniqueCardsByName, entry -> entry.getKey().equals(entry.getValue().getName())).get(getName(cardName)));
+        return Lists.newArrayList(Maps.filterEntries(uniqueCardsByName, entry -> entry.getKey().equals(entry.getValue().getName())).get(getNormalizedName(cardName)));
     }
 
     public PaperCard getUniqueByName(final String name) {
-        return uniqueCardsByName.get(getName(name));
+        return uniqueCardsByName.get(getNormalizedName(name));
     }
 
     public Collection<ICardFace> getAllFaces() {
@@ -979,7 +993,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public ICardFace getFaceByName(final String name) {
-        return facesByName.get(getName(name));
+        return facesByName.get(getNormalizedName(name));
     }
 
     public boolean isNonLegendaryCreatureName(final String name) {
@@ -1050,26 +1064,20 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return streamAllCardsNoAlt().filter(EDITION_NON_REPRINT).collect(Collectors.toList());
     }
 
-    public String getName(final String cardName) {
-        return getName(cardName, false);
-    }
-    public String getName(String cardName, boolean engine) {
+    public String getNormalizedName(final String cardName) {
+        String cardName1 = cardName;
         // normalize Names first
-        cardName = normalizedNames.getOrDefault(cardName, cardName);
-        if (alternateName.containsKey(cardName) && engine) {
-            // TODO might want to implement GUI option so it always fetches the Within version
-            return alternateName.get(cardName);
-        }
-        return cardName;
+        cardName1 = normalizedNames.getOrDefault(cardName1, cardName1);
+        return cardName1;
     }
 
     @Override
     public List<PaperCard> getAllCards(String cardName) {
-        return allCardsByName.get(getName(cardName));
+        return allCardsByName.get(getNormalizedName(cardName));
     }
 
     public List<PaperCard> getAllCardsNoAlt(String cardName) {
-        return Lists.newArrayList(Multimaps.filterEntries(allCardsByName, entry -> entry.getKey().equals(entry.getValue().getName())).get(getName(cardName)));
+        return Lists.newArrayList(Multimaps.filterEntries(allCardsByName, entry -> entry.getKey().equals(entry.getValue().getName())).get(getNormalizedName(cardName)));
     }
 
     /**
@@ -1111,7 +1119,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     @Override
     public boolean contains(String name) {
-        return allCardsByName.containsKey(getName(name));
+        return allCardsByName.containsKey(getNormalizedName(name));
     }
 
     @Override
@@ -1221,7 +1229,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                     int artIdx = IPaperCard.DEFAULT_ART_INDEX;
                     for (EditionEntry cis : e.getCardInSet(cardName))
                         paperCards.add(new PaperCard(rules, e.getCode(), cis.rarity(), artIdx++, false,
-                                                     cis.collectorNumber(), cis.artistName(), cis.functionalVariantName()));
+                                                     cis.collectorNumber(), cis.artistName(), cis.getFunctionalVariantName()));
                 }
             } else {
                 String lastEdition = null;
@@ -1241,7 +1249,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                     int cardInSetIndex = Math.max(artIdx-1, 0); // make sure doesn't go below zero
                     EditionEntry cds = cardsInSet.get(cardInSetIndex);  // use ArtIndex to get the right Coll. Number
                     paperCards.add(new PaperCard(rules, lastEdition, tuple.getValue(), artIdx++, false,
-                                                 cds.collectorNumber(), cds.artistName(), cds.functionalVariantName()));
+                                                 cds.collectorNumber(), cds.artistName(), cds.getFunctionalVariantName()));
                 }
             }
             if (paperCards.isEmpty()) {
