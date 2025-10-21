@@ -54,7 +54,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private final DifficultyData difficultyData = new DifficultyData();
 
     // Commander mode
-    private boolean commanderMode;
+    private AdventureModes adventureMode;
 
     // Game data.
     private float worldPosX;
@@ -107,7 +107,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private void clearDecks() {
         decks.clear();
         for (int i = 0; i < MIN_DECK_COUNT; i++)
-            decks.add(newDeck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
+            decks.add(new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
         deck = decks.get(0);
         selectedDeckIndex = 0;
     }
@@ -118,7 +118,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         fantasyMode = false;
         announceFantasy = false;
         usingCustomDeck = false;
-        commanderMode = false;
+        adventureMode = null;
         blessing = null;
         gold = 0;
         maxLife = 20;
@@ -153,9 +153,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public final Set<PaperCard> favoriteCards = new HashSet<>();
 
     public void create(String n, Deck startingDeck, boolean male, int race, int avatar, boolean isFantasy,
-                       boolean isUsingCustomDeck, DifficultyData difficultyData, boolean commanderMode) {
+                       boolean isUsingCustomDeck, DifficultyData difficultyData, AdventureModes adventureMode) {
         clear();
-        this.commanderMode = commanderMode;
+        this.adventureMode = adventureMode;
         announceFantasy = fantasyMode = isFantasy; //Set Chaos mode first.
         announceCustom = usingCustomDeck = isUsingCustomDeck;
 
@@ -296,8 +296,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return life;
     }
 
-    public boolean isCommanderMode(){
-        return commanderMode;
+    public AdventureModes getAdventureMode(){
+        return adventureMode;
     }
 
     public int getMaxLife() {
@@ -317,8 +317,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public ColorSet getColorIdentity() {
-        if (commanderMode)
-            return colorIdentity; //TODO: return the color identiy of the commander PaperCard
         return colorIdentity;
     }
 
@@ -346,15 +344,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public void setColorIdentity(ColorSet set) {
         this.colorIdentity = set;
-    }
-
-    private Deck newDeck(String deckname){
-        if (commanderMode) {
-            Deck n_deck = new Deck(deckname);
-            n_deck.putSection(DeckSection.Commander, new CardPool());
-            return n_deck;
-        }
-        return new Deck(deckname);
     }
 
     @Override
@@ -414,7 +403,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         avatarIndex = data.readInt("avatarIndex");
         isFemale = data.readBool("isFemale");
 
-        commanderMode = data.readBool("commander_mode");
+        String _mode = data.readString("adventure_mode");
+        if (_mode == null)
+            adventureMode = AdventureModes.Standard;
+        else
+            adventureMode = AdventureModes.valueOf(_mode);
 
         if (data.containsKey("colorIdentity")) {
             String temp = data.readString("colorIdentity");
@@ -511,7 +504,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             }
         }
 
-        deck = newDeck(data.readString("deckName"));
+        deck = new Deck(data.readString("deckName"));
         CardPool deckCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deckCards")));
         deck.getMain().addAll(deckCards.getFilteredPool(isValid));
         unsupportedCards.addAll(deckCards.getFilteredPool(isUnsupported).toFlatList());
@@ -580,10 +573,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             for (int i = 0; i < dynamicDeckCount; i++){
                 // The first x elements are pre-created
                 if (i < MIN_DECK_COUNT) {
-                    decks.set(i, newDeck(data.readString("deck_name_" + i)));
+                    decks.set(i, new Deck(data.readString("deck_name_" + i)));
                 }
                 else {
-                    decks.add(newDeck(data.readString("deck_name_" + i)));
+                    decks.add(new Deck(data.readString("deck_name_" + i)));
                 }
                 CardPool mainCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deck_" + i)));
                 decks.get(i).getMain().addAll(mainCards.getFilteredPool(isValid));
@@ -611,17 +604,17 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             }
             // In case we allow removing decks from the deck selection GUI, populate up to the minimum
             for (int i = dynamicDeckCount++; i < MIN_DECK_COUNT; i++) {
-                decks.set(i, newDeck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
+                decks.set(i, new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
             }
         // Legacy load
         } else {
             for (int i = 0; i < MIN_DECK_COUNT; i++) {
                 if (!data.containsKey("deck_name_" + i)) {
                     if (i == 0) decks.set(i, deck);
-                    else decks.set(i, newDeck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
+                    else decks.set(i, new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
                     continue;
                 }
-                decks.set(i, newDeck(data.readString("deck_name_" + i)));
+                decks.set(i, new Deck(data.readString("deck_name_" + i)));
                 CardPool mainCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deck_" + i)));
                 decks.get(i).getMain().addAll(mainCards.getFilteredPool(isValid));
                 unsupportedCards.addAll(mainCards.getFilteredPool(isUnsupported).toFlatList());
@@ -755,7 +748,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.store("isFemale", isFemale);
         data.store("colorIdentity", colorIdentity.getColor());
 
-        data.store("commander_mode", commanderMode);
+        data.store("adventure_mode", adventureMode.toString());
 
         data.store("fantasyMode", fantasyMode);
         data.store("announceFantasy", announceFantasy);
@@ -1459,7 +1452,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
      * Clears a deck by replacing the current selected deck with a new deck
      */
     public void clearDeck() {
-        deck = decks.set(selectedDeckIndex, newDeck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
+        deck = decks.set(selectedDeckIndex, new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
     }
 
     /**
@@ -1472,7 +1465,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void addDeck(){
-        decks.add(newDeck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
+        decks.add(new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
     }
 
     /**

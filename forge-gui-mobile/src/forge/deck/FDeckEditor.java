@@ -1085,7 +1085,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         return editorConfig.isLimited();
     }
     public boolean isCommanderEditor() {
-        return AdventurePlayer.current().isCommanderMode() || editorConfig.hasCommander();
+        return editorConfig.hasCommander();
     }
     public boolean isDraftEditor() {
         return editorConfig.isDraft();

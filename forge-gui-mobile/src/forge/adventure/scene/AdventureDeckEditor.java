@@ -9,6 +9,7 @@ import forge.adventure.data.AdventureEventData;
 import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.util.AdventureEventController;
+import forge.adventure.util.AdventureModes;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.assets.FImage;
@@ -65,7 +66,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         protected DeckEditorPage[] getInitialPages() {
-            if (AdventurePlayer.current().isCommanderMode())
+            if (AdventurePlayer.current().getAdventureMode() == AdventureModes.Commander)
                 return new DeckEditorPage[]{
                         new CollectionCatalogPage(),
                         new AdventureDeckSectionPage(DeckSection.Commander, ItemManagerConfig.ADVENTURE_EDITOR_POOL),
@@ -123,6 +124,13 @@ public class AdventureDeckEditor extends FDeckEditor {
             }
             return unlockedEditions;
         }
+    }
+
+    @Override
+    public boolean isCommanderEditor() {
+        if (AdventurePlayer.current().getAdventureMode() == AdventureModes.Commander)
+            return true;
+        return super.isCommanderEditor();
     }
 
     protected static class ShopConfig extends AdventureEditorConfig {
@@ -911,7 +919,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         String deckError;
         if (!(getEditorConfig() instanceof ShopConfig))
         {
-            if (AdventurePlayer.current().isCommanderMode())
+            if (AdventurePlayer.current().getAdventureMode() == AdventureModes.Commander)
                 deckError = GameType.Commander.getDeckFormat().getDeckConformanceProblem(getDeck());
             else
                 deckError = GameType.Adventure.getDeckFormat().getDeckConformanceProblem(getDeck());
