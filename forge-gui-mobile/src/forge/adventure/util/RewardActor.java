@@ -33,6 +33,7 @@ import forge.Graphics;
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.adventure.data.ItemData;
+import forge.adventure.player.AdventurePlayer;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.UIScene;
@@ -943,8 +944,18 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     addListener(tooltip);
                 }
             }
-            if (autoSell != null && !autoSell.isVisible() && flipProcess == 1)
+            if (autoSell != null && !autoSell.isVisible() && flipProcess == 1) {
                 autoSell.setVisible(true);
+                if (AdventurePlayer.current().isCommanderMode()) {
+                    PaperCard pc = reward.getCard();
+                    if (pc != null) {
+                        byte cmdMask = AdventurePlayer.current().getCommander().getRules().getColorIdentity().getColor();
+                        boolean inCI = pc.getRules().getColorIdentity().getMissingColors(cmdMask).isColorless();
+                        boolean inCollection = AdventurePlayer.current().getCollectionCards(true).contains(pc);
+                        setAutoSell(!inCI || inCollection);
+                    }
+                }
+            }
             // flipProcess=(float)Gdx.input.getX()/ (float)Gdx.graphics.getWidth();
         }
 

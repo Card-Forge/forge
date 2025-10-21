@@ -510,18 +510,6 @@ public class RewardScene extends UIScene {
 
             RewardActor actor = new RewardActor(reward, type == Type.Loot || type == Type.QuestReward, type, type == Type.Shop && (numberOfRows > 2 || numberOfColumns > 2));
 
-            if (AdventurePlayer.current().isCommanderMode()) {
-                PaperCard pc = reward.getCard();
-                if (pc != null) {
-                    byte cmdMask = AdventurePlayer.current().getCommander().getRules().getColorIdentity().getColor();
-                    boolean inCI = pc.getRules().getColorIdentity().getMissingColors(cmdMask).isColorless();
-                    boolean inCollection = AdventurePlayer.current().getCollectionCards(true).contains(pc);
-                    autoSell = !inCI || inCollection;
-                    reward.setAutoSell(autoSell);
-                    actor.setAutoSell(autoSell);
-                }
-            }
-
             actor.setBounds(lastRowXAdjust + xOff + cardWidth * (i % numberOfColumns) + spacing, yOff + cardHeight * currentRow + spacing, cardWidth - spacing * 2, cardHeight - spacing * 2);
 
             if (type == Type.Shop) {

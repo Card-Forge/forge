@@ -922,16 +922,19 @@ public class AdventureDeckEditor extends FDeckEditor {
         }
 
         String deckError;
-        if (AdventurePlayer.current().isCommanderMode())
-            deckError = GameType.Commander.getDeckFormat().getDeckConformanceProblem(getDeck());
-        else
-            deckError = GameType.Adventure.getDeckFormat().getDeckConformanceProblem(getDeck());
-        
-        if (deckError != null) {
-            //Allow the player to close the editor with an invalid deck, but warn them that cards may be swapped out.
-            String warning = localizer.getMessage("lblAdventureDeckError", deckError);
-            FOptionPane.showConfirmDialog(warning, localizer.getMessage("lblInvalidDeck"), false, result -> resolveClose(canCloseCallback, result == true));
-            return;
+        if (!(getEditorConfig() instanceof ShopConfig))
+        {
+            if (AdventurePlayer.current().isCommanderMode())
+                deckError = GameType.Commander.getDeckFormat().getDeckConformanceProblem(getDeck());
+            else
+                deckError = GameType.Adventure.getDeckFormat().getDeckConformanceProblem(getDeck());
+
+            if (deckError != null) {
+                //Allow the player to close the editor with an invalid deck, but warn them that cards may be swapped out.
+                String warning = localizer.getMessage("lblAdventureDeckError", deckError);
+                FOptionPane.showConfirmDialog(warning, localizer.getMessage("lblInvalidDeck"), false, result -> resolveClose(canCloseCallback, result == true));
+                return;
+            }
         }
 
         resolveClose(canCloseCallback, true);
