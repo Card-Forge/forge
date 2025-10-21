@@ -37,6 +37,7 @@ import forge.util.NameGenerator;
  * NewGame scene that contains the character creation
  */
 public class NewGameScene extends MenuScene {
+
     private static final int NUMBER_OF_COMMANDER_CANDIDATES = 5;
     TextField selectedName;
     ColorSet[] colorIds;

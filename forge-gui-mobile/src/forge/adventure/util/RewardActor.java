@@ -926,6 +926,16 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         getColor().a = 0.5f;
     }
 
+    private static boolean inCollectionLike(PaperCard pc) {
+        var coll = AdventurePlayer.current().getCollectionCards(true).toFlatList();
+        String name = pc.getName();
+        for (PaperCard c : coll) {
+            if (c.equals(pc) || c.getName().equals(name))
+                return true;
+        }
+        return false;
+    }
+
     @Override
     public void act(float delta) {
         super.act(delta);
@@ -949,10 +959,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 if (AdventurePlayer.current().isCommanderMode()) {
                     PaperCard pc = reward.getCard();
                     if (pc != null) {
-                        byte cmdMask = AdventurePlayer.current().getCommander().getRules().getColorIdentity().getColor();
-                        boolean inCI = pc.getRules().getColorIdentity().getMissingColors(cmdMask).isColorless();
-                        boolean inCollection = AdventurePlayer.current().getCollectionCards(true).contains(pc);
-                        setAutoSell(!inCI || inCollection);
+                        setAutoSell(inCollectionLike(pc));
                     }
                 }
             }

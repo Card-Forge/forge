@@ -7,6 +7,7 @@ import com.google.common.collect.ImmutableList;
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
+import forge.adventure.player.AdventurePlayer;
 import forge.assets.*;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
@@ -1084,7 +1085,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         return editorConfig.isLimited();
     }
     public boolean isCommanderEditor() {
-        return editorConfig.hasCommander();
+        return AdventurePlayer.current().isCommanderMode() || editorConfig.hasCommander();
     }
     public boolean isDraftEditor() {
         return editorConfig.isDraft();
@@ -1538,8 +1539,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         protected boolean canEditMainCommander() {
             //Planar conquest sets the commander by other means.
-            return (parentScreen.getEditorConfig().getGameType() != GameType.PlanarConquest) &&
-                    (parentScreen.getEditorConfig().getGameType() != GameType.Adventure);
+            return (parentScreen.getEditorConfig().getGameType() != GameType.PlanarConquest);
         }
 
         protected boolean needsCommander() {

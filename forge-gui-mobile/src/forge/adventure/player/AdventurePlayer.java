@@ -56,7 +56,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private final DifficultyData difficultyData = new DifficultyData();
 
     // Commander mode
-    private PaperCard commander;
     private boolean commanderMode;
 
     // Game data.
@@ -121,7 +120,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         fantasyMode = false;
         announceFantasy = false;
         usingCustomDeck = false;
-        commander = null;
         commanderMode = false;
         blessing = null;
         gold = 0;
@@ -157,10 +155,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public final Set<PaperCard> favoriteCards = new HashSet<>();
 
     public void create(String n, Deck startingDeck, boolean male, int race, int avatar, boolean isFantasy,
-                       boolean isUsingCustomDeck, DifficultyData difficultyData, PaperCard commander) {
+                       boolean isUsingCustomDeck, DifficultyData difficultyData, boolean commanderMode) {
         clear();
-        this.commanderMode = commander != null;
-        this.commander = commander;
+        this.commanderMode = commanderMode;
         announceFantasy = fantasyMode = isFantasy; //Set Chaos mode first.
         announceCustom = usingCustomDeck = isUsingCustomDeck;
 
@@ -277,10 +274,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return cards;
     }
 
-    public PaperCard getCommander(){
-        return commander;
-    }
-
     public String getName() {
         return name;
     }
@@ -360,7 +353,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private Deck newDeck(String deckname){
         if (commanderMode) {
             Deck n_deck = new Deck(deckname);
-            n_deck.putSection(DeckSection.Commander, new CardPool(List.of(Map.entry(commander, 1))));
+            n_deck.putSection(DeckSection.Commander, new CardPool());
             return n_deck;
         }
         return new Deck(deckname);
@@ -423,15 +416,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         avatarIndex = data.readInt("avatarIndex");
         isFemale = data.readBool("isFemale");
 
-        String commander_name = data.readString("commander_name");
-        String commander_set = data.readString("commander_set");
-        int commander_art = data.readInt("commander_art");
-        if (commander_name != null) {
-            commander = StaticData.instance().getCommonCards().getCard(commander_name, commander_set, commander_art);
-            commanderMode = true;
-        } else {
-            commanderMode = false;
-        }
+        commanderMode = data.readBool("commander_mode");
 
         if (data.containsKey("colorIdentity")) {
             String temp = data.readString("colorIdentity");
@@ -772,11 +757,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.store("isFemale", isFemale);
         data.store("colorIdentity", colorIdentity.getColor());
 
-        if (commander != null) {
-            data.store("commander_name", commander.getCardName());
-            data.store("commander_set", commander.getEdition());
-            data.store("commander_art", commander.getArtIndex());
-        }
+        data.store("commander_mode", commanderMode);
 
         data.store("fantasyMode", fantasyMode);
         data.store("announceFantasy", announceFantasy);

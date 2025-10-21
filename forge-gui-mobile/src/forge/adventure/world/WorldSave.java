@@ -147,7 +147,7 @@ public class WorldSave {
         } else {
             starterDeck = Config.instance().starterDeck(startingColorIdentity, diff, mode, customDeckIndex, starterEdition, null);
         }
-        currentSave.player.create(name, starterDeck, male, race, avatarIndex, chaos, custom, diff, commander);
+        currentSave.player.create(name, starterDeck, male, race, avatarIndex, chaos, custom, diff, isCommander);
 
         currentSave.player.setWorldPosY((int) (currentSave.world.getData().playerStartPosY * currentSave.world.getData().height * currentSave.world.getTileSize()));
         currentSave.player.setWorldPosX((int) (currentSave.world.getData().playerStartPosX * currentSave.world.getData().width * currentSave.world.getTileSize()));
