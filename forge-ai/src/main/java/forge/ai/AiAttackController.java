@@ -974,6 +974,16 @@ public class AiAttackController {
             return aiAggression;
         }
 
+        // Only do decisive attacks against token-generating players
+        if (!bAssault && defender instanceof Player) {
+            Player opponent = (Player)defender;
+            if (CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Rabble Rousing"))
+                - CardLists.count(opponent.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Darien, King of Kjeldor"))
+                - CardLists.count(opponent.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Kazuul, Tyrant of the Cliffs")) < 0) {
+                    return aiAggression;
+                }
+        }
+
         if (bAssault && defender == defendingOpponent) { // in case we are forced to attack someone else
             if (LOG_AI_ATTACKS)
                 System.out.println("Assault");

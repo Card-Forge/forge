@@ -71,7 +71,8 @@ public final class CardRules implements ICardCharacteristics {
             specializedParts.put(CardStateName.SpecializeG, faces[6]);
         }
 
-        allFaces = Arrays.stream(faces).filter(Objects::nonNull).collect(Collectors.toUnmodifiableList());
+        // Android doesn't support toUnmodifiableList
+        allFaces = Arrays.stream(faces).filter(Objects::nonNull).collect(Collectors.toList());
 
         aiHints = cah;
         meldWith = "";
