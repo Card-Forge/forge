@@ -620,7 +620,7 @@ public final class CardEdition implements Comparable<CardEdition> {
                     * extra parameters - grouping #5
                 */
                 // Collector numbers now should allow hyphens for Planeswalker Championship Promos
-                "(?:^(.?[0-9A-Z-]+\\S*[A-Z]*)\\s)?(?:([SCURML])\\s)?(?<name>[^@$]*)(?: @([^$]*))?(?: \\$\\{(.+)})?$"
+                "(?:^(.?[0-9A-Z-]+\\S*[A-Z]*)\\s)?(?:([SCURML])\\s)?([^@$]+)(?: @([^$]*))?(?: \\$\\{(.+)})?$"
                 //"(?:^(?<cnum>.?[0-9A-Z-]+\\S*[A-Z]*)\\s)?(?:(?<rarity>[SCURML])\\s)?(?<name>[^@$]*)(?: @(?<artist>[^$]*))?(?: \\$\\{(?<params>.+)})?$"
         );
 
@@ -631,7 +631,7 @@ public final class CardEdition implements Comparable<CardEdition> {
                  * artist name - grouping #3
                  */
                 //"(?:^(?<cnum>.?[0-9A-Z-]+\\S?[A-Z☇]*)\\s)?(?<name>[^@]*)(?: @(?<artist>.*))?$"
-                "(?:^(.?[0-9A-Z-]+\\S?[A-Z☇]*)\\s)?([^@]*)(?: @(.*))?$"
+                "(?:^(.?[0-9A-Z-]+\\S?[A-Z☇]*)\\s)?([^@]+)(?: @(.*))?$"
         );
 
         public static final Pattern EXTRA_PARAMS_PATTERN = Pattern.compile(
