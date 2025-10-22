@@ -51,7 +51,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         public DeckFormat getDeckFormat() {
-            return DeckFormat.Adventure;
+            return AdventurePlayer.current().getAdventureMode() == AdventureModes.Commander ? DeckFormat.Commander : DeckFormat.Adventure;
         }
 
         @Override
@@ -919,10 +919,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         String deckError;
         if (!(getEditorConfig() instanceof ShopConfig))
         {
-            if (AdventurePlayer.current().getAdventureMode() == AdventureModes.Commander)
-                deckError = GameType.Commander.getDeckFormat().getDeckConformanceProblem(getDeck());
-            else
-                deckError = GameType.Adventure.getDeckFormat().getDeckConformanceProblem(getDeck());
+            deckError = getEditorConfig().getDeckFormat().getDeckConformanceProblem(getDeck());
 
             if (deckError != null) {
                 //Allow the player to close the editor with an invalid deck, but warn them that cards may be swapped out.

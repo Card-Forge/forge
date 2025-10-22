@@ -137,16 +137,10 @@ public class WorldSave {
         currentSave.pointOfInterestChanges.clear();
         boolean chaos = mode == AdventureModes.Chaos;
         boolean custom = mode == AdventureModes.Custom;
-        boolean isCommander = mode == AdventureModes.Commander;
-        Deck starterDeck;
-        if (isCommander){
-            currentSave.player.addReward(new Reward(commander, true));
-            starterDeck = Config.instance().starterDeck(startingColorIdentity, diff, mode, customDeckIndex,
+
+        Deck starterDeck = Config.instance().starterDeck(startingColorIdentity, diff, mode, customDeckIndex,
                     starterEdition, commander);
-            starterDeck.putSection(DeckSection.Commander, new CardPool(List.of(Map.entry(commander, 1))));
-        } else {
-            starterDeck = Config.instance().starterDeck(startingColorIdentity, diff, mode, customDeckIndex, starterEdition, null);
-        }
+
         currentSave.player.create(name, starterDeck, male, race, avatarIndex, chaos, custom, diff, mode);
 
         currentSave.player.setWorldPosY((int) (currentSave.world.getData().playerStartPosY * currentSave.world.getData().height * currentSave.world.getTileSize()));
