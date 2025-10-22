@@ -84,7 +84,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private boolean usingCustomDeck = false;
     private boolean announceCustom = false;
 
-
     // Signals
     final SignalList onLifeTotalChangeList = new SignalList();
     final SignalList onShardsChangeList = new SignalList();
