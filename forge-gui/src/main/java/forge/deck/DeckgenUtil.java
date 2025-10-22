@@ -2,7 +2,10 @@ package forge.deck;
 
 import com.google.common.collect.Lists;
 import forge.StaticData;
-import forge.card.*;
+import forge.card.CardDb;
+import forge.card.CardRules;
+import forge.card.CardRulesPredicates;
+import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.generation.*;

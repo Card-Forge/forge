@@ -11,17 +11,13 @@ import forge.adventure.stage.WorldStage;
 import forge.adventure.util.*;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
-import forge.deck.CardPool;
 import forge.deck.Deck;
-import forge.deck.DeckSection;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.player.GamePlayerUtil;
 
 import java.io.*;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 import java.util.zip.DeflaterOutputStream;
 import java.util.zip.InflaterInputStream;
 
