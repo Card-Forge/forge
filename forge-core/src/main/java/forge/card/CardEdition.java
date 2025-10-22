@@ -613,25 +613,25 @@ public final class CardEdition implements Comparable<CardEdition> {
                 So, untill support for those devices is officially dropped,
                 we'll have to suffice with numbered groups.
                 We are looking for:
-                    * cnum - grouping #1
-                    * rarity - grouping #2
-                    * name - grouping #3
-                    * artist name - grouping #4
-                    * extra parameters - grouping #5
+                    * cnum - grouping #2
+                    * rarity - grouping #4
+                    * name - grouping #5
+                    * artist name - grouping #7
+                    * extra parameters - grouping #9
                 */
                 // Collector numbers now should allow hyphens for Planeswalker Championship Promos
-                "(?:^(.?[0-9A-Z-]+\\S*[A-Z]*)\\s)?(?:([SCURML])\\s)?([^@$]+)(?: @([^$]*))?(?: \\$\\{(.+)})?$"
+                "(^(.?[0-9A-Z-]+\\S*[A-Z]*)\\s)?(([SCURML])\\s)?([^@$]+)( @([^$]*))?( \\$\\{(.+)})?$"
                 //"(?:^(?<cnum>.?[0-9A-Z-]+\\S*[A-Z]*)\\s)?(?:(?<rarity>[SCURML])\\s)?(?<name>[^@$]*)(?: @(?<artist>[^$]*))?(?: \\$\\{(?<params>.+)})?$"
         );
 
         public static final Pattern TOKEN_PATTERN = Pattern.compile(
                 /*
-                 * cnum - grouping #1
-                 * name - grouping #2
-                 * artist name - grouping #3
+                 * cnum - grouping #2
+                 * name - grouping #3
+                 * artist name - grouping #5
                  */
                 //"(?:^(?<cnum>.?[0-9A-Z-]+\\S?[A-Z☇]*)\\s)?(?<name>[^@]*)(?: @(?<artist>.*))?$"
-                "(?:^(.?[0-9A-Z-]+\\S?[A-Z☇]*)\\s)?([^@]+)(?: @(.*))?$"
+                "(^(.?[0-9A-Z-]+\\S?[A-Z☇]*)\\s)?([^@]+)( @(.*))?$"
         );
 
         public static final Pattern EXTRA_PARAMS_PATTERN = Pattern.compile(
@@ -692,11 +692,11 @@ public final class CardEdition implements Comparable<CardEdition> {
                                 continue;
                             }
 
-                            String collectorNumber = matcher.group(1);
-                            CardRarity r = CardRarity.smartValueOf(matcher.group(2));
-                            String cardName = matcher.group(3);
-                            String artistName = matcher.group(4);
-                            String extraParamText = matcher.group(5);
+                            String collectorNumber = matcher.group(2);
+                            CardRarity r = CardRarity.smartValueOf(matcher.group(4));
+                            String cardName = matcher.group(5);
+                            String artistName = matcher.group(7);
+                            String extraParamText = matcher.group(9);
                             Map<String, String> extraParams = null;
                             if(!StringUtils.isBlank(extraParamText)) {
                                 Matcher paramMatcher = EXTRA_PARAMS_PATTERN.matcher(extraParamText);
@@ -742,9 +742,9 @@ public final class CardEdition implements Comparable<CardEdition> {
                         continue;
                     }
 
-                    String collectorNumber = matcher.group(1);
-                    String cardName = matcher.group(2);
-                    String artistName = matcher.group(3);
+                    String collectorNumber = matcher.group(2);
+                    String cardName = matcher.group(3);
+                    String artistName = matcher.group(5);
                     // rarity isn't used for this anyway
                     EditionEntry tis = new EditionEntry(cardName, collectorNumber, CardRarity.Token, artistName, null);
                     tokenMap.put(cardName, tis);
@@ -759,9 +759,9 @@ public final class CardEdition implements Comparable<CardEdition> {
                     if (!matcher.matches()) {
                         continue;
                     }
-                    String collectorNumber = matcher.group(1);
-                    String cardName = matcher.group(2);
-                    String artistName = matcher.group(3);
+                    String collectorNumber = matcher.group(2);
+                    String cardName = matcher.group(3);
+                    String artistName = matcher.group(5);
                     EditionEntry tis = new EditionEntry(cardName, collectorNumber, CardRarity.Unknown, artistName, null);
                     otherMap.put(cardName, tis);
                 }
