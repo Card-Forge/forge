@@ -257,7 +257,7 @@ public class Config {
                     }
                 }
             case Commander:
-                return DeckgenUtil.generateAdventureCommanderDeck(commander);
+                return DeckgenUtil.generateRandomCommanderDeck(commander, DeckFormat.Commander, false, false);
         }
         return null;
     }
