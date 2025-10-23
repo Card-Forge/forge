@@ -2603,8 +2603,6 @@ public class AbilityUtils {
         }
 
         if (sq[0].contains("Party")) {
-            int partySize = 0;
-
             Set<String> chosenParty = Sets.newHashSet();
             int wildcard = 0;
             ListMultimap<String, Card> multityped = MultimapBuilder.hashKeys().arrayListValues().build();
@@ -2616,11 +2614,13 @@ public class AbilityUtils {
                     continue;
                 }
                 CardTypeView type = card.getType();
-                // cards with all creature types will just return full list
                 Set<String> creatureTypes;
+
+                // extra logic for "all creature types" cards
                 if (type.hasAllCreatureTypes()) {
+                    // one of the party types could be excluded, so check each of them separate
                     creatureTypes = CardType.Constant.PARTY_TYPES.stream().filter(p -> type.hasCreatureType(p)).collect(Collectors.toSet());
-                } else {
+                } else { // shortcut for others 
                     creatureTypes = type.getCreatureTypes();
                     creatureTypes.retainAll(CardType.Constant.PARTY_TYPES);
                 }
@@ -2646,27 +2646,22 @@ public class AbilityUtils {
                 }
             }
 
-            partySize = Math.min(chosenParty.size() + wildcard, 4);
-
-            if (partySize < 4) {
+            if (chosenParty.size() + wildcard < 4) {
                 multityped.keySet().removeAll(chosenParty);
 
+                // sort by amount of members
                 Multimaps.asMap(multityped).entrySet().stream()
-                .sorted(Map.Entry.<String, List<Card>>comparingByValue(
-                        Comparator.<List<Card>>comparingInt(Collection::size)))
-                    //.sorted(Map.Entry.<>comparingByValue(Comparator<>.comparingInt​(Collection::size)))
-                .forEach( e -> {
-                    e.getValue().removeAll(chosenMulti);
-                    if (e.getValue().size() > 0) {
-                        chosenParty.add(e.getKey());
-                        chosenMulti.add(e.getValue().get(0));
-                    }
-                });
+                    .sorted(Map.Entry.<String, List<Card>>comparingByValue(Comparator.<List<Card>>comparingInt(Collection::size)))
+                    .forEach(e -> {
+                        e.getValue().removeAll(chosenMulti);
+                        if (e.getValue().size() > 0) {
+                            chosenParty.add(e.getKey());
+                            chosenMulti.add(e.getValue().get(0));
+                        }
+                    });
             }
 
-            partySize = Math.min(chosenParty.size() + wildcard, 4);
-
-            return doXMath(partySize, expr, c, ctb);
+            return doXMath(Math.min(chosenParty.size() + wildcard, 4), expr, c, ctb);
         }
 
         // TODO make AI part to understand Sunburst better so this isn't needed
