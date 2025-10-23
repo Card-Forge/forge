@@ -10,7 +10,6 @@ import com.badlogic.gdx.utils.ObjectMap;
 import forge.CardStorageReader;
 import forge.Forge;
 import forge.ImageKeys;
-import forge.StaticData;
 import forge.adventure.data.*;
 import forge.card.*;
 import forge.deck.*;
@@ -28,8 +27,6 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.function.Predicate;
-import java.util.regex.Pattern;
 
 /**
  * Main resource class to access files from the selected adventure
