@@ -23,7 +23,10 @@ import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
-import forge.card.*;
+import forge.card.CardDb;
+import forge.card.CardEdition;
+import forge.card.ColorSet;
+import forge.card.ICardFace;
 import forge.item.PaperCard;
 import forge.deck.DeckProxy;
 import forge.localinstance.properties.ForgePreferences;
@@ -556,7 +559,7 @@ public class NewGameScene extends MenuScene {
                         The beginning will be tough, but you can always swap your commander if you find a better one.
                         """);
                 break;
-            default:;
+            default:
                 summaryText.append("No summary available for your this game mode.");
                 break;
         }
