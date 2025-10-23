@@ -340,7 +340,7 @@ public class RewardScene extends UIScene {
         }
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
             actor.remove();
-            if (actor instanceof RewardActor){
+            if (actor instanceof RewardActor) {
                 ((RewardActor) actor).dispose();
             }
         }

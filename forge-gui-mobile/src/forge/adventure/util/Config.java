@@ -12,7 +12,10 @@ import forge.Forge;
 import forge.ImageKeys;
 import forge.adventure.data.*;
 import forge.card.*;
-import forge.deck.*;
+import forge.deck.Deck;
+import forge.deck.DeckFormat;
+import forge.deck.DeckProxy;
+import forge.deck.DeckgenUtil;
 import forge.gui.GuiBase;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
@@ -26,7 +29,8 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Main resource class to access files from the selected adventure

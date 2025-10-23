@@ -884,5 +884,4 @@ public class DeckgenUtil {
 
         return suggestionMap;
     }
-
 }
