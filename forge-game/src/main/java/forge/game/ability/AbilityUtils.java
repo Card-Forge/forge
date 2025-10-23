@@ -4,6 +4,7 @@ import com.google.common.collect.*;
 import com.google.common.math.IntMath;
 import forge.card.CardStateName;
 import forge.card.CardType;
+import forge.card.CardTypeView;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
@@ -2602,20 +2603,27 @@ public class AbilityUtils {
         }
 
         if (sq[0].contains("Party")) {
-            Set<String> partyTypes = Sets.newHashSet(CardType.Constant.PARTY_TYPES);
             int partySize = 0;
 
             Set<String> chosenParty = Sets.newHashSet();
             int wildcard = 0;
-            List<Set<String>> multityped = Lists.newArrayList();
+            ListMultimap<String, Card> multityped = MultimapBuilder.hashKeys().arrayListValues().build();
+            List<Card> chosenMulti = Lists.newArrayList();
 
             // Figure out how to count each class separately.
             for (Card card : player.getCardsIn(ZoneType.Battlefield)) {
                 if (!card.isCreature()) {
                     continue;
                 }
+                CardTypeView type = card.getType();
                 // cards with all creature types will just return full list
-                Set<String> creatureTypes = CardType.Constant.PARTY_TYPES.stream().filter(p -> card.getType().hasCreatureType(p)).collect(Collectors.toSet());
+                Set<String> creatureTypes;
+                if (type.hasAllCreatureTypes()) {
+                    creatureTypes = CardType.Constant.PARTY_TYPES.stream().filter(p -> type.hasCreatureType(p)).collect(Collectors.toSet());
+                } else {
+                    creatureTypes = type.getCreatureTypes();
+                    creatureTypes.retainAll(CardType.Constant.PARTY_TYPES);
+                }
 
                 switch (creatureTypes.size()) {
                 case 0:
@@ -2627,7 +2635,9 @@ public class AbilityUtils {
                     chosenParty.addAll(creatureTypes);
                     break;
                 default:
-                    multityped.add(creatureTypes);
+                    for (String t : creatureTypes) {
+                        multityped.put(t, card);
+                    }
                 }
 
                 // found enough
@@ -2639,18 +2649,19 @@ public class AbilityUtils {
             partySize = Math.min(chosenParty.size() + wildcard, 4);
 
             if (partySize < 4) {
-                partyTypes.removeAll(chosenParty);
+                multityped.keySet().removeAll(chosenParty);
 
-                // Here I'm left with just the party types that I haven't selected.
-                for (Set<String> types : multityped) {
-                    types.retainAll(partyTypes);
-
-                    for (String type : types) {
-                        chosenParty.add(type);
-                        partyTypes.remove(type);
-                        break;
+                Multimaps.asMap(multityped).entrySet().stream()
+                .sorted(Map.Entry.<String, List<Card>>comparingByValue(
+                        Comparator.<List<Card>>comparingInt(Collection::size)))
+                    //.sorted(Map.Entry.<>comparingByValue(Comparator<>.comparingInt​(Collection::size)))
+                .forEach( e -> {
+                    e.getValue().removeAll(chosenMulti);
+                    if (e.getValue().size() > 0) {
+                        chosenParty.add(e.getKey());
+                        chosenMulti.add(e.getValue().get(0));
                     }
-                }
+                });
             }
 
             partySize = Math.min(chosenParty.size() + wildcard, 4);
