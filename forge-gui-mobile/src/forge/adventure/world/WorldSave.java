@@ -15,7 +15,6 @@ import forge.adventure.util.SignalList;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
 import forge.deck.Deck;
-import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.player.GamePlayerUtil;
 
@@ -130,15 +129,14 @@ public class WorldSave {
 
     public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex,
                                              ColorSet startingColorIdentity, DifficultyData diff, AdventureModes mode,
-                                             int customDeckIndex, CardEdition starterEdition, long seed,
-                                             PaperCard commander) {
+                                             int customDeckIndex, CardEdition starterEdition, long seed) {
         currentSave.world.generateNew(seed);
         currentSave.pointOfInterestChanges.clear();
         boolean chaos = mode == AdventureModes.Chaos;
         boolean custom = mode == AdventureModes.Custom;
 
         Deck starterDeck = Config.instance().starterDeck(startingColorIdentity, diff, mode, customDeckIndex,
-                    starterEdition, commander);
+                    starterEdition);
 
         currentSave.player.create(name, starterDeck, male, race, avatarIndex, chaos, custom, diff, mode);
 

@@ -13,7 +13,6 @@ import forge.ImageKeys;
 import forge.adventure.data.*;
 import forge.card.*;
 import forge.deck.Deck;
-import forge.deck.DeckFormat;
 import forge.deck.DeckProxy;
 import forge.deck.DeckgenUtil;
 import forge.gui.GuiBase;
@@ -232,7 +231,7 @@ public class Config {
     }
 
     public Deck starterDeck(ColorSet color, DifficultyData difficultyData, AdventureModes mode, int index,
-                            CardEdition starterEdition, PaperCard commander) {
+                            CardEdition starterEdition) {
         switch (mode) {
             case Constructed:
                 for (ObjectMap.Entry<String, String> entry : difficultyData.constructedStarterDecks) {
@@ -258,7 +257,11 @@ public class Config {
                     }
                 }
             case Commander:
-                return DeckgenUtil.generateRandomCommanderDeck(commander, DeckFormat.Commander, false, false);
+                for (ObjectMap.Entry<String, String> entry : difficultyData.commanderDecks) {
+                    if (ColorSet.fromNames(entry.key.toCharArray()).getColor() == color.getColor()) {
+                        return CardUtil.getDeck(entry.value, false, false, "", false, false);
+                    }
+                };
         }
         return null;
     }

@@ -112,15 +112,6 @@
       "yOffset": 8
     },
     {
-      "type": "Label",
-      "name" : "chooseCommanderL",
-      "text": "[BLACK]tr(lblCommander):",
-      "width": 128,
-      "height": 16,
-      "x": 75,
-      "yOffset": -16
-    },
-    {
       "type": "ImageButton",
       "name": "leftAvatar",
       "style": "leftarrow",
@@ -211,15 +202,6 @@
       "height": 14,
       "x": 159,
       "yOffset": 9
-    },
-    {
-      "type": "Selector",
-      "name": "chooseCommander",
-      "selectable": true,
-      "width": 192,
-      "height": 14,
-      "x": 134,
-      "yOffset": -14
     },
     {
       "type": "TextButton",

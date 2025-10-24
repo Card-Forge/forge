@@ -11,11 +11,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.*;
-import java.util.function.Predicate;
 
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
-import forge.StaticData;
 import forge.adventure.data.DialogData;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.data.HeroListData;
@@ -23,11 +21,8 @@ import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
-import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
-import forge.card.ICardFace;
-import forge.item.PaperCard;
 import forge.deck.DeckProxy;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
@@ -41,7 +36,6 @@ import forge.util.NameGenerator;
  */
 public class NewGameScene extends MenuScene {
 
-    private static final int NUMBER_OF_COMMANDER_CANDIDATES = 3; // 3 * 5 colors = 15 commander choices
     TextField selectedName;
     ColorSet[] colorIds;
     CardEdition[] editionIds;
@@ -54,8 +48,6 @@ public class NewGameScene extends MenuScene {
     private final Selector difficulty;
     private final Selector starterEdition;
     private final TextraLabel starterEditionLabel;
-    private final Selector chooseCommander;
-    private final TextraLabel chooseCommanderLabel;
     private final Array<String> custom;
     private final TextraLabel colorLabel;
     private final ImageButton difficultyHelp;
@@ -65,7 +57,6 @@ public class NewGameScene extends MenuScene {
     private final Random rand = new Random();
 
     private final Array<AdventureModes> modes = new Array<>();
-    private final List<PaperCard> commanderChoices = new ArrayList<>();
 
     private NewGameScene() {
 
@@ -108,6 +99,11 @@ public class NewGameScene extends MenuScene {
                 AdventureModes.Pile.setSelectionName(colorIdLabel);
                 AdventureModes.Pile.setModes(colorNames);
             }
+            if (diff.commanderDecks != null) {
+                modes.add(AdventureModes.Commander);
+                AdventureModes.Commander.setSelectionName(colorIdLabel);
+                AdventureModes.Commander.setModes(colorNames);
+            }
             break;
         }
 
@@ -122,14 +118,6 @@ public class NewGameScene extends MenuScene {
         for (String editionName : starterEditionNames)
             editionNames.add(UIActor.localize(editionName));
         starterEdition.setTextList(editionNames);
-
-        chooseCommander = ui.findActor("chooseCommander");
-        chooseCommanderLabel = ui.findActor("chooseCommanderL");
-
-        // Here, we create a random list of 5 commander candidates for each base color
-        for (ColorSet tmpColorId : colorIds){
-            commanderChoices.addAll(getCommanderCandidatesForColor(tmpColorId));
-        }
 
         modes.add(AdventureModes.Chaos);
         AdventureModes.Chaos.setSelectionName("[BLACK]" + Forge.getLocalizer().getMessage("lblDeck") + ":");
@@ -163,20 +151,6 @@ public class NewGameScene extends MenuScene {
         AdventureModes initialMode = modes.get(mode.getCurrentIndex());
         starterEdition.setVisible(initialMode == AdventureModes.Standard);
         starterEditionLabel.setVisible(initialMode == AdventureModes.Standard);
-        chooseCommander.setVisible(initialMode == AdventureModes.Commander);
-        chooseCommanderLabel.setVisible(initialMode == AdventureModes.Commander);
-
-        chooseCommander.addListener(new ClickListener() {
-            @Override public void clicked(InputEvent event, float x, float y) {
-                removePreview();
-                PaperCard pc = commanderChoices.get(chooseCommander.getCurrentIndex());
-                Reward reward = new Reward(pc, false);
-                previewActor = new RewardActor(reward, false, null, false);
-                previewActor.setBounds(75, 180, 40, 60); // pick your size
-                stage.addActor(previewActor);
-                previewActor.toFront();
-            }
-        });
 
         gender.setTextList(new String[]{Forge.getLocalizer().getMessage("lblMale") + "[%120][CYAN] \u2642",
                 Forge.getLocalizer().getMessage("lblFemale") + "[%120][MAGENTA] \u2640"});
@@ -197,10 +171,6 @@ public class NewGameScene extends MenuScene {
                 colorId.setTextList(smode.getModes());
                 starterEdition.setVisible(smode == AdventureModes.Standard);
                 starterEditionLabel.setVisible(smode == AdventureModes.Standard);
-                chooseCommander.setVisible(smode == AdventureModes.Commander);
-                chooseCommanderLabel.setVisible(smode == AdventureModes.Commander);
-                if (smode != AdventureModes.Commander)
-                    removePreview();
             }
         });
         race = ui.findActor("race");
@@ -246,19 +216,10 @@ public class NewGameScene extends MenuScene {
                 showModeHelp();
             }
         });
-        updateCommanderChoices();
     }
 
     // class field
     private RewardActor previewActor;
-
-    private void removePreview() {
-        if (previewActor == null) return;
-        previewActor.removeTooltip();
-        previewActor.dispose();
-        previewActor.remove();   // detach from stage
-        previewActor = null;
-    }
 
     private static NewGameScene object;
 
@@ -288,31 +249,6 @@ public class NewGameScene extends MenuScene {
         }
     }
 
-    private List<PaperCard> getCommanderCandidatesForColor(ColorSet _color) {
-        CardDb cardDb = StaticData.instance().getCommonCards();
-
-        Predicate<PaperCard> commander_filter = card -> {
-            ICardFace face = card.getRules().getMainPart();
-            boolean isLegendaryCreature = face.getType().isCreature() && face.getType().isLegendary();
-            boolean sharesColorInIdentity = face.getColor().sharesColorWith(_color);
-
-            return isLegendaryCreature && sharesColorInIdentity;
-
-        };
-        List<PaperCard> commanderCandidates = new ArrayList<>(cardDb.streamUniqueCardsNoAlt().filter(commander_filter).toList());
-
-        Collections.shuffle(commanderCandidates);
-        int selectionSize = Math.min(NewGameScene.NUMBER_OF_COMMANDER_CANDIDATES, commanderCandidates.size());
-        return commanderCandidates.subList(0, selectionSize);
-    }
-
-    private void updateCommanderChoices(){
-        String[] commanders = commanderChoices.stream()
-                .map(PaperCard::getCardName)
-                .toArray(String[]::new);
-        chooseCommander.setTextList(commanders);
-    }
-
     private void generateAvatar() {
         avatarIndex = rand.nextInt();
         updateAvatar();
@@ -335,9 +271,6 @@ public class NewGameScene extends MenuScene {
         }
         Runnable runnable = () -> {
             started = false;
-            PaperCard commander_card = null;
-            if (AdventureModes.Commander.equals(modes.get(mode.getCurrentIndex())))
-                commander_card = commanderChoices.get(chooseCommander.getCurrentIndex());
             //FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC, false);
             WorldSave.generateNewWorld(selectedName.getText(),
                     gender.getCurrentIndex() == 0,
@@ -346,8 +279,7 @@ public class NewGameScene extends MenuScene {
                     colorIds[custom.isEmpty() || !AdventureModes.Custom.equals(modes.get(mode.getCurrentIndex())) ? colorId.getCurrentIndex() : 0],
                     Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
                     modes.get(mode.getCurrentIndex()), colorId.getCurrentIndex(),
-                    editionIds[starterEdition.getCurrentIndex()], 0,
-                    commander_card);//maybe replace with enum
+                    editionIds[starterEdition.getCurrentIndex()], 0);//maybe replace with enum
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             SoundSystem.instance.changeBackgroundTrack();
             WorldStage.getInstance().enterSpawnPOI();
@@ -386,9 +318,6 @@ public class NewGameScene extends MenuScene {
     @Override
     public void enter() {
         updateAvatar();
-        PaperCard commander_card = null;
-        if (AdventureModes.Commander.equals(modes.get(mode.getCurrentIndex())))
-            commander_card = commanderChoices.get(chooseCommander.getCurrentIndex());
         if (Forge.createNewAdventureMap) {
             FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC, false);
             WorldSave.generateNewWorld(selectedName.getText(),
@@ -398,8 +327,7 @@ public class NewGameScene extends MenuScene {
                     colorIds[colorId.getCurrentIndex()],
                     Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
                     modes.get(mode.getCurrentIndex()), colorId.getCurrentIndex(),
-                    editionIds[starterEdition.getCurrentIndex()], 0,
-                    commander_card);
+                    editionIds[starterEdition.getCurrentIndex()], 0);
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             Forge.switchScene(GameScene.instance());
         }
@@ -552,11 +480,9 @@ public class NewGameScene extends MenuScene {
                 summaryText.append("""
                         Mode: Commander
                         
-                        You will be presented with a choice of 15 randomly chosen commanders to start the playthrough. \
-                        You'll also be given a pseudo-randomised 100-card pile to start with. \
+                        You will given a preconstructed commander deck based on the chosen color theme to start the playthrough.
                         
-                        Good luck on your quest of creating a coherent deck that can win consistently. \
-                        The beginning will be tough, but you can always swap your commander if you find a better one.
+                        Good luck on your quest of creating a coherent deck that can win consistently and defeat the bosses.
                         """);
                 break;
             default:
