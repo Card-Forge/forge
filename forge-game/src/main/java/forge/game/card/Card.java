@@ -499,9 +499,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (state == CardStateName.FaceDown) {
             return getFaceDownState();
         }
-        if (state == CardStateName.EmptyRoom) {
-            return getEmptyRoomState();
-        }
         CardCloneStates clStates = getLastClonedState();
         if (clStates == null) {
             return getOriginalState(state);
@@ -560,7 +557,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         boolean needsTransformAnimation = transform || rollback;
         // faceDown has higher priority over clone states
         // while text change states doesn't apply while the card is faceDown
-        if (state != CardStateName.FaceDown && state != CardStateName.EmptyRoom) {
+        if (state != CardStateName.FaceDown) {
             CardCloneStates cloneStates = getLastClonedState();
             if (cloneStates != null) {
                 if (!cloneStates.containsKey(state)) {

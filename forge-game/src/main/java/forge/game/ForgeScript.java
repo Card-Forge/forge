@@ -93,6 +93,8 @@ public class ForgeScript {
             }
         } else if (property.equals("Outlaw")) {
             return type.isOutlaw();
+        } else if (property.equals("Party")) {
+            return type.isParty();
         } else if (property.startsWith("non")) {
             // ... Other Card types
             return !type.hasStringType(property.substring(3));
