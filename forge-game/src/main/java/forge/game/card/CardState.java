@@ -309,6 +309,9 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     public final boolean hasIntrinsicKeyword(String k) {
         return intrinsicKeywords.contains(k);
     }
+    public final boolean hasIntrinsicKeyword(Keyword k) {
+        return intrinsicKeywords.contains(k);
+    }
     public final void setIntrinsicKeywords(final Iterable<KeywordInterface> intrinsicKeyword0, final boolean lki) {
         intrinsicKeywords.clear();
         for (KeywordInterface k : intrinsicKeyword0) {
@@ -841,8 +844,17 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     }
 
     public CardState copy(final Card host, CardStateName name, final boolean lki) {
+        return copy(host, name, lki, null);
+    }
+    public CardState copy(final Card host, final CardTraitBase ctb) {
+        return copy(host, this.getStateName(), false, ctb);
+    }
+    public CardState copy(final Card host, CardStateName name, final CardTraitBase ctb) {
+        return copy(host, name, false, ctb);
+    }
+    public CardState copy(final Card host, CardStateName name, final boolean lki, final CardTraitBase ctb) {
         CardState result = new CardState(host, name);
-        result.copyFrom(this, lki);
+        result.copyFrom(this, lki, ctb);
         return result;
     }
 

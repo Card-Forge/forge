@@ -547,7 +547,14 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (!isCreature() && !isKindred()) {
             return false;
         }
-        return !Collections.disjoint(getCreatureTypes(), Constant.OUTLAW_TYPES);
+        return Constant.OUTLAW_TYPES.stream().anyMatch(s -> hasCreatureType(s));
+    }
+    @Override
+    public boolean isParty() {
+        if (!isCreature() && !isKindred()) {
+            return false;
+        }
+        return Constant.PARTY_TYPES.stream().anyMatch(s -> hasCreatureType(s));
     }
 
     @Override
@@ -916,6 +923,12 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
                 "Pirate",
                 "Rogue",
                 "Warlock");
+
+        public static final Set<String> PARTY_TYPES = Sets.newHashSet(
+                "Cleric",
+                "Rogue",
+                "Warrior",
+                "Wizard");
     }
     public static class Predicates {
         public static Predicate<String> IS_LAND_TYPE = CardType::isALandType;

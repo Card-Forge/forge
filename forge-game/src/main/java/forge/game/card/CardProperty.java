@@ -2,7 +2,6 @@ package forge.game.card;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.ColorSet;
@@ -720,17 +719,6 @@ public class CardProperty {
                     return false;
                 }
             }
-        } else if (property.equals("Party")) {
-            boolean isParty = false;
-            Set<String> partyTypes = Sets.newHashSet("Cleric", "Rogue", "Warrior", "Wizard");
-            Set<String> cTypes = card.getType().getCreatureTypes();
-            for (String t : partyTypes) {
-                if (cTypes.contains(t)) {
-                    isParty = true;
-                    break;
-                }
-            }
-            return isParty;
         } else if (property.startsWith("sharesCreatureTypeWith")) {
             if (property.equals("sharesCreatureTypeWith")) {
                 if (!card.sharesCreatureTypeWith(source)) {
