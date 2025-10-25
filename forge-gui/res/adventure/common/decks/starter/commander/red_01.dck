@@ -9,11 +9,9 @@ Name=Starter Commander - Red
 1 Viashino Pyromancer|fdn|1
 1 Bolrac-Clan Basher|mkm|1
 1 Charging Monstrosaur|xln|1
-1 Oreplate Pangolin|eoe|1
 1 Sabotender|fin|1
 1 Akoum Hellhound|znr|1
 1 Goblin Bushwhacker|zen|1
-1 Reinforced Ronin|neo|1
 1 Skitter of Lizards|cns|1
 1 Alania's Pathmaker|blb|1
 1 Anep, Vizier of Hazoret|j25|1
@@ -34,7 +32,7 @@ Name=Starter Commander - Red
 1 Voldaren Epicure|inr|1
 1 Command Beacon|tdc|1
 1 Command Tower|eoc|1
-38 Mountain|tle|1
+37 Mountain|tle|1
 1 Belligerent Whiptail|bfz|1
 1 Lightning Greaves|tdc|1
 1 Swiftfoot Boots|tdc|1
@@ -68,6 +66,9 @@ Name=Starter Commander - Red
 1 Smash to Smithereens|plst|1
 1 Stoke the Flames|mom|1
 1 Goblin Instigator|moc|1
+1 Commander's Plate|cmr|1
+1 Path of Ancestry|tdc|1
+1 Campfire|cmm|1
 
 [Sideboard]
 

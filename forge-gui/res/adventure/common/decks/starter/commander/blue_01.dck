@@ -35,8 +35,7 @@ Name=Starter Commander - Blue
 1 Spyglass Siren|lci|1
 1 Command Beacon|tdc|1
 1 Command Tower|eoc|1
-38 Island|tla|1
-1 Covetous Castaway|inr|1
+37 Island|tla|1
 1 Aegis Turtle|fdn|1
 1 Cogwork Wrestler|lci|1
 1 Lightning Greaves|tdc|1
@@ -44,7 +43,6 @@ Name=Starter Commander - Blue
 1 Animating Faerie|eld|1
 1 Aven Wind Mage|gn2|1
 1 Aarakocra Sneak|clb|1
-1 Apprentice Wizard|2xm|1
 1 Arcane Signet|eoc|1
 1 Burnished Hart|dsc|1
 1 Commander's Sphere|drc|1
@@ -68,6 +66,9 @@ Name=Starter Commander - Blue
 1 Clutch of Currents|bfz|1
 1 Cunning Geysermage|znr|1
 1 Exclusion Mage|fdn|1
+1 Commander's Plate|cmr|1
+1 Path of Ancestry|tdc|1
+1 Campfire|cmm|1
 
 [Sideboard]
 
