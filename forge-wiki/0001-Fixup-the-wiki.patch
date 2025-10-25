@@ -1,0 +1,187 @@
+From ac5bd0f63baa9045fcf131e9007b9458a77bca7e Mon Sep 17 00:00:00 2001
+From: Hugh Kaznowski <hughkaznowski@Hughs-MacBook-Pro.local>
+Date: Fri, 17 Oct 2025 11:25:16 +0100
+Subject: [PATCH] Fixup the wiki
+
+- Include link to gameplay in sidepanel
+- Include console details
+- Describe currency
+---
+ Console-and-cheats.md | 43 +++++++++++++++++++++++++++++++++++++++
+ Currency.md           | 47 +++++++++++++++++++++++++++++++++++++++++++
+ Deck-Building-Tips.md | 28 ++++++++++++++++++++++++++
+ _sidebar.md           |  7 +++++--
+ 4 files changed, 123 insertions(+), 2 deletions(-)
+ create mode 100644 Console-and-cheats.md
+ create mode 100644 Currency.md
+ create mode 100644 Deck-Building-Tips.md
+
+diff --git a/Console-and-cheats.md b/Console-and-cheats.md
+new file mode 100644
+index 0000000..43d7586
+--- /dev/null
++++ b/Console-and-cheats.md
+@@ -0,0 +1,43 @@
++Forge provides an in-game console in adventure mode.
++
++You can access (and close) the console while exploring by pressing F9 (or Fn-F9).
++
++To scroll the console window, click and drag the text box.
++
++## Available commands
++
++| Command Example | Description |
++| -- | -- |
++| resetMapQuests | Resets the map quests, resulting in all side-quest progress being lost and all side-quest types being re-picked |
++| give gold 1000 | Give 1000 gold |
++| give shards 1000 | Give 1000 shards |
++| give print lea 232 | Add an alpha (LEA set code) black lotus (232 collector number) |
++| give item <item name or code?> | Adds an in game item such as leather boots |
++| give set sld | Give 4 copies of every card in the Secret Lair Drop (set code SLD), flagged as having no sell value |
++| give nosell card forest | Gives a forest with no sell value |
++| give boosters leb | Add a booster from beta (LEB set code) |
++| give quest 123 | Add the quest by its number ID |
++| give life 10 | Add 10 life to yourself |
++| give card forest | Adds a forest to your inventory |
++| debug collision | Displays bounding boxes around entities |
++| debug map | TODO |
++| debug off | Turns off previously enable debugging |
++| teleport to 6000 5000 | Moves you 6000 tiles east and 5000 tiles north from the left bottom corner |
++| fullHeal | Returns your health back to baseline |
++| sprint 100 | Increases your speed for 100 seconds | 
++| setColorId R | Sets the player color identity; Probably used for testing and shops |
++| clearnosell | Clears the no sell value flag from all cards you own that are not used in a deck |
++| remove enemy abc | Remove the enemy from the map with the map ID abc |
++| remove enemy all | Remove all the enemies from the map |
++| dumpEnemyDeckList | Print the enemy deck lists to terminal output stream |
++| getShards amount 100 | Similar to give shards command; Gives 100 shards to the player |
++| resetQuests | Resets the world quests. In progress quests are not abandonned or reset including dungeons. Does not reroll abandoned quests. Not really sure what this does. | 
++| hide 100 | Enemies do not chase you for 100 seconds |
++| fly 100 | You can walk over obstacles for 100 seconds |
++| crack | Cracks a random item you are wearing | 
++| spawn enemy Sliver | Spawns a Sliver on your screen |
++| listPOI | Prints all locations in terminal output stream as ID-type pairings |
++| leave | Gets you out of the current town/dungeon/cave |
++| dumpEnemyColorIdentity | Prints all enemies, their colour affinity and deck name to terminal output |
++| heal | Recover your full health |
++| dumpEnemyDeckColors | Prints all decks available to enemies and their affinities |
+diff --git a/Currency.md b/Currency.md
+new file mode 100644
+index 0000000..cc97fbb
+--- /dev/null
++++ b/Currency.md
+@@ -0,0 +1,47 @@
++There are many currencies in the game, and most of them can be interchanged.
++
++# Cards
++
++Acquired by:
++- World drops
++- Match reward
++- Draft wins
++- Shop purchases
++- Quests
++
++Spent on:
++- Selling to shops
++
++# Gold
++
++Acquired by:
++- World drop
++- Match reward
++- Draft reward
++- Quests
++- Capitol Arena (100 gold entry, 1 win = 500 gold)
++
++Spent on:
++- Cards and items from shops
++- Drafts games
++- Crafting cards
++- Shards
++
++# Shards
++
++Acquired by
++- World drop
++- Quest reward
++
++Spent on
++- Crafting cards
++- Shop Re-rolls
++- Gold exchange
++
++# Challenge Coins
++
++Acquired by
++- At the start of the game
++
++Spent on
++- Drafts
+diff --git a/Deck-Building-Tips.md b/Deck-Building-Tips.md
+new file mode 100644
+index 0000000..9c82310
+--- /dev/null
++++ b/Deck-Building-Tips.md
+@@ -0,0 +1,28 @@
++# Adding basic lands and special arts
++
++You can add lands by clicking the tripple dots icon in the right top of the deck building interface.
++
++Initially you only have access to jumpstart basic land arts - to get more, you need to purchase the landscape sketch books from the basic land shop (The Cartographers Guild).
++
++# 40-card deck recommendation
++
++40-card decks give you a much more predictable curve.
++
++In a 40-card deck, each individual card has a 2.5% chance of being drawn.
++
++In a 60-card deck, each individual card has a 1.6% chance of being drawn.
++
++When you use a smaller deck, the significance of each individual card is much higher and will give you more predictable performance.
++
++# Autosell
++
++When you click a card that is not part of any decks, you get the option to move it to auto-sell.
++
++The numbers in the interface indicate how many copies you have.
++
++To sell the cards you have marked, go to any town and enter the Inn.
++In the Inn, the middle icon of the coin called Sell (E) will sell all your cards you have marked to sell.
++
++Individual card values vary by rarity and reputation with the town you sell them in.
++
++Since dying will cause you to lose a percentage of your gold, you may want to not sell all your cards immediately.
+diff --git a/_sidebar.md b/_sidebar.md
+index 10c55ba..7f53015 100644
+--- a/_sidebar.md
++++ b/_sidebar.md
+@@ -9,14 +9,17 @@
+ 
+ - [Adventure Mode](Adventure-Mode)
+ 
+-    - Gameplay Guide
++    - [Gameplay Guide](Gameplay-Guide)
+ 
+       - [Getting Started](Gameplay-Guide)
+       - [Different Planes](Different-Planes)
++      - [Currency](Currency)
++      - [Deck Building Tips](Deck-Building-Tips)
+       - [Towns & Capitals](Towns-&-Capitals)
+       - [Dungeons](Dungeons)
+       - [Equipments and Items](Equipments-and-Items)
+       - [Keyboard Shortcuts](Keyboard-Shortcuts)
++      - [Console and Cheats](Console-and-Cheats)
+ 
+   - [Modding and Development](https://github.com/Card-Forge/forge/wiki/Modding-and-Development)
+ 
+@@ -59,4 +62,4 @@
+ 
+ - [Missing Cards in Forge](Missing-Cards-in-Forge)
+   - [Un‐cards, Playtest Cards, and Other Funny Cards](Un‐cards,-Playtest-Cards,-and-Other-Funny-Cards)
+-- [Credit and Thanks](Credit-and-Thanks)
+\ No newline at end of file
++- [Credit and Thanks](Credit-and-Thanks)
+-- 
+2.39.5 (Apple Git-154)
+
