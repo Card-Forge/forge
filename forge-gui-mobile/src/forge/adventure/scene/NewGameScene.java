@@ -10,8 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 
-import java.util.*;
-
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.data.DialogData;
@@ -30,6 +28,8 @@ import forge.player.GamePlayerUtil;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundSystem;
 import forge.util.NameGenerator;
+
+import java.util.Random;
 
 /**
  * NewGame scene that contains the character creation
