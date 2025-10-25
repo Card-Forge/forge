@@ -230,8 +230,7 @@ public class Config {
         return configData.starterEditions;
     }
 
-    public Deck starterDeck(ColorSet color, DifficultyData difficultyData, AdventureModes mode, int index,
-                            CardEdition starterEdition) {
+    public Deck starterDeck(ColorSet color, DifficultyData difficultyData, AdventureModes mode, int index, CardEdition starterEdition) {
         switch (mode) {
             case Constructed:
                 for (ObjectMap.Entry<String, String> entry : difficultyData.constructedStarterDecks) {
