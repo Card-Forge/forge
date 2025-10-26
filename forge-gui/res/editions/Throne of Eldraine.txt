@@ -2,7 +2,6 @@
 Code=ELD
 Date=2019-10-04
 Name=Throne of Eldraine
-Code2=ELD
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:fromSheet("ELD cards"), 3 Uncommon:fromSheet("ELD cards"), 1 RareMythic:fromSheet("ELD cards"), 1 BasicLand
@@ -443,9 +442,9 @@ A-125 R A-Fires of Invention @Stanton Feng
 13 rw_3_1_human_warrior_trample_haste @Suzanne Helmigh
 14 bg_2_2_wolf_garruk @David Gaillet
 15 c_a_food_sac @Steven Belledin
-16 c_a_food_sac @Steven Belledin
-17 c_a_food_sac @Steven Belledin
-18 c_a_food_sac @Steven Belledin
+16 c_a_food_sac @Randy Gallegos
+17 c_a_food_sac @Donato Giancola
+18 c_a_food_sac @Lucas Graciano
 
 [other]
 19 emblem_garruk_cursed_huntsman @Eric Deschamps

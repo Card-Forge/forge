@@ -82,23 +82,17 @@ public final class CardEdition implements Comparable<CardEdition> {
         public static final EnumSet<Type> REPRINT_SET_TYPES = EnumSet.of(REPRINT, PROMO, COLLECTOR_EDITION);
 
         public String getBoosterBoxDefault() {
-            switch (this) {
-                case CORE:
-                case EXPANSION:
-                    return "36";
-                default:
-                    return "0";
-            }
+            return switch (this) {
+                case CORE, EXPANSION -> "36";
+                default -> "0";
+            };
         }
 
         public String getFatPackDefault() {
-            switch (this) {
-                case CORE:
-                case EXPANSION:
-                    return "10";
-                default:
-                    return "0";
-            }
+            return switch (this) {
+                case CORE, EXPANSION -> "10";
+                default -> "0";
+            };
         }
 
         public String toString(){
@@ -215,7 +209,7 @@ public final class CardEdition implements Comparable<CardEdition> {
         return sortableCollNr;
     }
 
-    public record EditionEntry(String name, String collectorNumber, CardRarity rarity, String artistName, String functionalVariantName) implements Comparable<EditionEntry> {
+    public record EditionEntry(String name, String collectorNumber, CardRarity rarity, String artistName, Map<String, String> extraParams) implements Comparable<EditionEntry> {
 
         public String toString() {
             StringBuilder sb = new StringBuilder();
@@ -232,9 +226,9 @@ public final class CardEdition implements Comparable<CardEdition> {
                 sb.append(" @");
                 sb.append(artistName);
             }
-            if (functionalVariantName != null) {
+            if (extraParams != null) {
                 sb.append(" $");
-                sb.append(functionalVariantName);
+                sb.append(extraParams.entrySet().stream().map(e -> String.format("\"%s\"=\"%s\"", e.getKey(), e.getValue())).collect(Collectors.joining(", ")));
             }
             return sb.toString();
         }
@@ -252,6 +246,24 @@ public final class CardEdition implements Comparable<CardEdition> {
                 return collNrCmp;
             }
             return rarity.compareTo(o.rarity);
+        }
+
+        public String getFlavorName() {
+            if(extraParams == null)
+                return null;
+            return extraParams.get("flavorname");
+        }
+
+        public String getFunctionalVariantName() {
+            if(extraParams == null)
+                return null;
+            return extraParams.get("variant");
+        }
+
+        public String getScriptOverride() {
+            if(extraParams == null)
+                return null;
+            return extraParams.get("script");
         }
     }
 
@@ -589,6 +601,44 @@ public final class CardEdition implements Comparable<CardEdition> {
     }
 
     public static class Reader extends StorageReaderFolder<CardEdition> {
+
+        public static final Pattern CARD_PATTERN = Pattern.compile(
+            /*
+            The following pattern will match the WAR Japanese art entries,
+            it should also match the Un-set and older alternate art cards
+            like Merseine from FEM.
+             */
+                /*  Ideally we'd use the named group above, but Android *25* and
+                earlier doesn't appear to support named groups.
+                So, untill support for those devices is officially dropped,
+                we'll have to suffice with numbered groups.
+                We are looking for:
+                    * cnum - grouping #2
+                    * rarity - grouping #4
+                    * name - grouping #5
+                    * artist name - grouping #7
+                    * extra parameters - grouping #9
+                */
+                // Collector numbers now should allow hyphens for Planeswalker Championship Promos
+                "(^(.?[0-9A-Z-]+\\S*[A-Z]*)\\s)?(([SCURML])\\s)?([^@$]+)( @([^$]*))?( \\$\\{(.+)\\})?$"
+                //"(?:^(?<cnum>.?[0-9A-Z-]+\\S*[A-Z]*)\\s)?(?:(?<rarity>[SCURML])\\s)?(?<name>[^@$]*)(?: @(?<artist>[^$]*))?(?: \\$\\{(?<params>.+)})?$"
+        );
+
+        public static final Pattern TOKEN_PATTERN = Pattern.compile(
+                /*
+                 * cnum - grouping #2
+                 * name - grouping #3
+                 * artist name - grouping #5
+                 */
+                //"(?:^(?<cnum>.?[0-9A-Z-]+\\S?[A-Z☇]*)\\s)?(?<name>[^@]*)(?: @(?<artist>.*))?$"
+                "(^(.?[0-9A-Z-]+\\S?[A-Z☇]*)\\s)?([^@]+)( @(.*))?$"
+        );
+
+        public static final Pattern EXTRA_PARAMS_PATTERN = Pattern.compile(
+                //Simple JSON string map parser - "key": "value". No support for escaping quotation marks or anything fancy.
+                "\"([^\"]+)\"\\s*:\\s*\"([^\"]+)\",?"
+        );
+
         private final boolean isCustomEditions;
 
         public Reader(File path) {
@@ -609,38 +659,6 @@ public final class CardEdition implements Comparable<CardEdition> {
         @Override
         protected CardEdition read(File file) {
             final Map<String, List<String>> contents = FileSection.parseSections(FileUtil.readFile(file));
-
-            final Pattern pattern = Pattern.compile(
-            /*
-            The following pattern will match the WAR Japanese art entries,
-            it should also match the Un-set and older alternate art cards
-            like Merseine from FEM.
-             */
-            // Collector numbers now should allow hyphens for Planeswalker Championship Promos
-            //"(^(?<cnum>[0-9]+.?) )?((?<rarity>[SCURML]) )?(?<name>.*)$"
-            /*  Ideally we'd use the named group above, but Android 6 and
-                earlier don't appear to support named groups.
-                So, untill support for those devices is officially dropped,
-                we'll have to suffice with numbered groups.
-                We are looking for:
-                    * cnum - grouping #2
-                    * rarity - grouping #4
-                    * name - grouping #5
-                    * artist name - grouping #7
-                    * functional variant name - grouping #9
-             */
-//                "(^(.?[0-9A-Z]+.?))?(([SCURML]) )?(.*)$"
-                    "(^(.?[0-9A-Z-]+\\S*[A-Z]*)\\s)?(([SCURML])\\s)?([^@\\$]*)( @([^\\$]*))?( \\$(.+))?$"
-            );
-
-            final Pattern tokenPattern = Pattern.compile(
-                    /*
-                     * cnum - grouping #2
-                     * name - grouping #3
-                     * artist name - grouping #5
-                     */
-                    "(^(.?[0-9A-Z-]+\\S?[A-Z☇]*)\\s)?([^@]*)( @(.*))?$"
-            );
 
             ListMultimap<String, EditionEntry> cardMap = ArrayListMultimap.create();
             List<BoosterSlot> boosterSlots = null;
@@ -668,7 +686,7 @@ public final class CardEdition implements Comparable<CardEdition> {
                     // parse sections of the format "<collector number> <rarity> <name>"
                     if (editionSectionsWithCollectorNumbers.contains(sectionName)) {
                         for(String line : contents.get(sectionName)) {
-                            Matcher matcher = pattern.matcher(line);
+                            Matcher matcher = CARD_PATTERN.matcher(line);
 
                             if (!matcher.matches()) {
                                 continue;
@@ -678,8 +696,25 @@ public final class CardEdition implements Comparable<CardEdition> {
                             CardRarity r = CardRarity.smartValueOf(matcher.group(4));
                             String cardName = matcher.group(5);
                             String artistName = matcher.group(7);
-                            String functionalVariantName = matcher.group(9);
-                            EditionEntry cis = new EditionEntry(cardName, collectorNumber, r, artistName, functionalVariantName);
+                            String extraParamText = matcher.group(9);
+                            Map<String, String> extraParams = null;
+                            if(!StringUtils.isBlank(extraParamText)) {
+                                Matcher paramMatcher = EXTRA_PARAMS_PATTERN.matcher(extraParamText);
+                                if(!paramMatcher.lookingAt())
+                                    System.err.println("Ignoring malformed parameter text: " + extraParamText);
+                                else {
+                                    extraParams = new HashMap<>(2);
+                                    do {
+                                        String k = paramMatcher.group(1).trim().toLowerCase();
+                                        String v = paramMatcher.group(2).trim();
+                                        if(k.isEmpty() || v.isEmpty())
+                                            continue;
+                                        extraParams.put(k, v);
+                                    } while(paramMatcher.find());
+                                }
+                            }
+
+                            EditionEntry cis = new EditionEntry(cardName, collectorNumber, r, artistName, extraParams);
 
                             cardMap.put(sectionName, cis);
                         }
@@ -701,7 +736,7 @@ public final class CardEdition implements Comparable<CardEdition> {
                 for (String line : contents.get("tokens")) {
                     if (StringUtils.isBlank(line))
                         continue;
-                    Matcher matcher = tokenPattern.matcher(line);
+                    Matcher matcher = TOKEN_PATTERN.matcher(line);
 
                     if (!matcher.matches()) {
                         continue;
@@ -719,7 +754,7 @@ public final class CardEdition implements Comparable<CardEdition> {
                 for (String line : contents.get("other")) {
                     if (StringUtils.isBlank(line))
                         continue;
-                    Matcher matcher = tokenPattern.matcher(line);
+                    Matcher matcher = TOKEN_PATTERN.matcher(line);
 
                     if (!matcher.matches()) {
                         continue;
@@ -931,7 +966,7 @@ public final class CardEdition implements Comparable<CardEdition> {
         public final Comparator<PaperCard> CARD_EDITION_COMPARATOR = Comparator.comparing(c -> Collection.this.get(c.getEdition()));
 
         public IItemReader<SealedTemplate> getBoosterGenerator() {
-            return new StorageReaderBase<SealedTemplate>(null) {
+            return new StorageReaderBase<>(null) {
                 @Override
                 public Map<String, SealedTemplate> readAll() {
                     Map<String, SealedTemplate> map = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);

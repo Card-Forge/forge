@@ -1,5 +1,5 @@
 Name:Chief Jim Hopper
-AltName:Sophina, Spearsage Deserter
+Variant:UniversesWithin:FlavorName:Sophina, Spearsage Deserter
 ManaCost:2 R W
 Types:Legendary Creature Human Soldier
 PT:4/4

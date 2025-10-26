@@ -1438,8 +1438,8 @@ public final class CMatchUI
     private int getRotation(CardView cardView) {
         final int rotation;
         if (cardView.isSplitCard()) {
-            String cardName = cardView.getName();
-            if (cardName.isEmpty()) { cardName = cardView.getAlternateState().getName(); }
+            String cardName = cardView.getOracleName();
+            if (cardName.isEmpty()) { cardName = cardView.getAlternateState().getOracleName(); }
 
             PaperCard pc = StaticData.instance().getCommonCards().getCard(cardName);
             boolean hasKeywordAftermath = pc != null && Card.getCardForUi(pc).hasKeyword(Keyword.AFTERMATH);

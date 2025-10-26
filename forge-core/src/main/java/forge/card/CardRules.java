@@ -27,6 +27,7 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static forge.card.MagicColor.Constant.BASIC_LANDS;
 import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
@@ -43,8 +44,9 @@ public final class CardRules implements ICardCharacteristics {
     private CardSplitType splitType;
     private ICardFace mainPart;
     private ICardFace otherPart;
-
     private Map<CardStateName, ICardFace> specializedParts = Maps.newHashMap();
+    private List<ICardFace> allFaces;
+
     private CardAiHints aiHints;
     private ColorSet colorIdentity;
     private ColorSet deckbuildingColors;
@@ -68,6 +70,9 @@ public final class CardRules implements ICardCharacteristics {
             specializedParts.put(CardStateName.SpecializeR, faces[5]);
             specializedParts.put(CardStateName.SpecializeG, faces[6]);
         }
+
+        // Android doesn't support toUnmodifiableList
+        allFaces = Arrays.stream(faces).filter(Objects::nonNull).collect(Collectors.toList());
 
         aiHints = cah;
         meldWith = "";
@@ -93,6 +98,7 @@ public final class CardRules implements ICardCharacteristics {
         mainPart = newRules.mainPart;
         otherPart = newRules.otherPart;
         specializedParts = Maps.newHashMap(newRules.specializedParts);
+        allFaces = newRules.allFaces;
         aiHints = newRules.aiHints;
         colorIdentity = newRules.colorIdentity;
         meldWith = newRules.meldWith;
@@ -163,8 +169,8 @@ public final class CardRules implements ICardCharacteristics {
         return specializedParts;
     }
 
-    public Iterable<ICardFace> getAllFaces() {
-        return Iterables.concat(Arrays.asList(mainPart, otherPart), specializedParts.values());
+    public List<ICardFace> getAllFaces() {
+        return allFaces;
     }
 
     public boolean isTransformable() {
@@ -464,6 +470,58 @@ public final class CardRules implements ICardCharacteristics {
         return this.supportedFunctionalVariants;
     }
 
+    public String getDisplayNameForVariant(String variantName) {
+        if(supportedFunctionalVariants == null || !supportedFunctionalVariants.contains(variantName))
+            return getName();
+
+        ICardFace mainFace = Objects.requireNonNullElse(mainPart.getFunctionalVariant(variantName), mainPart);
+        String mainPartName = Objects.requireNonNullElse(mainFace.getFlavorName(), mainFace.getName());
+
+        if(splitType.getAggregationMethod() == CardSplitType.FaceSelectionMethod.COMBINE) {
+            ICardFace otherFace = Objects.requireNonNullElse(otherPart.getFunctionalVariant(variantName), otherPart);
+            String otherPartName = Objects.requireNonNullElse(otherFace.getFlavorName(), otherFace.getName());
+            return mainPartName + " // " + otherPartName;
+        }
+        else
+            return mainPartName;
+    }
+
+    /* package */ String findOrCreateVariantForFlavorName(String flavorName, String suggestedVariantName) {
+        Objects.requireNonNull(flavorName);
+        String[] nameParts = flavorName.trim().split("\\s*//\\s*");
+        flavorName = String.join(" // ", nameParts); //Normalize this just in case.
+        if(otherPart != null && nameParts.length < 2)
+            throw new IllegalArgumentException("Tried to assign a single flavor name to a multi-faced card. Use ' // ' as a separator in the flavorName parameter.");
+        if(supportedFunctionalVariants == null)
+            supportedFunctionalVariants = new HashSet<>();
+        for(String variantName : this.supportedFunctionalVariants) {
+            if(getDisplayNameForVariant(variantName).equals(flavorName))
+                return variantName;
+        }
+        String variantName = suggestedVariantName != null ? suggestedVariantName : "FlavorName" + flavorName.hashCode();
+        if(supportedFunctionalVariants.contains(variantName))
+            variantName = variantName + flavorName.hashCode();
+
+        CardFace variantMain = ((CardFace) mainPart).getOrCreateFunctionalVariant(variantName);
+        variantMain.setFlavorName(nameParts[0]);
+        //Rudimentary name replacement. Can't do nicknames, pronouns, ability words, or flavored keywords. Need to define variants manually for that.
+        if(mainPart.getOracleText().contains(mainPart.getName()))
+            variantMain.setOracleText(mainPart.getOracleText().replace(mainPart.getName(), nameParts[0]));
+        ((CardFace) mainPart).assignMissingFieldsToVariant(variantMain);
+
+        if(otherPart != null) {
+            CardFace variantOther = ((CardFace) otherPart).getOrCreateFunctionalVariant(variantName);
+            variantOther.setFlavorName(nameParts[1]);
+            if(otherPart.getOracleText().contains(otherPart.getName()))
+                variantMain.setOracleText(otherPart.getOracleText().replace(otherPart.getName(), nameParts[1]));
+            ((CardFace) otherPart).assignMissingFieldsToVariant(variantOther);
+        }
+
+        supportedFunctionalVariants.add(variantName);
+
+        return variantName;
+    }
+
     public ColorSet getColorIdentity() {
         return colorIdentity;
     }
@@ -622,8 +680,6 @@ public final class CardRules implements ICardCharacteristics {
                         this.altMode = CardSplitType.smartValueOf(value);
                     } else if ("ALTERNATE".equals(key)) {
                         this.curFace = 1;
-                    } else if ("AltName".equals(key)) {
-                        face.setAltName(value);
                     }
                     break;
 
@@ -647,6 +703,11 @@ public final class CardRules implements ICardCharacteristics {
                         face.addDraftAction(value);
                     }
                     break;
+
+                case 'F':
+                    if("FlavorName".equals(key)) {
+                        face.setFlavorName(value);
+                    }
 
                 case 'H':
                     if ("HandLifeModifier".equals(key)) {

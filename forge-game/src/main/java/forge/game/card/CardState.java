@@ -63,6 +63,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     private ColorSet color = ColorSet.C;
     private String oracleText = "";
     private String functionalVariantName = null;
+    private String flavorName = null;
     private int basePower = 0;
     private int baseToughness = 0;
     private String basePowerString = null;
@@ -221,6 +222,15 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         view.setFunctionalVariantName(functionalVariantName);
     }
 
+    public String getFlavorName() {
+        return flavorName;
+    }
+
+    public void setFlavorName(String flavorName) {
+        this.flavorName = flavorName;
+        view.updateName(this);
+    }
+
     public final int getBasePower() {
         return basePower;
     }
@@ -297,6 +307,9 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         return intrinsicKeywords.getValues();
     }
     public final boolean hasIntrinsicKeyword(String k) {
+        return intrinsicKeywords.contains(k);
+    }
+    public final boolean hasIntrinsicKeyword(Keyword k) {
         return intrinsicKeywords.contains(k);
     }
     public final void setIntrinsicKeywords(final Iterable<KeywordInterface> intrinsicKeyword0, final boolean lki) {
@@ -716,6 +729,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         setBaseLoyalty(source.getBaseLoyalty());
         setBaseDefense(source.getBaseDefense());
         setAttractionLights(source.getAttractionLights());
+        setFlavorName(source.getFlavorName());
         setSVars(source.getSVars());
 
         abilities.clear();
@@ -830,8 +844,17 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     }
 
     public CardState copy(final Card host, CardStateName name, final boolean lki) {
+        return copy(host, name, lki, null);
+    }
+    public CardState copy(final Card host, final CardTraitBase ctb) {
+        return copy(host, this.getStateName(), false, ctb);
+    }
+    public CardState copy(final Card host, CardStateName name, final CardTraitBase ctb) {
+        return copy(host, name, false, ctb);
+    }
+    public CardState copy(final Card host, CardStateName name, final boolean lki, final CardTraitBase ctb) {
         CardState result = new CardState(host, name);
-        result.copyFrom(this, lki);
+        result.copyFrom(this, lki, ctb);
         return result;
     }
 
@@ -930,9 +953,10 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
 
     @Override
     public String getTranslationKey() {
+        String displayName = flavorName == null ? name : flavorName;
         if(StringUtils.isNotEmpty(functionalVariantName))
-            return name + " $" + functionalVariantName;
-        return name;
+            return displayName + " $" + functionalVariantName;
+        return displayName;
     }
 
     @Override
