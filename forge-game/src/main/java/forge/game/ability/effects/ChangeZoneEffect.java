@@ -1597,17 +1597,17 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             final boolean imprint = srcSA.hasParam("Imprint");
             if (tgtSA.isAbility()) {
                 // Shouldn't be able to target Abilities but leaving this in for now
-            } else if (srcSA.getParam("Destination").equals("Graveyard")) {
+            } else if (destination == ZoneType.Graveyard) {
                 movedCard = game.getAction().moveToGraveyard(tgtHost, srcSA, params);
-            } else if (srcSA.getParam("Destination").equals("Exile")) {
+            } else if (destination == ZoneType.Exile) {
                 if (!tgtHost.canExiledBy(srcSA, true)) {
                     return;
                 }
                 movedCard = game.getAction().exile(tgtHost, srcSA, params);
                 handleExiledWith(movedCard, srcSA);
-            } else if (srcSA.getParam("Destination").equals("Hand")) {
+            } else if (destination == ZoneType.Hand) {
                 movedCard = game.getAction().moveToHand(tgtHost, srcSA, params);
-            } else if (srcSA.getParam("Destination").equals("Library")) {
+            } else if (destination == ZoneType.Library) {
                 movedCard = game.getAction().moveToLibrary(tgtHost, libPos, srcSA, params);
                 if (srcSA.hasParam("Shuffle") && "True".equals(srcSA.getParam("Shuffle"))) {
                     tgtHost.getOwner().shuffle(srcSA);
