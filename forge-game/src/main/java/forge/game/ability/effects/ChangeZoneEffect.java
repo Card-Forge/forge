@@ -475,11 +475,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             origin.addAll(ZoneType.listValueOf(sa.getParam("Origin")));
         }
 
-        int libraryPosition = sa.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(hostCard, sa.getParam("LibraryPosition"), sa) : 0;
+        int libPos = sa.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(hostCard, sa.getParam("LibraryPosition"), sa) : 0;
         if (sa.hasParam("DestinationAlternative")) {
-            Pair<ZoneType, Integer> pair = handleAltDest(sa, hostCard, destination, libraryPosition, activator);
+            Pair<ZoneType, Integer> pair = handleAltDest(sa, hostCard, destination, libPos, activator);
             destination = pair.getKey();
-            libraryPosition = pair.getValue();
+            libPos = pair.getValue();
         }
 
         final GameEntityCounterTable counterTable = new GameEntityCounterTable();
@@ -497,7 +497,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            removeFromStack(tgtSA, sa, si, game, triggerList, counterTable);
+            removeFromStack(tgtSA, sa, si, destination, libPos, game, triggerList, counterTable);
         } // End of change from stack
 
         final String remember = sa.getParam("RememberChanged");
@@ -729,7 +729,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     handleExiledWith(gameCard, sa);
                 }
 
-                movedCard = game.getAction().moveTo(destination, gameCard, libraryPosition, sa, moveParams);
+                movedCard = game.getAction().moveTo(destination, gameCard, libPos, sa, moveParams);
 
                 if (destination.equals(ZoneType.Exile) && lastStateBattlefield.contains(gameCard) && hostCard.equals(gameCard)) {
                     // support Parallax Wave returning itself
@@ -1297,7 +1297,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 moveParams.put(AbilityKey.FoundSearchingLibrary, searchedLibrary);
                 AbilityKey.addCardZoneTableParams(moveParams, triggerList);
 
-                if (destination.equals(ZoneType.Library)) {
+                if (destination == null) {
+                    movedCard = c;
+                }
+                else if (destination.equals(ZoneType.Library)) {
                     movedCard = game.getAction().moveToLibrary(c, libraryPos, sa, moveParams);
                 }
                 else if (destination.equals(ZoneType.Battlefield)) {
@@ -1423,9 +1426,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         movedCard.addMayLookFaceDownExile(sa.getActivatingPlayer());
                     }
                 }
-                else if (destination == null) {
-                    movedCard = c;
-                }
                 else {
                     movedCard = game.getAction().moveTo(destination, c, 0, sa, moveParams);
                 }
@@ -1503,7 +1503,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 game.getAction().reveal(movedCards, player);
             }
 
-            if ((origin.contains(ZoneType.Library) && !destination.equals(ZoneType.Library) && !defined && shuffleMandatory)
+            if ((origin.contains(ZoneType.Library) && !ZoneType.Library.equals(destination) && !defined && shuffleMandatory)
                     || (sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle")))) {
                 player.shuffle(sa);
             }
@@ -1582,37 +1582,33 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      *            object.
      * @param game
      */
-    private void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, final Game game, CardZoneTable triggerList, GameEntityCounterTable counterTable) {
+    private void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, final ZoneType destination, final int libPos,
+                                 final Game game, CardZoneTable triggerList, GameEntityCounterTable counterTable) {
         final Card tgtHost = tgtSA.getHostCard();
         game.getStack().remove(si);
 
-        Map<AbilityKey,Object> params = AbilityKey.newMap();
-        params.put(AbilityKey.StackSa, tgtSA);
-        AbilityKey.addCardZoneTableParams(params, triggerList);
+        if (destination != null) {
+            Map<AbilityKey,Object> params = AbilityKey.newMap();
+            params.put(AbilityKey.StackSa, tgtSA);
+            AbilityKey.addCardZoneTableParams(params, triggerList);
 
-        Card movedCard = null;
-        if (srcSA.hasParam("Destination")) {
+            Card movedCard = null;
             final boolean remember = srcSA.hasParam("RememberChanged");
             final boolean imprint = srcSA.hasParam("Imprint");
             if (tgtSA.isAbility()) {
                 // Shouldn't be able to target Abilities but leaving this in for now
-            } else if (srcSA.getParam("Destination").equals("Graveyard")) {
+            } else if (destination == ZoneType.Graveyard) {
                 movedCard = game.getAction().moveToGraveyard(tgtHost, srcSA, params);
-            } else if (srcSA.getParam("Destination").equals("Exile")) {
+            } else if (destination == ZoneType.Exile) {
                 if (!tgtHost.canExiledBy(srcSA, true)) {
                     return;
                 }
                 movedCard = game.getAction().exile(tgtHost, srcSA, params);
                 handleExiledWith(movedCard, srcSA);
-            } else if (srcSA.getParam("Destination").equals("TopOfLibrary")) {
-                movedCard = game.getAction().moveToLibrary(tgtHost, srcSA, params);
-            } else if (srcSA.getParam("Destination").equals("Hand")) {
+            } else if (destination == ZoneType.Hand) {
                 movedCard = game.getAction().moveToHand(tgtHost, srcSA, params);
-            } else if (srcSA.getParam("Destination").equals("BottomOfLibrary")) {
-                movedCard = game.getAction().moveToBottomOfLibrary(tgtHost, srcSA, params);
-            } else if (srcSA.getParam("Destination").equals("Library")) {
-                final int libraryPos = srcSA.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(tgtHost, srcSA.getParam("LibraryPosition"), srcSA) : 0;
-                movedCard = game.getAction().moveToLibrary(tgtHost, libraryPos, srcSA, params);
+            } else if (destination == ZoneType.Library) {
+                movedCard = game.getAction().moveToLibrary(tgtHost, libPos, srcSA, params);
                 if (srcSA.hasParam("Shuffle") && "True".equals(srcSA.getParam("Shuffle"))) {
                     tgtHost.getOwner().shuffle(srcSA);
                 }
