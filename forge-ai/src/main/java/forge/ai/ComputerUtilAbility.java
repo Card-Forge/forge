@@ -3,6 +3,7 @@ package forge.ai;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import com.google.common.collect.Lists;
 
@@ -25,6 +26,10 @@ import forge.game.spellability.OptionalCost;
 import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMode;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 public class ComputerUtilAbility {
@@ -349,6 +354,30 @@ public class ComputerUtilAbility {
                 if (source.isInPlay() && source.hasSVar("EndOfTurnLeavePlay")) {
                     p += 1;
                 }
+
+                // Triggered abilities
+                for (Trigger trigger : source.getTriggers()) {
+                    if (!"Battlefield".equals(trigger.getParam("TriggerZones"))) continue;
+                    final TriggerType mode = trigger.getMode();
+                    if (mode != null) {
+                        // 1024+ cards match `Mode\$ SpellCast.*?ValidActivatingPlayer\$ You`
+                        // Aetherflux Reservoir etc
+                        if (mode == TriggerType.SpellCast && "You".equals(sa.getParam("ValidActivatingPlayer"))) {
+                            p += 1;
+                        }
+                    }
+                }
+
+                // Static abilities
+                for (StaticAbility sta : source.getStaticAbilities()) {
+                    final Set<StaticAbilityMode> mode = sta.getMode();
+                    // 210+ cards match `S:Mode\$ ReduceCost.*?Activator\$ You`
+                    // reduce cost to enable more plays
+                    if (mode.contains(StaticAbilityMode.ReduceCost) && "You".equals(sta.getParam("Activator"))) {
+                        p += 1;
+                    }
+                }
+
                 if (ComputerUtilCard.isCardRemAIDeck(sa.getOriginalHost() != null ? sa.getOriginalHost() : source)) {
                     p -= 10;
                 }
