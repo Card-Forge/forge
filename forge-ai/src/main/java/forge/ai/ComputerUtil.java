@@ -345,27 +345,24 @@ public class ComputerUtil {
                     return sacMeList.getFirst();
                 } else {
                     // empty sacMeList, so get some viable average preference if the option is enabled
-                    if (ai.getController().isAI()) {
-                        AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-                        boolean enableDefaultPref = aic.getBooleanProperty(AiProps.SACRIFICE_DEFAULT_PREF_ENABLE);
-                        if (enableDefaultPref) {
-                            int minCMC = aic.getIntProperty(AiProps.SACRIFICE_DEFAULT_PREF_MIN_CMC);
-                            int maxCMC = aic.getIntProperty(AiProps.SACRIFICE_DEFAULT_PREF_MAX_CMC);
-                            int maxCreatureEval = aic.getIntProperty(AiProps.SACRIFICE_DEFAULT_PREF_MAX_CREATURE_EVAL);
-                            boolean allowTokens = aic.getBooleanProperty(AiProps.SACRIFICE_DEFAULT_PREF_ALLOW_TOKENS);
-                            List<String> dontSac = Arrays.asList("Black Lotus", "Mox Pearl", "Mox Jet", "Mox Emerald", "Mox Ruby", "Mox Sapphire", "Lotus Petal");
-                            CardCollection allowList = CardLists.filter(typeList, card -> {
-                                if (card.isCreature() && ComputerUtilCard.evaluateCreature(card) > maxCreatureEval) {
-                                    return false;
-                                }
-
-                                return (allowTokens && card.isToken())
-                                        || (card.getCMC() >= minCMC && card.getCMC() <= maxCMC && !dontSac.contains(card.getName()));
-                            });
-                            if (!allowList.isEmpty()) {
-                                CardLists.sortByCmcDesc(allowList);
-                                return allowList.getLast();
+                    boolean enableDefaultPref = AiProfileUtil.getBoolProperty(ai, AiProps.SACRIFICE_DEFAULT_PREF_ENABLE);
+                    if (enableDefaultPref) {
+                        int minCMC = AiProfileUtil.getIntProperty(ai, AiProps.SACRIFICE_DEFAULT_PREF_MIN_CMC);
+                        int maxCMC = AiProfileUtil.getIntProperty(ai, AiProps.SACRIFICE_DEFAULT_PREF_MAX_CMC);
+                        int maxCreatureEval = AiProfileUtil.getIntProperty(ai, AiProps.SACRIFICE_DEFAULT_PREF_MAX_CREATURE_EVAL);
+                        boolean allowTokens = AiProfileUtil.getBoolProperty(ai, AiProps.SACRIFICE_DEFAULT_PREF_ALLOW_TOKENS);
+                        List<String> dontSac = Arrays.asList("Black Lotus", "Mox Pearl", "Mox Jet", "Mox Emerald", "Mox Ruby", "Mox Sapphire", "Lotus Petal");
+                        CardCollection allowList = CardLists.filter(typeList, card -> {
+                            if (card.isCreature() && ComputerUtilCard.evaluateCreature(card) > maxCreatureEval) {
+                                return false;
                             }
+
+                            return (allowTokens && card.isToken())
+                                    || (card.getCMC() >= minCMC && card.getCMC() <= maxCMC && !dontSac.contains(card.getName()));
+                        });
+                        if (!allowList.isEmpty()) {
+                            CardLists.sortByCmcDesc(allowList);
+                            return allowList.getLast();
                         }
                     }
                 }
@@ -1999,8 +1996,7 @@ public class ComputerUtil {
         else if ((threatApi == ApiType.Attach && (topStack.isCurse() || "Curse".equals(topStack.getParam("AILogic"))))
                 && (saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll
                 || saviourApi == ApiType.Protection || saviourApi == null)) {
-            AiController aic = aiPlayer.isAI() ? ((PlayerControllerAi)aiPlayer.getController()).getAi() : null;
-            boolean enableCurseAuraRemoval = aic != null ? aic.getBooleanProperty(AiProps.ACTIVELY_DESTROY_IMMEDIATELY_UNBLOCKABLE) : false;
+            boolean enableCurseAuraRemoval = AiProfileUtil.getBoolProperty(aiPlayer, AiProps.ACTIVELY_DESTROY_IMMEDIATELY_UNBLOCKABLE);
             if (enableCurseAuraRemoval) {
                 for (final Object o : objects) {
                     if (o instanceof Card c) {
@@ -2041,17 +2037,14 @@ public class ComputerUtil {
         // a creature will [hopefully] die from a spell on stack
         boolean willDieFromSpell = false;
         boolean noStackCheck = false;
-        if (ai.getController().isAI()) {
-            AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-            if (aic.getBooleanProperty(AiProps.DONT_EVAL_KILLSPELLS_ON_STACK_WITH_PERMISSION)) {
-                // See if permission is on stack and ignore this check if there is and the relevant AI flag is set
-                // TODO: improve this so that this flag is not needed and the AI can properly evaluate spells in presence of counterspells.
-                for (SpellAbilityStackInstance si : game.getStack()) {
-                    SpellAbility sa = si.getSpellAbility();
-                    if (sa.getApi() == ApiType.Counter) {
-                        noStackCheck = true;
-                        break;
-                    }
+        if (AiProfileUtil.getBoolProperty(ai, AiProps.DONT_EVAL_KILLSPELLS_ON_STACK_WITH_PERMISSION)) {
+            // See if permission is on stack and ignore this check if there is and the relevant AI flag is set
+            // TODO: improve this so that this flag is not needed and the AI can properly evaluate spells in presence of counterspells.
+            for (SpellAbilityStackInstance si : game.getStack()) {
+                SpellAbility sa = si.getSpellAbility();
+                if (sa.getApi() == ApiType.Counter) {
+                    noStackCheck = true;
+                    break;
                 }
             }
         }
@@ -2080,8 +2073,7 @@ public class ComputerUtil {
      * @return a filtered list with no dying creatures in it
      */
     public static CardCollection filterCreaturesThatWillDieThisTurn(final Player ai, final CardCollection list, final SpellAbility excludeSa) {
-        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-        if (aic.getBooleanProperty(AiProps.AVOID_TARGETING_CREATS_THAT_WILL_DIE)) {
+        if (AiProfileUtil.getBoolProperty(ai, AiProps.AVOID_TARGETING_CREATS_THAT_WILL_DIE)) {
             // Try to avoid targeting creatures that are dead on board
             List<Card> willBeKilled = CardLists.filter(list, card -> card.isCreature() && predictCreatureWillDieThisTurn(ai, card, excludeSa));
             list.removeAll(willBeKilled);
@@ -2254,25 +2246,14 @@ public class ComputerUtil {
         boolean bottom = false;
 
         // AI profile-based toggles
-        int maxLandsToScryLandsToTop = 3;
-        int minLandsToScryLandsAway = 8;
-        int minCreatsToScryCreatsAway = 5;
-        int minCreatEvalThreshold = 160; // just a bit higher than a baseline 2/2 creature or a 1/1 mana dork
-        int lowCMCThreshold = 3;
-        int maxCreatsToScryLowCMCAway = 3;
-        boolean uncastablesToBottom = false;
-        int uncastableCMCThreshold = 1;
-        if (player.getController().isAI()) {
-            AiController aic = ((PlayerControllerAi)player.getController()).getAi();
-            maxLandsToScryLandsToTop = aic.getIntProperty(AiProps.SCRY_NUM_LANDS_TO_STILL_NEED_MORE);
-            minLandsToScryLandsAway = aic.getIntProperty(AiProps.SCRY_NUM_LANDS_TO_NOT_NEED_MORE);
-            minCreatsToScryCreatsAway = aic.getIntProperty(AiProps.SCRY_NUM_CREATURES_TO_NOT_NEED_SUBPAR_ONES);
-            minCreatEvalThreshold = aic.getIntProperty(AiProps.SCRY_EVALTHR_TO_SCRY_AWAY_LOWCMC_CREATURE);
-            lowCMCThreshold = aic.getIntProperty(AiProps.SCRY_EVALTHR_CMC_THRESHOLD);
-            maxCreatsToScryLowCMCAway = aic.getIntProperty(AiProps.SCRY_EVALTHR_CREATCOUNT_TO_SCRY_AWAY_LOWCMC);
-            uncastablesToBottom = aic.getBooleanProperty(AiProps.SCRY_IMMEDIATELY_UNCASTABLE_TO_BOTTOM);
-            uncastableCMCThreshold = aic.getIntProperty(AiProps.SCRY_IMMEDIATELY_UNCASTABLE_CMC_DIFF);
-        }
+        int maxLandsToScryLandsToTop = AiProfileUtil.getIntProperty(player, AiProps.SCRY_NUM_LANDS_TO_STILL_NEED_MORE);
+        int minLandsToScryLandsAway = AiProfileUtil.getIntProperty(player, AiProps.SCRY_NUM_LANDS_TO_NOT_NEED_MORE);
+        int minCreatsToScryCreatsAway = AiProfileUtil.getIntProperty(player, AiProps.SCRY_NUM_CREATURES_TO_NOT_NEED_SUBPAR_ONES);
+        int minCreatEvalThreshold = AiProfileUtil.getIntProperty(player, AiProps.SCRY_EVALTHR_TO_SCRY_AWAY_LOWCMC_CREATURE);
+        int lowCMCThreshold = AiProfileUtil.getIntProperty(player, AiProps.SCRY_EVALTHR_CMC_THRESHOLD);
+        int maxCreatsToScryLowCMCAway = AiProfileUtil.getIntProperty(player, AiProps.SCRY_EVALTHR_CREATCOUNT_TO_SCRY_AWAY_LOWCMC);
+        boolean uncastablesToBottom = AiProfileUtil.getBoolProperty(player, AiProps.SCRY_IMMEDIATELY_UNCASTABLE_TO_BOTTOM);
+        int uncastableCMCThreshold = AiProfileUtil.getIntProperty(player, AiProps.SCRY_IMMEDIATELY_UNCASTABLE_CMC_DIFF);
 
         CardCollectionView allCards = player.getAllCards();
         CardCollectionView cardsInHand = player.getCardsIn(ZoneType.Hand);

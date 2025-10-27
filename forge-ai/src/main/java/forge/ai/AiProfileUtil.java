@@ -18,6 +18,7 @@
 package forge.ai;
 
 import forge.LobbyPlayer;
+import forge.game.player.Player;
 import forge.util.Aggregates;
 import forge.util.FileUtil;
 import forge.util.TextUtil;
@@ -111,6 +112,23 @@ public class AiProfileUtil {
         }
 
         return profileMap;
+    }
+
+    public static String getProperty(final Player p, final AiProps propName) {
+        String prop = AiProfileUtil.getAIProp(p.getLobbyPlayer(), propName);
+
+        if (prop == null || prop.isEmpty()) {
+            // TODO if p is human try to predict some values from previous plays or something
+            return propName.getDefault();
+        }
+
+        return prop;
+    }
+    public static int getIntProperty(final Player p, final AiProps propName) {
+        return Integer.parseInt(getProperty(p, propName));
+    }
+    public static boolean getBoolProperty(final Player p, final AiProps propName) {
+        return Boolean.parseBoolean(getProperty(p, propName));
     }
 
     /**
