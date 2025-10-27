@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import java.util.Map;
 
 import forge.game.card.*;
+import forge.game.replacement.ReplacementType;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.ImmutableList;
@@ -105,12 +106,11 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
         if (sa.hasParam("Choices")) {
             ZoneType choiceZone = sa.hasParam("ChoiceZone") ? ZoneType.smartValueOf(sa.getParam("ChoiceZone"))
                     : ZoneType.Battlefield;
-            srcCards = CardLists.getValidCards(game.getCardsIn(choiceZone), sa.getParam("Choices"),
-                    activator, source, sa);
+            srcCards = CardLists.getValidCards(game.getCardsIn(choiceZone), sa.getParam("Choices"), activator, source, sa);
         } else {
             srcCards = getTargetCards(sa);
         }
-        if (sa.isReplacementAbility()) {
+        if (sa.isReplacementAbility() && sa.getReplacementEffect().getMode() == ReplacementType.Moved) {
             srcCards = new CardCollection(srcCards).filter(c -> !c.isInPlay() || sa.getLastStateBattlefield().contains(c));
         }
 
