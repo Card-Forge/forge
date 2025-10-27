@@ -557,18 +557,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         boolean needsTransformAnimation = transform || rollback;
         // faceDown has higher priority over clone states
         // while text change states doesn't apply while the card is faceDown
-        if (state != CardStateName.FaceDown) {
+        if (state != CardStateName.FaceDown && state != CardStateName.EmptyRoom) {
             CardCloneStates cloneStates = getLastClonedState();
             if (cloneStates != null) {
                 if (!cloneStates.containsKey(state)) {
                     throw new RuntimeException(getName() + " tried to switch to non-existant cloned state \"" + state + "\"!");
                     //return false; // Nonexistant state.
                 }
-            } else {
-                if (!states.containsKey(state)) {
-                    System.out.println(getName() + " tried to switch to non-existant state \"" + state + "\"!");
-                    return false; // Nonexistant state.
-                }
+            } else if (!states.containsKey(state)) {
+                System.out.println(getName() + " tried to switch to non-existant state \"" + state + "\"!");
+                return false; // Nonexistant state.
             }
         }
 
