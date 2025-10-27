@@ -1297,7 +1297,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 moveParams.put(AbilityKey.FoundSearchingLibrary, searchedLibrary);
                 AbilityKey.addCardZoneTableParams(moveParams, triggerList);
 
-                if (destination.equals(ZoneType.Library)) {
+                if (destination == null) {
+                    movedCard = c;
+                }
+                else if (destination.equals(ZoneType.Library)) {
                     movedCard = game.getAction().moveToLibrary(c, libraryPos, sa, moveParams);
                 }
                 else if (destination.equals(ZoneType.Battlefield)) {
@@ -1423,9 +1426,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         movedCard.addMayLookFaceDownExile(sa.getActivatingPlayer());
                     }
                 }
-                else if (destination == null) {
-                    movedCard = c;
-                }
                 else {
                     movedCard = game.getAction().moveTo(destination, c, 0, sa, moveParams);
                 }
@@ -1503,7 +1503,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 game.getAction().reveal(movedCards, player);
             }
 
-            if ((origin.contains(ZoneType.Library) && !destination.equals(ZoneType.Library) && !defined && shuffleMandatory)
+            if ((origin.contains(ZoneType.Library) && !ZoneType.Library.equals(destination) && !defined && shuffleMandatory)
                     || (sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle")))) {
                 player.shuffle(sa);
             }
