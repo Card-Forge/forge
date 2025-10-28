@@ -353,66 +353,66 @@ ScryfallCode=LTC
 345 R Windbrisk Heights @Jokubas Uogintas
 346 R Woodland Cemetery @Hristo D. Chukov
 347 C Woodland Stream @Lucas Terryn
-348 M The Great Henge @Jeremy Paillotin
-349 M Cloudstone Curio @Erikas Perl
-350 M Ensnaring Bridge @Stephen Stark
-351 M The Ozolith @Calder Moore
-352 M Rings of Brighthearth @Jonas De Ro
-353 M Shadowspear @Campbell White
-354 M Sword of Hearth and Home @Randy Gallegos
-355 M Sword of the Animist @Pavel Kolomeyets
-356 M Thorn of Amethyst @Igor Krstic
-357 M Ancient Tomb @Anastasia Balakchina
-358 M Bojuka Bog @Calder Moore
-359 M Boseiju, Who Shelters All @Jeremy Paillotin
-360 M Cabal Coffers @Sean Vo
-361 M Castle Ardenvale @Jeremy Paillotin
-362 M Cavern of Souls @Logan Feliciano
-363 M Deserted Temple @Calder Moore
-364 M Gemstone Caverns @Jonas De Ro
-365 M Homeward Path @Erikas Perl
-366 M Horizon Canopy @Randy Gallegos
-367 M Karakas @Stephen Stark
-368 M Kor Haven @Erikas Perl
-369 M Minamo, School at Water's Edge @Stephen Stark
-370 M Mouth of Ronom @Marina Ortega Lorente
-371 M Oboro, Palace in the Clouds @Jonas De Ro
-372 M Pillar of the Paruns @Randy Gallegos
-373 M Reflecting Pool @Marco Gorlei
-374 M Shinka, the Bloodsoaked Keep @Logan Feliciano
-375 M Urborg, Tomb of Yawgmoth @Erikas Perl
-376 M Wasteland @Hristo D. Chukov
-377 M Yavimaya, Cradle of Growth @Erikas Perl
-378 M The Great Henge @Jeremy Paillotin
-379 M Cloudstone Curio @Erikas Perl
-380 M Ensnaring Bridge @Stephen Stark
-381 M The Ozolith @Calder Moore
-382 M Rings of Brighthearth @Jonas De Ro
-383 M Shadowspear @Campbell White
-384 M Sword of Hearth and Home @Randy Gallegos
-385 M Sword of the Animist @Pavel Kolomeyets
-386 M Thorn of Amethyst @Igor Krstic
-387 M Ancient Tomb @Anastasia Balakchina
-388 M Bojuka Bog @Calder Moore
-389 M Boseiju, Who Shelters All @Jeremy Paillotin
-390 M Cabal Coffers @Sean Vo
-391 M Castle Ardenvale @Jeremy Paillotin
-392 M Cavern of Souls @Logan Feliciano
-393 M Deserted Temple @Calder Moore
-394 M Gemstone Caverns @Jonas De Ro
-395 M Homeward Path @Erikas Perl
-396 M Horizon Canopy @Randy Gallegos
-397 M Karakas @Stephen Stark
-398 M Kor Haven @Erikas Perl
-399 M Minamo, School at Water's Edge @Stephen Stark
-400 M Mouth of Ronom @Marina Ortega Lorente
-401 M Oboro, Palace in the Clouds @Jonas De Ro
-402 M Pillar of the Paruns @Randy Gallegos
-403 M Reflecting Pool @Marco Gorlei
-404 M Shinka, the Bloodsoaked Keep @Logan Feliciano
-405 M Urborg, Tomb of Yawgmoth @Erikas Perl
-406 M Wasteland @Hristo D. Chukov
-407 M Yavimaya, Cradle of Growth @Erikas Perl
+348 M The Great Henge @Jeremy Paillotin ${"flavorName": "The Party Tree"}
+349 M Cloudstone Curio @Erikas Perl ${"flavorName": "Elessar, the Elfstone"}
+350 M Ensnaring Bridge @Stephen Stark ${"flavorName": "Bridge of Khazad-dûm"}
+351 M The Ozolith @Calder Moore ${"flavorName": "Argonath, Pillars of the Kings"}
+352 M Rings of Brighthearth @Jonas De Ro ${"flavorName": "Three Rings for the Elven-Kings"}
+353 M Shadowspear @Campbell White ${"flavorName": "Morgul-Knife"}
+354 M Sword of Hearth and Home @Randy Gallegos ${"flavorName": "Herugrim, Sword of Rohan"}
+355 M Sword of the Animist @Pavel Kolomeyets ${"flavorName": "Ring of Barahir"}
+356 M Thorn of Amethyst @Igor Krstic ${"flavorName": "Shards of Narsil"}
+357 M Ancient Tomb @Anastasia Balakchina ${"flavorName": "Balin's Tomb"}
+358 M Bojuka Bog @Calder Moore ${"flavorName": "Barrow-Downs"}
+359 M Boseiju, Who Shelters All @Jeremy Paillotin ${"flavorName": "Isengard, Saruman's Fortress"}
+360 M Cabal Coffers @Sean Vo ${"flavorName": "Minas Morgul"}
+361 M Castle Ardenvale @Jeremy Paillotin ${"flavorName": "Meduseld, Golden Hall of Edoras"}
+362 M Cavern of Souls @Logan Feliciano ${"flavorName": "Paths of the Dead"}
+363 M Deserted Temple @Calder Moore ${"flavorName": "Weathertop"}
+364 M Gemstone Caverns @Jonas De Ro ${"flavorName": "Glittering Caves of Aglarond"}
+365 M Homeward Path @Erikas Perl ${"flavorName": "Green Dragon Inn"}
+366 M Horizon Canopy @Randy Gallegos ${"flavorName": "Bag End"}
+367 M Karakas @Stephen Stark ${"flavorName": "White Tower of Ecthelion"}
+368 M Kor Haven @Erikas Perl ${"flavorName": "Osgiliath, Fallen Capital"}
+369 M Minamo, School at Water's Edge @Stephen Stark ${"flavorName": "Dol Amroth"}
+370 M Mouth of Ronom @Marina Ortega Lorente ${"flavorName": "Redhorn Pass"}
+371 M Oboro, Palace in the Clouds @Jonas De Ro ${"flavorName": "Bucklebury Ferry"}
+372 M Pillar of the Paruns @Randy Gallegos ${"flavorName": "Inn of the Prancing Pony"}
+373 M Reflecting Pool @Marco Gorlei ${"flavorName": "Henneth Annûn"}
+374 M Shinka, the Bloodsoaked Keep @Logan Feliciano ${"flavorName": "Helm's Deep"}
+375 M Urborg, Tomb of Yawgmoth @Erikas Perl ${"flavorName": "The Dead Marshes"}
+376 M Wasteland @Hristo D. Chukov ${"flavorName": "Valley of Gorgoroth"}
+377 M Yavimaya, Cradle of Growth @Erikas Perl ${"flavorName": "Fangorn Forest"}
+378 M The Great Henge @Jeremy Paillotin ${"flavorName": "The Party Tree"}
+379 M Cloudstone Curio @Erikas Perl ${"flavorName": "Elessar, the Elfstone"}
+380 M Ensnaring Bridge @Stephen Stark ${"flavorName": "Bridge of Khazad-dûm"}
+381 M The Ozolith @Calder Moore ${"flavorName": "Argonath, Pillars of the Kings"}
+382 M Rings of Brighthearth @Jonas De Ro ${"flavorName": "Three Rings for the Elven-Kings"}
+383 M Shadowspear @Campbell White ${"flavorName": "Morgul-Knife"}
+384 M Sword of Hearth and Home @Randy Gallegos ${"flavorName": "Herugrim, Sword of Rohan"}
+385 M Sword of the Animist @Pavel Kolomeyets ${"flavorName": "Ring of Barahir"}
+386 M Thorn of Amethyst @Igor Krstic ${"flavorName": "Shards of Narsil"}
+387 M Ancient Tomb @Anastasia Balakchina ${"flavorName": "Balin's Tomb"}
+388 M Bojuka Bog @Calder Moore ${"flavorName": "Barrow-Downs"}
+389 M Boseiju, Who Shelters All @Jeremy Paillotin ${"flavorName": "Isengard, Saruman's Fortress"}
+390 M Cabal Coffers @Sean Vo ${"flavorName": "Minas Morgul"}
+391 M Castle Ardenvale @Jeremy Paillotin ${"flavorName": "Meduseld, Golden Hall of Edoras"}
+392 M Cavern of Souls @Logan Feliciano ${"flavorName": "Paths of the Dead"}
+393 M Deserted Temple @Calder Moore ${"flavorName": "Weathertop"}
+394 M Gemstone Caverns @Jonas De Ro ${"flavorName": "Glittering Caves of Aglarond"}
+395 M Homeward Path @Erikas Perl ${"flavorName": "Green Dragon Inn"}
+396 M Horizon Canopy @Randy Gallegos ${"flavorName": "Bag End"}
+397 M Karakas @Stephen Stark ${"flavorName": "White Tower of Ecthelion"}
+398 M Kor Haven @Erikas Perl ${"flavorName": "Osgiliath, Fallen Capital"}
+399 M Minamo, School at Water's Edge @Stephen Stark ${"flavorName": "Dol Amroth"}
+400 M Mouth of Ronom @Marina Ortega Lorente ${"flavorName": "Redhorn Pass"}
+401 M Oboro, Palace in the Clouds @Jonas De Ro ${"flavorName": "Bucklebury Ferry"}
+402 M Pillar of the Paruns @Randy Gallegos ${"flavorName": "Inn of the Prancing Pony"}
+403 M Reflecting Pool @Marco Gorlei ${"flavorName": "Henneth Annûn"}
+404 M Shinka, the Bloodsoaked Keep @Logan Feliciano ${"flavorName": "Helm's Deep"}
+405 M Urborg, Tomb of Yawgmoth @Erikas Perl ${"flavorName": "The Dead Marshes"}
+406 M Wasteland @Hristo D. Chukov ${"flavorName": "Valley of Gorgoroth"}
+407 M Yavimaya, Cradle of Growth @Erikas Perl ${"flavorName": "Fangorn Forest"}
 408 M Sol Ring @Randy Gallegos
 409 M Sol Ring @Erikas Perl
 410 M Sol Ring @Anastasia Balakchina
@@ -520,11 +520,11 @@ ScryfallCode=LTC
 512 R Mordor on the March @Campbell White
 513 R Fell Beast of Mordor @Campbell White
 514 R Minas Morgul, Dark Fortress @Campbell White
-515 M Kenrith, the Returned King @Greg Hildebrandt & Tim Hildebrandt
-516 M Ishkanah, Grafwidow @Greg Hildebrandt & Tim Hildebrandt
-517 R Doran, the Siege Tower @Greg Hildebrandt & Tim Hildebrandt
-518 R Hammerheim @Greg Hildebrandt & Tim Hildebrandt
-519 R Urborg @Greg Hildebrandt & Tim Hildebrandt
+515 M Kenrith, the Returned King @Greg Hildebrandt & Tim Hildebrandt ${"flavorName": "Théoden, Strength Restored"}
+516 M Ishkanah, Grafwidow @Greg Hildebrandt & Tim Hildebrandt ${"flavorName": "Shelob, Whose Lair Is Death"}
+517 R Doran, the Siege Tower @Greg Hildebrandt & Tim Hildebrandt ${"flavorName": "Treebeard, Eldest of Ents"}
+518 R Hammerheim @Greg Hildebrandt & Tim Hildebrandt ${"flavorName": "Edoras, Capital of Rohan"}
+519 R Urborg @Greg Hildebrandt & Tim Hildebrandt ${"flavorName": "Tower of Cirith Ungol"}
 520 U Soul's Attendant @Greg Hildebrandt & Tim Hildebrandt
 521 R Stonehewer Giant @Greg Hildebrandt & Tim Hildebrandt
 522 R Worship @Tim Hildebrandt & Greg Hildebrandt
