@@ -1,0 +1,6 @@
+Name:Energybending
+ManaCost:2
+Types:Instant
+A:SP$ AnimateAll | ValidCards$ Land.YouCtrl | Types$ AllBasicLandType | SubAbility$ DBDraw | SpellDescription$ Lands you control gain all basic land types until end of turn. Draw a card.
+SVar:DBDraw:DB$ Draw
+Oracle:Lands you control gain all basic land types until end of turn.\nDraw a card.
