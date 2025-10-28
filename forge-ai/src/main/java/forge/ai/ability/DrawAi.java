@@ -264,7 +264,7 @@ public class DrawAi extends SpellAbilityAi {
                     if (sa.getPayCosts().hasSpecificCostType(CostPayLife.class)) {
                         // [Necrologia, Pay X Life : Draw X Cards]
                         // Don't draw more than what's "safe" and don't risk a near death experience
-                        boolean aggroAI = (((PlayerControllerAi) ai.getController()).getAi()).getBooleanProperty(AiProps.PLAY_AGGRO);
+                        boolean aggroAI = AiProfileUtil.getBoolProperty(ai, AiProps.PLAY_AGGRO);
                         while (ComputerUtil.aiLifeInDanger(ai, aggroAI, numCards) && numCards > 0) {
                             numCards--;
                         }

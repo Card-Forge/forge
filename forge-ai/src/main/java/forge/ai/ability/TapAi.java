@@ -30,8 +30,7 @@ public class TapAi extends TapAiBase {
                 // Cast it if it's a sorcery.
             } else if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 // Aggro Brains are willing to use TapEffects aggressively instead of defensively
-                AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-                if (!aic.getBooleanProperty(AiProps.PLAY_AGGRO)) {
+                if (!AiProfileUtil.getBoolProperty(ai, AiProps.PLAY_AGGRO)) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             } else {
