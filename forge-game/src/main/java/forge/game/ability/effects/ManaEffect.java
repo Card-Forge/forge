@@ -17,14 +17,11 @@ import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
-import forge.game.zone.ZoneType;
 import forge.util.Localizer;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
@@ -201,32 +198,6 @@ public class ManaEffect extends SpellAbilityEffect {
                     }
 
                     abMana.setExpressChoice(sb.toString().trim());
-                } else if (type.equals("LastNotedType")) {
-                    final StringBuilder sb = new StringBuilder();
-                    int nMana = 0;
-                    for (Object o : card.getRemembered()) {
-                        if (o instanceof String) {
-                            sb.append(o);
-                            nMana++;
-                        }
-                    }
-                    if (nMana == 0) {
-                        return;
-                    }
-                    abMana.setExpressChoice(sb.toString());
-                } else if (type.startsWith("EachColorAmong")) {
-                    final String res = type.split("_")[1];
-                    final boolean defined = type.startsWith("EachColorAmongDefined");
-                    final ZoneType zone = defined || type.startsWith("EachColorAmong_") ? ZoneType.Battlefield :
-                            ZoneType.smartValueOf(type.split("_")[0].substring(14));
-                    final CardCollection list = defined ? AbilityUtils.getDefinedCards(card, res, sa) :
-                            CardLists.getValidCards(card.getGame().getCardsIn(zone), res, activator, card, sa);
-                    byte colors = 0;
-                    for (Card c : list) {
-                        colors |= c.getColor().getColor();
-                    }
-                    if (colors == 0) return;
-                    abMana.setExpressChoice(ColorSet.fromMask(colors));
                 } else if (type.startsWith("EachColoredManaSymbol")) {
                     final String res = type.split("_")[1];
                     StringBuilder sb = new StringBuilder();
