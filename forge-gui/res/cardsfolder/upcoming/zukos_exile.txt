@@ -1,0 +1,7 @@
+Name:Zuko's Exile
+ManaCost:5
+Types:Instant Lesson
+A:SP$ ChangeZone | ValidTgts$ Artifact,Creature,Enchantment | TgtPrompt$ Select target artifact, creature, or enchantment | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBToken | SpellDescription$ Exile target artifact, creature, or enchantment. Its controller creates a Clue token. (It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_clue_draw | TokenOwner$ TargetedController
+DeckHas:Ability$Token
+Oracle:Exile target artifact, creature, or enchantment. Its controller creates a Clue token. (It's an artifact with "{2}, Sacrifice this token: Draw a card.")
