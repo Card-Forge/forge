@@ -1,0 +1,7 @@
+Name:Day of Black Sun
+ManaCost:X B B
+Types:Sorcery
+A:SP$ AnimateAll | ValidCards$ Creature.cmcLEX | RemoveAllAbilities$ True | SubAbility$ DBDestroyAll | SpellDescription$ Each creature with mana value X or less loses all abilities until end of turn. Destroy those creatures.
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.cmcLEX
+SVar:X:Count$xPaid
+Oracle:Each creature with mana value X or less loses all abilities until end of turn. Destroy those creatures.
