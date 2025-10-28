@@ -11,3 +11,4 @@ ScryfallCode=PSPL
 3 M Sword of Forge and Frontier @Sam Guay
 5 M Cloud, Midgar Mercenary @Tetsuya Nomura
 6 R Get Lost @Dominik Mayer
+7 R Spectacular Spider-Man @Julian Totino Tedesco

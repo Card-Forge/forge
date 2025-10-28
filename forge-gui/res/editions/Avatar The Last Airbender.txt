@@ -57,6 +57,7 @@ ScryfallCode=TLA
 148 C Mongoose Lizard @Joseph Weston
 151 R Redirect Lightning @Toni Infante
 152 C Rough Rhino Cavalry @Yuhong Ding
+154 M Sozin's Comet @Salvatorre Zee Yazzie
 161 C Yuyan Archers @Domco.
 163 U Zuko, Exiled Prince @Nijihayashi
 166 C Badgermole @Matteo Bassini
@@ -100,8 +101,10 @@ ScryfallCode=TLA
 289 L Swamp @John Di Giovanni
 290 L Mountain @Lorenzo Lanfranconi
 291 L Forest @Luc Courtois
+309 M Sozin's Comet @Dominik Mayer
 316 M Appa, Steadfast Guardian @Ilse Gort
 317 R Momo, Friendly Flier @Filip Burburan
+332 M Sozin's Comet @JungShan
 336 R Aang's Iceberg @Brigitte Roka & Clifton Stommel
 338 R Yue, the Moon Spirit @Barbara Rosiak
 341 M Fated Firepower @Brigitte Roka
