@@ -8,8 +8,8 @@ ScryfallCode=TLE
 [cards]
 5 M Release to Memory @Viacom
 13 M Force of Negation @Viacom
-41 M The Great Henge @Viacom
-61 M Valakut, the Molten Pinnacle @Viacom
+41 M The Great Henge @Viacom ${"flavorName": "The Banyan Tree"}
+61 M Valakut, the Molten Pinnacle @Viacom ${"flavorName": "Volcano of Roku's Island"}
 74 M Aang, Airbending Master @Tomoyo Asatani
 93 M Katara, Waterbending Master @Yueko
 104 M Fire Lord Ozai @Ryuichi Sakuma
