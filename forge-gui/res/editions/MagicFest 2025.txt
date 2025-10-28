@@ -23,3 +23,5 @@ F8 R All-You-Can-Eat Buffet @Mark Rosewater
 14 R Scourge of Valkas @Svetlin Velinov
 15 M The Ur-Dragon @Jaime Jones
 F16 R Spaghetti Junction @Mark Rosewater
+17 R J. Jonah Jameson @Borja Pindado
+18 R Sokka, Bold Boomeranger @Brian Yuen

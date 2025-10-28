@@ -13,6 +13,9 @@ ScryfallCode=PW25
 4 R Culling Ritual @AKAGI
 5 R Zidane, Tantalus Thief @Eiji Kaneda
 6 R Palladium Myr @Alan Pollack
-7 R Spectacular Spider-Man @Julian Totino Tedesco
 8 R Trinket Mage @Scott Chou
 9 R Monstrous Rage @Borja Pindado
+10 R Spider-Ham, Peter Porker @Paolo Rivera
+11 R Mary Jane Watson @Paolo Rivera
+12 R Ultimate Green Goblin @Tyler Walpole
+13 R Carnage, Crimson Chaos @Lucio Parrillo
