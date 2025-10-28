@@ -798,7 +798,7 @@ public class SpecialCardAi {
     public static class Intuition {
         public static CardCollection considerMultiple(final Player ai, final SpellAbility sa) {
             if (ai.getController().isAI()) {
-                if (!((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.INTUITION_ALTERNATIVE_LOGIC)) {
+                if (!((PlayerControllerAi) ai.getController()).getAi().getBoolProperty(AiProps.INTUITION_ALTERNATIVE_LOGIC)) {
                     return new CardCollection(); // fall back to standard ChangeZoneAi considerations
                 }
             }

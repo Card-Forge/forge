@@ -65,10 +65,7 @@ public class PermanentCreatureAi extends PermanentAi {
         }
 
         // Flash logic
-        boolean advancedFlash = false;
-        if (ai.getController().isAI()) {
-            advancedFlash = ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.FLASH_ENABLE_ADVANCED_LOGIC);
-        }
+        boolean advancedFlash = AiProfileUtil.getBoolProperty(ai, AiProps.FLASH_ENABLE_ADVANCED_LOGIC);
         if (card.hasKeyword(Keyword.FLASH) || (!ai.canCastSorcery() && sa.canCastTiming(ai) && !sa.isCastFromPlayEffect())) {
             if (advancedFlash) {
                 return doAdvancedFlashLogic(card, ai, sa);
@@ -135,11 +132,11 @@ public class PermanentCreatureAi extends PermanentAi {
             }
         }
 
-        int chanceToObeyAmbushAI = aic.getIntProperty(AiProps.FLASH_CHANCE_TO_OBEY_AMBUSHAI);
-        int chanceToAddBlocker = aic.getIntProperty(AiProps.FLASH_CHANCE_TO_CAST_AS_VALUABLE_BLOCKER);
-        int chanceToCastForETB = aic.getIntProperty(AiProps.FLASH_CHANCE_TO_CAST_DUE_TO_ETB_EFFECTS);
-        int chanceToRespondToStack = aic.getIntProperty(AiProps.FLASH_CHANCE_TO_RESPOND_TO_STACK_WITH_ETB);
-        int chanceToProcETBBeforeMain1 = aic.getIntProperty(AiProps.FLASH_CHANCE_TO_CAST_FOR_ETB_BEFORE_MAIN1);
+        int chanceToObeyAmbushAI = AiProfileUtil.getIntProperty(ai, AiProps.FLASH_CHANCE_TO_OBEY_AMBUSHAI);
+        int chanceToAddBlocker = AiProfileUtil.getIntProperty(ai, AiProps.FLASH_CHANCE_TO_CAST_AS_VALUABLE_BLOCKER);
+        int chanceToCastForETB = AiProfileUtil.getIntProperty(ai, AiProps.FLASH_CHANCE_TO_CAST_DUE_TO_ETB_EFFECTS);
+        int chanceToRespondToStack = AiProfileUtil.getIntProperty(ai, AiProps.FLASH_CHANCE_TO_RESPOND_TO_STACK_WITH_ETB);
+        int chanceToProcETBBeforeMain1 = AiProfileUtil.getIntProperty(ai, AiProps.FLASH_CHANCE_TO_CAST_FOR_ETB_BEFORE_MAIN1);
         boolean canCastAtOppTurn = true;
         for (Card c : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
             for (StaticAbility s : c.getStaticAbilities()) {

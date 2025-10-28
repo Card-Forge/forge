@@ -70,7 +70,7 @@ public class SurveilAi extends SpellAbilityAi {
         // Only Surveil for life when at decent amount of life remaining
         final Cost cost = sa.getPayCosts();
         if (cost != null && cost.hasSpecificCostType(CostPayLife.class)) {
-            final int maxLife = ((PlayerControllerAi)ai.getController()).getAi().getIntProperty(AiProps.SURVEIL_LIFEPERC_AFTER_PAYING_LIFE);
+            final int maxLife = AiProfileUtil.getIntProperty(ai, AiProps.SURVEIL_LIFEPERC_AFTER_PAYING_LIFE);
             if (!ComputerUtilCost.checkLifeCost(ai, cost, sa.getHostCard(), ai.getStartingLife() * maxLife / 100, sa)) {
                 return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
             }

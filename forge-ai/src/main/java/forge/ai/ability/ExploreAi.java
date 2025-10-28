@@ -37,14 +37,8 @@ public class ExploreAi extends SpellAbilityAi {
         CardCollection landsOTB = CardLists.filter(cardsOTB, CardPredicates.LANDS_PRODUCING_MANA);
         CardCollection landsInHand = CardLists.filter(cardsInHand, CardPredicates.LANDS_PRODUCING_MANA);
 
-        int maxCMCDiff = 1;
-        int numLandsToStillNeedMore = 2;
-
-        if (ai.getController().isAI()) {
-            AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-            maxCMCDiff = aic.getIntProperty(AiProps.EXPLORE_MAX_CMC_DIFF_TO_PUT_IN_GRAVEYARD);
-            numLandsToStillNeedMore = aic.getIntProperty(AiProps.EXPLORE_NUM_LANDS_TO_STILL_NEED_MORE);
-        }
+        int maxCMCDiff = AiProfileUtil.getIntProperty(ai, AiProps.EXPLORE_MAX_CMC_DIFF_TO_PUT_IN_GRAVEYARD);
+        int numLandsToStillNeedMore = AiProfileUtil.getIntProperty(ai, AiProps.EXPLORE_NUM_LANDS_TO_STILL_NEED_MORE);
 
         if (landsInHand.isEmpty() && landsOTB.size() <= numLandsToStillNeedMore) {
             // We need more lands to improve our mana base, explore away the non-lands

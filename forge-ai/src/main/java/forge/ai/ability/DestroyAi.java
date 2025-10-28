@@ -409,12 +409,11 @@ public class DestroyAi extends SpellAbilityAi {
         int oppLandsOTB = tgtPlayer.getLandsInPlay().size();
 
         // AI profile-dependent properties
-        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-        int amountNoTempoCheck = aic.getIntProperty(AiProps.STRIPMINE_MIN_LANDS_OTB_FOR_NO_TEMPO_CHECK);
-        int amountNoTimingCheck = aic.getIntProperty(AiProps.STRIPMINE_MIN_LANDS_FOR_NO_TIMING_CHECK);
-        int amountLandsInHand = aic.getIntProperty(AiProps.STRIPMINE_MIN_LANDS_IN_HAND_TO_ACTIVATE);
-        int amountLandsToManalock = aic.getIntProperty(AiProps.STRIPMINE_MAX_LANDS_TO_ATTEMPT_MANALOCKING);
-        boolean highPriorityIfNoLandDrop = aic.getBooleanProperty(AiProps.STRIPMINE_HIGH_PRIORITY_ON_SKIPPED_LANDDROP);
+        int amountNoTempoCheck = AiProfileUtil.getIntProperty(ai, AiProps.STRIPMINE_MIN_LANDS_OTB_FOR_NO_TEMPO_CHECK);
+        int amountNoTimingCheck = AiProfileUtil.getIntProperty(ai, AiProps.STRIPMINE_MIN_LANDS_FOR_NO_TIMING_CHECK);
+        int amountLandsInHand = AiProfileUtil.getIntProperty(ai, AiProps.STRIPMINE_MIN_LANDS_IN_HAND_TO_ACTIVATE);
+        int amountLandsToManalock = AiProfileUtil.getIntProperty(ai, AiProps.STRIPMINE_MAX_LANDS_TO_ATTEMPT_MANALOCKING);
+        boolean highPriorityIfNoLandDrop = AiProfileUtil.getBoolProperty(ai, AiProps.STRIPMINE_HIGH_PRIORITY_ON_SKIPPED_LANDDROP);
 
         // if the opponent didn't play a land and has few lands OTB, might be worth mana-locking him
         PhaseHandler ph = ai.getGame().getPhaseHandler();

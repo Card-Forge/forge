@@ -443,23 +443,18 @@ public class ComputerUtilCombat {
             }
         }
 
-        int threshold = 0;
-        int maxTreshold = 0;
-        if (ai.getController().isAI()) {
-            threshold = ((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD);
-            maxTreshold = ((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_MAX_THRESHOLD) - threshold;
+        if (resultingPoison(ai, combat) > Math.max(7, ai.getPoisonCounters())) {
+            return true;
         }
 
+        int threshold = AiProfileUtil.getIntProperty(ai, AiProps.AI_IN_DANGER_THRESHOLD);
+        int maxTreshold = AiProfileUtil.getIntProperty(ai, AiProps.AI_IN_DANGER_MAX_THRESHOLD) - threshold;
         int chance = MyRandom.getRandom().nextInt(80) + 5;
         while (maxTreshold > 0) {
             if (MyRandom.getRandom().nextInt(100) < chance) {
                 threshold++;
             }
             maxTreshold--;
-        }
-
-        if (resultingPoison(ai, combat) > Math.max(7, ai.getPoisonCounters())) {
-            return true;
         }
 
         return !ai.cantLoseForZeroOrLessLife() && lifeThatWouldRemain(ai, combat) - payment < Math.min(threshold, ai.getLife());

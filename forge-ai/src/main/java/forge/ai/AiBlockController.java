@@ -861,10 +861,9 @@ public class AiBlockController {
             return;
         }
 
-        AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-        final int evalThresholdToken = aic.getIntProperty(AiProps.THRESHOLD_TOKEN_CHUMP_TO_SAVE_PLANESWALKER);
-        final int evalThresholdNonToken = aic.getIntProperty(AiProps.THRESHOLD_NONTOKEN_CHUMP_TO_SAVE_PLANESWALKER);
-        final boolean onlyIfLethal = aic.getBooleanProperty(AiProps.CHUMP_TO_SAVE_PLANESWALKER_ONLY_ON_LETHAL);
+        final int evalThresholdToken = AiProfileUtil.getIntProperty(ai, AiProps.THRESHOLD_TOKEN_CHUMP_TO_SAVE_PLANESWALKER);
+        final int evalThresholdNonToken = AiProfileUtil.getIntProperty(ai, AiProps.THRESHOLD_NONTOKEN_CHUMP_TO_SAVE_PLANESWALKER);
+        final boolean onlyIfLethal = AiProfileUtil.getBoolProperty(ai, AiProps.CHUMP_TO_SAVE_PLANESWALKER_ONLY_ON_LETHAL);
 
         if (evalThresholdToken > 0 || evalThresholdNonToken > 0) {
             // detect how much damage is threatened to each of the planeswalkers, see which ones would be
@@ -1047,7 +1046,7 @@ public class AiBlockController {
         clearBlockers(combat, possibleBlockers);
 
         diff = (ai.getLife() * 2) - 5; // This is the minimal gain for an unnecessary trade
-        if (ai.getController().isAI() && diff > 0 && ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.PLAY_AGGRO)) {
+        if (diff > 0 && AiProfileUtil.getBoolProperty(ai, AiProps.PLAY_AGGRO)) {
             diff = 0;
         }
 
@@ -1284,9 +1283,9 @@ public class AiBlockController {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
             // simulation must get same results or it may crash
             if (!aic.usesSimulation()) {
-                enableRandomTrades = aic.getBooleanProperty(AiProps.ENABLE_RANDOM_FAVORABLE_TRADES_ON_BLOCK);
-                randomTradeIfBehindOnBoard = aic.getBooleanProperty(AiProps.RANDOMLY_TRADE_EVEN_WHEN_HAVE_LESS_CREATS);
-                randomTradeIfCreatInHand = aic.getBooleanProperty(AiProps.ALSO_TRADE_WHEN_HAVE_A_REPLACEMENT_CREAT);
+                enableRandomTrades = aic.getBoolProperty(AiProps.ENABLE_RANDOM_FAVORABLE_TRADES_ON_BLOCK);
+                randomTradeIfBehindOnBoard = aic.getBoolProperty(AiProps.RANDOMLY_TRADE_EVEN_WHEN_HAVE_LESS_CREATS);
+                randomTradeIfCreatInHand = aic.getBoolProperty(AiProps.ALSO_TRADE_WHEN_HAVE_A_REPLACEMENT_CREAT);
                 minRandomTradeChance = aic.getIntProperty(AiProps.MIN_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
                 maxRandomTradeChance = aic.getIntProperty(AiProps.MAX_CHANCE_TO_RANDOMLY_TRADE_ON_BLOCK);
                 chanceModForEmbalm = aic.getIntProperty(AiProps.CHANCE_DECREASE_TO_TRADE_VS_EMBALM);

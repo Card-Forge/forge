@@ -19,8 +19,8 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
     @Override
     protected AiAbilityDecision checkApiLogic(Player aiPlayer, SpellAbility sa) {
         Game game = aiPlayer.getGame();
-        int chance = ((PlayerControllerAi)aiPlayer.getController()).getAi().getIntProperty(AiProps.CHANCE_TO_COPY_OWN_SPELL_WHILE_ON_STACK);
-        int diff = ((PlayerControllerAi)aiPlayer.getController()).getAi().getIntProperty(AiProps.ALWAYS_COPY_SPELL_IF_CMC_DIFF);
+        int chance = AiProfileUtil.getIntProperty(aiPlayer, AiProps.CHANCE_TO_COPY_OWN_SPELL_WHILE_ON_STACK);
+        int diff = AiProfileUtil.getIntProperty(aiPlayer, AiProps.ALWAYS_COPY_SPELL_IF_CMC_DIFF);
         String logic = sa.getParamOrDefault("AILogic", "");
 
         if (game.getStack().isEmpty()) {

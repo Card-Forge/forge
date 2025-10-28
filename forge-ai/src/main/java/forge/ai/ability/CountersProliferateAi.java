@@ -112,7 +112,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
 
         final CounterType poison = CounterEnumType.POISON;
 
-        boolean aggroAI = (((PlayerControllerAi) ai.getController()).getAi()).getBooleanProperty(AiProps.PLAY_AGGRO);
+        boolean aggroAI = AiProfileUtil.getBoolProperty(ai, AiProps.PLAY_AGGRO);
         // because countertype can't be chosen anymore, only look for poison counters
         for (final Player p : IterableUtil.filter(options, Player.class)) {
             if (p.isOpponentOf(ai)) {

@@ -141,7 +141,7 @@ public class CountersPutAi extends CountersAi {
         final boolean isClockwork = "True".equals(sa.getParam("UpTo")) && "Self".equals(sa.getParam("Defined"))
                 && "P1P0".equals(sa.getParam("CounterType")) && "Count$xPaid".equals(source.getSVar("X"))
                 && sa.hasParam("MaxFromEffect");
-        boolean playAggro = ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.PLAY_AGGRO);
+        boolean playAggro = AiProfileUtil.getBoolProperty(ai, AiProps.PLAY_AGGRO);
 
         if ("ExistingCounter".equals(type)) {
             final boolean eachExisting = sa.hasParam("EachExistingCounter");
@@ -219,10 +219,8 @@ public class CountersPutAi extends CountersAi {
         } else if ("PayEnergy".equals(logic)) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else if ("PayEnergyConservatively".equals(logic)) {
-            boolean onlyInCombat = ai.getController().isAI()
-                    && ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.CONSERVATIVE_ENERGY_PAYMENT_ONLY_IN_COMBAT);
-            boolean onlyDefensive = ai.getController().isAI()
-                    && ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.CONSERVATIVE_ENERGY_PAYMENT_ONLY_DEFENSIVELY);
+            boolean onlyInCombat = AiProfileUtil.getBoolProperty(ai, AiProps.CONSERVATIVE_ENERGY_PAYMENT_ONLY_IN_COMBAT);
+            boolean onlyDefensive = AiProfileUtil.getBoolProperty(ai, AiProps.CONSERVATIVE_ENERGY_PAYMENT_ONLY_DEFENSIVELY);
 
             if (playAggro) {
                 // aggro profiles ignore conservative play for this AI logic

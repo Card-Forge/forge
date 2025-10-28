@@ -139,9 +139,9 @@ public class PlayerControllerAi extends PlayerController {
             }
         }
 
-        boolean sbLimitedFormats = getAi().getBooleanProperty(AiProps.SIDEBOARDING_IN_LIMITED_FORMATS);
-        boolean sbSharedTypesOnly = getAi().getBooleanProperty(AiProps.SIDEBOARDING_SHARED_TYPE_ONLY);
-        boolean sbPlaneswalkerException = getAi().getBooleanProperty(AiProps.SIDEBOARDING_PLANESWALKER_EQ_CREATURE);
+        boolean sbLimitedFormats = getAi().getBoolProperty(AiProps.SIDEBOARDING_IN_LIMITED_FORMATS);
+        boolean sbSharedTypesOnly = getAi().getBoolProperty(AiProps.SIDEBOARDING_SHARED_TYPE_ONLY);
+        boolean sbPlaneswalkerException = getAi().getBoolProperty(AiProps.SIDEBOARDING_PLANESWALKER_EQ_CREATURE);
         int sbChanceOnWin = getAi().getIntProperty(AiProps.SIDEBOARDING_CHANCE_ON_WIN);
         int sbChancePerCard = getAi().getIntProperty(AiProps.SIDEBOARDING_CHANCE_PER_CARD);
 
@@ -1372,7 +1372,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public CardCollectionView cheatShuffle(CardCollectionView list) {
-        return brains.getBooleanProperty(AiProps.CHEAT_WITH_MANA_ON_SHUFFLE) ? brains.cheatShuffle(list) : list;
+        return brains.getBoolProperty(AiProps.CHEAT_WITH_MANA_ON_SHUFFLE) ? brains.cheatShuffle(list) : list;
     }
 
     @Override
@@ -1544,12 +1544,10 @@ public class PlayerControllerAi extends PlayerController {
         }
 
         // Don't choose Tomb of Annihilation when life in danger unless we can win right away or can't lose for 0 life
-        if (ai.getController().isAI()) { // FIXME: is this needed? Can simulation ever run this for a non-AI player?
-            int lifeInDanger = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD));
-            if ((ai.getLife() <= lifeInDanger && !ai.cantLoseForZeroOrLessLife())
-                    && !(ai.getLife() > 1 && ai.getWeakestOpponent().getLife() == 1)) {
-                dungeonNames.remove("Tomb of Annihilation");
-            }
+        int lifeInDanger = AiProfileUtil.getIntProperty(player, AiProps.AI_IN_DANGER_THRESHOLD);
+        if ((ai.getLife() <= lifeInDanger && !ai.cantLoseForZeroOrLessLife())
+                && !(ai.getLife() > 1 && ai.getWeakestOpponent().getLife() == 1)) {
+            dungeonNames.remove("Tomb of Annihilation");
         }
 
         try {

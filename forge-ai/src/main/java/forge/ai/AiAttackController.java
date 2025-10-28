@@ -393,7 +393,7 @@ public class AiAttackController {
             if (ai.getController().isAI()) {
                 PlayerControllerAi aic = ((PlayerControllerAi) ai.getController());
                 pilotsNonAggroDeck = aic.pilotsNonAggroDeck();
-                playAggro = !pilotsNonAggroDeck || aic.getAi().getBooleanProperty(AiProps.PLAY_AGGRO);
+                playAggro = !pilotsNonAggroDeck || aic.getAi().getBoolProperty(AiProps.PLAY_AGGRO);
             }
             // TODO make switchable via AI property
             int thresholdMod = 0;
@@ -614,13 +614,7 @@ public class AiAttackController {
 
         // if true, the AI will attempt to identify which blockers will already be taken,
         // thus attempting to predict how many creatures with evasion can actively block
-        boolean predictEvasion = false;
-        if (ai.getController().isAI()) {
-            AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-            if (aic.getBooleanProperty(AiProps.COMBAT_ASSAULT_ATTACK_EVASION_PREDICTION)) {
-                predictEvasion = true;
-            }
-        }
+        boolean predictEvasion = AiProfileUtil.getBoolProperty(ai, AiProps.COMBAT_ASSAULT_ATTACK_EVASION_PREDICTION);
 
         CardCollection accountedBlockers = new CardCollection(this.blockers);
         CardCollection categorizedAttackers = new CardCollection();
@@ -860,12 +854,12 @@ public class AiAttackController {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
             simAI = aic.usesSimulation();
             if (!simAI) {
-                playAggro = aic.getBooleanProperty(AiProps.PLAY_AGGRO);
+                playAggro = aic.getBoolProperty(AiProps.PLAY_AGGRO);
                 chanceToAttackToTrade = aic.getIntProperty(AiProps.CHANCE_TO_ATTACK_INTO_TRADE);
-                tradeIfTappedOut = aic.getBooleanProperty(AiProps.ATTACK_INTO_TRADE_WHEN_TAPPED_OUT);
+                tradeIfTappedOut = aic.getBoolProperty(AiProps.ATTACK_INTO_TRADE_WHEN_TAPPED_OUT);
                 extraChanceIfOppHasMana = aic.getIntProperty(AiProps.CHANCE_TO_ATKTRADE_WHEN_OPP_HAS_MANA);
-                tradeIfLowerLifePressure = aic.getBooleanProperty(AiProps.RANDOMLY_ATKTRADE_ONLY_ON_LOWER_LIFE_PRESSURE);
-                predictEvasion = aic.getBooleanProperty(AiProps.COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION);
+                tradeIfLowerLifePressure = aic.getBoolProperty(AiProps.RANDOMLY_ATKTRADE_ONLY_ON_LOWER_LIFE_PRESSURE);
+                predictEvasion = aic.getBoolProperty(AiProps.COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION);
             }
         }
 
@@ -1423,7 +1417,7 @@ public class AiAttackController {
                         // Check if maybe we are too reckless in adding this attacker
                         if (canKillAllDangerous) {
                             boolean avoidAttackingIntoBlock = ai.getController().isAI()
-                                    && ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.TRY_TO_AVOID_ATTACKING_INTO_CERTAIN_BLOCK);
+                                    && ((PlayerControllerAi) ai.getController()).getAi().getBoolProperty(AiProps.TRY_TO_AVOID_ATTACKING_INTO_CERTAIN_BLOCK);
                             boolean attackerWillDie = defPower >= attacker.getNetToughness();
                             boolean uselessAttack = !hasCombatEffect && !hasAttackEffect;
                             boolean noContributionToAttack = attackers.size() <= defenders.size() || attacker.getNetPower() <= 0;
