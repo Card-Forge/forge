@@ -72,4 +72,4 @@ ScryfallCode=FCA
 64 R Command Beacon @Square Enix ${"flavorName": "Balamb Garden"}
 
 [rebalanced]
-A-19 R A-Winota, Joiner of Forces @Yoshitaka Amano
+A-19 R A-Winota, Joiner of Forces @Yoshitaka Amano ${"flavorName": "Bartz Klauser"}
