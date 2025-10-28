@@ -838,6 +838,45 @@ public final class GameActionUtil {
         return sb.toString().trim();
     }
 
+    // Predicts human moves so only for abilities that don't prompt.
+    // returns false if no mana.
+    public static boolean setManaAbilityChoice(final SpellAbility sa) {
+        final AbilityManaPart abMana = sa.getManaPart();
+        final Player activator = sa.getActivatingPlayer();
+        final Card card = sa.getHostCard();
+        String type = abMana.getOrigProduced().split("Special ")[1];
+        if (type.equals("LastNotedType")) {
+            // Jeweled Lotus
+            final StringBuilder sb = new StringBuilder();
+            int nMana = 0;
+            for (Object o : card.getRemembered()) {
+                if (o instanceof String) {
+                    sb.append(o);
+                    nMana++;
+                }
+            }
+            if (nMana == 0) {
+                return false;
+            }
+            abMana.setExpressChoice(sb.toString());
+        } else if (type.startsWith("EachColorAmong")) {
+            // Faeburrow Elder
+            final String res = type.split("_")[1];
+            final boolean defined = type.startsWith("EachColorAmongDefined");
+            final ZoneType zone = defined || type.startsWith("EachColorAmong_") ? ZoneType.Battlefield :
+                    ZoneType.smartValueOf(type.split("_")[0].substring(14));
+            final CardCollection list = defined ? AbilityUtils.getDefinedCards(card, res, sa) :
+                    CardLists.getValidCards(card.getGame().getCardsIn(zone), res, activator, card, sa);
+            byte colors = 0;
+            for (Card c : list) {
+                colors |= c.getColor().getColor();
+            }
+            if (colors == 0) return false;
+            abMana.setExpressChoice(ColorSet.fromMask(colors));
+        }
+        return true;
+    }
+
     public static String generatedMana(final SpellAbility sa) {
         AbilityManaPart abMana = sa.getManaPart();
         if (abMana == null) {
@@ -860,6 +899,7 @@ public final class GameActionUtil {
         } else if (sa.getApi() == ApiType.ManaReflected) {
             baseMana = abMana.getExpressChoice();
         } else if (abMana.isSpecialMana()) {
+            setManaAbilityChoice(sa);
             baseMana = abMana.getExpressChoice();
         } else {
             baseMana = abMana.mana(sa);
