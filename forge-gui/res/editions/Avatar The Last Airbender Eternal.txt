@@ -14,8 +14,8 @@ ScryfallCode=TLE
 24 M Cruel Tutor @Viacom
 41 M The Great Henge @Viacom ${"flavorName": "The Banyan Tree"}
 43 M Heroic Intervention @Viacom
-48 M Eladamri's Call @Viacom
-56 M Dark Depths @Viacom
+48 M Eladamri's Call @Viacom ${"flavorName": "Lifelong Friendship"}
+56 M Dark Depths @Viacom ${"flavorName": "The Boy in the Iceberg"}
 61 M Valakut, the Molten Pinnacle @Viacom ${"flavorName": "Volcano of Roku's Island"}
 63 R Katara's Reversal @Fahmi Fauzi
 69 R Aang and Katara @Brian Yuen
