@@ -1,0 +1,5 @@
+Name:Teddy Bear Token
+ManaCost:no cost
+Types:Creature Teddy bear
+PT:2/2
+Oracle:

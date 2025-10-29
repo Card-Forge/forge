@@ -41,7 +41,7 @@ public class EndureAi extends SpellAbilityAi {
                 return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
             }
             int curLife = aiPlayer.getLife();
-            int dangerLife = (((PlayerControllerAi) aiPlayer.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD));
+            int dangerLife = AiProfileUtil.getIntProperty(aiPlayer, AiProps.AI_IN_DANGER_THRESHOLD);
             if (curLife <= dangerLife) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
             }

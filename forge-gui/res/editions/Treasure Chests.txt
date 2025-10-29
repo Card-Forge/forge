@@ -288,16 +288,3 @@ ScryfallCode=PZ2
 70861 R Journey for the Elixir @Qiu De En
 70863 R Screeching Phoenix @Tingting Yeh
 70865 C Cleansing Screech @Tingting Yeh
-
-[tokens]
-w_1_1_bird_flying
-w_1_1_soldier
-w_1_1_spirit_flying
-u_1_1_a_thopter_flying
-b_1_1_assassin_deathtouch_haste
-b_0_0_phyrexian_germ
-r_5_5_dragon_flying
-r_1_1_goblin_all_attack
-r_8_8_lizard
-g_1_1_saproling
-c_1_1_a_construct_defender
