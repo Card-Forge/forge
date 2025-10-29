@@ -1,0 +1,9 @@
+Name:Day of Black Sun
+ManaCost:X B B
+Types:Sorcery
+A:SP$ PumpAll | ValidCards$ Creature.cmcLEX | RememberPumped$ True | StackDescription$ None | SubAbility$ DBAnimateAll
+SVar:DBAnimateAll:DB$ AnimateAll | ValidCards$ Card.IsRemembered | RemoveAllAbilities$ True | SubAbility$ DBDestroyAll | SpellDescription$ Each creature with mana value X or less loses all abilities until end of turn. Destroy those creatures.
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Card.IsRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+Oracle:Each creature with mana value X or less loses all abilities until end of turn. Destroy those creatures.
