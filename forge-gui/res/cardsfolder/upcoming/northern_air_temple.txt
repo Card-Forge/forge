@@ -8,7 +8,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Shrine
 SVar:TrigLoseLife2:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife2
 SVar:DBGainLife2:DB$ GainLife | Defined$ You | LifeAmount$ 1
 SVar:X:Count$Valid Shrine.YouCtrl
-SVar:PlayMain1:TRUE
-DeckHas:Ability$Counters
 DeckHints:Type$Shrine
 Oracle:When Northern Air Temple enters, each opponent loses X life and you gain X life, where X is the number of Shrines you control.\nWhenever another Shrine you control enters, each opponent loses 1 life and you gain 1 life.
