@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +37,7 @@ public class HeistEffect extends SpellAbilityEffect {
                 "Land"), 3);
             if (choices.isEmpty()) continue; //nothing to heist
             Card chosenCard = player.getController().chooseSingleCardForZoneChange(ZoneType.Exile,
-                new ArrayList<>(List.of(ZoneType.Exile)), sa, new CardCollection(choices),
+                List.of(ZoneType.Library), sa, new CardCollection(choices),
                 null, Localizer.getInstance().getMessage("lblChooseCardHeist"), false, 
                 player);
             if (!chosenCard.canExiledBy(sa, true)) {
