@@ -58,10 +58,8 @@ public class ControlSpellEffect extends SpellAbilityEffect {
         boolean remember = sa.hasParam("Remember");
         final List<Player> controllers = getDefinedPlayersOrTargeted(sa, "NewController");
 
-        final Player newController = controllers.isEmpty() ? sa.getActivatingPlayer() : controllers.get(0);
+        Player newController = controllers.isEmpty() ? sa.getActivatingPlayer() : controllers.get(0);
         final Game game = newController.getGame();
-
-        // If an Exchange needs to happen, make sure both parties are still in the right zones
 
         for (SpellAbility spell : getTargetSpells(sa)) {
             Card tgtC = spell.getHostCard();
@@ -69,11 +67,10 @@ public class ControlSpellEffect extends SpellAbilityEffect {
             SpellAbilityStackInstance si = game.getStack().getInstanceMatchingSpellAbilityID(spell);
             if (exchange) {
                 // Currently the only Exchange Control for Spells is a Permanent Trigger
-                // Expand this area as it becomes needed
                 // Use "DefinedExchange" to Reference Object that is Exchanging the other direction
                 GameObject obj = Iterables.getFirst(getDefinedOrTargeted(sa, "DefinedExchange"), null);
                 if (obj instanceof Card c) {
-                    if (!c.isInPlay() || si == null) {
+                    if (!c.isInPlay() || c.isPhasedOut() || si == null) {
                         // Exchanging object isn't available, continue
                         continue;
                     }
@@ -82,14 +79,10 @@ public class ControlSpellEffect extends SpellAbilityEffect {
                         continue;
                     }
 
-                    if (c.getController().equals(si.getActivatingPlayer())) {
-                        // Controllers are already the same, no exchange needed
-                        continue;
-                    }
-
                     if (remember) {
                         source.addRemembered(c);
                     }
+                    newController = c.getController();
                     c.addTempController(si.getActivatingPlayer(), tStamp);
                     c.runChangeControllerCommands();
                 }
