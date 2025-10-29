@@ -1,0 +1,7 @@
+Name:Allies at Last
+ManaCost:2 G
+Types:Instant
+K:Affinity:Ally
+A:SP$ Pump | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to two target creatures you control | AILogic$ PowerDmg | SubAbility$ DBEachDamage | StackDescription$ {c:ThisTargetedCard} | SpellDescription$ Up to two target creatures you control
+SVar:DBEachDamage:DB$ EachDamage | DefinedDamagers$ ParentTarget | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ Count$CardPower | StackDescription$ REP another target creature_{c:ThisTargetedCard} | SpellDescription$ each deal damage equal to their power to target creature an opponent controls.
+Oracle:Affinity for Allies (This spell costs {1} less to cast for each Ally you control.)\nUp to two target creatures you control each deal damage equal to their power to target creature an opponent controls.
