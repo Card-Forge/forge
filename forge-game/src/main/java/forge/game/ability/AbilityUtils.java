@@ -1861,6 +1861,12 @@ public class AbilityUtils {
                 }
 
                 if (sq[0].equals("ResolvedThisTurn")) {
+                    if (sa.isTrigger()) {
+                        Trigger trigger = sa.getTrigger();
+
+                        return doXMath(trigger.getResolvedThisTurn(trigger.getHostCard().getOwner()), expr, c, ctb);
+                    }
+
                     return doXMath(sa.getResolvedThisTurn(), expr, c, ctb);
                 }
 
