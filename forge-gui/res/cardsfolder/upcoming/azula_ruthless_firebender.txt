@@ -4,7 +4,7 @@ Types:Legendary Creature Human Noble
 PT:3/3
 K:Firebending:1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ Whenever NICKNAME attacks, you may discard a card. Then you get an experience counter for each player who discarded a card this turn.
-SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | Optional$ True | NumCards$ 1 | SubAbility$ DBExperience
+SVar:TrigDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | Optional$ True | NumCards$ 1 | SubAbility$ DBExperience
 SVar:DBExperience:DB$ PutCounter | Defined$ You | CounterType$ Experience | CounterNum$ X
 A:AB$ Pump | Cost$ 2 B | Defined$ Self | NumAtt$ +Y | NumDef$ +Y | KW$ Menace | SpellDescription$ Until end of turn, NICKNAME gets +1/+1 for each experience counter you have and gains menace.
 PlayerCountPlayers$ConditionGE1 CardsDiscardedThisTurn
