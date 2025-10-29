@@ -73,8 +73,8 @@ public class ControlExchangeEffect extends SpellAbilityEffect {
             object2 = tgts.get(1);
         }
 
-        if (object1 == null || object2 == null || !object1.isInPlay()
-                || !object2.isInPlay()) {
+        if (object1 == null || object2 == null || !object1.isInPlay() || !object2.isInPlay()
+                || object1.isPhasedOut() || object2.isPhasedOut()) {
             return;
         }
 
