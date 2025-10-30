@@ -1492,24 +1492,24 @@ ScryfallCode=PRM
 80899 R Inspired Ultimatum @Tyler Jacobson
 80901 R Genesis Ultimatum @Jason Rainville
 80903 R Bonders' Enclave @Cliff Childs
-80905 M Nethroi, Apex of Death @Torstein Nordstrand
-80907 M Vadrok, Apex of Thunder @Johann Bodin
-80909 M Brokkos, Apex of Forever @Svetlin Velinov
-80911 M Snapdax, Apex of the Hunt @YW Tang
-80913 M Illuna, Apex of Wishes @Nicholas Gregory
-80915 M Luminous Broodmoth @Nick Southam
-80917 R Gemrazer @Sam Rowan
-80919 R Gyruda, Doom of Depths @Jesper Ejsing
-80921 R Yidaro, Wandering Monster @Yigit Koroglu
-80923 U Void Beckoner @Zezhou Chen
-80925 U Titanoth Rex @Lius Lasahido
-80927 U Huntmaster Liger @Slawomir Maniak
-80929 R Everquill Phoenix @JOZ
-80931 U Pollywog Symbiote @Simon Dominic
-80933 U Sprite Dragon @Simon Dominic
-80935 R Dirge Bat @Kohei Hayama
-80937 R Crystalline Giant @Kotakan
-80939 C Mysterious Egg @Yoroikoji
+80905 M Nethroi, Apex of Death @Torstein Nordstrand ${"flavorName": "Biollante, Plant Beast Form"}
+80907 M Vadrok, Apex of Thunder @Johann Bodin ${"flavorName": "Rodan, Titan of Winged Fury"}
+80909 M Brokkos, Apex of Forever @Svetlin Velinov ${"flavorName": "Bio-Quartz Spacegodzilla"}
+80911 M Snapdax, Apex of the Hunt @YW Tang ${"flavorName": "King Caesar, Awoken Titan"}
+80913 M Illuna, Apex of Wishes @Nicholas Gregory ${"flavorName": "Ghidorah, King of the Cosmos"}
+80915 M Luminous Broodmoth @Nick Southam ${"flavorName": "Mothra, Supersonic Queen"}
+80917 R Gemrazer @Sam Rowan ${"flavorName": "Anguirus, Armored Killer"}
+80919 R Gyruda, Doom of Depths @Jesper Ejsing ${"flavorName": "Gigan, Cyberclaw Terror"}
+80921 R Yidaro, Wandering Monster @Yigit Koroglu ${"flavorName": "Godzilla, Doom Inevitable"}
+80923 U Void Beckoner @Zezhou Chen ${"flavorName": "Spacegodzilla, Death Corona"}
+80925 U Titanoth Rex @Lius Lasahido ${"flavorName": "Godzilla, Primeval Champion"}
+80927 U Huntmaster Liger @Slawomir Maniak ${"flavorName": "King Caesar, Ancient Guardian"}
+80929 R Everquill Phoenix @JOZ ${"flavorName": "Destoroyah, Perfect Lifeform"}
+80931 U Pollywog Symbiote @Simon Dominic ${"flavorName": "Babygodzilla, Ruin Reborn"}
+80933 U Sprite Dragon @Simon Dominic ${"flavorName": "Dorat, the Perfect Pet"}
+80935 R Dirge Bat @Kohei Hayama ${"flavorName": "Battra, Dark Destroyer"}
+80937 R Crystalline Giant @Kotakan ${"flavorName": "Mechagodzilla, the Weapon"}
+80939 C Mysterious Egg @Yoroikoji ${"flavorName": "Mothra's Great Cocoon"}
 80941 R Colossification @Mathias Kollros
 80943 R Raugrin Triome @Robbie Trevino
 80945 R Indatha Triome @Robbie Trevino
