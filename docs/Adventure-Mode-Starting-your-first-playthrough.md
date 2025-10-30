@@ -1,0 +1,1 @@
+This is where I'm going to outline "starting a game" and "how to play" in adventure mode.
