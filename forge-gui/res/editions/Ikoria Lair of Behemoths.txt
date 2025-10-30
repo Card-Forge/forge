@@ -285,7 +285,7 @@ FatPackExtraSlots=20 BasicLands, 20 BasicLands+
 274 L Forest @Yeong-Hao Han
 
 [buy a box]
-275 M Zilortha, Strength Incarnate @Antonio José Manzanedo
+275 M Zilortha, Strength Incarnate @Antonio José Manzanedo ${"flavorName": "Godzilla, King of the Monsters"}
 275y M Zilortha, Strength Incarnate @Chase Stone
 
 [borderless]
@@ -389,24 +389,24 @@ FatPackExtraSlots=20 BasicLands, 20 BasicLands+
 367 C Forbidden Friendship @Jakub Kasper
 368 U Migration Path @Grzegorz Rutkowski
 369 U Sprite Dragon @Gabor Szikszai
-370 U Huntmaster Liger @Slawomir Maniak
-371 M Luminous Broodmoth @Nick Southam
-372 U Pollywog Symbiote @Simon Dominic
-373 U Void Beckoner @Zezhou Chen
-374 R Everquill Phoenix @JOZ
-375 R Yidaro, Wandering Monster @Yigit Koroglu
-376 R Gemrazer @Sam Rowan
-377 U Titanoth Rex @Lius Lasahido
-378 M Brokkos, Apex of Forever @Svetlin Velinov
-379 M Illuna, Apex of Wishes @Nicholas Gregory
-380 M Nethroi, Apex of Death @Torstein Nordstrand
-381 M Snapdax, Apex of the Hunt @YW Tang
-382 U Sprite Dragon @Simon Dominic
-383 M Vadrok, Apex of Thunder @Johann Bodin
-384 R Gyruda, Doom of Depths @Jesper Ejsing
-385 C Mysterious Egg @Yoroikoji
-386 R Dirge Bat @Kohei Hayama
-387 R Crystalline Giant @Kotakan
+370 U Huntmaster Liger @Slawomir Maniak ${"flavorName": "King Caesar, Ancient Guardian"}
+371 M Luminous Broodmoth @Nick Southam ${"flavorName": "Mothra, Supersonic Queen"}
+372 U Pollywog Symbiote @Simon Dominic ${"flavorName": "Babygodzilla, Ruin Reborn"}
+373 U Void Beckoner @Zezhou Chen ${"flavorName": "Spacegodzilla, Death Corona"}
+374 R Everquill Phoenix @JOZ ${"flavorName": "Destoroyah, Perfect Lifeform"}
+375 R Yidaro, Wandering Monster @Yigit Koroglu ${"flavorName": "Godzilla, Doom Inevitable"}
+376 R Gemrazer @Sam Rowan ${"flavorName": "Anguirus, Armored Killer"}
+377 U Titanoth Rex @Lius Lasahido ${"flavorName": "Godzilla, Primeval Champion"}
+378 M Brokkos, Apex of Forever @Svetlin Velinov ${"flavorName": "Bio-Quartz Spacegodzilla"}
+379 M Illuna, Apex of Wishes @Nicholas Gregory ${"flavorName": "Ghidorah, King of the Cosmos"}
+380 M Nethroi, Apex of Death @Torstein Nordstrand ${"flavorName": "Biollante, Plant Beast Form"}
+381 M Snapdax, Apex of the Hunt @YW Tang ${"flavorName": "King Caesar, Awoken Titan"}
+382 U Sprite Dragon @Simon Dominic ${"flavorName": "Dorat, the Perfect Pet"}
+383 M Vadrok, Apex of Thunder @Johann Bodin ${"flavorName": "Rodan, Titan of Winged Fury"}
+384 R Gyruda, Doom of Depths @Jesper Ejsing ${"flavorName": "Gigan, Cyberclaw Terror"}
+385 C Mysterious Egg @Yoroikoji ${"flavorName": "Mothra's Great Cocoon"}
+386 R Dirge Bat @Kohei Hayama ${"flavorName": "Battra, Dark Destroyer"}
+387 R Crystalline Giant @Kotakan ${"flavorName": "Mechagodzilla, the Weapon"}
 
 [rebalanced]
 A-216 M A-Winota, Joiner of Forces @Magali Villeneuve
