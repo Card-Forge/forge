@@ -1,0 +1,11 @@
+Name:Sokka and Suki
+ManaCost:U R W
+Types:Legendary Creature Human Warrior Ally
+PT:3/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self,Creature.Other+Ally+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigAttach | TriggerDescription$ Whenever CARDNAME or another Ally you control enters, attach up to one target Equipment you control to that creature.
+SVar:TrigAttach:DB$ Attach | Defined$ TriggeredCardLKICopy | Object$ Targeted | ValidTgts$ Equipment.YouCtrl | TgtPrompt$ Select up to one target Equipment you control | TargetMin$ 0 | TargetMax$ 1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Equipment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an Equipment you control enters, create a 1/1 white Ally creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_ally | TokenOwner$ You
+DeckHas:Ability$Token
+DeckNeeds:Type$Equipment|Ally
+Oracle:Whenever Sokka and Suki or another Ally you control enters, attach up to one target Equipment you control to that creature.\nWhenever an Equipment you control enters, create a 1/1 white Ally creature token.

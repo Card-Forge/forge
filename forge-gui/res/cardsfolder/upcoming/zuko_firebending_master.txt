@@ -1,0 +1,10 @@
+Name:Zuko, Firebending Master
+ManaCost:1 R
+Types:Legendary Creature Human Noble Ally
+PT:2/2
+K:First Strike
+K:Firebending:X:, where X is the number of experience counters you have.
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Phase$ BeginCombat->EndCombat | Execute$ TrigExperience | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell during combat, you get an experience counter.
+SVar:TrigExperience:DB$ PutCounter | Defined$ You | CounterType$ Experience | CounterNum$ 1
+SVar:X:Count$YourCountersExperience
+Oracle:First strike\nFirebending X, where X is the number of experience counters you have. (Whenever this creature attacks, add X {R}. This mana lasts until end of combat.)\nWhenever you cast a spell during combat, you get an experience counter.

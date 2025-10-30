@@ -1,0 +1,12 @@
+Name:Northern Air Temple
+ManaCost:B
+Types:Legendary Enchantment Shrine
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife1 | TriggerDescription$ When CARDNAME enters, each opponent loses X life and you gain X life, where X is the number of Shrines you control.
+SVar:TrigLoseLife1:DB$ LoseLife | Defined$ Opponent | LifeAmount$ X | SubAbility$ DBGainLife1
+SVar:DBGainLife1:DB$ GainLife | Defined$ You | LifeAmount$ X
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Shrine.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife2 | TriggerDescription$ Whenever another Shrine you control enters, each opponent loses 1 life and you gain 1 life.
+SVar:TrigLoseLife2:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife2
+SVar:DBGainLife2:DB$ GainLife | Defined$ You | LifeAmount$ 1
+SVar:X:Count$Valid Shrine.YouCtrl
+DeckHints:Type$Shrine
+Oracle:When Northern Air Temple enters, each opponent loses X life and you gain X life, where X is the number of Shrines you control.\nWhenever another Shrine you control enters, each opponent loses 1 life and you gain 1 life.

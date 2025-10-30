@@ -389,6 +389,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             String normalizedFlavorName = cr.getDisplayNameForVariant(variantName);
             if(!flavorNameMappings.containsKey(normalizedFlavorName)) {
                 flavorNameMappings.put(normalizedFlavorName, variantName);
+                flavorNameMappings.put(cr.getName(), IPaperCard.NO_FUNCTIONAL_VARIANT);
                 rulesByName.put(normalizedFlavorName, cr);
                 cacheFlavorName(cr.getMainPart().getFunctionalVariant(variantName));
                 if(cr.getOtherPart() != null)

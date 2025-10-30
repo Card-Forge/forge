@@ -1,0 +1,11 @@
+Name:Crescent Island Temple
+ManaCost:3 R
+Types:Legendary Enchantment Shrine
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken1 | TriggerDescription$ When CARDNAME enters, for each Shrine you control, create a 1/1 red Monk creature token with prowess. (Whenever you cast a noncreature spell, it gets +1/+1 until end of turn.)
+SVar:TrigToken1:DB$ Token | TokenAmount$ X | TokenOwner$ You | TokenScript$ r_1_1_monk_prowess
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Shrine.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken2 | TriggerDescription$ Whenever another Shrine you control enters, create a 1/1 red Monk creature token with prowess.
+SVar:TrigToken2:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ r_1_1_monk_prowess
+SVar:X:Count$Valid Shrine.YouCtrl
+DeckHas:Ability$Counters
+DeckHints:Type$Shrine
+Oracle:When Crescent Island Temple enters, for each Shrine you control, create a 1/1 red Monk creature token with prowess. (Whenever you cast a noncreature spell, it gets +1/+1 until end of turn.)\nWhenever another Shrine you control enters, create a 1/1 red Monk creature token with prowess.

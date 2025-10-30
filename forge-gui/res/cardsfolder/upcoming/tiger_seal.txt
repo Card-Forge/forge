@@ -1,0 +1,10 @@
+Name:Tiger-Seal
+ManaCost:U
+Types:Creature Cat Seal
+PT:3/3
+K:Vigilance
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ At the beginning of your upkeep, tap this creature.
+SVar:TrigTap:DB$ Tap | Defined$ Self
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you draw your second card each turn, untap this creature.
+SVar:TrigUntap:DB$ Untap | Defined$ Self
+Oracle:Vigilance\nAt the beginning of your upkeep, tap this creature.\nWhenever you draw your second card each turn, untap this creature.

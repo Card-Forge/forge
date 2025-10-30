@@ -1,0 +1,12 @@
+Name:Azula, Ruthless Firebender
+ManaCost:2 B
+Types:Legendary Creature Human Noble
+PT:3/3
+K:Firebending:1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ Whenever NICKNAME attacks, you may discard a card. Then you get an experience counter for each player who discarded a card this turn.
+SVar:TrigDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | Optional$ True | NumCards$ 1 | SubAbility$ DBExperience
+SVar:DBExperience:DB$ PutCounter | Defined$ You | CounterType$ Experience | CounterNum$ X
+A:AB$ Pump | Cost$ 2 B | Defined$ Self | NumAtt$ +Y | NumDef$ +Y | KW$ Menace | SpellDescription$ Until end of turn, NICKNAME gets +1/+1 for each experience counter you have and gains menace.
+SVar:X:PlayerCountPlayers$ConditionGE1 CardsDiscardedThisTurn
+SVar:Y:Count$YourCountersExperience
+Oracle:Firebending 1 (Whenever this creature attacks, add {R}. This mana lasts until end of combat.)\nWhenever Azula attacks, you may discard a card. Then you get an experience counter for each player who discarded a card this turn.\n{2}{B}: Until end of turn, Azula gets +1/+1 for each experience counter you have and gains menace.

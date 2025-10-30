@@ -1,0 +1,10 @@
+Name:Boiling Rock Rioter
+ManaCost:2 B
+Types:Creature Human Rogue Ally
+PT:3/3
+K:Firebending:1
+A:AB$ ChangeZone | Cost$ tapXType<1/Ally> | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCast | OptionalDecider$ You | TriggerDescription$ Whenever this creature attacks, you may cast an Ally spell from among cards you own exiled with this creature.
+SVar:TrigCast:DB$ Play | ValidZone$ Exile | Valid$ Ally.YouOwn+ExiledWithSource | ValidSA$ Spell | Controller$ You | Optional$ True | Amount$ 1
+DeckHints:Type$Ally
+Oracle:Firebending 1 (Whenever this creature attacks, add {R}. This mana lasts until end of combat.)\nTap an untapped Ally you control: Exile target card from a graveyard.\nWhenever this creature attacks, you may cast an Ally spell from among cards you own exiled with this creature.

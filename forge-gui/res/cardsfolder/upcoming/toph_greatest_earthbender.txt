@@ -1,0 +1,9 @@
+Name:Toph, Greatest Earthbender
+ManaCost:2 R G
+Types:Legendary Creature Human Warrior Ally
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEarthbend | TriggerDescription$ When NICKNAME enters, earthbend X, where X is the amount of mana spent to cast her.
+SVar:TrigEarthbend:DB$ Earthbend | Num$ X
+S:Mode$ Continuous | Affected$ Creature.Land+YouCtrl| AddKeyword$ Double Strike | Description$ Land creatures you control have double strike.
+SVar:X:Count$CastTotalManaSpent
+Oracle:When Toph enters, earthbend X, where X is the amount of mana spent to cast her.\nLand creatures you control have double strike.
