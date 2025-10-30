@@ -1,4 +1,4 @@
-Name:Gran-Fran
+Name:Gran-Gran
 ManaCost:U
 Types:Legendary Creature Human Peasant Ally
 PT:1/2
