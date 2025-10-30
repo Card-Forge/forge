@@ -15,10 +15,14 @@ ScryfallCode=TLA
 8 C Airbending Lesson @Pisukev
 10 M Appa, Steadfast Guardian @Maël Ollivier-Henry
 11 C Avatar Enthusiasts @Leanna Crossan
+13 C Compassionate Healer @Kuno
+19 U Fancy Footwork @Mizutametori
 21 C Glider Kids @ikeda_cpt
+22 U Glider Staff @Eduardo Francisco
 25 C Jeong Jeong's Deserters @Leonardo Borazio
 28 U Master Piandao @Brian Yuen
 29 R Momo, Friendly Flier @Brandon L. Hunt
+30 U Momo, Playful Pet @Awanqi (Angela Wang)
 31 C Path to Redemption @Hokyoung Kim
 32 C Rabaroo Troop @Mizutametori
 33 C Razor Rings @Norikatsu Miyoshi
@@ -27,6 +31,7 @@ ScryfallCode=TLA
 43 C Yip Yip! @Cinkai
 49 C First-Time Flyer @Mizutametori
 50 C Flexible Waterbender @Rafater
+51 C Forecasting Fortune Teller @Hisashi Momose
 52 C Geyser Leaper @Norikatsu Miyoshi
 53 C Giant Koi @Nathaniel Himawan
 54 U Gran-Gran @Arou
@@ -35,14 +40,18 @@ ScryfallCode=TLA
 58 C It'll Quench Ya! @Nathaniel Himawan
 59 U Katara, Bending Prodigy @Mephisto
 61 M The Legend of Kuruk @Toshiaki Takayama
+62 C Lost Days @Matteo Bassini
 63 U Master Pakku @Olena Richards
+64 R The Mechanist, Aerial Artisan @Le Vuong
 65 U North Pole Patrol @Rose Benjamin
 67 C Otter-Penguin @Eilene Cherie
 68 C Rowdy Snowballers @Mizutametori
 69 M Secret of Bloodbending @Olena Richards
 70 U Serpent of the Pass @Eiji Kaneda
 71 U Sokka's Haiku @Bun Toujo
+74 U Teo, Spirited Glider @Robin Har
 75 R Tiger-Seal @Jinho Bae
+76 R Ty Lee, Chi Blocker @Gemi
 78 M Wan Shi Tong, Librarian @Ryota Murayama
 80 C Waterbending Lesson @Sylvain Sarrailh
 82 C Watery Grasp @Rose Benjamin
@@ -59,11 +68,14 @@ ScryfallCode=TLA
 96 U Epic Downfall @Hristo D. Chukov
 98 R The Fire Nation Drill @Brandon L. Hunt
 99 U Fire Nation Engineer @Norikatsu Miyoshi
+102 R Foggy Swamp Visions @Hori Airi
 103 U Heartless Act @Sylvain Sarrailh
 104 C Hog-Monkey @Miho Midorikawa
 110 C Merchant of Many Hats @Boell Oyino
+111 U Northern Air Temple @Slawek Fedorczuk
 113 U Ozai's Cruelty @ikeda_cpt
 117 M The Rise of Sozin @Mitori
+121 U Tundra Tank @Shishizaru
 126 U The Cave of Two Lovers @Ittoku
 129 U Crescent Island Temple @Luc Courtois
 130 C Cunning Maneuver @Robin Har
@@ -82,6 +94,7 @@ ScryfallCode=TLA
 152 C Rough Rhino Cavalry @Yuhong Ding
 153 U Solstice Revelations @Kotakan
 154 M Sozin's Comet @Salvatorre Zee Yazzie
+158 U Ty Lee, Artful Acrobat @Rose Benjamin
 159 U War Balloon @Matteo Bassini
 161 C Yuyan Archers @Domco.
 163 U Zuko, Exiled Prince @Nijihayashi
@@ -89,6 +102,7 @@ ScryfallCode=TLA
 166 C Badgermole @Matteo Bassini
 167 M Badgermole Cub @Nathaniel Himawan
 170 C Cycle of Renewal @Jocelin Carmes
+171 R Diligent Zookeeper @Maojin Lee
 174 U Earth Rumble @Olena Richards
 176 C Earthbending Lesson @Toni Infante
 179 U Flopsie, Bumi's Buddy @Alexandr Leskinen
@@ -104,11 +118,14 @@ ScryfallCode=TLA
 195 U Seismic Sense @Jo Cordisco
 197 U Sparring Dummy @Gemi
 198 U Toph, the Blind Bandit @Yueko
+199 U True Ancestry @Chibi
 200 C Turtle-Duck @Sylvain Sarrailh
+201 U Unlucky Cabbage Merchant @Thomas Chamberlain-Keen
 203 R Aang, at the Crossroads @Evan Shipard
 205 C Abandon Attachments @Shahab Alizadeh
 207 M Avatar Aang @Fahmi Fauzi
 208 R Azula, Cunning Usurper @Evyn Fong
+211 M Bumi, Unleashed @Toni Infante
 212 C Cat-Owl @Thomas Chamberlain-Keen
 214 U Dai Li Agents @Eduardo Francisco
 215 U Dragonfly Swarm @John Di Giovanni
@@ -136,10 +153,14 @@ ScryfallCode=TLA
 248 U Uncle Iroh @Kieran Yanner
 249 C Vindictive Warden @Jo Cordisco
 251 U White Lotus Reinforcements @Kotakan
+253 R Zuko, Conflicted @Halil Ural
 254 C Barrels of Blasting Jelly @Salvatorre Zee Yazzie
 255 C Bender's Waterskin @Dee Nguyen
+259 M Planetarium of Wan Shi Tong @Robin Olausson
 260 U Trusty Boomerang @Toni Infante
 262 M White Lotus Tile @Dee Nguyen
+278 R Secret Tunnel @Alexander Forssberg
+281 U White Lotus Hideout @Luc Courtois
 282 L Plains @Slawek Fedorczuk
 283 L Island @Maojin Lee
 284 L Swamp @Matteo Bassini
@@ -174,13 +195,8 @@ ScryfallCode=TLA
 321 R The Fire Nation Drill @Ben Hill
 325 R Ran and Shaw @Antonio José Manzanedo
 326 M Badgermole Cub @Filip Burburan
+327 R Diligent Zookeeper @Andrea Piparo
 328 R The Lion-Turtle @Filip Burburan
-330 M White Lotus Tile @Antonio José Manzanedo
-332 M Sozin's Comet @JungShan
-334 R Fire Lord Azula @JungShan
-335 M Ozai, the Phoenix King @Sidharth Chaturvedi
-336 R Aang's Iceberg @Brigitte Roka & Clifton Stommel
-337 M Secret of Bloodbending @Barbara Rosiak
 330 M White Lotus Tile @Antonio José Manzanedo
 332 M Sozin's Comet @JungShan
 334 R Fire Lord Azula @JungShan
@@ -193,6 +209,7 @@ ScryfallCode=TLA
 342 R Firebending Student @Ina Wong
 343 R Redirect Lightning @Perci Chen
 346 R Aang, at the Crossroads @Brigitte Roka & Clifton Stommel
+348 M Bumi, Unleashed @Brigitte Roka
 349 R Iroh, Grand Lotus @Dalton Pencarinha
 350 R Katara, the Fearless @Barbara Rosiak
 351 R Katara, Water Tribe's Hope @Chun Lo
@@ -207,10 +224,13 @@ ScryfallCode=TLA
 363 M Avatar Aang @Bryan Konietzko
 364 R Airbender Ascension @Shiren
 366 R Hakoda, Selfless Commander @Rafater
+369 R The Mechanist, Aerial Artisan @Le Vuong
+371 R Ty Lee, Chi Blocker @Gemi
 372 R Boiling Rock Rioter @Airi Yoshihisa
 373 R Day of Black Sun @Matteo Bassini
 380 R Earth King's Lieutenant @Nathaniel Himawan
 383 R Sokka, Bold Boomeranger @Toni Infante
 385 M Planetarium of Wan Shi Tong @Robin Olausson
+392 R Secret Tunnel @Alexander Forssberg
 393 R Firebending Student @Airi Yoshihisa
 394 R Momo, Friendly Flier @Ryota Murayama

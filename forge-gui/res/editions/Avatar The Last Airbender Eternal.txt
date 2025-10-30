@@ -6,15 +6,20 @@ Type=Expansion
 ScryfallCode=TLE
 
 [cards]
+1 M Brought Back @Viacom
 5 M Release to Memory @Viacom
 9 M Agent of Treachery @Viacom
 10 M Bribery @Viacom
 13 M Force of Negation @Viacom
 16 M Mystic Remora @Viacom
+17 M Prosperity @Viacom
 24 M Cruel Tutor @Viacom
+33 M Mirrorwing Dragon @Viacom
 41 M The Great Henge @Viacom ${"flavorName": "The Banyan Tree"}
 43 M Heroic Intervention @Viacom
+45 M Rites of Flourishing @Viacom
 48 M Eladamri's Call @Viacom ${"flavorName": "Lifelong Friendship"}
+52 M Rhys the Redeemed @Viacom
 56 M Dark Depths @Viacom ${"flavorName": "The Boy in the Iceberg"}
 61 M Valakut, the Molten Pinnacle @Viacom ${"flavorName": "Volcano of Roku's Island"}
 63 R Katara's Reversal @Fahmi Fauzi
