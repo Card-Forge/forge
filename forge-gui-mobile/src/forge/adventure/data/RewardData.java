@@ -107,9 +107,10 @@ public class RewardData implements Serializable {
             allCards = IterableUtil.filter(allCards, PaperCardPredicates.printedInAnyEditions(configData.allowedEditions));
         } else if (configData.restrictedEditions != null && configData.restrictedEditions.length > 0) {
             allCards = IterableUtil.filter(allCards, PaperCardPredicates.onlyPrintedInEditions(configData.restrictedEditions).negate());
-        } else {
-            allCards = IterableUtil.filter(allCards, PaperCardPredicates.isObtainableAnyEdition());
         }
+
+        // Remove unobtainable cards (ie. Conjure-only)
+        allCards = IterableUtil.filter(allCards, PaperCardPredicates.isObtainableAnyEdition());
 
         Set<String> restrictedCards = new HashSet<>(Arrays.asList(configData.restrictedCards));
 
