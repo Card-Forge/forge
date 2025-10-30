@@ -1,0 +1,7 @@
+Name:Professor Zei, Anthropologist
+ManaCost:UR UR
+Types:Legendary Creature Human Advisor Ally
+PT:0/3
+A:AB$ Draw | Cost$ T Discard<1/Card> | Defined$ You | SpellDescription$ Draw a card.
+A:AB$ ChangeZone | Cost$ 1 T Sac<1/CARDNAME/NICKNAME> | TgtPrompt$ Select target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | Origin$ Graveyard | Destination$ Hand | PlayerTurn$ True | SpellDescription$ Return target instant or sorcery card from your graveyard to your hand. Activate only during your turn.
+Oracle:{T}, Discard a card: Draw a card.\n{1}, {T}, Sacrifice Professor Zei: Return target instant or sorcery card from your graveyard to your hand. Activate only during your turn.
