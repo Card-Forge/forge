@@ -51,6 +51,8 @@ public class MulliganService {
                 case London:
                     mulligans.add(new LondonMulligan(player, firstMullFree));
                     break;
+                case Houston:
+                    mulligans.add(new HoustonMulligan(player));
                 default:
                     // Default to Vancouver mulligan for now. Should ideally never get here.
                     mulligans.add(new VancouverMulligan(player, firstMullFree));
@@ -64,29 +66,54 @@ public class MulliganService {
         do {
             allKept = true;
             for (AbstractMulligan mulligan : mulligans) {
+
+                // 🚨 1. PRIMARY CHECK: If the mulligan state is 'kept', skip this player.
+                // This is how you prevent a second interaction for Houston.
                 if (mulligan.hasKept()) {
                     continue;
                 }
-                Player p = mulligan.getPlayer();
-                boolean keep = !mulligan.canMulligan() || p.getController().mulliganKeepHand(firstPlayer, mulligan.tuckCardsAfterKeepHand());
 
-                if (game.isGameOver()) { // conceded on mulligan prompt
+                Player p = mulligan.getPlayer();
+                boolean keep;
+
+                if (mulligan instanceof HoustonMulligan) {
+                    if (mulligan.canMulligan()) {
+                        // This is the first and only mandatory mulligan for Houston.
+                        mulligan.mulligan(); // Executes draw/tuck and MUST set internal 'hasKept' to true.
+
+                        // 🚨 Force the keep() method call externally for safety/consistency.
+                        mulligan.keep();
+
+                        keep = true; // Set 'keep' to true for the following logic.
+                    } else {
+                        // If canMulligan() is false, and hasKept() was false (unlikely state, but handle it)
+                        // we must force a keep to proceed and rely on the initial hasKept() check next loop.
+                        mulligan.keep();
+                        keep = true;
+                    }
+
+                } else {
+                    // 2. STANDARD MULLIGAN RULES: This is the only place the dialog should run.
+                    keep = !mulligan.canMulligan() || p.getController().mulliganKeepHand(firstPlayer, mulligan.tuckCardsAfterKeepHand());
+                }
+
+                if (game.isGameOver()) {
                     return;
                 }
 
                 if (keep) {
-                    mulligan.keep();
+                    // If this was a standard mulligan player, we call keep() now.
+                    // If this was Houston, we already called keep() inside the block (or it's idempotent).
+                    if (!mulligan.hasKept()) { // Safer check to avoid redundant calls
+                        mulligan.keep();
+                    }
                     continue;
                 }
 
+                // If 'keep' is false (only for non-Houston rules), allKept is set to false.
                 allKept = false;
-
                 mulligan.mulligan();
             }
         } while (!allKept);
-
-        for (AbstractMulligan mulligan : mulligans) {
-            mulligan.afterMulligan();
-        }
     }
 }
