@@ -1,0 +1,7 @@
+Name:Forecasting Fortune Teller
+ManaCost:1 U
+Types:Creature Human Advisor Ally
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a Clue token. (It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_clue_draw | TokenOwner$ You
+Oracle:When this creature enters, create a Clue token. (It's an artifact with "{2}, Sacrifice this token: Draw a card.")

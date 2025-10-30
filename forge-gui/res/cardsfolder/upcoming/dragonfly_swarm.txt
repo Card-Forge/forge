@@ -1,0 +1,13 @@
+Name:Dragonfly Swarm
+ManaCost:1 U R
+Types:Creature Dragon Insect
+PT:*/3
+K:Flying
+K:Ward:1
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ This creature's power is equal to the number of noncreature, nonland cards in your graveyard.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | CheckSVar$ Y | SVarCompare$ GE1 | Execute$ TrigDraw | TriggerDescription$ When this creature dies, if there's a Lesson card in your graveyard, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:X:Count$ValidGraveyard Card.YouOwn+nonCreature+nonLand
+SVar:Y:Count$ValidGraveyard Lesson.YouOwn
+DeckHints:Type$Lesson
+Oracle:Flying, ward {1} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.)\nThis creature's power is equal to the number of noncreature, nonland cards in your graveyard.\nWhen this creature dies, if there's a Lesson card in your graveyard, draw a card.

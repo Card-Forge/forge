@@ -1178,13 +1178,11 @@ public class CardFactoryUtil {
             StringBuilder desc = new StringBuilder("Firebending ");
             desc.append(n);
             if (k.length > 2) {
-                desc.append(" ").append(k[2]);
+                desc.append(k[2]);
             }
-
             desc.append(" (").append(inst.getReminderText()).append(")");
 
-            final String trigStr = "Mode$ Attacks | ValidCard$ Card.Self | TriggerDescription$ " + desc.toString();
-
+            final String trigStr = "Mode$ Attacks | ValidCard$ Card.Self | TriggerDescription$ " + desc;
             final String manaStr = "DB$ Mana | Defined$ You | CombatMana$ True | Produced$ R | Amount$ " + n;
 
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
