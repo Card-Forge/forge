@@ -26,7 +26,7 @@ public class MulliganService {
 
         for (AbstractMulligan mulligan : mulligans) {
             if (mulligan.hasKept()) {
-                mulligan.afterMulligan(); // This usually calls the tuck logic in a real engine
+                mulligan.afterMulligan();
             }
         }
     }
@@ -35,7 +35,6 @@ public class MulliganService {
         List<Player> whoCanMulligan = Lists.newArrayList(game.getPlayers());
         int offset = whoCanMulligan.indexOf(firstPlayer);
 
-        // Have to cycle-shift the list to get the first player on index 0
         for (int i = 0; i < offset; i++) {
             whoCanMulligan.add(whoCanMulligan.remove(0));
         }
@@ -61,7 +60,6 @@ public class MulliganService {
                     mulligans.add(new HoustonMulligan(player, firstMullFree));
                     break;
                 default:
-                    // Default to Vancouver mulligan for now. Should ideally never get here.
                     mulligans.add(new VancouverMulligan(player, firstMullFree));
                     break;
             }
@@ -74,16 +72,12 @@ public class MulliganService {
             allKept = true;
             for (AbstractMulligan mulligan : mulligans) {
 
-                // 🚨 1. PRIMARY CHECK: If the mulligan state is 'kept', skip this player.
-                // This is how you prevent a second interaction for Houston.
                 if (mulligan.hasKept()) {
                     continue;
                 }
 
                 Player p = mulligan.getPlayer();
 
-                // 2. STANDARD MULLIGAN RULES: This is where non-Houston players decide to mulligan.
-                // It only proceeds if the player *can* mulligan.
                 boolean keep = !mulligan.canMulligan() ||
                         p.getController().mulliganKeepHand(
                                 firstPlayer,
@@ -99,13 +93,10 @@ public class MulliganService {
                     continue;
                 }
 
-                // If 'keep' is false (only for non-Houston rules), allKept is set to false.
                 allKept = false;
                 mulligan.mulligan();
             }
 
-            // If all players have 'kept' (or if the only one remaining is Houston, who already 'kept'),
-            // the loop terminates.
         } while (!allKept);
     }
 }
