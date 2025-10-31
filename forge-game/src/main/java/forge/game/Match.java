@@ -3,6 +3,8 @@ package forge.game;
 import com.google.common.collect.*;
 import com.google.common.eventbus.EventBus;
 import forge.LobbyPlayer;
+import forge.MulliganDefs;
+import forge.StaticData;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckFormat;
@@ -69,7 +71,32 @@ public class Match {
     }
 
     public Game createGame() {
-        return new Game(players, rules, this);
+        final GameRules currentRules = this.getRules();
+
+        MulliganDefs.MulliganRule selectedRule = StaticData.instance().getMulliganRule();
+
+        if (selectedRule == MulliganDefs.MulliganRule.Houston) {
+            List<RegisteredPlayer> modifiedPlayers = new ArrayList<>();
+
+            for (RegisteredPlayer rp : players) {
+                rp.setStartingHand(10);
+                modifiedPlayers.add(rp);
+            }
+
+            Game game = new Game(modifiedPlayers, currentRules, this);
+
+            for (RegisteredPlayer rp : players) {
+                rp.setStartingHand(7);
+            }
+
+            return game;
+
+        } else {
+            for (RegisteredPlayer rp : players) {
+                rp.setStartingHand(7);
+            }
+            return new Game(players, currentRules, this);
+        }
     }
 
     public void startGame(final Game game) {
