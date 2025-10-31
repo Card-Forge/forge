@@ -1,0 +1,12 @@
+Name:Momo, Playful Pet
+ManaCost:W
+Types:Legendary Creature Lemur Bat Ally
+PT:1/1
+K:Flying
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When NICKNAME leaves the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBToken,DBPutCounter,DBScry
+SVar:DBToken:DB$ Token | TokenScript$ c_a_food_sac | SpellDescription$ Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | CounterType$ P1P1 | TgtPrompt$ Select target creature you control | StackDescription$ Put a +1/+1 counter on {c:ThisTargetedCard}. | SpellDescription$ Put a +1/+1 counter on target creature you control.
+SVar:DBScry:DB$ Scry | ScryNum$ 2 | SpellDescription$ Scry 2.
+Oracle:Flying, vigilance\nWhen Momo leaves the battlefield, choose one —\n• Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")\n• Put a +1/+1 counter on target creature you control.\n• Scry 2.

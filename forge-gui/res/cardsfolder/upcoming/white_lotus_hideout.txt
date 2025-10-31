@@ -1,0 +1,9 @@
+Name:White Lotus Hideout
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Spell.Lesson,Spell.Shrine | SpellDescription$ Add one mana of any color. Spend this mana only to cast a Lesson or Shrine spell.
+A:AB$ Mana | Cost$ 1 T | Produced$ Any | SpellDescription$ Add one mana of any color.
+DeckHas:Ability$Mana.Colorless
+DeckHints:Type$Lesson|Shrine
+Oracle:{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Lesson or Shrine spell.\n{1}, {T}: Add one mana of any color.

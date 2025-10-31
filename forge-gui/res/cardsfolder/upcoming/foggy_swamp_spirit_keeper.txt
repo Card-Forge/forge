@@ -1,0 +1,9 @@
+Name:Foggy Swamp Spirit Keeper
+ManaCost:1 U B
+Types:Creature Human Druid Ally
+PT:2/4
+K:Lifelink
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you draw your second card each turn, create a 1/1 colorless Spirit creature token with "This token can't block or be blocked by non-Spirit creatures."
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_spirit_spiritshadow
+DeckHas:Ability$Token & Type$Spirit
+Oracle:Lifelink\nWhenever you draw your second card each turn, create a 1/1 colorless Spirit creature token with "This token can't block or be blocked by non-Spirit creatures."

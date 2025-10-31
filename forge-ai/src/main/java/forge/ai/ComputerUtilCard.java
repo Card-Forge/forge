@@ -500,7 +500,7 @@ public class ComputerUtilCard {
         }
 
         List<Card> lands = CardLists.filter(list, CardPredicates.LANDS);
-        if (lands.size() > 6) {
+        if (lands.size() > 6 || lands.size() == Iterables.size(list)) {
             return getWorstLand(lands);
         }
 

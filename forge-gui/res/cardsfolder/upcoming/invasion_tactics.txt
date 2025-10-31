@@ -1,0 +1,10 @@
+Name:Invasion Tactics
+ManaCost:4 G
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When this enchantment enters, creatures you control get +2/+2 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Ally.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ TrigDraw | TriggerDescription$ Whenever one or more Allies you control deal combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:PlayMain1:ALWAYS
+DeckHints:Type$Ally
+Oracle:When this enchantment enters, creatures you control get +2/+2 until end of turn.\nWhenever one or more Allies you control deal combat damage to a player, draw a card.

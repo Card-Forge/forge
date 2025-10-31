@@ -1,0 +1,8 @@
+Name:Fire Lord Azula
+ManaCost:1 U B R
+Types:Legendary Creature Human Noble
+PT:4/4
+K:Firebending:2
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | IsPresent$ Card.Self+attacking | NoResolvingCheck$ True | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell while CARDNAME is attacking, copy that spell. You may choose new targets for the copy. (A copy of a permanent spell becomes a token.)
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+Oracle:Firebending 2 (Whenever this creature attacks, add {R}{R}. This mana lasts until end of combat.)\nWhenever you cast a spell while Fire Lord Azula is attacking, copy that spell. You may choose new targets for the copy. (A copy of a permanent spell becomes a token.)

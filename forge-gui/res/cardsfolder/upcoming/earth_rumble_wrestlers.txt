@@ -1,0 +1,10 @@
+Name:Earth Rumble Wrestlers
+ManaCost:3 RG
+Types:Creature Human Warrior Performer
+PT:3/4
+K:Reach
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddKeyword$ Trample | CheckSVar$ X | Description$ This creature gets +1/+0 and has trample as long as you control a land creature or a land entered the battlefield under your control this turn.
+SVar:Y:Count$Valid Creature.Land+YouCtrl
+SVar:Z:Count$ThisTurnEntered_Battlefield_Land.YouCtrl
+SVar:X:SVar$Y/Plus.Z
+Oracle:Reach\nThis creature gets +1/+0 and has trample as long as you control a land creature or a land entered the battlefield under your control this turn.

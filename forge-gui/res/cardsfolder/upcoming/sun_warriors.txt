@@ -1,0 +1,8 @@
+Name:Sun Warriors
+ManaCost:2 R W
+Types:Creature Human Warrior Ally
+PT:3/5
+K:Firebending:X:, where X is the number of creatures you control.
+A:AB$ Token | Cost$ 5 | TokenAmount$ 1 | TokenScript$ w_1_1_ally | TokenOwner$ You | SpellDescription$ Create a 1/1 white Ally creature token.
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:Firebending X, where X is the number of creatures you control. (Whenever this creature attacks, add X {R}. This mana lasts until end of combat.)\n{5}: Create a 1/1 white Ally creature token.

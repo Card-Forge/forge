@@ -1,0 +1,10 @@
+Name:Leaves from the Vine
+ManaCost:1 G
+Types:Enchantment Saga
+K:Chapter:3:DBMill,DBPutCounter,DBDraw
+SVar:DBMill:DB$ Mill | Defined$ You | NumCards$ 3 | SubAbility$ DBToken | SpellDescription$ Mill three cards, then create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to two target creatures you control | CounterType$ P1P1 | CounterNum$ 1 | TargetMin$ 0 | TargetMax$ 2 | SpellDescription$ Put a +1/+1 counter on each of up to two target creatures you control.
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SpellDescription$ Draw a card if there's a creature or Lesson card in your graveyard.
+SVar:X:Count$ValidGraveyard Creature.YouOwn,Lesson.YouOwn
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Mill three cards, then create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")\nII — Put a +1/+1 counter on each of up to two target creatures you control.\nIII — Draw a card if there's a creature or Lesson card in your graveyard.
