@@ -854,7 +854,7 @@ ScryfallCode=LTR
 833 R Mirkwood Channeler @Irina Nordsol
 
 [buy a box]
-398 R Trailblazer's Boots @Alexander Gering
+398 R Trailblazer's Boots @Alexander Gering ${"flavorName": "Lórien Brooch"}
 
 [promo]
 299 M Gandalf the White @Leonardo Borazio
