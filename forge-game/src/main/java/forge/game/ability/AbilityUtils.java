@@ -435,7 +435,7 @@ public class AbilityUtils {
             svarval = ability.getSVar(amount);
         }
         if (StringUtils.isBlank(svarval)) {
-            if ((ability != null) && (ability instanceof SpellAbility) && !(ability instanceof SpellPermanent)) {
+            if ((ability instanceof SpellAbility) && !(ability instanceof SpellPermanent)) {
                 System.err.printf("SVar '%s' not found in ability, fallback to Card (%s). Ability is (%s)%n", amount, card.getName(), ability);
             }
             svarval = card.getSVar(amount);
@@ -1591,6 +1591,7 @@ public class AbilityUtils {
      * @return a int.
      */
     public static int xCount(Card c, final String s, final CardTraitBase ctb) {
+        String cacheKey = "xCount_" + s;
         final String s2 = applyAbilityTextChangeEffects(s, ctb);
         final String[] l = s2.split("/");
         final String expr = CardFactoryUtil.extractOperators(s2);
@@ -1602,6 +1603,13 @@ public class AbilityUtils {
             }
             if (player == null) {
                 player = ctb.getHostCard().getController();
+            }
+        }
+
+        if (player != null) {
+            Integer cachedValue = player.getFromCache(cacheKey);
+            if (cachedValue != null) {
+                return cachedValue;
             }
         }
 
@@ -1618,6 +1626,7 @@ public class AbilityUtils {
         if (l[0].startsWith("SVar$")) {
             String n = l[0].substring(5);
             String v = ctb == null ? c.getSVar(n) : ctb.getSVar(n);
+
             return doXMath(xCount(c, v, ctb), expr, c, ctb);
         }
 
@@ -1955,7 +1964,8 @@ public class AbilityUtils {
                     }
                 }
                 colorOccurrences += player.getDevotionMod();
-                return doXMath(colorOccurrences, expr, c, ctb);
+
+                return computeAndCache(player, cacheKey, doXMath(colorOccurrences, expr, c, ctb));
             }
         } // end ctb != null
 
@@ -2599,7 +2609,8 @@ public class AbilityUtils {
                     count++;
                 }
             }
-            return doXMath(count, expr, c, ctb);
+
+            return computeAndCache(player, cacheKey, doXMath(count, expr, c, ctb));
         }
 
         if (sq[0].contains("Party")) {
@@ -2735,7 +2746,7 @@ public class AbilityUtils {
                 }
             }
 
-            return doXMath(colorOcurrencices, expr, c, ctb);
+            return computeAndCache(player, cacheKey, doXMath(colorOcurrencices, expr, c, ctb));
         }
 
         if (l[0].contains("ExactManaCost")) {
@@ -2754,7 +2765,7 @@ public class AbilityUtils {
             }
             manaCost.remove(ManaCost.NO_COST.getShortString());
 
-            return doXMath(manaCost.size(), expr, c, ctb);
+            return computeAndCache(player, cacheKey, doXMath(manaCost.size(), expr, c, ctb));
         }
 
         if (sq[0].equals("StormCount")) {
@@ -2883,7 +2894,8 @@ public class AbilityUtils {
                     max = entry.getValue();
                 }
             }
-            return max;
+
+            return computeAndCache(player, cacheKey, max);
         }
 
         if (sq[0].startsWith("MostProminentCreatureType")) {
@@ -2906,7 +2918,8 @@ public class AbilityUtils {
                     .filter(CardPredicates.restriction(restriction, player, c, ctb))
                     .map(Card::getNetPower)
                     .distinct().count();
-            return doXMath(uniquePowers, expr, c, ctb);
+
+            return computeAndCache(player, cacheKey, doXMath(uniquePowers, expr, c, ctb));
         }
         if (sq[0].startsWith("DifferentCounterKinds_")) {
             final Set<CounterType> kinds = Sets.newHashSet();
@@ -2915,7 +2928,8 @@ public class AbilityUtils {
             for (final Card card : list) {
                 kinds.addAll(card.getCounters().keySet());
             }
-            return doXMath(kinds.size(), expr, c, ctb);
+
+            return computeAndCache(player, cacheKey, doXMath(kinds.size(), expr, c, ctb));
         }
 
         // Complex counting methods
@@ -2929,7 +2943,26 @@ public class AbilityUtils {
             num = Iterables.size(someCards);
         }
 
-        return doXMath(num, expr, c, ctb);
+        return computeAndCache(player, cacheKey, doXMath(num, expr, c, ctb));
+    }
+
+    /** 
+        Caches the computed value if possible and returns it.
+     */
+    private static Integer computeAndCache(Player p, String key, int value) {
+        if (p == null){
+            return value;
+        }
+
+        if (key.contains("Remembered") ||
+            key.contains("Triggered") ||
+            key.contains("Chosen")) {
+            return value;
+        }
+
+        p.putInCache(key, value);
+
+        return value;
     }
 
     public static final void applyManaColorConversion(ManaConversionMatrix matrix, String conversion) {
@@ -3419,17 +3452,21 @@ public class AbilityUtils {
     }
 
     public static int playerXProperty(final Player player, final String s, final Card source, CardTraitBase ctb) {
-
+        final String cacheKey = "playerXProperty_" + s;
         final String[] l = s.split("/");
         final String m = CardFactoryUtil.extractOperators(s);
 
         final Game game = player.getGame();
 
+        if (player.getFromCache(cacheKey) != null) {
+            return player.getFromCache(cacheKey);
+        }
+
         // count valid cards on the battlefield
         if (l[0].startsWith("Valid ")) {
             final String restrictions = l[0].substring(6);
             int num = CardLists.getValidCardCount(game.getCardsIn(ZoneType.Battlefield), restrictions, player, source, ctb);
-            return doXMath(num, m, source, ctb);
+            return computeAndCache(player, cacheKey, doXMath(num, m, source, ctb));
         }
 
         // count valid cards in any specified zone/s
@@ -3438,7 +3475,7 @@ public class AbilityUtils {
             final List<ZoneType> vZone = ZoneType.listValueOf(lparts[0].split("Valid")[1]);
             String restrictions = TextUtil.fastReplace(l[0], TextUtil.addSuffix(lparts[0]," "), "");
             int num = CardLists.getValidCardCount(game.getCardsIn(vZone), restrictions, player, source, ctb);
-            return doXMath(num, m, source, ctb);
+            return computeAndCache(player, cacheKey, doXMath(num, m, source, ctb));
         }
 
         if (l[0].startsWith("ThisTurnEntered")) {
