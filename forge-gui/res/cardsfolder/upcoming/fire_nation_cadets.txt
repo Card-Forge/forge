@@ -1,0 +1,8 @@
+Name:Fire Nation Cadets
+ManaCost:R
+Types:Creature Human Soldier
+PT:1/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Firebending:2 | IsPresent$ Lesson.YouOwn | PresentZone$ Graveyard | Description$ This creature has firebending 2 as long as there's a Lesson card in your graveyard. (Whenever this creature attacks, add {R}{R}. This mana lasts until end of combat.)
+A:AB$ Pump | Cost$ 2 | NumAtt$ +1 | SpellDescription$ This creature gets +1/+0 until end of turn.
+DeckHints:Type$Lesson
+Oracle:This creature has firebending 2 as long as there's a Lesson card in your graveyard. (Whenever this creature attacks, add {R}{R}. This mana lasts until end of combat.)\n{2}: This creature gets +1/+0 until end of turn.
