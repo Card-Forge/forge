@@ -192,10 +192,8 @@ public class AbilityManaPart implements java.io.Serializable {
             }
         }
 
-        // add the mana produced to the mana pool
         manaPool.add(this.lastManaProduced);
 
-        // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(source);
         runParams.put(AbilityKey.Player, player);
         runParams.put(AbilityKey.Produced, afterReplace);
@@ -512,7 +510,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * @return a {@link java.lang.String} object.
      */
     public final String mana(SpellAbility sa) {
-        if (isComboMana()) { // when asking combo, just go there
+        if (isComboMana()) {
             return getComboColors(sa);
         }
         String produced = this.getOrigProduced();

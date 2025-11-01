@@ -58,10 +58,6 @@ public class TriggerHandler {
         game = gameState;
     }
 
-    public final boolean hasDelayedTriggers() {
-        return !delayedTriggers.isEmpty();
-    }
-
     public final void registerDelayedTrigger(final Trigger trig) {
         delayedTriggers.add(trig);
     }
