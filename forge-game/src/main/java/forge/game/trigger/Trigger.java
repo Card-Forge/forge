@@ -354,23 +354,23 @@ public abstract class Trigger extends TriggerReplacementBase {
     public boolean checkResolvedLimit(Player activator) {
         // CR 603.2i
         if (hasParam("ResolvedLimit")) {
-            if (Collections.frequency(getHostCard().getAbilityResolvedThisTurnActivators(getOverridingAbility()), activator)
-                    >= Integer.parseInt(getParam("ResolvedLimit"))) {
-                return false;
-            }
+            return getResolvedThisTurn(activator) < Integer.parseInt(getParam("ResolvedLimit"));
         }
+
         return true;
     }
 
     public boolean checkActivationLimit() {
         if (hasParam("ActivationLimit") &&
-                getActivationsThisTurn() >= Integer.parseInt(getParam("ActivationLimit"))) {
+            getActivationsThisTurn() >= Integer.parseInt(getParam("ActivationLimit"))) {
             return false;
         }
+
         if (hasParam("GameActivationLimit") && 
             getActivationsThisGame() >= Integer.parseInt(getParam("GameActivationLimit"))) {
-                return false;
+            return false;
         }
+
         return true;
     }
 
@@ -585,11 +585,40 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
 
     public int getActivationsThisTurn() {
+        // Support for linked triggers
+        if (hasParam("LinkedTrigger")) {
+            return this.getHostCard().getTriggers().stream()
+                .filter(t -> t.hasParam("LinkedTrigger") && t.getParam("LinkedTrigger").equals(getParam("LinkedTrigger")))
+                .mapToInt(t -> hostCard.getAbilityActivatedThisTurn(t.getOverridingAbility()))
+                .sum();
+        } 
+        
         return hostCard.getAbilityActivatedThisTurn(this.getOverridingAbility());
     }
 
     public int getActivationsThisGame() {
+        // Support for linked triggers
+        if (hasParam("LinkedTrigger")) {
+            return this.getHostCard().getTriggers().stream()
+                .filter(t -> t.hasParam("LinkedTrigger") && t.getParam("LinkedTrigger").equals(getParam("LinkedTrigger")))
+                .mapToInt(t -> hostCard.getAbilityActivatedThisGame(t.getOverridingAbility()))
+                .sum();
+        } 
+
         return hostCard.getAbilityActivatedThisGame(this.getOverridingAbility());
+    }
+
+    public int getResolvedThisTurn(Player activator) {
+        // Support for linked triggers
+        if (hasParam("LinkedTrigger")) {
+            int sum = this.getHostCard().getTriggers().stream()
+                    .filter(t -> t.hasParam("LinkedTrigger") && t.getParam("LinkedTrigger").equals(getParam("LinkedTrigger")))
+                    .mapToInt(t -> Collections.frequency(getHostCard().getAbilityResolvedThisTurnActivators(t.getOverridingAbility()), activator))
+                    .sum();
+            return sum;
+        } 
+
+        return Collections.frequency(getHostCard().getAbilityResolvedThisTurnActivators(getOverridingAbility()), activator);
     }
 
     public void triggerRun() {

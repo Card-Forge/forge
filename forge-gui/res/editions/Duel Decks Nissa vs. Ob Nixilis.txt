@@ -2,9 +2,9 @@
 Code=DDR
 Date=2016-09-02
 Name=Duel Decks: Nissa vs. Ob Nixilis
-Code2=DDR
 Type=Duel_Deck
 ScryfallCode=DDR
+TokensCode=DDR
 
 [cards]
 1 M Nissa, Voice of Zendikar @Raymond Swanland
@@ -79,8 +79,11 @@ ScryfallCode=DDR
 70 L Swamp @Tianhua X
 
 [tokens]
-c_1_1_eldrazi_scion_sac
-b_5_5_demon_flying
-b_5_5_zombie_giant
-g_4_4_elemental
-g_0_1_plant
+71 c_1_1_eldrazi_scion_sac @Izzy
+72 b_5_5_demon_flying @Kev Walker
+73 b_5_5_zombie_giant @Igor Kieryluk
+74 g_4_4_elemental @Brandon Kitkouski
+75 g_0_1_plant @Daren Bader
+
+[other]
+76 emblem_ob_nixilis_reignited @Raymond Swanland
