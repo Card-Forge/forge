@@ -1,0 +1,7 @@
+Name:Price of Freedom
+ManaCost:1 R
+Types:Sorcery Lesson
+A:SP$ Destroy | ValidTgts$ Artifact.OppCtrl,Land.OppCtrl | TgtPrompt$ Select target artifact or land an opponent controls | SubAbility$ DBChangeZone | SpellDescription$ Destroy target artifact or land an opponent controls. Its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle. Draw a card.
+SVar:DBChangeZone:DB$ ChangeZone | Optional$ True | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | DefinedPlayer$ TargetedController | ShuffleNonMandatory$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+Oracle:Destroy target artifact or land an opponent controls. Its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.\nDraw a card.
