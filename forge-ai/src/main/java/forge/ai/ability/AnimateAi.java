@@ -411,15 +411,13 @@ public class AnimateAi extends SpellAbilityAi {
         }
 
         if (logic.equals("ValuableAttackerOrBlocker")) {
-            if (ph.inCombat()) {
-                final Combat combat = ph.getCombat();
-                for (Card c : list) {
-                    Card animated = becomeAnimated(c, sa);
-                    boolean isValuableAttacker = ph.is(PhaseType.MAIN1, ai) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animated);
-                    boolean isValuableBlocker = combat != null && combat.getDefendingPlayers().contains(ai) && ComputerUtilCard.doesSpecifiedCreatureBlock(ai, animated);
-                    if (isValuableAttacker || isValuableBlocker)
-                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                }
+            final Combat combat = ph.getCombat();
+            for (Card c : list) {
+                Card animated = becomeAnimated(c, sa);
+                boolean isValuableAttacker = ph.is(PhaseType.COMBAT_BEGIN, ai) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animated);
+                boolean isValuableBlocker = combat != null && combat.getDefendingPlayers().contains(ai) && ComputerUtilCard.doesSpecifiedCreatureBlock(ai, animated);
+                if (isValuableAttacker || isValuableBlocker)
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
         }
 

@@ -3419,7 +3419,6 @@ public class AbilityUtils {
     }
 
     public static int playerXProperty(final Player player, final String s, final Card source, CardTraitBase ctb) {
-
         final String[] l = s.split("/");
         final String m = CardFactoryUtil.extractOperators(s);
 
