@@ -879,14 +879,12 @@ public final class GameActionUtil {
         } else if (abMana.isComboMana()) {
             // amount is already taken care of in resolve method for combination mana, just append baseMana
             sb.append(baseMana);
+        } else if (StringUtils.isNumeric(baseMana)) {
+            sb.append(amount * Integer.parseInt(baseMana));
         } else {
-            if (StringUtils.isNumeric(baseMana)) {
-                sb.append(amount * Integer.parseInt(baseMana));
-            } else {
-                sb.append(baseMana);
-                for (int i = 1; i < amount; i++) {
-                    sb.append(" ").append(baseMana);
-                }
+            sb.append(baseMana);
+            for (int i = 1; i < amount; i++) {
+                sb.append(" ").append(baseMana);
             }
         }
         return sb.toString();
