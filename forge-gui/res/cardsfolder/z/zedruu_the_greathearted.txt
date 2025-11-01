@@ -7,6 +7,6 @@ SVar:DBGainControl:DB$ GainControl | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ S
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ GainLife | TriggerDescription$ At the beginning of your upkeep, you gain X life and draw X cards, where X is the number of permanents you own that your opponents control.
 SVar:GainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ X
-SVar:X:Count$Valid Permanent.YouOwn+OwnerDoesntControl
+SVar:X:Count$Valid Permanent.YouOwn+OppCtrl
 AI:RemoveDeck:All
 Oracle:At the beginning of your upkeep, you gain X life and draw X cards, where X is the number of permanents you own that your opponents control.\n{U}{R}{W}: Target opponent gains control of target permanent you control.
