@@ -8,7 +8,8 @@ public enum AdventureModes {
     Constructed(Forge.getLocalizer().getMessage("lblConstructed")),
     Chaos("[GOLD]"+Forge.getLocalizer().getMessage("lblChaos")),
     Pile(Forge.getLocalizer().getMessage("lblPile")),
-    Custom(Forge.getLocalizer().getMessage("lblCustom"));
+    Custom(Forge.getLocalizer().getMessage("lblCustom")),
+    Commander(Forge.getLocalizer().getMessage("lblCommander"));
 
     private final String name;
     private  String selectionName;
