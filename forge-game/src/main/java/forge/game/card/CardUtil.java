@@ -307,7 +307,7 @@ public final class CardUtil {
             for (final Card c : cards) {
                 abilities.addAll(c.getSpellAbilities());
                 for (Trigger trig : c.getTriggers()) {
-                    if (trig.getOverridingAbility() != null) {
+                    if (trig.ensureAbility() != null) {
                         abilities.add(trig.getOverridingAbility());
                     }
                 }
