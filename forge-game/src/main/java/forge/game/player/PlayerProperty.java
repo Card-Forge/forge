@@ -282,6 +282,13 @@ public class PlayerProperty {
             if (!player.maxSpeed()) {
                 return false;
             }
+        } else if (property.equals("targetedBy")) {
+            if (!(spellAbility instanceof SpellAbility)) {
+                return false;
+            }
+            SpellAbility sp = (SpellAbility)spellAbility;
+            if (!sp.getRootAbility().isTargeting(card)) {
+                return false;
         } else if (property.startsWith("controls")) {
             // this allows escaping _ with \ in case of complex restrictions (used on Turf War)
             List<String> type = new ArrayList<>();
