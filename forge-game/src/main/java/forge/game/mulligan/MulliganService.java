@@ -23,13 +23,18 @@ public class MulliganService {
     public void perform() {
         initializeMulligans();
         runPlayerMulligans();
+
+        for (AbstractMulligan mulligan : mulligans) {
+            if (mulligan.hasKept()) {
+                mulligan.afterMulligan();
+            }
+        }
     }
 
     private void initializeMulligans() {
         List<Player> whoCanMulligan = Lists.newArrayList(game.getPlayers());
         int offset = whoCanMulligan.indexOf(firstPlayer);
 
-        // Have to cycle-shift the list to get the first player on index 0
         for (int i = 0; i < offset; i++) {
             whoCanMulligan.add(whoCanMulligan.remove(0));
         }
@@ -51,8 +56,10 @@ public class MulliganService {
                 case London:
                     mulligans.add(new LondonMulligan(player, firstMullFree));
                     break;
+                case Houston:
+                    mulligans.add(new HoustonMulligan(player, firstMullFree));
+                    break;
                 default:
-                    // Default to Vancouver mulligan for now. Should ideally never get here.
                     mulligans.add(new VancouverMulligan(player, firstMullFree));
                     break;
             }
@@ -64,13 +71,20 @@ public class MulliganService {
         do {
             allKept = true;
             for (AbstractMulligan mulligan : mulligans) {
+
                 if (mulligan.hasKept()) {
                     continue;
                 }
-                Player p = mulligan.getPlayer();
-                boolean keep = !mulligan.canMulligan() || p.getController().mulliganKeepHand(firstPlayer, mulligan.tuckCardsAfterKeepHand());
 
-                if (game.isGameOver()) { // conceded on mulligan prompt
+                Player p = mulligan.getPlayer();
+
+                boolean keep = !mulligan.canMulligan() ||
+                        p.getController().mulliganKeepHand(
+                                firstPlayer,
+                                mulligan.tuckCardsAfterKeepHand()
+                        );
+
+                if (game.isGameOver()) {
                     return;
                 }
 
@@ -80,13 +94,9 @@ public class MulliganService {
                 }
 
                 allKept = false;
-
                 mulligan.mulligan();
             }
-        } while (!allKept);
 
-        for (AbstractMulligan mulligan : mulligans) {
-            mulligan.afterMulligan();
-        }
+        } while (!allKept);
     }
 }
