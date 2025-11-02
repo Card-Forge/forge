@@ -1340,7 +1340,7 @@ public class AbilityUtils {
         resolvePreAbilities(sa, game);
 
         // count times ability resolves this turn
-        if (!sa.isWrapper()) {
+        if (!sa.isWrapper() && sa.isAbility()) {
             final Card host = sa.getHostCard();
             if (host != null) {
                 host.addAbilityResolved(sa);
