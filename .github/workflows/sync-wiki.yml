@@ -5,6 +5,7 @@ on:
     paths:
       - docs/**
       - .github/workflows/sync-wiki.yml
+  workflow_dispatch:
 concurrency:
   group: publish-wiki
   cancel-in-progress: true
