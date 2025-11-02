@@ -275,12 +275,10 @@ public class HostedMatch {
                             addNextGameDecision(null, NextGameDecision.CONTINUE);
                         }
                     });
+                } else if (isMatchOver) {
+                    addNextGameDecision(null, NextGameDecision.QUIT);
                 } else {
-                    if (isMatchOver) {
-                        addNextGameDecision(null, NextGameDecision.QUIT);
-                    } else {
-                        addNextGameDecision(null, NextGameDecision.CONTINUE);
-                    }
+                    addNextGameDecision(null, NextGameDecision.CONTINUE);
                 }
             }
         });
