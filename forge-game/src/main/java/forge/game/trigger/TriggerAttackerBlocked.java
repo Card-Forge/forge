@@ -23,7 +23,6 @@ import com.google.common.collect.Iterables;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
