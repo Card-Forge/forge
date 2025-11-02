@@ -136,6 +136,8 @@ public class TargetRestrictions {
 
         if (mapParams.containsKey("ValidTgtsDesc")) {
             this.validTgtsDesc = mapParams.get("ValidTgtsDesc");
+        } else if ("Any".equals(mapParams.get("ValidTgts"))) {
+            this.validTgtsDesc = "damage target";
         } else {
             this.validTgtsDesc = Lang.getInstance().buildValidDesc(Arrays.asList(this.validTgts), maxTargets != "1");
         }
@@ -249,6 +251,10 @@ public class TargetRestrictions {
      */
     public final String[] getValidTgts() {
         return this.validTgts;
+    }
+
+    public final String getValidDesc() {
+        return this.validTgtsDesc;
     }
 
     /**
