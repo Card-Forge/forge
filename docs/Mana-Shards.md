@@ -3,7 +3,7 @@ Mana Shards are a custom resource created for Adventure Mode in Forge. Shards se
 
 As Mana Shards are not self-replenishing, using them for activated abilities that affect the game world and in-match gameplay is a way of letting the player have a constant challenge of their own comfort level. If the player is comfortable taking on a fight without using extra abilities afforded to them by use of Shards, they will have more of them available to spend on in town, or can simply save their full might for boss-level entities. 
 
-The most consistent source of Mana Shards is from match wins, players receive one Shard per win without any rewards having to be explicitly added to the encounter. However, when used to power equipment and abilities, one Shard per match will definitely not break even, as most custom Adventure cards and items will cost 2-4 per use. However, Mana Shards can also be purchased in towns, picked up in dungeons, and can be received in large quantities from completing [Quests](Adventure-Quests).
+The most consistent source of Mana Shards is from match wins, players receive one Shard per win without any rewards having to be explicitly added to the encounter. However, when used to power equipment and abilities, one Shard per match will definitely not break even, as most custom Adventure cards and items will cost 2-4 per use. However, Mana Shards can also be purchased in towns, picked up in dungeons, and can be received in large quantities from completing quests.
 
 Mana Shards can be used for:
 * Activated in-match abilities
