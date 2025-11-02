@@ -38,7 +38,7 @@ public class EarthbendEffect extends SpellAbilityEffect {
 
     @Override
     public void buildSpellAbility(final SpellAbility sa) {
-        TargetRestrictions abTgt = new TargetRestrictions(Map.of("TgtPrompt", "Select target land you control", "ValidTgts", "Land.YouCtrl"));
+        TargetRestrictions abTgt = new TargetRestrictions(Map.of("ValidTgtsDesc", "land you control", "ValidTgts", "Land.YouCtrl"));
         sa.setTargetRestrictions(abTgt);
     }
 
