@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.Arrays;
 import java.util.EnumSet;
+import java.util.Map;
 
 import forge.card.RemoveType;
 import forge.game.Game;
@@ -37,7 +38,7 @@ public class EarthbendEffect extends SpellAbilityEffect {
 
     @Override
     public void buildSpellAbility(final SpellAbility sa) {
-        TargetRestrictions abTgt = new TargetRestrictions("Select target land you control", "Land.YouCtrl".split(","), "1", "1");
+        TargetRestrictions abTgt = new TargetRestrictions(Map.of("TgtPrompt", "Select target land you control", "ValidTgts", "Land.YouCtrl"));
         sa.setTargetRestrictions(abTgt);
     }
 

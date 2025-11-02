@@ -4,7 +4,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.card.CardStateName;
-import forge.card.CardType;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
@@ -31,7 +30,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class ChangeZoneEffect extends SpellAbilityEffect {
 
@@ -119,8 +117,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             type = Lang.joinHomogenous(tgts);
             defined = true;
         } else if (sa.hasParam("ChangeType") && !sa.getParam("ChangeType").equals("Card")) {
-            List<String> typeList = Arrays.stream(sa.getParam("ChangeType").split(",")).map(ct -> CardType.isACardType(ct) ? ct.toLowerCase() : ct).collect(Collectors.toList());
-            type = Lang.joinHomogenous(typeList, null, num == 1 ? "or" : "and/or");
+            type = Lang.getInstance().buildValidDesc(Arrays.asList(sa.getParam("ChangeType").split(",")), num != 1);
         }
         final String cardTag = type.contains("card") ? "" : " card";
 
