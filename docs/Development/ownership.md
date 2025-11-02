@@ -12,7 +12,7 @@ The "Ancestors" column is basically there to list currently inactive developers 
 ## Ingame Engine
 | Concept | Owners | Ancestors | Example tasks |
 | - | - | - | - |
-| Ability Effects | friarsol, Hanmac, Northmoc, TRT | | - support new mechanics<br>- debug complicated reports<br>- improve stackdescriptions |
+| Ability Effects | friarsol, Hanmac, Northmoc, TRT | | - support new mechanics<br>- debug complicated reports<br>- improve stackdescriptions<br>- research rulings<br>- compare with Arena |
 | Adventure | TabletopGeneral | Grimm | |
 
 ## Magic Metadata

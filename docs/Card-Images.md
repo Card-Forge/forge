@@ -37,7 +37,7 @@ Card images are stored in `pics/cards`, and tokens in `pics/tokens`, in the Cach
 - **Android 8 to 10** - `Internal Storage/Forge/cache/`
 - **Linux** - `/home/<username>/.cache/forge/`
 - **MacOS** - `/Users/<username>/Library/caches/forge/`
-  - Use `Command + Shift + /` to show hidden files.
+  - Use `Command + Shift + .` to show hidden files.
 
 
 # Subfolders

@@ -5,7 +5,7 @@ Adventure mode is a work-in-progress game mode where you explore the ever-changi
 # How to run?
 
 1. Step 1: Download the latest version of Forge https://downloads.cardforge.org/dailysnapshots/ 
-2. Step 2: Make sure you have the requirerd version of the JDK (https://www.oracle.com/be/java/technologies/downloads/)
+2. Step 2: Make sure you have the required version of the JDK (https://www.oracle.com/be/java/technologies/downloads/)
 3. Step 3: Launch the adventure mode from the "adventure.exe" file included in the forge version (on android, the adventure version should be embedded into the main Forge program)
 4. Step 4: In order to have pictures show up make sure you enable "automatically download missing card images" in the settings. This should automatically download the picture of the card as you encounter them in game. 
 

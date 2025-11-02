@@ -1,4 +1,6 @@
-> <span style="color: red;">Note:</span> if want to contribute to this Wiki please only make pull requests against the main repos docs folder or your changes might get lost
+> [!CAUTION]
+> - if you want to contribute to this Wiki please only make pull requests against the main repos docs folder or your changes might get lost
+> - due to GitHub limitations all filenames should be unique
 
 # What is Forge?
 

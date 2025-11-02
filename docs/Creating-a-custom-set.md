@@ -18,12 +18,12 @@ The important folders are the following (you can create them if they don't exist
 
 ### Image files
 
-Your card and token images go into `%appdata%/../Local/Forge/Cache/pics`.
+Your card and token images go into `%localappdata%/Forge/Cache/pics`.
 
 The important folders are the following:
 
 * **cards**: This is where you will put your card images. You'll want to create a folder with the Code of your edition. The images are named using this convention `Card Name.full.jpg`. If you have multiple art for the same card (something like basic lands, or maybe alternate art of the same card), then you can name them `Card Name1.full.jpg`, `Card Name2.full.jpg`, and so forth.
-* **tokens**: Same as the cards folder, your tokens will go inside this folder. The naming convention is `token_script_name.jpg`. So if your token script name is `b_5_5_golem_trample`, then you can put your token image inside your edition folder named `b_5_5_golem_trample.jpg`.
+* **tokens**: Same as the cards folder, your tokens will go inside this folder. The naming convention is `token_script_name.jpg`. So if your token script name is `b_5_5_golem_trample`, then you can put your token image inside your edition folder named `b_5_5_golem_trample.jpg`. If there is a collector number, append it at the beginning, such as `1_b_5_5_golem_trample.jpg`
 
 ## Creating your edition definition file
 
@@ -60,6 +60,9 @@ Type=Custom
 b_1_1_bird_flying
 b_3_3_cat_deathtouch
 b_5_5_golem_trample
+
+[CreatureTypes]
+Artist:Artists
 ```
 
 Let's break it down.
@@ -77,7 +80,7 @@ The **[metadata]** section contains the information about your edition.
 * **Code** is an **unique** identifier for your edition.
 * **Name** is the name of your edition.
 * **Date** is the date the set was first released/created.
-* **Type** should be Custom as Forge do things differently for them, including but not limited to skipping the automatic download of the images.
+* **Type** should be `Custom` as Forge do things differently for them, including but not limited to skipping the automatic download of the images.
 
 ```
 [cards]
@@ -119,7 +122,7 @@ The **[tokens]** section is optional, and only needed if you want to use specifi
 
 If you load the game with just file, you'll be able to see that Master Chef, Unearth and the basic lands can already be found in game. That's because they share a name with existing Magic the Gathering cards. **However**, [Master Chef](https://msem-instigator.herokuapp.com/card?q=Master+Chef) from MSEM and [Master Chef](https://scryfall.com/card/clb/241/master-chef) from MTG are two different cards! You must ensure that your custom cards do not have the same name as an existing one, unless you just want it to be another print, just like [Unearth](https://msem-instigator.herokuapp.com/card/CHAMPIONS/62/Unearth) and the basic lands in this example.
 
-Let’s comment out Master Chef to avoid a name conflict with an existing MTG card:
+Let's comment out Master Chef to avoid a name conflict with an existing MTG card:
 
 ```
 [cards]
@@ -187,7 +190,12 @@ SVar:Z:Count$Compare X GE6.1.0
 Oracle:At the beginning of your end step, if you lost 2 or more life this turn, create a 1/1 black Bird creature token with flying.\nIf you lost 4 or more life this turn, instead create a 3/3 black Cat creature token with deathtouch.\nIf you lost 6 or more life this turn, instead create a 5/5 black Golem creature token with trample.
 ```
 
-If you load your game now, you should be able to find these cards you just scripted! You'll also notice that Inked Summoner is only listed as a Human Warlock, missing the Artist subtype. That's because Artist is not a real MTG subtype. There is no way to add custom ones in Forge at this moment.
+If you load your game now, you should be able to find these cards you just scripted! You'll also notice that Inked Summoner is only listed as a Human Warlock, missing the Artist subtype. That's because Artist is not a real MTG subtype. You can add custom types directing inside the set definition file by following the sections found inside the `res/lists/TypeLists.txt` file. Duplicates will be ignored.
+
+```
+[CreatureTypes]
+Artist:Artists
+```
 
 Oh no! If you play with Inked Summoner now, you will crash when summoning a token. That's because they don't exist in MTG and we need to define them! Let's go onto the next step!
 
@@ -237,7 +245,7 @@ Great! Now Inked Summoner no longer make the game crash! Now let's add some imag
 
 You can find the card images for the MSEM Champions edition [here](https://msem-instigator.herokuapp.com/set/CHAMPIONS). Find the ones you need and save them inside `%appdata%/../Local/Forge/Cache/pics/cards/MSEM_CHAMPIONS` Remember the filename format should be something like `Swamp.full.jpg` if you only have one variant in your edition. If you have multiples, then it should be something like `Fox of the Orange Orchard1.full.jpg`, `Fox of the Orange Orchard2.full.jpg`, etc. You can find the alternate images from [here](https://msem-instigator.herokuapp.com/set/MPS_MSE) if you want.
 
-For the tokens, we can deposit them inside `%appdata%/../Local/Forge/Cache/pics/tokens/MSEM_CHAMPIONS`. They should be named the same as their token script so `b_1_1_bird_flying.jpg` and so forth.
+For the tokens, we can deposit them inside `%localappdata%/Forge/Cache/pics/tokens/MSEM_CHAMPIONS`. They should be named the same as their token script so `b_1_1_bird_flying.jpg` and so forth.
 
 ![b_1_1_bird_flying](https://github.com/user-attachments/assets/531583c1-3985-4744-858a-3a49fd12740a)
 ![b_3_3_cat_deathtouch](https://github.com/user-attachments/assets/15a24e62-be43-4c0c-aeac-0ddb38fca97a)

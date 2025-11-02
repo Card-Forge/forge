@@ -12,7 +12,10 @@ The next tutorial will walk you through the process of adding your new cards to 
 Windows:
 > C:/Users/<your username>/Application Data/Roaming/Forge/custom/cards
 
-Mac/Linux:
+Linux:
+> ~/.forge/custom/cards
+
+Mac:
 > TODO Add filepath
 
 ### Custom Tokens
@@ -20,14 +23,20 @@ Mac/Linux:
 Windows:
 > C:/Users/<your username>/Application Data/Roaming/Forge/custom/tokens
 
-Mac/Linux:
+Linux:
+> ~/.forge/custom/tokens
+
+Mac:
 > TODO Add filepath
 
 ### Custom Editions
 
 > C:/Users/<your username>/Application Data/Roaming/Forge/custom/editions
 
-Mac/Linux:
+Linux:
+> ~/.forge/custom/editions
+
+Mac:
 > TODO Add filepath
 
 ### Card Images
@@ -35,10 +44,11 @@ Mac/Linux:
 Windows:
 > C:/Users/<your username>/Application Data/Local/Forge/Cache/pics/cards
 
-Mac/Linux:
+Linux:
+> ~/.cache/forge/pics/cards
+
+Mac:
 > TODO Add filepath
-
-
 
 ## Creating a New Card
 

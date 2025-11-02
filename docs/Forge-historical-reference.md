@@ -2,7 +2,7 @@
 
 Here is a roughly written history of some notable points in Forge's history along with some Java 8 playable versions of the game linked for some of the older ones...
 
-## 2007-04-26 - Forge introduced on http://mtgrares.blogpost.com by mtgrares. 
+## 2007-04-26 - Forge introduced on https://mtgrares.blogspot.com/ by mtgrares. 
 
 365 cards available. 
 

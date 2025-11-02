@@ -50,7 +50,8 @@
 
 - [Customization and Themes.md](Themes.md)
   - Skins
-  - Music & Sounds
+  - Sounds
+  - [Music](Custom-Music.md)
   - [Card Images](Card-Images.md)
   - [File Formats](File-Formats.md)
   - [Creating your first custom set](Creating-a-custom-set.md)
