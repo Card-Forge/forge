@@ -128,6 +128,8 @@ public class AdventureDeckEditor extends FDeckEditor {
 
     @Override
     public boolean isCommanderEditor() {
+        if (isLimitedEditor())
+            return false;
         if (AdventurePlayer.current().getAdventureMode() == AdventureModes.Commander)
             return true;
         return super.isCommanderEditor();
