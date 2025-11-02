@@ -63,7 +63,7 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
     /** Keys of descriptive (text) parameters. */
     private static final ImmutableList<String> descriptiveKeys = ImmutableList.<String>builder()
             .add("Description", "SpellDescription", "StackDescription", "TriggerDescription")
-            .add("ChangeTypeDesc")
+            .add("ChangeTypeDesc", "ValidTgtsDesc")
             .build();
 
     /**
