@@ -56,13 +56,14 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class CardState extends GameObject implements IHasSVars, ITranslatable {
+public class CardState implements GameObject, IHasSVars, ITranslatable {
     private String name = "";
     private CardType type = new CardType(false);
     private ManaCost manaCost = ManaCost.NO_COST;
-    private byte color = MagicColor.COLORLESS;
+    private ColorSet color = ColorSet.C;
     private String oracleText = "";
     private String functionalVariantName = null;
+    private String flavorName = null;
     private int basePower = 0;
     private int baseToughness = 0;
     private String basePowerString = null;
@@ -191,14 +192,14 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
         view.updateManaCost(this);
     }
 
-    public final byte getColor() {
+    public final ColorSet getColor() {
         return color;
     }
-    public final void addColor(final byte color) {
-        this.color |= color;
+    public final void addColor(final ColorSet color) {
+        this.color = ColorSet.combine(this.color, color);
         view.updateColors(card);
     }
-    public final void setColor(final byte color) {
+    public final void setColor(final ColorSet color) {
         this.color = color;
         view.updateColors(card);
     }
@@ -219,6 +220,15 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
             functionalVariantName = null;
         this.functionalVariantName = functionalVariantName;
         view.setFunctionalVariantName(functionalVariantName);
+    }
+
+    public String getFlavorName() {
+        return flavorName;
+    }
+
+    public void setFlavorName(String flavorName) {
+        this.flavorName = flavorName;
+        view.updateName(this);
     }
 
     public final int getBasePower() {
@@ -297,6 +307,9 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
         return intrinsicKeywords.getValues();
     }
     public final boolean hasIntrinsicKeyword(String k) {
+        return intrinsicKeywords.contains(k);
+    }
+    public final boolean hasIntrinsicKeyword(Keyword k) {
         return intrinsicKeywords.contains(k);
     }
     public final void setIntrinsicKeywords(final Iterable<KeywordInterface> intrinsicKeyword0, final boolean lki) {
@@ -716,6 +729,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
         setBaseLoyalty(source.getBaseLoyalty());
         setBaseDefense(source.getBaseDefense());
         setAttractionLights(source.getAttractionLights());
+        setFlavorName(source.getFlavorName());
         setSVars(source.getSVars());
 
         abilities.clear();
@@ -830,8 +844,17 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     }
 
     public CardState copy(final Card host, CardStateName name, final boolean lki) {
+        return copy(host, name, lki, null);
+    }
+    public CardState copy(final Card host, final CardTraitBase ctb) {
+        return copy(host, this.getStateName(), false, ctb);
+    }
+    public CardState copy(final Card host, CardStateName name, final CardTraitBase ctb) {
+        return copy(host, name, false, ctb);
+    }
+    public CardState copy(final Card host, CardStateName name, final boolean lki, final CardTraitBase ctb) {
         CardState result = new CardState(host, name);
-        result.copyFrom(this, lki);
+        result.copyFrom(this, lki, ctb);
         return result;
     }
 
@@ -930,9 +953,10 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
 
     @Override
     public String getTranslationKey() {
+        String displayName = flavorName == null ? name : flavorName;
         if(StringUtils.isNotEmpty(functionalVariantName))
-            return name + " $" + functionalVariantName;
-        return name;
+            return displayName + " $" + functionalVariantName;
+        return displayName;
     }
 
     @Override

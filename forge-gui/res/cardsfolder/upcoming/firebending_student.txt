@@ -1,0 +1,8 @@
+Name:Firebending Student
+ManaCost:1 R
+Types:Creature Human Monk
+PT:1/2
+K:Prowess
+K:Firebending:X:, where X is this creature's power.
+SVar:X:Count$CardPower
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nFirebending X, where X is this creature's power. (Whenever this creature attacks, add X {R}. This mana lasts until end of combat.)

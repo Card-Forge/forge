@@ -44,9 +44,9 @@ ScryfallCode=SCH
 36 R Gleeful Demolition @Vincent Proce
 37 R Charming Scoundrel @Fariba Khamseh
 38 R Goddric, Cloaked Reveler @Irvin Rodriguez
-39 R Preordain @Toshiaki Takayama
-40 R Death's Shadow @Nottsuo
-41 R City of Brass @Yo Shimizu
+39 R Preordain @Toshiaki Takayama ${"flavorName": "Prophetic Beginning"}
+40 R Death's Shadow @Nottsuo ${"flavorName": "Diabolos, Guardian Force"}
+41 R City of Brass @Yo Shimizu ${"flavorName": "Bhujerba, Floating City"}
 42 R Bitter Triumph @Aaron J. Riley
 43 R Slickshot Show-Off @Wayne Reynolds
 44 R Fable of the Mirror-Breaker @Warren Mahy

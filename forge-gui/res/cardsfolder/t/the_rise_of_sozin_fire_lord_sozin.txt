@@ -22,7 +22,7 @@ K:Menace
 K:Firebending:3
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigImmediateTrig | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may pay {X}. When you do, put any number of target creature cards with total mana value X or less from that player's graveyard onto the battlefield under your control.
 SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ X | Execute$ TrigChangeZone | TriggerDescription$ When you do, put any number of target creature cards with total mana value X or less from that player's graveyard onto the battlefield under your control.
-SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ Y | ValidTgts$ Creature.OwnedBy TriggeredTarget | TgtPrompt$ Select any number of target creature cards with total mana value X or less from the damaged player's graveyard | MaxTotalTargetCMC$ X | GainControl$ True
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ Y | ValidTgts$ Creature.OwnedBy Spawner>TriggeredTarget | TgtPrompt$ Select any number of target creature cards with total mana value X or less from the damaged player's graveyard | MaxTotalTargetCMC$ X | GainControl$ True
 SVar:X:Count$xPaid
-SVar:Y:Count$ValidGraveyard Creature.OwnedBy TriggeredTarget
+SVar:Y:Count$ValidGraveyard Creature.OwnedBy Spawner>TriggeredTarget
 Oracle:Menace, firebending 3 (Whenever this creature attacks, add {R}{R}{R}. This mana lasts until end of combat.)\nWhenever Fire Lord Sozin deals combat damage to a player, you may pay {X}. When you do, put any number of target creature cards with total mana value X or less from that player's graveyard onto the battlefield under your control.

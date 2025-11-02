@@ -72,16 +72,14 @@ public class ChooseCardNameAi extends SpellAbilityAi {
             // 5 percent chance to cast per opposing card with a non mana ability
             if (MyRandom.getRandom().nextFloat() <= .05 * oppPerms.size()) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (mandatory) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
     /* (non-Javadoc)
      * @see forge.card.ability.SpellAbilityAi#chooseSingleCard(forge.card.spellability.SpellAbility, java.util.List, boolean)

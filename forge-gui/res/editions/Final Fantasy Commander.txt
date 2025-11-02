@@ -488,7 +488,7 @@ ScryfallCode=FIC
 480 L Swamp @Ryuichi Sakuma
 481 L Mountain @Nao Miyoshi
 482 L Forest @ZOUNOSE
-483 R Birds of Paradise @Takotto
+483 R Birds of Paradise @Takotto ${"flavorName": "Paradise Chocobo"}
 484 C Command Tower @Anthony Devine
 485 C Command Tower @Eduardo Francisco
 486 C Command Tower @Jonas De Ro

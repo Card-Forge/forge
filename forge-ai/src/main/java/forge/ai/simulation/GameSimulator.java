@@ -5,6 +5,7 @@ import forge.ai.ComputerUtil;
 import forge.ai.PlayerControllerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
@@ -131,6 +132,19 @@ public class GameSimulator {
         Card hostCard = (Card) copier.find(origHostCard);
         String desc = sa.getDescription();
         FCollectionView<SpellAbility> candidates = hostCard.getSpellAbilities();
+
+        SpellAbility result = saMatcher(candidates, desc);
+        for (SpellAbility cSa : candidates) {
+            if (result != null) {
+                break;
+            }
+            result = saMatcher(GameActionUtil.getAlternativeCosts(cSa, aiPlayer, true), desc);
+        }
+
+        return result;
+    }
+
+    private SpellAbility saMatcher(Iterable<SpellAbility> candidates, String desc) {
         // first pass for accuracy (spells with alternative costs)
         for (SpellAbility cSa : candidates) {
             if (desc.equals(cSa.getDescription())) {

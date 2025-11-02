@@ -275,27 +275,6 @@ public class AiAttackController {
             return false;
         }
 
-        // the attacker will die to a triggered ability (e.g. Sarkhan the Masterless)
-        for (Card c : ai.getOpponents().getCardsIn(ZoneType.Battlefield)) {
-            for (Trigger t : c.getTriggers()) {
-                if (t.getMode() == TriggerType.Attacks) {
-                    SpellAbility sa = t.ensureAbility();
-                    if (sa == null) {
-                        continue;
-                    }
-
-                    if (sa.getApi() == ApiType.EachDamage && "TriggeredAttacker".equals(sa.getParam("Defined"))) {
-                        List<Card> valid = CardLists.getValidCards(c.getController().getCreaturesInPlay(), sa.getParam("ValidCards"), c.getController(), c, sa);
-                        // TODO: this assumes that 1 damage is dealt per creature. Improve this to check the parameter/X to determine
-                        // how much damage is dealt by each of the creatures in the valid list.
-                        if (attacker.getNetToughness() <= valid.size()) {
-                            return false;
-                        }
-                    }
-                }
-            }
-        }
-
         if ("TRUE".equals(attacker.getSVar("HasAttackEffect"))) {
             return true;
         }
@@ -414,7 +393,7 @@ public class AiAttackController {
             if (ai.getController().isAI()) {
                 PlayerControllerAi aic = ((PlayerControllerAi) ai.getController());
                 pilotsNonAggroDeck = aic.pilotsNonAggroDeck();
-                playAggro = !pilotsNonAggroDeck || aic.getAi().getBooleanProperty(AiProps.PLAY_AGGRO);
+                playAggro = !pilotsNonAggroDeck || aic.getAi().getBoolProperty(AiProps.PLAY_AGGRO);
             }
             // TODO make switchable via AI property
             int thresholdMod = 0;
@@ -635,13 +614,7 @@ public class AiAttackController {
 
         // if true, the AI will attempt to identify which blockers will already be taken,
         // thus attempting to predict how many creatures with evasion can actively block
-        boolean predictEvasion = false;
-        if (ai.getController().isAI()) {
-            AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-            if (aic.getBooleanProperty(AiProps.COMBAT_ASSAULT_ATTACK_EVASION_PREDICTION)) {
-                predictEvasion = true;
-            }
-        }
+        boolean predictEvasion = AiProfileUtil.getBoolProperty(ai, AiProps.COMBAT_ASSAULT_ATTACK_EVASION_PREDICTION);
 
         CardCollection accountedBlockers = new CardCollection(this.blockers);
         CardCollection categorizedAttackers = new CardCollection();
@@ -881,12 +854,12 @@ public class AiAttackController {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
             simAI = aic.usesSimulation();
             if (!simAI) {
-                playAggro = aic.getBooleanProperty(AiProps.PLAY_AGGRO);
+                playAggro = aic.getBoolProperty(AiProps.PLAY_AGGRO);
                 chanceToAttackToTrade = aic.getIntProperty(AiProps.CHANCE_TO_ATTACK_INTO_TRADE);
-                tradeIfTappedOut = aic.getBooleanProperty(AiProps.ATTACK_INTO_TRADE_WHEN_TAPPED_OUT);
+                tradeIfTappedOut = aic.getBoolProperty(AiProps.ATTACK_INTO_TRADE_WHEN_TAPPED_OUT);
                 extraChanceIfOppHasMana = aic.getIntProperty(AiProps.CHANCE_TO_ATKTRADE_WHEN_OPP_HAS_MANA);
-                tradeIfLowerLifePressure = aic.getBooleanProperty(AiProps.RANDOMLY_ATKTRADE_ONLY_ON_LOWER_LIFE_PRESSURE);
-                predictEvasion = aic.getBooleanProperty(AiProps.COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION);
+                tradeIfLowerLifePressure = aic.getBoolProperty(AiProps.RANDOMLY_ATKTRADE_ONLY_ON_LOWER_LIFE_PRESSURE);
+                predictEvasion = aic.getBoolProperty(AiProps.COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION);
             }
         }
 
@@ -995,6 +968,16 @@ public class AiAttackController {
             return aiAggression;
         }
 
+        // Only do decisive attacks against token-generating players
+        if (!bAssault && defender instanceof Player) {
+            Player opponent = (Player)defender;
+            if (CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Rabble Rousing"))
+                - CardLists.count(opponent.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Darien, King of Kjeldor"))
+                - CardLists.count(opponent.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Kazuul, Tyrant of the Cliffs")) < 0) {
+                    return aiAggression;
+                }
+        }
+
         if (bAssault && defender == defendingOpponent) { // in case we are forced to attack someone else
             if (LOG_AI_ATTACKS)
                 System.out.println("Assault");
@@ -1005,7 +988,7 @@ public class AiAttackController {
                 if (attackMax != -1 && combat.getAttackers().size() >= attackMax)
                     return aiAggression;
 
-                // TODO if lifeInDanger use chance to hold back some
+                // TODO if lifeInDanger use chance to hold back some (especially in multiplayer)
                 if (canAttackWrapper(attacker, defender) && isEffectiveAttacker(ai, attacker, combat, defender)) {
                     combat.addAttacker(attacker, defender);
                 }
@@ -1102,7 +1085,8 @@ public class AiAttackController {
         for (final Card pCard : myList) {
             // if the creature can attack then it's a potential attacker this
             // turn, assume summoning sickness creatures will be able to
-            if (ComputerUtilCombat.canAttackNextTurn(pCard) && pCard.getNetCombatDamage() > 0) {
+            // TODO: Account for triggered power boosts.
+            if (ComputerUtilCombat.canAttackNextTurn(pCard) && (pCard.getNetCombatDamage() > 0 || "TRUE".equals(pCard.getSVar("HasAttackEffect")))) {
                 candidateAttackers.add(pCard);
                 candidateUnblockedDamage += ComputerUtilCombat.damageIfUnblocked(pCard, defendingOpponent, null, false);
                 computerForces++;
@@ -1433,7 +1417,7 @@ public class AiAttackController {
                         // Check if maybe we are too reckless in adding this attacker
                         if (canKillAllDangerous) {
                             boolean avoidAttackingIntoBlock = ai.getController().isAI()
-                                    && ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.TRY_TO_AVOID_ATTACKING_INTO_CERTAIN_BLOCK);
+                                    && ((PlayerControllerAi) ai.getController()).getAi().getBoolProperty(AiProps.TRY_TO_AVOID_ATTACKING_INTO_CERTAIN_BLOCK);
                             boolean attackerWillDie = defPower >= attacker.getNetToughness();
                             boolean uselessAttack = !hasCombatEffect && !hasAttackEffect;
                             boolean noContributionToAttack = attackers.size() <= defenders.size() || attacker.getNetPower() <= 0;

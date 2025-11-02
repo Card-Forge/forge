@@ -377,7 +377,7 @@ public class AiController {
 
         if (card.isSaga()) {
             for (final Trigger tr : card.getTriggers()) {
-                if (tr.getMode() != TriggerType.CounterAdded || !tr.isChapter()) {
+                if (!tr.isChapter()) {
                     continue;
                 }
 
@@ -393,6 +393,7 @@ public class AiController {
                     return false;
                 }
 
+                // usually later chapters make use of an earlier one
                 break;
             }
         }
@@ -763,7 +764,7 @@ public class AiController {
         return predictSpellToCastInMain2(exceptSA, true);
     }
     private SpellAbility predictSpellToCastInMain2(ApiType exceptSA, boolean handOnly) {
-        if (!getBooleanProperty(AiProps.PREDICT_SPELLS_FOR_MAIN2)) {
+        if (!getBoolProperty(AiProps.PREDICT_SPELLS_FOR_MAIN2)) {
             return null;
         }
 
@@ -929,7 +930,7 @@ public class AiController {
         final Card card = sa.getHostCard();
 
         // Trying to play a card that has Buyback without a Buyback cost, look for possible additional considerations
-        if (getBooleanProperty(AiProps.TRY_TO_PRESERVE_BUYBACK_SPELLS)) {
+        if (getBoolProperty(AiProps.TRY_TO_PRESERVE_BUYBACK_SPELLS)) {
             if (card.hasKeyword(Keyword.BUYBACK) && !sa.isBuyback() && !canPlaySpellWithoutBuyback(card, sa)) {
                 return AiPlayDecision.NeedsToPlayCriteriaNotMet;
             }
@@ -1298,27 +1299,13 @@ public class AiController {
     }
 
     public String getProperty(AiProps propName) {
-        return AiProfileUtil.getAIProp(getPlayer().getLobbyPlayer(), propName);
+        return AiProfileUtil.getProperty(getPlayer(), propName);
     }
-
     public int getIntProperty(AiProps propName) {
-        String prop = AiProfileUtil.getAIProp(getPlayer().getLobbyPlayer(), propName);
-
-        if (prop == null || prop.isEmpty()) {
-            return Integer.parseInt(propName.getDefault());
-        }
-
-        return Integer.parseInt(prop);
+        return AiProfileUtil.getIntProperty(getPlayer(), propName);
     }
-
-    public boolean getBooleanProperty(AiProps propName) {
-        String prop = AiProfileUtil.getAIProp(getPlayer().getLobbyPlayer(), propName);
-
-        if (prop == null || prop.isEmpty()) {
-            return Boolean.parseBoolean(propName.getDefault());
-        }
-
-        return Boolean.parseBoolean(prop);
+    public boolean getBoolProperty(AiProps propName) {
+        return AiProfileUtil.getBoolProperty(getPlayer(), propName);
     }
 
     public AiPlayDecision canPlayFromEffectAI(Spell spell, boolean mandatory, boolean withoutPayingManaCost) {
@@ -1329,7 +1316,7 @@ public class AiController {
 
         final Card card = spell.getHostCard();
         if (spell instanceof SpellApiBased) {
-            boolean chance = false;
+            boolean chance;
             if (withoutPayingManaCost) {
                 chance = SpellApiToAi.Converter.get(spell).doTriggerNoCostWithSubs(player, spell, mandatory).willingToPlay();
             } else {
@@ -1467,7 +1454,7 @@ public class AiController {
         CardCollection inHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.NON_LANDS);
         CardCollectionView otb = player.getCardsIn(ZoneType.Battlefield);
 
-        if (getBooleanProperty(AiProps.HOLD_LAND_DROP_ONLY_IF_HAVE_OTHER_PERMS)) {
+        if (getBoolProperty(AiProps.HOLD_LAND_DROP_ONLY_IF_HAVE_OTHER_PERMS)) {
             if (!otb.anyMatch(CardPredicates.NON_LANDS)) {
                 return false;
             }

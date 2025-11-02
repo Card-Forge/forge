@@ -1,0 +1,7 @@
+Name:Sandbenders' Storm
+ManaCost:3 W
+Types:Instant
+A:SP$ Charm | Choices$ DBDestroy,DBEarthbend
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater.
+SVar:DBEarthbend:DB$ Earthbend | Num$ 3 | SpellDescription$ Earthbend 3. (Target land you control becomes a 0/0 creature with haste that's still a land. Put three +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)
+Oracle:Choose one —\n• Destroy target creature with power 4 or greater.\n• Earthbend 3. (Target land you control becomes a 0/0 creature with haste that's still a land. Put three +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)

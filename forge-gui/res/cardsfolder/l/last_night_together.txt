@@ -8,6 +8,6 @@ SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Vigilance & Indestructible & Hast
 SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | ExtraPhaseDelayedTrigger$ DelTrigStatic | ExtraPhaseDelayedTriggerExcute$ TrigEffect | ConditionPhases$ Main1,Main2 | SpellDescription$ After this main phase, there is an additional combat phase. Only the chosen creatures can attack during that combat phase.
 SVar:DelTrigStatic:Mode$ Phase | Static$ True | Phase$ BeginCombat | TriggerDescription$ After this main phase, there is an additional combat phase. Only the chosen creatures can attack during that combat phase.
 SVar:TrigEffect:DB$ Effect | StaticAbilities$ ForbidAttack | Duration$ UntilEndOfCombat
-SVar:ForbidAttack:Mode$ CantAttack | ValidCard$ Creature.YouCtrl+nonChosenCard | Description$ CARDNAME can't attack.
+SVar:ForbidAttack:Mode$ CantAttack | ValidCard$ Creature.nonChosenCard | Description$ CARDNAME can't attack.
 DeckHas:Ability$Counters
 Oracle:Choose two target creatures. Untap them. Put two +1/+1 counters on each of them. They gain vigilance, indestructible, and haste until end of turn. After this main phase, there is an additional combat phase. Only the chosen creatures can attack during that combat phase.

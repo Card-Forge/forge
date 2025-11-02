@@ -634,6 +634,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // not urgent, get the largest creature possible
+        // TODO checkETBEffects
         return ComputerUtilCard.getBestCreatureAI(list);
     }
 
@@ -1299,15 +1300,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
         // Reload planeswalkers
         else if (!aiPlaneswalkers.isEmpty() && (sa.getHostCard().isSorcery() || !game.getPhaseHandler().isPlayerTurn(ai))) {
-            int maxLoyaltyToConsider = 2;
-            int loyaltyDiff = 2;
-            int chance = 30;
-            if (ai.getController().isAI()) {
-                AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-                maxLoyaltyToConsider = aic.getIntProperty(AiProps.BLINK_RELOAD_PLANESWALKER_MAX_LOYALTY);
-                loyaltyDiff = aic.getIntProperty(AiProps.BLINK_RELOAD_PLANESWALKER_LOYALTY_DIFF);
-                chance = aic.getIntProperty(AiProps.BLINK_RELOAD_PLANESWALKER_CHANCE);
-            }
+            int maxLoyaltyToConsider = AiProfileUtil.getIntProperty(ai, AiProps.BLINK_RELOAD_PLANESWALKER_MAX_LOYALTY);
+            int loyaltyDiff = AiProfileUtil.getIntProperty(ai, AiProps.BLINK_RELOAD_PLANESWALKER_LOYALTY_DIFF);
+            int chance = AiProfileUtil.getIntProperty(ai, AiProps.BLINK_RELOAD_PLANESWALKER_CHANCE);
             if (MyRandom.percentTrue(chance)) {
                 aiPlaneswalkers.sort(CardPredicates.compareByCounterType(CounterEnumType.LOYALTY));
                 for (Card pw : aiPlaneswalkers) {
@@ -1546,10 +1541,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (fetchList.isEmpty()) {
             return null;
         }
-        String type = sa.getParam("ChangeType");
-        if (type == null) {
-            type = "Card";
-        }
+        String type = sa.getParamOrDefault("ChangeType", "");
 
         Card c = null;
         final Player activator = sa.getActivatingPlayer();
@@ -1672,15 +1664,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
             if (card.hasCounters()) {
                 if (card.isPlaneswalker()) {
-                    int maxLoyaltyToConsider = 2;
-                    int loyaltyDiff = 2;
-                    int chance = 30;
-                    if (decider.getController().isAI()) {
-                        AiController aic = ((PlayerControllerAi) decider.getController()).getAi();
-                        maxLoyaltyToConsider = aic.getIntProperty(AiProps.BLINK_RELOAD_PLANESWALKER_MAX_LOYALTY);
-                        loyaltyDiff = aic.getIntProperty(AiProps.BLINK_RELOAD_PLANESWALKER_LOYALTY_DIFF);
-                        chance = aic.getIntProperty(AiProps.BLINK_RELOAD_PLANESWALKER_CHANCE);
-                    }
+                    int maxLoyaltyToConsider = AiProfileUtil.getIntProperty(decider, AiProps.BLINK_RELOAD_PLANESWALKER_MAX_LOYALTY);
+                    int loyaltyDiff = AiProfileUtil.getIntProperty(decider, AiProps.BLINK_RELOAD_PLANESWALKER_LOYALTY_DIFF);
+                    int chance = AiProfileUtil.getIntProperty(decider, AiProps.BLINK_RELOAD_PLANESWALKER_CHANCE);
                     if (MyRandom.percentTrue(chance)) {
                         int curLoyalty = card.getCounters(CounterEnumType.LOYALTY);
                         int freshLoyalty = Integer.parseInt(card.getCurrentState().getBaseLoyalty());

@@ -234,6 +234,7 @@ public class ReplacementHandler {
         // if its updated, try to call event again
         if (res == ReplacementResult.Updated) {
             Map<AbilityKey, Object> params = AbilityKey.newMap(runParams);
+            params.remove(AbilityKey.ReplacementResult);
 
             if (params.containsKey(AbilityKey.EffectOnly)) {
                 params.put(AbilityKey.EffectOnly, true);
