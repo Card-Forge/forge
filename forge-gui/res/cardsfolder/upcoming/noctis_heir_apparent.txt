@@ -2,7 +2,7 @@ Name:Noctis, Heir Apparent
 ManaCost:W U B
 Types:Legendary Creature Human Noble
 PT:2/3
-T:Mode$ ChangesZone | Phase$ BeginCombat->EndCombat | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | Execute$ EquipmentSelection | OptionalDecider$ You | TriggerDescription$ Whenever a creature you control enters during combat, you may attach target Equipment you control to target creature you control.
+T:Mode$ ChangesZone | Phase$ BeginCombat->EndCombat | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ EquipmentSelection | OptionalDecider$ You | TriggerDescription$ Whenever a creature you control enters during combat, you may attach target Equipment you control to target creature you control.
 SVar:EquipmentSelection:DB$ Pump | ValidTgts$ Equipment.YouCtrl | TgtPrompt$ Select target equipment you control | SubAbility$ DBAttach | StackDescription$ None
 SVar:DBAttach:DB$ Attach | Object$ ParentTarget | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control.
 A:AB$ ChangeZone | PrecostDesc$ Warp-Strike — | Cost$ 3 | Defined$ Self | Origin$ Battlefield | Destination$ Exile | SubAbility$ DelTrig | RememberChanged$ True | SpellDescription$ Exile NICKNAME. Return it to the battlefield under its owner's control tapped and attacking at the beginning of that player's next declare attackers step. It can't be blocked that combat.
