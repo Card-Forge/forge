@@ -39,9 +39,10 @@
   - [Ability effects](Card-scripting-API/AbilityFactory.md)
   - [Triggers](Card-scripting-API/Triggers.md)
   - [Replacements](Card-scripting-API/Replacements.md)
+  - Statics
   - [Costs](Card-scripting-API/Costs.md)
   - [Affected / Targets](Card-scripting-API/Targeting.md)
-  - [Restrictions](Card-scripting-API/Restrictions.md)
+  - [Restrictions / Conditions](Card-scripting-API/Restrictions.md)
   - [Guide: Creating a Custom Card](Card-scripting-API/Creating-a-Custom-Card.md)
 
 - [Development]((SM-autoconverted)-how-to-get-started-developing-forge.md)

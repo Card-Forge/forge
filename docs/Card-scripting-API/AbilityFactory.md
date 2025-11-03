@@ -427,12 +427,6 @@ Parameters
 
 An AbilityFactory for Removing Keywords, either temporarily or for longer durations.
 
-## Trigger
-
-### DelayedTrigger
-
-### ImmediateTrigger
-
 ## Destroy
 
 These APIs handles destruction of cards on the battlefield.
@@ -746,6 +740,12 @@ As another example, here's Mitotic Slimes' use of TokenTriggers$:
     SVar:TrigTokenSenior:AB$ Token | Cost$ 0 | TokenImage$ g 2 2 ooze | TokenName$ Ooze | TokenTypes$ Creature,Ooze | TokenColors$ Green | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | TokenAmount$ 2 | TokenTriggers$ TriggerJunior | TokenSVars$ TrigTokenJunior 
     SVar:TriggerJunior:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigTokenJunior | TriggerDescription$ When this creature is put into a graveyard, put two 1/1 green Ooze creature tokens onto the battlefield. SVar:TrigTokenJunior:AB$Token | Cost$ 0 | TokenImage$ g 1 1 ooze | TokenName$ Ooze | TokenTypes$ Creature,Ooze | TokenColors$ Green | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenAmount$ 2 
 
+## Trigger
+
+### DelayedTrigger
+
+### ImmediateTrigger
+
 ## Turn structure
 
 ### AddPhase
@@ -856,10 +856,6 @@ Think of Impulse.
 
 ### DigUntil
 
-### Draw
-
-`A:AB$ Draw | Cost$ 1 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.`
-
 ### Discard
 
 `A:AB$ Discard | Cost$ T | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target opponent discards a card. `
@@ -873,6 +869,10 @@ Think of Impulse.
   - DiscardValid - a ValidCards syntax for acceptable cards to discard
   - UnlessType - a ValidCards expression for "discard X unless you
     discard <Type>"
+
+### Draw
+
+`A:AB$ Draw | Cost$ 1 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.`
 
 ### Mill
 
