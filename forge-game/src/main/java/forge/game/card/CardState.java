@@ -529,7 +529,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             if (hasSVar("AttachAIValid")) { // TODO combine with AttachAITgts
                 extra += " | AIValid$ " + getSVar("AttachAIValid");
             }
-            String st = "SP$ Attach | ValidTgts$ Card.CanBeEnchantedBy,Player.CanBeEnchantedBy | TgtZone$ Battlefield,Graveyard | TgtPrompt$ Select target " + desc + extra;
+            String st = "SP$ Attach | ValidTgts$ Card.CanBeEnchantedBy,Player.CanBeEnchantedBy | TgtZone$ Battlefield,Graveyard | ValidTgtsDesc$ " + desc + extra;
             auraAbility = AbilityFactory.getAbility(st, this);
             auraAbility.setIntrinsic(true);
         }

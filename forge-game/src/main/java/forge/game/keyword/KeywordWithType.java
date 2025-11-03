@@ -1,6 +1,8 @@
 package forge.game.keyword;
 
-import forge.card.CardType;
+import java.util.Arrays;
+
+import forge.util.Lang;
 
 public class KeywordWithType extends KeywordInstance<KeywordWithType> {
     protected String type = null;
@@ -31,17 +33,19 @@ public class KeywordWithType extends KeywordInstance<KeywordWithType> {
             }
         } else {
             descType = type = details;
+            boolean multiple = switch(getKeyword()) {
+                case AFFINITY -> true;
+                default -> false;
+            };
+            descType = Lang.getInstance().buildValidDesc(Arrays.asList(type.split(",")), multiple);
         }
 
-        if (CardType.isACardType(descType) || "Permanent".equals(descType) || "Player".equals(descType) || "Opponent".equals(descType)) {
-            descType = descType.toLowerCase();
-        } else if (descType.equalsIgnoreCase("Outlaw")) {
+        if (descType.equalsIgnoreCase("Outlaw")) {
             reminderType = "Assassin, Mercenary, Pirate, Rogue, and/or Warlock";
         } else if (type.equalsIgnoreCase("historic permanent")) {
             reminderType = "artifact, legendary, and/or Saga permanent";
-        }
-        if (reminderType == null) {
-            reminderType = type;
+        } else {
+            reminderType = descType;
         }
     }
 

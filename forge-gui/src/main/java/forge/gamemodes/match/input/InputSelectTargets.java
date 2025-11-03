@@ -297,7 +297,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         }
 
         if (!choices.contains(card)) {
-            showMessage(sa.getHostCard() + " - The selected card is not a valid choice to be targeted.");
+            showMessage(sa.getHostCard() + " - The selected card is not " + Lang.nounWithAmount(1, tgt.getValidDesc()) + ".");
             return false;
         }
 

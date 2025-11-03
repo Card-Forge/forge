@@ -19,6 +19,7 @@ package forge.game.spellability;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.ObjectUtils;
 
@@ -31,6 +32,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 import forge.util.TextUtil;
 
 /**
@@ -48,6 +50,7 @@ public class TargetRestrictions {
     private String[] originalValidTgts,
         validTgts;
     private String uiPrompt = "";
+    private String validTgtsDesc = "";
     private List<ZoneType> tgtZone = Arrays.asList(ZoneType.Battlefield);
 
     // The target SA of this SA must be targeting a Valid X
@@ -125,12 +128,87 @@ public class TargetRestrictions {
      * @param max
      *            a {@link java.lang.String} object.
      */
-    public TargetRestrictions(final String prompt, final String[] valid, final String min, final String max) {
-        this.uiPrompt = prompt;
-        this.originalValidTgts = valid;
+    public TargetRestrictions(Map<String, String> mapParams) {
+        this.originalValidTgts = mapParams.get("ValidTgts").split(",");
         this.validTgts = this.originalValidTgts.clone();
-        this.minTargets = min;
-        this.maxTargets = max;
+        this.minTargets = mapParams.getOrDefault("TargetMin", "1");
+        this.maxTargets = mapParams.getOrDefault("TargetMax", "1");
+
+        if (mapParams.containsKey("ValidTgtsDesc")) {
+            this.validTgtsDesc = mapParams.get("ValidTgtsDesc");
+        } else if ("Any".equals(mapParams.get("ValidTgts"))) {
+            this.validTgtsDesc = "damage target";
+        } else {
+            this.validTgtsDesc = Lang.getInstance().buildValidDesc(Arrays.asList(this.validTgts), maxTargets != "1");
+        }
+
+        if (mapParams.containsKey("TgtPrompt")) {
+            this.uiPrompt = mapParams.get("TgtPrompt");
+        } else if ("Any".equals(mapParams.get("ValidTgts"))) {
+            this.uiPrompt = "Select any target";
+        } else {
+            this.uiPrompt = "Select target " + validTgtsDesc;
+        }
+
+        if (mapParams.containsKey("TgtZone")) {
+            // if Targeting something not in play, this Key should be set
+            setZone(ZoneType.listValueOf(mapParams.get("TgtZone")));
+        }
+
+        if (mapParams.containsKey("MaxTotalTargetCMC")) {
+            // only target cards up to a certain total max CMC
+            setMaxTotalCMC(mapParams.get("MaxTotalTargetCMC"));
+        }
+
+        if (mapParams.containsKey("MaxTotalTargetPower")) {
+            // only target cards up to a certain total max power
+            setMaxTotalPower(mapParams.get("MaxTotalTargetPower"));
+        }
+
+        // TargetValidTargeting most for Counter: e.g. target spell that targets X.
+        if (mapParams.containsKey("TargetValidTargeting")) {
+            setSAValidTargeting(mapParams.get("TargetValidTargeting"));
+        }
+
+        if (mapParams.containsKey("TargetUnique")) {
+            setUniqueTargets(true);
+        }
+        if (mapParams.containsKey("TargetsWithoutSameCreatureType")) {
+            setWithoutSameCreatureType(true);
+        }
+        if (mapParams.containsKey("TargetsWithSameCreatureType")) {
+            setWithSameCreatureType(true);
+        }
+        if (mapParams.containsKey("TargetsWithSameCardType")) {
+            setWithSameCardType(true);
+        }
+        if (mapParams.containsKey("TargetsWithSameController")) {
+            setSameController(true);
+        }
+        if (mapParams.containsKey("TargetsWithDifferentControllers")) {
+            setDifferentControllers(true);
+        }
+        if (mapParams.containsKey("TargetsForEachPlayer")) {
+            setForEachPlayer(true);
+        }
+        if (mapParams.containsKey("TargetsWithDifferentCMC")) {
+            setDifferentCMC(true);
+        }
+        if (mapParams.containsKey("TargetsWithDifferentNames")) {
+            setDifferentNames(true);
+        }
+        if (mapParams.containsKey("TargetsWithEqualToughness")) {
+            setEqualToughness(true);
+        }
+        if (mapParams.containsKey("TargetsAtRandom")) {
+            setRandomTarget(true);
+        }
+        if (mapParams.containsKey("RandomNumTargets")) {
+            setRandomNumTargets(true);
+        }
+        if (mapParams.containsKey("TargetingPlayer")) {
+            setMandatory(true);
+        }
     }
 
     public final boolean getMandatory() {
@@ -173,6 +251,10 @@ public class TargetRestrictions {
      */
     public final String[] getValidTgts() {
         return this.validTgts;
+    }
+
+    public final String getValidDesc() {
+        return this.validTgtsDesc;
     }
 
     /**

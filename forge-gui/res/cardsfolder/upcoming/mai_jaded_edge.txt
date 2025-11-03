@@ -1,0 +1,8 @@
+Name:Mai, Jaded Edge
+ManaCost:1 R
+Types:Legendary Creature Human Noble
+PT:1/3
+K:Prowess
+A:AB$ PutCounter | Cost$ 3 | Defined$ Self | CounterType$ Double Strike | CounterNum$ 1 | Exhaust$ True | SpellDescription$ Put a double strike counter on NICKNAME. (Activate each exhaust ability only once.)
+DeckHas:Ability$Counters
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nExhaust — {3}: Put a double strike counter on Mai. (Activate each exhaust ability only once.)
