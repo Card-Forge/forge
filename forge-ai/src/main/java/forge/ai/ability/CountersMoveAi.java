@@ -424,7 +424,7 @@ public class CountersMoveAi extends SpellAbilityAi {
 
             // move counter to opponents creature but only if you can not steal them
             // try to move to something useless or something that would leave play
-            boolean isNegative = ComputerUtil.isNegativeCounter(cType, src);
+            boolean isNegative = cType != null && ComputerUtil.isNegativeCounter(cType, src);
             List<Card> filteredTgtList;
             filteredTgtList = isNegative ? CardLists.filterControlledBy(tgtCards, ai.getOpponents()) :
                 CardLists.filterControlledBy(tgtCards, ai.getYourTeam());

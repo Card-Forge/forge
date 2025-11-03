@@ -509,6 +509,6 @@ A-138 U A-Heartfire Hero @Jakub Kasper
 19 offspring_steampath_charger @Alex Stone
 20 offspring_bushy_bodyguard @Jakub Kasper
 21 offspring_pawpatch_recruit @Johan Grenier
-22 offspring_rust_shield_rampager @Steve Ellis
+22 offspring_rust-shield_rampager @Steve Ellis
 24 offspring_tender_wildguide @Jakob Eirich
 30 emblem_ral_crackling_wit @Rudy Siswanto

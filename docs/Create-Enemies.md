@@ -59,7 +59,6 @@ Every sprite under
 will be used as animation for the corresponding action.  
 direction can be added to alter the animation depending on the direction like "IdleRight"  
 Supported directions are "Right","Left","Up","Down","RightDown","LeftDown","LeftUp","RightUp"
-See [sprite atlas reference](Sprite-Atlas) for more information
  
 ## **deck**
 Array of strings containing paths to the decks used for this enemy (from `res/<AdventureName>`)  
@@ -80,7 +79,7 @@ Boolean - Not used to any great extent at this time, but a value of true in this
 Boolean - If true, this enemy ignores terrain collisions and can travel freely in their intended movement direction.
 
 ## **spawnRate**
-Decimal - Relative frequency with which this enemy will be picked to spawn in appropriate biomes (which are set in the [biome json file](Biome-Data)). Existing values range from 0 to 1.0.
+Decimal - Relative frequency with which this enemy will be picked to spawn in appropriate biomes (which are set in the biome json file). Existing values range from 0 to 1.0.
 
 ## **difficulty**
 Decimal - Relative estimated difficulty associated with this enemy. Currently unused, but will likely be factored in as a part of filtering enemies into early/late game appropriate opponents. Existing values range from 0 to 1.0.
@@ -105,4 +104,4 @@ Array - A collection of strings representing [equipment items](adventure-items) 
 String - Any combination of "B" (Black), "U" (Blue), "C" (Colorless), "G" (Green), "R" Red, and "W" (White). Used to display color identity alongside the sprite when an active ability allows it.
 
 ## **questTags**
-Array- A collection of strings associated with this entity for filtering in regards to quests. See [Adventure Quests](Adventure-Quests) for more information on how these are used.
+Array- A collection of strings associated with this entity for filtering in regards to quests.

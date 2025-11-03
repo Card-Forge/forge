@@ -254,7 +254,6 @@ public class SimulateMatch {
                     numPlayers++;
                 }
             }
-
         }
 
         if (numPlayers == 0) {

@@ -1,5 +1,3 @@
-This page is a work in progress... sorry, this is super complex, any input and help is definitely welcome!
-
 # About
 There are many different file formats used in forge, due to the longevity of forge and it's growth and change, older formats are used and new ones are being created. This is an attempt to capture the requirements of these files for general creation, and modification. Unfortunately these "formats" may change and this list, or the data in them may become obsolete as changes happen, especially in newer features like Adventure Mode.
 

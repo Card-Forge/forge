@@ -1,5 +1,0 @@
-Name:Vanilla Creature
-ManaCost:2 G
-Types:Creature Beast
-Text:no text
-PT:2/2
