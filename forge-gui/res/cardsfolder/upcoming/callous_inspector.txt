@@ -1,0 +1,9 @@
+Name:Callous Inspector
+ManaCost:B
+Types:Creature Human Soldier
+PT:1/1
+K:Menace
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When this creature dies, it deals 1 damage to you. Create a Clue token. (It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ 1 | Defined$ You | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_clue_draw | TokenOwner$ You
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhen this creature dies, it deals 1 damage to you. Create a Clue token. (It's an artifact with "{2}, Sacrifice this token: Draw a card.")
