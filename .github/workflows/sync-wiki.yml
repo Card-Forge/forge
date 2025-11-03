@@ -1,10 +1,11 @@
 name: Publish wiki
 on:
   push:
-    branches: [wiki]
+    branches: [master]
     paths:
       - docs/**
       - .github/workflows/sync-wiki.yml
+  workflow_dispatch:
 concurrency:
   group: publish-wiki
   cancel-in-progress: true
@@ -12,7 +13,7 @@ permissions:
   contents: write
 jobs:
   publish-wiki:
-    if: github.repository_owner == 'tool4ever'
+    if: github.repository_owner == 'Card-Forge'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
