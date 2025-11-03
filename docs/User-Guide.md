@@ -108,12 +108,9 @@ the **forge.exe** file. People using Apple's Mac OS X should use the Mac
 OS version and double click the **forge.command** file. People using one of the
 other \*nix OS should double click the **forge.sh** file.
 
-
 # What if double-clicking doesn’t work?
 
 Sometimes double-clicking will open the jar file in a different program.
 In Windows, you may need to right-click and open the properties to
 change the launching program to Java. This might be different in OSX or
-Linux systems(file permission related).
-
-Check the [troubleshooting page.](Troubleshooting-FAQ)
+Linux systems (file permission related).
