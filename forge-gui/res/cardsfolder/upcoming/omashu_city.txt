@@ -1,4 +1,4 @@
-Name:Foggy Bottom Swamp
+Name:Omashu City
 ManaCost:no cost
 Types:Land
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
