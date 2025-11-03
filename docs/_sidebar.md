@@ -13,10 +13,13 @@
 
       - [Getting Started](Gameplay-Guide.md)
       - [Different Planes](Different-Planes.md)
+      - [Currency](Currency.md)
+      - [Deck Building Tips](Deck-Building-Tips.md)
       - [Towns & Capitals](Towns-&-Capitals.md)
       - [Dungeons](Dungeons.md)
       - [Equipments and Items](Equipments-and-Items.md)
       - [Keyboard Shortcuts](Keyboard-Shortcuts.md)
+      - [Console and Cheats](Console-and-Cheats.md)
 
   - [Modding and Development](Modding-and-Development.md)
 
