@@ -278,6 +278,25 @@ Parameters
   - ForgetDefined$ (optional) If present, remove the specified cards
     from this card's remembered list.
 
+## Control
+
+### GainControl
+
+Example: Act of Aggression
+
+`A:SP$ GainControl | Cost$ 3 PR PR | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls. | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.`
+
+Parameters:
+
+- NewController(Targeted player, if there is no target player, the
+  default is the ActivatingPlayer)
+- AllValid(all valid types, no targets)
+- LoseControl(LeavesPlay, Untap, LoseControl, EOT(end of turn))
+
+### ControlExchange
+
+### ControlSpell
+
 ## Copy*
 
 ### CopyPermanent
@@ -476,19 +495,6 @@ Duration$ Permanent for effects that have no specific Duration.
 Fog is an ability based on the original Fog spell. "Prevent all combat
 damage that would be dealt this turn." While this could be done with an
 effect, the specialized nature of the AI gives it its own AF.
-
-## GainControl
-
-Example: Act of Aggression
-
-`A:SP$ GainControl | Cost$ 3 PR PR | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls. | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.`
-
-Parameters:
-
-  - NewController(Targeted player, if there is no target player, the
-    default is the ActivatingPlayer)
-  - AllValid(all valid types, no targets)
-  - LoseControl(LeavesPlay, Untap, LoseControl, EOT(end of turn))
 
 ## Game outcome
 
@@ -741,6 +747,8 @@ As another example, here's Mitotic Slimes' use of TokenTriggers$:
     SVar:TriggerJunior:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigTokenJunior | TriggerDescription$ When this creature is put into a graveyard, put two 1/1 green Ooze creature tokens onto the battlefield. SVar:TrigTokenJunior:AB$Token | Cost$ 0 | TokenImage$ g 1 1 ooze | TokenName$ Ooze | TokenTypes$ Creature,Ooze | TokenColors$ Green | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenAmount$ 2 
 
 ## Trigger
+
+If possible split the SpellDescription$ of the the effect so the part for the trigger can become the StackDescription directly.
 
 ### DelayedTrigger
 
