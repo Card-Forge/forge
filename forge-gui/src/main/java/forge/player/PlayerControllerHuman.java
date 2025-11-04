@@ -1890,7 +1890,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                           final String name) {
         List<CardFaceView> choices = FModel.getMagicDb().getCommonCards().streamAllFaces()
                 .filter(cpp)
-                .map(cardFace -> new CardFaceView(CardTranslation.getTranslatedName(cardFace.getName()), cardFace.getName()))
+                .map(cardFace -> new CardFaceView(CardTranslation.getTranslatedName(cardFace.getDisplayName()), cardFace.getName()))
                 .sorted()
                 .collect(Collectors.toList());
         CardFaceView cardFaceView = getGui().one(message, choices);
@@ -2949,7 +2949,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             List<CardFaceView> choices = new ArrayList<>();
             CardFaceView cardFaceView;
             for (ICardFace cardFace : faces) {
-                cardFaceView = new CardFaceView(CardTranslation.getTranslatedName(cardFace.getName()), cardFace.getName());
+                cardFaceView = new CardFaceView(CardTranslation.getTranslatedName(cardFace.getDisplayName()), cardFace.getName());
                 choices.add(cardFaceView);
             }
             Collections.sort(choices);
