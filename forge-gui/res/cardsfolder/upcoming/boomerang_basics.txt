@@ -1,0 +1,7 @@
+Name:Boomerang Basics
+ManaCost:U
+Types:Sorcery Lesson
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Targeted | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | RememberLKI$ True | SubAbility$ DBDraw | SpellDescription$ Return target nonland permanent to its owner's hand. If you controlled that permanent, draw a card.
+SVar:DBDraw:DB$ Draw | ConditionDefined$ RememberedLKI | ConditionPresent$ Card.YouCtrl | NumCards$ 1 | StackDescription$ If you controlled that permanent, draw a card. | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Return target nonland permanent to its owner's hand. If you controlled that permanent, draw a card.
