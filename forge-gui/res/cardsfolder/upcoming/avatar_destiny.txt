@@ -9,7 +9,7 @@ SVar:TrigMill:DB$ Mill | NumCards$ Y | RememberMilled$ True | SubAbility$ DBChan
 SVar:DBChangeZoneHand:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeZoneTable$ True | SubAbility$ DBChangeZoneBattlefield
 SVar:DBChangeZoneBattlefield:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Battlefield | ChangeType$ Creature.IsRemembered | GainControl$ True | SelectPrompt$ Select up to one creature card | SubAbility$ DBResolve
 SVar:DBResolve:DB$ ChangeZoneResolve | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearChosenColor$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$ValidGraveyard Creature.YouOwn
 SVar:Y:TriggeredCard$CardPower
 DeckHints:Ability$Graveyard
