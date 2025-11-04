@@ -16,7 +16,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
-import forge.util.CardTranslation;
 import forge.util.Expressions;
 import forge.util.Lang;
 import forge.util.Localizer;
@@ -80,7 +79,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
             }
             if (sa.hasParam("Optional") && !pl.getController().confirmAction(sa, null,
                     Localizer.getInstance().getMessage("lblWouldYouLikePutRemoveCounters", ctype.getName(),
-                            CardTranslation.getTranslatedName(gameCard.getName())), null)) {
+                            gameCard.getTranslatedName()), null)) {
                 continue;
             }
             if (gameCard.hasCounters()) {
@@ -135,7 +134,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
                 putCounter = false;
             } else {
                 params.put("CounterType", chosenType);
-                prompt = Localizer.getInstance().getMessage("lblWhatToDoWithTargetCounter",  chosenType.getName(), CardTranslation.getTranslatedName(tgtCard.getName())) + " ";
+                prompt = Localizer.getInstance().getMessage("lblWhatToDoWithTargetCounter", chosenType.getName(), tgtCard.getTranslatedName()) + " ";
                 putCounter = pc.chooseBinary(sa, prompt, BinaryChoiceType.AddOrRemove, params);
             }
         }

@@ -94,7 +94,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
         if (valid.equals("Self") && game.getZoneOf(host) != null) {
             if (host.getController().equals(activator) && game.getZoneOf(host).is(ZoneType.Battlefield) &&
                     (!optional || activator.getController().confirmAction(sa, null,
-                        Localizer.getInstance().getMessage("lblDoYouWantSacrificeThis", host.getName()), null))) {
+                        Localizer.getInstance().getMessage("lblDoYouWantSacrificeThis", host.getDisplayName()), null))) {
                 if (game.getAction().sacrifice(new CardCollection(host), sa, true, params) != null && remSacrificed) {
                     host.addRemembered(host);
                 }

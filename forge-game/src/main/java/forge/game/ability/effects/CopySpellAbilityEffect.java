@@ -92,7 +92,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             }
 
             for (SpellAbility chosenSA : copySpells) {
-                if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoyouWantCopyTheSpell", CardTranslation.getTranslatedName(chosenSA.getHostCard().getName())), null)) {
+                if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoyouWantCopyTheSpell", chosenSA.getHostCard().getTranslatedName()), null)) {
                     continue;
                 }
 

@@ -11,7 +11,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
-import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
 
@@ -64,7 +63,7 @@ public class TapOrUntapEffect extends SpellAbilityEffect {
             // If the effected card is controlled by the same controller of the SA, default to untap.
             boolean tap;
             if(!toggle)
-                tap = pc.chooseBinary(sa, Localizer.getInstance().getMessage("lblTapOrUntapTarget", CardTranslation.getTranslatedName(gameCard.getName())), PlayerController.BinaryChoiceType.TapOrUntap,
+                tap = pc.chooseBinary(sa, Localizer.getInstance().getMessage("lblTapOrUntapTarget", gameCard.getTranslatedName()), PlayerController.BinaryChoiceType.TapOrUntap,
                     !gameCard.getController().equals(tapper));
             else
                 tap = !gameCard.isTapped();

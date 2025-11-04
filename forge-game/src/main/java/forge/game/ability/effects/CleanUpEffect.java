@@ -11,7 +11,6 @@ import forge.game.card.Card;
 import forge.game.event.GameEventRandomLog;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.util.CardTranslation;
 import forge.util.Localizer;
 
 public class CleanUpEffect extends SpellAbilityEffect {
@@ -76,7 +75,7 @@ public class CleanUpEffect extends SpellAbilityEffect {
 
     protected String logOutput(SpellAbility sa, Card source) {
         final StringBuilder log = new StringBuilder();
-        final String name = CardTranslation.getTranslatedName(source.getName());
+        final String name = source.getTranslatedName();
         String linebreak = "\r\n";
 
         if (sa.hasParam("ClearRemembered") && source.getRememberedCount() != 0) {

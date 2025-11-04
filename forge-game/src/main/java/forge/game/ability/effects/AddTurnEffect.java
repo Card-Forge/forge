@@ -69,7 +69,7 @@ public class AddTurnEffect extends SpellAbilityEffect {
     public static void createCantSetSchemesInMotionEffect(SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
-        final String name = hostCard.getName() + "'s Effect";
+        final String name = hostCard.getDisplayName() + "'s Effect";
         final String image = hostCard.getImageKey();
 
         final Card eff = createEffect(sa, sa.getActivatingPlayer(), name, image);

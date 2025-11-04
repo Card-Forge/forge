@@ -247,7 +247,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 game.getAction().revealTo(tgtCard, controller);
             }
             String prompt = sa.hasParam("CastTransformed") ? "lblDoYouWantPlayCardTransformed" : "lblDoYouWantPlayCard";
-            if (singleOption && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage(prompt, CardTranslation.getTranslatedName(tgtCard.getName())), tgtCard, null)) {
+            if (singleOption && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage(prompt, tgtCard.getTranslatedName()), tgtCard, null)) {
                 if (wasFaceDown) {
                     tgtCard.turnFaceDownNoUpdate();
                     tgtCard.updateStateForView();
@@ -490,7 +490,7 @@ public class PlayEffect extends SpellAbilityEffect {
     public static void addReplaceGraveyardEffect(Card c, Card hostCard, SpellAbility sa, SpellAbility tgtSA, String zone) {
         final Game game = hostCard.getGame();
         final Player controller = sa.getActivatingPlayer();
-        final String name = hostCard.getName() + "'s Effect";
+        final String name = hostCard.getDisplayName() + "'s Effect";
         final String image = hostCard.getImageKey();
         final Card eff = createEffect(sa, controller, name, image);
 
