@@ -12,5 +12,5 @@ T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield 
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 SVar:HasAttackEffect:TRUE
-DeckHas:Ability$Token|Graveyard|Lifegain
+DeckHas:Ability$Token|Graveyard|LifeGain
 Oracle:Flying\nWhenever this creature enters or attacks, exile up to one target card from a graveyard. If a creature card is exiled this way, create a Clue token. (It's an artifact with "{2}, Sacrifice this token: Draw a card.")\nWhenever you draw your second card each turn, each opponent loses 1 life and you gain 1 life.
