@@ -1,0 +1,12 @@
+Name:Bumi, King of Three Trials
+ManaCost:5 G
+Types:Legendary Creature Human Noble Ally
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When NICKNAME enters, ABILITY
+SVar:TrigCharm:DB$ Charm | MinCharmNum$ 0 | CharmNum$ X | Choices$ DBPutCounter,DBScry,DBEarthbend
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 3 | SpellDescription$ Put three +1/+1 counters on NICKNAME.
+SVar:DBScry:DB$ Scry | ScryNum$ 3 | ValidTgts$ Player | SpellDescription$ Target player scries 3.
+SVar:DBEarthbend:DB$ Earthbend | Num$ 3 | SpellDescription$ Earthbend 3. (Target land you control becomes a 0/0 creature with haste that's still a land. Put three +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)
+SVar:X:Count$ValidGraveyard Lesson.YouOwn
+DeckHints:Type$Lesson
+Oracle:When Bumi enters, choose up to X, where X is the number of Lesson cards in your graveyard —\n• Put three +1/+1 counters on Bumi.\n• Target player scries 3.\n• Earthbend 3. (Target land you control becomes a 0/0 creature with haste that's still a land. Put three +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)

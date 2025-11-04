@@ -1,0 +1,9 @@
+Name:Earth Kingdom Jailer
+ManaCost:2 W
+Types:Creature Human Soldier Ally
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this creature enters, exile up to one target artifact, creature, or enchantment an opponent controls with mana value 3 or greater until this creature leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Artifact.OppCtrl+cmcGE3,Creature.OppCtrl+cmcGE3,Enchantment.OppCtrl+cmcGE3 | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target artifact, creature, or enchantment an opponent controls with mana value 3 or greater | Duration$ UntilHostLeavesPlay
+SVar:PlayMain1:TRUE
+SVar:OblivionRing:TRUE
+Oracle:When this creature enters, exile up to one target artifact, creature, or enchantment an opponent controls with mana value 3 or greater until this creature leaves the battlefield.

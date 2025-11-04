@@ -1,0 +1,10 @@
+Name:Fire Navy Trebuchet
+ManaCost:2 B
+Types:Artifact Creature Wall
+PT:0/4
+K:Defender
+K:Reach
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you attack, create a 2/1 colorless Construct artifact creature token with flying named Ballistic Boulder that's tapped and attacking. Sacrifice that token at the beginning of the next end step.
+SVar:TrigToken:DB$ Token | TokenScript$ ballistic_boulder | TokenTapped$ True | TokenAttacking$ True | AtEOT$ Sacrifice
+DeckHas:Ability$Token & Type$Artifact|Construct
+Oracle:Defender, reach\nWhenever you attack, create a 2/1 colorless Construct artifact creature token with flying named Ballistic Boulder that's tapped and attacking. Sacrifice that token at the beginning of the next end step.

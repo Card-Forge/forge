@@ -19,3 +19,5 @@ ScryfallCode=PW25
 11 R Mary Jane Watson @Paolo Rivera
 12 R Ultimate Green Goblin @Tyler Walpole
 13 R Carnage, Crimson Chaos @Lucio Parrillo
+14 R Gran-Gran @Mizutametori
+15 R Unlucky Cabbage Merchant @Thanh Tuấn
