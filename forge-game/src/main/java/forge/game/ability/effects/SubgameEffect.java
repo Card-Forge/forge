@@ -23,7 +23,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
-import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.collect.FCollectionView;
@@ -164,7 +163,7 @@ public class SubgameEffect extends SpellAbilityEffect {
         Game subgame = createSubGame(maingame, startingLife);
 
         String startMessage = Localizer.getInstance().getMessage("lblSubgameStart",
-                CardTranslation.getTranslatedName(hostCard.getDisplayName()));
+                hostCard.getTranslatedName());
         maingame.fireEvent(new GameEventSubgameStart(subgame, startMessage));
 
         prepareAllZonesSubgame(maingame, subgame);

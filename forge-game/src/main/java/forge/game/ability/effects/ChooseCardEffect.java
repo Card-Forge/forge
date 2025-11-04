@@ -6,7 +6,6 @@ import com.google.common.collect.Lists;
 import forge.game.Direction;
 import forge.game.player.DelayedReveal;
 import forge.game.player.PlayerView;
-import forge.util.CardTranslation;
 
 import forge.card.CardType;
 import forge.game.Game;
@@ -256,7 +255,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     CardCollectionView shown = !p.hasKeyword("LimitSearchLibrary")
                             ? searched.getCardsIn(ZoneType.Library) : searched.getCardsIn(ZoneType.Library, fetchNum);
                     DelayedReveal delayedReveal = new DelayedReveal(shown, ZoneType.Library, PlayerView.get(searched),
-                            CardTranslation.getTranslatedName(host.getDisplayName()) + " - " +
+                            host.getTranslatedName() + " - " +
                                     Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
                     Card choice = p.getController().chooseSingleEntityForEffect(pChoices, delayedReveal, sa, title,
                             !sa.hasParam("Mandatory"), p, null);

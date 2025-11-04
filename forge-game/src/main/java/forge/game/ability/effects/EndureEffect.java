@@ -21,7 +21,6 @@ import forge.game.event.GameEventTokenCreated;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
 
@@ -69,7 +68,7 @@ public class EndureEffect extends TokenEffectBase {
             params.put("Amount", amount);
             if (gamec != null && gamec.isInPlay() && gamec.equalsWithGameTimestamp(c) && gamec.canReceiveCounters(CounterEnumType.P1P1)
                     && pl.getController().confirmAction(sa, null,
-                            Localizer.getInstance().getMessage("lblEndureAction", CardTranslation.getTranslatedName(c.getDisplayName()), amount),
+                            Localizer.getInstance().getMessage("lblEndureAction", c.getTranslatedName(), amount),
                             gamec, params)) {
                 gamec.addCounter(CounterEnumType.P1P1, amount, pl, table);
             } else {

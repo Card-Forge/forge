@@ -9,7 +9,6 @@ import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.util.CardTranslation;
 import forge.util.Localizer;
 
 
@@ -87,8 +86,8 @@ public class ControlExchangeEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("Optional") && !sa.getActivatingPlayer().getController().confirmAction(sa, null,
                 Localizer.getInstance().getMessage("lblExchangeControl",
-                        CardTranslation.getTranslatedName(object1.getDisplayName()),
-                        CardTranslation.getTranslatedName(object2.getDisplayName())), null)) {
+                        object1.getTranslatedName(),
+                        object2.getTranslatedName()), null)) {
             return;
         }
 

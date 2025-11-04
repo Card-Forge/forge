@@ -120,7 +120,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             sb.append(TextUtil.concatNoSpace("\n(", String.valueOf(maxTargets - targeted), " more can be targeted)"));
         }
 
-        String name = CardTranslation.getTranslatedName(sa.getHostCard().getDisplayName());
+        String name = sa.getHostCard().getTranslatedName();
         String message = TextUtil.fastReplace(TextUtil.fastReplace(sb.toString(),
                 "CARDNAME", name), "(Targeting ERROR)", "");
         message = TextUtil.fastReplace(message, "NICKNAME", Lang.getInstance().getNickName(name));

@@ -16,7 +16,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.TextUtil;
@@ -197,7 +196,7 @@ public class DigEffect extends SpellAbilityEffect {
                 }
                 else if (!sa.hasParam("NoLooking")) {
                     // show the user the revealed cards
-                    delayedReveal = new DelayedReveal(top, srcZone, PlayerView.get(p), CardTranslation.getTranslatedName(host.getDisplayName()) + " - " + Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
+                    delayedReveal = new DelayedReveal(top, srcZone, PlayerView.get(p), host.getTranslatedName() + " - " + Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
                 }
 
                 if (sa.hasParam("RememberRevealed") && hasRevealed) {
@@ -249,7 +248,7 @@ public class DigEffect extends SpellAbilityEffect {
                 // Optional abilities that use a dialog box to prompt the user to skip the ability (e.g. Explorer's Scope, Quest for Ula's Temple)
                 if (optional && mayBeSkipped && !valid.isEmpty()) {
                     String prompt = optionalAbilityPrompt != null ? optionalAbilityPrompt : Localizer.getInstance().getMessage("lblWouldYouLikeProceedWithOptionalAbility") + " " + host + "?\n\n(" + sa.getDescription() + ")";
-                    if (!p.getController().confirmAction(sa, null, TextUtil.fastReplace(prompt, "CARDNAME", CardTranslation.getTranslatedName(host.getDisplayName())), null)) {
+                    if (!p.getController().confirmAction(sa, null, TextUtil.fastReplace(prompt, "CARDNAME", host.getTranslatedName()), null)) {
                         return;
                     }
                 }

@@ -45,7 +45,6 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.util.CardTranslation;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.Visitor;
@@ -311,7 +310,7 @@ public class ReplacementHandler {
                         replacementEffect.getParam("OptionalDecider"), effectSA).get(0);
             }
 
-            String name = CardTranslation.getTranslatedName(MoreObjects.firstNonNull(host.getRenderForUI() ? host.getCardForUi() : null, host).getDisplayName());
+            String name = MoreObjects.firstNonNull(host.getRenderForUI() ? host.getCardForUi() : null, host).getTranslatedName();
             String effectDesc = TextUtil.fastReplace(replacementEffect.getDescription(), "CARDNAME", name);
             final String question = runParams.containsKey(AbilityKey.Card)
                 ? Localizer.getInstance().getMessage("lblApplyCardReplacementEffectToCardConfirm", name, runParams.get(AbilityKey.Card).toString(), effectDesc)
