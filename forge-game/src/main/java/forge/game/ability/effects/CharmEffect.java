@@ -16,7 +16,6 @@ import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
-import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
@@ -235,7 +234,7 @@ public class CharmEffect extends SpellAbilityEffect {
         }
 
         boolean isOptional = sa.hasParam("Optional");
-        if (isOptional && !activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeCharm", CardTranslation.getTranslatedName(source.getName())), null)) {
+        if (isOptional && !activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeCharm", source.getTranslatedName()), null)) {
             return false;
         }
 

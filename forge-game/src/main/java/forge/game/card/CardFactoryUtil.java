@@ -222,7 +222,7 @@ public class CardFactoryUtil {
         //Predicate<Card> pc = Predicates.in(player.getAllCards());
         // TODO This would be better to send in the player's deck, not all cards
         String name = player.getController().chooseCardName(sa, cpp, "Card",
-                "Name a card for " + card.getName());
+                "Name a card for " + card.getDisplayName());
         if (name == null || name.isEmpty()) {
             return false;
         }
@@ -230,7 +230,7 @@ public class CardFactoryUtil {
 
         if (ki.getKeyword().equals(Keyword.DOUBLE_AGENDA)) {
             String name2 = player.getController().chooseCardName(sa, cpp, "Card.!NamedCard",
-                    "Name a second card for " + card.getName());
+                    "Name a second card for " + card.getDisplayName());
             if (name2 == null || name2.isEmpty()) {
                 return false;
             }
@@ -1289,10 +1289,10 @@ public class CardFactoryUtil {
 
             final StringBuilder sb = new StringBuilder();
             if (card.isCreature()) {
-                sb.append("When ").append(card.getName());
+                sb.append("When ").append(card.getDisplayName());
                 sb.append(" enters or the creature it haunts dies, ");
             } else {
-                sb.append("When the creature ").append(card.getName());
+                sb.append("When the creature ").append(card.getDisplayName());
                 sb.append(" haunts dies, ");
             }
 
@@ -1484,7 +1484,7 @@ public class CardFactoryUtil {
             if (!"ManaCost".equals(manacost)) {
                 desc.append(ManaCostParser.parse(manacost)).append(" ");
             }
-            desc.append(" - " + card.getName());
+            desc.append(" - " + card.getDisplayName());
 
             final String trigStr = "Mode$ Exiled | ValidCard$ Card.Self | Secondary$ True | TriggerDescription$ " + desc.toString();
 
@@ -3762,10 +3762,10 @@ public class CardFactoryUtil {
                     c.addCounter(CounterEnumType.TIME, counters, getActivatingPlayer(), table);
                     table.replaceCounterEffect(game, this, false); // this is a special Action, not an Effect
 
-                    String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(),"has suspended", c.getName(), "with", String.valueOf(counters),"time counters on it.");
+                    String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(),"has suspended", c.getDisplayName(), "with", String.valueOf(counters),"time counters on it.");
                     game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
                     //reveal suspended card
-                    game.getAction().reveal(new CardCollection(c), c.getOwner(), true, c.getName() + " is suspended with " + counters + " time counters in ");
+                    game.getAction().reveal(new CardCollection(c), c.getOwner(), true, c.getDisplayName() + " is suspended with " + counters + " time counters in ");
                 }
             };
             final StringBuilder sbDesc = new StringBuilder();

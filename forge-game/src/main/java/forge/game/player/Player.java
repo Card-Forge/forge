@@ -3017,7 +3017,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 if (color) {
                     Player p = cmd.getController();
                     List<String> colorChoices = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
-                    String prompt = Localizer.getInstance().getMessage("lblChooseAColorFor", cmd.getName());
+                    String prompt = Localizer.getInstance().getMessage("lblChooseAColorFor", cmd.getDisplayName());
                     List<String> chosenColors;
                     SpellAbility cmdColorsa = new SpellAbility.EmptySa(ApiType.ChooseColor, cmd, p);
                     chosenColors = p.getController().chooseColors(prompt,cmdColorsa, 1, 1, colorChoices);
@@ -3219,7 +3219,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      }
 
     public static DetachedCardEffect createCompanionEffect(Game game, Card companion) {
-        final String name = Lang.getInstance().getPossesive(companion.getName()) + " Companion Effect";
+        final String name = Lang.getInstance().getPossesive(companion.getDisplayName()) + " Companion Effect";
         DetachedCardEffect eff = new DetachedCardEffect(companion, name);
 
         String addToHandAbility = "Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouOwn+EffectSource | AffectedZone$ Command | AddAbility$ MoveToHand";
