@@ -13,10 +13,13 @@
 
       - [Getting Started](Gameplay-Guide.md)
       - [Different Planes](Different-Planes.md)
+      - [Currency](Currency.md)
+      - [Deck Building Tips](Deck-Building-Tips.md)
       - [Towns & Capitals](Towns-&-Capitals.md)
       - [Dungeons](Dungeons.md)
       - [Equipments and Items](Equipments-and-Items.md)
       - [Keyboard Shortcuts](Keyboard-Shortcuts.md)
+      - [Console and Cheats](Console-and-Cheats.md)
 
   - [Modding and Development](Modding-and-Development.md)
 
@@ -36,9 +39,10 @@
   - [Ability effects](Card-scripting-API/AbilityFactory.md)
   - [Triggers](Card-scripting-API/Triggers.md)
   - [Replacements](Card-scripting-API/Replacements.md)
+  - Statics
   - [Costs](Card-scripting-API/Costs.md)
   - [Affected / Targets](Card-scripting-API/Targeting.md)
-  - [Restrictions](Card-scripting-API/Restrictions.md)
+  - [Restrictions / Conditions](Card-scripting-API/Restrictions.md)
   - [Guide: Creating a Custom Card](Card-scripting-API/Creating-a-Custom-Card.md)
 
 - [Development]((SM-autoconverted)-how-to-get-started-developing-forge.md)
