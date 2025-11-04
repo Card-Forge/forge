@@ -173,22 +173,50 @@ public class AdventureEventData implements Serializable {
     private static final Predicate<CardEdition> filterModern = FModel.getFormats().getModern().editionLegalPredicate;
     private static final Predicate<CardEdition> filterVintage = FModel.getFormats().getVintage().editionLegalPredicate;
     private static final Predicate<CardEdition> filterStandard = FModel.getFormats().getStandard().editionLegalPredicate;
+public static Predicate<CardEdition> selectSetPool() {
 
-    public static Predicate<CardEdition> selectSetPool() {
-        // Should we negate any of these to avoid overlap?
-        final int rollD100 = MyRandom.getRandom().nextInt(100);
-        Predicate<CardEdition> rolledFilter;
-        if (rollD100 < 30) {
-            rolledFilter = filterStandard;
-        } else if (rollD100 < 60) {
-            rolledFilter = filterPioneer;
-        } else if (rollD100 < 80) {
-            rolledFilter = filterModern;
-        } else {
-            rolledFilter = filterVintage;
-        }
-        return rolledFilter;
+    // --- Create new "exclusive" filters for each era ---
+    // This is the key fix. We "subtract" the smaller pools to stop the overlap.
+
+    // Era 1: Standard sets (This is the base, no change)
+    Predicate<CardEdition> filterEraStandard = filterStandard;
+
+    // Era 2: Pioneer-exclusive sets
+    // (In Pioneer) AND (NOT in Standard)
+    Predicate<CardEdition> filterEraPioneer = filterPioneer.and(filterStandard.negate());
+
+    // Era 3: Modern-exclusive sets
+    // (In Modern) AND (NOT in Pioneer)
+    Predicate<CardEdition> filterEraModern = filterModern.and(filterPioneer.negate());
+
+    // Era 4: Vintage-exclusive sets ("The Rest")
+    // (In Vintage) AND (NOT in Modern)
+    Predicate<CardEdition> filterEraVintage = filterVintage.and(filterModern.negate());
+
+    // --- Now, use your original weights with these new NON-overlapping filters ---
+
+    final int rollD100 = MyRandom.getRandom().nextInt(100);
+    Predicate<CardEdition> rolledFilter;
+
+    // 30% chance for a Standard-era set
+    if (rollD100 < 30) {
+        rolledFilter = filterEraStandard;
+    
+    // 30% chance for a Pioneer-exclusive-era set
+    } else if (rollD100 < 60) { // (30-59)
+        rolledFilter = filterEraPioneer;
+    
+    // 20% chance for a Modern-exclusive-era set
+    } else if (rollD100 < 80) { // (60-79)
+        rolledFilter = filterEraModern;
+    
+    // 20% chance for a Vintage-exclusive-era set
+    } else { // (80-99)
+        rolledFilter = filterEraVintage;
     }
+
+    return rolledFilter;
+}
 
     private static final Set<String> POWER_NINE = Set.of("Black Lotus", "Mox Emerald", "Mox Pearl", "Mox Ruby", "Mox Sapphire", "Mox Jet", "Ancestral Recall", "Timetwister", "Time Walk");
 
