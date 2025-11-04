@@ -64,7 +64,7 @@ public class TapOrUntapEffect extends SpellAbilityEffect {
             // If the effected card is controlled by the same controller of the SA, default to untap.
             boolean tap;
             if(!toggle)
-                tap = pc.chooseBinary(sa, Localizer.getInstance().getMessage("lblTapOrUntapTarget", CardTranslation.getTranslatedName(gameCard.getName())), PlayerController.BinaryChoiceType.TapOrUntap,
+                tap = pc.chooseBinary(sa, Localizer.getInstance().getMessage("lblTapOrUntapTarget", CardTranslation.getTranslatedName(gameCard.getDisplayName())), PlayerController.BinaryChoiceType.TapOrUntap,
                     !gameCard.getController().equals(tapper));
             else
                 tap = !gameCard.isTapped();

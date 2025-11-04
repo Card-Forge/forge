@@ -182,7 +182,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             if (counterNum.equals("Any")) {
                 tgtCards = activator.getController().chooseCardsForEffect(
                         tgtCards, sa, Localizer.getInstance().getMessage("lblChooseCardToGetCountersFrom",
-                                cType.getName(), CardTranslation.getTranslatedName(source.getName())),
+                                cType.getName(), CardTranslation.getTranslatedName(source.getDisplayName())),
                         0, tgtCards.size(), true, params);
             }
 
@@ -212,7 +212,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                 params.put("Target", cur);
                 int cnum = activator.getController().chooseNumber(sa,
                         Localizer.getInstance().getMessage("lblPutHowManyTargetCounterOnCard", cType.getName(),
-                                CardTranslation.getTranslatedName(cur.getName())),
+                                CardTranslation.getTranslatedName(cur.getDisplayName())),
                         0, source.getCounters(cType), params);
 
                 if (cnum > 0) {
@@ -353,7 +353,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             int min = sa.hasParam("NonZero") && countersToAdd.isEmpty() ? 1 : 0;
             cnum = pc.chooseNumber(
                     sa, Localizer.getInstance().getMessage("lblTakeHowManyTargetCounterFromCard",
-                            cType.getName(), CardTranslation.getTranslatedName(src.getName())),
+                            cType.getName(), CardTranslation.getTranslatedName(src.getDisplayName())),
                     min, cmax, params);
         } else {
             cnum = Math.min(cmax, AbilityUtils.calculateAmount(host, counterNum, sa));

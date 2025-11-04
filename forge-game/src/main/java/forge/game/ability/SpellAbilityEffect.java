@@ -147,7 +147,7 @@ public abstract class SpellAbilityEffect {
             sb.append(TextUtil.enclosedParen(TextUtil.concatNoSpace("X","=",String.valueOf(amount))));
         }
 
-        String currentName = CardTranslation.getTranslatedName(sa.getHostCard().getName());
+        String currentName = CardTranslation.getTranslatedName(sa.getHostCard().getDisplayName());
         String substitutedDesc = TextUtil.fastReplace(sb.toString(), "CARDNAME", currentName);
         substitutedDesc = TextUtil.fastReplace(substitutedDesc, "NICKNAME", Lang.getInstance().getNickName(currentName));
         return substitutedDesc;
@@ -670,7 +670,7 @@ public abstract class SpellAbilityEffect {
             }
 
             // build an Effect with that information
-            String name = host.getName() + "'s Effect";
+            String name = host.getDisplayName() + "'s Effect";
 
             final Card eff = createEffect(sa, controller, name, host.getImageKey());
             if (cards != null) {
@@ -735,7 +735,7 @@ public abstract class SpellAbilityEffect {
             Map<String, Object> params = Maps.newHashMap();
             params.put("Attacker", c);
             defender = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(defs, sa,
-                    Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())), false, params);
+                    Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getDisplayName())), false, params);
 
             if (defender != null && !combat.getAttackersOf(defender).contains(c)) {
                 // we might be reselecting

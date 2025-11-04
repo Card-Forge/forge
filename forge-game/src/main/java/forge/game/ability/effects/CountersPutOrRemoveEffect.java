@@ -80,7 +80,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
             }
             if (sa.hasParam("Optional") && !pl.getController().confirmAction(sa, null,
                     Localizer.getInstance().getMessage("lblWouldYouLikePutRemoveCounters", ctype.getName(),
-                            CardTranslation.getTranslatedName(gameCard.getName())), null)) {
+                            CardTranslation.getTranslatedName(gameCard.getDisplayName())), null)) {
                 continue;
             }
             if (gameCard.hasCounters()) {
@@ -135,7 +135,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
                 putCounter = false;
             } else {
                 params.put("CounterType", chosenType);
-                prompt = Localizer.getInstance().getMessage("lblWhatToDoWithTargetCounter",  chosenType.getName(), CardTranslation.getTranslatedName(tgtCard.getName())) + " ";
+                prompt = Localizer.getInstance().getMessage("lblWhatToDoWithTargetCounter",  chosenType.getName(), CardTranslation.getTranslatedName(tgtCard.getDisplayName())) + " ";
                 putCounter = pc.chooseBinary(sa, prompt, BinaryChoiceType.AddOrRemove, params);
             }
         }

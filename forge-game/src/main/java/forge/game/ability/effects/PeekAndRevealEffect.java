@@ -82,7 +82,7 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
             boolean doReveal = !sa.hasParam("NoReveal") && !revealableCards.isEmpty();
             if (!noPeek) {
                 peekingPlayer.getController().reveal(peekCards, srcZone, zoneToPeek,
-                        CardTranslation.getTranslatedName(source.getName()) + " - " +
+                        CardTranslation.getTranslatedName(source.getDisplayName()) + " - " +
                                 Localizer.getInstance().getMessage("lblLookingCardFrom"));
             }
 
@@ -91,7 +91,7 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
 
             if (doReveal) {
                 peekingPlayer.getGame().getAction().reveal(revealableCards, srcZone, zoneToPeek, !noPeek,
-                        CardTranslation.getTranslatedName(source.getName()) + " - " +
+                        CardTranslation.getTranslatedName(source.getDisplayName()) + " - " +
                                 Localizer.getInstance().getMessage("lblRevealingCardFrom"));
 
                 if (rememberRevealed) {

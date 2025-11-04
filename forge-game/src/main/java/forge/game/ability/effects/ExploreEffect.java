@@ -82,7 +82,7 @@ public class ExploreEffect extends SpellAbilityEffect {
                         params.put("RevealedCard", r);
                         if (pl.getController().confirmAction(sa, null,
                                 Localizer.getInstance().getMessage("lblPutThisCardToYourGraveyard",
-                                        CardTranslation.getTranslatedName(r.getName())), r, params))
+                                        CardTranslation.getTranslatedName(r.getDisplayName())), r, params))
                             game.getAction().moveTo(ZoneType.Graveyard, r, sa, moveParams);
                     }
                 }

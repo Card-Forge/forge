@@ -76,7 +76,7 @@ public class CleanUpEffect extends SpellAbilityEffect {
 
     protected String logOutput(SpellAbility sa, Card source) {
         final StringBuilder log = new StringBuilder();
-        final String name = CardTranslation.getTranslatedName(source.getName());
+        final String name = CardTranslation.getTranslatedName(source.getDisplayName());
         String linebreak = "\r\n";
 
         if (sa.hasParam("ClearRemembered") && source.getRememberedCount() != 0) {

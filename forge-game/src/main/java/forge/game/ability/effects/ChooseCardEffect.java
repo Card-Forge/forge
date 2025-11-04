@@ -256,7 +256,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     CardCollectionView shown = !p.hasKeyword("LimitSearchLibrary")
                             ? searched.getCardsIn(ZoneType.Library) : searched.getCardsIn(ZoneType.Library, fetchNum);
                     DelayedReveal delayedReveal = new DelayedReveal(shown, ZoneType.Library, PlayerView.get(searched),
-                            CardTranslation.getTranslatedName(host.getName()) + " - " +
+                            CardTranslation.getTranslatedName(host.getDisplayName()) + " - " +
                                     Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
                     Card choice = p.getController().chooseSingleEntityForEffect(pChoices, delayedReveal, sa, title,
                             !sa.hasParam("Mandatory"), p, null);

@@ -109,7 +109,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
                         chosen = Aggregates.random(faces).getName();
                     } else {
                         final String sbName = sa.hasParam("SpellbookName") ? sa.getParam("SpellbookName") :
-                                CardTranslation.getTranslatedName(source.getName());
+                                CardTranslation.getTranslatedName(source.getDisplayName());
                         final String message = sa.hasParam("Choices") ? 
                             Localizer.getInstance().getMessage("lblChooseaCard") :
                             Localizer.getInstance().getMessage("lblChooseFromSpellbook", sbName);

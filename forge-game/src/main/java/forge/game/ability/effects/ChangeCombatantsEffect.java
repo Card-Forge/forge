@@ -35,7 +35,7 @@ public class ChangeCombatantsEffect extends SpellAbilityEffect {
 
         // TODO: may expand this effect for defined blocker (False Orders, General Jarkeld, Sorrow's Path, Ydwen Efreet)
         for (final Card c : getTargetCards(sa)) {
-            String cardString = CardTranslation.getTranslatedName(c.getName()) + " (" + c.getId() + ")";
+            String cardString = CardTranslation.getTranslatedName(c.getDisplayName()) + " (" + c.getId() + ")";
             if (isOptional && !activator.getController().confirmAction(sa, null,
                     Localizer.getInstance().getMessage("lblChangeCombatantOption", cardString), null)) {
                 continue;

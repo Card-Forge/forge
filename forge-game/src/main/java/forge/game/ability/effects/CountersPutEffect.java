@@ -486,7 +486,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         } else {
                             counterAmount = pc.chooseNumber(sa,
                                     Localizer.getInstance().getMessage("lblHowManyCountersThis",
-                                            CardTranslation.getTranslatedName(gameCard.getName())),
+                                            CardTranslation.getTranslatedName(gameCard.getDisplayName())),
                                     1, counterRemain, params);
                         }
                     }
@@ -529,7 +529,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
                         String message = Localizer.getInstance().getMessage(
                                 "lblDoYouWantPutTargetP1P1CountersOnCard", String.valueOf(counterAmount),
-                                CardTranslation.getTranslatedName(gameCard.getName()));
+                                CardTranslation.getTranslatedName(gameCard.getDisplayName()));
                         placer = pc.chooseSingleEntityForEffect(activator.getOpponents(), sa,
                                 Localizer.getInstance().getMessage("lblChooseAnOpponent"), params);
 
@@ -721,7 +721,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
     protected String logOutput(Map<Object, Integer> randomMap, Card card) {
         StringBuilder randomLog = new StringBuilder();
-        randomLog.append(card.getName()).append(" randomly distributed ");
+        randomLog.append(card.getDisplayName()).append(" randomly distributed ");
         if (randomMap.entrySet().size() == 0) {
             randomLog.append("no counters.");
         } else {
