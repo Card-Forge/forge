@@ -1,0 +1,5 @@
+Name:Shared Roots
+ManaCost:1 G
+Types:Sorcery Lesson
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | Tapped$ True | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+Oracle:Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
