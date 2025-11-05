@@ -1,0 +1,16 @@
+Name:Zuko, Conflicted
+ManaCost:B R
+Types:Legendary Creature Human Rogue
+PT:2/3
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your first main phase, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBDraw,DBPutCounter,DBMana,DBChangeZone | ChoiceRestriction$ ThisGame | CharmNum$ 1 | AdditionalDescription$ and you lose 2 life
+SVar:DBDraw:DB$ Draw | SubAbility$ DBLoseLife | SpellDescription$ Draw a card.
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBLoseLife | SpellDescription$ Put a +1/+1 counter on NICKNAME.
+SVar:DBMana:DB$ Mana | Produced$ R | SubAbility$ DBLoseLife | SpellDescription$ Add {R}.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBChooseOpp | RememberChanged$ True | SpellDescription$ Exile NICKNAME, then return it to the battlefield under an opponent's control.
+SVar:DBChooseOpp:DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | ChoiceTitle$ Choose an opponent | SubAbility$ MoveToPlay
+SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ Remembered | GainControl$ ChosenPlayer | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenPlayer$ True | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 2
+DeckHas:Ability$Counters
+Oracle:At the beginning of your first main phase, choose one that hasn't been chosen and you lose 2 life —\n• Draw a card.\n• Put a +1/+1 counter on Zuko.\n• Add {R}.\n• Exile Zuko, then return him to the battlefield under an opponent's control.

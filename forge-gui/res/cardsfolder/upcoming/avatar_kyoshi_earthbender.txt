@@ -1,0 +1,9 @@
+Name:Avatar Kyoshi, Earthbender
+ManaCost:5 G G G
+Types:Legendary Creature Human Avatar
+PT:6/6
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Hexproof | Condition$ PlayerTurn | Description$ During your turn, NICKNAME has hexproof.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigEarthbend | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, earthbend 8, then untap that land. (Target land you control becomes a 0/0 creature with haste that's still a land. Put eight +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)
+SVar:TrigEarthbend:DB$ Earthbend | Num$ 8 | SubAbility$ DBUntap
+SVar:DBUntap:DB$ Untap | Defined$ Targeted
+Oracle:During your turn, Avatar Kyoshi has hexproof.\nAt the beginning of combat on your turn, earthbend 8, then untap that land. (Target land you control becomes a 0/0 creature with haste that's still a land. Put eight +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)

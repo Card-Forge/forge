@@ -450,6 +450,9 @@ A-289 R A-Geology Enthusiast @Fajareka Setiawan
 6 c_x_x_a_golem @Olivier Bernard
 7 c_a_powerstone @Karl Kopinski
 8 c_1_1_a_soldier @Gabor Szikszai
-8 c_1_1_a_soldier @Gabor Szikszai
+9 c_1_1_a_soldier @Kev Walker
 10 c_1_1_a_thopter_flying @Samuel Perin
 11 c_3_3_a_zombie @Kieran Yanner
+
+[other]
+12 emblem_saheeli_filigree_master @Aurore Folny

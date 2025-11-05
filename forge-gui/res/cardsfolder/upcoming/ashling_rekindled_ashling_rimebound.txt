@@ -1,0 +1,26 @@
+Name:Ashling, Rekindled
+ManaCost:1 R
+Types:Legendary Creature Elemental Sorcerer
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever this creature enters or transforms into CARDNAME, you may discard a card. If you do, draw a card.
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ Whenever this creature enters or transforms into CARDNAME, you may discard a card. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Card> | NumCards$ 1
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your first main phase, you may pay {U}. If you do, transform NICKNAME.
+SVar:TrigTransform:AB$ SetState | Cost$ U | Defined$ Self | Mode$ Transform
+DeckHas:Ability$Discard
+AlternateMode:DoubleFaced
+Oracle:Whenever this creature enters or transforms into Ashling, Rekindled, you may discard a card. If you do, draw a card.\nAt the beginning of your first main phase, you may pay {U}. If you do, transform Ashling.
+
+ALTERNATE
+
+Name:Ashling, Rimebound
+ManaCost:no cost
+Colors:blue
+Types:Legendary Creature Elemental Wizard
+PT:1/3
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$Whenever this creature transforms into CARDNAME and at the beginning of your first main phase, add two mana of any one color. Spend this mana only to cast spells with mana value 4 or greater.
+T:Mode$ Phase | Phase$ Main1 | Secondary$ True | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ Whenever this creature transforms into CARDNAME and at the beginning of your first main phase, add two mana of any one color. Spend this mana only to cast spells with mana value 4 or greater.
+SVar:TrigMana:DB$ Mana | Produced$ Any | Amount$ 2 | RestrictValid$ Spell.cmcGE4
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your first main phase, you may pay {R}. If you do, transform NICKNAME.
+SVar:TrigTransform:AB$ SetState | Cost$ R | Defined$ Self | Mode$ Transform
+Oracle:Whenever this creature transforms into Ashling, Rimebound and at the beginning of your first main phase, add two mana of any one color. Spend this mana only to cast spells with mana value 4 or greater.\nAt the beginning of your first main phase, you may pay {R}. If you do, transform Ashling.

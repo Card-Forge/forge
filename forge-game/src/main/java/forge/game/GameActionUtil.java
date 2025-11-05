@@ -19,8 +19,9 @@ package forge.game;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+
+import forge.card.ColorSet;
 import forge.card.GamePieceType;
-import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -787,7 +788,7 @@ public final class GameActionUtil {
         eff.setOwner(controller);
 
         eff.setImageKey(sourceCard.getImageKey());
-        eff.setColor(MagicColor.COLORLESS);
+        eff.setColor(ColorSet.C);
         eff.setGamePieceType(GamePieceType.EFFECT);
         // try to get the SpellAbility from the mana ability
         //eff.setEffectSource((SpellAbility)null);
@@ -878,14 +879,12 @@ public final class GameActionUtil {
         } else if (abMana.isComboMana()) {
             // amount is already taken care of in resolve method for combination mana, just append baseMana
             sb.append(baseMana);
+        } else if (StringUtils.isNumeric(baseMana)) {
+            sb.append(amount * Integer.parseInt(baseMana));
         } else {
-            if (StringUtils.isNumeric(baseMana)) {
-                sb.append(amount * Integer.parseInt(baseMana));
-            } else {
-                sb.append(baseMana);
-                for (int i = 1; i < amount; i++) {
-                    sb.append(" ").append(baseMana);
-                }
+            sb.append(baseMana);
+            for (int i = 1; i < amount; i++) {
+                sb.append(" ").append(baseMana);
             }
         }
         return sb.toString();
@@ -993,9 +992,6 @@ public final class GameActionUtil {
             oldCard.setBackSide(false);
             oldCard.setState(oldCard.getFaceupCardStateName(), true);
             oldCard.unanimateBestow();
-            if (ability.isDisturb() || ability.hasParam("CastTransformed")) {
-                oldCard.undoIncrementTransformedTimestamp();
-            }
 
             if (ability.hasParam("Prototype")) {
                 oldCard.removeCloneState(oldCard.getPrototypeTimestamp());

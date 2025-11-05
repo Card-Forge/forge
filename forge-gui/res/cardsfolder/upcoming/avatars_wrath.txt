@@ -1,0 +1,9 @@
+Name:Avatar's Wrath
+ManaCost:2 W W
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBAirbend | SpellDescription$ Choose up to one target creature, then airbend all other creatures. (Exile them. While each one is exiled, its owner may cast it for {2} rather than its mana cost.) Until your next turn, your opponents can't cast spells from anywhere other than their hands. Exile CARDNAME.
+SVar:DBAirbend:DB$ Airbend | Defined$ Valid Creature.NotDefinedTargeted | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ CantCast | Duration$ UntilYourNextTurn | SubAbility$ DBExile
+SVar:CantCast:Mode$ CantBeCast | ValidCard$ Card.!wasCastFromTheirHand | Caster$ Opponent | Description$ Your opponents can't cast spells from anywhere other than their hands.
+SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
+Oracle:Choose up to one target creature, then airbend all other creatures. (Exile them. While each one is exiled, its owner may cast it for {2} rather than its mana cost.)\nUntil your next turn, your opponents can't cast spells from anywhere other than their hands.\nExile Avatar's Wrath.

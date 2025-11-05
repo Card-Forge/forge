@@ -339,11 +339,11 @@ public class PumpAi extends PumpAiBase {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        if (!pumpTgtAI(ai, sa, defense, attack, false, false)) {
-            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+        if (pumpTgtAI(ai, sa, defense, attack, false, false)) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
     }
 
     private boolean pumpTgtAI(final Player ai, final SpellAbility sa, final int defense, final int attack, final boolean mandatory,
@@ -453,7 +453,7 @@ public class PumpAi extends PumpAiBase {
             }
 
             if (isFight) {
-                return FightAi.canFightAi(ai, sa, attack, defense).willingToPlay();
+                return FightAi.canFight(ai, sa, attack, defense).willingToPlay();
             }
         }
 

@@ -6,8 +6,8 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 import forge.GameCommand;
 import forge.card.CardRarity;
+import forge.card.ColorSet;
 import forge.card.GamePieceType;
-import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -617,10 +617,10 @@ public abstract class SpellAbilityEffect {
         if (name.startsWith("Emblem")) {
             eff.setEmblem(true);
             // Emblem needs to be colorless
-            eff.setColor(MagicColor.COLORLESS);
+            eff.setColor(ColorSet.C);
             eff.setRarity(CardRarity.Common);
         } else {
-            eff.setColor(hostCard.getColor().getColor());
+            eff.setColor(hostCard.getColor());
             eff.setRarity(hostCard.getRarity());
         }
 
@@ -891,10 +891,6 @@ public abstract class SpellAbilityEffect {
                 runParams.put(AbilityKey.Cause, sa);
                 runParams.put(AbilityKey.DiscardedBefore, discardedBefore.get(p));
                 p.getGame().getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);
-
-                if (sa.hasParam("RememberDiscardingPlayers")) {
-                    sa.getHostCard().addRemembered(p);
-                }
             }
         }
     }
@@ -1069,7 +1065,7 @@ public abstract class SpellAbilityEffect {
         // if ability was granted use that source so they can be kept apart later
         if (cause.isCopiedTrait()) {
             exilingSource = cause.getOriginalHost();
-        } else if (cause.getKeyword() != null && cause.getKeyword().getStatic() != null) {
+        } else if (!cause.isSpell() && cause.getKeyword() != null && cause.getKeyword().getStatic() != null) {
             exilingSource = cause.getKeyword().getStatic().getOriginalHost();
         }
         movedCard.setExiledWith(exilingSource);

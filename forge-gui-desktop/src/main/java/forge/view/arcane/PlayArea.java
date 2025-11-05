@@ -107,7 +107,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             for (int i = 0, n = allLands.size(); i < n; i++) {
                 final CardStack stack = allLands.get(i);
                 final CardPanel firstPanel = stack.get(0);
-                if (firstPanel.getCard().getCurrentState().getName().equals(state.getName())) {
+                if (firstPanel.getCard().getCurrentState().getOracleName().equals(state.getOracleName())) {
                     if (!firstPanel.getAttachedPanels().isEmpty() || firstPanel.getCard().hasCardAttachments()) {
                         // Put this land to the left of lands with the same name
                         // and attachments.
@@ -162,7 +162,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 final CardPanel firstPanel = stack.get(0);
                 final CardView firstCard = firstPanel.getCard();
 
-                if (firstPanel.getCard().getCurrentState().getName().equals(state.getName())) {
+                if (firstPanel.getCard().getCurrentState().getOracleName().equals(state.getOracleName())) {
                     if (!firstPanel.getAttachedPanels().isEmpty()) {
                         // Put this token to the left of tokens with the same
                         // name and attachments.
@@ -220,7 +220,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 final CardStack stack = allCreatures.get(i);
                 final CardPanel firstPanel = stack.get(0);
                 final CardView firstCard = firstPanel.getCard();
-                if (firstCard.getName().equals(card.getName())) {
+                if (firstCard.getOracleName().equals(card.getOracleName())) {
                     if (!firstPanel.getAttachedPanels().isEmpty()) {
                         // Put this creature to the left of creatures with the same
                         // name and attachments.
@@ -335,7 +335,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 final CardStateView otherState = otherCard.getCurrentState();
                 final CardView thisCard = panel.getCard();
                 final CardStateView thisState = thisCard.getCurrentState();
-                if (otherState.getName().equals(thisState.getName()) && s.size() < STACK_MAX_OTHERS) {
+                if (otherState.getOracleName().equals(thisState.getOracleName()) && s.size() < STACK_MAX_OTHERS) {
                     if (panel.getAttachedPanels().isEmpty()
                             && thisCard.hasSameCounters(otherCard)
                             && (thisCard.isSick() == otherCard.isSick())

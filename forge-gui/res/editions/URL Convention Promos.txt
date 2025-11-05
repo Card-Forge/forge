@@ -15,6 +15,9 @@ ScryfallCode=PURL
 8 C Aeronaut Tinkerer @Willian Murai
 23 R Kor Skyfisher @Dan Murayama Scott
 34★ U Shepherd of the Lost @Kekai Kotaki
+324 R White Orchid Phantom @Richard Kane Ferguson
 445 M Ral, Monsoon Mage @Borja Pindado
 2025-1 M Hylda of the Icy Crown @Yakotakos
 2025-3 R Katara, the Fearless @Yueko
+2025-4 M Behold the Sinister Six! @Jonas De Ro
+2025-5 R Unbreakable Formation @Xavier Ribeiro

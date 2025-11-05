@@ -349,15 +349,15 @@ ScryfallCode=PIP
 341 M Dr. Madison Li @John Stanko
 342 R Inventory Management @Tim Brumley
 343 M The Wise Mothman @David Gaillet
-344 R Hullbreaker Horror @Tomas Duchek
-345 R Lord of the Undead @John Stanko
-346 M Grave Titan @Mark Poole
-347 R Vigor @Tomas Duchek
-348 R Ayula, Queen Among Bears @Mark Poole
-349 M Tarmogoyf @Robin Olausson
-350 R Hornet Queen @Robin Olausson
-351 R Gemrazer @Evan Shipard
-352 R Walking Ballista @Evan Shipard
+344 R Hullbreaker Horror @Tomas Duchek ${"flavorName": "Prime Mirelurk Queen"}
+345 R Lord of the Undead @John Stanko ${"flavorName": "Centurion of the Marked"}
+346 M Grave Titan @Mark Poole ${"flavorName": "West Tek Tyrant"}
+347 R Vigor @Tomas Duchek ${"flavorName": "Fog Crawler"}
+348 R Ayula, Queen Among Bears @Mark Poole ${"flavorName": "Ruzka, Terror of Point Lookout"}
+349 M Tarmogoyf @Robin Olausson ${"flavorName": "Scrounging Deathclaw"}
+350 R Hornet Queen @Robin Olausson ${"flavorName": "Specimen 73"}
+351 R Gemrazer @Evan Shipard ${"flavorName": "Toxic Sheepsquatch"}
+352 R Walking Ballista @Evan Shipard ${"flavorName": "Assaultron Invader"}
 353 R Farewell @AKQA
 354 M Ravages of War @AKQA
 355 U Vandalblast @AKQA
@@ -877,15 +877,15 @@ ScryfallCode=PIP
 869 M Dr. Madison Li @John Stanko
 870 R Inventory Management @Tim Brumley
 871 M The Wise Mothman @David Gaillet
-872 R Hullbreaker Horror @Tomas Duchek
-873 R Lord of the Undead @John Stanko
-874 M Grave Titan @Mark Poole
-875 R Vigor @Tomas Duchek
-876 R Ayula, Queen Among Bears @Mark Poole
-877 M Tarmogoyf @Robin Olausson
-878 R Hornet Queen @Robin Olausson
-879 R Gemrazer @Evan Shipard
-880 R Walking Ballista @Evan Shipard
+872 R Hullbreaker Horror @Tomas Duchek ${"flavorName": "Prime Mirelurk Queen"}
+873 R Lord of the Undead @John Stanko ${"flavorName": "Centurion of the Marked"}
+874 M Grave Titan @Mark Poole ${"flavorName": "West Tek Tyrant"}
+875 R Vigor @Tomas Duchek ${"flavorName": "Fog Crawler"}
+876 R Ayula, Queen Among Bears @Mark Poole ${"flavorName": "Ruzka, Terror of Point Lookout"}
+877 M Tarmogoyf @Robin Olausson ${"flavorName": "Scrounging Deathclaw"}
+878 R Hornet Queen @Robin Olausson ${"flavorName": "Specimen 73"}
+879 R Gemrazer @Evan Shipard ${"flavorName": "Toxic Sheepsquatch"}
+880 R Walking Ballista @Evan Shipard ${"flavorName": "Assaultron Invader"}
 881 R Farewell @AKQA
 882 M Ravages of War @AKQA
 883 U Vandalblast @AKQA

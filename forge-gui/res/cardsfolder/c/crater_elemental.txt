@@ -4,7 +4,7 @@ Types:Creature Elemental
 PT:0/6
 A:AB$ DealDamage | Cost$ R T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ It deals 4 damage to target creature.
 A:AB$ Animate | Cost$ 2 R | Defined$ Self | Power$ 8 | CheckSVar$ FormidableTest | SVarCompare$ GE8 | PrecostDesc$ Formidable — | SpellDescription$ CARDNAME has base power 8 until end of turn. Activate only if creatures you control have total power 8 or greater.
-SVar:FormidableTest:Count$SumPower_Creature.YouCtrl
+SVar:FormidableTest:Count$Valid Creature.YouCtrl$CardPower
 AI:RemoveDeck:All
 DeckHas:Ability$Sacrifice
 Oracle:{R}, {T}, Sacrifice Crater Elemental: It deals 4 damage to target creature.\nFormidable — {2}{R}: Crater Elemental has base power 8 until end of turn. Activate only if creatures you control have total power 8 or greater.

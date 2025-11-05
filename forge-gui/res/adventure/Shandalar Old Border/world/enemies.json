@@ -459,7 +459,7 @@
 					"Land"
 				],
 				"colorType": "Colorless",
-				"cardText": "{R}"
+				"cardText": "\\{R\\}"
 			},
 			{
 				"type": "shards",
@@ -544,7 +544,7 @@
 					"Land"
 				],
 				"colorType": "Colorless",
-				"cardText": "{R}"
+				"cardText": "\\{R\\}"
 			},
 			{
 				"type": "shards",
@@ -1032,7 +1032,7 @@
 					"Land"
 				],
 				"colorType": "Colorless",
-				"cardText": "{W}"
+				"cardText": "\\{W\\}"
 			}
 		],
 		"colors": "W",
@@ -2149,7 +2149,7 @@
 					"Land"
 				],
 				"colorType": "Colorless",
-				"cardText": "{C}"
+				"cardText": "\\{C\\}"
 			}
 		],
 		"colors": "U",
@@ -3433,7 +3433,7 @@
 					"Land"
 				],
 				"colorType": "Colorless",
-				"cardText": "{C}"
+				"cardText": "\\{C\\}"
 			},
 			{
 				"type": "shards",
@@ -3508,7 +3508,7 @@
 					"Land"
 				],
 				"colorType": "Colorless",
-				"cardText": "{C}"
+				"cardText": "\\{C\\}"
 			},
 			{
 				"type": "shards",
@@ -3845,7 +3845,7 @@
 					"Land"
 				],
 				"colorType": "Colorless",
-				"cardText": "{R}"
+				"cardText": "\\{R\\}"
 			},
 			{
 				"type": "shards",
@@ -5154,7 +5154,7 @@
 			"Aberration",
 			"Animal",
 			"Chandra",
-			"FIre",
+			"Fire",
 			"IdentityRed"
 		]
 	},
@@ -5259,7 +5259,7 @@
 			"Human",
 			"Pyromancer",
 			"Wizard",
-			"FIre",
+			"Fire",
 			"IdentityRed"
 		]
 	},
@@ -5364,7 +5364,7 @@
 			"Pyromancer",
 			"Human",
 			"Wizard",
-			"FIre",
+			"Fire",
 			"IdentityRed"
 		]
 	},
@@ -5469,7 +5469,7 @@
 			"Wizard",
 			"Chandra",
 			"Human",
-			"FIre",
+			"Fire",
 			"IdentityRed"
 		]
 	},
@@ -10749,7 +10749,7 @@
 					"Land"
 				],
 				"colorType": "Colorless",
-				"cardText": "{R}"
+				"cardText": "\\{R\\}"
 			}
 		],
 		"colors": "R",
@@ -10837,7 +10837,7 @@
 		],
 		"colors": "R",
 		"questTags": [
-			"FIre",
+			"Fire",
 			"Elemental",
 			"Humanoid",
 			"Flying",
@@ -13150,7 +13150,7 @@
 					"Land"
 				],
 				"colorType": "Colorless",
-				"cardText": "{C}"
+				"cardText": "\\{C\\}"
 			},
 			{
 				"type": "shards",
@@ -16103,7 +16103,7 @@
 	},
 	{
 		"name": "Human elite",
-		"nameOverride": "Legionaire",
+		"nameOverride": "Legionnaire",
 		"sprite": "sprites/enemy/humanoid/human/soldier/legionite.atlas",
 		"deck": [
 			"decks/standard/human_good.json"
@@ -22301,7 +22301,7 @@
 					"Land"
 				],
 				"colorType": "Colorless",
-				"cardText": "{C}"
+				"cardText": "\\{C\\}"
 			},
 			{
 				"type": "shards",
@@ -22376,7 +22376,7 @@
 					"Land"
 				],
 				"colorType": "Colorless",
-				"cardText": "{C}"
+				"cardText": "\\{C\\}"
 			},
 			{
 				"type": "shards",
@@ -27417,7 +27417,7 @@
 					"Land"
 				],
 				"colorType": "Colorless",
-				"cardText": "{R}"
+				"cardText": "\\{R\\}"
 			}
 		],
 		"colors": "R",

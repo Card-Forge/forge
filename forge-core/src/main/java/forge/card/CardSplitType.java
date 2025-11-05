@@ -1,7 +1,5 @@
 package forge.card;
 
-import forge.card.CardFace.FaceSelectionMethod;
-
 import java.util.EnumSet;
 
 public enum CardSplitType
@@ -40,5 +38,11 @@ public enum CardSplitType
 
     public CardStateName getChangedStateName() {
         return changedStateName;
+    }
+
+    public enum FaceSelectionMethod {
+        USE_ACTIVE_FACE,
+        USE_PRIMARY_FACE,
+        COMBINE
     }
 }

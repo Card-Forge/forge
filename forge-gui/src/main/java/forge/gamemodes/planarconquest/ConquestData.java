@@ -291,16 +291,16 @@ public final class ConquestData {
                     commandersBeingExiled.add(commander); //cache commander to make it easier to remove later
                 }
                 if (commander.getDeck().getMain().contains(card)) {
-                    commandersUsingCard.append("\n").append(CardTranslation.getTranslatedName(commander.getName()));
+                    commandersUsingCard.append("\n").append(CardTranslation.getTranslatedName(commander.getDisplayName()));
                 }
             }
-
-            if (!commandersUsingCard.isEmpty()) {
-                SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblCommandersCardCannotBeExiledByCard", CardTranslation.getTranslatedName(card.getName()), commandersUsingCard), title, SOptionPane.INFORMATION_ICON);
+            // Android API StringBuilder isEmpty() is unavailable. https://developer.android.com/reference/java/lang/StringBuilder
+            if (commandersUsingCard.length() != 0) {
+                SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblCommandersCardCannotBeExiledByCard", CardTranslation.getTranslatedName(card.getDisplayName()), commandersUsingCard), title, SOptionPane.INFORMATION_ICON);
                 return false;
             }
 
-            message.append("\n").append(CardTranslation.getTranslatedName(card.getName()));
+            message.append("\n").append(CardTranslation.getTranslatedName(card.getDisplayName()));
         }
 
         if (SOptionPane.showConfirmDialog(message.toString(), title, Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel"))) {

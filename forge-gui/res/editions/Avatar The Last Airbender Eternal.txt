@@ -6,12 +6,70 @@ Type=Expansion
 ScryfallCode=TLE
 
 [cards]
+1 M Brought Back @Viacom
+3 M Empty City Ruse @Viacom
+5 M Release to Memory @Viacom
+6 M Scout's Warning @Viacom
+7 M Teferi's Protection ${"flavorName": "Aang's Shelter"}
+9 M Agent of Treachery @Viacom
+10 M Bribery @Viacom
+11 M Clone @Viacom
+12 M Clone Legion @Viacom
 13 M Force of Negation @Viacom
-41 M The Great Henge @Viacom
+14 M Imprisoned in the Moon @Viacom
+16 M Mystic Remora @Viacom
+17 M Prosperity @Viacom
+19 M Standstill @Viacom
+20 M Training Grounds @Viacom
+23 M Bloodchief Ascension @Viacom ${"flavorName": "Bloodbender's Rise"}
+24 M Cruel Tutor @Viacom
+25 M Noxious Gearhulk @Viacom ${"flavorName": "Fire Nation Tank Train"}
+26 M Blasphemous Act @Viacom
+28 M Dockside Extortionist @Viacom
+33 M Mirrorwing Dragon @Viacom
+34 M Rending Volley @Viacom
+35 M Searing Blood @Viacom
+36 M Shattering Spree @Viacom
+39 M Beastmaster Ascension @Viacom
+41 M The Great Henge @Viacom ${"flavorName": "The Banyan Tree"}
+42 M Heartbeat of Spring @Viacom
+43 M Heroic Intervention @Viacom
+44 M Return of the Wildspeaker @Viacom ${"flavorName": "Earth Rumble Triumph"}
+45 M Rites of Flourishing @Viacom
+48 M Eladamri's Call @Viacom ${"flavorName": "Lifelong Friendship"}
+51 M Koma, Cosmos Serpent @Viacom ${"flavorName": "The Monstrous Serpent"}
+52 M Rhys the Redeemed @Viacom
+53 M Cityscape Leveler @Viacom
+55 M Sundial of the Infinite @Viacom
+56 M Dark Depths @Viacom ${"flavorName": "The Boy in the Iceberg"}
+61 M Valakut, the Molten Pinnacle @Viacom ${"flavorName": "Volcano of Roku's Island"}
+62 R Appa, the Vigilant @Fahmi Fauzi
+63 R Katara's Reversal @Fahmi Fauzi
+64 R Fire Nation Turret @Fahmi Fauzi
+65 R Swampbenders @Fahmi Fauzi
+66 R Sokka's Charge @Fahmi Fauzi
+67 R Earthshape @Fahmi Fauzi
+68 R Mai and Zuko @Brian Yuen
+69 R Aang and Katara @Brian Yuen
+70 R Toph, Greatest Earthbender @Brian Yuen
+71 R Sokka and Suki @Brian Yuen
+72 R Momo's Heist @Brian Yuen
+73 R Uncle's Musings @Brian Yuen
 74 M Aang, Airbending Master @Tomoyo Asatani
+83 M Sokka, Swordmaster @Jason Kiantoro
 93 M Katara, Waterbending Master @Yueko
+98 M Wan Shi Tong, All-Knowing @Axel Sauerwald
+101 M Azula, Ruthless Firebender @Rose Benjamin
 104 M Fire Lord Ozai @Ryuichi Sakuma
+112 M Avatar Roku, Firebender @Toni Infante
+115 R Fang, Roku's Companion @Douzen
+127 M Zuko, Firebending Master @Kinota Eishi
+130 M Avatar Kyoshi, Earthbender @Tetsuko
 134 R The Cabbage Merchant @Patrick Gañas
+139 M Hei Bai, Forest Guardian @TAPIOCA
+145 M Toph, Earthbending Master @Phima
+165 R Fiery Confluence @Salvatorre Zee Yazzie
+167 R Descendants' Path @Pauline Voss
 210 R Aang, Air Nomad @Jinho Bae
 211 C Aang's Defense @Jo Cordisco
 212 C Aardvark Sloth @Ionomycin
@@ -56,7 +114,7 @@ ScryfallCode=TLE
 251 C Frog-Squirrels @Daniel Romanovsky
 252 C Hippo-Cows @Brandon L. Hunt
 253 U Match the Odds @Eilene Cherie
-254 R Seismic Tutelage
+254 R Seismic Tutelage @Florent Lebrun
 255 U Hog-Monkey Rampage @Daniel Romanovsky
 256 C Mechanical Glider @Salvatorre Zee Yazzie
 257 C Feed the Swarm @Kotakan
@@ -107,3 +165,6 @@ ScryfallCode=TLE
 302 L Plains @Slawek Fedorczuk
 303 L Plains @Slawek Fedorczuk
 304 L Plains @Slawek Fedorczuk
+315 R Arcane Signet @Shane Beresford
+316 R Sol Ring @Barbara Rosiak
+317 R Swiftfoot Boots @Barbara Rosiak

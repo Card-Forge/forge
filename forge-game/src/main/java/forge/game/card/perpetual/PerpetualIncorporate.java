@@ -17,7 +17,7 @@ public record PerpetualIncorporate(long timestamp, ManaCost incorporate) impleme
         ColorSet colors = ColorSet.fromMask(incorporate.getColorProfile());
         final ManaCost newCost = ManaCost.combine(c.getManaCost(), incorporate);
         c.addChangedManaCost(newCost, timestamp, (long) 0);
-        c.addColor(colors, true, timestamp, (long) 0, false);
+        c.addColor(colors, true, timestamp, null);
         c.updateManaCostForView();
 
         if (c.getFirstSpellAbility() != null) {

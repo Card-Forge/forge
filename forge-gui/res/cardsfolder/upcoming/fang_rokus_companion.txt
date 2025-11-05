@@ -1,0 +1,13 @@
+Name:Fang, Roku's Companion
+ManaCost:3 R R
+Types:Legendary Creature Dragon
+PT:4/4
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever NICKNAME attacks, another target legendary creature you control gets +X/+0 until end of turn, where X is NICKNAME's power.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+Legendary+YouCtrl | TgtPrompt$ Select another target legendary creature you control | NumAtt$ +X
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+nonSpirit | Execute$ DBReturn | TriggerDescription$ When NICKNAME dies, if he wasn't a Spirit, return this card to the battlefield under your control. He's a Spirit in addition to his other types.
+SVar:DBReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | StaticEffect$ Animate
+SVar:Animate:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Spirit
+SVar:X:Count$CardPower
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nWhenever Fang attacks, another target legendary creature you control gets +X/+0 until end of turn, where X is Fang's power.\nWhen Fang dies, if he wasn't a Spirit, return this card to the battlefield under your control. He's a Spirit in addition to his other types.

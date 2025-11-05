@@ -22,6 +22,7 @@ import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardType;
+import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
@@ -993,30 +994,17 @@ public class DeckRecognizer {
 
     private static String getMagicColourLabel(MagicColor.Color magicColor) {
         if (magicColor == null) // Multicolour
-            return String.format("%s {W}{U}{B}{R}{G}", getLocalisedMagicColorName("Multicolour"));
-        return String.format("%s %s", magicColor.getLocalizedName(), magicColor.getSymbol());
+            return String.format("%s {W}{U}{B}{R}{G}", Localizer.getInstance().getMessage("lblMulticolor"));
+        return String.format("%s %s", magicColor.getTranslatedName(), magicColor.getSymbol());
     }
 
-    private static final HashMap<Integer, String> manaSymbolsMap = new HashMap<Integer, String>() {{
-        put(MagicColor.WHITE | MagicColor.BLUE, "WU");
-        put(MagicColor.BLUE | MagicColor.BLACK, "UB");
-        put(MagicColor.BLACK | MagicColor.RED, "BR");
-        put(MagicColor.RED | MagicColor.GREEN, "RG");
-        put(MagicColor.GREEN | MagicColor.WHITE, "GW");
-        put(MagicColor.WHITE | MagicColor.BLACK, "WB");
-        put(MagicColor.BLUE | MagicColor.RED, "UR");
-        put(MagicColor.BLACK | MagicColor.GREEN, "BG");
-        put(MagicColor.RED | MagicColor.WHITE, "RW");
-        put(MagicColor.GREEN | MagicColor.BLUE, "GU");
-    }};
-    private static String getMagicColourLabel(MagicColor.Color magicColor1, MagicColor.Color magicColor2){
+    private static String getMagicColourLabel(MagicColor.Color magicColor1, MagicColor.Color magicColor2) {
         if (magicColor2 == null || magicColor2 == MagicColor.Color.COLORLESS
                 || magicColor1 == MagicColor.Color.COLORLESS)
             return String.format("%s // %s", getMagicColourLabel(magicColor1), getMagicColourLabel(magicColor2));
-        String localisedName1 = magicColor1.getLocalizedName();
-        String localisedName2 = magicColor2.getLocalizedName();
-        String comboManaSymbol = manaSymbolsMap.get(magicColor1.getColorMask() | magicColor2.getColorMask());
-        return String.format("%s/%s {%s}", localisedName1, localisedName2, comboManaSymbol);
+        String localisedName1 = magicColor1.getTranslatedName();
+        String localisedName2 = magicColor2.getTranslatedName();
+        return String.format("%s/%s {%s}", localisedName1, localisedName2, ColorSet.fromEnums(magicColor1, magicColor2));
     }
 
     private static MagicColor.Color getMagicColor(String colorName){

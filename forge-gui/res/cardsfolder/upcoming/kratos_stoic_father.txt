@@ -1,0 +1,14 @@
+Name:Kratos, Stoic Father
+ManaCost:2 R W
+Types:Legendary Creature God Warrior
+PT:4/4
+K:Partner - Father & Son
+T:Mode$ AttackersDeclared | ValidAttackers$ God.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigExperience | TriggerDescription$ Whenever you attack with one or more Gods and whenever a God dies, you get an experience counter.
+T:Mode$ ChangesZone | ValidCard$ God | TriggerZones$ Battlefield | Secondary$ True | Destination$ Graveyard | Execute$ TrigExperience | TriggerDescription$ Whenever you attack with one or more Gods and whenever a God dies, you get an experience counter.
+SVar:TrigExperience:DB$ PutCounter | Defined$ You | CounterType$ Experience | CounterNum$ 1
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, put a number of +1/+1 counters on target creature equal to the number of experience counters you have.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ X
+SVar:X:Count$YourCountersExperience
+DeckHas:Ability$Counters
+DeckHints:Type$God
+Oracle:Whenever you attack with one or more Gods and whenever a God dies, you get an experience counter.\nAt the beginning of your end step, put a number of +1/+1 counters on target creature equal to the number of experience counters you have.\nPartner—Father & son (You can have two commanders if both have this ability.)

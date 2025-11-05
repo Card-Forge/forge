@@ -14,6 +14,7 @@ import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.IAfterMatch;
 import forge.adventure.util.AdventureEventController;
+import forge.adventure.util.AdventureModes;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.assets.FBufferedImage;
@@ -197,6 +198,8 @@ public class DuelScene extends ForgeScene {
         String isDeckMissingMsg = "";
         if (eventData != null && eventData.eventRules != null) {
             mainGameType = eventData.eventRules.gameType;
+        } else if (AdventurePlayer.current().getAdventureMode() == AdventureModes.Commander){
+            mainGameType = GameType.Commander;
         } else {
             mainGameType = GameType.Adventure;
         }
@@ -277,7 +280,7 @@ public class DuelScene extends ForgeScene {
 
         currentEnemy = enemy.getData();
         boolean bossBattle = currentEnemy.boss;
-        for (int i = 0; i < 8 && currentEnemy != null; i++) {
+        for (int i = 0; i < playerCount && currentEnemy != null; i++) {
             Deck deck;
 
             if (this.chaosBattle) { //random challenge for chaos mode

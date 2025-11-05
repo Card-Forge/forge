@@ -57,6 +57,8 @@ import forge.item.PaperCard;
 import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import io.sentry.Breadcrumb;
+import io.sentry.Sentry;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jgrapht.alg.cycle.SzwarcfiterLauerSimpleCycles;
 import org.jgrapht.graph.DefaultDirectedGraph;
@@ -220,11 +222,8 @@ public class GameAction {
                     //copied.setGamePieceType(GamePieceType.COPIED_SPELL);
                 }
 
-                if (c.isTransformed()) {
-                    copied.incrementTransformedTimestamp();
-                }
-
                 if (cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
+                    copied.setCastFrom(zoneFrom);
                     copied.setCastSA(cause);
                     copied.setSplitStateToPlayAbility(cause);
 
@@ -234,6 +233,13 @@ public class GameAction {
                     KeywordInterface kw = cause.getKeyword();
                     if (kw != null) {
                         copied.addKeywordForStaticAbility(kw);
+
+                        // CR 400.7g If an effect grants a nonland card an ability that allows it to be cast,
+                        // that ability will continue to apply to the new object that card became after it moved to the stack as a result of being cast this way.
+                        if (!cause.isIntrinsic()) {
+                            kw.setHostCard(copied);
+                            copied.addChangedCardKeywordsInternal(ImmutableList.of(kw), null, false, copied.getGameTimestamp(), kw.getStatic(), false);
+                        }
                     }
                 }
             } else {
@@ -302,7 +308,6 @@ public class GameAction {
             // Temporary disable commander replacement effect
             // 903.9a
             if (fromBattlefield && !toBattlefield && c.isCommander() && c.hasMergedCard()) {
-                // Disable the commander replacement effect
                 c.getOwner().setCommanderReplacementSuppressed(true);
             }
 
@@ -447,14 +452,8 @@ public class GameAction {
             }
 
             if (zoneFrom.is(ZoneType.Stack) && toBattlefield) {
-                // 400.7a Effects from static abilities that give a permanent spell on the stack an ability
-                // that allows it to be cast for an alternative cost continue to apply to the permanent that spell becomes.
-                if (c.getCastSA() != null && !c.getCastSA().isIntrinsic() && c.getKeywords().contains(c.getCastSA().getKeyword())) {
-                    KeywordInterface ki = c.getCastSA().getKeyword();
-                    ki.setHostCard(copied);
-                    copied.addChangedCardKeywordsInternal(ImmutableList.of(ki), null, false, copied.getGameTimestamp(), null, true);
-                }
-                // TODO hot fix for non-intrinsic offspring
+                // CR 400.7b Effects from static abilities that grant an ability to a permanent spell that functions on the battlefield
+                // continue to apply to the permanent that spell becomes
                 Multimap<StaticAbility, KeywordInterface> addKw = MultimapBuilder.hashKeys().arrayListValues().build();
                 for (KeywordInterface kw : c.getKeywords(Keyword.OFFSPRING)) {
                     if (!kw.isIntrinsic()) {
@@ -467,7 +466,7 @@ public class GameAction {
                     }
                 }
 
-                // 607.2q linked ability can find cards exiled as cost while it was a spell
+                // CR 607.2q linked ability can find cards exiled as cost while it was a spell
                 copied.addExiledCards(c.getExiledCards());
             }
 
@@ -488,7 +487,7 @@ public class GameAction {
                 if (card.isRealCommander()) {
                     card.setMoveToCommandZone(true);
                 }
-                // 727.3e & 903.9a
+                // CR 727.3e & 903.9a
                 if (wasToken && !card.isRealToken() || card.isRealCommander()) {
                     Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(card);
                     repParams.put(AbilityKey.CardLKI, card);
@@ -562,13 +561,6 @@ public class GameAction {
 
         // update static abilities after etb counters have been placed
         checkStaticAbilities();
-
-        // 400.7g try adding keyword back into card if it doesn't already have it
-        if (zoneTo.is(ZoneType.Stack) && cause != null && cause.isSpell() && !cause.isIntrinsic() && c.equals(cause.getHostCard())) {
-            if (cause.getKeyword() != null && !copied.getKeywords().contains(cause.getKeyword())) {
-                copied.addChangedCardKeywordsInternal(ImmutableList.of(cause.getKeyword()), null, false, game.getNextTimestamp(), null, true);
-            }
-        }
 
         // CR 603.6b
         if (toBattlefield) {
@@ -753,26 +745,29 @@ public class GameAction {
 
     public final Card moveTo(final ZoneType name, final Card c, final int libPosition, SpellAbility cause, Map<AbilityKey, Object> params) {
         // Call specific functions to set PlayerZone, then move onto moveTo
-        switch(name) {
-            case Hand:          return moveToHand(c, cause, params);
-            case Library:       return moveToLibrary(c, libPosition, cause, params);
-            case Battlefield:   return moveToPlay(c, c.getController(), cause, params);
-            case Graveyard:     return moveToGraveyard(c, cause, params);
-            case Exile:
-                if (!c.canExiledBy(cause, true)) {
-                    return null;
-                }
-                return exile(c, cause, params);
-            case Stack:         return moveToStack(c, cause, params);
-            case PlanarDeck:
-            case SchemeDeck:
-            case AttractionDeck:
-            case ContraptionDeck:
-                return moveToVariantDeck(c, name, libPosition, cause, params);
-            case Junkyard:
-                return moveToJunkyard(c, cause, params);
-            default: // sideboard will also get there
-                return moveTo(c.getOwner().getZone(name), c, cause);
+        try {
+            return switch (name) {
+                case Hand -> moveToHand(c, cause, params);
+                case Library -> moveToLibrary(c, libPosition, cause, params);
+                case Battlefield -> moveToPlay(c, c.getController(), cause, params);
+                case Graveyard -> moveToGraveyard(c, cause, params);
+                case Exile -> !c.canExiledBy(cause, true) ? null : exile(c, cause, params);
+                case Stack -> moveToStack(c, cause, params);
+                case PlanarDeck, SchemeDeck, AttractionDeck, ContraptionDeck -> moveToVariantDeck(c, name, libPosition, cause, params);
+                case Junkyard -> moveToJunkyard(c, cause, params);
+                default -> moveTo(c.getOwner().getZone(name), c, cause); // sideboard will also get there
+            };
+        } catch (Exception e) {
+            String msg = "GameAction:moveTo: Exception occured";
+
+            Breadcrumb bread = new Breadcrumb(msg);
+            bread.setData("Card", c.getName());
+            bread.setData("SA", cause.toString());
+            bread.setData("ZoneType", name.name());
+            bread.setData("Player", c.getOwner());
+            Sentry.addBreadcrumb(bread);
+
+            throw new RuntimeException("Error in GameAction moveTo " + c.getName() + " to Player Zone " + name.name(), e);
         }
     }
 
@@ -824,19 +819,6 @@ public class GameAction {
                 }
                 game.getMaingame().getAction().moveTo(ZoneType.Subgame, maingameCard, null, params);
             }
-        }
-
-        if (zoneTo.is(ZoneType.Stack)) {
-            c.setCastFrom(zoneFrom);
-            if (cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
-                c.setCastSA(cause);
-            } else {
-                c.setCastSA(null);
-            }
-        } else if (zoneFrom == null || !(zoneFrom.is(ZoneType.Stack) &&
-                (zoneTo.is(ZoneType.Battlefield) || zoneTo.is(ZoneType.Merged)))) {
-            c.setCastFrom(null);
-            c.setCastSA(null);
         }
 
         if (c.isRealCommander()) {
@@ -1601,9 +1583,7 @@ public class GameAction {
         }
 
         // recheck the game over condition at this point to make sure no other win conditions apply now.
-        if (!game.isGameOver()) {
-            checkGameOverCondition();
-        }
+        checkGameOverCondition();
 
         if (game.getAge() != GameStage.Play) {
             return false;
@@ -1884,6 +1864,10 @@ public class GameAction {
     }
 
     public void checkGameOverCondition() {
+        if (game.isGameOver()) {
+            return;
+        }
+
         // award loses as SBE
         GameEndReason reason = null;
         List<Player> losers = null;

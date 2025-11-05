@@ -684,10 +684,10 @@ public class ConquestMultiverseScreen extends FScreen {
             float labelHeight = playerAvatar.getTop();
 
             if (playerAvatar.card != null) {
-                g.drawText(playerAvatar.card.getName(), AVATAR_NAME_FONT, Color.WHITE, PADDING, 0, labelWidth, labelHeight, false, Align.left, true);
+                g.drawText(playerAvatar.card.getDisplayName(), AVATAR_NAME_FONT, Color.WHITE, PADDING, 0, labelWidth, labelHeight, false, Align.left, true);
             }
             if (opponentAvatar.card != null) {
-                g.drawText(opponentAvatar.card.getName(), AVATAR_NAME_FONT, Color.WHITE, getWidth() - labelWidth - PADDING, getHeight() - labelHeight, labelWidth, labelHeight, false, Align.right, true);
+                g.drawText(opponentAvatar.card.getDisplayName(), AVATAR_NAME_FONT, Color.WHITE, getWidth() - labelWidth - PADDING, getHeight() - labelHeight, labelWidth, labelHeight, false, Align.right, true);
             }
         }
 

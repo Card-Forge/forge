@@ -2,7 +2,6 @@ package forge.game.card;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.ColorSet;
@@ -64,12 +63,6 @@ public class CardProperty {
             String name = TextUtil.fastReplace(property.substring(5), ";", ","); // workaround for card name with ","
             name = TextUtil.fastReplace(name, "_", " ");
             if (!card.sharesNameWith(name)) {
-                return false;
-            }
-        } else if (property.startsWith("notnamed")) {
-            String name = TextUtil.fastReplace(property.substring(8), ";", ","); // workaround for card name with ","
-            name = TextUtil.fastReplace(name, "_", " ");
-            if (card.sharesNameWith(name)) {
                 return false;
             }
         } else if (property.equals("NamedCard")) {
@@ -726,17 +719,6 @@ public class CardProperty {
                     return false;
                 }
             }
-        } else if (property.equals("Party")) {
-            boolean isParty = false;
-            Set<String> partyTypes = Sets.newHashSet("Cleric", "Rogue", "Warrior", "Wizard");
-            Set<String> cTypes = card.getType().getCreatureTypes();
-            for (String t : partyTypes) {
-                if (cTypes.contains(t)) {
-                    isParty = true;
-                    break;
-                }
-            }
-            return isParty;
         } else if (property.startsWith("sharesCreatureTypeWith")) {
             if (property.equals("sharesCreatureTypeWith")) {
                 if (!card.sharesCreatureTypeWith(source)) {
@@ -1564,8 +1546,6 @@ public class CardProperty {
                     return false;
                 }
             }
-        } else if (property.startsWith("notattacking")) {
-            return null == combat || !combat.isAttacking(card);
         } else if (property.startsWith("enlistedThisCombat")) {
             if (card.getEnlistedThisCombat() == false) return false;
         } else if (property.startsWith("attackedThisCombat")) {
@@ -1619,8 +1599,6 @@ public class CardProperty {
             if (Collections.disjoint(combat.getAttackersBlockedBy(source), combat.getAttackersBlockedBy(card))) {
                 return false;
             }
-        } else if (property.startsWith("notblocking")) {
-            return null == combat || !combat.isBlocking(card);
         }
         // Nex predicates refer to past combat and don't need a reference to actual combat
         else if (property.equals("blocked")) {
@@ -2068,16 +2046,6 @@ public class CardProperty {
                     }
                 }
                 if (!found) {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        } else if (property.startsWith("NotTriggered")) {
-            final String key = property.substring("NotTriggered".length());
-            if (spellAbility instanceof SpellAbility) {
-                SpellAbility sa = (SpellAbility) spellAbility;
-                if (card.equals(sa.getRootAbility().getTriggeringObject(AbilityKey.fromString(key)))) {
                     return false;
                 }
             } else {

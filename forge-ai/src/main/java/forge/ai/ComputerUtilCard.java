@@ -500,7 +500,7 @@ public class ComputerUtilCard {
         }
 
         List<Card> lands = CardLists.filter(list, CardPredicates.LANDS);
-        if (lands.size() > 6) {
+        if (lands.size() > 6 || lands.size() == Iterables.size(list)) {
             return getWorstLand(lands);
         }
 
@@ -1060,7 +1060,6 @@ public class ComputerUtilCard {
 
     public static boolean useRemovalNow(final SpellAbility sa, final Card c, final int dmg, ZoneType destination) {
         final Player ai = sa.getActivatingPlayer();
-        final AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
         final Game game = ai.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
         final PhaseType phaseType = ph.getPhase();
@@ -1207,7 +1206,7 @@ public class ComputerUtilCard {
             }
         } else if (c.isPlaneswalker()) {
             threat = 1;
-        } else if (aic.getBooleanProperty(AiProps.ACTIVELY_DESTROY_ARTS_AND_NONAURA_ENCHS) && ((c.isArtifact() && !c.isCreature()) || (c.isEnchantment() && !c.isAura()))) {
+        } else if (AiProfileUtil.getBoolProperty(ai, AiProps.ACTIVELY_DESTROY_ARTS_AND_NONAURA_ENCHS) && ((c.isArtifact() && !c.isCreature()) || (c.isEnchantment() && !c.isAura()))) {
             // non-creature artifacts and global enchantments with suspicious intrinsic abilities
             boolean priority = false;
             if (c.getOwner().isOpponentOf(ai) && c.getController().isOpponentOf(ai)) {
@@ -1311,7 +1310,7 @@ public class ComputerUtilCard {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
             simAI = aic.usesSimulation();
             if (!simAI) {
-                holdCombatTricks = aic.getBooleanProperty(AiProps.TRY_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK);
+                holdCombatTricks = aic.getBoolProperty(AiProps.TRY_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK);
                 chanceToHoldCombatTricks = aic.getIntProperty(AiProps.CHANCE_TO_HOLD_COMBAT_TRICKS_UNTIL_BLOCK);
             }
         }
@@ -1640,7 +1639,7 @@ public class ComputerUtilCard {
             // if we got here, Berserk will result in the pumped creature dying at EOT and the opponent will not lose
             // (other similar cards with AILogic$ Berserk that do not die only when attacking are excluded from consideration)
             if (ai.getController() instanceof PlayerControllerAi) {
-                boolean aggr = ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.USE_BERSERK_AGGRESSIVELY)
+                boolean aggr = ((PlayerControllerAi) ai.getController()).getAi().getBoolProperty(AiProps.USE_BERSERK_AGGRESSIVELY)
                         || sa.hasParam("AtEOT");
                 if (!aggr) {
                     return false;
@@ -1907,17 +1906,10 @@ public class ComputerUtilCard {
             return oppCards;
         }
 
-        boolean enablePriorityRemoval = false;
-        boolean priorityRemovalOnlyInDanger = false;
-        int priorityRemovalThreshold = 0;
-        int lifeInDanger = 5;
-        if (ai.getController().isAI()) {
-            AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-            enablePriorityRemoval = aic.getBooleanProperty(AiProps.ACTIVELY_DESTROY_IMMEDIATELY_UNBLOCKABLE);
-            priorityRemovalThreshold = aic.getIntProperty(AiProps.DESTROY_IMMEDIATELY_UNBLOCKABLE_THRESHOLD);
-            priorityRemovalOnlyInDanger = aic.getBooleanProperty(AiProps.DESTROY_IMMEDIATELY_UNBLOCKABLE_ONLY_IN_DNGR);
-            lifeInDanger = aic.getIntProperty(AiProps.DESTROY_IMMEDIATELY_UNBLOCKABLE_LIFE_IN_DNGR);
-        }
+        boolean enablePriorityRemoval = AiProfileUtil.getBoolProperty(ai, AiProps.ACTIVELY_DESTROY_IMMEDIATELY_UNBLOCKABLE);
+        int priorityRemovalThreshold = AiProfileUtil.getIntProperty(ai, AiProps.DESTROY_IMMEDIATELY_UNBLOCKABLE_THRESHOLD);
+        boolean priorityRemovalOnlyInDanger = AiProfileUtil.getBoolProperty(ai, AiProps.DESTROY_IMMEDIATELY_UNBLOCKABLE_ONLY_IN_DNGR);
+        int lifeInDanger = AiProfileUtil.getIntProperty(ai, AiProps.DESTROY_IMMEDIATELY_UNBLOCKABLE_LIFE_IN_DNGR);
 
         if (!enablePriorityRemoval) {
             // Nothing to do here, the profile does not allow prioritizing

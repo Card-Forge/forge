@@ -5,5 +5,5 @@ PT:0/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBVenture | TriggerDescription$ When CARDNAME enters, venture into the dungeon. (Enter the first room or advance to the next room.)
 SVar:DBVenture:DB$ Venture | Defined$ You
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddKeyword$ Flying | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as you've completed a dungeon, CARDNAME gets +3/+0 and has flying.
-SVar:X:PlayerCountPropertyYou$DungeonsCompleted
+SVar:X:DungeonsCompleted$Amount
 Oracle:When Cloister Gargoyle enters, venture into the dungeon. (Enter the first room or advance to the next room.)\nAs long as you've completed a dungeon, Cloister Gargoyle gets +3/+0 and has flying.
