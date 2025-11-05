@@ -363,38 +363,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if (this.difficultyData.sellFactor == 0)
             this.difficultyData.sellFactor = 0.2f;
 
-        //BEGIN SPECIAL CASES
-        //Previously these were not being read from or written to save files, causing defaults to appear after reload
-        //Pull from config if appropriate
-        DifficultyData configuredDifficulty = null;
-        for (DifficultyData candidate : Config.instance().getConfigData().difficulties) {
-            if (candidate.name.equals(this.difficultyData.name)) {
-                configuredDifficulty = candidate;
-                break;
-            }
-        }
-
-        if (configuredDifficulty != null && (this.difficultyData.shardSellRatio == data.readFloat("shardSellRatio") || data.readFloat("shardSellRatio") == 0))
-            this.difficultyData.shardSellRatio = configuredDifficulty.shardSellRatio;
-        else
-            this.difficultyData.shardSellRatio = data.readFloat("shardSellRatio");
-        if (configuredDifficulty != null && !data.containsKey("goldLoss"))
-            this.difficultyData.goldLoss = configuredDifficulty.goldLoss;
-        else
-            this.difficultyData.goldLoss = data.readFloat("goldLoss");
-        if (configuredDifficulty != null && !data.containsKey("lifeLoss"))
-            this.difficultyData.lifeLoss = configuredDifficulty.lifeLoss;
-        else
-            this.difficultyData.lifeLoss = data.readFloat("lifeLoss");
-        if (configuredDifficulty != null && !data.containsKey("spawnRank"))
-            this.difficultyData.spawnRank = configuredDifficulty.spawnRank;
-        else
-            this.difficultyData.spawnRank = data.readInt("spawnRank");
-        if (configuredDifficulty != null && !data.containsKey("rewardMaxFactor"))
-            this.difficultyData.rewardMaxFactor = configuredDifficulty.rewardMaxFactor;
-        else
-            this.difficultyData.rewardMaxFactor = data.readFloat("rewardMaxFactor");
-        // END SPECIAL CASES
+        this.difficultyData.shardSellRatio = data.readFloat("shardSellRatio");
+        this.difficultyData.goldLoss = data.readFloat("goldLoss");
+        this.difficultyData.lifeLoss = data.readFloat("lifeLoss");
+        this.difficultyData.spawnRank = data.readInt("spawnRank");
+        this.difficultyData.rewardMaxFactor = data.readFloat("rewardMaxFactor");
 
         name = data.readString("name");
         heroRace = data.readInt("heroRace");
@@ -761,6 +734,28 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     protected void saveVersionBumpPreProcess(SaveFileData data, int oldVersion) {
         System.out.printf("Migrating save version %d -> %d (pre-stage)%n", oldVersion, WorldSave.ADVENTURE_SAVE_VERSION);
         if (oldVersion < 1) {
+
+            //Previously these were not being read from or written to save files, causing defaults to appear after reload
+            //Pull from config if appropriate
+            String difficultyName = data.readString("difficultyName");
+            DifficultyData configuredDifficulty = Config.instance().getDifficultyByName(difficultyName);
+            if(configuredDifficulty == null)
+                configuredDifficulty = Config.instance().getDifficultyByName("Normal");
+
+            if (configuredDifficulty != null) {
+                if (this.difficultyData.shardSellRatio == data.readFloat("shardSellRatio") || data.readFloat("shardSellRatio") == 0) {
+                    data.store("shardSellRatio", configuredDifficulty.shardSellRatio);
+                }
+                if (!data.containsKey("goldLoss"))
+                    data.store("goldLoss", configuredDifficulty.goldLoss);
+                if (!data.containsKey("lifeLoss"))
+                    data.store("lifeLoss", configuredDifficulty.lifeLoss);
+                if (!data.containsKey("spawnRank"))
+                    data.store("spawnRank", configuredDifficulty.spawnRank);
+                if (!data.containsKey("rewardMaxFactor"))
+                    data.store("rewardMaxFactor", configuredDifficulty.rewardMaxFactor);
+            }
+
             // Used to always be 10 decks.
             if (!data.containsKey("deckCount"))
                 data.store("deckCount", 10);
