@@ -289,6 +289,7 @@ public class PlayerProperty {
             SpellAbility sp = (SpellAbility)spellAbility;
             if (!sp.getRootAbility().isTargeting(card)) {
                 return false;
+            }
         } else if (property.startsWith("controls")) {
             // this allows escaping _ with \ in case of complex restrictions (used on Turf War)
             List<String> type = new ArrayList<>();
