@@ -6,7 +6,7 @@ SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player | StartingWith$ You | R
 SVar:DBChoosePermanent:DB$ ChooseCard | ChoiceTitle$ Choose up to one permanent with mana value 3 or greater | MinAmount$ 0 | Amount$ 1 | Defined$ Remembered | Choices$ Permanent.cmcGE3+OppCtrl | RememberChosen$ True
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
-SVar:DBDraw:DB$ Draw | Defined$ You | ValidTgts$ Opponent | NumCards$ 3 | UnlessCost$ UnlessCost$ Draw<3/Player.targetedBy> | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ You may have target opponent draw three cards. If you do, draw three cards.
+SVar:DBDraw:DB$ Draw | Defined$ You | ValidTgts$ Opponent | NumCards$ 3 | UnlessCost$ Draw<3/Player.targetedBy> | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ You may have target opponent draw three cards. If you do, draw three cards.
 SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | GainControl$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
