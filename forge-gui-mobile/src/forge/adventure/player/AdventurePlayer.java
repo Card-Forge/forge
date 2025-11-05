@@ -401,11 +401,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         avatarIndex = data.readInt("avatarIndex");
         isFemale = data.readBool("isFemale");
 
-        String _mode = data.readString("adventure_mode");
-        if (_mode == null)
-            adventureMode = AdventureModes.Standard;
-        else
-            adventureMode = AdventureModes.valueOf(_mode);
+        adventureMode = AdventureModes.valueOf(data.readString("adventure_mode"));
 
         if (data.containsKey("colorIdentity")) {
             String temp = data.readString("colorIdentity");
@@ -542,7 +538,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         // Load decks
         int deckCount = data.readInt("deckCount");
         // In case the save had previously saved more decks than the current version allows (in case of the max being lowered)
-        deckCount = Math.max(MIN_DECK_COUNT, Math.min(MAX_DECK_COUNT, deckCount));
+        deckCount = Math.min(MAX_DECK_COUNT, deckCount);
         for (int i = 0; i < deckCount; i++){
             // The first x elements are pre-created
             if (i < MIN_DECK_COUNT) {
@@ -789,6 +785,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                     e.printStackTrace();
                 }
             }
+            if (!data.containsKey("adventure_mode"))
+                data.store("adventure_mode", AdventureModes.Standard.toString());
         }
     }
 
