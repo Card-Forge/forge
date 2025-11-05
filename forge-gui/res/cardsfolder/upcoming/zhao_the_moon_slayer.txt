@@ -1,0 +1,10 @@
+Name:Zhao, the Moon Slayer
+ManaCost:1 R
+Types:Legendary Creature Human Soldier
+PT:2/2
+K:Menace
+R:Event$ Moved | ValidCard$ Land.nonBasic | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ Nonbasic lands enter tapped.
+SVar:ETBTapped:DB$ Tap | ETB$ True | Defined$ ReplacedCard
+A:AB$ PutCounter | Cost$ 7 | CounterType$ CONQUEROR | CounterNum$ 1 | SpellDescription$ Put a conqueror counter on NICKNAME.
+S:Mode$ Continuous | Affected$ Land.nonBasic | AddType$ Mountain | RemoveLandTypes$ True | IsPresent$ Card.Self+counters_GE1_CONQUEROR | Description$ As long as NICKNAME has a conqueror counter on him, nonbasic lands are Mountains. (They lose all other land types and abilities and have "{T}: Add {R}.")
+Oracle:Menace\nNonbasic lands enter tapped.\n{7}: Put a conqueror counter on Zhao.\nAs long as Zhao has a conqueror counter on him, nonbasic lands are Mountains. (They lose all other land types and abilities and have "{T}: Add {R}.")
