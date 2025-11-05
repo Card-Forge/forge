@@ -287,7 +287,7 @@ public class PlayerProperty {
                 return false;
             }
             SpellAbility sp = (SpellAbility)spellAbility;
-            if (!sp.getRootAbility().isTargeting(card)) {
+            if (!sp.getRootAbility().isTargeting(player)) {
                 return false;
             }
         } else if (property.startsWith("controls")) {
