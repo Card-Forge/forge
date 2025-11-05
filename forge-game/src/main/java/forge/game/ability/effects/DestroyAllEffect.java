@@ -28,7 +28,7 @@ public class DestroyAllEffect extends SpellAbilityEffect {
 
         final StringBuilder sb = new StringBuilder();
         final boolean noRegen = sa.hasParam("NoRegen");
-        sb.append(sa.getHostCard().getName()).append(" - Destroy permanents.");
+        sb.append(sa.getHostCard().getDisplayName()).append(" - Destroy permanents.");
 
         if (noRegen) {
             sb.append(" They can't be regenerated");

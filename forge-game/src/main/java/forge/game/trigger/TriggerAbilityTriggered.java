@@ -21,11 +21,12 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
 import forge.game.card.CardZoneTable;
 import forge.game.spellability.SpellAbility;
-import forge.game.zone.ZoneType;
 import forge.util.Localizer;
-import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 
@@ -84,13 +85,12 @@ public class TriggerAbilityTriggered extends Trigger {
             return false;
         }
 
-        if (hasParam("TriggeredOwnAbility") && "True".equals(getParam("TriggeredOwnAbility")) && !Iterables.contains(causes, source)) {
+        if (hasParam("TriggeredOwnAbility") && !Iterables.contains(causes, source)) {
             return false;
         }
 
         return true;
     }
-
 
     /** {@inheritDoc} */
     @Override
@@ -118,14 +118,16 @@ public class TriggerAbilityTriggered extends Trigger {
             newRunParams.put(AbilityKey.Cause, ImmutableList.of(runParams.get(AbilityKey.Card)));
         } else if (regtrig.getMode() == TriggerType.ChangesZoneAll) {
             final CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.Cards);
-            Set<String> destinations = new HashSet<>();
-            for (ZoneType dest : ZoneType.values()) {
-                if (table.containsColumn(dest) && !table.column(dest).isEmpty()) {
-                    destinations.add(dest.toString());
-                }
-            }
-            newRunParams.put(AbilityKey.Destination, TextUtil.join(destinations, ","));
+            newRunParams.put(AbilityKey.Destination, StringUtils.join(table.columnKeySet(), ","));
             newRunParams.put(AbilityKey.Cause, table.allCards());
+        } else if (regtrig.getMode() == TriggerType.Attacks) {
+            newRunParams.put(AbilityKey.Cause, ImmutableList.of(runParams.get(AbilityKey.Attacker)));
+        } else if (regtrig.getMode() == TriggerType.AttackersDeclared || regtrig.getMode() == TriggerType.AttackersDeclaredOneTarget) {
+            CardCollection attackers = (CardCollection) runParams.get(AbilityKey.Attackers);
+            if (regtrig.hasParam("ValidAttackers")) {
+                attackers = CardLists.getValidCards(attackers, regtrig.getParam("ValidAttackers"), regtrig.getHostCard().getController(), regtrig.getHostCard(), regtrig);
+            }
+            newRunParams.put(AbilityKey.Cause, attackers);
         }
 
         newRunParams.put(AbilityKey.SpellAbility, sa);

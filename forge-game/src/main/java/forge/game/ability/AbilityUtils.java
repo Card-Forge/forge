@@ -1340,7 +1340,7 @@ public class AbilityUtils {
         resolvePreAbilities(sa, game);
 
         // count times ability resolves this turn
-        if (!sa.isWrapper()) {
+        if (!sa.isWrapper() && sa.isAbility()) {
             final Card host = sa.getHostCard();
             if (host != null) {
                 host.addAbilityResolved(sa);
@@ -3419,7 +3419,6 @@ public class AbilityUtils {
     }
 
     public static int playerXProperty(final Player player, final String s, final Card source, CardTraitBase ctb) {
-
         final String[] l = s.split("/");
         final String m = CardFactoryUtil.extractOperators(s);
 

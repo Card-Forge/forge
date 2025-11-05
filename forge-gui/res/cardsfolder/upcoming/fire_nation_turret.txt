@@ -1,0 +1,9 @@
+Name:Fire Nation Turret
+ManaCost:2 R
+Types:Artifact
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, up to one target creature gets +2/+0 and gains firebending 2 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | NumAtt$ +2 | KW$ Firebending:2
+A:AB$ PutCounter | Cost$ R | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on this artifact.
+A:AB$ DealDamage | Cost$ SubCounter<50/CHARGE> | ValidTgts$ Any | NumDmg$ 50 | SpellDescription$ It deals 50 damage to any target.
+SVar:PlayMain1:TRUE
+Oracle:At the beginning of combat on your turn, up to one target creature gets +2/+0 and gains firebending 2 until end of turn.\n{R}: Put a charge counter on this artifact.\nRemove fifty charge counters from this artifact: It deals 50 damage to any target.

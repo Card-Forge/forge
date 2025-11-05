@@ -34,6 +34,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
@@ -304,20 +305,26 @@ public final class CardUtil {
         } else if (reflectProperty.equals("Produce")) {
             final FCollection<SpellAbility> abilities = new FCollection<>();
             for (final Card c : cards) {
-                abilities.addAll(c.getManaAbilities());
+                abilities.addAll(c.getSpellAbilities());
+                for (Trigger trig : c.getTriggers()) {
+                    abilities.add(trig.ensureAbility());
+                }
             }
 
             final List<SpellAbility> reflectAbilities = Lists.newArrayList();
 
             for (final SpellAbility ab : abilities) {
+                if (ab.isSpell()) {
+                    continue;
+                }
                 if (maxChoices == colors.size()) {
                     break;
                 }
 
-                if (ab.getApi() == ApiType.ManaReflected) {
+                // Recursion! Set Activator to controller for appropriate valid comparison
+                ab.setActivatingPlayer(ab.getHostCard().getController());
+                if (ab.getApi() == ApiType.ManaReflected && !"Produced".equals(ab.getParam("ReflectProperty"))) {
                     if (!parents.contains(ab.getHostCard())) {
-                        // Recursion! Set Activator to controller for appropriate valid comparison
-                        ab.setActivatingPlayer(ab.getHostCard().getController());
                         reflectAbilities.add(ab);
                         parents.add(ab.getHostCard());
                     }

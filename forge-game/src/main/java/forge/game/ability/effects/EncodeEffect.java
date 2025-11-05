@@ -11,7 +11,6 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.util.CardTranslation;
 import forge.util.Localizer;
 
 public class EncodeEffect extends SpellAbilityEffect {
@@ -47,7 +46,7 @@ public class EncodeEffect extends SpellAbilityEffect {
         }
 
         // Handle choice of whether or not to encoded
-        if (!activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantExileCardAndEncodeOntoYouCreature", CardTranslation.getTranslatedName(host.getName())), null)) {
+        if (!activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantExileCardAndEncodeOntoYouCreature", host.getTranslatedName()), null)) {
             return;
         }
 

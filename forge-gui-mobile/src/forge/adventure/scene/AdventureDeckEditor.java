@@ -9,6 +9,7 @@ import forge.adventure.data.AdventureEventData;
 import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.util.AdventureEventController;
+import forge.adventure.util.AdventureModes;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.assets.FImage;
@@ -50,7 +51,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         public DeckFormat getDeckFormat() {
-            return DeckFormat.Adventure;
+            return AdventurePlayer.current().getAdventureMode() == AdventureModes.Commander ? DeckFormat.Commander : DeckFormat.Adventure;
         }
 
         @Override
@@ -65,17 +66,29 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         protected DeckEditorPage[] getInitialPages() {
-            return new DeckEditorPage[]{
-                    new CollectionCatalogPage(),
-                    new AdventureDeckSectionPage(DeckSection.Main, ItemManagerConfig.ADVENTURE_EDITOR_POOL),
-                    new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.ADVENTURE_SIDEBOARD),
-                    new CollectionAutoSellPage()
-            };
+            if (AdventurePlayer.current().getAdventureMode() == AdventureModes.Commander)
+                return new DeckEditorPage[]{
+                        new CollectionCatalogPage(),
+                        new AdventureDeckSectionPage(DeckSection.Commander, ItemManagerConfig.ADVENTURE_EDITOR_POOL),
+                        new AdventureDeckSectionPage(DeckSection.Main, ItemManagerConfig.ADVENTURE_EDITOR_POOL),
+                        new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.ADVENTURE_SIDEBOARD),
+                        new CollectionAutoSellPage()
+                };
+            else {
+                return new DeckEditorPage[]{
+                        new CollectionCatalogPage(),
+                        new AdventureDeckSectionPage(DeckSection.Main, ItemManagerConfig.ADVENTURE_EDITOR_POOL),
+                        new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.ADVENTURE_SIDEBOARD),
+                        new CollectionAutoSellPage()
+                };
+            }
         }
 
         @Override
-        public ItemPool<PaperCard> getCardPool(boolean wantUnique) {
-            return Current.player().getCards();
+        public ItemPool<PaperCard> getCardPool() {
+            ItemPool<PaperCard> pool = new ItemPool<>(PaperCard.class);
+            pool.addAll(Current.player().getCards());
+            return pool;
         }
 
         @Override
@@ -113,6 +126,15 @@ public class AdventureDeckEditor extends FDeckEditor {
         }
     }
 
+    @Override
+    public boolean isCommanderEditor() {
+        if (isLimitedEditor())
+            return false;
+        if (AdventurePlayer.current().getAdventureMode() == AdventureModes.Commander)
+            return true;
+        return super.isCommanderEditor();
+    }
+
     protected static class ShopConfig extends AdventureEditorConfig {
         @Override
         protected DeckEditorPage[] getInitialPages() {
@@ -141,7 +163,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         }
 
         @Override
-        public ItemPool<PaperCard> getCardPool(boolean wantUnique) {
+        public ItemPool<PaperCard> getCardPool() {
             return deckToPreview.getAllCardsInASinglePool(true, true);
         }
 
@@ -896,12 +918,17 @@ public class AdventureDeckEditor extends FDeckEditor {
             return;
         }
 
-        String deckError = GameType.Adventure.getDeckFormat().getDeckConformanceProblem(getDeck());
-        if (deckError != null) {
-            //Allow the player to close the editor with an invalid deck, but warn them that cards may be swapped out.
-            String warning = localizer.getMessage("lblAdventureDeckError", deckError);
-            FOptionPane.showConfirmDialog(warning, localizer.getMessage("lblInvalidDeck"), false, result -> resolveClose(canCloseCallback, result == true));
-            return;
+        String deckError;
+        if (!(getEditorConfig() instanceof ShopConfig))
+        {
+            deckError = getEditorConfig().getDeckFormat().getDeckConformanceProblem(getDeck());
+
+            if (deckError != null) {
+                //Allow the player to close the editor with an invalid deck, but warn them that cards may be swapped out.
+                String warning = localizer.getMessage("lblAdventureDeckError", deckError);
+                FOptionPane.showConfirmDialog(warning, localizer.getMessage("lblInvalidDeck"), false, result -> resolveClose(canCloseCallback, result == true));
+                return;
+            }
         }
 
         resolveClose(canCloseCallback, true);

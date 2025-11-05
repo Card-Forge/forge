@@ -33,6 +33,7 @@ import forge.Graphics;
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.adventure.data.ItemData;
+import forge.adventure.player.AdventurePlayer;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.UIScene;
@@ -925,6 +926,16 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         getColor().a = 0.5f;
     }
 
+    private static boolean inCollectionLike(PaperCard pc) {
+        var coll = AdventurePlayer.current().getCollectionCards(true).toFlatList();
+        String name = pc.getName();
+        for (PaperCard c : coll) {
+            if (c.equals(pc) || c.getName().equals(name))
+                return true;
+        }
+        return false;
+    }
+
     @Override
     public void act(float delta) {
         super.act(delta);
@@ -943,8 +954,15 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     addListener(tooltip);
                 }
             }
-            if (autoSell != null && !autoSell.isVisible() && flipProcess == 1)
+            if (autoSell != null && !autoSell.isVisible() && flipProcess == 1) {
                 autoSell.setVisible(true);
+                if (AdventurePlayer.current().getAdventureMode() == AdventureModes.Commander) {
+                    PaperCard pc = reward.getCard();
+                    if (pc != null) {
+                        setAutoSell(inCollectionLike(pc));
+                    }
+                }
+            }
             // flipProcess=(float)Gdx.input.getX()/ (float)Gdx.graphics.getWidth();
         }
 
