@@ -1,0 +1,12 @@
+Name:Ran and Shaw
+ManaCost:3 R R
+Types:Legendary Creature Dragon
+PT:4/4
+K:Flying
+K:Firebending:2
+T:Mode$ ChangesZone | ValidCard$ Card.Self+wasCastByYou | CheckSVar$ X | SVarCompare$ GE3 | Destination$ Battlefield | Execute$ TrigCopy | TriggerDescription$ When CARDNAME enter, if you cast them and there are three or more Dragon and/or Lesson cards in your graveyard, create a token that's a copy of CARDNAME, except it's not legendary.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ Self | NumCopies$ 1 | NonLegendary$ True
+A:AB$ PumpAll | Cost$ 3 R | ValidCards$ Dragon.YouCtrl | NumAtt$ +2 | SpellDescription$ Dragons you control get +2/+0 until end of turn.
+SVar:X:Count$ValidGraveyard Dragon.YouOwn,Lesson.YouOwn
+DeckHints:Type$Dragon|Lesson
+Oracle:Flying, firebending 2\nWhen Ran and Shaw enter, if you cast them and there are three or more Dragon and/or Lesson cards in your graveyard, create a token that's a copy of Ran and Shaw, except it's not legendary.\n{3}{R}: Dragons you control get +2/+0 until end of turn.

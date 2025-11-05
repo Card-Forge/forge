@@ -27,8 +27,9 @@ public class Current {
     public static void setLatestDeck(Deck generateDeck) {
         deck=generateDeck;
     }
-    public static String generateDefeatMessage() {
-        String message = Forge.getLocalizer().getMessage("lblYouDied", player().getName());
+    public static String generateDefeatMessage(boolean hasDied) {
+        String key = hasDied ? "lblYouDied" : "lblYouLostTheLastGame";
+        String message = Forge.getLocalizer().getMessage(key, player().getName());
         ItemData itemData = player().getRandomEquippedItem();
         if (itemData != null) {
             itemData.isCracked = true;

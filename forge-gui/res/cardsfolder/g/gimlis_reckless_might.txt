@@ -5,7 +5,7 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Descriptio
 T:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE8 | Execute$ TrigFight | TriggerDescription$ Formidable — Whenever you attack, if creatures you control have total power 8 or greater, target attacking creature you control fights up to one target creature you don't control.
 SVar:TrigFight:DB$ Pump | ValidTgts$ Creature.YouCtrl+attacking | AILogic$ Fight | TgtPrompt$ Select target attacking creature you control | SubAbility$ DBFight
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature you don't control
-SVar:X:Count$SumPower_Creature.YouCtrl
+SVar:X:Count$Valid Creature.YouCtrl$CardPower
 SVar:BuffedBy:Creature
 SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE

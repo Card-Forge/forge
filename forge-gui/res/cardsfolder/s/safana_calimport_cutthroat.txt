@@ -6,7 +6,7 @@ K:Menace
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckDefinedPlayer$ You.hasInitiative | Execute$ TrigTreasure | TriggerDescription$ At the beginning of your end step, if you have the initiative, create a Treasure token. If you've completed a dungeon, create three of those tokens instead.
 SVar:TrigTreasure:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac
 SVar:X:Count$Compare Y GE1.3.1
-SVar:Y:PlayerCountPropertyYou$DungeonsCompleted
+SVar:Y:DungeonsCompleted$Amount
 K:Choose a Background
 AI:RemoveDeck:Random
 DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure

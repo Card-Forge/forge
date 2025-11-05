@@ -234,6 +234,7 @@ Pilot:Pilots
 Pincher:Pinchers
 Pirate:Pirates
 Plant:Plants
+Platypus:Platypuses
 Porcupine:Porcupines
 Possum:Possums
 Praetor:Praetors
@@ -283,6 +284,7 @@ Snail:Snails
 Snake:Snakes
 Soldier:Soldiers
 Soltari:Soltaris
+Sorcerer:Sorcerers
 Spawn:Spawns
 Specter:Specters
 Spellshaper:Spellshapers
@@ -315,6 +317,7 @@ Troll:Trolls
 Turtle:Turtles
 Tyranid:Tyranids
 Unicorn:Unicorns
+Utrom:Utroms
 Vampire:Vampires
 Varmint:Varmints
 Vedalken:Vedalkens
@@ -373,6 +376,7 @@ Junk
 Key:Keys
 Lander:Landers
 Map
+Mutagen
 Powerstone:Powerstones
 Spacecraft:Spacecraft
 Stone:Stones

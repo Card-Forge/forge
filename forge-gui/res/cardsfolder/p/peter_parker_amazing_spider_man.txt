@@ -1,0 +1,20 @@
+Name:Peter Parker
+ManaCost:1 W
+Types:Legendary Creature Human Scientist Hero
+PT:0/1
+AlternateMode:Modal
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 2/1 green Spider creature token with reach.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_1_spider_reach | TokenOwner$ You
+A:AB$ SetState | Cost$ 1 G W U | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery.
+Oracle:When Peter Parker enters, create a 2/1 green Spider creature token with reach.\n{1}{G}{W}{U}: Transform Peter Parker. Activate only as a sorcery.
+
+ALTERNATE
+
+Name:Amazing Spider-Man
+ManaCost:1 G W U
+Types:Legendary Creature Spider Human Hero
+PT:4/4
+K:Vigilance
+K:Reach
+S:Mode$ Continuous | Affected$ Legendary.YouCtrl+wasCast+nonColorless | AffectedZone$ Stack | AddKeyword$ Web-slinging:G W U:Spell.Legendary+nonColorless | Description$ Each legendary spell you cast that's one or more colors has web-slinging {G}{W}{U}. (You may cast a spell for its web-slinging cost if you also return a tapped creature you control to its owner's hand.)
+Oracle:Vigilance, reach\nEach legendary spell you cast that's one or more colors has web-slinging {G}{W}{U}. (You may cast a spell for its web-slinging cost if you also return a tapped creature you control to its owner's hand.)

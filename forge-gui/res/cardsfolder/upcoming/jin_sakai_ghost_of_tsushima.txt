@@ -1,0 +1,12 @@
+Name:Jin Sakai, Ghost of Tsushima
+ManaCost:1 W U B
+Types:Legendary Creature Human Samurai
+PT:2/4
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+T:Mode$ AttackersDeclaredOneTarget | ValidAttackers$ Creature.YouCtrl | AttackedTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigCharm | ValidAttackersAmount$ EQ1 | TriggerDescription$ Whenever a creature you control attacks a player, if no other creatures are attacking that player, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ Standoff,Ghost
+SVar:Standoff:DB$ Pump | Defined$ TriggeredAttackers | KW$ Double Strike | SpellDescription$ Standoff — It gains double strike until end of turn.
+SVar:Ghost:DB$ Effect | RememberObjects$ TriggeredAttackers | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SpellDescription$ Ghost — It can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+Oracle:Whenever Jin Sakai deals combat damage to a player, draw a card.\nWhenever a creature you control attacks a player, if no other creatures are attacking that player, choose one —-\n• Standoff — It gains double strike until end of turn.\n• Ghost — It can't be blocked this turn.

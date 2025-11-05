@@ -1,0 +1,8 @@
+Name:Network Marauder
+ManaCost:2 U
+Types:Artifact Creature Robot Pirate
+PT:1/2
+K:Warp:1 U
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Artifact.YouCtrl+cmcGE3 | Execute$ TrigPump | TriggerDescription$ When this creature enters and whenever another artifact you control with mana value 3 or greater enters, all artifact creature cards and Spacecraft cards you own perpetually get +1/+0.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Artifact.Creature+YouOwn+!token,Spacecraft.YouOwn+!token | PumpZone$ All | NumAtt$ +1 | Duration$ Perpetual
+Oracle:When this creature enters and whenever another artifact you control with mana value 3 or greater enters, all artifact creature cards and Spacecraft cards you own perpetually get +1/+0.\nWarp {1}{U}

@@ -1,0 +1,10 @@
+Name:Shriek, Treblemaker
+ManaCost:2 BR
+Types:Legendary Creature Mutant Villain
+PT:2/3
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | Execute$ DBImmediateTrig | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your first main phase, you may discard a card. When you do, target creature can't block this turn.
+SVar:DBImmediateTrig:AB$ ImmediateTrigger | Cost$ Discard<1/Card> | Execute$ TrigPump | TriggerDescription$ You may discard a card. When you do, target creature can't block this turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. | TgtPrompt$ Select target creature. | IsCurse$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Sonic Blast — Whenever a creature an opponent controls dies, NICKNAME deals 1 damage to that player.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ 1 | Defined$ TriggeredCardController
+Oracle:At the beginning of your first main phase, you may discard a card. When you do, target creature can't block this turn.\nSonic Blast — Whenever a creature an opponent controls dies, Shriek deals 1 damage to that player.

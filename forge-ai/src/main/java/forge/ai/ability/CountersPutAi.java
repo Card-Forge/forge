@@ -92,9 +92,8 @@ public class CountersPutAi extends CountersAi {
                     return false;
                 }
                 return chance > MyRandom.getRandom().nextFloat();
-            } else {
-                return false;
             }
+            return false;
         }
 
         if (sa.isKeyword(Keyword.LEVEL_UP)) {
@@ -124,7 +123,6 @@ public class CountersPutAi extends CountersAi {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
-        CardCollection list;
         Card choice = null;
         final String amountStr = sa.getParamOrDefault("CounterNum", "1");
         final boolean divided = sa.isDividedAsYouChoose();
@@ -143,7 +141,7 @@ public class CountersPutAi extends CountersAi {
         final boolean isClockwork = "True".equals(sa.getParam("UpTo")) && "Self".equals(sa.getParam("Defined"))
                 && "P1P0".equals(sa.getParam("CounterType")) && "Count$xPaid".equals(source.getSVar("X"))
                 && sa.hasParam("MaxFromEffect");
-        boolean playAggro = ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.PLAY_AGGRO);
+        boolean playAggro = AiProfileUtil.getBoolProperty(ai, AiProps.PLAY_AGGRO);
 
         if ("ExistingCounter".equals(type)) {
             final boolean eachExisting = sa.hasParam("EachExistingCounter");
@@ -221,10 +219,8 @@ public class CountersPutAi extends CountersAi {
         } else if ("PayEnergy".equals(logic)) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else if ("PayEnergyConservatively".equals(logic)) {
-            boolean onlyInCombat = ai.getController().isAI()
-                    && ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.CONSERVATIVE_ENERGY_PAYMENT_ONLY_IN_COMBAT);
-            boolean onlyDefensive = ai.getController().isAI()
-                    && ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.CONSERVATIVE_ENERGY_PAYMENT_ONLY_DEFENSIVELY);
+            boolean onlyInCombat = AiProfileUtil.getBoolProperty(ai, AiProps.CONSERVATIVE_ENERGY_PAYMENT_ONLY_IN_COMBAT);
+            boolean onlyDefensive = AiProfileUtil.getBoolProperty(ai, AiProps.CONSERVATIVE_ENERGY_PAYMENT_ONLY_DEFENSIVELY);
 
             if (playAggro) {
                 // aggro profiles ignore conservative play for this AI logic
@@ -292,10 +288,8 @@ public class CountersPutAi extends CountersAi {
 
             if (willActivate) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
-
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else if (logic.equals("ChargeToBestCMC")) {
             return doChargeToCMCLogic(ai, sa);
         } else if (logic.equals("ChargeToBestOppControlledCMC")) {
@@ -348,7 +342,7 @@ public class CountersPutAi extends CountersAi {
             if (type.equals("P1P1")) {
                 nPump = amount;
             }
-            return FightAi.canFightAi(ai, sa, nPump, nPump);
+            return FightAi.canFight(ai, sa, nPump, nPump);
         }
 
         if (amountStr.equals("X")) {
@@ -451,6 +445,7 @@ public class CountersPutAi extends CountersAi {
 
             sa.resetTargets();
 
+            CardCollection list;
             if (sa.isCurse()) {
                 list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
             } else {
@@ -746,7 +741,7 @@ public class CountersPutAi extends CountersAi {
     protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final SpellAbility root = sa.getRootAbility();
         final Card source = sa.getHostCard();
-        final String aiLogic = sa.getParamOrDefault("AILogic", "");
+        final String aiLogic = sa.getParam("AILogic");
         final String amountStr = sa.getParamOrDefault("CounterNum", "1");
         final boolean divided = sa.isDividedAsYouChoose();
         final int amount = AbilityUtils.calculateAmount(source, amountStr, sa);
@@ -765,14 +760,10 @@ public class CountersPutAi extends CountersAi {
         }
 
         if ("ChargeToBestCMC".equals(aiLogic)) {
-            AiAbilityDecision decision = doChargeToCMCLogic(ai, sa);
-            if (decision.willingToPlay()) {
-                return decision;
-            }
             if (mandatory) {
                 return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
             }
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            return doChargeToCMCLogic(ai, sa);
         }
 
         if (!sa.usesTargeting()) {
@@ -796,7 +787,6 @@ public class CountersPutAi extends CountersAi {
                 // things like Powder Keg, which are way too complex for the AI
             }
         } else if (sa.getTargetRestrictions().canOnlyTgtOpponent() && !sa.getTargetRestrictions().canTgtCreature()) {
-            // can only target opponent
             PlayerCollection playerList = new PlayerCollection(IterableUtil.filter(
                     sa.getTargetRestrictions().getAllCandidates(sa, true, true), Player.class));
 
@@ -811,13 +801,12 @@ public class CountersPutAi extends CountersAi {
                 sa.getTargets().add(choice);
             }
         } else {
-            String logic = sa.getParam("AILogic");
-            if ("Fight".equals(logic) || "PowerDmg".equals(logic)) {
+            if ("Fight".equals(aiLogic) || "PowerDmg".equals(aiLogic)) {
                 int nPump = 0;
                 if (type.equals("P1P1")) {
                     nPump = amount;
                 }
-                AiAbilityDecision decision = FightAi.canFightAi(ai, sa, nPump, nPump);
+                AiAbilityDecision decision = FightAi.canFight(ai, sa, nPump, nPump);
                 if (decision.willingToPlay()) {
                     return decision;
                 }
@@ -838,7 +827,6 @@ public class CountersPutAi extends CountersAi {
 
             while (sa.canAddMoreTarget()) {
                 if (mandatory) {
-                    // When things are mandatory, gotta handle a little differently
                     if ((list.isEmpty() || !preferred) && sa.isTargetNumberValid()) {
                         return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                     }
@@ -863,7 +851,7 @@ public class CountersPutAi extends CountersAi {
                     return new AiAbilityDecision(sa.isTargetNumberValid() ? 100 : 0, sa.isTargetNumberValid() ? AiPlayDecision.WillPlay : AiPlayDecision.CantPlayAi);
                 }
 
-                Card choice = null;
+                Card choice;
 
                 // Choose targets here:
                 if (sa.isCurse()) {
@@ -889,10 +877,10 @@ public class CountersPutAi extends CountersAi {
                     choice = Aggregates.random(list);
                 }
                 if (choice != null && divided) {
-                    int alloc = Math.max(amount / totalTargets, 1);
                     if (sa.getTargets().size() == Math.min(totalTargets, sa.getMaxTargets()) - 1) {
                         sa.addDividedAllocation(choice, left);
                     } else {
+                        int alloc = Math.max(amount / totalTargets, 1);
                         sa.addDividedAllocation(choice, alloc);
                         left -= alloc;
                     }
@@ -982,9 +970,7 @@ public class CountersPutAi extends CountersAi {
         final String amountStr = sa.getParamOrDefault("CounterNum", "1");
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
 
-        final boolean isCurse = sa.isCurse();
-
-        if (isCurse) {
+        if (sa.isCurse()) {
             final CardCollection opponents = CardLists.filterControlledBy(options, ai.getOpponents());
 
             if (!opponents.isEmpty()) {
@@ -1187,7 +1173,7 @@ public class CountersPutAi extends CountersAi {
 
     @Override
     public int chooseNumber(Player player, SpellAbility sa, int min, int max, Map<String, Object> params) {
-        if (sa.hasParam("ReadAhead")) {
+        if (sa.isKeyword(Keyword.READ_AHEAD)) {
             return 1;
         }
         return max;
@@ -1210,9 +1196,8 @@ public class CountersPutAi extends CountersAi {
         }
         if (numCtrs < optimalCMC) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     private AiAbilityDecision doChargeToOppCtrlCMCLogic(Player ai, SpellAbility sa) {

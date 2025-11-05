@@ -845,6 +845,8 @@ public class Game {
             p.revealFaceDownCards();
         }
 
+        // TODO free any mindslaves
+
         for (Card c : cards) {
             // CR 800.4d if card is controlled by opponent, LTB should trigger
             if (c.getOwner().equals(p) && c.getController().equals(p)) {
@@ -880,8 +882,6 @@ public class Game {
                         }
                         triggerList.put(c.getZone().getZoneType(), null, c);
                         getAction().ceaseToExist(c, false);
-                        // CR 603.2f owner of trigger source lost game
-                        getTriggerHandler().clearDelayedTrigger(c);
                     }
                 } else {
                     // return stolen permanents
@@ -1290,6 +1290,11 @@ public class Game {
         }
 
         return dmgList;
+    }
+
+    public int getSingleMaxDamageDoneThisTurn() {
+        return globalDamageHistory.stream().flatMap(cdh -> cdh.getAllDmgInstances().stream()).
+                mapToInt(dmg -> dmg.getLeft()).max().orElse(0);
     }
 
     public void addGlobalDamageHistory(CardDamageHistory cdh, Pair<Integer, Boolean> dmg, Card source, GameEntity target) {

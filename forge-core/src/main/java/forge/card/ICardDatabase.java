@@ -75,8 +75,6 @@ public interface ICardDatabase extends Iterable<PaperCard> {
     PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate);
     PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate, Predicate<PaperCard> filter);
 
-
-
     /* CARDS COLLECTION RETRIEVAL METHODS
      * ================================== */
     Collection<PaperCard> getAllCards();

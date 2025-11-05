@@ -35,7 +35,7 @@ public class ForgeScript {
         boolean withSource = property.endsWith("Source");
         final ColorSet colors;
         if (withSource && StaticAbilityColorlessDamageSource.colorlessDamageSource(cardState)) {
-            colors = ColorSet.getNullColor();
+            colors = ColorSet.C;
         } else {
             colors = cardState.getCard().getColor(cardState);
         }
@@ -93,6 +93,8 @@ public class ForgeScript {
             }
         } else if (property.equals("Outlaw")) {
             return type.isOutlaw();
+        } else if (property.equals("Party")) {
+            return type.isParty();
         } else if (property.startsWith("non")) {
             // ... Other Card types
             return !type.hasStringType(property.substring(3));
@@ -166,8 +168,6 @@ public class ForgeScript {
             Card source, CardTraitBase spellAbility) {
         if (property.equals("ManaAbility")) {
             return sa.isManaAbility();
-        } else if (property.equals("nonManaAbility")) {
-            return !sa.isManaAbility();
         } else if (property.equals("withoutXCost")) {
             return !sa.costHasManaX();
         } else if (property.startsWith("XCost")) {
@@ -412,6 +412,8 @@ public class ForgeScript {
                 return !sa.isPwAbility() && !sa.getRestrictions().isSorcerySpeed();
             }
             return true;
+        } else if(property.startsWith("NamedAbility")) {
+            return sa.getName().equals(property.substring(12));
         } else if (sa.getHostCard() != null) {
             return sa.getHostCard().hasProperty(property, sourceController, source, spellAbility);
         }

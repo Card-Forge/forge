@@ -133,11 +133,11 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             System.out.println("Pre Colors: " + colors.toEnumSet().toString());
         }
         if(!colors.hasAllColors(keyCard.getRules().getColorIdentity().getColor())){
-            colors = ColorSet.fromMask(colors.getColor() | keyCard.getRules().getColorIdentity().getColor());
+            colors = ColorSet.combine(colors, keyCard.getRules().getColorIdentity());
         }
         if(secondKeyCard!=null) {
             if (!colors.hasAllColors(secondKeyCard.getRules().getColorIdentity().getColor())) {
-                colors = ColorSet.fromMask(colors.getColor() | secondKeyCard.getRules().getColorIdentity().getColor());
+                colors = ColorSet.combine(colors, secondKeyCard.getRules().getColorIdentity());
             }
         }
         numSpellsNeeded = ((Double)Math.floor(targetSize*(getCreaturePercentage()+getSpellPercentage()))).intValue();
@@ -462,7 +462,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
                 // Want a card that has just one "off" color.
                 final ColorSet off = colors.getOffColors(card.getRules().getColor());
                 if (off.isMonoColor()) {
-                    colors = ColorSet.fromMask(colors.getColor() | off.getColor());
+                    colors = ColorSet.combine(colors, off);
                     break;
                 }
             }

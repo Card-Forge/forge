@@ -287,10 +287,6 @@ public class ComputerUtilMana {
                 continue;
             }
 
-            if (!ComputerUtilCost.checkTapTypeCost(ai, ma.getPayCosts(), ma.getHostCard(), sa, AiCardMemory.getMemorySet(ai, MemorySet.PAYS_TAP_COST))) {
-                continue;
-            }
-
             int amount = ma.hasParam("Amount") ? AbilityUtils.calculateAmount(ma.getHostCard(), ma.getParam("Amount"), ma) : 1;
             if (amount <= 0) {
                 // wrong gamestate for variable amount
@@ -357,7 +353,12 @@ public class ComputerUtilMana {
                 continue;
             }
 
+            // these should come last since they reserve the paying cards
+            // (this means if a mana ability has both parts it doesn't currently undo reservations if the second part fails)
             if (!ComputerUtilCost.checkForManaSacrificeCost(ai, ma.getPayCosts(), ma, ma.isTrigger())) {
+                continue;
+            }
+            if (!ComputerUtilCost.checkTapTypeCost(ai, ma.getPayCosts(), ma.getHostCard(), sa, AiCardMemory.getMemorySet(ai, MemorySet.PAYS_TAP_COST))) {
                 continue;
             }
 
@@ -486,14 +487,14 @@ public class ComputerUtilMana {
         String originalProduced = manaProduced.toString();
 
         if (originalProduced.isEmpty()) {
-            return manaProduced.toString();
+            return originalProduced;
         }
 
         // Run triggers like Nissa
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(hostCard);
         runParams.put(AbilityKey.Activator, ai); // assuming AI would only ever gives itself mana
         runParams.put(AbilityKey.AbilityMana, saPayment);
-        runParams.put(AbilityKey.Produced, manaProduced.toString());
+        runParams.put(AbilityKey.Produced, originalProduced);
         for (Trigger tr : ai.getGame().getTriggerHandler().getActiveTrigger(TriggerType.TapsForMana, runParams)) {
             SpellAbility trSA = tr.ensureAbility();
             if (trSA == null) {
@@ -709,9 +710,9 @@ public class ComputerUtilMana {
             if (hasConverge &&
                     (toPay == ManaCostShard.GENERIC || toPay == ManaCostShard.X)) {
                 final int unpaidColors = cost.getUnpaidColors() + cost.getColorsPaid() ^ ManaCostShard.COLORS_SUPERPOSITION;
-                for (final byte b : ColorSet.fromMask(unpaidColors)) {
+                for (final MagicColor.Color b : ColorSet.fromMask(unpaidColors)) {
                     // try and pay other colors for converge
-                    final ManaCostShard shard = ManaCostShard.valueOf(b);
+                    final ManaCostShard shard = ManaCostShard.valueOf(b.getColorMask());
                     saList = sourcesForShards.get(shard);
                     if (saList != null && !saList.isEmpty()) {
                         toPay = shard;
@@ -815,11 +816,11 @@ public class ComputerUtilMana {
                 String manaProduced = predictManafromSpellAbility(saPayment, ai, toPay);
                 payMultipleMana(cost, manaProduced, ai);
 
-                // remove from available lists
+                // remove to prevent re-usage since resources don't get consumed
                 sourcesForShards.values().removeIf(CardTraitPredicates.isHostCard(saPayment.getHostCard()));
             } else {
                 final CostPayment pay = new CostPayment(saPayment.getPayCosts(), saPayment);
-                if (!pay.payComputerCosts(new AiCostDecision(ai, saPayment, effect))) {
+                if (!pay.payComputerCosts(new AiCostDecision(ai, saPayment, effect, true))) {
                     saList.remove(saPayment);
                     continue;
                 }
@@ -828,8 +829,10 @@ public class ComputerUtilMana {
                 // subtract mana from mana pool
                 manapool.payManaFromAbility(sa, cost, saPayment);
 
-                // no need to remove abilities from resource map,
-                // once their costs are paid and consume resources, they can not be used again
+                // need to consider if another use is now prevented
+                if (!cost.isPaid() && saPayment.isActivatedAbility() && !saPayment.getRestrictions().canPlay(saPayment.getHostCard(), saPayment)) {
+                    sourcesForShards.values().removeIf(s -> s == saPayment);
+                }
 
                 if (hasConverge) {
                     // hack to prevent converge re-using sources
@@ -893,7 +896,8 @@ public class ComputerUtilMana {
         if (hasConverge) {
             // add extra colors for paying converge
             final int unpaidColors = cost.getUnpaidColors() + cost.getColorsPaid() ^ ManaCostShard.COLORS_SUPERPOSITION;
-            for (final byte b : ColorSet.fromMask(unpaidColors)) {
+            for (final MagicColor.Color color : ColorSet.fromMask(unpaidColors)) {
+                final byte b = color.getColorMask();
                 final ManaCostShard shard = ManaCostShard.valueOf(b);
                 if (!sourcesForShards.containsKey(shard)) {
                     if (ai.getManaPool().canPayForShardWithColor(shard, b)) {
@@ -920,7 +924,7 @@ public class ComputerUtilMana {
             ColorSet shared = ColorSet.fromMask(toPay.getColorMask()).getSharedColors(ColorSet.fromNames(m.getComboColors(saPayment).split(" ")));
             // but other effects might still lead to a more permissive payment
             if (!shared.isColorless()) {
-                m.setExpressChoice(ColorSet.fromMask(shared.iterator().next()));
+                m.setExpressChoice(shared.iterator().next().getShortName());
             }
             getComboManaChoice(ai, saPayment, sa, cost);
         }
@@ -1095,7 +1099,7 @@ public class ComputerUtilMana {
         // * pay hybrids
         // * pay phyrexian, keep mana for colorless
         // * pay generic
-        return cost.getShardToPayByPriority(shardsToPay, ColorSet.ALL_COLORS.getColor());
+        return cost.getShardToPayByPriority(shardsToPay, ColorSet.WUBRG.getColor());
     }
 
     private static void adjustManaCostToAvoidNegEffects(ManaCostBeingPaid cost, final Card card, Player ai) {
@@ -1288,11 +1292,11 @@ public class ComputerUtilMana {
      * @return ManaCost
      */
     public static ManaCostBeingPaid calculateManaCost(final Cost cost, final SpellAbility sa, final boolean test, final int extraMana, final boolean effect) {
-        Card card = sa.getHostCard();
+        Card host = sa.getHostCard();
         Zone castFromBackup = null;
-        if (test && sa.isSpell() && !card.isInZone(ZoneType.Stack)) {
-            castFromBackup = card.getCastFrom();
-            card.setCastFrom(card.getZone() != null ? card.getZone() : null);
+        if (test && sa.isSpell() && !host.isInZone(ZoneType.Stack)) {
+            castFromBackup = host.getCastFrom();
+            host.setCastFrom(host.getZone() != null ? host.getZone() : null);
         }
 
         Cost payCosts;
@@ -1315,7 +1319,7 @@ public class ComputerUtilMana {
                 final int multiplicator = Math.max(xCounter, 1);
                 manaToAdd = extraMana * multiplicator;
             } else {
-                manaToAdd = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("XAlternative", "X"), sa) * xCounter;
+                manaToAdd = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("XAlternative", "X"), sa) * xCounter;
             }
 
             if (manaToAdd < 1 && payCosts != null && payCosts.getCostMana().getXMin() > 0) {
@@ -1327,7 +1331,7 @@ public class ComputerUtilMana {
             if (xColor == null) {
                 xColor = "1";
             }
-            if (card.hasKeyword("Spend only colored mana on X. No more than one mana of each color may be spent this way.")) {
+            if (host.hasKeyword("Spend only colored mana on X. No more than one mana of each color may be spent this way.")) {
                 xColor = "WUBRGX";
             }
             if (xCounter > 0) {
@@ -1352,14 +1356,14 @@ public class ComputerUtilMana {
                 mCost = ManaCost.combine(mCost, mkCost);
                 ManaCostBeingPaid mcbp = new ManaCostBeingPaid(mCost);
                 if (!canPayManaCost(mcbp, sa, sa.getActivatingPlayer(), true)) {
-                    sa.getHostCard().setSVar("NumTimes", "Number$" + i);
+                    host.setSVar("NumTimes", "Number$" + i);
                     break;
                 }
             }
         }
 
-        if (test && sa.isSpell()) {
-            sa.getHostCard().setCastFrom(castFromBackup);
+        if (test && sa.isSpell() && !host.isInZone(ZoneType.Stack)) {
+            host.setCastFrom(castFromBackup);
         }
 
         return manaCost;
@@ -1592,6 +1596,7 @@ public class ComputerUtilMana {
                 }
 
                 // don't use abilities with dangerous drawbacks
+                // TODO this has already been checked earlier
                 AbilitySub sub = m.getSubAbility();
                 if (sub != null && !SpellApiToAi.Converter.get(sub).chkDrawbackWithSubs(ai, sub).willingToPlay()) {
                     continue;
@@ -1662,7 +1667,6 @@ public class ComputerUtilMana {
                                 if (replaced.contains("C")) {
                                     manaMap.put(ManaAtom.COLORLESS, m);
                                 }
-
                             }
                         }
                     }

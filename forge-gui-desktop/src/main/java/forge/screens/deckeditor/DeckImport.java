@@ -46,7 +46,6 @@ import forge.toolbox.*;
 import forge.util.Localizer;
 import forge.view.FDialog;
 import net.miginfocom.swing.MigLayout;
-import org.apache.commons.lang3.StringUtils;
 
 import static forge.deck.DeckRecognizer.TokenType.*;
 
@@ -523,7 +522,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
                 else
                     deck.setName(currentDeckName);
             }
-            host.getDeckController().loadDeck(deck, controller.getCreateNewDeck());
+            host.getDeckController().loadDeck(deck, controller.getImportBehavior() != DeckImportController.ImportBehavior.MERGE);
             processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING));
         });
 
@@ -531,7 +530,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             this.createNewDeckCheckbox.setSelected(false);
             this.createNewDeckCheckbox.addActionListener(e -> {
                 boolean createNewDeck = createNewDeckCheckbox.isSelected();
-                controller.setCreateNewDeck(createNewDeck);
+                controller.setImportBehavior(createNewDeck ? DeckImportController.ImportBehavior.CREATE_NEW : DeckImportController.ImportBehavior.MERGE);
                 String cmdAcceptLabel = createNewDeck ? CREATE_NEW_DECK_CMD_LABEL : IMPORT_CARDS_CMD_LABEL;
                 cmdAcceptButton.setText(cmdAcceptLabel);
                 String smartCardArtChboxTooltip = createNewDeck ? SMART_CARDART_TT_NO_DECK : SMART_CARDART_TT_WITH_DECK;
@@ -600,7 +599,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             if (token.getType() == LIMITED_CARD)
                 cssClass = WARN_MSG_CLASS;
             String statusMsg = String.format("<span class=\"%s\" style=\"font-size: 9px;\">%s</span>", cssClass,
-                                                                                        getTokenStatusMessage(token));
+                    controller.getTokenStatusMessage(token));
             statusLbl.append(statusMsg);
         }
 
@@ -623,7 +622,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
         cardPreviewLabel.setText(String.format("<html>%s %s<br>%s</html>", STYLESHEET, editionLbl, statusLbl));
 
         // set tooltip
-        String tooltip = String.format("%s [%s] #%s", card.getName(), card.getEdition(),
+        String tooltip = String.format("%s [%s] #%s", card.getDisplayName(), card.getEdition(),
                 card.getCollectorNumber());
         cardImagePreview.setToolTipText(tooltip);
     }
@@ -740,12 +739,12 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
     private String toHTML(final DeckRecognizer.Token token) {
         if (token == null)
             return "";
-        String tokenMsg = getTokenMessage(token);
+        String tokenMsg = controller.getTokenMessage(token);
         if (tokenMsg == null)
             return "";
-        String tokenStatus = getTokenStatusMessage(token);
+        String tokenStatus = controller.getTokenStatusMessage(token);
         String cssClass = getTokenCSSClass(token.getType());
-        if (tokenStatus.length() == 0)
+        if (tokenStatus.isEmpty())
             tokenMsg = padEndWithHTMLSpaces(tokenMsg, 2*PADDING_TOKEN_MSG_LENGTH+10);
         else {
             tokenMsg = padEndWithHTMLSpaces(tokenMsg, PADDING_TOKEN_MSG_LENGTH);
@@ -754,11 +753,6 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
         if (token.isCardToken())
             tokenMsg = String.format("<a class=\"%s\" href=\"%s\">%s</a>", cssClass,
                     token.getKey().toString(), tokenMsg);
-
-        if (tokenStatus == null) {
-            String tokenTag = String.format("<td colspan=\"2\" class=\"%s\">%s</td>", cssClass, tokenMsg);
-            return String.format("<tr>%s</tr>", tokenTag);
-        }
 
         String tokenTag = "<td class=\"%s\">%s</td>";
         String tokenMsgTag = String.format(tokenTag, cssClass, tokenMsg);
@@ -774,97 +768,6 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
         for (int i = targetMsg.length(); i < limit; i++)
             spacer.append("&nbsp;");
         return String.format("%s%s", targetMsg, spacer);
-    }
-
-    private String getTokenMessage(DeckRecognizer.Token token) {
-        switch (token.getType()) {
-            case LEGAL_CARD:
-            case LIMITED_CARD:
-            case CARD_FROM_NOT_ALLOWED_SET:
-            case CARD_FROM_INVALID_SET:
-                return String.format("%s x %s %s", token.getQuantity(), token.getText(), getTokenFoilLabel(token));
-            // Card Warning Msgs
-            case UNKNOWN_CARD:
-            case UNSUPPORTED_CARD:
-                return token.getQuantity() > 0 ? String.format("%s x %s", token.getQuantity(), token.getText())
-                        : token.getText();
-
-            case UNSUPPORTED_DECK_SECTION:
-                return String.format("%s: %s", Localizer.getInstance().getMessage("lblWarningMsgPrefix"),
-                                        Localizer.getInstance()
-                                                .getMessage("lblWarnDeckSectionNotAllowedInEditor", token.getText(),
-                                                        this.currentGameType));
-
-            // Special Case of Card moved into another section (e.g. Commander from Sideboard)
-            case WARNING_MESSAGE:
-                return String.format("%s: %s", Localizer.getInstance()
-                                .getMessage("lblWarningMsgPrefix"), token.getText());
-
-            // Placeholders
-            case DECK_SECTION_NAME:
-                return String.format("%s: %s", Localizer.getInstance().getMessage("lblDeckSection"),
-                                        token.getText());
-
-            case CARD_RARITY:
-                return String.format("%s: %s", Localizer.getInstance().getMessage("lblRarity"),
-                                        token.getText());
-
-            case CARD_TYPE:
-            case CARD_CMC:
-            case MANA_COLOUR:
-            case COMMENT:
-                return token.getText();
-
-            case DECK_NAME:
-                return String.format("%s: %s", Localizer.getInstance().getMessage("lblDeckName"),
-                        token.getText());
-
-            case UNKNOWN_TEXT:
-            default:
-                return null;
-
-        }
-    }
-
-    private String getTokenStatusMessage(DeckRecognizer.Token token){
-        if (token == null)
-            return "";
-
-        switch (token.getType()) {
-            case LIMITED_CARD:
-                return String.format("%s: %s", Localizer.getInstance().getMessage("lblWarningMsgPrefix"),
-                        Localizer.getInstance().getMessage("lblWarnLimitedCard",
-                        StringUtils.capitalize(token.getLimitedCardType().name()), getGameFormatLabel()));
-
-            case CARD_FROM_NOT_ALLOWED_SET:
-                return Localizer.getInstance().getMessage("lblErrNotAllowedCard", getGameFormatLabel());
-
-            case CARD_FROM_INVALID_SET:
-                return Localizer.getInstance().getMessage("lblErrCardEditionDate");
-
-            case UNSUPPORTED_CARD:
-                return Localizer.getInstance().getMessage("lblErrUnsupportedCard", this.currentGameType);
-
-            case UNKNOWN_CARD:
-                return String.format("%s: %s", Localizer.getInstance().getMessage("lblWarningMsgPrefix"),
-                        Localizer.getInstance().getMessage("lblWarnUnknownCardMsg"));
-
-            case UNSUPPORTED_DECK_SECTION:
-            case WARNING_MESSAGE:
-            case COMMENT:
-            case CARD_CMC:
-            case MANA_COLOUR:
-            case CARD_TYPE:
-            case DECK_SECTION_NAME:
-            case CARD_RARITY:
-            case DECK_NAME:
-            case LEGAL_CARD:
-            case UNKNOWN_TEXT:
-            default:
-                return "";
-
-        }
-
     }
 
     private String getTokenCSSClass(DeckRecognizer.TokenType tokenType){
@@ -898,17 +801,6 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             default:
                 return "";
         }
-    }
-
-    private String getTokenFoilLabel(DeckRecognizer.Token token) {
-        if (!token.isCardToken())
-            return "";
-        final String foilMarker = "- (Foil)";
-        return token.getCard().isFoil() ? foilMarker : "";
-    }
-
-    private String getGameFormatLabel() {
-         return String.format("\"%s\"", this.controller.getCurrentGameFormatName());
     }
 }
 

@@ -1,5 +1,5 @@
 Name:Max, the Daredevil
-AltName:Elmar, Ulvenwald Informant
+Variant:UniversesWithin:FlavorName:Elmar, Ulvenwald Informant
 ManaCost:1 R G
 Types:Legendary Creature Human
 PT:3/2

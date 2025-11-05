@@ -59,7 +59,7 @@ public class AddBasicLandsDialog extends FDialog {
     private final Consumer<CardPool> callback;
 
     private final FLabel lblLandSet = add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblLandSet") + ":").font(FSkinFont.get(12)).textColor(FLabel.getInlineLabelColor()).build());
-    private final FComboBox<CardEdition> cbLandSet = add(new FComboBox<>(IterableUtil.filter(StaticData.instance().getEditions(), CardEdition.Predicates.hasBasicLands)));
+    private final FComboBox<CardEdition> cbLandSet = add(new FComboBox<>(IterableUtil.filter(StaticData.instance().getSortedEditions(), CardEdition::hasBasicLands)));
 
     private final FScrollPane scroller = add(new FScrollPane() {
         @Override

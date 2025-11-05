@@ -7,10 +7,7 @@ import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.*;
 import forge.card.mana.ManaCost;
-import forge.game.Direction;
-import forge.game.EvenOdd;
-import forge.game.GameEntityView;
-import forge.game.GameType;
+import forge.game.*;
 import forge.game.combat.Combat;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
@@ -100,6 +97,25 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Controller, ownerAndController);
         set(TrackableProperty.ImageKey, imageKey);
     }
+
+    @Override
+    protected void updateName(GameEntity e) {
+        //Name reflects the current display name, as modified by any flavor names.
+        //OracleName can be used to find the true name of a card.
+        if (e instanceof Card c) {
+            set(TrackableProperty.Name, c.getDisplayName());
+            set(TrackableProperty.OracleName, c.getName());
+        }
+        else {
+            super.updateName(e);
+            set(TrackableProperty.OracleName, e.getName());
+        }
+    }
+
+    public String getOracleName() {
+        return get(TrackableProperty.OracleName);
+    }
+
     public PlayerView getOwner() {
         return get(TrackableProperty.Owner);
     }
@@ -1095,7 +1111,7 @@ public class CardView extends GameEntityView {
             if (c.getGame() != null) {
                 if (c.hasPerpetual()) currentStateView.updateColors(c);
                 else currentStateView.updateColors(currentState);
-                currentStateView.updateHasChangeColors(!Iterables.isEmpty(c.getChangedCardColors()));
+                currentStateView.updateHasChangeColors(c.hasChangedCardColors());
             }
         } else {
             currentStateView.updateLoyalty(currentState);
@@ -1280,16 +1296,26 @@ public class CardView extends GameEntityView {
         }
         void updateName(CardState c) {
             Card card = c.getCard();
-            setName(card.getName(c, false));
+            setName(card.getDisplayName(c));
+            setOracleName(card.getName(c));
 
             if (CardView.this.getCurrentState() == this) {
-                if (card != null) {
-                    CardView.this.updateName(card);
-                }
+                CardView.this.updateName(card);
             }
         }
-        private void setName(String name0) {
-            set(TrackableProperty.Name, name0);
+        private void setName(String name) {
+            set(TrackableProperty.Name, name);
+        }
+
+        /**
+         * @return The name of the card, unaltered by flavor names.
+         */
+        public String getOracleName() {
+            return get(TrackableProperty.OracleName);
+        }
+
+        private void setOracleName(String name) {
+            set(TrackableProperty.OracleName, name);
         }
 
         public ColorSet getColors() {
@@ -1308,7 +1334,7 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.Colors, c.getColor());
         }
         void updateColors(CardState c) {
-            set(TrackableProperty.Colors, ColorSet.fromMask(c.getColor()));
+            set(TrackableProperty.Colors, c.getColor());
         }
         void setOriginalColors(Card c) {
             set(TrackableProperty.OriginalColors, c.getColor());
@@ -1841,8 +1867,8 @@ public class CardView extends GameEntityView {
         }
 
         @Override
-        public String getUntranslatedOracle() {
-            return getOracleText();
+        public String getTranslatedName() {
+            return CardTranslation.getTranslatedName(this);
         }
     }
 

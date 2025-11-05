@@ -11,6 +11,7 @@ import forge.adventure.stage.GameHUD;
 import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
+import forge.model.CardBlock;
 
 /**
  * Scene for the Inn in towns
@@ -34,7 +35,7 @@ public class InnScene extends UIScene {
         localObjectId = objectId;
         if (lastGameScene != null)
             object.lastGameScene=lastGameScene;
-        getLocalEvent();
+        initLocalEvent();
 
         return object;
     }
@@ -109,7 +110,7 @@ public class InnScene extends UIScene {
         tempHitPointCost.setDisabled(!purchaseable);
         tempHitPointCost.setText("[+GoldCoin] " + tempHealthCost);
 
-        getLocalEvent();
+        initLocalEvent();
         if (localEvent == null){
             eventDescription.setText("[GREY]No events at this time");
             event.setDisabled(true);
@@ -148,9 +149,7 @@ public class InnScene extends UIScene {
         Forge.switchScene(ShopScene.instance());
     }
 
-
-
-    private static void getLocalEvent() {
+    private static void initLocalEvent() {
         localEvent = null;
         for (AdventureEventData data :  AdventurePlayer.current().getEvents()){
             if (data.sourceID.equals(localPointOfInterestId) && data.eventOrigin == localObjectId){
@@ -158,7 +157,18 @@ public class InnScene extends UIScene {
                 return;
             }
         }
-        localEvent = AdventureEventController.instance().createEvent(AdventureEventController.EventStyle.Bracket, localPointOfInterestId, localObjectId, changes);
+        AdventureEventController controller = AdventureEventController.instance();
+        localEvent = controller.createEvent(localPointOfInterestId);
+        if(localEvent != null)
+            controller.initializeEvent(localEvent, localPointOfInterestId, localObjectId, changes);
+    }
+
+    public static void replaceLocalEvent(AdventureEventController.EventFormat format, CardBlock cardBlock) {
+        AdventurePlayer.current().getEvents().removeIf((data) -> data.sourceID.equals(localPointOfInterestId) && data.eventOrigin == localObjectId);
+        AdventureEventController controller = AdventureEventController.instance();
+        localEvent = controller.createEvent(format, cardBlock, localPointOfInterestId);
+        if(localEvent != null)
+            controller.initializeEvent(localEvent, localPointOfInterestId, localObjectId, changes);
     }
 
     private void startEvent(){

@@ -1,0 +1,9 @@
+Name:Ellie, Brick Master
+ManaCost:1 R
+Types:Legendary Creature Human Survivor
+PT:2/1
+K:Partner - Survivors
+T:Mode$ AttackersDeclaredOneTarget | AttackedTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Distract the Horde - Whenever a player attacks one of your opponents, that attacking player creates a tapped 1/1 black Fungus Zombie creature token named Cordyceps Infected that's attacking that opponent.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ cordyceps_infected | TokenOwner$ TriggeredAttackingPlayer | TokenTapped$ True | TokenAttacking$ TriggeredAttackedTarget
+DeckHas:Ability$Token & Type$Zombie|Fungus
+Oracle:Distract the Horde - Whenever a player attacks one of your opponents, that attacking player creates a tapped 1/1 black Fungus Zombie creature token named Cordyceps Infected that's attacking that opponent.\nPartner—Survivors (You can have two commanders if both have this ability.)

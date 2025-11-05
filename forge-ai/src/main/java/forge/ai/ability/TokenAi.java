@@ -69,17 +69,20 @@ public class TokenAi extends SpellAbilityAi {
 
         Card actualToken = spawnToken(ai, sa);
 
-        if (actualToken == null || (actualToken.isCreature() && actualToken.getNetToughness() < 1)) {
-            // planeswalker plus ability or sub-ability is useful
-            return pwPlus || sa.getSubAbility() != null;
-        }
-
         String tokenAmount = sa.getParamOrDefault("TokenAmount", "1");
         String tokenPower = sa.getParamOrDefault("TokenPower", actualToken.getBasePowerString());
         String tokenToughness = sa.getParamOrDefault("TokenToughness", actualToken.getBaseToughnessString());
 
+        // Don't check toughness yet if token has variable P/T based on X
+        boolean tokenHasX = "X".equals(tokenAmount) || "X".equals(tokenPower) || "X".equals(tokenToughness);
+
+        if (!tokenHasX && (actualToken == null || (actualToken.isCreature() && actualToken.getNetToughness() < 1))) {
+            // planeswalker plus ability or sub-ability is useful
+            return pwPlus || sa.getSubAbility() != null;
+        }
+
         // X-cost spells
-        if ("X".equals(tokenAmount) || "X".equals(tokenPower) || "X".equals(tokenToughness)) {
+        if (tokenHasX) {
             int x = AbilityUtils.calculateAmount(sa.getHostCard(), tokenAmount, sa);
             if (source.getSVar("X").equals("Count$Converge")) {
                 x = ComputerUtilMana.getConvergeCount(sa, ai);
@@ -183,16 +186,9 @@ public class TokenAi extends SpellAbilityAi {
             }
         }
 
-        double chance = 1.0F; // 100%
-        boolean alwaysFromPW = true;
-        boolean alwaysOnOppAttack = true;
-
-        if (ai.getController().isAI()) {
-            AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-            chance = (double)aic.getIntProperty(AiProps.TOKEN_GENERATION_ABILITY_CHANCE) / 100;
-            alwaysFromPW = aic.getBooleanProperty(AiProps.TOKEN_GENERATION_ALWAYS_IF_FROM_PLANESWALKER);
-            alwaysOnOppAttack = aic.getBooleanProperty(AiProps.TOKEN_GENERATION_ALWAYS_IF_OPP_ATTACKS);
-        }
+        double chance = (double)AiProfileUtil.getIntProperty(ai, AiProps.TOKEN_GENERATION_ABILITY_CHANCE) / 100;
+        boolean alwaysFromPW = AiProfileUtil.getBoolProperty(ai, AiProps.TOKEN_GENERATION_ALWAYS_IF_FROM_PLANESWALKER);
+        boolean alwaysOnOppAttack = AiProfileUtil.getBoolProperty(ai, AiProps.TOKEN_GENERATION_ALWAYS_IF_OPP_ATTACKS);
 
         if (sa.isPwAbility() && alwaysFromPW) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

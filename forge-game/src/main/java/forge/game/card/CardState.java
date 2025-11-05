@@ -32,6 +32,7 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
 import forge.game.keyword.KeywordInterface;
+import forge.game.keyword.KeywordWithType;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.LandAbility;
@@ -40,6 +41,7 @@ import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
+import forge.util.CardTranslation;
 import forge.util.ITranslatable;
 import forge.util.IterableUtil;
 import forge.util.collect.FCollection;
@@ -54,13 +56,14 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class CardState extends GameObject implements IHasSVars, ITranslatable {
+public class CardState implements GameObject, IHasSVars, ITranslatable {
     private String name = "";
     private CardType type = new CardType(false);
     private ManaCost manaCost = ManaCost.NO_COST;
-    private byte color = MagicColor.COLORLESS;
+    private ColorSet color = ColorSet.C;
     private String oracleText = "";
     private String functionalVariantName = null;
+    private String flavorName = null;
     private int basePower = 0;
     private int baseToughness = 0;
     private String basePowerString = null;
@@ -189,14 +192,14 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
         view.updateManaCost(this);
     }
 
-    public final byte getColor() {
+    public final ColorSet getColor() {
         return color;
     }
-    public final void addColor(final byte color) {
-        this.color |= color;
+    public final void addColor(final ColorSet color) {
+        this.color = ColorSet.combine(this.color, color);
         view.updateColors(card);
     }
-    public final void setColor(final byte color) {
+    public final void setColor(final ColorSet color) {
         this.color = color;
         view.updateColors(card);
     }
@@ -217,6 +220,15 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
             functionalVariantName = null;
         this.functionalVariantName = functionalVariantName;
         view.setFunctionalVariantName(functionalVariantName);
+    }
+
+    public String getFlavorName() {
+        return flavorName;
+    }
+
+    public void setFlavorName(String flavorName) {
+        this.flavorName = flavorName;
+        view.updateName(this);
     }
 
     public final int getBasePower() {
@@ -297,6 +309,9 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     public final boolean hasIntrinsicKeyword(String k) {
         return intrinsicKeywords.contains(k);
     }
+    public final boolean hasIntrinsicKeyword(Keyword k) {
+        return intrinsicKeywords.contains(k);
+    }
     public final void setIntrinsicKeywords(final Iterable<KeywordInterface> intrinsicKeyword0, final boolean lki) {
         intrinsicKeywords.clear();
         for (KeywordInterface k : intrinsicKeyword0) {
@@ -367,7 +382,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     public final FCollectionView<SpellAbility> getManaAbilities() {
         FCollection<SpellAbility> newCol = new FCollection<>();
         updateSpellAbilities(newCol, true);
-        // stream().toList() causes crash on Android, use Collectors.toList()
+        // stream().toList() causes crash on Android 8-13, use Collectors.toList()
         newCol.addAll(abilities.stream().filter(SpellAbility::isManaAbility).collect(Collectors.toList()));
         card.updateSpellAbilities(newCol, this, true);
         return newCol;
@@ -375,7 +390,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     public final FCollectionView<SpellAbility> getNonManaAbilities() {
         FCollection<SpellAbility> newCol = new FCollection<>();
         updateSpellAbilities(newCol, false);
-        // stream().toList() causes crash on Android, use Collectors.toList()
+        // stream().toList() causes crash on Android 8-13, use Collectors.toList()
         newCol.addAll(abilities.stream().filter(Predicate.not(SpellAbility::isManaAbility)).collect(Collectors.toList()));
         card.updateSpellAbilities(newCol, this, false);
         return newCol;
@@ -390,7 +405,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
                 if (null != mana) {
                     leftAbilities = leftAbilities.stream()
                             .filter(mana ? SpellAbility::isManaAbility : Predicate.not(SpellAbility::isManaAbility))
-                            // stream().toList() causes crash on Android, use Collectors.toList()
+                            // stream().toList() causes crash on Android 8-13, use Collectors.toList()
                             .collect(Collectors.toList());
                 }
                 newCol.addAll(leftAbilities);
@@ -402,7 +417,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
                 if (null != mana) {
                     rightAbilities = rightAbilities.stream()
                             .filter(mana ? SpellAbility::isManaAbility : Predicate.not(SpellAbility::isManaAbility))
-                            // stream().toList() causes crash on Android, use Collectors.toList()
+                            // stream().toList() causes crash on Android 8-13, use Collectors.toList()
                             .collect(Collectors.toList());
                 }
                 newCol.addAll(rightAbilities);
@@ -500,15 +515,8 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
             String desc = "";
             String extra = "";
             for (KeywordInterface ki : this.getCachedKeyword(Keyword.ENCHANT)) {
-                String o = ki.getOriginal();
-                String m[] = o.split(":");
-                if (m.length > 2) {
-                    desc = m[2];
-                } else {
-                    desc = m[1];
-                    if (CardType.isACardType(desc) || "Permanent".equals(desc) || "Player".equals(desc) || "Opponent".equals(desc)) {
-                        desc = desc.toLowerCase();
-                    }
+                if (ki instanceof KeywordWithType kwt) {
+                    desc = kwt.getTypeDescription();
                 }
                 break;
             }
@@ -521,7 +529,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
             if (hasSVar("AttachAIValid")) { // TODO combine with AttachAITgts
                 extra += " | AIValid$ " + getSVar("AttachAIValid");
             }
-            String st = "SP$ Attach | ValidTgts$ Card.CanBeEnchantedBy,Player.CanBeEnchantedBy | TgtZone$ Battlefield,Graveyard | TgtPrompt$ Select target " + desc + extra;
+            String st = "SP$ Attach | ValidTgts$ Card.CanBeEnchantedBy,Player.CanBeEnchantedBy | TgtZone$ Battlefield,Graveyard | ValidTgtsDesc$ " + desc + extra;
             auraAbility = AbilityFactory.getAbility(st, this);
             auraAbility.setIntrinsic(true);
         }
@@ -721,6 +729,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
         setBaseLoyalty(source.getBaseLoyalty());
         setBaseDefense(source.getBaseDefense());
         setAttractionLights(source.getAttractionLights());
+        setFlavorName(source.getFlavorName());
         setSVars(source.getSVars());
 
         abilities.clear();
@@ -835,8 +844,17 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     }
 
     public CardState copy(final Card host, CardStateName name, final boolean lki) {
+        return copy(host, name, lki, null);
+    }
+    public CardState copy(final Card host, final CardTraitBase ctb) {
+        return copy(host, this.getStateName(), false, ctb);
+    }
+    public CardState copy(final Card host, CardStateName name, final CardTraitBase ctb) {
+        return copy(host, name, false, ctb);
+    }
+    public CardState copy(final Card host, CardStateName name, final boolean lki, final CardTraitBase ctb) {
         CardState result = new CardState(host, name);
-        result.copyFrom(this, lki);
+        result.copyFrom(this, lki, ctb);
         return result;
     }
 
@@ -935,9 +953,10 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
 
     @Override
     public String getTranslationKey() {
+        String displayName = flavorName == null ? name : flavorName;
         if(StringUtils.isNotEmpty(functionalVariantName))
-            return name + " $" + functionalVariantName;
-        return name;
+            return displayName + " $" + functionalVariantName;
+        return displayName;
     }
 
     @Override
@@ -946,7 +965,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     }
 
     @Override
-    public String getUntranslatedOracle() {
-        return getOracleText();
+    public String getTranslatedName() {
+        return CardTranslation.getTranslatedName(this);
     }
 }

@@ -1,0 +1,10 @@
+Name:The Earth King
+ManaCost:3 G
+Types:Legendary Creature Human Noble Ally
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 4/4 green Bear creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_4_4_bear | TokenOwner$ You
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.YouCtrl+powerGE4 | Execute$ TrigSearch | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more creatures you control with power 4 or greater attack, search your library for up to that many basic land cards, put them onto the battlefield tapped, then shuffle.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | Tapped$ True | ChangeNum$ X
+SVar:X:TriggerObjectsAttackers$Amount
+Oracle:When The Earth King enters, create a 4/4 green Bear creature token.\nWhenever one or more creatures you control with power 4 or greater attack, search your library for up to that many basic land cards, put them onto the battlefield tapped, then shuffle.

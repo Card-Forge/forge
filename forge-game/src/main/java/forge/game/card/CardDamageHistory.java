@@ -1,6 +1,5 @@
 package forge.game.card;
 
-
 import com.google.common.collect.Lists;
 import forge.game.CardTraitBase;
 import forge.game.GameEntity;
@@ -250,6 +249,9 @@ public class CardDamageHistory {
     }
 
     public int getDamageDoneThisTurn(Boolean isCombat, boolean anyIsEnough, String validSourceCard, String validTargetEntity, Card source, Player sourceController, CardTraitBase ctb) {
+        return getDamageDoneThisTurn(isCombat, anyIsEnough, false, validSourceCard, validTargetEntity, source, sourceController, ctb);
+    }
+    public int getDamageDoneThisTurn(Boolean isCombat, boolean anyIsEnough, boolean times, String validSourceCard, String validTargetEntity, Card source, Player sourceController, CardTraitBase ctb) {
         int sum = 0;
         for (Pair<Integer, Boolean> damage : damageDoneThisTurn) {
             Pair<Card, GameEntity> sourceToTarget = sourceController.getGame().getDamageLKI(damage);
@@ -265,12 +267,16 @@ public class CardDamageHistory {
                     continue;
                 }
             }
-            sum += damage.getLeft();
+            sum += times ? 1 : damage.getLeft();
             if (anyIsEnough) {
                 break;
             }
         }
         return sum;
+    }
+
+    public List<Pair<Integer, Boolean>> getAllDmgInstances() {
+        return damageDoneThisTurn;
     }
 
     public void newTurn() {

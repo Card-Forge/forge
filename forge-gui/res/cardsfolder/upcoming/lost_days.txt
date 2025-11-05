@@ -1,0 +1,6 @@
+Name:Lost Days
+ManaCost:4 U
+Types:Instant Lesson
+A:SP$ ChangeZone | ValidTgts$ Creature,Enchantment | TgtPrompt$ Select target creature or enchantment | AlternativeDecider$ TargetedOwner | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 1 | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | SubAbility$ DBToken | SpellDescription$ The owner of target creature or enchantment puts it into their library second from the top or on the bottom. You create a Clue token. (It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_clue_draw | TokenOwner$ You
+Oracle:The owner of target creature or enchantment puts it into their library second from the top or on the bottom. You create a Clue token. (It's an artifact with "{2}, Sacrifice this token: Draw a card.")

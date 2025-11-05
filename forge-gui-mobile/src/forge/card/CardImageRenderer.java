@@ -49,6 +49,24 @@ public class CardImageRenderer {
         return FSkinColor.fromRGB(detailColor.r, detailColor.g, detailColor.b);
     }
 
+    private static float getCapHeight(FSkinFont fSkinFont) {
+        if (fSkinFont == null)
+            return 0f;
+        return fSkinFont.getCapHeight();
+    }
+
+    private static float getAscent(FSkinFont fSkinFont) {
+        if (fSkinFont == null)
+            return 0f;
+        return fSkinFont.getAscent();
+    }
+
+    private static float getBoundsWidth(String sequence, FSkinFont fSkinFont) {
+        if (fSkinFont == null)
+            return 0f;
+        return fSkinFont.getBounds(sequence).width;
+    }
+
     public static void forceStaticFieldUpdate() {
         //force static fields to be updated the next time a card image is rendered
         prevImageWidth = 0;
@@ -143,7 +161,7 @@ public class CardImageRenderer {
         x += outerBorderThickness;
         y += outerBorderThickness;
         w -= 2 * outerBorderThickness;
-        float headerHeight = Math.max(MANA_SYMBOL_SIZE + 2 * HEADER_PADDING, 2 * NAME_FONT.getCapHeight()) + 2;
+        float headerHeight = Math.max(MANA_SYMBOL_SIZE + 2 * HEADER_PADDING, 2 * getCapHeight(NAME_FONT)) + 2;
 
         //draw header containing name and mana cost
         Color[] headerColors = FSkinColor.tintColors(Color.WHITE, colors, CardRenderer.NAME_BOX_TINT);
@@ -158,15 +176,15 @@ public class CardImageRenderer {
 
         float artWidth = w - 2 * artInset;
         float artHeight = !showArtBox ? 0f : artWidth / CardRenderer.CARD_ART_RATIO;
-        float typeBoxHeight = 2 * TYPE_FONT.getCapHeight();
+        float typeBoxHeight = 2 * getCapHeight(TYPE_FONT);
         float ptBoxHeight = 0;
         float textBoxHeight = h - headerHeight - artHeight - typeBoxHeight - outerBorderThickness - artInset;
 
         if (state.isCreature() || state.isPlaneswalker() || state.hasPrintedPT() || state.isBattle()) {
-            ptBoxHeight = 2 * PT_FONT.getCapHeight();
+            ptBoxHeight = 2 * getCapHeight(PT_FONT);
         }
         //space for artist
-        textBoxHeight -= 2 * PT_FONT.getCapHeight();
+        textBoxHeight -= 2 * getCapHeight(PT_FONT);
         PaperCard paperCard = null;
         try {
             paperCard = ImageUtil.getPaperCardFromImageKey(state.getImageKey());
@@ -246,7 +264,7 @@ public class CardImageRenderer {
         }
         //draw artist
         if (showArtist)
-            g.drawOutlinedText(artist, TEXT_FONT, Color.WHITE, Color.DARK_GRAY, x + (TYPE_FONT.getCapHeight() / 2), y + (TYPE_FONT.getCapHeight() / 2), w, h, false, Align.left, false);
+            g.drawOutlinedText(artist, TEXT_FONT, Color.WHITE, Color.DARK_GRAY, x + (getCapHeight(TYPE_FONT) / 2), y + (getCapHeight(TYPE_FONT) / 2), w, h, false, Align.left, false);
     }
     private static void drawOutlineColor(Graphics g, ColorSet colors, float x, float y, float w, float h) {
         if (colors == null)
@@ -296,7 +314,7 @@ public class CardImageRenderer {
                 manaCostWidth = CardFaceSymbols.getWidth(otherManaCost, manaSymbolSize) + HEADER_PADDING;
                 CardFaceSymbols.drawManaCost(g, otherManaCost, x + w - manaCostWidth, y + (h - manaSymbolSize) / 2, manaSymbolSize);
                 //draw "//" between two parts of mana cost
-                manaCostWidth += NAME_FONT.getBounds("//").width + HEADER_PADDING;
+                manaCostWidth += getBoundsWidth("//", NAME_FONT) + HEADER_PADDING;
                 g.drawText("//", NAME_FONT, Color.BLACK, x + w - manaCostWidth, y, w, h, false, Align.left, true);
             }
             manaCostWidth += CardFaceSymbols.getWidth(mainManaCost, manaSymbolSize) + HEADER_PADDING;
@@ -517,7 +535,7 @@ public class CardImageRenderer {
             } else {
                 //left
                 //float headerHeight = Math.max(MANA_SYMBOL_SIZE + 2 * HEADER_PADDING, 2 * TYPE_FONT.getCapHeight()) + 2;
-                float typeBoxHeight = 2 * TYPE_FONT.getCapHeight();
+                float typeBoxHeight = 2 * getCapHeight(TYPE_FONT);
                 drawHeader(g, card, card.getState(true), altcolors, x, y, w - (w / 2), typeBoxHeight, noText, true);
                 drawTypeLine(g, card.getState(true), canShow, altcolors, x, y + typeBoxHeight, w - (w / 2), typeBoxHeight, noText, true, true);
                 float mod = (typeBoxHeight + typeBoxHeight);
@@ -714,7 +732,7 @@ public class CardImageRenderer {
                 return;
             }
 
-            float padding = TEXT_FONT.getCapHeight() * 0.75f;
+            float padding = getCapHeight(TEXT_FONT) * 0.75f;
             x += padding;
             y += padding;
             w -= 2 * padding;
@@ -747,15 +765,15 @@ public class CardImageRenderer {
             return;
         }
 
-        float padding = Math.round(PT_FONT.getCapHeight() / 4);
+        float padding = Math.round(getCapHeight(PT_FONT) / 4);
         float totalPieceWidth = -padding;
         float[] pieceWidths = new float[pieces.size()];
         for (int i = 0; i < pieces.size(); i++) {
-            float pieceWidth = PT_FONT.getBounds(pieces.get(i)).width + padding;
+            float pieceWidth = getBoundsWidth(pieces.get(i), PT_FONT) + padding;
             pieceWidths[i] = pieceWidth;
             totalPieceWidth += pieceWidth;
         }
-        float boxHeight = PT_FONT.getCapHeight() + PT_FONT.getAscent() + 3 * padding;
+        float boxHeight = getCapHeight(PT_FONT) + getAscent(PT_FONT) + 3 * padding;
 
         float boxWidth = Math.max(PT_BOX_WIDTH, totalPieceWidth + 2 * padding);
         x += w - boxWidth;
@@ -951,14 +969,14 @@ public class CardImageRenderer {
         x += outerBorderThickness;
         y += outerBorderThickness;
         w -= 2 * outerBorderThickness;
-        float cardNameBoxHeight = Math.max(MANA_SYMBOL_SIZE + 2 * HEADER_PADDING, 2 * NAME_FONT.getCapHeight()) + 2 * TYPE_FONT.getCapHeight() + 2;
+        float cardNameBoxHeight = Math.max(MANA_SYMBOL_SIZE + 2 * HEADER_PADDING, 2 * getCapHeight(NAME_FONT)) + 2 * getCapHeight(TYPE_FONT) + 2;
 
         //draw name/type box
         Color[] nameBoxColors = FSkinColor.tintColors(Color.WHITE, colors, CardRenderer.NAME_BOX_TINT);
         drawDetailsNameBox(g, card, state, canShow, nameBoxColors, x, y, w, cardNameBoxHeight);
 
         float innerBorderThickness = outerBorderThickness / 2;
-        float ptBoxHeight = 2 * PT_FONT.getCapHeight();
+        float ptBoxHeight = 2 * getCapHeight(PT_FONT);
         float textBoxHeight = h - cardNameBoxHeight - ptBoxHeight - outerBorderThickness - 3 * innerBorderThickness;
 
         y += cardNameBoxHeight + innerBorderThickness;
@@ -1141,7 +1159,7 @@ public class CardImageRenderer {
         float padding = h / 8;
 
         //make sure name/mana cost row height is tall enough for both
-        h = Math.max(MANA_SYMBOL_SIZE + 2 * HEADER_PADDING, 2 * NAME_FONT.getCapHeight());
+        h = Math.max(MANA_SYMBOL_SIZE + 2 * HEADER_PADDING, 2 * getCapHeight(NAME_FONT));
 
         //draw mana cost for card
         float manaCostWidth = 0;
@@ -1154,7 +1172,7 @@ public class CardImageRenderer {
                 manaCostWidth = CardFaceSymbols.getWidth(otherManaCost, MANA_SYMBOL_SIZE) + HEADER_PADDING;
                 CardFaceSymbols.drawManaCost(g, otherManaCost, x + w - manaCostWidth, y + (h - MANA_SYMBOL_SIZE) / 2, MANA_SYMBOL_SIZE);
                 //draw "//" between two parts of mana cost
-                manaCostWidth += NAME_FONT.getBounds("//").width + HEADER_PADDING;
+                manaCostWidth += getBoundsWidth("//", NAME_FONT) + HEADER_PADDING;
                 g.drawText("//", NAME_FONT, Color.BLACK, x + w - manaCostWidth, y, w, h, false, Align.left, true);
             }
             manaCostWidth += CardFaceSymbols.getWidth(mainManaCost, MANA_SYMBOL_SIZE) + HEADER_PADDING;
@@ -1168,7 +1186,7 @@ public class CardImageRenderer {
 
         //draw type and set label for card
         y += h;
-        h = 2 * TYPE_FONT.getCapHeight();
+        h = 2 * getCapHeight(TYPE_FONT);
 
         String set = state.getSetCode();
         CardRarity rarity = state.getRarity();
@@ -1189,7 +1207,7 @@ public class CardImageRenderer {
         fillColorBackground(g, colors, x, y, w, h);
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
-        float padX = TEXT_FONT.getCapHeight() / 2;
+        float padX = getCapHeight(TEXT_FONT) / 2;
         float padY = padX + Utils.scale(2); //add a little more vertical padding
         x += padX;
         y += padY;
@@ -1202,8 +1220,8 @@ public class CardImageRenderer {
         float idWidth = 0;
         if (canShow) {
             String idText = CardDetailUtil.formatCardId(state);
-            g.drawText(idText, TYPE_FONT, idForeColor, x, y + TYPE_FONT.getCapHeight() / 2, w, h, false, Align.left, false);
-            idWidth = TYPE_FONT.getBounds(idText).width;
+            g.drawText(idText, TYPE_FONT, idForeColor, x, y + getCapHeight(TYPE_FONT) / 2, w, h, false, Align.left, false);
+            idWidth = getBoundsWidth(idText, TYPE_FONT);
         }
 
         String ptText = CardDetailUtil.formatPrimaryCharacteristic(state, canShow);
@@ -1212,7 +1230,7 @@ public class CardImageRenderer {
         }
 
         TextBounds bounds = cardTextRenderer.getBounds(ptText, PT_FONT);
-        float padding = PT_FONT.getCapHeight() / 2;
+        float padding = getCapHeight(PT_FONT) / 2;
         float boxWidth = Math.min(bounds.width + 2 * padding,
                 w - idWidth - padding); //prevent box overlapping ID
         x += w - boxWidth;

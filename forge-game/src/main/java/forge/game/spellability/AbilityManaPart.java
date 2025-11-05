@@ -17,7 +17,6 @@
  */
 package forge.game.spellability;
 
-import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import forge.card.ColorSet;
 import forge.card.GamePieceType;
@@ -49,9 +48,9 @@ import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -193,10 +192,8 @@ public class AbilityManaPart implements java.io.Serializable {
             }
         }
 
-        // add the mana produced to the mana pool
         manaPool.add(this.lastManaProduced);
 
-        // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(source);
         runParams.put(AbilityKey.Player, player);
         runParams.put(AbilityKey.Produced, afterReplace);
@@ -254,7 +251,7 @@ public class AbilityManaPart implements java.io.Serializable {
         eff.setOwner(sourceCard.getController());
 
         eff.setImageKey(sourceCard.getImageKey());
-        eff.setColor(MagicColor.COLORLESS);
+        eff.setColor(ColorSet.C);
         eff.setGamePieceType(GamePieceType.EFFECT);
 
         String cantcounterstr = "Event$ Counter | ValidSA$ Spell.IsRemembered | Description$ That spell can't be countered.";
@@ -513,7 +510,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * @return a {@link java.lang.String} object.
      */
     public final String mana(SpellAbility sa) {
-        if (isComboMana()) { // when asking combo, just go there
+        if (isComboMana()) {
             return getComboColors(sa);
         }
         String produced = this.getOrigProduced();
@@ -658,8 +655,8 @@ public class AbilityManaPart implements java.io.Serializable {
         }
         // replace Chosen for Spire colors
         if (origProduced.contains("ColorID")) {
-            Iterator<String> colors = Iterators.transform(sa.getHostCard().getMarkedColors().iterator(), MagicColor::toLongString);
-            origProduced = origProduced.replace("ColorID", getChosenColor(sa, () -> colors));
+            String str = sa.getHostCard().getMarkedColors().stream().map(c -> c.getShortName()).collect(Collectors.joining(" "));
+            origProduced = origProduced.replace("ColorID", str);
         }
         if (origProduced.contains("NotedColors")) {
             // Should only be used for Paliano, the High City

@@ -1,7 +1,9 @@
 package forge.card;
 
 import com.google.common.collect.ImmutableList;
-import forge.deck.DeckRecognizer;
+
+import forge.util.ITranslatable;
+import forge.util.Localizer;
 
 /**
  * Holds byte values for each color magic has.
@@ -157,21 +159,24 @@ public final class MagicColor {
         }
     }
 
-    public enum Color {
-        WHITE(Constant.WHITE, MagicColor.WHITE, "{W}"),
-        BLUE(Constant.BLUE, MagicColor.BLUE, "{U}"),
-        BLACK(Constant.BLACK, MagicColor.BLACK, "{B}"),
-        RED(Constant.RED, MagicColor.RED, "{R}"),
-        GREEN(Constant.GREEN, MagicColor.GREEN, "{G}"),
-        COLORLESS(Constant.COLORLESS, MagicColor.COLORLESS, "{C}");
+    public enum Color implements ITranslatable {
+        WHITE(Constant.WHITE, MagicColor.WHITE, "W", "lblWhite"),
+        BLUE(Constant.BLUE, MagicColor.BLUE, "U", "lblBlue"),
+        BLACK(Constant.BLACK, MagicColor.BLACK, "B", "lblBlack"),
+        RED(Constant.RED, MagicColor.RED, "R", "lblRed"),
+        GREEN(Constant.GREEN, MagicColor.GREEN, "G", "lblGreen"),
+        COLORLESS(Constant.COLORLESS, MagicColor.COLORLESS, "C", "lblColorless");
 
-        private final String name, symbol;
+        private final String name, shortName, symbol;
+        private final String label;
         private final byte colormask;
 
-        Color(String name0, byte colormask0, String symbol0) {
+        Color(String name0, byte colormask0, String shortName, String label) {
             name = name0;
             colormask = colormask0;
-            symbol = symbol0;
+            this.shortName = shortName;
+            symbol = "{" + shortName + "}";
+            this.label = label;
         }
 
         public static Color fromByte(final byte color) {
@@ -185,24 +190,24 @@ public final class MagicColor {
             }
         }
 
+        @Override
         public String getName() {
             return name;
         }
-
-        public String getLocalizedName() {
-            //Should probably move some of this logic back here, or at least to a more general location.
-            return DeckRecognizer.getLocalisedMagicColorName(getName());
+        public String getShortName() {
+            return shortName;
         }
 
-        public byte getColormask() {
+        @Override
+        public String getTranslatedName() {
+            return Localizer.getInstance().getMessage(label);
+        }
+
+        public byte getColorMask() {
             return colormask;
         }
         public String getSymbol() {
             return symbol;
-        }
-        @Override
-        public String toString() {
-            return name;
         }
     }
 

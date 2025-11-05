@@ -6,6 +6,7 @@ import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class PaperToken implements InventoryItemFromSet, IPaperCard {
@@ -89,6 +90,11 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     }
 
     @Override
+    public String getDisplayName() {
+        return name;
+    }
+
+    @Override
     public String toString() {
         return name;
     }
@@ -156,7 +162,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
             return false;
         CardSplitType cst = this.cardRules.getSplitType();
         //expand this on future for other tokens that has other backsides besides transform..
-        return cst == CardSplitType.Transform;
+        return cst == CardSplitType.Transform || cst == CardSplitType.Modal;
     }
 
     @Override
@@ -167,6 +173,11 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     @Override
     public ICardFace getOtherFace() {
         return this.getRules().getOtherPart();
+    }
+
+    @Override
+    public List<ICardFace> getAllFaces() {
+        return this.cardRules.getAllFaces();
     }
 
     @Override

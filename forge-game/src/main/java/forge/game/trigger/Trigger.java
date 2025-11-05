@@ -124,7 +124,7 @@ public abstract class Trigger extends TriggerReplacementBase {
             String desc = getParam("TriggerDescription");
             if (!desc.contains("ABILITY")) {
                 desc = CardTranslation.translateSingleDescriptionText(getParam("TriggerDescription"), nameSource);
-                String translatedName = CardTranslation.getTranslatedName(nameSource);
+                String translatedName = nameSource.getTranslatedName();
                 desc = TextUtil.fastReplace(desc,"CARDNAME", translatedName);
                 desc = TextUtil.fastReplace(desc,"NICKNAME", Lang.getInstance().getNickName(translatedName));
                 if (desc.contains("ORIGINALHOST") && this.getOriginalHost() != null) {
@@ -218,7 +218,7 @@ public abstract class Trigger extends TriggerReplacementBase {
             result = TextUtil.fastReplace(result, "ABILITY", saDesc);
 
             result = CardTranslation.translateMultipleDescriptionText(result, sa.getHostCard());
-            String translatedName = CardTranslation.getTranslatedName(sa.getHostCard());
+            String translatedName = sa.getHostCard().getTranslatedName();
             result = TextUtil.fastReplace(result,"CARDNAME", translatedName);
             result = TextUtil.fastReplace(result,"NICKNAME", Lang.getInstance().getNickName(translatedName));
         }
@@ -392,6 +392,10 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
 
+        if (condition == null) {
+            return true;
+        }
+
         if ("LifePaid".equals(condition)) {
             final SpellAbility trigSA = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
             if (trigSA != null && trigSA.getAmountLifePaid() <= 0) {
@@ -442,7 +446,15 @@ public abstract class Trigger extends TriggerReplacementBase {
             if (game.getCombat().getAttackersAndDefenders().values().containsAll(attacker.getOpponents())) {
                 return false;
             }
+        } else if (condition.startsWith("FromNamedAbility")) {
+            var rest = condition.substring(16);
+            final SpellAbility trigSA = (SpellAbility) runParams.get(AbilityKey.Cause);
+
+            if (trigSA != null && !trigSA.getName().equals(rest)) {
+                return false;
+            }
         }
+        
         return true;
     }
 
