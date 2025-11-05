@@ -771,11 +771,17 @@ public class CardUtil {
     public static PaperCard getCardByName(String cardName) {
         List<PaperCard> validCards;
         // Faster to ask the CardDB for a card name than it is to search the pool.
-        if (Config.instance().getSettingData().useAllCardVariants)
-            validCards = FModel.getMagicDb().getCommonCards().getAllCards(cardName);
-        else
+        if (Config.instance().getSettingData().useAllCardVariants) {
+            Predicate<PaperCard> not_restricted = card -> (!Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(card.getEdition()));
+            Predicate<PaperCard> combined_predicate = not_restricted;
+            if (Config.instance().getSettingData().excludeAlchemyVariants) {
+                Predicate<PaperCard> not_rebalanced = card -> (!card.getName().startsWith("A-"));
+                combined_predicate = not_restricted.and(not_rebalanced);
+            }
+            validCards = FModel.getMagicDb().getCommonCards().getAllCards(cardName, combined_predicate);
+        } else {
             validCards = FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(cardName);
-
+        }
         if (validCards.isEmpty()) {
             return getReplacement(cardName, "Wastes");
         }
