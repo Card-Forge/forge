@@ -1,7 +1,7 @@
 Name:Tectonic Split
 ManaCost:4 G G
 Types:Enchantment
-A:SP$ PermanentEnchantment | Cost$ 4 G G Sac<X/Land>
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Activator$ You | Type$ Spell | Cost$ Sac<X/Land/land(s)> | EffectZone$ All | Description$ As an additional cost to cast this spell, sacrifice half the lands you control, rounded up.
 K:Hexproof
 S:Mode$ Continuous | Affected$ Land.YouCtrl | AddAbility$ AnyMana | Description$ Lands you control have "{T}: Add three mana of any one color."
 SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 3 | SpellDescription$ Add three mana of any one color.
