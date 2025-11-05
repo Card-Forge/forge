@@ -85,7 +85,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         }
 
         @Override
-        public ItemPool<PaperCard> getCardPool(boolean wantUnique) {
+        public ItemPool<PaperCard> getCardPool() {
             ItemPool<PaperCard> pool = new ItemPool<>(PaperCard.class);
             pool.addAll(Current.player().getCards());
             return pool;
@@ -163,7 +163,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         }
 
         @Override
-        public ItemPool<PaperCard> getCardPool(boolean wantUnique) {
+        public ItemPool<PaperCard> getCardPool() {
             return deckToPreview.getAllCardsInASinglePool(true, true);
         }
 
