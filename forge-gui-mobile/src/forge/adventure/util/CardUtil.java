@@ -19,6 +19,7 @@ import forge.deck.io.DeckSerializer;
 import forge.game.GameFormat;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.item.SealedTemplate;
 import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
@@ -775,8 +776,7 @@ public class CardUtil {
             Predicate<PaperCard> not_restricted = card -> (!Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(card.getEdition()));
             Predicate<PaperCard> combined_predicate = not_restricted;
             if (Config.instance().getSettingData().excludeAlchemyVariants) {
-                Predicate<PaperCard> not_rebalanced = card -> (!card.getName().startsWith("A-"));
-                combined_predicate = not_restricted.and(not_rebalanced);
+                combined_predicate = not_restricted.and(PaperCardPredicates.IS_REBALANCED.negate());
             }
             validCards = FModel.getMagicDb().getCommonCards().getAllCards(cardName, combined_predicate);
         } else {
