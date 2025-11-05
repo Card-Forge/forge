@@ -1,0 +1,8 @@
+Name:Moku, Meandering Drummer
+ManaCost:1 R
+Types:Legendary Creature Human Bard Ally
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a noncreature spell, you may pay {1}. If you do, NICKNAME gets +2/+1 and creatures you control gain haste until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ 1 | Defined$ Self | NumAtt$ +2 | NumDef$ +1 | SubAbility$ DBPumpAll
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Haste
+Oracle:Whenever you cast a noncreature spell, you may pay {1}. If you do, Moku gets +2/+1 and creatures you control gain haste until end of turn.

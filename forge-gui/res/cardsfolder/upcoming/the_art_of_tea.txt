@@ -1,0 +1,7 @@
+Name:The Art of Tea
+ManaCost:1 G
+Types:Instant Lesson
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to one target creature you control | TargetMin$ 0 | TargetMax$ 1 | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBToken | SpellDescription$ Put a +1/+1 counter on up to one target creature you control. Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
+SVar:DBToken:DB$ Token | TokenScript$ c_a_food_sac
+DeckHas:Ability$Counters|Token|Sacrifice|LifeGain|Food
+Oracle:Put a +1/+1 counter on up to one target creature you control. Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")

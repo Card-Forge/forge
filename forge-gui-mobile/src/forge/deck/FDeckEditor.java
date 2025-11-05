@@ -66,8 +66,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             return gameType == null ? null : gameType.getDeckFormat();
         }
 
-        public ItemPool<PaperCard> getCardPool(boolean wantUnique) {
-            return wantUnique ? FModel.getUniqueCardsNoAlt() : FModel.getAllCardsNoAlt();
+        public ItemPool<PaperCard> getCardPool() {
+            return FModel.getAllCardsNoAlt();
         }
         protected Predicate<PaperCard> getCardFilter() { return null; }
 
@@ -172,10 +172,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         @Override public boolean hasCommander() { return deckFormat.hasCommander(); }
 
         @Override
-        public ItemPool<PaperCard> getCardPool(boolean wantUnique) {
+        public ItemPool<PaperCard> getCardPool() {
             if(this.itemPoolSupplier != null)
                 return itemPoolSupplier.get();
-            return super.getCardPool(wantUnique);
+            return super.getCardPool();
         }
 
         @Override
@@ -1713,7 +1713,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
             //Clone the pool to ensure we don't mutate it by adding to or removing from this page.
             //Can override this if that behavior is desired.
-            ItemPool<PaperCard> cardPool = CardPool.createFrom(parentScreen.getEditorConfig().getCardPool(cardManager.getWantUnique()), PaperCard.class);
+            ItemPool<PaperCard> cardPool = CardPool.createFrom(parentScreen.getEditorConfig().getCardPool(), PaperCard.class);
 
             if(editorConfig.usePlayerInventory() && currentDeck != null) {
                 //Remove any items from the pool that are in the deck.
@@ -1886,8 +1886,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 menu.addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblUniqueCardsOnly"), cardManager.getWantUnique(), e -> {
                     boolean wantUnique = !cardManager.getWantUnique();
                     cardManager.setWantUnique(wantUnique);
-                    refresh();
                     cardManager.getConfig().setUniqueCardsOnly(wantUnique);
+                    cardManager.refresh();
                 }));
             }
         }

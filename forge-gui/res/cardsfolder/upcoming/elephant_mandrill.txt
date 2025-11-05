@@ -1,0 +1,12 @@
+Name:Elephant-Mandrill
+ManaCost:2 G
+Types:Creature Elephant Monkey
+PT:3/2
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, each player creates a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ Player
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, this creature gets +1/+1 until end of turn for each artifact your opponents control.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X | NumDef$ +X
+SVar:X:Count$Valid Artifact.OppCtrl
+DeckHas:Ability$Token|Sacrifice|LifeGain|Food
+Oracle:Reach\nWhen this creature enters, each player creates a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")\nAt the beginning of combat on your turn, this creature gets +1/+1 until end of turn for each artifact your opponents control.

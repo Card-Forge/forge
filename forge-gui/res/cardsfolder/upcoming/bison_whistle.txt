@@ -1,0 +1,9 @@
+Name:Bison Whistle
+ManaCost:1 G
+Types:Artifact
+A:AB$ PeekAndReveal | Cost$ 1 T | NoReveal$ True | RememberPeeked$ True | SubAbility$ DBChangeZone1 | SpellDescription$ Look at the top card of your library. If it's a Bison card, you may put it onto the battlefield. If it's a creature card, you may reveal it and put it into your hand. Otherwise, you may put it into your graveyard.
+SVar:DBChangeZone1:DB$ Dig | DestinationZone$ Battlefield | DigNum$ 1 | ChangeNum$ All | Optional$ True | ConditionDefined$ Remembered | ConditionPresent$ Bison | ConditionCompare$ GE1 | ForgetChanged$ True | SubAbility$ DBChangeZone2
+SVar:DBChangeZone2:DB$ Dig | DestinationZone$ Hand | DigNum$ 1 | ChangeNum$ All | Optional$ True | ForceRevealToController$ True | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ GE1 | ForgetChanged$ True | SubAbility$ DBChangeZone3
+SVar:DBChangeZone3:DB$ Dig | DestinationZone$ Graveyard | DigNum$ 1 | ChangeNum$ All | Optional$ True | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:{1}, {T}: Look at the top card of your library. If it's a Bison card, you may put it onto the battlefield. If it's a creature card, you may reveal it and put it into your hand. Otherwise, you may put it into your graveyard.

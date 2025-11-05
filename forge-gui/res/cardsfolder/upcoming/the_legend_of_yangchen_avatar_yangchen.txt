@@ -1,0 +1,25 @@
+Name:The Legend of Yangchen
+ManaCost:3 W W
+Types:Enchantment Saga
+K:Chapter:3:DBRepeatEach,DBDraw,DBTransform
+SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player | StartingWith$ You | RepeatSubAbility$ DBChoosePermanent | SubAbility$ DBChangeZone | SpellDescription$ Starting with you, each player chooses up to one permanent with mana value 3 or greater from among permanents your opponents control. Exile those permanents.
+SVar:DBChoosePermanent:DB$ ChooseCard | ChoiceTitle$ Choose up to one permanent with mana value 3 or greater | MinAmount$ 0 | Amount$ 1 | Defined$ Remembered | Choices$ Permanent.cmcGE3+OppCtrl | RememberChosen$ True
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
+SVar:DBDraw:DB$ Draw | Defined$ You | ValidTgts$ Opponent | NumCards$ 3 | UnlessCost$ Draw<3/Player.targetedBy> | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ You may have target opponent draw three cards. If you do, draw three cards.
+SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | GainControl$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AlternateMode:DoubleFaced
+Oracle:(As this Saga enters, and after your draw step, add a lore counter.)\nI — Starting with you, each player chooses up to one permanent with mana value 3 or greater from among permanents your opponents control. Exile those permanents.\nII — You may have target opponent draw three cards. If you do, draw three cards.\nIII — Exile this Saga, then return it to the battlefield transformed under your control.
+
+ALTERNATE
+
+Name:Avatar Yangchen
+ManaCost:no cost
+Types:Legendary Creature Avatar
+PT:4/5
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAirbend | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Whenever you cast your second spell each turn, airbend up to one other target nonland permanent. (Exile it. While it's exiled, its owner may cast it for {2} rather than its mana cost.)
+SVar:TrigAirbend:DB$ Airbend | ValidTgts$ Permanent.nonLand+Other | TgtPrompt$ Select up to one other target nonland permanent | TargetMin$ 0 | TargetMax$ 1
+Oracle:Flying\nWhenever you cast your second spell each turn, airbend up to one other target nonland permanent. (Exile it. While it's exiled, its owner may cast it for {2} rather than its mana cost.)

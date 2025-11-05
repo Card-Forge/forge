@@ -9,6 +9,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.TextUtil;
@@ -280,6 +281,14 @@ public class PlayerProperty {
             }
         } else if (property.equals("MaxSpeed")) {
             if (!player.maxSpeed()) {
+                return false;
+            }
+        } else if (property.equals("targetedBy")) {
+            if (!(spellAbility instanceof SpellAbility)) {
+                return false;
+            }
+            SpellAbility sp = (SpellAbility)spellAbility;
+            if (!sp.getRootAbility().isTargeting(player)) {
                 return false;
             }
         } else if (property.startsWith("controls")) {

@@ -1,0 +1,9 @@
+Name:Bumi's Feast Lecture
+ManaCost:1 G
+Types:Sorcery Lesson
+A:SP$ Token | TokenScript$ c_a_food_sac | TokenAmount$ 1 | TokenOwner$ You | SubAbility$ DBEarthbend | SpellDescription$ Create a Food token. Then earthbend X, where X is twice the number of Foods you control. (A Food token is an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life." To earthbend X, target land you control becomes a 0/0 creature with haste that's still a land. Put X +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)
+SVar:DBEarthbend:DB$ Earthbend | Num$ X
+SVar:X:Count$Valid Food.YouCtrl/Twice
+DeckHas:Ability$LifeGain|Token|Food
+DeckHints:Ability$Food
+Oracle:Create a Food token. Then earthbend X, where X is twice the number of Foods you control. (A Food token is an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life." To earthbend X, target land you control becomes a 0/0 creature with haste that's still a land. Put X +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)

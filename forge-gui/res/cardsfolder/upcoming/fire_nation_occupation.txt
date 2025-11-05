@@ -1,0 +1,7 @@
+Name:Fire Nation Occupation
+ManaCost:2 B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this enchantment enters, create a 2/2 red Soldier creature token with firebending 1.
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OpponentTurn$ True | Execute$ TrigToken | TriggerDescription$ Whenever you cast a spell during an opponent's turn, create a 2/2 red Soldier creature token with firebending 1.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_2_2_soldier_firebending_1 | TokenOwner$ You
+Oracle:When this enchantment enters, create a 2/2 red Soldier creature token with firebending 1. (Whenever it attacks, add {R}. This mana lasts until end of combat.)\nWhenever you cast a spell during an opponent's turn, create a 2/2 red Soldier creature token with firebending 1.

@@ -1,0 +1,7 @@
+Name:Freedom Fighter Recruit
+ManaCost:1 R
+Types:Creature Human Rebel Ally
+PT:*/2
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:Freedom Fighter Recruit's power is equal to the number of creatures you control.
