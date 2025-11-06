@@ -611,7 +611,11 @@ public abstract class Trigger extends TriggerReplacementBase {
     public SpellAbility ensureAbility(final IHasSVars sVarHolder) {
         SpellAbility sa = getOverridingAbility();
         if (sa == null && hasParam("Execute")) {
-            sa = AbilityFactory.getAbility(getHostCard(), getParam("Execute"), sVarHolder);
+            if (this.isIntrinsic() && sVarHolder instanceof CardState state) {
+                sa = state.getAbilityForTrigger(getParam("Execute"));
+            } else {
+                sa = AbilityFactory.getAbility(getHostCard(), getParam("Execute"), sVarHolder);
+            }
             setOverridingAbility(sa);
         }
         return sa;

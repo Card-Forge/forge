@@ -79,6 +79,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     private FCollection<StaticAbility> staticAbilities = new FCollection<>();
     private String imageKey = "";
     private Map<String, String> sVars = Maps.newTreeMap();
+    private Map<String, SpellAbility> abilityForTrigger = Maps.newHashMap();
 
     private KeywordCollection cachedKeywords = new KeywordCollection();
 
@@ -949,6 +950,10 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             cloakUp = CardFactoryUtil.abilityTurnFaceUp(this, "CloakUp", "Uncloak");
         }
         return cloakUp;
+    }
+
+    public SpellAbility getAbilityForTrigger(String svar) {
+        return abilityForTrigger.computeIfAbsent(svar, s -> AbilityFactory.getAbility(getCard(), s, this));
     }
 
     @Override
