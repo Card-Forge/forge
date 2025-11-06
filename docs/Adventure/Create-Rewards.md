@@ -107,7 +107,7 @@ Valid options are:
 * `item` will give items to be added to the player's inventory.
 * `card` will create one or more cards matching a detailed set of filters to follow.
 * `union` is a wrapper for multiple `card` instances that can have mutually exclusive filters.
-* `deckCard` is only used with rewards from [enemies](Create-Enemies), this functions as a `card` reward that is limited to cards found in that enemy's deck.
+* `deckCard` is only used with rewards from [enemies](Create-Enemies.md), this functions as a `card` reward that is limited to cards found in that enemy's deck.
 
 `{"type": "card", ...}`
 
