@@ -1,9 +1,4 @@
-# Guide - Creating a Custom Card
-
-Using the Forge API you can create your own custom cards and sets. This guide will walk you through the process of creating custom cards via the Force Custom Card Script. 
-
-The next tutorial will walk you through the process of adding your new cards to a custom set. 
-
+Using the Forge API you can create your own custom cards and sets. This tutorial will walk you through the process of creating custom cards via the Force Custom Card Script.
 
 ## File Locations
 
@@ -84,11 +79,11 @@ Let's break our card down:
  - K - A Keyword that gives our creature an ability. 
  - Oracle - The actual text that appears on that card. 
 
-For a refrence of possible fields and their descriptions please see the [Card Scripting API](Card-scripting-API) document. Note that maintaining an up to date list of every ability of every Magic Card ever printed is not feasable. The API is meant to serve as a guide and includes most common used information. 
+For a reference of possible fields and their descriptions please see the [Card Scripting API](Card-scripting-API) document. Note that maintaining an up to date list of every ability of every Magic Card ever printed is not feasable. The API is meant to serve as a guide and includes most common used information. 
 
 3. Add Card to a Set
 
-Now that we have a new card we need to add it to a set so that it will be included in the game. For the purposes of this turorial we'll add out card to an existing set. If you wish to create your own set you can follow this guide: `Guide Coming Soon`
+Now that we have a new card we need to add it to a set so that it will be included in the game. For the purposes of this tutorial we'll add our card to an existing set. If you wish to create your own set you can follow this [guide](Creating-a-custom-Set.md).
 
 Navigate to your Custom Editions folder and open the text file for the set you would like to add your card to. Let's add our card to the "DCI Promos" set.
 
@@ -171,7 +166,7 @@ Simply save and rename the image to "Goblin Card Guide.fullborder.jpg" then over
 
 You can check the [Abilities](AbilityFactory) and [Triggers](Triggers) documentation for more information on this topic. These documents are meant as a guide and are unlikely to contain information about every ability in the game.
 
-The sinplest method for creating an effect on your card is to find another card that does the same thing and copying the ability. These can be found in your Forge folder:
+The sinmlest method for creating an effect on your card is to find another card that does the same thing and copying the ability. These can be found in your Forge folder:
 
 >./Forge/res/cardsfolder/cardsfolder.zip
 

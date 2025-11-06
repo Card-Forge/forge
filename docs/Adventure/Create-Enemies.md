@@ -1,6 +1,6 @@
 All Enemies are stored under `res/<AdventureName>/world/enemies.json`
 
-Enemies spawned on the overworld map or on map stages will use this exact template to define their base behavior. These values can be modified or added to with additional settings on an individual enemy basis, details of which can be found within [map instance](Create-new-Maps).
+Enemies spawned on the overworld map or on map stages will use this exact template to define their base behavior. These values can be modified or added to with additional settings on an individual enemy basis, details of which can be found within [map instance](Create-new-Maps.md).
 
 Some ideas for custom enemy cards:
 - basic (CR or at least Alchemy conform) effects for normal mobs to add flavor
@@ -64,7 +64,7 @@ Supported directions are "Right","Left","Up","Down","RightDown","LeftDown","Left
 Array of strings containing paths to the decks used for this enemy (from `res/<AdventureName>`)  
 If no decks are defined then the enemy will act like a treasure chest and give the rewards without a fight.  
 (only for enemies in dungeons)  
-The format for the deck file can be the normal forge *.dck syntax or a json file that will behave like a collection of [rewards](Create-Rewards) to get a random generated deck.  
+The format for the deck file can be the normal forge *.dck syntax or a json file that will behave like a collection of [rewards](Create-Rewards.md) to get a random generated deck.  
 
 ## **randomizeDeck**
 Boolean - if true then the enemy deck will be randomly selected from the deck array. If false, an algorithm will select a deck in sequential order based on the player's prior win/loss ratio against that opponent (discouraged and currently unused due to wild swings in ratio at low game count).
@@ -85,17 +85,17 @@ Decimal - Relative frequency with which this enemy will be picked to spawn in ap
 Decimal - Relative estimated difficulty associated with this enemy. Currently unused, but will likely be factored in as a part of filtering enemies into early/late game appropriate opponents. Existing values range from 0 to 1.0.
 
 ## **speed**
-Integer - Movement speed of this enemy in overworld or on a [map instance](Create-new-Maps). For comparison, the player's base speed is set at a value of 32 (before any equipment / ability modifiers).
+Integer - Movement speed of this enemy in overworld or on a [map instance](Create-new-Maps.md). For comparison, the player's base speed is set at a value of 32 (before any equipment / ability modifiers).
 
 ## **scale**
 Decimal - Default 1.0. For enemies whose sprites are too large or small for their intended usage, this serves as multiplier for the enemy's visual dimensions & collision area. By default, we work with 16x16 pixel sprites for most entities - this can be replicated with a more detailed 32x32 sprite by setting a scale of 0.5 for the enemy entry.
 
 ## **life**
-Integer - Base starting life total. This is modified universally by a value determined by the player's chosen difficulty, and can be adjusted further at the enemy object level on [map instances](Create-new-Maps).
+Integer - Base starting life total. This is modified universally by a value determined by the player's chosen difficulty, and can be adjusted further at the enemy object level on [map instances](Create-new-Maps.md).
 
 ## **rewards**
 Array - A collection of the rewards to be granted for defeating the enemy.  
-see [Create Rewards](Create-Rewards) for the syntax.
+see [Create Rewards](Create-Rewards.md) for the syntax.
 
 ## **equipment**
 Array - A collection of strings representing [equipment items](adventure-items) normally intended for player use that this enemy will have. Not used widely, usually when an enemy will drop that [equipment](adventure-items) and it does not use [mana shards](mana-shards).

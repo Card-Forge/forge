@@ -42,5 +42,3 @@ mvn -U -B clean \\
     -Dcardforge.user=${FORGE_FTP_USER} \\
     -Dcardforge.pass=${FORGE_FTP_PASS}
 ```
-
-After this, the appropriate forum posts will need to be made announcing the new release.
