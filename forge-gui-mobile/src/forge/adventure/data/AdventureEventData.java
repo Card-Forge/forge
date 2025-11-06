@@ -197,7 +197,7 @@ public class AdventureEventData implements Serializable {
         ConfigData configData = Config.instance().getConfigData();
         Predicate<CardEdition> filter = CardEdition.Predicates.CAN_MAKE_BOOSTER;
 
-        if(configData.allowedEvents != null) {
+        if(configData.allowedEvents != null && configData.allowedEvents.length > 0) {
             Set<String> allowedEvents = Set.of(configData.allowedEvents);
             filter = filter.and(q -> allowedEvents.contains(q.getCode()));
         }
@@ -210,7 +210,7 @@ public class AdventureEventData implements Serializable {
                 Set<String> restrictedEvents = Set.of(configData.restrictedEvents);
                 filter = filter.and((q) -> !restrictedEvents.contains(q.getCode()));
             }
-            if (configData.allowedEditions != null) {
+            if (configData.allowedEditions != null && configData.allowedEditions.length > 0) {
                 Set<String> allowed = Set.of(configData.allowedEditions);
                 filter = filter.and(q -> allowed.contains(q.getCode()));
             } else if(configData.restrictedEditions != null) {
