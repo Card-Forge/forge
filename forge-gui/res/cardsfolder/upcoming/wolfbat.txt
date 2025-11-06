@@ -1,0 +1,9 @@
+Name:Wolfbat
+ManaCost:2 B
+Types:Creature Wolf Bat
+PT:2/2
+K:Flying
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Graveyard | Execute$ TrigChangeZone | TriggerDescription$ Whenever you draw your second card each turn, you may pay {B}. If you do, return this card from your graveyard to the battlefield with a finality counter on it. (If a creature with a finality counter on it would die, exile it instead.)
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Battlefield | WithCountersType$ FINALITY
+DeckHas:Ability$Counters
+Oracle:Flying\nWhenever you draw your second card each turn, you may pay {B}. If you do, return this card from your graveyard to the battlefield with a finality counter on it. (If a creature with a finality counter on it would die, exile it instead.)
