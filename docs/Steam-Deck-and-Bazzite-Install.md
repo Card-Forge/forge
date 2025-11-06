@@ -1,10 +1,8 @@
-# SteamDeck and Bazzite Support
-
 _This instruction was written using Bazzite, however should be similar enough for SteamOS._
 
 In order to support the SteamDeck "natively" for full Forge Desktop mode, we would likely need to have a flatpack installer for the best user install experience, currently Forge has no intention to have a flatpack. The current **best** and recommended way to have Forge on your SteamDeck is to install and run the Android APK version in Waydroid Android Container.
 
-* You will need to have installed Waydroid first, this reddit post may work for you; https://www.reddit.com/r/SteamDeck/comments/1ay7ev8/how_to_install_waydroid_android_on_your_steam_deck/
+* You will need to have installed Waydroid first, this reddit post may work for you: https://www.reddit.com/r/SteamDeck/comments/1ay7ev8/how_to_install_waydroid_android_on_your_steam_deck/
 
 ## Installing Forge Android in Waydroid (Recommended Method)
 Once you've installed Waydroid, you can follow the same steps you would in any Android device.

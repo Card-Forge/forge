@@ -8,7 +8,7 @@ Much of the code is shared, so creating the data object will look very similar.
   - **AB** is for Activated Abilities
   - **SP** is for Spell
   - **DB** is for Drawback and many abilities that are subsidiary to other things, like replacements. They are only used to chain AFs together, and will never be the root AF
-  - **ST** is for Static, this gets used in case the API should resolve without using the stack<br> (e.g. the unique *Circling Vultures* special action is directly implemented in the script this way)
+  - **ST** is for Static, this gets used in case the API should resolve without using the stack<br /> (e.g. the unique *Circling Vultures* special action is directly implemented in the script this way)
 
 >*NOTE:*
 > - these factories are refactored from time to time (often to adapt to new sets), so while some entries could be slightly outdated, the base information should still be correct
@@ -52,7 +52,7 @@ The SpellDescription for secondary abilities (both AB and DB) is now displayed w
 
 ## Remember*
 
-Remembering is often needed when a card becomes a new object, which is then further affected by the ability. Typical example: [Flicker](https://github.com/Card-Forge/forge/blob/master/forge-gui/res/cardsfolder/f/flicker.txt)<br>
+Remembering is often needed when a card becomes a new object, which is then further affected by the ability. Typical example: [Flicker](https://github.com/Card-Forge/forge/blob/master/forge-gui/res/cardsfolder/f/flicker.txt)<br />
 Because cards keep their remembered parts when changing zones manual [cleanup](#Cleanup) is usually required.
 
 ## AI params
@@ -235,7 +235,7 @@ Parameters
 
 ## Choose*
 
-These can be used to chain effects together. However for common cases many effects already support this directly, e.g. `PutCounter | Choices$``.<br>
+These can be used to chain effects together. However for common cases many effects already support this directly, e.g. `PutCounter | Choices$``.<br />
 Besides making the script shorter using such shortcuts usually also helps the AI making better use of the effect.
 
 ### ChooseType
@@ -748,7 +748,7 @@ As another example, here's Mitotic Slimes' use of TokenTriggers$:
 
 ## Trigger
 
-If possible split the SpellDescription$ of the the effect so the part for the trigger can become the StackDescription directly.
+If possible split the SpellDescription of the effect so the part for the trigger can become the StackDescription directly.
 
 ### DelayedTrigger
 
