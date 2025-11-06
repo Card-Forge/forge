@@ -1,0 +1,9 @@
+Name:Planetarium of Wan Shi Tong
+ManaCost:6
+Types:Legendary Artifact
+A:AB$ Scry | Cost$ 1 T | ScryNum$ 2 | SpellDescription$ Scry 2.
+T:Mode$ Scry | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPeek | ResolvedLimit$ 1 | OptionalDecider$ You | TriggerDescription$ Whenever you scry or surveil, look at the top card of your library. You may cast that card without paying its mana cost. Do this only once each turn. (Look at the card after you scry or surveil.)
+T:Mode$ Surveil | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPeek | ResolvedLimit$ 1 | OptionalDecider$ You | Secondary$ True | TriggerDescription$ Whenever you scry or surveil, look at the top card of your library. You may cast that card without paying its mana cost. Do this only once each turn. (Look at the card after you scry or surveil.)
+SVar:TrigPeek:DB$ PeekAndReveal | NoReveal$ True | SubAbility$ TrigPlay
+SVar:TrigPlay:DB$ Play | Defined$ TopOfLibrary | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True
+Oracle:{1}, {T}: Scry 2.\nWhenever you scry or surveil, look at the top card of your library. You may cast that card without paying its mana cost. Do this only once each turn. (Look at the card after you scry or surveil.)
