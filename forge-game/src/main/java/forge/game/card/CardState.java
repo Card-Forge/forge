@@ -733,6 +733,11 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         setFlavorName(source.getFlavorName());
         setSVars(source.getSVars());
 
+        abilityForTrigger.clear();
+        for (Map.Entry<String, SpellAbility> e : source.abilityForTrigger.entrySet()) {
+            abilityForTrigger.put(e.getKey(), e.getValue().copy(card, lki));
+        }
+
         abilities.clear();
         for (SpellAbility sa : source.abilities) {
             if (sa.isIntrinsic()) {
