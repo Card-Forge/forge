@@ -197,7 +197,11 @@ public class AdventureEventData implements Serializable {
         ConfigData configData = Config.instance().getConfigData();
         Predicate<CardEdition> filter = CardEdition.Predicates.CAN_MAKE_BOOSTER.and(selectSetPool());
 
-        if(configData.restrictedEvents != null) {
+        if(configData.allowedEvents != null) {
+            Set<String> allowedEvents = Set.of(configData.allowedEvents);
+            filter = filter.and(q -> allowedEvents.contains(q.getCode()));
+        }
+        else if(configData.restrictedEvents != null) {
             //Temporary restriction until rewards are more diverse - don't want to award restricted cards so these editions need different rewards added.
             //Also includes sets that use conspiracy or commander drafts.
             Set<String> restrictedEvents = Set.of(configData.restrictedEvents);
@@ -206,7 +210,7 @@ public class AdventureEventData implements Serializable {
         if (configData.allowedEditions != null) {
             Set<String> allowed = Set.of(configData.allowedEditions);
             filter = filter.and(q -> allowed.contains(q.getCode()));
-        } else {
+        } else if(configData.restrictedEditions != null) {
             List<String> restrictedList = Arrays.asList(configData.restrictedEditions);
             Set<String> restricted = new HashSet<>(restrictedList); //Would use Set.of but that throws an error if there's any duplicates, and users edit these lists all the time.
             filter = filter.and(q -> !restricted.contains(q.getCode()));
