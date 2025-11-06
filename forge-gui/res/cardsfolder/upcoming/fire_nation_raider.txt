@@ -1,0 +1,8 @@
+Name:Fire Nation Raider
+ManaCost:3 R
+Types:Creature Human Soldier
+PT:4/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ RaidTest | Execute$ TrigToken | TriggerDescription$ Raid — When this creature enters, if you attacked this turn, create a Clue token. (It's an artifact with "{2}, Sacrifice this token: Draw a card.)
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_clue_draw | TokenOwner$ You
+SVar:RaidTest:Count$AttackersDeclared
+Oracle:Raid — When this creature enters, if you attacked this turn, create a Clue token. (It's an artifact with "{2}, Sacrifice this token: Draw a card.)

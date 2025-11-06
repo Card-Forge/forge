@@ -1,0 +1,13 @@
+Name:Earthbender Ascension
+ManaCost:2 G
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEarthbend | TriggerDescription$ When this enchantment enters, earthbend 2. Then search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+SVar:TrigEarthbend:DB$ Earthbend | Num$ 2 | SubAbility$ DBSearch
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounterQuest | TriggerDescription$ Landfall — Whenever a land you control enters, put a quest counter on this enchantment. When you do, if it has four or more quest counters on it, put a +1/+1 counter on target creature you control. It gains trample until end of turn.
+SVar:TrigPutCounterQuest:DB$ PutCounter | Defined$ Self | CounterType$ QUEST | CounterNum$ 1 | RememberAmount$ True | SubAbility$ TrigImmediateTrig
+SVar:TrigImmediateTrig:DB$ ImmediateTrigger | Execute$ TrigPutCounterP1P1 | TriggerAmount$ Count$RememberedNumber | IsPresent$ Card.Self+counters_GE4_QUEST | ConditionPresent$ Card.Self+counters_GE4_QUEST | SubAbility$ DBCleanup | TriggerDescription$ When you do, if it has four or more quest counters on it, put a +1/+1 counter on target creature you control. It gains trample until end of turn.
+SVar:TrigPutCounterP1P1:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ ParentTarget | KW$ Trample
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:When this enchantment enters, earthbend 2. Then search your library for a basic land card, put it onto the battlefield tapped, then shuffle.\nLandfall — Whenever a land you control enters, put a quest counter on this enchantment. When you do, if it has four or more quest counters on it, put a +1/+1 counter on target creature you control. It gains trample until end of turn.

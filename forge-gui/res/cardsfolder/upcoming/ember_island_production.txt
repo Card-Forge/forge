@@ -1,0 +1,8 @@
+Name:Ember Island Production
+ManaCost:3 U U
+Types:Sorcery
+A:SP$ Charm | Choices$ DBCopy1,DBCopy2 | CharmNum$ 1
+SVar:DBCopy1:DB$ CopyPermanent | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NonLegendary$ True | SetPower$ 4 | SetToughness$ 4 | AddTypes$ Hero | SpellDescription$ Create a token that's a copy of target creature you control, except it's not legendary and it's a 4/4 Hero in addition to its other types.
+SVar:DBCopy2:DB$ CopyPermanent | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NonLegendary$ True | SetPower$ 2 | SetToughness$ 2 | AddTypes$ Coward | SpellDescription$ Create a token that's a copy of target creature an opponent controls, except it's not legendary and it's a 2/2 Coward in addition to its other types.
+DeckHas:Ability$Token
+Oracle:Choose one —\n• Create a token that's a copy of target creature you control, except it's not legendary and it's a 4/4 Hero in addition to its other types.\n• Create a token that's a copy of target creature an opponent controls, except it's not legendary and it's a 2/2 Coward in addition to its other types.
