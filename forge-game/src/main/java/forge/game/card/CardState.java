@@ -961,6 +961,10 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         return abilityForTrigger.computeIfAbsent(svar, s -> AbilityFactory.getAbility(getCard(), s, this));
     }
 
+    public boolean hasAbilityForTrigger(String svar) {
+        return abilityForTrigger.containsKey(svar);
+    }
+
     @Override
     public String getTranslationKey() {
         String displayName = flavorName == null ? name : flavorName;
