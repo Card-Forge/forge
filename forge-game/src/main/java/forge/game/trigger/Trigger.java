@@ -544,15 +544,22 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
 
     public final Trigger copy(Card newHost, boolean lki) {
-        return copy(newHost, lki, false);
+        return copy(newHost, lki, false, null);
     }
     public final Trigger copy(Card newHost, boolean lki, boolean keepTextChanges) {
+        return copy(newHost, lki, keepTextChanges, null);
+    }
+    public final Trigger copy(Card newHost, boolean lki, boolean keepTextChanges, CardState newState) {
         final Trigger copy = (Trigger) clone();
 
         copyHelper(copy, newHost, lki || keepTextChanges);
 
         if (getOverridingAbility() != null) {
-            copy.setOverridingAbility(getOverridingAbility().copy(newHost, lki));
+            if (isIntrinsic() && hasParam("Execute") && newState != null && newState.hasAbilityForTrigger(getParam("Execute"))) {
+                copy.setOverridingAbility(newState.getAbilityForTrigger(getParam("Execute")));
+            } else {
+                copy.setOverridingAbility(getOverridingAbility().copy(newHost, lki));
+            }
         }
 
         if (!lki) {
