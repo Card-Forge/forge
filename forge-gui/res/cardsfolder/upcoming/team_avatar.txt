@@ -1,0 +1,9 @@
+Name:Team Avatar
+ManaCost:2 W
+Types:Enchantment
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control attacks alone, it gets +X/+X until end of turn, where X is the number of creatures you control.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +X | NumDef$ +X
+A:AB$ DealDamage | Cost$ 2 W Discard<1/CARDNAME> | ActivationZone$ Hand | ValidTgts$ Creature | TgtPrompt$ Select target creature with flying | NumDmg$ X | SpellDescription$ It deals damage equal to the number of creatures you control to target creature.
+SVar:X:Count$Valid Creature.YouCtrl
+SVar:PlayMain1:TRUE
+Oracle:Whenever a creature you control attacks alone, it gets +X/+X until end of turn, where X is the number of creatures you control.\n{2}{W}, Discard this card: It deals damage equal to the number of creatures you control to target creature.
