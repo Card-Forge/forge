@@ -20,7 +20,7 @@
       - [Equipments and Items](Adventure/Equipments-and-Items.md)
       - [Keyboard Shortcuts](Keyboard-Shortcuts.md)
       - [Controller Support](Adventure/GAMEPAD.md)
-      - [Console and Cheats](Console-and-Cheats.md)
+      - [Console and Cheats](Adventure/Console-and-Cheats.md)
 
   - [Modding and content creation](Adventure/Modding.md)
 
@@ -43,12 +43,13 @@
   - [Costs](Card-scripting-API/Costs.md)
   - [Affected / Targets](Card-scripting-API/Targeting.md)
   - [Restrictions / Conditions](Card-scripting-API/Restrictions.md)
-  - [Tutorial: Creating a custom Card](Card-scripting-API/Creating-a-Custom-Card.md)
+  - [Tutorial: creating a custom card](Card-scripting-API/Creating-a-Custom-Card.md)
 
 - [Development]((SM-autoconverted)-how-to-get-started-developing-forge.md)
   - [IntelliJ Setup](Development/IntelliJ-setup/IntelliJ-setup.md)
   - [Snapshots and Releases](Development/Snapshots-and-Releases.md)
   - [Android Builds](Development/Android-Builds.md)
+  - [Dev Mode](Development/DevMode.md)
   - [Ownership](Development/ownership.md)
   - [Docker Container](docker-setup.md)
 

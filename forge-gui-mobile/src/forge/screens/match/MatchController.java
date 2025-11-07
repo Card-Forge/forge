@@ -68,7 +68,6 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
-import forge.util.Localizer;
 import forge.util.MessageUtil;
 import forge.util.WaitCallback;
 import forge.util.collect.FCollectionView;
@@ -751,10 +750,7 @@ public class MatchController extends AbstractGuiGame {
         FPopupMenu menu = new FPopupMenu() {
             @Override
             protected void buildMenu() {
-                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblFullControl"),
-                        e -> {
-                            FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblFullControlDetails"), "Full Control details");
-                        }));
+                addItem(new FMenuItem("- " + Forge.getLocalizer().getMessage("lblFullControl") + " -", null, false));
                 addItem(getFullControlMenuEntry("lblChooseCostOrder", FullControlFlag.ChooseCostOrder, controlFlags));
                 addItem(getFullControlMenuEntry("lblChooseCostReductionOrder", FullControlFlag.ChooseCostReductionOrderAndVariableAmount, controlFlags));
                 addItem(getFullControlMenuEntry("lblNoPaymentFromManaAbility", FullControlFlag.NoPaymentFromManaAbility, controlFlags));
