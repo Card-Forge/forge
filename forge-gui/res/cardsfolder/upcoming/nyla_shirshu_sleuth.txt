@@ -1,0 +1,14 @@
+Name:Nyla, Shirshu Sleuth
+ManaCost:4 B
+Types:Legendary Creature Mole Beast
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When NICKNAME enters, exile up to one target creature card from your graveyard. If you do, you lose X life and create X Clue tokens, where X is that card's mana value. (A Clue token is an artifact with "{2}, Sacrifice this token: Draw a card.")
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select up to one target creature card from your graveyard | RememberChanged$ True | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | ConditionDefined$ Remembered | ConditionPresent$ Creature | Defined$ You | LifeAmount$ X | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_clue_draw | TokenOwner$ You | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Clue.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of your end step, if you control no Clues, return target card exiled with NICKNAME to its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | ValidTgts$ Card.ExiledWithSource | TgtPrompt$ Choose target card exiled with NICKNAME
+SVar:X:Remembered$CardManaCost
+DeckHas:Ability$Graveyard|Token
+Oracle:When Nyla enters, exile up to one target creature card from your graveyard. If you do, you lose X life and create X Clue tokens, where X is that card's mana value. (A Clue token is an artifact with "{2}, Sacrifice this token: Draw a card.")\nAt the beginning of your end step, if you control no Clues, return target card exiled with Nyla to its owner's hand.
