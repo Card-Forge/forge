@@ -26,6 +26,8 @@ Mostly old-style interface with new age loading screen. Initial card scripting i
 
 Supports over 10,000 cards. We start using a reconstructed UI that allows for better theming. And makes things feel less like an "Application" and more like a "Game"
 
+## 2013-10 - ver 1.5.1 is the first with Commander
+
 ## 2014-05 - Android app is published via Maven
 
 ## 2015-04 - Network play is rudimentary but available

@@ -40,7 +40,5 @@ It would be useful for other people to be comfortable with the release process. 
 * Create a PR from your branch and get it merged as quickly as you can (ideally before other PRs are merged). 
 * Create a new release from https://github.com/Card-Forge/forge/releases
 * Upload the package and its sha to the create new release page
-
-
-4. Marketing
+5. Marketing
 * Advertise in the #announcements channel in the Discord

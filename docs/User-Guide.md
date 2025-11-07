@@ -55,9 +55,8 @@ _**Download and unpack/install the package to their own new folder!**_
 ## What if double-clicking doesn’t work?
 
 Sometimes double-clicking will open the jar file in a different program.
-In Windows, you may need to right-click and open the properties to
-change the launching program to Java. This might be different in OSX or
-Linux systems (file permission related).
+In Windows, you may need to right-click and open the properties to change the launching program to Java.
+This might be different in OSX or Linux systems (file permission related).
 
 ## Manual Extraction (tar.bz2)
 
@@ -87,3 +86,10 @@ Linux systems (file permission related).
   - If adventure mode option does not show up;
     - check you're up to date with your version.
     - check in the settings that the "Selector Mode" is set to `Default`
+
+# Gameplay
+
+## Full Control
+
+Right click/long tap on your player avatar:<br />
+This feature lets you skip different helpers that streamline gameplay by avoiding somewhat annoying GUI interactions and instead use AI logic to make reasonable decisions for beginners.\nUseful for certain corner cases or if you want to challenge yourself with the Comprehensive Rules:\ne.g. the opposite cost order is needed if activating an animated "Halo Fountain" that's also tapped.

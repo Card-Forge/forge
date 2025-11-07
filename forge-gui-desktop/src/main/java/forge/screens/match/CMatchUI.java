@@ -1514,9 +1514,9 @@ public final class CMatchUI
         Set<FullControlFlag> controlFlags = getGameView().getGame().getPlayer(pv).getController().getFullControl();
         final String lblFullControl = Localizer.getInstance().getMessage("lblFullControl");
         final JPopupMenu menu = new JPopupMenu(lblFullControl);
-        GuiUtils.addMenuItem(menu, lblFullControl, null, () -> {
-            FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblFullControlDetails"), lblFullControl);
-        });
+        menu.add(
+                GuiUtils.createMenuItem("- " + lblFullControl + " -", null, null, false, true)
+        );
 
         addFullControlEntry(menu, "lblChooseCostOrder", FullControlFlag.ChooseCostOrder, controlFlags);
         addFullControlEntry(menu, "lblChooseCostReductionOrder", FullControlFlag.ChooseCostReductionOrderAndVariableAmount, controlFlags);
