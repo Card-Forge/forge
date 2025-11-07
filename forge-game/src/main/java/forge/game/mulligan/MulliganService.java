@@ -98,5 +98,9 @@ public class MulliganService {
             }
 
         } while (!allKept);
+
+        for (AbstractMulligan mulligan : mulligans) {
+            mulligan.afterMulligan();
+        }
     }
 }
