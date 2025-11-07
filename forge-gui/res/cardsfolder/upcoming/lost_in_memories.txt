@@ -1,0 +1,10 @@
+Name:Lost in Memories
+ManaCost:1 R
+Types:Enchantment Aura
+K:Flash
+K:Enchant:Creature.YouCtrl:creature you control
+SVar:AttachAILogic:Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddTrigger$ DamageTrig | Description$ Enchanted creature gets +1/+1 and has "Whenever this creature deals combat damage to a player, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost." (You may cast that card from your graveyard for its flashback cost. Then exile it.)
+SVar:DamageTrig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage to a player, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | KW$ Flashback | TgtZone$ Graveyard | PumpZone$ Graveyard
+Oracle:Flash\nEnchant creature you control\nEnchanted creature gets +1/+1 and has "Whenever this creature deals combat damage to a player, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost." (You may cast that card from your graveyard for its flashback cost. Then exile it.)

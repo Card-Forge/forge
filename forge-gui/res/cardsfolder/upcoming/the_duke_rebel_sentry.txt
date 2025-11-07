@@ -1,0 +1,9 @@
+Name:The Duke, Rebel Sentry
+ManaCost:W
+Types:Legendary Creature Human Rebel Ally
+PT:0/1
+K:etbCounter:P1P1:1:no Condition:NICKNAME enters with a +1/+1 counter on him.
+A:AB$ PutCounter | Cost$ T RemoveAnyCounter<1/Any/Card.Self/NICKNAME> | ValidTgts$ Creature.YouCtrl+Other | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on another target creature you control. It gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Hexproof
+DeckHas:Ability$Counters
+Oracle:The Duke enters with a +1/+1 counter on him.\n{T}, Remove a counter from The Duke: Put a +1/+1 counter on another target creature you control. It gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)

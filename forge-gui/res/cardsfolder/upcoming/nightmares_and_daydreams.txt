@@ -1,0 +1,13 @@
+Name:Nightmares and Daydreams
+ManaCost:2 U
+Types:Enchantment Saga
+K:Chapter:4:DBEffect,DBEffect,DBEffect,DBDraw
+SVar:DBEffect:DB$ Effect | Triggers$ CastTrig | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, whenever you cast an instant or sorcery spell, target player mills cards equal to that spell's mana value.
+SVar:CastTrig:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ TrigMill | TriggerDescription$ Whenever you cast an instant or sorcery spell, target player mills cards equal to that spell's mana value.
+SVar:TrigMill:DB$ Mill | NumCards$ X | ValidTgts$ Player
+SVar:DBDraw:DB$ Draw | NumCards$ Y | SpellDescription$ Draw a card. If a graveyard has twenty or more cards in it, draw three cards instead.
+SVar:X:TriggeredSpellAbility$CardManaCostLKI
+SVar:CheckGrave:PlayerCountPlayers$HighestValidGraveyard Card.YouOwn
+SVar:Y:Count$Compare CheckGrave GE20.3.1
+DeckHints:Type$Instant|Sorcery
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI, II, III — Until your next turn, whenever you cast an instant or sorcery spell, target player mills cards equal to that spell's mana value.\nIV — Draw a card. If a graveyard has twenty or more cards in it, draw three cards instead.
