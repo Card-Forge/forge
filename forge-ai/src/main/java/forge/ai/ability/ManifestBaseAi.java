@@ -124,13 +124,11 @@ public abstract class ManifestBaseAi extends SpellAbilityAi {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        if ( MyRandom.getRandom().nextFloat() < .8) {
+        if (MyRandom.getRandom().nextFloat() < .8) {
             // 80% chance to play a Manifest spell
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            // 20% chance to not play a Manifest spell
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override

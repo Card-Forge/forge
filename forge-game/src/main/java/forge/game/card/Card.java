@@ -195,6 +195,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private boolean startedTheTurnUntapped = false;
     private boolean cameUnderControlSinceLastUpkeep = true; // for Echo
     private boolean tapped = false;
+    private int tappedThisTurn;
     private boolean sickness = true; // summoning sickness
     private boolean collectible = false;
     private boolean tokenCard = false;
@@ -4897,7 +4898,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         runParams.put(AbilityKey.Attacker, attacker);
         runParams.put(AbilityKey.Cause, cause);
         runParams.put(AbilityKey.Player, tapper);
+        runParams.put(AbilityKey.FirstTime, tappedThisTurn == 0);
         getGame().getTriggerHandler().runTrigger(TriggerType.Taps, runParams, false);
+
+        tappedThisTurn++;
 
         setTapped(true);
         view.updateNeedsTapAnimation(tapAnimation);
@@ -7171,7 +7175,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 String v = kwt.getValidType();
                 String desc = kwt.getTypeDescription();
                 if (!isValid(v.split(","), aura.getController(), aura, null) || (!v.contains("inZone") && !isInPlay())) {
-                    return getName() + " is not " + Lang.nounWithAmount(1, desc);
+                    return getDisplayName() + " is not " + Lang.nounWithAmount(1, desc);
                 }
             }
         }
@@ -7182,17 +7186,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     @Override
     protected String cantBeEquippedByMsg(final Card equip, SpellAbility sa) {
         if (!isInPlay()) {
-            return getName() + " is not in play";
+            return getDisplayName() + " is not in play";
         }
         if (sa != null && sa.isEquip()) {
             if (!isValid(sa.getTargetRestrictions().getValidTgts(), sa.getActivatingPlayer(), equip, sa)) {
                 Equip eq = (Equip) sa.getKeyword();
-                return getName() + " is not " + Lang.nounWithAmount(1, eq.getValidDescription());
+                return getDisplayName() + " is not " + Lang.nounWithAmount(1, eq.getValidDescription());
             }
             return null;
         }
         if (!isCreature()) {
-            return getName() + " is not a creature";
+            return getDisplayName() + " is not a creature";
         }
         return null;
     }
@@ -7200,13 +7204,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     @Override
     protected String cantBeFortifiedByMsg(final Card fort) {
         if (!isLand()) {
-            return getName() + " is not a Land";
+            return getDisplayName() + " is not a Land";
         }
         if (!isInPlay()) {
-            return getName() + " is not in play";
+            return getDisplayName() + " is not in play";
         }
         if (fort.isLand()) {
-            return fort.getName() + " is a Land";
+            return fort.getDisplayName() + " is a Land";
         }
 
         return null;
@@ -7215,7 +7219,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     @Override
     public String cantBeAttachedMsg(final Card attach, SpellAbility sa, boolean checkSBA) {
         if (isPhasedOut() && !attach.isPhasedOut()) {
-            return getName() + " is phased out";
+            return getDisplayName() + " is phased out";
         }
         return super.cantBeAttachedMsg(attach, sa, checkSBA);
     }
@@ -7456,7 +7460,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public void onCleanupPhase(final Player turn) {
-        resetExcessDamage();
+        tappedThisTurn = 0;
         setRegeneratedThisTurn(0);
         resetShieldCount();
         targetedFromThisTurn.clear();
@@ -7466,13 +7470,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         getDamageHistory().setCreatureAttackedLastTurnOf(turn, getDamageHistory().getCreatureAttacksThisTurn() > 0);
         getDamageHistory().newTurn();
         damageReceivedThisTurn.clear();
+        resetExcessDamage();
         clearBlockedByThisTurn();
         clearBlockedThisTurn();
-        resetMayPlayTurn();
         resetExertedThisTurn();
         resetCrewed();
         resetSaddled();
         visitedThisTurn = false;
+        resetMayPlayTurn();
         resetChosenModeTurn();
         resetAbilityResolvedThisTurn();
     }

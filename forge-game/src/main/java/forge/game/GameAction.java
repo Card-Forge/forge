@@ -1776,7 +1776,7 @@ public class GameAction {
             if (sb.length() == 0) {
                 sb.append(p).append(" ").append(Localizer.getInstance().getMessage("lblAssigns")).append("\n");
             }
-            String creature = CardTranslation.getTranslatedName(assignee.getName()) + " (" + assignee.getId() + ")";
+            String creature = assignee.getTranslatedName() + " (" + assignee.getId() + ")";
             sb.append(creature).append(" ").append(sector).append("\n");
         }
         if (sb.length() > 0) {
@@ -1793,7 +1793,7 @@ public class GameAction {
             c.getGame().getTracker().flush();
 
             c.setMoveToCommandZone(false);
-            if (c.getOwner().getController().confirmAction(c.getFirstSpellAbility(), PlayerActionConfirmMode.ChangeZoneToAltDestination, c.getName() + ": If a commander is in a graveyard or in exile and that card was put into that zone since the last time state-based actions were checked, its owner may put it into the command zone.", null)) {
+            if (c.getOwner().getController().confirmAction(c.getFirstSpellAbility(), PlayerActionConfirmMode.ChangeZoneToAltDestination, c.getDisplayName() + ": If a commander is in a graveyard or in exile and that card was put into that zone since the last time state-based actions were checked, its owner may put it into the command zone.", null)) {
                 moveTo(c.getOwner().getZone(ZoneType.Command), c, null, mapParams);
                 return true;
             }
@@ -2217,7 +2217,7 @@ public class GameAction {
     /** Delivers a message to all players. (use reveal to show Cards) */
     public void notifyOfValue(SpellAbility saSource, GameObject relatedTarget, String value, Player playerExcept) {
         if (saSource != null) {
-            String name = CardTranslation.getTranslatedName(saSource.getHostCard().getName());
+            String name = saSource.getHostCard().getTranslatedName();
             value = TextUtil.fastReplace(value, "CARDNAME", name);
             value = TextUtil.fastReplace(value, "NICKNAME", Lang.getInstance().getNickName(name));
         }
@@ -2420,7 +2420,7 @@ public class GameAction {
                 //  it to either player or the papercard object so it feels like rule based for the player side..
                 if (!c.hasMarkedColor()) {
                     if (takesAction.isAI()) {
-                        String prompt = CardTranslation.getTranslatedName(c.getName()) + ": " +
+                        String prompt = c.getTranslatedName() + ": " +
                                 Localizer.getInstance().getMessage("lblChooseNColors", Lang.getNumeral(2));
                         SpellAbility sa = new SpellAbility.EmptySa(ApiType.ChooseColor, c, takesAction);
                         sa.putParam("AILogic", "MostProminentInComputerDeck");
@@ -2806,7 +2806,7 @@ public class GameAction {
             final FCollection<Player> players = game.getPlayers().filter(PlayerPredicates.canBeAttached(source, null));
 
             final Player pa = p.getController().chooseSingleEntityForEffect(players, aura,
-                    Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", CardTranslation.getTranslatedName(source.getName())), null);
+                    Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", source.getTranslatedName()), null);
             if (pa != null) {
                 source.attachToEntity(pa, null, true);
                 return true;
@@ -2831,7 +2831,7 @@ public class GameAction {
             }
 
             final Card o = p.getController().chooseSingleEntityForEffect(list, aura,
-                    Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(source.getName())), null);
+                    Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", source.getTranslatedName()), null);
             if (o != null) {
                 source.attachToEntity(game.getCardState(o), null, true);
                 return true;

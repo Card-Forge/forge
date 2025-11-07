@@ -1,0 +1,12 @@
+Name:Earth Kingdom General
+ManaCost:3 G
+Types:Creature Human Soldier Ally
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEarthbend | TriggerDescription$ When this creature enters, earthbend 2. (Target land you control becomes a 0/0 creature with haste that's still a land. Put two +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)
+SVar:TrigEarthbend:DB$ Earthbend | Num$ 2
+T:Mode$ CounterAddedOnce | CounterType$ P1P1 | Valid$ Creature | TriggerZones$ Battlefield | Execute$ TrigGainLife | ResolvedLimit$ 1 | OptionalDecider$ You | ValidSource$ You | TriggerDescription$ Whenever you put one or more +1/+1 counters on a creature, you may gain that much life. Do this only once each turn.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:TriggerCount$Amount
+DeckHas:Ability$Lifegain
+DeckHints:Ability$Counters
+Oracle:When this creature enters, earthbend 2. (Target land you control becomes a 0/0 creature with haste that's still a land. Put two +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)\nWhenever you put one or more +1/+1 counters on a creature, you may gain that much life. Do this only once each turn.

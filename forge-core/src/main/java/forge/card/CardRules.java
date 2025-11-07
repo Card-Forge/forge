@@ -475,11 +475,11 @@ public final class CardRules implements ICardCharacteristics {
             return getName();
 
         ICardFace mainFace = Objects.requireNonNullElse(mainPart.getFunctionalVariant(variantName), mainPart);
-        String mainPartName = Objects.requireNonNullElse(mainFace.getFlavorName(), mainFace.getName());
+        String mainPartName = mainFace.getDisplayName();
 
         if(splitType.getAggregationMethod() == CardSplitType.FaceSelectionMethod.COMBINE) {
             ICardFace otherFace = Objects.requireNonNullElse(otherPart.getFunctionalVariant(variantName), otherPart);
-            String otherPartName = Objects.requireNonNullElse(otherFace.getFlavorName(), otherFace.getName());
+            String otherPartName = otherFace.getDisplayName();
             return mainPartName + " // " + otherPartName;
         }
         else

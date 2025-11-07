@@ -26,6 +26,8 @@ Due to charges in Forges hosting and scryfall terms you can no longer predownloa
 
 **(I'm not gatekeeping, please if you have a private location for bulk downloads or for alternate or custom arts, you can update this wiki too or let us know in the discord. I'll be happy to update the wiki page with additional sources.)**
 
+If you have an older Android device for increased performance or to save bandwidth it might be a good idea to use lower resolution images instead: https://www.slightlymagic.net/forum/viewtopic.php?f=15&t=29104
+
 # Storage
 
 Card images are stored in `pics/cards`, and tokens in `pics/tokens`, in the Cache folder for forge: 

@@ -1,11 +1,11 @@
 # About Forge's Artificial Intelligence
 
-The AI is *not* "trained". It uses basic rules and can be easy to overcome knowing it's weaknesses.
+The AI is *not* "trained". It uses basic rules and can be easy to overcome knowing its weaknesses.
 
-The AI is;
-* Best with Aggro and midrange decks
-* Poor to Ok in control decks
-* Pretty bad for most combo decks
+The AI is:
+- Best with Aggro and midrange decks
+- Poor to Ok in control decks
+- Pretty bad for most combo decks
 
 If you want to train a model for the AI, please do. We would love to see something like that implemented in Forge.
 
@@ -42,7 +42,7 @@ In linux and mac, command line arguments are not currently passed through the sh
 - `-p [P]` - [P] number of players paired, only used in tournament mode. Default is 2.
 - `-q` - Quiet Mode, only prints the result not the entire log.
 
-## Examples:
+## Examples
 In linux and macos you must run forge by evoking java and calling the jar, currently command line parameters are not passed through the script. The forge jar filename is truncated in these examples from `forge-whatever-version-youre-on.jar` to `forge.jar`.
 
 In Windows, if you use the EXE file as described below, the simulation runs in the background and output is sent to the forge log file only. If you want to have output to the console, please use the `java -jar` evocation of forge.

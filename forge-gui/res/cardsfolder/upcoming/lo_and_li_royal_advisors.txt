@@ -1,0 +1,10 @@
+Name:Lo and Li, Royal Advisors
+ManaCost:2 B B
+Types:Legendary Creature Human Advisor
+PT:3/3
+T:Mode$ Discarded | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ Whenever an opponent discards a card or mills one or more cards, put a +1/+1 counter on each Advisor you control.
+T:Mode$ MilledOnce | ValidPlayer$ Opponent | ValidCard$ Card | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | Secondary$ True | TriggerDescription$ Whenever an opponent discards a card or mills one or more cards, put a +1/+1 counter on each Advisor you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Advisor.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ Mill | Cost$ 2 UB | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills four cards. (They put the top four cards of their library into their graveyard.)
+DeckHas:Ability$Mill
+Oracle:Whenever an opponent discards a card or mills one or more cards, put a +1/+1 counter on each Advisor you control.\n{2}{U/B}: Target player mills four cards. (They put the top four cards of their library into their graveyard.)
