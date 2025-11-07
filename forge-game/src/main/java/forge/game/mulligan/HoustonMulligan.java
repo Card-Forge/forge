@@ -53,6 +53,6 @@ public class HoustonMulligan extends AbstractMulligan {
 
     @Override
     public boolean canMulligan() {
-        return !kept && timesMulliganed == 0;
+        return false;
     }
 }
