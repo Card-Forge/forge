@@ -1,0 +1,10 @@
+Name:Walltop Sentries
+ManaCost:2 G
+Types:Creature Human Soldier Ally
+PT:2/3
+K:Reach
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigGainLife | TriggerDescription$ When this creature dies, if there's a Lesson card in your graveyard, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+SVar:X:Count$ValidGraveyard Lesson.YouOwn
+Oracle:Reach, deathtouch\nWhen this creature dies, if there's a Lesson card in your graveyard, you gain 2 life.

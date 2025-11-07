@@ -1,0 +1,9 @@
+Name:Earthen Ally
+ManaCost:G
+Types:Creature Human Soldier Ally
+PT:0/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ This creature gets +1/+0 for each color among Allies you control.
+A:AB$ Earthbend | Cost$ 2 W U B R G | Num$ 5 | SpellDescription$ Earthbend 5. (Target land you control becomes a 0/0 creature with haste that's still a land. Put five +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)
+SVar:X:Count$Valid Ally.YouCtrl$Colors
+DeckHints:Type$Ally
+Oracle:This creature gets +1/+0 for each color among Allies you control.\n{2}{W}{U}{B}{R}{G}: Earthbend 5. (Target land you control becomes a 0/0 creature with haste that's still a land. Put five +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)
