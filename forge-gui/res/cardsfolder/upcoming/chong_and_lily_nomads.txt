@@ -8,5 +8,5 @@ SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Saga.YouCtrl | TgtPrompt$ Select a
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +Y | SpellDescription$ Creatures you control get +1/+0 until end of turn for each lore counter among Sagas you control.
 SVar:X:Count$Valid Saga.YouCtrl
 SVar:Y:Count$Valid Saga.YouCtrl$CardCounters.LORE
-DeckHints:Type$Saga
+DeckNeeds:Type$Saga
 Oracle:Whenever one or more Bards you control attack, choose one -\n• Put a lore counter on each of any number of target Sagas you control.\n• Creatures you control get +1/+0 until end of turn for each lore counter among Sagas you control.
