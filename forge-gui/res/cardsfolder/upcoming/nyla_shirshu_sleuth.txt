@@ -8,7 +8,7 @@ SVar:DBLoseLife:DB$ LoseLife | ConditionDefined$ Remembered | ConditionPresent$ 
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_clue_draw | TokenOwner$ You | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Clue.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of your end step, if you control no Clues, return target card exiled with NICKNAME to its owner's hand.
-SVar:DBChangeZone:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | ValidTgts$ Card.ExiledWithSource | TgtPrompt$ Choose target card exiled with NICKNAME
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | ValidTgts$ Card.ExiledWithSource | TgtPrompt$ Choose target card exiled with NICKNAME
 SVar:X:Remembered$CardManaCost
 DeckHas:Ability$Graveyard|Token
 Oracle:When Nyla enters, exile up to one target creature card from your graveyard. If you do, you lose X life and create X Clue tokens, where X is that card's mana value. (A Clue token is an artifact with "{2}, Sacrifice this token: Draw a card.")\nAt the beginning of your end step, if you control no Clues, return target card exiled with Nyla to its owner's hand.
