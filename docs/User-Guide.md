@@ -45,6 +45,8 @@ We have created several scripts that will launch Forge with a greater
 allotment of system resources. (We do this by passing `-Xmx1024m` as
 an argument to the Java VM.)
 
+If you plan to eventually download all card images make sure you have several gigabytes of free drive space.
+
 # Install and Run
 
 > Warning: Do **NOT** owerwrite an existing installation. Always unpack/install the package in a new folder to avoid problems!
