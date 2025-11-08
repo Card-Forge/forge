@@ -32,9 +32,7 @@ public class HoustonMulligan extends AbstractMulligan {
     }
 
     @Override
-    public void mulligan() {
-        timesMulliganed++;
-
+    public void afterMulligan() {
         List<Card> cardsToTuckDown = Lists.newArrayList(
                 player.getController().londonMulliganReturnCards(player, TUCK_COUNT)
         );
@@ -46,8 +44,6 @@ public class HoustonMulligan extends AbstractMulligan {
                     (SpellAbility)null
             );
         }
-
-        kept = true;
     }
 
     @Override
