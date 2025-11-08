@@ -1,0 +1,10 @@
+Name:Canyon Crawler
+ManaCost:4 B B
+Types:Creature Spider Beast
+PT:6/6
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFood | TriggerDescription$ When this creature enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token:You gain 3 life.")
+SVar:TrigFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+K:TypeCycling:Swamp:2
+DeckHas:Ability$LifeGain|Token|Food
+Oracle:Deathtouch\nWhen this creature enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token:You gain 3 life.")\nSwampcycling {2} ({2}, Discard this card: Search your library for a Swamp card, reveal it, put it into your hand, then shuffle.)

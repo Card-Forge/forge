@@ -1,0 +1,8 @@
+Name:Boar-q-pine
+ManaCost:2 R
+Types:Creature Boar Porcupine
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever you cast a noncreature spell, put a +1/+1 counter on this creature.
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Whenever you cast a noncreature spell, put a +1/+1 counter on this creature.

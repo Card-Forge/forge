@@ -1,0 +1,6 @@
+Name:Water Tribe Captain
+ManaCost:2 W
+Types:Creature Human Soldier Ally
+PT:3/3
+A:AB$ PumpAll | Cost$ 5 | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
+Oracle:{5}: Creatures you control get +1/+1 until end of turn.

@@ -12,12 +12,14 @@ ScryfallCode=TLA
 4 U Aang, the Last Airbender @Yueko
 5 R Aang's Iceberg @Matteo Bassini
 6 R Airbender Ascension @Shiren
+7 U Airbender's Reversal @Kotakan
 8 C Airbending Lesson @Pisukev
 9 U Appa, Loyal Sky Bison @Tomoyo Asatani
 10 M Appa, Steadfast Guardian @Maël Ollivier-Henry
 11 C Avatar Enthusiasts @Leanna Crossan
 12 R Avatar's Wrath @Ainezu
 13 C Compassionate Healer @Kuno
+14 C Curious Farm Animals @John Di Giovanni
 15 U Destined Confrontation @Joshua Raphael
 16 U Earth Kingdom Jailer @Danciao
 17 U Earth Kingdom Protectors @Leonardo Borazio
@@ -26,6 +28,7 @@ ScryfallCode=TLA
 20 U Gather the White Lotus @Kozato
 21 C Glider Kids @ikeda_cpt
 22 U Glider Staff @Eduardo Francisco
+23 R Hakoda, Selfless Commander @Rafater
 24 U Invasion Reinforcements @Yuhong Ding
 25 C Jeong Jeong's Deserters @Leonardo Borazio
 26 C Kyoshi Warriors @Awanqi (Angela Wang)
@@ -37,11 +40,16 @@ ScryfallCode=TLA
 32 C Rabaroo Troop @Mizutametori
 33 C Razor Rings @Norikatsu Miyoshi
 34 C Sandbenders' Storm @Robin Har
+35 R South Pole Voyager @Tition
 36 U Southern Air Temple @Salvatorre Zee Yazzie
 37 R Suki, Courageous Rescuer @Tky
+38 U Team Avatar @Bun Toujo
 39 M United Front @Mengxuan Li
+40 U Vengeful Villagers @Ittoku
+41 C Water Tribe Captain @Yosuke Adachi
 42 U Water Tribe Rallier @Boell Oyino
 43 C Yip Yip! @Cinkai
+44 U Accumulate Wisdom @Gemi
 45 U Benevolent River Spirit @Mizutametori
 46 U Boomerang Basics @Tubaki Halsame
 47 U Crashing Wave @Mitori
@@ -78,6 +86,7 @@ ScryfallCode=TLA
 78 M Wan Shi Tong, Librarian @Ryota Murayama
 79 R Waterbender Ascension @Takeuchi Moto
 80 C Waterbending Lesson @Sylvain Sarrailh
+81 U Waterbending Scroll @Dee Nguyen
 82 C Watery Grasp @Rose Benjamin
 83 R Yue, the Moon Spirit @Yuumei
 84 C Azula Always Lies @Robin Har
@@ -86,6 +95,7 @@ ScryfallCode=TLA
 87 R Boiling Rock Rioter @Airi Yoshihisa
 88 U Buzzard-Wasp Colony @Thomas Chamberlain-Keen
 89 C Callous Inspector @Enishi
+90 C Canyon Crawler @Kohei Hayama
 91 U Cat-Gator @Joseph Weston
 92 C Corrupt Court Official @Norikatsu Miyoshi
 93 C Dai Li Indoctrination @Lius Lasahido
@@ -100,18 +110,26 @@ ScryfallCode=TLA
 102 R Foggy Swamp Visions @Hori Airi
 103 U Heartless Act @Sylvain Sarrailh
 104 C Hog-Monkey @Miho Midorikawa
+105 U Joo Dee, One of Many @Olena Richards
 106 U June, Bounty Hunter @Shiren
+107 M Koh, the Face Stealer @Eduardo Francisco
+108 U Lo and Li, Twin Tutors @AKAGI
 109 R Mai, Scornful Striker @Hori Airi
 110 C Merchant of Many Hats @Boell Oyino
 111 U Northern Air Temple @Slawek Fedorczuk
 112 R Obsessive Pursuit @Ichiko Milk Tei
 113 U Ozai's Cruelty @ikeda_cpt
+114 M Phoenix Fleet Airship @Thanh Tuấn
+115 C Pirate Peddlers @Eduardo Francisco
 116 R Raven Eagle @Robin Olausson
 117 M The Rise of Sozin @Mitori
+118 U Ruinous Waterbending @Yuu Fujiki
 119 C Sold Out @Nijihayashi
 120 C Swampsnare Trap @Yoshioka
 121 U Tundra Tank @Shishizaru
 122 U Wolfbat @Daniel Romanovsky
+123 U Zuko's Conviction @Kieran Yanner
+124 C Boar-q-pine @Brandon L. Hunt
 125 C Bumi Bash @Maël Ollivier-Henry
 126 U The Cave of Two Lovers @Ittoku
 127 U Combustion Man @Pisukev
@@ -125,6 +143,7 @@ ScryfallCode=TLA
 135 C Fire Nation Raider @Tubaki Halsame
 136 U Fire Sages @Yuu Fujiki
 137 R Firebender Ascension @Tetsuko
+138 C Firebending Lesson @Toni Infante
 139 R Firebending Student @Kozato
 140 C How to Start a Riot @Robin Olausson
 141 U Iroh's Demonstration @Song Qijin
@@ -146,7 +165,9 @@ ScryfallCode=TLA
 157 U Twin Blades @Jo Cordisco
 158 U Ty Lee, Artful Acrobat @Rose Benjamin
 159 U War Balloon @Matteo Bassini
+160 R Wartime Protestors @Yosuke Adachi
 161 C Yuyan Archers @Domco.
+162 R Zhao, the Moon Slayer @Toraji
 163 U Zuko, Exiled Prince @Nijihayashi
 164 U Allies at Last @Evan Shipard
 165 R Avatar Destiny @Iwamoto05
@@ -161,13 +182,16 @@ ScryfallCode=TLA
 174 U Earth Rumble @Olena Richards
 175 R Earthbender Ascension @Logan Feliciano
 176 C Earthbending Lesson @Toni Infante
+177 R Earthen Ally @Boell Oyino
 178 R Elemental Teachings @Yoshioka
 179 U Flopsie, Bumi's Buddy @Alexandr Leskinen
+180 C Foggy Swamp Vinebender @Maël Ollivier-Henry
 181 R Great Divide Guide @Song Qijin
 182 U Haru, Hidden Talent @Mitori
 183 U Invasion Tactics @Eduardo Francisco
 184 U Kyoshi Island Plaza @Eilene Cherie
 185 U Leaves from the Vine @Ittoku
+186 M The Legend of Kyoshi @Thanh Tuấn
 187 C Origin of Metalbending @Pauline Voss
 188 C Ostrich-Horse @Pablo Rivera
 189 C Pillar Launch @Jo Cordisco
@@ -187,6 +211,7 @@ ScryfallCode=TLA
 203 R Aang, at the Crossroads @Evan Shipard
 204 R Aang, Swift Savior @Tetsuko
 205 C Abandon Attachments @Shahab Alizadeh
+206 U Air Nomad Legacy @AKAGI
 207 M Avatar Aang @Fahmi Fauzi
 208 R Azula, Cunning Usurper @Evyn Fong
 209 R Beifong's Bounty Hunters @Alexandr Leskinen
@@ -206,6 +231,7 @@ ScryfallCode=TLA
 223 U Guru Pathik @Dee Nguyen
 224 U Hama, the Bloodbender @Le Vuong
 225 U Hei Bai, Spirit of Balance @Tyler Smith
+226 U Hermitic Herbalist @Kozato
 227 R Iroh, Grand Lotus @Fahmi Fauzi
 228 R Iroh, Tea Master @Brian Yuen
 229 U Jet, Freedom Fighter @Fahmi Fauzi
@@ -218,26 +244,34 @@ ScryfallCode=TLA
 236 C Platypus-Bear @Maël Ollivier-Henry
 237 C Pretending Poxbearers @Salvatorre Zee Yazzie
 238 U Professor Zei, Anthropologist @Pauline Voss
+239 R Sandbender Scavengers @Alexander Forssberg
 240 R Sokka, Bold Boomeranger @Toni Infante
 241 U Sokka, Lateral Strategist @Axel Sauerwald
 242 R Sokka, Tenacious Tactician @Robin Har
 243 U Suki, Kyoshi Warrior @Yuhong Ding
 244 U Sun Warriors @Boell Oyino
 245 U Tolls of War @Jocelin Carmes
+246 R Toph, Hardheaded Teacher @Ruwen Liu
 247 R Toph, the First Metalbender @Eilene Cherie
 248 U Uncle Iroh @Kieran Yanner
 249 C Vindictive Warden @Jo Cordisco
+250 C Wandering Musicians @Rose Benjamin
 251 U White Lotus Reinforcements @Kotakan
 252 U Zhao, Ruthless Admiral @Yuumei
 253 R Zuko, Conflicted @Halil Ural
 254 C Barrels of Blasting Jelly @Salvatorre Zee Yazzie
 255 C Bender's Waterskin @Dee Nguyen
 256 U Fire Nation Warship @Hisashi Momose
+257 C Kyoshi Battle Fan @Ven
+258 U Meteor Sword @Matteo Bassini
 259 M Planetarium of Wan Shi Tong @Robin Olausson
 260 U Trusty Boomerang @Toni Infante
+261 M The Walls of Ba Sing Se @Arthur Yuan
 262 M White Lotus Tile @Dee Nguyen
+263 R Abandoned Air Temple @Dom Lay
 264 R Agna Qel'a @Dom Lay
 265 C Airship Engine Room @Andreas Rocha
+266 R Ba Sing Se @Andreas Rocha
 267 C Boiling Rock Prison @Matteo Bassini
 268 R Fire Nation Palace @Awanqi (Angela Wang)
 269 C Foggy Bottom Swamp @Dom Lay
@@ -247,6 +281,8 @@ ScryfallCode=TLA
 273 C Misty Palms Oasis @Andreas Rocha
 274 C North Pole Gates @Andreas Rocha
 275 C Omashu City @Andreas Rocha
+276 R Realm of Koh @Andreas Rocha
+277 C Rumble Arena @Le Vuong
 278 R Secret Tunnel @Alexander Forssberg
 279 C Serpent's Pass @Matteo Bassini
 280 C Sun-Blessed Peak @Dom Lay
@@ -271,6 +307,7 @@ ScryfallCode=TLA
 299 U Fire Nation Attacks @Claudiu-Antoniu Magherusan
 300 U Crashing Wave @Claudiu-Antoniu Magherusan
 301 U Combustion Technique @Toni Infante
+302 R Zuko, Conflicted @Toni Infante
 303 R Azula, Cunning Usurper @Toni Infante
 304 R Aang, at the Crossroads @Toni Infante
 305 R Katara, the Fearless @Toni Infante
@@ -290,11 +327,14 @@ ScryfallCode=TLA
 319 R The Unagi of Kyoshi Island @Antonio José Manzanedo
 320 M Wan Shi Tong, Librarian @Andrea Piparo
 321 R The Fire Nation Drill @Ben Hill
+322 M Koh, the Face Stealer @Antonio José Manzanedo
+323 M Phoenix Fleet Airship @Ben Hill
 324 R Raven Eagle @Vincent Coviello
 325 R Ran and Shaw @Antonio José Manzanedo
 326 M Badgermole Cub @Filip Burburan
 327 R Diligent Zookeeper @Andrea Piparo
 328 R The Lion-Turtle @Filip Burburan
+329 M The Walls of Ba Sing Se @Ben Hill
 330 M White Lotus Tile @Antonio José Manzanedo
 331 M United Front @JungShan
 332 M Sozin's Comet @JungShan
@@ -323,6 +363,7 @@ ScryfallCode=TLA
 355 M The Legend of Kuruk @Barbara Rosiak
 356 M The Rise of Sozin @Barbara Rosiak
 357 M The Legend of Roku @Barbara Rosiak
+358 M The Legend of Kyoshi @Sija Hong
 359 R Aang, Swift Savior @Flavio Girón
 360 R Fire Lord Zuko @Flavio Girón
 361 R Katara, the Fearless @Flavio Girón
@@ -331,6 +372,7 @@ ScryfallCode=TLA
 364 R Airbender Ascension @Shiren
 365 R Avatar's Wrath @Ainezu
 366 R Hakoda, Selfless Commander @Rafater
+367 R South Pole Voyager @Tition
 368 R Suki, Courageous Rescuer @Tky
 369 R The Mechanist, Aerial Artisan @Le Vuong
 370 R Spirit Water Revival @Enishi
@@ -338,15 +380,23 @@ ScryfallCode=TLA
 372 R Boiling Rock Rioter @Airi Yoshihisa
 373 R Day of Black Sun @Matteo Bassini
 374 R Mai, Scornful Striker @Hori Airi
+375 R Wartime Protestors @Yosuke Adachi
+376 R Zhao, the Moon Slayer @Toraji
+377 R Earthen Ally @Boell Oyino
 378 R Elemental Teachings @Yoshioka
 379 R Beifong's Bounty Hunters @Alexandr Leskinen
 380 R Earth King's Lieutenant @Nathaniel Himawan
 381 R Iroh, Tea Master @Brian Yuen
+382 R Sandbender Scavengers @Alexander Forssberg
 383 R Sokka, Bold Boomeranger @Toni Infante
+384 R Toph, Hardheaded Teacher @Ruwen Liu
 385 M Planetarium of Wan Shi Tong @Robin Olausson
+386 R Abandoned Air Temple @Dom Lay
 387 R Agna Qel'a @Dom Lay
+388 R Ba Sing Se @Andreas Rocha
 389 R Fire Nation Palace @Awanqi (Angela Wang)
 390 R Jasmine Dragon Tea Shop @Leanna Crossan
+391 R Realm of Koh @Andreas Rocha
 392 R Secret Tunnel @Alexander Forssberg
 393 R Firebending Student @Airi Yoshihisa
 394 R Momo, Friendly Flier @Ryota Murayama

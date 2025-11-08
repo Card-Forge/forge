@@ -1,0 +1,11 @@
+Name:Toph, Hardheaded Teacher
+ManaCost:2 R G
+Types:Legendary Creature Human Warrior Ally
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When NICKNAME enters, you may discard a card. If you do, return target instant or sorcery card from your graveyard to your hand.
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ Discard<1/Card> | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | TgtPrompt$ Choose target instant or sorcery card in your graveyard
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigEarthbend | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell, earthbend 1. If that spell is a Lesson, put an additional +1/+1 counter on that land. (Target land you control becomes a 0/0 creature with haste that's still a land. Put a +1/+1 counter on it. When it dies or is exiled, return it to the battlefield tapped.)
+SVar:TrigEarthbend:DB$ Earthbend | Num$ 1 | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ P1P1 | ConditionDefined$ TriggeredCardLKICopy | ConditionPresent$ Lesson | CounterNum$ 1
+DeckHints:Ability$Graveyard & Type$Lesson
+Oracle:When Toph enters, you may discard a card. If you do, return target instant or sorcery card from your graveyard to your hand.\nWhenever you cast a spell, earthbend 1. If that spell is a Lesson, put an additional +1/+1 counter on that land. (Target land you control becomes a 0/0 creature with haste that's still a land. Put a +1/+1 counter on it. When it dies or is exiled, return it to the battlefield tapped.)
