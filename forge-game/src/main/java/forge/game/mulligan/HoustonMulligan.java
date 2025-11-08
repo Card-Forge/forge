@@ -9,16 +9,15 @@ import java.util.List;
 
 public class HoustonMulligan extends AbstractMulligan {
 
-    private static final int STARTING_DRAW_SIZE = 10;
     private static final int TUCK_COUNT = 3;
-
-    public HoustonMulligan(Player p, boolean firstMullFree) {
-        super(p, false);
-    }
 
     @Override
     public int handSizeAfterNextMulligan() {
-        return STARTING_DRAW_SIZE;
+        return player.getMaxHandSize();
+    }
+
+    public HoustonMulligan(Player p, boolean firstMullFree) {
+        super(p, false);
     }
 
     @Override
