@@ -1,0 +1,8 @@
+Name:Swampsnare Trap
+ManaCost:2 B
+Types:Enchantment Aura
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | ValidTarget$ Creature.withFlying | EffectZone$ All | Description$ This spell costs {1} less to cast if it targets a creature with flying.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -5 | AddToughness$ -3 | Description$ Enchanted creature gets -5/-3.
+Oracle:This spell costs {1} less to cast if it targets a creature with flying.\nEnchant creature\nEnchanted creature gets -5/-3.

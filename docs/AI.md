@@ -1,11 +1,11 @@
 # About Forge's Artificial Intelligence
 
-The AI is *not* "trained". It uses basic rules and can be easy to overcome knowing it's weaknesses.
+The AI is *not* "trained". It uses basic rules and can be easy to overcome knowing its weaknesses.
 
 The AI is:
-* Best with Aggro and midrange decks
-* Poor to Ok in control decks
-* Pretty bad for most combo decks
+- Best with Aggro and midrange decks
+- Poor to Ok in control decks
+- Pretty bad for most combo decks
 
 If you want to train a model for the AI, please do. We would love to see something like that implemented in Forge.
 

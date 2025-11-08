@@ -8,9 +8,9 @@ T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigPump:DB$ Pump | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBGiveControl
 SVar:DBGiveControl:DB$ GainControl | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | Defined$ Targeted | NewController$ ParentTarget | RememberControlled$ True | SubAbility$ DBImmediateTrig
 SVar:DBImmediateTrig:DB$ ImmediateTrigger | Execute$ TrigToken | ConditionDefined$ Remembered | ConditionPresent$ Card | TriggerDescription$ When you do, create a 1/1 white Ally creature token. Put a +1/+1 counter on that token for each permanent you own that your opponents control.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_ally | RememberTokens$ True | ForgetOtherRemembered$ True | TokenOwner$ You | SubAbility$ DBPutCounter
-SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_ally | ImprintTokens$ True | TokenOwner$ You | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Imprinted | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:X:Count$Valid Permanent.YouOwn+OppCtrl
 SVar:PlayMain1:TRUE
 DeckHas:Ability$LifeGain|Token|Food

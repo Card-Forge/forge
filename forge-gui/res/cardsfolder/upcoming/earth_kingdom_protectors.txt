@@ -1,0 +1,8 @@
+Name:Earth Kingdom Protectors
+ManaCost:W
+Types:Creature Human Soldier Ally
+PT:1/1
+K:Vigilance
+A:AB$ Pump | Cost$ Sac<1/CARDNAME> | ValidTgts$ Ally.Other+YouCtrl | TgtPrompt$ Select another target Ally you control | KW$ Indestructible | SpellDescription$ Another target Ally you control gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
+DeckHints:Type$Ally
+Oracle:Vigilance\nSacrifice this creature: Another target Ally you control gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)

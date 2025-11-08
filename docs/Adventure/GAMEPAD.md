@@ -1,6 +1,6 @@
 Basic Gamepad Support for Adventure Mode
 
-Tested using DS4 Cpntroller on Windows and Android.
+Tested using DS4 Controller on Windows and Android.
 
 If using on Windows OS and you have DS4Windows installed, you might experience dual input because of Emulated/Virtual Controller. To fix this you must use HidHide (better than exclusive mode). Refer to the guide here:
 https://vigem.org/projects/HidHide/Simple-Setup-Guide/

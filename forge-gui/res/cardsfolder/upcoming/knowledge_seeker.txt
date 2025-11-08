@@ -1,0 +1,10 @@
+Name:Knowledge Seeker
+ManaCost:1 U
+Types:Creature Fox Spirit
+PT:2/1
+K:Vigilance
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw your second card each turn, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature dies, create a Clue token. (It's an artifact with "{2}, Sacrifice this token: Draw a card.)
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_clue_draw | TokenOwner$ You
+Oracle:Vigilance\nWhenever you draw your second card each turn, put a +1/+1 counter on this creature.\nWhen this creature dies, create a Clue token. (It's an artifact with "{2}, Sacrifice this token: Draw a card.)
