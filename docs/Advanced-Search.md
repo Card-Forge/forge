@@ -2,7 +2,11 @@
 
 Forge implements many ways to help you find the cards you want in your ever growing collection. One of them uses a [Scryfall-like syntax](https://scryfall.com/docs/syntax) in the collection search bar.
 
-Pressing Ctrl+Enter in current search adds another editable search bar.
+Pressing Ctrl+Enter in current search adds another editable search bar.  
+Here's how searching for all Goblins without Haste-related abilities might look:
+![search](search.png)
+
+Click the "X" in the upper right corner of each search widget to remove that filter from the filter stack.
 
 ## Additional information
 
