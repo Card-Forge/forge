@@ -133,7 +133,7 @@ When hovering over items on the stack, arrows will be displayed between that ite
 The arrow will be red if the spell/ability's activator is an opponent of the target or its controller, and blue if targeting an ally of the target or its controller.
 
 ## Easier creature type selection
-When prompted to select a creature type for a card like *Obelisk of Urd*, creature types present in your deck will appear on top, sorted from most to least frequent, followed by all other creature types.<br/ >
+When prompted to select a creature type for a card like *Obelisk of Urd*, creature types present in your deck will appear on top, sorted from most to least frequent, followed by all other creature types.  
 This should make it so, more often than not, you can just accept the dialog without searching.
 
 ## Card Zoomer
@@ -150,13 +150,13 @@ If a card is a flip or double-sided card then you can easily view the alternate 
 
 The standard flip graphic (the two rotated arrows) is displayed if the card can be flipped or transformed.
 
-Forge supports showing XLHQ (extra large high quality) card pictures when zooming in on a card if these pictures are available. Forge will look for XLHQ card art in the "XLHQ" subfolder of the "pics/cards" folder in Forge cache. XLHQ pictures should have the ".xlhq.jpg" extension instead of the ".full.jpg" one (CCGHQ XLHQ releases comply with this naming scheme).<br />
+Forge supports showing XLHQ (extra large high quality) card pictures when zooming in on a card if these pictures are available. Forge will look for XLHQ card art in the "XLHQ" subfolder of the "pics/cards" folder in Forge cache. XLHQ pictures should have the ".xlhq.jpg" extension instead of the ".full.jpg" one (CCGHQ XLHQ releases comply with this naming scheme).  
 Please note that XLHQ versions of cards are *only* showed in the zoom view, regular card pictures are still used (LQ/HQ, depending on what you're using) on the battlefield and elsewhere in the game because XLHQ art is significantly more taxing in memory consumption  (and in addition to that, XLHQ card borders are not cropped the way Forge expects them in order to show them properly on the battlefield anyway).
 
 XLHQ tokens are also supported, but the naming scheme for them is a little different - they are looked up in "pics/tokens/XLHQ" and have their ordinary names.
 
 ## Auto-Target
-When playing spells and abilities with the text "target opponent", if you only have one opponent, you will no longer be asked to choose the opponent to target.<br />
+When playing spells and abilities with the text "target opponent", if you only have one opponent, you will no longer be asked to choose the opponent to target.  
 When triggered abilities have only one valid target, that target will now be auto-selected.
 
 ## Auto-Pay
