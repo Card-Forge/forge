@@ -2,6 +2,8 @@
 
 Forge implements many ways to help you find the cards you want in your ever growing collection. One of them uses a [Scryfall-like syntax](https://scryfall.com/docs/syntax) in the collection search bar.
 
+Pressing Ctrl+Enter in current search adds another editable search bar.
+
 ## Additional information
 
 If no operators are passed between tokens, Forge will assume it is joined by `and`. For example, `t:cat t:warrior t:creature` will search for "creatures that are a cat **and** a warrior". Make sure to use `|` or `or` for your queries, as well as parentheses `( )` when needed.
