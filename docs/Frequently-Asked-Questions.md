@@ -6,8 +6,6 @@ https://discord.com/channels/267367946135928833/1095026912927154176
 * Search the help posts in Discord
 https://discord.com/channels/267367946135928833/1047001034788196452
 
-Note: For now, please also check [this](https://www.slightlymagic.net/forum/viewtopic.php?f=26&t=11825) forum topic for some additional information.
-
 # General
 
 ## How do I download content?
