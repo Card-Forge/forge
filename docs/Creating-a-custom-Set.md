@@ -1,5 +1,3 @@
-# Creating a custom set
-
 This is a tutorial to start creating your own custom set, or implementing an existing one. We'll take you step by step into implementing a few cards from [MSEM Champions](https://msem-instigator.herokuapp.com/set/MPS_MSE). This is a basic guide to help you get started.
 
 **Note:** This tutorial is currently for **Windows only**.

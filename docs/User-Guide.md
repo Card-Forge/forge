@@ -105,6 +105,5 @@ This might be different in OSX or Linux systems (file permission related).
 
 ### Full Control
 
-Right click/long tap on your player avatar:
-
+Right click/long tap on your player avatar:  
 This feature lets you skip different helpers that streamline gameplay by avoiding somewhat annoying GUI interactions and instead use AI logic to make reasonable decisions for beginners.\nUseful for certain corner cases or if you want to challenge yourself with the Comprehensive Rules:\ne.g. the opposite cost order is needed if activating an animated "Halo Fountain" that's also tapped.

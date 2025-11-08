@@ -1,4 +1,4 @@
-# [Forge Wiki Home](Home.md)
+### [Forge Wiki Home](Home.md)
 
 - [User Guide](User-Guide.md)
   - [FAQ](Frequently-Asked-Questions.md)
