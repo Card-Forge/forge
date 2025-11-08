@@ -1,4 +1,5 @@
 ### [Forge Wiki Home](Home.md)
+
 - [User Guide](User-Guide.md)
   - [FAQ](Frequently-Asked-Questions.md)
   - [SteamDeck/Bazzite](Steam-Deck-and-Bazzite-Install.md)
@@ -6,21 +7,20 @@
   - [Network Play](network-play.md)
     - [Network FAQ](Network-FAQ.md)
     - [Network Extra](Networking-Extras.md)
+  - [Advanced search](Advanced-Search.md)
 
 - [Adventure Mode](Adventure/Adventure-Mode.md)
-
-    - Gameplay Guide
-
-      - [Getting Started](Adventure/Gameplay-Guide.md)
-      - [Different Planes](Adventure/Different-Planes.md)
-      - [Currency](Adventure/Currency.md)
-      - [Deck Building Tips](Adventure/Deck-Building-Tips.md)
-      - [Towns & Capitals](Adventure/Towns-&-Capitals.md)
-      - [Dungeons](Adventure/Dungeons.md)
-      - [Equipments and Items](Adventure/Equipments-and-Items.md)
-      - [Keyboard Shortcuts](Keyboard-Shortcuts.md)
-      - [Controller Support](Adventure/GAMEPAD.md)
-      - [Console and Cheats](Adventure/Console-and-Cheats.md)
+  - Gameplay Guide
+    - [Getting Started](Adventure/Gameplay-Guide.md)
+    - [Different Planes](Adventure/Different-Planes.md)
+    - [Currency](Adventure/Currency.md)
+    - [Deck Building Tips](Adventure/Deck-Building-Tips.md)
+    - [Towns & Capitals](Adventure/Towns-&-Capitals.md)
+    - [Dungeons](Adventure/Dungeons.md)
+    - [Equipments and Items](Adventure/Equipments-and-Items.md)
+    - [Keyboard Shortcuts](Keyboard-Shortcuts.md)
+    - [Controller Support](Adventure/GAMEPAD.md)
+    - [Console and Cheats](Adventure/Console-and-Cheats.md)
 
   - [Modding and content creation](Adventure/Modding.md)
 

@@ -1,0 +1,8 @@
+Name:Realm of Koh
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ This land enters tapped unless you control a basic land.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Land.Basic+YouCtrl | ConditionCompare$ EQ0
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ Token | Cost$ 3 B T | TokenAmount$ 1 | TokenScript$ c_1_1_spirit_spiritshadow | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Spirit creature token with "This token can't block or be blocked by non-Spirit creatures."
+Oracle:This land enters tapped unless you control a basic land.\n{T}: Add {B}.\n{3}{B}, {T}: Create a 1/1 colorless Spirit creature token with "This token can't block or be blocked by non-Spirit creatures."
