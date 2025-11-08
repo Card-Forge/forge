@@ -1,6 +1,6 @@
 # Advanced Search
 
-Forge implements many ways to help you find the cards you want in your ever growing collection. One of them uses a [Scryfall-like syntax](https://scryfall.com/docs/syntax) in the collection search bar.
+Forge implements many ways to help you find the cards you want in your ever growing collection.
 
 Pressing Ctrl+Enter in current search adds another editable search bar.  
 Here's how searching for all Goblins without Haste-related abilities might look:
@@ -8,7 +8,11 @@ Here's how searching for all Goblins without Haste-related abilities might look:
 
 Click the "X" in the upper right corner of each search widget to remove that filter from the filter stack.
 
+Find-as-you-type is implemented for Deck Editor tables. Just start typing while the table has focus and the next card with a matching string in its name will be highlighted. If more than one card matches, hit Enter to select the next matching card. A popup panel will appear with the search string so you know what you are searching for. If no cards match the string, the string will be highlighted in red. Find-as-you-type mode is automatically exited after 5 seconds of inactivity, or hit Escape to exit find-as-you-type mode immediately.
+
 ## Additional information
+
+Another way to filter is using [Scryfall-like syntax](https://scryfall.com/docs/syntax) in the collection search bar.
 
 If no operators are passed between tokens, Forge will assume it is joined by `and`. For example, `t:cat t:warrior t:creature` will search for "creatures that are a cat **and** a warrior". Make sure to use `|` or `or` for your queries, as well as parentheses `( )` when needed.
 
