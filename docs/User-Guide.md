@@ -132,10 +132,6 @@ We know some people are colorblind and may not be able to differentiate between 
 When hovering over items on the stack, arrows will be displayed between that item and all of its targets (both cards and players).
 The arrow will be red if the spell/ability's activator is an opponent of the target or its controller, and blue if targeting an ally of the target or its controller.
 
-## Easier creature type selection
-When prompted to select a creature type for a card like *Obelisk of Urd*, creature types present in your deck will appear on top, sorted from most to least frequent, followed by all other creature types.  
-This should make it so, more often than not, you can just accept the dialog without searching.
-
 ## Card Zoomer
 You can gaze at your HQ images in all their glory with just a flick of the mousewheel, holding the middle mouse button down, or holding the left and right mouse buttons down at the same time. This feature will also increase the size of low quality pics up to the size used for high quality pics, but the image will not be very clear.
 
@@ -154,6 +150,10 @@ Forge supports showing XLHQ (extra large high quality) card pictures when zoomin
 Please note that XLHQ versions of cards are *only* showed in the zoom view, regular card pictures are still used (LQ/HQ, depending on what you're using) on the battlefield and elsewhere in the game because XLHQ art is significantly more taxing in memory consumption  (and in addition to that, XLHQ card borders are not cropped the way Forge expects them in order to show them properly on the battlefield anyway).
 
 XLHQ tokens are also supported, but the naming scheme for them is a little different - they are looked up in "pics/tokens/XLHQ" and have their ordinary names.
+
+## Easier creature type selection
+When prompted to select a creature type for a card like *Obelisk of Urd*, creature types present in your deck will appear on top, sorted from most to least frequent, followed by all other creature types.  
+This should make it so, more often than not, you can just accept the dialog without searching.
 
 ## Auto-Target
 When playing spells and abilities with the text "target opponent", if you only have one opponent, you will no longer be asked to choose the opponent to target.  
@@ -176,6 +176,12 @@ When paying mana costs, you can press Enter/Spacebar or click the Auto button in
 - Pressing "End Turn" skips your attack phase and doesn't get cancelled automatically if a spell or ability is put on the stack. You will still be given a chance to declare blockers if your opponent attacks, but after that the rest of your opponent's turn will now be skipped properly.
 
   To alleviate pressing this accidentally, as long as you're passing this way, you'll be able to press Escape or the Cancel button to be given the chance to act again. Phases with stops and spells/abilities resolving will be given a slight delay to allow you to see what's going on.
+
+## Shift Key helper
+* When you mouse over a flip, transform or Morph (controlled by you) card in battlefield, hold SHIFT to see other state of that card at the side panel that displays card picture and details.
+* Hold SHIFT when clicking on mana pool icons to use as much of that mana type as possible towards the cost.
+* Tap all lands in a stack using Shift+click on any in the stack.
+* Attack with all creatures in a stack using Shift+click on any in the stack.
 
 ## Full Control
 Right click/long tap on your player avatar:  
