@@ -12,6 +12,13 @@ https://discord.com/channels/267367946135928833/1047001034788196452
 
 Forge has content downloaders within the app itself, you can use those tools to update the graphics assets. More information about card and token image assets can be found here. [Card Images, Downloading](Card-Images.md#downloading)
 
+## My desktop match/deck view is all messed up?
+The match and deck editor windows contain panels that can be moved and/or resized. The changes that you make are saved to files that are named "editor.xml" and "match.xml". These files can be found in your userDir/preferences/ directory.
+
+Sometimes people will decide that they do not like the changes that they made and wish to go back to the original layout. To reset layouts to default, go to the Game Settings -> Preferences -> Troubleshooting section. You will find at this location two buttons that will reset the match layout and the deck editor layouts.
+
+Also use the mentioned measure if your match or deckeditor won't start - it would help in 90% of the cases.
+
 ## I think I found a bug in Forge. What do I do?
 
 *Most users, who are running beta versions of Forge, should continue to use these instructions. As for alpha testers, these instructions have yet to be made congruent with the latest automatic bug reporting from within Forge.*
