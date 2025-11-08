@@ -1,3 +1,5 @@
+# Creating a custom set
+
 This is a tutorial to start creating your own custom set, or implementing an existing one. We'll take you step by step into implementing a few cards from [MSEM Champions](https://msem-instigator.herokuapp.com/set/MPS_MSE). This is a basic guide to help you get started.
 
 **Note:** This tutorial is currently for **Windows only**.
@@ -109,11 +111,11 @@ Each line is as follow: `CollectorNumber Rarity CardName @ArtistName`.
 
 > Note: You can put the cards in the list even if they aren't scripted yet. Forge will skip over them.
 
-```
+```text
 [tokens]
-b_1_1_bird_flying
-b_3_3_cat_deathtouch
-b_5_5_golem_trample
+1 b_1_1_bird_flying
+2 b_3_3_cat_deathtouch
+3 b_5_5_golem_trample
 ```
 
 The **[tokens]** section is optional, and only needed if you want to use specific token images in this set. They should be named using the name of their token script. `b_1_1_bird_flying` means it is a black 1/1 bird with flying. More on that later.
@@ -122,7 +124,7 @@ If you load the game with just file, you'll be able to see that Master Chef, Une
 
 Let's comment out Master Chef to avoid a name conflict with an existing MTG card:
 
-```
+```text
 [cards]
 #7 M Master Chef
 33 M Golden Touch
@@ -130,6 +132,8 @@ Let's comment out Master Chef to avoid a name conflict with an existing MTG card
 ```
 
 Save your file, and let's move onto another step.
+
+> If there is a conflict, you can add something in its name for differenciate it, such as a set tag (ie. `Master Chef (MSEM)`).
 
 ## Scripting your first cards
 
@@ -141,7 +145,8 @@ Now, you might remember than Unearth was an existing MTG card so we do not need 
 Let's create the following files:
 
 avatar_of_basat.txt
-```
+
+```text
 Name:Avatar of Basat
 ManaCost:R
 Types:Creature Avatar
@@ -152,7 +157,8 @@ Oracle:Menace\nAvatar of Basat can't block.
 ```
 
 exhunt.txt
-```
+
+```text
 Name:Exeunt
 ManaCost:B
 Types:Instant
@@ -162,7 +168,8 @@ Oracle:Each player sacrifices a creature.
 ```
 
 fox_of_the_orange_orchard.txt
-```
+
+```text
 Name:Fox of the Orange Orchard
 ManaCost:1 W
 Types:Creature Fox Spirit
@@ -171,7 +178,8 @@ Oracle:
 ```
 
 inked_summoner.txt
-```
+
+```text
 Name:Inked Summoner
 ManaCost:1 B
 Types:Creature Human Warlock Artist
@@ -190,7 +198,7 @@ Oracle:At the beginning of your end step, if you lost 2 or more life this turn, 
 
 If you load your game now, you should be able to find these cards you just scripted! You'll also notice that Inked Summoner is only listed as a Human Warlock, missing the Artist subtype. That's because Artist is not a real MTG subtype. You can add custom types directing inside the set definition file by following the sections found inside the `res/lists/TypeLists.txt` file. Duplicates will be ignored.
 
-```
+```text
 [CreatureTypes]
 Artist:Artists
 ```
@@ -205,7 +213,8 @@ Let's add the new tokens we need to make Inked Summoner work!
 > Just like for card scripting, this tutorial will not teach you about scripting them.
 
 b_1_1_bird.flying.txt
-```
+
+```text
 Name:Bird Token
 ManaCost:no cost
 Colors:black
@@ -216,7 +225,8 @@ Oracle:Flying
 ```
 
 b_3_3_cat_deathtouch.txt
-```
+
+```text
 Name:Cat Token
 ManaCost:no cost
 Colors:black
@@ -227,7 +237,8 @@ Oracle:Deathtouch
 ```
 
 b_5_5_golem_trample.txt
-```
+
+```text
 Name:Golem Token
 ManaCost:no cost
 Colors:black
@@ -241,9 +252,9 @@ Great! Now Inked Summoner no longer make the game crash! Now let's add some imag
 
 ## Adding card and token images
 
-You can find the card images for the MSEM Champions edition [here](https://msem-instigator.herokuapp.com/set/CHAMPIONS). Find the ones you need and save them inside `%appdata%/../Local/Forge/Cache/pics/cards/MSEM_CHAMPIONS` Remember the filename format should be something like `Swamp.full.jpg` if you only have one variant in your edition. If you have multiples, then it should be something like `Fox of the Orange Orchard1.full.jpg`, `Fox of the Orange Orchard2.full.jpg`, etc. You can find the alternate images from [here](https://msem-instigator.herokuapp.com/set/MPS_MSE) if you want.
+You can find the card images for the MSEM Champions edition [here](https://msem-instigator.herokuapp.com/set/CHAMPIONS). Find the ones you need and save them inside `%appdata%/../Local/Forge/Cache/pics/cards/MSEM_CHAMPIONS` Remember the filename format should be `{cardname}.fullborder.jpg` if you only have one variant in your edition. If you have multiples, then it should be `{cardname}{number}.fullborder.jpg` (ie. `Fox of the Orange Orchard1.fullborder.jpg`, `Fox of the Orange Orchard2.fullborder.jpg`, etc). You can find the alternate images from [here](https://msem-instigator.herokuapp.com/set/MPS_MSE) if you want.
 
-For the tokens, we can deposit them inside `%localappdata%/Forge/Cache/pics/tokens/MSEM_CHAMPIONS`. They should be named the same as their token script so `b_1_1_bird_flying.jpg` and so forth.
+For the tokens, we can deposit them inside `%localappdata%/Forge/Cache/pics/tokens/MSEM_CHAMPIONS`. They should be named the same as their number + token script so `1_b_1_1_bird_flying.jpg`, `2_b_3_3_cat_deathtouch.jpg`, and so forth.
 
 ![b_1_1_bird_flying](https://github.com/user-attachments/assets/531583c1-3985-4744-858a-3a49fd12740a)
 ![b_3_3_cat_deathtouch](https://github.com/user-attachments/assets/15a24e62-be43-4c0c-aeac-0ddb38fca97a)
@@ -251,6 +262,6 @@ For the tokens, we can deposit them inside `%localappdata%/Forge/Cache/pics/toke
 
 You can now start your game again, and see that the art loads correctly now.
 
-## 🎉 Congratulations!
+## 🎉 Congratulations
 
 You’ve just added your first custom set in Forge! There's still much more to explore — scripting advanced abilities, custom mechanics, and set structures — but you now have a solid foundation to build from.
