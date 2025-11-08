@@ -295,6 +295,8 @@ Parameters:
 
 ### ControlExchange
 
+### ControlPlayer
+
 ### ControlSpell
 
 ## Copy*

@@ -7,6 +7,9 @@ The AI is:
 - Poor to Ok in control decks
 - Pretty bad for most combo decks
 
+The logic is mostly based on heuristics and split between effect APIs and all other ingame decisions. Sometimes there is hardcoded logic for single cards but that's usually not a healthy approach though it can be more justifiable for highly iconic cards.<br />
+Defining general concepts of smart play can help improve the win rate much easier, e.g. the AI will always attack with creatures that it has temporarily gained control of until end of turn in order not to miss the opportunity and thus waste the control effect.
+
 If you want to train a model for the AI, please do. We would love to see something like that implemented in Forge.
 
 # AI Matches from Command Line
