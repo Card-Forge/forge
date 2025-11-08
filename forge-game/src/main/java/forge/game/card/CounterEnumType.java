@@ -91,6 +91,8 @@ public enum CounterEnumType implements CounterType {
 
     COMPONENT("COMPN", 224, 160, 48),
 
+    CONQUEROR("CONQR", 225, 210, 25),
+
     CONTESTED("CONTES", 255, 76, 2),
 
     CORPSE("CRPSE", 230, 186, 209),
