@@ -76,27 +76,12 @@ public class Match {
         MulliganDefs.MulliganRule selectedRule = StaticData.instance().getMulliganRule();
 
         if (selectedRule == MulliganDefs.MulliganRule.Houston) {
-            List<RegisteredPlayer> modifiedPlayers = new ArrayList<>();
-
             for (RegisteredPlayer rp : players) {
-                rp.setStartingHand(10);
-                modifiedPlayers.add(rp);
+                rp.setStartingHand(selectedRule.getModifiedHandSize(rp.getStartingHand()));
             }
-
-            Game game = new Game(modifiedPlayers, currentRules, this);
-
-            for (RegisteredPlayer rp : players) {
-                rp.setStartingHand(7);
-            }
-
-            return game;
-
-        } else {
-            for (RegisteredPlayer rp : players) {
-                rp.setStartingHand(7);
-            }
-            return new Game(players, currentRules, this);
         }
+
+        return new Game(players, currentRules, this);
     }
 
     public void startGame(final Game game) {

@@ -9,11 +9,40 @@ import java.util.List;
  */
 public class MulliganDefs {
     public enum MulliganRule {
-        Original,
-        Paris,
-        Vancouver,
-        London,
-        Houston,
+        Original {
+            @Override
+            public int getModifiedHandSize(int startingHandSize) {
+                return startingHandSize;
+            }
+        },
+        Paris {
+            @Override
+            public int getModifiedHandSize(int startingHandSize) {
+                return startingHandSize;
+            }
+        },
+        Vancouver {
+            @Override
+            public int getModifiedHandSize(int startingHandSize) {
+                return startingHandSize;
+            }
+        },
+        London {
+            @Override
+            public int getModifiedHandSize(int startingHandSize) {
+                return startingHandSize;
+            }
+        },
+        Houston {
+            @Override
+            public int getModifiedHandSize(int startingHandSize) {
+                // The Houston rule always sets the hand size to 10, regardless of the starting size
+                // or how many times the player has mulliganed.
+                return 10;
+            }
+        };
+
+        public abstract int getModifiedHandSize(int startingHandSize);
     }
     private static MulliganRule defaultRule = MulliganRule.London;
 
