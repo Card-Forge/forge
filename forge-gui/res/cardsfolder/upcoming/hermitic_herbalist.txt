@@ -1,0 +1,8 @@
+Name:Hermitic Herbalist
+ManaCost:G U
+Types:Creature Human Druid Ally
+PT:2/3
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ 2 | RestrictValid$ Spell.Lesson | SpellDescription$ Add two mana in any combination of colors. Spend this mana only to cast Lesson spells.
+DeckHints:Type$Lesson
+Oracle:{T}: Add one mana of any color.\n{T}: Add two mana in any combination of colors. Spend this mana only to cast Lesson spells.
