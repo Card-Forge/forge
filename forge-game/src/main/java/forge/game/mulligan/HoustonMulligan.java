@@ -10,7 +10,6 @@ import java.util.List;
 public class HoustonMulligan extends AbstractMulligan {
 
     private static final int TUCK_COUNT = 3;
-    public static final int MODIFIED_HAND_SIZE = 10;
 
     @Override
     public int handSizeAfterNextMulligan() {
@@ -50,10 +49,6 @@ public class HoustonMulligan extends AbstractMulligan {
     @Override
     public boolean canMulligan() {
         return false;
-    }
-
-    public int getModifiedHandSize(int startingHandSize) {
-        return MODIFIED_HAND_SIZE; // Returns 10
     }
 
 }
