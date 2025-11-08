@@ -764,7 +764,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
                 continue;
             }
             if (tr.isIntrinsic()) {
-                triggers.add(tr.copy(card, lki, false, this));
+                triggers.add(tr.copy(card, lki, false, tr.hasParam("Execute") ? abilityForTrigger.get(tr.getParam("Execute")) : null));
             }
         }
         ReplacementEffect runRE = null;
