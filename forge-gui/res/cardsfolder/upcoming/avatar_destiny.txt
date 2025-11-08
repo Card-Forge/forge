@@ -1,0 +1,15 @@
+Name:Avatar Destiny
+ManaCost:2 G G
+Types:Enchantment Aura
+K:Enchant:Creature.YouCtrl:creature you control
+SVar:AttachAILogic:Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | AddType$ Avatar | Description$ Enchanted creature gets +1/+1 for each creature card in your graveyard and is an Avatar in addition to its other types.
+T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigMill | TriggerDescription$ When enchanted creature dies, mill cards equal to its power. Return this card to its owner's hand and up to one creature card milled this way to the battlefield under your control.
+SVar:TrigMill:DB$ Mill | NumCards$ Y | RememberMilled$ True | SubAbility$ DBChangeZoneHand
+SVar:DBChangeZoneHand:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBChangeZoneBattlefield
+SVar:DBChangeZoneBattlefield:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Battlefield | ChangeType$ Creature.IsRemembered | SelectPrompt$ Select up to one creature card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$ValidGraveyard Creature.YouOwn
+SVar:Y:TriggeredCard$CardPower
+DeckHints:Ability$Graveyard
+Oracle:Enchant creature you control\nEnchanted creature gets +1/+1 for each creature card in your graveyard and is an Avatar in addition to its other types.\nWhen enchanted creature dies, mill cards equal to its power. Return this card to its owner's hand and up to one creature card milled this way to the battlefield under your control.
