@@ -2697,10 +2697,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public Integer getMaxWaterbend() {
         return maxWaterbend;
     }
-    public void setMaxWaterbend(String max) {
-        if (max == null) {
+    public void setMaxWaterbend(Cost cost) {
+        if (cost == null || cost.getMaxWaterbend() == null) {
             return;
         }
-        maxWaterbend = AbilityUtils.calculateAmount(getHostCard(), max, this);
+        maxWaterbend = AbilityUtils.calculateAmount(getHostCard(), cost.getMaxWaterbend(), this);
     }
 }
