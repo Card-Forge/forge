@@ -260,6 +260,15 @@ For the tokens, we can deposit them inside `%localappdata%/Forge/Cache/pics/toke
 
 You can now start your game again, and see that the art loads correctly now.
 
+## Excursion: Card variants
+
+There are currently multiple ways to specify a flavor name:
+* Manually, by writing `Variant:Foo:FlavorName:Loret Ipsum` in the card script, and adding `${"variant": "Foo"}` to the end of the edition entry. You'll also want to add `Variant:Foo:Oracle:When Loret Ipsum enters...` if the flavor name would appear in the Oracle text, or if it would otherwise be changed.
+* By lookup, again by using `Variant:Foo:FlavorName:Loret Ipsum` in the card script, but simply using "Loret Ipsum" as the name in the edition file.
+* Automatically, by putting `${"flavorName": "Loret Ipsum"}` at the end of the edition entry.
+
+The third method is the easiest, but besides a simple find/replace for the card name, it won't be able to make any changes to flavor the Oracle text, such as for ability words. They all function the same under the hood once the CardDB is loaded; the latter two are just shortcuts for the first.
+
 ## 🎉 Congratulations
 
 You’ve just added your first custom set in Forge! There's still much more to explore — scripting advanced abilities, custom mechanics, and set structures — but you now have a solid foundation to build from.
