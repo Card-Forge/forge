@@ -22,6 +22,7 @@ import forge.card.CardType;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.CardTraitBase;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
@@ -188,10 +189,10 @@ public class Cost implements Serializable {
         return this.isAbility;
     }
 
-    public final Integer getMaxWaterbend() {
-        for(CostPart cp : this.costParts) {
-            if (cp instanceof CostWaterbend) {
-                return ((CostWaterbend) cp).getMaxWaterbend();
+    public final String getMaxWaterbend() {
+        for (CostPart cp : this.costParts) {
+            if (cp instanceof CostPartMana) {
+                return ((CostPartMana) cp).getMaxWaterbend();
             }
         }
         return null;
@@ -575,7 +576,7 @@ public class Cost implements Serializable {
 
         if (parse.startsWith("Waterbend<")) {
             final String[] splitStr = abCostParse(parse, 1);
-            return new CostWaterbend(new ManaCost(new ManaCostParser(splitStr[0])));
+            return new CostWaterbend(splitStr[0]);
         }
 
         if (parse.equals("Forage")) {
@@ -987,6 +988,7 @@ public class Cost implements Serializable {
                 } else {
                     costParts.add(0, new CostPartMana(manaCost.toManaCost(), null));
                 }
+                getCostMana().setMaxWaterbend(mPart.getMaxWaterbend());
             } else if (part instanceof CostPutCounter || (mergeAdditional && // below usually not desired because they're from different causes
                     (part instanceof CostDiscard || part instanceof CostDraw ||
                     part instanceof CostAddMana || part instanceof CostPayLife ||

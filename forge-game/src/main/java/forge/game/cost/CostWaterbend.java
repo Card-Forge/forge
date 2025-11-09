@@ -1,18 +1,14 @@
 package forge.game.cost;
 
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostParser;
 
 public class CostWaterbend extends CostPartMana {
-    private int maxWaterbend;
 
-    public CostWaterbend(final ManaCost cost) {
-        super(cost, null);
+    public CostWaterbend(final String mana) {
+        super(new ManaCost(new ManaCostParser(mana)), null);
 
-        maxWaterbend = cost.getGenericCost();
-    }
-
-    public int getMaxWaterbend() {
-        return maxWaterbend;
+        maxWaterbend = mana;
     }
 
     @Override

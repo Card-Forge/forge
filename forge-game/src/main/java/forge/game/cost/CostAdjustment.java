@@ -100,6 +100,9 @@ public class CostAdjustment {
             host.setState(CardStateName.Original, false);
             host.setFaceDown(false);
         }
+
+        sa.setMaxWaterbend(result.getMaxWaterbend());
+
         return result;
     }
 
@@ -179,14 +182,12 @@ public class CostAdjustment {
 
         final Game game = sa.getActivatingPlayer().getGame();
         final Card originalCard = sa.getHostCard();
-        boolean isStateChangeToFaceDown = false;
 
-        if (sa.isSpell()) {
-            if (sa.isCastFaceDown() && !originalCard.isFaceDown()) {
-                // Turn face down to apply cost modifiers correctly
-                originalCard.turnFaceDownNoUpdate();
-                isStateChangeToFaceDown = true;
-            }
+        boolean isStateChangeToFaceDown = false;
+        if (sa.isSpell() && sa.isCastFaceDown() && !originalCard.isFaceDown()) {
+            // Turn face down to apply cost modifiers correctly
+            originalCard.turnFaceDownNoUpdate();
+            isStateChangeToFaceDown = true;
         }
 
         CardCollection cardsOnBattlefield = new CardCollection(game.getCardsIn(ZoneType.Battlefield));
@@ -290,7 +291,7 @@ public class CostAdjustment {
             adjustCostByConvokeOrImprovise(cost, sa, false, true, test);
         }
 
-        Integer maxWaterbend = sa.getPayCosts().getMaxWaterbend();
+        Integer maxWaterbend = sa.getMaxWaterbend();
         if (maxWaterbend != null && maxWaterbend > 0) {
             adjustCostByConvokeOrImprovise(cost, sa, true, true, test);
         }
@@ -338,7 +339,7 @@ public class CostAdjustment {
 
         Integer maxReduction = null;
         if (artifacts && creatures) {
-            maxReduction = sa.getPayCosts().getMaxWaterbend();
+            maxReduction = sa.getMaxWaterbend();
             Predicate <Card> isArtifactOrCreature = card -> card.isArtifact() || card.isCreature();
             untappedCards = CardLists.filter(untappedCards, isArtifactOrCreature);
         } else if (artifacts) {
