@@ -31,7 +31,7 @@ public class EarthbendEffect extends SpellAbilityEffect {
 
         sb.append(amount).append(". (Target land you control becomes a 0/0 creature with haste that's still a land. Put  ");
         sb.append(Lang.nounWithNumeral(amount, "+1/+1 counter"));
-        sb.append(" on it. When it dies or is exiled, return it to the battlefield tapped.)");
+        sb.append(" on it. When it dies or is exiled, return it to the battlefield tapped under your control.)");
 
         return sb.toString();
     }
@@ -74,7 +74,7 @@ public class EarthbendEffect extends SpellAbilityEffect {
     protected void buildTrigger(SpellAbility sa, Card c, String sbTrig, String zone) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
-        String trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ " + zone + " | Destination$ Battlefield | Tapped$ True";
+        String trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ " + zone + " | Destination$ Battlefield | Tapped$ True | GainControl$ You";
 
         final Trigger trig = TriggerHandler.parseTrigger(sbTrig, CardCopyService.getLKICopy(source), sa.isIntrinsic());
         final SpellAbility newSa = AbilityFactory.getAbility(trigSA, sa.getHostCard());

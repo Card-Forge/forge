@@ -6,13 +6,18 @@ https://discord.com/channels/267367946135928833/1095026912927154176
 * Search the help posts in Discord
 https://discord.com/channels/267367946135928833/1047001034788196452
 
-Note: For now, please also check [this](https://www.slightlymagic.net/forum/viewtopic.php?f=26&t=11825) forum topic for some additional information.
-
 # General
 
 ## How do I download content?
 
-Forge has content downloaders within the app itself, you can use those tools to update the graphics assets. More information about card and token image assets can be found here. [Card Images, Downloading](Card-Images#downloading)
+Forge has content downloaders within the app itself, you can use those tools to update the graphics assets. More information about card and token image assets can be found here. [Card Images, Downloading](Card-Images.md#downloading)
+
+## My desktop match/deck view is all messed up?
+The match and deck editor windows contain panels that can be moved and/or resized. The changes that you make are saved to files that are named "editor.xml" and "match.xml". These files can be found in your userDir/preferences/ directory.
+
+Sometimes people will decide that they do not like the changes that they made and wish to go back to the original layout. To reset layouts to default, go to the Game Settings -> Preferences -> Troubleshooting section. You will find at this location two buttons that will reset the match layout and the deck editor layouts.
+
+Also use the mentioned measure if your match or deckeditor won't start - it would help in 90% of the cases.
 
 ## I think I found a bug in Forge. What do I do?
 
@@ -24,7 +29,7 @@ For starters, please take note of (1) what you had in play, (2) what your oppone
 
 If you did not get a Crash Report, but you have experienced a problem in how Forge handled one or more cards or game rules, *please read the cards (and the Oracle rulings) carefully* to make sure you understand how they work. You may be surprised to find that Forge is actually enforcing the rules correctly.
 
-Because duplicate bug reports use up our limited resources, please research your bug with the **Search** box on Forge's [issue tracker](https://git.cardforge.org/core-developers/forge/-/issues) to see if your bug has already been reported there. For Crash Reports, use key words from the second paragraph of the Crash Report.
+Because duplicate bug reports use up our limited resources, please research your bug with the **Search** box on Forge's [issue tracker](https://github.com/Card-Forge/forge/issues) to see if your bug has already been reported there. For Crash Reports, use key words from the second paragraph of the Crash Report.
 
 * If you find a matching issue, examine it to see if you have anything new to contribute. For example, a different way of reproducing a problem can sometimes be helpful. If the issue was posted to the forum, you may post your additional information there.
 
@@ -46,7 +51,17 @@ A development environment such as [IntelliJ](https://www.jetbrains.com/idea) is 
 
 Thanks to the nature of how cards are implemented, you can also contribute these as small plain text files. This is especially helpful during a preview season, when there are a lot of new cards in the backlog. This is mostly coordinated in #card-scripting on the Discord (and the pins there).
 
-To obtain the source code of Forge, read our [Development Guide]((SM-autoconverted)--how-to-get-started-developing-forge).
+For smaller first-time contributions using the GitHub web interface is also an alternative:
+![github](Development/github.png)
+
+1. Register GitHub Account (if you don't already have one)
+2. Make your own fork of Forge, press this button on the main project page (must only be done first time)
+3. In your fork you can navigate to `forge-gui/res/cardsfolder/upcoming` and either Upload new files or open an existing one
+4. When you're done at the bottom make sure to create a new branch, that makes it easier to keep your changes apart
+5. On the next page make sure you choose the original project as merge target (see screens)
+6. Please test your scripts and watch for review comments
+
+To obtain the source code of Forge, read our [Development Guide](Development/IntelliJ-setup/IntelliJ-setup.md).
 
 ## My system is all setup to help. What now?
 
@@ -56,7 +71,7 @@ Take a look through the /res/cardsfolder folder. This is where all the card data
 
 ## Where do I use Flashback or a similar ability that is in an External area?
 
-Click on the Lightning Bolt icon in the player panel. Since cards with External Activations aren't as clear to activate, we created this shortcut for this specific purpose.
+Click on the Lightning Bolt icon in the player panel. Since cards with external Activations aren't as clear to activate, we created this shortcut for this specific purpose. After the last card is removed from a zone window, that window will automatically be hidden.
 
 ## How do I target a player?
 
@@ -71,7 +86,3 @@ If you have an effect that generated you some mana, and you don't know where it 
 ## What is the difference between Fantasy Quest and Normal Quest?
 
 In Normal Quest, you start with 20 life and only have access to the Card Shop. In Fantasy Quest, you start at 15 life and gain additional access to the Bazaar which allows you to buy things like extra life points, Pets, Plants and more.
-
-## Sealed Deck Mode
-
-[HOW-TO: Customize your Sealed Deck games with fantasy blocks](https://www.slightlymagic.net/forum/viewtopic.php?f=26&t=8164)

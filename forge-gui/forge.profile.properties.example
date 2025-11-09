@@ -77,7 +77,7 @@ cardPicsDir=
 cardPicsSubDirs=
 
 # This is the top level directory that forge will use for storing and
-# locating decklists. The default value (for all plaforms) is:
+# locating decklists. The default value (for all platforms) is:
 #   <the userDir defined above>/decks/
 decksDir=
 

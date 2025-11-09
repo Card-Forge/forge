@@ -10,20 +10,19 @@
   - [Advanced search](Advanced-Search.md)
 
 - [Adventure Mode](Adventure/Adventure-Mode.md)
-  - Gameplay Guide
-    - [Getting Started](Adventure/Gameplay-Guide.md)
-    - [Different Planes](Adventure/Different-Planes.md)
-    - [Currency](Adventure/Currency.md)
-    - [Deck Building Tips](Adventure/Deck-Building-Tips.md)
-    - [Towns & Capitals](Adventure/Towns-&-Capitals.md)
-    - [Dungeons](Adventure/Dungeons.md)
-    - [Equipments and Items](Adventure/Equipments-and-Items.md)
-    - [Keyboard Shortcuts](Keyboard-Shortcuts.md)
-    - [Controller Support](Adventure/GAMEPAD.md)
-    - [Console and Cheats](Adventure/Console-and-Cheats.md)
 
-  - [Modding and content creation](Adventure/Modding.md)
+    - Gameplay Guide
+      - [Getting Started](Adventure/Gameplay-Guide.md)
+      - [Different Planes](Adventure/Different-Planes.md)
+      - [Currency](Adventure/Currency.md)
+      - [Deck Building Tips](Adventure/Deck-Building-Tips.md)
+      - [Towns & Capitals](Adventure/Towns-&-Capitals.md)
+      - [Dungeons](Adventure/Dungeons.md)
+      - [Equipment & Items](Adventure/Equipments-and-Items.md)
+      - [Controller Support](Adventure/GAMEPAD.md)
+      - [Console & Cheats](Adventure/Console-and-Cheats.md)
 
+  - [Modding & content creation](Adventure/Modding.md)
     - [Create Enemies](Adventure/Create-Enemies.md)
     - [Create Rewards](Adventure/Create-Rewards.md)
     - [Create Maps](Adventure/Create-new-Maps.md)
@@ -45,22 +44,23 @@
   - [Restrictions / Conditions](Card-scripting-API/Restrictions.md)
   - [Tutorial: creating a custom card](Card-scripting-API/Creating-a-Custom-Card.md)
 
-- [Development]((SM-autoconverted)-how-to-get-started-developing-forge.md)
+- Development
   - [IntelliJ Setup](Development/IntelliJ-setup/IntelliJ-setup.md)
-  - [Snapshots and Releases](Development/Snapshots-and-Releases.md)
+  - [Snapshots & Releases](Development/Snapshots-and-Releases.md)
   - [Android Builds](Development/Android-Builds.md)
   - [Dev Mode](Development/DevMode.md)
   - [Ownership](Development/ownership.md)
   - [Docker Container](docker-setup.md)
 
-- [Customization and Themes](Themes.md)
-  - Skins
-  - Sounds
-  - [Music](Custom-Music.md)
+- Customization & Themes
+  - [Skins](Skins.md)
+  - [Sounds & Music](Custom-Audio.md)
   - [Card Images](Card-Images.md)
   - [File Formats](File-Formats.md)
   - [Tutorial: creating your first custom set](Creating-a-custom-Set.md)
+  - [Fantasy Blocks](fantasy-blocks.md)
 
 - [Missing Cards in Forge](Missing-Cards-in-Forge.md)
   - [Un‐cards, Playtest Cards, and Other Funny Cards](Un‐cards,-Playtest-Cards,-and-Other-Funny-Cards.md)
-- [Credit and Thanks](Credit-and-Thanks.md)
+
+- [Credit & Thanks](Credit-and-Thanks.md)
