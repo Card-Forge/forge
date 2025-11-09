@@ -1,5 +1,5 @@
 Name:Longshot, Rebel Bowman
-ManaCost:3 W
+ManaCost:3 R
 Types:Legendary Creature Human Rebel Ally
 PT:3/3
 K:Reach
