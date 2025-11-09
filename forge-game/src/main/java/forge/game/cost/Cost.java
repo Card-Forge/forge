@@ -188,6 +188,15 @@ public class Cost implements Serializable {
         return this.isAbility;
     }
 
+    public final Integer getMaxWaterbend() {
+        for(CostPart cp : this.costParts) {
+            if (cp instanceof CostWaterbend) {
+                return ((CostWaterbend) cp).getMaxWaterbend();
+            }
+        }
+        return null;
+    }
+
     private Cost() {
 
     }
@@ -562,6 +571,11 @@ public class Cost implements Serializable {
         if (parse.startsWith("RevealChosen<")) {
             final String[] splitStr = abCostParse(parse, 2);
             return new CostRevealChosen(splitStr[0], splitStr.length > 1 ? splitStr[1] : null);
+        }
+
+        if (parse.startsWith("Waterbend<")) {
+            final String[] splitStr = abCostParse(parse, 1);
+            return new CostWaterbend(new ManaCost(new ManaCostParser(splitStr[0])));
         }
 
         if (parse.equals("Forage")) {

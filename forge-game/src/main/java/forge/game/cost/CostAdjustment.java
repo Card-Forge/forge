@@ -31,6 +31,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 
 public class CostAdjustment {
 
@@ -278,15 +279,20 @@ public class CostAdjustment {
                 table.triggerChangesZoneAll(game, sa);
             }
             if (sa.getHostCard().hasKeyword(Keyword.CONVOKE)) {
-                adjustCostByConvokeOrImprovise(cost, sa, false, test);
+                adjustCostByConvokeOrImprovise(cost, sa, false, true, test);
             }
             if (sa.getHostCard().hasKeyword(Keyword.IMPROVISE)) {
-                adjustCostByConvokeOrImprovise(cost, sa, true, test);
+                adjustCostByConvokeOrImprovise(cost, sa, true, false, test);
             }
         } // isSpell
 
         if (sa.hasParam("TapCreaturesForMana")) {
-            adjustCostByConvokeOrImprovise(cost, sa, false, test);
+            adjustCostByConvokeOrImprovise(cost, sa, false, true, test);
+        }
+
+        Integer maxWaterbend = sa.getPayCosts().getMaxWaterbend();
+        if (maxWaterbend != null && maxWaterbend > 0) {
+            adjustCostByConvokeOrImprovise(cost, sa, true, true, test);
         }
 
         // Reset card state (if changed)
@@ -321,27 +327,33 @@ public class CostAdjustment {
         return assistant.getController().helpPayForAssistSpell(cost, sa, genericLeft, requestedAmount);
     }
 
-    private static void adjustCostByConvokeOrImprovise(ManaCostBeingPaid cost, final SpellAbility sa, boolean improvise, boolean test) {
-        if (!improvise) {
+    private static void adjustCostByConvokeOrImprovise(ManaCostBeingPaid cost, final SpellAbility sa, boolean artifacts, boolean creatures, boolean test) {
+        if (creatures && !artifacts) {
             sa.clearTappedForConvoke();
         }
 
         final Player activator = sa.getActivatingPlayer();
         CardCollectionView untappedCards = CardLists.filter(activator.getCardsIn(ZoneType.Battlefield),
                 CardPredicates.CAN_TAP);
-        if (improvise) {
+
+        Integer maxReduction = null;
+        if (artifacts && creatures) {
+            maxReduction = sa.getPayCosts().getMaxWaterbend();
+            Predicate <Card> isArtifactOrCreature = card -> card.isArtifact() || card.isCreature();
+            untappedCards = CardLists.filter(untappedCards, isArtifactOrCreature);
+        } else if (artifacts) {
             untappedCards = CardLists.filter(untappedCards, CardPredicates.ARTIFACTS);
         } else {
             untappedCards = CardLists.filter(untappedCards, CardPredicates.CREATURES);
         }
 
         Map<Card, ManaCostShard> convokedCards = activator.getController().chooseCardsForConvokeOrImprovise(sa,
-                cost.toManaCost(), untappedCards, improvise);
+                cost.toManaCost(), untappedCards, artifacts, creatures, maxReduction);
 
         CardCollection tapped = new CardCollection();
         for (final Entry<Card, ManaCostShard> conv : convokedCards.entrySet()) {
             Card c = conv.getKey();
-            if (!improvise) {
+            if (creatures && !artifacts) {
                 sa.addTappedForConvoke(c);
             }
             cost.decreaseShard(conv.getValue(), 1);

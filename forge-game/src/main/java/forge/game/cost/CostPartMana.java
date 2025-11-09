@@ -33,7 +33,7 @@ public class CostPartMana extends CostPart {
      */
     private static final long serialVersionUID = 1L;
     // "Leftover"
-    private final ManaCost cost;
+    protected final ManaCost cost;
     private int xMin = 0;
     private boolean isExiledCreatureCost = false;
     private boolean isEnchantedCreatureCost = false;
@@ -101,7 +101,7 @@ public class CostPartMana extends CostPart {
     public boolean isUndoable() { return true; }
 
     @Override
-    public final String toString() {
+    public String toString() {
         return cost.toString();
     }
 
