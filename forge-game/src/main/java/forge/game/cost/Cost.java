@@ -22,7 +22,6 @@ import forge.card.CardType;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.CardTraitBase;
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
