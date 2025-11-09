@@ -15,6 +15,7 @@ import forge.game.*;
 import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
+import forge.game.cost.CostAdjustment;
 import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -1527,6 +1528,7 @@ public class AbilityUtils {
         else {
             cost = new Cost(unlessCost, true);
         }
+        cost = CostAdjustment.adjust(cost, sa, true);
         return cost;
     }
 

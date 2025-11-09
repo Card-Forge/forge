@@ -37,6 +37,7 @@ public class CostAdjustment {
 
     public static Cost adjust(final Cost cost, final SpellAbility sa, boolean effect) {
         if (sa.isTrigger() || cost == null || effect) {
+            sa.setMaxWaterbend(cost);
             return cost;
         }
 
@@ -101,7 +102,7 @@ public class CostAdjustment {
             host.setFaceDown(false);
         }
 
-        sa.setMaxWaterbend(result.getMaxWaterbend());
+        sa.setMaxWaterbend(result);
 
         return result;
     }
@@ -175,8 +176,11 @@ public class CostAdjustment {
 
     // If cardsToDelveOut is null, will immediately exile the delved cards and remember them on the host card.
     // Otherwise, will return them in cardsToDelveOut and the caller is responsible for doing the above.
-    public static boolean adjust(ManaCostBeingPaid cost, final SpellAbility sa, CardCollection cardsToDelveOut, boolean test) {
-        if (sa.isTrigger() || sa.isReplacementAbility()) {
+    public static boolean adjust(ManaCostBeingPaid cost, final SpellAbility sa, CardCollection cardsToDelveOut, boolean test, boolean effect) {
+        if (effect) {
+            adjustCostByWaterbend(cost, sa, test);
+        }
+        if (effect || sa.isTrigger() || sa.isReplacementAbility()) {
             return true;
         }
 
@@ -291,10 +295,7 @@ public class CostAdjustment {
             adjustCostByConvokeOrImprovise(cost, sa, false, true, test);
         }
 
-        Integer maxWaterbend = sa.getMaxWaterbend();
-        if (maxWaterbend != null && maxWaterbend > 0) {
-            adjustCostByConvokeOrImprovise(cost, sa, true, true, test);
-        }
+        adjustCostByWaterbend(cost, sa, test);
 
         // Reset card state (if changed)
         if (isStateChangeToFaceDown) {
@@ -305,6 +306,13 @@ public class CostAdjustment {
         return true;
     }
     // GetSpellCostChange
+
+    private static void adjustCostByWaterbend(ManaCostBeingPaid cost, SpellAbility sa, boolean test) {
+        Integer maxWaterbend = sa.getMaxWaterbend();
+        if (maxWaterbend != null && maxWaterbend > 0) {
+            adjustCostByConvokeOrImprovise(cost, sa, true, true, test);
+        }
+    }
 
     private static boolean adjustCostByAssist(ManaCostBeingPaid cost, final SpellAbility sa, boolean test) {
         // 702.132a Assist is a static ability that modifies the rules of paying for the spell with assist (see rules 601.2g-h).

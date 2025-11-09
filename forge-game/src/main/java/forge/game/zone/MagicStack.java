@@ -428,7 +428,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 game.getTriggerHandler().runTrigger(TriggerType.AbilityCast, runParams, true);
             }
 
-            if (sp.getPayCosts() != null && sp.getPayCosts().getMaxWaterbend() != null) {
+            if (sp.getPayCosts() != null && sp.getMaxWaterbend() != null) {
                 activator.triggerElementalBend(TriggerType.Waterbend);
             }
 

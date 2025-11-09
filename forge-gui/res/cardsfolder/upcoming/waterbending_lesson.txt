@@ -1,0 +1,7 @@
+Name:Waterbending Lesson
+ManaCost:3 U
+Types:Sorcery Lesson
+A:SP$ Draw | NumCards$ 3 | SubAbility$ DBDiscard | SpellDescription$ Draw three cards. Then discard a card unless you waterbend {2}. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | UnlessCost$ Waterbend<2> | UnlessPayer$ You
+DeckHas:Ability$Discard
+Oracle:Draw three cards. Then discard a card unless you waterbend {2}. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)

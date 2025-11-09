@@ -1345,9 +1345,7 @@ public class ComputerUtilMana {
             }
         }
 
-        if (!effect) {
-            CostAdjustment.adjust(manaCost, sa, null, test);
-        }
+        CostAdjustment.adjust(manaCost, sa, null, test, effect);
 
         if ("NumTimes".equals(sa.getParam("Announce"))) { // e.g. the Adversary cycle
             ManaCost mkCost = sa.getPayCosts().getTotalMana();
