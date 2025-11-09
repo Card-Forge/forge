@@ -33,7 +33,7 @@ public class CostPartMana extends CostPart {
      */
     private static final long serialVersionUID = 1L;
     // "Leftover"
-    protected final ManaCost cost;
+    private final ManaCost cost;
     private int xMin = 0;
     private boolean isExiledCreatureCost = false;
     private boolean isEnchantedCreatureCost = false;

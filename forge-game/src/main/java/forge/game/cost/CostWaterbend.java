@@ -13,6 +13,6 @@ public class CostWaterbend extends CostPartMana {
 
     @Override
     public final String toString() {
-        return "Waterbend " + cost.toString();
+        return "Waterbend " + getMana().toString();
     }
 }
