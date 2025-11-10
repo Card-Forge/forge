@@ -214,7 +214,7 @@ public static Predicate<CardEdition> selectSetPool() {
     } else { // (80-99)
         rolledFilter = filterEraVintage;
     }
-    System.out.println("Rolled " + rollD100, "Picked " + rolledFilter)
+    System.out.println("Rolled " + rollD100, "Picked " + rolledFilter);
 
     return rolledFilter;
 }
