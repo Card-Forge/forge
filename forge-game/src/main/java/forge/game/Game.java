@@ -75,11 +75,13 @@ public class Game {
 
     private List<Card> activePlanes = null;
 
-    public final Phase cleanup;
-    public final Phase endOfCombat;
-    public final Phase endOfTurn;
     public final Untap untap;
     public final Phase upkeep;
+    public final Phase beginOfCombat;
+    public final Phase endOfCombat;
+    public final Phase endOfTurn;
+    public final Phase cleanup;
+
     // to execute commands for "current" phase each time state based action is checked
     public final List<GameCommand> sbaCheckedCommandList;
     public final MagicStack stack;
@@ -363,9 +365,10 @@ public class Game {
 
         untap = new Untap(this);
         upkeep = new Phase(PhaseType.UPKEEP);
-        cleanup = new Phase(PhaseType.CLEANUP);
+        beginOfCombat = new Phase(PhaseType.COMBAT_BEGIN);
         endOfCombat = new Phase(PhaseType.COMBAT_END);
         endOfTurn = new Phase(PhaseType.END_OF_TURN);
+        cleanup = new Phase(PhaseType.CLEANUP);
 
         sbaCheckedCommandList = new ArrayList<>();
 
@@ -427,6 +430,9 @@ public class Game {
     }
     public final Phase getUpkeep() {
         return upkeep;
+    }
+    public final Phase getBeginOfCombat() {
+        return beginOfCombat;
     }
     public final Phase getEndOfCombat() {
         return endOfCombat;
