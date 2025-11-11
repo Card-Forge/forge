@@ -5,13 +5,13 @@
 #4|Ran and Shaw|R|TLA
 #5|Azula, Cunning Usurper|R|TLA
 #6|Sokka, Tenacious Tactician|R|TLA
-#7|Black Sun's Zenith|M|TLA
-#8|Koma, Cosmos Serpent|M|TLA
+#7|Black Sun's Zenith|M|TLE
+#8|Koma, Cosmos Serpent|M|TLE
 #9|Hakoda, Selfless Commander|R|TLA
 #10|United Front|M|TLA
 #11|Iroh, Grand Lotus|R|TLA
-#12|Agent of Treachery|M|TLA
-#13|Noxious Gearhulk|M|TLA
+#12|Agent of Treachery|M|TLE
+#13|Noxious Gearhulk|M|TLE
 #14|Appa, Steadfast Guardian|M|TLA
 #15|Avatar's Wrath|R|TLA
 #16|Suki, Courageous Rescuer|R|TLA
@@ -28,7 +28,7 @@
 #27|Jasmine Dragon Tea Shop|R|TLA
 #28|South Pole Voyager|R|TLA
 #29|Fire Lord Azula|R|TLA
-#30|Return of the Wildspeaker|M|TLA
+#30|Return of the Wildspeaker|M|TLE
 #31|The Legend of Kuruk|M|TLA
 #32|Spirit Water Revival|R|TLA
 #33|The Unagi of Kyoshi Island|R|TLA
@@ -40,9 +40,9 @@
 #39|Sandbender Scavengers|R|TLA
 #40|Toph, the First Metalbender|R|TLA
 #41|Planetarium of Wan Shi Tong|M|TLA
-#42|Mirrorwing Dragon|M|TLA
-#43|Warstorm Surge|M|TLA
-#44|Cityscape Leveler|M|TLA
+#42|Mirrorwing Dragon|M|TLE
+#43|Warstorm Surge|M|TLE
+#44|Cityscape Leveler|M|TLE
 #45|Obsessive Pursuit|R|TLA
 #46|Toph, Hardheaded Teacher|R|TLA
 #47|Realm of Koh|R|TLA
@@ -65,14 +65,14 @@
 #64|Fire Lord Zuko|R|TLA
 #65|Agna Qel'a|R|TLA
 #66|Ba Sing Se|R|TLA
-#67|Drannith Magistrate|M|TLA
-#68|Bribery|M|TLA
-#69|Blasphemous Act|M|TLA
-#70|Insurrection|M|TLA
-#71|Beastmaster Ascension|M|TLA
-#72|The Great Henge|M|TLA
-#73|Rhys the Redeemed|M|TLA
-#74|Treetop Village|M|TLA
+#67|Drannith Magistrate|M|TLE
+#68|Bribery|M|TLE
+#69|Blasphemous Act|M|TLE
+#70|Insurrection|M|TLE
+#71|Beastmaster Ascension|M|TLE
+#72|The Great Henge|M|TLE
+#73|Rhys the Redeemed|M|TLE
+#74|Treetop Village|M|TLE
 #75|Earth Kingdom Jailer|U|TLA
 #76|Water Tribe Rallier|U|TLA
 #77|Accumulate Wisdom|U|TLA
@@ -111,7 +111,7 @@
 #110|The Lion-Turtle|R|TLA
 #111|Suki, Kyoshi Warrior|U|TLA
 #112|Tolls of War|U|TLA
-#113|Lightning Bolt|M|TLA
+#113|Lightning Bolt|M|TLE
 #114|Enter the Avatar State|U|TLA
 #115|Invasion Reinforcements|U|TLA
 #116|Master Piandao|U|TLA
@@ -134,10 +134,10 @@
 #133|Uncle Iroh|U|TLA
 #134|Vindictive Warden|C|TLA
 #135|Zhao, Ruthless Admiral|U|TLA
-#136|Lita, Mechanical Engineer|M|TLA
-#137|Release to Memory|M|TLA
-#138|Searing Blood|M|TLA
-#139|Elemental Bond|M|TLA
+#136|Lita, Mechanical Engineer|M|TLE
+#137|Release to Memory|M|TLE
+#138|Searing Blood|M|TLE
+#139|Elemental Bond|M|TLE
 #140|Appa, Loyal Sky Bison|U|TLA
 #141|Earth Kingdom Protectors|U|TLA
 #142|Glider Staff|U|TLA
@@ -169,12 +169,12 @@
 #168|Unlucky Cabbage Merchant|U|TLA
 #169|Dai Li Agents|U|TLA
 #170|Foggy Swamp Spirit Keeper|U|TLA
-#171|Three Dreams|M|TLA
-#172|Sakashima of a Thousand Faces|M|TLA
-#173|Standstill|M|TLA
-#174|Heroic Intervention|M|TLA
-#175|Captain Sisay|M|TLA
-#176|Join the Dance|M|TLA
+#171|Three Dreams|M|TLE
+#172|Sakashima of a Thousand Faces|M|TLE
+#173|Standstill|M|TLE
+#174|Heroic Intervention|M|TLE
+#175|Captain Sisay|M|TLE
+#176|Join the Dance|M|TLE
 #177|Aang's Journey|C|TLA
 #178|Avatar Enthusiasts|C|TLA
 #179|Gather the White Lotus|U|TLA
@@ -200,8 +200,8 @@
 #199|Origin of Metalbending|C|TLA
 #200|Fire Nation Warship|U|TLA
 #201|Meteor Sword|U|TLA
-#202|Fervor|M|TLA
-#203|Meteorite|M|TLA
+#202|Fervor|M|TLE
+#203|Meteorite|M|TLE
 #204|Zuko's Exile|C|TLA
 #205|Airbender's Reversal|U|TLA
 #206|Airbending Lesson|C|TLA
@@ -255,9 +255,9 @@
 #254|Serpent's Pass|C|TLA
 #255|Sun-Blessed Peak|C|TLA
 #256|White Lotus Hideout|U|TLA
-#257|Imprisoned in the Moon|M|TLA
-#258|Visions of Beyond|M|TLA
-#259|Fabled Passage|M|TLA
+#257|Imprisoned in the Moon|M|TLE
+#258|Visions of Beyond|M|TLE
+#259|Fabled Passage|M|TLE
 #260|Energybending|U|TLA
 #261|Curious Farm Animals|C|TLA
 #262|Razor Rings|C|TLA
@@ -297,52 +297,52 @@
 #296|Fire Nation Palace|R|TLA
 #297|Rumble Arena|C|TLA
 #298|Secret Tunnel|R|TLA
-#299|Clone|M|TLA
-#300|Dockside Extortionist|M|TLA
+#299|Clone|M|TLE
+#300|Dockside Extortionist|M|TLE
 #301|Ruinous Waterbending|U|TLA
 #302|Tiger-Dillo|U|TLA
 #303|Northern Air Temple|U|TLA
 #304|Zuko, Conflicted|R|TLA
 #305|Trusty Boomerang|U|TLA
 #306|The Walls of Ba Sing Se|M|TLA
-#307|Brought Back|M|TLA
-#308|Force of Negation|M|TLA
-#309|Humble Defector|M|TLA
-#310|Rending Volley|M|TLA
-#311|Eladamri's Call|M|TLA
-#312|Sunbaked Canyon|M|TLA
-#313|Valakut, the Molten Pinnacle|M|TLA
-#314|Clone Legion|M|TLA
+#307|Brought Back|M|TLE
+#308|Force of Negation|M|TLE
+#309|Humble Defector|M|TLE
+#310|Rending Volley|M|TLE
+#311|Eladamri's Call|M|TLE
+#312|Sunbaked Canyon|M|TLE
+#313|Valakut, the Molten Pinnacle|M|TLE
+#314|Clone Legion|M|TLE
 #315|Destined Confrontation|U|TLA
 #316|Tiger-Seal|R|TLA
 #317|Solstice Revelations|U|TLA
 #318|Elemental Teachings|R|TLA
-#319|Scout's Warning|M|TLA
-#320|Teferi's Protection|M|TLA
-#321|Prosperity|M|TLA
-#322|Diaochan, Artful Beauty|M|TLA
-#323|Shattering Spree|M|TLA
-#324|Volcanic Torrent|M|TLA
-#325|Taunting Challenge|M|TLA
-#326|Fevered Visions|M|TLA
+#319|Scout's Warning|M|TLE
+#320|Teferi's Protection|M|TLE
+#321|Prosperity|M|TLE
+#322|Diaochan, Artful Beauty|M|TLE
+#323|Shattering Spree|M|TLE
+#324|Volcanic Torrent|M|TLE
+#325|Taunting Challenge|M|TLE
+#326|Fevered Visions|M|TLE
 #327|Secret of Bloodbending|M|TLA
 #328|Foggy Swamp Visions|R|TLA
 #329|Redirect Lightning|R|TLA
 #330|Sozin's Comet|M|TLA
 #331|White Lotus Tile|M|TLA
-#332|Empty City Ruse|M|TLA
-#333|Mystic Remora|M|TLA
-#334|Training Grounds|M|TLA
-#335|Bloodchief Ascension|M|TLA
-#336|Cruel Tutor|M|TLA
-#337|Heartbeat of Spring|M|TLA
-#338|Rites of Flourishing|M|TLA
-#339|Sundial of the Infinite|M|TLA
-#340|Dark Depths|M|TLA
-#341|Tarnished Citadel|M|TLA
-#342|Plains|C|TLA
-#343|Island|C|TLA
-#344|Swamp|C|TLA
-#345|Mountain|C|TLA
-#346|Forest|C|TLA
-#347|Intruder Alarm|M|TLA
+#332|Empty City Ruse|M|TLE
+#333|Mystic Remora|M|TLE
+#334|Training Grounds|M|TLE
+#335|Bloodchief Ascension|M|TLE
+#336|Cruel Tutor|M|TLE
+#337|Heartbeat of Spring|M|TLE
+#338|Rites of Flourishing|M|TLE
+#339|Sundial of the Infinite|M|TLE
+#340|Dark Depths|M|TLE
+#341|Tarnished Citadel|M|TLE
+#342|Intruder Alarm|M|TLE
+#343|Plains|C|TLA
+#344|Island|C|TLA
+#345|Swamp|C|TLA
+#346|Mountain|C|TLA
+#347|Forest|C|TLA
