@@ -175,17 +175,17 @@ public class AdventureEventData implements Serializable {
     private static final Predicate<CardEdition> filterStandard = FModel.getFormats().getStandard().editionLegalPredicate;
 
     public static Predicate<CardEdition> selectSetPool() {
-        // Should we negate any of these to avoid overlap?
         final int rollD100 = MyRandom.getRandom().nextInt(100);
         Predicate<CardEdition> rolledFilter;
         if (rollD100 < 30) {
             rolledFilter = filterStandard;
         } else if (rollD100 < 60) {
-            rolledFilter = filterPioneer;
+            // Remove standard from older pools because its representation is already inflated.
+            rolledFilter = filterPioneer.and(filterStandard.negate());
         } else if (rollD100 < 80) {
-            rolledFilter = filterModern;
+            rolledFilter = filterModern.and(filterStandard.negate());
         } else {
-            rolledFilter = filterVintage;
+            rolledFilter = filterVintage.and(filterStandard.negate());
         }
         return rolledFilter;
     }
@@ -195,21 +195,33 @@ public class AdventureEventData implements Serializable {
     private static CardBlock pickWeightedCardBlock() {
         CardEdition.Collection editions = FModel.getMagicDb().getEditions();
         ConfigData configData = Config.instance().getConfigData();
-        Predicate<CardEdition> filter = CardEdition.Predicates.CAN_MAKE_BOOSTER.and(selectSetPool());
+        Predicate<CardEdition> filter = CardEdition.Predicates.CAN_MAKE_BOOSTER;
 
-        if(configData.restrictedEvents != null) {
-            //Temporary restriction until rewards are more diverse - don't want to award restricted cards so these editions need different rewards added.
-            //Also includes sets that use conspiracy or commander drafts.
-            Set<String> restrictedEvents = Set.of(configData.restrictedEvents);
-            filter = filter.and((q) -> !restrictedEvents.contains(q.getCode()));
+        if(configData.allowedEvents != null && configData.allowedEvents.length > 0) {
+            Set<String> allowedEvents = Set.of(configData.allowedEvents);
+            filter = filter.and(q -> allowedEvents.contains(q.getCode()));
         }
-        if (configData.allowedEditions != null) {
-            Set<String> allowed = Set.of(configData.allowedEditions);
-            filter = filter.and(q -> allowed.contains(q.getCode()));
-        } else {
-            List<String> restrictedList = Arrays.asList(configData.restrictedEditions);
-            Set<String> restricted = new HashSet<>(restrictedList); //Would use Set.of but that throws an error if there's any duplicates, and users edit these lists all the time.
-            filter = filter.and(q -> !restricted.contains(q.getCode()));
+        else
+        {
+            //The whitelist beats all other filters.
+            if(configData.restrictedEvents != null) {
+                //Temporary restriction until rewards are more diverse - don't want to award restricted cards so these editions need different rewards added.
+                //Also includes sets that use conspiracy or commander drafts.
+                Set<String> restrictedEvents = Set.of(configData.restrictedEvents);
+                filter = filter.and((q) -> !restrictedEvents.contains(q.getCode()));
+            }
+            if (configData.allowedEditions != null && configData.allowedEditions.length > 0) {
+                Set<String> allowed = Set.of(configData.allowedEditions);
+                filter = filter.and(q -> allowed.contains(q.getCode()));
+            } else if(configData.restrictedEditions != null) {
+                List<String> restrictedList = Arrays.asList(configData.restrictedEditions);
+                Set<String> restricted = new HashSet<>(restrictedList); //Would use Set.of but that throws an error if there's any duplicates, and users edit these lists all the time.
+                filter = filter.and(q -> !restricted.contains(q.getCode()));
+            }
+
+            Predicate<CardEdition> setPoolFilter = selectSetPool();
+            if(editions.stream().anyMatch(setPoolFilter))
+                filter = filter.and(setPoolFilter);
         }
 
         List<CardEdition> allEditions = new ArrayList<>();

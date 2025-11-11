@@ -1382,7 +1382,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Map<Card, ManaCostShard> chooseCardsForConvokeOrImprovise(SpellAbility sa, ManaCost manaCost, CardCollectionView untappedCards, boolean improvise) {
+    public Map<Card, ManaCostShard> chooseCardsForConvokeOrImprovise(SpellAbility sa, ManaCost manaCost, CardCollectionView untappedCards, boolean artifacts, boolean creatures, Integer maxReduction) {
         final Player ai = sa.getActivatingPlayer();
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
         //Filter out mana sources that will interfere with payManaCost()
@@ -1390,9 +1390,10 @@ public class PlayerControllerAi extends PlayerController {
 
         // Filter out creatures if AI hasn't attacked yet
         if (ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-            if (improvise) {
+            if (!creatures) {
                 untapped = CardLists.filter(untapped, c -> !c.isCreature());
             } else {
+                // TODO AI needs to learn how to use Convoke or Waterbend
                 return new HashMap<>();
             }
         }
@@ -1406,13 +1407,16 @@ public class PlayerControllerAi extends PlayerController {
             if (!ai.getGame().getStack().isEmpty()) {
                 final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), null);
                 for (Card c : blockers) {
-                    if (objects.contains(c) && (!improvise || c.isArtifact())) {
+                    if (objects.contains(c) && (creatures || c.isArtifact())) {
                         untapped.add(c);
+                    }
+                    if (maxReduction != null && untapped.size() >= maxReduction) {
+                        break;
                     }
                 }
             }
         }
-        return ComputerUtilMana.getConvokeOrImproviseFromList(manaCost, untapped, improvise);
+        return ComputerUtilMana.getConvokeOrImproviseFromList(manaCost, untapped, artifacts, creatures);
     }
 
     @Override
