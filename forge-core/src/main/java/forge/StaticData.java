@@ -776,7 +776,7 @@ public class StaticData {
         Queue<String> TOKEN_Q = new ConcurrentLinkedQueue<>();
         boolean nifHeader = false;
         boolean cniHeader = false;
-        final Pattern funnyCardCollectorNumberPattern = Pattern.compile("^F\\d+");
+        final Pattern funnyCardCollectorNumberPattern = Pattern.compile("^F★?\\d+★?");
         for (CardEdition e : editions) {
             if (CardEdition.Type.FUNNY.equals(e.getType()))
                 continue;
