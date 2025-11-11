@@ -2,51 +2,6 @@ Using the Forge API you can create your own custom cards and sets. This tutorial
 
 If you are trying to script cards for a new set make sure you take advantage of the [Developer Mode](Development/DevMode.md) for testing to try and contribute without any obvious bugs.
 
-## File Locations
-
-### Custom Card Scripts
-
-Windows:
-> C:/Users/<your username>/Application Data/Roaming/Forge/custom/cards
-
-Linux:
-> ~/.forge/custom/cards
-
-Mac:
-> TODO Add filepath
-
-### Custom Tokens
-
-Windows:
-> C:/Users/<your username>/Application Data/Roaming/Forge/custom/tokens
-
-Linux:
-> ~/.forge/custom/tokens
-
-Mac:
-> TODO Add filepath
-
-### Custom Editions
-
-> C:/Users/<your username>/Application Data/Roaming/Forge/custom/editions
-
-Linux:
-> ~/.forge/custom/editions
-
-Mac:
-> TODO Add filepath
-
-### Card Images
-
-Windows:
-> C:/Users/<your username>/Application Data/Local/Forge/Cache/pics/cards
-
-Linux:
-> ~/.cache/forge/pics/cards
-
-Mac:
-> TODO Add filepath
-
 ## Creating a New Card
 
 In this tutorial we'll create a new card called "Goblin Card Guide".

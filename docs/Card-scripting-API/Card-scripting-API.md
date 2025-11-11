@@ -2,7 +2,7 @@ A reference guide for scripting cards using the API parsed by the Forge engine.
 
 # Base Structure
 
-By opening any file in the /res/cardsfolder folder you can see the basic structure of how the data is created.<br />
+By opening any file in the /res/cardsfolder folder you can see the basic structure of how the data is created.  
 Here's an example of a vanilla creature:
 
 ```
@@ -13,11 +13,11 @@ PT:2/2
 Oracle:
 ```
 
-The name of this card is Vanilla Creature.<br />
-It's casting cost is {2}{G}.<br />
-It has the types Creature and Beast.<br />
-It has a Power-Toughness of 2/2.<br />
-It will not display any additional text in the card's template.<br />
+The name of this card is Vanilla Creature.  
+It's casting cost is {2}{G}.  
+It has the types Creature and Beast.  
+It has a Power-Toughness of 2/2.  
+It will not display any additional text in the card's template.  
 
 If a card has two faces, use AlternateMode:{CardStateName} in the front face and separate both by a new line with the text "ALTERNATE".
 
@@ -60,67 +60,24 @@ All keywords need to be prepended with "K:" to be parsed correctly. Each keyword
 
 ## Keywords without Parameters
 
-This section is for Keywords that require no additional parameters and are one or two words long. Most of these you would see exactly on cards in the game.<br />
+This section is for Keywords that require no additional parameters and are one or two words long. Most of these you would see exactly on cards in the game.  
 Examples:
 
 - Cascade
-- Changeling
 - Cipher
-- Conspire
 - Convoke
-- Deathtouch
-- Defender
-- Delve
 - Devoid
-- Double Strike
-- Epic
-- Exalted
-- Fear
 - First Strike
-- Flanking
 - Flash
-- Flying
-- Forestwalk
-- Fuse
 - Haste
-- Hideaway
-- Horsemanship
 - Indestructible
-- Infect
-- Intimidate
-- Islandwalk
-- Landfall
-- Legendary landwalk
-- Lifelink
-- Living Weapon
-- Menace
 - Mentor
-- Mountainwalk
-- Nonbasic landwalk
-- Persist
-- Plainswalk
-- Prowess
 - Provoke
 - Reach
-- Rebound
-- Retrace
-- Riot
-- Shadow
 - Shroud
-- Snow forestwalk
-- Snow islandwalk
-- Snow landwalk
-- Snow mountainwalk
-- Snow plainswalk
-- Snow swamp walk
-- Soulbond
 - Split second
 - Storm
-- Sunburst
-- Swampwalk
-- Totem Armor
 - Trample
-- Unblockable
 - Undying
 - Vigilance
 - Wither
@@ -128,7 +85,6 @@ Examples:
 ## Keywords with parameters
 
 - Adapt:{cost}
-- AdjustLandPlays:{params}
 - Afterlife:{N}
 - AlternateAdditionalCost:{cost}
 - Amplify:{cost}:{validType(comma separated)}
@@ -136,9 +92,7 @@ Examples:
 - Bloodthirst:{magnitude}
 - Bestow:{cost}
 - Bushido:{magnitude}
-- CantBeBlockedByAmount {xMath}
 - Champion:{validType}
-- CostChange:{params}
 - Crew:{cost}
 - Cumulative upkeep:{cost}:{Description}
 - Cycling:{cost}
@@ -147,12 +101,9 @@ Examples:
 - Dredge:{magnitude}
 - Echo:{cost}
 - Emerge:{cost}
-- Enchant {params} \[Curse\]
-- Enchant {Type}
+- Enchant:{Type}
 - Entwine:{cost}
 - Equip:{cost}
-- etbCounter:{CounterType}:{CounterAmount}
-- ETBReplacement:{Control/Copy/Other}:{AbilitySVar}\[:Optional\]
 - Evoke:{cost}
 - Fabricate:{cost}
 - Fading:{FadeCounters}
@@ -160,13 +111,11 @@ Examples:
 - Foretell:{cost}
 - Fortify:{cost}
 - Graft:{value}
-- Haunt:{ability}:{Description}
-- Hexproof:{ValidCards}:{Description}
+- Haunt:{ability}:<Ability>
+- Hexproof:{ValidCards}:[Description]
 - Kicker:{cost}
 - Level up:{cost}
 - Madness:{cost}
-- ManaConvert:
-- maxLevel:{magnitude}
 - MayEffectFromOpeningHand:{Effect}
 - Miracle:{cost}
 - Modular:{magnitude}
@@ -177,8 +126,6 @@ Examples:
 - Ninjutsu:{cost}
 - Outlast:{cost}
 - Partner:{CardName}
-- Poisonous {magnitude}
-- PreventAllDamageBy {ValidCards}
 - Protection:{ValidCards}:{Description}
 - Prowl:{cost}
 - Rampage:{magnitude}
@@ -193,7 +140,6 @@ Examples:
 - Toxic:{poisonCounters}
 - TypeCycling:{Type}:{cost}
 - Unearth:{cost}
-- UpkeepCost:{cost}
 - Vanishing:{TimeCounters}
 
 ## Plaintext keywords
@@ -202,80 +148,12 @@ These are hardcoded but not truly keywords rules-wise and will eventually be tur
 Only listing the most common ones here so you can recognize them.
 CARDNAME is replaced by the card's name ingame.
 
-- All creatures able to block CARDNAME do so.
-- CARDNAME assigns no combat damage
-- CARDNAME attacks each turn if able.
-- CARDNAME attacks each combat if able.
-- CARDNAME blocks each combat if able.
-- CARDNAME blocks each turn if able.
-- CARDNAME can attack as though it didn't have defender.
-- CARDNAME can attack as though it had haste.
-- CARDNAME can block as though it were untapped.
-- CARDNAME can block creatures with shadow as though they didn't have shadow.
-- CARDNAME can block creatures with landwalk abilities as though they didn't have those abilities.
-- CARDNAME can block only creatures with flying.
-- CARDNAME can only attack alone.
-- CARDNAME can't attack.
-- CARDNAME can't attack if you cast a spell this turn.
-- CARDNAME can't attack if defending player controls an untapped creature with power {rest of text string}
-- CARDNAME can't attack or block.
 - CARDNAME can't attack or block alone.
-- CARDNAME can't be countered.
-- CARDNAME can't be enchanted.
-- CARDNAME can't be equipped.
-- CARDNAME can't be regenerated.
-- CARDNAME can't be the target of Aura spells.
-- CARDNAME can't block.
-- CARDNAME can't block creatures with power {rest of text string}
 - CARDNAME can't block unless a creature with greater power also blocks.
-- CARDNAME can't block unless at least two other creatures block.
-- CARDNAME can't transform
-- CARDNAME doesn't untap during your untap step.
-- CARDNAME enters the battlefield tapped.
-- CARDNAME is {color}.
 - CARDNAME must be blocked if able.
-- CARDNAME must be blocked by exactly one creature if able.
-- CARDNAME must be blocked by two or more creatures if able.
-- CARDNAME can't be blocked unless all creatures defending player controls block it.
-- CARDNAME's power and toughness are switched
-- CARDNAME untaps during each other player's untap step.
-- CARDNAME's activated abilities can't be activated.
-- Creatures with power greater than CARDNAME's power can't block it.
-- Creatures can't attack unless their controller pays:{params}
-- Damage that would be dealt by CARDNAME can't be prevented.
-- Damage that would reduce your life total to less than 1 reduces it to 1 instead.
-- Enchant artifact
-- Enchant creature
-- Enchant creature with converted mana cost 2 or less
-- Enchant creature without flying
-- Enchant red or green creature
-- Enchant land
-- Enchant land you control
-- Enchant tapped creature
-- No more than one creature can attack each combat.
-- No more than one creature can block each combat.
-- No more than two creatures can attack you each combat.
-- No more than two creatures can block each combat.
-- Play with your hand revealed.
-- Prevent all combat damage that would be dealt to and dealt by CARDNAME.
-- Prevent all combat damage that would be dealt by CARDNAME.
-- Prevent all combat damage that would be dealt to CARDNAME.
-- Prevent all damage that would be dealt to and dealt by CARDNAME.
-- Prevent all damage that would be dealt by CARDNAME.
-- Prevent all damage that would be dealt to CARDNAME.
-- Protection from {type}
 - Remove CARDNAME from your deck before playing if you're not playing for ante.
-- Spells and abilities your opponents control can't cause you to sacrifice permanents.
-- You can't pay life to cast spells or activate abilities.
-- You can't sacrifice creatures to cast spells or activate abilities.
-- You can't draw cards.
-- You can't gain life.
-- You can't lose the game.
-- You can't win the game.
-- You don't lose the game for having 0 or less life.
 - You may choose not to untap CARDNAME during your untap step.
-- You may have CARDNAME assign its combat damage as though it weren't blocked.
-- Your life total can't change.
+- CantSearchLibrary
 
 # General SVars
 
