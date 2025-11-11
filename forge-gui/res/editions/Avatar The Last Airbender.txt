@@ -376,7 +376,7 @@ Replace=0.025F BasicLand:fromSheet("TLA Appa basic")+
 295 L Mountain @Maojin Lee
 296 L Forest @Slawek Fedorczuk
 
-scene cards]
+[scene cards]
 297 M Fated Firepower @Claudiu-Antoniu Magherusan
 298 R Aang, Swift Savior @Claudiu-Antoniu Magherusan
 299 U Fire Nation Attacks @Claudiu-Antoniu Magherusan
