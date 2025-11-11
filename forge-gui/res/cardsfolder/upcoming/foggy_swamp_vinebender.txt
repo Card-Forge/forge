@@ -1,7 +1,7 @@
 Name:Foggy Swamp Vinebender
-ManaCost:3 U
-Types:Creature Human Warrior Ally 
-PT:2/5
-K:Vigilance
-A:AB$ Animate | Cost$ Waterbend<3> | ValidCard$ Card.Self | SetPower$ 5 | SetToughness$ 2 | Condition$ PlayerTurn | SpellDescription$ During your turn, this creature has base power and toughness 5/2.
-Oracle:Vigilance\nWaterbend {3}: This creature has base power and toughness 5/2 until end of turn. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)
+ManaCost:3 B
+Types:Creature Human Ranger Ally 
+PT:3/4
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Lifelink & Menace | CheckSVar$ X | SVarCompare$ GE2 | Description$ As long as you've drawn two or more cards this turn, this creature has lifelink and menace.
+SVar:X:Count$YouDrewThisTurn
+Oracle:As long as you've drawn two or more cards this turn, this creature has lifelink and menace. (It can't be blocked except by two or more creatures.)
