@@ -4,6 +4,5 @@ Types:Legendary Creature Spirit Ally
 PT:3/3
 K:Flying
 K:Vigilance
-A:AB$ Effect | Cost$ T Waterbend<5> | StaticAbilities$ STMayPlay | Description$ You may cast a noncreature spell from your hand without paying its mana cost.
-SVar:STMayPlay:Mode$ Continuous | AffectedZone$ Hand | Affected$ Card.nonCreature | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayLimit$ 1
+A:AB$ Play | Cost$ T Waterbend<5> | ValidZone$ Hand | ValidSA$ Spell.nonCreature | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True | SpellDescription$ You may cast a noncreature spell from your hand without paying its mana cost.
 Oracle:Flying, vigilance\nWaterbend {5}, {T}: You may cast a noncreature spell from your hand without paying its mana cost.
