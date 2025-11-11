@@ -2332,9 +2332,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public Map<Card, ManaCostShard> chooseCardsForConvokeOrImprovise(final SpellAbility sa, final ManaCost manaCost,
-                                                                     final CardCollectionView untappedCards, boolean improvise) {
+                                                                     final CardCollectionView untappedCards, boolean artifacts, boolean creatures, Integer maxReduction) {
         final InputSelectCardsForConvokeOrImprovise inp = new InputSelectCardsForConvokeOrImprovise(this, player,
-                manaCost, untappedCards, improvise, sa);
+                sa, manaCost, untappedCards, artifacts, creatures, maxReduction);
         inp.showAndWait();
         return inp.getConvokeMap();
     }

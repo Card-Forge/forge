@@ -1,0 +1,8 @@
+Name:Geyser Leaper
+ManaCost:4 U
+Types:Creature Human Warrior Ally
+PT:4/3
+K:Flying
+A:AB$ Draw | Cost$ Waterbend<4> | NumCards$ 1 | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+Oracle:Flying\nWaterbend 4: Draw a card, then discard a card.

@@ -7,7 +7,7 @@ ScryfallCode=TLE
 
 [cards]
 1 M Brought Back @Viacom
-2 M Drannith Magistrate @Viacom
+2 M Drannith Magistrate @Viacom ${"flavorName": "Mayor Tong of Chin Village"}
 3 M Empty City Ruse @Viacom
 4 M Lita, Mechanical Engineer @Viacom ${"flavorName": "The Mechanist, Tactical Tinkerer"}
 5 M Release to Memory @Viacom
@@ -34,7 +34,10 @@ ScryfallCode=TLE
 26 M Blasphemous Act @Viacom
 27 M Diaochan, Artful Beauty @Viacom ${"flavorName": "Azula, Flame of Ember Island"}
 28 M Dockside Extortionist @Viacom
+29 M Fervor @Viacom
+30 M Humble Defector @Viacom
 31 M Insurrection @Viacom
+32 M Lightning Bolt @Viacom
 33 M Mirrorwing Dragon @Viacom
 34 M Rending Volley @Viacom
 35 M Searing Blood @Viacom
@@ -51,6 +54,8 @@ ScryfallCode=TLE
 46 M Taunting Challenge @Viacom
 47 M Captain Sisay @Viacom ${"flavorName": "Suki of the Kyoshi Warriors"}
 48 M Eladamri's Call @Viacom ${"flavorName": "Lifelong Friendship"}
+49 M Fevered Visions @Viacom
+50 M Join the Dance @Viacom
 51 M Koma, Cosmos Serpent @Viacom ${"flavorName": "The Monstrous Serpent"}
 52 M Rhys the Redeemed @Viacom ${"flavorName": "Zuko, Redeemed"}
 53 M Cityscape Leveler @Viacom
@@ -171,6 +176,45 @@ ScryfallCode=TLE
 168 U Inspiring Call @Alexander Forssberg
 169 C Many Partings @Kazeto
 170 U Suspicious Bookcase @Kotakan
+171 M Aang, Airbending Master @Tomoyo Asatani
+172 R Jet, Rebel Leader @Keiuu
+173 R Monk Gyatso @Masateru Ikeda
+174 M Sokka, Swordmaster @Jason Kiantoro
+175 R Suki, Kyoshi Captain @Shiren
+176 R Tale of Momo @Tetsuko
+177 R Baboon Spirit @Daniel Romanovsky
+178 R The Blue Spirit @Claudiu-Antoniu Magherusan
+179 R Chakra Meditation @Hori Airi
+180 M Katara, Waterbending Master @Yueko
+181 R Tui and La, Moon and Ocean @Douzen
+182 M Wan Shi Tong, All-Knowing @Axel Sauerwald
+183 R Waterbender's Restoration @Phima
+184 M Azula, Ruthless Firebender @Rose Benjamin
+185 R Desperate Plea @Shiyu
+186 M Fire Lord Ozai @Ryuichi Sakuma
+187 R Fire Nation Occupation @Arthur Yuan
+188 R Fire Nation Salvagers @Susumu Kuroi
+189 R Lo and Li, Royal Advisors @Kieran Yanner
+190 R Nyla, Shirshu Sleuth @Douzen
+191 M Avatar Roku, Firebender @Toni Infante
+192 R Chong and Lily, Nomads @Phima
+193 R Fang, Roku's Companion @Douzen
+194 R Iroh, Dragon of the West @Hokyoung Kim
+195 R Lost in Memories @Tubaki Halsame
+196 R Overwhelming Victory @Joshua Raphael
+197 R Reckless Blaze @Nijimaarc
+198 R Smellerbee, Rebel Fighter @Enishi
+199 R Storm of Memories @Nijimaarc
+200 M Zuko, Firebending Master @Kinota Eishi
+201 M Avatar Kyoshi, Earthbender @Tetsuko
+202 R Bison Whistle @Brandon L. Hunt
+203 R The Cabbage Merchant @Patrick Gañas
+204 R Crystalline Armor @Susumu Kuroi
+205 M Hei Bai, Forest Guardian @TAPIOCA
+206 R Master's Guidance @Yueko
+207 R Tale of Katara and Toph @Ichiko Milk Tei
+208 R Tectonic Split @Mengxuan Li
+209 M Toph, Earthbending Master @Phima
 210 R Aang, Air Nomad @Jinho Bae
 211 C Aang's Defense @Jo Cordisco
 212 C Aardvark Sloth @Ionomycin
@@ -279,3 +323,7 @@ ScryfallCode=TLE
 315 R Arcane Signet @Shane Beresford
 316 R Sol Ring @Barbara Rosiak
 317 R Swiftfoot Boots @Barbara Rosiak
+
+[tokens]
+1 marit_lage @Viacom
+2 r_2_2_soldier @Lius Lasahido

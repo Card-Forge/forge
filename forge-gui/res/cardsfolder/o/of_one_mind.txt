@@ -2,6 +2,6 @@ Name:Of One Mind
 ManaCost:2 U
 Types:Sorcery
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | IsPresent$ Creature.Human+YouCtrl | CheckSVar$ Count$Valid Creature.nonHuman+YouCtrl | Description$ CARDNAME costs {2} less to cast if you control a Human creature and a non-Human creature.
-DeckHints:Type$Human
 A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards.
+DeckHints:Type$Human
 Oracle:This spell costs {2} less to cast if you control a Human creature and a non-Human creature.\nDraw two cards.

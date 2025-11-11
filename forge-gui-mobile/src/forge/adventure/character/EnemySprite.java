@@ -450,7 +450,9 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
                     .filter(paperCard -> !paperCard.isVeryBasicLand())
                     .collect(Collectors.toList());
 
-            if (paperCardList.size() < 6) {
+            int uniqueRules = paperCardList.stream().map(PaperCard::getRules).collect(Collectors.toSet()).size();
+
+            if (uniqueRules < 4 || paperCardList.size() < 10) {
                 // Player trying to cheese doppleganger and farm cards. Sorry, the fun police have arrived
                 // Static rewards of 199 GP, 9 Shards, and 1 Cheese Stands Alone
                 rewards.add(new Reward(199));
@@ -466,7 +468,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
             if (AdventurePlayer.current().isFantasyMode()) {
                 //random uncommons from deck
                 List<PaperCard> uncommonCards = paperCardList.stream()
-                        .filter(paperCard -> CardRarity.Uncommon.equals(paperCard.getRarity()) || CardRarity.Special.equals(paperCard.getRarity()))
+                        .filter(paperCard -> paperCard.getRarity() == CardRarity.Uncommon || paperCard.getRarity() == CardRarity.Special)
                         .collect(Collectors.toList());
                 if (!uncommonCards.isEmpty()) {
                     rewards.add(new Reward(Aggregates.random(uncommonCards)));
@@ -474,7 +476,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
                 }
                 //random commons from deck
                 List<PaperCard> commmonCards = paperCardList.stream()
-                        .filter(paperCard -> CardRarity.Common.equals(paperCard.getRarity()))
+                        .filter(paperCard -> paperCard.getRarity() == CardRarity.Common)
                         .collect(Collectors.toList());
                 if (!commmonCards.isEmpty()) {
                     rewards.add(new Reward(Aggregates.random(commmonCards)));
@@ -483,7 +485,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
                 }
                 //random rare from deck
                 List<PaperCard> rareCards = paperCardList.stream()
-                        .filter(paperCard -> CardRarity.Rare.equals(paperCard.getRarity()) || CardRarity.MythicRare.equals(paperCard.getRarity()))
+                        .filter(paperCard -> paperCard.getRarity() == CardRarity.Rare || paperCard.getRarity() == CardRarity.MythicRare)
                         .collect(Collectors.toList());
                 if (!rareCards.isEmpty()) {
                     rewards.add(new Reward(Aggregates.random(rareCards)));

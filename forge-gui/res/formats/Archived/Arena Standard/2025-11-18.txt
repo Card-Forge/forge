@@ -1,0 +1,7 @@
+[format]
+Name:Arena Standard (TLA)
+Type:Archived
+Subtype:Standard
+Effective:2025-11-18
+Sets:WOE, LCI, MKM, OTJ, BIG, BLB, DSK, FDN, DFT, TDM, FIN, EOE, OM1, TLA
+Banned:Abuelo's Awakening; Cori-Steel Cutter; Heartfire Hero; Hopeless Nightmare; Leyline of Resonance; Monstrous Rage; Proft's Eidetic Memory; Screaming Nemesis; This Town Ain't Big Enough; Up the Beanstalk; Vivi Ornitier

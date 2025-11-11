@@ -31,11 +31,13 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 
 public class CostAdjustment {
 
     public static Cost adjust(final Cost cost, final SpellAbility sa, boolean effect) {
         if (sa.isTrigger() || cost == null || effect) {
+            sa.setMaxWaterbend(cost);
             return cost;
         }
 
@@ -99,6 +101,9 @@ public class CostAdjustment {
             host.setState(CardStateName.Original, false);
             host.setFaceDown(false);
         }
+
+        sa.setMaxWaterbend(result);
+
         return result;
     }
 
@@ -171,21 +176,22 @@ public class CostAdjustment {
 
     // If cardsToDelveOut is null, will immediately exile the delved cards and remember them on the host card.
     // Otherwise, will return them in cardsToDelveOut and the caller is responsible for doing the above.
-    public static boolean adjust(ManaCostBeingPaid cost, final SpellAbility sa, CardCollection cardsToDelveOut, boolean test) {
-        if (sa.isTrigger() || sa.isReplacementAbility()) {
+    public static boolean adjust(ManaCostBeingPaid cost, final SpellAbility sa, CardCollection cardsToDelveOut, boolean test, boolean effect) {
+        if (effect) {
+            adjustCostByWaterbend(cost, sa, test);
+        }
+        if (effect || sa.isTrigger() || sa.isReplacementAbility()) {
             return true;
         }
 
         final Game game = sa.getActivatingPlayer().getGame();
         final Card originalCard = sa.getHostCard();
-        boolean isStateChangeToFaceDown = false;
 
-        if (sa.isSpell()) {
-            if (sa.isCastFaceDown() && !originalCard.isFaceDown()) {
-                // Turn face down to apply cost modifiers correctly
-                originalCard.turnFaceDownNoUpdate();
-                isStateChangeToFaceDown = true;
-            }
+        boolean isStateChangeToFaceDown = false;
+        if (sa.isSpell() && sa.isCastFaceDown() && !originalCard.isFaceDown()) {
+            // Turn face down to apply cost modifiers correctly
+            originalCard.turnFaceDownNoUpdate();
+            isStateChangeToFaceDown = true;
         }
 
         CardCollection cardsOnBattlefield = new CardCollection(game.getCardsIn(ZoneType.Battlefield));
@@ -278,16 +284,18 @@ public class CostAdjustment {
                 table.triggerChangesZoneAll(game, sa);
             }
             if (sa.getHostCard().hasKeyword(Keyword.CONVOKE)) {
-                adjustCostByConvokeOrImprovise(cost, sa, false, test);
+                adjustCostByConvokeOrImprovise(cost, sa, false, true, test);
             }
             if (sa.getHostCard().hasKeyword(Keyword.IMPROVISE)) {
-                adjustCostByConvokeOrImprovise(cost, sa, true, test);
+                adjustCostByConvokeOrImprovise(cost, sa, true, false, test);
             }
         } // isSpell
 
         if (sa.hasParam("TapCreaturesForMana")) {
-            adjustCostByConvokeOrImprovise(cost, sa, false, test);
+            adjustCostByConvokeOrImprovise(cost, sa, false, true, test);
         }
+
+        adjustCostByWaterbend(cost, sa, test);
 
         // Reset card state (if changed)
         if (isStateChangeToFaceDown) {
@@ -298,6 +306,13 @@ public class CostAdjustment {
         return true;
     }
     // GetSpellCostChange
+
+    private static void adjustCostByWaterbend(ManaCostBeingPaid cost, SpellAbility sa, boolean test) {
+        Integer maxWaterbend = sa.getMaxWaterbend();
+        if (maxWaterbend != null && maxWaterbend > 0) {
+            adjustCostByConvokeOrImprovise(cost, sa, true, true, test);
+        }
+    }
 
     private static boolean adjustCostByAssist(ManaCostBeingPaid cost, final SpellAbility sa, boolean test) {
         // 702.132a Assist is a static ability that modifies the rules of paying for the spell with assist (see rules 601.2g-h).
@@ -321,27 +336,33 @@ public class CostAdjustment {
         return assistant.getController().helpPayForAssistSpell(cost, sa, genericLeft, requestedAmount);
     }
 
-    private static void adjustCostByConvokeOrImprovise(ManaCostBeingPaid cost, final SpellAbility sa, boolean improvise, boolean test) {
-        if (!improvise) {
+    private static void adjustCostByConvokeOrImprovise(ManaCostBeingPaid cost, final SpellAbility sa, boolean artifacts, boolean creatures, boolean test) {
+        if (creatures && !artifacts) {
             sa.clearTappedForConvoke();
         }
 
         final Player activator = sa.getActivatingPlayer();
         CardCollectionView untappedCards = CardLists.filter(activator.getCardsIn(ZoneType.Battlefield),
                 CardPredicates.CAN_TAP);
-        if (improvise) {
+
+        Integer maxReduction = null;
+        if (artifacts && creatures) {
+            maxReduction = sa.getMaxWaterbend();
+            Predicate <Card> isArtifactOrCreature = card -> card.isArtifact() || card.isCreature();
+            untappedCards = CardLists.filter(untappedCards, isArtifactOrCreature);
+        } else if (artifacts) {
             untappedCards = CardLists.filter(untappedCards, CardPredicates.ARTIFACTS);
         } else {
             untappedCards = CardLists.filter(untappedCards, CardPredicates.CREATURES);
         }
 
         Map<Card, ManaCostShard> convokedCards = activator.getController().chooseCardsForConvokeOrImprovise(sa,
-                cost.toManaCost(), untappedCards, improvise);
+                cost.toManaCost(), untappedCards, artifacts, creatures, maxReduction);
 
         CardCollection tapped = new CardCollection();
         for (final Entry<Card, ManaCostShard> conv : convokedCards.entrySet()) {
             Card c = conv.getKey();
-            if (!improvise) {
+            if (creatures && !artifacts) {
                 sa.addTappedForConvoke(c);
             }
             cost.decreaseShard(conv.getValue(), 1);

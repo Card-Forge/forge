@@ -262,7 +262,7 @@ ScryfallCode=TLA
 254 C Barrels of Blasting Jelly @Salvatorre Zee Yazzie
 255 C Bender's Waterskin @Dee Nguyen
 256 U Fire Nation Warship @Hisashi Momose
-257 C Kyoshi Battle Fan @Ven
+257 C Kyoshi Battle Fan @VEN
 258 U Meteor Sword @Matteo Bassini
 259 M Planetarium of Wan Shi Tong @Robin Olausson
 260 U Trusty Boomerang @Toni Infante
@@ -400,3 +400,29 @@ ScryfallCode=TLA
 392 R Secret Tunnel @Alexander Forssberg
 393 R Firebending Student @Airi Yoshihisa
 394 R Momo, Friendly Flier @Ryota Murayama
+
+[tokens]
+3 c_1_1_spirit_spiritshadow @Valera Lutfullina
+4 w_1_1_ally @Rose Benjamin
+5 w_1_1_ally @Alexandr Leskinen
+6 w_1_1_ally @Alexandr Leskinen
+7 w_1_1_ally @Le Vuong
+8 w_1_1_ally @Salvatorre Zee Yazzie
+9 r_4_4_dragon_flying_firebending_4 @Lius Lasahido
+10 r_1_1_monk_prowess @Dom Lay
+11 r_2_2_soldier_firebending_1 @Jo Cordisco
+12 g_4_4_bear @Brandon L. Hunt
+13 ballistic_boulder @Dom Lay
+14 c_a_clue_draw @Luc Courtois
+15 c_a_clue_draw @Luc Courtois
+16 c_a_clue_draw @Valera Lutfullina
+17 c_a_clue_draw @Andreas Rocha
+18 c_a_clue_draw @Andreas Rocha
+19 c_a_food_sac @Andreas Rocha
+20 c_a_food_sac @Joseph Weston
+21 c_a_food_sac @Henry Wong
+22 c_a_treasure_sac @Rose Benjamin
+
+[other]
+1 copy @Jo Cordisco
+2 copy @Le Vuong
