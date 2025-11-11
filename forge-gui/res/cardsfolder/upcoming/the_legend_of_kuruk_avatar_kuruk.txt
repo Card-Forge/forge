@@ -17,8 +17,7 @@ Name:Avatar Kuruk
 ManaCost:no cost
 Types:Legendary Creature Avatar
 PT:4/3
-T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | SpellDescription$ Whenever you cast a spell, create a 1/1 colorless Spirit creature token with “This token can’t block or be blocked by non-Spirit creatures.”
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | SpellDescription$ Whenever you cast a spell, create a 1/1 colorless Spirit creature token with "This token can’t block or be blocked by non-Spirit creatures."
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_spirit_spiritshadow | TokenOwner$ You
 A:AB$ AddTurn | Cost$ T Waterbend<20> | NumTurns$ 1 | Exhaust$ True | SpellDescription$ Exhaust — Waterbend {20}: Take an extra turn after this one.
-Oracle:Whenever you cast a spell, create a 1/1 colorless Spirit creature token with “This token can’t block or be blocked by non-Spirit creatures.”\nExhaust — Waterbend {20}: Take an extra turn after this one. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}. Activate each exhaust ability only once.)
-
+Oracle:Whenever you cast a spell, create a 1/1 colorless Spirit creature token with "This token can’t block or be blocked by non-Spirit creatures."\nExhaust — Waterbend {20}: Take an extra turn after this one. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}. Activate each exhaust ability only once.)
