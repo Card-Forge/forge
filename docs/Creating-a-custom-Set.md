@@ -135,8 +135,6 @@ Save your file, and let's move onto another step.
 
 ## Scripting your first cards
 
-As mentioned earlier, your custom card rules need to be located inside `%appdata%/Forge/custom/cards`. I recommend creating subfolders for each starting letter (`Forge/custom/cards/a`, `Forge/custom/cards/b`, etc.) to quickly find if a card has a duplicate name.
-
 Now, you might remember than Unearth was an existing MTG card so we do not need to create a custom card rule for it. Let's create a few others.
 > This tutorial will not teach you to script your cards, and they might not be perfect. Please check out [Creating a Custom Card](https://github.com/Card-Forge/forge/wiki/Creating-a-Custom-Card) if you want more info, or look at the existing cards to learn more complex scripting.
 
@@ -204,8 +202,6 @@ Artist:Artists
 Oh no! If you play with Inked Summoner now, you will crash when summoning a token. That's because they don't exist in MTG and we need to define them! Let's go onto the next step!
 
 ## Scripting custom tokens
-
-The token scripts are located at `%appdata%/Forge/custom/tokens`.
 
 Let's add the new tokens we need to make Inked Summoner work!
 > Just like for card scripting, this tutorial will not teach you about scripting them.
