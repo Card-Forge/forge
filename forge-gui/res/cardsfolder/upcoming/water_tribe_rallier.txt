@@ -1,4 +1,4 @@
-Name:Squad Rallier
+Name:Water Tribe Rallier
 ManaCost:1 W
 Types:Creature Human Soldier Ally
 PT:2/2
