@@ -544,14 +544,19 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
 
     public final Trigger copy(Card newHost, boolean lki) {
-        return copy(newHost, lki, false);
+        return copy(newHost, lki, false, null);
     }
     public final Trigger copy(Card newHost, boolean lki, boolean keepTextChanges) {
+        return copy(newHost, lki, keepTextChanges, null);
+    }
+    public final Trigger copy(Card newHost, boolean lki, boolean keepTextChanges, SpellAbility spellAbility) {
         final Trigger copy = (Trigger) clone();
 
         copyHelper(copy, newHost, lki || keepTextChanges);
 
-        if (getOverridingAbility() != null) {
+        if (spellAbility != null) {
+            copy.setOverridingAbility(spellAbility);
+        } else if (getOverridingAbility() != null) {
             copy.setOverridingAbility(getOverridingAbility().copy(newHost, lki));
         }
 
@@ -611,7 +616,11 @@ public abstract class Trigger extends TriggerReplacementBase {
     public SpellAbility ensureAbility(final IHasSVars sVarHolder) {
         SpellAbility sa = getOverridingAbility();
         if (sa == null && hasParam("Execute")) {
-            sa = AbilityFactory.getAbility(getHostCard(), getParam("Execute"), sVarHolder);
+            if (this.isIntrinsic() && sVarHolder instanceof CardState state) {
+                sa = state.getAbilityForTrigger(getParam("Execute"));
+            } else {
+                sa = AbilityFactory.getAbility(getHostCard(), getParam("Execute"), sVarHolder);
+            }
             setOverridingAbility(sa);
         }
         return sa;

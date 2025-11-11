@@ -140,6 +140,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     // stores the card traits created by static abilities
     private final Table<StaticAbility, String, SpellAbility> storedSpellAbility = TreeBasedTable.create();
     private final Table<StaticAbility, String, Trigger> storedTrigger = TreeBasedTable.create();
+    private final Table<StaticAbility, SpellAbility, SpellAbility> storedAbilityForTrigger = HashBasedTable.create();
     private final Table<StaticAbility, String, ReplacementEffect> storedReplacementEffect = TreeBasedTable.create();
     private final Table<StaticAbility, String, StaticAbility> storedStaticAbility = TreeBasedTable.create();
 
@@ -4974,7 +4975,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         String str = trig.toString() + trig.getId();
         Trigger result = storedTrigger.get(stAb, str);
         if (result == null) {
-            result = trig.copy(this, false);
+            SpellAbility ab = null;
+            if (trig.hasParam("Execute") && trig.getOverridingAbility() != null) {
+                ab = storedAbilityForTrigger.get(stAb, trig.getOverridingAbility());
+                if (ab == null) {
+                    ab = trig.getOverridingAbility().copy(this, false);
+                    storedAbilityForTrigger.put(stAb, trig.getOverridingAbility(), ab);
+                }
+            }
+            result = trig.copy(this, false, false, ab);
             storedTrigger.put(stAb, str, result);
         }
         return result;
