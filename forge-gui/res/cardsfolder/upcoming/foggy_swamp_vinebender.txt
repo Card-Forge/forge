@@ -2,6 +2,6 @@ Name:Foggy Swamp Vinebender
 ManaCost:3 B
 Types:Creature Human Ranger Ally 
 PT:3/4
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Lifelink & Menace | CheckSVar$ X | SVarCompare$ GE2 | Description$ As long as you've drawn two or more cards this turn, this creature has lifelink and menace.
-SVar:X:Count$YouDrewThisTurn
-Oracle:As long as you've drawn two or more cards this turn, this creature has lifelink and menace. (It can't be blocked except by two or more creatures.)
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ This creature can't be blocked by creatures with power 2 or less.
+A:AB$ PutCounter | Cost$ Waterbend<5> | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | Condition$ PlayerTurn
+Oracle:This creature can't be blocked by creatures with power 2 or less.\nWaterbend {5}: Put a +1/+1 counter on this creature. Activate only during your turn. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)
