@@ -1,4 +1,5 @@
 Name:Skyward Spider
+Variant:UniversesWithin:FlavorName:Wonderweave Aerialist
 ManaCost:WU WU
 Types:Creature Spider Human Hero
 PT:2/2

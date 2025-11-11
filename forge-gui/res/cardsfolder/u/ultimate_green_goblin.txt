@@ -1,4 +1,5 @@
 Name:Ultimate Green Goblin
+Variant:UniversesWithin:FlavorName:Ruzic, Booed but Victorious
 ManaCost:1 BR BR
 Types:Legendary Creature Goblin Villain
 PT:5/4

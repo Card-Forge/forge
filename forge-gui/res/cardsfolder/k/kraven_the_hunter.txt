@@ -1,4 +1,5 @@
 Name:Kraven the Hunter
+Variant:UniversesWithin:FlavorName:Brako, Heartless Hunter
 ManaCost:1 B G
 Types:Legendary Creature Human Warrior Villain
 PT:4/3

@@ -1,4 +1,5 @@
 Name:Electro's Bolt
+Variant:UniversesWithin:FlavorName:Deathflame Burst
 ManaCost:2 R
 Types:Sorcery
 A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.

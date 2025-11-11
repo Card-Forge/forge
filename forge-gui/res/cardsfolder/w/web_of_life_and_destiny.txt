@@ -1,4 +1,5 @@
 Name:Web of Life and Destiny
+Variant:UniversesWithin:FlavorName:Through the Omenpath
 ManaCost:6 G G
 Types:Enchantment
 K:Convoke

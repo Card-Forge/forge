@@ -1,4 +1,5 @@
 Name:Bagel and Schmear
+Variant:UniversesWithin:FlavorName:Perfected Pastry
 ManaCost:1
 Types:Artifact Food
 A:AB$ PutCounter | PrecostDesc$ Share — | Cost$ W T Sac<1/CARDNAME> | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDraw | SorcerySpeed$ True | SpellDescription$ Put a +1/+1 counter on up to one target creature. Draw a card. Activate only as a sorcery.

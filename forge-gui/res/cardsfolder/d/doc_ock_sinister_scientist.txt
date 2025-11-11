@@ -1,4 +1,5 @@
 Name:Doc Ock, Sinister Scientist
+Variant:UniversesWithin:FlavorName:Ozor, Chronicler of Collapse
 ManaCost:4 U
 Types:Legendary Creature Human Scientist Villain
 PT:4/5

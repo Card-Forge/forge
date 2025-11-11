@@ -55,6 +55,8 @@ The SpellDescription for secondary abilities (both AB and DB) is now displayed w
 Remembering is often needed when a card becomes a new object, which is then further affected by the ability. Typical example: [Flicker](https://github.com/Card-Forge/forge/blob/master/forge-gui/res/cardsfolder/f/flicker.txt)<br />
 Because cards keep their remembered parts when changing zones manual [cleanup](#Cleanup) is usually required.
 
+## Duration
+
 ## AI params
 
 `IsCurse$ True` - For effects that are normally treated positive e.g. Pump
@@ -207,6 +209,8 @@ Attach separates the actually granting of abilities from the attaching to perman
 
 ## BecomeMonarch
 
+No own parameters.
+
 ## Bond
 
 Soulbonding two creatures. Only used internally by the engine.
@@ -306,7 +310,6 @@ Parameters:
 Copies a permanent on the battlefield.
 
 Parameters:
-
   - NumCopies - optional - the number of copies to put onto the
     battlefield. Supports SVar:X:????.
   - Keywords - optional - a list of keywords to add to the copies
@@ -317,7 +320,9 @@ Parameters:
 
 ### CopySpellAbility
 
-Copies a spell on the stack (Twincast, etc.).
+Parameters:
+- Num$ <Integer>
+- Restrict$ <String>
 
 ## Counter
 
@@ -412,8 +417,6 @@ Remove any type of counter from all valid cards.
   - ValidCards$ (required) specifies the card to remove counters from.
 
 ### Proliferate
-
-No own parameters.
 
 ### MoveCounters
 
