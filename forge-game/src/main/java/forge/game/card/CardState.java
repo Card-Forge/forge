@@ -79,6 +79,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     private FCollection<StaticAbility> staticAbilities = new FCollection<>();
     private String imageKey = "";
     private Map<String, String> sVars = Maps.newTreeMap();
+    private Map<String, SpellAbility> abilityForTrigger = Maps.newHashMap();
 
     private KeywordCollection cachedKeywords = new KeywordCollection();
 
@@ -732,6 +733,11 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         setFlavorName(source.getFlavorName());
         setSVars(source.getSVars());
 
+        abilityForTrigger.clear();
+        for (Map.Entry<String, SpellAbility> e : source.abilityForTrigger.entrySet()) {
+            abilityForTrigger.put(e.getKey(), e.getValue().copy(card, lki));
+        }
+
         abilities.clear();
         for (SpellAbility sa : source.abilities) {
             if (sa.isIntrinsic()) {
@@ -758,7 +764,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
                 continue;
             }
             if (tr.isIntrinsic()) {
-                triggers.add(tr.copy(card, lki));
+                triggers.add(tr.copy(card, lki, false, tr.hasParam("Execute") ? abilityForTrigger.get(tr.getParam("Execute")) : null));
             }
         }
         ReplacementEffect runRE = null;
@@ -949,6 +955,10 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             cloakUp = CardFactoryUtil.abilityTurnFaceUp(this, "CloakUp", "Uncloak");
         }
         return cloakUp;
+    }
+
+    public SpellAbility getAbilityForTrigger(String svar) {
+        return abilityForTrigger.computeIfAbsent(svar, s -> AbilityFactory.getAbility(getCard(), s, this));
     }
 
     @Override
