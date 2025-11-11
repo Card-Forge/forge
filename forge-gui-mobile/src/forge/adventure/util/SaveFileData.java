@@ -349,7 +349,9 @@ public class SaveFileData extends HashMap<String, byte[]> {
                 final long localSUID = localClassDescriptor.getSerialVersionUID();
                 final long streamSUID = resultClassDescriptor.getSerialVersionUID();
                 if (streamSUID != localSUID) { // check for serialVersionUID mismatch.
-                    String s = "Overriding serialized class version mismatch: " + "local serialVersionUID = " + localSUID +
+                    String s = "Overriding serialized class version mismatch:"
+                            + " class = " + resultClassDescriptor.getName()
+                            + " local serialVersionUID = " + localSUID +
                             " stream serialVersionUID = " + streamSUID;
 
                     System.err.println("[Invalid Class Exception]\n" + s);
