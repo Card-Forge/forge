@@ -1,4 +1,5 @@
 Name:Hot Dog Cart
+Variant:UniversesWithin:FlavorName:Treat Trolley
 ManaCost:3
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFood | TriggerDescription$ When this artifact enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")

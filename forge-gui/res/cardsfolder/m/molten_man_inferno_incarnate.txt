@@ -1,4 +1,5 @@
 Name:Molten Man, Inferno Incarnate
+Variant:UniversesWithin:FlavorName:The Infernus
 ManaCost:2 R
 Types:Legendary Creature Elemental Villain
 PT:0/0

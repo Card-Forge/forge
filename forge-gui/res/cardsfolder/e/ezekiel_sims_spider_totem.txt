@@ -1,4 +1,5 @@
 Name:Ezekiel Sims, Spider-Totem
+Variant:UniversesWithin:FlavorName:Orris, Last of the Web Lords
 ManaCost:4 G
 Types:Legendary Creature Spider Human Advisor
 PT:3/5

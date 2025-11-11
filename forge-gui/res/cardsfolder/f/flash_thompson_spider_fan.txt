@@ -1,4 +1,5 @@
 Name:Flash Thompson, Spider-Fan
+Variant:UniversesWithin:FlavorName:Basil, Cabaretti Loudmouth
 ManaCost:1 W
 Types:Legendary Creature Human Citizen
 PT:2/2

@@ -1,4 +1,5 @@
 Name:Hobgoblin, Mantled Marauder
+Variant:UniversesWithin:FlavorName:Cam and Farrik, Havoc Duo
 ManaCost:1 R
 Types:Legendary Creature Goblin Human Villain
 PT:1/2

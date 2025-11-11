@@ -1,4 +1,5 @@
 Name:Peter Parker
+Variant:UniversesWithin:FlavorName:Surris, Spidersilk Innovator
 ManaCost:1 W
 Types:Legendary Creature Human Scientist Hero
 PT:0/1
@@ -11,6 +12,7 @@ Oracle:When Peter Parker enters, create a 2/1 green Spider creature token with r
 ALTERNATE
 
 Name:Amazing Spider-Man
+Variant:UniversesWithin:FlavorName:Surris, Silk-Tech Vanguard
 ManaCost:1 G W U
 Types:Legendary Creature Spider Human Hero
 PT:4/4

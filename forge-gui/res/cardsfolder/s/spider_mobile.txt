@@ -1,4 +1,5 @@
 Name:Spider-Mobile
+Variant:UniversesWithin:FlavorName:Scuttling Spidercoach
 ManaCost:3
 Types:Artifact Vehicle
 PT:3/3

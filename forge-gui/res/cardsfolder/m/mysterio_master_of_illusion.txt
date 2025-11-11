@@ -1,4 +1,5 @@
 Name:Mysterio, Master of Illusion
+Variant:UniversesWithin:FlavorName:The Watcher on the Road
 ManaCost:3 U
 Types:Legendary Creature Human Villain
 PT:3/3
