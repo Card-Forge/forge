@@ -1,4 +1,5 @@
 Name:Araña, Heart of the Spider
+Variant:UniversesWithin:FlavorName:Gloria, the Great Armorer
 ManaCost:1 R W
 Types:Legendary Creature Spider Human Hero
 PT:3/3

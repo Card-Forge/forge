@@ -1,4 +1,5 @@
 Name:News Helicopter
+Variant:UniversesWithin:FlavorName:Opulent Valet
 ManaCost:3
 Types:Artifact Creature Construct
 PT:1/1

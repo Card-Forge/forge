@@ -1,4 +1,5 @@
 Name:Oscorp Industries
+Variant:UniversesWithin:FlavorName:Exclusive Nightclub
 ManaCost:no cost
 Types:Land
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.

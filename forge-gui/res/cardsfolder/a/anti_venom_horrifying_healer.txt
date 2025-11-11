@@ -1,4 +1,5 @@
 Name:Anti-Venom, Horrifying Healer
+Variant:UniversesWithin:FlavorName:Verilax the Havenskin
 ManaCost:W W W W W
 Types:Legendary Creature Symbiote Hero
 PT:5/5
