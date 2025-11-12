@@ -104,9 +104,9 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
                 } else if (colors.size() == 1) {
                     baseMana = MagicColor.toShortString(colors.iterator().next());
                 } else if (colors.contains("colorless")) {
-                    baseMana = player.getController().chooseColorAllowColorless(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa.getHostCard(), ColorSet.fromNames(colors))).getShortName();
+                    baseMana = player.getController().chooseColorAllowColorless(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa.getHostCard(), ColorSet.fromNames(colors)).getShortName();
                 } else {
-                    baseMana = player.getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa, ColorSet.fromNames(colors))).getShortName();
+                    baseMana = player.getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa, ColorSet.fromNames(colors)).getShortName();
                 }
             } else {
                 colorMenu = ColorSet.fromMask(mask);
