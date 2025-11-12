@@ -200,6 +200,7 @@ final class CardFace implements ICardFace, Cloneable {
                 catch (PatternSyntaxException ignored) {
                     // Old versions of Android are weird about patterns sometimes. I don't *think* this is such a case but
                     // the documentation is unreliable. May be worth removing this once we're sure it's not a problem.
+                    variant.oracleText = this.oracleText;
                 }
             }
             else
