@@ -1,4 +1,5 @@
 Name:Raging Goblinoids
+Variant:UniversesWithin:FlavorName:Lavaborn Goblins
 ManaCost:4 R
 Types:Creature Goblin Berserker Villain
 PT:5/4

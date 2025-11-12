@@ -1,4 +1,5 @@
 Name:The Spot's Portal
+Variant:UniversesWithin:FlavorName:Remorseless Coup
 ManaCost:2 B
 Types:Instant
 A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SubAbility$ DBLoseLife | SpellDescription$ Put target creature on the bottom of its owner's library. You lose 2 life unless you control a Villain.

@@ -1,4 +1,5 @@
 Name:Spinneret and Spiderling
+Variant:UniversesWithin:FlavorName:Rizna, the Spider-Crowned
 ManaCost:R
 Types:Legendary Creature Spider Human Hero
 PT:1/2

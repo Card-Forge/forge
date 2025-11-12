@@ -1,4 +1,5 @@
 Name:Wraith, Vicious Vigilante
+Variant:UniversesWithin:FlavorName:Margot, On the Case
 ManaCost:1 W U
 Types:Legendary Creature Human Detective Hero
 PT:1/1

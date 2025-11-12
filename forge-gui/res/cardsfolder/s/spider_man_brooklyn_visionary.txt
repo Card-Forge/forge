@@ -1,4 +1,5 @@
 Name:Spider-Man, Brooklyn Visionary
+Variant:UniversesWithin:FlavorName:Zan, Tunnelweb Explorer
 ManaCost:4 G
 Types:Legendary Creature Spider Human Hero
 PT:4/3

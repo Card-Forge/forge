@@ -1,4 +1,5 @@
 Name:Spider-Girl, Legacy Hero
+Variant:UniversesWithin:FlavorName:Janai and Hoppy, Roofskippers
 ManaCost:G W
 Types:Legendary Creature Spider Human Hero
 PT:2/2

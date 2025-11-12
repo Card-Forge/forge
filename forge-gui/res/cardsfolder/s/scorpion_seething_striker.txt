@@ -1,4 +1,5 @@
 Name:Scorpion, Seething Striker
+Variant:UniversesWithin:FlavorName:Scorvus Ames, Crimelord
 ManaCost:3 B
 Types:Legendary Creature Scorpion Human Villain
 PT:3/3

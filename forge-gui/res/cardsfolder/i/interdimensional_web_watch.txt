@@ -1,4 +1,5 @@
 Name:Interdimensional Web Watch
+Variant:UniversesWithin:FlavorName:Reality Fulcrum
 ManaCost:4
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this artifact enters, exile the top two cards of your library. Until the end of your next turn, you may play those cards.

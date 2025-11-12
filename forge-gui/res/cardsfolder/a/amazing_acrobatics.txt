@@ -1,4 +1,5 @@
 Name:Amazing Acrobatics
+Variant:UniversesWithin:FlavorName:Drix Interception
 ManaCost:1 U U
 Types:Instant
 A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBCounter,DBTap

@@ -1,4 +1,5 @@
 Name:Kraven's Last Hunt
+Variant:UniversesWithin:FlavorName:A Trail of Teacups
 ManaCost:3 G
 Types:Enchantment Saga
 K:Chapter:3:DBMill,DBPump,DBReturn

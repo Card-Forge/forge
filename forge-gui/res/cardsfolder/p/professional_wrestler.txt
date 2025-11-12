@@ -1,4 +1,5 @@
 Name:Professional Wrestler
+Variant:UniversesWithin:FlavorName:Favored Fighter
 ManaCost:3 G
 Types:Creature Human Warrior Performer
 PT:4/4

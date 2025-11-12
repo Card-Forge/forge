@@ -1,4 +1,5 @@
 Name:Spider-Man 2099
+Variant:UniversesWithin:FlavorName:Uharis, the Stormspinner
 ManaCost:U R
 Types:Legendary Creature Spider Human Hero
 PT:2/3

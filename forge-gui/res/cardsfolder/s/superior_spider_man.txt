@@ -1,4 +1,5 @@
 Name:Superior Spider-Man
+Variant:UniversesWithin:FlavorName:Kavaero, Mind-Bitten
 ManaCost:2 U B
 Types:Legendary Creature Spider Human Hero
 PT:4/4

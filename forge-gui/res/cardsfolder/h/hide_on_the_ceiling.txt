@@ -1,4 +1,5 @@
 Name:Hide on the Ceiling
+Variant:UniversesWithin:FlavorName:Spectral Restitching
 ManaCost:X U
 Types:Instant
 A:SP$ ChangeZone | ValidTgts$ Artifact,Creature | TgtPrompt$ Select X target artifacts and/or creatures | TargetMin$ X | TargetMax$ X | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBDelTrig | SpellDescription$ Exile X target artifacts and/or creatures. Return the exiled cards to the battlefield under their owners' control at the beginning of the next end step.

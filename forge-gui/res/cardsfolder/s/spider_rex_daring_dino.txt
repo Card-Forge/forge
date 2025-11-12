@@ -1,4 +1,5 @@
 Name:Spider-Rex, Daring Dino
+Variant:UniversesWithin:FlavorName:Chizak, Apex Arachnosaur
 ManaCost:4 G G
 Types:Legendary Creature Spider Dinosaur Hero
 PT:6/6

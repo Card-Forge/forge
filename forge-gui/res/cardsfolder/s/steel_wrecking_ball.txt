@@ -1,4 +1,5 @@
 Name:Steel Wrecking Ball
+Variant:UniversesWithin:FlavorName:Temple Trap
 ManaCost:5
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When this artifact enters, it deals 5 damage to target creature.

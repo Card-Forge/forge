@@ -1,4 +1,5 @@
 Name:Norman Osborn
+Variant:UniversesWithin:FlavorName:Goben, Gene-Splice Savant
 ManaCost:1 U
 Types:Legendary Creature Human Scientist Villain
 PT:1/1
@@ -12,6 +13,7 @@ Oracle:Norman Osborn can't be blocked.\nWhenever Norman Osborn deals combat dama
 ALTERNATE
 
 Name:Green Goblin
+Variant:UniversesWithin:FlavorName:Fleem, Goben's Creation
 ManaCost:1 U B R
 Types:Legendary Creature Goblin Human Villain
 PT:3/3

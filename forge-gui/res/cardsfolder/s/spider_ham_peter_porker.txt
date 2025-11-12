@@ -1,4 +1,5 @@
 Name:Spider-Ham, Peter Porker
+Variant:UniversesWithin:FlavorName:Tarantusk, Unwisely Awoken
 ManaCost:1 G
 Types:Legendary Creature Spider Boar Hero
 PT:2/2

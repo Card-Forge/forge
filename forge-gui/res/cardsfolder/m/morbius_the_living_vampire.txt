@@ -1,4 +1,5 @@
 Name:Morbius the Living Vampire
+Variant:UniversesWithin:FlavorName:Tearle, Entropic Hunger
 ManaCost:2 U B
 Types:Legendary Creature Vampire Scientist Villain
 PT:3/1

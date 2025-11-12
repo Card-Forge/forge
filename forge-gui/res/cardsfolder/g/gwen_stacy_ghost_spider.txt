@@ -1,4 +1,5 @@
 Name:Gwen Stacy
+Variant:UniversesWithin:FlavorName:Nia, Skysail Storyteller
 ManaCost:1 R
 Types:Legendary Creature Human Performer Hero
 PT:2/1
@@ -14,6 +15,7 @@ Oracle:When Gwen Stacy enters, exile the top card of your library. You may play 
 ALTERNATE
 
 Name:Ghost-Spider
+Variant:UniversesWithin:FlavorName:Nia, Fabled Skyclimber
 ManaCost:2 U R W
 Types:Legendary Creature Spider Human Hero
 PT:4/4

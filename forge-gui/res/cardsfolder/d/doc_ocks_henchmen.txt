@@ -1,4 +1,5 @@
 Name:Doc Ock's Henchmen
+Variant:UniversesWithin:FlavorName:Obscura Alleylurkers
 ManaCost:2 U
 Types:Creature Human Villain
 PT:2/1

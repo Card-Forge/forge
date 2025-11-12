@@ -122,7 +122,8 @@ public class InputPassPriority extends InputSyncronizedBase {
 
     @Override
     protected boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
-        //remove unplayable unless triggerEvent specified, in which case unplayable may be shown as disabled options
+        // remove unplayable unless triggerEvent specified, in which case unplayable may be shown as disabled options
+        // (so shortcuts are constant regardless of game state)
         List<SpellAbility> abilities = card.getAllPossibleAbilities(getController().getPlayer(), triggerEvent == null); 
         if (abilities.isEmpty()) {
             return false;

@@ -1,4 +1,5 @@
 Name:Aunt May
+Variant:UniversesWithin:FlavorName:Zora, Spider Fancier
 ManaCost:W
 Types:Legendary Creature Human Citizen
 PT:0/2

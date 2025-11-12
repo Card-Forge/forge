@@ -1,4 +1,5 @@
 Name:Peter Parker's Camera
+Variant:UniversesWithin:FlavorName:Phenomena Recorder
 ManaCost:1
 Types:Artifact
 K:etbCounter:FILM:3

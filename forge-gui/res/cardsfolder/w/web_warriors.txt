@@ -1,4 +1,5 @@
 Name:Web-Warriors
+Variant:UniversesWithin:FlavorName:Diligent Webkeepers
 ManaCost:4 GW
 Types:Creature Spider Hero
 PT:4/3

@@ -1,4 +1,5 @@
 Name:The Death of Gwen Stacy
+Variant:UniversesWithin:FlavorName:The House Grows Hungry
 ManaCost:2 B
 Types:Enchantment Saga
 K:Chapter:3:DBDestroy,DBChoose,DBExile

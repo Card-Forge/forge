@@ -1,4 +1,5 @@
 Name:Scarlet Spider, Ben Reilly
+Variant:UniversesWithin:FlavorName:Borys, the Spider Rider
 ManaCost:1 R G
 Types:Legendary Creature Spider Human Hero
 PT:4/3

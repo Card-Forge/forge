@@ -1,4 +1,5 @@
 Name:The Soul Stone
+Variant:UniversesWithin:FlavorName:The Terminus of Return
 ManaCost:1 B
 Types:Legendary Artifact Infinity Stone
 K:Indestructible

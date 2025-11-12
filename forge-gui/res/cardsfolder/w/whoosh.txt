@@ -1,4 +1,5 @@
 Name:Whoosh!
+Variant:UniversesWithin:FlavorName:Snatch Back
 ManaCost:1 U
 Types:Instant
 K:Kicker:1 U

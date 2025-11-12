@@ -8,6 +8,5 @@ SVar:DBNameCard:DB$ NameCard | Defined$ You | SubAbility$ DBClear
 SVar:DBClear:DB$ Cleanup | ClearChosenPlayer$ True
 S:Mode$ CantBeActivated | ValidCard$ Card.NamedCard | ValidSA$ Activated.!ManaAbility | Description$ Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.
 AI:RemoveDeck:Random
-# TODO: Might improve AI logic to support it (the AI needs to pick cards that actually have activated nonmana abilities on them)
 AI:RemoveDeck:All
 Oracle:As Sorcerous Spyglass enters, look at an opponent's hand, then choose any card name.\nActivated abilities of sources with the chosen name can't be activated unless they're mana abilities.

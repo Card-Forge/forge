@@ -171,11 +171,11 @@ When paying mana costs, you can press Enter/Spacebar or click the Auto button in
 ## Auto-Yield
 - When a spell or an ability appears on the stack and it says "(OPTIONAL)" you can right-click it to decide if you want to always accept or to decline it.
 
-  It is possible to specify the granularity level for auto-yields: the difference is that, for example, when yielding per ability if you auto-yield to Hellrider's triggered ability once, all triggers from other Hellrider cards will be automatically auto-yielded to as well. When yielding per card, you will need to auto-yield to each Hellrider separately.
+  It is possible to specify the granularity level for auto-yields: the difference is that, for example, when choosing per ability if you auto-yield to Hellrider's triggered ability once, all triggers from other Hellrider cards will be automatically yielded to as well. When choosing per card, you will need to auto-yield to each Hellrider separately.
 
-  Note that in when auto-yielding per ability, auto-yields will NOT be automatically cleared between games in a match, which should speed the game up. When auto-yielding per card, auto-yields WILL be automatically cleared between games because they are dependent on card IDs which change from game to game, thus you will need to auto-yield to each card again in each game of the match.
+  Note that in when auto-yielding per ability, yields will NOT be automatically cleared between games in a match, which should speed the game up. When auto-yielding per card, yields WILL be automatically cleared between games because they are dependent on card IDs which change from game to game, thus you will need to auto-yield to each card again in each game of the match.
 
-- Pressing "End Turn" skips your attack phase and doesn't get cancelled automatically if a spell or ability is put on the stack. You will still be given a chance to declare blockers if your opponent attacks, but after that the rest of your opponent's turn will now be skipped properly.
+- Pressing "End Turn" skips your attack phase and doesn't get cancelled automatically if a spell or ability is put on the stack. You'll still be given a chance to declare blockers if your opponent attacks, but after that the rest of your opponent's turn will then progress without you receiving priority.
 
   To alleviate pressing this accidentally, as long as you're passing this way, you'll be able to press Escape or the Cancel button to be given the chance to act again. Phases with stops and spells/abilities resolving will be given a slight delay to allow you to see what's going on.
 

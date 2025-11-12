@@ -1,4 +1,5 @@
 Name:Spider-Byte, Web Warden
+Variant:UniversesWithin:FlavorName:Argyr, Tidal Spinner
 ManaCost:2 U
 Types:Legendary Creature Spider Avatar Hero
 PT:2/2

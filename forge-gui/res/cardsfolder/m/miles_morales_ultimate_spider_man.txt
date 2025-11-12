@@ -1,4 +1,5 @@
 Name:Miles Morales
+Variant:UniversesWithin:FlavorName:Cren, Undercity Dreamer
 ManaCost:1 G
 Types:Legendary Creature Human Citizen Hero
 PT:1/2
@@ -11,6 +12,7 @@ Oracle:When Miles Morales enters, put a +1/+1 counter on each of up to two targe
 ALTERNATE
 
 Name:Ultimate Spider-Man
+Variant:UniversesWithin:FlavorName:Cren of the Spider Brood
 ManaCost:3 R G W
 Types:Legendary Creature Spider Human Hero
 PT:4/3

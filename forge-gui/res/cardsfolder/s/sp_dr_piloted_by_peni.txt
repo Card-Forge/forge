@@ -1,4 +1,5 @@
 Name:SP//dr, Piloted by Peni
+Variant:UniversesWithin:FlavorName:Kumonosu, the Watchful
 ManaCost:3 W U
 Types:Legendary Artifact Creature Spider Hero
 PT:4/4

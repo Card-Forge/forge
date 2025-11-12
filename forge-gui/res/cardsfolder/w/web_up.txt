@@ -1,4 +1,5 @@
 Name:Web Up
+Variant:UniversesWithin:FlavorName:Mothwing Shroud
 ManaCost:2 W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield.

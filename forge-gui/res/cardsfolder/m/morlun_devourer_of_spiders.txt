@@ -1,4 +1,5 @@
 Name:Morlun, Devourer of Spiders
+Variant:UniversesWithin:FlavorName:Luis, Pompous Pillager
 ManaCost:X B B
 Types:Legendary Creature Vampire Villain
 PT:2/1

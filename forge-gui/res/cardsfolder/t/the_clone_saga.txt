@@ -1,4 +1,5 @@
 Name:The Clone Saga
+Variant:UniversesWithin:FlavorName:Lost in Littjara
 ManaCost:3 U
 Types:Enchantment Saga
 K:Chapter:3:DBSurveil,DBCopyEffect,DBDrawEffect
