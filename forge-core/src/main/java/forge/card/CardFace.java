@@ -1,6 +1,7 @@
 package forge.card;
 
 import forge.card.mana.ManaCost;
+import forge.util.Lang;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -185,7 +186,17 @@ final class CardFace implements ICardFace, Cloneable {
     }
 
     void assignMissingFieldsToVariant(CardFace variant) {
-        if(variant.oracleText == null) variant.oracleText = this.oracleText;
+        if(variant.oracleText == null) {
+            if(variant.flavorName != null && this.oracleText != null) {
+                Lang lang = Lang.getInstance();
+                //Rudimentary name replacement. Can't do pronouns, ability words, or flavored keywords. Need to define variant text manually for that.
+                String flavoredText = this.oracleText.replaceAll("(?<=\\b|\\\\n)" + this.name + "\\b", variant.flavorName);
+                flavoredText = flavoredText.replaceAll("(?<=\\b|\\\\n)" + lang.getNickName(this.name) + "\\b", lang.getNickName(variant.flavorName));
+                variant.oracleText = flavoredText;
+            }
+            else
+                variant.oracleText = this.oracleText;
+        }
         if(variant.manaCost == null) variant.manaCost = this.manaCost;
         if(variant.color == null) variant.color = ColorSet.fromManaCost(variant.manaCost);
 
