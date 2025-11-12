@@ -145,3 +145,4 @@ Final Fantasy, 3/6/FIN, FIN
 Alchemy: Innistrad, 3/6/ISD, YMID
 Edge of Eternities, 3/6/EOE, EOE
 Marvel's Spider-Man, 3/6/SPM, SPM
+Avatar: The Last Airbender, 3/6/TLA, TLA

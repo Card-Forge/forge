@@ -2,8 +2,26 @@ import argparse
 import json
 import requests
 
+def manualRankings(edition='TLA'):
+    with open(edition + '.json', 'r') as f:
+        cardlist = json.load(f)
+        # remove duplicates
+        unique_cards = dict()
+        for card in cardlist:
+            if card['name'] not in unique_cards:
+                unique_cards[card['name']] = card
 
-def draftsimRankings(edition='SPM', extra=None):
+        cardlist = list(unique_cards.values())
+        cardlist.sort(key=lambda k:k['myrating'], reverse=True)
+        with open("../res/draft/rankings/" + edition.lower() + '.rnk', 'w') as out:
+            out.write('//Rank|Name|Rarity|Set\n')
+            for counter, card in enumerate(cardlist):
+                l = [str(counter+1), card['name'].replace('_', ' '), card['rarity'], edition]
+                out.write('#')
+                out.write('|'.join(l))
+                out.write('\n')
+
+def draftsimRankings(edition='TLA', extra=None):
 	edition = edition.upper()
 	url1 = 'https://draftsim.com/generated/%s/' % (edition)
 	url2 = '%s' % edition
@@ -76,11 +94,14 @@ def idToNameLoops(name, code=None):
 
 
 if __name__ == "__main__":
-	parser = argparse.ArgumentParser(description='Edition File Generator')
+    parser = argparse.ArgumentParser(description='Edition File Generator')
 
-	parser.add_argument('-c', action='store', dest='setcode', help='Required setcode', required=True)
-	parser.add_argument('-x', action='store', dest='altpage', help='Additional rankings page', required=False)
-
-	result = parser.parse_args()
-
-	draftsimRankings(result.setcode, result.altpage)
+    parser.add_argument('-c', action='store', dest='setcode', help='Required setcode', required=True)
+    parser.add_argument('-x', action='store', dest='altpage', help='Additional rankings page', required=False)
+    parser.add_argument('-m', action='store_true', dest='manual', help='Additional rankings page', required=False)
+    result = parser.parse_args()
+    manual = result.manual is not None
+    if manual:
+        manualRankings(result.setcode)
+    else:
+        draftsimRankings(result.setcode, result.altpage)

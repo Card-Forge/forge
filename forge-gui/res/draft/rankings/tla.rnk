@@ -1,0 +1,348 @@
+//Rank|Name|Rarity|Set
+#1|Day of Black Sun|R|TLA
+#2|Phoenix Fleet Airship|M|TLA
+#3|The Rise of Sozin|M|TLA
+#4|Ran and Shaw|R|TLA
+#5|Azula, Cunning Usurper|R|TLA
+#6|Sokka, Tenacious Tactician|R|TLA
+#7|Black Sun's Zenith|M|TLE
+#8|Koma, Cosmos Serpent|M|TLE
+#9|Hakoda, Selfless Commander|R|TLA
+#10|United Front|M|TLA
+#11|Iroh, Grand Lotus|R|TLA
+#12|Agent of Treachery|M|TLE
+#13|Noxious Gearhulk|M|TLE
+#14|Appa, Steadfast Guardian|M|TLA
+#15|Avatar's Wrath|R|TLA
+#16|Suki, Courageous Rescuer|R|TLA
+#17|Wan Shi Tong, Librarian|M|TLA
+#18|The Fire Nation Drill|R|TLA
+#19|Wartime Protestors|R|TLA
+#20|The Earth King|R|TLA
+#21|Aang, at the Crossroads|R|TLA
+#22|Bumi, Unleashed|M|TLA
+#23|Iroh, Tea Master|R|TLA
+#24|Katara, Water Tribe's Hope|R|TLA
+#25|Ozai, the Phoenix King|M|TLA
+#26|Abandoned Air Temple|R|TLA
+#27|Jasmine Dragon Tea Shop|R|TLA
+#28|South Pole Voyager|R|TLA
+#29|Fire Lord Azula|R|TLA
+#30|Return of the Wildspeaker|M|TLE
+#31|The Legend of Kuruk|M|TLA
+#32|Spirit Water Revival|R|TLA
+#33|The Unagi of Kyoshi Island|R|TLA
+#34|Koh, the Face Stealer|M|TLA
+#35|Diligent Zookeeper|R|TLA
+#36|The Legend of Kyoshi|M|TLA
+#37|Aang, Swift Savior|R|TLA
+#38|Earth King's Lieutenant|R|TLA
+#39|Sandbender Scavengers|R|TLA
+#40|Toph, the First Metalbender|R|TLA
+#41|Planetarium of Wan Shi Tong|M|TLA
+#42|Mirrorwing Dragon|M|TLE
+#43|Warstorm Surge|M|TLE
+#44|Cityscape Leveler|M|TLE
+#45|Obsessive Pursuit|R|TLA
+#46|Toph, Hardheaded Teacher|R|TLA
+#47|Realm of Koh|R|TLA
+#48|Airbender Ascension|R|TLA
+#49|The Legend of Yangchen|M|TLA
+#50|Momo, Friendly Flier|R|TLA
+#51|The Mechanist, Aerial Artisan|R|TLA
+#52|Ty Lee, Chi Blocker|R|TLA
+#53|Waterbender Ascension|R|TLA
+#54|Yue, the Moon Spirit|R|TLA
+#55|Boiling Rock Rioter|R|TLA
+#56|Mai, Scornful Striker|R|TLA
+#57|Raven Eagle|R|TLA
+#58|Fated Firepower|M|TLA
+#59|The Legend of Roku|M|TLA
+#60|Badgermole Cub|M|TLA
+#61|Great Divide Guide|R|TLA
+#62|Avatar Aang|M|TLA
+#63|Beifong's Bounty Hunters|R|TLA
+#64|Fire Lord Zuko|R|TLA
+#65|Agna Qel'a|R|TLA
+#66|Ba Sing Se|R|TLA
+#67|Drannith Magistrate|M|TLE
+#68|Bribery|M|TLE
+#69|Blasphemous Act|M|TLE
+#70|Insurrection|M|TLE
+#71|Beastmaster Ascension|M|TLE
+#72|The Great Henge|M|TLE
+#73|Rhys the Redeemed|M|TLE
+#74|Treetop Village|M|TLE
+#75|Earth Kingdom Jailer|U|TLA
+#76|Water Tribe Rallier|U|TLA
+#77|Accumulate Wisdom|U|TLA
+#78|Master Pakku|U|TLA
+#79|Joo Dee, One of Many|U|TLA
+#80|June, Bounty Hunter|U|TLA
+#81|Firebending Student|R|TLA
+#82|Haru, Hidden Talent|U|TLA
+#83|Invasion Tactics|U|TLA
+#84|Leaves from the Vine|U|TLA
+#85|Ostrich-Horse|C|TLA
+#86|Bitter Work|U|TLA
+#87|Dragonfly Swarm|U|TLA
+#88|Sokka, Bold Boomeranger|R|TLA
+#89|Sokka, Lateral Strategist|U|TLA
+#90|White Lotus Reinforcements|U|TLA
+#91|Aang, the Last Airbender|U|TLA
+#92|Aang's Iceberg|R|TLA
+#93|Team Avatar|U|TLA
+#94|Crashing Wave|U|TLA
+#95|Forecasting Fortune Teller|C|TLA
+#96|Katara, Bending Prodigy|U|TLA
+#97|Knowledge Seeker|U|TLA
+#98|The Cave of Two Lovers|U|TLA
+#99|Combustion Technique|U|TLA
+#100|Iroh's Demonstration|U|TLA
+#101|The Last Agni Kai|R|TLA
+#102|Lightning Strike|C|TLA
+#103|Earth Rumble|U|TLA
+#104|Air Nomad Legacy|U|TLA
+#105|Cruel Administrator|U|TLA
+#106|Hama, the Bloodbender|U|TLA
+#107|Hei Bai, Spirit of Balance|U|TLA
+#108|Hermitic Herbalist|U|TLA
+#109|Katara, the Fearless|R|TLA
+#110|The Lion-Turtle|R|TLA
+#111|Suki, Kyoshi Warrior|U|TLA
+#112|Tolls of War|U|TLA
+#113|Lightning Bolt|M|TLE
+#114|Enter the Avatar State|U|TLA
+#115|Invasion Reinforcements|U|TLA
+#116|Master Piandao|U|TLA
+#117|Momo, Playful Pet|U|TLA
+#118|Sold Out|C|TLA
+#119|Swampsnare Trap|C|TLA
+#120|Fire Nation Attacks|U|TLA
+#121|Firebender Ascension|R|TLA
+#122|Allies at Last|U|TLA
+#123|Earth Kingdom General|U|TLA
+#124|Earthbender Ascension|R|TLA
+#125|Rocky Rebuke|C|TLA
+#126|Toph, the Blind Bandit|U|TLA
+#127|True Ancestry|U|TLA
+#128|Guru Pathik|U|TLA
+#129|Jet, Freedom Fighter|U|TLA
+#130|Long Feng, Grand Secretariat|U|TLA
+#131|Messenger Hawk|C|TLA
+#132|Sun Warriors|U|TLA
+#133|Uncle Iroh|U|TLA
+#134|Vindictive Warden|C|TLA
+#135|Zhao, Ruthless Admiral|U|TLA
+#136|Lita, Mechanical Engineer|M|TLE
+#137|Release to Memory|M|TLE
+#138|Searing Blood|M|TLE
+#139|Elemental Bond|M|TLE
+#140|Appa, Loyal Sky Bison|U|TLA
+#141|Earth Kingdom Protectors|U|TLA
+#142|Glider Staff|U|TLA
+#143|Path to Redemption|C|TLA
+#144|Southern Air Temple|U|TLA
+#145|Vengeful Villagers|U|TLA
+#146|Benevolent River Spirit|U|TLA
+#147|Boomerang Basics|U|TLA
+#148|Invasion Submersible|U|TLA
+#149|Lost Days|C|TLA
+#150|Octopus Form|C|TLA
+#151|The Spirit Oasis|U|TLA
+#152|Azula, On the Hunt|U|TLA
+#153|Buzzard-Wasp Colony|U|TLA
+#154|Epic Downfall|U|TLA
+#155|Heartless Act|U|TLA
+#156|Lo and Li, Twin Tutors|U|TLA
+#157|Combustion Man|U|TLA
+#158|Crescent Island Temple|U|TLA
+#159|Fire Sages|U|TLA
+#160|Firebending Lesson|C|TLA
+#161|Jeong Jeong, the Deserter|U|TLA
+#162|Mai, Jaded Edge|U|TLA
+#163|Zhao, the Moon Slayer|R|TLA
+#164|Avatar Destiny|R|TLA
+#165|Bumi, King of Three Trials|U|TLA
+#166|Earthen Ally|R|TLA
+#167|Flopsie, Bumi's Buddy|U|TLA
+#168|Unlucky Cabbage Merchant|U|TLA
+#169|Dai Li Agents|U|TLA
+#170|Foggy Swamp Spirit Keeper|U|TLA
+#171|Three Dreams|M|TLE
+#172|Sakashima of a Thousand Faces|M|TLE
+#173|Standstill|M|TLE
+#174|Heroic Intervention|M|TLE
+#175|Captain Sisay|M|TLE
+#176|Join the Dance|M|TLE
+#177|Aang's Journey|C|TLA
+#178|Avatar Enthusiasts|C|TLA
+#179|Gather the White Lotus|U|TLA
+#180|Ember Island Production|U|TLA
+#181|Honest Work|U|TLA
+#182|Serpent of the Pass|U|TLA
+#183|Teo, Spirited Glider|U|TLA
+#184|Waterbending Scroll|U|TLA
+#185|Watery Grasp|C|TLA
+#186|Callous Inspector|C|TLA
+#187|Cat-Gator|U|TLA
+#188|Corrupt Court Official|C|TLA
+#189|Fire Nation Engineer|U|TLA
+#190|Fire Navy Trebuchet|U|TLA
+#191|Tundra Tank|U|TLA
+#192|Wolfbat|U|TLA
+#193|Zuko's Conviction|U|TLA
+#194|Twin Blades|U|TLA
+#195|Ty Lee, Artful Acrobat|U|TLA
+#196|War Balloon|U|TLA
+#197|Zuko, Exiled Prince|U|TLA
+#198|The Boulder, Ready to Rumble|U|TLA
+#199|Origin of Metalbending|C|TLA
+#200|Fire Nation Warship|U|TLA
+#201|Meteor Sword|U|TLA
+#202|Fervor|M|TLE
+#203|Meteorite|M|TLE
+#204|Zuko's Exile|C|TLA
+#205|Airbender's Reversal|U|TLA
+#206|Airbending Lesson|C|TLA
+#207|Compassionate Healer|C|TLA
+#208|Fancy Footwork|U|TLA
+#209|Glider Kids|C|TLA
+#210|Jeong Jeong's Deserters|C|TLA
+#211|Kyoshi Warriors|C|TLA
+#212|Rabaroo Troop|C|TLA
+#213|Sandbenders' Storm|C|TLA
+#214|Water Tribe Captain|C|TLA
+#215|Yip Yip!|C|TLA
+#216|First-Time Flyer|C|TLA
+#217|Giant Koi|C|TLA
+#218|Gran-Gran|U|TLA
+#219|Iguana Parrot|C|TLA
+#220|Otter-Penguin|C|TLA
+#221|Rowdy Snowballers|C|TLA
+#222|Waterbending Lesson|C|TLA
+#223|Canyon Crawler|C|TLA
+#224|Deadly Precision|C|TLA
+#225|Pirate Peddlers|C|TLA
+#226|Bumi Bash|C|TLA
+#227|Cunning Maneuver|C|TLA
+#228|Fire Nation Raider|C|TLA
+#229|Mongoose Lizard|C|TLA
+#230|Treetop Freedom Fighters|C|TLA
+#231|Yuyan Archers|C|TLA
+#232|Badgermole|C|TLA
+#233|Foggy Swamp Vinebender|C|TLA
+#234|Pillar Launch|C|TLA
+#235|Raucous Audience|C|TLA
+#236|Rebellious Captives|C|TLA
+#237|Rockalanche|U|TLA
+#238|Saber-Tooth Moose-Lion|C|TLA
+#239|Cat-Owl|C|TLA
+#240|Earth Kingdom Soldier|C|TLA
+#241|Platypus-Bear|C|TLA
+#242|Pretending Poxbearers|C|TLA
+#243|Professor Zei, Anthropologist|U|TLA
+#244|Wandering Musicians|C|TLA
+#245|Kyoshi Battle Fan|C|TLA
+#246|Airship Engine Room|C|TLA
+#247|Boiling Rock Prison|C|TLA
+#248|Foggy Bottom Swamp|C|TLA
+#249|Kyoshi Village|C|TLA
+#250|Meditation Pools|C|TLA
+#251|Misty Palms Oasis|C|TLA
+#252|North Pole Gates|C|TLA
+#253|Omashu City|C|TLA
+#254|Serpent's Pass|C|TLA
+#255|Sun-Blessed Peak|C|TLA
+#256|White Lotus Hideout|U|TLA
+#257|Imprisoned in the Moon|M|TLE
+#258|Visions of Beyond|M|TLE
+#259|Fabled Passage|M|TLE
+#260|Energybending|U|TLA
+#261|Curious Farm Animals|C|TLA
+#262|Razor Rings|C|TLA
+#263|Flexible Waterbender|C|TLA
+#264|Geyser Leaper|C|TLA
+#265|It'll Quench Ya!|C|TLA
+#266|North Pole Patrol|U|TLA
+#267|Sokka's Haiku|U|TLA
+#268|Azula Always Lies|C|TLA
+#269|Beetle-Headed Merchants|C|TLA
+#270|Dai Li Indoctrination|C|TLA
+#271|Fatal Fissure|U|TLA
+#272|Foggy Swamp Hunters|C|TLA
+#273|Hog-Monkey|C|TLA
+#274|Merchant of Many Hats|C|TLA
+#275|Ozai's Cruelty|U|TLA
+#276|Boar-q-pine|C|TLA
+#277|Deserter's Disciple|C|TLA
+#278|Fire Nation Cadets|C|TLA
+#279|How to Start a Riot|C|TLA
+#280|Jet's Brainwashing|U|TLA
+#281|Price of Freedom|U|TLA
+#282|Rough Rhino Cavalry|C|TLA
+#283|Cycle of Renewal|C|TLA
+#284|Earthbending Lesson|C|TLA
+#285|Kyoshi Island Plaza|U|TLA
+#286|Seismic Sense|U|TLA
+#287|Shared Roots|U|TLA
+#288|Sparring Dummy|U|TLA
+#289|Turtle-Duck|C|TLA
+#290|Walltop Sentries|C|TLA
+#291|Abandon Attachments|C|TLA
+#292|Earth Rumble Wrestlers|C|TLA
+#293|Earth Village Ruffians|C|TLA
+#294|Barrels of Blasting Jelly|C|TLA
+#295|Bender's Waterskin|C|TLA
+#296|Fire Nation Palace|R|TLA
+#297|Rumble Arena|C|TLA
+#298|Secret Tunnel|R|TLA
+#299|Clone|M|TLE
+#300|Dockside Extortionist|M|TLE
+#301|Ruinous Waterbending|U|TLA
+#302|Tiger-Dillo|U|TLA
+#303|Northern Air Temple|U|TLA
+#304|Zuko, Conflicted|R|TLA
+#305|Trusty Boomerang|U|TLA
+#306|The Walls of Ba Sing Se|M|TLA
+#307|Brought Back|M|TLE
+#308|Force of Negation|M|TLE
+#309|Humble Defector|M|TLE
+#310|Rending Volley|M|TLE
+#311|Eladamri's Call|M|TLE
+#312|Sunbaked Canyon|M|TLE
+#313|Valakut, the Molten Pinnacle|M|TLE
+#314|Clone Legion|M|TLE
+#315|Destined Confrontation|U|TLA
+#316|Tiger-Seal|R|TLA
+#317|Solstice Revelations|U|TLA
+#318|Elemental Teachings|R|TLA
+#319|Scout's Warning|M|TLE
+#320|Teferi's Protection|M|TLE
+#321|Prosperity|M|TLE
+#322|Diaochan, Artful Beauty|M|TLE
+#323|Shattering Spree|M|TLE
+#324|Volcanic Torrent|M|TLE
+#325|Taunting Challenge|M|TLE
+#326|Fevered Visions|M|TLE
+#327|Secret of Bloodbending|M|TLA
+#328|Foggy Swamp Visions|R|TLA
+#329|Redirect Lightning|R|TLA
+#330|Sozin's Comet|M|TLA
+#331|White Lotus Tile|M|TLA
+#332|Empty City Ruse|M|TLE
+#333|Mystic Remora|M|TLE
+#334|Training Grounds|M|TLE
+#335|Bloodchief Ascension|M|TLE
+#336|Cruel Tutor|M|TLE
+#337|Heartbeat of Spring|M|TLE
+#338|Rites of Flourishing|M|TLE
+#339|Sundial of the Infinite|M|TLE
+#340|Dark Depths|M|TLE
+#341|Tarnished Citadel|M|TLE
+#342|Intruder Alarm|M|TLE
+#343|Plains|C|TLA
+#344|Island|C|TLA
+#345|Swamp|C|TLA
+#346|Mountain|C|TLA
+#347|Forest|C|TLA
