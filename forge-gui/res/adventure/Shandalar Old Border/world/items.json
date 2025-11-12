@@ -1343,7 +1343,7 @@
   },
   {
     "name": "Helm of Obedience",
-    "equipmentSlot": "Head",
+    "equipmentSlot": "Neck",
     "iconName": "MoxJet",
     "effect": {
       "lifeModifier": -1,
