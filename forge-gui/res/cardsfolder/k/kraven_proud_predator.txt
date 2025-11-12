@@ -1,4 +1,5 @@
 Name:Kraven, Proud Predator
+Variant:UniversesWithin:FlavorName:Dreadfang, Loathed by Fans
 ManaCost:1 R G
 Types:Legendary Creature Human Warrior Villain
 PT:*/4

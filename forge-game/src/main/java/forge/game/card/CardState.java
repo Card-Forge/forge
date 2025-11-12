@@ -63,6 +63,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     private ColorSet color = ColorSet.C;
     private String oracleText = "";
     private String functionalVariantName = null;
+    private String flavorName = null;
     private int basePower = 0;
     private int baseToughness = 0;
     private String basePowerString = null;
@@ -78,6 +79,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     private FCollection<StaticAbility> staticAbilities = new FCollection<>();
     private String imageKey = "";
     private Map<String, String> sVars = Maps.newTreeMap();
+    private Map<String, SpellAbility> abilityForTrigger = Maps.newHashMap();
 
     private KeywordCollection cachedKeywords = new KeywordCollection();
 
@@ -221,6 +223,15 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         view.setFunctionalVariantName(functionalVariantName);
     }
 
+    public String getFlavorName() {
+        return flavorName;
+    }
+
+    public void setFlavorName(String flavorName) {
+        this.flavorName = flavorName;
+        view.updateName(this);
+    }
+
     public final int getBasePower() {
         return basePower;
     }
@@ -297,6 +308,9 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         return intrinsicKeywords.getValues();
     }
     public final boolean hasIntrinsicKeyword(String k) {
+        return intrinsicKeywords.contains(k);
+    }
+    public final boolean hasIntrinsicKeyword(Keyword k) {
         return intrinsicKeywords.contains(k);
     }
     public final void setIntrinsicKeywords(final Iterable<KeywordInterface> intrinsicKeyword0, final boolean lki) {
@@ -516,7 +530,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             if (hasSVar("AttachAIValid")) { // TODO combine with AttachAITgts
                 extra += " | AIValid$ " + getSVar("AttachAIValid");
             }
-            String st = "SP$ Attach | ValidTgts$ Card.CanBeEnchantedBy,Player.CanBeEnchantedBy | TgtZone$ Battlefield,Graveyard | TgtPrompt$ Select target " + desc + extra;
+            String st = "SP$ Attach | ValidTgts$ Card.CanBeEnchantedBy,Player.CanBeEnchantedBy | TgtZone$ Battlefield,Graveyard | ValidTgtsDesc$ " + desc + extra;
             auraAbility = AbilityFactory.getAbility(st, this);
             auraAbility.setIntrinsic(true);
         }
@@ -716,7 +730,13 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         setBaseLoyalty(source.getBaseLoyalty());
         setBaseDefense(source.getBaseDefense());
         setAttractionLights(source.getAttractionLights());
+        setFlavorName(source.getFlavorName());
         setSVars(source.getSVars());
+
+        abilityForTrigger.clear();
+        for (Map.Entry<String, SpellAbility> e : source.abilityForTrigger.entrySet()) {
+            abilityForTrigger.put(e.getKey(), e.getValue().copy(card, lki));
+        }
 
         abilities.clear();
         for (SpellAbility sa : source.abilities) {
@@ -744,7 +764,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
                 continue;
             }
             if (tr.isIntrinsic()) {
-                triggers.add(tr.copy(card, lki));
+                triggers.add(tr.copy(card, lki, false, tr.hasParam("Execute") ? abilityForTrigger.get(tr.getParam("Execute")) : null));
             }
         }
         ReplacementEffect runRE = null;
@@ -830,8 +850,17 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     }
 
     public CardState copy(final Card host, CardStateName name, final boolean lki) {
+        return copy(host, name, lki, null);
+    }
+    public CardState copy(final Card host, final CardTraitBase ctb) {
+        return copy(host, this.getStateName(), false, ctb);
+    }
+    public CardState copy(final Card host, CardStateName name, final CardTraitBase ctb) {
+        return copy(host, name, false, ctb);
+    }
+    public CardState copy(final Card host, CardStateName name, final boolean lki, final CardTraitBase ctb) {
         CardState result = new CardState(host, name);
-        result.copyFrom(this, lki);
+        result.copyFrom(this, lki, ctb);
         return result;
     }
 
@@ -928,11 +957,16 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         return cloakUp;
     }
 
+    public SpellAbility getAbilityForTrigger(String svar) {
+        return abilityForTrigger.computeIfAbsent(svar, s -> AbilityFactory.getAbility(getCard(), s, this));
+    }
+
     @Override
     public String getTranslationKey() {
+        String displayName = flavorName == null ? name : flavorName;
         if(StringUtils.isNotEmpty(functionalVariantName))
-            return name + " $" + functionalVariantName;
-        return name;
+            return displayName + " $" + functionalVariantName;
+        return displayName;
     }
 
     @Override

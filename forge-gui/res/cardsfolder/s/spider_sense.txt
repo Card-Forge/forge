@@ -1,4 +1,5 @@
 Name:Spider-Sense
+Variant:UniversesWithin:FlavorName:Detect Intrusion
 ManaCost:1 U
 Types:Instant
 K:Web-slinging:U

@@ -1,0 +1,8 @@
+Name:Master's Guidance
+ManaCost:2 G
+Types:Enchantment
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.Legendary | ValidAttackersAmount$ GE2 | TriggerZones$ Battlefield | AttackingPlayer$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you attack with two or more legendary creatures, put a +1/+1 counter on each of up to two target attacking creatures.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.attacking | TgtPrompt$ Select up to two target attacking creatures
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl+powerGE4 | PresentCompare$ GE1 | TriggerDescription$ At the beginning of your end step, if you control a creature with power 4 or greater, draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:Whenever you attack with two or more legendary creatures, put a +1/+1 counter on each of up to two target attacking creatures.\nAt the beginning of your end step, if you control a creature with power 4 or greater, draw a card.

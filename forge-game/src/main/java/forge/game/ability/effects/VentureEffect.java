@@ -27,7 +27,7 @@ import forge.item.PaperCardPredicates;
 import forge.util.Localizer;
 import forge.util.PredicateString.StringOp;
 
-public class VentureEffect  extends SpellAbilityEffect {
+public class VentureEffect extends SpellAbilityEffect {
 
     private Card getDungeonCard(SpellAbility sa, Player player, Map<AbilityKey, Object> moveParams) {
         final Game game = player.getGame();
@@ -44,7 +44,7 @@ public class VentureEffect  extends SpellAbilityEffect {
             }
         }
 
-        List<PaperCard> dungeonCards = null;
+        List<PaperCard> dungeonCards;
         if (sa.hasParam("Dungeon")) {
             String dungeonType = sa.getParam("Dungeon");
             Predicate<CardRules> rulesPredicate = CardRulesPredicates.IS_DUNGEON.and(CardRulesPredicates.subType(StringOp.EQUALS, dungeonType));

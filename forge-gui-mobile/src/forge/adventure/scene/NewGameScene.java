@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
+
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.data.DialogData;
@@ -34,6 +35,7 @@ import java.util.Random;
  * NewGame scene that contains the character creation
  */
 public class NewGameScene extends MenuScene {
+
     TextField selectedName;
     ColorSet[] colorIds;
     CardEdition[] editionIds;
@@ -97,6 +99,11 @@ public class NewGameScene extends MenuScene {
                 AdventureModes.Pile.setSelectionName(colorIdLabel);
                 AdventureModes.Pile.setModes(colorNames);
             }
+            if (diff.commanderDecks != null) {
+                modes.add(AdventureModes.Commander);
+                AdventureModes.Commander.setSelectionName(colorIdLabel);
+                AdventureModes.Commander.setModes(colorNames);
+            }
             break;
         }
 
@@ -122,6 +129,12 @@ public class NewGameScene extends MenuScene {
             AdventureModes.Custom.setSelectionName("[BLACK]" + Forge.getLocalizer().getMessage("lblDeck") + ":");
             AdventureModes.Custom.setModes(custom);
         }
+
+        // Commander game mode in selection screen
+        modes.add(AdventureModes.Commander);
+        AdventureModes.Commander.setSelectionName(colorIdLabel);
+        AdventureModes.Commander.setModes(colorNames);
+
         String[] modeNames = new String[modes.size];
         int constructedIndex = -1;
 
@@ -204,6 +217,9 @@ public class NewGameScene extends MenuScene {
             }
         });
     }
+
+    // class field
+    private RewardActor previewActor;
 
     private static NewGameScene object;
 
@@ -302,7 +318,6 @@ public class NewGameScene extends MenuScene {
     @Override
     public void enter() {
         updateAvatar();
-
         if (Forge.createNewAdventureMap) {
             FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC, false);
             WorldSave.generateNewWorld(selectedName.getText(),
@@ -450,6 +465,9 @@ public class NewGameScene extends MenuScene {
                 break;
             case Custom:
                 summaryText.append("Mode: Custom\n\nChoose your own preconstructed deck. Enemies can receive a random genetic AI deck (difficult).\n\nWarning: This will make encounter difficulty vary wildly from the developers' intent");
+                break;
+            case Commander:
+                summaryText.append("Mode: Commander\n\nYou will be given a preconstructed commander deck based on the chosen color theme to start the playthrough.\n\nGood luck on your quest of creating a coherent deck that can win consistently and defeat the bosses.");
                 break;
             default:
                 summaryText.append("No summary available for your this game mode.");

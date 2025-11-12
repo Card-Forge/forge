@@ -1,0 +1,10 @@
+Name:Katara, Water Tribe's Hope
+ManaCost:2 W U U
+Types:Legendary Creature Human Warrior Ally 
+PT:3/3
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, create a 1/1 white Ally creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_ally | TokenOwner$ You
+A:AB$ AnimateAll | Cost$ Waterbend<X> XMin1 | ValidCards$ Creature.YouCtrl | PlayerTurn$ True | Power$ X | Toughness$ X | SpellDescription$ Creatures you control have base power and toughness X/X until end of turn. X can't be 0. Activate only during your turn.
+SVar:X:Count$xPaid
+Oracle:Vigilance\nWhen Katara enters, create a 1/1 white Ally creature token.\nWaterbend {X}: Creatures you control have base power and toughness X/X until end of turn. X can't be 0. Activate only during your turn. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)

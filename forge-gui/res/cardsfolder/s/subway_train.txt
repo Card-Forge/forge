@@ -1,4 +1,5 @@
 Name:Subway Train
+Variant:UniversesWithin:FlavorName:Vinewoven Chariot
 ManaCost:2
 Types:Artifact Vehicle
 PT:3/1

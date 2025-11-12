@@ -1,4 +1,5 @@
 Name:Spider-Gwen, Free Spirit
+Variant:UniversesWithin:FlavorName:Wardens of Silverweb Summit
 ManaCost:2 R
 Types:Legendary Creature Spider Human Hero
 PT:2/3

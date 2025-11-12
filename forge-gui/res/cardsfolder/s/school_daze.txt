@@ -1,4 +1,5 @@
 Name:School Daze
+Variant:UniversesWithin:FlavorName:Outsmart the Amateur
 ManaCost:3 U U
 Types:Instant
 A:SP$ Charm | Choices$ DBDoHomework,DBFightCrime | CharmNum$ 1

@@ -1,4 +1,5 @@
 Name:Maximum Carnage
+Variant:UniversesWithin:FlavorName:Lavabrink Repels the Magmaloth
 ManaCost:4 R
 Types:Enchantment Saga
 K:Chapter:3:DBEffect,DBMana,DBDamage

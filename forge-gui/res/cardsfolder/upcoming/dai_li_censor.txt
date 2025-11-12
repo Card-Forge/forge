@@ -1,0 +1,6 @@
+Name:Dai Li Censor
+ManaCost:1 B
+Types:Creature Human Soldier Advisor
+PT:2/1
+A:AB$ Pump | Cost$ 1 Sac<1/Creature.Other/another creature> | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 1 | SpellDescription$ This creature gets +2/+2 until end of turn. Activate only once each turn.
+Oracle:{1}, Sacrifice another creature: This creature gets +2/+2 until end of turn. Activate only once each turn.

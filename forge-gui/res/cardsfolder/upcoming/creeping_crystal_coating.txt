@@ -1,0 +1,12 @@
+Name:Creeping Crystal Coating
+ManaCost:2 G
+Types:Enchantment Aura
+K:Flash
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddToughness$ 3 | AddTrigger$ TrigAttack | AddSVar$ CCCToken & HasAttackEffect | Description$ Enchanted creature gets +0/+3 and has "Whenever this creature attacks, create a Food token." (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
+SVar:TrigAttack:Mode$ Attacks | ValidCard$ Card.Self | Execute$ CCCToken | TriggerDescription$ Whenever this creature attacks, create a Food token.
+SVar:CCCToken:DB$ Token | TokenScript$ c_a_food_sac
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token|Sacrifice|LifeGain|Food
+Oracle:Flash\nEnchant creature\nEnchanted creature gets +0/+3 and has "Whenever this creature attacks, create a Food token." (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")

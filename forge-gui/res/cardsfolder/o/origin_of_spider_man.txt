@@ -1,4 +1,5 @@
 Name:Origin of Spider-Man
+Variant:UniversesWithin:FlavorName:A Most Helpful Weaver
 ManaCost:1 W
 Types:Enchantment Saga
 K:Chapter:3:DBToken,DBPutCounter,DBPump

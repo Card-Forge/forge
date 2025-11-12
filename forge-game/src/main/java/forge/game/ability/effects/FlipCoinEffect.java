@@ -206,7 +206,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         } else {
             // no reason to ask if result is fixed anyway
             if (!noCall) {
-                choice = flipper.getController().chooseBinary(sa, sa.getHostCard().getName() + " - " + Localizer.getInstance().getMessage("lblCallCoinFlip") + info, PlayerController.BinaryChoiceType.HeadsOrTails);
+                choice = flipper.getController().chooseBinary(sa, sa.getHostCard().getDisplayName() + " - " + Localizer.getInstance().getMessage("lblCallCoinFlip") + info, PlayerController.BinaryChoiceType.HeadsOrTails);
             }
 
             for (int i = 0; i < multiplier; i++) {

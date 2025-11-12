@@ -139,9 +139,9 @@ public class PlayerControllerAi extends PlayerController {
             }
         }
 
-        boolean sbLimitedFormats = getAi().getBooleanProperty(AiProps.SIDEBOARDING_IN_LIMITED_FORMATS);
-        boolean sbSharedTypesOnly = getAi().getBooleanProperty(AiProps.SIDEBOARDING_SHARED_TYPE_ONLY);
-        boolean sbPlaneswalkerException = getAi().getBooleanProperty(AiProps.SIDEBOARDING_PLANESWALKER_EQ_CREATURE);
+        boolean sbLimitedFormats = getAi().getBoolProperty(AiProps.SIDEBOARDING_IN_LIMITED_FORMATS);
+        boolean sbSharedTypesOnly = getAi().getBoolProperty(AiProps.SIDEBOARDING_SHARED_TYPE_ONLY);
+        boolean sbPlaneswalkerException = getAi().getBoolProperty(AiProps.SIDEBOARDING_PLANESWALKER_EQ_CREATURE);
         int sbChanceOnWin = getAi().getIntProperty(AiProps.SIDEBOARDING_CHANCE_ON_WIN);
         int sbChancePerCard = getAi().getIntProperty(AiProps.SIDEBOARDING_CHANCE_PER_CARD);
 
@@ -1376,7 +1376,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public CardCollectionView cheatShuffle(CardCollectionView list) {
-        return brains.getBooleanProperty(AiProps.CHEAT_WITH_MANA_ON_SHUFFLE) ? brains.cheatShuffle(list) : list;
+        return brains.getBoolProperty(AiProps.CHEAT_WITH_MANA_ON_SHUFFLE) ? brains.cheatShuffle(list) : list;
     }
 
     @Override
@@ -1386,7 +1386,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Map<Card, ManaCostShard> chooseCardsForConvokeOrImprovise(SpellAbility sa, ManaCost manaCost, CardCollectionView untappedCards, boolean improvise) {
+    public Map<Card, ManaCostShard> chooseCardsForConvokeOrImprovise(SpellAbility sa, ManaCost manaCost, CardCollectionView untappedCards, boolean artifacts, boolean creatures, Integer maxReduction) {
         final Player ai = sa.getActivatingPlayer();
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
         //Filter out mana sources that will interfere with payManaCost()
@@ -1394,9 +1394,10 @@ public class PlayerControllerAi extends PlayerController {
 
         // Filter out creatures if AI hasn't attacked yet
         if (ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-            if (improvise) {
+            if (!creatures) {
                 untapped = CardLists.filter(untapped, c -> !c.isCreature());
             } else {
+                // TODO AI needs to learn how to use Convoke or Waterbend
                 return new HashMap<>();
             }
         }
@@ -1410,13 +1411,16 @@ public class PlayerControllerAi extends PlayerController {
             if (!ai.getGame().getStack().isEmpty()) {
                 final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), null);
                 for (Card c : blockers) {
-                    if (objects.contains(c) && (!improvise || c.isArtifact())) {
+                    if (objects.contains(c) && (creatures || c.isArtifact())) {
                         untapped.add(c);
+                    }
+                    if (maxReduction != null && untapped.size() >= maxReduction) {
+                        break;
                     }
                 }
             }
         }
-        return ComputerUtilMana.getConvokeOrImproviseFromList(manaCost, untapped, improvise);
+        return ComputerUtilMana.getConvokeOrImproviseFromList(manaCost, untapped, artifacts, creatures);
     }
 
     @Override
@@ -1548,12 +1552,10 @@ public class PlayerControllerAi extends PlayerController {
         }
 
         // Don't choose Tomb of Annihilation when life in danger unless we can win right away or can't lose for 0 life
-        if (ai.getController().isAI()) { // FIXME: is this needed? Can simulation ever run this for a non-AI player?
-            int lifeInDanger = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD));
-            if ((ai.getLife() <= lifeInDanger && !ai.cantLoseForZeroOrLessLife())
-                    && !(ai.getLife() > 1 && ai.getWeakestOpponent().getLife() == 1)) {
-                dungeonNames.remove("Tomb of Annihilation");
-            }
+        int lifeInDanger = AiProfileUtil.getIntProperty(player, AiProps.AI_IN_DANGER_THRESHOLD);
+        if ((ai.getLife() <= lifeInDanger && !ai.cantLoseForZeroOrLessLife())
+                && !(ai.getLife() > 1 && ai.getWeakestOpponent().getLife() == 1)) {
+            dungeonNames.remove("Tomb of Annihilation");
         }
 
         try {

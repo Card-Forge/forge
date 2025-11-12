@@ -234,6 +234,7 @@ Pilot:Pilots
 Pincher:Pinchers
 Pirate:Pirates
 Plant:Plants
+Platypus:Platypuses
 Porcupine:Porcupines
 Possum:Possums
 Praetor:Praetors

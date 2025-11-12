@@ -487,14 +487,14 @@ public class ComputerUtilMana {
         String originalProduced = manaProduced.toString();
 
         if (originalProduced.isEmpty()) {
-            return manaProduced.toString();
+            return originalProduced;
         }
 
         // Run triggers like Nissa
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(hostCard);
         runParams.put(AbilityKey.Activator, ai); // assuming AI would only ever gives itself mana
         runParams.put(AbilityKey.AbilityMana, saPayment);
-        runParams.put(AbilityKey.Produced, manaProduced.toString());
+        runParams.put(AbilityKey.Produced, originalProduced);
         for (Trigger tr : ai.getGame().getTriggerHandler().getActiveTrigger(TriggerType.TapsForMana, runParams)) {
             SpellAbility trSA = tr.ensureAbility();
             if (trSA == null) {
@@ -1292,11 +1292,11 @@ public class ComputerUtilMana {
      * @return ManaCost
      */
     public static ManaCostBeingPaid calculateManaCost(final Cost cost, final SpellAbility sa, final boolean test, final int extraMana, final boolean effect) {
-        Card card = sa.getHostCard();
+        Card host = sa.getHostCard();
         Zone castFromBackup = null;
-        if (test && sa.isSpell() && !card.isInZone(ZoneType.Stack)) {
-            castFromBackup = card.getCastFrom();
-            card.setCastFrom(card.getZone() != null ? card.getZone() : null);
+        if (test && sa.isSpell() && !host.isInZone(ZoneType.Stack)) {
+            castFromBackup = host.getCastFrom();
+            host.setCastFrom(host.getZone() != null ? host.getZone() : null);
         }
 
         Cost payCosts;
@@ -1319,7 +1319,7 @@ public class ComputerUtilMana {
                 final int multiplicator = Math.max(xCounter, 1);
                 manaToAdd = extraMana * multiplicator;
             } else {
-                manaToAdd = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("XAlternative", "X"), sa) * xCounter;
+                manaToAdd = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("XAlternative", "X"), sa) * xCounter;
             }
 
             if (manaToAdd < 1 && payCosts != null && payCosts.getCostMana().getXMin() > 0) {
@@ -1331,7 +1331,7 @@ public class ComputerUtilMana {
             if (xColor == null) {
                 xColor = "1";
             }
-            if (card.hasKeyword("Spend only colored mana on X. No more than one mana of each color may be spent this way.")) {
+            if (host.hasKeyword("Spend only colored mana on X. No more than one mana of each color may be spent this way.")) {
                 xColor = "WUBRGX";
             }
             if (xCounter > 0) {
@@ -1345,9 +1345,7 @@ public class ComputerUtilMana {
             }
         }
 
-        if (!effect) {
-            CostAdjustment.adjust(manaCost, sa, null, test);
-        }
+        CostAdjustment.adjust(manaCost, sa, null, test, effect);
 
         if ("NumTimes".equals(sa.getParam("Announce"))) { // e.g. the Adversary cycle
             ManaCost mkCost = sa.getPayCosts().getTotalMana();
@@ -1356,14 +1354,14 @@ public class ComputerUtilMana {
                 mCost = ManaCost.combine(mCost, mkCost);
                 ManaCostBeingPaid mcbp = new ManaCostBeingPaid(mCost);
                 if (!canPayManaCost(mcbp, sa, sa.getActivatingPlayer(), true)) {
-                    sa.getHostCard().setSVar("NumTimes", "Number$" + i);
+                    host.setSVar("NumTimes", "Number$" + i);
                     break;
                 }
             }
         }
 
-        if (test && sa.isSpell()) {
-            sa.getHostCard().setCastFrom(castFromBackup);
+        if (test && sa.isSpell() && !host.isInZone(ZoneType.Stack)) {
+            host.setCastFrom(castFromBackup);
         }
 
         return manaCost;
@@ -1596,6 +1594,7 @@ public class ComputerUtilMana {
                 }
 
                 // don't use abilities with dangerous drawbacks
+                // TODO this has already been checked earlier
                 AbilitySub sub = m.getSubAbility();
                 if (sub != null && !SpellApiToAi.Converter.get(sub).chkDrawbackWithSubs(ai, sub).willingToPlay()) {
                     continue;
@@ -1772,15 +1771,18 @@ public class ComputerUtilMana {
 
     /**
      * Matches list of creatures to shards in mana cost for convoking.
-     * @param cost cost of convoked ability
-     * @param list creatures to be evaluated
-     * @param improvise
+     *
+     * @param cost      cost of convoked ability
+     * @param list      creatures to be evaluated
+     * @param artifacts
+     * @param creatures
      * @return map between creatures and shards to convoke
      */
-    public static Map<Card, ManaCostShard> getConvokeOrImproviseFromList(final ManaCost cost, List<Card> list, boolean improvise) {
+    public static Map<Card, ManaCostShard> getConvokeOrImproviseFromList(final ManaCost cost, List<Card> list, boolean artifacts, boolean creatures) {
         final Map<Card, ManaCostShard> convoke = new HashMap<>();
         Card convoked = null;
-        if (!improvise) {
+        if (creatures && !artifacts) {
+            // Run for convoke but not improvise or waterbending
             for (ManaCostShard toPay : cost) {
                 if (toPay.isSnow() || toPay.isColorless()) {
                     continue;

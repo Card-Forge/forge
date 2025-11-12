@@ -120,7 +120,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             sb.append(TextUtil.concatNoSpace("\n(", String.valueOf(maxTargets - targeted), " more can be targeted)"));
         }
 
-        String name = CardTranslation.getTranslatedName(sa.getHostCard().getName());
+        String name = sa.getHostCard().getTranslatedName();
         String message = TextUtil.fastReplace(TextUtil.fastReplace(sb.toString(),
                 "CARDNAME", name), "(Targeting ERROR)", "");
         message = TextUtil.fastReplace(message, "NICKNAME", Lang.getInstance().getNickName(name));
@@ -297,7 +297,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         }
 
         if (!choices.contains(card)) {
-            showMessage(sa.getHostCard() + " - The selected card is not a valid choice to be targeted.");
+            showMessage(sa.getHostCard() + " - The selected card is not " + Lang.nounWithAmount(1, tgt.getValidDesc()) + ".");
             return false;
         }
 

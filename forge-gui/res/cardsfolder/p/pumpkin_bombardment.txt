@@ -1,4 +1,5 @@
 Name:Pumpkin Bombardment
+Variant:UniversesWithin:FlavorName:Knife Trick
 ManaCost:BR
 Types:Sorcery
 K:AlternateAdditionalCost:Discard<1/Card>:2

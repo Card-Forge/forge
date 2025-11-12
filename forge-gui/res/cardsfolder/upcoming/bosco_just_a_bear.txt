@@ -1,0 +1,12 @@
+Name:Bosco, Just a Bear
+ManaCost:4 G
+Types:Legendary Creature Bear
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFood | TriggerDescription$ When NICKNAME enters, create a Food token for each legendary creature you control. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
+SVar:TrigFood:DB$ Token | TokenAmount$ X | TokenScript$ c_a_food_sac | TokenOwner$ You
+A:AB$ PutCounter | Cost$ 2 G Sac<1/Food> | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPump | SpellDescription$ Put two +1/+1 counters on NICKNAME. He gains trample until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Trample
+SVar:X:Count$Valid Creature.Legendary+YouCtrl
+DeckHas:Ability$LifeGain|Token|Food
+DeckHints:Ability$Food
+Oracle:When Bosco enters, create a Food token for each legendary creature you control. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")\n{2}{G}, Sacrifice a Food: Put two +1/+1 counters on Bosco. He gains trample until end of turn.

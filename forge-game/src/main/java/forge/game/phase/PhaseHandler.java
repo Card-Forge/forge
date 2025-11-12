@@ -297,6 +297,7 @@ public class PhaseHandler implements java.io.Serializable {
                 case COMBAT_BEGIN:
                     nCombatsThisTurn++;
                     combat = new Combat(playerTurn);
+                    game.getBeginOfCombat().executeUntil(playerTurn);
                     //PhaseUtil.verifyCombat();
                     break;
 
@@ -490,6 +491,7 @@ public class PhaseHandler implements java.io.Serializable {
 
             case UNTAP:
                 game.getUntap().executeUntilEndOfPhase(playerTurn);
+                break;
 
             case COMBAT_END:
                 GameEventCombatEnded eventEndCombat = null;
@@ -755,7 +757,6 @@ public class PhaseHandler implements java.io.Serializable {
                     }
                 }
             }
-            // fire blockers declared trigger
             final Map<AbilityKey, Object> bdRunParams = AbilityKey.newMap();
             bdRunParams.put(AbilityKey.Blockers, declaredBlockers);
             bdRunParams.put(AbilityKey.Attackers, blockedAttackers);
@@ -767,7 +768,6 @@ public class PhaseHandler implements java.io.Serializable {
                 continue;
             }
 
-            // Run triggers
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Blocker, c1);
             runParams.put(AbilityKey.Attackers, combat.getAttackersBlockedBy(c1));

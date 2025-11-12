@@ -1,0 +1,12 @@
+Name:Aang's Iceberg
+ManaCost:2 W
+Types:Enchantment
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this enchantment enters, exile up to one other target nonland permanent until this enchantment leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | IsCurse$ True | ValidTgts$ Permanent.nonLand+Other | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one other target nonland permanent | Origin$ Battlefield | Destination$ Exile | Duration$ UntilHostLeavesPlay
+A:AB$Sacrifice | Cost$ Waterbend<3> | SacValid$ Self | RememberSacrificed$ True | SubAbility$ DBScry | SpellDescription$ Sacrifice this enchantment. If you do, scry 2.
+SVar:DBScry:DB$ Scry | ScryNum$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:PlayMain1:TRUE
+SVar:OblivionRing:TRUE
+Oracle:Flash\nWhen this enchantment enters, exile up to one other target nonland permanent until this enchantment leaves the battlefield.\nWaterbend {3}: Sacrifice this enchantment. If you do, scry 2. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)

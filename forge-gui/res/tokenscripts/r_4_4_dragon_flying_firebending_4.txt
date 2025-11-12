@@ -1,0 +1,8 @@
+Name:Dragon Token
+ManaCost:no cost
+Colors:red
+Types:Creature Dragon
+PT:4/4
+K:Flying
+K:Firebending:4
+Oracle:Flying\nFirebending 4 (Whenever this creature attacks, add {R}{R}{R}{R}. This mana lasts until end of combat.)

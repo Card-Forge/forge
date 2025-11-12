@@ -93,9 +93,9 @@ public class LifeExchangeVariantAi extends SpellAbilityAi {
                 if (game.getCombat().isUnblocked(source) && def.canLoseLife() && aiLife >= def.getLife() && source.getNetPower() < def.getLife()) {
                     // Unblocked Evra which can deal lethal damage
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else if (ai.getController().isAI() && aiLife > source.getNetPower() && source.hasKeyword(Keyword.LIFELINK)) {
-                    int dangerMin = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD));
-                    int dangerMax = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_MAX_THRESHOLD));
+                } else if (aiLife > source.getNetPower() && source.hasKeyword(Keyword.LIFELINK)) {
+                    int dangerMin = AiProfileUtil.getIntProperty(ai, AiProps.AI_IN_DANGER_THRESHOLD);
+                    int dangerMax = AiProfileUtil.getIntProperty(ai, AiProps.AI_IN_DANGER_MAX_THRESHOLD);
                     int dangerDiff = dangerMax - dangerMin;
                     int lifeInDanger = dangerDiff <= 0 ? dangerMin : MyRandom.getRandom().nextInt(dangerDiff) + dangerMin;
                     if (source.getNetPower() >= lifeInDanger && ai.canGainLife() && ComputerUtil.lifegainPositive(ai, source)) {

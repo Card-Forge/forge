@@ -1,4 +1,5 @@
 Name:Spider-Suit
+Variant:UniversesWithin:FlavorName:Cactarantula Saddle
 ManaCost:1
 Types:Artifact Equipment
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddType$ Spider & Hero | Description$ Equipped creature gets +2/+2 and is a Spider Hero in addition to its other types.

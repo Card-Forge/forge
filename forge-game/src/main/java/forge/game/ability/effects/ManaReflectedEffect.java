@@ -103,12 +103,10 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
                     return "0";
                 } else if (colors.size() == 1) {
                     baseMana = MagicColor.toShortString(colors.iterator().next());
+                } else if (colors.contains("colorless")) {
+                    baseMana = player.getController().chooseColorAllowColorless(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa.getHostCard(), ColorSet.fromNames(colors))).getShortName();
                 } else {
-                    if (colors.contains("colorless")) {
-                        baseMana = player.getController().chooseColorAllowColorless(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa.getHostCard(), ColorSet.fromNames(colors)).getShortName();
-                    } else {
-                        baseMana = player.getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa, ColorSet.fromNames(colors)).getShortName();
-                    }
+                    baseMana = player.getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa, ColorSet.fromNames(colors))).getShortName();
                 }
             } else {
                 colorMenu = ColorSet.fromMask(mask);
@@ -122,19 +120,16 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
 
         if (amount == 0) {
             sb.append("0");
+        } else if (StringUtils.isNumeric(baseMana)) {
+            // if baseMana is an integer(colorless), just multiply amount and baseMana
+            final int base = Integer.parseInt(baseMana);
+            sb.append(base * amount);
         } else {
-            if (StringUtils.isNumeric(baseMana)) {
-                // if baseMana is an integer(colorless), just multiply amount
-                // and baseMana
-                final int base = Integer.parseInt(baseMana);
-                sb.append(base * amount);
-            } else {
-                for (int i = 0; i < amount; i++) {
-                    if (i != 0) {
-                        sb.append(" ");
-                    }
-                    sb.append(baseMana);
+            for (int i = 0; i < amount; i++) {
+                if (i != 0) {
+                    sb.append(" ");
                 }
+                sb.append(baseMana);
             }
         }
         return sb.toString();
