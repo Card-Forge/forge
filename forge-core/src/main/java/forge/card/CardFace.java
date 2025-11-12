@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.regex.PatternSyntaxException;
 import java.util.stream.Collectors;
 
 //
@@ -188,11 +189,18 @@ final class CardFace implements ICardFace, Cloneable {
     void assignMissingFieldsToVariant(CardFace variant) {
         if(variant.oracleText == null) {
             if(variant.flavorName != null && this.oracleText != null) {
-                Lang lang = Lang.getInstance();
-                //Rudimentary name replacement. Can't do pronouns, ability words, or flavored keywords. Need to define variant text manually for that.
-                String flavoredText = this.oracleText.replaceAll("(?<=\\b|\\\\n)" + this.name + "\\b", variant.flavorName);
-                flavoredText = flavoredText.replaceAll("(?<=\\b|\\\\n)" + lang.getNickName(this.name) + "\\b", lang.getNickName(variant.flavorName));
-                variant.oracleText = flavoredText;
+                try {
+                    Lang lang = Lang.getInstance();
+                    //Rudimentary name replacement. Can't do pronouns, ability words, or flavored keywords. Need to define variant text manually for that.
+                    //Regex here checks for the name following either a word boundary or a literal "\n" string, since those haven't yet been converted to line breaks.
+                    String flavoredText = this.oracleText.replaceAll("(?<=\\b|\\\\n)" + this.name + "\\b", variant.flavorName);
+                    flavoredText = flavoredText.replaceAll("(?<=\\b|\\\\n)" + lang.getNickName(this.name) + "\\b", lang.getNickName(variant.flavorName));
+                    variant.oracleText = flavoredText;
+                }
+                catch (PatternSyntaxException ignored) {
+                    // Old versions of Android are weird about patterns sometimes. I don't *think* this is such a case but
+                    // the documentation is unreliable. May be worth removing this once we're sure it's not a problem.
+                }
             }
             else
                 variant.oracleText = this.oracleText;
