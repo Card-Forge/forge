@@ -5,10 +5,7 @@ A:AB$ Scry | Cost$ 1 T | ScryNum$ 2 | SpellDescription$ Scry 2.
 T:Mode$ Scry | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPeek | TriggerDescription$ Whenever you scry or surveil, look at the top card of your library. You may cast that card without paying its mana cost. Do this only once each turn. (Look at the card after you scry or surveil.)
 T:Mode$ Surveil | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPeek | Secondary$ True | TriggerDescription$ Whenever you scry or surveil, look at the top card of your library. You may cast that card without paying its mana cost. Do this only once each turn. (Look at the card after you scry or surveil.)
 SVar:TrigPeek:DB$ PeekAndReveal | NoReveal$ True | SubAbility$ TrigPlay
-SVar:TrigPlay:DB$ Play | Defined$ TopOfLibrary | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | RememberPlayed$ True | ConditionCheckSVar$ CastThisTurn | ConditionSVarCompare$ EQ0 | SubAbility$ IncreaseTurnCount
-SVar:IncreaseTurnCount:DB$ StoreSVar | SVar$ CastThisTurn | Type$ Number | Expression$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:TrigPlay:DB$ Play | Defined$ TopOfLibrary | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | RememberPlayed$ True | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0
+T:Mode$ TurnBegin | ValidPlayer$ Player | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-T:Mode$ TurnBegin | ValidPlayer$ Player | Execute$ ResetTurnCount | Static$ True
-SVar:ResetTurnCount:DB$ StoreSVar | SVar$ CastThisTurn | Type$ Number | Expression$ 0
-SVar:CastThisTurn:Number$0
 Oracle:{1}, {T}: Scry 2.\nWhenever you scry or surveil, look at the top card of your library. You may cast that card without paying its mana cost. Do this only once each turn. (Look at the card after you scry or surveil.)
