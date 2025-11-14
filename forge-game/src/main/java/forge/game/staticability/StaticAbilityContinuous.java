@@ -25,7 +25,6 @@ import forge.GameCommand;
 import forge.card.*;
 import forge.game.Game;
 import forge.game.StaticEffect;
-import forge.game.StaticEffects;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
@@ -93,17 +92,17 @@ public final class StaticAbilityContinuous {
         final List<Player> affectedPlayers = StaticAbilityContinuous.getAffectedPlayers(stAb);
         final Game game = hostCard.getGame();
 
-        final StaticEffects effects = game.getStaticEffects();
-        final StaticEffect se = effects.getStaticEffect(stAb);
-        se.setAffectedCards(affectedCards);
-        se.setAffectedPlayers(affectedPlayers);
-        se.setParams(params);
-        se.setTimestamp(hostCard.getLayerTimestamp());
 
         // nothing more to do
         if (stAb.hasParam("Affected") && affectedPlayers.isEmpty() && affectedCards.isEmpty()) {
             return affectedCards;
         }
+
+        final StaticEffect se = game.getStaticEffects().getStaticEffect(stAb);
+        se.setAffectedCards(affectedCards);
+        se.setAffectedPlayers(affectedPlayers);
+        se.setParams(params);
+        se.setTimestamp(stAb.getTimestamp());
 
         String addP = "";
         int powerBonus = 0;
