@@ -92,17 +92,16 @@ public final class StaticAbilityContinuous {
         final List<Player> affectedPlayers = StaticAbilityContinuous.getAffectedPlayers(stAb);
         final Game game = hostCard.getGame();
 
-
-        // nothing more to do
-        if (stAb.hasParam("Affected") && affectedPlayers.isEmpty() && affectedCards.isEmpty()) {
-            return affectedCards;
-        }
-
         final StaticEffect se = game.getStaticEffects().getStaticEffect(stAb);
         se.setAffectedCards(affectedCards);
         se.setAffectedPlayers(affectedPlayers);
         se.setParams(params);
         se.setTimestamp(stAb.getTimestamp());
+
+        // nothing more to do
+        if (stAb.hasParam("Affected") && affectedPlayers.isEmpty() && affectedCards.isEmpty()) {
+            return affectedCards;
+        }
 
         String addP = "";
         int powerBonus = 0;
