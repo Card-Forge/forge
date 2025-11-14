@@ -583,6 +583,13 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         .result();
     }
 
+    public long getTimestamp() {
+        if (hasParam("Timestamp")) {
+            return Long.valueOf(getParam("Timestamp"));
+        }
+        return getHostCard().getLayerTimestamp();
+    }
+
     @Override
     public void setHostCard(Card host) {
         super.setHostCard(host);
