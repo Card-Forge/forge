@@ -2,7 +2,7 @@ Name:Ayara, Widow of the Realm
 ManaCost:1 B B
 Types:Legendary Creature Elf Noble
 PT:3/3
-A:AB$ DealDamage | Cost$ T Sac<1/Creature.Other;Artifact.Other/another creature or artifact> | ValidTgts$ Opponent,Battle | TgtPrompt$ Select target opponent or battle | SubAbility$ DBGainLife | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target opponent or battle and you gain X life, where X is the sacrificed permanent's mana value.
+A:AB$ DealDamage | Cost$ T Sac<1/Creature.Other;Artifact.Other> | ValidTgts$ Opponent,Battle | TgtPrompt$ Select target opponent or battle | SubAbility$ DBGainLife | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target opponent or battle and you gain X life, where X is the sacrificed permanent's mana value.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X
 SVar:X:Sacrificed$CardManaCost
 A:AB$ SetState | Cost$ 5 RP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform NICKNAME. Activate only as a sorcery.

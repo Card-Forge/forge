@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Creature Zombie
 PT:1/4
 K:Defender
-A:AB$ Pump | Cost$ Sac<1/Creature.Other/another creature> | Defined$ Self | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn.
+A:AB$ Pump | Cost$ Sac<1/Creature.Other> | Defined$ Self | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn.
 AI:RemoveDeck:All
 Oracle:Defender\nSacrifice another creature: Corpse Blockade gains deathtouch until end of turn.
