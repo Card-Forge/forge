@@ -11,6 +11,7 @@ import forge.game.card.Card;
 import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
@@ -55,19 +56,25 @@ public class AirbendEffect extends SpellAbilityEffect {
             if (gameCard == null || !c.equalsWithGameTimestamp(gameCard) || gameCard.isPhasedOut()) {
                 continue;
             }
-
-            if (!gameCard.canExiledBy(sa, true)) {
-                continue;
-            }
             handleExiledWith(gameCard, sa);
 
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
             AbilityKey.addCardZoneTableParams(moveParams, triggerList);
 
-            Card movedCard = game.getAction().exile(gameCard, sa, moveParams);
+            SpellAbilityStackInstance si = null;
+            if (gameCard.isInZone(ZoneType.Stack)) {
+                SpellAbility stackSA = game.getStack().getSpellMatchingHost(gameCard);
+                si = game.getStack().getInstanceMatchingSpellAbilityID(stackSA);
+            }
 
+            Card movedCard = game.getAction().exile(gameCard, sa, moveParams);
             if (movedCard == null || !movedCard.isInZone(ZoneType.Exile)) {
                 continue;
+            }
+
+            if (si != null) {
+                // GameAction.changeZone should really take care of cleaning up SASI when a card from the stack is removed.
+                game.getStack().remove(si);
             }
 
             // Effect to cast for 2 from exile
@@ -84,6 +91,7 @@ public class AirbendEffect extends SpellAbilityEffect {
 
             game.getAction().moveToCommand(eff, sa);
         }
+
         triggerList.triggerChangesZoneAll(game, sa);
         handleExiledWith(triggerList.allCards(), sa);
 
