@@ -1,0 +1,12 @@
+Name:Spirit Water Revival
+ManaCost:1 U U
+Types:Sorcery
+S:Mode$ OptionalCost | EffectZone$ All | ValidCard$ Card.Self | ValidSA$ Spell | Cost$ Waterbend<6> | Description$ As an additional cost to cast this spell, you may waterbend {6}. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)
+A:SP$ ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Graveyard | Destination$ Library | Shuffle$ True | ConditionCheckSVar$ X | SubAbility$ DBDraw | SpellDescription$ Draw two cards. If this spell's additional cost was paid, instead shuffle your graveyard into your library, draw seven cards, and you have no maximum hand size for the rest of the game. Exile CARDNAME.
+SVar:DBDraw:DB$ Draw | NumCards$ Y | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STHandSize | Duration$ Permanent | ConditionCheckSVar$ X | SubAbility$ DBExile
+SVar:STHandSize:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size for the rest of the game.
+SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
+SVar:X:Count$OptionalGenericCostPaid.1.0
+SVar:Y:Count$OptionalGenericCostPaid.7.2
+Oracle:As an additional cost to cast this spell, you may waterbend {6}. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)\nDraw two cards. If this spell's additional cost was paid, instead shuffle your graveyard into your library, draw seven cards, and you have no maximum hand size for the rest of the game.\nExile Spirit Water Revival.

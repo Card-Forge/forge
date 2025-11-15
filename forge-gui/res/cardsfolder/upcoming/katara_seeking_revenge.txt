@@ -1,0 +1,13 @@
+Name:Katara, Seeking Revenge
+ManaCost:3 UB
+Types:Legendary Creature Human Warrior Ally
+PT:3/3
+S:Mode$ OptionalCost | EffectZone$ All | ValidCard$ Card.Self | ValidSA$ Spell | Cost$ Waterbend<2> | Description$ As an additional cost to cast this spell, you may waterbend {2}. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When NICKNAME enters, draw a card, then discard a card unless her additional cost was paid.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ X | Mode$ TgtChoose
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ Y | AddToughness$ Y | Description$ NICKNAME gets +1/+1 for each Lesson card in your graveyard.
+SVar:X:Count$OptionalGenericCostPaid.0.1
+SVar:Y:Count$ValidGraveyard Lesson.YouOwn
+DeckHas:Ability$Discard
+Oracle:As an additional cost to cast this spell, you may waterbend {2}. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)\nWhen Katara enters, draw a card, then discard a card unless her additional cost was paid.\nKatara gets +1/+1 for each Lesson card in your graveyard.
