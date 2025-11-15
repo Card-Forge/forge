@@ -517,6 +517,11 @@ public class AbilityManaPart implements java.io.Serializable {
         if (produced.contains("Chosen")) {
             produced = produced.replace("Chosen", getChosenColor(sa, sa.getHostCard().getChosenColors()));
         }
+        if (produced.startsWith("Special ")) {
+            GameActionUtil.setManaAbilityChoice(sa);
+            final AbilityManaPart abMana = sa.getManaPart();
+            produced = abMana.getExpressChoice();
+        }
         return produced;
     }
 
