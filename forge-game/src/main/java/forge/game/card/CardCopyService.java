@@ -315,7 +315,7 @@ public class CardCopyService {
         newCopy.setSaddled(copyFrom.isSaddled());
         if (newCopy.isSaddled()) newCopy.setSaddledByThisTurn(copyFrom.getSaddledByThisTurn());
         if (copyFrom.isSuspected()) {
-            newCopy.setSuspectedEffect(getLKICopy(copyFrom.getSuspectedEffect(), cachedMap));
+            newCopy.setSuspectedStatic(copyFrom.getSuspectedStatic().copy(newCopy, true));
         }
 
         newCopy.setDamageHistory(copyFrom.getDamageHistory());

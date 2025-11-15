@@ -78,7 +78,7 @@ public class GameAction {
     private boolean holdCheckingStaticAbilities = false;
 
     private final static Comparator<StaticAbility> effectOrder = Comparator.comparing(StaticAbility::isCharacteristicDefining).reversed()
-            .thenComparing(s -> s.getHostCard().getLayerTimestamp());
+            .thenComparing(StaticAbility::getTimestamp);
 
     public GameAction(Game game0) {
         game = game0;
@@ -1103,11 +1103,16 @@ public class GameAction {
                     if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.zonesCheck()) {
                         staticAbilities.add(stAb);
                     }
-                 }
-                 if (!co.getStaticCommandList().isEmpty()) {
-                     staticList.add(co);
-                 }
-                 return true;
+                }
+                if (!co.getStaticCommandList().isEmpty()) {
+                    staticList.add(co);
+                }
+                for (StaticAbility stAb : co.getHiddenStaticAbilities()) {
+                    if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.zonesCheck()) {
+                        staticAbilities.add(stAb);
+                    }
+                }
+                return true;
             }
         }, true);
 
@@ -1333,7 +1338,7 @@ public class GameAction {
 
         // now the earliest one left is the correct choice
         List<StaticAbility> statics = Lists.newArrayList(dependencyGraph.vertexSet());
-        statics.sort(Comparator.comparing(s -> s.getHostCard().getLayerTimestamp()));
+        statics.sort(Comparator.comparing(StaticAbility::getTimestamp));
 
         return statics.get(0);
     }
