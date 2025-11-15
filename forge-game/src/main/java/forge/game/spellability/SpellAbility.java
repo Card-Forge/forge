@@ -1814,6 +1814,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public void setTargets(TargetChoices targets) {
+        // .getTargets().add() is used more!
         // TODO should copy the target choices?
         targetChosen = targets;
     }

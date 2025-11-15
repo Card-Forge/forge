@@ -99,15 +99,18 @@ public abstract class CountersAi extends SpellAbilityAi {
                 // We'd only get here if list isn't empty, maybe we're trying to animate a land?
                 choice = ComputerUtilCard.getBestLandToAnimate(list);
             }
+        } else if (type.equals("CHARGE")) {
+            final CardCollection boon = CardLists.filter(list, c -> c.getCounters(CounterEnumType.CHARGE) < c.getKeywordMagnitude(Keyword.STATION) || c.getOracleText().matches(".*(for|number|emove) \\w+ (?:charge )counter.*"));
+            choice = ComputerUtilCard.getMostExpensivePermanentAI(boon);
+        } else if (type.equals("COIN")) {
+            final CardCollection boon = CardLists.filter(list, c -> c.getOracleText().contains("coin counter") || (!c.isToken() && c.getCounters(CounterEnumType.COIN) == 0));
+            choice = ComputerUtilCard.getMostExpensivePermanentAI(boon);
         } else if (type.equals("DIVINITY")) {
             final CardCollection boon = CardLists.filter(list, c -> c.getCounters(CounterEnumType.DIVINITY) == 0);
             choice = ComputerUtilCard.getMostExpensivePermanentAI(boon);
         } else if (CounterType.getType(type).isKeywordCounter()) {
             choice = ComputerUtilCard.getBestCreatureAI(CardLists.getNotKeyword(list, type));
         } else {
-            // The AI really should put counters on cards that can use it.
-            // Charge counters on things with Charge abilities, etc. Expand
-            // these above
             choice = Aggregates.random(list);
         }
         return choice;
