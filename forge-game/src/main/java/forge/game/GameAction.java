@@ -1103,11 +1103,16 @@ public class GameAction {
                     if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.zonesCheck()) {
                         staticAbilities.add(stAb);
                     }
-                 }
-                 if (!co.getStaticCommandList().isEmpty()) {
-                     staticList.add(co);
-                 }
-                 return true;
+                }
+                if (!co.getStaticCommandList().isEmpty()) {
+                    staticList.add(co);
+                }
+                for (StaticAbility stAb : co.getHiddenStaticAbilities()) {
+                    if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.zonesCheck()) {
+                        staticAbilities.add(stAb);
+                    }
+                }
+                return true;
             }
         }, true);
 
