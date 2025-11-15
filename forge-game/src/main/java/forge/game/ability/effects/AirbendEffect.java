@@ -48,7 +48,7 @@ public class AirbendEffect extends SpellAbilityEffect {
 
         final CardZoneTable triggerList = CardZoneTable.getSimultaneousInstance(sa);
 
-        for (Card c : getTargetCards(sa)) {
+        for (Card c : getCardsfromTargets(sa)) {
             final Card gameCard = game.getCardState(c, null);
             // gameCard is LKI in that case, the card is not in game anymore
             // or the timestamp did change
