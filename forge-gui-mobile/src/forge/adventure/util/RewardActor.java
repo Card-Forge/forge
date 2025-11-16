@@ -69,6 +69,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     HoldTooltip holdTooltip;
     Reward reward;
     public TextraButton autoSell;
+    public TextraLabel ownedLabel;
     ShaderProgram shaderGrayscale = Forge.getGraphics().getShaderGrayscale();
     ShaderProgram shaderRoundRect = Forge.getGraphics().getShaderRoundedRect();
 
@@ -258,6 +259,13 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                         }
                     });
                 }
+                
+                int ownedCount = AdventurePlayer.current().getCollectionCards(true).count(reward.card);
+                String textContent = ownedCount > 0
+                    ? "[%65][WHITE]" + Forge.getLocalizer().getMessage("lblOwned")  + ": " + ownedCount
+                    : "[%65][LIME]" + Forge.getLocalizer().getMessage("lblNew");
+                ownedLabel = Controls.newTextraLabel(textContent);
+
                 hasbackface = reward.getCard().hasBackFace();
 
                 if (ImageCache.getInstance().imageKeyFileExists(reward.getCard().getImageKey(false)) && !Forge.enableUIMask.equals("Art")) {
@@ -903,6 +911,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         }
         if (autoSell != null)
             autoSell.remove();
+
+        if (ownedLabel != null)
+            ownedLabel.remove();
     }
 
     public void flip() {
@@ -915,6 +926,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             autoSell.setPosition(this.getX(), this.getY());
             getStage().addActor(autoSell);
             autoSell.setVisible(false);
+        }
+
+        if (reward.type.equals(Reward.Type.Card) && ownedLabel != null) {
+            ownedLabel.setPosition(this.getX(), this.getY() - (ownedLabel.layout.getHeight() / 2));
+            ownedLabel.setVisible(false);
+            getStage().addActor(ownedLabel);
         }
     }
 
@@ -954,18 +971,22 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     addListener(tooltip);
                 }
             }
+
             if (autoSell != null && !autoSell.isVisible() && flipProcess == 1) {
                 autoSell.setVisible(true);
-                if (AdventurePlayer.current().getAdventureMode() == AdventureModes.Commander) {
+
+                if (AdventurePlayer.current().getAdventureMode().equals(AdventureModes.Commander)) {
                     PaperCard pc = reward.getCard();
                     if (pc != null) {
                         setAutoSell(inCollectionLike(pc));
                     }
                 }
             }
-            // flipProcess=(float)Gdx.input.getX()/ (float)Gdx.graphics.getWidth();
-        }
 
+            if (ownedLabel != null && !ownedLabel.isVisible() && flipProcess == 1) {
+                ownedLabel.setVisible(true);
+            }
+        }
     }
 
     @Override
