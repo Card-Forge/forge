@@ -91,11 +91,10 @@ public class AIIntegrationTests extends AITest {
         Player opponent = game.getPlayers().get(0);
         opponent.setTeam(1);
 
-        // AI has Repopulate in hand and mana to cast. AI has no other playable cards.
+        // AI has Repopulate in hand, mana to cast, and no other playable cards.
         Zone hand = p.getZone(ZoneType.Hand);
         Card repopulate = addCardToZone("Repopulate", p, ZoneType.Hand);
         AssertJUnit.assertTrue(hand.contains(repopulate));
-        addCardToZone("Plains", p, ZoneType.Hand); // Testing if AI plays the land?
 
         // Setup mana
         Card colorlessMana = createCard("Ash Barrens", p);
@@ -105,7 +104,7 @@ public class AIIntegrationTests extends AITest {
         AssertJUnit.assertEquals(2, p.getManaPool().totalMana());
 
         // Put a non-creature card in opponent's graveyard
-        Card opponentLand = addCardToZone("Swamp", opponent, ZoneType.Graveyard);
+        addCardToZone("Swamp", opponent, ZoneType.Graveyard);
 
         // Opponent has 0 creatures in graveyard.
         AssertJUnit.assertFalse(opponent.getZone(ZoneType.Graveyard).getCards().anyMatch(Card::isCreature));
