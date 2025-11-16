@@ -66,10 +66,8 @@ public class UntapAi extends SpellAbilityAi {
         if (pDefined.isEmpty() || (pDefined.get(0).isTapped() && pDefined.get(0).getController() == ai)) {
             // If the defined card is tapped, or if there are no defined cards, we can play this ability
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            // Otherwise, we can't play this ability
-            return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
         }
+        return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
     }
 
     @Override
