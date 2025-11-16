@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Artifact Vehicle
 PT:4/4
 K:Flying
-T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigCopy | TriggerDescription$ At the beginning of your end step, if you sacrificed a permanent this turn, create a token that's a copy of this Vehicle.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigCopy | TriggerDescription$ At the beginning of your end step, if you sacrificed a permanent this turn, create a token that's a copy of this Vehicle.
 SVar:TrigCopy:DB$ CopyPermanent | Defined$ Self | NumCopies$ 1
 S:Mode$ Continuous | Affected$ Card.Self | IsPresent$ Permanent.YouCtrl+namedPhoenix Fleet Airship | PresentCompare$ GE8 | AddType$ Artifact & Creature | Description$ As long as you control eight or more permanents named Phoenix Fleet Airship, this Vehicle is an artifact creature.
 K:Crew:1

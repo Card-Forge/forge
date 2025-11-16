@@ -1,6 +1,8 @@
 Forge provides an in-game console in adventure mode.
 
 You can access (and close) the console while exploring by pressing F9 (or Fn-F9).
+The equivalent method to access the console on mobile is to hold down the character image in the right top of the screen.
+Holding the character image again will close the console (as will typing `exit`).
 
 To scroll the console window, click and drag the text box.
 
