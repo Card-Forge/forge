@@ -172,9 +172,9 @@ public class CostAdjustment {
 
     // If cardsToDelveOut is null, will immediately exile the delved cards and remember them on the host card.
     // Otherwise, will return them in cardsToDelveOut and the caller is responsible for doing the above.
-    public static boolean adjust(ManaCostBeingPaid cost, final SpellAbility sa, CardCollection cardsToDelveOut, boolean test, boolean effect) {
+    public static boolean adjust(ManaCostBeingPaid cost, final SpellAbility sa, final Player payer, CardCollection cardsToDelveOut, boolean test, boolean effect) {
         if (effect) {
-            adjustCostByWaterbend(cost, sa, test, effect);
+            adjustCostByWaterbend(cost, sa, payer, test);
         }
         if (effect || sa.isTrigger() || sa.isReplacementAbility()) {
             return true;
@@ -291,7 +291,7 @@ public class CostAdjustment {
             adjustCostByConvokeOrImprovise(cost, sa, activator, false, true, test);
         }
 
-        adjustCostByWaterbend(cost, sa, test, effect);
+        adjustCostByWaterbend(cost, sa, payer, test);
 
         // Reset card state (if changed)
         if (isStateChangeToFaceDown) {
@@ -325,13 +325,9 @@ public class CostAdjustment {
         return assistant.getController().helpPayForAssistSpell(cost, sa, genericLeft, requestedAmount);
     }
 
-    private static void adjustCostByWaterbend(ManaCostBeingPaid cost, SpellAbility sa, boolean test, boolean effect) {
+    private static void adjustCostByWaterbend(ManaCostBeingPaid cost, SpellAbility sa, Player payer, boolean test) {
         Integer maxWaterbend = sa.getMaxWaterbend();
         if (maxWaterbend != null && maxWaterbend > 0) {
-            Player payer = sa.getActivatingPlayer();
-            if (effect && (sa.getPayCosts() == null || !sa.getPayCosts().hasSpecificCostType(CostWaterbend.class))) {
-                payer = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParamOrDefault("UnlessPayer", "TargetedController"), sa).get(0);
-            }
             adjustCostByConvokeOrImprovise(cost, sa, payer, true, true, test);
         }
     }
