@@ -416,10 +416,6 @@ public class RewardScene extends UIScene {
                 }
                 break;
             case QuestReward:
-                headerLabel.setVisible(false);
-                headerLabel.setText("");
-                restockButton.setVisible(false);
-                break;
             case Loot:
                 headerLabel.setPosition(restockButton.getX(), restockButton.getY());
                 headerLabel.setVisible(true);
