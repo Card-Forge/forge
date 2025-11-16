@@ -353,7 +353,7 @@ public class RewardScene extends UIScene {
         headerLabel.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (type == Type.Loot) {
+                if (type == Type.Loot || type == Type.QuestReward) {
                     autoSell = !autoSell;
                     String cb = autoSell ? "\u2611 " : "\u2610 ";
                     headerLabel.setText("[%?SHINY][;]" + cb + Forge.getLocalizer().getMessage("lblAll"));
