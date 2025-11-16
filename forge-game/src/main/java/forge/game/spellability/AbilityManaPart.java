@@ -30,6 +30,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
+import forge.game.ability.effects.ManaEffect;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
@@ -515,7 +516,11 @@ public class AbilityManaPart implements java.io.Serializable {
         }
         String produced = this.getOrigProduced();
         if (produced.contains("Chosen")) {
-            produced = produced.replace("Chosen", getChosenColor(sa, sa.getHostCard().getChosenColors()));
+            produced = produced.replace("Chosen", getChosenColor(sa));
+        }
+        if (isSpecialMana()) {
+            ManaEffect.handleSpecialMana(sa.getActivatingPlayer(), this, sa, false);
+            produced = getExpressChoice();
         }
         return produced;
     }
@@ -651,7 +656,7 @@ public class AbilityManaPart implements java.io.Serializable {
         }
         // replace Chosen for Combo colors
         if (origProduced.contains("Chosen")) {
-            origProduced = origProduced.replace("Chosen", getChosenColor(sa, sa.getHostCard().getChosenColors()));
+            origProduced = origProduced.replace("Chosen", getChosenColor(sa));
         }
         // replace Chosen for Spire colors
         if (origProduced.contains("ColorID")) {
@@ -701,14 +706,14 @@ public class AbilityManaPart implements java.io.Serializable {
         return sb.length() == 0 ? "" : sb.substring(0, sb.length() - 1);
     }
 
-    public String getChosenColor(SpellAbility sa, Iterable<String> colors) {
+    public String getChosenColor(SpellAbility sa) {
         if (sa == null) {
             return "";
         }
         Card card = sa.getHostCard();
         if (card != null) {
             StringBuilder values = new StringBuilder();
-            for (String c : colors) {
+            for (String c : card.getChosenColors()) {
                 values.append(MagicColor.toShortString(c)).append(" ");
             }
             return values.toString().trim();

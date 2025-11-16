@@ -38,7 +38,7 @@
   - [Ability effects](Card-scripting-API/AbilityFactory.md)
   - [Triggers](Card-scripting-API/Triggers.md)
   - [Replacements](Card-scripting-API/Replacements.md)
-  - Statics
+  - [Statics](Card-scripting-API/Statics.md)
   - [Costs](Card-scripting-API/Costs.md)
   - [Affected / Targets](Card-scripting-API/Targeting.md)
   - [Restrictions / Conditions](Card-scripting-API/Restrictions.md)

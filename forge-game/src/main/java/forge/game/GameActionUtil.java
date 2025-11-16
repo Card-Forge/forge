@@ -57,7 +57,6 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * <p>
  * GameActionUtil class.
@@ -858,8 +857,6 @@ public final class GameActionUtil {
                 baseMana = "Any";
             }
         } else if (sa.getApi() == ApiType.ManaReflected) {
-            baseMana = abMana.getExpressChoice();
-        } else if (abMana.isSpecialMana()) {
             baseMana = abMana.getExpressChoice();
         } else {
             baseMana = abMana.mana(sa);
