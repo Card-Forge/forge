@@ -1,14 +1,18 @@
 AbilityFactory parses differently from the Keyword parser. Your Ability line will look more like this:
 
-`A:{AB/SP/DB/ST}$ <AFSubclass> | {Necessary$ Parameters} | {Separated$ By} | {Pipes$ Here} | [Optional$ Values]`
+`A:<AB/SP/DB/ST>$ <AFSubclass> | <Necessary$ Parameters> | (<Separated$ By> | <Pipes$ Here>) | [Optional$ {Values} [Nested$ Dependency]]`
 
-In most cases, each AF subclass implements both the Spell and Ability.
-Much of the code is shared, so creating the data object will look very similar.
+The ability types are:
+- **AB** for Activated Abilities
+- **SP** for Spell
+- **DB** for Drawback and many abilities that are subsidiary to other things, like replacements. They are only used to chain AFs together, and will never be the root AF
+- **ST** for Static, this gets used in case the API should resolve without using the stack<br /> (e.g. the unique *Circling Vultures* special action is directly implemented in the script this way)
 
-  - **AB** is for Activated Abilities
-  - **SP** is for Spell
-  - **DB** is for Drawback and many abilities that are subsidiary to other things, like replacements. They are only used to chain AFs together, and will never be the root AF
-  - **ST** is for Static, this gets used in case the API should resolve without using the stack<br /> (e.g. the unique *Circling Vultures* special action is directly implemented in the script this way)
+Syntax definitions like the above will use different symbols to separate the variable parts from the plaintext:
+- angle brackets for mandatory parts
+- square brackets for optional parts
+- round brackets for grouping parts that are exclusive to each other
+- curly brackets to denote the type of a param
 
 >*NOTE:*
 > - these factories are refactored from time to time (often to adapt to new sets), so while some entries could be slightly outdated, the base information should still be correct
@@ -20,7 +24,7 @@ Much of the code is shared, so creating the data object will look very similar.
 
 ## Cost / UnlessCost
 
-`Cost$ <AbilityCost>` is the appropriate way to set the cost of the ability. Currently for spells, any additional costs including the original Mana cost need to appear in the Cost parameter in the AbilityFactory. For each card that uses it, the order in which the cost is paid will always be the same.
+`Cost$ {AbilityCost}` is the appropriate way to set the cost of the ability. Currently for spells, any additional costs including the original Mana cost need to appear in the Cost parameter in the AbilityFactory. For each card that uses it, the order in which the cost is paid will always be the same.
 
 Secondary abilities such as the DB executed by triggers or replacements (usually) don't need costs. (This is one reason to use DB over AB in these cases.)
 
@@ -515,8 +519,6 @@ Used in the script of *Karn Liberated*
 
 ## Goad
 
-## Investigate
-
 ## Mana
 
 For lands or other permanent to produce mana.
@@ -722,7 +724,13 @@ player chooses (eg: Burning of Xinye, or Imperial Edict).
 
 ## StoreSVar
 
-## Token
+## Tokens
+
+### Amass
+
+### Investigate
+
+### Token
 
 Token simply lets you create tokens of any type.
 
@@ -758,6 +766,8 @@ If possible split the SpellDescription of the effect so the part for the trigger
 ### DelayedTrigger
 
 ### ImmediateTrigger
+
+TriggerAmount
 
 ## Turn structure
 
