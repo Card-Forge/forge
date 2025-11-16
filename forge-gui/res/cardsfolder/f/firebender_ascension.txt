@@ -1,0 +1,9 @@
+Name:Firebender Ascension
+ManaCost:1 R
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this enchantment enters, create a 2/2 red Soldier creature token with firebending 1.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_2_2_soldier_firebending_1 | TokenOwner$ You
+T:Mode$ AbilityTriggered | TriggerZones$ Battlefield | ValidMode$ Attacks,AttackersDeclared,AttackersDeclaredOneTarget | Execute$ TrigPutCounter | ValidSource$ Creature.YouCtrl | TriggeredOwnAbility$ True | TriggerDescription$ Whenever a creature you control attacking causes a triggered ability of that creature to trigger, put a quest counter on this enchantment. Then if it has four or more quest counters on it, you may copy that ability. You may choose new targets for the copy.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ QUEST | CounterNum$ 1 | SubAbility$ DBCopy
+SVar:DBCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Optional$ True | MayChooseTarget$ True | ConditionPresent$ Card.Self+counters_GE4_QUEST
+Oracle:When this enchantment enters, create a 2/2 red Soldier creature token with firebending 1.\nWhenever a creature you control attacking causes a triggered ability of that creature to trigger, put a quest counter on this enchantment. Then if it has four or more quest counters on it, you may copy that ability. You may choose new targets for the copy.

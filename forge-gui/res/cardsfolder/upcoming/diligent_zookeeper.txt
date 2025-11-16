@@ -1,7 +1,0 @@
-Name:Diligent Zookeeper
-ManaCost:3 G
-Types:Creature Human Citizen Ally
-PT:4/4
-S:Mode$ Continuous | Affected$ Creature.nonHuman+YouCtrl | AddPower$ AffectedX | AddToughness$ AffectedX | Description$ Each non-Human creature you control gets +1/+1 for each of its creature types, to a maximum of 10.
-SVar:AffectedX:Count$CreatureType/LimitMax.10
-Oracle:Each non-Human creature you control gets +1/+1 for each of its creature types, to a maximum of 10.

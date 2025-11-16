@@ -78,7 +78,7 @@ public class GameAction {
     private boolean holdCheckingStaticAbilities = false;
 
     private final static Comparator<StaticAbility> effectOrder = Comparator.comparing(StaticAbility::isCharacteristicDefining).reversed()
-            .thenComparing(s -> s.getHostCard().getLayerTimestamp());
+            .thenComparing(StaticAbility::getTimestamp);
 
     public GameAction(Game game0) {
         game = game0;
@@ -702,7 +702,7 @@ public class GameAction {
 
         eff.addRemembered(copied);
         // refresh needed for canEnchant checks
-        game.getAction().checkStaticAbilities(false, Sets.newHashSet(copied), new CardCollection(copied));
+        checkStaticAbilities(false, Sets.newHashSet(copied), new CardCollection(copied));
         return eff;
     }
     private void cleanStaticEffect(Card eff, Card copied) {
@@ -809,8 +809,7 @@ public class GameAction {
             }
         }
 
-        // Move card in maingame if take card from subgame
-        // 720.4a
+        // CR 720.4a Move card in maingame if take card from subgame
         if (zoneFrom != null && zoneFrom.is(ZoneType.Sideboard) && game.getMaingame() != null) {
             Card maingameCard = c.getOwner().getMappingMaingameCard(c);
             if (maingameCard != null) {
@@ -913,7 +912,7 @@ public class GameAction {
         final PlayerZone removed = c.getOwner().getZone(ZoneType.Exile);
         final Card copied = moveTo(removed, c, cause, params);
 
-        if (c.isImmutable()) {            
+        if (c.isImmutable()) {
             return copied;
         }
 
@@ -1103,11 +1102,16 @@ public class GameAction {
                     if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.zonesCheck()) {
                         staticAbilities.add(stAb);
                     }
-                 }
-                 if (!co.getStaticCommandList().isEmpty()) {
-                     staticList.add(co);
-                 }
-                 return true;
+                }
+                if (!co.getStaticCommandList().isEmpty()) {
+                    staticList.add(co);
+                }
+                for (StaticAbility stAb : co.getHiddenStaticAbilities()) {
+                    if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.zonesCheck()) {
+                        staticAbilities.add(stAb);
+                    }
+                }
+                return true;
             }
         }, true);
 
@@ -1235,7 +1239,7 @@ public class GameAction {
     }
 
     private StaticAbility findStaticAbilityToApply(StaticAbilityLayer layer, List<StaticAbility> staticsForLayer, CardCollectionView preList, Map<StaticAbility, CardCollectionView> affectedPerAbility,
-            Table<StaticAbility, StaticAbility, Set<StaticAbilityLayer>> dependencies) {
+                                                   Table<StaticAbility, StaticAbility, Set<StaticAbilityLayer>> dependencies) {
         if (staticsForLayer.size() == 1) {
             return staticsForLayer.get(0);
         }
@@ -1333,7 +1337,7 @@ public class GameAction {
 
         // now the earliest one left is the correct choice
         List<StaticAbility> statics = Lists.newArrayList(dependencyGraph.vertexSet());
-        statics.sort(Comparator.comparing(s -> s.getHostCard().getLayerTimestamp()));
+        statics.sort(Comparator.comparing(StaticAbility::getTimestamp));
 
         return statics.get(0);
     }
@@ -1776,7 +1780,7 @@ public class GameAction {
             if (sb.length() == 0) {
                 sb.append(p).append(" ").append(Localizer.getInstance().getMessage("lblAssigns")).append("\n");
             }
-            String creature = CardTranslation.getTranslatedName(assignee.getName()) + " (" + assignee.getId() + ")";
+            String creature = assignee.getTranslatedName() + " (" + assignee.getId() + ")";
             sb.append(creature).append(" ").append(sector).append("\n");
         }
         if (sb.length() > 0) {
@@ -1793,7 +1797,7 @@ public class GameAction {
             c.getGame().getTracker().flush();
 
             c.setMoveToCommandZone(false);
-            if (c.getOwner().getController().confirmAction(c.getFirstSpellAbility(), PlayerActionConfirmMode.ChangeZoneToAltDestination, c.getName() + ": If a commander is in a graveyard or in exile and that card was put into that zone since the last time state-based actions were checked, its owner may put it into the command zone.", null)) {
+            if (c.getOwner().getController().confirmAction(c.getFirstSpellAbility(), PlayerActionConfirmMode.ChangeZoneToAltDestination, c.getDisplayName() + ": If a commander is in a graveyard or in exile and that card was put into that zone since the last time state-based actions were checked, its owner may put it into the command zone.", null)) {
                 moveTo(c.getOwner().getZone(ZoneType.Command), c, null, mapParams);
                 return true;
             }
@@ -2075,7 +2079,7 @@ public class GameAction {
             }
             if (showRevealDialog) {
                 final String message = Localizer.getInstance().getMessage("lblSacrifice");
-                game.getAction().reveal(result, ZoneType.Graveyard, c.getOwner(), false, message, false);
+                reveal(result, ZoneType.Graveyard, c.getOwner(), false, message, false);
             }
         }
         for (Map.Entry<Player, Collection<Card>> e : lki.asMap().entrySet()) {
@@ -2217,7 +2221,7 @@ public class GameAction {
     /** Delivers a message to all players. (use reveal to show Cards) */
     public void notifyOfValue(SpellAbility saSource, GameObject relatedTarget, String value, Player playerExcept) {
         if (saSource != null) {
-            String name = CardTranslation.getTranslatedName(saSource.getHostCard().getName());
+            String name = saSource.getHostCard().getTranslatedName();
             value = TextUtil.fastReplace(value, "CARDNAME", name);
             value = TextUtil.fastReplace(value, "NICKNAME", Lang.getInstance().getNickName(name));
         }
@@ -2420,7 +2424,7 @@ public class GameAction {
                 //  it to either player or the papercard object so it feels like rule based for the player side..
                 if (!c.hasMarkedColor()) {
                     if (takesAction.isAI()) {
-                        String prompt = CardTranslation.getTranslatedName(c.getName()) + ": " +
+                        String prompt = c.getTranslatedName() + ": " +
                                 Localizer.getInstance().getMessage("lblChooseNColors", Lang.getNumeral(2));
                         SpellAbility sa = new SpellAbility.EmptySa(ApiType.ChooseColor, c, takesAction);
                         sa.putParam("AILogic", "MostProminentInComputerDeck");
@@ -2534,19 +2538,9 @@ public class GameAction {
         game.getTriggerHandler().runTrigger(TriggerType.TakesInitiative, runParams, false);
     }
 
-    // Make scry an action function so that it can be used for mulligans (with a null cause)
-    // Assumes that the list of players is in APNAP order, which should be the case
-    // Optional here as well to handle the way that mulligans do the choice
-    // 701.17. Scry
-    // 701.17a To "scry N" means to look at the top N cards of your library, then put any number of them
-    // on the bottom of your library in any order and the rest on top of your library in any order.
-    // 701.17b If a player is instructed to scry 0, no scry event occurs. Abilities that trigger whenever a
-    // player scries won't trigger.
-    // 701.17c If multiple players scry at once, each of those players looks at the top cards of their library
-    // at the same time. Those players decide in APNAP order (see rule 101.4) where to put those
-    // cards, then those cards move at the same time.
     public void scry(final List<Player> players, int numScry, SpellAbility cause) {
         if (numScry <= 0) {
+            // CR 701.22b If a player is instructed to scry 0, no scry event occurs.
             return;
         }
 
@@ -2572,12 +2566,9 @@ public class GameAction {
             if (playerScry > 0) {
                 actualPlayers.put(p, playerScry);
 
-                // reveal the top N library cards to the player (only)
-                // no real need to separate out the look if
-                // there is only one player scrying
+                // no real need to separate out the look if there is only one player scrying
                 if (players.size() > 1) {
-                    final CardCollection topN = new CardCollection(p.getCardsIn(ZoneType.Library, playerScry));
-                    revealTo(topN, p);
+                    revealTo(p.getCardsIn(ZoneType.Library, playerScry), p);
                 }
             }
         }
@@ -2618,7 +2609,6 @@ public class GameAction {
             }
 
             if (cause != null) {
-                // set up triggers (but not actually do them until later)
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
                 runParams.put(AbilityKey.ScryNum, numLookedAt);
                 runParams.put(AbilityKey.ScryBottom, toBottom == null ? 0 : toBottom.size());
@@ -2649,7 +2639,7 @@ public class GameAction {
                 if (showRevealDialog) {
                     final String message = Localizer.getInstance().getMessage("lblMilledCards");
                     final boolean addSuffix = !toZoneStr.isEmpty();
-                    game.getAction().reveal(milledPlayer, destination, p, false, message, addSuffix);
+                    reveal(milledPlayer, destination, p, false, message, addSuffix);
                 }
                 game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, p + " milled " +
                         Lang.joinHomogenous(milledPlayer) + toZoneStr + ".");
@@ -2666,7 +2656,7 @@ public class GameAction {
     }
 
     public void dealDamage(final boolean isCombat, final CardDamageMap damageMap, final CardDamageMap preventMap,
-            final GameEntityCounterTable counterTable, final SpellAbility cause) {
+                           final GameEntityCounterTable counterTable, final SpellAbility cause) {
         // Clear assigned damage if is combat
         if (isCombat) {
             for (Map.Entry<GameEntity, Map<Card, Integer>> et : damageMap.columnMap().entrySet()) {
@@ -2806,7 +2796,7 @@ public class GameAction {
             final FCollection<Player> players = game.getPlayers().filter(PlayerPredicates.canBeAttached(source, null));
 
             final Player pa = p.getController().chooseSingleEntityForEffect(players, aura,
-                    Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", CardTranslation.getTranslatedName(source.getName())), null);
+                    Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", source.getTranslatedName()), null);
             if (pa != null) {
                 source.attachToEntity(pa, null, true);
                 return true;
@@ -2831,7 +2821,7 @@ public class GameAction {
             }
 
             final Card o = p.getController().chooseSingleEntityForEffect(list, aura,
-                    Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(source.getName())), null);
+                    Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", source.getTranslatedName()), null);
             if (o != null) {
                 source.attachToEntity(game.getCardState(o), null, true);
                 return true;

@@ -4,6 +4,77 @@ Date=2025-11-21
 Name=Avatar: The Last Airbender
 Type=Expansion
 ScryfallCode=TLA
+#https://mtgscribe.com/2025/11/08/avatar-play-booster-fact-sheet/
+BoosterSlots=Common,Common-Borderless,Uncommon,RareMythic,Land,Wildcard,WildcardFoil
+Booster=6 Common, 1 Common-Borderless, 3 Uncommon, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 Land
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=30
+
+[Common]
+Base=Common:fromSheet("TLA cards")
+
+[Common-Borderless]
+Base=Common:fromSheet("TLA cards")
+Replace=.0384F fromSheet("TLE borderless")
+
+[Uncommon]
+Base=Uncommon:fromSheet("TLA cards")
+Replace=0.036F Uncommon:fromSheet("TLA scene cards")
+
+[RareMythic]
+Base=Rare:fromSheet("TLA cards")
+Replace=.126F Mythic:fromSheet("TLA cards")
+Replace=.016F Rare:fromSheet("TLA scene cards")
+Replace=.004F Mythic:fromSheet("TLA scene cards")
+Replace=.006F Rare:fromSheet("TLA field notes")
+Replace=.004F Mythic:fromSheet("TLA field notes")
+Replace=.001F Rare:fromSheet("TLA battle pose")
+Replace=.0005F Mythic:fromSheet("TLA battle pose")
+Replace=.001F Rare:fromSheet("TLA elemental frame")
+Replace=.0005F Mythic:fromSheet("TLA elemental frame")
+Replace=.0005F Mythic:fromSheet("TLA borderless saga")
+
+[Wildcard]
+Base=Uncommon:fromSheet("TLA cards")
+Replace=0.042F Common:fromSheet("TLA cards")
+Replace=0.167F Rare:fromSheet("TLA cards")
+Replace=0.0026F Mythic:fromSheet("TLA cards")
+Replace=0.008F Uncommon:fromSheet("TLA scene cards")
+Replace=.006F Rare:fromSheet("TLA scene cards")
+Replace=.004F Mythic:fromSheet("TLA scene cards")
+Replace=.006F Rare:fromSheet("TLA field notes")
+Replace=.004F Mythic:fromSheet("TLA field notes")
+Replace=.001F Rare:fromSheet("TLA battle pose")
+Replace=.0005F Mythic:fromSheet("TLA battle pose")
+Replace=.001F Rare:fromSheet("TLA elemental frame")
+Replace=.0005F Mythic:fromSheet("TLA elemental frame")
+Replace=.0005F Mythic:fromSheet("TLA borderless dfc saga")
+
+[WildcardFoil]
+Base=Common:fromSheet("TLA cards")
+Replace=0.367F Uncommon:fromSheet("TLA cards")
+Replace=0.067F Rare:fromSheet("TLA cards")
+Replace=0.012F Mythic:fromSheet("TLA cards")
+Replace=0.008F Uncommon:fromSheet("TLA scene cards")
+Replace=.006F Rare:fromSheet("TLA scene cards")
+Replace=.004F Mythic:fromSheet("TLA scene cards")
+Replace=.006F Rare:fromSheet("TLA field notes")
+Replace=.004F Mythic:fromSheet("TLA field notes")
+Replace=.001F Rare:fromSheet("TLA battle pose")
+Replace=.0005F Mythic:fromSheet("TLA battle pose")
+Replace=.001F Rare:fromSheet("TLA elemental frame")
+Replace=.0005F Mythic:fromSheet("TLA elemental frame")
+Replace=.0005F Mythic:fromSheet("TLA borderless dfc saga")
+
+[Land]
+Base=fromSheet("TLA allied lands")
+Replace=0.20F BasicLand:fromSheet("TLA default basic")
+Replace=0.10F BasicLand:fromSheet("TLA Avatar journey basic")
+Replace=0.10F BasicLand:fromSheet("TLA Appa basic")
+Replace=0.10F fromSheet("TLA allied lands")+
+Replace=0.05F BasicLand:fromSheet("TLA default basic")+
+Replace=0.025F BasicLand:fromSheet("TLA Avatar journey basic")+
+Replace=0.025F BasicLand:fromSheet("TLA Appa basic")+
 
 [cards]
 1 C Aang's Journey @Kotakan
@@ -12,23 +83,48 @@ ScryfallCode=TLA
 4 U Aang, the Last Airbender @Yueko
 5 R Aang's Iceberg @Matteo Bassini
 6 R Airbender Ascension @Shiren
+7 U Airbender's Reversal @Kotakan
 8 C Airbending Lesson @Pisukev
+9 U Appa, Loyal Sky Bison @Tomoyo Asatani
 10 M Appa, Steadfast Guardian @Maël Ollivier-Henry
 11 C Avatar Enthusiasts @Leanna Crossan
+12 R Avatar's Wrath @Ainezu
 13 C Compassionate Healer @Kuno
+14 C Curious Farm Animals @John Di Giovanni
+15 U Destined Confrontation @Joshua Raphael
+16 U Earth Kingdom Jailer @Danciao
+17 U Earth Kingdom Protectors @Leonardo Borazio
+18 U Enter the Avatar State @Shiren
 19 U Fancy Footwork @Mizutametori
+20 U Gather the White Lotus @Kozato
 21 C Glider Kids @ikeda_cpt
 22 U Glider Staff @Eduardo Francisco
+23 R Hakoda, Selfless Commander @Rafater
+24 U Invasion Reinforcements @Yuhong Ding
 25 C Jeong Jeong's Deserters @Leonardo Borazio
+26 C Kyoshi Warriors @Awanqi (Angela Wang)
+27 M The Legend of Yangchen @Kuno
 28 U Master Piandao @Brian Yuen
 29 R Momo, Friendly Flier @Brandon L. Hunt
 30 U Momo, Playful Pet @Awanqi (Angela Wang)
 31 C Path to Redemption @Hokyoung Kim
 32 C Rabaroo Troop @Mizutametori
 33 C Razor Rings @Norikatsu Miyoshi
+34 C Sandbenders' Storm @Robin Har
+35 R South Pole Voyager @Tition
 36 U Southern Air Temple @Salvatorre Zee Yazzie
+37 R Suki, Courageous Rescuer @Tky
+38 U Team Avatar @Bun Toujo
+39 M United Front @Mengxuan Li
+40 U Vengeful Villagers @Ittoku
+41 C Water Tribe Captain @Yosuke Adachi
 42 U Water Tribe Rallier @Boell Oyino
 43 C Yip Yip! @Cinkai
+44 U Accumulate Wisdom @Gemi
+45 U Benevolent River Spirit @Mizutametori
+46 U Boomerang Basics @Tubaki Halsame
+47 U Crashing Wave @Mitori
+48 U Ember Island Production @Brian Yuen
 49 C First-Time Flyer @Mizutametori
 50 C Flexible Waterbender @Rafater
 51 C Forecasting Fortune Teller @Hisashi Momose
@@ -37,23 +133,31 @@ ScryfallCode=TLA
 54 U Gran-Gran @Arou
 55 U Honest Work @ikeda_cpt
 56 C Iguana Parrot @Tyler Smith
+57 U Invasion Submersible @Sylvain Sarrailh
 58 C It'll Quench Ya! @Nathaniel Himawan
 59 U Katara, Bending Prodigy @Mephisto
+60 U Knowledge Seeker @Shiren
 61 M The Legend of Kuruk @Toshiaki Takayama
 62 C Lost Days @Matteo Bassini
 63 U Master Pakku @Olena Richards
 64 R The Mechanist, Aerial Artisan @Le Vuong
 65 U North Pole Patrol @Rose Benjamin
+66 C Octopus Form @Norikatsu Miyoshi
 67 C Otter-Penguin @Eilene Cherie
 68 C Rowdy Snowballers @Mizutametori
 69 M Secret of Bloodbending @Olena Richards
 70 U Serpent of the Pass @Eiji Kaneda
 71 U Sokka's Haiku @Bun Toujo
+72 U The Spirit Oasis @Slawek Fedorczuk
+73 R Spirit Water Revival @Enishi
 74 U Teo, Spirited Glider @Robin Har
 75 R Tiger-Seal @Jinho Bae
 76 R Ty Lee, Chi Blocker @Gemi
+77 R The Unagi of Kyoshi Island @Miho Midorikawa
 78 M Wan Shi Tong, Librarian @Ryota Murayama
+79 R Waterbender Ascension @Takeuchi Moto
 80 C Waterbending Lesson @Sylvain Sarrailh
+81 U Waterbending Scroll @Dee Nguyen
 82 C Watery Grasp @Rose Benjamin
 83 R Yue, the Moon Spirit @Yuumei
 84 C Azula Always Lies @Robin Har
@@ -61,111 +165,206 @@ ScryfallCode=TLA
 86 C Beetle-Headed Merchants @Norikatsu Miyoshi
 87 R Boiling Rock Rioter @Airi Yoshihisa
 88 U Buzzard-Wasp Colony @Thomas Chamberlain-Keen
+89 C Callous Inspector @Enishi
+90 C Canyon Crawler @Kohei Hayama
 91 U Cat-Gator @Joseph Weston
 92 C Corrupt Court Official @Norikatsu Miyoshi
 93 C Dai Li Indoctrination @Lius Lasahido
 94 R Day of Black Sun @Matteo Bassini
+95 C Deadly Precision @Yuhong Ding
 96 U Epic Downfall @Hristo D. Chukov
+97 U Fatal Fissure @Maojin Lee
 98 R The Fire Nation Drill @Brandon L. Hunt
 99 U Fire Nation Engineer @Norikatsu Miyoshi
+100 U Fire Navy Trebuchet @Mikio Masuda
+101 C Foggy Swamp Hunters @Bun Toujo
 102 R Foggy Swamp Visions @Hori Airi
 103 U Heartless Act @Sylvain Sarrailh
 104 C Hog-Monkey @Miho Midorikawa
+105 U Joo Dee, One of Many @Olena Richards
+106 U June, Bounty Hunter @Shiren
+107 M Koh, the Face Stealer @Eduardo Francisco
+108 U Lo and Li, Twin Tutors @AKAGI
+109 R Mai, Scornful Striker @Hori Airi
 110 C Merchant of Many Hats @Boell Oyino
 111 U Northern Air Temple @Slawek Fedorczuk
+112 R Obsessive Pursuit @Ichiko Milk Tei
 113 U Ozai's Cruelty @ikeda_cpt
+114 M Phoenix Fleet Airship @Thanh Tuấn
+115 C Pirate Peddlers @Eduardo Francisco
+116 R Raven Eagle @Robin Olausson
 117 M The Rise of Sozin @Mitori
+118 U Ruinous Waterbending @Yuu Fujiki
+119 C Sold Out @Nijihayashi
+120 C Swampsnare Trap @Yoshioka
 121 U Tundra Tank @Shishizaru
+122 U Wolfbat @Daniel Romanovsky
+123 U Zuko's Conviction @Kieran Yanner
+124 C Boar-q-pine @Brandon L. Hunt
+125 C Bumi Bash @Maël Ollivier-Henry
 126 U The Cave of Two Lovers @Ittoku
+127 U Combustion Man @Pisukev
+128 U Combustion Technique @Devin Elle Kurtz
 129 U Crescent Island Temple @Luc Courtois
 130 C Cunning Maneuver @Robin Har
 131 C Deserter's Disciple @HAIKEI
 132 M Fated Firepower @Toshiaki Takayama
 133 U Fire Nation Attacks @Claudiu-Antoniu Magherusan
+134 C Fire Nation Cadets @Rafater
+135 C Fire Nation Raider @Tubaki Halsame
 136 U Fire Sages @Yuu Fujiki
+137 R Firebender Ascension @Tetsuko
+138 C Firebending Lesson @Toni Infante
 139 R Firebending Student @Kozato
 140 C How to Start a Riot @Robin Olausson
+141 U Iroh's Demonstration @Song Qijin
+142 U Jeong Jeong, the Deserter @Danciao
+143 U Jet's Brainwashing @Enishi
 144 R The Last Agni Kai @Pablo Rivera
 145 M The Legend of Roku @Song Qijin
 146 C Lightning Strike @Jo Cordisco
+147 U Mai, Jaded Edge @Toraji
 148 C Mongoose Lizard @Joseph Weston
+149 U Price of Freedom @Kotakan
 150 R Ran and Shaw @Miho Midorikawa
 151 R Redirect Lightning @Toni Infante
 152 C Rough Rhino Cavalry @Yuhong Ding
 153 U Solstice Revelations @Kotakan
 154 M Sozin's Comet @Salvatorre Zee Yazzie
+155 U Tiger-Dillo @John Di Giovanni
+156 C Treetop Freedom Fighters @AKAGI
+157 U Twin Blades @Jo Cordisco
 158 U Ty Lee, Artful Acrobat @Rose Benjamin
 159 U War Balloon @Matteo Bassini
+160 R Wartime Protestors @Yosuke Adachi
 161 C Yuyan Archers @Domco.
+162 R Zhao, the Moon Slayer @Toraji
 163 U Zuko, Exiled Prince @Nijihayashi
 164 U Allies at Last @Evan Shipard
+165 R Avatar Destiny @Iwamoto05
 166 C Badgermole @Matteo Bassini
 167 M Badgermole Cub @Nathaniel Himawan
+168 U The Boulder, Ready to Rumble @Thanh Tuấn
+169 U Bumi, King of Three Trials @Thomas Chamberlain-Keen
 170 C Cycle of Renewal @Jocelin Carmes
 171 R Diligent Zookeeper @Maojin Lee
+172 R The Earth King @Ryota Murayama
+173 U Earth Kingdom General @Alexandr Leskinen
 174 U Earth Rumble @Olena Richards
+175 R Earthbender Ascension @Logan Feliciano
 176 C Earthbending Lesson @Toni Infante
+177 R Earthen Ally @Boell Oyino
+178 R Elemental Teachings @Yoshioka
 179 U Flopsie, Bumi's Buddy @Alexandr Leskinen
+180 C Foggy Swamp Vinebender @Maël Ollivier-Henry
+181 R Great Divide Guide @Song Qijin
 182 U Haru, Hidden Talent @Mitori
 183 U Invasion Tactics @Eduardo Francisco
+184 U Kyoshi Island Plaza @Eilene Cherie
 185 U Leaves from the Vine @Ittoku
+186 M The Legend of Kyoshi @Thanh Tuấn
+187 C Origin of Metalbending @Pauline Voss
 188 C Ostrich-Horse @Pablo Rivera
 189 C Pillar Launch @Jo Cordisco
 190 C Raucous Audience @ikeda_cpt
 191 C Rebellious Captives @Ittoku
+192 U Rockalanche @Yuu Fujiki
 193 C Rocky Rebuke @Hokyoung Kim
 194 C Saber-Tooth Moose-Lion @Shiren
 195 U Seismic Sense @Jo Cordisco
+196 U Shared Roots @Alfven Ato
 197 U Sparring Dummy @Gemi
 198 U Toph, the Blind Bandit @Yueko
 199 U True Ancestry @Chibi
 200 C Turtle-Duck @Sylvain Sarrailh
 201 U Unlucky Cabbage Merchant @Thomas Chamberlain-Keen
+202 C Walltop Sentries @Boell Oyino
 203 R Aang, at the Crossroads @Evan Shipard
+204 R Aang, Swift Savior @Tetsuko
 205 C Abandon Attachments @Shahab Alizadeh
+206 U Air Nomad Legacy @AKAGI
 207 M Avatar Aang @Fahmi Fauzi
 208 R Azula, Cunning Usurper @Evyn Fong
+209 R Beifong's Bounty Hunters @Alexandr Leskinen
+210 U Bitter Work @Bun Toujo
 211 M Bumi, Unleashed @Toni Infante
 212 C Cat-Owl @Thomas Chamberlain-Keen
+213 U Cruel Administrator @Norikatsu Miyoshi
 214 U Dai Li Agents @Eduardo Francisco
 215 U Dragonfly Swarm @John Di Giovanni
 216 C Earth Kingdom Soldier @Rafater
 217 R Earth King's Lieutenant @Nathaniel Himawan
+218 C Earth Rumble Wrestlers @Thomas Chamberlain-Keen
 219 C Earth Village Ruffians @Dom Lay
 220 R Fire Lord Azula @Fahmi Fauzi
 221 R Fire Lord Zuko @Jo Cordisco
+222 U Foggy Swamp Spirit Keeper @Airi Yoshihisa
 223 U Guru Pathik @Dee Nguyen
 224 U Hama, the Bloodbender @Le Vuong
 225 U Hei Bai, Spirit of Balance @Tyler Smith
+226 U Hermitic Herbalist @Kozato
 227 R Iroh, Grand Lotus @Fahmi Fauzi
+228 R Iroh, Tea Master @Brian Yuen
+229 U Jet, Freedom Fighter @Fahmi Fauzi
 230 R Katara, the Fearless @Hisashi Momose
 231 R Katara, Water Tribe's Hope @Toraji
 232 R The Lion-Turtle @Yuumei
 233 U Long Feng, Grand Secretariat @Robin Har
+234 C Messenger Hawk @Daniel Romanovsky
 235 M Ozai, the Phoenix King @Kekai Kotaki
+236 C Platypus-Bear @Maël Ollivier-Henry
 237 C Pretending Poxbearers @Salvatorre Zee Yazzie
+238 U Professor Zei, Anthropologist @Pauline Voss
+239 R Sandbender Scavengers @Alexander Forssberg
 240 R Sokka, Bold Boomeranger @Toni Infante
 241 U Sokka, Lateral Strategist @Axel Sauerwald
 242 R Sokka, Tenacious Tactician @Robin Har
 243 U Suki, Kyoshi Warrior @Yuhong Ding
 244 U Sun Warriors @Boell Oyino
+245 U Tolls of War @Jocelin Carmes
+246 R Toph, Hardheaded Teacher @Ruwen Liu
 247 R Toph, the First Metalbender @Eilene Cherie
 248 U Uncle Iroh @Kieran Yanner
 249 C Vindictive Warden @Jo Cordisco
+250 C Wandering Musicians @Rose Benjamin
 251 U White Lotus Reinforcements @Kotakan
+252 U Zhao, Ruthless Admiral @Yuumei
 253 R Zuko, Conflicted @Halil Ural
 254 C Barrels of Blasting Jelly @Salvatorre Zee Yazzie
 255 C Bender's Waterskin @Dee Nguyen
+256 U Fire Nation Warship @Hisashi Momose
+257 C Kyoshi Battle Fan @VEN
+258 U Meteor Sword @Matteo Bassini
 259 M Planetarium of Wan Shi Tong @Robin Olausson
 260 U Trusty Boomerang @Toni Infante
+261 M The Walls of Ba Sing Se @Arthur Yuan
 262 M White Lotus Tile @Dee Nguyen
+263 R Abandoned Air Temple @Dom Lay
+264 R Agna Qel'a @Dom Lay
+265 C Airship Engine Room @Andreas Rocha
+266 R Ba Sing Se @Andreas Rocha
+267 C Boiling Rock Prison @Matteo Bassini
+268 R Fire Nation Palace @Awanqi (Angela Wang)
+269 C Foggy Bottom Swamp @Dom Lay
+270 R Jasmine Dragon Tea Shop @Leanna Crossan
+271 C Kyoshi Village @Luc Courtois
+272 C Meditation Pools @Luc Courtois
+273 C Misty Palms Oasis @Andreas Rocha
+274 C North Pole Gates @Andreas Rocha
+275 C Omashu City @Andreas Rocha
+276 R Realm of Koh @Andreas Rocha
+277 C Rumble Arena @Le Vuong
 278 R Secret Tunnel @Alexander Forssberg
+279 C Serpent's Pass @Matteo Bassini
+280 C Sun-Blessed Peak @Dom Lay
 281 U White Lotus Hideout @Luc Courtois
 282 L Plains @Slawek Fedorczuk
 283 L Island @Maojin Lee
 284 L Swamp @Matteo Bassini
 285 L Mountain @Salvatorre Zee Yazzie
 286 L Forest @Maojin Lee
+
+[full art]
 287 L Plains @Salvatorre Zee Yazzie
 288 L Island @Grady Frederick
 289 L Swamp @John Di Giovanni
@@ -176,61 +375,217 @@ ScryfallCode=TLA
 294 L Swamp @Robin Olausson
 295 L Mountain @Maojin Lee
 296 L Forest @Slawek Fedorczuk
+
+[scene cards]
 297 M Fated Firepower @Claudiu-Antoniu Magherusan
+298 R Aang, Swift Savior @Claudiu-Antoniu Magherusan
 299 U Fire Nation Attacks @Claudiu-Antoniu Magherusan
+300 U Crashing Wave @Claudiu-Antoniu Magherusan
+301 U Combustion Technique @Toni Infante
+302 R Zuko, Conflicted @Toni Infante
 303 R Azula, Cunning Usurper @Toni Infante
 304 R Aang, at the Crossroads @Toni Infante
 305 R Katara, the Fearless @Toni Infante
 306 U Dai Li Agents @Toni Infante
+307 R Earthbender Ascension @Dominik Mayer
 308 M Avatar Aang @Dominik Mayer
 309 M Sozin's Comet @Dominik Mayer
+310 R Waterbender Ascension @Dominik Mayer
 311 M Ozai, the Phoenix King @Dominik Mayer
+312 R Firebender Ascension @Dominik Mayer
 313 R Fire Lord Azula @Dominik Mayer
 314 R The Last Agni Kai @Dominik Mayer
 315 R Fire Lord Zuko @Dominik Mayer
+
+[borderless]
 316 M Appa, Steadfast Guardian @Ilse Gort
 317 R Momo, Friendly Flier @Filip Burburan
 318 R Tiger-Seal @Andrea Piparo
+319 R The Unagi of Kyoshi Island @Antonio José Manzanedo
 320 M Wan Shi Tong, Librarian @Andrea Piparo
 321 R The Fire Nation Drill @Ben Hill
+322 M Koh, the Face Stealer @Antonio José Manzanedo
+323 M Phoenix Fleet Airship @Ben Hill
+324 R Raven Eagle @Vincent Coviello
 325 R Ran and Shaw @Antonio José Manzanedo
 326 M Badgermole Cub @Filip Burburan
 327 R Diligent Zookeeper @Andrea Piparo
 328 R The Lion-Turtle @Filip Burburan
+329 M The Walls of Ba Sing Se @Ben Hill
 330 M White Lotus Tile @Antonio José Manzanedo
+331 M United Front @JungShan
 332 M Sozin's Comet @JungShan
+333 R Avatar Destiny @Flavio Girón
 334 R Fire Lord Azula @JungShan
 335 M Ozai, the Phoenix King @Sidharth Chaturvedi
 336 R Aang's Iceberg @Brigitte Roka & Clifton Stommel
 337 M Secret of Bloodbending @Barbara Rosiak
 338 R Yue, the Moon Spirit @Barbara Rosiak
 339 R Foggy Swamp Visions @Sija Hong
+340 R Obsessive Pursuit @Sija Hong
 341 M Fated Firepower @Brigitte Roka
 342 R Firebending Student @Ina Wong
 343 R Redirect Lightning @Perci Chen
+344 R The Earth King @Brigitte Roka & Clifton Stommel
+345 R Great Divide Guide @Shane Beresford
 346 R Aang, at the Crossroads @Brigitte Roka & Clifton Stommel
+347 R Aang, Swift Savior @Shane Beresford
 348 M Bumi, Unleashed @Brigitte Roka
 349 R Iroh, Grand Lotus @Dalton Pencarinha
 350 R Katara, the Fearless @Barbara Rosiak
 351 R Katara, Water Tribe's Hope @Chun Lo
 352 R Sokka, Tenacious Tactician @Faustine Dumontier
 353 R Toph, the First Metalbender @Barbara Rosiak
+354 M The Legend of Yangchen @Sija Hong
 355 M The Legend of Kuruk @Barbara Rosiak
 356 M The Rise of Sozin @Barbara Rosiak
 357 M The Legend of Roku @Barbara Rosiak
+358 M The Legend of Kyoshi @Sija Hong
+359 R Aang, Swift Savior @Flavio Girón
 360 R Fire Lord Zuko @Flavio Girón
 361 R Katara, the Fearless @Flavio Girón
 362 R Toph, the First Metalbender @Flavio Girón
 363 M Avatar Aang @Bryan Konietzko
 364 R Airbender Ascension @Shiren
+365 R Avatar's Wrath @Ainezu
 366 R Hakoda, Selfless Commander @Rafater
+367 R South Pole Voyager @Tition
+368 R Suki, Courageous Rescuer @Tky
 369 R The Mechanist, Aerial Artisan @Le Vuong
+370 R Spirit Water Revival @Enishi
 371 R Ty Lee, Chi Blocker @Gemi
 372 R Boiling Rock Rioter @Airi Yoshihisa
 373 R Day of Black Sun @Matteo Bassini
+374 R Mai, Scornful Striker @Hori Airi
+375 R Wartime Protestors @Yosuke Adachi
+376 R Zhao, the Moon Slayer @Toraji
+377 R Earthen Ally @Boell Oyino
+378 R Elemental Teachings @Yoshioka
+379 R Beifong's Bounty Hunters @Alexandr Leskinen
 380 R Earth King's Lieutenant @Nathaniel Himawan
+381 R Iroh, Tea Master @Brian Yuen
+382 R Sandbender Scavengers @Alexander Forssberg
 383 R Sokka, Bold Boomeranger @Toni Infante
+384 R Toph, Hardheaded Teacher @Ruwen Liu
 385 M Planetarium of Wan Shi Tong @Robin Olausson
+386 R Abandoned Air Temple @Dom Lay
+387 R Agna Qel'a @Dom Lay
+388 R Ba Sing Se @Andreas Rocha
+389 R Fire Nation Palace @Awanqi (Angela Wang)
+390 R Jasmine Dragon Tea Shop @Leanna Crossan
+391 R Realm of Koh @Andreas Rocha
 392 R Secret Tunnel @Alexander Forssberg
 393 R Firebending Student @Airi Yoshihisa
 394 R Momo, Friendly Flier @Ryota Murayama
+
+[field notes]
+1 Appa, Steadfast Guardian|TLA|[316]
+1 Momo, Friendly Flier|TLA|[317]
+1 Tiger-Seal|TLA|[318]
+1 The Unagi of Kyoshi Island|TLA|[319]
+1 Wan Shi Tong, Librarian|TLA|[320]
+1 The Fire Nation Drill|TLA|[321]
+1 Koh, the Face Stealer|TLA|[322]
+1 Phoenix Fleet Airship|TLA|[323]
+1 Raven Eagle|TLA|[324]
+1 Ran and Shaw|TLA|[325]
+1 Badgermole Cub|TLA|[326]
+1 Diligent Zookeeper|TLA|[327]
+1 The Lion-Turtle|TLA|[328]
+1 The Walls of Ba Sing Se|TLA|[329]
+1 White Lotus Tile|TLA|[330]
+
+[battle pose]
+1 Aang, Swift Savior|TLA|[359]
+1 Fire Lord Zuko|TLA|[360]
+1 Katara, the Fearless|TLA|[361]
+1 Toph, the First Metalbender|TLA|[362]
+1 United Front|TLA|[331]
+1 Sozin's Comet|TLA|[332]
+1 Avatar Destiny|TLA|[333]
+1 Fire Lord Azula|TLA|[334]
+1 Ozai, the Phoenix King|TLA|[335]
+
+[elemental frame]
+1 Aang's Iceberg|TLA|[336]
+1 Fated Firepower|TLA|[337]
+1 Yue, the Moon Spirit|TLA|[338]
+1 Foggy Swamp Visions|TLA|[339]
+1 Obsessive Pursuit|TLA|[340]
+1 Firebending Student|TLA|[342]
+1 Redirect Lightning|TLA|[343]
+1 The Earth King|TLA|[344]
+1 Great Divide Guide|TLA|[345]
+1 Aang, at the Crossroads|TLA|[346]
+1 Bumi, Unleashed|TLA|[348]
+1 Iroh, Grand Lotus|TLA|[349]
+1 Katara, the Fearless|TLA|[350]
+1 Katara, Water Tribe's Hope|TLA|[351]
+1 Sokka, Tenacious Tactician|TLA|[352]
+1 Toph, the First Metalbender|TLA|[353]
+
+[borderless dfc saga]
+1 The Legend of Yangchen|TLA|[354]
+1 The Legend of Kuruk|TLA|[355]
+1 The Rise of Sozin|TLA|[356]
+1 The Legend of Roku|TLA|[357]
+1 The Legend of Kyoshi|TLA|[358]
+
+[allied lands]
+1 Airship Engine Room|TLA|[265]
+1 Boiling Rock Prison|TLA|[267]
+1 Foggy Bottom Swamp|TLA|[269]
+1 Kyoshi Village|TLA|[271]
+1 Meditation Pools|TLA|[272]
+1 Misty Palms Oasis|TLA|[273]
+1 North Pole Gates|TLA|[274]
+1 Omashu City|TLA|[275]
+1 Serpent's Pass|TLA|[279]
+1 Sun-Blessed Peak|TLA|[280]
+
+[default basic]
+1 Plains|TLA|[282]
+1 Island|TLA|[283]
+1 Swamp|TLA|[284]
+1 Mountain|TLA|[285]
+1 Forest|TLA|[286]
+
+[Appa basic]
+1 Plains|TLA|[287]
+1 Island|TLA|[288]
+1 Swamp|TLA|[289]
+1 Mountain|TLA|[290]
+1 Forest|TLA|[291]
+
+[Avatar journey basic]
+1 Plains|TLA|[292]
+1 Island|TLA|[293]
+1 Swamp|TLA|[294]
+1 Mountain|TLA|[295]
+1 Forest|TLA|[296]
+
+[tokens]
+3 c_1_1_spirit_spiritshadow @Valera Lutfullina
+4 w_1_1_ally @Rose Benjamin
+5 w_1_1_ally @Alexandr Leskinen
+6 w_1_1_ally @Alexandr Leskinen
+7 w_1_1_ally @Le Vuong
+8 w_1_1_ally @Salvatorre Zee Yazzie
+9 r_4_4_dragon_flying_firebending_4 @Lius Lasahido
+10 r_1_1_monk_prowess @Dom Lay
+11 r_2_2_soldier_firebending_1 @Jo Cordisco
+12 g_4_4_bear @Brandon L. Hunt
+13 ballistic_boulder @Dom Lay
+14 c_a_clue_draw @Luc Courtois
+15 c_a_clue_draw @Luc Courtois
+16 c_a_clue_draw @Valera Lutfullina
+17 c_a_clue_draw @Andreas Rocha
+18 c_a_clue_draw @Andreas Rocha
+19 c_a_food_sac @Andreas Rocha
+20 c_a_food_sac @Joseph Weston
+21 c_a_food_sac @Henry Wong
+22 c_a_treasure_sac @Rose Benjamin
+
+[other]
+1 copy @Jo Cordisco
+2 copy @Le Vuong

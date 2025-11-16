@@ -1,0 +1,8 @@
+Name:Tale of Momo
+ManaCost:2 W
+Types:Sorcery
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | CheckSVar$ X | SVarCompare$ GE1 | Description$ This spell costs {2} less to cast if a creature left the battlefield under your control this turn.
+A:SP$ ChangeZone | Optional$ True | Origin$ Library | OriginAlternative$ Graveyard | Destination$ Hand | ChangeType$ Creature.Ally+YouOwn | ChangeTypeDesc$ Ally creature card | ChangeNum$ 1 | ShuffleNonMandatory$ True | SpellDescription$ Search your library and/or graveyard for an Ally creature card, reveal it, and put it into your hand. If you search your library this way, shuffle.
+SVar:X:Count$LeftBattlefieldThisTurn Creature.YouCtrl
+DeckHints:Type$Ally
+Oracle:This spell costs {2} less to cast if a creature left the battlefield under your control this turn.\nSearch your library and/or graveyard for an Ally creature card, reveal it, and put it into your hand. If you search your library this way, shuffle.

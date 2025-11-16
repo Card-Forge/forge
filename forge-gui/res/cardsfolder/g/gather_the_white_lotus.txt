@@ -1,0 +1,8 @@
+Name:Gather the White Lotus
+ManaCost:4 W
+Types:Sorcery
+A:SP$ Token | TokenAmount$ X | TokenScript$ w_1_1_ally | TokenOwner$ You | SubAbility$ DBScry | SpellDescription$ Create a 1/1 white Ally creature token for each Plains you control. Scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)
+SVar:DBScry:DB$ Scry | ScryNum$ 2
+SVar:X:Count$Valid Plains.YouCtrl
+SVar:BuffedBy:Plains
+Oracle:Create a 1/1 white Ally creature token for each Plains you control. Scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)

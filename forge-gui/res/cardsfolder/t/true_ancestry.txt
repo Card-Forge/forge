@@ -1,0 +1,7 @@
+Name:True Ancestry
+ManaCost:1 G
+Types:Sorcery Lesson
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Permanent.YouOwn | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose up to one target creature card in your graveyard | SubAbility$ DBToken | SpellDescription$ Return up to one target permanent card from your graveyard to your hand. Create a Clue token. (It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_clue_draw | TokenOwner$ You
+DeckHints:Ability$Graveyard|Token
+Oracle:Return up to one target permanent card from your graveyard to your hand.\nCreate a Clue token. (It's an artifact with "{2}, Sacrifice this token: Draw a card.")

@@ -140,6 +140,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     // stores the card traits created by static abilities
     private final Table<StaticAbility, String, SpellAbility> storedSpellAbility = TreeBasedTable.create();
     private final Table<StaticAbility, String, Trigger> storedTrigger = TreeBasedTable.create();
+    private final Table<StaticAbility, SpellAbility, SpellAbility> storedAbilityForTrigger = HashBasedTable.create();
     private final Table<StaticAbility, String, ReplacementEffect> storedReplacementEffect = TreeBasedTable.create();
     private final Table<StaticAbility, String, StaticAbility> storedStaticAbility = TreeBasedTable.create();
 
@@ -195,6 +196,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private boolean startedTheTurnUntapped = false;
     private boolean cameUnderControlSinceLastUpkeep = true; // for Echo
     private boolean tapped = false;
+    private int tappedThisTurn;
     private boolean sickness = true; // summoning sickness
     private boolean collectible = false;
     private boolean tokenCard = false;
@@ -207,7 +209,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private boolean renowned;
     private boolean solved;
     private boolean tributed;
-    private Card suspectedEffect = null;
+    private StaticAbility suspectedStatic = null;
 
     private SpellAbility manifestedSA;
     private SpellAbility cloakedSA;
@@ -4897,7 +4899,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         runParams.put(AbilityKey.Attacker, attacker);
         runParams.put(AbilityKey.Cause, cause);
         runParams.put(AbilityKey.Player, tapper);
+        runParams.put(AbilityKey.FirstTime, tappedThisTurn == 0);
         getGame().getTriggerHandler().runTrigger(TriggerType.Taps, runParams, false);
+
+        tappedThisTurn++;
 
         setTapped(true);
         view.updateNeedsTapAnimation(tapAnimation);
@@ -4970,7 +4975,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         String str = trig.toString() + trig.getId();
         Trigger result = storedTrigger.get(stAb, str);
         if (result == null) {
-            result = trig.copy(this, false);
+            SpellAbility ab = null;
+            if (trig.hasParam("Execute") && trig.getOverridingAbility() != null) {
+                ab = storedAbilityForTrigger.get(stAb, trig.getOverridingAbility());
+                if (ab == null) {
+                    ab = trig.getOverridingAbility().copy(this, false);
+                    storedAbilityForTrigger.put(stAb, trig.getOverridingAbility(), ab);
+                }
+            }
+            result = trig.copy(this, false, false, ab);
             storedTrigger.put(stAb, str, result);
         }
         return result;
@@ -6745,15 +6758,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return true;
     }
 
-    public Card getSuspectedEffect() {
-        return this.suspectedEffect;
+    public StaticAbility getSuspectedStatic() {
+        return this.suspectedStatic;
     }
-    public void setSuspectedEffect(Card effect) {
-        this.suspectedEffect = effect;
+    public void setSuspectedStatic(StaticAbility stAb) {
+        this.suspectedStatic = stAb;
     }
 
     public final boolean isSuspected() {
-        return suspectedEffect != null;
+        return suspectedStatic != null;
     }
 
     public final boolean setSuspected(final boolean suspected) {
@@ -6766,23 +6779,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 return true;
             }
 
-            suspectedEffect = SpellAbilityEffect.createEffect(null, this, this.getController(), "Suspected Effect", getImageKey(), getGame().getNextTimestamp());
-            suspectedEffect.setRenderForUI(false);
-            suspectedEffect.addRemembered(this);
+            String s = "Mode$ Continuous | AffectedDefined$ Self | AddKeyword$ Menace | AddStaticAbility$ SuspectedCantBlockBy";
+            suspectedStatic = StaticAbility.create(s, this, currentState, true);
+            suspectedStatic.putParam("Timestamp", String.valueOf(getGame().getNextTimestamp()));
 
-            String s = "Mode$ Continuous | AffectedDefined$ RememberedCard | EffectZone$ Command | AddKeyword$ Menace | AddStaticAbility$ SuspectedCantBlockBy";
-            StaticAbility suspectedStatic = suspectedEffect.addStaticAbility(s);
             String effect = "Mode$ CantBlock | ValidCard$ Creature.Self | Description$ CARDNAME can't block.";
             suspectedStatic.setSVar("SuspectedCantBlockBy", effect);
 
-            GameCommand until = SpellAbilityEffect.exileEffectCommand(getGame(), suspectedEffect);
-            addLeavesPlayCommand(until);
-            getGame().getAction().moveToCommand(suspectedEffect, null);
         } else {
-            if (isSuspected()) {
-                getGame().getAction().exileEffect(suspectedEffect);
-                suspectedEffect = null;
-            }
+            suspectedStatic = null;
         }
         return true;
     }
@@ -7171,7 +7176,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 String v = kwt.getValidType();
                 String desc = kwt.getTypeDescription();
                 if (!isValid(v.split(","), aura.getController(), aura, null) || (!v.contains("inZone") && !isInPlay())) {
-                    return getName() + " is not " + Lang.nounWithAmount(1, desc);
+                    return getDisplayName() + " is not " + Lang.nounWithAmount(1, desc);
                 }
             }
         }
@@ -7182,17 +7187,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     @Override
     protected String cantBeEquippedByMsg(final Card equip, SpellAbility sa) {
         if (!isInPlay()) {
-            return getName() + " is not in play";
+            return getDisplayName() + " is not in play";
         }
         if (sa != null && sa.isEquip()) {
             if (!isValid(sa.getTargetRestrictions().getValidTgts(), sa.getActivatingPlayer(), equip, sa)) {
                 Equip eq = (Equip) sa.getKeyword();
-                return getName() + " is not " + Lang.nounWithAmount(1, eq.getValidDescription());
+                return getDisplayName() + " is not " + Lang.nounWithAmount(1, eq.getValidDescription());
             }
             return null;
         }
         if (!isCreature()) {
-            return getName() + " is not a creature";
+            return getDisplayName() + " is not a creature";
         }
         return null;
     }
@@ -7200,13 +7205,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     @Override
     protected String cantBeFortifiedByMsg(final Card fort) {
         if (!isLand()) {
-            return getName() + " is not a Land";
+            return getDisplayName() + " is not a Land";
         }
         if (!isInPlay()) {
-            return getName() + " is not in play";
+            return getDisplayName() + " is not in play";
         }
         if (fort.isLand()) {
-            return fort.getName() + " is a Land";
+            return fort.getDisplayName() + " is a Land";
         }
 
         return null;
@@ -7215,7 +7220,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     @Override
     public String cantBeAttachedMsg(final Card attach, SpellAbility sa, boolean checkSBA) {
         if (isPhasedOut() && !attach.isPhasedOut()) {
-            return getName() + " is phased out";
+            return getDisplayName() + " is phased out";
         }
         return super.cantBeAttachedMsg(attach, sa, checkSBA);
     }
@@ -7278,6 +7283,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         for (KeywordInterface kw : getUnhiddenKeywords(state)) {
             list.addAll(kw.getStaticAbilities());
         }
+    }
+
+    public final FCollectionView<StaticAbility> getHiddenStaticAbilities() {
+        FCollection<StaticAbility> result = new FCollection<>();
+        // Suspected
+        if (this.isInPlay() && this.isSuspected()) {
+            result.add(suspectedStatic);
+        }
+        return result;
     }
 
     public final FCollectionView<Trigger> getTriggers() {
@@ -7456,7 +7470,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public void onCleanupPhase(final Player turn) {
-        resetExcessDamage();
+        tappedThisTurn = 0;
         setRegeneratedThisTurn(0);
         resetShieldCount();
         targetedFromThisTurn.clear();
@@ -7466,13 +7480,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         getDamageHistory().setCreatureAttackedLastTurnOf(turn, getDamageHistory().getCreatureAttacksThisTurn() > 0);
         getDamageHistory().newTurn();
         damageReceivedThisTurn.clear();
+        resetExcessDamage();
         clearBlockedByThisTurn();
         clearBlockedThisTurn();
-        resetMayPlayTurn();
         resetExertedThisTurn();
         resetCrewed();
         resetSaddled();
         visitedThisTurn = false;
+        resetMayPlayTurn();
         resetChosenModeTurn();
         resetAbilityResolvedThisTurn();
     }

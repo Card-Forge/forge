@@ -1,0 +1,9 @@
+Name:The Unagi of Kyoshi Island
+ManaCost:3 U U
+Types:Legendary Creature Serpent
+PT:5/5
+K:Flash
+K:Ward:Waterbend<4>
+T:Mode$ Drawn | ValidPlayer$ Opponent | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever an opponent draws their second card each turn, draw two cards.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2
+Oracle:Flash\nWard—Waterbend {4} (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)\nWhenever an opponent draws their second card each turn, draw two cards.

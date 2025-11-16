@@ -69,7 +69,7 @@ public class ComputerUtilMana {
         return payManaCost(cost, sa, ai, false, 0, true, effect);
     }
     private static boolean payManaCost(final Cost cost, final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable, final boolean effect) {
-        ManaCostBeingPaid manaCost = calculateManaCost(cost, sa, test, extraMana, effect);
+        ManaCostBeingPaid manaCost = calculateManaCost(cost, sa, ai, test, extraMana, effect);
         return payManaCost(manaCost, sa, ai, test, checkPlayable, effect);
     }
 
@@ -77,7 +77,7 @@ public class ComputerUtilMana {
      * Return the number of colors used for payment for Converge
      */
     public static int getConvergeCount(final SpellAbility sa, final Player ai) {
-        ManaCostBeingPaid cost = calculateManaCost(sa.getPayCosts(), sa, true, 0, false);
+        ManaCostBeingPaid cost = calculateManaCost(sa.getPayCosts(), sa, ai, true, 0, false);
         if (payManaCost(cost, sa, ai, true, true, false)) {
             return cost.getSunburst();
         }
@@ -1291,7 +1291,7 @@ public class ComputerUtilMana {
      * @param extraMana extraMana
      * @return ManaCost
      */
-    public static ManaCostBeingPaid calculateManaCost(final Cost cost, final SpellAbility sa, final boolean test, final int extraMana, final boolean effect) {
+    public static ManaCostBeingPaid calculateManaCost(final Cost cost, final SpellAbility sa, final Player payer, final boolean test, final int extraMana, final boolean effect) {
         Card host = sa.getHostCard();
         Zone castFromBackup = null;
         if (test && sa.isSpell() && !host.isInZone(ZoneType.Stack)) {
@@ -1345,9 +1345,7 @@ public class ComputerUtilMana {
             }
         }
 
-        if (!effect) {
-            CostAdjustment.adjust(manaCost, sa, null, test);
-        }
+        CostAdjustment.adjust(manaCost, sa, payer, null, test, effect);
 
         if ("NumTimes".equals(sa.getParam("Announce"))) { // e.g. the Adversary cycle
             ManaCost mkCost = sa.getPayCosts().getTotalMana();
@@ -1773,15 +1771,18 @@ public class ComputerUtilMana {
 
     /**
      * Matches list of creatures to shards in mana cost for convoking.
-     * @param cost cost of convoked ability
-     * @param list creatures to be evaluated
-     * @param improvise
+     *
+     * @param cost      cost of convoked ability
+     * @param list      creatures to be evaluated
+     * @param artifacts
+     * @param creatures
      * @return map between creatures and shards to convoke
      */
-    public static Map<Card, ManaCostShard> getConvokeOrImproviseFromList(final ManaCost cost, List<Card> list, boolean improvise) {
+    public static Map<Card, ManaCostShard> getConvokeOrImproviseFromList(final ManaCost cost, List<Card> list, boolean artifacts, boolean creatures) {
         final Map<Card, ManaCostShard> convoke = new HashMap<>();
         Card convoked = null;
-        if (!improvise) {
+        if (creatures && !artifacts) {
+            // Run for convoke but not improvise or waterbending
             for (ManaCostShard toPay : cost) {
                 if (toPay.isSnow() || toPay.isColorless()) {
                     continue;

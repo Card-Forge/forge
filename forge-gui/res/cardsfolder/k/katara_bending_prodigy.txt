@@ -1,0 +1,8 @@
+Name:Katara, Bending Prodigy
+Types:Legendary Creature Human Warrior Ally 
+ManaCost:2 U
+PT:2/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | PresentDefined$ Self | IsPresent$ Card.tapped | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, if NICKNAME is tapped, put a +1/+1 counter on her.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ Draw | Cost$ Waterbend<6> | NumCards$ 1 | SpellDescription$ Draw a card. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)
+Oracle:At the beginning of your end step, if Katara is tapped, put a +1/+1 counter on her.\nWaterbend {6}: Draw a card. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)

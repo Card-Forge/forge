@@ -1,0 +1,8 @@
+Name:Crashing Wave
+ManaCost:U U
+Types:Sorcery
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Activator$ You | Type$ Spell | Cost$ Waterbend<X> | EffectZone$ All | Description$ As an additional cost to cast this spell, waterbend {X}. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)
+A:SP$ Tap | TargetMin$ 0 | TargetMax$ X | TgtPrompt$ Select up to X target creatures to tap | ValidTgts$ Creature | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Choices$ Creature.tapped+OppCtrl | ChoiceTitle$ Choose any number of tapped creatures your opponents control to distribute counters to | CounterType$ STUN | CounterNum$ 3 | ChoiceAmount$ 3 | DividedAsYouChoose$ 3
+SVar:X:Count$xPaid
+Oracle:As an additional cost to cast this spell, waterbend {X}. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)\nTap up to X target creatures, then distribute three stun counters among tapped creatures your opponents control. (If a permanent with a stun counter would become untapped, remove one from it instead.)

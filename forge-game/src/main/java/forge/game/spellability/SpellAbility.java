@@ -144,6 +144,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private final Supplier<CardCollection> tappedForConvoke = Suppliers.memoize(CardCollection::new);
     private Card sacrificedAsOffering;
     private Card sacrificedAsEmerge;
+    private Integer maxWaterbend;
 
     private AbilityManaPart manaPart;
 
@@ -1025,12 +1026,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public String getStackDescription() {
         String text = getHostCard().getView().getText();
         if (stackDescription.equals(text) && !text.isEmpty()) {
-            return getHostCard().getName() + " - " + text;
+            return getHostCard().getDisplayName() + " - " + text;
         }
         if (stackDescription.isEmpty()) {
             return "";
         }
-        return TextUtil.fastReplace(stackDescription, "CARDNAME", getHostCard().getName());
+        return TextUtil.fastReplace(stackDescription, "CARDNAME", getHostCard().getDisplayName());
     }
     public void setStackDescription(final String s) {
         originalStackDescription = s;
@@ -1129,7 +1130,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 desc = TextUtil.fastReplace(desc, "CARDNAME", translatedName);
                 desc = TextUtil.fastReplace(desc, "NICKNAME", Lang.getInstance().getNickName(translatedName));
                 if (node.getOriginalHost() != null) {
-                    desc = TextUtil.fastReplace(desc, "ORIGINALHOST", node.getOriginalHost().getName());
+                    desc = TextUtil.fastReplace(desc, "ORIGINALHOST", node.getOriginalHost().getDisplayName());
                 }
                 sb.append(desc);
             }
@@ -1954,7 +1955,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
         resetTargets();
         targetChosen.add(card);
-        setStackDescription(getHostCard().getName() + " - targeting " + card);
+        setStackDescription(getHostCard().getDisplayName() + " - targeting " + card);
     }
 
     /**
@@ -2691,5 +2692,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getMaxWaterbend() {
+        return maxWaterbend;
+    }
+    public void setMaxWaterbend(Cost cost) {
+        if (cost == null || cost.getMaxWaterbend() == null) {
+            return;
+        }
+        maxWaterbend = AbilityUtils.calculateAmount(getHostCard(), cost.getMaxWaterbend(), this);
     }
 }
