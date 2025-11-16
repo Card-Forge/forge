@@ -144,6 +144,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private final Supplier<CardCollection> tappedForConvoke = Suppliers.memoize(CardCollection::new);
     private Card sacrificedAsOffering;
     private Card sacrificedAsEmerge;
+    private Integer maxWaterbend;
 
     private AbilityManaPart manaPart;
 
@@ -2691,5 +2692,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getMaxWaterbend() {
+        return maxWaterbend;
+    }
+    public void setMaxWaterbend(Cost cost) {
+        if (cost == null || cost.getMaxWaterbend() == null) {
+            return;
+        }
+        maxWaterbend = AbilityUtils.calculateAmount(getHostCard(), cost.getMaxWaterbend(), this);
     }
 }

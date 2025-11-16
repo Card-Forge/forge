@@ -4,6 +4,77 @@ Date=2025-11-21
 Name=Avatar: The Last Airbender
 Type=Expansion
 ScryfallCode=TLA
+#https://mtgscribe.com/2025/11/08/avatar-play-booster-fact-sheet/
+BoosterSlots=Common,Common-Borderless,Uncommon,RareMythic,Land,Wildcard,WildcardFoil
+Booster=6 Common, 1 Common-Borderless, 3 Uncommon, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 Land
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=30
+
+[Common]
+Base=Common:fromSheet("TLA cards")
+
+[Common-Borderless]
+Base=Common:fromSheet("TLA cards")
+Replace=.0384F fromSheet("TLE borderless")
+
+[Uncommon]
+Base=Uncommon:fromSheet("TLA cards")
+Replace=0.036F Uncommon:fromSheet("TLA scene cards")
+
+[RareMythic]
+Base=Rare:fromSheet("TLA cards")
+Replace=.126F Mythic:fromSheet("TLA cards")
+Replace=.016F Rare:fromSheet("TLA scene cards")
+Replace=.004F Mythic:fromSheet("TLA scene cards")
+Replace=.006F Rare:fromSheet("TLA field notes")
+Replace=.004F Mythic:fromSheet("TLA field notes")
+Replace=.001F Rare:fromSheet("TLA battle pose")
+Replace=.0005F Mythic:fromSheet("TLA battle pose")
+Replace=.001F Rare:fromSheet("TLA elemental frame")
+Replace=.0005F Mythic:fromSheet("TLA elemental frame")
+Replace=.0005F Mythic:fromSheet("TLA borderless saga")
+
+[Wildcard]
+Base=Uncommon:fromSheet("TLA cards")
+Replace=0.042F Common:fromSheet("TLA cards")
+Replace=0.167F Rare:fromSheet("TLA cards")
+Replace=0.0026F Mythic:fromSheet("TLA cards")
+Replace=0.008F Uncommon:fromSheet("TLA scene cards")
+Replace=.006F Rare:fromSheet("TLA scene cards")
+Replace=.004F Mythic:fromSheet("TLA scene cards")
+Replace=.006F Rare:fromSheet("TLA field notes")
+Replace=.004F Mythic:fromSheet("TLA field notes")
+Replace=.001F Rare:fromSheet("TLA battle pose")
+Replace=.0005F Mythic:fromSheet("TLA battle pose")
+Replace=.001F Rare:fromSheet("TLA elemental frame")
+Replace=.0005F Mythic:fromSheet("TLA elemental frame")
+Replace=.0005F Mythic:fromSheet("TLA borderless dfc saga")
+
+[WildcardFoil]
+Base=Common:fromSheet("TLA cards")
+Replace=0.367F Uncommon:fromSheet("TLA cards")
+Replace=0.067F Rare:fromSheet("TLA cards")
+Replace=0.012F Mythic:fromSheet("TLA cards")
+Replace=0.008F Uncommon:fromSheet("TLA scene cards")
+Replace=.006F Rare:fromSheet("TLA scene cards")
+Replace=.004F Mythic:fromSheet("TLA scene cards")
+Replace=.006F Rare:fromSheet("TLA field notes")
+Replace=.004F Mythic:fromSheet("TLA field notes")
+Replace=.001F Rare:fromSheet("TLA battle pose")
+Replace=.0005F Mythic:fromSheet("TLA battle pose")
+Replace=.001F Rare:fromSheet("TLA elemental frame")
+Replace=.0005F Mythic:fromSheet("TLA elemental frame")
+Replace=.0005F Mythic:fromSheet("TLA borderless dfc saga")
+
+[Land]
+Base=fromSheet("TLA allied lands")
+Replace=0.20F BasicLand:fromSheet("TLA default basic")
+Replace=0.10F BasicLand:fromSheet("TLA Avatar journey basic")
+Replace=0.10F BasicLand:fromSheet("TLA Appa basic")
+Replace=0.10F fromSheet("TLA allied lands")+
+Replace=0.05F BasicLand:fromSheet("TLA default basic")+
+Replace=0.025F BasicLand:fromSheet("TLA Avatar journey basic")+
+Replace=0.025F BasicLand:fromSheet("TLA Appa basic")+
 
 [cards]
 1 C Aang's Journey @Kotakan
@@ -262,7 +333,7 @@ ScryfallCode=TLA
 254 C Barrels of Blasting Jelly @Salvatorre Zee Yazzie
 255 C Bender's Waterskin @Dee Nguyen
 256 U Fire Nation Warship @Hisashi Momose
-257 C Kyoshi Battle Fan @Ven
+257 C Kyoshi Battle Fan @VEN
 258 U Meteor Sword @Matteo Bassini
 259 M Planetarium of Wan Shi Tong @Robin Olausson
 260 U Trusty Boomerang @Toni Infante
@@ -292,6 +363,8 @@ ScryfallCode=TLA
 284 L Swamp @Matteo Bassini
 285 L Mountain @Salvatorre Zee Yazzie
 286 L Forest @Maojin Lee
+
+[full art]
 287 L Plains @Salvatorre Zee Yazzie
 288 L Island @Grady Frederick
 289 L Swamp @John Di Giovanni
@@ -302,6 +375,8 @@ ScryfallCode=TLA
 294 L Swamp @Robin Olausson
 295 L Mountain @Maojin Lee
 296 L Forest @Slawek Fedorczuk
+
+[scene cards]
 297 M Fated Firepower @Claudiu-Antoniu Magherusan
 298 R Aang, Swift Savior @Claudiu-Antoniu Magherusan
 299 U Fire Nation Attacks @Claudiu-Antoniu Magherusan
@@ -321,6 +396,8 @@ ScryfallCode=TLA
 313 R Fire Lord Azula @Dominik Mayer
 314 R The Last Agni Kai @Dominik Mayer
 315 R Fire Lord Zuko @Dominik Mayer
+
+[borderless]
 316 M Appa, Steadfast Guardian @Ilse Gort
 317 R Momo, Friendly Flier @Filip Burburan
 318 R Tiger-Seal @Andrea Piparo
@@ -400,3 +477,115 @@ ScryfallCode=TLA
 392 R Secret Tunnel @Alexander Forssberg
 393 R Firebending Student @Airi Yoshihisa
 394 R Momo, Friendly Flier @Ryota Murayama
+
+[field notes]
+1 Appa, Steadfast Guardian|TLA|[316]
+1 Momo, Friendly Flier|TLA|[317]
+1 Tiger-Seal|TLA|[318]
+1 The Unagi of Kyoshi Island|TLA|[319]
+1 Wan Shi Tong, Librarian|TLA|[320]
+1 The Fire Nation Drill|TLA|[321]
+1 Koh, the Face Stealer|TLA|[322]
+1 Phoenix Fleet Airship|TLA|[323]
+1 Raven Eagle|TLA|[324]
+1 Ran and Shaw|TLA|[325]
+1 Badgermole Cub|TLA|[326]
+1 Diligent Zookeeper|TLA|[327]
+1 The Lion-Turtle|TLA|[328]
+1 The Walls of Ba Sing Se|TLA|[329]
+1 White Lotus Tile|TLA|[330]
+
+[battle pose]
+1 Aang, Swift Savior|TLA|[359]
+1 Fire Lord Zuko|TLA|[360]
+1 Katara, the Fearless|TLA|[361]
+1 Toph, the First Metalbender|TLA|[362]
+1 United Front|TLA|[331]
+1 Sozin's Comet|TLA|[332]
+1 Avatar Destiny|TLA|[333]
+1 Fire Lord Azula|TLA|[334]
+1 Ozai, the Phoenix King|TLA|[335]
+
+[elemental frame]
+1 Aang's Iceberg|TLA|[336]
+1 Fated Firepower|TLA|[337]
+1 Yue, the Moon Spirit|TLA|[338]
+1 Foggy Swamp Visions|TLA|[339]
+1 Obsessive Pursuit|TLA|[340]
+1 Firebending Student|TLA|[342]
+1 Redirect Lightning|TLA|[343]
+1 The Earth King|TLA|[344]
+1 Great Divide Guide|TLA|[345]
+1 Aang, at the Crossroads|TLA|[346]
+1 Bumi, Unleashed|TLA|[348]
+1 Iroh, Grand Lotus|TLA|[349]
+1 Katara, the Fearless|TLA|[350]
+1 Katara, Water Tribe's Hope|TLA|[351]
+1 Sokka, Tenacious Tactician|TLA|[352]
+1 Toph, the First Metalbender|TLA|[353]
+
+[borderless dfc saga]
+1 The Legend of Yangchen|TLA|[354]
+1 The Legend of Kuruk|TLA|[355]
+1 The Rise of Sozin|TLA|[356]
+1 The Legend of Roku|TLA|[357]
+1 The Legend of Kyoshi|TLA|[358]
+
+[allied lands]
+1 Airship Engine Room|TLA|[265]
+1 Boiling Rock Prison|TLA|[267]
+1 Foggy Bottom Swamp|TLA|[269]
+1 Kyoshi Village|TLA|[271]
+1 Meditation Pools|TLA|[272]
+1 Misty Palms Oasis|TLA|[273]
+1 North Pole Gates|TLA|[274]
+1 Omashu City|TLA|[275]
+1 Serpent's Pass|TLA|[279]
+1 Sun-Blessed Peak|TLA|[280]
+
+[default basic]
+1 Plains|TLA|[282]
+1 Island|TLA|[283]
+1 Swamp|TLA|[284]
+1 Mountain|TLA|[285]
+1 Forest|TLA|[286]
+
+[Appa basic]
+1 Plains|TLA|[287]
+1 Island|TLA|[288]
+1 Swamp|TLA|[289]
+1 Mountain|TLA|[290]
+1 Forest|TLA|[291]
+
+[Avatar journey basic]
+1 Plains|TLA|[292]
+1 Island|TLA|[293]
+1 Swamp|TLA|[294]
+1 Mountain|TLA|[295]
+1 Forest|TLA|[296]
+
+[tokens]
+3 c_1_1_spirit_spiritshadow @Valera Lutfullina
+4 w_1_1_ally @Rose Benjamin
+5 w_1_1_ally @Alexandr Leskinen
+6 w_1_1_ally @Alexandr Leskinen
+7 w_1_1_ally @Le Vuong
+8 w_1_1_ally @Salvatorre Zee Yazzie
+9 r_4_4_dragon_flying_firebending_4 @Lius Lasahido
+10 r_1_1_monk_prowess @Dom Lay
+11 r_2_2_soldier_firebending_1 @Jo Cordisco
+12 g_4_4_bear @Brandon L. Hunt
+13 ballistic_boulder @Dom Lay
+14 c_a_clue_draw @Luc Courtois
+15 c_a_clue_draw @Luc Courtois
+16 c_a_clue_draw @Valera Lutfullina
+17 c_a_clue_draw @Andreas Rocha
+18 c_a_clue_draw @Andreas Rocha
+19 c_a_food_sac @Andreas Rocha
+20 c_a_food_sac @Joseph Weston
+21 c_a_food_sac @Henry Wong
+22 c_a_treasure_sac @Rose Benjamin
+
+[other]
+1 copy @Jo Cordisco
+2 copy @Le Vuong

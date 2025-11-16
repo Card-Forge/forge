@@ -57,6 +57,8 @@ Card scripting resources are found in the forge-gui/res/ path.
 
 ## General Notes
 
+Art files need to be copyright-free and they should be in the public domain.
+
 ### Project Hierarchy
 
 Forge is divided into 4 primary projects with additional projects that target specific platform releases. The primary projects are:

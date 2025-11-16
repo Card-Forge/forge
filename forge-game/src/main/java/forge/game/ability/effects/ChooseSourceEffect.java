@@ -23,7 +23,7 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
 
         sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
 
-        sb.append("chooses a source.");
+        sb.append(" chooses a source.");
 
         return sb.toString();
     }

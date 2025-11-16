@@ -1,0 +1,8 @@
+Name:Tolls of War
+ManaCost:W B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigClue | TriggerDescription$ When this enchantment enters, create a Clue token. (It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+SVar:TrigClue:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_clue_draw | TokenOwner$ You
+T:Mode$ Sacrificed | ValidCard$ Permanent.YouCtrl | Execute$ TrigAlly | TriggerZones$ Battlefield | ValidPlayer$ You | PlayerTurn$ True | ActivationLimit$ 1 | TriggerDescription$ Whenever you sacrifice a permanent during your turn, create a 1/1 white Ally creature token. This ability triggers only once each turn.
+SVar:TrigAlly:DB$ Token | TokenScript$ w_1_1_ally
+Oracle:When this enchantment enters, create a Clue token. (It's an artifact with "{2}, Sacrifice this token: Draw a card.")\nWhenever you sacrifice a permanent during your turn, create a 1/1 white Ally creature token. This ability triggers only once each turn.

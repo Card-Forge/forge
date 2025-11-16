@@ -1,4 +1,5 @@
 Name:Rocket-Powered Goblin Glider
+Variant:UniversesWithin:FlavorName:Stitcher's Wings
 ManaCost:3
 Types:Artifact Equipment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+wasCastFromYourGraveyard | Execute$ TrigAttach | TriggerDescription$ When this Equipment enters, if it was cast from your graveyard, attach it to target creature you control.

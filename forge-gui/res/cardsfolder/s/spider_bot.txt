@@ -1,4 +1,5 @@
 Name:Spider-Bot
+Variant:UniversesWithin:FlavorName:Steelweb Surveyor
 ManaCost:2
 Types:Artifact Creature Spider Robot Scout
 PT:2/1

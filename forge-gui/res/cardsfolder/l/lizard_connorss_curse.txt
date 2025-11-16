@@ -1,4 +1,5 @@
 Name:Lizard, Connors's Curse
+Variant:UniversesWithin:FlavorName:King of the Coldblood Curse
 ManaCost:2 G G
 Types:Legendary Creature Lizard Villain
 PT:5/5

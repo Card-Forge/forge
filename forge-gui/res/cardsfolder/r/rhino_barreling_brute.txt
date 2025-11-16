@@ -1,4 +1,5 @@
 Name:Rhino, Barreling Brute
+Variant:UniversesWithin:FlavorName:Xecau, Predation's Shadow
 ManaCost:3 R R G G
 Types:Legendary Creature Human Villain
 PT:6/7

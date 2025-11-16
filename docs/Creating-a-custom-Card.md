@@ -2,51 +2,6 @@ Using the Forge API you can create your own custom cards and sets. This tutorial
 
 If you are trying to script cards for a new set make sure you take advantage of the [Developer Mode](Development/DevMode.md) for testing to try and contribute without any obvious bugs.
 
-## File Locations
-
-### Custom Card Scripts
-
-Windows:
-> C:/Users/<your username>/Application Data/Roaming/Forge/custom/cards
-
-Linux:
-> ~/.forge/custom/cards
-
-Mac:
-> TODO Add filepath
-
-### Custom Tokens
-
-Windows:
-> C:/Users/<your username>/Application Data/Roaming/Forge/custom/tokens
-
-Linux:
-> ~/.forge/custom/tokens
-
-Mac:
-> TODO Add filepath
-
-### Custom Editions
-
-> C:/Users/<your username>/Application Data/Roaming/Forge/custom/editions
-
-Linux:
-> ~/.forge/custom/editions
-
-Mac:
-> TODO Add filepath
-
-### Card Images
-
-Windows:
-> C:/Users/<your username>/Application Data/Local/Forge/Cache/pics/cards
-
-Linux:
-> ~/.cache/forge/pics/cards
-
-Mac:
-> TODO Add filepath
-
 ## Creating a New Card
 
 In this tutorial we'll create a new card called "Goblin Card Guide".
@@ -173,3 +128,57 @@ The sinmlest method for creating an effect on your card is to find another card 
 >./Forge/res/cardsfolder/cardsfolder.zip
 
 Unzipping this file will sllow you to search for any card in the containing subfolders. 
+
+# Custom mechanics
+
+We don't accept new mechanics from outside of official Cards into the main repository. This restriction is needed to keep the engine healthy.
+
+However there is some support to simulate them using named abilities:
+
+This will support things like being able to target specific SA using a custom name. (Flash on Meditate abilities in this example)
+
+```text
+Name:Plo Koon
+ManaCost:3 W W
+Types:Legendary Creature KelDor Jedi
+PT:4/4
+
+S:Mode$ CastWithFlash | ValidSA$ Activated.NamedAbilityMeditate | Caster$ You | Description$ You may activate meditate abilities any time you could cast an instant.
+
+A:AB$ ChangeZone | Named$ Meditate | Cost$ 1 W | ActivationZone$ Battlefield | SorcerySpeed$ True | Origin$ Battlefield | Destination$ Hand | Defined$ Self | SpellDescription$ Meditate (Return this creature to its owner's hand. Meditate only as a sorcery.)
+
+Oracle:You may activate meditate abilities any time you could cast an instant.\nMeditate 1W (Return this creature to its owner's hand. Meditate only as a sorcery.)
+```
+
+Restrict trigger to only if was triggered by a specific type of SA (Only Scry when Meditating and not being bounced), and reduce cost for a specific type of ability.
+
+```text
+Name:Jedi Training
+ManaCost:U
+Types:Enchantment
+
+S:Mode$ ReduceCost | ValidCard$ Card | ValidSpell$ Activated.NamedAbilityMeditate | Activator$ You | Amount$ 1 | Description$ Meditate abilities you activate cost {1} less to activate.
+
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Hand | TriggerZones$ Battlefield | ValidCard$ Creature.Jedi+YouCtrl | Condition$ FromNamedAbilityMeditate | SubAbility$ DBScry | TriggerDescription$ Whenever a Jedi creature you control meditates, scry 1.
+SVar:DBScry:DB$ Scry | ScryNum$ 1
+
+Oracle:Meditate abilities you activate cost {1} less to activate.\nWhenever a Jedi creature you control meditates, scry 1.
+```
+
+It will also allow for cards to check if a card was cast using an certain ability using `Count$FromNamedAbility<name>.<true>.<false>`:
+
+```text
+Name:Chronic Traitor
+ManaCost:2 B
+Types:Creature Human Rogue
+PT:2/1
+
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ When this creature enters, each player sacrifices a creature. If this creature's paranoia cost was paid, each player sacrifices two creatures instead.
+SVar:TrigSacrifice:DB$ Sacrifice | Defined$ Player | SacValid$ Creature | Amount$ X
+SVar:X:Count$FromNamedAbilityParanoia.2.1
+
+T:Mode$ ChangesZone | TriggerZones$ Hand | ValidCard$ Permanent.YouCtrl | Origin$ Battlefield | Destination$ Any | Execute$ PayParanoia | TriggerDescription$ Paranoia {2}{B}{B} (You may cast this spell for its paranoia cost when a permanent you control leaves the battlefield.)
+SVar:PayParanoia:DB$ Play | Named$ Paranoia | PlayCost$ 2 B B | ValidSA$ Spell.Self | Controller$ You | ValidZone$ Hand | Optional$ True
+
+Oracle:When this creature enters, each player sacrifices a creature. If this creature's paranoia cost was paid, each player sacrifices two creatures instead.\nParanoia {2}{B}{B} (You may cast this spell for its paranoia cost when a permanent you control leaves the battlefield.)
+```

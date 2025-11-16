@@ -135,8 +135,6 @@ Save your file, and let's move onto another step.
 
 ## Scripting your first cards
 
-As mentioned earlier, your custom card rules need to be located inside `%appdata%/Forge/custom/cards`. I recommend creating subfolders for each starting letter (`Forge/custom/cards/a`, `Forge/custom/cards/b`, etc.) to quickly find if a card has a duplicate name.
-
 Now, you might remember than Unearth was an existing MTG card so we do not need to create a custom card rule for it. Let's create a few others.
 > This tutorial will not teach you to script your cards, and they might not be perfect. Please check out [Creating a Custom Card](https://github.com/Card-Forge/forge/wiki/Creating-a-Custom-Card) if you want more info, or look at the existing cards to learn more complex scripting.
 
@@ -205,8 +203,6 @@ Oh no! If you play with Inked Summoner now, you will crash when summoning a toke
 
 ## Scripting custom tokens
 
-The token scripts are located at `%appdata%/Forge/custom/tokens`.
-
 Let's add the new tokens we need to make Inked Summoner work!
 > Just like for card scripting, this tutorial will not teach you about scripting them.
 
@@ -259,6 +255,15 @@ For the tokens, we can deposit them inside `%localappdata%/Forge/Cache/pics/toke
 ![b_5_5_golem_trample](https://github.com/user-attachments/assets/7ff44dc7-0284-48bd-9233-785ac79106f3)
 
 You can now start your game again, and see that the art loads correctly now.
+
+## Excursion: Card variants
+
+There are currently multiple ways to specify a flavor name:
+* Manually, by writing `Variant:Foo:FlavorName:Loret Ipsum` in the card script, and adding `${"variant": "Foo"}` to the end of the edition entry. You'll also want to add `Variant:Foo:Oracle:When Loret Ipsum enters...` if the flavor name would appear in the Oracle text, or if it would otherwise be changed.
+* By lookup, again by using `Variant:Foo:FlavorName:Loret Ipsum` in the card script, but simply using "Loret Ipsum" as the name in the edition file.
+* Automatically, by putting `${"flavorName": "Loret Ipsum"}` at the end of the edition entry.
+
+The third method is the easiest, but besides a simple find/replace for the card name, it won't be able to make any changes to flavor the Oracle text, such as for ability words. They all function the same under the hood once the CardDB is loaded; the latter two are just shortcuts for the first.
 
 ## 🎉 Congratulations
 
