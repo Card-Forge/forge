@@ -235,6 +235,7 @@ public class ReplacementHandler {
             Map<AbilityKey, Object> params = AbilityKey.newMap(runParams);
             params.remove(AbilityKey.ReplacementResult);
 
+            // CR 614.16
             if (params.containsKey(AbilityKey.EffectOnly)) {
                 params.put(AbilityKey.EffectOnly, true);
             }

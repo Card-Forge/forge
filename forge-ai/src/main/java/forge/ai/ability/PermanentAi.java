@@ -108,7 +108,7 @@ public class PermanentAi extends SpellAbilityAi {
         if ("SacToReduceCost".equals(sa.getParam("AILogic"))) {
             // reset X to better calculate
             sa.setXManaCostPaid(0);
-            ManaCostBeingPaid paidCost = ComputerUtilMana.calculateManaCost(sa.getPayCosts(), sa, true, 0, false);
+            ManaCostBeingPaid paidCost = ComputerUtilMana.calculateManaCost(sa.getPayCosts(), sa, ai, true, 0, false);
 
             int generic = paidCost.getGenericManaAmount();
             // Set PayX here to maximum value.
