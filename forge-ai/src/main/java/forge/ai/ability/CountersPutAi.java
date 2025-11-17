@@ -21,6 +21,7 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -105,7 +106,12 @@ public class CountersPutAi extends CountersAi {
                     }
                 }
             }
-            int maxLevel = Integer.parseInt(sa.getParam("MaxLevel"));
+            int maxLevel = 0;
+            for (StaticAbility st : source.getStaticAbilities()) {
+                if (st.toString().startsWith("LEVEL ")) {
+                    maxLevel = Math.max(maxLevel, Integer.parseInt(st.toString().substring(6, 7)));
+                }
+            }
             return source.getCounters(CounterEnumType.LEVEL) < maxLevel;
         }
 

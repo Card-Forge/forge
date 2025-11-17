@@ -2699,6 +2699,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setMaxWaterbend(Cost cost) {
         if (cost == null || cost.getMaxWaterbend() == null) {
+            maxWaterbend = 0;
             return;
         }
         maxWaterbend = AbilityUtils.calculateAmount(getHostCard(), cost.getMaxWaterbend(), this);
