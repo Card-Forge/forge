@@ -86,6 +86,7 @@ public enum SpellApiToAi {
             .put(ApiType.DrainMana, DrainManaAi.class)
             .put(ApiType.Draw, DrawAi.class)
             .put(ApiType.EachDamage, DamageEachAi.class)
+            .put(ApiType.Earthbend, EarthbendAi.class)
             .put(ApiType.Effect, EffectAi.class)
             .put(ApiType.Encode, EncodeAi.class)
             .put(ApiType.Endure, EndureAi.class)
