@@ -34,7 +34,7 @@ The "Ancestors" column is basically there to list currently inactive developers 
 ## Forge Script DSL
 | Concept | Owners | Ancestors | Example tasks |
 | - | - | - | - |
-| [Card Scripting](cardscripting) | TRT, Northmoc, Simisays, Fulgur14, Dracontes | a lot | - implement new Sets<br>- clean up outdated elements<br>- apply Oracle updates |
+| [Card Scripting](cardscripting) | TRT, Northmoc, Simisays, Fulgur14, Dracontes | a lot | - implement new Sets<br>- review script PR<br>- clean up outdated elements<br>- apply Oracle updates |
 | ForgeScribe | | Austinino | |
 
 ## Modes
