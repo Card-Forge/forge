@@ -15,6 +15,7 @@ p0battlefield=Unyielding Gatekeeper|FaceDown;Mysterio's Phantasm|Id:1;Mysterio, 
 # FIXME: This is needed to set up the third Illusion token.
 p0precast=Lightning Bolt->1
 p1life=21
-p1graveyard=Electro, Assaulting Battery;Electro, Assaulting Battery
-p1battlefield=Electro, Assaulting Battery;Impostor Syndrome;Mountain;Mountain;Mountain;Mountain;Mountain
+p1graveyard=
+p1battlefield=Electro, Assaulting Battery|Id:2;Impostor Syndrome;Mountain;Mountain;Mountain;Mountain;Mountain
+p1precast=Impostor Syndrome:TrigCopy->2;Impostor Syndrome:TrigCopy->2
 removesummoningsickness=true
