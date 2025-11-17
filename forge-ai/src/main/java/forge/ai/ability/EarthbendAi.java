@@ -9,17 +9,12 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.player.Player;
-import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
-
-import java.util.Map;
 
 public class EarthbendAi extends SpellAbilityAi {
     @Override
     protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
-
-        CardCollection nonAnimatedLands = CardLists.filter(aiPlayer.getLandsInPlay(),
-                CardPredicates.LANDS.and(CardPredicates.NON_CREATURES));
+        CardCollection nonAnimatedLands = CardLists.filter(aiPlayer.getLandsInPlay(), CardPredicates.NON_CREATURES);
 
         if (nonAnimatedLands.isEmpty()) {
             return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
@@ -29,7 +24,6 @@ public class EarthbendAi extends SpellAbilityAi {
         sa.getTargets().add(bestToAnimate);
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-
     }
 
     @Override
@@ -41,8 +35,4 @@ public class EarthbendAi extends SpellAbilityAi {
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
-    @Override
-    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
-        return true;
-    }
 }
