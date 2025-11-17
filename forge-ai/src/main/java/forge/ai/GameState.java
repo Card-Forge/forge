@@ -963,6 +963,8 @@ public abstract class GameState {
             spellDef = spellDef.substring(0, spellDef.indexOf("->")).trim();
         }
 
+        spellDef = spellDef.replace("^", ":"); // alternate marker for when : is the name of the card
+
         Card c = null;
 
         if (StringUtils.isNumeric(spellDef)) {
