@@ -148,14 +148,18 @@ public class RewardData implements Serializable {
     }
 
     public Array<Reward> generate(boolean isForEnemy, boolean useSeedlessRandom, boolean isNoSell) {
-        return generate(isForEnemy, null, useSeedlessRandom, isNoSell);
+        return generate(isForEnemy, null, useSeedlessRandom, isNoSell, false);
     }
 
     public Array<Reward> generate(boolean isForEnemy, Iterable<PaperCard> cards, boolean useSeedlessRandom){
-        return generate(isForEnemy, cards, useSeedlessRandom, false);
+        return generate(isForEnemy, cards, useSeedlessRandom, false, false);
     }
 
-    public Array<Reward> generate(boolean isForEnemy, Iterable<PaperCard> cards, boolean useSeedlessRandom, boolean isNoSell) {
+    public Array<Reward> generate(boolean isForEnemy, Iterable<PaperCard> cards, boolean useSeedlessRandom, boolean isNoDupeItems){
+        return generate(isForEnemy, cards, useSeedlessRandom, false, isNoDupeItems);
+    }
+
+    public Array<Reward> generate(boolean isForEnemy, Iterable<PaperCard> cards, boolean useSeedlessRandom, boolean isNoSell, boolean isNoDupeItems) {
         boolean allCardVariants = Config.instance().getSettingData().useAllCardVariants;
         Random rewardRandom = useSeedlessRandom ? new Random() : WorldSave.getCurrentSave().getWorld().getRandom();
         //Keep using same generation method for shop rewards, but fully randomize loot drops by not using the instance pre-seeded by the map
@@ -239,8 +243,27 @@ public class RewardData implements Serializable {
                     break;
                 case "item":
                     if(itemNames!=null) {
+                        ArrayList<String> unownedItemNames = new ArrayList<>();
+                        if (isNoDupeItems) {
+                            List<ItemData> inventoryItems = WorldSave.getCurrentSave().getPlayer().getItems();
+                            Set<String> inventoryItemNames = new HashSet<>();
+                            for (ItemData item : inventoryItems) {
+                                inventoryItemNames.add(item.name);
+                            }
+
+                            for (String itemName : itemNames) {
+                                if (!inventoryItemNames.contains(itemName)) {
+                                    unownedItemNames.add(itemName);
+                                }
+                            }
+                        }
+
                         for (int i = 0; i < count + addedCount; i++) {
-                            String itemName = itemNames[WorldSave.getCurrentSave().getWorld().getRandom().nextInt(itemNames.length)];
+                            if (unownedItemNames.isEmpty()) {
+                                unownedItemNames.addAll(List.of(itemNames));
+                            }
+
+                            String itemName = unownedItemNames.remove(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(unownedItemNames.size()));
                             ItemData itemData = ItemListData.getItem(itemName);
                             if (itemData != null)
                                 ret.add(new Reward(itemData));
