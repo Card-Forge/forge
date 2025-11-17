@@ -181,7 +181,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 Player oppTarget = Collections.max(oppList, AiPlayerPredicates.compareByZoneValue(changeType, origin, sa));
                 int countChangeType = AbilityUtils.filterListByType(oppTarget.getCardsIn(ZoneType.Graveyard), changeType, sa).size();
                 // Assumes the SpellAbility is only useful when 1 or more ChangeType will change zones
-                if (!oppTarget.getCardsIn(ZoneType.Graveyard).isEmpty() && countChangeType > 0) {
+                if (countChangeType > 0) {
                     sa.resetTargets();
                     sa.getTargets().add(oppTarget);
                 } else {
