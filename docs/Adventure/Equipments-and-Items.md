@@ -516,7 +516,7 @@ Opponent starting life +5
 1. **Cost**: 5000
 
 #### Blue Staff
-1. **Effect**: Let's you fly for 5 shards
+1. **Effect**: Lets you fly for 5 shards
 1. **Location** : Capital cities
 1. **Cost**: 5000
 
