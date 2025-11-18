@@ -6748,7 +6748,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
             String effect = "Mode$ CantBlock | ValidCard$ Creature.Self | Description$ CARDNAME can't block.";
             suspectedStatic.setSVar("SuspectedCantBlockBy", effect);
-
         } else {
             suspectedStatic = null;
         }

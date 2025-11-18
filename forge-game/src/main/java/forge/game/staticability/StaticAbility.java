@@ -253,7 +253,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             setActiveZone(EnumSet.copyOf(ZoneType.listValueOf(getParam("EffectZone"))));
         }
         if (hasParam("Mode")) {
-            setMode(EnumSet.copyOf(StaticAbilityMode.listValueOf(getParam("Mode"))));
+            setMode(StaticAbilityMode.setValueOf(getParam("Mode")));
         }
         this.layers = this.generateLayer();
     }
