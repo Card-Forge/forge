@@ -1302,6 +1302,10 @@ public class ComputerUtilMana {
         Cost payCosts;
         if (test) {
             payCosts = CostAdjustment.adjust(cost, sa, effect);
+            // prevent asking Human when only predicting
+            if (!payer.getController().isAI()) {
+                sa.setMaxWaterbend(null);
+            }
         } else {
             // when not testing CostPayment already handled raise
             payCosts = cost;

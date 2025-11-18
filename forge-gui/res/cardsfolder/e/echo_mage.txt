@@ -3,7 +3,6 @@ ManaCost:1 U U
 Types:Creature Human Wizard
 PT:2/3
 K:Level up:1 U
-SVar:maxLevel:4
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 4 | AddAbility$ CopyOnce | IsPresent$ Card.Self+counters_GE2_LEVEL+counters_LT4_LEVEL | Description$ LEVEL 2-3 2/4 {U}{U}, {T}: Copy target instant or sorcery spell. You may choose new targets for the copy.
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 5 | AddAbility$ CopyTwice | IsPresent$ Card.Self+counters_GE4_LEVEL | Description$ LEVEL 4+ 2/5 {U}{U}, {T}: Copy target instant or sorcery spell twice. You may choose new targets for the copies.
 SVar:CopyOnce:AB$ CopySpellAbility | Cost$ U U T | ValidTgts$ Instant,Sorcery | AILogic$ Once | MayChooseTarget$ True | Secondary$ True | SpellDescription$ Copy target instant or sorcery spell. You may choose new targets for the copy.

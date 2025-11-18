@@ -1,4 +1,4 @@
-Name:Platypus Bear
+Name:Platypus-Bear
 ManaCost:1 GU
 Types:Creature Platypus Bear
 PT:2/3

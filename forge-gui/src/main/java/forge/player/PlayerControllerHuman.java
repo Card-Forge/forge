@@ -2942,13 +2942,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             final Player p = pOld;
 
-
             final CardDb carddb = FModel.getMagicDb().getCommonCards();
-            final List<ICardFace> faces = Lists.newArrayList(carddb.getAllFaces());
 
             List<CardFaceView> choices = new ArrayList<>();
             CardFaceView cardFaceView;
-            for (ICardFace cardFace : faces) {
+            for (ICardFace cardFace : carddb.getAllFaces()) {
                 cardFaceView = new CardFaceView(CardTranslation.getTranslatedName(cardFace.getDisplayName()), cardFace.getName());
                 choices.add(cardFaceView);
             }

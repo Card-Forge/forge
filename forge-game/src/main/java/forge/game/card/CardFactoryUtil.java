@@ -3279,10 +3279,6 @@ public class CardFactoryUtil {
             sb.append("AB$ PutCounter | Cost$ ").append(manacost).append(" | PrecostDesc$ Level up | CostDesc$ ");
             sb.append(ManaCostParser.parse(manacost)).append(" | SorcerySpeed$ True | Secondary$ True");
             sb.append("| CounterType$ LEVEL | StackDescription$ {p:You} levels up {c:Self}.");
-            if (card.hasSVar("maxLevel")) {
-                final String strMaxLevel = card.getSVar("maxLevel");
-                sb.append("| MaxLevel$ ").append(strMaxLevel);
-            }
             sb.append(" | SpellDescription$ (").append(inst.getReminderText()).append(")");
 
             final SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);

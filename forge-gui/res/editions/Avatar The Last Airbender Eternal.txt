@@ -6,8 +6,6 @@ Type=Expansion
 ScryfallCode=TLE
 
 [cards]
-
-[borderless]
 1 M Brought Back @Viacom
 2 M Drannith Magistrate @Viacom ${"flavorName": "Mayor Tong of Chin Village"}
 3 M Empty City Ruse @Viacom
@@ -70,15 +68,13 @@ ScryfallCode=TLE
 60 M Treetop Village @Viacom
 61 M Valakut, the Molten Pinnacle @Viacom ${"flavorName": "Volcano of Roku's Island"}
 
-[black sun invasion]
+[borderless]
 62 R Appa, the Vigilant @Fahmi Fauzi
 63 R Katara's Reversal @Fahmi Fauzi
 64 R Fire Nation Turret @Fahmi Fauzi
 65 R Swampbenders @Fahmi Fauzi
 66 R Sokka's Charge @Fahmi Fauzi
 67 R Earthshape @Fahmi Fauzi
-
-[tea time]
 68 R Mai and Zuko @Brian Yuen
 69 R Aang and Katara @Brian Yuen
 70 R Toph, Greatest Earthbender @Brian Yuen
@@ -86,7 +82,7 @@ ScryfallCode=TLE
 72 R Momo's Heist @Brian Yuen
 73 R Uncle's Musings @Brian Yuen
 
-[extended art]
+[jumpstart]
 74 M Aang, Airbending Master @Tomoyo Asatani
 75 U Air Nomad Student @Tky
 76 U The Duke, Rebel Sentry @Logan Feliciano
@@ -159,8 +155,6 @@ ScryfallCode=TLE
 143 R Tale of Katara and Toph @Ichiko Milk Tei
 144 R Tectonic Split @Mengxuan Li
 145 M Toph, Earthbending Master @Phima
-
-[jumpstart]
 146 U Aang, A Lot to Learn @Tomoyo Asatani
 147 U Hook Swords @Eliz Roxs
 148 U Katara, Seeking Revenge @Yoshioka
@@ -186,47 +180,6 @@ ScryfallCode=TLE
 168 U Inspiring Call @Alexander Forssberg
 169 C Many Partings @Kazeto
 170 U Suspicious Bookcase @Kotakan
-171 M Aang, Airbending Master @Tomoyo Asatani
-172 R Jet, Rebel Leader @Keiuu
-173 R Monk Gyatso @Masateru Ikeda
-174 M Sokka, Swordmaster @Jason Kiantoro
-175 R Suki, Kyoshi Captain @Shiren
-176 R Tale of Momo @Tetsuko
-177 R Baboon Spirit @Daniel Romanovsky
-178 R The Blue Spirit @Claudiu-Antoniu Magherusan
-179 R Chakra Meditation @Hori Airi
-180 M Katara, Waterbending Master @Yueko
-181 R Tui and La, Moon and Ocean @Douzen
-182 M Wan Shi Tong, All-Knowing @Axel Sauerwald
-183 R Waterbender's Restoration @Phima
-184 M Azula, Ruthless Firebender @Rose Benjamin
-185 R Desperate Plea @Shiyu
-186 M Fire Lord Ozai @Ryuichi Sakuma
-187 R Fire Nation Occupation @Arthur Yuan
-188 R Fire Nation Salvagers @Susumu Kuroi
-189 R Lo and Li, Royal Advisors @Kieran Yanner
-190 R Nyla, Shirshu Sleuth @Douzen
-191 M Avatar Roku, Firebender @Toni Infante
-192 R Chong and Lily, Nomads @Phima
-193 R Fang, Roku's Companion @Douzen
-194 R Iroh, Dragon of the West @Hokyoung Kim
-195 R Lost in Memories @Tubaki Halsame
-196 R Overwhelming Victory @Joshua Raphael
-197 R Reckless Blaze @Nijimaarc
-198 R Smellerbee, Rebel Fighter @Enishi
-199 R Storm of Memories @Nijimaarc
-200 M Zuko, Firebending Master @Kinota Eishi
-201 M Avatar Kyoshi, Earthbender @Tetsuko
-202 R Bison Whistle @Brandon L. Hunt
-203 R The Cabbage Merchant @Patrick Gañas
-204 R Crystalline Armor @Susumu Kuroi
-205 M Hei Bai, Forest Guardian @TAPIOCA
-206 R Master's Guidance @Yueko
-207 R Tale of Katara and Toph @Ichiko Milk Tei
-208 R Tectonic Split @Mengxuan Li
-209 M Toph, Earthbending Master @Phima
-
-[tutorial]
 210 R Aang, Air Nomad @Jinho Bae
 211 C Aang's Defense @Jo Cordisco
 212 C Aardvark Sloth @Ionomycin
@@ -282,6 +235,49 @@ ScryfallCode=TLE
 262 C Thriving Heath @Dom Lay
 263 C Thriving Isle @Slawek Fedorczuk
 264 C Thriving Moor @Dom Lay
+
+[extended art]
+171 M Aang, Airbending Master @Tomoyo Asatani
+172 R Jet, Rebel Leader @Keiuu
+173 R Monk Gyatso @Masateru Ikeda
+174 M Sokka, Swordmaster @Jason Kiantoro
+175 R Suki, Kyoshi Captain @Shiren
+176 R Tale of Momo @Tetsuko
+177 R Baboon Spirit @Daniel Romanovsky
+178 R The Blue Spirit @Claudiu-Antoniu Magherusan
+179 R Chakra Meditation @Hori Airi
+180 M Katara, Waterbending Master @Yueko
+181 R Tui and La, Moon and Ocean @Douzen
+182 M Wan Shi Tong, All-Knowing @Axel Sauerwald
+183 R Waterbender's Restoration @Phima
+184 M Azula, Ruthless Firebender @Rose Benjamin
+185 R Desperate Plea @Shiyu
+186 M Fire Lord Ozai @Ryuichi Sakuma
+187 R Fire Nation Occupation @Arthur Yuan
+188 R Fire Nation Salvagers @Susumu Kuroi
+189 R Lo and Li, Royal Advisors @Kieran Yanner
+190 R Nyla, Shirshu Sleuth @Douzen
+191 M Avatar Roku, Firebender @Toni Infante
+192 R Chong and Lily, Nomads @Phima
+193 R Fang, Roku's Companion @Douzen
+194 R Iroh, Dragon of the West @Hokyoung Kim
+195 R Lost in Memories @Tubaki Halsame
+196 R Overwhelming Victory @Joshua Raphael
+197 R Reckless Blaze @Nijimaarc
+198 R Smellerbee, Rebel Fighter @Enishi
+199 R Storm of Memories @Nijimaarc
+200 M Zuko, Firebending Master @Kinota Eishi
+201 M Avatar Kyoshi, Earthbender @Tetsuko
+202 R Bison Whistle @Brandon L. Hunt
+203 R The Cabbage Merchant @Patrick Gañas
+204 R Crystalline Armor @Susumu Kuroi
+205 M Hei Bai, Forest Guardian @TAPIOCA
+206 R Master's Guidance @Yueko
+207 R Tale of Katara and Toph @Ichiko Milk Tei
+208 R Tectonic Split @Mengxuan Li
+209 M Toph, Earthbending Master @Phima
+
+[promo]
 265 R Aang, Air Nomad @Jinho Bae
 266 C Aang's Defense @Jo Cordisco
 267 C Aardvark Sloth @Ionomycin
@@ -323,7 +319,7 @@ ScryfallCode=TLE
 303 L Plains @Slawek Fedorczuk
 304 L Plains @Slawek Fedorczuk
 
-[commander bundle]
+[bundle]
 305 R Enlightened Tutor @Brigitte Roka & Clifton Stommel
 306 R Flawless Maneuver @Irina Nordsol
 307 R Fierce Guardianship @Ina Wong

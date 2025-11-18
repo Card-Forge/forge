@@ -2,7 +2,6 @@ Name:Under-Construction Skyscraper
 ManaCost:no cost
 Types:Land
 K:Level up:1
-SVar:maxLevel:8
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 DeckHas:Ability$Mana.Colorless
 S:Mode$ Continuous | Affected$ Card.Self | AddAbility$ ABManaAbzan | IsPresent$ Card.Self+counters_GE1_LEVEL+counters_LE7_LEVEL | Description$ LEVEL 1-7 {T}: Add {W}, {B}, {G}, or {C}.
