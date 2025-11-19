@@ -550,20 +550,20 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     if (sa.hasParam("Monstrosity")) {
                         gameCard.setMonstrous(true);
                         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(gameCard);
+                        // CR 701.37c
                         runParams.put(AbilityKey.MonstrosityAmount, counterAmount);
                         game.getTriggerHandler().runTrigger(TriggerType.BecomeMonstrous, runParams, false);
-                    }
-                    if (sa.isKeyword(Keyword.RENOWN)) {
-                        gameCard.setRenowned(true);
-                        game.getTriggerHandler().runTrigger(TriggerType.BecomeRenowned,
-                                AbilityKey.mapFromCard(gameCard), false);
                     }
                     if (sa.hasParam("Adapt")) {
                         game.getTriggerHandler().runTrigger(TriggerType.Adapt, AbilityKey.mapFromCard(gameCard), false);
                     }
+                    if (sa.isKeyword(Keyword.RENOWN)) {
+                        gameCard.setRenowned(true);
+                        game.getTriggerHandler().runTrigger(TriggerType.BecomeRenowned, AbilityKey.mapFromCard(gameCard), false);
+                    }
                     if (sa.isKeyword(Keyword.MENTOR)) {
                         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(gameCard);
-                        runParams.put(AbilityKey.Source, sa.getHostCard());
+                        runParams.put(AbilityKey.Source, card);
                         game.getTriggerHandler().runTrigger(TriggerType.Mentored, runParams, false);
                     }
 

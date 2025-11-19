@@ -938,10 +938,9 @@ public class ComputerUtil {
             }
         }
 
-        for (int ip = 0; ip < 6; ip++) { // priority 0 is the lowest, priority 5 the highest
-            final int priority = 6 - ip;
+        for (int prio = 6; prio > 0; prio--) {
             for (Card card : remaining) {
-                if (card.hasSVar("SacMe") && Integer.parseInt(card.getSVar("SacMe")) == priority) {
+                if (card.hasSVar("SacMe") && Integer.parseInt(card.getSVar("SacMe")) == prio) {
                     return card;
                 }
             }
@@ -1153,7 +1152,7 @@ public class ComputerUtil {
             if (card.getSVar("PlayMain1").equals("ALWAYS") || sa.getPayCosts().hasNoManaCost()) {
                 return true;
             } else if (card.getSVar("PlayMain1").equals("OPPONENTCREATURES")) {
-                //Only play these main1 when the opponent has creatures (stealing and giving them haste)
+                // Only play these main1 when the opponent has creatures (stealing and giving them haste)
                 if (!ai.getOpponents().getCreaturesInPlay().isEmpty()) {
                     return true;
                 }
@@ -1323,8 +1322,8 @@ public class ComputerUtil {
             }
         }
 
-        final CardCollectionView buffed = ai.getCardsIn(ZoneType.Battlefield);
         boolean checkThreshold = sa.isSpell() && !ai.hasThreshold() && !source.isInZone(ZoneType.Graveyard);
+        final CardCollectionView buffed = ai.getCardsIn(ZoneType.Battlefield);
         for (Card buffedCard : buffed) {
             if (buffedCard.hasSVar("BuffedBy")) {
                 final String buffedby = buffedCard.getSVar("BuffedBy");
@@ -3068,16 +3067,16 @@ public class ComputerUtil {
     }
 
     // this function should be called by most API to give scripters the option of helping AI
-    public static CardCollection filterAITgts(SpellAbility sa, Player ai, CardCollection srcList, boolean alwaysStrict) {
+    public static CardCollection filterAITgts(SpellAbility sa, Player ai, CardCollection targetables, boolean alwaysStrict) {
         // TODO support players
         final Card source = sa.getHostCard();
         if (source == null || !sa.hasParam("AITgts")) {
-            return srcList;
+            return targetables;
         }
 
         // TODO randomize the order, just so human can't predict in advance which of two equal cards AI might pick
 
-        CardCollection list;
+        CardCollection filtered;
         String aiTgts = sa.getParam("AITgts");
         if (aiTgts.startsWith("BetterThan")) {
             int value = 0;
@@ -3097,28 +3096,28 @@ public class ComputerUtil {
                 value = ComputerUtilCard.evaluateCreature(source);
             }
             final int totalValue = value;
-            list = CardLists.filter(srcList, c -> ComputerUtilCard.evaluateCreature(c) > totalValue + 30);
+            filtered = CardLists.filter(targetables, c -> ComputerUtilCard.evaluateCreature(c) > totalValue + 30);
         } else {
-            list = CardLists.getValidCards(srcList, aiTgts, sa.getActivatingPlayer(), source, sa);
+            filtered = CardLists.getValidCards(targetables, aiTgts, sa.getActivatingPlayer(), source, sa);
         }
 
         if (sa.hasParam("AITgtsStrict") || alwaysStrict) {
-            return list;
+            return filtered;
         }
-        if (!list.isEmpty()) {
+        if (!filtered.isEmpty()) {
             // try to fill up with other regular targets to increase chance of playing
-            for (Card tgt : srcList) {
-                if (list.size() >= sa.getMinTargets()) {
+            for (Card tgt : targetables) {
+                if (filtered.size() >= sa.getMinTargets()) {
                     break;
                 }
-                if (list.contains(tgt)) {
+                if (filtered.contains(tgt)) {
                     continue;
                 }
-                list.add(tgt);
+                filtered.add(tgt);
             }
-            return list;
+            return filtered;
         }
-        return srcList;
+        return targetables;
     }
 
     // Check if AI life is in danger/serious danger based on next expected combat

@@ -241,7 +241,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param aiPlayer
      *            a {@link forge.game.player.Player} object.
-     * 
+     *
      * @return a boolean.
      */
     @Override
