@@ -1,7 +1,7 @@
 Name:Bloodsoaked Insight
 ManaCost:5 BR BR
 Types:Sorcery
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Activator$ You | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each 1 life your opponents have lost this turn.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each 1 life your opponents have lost this turn.
 SVar:X:Count$LifeOppsLostThisTurn
 A:SP$ Dig | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Target opponent exiles the top three cards of their library. Until the end of your next turn, you may play those cards. If you cast a spell this way, mana of any type can be spent to cast it.
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STLookPlay | Duration$ UntilTheEndOfYourNextTurn | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
