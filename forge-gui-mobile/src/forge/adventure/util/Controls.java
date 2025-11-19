@@ -450,17 +450,17 @@ public class Controls {
         return Color.BLACK;
     }
 
-    public static TextraLabel newTextraLabel(String name, Font font) {
-        TextraLabel ret = new LabelFix(name, font);
+    public static TextraLabel newTextraLabel(String text, Font font) {
+        TextraLabel ret = new LabelFix(text, font);
         return ret;
     }
 
-    public static TextraLabel newTextraLabel(String name) {
-        return newTextraLabel(name, getTextraFont());
+    public static TextraLabel newTextraLabel(String text) {
+        return newTextraLabel(text, getTextraFont());
     }
 
-    public static TextraLabel newRewardLabel(String name) {
-        return newTextraLabel(name, getRewardHeaderFont());
+    public static TextraLabel newRewardLabel(String text) {
+        return newTextraLabel(text, getRewardHeaderFont());
     }
 
     public static String colorIdToTypingString(ColorSet color) {
@@ -485,8 +485,8 @@ public class Controls {
         return colorId;
     }
 
-    public static TypingLabel newTypingLabel(String name) {
-        TypingLabel ret = new TypingLabel(name == null ? "" : name, getSkin(), getTextraFont());
+    public static TypingLabel newTypingLabel(String text) {
+        TypingLabel ret = new TypingLabel(text == null ? "" : text, getSkin(), getTextraFont());
         String pn = Current.player().getName();
         if (pn != null) // this variable is used for dialogs
             ret.setVariable("player_name", pn);
