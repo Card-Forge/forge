@@ -5,6 +5,7 @@ A:SP$ PutCounter | ValidTgts$ Land | TgtPrompt$ Select target land | CounterType
 SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ FountainStatic | ForgetOnMoved$ Battlefield | ForgetCounter$ FLOOD | Duration$ Permanent | SubAbility$ DBDraw
 SVar:FountainStatic:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Island | Description$ That land is an island in addition to its other types for as long as it has a flood counter on it.
 SVar:DBDraw:DB$ Draw | ConditionPresent$ Merfolk.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control a Merfolk,
+DeckHints:Type$Merfolk
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
 Oracle:Put a flood counter on target land. That land is an Island in addition to its other types for as long as it has a flood counter on it. If you control a Merfolk, draw a card.

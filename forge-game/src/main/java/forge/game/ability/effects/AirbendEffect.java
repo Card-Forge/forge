@@ -95,7 +95,10 @@ public class AirbendEffect extends SpellAbilityEffect {
         triggerList.triggerChangesZoneAll(game, sa);
         handleExiledWith(triggerList.allCards(), sa);
 
-        pl.triggerElementalBend(TriggerType.Airbend);
+        // CR 701.65b
+        if (!triggerList.isEmpty()) {
+            pl.triggerElementalBend(TriggerType.Airbend);
+        }
     }
 
 }
