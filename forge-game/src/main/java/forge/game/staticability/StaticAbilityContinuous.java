@@ -88,20 +88,19 @@ public final class StaticAbilityContinuous {
         final Map<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
         final Player controller = hostCard.getController();
-
         final List<Player> affectedPlayers = StaticAbilityContinuous.getAffectedPlayers(stAb);
-        final Game game = hostCard.getGame();
-
-        final StaticEffect se = game.getStaticEffects().getStaticEffect(stAb);
-        se.setAffectedCards(affectedCards);
-        se.setAffectedPlayers(affectedPlayers);
-        se.setParams(params);
-        se.setTimestamp(stAb.getTimestamp());
 
         // nothing more to do
         if (stAb.hasParam("Affected") && affectedPlayers.isEmpty() && affectedCards.isEmpty()) {
             return affectedCards;
         }
+
+        final Game game = hostCard.getGame();
+        final StaticEffect se = game.getStaticEffects().getStaticEffect(stAb);
+        se.setAffectedCards(affectedCards);
+        se.setAffectedPlayers(affectedPlayers);
+        se.setParams(params);
+        se.setTimestamp(stAb.getTimestamp());
 
         String addP = "";
         int powerBonus = 0;
@@ -723,6 +722,10 @@ public final class StaticAbilityContinuous {
                         }
                         return input;
                     }).collect(Collectors.toList());
+                }
+
+                if (newKeywords != null && !newKeywords.isEmpty() && params.containsKey("KeywordMultiplier")) {
+                    newKeywords = newKeywords.stream().flatMap(s -> Collections.nCopies(Integer.valueOf(params.get("KeywordMultiplier")), s).stream()).collect(Collectors.toList());
                 }
 
                 affectedCard.addChangedCardKeywords(newKeywords, removeKeywords,

@@ -1285,20 +1285,6 @@ public class ComputerUtil {
             }
         } // AntiBuffedBy
 
-        // Plane cards that give Haste (e.g. Sokenzan)
-        if (ai.getGame().getRules().hasAppliedVariant(GameType.Planechase)) {
-            for (Card c : ai.getGame().getActivePlanes()) {
-                for (StaticAbility s : c.getStaticAbilities()) {
-                    if (s.hasParam("AddKeyword")
-                            && s.getParam("AddKeyword").contains("Haste")
-                            && "Creature".equals(s.getParam("Affected"))
-                            && card.isCreature()) {
-                        return true;
-                    }
-                }
-            }
-        }
-
         final CardCollectionView vengevines = ai.getCardsIn(ZoneType.Graveyard, "Vengevine");
         if (!vengevines.isEmpty()) {
             final CardCollectionView creatures = ai.getCardsIn(ZoneType.Hand);
@@ -1458,16 +1444,15 @@ public class ComputerUtil {
             for (StaticAbility stAb : c.getStaticAbilities()) {
                 if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.hasParam("AddKeyword")
                         && stAb.getParam("AddKeyword").contains("Haste")) {
-
                     if (c.isEquipment() && c.getEquipping() == null) {
                         return true;
                     }
 
                     final String affected = stAb.getParam("Affected");
-                    if (affected.contains("Creature.YouCtrl")
-                            || affected.contains("Other+YouCtrl")) {
+                    if (affected.startsWith("Creature") && (affected.contains("YouCtrl") || !affected.contains("."))) {
                         return true;
-                    } else if (affected.contains("Creature.PairedWith") && !c.isPaired()) {
+                    }
+                    if (affected.contains("Creature.PairedWith") && !c.isPaired()) {
                         return true;
                     }
                 }
@@ -1482,8 +1467,7 @@ public class ComputerUtil {
                 }
 
                 final String valid = params.get("ValidCard");
-                if (valid.contains("Creature.YouCtrl")
-                        || valid.contains("Other+YouCtrl") ) {
+                if (valid.contains("Creature.YouCtrl") || valid.contains("Other+YouCtrl") ) {
 
                     final SpellAbility sa = t.getOverridingAbility();
                     if (sa != null && sa.getApi() == ApiType.Pump && sa.hasParam("KW")

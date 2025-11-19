@@ -1,4 +1,4 @@
-Name:Suki, Kyoshi Warrior
+Name:Suki, Kyoshi Captain
 ManaCost:2 W
 Types:Legendary Creature Human Warrior Ally
 PT:3/3

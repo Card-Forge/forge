@@ -1066,10 +1066,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public String getNormalizedName(final String cardName) {
-        String cardName1 = cardName;
         // normalize Names first
-        cardName1 = normalizedNames.getOrDefault(cardName1, cardName1);
-        return cardName1;
+        return normalizedNames.getOrDefault(cardName, cardName);
     }
 
     @Override

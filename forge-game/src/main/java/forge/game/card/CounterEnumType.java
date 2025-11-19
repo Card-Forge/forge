@@ -483,24 +483,6 @@ public enum CounterEnumType implements CounterType {
 
     TICKET("TICKET"),
 
-    // Keyword Counters
-/*
-    FLYING("Flying"),
-    FIRSTSTRIKE("First Strike"),
-    DOUBLESTRIKE("Double Strike"),
-    DEATHTOUCH("Deathtouch"),
-    DECAYED("Decayed"),
-    HASTE("Haste"),
-    HEXPROOF("Hexproof"),
-    INDESTRUCTIBLE("Indestructible"),
-    LIFELINK("Lifelink"),
-    MENACE("Menace"),
-    REACH("Reach"),
-    TRAMPLE("Trample"),
-    VIGILANCE("Vigilance"),
-    SHADOW("Shadow"),
-    EXALTED("Exalted")
-//*/
     ;
 
     private String name, counterOnCardDisplayName;

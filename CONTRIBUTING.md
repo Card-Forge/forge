@@ -45,6 +45,9 @@ In IntelliJ, if the SDK Manager is not already running, go to Tools > Android > 
 - Android SDK Build-tools 35.0.0
 - Android 15 (API 35) SDK Platform
 
+> [!CAUTION]
+> Be careful about using unsupported api calls e.g. ``StringBuilder.isEmpty()``. Google's documentation for these is sometimes inaccurate.
+
 ### Proguard update
 
 Standalone Proguard 7.6.0 is included with the project (proguard.jar) under forge-gui-android > tools and supports up to Java 23 (latest android uses Java 17).
