@@ -3067,11 +3067,15 @@ public class ComputerUtil {
         return numInHand > 0 || numInDeck >= 3;
     }
 
+    // this function should be called by most API to give scripters the option of helping AI
     public static CardCollection filterAITgts(SpellAbility sa, Player ai, CardCollection srcList, boolean alwaysStrict) {
+        // TODO support players
         final Card source = sa.getHostCard();
         if (source == null || !sa.hasParam("AITgts")) {
             return srcList;
         }
+
+        // TODO randomize the order, just so human can't predict in advance which of two equal cards AI might pick
 
         CardCollection list;
         String aiTgts = sa.getParam("AITgts");
@@ -3095,10 +3099,23 @@ public class ComputerUtil {
             final int totalValue = value;
             list = CardLists.filter(srcList, c -> ComputerUtilCard.evaluateCreature(c) > totalValue + 30);
         } else {
-            list = CardLists.getValidCards(srcList, sa.getParam("AITgts"), sa.getActivatingPlayer(), source, sa);
+            list = CardLists.getValidCards(srcList, aiTgts, sa.getActivatingPlayer(), source, sa);
         }
 
-        if (!list.isEmpty() || sa.hasParam("AITgtsStrict") || alwaysStrict) {
+        if (sa.hasParam("AITgtsStrict") || alwaysStrict) {
+            return list;
+        }
+        if (!list.isEmpty()) {
+            // try to fill up with other regular targets to increase chance of playing
+            for (Card tgt : srcList) {
+                if (list.size() >= sa.getMinTargets()) {
+                    break;
+                }
+                if (list.contains(tgt)) {
+                    continue;
+                }
+                list.add(tgt);
+            }
             return list;
         }
         return srcList;
