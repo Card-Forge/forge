@@ -64,7 +64,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
             } else if (top.getApi() == ApiType.Mana) {
                 // would lead to Stack Overflow by trying to play this again
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            } else if (top.getApi() == ApiType.DestroyAll || top.getApi() == ApiType.SacrificeAll || top.getApi() == ApiType.ChangeZoneAll || top.getApi() == ApiType.TapAll || top.getApi() == ApiType.UnattachAll) {
+            } else if (top.getApi() == ApiType.DestroyAll || top.getApi() == ApiType.SacrificeAll || top.getApi() == ApiType.ChangeZoneAll || top.getApi() == ApiType.TapAll) {
                 if (!top.usesTargeting() || top.getActivatingPlayer().equals(aiPlayer)) {
                     // If we activated a mass removal / mass tap / mass bounce / etc. spell, or if the opponent activated it but
                     // it can't be retargeted, no reason to copy this spell since it'll probably do the same thing and is useless as a copy
@@ -73,7 +73,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
             } else if (top.hasParam("ConditionManaSpent") || top.getHostCard().hasSVar("AINoCopy")) {
                 // Mana spent is not copied, so these spells generally do nothing when copied.
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            } else if (ComputerUtilCard.isCardRemAIDeck(top.getHostCard())) {
+            } else if (SpellApiToAi.Converter.get(top.getApi()) instanceof CannotPlayAi || ComputerUtilCard.isCardRemAIDeck(top.getHostCard())) {
                 // Don't try to copy anything you can't understand how to handle
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }

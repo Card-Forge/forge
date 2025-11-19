@@ -141,7 +141,7 @@ ScryfallCode=7ED
 126 U Dakmor Lancer @Luca Zontini
 127 C Dark Banishing @Rebecca Guay
 128 R Darkest Hour @Ciruelo
-129 R Dregs of Sorrow @Massimilano Frezzato
+129 R Dregs of Sorrow @Massimiliano Frezzato
 130 C Drudge Skeletons @Jim Nelson
 131 C Duress @Pete Venters
 132 R Eastern Paladin @Kev Walker

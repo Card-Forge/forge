@@ -101,6 +101,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
     protected boolean tapPrefTargeting(final Player ai, final Card source, final SpellAbility sa, final boolean mandatory) {
         final Game game = ai.getGame();
         CardCollection tapList = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
+        tapList = ComputerUtil.filterAITgts(sa, ai, tapList, false);
         tapList = CardLists.filter(tapList, CardPredicates.CAN_TAP);
         tapList = CardLists.filter(tapList, c -> {
             if (c.isCreature()) {
