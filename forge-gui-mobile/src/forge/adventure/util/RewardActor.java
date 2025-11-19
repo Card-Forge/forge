@@ -28,6 +28,8 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Scaling;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
+import com.github.tommyettinger.textra.TypingLabel;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.ImageKeys;
@@ -69,7 +71,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     HoldTooltip holdTooltip;
     Reward reward;
     public TextraButton autoSell;
-    public TextraLabel ownedLabel;
+    public TypingLabel ownedLabel;
     ShaderProgram shaderGrayscale = Forge.getGraphics().getShaderGrayscale();
     ShaderProgram shaderRoundRect = Forge.getGraphics().getShaderRoundedRect();
 
@@ -99,6 +101,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     String description = "";
     private boolean shouldDisplayText = false;
     private boolean isDragging = false;
+    private boolean isNew = false;
 
     @Override
     public void dispose() {
@@ -261,10 +264,11 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 }
                 
                 int ownedCount = AdventurePlayer.current().getCollectionCards(true).count(reward.card);
-                String textContent = ownedCount > 0
-                    ? "[%65][WHITE]" + Forge.getLocalizer().getMessage("lblOwned")  + ": " + ownedCount
-                    : "[%65][LIME]" + Forge.getLocalizer().getMessage("lblNew");
-                ownedLabel = Controls.newTextraLabel(textContent);
+                this.isNew = ownedCount == 0;
+                String textContent = this.isNew
+                    ? "{WAVE}{STYLE=SHADOW}{COLOR=LIME}[%85]" + Forge.getLocalizer().getMessage("lblNew")
+                    : "{COLOR=WHITE}{STYLE=BLACKEN}[%65]" + Forge.getLocalizer().getMessage("lblOwned")  + ": " + ownedCount;
+                ownedLabel = Controls.newTypingLabel(textContent);
 
                 hasbackface = reward.getCard().hasBackFace();
 
@@ -929,7 +933,18 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         }
 
         if (reward.type.equals(Reward.Type.Card) && ownedLabel != null) {
-            ownedLabel.setPosition(this.getX(), this.getY() - (ownedLabel.layout.getHeight() / 2));
+            if (isNew) {
+                if (autoSell != null) {
+                    ownedLabel.setPosition(
+                        autoSell.getX() + autoSell.getWidth() / 2 - ownedLabel.layout.getWidth() / 2,
+                        autoSell.getY() + autoSell.getHeight());
+                } else {
+                    ownedLabel.setPosition(this.getX(), this.getY() + 5);
+                }
+            } else {
+                ownedLabel.setPosition(this.getX(), this.getY() - ownedLabel.layout.getHeight() / 2);
+            }
+            
             ownedLabel.setVisible(false);
             getStage().addActor(ownedLabel);
         }
