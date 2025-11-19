@@ -42,12 +42,12 @@ public class UntapAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean willPayCosts(final Player ai, final SpellAbility sa, final Cost cost, final Card source) {
+    protected boolean willPayCosts(final Player payer, final SpellAbility sa, final Cost cost, final Card source) {
         if (!ComputerUtilCost.checkAddM1M1CounterCost(cost, source)) {
             return false;
         }
 
-        return ComputerUtilCost.checkDiscardCost(ai, cost, source, sa);
+        return ComputerUtilCost.checkDiscardCost(payer, cost, source, sa);
     }
 
     @Override
@@ -102,7 +102,7 @@ public class UntapAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         if (!sa.usesTargeting()) {
             // who cares if its already untapped, it's only a subability?
         } else {
@@ -471,7 +471,7 @@ public class UntapAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+    public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         // Paralyze effects
         if (sa.hasParam("UnlessSwitched")) {
             final Card host = sa.getHostCard();
@@ -493,6 +493,6 @@ public class UntapAi extends SpellAbilityAi {
             }
         }
 
-        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+        return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
     }
 }

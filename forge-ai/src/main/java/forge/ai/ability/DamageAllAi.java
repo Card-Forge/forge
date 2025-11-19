@@ -175,7 +175,7 @@ public class  DamageAllAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final String validP = sa.getParamOrDefault("ValidPlayers", "");
 

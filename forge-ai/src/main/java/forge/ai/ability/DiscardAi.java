@@ -196,7 +196,7 @@ public class DiscardAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         // Drawback AI improvements
         // if parent draws cards, make sure cards in hand + cards drawn > 0
         if (sa.usesTargeting()) {
@@ -219,7 +219,7 @@ public class DiscardAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+    public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         final Card host = sa.getHostCard();
         final String aiLogic = sa.getParam("UnlessAI");
         if ("Never".equals(aiLogic)) { return false; }
@@ -268,6 +268,6 @@ public class DiscardAi extends SpellAbilityAi {
             }
         }
 
-        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+        return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
     }
 }

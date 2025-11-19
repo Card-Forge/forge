@@ -18,6 +18,7 @@ import forge.game.zone.ZoneType;
 import forge.util.collect.FCollectionView;
 
 public class TapAi extends TapAiBase {
+
     @Override
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final PhaseHandler phase = ai.getGame().getPhaseHandler();
@@ -43,7 +44,6 @@ public class TapAi extends TapAiBase {
         }
 
         final Card source = sa.getHostCard();
-        final Cost abCost = sa.getPayCosts();
 
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
         if ("GoblinPolkaBand".equals(aiLogic)) {
@@ -52,7 +52,20 @@ public class TapAi extends TapAiBase {
             return SpecialCardAi.Arena.consider(ai, sa);
         }
 
-        if (!sa.usesTargeting()) {
+        if (sa.usesTargeting()) {
+            // X controls the minimum targets
+            if ("X".equals(sa.getTargetRestrictions().getMinTargets()) && sa.getSVar("X").equals("Count$xPaid")) {
+                // Set PayX here to maximum value.
+                // TODO need to set XManaCostPaid for targets, maybe doesn't need PayX anymore?
+                sa.setXManaCostPaid(ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger()));
+            }
+
+            sa.resetTargets();
+            if (tapPrefTargeting(ai, source, sa, false)) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+        } else {
             CardCollection untap;
             if (sa.hasParam("CardChoices")) {
                 untap = CardLists.getValidCards(source.getGame().getCardsIn(ZoneType.Battlefield), sa.getParam("CardChoices"), ai, source, sa);
@@ -69,28 +82,13 @@ public class TapAi extends TapAiBase {
 
             if (value > 0) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
-        } else {
-            // X controls the minimum targets
-            if ("X".equals(sa.getTargetRestrictions().getMinTargets()) && sa.getSVar("X").equals("Count$xPaid")) {
-                // Set PayX here to maximum value.
-                // TODO need to set XManaCostPaid for targets, maybe doesn't need PayX anymore?
-                sa.setXManaCostPaid(ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger()));
-            }
-
-            sa.resetTargets();
-            if (tapPrefTargeting(ai, source, sa, false)) {
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
-            }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
     }
 
     @Override
-    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+    public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         // Check for shocklands and similar ETB replacement effects
         if (sa.hasParam("ETB")) {
             final Card source = sa.getHostCard();
@@ -134,6 +132,6 @@ public class TapAi extends TapAiBase {
                 return true;
             }
         }
-        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+        return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
     }
 }
