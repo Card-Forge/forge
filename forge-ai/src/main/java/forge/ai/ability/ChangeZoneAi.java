@@ -45,23 +45,23 @@ public class ChangeZoneAi extends SpellAbilityAi {
     // cards where multiple cards are fetched at once and they need to be coordinated
     private static CardCollection multipleCardsToChoose = new CardCollection();
 
-    protected boolean willPayCosts(Player ai, SpellAbility sa, Cost cost, Card source) {
+    protected boolean willPayCosts(Player payer, SpellAbility sa, Cost cost, Card source) {
         if (sa.isHidden()) {
-            if (!ComputerUtilCost.checkSacrificeCost(ai, cost, source, sa)
+            if (!ComputerUtilCost.checkSacrificeCost(payer, cost, source, sa)
                     && !"Battlefield".equals(sa.getParam("Destination")) && !source.isLand()) {
                 return false;
             }
 
-            if (!ComputerUtilCost.checkLifeCost(ai, cost, source, 4, sa)) {
+            if (!ComputerUtilCost.checkLifeCost(payer, cost, source, 4, sa)) {
                 return false;
             }
 
-            if (!ComputerUtilCost.checkDiscardCost(ai, cost, source, sa)) {
+            if (!ComputerUtilCost.checkDiscardCost(payer, cost, source, sa)) {
                 for (final CostPart part : cost.getCostParts()) {
                     if (part instanceof CostDiscard) {
                         CostDiscard cd = (CostDiscard) part;
                         // this is mainly for typecycling
-                        if (!cd.payCostFromSource() || !ComputerUtil.isWorseThanDraw(ai, source)) {
+                        if (!cd.payCostFromSource() || !ComputerUtil.isWorseThanDraw(payer, source)) {
                             return false;
                         }
                     }
@@ -80,7 +80,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
                     int amt = part.getAbilityAmount(sa);
                     needed += amt;
-                    CardCollection toAdd = ComputerUtil.chooseExileFrom(ai, (CostExile) part, source, amt, sa, true);
+                    CardCollection toAdd = ComputerUtil.chooseExileFrom(payer, (CostExile) part, source, amt, sa, true);
                     if (toAdd != null) {
                         payingCards.addAll(toAdd);
                     }
@@ -91,7 +91,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
 
-        return super.willPayCosts(ai, sa, cost, source);
+        return super.willPayCosts(payer, sa, cost, source);
     }
 
     @Override
@@ -198,13 +198,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * <p>
      * changeZonePlayDrawbackAI.
      * </p>
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
      *
+     * @param sa a {@link SpellAbility} object.
      * @return a boolean.
      */
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
         if (sa.isHidden()) {
             return hiddenOriginPlayDrawbackAI(aiPlayer, sa);
         }
@@ -2105,7 +2104,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+    public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         final Card host = sa.getHostCard();
 
         int lifeLoss = 0;
@@ -2132,6 +2131,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
 
-        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+        return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
     }
 }

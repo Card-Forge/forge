@@ -44,11 +44,11 @@ public class CountersPutAi extends CountersAi {
      * forge.game.card.Card)
      */
     @Override
-    protected boolean willPayCosts(Player ai, SpellAbility sa, Cost cost, Card source) {
+    protected boolean willPayCosts(Player payer, SpellAbility sa, Cost cost, Card source) {
         final String type = sa.getParam("CounterType");
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
 
-        if (!super.willPayCosts(ai, sa, cost, source)) {
+        if (!super.willPayCosts(payer, sa, cost, source)) {
             return false;
         }
 
@@ -669,7 +669,7 @@ public class CountersPutAi extends CountersAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(final SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, final SpellAbility sa) {
         final Game game = ai.getGame();
         Card choice = null;
         final String type = sa.getParam("CounterType");
