@@ -125,7 +125,7 @@ TokensFallbackCode=WOE
 116 R Rankle, Master of Pranks @Dmitry Burmak
 117 U Reckless Spite @Karl Kopinski
 118 R Thrilling Encore @Alex Konstad
-119 C Ancestral Mask @Massimilano Frezzato
+119 C Ancestral Mask @Massimiliano Frezzato
 120 C Aura Gnarlid @Lars Grant-West
 121 R Bear Umbra @Howard Lyon
 122 C Careful Cultivation @A. M. Sartor

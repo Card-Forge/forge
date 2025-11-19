@@ -151,7 +151,7 @@ ScryfallCode=INV
 137 R Bend or Break @Arnie Swekel
 138 U Breath of Darigaaz @Greg Hildebrandt & Tim Hildebrandt
 139 R Callous Giant @Mark Brill
-140 U Chaotic Strike @Massimilano Frezzato
+140 U Chaotic Strike @Massimiliano Frezzato
 141 R Collapsing Borders @Glen Angus
 142 C Crown of Flames @Christopher Moeller
 143 U Firebrand Ranger @Quinton Hoover
@@ -293,7 +293,7 @@ ScryfallCode=INV
 279 R Teferi's Moat @rk post
 280 R Treva, the Renewer @Ciruelo
 281 R Tsabo Tavoc @Michael Sutfin
-282 R Undermine @Massimilano Frezzato
+282 R Undermine @Massimiliano Frezzato
 283 U Urborg Drake @Sam Wood
 284 U Vicious Kavu @Kev Walker
 285 R Vile Consumption @Heather Hudson
