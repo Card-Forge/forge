@@ -90,7 +90,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     private boolean hover, hasbackface;
     boolean loaded = true;
     boolean alternate = false, shown = false;
-    boolean isRewardShop, showOverlay, isLoot, isQuestReward;
+    boolean isRewardShop, showOverlay, canAutoSell;
     TextraLabel overlayLabel;
     int artIndex = 1;
     String imageKey = "";
@@ -215,7 +215,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     }
 
     public void setAutoSell(boolean sell) {
-        if (!isLoot && !isQuestReward)
+        if (!canAutoSell)
             return;
         if (autoSell == null)
             return;
@@ -242,8 +242,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         this.flipOnClick = flippable;
         this.reward = reward;
         this.isRewardShop = RewardScene.Type.Shop.equals(type);
-        this.isLoot = RewardScene.Type.Loot.equals(type);
-        this.isQuestReward = RewardScene.Type.QuestReward.equals(type);
+        this.canAutoSell = (RewardScene.Type.Loot.equals(type) || RewardScene.Type.QuestReward.equals(type));
         this.showOverlay = showOverlay;
 
         if (backTexture == null) {
@@ -936,15 +935,15 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         clicked = true;
         flipProcess = 0;
         SoundSystem.instance.play(SoundEffectType.FlipCard, false);
-        if ((isLoot || isQuestReward) && autoSell != null) {
+        if (canAutoSell && autoSell != null) {
             autoSell.setPosition(this.getX(), this.getY());
             getStage().addActor(autoSell);
             autoSell.setVisible(false);
         }
 
-        if ((isLoot || isQuestReward) && reward.type.equals(Reward.Type.Card) && ownedLabel != null) {
+        if (reward.type.equals(Reward.Type.Card) && ownedLabel != null) {
             if (isNew) {
-                if (isLoot && autoSell != null) {
+                if (canAutoSell && autoSell != null) {
                     ownedLabel.setPosition(
                         autoSell.getX() + autoSell.getWidth() / 2 - ownedLabel.layout.getWidth() / 2,
                         autoSell.getY() + autoSell.getHeight());
