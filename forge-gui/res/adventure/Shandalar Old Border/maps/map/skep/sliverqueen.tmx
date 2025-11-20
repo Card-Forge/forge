@@ -36,7 +36,7 @@
  <objectgroup id="4" name="Objects">
   <object id="38" template="../../obj/entry_up.tx" x="192" y="480" width="112" height="8">
    <properties>
-    <property name="teleport" value="../common/maps/map/skep/skep_outer.tmx"/>
+    <property name="teleport" value="skep_outer.tmx"/>
     <property name="teleportObjectId" value="153"/>
    </properties>
   </object>

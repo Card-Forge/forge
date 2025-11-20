@@ -99,7 +99,7 @@
   <object id="170" template="../../obj/door_down.tx" x="112.057" y="895.107" width="34.2466" height="35.0741" rotation="0.284412">
    <properties>
     <property name="direction" value="down"/>
-    <property name="teleport" value="../common/maps/map/grolnok/grolnok.tmx"/>
+    <property name="teleport" value="grolnok.tmx"/>
    </properties>
   </object>
   <object id="177" template="../../obj/booster.tx" x="334.782" y="845.759">

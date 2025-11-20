@@ -121,7 +121,7 @@
   </object>
   <object id="223" template="../../../../common/maps/obj/door_up.tx" x="463.842" y="524.605">
    <properties>
-    <property name="teleport" value="../common/maps/map/zedruu/zedruu.tmx"/>
+    <property name="teleport" value="zedruu.tmx"/>
    </properties>
   </object>
   <object id="225" template="../../../../common/maps/obj/enemy.tx" x="503.727" y="394.454">

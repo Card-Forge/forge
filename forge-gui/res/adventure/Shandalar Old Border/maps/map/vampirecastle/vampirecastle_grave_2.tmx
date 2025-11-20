@@ -36,7 +36,7 @@
   <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="194.811" y="475.246" width="48" height="16">
    <properties>
     <property name="direction" value="up"/>
-    <property name="teleport" value="../common/maps/map/vampirecastle/vampirecastle_2.tmx"/>
+    <property name="teleport" value="vampirecastle_2.tmx"/>
    </properties>
   </object>
   <object id="48" template="../../../../common/maps/obj/treasure.tx" x="170.637" y="27.2682">

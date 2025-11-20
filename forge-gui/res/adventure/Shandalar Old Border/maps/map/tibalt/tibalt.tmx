@@ -126,14 +126,14 @@
   <object id="203" template="../../../../common/maps/obj/entry_up.tx" x="812.175" y="11.4386" width="44.6667" height="19.6667">
    <properties>
     <property name="direction" value="down"/>
-    <property name="teleport" value="../common/maps/map/tibalt/tibalt_f0.tmx"/>
+    <property name="teleport" value="tibalt_f0.tmx"/>
     <property name="teleportObjectId" value="174"/>
    </properties>
   </object>
   <object id="204" template="../../../../common/maps/obj/entry_up.tx" x="683.175" y="12.4386" width="39" height="16">
    <properties>
     <property name="direction" value="down"/>
-    <property name="teleport" value="../common/maps/map/tibalt/tibalt_f0.tmx"/>
+    <property name="teleport" value="tibalt_f0.tmx"/>
     <property name="teleportObjectId" value="170"/>
    </properties>
   </object>
@@ -197,7 +197,7 @@
     <property name="activeQuestFlag" value="FortressPortal"/>
     <property name="portalState" value="closed"/>
     <property name="sprite" value="sprites/portal3.atlas"/>
-    <property name="teleport" value="../common/maps/map/tibalt/tibalt_f0.tmx"/>
+    <property name="teleport" value="tibalt_f0.tmx"/>
     <property name="teleportObjectId" value="194"/>
    </properties>
   </object>

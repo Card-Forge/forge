@@ -108,7 +108,7 @@
   <object id="197" template="../../../../common/maps/obj/door_up.tx" x="61.6753" y="66.9383" width="30" height="39.5">
    <properties>
     <property name="direction" value="down"/>
-    <property name="teleport" value="../common/maps/map/zedruu/zedruu_f1.tmx"/>
+    <property name="teleport" value="zedruu_f1.tmx"/>
    </properties>
   </object>
   <object id="198" template="../../../../common/maps/obj/waypoint.tx" x="146.842" y="557.938"/>
@@ -361,7 +361,7 @@
   <object id="262" template="../../../../common/maps/obj/door_up.tx" x="457.509" y="16.3553" width="22.6667" height="22.5">
    <properties>
     <property name="direction" value="down"/>
-    <property name="teleport" value="../common/maps/map/zedruu/zedruu_f4.tmx"/>
+    <property name="teleport" value="zedruu_f4.tmx"/>
    </properties>
   </object>
  </objectgroup>

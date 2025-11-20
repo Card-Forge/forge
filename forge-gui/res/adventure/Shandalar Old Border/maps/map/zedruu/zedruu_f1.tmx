@@ -75,7 +75,7 @@
   <object id="167" template="../../../../common/maps/obj/entry_up.tx" x="220.675" y="328.272" width="48.6667" height="16">
    <properties>
     <property name="direction" value="up"/>
-    <property name="teleport" value="../common/maps/map/zedruu/zedruu.tmx"/>
+    <property name="teleport" value="zedruu.tmx"/>
    </properties>
   </object>
   <object id="169" template="../../../../common/maps/obj/enemy.tx" x="311.49" y="108.728">
@@ -137,7 +137,7 @@
   <object id="214" template="../../../../common/maps/obj/collision.tx" x="271.409" y="294.772" width="185.199" height="16"/>
   <object id="215" template="../../../../common/maps/obj/door_up.tx" x="423.509" y="279.439" width="28.6667" height="16">
    <properties>
-    <property name="teleport" value="../common/maps/map/zedruu/zedruu_f0.tmx"/>
+    <property name="teleport" value="zedruu_f0.tmx"/>
    </properties>
   </object>
   <object id="216" template="../../../../common/maps/obj/enemy.tx" x="203.888" y="168.866">
