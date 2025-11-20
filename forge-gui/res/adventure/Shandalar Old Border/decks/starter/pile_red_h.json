@@ -1,48 +1,89 @@
-{                                    
-"name":"Red",
+{
+  "name": "Red",
   "mainDeck": [
-    {  
-      "count":15, 
-      "cardName": "Mountain" 
-    },        
-    {  
-      "count":6, 
-      "cardName": "Forest" 
-    },   
-    {  
-      "count":6, 
-      "cardName": "Swamp" 
+    {
+      "type": "card",
+      "count": 9,
+      "cardName": "Mountain|PTK"
     },
-    {  
-      "count":9,
-      "colors": ["red"],
-      "rarity": ["Common"],   
-      "manaCosts": [1,2]
+    {
+      "type": "card",
+      "count": 9,
+      "cardName": "Forest|PTK"
     },
-    {  
-      "count":6,
-      "colors": ["green","black"],
-      "rarity": ["Common"],   
-      "manaCosts": [1,2]
+    {
+      "type": "card",
+      "count": 9,
+      "cardName": "Swamp|PTK"
     },
-    {  
-      "count":6,
-      "colors": ["red"],
-      "rarity": ["Common"],   
-      "manaCosts": [3,4]
+    {
+      "count": 9,
+      "colors": [
+        "red"
+      ],
+      "rarity": [
+        "Common"
+      ],
+      "manaCosts": [
+        1,
+        2
+      ]
     },
-    {  
-      "count":3,
-      "colors": ["green","black"],
-      "rarity": ["Uncommon","Common"],   
-      "manaCosts": [3,4]
+    {
+      "count": 6,
+      "colors": [
+        "green",
+        "black"
+      ],
+      "rarity": [
+        "Common"
+      ],
+      "manaCosts": [
+        1,
+        2
+      ]
     },
-    {  
-      "count":9,
-      "colors": ["red"],
-      "rarity": ["Uncommon","Common"],   
-      "manaCosts": [5,6]
-    } 
-    ]
+    {
+      "count": 6,
+      "colors": [
+        "red"
+      ],
+      "rarity": [
+        "Common"
+      ],
+      "manaCosts": [
+        3,
+        4
+      ]
+    },
+    {
+      "count": 3,
+      "colors": [
+        "green",
+        "black"
+      ],
+      "rarity": [
+        "Uncommon",
+        "Common"
+      ],
+      "manaCosts": [
+        3,
+        4
+      ]
+    },
+    {
+      "count": 9,
+      "colors": [
+        "red"
+      ],
+      "rarity": [
+        "Uncommon",
+        "Common"
+      ],
+      "manaCosts": [
+        5,
+        6
+      ]
+    }
+  ]
 }
-

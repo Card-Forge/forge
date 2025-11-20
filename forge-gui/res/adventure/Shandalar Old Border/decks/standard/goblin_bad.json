@@ -1,10 +1,36 @@
-{                                    
-"name":"Goblin bad",
-  "template":
-  {
-   "count":80,
-   "colors":["Red"],
-   "tribe":"Goblin",
-   "rares":0.1
-  }
+{
+  "name": "Goblin bad",
+  "mainDeck": [
+    {
+      "count": 34,
+      "colors": [
+        "Red"
+      ],
+      "subTypes": [
+        "Goblin"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 4,
+      "colors": [
+        "Red"
+      ],
+      "subTypes": [
+        "Goblin"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 22,
+      "cardName": "Mountain|UGL"
+    }
+  ]
 }

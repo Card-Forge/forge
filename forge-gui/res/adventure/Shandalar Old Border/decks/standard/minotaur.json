@@ -1,11 +1,36 @@
-{                                    
-"name":"Minotaur",
-  "template":
-  {
-   "count":60,
-   "colors":["Red"],
-   "tribe":"Minotaur",
-   "tribeSynergyCards":0.1,
-   "rares":0.8
-  }
+{
+  "name": "Minotaur",
+  "mainDeck": [
+    {
+      "count": 8,
+      "colors": [
+        "Red"
+      ],
+      "subTypes": [
+        "Minotaur"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 30,
+      "colors": [
+        "Red"
+      ],
+      "subTypes": [
+        "Minotaur"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 22,
+      "cardName": "Mountain|5ED"
+    }
+  ]
 }

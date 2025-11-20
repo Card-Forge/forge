@@ -551,6 +551,11 @@
 				"probability": 1,
 				"count": 5,
 				"addMaxCount": 5
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
 		],
 		"colors": "U",
@@ -783,12 +788,6 @@
 		"life": 60,
 		"rewards": [
 			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Swords to Plowshares"
-			},
-			{
 				"type": "gold",
 				"probability": 1,
 				"count": 1000,
@@ -801,6 +800,12 @@
 				"addMaxCount": 20
 			},
 			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "Serra's Shield"
+			},
+			{
 				"type": "life",
 				"probability": 1,
 				"count": 1
@@ -809,25 +814,46 @@
 				"type": "card",
 				"probability": 1,
 				"count": 1,
-				"cardName": "Karmic Guide"
+				"cardName": "Akroma, Angel of Wrath|LGN"
 			},
 			{
 				"type": "card",
 				"probability": 1,
 				"count": 1,
-				"cardName": "Akroma, Angel of Wrath"
+				"cardName": "Akroma's Vengeance|ONS"
 			},
 			{
-				"type": "item",
+				"type": "card",
 				"probability": 1,
 				"count": 1,
-				"itemNames": [
-					"White Key"
-				]
+				"cardName": "Decree of Justice|SCG"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Moat|LEG"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Harsh Mercy|ONS"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Plains|PGRU"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
 		],
 		"equipment": [
-			"Mox Pearl"
+			"Akroma Starting Setup"
 		],
 		"colors": "W",
 		"questTags": [
@@ -4756,7 +4782,7 @@
 				"type": "card",
 				"probability": 1,
 				"count": 1,
-				"cardName": "Teeka's Dragon"
+				"cardName": "Teeka's Dragon|MIR"
 			},
 			{
 				"type": "Union",
@@ -4829,6 +4855,17 @@
 				"probability": 1,
 				"count": 1,
 				"itemName": "Chandra's Stone"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Mountain|UGL"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
 		],
 		"colors": "R",
@@ -5595,13 +5632,13 @@
 				"type": "card",
 				"probability": 1,
 				"count": 3,
-				"cardName": "Zodiac Rooster"
+				"cardName": "Zodiac Rooster|PTK"
 			},
 			{
 				"type": "card",
 				"probability": 1,
 				"count": 2,
-				"cardName": "Polluted Delta"
+				"cardName": "Polluted Delta|ONS"
 			},
 			{
 				"type": "item",
@@ -6011,73 +6048,6 @@
 		"life": 35,
 		"rewards": [
 			{
-				"type": "deckCard",
-				"probability": 1,
-				"count": 2,
-				"addMaxCount": 5
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Phyrexian Altar"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Bottle of Suleiman"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Anvil of Bogardan"
-			},
-			{
-				"type": "deckCard",
-				"probability": 0.5,
-				"count": 1,
-				"addMaxCount": 2,
-				"rarity": [
-					"uncommon"
-				],
-				"cardTypes": [
-					"Creature",
-					"Artifact",
-					"Enchantment",
-					"Instant",
-					"Sorcery"
-				]
-			},
-			{
-				"type": "deckCard",
-				"probability": 0.25,
-				"count": 1,
-				"addMaxCount": 1,
-				"rarity": [
-					"rare"
-				],
-				"cardTypes": [
-					"Creature",
-					"Artifact",
-					"Enchantment",
-					"Instant",
-					"Sorcery"
-				]
-			},
-			{
-				"type": "deckCard",
-				"probability": 0.1,
-				"count": 1,
-				"rarity": [
-					"rare"
-				],
-				"cardTypes": [
-					"Land"
-				]
-			},
-			{
 				"type": "gold",
 				"probability": 0.3,
 				"count": 10,
@@ -6087,17 +6057,69 @@
 				"type": "item",
 				"probability": 1,
 				"count": 1,
-				"itemName": "Mantle of Ancient Lore",
-				"itemNames": [
-					"Mantle of Ancient Lore"
-				]
+				"itemName": "Yellow Scarves Horseshoe"
 			},
 			{
 				"type": "shards",
 				"probability": 1,
 				"count": 20,
 				"addMaxCount": 20
+			},
+			{
+				"type": "life",
+				"probability": 1,
+				"count": 1
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Rolling Earthquake|PTK"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Guan Yu's 1,000-Li March|PTK"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Capture of Jingzhou|PTK"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Lu Bu, Master-at-Arms|PTK"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Lu Xun, Scholar General|PTK"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Zhang Fei, Fierce Warrior|PTK"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Island|PELP"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
+		],
+		"equipment": [
+			"Conjurer Starting Setup"
 		],
 		"colors": "UB",
 		"questTags": [
@@ -6869,7 +6891,7 @@
 	},
 	{
 		"name": "Cyclops",
-		"nameOverride": "Youthful Cyclops",
+		"nameOverride": "Specter's Cyclops",
 		"sprite": "sprites/enemy/giant/cyclops.atlas",
 		"deck": [
 			"decks/standard/cyclops.dck"
@@ -6898,6 +6920,9 @@
 				"addMaxCount": 85
 			}
 		],
+		"equipment": [
+			"Cyclops Starting Setup"
+		],
 		"colors": "R",
 		"questTags": [
 			"Humanoid",
@@ -6923,17 +6948,6 @@
 		"life": 30,
 		"rewards": [
 			{
-				"type": "deckCard",
-				"probability": 1,
-				"count": 4,
-				"addMaxCount": 6,
-				"rarity": [
-					"Common",
-					"Rare",
-					"Uncommon"
-				]
-			},
-			{
 				"type": "gold",
 				"probability": 1,
 				"count": 100,
@@ -6946,18 +6960,46 @@
 				"addMaxCount": 10
 			},
 			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "Lucky Clover"
+			},
+			{
 				"type": "card",
 				"probability": 1,
-				"count": 2,
-				"addMaxCount": 2,
-				"colors": [
-					"Blue",
-					"Red"
-				],
-				"rarity": [
-					"rare"
-				],
-				"colorType": "MultiColor"
+				"count": 1,
+				"cardName": "Chaos Orb|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Falling Star|LEG"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Goblin Bomb|WTH"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Bottle of Suleiman|ARN"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Mijae Djinn|ARN"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Ydwen Efreet|ARN"
 			}
 		],
 		"colors": "UR",
@@ -7155,52 +7197,49 @@
 		"life": 35,
 		"rewards": [
 			{
-				"type": "card",
-				"probability": 1,
-				"count": 1,
-				"addMaxCount": 4,
-				"colors": [
-					"Black",
-					"Green"
-				],
-				"rarity": [
-					"rare",
-					"Uncommon"
-				],
-				"cardTypes": [
-					"Enchantment"
-				],
-				"colorType": "Any"
-			},
-			{
-				"type": "deckCard",
-				"probability": 0.1,
-				"count": 1,
-				"rarity": [
-					"rare"
-				],
-				"cardTypes": [
-					"Land"
-				]
-			},
-			{
 				"type": "gold",
 				"probability": 1,
-				"count": 50,
-				"addMaxCount": 300
+				"count": 150,
+				"addMaxCount": 100
 			},
 			{
 				"type": "card",
 				"probability": 1,
 				"count": 1,
-				"cardName": "Enchantress's Presence"
+				"cardName": "Llanowar Wastes|APC"
 			},
 			{
-				"type": "shards",
-				"probability": 1,
-				"count": 10,
-				"addMaxCount": 10
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Argothian Enchantress|USG"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Spiritmonger|APC"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Enchantress's Presence|ONS"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Dance of the Dead|ICE"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
+		],
+		"equipment": [
+			"Dark Enchanter Starting Setup"
 		],
 		"colors": "GB",
 		"questTags": [
@@ -7647,6 +7686,7 @@
 	},
 	{
 		"name": "Demon of Tibalt",
+		"nameOverride": "Specter's Horror",
 		"sprite": "sprites/enemy/fiend/cacodaemon.atlas",
 		"deck": [
 			"decks/standard/tibalt_demon.dck"
@@ -7661,15 +7701,6 @@
 		"life": 30,
 		"rewards": [
 			{
-				"type": "deckCard",
-				"probability": 1,
-				"count": 2,
-				"addMaxCount": 5,
-				"rarity": [
-					"rare"
-				]
-			},
-			{
 				"type": "gold",
 				"probability": 0.3,
 				"count": 10,
@@ -7682,25 +7713,38 @@
 				"addMaxCount": 2
 			},
 			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "Eye of Horror"
+			},
+			{
 				"type": "card",
-				"probability": 0.5,
-				"count": 2,
-				"addMaxCount": 4,
-				"colors": [
-					"Black",
-					"Red",
-					"Blue"
-				],
-				"rarity": [
-					"rare"
-				],
-				"subTypes": [
-					"Demon"
-				],
-				"cardTypes": [
-					"Creature"
-				]
+				"probability": 1,
+				"count": 1,
+				"cardName": "Laquatus's Champion|TOR"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Hypnox|TOR"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Dark Hatchling|USG"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Devouring Strossus|INV"
 			}
+		],
+		"equipment": [
+			"Specter's Horror Starting Setup"
 		],
 		"colors": "B",
 		"questTags": [
@@ -9801,6 +9845,7 @@
 	},
 	{
 		"name": "Emrakul",
+		"nameOverride": "Urza, Planeswalker",
 		"sprite": "sprites/enemy/aberration/emrakul.atlas",
 		"deck": [
 			"decks/boss/emrakul.dck"
@@ -9819,68 +9864,55 @@
 				"addMaxCount": 2500
 			},
 			{
-				"type": "card",
-				"probability": 1,
-				"count": 5,
-				"addMaxCount": 10,
-				"subTypes": [
-					"Eldrazi"
-				],
-				"cardTypes": [
-					"Creature"
-				]
-			},
-			{
-				"type": "life",
-				"probability": 1,
-				"count": 1
-			},
-			{
-				"type": "Union",
+				"type": "item",
 				"probability": 1,
 				"count": 1,
-				"cardUnion": [
-					{
-						"count": 1,
-						"cardName": "Ancestral Recall"
-					},
-					{
-						"count": 1,
-						"cardName": "Black Lotus"
-					},
-					{
-						"count": 1,
-						"cardName": "Mox Emerald"
-					},
-					{
-						"count": 1,
-						"cardName": "Mox Jet"
-					},
-					{
-						"count": 1,
-						"cardName": "Mox Pearl"
-					},
-					{
-						"count": 1,
-						"cardName": "Mox Ruby"
-					},
-					{
-						"count": 1,
-						"cardName": "Mox Sapphire"
-					},
-					{
-						"count": 1,
-						"cardName": "Timetwister"
-					},
-					{
-						"count": 1,
-						"cardName": "Time Walk"
-					}
-				]
+				"itemName": "Urza's Armor"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Sol Ring|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Mana Crypt|PHPR"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Tolarian Academy|USG"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Timetwister|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Time Walk|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Ancestral Recall|LEA"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
 		],
 		"equipment": [
-			"Sol Ring"
+			"Urza Starting Setup"
 		],
 		"colors": "C",
 		"questTags": [
@@ -9914,19 +9946,19 @@
 				"type": "card",
 				"probability": 0.5,
 				"count": 1,
-				"cardName": "Winter Orb"
+				"cardName": "Winter Orb|LEA"
 			},
 			{
 				"type": "card",
 				"probability": 0.5,
 				"count": 1,
-				"cardName": "Tundra"
+				"cardName": "Tundra|LEA"
 			},
 			{
 				"type": "card",
 				"probability": 0.5,
 				"count": 1,
-				"cardName": "Underground Sea"
+				"cardName": "Underground Sea|LEA"
 			},
 			{
 				"type": "deckCard",
@@ -11518,6 +11550,12 @@
 		"life": 10,
 		"rewards": [
 			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "Fungal Staff"
+			},
+			{
 				"type": "card",
 				"probability": 1,
 				"count": 2,
@@ -12017,6 +12055,7 @@
 	},
 	{
 		"name": "Ghalta",
+		"nameOverride": "Queen of Beasts",
 		"sprite": "sprites/enemy/beast/ghalta.atlas",
 		"deck": [
 			"decks/boss/ghalta.dck"
@@ -12028,34 +12067,16 @@
 		"life": 60,
 		"rewards": [
 			{
-				"type": "card",
-				"probability": 1,
-				"count": 1,
-				"cardName": "Black Lotus"
-			},
-			{
 				"type": "item",
 				"probability": 1,
 				"count": 1,
-				"itemName": "Green Key"
+				"itemName": "Explorer's Boots"
 			},
 			{
 				"type": "gold",
 				"probability": 1,
 				"count": 1000,
 				"addMaxCount": 250
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Library of Alexandria"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Exploration"
 			},
 			{
 				"type": "shards",
@@ -12067,10 +12088,75 @@
 				"type": "life",
 				"probability": 1,
 				"count": 1
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Ancient Tomb|TMP"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Krosan Cloudscraper|LGN"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Avatar of Might|PCY"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "City of Solitude|VIS"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Dense Foliage|WTH"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Thorn Elemental|UDS"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Crush of Wurms|JUD"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Verdant Force|TMP"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Whirlwind|USG"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Titania's Song|ATQ"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
 		],
 		"equipment": [
-			"Mox Emerald"
+			"Ghalta Starting Setup"
 		],
 		"colors": "G",
 		"questTags": [
@@ -12086,6 +12172,7 @@
 	},
 	{
 		"name": "Garruk",
+		"nameOverride": "Kamahl, Fist of Krosa",
 		"sprite": "sprites/enemy/humanoid/human/shaman/garruk.atlas",
 		"deck": [
 			"decks/miniboss/garruk.dck"
@@ -12099,48 +12186,6 @@
 		"life": 25,
 		"rewards": [
 			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Flooded Strand"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Null Rod"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Exploration"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Mishra's Workshop"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Jayemdae Tome"
-			},
-			{
-				"type": "card",
-				"probability": 0.3,
-				"count": 1,
-				"cardName": "Gaea's Cradle"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Polluted Delta"
-			},
-			{
 				"type": "gold",
 				"probability": 1,
 				"count": 1000,
@@ -12150,7 +12195,7 @@
 				"type": "item",
 				"probability": 1,
 				"count": 1,
-				"itemName": "Hidden Ancients"
+				"itemName": "Overwhelming Axe"
 			},
 			{
 				"type": "shards",
@@ -12162,7 +12207,51 @@
 				"type": "life",
 				"probability": 1,
 				"count": 1
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Kamahl, Fist of Krosa|ONS"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Vernal Bloom|USG"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Epic Struggle|JUD"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Call of the Herd|ODY"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Crush of Wurms|JUD"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Forest|PALP"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
+		],
+		"equipment": [
+			"Kamahl Starting Setup"
 		],
 		"colors": "GB",
 		"questTags": [
@@ -12177,6 +12266,7 @@
 	},
 	{
 		"name": "Sorin",
+		"nameOverride": "Baron Sengir",
 		"sprite": "sprites/enemy/undead/sorin.atlas",
 		"deck": [
 			"decks/miniboss/sorin.dck"
@@ -12190,48 +12280,6 @@
 		"life": 55,
 		"rewards": [
 			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Bazaar of Baghdad"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Mox Jet"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Wooded Foothills"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Swords to Plowshares"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Yawgmoth's Will"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Vampiric Tutor"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Diabolic Intent"
-			},
-			{
 				"type": "gold",
 				"probability": 1,
 				"count": 1000,
@@ -12244,10 +12292,66 @@
 				"addMaxCount": 10
 			},
 			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "Vampire Bite"
+			},
+			{
 				"type": "life",
 				"probability": 1,
 				"count": 1
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Sengir Vampire|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Baron Sengir|HML"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "No Mercy|ULG"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Patriarch's Bidding|ONS"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Plague Wind|PCY"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Necromancy|VIS"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Swamp|PELP"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
+		],
+		"equipment": [
+			"Baron Sengir Starting Setup"
 		],
 		"colors": "GB",
 		"questTags": [
@@ -13184,6 +13288,7 @@
 	},
 	{
 		"name": "Griselbrand",
+		"nameOverride": "Lord of the Pit",
 		"sprite": "sprites/enemy/fiend/griselbrand.atlas",
 		"deck": [
 			"decks/boss/griselbrand.dck"
@@ -13196,34 +13301,16 @@
 		"life": 60,
 		"rewards": [
 			{
-				"type": "card",
-				"probability": 1,
-				"count": 1,
-				"cardName": "Time Vault"
-			},
-			{
 				"type": "item",
 				"probability": 1,
 				"count": 1,
-				"itemName": "Black Key"
+				"itemName": "Symbol of the Pit"
 			},
 			{
 				"type": "gold",
 				"probability": 1,
 				"count": 1000,
 				"addMaxCount": 250
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Demonic Tutor"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Sol Ring"
 			},
 			{
 				"type": "shards",
@@ -13235,10 +13322,51 @@
 				"type": "life",
 				"probability": 1,
 				"count": 1
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Cabal Coffers|TOR"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Lord of the Pit|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Spirit of the Night|MIR"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Animate Dead|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "No Mercy|ULG"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Phyrexian Arena|APC"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
 		],
 		"equipment": [
-			"Mox Jet"
+			"Volrath Starting Setup"
 		],
 		"colors": "B",
 		"questTags": [
@@ -13254,6 +13382,7 @@
 	},
 	{
 		"name": "Grolnok",
+		"nameOverride": "The Grave Frog",
 		"sprite": "sprites/enemy/aberration/gianttoad.atlas",
 		"deck": [
 			"decks/miniboss/frogboss.dck"
@@ -13267,69 +13396,22 @@
 		"life": 50,
 		"rewards": [
 			{
-				"type": "deckCard",
-				"probability": 1,
-				"count": 4,
-				"rarity": [
-					"rare"
-				],
-				"cardTypes": [
-					"Land"
-				]
-			},
-			{
 				"type": "gold",
 				"probability": 1,
 				"count": 500,
 				"addMaxCount": 1000
 			},
 			{
-				"type": "card",
-				"probability": 1,
-				"count": 1,
-				"cardName": "Coat of Arms"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Windswept Heath"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Bloodstained Mire"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "City of Brass"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Tarnished Citadel"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Urza's Incubator"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Horn of Greed"
-			},
-			{
 				"type": "item",
 				"probability": 1,
 				"count": 1,
-				"itemName": "Grolnok's Skin"
+				"itemName": "Worry Beads"
+			},
+			{
+				"type": "shards",
+				"probability": 1,
+				"count": 50,
+				"addMaxCount": 50
 			},
 			{
 				"type": "life",
@@ -13337,11 +13419,61 @@
 				"count": 1
 			},
 			{
-				"type": "shards",
+				"type": "card",
 				"probability": 1,
-				"count": 50,
-				"addMaxCount": 50
+				"count": 1,
+				"cardName": "Bayou|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Lhurgoyf|ICE"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Mortivore|ODY"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Terravore|ODY"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Spiritmonger|APC"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Avatar of Woe|PCY"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Doomed Necromancer|ONS"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Forest|PELP"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
+		],
+		"equipment": [
+			"Grolnok Starting Setup"
 		],
 		"colors": "BGU",
 		"questTags": [
@@ -16299,6 +16431,12 @@
 		"life": 19,
 		"rewards": [
 			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "Molten Mantle"
+			},
+			{
 				"type": "deckCard",
 				"probability": 1,
 				"count": 2,
@@ -16346,28 +16484,66 @@
 		"life": 30,
 		"rewards": [
 			{
-				"type": "deckCard",
-				"probability": 1,
-				"count": 2,
-				"addMaxCount": 4
-			},
-			{
 				"type": "gold",
 				"probability": 1,
 				"count": 150,
 				"addMaxCount": 250
 			},
 			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "Molten Mantle"
+			},
+			{
+				"type": "life",
+				"probability": 1,
+				"count": 1
+			},
+			{
 				"type": "card",
 				"probability": 1,
-				"count": 4,
-				"colors": [
-					"Green"
-				],
-				"rarity": [
-					"Rare"
-				]
+				"count": 1,
+				"cardName": "Taiga|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Wooded Foothills|ONS"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Rock Hydra|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Krakilin|TMP"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "New Frontiers|ODY"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Mana Flare|LEA"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
+		],
+		"equipment": [
+			"Hydra Starting Setup"
 		],
 		"colors": "G",
 		"questTags": [
@@ -16818,6 +16994,7 @@
 	},
 	{
 		"name": "Jace",
+		"nameOverride": "Arcanis the Omnipotent",
 		"sprite": "sprites/enemy/humanoid/human/wizard/jace.atlas",
 		"deck": [
 			"decks/miniboss/jace.dck"
@@ -16831,42 +17008,6 @@
 		"life": 40,
 		"rewards": [
 			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Academy Rector"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Deranged Hermit"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Hurkyl's Recall"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Survival of the Fittest"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Volrath's Stronghold"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Counterspell"
-			},
-			{
 				"type": "gold",
 				"probability": 1,
 				"count": 1000,
@@ -16876,7 +17017,7 @@
 				"type": "item",
 				"probability": 1,
 				"count": 1,
-				"itemName": "Robe of Mirrors"
+				"itemName": "Robes of Omniscience"
 			},
 			{
 				"type": "shards",
@@ -16888,7 +17029,57 @@
 				"type": "life",
 				"probability": 1,
 				"count": 1
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Treachery|UDS"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Arcanis the Omnipotent|ONS"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Rhystic Study|PCY"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Time Warp|TMP"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Spelljack|JUD"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Time Spiral|USG"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Island|PGRU"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
+		],
+		"equipment": [
+			"Arcanis Starting Setup"
 		],
 		"colors": "UW",
 		"questTags": [
@@ -17142,6 +17333,7 @@
 	},
 	{
 		"name": "Kiora",
+		"nameOverride": "Empress Galina",
 		"sprite": "sprites/enemy/humanoid/merfolk/kiora.atlas",
 		"deck": [
 			"decks/miniboss/kiora.dck"
@@ -17155,69 +17347,16 @@
 		"life": 40,
 		"rewards": [
 			{
-				"type": "deckCard",
-				"probability": 1,
-				"count": 2,
-				"rarity": [
-					"rare"
-				],
-				"cardTypes": [
-					"Land"
-				]
-			},
-			{
 				"type": "gold",
 				"probability": 1,
 				"count": 1000,
 				"addMaxCount": 5000
 			},
 			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Gaea's Cradle"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Tolarian Academy"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Serra's Sanctum"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Aggravated Assault"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Rhystic Study"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Exploration"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 4,
-				"cardName": "Shivan Hellkite"
-			},
-			{
 				"type": "item",
 				"probability": 1,
 				"count": 1,
-				"itemName": "Kiora's Bident"
+				"itemName": "Vodalian Shield"
 			},
 			{
 				"type": "shards",
@@ -17229,7 +17368,63 @@
 				"type": "life",
 				"probability": 1,
 				"count": 1
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Tropical Island|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Yavimaya Coast|APC"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Empress Galina|INV"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Birds of Paradise|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Yavimaya's Embrace|APC"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Aboshan, Cephalid Emperor|ODY"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Exploration|USG"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Island|PALP"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
+		],
+		"equipment": [
+			"Empress Galina Starting Setup"
 		],
 		"colors": "UG",
 		"questTags": [
@@ -18046,6 +18241,7 @@
 	},
 	{
 		"name": "Lathliss",
+		"nameOverride": "Rorix Bladewing",
 		"sprite": "sprites/enemy/dragon/lathiss.atlas",
 		"deck": [
 			"decks/boss/lathliss.dck"
@@ -18058,16 +18254,10 @@
 		"life": 60,
 		"rewards": [
 			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Lightning Bolt"
-			},
-			{
 				"type": "item",
 				"probability": 1,
 				"count": 1,
-				"itemName": "Red Key"
+				"itemName": "Dragon Egg"
 			},
 			{
 				"type": "gold",
@@ -18076,16 +18266,10 @@
 				"addMaxCount": 250
 			},
 			{
-				"type": "card",
+				"type": "shards",
 				"probability": 1,
-				"count": 1,
-				"cardName": "Mana Crypt"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Mox Sapphire"
+				"count": 10,
+				"addMaxCount": 20
 			},
 			{
 				"type": "life",
@@ -18093,14 +18277,55 @@
 				"count": 1
 			},
 			{
-				"type": "shards",
+				"type": "card",
 				"probability": 1,
-				"count": 10,
-				"addMaxCount": 20
+				"count": 1,
+				"cardName": "Gauntlet of Might|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Sneak Attack|USG"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Dragon Tyrant|SCG"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Kilnmouth Dragon|LGN"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Gratuitous Violence|ONS"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Ruination|STH"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Insurrection|ONS"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
 		],
 		"equipment": [
-			"Mox Ruby"
+			"Rorix Starting Setup"
 		],
 		"colors": "R",
 		"questTags": [
@@ -18338,7 +18563,7 @@
 				"type": "card",
 				"probability": 1,
 				"count": 1,
-				"cardName": "Wasteland"
+				"cardName": "Wasteland|TMP"
 			},
 			{
 				"type": "Union",
@@ -18411,6 +18636,17 @@
 				"probability": 1,
 				"count": 1,
 				"itemName": "Liliana's Stone"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Swamp|PELP"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
 		],
 		"colors": "B",
@@ -18649,6 +18885,7 @@
 	},
 	{
 		"name": "Lorthos",
+		"nameOverride": "Leviathan",
 		"sprite": "sprites/enemy/monstrosity/lorthos.atlas",
 		"deck": [
 			"decks/boss/lorthos.dck"
@@ -18660,16 +18897,10 @@
 		"life": 60,
 		"rewards": [
 			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Ancestral Recall"
-			},
-			{
 				"type": "item",
 				"probability": 1,
 				"count": 1,
-				"itemName": "Blue Key"
+				"itemName": "Leviathan Caller's Staff"
 			},
 			{
 				"type": "gold",
@@ -18690,19 +18921,54 @@
 			},
 			{
 				"type": "card",
-				"probability": 0.5,
+				"probability": 1,
 				"count": 1,
-				"cardName": "Windfall"
+				"cardName": "Ancient Tomb|TMP"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Tidal Kraken|MMQ"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Great Whale|USG"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Mana Drain|LEG"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "High Tide|FEM"
 			},
 			{
 				"type": "card",
 				"probability": 0.5,
 				"count": 1,
-				"cardName": "Force of Will"
+				"cardName": "Sun Quan, Lord of Wu|PTK"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Benthic Behemoth|TMP"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
 		],
 		"equipment": [
-			"Mox Sapphire"
+			"Leviathan Starting Setup"
 		],
 		"colors": "U",
 		"questTags": [
@@ -19673,6 +19939,7 @@
 	},
 	{
 		"name": "Metallic Sliver",
+		"nameOverride": "Crystalline Sliver",
 		"sprite": "sprites/enemy/aberration/sliver_black.atlas",
 		"deck": [
 			"decks/standard/sliver_metallicsliver.dck"
@@ -19683,30 +19950,44 @@
 		"life": 30,
 		"rewards": [
 			{
-				"type": "deckCard",
-				"count": 2,
-				"cardTypes": [
-					"Creature"
-				]
-			},
-			{
-				"type": "deckCard",
-				"probability": 0.05,
-				"count": 1,
-				"cardTypes": [
-					"Artifact",
-					"Enchantment",
-					"Instant",
-					"Sorcery"
-				]
-			},
-			{
-				"type": "randomCard",
-				"count": 2
-			},
-			{
 				"type": "gold",
 				"count": 150
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Flooded Strand|ONS"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Essence Sliver|LGN"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Ward Sliver|LGN"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Shifting Sliver|LGN"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Crystalline Sliver|STH"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Synapse Sliver|LGN"
 			}
 		],
 		"colors": "BUR",
@@ -20398,6 +20679,7 @@
 	},
 	{
 		"name": "Myr Superion",
+		"nameOverride": "Colossus of Sardia",
 		"sprite": "sprites/enemy/construct/myr.atlas",
 		"deck": [
 			"decks/miniboss/myr_superion.dck"
@@ -20411,32 +20693,62 @@
 		"life": 25,
 		"rewards": [
 			{
-				"type": "deckCard",
-				"probability": 1,
-				"count": 1,
-				"addMaxCount": 4
-			},
-			{
 				"type": "gold",
 				"probability": 0.7,
 				"count": 100,
 				"addMaxCount": 200
 			},
 			{
-				"type": "card",
+				"type": "item",
 				"probability": 1,
-				"count": 3,
-				"rarity": [
-					"Uncommon"
-				]
+				"count": 1,
+				"itemName": "Glider Gloves"
+			},
+			{
+				"type": "life",
+				"probability": 1,
+				"count": 1
 			},
 			{
 				"type": "card",
-				"probability": 0.5,
-				"count": 3,
-				"rarity": [
-					"Rare"
-				]
+				"probability": 1,
+				"count": 1,
+				"cardName": "Mishra's Factory|ATQ"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Triskelion|ATQ"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Thran Dynamo|UDS"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Tetravus|ATQ"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Juggernaut|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Mountain|UGL"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
 		],
 		"colors": "C",
@@ -20537,6 +20849,7 @@
 	},
 	{
 		"name": "Nahiri",
+		"nameOverride": "Lin Sivvi, Defiant Hero",
 		"sprite": "sprites/enemy/humanoid/kor/nahiri.atlas",
 		"deck": [
 			"decks/miniboss/nahiri.dck"
@@ -20549,42 +20862,6 @@
 		"life": 40,
 		"rewards": [
 			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Burgeoning"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Humility"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Impulse"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Lightning Bolt"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Wheel of Fortune"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Mana Echoes"
-			},
-			{
 				"type": "gold",
 				"probability": 1,
 				"count": 1000,
@@ -20594,7 +20871,7 @@
 				"type": "item",
 				"probability": 1,
 				"count": 1,
-				"itemName": "Dwarven Hold"
+				"itemName": "Rebel Falconer's Glove"
 			},
 			{
 				"type": "shards",
@@ -20606,6 +20883,42 @@
 				"type": "life",
 				"probability": 1,
 				"count": 1
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Lin Sivvi, Defiant Hero|NMS"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Cho-Manno, Revolutionary|MMQ"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Kor Haven|NMS"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Swords to Plowshares|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Glorious Anthem|USG"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Plains|PALP"
 			}
 		],
 		"colors": "RW",
@@ -21241,49 +21554,49 @@
 				"type": "card",
 				"probability": 0.5,
 				"count": 1,
-				"cardName": "Dust Bowl"
+				"cardName": "Dust Bowl|MMQ"
 			},
 			{
 				"type": "card",
 				"probability": 0.5,
 				"count": 1,
-				"cardName": "Sphere of Resistance"
+				"cardName": "Sphere of Resistance|EXO"
 			},
 			{
 				"type": "card",
 				"probability": 0.5,
 				"count": 1,
-				"cardName": "Dark Ritual"
+				"cardName": "Dark Ritual|LEA"
 			},
 			{
 				"type": "card",
 				"probability": 0.5,
 				"count": 1,
-				"cardName": "Thawing Glaciers"
+				"cardName": "Thawing Glaciers|ALL"
 			},
 			{
 				"type": "card",
 				"probability": 0.5,
 				"count": 1,
-				"cardName": "Static Orb"
+				"cardName": "Static Orb|TMP"
 			},
 			{
 				"type": "card",
 				"probability": 0.5,
 				"count": 1,
-				"cardName": "Undiscovered Paradise"
+				"cardName": "Undiscovered Paradise|VIS"
 			},
 			{
 				"type": "card",
 				"probability": 0.5,
 				"count": 1,
-				"cardName": "Rampant Growth"
+				"cardName": "Rampant Growth|MIR"
 			},
 			{
 				"type": "card",
 				"probability": 0.5,
 				"count": 1,
-				"cardName": "Jet Medallion"
+				"cardName": "Jet Medallion|TMP"
 			},
 			{
 				"type": "shards",
@@ -21295,7 +21608,15 @@
 				"type": "life",
 				"probability": 1,
 				"count": 1
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
+		],
+		"equipment": [
+			"Slime Mother Starting Setup"
 		],
 		"colors": "GB",
 		"questTags": [
@@ -23335,6 +23656,7 @@
 	},
 	{
 		"name": "Recruiter Sliver",
+		"nameOverride": "Hibernation Sliver",
 		"sprite": "sprites/enemy/aberration/sliver_black.atlas",
 		"deck": [
 			"decks/standard/sliver_recruitersliver.dck"
@@ -23345,30 +23667,26 @@
 		"life": 30,
 		"rewards": [
 			{
-				"type": "deckCard",
-				"count": 2,
-				"cardTypes": [
-					"Creature"
-				]
-			},
-			{
-				"type": "deckCard",
-				"probability": 0.05,
-				"count": 1,
-				"cardTypes": [
-					"Artifact",
-					"Enchantment",
-					"Instant",
-					"Sorcery"
-				]
-			},
-			{
-				"type": "randomCard",
-				"count": 2
-			},
-			{
 				"type": "gold",
 				"count": 150
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Polluted Delta|ONS"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Synapse Sliver|LGN"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Toxin Sliver|LGN"
 			}
 		],
 		"colors": "BUR",
@@ -24006,6 +24324,12 @@
 				"cardTypes": [
 					"Land"
 				]
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Forest|UGL"
 			}
 		],
 		"colors": "B",
@@ -24032,35 +24356,6 @@
 		"life": 40,
 		"rewards": [
 			{
-				"type": "deckCard",
-				"probability": 1,
-				"count": 2,
-				"rarity": [
-					"rare"
-				],
-				"cardTypes": [
-					"Land"
-				]
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Didgeridoo"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Icy Manipulator"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Reflecting Pool"
-			},
-			{
 				"type": "gold",
 				"probability": 1,
 				"count": 500,
@@ -24070,13 +24365,65 @@
 				"type": "item",
 				"probability": 1,
 				"count": 1,
-				"itemName": "Dark Sphere"
+				"itemName": "Wombat Tamer's Whip"
 			},
 			{
 				"type": "shards",
 				"probability": 1,
 				"count": 20,
 				"addMaxCount": 30
+			},
+			{
+				"type": "life",
+				"probability": 1,
+				"count": 1
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Savannah|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Windswept Heath|ONS"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Enchantress's Presence|ONS"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Argothian Enchantress|USG"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Serra's Sanctum|USG"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Aura Shards|INV"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Sterling Grove|INV"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
 		],
 		"colors": "WUBRG",
@@ -24735,7 +25082,7 @@
 	},
 	{
 		"name": "Slimefoot",
-		"nameOverride": "Fungus of Slimefoot",
+		"nameOverride": "Thallid Lord",
 		"sprite": "sprites/enemy/plant/slimefoot.atlas",
 		"deck": [
 			"decks/miniboss/slimefoot.dck"
@@ -24749,63 +25096,16 @@
 		"life": 40,
 		"rewards": [
 			{
-				"type": "deckCard",
-				"probability": 1,
-				"count": 1,
-				"rarity": [
-					"rare"
-				],
-				"cardTypes": [
-					"Land"
-				]
-			},
-			{
 				"type": "gold",
 				"probability": 1,
 				"count": 1000,
 				"addMaxCount": 5000
 			},
 			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Dark Ritual"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Squandered Resources"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Bloodstained Mire"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Bloodstained Mire"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Polluted Delta"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Wooded Foothills"
-			},
-			{
 				"type": "item",
 				"probability": 1,
 				"count": 1,
-				"itemName": "Slimefoot's Slimy Staff"
+				"itemName": "Gooey Shoes"
 			},
 			{
 				"type": "shards",
@@ -24817,7 +25117,45 @@
 				"type": "life",
 				"probability": 1,
 				"count": 1
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Verdeloth the Ancient|INV"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Nemata, Grove Guardian|PLS"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Verdant Force|TMP"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Saproling Symbiosis|INV"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Forest|PALP"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
+		],
+		"equipment": [
+			"Fungus Starting Setup"
 		],
 		"colors": "BG",
 		"questTags": [
@@ -24833,6 +25171,7 @@
 	},
 	{
 		"name": "Slivdrazi Experiment",
+		"nameOverride": "Spined Sliver",
 		"sprite": "sprites/enemy/aberration/sliverexperiment.atlas",
 		"deck": [
 			"decks/standard/sliver_slivdrazi.dck"
@@ -24843,30 +25182,26 @@
 		"life": 30,
 		"rewards": [
 			{
-				"type": "deckCard",
-				"count": 2,
-				"cardTypes": [
-					"Creature"
-				]
-			},
-			{
-				"type": "deckCard",
-				"probability": 0.05,
-				"count": 1,
-				"cardTypes": [
-					"Artifact",
-					"Enchantment",
-					"Instant",
-					"Sorcery"
-				]
-			},
-			{
-				"type": "randomCard",
-				"count": 2
-			},
-			{
 				"type": "gold",
 				"count": 150
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Wooded Foothills|ONS"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Magma Sliver|LGN"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Brood Sliver|LGN"
 			}
 		],
 		"colors": "BUR",
@@ -25192,6 +25527,7 @@
 	},
 	{
 		"name": "Slobad",
+		"nameOverride": "Squee, Goblin Nabob",
 		"sprite": "sprites/enemy/humanoid/goblin/slobad.atlas",
 		"deck": [
 			"decks/miniboss/slobad.dck"
@@ -25205,63 +25541,16 @@
 		"life": 40,
 		"rewards": [
 			{
-				"type": "Card",
-				"probability": 1,
-				"count": 1,
-				"rarity": [
-					"rare"
-				],
-				"cardTypes": [
-					"Land"
-				]
-			},
-			{
 				"type": "gold",
 				"probability": 1,
 				"count": 1000,
 				"addMaxCount": 5000
 			},
 			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Null Rod"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Anvil of Bogardan"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Bloodstained Mire"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Null Rod"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Bloodstained Mire"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Phyrexian Altar"
-			},
-			{
 				"type": "item",
 				"probability": 1,
 				"count": 1,
-				"itemName": "Land's Edge"
+				"itemName": "Warren Tender's Cloak"
 			},
 			{
 				"type": "shards",
@@ -25273,7 +25562,51 @@
 				"type": "life",
 				"probability": 1,
 				"count": 1
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Goblin King|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Goblin Warchief|SCG"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Siege-Gang Commander|SCG"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Goblin Ringleader|APC"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Goblin Lackey|USG"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Mountain|UGL"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
+		],
+		"equipment": [
+			"Squee Starting Setup"
 		],
 		"colors": "R",
 		"questTags": [
@@ -25305,16 +25638,16 @@
 				"addMaxCount": 1000
 			},
 			{
-				"type": "card",
+				"type": "shards",
 				"probability": 1,
-				"count": 5,
-				"addMaxCount": 10,
-				"subTypes": [
-					"Sliver"
-				],
-				"cardTypes": [
-					"Creature"
-				]
+				"count": 50,
+				"addMaxCount": 50
+			},
+			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "Slivercaller's Gauntlet"
 			},
 			{
 				"type": "life",
@@ -25322,14 +25655,55 @@
 				"count": 1
 			},
 			{
-				"type": "shards",
+				"type": "card",
 				"probability": 1,
-				"count": 50,
-				"addMaxCount": 50
+				"count": 1,
+				"cardName": "City of Brass|ARN"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Reflecting Pool|TMP"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Coat of Arms|EXO"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Sliver Queen|STH"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Sliver Overlord|SCG"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Primitive Etchings|SCG"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Forest|PGRU"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
 		],
 		"equipment": [
-			"Black Lotus"
+			"Sliver Queen Starting Setup"
 		],
 		"colors": "BGRUW",
 		"questTags": [
@@ -26089,19 +26463,19 @@
 				"type": "card",
 				"probability": 0.5,
 				"count": 1,
-				"cardName": "Rishadan Port"
+				"cardName": "Rishadan Port|MMQ"
 			},
 			{
 				"type": "card",
 				"probability": 0.5,
 				"count": 1,
-				"cardName": "Defense Grid"
+				"cardName": "Defense Grid|ULG"
 			},
 			{
 				"type": "card",
 				"probability": 0.5,
 				"count": 1,
-				"cardName": "Gustha's Scepter"
+				"cardName": "Gustha's Scepter|ALL"
 			},
 			{
 				"type": "deckCard",
@@ -26308,46 +26682,10 @@
 				"addMaxCount": 1000
 			},
 			{
-				"type": "card",
-				"probability": 1,
-				"count": 1,
-				"cardName": "Swords to Plowshares"
-			},
-			{
-				"type": "card",
-				"probability": 1,
-				"count": 1,
-				"cardName": "Sapphire Medallion"
-			},
-			{
-				"type": "card",
-				"probability": 1,
-				"count": 1,
-				"cardName": "Brainstorm"
-			},
-			{
-				"type": "card",
-				"probability": 1,
-				"count": 1,
-				"cardName": "Pearl Medallion"
-			},
-			{
-				"type": "card",
-				"probability": 1,
-				"count": 1,
-				"cardName": "Bubble Matrix"
-			},
-			{
-				"type": "card",
-				"probability": 1,
-				"count": 1,
-				"cardName": "Teferi's Moat"
-			},
-			{
 				"type": "item",
 				"probability": 1,
 				"count": 1,
-				"itemName": "Teferi's Staff"
+				"itemName": "Imp Tamer's Glove"
 			},
 			{
 				"type": "shards",
@@ -26359,7 +26697,76 @@
 				"type": "life",
 				"probability": 1,
 				"count": 1
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Tundra|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Flooded Strand|ONS"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Iridescent Angel|ODY"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Teferi's Puzzle Box|VIS"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Teferi's Realm|VIS"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Teferi's Moat|INV"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Winter Orb|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Static Orb|TMP"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Stasis|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Absorb|INV"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Island|PGRU"
 			}
+		],
+		"equipment": [
+			"Teferi Starting Setup"
 		],
 		"colors": "WU",
 		"questTags": [
@@ -26377,7 +26784,7 @@
 	},
 	{
 		"name": "The Cheff",
-		"nameOverride": "Zedruu's Cook",
+		"nameOverride": "Homelands Chef",
 		"sprite": "sprites/enemy/humanoid/halfling/korred.atlas",
 		"deck": [
 			"decks/miniboss/thecheff.dck"
@@ -26392,85 +26799,6 @@
 		"life": 50,
 		"rewards": [
 			{
-				"type": "deckCard",
-				"probability": 1,
-				"count": 2,
-				"addMaxCount": 5
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Quicksilver Amulet"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Nevinyrral's Disk"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Howling Mine"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Tormod's Crypt"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Temporal Aperture"
-			},
-			{
-				"type": "deckCard",
-				"probability": 0.5,
-				"count": 1,
-				"addMaxCount": 2,
-				"rarity": [
-					"uncommon"
-				],
-				"cardTypes": [
-					"Creature",
-					"Artifact",
-					"Enchantment",
-					"Instant",
-					"Sorcery"
-				]
-			},
-			{
-				"type": "deckCard",
-				"probability": 0.25,
-				"count": 1,
-				"addMaxCount": 1,
-				"rarity": [
-					"rare"
-				],
-				"cardTypes": [
-					"Creature",
-					"Artifact",
-					"Enchantment",
-					"Instant",
-					"Sorcery"
-				]
-			},
-			{
-				"type": "deckCard",
-				"probability": 0.1,
-				"count": 1,
-				"rarity": [
-					"rare"
-				],
-				"cardTypes": [
-					"Land"
-				]
-			},
-			{
 				"type": "gold",
 				"probability": 0.3,
 				"count": 100,
@@ -26480,14 +26808,88 @@
 				"type": "item",
 				"probability": 1,
 				"count": 1,
-				"itemName": "Cursed Rack"
+				"itemName": "Joven's Tools"
 			},
 			{
 				"type": "shards",
 				"probability": 1,
 				"count": 10,
 				"addMaxCount": 30
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Joven|HML"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Chandler|HML"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Serrated Arrows|HML"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Brushland|ICE"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Karplusan Forest|ICE"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "An-Havva Township|HML"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Eron the Relentless|HML"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Autumn Willow|HML"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Daughter of Autumn|HML"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Hazduhr the Abbot|HML"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Rashka the Slayer|HML"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
+		],
+		"equipment": [
+			"Homelands Chef Starting Setup"
 		],
 		"colors": "GBR",
 		"questTags": [
@@ -26503,6 +26905,7 @@
 	},
 	{
 		"name": "Tibalt",
+		"nameOverride": "Specter King",
 		"sprite": "sprites/enemy/fiend/tibalt.atlas",
 		"deck": [
 			"decks/miniboss/tibalt.dck"
@@ -26516,72 +26919,22 @@
 		"life": 40,
 		"rewards": [
 			{
-				"type": "card",
-				"probability": 1,
-				"count": 1,
-				"rarity": [
-					"rare"
-				],
-				"cardTypes": [
-					"Land"
-				]
-			},
-			{
 				"type": "gold",
 				"probability": 1,
 				"count": 1000,
 				"addMaxCount": 5000
 			},
 			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Anvil of Bogardan"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Wooded Foothills"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Anvil of Bogardan"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Wooded Foothills"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Windswept Heath"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Badlands"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Wheel of Fortune"
-			},
-			{
 				"type": "item",
 				"probability": 1,
 				"count": 1,
-				"itemName": "Goblin Tinkerer",
-				"itemNames": [
-					"Goblin Tinkerer"
-				]
+				"itemName": "Crown of Madness"
+			},
+			{
+				"type": "shards",
+				"probability": 1,
+				"count": 50,
+				"addMaxCount": 50
 			},
 			{
 				"type": "life",
@@ -26589,11 +26942,49 @@
 				"count": 1
 			},
 			{
-				"type": "shards",
+				"type": "card",
 				"probability": 1,
-				"count": 50,
-				"addMaxCount": 50
+				"count": 1,
+				"cardName": "Badlands|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Bloodstained Mire|ONS"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Strip Mine|ATQ"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Hypnotic Specter|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Pox|ICE"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Swamp|PELP"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
+		],
+		"equipment": [
+			"Chainer Starting Setup"
 		],
 		"colors": "R",
 		"questTags": [
@@ -26668,6 +27059,7 @@
 	},
 	{
 		"name": "Torturer",
+		"nameOverride": "Specter's Torturer",
 		"sprite": "sprites/enemy/humanoid/human/bandit/bandittorturer.atlas",
 		"deck": [
 			"decks/miniboss/torturer.dck"
@@ -26680,43 +27072,56 @@
 		"life": 30,
 		"rewards": [
 			{
-				"type": "deckCard",
-				"probability": 1,
-				"count": 2,
-				"addMaxCount": 8
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"rarity": [
-					"Rare"
-				]
-			},
-			{
 				"type": "gold",
 				"probability": 1,
 				"count": 50,
 				"addMaxCount": 100
 			},
 			{
-				"type": "card",
-				"probability": 1,
-				"count": 1,
-				"rarity": [
-					"uncommon",
-					"common"
-				],
-				"cardTypes": [
-					"Land"
-				]
-			},
-			{
 				"type": "shards",
 				"probability": 1,
 				"count": 20,
 				"addMaxCount": 20
+			},
+			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "Torturer's Hood"
+			},
+			{
+				"type": "card",
+				"probability": 0.25,
+				"count": 1,
+				"cardName": "Bloodstained Mire|ONS"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Pox|ICE"
+			},
+			{
+				"type": "card",
+				"probability": 0.25,
+				"count": 1,
+				"cardName": "Mindslicer|ODY"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Meekstone|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Swamp|PELP"
 			}
+		],
+		"equipment": [
+			"Specter's Torturer Starting Setup"
 		],
 		"colors": "B",
 		"questTags": [
@@ -27087,45 +27492,75 @@
 		"life": 80,
 		"rewards": [
 			{
-				"type": "deckCard",
+				"type": "item",
 				"probability": 1,
-				"count": 2,
-				"addMaxCount": 4,
-				"rarity": [
-					"common"
-				]
+				"count": 1,
+				"itemName": "Ankh of Purgatory"
 			},
 			{
-				"type": "deckCard",
+				"type": "life",
 				"probability": 1,
-				"count": 2,
-				"addMaxCount": 2,
-				"rarity": [
-					"uncommon"
-				],
-				"cardTypes": [
-					"Creature",
-					"Artifact",
-					"Enchantment",
-					"Instant",
-					"Sorcery"
-				]
+				"count": 1
 			},
 			{
-				"type": "deckCard",
+				"type": "card",
 				"probability": 1,
-				"count": 2,
-				"addMaxCount": 1,
-				"rarity": [
-					"rare"
-				],
-				"cardTypes": [
-					"Creature",
-					"Artifact",
-					"Enchantment",
-					"Instant",
-					"Sorcery"
-				]
+				"count": 1,
+				"cardName": "Scrubland|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Caves of Koilos|APC"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Desolation Angel|APC"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Grim Monolith|ULG"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Vindicate|APC"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Selenia, Dark Angel|TMP"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Fallen Angel|LEG"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "False Prophet|UDS"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Rotlung Reanimator|ONS"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Plains|UGL"
 			}
 		],
 		"colors": "B",
@@ -28575,6 +29010,11 @@
 				"probability": 1,
 				"count": 500,
 				"addMaxCount": 150
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
 		],
 		"colors": "GRW",
@@ -28605,69 +29045,16 @@
 		"life": 50,
 		"rewards": [
 			{
-				"type": "deckCard",
-				"probability": 1,
-				"count": 4,
-				"rarity": [
-					"rare"
-				],
-				"cardTypes": [
-					"Land"
-				]
-			},
-			{
 				"type": "gold",
 				"probability": 1,
 				"count": 1000,
 				"addMaxCount": 5000
 			},
 			{
-				"type": "card",
-				"probability": 1,
-				"count": 1,
-				"cardName": "Windswept Heath"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Polluted Delta"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Windswept Heath"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Polluted Delta"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Flooded Strand"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Flooded Strand"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Flooded Strand"
-			},
-			{
 				"type": "item",
 				"probability": 1,
 				"count": 1,
-				"itemName": "Crown of the Ages"
+				"itemName": "Hivecaller's Helm"
 			},
 			{
 				"type": "shards",
@@ -28679,7 +29066,57 @@
 				"type": "life",
 				"probability": 1,
 				"count": 1
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Xira Arien|LEG"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Fecundity|USG"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Taiga|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Badlands|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Bayou|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Grave Pact|STH"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Gratuitous Violence|ONS"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
+		],
+		"equipment": [
+			"Xira Starting Setup"
 		],
 		"colors": "BGR",
 		"questTags": [
@@ -28779,6 +29216,7 @@
 	},
 	{
 		"name": "Zedruu",
+		"nameOverride": "Portal Master",
 		"sprite": "sprites/enemy/humanoid/minotaur/zedru.atlas",
 		"deck": [
 			"decks/miniboss/zedruubis.dck"
@@ -28792,42 +29230,6 @@
 		"life": 40,
 		"rewards": [
 			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Lodestone Bauble"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Smokestack"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Emerald Medallion"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Meteor Crater"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Brain Freeze"
-			},
-			{
-				"type": "card",
-				"probability": 0.5,
-				"count": 1,
-				"cardName": "Swords to Plowshares"
-			},
-			{
 				"type": "gold",
 				"probability": 1,
 				"count": 1000,
@@ -28837,7 +29239,7 @@
 				"type": "item",
 				"probability": 1,
 				"count": 1,
-				"itemName": "Crystal Rod"
+				"itemName": "Crowcaller's Charm"
 			},
 			{
 				"type": "shards",
@@ -28849,7 +29251,75 @@
 				"type": "life",
 				"probability": 1,
 				"count": 1
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Wrath of God|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Archangel|VIS"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Alabaster Dragon|POR"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Cloud Dragon|POR"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Djinn of the Lamp|POR"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Ancestral Memories|MIR"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Volcanic Dragon|MIR"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Earthquake|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Fire Dragon|POR"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Plains|UGL"
+			},
+			{
+				"type": "landSketchbookShop",
+				"probability": 0.05,
+				"count": 1
 			}
+		],
+		"equipment": [
+			"Portal Master Starting Setup"
 		],
 		"colors": "WUBR",
 		"questTags": [
@@ -30548,6 +31018,288 @@
 			"Leader",
 			"IdentityBlack",
 			"BiomeBlack"
+		]
+	},
+	{
+		"name": "Dwarf Lord",
+		"sprite": "sprites/enemy/humanoid/dwarf/dwarf.atlas",
+		"deck": [
+			"decks/castle_npc/dwarf_lord.dck"
+		],
+		"ai": "",
+		"spawnRate": 1,
+		"difficulty": 0.1,
+		"speed": 25,
+		"life": 30,
+		"rewards": [
+			{
+				"type": "gold",
+				"probability": 1,
+				"count": 150,
+				"addMaxCount": 100
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Daru Warchief|SCG"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Kjeldoran Outpost|ALL"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Commander Eesha|JUD"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Gerrard Capashen|USG"
+			}
+		],
+		"colors": "W",
+		"questTags": [
+			"Humanoid",
+			"Dwarf",
+			"Soldier",
+			"IdentityWhite",
+			"BiomeWhite",
+			"Leader"
+		]
+	},
+	{
+		"name": "Sun Titan",
+		"sprite": "sprites/enemy/giant/gravetitan.atlas",
+		"deck": [
+			"decks/castle_npc/sun_titan.dck"
+		],
+		"ai": "",
+		"spawnRate": 1,
+		"difficulty": 0.1,
+		"speed": 20,
+		"life": 35,
+		"rewards": [
+			{
+				"type": "gold",
+				"probability": 1,
+				"count": 200,
+				"addMaxCount": 150
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Jareth, Leonine Titan|ONS"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Death or Glory|INV"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Kirtar's Wrath|ODY"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Purify|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Serra Avatar|USG"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Avatar of Hope|PCY"
+			}
+		],
+		"colors": "W",
+		"questTags": [
+			"Giant",
+			"Titan",
+			"IdentityWhite",
+			"BiomeWhite"
+		]
+	},
+	{
+		"name": "Mill Mole",
+		"sprite": "sprites/enemy/beast/mole.atlas",
+		"deck": [
+			"decks/castle_npc/mill_mole.dck"
+		],
+		"ai": "",
+		"spawnRate": 1,
+		"difficulty": 0.1,
+		"speed": 22,
+		"life": 28,
+		"rewards": [
+			{
+				"type": "gold",
+				"probability": 1,
+				"count": 150,
+				"addMaxCount": 100
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Ambassador Laquatus|TOR"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Traumatize|ODY"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Grindstone|TMP"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Dreamborn Muse|LGN"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Back to Basics|USG"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Winter Orb|LEA"
+			},
+			{
+				"type": "card",
+				"probability": 0.5,
+				"count": 1,
+				"cardName": "Meekstone|3ED"
+			}
+		],
+		"colors": "U",
+		"questTags": [
+			"Beast",
+			"Mole",
+			"IdentityBlue",
+			"BiomeBlue"
+		]
+	},
+	{
+		"name": "Merfolk King",
+		"sprite": "sprites/enemy/humanoid/merfolk/merfolk_king.atlas",
+		"deck": [
+			"decks/castle_npc/merfolk_king.dck"
+		],
+		"ai": "",
+		"spawnRate": 1,
+		"difficulty": 0.1,
+		"speed": 28,
+		"life": 25,
+		"rewards": [
+			{
+				"type": "gold",
+				"probability": 1,
+				"count": 150,
+				"addMaxCount": 100
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Lord of Atlantis|3ED"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Clone|3ED"
+			}
+		],
+		"colors": "U",
+		"questTags": [
+			"Merfolk",
+			"Tribal",
+			"IdentityBlue",
+			"BiomeBlue",
+			"Leader"
+		]
+	},
+	{
+		"name": "Forest Titan",
+		"sprite": "sprites/enemy/elemental/treant.atlas",
+		"deck": [
+			"decks/castle_npc/forest_titan.dck"
+		],
+		"ai": "",
+		"spawnRate": 1,
+		"difficulty": 0.1,
+		"speed": 20,
+		"life": 35,
+		"rewards": [
+			{
+				"type": "gold",
+				"probability": 1,
+				"count": 200,
+				"addMaxCount": 150
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Nature's Lore|ICE"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Wood Elves|POR"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Child of Gaea|USG"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Three Visits|POR"
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 1,
+				"cardName": "Plow Under|UDS"
+			}
+		],
+		"colors": "G",
+		"questTags": [
+			"Elemental",
+			"Titan",
+			"IdentityGreen",
+			"BiomeGreen"
 		]
 	}
 ]
