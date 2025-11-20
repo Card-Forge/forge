@@ -118,6 +118,15 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             Talt.dispose();
     }
 
+    @Override
+    public boolean remove() {
+        if (ownedLabel != null) {
+            ownedLabel.remove();
+        }
+
+        return super.remove();
+    }
+
     public boolean toolTipIsVisible() {
         if (holdTooltip != null)
             return holdTooltip.tooltip_actor.getStage() != null;
