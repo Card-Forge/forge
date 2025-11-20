@@ -90,7 +90,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     private boolean hover, hasbackface;
     boolean loaded = true;
     boolean alternate = false, shown = false;
-    boolean isRewardShop, showOverlay, isLoot;
+    boolean isRewardShop, showOverlay, isLoot, isQuestReward;
     TextraLabel overlayLabel;
     int artIndex = 1;
     String imageKey = "";
@@ -215,7 +215,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     }
 
     public void setAutoSell(boolean sell) {
-        if (!isLoot)
+        if (!isLoot && !isQuestReward)
             return;
         if (autoSell == null)
             return;
@@ -242,7 +242,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         this.flipOnClick = flippable;
         this.reward = reward;
         this.isRewardShop = RewardScene.Type.Shop.equals(type);
-        this.isLoot = (RewardScene.Type.Loot.equals(type) || RewardScene.Type.QuestReward.equals(type));
+        this.isLoot = RewardScene.Type.Loot.equals(type);
+        this.isQuestReward = RewardScene.Type.QuestReward.equals(type);
         this.showOverlay = showOverlay;
 
         if (backTexture == null) {
@@ -935,13 +936,13 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         clicked = true;
         flipProcess = 0;
         SoundSystem.instance.play(SoundEffectType.FlipCard, false);
-        if (isLoot && autoSell != null) {
+        if ((isLoot || isQuestReward) && autoSell != null) {
             autoSell.setPosition(this.getX(), this.getY());
             getStage().addActor(autoSell);
             autoSell.setVisible(false);
         }
 
-        if (isLoot && reward.type.equals(Reward.Type.Card) && ownedLabel != null) {
+        if ((isLoot || isQuestReward) && reward.type.equals(Reward.Type.Card) && ownedLabel != null) {
             if (isNew) {
                 if (isLoot && autoSell != null) {
                     ownedLabel.setPosition(
