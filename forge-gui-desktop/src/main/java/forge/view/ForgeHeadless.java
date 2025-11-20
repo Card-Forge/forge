@@ -35,27 +35,18 @@ import java.util.List;
 public class ForgeHeadless {
 
     public static void main(String[] args) {
+        System.err.println("DEBUG: ForgeHeadless main started");
         GuiBase.setInterface(new HeadlessGui());
         FModel.initialize(null, null);
-        try {
-            JsonObject initialState = getInitialGameState();
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            System.out.println(gson.toJson(initialState));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        runGame();
     }
 
     private static void initialize() {
         // FModel.initialize() is called in main
     }
 
-    public static JsonObject getInitialGameState() {
-        Game game = runGameUntilStart();
-        return extractGameState(game);
-    }
-
-    private static Game runGameUntilStart() {
+    private static void runGame() {
+        // ... (rest of runGame)
         // Generate Decks
         Deck deck1 = DeckgenUtil.getRandomColorDeck(FModel.getFormats().getStandard().getFilterPrinted(), true);
         Deck deck2 = DeckgenUtil.getRandomColorDeck(FModel.getFormats().getStandard().getFilterPrinted(), true);
@@ -72,16 +63,8 @@ public class ForgeHeadless {
         Match match = new Match(rules, players, "Headless Match");
         Game game = match.createGame();
 
-        // Run Game until start
-        try {
-            match.startGame(game, () -> {
-                throw new StopGameException(game);
-            });
-        } catch (StopGameException e) {
-            return e.game;
-        }
-
-        return game; // Should not be reached if exception is thrown
+        // Start Game
+        match.startGame(game);
     }
 
     private static JsonObject extractGameState(Game game) {
@@ -136,13 +119,6 @@ public class ForgeHeadless {
         return zoneArray;
     }
 
-    private static class StopGameException extends RuntimeException {
-        public final Game game;
-        public StopGameException(Game game) {
-            this.game = game;
-        }
-    }
-
     private static class HeadlessLobbyPlayer extends forge.ai.LobbyPlayerAi {
         public HeadlessLobbyPlayer(String name) {
             super(name, null);
@@ -157,6 +133,8 @@ public class ForgeHeadless {
     }
 
     private static class HeadlessPlayerController extends forge.ai.PlayerControllerAi {
+        private final java.util.Scanner scanner = new java.util.Scanner(System.in);
+
         public HeadlessPlayerController(Game game, Player player, forge.ai.LobbyPlayerAi lobbyPlayer) {
             super(game, player, lobbyPlayer);
         }
@@ -164,6 +142,36 @@ public class ForgeHeadless {
         @Override
         public boolean mulliganKeepHand(Player player, int cardsToReturn) {
             return true; // Always keep hand
+        }
+
+        @Override
+        public java.util.List<forge.game.spellability.SpellAbility> chooseSpellAbilityToPlay() {
+            while (true) {
+                System.out.print(player.getName() + "> ");
+                String input = "";
+                try {
+                    input = scanner.nextLine();
+                } catch (java.util.NoSuchElementException e) {
+                    System.exit(0); // End of input
+                }
+
+                if (input.trim().isEmpty()) continue;
+
+                String[] parts = input.split(" ");
+                String command = parts[0];
+
+                if (command.equals("get_state")) {
+                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                    System.out.println(gson.toJson(extractGameState(getGame())));
+                } else if (command.equals("pass_priority")) {
+                    return null; // Pass priority
+                } else if (command.equals("concede")) {
+                    System.exit(0);
+                    return null;
+                } else {
+                    System.out.println("Unknown command: " + command);
+                }
+            }
         }
     }
 
