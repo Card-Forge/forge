@@ -51,7 +51,7 @@ public class ChooseGenericAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
         AiAbilityDecision decision;
         if (sa.isTrigger()) {
             decision = doTriggerNoCost(aiPlayer, sa, sa.isMandatory());
@@ -99,7 +99,7 @@ public class ChooseGenericAi extends SpellAbilityAi {
                 String unlessCost = sp.getParam("UnlessCost");
                 sp.setActivatingPlayer(sa.getActivatingPlayer());
                 Cost unless = new Cost(unlessCost, false);
-                if (SpellApiToAi.Converter.get(sp).willPayUnlessCost(sp, player, unless, false, new FCollection<>(player))
+                if (SpellApiToAi.Converter.get(sp).willPayUnlessCost(player, sp, unless, false, new FCollection<>(player))
                         && ComputerUtilCost.canPayCost(unless, sp, player, true)) {
                     return sp;
                 }

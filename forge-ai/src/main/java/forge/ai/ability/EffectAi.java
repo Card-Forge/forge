@@ -640,7 +640,7 @@ public class EffectAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+    public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         final String aiLogic = sa.getParam("UnlessAI");
         if ("WillAttack".equals(aiLogic)) {
             // TODO use AiController::getPredictedCombat
@@ -651,6 +651,6 @@ public class EffectAi extends SpellAbilityAi {
                 return false;
             }
         }
-        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+        return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
     }
 }

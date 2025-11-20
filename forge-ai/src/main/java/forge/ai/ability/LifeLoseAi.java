@@ -28,7 +28,7 @@ public class LifeLoseAi extends SpellAbilityAi {
      * SpellAbility, forge.game.player.Player)
      */
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         final PlayerCollection tgtPlayers = getPlayers(ai, sa);
 
         final Card source = sa.getHostCard();
@@ -67,24 +67,24 @@ public class LifeLoseAi extends SpellAbilityAi {
      * forge.game.card.Card)
      */
     @Override
-    protected boolean willPayCosts(Player ai, SpellAbility sa, Cost cost, Card source) {
+    protected boolean willPayCosts(Player payer, SpellAbility sa, Cost cost, Card source) {
         final String amountStr = sa.getParam("LifeAmount");
         int amount = 0;
 
         if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            amount = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+            amount = ComputerUtilCost.getMaxXValue(sa, payer, sa.isTrigger());
         } else {
             amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }
 
         // special logic for checkLifeCost
-        if (!ComputerUtilCost.checkLifeCost(ai, cost, source, amount, sa)) {
+        if (!ComputerUtilCost.checkLifeCost(payer, cost, source, amount, sa)) {
             return false;
         }
 
         // other cost as the same
-        return super.willPayCosts(ai, sa, cost, source);
+        return super.willPayCosts(payer, sa, cost, source);
     }
 
     /*
@@ -200,8 +200,8 @@ public class LifeLoseAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid,
-            FCollectionView<Player> payers) {
+    public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid,
+                                     FCollectionView<Player> payers) {
         if (!payer.canLoseLife() || payer.cantLoseForZeroOrLessLife()) {
             return false;
         }
@@ -224,7 +224,7 @@ public class LifeLoseAi extends SpellAbilityAi {
             return true;
         }
 
-        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+        return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
     }
 
     protected boolean doTgt(Player ai, SpellAbility sa, boolean mandatory) {

@@ -34,7 +34,7 @@ public class ChangeCombatantsAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
         final String logic = sa.getParamOrDefault("AILogic", "");
 
         if (logic.equals("WeakestOppExceptCtrl")) {

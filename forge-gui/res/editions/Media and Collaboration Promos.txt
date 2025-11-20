@@ -6,6 +6,7 @@ Type=Promo
 ScryfallCode=PMEI
 
 [cards]
+24 R Iroh, Grand Lotus @Jo Cordisco
 1995-1 C Fireball @Mark Tedin
 1995-2 C Blue Elemental Blast @Richard Thomas
 1996-1 C Sandbar Crocodile @Una Fricker
@@ -67,13 +68,14 @@ ScryfallCode=PMEI
 2024-3 M Ajani, Mentor of Heroes @Aaron Miller
 2024-4 R Gush @Kev Walker
 2024-5 R Diabolic Edict @Ron Spencer
-2024-6 R Voltaic Key @Henry G. Higginbotham
 2024-7 R Patchwork Banner @Sarah Finnigan
 2024-8 M Liliana of the Dark Realms @D. Alexander Gregory
 2025-1 R Shock @Randy Gallegos
-2025-2 R Ancestral Mask @Massimilano Frezzato
+2025-2 R Ancestral Mask @Massimiliano Frezzato
 2025-3 R Wrath of God @Yumeko
+2025-4 R Voltaic Key @Henry G. Higginbotham
 2025-7 R Duress @Lawrence Snelly
+2025-8 R Dark Ritual @Tom Fleming
 2025-10 M Nicol Bolas, Planeswalker @D. Alexander Gregory
 2025-11 R Ultimecia, Temporal Threat @Bachzim
 2025-12 R Lightning, Security Sergeant @Ramza Psyru
@@ -83,3 +85,4 @@ ScryfallCode=PMEI
 2025-20 R Chrome Host Seedshark @Donato Giancola
 2025-21 M Cloud, Midgar Mercenary @Square Enix
 2025-22 M Peter Parker @Randy Gallegos
+2025-23 M Spider-Man, Miles Morales @InHyuk Lee

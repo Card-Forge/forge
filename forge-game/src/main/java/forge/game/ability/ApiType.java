@@ -198,7 +198,6 @@ public enum ApiType {
     Token (TokenEffect.class),
     TwoPiles (TwoPilesEffect.class),
     Unattach (UnattachEffect.class),
-    UnattachAll (UnattachAllEffect.class),
     UnlockDoor (UnlockDoorEffect.class),
     Untap (UntapEffect.class),
     UntapAll (UntapAllEffect.class),

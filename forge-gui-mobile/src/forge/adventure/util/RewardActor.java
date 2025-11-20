@@ -28,6 +28,8 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Scaling;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
+import com.github.tommyettinger.textra.TypingLabel;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.ImageKeys;
@@ -69,6 +71,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     HoldTooltip holdTooltip;
     Reward reward;
     public TextraButton autoSell;
+    public TypingLabel ownedLabel;
     ShaderProgram shaderGrayscale = Forge.getGraphics().getShaderGrayscale();
     ShaderProgram shaderRoundRect = Forge.getGraphics().getShaderRoundedRect();
 
@@ -98,6 +101,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     String description = "";
     private boolean shouldDisplayText = false;
     private boolean isDragging = false;
+    private boolean isNew = false;
 
     @Override
     public void dispose() {
@@ -258,6 +262,14 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                         }
                     });
                 }
+                
+                int ownedCount = AdventurePlayer.current().getCollectionCards(true).count(reward.card);
+                this.isNew = ownedCount == 0;
+                String textContent = this.isNew
+                    ? "{WAVE}{STYLE=SHADOW}{COLOR=LIME}[%85]" + Forge.getLocalizer().getMessage("lblNew")
+                    : "{COLOR=WHITE}{STYLE=BLACKEN}[%65]" + Forge.getLocalizer().getMessage("lblOwned")  + ": " + ownedCount;
+                ownedLabel = Controls.newTypingLabel(textContent);
+
                 hasbackface = reward.getCard().hasBackFace();
 
                 if (ImageCache.getInstance().imageKeyFileExists(reward.getCard().getImageKey(false)) && !Forge.enableUIMask.equals("Art")) {
@@ -903,6 +915,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         }
         if (autoSell != null)
             autoSell.remove();
+
+        if (ownedLabel != null)
+            ownedLabel.remove();
     }
 
     public void flip() {
@@ -915,6 +930,23 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             autoSell.setPosition(this.getX(), this.getY());
             getStage().addActor(autoSell);
             autoSell.setVisible(false);
+        }
+
+        if (reward.type.equals(Reward.Type.Card) && ownedLabel != null) {
+            if (isNew) {
+                if (autoSell != null) {
+                    ownedLabel.setPosition(
+                        autoSell.getX() + autoSell.getWidth() / 2 - ownedLabel.layout.getWidth() / 2,
+                        autoSell.getY() + autoSell.getHeight());
+                } else {
+                    ownedLabel.setPosition(this.getX(), this.getY() + 5);
+                }
+            } else {
+                ownedLabel.setPosition(this.getX(), this.getY() - ownedLabel.layout.getHeight() / 2);
+            }
+            
+            ownedLabel.setVisible(false);
+            getStage().addActor(ownedLabel);
         }
     }
 
@@ -954,18 +986,22 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     addListener(tooltip);
                 }
             }
+
             if (autoSell != null && !autoSell.isVisible() && flipProcess == 1) {
                 autoSell.setVisible(true);
-                if (AdventurePlayer.current().getAdventureMode() == AdventureModes.Commander) {
+
+                if (AdventurePlayer.current().getAdventureMode().equals(AdventureModes.Commander)) {
                     PaperCard pc = reward.getCard();
                     if (pc != null) {
                         setAutoSell(inCollectionLike(pc));
                     }
                 }
             }
-            // flipProcess=(float)Gdx.input.getX()/ (float)Gdx.graphics.getWidth();
-        }
 
+            if (ownedLabel != null && !ownedLabel.isVisible() && flipProcess == 1) {
+                ownedLabel.setVisible(true);
+            }
+        }
     }
 
     @Override

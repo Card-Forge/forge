@@ -21,3 +21,5 @@ ScryfallCode=PW25
 13 R Carnage, Crimson Chaos @Lucio Parrillo
 14 R Gran-Gran @Mizutametori
 15 R Unlucky Cabbage Merchant @Thanh Tuấn
+16 M Yuna, Grand Summoner @Miki Yamashita
+17 R Command Tower @Néstor Ossandón Leal
