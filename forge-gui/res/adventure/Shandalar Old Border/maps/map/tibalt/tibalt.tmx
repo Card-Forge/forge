@@ -206,7 +206,7 @@
     <property name="activeQuestFlag" value="TibaltPortal"/>
     <property name="portalState" value="closed"/>
     <property name="sprite" value="sprites/portal3.atlas"/>
-    <property name="teleport" value="../common/maps/map/tibalt/tibalt_f4.tmx"/>
+    <property name="teleport" value="tibalt_f4.tmx"/>
     <property name="teleportObjectId" value="175"/>
    </properties>
   </object>

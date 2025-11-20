@@ -106,7 +106,7 @@
   <object id="176" template="../../../../common/maps/obj/door_down.tx" x="203.912" y="149.787" width="29.8454" height="19.2078" rotation="0.284412">
    <properties>
     <property name="direction" value="up"/>
-    <property name="teleport" value="../common/maps/map/tibalt/tibalt_f4.tmx"/>
+    <property name="teleport" value="tibalt_f4.tmx"/>
     <property name="teleportObjectId" value="174"/>
    </properties>
   </object>

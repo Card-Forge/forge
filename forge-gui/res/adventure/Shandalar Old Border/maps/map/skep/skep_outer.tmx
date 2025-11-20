@@ -874,7 +874,7 @@
   <object id="153" template="../../../../common/maps/obj/entry_up.tx" x="648.667" y="783" width="48" height="16">
    <properties>
     <property name="direction" value="down" />
-    <property name="teleport" value="../common/maps/map/skep/sliverqueen.tmx" />
+    <property name="teleport" value="sliverqueen.tmx" />
     <property name="teleportObjectId" value="38" />
    </properties>
   </object>
