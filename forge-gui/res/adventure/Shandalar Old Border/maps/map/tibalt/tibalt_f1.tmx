@@ -56,7 +56,7 @@
   <object id="114" template="../../../../common/maps/obj/entry_up.tx" x="238.676" y="440.886" width="48" height="74.6666">
    <properties>
     <property name="direction" value="up"/>
-    <property name="teleport" value="tibalt_f0.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt_f0.tmx"/>
     <property name="teleportObjectId" value="182"/>
    </properties>
   </object>
@@ -137,7 +137,7 @@
   <object id="204" template="../../../../common/maps/obj/door_up.tx" x="556.858" y="169.204" width="62.3015" height="63.8032" rotation="359.74">
    <properties>
     <property name="direction" value="down"/>
-    <property name="teleport" value="tibalt_f2.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt_f2.tmx"/>
     <property name="teleportObjectId" value="198"/>
    </properties>
   </object>

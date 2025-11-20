@@ -76,14 +76,14 @@
   <object id="170" template="../../../../common/maps/obj/door_down.tx" x="146.537" y="632.155" width="45.8303" height="21.1308" rotation="0.284412">
    <properties>
     <property name="direction" value="up"/>
-    <property name="teleport" value="tibalt.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt.tmx"/>
     <property name="teleportObjectId" value="204"/>
    </properties>
   </object>
   <object id="174" template="../../../../common/maps/obj/door_down.tx" x="270.927" y="631.04" width="45.8303" height="16.1284" rotation="0.284412">
    <properties>
     <property name="direction" value="up"/>
-    <property name="teleport" value="tibalt.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt.tmx"/>
     <property name="teleportObjectId" value="203"/>
    </properties>
   </object>
@@ -106,7 +106,7 @@
   <object id="176" template="../../../../common/maps/obj/door_down.tx" x="203.912" y="149.787" width="29.8454" height="19.2078" rotation="0.284412">
    <properties>
     <property name="direction" value="up"/>
-    <property name="teleport" value="tibalt_f4.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt_f4.tmx"/>
     <property name="teleportObjectId" value="174"/>
    </properties>
   </object>
@@ -117,7 +117,7 @@
   <object id="182" template="../../../../common/maps/obj/door_down.tx" x="211.919" y="296.502" width="29.8454" height="19.2078" rotation="0.284412">
    <properties>
     <property name="direction" value="down"/>
-    <property name="teleport" value="tibalt_f1.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt_f1.tmx"/>
     <property name="teleportObjectId" value="114"/>
    </properties>
   </object>
@@ -211,7 +211,7 @@
     <property name="activeQuestFlag" value="FortressPortal"/>
     <property name="portalState" value="inactive"/>
     <property name="sprite" value="sprites/portal3.atlas"/>
-    <property name="teleport" value="tibalt.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt.tmx"/>
     <property name="teleportObjectId" value="221"/>
    </properties>
   </object>

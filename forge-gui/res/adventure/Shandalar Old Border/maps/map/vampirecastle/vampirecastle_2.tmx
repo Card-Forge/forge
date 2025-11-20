@@ -87,7 +87,7 @@
   <object id="72" template="../../../../common/maps/obj/entry_up.tx" x="272.413" y="130.985" width="31.9777" height="32.395">
    <properties>
     <property name="direction" value="down"/>
-    <property name="teleport" value="vampirecastle_grave_2.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/vampirecastle/vampirecastle_grave_2.tmx"/>
    </properties>
   </object>
   <object id="73" template="../../../../common/maps/obj/manashards.tx" x="310.584" y="81.4271"/>
