@@ -51,6 +51,7 @@ public interface IGuiBase {
     int getSleevesCount();
     void copyToClipboard(String text);
     void browseToUrl(String url) throws IOException, URISyntaxException;
+    boolean isSupportedAudioFormat(File file);
     IAudioClip createAudioClip(String filename);
     IAudioMusic createAudioMusic(String filename);
     void startAltSoundSystem(String filename, boolean isSynchronized);

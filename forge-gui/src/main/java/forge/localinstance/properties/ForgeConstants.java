@@ -40,7 +40,6 @@ public final class ForgeConstants {
 
     public static final String RES_DIR                      = ASSETS_DIR + "res" + PATH_SEPARATOR;
     public static final String ADVENTURE_DIR                = RES_DIR + "adventure" + PATH_SEPARATOR;
-    public static final String ADVENTURE_DEFAULT_PLANE_DIR  = ADVENTURE_DIR + "Shandalar" + PATH_SEPARATOR;
     public static final String ADVENTURE_COMMON_DIR         = ADVENTURE_DIR + "common" + PATH_SEPARATOR;
     public static final String LISTS_DIR                    = RES_DIR + "lists" + PATH_SEPARATOR;
     public static final String SETLOOKUP_DIR                = RES_DIR + "setlookup" + PATH_SEPARATOR;
@@ -92,9 +91,8 @@ public final class ForgeConstants {
     public static final String FORMATS_DATA_DIR             = RES_DIR + "formats" + PATH_SEPARATOR;
     public static final String DECK_CUBE_DIR                = RES_DIR + "cube" + PATH_SEPARATOR;
     public static final String AI_PROFILE_DIR               = RES_DIR + "ai" + PATH_SEPARATOR;
-    public static final String SOUND_DIR                    = RES_DIR + "sound" + PATH_SEPARATOR;
-    public static final String MUSIC_DIR                    = RES_DIR + "music" + PATH_SEPARATOR;
-    public static final String ADVENTURE_MUSIC_DIR          = ADVENTURE_DEFAULT_PLANE_DIR + "music" + PATH_SEPARATOR;
+    public static final String SOUND_DIR                    = "sound" + PATH_SEPARATOR;
+    public static final String MUSIC_DIR                    = "music" + PATH_SEPARATOR;
     public static final String ADVENTURE_COMMON_MUSIC_DIR   = ADVENTURE_COMMON_DIR + "music" + PATH_SEPARATOR;
     public static final String LANG_DIR                     = RES_DIR + "languages" + PATH_SEPARATOR;
     public static final String EFFECTS_DIR                  = RES_DIR + "effects" + PATH_SEPARATOR;
@@ -290,8 +288,6 @@ public final class ForgeConstants {
     public static final String DB_DIR                        = CACHE_DIR + "db" + PATH_SEPARATOR;
     public static final String FONTS_DIR                     = CACHE_DIR + "fonts" + PATH_SEPARATOR;
     public static final String CACHE_SKINS_DIR               = CACHE_DIR + "skins" + PATH_SEPARATOR;
-    public static final String CACHE_SOUND_DIR               = CACHE_DIR + "sound" + PATH_SEPARATOR;
-    public static final String CACHE_MUSIC_DIR               = CACHE_DIR + "music" + PATH_SEPARATOR;
     public static final String CACHE_TOKEN_PICS_DIR          = PICS_DIR + "tokens" + PATH_SEPARATOR;
     public static final String CACHE_ICON_PICS_DIR           = PICS_DIR + "icons" + PATH_SEPARATOR;
     public static final String CACHE_SYMBOLS_DIR             = PICS_DIR + "symbols" + PATH_SEPARATOR;

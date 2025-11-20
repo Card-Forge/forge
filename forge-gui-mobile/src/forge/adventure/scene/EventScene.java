@@ -418,7 +418,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
     @Override
     public void enter() {
         super.enter();
-        GameHUD.getInstance().switchAudio();
+        GameHUD.getInstance().updateBGM();
         scrollContainer.clear();
 
         if (money != null) {

@@ -17,6 +17,7 @@ public class AudioMusic implements IAudioMusic {
     private int stopped;
     private boolean valid;
     private Runnable onComplete;
+    private volatile boolean isPlaying = false;
 
     public AudioMusic(String filename0) {
         filename = filename0;
@@ -49,17 +50,20 @@ public class AudioMusic implements IAudioMusic {
             });
             new Thread(() -> {
                 try {
+                    isPlaying = true;
                     musicPlayer.play();
                 }
                 catch (Exception e){
                     e.printStackTrace();
                     valid = false;
+                    isPlaying = false;
                 }
             }, "Audio Music").start();
         }
         catch (Exception e) {
             e.printStackTrace();
             valid = false;
+            isPlaying = false;
         }
         return valid;
     }
@@ -71,6 +75,7 @@ public class AudioMusic implements IAudioMusic {
         try {
             stopped = fileStream.available();
             close();
+            isPlaying = false;
             if (valid) {
                 canResume = true;
             }
@@ -116,5 +121,10 @@ public class AudioMusic implements IAudioMusic {
     @Override
     public void setVolume(float value) {
         //todo
+    }
+
+    @Override
+    public boolean isPlaying() {
+        return this.isPlaying;
     }
 }

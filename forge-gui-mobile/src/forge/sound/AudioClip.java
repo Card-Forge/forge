@@ -21,7 +21,8 @@ package forge.sound;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
-//import forge.Forge;
+
+import java.io.File;
 
 public class AudioClip implements IAudioClip {
     private Sound clip;
@@ -29,6 +30,13 @@ public class AudioClip implements IAudioClip {
     public static AudioClip createClip(String filename) {
         FileHandle fileHandle = Gdx.files.absolute(filename);
         if (!fileHandle.exists()) { return null; }
+        return new AudioClip(fileHandle);
+    }
+
+    public static AudioClip createClip(File file) {
+        if(file == null) return null;
+        FileHandle fileHandle = new FileHandle(file);
+        if(!fileHandle.exists()) return null;
         return new AudioClip(fileHandle);
     }
 
