@@ -94,7 +94,3 @@ forge-gui/tools/PerSetTrackingResults
 # Ignore python temporaries
 __pycache__
 *.pyc
-.claude
-items_grid.png
-items_index.md
-legal_card_pool.txt
