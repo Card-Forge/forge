@@ -934,7 +934,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
         if (reward.type.equals(Reward.Type.Card) && ownedLabel != null) {
             if (isNew) {
-                if (autoSell != null) {
+                if (isLoot && autoSell != null) {
                     ownedLabel.setPosition(
                         autoSell.getX() + autoSell.getWidth() / 2 - ownedLabel.layout.getWidth() / 2,
                         autoSell.getY() + autoSell.getHeight());
