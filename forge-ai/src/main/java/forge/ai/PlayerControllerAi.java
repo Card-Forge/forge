@@ -1225,7 +1225,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, FCollectionView<Player> allPayers) {
-        if (SpellApiToAi.Converter.get(sa).willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers)) {
+        if (SpellApiToAi.Converter.get(sa).willPayUnlessCost(player, sa, cost, alreadyPaid, allPayers)) {
             if (!ComputerUtilCost.canPayCost(cost, sa, player, true)) {
                 return false;
             }
@@ -1586,7 +1586,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<OptionalCostValue> chooseOptionalCosts(SpellAbility chosen, List<OptionalCostValue> optionalCostValues) {
-        return SpellApiToAi.Converter.get(chosen).chooseOptionalCosts(chosen, player, optionalCostValues);
+        return SpellApiToAi.Converter.get(chosen).chooseOptionalCosts(player, chosen, optionalCostValues);
     }
 
     @Override

@@ -121,7 +121,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(final SpellAbility sa, final Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(final Player aiPlayer, final SpellAbility sa) {
         if ("ChainOfSmog".equals(sa.getParam("AILogic"))) {
             return SpecialCardAi.ChainOfSmog.consider(aiPlayer, sa);
         }
@@ -132,7 +132,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
         AiAbilityDecision decision = canPlay(aiPlayer, sa);
         if (!decision.willingToPlay()) {
             if (sa.isMandatory()) {
-                return super.chkDrawback(sa, aiPlayer);
+                return super.chkDrawback(aiPlayer, sa);
             }
         }
         return decision;
@@ -156,7 +156,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+    public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         final String aiLogic = sa.getParam("UnlessAI");
         if ("Never".equals(aiLogic)) { return false; }
 
@@ -172,6 +172,6 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
                 }
             }
         }
-        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+        return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
     }
 }

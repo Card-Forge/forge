@@ -10,7 +10,7 @@ public class ImmediateTriggerAi extends SpellAbilityAi {
     // TODO: this class is largely reused from DelayedTriggerAi, consider updating
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         String logic = sa.getParamOrDefault("AILogic", "");
         if (logic.equals("Always")) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
