@@ -11,10 +11,13 @@ import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.model.FModel;
+import forge.ai.ComputerUtilAbility;
 
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiBase;
@@ -119,6 +122,57 @@ public class ForgeHeadless {
         return zoneArray;
     }
 
+    private static JsonObject getPossibleActions(Player player, Game game) {
+        JsonObject actions = new JsonObject();
+        JsonArray actionsList = new JsonArray();
+
+        // Get available lands to play
+        CardCollection lands = ComputerUtilAbility.getAvailableLandsToPlay(game, player);
+        if (lands != null && !lands.isEmpty()) {
+            for (Card land : lands) {
+                JsonObject action = new JsonObject();
+                action.addProperty("type", "play_land");
+                action.addProperty("card_id", land.getId());
+                action.addProperty("card_name", land.getName());
+                actionsList.add(action);
+            }
+        }
+
+        // Get available spells and abilities
+        CardCollection availableCards = ComputerUtilAbility.getAvailableCards(game, player);
+        List<SpellAbility> spellAbilities = ComputerUtilAbility.getSpellAbilities(availableCards, player);
+        
+        for (SpellAbility sa : spellAbilities) {
+            // Filter to only abilities the player can actually activate
+            if (sa.canPlay() && sa.getActivatingPlayer() == player) {
+                JsonObject action = new JsonObject();
+                Card source = sa.getHostCard();
+                
+                if (sa.isSpell()) {
+                    action.addProperty("type", "cast_spell");
+                } else {
+                    action.addProperty("type", "activate_ability");
+                }
+                
+                action.addProperty("card_id", source != null ? source.getId() : -1);
+                action.addProperty("card_name", source != null ? source.getName() : "Unknown");
+                action.addProperty("ability_description", sa.getDescription());
+                action.addProperty("mana_cost", sa.getPayCosts() != null ? sa.getPayCosts().toSimpleString() : "");
+                
+                actionsList.add(action);
+            }
+        }
+
+        // Always available: pass priority
+        JsonObject passAction = new JsonObject();
+        passAction.addProperty("type", "pass_priority");
+        actionsList.add(passAction);
+
+        actions.add("actions", actionsList);
+        actions.addProperty("count", actionsList.size());
+        return actions;
+    }
+
     private static class HeadlessLobbyPlayer extends forge.ai.LobbyPlayerAi {
         public HeadlessLobbyPlayer(String name) {
             super(name, null);
@@ -163,6 +217,9 @@ public class ForgeHeadless {
                 if (command.equals("get_state")) {
                     Gson gson = new GsonBuilder().setPrettyPrinting().create();
                     System.out.println(gson.toJson(extractGameState(getGame())));
+                } else if (command.equals("possible_actions")) {
+                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                    System.out.println(gson.toJson(getPossibleActions(player, getGame())));
                 } else if (command.equals("pass_priority")) {
                     return null; // Pass priority
                 } else if (command.equals("concede")) {
