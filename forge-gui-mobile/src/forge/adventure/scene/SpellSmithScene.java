@@ -428,9 +428,9 @@ public class SpellSmithScene extends UIScene {
         }
         if (rewardActor != null) rewardActor.remove();
         rewardActor = new RewardActor(currentReward, true, null, true);
-        rewardActor.flip(); //Make it flip so it draws visual attention, why not.
-        rewardActor.setBounds(rewardDummy.getX(), rewardDummy.getY(), rewardDummy.getWidth(), rewardDummy.getHeight());
         stage.addActor(rewardActor);
+        rewardActor.setBounds(rewardDummy.getX(), rewardDummy.getY(), rewardDummy.getWidth(), rewardDummy.getHeight());
+        rewardActor.flip(); //Make it flip so it draws visual attention, why not.
 
         acceptReward.setVisible(true);
         declineReward.setVisible(true);
