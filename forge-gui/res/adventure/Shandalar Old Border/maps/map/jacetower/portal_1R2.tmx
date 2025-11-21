@@ -32,7 +32,7 @@
   <object id="48" template="../../../common/maps/obj/treasure.tx" x="64" y="31.75"/>
   <object id="50" template="../../../common/maps/obj/enemy.tx" x="173" y="220">
    <properties>
-    <property name="enemy" value="Devil"/>
+    <property name="enemy" value="Imp"/>
    </properties>
   </object>
   <object id="51" template="../../../common/maps/obj/treasure.tx" x="240.166" y="48.6666"/>

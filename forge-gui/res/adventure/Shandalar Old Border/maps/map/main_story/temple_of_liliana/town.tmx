@@ -1779,7 +1779,7 @@
   <object id="251" template="../../../obj/enemy.tx" x="864" y="112">
    <properties>
     <property name="effect">{
- &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Waker of the Dead&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Waker of the Dead&quot; ]
 }</property>
     <property name="enemy" value="Liliana"/>
     <property name="reward">[

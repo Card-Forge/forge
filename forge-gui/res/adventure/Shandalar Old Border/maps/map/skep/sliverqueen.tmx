@@ -56,7 +56,7 @@
   }
 ]</property>
     <property name="effect">{
- &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Sliver Queen's Boss Effect&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Sliver Queen's Boss Effect&quot; ]
 }</property>
     <property name="enemy" value="Sliver Queen"/>
     <property name="spawn.Easy" type="bool" value="true"/>
@@ -80,7 +80,7 @@
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Crippling Fear&quot;
+		&quot;cardName&quot;: &quot;Mutilate|TOR&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,

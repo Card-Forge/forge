@@ -8,8 +8,8 @@
   &quot;startBattleWithCard&quot;: [ &quot;Kavu Lair|INV&quot; ],
 }</property>
  </properties>
- <tileset firstgid="1" source="../../../common/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJyr42RgqBvk+L0AfkyOmenCEEzIrtuiCBoZw+QtgewqMdzm4bIXXW0l0AxrUVS7LZHsA7FhatDtJNVedFyBxW50vSA16HZSai+y3aToJyV+SdVHTBohx7+0ziOk2vtAFILxmXlDFIEpCStkc2Bm4TIXm1piMSs7Kj+TDdMMXGaTay/IThDOYUPF2My0AWJbqNmwfAbi25HhVxBGtxM53pHtLBfDXq6ViiHcQ820B7L3pij2shpWntEq3SOHLSX1Ayl208p8fJic9IKMAQJUJsw=

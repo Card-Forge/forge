@@ -154,7 +154,7 @@
    <properties>
     <property name="effect">{
 	&quot;startBattleWithCard&quot;: [ &quot;First Head of the Hydra&quot;, &quot;Second Head of the Hydra&quot;, &quot;Third Head of the Hydra&quot;, &quot;Fourth Head of the Hydra&quot;, &quot;Fifth Head of the Hydra&quot;, &quot;Sixth Head of the Hydra&quot; ],
-	&quot;startBattleWithCardInCommandZone&quot;: [ &quot;The Hydra of Shandalar&quot; ]
+	&quot;startBattleWithCard&quot;: [ &quot;The Hydra of Shandalar&quot; ]
 }</property>
     <property name="enemy" value="The Hydra of Shandalaar"/>
     <property name="reward">[

@@ -53,7 +53,7 @@
   </object>
   <object id="150" template="../../../common/maps/obj/enemy.tx" x="141.842" y="91.272">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Tibalt's Boss Effect&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Tibalt's Boss Effect&quot;]
 }</property>
     <property name="enemy" value="Tibalt"/>
     <property name="reward">[

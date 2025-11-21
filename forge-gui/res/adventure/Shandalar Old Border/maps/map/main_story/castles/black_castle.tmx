@@ -5,7 +5,7 @@
  </editorsettings>
  <properties>
   <property name="canFailDungeon" type="bool" value="true"/>
-  <property name="dungeonEffect">{&quot;startBattleWithCardInCommandZone&quot;: [ &quot;Griselbrand's Presence&quot; ]
+  <property name="dungeonEffect">{&quot;startBattleWithCard&quot;: [ &quot;Griselbrand's Presence&quot; ]
 }</property>
   <property name="respawnEnemies" type="bool" value="true"/>
  </properties>

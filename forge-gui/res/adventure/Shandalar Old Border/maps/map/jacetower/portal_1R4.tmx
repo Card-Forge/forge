@@ -39,23 +39,23 @@
   <object id="55" template="../../../common/maps/obj/treasure.tx" x="71.4167" y="92"/>
   <object id="56" template="../../../common/maps/obj/enemy.tx" x="110.833" y="201">
    <properties>
-    <property name="enemy" value="Devil"/>
+    <property name="enemy" value="Imp"/>
    </properties>
   </object>
   <object id="57" template="../../../common/maps/obj/enemy.tx" x="288.667" y="152.583">
    <properties>
-    <property name="enemy" value="Devil"/>
+    <property name="enemy" value="Imp"/>
    </properties>
   </object>
   <object id="58" template="../../../common/maps/obj/enemy.tx" x="183.417" y="198.167">
    <properties>
-    <property name="enemy" value="Devil"/>
+    <property name="enemy" value="Imp"/>
    </properties>
   </object>
   <object id="60" template="../../../common/maps/obj/gold.tx" x="208" y="107.5"/>
   <object id="61" template="../../../common/maps/obj/enemy.tx" x="96" y="104">
    <properties>
-    <property name="enemy" value="Devil"/>
+    <property name="enemy" value="Imp"/>
    </properties>
   </object>
   <object id="63" template="../../../common/maps/obj/door_left.tx" x="379.814" y="137.793">

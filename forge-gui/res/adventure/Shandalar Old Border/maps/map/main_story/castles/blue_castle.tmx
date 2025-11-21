@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect">{&quot;startBattleWithCardInCommandZone&quot;: [ &quot;Lorthos' Presence&quot; ]
+  <property name="dungeonEffect">{&quot;startBattleWithCard&quot;: [ &quot;Lorthos' Presence&quot; ]
 }</property>
   <property name="respawnEnemies" type="bool" value="true"/>
  </properties>
