@@ -37,7 +37,7 @@
   </object>
   <object id="55" template="../../../common/maps/obj/enemy.tx" x="313.126" y="181.759">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Garruk's Boss Effect Phase One&quot;,&quot;Garruk's Boss Effect Phase Two&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Garruk's Boss Effect Phase One&quot;,&quot;Garruk's Boss Effect Phase Two&quot;]
 }</property>
     <property name="enemy" value="Garruk"/>
    </properties>

@@ -1,5 +1,5 @@
 {
-  "name": "Devil",
+  "name": "Imp",
   "mainDeck": [
     {
       "count": 34,
@@ -8,7 +8,7 @@
         "Black"
       ],
       "subTypes": [
-        "Devil"
+        "Imp"
       ],
       "rarity": [
         "Common",
@@ -22,7 +22,7 @@
         "Black"
       ],
       "subTypes": [
-        "Devil"
+        "Imp"
       ],
       "rarity": [
         "Rare",

@@ -7810,10 +7810,10 @@
 		]
 	},
 	{
-		"name": "Devil",
+		"name": "Imp",
 		"sprite": "sprites/enemy/fiend/imp.atlas",
 		"deck": [
-			"decks/standard/devil.json"
+			"decks/standard/imp.json"
 		],
 		"ai": "",
 		"spawnRate": 1,
@@ -25105,7 +25105,7 @@
 				"type": "item",
 				"probability": 1,
 				"count": 1,
-				"itemName": "Gooey Shoes"
+				"itemName": "Thallid Farming Tools"
 			},
 			{
 				"type": "shards",

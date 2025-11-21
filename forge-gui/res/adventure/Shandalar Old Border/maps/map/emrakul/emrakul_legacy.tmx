@@ -38,7 +38,7 @@
   <object id="49" template="../../../common/maps/obj/gold.tx" x="106" y="216"/>
   <object id="50" template="../../../common/maps/obj/enemy.tx" x="182.772" y="284.992" width="64" height="64">
    <properties>
-    <property name="effect" value="{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Emrakul's Presence&quot;]}"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Emrakul's Presence&quot;]}"/>
     <property name="enemy" value="Emrakul"/>
     <property name="spawn.Easy" type="bool" value="false"/>
     <property name="spawn.Hard" type="bool" value="true"/>
@@ -53,7 +53,7 @@
   </object>
   <object id="52" template="../../../common/maps/obj/enemy.tx" x="182.772" y="284.992" width="64" height="64">
      <properties>
-      <property name="effect" value="{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Emrakul's Awakening&quot;]}"/>
+      <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Emrakul's Awakening&quot;]}"/>
       <property name="enemy" value="Emrakul"/>
       <property name="spawn.Easy" type="bool" value="true"/>
       <property name="spawn.Hard" type="bool" value="false"/>

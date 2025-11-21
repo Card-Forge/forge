@@ -44,13 +44,13 @@
   </object>
   <object id="57" template="../../../common/maps/obj/enemy.tx" x="200.167" y="229.083">
    <properties>
-    <property name="enemy" value="Devil"/>
+    <property name="enemy" value="Imp"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
   <object id="58" template="../../../common/maps/obj/enemy.tx" x="183.417" y="198.167">
    <properties>
-    <property name="enemy" value="Devil"/>
+    <property name="enemy" value="Imp"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
