@@ -224,7 +224,7 @@ public class DeckSelectScene extends UIScene {
     @Override
     public void enter() {
         refreshDeckButtons();
-        GameHUD.getInstance().switchAudio();
+        GameHUD.getInstance().updateBGM();
         select(Current.player().getSelectedDeckIndex());
         performTouch(scrollPane); //can use mouse wheel if available to scroll after selection
         super.enter();

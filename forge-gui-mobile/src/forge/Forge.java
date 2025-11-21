@@ -18,7 +18,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
 import forge.adventure.scene.*;
-import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.MapStage;
 import forge.adventure.util.Config;
 import forge.adventure.world.WorldSave;
@@ -329,7 +328,7 @@ public class Forge implements ApplicationListener {
     public static void openHomeDefault() {
         //default to English only if CJK is missing
         getLocalizer().setEnglish(forcedEnglishonCJKMissing);
-        GuiBase.setIsAdventureMode(false);
+        GuiBase.setAdventureDirectory(null);
         clearScreenStack();
         openHomeScreen(-1, null); //default for startup
         isMobileAdventureMode = false;
@@ -346,7 +345,7 @@ public class Forge implements ApplicationListener {
         getLocalizer().setEnglish(forcedEnglishonCJKMissing);
         //continuous rendering is needed for adventure mode
         startContinuousRendering();
-        GuiBase.setIsAdventureMode(true);
+        GuiBase.setAdventureDirectory(ForgeConstants.ADVENTURE_COMMON_DIR);
         advStartup = false;
         isMobileAdventureMode = true;
         //force it for adventure mode if the prefs is not updated from boolean value to string value
@@ -364,7 +363,7 @@ public class Forge implements ApplicationListener {
         try {
             Config.instance().loadResources();
             SpellSmithScene.instance().loadEditions();
-            GameHUD.getInstance().stopAudio();
+            SoundSystem.instance.stopBackgroundMusic();
             MusicPlaylist.invalidateMusicPlaylist();
             if (startScene) {
                 SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
@@ -768,7 +767,7 @@ public class Forge implements ApplicationListener {
         setTransitionScreen(new TransitionScreen(() -> {
             ImageCache.getInstance().disposeTextures();
             isMobileAdventureMode = false;
-            GuiBase.setIsAdventureMode(false);
+            GuiBase.setAdventureDirectory(null);
             setCursor(FSkin.getCursor().get(0), "0");
             setAltZoneTabMode(FModel.getPreferences().getPref(FPref.UI_ALT_PLAYERZONETABS));
             Gdx.input.setInputProcessor(getInputProcessor());

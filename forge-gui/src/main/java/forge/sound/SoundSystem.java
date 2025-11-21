@@ -5,12 +5,12 @@ import forge.game.event.GameEvent;
 import forge.gui.GuiBase;
 import forge.gui.events.UiEvent;
 import forge.localinstance.properties.ForgeConstants;
-import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.*;
 
 /**
@@ -21,11 +21,17 @@ public class SoundSystem {
 
     public static final int DELAY = 30;
 
+    public static final FilenameFilter PLAYABLE_AUDIO = (dir, name) -> GuiBase.getInterface().isSupportedAudioFormat(new File(dir, name));
+    private static final String[] SOUND_RESOURCE_PATHS = {ForgeConstants.USER_CUSTOM_DIR, ForgeConstants.CACHE_DIR};
+
     private static final IAudioClip emptySound = new NoSoundClip();
     private static final Map<SoundEffectType, IAudioClip> loadedClips = new EnumMap<>(SoundEffectType.class);
     private static final Map<String, IAudioClip> loadedScriptClips = new HashMap<>();
 
     private final EventVisualizer visualizer;
+
+    private boolean shouldPlayMusic = true;
+    private boolean hasWindowFocus = true;
 
     private SoundSystem() {
         this.visualizer = new EventVisualizer(GamePlayerUtil.getGuiPlayer());
@@ -107,7 +113,10 @@ public class SoundSystem {
      */
     public void play(final String resourceFileName, final boolean isSynchronized) {
         if (isUsingAltSystem()) {
-            GuiBase.getInterface().startAltSoundSystem(getSoundDirectory() + resourceFileName, isSynchronized);
+            File file = getSoundResource(resourceFileName);
+            if(file == null)
+                return;
+            GuiBase.getInterface().startAltSoundSystem(file.getPath(), isSynchronized);
         }
         else {
             final IAudioClip snd = fetchResource(resourceFileName);
@@ -122,41 +131,16 @@ public class SoundSystem {
      */
     public void play(final SoundEffectType type, final boolean isSynchronized) {
         if (isUsingAltSystem()) {
-            GuiBase.getInterface().startAltSoundSystem(getSoundDirectory() + type.getResourceFileName(), isSynchronized);
+            File file = getSoundResource(type.getResourceFileName());
+            if(file == null)
+                return;
+            GuiBase.getInterface().startAltSoundSystem(file.getPath(), isSynchronized);
         } else {
             final IAudioClip snd = fetchResource(type);
             if (!isSynchronized || snd.isDone()) {
                 snd.play(FModel.getPreferences().getPrefInt(FPref.UI_VOL_SOUNDS)/100f);
             }
         }
-    }
-
-    /**
-     * Play the sound in a looping manner until 'stop' is called.
-     */
-    public void loop(final String resourceFileName) {
-        fetchResource(resourceFileName).loop();
-    }
-
-    /**
-     * Play the sound in a looping manner until 'stop' is called.
-     */
-    public void loop(final SoundEffectType type) {
-        fetchResource(type).loop();
-    }
-
-    /**
-     * Stop the sound associated with the given resource file name.
-     */
-    public void stop(final String resourceFileName) {
-        fetchResource(resourceFileName).stop();
-    }
-
-    /**
-     * Stop the sound associated with the Sounds enumeration element.
-     */
-    public void stop(final SoundEffectType type) {
-        fetchResource(type).stop();
     }
 
     @Subscribe
@@ -187,13 +171,63 @@ public class SoundSystem {
     private IAudioMusic currentTrack;
     private MusicPlaylist currentPlaylist;
 
+    //Shelved tracks, for when we want to switch back to a previous track and want to resume playback where we left off.
+    private MusicPlaylist shelvedPlaylist;
+    private IAudioMusic shelvedTrack;
+
     public void setBackgroundMusic(final MusicPlaylist playlist) {
+        setBackgroundMusic(playlist, false);
+    }
+
+    public void setBackgroundMusic(final MusicPlaylist playlist, boolean shelvePrevious) {
+        if(playlist == currentPlaylist)
+            return;
+        if(playlist == shelvedPlaylist && playlist != null) {
+            if(!shelvePrevious) {
+                //Dispose current, resume shelved.
+                currentTrack.dispose();
+                currentTrack = shelvedTrack;
+                shelvedTrack = null;
+                shelvedPlaylist = null;
+            }
+            else {
+                //Swap current and shelved.
+                currentTrack.pause();
+                IAudioMusic temp = currentTrack;
+                currentTrack = shelvedTrack;
+                shelvedTrack = temp;
+                shelvedPlaylist = currentPlaylist;
+            }
+            currentPlaylist = playlist;
+            refreshVolume();
+            currentTrack.resume();
+            return;
+        }
+        if (shelvedTrack != null) {
+            // We've switched to a third track. Safe to discard the shelf.
+            clearShelvedPlaylist();
+        }
+        if (shelvePrevious) {
+            //Shelve current.
+            currentTrack.pause();
+            shelvedTrack = currentTrack;
+            shelvedPlaylist = currentPlaylist;
+            currentTrack = null;
+        }
         currentPlaylist = playlist;
         changeBackgroundTrack();
     }
 
     public MusicPlaylist getCurrentPlaylist() {
         return currentPlaylist;
+    }
+
+    public void clearShelvedPlaylist() {
+        if(this.shelvedTrack == null)
+            return;
+        shelvedTrack.dispose();
+        shelvedTrack = null;
+        shelvedPlaylist = null;
     }
 
     public void changeBackgroundTrack() {
@@ -214,6 +248,7 @@ public class SoundSystem {
 
         try {
             currentTrack = GuiBase.getInterface().createAudioMusic(filename);
+            shouldPlayMusic = true;
             currentTrack.play(() -> {
                 try {
                     Thread.sleep(SoundSystem.DELAY);
@@ -234,23 +269,47 @@ public class SoundSystem {
         }
     }
     public void pause() {
-        if (currentTrack != null) {
-            currentTrack.pause();
-        }
+        shouldPlayMusic = false;
+        updatePlayPause();
     }
 
     public void resume() {
-        if (currentTrack != null) {
-            currentTrack.resume();
-        }
+        shouldPlayMusic = true;
+        updatePlayPause();
     }
 
-    public void dispose() {
+    private void updatePlayPause() {
+        if(currentTrack == null)
+            return;
+        boolean shouldPlay = shouldPlayMusic && hasWindowFocus;
+        if(shouldPlay && !currentTrack.isPlaying())
+            currentTrack.resume();
+        else if(!shouldPlay && currentTrack.isPlaying())
+            currentTrack.pause();
+    }
+
+    public void stopBackgroundMusic() {
         if (currentTrack != null) {
             currentTrack.dispose();
             currentTrack = null;
         }
+        if (shelvedTrack != null) {
+            shelvedTrack.dispose();
+            shelvedTrack = null;
+        }
+        currentPlaylist = null;
+        shelvedPlaylist = null;
+        shouldPlayMusic = false;
+    }
+
+    public void dispose() {
+        stopBackgroundMusic();
         invalidateSoundCache();
+    }
+
+    public void setWindowFocus(boolean hasWindowFocus) {
+        this.hasWindowFocus = hasWindowFocus;
+        updatePlayPause();
     }
 
     public void fadeModifier(float value) {
@@ -259,41 +318,45 @@ public class SoundSystem {
         }
     }
 
-    public String[] getAvailableSoundSets()
-    {
-        final List<String> availableSets = new ArrayList<>();
+    private static final Map<Integer, List<String>> soundResourceDirectoryCache = new HashMap<>();
 
-        final File dir = new File(ForgeConstants.CACHE_SOUND_DIR);
-        if (dir != null && dir.exists()) {
-            final String[] files = dir.list();
-            for (String fileName : files) {
-                String fullPath = ForgeConstants.CACHE_SOUND_DIR + fileName;
-                if (!fileName.equals("Default") && new File(fullPath).isDirectory()) {
-                    availableSets.add(fileName);
-                }
+    /**
+     * Returns a list of audio resource directories, in order of overrides. The subPath parameter is usually either
+     * `music/` or `sound/`. The fallback order used here is:
+     * <li>The user's override of the current adventure directory, if in adventure mode.</li>
+     * <li>The user's override of the common adventure directory, if in adventure mode.</li>
+     * <li>The current adventure directory, if in adventure mode.</li>
+     * <li>The common adventure directory if in adventure mode.</li>
+     * <li>The current user audio profile directory.</li>
+     * <li>The common resource directory.</li>
+     *
+     * User overrides and profiles are searched for first in the custom directory, and then the cache directory.
+     */
+    private static List<String> getSoundResourceDirectoryFallbacks(String profileName, String subPath) {
+        String adventureDirectory = GuiBase.getAdventureDirectory();
+        int cacheKey = Objects.hash(profileName, subPath, adventureDirectory);
+        if(soundResourceDirectoryCache.containsKey(cacheKey))
+            return soundResourceDirectoryCache.get(cacheKey);
+        List<String> out = new ArrayList<>(5);
+        if (adventureDirectory != null) {
+            //Check user folders for matching music folder. Last path part should be the plane name.
+            String[] pathParts = adventureDirectory.split(ForgeConstants.PATH_SEPARATOR);
+            for(String path : SOUND_RESOURCE_PATHS) {
+                out.add(path + subPath + pathParts[pathParts.length - 1] + ForgeConstants.PATH_SEPARATOR);
+            }
+            out.add(adventureDirectory + subPath);
+            out.add(ForgeConstants.ADVENTURE_COMMON_DIR + subPath);
+        }
+        if(profileName != null && !"Default".equals(profileName)) {
+            for (String path : SOUND_RESOURCE_PATHS) {
+                out.add(path + subPath + profileName + ForgeConstants.PATH_SEPARATOR);
             }
         }
-
-        Collections.sort(availableSets);
-        availableSets.add(0, "Default");
-
-        if (availableSets.size() == 1 || !availableSets.contains(FModel.getPreferences().getPref(FPref.UI_CURRENT_SOUND_SET))) {
-            // Default profile only or the current set is no longer available - revert the preference setting to default
-            FModel.getPreferences().setPref(FPref.UI_CURRENT_SOUND_SET, "Default");
-            invalidateSoundCache();
-        }
-
-        return availableSets.toArray(new String[0]);
+        out.add(ForgeConstants.RES_DIR + subPath);
+        soundResourceDirectoryCache.put(cacheKey, out);
+        return out;
     }
 
-    public String getSoundDirectory() {
-        String profileName = FModel.getPreferences().getPref(FPref.UI_CURRENT_SOUND_SET);
-        if (profileName.equals("Default")) {
-            return ForgeConstants.SOUND_DIR;
-        } else {
-            return ForgeConstants.CACHE_SOUND_DIR + profileName + ForgeConstants.PATH_SEPARATOR;
-        }
-    }
 
     public void invalidateSoundCache() {
         for (IAudioClip c : loadedClips.values()) {
@@ -304,36 +367,51 @@ public class SoundSystem {
             c.dispose();
         }
         loadedScriptClips.clear();
+        soundResourceDirectoryCache.clear();
+        soundResourceAssetCache.clear();
     }
 
-    public String getMusicDirectory() {
-        if (GuiBase.isAdventureMode())
-            return ForgeConstants.ADVENTURE_MUSIC_DIR;
-        String profileName = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CURRENT_MUSIC_SET);
-        if (profileName.equals("Default")) {
-            return ForgeConstants.MUSIC_DIR;
-        } else {
-            return ForgeConstants.CACHE_MUSIC_DIR + profileName + ForgeConstants.PATH_SEPARATOR;
-        }
-    }
-
-    public static String[] getAvailableMusicSets()
+    public String[] getAvailableSoundSets()
     {
-        final List<String> availableSets = new ArrayList<>();
+        List<String> availableSets = collectProfiles(ForgeConstants.SOUND_DIR);
 
-        final File dir = new File(ForgeConstants.CACHE_MUSIC_DIR);
-        if (dir != null && dir.exists()) {
-            final String[] files = dir.list();
-            for (String fileName : files) {
-                String fullPath = ForgeConstants.CACHE_MUSIC_DIR + fileName;
-                if (!fileName.equals("Default") && new File(fullPath).isDirectory()) {
-                    availableSets.add(fileName);
-                }
-            }
+        if (availableSets.size() == 1 || !availableSets.contains(FModel.getPreferences().getPref(FPref.UI_CURRENT_SOUND_SET))) {
+            // Default profile only or the current set is no longer available - revert the preference setting to default
+            FModel.getPreferences().setPref(FPref.UI_CURRENT_SOUND_SET, "Default");
+            invalidateSoundCache();
         }
 
-        Collections.sort(availableSets);
-        availableSets.add(0, "Default");
+        return availableSets.toArray(new String[0]);
+    }
+
+    private static final Map<Integer, File> soundResourceAssetCache = new HashMap<>();
+
+    /**
+     * Searches through available sound resource directories for a sound matching the given filename.
+     * Returns null if the file does not exist in any sound directory.
+     */
+    public File getSoundResource(String filename) {
+        String adventureDirectory = GuiBase.getAdventureDirectory();
+        String profileName = FModel.getPreferences().getPref(FPref.UI_CURRENT_SOUND_SET);
+        int cacheKey = Objects.hash(filename, adventureDirectory, profileName);
+        if(soundResourceAssetCache.containsKey(cacheKey) && soundResourceAssetCache.get(cacheKey).isFile())
+            return soundResourceAssetCache.get(cacheKey);
+        FilenameFilter nameFilter = (dir, name) -> name.equals(filename) || (name.startsWith(filename + ".") && PLAYABLE_AUDIO.accept(dir, name));
+        File out = getSoundResourceDirectoryFallbacks(profileName, ForgeConstants.SOUND_DIR).stream()
+                .map(File::new)
+                .filter(File::isDirectory)
+                .map((d) -> d.listFiles(nameFilter))
+                .filter(Objects::nonNull)
+                .flatMap(Arrays::stream)
+                .findFirst()
+                .orElse(null);
+        if(out != null)
+            soundResourceAssetCache.put(cacheKey, out);
+        return out;
+    }
+
+    public static String[] getAvailableMusicSets() {
+        List<String> availableSets = collectProfiles(ForgeConstants.MUSIC_DIR);
 
         if (availableSets.size() == 1 || !availableSets.contains(FModel.getPreferences().getPref(FPref.UI_CURRENT_MUSIC_SET))) {
             // Default profile only or the current set is no longer available - revert the preference setting to default
@@ -342,5 +420,34 @@ public class SoundSystem {
         }
 
         return availableSets.toArray(new String[0]);
+    }
+
+    /**
+     * Searches through available music resource directories for a directory matching the given playlist.
+     * Returns null if the playlist does not exist in any music directory.
+     */
+    public static File findMusicDirectory(MusicPlaylist playlist) {
+        String profileName = FModel.getPreferences().getPref(FPref.UI_CURRENT_MUSIC_SET);
+        return getSoundResourceDirectoryFallbacks(profileName, ForgeConstants.MUSIC_DIR).stream()
+                .map((p) -> new File(p, playlist.getSubDir()))
+                .filter(File::isDirectory)
+                .filter((f) -> Objects.requireNonNull(f.listFiles(PLAYABLE_AUDIO)).length > 0)
+                .findFirst()
+                .orElse(null);
+    }
+
+    private static List<String> collectProfiles(String subPath) {
+        Set<String> foundSets = new HashSet<>();
+        for(String path : SOUND_RESOURCE_PATHS) {
+            File[] files = new File(path + subPath).listFiles(File::isDirectory);
+            if(files != null)
+                Arrays.stream(files).map(File::getName).forEach(foundSets::add);
+        }
+        foundSets.remove("Default");
+        List<String> availableSets = new ArrayList<>(foundSets);
+
+        Collections.sort(availableSets);
+        availableSets.add(0, "Default");
+        return availableSets;
     }
 }

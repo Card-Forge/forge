@@ -12,6 +12,7 @@ import forge.Forge;
 import forge.adventure.util.Config;
 import io.sentry.protocol.Device;
 import io.sentry.protocol.OperatingSystem;
+import forge.sound.SoundSystem;
 import org.lwjgl.system.Configuration;
 import oshi.SystemInfo;
 
@@ -83,6 +84,18 @@ public class GameLauncher {
                 if (Forge.safeToClose)
                     Forge.exit(true);
                 return false;
+            }
+
+            @Override
+            public void focusGained() {
+                super.focusGained();
+                SoundSystem.instance.setWindowFocus(true);
+            }
+
+            @Override
+            public void focusLost() {
+                super.focusLost();
+                SoundSystem.instance.setWindowFocus(false);
             }
         });
 
