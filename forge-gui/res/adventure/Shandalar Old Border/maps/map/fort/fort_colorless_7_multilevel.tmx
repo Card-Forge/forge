@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="50" height="50">
   <data encoding="base64" compression="zlib">
    eJzt1z0OwjAMQOEMWSombstVuvQGviNCKCKy0vKT2MXRGz6JAZU8JYawLimtAAAAgKHbJaVt+czjvWevt7fhH1qu+Uny6/UvDXVLed4Rq44RDbrlqMe6o7eh0A36cyJ16D2J3qHnz7pDDDt0S/QOmaCjbok6H/psRe6Y5Vx5zLkY74fH926936PvJa27iUVH684w4p7Ymgmv+eht0Q1n/Q7qjm//R71r8O6QvL+usu7Wedxbu8d9FwAAAAAwhzseddN4
@@ -34,36 +34,36 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="383.965" y="511.303" width="31.6667" height="16"/>
-  <object id="49" template="../../../common/maps/obj/entry_down.tx" x="513.654" y="304.89">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="383.965" y="511.303" width="31.6667" height="16"/>
+  <object id="49" template="../../../../../../common/maps/obj/entry_down.tx" x="513.654" y="304.89">
    <properties>
     <property name="teleport" value="../common/maps/map/fort/fort_colorless_7_multilevel2.tmx"/>
     <property name="teleportObjectId" value="79"/>
    </properties>
   </object>
-  <object id="56" template="../../../common/maps/obj/enemy.tx" x="391.848" y="282.871">
+  <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="391.848" y="282.871">
    <properties>
     <property name="enemy" value="Corrupted Red Wizard"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="57" template="../../../common/maps/obj/enemy.tx" x="383.166" y="385.704">
+  <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="383.166" y="385.704">
    <properties>
     <property name="enemy" value="Corrupted Blue Wizard"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="62,63,64,63"/>
    </properties>
   </object>
-  <object id="59" template="../../../common/maps/obj/gold.tx" x="275.167" y="296.667"/>
-  <object id="60" template="../../../common/maps/obj/enemy.tx" x="515.083" y="355.083">
+  <object id="59" template="../../../../../../common/maps/obj/gold.tx" x="275.167" y="296.667"/>
+  <object id="60" template="../../../../../../common/maps/obj/enemy.tx" x="515.083" y="355.083">
    <properties>
     <property name="enemy" value="Corrupted Red Wizard"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="61" template="../../../common/maps/obj/manashards.tx" x="328" y="234"/>
-  <object id="62" template="../../../common/maps/obj/waypoint.tx" x="474" y="380.667"/>
-  <object id="63" template="../../../common/maps/obj/waypoint.tx" x="267.667" y="381"/>
-  <object id="64" template="../../../common/maps/obj/waypoint.tx" x="271.333" y="319.333"/>
+  <object id="61" template="../../../../../../common/maps/obj/manashards.tx" x="328" y="234"/>
+  <object id="62" template="../../../../../../common/maps/obj/waypoint.tx" x="474" y="380.667"/>
+  <object id="63" template="../../../../../../common/maps/obj/waypoint.tx" x="267.667" y="381"/>
+  <object id="64" template="../../../../../../common/maps/obj/waypoint.tx" x="271.333" y="319.333"/>
  </objectgroup>
 </map>

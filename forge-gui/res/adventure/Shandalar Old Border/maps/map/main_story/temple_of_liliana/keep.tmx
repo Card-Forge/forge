@@ -4,9 +4,9 @@
   <property name="canFailDungeon" type="bool" value="true"/>
   <property name="respawnEnemies" type="bool" value="true"/>
  </properties>
- <tileset firstgid="1" source="../../../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Tile Layer 1" width="55" height="19">
   <data encoding="csv">
 4107,4107,764,2904,2904,2904,2904,2904,2904,2904,2904,2904,764,2904,2904,2904,2904,2904,2904,2904,2904,2904,764,2430,2430,2430,2106,1952,1947,1792,2430,2430,764,2422,0,2946,2946,2946,2946,2946,2946,4107,764,6164,6164,6164,6164,6164,6164,6164,6164,6164,764,4107,0,
@@ -103,12 +103,12 @@
 </data>
  </layer>
  <objectgroup id="2" name="Objects">
-  <object id="2" template="../../../obj/collision.tx" x="-16" y="0" width="16" height="304"/>
-  <object id="3" template="../../../obj/collision.tx" x="-16" y="304" width="912" height="16"/>
-  <object id="4" template="../../../obj/collision.tx" x="880" y="0" width="16" height="304"/>
-  <object id="5" template="../../../obj/collision.tx" x="-16" y="-16" width="912" height="16"/>
-  <object id="183" template="../../../obj/entry_up.tx" x="64" y="304" width="112" height="16"/>
-  <object id="224" template="../../../obj/enemy.tx" x="64" y="224">
+  <object id="2" template="../../../../../../common/maps/obj/collision.tx" x="-16" y="0" width="16" height="304"/>
+  <object id="3" template="../../../../../../common/maps/obj/collision.tx" x="-16" y="304" width="912" height="16"/>
+  <object id="4" template="../../../../../../common/maps/obj/collision.tx" x="880" y="0" width="16" height="304"/>
+  <object id="5" template="../../../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="912" height="16"/>
+  <object id="183" template="../../../../../../common/maps/obj/entry_up.tx" x="64" y="304" width="112" height="16"/>
+  <object id="224" template="../../../../../../common/maps/obj/enemy.tx" x="64" y="224">
    <properties>
     <property name="dialog">[ {
   &quot;text&quot;:&quot;HELLO AGAIN PLANESWALKER {var=player_name}&quot;, 
@@ -153,7 +153,7 @@
     <property name="enemy" value="Adept Black Wizard"/>
    </properties>
   </object>
-  <object id="226" template="../../../obj/portal.tx" type="portal" x="112" y="112">
+  <object id="226" template="../../../../../../common/maps/obj/portal.tx" type="portal" x="112" y="112">
    <properties>
     <property name="portalState" value="active"/>
     <property name="sprite" value="sprites/portal.atlas"/>
@@ -161,7 +161,7 @@
     <property name="teleportObjectId" value="183"/>
    </properties>
   </object>
-  <object id="227" template="../../../obj/portal.tx" type="portal" x="272" y="112">
+  <object id="227" template="../../../../../../common/maps/obj/portal.tx" type="portal" x="272" y="112">
    <properties>
     <property name="activeQuestFlag" value="lilianaGraveyardPortal"/>
     <property name="portalState" value="closed"/>
@@ -170,7 +170,7 @@
     <property name="teleportObjectId" value="269"/>
    </properties>
   </object>
-  <object id="228" template="../../../obj/portal.tx" type="portal" x="432" y="112">
+  <object id="228" template="../../../../../../common/maps/obj/portal.tx" type="portal" x="432" y="112">
    <properties>
     <property name="activeQuestFlag" value="lilianaBogPortal"/>
     <property name="portalState" value="closed"/>
@@ -179,7 +179,7 @@
     <property name="teleportObjectId" value="270"/>
    </properties>
   </object>
-  <object id="238" template="../../../obj/portal.tx" type="portal" x="592" y="112">
+  <object id="238" template="../../../../../../common/maps/obj/portal.tx" type="portal" x="592" y="112">
    <properties>
     <property name="activeQuestFlag" value="lilianaTownPortal"/>
     <property name="portalState" value="closed"/>
@@ -188,7 +188,7 @@
     <property name="teleportObjectId" value="288"/>
    </properties>
   </object>
-  <object id="239" template="../../../obj/portal.tx" type="portal" x="752" y="112">
+  <object id="239" template="../../../../../../common/maps/obj/portal.tx" type="portal" x="752" y="112">
    <properties>
     <property name="activeQuestFlag" value="lilianaBossPortal"/>
     <property name="portalState" value="inactive"/>

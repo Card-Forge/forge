@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBicIJqXOHVRRKobBQhAbNjiAqNhPgpGwcCBvTyU6d9Dpv5dPAhMD32DCRAb5uSGLS6AHHbo4YdPjhAAAJpcD5U=
@@ -39,36 +39,36 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="208.333" y="270.665">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="208.333" y="270.665">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="71" template="../../../common/maps/obj/door_up.tx" x="209" y="96">
+  <object id="71" template="../../../../../../common/maps/obj/door_up.tx" x="209" y="96">
    <properties>
     <property name="teleport" value="maps/map/portal_1W.tmx"/>
     <property name="teleportObjectId" value="69"/>
    </properties>
   </object>
-  <object id="74" template="../../../common/maps/obj/door_down.tx" x="176.667" y="210">
+  <object id="74" template="../../../../../../common/maps/obj/door_down.tx" x="176.667" y="210">
    <properties>
     <property name="teleport" value="maps/map/portal_1R.tmx"/>
     <property name="teleportObjectId" value="67"/>
    </properties>
   </object>
-  <object id="75" template="../../../common/maps/obj/door_down.tx" x="241.333" y="210">
+  <object id="75" template="../../../../../../common/maps/obj/door_down.tx" x="241.333" y="210">
    <properties>
     <property name="teleport" value="maps/map/portal_1B.tmx"/>
     <property name="teleportObjectId" value="63"/>
    </properties>
   </object>
-  <object id="76" template="../../../common/maps/obj/door_down.tx" x="145.333" y="144.667">
+  <object id="76" template="../../../../../../common/maps/obj/door_down.tx" x="145.333" y="144.667">
    <properties>
     <property name="teleport" value="maps/map/portal_1G.tmx"/>
     <property name="teleportObjectId" value="69"/>
    </properties>
   </object>
-  <object id="77" template="../../../common/maps/obj/door_down.tx" x="272.667" y="147.333">
+  <object id="77" template="../../../../../../common/maps/obj/door_down.tx" x="272.667" y="147.333">
    <properties>
     <property name="teleport" value="maps/map/portal_1U.tmx"/>
     <property name="teleportObjectId" value="87"/>

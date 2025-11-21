@@ -3,9 +3,9 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
    eJztzrENACAMwLAOSFzZ7zmEJ6qCwEPmOEdEqqQ174iPj4+Pj4+Pj4+Pj4+Pj+98fHx87/kq6/rw8f3s21DxrDk=
@@ -35,7 +35,7 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="41" template="../../obj/shop.tx" x="465" y="260">
+  <object id="41" template="../../../../../../common/maps/obj/shop.tx" x="465" y="260">
    <properties>
     <property name="commonShopList" value="Enchantment6White,Creature6White,WhiteBoosterPackShop,Instant6White,Angel,Human4White,Soldier4White,SmallCats,"/>
     <property name="mythicShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite,Eldrazi"/>
@@ -44,7 +44,7 @@
     <property name="uncommonShopList" value="Bird4White,Spirit4White,Sliver4White,Knight4White,Multicolor8White"/>
    </properties>
   </object>
-  <object id="56" template="../../obj/shop.tx" x="416" y="260">
+  <object id="56" template="../../../../../../common/maps/obj/shop.tx" x="416" y="260">
    <properties>
     <property name="commonShopList" value="Enchantment6White,Creature6White,WhiteBoosterPackShop,Instant6White,Angel,Human4White,Soldier4White,SmallCats,"/>
     <property name="mythicShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite,Eldrazi"/>
@@ -53,7 +53,7 @@
     <property name="uncommonShopList" value="Bird4White,Spirit4White,Sliver4White,Knight4White,Multicolor8White"/>
    </properties>
   </object>
-  <object id="57" template="../../obj/shop.tx" x="545" y="259">
+  <object id="57" template="../../../../../../common/maps/obj/shop.tx" x="545" y="259">
    <properties>
     <property name="commonShopList" value="Enchantment6White,Creature6White,WhiteBoosterPackShop,Instant6White,Angel,Human4White,Soldier4White"/>
     <property name="mythicShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite"/>
@@ -62,7 +62,7 @@
     <property name="uncommonShopList" value="Bird4White,Spirit4White,Sliver4White,Knight4White,Multicolor8White"/>
    </properties>
   </object>
-  <object id="43" template="../../obj/shop.tx" x="370" y="325">
+  <object id="43" template="../../../../../../common/maps/obj/shop.tx" x="370" y="325">
    <properties>
     <property name="commonShopList" value="Enchantment6White,Creature6White,WhiteBoosterPackShop,Instant6White,Angel,Human4White,Soldier4White,SmallCats,"/>
     <property name="mythicShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite,Eldrazi"/>
@@ -71,8 +71,8 @@
     <property name="uncommonShopList" value="Bird4White,Spirit4White,Sliver4White,Knight4White,Multicolor8White"/>
    </properties>
   </object>
-  <object id="47" template="../../obj/inn.tx" x="536" y="144"/>
-  <object id="49" template="../../obj/shop.tx" x="417" y="324">
+  <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="536" y="144"/>
+  <object id="49" template="../../../../../../common/maps/obj/shop.tx" x="417" y="324">
    <properties>
     <property name="commonShopList" value="Enchantment6White,Creature6White,WhiteBoosterPackShop,Instant6White,Angel,Human4White,Soldier4White,SmallCats,"/>
     <property name="mythicShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite,Eldrazi"/>
@@ -81,7 +81,7 @@
     <property name="uncommonShopList" value="Bird4White,Spirit4White,Sliver4White,Knight4White,Multicolor8White"/>
    </properties>
   </object>
-  <object id="50" template="../../obj/shop.tx" x="465" y="323">
+  <object id="50" template="../../../../../../common/maps/obj/shop.tx" x="465" y="323">
    <properties>
     <property name="commonShopList" value="Enchantment6White,Creature6White,WhiteBoosterPackShop,Instant6White,Angel,Human4White,Soldier4White,SmallCats,"/>
     <property name="mythicShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite,Eldrazi"/>
@@ -90,7 +90,7 @@
     <property name="uncommonShopList" value="Bird4White,Spirit4White,Sliver4White,Knight4White,Multicolor8White"/>
    </properties>
   </object>
-  <object id="51" template="../../obj/shop.tx" x="545" y="325">
+  <object id="51" template="../../../../../../common/maps/obj/shop.tx" x="545" y="325">
    <properties>
     <property name="commonShopList" value="Enchantment6White,Creature6White,WhiteBoosterPackShop,Instant6White,Angel,Human4White,Soldier4White"/>
     <property name="mythicShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite"/>
@@ -99,7 +99,7 @@
     <property name="uncommonShopList" value="Bird4White,Spirit4White,Sliver4White,Knight4White,Multicolor8White"/>
    </properties>
   </object>
-  <object id="52" template="../../obj/shop.tx" x="369" y="261">
+  <object id="52" template="../../../../../../common/maps/obj/shop.tx" x="369" y="261">
    <properties>
     <property name="commonShopList" value="Enchantment6White,Creature6White,WhiteBoosterPackShop,Instant6White,Angel,Human4White,Soldier4White,SmallCats,"/>
     <property name="mythicShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite,Eldrazi"/>
@@ -108,22 +108,22 @@
     <property name="uncommonShopList" value="Bird4White,Spirit4White,Sliver4White,Knight4White,Multicolor8White"/>
    </properties>
   </object>
-  <object id="53" template="../../obj/spellsmith.tx" x="452" y="212"/>
-  <object id="55" template="../../obj/shop.tx" x="465" y="515">
+  <object id="53" template="../../../../../../common/maps/obj/spellsmith.tx" x="452" y="212"/>
+  <object id="55" template="../../../../../../common/maps/obj/shop.tx" x="465" y="515">
    <properties>
     <property name="commonShopList" value="Plains"/>
     <property name="noRestock" type="bool" value="true"/>
     <property name="signYOffset" type="float" value="-2"/>
    </properties>
   </object>
-  <object id="58" template="../../obj/entry_up.tx" x="320" y="644" width="80" height="20">
+  <object id="58" template="../../../../../../common/maps/obj/entry_up.tx" x="320" y="644" width="80" height="20">
    <properties>
     <property name="spawn" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="59" template="../../obj/entry_left.tx" x="392" y="625" width="16" height="71.964" rotation="0"/>
-  <object id="60" template="../../obj/entry_right.tx" x="304" y="624" width="16" height="69"/>
-  <object id="61" template="../../obj/arena.tx" x="423" y="114">
+  <object id="59" template="../../../../../../common/maps/obj/entry_left.tx" x="392" y="625" width="16" height="71.964" rotation="0"/>
+  <object id="60" template="../../../../../../common/maps/obj/entry_right.tx" x="304" y="624" width="16" height="69"/>
+  <object id="61" template="../../../../../../common/maps/obj/arena.tx" x="423" y="114">
    <properties>
     <property name="arena">{
 
@@ -190,14 +190,14 @@
 }</property>
    </properties>
   </object>
-  <object id="62" template="../../obj/shop.tx" x="80" y="338">
+  <object id="62" template="../../../../../../common/maps/obj/shop.tx" x="80" y="338">
    <properties>
     <property name="commonShopList" value="WhiteItems"/>
     <property name="noRestock" type="bool" value="true"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
-  <object id="63" template="../../obj/shop.tx" x="82" y="257">
+  <object id="63" template="../../../../../../common/maps/obj/shop.tx" x="82" y="257">
    <properties>
     <property name="commonShopList" value="WhiteEquipment"/>
     <property name="noRestock" type="bool" value="true"/>
@@ -215,12 +215,12 @@
     <property name="sprite" value=""/>
    </properties>
   </object>
-  <object id="66" template="../../obj/quest.tx" x="200" y="257">
+  <object id="66" template="../../../../../../common/maps/obj/quest.tx" x="200" y="257">
    <properties>
     <property name="questtype" value="plains_capital"/>
    </properties>
   </object>
-  <object id="67" template="../../obj/shop.tx" x="208" y="338">
+  <object id="67" template="../../../../../../common/maps/obj/shop.tx" x="208" y="338">
    <properties>
     <property name="commonShopList" value="Enchantment6White,Creature6White,WhiteBoosterPackShop,Instant6White,Angel,Human4White,Soldier4White"/>
     <property name="mythicShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite"/>
@@ -229,7 +229,7 @@
     <property name="uncommonShopList" value="Bird4White,Spirit4White,Sliver4White,Knight4White,Multicolor8White"/>
    </properties>
   </object>
-  <object id="68" template="../../obj/shop.tx" x="128" y="338">
+  <object id="68" template="../../../../../../common/maps/obj/shop.tx" x="128" y="338">
    <properties>
     <property name="commonShopList" value="Enchantment6White,Creature6White,WhiteBoosterPackShop,Instant6White,Angel,Human4White,Soldier4White"/>
     <property name="mythicShopList" value="Planeswalker4White,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,Legend4White,PhyrexianWhite"/>
@@ -238,25 +238,25 @@
     <property name="uncommonShopList" value="Bird4White,Spirit4White,Sliver4White,Knight4White,Multicolor8White"/>
    </properties>
   </object>
-  <object id="69" template="../../obj/RotatingShop.tx" x="481.667" y="418.667">
+  <object id="69" template="../../../../../../common/maps/obj/RotatingShop.tx" x="481.667" y="418.667">
    <properties>
     <property name="rotation" value="White1,White2,White3,White4,White5,White6"/>
     <property name="signYOffset" type="float" value="-2"/>
    </properties>
   </object>
-  <object id="70" template="../../obj/RotatingShop.tx" x="541" y="193">
+  <object id="70" template="../../../../../../common/maps/obj/RotatingShop.tx" x="541" y="193">
    <properties>
     <property name="rotation" value="White1,White2,White3,White4,White5,White6"/>
     <property name="signYOffset" type="float" value="-2"/>
    </properties>
   </object>
-  <object id="71" template="../../obj/RotatingShop.tx" x="401" y="161">
+  <object id="71" template="../../../../../../common/maps/obj/RotatingShop.tx" x="401" y="161">
    <properties>
     <property name="rotation" value="White1,White2,White3,White4,White5,White6"/>
     <property name="signYOffset" type="float" value="-2"/>
    </properties>
   </object>
-  <object id="72" template="../../obj/shardtrader.tx" x="272" y="338">
+  <object id="72" template="../../../../../../common/maps/obj/shardtrader.tx" x="272" y="338">
    <properties>
     <property name="signYOffset" type="float" value="-2"/>
    </properties>

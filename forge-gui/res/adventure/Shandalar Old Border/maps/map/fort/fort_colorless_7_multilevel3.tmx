@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="50" height="50">
   <data encoding="base64" compression="zlib">
    eJzt100KwjAQQOEssildeVtPIvQQc0cRKYYhjT/JTJ3wFh+4kJpHMhq3JaUNAAAAMHRdU7otn3m89+z19jb8Q8slP0l+vf6loWzZn9di1TGiQbe0eqw7eht2ukF/TqQOvSfRO/T8WXeIYYduid4hE3SULVHnQ5+tyB2znCuPORfj/fD43i33e/S9pHY3seio3RlG3BNrM+E1H70tuuGs30Hd8e3/qHcN3h2Sj9fVOo9Ha/e47wIAAAAA5nAHTKzKjg==
@@ -34,27 +34,27 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="450.334" y="239.188">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="450.334" y="239.188">
    <properties>
     <property name="direction" value="down"/>
     <property name="teleport" value="../common/maps/map/fort/fort_colorless_7_multilevel4.tmx"/>
     <property name="teleportObjectId" value="38"/>
    </properties>
   </object>
-  <object id="49" template="../../../common/maps/obj/entry_down.tx" x="273.154" y="384.89">
+  <object id="49" template="../../../../../../common/maps/obj/entry_down.tx" x="273.154" y="384.89">
    <properties>
     <property name="teleport" value="../common/maps/map/fort/fort_colorless_7_multilevel2.tmx"/>
     <property name="teleportObjectId" value="38"/>
    </properties>
   </object>
-  <object id="56" template="../../../common/maps/obj/enemy.tx" x="373.515" y="281.454">
+  <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="373.515" y="281.454">
    <properties>
     <property name="enemy" value="Eldrazi"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="64,65"/>
    </properties>
   </object>
-  <object id="57" template="../../../common/maps/obj/enemy.tx" x="427.333" y="425.121">
+  <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="427.333" y="425.121">
    <properties>
     <property name="enemy" value="Eldrazi"/>
     <property name="speedModifier" type="float" value="10"/>
@@ -62,13 +62,13 @@
     <property name="waypoints" value="61,62,61,63"/>
    </properties>
   </object>
-  <object id="58" template="../../../common/maps/obj/treasure.tx" x="354" y="242.333"/>
-  <object id="59" template="../../../common/maps/obj/gold.tx" x="513.667" y="383.667"/>
-  <object id="60" template="../../../common/maps/obj/manashards.tx" x="440.667" y="382.333"/>
-  <object id="61" template="../../../common/maps/obj/waypoint.tx" x="364.667" y="421"/>
-  <object id="62" template="../../../common/maps/obj/waypoint.tx" x="495" y="423"/>
-  <object id="63" template="../../../common/maps/obj/waypoint.tx" x="317.667" y="308.667"/>
-  <object id="64" template="../../../common/maps/obj/waypoint.tx" x="373.333" y="236.667"/>
-  <object id="65" template="../../../common/maps/obj/waypoint.tx" x="386.333" y="487.333"/>
+  <object id="58" template="../../../../../../common/maps/obj/treasure.tx" x="354" y="242.333"/>
+  <object id="59" template="../../../../../../common/maps/obj/gold.tx" x="513.667" y="383.667"/>
+  <object id="60" template="../../../../../../common/maps/obj/manashards.tx" x="440.667" y="382.333"/>
+  <object id="61" template="../../../../../../common/maps/obj/waypoint.tx" x="364.667" y="421"/>
+  <object id="62" template="../../../../../../common/maps/obj/waypoint.tx" x="495" y="423"/>
+  <object id="63" template="../../../../../../common/maps/obj/waypoint.tx" x="317.667" y="308.667"/>
+  <object id="64" template="../../../../../../common/maps/obj/waypoint.tx" x="373.333" y="236.667"/>
+  <object id="65" template="../../../../../../common/maps/obj/waypoint.tx" x="386.333" y="487.333"/>
  </objectgroup>
 </map>

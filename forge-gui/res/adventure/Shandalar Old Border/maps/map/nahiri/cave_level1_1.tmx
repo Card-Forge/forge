@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
    eJztwzEJAAAMA7Ae8y+tmupjJJBeUlVVVVVV1UcHQxwgzA==
@@ -24,18 +24,18 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="321" y="640.667">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="321" y="640.667">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="61" template="../../../common/maps/obj/door_down.tx" x="321.333" y="16.6666">
+  <object id="61" template="../../../../../../common/maps/obj/door_down.tx" x="321.333" y="16.6666">
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel_4/cave_23I5.tmx"/>
     <property name="teleportObjectId" value="62"/>
    </properties>
   </object>
-  <object id="62" template="../../../common/maps/obj/enemy.tx" x="307" y="295">
+  <object id="62" template="../../../../../../common/maps/obj/enemy.tx" x="307" y="295">
    <properties>
     <property name="enemy" value="Evil Wall"/>
     <property name="threatRange" type="int" value="50"/>

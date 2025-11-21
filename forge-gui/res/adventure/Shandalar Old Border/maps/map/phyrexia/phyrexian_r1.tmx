@@ -3,9 +3,9 @@
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/phyrexia/FurnaceTiles.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/phyrexia/FurnaceTiles.tsx"/>
  <layer id="6" name="Collision" width="29" height="45">
   <data encoding="base64" compression="zlib">
    eJztlksOgDAIRN249fgezBO5MI0NQoHyaUyYpBssfTql1G0rleJ17t+RwbyOd2Sw4do9O4vJxb2YmJ8RTKx2INO7vmDttNGEPZtlWt7Zk0n56LXHvaeStbyYkpg3k/OMq+VZze6nhdvnwV5LnQ+PMwMFa6vFJLla5gpvo+vWysz+Ts8akjIl8zVMyrdIbyN7PMXE7kvNXaBlYueey7EyV3lrnVdM/T79mVn/YDFMaq3snjDqtVH9NjIH5o/uTekc6ztIYsV8dAPyjKyE
@@ -35,20 +35,20 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../obj/entry_up.tx" x="214.619" y="708.832">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="214.619" y="708.832">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="51" template="../../obj/treasure.tx" x="162.35" y="143.684"/>
-  <object id="54" template="../../obj/gold.tx" x="330.774" y="393.463"/>
-  <object id="77" template="../../obj/enemy.tx" x="215.667" y="164">
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="162.35" y="143.684"/>
+  <object id="54" template="../../../../../../common/maps/obj/gold.tx" x="330.774" y="393.463"/>
+  <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="215.667" y="164">
    <properties>
     <property name="enemy" value="Furnace Tormentor"/>
     <property name="threatRange" value="20"/>
    </properties>
   </object>
-  <object id="78" template="../../obj/enemy.tx" x="136.333" y="219.333">
+  <object id="78" template="../../../../../../common/maps/obj/enemy.tx" x="136.333" y="219.333">
    <properties>
     <property name="enemy" value="Furnace Goblin"/>
     <property name="speedModifier" type="float" value="3"/>
@@ -56,7 +56,7 @@
     <property name="waypoints" value="75,76,74,62"/>
    </properties>
   </object>
-  <object id="79" template="../../obj/enemy.tx" x="277.667" y="200">
+  <object id="79" template="../../../../../../common/maps/obj/enemy.tx" x="277.667" y="200">
    <properties>
     <property name="enemy" value="Furnace Goblin"/>
     <property name="speedModifier" type="float" value="3"/>
@@ -64,7 +64,7 @@
     <property name="waypoints" value="76,74,62,75"/>
    </properties>
   </object>
-  <object id="80" template="../../obj/enemy.tx" x="294.5" y="531.333">
+  <object id="80" template="../../../../../../common/maps/obj/enemy.tx" x="294.5" y="531.333">
    <properties>
     <property name="enemy" value="Furnace Goblin"/>
     <property name="spawn.Easy" type="bool" value="false"/>
@@ -73,7 +73,7 @@
     <property name="waypoints" value="74,62,75,76"/>
    </properties>
   </object>
-  <object id="81" template="../../obj/enemy.tx" x="296" y="629.667">
+  <object id="81" template="../../../../../../common/maps/obj/enemy.tx" x="296" y="629.667">
    <properties>
     <property name="enemy" value="Furnace Goblin"/>
     <property name="speedModifier" type="float" value="3"/>
@@ -81,7 +81,7 @@
     <property name="waypoints" value="74,62,75,76"/>
    </properties>
   </object>
-  <object id="82" template="../../obj/enemy.tx" x="154" y="648">
+  <object id="82" template="../../../../../../common/maps/obj/enemy.tx" x="154" y="648">
    <properties>
     <property name="enemy" value="Furnace Goblin"/>
     <property name="speedModifier" type="float" value="3"/>
@@ -89,7 +89,7 @@
     <property name="waypoints" value="62,75,76,74"/>
    </properties>
   </object>
-  <object id="83" template="../../obj/enemy.tx" x="133.333" y="374.5">
+  <object id="83" template="../../../../../../common/maps/obj/enemy.tx" x="133.333" y="374.5">
    <properties>
     <property name="enemy" value="Furnace Goblin"/>
     <property name="spawn.Easy" type="bool" value="false"/>
@@ -97,9 +97,9 @@
     <property name="waypoints" value="75,76,74,62"/>
    </properties>
   </object>
-  <object id="84" template="../../obj/gold.tx" x="104" y="247"/>
-  <object id="85" template="../../obj/treasure.tx" x="162" y="128.273"/>
-  <object id="86" template="../../obj/booster.tx" x="182.25" y="113">
+  <object id="84" template="../../../../../../common/maps/obj/gold.tx" x="104" y="247"/>
+  <object id="85" template="../../../../../../common/maps/obj/treasure.tx" x="162" y="128.273"/>
+  <object id="86" template="../../../../../../common/maps/obj/booster.tx" x="182.25" y="113">
    <properties>
     <property name="reward">[
   {
@@ -127,7 +127,7 @@
 </property>
    </properties>
   </object>
-  <object id="87" template="../../obj/enemy.tx" x="134.5" y="519.5">
+  <object id="87" template="../../../../../../common/maps/obj/enemy.tx" x="134.5" y="519.5">
    <properties>
     <property name="enemy" value="Furnace Goblin"/>
     <property name="spawn.Easy" type="bool" value="false"/>
@@ -137,7 +137,7 @@
     <property name="waypoints" value="75,76,74,62"/>
    </properties>
   </object>
-  <object id="88" template="../../obj/enemy.tx" x="296.5" y="384">
+  <object id="88" template="../../../../../../common/maps/obj/enemy.tx" x="296.5" y="384">
    <properties>
     <property name="enemy" value="Furnace Goblin"/>
     <property name="spawn.Easy" type="bool" value="false"/>
@@ -147,13 +147,13 @@
     <property name="waypoints" value="74,62,75,76"/>
    </properties>
   </object>
-  <object id="89" template="../../obj/gold.tx" x="102.5" y="591.75"/>
-  <object id="90" template="../../obj/gold.tx" x="332.333" y="314.333"/>
+  <object id="89" template="../../../../../../common/maps/obj/gold.tx" x="102.5" y="591.75"/>
+  <object id="90" template="../../../../../../common/maps/obj/gold.tx" x="332.333" y="314.333"/>
  </objectgroup>
  <objectgroup id="7" name="Waypoints">
-  <object id="62" template="../../obj/waypoint.tx" x="136.061" y="647.864"/>
-  <object id="74" template="../../obj/waypoint.tx" x="295.955" y="648.318"/>
-  <object id="75" template="../../obj/waypoint.tx" x="136.011" y="199.967"/>
-  <object id="76" template="../../obj/waypoint.tx" x="295.953" y="200.866"/>
+  <object id="62" template="../../../../../../common/maps/obj/waypoint.tx" x="136.061" y="647.864"/>
+  <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="295.955" y="648.318"/>
+  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="136.011" y="199.967"/>
+  <object id="76" template="../../../../../../common/maps/obj/waypoint.tx" x="295.953" y="200.866"/>
  </objectgroup>
 </map>

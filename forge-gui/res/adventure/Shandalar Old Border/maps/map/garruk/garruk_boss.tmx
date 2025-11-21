@@ -3,9 +3,9 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
  <layer id="10" name="Lowest Background" width="34" height="27">
   <data encoding="base64" compression="zlib">
    eJztwzENAAAMA6C+M1z99bAbEnpJVVVV9XlouMd6
@@ -30,23 +30,23 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="192" y="431.5" width="48" height="16">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="431.5" width="48" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="55" template="../../../common/maps/obj/enemy.tx" x="313.126" y="181.759">
+  <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="313.126" y="181.759">
    <properties>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Garruk's Boss Effect Phase One&quot;,&quot;Garruk's Boss Effect Phase Two&quot;]
 }</property>
     <property name="enemy" value="Garruk"/>
    </properties>
   </object>
-  <object id="68" template="../../../common/maps/obj/treasure.tx" x="380.489" y="119.825"/>
-  <object id="71" template="../../../common/maps/obj/gold.tx" x="394.57" y="138.493"/>
-  <object id="88" template="../../../common/maps/obj/manashards.tx" x="233.666" y="155.659"/>
-  <object id="89" template="../../../common/maps/obj/manashards.tx" x="356.889" y="108.302"/>
-  <object id="90" template="../../../common/maps/obj/manashards.tx" x="320.5" y="270"/>
-  <object id="95" template="../../../common/maps/obj/collision.tx" x="543.75" y="0.5" width="19.5" height="431"/>
+  <object id="68" template="../../../../../../common/maps/obj/treasure.tx" x="380.489" y="119.825"/>
+  <object id="71" template="../../../../../../common/maps/obj/gold.tx" x="394.57" y="138.493"/>
+  <object id="88" template="../../../../../../common/maps/obj/manashards.tx" x="233.666" y="155.659"/>
+  <object id="89" template="../../../../../../common/maps/obj/manashards.tx" x="356.889" y="108.302"/>
+  <object id="90" template="../../../../../../common/maps/obj/manashards.tx" x="320.5" y="270"/>
+  <object id="95" template="../../../../../../common/maps/obj/collision.tx" x="543.75" y="0.5" width="19.5" height="431"/>
  </objectgroup>
 </map>

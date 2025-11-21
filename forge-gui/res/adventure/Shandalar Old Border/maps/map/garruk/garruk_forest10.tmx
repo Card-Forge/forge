@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="40" height="30">
   <data encoding="base64" compression="zlib">
    eJzVlkEOwyAMBHONxBOa7+TP7et6ikoRXq/XjkpX8iUBe7DBcO7bdv6RjbL+ZWI82repbEhXHDQfxe/HMOtRNOYBrcWKw+RwBSHGFXQXn1fbiCr5xr1XwZjJ4YwHGcvTj0V86GxVGePX65ksm7IONH7WT2f9fObDqodXN2U8u/9Qvav5rjnZHv0rPlZKzSK+V+dDezCi1w18/Rzm/Kox+nkKH/tmZPsXYhvfeR4z0/+yxvg82oeH4UM5yBhTT+b+YHwg3/23qBg+5Y2lnh2PsYrv2bg+E2FEfFW5WIWvsr4sX+Qur863x8fmMHM3KL1ZeeNb52r2nYnDsKlm8VXZGxqBiRM=
@@ -34,25 +34,25 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="48" template="../../../common/maps/obj/treasure.tx" x="237.667" y="177.583"/>
-  <object id="63" template="../../../common/maps/obj/gold.tx" x="322.666" y="47"/>
-  <object id="65" template="../../../common/maps/obj/enemy.tx" x="224.36" y="392.771">
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="237.667" y="177.583"/>
+  <object id="63" template="../../../../../../common/maps/obj/gold.tx" x="322.666" y="47"/>
+  <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="224.36" y="392.771">
    <properties>
     <property name="enemy" value="Centaur"/>
    </properties>
   </object>
-  <object id="66" template="../../../common/maps/obj/enemy.tx" x="220.861" y="281.033">
+  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="220.861" y="281.033">
    <properties>
     <property name="enemy" value="Satyr"/>
    </properties>
   </object>
-  <object id="68" template="../../../common/maps/obj/gold.tx" x="16.167" y="350.833"/>
-  <object id="69" template="../../../common/maps/obj/enemy.tx" x="476.796" y="309.503">
+  <object id="68" template="../../../../../../common/maps/obj/gold.tx" x="16.167" y="350.833"/>
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="476.796" y="309.503">
    <properties>
     <property name="enemy" value="Satyr"/>
    </properties>
   </object>
-  <object id="70" template="../../../common/maps/obj/door_up.tx" x="271.5" y="480">
+  <object id="70" template="../../../../../../common/maps/obj/door_up.tx" x="271.5" y="480">
    <properties>
     <property name="teleport" value="maps/map/grove_11.tmx"/>
     <property name="teleportObjectId" value="69"/>

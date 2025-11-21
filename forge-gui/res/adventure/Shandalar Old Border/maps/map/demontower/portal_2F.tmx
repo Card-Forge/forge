@@ -3,9 +3,9 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBjcQIZn1F56ADdO0sSpYT4hs8nRg009KExhmFj96OrIsRcZoMcrSB6GSTGHGvYSY+5Q9e9AxS8xZlAjPZNiNr70Ti17RwF9AXJZRgkAAMEHDNY=
@@ -35,28 +35,28 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="58" template="../../../common/maps/obj/door_right.tx" x="177.5" y="46.333">
+  <object id="58" template="../../../../../../common/maps/obj/door_right.tx" x="177.5" y="46.333">
    <properties>
     <property name="teleport" value="../common/maps/map/demontower/portal_2G.tmx"/>
     <property name="teleportObjectId" value="63"/>
    </properties>
   </object>
-  <object id="59" template="../../../common/maps/obj/door_down.tx" x="98" y="144">
+  <object id="59" template="../../../../../../common/maps/obj/door_down.tx" x="98" y="144">
    <properties>
     <property name="teleport" value="../common/maps/map/demontower/portal_2E.tmx"/>
     <property name="teleportObjectId" value="56"/>
    </properties>
   </object>
-  <object id="60" template="../../../common/maps/obj/gold.tx" x="331.263" y="134.829"/>
-  <object id="61" template="../../../common/maps/obj/enemy.tx" x="313.625" y="134.138">
+  <object id="60" template="../../../../../../common/maps/obj/gold.tx" x="331.263" y="134.829"/>
+  <object id="61" template="../../../../../../common/maps/obj/enemy.tx" x="313.625" y="134.138">
    <properties>
     <property name="enemy" value="Cosmic Horror"/>
     <property name="threatRange" type="int" value="50"/>
     <property name="waypoints" value="62,63,64,62,63"/>
    </properties>
   </object>
-  <object id="62" template="../../../common/maps/obj/waypoint.tx" x="313.28" y="104.396"/>
-  <object id="63" template="../../../common/maps/obj/waypoint.tx" x="314.663" y="184.975"/>
-  <object id="64" template="../../../common/maps/obj/waypoint.tx" x="265.209" y="233.046"/>
+  <object id="62" template="../../../../../../common/maps/obj/waypoint.tx" x="313.28" y="104.396"/>
+  <object id="63" template="../../../../../../common/maps/obj/waypoint.tx" x="314.663" y="184.975"/>
+  <object id="64" template="../../../../../../common/maps/obj/waypoint.tx" x="265.209" y="233.046"/>
  </objectgroup>
 </map>

@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="40" height="40">
   <data encoding="base64" compression="zlib">
    eJztwQENAAAAwqD3T20PBxQAAAAAAMCXARkAAAE=
@@ -29,7 +29,7 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="60" template="../../../common/maps/obj/door_up.tx" x="320.672" y="637.409">
+  <object id="60" template="../../../../../../common/maps/obj/door_up.tx" x="320.672" y="637.409">
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel_4/cave_23D7.tmx"/>
     <property name="teleportObjectId" value="61"/>

@@ -3,9 +3,9 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/dungeon.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJwL42RgCBvFo5jOOA4NYxPDpoaadpKCB8peSuweCHuHol+pEbcgQOv0S4p/aZFnR/HwwQDYMMBE
@@ -30,62 +30,62 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="217.032" y="271.777">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="217.032" y="271.777">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="51" template="../../../common/maps/obj/treasure.tx" x="213.75" y="27.75"/>
-  <object id="56" template="../../../common/maps/obj/enemy.tx" x="114.243" y="85.0347">
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="213.75" y="27.75"/>
+  <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="114.243" y="85.0347">
    <properties>
     <property name="enemy" value="Goblin"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="77,73"/>
    </properties>
   </object>
-  <object id="57" template="../../../common/maps/obj/enemy.tx" x="292.252" y="63.2047">
+  <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="292.252" y="63.2047">
    <properties>
     <property name="enemy" value="Goblin"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="71,72,76,67,76,72"/>
    </properties>
   </object>
-  <object id="58" template="../../../common/maps/obj/enemy.tx" x="217.794" y="66.2717">
+  <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="217.794" y="66.2717">
    <properties>
     <property name="enemy" value="Goblin Chief"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="59" template="../../../common/maps/obj/enemy.tx" x="189.665" y="101.698">
+  <object id="59" template="../../../../../../common/maps/obj/enemy.tx" x="189.665" y="101.698">
    <properties>
     <property name="enemy" value="Goblin "/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="67,68,67,76,73,76"/>
    </properties>
   </object>
-  <object id="62" template="../../../common/maps/obj/enemy.tx" x="331.577" y="161.127">
+  <object id="62" template="../../../../../../common/maps/obj/enemy.tx" x="331.577" y="161.127">
    <properties>
     <property name="enemy" value="Goblin "/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="70,71"/>
    </properties>
   </object>
-  <object id="63" template="../../../common/maps/obj/enemy.tx" x="252.705" y="162.45">
+  <object id="63" template="../../../../../../common/maps/obj/enemy.tx" x="252.705" y="162.45">
    <properties>
     <property name="enemy" value="Goblin "/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="68,77,68,69"/>
    </properties>
   </object>
-  <object id="64" template="../../../common/maps/obj/enemy.tx" x="111.633" y="145.511">
+  <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="111.633" y="145.511">
    <properties>
     <property name="enemy" value="Goblin "/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="74,73,75"/>
    </properties>
   </object>
-  <object id="65" template="../../../common/maps/obj/manashards.tx" x="106.339" y="44.4055"/>
-  <object id="66" template="../../../common/maps/obj/booster.tx" x="238.412" y="66.1088">
+  <object id="65" template="../../../../../../common/maps/obj/manashards.tx" x="106.339" y="44.4055"/>
+  <object id="66" template="../../../../../../common/maps/obj/booster.tx" x="238.412" y="66.1088">
    <properties>
     <property name="reward">[
   {
@@ -110,24 +110,24 @@
 </property>
    </properties>
   </object>
-  <object id="67" template="../../../common/maps/obj/waypoint.tx" x="230.472" y="130.16"/>
-  <object id="68" template="../../../common/maps/obj/waypoint.tx" x="255.88" y="196.858"/>
-  <object id="69" template="../../../common/maps/obj/waypoint.tx" x="298.228" y="213.003"/>
-  <object id="70" template="../../../common/maps/obj/waypoint.tx" x="328.401" y="214.591"/>
-  <object id="71" template="../../../common/maps/obj/waypoint.tx" x="334.224" y="76.6958"/>
-  <object id="72" template="../../../common/maps/obj/waypoint.tx" x="257.733" y="61.874"/>
-  <object id="73" template="../../../common/maps/obj/waypoint.tx" x="104.487" y="84.636"/>
-  <object id="74" template="../../../common/maps/obj/waypoint.tx" x="82.7832" y="200.563"/>
-  <object id="75" template="../../../common/maps/obj/waypoint.tx" x="170.126" y="171.184"/>
-  <object id="76" template="../../../common/maps/obj/waypoint.tx" x="164.303" y="83.3126"/>
-  <object id="77" template="../../../common/maps/obj/waypoint.tx" x="134.395" y="226.236"/>
-  <object id="78" template="../../../common/maps/obj/enemy.tx" x="193.682" y="40.9647">
+  <object id="67" template="../../../../../../common/maps/obj/waypoint.tx" x="230.472" y="130.16"/>
+  <object id="68" template="../../../../../../common/maps/obj/waypoint.tx" x="255.88" y="196.858"/>
+  <object id="69" template="../../../../../../common/maps/obj/waypoint.tx" x="298.228" y="213.003"/>
+  <object id="70" template="../../../../../../common/maps/obj/waypoint.tx" x="328.401" y="214.591"/>
+  <object id="71" template="../../../../../../common/maps/obj/waypoint.tx" x="334.224" y="76.6958"/>
+  <object id="72" template="../../../../../../common/maps/obj/waypoint.tx" x="257.733" y="61.874"/>
+  <object id="73" template="../../../../../../common/maps/obj/waypoint.tx" x="104.487" y="84.636"/>
+  <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="82.7832" y="200.563"/>
+  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="170.126" y="171.184"/>
+  <object id="76" template="../../../../../../common/maps/obj/waypoint.tx" x="164.303" y="83.3126"/>
+  <object id="77" template="../../../../../../common/maps/obj/waypoint.tx" x="134.395" y="226.236"/>
+  <object id="78" template="../../../../../../common/maps/obj/enemy.tx" x="193.682" y="40.9647">
    <properties>
     <property name="enemy" value="Goblin"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="79" template="../../../common/maps/obj/enemy.tx" x="238.676" y="38.5827">
+  <object id="79" template="../../../../../../common/maps/obj/enemy.tx" x="238.676" y="38.5827">
    <properties>
     <property name="enemy" value="Goblin"/>
     <property name="threatRange" type="int" value="30"/>

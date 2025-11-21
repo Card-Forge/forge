@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
    eJztwzEJAAAMA7Ae8++kHutjJJBeUlVVVVVV1UcH72FSfQ==
@@ -16,13 +16,13 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="60" template="../../../common/maps/obj/door_left.tx" x="542" y="322">
+  <object id="60" template="../../../../../../common/maps/obj/door_left.tx" x="542" y="322">
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel_4/cave_23I9.tmx"/>
     <property name="teleportObjectId" value="59"/>
    </properties>
   </object>
-  <object id="61" template="../../../common/maps/obj/door_down.tx" x="319.333" y="19.3333">
+  <object id="61" template="../../../../../../common/maps/obj/door_down.tx" x="319.333" y="19.3333">
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel_4/cave_23H8.tmx"/>
     <property name="teleportObjectId" value="62"/>

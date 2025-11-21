@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="40" height="30">
   <data encoding="base64" compression="zlib">
    eJzVl9ENgzAMRPmtRDdgHpbopLQdrvQjUhTlbN/FFHpSfogVv5iLA+ttmtY/Gq3QXEauZR5js8TuDcVGGY+UlefL5zEerW3P/9zHa8YxFuMVxPB57Oz+yjtcxPq1eZT5eq7mqNl6o437BV9hVIbqwR4DivNqVSuLT5HnuV681cvP1pX5mLuuKNMD3hoZfAqnsr6aj41l9m+dYUVv4Nd27cc9vqbVY1g2rx4MV82XdX4Rn8JV2Dw+tp9G1PMBemeRMxy9lyJciAP5yuPz7mwrj+XFSLzHh2ql/sOwfJHaIVnfGEgoRuVjNNI3Ve+drRG+I/oOy2d5MIMv4/8o2qsi3u89Q72C7RFKP0Eso+MD6IymQg==
@@ -34,79 +34,79 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="48" template="../../../common/maps/obj/treasure.tx" x="527.167" y="104.583"/>
-  <object id="63" template="../../../common/maps/obj/gold.tx" x="528.166" y="116"/>
-  <object id="65" template="../../../common/maps/obj/enemy.tx" x="416.084" y="93.1663">
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="527.167" y="104.583"/>
+  <object id="63" template="../../../../../../common/maps/obj/gold.tx" x="528.166" y="116"/>
+  <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="416.084" y="93.1663">
    <properties>
     <property name="enemy" value="Faerie"/>
    </properties>
   </object>
-  <object id="68" template="../../../common/maps/obj/gold.tx" x="527.667" y="87.333"/>
-  <object id="70" template="../../../common/maps/obj/door_down.tx" x="328" y="353.333">
+  <object id="68" template="../../../../../../common/maps/obj/gold.tx" x="527.667" y="87.333"/>
+  <object id="70" template="../../../../../../common/maps/obj/door_down.tx" x="328" y="353.333">
    <properties>
     <property name="teleport" value="maps/map/grove_12C.tmx"/>
     <property name="teleportObjectId" value="81"/>
    </properties>
   </object>
-  <object id="71" template="../../../common/maps/obj/door_down.tx" x="520" y="368">
+  <object id="71" template="../../../../../../common/maps/obj/door_down.tx" x="520" y="368">
    <properties>
     <property name="teleport" value="maps/map/grove_12C.tmx"/>
     <property name="teleportObjectId" value="81"/>
    </properties>
   </object>
-  <object id="72" template="../../../common/maps/obj/door_down.tx" x="208.667" y="256">
+  <object id="72" template="../../../../../../common/maps/obj/door_down.tx" x="208.667" y="256">
    <properties>
     <property name="teleport" value="maps/map/grove_12C.tmx"/>
     <property name="teleportObjectId" value="81"/>
    </properties>
   </object>
-  <object id="73" template="../../../common/maps/obj/door_down.tx" x="279.333" y="304.667">
+  <object id="73" template="../../../../../../common/maps/obj/door_down.tx" x="279.333" y="304.667">
    <properties>
     <property name="teleport" value="maps/map/grove_12C.tmx"/>
     <property name="teleportObjectId" value="81"/>
    </properties>
   </object>
-  <object id="74" template="../../../common/maps/obj/door_down.tx" x="56" y="143.333">
+  <object id="74" template="../../../../../../common/maps/obj/door_down.tx" x="56" y="143.333">
    <properties>
     <property name="teleport" value="maps/map/grove_12C.tmx"/>
     <property name="teleportObjectId" value="81"/>
    </properties>
   </object>
-  <object id="75" template="../../../common/maps/obj/door_down.tx" x="296.667" y="145">
+  <object id="75" template="../../../../../../common/maps/obj/door_down.tx" x="296.667" y="145">
    <properties>
     <property name="teleport" value="maps/map/grove_12C.tmx"/>
     <property name="teleportObjectId" value="81"/>
    </properties>
   </object>
-  <object id="76" template="../../../common/maps/obj/door_down.tx" x="472.333" y="256.667">
+  <object id="76" template="../../../../../../common/maps/obj/door_down.tx" x="472.333" y="256.667">
    <properties>
     <property name="teleport" value="maps/map/grove_12C.tmx"/>
     <property name="teleportObjectId" value="81"/>
    </properties>
   </object>
-  <object id="77" template="../../../common/maps/obj/door_down.tx" x="160" y="191.333">
+  <object id="77" template="../../../../../../common/maps/obj/door_down.tx" x="160" y="191.333">
    <properties>
     <property name="teleport" value="maps/map/grove_12C.tmx"/>
     <property name="teleportObjectId" value="81"/>
    </properties>
   </object>
-  <object id="78" template="../../../common/maps/obj/enemy.tx" x="272" y="422.667">
+  <object id="78" template="../../../../../../common/maps/obj/enemy.tx" x="272" y="422.667">
    <properties>
     <property name="enemy" value="Faerie"/>
    </properties>
   </object>
-  <object id="79" template="../../../common/maps/obj/enemy.tx" x="280.667" y="215.333">
+  <object id="79" template="../../../../../../common/maps/obj/enemy.tx" x="280.667" y="215.333">
    <properties>
     <property name="enemy" value="Faerie"/>
    </properties>
   </object>
-  <object id="80" template="../../../common/maps/obj/door_up.tx" x="273" y="480.5">
+  <object id="80" template="../../../../../../common/maps/obj/door_up.tx" x="273" y="480.5">
    <properties>
     <property name="teleport" value="maps/map/grove_12B.tmx"/>
     <property name="teleportObjectId" value="73"/>
    </properties>
   </object>
-  <object id="81" template="../../../common/maps/obj/door_down.tx" x="89.2488" y="404.978">
+  <object id="81" template="../../../../../../common/maps/obj/door_down.tx" x="89.2488" y="404.978">
    <properties>
     <property name="teleport" value="maps/map/grove_12C.tmx"/>
     <property name="teleportObjectId" value="80"/>

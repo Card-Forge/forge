@@ -6,9 +6,9 @@
  <properties>
   <property name="preventEscape" type="bool" value="true"/>
  </properties>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
@@ -38,14 +38,14 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../obj/entry_up.tx" x="196" y="272" width="40" height="16"/>
-  <object id="60" template="../../obj/entry_down.tx" x="192" y="34.25" width="32" height="16">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="196" y="272" width="40" height="16"/>
+  <object id="60" template="../../../../../../common/maps/obj/entry_down.tx" x="192" y="34.25" width="32" height="16">
    <properties>
     <property name="teleport" value="./dig_site_1.tmx"/>
     <property name="teleportObjectId" value="38"/>
    </properties>
   </object>
-  <object id="61" template="../../obj/enemy.tx" x="408" y="209">
+  <object id="61" template="../../../../../../common/maps/obj/enemy.tx" x="408" y="209">
    <properties>
     <property name="dialog">[
 {
@@ -57,17 +57,17 @@
     <property name="enemy" value="Archaeologist"/>
    </properties>
   </object>
-  <object id="62" template="../../obj/collision.tx" x="-16" y="-16" width="16" height="304"/>
-  <object id="63" template="../../obj/collision.tx" x="0" y="-16" width="480" height="16"/>
-  <object id="64" template="../../obj/collision.tx" x="0" y="272" width="480" height="16"/>
-  <object id="65" template="../../obj/collision.tx" x="480" y="-16" width="16" height="304"/>
-  <object id="66" template="../../obj/enemy.tx" x="200" y="57">
+  <object id="62" template="../../../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="16" height="304"/>
+  <object id="63" template="../../../../../../common/maps/obj/collision.tx" x="0" y="-16" width="480" height="16"/>
+  <object id="64" template="../../../../../../common/maps/obj/collision.tx" x="0" y="272" width="480" height="16"/>
+  <object id="65" template="../../../../../../common/maps/obj/collision.tx" x="480" y="-16" width="16" height="304"/>
+  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="200" y="57">
    <properties>
     <property name="enemy" value="Construct"/>
     <property name="threatRange" type="int" value="50"/>
     <property name="waypoints" value="67"/>
    </properties>
   </object>
-  <object id="67" template="../../obj/waypoint.tx" name="67" x="200" y="56"/>
+  <object id="67" template="../../../../../../common/maps/obj/waypoint.tx" name="67" x="200" y="56"/>
  </objectgroup>
 </map>

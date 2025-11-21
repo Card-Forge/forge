@@ -3,9 +3,9 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJyL4GZgiBjFo3gUj+JRPIpH8YjAAH23xTs=
@@ -30,8 +30,8 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../obj/entry_up.tx" x="208" y="272"/>
-  <object id="41" template="../../obj/shop.tx" x="129" y="146">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="208" y="272"/>
+  <object id="41" template="../../../../../../common/maps/obj/shop.tx" x="129" y="146">
    <properties>
     <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Black"/>
@@ -39,7 +39,7 @@
     <property name="uncommonShopList" value="Dimir,Rakdos,Orzhov,Golgari,Dimir,Rakdos,Orzhov,Golgari,Land"/>
    </properties>
   </object>
-  <object id="42" template="../../obj/shop.tx" x="177" y="145">
+  <object id="42" template="../../../../../../common/maps/obj/shop.tx" x="177" y="145">
    <properties>
     <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Black"/>
@@ -47,7 +47,7 @@
     <property name="uncommonShopList" value="Dimir,Rakdos,Orzhov,Golgari,Dimir,Rakdos,Orzhov,Golgari,Land"/>
    </properties>
   </object>
-  <object id="43" template="../../obj/shop.tx" x="321" y="129">
+  <object id="43" template="../../../../../../common/maps/obj/shop.tx" x="321" y="129">
    <properties>
     <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Black"/>
@@ -55,7 +55,7 @@
     <property name="uncommonShopList" value="Dimir,Rakdos,Orzhov,Golgari,Dimir,Rakdos,Orzhov,Golgari,Land"/>
    </properties>
   </object>
-  <object id="44" template="../../obj/shop.tx" x="114" y="194">
+  <object id="44" template="../../../../../../common/maps/obj/shop.tx" x="114" y="194">
    <properties>
     <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Black"/>
@@ -63,7 +63,7 @@
     <property name="uncommonShopList" value="Dimir,Rakdos,Orzhov,Golgari,Dimir,Rakdos,Orzhov,Golgari,Land"/>
    </properties>
   </object>
-  <object id="45" template="../../obj/shop.tx" x="273" y="130">
+  <object id="45" template="../../../../../../common/maps/obj/shop.tx" x="273" y="130">
    <properties>
     <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Black"/>
@@ -71,7 +71,7 @@
     <property name="uncommonShopList" value="Dimir,Rakdos,Orzhov,Golgari,Dimir,Rakdos,Orzhov,Golgari,Land"/>
    </properties>
   </object>
-  <object id="46" template="../../obj/shop.tx" x="337" y="177">
+  <object id="46" template="../../../../../../common/maps/obj/shop.tx" x="337" y="177">
    <properties>
     <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Black"/>
@@ -79,20 +79,20 @@
     <property name="uncommonShopList" value="Dimir,Rakdos,Orzhov,Golgari,Dimir,Rakdos,Orzhov,Golgari,Land"/>
    </properties>
   </object>
-  <object id="47" template="../../obj/inn.tx" x="230" y="98"/>
-  <object id="48" template="../../obj/shop.tx" x="336" y="80">
+  <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="230" y="98"/>
+  <object id="48" template="../../../../../../common/maps/obj/shop.tx" x="336" y="80">
    <properties>
     <property name="commonShopList" value="Swamp"/>
     <property name="noRestock" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="49" template="../../obj/quest.tx" x="95" y="114" width="36" height="16">
+  <object id="49" template="../../../../../../common/maps/obj/quest.tx" x="95" y="114" width="36" height="16">
    <properties>
     <property name="questtype" value="swamp_town_identity"/>
    </properties>
   </object>
-  <object id="50" template="../../obj/shardtrader.tx" x="288" y="82"/>
-  <object id="51" template="../../obj/shop.tx" x="201" y="88">
+  <object id="50" template="../../../../../../common/maps/obj/shardtrader.tx" x="288" y="82"/>
+  <object id="51" template="../../../../../../common/maps/obj/shop.tx" x="201" y="88">
    <properties>
     <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Black"/>
@@ -101,7 +101,7 @@
     <property name="uncommonShopList" value="Dimir,Rakdos,Orzhov,Golgari,Dimir,Rakdos,Orzhov,Golgari,Land"/>
    </properties>
   </object>
-  <object id="53" template="../../obj/RotatingShop.tx" type="RotatingShop" x="167" y="88">
+  <object id="53" template="../../../../../../common/maps/obj/RotatingShop.tx" type="RotatingShop" x="167" y="88">
    <properties>
     <property name="rotation" value="Black1,Black2,Black3,Black4,Black5,Black6"/>
     <property name="signXOffset" type="float" value="4"/>

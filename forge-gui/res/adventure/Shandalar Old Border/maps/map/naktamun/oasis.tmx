@@ -4,7 +4,7 @@
   <image source="../../../../Amonkhet/world/tilesets/autotiles.png" width="192" height="576"/>
  </tileset>
  <tileset firstgid="433" name="large_buildings" tilewidth="16" tileheight="16" tilecount="36" columns="6">
-  <image source="../../../common/maps/tileset/large_buildings.png" width="96" height="96"/>
+  <image source="../../../../../../common/maps/tileset/large_buildings.png" width="96" height="96"/>
   <tile id="0">
    <objectgroup draworder="index" id="2">
     <object id="1" x="1" y="14" width="15" height="2"/>
@@ -159,7 +159,7 @@
   </tile>
  </tileset>
  <tileset firstgid="469" name="main" tilewidth="16" tileheight="16" tilecount="10112" columns="158">
-  <image source="../../../common/maps/tileset/main.png" width="2528" height="1024"/>
+  <image source="../../../../../../common/maps/tileset/main.png" width="2528" height="1024"/>
   <tile id="366">
    <objectgroup draworder="index" id="2">
     <object id="2" x="14" y="13" width="2" height="1"/>
@@ -517,8 +517,8 @@
    </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="10581" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="12373" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10581" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="12373" source="../../../../../../common/maps/tileset/main.tsx"/>
  <layer id="1" name="Ground" width="16" height="16">
   <data encoding="csv">
 74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,
@@ -646,15 +646,15 @@
 </data>
  </layer>
  <objectgroup id="7" name="Invisible">
-  <object id="4" template="../../../common/maps/obj/exit.tx" name="Hekma" x="8" y="0" width="1016" height="1" visible="0"/>
-  <object id="7" template="../../../common/maps/obj/exit.tx" name="Hekma" x="0" y="0" width="4" height="1016" visible="0"/>
-  <object id="47" template="../../../common/maps/obj/entry_up.tx" x="120" y="256"/>
-  <object id="48" template="../../../common/maps/obj/exit.tx" x="1" y="240" width="254" height="16"/>
-  <object id="49" template="../../../common/maps/obj/exit.tx" x="240" y="144" width="16" height="112"/>
-  <object id="50" template="../../../common/maps/obj/exit.tx" x="0" y="129" width="16" height="127"/>
+  <object id="4" template="../../../../../../common/maps/obj/exit.tx" name="Hekma" x="8" y="0" width="1016" height="1" visible="0"/>
+  <object id="7" template="../../../../../../common/maps/obj/exit.tx" name="Hekma" x="0" y="0" width="4" height="1016" visible="0"/>
+  <object id="47" template="../../../../../../common/maps/obj/entry_up.tx" x="120" y="256"/>
+  <object id="48" template="../../../../../../common/maps/obj/exit.tx" x="1" y="240" width="254" height="16"/>
+  <object id="49" template="../../../../../../common/maps/obj/exit.tx" x="240" y="144" width="16" height="112"/>
+  <object id="50" template="../../../../../../common/maps/obj/exit.tx" x="0" y="129" width="16" height="127"/>
  </objectgroup>
  <objectgroup id="15" name="Enemies">
-  <object id="51" template="../../../common/maps/obj/enemy.tx" x="64" y="208">
+  <object id="51" template="../../../../../../common/maps/obj/enemy.tx" x="64" y="208">
    <properties>
     <property name="enemy" value="Rogue"/>
    </properties>

@@ -3,9 +3,9 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
  <layer id="2" name="Grass" width="70" height="50">
   <data encoding="base64" compression="zlib">
    eJzt1UsKwjAUheGAtLZxA4L42IS4Cdfh0JlOBadOXI1bEFehgjgWV2AvMRg1qH2oVf7AR1JaWnK4uR3HSg0KMEysIqX2PaXWybw5r9NYBMa8es+OQ5j+vVkUkUlFm1wCbTLpJPM4zp5LPbi+PoaXtejX3p9LU+fPRd4j2ciYxiYTMUmZjbt3n1n1c7n46kdGw8lLsov09VnxyVMrZeX2CbuWbCQTWw/D+Hk2/8R3NkJ9/5zbR7J8R3rx9kcy9fVPy/d81kx+zeBm/5KNzUeupWe0H2QhZ2pZQA3IcOeys/8X371IP66tPPmUnfTe3bkeWvrSH17JxPbnUdf49l4AAAAAAAAAAAAAAAAAAAAAlNMJp7PLsA==
@@ -30,20 +30,20 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="541.667" y="797.833" width="67.3333" height="16">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="541.667" y="797.833" width="67.3333" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="50" template="../../../common/maps/obj/enemy.tx" x="312.999" y="241">
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="312.999" y="241">
    <properties>
     <property name="enemy" value="Raptor"/>
     <property name="threatRange" type="int" value="60"/>
     <property name="waypoints" value="73,77,116,77"/>
    </properties>
   </object>
-  <object id="52" template="../../../common/maps/obj/gold.tx" x="547.583" y="226.75"/>
-  <object id="54" template="../../../common/maps/obj/enemy.tx" x="551.096" y="267.397">
+  <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="547.583" y="226.75"/>
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="551.096" y="267.397">
    <properties>
     <property name="displayNameOverride" value="Colossal Dreadmaw"/>
     <property name="enemy" value="Dinosaur Elite"/>
@@ -51,30 +51,30 @@
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="64" template="../../../common/maps/obj/enemy.tx" x="987.242" y="280.756">
+  <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="987.242" y="280.756">
    <properties>
     <property name="enemy" value="Triceratops"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="65" template="../../../common/maps/obj/enemy.tx" x="224.47" y="167.139">
+  <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="224.47" y="167.139">
    <properties>
     <property name="enemy" value="Raptor"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="67" template="../../../common/maps/obj/waypoint.tx" x="957.506" y="211.33"/>
-  <object id="68" template="../../../common/maps/obj/waypoint.tx" x="547.669" y="322.864"/>
-  <object id="73" template="../../../common/maps/obj/waypoint.tx" x="367.753" y="178.8"/>
-  <object id="75" template="../../../common/maps/obj/waypoint.tx" x="506.606" y="502.553"/>
-  <object id="77" template="../../../common/maps/obj/waypoint.tx" x="279.068" y="334.98"/>
-  <object id="78" template="../../../common/maps/obj/waypoint.tx" x="618.632" y="462.388"/>
-  <object id="79" template="../../../common/maps/obj/waypoint.tx" x="800.641" y="398.152"/>
-  <object id="81" template="../../../common/maps/obj/gold.tx" x="730" y="189.333"/>
-  <object id="82" template="../../../common/maps/obj/gold.tx" x="435.333" y="85.3333"/>
-  <object id="83" template="../../../common/maps/obj/collision.tx" x="-3.385" y="-16" width="1125.44" height="16"/>
-  <object id="84" template="../../../common/maps/obj/collision.tx" x="-2.05333" y="798.667" width="1125.44" height="16"/>
-  <object id="85" template="../../../common/maps/obj/treasure.tx" x="466" y="97.3333">
+  <object id="67" template="../../../../../../common/maps/obj/waypoint.tx" x="957.506" y="211.33"/>
+  <object id="68" template="../../../../../../common/maps/obj/waypoint.tx" x="547.669" y="322.864"/>
+  <object id="73" template="../../../../../../common/maps/obj/waypoint.tx" x="367.753" y="178.8"/>
+  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="506.606" y="502.553"/>
+  <object id="77" template="../../../../../../common/maps/obj/waypoint.tx" x="279.068" y="334.98"/>
+  <object id="78" template="../../../../../../common/maps/obj/waypoint.tx" x="618.632" y="462.388"/>
+  <object id="79" template="../../../../../../common/maps/obj/waypoint.tx" x="800.641" y="398.152"/>
+  <object id="81" template="../../../../../../common/maps/obj/gold.tx" x="730" y="189.333"/>
+  <object id="82" template="../../../../../../common/maps/obj/gold.tx" x="435.333" y="85.3333"/>
+  <object id="83" template="../../../../../../common/maps/obj/collision.tx" x="-3.385" y="-16" width="1125.44" height="16"/>
+  <object id="84" template="../../../../../../common/maps/obj/collision.tx" x="-2.05333" y="798.667" width="1125.44" height="16"/>
+  <object id="85" template="../../../../../../common/maps/obj/treasure.tx" x="466" y="97.3333">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -94,7 +94,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="86" template="../../../common/maps/obj/treasure.tx" x="550.145" y="249.437">
+  <object id="86" template="../../../../../../common/maps/obj/treasure.tx" x="550.145" y="249.437">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -114,7 +114,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="87" template="../../../common/maps/obj/treasure.tx" x="916.667" y="158.667">
+  <object id="87" template="../../../../../../common/maps/obj/treasure.tx" x="916.667" y="158.667">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -134,21 +134,21 @@
 }]</property>
    </properties>
   </object>
-  <object id="88" template="../../../common/maps/obj/enemy.tx" x="135.334" y="598.666">
+  <object id="88" template="../../../../../../common/maps/obj/enemy.tx" x="135.334" y="598.666">
    <properties>
     <property name="enemy" value="Stegosaurus"/>
     <property name="threatRange" type="int" value="50"/>
     <property name="waypoints" value="104,108,104,105"/>
    </properties>
   </object>
-  <object id="89" template="../../../common/maps/obj/enemy.tx" x="975.334" y="675.334">
+  <object id="89" template="../../../../../../common/maps/obj/enemy.tx" x="975.334" y="675.334">
    <properties>
     <property name="enemy" value="Stegosaurus"/>
     <property name="speedModifier" type="float" value="5"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="90" template="../../../common/maps/obj/enemy.tx" x="573.334" y="390.667">
+  <object id="90" template="../../../../../../common/maps/obj/enemy.tx" x="573.334" y="390.667">
    <properties>
     <property name="enemy" value="Dinosaur"/>
     <property name="speedModifier" type="float" value="4"/>
@@ -156,15 +156,15 @@
     <property name="waypoints" value="68,78,120,75,120,121,120,75,120,78"/>
    </properties>
   </object>
-  <object id="91" template="../../../common/maps/obj/enemy.tx" x="430.667" y="118.666">
+  <object id="91" template="../../../../../../common/maps/obj/enemy.tx" x="430.667" y="118.666">
    <properties>
     <property name="displayNameOverride" value="Colossal Dreadmaw"/>
     <property name="enemy" value="Dinosaur Elite"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="93" template="../../../common/maps/obj/waypoint.tx" x="723.333" y="568"/>
-  <object id="94" template="../../../common/maps/obj/enemy.tx" x="318.667" y="528.666">
+  <object id="93" template="../../../../../../common/maps/obj/waypoint.tx" x="723.333" y="568"/>
+  <object id="94" template="../../../../../../common/maps/obj/enemy.tx" x="318.667" y="528.666">
    <properties>
     <property name="enemy" value="Dinosaur"/>
     <property name="speedModifier" type="float" value="4"/>
@@ -172,24 +172,24 @@
     <property name="waypoints" value="98,125,96,125"/>
    </properties>
   </object>
-  <object id="95" template="../../../common/maps/obj/waypoint.tx" x="368" y="649.333"/>
-  <object id="96" template="../../../common/maps/obj/waypoint.tx" x="341.333" y="602.667"/>
-  <object id="97" template="../../../common/maps/obj/waypoint.tx" x="393.333" y="573.333"/>
-  <object id="98" template="../../../common/maps/obj/waypoint.tx" x="469.333" y="529.333"/>
-  <object id="100" template="../../../common/maps/obj/enemy.tx" x="478.666" y="578.666">
+  <object id="95" template="../../../../../../common/maps/obj/waypoint.tx" x="368" y="649.333"/>
+  <object id="96" template="../../../../../../common/maps/obj/waypoint.tx" x="341.333" y="602.667"/>
+  <object id="97" template="../../../../../../common/maps/obj/waypoint.tx" x="393.333" y="573.333"/>
+  <object id="98" template="../../../../../../common/maps/obj/waypoint.tx" x="469.333" y="529.333"/>
+  <object id="100" template="../../../../../../common/maps/obj/enemy.tx" x="478.666" y="578.666">
    <properties>
     <property name="enemy" value="Triceratops"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="102" template="../../../common/maps/obj/collision.tx" x="1120" y="-15.3585" width="16" height="827.384"/>
-  <object id="103" template="../../../common/maps/obj/collision.tx" x="-16.6667" y="-17.692" width="16" height="827.384"/>
-  <object id="104" template="../../../common/maps/obj/waypoint.tx" x="179.333" y="688.667"/>
-  <object id="105" template="../../../common/maps/obj/waypoint.tx" x="74" y="444.667"/>
-  <object id="106" template="../../../common/maps/obj/gold.tx" x="83.3333" y="258.667"/>
-  <object id="107" template="../../../common/maps/obj/gold.tx" x="1056" y="498"/>
-  <object id="108" template="../../../common/maps/obj/waypoint.tx" x="308.667" y="796"/>
-  <object id="109" template="../../../common/maps/obj/enemy.tx" x="786" y="241.333">
+  <object id="102" template="../../../../../../common/maps/obj/collision.tx" x="1120" y="-15.3585" width="16" height="827.384"/>
+  <object id="103" template="../../../../../../common/maps/obj/collision.tx" x="-16.6667" y="-17.692" width="16" height="827.384"/>
+  <object id="104" template="../../../../../../common/maps/obj/waypoint.tx" x="179.333" y="688.667"/>
+  <object id="105" template="../../../../../../common/maps/obj/waypoint.tx" x="74" y="444.667"/>
+  <object id="106" template="../../../../../../common/maps/obj/gold.tx" x="83.3333" y="258.667"/>
+  <object id="107" template="../../../../../../common/maps/obj/gold.tx" x="1056" y="498"/>
+  <object id="108" template="../../../../../../common/maps/obj/waypoint.tx" x="308.667" y="796"/>
+  <object id="109" template="../../../../../../common/maps/obj/enemy.tx" x="786" y="241.333">
    <properties>
     <property name="displayNameOverride" value="Colossal Dreadmaw"/>
     <property name="enemy" value="Dinosaur Elite"/>
@@ -197,7 +197,7 @@
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="110" template="../../../common/maps/obj/treasure.tx" x="761.333" y="195.333">
+  <object id="110" template="../../../../../../common/maps/obj/treasure.tx" x="761.333" y="195.333">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -217,21 +217,21 @@
 }]</property>
    </properties>
   </object>
-  <object id="111" template="../../../common/maps/obj/manashards.tx" x="863.333" y="593.333"/>
-  <object id="112" template="../../../common/maps/obj/manashards.tx" x="143.333" y="386.667"/>
-  <object id="113" template="../../../common/maps/obj/manashards.tx" x="442.667" y="610"/>
-  <object id="114" template="../../../common/maps/obj/manashards.tx" x="718" y="438.667"/>
-  <object id="115" template="../../../common/maps/obj/gold.tx" x="150" y="254"/>
-  <object id="116" template="../../../common/maps/obj/waypoint.tx" x="178.667" y="390"/>
-  <object id="117" template="../../../common/maps/obj/enemy.tx" x="214" y="460.667">
+  <object id="111" template="../../../../../../common/maps/obj/manashards.tx" x="863.333" y="593.333"/>
+  <object id="112" template="../../../../../../common/maps/obj/manashards.tx" x="143.333" y="386.667"/>
+  <object id="113" template="../../../../../../common/maps/obj/manashards.tx" x="442.667" y="610"/>
+  <object id="114" template="../../../../../../common/maps/obj/manashards.tx" x="718" y="438.667"/>
+  <object id="115" template="../../../../../../common/maps/obj/gold.tx" x="150" y="254"/>
+  <object id="116" template="../../../../../../common/maps/obj/waypoint.tx" x="178.667" y="390"/>
+  <object id="117" template="../../../../../../common/maps/obj/enemy.tx" x="214" y="460.667">
    <properties>
     <property name="enemy" value="Raptor"/>
     <property name="threatRange" type="int" value="60"/>
     <property name="waypoints" value="116,118,96,95,96,118,116"/>
    </properties>
   </object>
-  <object id="118" template="../../../common/maps/obj/waypoint.tx" x="224" y="510.667"/>
-  <object id="119" template="../../../common/maps/obj/enemy.tx" x="766.667" y="485.333">
+  <object id="118" template="../../../../../../common/maps/obj/waypoint.tx" x="224" y="510.667"/>
+  <object id="119" template="../../../../../../common/maps/obj/enemy.tx" x="766.667" y="485.333">
    <properties>
     <property name="enemy" value="Dinosaur"/>
     <property name="speedModifier" type="float" value="4"/>
@@ -239,9 +239,9 @@
     <property name="waypoints" value="93,126,79,126"/>
    </properties>
   </object>
-  <object id="120" template="../../../common/maps/obj/waypoint.tx" x="577.333" y="550"/>
-  <object id="121" template="../../../common/maps/obj/waypoint.tx" x="584.667" y="697.333"/>
-  <object id="125" template="../../../common/maps/obj/waypoint.tx" x="256" y="537.333"/>
-  <object id="126" template="../../../common/maps/obj/waypoint.tx" x="800" y="467.333"/>
+  <object id="120" template="../../../../../../common/maps/obj/waypoint.tx" x="577.333" y="550"/>
+  <object id="121" template="../../../../../../common/maps/obj/waypoint.tx" x="584.667" y="697.333"/>
+  <object id="125" template="../../../../../../common/maps/obj/waypoint.tx" x="256" y="537.333"/>
+  <object id="126" template="../../../../../../common/maps/obj/waypoint.tx" x="800" y="467.333"/>
  </objectgroup>
 </map>

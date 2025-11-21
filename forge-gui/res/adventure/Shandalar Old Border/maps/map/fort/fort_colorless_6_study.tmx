@@ -3,10 +3,10 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
- <tileset firstgid="28289" source="../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
  <layer id="6" name="Collision" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJztlksKwlAMRUsnUpw4EdyAW+gSukTHLlWkhIZwk9z3Qwc9cJHS+k7T5FWn6cRjW/KM8jH34TFfjzA8L0fssU0G63zfufT2fvHWbKlX+oF6g2qKamW8ApqLqH8lvZaguYu8Xk062fkab5bXkofxIjJX6VxZF+ONfKXuiKjWWm9Ur16/N7q/6LN0P7LOHvPMhvkd+xdvC5nXPm/9nR5ejfeusF5Ue8kzbr1nvYdlvVFOu7bd0yN8yG3fI7/yIncr+r+fTc11NcjsP2778Tr7e3MEyHvC8QFjWGeX
@@ -36,71 +36,71 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="218" y="436.917" width="48" height="47">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="218" y="436.917" width="48" height="47">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="48" template="../../../common/maps/obj/treasure.tx" x="344.75" y="95.5"/>
-  <object id="51" template="../../../common/maps/obj/treasure.tx" x="122.333" y="111.666"/>
-  <object id="52" template="../../../common/maps/obj/gold.tx" x="270.5" y="112.25"/>
-  <object id="53" template="../../../common/maps/obj/enemy.tx" x="335.5" y="143.25">
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="344.75" y="95.5"/>
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="122.333" y="111.666"/>
+  <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="270.5" y="112.25"/>
+  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="335.5" y="143.25">
    <properties>
     <property name="enemy" value="Shade"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="54" template="../../../common/maps/obj/enemy.tx" x="276.084" y="266.166">
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="276.084" y="266.166">
    <properties>
     <property name="enemy" value="Apprentice Black Wizard"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="55" template="../../../common/maps/obj/enemy.tx" x="161.833" y="269.25">
+  <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="161.833" y="269.25">
    <properties>
     <property name="enemy" value="Apprentice Black Wizard"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="56" template="../../../common/maps/obj/enemy.tx" x="192" y="332.25">
+  <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="192" y="332.25">
    <properties>
     <property name="enemy" value="Apprentice Black Wizard"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="57" template="../../../common/maps/obj/enemy.tx" x="207.5" y="150">
+  <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="207.5" y="150">
    <properties>
     <property name="enemy" value="Shade"/>
     <property name="threatRange" type="int" value="50"/>
     <property name="waypoints" value="60,63,64,62,61"/>
    </properties>
   </object>
-  <object id="59" template="../../../common/maps/obj/enemy.tx" x="227" y="277.75">
+  <object id="59" template="../../../../../../common/maps/obj/enemy.tx" x="227" y="277.75">
    <properties>
     <property name="enemy" value="Death Knight"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="67,68"/>
    </properties>
   </object>
-  <object id="60" template="../../../common/maps/obj/waypoint.tx" x="270.5" y="144.25"/>
-  <object id="61" template="../../../common/maps/obj/waypoint.tx" x="176.5" y="150.25"/>
-  <object id="62" template="../../../common/maps/obj/waypoint.tx" x="176.25" y="110"/>
-  <object id="63" template="../../../common/maps/obj/waypoint.tx" x="269.75" y="111.25"/>
-  <object id="64" template="../../../common/maps/obj/waypoint.tx" x="120.75" y="111.75"/>
-  <object id="65" template="../../../common/maps/obj/waypoint.tx" x="113" y="217"/>
-  <object id="66" template="../../../common/maps/obj/waypoint.tx" x="362.25" y="217.25"/>
-  <object id="67" template="../../../common/maps/obj/waypoint.tx" x="360" y="282.5"/>
-  <object id="68" template="../../../common/maps/obj/waypoint.tx" x="108.5" y="282.5"/>
-  <object id="69" template="../../../common/maps/obj/enemy.tx" x="135.5" y="216.25">
+  <object id="60" template="../../../../../../common/maps/obj/waypoint.tx" x="270.5" y="144.25"/>
+  <object id="61" template="../../../../../../common/maps/obj/waypoint.tx" x="176.5" y="150.25"/>
+  <object id="62" template="../../../../../../common/maps/obj/waypoint.tx" x="176.25" y="110"/>
+  <object id="63" template="../../../../../../common/maps/obj/waypoint.tx" x="269.75" y="111.25"/>
+  <object id="64" template="../../../../../../common/maps/obj/waypoint.tx" x="120.75" y="111.75"/>
+  <object id="65" template="../../../../../../common/maps/obj/waypoint.tx" x="113" y="217"/>
+  <object id="66" template="../../../../../../common/maps/obj/waypoint.tx" x="362.25" y="217.25"/>
+  <object id="67" template="../../../../../../common/maps/obj/waypoint.tx" x="360" y="282.5"/>
+  <object id="68" template="../../../../../../common/maps/obj/waypoint.tx" x="108.5" y="282.5"/>
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="135.5" y="216.25">
    <properties>
     <property name="enemy" value="Death Knight"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="66,65"/>
    </properties>
   </object>
-  <object id="71" template="../../../common/maps/obj/collision.tx" x="130" y="296.628" width="236.8" height="23.144"/>
-  <object id="72" template="../../../common/maps/obj/collision.tx" x="128.8" y="232.228" width="236.8" height="13.144"/>
-  <object id="74" template="../../../common/maps/obj/booster.tx" x="352.8" y="245.6">
+  <object id="71" template="../../../../../../common/maps/obj/collision.tx" x="130" y="296.628" width="236.8" height="23.144"/>
+  <object id="72" template="../../../../../../common/maps/obj/collision.tx" x="128.8" y="232.228" width="236.8" height="13.144"/>
+  <object id="74" template="../../../../../../common/maps/obj/booster.tx" x="352.8" y="245.6">
    <properties>
     <property name="reward">[
 	{

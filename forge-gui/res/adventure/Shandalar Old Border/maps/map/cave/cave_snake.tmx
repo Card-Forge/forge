@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="cave_1..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="8" name="Lowest" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJxjYBgFgxFcZRt89oLkYJjW9iLbhY6paSet7SDV7lEwCkbBKBgFo2AUjIJRMAroCQADehY/
@@ -39,19 +39,19 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="196" y="480" width="40" height="8">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="196" y="480" width="40" height="8">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="49" template="../../../common/maps/obj/gold.tx" x="112.522" y="340.819"/>
-  <object id="50" template="../../../common/maps/obj/enemy.tx" x="134.676" y="345.362">
+  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="112.522" y="340.819"/>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="134.676" y="345.362">
    <properties>
     <property name="enemy" value="Poisonous Snake"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
-  <object id="56" template="../../../common/maps/obj/enemy.tx" x="220.966" y="236.941">
+  <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="220.966" y="236.941">
    <properties>
     <property name="effect">{
  &quot;lifeModifier&quot;: 4,
@@ -61,7 +61,7 @@
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="58" template="../../../common/maps/obj/treasure.tx" x="70.4356" y="65.1836">
+  <object id="58" template="../../../../../../common/maps/obj/treasure.tx" x="70.4356" y="65.1836">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -77,19 +77,19 @@
     <property name="spawn.Hard" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="60" template="../../../common/maps/obj/enemy.tx" x="364.086" y="354.805">
+  <object id="60" template="../../../../../../common/maps/obj/enemy.tx" x="364.086" y="354.805">
    <properties>
     <property name="enemy" value="Hidden Snake"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="61" template="../../../common/maps/obj/enemy.tx" x="71.906" y="237.367">
+  <object id="61" template="../../../../../../common/maps/obj/enemy.tx" x="71.906" y="237.367">
    <properties>
     <property name="enemy" value="Snake"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
-  <object id="62" template="../../../common/maps/obj/booster.tx" x="65.0452" y="369.737">
+  <object id="62" template="../../../../../../common/maps/obj/booster.tx" x="65.0452" y="369.737">
    <properties>
     <property name="reward">[
   {
@@ -114,46 +114,46 @@
 </property>
    </properties>
   </object>
-  <object id="63" template="../../../common/maps/obj/enemy.tx" x="124.369" y="26.7066">
+  <object id="63" template="../../../../../../common/maps/obj/enemy.tx" x="124.369" y="26.7066">
    <properties>
     <property name="enemy" value="Poisonous Snake"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
-  <object id="64" template="../../../common/maps/obj/waypoint.tx" x="147.372" y="300.727"/>
-  <object id="65" template="../../../common/maps/obj/waypoint.tx" x="138.09" y="111.859"/>
-  <object id="66" template="../../../common/maps/obj/waypoint.tx" x="333.416" y="113.473"/>
-  <object id="67" template="../../../common/maps/obj/enemy.tx" x="139.301" y="222.436">
+  <object id="64" template="../../../../../../common/maps/obj/waypoint.tx" x="147.372" y="300.727"/>
+  <object id="65" template="../../../../../../common/maps/obj/waypoint.tx" x="138.09" y="111.859"/>
+  <object id="66" template="../../../../../../common/maps/obj/waypoint.tx" x="333.416" y="113.473"/>
+  <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="139.301" y="222.436">
    <properties>
     <property name="enemy" value="Viper"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="65,66,72,64"/>
    </properties>
   </object>
-  <object id="68" template="../../../common/maps/obj/enemy.tx" x="307.991" y="186.115">
+  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="307.991" y="186.115">
    <properties>
     <property name="enemy" value="Viper"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="66,72,64,65"/>
    </properties>
   </object>
-  <object id="70" template="../../../common/maps/obj/enemy.tx" x="61.4131" y="144.144">
+  <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="61.4131" y="144.144">
    <properties>
     <property name="enemy" value="Poisonous Snake"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="71" template="../../../common/maps/obj/gold.tx" x="36.7957" y="142.53"/>
-  <object id="72" template="../../../common/maps/obj/waypoint.tx" x="320.905" y="295.884"/>
-  <object id="73" template="../../../common/maps/obj/manashards.tx" x="151.408" y="75.1344"/>
-  <object id="74" template="../../../common/maps/obj/manashards.tx" x="372.965" y="97.734"/>
-  <object id="75" template="../../../common/maps/obj/manashards.tx" x="384.265" y="256.739"/>
-  <object id="77" template="../../../common/maps/obj/enemy.tx" x="269.249" y="64.2381">
+  <object id="71" template="../../../../../../common/maps/obj/gold.tx" x="36.7957" y="142.53"/>
+  <object id="72" template="../../../../../../common/maps/obj/waypoint.tx" x="320.905" y="295.884"/>
+  <object id="73" template="../../../../../../common/maps/obj/manashards.tx" x="151.408" y="75.1344"/>
+  <object id="74" template="../../../../../../common/maps/obj/manashards.tx" x="372.965" y="97.734"/>
+  <object id="75" template="../../../../../../common/maps/obj/manashards.tx" x="384.265" y="256.739"/>
+  <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="269.249" y="64.2381">
    <properties>
     <property name="enemy" value="Poisonous Snake"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
-  <object id="78" template="../../../common/maps/obj/gold.tx" x="398.793" y="348.348"/>
+  <object id="78" template="../../../../../../common/maps/obj/gold.tx" x="398.793" y="348.348"/>
  </objectgroup>
 </map>

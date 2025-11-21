@@ -3,9 +3,9 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJztldEOgzAIRZuo0/GhOv1RO/Wj5CZrwpKu0K3dkw/nScMFLtDx7tz4JRMzKzTk3DHYY278767Qka4LloxaHoZ4FlbOb6D3elqqqys1oYd+B29+8c7S3014Aq+DN6i5jXhv9U6bKS2OnLsSmqXzu7CD+fbMk+kpDr6V1gw7hR2tuUeyRnk7/qEbu5G3xL2qqZsCOflXj2K9s/qf+x5Jgr4XXuX0o/lwE2u9vamen7FF4yE=
@@ -30,8 +30,8 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../obj/entry_up.tx" x="240" y="272"/>
-  <object id="41" template="../../obj/shop.tx" x="129" y="82">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="240" y="272"/>
+  <object id="41" template="../../../../../../common/maps/obj/shop.tx" x="129" y="82">
    <properties>
     <property name="commonShopList" value="Elf,Wolf,Druid,Squirrel,Sliver2Green,Wolf4Green"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green"/>
@@ -39,7 +39,7 @@
     <property name="uncommonShopList" value="Creature2Green,Creature,Green"/>
    </properties>
   </object>
-  <object id="42" template="../../obj/shop.tx" x="304" y="114">
+  <object id="42" template="../../../../../../common/maps/obj/shop.tx" x="304" y="114">
    <properties>
     <property name="commonShopList" value="Elf,Wolf,Druid,Squirrel,Sliver2Green,Wolf4Green"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green,Hydra"/>
@@ -47,7 +47,7 @@
     <property name="uncommonShopList" value="Creature2Green,Creature,Green"/>
    </properties>
   </object>
-  <object id="43" template="../../obj/shop.tx" x="352" y="162">
+  <object id="43" template="../../../../../../common/maps/obj/shop.tx" x="352" y="162">
    <properties>
     <property name="commonShopList" value="Elf,Wolf,Druid,Squirrel,Sliver2Green,Wolf4Green"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green,Hydra"/>
@@ -55,7 +55,7 @@
     <property name="uncommonShopList" value="Creature2Green,Creature,Green"/>
    </properties>
   </object>
-  <object id="44" template="../../obj/shop.tx" x="177" y="81">
+  <object id="44" template="../../../../../../common/maps/obj/shop.tx" x="177" y="81">
    <properties>
     <property name="commonShopList" value="Elf,Wolf,Druid,Squirrel,Sliver2Green,Wolf4Green"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green,Hydra"/>
@@ -63,7 +63,7 @@
     <property name="uncommonShopList" value="Creature2Green,Creature,Green"/>
    </properties>
   </object>
-  <object id="45" template="../../obj/shop.tx" x="240" y="129">
+  <object id="45" template="../../../../../../common/maps/obj/shop.tx" x="240" y="129">
    <properties>
     <property name="commonShopList" value="Elf,Wolf,Druid,Squirrel,Sliver2Green,Wolf4Green"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green,Hydra"/>
@@ -71,7 +71,7 @@
     <property name="uncommonShopList" value="Creature2Green,Creature,Green"/>
    </properties>
   </object>
-  <object id="46" template="../../obj/shop.tx" x="368" y="226">
+  <object id="46" template="../../../../../../common/maps/obj/shop.tx" x="368" y="226">
    <properties>
     <property name="commonShopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,GreenBoosterPackShop,Elf,Wolf,Druid,Squirrel,Sliver2Green,Wolf4Green"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green,Hydra"/>
@@ -79,20 +79,20 @@
     <property name="uncommonShopList" value="Creature2Green,Creature,Green"/>
    </properties>
   </object>
-  <object id="47" template="../../obj/inn.tx" x="137" y="162"/>
-  <object id="48" template="../../obj/shop.tx" x="304" y="48">
+  <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="137" y="162"/>
+  <object id="48" template="../../../../../../common/maps/obj/shop.tx" x="304" y="48">
    <properties>
     <property name="commonShopList" value="Forest"/>
     <property name="noRestock" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="51" template="../../obj/quest.tx" x="80" y="162" width="34" height="16">
+  <object id="51" template="../../../../../../common/maps/obj/quest.tx" x="80" y="162" width="34" height="16">
    <properties>
     <property name="questtype" value="forest_town_tribal"/>
    </properties>
   </object>
-  <object id="52" template="../../obj/shardtrader.tx" x="98" y="98"/>
-  <object id="53" template="../../obj/shop.tx" x="272" y="98">
+  <object id="52" template="../../../../../../common/maps/obj/shardtrader.tx" x="98" y="98"/>
+  <object id="53" template="../../../../../../common/maps/obj/shop.tx" x="272" y="98">
    <properties>
     <property name="commonShopList" value="Elf,Wolf,Druid,Squirrel,Sliver2Green,Wolf4Green"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green"/>
@@ -100,7 +100,7 @@
     <property name="uncommonShopList" value="Creature2Green,Creature,Green"/>
    </properties>
   </object>
-  <object id="54" template="../../obj/shop.tx" x="208" y="50">
+  <object id="54" template="../../../../../../common/maps/obj/shop.tx" x="208" y="50">
    <properties>
     <property name="commonShopList" value="Elf,Wolf,Druid,Squirrel,Sliver2Green,Wolf4Green"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green,Hydra"/>

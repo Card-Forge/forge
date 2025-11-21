@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzFlVsOAiEMRfs/nRUQN6ZrMa4L0b2NhDQ213aKOMSbECiPHp6F6K3LSnRnovPayjr/ReJXfKNO3PLErSx55v1xFkNUy0XZGXzU/sXhamWDr9dToL+lxJ9MPU9MXpuMtfp6XIs5W7iPCfiPl/3sqOvhoF193Ba7Xe5zVDfCrdL3eIZmcnH/vfO4Lq3N4kY+LJ+4/9556LXhG418jJxxD/doada/uDpO6rc0m4s2sqN4F8VEL8Za8/g2Do0q7cT+KutvOCptbIlYNg==
@@ -34,41 +34,41 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="63" template="../../../common/maps/obj/door_down.tx" x="359.959" y="17.8328">
+  <object id="63" template="../../../../../../common/maps/obj/door_down.tx" x="359.959" y="17.8328">
    <properties>
     <property name="teleport" value="maps/map/portal_1G2.tmx"/>
     <property name="teleportObjectId" value="63"/>
    </properties>
   </object>
-  <object id="64" template="../../../common/maps/obj/door_up.tx" x="80.5779" y="271.455">
+  <object id="64" template="../../../../../../common/maps/obj/door_up.tx" x="80.5779" y="271.455">
    <properties>
     <property name="teleport" value="maps/map/portal_1G4.tmx"/>
     <property name="teleportObjectId" value="63"/>
    </properties>
   </object>
-  <object id="65" template="../../../common/maps/obj/gold.tx" x="2.33333" y="94.6667"/>
-  <object id="66" template="../../../common/maps/obj/enemy.tx" x="22.6667" y="94.6667">
+  <object id="65" template="../../../../../../common/maps/obj/gold.tx" x="2.33333" y="94.6667"/>
+  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="22.6667" y="94.6667">
    <properties>
     <property name="enemy" value="Hydra"/>
    </properties>
   </object>
-  <object id="67" template="../../../common/maps/obj/treasure.tx" x="447.667" y="257.333"/>
-  <object id="68" template="../../../common/maps/obj/enemy.tx" x="447.333" y="229">
+  <object id="67" template="../../../../../../common/maps/obj/treasure.tx" x="447.667" y="257.333"/>
+  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="447.333" y="229">
    <properties>
     <property name="enemy" value="Spider"/>
    </properties>
   </object>
-  <object id="69" template="../../../common/maps/obj/enemy.tx" x="353" y="63.3333">
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="353" y="63.3333">
    <properties>
     <property name="enemy" value="Snake"/>
    </properties>
   </object>
-  <object id="70" template="../../../common/maps/obj/enemy.tx" x="79.6667" y="224.667">
+  <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="79.6667" y="224.667">
    <properties>
     <property name="enemy" value="Dino"/>
    </properties>
   </object>
-  <object id="71" template="../../../common/maps/obj/enemy.tx" x="254.667" y="201.333">
+  <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="254.667" y="201.333">
    <properties>
     <property name="enemy" value="Bear"/>
    </properties>

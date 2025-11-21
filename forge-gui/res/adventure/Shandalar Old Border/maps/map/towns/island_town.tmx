@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzbwM7AsIHG2JiVgeEKEHdyIjBI3IiVtvZeR7MTZu8FEuwFub2EDROb4DHjIlDODIt/SbELPbxg+DIB94DstkDCxNhXyobdLmIwyD34woKYtEAuvkqCvdjSArm4mED808KvpIQ3Nf1KSngPlL3Y8hu90hcsv1HLflOgOWtIKOMo9TvIPiF2TDsJlXHE+N0UrSxCxrj8CMtfpNgPwpZIbiClXIDlU1LjHVv4k6IPW9lAqrs3spOmD9lOAPPDPGo=
@@ -29,39 +29,39 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../obj/entry_up.tx" x="256" y="271"/>
-  <object id="41" template="../../obj/shop.tx" x="304" y="98">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="256" y="271"/>
+  <object id="41" template="../../../../../../common/maps/obj/shop.tx" x="304" y="98">
    <properties>
     <property name="shopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,BlueBoosterPackShop,Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
    </properties>
   </object>
-  <object id="42" template="../../obj/shop.tx" x="368" y="162">
+  <object id="42" template="../../../../../../common/maps/obj/shop.tx" x="368" y="162">
    <properties>
     <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
    </properties>
   </object>
-  <object id="43" template="../../obj/shop.tx" x="353" y="98">
+  <object id="43" template="../../../../../../common/maps/obj/shop.tx" x="353" y="98">
    <properties>
     <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
    </properties>
   </object>
-  <object id="44" template="../../obj/shop.tx" x="208" y="162">
+  <object id="44" template="../../../../../../common/maps/obj/shop.tx" x="208" y="162">
    <properties>
     <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
    </properties>
   </object>
-  <object id="45" template="../../obj/shop.tx" x="304" y="162">
+  <object id="45" template="../../../../../../common/maps/obj/shop.tx" x="304" y="162">
    <properties>
     <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
    </properties>
   </object>
-  <object id="46" template="../../obj/shop.tx" x="336" y="162">
+  <object id="46" template="../../../../../../common/maps/obj/shop.tx" x="336" y="162">
    <properties>
     <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
    </properties>
   </object>
-  <object id="47" template="../../obj/inn.tx" x="215" y="82"/>
-  <object id="48" template="../../obj/shop.tx" x="176" y="192">
+  <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="215" y="82"/>
+  <object id="48" template="../../../../../../common/maps/obj/shop.tx" x="176" y="192">
    <properties>
     <property name="shopList" value="Island"/>
    </properties>

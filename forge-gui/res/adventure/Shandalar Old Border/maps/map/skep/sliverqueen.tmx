@@ -3,8 +3,8 @@
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJzt1z0OABAMBWCbSKzu2NM4s9hE4qe0jVSHt75v4QWIzgFRcpiHsgsbaW/H5TJHNrfXu1Je60qb5r6R5M9i7lvuaK843dk+m6vT1Xyef9wNc2XvEZfb96/ezzcu1b+nZsek9DA2pqsA8yt8nw==
@@ -34,13 +34,13 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="192" y="480" width="112" height="8">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="480" width="112" height="8">
    <properties>
     <property name="teleport" value="../common/maps/map/skep/skep_outer.tmx"/>
     <property name="teleportObjectId" value="153"/>
    </properties>
   </object>
-  <object id="57" template="../../../common/maps/obj/enemy.tx" x="224.189" y="175.454" width="16" height="16" visible="1">
+  <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="224.189" y="175.454" width="16" height="16" visible="1">
    <properties>
     <property name="defeatDialog">[
   {
@@ -64,10 +64,10 @@
     <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="65" template="../../../common/maps/obj/manashards.tx" x="416.954" y="46.4813"/>
-  <object id="66" template="../../../common/maps/obj/manashards.tx" x="32.76" y="210.329"/>
-  <object id="67" template="../../../common/maps/obj/manashards.tx" x="456.503" y="368.93"/>
-  <object id="68" template="../../../common/maps/obj/treasure.tx" x="288.62" y="50.1133">
+  <object id="65" template="../../../../../../common/maps/obj/manashards.tx" x="416.954" y="46.4813"/>
+  <object id="66" template="../../../../../../common/maps/obj/manashards.tx" x="32.76" y="210.329"/>
+  <object id="67" template="../../../../../../common/maps/obj/manashards.tx" x="456.503" y="368.93"/>
+  <object id="68" template="../../../../../../common/maps/obj/treasure.tx" x="288.62" y="50.1133">
    <properties>
     <property name="reward">[
 	{

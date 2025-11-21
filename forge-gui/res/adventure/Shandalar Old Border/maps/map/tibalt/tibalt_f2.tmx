@@ -7,12 +7,12 @@
   <property name="canFailDungeon" type="bool" value="true"/>
   <property name="respawnEnemies" type="bool" value="true"/>
  </properties>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/buildings-nocollide.tsx"/>
- <tileset firstgid="13697" source="../../../common/maps/tileset/main-nocollide.tsx"/>
- <tileset firstgid="23809" source="../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx"/>
- <tileset firstgid="23839" source="../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="13697" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="23809" source="../../../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx"/>
+ <tileset firstgid="23839" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="17" name="Collision" width="46" height="28">
   <data encoding="base64" compression="zlib">
    eJztkkEKgDAMBIM37/olbz7CP/lQn+BBAkXaUtNNaiADAUF2M4QS4dhmWSY3tX+SPWjvNPtlkPT2efUudXr05t7wzvej0Xgnua5jeYZJvxE7NL2RaHszHrwtCO86F7gv7m1LeNsy0luyhzNo73OXZ1vQ8m5hWuXZkd4S3m4evWvzdz8L75Zdvb5W90Z5Wt1b09n6nYQ30Q14PGdB
@@ -55,14 +55,14 @@
   </data>
  </layer>
  <objectgroup id="12" name="Objects" opacity="0.9" offsetx="2.65789" offsety="6.89474">
-  <object id="114" template="../../../common/maps/obj/entry_up.tx" x="348.569" y="361.886" width="64.496" height="50">
+  <object id="114" template="../../../../../../common/maps/obj/entry_up.tx" x="348.569" y="361.886" width="64.496" height="50">
    <properties>
     <property name="direction" value="left"/>
     <property name="teleport" value="../common/maps/map/tibalt/tibalt_f3.tmx"/>
     <property name="teleportObjectId" value="114"/>
    </properties>
   </object>
-  <object id="119" template="../../../common/maps/obj/enemy.tx" x="220.435" y="254.655">
+  <object id="119" template="../../../../../../common/maps/obj/enemy.tx" x="220.435" y="254.655">
    <properties>
     <property name="defeatDialog">[
 	{
@@ -87,12 +87,12 @@
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="172" template="../../../common/maps/obj/manashards.tx" x="319.79" y="104.641"/>
-  <object id="173" template="../../../common/maps/obj/manashards.tx" x="319.287" y="87.5206"/>
-  <object id="174" template="../../../common/maps/obj/manashards.tx" x="318.133" y="70.1288"/>
-  <object id="181" template="../../../common/maps/obj/waypoint.tx" x="501.259" y="148.045"/>
-  <object id="195" template="../../../common/maps/obj/waypoint.tx" x="355.432" y="164.585"/>
-  <object id="198" template="../../../common/maps/obj/door_up.tx" x="542.903" y="200.999" width="62.3015" height="63.8032" rotation="359.74">
+  <object id="172" template="../../../../../../common/maps/obj/manashards.tx" x="319.79" y="104.641"/>
+  <object id="173" template="../../../../../../common/maps/obj/manashards.tx" x="319.287" y="87.5206"/>
+  <object id="174" template="../../../../../../common/maps/obj/manashards.tx" x="318.133" y="70.1288"/>
+  <object id="181" template="../../../../../../common/maps/obj/waypoint.tx" x="501.259" y="148.045"/>
+  <object id="195" template="../../../../../../common/maps/obj/waypoint.tx" x="355.432" y="164.585"/>
+  <object id="198" template="../../../../../../common/maps/obj/door_up.tx" x="542.903" y="200.999" width="62.3015" height="63.8032" rotation="359.74">
    <properties>
     <property name="direction" value="up"/>
     <property name="teleport" value="../common/maps/map/tibalt/tibalt_f1.tmx"/>
@@ -109,20 +109,20 @@
 }]</property>
    </properties>
   </object>
-  <object id="201" template="../../../common/maps/obj/enemy.tx" x="398.782" y="66.7395">
+  <object id="201" template="../../../../../../common/maps/obj/enemy.tx" x="398.782" y="66.7395">
    <properties>
     <property name="enemy" value="Devil of Tibalt"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="202" template="../../../common/maps/obj/enemy.tx" x="433.889" y="235.084">
+  <object id="202" template="../../../../../../common/maps/obj/enemy.tx" x="433.889" y="235.084">
    <properties>
     <property name="enemy" value="Devil of Tibalt"/>
     <property name="threatRange" type="int" value="60"/>
     <property name="waypoints" value="181,206,205,195"/>
    </properties>
   </object>
-  <object id="205" template="../../../common/maps/obj/waypoint.tx" x="355.216" y="289.224"/>
-  <object id="206" template="../../../common/maps/obj/waypoint.tx" x="504.526" y="309.104"/>
+  <object id="205" template="../../../../../../common/maps/obj/waypoint.tx" x="355.216" y="289.224"/>
+  <object id="206" template="../../../../../../common/maps/obj/waypoint.tx" x="504.526" y="309.104"/>
  </objectgroup>
 </map>

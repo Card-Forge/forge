@@ -3,9 +3,9 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="6" name="Collision" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJztlU0OgkAMhWfLAkQUbqC30IUh7OA2XsMDGBJZiKdy401MgxPG0g4dfmKMvuQtxmH6tZ0imadUxpjScTHcEnF5rEPZeaxdMOyc1q9x70HXpd/snX16X1sibjZWYdeHpD0H6yqmLRHXTxs3TZr1mHmW3iPFBeE6o7DxVFypJMyxXKjxsm8NaxduHdM2hfciZq6kXPNuzPNwh/o+KQaOD/XqZ1242JiL2WO5nCiumSsXf06uLT73e50rdcvn5cbE3qZQalsQ+RDzbOMuLf106fWVeHe4ODamKxdqK/eNbXH6mFNy04Rnwh7+Lkhy00zzG+ci7n9Lqk9wq9fsPgzbZPZW2lOO65IvcIf0tE8pqvmBerEM5+GevPd4Y+bGlfvXd+kJ07yAKw==
@@ -38,15 +38,15 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="168" y="479.5" width="160.5" height="16">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="168" y="479.5" width="160.5" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="48" template="../../../common/maps/obj/treasure.tx" x="350.25" y="31"/>
-  <object id="51" template="../../../common/maps/obj/treasure.tx" x="270.5" y="32.333"/>
-  <object id="52" template="../../../common/maps/obj/gold.tx" x="403.871" y="206.481"/>
-  <object id="54" template="../../../common/maps/obj/enemy.tx" x="288.623" y="55.4841">
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="350.25" y="31"/>
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="270.5" y="32.333"/>
+  <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="403.871" y="206.481"/>
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="288.623" y="55.4841">
    <properties>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Cold-Eyed Selkie&quot;]
 }</property>
@@ -55,7 +55,7 @@
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="56" template="../../../common/maps/obj/booster.tx" x="381.883" y="147.478">
+  <object id="56" template="../../../../../../common/maps/obj/booster.tx" x="381.883" y="147.478">
    <properties>
     <property name="reward">[
   {
@@ -80,45 +80,45 @@
 </property>
    </properties>
   </object>
-  <object id="57" template="../../../common/maps/obj/manashards.tx" x="401" y="131.5"/>
-  <object id="58" template="../../../common/maps/obj/waypoint.tx" x="163.93" y="145.792"/>
-  <object id="59" template="../../../common/maps/obj/waypoint.tx" x="386.615" y="211.395"/>
-  <object id="60" template="../../../common/maps/obj/waypoint.tx" x="334" y="142.5"/>
-  <object id="61" template="../../../common/maps/obj/waypoint.tx" x="301.247" y="348.699"/>
-  <object id="62" template="../../../common/maps/obj/waypoint.tx" x="220.203" y="361.104"/>
-  <object id="63" template="../../../common/maps/obj/enemy.tx" x="365.954" y="241.335">
+  <object id="57" template="../../../../../../common/maps/obj/manashards.tx" x="401" y="131.5"/>
+  <object id="58" template="../../../../../../common/maps/obj/waypoint.tx" x="163.93" y="145.792"/>
+  <object id="59" template="../../../../../../common/maps/obj/waypoint.tx" x="386.615" y="211.395"/>
+  <object id="60" template="../../../../../../common/maps/obj/waypoint.tx" x="334" y="142.5"/>
+  <object id="61" template="../../../../../../common/maps/obj/waypoint.tx" x="301.247" y="348.699"/>
+  <object id="62" template="../../../../../../common/maps/obj/waypoint.tx" x="220.203" y="361.104"/>
+  <object id="63" template="../../../../../../common/maps/obj/enemy.tx" x="365.954" y="241.335">
    <properties>
     <property name="enemy" value="Merfolk Avatar"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="59,61"/>
    </properties>
   </object>
-  <object id="64" template="../../../common/maps/obj/enemy.tx" x="222.807" y="200.828">
+  <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="222.807" y="200.828">
    <properties>
     <property name="enemy" value="Merfolk Avatar"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="73,62"/>
    </properties>
   </object>
-  <object id="65" template="../../../common/maps/obj/enemy.tx" x="281.429" y="148.579">
+  <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="281.429" y="148.579">
    <properties>
     <property name="enemy" value="Merfolk Avatar"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="60,58"/>
    </properties>
   </object>
-  <object id="66" template="../../../common/maps/obj/enemy.tx" x="181.19" y="316.007">
+  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="181.19" y="316.007">
    <properties>
     <property name="enemy" value="Water Elemental"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="67" template="../../../common/maps/obj/collision.tx" x="-1" y="-16.5" width="482" height="16"/>
-  <object id="68" template="../../../common/maps/obj/collision.tx" x="-1" y="479.5" width="482" height="16"/>
-  <object id="69" template="../../../common/maps/obj/collision.tx" x="481" y="-5.0415" width="16" height="502.083"/>
-  <object id="70" template="../../../common/maps/obj/collision.tx" x="-15.5" y="-11.5415" width="16" height="502.083"/>
-  <object id="71" template="../../../common/maps/obj/manashards.tx" x="342.294" y="353.998"/>
-  <object id="72" template="../../../common/maps/obj/gold.tx" x="105.402" y="107.42"/>
-  <object id="73" template="../../../common/maps/obj/waypoint.tx" x="222.839" y="129.616"/>
+  <object id="67" template="../../../../../../common/maps/obj/collision.tx" x="-1" y="-16.5" width="482" height="16"/>
+  <object id="68" template="../../../../../../common/maps/obj/collision.tx" x="-1" y="479.5" width="482" height="16"/>
+  <object id="69" template="../../../../../../common/maps/obj/collision.tx" x="481" y="-5.0415" width="16" height="502.083"/>
+  <object id="70" template="../../../../../../common/maps/obj/collision.tx" x="-15.5" y="-11.5415" width="16" height="502.083"/>
+  <object id="71" template="../../../../../../common/maps/obj/manashards.tx" x="342.294" y="353.998"/>
+  <object id="72" template="../../../../../../common/maps/obj/gold.tx" x="105.402" y="107.42"/>
+  <object id="73" template="../../../../../../common/maps/obj/waypoint.tx" x="222.839" y="129.616"/>
  </objectgroup>
 </map>

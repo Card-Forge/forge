@@ -6,9 +6,9 @@
  <properties>
   <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Staff of the Death Magus&quot; ]}"/>
  </properties>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgaYBcPAtMTyELtk6azvQPlX3oBYsNTlsr+R7YX3Wx8cqP2Dl57QXlkLxDXc1NuFjlg1G76A1jZSO10SwyQHgB7sdUFlNQPANR4EvQ=
@@ -36,46 +36,46 @@
   <properties>
    <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Staff of the Death Magus&quot; ]}"/>
   </properties>
-  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="192" y="274.665" width="48" height="16">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="274.665" width="48" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="50" template="../../../common/maps/obj/enemy.tx" x="209.069" y="126.226">
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="209.069" y="126.226">
    <properties>
     <property name="enemy" value="Adept Black Wizard"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="68,71"/>
    </properties>
   </object>
-  <object id="54" template="../../../common/maps/obj/enemy.tx" x="153" y="130.5">
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="153" y="130.5">
    <properties>
     <property name="enemy" value="Demon"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="56" template="../../../common/maps/obj/enemy.tx" x="264.833" y="135.167">
+  <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="264.833" y="135.167">
    <properties>
     <property name="enemy" value="Imp"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="62" template="../../../common/maps/obj/gold.tx" x="153" y="112.5"/>
-  <object id="65" template="../../../common/maps/obj/enemy.tx" x="175" y="191.5">
+  <object id="62" template="../../../../../../common/maps/obj/gold.tx" x="153" y="112.5"/>
+  <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="175" y="191.5">
    <properties>
     <property name="enemy" value="Apprentice Black Wizard"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="74,72,74,68,70,73,69,73,70,68"/>
    </properties>
   </object>
-  <object id="66" template="../../../common/maps/obj/enemy.tx" x="321.5" y="151">
+  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="321.5" y="151">
    <properties>
     <property name="enemy" value="Apprentice Black Wizard"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="69,73,70,68,74,72,74,68,70,73"/>
    </properties>
   </object>
-  <object id="67" template="../../../common/maps/obj/booster.tx" x="262" y="113.5">
+  <object id="67" template="../../../../../../common/maps/obj/booster.tx" x="262" y="113.5">
    <properties>
     <property name="reward">[
   {
@@ -100,15 +100,15 @@
 </property>
    </properties>
   </object>
-  <object id="68" template="../../../common/maps/obj/waypoint.tx" x="209" y="190.5"/>
-  <object id="69" template="../../../common/maps/obj/waypoint.tx" x="320" y="119"/>
-  <object id="70" template="../../../common/maps/obj/waypoint.tx" x="278" y="212"/>
-  <object id="71" template="../../../common/maps/obj/waypoint.tx" x="207.5" y="86.5"/>
-  <object id="72" template="../../../common/maps/obj/waypoint.tx" x="150" y="160"/>
-  <object id="73" template="../../../common/maps/obj/waypoint.tx" x="318" y="184.5"/>
-  <object id="74" template="../../../common/maps/obj/waypoint.tx" x="152.5" y="195.5"/>
-  <object id="75" template="../../../common/maps/obj/manashards.tx" x="258" y="45"/>
-  <object id="76" template="../../../common/maps/obj/treasure.tx" x="161.5" y="48">
+  <object id="68" template="../../../../../../common/maps/obj/waypoint.tx" x="209" y="190.5"/>
+  <object id="69" template="../../../../../../common/maps/obj/waypoint.tx" x="320" y="119"/>
+  <object id="70" template="../../../../../../common/maps/obj/waypoint.tx" x="278" y="212"/>
+  <object id="71" template="../../../../../../common/maps/obj/waypoint.tx" x="207.5" y="86.5"/>
+  <object id="72" template="../../../../../../common/maps/obj/waypoint.tx" x="150" y="160"/>
+  <object id="73" template="../../../../../../common/maps/obj/waypoint.tx" x="318" y="184.5"/>
+  <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="152.5" y="195.5"/>
+  <object id="75" template="../../../../../../common/maps/obj/manashards.tx" x="258" y="45"/>
+  <object id="76" template="../../../../../../common/maps/obj/treasure.tx" x="161.5" y="48">
    <properties>
     <property name="reward">[{&quot;type&quot;: &quot;randomCard&quot;,&quot;colors&quot;: [&quot;Black&quot;], &quot;count&quot;: 5 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Spell Book&quot;},
 {
@@ -119,7 +119,7 @@
     <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="78" template="../../../common/maps/obj/enemy.tx" x="162" y="63.6667">
+  <object id="78" template="../../../../../../common/maps/obj/enemy.tx" x="162" y="63.6667">
    <properties>
     <property name="enemy" value="Apprentice Black Wizard"/>
    </properties>

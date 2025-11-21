@@ -3,11 +3,11 @@
  <properties>
   <property name="preventEscape" type="bool" value="true"/>
  </properties>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/dungeon.tsx"/>
- <tileset firstgid="16385" source="../../../common/maps/tileset/dungeon-nocollide.tsx"/>
- <tileset firstgid="20865" source="../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon.tsx"/>
+ <tileset firstgid="16385" source="../../../../../../common/maps/tileset/dungeon-nocollide.tsx"/>
+ <tileset firstgid="20865" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="30" height="20">
   <data encoding="base64" compression="zlib">
    eJzjVWdg4B1CGAbQxQbaXaN4FI/iUTyKR/EoHsUwDADG93lF
@@ -32,12 +32,12 @@
   </data>
  </layer>
  <objectgroup id="5" name="Objects">
-  <object id="26" template="../../obj/scroll.tx" x="272" y="80">
+  <object id="26" template="../../../../../../common/maps/obj/scroll.tx" x="272" y="80">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Myr Convert&quot;, &quot;count&quot;: 1 }, { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Coretapper&quot;, &quot;count&quot;: 1 }, { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Myr Custodian&quot;, &quot;count&quot;: 1 }, { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Myr Adapter&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="27" template="../../obj/enemy.tx" x="232" y="172">
+  <object id="27" template="../../../../../../common/maps/obj/enemy.tx" x="232" y="172">
    <properties>
     <property name="defeatDialog">[{
    &quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;exploreShand1&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 4}}, {&quot;checkQuestFlag&quot;: &quot;foundLibraryOfVarsilResearch&quot;, &quot;not&quot;: true}],
@@ -61,7 +61,7 @@
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="28" template="../../obj/enemy.tx" x="232" y="162">
+  <object id="28" template="../../../../../../common/maps/obj/enemy.tx" x="232" y="162">
    <properties>
     <property name="defeatDialog">[{
    &quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;exploreShand1&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 4}}, {&quot;checkQuestFlag&quot;: &quot;foundLibraryOfVarsilResearch&quot;, &quot;not&quot;: true}],
@@ -87,7 +87,7 @@
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="29" template="../../obj/enemy.tx" x="232" y="152">
+  <object id="29" template="../../../../../../common/maps/obj/enemy.tx" x="232" y="152">
    <properties>
     <property name="defeatDialog">[{
    &quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;exploreShand1&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 4}}, {&quot;checkQuestFlag&quot;: &quot;foundLibraryOfVarsilResearch&quot;, &quot;not&quot;: true}],
@@ -113,7 +113,7 @@
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="33" template="../../obj/dialog.tx" x="144" y="112" width="192" height="80">
+  <object id="33" template="../../../../../../common/maps/obj/dialog.tx" x="144" y="112" width="192" height="80">
    <properties>
     <property name="dialog">[
 {
@@ -126,7 +126,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="34" template="../../obj/portal.tx" x="232" y="88">
+  <object id="34" template="../../../../../../common/maps/obj/portal.tx" x="232" y="88">
    <properties>
     <property name="activeQuestFlag" value="defeatedLibraryOfVarsilBoss"/>
     <property name="portalState" value="inactive"/>
@@ -135,7 +135,7 @@
     <property name="teleportObjectId" value="14"/>
    </properties>
   </object>
-  <object id="35" template="../../obj/dialog.tx" x="176" y="272" width="128" height="64">
+  <object id="35" template="../../../../../../common/maps/obj/dialog.tx" x="176" y="272" width="128" height="64">
    <properties>
     <property name="dialog">[
 {
@@ -155,20 +155,20 @@
 ]</property>
    </properties>
   </object>
-  <object id="36" template="../../obj/collision.tx" x="-32" y="0" width="32" height="320"/>
-  <object id="37" template="../../obj/collision.tx" x="272" y="176" width="176" height="112"/>
-  <object id="38" template="../../obj/collision.tx" x="480" y="0" width="32" height="320"/>
-  <object id="39" template="../../obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
-  <object id="40" template="../../obj/entry_up.tx" x="208" y="304" width="64" height="16">
+  <object id="36" template="../../../../../../common/maps/obj/collision.tx" x="-32" y="0" width="32" height="320"/>
+  <object id="37" template="../../../../../../common/maps/obj/collision.tx" x="272" y="176" width="176" height="112"/>
+  <object id="38" template="../../../../../../common/maps/obj/collision.tx" x="480" y="0" width="32" height="320"/>
+  <object id="39" template="../../../../../../common/maps/obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
+  <object id="40" template="../../../../../../common/maps/obj/entry_up.tx" x="208" y="304" width="64" height="16">
    <properties>
     <property name="teleport" value="./library_of_varsil_3.tmx"/>
     <property name="teleportObjectId" value="24"/>
    </properties>
   </object>
-  <object id="41" template="../../obj/collision.tx" x="92" y="309" width="544" height="32"/>
-  <object id="42" template="../../obj/collision.tx" x="32" y="144" width="176" height="144"/>
+  <object id="41" template="../../../../../../common/maps/obj/collision.tx" x="92" y="309" width="544" height="32"/>
+  <object id="42" template="../../../../../../common/maps/obj/collision.tx" x="32" y="144" width="176" height="144"/>
  </objectgroup>
  <objectgroup id="6" name="Waypoints">
-  <object id="5" template="../../obj/waypoint.tx" name="WP1" x="232" y="144"/>
+  <object id="5" template="../../../../../../common/maps/obj/waypoint.tx" name="WP1" x="232" y="144"/>
  </objectgroup>
 </map>

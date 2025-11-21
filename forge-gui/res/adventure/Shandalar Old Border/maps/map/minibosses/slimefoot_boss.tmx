@@ -8,10 +8,10 @@
   &quot;startBattleWithCard&quot;: [ &quot;Thallid|FEM&quot; ]
 }</property>
  </properties>
- <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
- <tileset firstgid="22017" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="7" name="Clutter" width="50" height="40">
   <data encoding="base64" compression="zlib">
    eJzt1bEJACAMAEEncCT3H0vEQrCw0MaEO0ifL0JKAZhaXRPZqSNSY5aOkx87ftzphg5gF+mesvzALB1DpF0BAAAAXnQogw0R
@@ -36,13 +36,13 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="268" y="638" width="90.5" height="16">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="268" y="638" width="90.5" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="49" template="../../../../common/maps/obj/gold.tx" x="681.038" y="604.87"/>
-  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="217.438" y="187.194" width="16" height="17.6724">
+  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="681.038" y="604.87"/>
+  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="217.438" y="187.194" width="16" height="17.6724">
    <properties>
     <property name="effect">{
  &quot;startBattleWithCard&quot;: [ &quot;Forest|LEA&quot;, &quot;Forest|LEA&quot;, &quot;Thallid|FEM&quot;, &quot;Elvish Farmer|FEM&quot;, &quot;Sporogenesis|USG&quot; ]
@@ -50,8 +50,8 @@
     <property name="enemy" value="Slimefoot"/>
    </properties>
   </object>
-  <object id="55" template="../../../../common/maps/obj/manashards.tx" x="599.986" y="40.5645"/>
-  <object id="56" template="../../../../common/maps/obj/booster.tx" x="775.398" y="146.054">
+  <object id="55" template="../../../../../../common/maps/obj/manashards.tx" x="599.986" y="40.5645"/>
+  <object id="56" template="../../../../../../common/maps/obj/booster.tx" x="775.398" y="146.054">
    <properties>
     <property name="reward">[
   {
@@ -76,84 +76,84 @@
 </property>
    </properties>
   </object>
-  <object id="58" template="../../../../common/maps/obj/enemy.tx" x="581.147" y="190.91" width="16" height="17.6724">
+  <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="581.147" y="190.91" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Golgari Fungus"/>
     <property name="threatRange" type="int" value="60"/>
     <property name="waypoints" value="68,62"/>
    </properties>
   </object>
-  <object id="62" template="../../../../common/maps/obj/waypoint.tx" x="589.499" y="299.15"/>
-  <object id="68" template="../../../../common/maps/obj/waypoint.tx" x="587.407" y="75.9884"/>
-  <object id="69" template="../../../../common/maps/obj/collision.tx" x="-2.51" y="-16.5" width="803.52" height="16"/>
-  <object id="70" template="../../../../common/maps/obj/collision.tx" x="-4.76" y="639.5" width="803.52" height="16"/>
-  <object id="72" template="../../../../common/maps/obj/collision.tx" x="800.673" y="-13.2155" width="15.6533" height="668.931"/>
-  <object id="73" template="../../../../common/maps/obj/collision.tx" x="-16.8266" y="-16.4655" width="15.6533" height="668.931"/>
-  <object id="74" template="../../../../common/maps/obj/manashards.tx" x="773" y="399"/>
-  <object id="75" template="../../../../common/maps/obj/manashards.tx" x="659" y="611"/>
-  <object id="76" template="../../../../common/maps/obj/manashards.tx" x="193" y="428.5"/>
-  <object id="77" template="../../../../common/maps/obj/enemy.tx" x="479.5" y="382.664" width="16" height="17.6724">
+  <object id="62" template="../../../../../../common/maps/obj/waypoint.tx" x="589.499" y="299.15"/>
+  <object id="68" template="../../../../../../common/maps/obj/waypoint.tx" x="587.407" y="75.9884"/>
+  <object id="69" template="../../../../../../common/maps/obj/collision.tx" x="-2.51" y="-16.5" width="803.52" height="16"/>
+  <object id="70" template="../../../../../../common/maps/obj/collision.tx" x="-4.76" y="639.5" width="803.52" height="16"/>
+  <object id="72" template="../../../../../../common/maps/obj/collision.tx" x="800.673" y="-13.2155" width="15.6533" height="668.931"/>
+  <object id="73" template="../../../../../../common/maps/obj/collision.tx" x="-16.8266" y="-16.4655" width="15.6533" height="668.931"/>
+  <object id="74" template="../../../../../../common/maps/obj/manashards.tx" x="773" y="399"/>
+  <object id="75" template="../../../../../../common/maps/obj/manashards.tx" x="659" y="611"/>
+  <object id="76" template="../../../../../../common/maps/obj/manashards.tx" x="193" y="428.5"/>
+  <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="479.5" y="382.664" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Geonid Death-Cap"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="78" template="../../../../common/maps/obj/enemy.tx" x="552" y="417.164" width="16" height="17.6724">
+  <object id="78" template="../../../../../../common/maps/obj/enemy.tx" x="552" y="417.164" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Golgari Fungus"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="79" template="../../../../common/maps/obj/enemy.tx" x="281.5" y="321.664" width="16" height="17.6724">
+  <object id="79" template="../../../../../../common/maps/obj/enemy.tx" x="281.5" y="321.664" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Fungus"/>
     <property name="threatRange" type="int" value="60"/>
     <property name="waypoints" value="r86-87-88-90"/>
    </properties>
   </object>
-  <object id="80" template="../../../../common/maps/obj/enemy.tx" x="184.5" y="554.664" width="16" height="17.6724">
+  <object id="80" template="../../../../../../common/maps/obj/enemy.tx" x="184.5" y="554.664" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Golgari Fungus"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="81" template="../../../../common/maps/obj/gold.tx" x="42.5" y="175.5"/>
-  <object id="82" template="../../../../common/maps/obj/enemy.tx" x="148.5" y="469.164" width="16" height="17.6724">
+  <object id="81" template="../../../../../../common/maps/obj/gold.tx" x="42.5" y="175.5"/>
+  <object id="82" template="../../../../../../common/maps/obj/enemy.tx" x="148.5" y="469.164" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Geonid Death-Cap"/>
     <property name="hidden" type="bool" value="true"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="83" template="../../../../common/maps/obj/enemy.tx" x="651.5" y="581.164" width="16" height="17.6724">
+  <object id="83" template="../../../../../../common/maps/obj/enemy.tx" x="651.5" y="581.164" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Geonid Death-Cap"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="84" template="../../../../common/maps/obj/enemy.tx" x="476" y="157.164" width="16" height="17.6724">
+  <object id="84" template="../../../../../../common/maps/obj/enemy.tx" x="476" y="157.164" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Geonid Death-Cap"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="85" template="../../../../common/maps/obj/waypoint.tx" x="258" y="508"/>
-  <object id="86" template="../../../../common/maps/obj/waypoint.tx" x="259.5" y="323"/>
-  <object id="87" template="../../../../common/maps/obj/waypoint.tx" x="305.5" y="320.5"/>
-  <object id="88" template="../../../../common/maps/obj/waypoint.tx" x="318.5" y="109.5"/>
-  <object id="89" template="../../../../common/maps/obj/waypoint.tx" x="197.5" y="28.5"/>
-  <object id="90" template="../../../../common/maps/obj/waypoint.tx" x="101.5" y="138"/>
-  <object id="92" template="../../../../common/maps/obj/enemy.tx" x="410.5" y="462.164" width="16" height="17.6724">
+  <object id="85" template="../../../../../../common/maps/obj/waypoint.tx" x="258" y="508"/>
+  <object id="86" template="../../../../../../common/maps/obj/waypoint.tx" x="259.5" y="323"/>
+  <object id="87" template="../../../../../../common/maps/obj/waypoint.tx" x="305.5" y="320.5"/>
+  <object id="88" template="../../../../../../common/maps/obj/waypoint.tx" x="318.5" y="109.5"/>
+  <object id="89" template="../../../../../../common/maps/obj/waypoint.tx" x="197.5" y="28.5"/>
+  <object id="90" template="../../../../../../common/maps/obj/waypoint.tx" x="101.5" y="138"/>
+  <object id="92" template="../../../../../../common/maps/obj/enemy.tx" x="410.5" y="462.164" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Geonid Death-Cap"/>
     <property name="hidden" type="bool" value="true"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="93" template="../../../../common/maps/obj/enemy.tx" x="733.5" y="214.664" width="16" height="17.6724">
+  <object id="93" template="../../../../../../common/maps/obj/enemy.tx" x="733.5" y="214.664" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Geonid Death-Cap"/>
     <property name="hidden" type="bool" value="true"/>

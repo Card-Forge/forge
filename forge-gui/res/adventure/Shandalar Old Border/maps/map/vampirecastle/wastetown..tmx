@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="85">
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/FarmFood.tsx"/>
- <tileset firstgid="16001" source="../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/FarmFood.tsx"/>
+ <tileset firstgid="16001" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
  <layer id="10" name="Collision" width="60" height="40">
   <data encoding="base64" compression="zlib">
    eJzt0bEJACAMRcEM4AjuP6eVYCGIjZJwV1n68yIA4F5vv3/wVuW9c9u6cfeufIPKTv30zU3f2vQFAAAAAIAcBsbMAvk=
@@ -33,19 +33,19 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="66" template="../../../common/maps/obj/door_up.tx" x="798.41" y="304.238">
+  <object id="66" template="../../../../../../common/maps/obj/door_up.tx" x="798.41" y="304.238">
    <properties>
     <property name="teleport" value="../common/maps/map/vampirecastle/vampirecastle_4C.tmx"/>
     <property name="teleportObjectId" value="65"/>
    </properties>
   </object>
-  <object id="67" template="../../../common/maps/obj/door_down.tx" x="48.9816" y="304.041">
+  <object id="67" template="../../../../../../common/maps/obj/door_down.tx" x="48.9816" y="304.041">
    <properties>
     <property name="teleport" value="../common/maps/map/vampirecastle/vampirecastle_4.tmx"/>
     <property name="teleportObjectId" value="66"/>
    </properties>
   </object>
-  <object id="68" template="../../../common/maps/obj/enemy.tx" x="517.558" y="531.191">
+  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="517.558" y="531.191">
    <properties>
     <property name="enemy" value="High Vampire"/>
     <property name="speedModifier" type="float" value="10"/>
@@ -53,13 +53,13 @@
     <property name="waypoints" value="74,76,77,78,77,76,74"/>
    </properties>
   </object>
-  <object id="69" template="../../../common/maps/obj/enemy.tx" x="640.989" y="193.444">
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="640.989" y="193.444">
    <properties>
     <property name="enemy" value="Undead Roamer"/>
    </properties>
   </object>
-  <object id="70" template="../../../common/maps/obj/treasure.tx" x="390.083" y="317.167"/>
-  <object id="71" template="../../../common/maps/obj/booster.tx" x="730.462" y="324.215">
+  <object id="70" template="../../../../../../common/maps/obj/treasure.tx" x="390.083" y="317.167"/>
+  <object id="71" template="../../../../../../common/maps/obj/booster.tx" x="730.462" y="324.215">
    <properties>
     <property name="reward">[
 	{
@@ -149,35 +149,35 @@
 ]</property>
    </properties>
   </object>
-  <object id="72" template="../../../common/maps/obj/enemy.tx" x="394.545" y="387.141">
+  <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="394.545" y="387.141">
    <properties>
     <property name="enemy" value="Unraveling Crawler"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="73" template="../../../common/maps/obj/enemy.tx" x="635.147" y="383.441">
+  <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="635.147" y="383.441">
    <properties>
     <property name="enemy" value="Unholy Skull"/>
     <property name="threatRange" type="int" value="50"/>
     <property name="waypoints" value="80,81"/>
    </properties>
   </object>
-  <object id="74" template="../../../common/maps/obj/waypoint.tx" x="793.388" y="528.726"/>
-  <object id="75" template="../../../common/maps/obj/waypoint.tx" x="799.866" y="368.634"/>
-  <object id="76" template="../../../common/maps/obj/waypoint.tx" x="245.557" y="531.503"/>
-  <object id="77" template="../../../common/maps/obj/waypoint.tx" x="240.005" y="71.5836"/>
-  <object id="78" template="../../../common/maps/obj/waypoint.tx" x="472.278" y="66.9566"/>
-  <object id="79" template="../../../common/maps/obj/gold.tx" x="142.839" y="273.319"/>
-  <object id="80" template="../../../common/maps/obj/waypoint.tx" x="638.848" y="237.228"/>
-  <object id="81" template="../../../common/maps/obj/waypoint.tx" x="636.072" y="463.023"/>
-  <object id="82" template="../../../common/maps/obj/enemy.tx" x="390.843" y="149.316">
+  <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="793.388" y="528.726"/>
+  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="799.866" y="368.634"/>
+  <object id="76" template="../../../../../../common/maps/obj/waypoint.tx" x="245.557" y="531.503"/>
+  <object id="77" template="../../../../../../common/maps/obj/waypoint.tx" x="240.005" y="71.5836"/>
+  <object id="78" template="../../../../../../common/maps/obj/waypoint.tx" x="472.278" y="66.9566"/>
+  <object id="79" template="../../../../../../common/maps/obj/gold.tx" x="142.839" y="273.319"/>
+  <object id="80" template="../../../../../../common/maps/obj/waypoint.tx" x="638.848" y="237.228"/>
+  <object id="81" template="../../../../../../common/maps/obj/waypoint.tx" x="636.072" y="463.023"/>
+  <object id="82" template="../../../../../../common/maps/obj/enemy.tx" x="390.843" y="149.316">
    <properties>
     <property name="enemy" value="Harpy"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="83" template="../../../common/maps/obj/manashards.tx" x="736.014" y="125.256"/>
-  <object id="84" template="../../../common/maps/obj/manashards.tx" x="731.387" y="472.278"/>
+  <object id="83" template="../../../../../../common/maps/obj/manashards.tx" x="736.014" y="125.256"/>
+  <object id="84" template="../../../../../../common/maps/obj/manashards.tx" x="731.387" y="472.278"/>
  </objectgroup>
 </map>

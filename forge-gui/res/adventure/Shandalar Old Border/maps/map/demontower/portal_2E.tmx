@@ -3,9 +3,9 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo4CBwY2TNHFqmE/IbHL0EFJPrH5y9RGrHiQPw5SYQ469pKijpr208q8MDwIPZPzSIz2TYjY54qQCUJgPBBhp9iLbD8OUAAD9PQw2
@@ -35,31 +35,31 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="56" template="../../../common/maps/obj/door_up.tx" x="97" y="143">
+  <object id="56" template="../../../../../../common/maps/obj/door_up.tx" x="97" y="143">
    <properties>
     <property name="teleport" value="../common/maps/map/demontower/portal_2F.tmx"/>
     <property name="teleportObjectId" value="59"/>
    </properties>
   </object>
-  <object id="58" template="../../../common/maps/obj/door_right.tx" x="192.5" y="238.833">
+  <object id="58" template="../../../../../../common/maps/obj/door_right.tx" x="192.5" y="238.833">
    <properties>
     <property name="teleport" value="../common/maps/map/demontower/portal_2D.tmx"/>
     <property name="teleportObjectId" value="55"/>
    </properties>
   </object>
-  <object id="60" template="../../../common/maps/obj/enemy.tx" x="317.775" y="135.521">
+  <object id="60" template="../../../../../../common/maps/obj/enemy.tx" x="317.775" y="135.521">
    <properties>
     <property name="enemy" value="Curselord"/>
     <property name="threatRange" type="int" value="50"/>
     <property name="waypoints" value="61,66,61,62,63,64,65,64,63,62,61"/>
    </properties>
   </object>
-  <object id="61" template="../../../common/maps/obj/waypoint.tx" x="320.542" y="183.592"/>
-  <object id="62" template="../../../common/maps/obj/waypoint.tx" x="307.746" y="94.021"/>
-  <object id="63" template="../../../common/maps/obj/waypoint.tx" x="246.188" y="49.0626"/>
-  <object id="64" template="../../../common/maps/obj/waypoint.tx" x="158.346" y="50.1001"/>
-  <object id="65" template="../../../common/maps/obj/waypoint.tx" x="97.1335" y="110.275"/>
-  <object id="66" template="../../../common/maps/obj/waypoint.tx" x="256.217" y="245.842"/>
-  <object id="67" template="../../../common/maps/obj/gold.tx" x="226.129" y="231.663"/>
+  <object id="61" template="../../../../../../common/maps/obj/waypoint.tx" x="320.542" y="183.592"/>
+  <object id="62" template="../../../../../../common/maps/obj/waypoint.tx" x="307.746" y="94.021"/>
+  <object id="63" template="../../../../../../common/maps/obj/waypoint.tx" x="246.188" y="49.0626"/>
+  <object id="64" template="../../../../../../common/maps/obj/waypoint.tx" x="158.346" y="50.1001"/>
+  <object id="65" template="../../../../../../common/maps/obj/waypoint.tx" x="97.1335" y="110.275"/>
+  <object id="66" template="../../../../../../common/maps/obj/waypoint.tx" x="256.217" y="245.842"/>
+  <object id="67" template="../../../../../../common/maps/obj/gold.tx" x="226.129" y="231.663"/>
  </objectgroup>
 </map>

@@ -3,9 +3,9 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/dungeon.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon.tsx"/>
  <layer id="9" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AU0AosEEXFwx2M+nd4g5Hm3+EKANPVC1E=
@@ -35,32 +35,32 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="308.242" y="247.89" width="38.2392" height="39.9582">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="308.242" y="247.89" width="38.2392" height="39.9582">
    <properties>
     <property name="direction" value="up"/>
     <property name="teleport" value="../common/maps/map/djinnpalace/djinnpalace_1.tmx"/>
     <property name="teleportObjectId" value="69"/>
    </properties>
   </object>
-  <object id="68" template="../../../common/maps/obj/enemy.tx" x="143.736" y="175.68">
+  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="143.736" y="175.68">
    <properties>
     <property name="enemy" value="Adept Blue Wizard"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="69" template="../../../common/maps/obj/enemy.tx" x="276.245" y="153.496">
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="276.245" y="153.496">
    <properties>
     <property name="enemy" value="Adept Green Wizard"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="70" template="../../../common/maps/obj/enemy.tx" x="208.248" y="115.342">
+  <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="208.248" y="115.342">
    <properties>
     <property name="enemy" value="Blue Golem"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="71" template="../../../common/maps/obj/booster.tx" x="96.1148" y="144.623">
+  <object id="71" template="../../../../../../common/maps/obj/booster.tx" x="96.1148" y="144.623">
    <properties>
     <property name="reward">[
   {
@@ -85,7 +85,7 @@
 </property>
    </properties>
   </object>
-  <object id="72" template="../../../common/maps/obj/booster.tx" x="300.204" y="122.439">
+  <object id="72" template="../../../../../../common/maps/obj/booster.tx" x="300.204" y="122.439">
    <properties>
     <property name="reward">[
   {
@@ -110,9 +110,9 @@
 </property>
    </properties>
   </object>
-  <object id="74" template="../../../common/maps/obj/gold.tx" x="314.401" y="55.0013"/>
-  <object id="75" template="../../../common/maps/obj/manashards.tx" x="120.96" y="55.0013"/>
-  <object id="76" template="../../../common/maps/obj/entry_up.tx" x="204.017" y="51.835" width="25.4153" height="17.3026">
+  <object id="74" template="../../../../../../common/maps/obj/gold.tx" x="314.401" y="55.0013"/>
+  <object id="75" template="../../../../../../common/maps/obj/manashards.tx" x="120.96" y="55.0013"/>
+  <object id="76" template="../../../../../../common/maps/obj/entry_up.tx" x="204.017" y="51.835" width="25.4153" height="17.3026">
    <properties>
     <property name="direction" value="down"/>
     <property name="teleport" value="../common/maps/map/djinnpalace/djinnpalace_2B.tmx"/>

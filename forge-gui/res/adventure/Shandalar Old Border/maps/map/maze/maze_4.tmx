@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="8" name="Solution" width="200" height="200">
   <data encoding="base64" compression="zlib">
    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
@@ -34,15 +34,15 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="135" template="../../obj/entry_down.tx" x="1536" y="12.3333" width="48" height="16"/>
-  <object id="136" template="../../obj/treasure.tx" x="1585" y="170.5"/>
-  <object id="137" template="../../obj/treasure.tx" x="1520" y="171"/>
-  <object id="138" template="../../obj/treasure.tx" x="1552.5" y="171"/>
-  <object id="139" template="../../obj/gold.tx" x="1515.5" y="198.5"/>
-  <object id="140" template="../../obj/gold.tx" x="1589.5" y="199"/>
-  <object id="141" template="../../obj/gold.tx" x="1538" y="169.5"/>
-  <object id="142" template="../../obj/gold.tx" x="1570" y="169.5"/>
-  <object id="143" template="../../obj/enemy.tx" x="1580" y="1622">
+  <object id="135" template="../../../../../../common/maps/obj/entry_down.tx" x="1536" y="12.3333" width="48" height="16"/>
+  <object id="136" template="../../../../../../common/maps/obj/treasure.tx" x="1585" y="170.5"/>
+  <object id="137" template="../../../../../../common/maps/obj/treasure.tx" x="1520" y="171"/>
+  <object id="138" template="../../../../../../common/maps/obj/treasure.tx" x="1552.5" y="171"/>
+  <object id="139" template="../../../../../../common/maps/obj/gold.tx" x="1515.5" y="198.5"/>
+  <object id="140" template="../../../../../../common/maps/obj/gold.tx" x="1589.5" y="199"/>
+  <object id="141" template="../../../../../../common/maps/obj/gold.tx" x="1538" y="169.5"/>
+  <object id="142" template="../../../../../../common/maps/obj/gold.tx" x="1570" y="169.5"/>
+  <object id="143" template="../../../../../../common/maps/obj/enemy.tx" x="1580" y="1622">
    <properties>
     <property name="enemy" value="Minotaur"/>
    </properties>

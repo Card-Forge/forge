@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJztlM0KgzAMx8MOtj6SIj3ukTzuQQbt3HsK24IWY9Z0jYqnHf5QSppfPjsYgOEEXeu1NG/DiVxnlzN81Ctj3cpFjjdr9qs6hou+qUr8NFbHT3GBsDW+GruPi7rM2jo3KT3JPHCuZ7ZBmB28e8znTpEnCPmiv9YudeM9pj1oCU9iu4wNrS/vJwgxczsncNHWM7vc3lPbX/9D7EXMn8dwZ/3N7QjdU57fWE1K5R/M947z+FC3wv0cC/aJzmtOfa3/r1L9wLpGlb7by9X+a3/upDdiMyqI
@@ -24,31 +24,31 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="48" template="../../../common/maps/obj/treasure.tx" x="39.3954" y="91.712"/>
-  <object id="49" template="../../../common/maps/obj/gold.tx" x="159.038" y="25.203"/>
-  <object id="50" template="../../../common/maps/obj/enemy.tx" x="81.297" y="205.515">
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="39.3954" y="91.712"/>
+  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="159.038" y="25.203"/>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="81.297" y="205.515">
    <properties>
     <property name="enemy" value="Merfolk"/>
    </properties>
   </object>
-  <object id="51" template="../../../common/maps/obj/treasure.tx" x="150.492" y="155.444"/>
-  <object id="53" template="../../../common/maps/obj/enemy.tx" x="296.9" y="172.963">
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="150.492" y="155.444"/>
+  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="296.9" y="172.963">
    <properties>
     <property name="enemy" value="Merfolk warrior"/>
    </properties>
   </object>
-  <object id="54" template="../../../common/maps/obj/enemy.tx" x="167" y="57">
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="167" y="57">
    <properties>
     <property name="enemy" value="Merfolk Avatar"/>
    </properties>
   </object>
-  <object id="55" template="../../../common/maps/obj/door_left.tx" x="373.85" y="151.83">
+  <object id="55" template="../../../../../../common/maps/obj/door_left.tx" x="373.85" y="151.83">
    <properties>
     <property name="teleport" value="maps/map/portal_1U3.tmx"/>
     <property name="teleportObjectId" value="87"/>
    </properties>
   </object>
-  <object id="56" template="../../../common/maps/obj/gold.tx" x="64" y="142"/>
-  <object id="57" template="../../../common/maps/obj/gold.tx" x="137.5" y="58"/>
+  <object id="56" template="../../../../../../common/maps/obj/gold.tx" x="64" y="142"/>
+  <object id="57" template="../../../../../../common/maps/obj/gold.tx" x="137.5" y="58"/>
  </objectgroup>
 </map>

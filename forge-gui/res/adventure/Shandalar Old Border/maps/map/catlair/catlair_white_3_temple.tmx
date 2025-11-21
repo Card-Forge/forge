@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzr42Rg6MOC25AwNnl86onB1DJnqNtLrt3E6hu1d9TeUXtH7R3q9pJjJ6nuG6z20qL+BQDfkyFi
@@ -24,17 +24,17 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="201.5" y="272" width="32.75" height="16">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="201.5" y="272" width="32.75" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="51" template="../../../common/maps/obj/treasure.tx" x="247.923" y="92.8391"/>
-  <object id="56" template="../../../common/maps/obj/collision.tx" x="-16" y="0" width="16" height="272"/>
-  <object id="57" template="../../../common/maps/obj/collision.tx" x="480" y="0" width="16" height="272"/>
-  <object id="58" template="../../../common/maps/obj/collision.tx" x="-16" y="272" width="512" height="16"/>
-  <object id="59" template="../../../common/maps/obj/collision.tx" x="-16" y="-16" width="512" height="16"/>
-  <object id="60" template="../../../common/maps/obj/booster.tx" x="186.604" y="93.0526">
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="247.923" y="92.8391"/>
+  <object id="56" template="../../../../../../common/maps/obj/collision.tx" x="-16" y="0" width="16" height="272"/>
+  <object id="57" template="../../../../../../common/maps/obj/collision.tx" x="480" y="0" width="16" height="272"/>
+  <object id="58" template="../../../../../../common/maps/obj/collision.tx" x="-16" y="272" width="512" height="16"/>
+  <object id="59" template="../../../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="512" height="16"/>
+  <object id="60" template="../../../../../../common/maps/obj/booster.tx" x="186.604" y="93.0526">
    <properties>
     <property name="reward">[
   {
@@ -62,7 +62,7 @@
 </property>
    </properties>
   </object>
-  <object id="65" template="../../../common/maps/obj/enemy.tx" x="82.9032" y="115.999">
+  <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="82.9032" y="115.999">
    <properties>
     <property name="enemy" value="Stray Cat"/>
     <property name="fleeRange" value="30"/>
@@ -70,7 +70,7 @@
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="66" template="../../../common/maps/obj/enemy.tx" x="362.673" y="135.857">
+  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="362.673" y="135.857">
    <properties>
     <property name="enemy" value="Stray Cat"/>
     <property name="fleeRange" value="30"/>
@@ -79,9 +79,9 @@
     <property name="waypoints" value="67,70"/>
    </properties>
   </object>
-  <object id="67" template="../../../common/maps/obj/waypoint.tx" x="300.895" y="134.533"/>
-  <object id="70" template="../../../common/maps/obj/waypoint.tx" x="441.662" y="135.415"/>
-  <object id="71" template="../../../common/maps/obj/enemy.tx" x="211.419" y="41.7638" visible="1">
+  <object id="67" template="../../../../../../common/maps/obj/waypoint.tx" x="300.895" y="134.533"/>
+  <object id="70" template="../../../../../../common/maps/obj/waypoint.tx" x="441.662" y="135.415"/>
+  <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="211.419" y="41.7638" visible="1">
    <properties>
     <property name="enemy" value="Leonin Warrior"/>
     <property name="fleeRange" value="30"/>
@@ -90,7 +90,7 @@
     <property name="waypoints" value="74,75"/>
    </properties>
   </object>
-  <object id="73" template="../../../common/maps/obj/enemy.tx" x="164.098" y="129.237" visible="1">
+  <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="164.098" y="129.237" visible="1">
    <properties>
     <property name="enemy" value="Leonin Weaponmaster"/>
     <property name="fleeRange" value="30"/>
@@ -98,9 +98,9 @@
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="74" template="../../../common/maps/obj/waypoint.tx" x="157.038" y="51.5725"/>
-  <object id="75" template="../../../common/maps/obj/waypoint.tx" x="287.01" y="32.5876"/>
-  <object id="76" template="../../../common/maps/obj/enemy.tx" x="266.034" y="131.444" visible="1">
+  <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="157.038" y="51.5725"/>
+  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="287.01" y="32.5876"/>
+  <object id="76" template="../../../../../../common/maps/obj/enemy.tx" x="266.034" y="131.444" visible="1">
    <properties>
     <property name="enemy" value="Leonin Weaponmaster"/>
     <property name="fleeRange" value="30"/>
@@ -108,7 +108,7 @@
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="77" template="../../../common/maps/obj/enemy.tx" x="211.433" y="178.228" visible="1">
+  <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="211.433" y="178.228" visible="1">
    <properties>
     <property name="enemy" value="Stray Cat"/>
     <property name="fleeRange" value="30"/>
@@ -116,9 +116,9 @@
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="78" template="../../../common/maps/obj/manashards.tx" x="241.322" y="151.743"/>
-  <object id="79" template="../../../common/maps/obj/manashards.tx" x="193.223" y="150.419"/>
-  <object id="80" template="../../../common/maps/obj/enemy.tx" x="228" y="95" visible="1">
+  <object id="78" template="../../../../../../common/maps/obj/manashards.tx" x="241.322" y="151.743"/>
+  <object id="79" template="../../../../../../common/maps/obj/manashards.tx" x="193.223" y="150.419"/>
+  <object id="80" template="../../../../../../common/maps/obj/enemy.tx" x="228" y="95" visible="1">
    <properties>
     <property name="enemy" value="Leonin Weaponmaster"/>
     <property name="fleeRange" value="30"/>

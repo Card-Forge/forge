@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzr42Rg6BuE+BgrBNPLvgXsEAyzF8QmVS+5evBhbOEix0xYHSV2wsKBGH3UtpcUPBB2DqS9+OwetXfUXlrYS4zd5LqP3LKD0vKGluU6NvtJ0UsvDAAUXz5k
@@ -24,34 +24,34 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="192" y="280.333" width="48" height="16">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="280.333" width="48" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="48" template="../../../common/maps/obj/treasure.tx" x="192.396" y="34.3787"/>
-  <object id="49" template="../../../common/maps/obj/gold.tx" x="355.065" y="66.2689"/>
-  <object id="50" template="../../../common/maps/obj/enemy.tx" x="83.5746" y="135.792">
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="192.396" y="34.3787"/>
+  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="355.065" y="66.2689"/>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="83.5746" y="135.792">
    <properties>
     <property name="enemy" value="Merfolk Fighter"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="60,59"/>
    </properties>
   </object>
-  <object id="53" template="../../../common/maps/obj/enemy.tx" x="219.432" y="140.105">
+  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="219.432" y="140.105">
    <properties>
     <property name="enemy" value="Merfolk warrior"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="54" template="../../../common/maps/obj/enemy.tx" x="327.738" y="143.857">
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="327.738" y="143.857">
    <properties>
     <property name="enemy" value="Merfolk Fighter"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="58,57"/>
    </properties>
   </object>
-  <object id="55" template="../../../common/maps/obj/booster.tx" x="298.194" y="34.0691">
+  <object id="55" template="../../../../../../common/maps/obj/booster.tx" x="298.194" y="34.0691">
    <properties>
     <property name="reward">[
   {
@@ -79,12 +79,12 @@
 </property>
    </properties>
   </object>
-  <object id="56" template="../../../common/maps/obj/manashards.tx" x="43.1769" y="128.183"/>
-  <object id="57" template="../../../common/maps/obj/waypoint.tx" x="73.1023" y="216.224"/>
-  <object id="58" template="../../../common/maps/obj/waypoint.tx" x="291.688" y="131.218"/>
-  <object id="59" template="../../../common/maps/obj/waypoint.tx" x="322.047" y="217.525"/>
-  <object id="60" template="../../../common/maps/obj/waypoint.tx" x="124.713" y="73.9697"/>
-  <object id="61" template="../../../common/maps/obj/enemy.tx" x="248.318" y="76.5719">
+  <object id="56" template="../../../../../../common/maps/obj/manashards.tx" x="43.1769" y="128.183"/>
+  <object id="57" template="../../../../../../common/maps/obj/waypoint.tx" x="73.1023" y="216.224"/>
+  <object id="58" template="../../../../../../common/maps/obj/waypoint.tx" x="291.688" y="131.218"/>
+  <object id="59" template="../../../../../../common/maps/obj/waypoint.tx" x="322.047" y="217.525"/>
+  <object id="60" template="../../../../../../common/maps/obj/waypoint.tx" x="124.713" y="73.9697"/>
+  <object id="61" template="../../../../../../common/maps/obj/enemy.tx" x="248.318" y="76.5719">
    <properties>
     <property name="enemy" value="Sand Golem"/>
    </properties>

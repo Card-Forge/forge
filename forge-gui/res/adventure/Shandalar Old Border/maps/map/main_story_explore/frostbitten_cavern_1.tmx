@@ -3,8 +3,8 @@
  <properties>
   <property name="preventEscape" type="bool" value="true"/>
  </properties>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="20">
   <data encoding="base64" compression="zlib">
    eJx7L8DA8H4UD2k8QXDg3TCKR/EoHsWjeBSPYgQGAOukVWk=
@@ -29,7 +29,7 @@
   </data>
  </layer>
  <objectgroup id="5" name="Objects">
-  <object id="8" template="../../obj/enemy.tx" x="350" y="120">
+  <object id="8" template="../../../../../../common/maps/obj/enemy.tx" x="350" y="120">
    <properties>
     <property name="defeatDialog">[
   {
@@ -66,18 +66,18 @@
     <property name="enemy" value="Snow Wizard"/>
    </properties>
   </object>
-  <object id="9" template="../../obj/enemy.tx" x="308" y="255">
+  <object id="9" template="../../../../../../common/maps/obj/enemy.tx" x="308" y="255">
    <properties>
     <property name="enemy" value="Yeti"/>
    </properties>
   </object>
-  <object id="10" template="../../obj/enemy.tx" x="413" y="186">
+  <object id="10" template="../../../../../../common/maps/obj/enemy.tx" x="413" y="186">
    <properties>
     <property name="enemy" value="Yeti"/>
     <property name="pursueRange" type="int" value="0"/>
    </properties>
   </object>
-  <object id="11" template="../../obj/enemy.tx" x="97" y="79">
+  <object id="11" template="../../../../../../common/maps/obj/enemy.tx" x="97" y="79">
    <properties>
     <property name="enemy" value="Polar Bear"/>
     <property name="pursueRange" type="int" value="60"/>
@@ -85,7 +85,7 @@
     <property name="waypoints" value="21"/>
    </properties>
   </object>
-  <object id="12" template="../../obj/treasure.tx" x="64" y="64">
+  <object id="12" template="../../../../../../common/maps/obj/treasure.tx" x="64" y="64">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -109,26 +109,26 @@
 }]</property>
    </properties>
   </object>
-  <object id="13" template="../../obj/gold.tx" x="96" y="304"/>
-  <object id="14" template="../../obj/enemy.tx" x="143" y="304">
+  <object id="13" template="../../../../../../common/maps/obj/gold.tx" x="96" y="304"/>
+  <object id="14" template="../../../../../../common/maps/obj/enemy.tx" x="143" y="304">
    <properties>
     <property name="enemy" value="Polar Bear"/>
     <property name="threatRange" type="int" value="60"/>
     <property name="waypoints" value="22"/>
    </properties>
   </object>
-  <object id="15" template="../../obj/enemy.tx" x="208" y="112">
+  <object id="15" template="../../../../../../common/maps/obj/enemy.tx" x="208" y="112">
    <properties>
     <property name="enemy" value="Yeti"/>
     <property name="pursueRange" type="int" value="60"/>
     <property name="waypoints" value="r5-17-16"/>
    </properties>
   </object>
-  <object id="19" template="../../obj/manashards.tx" x="416" y="288"/>
-  <object id="20" template="../../obj/manashards.tx" x="177" y="79"/>
-  <object id="21" template="../../obj/waypoint.tx" name="21" x="97" y="79"/>
-  <object id="22" template="../../obj/waypoint.tx" name="22" x="143" y="304"/>
-  <object id="23" template="../../obj/dialog.tx" x="280" y="305" width="46" height="28">
+  <object id="19" template="../../../../../../common/maps/obj/manashards.tx" x="416" y="288"/>
+  <object id="20" template="../../../../../../common/maps/obj/manashards.tx" x="177" y="79"/>
+  <object id="21" template="../../../../../../common/maps/obj/waypoint.tx" name="21" x="97" y="79"/>
+  <object id="22" template="../../../../../../common/maps/obj/waypoint.tx" name="22" x="143" y="304"/>
+  <object id="23" template="../../../../../../common/maps/obj/dialog.tx" x="280" y="305" width="46" height="28">
    <properties>
     <property name="dialog">[
 {
@@ -139,7 +139,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="24" template="../../obj/dialog.tx" x="206" y="80" width="19" height="16">
+  <object id="24" template="../../../../../../common/maps/obj/dialog.tx" x="206" y="80" width="19" height="16">
    <properties>
     <property name="dialog">[
     {
@@ -158,7 +158,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="25" template="../../obj/dialog.tx" x="304" y="176" width="16" height="16">
+  <object id="25" template="../../../../../../common/maps/obj/dialog.tx" x="304" y="176" width="16" height="16">
    <properties>
     <property name="dialog">[
     {
@@ -185,7 +185,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="26" template="../../obj/dialog.tx" x="368" y="176" width="17" height="16">
+  <object id="26" template="../../../../../../common/maps/obj/dialog.tx" x="368" y="176" width="17" height="16">
    <properties>
     <property name="dialog">[
     {
@@ -214,18 +214,18 @@
   </object>
  </objectgroup>
  <objectgroup id="6" name="Waypoints">
-  <object id="1" template="../../obj/collision.tx" x="-32" y="0" width="32" height="320"/>
-  <object id="2" template="../../obj/collision.tx" x="-32" y="320" width="544" height="32"/>
-  <object id="3" template="../../obj/collision.tx" x="480" y="0" width="32" height="320"/>
-  <object id="4" template="../../obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
-  <object id="5" template="../../obj/waypoint.tx" name="5" x="240" y="96"/>
-  <object id="7" template="../../obj/entry_up.tx" x="296" y="327" width="124" height="16">
+  <object id="1" template="../../../../../../common/maps/obj/collision.tx" x="-32" y="0" width="32" height="320"/>
+  <object id="2" template="../../../../../../common/maps/obj/collision.tx" x="-32" y="320" width="544" height="32"/>
+  <object id="3" template="../../../../../../common/maps/obj/collision.tx" x="480" y="0" width="32" height="320"/>
+  <object id="4" template="../../../../../../common/maps/obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
+  <object id="5" template="../../../../../../common/maps/obj/waypoint.tx" name="5" x="240" y="96"/>
+  <object id="7" template="../../../../../../common/maps/obj/entry_up.tx" x="296" y="327" width="124" height="16">
    <properties>
     <property name="teleport" value="./frostbitten_cavern_0.tmx"/>
     <property name="teleportObjectId" value="31"/>
    </properties>
   </object>
-  <object id="16" template="../../obj/waypoint.tx" name="16" x="176" y="160"/>
-  <object id="17" template="../../obj/waypoint.tx" name="17" x="144" y="96"/>
+  <object id="16" template="../../../../../../common/maps/obj/waypoint.tx" name="16" x="176" y="160"/>
+  <object id="17" template="../../../../../../common/maps/obj/waypoint.tx" name="17" x="144" y="96"/>
  </objectgroup>
 </map>

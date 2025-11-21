@@ -3,9 +3,9 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
  <layer id="1" name="Background" width="60" height="30">
   <data encoding="base64" compression="zlib">
    eJzt1EEOgDAIRNFuvaj3P4L7RlvBDr+tkLBTnAeJ51HKCfabIvMRbjpbese4RtUfjLSXKKVhJmcv08q3+vLuSs5WpqdnZjXWtdt/RW0a4R2xH8po8UbNoL3eGbQnwlvPo00e9y4uy51nyHOXT2GNMkfvtlfkjVu78WazeiP3ofiGtdTz1Tv0ZmrlIi0qO51T7abzZGdnZ2fv3Rde8Ezx
@@ -30,12 +30,12 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="488.817" y="478.704" width="41.5" height="16">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="488.817" y="478.704" width="41.5" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="48" template="../../../common/maps/obj/treasure.tx" x="210.657" y="215.069">
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="210.657" y="215.069">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -55,10 +55,10 @@
 }]</property>
    </properties>
   </object>
-  <object id="63" template="../../../common/maps/obj/gold.tx" x="161.217" y="237.673"/>
-  <object id="68" template="../../../common/maps/obj/gold.tx" x="769.875" y="455.247"/>
-  <object id="71" template="../../../common/maps/obj/manashards.tx" x="246.784" y="224.533"/>
-  <object id="72" template="../../../common/maps/obj/booster.tx" x="178.912" y="251.368">
+  <object id="63" template="../../../../../../common/maps/obj/gold.tx" x="161.217" y="237.673"/>
+  <object id="68" template="../../../../../../common/maps/obj/gold.tx" x="769.875" y="455.247"/>
+  <object id="71" template="../../../../../../common/maps/obj/manashards.tx" x="246.784" y="224.533"/>
+  <object id="72" template="../../../../../../common/maps/obj/booster.tx" x="178.912" y="251.368">
    <properties>
     <property name="reward">[
   {
@@ -86,9 +86,9 @@
 </property>
    </properties>
   </object>
-  <object id="84" template="../../../common/maps/obj/waypoint.tx" x="650.485" y="448.365"/>
-  <object id="85" template="../../../common/maps/obj/waypoint.tx" x="236.985" y="289.365"/>
-  <object id="105" template="../../../common/maps/obj/enemy.tx" x="221.39" y="243.01">
+  <object id="84" template="../../../../../../common/maps/obj/waypoint.tx" x="650.485" y="448.365"/>
+  <object id="85" template="../../../../../../common/maps/obj/waypoint.tx" x="236.985" y="289.365"/>
+  <object id="105" template="../../../../../../common/maps/obj/enemy.tx" x="221.39" y="243.01">
    <properties>
     <property name="effect">{
 	&quot;startBattleWithCard&quot;: [ &quot;First Head of the Hydra&quot;, &quot;Second Head of the Hydra&quot;, &quot;Third Head of the Hydra&quot;, &quot;Fourth Head of the Hydra&quot;, &quot;Fifth Head of the Hydra&quot;, &quot;Sixth Head of the Hydra&quot; ]
@@ -109,26 +109,26 @@
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="107" template="../../../common/maps/obj/enemy.tx" x="411.402" y="265.155">
+  <object id="107" template="../../../../../../common/maps/obj/enemy.tx" x="411.402" y="265.155">
    <properties>
     <property name="enemy" value="Hydra"/>
     <property name="threatRange" type="int" value="50"/>
     <property name="waypoints" value="117,114,85,114,117"/>
    </properties>
   </object>
-  <object id="108" template="../../../common/maps/obj/collision.tx" x="-0.122016" y="479.744" width="962.195" height="16"/>
-  <object id="109" template="../../../common/maps/obj/collision.tx" x="-2.27555" y="-17.028" width="962.195" height="16"/>
-  <object id="110" template="../../../common/maps/obj/collision.tx" x="960" y="-17.383" width="16" height="514.099"/>
-  <object id="111" template="../../../common/maps/obj/collision.tx" x="-17.3333" y="-15.0495" width="16" height="514.099"/>
-  <object id="112" template="../../../common/maps/obj/enemy.tx" x="681.5" y="188.5">
+  <object id="108" template="../../../../../../common/maps/obj/collision.tx" x="-0.122016" y="479.744" width="962.195" height="16"/>
+  <object id="109" template="../../../../../../common/maps/obj/collision.tx" x="-2.27555" y="-17.028" width="962.195" height="16"/>
+  <object id="110" template="../../../../../../common/maps/obj/collision.tx" x="960" y="-17.383" width="16" height="514.099"/>
+  <object id="111" template="../../../../../../common/maps/obj/collision.tx" x="-17.3333" y="-15.0495" width="16" height="514.099"/>
+  <object id="112" template="../../../../../../common/maps/obj/enemy.tx" x="681.5" y="188.5">
    <properties>
     <property name="enemy" value="Hydra"/>
     <property name="threatRange" type="int" value="50"/>
     <property name="waypoints" value="78,99,78,98,93,98,78"/>
    </properties>
   </object>
-  <object id="114" template="../../../common/maps/obj/waypoint.tx" x="356.5" y="274.5"/>
-  <object id="115" template="../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="816.5" y="95" width="16" height="16" visible="1">
+  <object id="114" template="../../../../../../common/maps/obj/waypoint.tx" x="356.5" y="274.5"/>
+  <object id="115" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="816.5" y="95" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[
   {
@@ -140,17 +140,17 @@
 ]</property>
    </properties>
   </object>
-  <object id="116" template="../../../common/maps/obj/enemy.tx" x="928" y="176">
+  <object id="116" template="../../../../../../common/maps/obj/enemy.tx" x="928" y="176">
    <properties>
     <property name="enemy" value="Parrot"/>
     <property name="threatRange" type="int" value="50"/>
     <property name="waypoints" value="119,118,84"/>
    </properties>
   </object>
-  <object id="117" template="../../../common/maps/obj/waypoint.tx" x="527.5" y="235"/>
-  <object id="118" template="../../../common/maps/obj/waypoint.tx" x="923.5" y="334"/>
-  <object id="119" template="../../../common/maps/obj/waypoint.tx" x="919" y="95"/>
-  <object id="121" template="../../../common/maps/obj/enemy.tx" x="222.406" y="242.409">
+  <object id="117" template="../../../../../../common/maps/obj/waypoint.tx" x="527.5" y="235"/>
+  <object id="118" template="../../../../../../common/maps/obj/waypoint.tx" x="923.5" y="334"/>
+  <object id="119" template="../../../../../../common/maps/obj/waypoint.tx" x="919" y="95"/>
+  <object id="121" template="../../../../../../common/maps/obj/enemy.tx" x="222.406" y="242.409">
    <properties>
     <property name="effect">{
 	&quot;startBattleWithCard&quot;: [ &quot;First Head of the Hydra&quot;, &quot;Second Head of the Hydra&quot;, &quot;Third Head of the Hydra&quot;, &quot;Fourth Head of the Hydra&quot;, &quot;Fifth Head of the Hydra&quot;, &quot;Sixth Head of the Hydra&quot; ],

@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
    eJzt2DEOwyAMBVC2KpfLGXurLjlM1KFqhWL4mG9/WnXwECXBTzYCxLGVcojifitl395RP++O8eoY+RaJ2ofmY+Ufsb18Ub1j+CLn12d/rt7V/VP4rDzW/Mr29ezK+o3U1wqlD7GqXWxf1HrE9GUa1X3t+di1eBiBeFr7r9LXW59ZRsvW8qH7x6yvZbN8meeDWV/0+uzxZe5vq/qevenZ1PXz2P6+eR9ijPaNjMP2sffubzy/qD0r+1au31Vuhc/Ks4rPuntC5p7al3l++QVfnRu5Y8v0Rd//ee5as3zI+Gwb02f9g/7P8FlzGum113cCSMDRNA==
@@ -29,49 +29,49 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="59" template="../../../common/maps/obj/door_right.tx" x="-0.33333" y="320.333">
+  <object id="59" template="../../../../../../common/maps/obj/door_right.tx" x="-0.33333" y="320.333">
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel_4/cave_23A3.tmx"/>
     <property name="teleportObjectId" value="61"/>
    </properties>
   </object>
-  <object id="62" template="../../../common/maps/obj/door_up.tx" x="321.94" y="639.409">
+  <object id="62" template="../../../../../../common/maps/obj/door_up.tx" x="321.94" y="639.409">
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel_4/cave_23B4.tmx"/>
     <property name="teleportObjectId" value="61"/>
    </properties>
   </object>
-  <object id="63" template="../../../common/maps/obj/enemy.tx" x="370" y="241.666">
+  <object id="63" template="../../../../../../common/maps/obj/enemy.tx" x="370" y="241.666">
    <properties>
     <property name="displayNameOverride" value="Cave Faerie"/>
     <property name="enemy" value="Faerie"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="64" template="../../../common/maps/obj/enemy.tx" x="256.334" y="228.666">
+  <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="256.334" y="228.666">
    <properties>
     <property name="displayNameOverride" value="Cave Faerie"/>
     <property name="enemy" value="Dimir Faerie"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="65" template="../../../common/maps/obj/treasure.tx" x="311.667" y="276.667"/>
-  <object id="66" template="../../../common/maps/obj/treasure.tx" x="326.333" y="396"/>
-  <object id="67" template="../../../common/maps/obj/gold.tx" x="395" y="255"/>
-  <object id="68" template="../../../common/maps/obj/gold.tx" x="279.333" y="376.333"/>
-  <object id="69" template="../../../common/maps/obj/enemy.tx" x="338.667" y="127.333">
+  <object id="65" template="../../../../../../common/maps/obj/treasure.tx" x="311.667" y="276.667"/>
+  <object id="66" template="../../../../../../common/maps/obj/treasure.tx" x="326.333" y="396"/>
+  <object id="67" template="../../../../../../common/maps/obj/gold.tx" x="395" y="255"/>
+  <object id="68" template="../../../../../../common/maps/obj/gold.tx" x="279.333" y="376.333"/>
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="338.667" y="127.333">
    <properties>
     <property name="displayNameOverride" value="Cave Faerie"/>
     <property name="enemy" value="Eldraine Faerie"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="70" template="../../../common/maps/obj/enemy.tx" x="42.3333" y="144.667">
+  <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="42.3333" y="144.667">
    <properties>
     <property name="enemy" value="Dimir Faerie"/>
    </properties>
   </object>
-  <object id="71" template="../../../common/maps/obj/enemy.tx" x="494.667" y="167.667">
+  <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="494.667" y="167.667">
    <properties>
     <property name="displayNameOverride" value="Cave Faerie"/>
     <property name="enemy" value="Eldraine Faerie"/>

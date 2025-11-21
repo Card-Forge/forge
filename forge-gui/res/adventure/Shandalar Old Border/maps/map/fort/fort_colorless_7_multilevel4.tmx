@@ -3,9 +3,9 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/dungeon/dungeon_2.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/dungeon_2.tsx"/>
  <layer id="1" name="Background" width="50" height="50">
   <data encoding="base64" compression="zlib">
    eJzt10EKwjAQQNEssildeVtPIvQQc0cpUgxDmtomkzrhLx64KNpPOjouUwgLAAAAYOg5h/CafrNee/f91jb8Q8sjfkj8vr7SkLZs71di1dGiQbeUeqw7ahs2ukF/jqcOfSbeO/T8WXeIYYdu8d4hA3SkLV7nQz9bnjtGea56zLkYn0eP7930vFvvJbndxKIjtzO02BNzM9FrPmpbdMNdv4O64+z/qKOG3h0S9++rtMOeubZ1BwAAAABgDG/+mcqs
@@ -35,25 +35,25 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="272.333" y="382.543">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="272.333" y="382.543">
    <properties>
     <property name="teleport" value="../common/maps/map/fort/fort_colorless_7_multilevel3.tmx"/>
     <property name="teleportObjectId" value="38"/>
    </properties>
   </object>
-  <object id="73" template="../../../common/maps/obj/gold.tx" x="522.917" y="363.166"/>
-  <object id="74" template="../../../common/maps/obj/treasure.tx" x="521.917" y="349.416"/>
-  <object id="75" template="../../../common/maps/obj/enemy.tx" x="391.751" y="324.417">
+  <object id="73" template="../../../../../../common/maps/obj/gold.tx" x="522.917" y="363.166"/>
+  <object id="74" template="../../../../../../common/maps/obj/treasure.tx" x="521.917" y="349.416"/>
+  <object id="75" template="../../../../../../common/maps/obj/enemy.tx" x="391.751" y="324.417">
    <properties>
     <property name="enemy" value="Eldrazi Devastator"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="80"/>
    </properties>
   </object>
-  <object id="78" template="../../../common/maps/obj/treasure.tx" x="521.333" y="328"/>
-  <object id="79" template="../../../common/maps/obj/gold.tx" x="521.333" y="307.667"/>
-  <object id="80" template="../../../common/maps/obj/manashards.tx" x="408" y="411"/>
-  <object id="81" template="../../../common/maps/obj/booster.tx" x="504.333" y="282.667">
+  <object id="78" template="../../../../../../common/maps/obj/treasure.tx" x="521.333" y="328"/>
+  <object id="79" template="../../../../../../common/maps/obj/gold.tx" x="521.333" y="307.667"/>
+  <object id="80" template="../../../../../../common/maps/obj/manashards.tx" x="408" y="411"/>
+  <object id="81" template="../../../../../../common/maps/obj/booster.tx" x="504.333" y="282.667">
    <properties>
     <property name="reward">[
   {

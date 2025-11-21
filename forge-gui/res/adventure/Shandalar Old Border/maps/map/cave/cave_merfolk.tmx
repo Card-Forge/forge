@@ -3,9 +3,9 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJztlE0OgjAQhbvy5wxSEw7RLjyAR3KFaLyHyi0MRvFo2pcycSgtFjGsXLxAaDvf/LxSTIUoRtB63lTsua0SYqnH41aGlRvmwjz35rnpkesQLjiS1Qn2c/IbLmJzdZ1H3YlRaXTt0Xcfl/oH7VRcHOIP4SLGQVnBP1VHPKznkblxP7jcY83lnvX1Gt/O9d6bjmOTF31cxFvN7Fqp2zMWbP40T2KH/E/vfI/LhTcT3c7P7Zc799AssFey/mEfehi6R5L17vTBQzQLqj+UQ8r6F+Lye+rWlykrt/6LfucgPexHBNdV1uEbqj8NeNDnyW//z6S7tn2luQ25v30U+1/7c5t6ARl5LSs=
@@ -25,39 +25,39 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="193.059" y="270.942" width="48" height="16">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="193.059" y="270.942" width="48" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="49" template="../../../common/maps/obj/gold.tx" x="159.038" y="25.203"/>
-  <object id="50" template="../../../common/maps/obj/enemy.tx" x="191.943" y="73.5139">
+  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="159.038" y="25.203"/>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="191.943" y="73.5139">
    <properties>
     <property name="enemy" value="Merfolk"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="51" template="../../../common/maps/obj/treasure.tx" x="390.492" y="184.777"/>
-  <object id="53" template="../../../common/maps/obj/enemy.tx" x="316.265" y="171.872">
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="390.492" y="184.777"/>
+  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="316.265" y="171.872">
    <properties>
     <property name="enemy" value="Merfolk warrior"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="54" template="../../../common/maps/obj/enemy.tx" x="62.4418" y="185.559">
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="62.4418" y="185.559">
    <properties>
     <property name="enemy" value="Merfolk Avatar"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="55" template="../../../common/maps/obj/enemy.tx" x="221.473" y="155.833">
+  <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="221.473" y="155.833">
    <properties>
     <property name="enemy" value="Water Elemental"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="56" template="../../../common/maps/obj/manashards.tx" x="371.543" y="123.278"/>
-  <object id="58" template="../../../common/maps/obj/booster.tx" x="40.9647" y="107.398">
+  <object id="56" template="../../../../../../common/maps/obj/manashards.tx" x="371.543" y="123.278"/>
+  <object id="58" template="../../../../../../common/maps/obj/booster.tx" x="40.9647" y="107.398">
    <properties>
     <property name="reward">[
   {

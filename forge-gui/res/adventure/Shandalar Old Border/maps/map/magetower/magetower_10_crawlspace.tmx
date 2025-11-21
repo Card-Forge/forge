@@ -8,8 +8,8 @@
   &quot;startBattleWithCard&quot;: [ &quot;Crawlspace|C13|1&quot; ],
 }</property>
  </properties>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxby8LAsHYUo+CZnBA80O5AxkwiEDxQ9lLLbnMuCCbVv5TGRxIHBBPrV2r5WZUdgXGpaRVkYGgThNjXIkgdu4mxV1mIgUFFCGKXEpQGuUUNyJ7GCcHk2onPXlUhiH83sCPwQaDYLE7a2gsyX0MINX41kPxKjr3JHBCMT91tUQYGdSFU/4LC2JiLPHtB+BMDBONT0y6IiF8Q1hSCuIXSNE0MRg5jNTrai+4Gets5VDAAVFFBAg==
@@ -29,13 +29,13 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="101.474" y="271.026" width="21.5" height="16">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="101.474" y="271.026" width="21.5" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="47" template="../../../common/maps/obj/gold.tx" x="345" y="186"/>
-  <object id="56" template="../../../common/maps/obj/gold.tx" x="182.5" y="184">
+  <object id="47" template="../../../../../../common/maps/obj/gold.tx" x="345" y="186"/>
+  <object id="56" template="../../../../../../common/maps/obj/gold.tx" x="182.5" y="184">
    <properties>
     <property name="reward">[
   {
@@ -46,7 +46,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="55" template="../../../common/maps/obj/treasure.tx" x="337.421" y="158.395">
+  <object id="55" template="../../../../../../common/maps/obj/treasure.tx" x="337.421" y="158.395">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -66,7 +66,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="49" template="../../../common/maps/obj/gold.tx" x="86" y="185.5">
+  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="86" y="185.5">
    <properties>
     <property name="reward">[
   {
@@ -77,7 +77,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="50" template="../../../common/maps/obj/enemy.tx" gid="11419" x="288.527" y="172.914" rotation="0">
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" gid="11419" x="288.527" y="172.914" rotation="0">
    <properties>
     <property name="effect">{
  &quot;lifeModifier&quot;: 4,
@@ -86,26 +86,26 @@
     <property name="enemy" value="Archmage"/>
    </properties>
   </object>
-  <object id="51" template="../../../common/maps/obj/enemy.tx" gid="11419" x="183.579" y="127.263">
+  <object id="51" template="../../../../../../common/maps/obj/enemy.tx" gid="11419" x="183.579" y="127.263">
    <properties>
     <property name="enemy" value="Symbiote"/>
    </properties>
   </object>
-  <object id="54" template="../../../common/maps/obj/enemy.tx" gid="11419" x="210.079" y="173.263">
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" gid="11419" x="210.079" y="173.263">
    <properties>
     <property name="enemy" value="Merfolk Avatar"/>
    </properties>
   </object>
-  <object id="53" template="../../../common/maps/obj/enemy.tx" x="104.079" y="123.763">
+  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="104.079" y="123.763">
    <properties>
     <property name="enemy" value="Adept Blue Wizard"/>
    </properties>
   </object>
-  <object id="52" template="../../../common/maps/obj/enemy.tx" x="104.184" y="214.079">
+  <object id="52" template="../../../../../../common/maps/obj/enemy.tx" x="104.184" y="214.079">
    <properties>
     <property name="enemy" value="Illusionist"/>
    </properties>
   </object>
-  <object id="58" template="../../../common/maps/obj/manashards.tx" x="105" y="91.6667"/>
+  <object id="58" template="../../../../../../common/maps/obj/manashards.tx" x="105" y="91.6667"/>
  </objectgroup>
 </map>

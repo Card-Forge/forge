@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="60">
   <data encoding="base64" compression="zlib">
    eJztwzENAAAMA6C+M1f/cipkkNBLqqqqqqqqqr446Chj1w==
@@ -24,41 +24,41 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="66" template="../../../../common/maps/obj/door_up.tx" x="216" y="958">
+  <object id="66" template="../../../../../../common/maps/obj/door_up.tx" x="216" y="958">
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/cave_21.tmx"/>
     <property name="teleportObjectId" value="65"/>
    </properties>
   </object>
-  <object id="67" template="../../../../common/maps/obj/door_down.tx" x="223.333" y="17.3333">
+  <object id="67" template="../../../../../../common/maps/obj/door_down.tx" x="223.333" y="17.3333">
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/cave_21C.tmx"/>
     <property name="teleportObjectId" value="66"/>
    </properties>
   </object>
-  <object id="68" template="../../../../common/maps/obj/enemy.tx" x="82.0833" y="509.5">
+  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="82.0833" y="509.5">
    <properties>
     <property name="enemy" value="Mimic"/>
    </properties>
   </object>
-  <object id="69" template="../../../../common/maps/obj/manashards.tx" x="118" y="530"/>
-  <object id="70" template="../../../../common/maps/obj/manashards.tx" x="105.333" y="472.667"/>
-  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="222" y="39.3333">
+  <object id="69" template="../../../../../../common/maps/obj/manashards.tx" x="118" y="530"/>
+  <object id="70" template="../../../../../../common/maps/obj/manashards.tx" x="105.333" y="472.667"/>
+  <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="222" y="39.3333">
    <properties>
     <property name="enemy" value="Evil Wall"/>
    </properties>
   </object>
-  <object id="72" template="../../../../common/maps/obj/enemy.tx" x="230.667" y="398.667">
+  <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="230.667" y="398.667">
    <properties>
     <property name="enemy" value="Gorgon"/>
     <property name="threatRange" type="int" value="50"/>
     <property name="waypoints" value="73,74,73,76"/>
    </properties>
   </object>
-  <object id="73" template="../../../../common/maps/obj/waypoint.tx" x="206" y="346.667"/>
-  <object id="74" template="../../../../common/maps/obj/waypoint.tx" x="208" y="92.6667"/>
-  <object id="75" template="../../../../common/maps/obj/waypoint.tx" x="252.667" y="435.333"/>
-  <object id="76" template="../../../../common/maps/obj/waypoint.tx" x="294.667" y="522.667"/>
-  <object id="77" template="../../../../common/maps/obj/waypoint.tx" x="272.667" y="754.667"/>
+  <object id="73" template="../../../../../../common/maps/obj/waypoint.tx" x="206" y="346.667"/>
+  <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="208" y="92.6667"/>
+  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="252.667" y="435.333"/>
+  <object id="76" template="../../../../../../common/maps/obj/waypoint.tx" x="294.667" y="522.667"/>
+  <object id="77" template="../../../../../../common/maps/obj/waypoint.tx" x="272.667" y="754.667"/>
  </objectgroup>
 </map>

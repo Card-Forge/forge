@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="60" height="60">
   <data encoding="base64" compression="zlib">
    eJztw7ENAAAMAiDXPu/N/tFAQi+pqqqqqqqqqqqqqqqqqvrqAKuZS+k=
@@ -24,20 +24,20 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="53" template="../../../common/maps/obj/enemy.tx" x="421.621" y="735.341">
+  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="421.621" y="735.341">
    <properties>
     <property name="enemy" value="Cerodon"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="54" template="../../../common/maps/obj/treasure.tx" x="416.667" y="523.5"/>
-  <object id="55" template="../../../common/maps/obj/door_up.tx" x="457.333" y="956.667">
+  <object id="54" template="../../../../../../common/maps/obj/treasure.tx" x="416.667" y="523.5"/>
+  <object id="55" template="../../../../../../common/maps/obj/door_up.tx" x="457.333" y="956.667">
    <properties>
     <property name="teleport" value="../common/maps/map/merfolkpool/merfolkpool_6.tmx"/>
     <property name="teleportObjectId" value="61"/>
    </properties>
   </object>
-  <object id="56" template="../../../common/maps/obj/manashards.tx" x="472.667" y="681.333"/>
+  <object id="56" template="../../../../../../common/maps/obj/manashards.tx" x="472.667" y="681.333"/>
  </objectgroup>
 </map>

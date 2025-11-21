@@ -3,9 +3,9 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="6" name="Collision" width="30" height="25">
   <data encoding="base64" compression="zlib">
    eJy1lksOwjAMRLuk12ELa1T1rByp69JjQIUshmHGcRBEGqmAnedfUpbzMCxF3cantocuiZQvrhbndHxp/5yxWOjL+2QcFueY2aLdZPKvcGfBUuyoCbInYedq7XLNcnRC7r6qXMfs6VHMY8V/f96SflaZ2Ovr4dPf9TSYHBMqzo6KS8151rOZ7GNfxVdnNnqI/lUu1knVuXUumYv3h5rtCrclxw2tZs85YVXmySlWxLOO73vOFGMlN2XnfN2dpvLNzrp7F3Ce3N/IuVq/njqrhf58tyqbb/upuDh7yG31F89pdY5479Z88O+qFtw7xY1nxey581vCfiE3m8eK3Jy6PPmebv1P4llo8VxfHYO/y3iV2cX9KnEwu+eM/IL/LacnDqV/rTvHbHZ/
@@ -30,53 +30,53 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="242" y="397.667" width="48" height="16">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="242" y="397.667" width="48" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="50" template="../../../common/maps/obj/enemy.tx" x="337.833" y="137.111">
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="337.833" y="137.111">
    <properties>
     <property name="enemy" value="Satyr Grove Guardian"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="65,66,67,64"/>
    </properties>
   </object>
-  <object id="53" template="../../../common/maps/obj/enemy.tx" x="182.167" y="156.833">
+  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="182.167" y="156.833">
    <properties>
     <property name="enemy" value="Satyr Grove Guardian"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="66,65,64,67"/>
    </properties>
   </object>
-  <object id="55" template="../../../common/maps/obj/enemy.tx" x="243.658" y="228.891">
+  <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="243.658" y="228.891">
    <properties>
     <property name="enemy" value="Satyr Grove Guardian"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="65,66"/>
    </properties>
   </object>
-  <object id="56" template="../../../common/maps/obj/gold.tx" x="241.058" y="150.057"/>
-  <object id="59" template="../../../common/maps/obj/gold.tx" x="246.333" y="55.3333"/>
-  <object id="60" template="../../../common/maps/obj/gold.tx" x="291" y="55"/>
-  <object id="62" template="../../../common/maps/obj/treasure.tx" x="268.667" y="55.3333"/>
-  <object id="63" template="../../../common/maps/obj/enemy.tx" x="270" y="72">
+  <object id="56" template="../../../../../../common/maps/obj/gold.tx" x="241.058" y="150.057"/>
+  <object id="59" template="../../../../../../common/maps/obj/gold.tx" x="246.333" y="55.3333"/>
+  <object id="60" template="../../../../../../common/maps/obj/gold.tx" x="291" y="55"/>
+  <object id="62" template="../../../../../../common/maps/obj/treasure.tx" x="268.667" y="55.3333"/>
+  <object id="63" template="../../../../../../common/maps/obj/enemy.tx" x="270" y="72">
    <properties>
     <property name="enemy" value="Satyr Grove Guardian"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="64" template="../../../common/maps/obj/waypoint.tx" x="332" y="92.6667"/>
-  <object id="65" template="../../../common/maps/obj/waypoint.tx" x="324.667" y="222"/>
-  <object id="66" template="../../../common/maps/obj/waypoint.tx" x="175.667" y="233.333"/>
-  <object id="67" template="../../../common/maps/obj/waypoint.tx" x="179.333" y="95"/>
-  <object id="68" template="../../../common/maps/obj/collision.tx" x="-0.833333" y="-16.6667" width="481" height="16"/>
-  <object id="69" template="../../../common/maps/obj/collision.tx" x="479.667" y="0.9585" width="16" height="414.416"/>
-  <object id="70" template="../../../common/maps/obj/collision.tx" x="-15.6667" y="0.458667" width="16" height="414.416"/>
-  <object id="71" template="../../../common/maps/obj/collision.tx" x="-0.833333" y="401" width="481" height="16"/>
-  <object id="72" template="../../../common/maps/obj/manashards.tx" x="448.333" y="245.333"/>
-  <object id="73" template="../../../common/maps/obj/manashards.tx" x="144.667" y="16"/>
-  <object id="74" template="../../../common/maps/obj/enemy.tx" x="44.25" y="88.5">
+  <object id="64" template="../../../../../../common/maps/obj/waypoint.tx" x="332" y="92.6667"/>
+  <object id="65" template="../../../../../../common/maps/obj/waypoint.tx" x="324.667" y="222"/>
+  <object id="66" template="../../../../../../common/maps/obj/waypoint.tx" x="175.667" y="233.333"/>
+  <object id="67" template="../../../../../../common/maps/obj/waypoint.tx" x="179.333" y="95"/>
+  <object id="68" template="../../../../../../common/maps/obj/collision.tx" x="-0.833333" y="-16.6667" width="481" height="16"/>
+  <object id="69" template="../../../../../../common/maps/obj/collision.tx" x="479.667" y="0.9585" width="16" height="414.416"/>
+  <object id="70" template="../../../../../../common/maps/obj/collision.tx" x="-15.6667" y="0.458667" width="16" height="414.416"/>
+  <object id="71" template="../../../../../../common/maps/obj/collision.tx" x="-0.833333" y="401" width="481" height="16"/>
+  <object id="72" template="../../../../../../common/maps/obj/manashards.tx" x="448.333" y="245.333"/>
+  <object id="73" template="../../../../../../common/maps/obj/manashards.tx" x="144.667" y="16"/>
+  <object id="74" template="../../../../../../common/maps/obj/enemy.tx" x="44.25" y="88.5">
    <properties>
     <property name="enemy" value="Symbiote"/>
     <property name="threatRange" type="int" value="40"/>

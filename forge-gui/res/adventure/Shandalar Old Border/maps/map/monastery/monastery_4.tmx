@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJztlmEKgCAMhf0b1Qms63SIukv3quxuJTZYkkZtGcI+GIMt38NFLKUEIR1NRQuK71Arpfc8o+hrV4eMe+3Rp/qOpdPGaKTZevrW056h+vq6lgnVlou+Zpjzle8dufvqBxrwPOd9u+KcQ7Xc5wykvq+83zgcvuuL84ZpL8xIA/YCEOp/MefYXoB+zr6TpxHzXZi+o/XYwTgM0gz1qb5//OcIAoUNp+8uUA==
@@ -29,32 +29,32 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="208" y="391.287" width="32" height="16">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="208" y="391.287" width="32" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="48" template="../../../common/maps/obj/treasure.tx" x="279.5" y="375"/>
-  <object id="50" template="../../../common/maps/obj/enemy.tx" x="159.006" y="286.459">
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="279.5" y="375"/>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="159.006" y="286.459">
    <properties>
     <property name="enemy" value="Cleric"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="51" template="../../../common/maps/obj/treasure.tx" x="216.171" y="122.719"/>
-  <object id="52" template="../../../common/maps/obj/gold.tx" x="152.5" y="374.5"/>
-  <object id="53" template="../../../common/maps/obj/enemy.tx" x="214.827" y="151.762">
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="216.171" y="122.719"/>
+  <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="152.5" y="374.5"/>
+  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="214.827" y="151.762">
    <properties>
     <property name="enemy" value="Sun Giant"/>
    </properties>
   </object>
-  <object id="56" template="../../../common/maps/obj/enemy.tx" x="280.296" y="316.458">
+  <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="280.296" y="316.458">
    <properties>
     <property name="enemy" value="White Dwarf"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
-  <object id="57" template="../../../common/maps/obj/booster.tx" x="127.641" y="236.154">
+  <object id="57" template="../../../../../../common/maps/obj/booster.tx" x="127.641" y="236.154">
    <properties>
     <property name="reward">[
   {
@@ -82,20 +82,20 @@
 </property>
    </properties>
   </object>
-  <object id="58" template="../../../common/maps/obj/manashards.tx" x="303.975" y="224.625"/>
-  <object id="59" template="../../../common/maps/obj/enemy.tx" x="238.878" y="221.935">
+  <object id="58" template="../../../../../../common/maps/obj/manashards.tx" x="303.975" y="224.625"/>
+  <object id="59" template="../../../../../../common/maps/obj/enemy.tx" x="238.878" y="221.935">
    <properties>
     <property name="enemy" value="Apprentice White Wizard"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="60" template="../../../common/maps/obj/enemy.tx" x="191.392" y="220.555">
+  <object id="60" template="../../../../../../common/maps/obj/enemy.tx" x="191.392" y="220.555">
    <properties>
     <property name="enemy" value="Apprentice White Wizard"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="61" template="../../../common/maps/obj/enemy.tx" x="272.777" y="254.466">
+  <object id="61" template="../../../../../../common/maps/obj/enemy.tx" x="272.777" y="254.466">
    <properties>
     <property name="enemy" value="Monk"/>
     <property name="threatRange" type="int" value="40"/>

@@ -3,11 +3,11 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
- <tileset firstgid="28289" source="../../../common/maps/tileset/main-nocollide.tsx"/>
- <tileset firstgid="38401" source="../../../common/maps/tileset/dungeon/animatedtiles.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="38401" source="../../../../../../common/maps/tileset/dungeon/animatedtiles.tsx"/>
  <layer id="1" name="Background" width="72" height="66">
   <data encoding="base64" compression="zlib">
    eJzt201OwzAQBeBsEOqCFeIcLSJInKAXYcUdOAxXACSOwF24BRohi1Ea/8XxPI89ld6iaqt6Pk2cxHLOh2k6WyxK8307TVfX4aDHiIirnXxCGdEp1WbphB53qzY9+cTmki02Wnxi80BJ/anzENogVPvp6B9rTRsNRs5mbawSNi0b8d5ZG+vaZxJGPD83eCdph5zQ2NBGiF7RZqShj9wYUV7uv9EWKSEfhFHrx1orx502o7XU9EHXXZqaRuja9kqt6yctx1ZKnh72NerJZu8+6tHG+dCrxEbqPhSVHAd+r6zpmnBL3+T2SO99ErJxtftseu2TtVCtfM7hny3n6tFseA/57Ea3icVswjGbcMzGfMzHfMynzZiPP7QmZD6X4fcU77MZ+WzMKG4zuhHNMTGbUY3IJnc99X7Gj1syuevLIZ9e1lipbyhb1t99Pl/zX0qOweX6HCol+8+o/uV6Gr0nm17mqdL9eVT/Jwu3CTlqidT+Ra19JLm/03zMpyTSc9Ae/ye5l8x8wjkC9oaX2ozok/LckLRNS/sYaBwfj3K1l9iUPuul3SjFxn1vtD5KtUH5II1ybJA+CKNcG7QPhXykjHJtKC+vWB+K1Pmcn5OeF9cVvt+QTyxvd/9J+T5PSz5bwmvfO6lGrfrUtMkxGtnHGYXOA635SLmk9lFLPggbblTj+bdfGQy50Q==
@@ -32,8 +32,8 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects" visible="0">
-  <object id="48" template="../../../common/maps/obj/treasure.tx" x="112.333" y="520.333"/>
-  <object id="50" template="../../../common/maps/obj/enemy.tx" x="112.902" y="544.559">
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="112.333" y="520.333"/>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="112.902" y="544.559">
    <properties>
     <property name="enemy" value="High Vampire"/>
    </properties>

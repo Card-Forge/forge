@@ -3,10 +3,10 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/FarmFood.tsx"/>
- <tileset firstgid="16001" source="../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/FarmFood.tsx"/>
+ <tileset firstgid="16001" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="10" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJyr5GRgqBzFo3gE4UZ+BoYmInEzP/XslRdgYFAgEisKUNfeTBH62AuyBxZ2Kkj2gmh0jG43JWGOzXxSMTl+H7WXPDxq76i91HIDJXaNZHtH8SgexaMYGQMALfO8Qg==
@@ -31,18 +31,18 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="238.666" y="480.166">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="238.666" y="480.166">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="78" template="../../../common/maps/obj/door_down.tx" x="232.5" y="235.5">
+  <object id="78" template="../../../../../../common/maps/obj/door_down.tx" x="232.5" y="235.5">
    <properties>
     <property name="teleport" value="../common/maps/map/demontower/portal_2B.tmx"/>
     <property name="teleportObjectId" value="69"/>
    </properties>
   </object>
-  <object id="83" template="../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="258" y="288.667" width="16" height="16" visible="1">
+  <object id="83" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="258" y="288.667" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[
   {

@@ -3,10 +3,10 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
- <tileset firstgid="28289" source="../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
  <layer id="1" name="Background" width="80" height="90">
   <data encoding="base64" compression="zlib">
    eJzt20tu2zAQBmBvirSLor5JYsSWexahq2TVC3TVw+QISeN41wP1CummIYxBJpPhcEgOH3Ip4EdbRZbEz0OTYtyb9Wp1cyb5pjzObR8ubNK6zdZ5DrjBdu5+OfftDH9/kc9tZdjaicudwb37DK3qrlc/y/t3hn9Rzt2vdBvmAoa1fe5IarfheaF+1v0mpw29+f35fEoLO6jpJfnN67d2V5encIal7WLb0rr2wW9GdQd+1BDvpynhB/fjgusS94/e/XoMdqXGtf1mxs+dp7VRqmGuo5XfEgy1njGmc4Ib9sPnam1i6ae1TKk7n9+5O3KeOX7S+9LapZZhjB39d+izobVLTL5ev43WMbb26PwZz6+W6CYZ0jmllR+Xc/TT1KKFHQS21g7WflIdxowXGr+W7c+tfys/zs43hswF7MAAW9T6bMBu+LpWfvP67e+wLPssNfJ5acf9FG9ady6H3SkWfrX6aO5zfU794fOAndZPslvCWotlsN12et3v85PsWrelRWj94Z/F+LVuR8twdtiPPlcMO12o37Cz9QuNFa3nyqF7w1ttvx7HWe2cxXIuA5v0TLwUv5CjdKz23HjeTDf4GWxL8eOeKUrOnXG42oN9kt9my5//gRnHe6g9qzVb3/pBbP/1+YEhOB6u2tfn08tzwXGyOVeMHxhyfg+CH67D7aa9326/Wk17ff3WqD93Ha1hTLR9LWad4OnF7ri3WVfQ2oXGD7iWpeFmeu9DrVL8LNdlJLP73Xu7kJ/GMDclraz9qJ3Gr7RhbT8XWFuG64f6KqwhuGM1ftz3CtyYrHkPe/fDc2TJD7Z7Ye2U8+O+o0D9LB0fmPO2Cn3+CNlhP9/3EyQ/l+P2lNQ+XsvmEPk+aexi/Hx14uym3esxvfptd/Z2kh813OxOPo8oYHdE9wbOvfkdlH7aPqvxw3FzPWd4jQJ20/S+Vnvz206642L6rG/soMYubv7rDB9RODtIb34xSbHjapIzvEbx2Wn9WjtZ2mlqMvZeOKNe3UrYudwIhjm2vaWEHfhhQ/x8J43Zlx3XWYxfrhv3u3XpvVqiX2rtudem+GkNe8kvt852xSdmjsytsaTYWY8ztQxxNLXn88PnDfnVGKdbGGI7yVGyC/mlzHNaG2kNuZ+F/LjXWNSedH6LfFzLsTKMtaN+OXbWftToxyc7Q64Pp9hhv5TvQWuvcYvy/edr6P7bi3A4O2frrnM3naIxjBkztH7udZr/w+Dzu/VcA5vVTIqbNOfT9l/f332umvd7CX4pn1lSbWn6dK92sX65diHXVL9Wdj4/n2Fpv9jPhB78OMfadiE/KTVcNMeljheWfdf6vDXqLmes7dnvf7GT+m/IFNpR06xHO2qV+4zXgx2d90qJOTbUh3PsarvRfdJzA7SRzh0s7KzqLtYSj62aZ1n8J547+dbUaG2BX+g5N7U2rde0JLfY5Kw9wj3i+gj5Wddnyn33lpp+rdta2lDy4/Zzjq3bsrQMs5GRkZGRkZGRkZGRkZGRkZEy+Qc8lgK+
@@ -36,13 +36,13 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects" visible="0">
-  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="608.5" y="1295" width="117" height="16">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="608.5" y="1295" width="117" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="48" template="../../../common/maps/obj/treasure.tx" x="208.333" y="520.333"/>
-  <object id="50" template="../../../common/maps/obj/enemy.tx" x="208.902" y="544.559">
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="208.333" y="520.333"/>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="208.902" y="544.559">
    <properties>
     <property name="enemy" value="High Vampire"/>
    </properties>

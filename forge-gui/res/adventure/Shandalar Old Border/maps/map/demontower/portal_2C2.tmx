@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="7" name="Collision" width="40" height="60">
   <data encoding="base64" compression="zlib">
    eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAB4DCWAAAE=
@@ -29,29 +29,29 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="70" template="../../../common/maps/obj/door_down.tx" x="97" y="18.5">
+  <object id="70" template="../../../../../../common/maps/obj/door_down.tx" x="97" y="18.5">
    <properties>
     <property name="teleport" value="../common/maps/map/demontower/portal_2B.tmx"/>
     <property name="teleportObjectId" value="70"/>
    </properties>
   </object>
-  <object id="74" template="../../../common/maps/obj/door_up.tx" x="551" y="958.5">
+  <object id="74" template="../../../../../../common/maps/obj/door_up.tx" x="551" y="958.5">
    <properties>
     <property name="teleport" value="../common/maps/map/demontower/portal_2C.tmx"/>
     <property name="teleportObjectId" value="77"/>
    </properties>
   </object>
-  <object id="75" template="../../../common/maps/obj/enemy.tx" x="146.162" y="638.511">
+  <object id="75" template="../../../../../../common/maps/obj/enemy.tx" x="146.162" y="638.511">
    <properties>
     <property name="displayNameOverride" value="Cave Horror"/>
     <property name="enemy" value="Horror of Tibalt"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="76" template="../../../common/maps/obj/gold.tx" x="93.6983" y="597.347"/>
-  <object id="77" template="../../../common/maps/obj/gold.tx" x="146.969" y="577.976"/>
-  <object id="78" template="../../../common/maps/obj/gold.tx" x="199.432" y="602.19"/>
-  <object id="79" template="../../../common/maps/obj/enemy.tx" x="355.208" y="674.025">
+  <object id="76" template="../../../../../../common/maps/obj/gold.tx" x="93.6983" y="597.347"/>
+  <object id="77" template="../../../../../../common/maps/obj/gold.tx" x="146.969" y="577.976"/>
+  <object id="78" template="../../../../../../common/maps/obj/gold.tx" x="199.432" y="602.19"/>
+  <object id="79" template="../../../../../../common/maps/obj/enemy.tx" x="355.208" y="674.025">
    <properties>
     <property name="displayNameOverride" value="Cave Horror"/>
     <property name="enemy" value="Horror of Tibalt"/>
@@ -59,14 +59,14 @@
     <property name="waypoints" value="83,84,85,86,87,88,87,86,85,84,83"/>
    </properties>
   </object>
-  <object id="80" template="../../../common/maps/obj/manashards.tx" x="89.6627" y="704.695"/>
-  <object id="81" template="../../../common/maps/obj/manashards.tx" x="288.217" y="278.531"/>
-  <object id="82" template="../../../common/maps/obj/manashards.tx" x="114.684" y="197.011"/>
-  <object id="83" template="../../../common/maps/obj/waypoint.tx" x="325.345" y="758.773"/>
-  <object id="84" template="../../../common/maps/obj/waypoint.tx" x="369.737" y="592.504"/>
-  <object id="85" template="../../../common/maps/obj/waypoint.tx" x="350.366" y="404.443"/>
-  <object id="86" template="../../../common/maps/obj/waypoint.tx" x="416.55" y="327.766"/>
-  <object id="87" template="../../../common/maps/obj/waypoint.tx" x="488.385" y="256.739"/>
-  <object id="88" template="../../../common/maps/obj/waypoint.tx" x="284.988" y="73.5201"/>
+  <object id="80" template="../../../../../../common/maps/obj/manashards.tx" x="89.6627" y="704.695"/>
+  <object id="81" template="../../../../../../common/maps/obj/manashards.tx" x="288.217" y="278.531"/>
+  <object id="82" template="../../../../../../common/maps/obj/manashards.tx" x="114.684" y="197.011"/>
+  <object id="83" template="../../../../../../common/maps/obj/waypoint.tx" x="325.345" y="758.773"/>
+  <object id="84" template="../../../../../../common/maps/obj/waypoint.tx" x="369.737" y="592.504"/>
+  <object id="85" template="../../../../../../common/maps/obj/waypoint.tx" x="350.366" y="404.443"/>
+  <object id="86" template="../../../../../../common/maps/obj/waypoint.tx" x="416.55" y="327.766"/>
+  <object id="87" template="../../../../../../common/maps/obj/waypoint.tx" x="488.385" y="256.739"/>
+  <object id="88" template="../../../../../../common/maps/obj/waypoint.tx" x="284.988" y="73.5201"/>
  </objectgroup>
 </map>

@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo4CBwY2TNHFqmE/IbHL0EFJPrH5y9ZGrnlrmjHR70fk7eRgYdmHBtIhfeqRnUswmR3wUjAwAAAl2DPk=
@@ -29,24 +29,24 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="57" template="../../../common/maps/obj/enemy.tx" x="169.494" y="134.657">
+  <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="169.494" y="134.657">
    <properties>
     <property name="displayNameOverride" value="The Deceiver"/>
     <property name="enemy" value="Torturer"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="58" template="../../../common/maps/obj/treasure.tx" x="330.5" y="123"/>
-  <object id="60" template="../../../common/maps/obj/gold.tx" x="332" y="137.25"/>
-  <object id="61" template="../../../common/maps/obj/gold.tx" x="332" y="149.75"/>
-  <object id="62" template="../../../common/maps/obj/entry_up.tx" x="207.5" y="145.192"/>
-  <object id="63" template="../../../common/maps/obj/door_left.tx" x="176.5" y="49">
+  <object id="58" template="../../../../../../common/maps/obj/treasure.tx" x="330.5" y="123"/>
+  <object id="60" template="../../../../../../common/maps/obj/gold.tx" x="332" y="137.25"/>
+  <object id="61" template="../../../../../../common/maps/obj/gold.tx" x="332" y="149.75"/>
+  <object id="62" template="../../../../../../common/maps/obj/entry_up.tx" x="207.5" y="145.192"/>
+  <object id="63" template="../../../../../../common/maps/obj/door_left.tx" x="176.5" y="49">
    <properties>
     <property name="teleport" value="../common/maps/map/demontower/portal_2F.tmx"/>
     <property name="teleportObjectId" value="58"/>
    </properties>
   </object>
-  <object id="66" template="../../../common/maps/obj/treasure.tx" x="331.609" y="170.45">
+  <object id="66" template="../../../../../../common/maps/obj/treasure.tx" x="331.609" y="170.45">
    <properties>
     <property name="reward">[
   {
@@ -58,6 +58,6 @@
 ]</property>
    </properties>
   </object>
-  <object id="67" template="../../../common/maps/obj/manashards.tx" x="207.8" y="37.9959"/>
+  <object id="67" template="../../../../../../common/maps/obj/manashards.tx" x="207.8" y="37.9959"/>
  </objectgroup>
 </map>

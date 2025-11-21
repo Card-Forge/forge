@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJztkzEOwDAIA7N27iP7o/yo/+qQLaor28BSMdwSiRyYZB5jzKZpfst1LvYzpi7LjWB6zXKpvVQ7nYz3WsfnOpUMszJmPOjtuG52Z+juyMzRt1rlZeucP4T8zHzVOX/53HmVf/NW52bM7hn1lOF1so94lVwrvGo2TR53ZyrzAH9WER8=
@@ -34,9 +34,9 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="47" template="../../../common/maps/obj/gold.tx" x="323" y="219"/>
-  <object id="49" template="../../../common/maps/obj/gold.tx" x="106" y="216"/>
-  <object id="50" template="../../../common/maps/obj/enemy.tx" x="182.772" y="284.992" width="64" height="64">
+  <object id="47" template="../../../../../../common/maps/obj/gold.tx" x="323" y="219"/>
+  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="106" y="216"/>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="182.772" y="284.992" width="64" height="64">
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Emrakul's Presence&quot;]}"/>
     <property name="enemy" value="Emrakul"/>
@@ -46,12 +46,12 @@
     <property name="spawn.Normal" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="51" template="../../../common/maps/obj/entry_up.tx" x="209" y="480">
+  <object id="51" template="../../../../../../common/maps/obj/entry_up.tx" x="209" y="480">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="52" template="../../../common/maps/obj/enemy.tx" x="182.772" y="284.992" width="64" height="64">
+  <object id="52" template="../../../../../../common/maps/obj/enemy.tx" x="182.772" y="284.992" width="64" height="64">
      <properties>
       <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Emrakul's Awakening&quot;]}"/>
       <property name="enemy" value="Emrakul"/>
@@ -61,7 +61,7 @@
       <property name="spawn.Normal" type="bool" value="true"/>
      </properties>
     </object>
-  <object id="69" template="../../../common/maps/obj/enemy.tx" x="132.844" y="401.619">
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="132.844" y="401.619">
    <properties>
     <property name="dialog">[{
   &quot;text&quot;:&quot;Hello, planeswalker {var=player_name}, Lord Emrakul awaits you for the final challenge. Be prepared.&quot;,
@@ -72,7 +72,7 @@
     <property name="enemy" value="Homarid"/>
    </properties>
   </object>
-  <object id="70" template="../../../common/maps/obj/gate.tx" x="208" y="448">
+  <object id="70" template="../../../../../../common/maps/obj/gate.tx" x="208" y="448">
    <properties>
     <property name="dialog">[
 	{

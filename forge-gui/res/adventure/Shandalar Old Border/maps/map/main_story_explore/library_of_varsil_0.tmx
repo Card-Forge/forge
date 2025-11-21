@@ -3,11 +3,11 @@
  <properties>
   <property name="preventEscape" type="bool" value="true"/>
  </properties>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/rivers.tsx"/>
- <tileset firstgid="27393" source="../../../common/maps/tileset/main-nocollide.tsx"/>
- <tileset firstgid="37505" source="../../../common/maps/tileset/dungeon.tsx"/>
- <tileset firstgid="41985" source="../../../common/maps/tileset/FarmFood.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/rivers.tsx"/>
+ <tileset firstgid="27393" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="37505" source="../../../../../../common/maps/tileset/dungeon.tsx"/>
+ <tileset firstgid="41985" source="../../../../../../common/maps/tileset/FarmFood.tsx"/>
  <layer id="1" name="Background" width="30" height="40">
   <data encoding="base64" compression="zlib">
    eJyLZWFgiB3Fo3gUj+JRjBMnWgyMvaKWDAwSQHzecuDsPz1AdjdZDVy4g+yGhfm0Wdgxuh5i1RHCT61xm4dLD6X2ngP6NXkAwhrmV2ScxomK8cmhyxPr12YrwvYSwqTaa4jFrzB7J7ATh4m1F5Zvkiyw+5VW9oLKC0lLhgZ8aYkW9hKDR+2ln720zEejeBSP4lE8ikcxAMAE71k=
@@ -37,13 +37,13 @@
   </data>
  </layer>
  <objectgroup id="5" name="Objects">
-  <object id="13" template="../../obj/entry_down.tx" x="224" y="184" width="32" height="16">
+  <object id="13" template="../../../../../../common/maps/obj/entry_down.tx" x="224" y="184" width="32" height="16">
    <properties>
     <property name="teleport" value="./library_of_varsil_1.tmx"/>
     <property name="teleportObjectId" value="7"/>
    </properties>
   </object>
-  <object id="14" template="../../obj/portal.tx" x="144" y="256">
+  <object id="14" template="../../../../../../common/maps/obj/portal.tx" x="144" y="256">
    <properties>
     <property name="activeQuestFlag" value="defeatedLibraryOfVarsilBoss"/>
     <property name="portalState" value="inactive"/>
@@ -54,15 +54,15 @@
   </object>
  </objectgroup>
  <objectgroup id="6" name="Waypoints">
-  <object id="1" template="../../obj/collision.tx" x="-32" y="0" width="144" height="640"/>
-  <object id="2" template="../../obj/collision.tx" x="-32" y="640" width="544" height="32"/>
-  <object id="3" template="../../obj/collision.tx" x="368" y="0" width="144" height="640"/>
-  <object id="4" template="../../obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
-  <object id="5" template="../../obj/waypoint.tx" name="5" x="336" y="288"/>
-  <object id="7" template="../../obj/entry_up.tx" x="176" y="640" width="128" height="16"/>
-  <object id="8" template="../../obj/waypoint.tx" name="8" x="128" y="288"/>
-  <object id="9" template="../../obj/waypoint.tx" name="9" x="232" y="448"/>
-  <object id="10" template="../../obj/enemy.tx" x="128" y="336">
+  <object id="1" template="../../../../../../common/maps/obj/collision.tx" x="-32" y="0" width="144" height="640"/>
+  <object id="2" template="../../../../../../common/maps/obj/collision.tx" x="-32" y="640" width="544" height="32"/>
+  <object id="3" template="../../../../../../common/maps/obj/collision.tx" x="368" y="0" width="144" height="640"/>
+  <object id="4" template="../../../../../../common/maps/obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
+  <object id="5" template="../../../../../../common/maps/obj/waypoint.tx" name="5" x="336" y="288"/>
+  <object id="7" template="../../../../../../common/maps/obj/entry_up.tx" x="176" y="640" width="128" height="16"/>
+  <object id="8" template="../../../../../../common/maps/obj/waypoint.tx" name="8" x="128" y="288"/>
+  <object id="9" template="../../../../../../common/maps/obj/waypoint.tx" name="9" x="232" y="448"/>
+  <object id="10" template="../../../../../../common/maps/obj/enemy.tx" x="128" y="336">
    <properties>
     <property name="enemy" value="Archivist"/>
     <property name="pursueRange" type="int" value="60"/>
@@ -70,7 +70,7 @@
     <property name="waypoints" value="r5-8-9"/>
    </properties>
   </object>
-  <object id="11" template="../../obj/enemy.tx" x="336" y="336">
+  <object id="11" template="../../../../../../common/maps/obj/enemy.tx" x="336" y="336">
    <properties>
     <property name="enemy" value="Archivist"/>
     <property name="pursueRange" type="int" value="60"/>
@@ -78,15 +78,15 @@
     <property name="waypoints" value="r5-8-9"/>
    </properties>
   </object>
-  <object id="12" template="../../obj/enemy.tx" x="232" y="232">
+  <object id="12" template="../../../../../../common/maps/obj/enemy.tx" x="232" y="232">
    <properties>
     <property name="enemy" value="Archivist"/>
    </properties>
   </object>
-  <object id="15" template="../../obj/collision.tx" x="112" y="0" width="256" height="160"/>
-  <object id="16" template="../../obj/collision.tx" x="112" y="464" width="96" height="176"/>
-  <object id="17" template="../../obj/collision.tx" x="256" y="160" width="112" height="64"/>
-  <object id="18" template="../../obj/collision.tx" x="112" y="160" width="112" height="64"/>
-  <object id="19" template="../../obj/collision.tx" x="272" y="464" width="96" height="176"/>
+  <object id="15" template="../../../../../../common/maps/obj/collision.tx" x="112" y="0" width="256" height="160"/>
+  <object id="16" template="../../../../../../common/maps/obj/collision.tx" x="112" y="464" width="96" height="176"/>
+  <object id="17" template="../../../../../../common/maps/obj/collision.tx" x="256" y="160" width="112" height="64"/>
+  <object id="18" template="../../../../../../common/maps/obj/collision.tx" x="112" y="160" width="112" height="64"/>
+  <object id="19" template="../../../../../../common/maps/obj/collision.tx" x="272" y="464" width="96" height="176"/>
  </objectgroup>
 </map>

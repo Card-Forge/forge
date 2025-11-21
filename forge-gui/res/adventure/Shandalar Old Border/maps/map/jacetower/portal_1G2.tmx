@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJztlWEKhSAMx/e9dQJ5F6uzVOfyaXerUcOxXAnvVRD9YUyZ7reJIkDSBxfvZt/WAE2d/C+iHF9cLJdLcmnM3uP+PovBFjDFvcpB64PBlfIZvmQFtT4nh1tmqbzRT4mYq3s6Wy/3udyuAog3cJ1gvdxruOM8HqrruRab7l6/mlVXdxA/4jK7F6wo5lZd/CZKz4y5+s/6h42qp6jipAnAtj93
@@ -34,13 +34,13 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="62" template="../../../common/maps/obj/door_down.tx" x="64" y="15.3333">
+  <object id="62" template="../../../../../../common/maps/obj/door_down.tx" x="64" y="15.3333">
    <properties>
     <property name="teleport" value="maps/map/portal_1G.tmx"/>
     <property name="teleportObjectId" value="74"/>
    </properties>
   </object>
-  <object id="63" template="../../../common/maps/obj/door_up.tx" x="368" y="271">
+  <object id="63" template="../../../../../../common/maps/obj/door_up.tx" x="368" y="271">
    <properties>
     <property name="teleport" value="maps/map/portal_1G3.tmx"/>
     <property name="teleportObjectId" value="63"/>

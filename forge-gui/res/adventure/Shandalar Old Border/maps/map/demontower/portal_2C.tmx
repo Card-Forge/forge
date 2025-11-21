@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="7" name="Collision" width="40" height="60">
   <data encoding="base64" compression="zlib">
    eJztzjENADAIADBejOFf0jIDvITQKmgEAAAAl1ROD3r/5wgAAAAAwBYPMFgBjA==
@@ -34,27 +34,27 @@
   </data>
  </layer>
  <objectgroup id="8" name="Objects">
-  <object id="76" template="../../../common/maps/obj/door_left.tx" x="616.667" y="860.667">
+  <object id="76" template="../../../../../../common/maps/obj/door_left.tx" x="616.667" y="860.667">
    <properties>
     <property name="teleport" value="../common/maps/map/demontower/portal_2B.tmx"/>
     <property name="teleportObjectId" value="66"/>
    </properties>
   </object>
-  <object id="77" template="../../../common/maps/obj/door_down.tx" x="96" y="20.6667">
+  <object id="77" template="../../../../../../common/maps/obj/door_down.tx" x="96" y="20.6667">
    <properties>
     <property name="teleport" value="../common/maps/map/demontower/portal_2C2.tmx"/>
     <property name="teleportObjectId" value="74"/>
    </properties>
   </object>
-  <object id="78" template="../../../common/maps/obj/enemy.tx" x="290.108" y="204.44">
+  <object id="78" template="../../../../../../common/maps/obj/enemy.tx" x="290.108" y="204.44">
    <properties>
     <property name="enemy" value="Werewolf"/>
     <property name="threatRange" type="int" value="50"/>
     <property name="waypoints" value="88,86"/>
    </properties>
   </object>
-  <object id="79" template="../../../common/maps/obj/gold.tx" x="106" y="196"/>
-  <object id="80" template="../../../common/maps/obj/enemy.tx" x="328.573" y="738.595">
+  <object id="79" template="../../../../../../common/maps/obj/gold.tx" x="106" y="196"/>
+  <object id="80" template="../../../../../../common/maps/obj/enemy.tx" x="328.573" y="738.595">
    <properties>
     <property name="displayNameOverride" value="Cursed Wolf"/>
     <property name="enemy" value="Werewolf"/>
@@ -62,13 +62,13 @@
     <property name="waypoints" value="89,84,85,84,89"/>
    </properties>
   </object>
-  <object id="81" template="../../../common/maps/obj/manashards.tx" x="320.502" y="90.4698"/>
-  <object id="82" template="../../../common/maps/obj/manashards.tx" x="275.303" y="800.744"/>
-  <object id="83" template="../../../common/maps/obj/manashards.tx" x="576.362" y="884.685"/>
-  <object id="84" template="../../../common/maps/obj/waypoint.tx" x="366.508" y="673.217"/>
-  <object id="85" template="../../../common/maps/obj/waypoint.tx" x="356.823" y="459.328"/>
-  <object id="86" template="../../../common/maps/obj/waypoint.tx" x="289.024" y="297.095"/>
-  <object id="88" template="../../../common/maps/obj/waypoint.tx" x="293.866" y="63.8345"/>
-  <object id="89" template="../../../common/maps/obj/waypoint.tx" x="309.202" y="812.044"/>
+  <object id="81" template="../../../../../../common/maps/obj/manashards.tx" x="320.502" y="90.4698"/>
+  <object id="82" template="../../../../../../common/maps/obj/manashards.tx" x="275.303" y="800.744"/>
+  <object id="83" template="../../../../../../common/maps/obj/manashards.tx" x="576.362" y="884.685"/>
+  <object id="84" template="../../../../../../common/maps/obj/waypoint.tx" x="366.508" y="673.217"/>
+  <object id="85" template="../../../../../../common/maps/obj/waypoint.tx" x="356.823" y="459.328"/>
+  <object id="86" template="../../../../../../common/maps/obj/waypoint.tx" x="289.024" y="297.095"/>
+  <object id="88" template="../../../../../../common/maps/obj/waypoint.tx" x="293.866" y="63.8345"/>
+  <object id="89" template="../../../../../../common/maps/obj/waypoint.tx" x="309.202" y="812.044"/>
  </objectgroup>
 </map>

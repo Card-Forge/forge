@@ -3,9 +3,9 @@
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
    eJztmG0OwiAMhon/hufRGQ+ye0ydF/VjHkca10jIGF9CUfvjDckC6UMLZH3HRoiR9TPaKLUVcNi4Hkr3yvYBsc5SiJN8jTY+mLdVGqZ5t0J8kLOrpjk+3APO2SkdZXk+W9xefdsTsJl5WaoZ7mO19pe+PmSdKV++lBipsp09vcaUfCDX20LN53ozqPlc95Kaz+fOMx/zMR/zMR/zMV9ZPkq2b+CD3rGtmM/1j0/NBz1kzf/Qvv5GiMwYnUcM6MUOU8+NvoY+Lp3BEHWRfDon+gIujyNFGAe8B8hLiP+AvgCsRdZP82GcGE/p0rw9Fax7Dn8l9mz3mXjm8pCjLv/CV6pONekJ5zkFQw==
@@ -35,7 +35,7 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="41" template="../../obj/shop.tx" x="249" y="370">
+  <object id="41" template="../../../../../../common/maps/obj/shop.tx" x="249" y="370">
    <properties>
     <property name="commonShopList" value="Enchantment6Red,Creature6Red,RedBoosterPackShop,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
@@ -44,7 +44,7 @@
     <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
    </properties>
   </object>
-  <object id="56" template="../../obj/shop.tx" x="152" y="370">
+  <object id="56" template="../../../../../../common/maps/obj/shop.tx" x="152" y="370">
    <properties>
     <property name="commonShopList" value="Enchantment6Red,Creature6Red,RedBoosterPackShop,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
@@ -53,7 +53,7 @@
     <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
    </properties>
   </object>
-  <object id="57" template="../../obj/shop.tx" x="200" y="418">
+  <object id="57" template="../../../../../../common/maps/obj/shop.tx" x="200" y="418">
    <properties>
     <property name="commonShopList" value="Enchantment6Red,Creature6Red,RedBoosterPackShop,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
@@ -62,7 +62,7 @@
     <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
    </properties>
   </object>
-  <object id="43" template="../../obj/shop.tx" x="104" y="370">
+  <object id="43" template="../../../../../../common/maps/obj/shop.tx" x="104" y="370">
    <properties>
     <property name="commonShopList" value="Enchantment6Red,Creature6Red,RedBoosterPackShop,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
@@ -71,8 +71,8 @@
     <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
    </properties>
   </object>
-  <object id="47" template="../../obj/inn.tx" x="376" y="370"/>
-  <object id="49" template="../../obj/shop.tx" x="104" y="418">
+  <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="376" y="370"/>
+  <object id="49" template="../../../../../../common/maps/obj/shop.tx" x="104" y="418">
    <properties>
     <property name="commonShopList" value="Enchantment6Red,Creature6Red,RedBoosterPackShop,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
@@ -81,7 +81,7 @@
     <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
    </properties>
   </object>
-  <object id="50" template="../../obj/shop.tx" x="152" y="418">
+  <object id="50" template="../../../../../../common/maps/obj/shop.tx" x="152" y="418">
    <properties>
     <property name="commonShopList" value="Enchantment6Red,Creature6Red,RedBoosterPackShop,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
@@ -90,7 +90,7 @@
     <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
    </properties>
   </object>
-  <object id="51" template="../../obj/shop.tx" x="248" y="418">
+  <object id="51" template="../../../../../../common/maps/obj/shop.tx" x="248" y="418">
    <properties>
     <property name="commonShopList" value="Enchantment6Red,Creature6Red,RedBoosterPackShop,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
@@ -99,22 +99,22 @@
     <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
    </properties>
   </object>
-  <object id="53" template="../../obj/spellsmith.tx" x="168" y="258"/>
-  <object id="55" template="../../obj/shop.tx" x="366" y="433">
+  <object id="53" template="../../../../../../common/maps/obj/spellsmith.tx" x="168" y="258"/>
+  <object id="55" template="../../../../../../common/maps/obj/shop.tx" x="366" y="433">
    <properties>
     <property name="commonShopList" value="Mountain"/>
     <property name="noRestock" type="bool" value="true"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
-  <object id="58" template="../../obj/entry_up.tx" x="273" y="642" width="80" height="20">
+  <object id="58" template="../../../../../../common/maps/obj/entry_up.tx" x="273" y="642" width="80" height="20">
    <properties>
     <property name="spawn" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="59" template="../../obj/entry_left.tx" x="337" y="627" width="16" height="89.9726" rotation="0"/>
-  <object id="60" template="../../obj/entry_right.tx" x="266" y="623" width="16" height="88"/>
-  <object id="61" template="../../obj/arena.tx" x="216" y="258">
+  <object id="59" template="../../../../../../common/maps/obj/entry_left.tx" x="337" y="627" width="16" height="89.9726" rotation="0"/>
+  <object id="60" template="../../../../../../common/maps/obj/entry_right.tx" x="266" y="623" width="16" height="88"/>
+  <object id="61" template="../../../../../../common/maps/obj/arena.tx" x="216" y="258">
    <properties>
     <property name="arena">{
 
@@ -181,7 +181,7 @@
 }</property>
    </properties>
   </object>
-  <object id="62" template="../../obj/shop.tx" x="361" y="258">
+  <object id="62" template="../../../../../../common/maps/obj/shop.tx" x="361" y="258">
    <properties>
     <property name="commonShopList" value="RedEquipment"/>
     <property name="hasSign" type="bool" value="true"/>
@@ -189,7 +189,7 @@
     <property name="signYOffset" type="float" value="-4"/>
    </properties>
   </object>
-  <object id="63" template="../../obj/shop.tx" x="409" y="259">
+  <object id="63" template="../../../../../../common/maps/obj/shop.tx" x="409" y="259">
    <properties>
     <property name="commonShopList" value="RedItems"/>
     <property name="hasSign" type="bool" value="true"/>
@@ -197,7 +197,7 @@
     <property name="signYOffset" type="float" value="-4"/>
    </properties>
   </object>
-  <object id="65" template="../../obj/shop.tx" x="200" y="370">
+  <object id="65" template="../../../../../../common/maps/obj/shop.tx" x="200" y="370">
    <properties>
     <property name="commonShopList" value="Enchantment6Red,Creature6Red,RedBoosterPackShop,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
@@ -206,18 +206,18 @@
     <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
    </properties>
   </object>
-  <object id="66" template="../../obj/quest.tx" x="328" y="370">
+  <object id="66" template="../../../../../../common/maps/obj/quest.tx" x="328" y="370">
    <properties>
     <property name="questtype" value="mountain_capital"/>
    </properties>
   </object>
-  <object id="67" template="../../obj/shardtrader.tx" x="337" y="403">
+  <object id="67" template="../../../../../../common/maps/obj/shardtrader.tx" x="337" y="403">
    <properties>
     <property name="signXOffset" type="float" value="14"/>
     <property name="signYOffset" type="float" value="-2"/>
    </properties>
   </object>
-  <object id="68" template="../../obj/shop.tx" x="400" y="337">
+  <object id="68" template="../../../../../../common/maps/obj/shop.tx" x="400" y="337">
    <properties>
     <property name="commonShopList" value="Enchantment6Red,Creature6Red,RedBoosterPackShop,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red"/>
@@ -226,7 +226,7 @@
     <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
    </properties>
   </object>
-  <object id="69" template="../../obj/shop.tx" x="464" y="337">
+  <object id="69" template="../../../../../../common/maps/obj/shop.tx" x="464" y="337">
    <properties>
     <property name="commonShopList" value="Enchantment6Red,Creature6Red,RedBoosterPackShop,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red"/>
@@ -235,20 +235,20 @@
     <property name="uncommonShopList" value="Wolf4Red,Sliver4Red,Knight4Red,Soldier4Red,Dinosaur4Red,Ogre4Red,Multicolor8Red"/>
    </properties>
   </object>
-  <object id="70" template="../../obj/RotatingShop.tx" x="495.917" y="305.432">
+  <object id="70" template="../../../../../../common/maps/obj/RotatingShop.tx" x="495.917" y="305.432">
    <properties>
     <property name="rotation" value="Red1,Red2,Red3,Red4,Red5,Red6"/>
     <property name="signXOffset" type="float" value="16"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
-  <object id="71" template="../../obj/RotatingShop.tx" x="511.091" y="227.455">
+  <object id="71" template="../../../../../../common/maps/obj/RotatingShop.tx" x="511.091" y="227.455">
    <properties>
     <property name="rotation" value="Red1,Red2,Red3,Red4,Red5,Red6"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
-  <object id="72" template="../../obj/RotatingShop.tx" x="527.455" y="193.455">
+  <object id="72" template="../../../../../../common/maps/obj/RotatingShop.tx" x="527.455" y="193.455">
    <properties>
     <property name="rotation" value="Red1,Red2,Red3,Red4,Red5,Red6"/>
     <property name="signYOffset" type="float" value="0"/>

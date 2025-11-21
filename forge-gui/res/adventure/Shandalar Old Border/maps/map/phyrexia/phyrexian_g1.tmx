@@ -3,9 +3,9 @@
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/phyrexia/Copperhost_Tiles.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/phyrexia/Copperhost_Tiles.tsx"/>
  <layer id="6" name="Collision" width="29" height="34">
   <data encoding="base64" compression="zlib">
    eJztlksOgzAMRLPpsrkMlJ60cC7gQlUWkSw3dhw8gCplJK8CeRr/lBC6kj7P65lDDGEzxivimFahmCvzMpF73+xsBzG5qG+Ur1rPnMG09EwWqqeoj+R5boyF5OkIs6VnSxwUc6jkzsvkc0JnQjvzMKV6ppppZx6mlFvtzjPquQp5RDGlmmlxtJ6W2bPIyhyjHKU7tO/HBp+WvGX13ff/uy/ryt2Xdcfumx+/0XefjemVlVnyNlX+5e9cxHu35h315uxMP/MLiOKyFQ==
@@ -30,22 +30,22 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../obj/entry_up.tx" x="160" y="546.582" width="112" height="16">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="160" y="546.582" width="112" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="50" template="../../obj/enemy.tx" x="100.532" y="326.928">
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="100.532" y="326.928">
    <properties>
     <property name="enemy" value="Copper Host Infector"/>
     <property name="threatRange" value="30"/>
     <property name="waypoints" value="57,62,60,58,57,61,59,58"/>
    </properties>
   </object>
-  <object id="51" template="../../obj/treasure.tx" x="286.638" y="78.836"/>
-  <object id="54" template="../../obj/gold.tx" x="223.441" y="366.796"/>
-  <object id="55" template="../../obj/gold.tx" x="207" y="239.5"/>
-  <object id="56" template="../../obj/booster.tx" x="144.5" y="79">
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="286.638" y="78.836"/>
+  <object id="54" template="../../../../../../common/maps/obj/gold.tx" x="223.441" y="366.796"/>
+  <object id="55" template="../../../../../../common/maps/obj/gold.tx" x="207" y="239.5"/>
+  <object id="56" template="../../../../../../common/maps/obj/booster.tx" x="144.5" y="79">
    <properties>
     <property name="reward">[
   {
@@ -73,48 +73,48 @@
 </property>
    </properties>
   </object>
-  <object id="70" template="../../obj/enemy.tx" x="322.667" y="453.667">
+  <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="322.667" y="453.667">
    <properties>
     <property name="enemy" value="Copper Host Infector"/>
     <property name="threatRange" value="30"/>
     <property name="waypoints" value="60,58,57,62,60,58,57,62,60,59,61,62"/>
    </properties>
   </object>
-  <object id="71" template="../../obj/enemy.tx" x="108.333" y="280">
+  <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="108.333" y="280">
    <properties>
     <property name="enemy" value="Copper Host Infector"/>
     <property name="threatRange" value="30"/>
     <property name="waypoints" value="66,68,65,63,66,67,64,63"/>
    </properties>
   </object>
-  <object id="72" template="../../obj/enemy.tx" x="338.666" y="164.333">
+  <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="338.666" y="164.333">
    <properties>
     <property name="enemy" value="Copper Host Infector"/>
     <property name="threatRange" value="30"/>
     <property name="waypoints" value="68,65,63,66,68,65,63,66,68,65,64,67"/>
    </properties>
   </object>
-  <object id="73" template="../../obj/enemy.tx" x="215.667" y="99">
+  <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="215.667" y="99">
    <properties>
     <property name="enemy" value="Copper Host Brutalizer"/>
     <property name="threatRange" value="30"/>
     <property name="waypoints" value=""/>
    </properties>
   </object>
-  <object id="74" template="../../obj/treasure.tx" x="217" y="71"/>
+  <object id="74" template="../../../../../../common/maps/obj/treasure.tx" x="217" y="71"/>
  </objectgroup>
  <objectgroup id="7" name="Waypoints">
-  <object id="57" template="../../obj/waypoint.tx" x="88.5" y="327.167"/>
-  <object id="58" template="../../obj/waypoint.tx" x="343.667" y="327"/>
-  <object id="59" template="../../obj/waypoint.tx" x="344" y="390.333"/>
-  <object id="60" template="../../obj/waypoint.tx" x="343.333" y="452.667"/>
-  <object id="61" template="../../obj/waypoint.tx" x="91" y="391.667"/>
-  <object id="62" template="../../obj/waypoint.tx" x="88.3333" y="457"/>
-  <object id="63" template="../../obj/waypoint.tx" x="89" y="278.667"/>
-  <object id="64" template="../../obj/waypoint.tx" x="90" y="215.667"/>
-  <object id="65" template="../../obj/waypoint.tx" x="89.6667" y="151.667"/>
-  <object id="66" template="../../obj/waypoint.tx" x="343.667" y="279"/>
-  <object id="67" template="../../obj/waypoint.tx" x="343.333" y="213.667"/>
-  <object id="68" template="../../obj/waypoint.tx" x="341" y="152"/>
+  <object id="57" template="../../../../../../common/maps/obj/waypoint.tx" x="88.5" y="327.167"/>
+  <object id="58" template="../../../../../../common/maps/obj/waypoint.tx" x="343.667" y="327"/>
+  <object id="59" template="../../../../../../common/maps/obj/waypoint.tx" x="344" y="390.333"/>
+  <object id="60" template="../../../../../../common/maps/obj/waypoint.tx" x="343.333" y="452.667"/>
+  <object id="61" template="../../../../../../common/maps/obj/waypoint.tx" x="91" y="391.667"/>
+  <object id="62" template="../../../../../../common/maps/obj/waypoint.tx" x="88.3333" y="457"/>
+  <object id="63" template="../../../../../../common/maps/obj/waypoint.tx" x="89" y="278.667"/>
+  <object id="64" template="../../../../../../common/maps/obj/waypoint.tx" x="90" y="215.667"/>
+  <object id="65" template="../../../../../../common/maps/obj/waypoint.tx" x="89.6667" y="151.667"/>
+  <object id="66" template="../../../../../../common/maps/obj/waypoint.tx" x="343.667" y="279"/>
+  <object id="67" template="../../../../../../common/maps/obj/waypoint.tx" x="343.333" y="213.667"/>
+  <object id="68" template="../../../../../../common/maps/obj/waypoint.tx" x="341" y="152"/>
  </objectgroup>
 </map>

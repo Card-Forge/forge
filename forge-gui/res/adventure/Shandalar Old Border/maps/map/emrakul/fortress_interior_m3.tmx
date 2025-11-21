@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="40" height="50">
   <data encoding="base64" compression="zlib">
    eJzt2QEKgzAMheFir2DFy4jn2a30prOIWCRT18Qm3d7gBxmFfWvUIZuCcxPRvNT2a+nxcd32fk7U595t6Jzz4Rkfx0XtYbQ2Yc0b9KXNQvO17pNwlvBxnEdfPP/G7hlfjpPaP4nrV8prwbfdN6jiLLV93P3W9mj7zuZLrZf4/Si5h9qWXF/60jTe8ZU2/sJ8/9X3aves+VJbDb5PRsyXl2UbfPBpV4Pvas1APLsgpJE3fC0hhBBCqL44/y/lZt33zXfQdlz53mY9CP8=
@@ -34,19 +34,19 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="47" template="../../../common/maps/obj/gold.tx" x="272.333" y="191.667"/>
-  <object id="49" template="../../../common/maps/obj/gold.tx" x="544" y="400"/>
-  <object id="50" template="../../../common/maps/obj/enemy.tx" x="263.561" y="531.203" width="37.3333" height="46">
+  <object id="47" template="../../../../../../common/maps/obj/gold.tx" x="272.333" y="191.667"/>
+  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="544" y="400"/>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="263.561" y="531.203" width="37.3333" height="46">
    <properties>
     <property name="enemy" value="Emrakul"/>
    </properties>
   </object>
-  <object id="51" template="../../../common/maps/obj/entry_up.tx" x="525.667" y="719.333" width="33.3333" height="46.6667">
+  <object id="51" template="../../../../../../common/maps/obj/entry_up.tx" x="525.667" y="719.333" width="33.3333" height="46.6667">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="69" template="../../../common/maps/obj/enemy.tx" x="189.747" y="418.972">
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="189.747" y="418.972">
    <properties>
     <property name="dialog">[{
   &quot;text&quot;:&quot;Hello, planeswalker {var=player_name}, this area is currently under construction and subject to change. Also this is a hard boss, so be prepared with a strong deck&quot;,

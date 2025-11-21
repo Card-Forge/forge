@@ -3,8 +3,8 @@
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="13" name="BackgroundBis" width="32" height="20">
   <data encoding="base64" compression="zlib">
    eJzNlcENwjAMRTsCqCpnluHcETgyXzdikUo0gi++LNux05Zi6UtpEvnZTuLO566bP3r03/ER+hd+Jo5p2I7PvkoMW9WD/cJqeZa1iBXf3hrEZp039nKcv+bLOq3hw6fc6913xPtUdD29VdZxP7x6sT/Jt+4X9t+X8W3QaziJea1mPG/xuRZSWi5eza34ZG7MjPIlr/ZtWaZX1PxA4yXGbuVHczuCn8m9he+x8X724mt9a61l+Zyr5S8TZ2v+2nuIvEGrj2TOv6Y9+RnT/nGaSc4LNbFpuQ==
@@ -39,14 +39,14 @@
   </data>
  </layer>
  <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
-  <object id="114" template="../../../common/maps/obj/entry_up.tx" x="300.842" y="317.718" width="48" height="16">
+  <object id="114" template="../../../../../../common/maps/obj/entry_up.tx" x="300.842" y="317.718" width="48" height="16">
    <properties>
     <property name="teleport" value="../common/maps/map/barbariancamp/barbariancamp_kobold.tmx"/>
     <property name="teleportObjectId" value="108"/>
    </properties>
   </object>
-  <object id="115" template="../../../common/maps/obj/gold.tx" x="315.713" y="81.5369"/>
-  <object id="141" template="../../../common/maps/obj/treasure.tx" x="272.842" y="82.1053">
+  <object id="115" template="../../../../../../common/maps/obj/gold.tx" x="315.713" y="81.5369"/>
+  <object id="141" template="../../../../../../common/maps/obj/treasure.tx" x="272.842" y="82.1053">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -62,7 +62,7 @@
     <property name="spawn.Hard" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="142" template="../../../common/maps/obj/treasure.tx" x="100.176" y="78.4386">
+  <object id="142" template="../../../../../../common/maps/obj/treasure.tx" x="100.176" y="78.4386">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -78,13 +78,13 @@
     <property name="spawn.Hard" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="150" template="../../../common/maps/obj/enemy.tx" x="307.842" y="123.772">
+  <object id="150" template="../../../../../../common/maps/obj/enemy.tx" x="307.842" y="123.772">
    <properties>
     <property name="enemy" value="Curselord"/>
     <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="159" template="../../../common/maps/obj/booster.tx" x="335.359" y="82.7761">
+  <object id="159" template="../../../../../../common/maps/obj/booster.tx" x="335.359" y="82.7761">
    <properties>
     <property name="reward">[
   {
@@ -109,26 +109,26 @@
 </property>
    </properties>
   </object>
-  <object id="160" template="../../../common/maps/obj/manashards.tx" x="215.177" y="53.3151"/>
-  <object id="161" template="../../../common/maps/obj/enemy.tx" x="310.122" y="169.575">
+  <object id="160" template="../../../../../../common/maps/obj/manashards.tx" x="215.177" y="53.3151"/>
+  <object id="161" template="../../../../../../common/maps/obj/enemy.tx" x="310.122" y="169.575">
    <properties>
     <property name="enemy" value="Kobold Pyromancer"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="162" template="../../../common/maps/obj/enemy.tx" x="179.289" y="106.725">
+  <object id="162" template="../../../../../../common/maps/obj/enemy.tx" x="179.289" y="106.725">
    <properties>
     <property name="enemy" value="Kobold Pyromancer"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="163" template="../../../common/maps/obj/enemy.tx" x="334.241" y="259.913">
+  <object id="163" template="../../../../../../common/maps/obj/enemy.tx" x="334.241" y="259.913">
    <properties>
     <property name="enemy" value="Kobold Pyromancer"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="164" template="../../../common/maps/obj/enemy.tx" x="180.928" y="198.735">
+  <object id="164" template="../../../../../../common/maps/obj/enemy.tx" x="180.928" y="198.735">
    <properties>
     <property name="enemy" value="Kobold Pyromancer"/>
     <property name="threatRange" type="int" value="50"/>

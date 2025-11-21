@@ -8,8 +8,8 @@
 }</property>
   <property name="respawnEnemies" type="bool" value="true"/>
  </properties>
- <tileset firstgid="1" source="../../../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="48" height="48">
   <data encoding="base64" compression="zlib">
    eJzt2LEJACEQRUFTsyvhqrZeuRrc049MMJksDxUER29tAAAAXOx9subATt+9rXKqP2mOfv369etfn7fz3Tn1zqXuv379Kf1Va/Tr169f///9lf8K1RLPKJn++/snqiFdMg==
@@ -39,7 +39,7 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="47" template="../../../obj/gold.tx" x="425.667" y="472.667">
+  <object id="47" template="../../../../../../common/maps/obj/gold.tx" x="425.667" y="472.667">
    <properties>
     <property name="reward">[
   {
@@ -50,7 +50,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="49" template="../../../obj/gold.tx" x="312" y="470.333">
+  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="312" y="470.333">
    <properties>
     <property name="reward">[
   {
@@ -61,7 +61,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="54" template="../../../obj/enemy.tx" x="96.3333" y="406.667">
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="96.3333" y="406.667">
    <properties>
     <property name="defeatDialog">[
    {
@@ -75,7 +75,7 @@
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="55" template="../../../obj/gate.tx" x="368" y="639.333">
+  <object id="55" template="../../../../../../common/maps/obj/gate.tx" x="368" y="639.333">
    <properties>
     <property name="dialog">[
 	{
@@ -140,17 +140,17 @@
 ]</property>
    </properties>
   </object>
-  <object id="60" template="../../../obj/entry_up.tx" x="357" y="768" width="38" height="16">
+  <object id="60" template="../../../../../../common/maps/obj/entry_up.tx" x="357" y="768" width="38" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="65" template="../../../obj/entry_down.tx" x="352" y="542.75" width="48" height="29">
+  <object id="65" template="../../../../../../common/maps/obj/entry_down.tx" x="352" y="542.75" width="48" height="29">
    <properties>
     <property name="teleport" value="./main_story/castles/blue_castle_f1.tmx"/>
    </properties>
   </object>
-  <object id="66" template="../../../obj/enemy.tx" x="83.3333" y="603">
+  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="83.3333" y="603">
    <properties>
     <property name="defeatDialog">[
    {
@@ -164,7 +164,7 @@
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="67" template="../../../obj/enemy.tx" x="649" y="601.333">
+  <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="649" y="601.333">
    <properties>
     <property name="defeatDialog">[
    {
@@ -178,7 +178,7 @@
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="68" template="../../../obj/enemy.tx" x="677.667" y="410.666">
+  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="677.667" y="410.666">
    <properties>
     <property name="defeatDialog">[
    {
@@ -192,7 +192,7 @@
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="69" template="../../../obj/enemy.tx" x="365" y="223.333">
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="365" y="223.333">
    <properties>
     <property name="defeatDialog">[
    {
@@ -206,31 +206,31 @@
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="72" template="../../../obj/enemy.tx" x="226.667" y="538">
+  <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="226.667" y="538">
    <properties>
     <property name="enemy" value="Master Blue Wizard"/>
     <property name="threatRange" type="int" value="20"/>
     <property name="waypoints" value="75,73,82,81,79,80,79,78,77,74,76"/>
    </properties>
   </object>
-  <object id="73" template="../../../obj/waypoint.tx" x="56" y="492"/>
-  <object id="74" template="../../../obj/waypoint.tx" x="58" y="698"/>
-  <object id="75" template="../../../obj/waypoint.tx" x="224" y="492"/>
-  <object id="76" template="../../../obj/waypoint.tx" x="224.667" y="702"/>
-  <object id="77" template="../../../obj/waypoint.tx" x="709.333" y="704.667"/>
-  <object id="78" template="../../../obj/waypoint.tx" x="510" y="700"/>
-  <object id="79" template="../../../obj/waypoint.tx" x="510.667" y="494"/>
-  <object id="80" template="../../../obj/waypoint.tx" x="695.333" y="494"/>
-  <object id="81" template="../../../obj/waypoint.tx" x="517.333" y="344.667"/>
-  <object id="82" template="../../../obj/waypoint.tx" x="228.667" y="346"/>
-  <object id="84" template="../../../obj/enemy.tx" x="532" y="494.667">
+  <object id="73" template="../../../../../../common/maps/obj/waypoint.tx" x="56" y="492"/>
+  <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="58" y="698"/>
+  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="224" y="492"/>
+  <object id="76" template="../../../../../../common/maps/obj/waypoint.tx" x="224.667" y="702"/>
+  <object id="77" template="../../../../../../common/maps/obj/waypoint.tx" x="709.333" y="704.667"/>
+  <object id="78" template="../../../../../../common/maps/obj/waypoint.tx" x="510" y="700"/>
+  <object id="79" template="../../../../../../common/maps/obj/waypoint.tx" x="510.667" y="494"/>
+  <object id="80" template="../../../../../../common/maps/obj/waypoint.tx" x="695.333" y="494"/>
+  <object id="81" template="../../../../../../common/maps/obj/waypoint.tx" x="517.333" y="344.667"/>
+  <object id="82" template="../../../../../../common/maps/obj/waypoint.tx" x="228.667" y="346"/>
+  <object id="84" template="../../../../../../common/maps/obj/enemy.tx" x="532" y="494.667">
    <properties>
     <property name="enemy" value="Master Blue Wizard"/>
     <property name="threatRange" type="int" value="20"/>
     <property name="waypoints" value="79,80,79,78,77,74,76,75,73,82,81"/>
    </properties>
   </object>
-  <object id="85" template="../../../obj/enemy.tx" x="398.667" y="652.667">
+  <object id="85" template="../../../../../../common/maps/obj/enemy.tx" x="398.667" y="652.667">
    <properties>
     <property name="dialog">[
   {

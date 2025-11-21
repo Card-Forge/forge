@@ -6,11 +6,11 @@
  <properties>
   <property name="preventEscape" type="bool" value="true"/>
  </properties>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/buildings-nocollide.tsx"/>
- <tileset firstgid="13697" source="../../../common/maps/tileset/rivers.tsx"/>
- <tileset firstgid="30977" source="../../../common/maps/tileset/rivers-nocolide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="13697" source="../../../../../../common/maps/tileset/rivers.tsx"/>
+ <tileset firstgid="30977" source="../../../../../../common/maps/tileset/rivers-nocolide.tsx"/>
  <layer id="1" name="Background" width="50" height="40">
   <data encoding="base64" compression="zlib">
    eJztmUsOgjAURTt3pK7D/4e6BHfEx6hxCRrjKlyGiS7EgbuQFyBpCIUCr320YXCDA0zuyX23H/UHjPkd1pIzdvLofWDovqP30FbHOIvxlt5Hn0WiH6f3gCGXeg4sn7gj3/QJEtlGlvXnGSVP6P48ZTrHnx+WdQhyecfeV7nOTBzqELUHLGW9iRxaE/YhY0PLul/G48p6ffDcYIEzjQvnGmCA+bK9K9m+UieTiyCVd8R3q77XVK9tkgVW54v8y5iwBQywp2D0hJIjy2Uh2fNVvclmyMRciZLloeJRlcUEx7SkI00yoZgrkSW/BmMzmGKBPX7D1TjacOpkgPvXLNd3XRy6WK4BY7dAfzd0ZgE55O+QOnl0cdS996p6NckRFnSiiqGMq4pbVxZY53YTa6lMmL8NU3HUnaeucmDfA3uOngMUIP9OQsVRdLa1kQOEOVtUHGuO+7+iKY4/AhwTSA==
@@ -35,8 +35,8 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../obj/entry_up.tx" x="364" y="624" width="56" height="16"/>
-  <object id="55" template="../../obj/treasure.tx" x="432" y="304" visible="0">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="364" y="624" width="56" height="16"/>
+  <object id="55" template="../../../../../../common/maps/obj/treasure.tx" x="432" y="304" visible="0">
    <properties>
     <property name="reward">[{
 	  &quot;count&quot;:4,
@@ -54,7 +54,7 @@
 	}]</property>
    </properties>
   </object>
-  <object id="51" template="../../obj/treasure.tx" x="512" y="368" visible="0">
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="512" y="368" visible="0">
    <properties>
     <property name="reward">[{
       &quot;count&quot;:4,
@@ -62,7 +62,7 @@
     }]</property>
    </properties>
   </object>
-  <object id="53" template="../../obj/treasure.tx" x="464" y="432" visible="0">
+  <object id="53" template="../../../../../../common/maps/obj/treasure.tx" x="464" y="432" visible="0">
    <properties>
     <property name="reward">[{
 	  &quot;count&quot;:4,
@@ -80,7 +80,7 @@
 	}]</property>
    </properties>
   </object>
-  <object id="64" template="../../obj/treasure.tx" x="256" y="373" visible="0">
+  <object id="64" template="../../../../../../common/maps/obj/treasure.tx" x="256" y="373" visible="0">
    <properties>
     <property name="reward">[{
       &quot;count&quot;:4,
@@ -88,7 +88,7 @@
     }]</property>
    </properties>
   </object>
-  <object id="65" template="../../obj/treasure.tx" x="289.5" y="227.25" visible="0">
+  <object id="65" template="../../../../../../common/maps/obj/treasure.tx" x="289.5" y="227.25" visible="0">
    <properties>
     <property name="reward">[{
 	  &quot;count&quot;:4,
@@ -106,8 +106,8 @@
 	}]</property>
    </properties>
   </object>
-  <object id="66" template="../../obj/treasure.tx" x="96" y="144"/>
-  <object id="67" template="../../obj/enemy.tx" x="495.333" y="236.667">
+  <object id="66" template="../../../../../../common/maps/obj/treasure.tx" x="96" y="144"/>
+  <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="495.333" y="236.667">
    <properties>
     <property name="enemy" value="Demon"/>
     <property name="inactive" type="bool" value="true"/>
@@ -115,28 +115,28 @@
     <property name="threatRange" type="int" value="5000"/>
    </properties>
   </object>
-  <object id="68" template="../../obj/enemy.tx" x="473.333" y="350.667">
+  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="473.333" y="350.667">
    <properties>
     <property name="enemy" value="Demon"/>
     <property name="inactive" type="bool" value="true"/>
     <property name="threatRange" type="int" value="5000"/>
    </properties>
   </object>
-  <object id="69" template="../../obj/enemy.tx" x="219.333" y="212.667">
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="219.333" y="212.667">
    <properties>
     <property name="enemy" value="Demon"/>
     <property name="inactive" type="bool" value="true"/>
     <property name="threatRange" type="int" value="5000"/>
    </properties>
   </object>
-  <object id="70" template="../../obj/enemy.tx" x="240.667" y="396.667">
+  <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="240.667" y="396.667">
    <properties>
     <property name="enemy" value="Demon"/>
     <property name="inactive" type="bool" value="true"/>
     <property name="threatRange" type="int" value="5000"/>
    </properties>
   </object>
-  <object id="71" template="../../obj/enemy.tx" x="658" y="303.333">
+  <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="658" y="303.333">
    <properties>
     <property name="enemy" value="Demon"/>
     <property name="inactive" type="bool" value="true"/>
@@ -144,7 +144,7 @@
     <property name="threatRange" type="int" value="5000"/>
    </properties>
   </object>
-  <object id="72" template="../../obj/enemy.tx" x="534.667" y="482">
+  <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="534.667" y="482">
    <properties>
     <property name="enemy" value="Demon"/>
     <property name="fleeRange" value="5000"/>
@@ -152,14 +152,14 @@
     <property name="threatRange" type="int" value="2000"/>
    </properties>
   </object>
-  <object id="73" template="../../obj/enemy.tx" x="354.667" y="291.333">
+  <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="354.667" y="291.333">
    <properties>
     <property name="enemy" value="Demon"/>
     <property name="inactive" type="bool" value="true"/>
     <property name="threatRange" type="int" value="5000"/>
    </properties>
   </object>
-  <object id="74" template="../../obj/enemy.tx" x="48" y="272">
+  <object id="74" template="../../../../../../common/maps/obj/enemy.tx" x="48" y="272">
    <properties>
     <property name="enemy" value="Demon"/>
     <property name="inactive" type="bool" value="true"/>
@@ -167,7 +167,7 @@
     <property name="threatRange" type="int" value="5000"/>
    </properties>
   </object>
-  <object id="75" template="../../obj/dialog.tx" x="80" y="208" width="96" height="96">
+  <object id="75" template="../../../../../../common/maps/obj/dialog.tx" x="80" y="208" width="96" height="96">
    <properties>
     <property name="dialog">[
 {
@@ -179,7 +179,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="76" template="../../obj/dialog.tx" x="656" y="175" width="117" height="98">
+  <object id="76" template="../../../../../../common/maps/obj/dialog.tx" x="656" y="175" width="117" height="98">
    <properties>
     <property name="dialog">[
 {
@@ -191,7 +191,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="77" template="../../obj/dialog.tx" x="400" y="448" width="160" height="190" visible="1">
+  <object id="77" template="../../../../../../common/maps/obj/dialog.tx" x="400" y="448" width="160" height="190" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -203,7 +203,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="78" template="../../obj/dialog.tx" x="202" y="448" width="166" height="159">
+  <object id="78" template="../../../../../../common/maps/obj/dialog.tx" x="202" y="448" width="166" height="159">
    <properties>
     <property name="dialog">[
 {
@@ -215,7 +215,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="79" template="../../obj/dialog.tx" x="448" y="192" width="80" height="80" visible="1">
+  <object id="79" template="../../../../../../common/maps/obj/dialog.tx" x="448" y="192" width="80" height="80" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -227,17 +227,17 @@
 ]</property>
    </properties>
   </object>
-  <object id="80" template="../../obj/scroll.tx" x="320" y="400">
+  <object id="80" template="../../../../../../common/maps/obj/scroll.tx" x="320" y="400">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wasteland&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="81" template="../../obj/scroll.tx" x="704" y="128">
+  <object id="81" template="../../../../../../common/maps/obj/scroll.tx" x="704" y="128">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Millstone&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="82" template="../../obj/dialog.tx" x="240" y="176" width="160" height="112">
+  <object id="82" template="../../../../../../common/maps/obj/dialog.tx" x="240" y="176" width="160" height="112">
    <properties>
     <property name="dialog">[
 {
@@ -249,7 +249,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="83" template="../../obj/dialog.tx" x="336" y="560" width="112" height="16">
+  <object id="83" template="../../../../../../common/maps/obj/dialog.tx" x="336" y="560" width="112" height="16">
    <properties>
     <property name="dialog">[{
    &quot;condition&quot;: [{&quot;checkMapFlag&quot;:&quot;demonsActive&quot;},{&quot;checkMapFlag&quot;: &quot;escaped&quot;, &quot;not&quot;: true}],
@@ -268,55 +268,55 @@
     <property name="hidden" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="84" template="../../obj/manashards.tx" x="560" y="448" visible="0"/>
-  <object id="85" template="../../obj/scroll.tx" x="48" y="336">
+  <object id="84" template="../../../../../../common/maps/obj/manashards.tx" x="560" y="448" visible="0"/>
+  <object id="85" template="../../../../../../common/maps/obj/scroll.tx" x="48" y="336">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wastes&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="86" template="../../obj/scroll.tx" x="256" y="112">
+  <object id="86" template="../../../../../../common/maps/obj/scroll.tx" x="256" y="112">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wastes&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="87" template="../../obj/scroll.tx" x="496" y="144">
+  <object id="87" template="../../../../../../common/maps/obj/scroll.tx" x="496" y="144">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wastes&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="88" template="../../obj/scroll.tx" x="736" y="304">
+  <object id="88" template="../../../../../../common/maps/obj/scroll.tx" x="736" y="304">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wastes&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="89" template="../../obj/scroll.tx" x="192" y="288">
+  <object id="89" template="../../../../../../common/maps/obj/scroll.tx" x="192" y="288">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wastes&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="90" template="../../obj/scroll.tx" x="448" y="240">
+  <object id="90" template="../../../../../../common/maps/obj/scroll.tx" x="448" y="240">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wastes&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="91" template="../../obj/scroll.tx" x="160" y="480">
+  <object id="91" template="../../../../../../common/maps/obj/scroll.tx" x="160" y="480">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wastes&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="92" template="../../obj/scroll.tx" x="352" y="128">
+  <object id="92" template="../../../../../../common/maps/obj/scroll.tx" x="352" y="128">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Abandoned Outpost&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="93" template="../../obj/enemy.tx" x="370.667" y="147.333">
+  <object id="93" template="../../../../../../common/maps/obj/enemy.tx" x="370.667" y="147.333">
    <properties>
     <property name="enemy" value="Demon"/>
     <property name="inactive" type="bool" value="true"/>
     <property name="threatRange" type="int" value="5000"/>
    </properties>
   </object>
-  <object id="94" template="../../obj/dialog.tx" x="240" y="272" width="80" height="80" visible="1">
+  <object id="94" template="../../../../../../common/maps/obj/dialog.tx" x="240" y="272" width="80" height="80" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -328,7 +328,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="95" template="../../obj/dialog.tx" x="96" y="176" width="64" height="16">
+  <object id="95" template="../../../../../../common/maps/obj/dialog.tx" x="96" y="176" width="64" height="16">
    <properties>
     <property name="dialog">[
 {
@@ -346,7 +346,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="96" template="../../obj/dialog.tx" x="336" y="528" width="112" height="16">
+  <object id="96" template="../../../../../../common/maps/obj/dialog.tx" x="336" y="528" width="112" height="16">
    <properties>
     <property name="dialog">[
 {
@@ -356,7 +356,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="97" template="../../obj/treasure.tx" x="162" y="195" visible="0">
+  <object id="97" template="../../../../../../common/maps/obj/treasure.tx" x="162" y="195" visible="0">
    <properties>
     <property name="reward">[{
 	  &quot;count&quot;:4,
@@ -374,7 +374,7 @@
 	}]</property>
    </properties>
   </object>
-  <object id="98" template="../../obj/enemy.tx" x="32" y="96">
+  <object id="98" template="../../../../../../common/maps/obj/enemy.tx" x="32" y="96">
    <properties>
     <property name="enemy" value="Demon"/>
     <property name="inactive" type="bool" value="true"/>
@@ -382,14 +382,14 @@
     <property name="threatRange" type="int" value="5000"/>
    </properties>
   </object>
-  <object id="99" template="../../obj/enemy.tx" x="657" y="133">
+  <object id="99" template="../../../../../../common/maps/obj/enemy.tx" x="657" y="133">
    <properties>
     <property name="enemy" value="Demon"/>
     <property name="inactive" type="bool" value="true"/>
     <property name="threatRange" type="int" value="5000"/>
    </properties>
   </object>
-  <object id="100" template="../../obj/enemy.tx" x="200" y="488">
+  <object id="100" template="../../../../../../common/maps/obj/enemy.tx" x="200" y="488">
    <properties>
     <property name="enemy" value="Demon"/>
     <property name="fleeRange" value="5000"/>
@@ -398,7 +398,7 @@
     <property name="threatRange" type="int" value="1000"/>
    </properties>
   </object>
-  <object id="101" template="../../obj/enemy.tx" x="383" y="383">
+  <object id="101" template="../../../../../../common/maps/obj/enemy.tx" x="383" y="383">
    <properties>
     <property name="enemy" value="Demon"/>
     <property name="inactive" type="bool" value="true"/>
@@ -406,7 +406,7 @@
     <property name="threatRange" type="int" value="5000"/>
    </properties>
   </object>
-  <object id="102" template="../../obj/enemy.tx" x="32" y="480">
+  <object id="102" template="../../../../../../common/maps/obj/enemy.tx" x="32" y="480">
    <properties>
     <property name="enemy" value="Demon"/>
     <property name="inactive" type="bool" value="true"/>
@@ -414,14 +414,14 @@
     <property name="threatRange" type="int" value="5000"/>
    </properties>
   </object>
-  <object id="103" template="../../obj/enemy.tx" x="624" y="416">
+  <object id="103" template="../../../../../../common/maps/obj/enemy.tx" x="624" y="416">
    <properties>
     <property name="enemy" value="Demon"/>
     <property name="inactive" type="bool" value="true"/>
     <property name="threatRange" type="int" value="5000"/>
    </properties>
   </object>
-  <object id="116" template="../../obj/collision.tx" x="330" y="640" width="126" height="29"/>
-  <object id="117" template="../../obj/waypoint.tx" x="384" y="239"/>
+  <object id="116" template="../../../../../../common/maps/obj/collision.tx" x="330" y="640" width="126" height="29"/>
+  <object id="117" template="../../../../../../common/maps/obj/waypoint.tx" x="384" y="239"/>
  </objectgroup>
 </map>

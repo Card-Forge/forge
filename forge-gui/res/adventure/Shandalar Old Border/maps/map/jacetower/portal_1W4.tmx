@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFAwGieRkYdvFQD0fxEmevLA91/SFNpHmj9lIGduKId1rbSyygtr213AwMdVgwre2VHqBwHmnpmVh79/JgTwfk4j0DlD8GGwAA7/Apnw==
@@ -34,14 +34,14 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="41" template="../../../common/maps/obj/shop.tx" x="97" y="193"/>
-  <object id="42" template="../../../common/maps/obj/shop.tx" x="304" y="193"/>
-  <object id="43" template="../../../common/maps/obj/shop.tx" x="352" y="194"/>
-  <object id="44" template="../../../common/maps/obj/shop.tx" x="144" y="194"/>
-  <object id="45" template="../../../common/maps/obj/shop.tx" x="255" y="194"/>
-  <object id="46" template="../../../common/maps/obj/shop.tx" x="192" y="193"/>
-  <object id="47" template="../../../common/maps/obj/inn.tx" x="225" y="99"/>
-  <object id="51" template="../../../common/maps/obj/door_left.tx" x="386" y="146">
+  <object id="41" template="../../../../../../common/maps/obj/shop.tx" x="97" y="193"/>
+  <object id="42" template="../../../../../../common/maps/obj/shop.tx" x="304" y="193"/>
+  <object id="43" template="../../../../../../common/maps/obj/shop.tx" x="352" y="194"/>
+  <object id="44" template="../../../../../../common/maps/obj/shop.tx" x="144" y="194"/>
+  <object id="45" template="../../../../../../common/maps/obj/shop.tx" x="255" y="194"/>
+  <object id="46" template="../../../../../../common/maps/obj/shop.tx" x="192" y="193"/>
+  <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="225" y="99"/>
+  <object id="51" template="../../../../../../common/maps/obj/door_left.tx" x="386" y="146">
    <properties>
     <property name="teleportObjectId" value="61"/>
    </properties>

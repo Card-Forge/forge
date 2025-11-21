@@ -3,9 +3,9 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/phyrexia/GitaxianTilesheet.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/phyrexia/GitaxianTilesheet.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYCAMpvIyMEzDg6fzEmEIGcCYj4HhEh5sykc7e/GB4WbvRaQwNYPaYY4kdplG9iKnK5jfQX6kdTpDT1cggC+dzaSSOwjFLzpAj29y459Uewm5YyjYu4sHgUEAmS/Lg98eWvkX3V5ztHRGTj5z4yTdXmqVI8Taa06B/yixl9rlJcjeem7c8tT2J7K9sLIHGcDEyPEnAMvuO9Q=
@@ -35,32 +35,32 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../obj/entry_up.tx" x="192" y="277" width="48" height="16">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="277" width="48" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="48" template="../../obj/treasure.tx" x="160.239" y="31.7659"/>
-  <object id="50" template="../../obj/enemy.tx" x="192.235" y="47.7421">
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="160.239" y="31.7659"/>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="192.235" y="47.7421">
    <properties>
     <property name="enemy" value="Gitaxian Scientist"/>
     <property name="threatRange" value="20"/>
     <property name="waypoints" value="68,69,70"/>
    </properties>
   </object>
-  <object id="54" template="../../obj/enemy.tx" x="273" y="145.112">
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="273" y="145.112">
    <properties>
     <property name="enemy" value="Gitaxian Underling"/>
     <property name="threatRange" value="20"/>
     <property name="waypoints" value="64,65,66,67"/>
    </properties>
   </object>
-  <object id="56" template="../../obj/enemy.tx" x="207.841" y="177.756">
+  <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="207.841" y="177.756">
    <properties>
     <property name="enemy" value="Gitaxian Underling"/>
    </properties>
   </object>
-  <object id="62" template="../../obj/gold.tx" x="383.945" y="175.462"/>
+  <object id="62" template="../../../../../../common/maps/obj/gold.tx" x="383.945" y="175.462"/>
   <object id="71" name="switch" type="dialog" gid="4426" x="368" y="126.848" width="16" height="16">
    <properties>
     <property name="dialog">[
@@ -79,7 +79,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="75" template="../../obj/booster.tx" x="216.75" y="32.8333">
+  <object id="75" template="../../../../../../common/maps/obj/booster.tx" x="216.75" y="32.8333">
    <properties>
     <property name="reward">[
   {
@@ -107,17 +107,17 @@
 </property>
    </properties>
   </object>
-  <object id="76" template="../../obj/treasure.tx" x="256" y="32"/>
+  <object id="76" template="../../../../../../common/maps/obj/treasure.tx" x="256" y="32"/>
  </objectgroup>
  <objectgroup id="7" name="Waypoints">
-  <object id="64" template="../../obj/waypoint.tx" x="273" y="145"/>
-  <object id="65" template="../../obj/waypoint.tx" x="367.667" y="145"/>
-  <object id="66" template="../../obj/waypoint.tx" x="367.333" y="157"/>
-  <object id="67" template="../../obj/waypoint.tx" x="272.667" y="157"/>
-  <object id="68" template="../../obj/waypoint.tx" x="163" y="61"/>
-  <object id="69" template="../../obj/waypoint.tx" x="192" y="61"/>
-  <object id="70" template="../../obj/waypoint.tx" x="192" y="34"/>
-  <object id="73" template="../../obj/gate.tx" x="208.25" y="96.5">
+  <object id="64" template="../../../../../../common/maps/obj/waypoint.tx" x="273" y="145"/>
+  <object id="65" template="../../../../../../common/maps/obj/waypoint.tx" x="367.667" y="145"/>
+  <object id="66" template="../../../../../../common/maps/obj/waypoint.tx" x="367.333" y="157"/>
+  <object id="67" template="../../../../../../common/maps/obj/waypoint.tx" x="272.667" y="157"/>
+  <object id="68" template="../../../../../../common/maps/obj/waypoint.tx" x="163" y="61"/>
+  <object id="69" template="../../../../../../common/maps/obj/waypoint.tx" x="192" y="61"/>
+  <object id="70" template="../../../../../../common/maps/obj/waypoint.tx" x="192" y="34"/>
+  <object id="73" template="../../../../../../common/maps/obj/gate.tx" x="208.25" y="96.5">
    <properties>
     <property name="dialog">[{
     &quot;text&quot;:&quot;This gate is locked. There must be a way to open it somewhere else in here.&quot;,

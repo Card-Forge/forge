@@ -6,10 +6,10 @@
  <properties>
   <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Gnat Miser&quot; ]}"/>
  </properties>
- <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
- <tileset firstgid="28289" source="../../../common/maps/tileset/dungeon/animatedtiles.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../../../common/maps/tileset/dungeon/animatedtiles.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJytlT0OwjAMhb1mYerWASEx9Q5wBebMXKHZOA0Czoki9ITrxqkNrvTU9M9fnu2kORFN41LX4T/d9u37OX3liXfeLWX9Dpw6H6heS4+Hy0dRXDAk18rTYj5note8jsXzHl3LYyG6V25pP698yfyVy/0/is7kftFPGLfyasmt1GnsfyP9alytVj1uPTS/6B3k3RLT6ndr7uhlS32tud7i8jUU7ddTX7C1tev1rXnlntHPUZ49itxDWrHlmO/NrZx74vfel3syzry2ljpHKad1b3nzrs2T/4Ok/zfvk+b8
@@ -39,12 +39,12 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="192" y="275.665" width="48" height="16">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="275.665" width="48" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="50" template="../../../common/maps/obj/enemy.tx" x="213.605" y="70.6596">
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="213.605" y="70.6596">
    <properties>
     <property name="enemy" value="Nezumi Ninja"/>
     <property name="spawn.Normal" type="bool" value="true"/>
@@ -52,8 +52,8 @@
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="62" template="../../../common/maps/obj/gold.tx" x="89.6918" y="125.224"/>
-  <object id="65" template="../../../common/maps/obj/enemy.tx" x="176.55" y="148.218">
+  <object id="62" template="../../../../../../common/maps/obj/gold.tx" x="89.6918" y="125.224"/>
+  <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="176.55" y="148.218">
    <properties>
     <property name="enemy" value="Nezumi Ninja"/>
     <property name="speedModifier" type="float" value="4"/>
@@ -61,7 +61,7 @@
     <property name="waypoints" value="72,69,70,71,73,72"/>
    </properties>
   </object>
-  <object id="66" template="../../../common/maps/obj/booster.tx" x="126.196" y="72.7342" width="16.25" height="15.25">
+  <object id="66" template="../../../../../../common/maps/obj/booster.tx" x="126.196" y="72.7342" width="16.25" height="15.25">
    <properties>
     <property name="reward">[
   {
@@ -86,19 +86,19 @@
 </property>
    </properties>
   </object>
-  <object id="67" template="../../../common/maps/obj/enemy.tx" x="304.845" y="135.63">
+  <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="304.845" y="135.63">
    <properties>
     <property name="enemy" value="Nezumi Ninja"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="68" template="../../../common/maps/obj/manashards.tx" x="332.361" y="137.498"/>
-  <object id="69" template="../../../common/maps/obj/waypoint.tx" x="248.604" y="186.586"/>
-  <object id="70" template="../../../common/maps/obj/waypoint.tx" x="195.111" y="215.924"/>
-  <object id="71" template="../../../common/maps/obj/waypoint.tx" x="117.185" y="203.246"/>
-  <object id="72" template="../../../common/maps/obj/waypoint.tx" x="203.732" y="136.586"/>
-  <object id="73" template="../../../common/maps/obj/waypoint.tx" x="88.2493" y="142.122"/>
-  <object id="76" template="../../../common/maps/obj/treasure.tx" x="188.774" y="63.2297">
+  <object id="68" template="../../../../../../common/maps/obj/manashards.tx" x="332.361" y="137.498"/>
+  <object id="69" template="../../../../../../common/maps/obj/waypoint.tx" x="248.604" y="186.586"/>
+  <object id="70" template="../../../../../../common/maps/obj/waypoint.tx" x="195.111" y="215.924"/>
+  <object id="71" template="../../../../../../common/maps/obj/waypoint.tx" x="117.185" y="203.246"/>
+  <object id="72" template="../../../../../../common/maps/obj/waypoint.tx" x="203.732" y="136.586"/>
+  <object id="73" template="../../../../../../common/maps/obj/waypoint.tx" x="88.2493" y="142.122"/>
+  <object id="76" template="../../../../../../common/maps/obj/treasure.tx" x="188.774" y="63.2297">
    <properties>
     <property name="reward">[{&quot;type&quot;: &quot;randomCard&quot;,&quot;colors&quot;: [&quot;Red&quot;], &quot;count&quot;: 5 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Dagger&quot;},
 {
