@@ -6,8 +6,8 @@
  <properties>
   <property name="preventEscape" type="bool" value="true"/>
  </properties>
- <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
  <layer id="8" name="Test" width="30" height="17" opacity="0.3">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIJRMFjBRlFUPBLs/SuIaT+t3TFLiIFhthD97R0IAACtEBKm

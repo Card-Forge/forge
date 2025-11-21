@@ -6,11 +6,11 @@
  <properties>
   <property name="preventEscape" type="bool" value="true"/>
  </properties>
- <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../tileset/buildings-nocollide.tsx"/>
- <tileset firstgid="13697" source="../../tileset/rivers.tsx"/>
- <tileset firstgid="30977" source="../../tileset/rivers-nocolide.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="13697" source="../../../common/maps/tileset/rivers.tsx"/>
+ <tileset firstgid="30977" source="../../../common/maps/tileset/rivers-nocolide.tsx"/>
  <layer id="1" name="Background" width="50" height="40">
   <data encoding="base64" compression="zlib">
    eJztmUsOgjAURTt3pK7D/4e6BHfEx6hxCRrjKlyGiS7EgbuQFyBpCIUCr320YXCDA0zuyX23H/UHjPkd1pIzdvLofWDovqP30FbHOIvxlt5Hn0WiH6f3gCGXeg4sn7gj3/QJEtlGlvXnGSVP6P48ZTrHnx+WdQhyecfeV7nOTBzqELUHLGW9iRxaE/YhY0PLul/G48p6ffDcYIEzjQvnGmCA+bK9K9m+UieTiyCVd8R3q77XVK9tkgVW54v8y5iwBQywp2D0hJIjy2Uh2fNVvclmyMRciZLloeJRlcUEx7SkI00yoZgrkSW/BmMzmGKBPX7D1TjacOpkgPvXLNd3XRy6WK4BY7dAfzd0ZgE55O+QOnl0cdS996p6NckRFnSiiqGMq4pbVxZY53YTa6lMmL8NU3HUnaeucmDfA3uOngMUIP9OQsVRdLa1kQOEOVtUHGuO+7+iKY4/AhwTSA==

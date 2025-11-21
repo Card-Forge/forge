@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="158">
- <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../autotiles.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">

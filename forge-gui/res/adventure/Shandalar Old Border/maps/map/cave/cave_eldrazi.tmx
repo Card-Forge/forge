@@ -8,8 +8,8 @@
   &quot;startBattleWithCard&quot;: [ &quot;Howling Mine&quot; ],
 }</property>
  </properties>
- <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYKAtqOPEjukBBspebHbT2z56+xfdLQNhJz3T1UCCkWr/QObfgSyz6OUOYu2kthsI2UsrvxMT1tS0m1T7iLEfW1gRYxcAq/g0vQ==

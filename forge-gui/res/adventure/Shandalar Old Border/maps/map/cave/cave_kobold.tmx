@@ -3,9 +3,9 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="1" name="Background" width="60" height="40" opacity="0.53">
   <data encoding="base64" compression="zlib">
    eJzt1LENwCAQBMEPnDhGclm04TZoiB4thzTAI5hg8r3k6h1RAQAAAAA21J78BgBgPf2KeMsou2m20zbbu7fT9v4flt0AjD649zHZ

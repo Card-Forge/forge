@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="109">
- <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="60" height="34">
   <data encoding="base64" compression="zlib">
    eJzl110OgjAMB/CFN6OX0Ddu5AW8whJeOKk30DtoSCDOpbBuXdt9NPlHjQH3W2GT6WTMxBCb+VxuOMabY3xU11G0jbm9mDkoxUkdTw09lhqPtp1r/pea11dsteDdi5ZZo78z8Fvc1vuZNxjvazTmPcp5reOG+ku1hrxbSXp93553WIM1+/fr8wLfv5LXc6iXgxdMX2NLy7vE91ESa+7JuxWnF1qfWvXu7bc5vSlmKSfFu1VpXszzSs39tRHOFryxVk4v9F+Zo78le6XXppa8KdZavf65ufcjzFol4cXMh/8ZekYo3Uu51jGGP8vt9/ZzNeaxBrMXSXmPzKHjIIf7vbQjxgu5Q8dp9YfDizmudm9KarNS06O3R7P2GHrxfgFBViDR

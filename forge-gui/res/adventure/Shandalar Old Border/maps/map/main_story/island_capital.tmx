@@ -3,9 +3,9 @@
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
    eJzNmF1OwzAMxyvRj12ERz40xnE4ATzADXYE2JbtKJyCywBj42UiVmvhGidx2mRskjWtU5NfbP8dJ+uqKD7KopjVffu0z9bVadjG2l3ZN/MPHNRP1D+nwkc5jON5DB+u913IjyF54uJ7sfbdPd9Z21tbBPwPdlv/XRe3m7q/Bh8vcOwd8yO7y2/ApuHR8sbqD9kXjAnHeWrGs3HOsVpa2e9l1a73sm75vxIzDvGlFEvghHEkLaXg1DL68sw4tH4sxpAGDk1rOfg0jCHf5ObDPBpTP4DvPEGd8RmvcVq2bdnWH6hFKXUszRHaf6X3Lkg9SM3o27c0fFS7qWvN1sEVE1tgWlV93hgfAsNzt0ehxuB738WFxhOYYL8e44PrOi430D+PTZ8PfsM68f9p/euHofUW5ntownxbllPY/1A+7G14ruGahvAZMt/K874hPcab5ZhM3PmA+zyOFxMf7g/wXYiN5ixw3jfte9r5uAZh7lCuGxKjEBufC+N3FVHbwYcbTy7C5/Ws39MO1dOyio8XZZLqBXwOTb+vj/GbNB/0kdqahExUY/QMgP3AGCbJjxrGXemu2ajNXL2KJk9856CxcZQMtT/r9BEaX+LT1IyhFtM7umKbq3eP4fPlXU4+jBdqz6UP370FvUdIbbh/oUkaDmk2NyP3E42Xhu2YjLQOamodP8djnc7JifvDVHmulO4bcvmS+oz2p5K/uG75OTmlL7tz0Nx3f4fnDVPJfPQ/npfdGWIOpuHFcxmePXx5xjmMwz9aLYViH6NJzie9K90BxoypiYF2rFT33yn5pPvdH0OhJ4A=

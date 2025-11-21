@@ -6,8 +6,8 @@
  <properties>
   <property name="canFailDungeon" type="bool" value="true"/>
  </properties>
- <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="24" height="17">
   <data encoding="base64" compression="zlib">
    eJwL42RgCKMAuxHAlJgNwrgAueaTAig1G1kMmzw1wgefO2hhPq3dP5TNRzebmua70dh8bGmTluZTM/zjaGQ+PkDt8g1mHi3SJi3KZWzmY5MDACFee5Y=

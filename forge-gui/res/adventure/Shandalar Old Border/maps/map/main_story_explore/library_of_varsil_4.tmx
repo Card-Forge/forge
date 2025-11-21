@@ -3,11 +3,11 @@
  <properties>
   <property name="preventEscape" type="bool" value="true"/>
  </properties>
- <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../tileset/dungeon.tsx"/>
- <tileset firstgid="16385" source="../../tileset/dungeon-nocollide.tsx"/>
- <tileset firstgid="20865" source="../../tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../common/maps/tileset/dungeon.tsx"/>
+ <tileset firstgid="16385" source="../../../common/maps/tileset/dungeon-nocollide.tsx"/>
+ <tileset firstgid="20865" source="../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="30" height="20">
   <data encoding="base64" compression="zlib">
    eJzjVWdg4B1CGAbQxQbaXaN4FI/iUTyKR/EoHsUwDADG93lF

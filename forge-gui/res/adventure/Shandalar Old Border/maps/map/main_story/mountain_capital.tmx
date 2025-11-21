@@ -3,9 +3,9 @@
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
    eJztmG0OwiAMhon/hufRGQ+ye0ydF/VjHkca10jIGF9CUfvjDckC6UMLZH3HRoiR9TPaKLUVcNi4Hkr3yvYBsc5SiJN8jTY+mLdVGqZ5t0J8kLOrpjk+3APO2SkdZXk+W9xefdsTsJl5WaoZ7mO19pe+PmSdKV++lBipsp09vcaUfCDX20LN53ozqPlc95Kaz+fOMx/zMR/zMR/zMV9ZPkq2b+CD3rGtmM/1j0/NBz1kzf/Qvv5GiMwYnUcM6MUOU8+NvoY+Lp3BEHWRfDon+gIujyNFGAe8B8hLiP+AvgCsRdZP82GcGE/p0rw9Fax7Dn8l9mz3mXjm8pCjLv/CV6pONekJ5zkFQw==

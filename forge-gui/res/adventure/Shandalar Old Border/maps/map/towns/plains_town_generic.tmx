@@ -3,9 +3,9 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJzr5GRg6Bxk+AUHBJOqz28QuH0UY8dN3NTHg9He5xy0tbcNDcPs1OCiv72tSOyRYi+t0xU2e5W5aG+vChcqHuh8NGovde19zoGoV7HVrbSyF1QuoadnUuwlx20wsymxl5L4HUn2YiuvKGkbEKuHWvYi0/SydxSP4sGKARuK+bI=

@@ -3,9 +3,9 @@
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../tileset/phyrexia/phyrexiantiles.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../common/maps/tileset/phyrexia/phyrexiantiles.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJy1k10OAiEMhPvqA1xGlBvsDf07luuFtNk2qXVAU3CSeVrot7TTZUe0OJ8S0Vl8SZ/fkSN3vPeZaBUf8ntNZOb4O1Gu6vaqWU1N5GPezqhmcLV2T/7MDK4Vv4nfz7qm7Z1IUe690c9i+slMnis69why2UXyxBzNTzX91Ln6fJUBpu4FyhOaq81XdIf8Llmhc/4/orNVocx8445kymbLs1GGrDjjI5nSXCF2S1VyPJqrIjVau4z6WyZwbb5+5c7g9ebc6vFMrrJXwNf9/gez1/OR3j4BI+CnQA==

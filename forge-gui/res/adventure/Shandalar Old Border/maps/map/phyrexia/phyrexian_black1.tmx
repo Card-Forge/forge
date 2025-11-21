@@ -3,9 +3,9 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../tileset/phyrexia/DrossPitTiles.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../common/maps/tileset/phyrexia/DrossPitTiles.tsx"/>
  <layer id="6" name="Collision" width="31" height="17">
   <data encoding="base64" compression="zlib">
    eJzVlM0NgCAMRrkYT3YZo67nEuJc6ia6gHAgYG1JIWBik+8g1L7+Bd0opQWqYRJubfYOtL5g596XZM9t/L7kfHLYEzOfEbyvJC98ZmNQ96EG47N0Sp3gtZrvHmR9wTvGGVXfAW+OzWcjfGM15FqP8h0i+WOTssO+4v5iNp4DJ2kPuHnj/lJzSFFobt8pP66eC55xJLxUdsn3l/rH7WjNdy2MH9uL2uxSffwD+wZNG6DH

@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzt0kEKgDAMBMDSm+ZDfsWP5nGepEighE2NsCqIh4Uclgy0qVJKBVmnI4vkYn2060rectuubc671mW4mrRbR4XnZuzeZLoj25tst7fVzb7Hds1G81dd/85PuP4/I5vpRjeEbJYbmZHNcM9MZN9xV5n8Ls4OYH1n9w==

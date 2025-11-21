@@ -6,9 +6,9 @@
  <properties>
   <property name="preventEscape" type="bool" value="true"/>
  </properties>
- <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../common/maps/tileset/main-nocollide.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJybx8nAMG+QYi32gXfDYMNtbAwM7VhwBxt55qVwEKdOBUdcqNE4joaavZSmWXLthcmzyTIwsEPxOWmGBSAM43PI4tZ/CKj/MBBvl2BogGIw/wgBe09A5ZcAzeYWwI6X4bGXUjxS7NUiIZxBefowND5TkfI3SBzEh8mnEpH3YfHrJMfA4IwDu8jRLpxHMW0wABqfN7U=

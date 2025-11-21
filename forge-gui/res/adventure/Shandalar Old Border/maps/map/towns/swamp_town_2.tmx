@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="40" height="40">
   <data encoding="base64" compression="zlib">
    eJzt10EKgCAQRuHZBnaC6Dpdwpt2ura1MXB+c9L3wG3zUZJoRkQztSWzU7j2pPcpw+cLn68RfXkt/xN6+9TvXD0Ln28WPt+sv/iO5blahM/XyL4v6u17O8trznOlr8W3wBfnmTP6au7XpXt7z+6+iOHzFWWfEam7ADCZOGc=

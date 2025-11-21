@@ -3,11 +3,11 @@
  <properties>
   <property name="preventEscape" type="bool" value="true"/>
  </properties>
- <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../tileset/rivers.tsx"/>
- <tileset firstgid="27393" source="../../tileset/main-nocollide.tsx"/>
- <tileset firstgid="37505" source="../../tileset/dungeon.tsx"/>
- <tileset firstgid="41985" source="../../tileset/FarmFood.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/rivers.tsx"/>
+ <tileset firstgid="27393" source="../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="37505" source="../../../common/maps/tileset/dungeon.tsx"/>
+ <tileset firstgid="41985" source="../../../common/maps/tileset/FarmFood.tsx"/>
  <layer id="1" name="Background" width="30" height="40">
   <data encoding="base64" compression="zlib">
    eJyLZWFgiB3Fo3gUj+JRjBMnWgyMvaKWDAwSQHzecuDsPz1AdjdZDVy4g+yGhfm0Wdgxuh5i1RHCT61xm4dLD6X2ngP6NXkAwhrmV2ScxomK8cmhyxPr12YrwvYSwqTaa4jFrzB7J7ATh4m1F5Zvkiyw+5VW9oLKC0lLhgZ8aYkW9hKDR+2ln720zEejeBSP4lE8ikcxAMAE71k=
