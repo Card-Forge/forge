@@ -1015,7 +1015,7 @@
 		"cost": 2000,
 		"effect": {
 			"startBattleWithCard": [
-				"Spare Dagger"
+				"Rod of Ruin|LEA"
 			]
 		}
 	},
@@ -1300,7 +1300,7 @@
 		"cost": 2000,
 		"effect": {
 			"startBattleWithCard": [
-				"Clattering Augur"
+				"Drudge Skeletons|LEA"
 			],
 			"lifeModifier": -2,
 			"moveSpeed": 1.3
