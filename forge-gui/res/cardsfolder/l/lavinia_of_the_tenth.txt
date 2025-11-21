@@ -4,6 +4,6 @@ Types:Legendary Creature Human Soldier
 PT:4/4
 K:Protection from red
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ Detain | TriggerDescription$ When CARDNAME enters, detain each nonland permanent your opponents control with mana value 4 or less.
-SVar:Detain:DB$ PumpAll | KW$ HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated. | IsCurse$ True | Duration$ UntilYourNextTurn | ValidCards$ Permanent.OppCtrl+nonLand+cmcLE4
+SVar:Detain:DB$ Detain | Defined$ Valid Permanent.OppCtrl+nonLand+cmcLE4
 SVar:PlayMain1:TRUE
 Oracle:Protection from red\nWhen Lavinia of the Tenth enters, detain each nonland permanent your opponents control with mana value 4 or less. (Until your next turn, those permanents can't attack or block and their activated abilities can't be activated.)
