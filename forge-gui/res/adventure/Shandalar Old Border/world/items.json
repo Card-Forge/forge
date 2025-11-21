@@ -2407,8 +2407,8 @@
 		"effect": {
 			"startBattleWithCard": [
 				"Mountain|PELP",
-				"Island|PELP",
-				"Plains|PELP"
+				"Island|PGRU",
+				"Plains|PGRU"
 			]
 		}
 	},

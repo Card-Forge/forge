@@ -4808,25 +4808,25 @@
 					},
 					{
 						"count": 1,
-						"cardName": "Cursed Scroll"
+						"cardName": "Cursed Scroll|TMP"
 					},
 					{
 						"count": 1,
-						"cardName": "Mirari"
+						"cardName": "Mirari|ODY"
 					},
 					{
 						"count": 1,
-						"cardName": "Hammer of Bogardan"
+						"cardName": "Hammer of Bogardan|MIR"
 					},
 					{
 						"count": 1,
-						"cardName": "Fork"
+						"cardName": "Fork|3ED"
 					}
 				]
 			},
 			{
 				"count": 1,
-				"cardName": "Wheel of Fortune"
+				"cardName": "Wheel of Fortune|3ED"
 			},
 			{
 				"type": "deckCard",
@@ -6110,7 +6110,7 @@
 				"type": "card",
 				"probability": 1,
 				"count": 1,
-				"cardName": "Island|PELP"
+				"cardName": "Island|PGRU"
 			},
 			{
 				"type": "landSketchbookShop",
@@ -13464,7 +13464,7 @@
 				"type": "card",
 				"probability": 1,
 				"count": 1,
-				"cardName": "Forest|PELP"
+				"cardName": "Forest|PGRU"
 			},
 			{
 				"type": "landSketchbookShop",
@@ -18589,25 +18589,25 @@
 					},
 					{
 						"count": 1,
-						"cardName": "Phyrexian Tower"
+						"cardName": "Phyrexian Tower|USG"
 					},
 					{
 						"count": 1,
-						"cardName": "Necropotence"
+						"cardName": "Necropotence|ICE"
 					},
 					{
 						"count": 1,
-						"cardName": "Vampiric Tutor"
+						"cardName": "Vampiric Tutor|VIS"
 					},
 					{
 						"count": 1,
-						"cardName": "Demonic Tutor"
+						"cardName": "Demonic Tutor|3ED"
 					}
 				]
 			},
 			{
 				"count": 1,
-				"cardName": "Yawgmoth's Bargain"
+				"cardName": "Yawgmoth's Bargain|UDS"
 			},
 			{
 				"type": "deckCard",

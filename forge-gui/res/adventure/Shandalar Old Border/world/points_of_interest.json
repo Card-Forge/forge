@@ -6,7 +6,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Aerie",
-		"map": "../Shandalar Old Border/maps/map/aerie/aerie_0.tmx",
+		"map": "maps/map/aerie/aerie_0.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -38,7 +38,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "BarbarianCamp",
-		"map": "../common/maps/map/barbariancamp/barbariancamp_kobold.tmx",
+		"map": "maps/map/barbariancamp/barbariancamp_kobold.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -54,7 +54,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "BarbarianCamp",
-		"map": "../common/maps/map/barbariancamp/kor_encampment.tmx",
+		"map": "maps/map/barbariancamp/kor_encampment.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -135,7 +135,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "black_castle",
-		"map": "../Shandalar Old Border/maps/map/main_story/castles/black_castle.tmx",
+		"map": "maps/map/main_story/castles/black_castle.tmx",
 		"radiusFactor": 0.01,
 		"offsetX": 0.1,
 		"offsetY": -0.1,
@@ -162,7 +162,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "blue_castle",
-		"map": "../Shandalar Old Border/maps/map/main_story/castles/blue_castle.tmx",
+		"map": "maps/map/main_story/castles/blue_castle.tmx",
 		"radiusFactor": 0.01,
 		"offsetX": 0.1,
 		"offsetY": 0.1,
@@ -189,7 +189,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "FortBlue",
-		"map": "../Shandalar Old Border/maps/map/fort/fort_blue_1_pirate.tmx",
+		"map": "maps/map/fort/fort_blue_1_pirate.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -237,7 +237,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlack",
-		"map": "../common/maps/map/demontower/portal_2.tmx",
+		"map": "maps/map/demontower/portal_2.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -268,7 +268,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "FortBlue",
-		"map": "../Shandalar Old Border/maps/map/fort/fort_blue_5_temple.tmx",
+		"map": "maps/map/fort/fort_blue_5_temple.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -284,7 +284,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "WhiteCastle",
-		"map": "../Shandalar Old Border/maps/map/fort/fort_white_1_celestial.tmx",
+		"map": "maps/map/fort/fort_white_1_celestial.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -301,7 +301,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "WhiteCastle",
-		"map": "../Shandalar Old Border/maps/map/fort/fort_white_2_humans.tmx",
+		"map": "maps/map/fort/fort_white_2_humans.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -318,7 +318,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "WhiteCastle",
-		"map": "../Shandalar Old Border/maps/map/fort/fort_white_3_pharaoh.tmx",
+		"map": "maps/map/fort/fort_white_3_pharaoh.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -384,7 +384,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "CatLair",
-		"map": "../Shandalar Old Border/maps/map/catlair/catlair_green_3_chimera.tmx",
+		"map": "maps/map/catlair/catlair_green_3_chimera.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"CatLair",
@@ -451,7 +451,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_snake.tmx",
+		"map": "maps/map/cave/cave_snake.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -467,7 +467,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_zombie.tmx",
+		"map": "maps/map/cave/cave_zombie.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -482,7 +482,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_kobold.tmx",
+		"map": "maps/map/cave/cave_kobold.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -497,7 +497,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_multilevel_2/cave_18.tmx",
+		"map": "maps/map/cave/cave_multilevel_2/cave_18.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -512,7 +512,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_multilevel_3/cave_21.tmx",
+		"map": "maps/map/cave/cave_multilevel_3/cave_21.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -527,7 +527,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_multilevel/cave_16.tmx",
+		"map": "maps/map/cave/cave_multilevel/cave_16.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -542,7 +542,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_treasure.tmx",
+		"map": "maps/map/cave/cave_treasure.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -556,7 +556,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_devil.tmx",
+		"map": "maps/map/cave/cave_devil.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -572,7 +572,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_skeleton.tmx",
+		"map": "maps/map/cave/cave_skeleton.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -588,7 +588,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_bigzombie.tmx",
+		"map": "maps/map/cave/cave_bigzombie.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -604,7 +604,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_merfolk.tmx",
+		"map": "maps/map/cave/cave_merfolk.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -620,7 +620,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_bluewiz.tmx",
+		"map": "maps/map/cave/cave_bluewiz.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -636,7 +636,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_mimic.tmx",
+		"map": "maps/map/cave/cave_mimic.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -652,7 +652,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_huge.tmx",
+		"map": "maps/map/cave/cave_huge.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -668,7 +668,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_snake.tmx",
+		"map": "maps/map/cave/cave_snake.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -684,7 +684,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_treasure.tmx",
+		"map": "maps/map/cave/cave_treasure.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -698,7 +698,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_devil.tmx",
+		"map": "maps/map/cave/cave_devil.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -714,7 +714,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_bear.tmx",
+		"map": "maps/map/cave/cave_bear.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -730,7 +730,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_minotaur.tmx",
+		"map": "maps/map/cave/cave_minotaur.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -746,7 +746,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_skeleton.tmx",
+		"map": "maps/map/cave/cave_skeleton.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -762,7 +762,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_spider.tmx",
+		"map": "maps/map/cave/cave_spider.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -778,7 +778,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_bandit.tmx",
+		"map": "maps/map/cave/cave_bandit.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -794,7 +794,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_merfolk.tmx",
+		"map": "maps/map/cave/cave_merfolk.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -810,7 +810,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_bluewiz.tmx",
+		"map": "maps/map/cave/cave_bluewiz.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -826,7 +826,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_goblin.tmx",
+		"map": "maps/map/cave/cave_goblin.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -842,7 +842,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_mimic.tmx",
+		"map": "maps/map/cave/cave_mimic.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -858,7 +858,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_huge.tmx",
+		"map": "maps/map/cave/cave_huge.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -874,7 +874,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_fog.tmx",
+		"map": "maps/map/cave/cave_fog.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -890,7 +890,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_snake.tmx",
+		"map": "maps/map/cave/cave_snake.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -906,7 +906,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_treasure.tmx",
+		"map": "maps/map/cave/cave_treasure.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -920,7 +920,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_devil.tmx",
+		"map": "maps/map/cave/cave_devil.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -936,7 +936,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_bear.tmx",
+		"map": "maps/map/cave/cave_bear.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -952,7 +952,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_spider.tmx",
+		"map": "maps/map/cave/cave_spider.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -968,7 +968,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_merfolk.tmx",
+		"map": "maps/map/cave/cave_merfolk.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -984,7 +984,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_dino.tmx",
+		"map": "maps/map/cave/cave_dino.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -1000,7 +1000,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_mimic.tmx",
+		"map": "maps/map/cave/cave_mimic.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -1016,7 +1016,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_huge.tmx",
+		"map": "maps/map/cave/cave_huge.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -1032,7 +1032,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_cerodon.tmx",
+		"map": "maps/map/cave/cave_cerodon.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -1049,7 +1049,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_eldrazi.tmx",
+		"map": "maps/map/cave/cave_eldrazi.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -1065,7 +1065,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_amphin.tmx",
+		"map": "maps/map/cave/cave_amphin.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -1082,7 +1082,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_rat.tmx",
+		"map": "maps/map/cave/cave_rat.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -1099,7 +1099,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_treasure.tmx",
+		"map": "maps/map/cave/cave_treasure.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -1113,7 +1113,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_merfolk.tmx",
+		"map": "maps/map/cave/cave_merfolk.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1129,7 +1129,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_bluewiz.tmx",
+		"map": "maps/map/cave/cave_bluewiz.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1145,7 +1145,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_djinn.tmx",
+		"map": "maps/map/cave/cave_djinn.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1161,7 +1161,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_mimic.tmx",
+		"map": "maps/map/cave/cave_mimic.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1177,7 +1177,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_snake.tmx",
+		"map": "maps/map/cave/cave_snake.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1193,7 +1193,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_treasure.tmx",
+		"map": "maps/map/cave/cave_treasure.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -1207,7 +1207,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_devil.tmx",
+		"map": "maps/map/cave/cave_devil.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1223,7 +1223,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_orc.tmx",
+		"map": "maps/map/cave/cave_orc.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1239,7 +1239,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_bear.tmx",
+		"map": "maps/map/cave/cave_bear.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1255,7 +1255,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_minotaur.tmx",
+		"map": "maps/map/cave/cave_minotaur.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1271,7 +1271,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_bigzombie.tmx",
+		"map": "maps/map/cave/cave_bigzombie.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1287,7 +1287,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_spider.tmx",
+		"map": "maps/map/cave/cave_spider.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1303,7 +1303,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_bandit.tmx",
+		"map": "maps/map/cave/cave_bandit.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1319,7 +1319,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_bluewiz.tmx",
+		"map": "maps/map/cave/cave_bluewiz.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1335,7 +1335,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_goblin.tmx",
+		"map": "maps/map/cave/cave_goblin.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1351,7 +1351,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_dino.tmx",
+		"map": "maps/map/cave/cave_dino.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1367,7 +1367,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_barbarian.tmx",
+		"map": "maps/map/cave/cave_barbarian.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1383,7 +1383,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_dwarf.tmx",
+		"map": "maps/map/cave/cave_dwarf.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1399,7 +1399,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_mimic.tmx",
+		"map": "maps/map/cave/cave_mimic.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1415,7 +1415,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_huge.tmx",
+		"map": "maps/map/cave/cave_huge.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1431,7 +1431,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_snake.tmx",
+		"map": "maps/map/cave/cave_snake.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1447,7 +1447,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_treasure.tmx",
+		"map": "maps/map/cave/cave_treasure.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -1461,7 +1461,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_bear.tmx",
+		"map": "maps/map/cave/cave_bear.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1477,7 +1477,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_bluewiz.tmx",
+		"map": "maps/map/cave/cave_bluewiz.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1493,7 +1493,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_dino.tmx",
+		"map": "maps/map/cave/cave_dino.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1509,7 +1509,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_dwarf.tmx",
+		"map": "maps/map/cave/cave_dwarf.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1525,7 +1525,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_mimic.tmx",
+		"map": "maps/map/cave/cave_mimic.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1541,7 +1541,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "colorless_castle",
-		"map": "../Shandalar Old Border/maps/map/emrakul/emrakul_legacy.tmx",
+		"map": "maps/map/emrakul/emrakul_legacy.tmx",
 		"radiusFactor": 0.4,
 		"questTags": [
 			"Castle",
@@ -1571,7 +1571,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlue",
-		"map": "../Shandalar Old Border/maps/map/magetower/magetower_10_crawlspace.tmx",
+		"map": "maps/map/magetower/magetower_10_crawlspace.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"DungeonEffect",
@@ -1584,7 +1584,7 @@
 		"type": "dungeon",
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "WurmPond",
-		"map": "../Shandalar Old Border/maps/map/debug_map.tmx",
+		"map": "maps/map/debug_map.tmx",
 		"radiusFactor": 5
 	},
 	{
@@ -1594,7 +1594,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "DjinnPalace",
-		"map": "../Shandalar Old Border/maps/map/djinnpalace/djinpalace_entrance.tmx",
+		"map": "maps/map/djinnpalace/djinpalace_entrance.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"DjinnPalace",
@@ -1608,7 +1608,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "DjinnPalace",
-		"map": "../Shandalar Old Border/maps/map/djinnpalace/djinpalace_entrance.tmx",
+		"map": "maps/map/djinnpalace/djinpalace_entrance.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"DjinnPalace",
@@ -1622,7 +1622,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlue",
-		"map": "../Shandalar Old Border/maps/map/magetower/magetower_11_dreamhalls.tmx",
+		"map": "maps/map/magetower/magetower_11_dreamhalls.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"DungeonEffect",
@@ -1669,7 +1669,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "EvilGrove",
-		"map": "../Shandalar Old Border/maps/map/evilgrove/evilgrove_1_zombie.tmx",
+		"map": "maps/map/evilgrove/evilgrove_1_zombie.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"EvilGrove",
@@ -1701,7 +1701,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "EvilGrove",
-		"map": "../Shandalar Old Border/maps/map/evilgrove/evilgrove_3_gravetitan.tmx",
+		"map": "maps/map/evilgrove/evilgrove_3_gravetitan.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"EvilGrove",
@@ -1717,7 +1717,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "EvilGrove",
-		"map": "../Shandalar Old Border/maps/map/evilgrove/evilgrove_4_cursedforest.tmx",
+		"map": "maps/map/evilgrove/evilgrove_4_cursedforest.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"EvilGrove",
@@ -1959,7 +1959,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Fort",
-		"map": "../common/maps/map/fort/fort_colorless_7_multilevel.tmx",
+		"map": "maps/map/fort/fort_colorless_7_multilevel.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -2103,7 +2103,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Garruk",
-		"map": "../Shandalar Old Border/maps/map/garruk/garruk.tmx",
+		"map": "maps/map/garruk/garruk.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Boss",
@@ -2134,7 +2134,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "green_castle",
-		"map": "../Shandalar Old Border/maps/map/main_story/castles/green_castle.tmx",
+		"map": "maps/map/main_story/castles/green_castle.tmx",
 		"radiusFactor": 0.01,
 		"offsetX": -0.1,
 		"offsetY": 0.1,
@@ -2161,7 +2161,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Graveyard",
-		"map": "../common/maps/map/graveyard_crypt/graveyard.tmx",
+		"map": "maps/map/graveyard_crypt/graveyard.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Graveyard",
@@ -2176,7 +2176,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Graveyard",
-		"map": "../common/maps/map/graveyard_crypt/graveyard_2.tmx",
+		"map": "maps/map/graveyard_crypt/graveyard_2.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Graveyard",
@@ -2191,7 +2191,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Graveyard",
-		"map": "../common/maps/map/graveyard_crypt/graveyard_3.tmx",
+		"map": "maps/map/graveyard_crypt/graveyard_3.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Graveyard",
@@ -2206,7 +2206,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Graveyard",
-		"map": "../common/maps/map/graveyard_crypt/graveyard_4.tmx",
+		"map": "maps/map/graveyard_crypt/graveyard_4.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Graveyard",
@@ -2221,7 +2221,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Graveyard",
-		"map": "../common/maps/map/graveyard_crypt/graveyard_5.tmx",
+		"map": "maps/map/graveyard_crypt/graveyard_5.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Graveyard",
@@ -2236,7 +2236,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Grolnok",
-		"map": "../Shandalar Old Border/maps/map/grolnok/grolnok.tmx",
+		"map": "maps/map/grolnok/grolnok.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Boss",
@@ -2251,7 +2251,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Grove",
-		"map": "../Shandalar Old Border/maps/map/grove/grove_1_bears.tmx",
+		"map": "maps/map/grove/grove_1_bears.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"BiomeGreen",
@@ -2267,7 +2267,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Grove",
-		"map": "../Shandalar Old Border/maps/map/grove/grove_2_wolf.tmx",
+		"map": "maps/map/grove/grove_2_wolf.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"BiomeGreen",
@@ -2299,7 +2299,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Grove",
-		"map": "../Shandalar Old Border/maps/map/grove/grove_4_gorilla.tmx",
+		"map": "maps/map/grove/grove_4_gorilla.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"BiomeGreen",
@@ -2363,7 +2363,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Grove",
-		"map": "../Shandalar Old Border/maps/map/grove/grove_8_hydra.tmx",
+		"map": "maps/map/grove/grove_8_hydra.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"BiomeGreen",
@@ -2515,7 +2515,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Jace",
-		"map": "../Shandalar Old Border/maps/map/jacetower/jacehold.tmx",
+		"map": "maps/map/jacetower/jacehold.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Boss",
@@ -2530,7 +2530,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_kavu.tmx",
+		"map": "maps/map/cave/cave_kavu.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -2545,7 +2545,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Kiora",
-		"map": "../Shandalar Old Border/maps/map/minibosses/kiora_island.tmx",
+		"map": "maps/map/minibosses/kiora_island.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Boss",
@@ -2561,7 +2561,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "LavaForge",
-		"map": "../Shandalar Old Border/maps/map/lavaforge/lavaforge_3_vulcanodragon.tmx",
+		"map": "maps/map/lavaforge/lavaforge_3_vulcanodragon.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -2576,7 +2576,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "LavaForge",
-		"map": "../Shandalar Old Border/maps/map/lavaforge/lavaforge_1_sulfuricvortex.tmx",
+		"map": "maps/map/lavaforge/lavaforge_1_sulfuricvortex.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"DungeonEffect",
@@ -2593,7 +2593,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "LavaForge",
-		"map": "../Shandalar Old Border/maps/map/lavaforge/lavaforge_2_burningsands.tmx",
+		"map": "maps/map/lavaforge/lavaforge_2_burningsands.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"DungeonEffect",
@@ -2610,7 +2610,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlack",
-		"map": "../Shandalar Old Border/maps/map/magetower/magetower_12_lichsmirror.tmx",
+		"map": "maps/map/magetower/magetower_12_lichsmirror.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -2625,7 +2625,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerRed",
-		"map": "../Shandalar Old Border/maps/map/magetower/magetower_1_djinn.tmx",
+		"map": "maps/map/magetower/magetower_1_djinn.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"BiomeColorless",
@@ -2642,7 +2642,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlack",
-		"map": "../Shandalar Old Border/maps/map/magetower/magetower_2_blackwiz.tmx",
+		"map": "maps/map/magetower/magetower_2_blackwiz.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"BiomeColorless",
@@ -2659,7 +2659,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerRed",
-		"map": "../Shandalar Old Border/maps/map/magetower/magetower_3_redwiz.tmx",
+		"map": "maps/map/magetower/magetower_3_redwiz.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"BiomeColorless",
@@ -2676,7 +2676,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerWhite",
-		"map": "../Shandalar Old Border/maps/map/magetower/magetower_4_monastery.tmx",
+		"map": "maps/map/magetower/magetower_4_monastery.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"BiomeColorless",
@@ -2693,7 +2693,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerGreen",
-		"map": "../Shandalar Old Border/maps/map/magetower/magetower_5_greenhouse.tmx",
+		"map": "maps/map/magetower/magetower_5_greenhouse.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"BiomeColorless",
@@ -2710,7 +2710,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlack",
-		"map": "../Shandalar Old Border/maps/map/magetower/magetower_6_infernalgenesis.tmx",
+		"map": "maps/map/magetower/magetower_6_infernalgenesis.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"MageTower",
@@ -2727,7 +2727,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerWhite",
-		"map": "../Shandalar Old Border/maps/map/magetower/magetower_7_church.tmx",
+		"map": "maps/map/magetower/magetower_7_church.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"MageTower",
@@ -2744,7 +2744,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlue",
-		"map": "../Shandalar Old Border/maps/map/magetower/magetower_8_illusion.tmx",
+		"map": "maps/map/magetower/magetower_8_illusion.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"BiomeColorless",
@@ -2761,7 +2761,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlue",
-		"map": "../Shandalar Old Border/maps/map/magetower/magetower_13_doppelganger.tmx",
+		"map": "maps/map/magetower/magetower_13_doppelganger.tmx",
 		"radiusFactor": 0.2,
 		"questTags": [
 			"BiomeColorless",
@@ -2777,7 +2777,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlue",
-		"map": "../Shandalar Old Border/maps/map/magetower/magetower_14_horrors.tmx",
+		"map": "maps/map/magetower/magetower_14_horrors.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"BiomeColorless",
@@ -2794,7 +2794,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlue",
-		"map": "../Shandalar Old Border/maps/map/magetower/magetower_1_djinn.tmx",
+		"map": "maps/map/magetower/magetower_1_djinn.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"MageTower",
@@ -2811,7 +2811,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlack",
-		"map": "../Shandalar Old Border/maps/map/magetower/magetower_2_blackwiz.tmx",
+		"map": "maps/map/magetower/magetower_2_blackwiz.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"MageTower",
@@ -2828,7 +2828,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerRed",
-		"map": "../Shandalar Old Border/maps/map/magetower/magetower_3_redwiz.tmx",
+		"map": "maps/map/magetower/magetower_3_redwiz.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"MageTower",
@@ -2845,7 +2845,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerWhite",
-		"map": "../Shandalar Old Border/maps/map/magetower/magetower_4_monastery.tmx",
+		"map": "maps/map/magetower/magetower_4_monastery.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"MageTower",
@@ -2862,7 +2862,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerGreen",
-		"map": "../Shandalar Old Border/maps/map/magetower/magetower_5_greenhouse.tmx",
+		"map": "maps/map/magetower/magetower_5_greenhouse.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"MageTower",
@@ -2879,7 +2879,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlack",
-		"map": "../Shandalar Old Border/maps/map/magetower/magetower_6_infernalgenesis.tmx",
+		"map": "maps/map/magetower/magetower_6_infernalgenesis.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"MageTower",
@@ -2896,7 +2896,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlue",
-		"map": "../Shandalar Old Border/maps/map/magetower/magetower_8_illusion.tmx",
+		"map": "maps/map/magetower/magetower_8_illusion.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"MageTower",
@@ -2913,7 +2913,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlack",
-		"map": "../Shandalar Old Border/maps/map/magetower/magetower_14_horrors.tmx",
+		"map": "maps/map/magetower/magetower_14_horrors.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"MageTower",
@@ -2930,7 +2930,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerBlack",
-		"map": "../Shandalar Old Border/maps/map/magetower/magetower_9_ninjarats.tmx",
+		"map": "maps/map/magetower/magetower_9_ninjarats.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"MageTower",
@@ -3026,7 +3026,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "MerfolkPool",
-		"map": "../common/maps/map/merfolkpool/merfolkpool_6.tmx",
+		"map": "maps/map/merfolkpool/merfolkpool_6.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"MerfolkPool",
@@ -3100,7 +3100,7 @@
 		"count": 3,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Monastery",
-		"map": "../Shandalar Old Border/maps/map/monastery/monastery_1.tmx",
+		"map": "maps/map/monastery/monastery_1.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -3252,7 +3252,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Nahiri",
-		"map": "../Shandalar Old Border/maps/map/nahiri/nahiri.tmx",
+		"map": "maps/map/nahiri/nahiri.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Boss",
@@ -3445,7 +3445,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "digsite",
-		"map": "../common/maps/map/main_story_explore/dig_site_0.tmx",
+		"map": "maps/map/main_story_explore/dig_site_0.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Quest_DigSite"
@@ -3464,7 +3464,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "frostbittencavern",
-		"map": "../common/maps/map/main_story_explore/frostbitten_cavern_0.tmx",
+		"map": "maps/map/main_story_explore/frostbitten_cavern_0.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Quest_FrostbittenCavern"
@@ -3483,7 +3483,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "libraryofvarsil",
-		"map": "../common/maps/map/main_story_explore/library_of_varsil_0.tmx",
+		"map": "maps/map/main_story_explore/library_of_varsil_0.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Quest_LibraryOfVarsil"
@@ -3521,7 +3521,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "abandonedshardmine",
-		"map": "../Shandalar Old Border/maps/map/main_story_explore/shard_mines.tmx",
+		"map": "maps/map/main_story_explore/shard_mines.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Quest_ShardMines"
@@ -3540,7 +3540,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "red_castle",
-		"map": "../Shandalar Old Border/maps/map/main_story/castles/red_castle.tmx",
+		"map": "maps/map/main_story/castles/red_castle.tmx",
 		"radiusFactor": 0.01,
 		"offsetX": -0.1,
 		"offsetY": -0.1,
@@ -3584,7 +3584,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "SkullCave",
-		"map": "../Shandalar Old Border/maps/map/skullcave/skullcave_2.tmx",
+		"map": "maps/map/skullcave/skullcave_2.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -3601,7 +3601,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "SkullCave",
-		"map": "../Shandalar Old Border/maps/map/skullcave/skullcave_3.tmx",
+		"map": "maps/map/skullcave/skullcave_3.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -3683,7 +3683,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Slimefoot",
-		"map": "../Shandalar Old Border/maps/map/minibosses/slimefoot_boss.tmx",
+		"map": "maps/map/minibosses/slimefoot_boss.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -3699,7 +3699,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "SlimeCave",
-		"map": "../Shandalar Old Border/maps/map/minibosses/slime_hive.tmx",
+		"map": "maps/map/minibosses/slime_hive.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -3714,7 +3714,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "farm",
-		"map": "../Shandalar Old Border/maps/map/fort/fort_green_4_scarecrowfarm.tmx",
+		"map": "maps/map/fort/fort_green_4_scarecrowfarm.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Boss",
@@ -3729,7 +3729,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Slobad",
-		"map": "../Shandalar Old Border/maps/map/minibosses/slobad_factory.tmx",
+		"map": "maps/map/minibosses/slobad_factory.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Boss",
@@ -3745,7 +3745,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Skep",
-		"map": "../Shandalar Old Border/maps/map/skep/skep_outer.tmx",
+		"map": "maps/map/skep/skep_outer.tmx",
 		"radiusFactor": 0.5,
 		"questTags": [
 			"Boss",
@@ -3777,7 +3777,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "SkullCave",
-		"map": "../Shandalar Old Border/maps/map/skullcave/skullcave_2.tmx",
+		"map": "maps/map/skullcave/skullcave_2.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -3794,7 +3794,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "SkullCave",
-		"map": "../Shandalar Old Border/maps/map/skullcave/skullcave_3.tmx",
+		"map": "maps/map/skullcave/skullcave_3.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Cave",
@@ -3892,7 +3892,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Jace",
-		"map": "../Shandalar Old Border/maps/map/minibosses/teferi.tmx",
+		"map": "maps/map/minibosses/teferi.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -3908,7 +3908,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "hall_of_flame",
-		"map": "../Shandalar Old Border/maps/map/main_story/templeofchandra.tmx",
+		"map": "maps/map/main_story/templeofchandra.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Story",
@@ -3932,7 +3932,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "hall_of_fear",
-		"map": "../Shandalar Old Border/maps/map/main_story/temple_of_liliana/keep.tmx",
+		"map": "maps/map/main_story/temple_of_liliana/keep.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Story",
@@ -3964,7 +3964,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Tibalt",
-		"map": "../Shandalar Old Border/maps/map/tibalt/tibalt.tmx",
+		"map": "maps/map/tibalt/tibalt.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -3979,7 +3979,7 @@
 		"count": 1,
 		"spriteAtlas": "maps/tileset/buildings.atlas",
 		"sprite": "Monastery",
-		"map": "../Shandalar Old Border/maps/map/monastery/unhallowed_abbey_1F.tmx",
+		"map": "maps/map/monastery/unhallowed_abbey_1F.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"UnhallowedAbbey"
@@ -3992,7 +3992,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "VampireCastle",
-		"map": "../Shandalar Old Border/maps/map/vampirecastle/vampirecastle_1.tmx",
+		"map": "maps/map/vampirecastle/vampirecastle_1.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"VampireCastle",
@@ -4009,7 +4009,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "VampireCastle",
-		"map": "../Shandalar Old Border/maps/map/vampirecastle/vampirecastle_2.tmx",
+		"map": "maps/map/vampirecastle/vampirecastle_2.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"VampireCastle",
@@ -4026,7 +4026,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "VampireCastle",
-		"map": "../Shandalar Old Border/maps/map/vampirecastle/vampirecastle_3.tmx",
+		"map": "maps/map/vampirecastle/vampirecastle_3.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"VampireCastle",
@@ -4043,7 +4043,7 @@
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "VampireCastle",
-		"map": "../Shandalar Old Border/maps/map/vampirecastle/vampirecastle_4.tmx",
+		"map": "maps/map/vampirecastle/vampirecastle_4.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"VampireCastle",
@@ -4107,7 +4107,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "white_castle",
-		"map": "../Shandalar Old Border/maps/map/main_story/castles/white_castle.tmx",
+		"map": "maps/map/main_story/castles/white_castle.tmx",
 		"radiusFactor": 0.01,
 		"offsetY": 0.1,
 		"questTags": [
@@ -4147,7 +4147,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Xira",
-		"map": "../Shandalar Old Border/maps/map/minibosses/xira.tmx",
+		"map": "maps/map/minibosses/xira.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -4176,7 +4176,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Zedruu",
-		"map": "../Shandalar Old Border/maps/map/zedruu/zedruu.tmx",
+		"map": "maps/map/zedruu/zedruu.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"BiomeRed",
@@ -4210,7 +4210,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Spawn",
-		"map": "../Shandalar Old Border/maps/map/debug_map.tmx",
+		"map": "maps/map/debug_map.tmx",
 		"questTags": [
 			"Debug",
 			"Testing"
