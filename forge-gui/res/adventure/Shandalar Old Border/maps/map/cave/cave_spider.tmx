@@ -3,9 +3,9 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../tileset/dungeon.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../common/maps/tileset/dungeon.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJx7zcLA8JoOOIwTFdPLDnrYO1D+HY72irLT116QfciYXH9TYic2TKyfKQlnUu2ndroixl5apGdi/Exte7HZQWt70c2nVziTkr7pVV6h2z8Q9lLDv8TqI+RfAEzdgbg=
@@ -30,12 +30,12 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../obj/entry_up.tx" x="180.619" y="273.324" width="86.3778" height="16">
+  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="180.619" y="273.324" width="86.3778" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="48" template="../../obj/treasure.tx" x="148.559" y="42.3155">
+  <object id="48" template="../../../common/maps/obj/treasure.tx" x="148.559" y="42.3155">
    <properties>
     <property name="reward">[
   {
@@ -61,59 +61,59 @@
 ]</property>
    </properties>
   </object>
-  <object id="49" template="../../obj/gold.tx" x="144.327" y="139.568"/>
-  <object id="50" template="../../obj/enemy.tx" x="109.994" y="43.33">
+  <object id="49" template="../../../common/maps/obj/gold.tx" x="144.327" y="139.568"/>
+  <object id="50" template="../../../common/maps/obj/enemy.tx" x="109.994" y="43.33">
    <properties>
     <property name="enemy" value="Cave Spider"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
-  <object id="53" template="../../obj/enemy.tx" x="228.619" y="199.505">
+  <object id="53" template="../../../common/maps/obj/enemy.tx" x="228.619" y="199.505">
    <properties>
     <property name="enemy" value="Cave Spider"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="62,61,60,59,58,65,64,63"/>
    </properties>
   </object>
-  <object id="54" template="../../obj/enemy.tx" x="199.504" y="63.9914">
+  <object id="54" template="../../../common/maps/obj/enemy.tx" x="199.504" y="63.9914">
    <properties>
     <property name="enemy" value="Cave Spider"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
-  <object id="55" template="../../obj/enemy.tx" x="395.893" y="125.396">
+  <object id="55" template="../../../common/maps/obj/enemy.tx" x="395.893" y="125.396">
    <properties>
     <property name="enemy" value="Cave Spider"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="60,59,58,65,64,63,62,61"/>
    </properties>
   </object>
-  <object id="56" template="../../obj/booster.tx" x="200.563" y="45.4642">
+  <object id="56" template="../../../common/maps/obj/booster.tx" x="200.563" y="45.4642">
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;STH&quot; ],
+    &quot;editions&quot;: [ &quot;TMP&quot;, &quot;STH&quot;, &quot;EXO&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 10,
     &quot;rarity&quot;: [ &quot;Common&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;STH&quot; ],
+    &quot;editions&quot;: [ &quot;TMP&quot;, &quot;STH&quot;, &quot;EXO&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
     &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;STH&quot; ],
+    &quot;editions&quot;: [ &quot;TMP&quot;, &quot;STH&quot;, &quot;EXO&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
   }
 ]
 </property>
    </properties>
   </object>
-  <object id="57" template="../../obj/enemy.tx" x="88.0768" y="110.839">
+  <object id="57" template="../../../common/maps/obj/enemy.tx" x="88.0768" y="110.839">
    <properties>
     <property name="enemy" value="Cave Spider"/>
     <property name="spawn.Normal" type="bool" value="true"/>
@@ -121,15 +121,15 @@
     <property name="waypoints" value="65,64,63,60,59,58"/>
    </properties>
   </object>
-  <object id="58" template="../../obj/waypoint.tx" x="221.473" y="109.515"/>
-  <object id="59" template="../../obj/waypoint.tx" x="311.197" y="52.0811"/>
-  <object id="60" template="../../obj/waypoint.tx" x="400" y="64"/>
-  <object id="61" template="../../obj/waypoint.tx" x="400.657" y="215.12"/>
-  <object id="62" template="../../obj/waypoint.tx" x="297.169" y="176.478"/>
-  <object id="63" template="../../obj/waypoint.tx" x="155.039" y="224.384"/>
-  <object id="64" template="../../obj/waypoint.tx" x="57.6392" y="213.797"/>
-  <object id="65" template="../../obj/waypoint.tx" x="68.7555" y="109.78"/>
-  <object id="66" template="../../obj/manashards.tx" x="25.0843" y="99.9871"/>
-  <object id="67" template="../../obj/manashards.tx" x="355.398" y="105.281"/>
+  <object id="58" template="../../../common/maps/obj/waypoint.tx" x="221.473" y="109.515"/>
+  <object id="59" template="../../../common/maps/obj/waypoint.tx" x="311.197" y="52.0811"/>
+  <object id="60" template="../../../common/maps/obj/waypoint.tx" x="400" y="64"/>
+  <object id="61" template="../../../common/maps/obj/waypoint.tx" x="400.657" y="215.12"/>
+  <object id="62" template="../../../common/maps/obj/waypoint.tx" x="297.169" y="176.478"/>
+  <object id="63" template="../../../common/maps/obj/waypoint.tx" x="155.039" y="224.384"/>
+  <object id="64" template="../../../common/maps/obj/waypoint.tx" x="57.6392" y="213.797"/>
+  <object id="65" template="../../../common/maps/obj/waypoint.tx" x="68.7555" y="109.78"/>
+  <object id="66" template="../../../common/maps/obj/manashards.tx" x="25.0843" y="99.9871"/>
+  <object id="67" template="../../../common/maps/obj/manashards.tx" x="355.398" y="105.281"/>
  </objectgroup>
 </map>

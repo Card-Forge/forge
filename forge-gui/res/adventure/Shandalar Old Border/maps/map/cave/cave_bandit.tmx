@@ -3,9 +3,9 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../common/maps/tileset/dungeon.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJwL42RgCKMyvslNfTOJxXEDZC81sTMfBI9Ee2HsgXAHOj7GiooH2j2kYHQwau/wsncUj2JKMAAJYrkS
@@ -30,84 +30,84 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="281" width="48" height="16">
+  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="192" y="281" width="48" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="49" template="../../../../common/maps/obj/gold.tx" x="390.871" y="48.703"/>
-  <object id="51" template="../../../../common/maps/obj/treasure.tx" x="392.159" y="96.1103"/>
-  <object id="55" template="../../../../common/maps/obj/gold.tx" x="390.667" y="66.3333"/>
-  <object id="56" template="../../../../common/maps/obj/gold.tx" x="391.333" y="28"/>
-  <object id="57" template="../../../../common/maps/obj/gold.tx" x="343.667" y="164.667"/>
-  <object id="58" template="../../../../common/maps/obj/gold.tx" x="39" y="60"/>
-  <object id="59" template="../../../../common/maps/obj/waypoint.tx" x="123.333" y="116.667"/>
-  <object id="60" template="../../../../common/maps/obj/waypoint.tx" x="113.333" y="233"/>
-  <object id="61" template="../../../../common/maps/obj/waypoint.tx" x="13.6667" y="231"/>
-  <object id="62" template="../../../../common/maps/obj/waypoint.tx" x="20.3333" y="199.333"/>
-  <object id="63" template="../../../../common/maps/obj/waypoint.tx" x="191.667" y="211.333"/>
-  <object id="64" template="../../../../common/maps/obj/waypoint.tx" x="292.667" y="145"/>
-  <object id="65" template="../../../../common/maps/obj/waypoint.tx" x="378.333" y="146.667"/>
-  <object id="66" template="../../../../common/maps/obj/waypoint.tx" x="318" y="230.667"/>
-  <object id="67" template="../../../../common/maps/obj/enemy.tx" x="161" y="78.6667">
+  <object id="49" template="../../../common/maps/obj/gold.tx" x="390.871" y="48.703"/>
+  <object id="51" template="../../../common/maps/obj/treasure.tx" x="392.159" y="96.1103"/>
+  <object id="55" template="../../../common/maps/obj/gold.tx" x="390.667" y="66.3333"/>
+  <object id="56" template="../../../common/maps/obj/gold.tx" x="391.333" y="28"/>
+  <object id="57" template="../../../common/maps/obj/gold.tx" x="343.667" y="164.667"/>
+  <object id="58" template="../../../common/maps/obj/gold.tx" x="39" y="60"/>
+  <object id="59" template="../../../common/maps/obj/waypoint.tx" x="123.333" y="116.667"/>
+  <object id="60" template="../../../common/maps/obj/waypoint.tx" x="113.333" y="233"/>
+  <object id="61" template="../../../common/maps/obj/waypoint.tx" x="13.6667" y="231"/>
+  <object id="62" template="../../../common/maps/obj/waypoint.tx" x="20.3333" y="199.333"/>
+  <object id="63" template="../../../common/maps/obj/waypoint.tx" x="191.667" y="211.333"/>
+  <object id="64" template="../../../common/maps/obj/waypoint.tx" x="292.667" y="145"/>
+  <object id="65" template="../../../common/maps/obj/waypoint.tx" x="378.333" y="146.667"/>
+  <object id="66" template="../../../common/maps/obj/waypoint.tx" x="318" y="230.667"/>
+  <object id="67" template="../../../common/maps/obj/enemy.tx" x="161" y="78.6667">
    <properties>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Bedlam|USG|1&quot; ] }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Bedlam&quot; ] }"/>
     <property name="enemy" value="Bandit Leader"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="68" template="../../../../common/maps/obj/enemy.tx" x="120" y="141.667">
+  <object id="68" template="../../../common/maps/obj/enemy.tx" x="120" y="141.667">
    <properties>
     <property name="enemy" value="Bandit Slingshot"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="69" template="../../../../common/maps/obj/waypoint.tx" x="70.3333" y="26.3333"/>
-  <object id="70" template="../../../../common/maps/obj/waypoint.tx" x="252.667" y="29.6667"/>
-  <object id="71" template="../../../../common/maps/obj/waypoint.tx" x="378.667" y="44.3333"/>
-  <object id="72" template="../../../../common/maps/obj/enemy.tx" x="351" y="160.333">
+  <object id="69" template="../../../common/maps/obj/waypoint.tx" x="70.3333" y="26.3333"/>
+  <object id="70" template="../../../common/maps/obj/waypoint.tx" x="252.667" y="29.6667"/>
+  <object id="71" template="../../../common/maps/obj/waypoint.tx" x="378.667" y="44.3333"/>
+  <object id="72" template="../../../common/maps/obj/enemy.tx" x="351" y="160.333">
    <properties>
     <property name="enemy" value="Bandit Scoundrel"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="65,66,63,60,61,62,61,60,63,64"/>
    </properties>
   </object>
-  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="26.3333" y="163.667">
+  <object id="73" template="../../../common/maps/obj/enemy.tx" x="26.3333" y="163.667">
    <properties>
     <property name="enemy" value="Bandit Archer"/>
     <property name="spawn.Normal" type="bool" value="true"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="74" template="../../../../common/maps/obj/enemy.tx" x="150.667" y="26">
+  <object id="74" template="../../../common/maps/obj/enemy.tx" x="150.667" y="26">
    <properties>
     <property name="enemy" value="Bandit Scoundrel"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="69,70,71,70"/>
    </properties>
   </object>
-  <object id="75" template="../../../../common/maps/obj/manashards.tx" x="174" y="138"/>
-  <object id="76" template="../../../../common/maps/obj/manashards.tx" x="85.3333" y="91"/>
-  <object id="77" template="../../../../common/maps/obj/booster.tx" x="223.667" y="95.3333">
+  <object id="75" template="../../../common/maps/obj/manashards.tx" x="174" y="138"/>
+  <object id="76" template="../../../common/maps/obj/manashards.tx" x="85.3333" y="91"/>
+  <object id="77" template="../../../common/maps/obj/booster.tx" x="223.667" y="95.3333">
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;JUD&quot; ],
+    &quot;editions&quot;: [ &quot;NMS&quot;, &quot;PCY&quot;, &quot;6ED&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 10,
     &quot;rarity&quot;: [ &quot;Common&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;VIS&quot; ],
+    &quot;editions&quot;: [ &quot;NMS&quot;, &quot;PCY&quot;, &quot;6ED&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
     &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;5ED&quot; ],
+    &quot;editions&quot;: [ &quot;NMS&quot;, &quot;PCY&quot;, &quot;6ED&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
   }
 ]
 </property>

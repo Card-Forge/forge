@@ -803,7 +803,7 @@
   <object id="62" template="../../../../common/maps/obj/enemy.tx" x="805.939" y="158.55">
    <properties>
     <property name="effect">{
- "startBattleWithCard": [ "Seal of Fire" ]
+ "startBattleWithCard": [ "Seal of Fire|NMS" ]
 }</property>
     <property name="enemy" value="Chandra's Scorcher" />
     

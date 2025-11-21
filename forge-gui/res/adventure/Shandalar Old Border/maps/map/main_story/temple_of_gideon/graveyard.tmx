@@ -5,9 +5,9 @@
   <property name="dungeonEffect" value=""/>
   <property name="respawnEnemies" type="bool" value="true"/>
  </properties>
- <tileset firstgid="1" source="../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Tile Layer 1" width="31" height="25">
   <data encoding="csv">
 2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
@@ -128,17 +128,17 @@
 </data>
  </layer>
  <objectgroup id="2" name="Objects">
-  <object id="2" template="../../../../../common/maps/obj/collision.tx" x="-16" y="0" width="16" height="400"/>
-  <object id="3" template="../../../../../common/maps/obj/collision.tx" x="-16" y="400" width="528" height="16"/>
-  <object id="4" template="../../../../../common/maps/obj/collision.tx" x="496" y="0" width="16" height="400"/>
-  <object id="5" template="../../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="528.5" height="16"/>
-  <object id="183" template="../../../../../common/maps/obj/entry_up.tx" x="165.583" y="384.667" width="73.5" height="16">
+  <object id="2" template="../../../obj/collision.tx" x="-16" y="0" width="16" height="400"/>
+  <object id="3" template="../../../obj/collision.tx" x="-16" y="400" width="528" height="16"/>
+  <object id="4" template="../../../obj/collision.tx" x="496" y="0" width="16" height="400"/>
+  <object id="5" template="../../../obj/collision.tx" x="-16" y="-16" width="528.5" height="16"/>
+  <object id="183" template="../../../obj/entry_up.tx" x="165.583" y="384.667" width="73.5" height="16">
    <properties>
-    <property name="teleport" value="../common/maps/map/main_story/temple_of_liliana/forest.tmx"/>
+    <property name="teleport" value="./main_story/temple_of_liliana/forest.tmx"/>
     <property name="teleportObjectId" value="240"/>
    </properties>
   </object>
-  <object id="189" template="../../../../../common/maps/obj/treasure.tx" x="288" y="337">
+  <object id="189" template="../../../obj/treasure.tx" x="288" y="337">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -162,7 +162,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="190" template="../../../../../common/maps/obj/treasure.tx" x="160" y="97.333">
+  <object id="190" template="../../../obj/treasure.tx" x="160" y="97.333">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -186,7 +186,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="191" template="../../../../../common/maps/obj/treasure.tx" x="226" y="83">
+  <object id="191" template="../../../obj/treasure.tx" x="226" y="83">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -210,7 +210,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="192" template="../../../../../common/maps/obj/enemy.tx" x="67.5833" y="271.833" visible="1">
+  <object id="192" template="../../../obj/enemy.tx" x="67.5833" y="271.833" visible="1">
    <properties>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Endless Ranks of the Dead&quot;]
 }</property>
@@ -220,7 +220,7 @@
     <property name="threatRange" type="float" value="30"/>
    </properties>
   </object>
-  <object id="193" template="../../../../../common/maps/obj/enemy.tx" x="80.3337" y="346.666" visible="1">
+  <object id="193" template="../../../obj/enemy.tx" x="80.3337" y="346.666" visible="1">
    <properties>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Endless Ranks of the Dead&quot;]
 }</property>
@@ -230,7 +230,7 @@
     <property name="threatRange" type="float" value="30"/>
    </properties>
   </object>
-  <object id="194" template="../../../../../common/maps/obj/treasure.tx" x="49.3337" y="337.666">
+  <object id="194" template="../../../obj/treasure.tx" x="49.3337" y="337.666">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -254,7 +254,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="195" template="../../../../../common/maps/obj/enemy.tx" x="95.9997" y="151.333" visible="1">
+  <object id="195" template="../../../obj/enemy.tx" x="95.9997" y="151.333" visible="1">
    <properties>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Endless Ranks of the Dead&quot;]
 }</property>
@@ -264,7 +264,7 @@
     <property name="threatRange" type="float" value="30"/>
    </properties>
   </object>
-  <object id="196" template="../../../../../common/maps/obj/enemy.tx" x="193" y="112.5" visible="1">
+  <object id="196" template="../../../obj/enemy.tx" x="193" y="112.5" visible="1">
    <properties>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Endless Ranks of the Dead&quot;]
 }</property>
@@ -274,7 +274,7 @@
     <property name="threatRange" type="float" value="30"/>
    </properties>
   </object>
-  <object id="197" template="../../../../../common/maps/obj/enemy.tx" x="210.333" y="287.833" visible="1">
+  <object id="197" template="../../../obj/enemy.tx" x="210.333" y="287.833" visible="1">
    <properties>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Endless Ranks of the Dead&quot;]
 }</property>
@@ -284,7 +284,7 @@
     <property name="threatRange" type="float" value="30"/>
    </properties>
   </object>
-  <object id="198" template="../../../../../common/maps/obj/enemy.tx" x="287.167" y="176" visible="1">
+  <object id="198" template="../../../obj/enemy.tx" x="287.167" y="176" visible="1">
    <properties>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Endless Ranks of the Dead&quot;]
 }</property>
@@ -294,7 +294,7 @@
     <property name="threatRange" type="float" value="30"/>
    </properties>
   </object>
-  <object id="225" template="../../../../../common/maps/obj/enemy.tx" x="335.364" y="271.636" visible="1">
+  <object id="225" template="../../../obj/enemy.tx" x="335.364" y="271.636" visible="1">
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Black Market&quot;]}"/>
     <property name="enemy" value="Skeleton Champion"/>
@@ -303,7 +303,7 @@
     <property name="threatRange" type="float" value="30"/>
    </properties>
   </object>
-  <object id="226" template="../../../../../common/maps/obj/enemy.tx" x="402" y="336.5" visible="1">
+  <object id="226" template="../../../obj/enemy.tx" x="402" y="336.5" visible="1">
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Death Pit Offering&quot;]}"/>
     <property name="enemy" value="Skeleton Champion"/>
@@ -312,7 +312,7 @@
     <property name="threatRange" type="float" value="30"/>
    </properties>
   </object>
-  <object id="227" template="../../../../../common/maps/obj/enemy.tx" x="38.75" y="169" visible="1">
+  <object id="227" template="../../../obj/enemy.tx" x="38.75" y="169" visible="1">
    <properties>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Death Pit Offering&quot;]
 }</property>
@@ -322,7 +322,7 @@
     <property name="threatRange" type="float" value="30"/>
    </properties>
   </object>
-  <object id="229" template="../../../../../common/maps/obj/enemy.tx" x="222.667" y="175" visible="1">
+  <object id="229" template="../../../obj/enemy.tx" x="222.667" y="175" visible="1">
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Death Pits of Rath&quot;]}"/>
     <property name="enemy" value="Skeleton Champion"/>
@@ -331,7 +331,7 @@
     <property name="threatRange" type="float" value="30"/>
    </properties>
   </object>
-  <object id="230" template="../../../../../common/maps/obj/enemy.tx" x="432" y="368" visible="1">
+  <object id="230" template="../../../obj/enemy.tx" x="432" y="368" visible="1">
    <properties>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Nether Shadow&quot;,&quot;Nether Shadow&quot;]
 }</property>
@@ -343,7 +343,7 @@
     <property name="waypoints" value="231,234,233,232"/>
    </properties>
   </object>
-  <object id="246" template="../../../../../common/maps/obj/enemy.tx" x="117.333" y="396.833" visible="1">
+  <object id="246" template="../../../obj/enemy.tx" x="117.333" y="396.833" visible="1">
    <properties>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Nether Shadow&quot;,&quot;Nether Shadow&quot;]
 }</property>
@@ -355,7 +355,7 @@
     <property name="waypoints" value="236,235,238,239"/>
    </properties>
   </object>
-  <object id="247" template="../../../../../common/maps/obj/enemy.tx" x="32" y="48" visible="1">
+  <object id="247" template="../../../obj/enemy.tx" x="32" y="48" visible="1">
    <properties>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Infernal Kirin&quot;]
 }</property>
@@ -367,7 +367,7 @@
     <property name="waypoints" value="233,232,234,231"/>
    </properties>
   </object>
-  <object id="248" template="../../../../../common/maps/obj/enemy.tx" x="320" y="399.333" visible="1">
+  <object id="248" template="../../../obj/enemy.tx" x="320" y="399.333" visible="1">
    <properties>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Infernal Kirin&quot;]
 }</property>
@@ -379,7 +379,7 @@
     <property name="waypoints" value="238,239,236,235"/>
    </properties>
   </object>
-  <object id="254" template="../../../../../common/maps/obj/enemy.tx" x="384" y="62" visible="1">
+  <object id="254" template="../../../obj/enemy.tx" x="384" y="62" visible="1">
    <properties>
     <property name="defeatDialog">[
   {
@@ -406,7 +406,7 @@
     <property name="threatRange" type="int" value="300"/>
    </properties>
   </object>
-  <object id="256" template="../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="383.875" y="95.125" width="16" height="16" visible="1">
+  <object id="256" template="../../../obj/dialog.tx" type="dialog" gid="11530" x="383.875" y="95.125" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[
   {
@@ -444,7 +444,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="257" template="../../../../../common/maps/obj/enemy.tx" x="272" y="64" visible="1">
+  <object id="257" template="../../../obj/enemy.tx" x="272" y="64" visible="1">
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Death Pits of Rath&quot;]}"/>
     <property name="enemy" value="Skeleton Champion"/>
@@ -453,15 +453,15 @@
     <property name="threatRange" type="float" value="30"/>
    </properties>
   </object>
-  <object id="258" template="../../../../../common/maps/obj/dialog.tx" x="17" y="176">
+  <object id="258" template="../../../obj/dialog.tx" x="17" y="176">
    <properties>
     <property name="dialog" value="[{&quot;text&quot;: &quot;You are unable to continue any further, a mystical force pushes you backwards no matter how hard you try to move forward, and you have a vision of an angel in your mind barring your path.&quot;, &quot;condition&quot;: [ { &quot;actorID&quot;: 254 } ], &quot;options&quot;:[{&quot;name&quot;: &quot;(Continue)&quot;}]}]"/>
    </properties>
   </object>
-  <object id="259" template="../../../../../common/maps/obj/gold.tx" x="161" y="48"/>
-  <object id="260" template="../../../../../common/maps/obj/manashards.tx" x="400.75" y="368.75"/>
-  <object id="261" template="../../../../../common/maps/obj/gold.tx" x="80" y="161"/>
-  <object id="262" template="../../../../../common/maps/obj/treasure.tx" x="383.833" y="114.833">
+  <object id="259" template="../../../obj/gold.tx" x="161" y="48"/>
+  <object id="260" template="../../../obj/manashards.tx" x="400.75" y="368.75"/>
+  <object id="261" template="../../../obj/gold.tx" x="80" y="161"/>
+  <object id="262" template="../../../obj/treasure.tx" x="383.833" y="114.833">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -485,20 +485,20 @@
 }]</property>
    </properties>
   </object>
-  <object id="263" template="../../../../../common/maps/obj/manashards.tx" x="160.167" y="289.5"/>
-  <object id="264" template="../../../../../common/maps/obj/manashards.tx" x="303.5" y="49.8333"/>
-  <object id="265" template="../../../../../common/maps/obj/scroll.tx" x="128" y="368">
+  <object id="263" template="../../../obj/manashards.tx" x="160.167" y="289.5"/>
+  <object id="264" template="../../../obj/manashards.tx" x="303.5" y="49.8333"/>
+  <object id="265" template="../../../obj/scroll.tx" x="128" y="368">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Liliana's Defeat&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="267" template="../../../../../common/maps/obj/entry_left.tx" x="1.45455" y="206.909" width="16.3636" height="72.7273">
+  <object id="267" template="../../../obj/entry_left.tx" x="1.45455" y="206.909" width="16.3636" height="72.7273">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/bog.tmx"/>
+    <property name="teleport" value="./main_story/temple_of_liliana/bog.tmx"/>
     <property name="teleportObjectId" value="228"/>
    </properties>
   </object>
-  <object id="268" template="../../../../../common/maps/obj/dialog.tx" x="176" y="352" width="48" height="16">
+  <object id="268" template="../../../obj/dialog.tx" x="176" y="352" width="48" height="16">
    <properties>
     <property name="dialog">[
 { &quot;action&quot;: [{&quot;setMapFlag&quot;: {&quot;key&quot;:&quot;angelAwake&quot;, &quot;val&quot;: 0}, &quot;deleteMapObject&quot;: -1}]},
@@ -539,22 +539,22 @@
     <property name="type" value="dialog"/>
    </properties>
   </object>
-  <object id="269" template="../../../../../common/maps/obj/portal.tx" x="144" y="320">
+  <object id="269" template="../../../obj/portal.tx" x="144" y="320">
    <properties>
     <property name="direction" value="left"/>
-    <property name="teleport" value="../common/maps/map/main_story/temple_of_liliana/keep.tmx"/>
+    <property name="teleport" value="./main_story/temple_of_liliana/keep.tmx"/>
     <property name="teleportObjectId" value="267"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup id="7" name="Waypoints">
-  <object id="231" template="../../../../../common/maps/obj/waypoint.tx" x="432" y="48"/>
-  <object id="232" template="../../../../../common/maps/obj/waypoint.tx" x="32" y="48"/>
-  <object id="233" template="../../../../../common/maps/obj/waypoint.tx" x="32" y="368"/>
-  <object id="234" template="../../../../../common/maps/obj/waypoint.tx" x="432" y="368"/>
-  <object id="235" template="../../../../../common/maps/obj/waypoint.tx" x="112" y="112"/>
-  <object id="236" template="../../../../../common/maps/obj/waypoint.tx" x="112" y="320"/>
-  <object id="238" template="../../../../../common/maps/obj/waypoint.tx" x="320" y="320"/>
-  <object id="239" template="../../../../../common/maps/obj/waypoint.tx" x="320" y="112"/>
+  <object id="231" template="../../../obj/waypoint.tx" x="432" y="48"/>
+  <object id="232" template="../../../obj/waypoint.tx" x="32" y="48"/>
+  <object id="233" template="../../../obj/waypoint.tx" x="32" y="368"/>
+  <object id="234" template="../../../obj/waypoint.tx" x="432" y="368"/>
+  <object id="235" template="../../../obj/waypoint.tx" x="112" y="112"/>
+  <object id="236" template="../../../obj/waypoint.tx" x="112" y="320"/>
+  <object id="238" template="../../../obj/waypoint.tx" x="320" y="320"/>
+  <object id="239" template="../../../obj/waypoint.tx" x="320" y="112"/>
  </objectgroup>
 </map>

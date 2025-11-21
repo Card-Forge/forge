@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="60" height="40">
   <data encoding="base64" compression="zlib">
    eJztwzEJAAAMA7C+8w/VWw37E0gvqaqqqqqqqqqqqu8DFRHS7A==
@@ -24,32 +24,31 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="66" template="../../../../common/maps/obj/door_up.tx" x="35.2402" y="285.749">
+  <object id="66" template="../../../common/maps/obj/door_up.tx" x="35.2402" y="285.749">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/vampirecastle/vampirecastle_4B.tmx"/>
+    <property name="teleport" value="../common/maps/map/vampirecastle/vampirecastle_4B.tmx"/>
     <property name="teleportObjectId" value="66"/>
    </properties>
   </object>
-  <object id="75" template="../../../../common/maps/obj/treasure.tx" x="784.167" y="63.75"/>
-  <object id="76" template="../../../../common/maps/obj/treasure.tx" x="704.5" y="64.6667"/>
-  <object id="77" template="../../../../common/maps/obj/gold.tx" x="744.5" y="62.9167"/>
-  <object id="78" template="../../../../common/maps/obj/enemy.tx" x="374.417" y="306.667">
+  <object id="75" template="../../../common/maps/obj/treasure.tx" x="784.167" y="63.75"/>
+  <object id="76" template="../../../common/maps/obj/treasure.tx" x="704.5" y="64.6667"/>
+  <object id="77" template="../../../common/maps/obj/gold.tx" x="744.5" y="62.9167"/>
+  <object id="78" template="../../../common/maps/obj/enemy.tx" x="374.417" y="306.667">
    <properties>
     <property name="enemy" value="Vampire"/>
    </properties>
   </object>
-  <object id="79" template="../../../../common/maps/obj/enemy.tx" x="744.5" y="143.954">
+  <object id="79" template="../../../common/maps/obj/enemy.tx" x="744.5" y="143.954">
    <properties>
-    <property name="effect">{
- &quot;startBattleWithCard&quot;: [ &quot;Swamp|LEA&quot;, &quot;Swamp|LEA&quot;, &quot;Swamp|LEA&quot;, &quot;Subversion|USG&quot; ]
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Sorin's Boss Effect&quot;]
 }</property>
     <property name="enemy" value="Sorin"/>
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;card&quot;,
+    &quot;type&quot;: &quot;item&quot;,
     &quot;probability&quot;: 1,
     &quot;count&quot;: 1,
-    &quot;cardName&quot;: &quot;Vampiric Tutor|VIS|1&quot;,
+    &quot;itemName&quot;: &quot;Sorin's Amulet&quot;,
   },
   {
     &quot;type&quot;: &quot;item&quot;,
@@ -63,207 +62,207 @@
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="80" template="../../../../common/maps/obj/enemy.tx" x="601.124" y="138.781">
+  <object id="80" template="../../../common/maps/obj/enemy.tx" x="601.124" y="138.781">
    <properties>
     <property name="enemy" value="Vampire Lord"/>
    </properties>
   </object>
-  <object id="81" template="../../../../common/maps/obj/booster.tx" x="786.91" y="92.8676">
+  <object id="81" template="../../../common/maps/obj/booster.tx" x="786.91" y="92.8676">
    <properties>
     <property name="reward">[
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Snuff Out|MMQ|1&quot;
+		&quot;cardName&quot;: &quot;Infernal Grasp&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Vendetta|MMQ|1&quot;
+		&quot;cardName&quot;: &quot;Crippling Fear&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Ambition's Cost|MIR|1&quot;
+		&quot;itemName&quot;: &quot;Deadly Dispute&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Bone Harvest|MIR|1&quot;
+		&quot;itemName&quot;: &quot;Village Rites&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Dark Banishing|ICE|1&quot;
+		&quot;cardName&quot;: &quot;Tragic Slip&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Terror|LEA|1&quot;
+		&quot;cardName&quot;: &quot;Defile&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Diabolic Edict|TMP|1&quot;
+		&quot;itemName&quot;: &quot;Murder&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Snuff Out|MMQ|1&quot;
+		&quot;cardName&quot;: &quot;Infernal Grasp&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Vendetta|MMQ|1&quot;
+		&quot;cardName&quot;: &quot;Crippling Fear&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Ambition's Cost|MIR|1&quot;
+		&quot;itemName&quot;: &quot;Deadly Dispute&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Bone Harvest|MIR|1&quot;
+		&quot;itemName&quot;: &quot;Village Rites&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Dark Banishing|ICE|1&quot;
+		&quot;cardName&quot;: &quot;Tragic Slip&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Terror|LEA|1&quot;
+		&quot;cardName&quot;: &quot;Defile&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Diabolic Edict|TMP|1&quot;
+		&quot;itemName&quot;: &quot;Murder&quot;
 	}
 ]</property>
    </properties>
   </object>
-  <object id="82" template="../../../../common/maps/obj/booster.tx" x="709.178" y="87.3152">
+  <object id="82" template="../../../common/maps/obj/booster.tx" x="709.178" y="87.3152">
    <properties>
     <property name="reward">[
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Snuff Out|MMQ|1&quot;
+		&quot;cardName&quot;: &quot;Infernal Grasp&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Vendetta|MMQ|1&quot;
+		&quot;cardName&quot;: &quot;Crippling Fear&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Ambition's Cost|MIR|1&quot;
+		&quot;itemName&quot;: &quot;Deadly Dispute&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Bone Harvest|MIR|1&quot;
+		&quot;itemName&quot;: &quot;Village Rites&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Dark Banishing|ICE|1&quot;
+		&quot;cardName&quot;: &quot;Tragic Slip&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Terror|LEA|1&quot;
+		&quot;cardName&quot;: &quot;Defile&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Diabolic Edict|TMP|1&quot;
+		&quot;itemName&quot;: &quot;Murder&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Snuff Out|MMQ|1&quot;
+		&quot;cardName&quot;: &quot;Infernal Grasp&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Vendetta|MMQ|1&quot;
+		&quot;cardName&quot;: &quot;Crippling Fear&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Ambition's Cost|MIR|1&quot;
+		&quot;itemName&quot;: &quot;Deadly Dispute&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Bone Harvest|MIR|1&quot;
+		&quot;itemName&quot;: &quot;Village Rites&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Dark Banishing|ICE|1&quot;
+		&quot;cardName&quot;: &quot;Tragic Slip&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Terror|LEA|1&quot;
+		&quot;cardName&quot;: &quot;Defile&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Diabolic Edict|TMP|1&quot;
+		&quot;itemName&quot;: &quot;Murder&quot;
 	}
 ]</property>
    </properties>
   </object>
-  <object id="83" template="../../../../common/maps/obj/enemy.tx" x="709.178" y="228.9">
+  <object id="83" template="../../../common/maps/obj/enemy.tx" x="709.178" y="228.9">
    <properties>
     <property name="enemy" value="Unholy Skull"/>
     <property name="threatRange" type="int" value="50"/>
     <property name="waypoints" value="80,81"/>
    </properties>
   </object>
-  <object id="84" template="../../../../common/maps/obj/enemy.tx" x="145.615" y="224.273">
+  <object id="84" template="../../../common/maps/obj/enemy.tx" x="145.615" y="224.273">
    <properties>
     <property name="enemy" value="Unholy Skull"/>
     <property name="threatRange" type="int" value="50"/>
     <property name="waypoints" value="80,81"/>
    </properties>
   </object>
-  <object id="85" template="../../../../common/maps/obj/waypoint.tx" x="74.3597" y="227.049"/>
-  <object id="86" template="../../../../common/maps/obj/manashards.tx" x="505.592" y="73.4344"/>
-  <object id="87" template="../../../../common/maps/obj/manashards.tx" x="790.612" y="392.694"/>
+  <object id="85" template="../../../common/maps/obj/waypoint.tx" x="74.3597" y="227.049"/>
+  <object id="86" template="../../../common/maps/obj/manashards.tx" x="505.592" y="73.4344"/>
+  <object id="87" template="../../../common/maps/obj/manashards.tx" x="790.612" y="392.694"/>
  </objectgroup>
 </map>

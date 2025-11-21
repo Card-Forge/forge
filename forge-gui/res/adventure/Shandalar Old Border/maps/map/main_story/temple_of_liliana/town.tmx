@@ -275,7 +275,7 @@
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 8,
-  &quot;editions&quot;: [ &quot;USG&quot;,&quot;MM2&quot;,&quot;MM3&quot;,&quot;EMA&quot;,&quot;UMA&quot;,&quot;IMA&quot;,&quot;A25&quot;,&quot;2XM&quot;,&quot;2X2&quot;,&quot;CMM&quot;]
+  &quot;editions&quot;: [ &quot;LEG&quot;, &quot;CHR&quot;, &quot;3ED&quot; ]
   &quot;colors&quot;: [ &quot;colorID&quot; ]
 }]</property>
     <property name="spawn.Easy" type="bool" value="false"/>
@@ -520,7 +520,7 @@
   </object>
   <object id="203" template="../../../obj/scroll.tx" x="592" y="528">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Terror|LEA&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Liliana's Defeat&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="205" template="../../../obj/treasure.tx" x="688" y="16">
@@ -1462,7 +1462,7 @@
 ]</property>
     <property name="effect">{
  &quot;lifeModifier&quot;: 15,
- &quot;startBattleWithCard&quot;: [ &quot;Zombie Master|LEA&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Skeleton Key&quot; ]
 }</property>
     <property name="enemy" value="Zombie Lord"/>
     <property name="fleeRange" type="float" value="125"/>
@@ -1627,7 +1627,7 @@
    }
 ]
 </property>
-    <property name="effect" value="{&quot;lifeModifier&quot;: 10,&quot;startBattleWithCard&quot;: [ &quot;Krovikan Vampire|ICE&quot; ]}"/>
+    <property name="effect" value="{&quot;lifeModifier&quot;: 10,&quot;startBattleWithCard&quot;: [ &quot;Captivating Vampire&quot; ]}"/>
     <property name="enemy" value="Vampire"/>
     <property name="reward">[
   {
@@ -1680,7 +1680,7 @@
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;cardName&quot;:&quot;Nevinyrral's Disk|LEA&quot;
+  &quot;cardName&quot;:&quot;The Chain Veil&quot;
 }
 ]
 
@@ -1770,7 +1770,7 @@
   <object id="241" template="../../../obj/entry_up.tx" x="0" y="544" width="144" height="16">
    <properties>
     <property name="spawn" type="bool" value="true"/>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/bog.tmx"/>
+    <property name="teleport" value="./main_story/temple_of_liliana/bog.tmx"/>
     <property name="teleportObjectId" value="241"/>
    </properties>
   </object>
@@ -1778,6 +1778,9 @@
   <object id="243" template="../../../obj/manashards.tx" x="896" y="96"/>
   <object id="251" template="../../../obj/enemy.tx" x="864" y="112">
    <properties>
+    <property name="effect">{
+ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Waker of the Dead&quot; ]
+}</property>
     <property name="enemy" value="Liliana"/>
     <property name="reward">[
   {
@@ -1832,7 +1835,7 @@
    }
 ]
 </property>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Call to the Grave|SCG&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Endless Ranks of the Dead&quot;]
 }</property>
     <property name="enemy" value="Greater Zombie"/>
     <property name="hidden" type="bool" value="true"/>
@@ -2007,7 +2010,7 @@
    }
 ]
 </property>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Call to the Grave|SCG&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Endless Ranks of the Dead&quot;]
 }</property>
     <property name="enemy" value="Greater Zombie"/>
     <property name="hidden" type="bool" value="true"/>
@@ -2043,7 +2046,7 @@
     &quot;colors&quot;: [&quot;Black&quot;],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
   }
 ]
 </property>
@@ -2093,7 +2096,7 @@
    <properties>
     <property name="activeQuestFlag" value="lilianaBossPortal"/>
     <property name="portalState" value="inactive"/>
-    <property name="teleport" value="../common/maps/map/main_story/temple_of_liliana/keep.tmx"/>
+    <property name="teleport" value="./main_story/temple_of_liliana/keep.tmx"/>
     <property name="teleportObjectId" value="239"/>
    </properties>
   </object>
@@ -2116,7 +2119,7 @@
     &quot;colors&quot;: [&quot;Black&quot;],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
   }
 ]
 </property>
@@ -2153,43 +2156,43 @@
   &quot;cardUnion&quot;: [
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Dark Ritual|LEA&quot;
+      &quot;cardName&quot;: &quot;Dark Ritual&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Nightmare|LEA&quot;
+      &quot;cardName&quot;: &quot;Nightmare&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Drain Life|LEA&quot;
+      &quot;cardName&quot;: &quot;Drain Life&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Terror|LEA&quot;
+      &quot;cardName&quot;: &quot;Terror&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Yawgmoth's Will|USG&quot;
+      &quot;cardName&quot;: &quot;Yawgmoth's Will&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Phyrexian Negator|USG&quot;
+      &quot;cardName&quot;: &quot;Griselbrand&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Ebon Dragon|PTK&quot;
+      &quot;cardName&quot;: &quot;Desecration Demon&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Decree of Pain|SCG&quot;
+      &quot;cardName&quot;: &quot;Damnation&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Recurring Nightmare|EXO&quot;
+      &quot;cardName&quot;: &quot;Recurring Nightmare&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Avatar of Woe|PCY&quot;
+      &quot;cardName&quot;: &quot;Avatar of Woe&quot;
     }
   ]
 },
@@ -2200,27 +2203,27 @@
   &quot;cardUnion&quot;: [
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Mox Jet|LEA&quot;
+      &quot;cardName&quot;: &quot;Mox Jet&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Cabal Coffers|TOR&quot;
+      &quot;cardName&quot;: &quot;Cabal Coffers&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Underground Sea|LEA&quot;
+      &quot;cardName&quot;: &quot;Underground Sea&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Scrubland|LEA&quot;
+      &quot;cardName&quot;: &quot;Scrubland&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Badlands|LEA&quot;
+      &quot;cardName&quot;: &quot;Badlands&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Bayou|LEA&quot;
+      &quot;cardName&quot;: &quot;Bayou&quot;
     }
   ]
 },
@@ -2231,19 +2234,19 @@
   &quot;cardUnion&quot;: [
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Badlands|LEA&quot;
+      &quot;cardName&quot;: &quot;Blood Crypt&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Scrubland|LEA&quot;
+      &quot;cardName&quot;: &quot;Godless Shrine&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Bayou|LEA&quot;
+      &quot;cardName&quot;: &quot;Overgrown Tomb&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Underground Sea|LEA&quot;
+      &quot;cardName&quot;: &quot;Watery Grave&quot;
     }
   ]
 },
@@ -2254,19 +2257,19 @@
   &quot;cardUnion&quot;: [
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Badlands|LEA&quot;
+      &quot;cardName&quot;: &quot;Blood Crypt&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Scrubland|LEA&quot;
+      &quot;cardName&quot;: &quot;Godless Shrine&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Bayou|LEA&quot;
+      &quot;cardName&quot;: &quot;Overgrown Tomb&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Underground Sea|LEA&quot;
+      &quot;cardName&quot;: &quot;Watery Grave&quot;
     }
   ]
 }]</property>
@@ -2287,7 +2290,7 @@
     <property name="activeQuestFlag" value="lilianaTownPortal"/>
     <property name="direction" value="left"/>
     <property name="portalState" value="closed"/>
-    <property name="teleport" value="../common/maps/map/main_story/temple_of_liliana/keep.tmx"/>
+    <property name="teleport" value="./main_story/temple_of_liliana/keep.tmx"/>
     <property name="teleportObjectId" value="238"/>
    </properties>
   </object>

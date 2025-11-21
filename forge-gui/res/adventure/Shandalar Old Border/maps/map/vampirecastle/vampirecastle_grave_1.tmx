@@ -4,11 +4,11 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Orcish Oriflamme|3ED|3ED&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Stensia Masquerade&quot; ]}"/>
  </properties>
- <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJybxsnAMG0Uj+JRPIpH8SgexSMCAwDOljzS
@@ -28,12 +28,12 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="268" width="48" height="16">
+  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="192" y="268" width="48" height="16">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/vampirecastle/vampirecastle_1.tmx"/>
+    <property name="teleport" value="../common/maps/map/vampirecastle/vampirecastle_1.tmx"/>
    </properties>
   </object>
-  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="193.5" y="125.987">
+  <object id="50" template="../../../common/maps/obj/enemy.tx" x="193.5" y="125.987">
    <properties>
     <property name="deckOverride" value="decks/standard/vampire_br.dck"/>
     <property name="enemy" value="Ancient Vampire"/>
@@ -42,7 +42,7 @@
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="62" template="../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="195.244" y="129.616" width="25.7101" height="18.009" visible="1">
+  <object id="62" template="../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="195.244" y="129.616" width="25.7101" height="18.009" visible="1">
    <properties>
     <property name="dialog">[
   {
@@ -85,8 +85,8 @@
 }]</property>
    </properties>
   </object>
-  <object id="64" template="../../../../common/maps/obj/manashards.tx" x="154.394" y="169.462"/>
-  <object id="65" template="../../../../common/maps/obj/treasure.tx" x="208.637" y="23.8091">
+  <object id="64" template="../../../common/maps/obj/manashards.tx" x="154.394" y="169.462"/>
+  <object id="65" template="../../../common/maps/obj/treasure.tx" x="208.637" y="23.8091">
    <properties>
     <property name="reward">[
   {
@@ -128,92 +128,92 @@
 ]</property>
    </properties>
   </object>
-  <object id="66" template="../../../../common/maps/obj/booster.tx" x="197.253" y="42.225">
+  <object id="66" template="../../../common/maps/obj/booster.tx" x="197.253" y="42.225">
    <properties>
     <property name="reward">[
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Snuff Out|MMQ|1&quot;
+		&quot;cardName&quot;: &quot;Infernal Grasp&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Vendetta|MMQ|1&quot;
+		&quot;cardName&quot;: &quot;Crippling Fear&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Ambition's Cost|MIR|1&quot;
+		&quot;itemName&quot;: &quot;Deadly Dispute&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Bone Harvest|MIR|1&quot;
+		&quot;itemName&quot;: &quot;Village Rites&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Dark Banishing|ICE|1&quot;
+		&quot;cardName&quot;: &quot;Tragic Slip&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Terror|LEA|1&quot;
+		&quot;cardName&quot;: &quot;Defile&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Diabolic Edict|TMP|1&quot;
+		&quot;itemName&quot;: &quot;Murder&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Snuff Out|MMQ|1&quot;
+		&quot;cardName&quot;: &quot;Infernal Grasp&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Vendetta|MMQ|1&quot;
+		&quot;cardName&quot;: &quot;Crippling Fear&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Ambition's Cost|MIR|1&quot;
+		&quot;itemName&quot;: &quot;Deadly Dispute&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Bone Harvest|MIR|1&quot;
+		&quot;itemName&quot;: &quot;Village Rites&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Dark Banishing|ICE|1&quot;
+		&quot;cardName&quot;: &quot;Tragic Slip&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Terror|LEA|1&quot;
+		&quot;cardName&quot;: &quot;Defile&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Diabolic Edict|TMP|1&quot;
+		&quot;itemName&quot;: &quot;Murder&quot;
 	}
 ]</property>
    </properties>

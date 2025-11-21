@@ -3,11 +3,11 @@
  <properties>
   <property name="preventEscape" type="bool" value="true"/>
  </properties>
- <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon.tsx"/>
- <tileset firstgid="16385" source="../../../../common/maps/tileset/dungeon-nocollide.tsx"/>
- <tileset firstgid="20865" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/dungeon.tsx"/>
+ <tileset firstgid="16385" source="../../tileset/dungeon-nocollide.tsx"/>
+ <tileset firstgid="20865" source="../../tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="30" height="20">
   <data encoding="base64" compression="zlib">
    eJzjVWdg4B1CGAbQxQbaXaN4FI/iUTyKR/EoHsUwDADG93lF
@@ -34,7 +34,7 @@
  <objectgroup id="5" name="Objects">
   <object id="26" template="../../obj/scroll.tx" x="272" y="80">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Bottle Gnomes|TMP&quot;, &quot;count&quot;: 1 }, { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Brass Man|3ED&quot;, &quot;count&quot;: 1 }, { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Clockwork Steed|HML&quot;, &quot;count&quot;: 1 }, { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Su-Chi|ATQ&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Myr Convert&quot;, &quot;count&quot;: 1 }, { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Coretapper&quot;, &quot;count&quot;: 1 }, { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Myr Custodian&quot;, &quot;count&quot;: 1 }, { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Myr Adapter&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="27" template="../../obj/enemy.tx" x="232" y="172">
@@ -43,20 +43,17 @@
    &quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;exploreShand1&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 4}}, {&quot;checkQuestFlag&quot;: &quot;foundLibraryOfVarsilResearch&quot;, &quot;not&quot;: true}],
    &quot;text&quot;: &quot;With this monstrous machine out of action, defeating its (relatively) smaller companions could be left to lesser adventurers, but you still haven't found the documents Sir Donovan wanted. They must be somewhere downstairs.&quot;,
    &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;name&quot;: &quot;(Continue)&quot;, 
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
    }]
 },{
    &quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;exploreShand1&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 4}}, {&quot;checkQuestFlag&quot;: &quot;foundLibraryOfVarsilResearch&quot;}],
    &quot;text&quot;: &quot;With this monstrous machine out of action, defeating its (relatively) smaller companions could be left to lesser adventurers. You've already found the documents Sir Donovan wanted and can report back to him now or go back down and explore further first.&quot;,
    &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;name&quot;: &quot;(Continue)&quot;, 
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
    }]
 }]</property>
-    <property name="effect">{
- &quot;startBattleWithCard&quot;: [ &quot;Mishra's Workshop|ATQ&quot;, &quot;Sol Ring|LEA&quot;, &quot;Colossus of Sardia|ATQ&quot; ]
-}</property>
     <property name="enemy" value="Myr Superion"/>
     <property name="pursueRange" type="int" value="200"/>
     <property name="spawn.Hard" type="bool" value="false"/>
@@ -81,9 +78,7 @@
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
    }]
 }]</property>
-    <property name="effect">{
- &quot;startBattleWithCard&quot;: [ &quot;Mishra's Workshop|ATQ&quot;, &quot;Sol Ring|LEA&quot;, &quot;Colossus of Sardia|ATQ&quot; ]
-}</property>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Alpha Myr&quot;, &quot;Omega Myr&quot;]}"/>
     <property name="enemy" value="Myr Superion"/>
     <property name="pursueRange" type="int" value="200"/>
     <property name="spawn.Easy" type="bool" value="false"/>
@@ -109,9 +104,7 @@
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
    }]
 }]</property>
-    <property name="effect">{
- &quot;startBattleWithCard&quot;: [ &quot;Mishra's Workshop|ATQ&quot;, &quot;Sol Ring|LEA&quot;, &quot;Colossus of Sardia|ATQ&quot; ]
-}</property>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Myr Turbine&quot;, &quot;Alpha Myr&quot;, &quot;Omega Myr&quot;]}"/>
     <property name="enemy" value="Myr Superion"/>
     <property name="pursueRange" type="int" value="200"/>
     <property name="spawn.Easy" type="bool" value="false"/>
@@ -138,7 +131,7 @@
     <property name="activeQuestFlag" value="defeatedLibraryOfVarsilBoss"/>
     <property name="portalState" value="inactive"/>
     <property name="sprite" value="sprites/portal3.atlas"/>
-    <property name="teleport" value="../common/maps/map/main_story_explore/library_of_varsil_0.tmx"/>
+    <property name="teleport" value="./library_of_varsil_0.tmx"/>
     <property name="teleportObjectId" value="14"/>
    </properties>
   </object>
@@ -168,7 +161,7 @@
   <object id="39" template="../../obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
   <object id="40" template="../../obj/entry_up.tx" x="208" y="304" width="64" height="16">
    <properties>
-    <property name="teleport" value="../common/maps/map/main_story_explore/library_of_varsil_3.tmx"/>
+    <property name="teleport" value="./library_of_varsil_3.tmx"/>
     <property name="teleportObjectId" value="24"/>
    </properties>
   </object>

@@ -4,10 +4,10 @@
   <property name="canFailDungeon" type="bool" value="true"/>
   <property name="respawnEnemies" type="bool" value="true"/>
  </properties>
- <tileset firstgid="1" source="../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
- <tileset firstgid="13697" source="../../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="13697" source="../../../tileset/main-nocollide.tsx"/>
  <layer id="1" name="Tile Layer 1" width="31" height="37">
   <data encoding="csv">
 1641,1641,1641,1641,1641,1641,1641,1641,1641,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
@@ -176,11 +176,11 @@
 </data>
  </layer>
  <objectgroup id="2" name="Objects">
-  <object id="2" template="../../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="16" height="624"/>
-  <object id="3" template="../../../../../common/maps/obj/collision.tx" x="0.25" y="592.75" width="495.75" height="15.25"/>
-  <object id="4" template="../../../../../common/maps/obj/collision.tx" x="496" y="-16" width="16" height="624"/>
-  <object id="5" template="../../../../../common/maps/obj/collision.tx" x="0" y="-16" width="496.295" height="16"/>
-  <object id="187" template="../../../../../common/maps/obj/enemy.tx" x="112" y="576">
+  <object id="2" template="../../../obj/collision.tx" x="-16" y="-16" width="16" height="624"/>
+  <object id="3" template="../../../obj/collision.tx" x="0.25" y="592.75" width="495.75" height="15.25"/>
+  <object id="4" template="../../../obj/collision.tx" x="496" y="-16" width="16" height="624"/>
+  <object id="5" template="../../../obj/collision.tx" x="0" y="-16" width="496.295" height="16"/>
+  <object id="187" template="../../../obj/enemy.tx" x="112" y="576">
    <properties>
     <property name="effect">{
  &quot;lifeModifier&quot;: 5,
@@ -189,12 +189,12 @@
     <property name="enemy" value="Golgari Fungus"/>
    </properties>
   </object>
-  <object id="188" template="../../../../../common/maps/obj/enemy.tx" x="112" y="304">
+  <object id="188" template="../../../obj/enemy.tx" x="112" y="304">
    <properties>
     <property name="enemy" value="Necromancer"/>
    </properties>
   </object>
-  <object id="189" template="../../../../../common/maps/obj/treasure.tx" x="121" y="62">
+  <object id="189" template="../../../obj/treasure.tx" x="121" y="62">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -218,7 +218,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="193" template="../../../../../common/maps/obj/enemy.tx" x="368" y="416">
+  <object id="193" template="../../../obj/enemy.tx" x="368" y="416">
    <properties>
     <property name="effect">{
  &quot;lifeModifier&quot;: 5,
@@ -229,7 +229,7 @@
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="194" template="../../../../../common/maps/obj/treasure.tx" x="192" y="144">
+  <object id="194" template="../../../obj/treasure.tx" x="192" y="144">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -253,12 +253,12 @@
 }]</property>
    </properties>
   </object>
-  <object id="198" template="../../../../../common/maps/obj/enemy.tx" x="272" y="304">
+  <object id="198" template="../../../obj/enemy.tx" x="272" y="304">
    <properties>
     <property name="enemy" value="Liliana's Alchemist"/>
    </properties>
   </object>
-  <object id="199" template="../../../../../common/maps/obj/enemy.tx" x="176" y="240">
+  <object id="199" template="../../../obj/enemy.tx" x="176" y="240">
    <properties>
     <property name="enemy" value="Dimir Faerie"/>
     <property name="pursueRange" type="int" value="90"/>
@@ -266,19 +266,19 @@
     <property name="waypoints" value="250,251,252,249"/>
    </properties>
   </object>
-  <object id="200" template="../../../../../common/maps/obj/enemy.tx" x="352" y="304">
+  <object id="200" template="../../../obj/enemy.tx" x="352" y="304">
    <properties>
     <property name="enemy" value="Golgari Treefolk"/>
     <property name="pursueRange" type="int" value="60"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="201" template="../../../../../common/maps/obj/enemy.tx" x="224" y="320">
+  <object id="201" template="../../../obj/enemy.tx" x="224" y="320">
    <properties>
     <property name="enemy" value="Dimir Faerie"/>
    </properties>
   </object>
-  <object id="202" template="../../../../../common/maps/obj/treasure.tx" x="223.795" y="272.136">
+  <object id="202" template="../../../obj/treasure.tx" x="223.795" y="272.136">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -302,12 +302,12 @@
 }]</property>
    </properties>
   </object>
-  <object id="203" template="../../../../../common/maps/obj/scroll.tx" x="70.3333" y="279">
+  <object id="203" template="../../../obj/scroll.tx" x="70.3333" y="279">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Liliana's Defeat&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="205" template="../../../../../common/maps/obj/treasure.tx" x="112" y="592">
+  <object id="205" template="../../../obj/treasure.tx" x="112" y="592">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -331,14 +331,14 @@
 }]</property>
    </properties>
   </object>
-  <object id="211" template="../../../../../common/maps/obj/enemy.tx" x="64" y="80">
+  <object id="211" template="../../../obj/enemy.tx" x="64" y="80">
    <properties>
     <property name="enemy" value="Orzhov Cleric"/>
     <property name="pursueRange" type="int" value="75"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
-  <object id="212" template="../../../../../common/maps/obj/enemy.tx" x="112" y="128">
+  <object id="212" template="../../../obj/enemy.tx" x="112" y="128">
    <properties>
     <property name="Type" value="enemy"/>
     <property name="effect">{
@@ -349,33 +349,33 @@
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
-  <object id="215" template="../../../../../common/maps/obj/enemy.tx" x="230.5" y="164.5">
+  <object id="215" template="../../../obj/enemy.tx" x="230.5" y="164.5">
    <properties>
     <property name="effect">{
  &quot;lifeModifier&quot;: 4,
- &quot;startBattleWithCard&quot;: [ &quot;Aphetto Vulture|ONS&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Carrion Screecher&quot; ]
 }</property>
     <property name="enemy" value="Harpy 2"/>
     <property name="threatRange" type="int" value="70"/>
    </properties>
   </object>
-  <object id="216" template="../../../../../common/maps/obj/enemy.tx" x="295.75" y="97.5">
+  <object id="216" template="../../../obj/enemy.tx" x="295.75" y="97.5">
    <properties>
     <property name="enemy" value="Harpy"/>
     <property name="pursueRange" type="int" value="90"/>
     <property name="threatRange" type="int" value="70"/>
    </properties>
   </object>
-  <object id="228" template="../../../../../common/maps/obj/entry_right.tx" x="473" y="299" width="23" height="37.6667">
+  <object id="228" template="../../../obj/entry_right.tx" x="473" y="299" width="23" height="37.6667">
    <properties>
-    <property name="teleport" value="../common/maps/map/main_story/temple_of_liliana/graveyard.tmx"/>
+    <property name="teleport" value="./main_story/temple_of_liliana/graveyard.tmx"/>
     <property name="teleportObjectId" value="267"/>
    </properties>
   </object>
-  <object id="231" template="../../../../../common/maps/obj/manashards.tx" x="400" y="576"/>
-  <object id="232" template="../../../../../common/maps/obj/gold.tx" x="352" y="592"/>
-  <object id="233" template="../../../../../common/maps/obj/treasure.tx" x="224" y="352"/>
-  <object id="235" template="../../../../../common/maps/obj/enemy.tx" x="272" y="528">
+  <object id="231" template="../../../obj/manashards.tx" x="400" y="576"/>
+  <object id="232" template="../../../obj/gold.tx" x="352" y="592"/>
+  <object id="233" template="../../../obj/treasure.tx" x="224" y="352"/>
+  <object id="235" template="../../../obj/enemy.tx" x="272" y="528">
    <properties>
     <property name="effect" value=""/>
     <property name="enemy" value="Vampire"/>
@@ -383,7 +383,7 @@
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="236" template="../../../../../common/maps/obj/enemy.tx" x="400" y="192">
+  <object id="236" template="../../../obj/enemy.tx" x="400" y="192">
    <properties>
     <property name="enemy" value="Liliana's Alchemist"/>
     <property name="pursueRange" type="int" value="80"/>
@@ -391,12 +391,12 @@
     <property name="waypoints" value="253,254,wait3,260,254,wait3"/>
    </properties>
   </object>
-  <object id="237" template="../../../../../common/maps/obj/dialog.tx" x="368" y="160">
+  <object id="237" template="../../../obj/dialog.tx" x="368" y="160">
    <properties>
     <property name="dialog" value="[]"/>
    </properties>
   </object>
-  <object id="238" template="../../../../../common/maps/obj/treasure.tx" x="64" y="144">
+  <object id="238" template="../../../obj/treasure.tx" x="64" y="144">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -420,7 +420,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="239" template="../../../../../common/maps/obj/treasure.tx" x="80" y="176">
+  <object id="239" template="../../../obj/treasure.tx" x="80" y="176">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -444,7 +444,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="240" template="../../../../../common/maps/obj/enemy.tx" x="256" y="48">
+  <object id="240" template="../../../obj/enemy.tx" x="256" y="48">
    <properties>
     <property name="defeatDialog">[
   {
@@ -520,19 +520,19 @@
     <property name="enemy" value="Witch"/>
    </properties>
   </object>
-  <object id="241" template="../../../../../common/maps/obj/entry_down.tx" x="0" y="16" width="144" height="16">
+  <object id="241" template="../../../obj/entry_down.tx" x="0" y="16" width="144" height="16">
    <properties>
-    <property name="teleport" value="../common/maps/map/main_story/temple_of_liliana/town.tmx"/>
+    <property name="teleport" value="./main_story/temple_of_liliana/town.tmx"/>
     <property name="teleportObjectId" value="241"/>
    </properties>
   </object>
-  <object id="242" template="../../../../../common/maps/obj/enemy.tx" x="0" y="336">
+  <object id="242" template="../../../obj/enemy.tx" x="0" y="336">
    <properties>
     <property name="enemy" value="Viper"/>
     <property name="waypoints" value="243,244,wait5"/>
    </properties>
   </object>
-  <object id="245" template="../../../../../common/maps/obj/treasure.tx" x="416" y="416">
+  <object id="245" template="../../../obj/treasure.tx" x="416" y="416">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -556,9 +556,9 @@
 }]</property>
    </properties>
   </object>
-  <object id="249" template="../../../../../common/maps/obj/waypoint.tx" x="176" y="384"/>
-  <object id="250" template="../../../../../common/maps/obj/waypoint.tx" x="176" y="224"/>
-  <object id="259" template="../../../../../common/maps/obj/enemy.tx" x="304" y="496">
+  <object id="249" template="../../../obj/waypoint.tx" x="176" y="384"/>
+  <object id="250" template="../../../obj/waypoint.tx" x="176" y="224"/>
+  <object id="259" template="../../../obj/enemy.tx" x="304" y="496">
    <properties>
     <property name="enemy" value="Black Sliver"/>
     <property name="pursueRange" type="int" value="60"/>
@@ -566,7 +566,7 @@
     <property name="waypoints" value="255,256,257,258,257,256"/>
    </properties>
   </object>
-  <object id="261" template="../../../../../common/maps/obj/enemy.tx" x="80" y="400">
+  <object id="261" template="../../../obj/enemy.tx" x="80" y="400">
    <properties>
     <property name="effect">{
  &quot;lifeModifier&quot;: 8,
@@ -576,7 +576,7 @@
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="263" template="../../../../../common/maps/obj/enemy.tx" x="256" y="368">
+  <object id="263" template="../../../obj/enemy.tx" x="256" y="368">
    <properties>
     <property name="enemy" value="Dimir Faerie"/>
     <property name="pursueRange" type="int" value="90"/>
@@ -584,15 +584,15 @@
     <property name="waypoints" value="252,249,250,251"/>
    </properties>
   </object>
-  <object id="270" template="../../../../../common/maps/obj/portal.tx" x="450" y="343">
+  <object id="270" template="../../../obj/portal.tx" x="450" y="343">
    <properties>
     <property name="activeQuestFlag" value="lilianaBogPortal"/>
     <property name="direction" value="up"/>
-    <property name="teleport" value="../common/maps/map/main_story/temple_of_liliana/keep.tmx"/>
+    <property name="teleport" value="./main_story/temple_of_liliana/keep.tmx"/>
     <property name="teleportObjectId" value=""/>
    </properties>
   </object>
-  <object id="271" template="../../../../../common/maps/obj/dialog.tx" x="416" y="288" width="16" height="48">
+  <object id="271" template="../../../obj/dialog.tx" x="416" y="288" width="16" height="48">
    <properties>
     <property name="dialog">[{ 
 &quot;condition&quot;: [{&quot;checkQuestFlag&quot;:&quot;lilianaBogPortal&quot;, &quot;not&quot;:true}],
@@ -600,7 +600,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="272" template="../../../../../common/maps/obj/dialog.tx" x="432" y="256" width="32" height="16">
+  <object id="272" template="../../../obj/dialog.tx" x="432" y="256" width="32" height="16">
    <properties>
     <property name="dialog">[{ 
 &quot;condition&quot;: [{&quot;checkQuestFlag&quot;:&quot;lilianaBog&quot;, &quot;not&quot;:true}],
@@ -610,19 +610,19 @@
   </object>
  </objectgroup>
  <objectgroup id="7" name="Waypoints">
-  <object id="243" template="../../../../../common/maps/obj/waypoint.tx" x="0" y="304"/>
-  <object id="244" template="../../../../../common/maps/obj/waypoint.tx" x="0" y="400"/>
-  <object id="246" template="../../../../../common/maps/obj/waypoint.tx" x="48" y="576"/>
-  <object id="247" template="../../../../../common/maps/obj/waypoint.tx" x="112" y="432"/>
-  <object id="248" template="../../../../../common/maps/obj/waypoint.tx" x="112" y="112"/>
-  <object id="251" template="../../../../../common/maps/obj/waypoint.tx" x="256" y="224"/>
-  <object id="252" template="../../../../../common/maps/obj/waypoint.tx" x="256" y="384"/>
-  <object id="253" template="../../../../../common/maps/obj/waypoint.tx" x="400" y="128"/>
-  <object id="254" template="../../../../../common/maps/obj/waypoint.tx" x="400" y="208"/>
-  <object id="255" template="../../../../../common/maps/obj/waypoint.tx" x="304" y="528"/>
-  <object id="256" template="../../../../../common/maps/obj/waypoint.tx" x="304" y="464"/>
-  <object id="257" template="../../../../../common/maps/obj/waypoint.tx" x="272" y="464"/>
-  <object id="258" template="../../../../../common/maps/obj/waypoint.tx" x="272" y="336"/>
-  <object id="260" template="../../../../../common/maps/obj/waypoint.tx" x="304" y="208"/>
+  <object id="243" template="../../../obj/waypoint.tx" x="0" y="304"/>
+  <object id="244" template="../../../obj/waypoint.tx" x="0" y="400"/>
+  <object id="246" template="../../../obj/waypoint.tx" x="48" y="576"/>
+  <object id="247" template="../../../obj/waypoint.tx" x="112" y="432"/>
+  <object id="248" template="../../../obj/waypoint.tx" x="112" y="112"/>
+  <object id="251" template="../../../obj/waypoint.tx" x="256" y="224"/>
+  <object id="252" template="../../../obj/waypoint.tx" x="256" y="384"/>
+  <object id="253" template="../../../obj/waypoint.tx" x="400" y="128"/>
+  <object id="254" template="../../../obj/waypoint.tx" x="400" y="208"/>
+  <object id="255" template="../../../obj/waypoint.tx" x="304" y="528"/>
+  <object id="256" template="../../../obj/waypoint.tx" x="304" y="464"/>
+  <object id="257" template="../../../obj/waypoint.tx" x="272" y="464"/>
+  <object id="258" template="../../../obj/waypoint.tx" x="272" y="336"/>
+  <object id="260" template="../../../obj/waypoint.tx" x="304" y="208"/>
  </objectgroup>
 </map>

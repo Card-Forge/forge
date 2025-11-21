@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJyrZWFgqB3Fo3gUj+JRPIpH8YjAADIiAQ4=
@@ -24,25 +24,25 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="271.5" width="48" height="16">
+  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="192" y="271.5" width="48" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="48" template="../../../../common/maps/obj/treasure.tx" x="229.386" y="104.333"/>
-  <object id="64" template="../../../../common/maps/obj/enemy.tx" x="230.621" y="123.08">
+  <object id="48" template="../../../common/maps/obj/treasure.tx" x="229.386" y="104.333"/>
+  <object id="64" template="../../../common/maps/obj/enemy.tx" x="230.621" y="123.08">
    <properties>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Mana Flare|LEA&quot; ] }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Heartbeat of Spring&quot; ] }"/>
     <property name="enemy" value="Chimera"/>
     <property name="fleeRange" value="30"/>
     <property name="pursueRange" type="int" value="30"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="79" template="../../../../common/maps/obj/manashards.tx" x="46.377" y="106.249"/>
-  <object id="81" template="../../../../common/maps/obj/collision.tx" x="-15.5" y="0.028" width="16" height="273.444"/>
-  <object id="82" template="../../../../common/maps/obj/collision.tx" x="481.5" y="-0.222" width="16" height="273.444"/>
-  <object id="83" template="../../../../common/maps/obj/collision.tx" x="-15.73" y="-16.5" width="516.96" height="16"/>
-  <object id="84" template="../../../../common/maps/obj/collision.tx" x="-14.48" y="273" width="516.96" height="16"/>
+  <object id="79" template="../../../common/maps/obj/manashards.tx" x="46.377" y="106.249"/>
+  <object id="81" template="../../../common/maps/obj/collision.tx" x="-15.5" y="0.028" width="16" height="273.444"/>
+  <object id="82" template="../../../common/maps/obj/collision.tx" x="481.5" y="-0.222" width="16" height="273.444"/>
+  <object id="83" template="../../../common/maps/obj/collision.tx" x="-15.73" y="-16.5" width="516.96" height="16"/>
+  <object id="84" template="../../../common/maps/obj/collision.tx" x="-14.48" y="273" width="516.96" height="16"/>
  </objectgroup>
 </map>

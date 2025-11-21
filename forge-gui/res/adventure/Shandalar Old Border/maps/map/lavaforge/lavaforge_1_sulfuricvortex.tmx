@@ -5,11 +5,11 @@
  </editorsettings>
  <properties>
   <property name="dungeonEffect">{
-  &quot;startBattleWithCard&quot;: [ &quot;Sulfuric Vortex|SCG|1&quot; ],
+  &quot;startBattleWithCard&quot;: [ &quot;Sulfuric Vortex|EMA|1&quot; ],
 }</property>
  </properties>
- <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJy1lLkRwyAQRQmUQD/W4a6sq1Fh2T24CS3DbKIRy18LgpcxPB6Xt8b4Ez0xOWN+jcyLxozE82IOLagz8LGR7YZrsHHt7AzzIW7u1jaf+7iBQd3aZsmZ8l6N0zZLc2nRuHMdWtD9Lu3ltxXuqdRe2ovuO3JnarjR+1r6zJH/qIZ3oX3oKnd/E2e8Z7rvriH1tmYnd9fyIv5/fA+iJVaH/SXvQl6p8wBa/68t
@@ -34,8 +34,8 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="176" y="272" width="80" height="16"/>
-  <object id="50" template="../../../../common/maps/obj/treasure.tx" x="378.5" y="93">
+  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="176" y="272" width="80" height="16"/>
+  <object id="50" template="../../../common/maps/obj/treasure.tx" x="378.5" y="93">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -62,7 +62,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="51" template="../../../../common/maps/obj/treasure.tx" x="128.5" y="58">
+  <object id="51" template="../../../common/maps/obj/treasure.tx" x="128.5" y="58">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -89,7 +89,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="52" template="../../../../common/maps/obj/gold.tx" x="17" y="110">
+  <object id="52" template="../../../common/maps/obj/gold.tx" x="17" y="110">
    <properties>
     <property name="reward">[
   {
@@ -100,7 +100,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="53" template="../../../../common/maps/obj/gold.tx" x="305.5" y="178">
+  <object id="53" template="../../../common/maps/obj/gold.tx" x="305.5" y="178">
    <properties>
     <property name="reward">[
   {
@@ -111,7 +111,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="54" template="../../../../common/maps/obj/gold.tx" x="165.5" y="77">
+  <object id="54" template="../../../common/maps/obj/gold.tx" x="165.5" y="77">
    <properties>
     <property name="reward">[
   {
@@ -122,102 +122,99 @@
 ]</property>
    </properties>
   </object>
-  <object id="55" template="../../../../common/maps/obj/enemy.tx" x="158.688" y="197.246">
+  <object id="55" template="../../../common/maps/obj/enemy.tx" x="158.688" y="197.246">
    <properties>
     <property name="enemy" value="Viashino"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="56" template="../../../../common/maps/obj/enemy.tx" x="59.0776" y="117.697">
+  <object id="56" template="../../../common/maps/obj/enemy.tx" x="59.0776" y="117.697">
    <properties>
-    <property name="effect">{
- &quot;startBattleWithCard&quot;: [ &quot;Enchantress's Presence|ONS&quot;, &quot;Black Market|MMQ&quot;, &quot;Grim Feast|INV&quot; ]
-}</property>
     <property name="enemy" value="Dark Enchanter"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="146.562" y="81.9924">
+  <object id="57" template="../../../common/maps/obj/enemy.tx" x="146.562" y="81.9924">
    <properties>
     <property name="enemy" value="Shaman of Zedruu"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="58" template="../../../../common/maps/obj/enemy.tx" x="250.613" y="155.704">
+  <object id="58" template="../../../common/maps/obj/enemy.tx" x="250.613" y="155.704">
    <properties>
     <property name="effect">{
  &quot;lifeModifier&quot;: 6,
- &quot;startBattleWithCard&quot;: [ &quot;Thran Dynamo|UDS|1&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;c_a_treasure_sac&quot; ]
 }</property>
     <property name="enemy" value="Fire Giant"/>
    </properties>
   </object>
-  <object id="59" template="../../../../common/maps/obj/enemy.tx" x="366" y="125.5">
+  <object id="59" template="../../../common/maps/obj/enemy.tx" x="366" y="125.5">
    <properties>
     <property name="effect">{
  &quot;lifeModifier&quot;: 4,
- &quot;startBattleWithCard&quot;: [ &quot;Embermage Goblin|ONS|1&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Irencrag Pyromancer|ELD|1&quot; ]
 }</property>
     <property name="enemy" value="Mindclaw Shaman"/>
    </properties>
   </object>
-  <object id="60" template="../../../../common/maps/obj/collision.tx" x="-0.741192" y="272.104" width="482.422" height="16"/>
-  <object id="61" template="../../../../common/maps/obj/collision.tx" x="-1.33275" y="-16.8734" width="480.943" height="16"/>
-  <object id="62" template="../../../../common/maps/obj/collision.tx" x="-15.6903" y="-0.236625" width="16" height="272"/>
-  <object id="63" template="../../../../common/maps/obj/collision.tx" x="479.447" y="-1.41975" width="16" height="272"/>
-  <object id="64" template="../../../../common/maps/obj/enemy.tx" x="212.948" y="118.89">
+  <object id="60" template="../../../common/maps/obj/collision.tx" x="-0.741192" y="272.104" width="482.422" height="16"/>
+  <object id="61" template="../../../common/maps/obj/collision.tx" x="-1.33275" y="-16.8734" width="480.943" height="16"/>
+  <object id="62" template="../../../common/maps/obj/collision.tx" x="-15.6903" y="-0.236625" width="16" height="272"/>
+  <object id="63" template="../../../common/maps/obj/collision.tx" x="479.447" y="-1.41975" width="16" height="272"/>
+  <object id="64" template="../../../common/maps/obj/enemy.tx" x="212.948" y="118.89">
    <properties>
     <property name="enemy" value="Wild-Magic Sorcerer"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="65" template="../../../../common/maps/obj/manashards.tx" x="106.763" y="76.8891"/>
-  <object id="66" template="../../../../common/maps/obj/manashards.tx" x="402.544" y="94.0444"/>
-  <object id="67" template="../../../../common/maps/obj/booster.tx" x="83.1005" y="76.5933">
+  <object id="65" template="../../../common/maps/obj/manashards.tx" x="106.763" y="76.8891"/>
+  <object id="66" template="../../../common/maps/obj/manashards.tx" x="402.544" y="94.0444"/>
+  <object id="67" template="../../../common/maps/obj/booster.tx" x="83.1005" y="76.5933">
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;STH&quot; ],
+    &quot;editions&quot;: [ &quot;TMP&quot;, &quot;STH&quot;, &quot;EXO&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 10,
     &quot;rarity&quot;: [ &quot;Common&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;6ED&quot; ],
+    &quot;editions&quot;: [ &quot;TMP&quot;, &quot;STH&quot;, &quot;EXO&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
     &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;STH&quot; ],
+    &quot;editions&quot;: [ &quot;TMP&quot;, &quot;STH&quot;, &quot;EXO&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
   }
 ]
 </property>
    </properties>
   </object>
-  <object id="68" template="../../../../common/maps/obj/booster.tx" x="409.642" y="145.806">
+  <object id="68" template="../../../common/maps/obj/booster.tx" x="409.642" y="145.806">
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;VIS&quot; ],
+    &quot;editions&quot;: [ &quot;TMP&quot;, &quot;STH&quot;, &quot;EXO&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 10,
     &quot;rarity&quot;: [ &quot;Common&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;EXO&quot; ],
+    &quot;editions&quot;: [ &quot;TMP&quot;, &quot;STH&quot;, &quot;EXO&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
     &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;7ED&quot; ],
+    &quot;editions&quot;: [ &quot;TMP&quot;, &quot;STH&quot;, &quot;EXO&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
   }
 ]
 </property>

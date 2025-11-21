@@ -6,9 +6,9 @@
  <properties>
   <property name="dungeonEffect" value=""/>
  </properties>
- <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx"/>
  <layer id="6" name="Collision" width="30" height="19">
   <data encoding="base64" compression="zlib">
    eJxjYBi8wI2TMKaFnU8JmPuYynYTYye17SbFTmrZjctOdDOx2UGJ3SB903gxMUh8Nw9x6si1FxsAmYmPj6yfHLuxhScuc7DJDXV76aUfpG8lB3l6l3NQnpdgdhMbzpTaiW43MfZSy050u/EBatuJbDe+dEurOgnZHnz84WgvtcIWAIOHLCo=
@@ -38,7 +38,7 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="66" template="../../obj/treasure.tx" x="256.447" y="95.763">
+  <object id="66" template="../../../common/maps/obj/treasure.tx" x="256.447" y="95.763">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -57,45 +57,45 @@
 }]</property>
    </properties>
   </object>
-  <object id="75" template="../../obj/enemy.tx" x="291.571" y="166.141">
+  <object id="75" template="../../../common/maps/obj/enemy.tx" x="291.571" y="166.141">
    <properties>
     <property name="enemy" value="Demon"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="100,101,99"/>
    </properties>
   </object>
-  <object id="83" template="../../obj/waypoint.tx" x="193.014" y="286.598"/>
-  <object id="86" template="../../obj/entry_up.tx" x="208.316" y="175.684">
+  <object id="83" template="../../../common/maps/obj/waypoint.tx" x="193.014" y="286.598"/>
+  <object id="86" template="../../../common/maps/obj/entry_up.tx" x="208.316" y="175.684">
    <properties>
     <property name="teleport" value="../common/maps/map/monastery/unhallowed_abbey_1F.tmx"/>
    </properties>
   </object>
-  <object id="87" template="../../obj/booster.tx" x="272.228" y="95.7719">
+  <object id="87" template="../../../common/maps/obj/booster.tx" x="272.228" y="95.7719">
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;6ED&quot; ],
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 10,
     &quot;rarity&quot;: [ &quot;Common&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;TMP&quot; ],
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
     &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;INV&quot; ],
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
   }
 ]
 </property>
    </properties>
   </object>
-  <object id="88" template="../../obj/treasure.tx" x="240.333" y="47.6667">
+  <object id="88" template="../../../common/maps/obj/treasure.tx" x="240.333" y="47.6667">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -114,32 +114,32 @@
 }]</property>
    </properties>
   </object>
-  <object id="89" template="../../obj/booster.tx" x="257.333" y="47.3333">
+  <object id="89" template="../../../common/maps/obj/booster.tx" x="257.333" y="47.3333">
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;EXO&quot; ],
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 10,
     &quot;rarity&quot;: [ &quot;Common&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;7ED&quot; ],
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
     &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;INV&quot; ],
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
   }
 ]
 </property>
    </properties>
   </object>
-  <object id="90" template="../../obj/treasure.tx" x="175.667" y="48.3333">
+  <object id="90" template="../../../common/maps/obj/treasure.tx" x="175.667" y="48.3333">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -158,7 +158,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="91" template="../../obj/treasure.tx" x="144.333" y="95">
+  <object id="91" template="../../../common/maps/obj/treasure.tx" x="144.333" y="95">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -177,78 +177,78 @@
 }]</property>
    </properties>
   </object>
-  <object id="92" template="../../obj/booster.tx" x="127.667" y="94">
+  <object id="92" template="../../../common/maps/obj/booster.tx" x="127.667" y="94">
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;SCG&quot; ],
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 10,
     &quot;rarity&quot;: [ &quot;Common&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;VIS&quot; ],
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
     &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;MMQ&quot; ],
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
   }
 ]
 </property>
    </properties>
   </object>
-  <object id="93" template="../../obj/booster.tx" x="159" y="47">
+  <object id="93" template="../../../common/maps/obj/booster.tx" x="159" y="47">
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;INV&quot; ],
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 10,
     &quot;rarity&quot;: [ &quot;Common&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;JUD&quot; ],
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
     &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;6ED&quot; ],
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
   }
 ]
 </property>
    </properties>
   </object>
-  <object id="94" template="../../obj/enemy.tx" x="208.666" y="270.394">
+  <object id="94" template="../../../common/maps/obj/enemy.tx" x="208.666" y="270.394">
    <properties>
     <property name="enemy" value="Demon"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="98,97,83"/>
    </properties>
   </object>
-  <object id="95" template="../../obj/enemy.tx" x="122.212" y="172.727">
+  <object id="95" template="../../../common/maps/obj/enemy.tx" x="122.212" y="172.727">
    <properties>
     <property name="enemy" value="Demon"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="104,102,103"/>
    </properties>
   </object>
-  <object id="97" template="../../obj/waypoint.tx" x="192.727" y="255.455"/>
-  <object id="98" template="../../obj/waypoint.tx" x="223.091" y="255.455"/>
-  <object id="99" template="../../obj/waypoint.tx" x="288.545" y="127.273"/>
-  <object id="100" template="../../obj/waypoint.tx" x="287.636" y="192"/>
-  <object id="101" template="../../obj/waypoint.tx" x="319.091" y="159.273"/>
-  <object id="102" template="../../obj/waypoint.tx" x="97.4545" y="159.636"/>
-  <object id="103" template="../../obj/waypoint.tx" x="126.545" y="127.455"/>
-  <object id="104" template="../../obj/waypoint.tx" x="125.636" y="200.909"/>
+  <object id="97" template="../../../common/maps/obj/waypoint.tx" x="192.727" y="255.455"/>
+  <object id="98" template="../../../common/maps/obj/waypoint.tx" x="223.091" y="255.455"/>
+  <object id="99" template="../../../common/maps/obj/waypoint.tx" x="288.545" y="127.273"/>
+  <object id="100" template="../../../common/maps/obj/waypoint.tx" x="287.636" y="192"/>
+  <object id="101" template="../../../common/maps/obj/waypoint.tx" x="319.091" y="159.273"/>
+  <object id="102" template="../../../common/maps/obj/waypoint.tx" x="97.4545" y="159.636"/>
+  <object id="103" template="../../../common/maps/obj/waypoint.tx" x="126.545" y="127.455"/>
+  <object id="104" template="../../../common/maps/obj/waypoint.tx" x="125.636" y="200.909"/>
   <object id="108" name="Ward" type="dialog" gid="11912" x="192.063" y="128.292" width="48" height="16">
    <properties>
     <property name="dialog">[{
@@ -325,7 +325,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="113" template="../../obj/dialog.tx" x="209.364" y="114.091" width="13.8182" height="13.3636">
+  <object id="113" template="../../../common/maps/obj/dialog.tx" x="209.364" y="114.091" width="13.8182" height="13.3636">
    <properties>
     <property name="dialog">[{
     &quot;text&quot;:&quot;*The large, imposing demon before you smirks*\n Ah, so you must be the one who's been freeing my sacrifices...and the volunteer to be my new one. Tell me, mortal, as your last words that aren't a howl of pain - why challenge me?&quot;,
@@ -364,7 +364,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="116" template="../../../../common/maps/obj/enemy.tx" x="203.566" y="96.2358" width="24" height="24">
+  <object id="116" template="../../../common/maps/obj/enemy.tx" x="203.566" y="96.2358" width="24" height="24">
    <properties>
     <property name="defeatDialog">[{
     &quot;text&quot;:&quot;*With a snarl of pain, the demon collapses to the floor.* \n Congratulations, mortal, you've bested me. In exchange for my life, I offer a lesson - the same killing power I wield.&quot;,
@@ -402,8 +402,7 @@
     }]
 }]
 </property>
-    <property name="effect">{
- &quot;startBattleWithCard&quot;: [ &quot;Marble Diamond|MIR&quot;, &quot;Charcoal Diamond|MIR&quot;, &quot;Edgewalker|SCG&quot;, &quot;Righteous War|INV&quot;, &quot;Purgatory|MIR&quot; ]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Mox Jet&quot;, &quot;Power of Valyx&quot;]
 }</property>
     <property name="enemy" value="Valyx Feaster of Torment"/>
    </properties>

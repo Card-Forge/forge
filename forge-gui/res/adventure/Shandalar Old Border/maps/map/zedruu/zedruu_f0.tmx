@@ -3,10 +3,10 @@
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../common/maps/tileset/FarmFood.tsx"/>
- <tileset firstgid="16001" source="../../../../common/maps/tileset/dungeon.tsx"/>
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../common/maps/tileset/FarmFood.tsx"/>
+ <tileset firstgid="16001" source="../../../common/maps/tileset/dungeon.tsx"/>
  <layer id="26" name="Collision" width="35" height="35">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AU0BNwCAy0CwgDN86BdsEoGAWjYBSMglEwCkbBKBgF5AMTPtyYkPwCUVS1tHILqWZQ2y2gNj8MD7RbiLELmzp6xhEhu+jhFkJhRW76ItUt5OChAgBI8xRY
@@ -36,8 +36,8 @@
   </data>
  </layer>
  <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
-  <object id="115" template="../../../../common/maps/obj/gold.tx" x="447.713" y="382.537"/>
-  <object id="118" template="../../../../common/maps/obj/enemy.tx" x="300.193" y="358.245">
+  <object id="115" template="../../../common/maps/obj/gold.tx" x="447.713" y="382.537"/>
+  <object id="118" template="../../../common/maps/obj/enemy.tx" x="300.193" y="358.245">
    <properties>
     <property name="enemy" value="Human elite"/>
     <property name="spawn.Easy" type="bool" value="false"/>
@@ -46,24 +46,23 @@
     <property name="waypoints" value="206,213,206,190,183,214,205,214,183,190"/>
    </properties>
   </object>
-  <object id="137" template="../../../../common/maps/obj/enemy.tx" x="407.763" y="152.73">
+  <object id="137" template="../../../common/maps/obj/enemy.tx" x="407.763" y="152.73">
    <properties>
     <property name="enemy" value="Dwarf Demolisher"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="162" template="../../../../common/maps/obj/enemy.tx" x="295.842" y="475.772">
+  <object id="162" template="../../../common/maps/obj/enemy.tx" x="295.842" y="475.772">
    <properties>
     <property name="enemy" value="Sand Golem"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
-  <object id="163" template="../../../../common/maps/obj/waypoint.tx" x="417.342" y="340.105"/>
-  <object id="176" template="../../../../common/maps/obj/waypoint.tx" x="215.342" y="355.605"/>
-  <object id="178" template="../../../../common/maps/obj/enemy.tx" x="332.175" y="105.438">
+  <object id="163" template="../../../common/maps/obj/waypoint.tx" x="417.342" y="340.105"/>
+  <object id="176" template="../../../common/maps/obj/waypoint.tx" x="215.342" y="355.605"/>
+  <object id="178" template="../../../common/maps/obj/enemy.tx" x="332.175" y="105.438">
    <properties>
-    <property name="effect">{
- &quot;startBattleWithCard&quot;: [ &quot;Mountain|LEA&quot;, &quot;Island|LEA&quot;, &quot;Plains|LEA&quot; ]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Tome of the Infinite&quot;,&quot;Thayan Evokers&quot;]
 }</property>
     <property name="enemy" value="Conjurer"/>
     <property name="reward">[
@@ -78,21 +77,21 @@
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="179" template="../../../../common/maps/obj/waypoint.tx" x="180.342" y="117.105"/>
-  <object id="180" template="../../../../common/maps/obj/waypoint.tx" x="95.0087" y="198.272"/>
-  <object id="181" template="../../../../common/maps/obj/waypoint.tx" x="432.342" y="215.605"/>
-  <object id="183" template="../../../../common/maps/obj/waypoint.tx" x="363.842" y="262.605"/>
-  <object id="184" template="../../../../common/maps/obj/waypoint.tx" x="225.342" y="251.605"/>
-  <object id="185" template="../../../../common/maps/obj/manashards.tx" x="402.887" y="196.423"/>
-  <object id="186" template="../../../../common/maps/obj/manashards.tx" x="122.797" y="182.787"/>
-  <object id="190" template="../../../../common/maps/obj/waypoint.tx" x="317.342" y="262.605"/>
-  <object id="197" template="../../../../common/maps/obj/door_up.tx" x="366.85" y="466.85" width="31" height="14.3333">
+  <object id="179" template="../../../common/maps/obj/waypoint.tx" x="180.342" y="117.105"/>
+  <object id="180" template="../../../common/maps/obj/waypoint.tx" x="95.0087" y="198.272"/>
+  <object id="181" template="../../../common/maps/obj/waypoint.tx" x="432.342" y="215.605"/>
+  <object id="183" template="../../../common/maps/obj/waypoint.tx" x="363.842" y="262.605"/>
+  <object id="184" template="../../../common/maps/obj/waypoint.tx" x="225.342" y="251.605"/>
+  <object id="185" template="../../../common/maps/obj/manashards.tx" x="402.887" y="196.423"/>
+  <object id="186" template="../../../common/maps/obj/manashards.tx" x="122.797" y="182.787"/>
+  <object id="190" template="../../../common/maps/obj/waypoint.tx" x="317.342" y="262.605"/>
+  <object id="197" template="../../../common/maps/obj/door_up.tx" x="366.85" y="466.85" width="31" height="14.3333">
    <properties>
     <property name="direction" value="down"/>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/zedruu/zedruu_f1.tmx"/>
+    <property name="teleport" value="../common/maps/map/zedruu/zedruu_f1.tmx"/>
    </properties>
   </object>
-  <object id="201" template="../../../../common/maps/obj/enemy.tx" x="270.342" y="69.105">
+  <object id="201" template="../../../common/maps/obj/enemy.tx" x="270.342" y="69.105">
    <properties>
     <property name="enemy" value="Construct"/>
     <property name="spawn.Easy" type="bool" value="false"/>
@@ -100,32 +99,32 @@
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="203" template="../../../../common/maps/obj/waypoint.tx" x="58.1753" y="311.605"/>
-  <object id="204" template="../../../../common/maps/obj/waypoint.tx" x="50.8421" y="352.105"/>
-  <object id="205" template="../../../../common/maps/obj/waypoint.tx" x="321.842" y="182.105"/>
-  <object id="206" template="../../../../common/maps/obj/waypoint.tx" x="295.842" y="374.605"/>
-  <object id="207" template="../../../../common/maps/obj/enemy.tx" x="349.675" y="294.772">
+  <object id="203" template="../../../common/maps/obj/waypoint.tx" x="58.1753" y="311.605"/>
+  <object id="204" template="../../../common/maps/obj/waypoint.tx" x="50.8421" y="352.105"/>
+  <object id="205" template="../../../common/maps/obj/waypoint.tx" x="321.842" y="182.105"/>
+  <object id="206" template="../../../common/maps/obj/waypoint.tx" x="295.842" y="374.605"/>
+  <object id="207" template="../../../common/maps/obj/enemy.tx" x="349.675" y="294.772">
    <properties>
     <property name="enemy" value="Dwarf Demolisher"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="183,163"/>
    </properties>
   </object>
-  <object id="209" template="../../../../common/maps/obj/enemy.tx" x="53.6753" y="269.272">
+  <object id="209" template="../../../common/maps/obj/enemy.tx" x="53.6753" y="269.272">
    <properties>
     <property name="enemy" value="Cave Spider"/>
     <property name="threatRange" type="int" value="20"/>
     <property name="waypoints" value="203,227,180,227"/>
    </properties>
   </object>
-  <object id="210" template="../../../../common/maps/obj/enemy.tx" x="70.3421" y="363.938">
+  <object id="210" template="../../../common/maps/obj/enemy.tx" x="70.3421" y="363.938">
    <properties>
     <property name="enemy" value="Cave Spider"/>
     <property name="threatRange" type="int" value="20"/>
     <property name="waypoints" value="224,204"/>
    </properties>
   </object>
-  <object id="212" template="../../../../common/maps/obj/enemy.tx" x="340.342" y="202.605">
+  <object id="212" template="../../../common/maps/obj/enemy.tx" x="340.342" y="202.605">
    <properties>
     <property name="enemy" value="Human elite"/>
     <property name="spawn.Easy" type="bool" value="false"/>
@@ -134,95 +133,95 @@
     <property name="waypoints" value="205,214,183,190,206,213,206,190,183,214"/>
    </properties>
   </object>
-  <object id="213" template="../../../../common/maps/obj/waypoint.tx" x="250.842" y="376.105"/>
-  <object id="214" template="../../../../common/maps/obj/waypoint.tx" x="365.342" y="184.105"/>
-  <object id="215" template="../../../../common/maps/obj/booster.tx" x="9.34211" y="353.605">
+  <object id="213" template="../../../common/maps/obj/waypoint.tx" x="250.842" y="376.105"/>
+  <object id="214" template="../../../common/maps/obj/waypoint.tx" x="365.342" y="184.105"/>
+  <object id="215" template="../../../common/maps/obj/booster.tx" x="9.34211" y="353.605">
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;APC&quot; ],
+    &quot;editions&quot;: [ &quot;INV&quot;, &quot;PLS&quot;, &quot;APC&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 10,
     &quot;rarity&quot;: [ &quot;Common&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;APC&quot; ],
+    &quot;editions&quot;: [ &quot;INV&quot;, &quot;PLS&quot;, &quot;APC&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
     &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;VIS&quot; ],
+    &quot;editions&quot;: [ &quot;INV&quot;, &quot;PLS&quot;, &quot;APC&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
   }
 ]
 </property>
    </properties>
   </object>
-  <object id="216" template="../../../../common/maps/obj/booster.tx" x="320.842" y="52.605">
+  <object id="216" template="../../../common/maps/obj/booster.tx" x="320.842" y="52.605">
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;VIS&quot; ],
+    &quot;editions&quot;: [ &quot;INV&quot;, &quot;PLS&quot;, &quot;APC&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 10,
     &quot;rarity&quot;: [ &quot;Common&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;4ED&quot; ],
+    &quot;editions&quot;: [ &quot;INV&quot;, &quot;PLS&quot;, &quot;APC&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
     &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;INV&quot; ],
+    &quot;editions&quot;: [ &quot;INV&quot;, &quot;PLS&quot;, &quot;APC&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
   }
 ]
 </property>
    </properties>
   </object>
-  <object id="217" template="../../../../common/maps/obj/booster.tx" x="439.342" y="284.105">
+  <object id="217" template="../../../common/maps/obj/booster.tx" x="439.342" y="284.105">
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;ONS&quot; ],
+    &quot;editions&quot;: [ &quot;INV&quot;, &quot;PLS&quot;, &quot;APC&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 10,
     &quot;rarity&quot;: [ &quot;Common&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;ULG&quot; ],
+    &quot;editions&quot;: [ &quot;INV&quot;, &quot;PLS&quot;, &quot;APC&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
     &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;7ED&quot; ],
+    &quot;editions&quot;: [ &quot;INV&quot;, &quot;PLS&quot;, &quot;APC&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
   }
 ]
 </property>
    </properties>
   </object>
-  <object id="218" template="../../../../common/maps/obj/waypoint.tx" x="447.842" y="87.4386"/>
-  <object id="219" template="../../../../common/maps/obj/waypoint.tx" x="178.842" y="81.1053"/>
-  <object id="220" template="../../../../common/maps/obj/waypoint.tx" x="417.842" y="134.439"/>
-  <object id="221" template="../../../../common/maps/obj/waypoint.tx" x="490.175" y="316.105"/>
-  <object id="222" template="../../../../common/maps/obj/enemy.tx" x="443.675" y="339.439">
+  <object id="218" template="../../../common/maps/obj/waypoint.tx" x="447.842" y="87.4386"/>
+  <object id="219" template="../../../common/maps/obj/waypoint.tx" x="178.842" y="81.1053"/>
+  <object id="220" template="../../../common/maps/obj/waypoint.tx" x="417.842" y="134.439"/>
+  <object id="221" template="../../../common/maps/obj/waypoint.tx" x="490.175" y="316.105"/>
+  <object id="222" template="../../../common/maps/obj/enemy.tx" x="443.675" y="339.439">
    <properties>
     <property name="enemy" value="Dwarf Demolisher"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="183,163"/>
    </properties>
   </object>
-  <object id="223" template="../../../../common/maps/obj/gate.tx" x="257.175" y="456.105">
+  <object id="223" template="../../../common/maps/obj/gate.tx" x="257.175" y="456.105">
    <properties>
     <property name="dialog">[{
     &quot;text&quot;:&quot;This door is locked&quot;,
@@ -238,22 +237,22 @@
 }]</property>
    </properties>
   </object>
-  <object id="224" template="../../../../common/maps/obj/waypoint.tx" x="95.8421" y="398.105"/>
-  <object id="227" template="../../../../common/maps/obj/waypoint.tx" x="54.8421" y="242.105"/>
-  <object id="228" template="../../../../common/maps/obj/enemy.tx" x="141.842" y="258.605">
+  <object id="224" template="../../../common/maps/obj/waypoint.tx" x="95.8421" y="398.105"/>
+  <object id="227" template="../../../common/maps/obj/waypoint.tx" x="54.8421" y="242.105"/>
+  <object id="228" template="../../../common/maps/obj/enemy.tx" x="141.842" y="258.605">
    <properties>
     <property name="enemy" value="Dwarf Mercenary"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="229" template="../../../../common/maps/obj/enemy.tx" x="200.342" y="127.605">
+  <object id="229" template="../../../common/maps/obj/enemy.tx" x="200.342" y="127.605">
    <properties>
     <property name="enemy" value="Geist"/>
     <property name="threatRange" type="int" value="20"/>
     <property name="waypoints" value="180,163,181"/>
    </properties>
   </object>
-  <object id="230" template="../../../../common/maps/obj/enemy.tx" x="348.342" y="70.6053">
+  <object id="230" template="../../../common/maps/obj/enemy.tx" x="348.342" y="70.6053">
    <properties>
     <property name="enemy" value="Construct"/>
     <property name="spawn.Easy" type="bool" value="false"/>

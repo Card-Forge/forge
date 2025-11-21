@@ -1,11 +1,11 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="123">
  <editorsettings>
-  <export target="wastetown..tmx" format="tmx" />
+  <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx" />
- <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx" />
- <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx" />
+ <tileset firstgid="1" source="../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../common/maps/tileset/main-nocollide.tsx"/>
  <layer id="1" name="Background" width="60" height="30">
   <data encoding="base64" compression="zlib">
    eJzt1EEOgDAIRNFuvaj3P4L7RlvBDr+tkLBTnAeJ51HKCfabIvMRbjpbese4RtUfjLSXKKVhJmcv08q3+vLuSs5WpqdnZjXWtdt/RW0a4R2xH8po8UbNoL3eGbQnwlvPo00e9y4uy51nyHOXT2GNMkfvtlfkjVu78WazeiP3ofiGtdTz1Tv0ZmrlIi0qO51T7abzZGdnZ2fv3Rde8Ezx
@@ -23,147 +23,154 @@
  </layer>
  <layer id="7" name="Bridge" width="60" height="30">
   <properties>
-   <property name="spriteLayer" type="bool" value="true" />
+   <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
    eJztWNtSE0EQndqtCFqVF0iV7755RyLlDwjkYvQv/A0uChEBb38if+CLDxY/AUQgJhSgeHuz2+lTaSazm90QAqnKqeqandnZmTl929415uLw6ZKtM8TFYD57uj+05xCDhLls5zk+bN6w7ZfeHWVg8NkzVgn6foxzweaUbd28ViJ+ZZInwnO/h3w3Msa8G7HyMdO7dRlsl2cxZ21c948vhMZUSV6Etr/TJd97o61rcHTlrGDbPCWZDey5X4Wte66vjj5KtmY39n1DXA7HjPk1ZnlDcpn0fOPm89m2SJZCy9mHtO/hRgq+J8TvJ8kxyYdxY27mjDlSY+sjlnMconxB80XMvSSeq6E940Fw+j779rS0SXIx5iyEsdP+czwCH+L4nmSKeE6QPCS5IzJJcnjFmDV17ijbdfL7FSfmlh1fZv5z1C+IHh4nsBn8Py4//yaOt4jH6rjlc5vkbs4/1+Xq8joLXJ9FDlp09JAEUfmKuX4fs/acjOCokcSXgW5riV6Ac8KMJ9fnieMacf1BnP+IT3N+isO6suPzq6clDr2u/aPWK0lOWJS84IJj9IHEJ8fq/ZzlzLb/K+2x0kH2Wus6Dd9+YVnlhCTg+OVclZc45hz9drx93onow4WvvusHSqq+OgsmIvJXXvRyWbCS0q6DjOF/gehabdBRiXj3FGW8HKTjXpF6HlIWQZ/3Kcnas6r+6wd433mK2b2gPXZrNFYXKXbgPK10w/VcUz1bE+Eaf1vWKqh1C1IHnhdnrc+GnO1r0B7D20GL8558j8BO4IZr1pnLD8825Rq1rdYj1t6V+zPKJ7rh78tDOg8vSF3hy8sFdf6icIKNwKGp5mgOPr64tyX8MO9bYM+0qOpf+EFZ9KlF/5eIQ0Xmud9JUe/7XXXupkhRaq9tZ7wetPuwbnEP363wB+5zbY/aGfZhO7wW7low5qv7XOyLzyBndHoH7Sg+NdXC1loX4KZt5/Juyv78LNY98Oi/GyB/zCibcp24q/YB8H/EjRfYQNsRnGuevquLuvOcGwM6R0L3SWpLPQfvFuRcxAHyAHKnjo1C4M/PsBVi1uXN41WPv1WVXmFnzMc475fEJzsB/wBYlpTvuDZxz+3b+x9+f0Ik
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="488.817" y="478.704" width="41.5" height="16">
+  <object id="38" template="../../../common/maps/obj/entry_up.tx" x="488.817" y="478.704" width="41.5" height="16">
    <properties>
-    <property name="teleport" value="" />
+    <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="48" template="../../../../common/maps/obj/treasure.tx" x="210.657" y="215.069">
+  <object id="48" template="../../../common/maps/obj/treasure.tx" x="210.657" y="215.069">
    <properties>
     <property name="reward">[{
-  "type": "randomCard",
-  "count": 2,
-  "colors": [ "Green" ]
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;Green&quot; ]
 },{
-  "type": "randomCard",
-  "count": 1,
-  "probability": 0.5,
-  "rarity": [ "rare" ],
-  "colors": [ "Green" ]
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;Green&quot; ]
 },{
-  "type": "randomCard",
-  "count": 3,
-  "addMaxCount": 2,
-  "colors": [ "Green" ]
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2,
+  &quot;colors&quot;: [ &quot;Green&quot; ]
 }]</property>
    </properties>
   </object>
-  <object id="63" template="../../../../common/maps/obj/gold.tx" x="161.217" y="237.673" />
-  <object id="68" template="../../../../common/maps/obj/gold.tx" x="769.875" y="455.247" />
-  <object id="71" template="../../../../common/maps/obj/manashards.tx" x="246.784" y="224.533" />
-  <object id="72" template="../../../../common/maps/obj/booster.tx" x="178.912" y="251.368">
+  <object id="63" template="../../../common/maps/obj/gold.tx" x="161.217" y="237.673"/>
+  <object id="68" template="../../../common/maps/obj/gold.tx" x="769.875" y="455.247"/>
+  <object id="71" template="../../../common/maps/obj/manashards.tx" x="246.784" y="224.533"/>
+  <object id="72" template="../../../common/maps/obj/booster.tx" x="178.912" y="251.368">
    <properties>
     <property name="reward">[
   {
-    "type": "card",
-    "count": 10,
-    "colors": ["Green"],
-    "rarity": [ "Common" ]
+    &quot;editions&quot;: [ &quot;MIR&quot;, &quot;VIS&quot;, &quot;WTH&quot;, &quot;POR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;colors&quot;: [&quot;Green&quot;],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
   },
   {
-    "type": "card",
-    "count": 3,
-    "colors": ["Green"],
-    "rarity": [ "Uncommon" ]
+    &quot;editions&quot;: [ &quot;MIR&quot;, &quot;VIS&quot;, &quot;WTH&quot;, &quot;POR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [&quot;Green&quot;],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
   },
   {
-    "type": "Green",
-    "count": 1,
-    "colors": ["Colorless"],
-    "rarity": [ "Rare" ]
+    &quot;editions&quot;: [ &quot;MIR&quot;, &quot;VIS&quot;, &quot;WTH&quot;, &quot;POR&quot; ],
+    &quot;type&quot;: &quot;Green&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [&quot;Colorless&quot;],
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
   }
-]</property>
+]
+</property>
    </properties>
   </object>
-  <object id="84" template="../../../../common/maps/obj/waypoint.tx" x="650.485" y="448.365" />
-  <object id="85" template="../../../../common/maps/obj/waypoint.tx" x="236.985" y="289.365" />
-  <object id="105" template="../../../../common/maps/obj/enemy.tx" x="221.39" y="243.01">
+  <object id="84" template="../../../common/maps/obj/waypoint.tx" x="650.485" y="448.365"/>
+  <object id="85" template="../../../common/maps/obj/waypoint.tx" x="236.985" y="289.365"/>
+  <object id="105" template="../../../common/maps/obj/enemy.tx" x="221.39" y="243.01">
    <properties>
     <property name="effect">{
- &quot;startBattleWithCard&quot;: [ &quot;Mountain|LEA&quot;, &quot;Forest|LEA&quot;, &quot;Mana Flare|LEA&quot;, &quot;Primal Rage|STH&quot; ]
+	&quot;startBattleWithCard&quot;: [ &quot;First Head of the Hydra&quot;, &quot;Second Head of the Hydra&quot;, &quot;Third Head of the Hydra&quot;, &quot;Fourth Head of the Hydra&quot;, &quot;Fifth Head of the Hydra&quot;, &quot;Sixth Head of the Hydra&quot; ]
 }</property>
-    <property name="enemy" value="The Hydra of Shandalaar" />
+    <property name="enemy" value="The Hydra of Shandalaar"/>
     <property name="reward">[
   {
-    "type": "item",
-    "probability": 1,
-    "count": 1,
-    "itemName": "Presence of the Hydra"
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Presence of the Hydra&quot;
   }
-]</property>
-    <property name="spawn.Easy" type="bool" value="false" />
-    <property name="spawn.Normal" type="bool" value="false" />
-    <property name="speedModifier" type="float" value="10" />
-    <property name="threatRange" type="int" value="50" />
+]
+</property>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="107" template="../../../../common/maps/obj/enemy.tx" x="411.402" y="265.155">
+  <object id="107" template="../../../common/maps/obj/enemy.tx" x="411.402" y="265.155">
    <properties>
-    <property name="enemy" value="Hydra" />
-    <property name="threatRange" type="int" value="50" />
-    <property name="waypoints" value="117,114,85,114,117" />
+    <property name="enemy" value="Hydra"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="117,114,85,114,117"/>
    </properties>
   </object>
-  <object id="108" template="../../../../common/maps/obj/collision.tx" x="-0.122016" y="479.744" width="962.195" height="16" />
-  <object id="109" template="../../../../common/maps/obj/collision.tx" x="-2.27555" y="-17.028" width="962.195" height="16" />
-  <object id="110" template="../../../../common/maps/obj/collision.tx" x="960" y="-17.383" width="16" height="514.099" />
-  <object id="111" template="../../../../common/maps/obj/collision.tx" x="-17.3333" y="-15.0495" width="16" height="514.099" />
-  <object id="112" template="../../../../common/maps/obj/enemy.tx" x="681.5" y="188.5">
+  <object id="108" template="../../../common/maps/obj/collision.tx" x="-0.122016" y="479.744" width="962.195" height="16"/>
+  <object id="109" template="../../../common/maps/obj/collision.tx" x="-2.27555" y="-17.028" width="962.195" height="16"/>
+  <object id="110" template="../../../common/maps/obj/collision.tx" x="960" y="-17.383" width="16" height="514.099"/>
+  <object id="111" template="../../../common/maps/obj/collision.tx" x="-17.3333" y="-15.0495" width="16" height="514.099"/>
+  <object id="112" template="../../../common/maps/obj/enemy.tx" x="681.5" y="188.5">
    <properties>
-    <property name="enemy" value="Hydra" />
-    <property name="threatRange" type="int" value="50" />
-    <property name="waypoints" value="78,99,78,98,93,98,78" />
+    <property name="enemy" value="Hydra"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="78,99,78,98,93,98,78"/>
    </properties>
   </object>
-  <object id="114" template="../../../../common/maps/obj/waypoint.tx" x="356.5" y="274.5" />
-  <object id="115" template="../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="816.5" y="95" width="16" height="16" visible="1">
+  <object id="114" template="../../../common/maps/obj/waypoint.tx" x="356.5" y="274.5"/>
+  <object id="115" template="../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="816.5" y="95" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[
   {
-    "text":"Dangerous Beast Ahead ! Turn back now !",
-    "options":[
-      { "name":"Walk away" }
+    &quot;text&quot;:&quot;Dangerous Beast Ahead! Turn back now!&quot;,
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;Walk away&quot; }
 ]
 }
 ]</property>
    </properties>
   </object>
-  <object id="116" template="../../../../common/maps/obj/enemy.tx" x="928" y="176">
+  <object id="116" template="../../../common/maps/obj/enemy.tx" x="928" y="176">
    <properties>
-    <property name="enemy" value="Parrot" />
-    <property name="threatRange" type="int" value="50" />
-    <property name="waypoints" value="119,118,84" />
+    <property name="enemy" value="Parrot"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="119,118,84"/>
    </properties>
   </object>
-  <object id="117" template="../../../../common/maps/obj/waypoint.tx" x="527.5" y="235" />
-  <object id="118" template="../../../../common/maps/obj/waypoint.tx" x="923.5" y="334" />
-  <object id="119" template="../../../../common/maps/obj/waypoint.tx" x="919" y="95" />
-  <object id="121" template="../../../../common/maps/obj/enemy.tx" x="222.406" y="242.409">
+  <object id="117" template="../../../common/maps/obj/waypoint.tx" x="527.5" y="235"/>
+  <object id="118" template="../../../common/maps/obj/waypoint.tx" x="923.5" y="334"/>
+  <object id="119" template="../../../common/maps/obj/waypoint.tx" x="919" y="95"/>
+  <object id="121" template="../../../common/maps/obj/enemy.tx" x="222.406" y="242.409">
    <properties>
     <property name="effect">{
- &quot;startBattleWithCard&quot;: [ &quot;Mountain|LEA&quot;, &quot;Forest|LEA&quot;, &quot;Mana Flare|LEA&quot;, &quot;Primal Rage|STH&quot; ]
+	&quot;startBattleWithCard&quot;: [ &quot;First Head of the Hydra&quot;, &quot;Second Head of the Hydra&quot;, &quot;Third Head of the Hydra&quot;, &quot;Fourth Head of the Hydra&quot;, &quot;Fifth Head of the Hydra&quot;, &quot;Sixth Head of the Hydra&quot; ],
+	&quot;startBattleWithCardInCommandZone&quot;: [ &quot;The Hydra of Shandalar&quot; ]
 }</property>
-<property name="enemy" value="The Hydra of Shandalaar" />
+    <property name="enemy" value="The Hydra of Shandalaar"/>
     <property name="reward">[
   {
-    "type": "item",
-    "probability": 1,
-    "count": 1,
-    "itemName": "Presence of the Hydra"
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Presence of the Hydra&quot;
   }
-]</property>
-    <property name="spawn.Easy" type="bool" value="true" />
-    <property name="spawn.Hard" type="bool" value="false" />
-    <property name="spawn.Normal" type="bool" value="true" />
-    <property name="speedModifier" type="float" value="10" />
-    <property name="threatRange" type="int" value="50" />
+]
+</property>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
  </objectgroup>
