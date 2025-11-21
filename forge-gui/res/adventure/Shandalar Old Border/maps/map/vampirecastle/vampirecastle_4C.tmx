@@ -40,7 +40,7 @@
   </object>
   <object id="79" template="../../../common/maps/obj/enemy.tx" x="744.5" y="143.954">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Sorin's Boss Effect&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Sorin's Boss Effect&quot;]
 }</property>
     <property name="enemy" value="Sorin"/>
     <property name="reward">[
@@ -74,37 +74,37 @@
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Infernal Grasp&quot;
+		&quot;cardName&quot;: &quot;Terror|LEA&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Crippling Fear&quot;
+		&quot;cardName&quot;: &quot;Mutilate|TOR&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;itemName&quot;: &quot;Deadly Dispute&quot;
+		&quot;itemName&quot;: &quot;Dark Ritual|LEA&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;itemName&quot;: &quot;Village Rites&quot;
+		&quot;itemName&quot;: &quot;Necrologia|VIS&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Tragic Slip&quot;
+		&quot;cardName&quot;: &quot;Dark Banishing|ICE&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Defile&quot;
+		&quot;cardName&quot;: &quot;Vendetta|MMQ&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
@@ -116,37 +116,37 @@
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Infernal Grasp&quot;
+		&quot;cardName&quot;: &quot;Terror|LEA&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Crippling Fear&quot;
+		&quot;cardName&quot;: &quot;Mutilate|TOR&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;itemName&quot;: &quot;Deadly Dispute&quot;
+		&quot;itemName&quot;: &quot;Dark Ritual|LEA&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;itemName&quot;: &quot;Village Rites&quot;
+		&quot;itemName&quot;: &quot;Necrologia|VIS&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Tragic Slip&quot;
+		&quot;cardName&quot;: &quot;Dark Banishing|ICE&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Defile&quot;
+		&quot;cardName&quot;: &quot;Vendetta|MMQ&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
@@ -164,37 +164,37 @@
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Infernal Grasp&quot;
+		&quot;cardName&quot;: &quot;Terror|LEA&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Crippling Fear&quot;
+		&quot;cardName&quot;: &quot;Mutilate|TOR&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;itemName&quot;: &quot;Deadly Dispute&quot;
+		&quot;itemName&quot;: &quot;Dark Ritual|LEA&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;itemName&quot;: &quot;Village Rites&quot;
+		&quot;itemName&quot;: &quot;Necrologia|VIS&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Tragic Slip&quot;
+		&quot;cardName&quot;: &quot;Dark Banishing|ICE&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Defile&quot;
+		&quot;cardName&quot;: &quot;Vendetta|MMQ&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
@@ -206,37 +206,37 @@
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Infernal Grasp&quot;
+		&quot;cardName&quot;: &quot;Terror|LEA&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Crippling Fear&quot;
+		&quot;cardName&quot;: &quot;Mutilate|TOR&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;itemName&quot;: &quot;Deadly Dispute&quot;
+		&quot;itemName&quot;: &quot;Dark Ritual|LEA&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;itemName&quot;: &quot;Village Rites&quot;
+		&quot;itemName&quot;: &quot;Necrologia|VIS&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Tragic Slip&quot;
+		&quot;cardName&quot;: &quot;Dark Banishing|ICE&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,
 		&quot;probability&quot;: 0.5,
 		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Defile&quot;
+		&quot;cardName&quot;: &quot;Vendetta|MMQ&quot;
 	},
 	{
 		&quot;type&quot;: &quot;card&quot;,

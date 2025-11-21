@@ -45,7 +45,7 @@
   <object id="48" template="../../../common/maps/obj/treasure.tx" x="303.833" y="33.3333"/>
   <object id="50" template="../../../common/maps/obj/enemy.tx" x="214.902" y="272.059">
    <properties>
-    <property name="enemy" value="Devil"/>
+    <property name="enemy" value="Imp"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="85,84,83,86"/>
    </properties>
@@ -65,7 +65,7 @@
   </object>
   <object id="64" template="../../../common/maps/obj/enemy.tx" x="179.5" y="156.75">
    <properties>
-    <property name="enemy" value="Devil"/>
+    <property name="enemy" value="Imp"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="86,85,85,84,83,86"/>
    </properties>
@@ -145,7 +145,7 @@
   </object>
   <object id="80" template="../../../common/maps/obj/enemy.tx" x="128" y="246.5">
    <properties>
-    <property name="enemy" value="Devil"/>
+    <property name="enemy" value="Imp"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="86,85,85,84,83,86"/>
    </properties>
@@ -158,7 +158,7 @@
   </object>
   <object id="82" template="../../../common/maps/obj/enemy.tx" x="237" y="199">
    <properties>
-    <property name="enemy" value="Devil"/>
+    <property name="enemy" value="Imp"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="84,83,86,85"/>
    </properties>
