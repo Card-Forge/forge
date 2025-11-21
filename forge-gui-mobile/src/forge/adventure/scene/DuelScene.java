@@ -37,6 +37,7 @@ import forge.screens.LoadingOverlay;
 import forge.screens.TransitionScreen;
 import forge.screens.match.MatchController;
 import forge.sound.MusicPlaylist;
+import forge.sound.SoundSystem;
 import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
 import forge.util.Aggregates;
@@ -133,7 +134,7 @@ public class DuelScene extends ForgeScene {
     void afterGameEnd(String enemyName, boolean winner) {
         Forge.advFreezePlayerControls = winner;
         endRunnable = () -> Gdx.app.postRunnable(() -> {
-            GameHUD.getInstance().switchAudio();
+            GameHUD.getInstance().updateBGM();
             dungeonEffect = null;
             callbackExit = false;
             Forge.clearTransitionScreen();
@@ -192,7 +193,7 @@ public class DuelScene extends ForgeScene {
 
     @Override
     public void enter() {
-        GameHUD.getInstance().unloadAudio();
+        SoundSystem.instance.stopBackgroundMusic();
         GameType mainGameType;
         boolean isDeckMissing = false;
         String isDeckMissingMsg = "";
