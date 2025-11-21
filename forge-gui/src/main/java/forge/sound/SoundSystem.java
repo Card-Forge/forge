@@ -340,9 +340,9 @@ public class SoundSystem {
         List<String> out = new ArrayList<>(5);
         if (adventureDirectory != null) {
             //Check user folders for matching music folder. Last path part should be the plane name.
-            String[] pathParts = adventureDirectory.split(ForgeConstants.PATH_SEPARATOR);
+            String directoryName = new File(adventureDirectory).getName();
             for(String path : SOUND_RESOURCE_PATHS) {
-                out.add(path + subPath + pathParts[pathParts.length - 1] + ForgeConstants.PATH_SEPARATOR);
+                out.add(path + subPath + directoryName + ForgeConstants.PATH_SEPARATOR);
             }
             out.add(adventureDirectory + subPath);
             out.add(ForgeConstants.ADVENTURE_COMMON_DIR + subPath);
