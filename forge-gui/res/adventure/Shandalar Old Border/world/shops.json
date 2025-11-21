@@ -2262,11 +2262,11 @@
 	  "sprite":"DwarfShop",
 	  "rewards": [ { "count":8, "type":"Union", "cardUnion": [ { "subTypes": ["Dwarf"] }, { "cardText": "Dwarf" }, { "cardText": "Dwarves" } ] } ]
 	},{
-	  "name":"Devil",
-	  "description":"Deal With the Devil",
+	  "name":"Imp",
+	  "description":"Imp's Bargain",
 	  "spriteAtlas":"maps/tileset/buildings.atlas",
 	  "sprite":"DevilShop",
-	  "rewards": [ { "count":8, "type":"Union", "cardUnion": [ { "subTypes": ["Devil"] }, { "cardText": "Devil" } ] } ]
+	  "rewards": [ { "count":8, "type":"Union", "cardUnion": [ { "subTypes": ["Imp"] }, { "cardText": "Imp" } ] } ]
 	},{                                    
 	"name":"ToDo", 
 	 "description":"To Do",

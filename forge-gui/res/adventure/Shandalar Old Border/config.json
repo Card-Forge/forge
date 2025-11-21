@@ -30,7 +30,7 @@
     "Time Walk",
     "Time Vault"
   ],
-  "restrictedEditions": [],
+  "restrictedEditions": ["8ED", "P8ED", "MRD"],
   "allowedEditions": [
     "LEA", "LEB", "2ED", "3ED", "ARN", "ATQ", "LEG", "DRK", "FEM", "4ED",
     "ICE", "CHR", "HML", "ALL", "MIR", "VIS", "5ED", "POR", "WTH", "TMP",

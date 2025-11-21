@@ -711,7 +711,7 @@
 		"iconName": "Hivestone",
 		"effect": {
 			"startBattleWithCard": [
-				"Hivestone"
+				"Metallic Sliver|TMP"
 			]
 		}
 	},
@@ -876,7 +876,7 @@
 		"cost": 6500,
 		"effect": {
 			"startBattleWithCard": [
-				"Thunder Wall"
+				"Thunder Wall|LEG"
 			]
 		}
 	},
@@ -1435,7 +1435,7 @@
 		"cost": 6000,
 		"effect": {
 			"startBattleWithCard": [
-				"Disrupting Scepter"
+				"Disrupting Scepter|LEA"
 			]
 		}
 	},
@@ -2073,7 +2073,7 @@
 		"cost": 4000,
 		"effect": {
 			"startBattleWithCard": [
-				"Sword of the Chosen"
+				"Sword of the Chosen|STH"
 			]
 		}
 	},
@@ -2093,7 +2093,7 @@
 		"cost": 9000,
 		"effect": {
 			"startBattleWithCard": [
-				"Celestial Prism"
+				"Celestial Prism|LEA"
 			]
 		}
 	},
@@ -2104,7 +2104,7 @@
 		"cost": 8000,
 		"effect": {
 			"startBattleWithCard": [
-				"Credit Voucher"
+				"Credit Voucher|MMQ"
 			]
 		}
 	},
@@ -2125,7 +2125,7 @@
 		"cost": 3000,
 		"effect": {
 			"startBattleWithCard": [
-				"Whalebone Glider"
+				"Whalebone Glider|WTH"
 			]
 		}
 	},
