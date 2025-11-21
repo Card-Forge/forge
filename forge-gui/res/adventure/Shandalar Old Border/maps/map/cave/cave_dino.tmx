@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="58">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxr42RgaBvFo3gUj+JRPIpH8YjAAIblHPI=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxz42RgcBvFo3gE4lUcDAxrOOhvrwcQP+akr90gvz4F0iAAsns1jf0Osm811E5RBgRgY6Ct3z04EXbV8ULoKCT7vWjk32dA/ByIV3IwYAW0shfZfpDdy6H21QD9vhzIf0GHtAWzGwToZScMu0Pj25WOdiKnM1rHK63sBQB/oaSI
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="192" y="282" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="53" template="../../obj/enemy.tx" x="200.615" y="182.192">
+   <properties>
+    <property name="enemy" value="Dinosaur Elite"/>
+    <property name="speedModifier" type="float" value="3"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/manashards.tx" x="184.154" y="129.366"/>
+  <object id="55" template="../../obj/gold.tx" x="195.799" y="151.069"/>
+  <object id="56" template="../../obj/gold.tx" x="168.802" y="171.184"/>
+  <object id="57" template="../../obj/gold.tx" x="238.147" y="172.773"/>
+ </objectgroup>
+</map>

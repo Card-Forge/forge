@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="29" height="45" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="91">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/phyrexia/FurnaceTiles.tsx"/>
+ <layer id="6" name="Collision" width="29" height="45">
+  <data encoding="base64" compression="zlib">
+   eJztlksOgDAIRN249fgezBO5MI0NQoHyaUyYpBssfTql1G0rleJ17t+RwbyOd2Sw4do9O4vJxb2YmJ8RTKx2INO7vmDttNGEPZtlWt7Zk0n56LXHvaeStbyYkpg3k/OMq+VZze6nhdvnwV5LnQ+PMwMFa6vFJLla5gpvo+vWysz+Ts8akjIl8zVMyrdIbyN7PMXE7kvNXaBlYueey7EyV3lrnVdM/T79mVn/YDFMaq3snjDqtVH9NjIH5o/uTekc6ztIYsV8dAPyjKyE
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="29" height="45">
+  <data encoding="base64" compression="zlib">
+   eJztV0EKwzAMy3Wf6TP6L+8Yf7oMZmaMU7xVdsrIQRRCiGJZStL90dq+sPCnoK215xtVnC8u3j7cvYC7qzqr65WaaQJnZp1aS+klOzp34D7s2h5QnqYv10JwWt0ie7zKyT/UyeB+VmgbWUt6ruchcjvyKQ3GUf71zj0LySwip3fr52xORD4FPehF66VKbas9hLpTNSedrJvhoVEetabIOvWZQOrrnUVobRHz7srJwT7JuYzgPPOqrTMjK9nazniD6fxF+oR890XvixlZyXjHz6gzAmRWvH+i0TiC86q3MrRenGMcewPvFw==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="29" height="45">
+  <data encoding="base64" compression="zlib">
+   eJztl01qwzAQhb3tZXyMXNBp7EVx6KIh7SJ0V7ozvUYu0xosGB5v5Bn9OFD8YCBEQp9G8yO5aXbtqq9T2zS9sKGtzzwDY9qAjcyg13/GvP6t/b7Yp+DUYM65c4T8+RGcCcasMT486WPamcYUfI+ty8ZOxCcvExnMpJh/NxFTNE+MPczYWmdgan5pfs6/NaYWI2SuifHfDGfWiVz9hlzWctcbV6wLmV930hsHwxkzpdRK0FpcNeUymTx+WmslzPtYYWqy5qM2z1ozch+s7taYlrs1dr4pfuIerbljZbLzsOzRyvwStfnc6vNiOcR8xXOQa91JzFh/yL3Hc+9Pbz/IZTJ5mbInXBar8Uay1ArGfQtmbF5uPMdIjb8U8LMjNTAm+OlR7nuoFLOEn973QWytEvG0vMGkatXK3GPx26Vf/rP220f0PmQz24opFeLK+moQvs3kvZnSh1C574GSzJS1cple/QIbFs7I
+  </data>
+ </layer>
+ <layer id="8" name="Furniture" width="29" height="45">
+  <data encoding="base64" compression="zlib">
+   eJzt1bENACAIRFEmYktlbUNLsOQs/K+jERK4aAYA+E242fbXU0Cp23kM3ED2WOXdWgPQyxxOZP6GPwboqbMIAEoHSxIJJg==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="29" height="45">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztV0EOgCAM80X7JBx5tDGGOJcRt9gtSmjCxQOldN1w2xYW5kWha2VyNsbbErg5X7beA5XOlYlMnZXuvna9/BuKp4r9i8KJ1G7dC+ExP7slFwidMhsWTlRmrXeG9NPKicysrFONS/ant3plHkecjXA59dTQDH5mclr9QfZAj05UDXn8zK6hiLkympcR83M0o4vg/Ov89HIidVp9Qs7P1W/x8P6boN99X/Uz4h3/hMh+28+h9WFk3co3mNbno8F1ZgF9l7NiB3Z3j4A=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="214.619" y="708.832">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/treasure.tx" x="162.35" y="143.684"/>
+  <object id="54" template="../../obj/gold.tx" x="330.774" y="393.463"/>
+  <object id="77" template="../../obj/enemy.tx" x="215.667" y="164">
+   <properties>
+    <property name="enemy" value="Furnace Tormentor"/>
+    <property name="threatRange" value="20"/>
+   </properties>
+  </object>
+  <object id="78" template="../../obj/enemy.tx" x="136.333" y="219.333">
+   <properties>
+    <property name="enemy" value="Furnace Goblin"/>
+    <property name="speedModifier" type="float" value="3"/>
+    <property name="threatRange" value="30"/>
+    <property name="waypoints" value="75,76,74,62"/>
+   </properties>
+  </object>
+  <object id="79" template="../../obj/enemy.tx" x="277.667" y="200">
+   <properties>
+    <property name="enemy" value="Furnace Goblin"/>
+    <property name="speedModifier" type="float" value="3"/>
+    <property name="threatRange" value="30"/>
+    <property name="waypoints" value="76,74,62,75"/>
+   </properties>
+  </object>
+  <object id="80" template="../../obj/enemy.tx" x="294.5" y="531.333">
+   <properties>
+    <property name="enemy" value="Furnace Goblin"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="3"/>
+    <property name="threatRange" value="30"/>
+    <property name="waypoints" value="74,62,75,76"/>
+   </properties>
+  </object>
+  <object id="81" template="../../obj/enemy.tx" x="296" y="629.667">
+   <properties>
+    <property name="enemy" value="Furnace Goblin"/>
+    <property name="speedModifier" type="float" value="3"/>
+    <property name="threatRange" value="30"/>
+    <property name="waypoints" value="74,62,75,76"/>
+   </properties>
+  </object>
+  <object id="82" template="../../obj/enemy.tx" x="154" y="648">
+   <properties>
+    <property name="enemy" value="Furnace Goblin"/>
+    <property name="speedModifier" type="float" value="3"/>
+    <property name="threatRange" value="30"/>
+    <property name="waypoints" value="62,75,76,74"/>
+   </properties>
+  </object>
+  <object id="83" template="../../obj/enemy.tx" x="133.333" y="374.5">
+   <properties>
+    <property name="enemy" value="Furnace Goblin"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="threatRange" value="30"/>
+    <property name="waypoints" value="75,76,74,62"/>
+   </properties>
+  </object>
+  <object id="84" template="../../obj/gold.tx" x="104" y="247"/>
+  <object id="85" template="../../obj/treasure.tx" x="162" y="128.273"/>
+  <object id="86" template="../../obj/booster.tx" x="182.25" y="113">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;colors&quot;: [ &quot;red&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;colors&quot;: [ &quot;red&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;colors&quot;: [ &quot;red&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="87" template="../../obj/enemy.tx" x="134.5" y="519.5">
+   <properties>
+    <property name="enemy" value="Furnace Goblin"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="3"/>
+    <property name="threatRange" value="30"/>
+    <property name="waypoints" value="75,76,74,62"/>
+   </properties>
+  </object>
+  <object id="88" template="../../obj/enemy.tx" x="296.5" y="384">
+   <properties>
+    <property name="enemy" value="Furnace Goblin"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="3"/>
+    <property name="threatRange" value="30"/>
+    <property name="waypoints" value="74,62,75,76"/>
+   </properties>
+  </object>
+  <object id="89" template="../../obj/gold.tx" x="102.5" y="591.75"/>
+  <object id="90" template="../../obj/gold.tx" x="332.333" y="314.333"/>
+ </objectgroup>
+ <objectgroup id="7" name="Waypoints">
+  <object id="62" template="../../obj/waypoint.tx" x="136.061" y="647.864"/>
+  <object id="74" template="../../obj/waypoint.tx" x="295.955" y="648.318"/>
+  <object id="75" template="../../obj/waypoint.tx" x="136.011" y="199.967"/>
+  <object id="76" template="../../obj/waypoint.tx" x="295.953" y="200.866"/>
+ </objectgroup>
+</map>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="60">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxj4mZgYMKCf3FBsAU3cRimHptZpOCBspdY+9DxqL2j9o7aO2rvqL2j9g4lewHgVFIj
+  </data>
+ </layer>
+ <layer id="7" name="Background2" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzllUsKgDAMRLO1N/EQ4udSIn5OKtJzuLKhDQRptZW0Gx8EVKRjMh0LYBkqgEUBrKY2BaJMZr2+shq7K07ouSSo0d3W59+VC9SYhef5dxrjVyvg2Vj7r0Nol5HSaJcNyqdE7zHg3uXZLNk7z6YvP749EOPhl3e5Jv4bl4IekCZ5cGTWXd0e08z3LuCBFLw/ZIjUTM0vcZ9pyrlzKluh+yfezsFcuhya7QVvxjPd
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAOdvGQhykFskAzpLGYAxKTxSKOSz2pAJf7cdlLTf9iA7jshcnRyl58YNTeUXtH7R21dyTbi17uY6sHqGVvHTcCo9dzMD6yGlLsBQA56BrL
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1lUEKwjAQRUPElbmBeIAepyqIB9BjCLpW8TweyYJWN7o0nzI4HWdaW+KHIU3S5OU3yTT3zh0Hzt1ieY1xis/j4NwkVKUU9UnR+ygL0f8aVmXu63WUYINJc/cVrYnmlqI10Rp4m+WpTdo4Pj9fC1i8j8b3FbjSq6xrXvEO557Db8G5mi6hztGUen+5P+u7p+A2ebJUGPenC1ebEyKvU/99pqAUXMszeKXX71kTd5U5t87auaRC2e+SeeXnrYm7jcxdC9fKGdAiMg8xP82N75wqb3DBE7zeYzwEV97fruJceWfIK7h7xfO/zhV5pZDs1HkSvrlXyV56+1zJ/6L1n9T212JSPP3H72ZUH4s6b5N1auN5EryZwXwDUChedQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="192.333" y="272.167" width="32" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="256.5" y="26.3337"/>
+  <object id="51" template="../../obj/treasure.tx" x="143.833" y="26.3333"/>
+  <object id="52" template="../../obj/gold.tx" x="168" y="25"/>
+  <object id="55" template="../../obj/enemy.tx" x="200" y="136.667">
+   <properties>
+    <property name="enemy" value="Frost Titan"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/gold.tx" x="232" y="24.5"/>
+  <object id="57" template="../../obj/enemy.tx" x="293.667" y="72.6667">
+   <properties>
+    <property name="enemy" value="Frost Titan"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/enemy.tx" x="106.333" y="71.3333">
+   <properties>
+    <property name="enemy" value="Frost Titan"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="59" template="../../obj/manashards.tx" x="275.667" y="132"/>
+ </objectgroup>
+</map>

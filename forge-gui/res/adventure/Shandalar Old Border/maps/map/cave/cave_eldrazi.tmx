@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="90">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  &quot;startBattleWithCard&quot;: [ &quot;Howling Mine&quot; ],
+}</property>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAtqOPEjukBBspebHbT2z56+xfdLQNhJz3T1UCCkWr/QObfgSyz6OUOYu2kthsI2UsrvxMT1tS0m1T7iLEfW1gRYxcAq/g0vQ==
+  </data>
+ </layer>
+ <layer id="3" name="Decoration" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzF00sKwCAMBFDprnTTU/fUXUgRQYL5OYkdmJ3JQ8RSbHkPvlmRzL/tWa671RM6o5n9PFevO5ZzNTPDtZgeW3M9ntVd2Ym66N5VO+uuEXeOnkOzy+E81HzO+X7JQ93PHN3If+qxd5nUlyz6HpZUwftEtQ==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNlW0OwiAMhom/ysE2zQ7h9UDxVnMfd/CPENNQuzIBN+OSN0s24Gl5W2i1Um2GrqDUXb/kIOoGefNrdfSSnm5H5j9yG+aFg+hFeNf6gGs9Dkum8d9n4v0gxNYXsvlalBt4ljAlXq0XJ7ZW4FrGS+VYmzPNgefmEjwcFzT5fxcoz5nWUE9q5JzwGOOS4i7hjlqOGTmTjuI8l/C7yeBSvoV3zSvj6T5hfLjva/O+Fdai+RDfVqK1/Qum1EslPpYw6J0k9dLWuUrnsyH9ulftjLruLEjpCS3Qu4o=
+  </data>
+ </layer>
+ <layer id="6" name="Foreground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4CB4SnnQLsAE8QyMTDEAXE8E4R9gBHCpsQ8YvT/BqppBtKzmRkYZgJxC5RNihnIdh4EuvsvEXpAdsHsweYmYsxAVv8HiBUZEe4AxTEoDONI8AM+N+FSjxxesLCchSZOa0Csu0mNT2oBUsN1FIwCbMCNzHIbACWTHOg=
+  </data>
+ </layer>
+ <layer id="7" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2BgQOgA6SUXfKaRuQPhF3oAcsKLVmE8CkYOGE1DhAEAX4MEzA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="180.333" y="271.667" width="73" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/gold.tx" x="191.167" y="31.4167"/>
+  <object id="55" template="../../obj/treasure.tx" x="215.434" y="26.5027"/>
+  <object id="61" template="../../obj/enemy.tx" x="198.008" y="76.1304">
+   <properties>
+    <property name="enemy" value="Eldrazi Devastator"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="88,89"/>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/manashards.tx" x="365.447" y="80.7803"/>
+  <object id="70" template="../../obj/manashards.tx" x="248.677" y="41.304"/>
+  <object id="81" template="../../obj/manashards.tx" x="169.91" y="42.911"/>
+  <object id="82" template="../../obj/enemy.tx" x="109.667" y="141.667">
+   <properties>
+    <property name="enemy" value="Eldrazi"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="83" template="../../obj/enemy.tx" x="375" y="120.667">
+   <properties>
+    <property name="enemy" value="Eldrazi"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="85,84,,86,84"/>
+   </properties>
+  </object>
+  <object id="84" template="../../obj/waypoint.tx" x="376.667" y="155"/>
+  <object id="85" template="../../obj/waypoint.tx" x="374" y="97.6667"/>
+  <object id="86" template="../../obj/waypoint.tx" x="326.333" y="180"/>
+  <object id="88" template="../../obj/waypoint.tx" x="179.333" y="102.333"/>
+  <object id="89" template="../../obj/waypoint.tx" x="229.667" y="43"/>
+ </objectgroup>
+</map>

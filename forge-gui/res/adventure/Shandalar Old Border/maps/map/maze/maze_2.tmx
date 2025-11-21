@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="24" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="67">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="canFailDungeon" type="bool" value="true"/>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="24" height="17">
+  <data encoding="base64" compression="zlib">
+   eJwL42RgCKMAuxHAlJgNwrgAueaTAig1G1kMmzw1wgefO2hhPq3dP5TNRzebmua70dh8bGmTluZTM/zjaGQ+PkDt8g1mHi3SJi3KZWzmY5MDACFee5Y=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="24" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxbzcHAsJpIHMeJH7thwWFEYkJm47KPFDDUzUcH6PqpZf5ToL7HQLyGAzUuqe1+QnZQaj42O2Bmh1HJfBDwwpHWh4r5j3HkSWqZDwJD0Xx85RUI4DM/m4eBYTkw3T0HqlnJgWoeKP294EQVQ7cPBJz58LsBli48oOph9r3AoweEQebCMEg9LvwCzXyYfc/w6HmOZj4A38FgeA==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="24" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJyVlE0OgjAQhcuOblxyGd0ZwHAAl95Mt/5uSbyPihzDNvWlj8kUa5MJgbbfvHnt0Fhjmoy4lMZcZ+LmQhvafr92vZjOvdxzZ+O+u8LS8oGxcbF37wcXnY18sOdGr3zrbOSDsSyMWRVT/kZhv22Mc8IX5kvGw4b6pPajex+/elD/YPV8kr/94QHn1WqCz60NZ8P8gfJ6jdBRmeAtf+sSnkkvauJzDmjkukdaMwo9mn7pj5bjKcLn5LXQeSc+zqtP8JHjVIY8/kwqE+vVtGjepPRr+3HuD6WGlnhXcdek/3M5MHwO9GaqN+BXDh8M+S/ge+rnZP+iT3L5GMypaY7vL2vP4Q+KB9CHuY7W4j7n8iWX+4F7IrXvH768ozl7P2ayk0s=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="144" y="281" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="49" template="../../obj/gold.tx" x="27.167" y="90.167"/>
+  <object id="51" template="../../obj/treasure.tx" x="229.833" y="109.667"/>
+  <object id="52" template="../../obj/gold.tx" x="220.167" y="110.667"/>
+  <object id="53" template="../../obj/treasure.tx" x="242.5" y="124.5"/>
+  <object id="54" template="../../obj/waypoint.tx" x="260.5" y="205"/>
+  <object id="55" template="../../obj/waypoint.tx" x="232.5" y="127"/>
+  <object id="56" template="../../obj/manashards.tx" x="146" y="156.5"/>
+  <object id="57" template="../../obj/enemy.tx" x="41" y="83.5" visible="1">
+   <properties>
+    <property name="defeatDialog">[
+	{
+		&quot;text&quot;: &quot;Your opponent unleashes a shrill scream as they shift back into stone form, but no longer balanced upon a pedestal. The statue falls and shatters, with many of the pieces tumbling into the pool. You would almost swear you could hear the scream faintly continuing beneath the water's surface.&quot;,
+  	&quot;action&quot;: [
+			{ &quot;deleteMapObject&quot;: 58 },
+			{ &quot;deleteMapObject&quot;: 59 },
+			{ &quot;deleteMapObject&quot;: -1 }
+		]
+	}
+]</property>
+    <property name="enemy" value="Minotaur Warcaller"/>
+    <property name="inactive" type="bool" value="true"/>
+    <property name="pursueRange" type="int" value="60"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="60,61,64,65,66,54,55"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/dialog.tx" type="dialog" gid="11530" x="134.5" y="62.5" width="81.5" height="54" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;text&quot;: &quot;Suddenly you hear strange sounds coming behind you. A strange voice calls out hoarsely: INTRUDER! This is your final mistake!&quot;,
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;You have a bad feeling about this.&quot;,
+				&quot;action&quot;: [
+					{ &quot;activateMapObject&quot;: 57 },			{ &quot;deleteMapObject&quot;: -1 }
+
+				]
+
+			}
+
+		]
+
+	}
+
+]</property>
+   </properties>
+  </object>
+  <object id="60" template="../../obj/waypoint.tx" x="68" y="95"/>
+  <object id="61" template="../../obj/waypoint.tx" x="132" y="106"/>
+  <object id="62" template="../../obj/gold.tx" x="219.5" y="117.5"/>
+  <object id="63" template="../../obj/gold.tx" x="222.5" y="122.5"/>
+  <object id="64" template="../../obj/waypoint.tx" x="205.5" y="33"/>
+  <object id="65" template="../../obj/waypoint.tx" x="336.5" y="72"/>
+  <object id="66" template="../../obj/waypoint.tx" x="318" y="208.5"/>
+ </objectgroup>
+</map>
