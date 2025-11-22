@@ -165,14 +165,13 @@
 		{
 			&quot;type&quot;: &quot;gold&quot;,
 			&quot;probability&quot;: 1,
-			&quot;count&quot;: 500,
-			&quot;itemNames&quot;: [&quot;Gold Armor&quot;,&quot;Gold Shield&quot;,&quot;Gold Boots&quot;,&quot;Bronze Sword&quot;]
+			&quot;count&quot;: 500
 		}
 		],[{
 			&quot;type&quot;: &quot;item&quot;,
 			&quot;probability&quot;: 1,
 			&quot;count&quot;: 1,
-			&quot;itemNames&quot;: [&quot;Gold Armor&quot;,&quot;Gold Shield&quot;,&quot;Gold Boots&quot;,&quot;Bronze Sword&quot;]
+			&quot;itemNames&quot;: [&quot;Shoes of Safety&quot;,&quot;Helm of Chatzuk&quot;,&quot;Crown of the Ages&quot;,&quot;Gold Armor&quot;]
 		}
 		],
 [
