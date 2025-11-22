@@ -182,6 +182,7 @@ public class SoundSystem {
     public void setBackgroundMusic(final MusicPlaylist playlist, boolean shelvePrevious) {
         if(playlist == currentPlaylist)
             return;
+        
         if(playlist == shelvedPlaylist && playlist != null) {
             if(!shelvePrevious) {
                 //Dispose current, resume shelved.
@@ -202,13 +203,18 @@ public class SoundSystem {
             }
             currentPlaylist = playlist;
             refreshVolume();
-            currentTrack.resume();
+            if (currentTrack != null) {
+                currentTrack.resume();
+            }
+            
             return;
         }
+
         if (shelvedTrack != null) {
             // We've switched to a third track. Safe to discard the shelf.
             clearShelvedPlaylist();
         }
+
         if (shelvePrevious) {
             //Shelve current.
             if(currentTrack != null)
@@ -217,6 +223,7 @@ public class SoundSystem {
             shelvedPlaylist = currentPlaylist;
             currentTrack = null;
         }
+
         currentPlaylist = playlist;
         changeBackgroundTrack();
     }
