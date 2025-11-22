@@ -48,7 +48,15 @@
    </properties>
   </object>
   <object id="47" template="../../../../../../common/maps/obj/gold.tx" x="320.333" y="148"/>
-  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="257.333" y="62.3333"/>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="257.333" y="62.3333">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;Flaming Skull&quot;
+}]</property>
+   </properties>
+  </object>
   <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="48.3333" y="126.333"/>
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="298.667" y="182">
    <properties>

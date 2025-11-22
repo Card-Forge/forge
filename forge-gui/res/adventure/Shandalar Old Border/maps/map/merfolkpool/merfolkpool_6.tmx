@@ -48,7 +48,6 @@
     <property name="enemy" value="Homarid"/>
    </properties>
   </object>
-  <object id="60" template="../../../../../../common/maps/obj/treasure.tx" x="376" y="796.5"/>
   <object id="61" template="../../../../../../common/maps/obj/door_down.tx" x="888.667" y="814.333">
    <properties>
     <property name="teleport" value="../Shandalar Old Border/maps/map/merfolkpool/merfolkpool_6b.tmx"/>

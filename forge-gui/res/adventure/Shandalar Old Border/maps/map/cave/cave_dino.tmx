@@ -40,5 +40,14 @@
   <object id="55" template="../../../../../../common/maps/obj/gold.tx" x="195.799" y="151.069"/>
   <object id="56" template="../../../../../../common/maps/obj/gold.tx" x="168.802" y="171.184"/>
   <object id="57" template="../../../../../../common/maps/obj/gold.tx" x="238.147" y="172.773"/>
+  <object id="58" template="../../../../../../common/maps/obj/treasure.tx" x="200" y="100">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;Triassic Egg&quot;
+}]</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>

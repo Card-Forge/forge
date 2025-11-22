@@ -71,7 +71,15 @@
    </properties>
   </object>
   <object id="83" template="../../../../../../common/maps/obj/manashards.tx" x="447.667" y="208"/>
-  <object id="84" template="../../../../../../common/maps/obj/treasure.tx" x="80.1818" y="33.2727"/>
+  <object id="84" template="../../../../../../common/maps/obj/treasure.tx" x="80.1818" y="33.2727">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;Thran Lens&quot;
+}]</property>
+   </properties>
+  </object>
   <object id="85" template="../../../../../../common/maps/obj/enemy.tx" x="205.333" y="137">
    <properties>
     <property name="enemy" value="Blue Prototype"/>

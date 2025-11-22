@@ -39,5 +39,14 @@
     <property name="enemy" value="Mimic"/>
    </properties>
   </object>
+  <object id="54" template="../../../../../../common/maps/obj/treasure.tx" x="197.5" y="100">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;Shoes of Sorrow&quot;
+}]</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>
