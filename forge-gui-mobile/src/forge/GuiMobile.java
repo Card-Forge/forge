@@ -32,6 +32,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -302,9 +303,17 @@ public class GuiMobile implements IGuiBase {
         Gdx.net.openURI(url);
     }
 
+    private static final Set<String> LWJGL_SUPPORTED_AUDIO_TYPES = Set.of(".wav", ".mp3", ".ogg");
+
+    @Override
+    public boolean isSupportedAudioFormat(File file) {
+        String path = file.getPath().toLowerCase();
+        return LWJGL_SUPPORTED_AUDIO_TYPES.stream().anyMatch(path::endsWith);
+    }
+
     @Override
     public IAudioClip createAudioClip(final String filename) {
-        return AudioClip.createClip(SoundSystem.instance.getSoundDirectory() + filename);
+        return AudioClip.createClip(SoundSystem.instance.getSoundResource(filename));
     }
 
     @Override
