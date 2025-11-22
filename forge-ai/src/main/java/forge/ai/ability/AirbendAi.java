@@ -18,7 +18,7 @@ public class AirbendAi extends SpellAbilityAi {
         final CardCollection threatenedTgts = CardLists.filter(aiPlayer.getCreaturesInPlay(),
                 card -> !card.isToken() && card.getCMC() > 2 &&
                         (ComputerUtil.predictThreatenedObjects(aiPlayer, null, true).contains(card)
-                        || (combat.isAttacking(card) && combat.isBlocked(card) && ComputerUtilCombat.combatantWouldBeDestroyed(aiPlayer, card, combat))));
+                        || (combat != null && ComputerUtilCombat.combatantWouldBeDestroyed(aiPlayer, card, combat))));
         if (!threatenedTgts.isEmpty()) {
             Card bestSaved = ComputerUtilCard.getBestAI(threatenedTgts);
             sa.getTargets().add(bestSaved);
