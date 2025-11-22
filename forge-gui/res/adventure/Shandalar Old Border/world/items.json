@@ -2581,7 +2581,7 @@
 		"iconName": "WarrenTendersCloak",
 		"effect": {
 			"startBattleWithCard": [
-				"Goblin Warrens|LEB"
+				"Goblin Warrens|FEM"
 			]
 		}
 	},
@@ -2739,7 +2739,7 @@
 		"effect": {
 			"lifeModifier": 1,
 			"startBattleWithCard": [
-				"Vebulid|SCG"
+				"Vebulid|USG"
 			]
 		}
 	},
@@ -2760,7 +2760,7 @@
 		"effect": {
 			"lifeModifier": -3,
 			"startBattleWithCard": [
-				"Wheel of Torture|USG"
+				"Wheel of Torture|ULG"
 			]
 		}
 	},
@@ -2833,7 +2833,7 @@
 		"iconName": "WombatTamersWhip",
 		"effect": {
 			"startBattleWithCard": [
-				"Rabid Wombat|LEB"
+				"Rabid Wombat|LEG"
 			]
 		}
 	},
