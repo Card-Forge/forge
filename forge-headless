@@ -1,0 +1,13 @@
+#!/bin/bash
+# Forge Headless Launcher Script
+# Quick start script for ForgeHeadless game engine
+
+JAVA_HOME=/opt/homebrew/Cellar/openjdk/25.0.1/libexec/openjdk.jdk/Contents/Home
+PROJECT_DIR=/Users/travisbarton/PycharmProjects/forge
+JAR_PATH=$PROJECT_DIR/forge-gui-desktop/target/forge-gui-desktop-2.0.07-SNAPSHOT-jar-with-dependencies.jar
+
+# Change to project directory
+cd "$PROJECT_DIR"
+
+# Run ForgeHeadless with any arguments passed to the script
+$JAVA_HOME/bin/java -Xmx4096m -cp "$JAR_PATH" forge.view.ForgeHeadless "$@"

@@ -39,27 +39,81 @@ public class ForgeHeadless {
 
     public static void main(String[] args) {
         System.err.println("DEBUG: ForgeHeadless main started");
+        
+        // Parse command-line arguments
+        boolean player1IsHuman = true;  // default
+        boolean player2IsHuman = false; // default
+        
+        for (String arg : args) {
+            if (arg.equals("--both-human")) {
+                player1IsHuman = true;
+                player2IsHuman = true;
+            } else if (arg.equals("--both-ai")) {
+                player1IsHuman = false;
+                player2IsHuman = false;
+            } else if (arg.equals("--p1-ai")) {
+                player1IsHuman = false;
+            } else if (arg.equals("--p2-human")) {
+                player2IsHuman = true;
+            } else if (arg.equals("--help")) {
+                printUsage();
+                System.exit(0);
+            }
+        }
+        
         GuiBase.setInterface(new HeadlessGui());
         FModel.initialize(null, null);
-        runGame();
+        runGame(player1IsHuman, player2IsHuman);
+    }
+    
+    private static void printUsage() {
+        System.out.println("ForgeHeadless - Headless Magic: The Gathering Game Engine");
+        System.out.println("\nUsage: java -cp <jar> forge.view.ForgeHeadless [options]");
+        System.out.println("\nOptions:");
+        System.out.println("  --both-human    Both players are human-controlled (interactive)");
+        System.out.println("  --both-ai       Both players are AI-controlled (simulation mode)");
+        System.out.println("  --p1-ai         Player 1 is AI-controlled (default: human)");
+        System.out.println("  --p2-human      Player 2 is human-controlled (default: AI)");
+        System.out.println("  --help          Show this help message");
+        System.out.println("\nDefault: Player 1 human-controlled, Player 2 AI-controlled");
+        System.out.println("\nAvailable interactive commands:");
+        System.out.println("  get_state           - View current game state as JSON");
+        System.out.println("  possible_actions    - List all available actions");
+        System.out.println("  play_action <index> - Execute the action at given index");
+        System.out.println("  pass_priority       - Pass priority without taking action");
+        System.out.println("  concede             - Exit the game");
     }
 
     private static void initialize() {
         // FModel.initialize() is called in main
     }
 
-    private static void runGame() {
-        // ... (rest of runGame)
+    private static void runGame(boolean player1IsHuman, boolean player2IsHuman) {
         // Generate Decks
         Deck deck1 = DeckgenUtil.getRandomColorDeck(FModel.getFormats().getStandard().getFilterPrinted(), true);
         Deck deck2 = DeckgenUtil.getRandomColorDeck(FModel.getFormats().getStandard().getFilterPrinted(), true);
 
-        // Setup Players
+        // Setup Players based on configuration
         List<RegisteredPlayer> players = new ArrayList<>();
-        RegisteredPlayer rp1 = new RegisteredPlayer(deck1).setPlayer(new HeadlessLobbyPlayer("Player 1"));
-        RegisteredPlayer rp2 = new RegisteredPlayer(deck2).setPlayer(new HeadlessLobbyPlayer("Player 2"));
-        players.add(rp1);
-        players.add(rp2);
+        
+        if (player1IsHuman) {
+            RegisteredPlayer rp1 = new RegisteredPlayer(deck1).setPlayer(new HeadlessLobbyPlayer("Player 1"));
+            players.add(rp1);
+        } else {
+            RegisteredPlayer rp1 = new RegisteredPlayer(deck1).setPlayer(new forge.ai.LobbyPlayerAi("AI Player 1", null));
+            players.add(rp1);
+        }
+        
+        if (player2IsHuman) {
+            RegisteredPlayer rp2 = new RegisteredPlayer(deck2).setPlayer(new HeadlessLobbyPlayer("Player 2"));
+            players.add(rp2);
+        } else {
+            RegisteredPlayer rp2 = new RegisteredPlayer(deck2).setPlayer(new forge.ai.LobbyPlayerAi("AI Player 2", null));
+            players.add(rp2);
+        }
+        
+        System.err.println("DEBUG: Player 1 - " + (player1IsHuman ? "Human" : "AI"));
+        System.err.println("DEBUG: Player 2 - " + (player2IsHuman ? "Human" : "AI"));
 
         // Setup Match
         GameRules rules = new GameRules(GameType.Constructed);
@@ -77,6 +131,21 @@ public class ForgeHeadless {
         state.addProperty("turn", game.getPhaseHandler().getTurn());
         state.addProperty("phase", game.getPhaseHandler().getPhase().toString());
         state.addProperty("activePlayerId", game.getPhaseHandler().getPlayerTurn().getId());
+
+        // Stack - show what spells/abilities are on the stack
+        JsonArray stackArray = new JsonArray();
+        for (forge.game.spellability.SpellAbilityStackInstance stackItem : game.getStack()) {
+            JsonObject stackObj = new JsonObject();
+            SpellAbility sa = stackItem.getSpellAbility();
+            Card source = sa.getHostCard();
+            stackObj.addProperty("card_name", source != null ? source.getName() : "Unknown");
+            stackObj.addProperty("card_id", source != null ? source.getId() : -1);
+            stackObj.addProperty("description", sa.getStackDescription());
+            stackObj.addProperty("controller", sa.getActivatingPlayer().getName());
+            stackArray.add(stackObj);
+        }
+        state.add("stack", stackArray);
+        state.addProperty("stack_size", game.getStack().size());
 
         // Players
         JsonArray playersArray = new JsonArray();
@@ -198,6 +267,34 @@ public class ForgeHeadless {
             return true; // Always keep hand
         }
 
+        private List<SpellAbility> getPossibleSpellAbilities() {
+            List<SpellAbility> allAbilities = new ArrayList<>();
+            
+            // Get available lands to play
+            CardCollection lands = ComputerUtilAbility.getAvailableLandsToPlay(getGame(), player);
+            if (lands != null && !lands.isEmpty()) {
+                for (Card land : lands) {
+                    SpellAbility sa = land.getSpellPermanent();
+                    if (sa != null) {
+                        allAbilities.add(sa);
+                    }
+                }
+            }
+
+            // Get available spells and abilities
+            CardCollection availableCards = ComputerUtilAbility.getAvailableCards(getGame(), player);
+            List<SpellAbility> spellAbilities = ComputerUtilAbility.getSpellAbilities(availableCards, player);
+            
+            for (SpellAbility sa : spellAbilities) {
+                // Filter to only abilities the player can actually activate
+                if (sa.canPlay() && sa.getActivatingPlayer() == player) {
+                    allAbilities.add(sa);
+                }
+            }
+            
+            return allAbilities;
+        }
+
         @Override
         public java.util.List<forge.game.spellability.SpellAbility> chooseSpellAbilityToPlay() {
             while (true) {
@@ -220,6 +317,29 @@ public class ForgeHeadless {
                 } else if (command.equals("possible_actions")) {
                     Gson gson = new GsonBuilder().setPrettyPrinting().create();
                     System.out.println(gson.toJson(getPossibleActions(player, getGame())));
+                } else if (command.equals("play_action")) {
+                    if (parts.length < 2) {
+                        System.out.println("Usage: play_action <index>");
+                        continue;
+                    }
+                    
+                    try {
+                        int actionIndex = Integer.parseInt(parts[1]);
+                        List<SpellAbility> actions = getPossibleSpellAbilities();
+                        
+                        if (actionIndex < 0 || actionIndex >= actions.size()) {
+                            System.out.println("Invalid action index: " + actionIndex + ". Valid range: 0-" + (actions.size() - 1));
+                            continue;
+                        }
+                        
+                        SpellAbility chosenAbility = actions.get(actionIndex);
+                        List<SpellAbility> result = new ArrayList<>();
+                        result.add(chosenAbility);
+                        return result;
+                        
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid action index. Please provide a number.");
+                    }
                 } else if (command.equals("pass_priority")) {
                     return null; // Pass priority
                 } else if (command.equals("concede")) {
