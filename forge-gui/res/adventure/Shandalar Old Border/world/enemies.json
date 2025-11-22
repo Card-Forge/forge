@@ -31373,5 +31373,565 @@
 			"IdentityGreen",
 			"BiomeGreen"
 		]
+	},
+	{
+		"name": "Jakub Slemr '97",
+		"sprite": "sprites/enemy/humanoid/human/knight/death_knight.atlas",
+		"deck": [
+			"decks/standard/wc97_jakub_slemr.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "WUBRG"
+	},
+	{
+		"name": "Janosch Kuhn '97",
+		"sprite": "sprites/enemy/humanoid/human/wizard/blue_wiz2.atlas",
+		"deck": [
+			"decks/standard/wc97_janosch_kuhn.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "WUR"
+	},
+	{
+		"name": "Svend Geertsen '97",
+		"sprite": "sprites/enemy/humanoid/elf/druid.atlas",
+		"deck": [
+			"decks/standard/wc97_svend_geertsen.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "G"
+	},
+	{
+		"name": "Paul McCabe '97",
+		"sprite": "sprites/enemy/humanoid/human/wizard/red_wiz2.atlas",
+		"deck": [
+			"decks/standard/wc97_paul_mccabe.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "UR"
+	},
+	{
+		"name": "Brian Selden '98",
+		"sprite": "sprites/enemy/humanoid/elf/shaman.atlas",
+		"deck": [
+			"decks/standard/wc98_brian_selden.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "WUBRG"
+	},
+	{
+		"name": "Ben Rubin '98",
+		"sprite": "sprites/enemy/humanoid/human/barbarian/barbarian.atlas",
+		"deck": [
+			"decks/standard/wc98_ben_rubin.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "R"
+	},
+	{
+		"name": "Brian Hacker '98",
+		"sprite": "sprites/enemy/humanoid/human/knight/paladin.atlas",
+		"deck": [
+			"decks/standard/wc98_brian_hacker.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "W"
+	},
+	{
+		"name": "Randy Buehler '98",
+		"sprite": "sprites/enemy/humanoid/human/wizard/archmage.atlas",
+		"deck": [
+			"decks/standard/wc98_randy_buehler.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "U"
+	},
+	{
+		"name": "Kai Budde '99",
+		"sprite": "sprites/enemy/humanoid/human/artificer/artificer.atlas",
+		"deck": [
+			"decks/standard/wc99_kai_budde.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "R"
+	},
+	{
+		"name": "Mark Le Pine '99",
+		"sprite": "sprites/enemy/humanoid/human/wizard/red_wiz2.atlas",
+		"deck": [
+			"decks/standard/wc99_mark_le_pine.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "R"
+	},
+	{
+		"name": "Matt Linde '99",
+		"sprite": "sprites/enemy/humanoid/elf/druid.atlas",
+		"deck": [
+			"decks/standard/wc99_matt_linde.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "G"
+	},
+	{
+		"name": "Jakub Šlemr '99",
+		"sprite": "sprites/enemy/humanoid/human/warlock/warlock.atlas",
+		"deck": [
+			"decks/standard/wc99_jakub_slemr.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "B"
+	},
+	{
+		"name": "Jon Finkel '00",
+		"sprite": "sprites/enemy/humanoid/human/artificer/artificer.atlas",
+		"deck": [
+			"decks/standard/wc00_jon_finkel.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "U"
+	},
+	{
+		"name": "Janosch Kühn '00",
+		"sprite": "sprites/enemy/humanoid/elf/shaman.atlas",
+		"deck": [
+			"decks/standard/wc00_janosch_kuhn.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "RG"
+	},
+	{
+		"name": "Tom van de Logt '00",
+		"sprite": "sprites/enemy/humanoid/human/wizard/white_wiz2.atlas",
+		"deck": [
+			"decks/standard/wc00_tom_van_de_logt.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "WU"
+	},
+	{
+		"name": "Nicolas Labarre '00",
+		"sprite": "sprites/enemy/humanoid/elf/druid.atlas",
+		"deck": [
+			"decks/standard/wc00_nicolas_labarre.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "WG"
+	},
+	{
+		"name": "Tom van de Logt '01",
+		"sprite": "sprites/enemy/humanoid/human/knight/death_knight.atlas",
+		"deck": [
+			"decks/standard/wc01_tom_van_de_logt.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "BR"
+	},
+	{
+		"name": "Alex Borteh '01",
+		"sprite": "sprites/enemy/humanoid/human/wizard/blue_wiz2.atlas",
+		"deck": [
+			"decks/standard/wc01_alex_borteh.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "U"
+	},
+	{
+		"name": "Antoine Ruel '01",
+		"sprite": "sprites/enemy/humanoid/human/wizard/dimir_wiz.atlas",
+		"deck": [
+			"decks/standard/wc01_antoine_ruel.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "UBR"
+	},
+	{
+		"name": "Jan Tomcani '01",
+		"sprite": "sprites/enemy/humanoid/elf/shaman.atlas",
+		"deck": [
+			"decks/standard/wc01_jan_tomcani.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "BRG"
+	},
+	{
+		"name": "Carlos Romao '02",
+		"sprite": "sprites/enemy/humanoid/human/wizard/dimir_wiz.atlas",
+		"deck": [
+			"decks/standard/wc02_carlos_romao.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "UB"
+	},
+	{
+		"name": "Sim Han How '02",
+		"sprite": "sprites/enemy/humanoid/elf/druid.atlas",
+		"deck": [
+			"decks/standard/wc02_sim_han_how.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "UGR"
+	},
+	{
+		"name": "Brian Kibler '02",
+		"sprite": "sprites/enemy/humanoid/human/knight/paladin.atlas",
+		"deck": [
+			"decks/standard/wc02_brian_kibler.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "GWR"
+	},
+	{
+		"name": "Raphael Levy '02",
+		"sprite": "sprites/enemy/humanoid/human/wizard/green_wiz.atlas",
+		"deck": [
+			"decks/standard/wc02_raphael_levy.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "UG"
+	},
+	{
+		"name": "Daniel Zink '03",
+		"sprite": "sprites/enemy/humanoid/human/wizard/white_wiz.atlas",
+		"deck": [
+			"decks/standard/wc03_daniel_zink.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "WUG"
+	},
+	{
+		"name": "Dave Humpherys '03",
+		"sprite": "sprites/enemy/humanoid/human/wizard/green_wiz.atlas",
+		"deck": [
+			"decks/standard/wc03_dave_humpherys.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "UG"
+	},
+	{
+		"name": "Wolfgang Eder '03",
+		"sprite": "sprites/enemy/humanoid/goblin/chief.atlas",
+		"deck": [
+			"decks/standard/wc03_wolfgang_eder.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "BR"
+	},
+	{
+		"name": "Peer Kroger '03",
+		"sprite": "sprites/enemy/humanoid/human/necromancer/dark_necro.atlas",
+		"deck": [
+			"decks/standard/wc03_peer_kroger.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "BR"
+	},
+	{
+		"name": "Zak Dolan '94",
+		"sprite": "sprites/enemy/humanoid/human/noble/noble.atlas",
+		"deck": [
+			"decks/standard/wc94_zak_dolan.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "WUG"
+	},
+	{
+		"name": "Bertrand Lestree '94",
+		"sprite": "sprites/enemy/humanoid/human/warrior/skirmisher.atlas",
+		"deck": [
+			"decks/standard/wc94_bertrand_lestree.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "UBRG"
+	},
+	{
+		"name": "Dominic Symens '94",
+		"sprite": "sprites/enemy/humanoid/human/warlock/warlock.atlas",
+		"deck": [
+			"decks/standard/wc94_dominic_symens.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "UBRG"
+	},
+	{
+		"name": "Cyrille deFoucaud '94",
+		"sprite": "sprites/enemy/humanoid/human/wizard/red_wiz.atlas",
+		"deck": [
+			"decks/standard/wc94_cyrille_defoucaud.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "UBRG"
+	},
+	{
+		"name": "Alexander Blumke '95",
+		"sprite": "sprites/enemy/humanoid/human/necromancer/dark_necro.atlas",
+		"deck": [
+			"decks/standard/wc95_alexander_blumke.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "WB"
+	},
+	{
+		"name": "Marc Hernandez '95",
+		"sprite": "sprites/enemy/humanoid/human/knight/paladin.atlas",
+		"deck": [
+			"decks/standard/wc95_marc_hernandez.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "WR"
+	},
+	{
+		"name": "Mark Justice '95",
+		"sprite": "sprites/enemy/humanoid/human/warrior/skirmisher.atlas",
+		"deck": [
+			"decks/standard/wc95_mark_justice.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "RG"
+	},
+	{
+		"name": "Henry Stern '95",
+		"sprite": "sprites/enemy/humanoid/human/wizard/red_wiz.atlas",
+		"deck": [
+			"decks/standard/wc95_henry_stern.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "RG"
+	},
+	{
+		"name": "Tom Chanpheng '96",
+		"sprite": "sprites/enemy/humanoid/human/knight/paladin.atlas",
+		"deck": [
+			"decks/standard/wc96_tom_chanpheng.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "W"
+	},
+	{
+		"name": "Mark Justice '96",
+		"sprite": "sprites/enemy/humanoid/human/warrior/skirmisher.atlas",
+		"deck": [
+			"decks/standard/wc96_mark_justice.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "WRG"
+	},
+	{
+		"name": "Henry Stern '96",
+		"sprite": "sprites/enemy/humanoid/human/necromancer/dark_necro.atlas",
+		"deck": [
+			"decks/standard/wc96_henry_stern.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "B"
+	},
+	{
+		"name": "Olle Rade '96",
+		"sprite": "sprites/enemy/humanoid/elf/shaman.atlas",
+		"deck": [
+			"decks/standard/wc96_olle_rade.dck"
+		],
+		"ai": "",
+		"spawnRate": 0,
+		"difficulty": 0.9,
+		"speed": 28,
+		"life": 25,
+		"rewards": [],
+		"colors": "RG"
 	}
 ]
