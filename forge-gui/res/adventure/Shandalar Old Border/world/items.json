@@ -439,7 +439,7 @@
 	{
 		"name": "Helm of Chatzuk",
 		"equipmentSlot": "Neck",
-		"iconName": "BrownHat",
+		"iconName": "HelmOfChatzuk",
 		"cost": 3000,
 		"effect": {
 			"startBattleWithCard": [
@@ -472,7 +472,7 @@
 	{
 		"name": "Tawnos's Wand",
 		"equipmentSlot": "Right",
-		"iconName": "MadStaff",
+		"iconName": "TawnossWand",
 		"cost": 3000,
 		"effect": {
 			"startBattleWithCard": [
@@ -619,7 +619,7 @@
 	{
 		"name": "Zelyon Sword",
 		"equipmentSlot": "Right",
-		"iconName": "SteelSword",
+		"iconName": "ZelyonSword",
 		"cost": 3000,
 		"effect": {
 			"startBattleWithCard": [
@@ -686,7 +686,7 @@
 	{
 		"name": "Jeweled Necklace",
 		"equipmentSlot": "Neck",
-		"iconName": "JeweledAmulet",
+		"iconName": "JeweledNecklace",
 		"cost": 9000,
 		"effect": {
 			"startBattleWithCard": [
@@ -921,7 +921,7 @@
 	{
 		"name": "Acidic Dagger",
 		"equipmentSlot": "Right",
-		"iconName": "Dagger",
+		"iconName": "AcidicDagger",
 		"cost": 3000,
 		"effect": {
 			"startBattleWithCard": [
@@ -944,7 +944,7 @@
 	{
 		"name": "Draconian Cylix",
 		"equipmentSlot": "Left",
-		"iconName": "DarkAmulet",
+		"iconName": "DraconianCylix",
 		"cost": 3000,
 		"effect": {
 			"startBattleWithCard": [
@@ -1149,7 +1149,7 @@
 	{
 		"name": "Triangle of War",
 		"equipmentSlot": "Neck",
-		"iconName": "RingofImmortals",
+		"iconName": "TriangleOfWar",
 		"cost": 3000,
 		"effect": {
 			"startBattleWithCard": [
@@ -1365,7 +1365,7 @@
 	{
 		"name": "Rod of Ruin",
 		"equipmentSlot": "Left",
-		"iconName": "MadStaff",
+		"iconName": "RodOfRuin",
 		"effect": {
 			"startBattleWithCard": [
 				"Rod of Ruin|LEA"
@@ -1755,7 +1755,7 @@
 	{
 		"name": "Jester's Cap",
 		"equipmentSlot": "Left",
-		"iconName": "SleepWand",
+		"iconName": "JestersCap",
 		"effect": {
 			"lifeModifier": -1,
 			"startBattleWithCard": [
@@ -1874,7 +1874,7 @@
 	{
 		"name": "Crown of the Ages",
 		"equipmentSlot": "Neck",
-		"iconName": "BrownHat",
+		"iconName": "CrownOfTheAges",
 		"effect": {
 			"lifeModifier": 2,
 			"startBattleWithCard": [
@@ -2068,7 +2068,7 @@
 	{
 		"name": "Amulet of Azar",
 		"equipmentSlot": "Neck",
-		"iconName": "DarkAmulet",
+		"iconName": "AmuletOfAzar",
 		"cost": 1000,
 		"effect": {
 			"startBattleWithCard": [
@@ -2090,7 +2090,7 @@
 	{
 		"name": "Pyromaniac's Cloak",
 		"equipmentSlot": "Boots",
-		"iconName": "Sandals",
+		"iconName": "PyromaniacsCloak",
 		"cost": 3000,
 		"effect": {
 			"startBattleWithCard": [
@@ -2101,7 +2101,7 @@
 	{
 		"name": "Concordant Boots",
 		"equipmentSlot": "Boots",
-		"iconName": "LeatherBoots",
+		"iconName": "ConcordantBoots",
 		"cost": 9000,
 		"effect": {
 			"startBattleWithCard": [
@@ -2763,7 +2763,7 @@
 	{
 		"name": "Memory Crystal",
 		"equipmentSlot": "Neck",
-		"iconName": "RelicAmulet",
+		"iconName": "MemoryCrystal",
 		"effect": {
 			"startBattleWithCard": [
 				"Memory Crystal|EXO"
@@ -2773,7 +2773,7 @@
 	{
 		"name": "Distorting Lens",
 		"equipmentSlot": "Neck",
-		"iconName": "RelicAmulet",
+		"iconName": "DistortingLens",
 		"effect": {
 			"startBattleWithCard": [
 				"Distorting Lens|MMQ"
@@ -2783,7 +2783,7 @@
 	{
 		"name": "Jandor's Saddlebags",
 		"equipmentSlot": "Body",
-		"iconName": "TravelersAmulet",
+		"iconName": "JandorsSaddlebags",
 		"effect": {
 			"startBattleWithCard": [
 				"Jandor's Saddlebags|ARN"
@@ -2793,7 +2793,7 @@
 	{
 		"name": "Gladiator's Greaves",
 		"equipmentSlot": "Boots",
-		"iconName": "MetallicBoots",
+		"iconName": "GladiatorsGreaves",
 		"effect": {
 			"startBattleWithCard": [
 				"Arena|PHPR"
@@ -2803,7 +2803,7 @@
 	{
 		"name": "Shoes of Safety",
 		"equipmentSlot": "Boots",
-		"iconName": "LightBoots",
+		"iconName": "ShoesOfSafety",
 		"effect": {
 			"startBattleWithCard": [
 				"Safe Haven|DRK"
@@ -2813,7 +2813,7 @@
 	{
 		"name": "Dragon Blood",
 		"equipmentSlot": "Left",
-		"iconName": "Blood",
+		"iconName": "DragonBlood",
 		"effect": {
 			"startBattleWithCard": [
 				"Dragon Blood|USG"
@@ -2823,7 +2823,7 @@
 	{
 		"name": "Cursed Lamp",
 		"equipmentSlot": "Right",
-		"iconName": "AladdinsLamp",
+		"iconName": "CursedLamp",
 		"effect": {
 			"startBattleWithCard": [
 				"Fledgling Djinn|WTH"
@@ -2833,7 +2833,7 @@
 	{
 		"name": "Pirate's Hook",
 		"equipmentSlot": "Right",
-		"iconName": "Dagger",
+		"iconName": "PiratesHook",
 		"effect": {
 			"lifeModifier": -1,
 			"startBattleWithCard": [
@@ -2844,7 +2844,7 @@
 	{
 		"name": "Grizzly Glaive",
 		"equipmentSlot": "Right",
-		"iconName": "SteelSword",
+		"iconName": "GrizzlyGlaive",
 		"effect": {
 			"startBattleWithCard": [
 				"Grizzly Bears|LEA"
@@ -2854,7 +2854,7 @@
 	{
 		"name": "Shaman's Staff",
 		"equipmentSlot": "Right",
-		"iconName": "MadStaff",
+		"iconName": "ShamansStaff",
 		"effect": {
 			"startBattleWithCard": [
 				"Gorilla Shaman|ALL"
@@ -2864,7 +2864,7 @@
 	{
 		"name": "Miller's Shoes",
 		"equipmentSlot": "Boots",
-		"iconName": "GooeyShoes",
+		"iconName": "MillersShoes",
 		"effect": {
 			"lifeModifier": 2,
 			"startBattleWithCard": [
@@ -2875,7 +2875,7 @@
 	{
 		"name": "War Beast Rider's Boots",
 		"equipmentSlot": "Boots",
-		"iconName": "MetallicBoots",
+		"iconName": "WarBeastRidersBoots",
 		"effect": {
 			"startBattleWithCard": [
 				"Phyrexian War Beast|ALL"
@@ -2885,7 +2885,7 @@
 	{
 		"name": "Tome of the Gate",
 		"equipmentSlot": "Left",
-		"iconName": "SpellBook",
+		"iconName": "TomeOfTheGate",
 		"effect": {
 			"lifeModifier": -2,
 			"startBattleWithCard": [
@@ -2896,7 +2896,7 @@
 	{
 		"name": "Phyrexian Grimoire",
 		"equipmentSlot": "Left",
-		"iconName": "SpellBook",
+		"iconName": "PhyrexianGrimoire",
 		"effect": {
 			"lifeModifier": -3,
 			"startBattleWithCard": [
@@ -2907,7 +2907,7 @@
 	{
 		"name": "Tome of the Vault",
 		"equipmentSlot": "Left",
-		"iconName": "SpellBook",
+		"iconName": "TomeOfTheVault",
 		"effect": {
 			"lifeModifier": -2,
 			"startBattleWithCard": [
@@ -2918,7 +2918,7 @@
 	{
 		"name": "Tome of the Portal",
 		"equipmentSlot": "Left",
-		"iconName": "SpellBook",
+		"iconName": "TomeOfThePortal",
 		"effect": {
 			"lifeModifier": -3,
 			"startBattleWithCard": [
@@ -2929,7 +2929,7 @@
 	{
 		"name": "Infiltrator's Mask",
 		"equipmentSlot": "Neck",
-		"iconName": "TorturersHood",
+		"iconName": "InfiltratorsMask",
 		"effect": {
 			"lifeModifier": -4,
 			"startBattleWithCard": [
@@ -2940,7 +2940,7 @@
 	{
 		"name": "Broodling Egg",
 		"equipmentSlot": "Right",
-		"iconName": "DragonEgg",
+		"iconName": "BroodlingEgg",
 		"effect": {
 			"lifeModifier": -2,
 			"startBattleWithCard": [
@@ -2951,7 +2951,7 @@
 	{
 		"name": "Armor of Evil",
 		"equipmentSlot": "Body",
-		"iconName": "DarkArmor",
+		"iconName": "ArmorOfEvil",
 		"effect": {
 			"startBattleWithCard": [
 				"Lurking Evil|USG"
@@ -2971,7 +2971,7 @@
 	{
 		"name": "Ashnod's Battle Gear",
 		"equipmentSlot": "Body",
-		"iconName": "SteelArmor",
+		"iconName": "AshnodsBattleGear",
 		"effect": {
 			"lifeModifier": 4,
 			"startBattleWithCard": [
@@ -2982,7 +2982,7 @@
 	{
 		"name": "Grovetender's Robes",
 		"equipmentSlot": "Body",
-		"iconName": "BlueRobes",
+		"iconName": "GrovetendersRobes",
 		"effect": {
 			"startBattleWithCard": [
 				"Afiya Grove|MIR"
@@ -2992,7 +2992,7 @@
 	{
 		"name": "Winter Boots",
 		"equipmentSlot": "Boots",
-		"iconName": "LightBoots",
+		"iconName": "WinterBoots",
 		"effect": {
 			"startBattleWithCard": [
 				"Winter's Night|ALL"
@@ -3002,7 +3002,7 @@
 	{
 		"name": "Prismatic Egg",
 		"equipmentSlot": "Right",
-		"iconName": "ChickenEgg",
+		"iconName": "PrismaticEgg",
 		"effect": {
 			"lifeModifier": -4,
 			"startBattleWithCard": [
@@ -3013,7 +3013,7 @@
 	{
 		"name": "Faerie Dragon Egg",
 		"equipmentSlot": "Right",
-		"iconName": "DragonEgg",
+		"iconName": "FaerieDragonEgg",
 		"effect": {
 			"lifeModifier": -4,
 			"startBattleWithCard": [
@@ -3024,7 +3024,7 @@
 	{
 		"name": "Goblin Trumpet",
 		"equipmentSlot": "Left",
-		"iconName": "EntrancingLyre",
+		"iconName": "GoblinTrumpet",
 		"effect": {
 			"startBattleWithCard": [
 				"Goblin Polka Band|UGL"
@@ -3034,7 +3034,7 @@
 	{
 		"name": "Rainbow Spear",
 		"equipmentSlot": "Right",
-		"iconName": "SteelSword",
+		"iconName": "RainbowSpear",
 		"effect": {
 			"lifeModifier": -2,
 			"startBattleWithCard": [
@@ -3045,7 +3045,7 @@
 	{
 		"name": "Catalyst Stone",
 		"equipmentSlot": "Neck",
-		"iconName": "RelicAmulet",
+		"iconName": "CatalystStone",
 		"effect": {
 			"startBattleWithCard": [
 				"Catalyst Stone|ODY"
@@ -3055,7 +3055,7 @@
 	{
 		"name": "Flaming Skull",
 		"equipmentSlot": "Left",
-		"iconName": "DeathRing",
+		"iconName": "FlamingSkull",
 		"effect": {
 			"startBattleWithCard": [
 				"Deadapult|PLS"
@@ -3065,7 +3065,7 @@
 	{
 		"name": "Triassic Egg",
 		"equipmentSlot": "Left",
-		"iconName": "ChickenEgg",
+		"iconName": "TriassicEgg",
 		"effect": {
 			"startBattleWithCard": [
 				"Triassic Egg|LEG"
@@ -3075,7 +3075,7 @@
 	{
 		"name": "Thran Lens",
 		"equipmentSlot": "Neck",
-		"iconName": "RelicAmulet",
+		"iconName": "ThranLens",
 		"effect": {
 			"startBattleWithCard": [
 				"Thran Lens|ULG"
@@ -3085,7 +3085,7 @@
 	{
 		"name": "Spawning Staff",
 		"equipmentSlot": "Left",
-		"iconName": "MadStaff",
+		"iconName": "SpawningStaff",
 		"effect": {
 			"startBattleWithCard": [
 				"Homarid Spawning Bed|FEM"
@@ -3095,7 +3095,7 @@
 	{
 		"name": "Cave Diver's Boots",
 		"equipmentSlot": "Boots",
-		"iconName": "MetallicBoots",
+		"iconName": "CaveDiversBoots",
 		"effect": {
 			"lifeModifier": -3,
 			"startBattleWithCard": [
@@ -3106,7 +3106,7 @@
 	{
 		"name": "Shoes of Sorrow",
 		"equipmentSlot": "Boots",
-		"iconName": "LeatherBoots",
+		"iconName": "ShoesOfSorrow",
 		"effect": {
 			"lifeModifier": 2,
 			"startBattleWithCard": [
@@ -3128,7 +3128,7 @@
 	{
 		"name": "Diamond Kaleidoscope",
 		"equipmentSlot": "Left",
-		"iconName": "PrismRing",
+		"iconName": "DiamondKaleidoscope",
 		"effect": {
 			"startBattleWithCard": [
 				"Diamond Kaleidoscope|VIS"
@@ -3138,7 +3138,7 @@
 	{
 		"name": "Map to the Vale",
 		"equipmentSlot": "Left",
-		"iconName": "DungeonMap",
+		"iconName": "MapToTheVale",
 		"effect": {
 			"startBattleWithCard": [
 				"Rainbow Vale|FEM"
@@ -3148,7 +3148,7 @@
 	{
 		"name": "Power Armor",
 		"equipmentSlot": "Body",
-		"iconName": "SteelArmor",
+		"iconName": "PowerArmor",
 		"effect": {
 			"startBattleWithCard": [
 				"Power Armor|INV"
