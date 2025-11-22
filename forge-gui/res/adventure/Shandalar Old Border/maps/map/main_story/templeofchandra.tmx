@@ -539,7 +539,6 @@
 	"type": "shards",
 	"probability": 1,
 	"count": 200
-},
 }]</property>
    </properties>
   </object>
@@ -630,8 +629,11 @@
   <object id="41" template="../../../../../../common/maps/obj/enemy.tx" x="736" y="508.33">
    <properties>
     <property name="enemy" value="Chandra" />
+    <property name="effect">{
+ "startBattleWithCard": [ "Mountain|UGL", "Mountain|UGL", "Gratuitous Violence|ONS" ]
+}</property>
     <property name="ignoreDungeonEffect" type="bool" value="false" />
-    
+
     <property name="spawn.Easy" type="bool" value="false" />
     <property name="spawn.Normal" type="bool" value="true" />
    </properties>

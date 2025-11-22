@@ -125,7 +125,7 @@
   </object>
   <object id="66" template="../../../../../../common/maps/obj/scroll.tx" x="336.333" y="58.3333">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Horn of Greed|STH&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Slate of Ancestry|ONS&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/manashards.tx" x="350.486" y="220.639"/>

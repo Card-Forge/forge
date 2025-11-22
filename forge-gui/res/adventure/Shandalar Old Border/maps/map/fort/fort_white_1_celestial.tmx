@@ -153,7 +153,6 @@
    <properties>
     <property name="deckOverride" value="decks/standard/baronlegant.dck"/>
     <property name="displayNameOverride" value="Baron Von Gant"/>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Imposing Sovereign&quot; ] }"/>
     <property name="enemy" value="Human elite"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
