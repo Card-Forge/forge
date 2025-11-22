@@ -556,6 +556,12 @@
 				"type": "landSketchbookShop",
 				"probability": 0.05,
 				"count": 1
+			},
+			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "Dragon Blood"
 			}
 		],
 		"colors": "U",
@@ -3078,6 +3084,12 @@
 				"probability": 0.3,
 				"count": 10,
 				"addMaxCount": 90
+			},
+			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "Grizzly Glaive"
 			}
 		],
 		"colors": "G",
@@ -6273,6 +6285,12 @@
 				"probability": 0.3,
 				"count": 10,
 				"addMaxCount": 90
+			},
+			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "War Beast Rider's Boots"
 			}
 		],
 		"colors": "GB",
@@ -8760,6 +8778,12 @@
 				"probability": 0.3,
 				"count": 10,
 				"addMaxCount": 90
+			},
+			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "Broodling Egg"
 			}
 		],
 		"colors": "BU",
@@ -11776,6 +11800,12 @@
 				"probability": 0.3,
 				"count": 10,
 				"addMaxCount": 90
+			},
+			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "Tome of the Gate"
 			}
 		],
 		"colors": "RG",
@@ -12941,6 +12971,12 @@
 				"probability": 0.3,
 				"count": 10,
 				"addMaxCount": 90
+			},
+			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "Infiltrator's Mask"
 			}
 		],
 		"colors": "UG",
@@ -13612,6 +13648,12 @@
 				"probability": 1,
 				"count": 20,
 				"addMaxCount": 10
+			},
+			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "Shaman's Staff"
 			}
 		],
 		"colors": "RG",
@@ -15656,6 +15698,12 @@
 				"probability": 1,
 				"count": 50,
 				"addMaxCount": 100
+			},
+			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "Spawning Staff"
 			}
 		],
 		"questTags": [
@@ -19076,6 +19124,12 @@
 				"cardTypes": [
 					"Land"
 				]
+			},
+			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "Diamond Kaleidoscope"
 			}
 		],
 		"colors": "W",
@@ -20039,6 +20093,12 @@
 				"probability": 1,
 				"count": 10,
 				"addMaxCount": 10
+			},
+			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "Cursed Lamp"
 			}
 		],
 		"colors": "U",
@@ -22158,6 +22218,12 @@
 					"Instant",
 					"Sorcery"
 				]
+			},
+			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "Pirate's Hook"
 			}
 		],
 		"colors": "URB",
@@ -23081,6 +23147,12 @@
 				"probability": 0.3,
 				"count": 10,
 				"addMaxCount": 90
+			},
+			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "Phyrexian Grimoire"
 			}
 		],
 		"colors": "WG",
@@ -31138,7 +31210,7 @@
 	},
 	{
 		"name": "Mill Mole",
-		"sprite": "sprites/enemy/beast/mole.atlas",
+		"sprite": "sprites/enemy/beast/nakedmolerat.atlas",
 		"deck": [
 			"decks/castle_npc/mill_mole.dck"
 		],
@@ -31207,7 +31279,7 @@
 	},
 	{
 		"name": "Merfolk King",
-		"sprite": "sprites/enemy/humanoid/merfolk/merfolk_king.atlas",
+		"sprite": "sprites/enemy/humanoid/merfolk/merfolk_lord.atlas",
 		"deck": [
 			"decks/castle_npc/merfolk_king.dck"
 		],
@@ -31247,7 +31319,7 @@
 	},
 	{
 		"name": "Forest Titan",
-		"sprite": "sprites/enemy/elemental/treant.atlas",
+		"sprite": "sprites/enemy/elemental/walkingleef.atlas",
 		"deck": [
 			"decks/castle_npc/forest_titan.dck"
 		],
