@@ -184,6 +184,7 @@ public interface IGuiGame {
      * @return One of {@code choices}. Can only be {@code null} if {@code choices} is empty.
      */
     <T> T one(String message, List<T> choices);
+    <T> T one(String message, List<T> choices, Function<T, String> display);
 
     <T> void reveal(String message, List<T> items);
 
