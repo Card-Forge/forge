@@ -290,7 +290,7 @@
   </object>
   <object id="225" template="../../../../../../../common/maps/obj/enemy.tx" x="335.364" y="271.636" visible="1">
    <properties>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Black Market&quot;]}"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Black Market|MMQ&quot;]}"/>
     <property name="enemy" value="Skeleton Champion"/>
     <property name="hidden" type="bool" value="true"/>
     <property name="pursueRange" type="float" value="60"/>
@@ -299,7 +299,7 @@
   </object>
   <object id="226" template="../../../../../../../common/maps/obj/enemy.tx" x="402" y="336.5" visible="1">
    <properties>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Death Pit Offering&quot;]}"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Death Pit Offering|NMS&quot;]}"/>
     <property name="enemy" value="Skeleton Champion"/>
     <property name="hidden" type="bool" value="true"/>
     <property name="pursueRange" type="float" value="60"/>
@@ -308,7 +308,7 @@
   </object>
   <object id="227" template="../../../../../../../common/maps/obj/enemy.tx" x="38.75" y="169" visible="1">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Death Pit Offering&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Death Pit Offering|NMS&quot;]
 }</property>
     <property name="enemy" value="Skeleton Champion"/>
     <property name="hidden" type="bool" value="true"/>
@@ -318,7 +318,7 @@
   </object>
   <object id="229" template="../../../../../../../common/maps/obj/enemy.tx" x="222.667" y="175" visible="1">
    <properties>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Death Pits of Rath&quot;]}"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Death Pits of Rath|TMP&quot;]}"/>
     <property name="enemy" value="Skeleton Champion"/>
     <property name="hidden" type="bool" value="true"/>
     <property name="pursueRange" type="float" value="60"/>
@@ -327,7 +327,7 @@
   </object>
   <object id="230" template="../../../../../../../common/maps/obj/enemy.tx" x="432" y="368" visible="1">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Nether Shadow&quot;,&quot;Nether Shadow&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Nether Shadow|LEA&quot;,&quot;Nether Shadow|LEA&quot;]
 }</property>
     <property name="enemy" value="Dark Spirit"/>
     <property name="flying" type="bool" value="true"/>
@@ -339,7 +339,7 @@
   </object>
   <object id="246" template="../../../../../../../common/maps/obj/enemy.tx" x="117.333" y="396.833" visible="1">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Nether Shadow&quot;,&quot;Nether Shadow&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Nether Shadow|LEA&quot;,&quot;Nether Shadow|LEA&quot;]
 }</property>
     <property name="enemy" value="Dark Spirit"/>
     <property name="flying" type="bool" value="true"/>
@@ -440,7 +440,7 @@
   </object>
   <object id="257" template="../../../../../../../common/maps/obj/enemy.tx" x="272" y="64" visible="1">
    <properties>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Death Pits of Rath&quot;]}"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Death Pits of Rath|TMP&quot;]}"/>
     <property name="enemy" value="Skeleton Champion"/>
     <property name="hidden" type="bool" value="true"/>
     <property name="pursueRange" type="float" value="60"/>
@@ -483,7 +483,7 @@
   <object id="264" template="../../../../../../../common/maps/obj/manashards.tx" x="303.5" y="49.8333"/>
   <object id="265" template="../../../../../../../common/maps/obj/scroll.tx" x="128" y="368">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Liliana's Defeat&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Dark Banishing|ICE&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="267" template="../../../../../../../common/maps/obj/entry_left.tx" x="1.45455" y="206.909" width="16.3636" height="72.7273">

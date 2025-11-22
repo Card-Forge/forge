@@ -520,7 +520,7 @@
   </object>
   <object id="203" template="../../../../../../../common/maps/obj/scroll.tx" x="592" y="528">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Liliana's Defeat&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Dark Banishing|ICE&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="205" template="../../../../../../../common/maps/obj/treasure.tx" x="688" y="16">
@@ -1200,7 +1200,7 @@
    }
 ]
 </property>
-    <property name="effect" value="{&quot;lifeModifier&quot;: 10, &quot;startBattleWithCard&quot;: [ &quot;Black Knight&quot; ]}"/>
+    <property name="effect" value="{&quot;lifeModifier&quot;: 10, &quot;startBattleWithCard&quot;: [ &quot;Black Knight|LEA&quot; ]}"/>
     <property name="enemy" value="Death Knight"/>
     <property name="reward">[
   {
@@ -1680,7 +1680,7 @@
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;cardName&quot;:&quot;The Chain Veil&quot;
+  &quot;cardName&quot;:&quot;Nevinyrral's Disk|LEA&quot;
 }
 ]
 
@@ -1894,7 +1894,7 @@
    }
 ]
 </property>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Black Market&quot;]}"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Black Market|MMQ&quot;]}"/>
     <property name="enemy" value="Skeleton Champion"/>
     <property name="hidden" type="bool" value="true"/>
     <property name="pursueRange" type="float" value="60"/>
@@ -1952,7 +1952,7 @@
    }
 ]
 </property>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Death Pits of Rath&quot;]}"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Death Pits of Rath|TMP&quot;]}"/>
     <property name="enemy" value="Skeleton Champion"/>
     <property name="hidden" type="bool" value="true"/>
     <property name="pursueRange" type="float" value="60"/>
@@ -2155,43 +2155,43 @@
   &quot;cardUnion&quot;: [
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Dark Ritual&quot;
+      &quot;cardName&quot;: &quot;Dark Ritual|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Nightmare&quot;
+      &quot;cardName&quot;: &quot;Nightmare|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Drain Life&quot;
+      &quot;cardName&quot;: &quot;Drain Life|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Terror&quot;
+      &quot;cardName&quot;: &quot;Terror|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Yawgmoth's Will&quot;
+      &quot;cardName&quot;: &quot;Yawgmoth's Will|USG&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Griselbrand&quot;
+      &quot;cardName&quot;: &quot;Spirit of the Night|MIR&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Desecration Demon&quot;
+      &quot;cardName&quot;: &quot;Sengir Vampire|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Damnation&quot;
+      &quot;cardName&quot;: &quot;Mutilate|TOR&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Recurring Nightmare&quot;
+      &quot;cardName&quot;: &quot;Recurring Nightmare|EXO&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Avatar of Woe&quot;
+      &quot;cardName&quot;: &quot;Avatar of Woe|PCY&quot;
     }
   ]
 },
@@ -2202,27 +2202,27 @@
   &quot;cardUnion&quot;: [
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Mox Jet&quot;
+      &quot;cardName&quot;: &quot;Mox Jet|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Cabal Coffers&quot;
+      &quot;cardName&quot;: &quot;Cabal Coffers|TOR&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Underground Sea&quot;
+      &quot;cardName&quot;: &quot;Underground Sea|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Scrubland&quot;
+      &quot;cardName&quot;: &quot;Scrubland|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Badlands&quot;
+      &quot;cardName&quot;: &quot;Badlands|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Bayou&quot;
+      &quot;cardName&quot;: &quot;Bayou|LEA&quot;
     }
   ]
 },
@@ -2233,19 +2233,19 @@
   &quot;cardUnion&quot;: [
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Blood Crypt&quot;
+      &quot;cardName&quot;: &quot;Sulfurous Springs|ICE&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Godless Shrine&quot;
+      &quot;cardName&quot;: &quot;Caves of Koilos|APC&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Overgrown Tomb&quot;
+      &quot;cardName&quot;: &quot;Llanowar Wastes|APC&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Watery Grave&quot;
+      &quot;cardName&quot;: &quot;Underground River|ICE&quot;
     }
   ]
 },
@@ -2256,19 +2256,19 @@
   &quot;cardUnion&quot;: [
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Blood Crypt&quot;
+      &quot;cardName&quot;: &quot;Sulfurous Springs|ICE&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Godless Shrine&quot;
+      &quot;cardName&quot;: &quot;Caves of Koilos|APC&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Overgrown Tomb&quot;
+      &quot;cardName&quot;: &quot;Llanowar Wastes|APC&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Watery Grave&quot;
+      &quot;cardName&quot;: &quot;Underground River|ICE&quot;
     }
   ]
 }]</property>

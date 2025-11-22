@@ -304,7 +304,7 @@
   </object>
   <object id="203" template="../../../../../../../common/maps/obj/scroll.tx" x="70.3333" y="279">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Liliana's Defeat&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Dark Banishing|ICE&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="205" template="../../../../../../../common/maps/obj/treasure.tx" x="112" y="592">
@@ -469,7 +469,7 @@
 	&quot;name&quot;:&quot;Let her leave&quot;,
 	&quot;text&quot;:&quot;She bows her head and scrambles away, leaving her staff behind.&quot;,
 	&quot;action&quot;:[
-	    {&quot;grantRewards&quot;:[{&quot;type&quot;:&quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Staff of the Death Magus&quot;}]},
+	    {&quot;grantRewards&quot;:[{&quot;type&quot;:&quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Charcoal Diamond|MIR&quot;}]},
 	    {&quot;deleteMapObject&quot;:240}
 	],
 	&quot;options&quot;:[ {&quot;name&quot;:&quot;(Continue)&quot;} ]
@@ -486,7 +486,7 @@
 	&quot;name&quot;:&quot;Let her leave&quot;,
 	&quot;text&quot;:&quot;She bows her head and scrambles away, leaving her staff behind.&quot;,
 	&quot;action&quot;:[
-	    {&quot;grantRewards&quot;:[{&quot;type&quot;:&quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Staff of the Death Magus&quot;}]},
+	    {&quot;grantRewards&quot;:[{&quot;type&quot;:&quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Charcoal Diamond|MIR&quot;}]},
 	    {&quot;deleteMapObject&quot;:240}
 	],
 	&quot;options&quot;:[ {&quot;name&quot;:&quot;(Continue)&quot;} ]
