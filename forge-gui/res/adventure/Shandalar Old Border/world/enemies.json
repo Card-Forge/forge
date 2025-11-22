@@ -434,16 +434,15 @@
 				"type": "card",
 				"probability": 0.4,
 				"count": 1,
-				"colors": [
-					"Green"
-				],
 				"rarity": [
 					"rare"
 				],
 				"cardTypes": [
-					"Planeswalker"
-				],
-				"colorType": "MonoColor"
+					"Artifact",
+					"Enchantment",
+					"Instant",
+					"Sorcery"
+				]
 			},
 			{
 				"type": "card",
@@ -519,16 +518,15 @@
 				"type": "card",
 				"probability": 0.4,
 				"count": 1,
-				"colors": [
-					"Blue"
-				],
 				"rarity": [
 					"rare"
 				],
 				"cardTypes": [
-					"Planeswalker"
-				],
-				"colorType": "MonoColor"
+					"Artifact",
+					"Enchantment",
+					"Instant",
+					"Sorcery"
+				]
 			},
 			{
 				"type": "card",
@@ -2163,10 +2161,8 @@
 					"rare"
 				],
 				"cardTypes": [
-					"Planeswalker"
-				],
-				"colorType": "Colorless",
-				"cardText": "Karn"
+					"Artifact"
+				]
 			},
 			{
 				"type": "card",
@@ -2398,7 +2394,10 @@
 					"rare"
 				],
 				"cardTypes": [
-					"Planeswalker"
+					"Artifact",
+					"Enchantment",
+					"Instant",
+					"Sorcery"
 				]
 			},
 			{
@@ -3129,7 +3128,6 @@
 					"Enchantment",
 					"Instant",
 					"Sorcery",
-					"Planeswalker",
 					"Land"
 				]
 			},
@@ -3865,10 +3863,11 @@
 					"rare"
 				],
 				"cardTypes": [
-					"Planeswalker"
-				],
-				"colorType": "Any",
-				"cardText": "Sarkhan"
+					"Artifact",
+					"Enchantment",
+					"Instant",
+					"Sorcery"
+				]
 			},
 			{
 				"type": "card",
@@ -10787,10 +10786,11 @@
 					"rare"
 				],
 				"cardTypes": [
-					"Planeswalker"
-				],
-				"colorType": "Any",
-				"cardText": "Sarkhan"
+					"Artifact",
+					"Enchantment",
+					"Instant",
+					"Sorcery"
+				]
 			},
 			{
 				"type": "card",
@@ -11525,8 +11525,7 @@
 					"Artifact",
 					"Enchantment",
 					"Instant",
-					"Sorcery",
-					"Planeswalker"
+					"Sorcery"
 				]
 			},
 			{
@@ -27906,10 +27905,11 @@
 					"rare"
 				],
 				"cardTypes": [
-					"Planeswalker"
-				],
-				"colorType": "Any",
-				"cardText": "Sarkhan"
+					"Artifact",
+					"Enchantment",
+					"Instant",
+					"Sorcery"
+				]
 			},
 			{
 				"type": "card",
