@@ -37,7 +37,7 @@
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="208.667" y="225.21">
    <properties>
     <property name="direction" value="up"/>
-    <property name="teleport" value="../common/maps/map/djinnpalace/djinnpalace_2.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/djinnpalace/djinnpalace_2.tmx"/>
    </properties>
   </object>
   <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="206.712" y="152.781">

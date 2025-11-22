@@ -37,14 +37,14 @@
  <objectgroup id="4" name="Objects">
   <object id="87" template="../../../../../../common/maps/obj/door_down.tx" x="308.384" y="159.596" width="39.283" height="32.2627">
    <properties>
-    <property name="teleport" value="../common/maps/map/aerie/aerie_4.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/aerie/aerie_4.tmx"/>
     <property name="teleportObjectId" value="87"/>
    </properties>
   </object>
   <object id="88" template="../../../../../../common/maps/obj/door_right.tx" x="209" y="160" width="46.5" height="41.6667">
    <properties>
     <property name="direction" value="right"/>
-    <property name="teleport" value="../common/maps/map/aerie/aerie_2.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/aerie/aerie_2.tmx"/>
     <property name="teleportObjectId" value="91"/>
    </properties>
   </object>

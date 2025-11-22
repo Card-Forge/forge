@@ -38,13 +38,13 @@
  <objectgroup id="4" name="Objects">
   <object id="66" template="../../../../../../common/maps/obj/door_up.tx" x="802.112" y="297.76">
    <properties>
-    <property name="teleport" value="../common/maps/map/vampirecastle/vampirecastle_4C.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/vampirecastle/vampirecastle_4C.tmx"/>
     <property name="teleportObjectId" value="65"/>
    </properties>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/door_down.tx" x="48.9816" y="304.041">
    <properties>
-    <property name="teleport" value="../common/maps/map/vampirecastle/vampirecastle_4.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/vampirecastle/vampirecastle_4.tmx"/>
     <property name="teleportObjectId" value="66"/>
    </properties>
   </object>

@@ -67,7 +67,7 @@
   <object id="83" template="../../../../../../common/maps/obj/waypoint.tx" x="193.014" y="286.598"/>
   <object id="86" template="../../../../../../common/maps/obj/entry_up.tx" x="208.316" y="175.684">
    <properties>
-    <property name="teleport" value="../common/maps/map/monastery/unhallowed_abbey_1F.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/monastery/unhallowed_abbey_1F.tmx"/>
    </properties>
   </object>
   <object id="87" template="../../../../../../common/maps/obj/booster.tx" x="272.228" y="95.7719">

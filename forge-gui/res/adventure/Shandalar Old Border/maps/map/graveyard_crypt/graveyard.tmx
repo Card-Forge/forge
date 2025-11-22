@@ -38,7 +38,7 @@
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="182" y="400.5" width="55" height="16"/>
   <object id="49" template="../../../../../../common/maps/obj/entry_down.tx" x="191" y="33.5" width="19" height="20">
    <properties>
-    <property name="teleport" value="../common/maps/map/graveyard_crypt/crypt.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/graveyard_crypt/crypt.tmx"/>
    </properties>
   </object>
   <object id="54" template="../../../../../../common/maps/obj/gold.tx" x="99" y="77.5"/>

@@ -88,7 +88,7 @@
   <object id="197" template="../../../../../../common/maps/obj/door_up.tx" x="366.85" y="466.85" width="31" height="14.3333">
    <properties>
     <property name="direction" value="down"/>
-    <property name="teleport" value="../common/maps/map/zedruu/zedruu_f1.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/zedruu/zedruu_f1.tmx"/>
    </properties>
   </object>
   <object id="201" template="../../../../../../common/maps/obj/enemy.tx" x="270.342" y="69.105">

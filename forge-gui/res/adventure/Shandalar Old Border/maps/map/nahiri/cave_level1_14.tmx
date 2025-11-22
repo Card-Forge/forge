@@ -18,13 +18,13 @@
  <objectgroup id="4" name="Objects">
   <object id="60" template="../../../../../../common/maps/obj/door_left.tx" x="542" y="322">
    <properties>
-    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_4/cave_23I9.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_4/cave_23I9.tmx"/>
     <property name="teleportObjectId" value="59"/>
    </properties>
   </object>
   <object id="61" template="../../../../../../common/maps/obj/door_down.tx" x="319.333" y="19.3333">
    <properties>
-    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_4/cave_23H8.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_4/cave_23H8.tmx"/>
     <property name="teleportObjectId" value="62"/>
    </properties>
   </object>

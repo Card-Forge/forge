@@ -30,7 +30,7 @@
  <objectgroup id="4" name="Objects">
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="268" width="48" height="16">
    <properties>
-    <property name="teleport" value="../common/maps/map/vampirecastle/vampirecastle_1.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/vampirecastle/vampirecastle_1.tmx"/>
    </properties>
   </object>
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="193.5" y="125.987">

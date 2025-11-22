@@ -23,7 +23,7 @@
  <objectgroup id="4" name="Objects">
   <object id="61" template="../../../../../../common/maps/obj/door_right.tx" x="2.95097" y="319.688">
    <properties>
-    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_4/cave_23A9.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_4/cave_23A9.tmx"/>
     <property name="teleportObjectId" value="60"/>
    </properties>
   </object>

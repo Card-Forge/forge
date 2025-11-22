@@ -31,13 +31,13 @@
  <objectgroup id="4" name="Objects">
   <object id="70" template="../../../../../../common/maps/obj/door_down.tx" x="97" y="18.5">
    <properties>
-    <property name="teleport" value="../common/maps/map/demontower/portal_2B.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/demontower/portal_2B.tmx"/>
     <property name="teleportObjectId" value="70"/>
    </properties>
   </object>
   <object id="74" template="../../../../../../common/maps/obj/door_up.tx" x="551" y="958.5">
    <properties>
-    <property name="teleport" value="../common/maps/map/demontower/portal_2C.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/demontower/portal_2C.tmx"/>
     <property name="teleportObjectId" value="77"/>
    </properties>
   </object>

@@ -121,7 +121,7 @@
   </object>
   <object id="223" template="../../../../../../common/maps/obj/door_up.tx" x="463.842" y="524.605">
    <properties>
-    <property name="teleport" value="../common/maps/map/zedruu/zedruu.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/zedruu/zedruu.tmx"/>
    </properties>
   </object>
   <object id="225" template="../../../../../../common/maps/obj/enemy.tx" x="503.727" y="394.454">
@@ -163,7 +163,7 @@
   <object id="239" template="../../../../../../common/maps/obj/door_up.tx" x="227.922" y="152.857" width="19.6114" height="29.1114">
    <properties>
     <property name="direction" value="down"/>
-    <property name="teleport" value="../common/maps/map/zedruu/zedruu_f3.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/zedruu/zedruu_f3.tmx"/>
    </properties>
   </object>
   <object id="240" template="../../../../../../common/maps/obj/enemy.tx" x="173.889" y="376.924">

@@ -40,7 +40,7 @@
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="270.665" width="48" height="16">
    <properties>
     <property name="direction" value="up"/>
-    <property name="teleport" value="../common/maps/map/aerie/aerie_0.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/aerie/aerie_0.tmx"/>
     <property name="teleportObjectId" value="90"/>
    </properties>
   </object>
@@ -54,7 +54,7 @@
   <object id="83" template="../../../../../../common/maps/obj/door_up.tx" x="309.411" y="157.773" width="37.0004" height="36.4089">
    <properties>
     <property name="direction" value="down"/>
-    <property name="teleport" value="../common/maps/map/aerie/aerie_2.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/aerie/aerie_2.tmx"/>
     <property name="teleportObjectId" value="90"/>
    </properties>
   </object>

@@ -235,7 +235,7 @@
   <object id="108" template="../../../../../../common/maps/obj/entry_right.tx" x="71" y="73.6667">
    <properties>
     <property name="direction" value="down"/>
-    <property name="teleport" value="../common/maps/map/barbariancamp/barbariancamp_kobold_mine.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/barbariancamp/barbariancamp_kobold_mine.tmx"/>
     <property name="teleportObjectId" value="114"/>
    </properties>
   </object>

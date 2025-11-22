@@ -32,26 +32,26 @@
  <objectgroup id="7" name="Objectlaag 1">
   <object id="115" template="../../../../../../common/maps/obj/door_right.tx" x="573.296" y="403.82" width="38.5996" height="33.7569">
    <properties>
-    <property name="teleport" value="../common/maps/map/demontower/portal_2C.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/demontower/portal_2C.tmx"/>
     <property name="teleportObjectId" value="76"/>
    </properties>
   </object>
   <object id="116" template="../../../../../../common/maps/obj/door_up.tx" x="473.07" y="907.38">
    <properties>
-    <property name="teleport" value="../common/maps/map/demontower/portal_2.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/demontower/portal_2.tmx"/>
     <property name="teleportObjectId" value="78"/>
    </properties>
   </object>
   <object id="117" template="../../../../../../common/maps/obj/door_up.tx" x="513.946" y="83.1696" width="34.564" height="30.5283">
    <properties>
     <property name="direction" value="down"/>
-    <property name="teleport" value="../common/maps/map/demontower/portal_2C2.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/demontower/portal_2C2.tmx"/>
     <property name="teleportObjectId" value="70"/>
    </properties>
   </object>
   <object id="118" template="../../../../../../common/maps/obj/door_down.tx" x="516.367" y="191.942" width="24.8784" height="25.6856">
    <properties>
-    <property name="teleport" value="../common/maps/map/demontower/portal_2D.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/demontower/portal_2D.tmx"/>
     <property name="teleportObjectId" value="56"/>
    </properties>
   </object>

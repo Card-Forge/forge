@@ -416,7 +416,7 @@
    <properties>
     <property name="portalState" value="active" />
     <property name="sprite" value="sprites/portal.atlas" />
-    <property name="teleport" value="../common/maps/map/debug_map.tmx" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/debug_map.tmx" />
     <property name="teleportObjectId" value="99" />
    </properties>
   </object>
@@ -424,7 +424,7 @@
    <properties>
     <property name="portalState" value="active" />
     <property name="sprite" value="sprites/portal.atlas" />
-    <property name="teleport" value="../common/maps/map/debug_map.tmx" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/debug_map.tmx" />
     <property name="teleportObjectId" value="98" />
    </properties>
   </object>

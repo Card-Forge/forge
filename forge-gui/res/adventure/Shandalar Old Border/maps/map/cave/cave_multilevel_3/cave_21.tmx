@@ -31,7 +31,7 @@
   </object>
   <object id="65" template="../../../../../../../common/maps/obj/door_down.tx" x="224.166" y="17">
    <properties>
-    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/cave_21B.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_3/cave_21B.tmx"/>
     <property name="teleportObjectId" value="66"/>
    </properties>
   </object>

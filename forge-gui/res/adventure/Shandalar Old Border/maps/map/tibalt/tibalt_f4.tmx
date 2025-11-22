@@ -114,14 +114,14 @@
   <object id="170" template="../../../../../../common/maps/obj/door_down.tx" x="124.811" y="303.18" width="32.3503" height="30.8105" rotation="0.284412">
    <properties>
     <property name="direction" value="up"/>
-    <property name="teleport" value="../common/maps/map/tibalt/tibalt_f3.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt_f3.tmx"/>
     <property name="teleportObjectId" value="198"/>
    </properties>
   </object>
   <object id="174" template="../../../../../../common/maps/obj/door_down.tx" x="261.1" y="80.3289" width="32.3503" height="30.8105" rotation="0.284412">
    <properties>
     <property name="direction" value="down"/>
-    <property name="teleport" value="../common/maps/map/tibalt/tibalt_f0.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt_f0.tmx"/>
     <property name="teleportObjectId" value="176"/>
    </properties>
   </object>
@@ -130,7 +130,7 @@
     <property name="activeQuestFlag" value="TibaltPortal"/>
     <property name="portalState" value="inactive"/>
     <property name="sprite" value="sprites/portal3.atlas"/>
-    <property name="teleport" value="../common/maps/map/tibalt/tibalt.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt.tmx"/>
     <property name="teleportObjectId" value="222"/>
    </properties>
   </object>

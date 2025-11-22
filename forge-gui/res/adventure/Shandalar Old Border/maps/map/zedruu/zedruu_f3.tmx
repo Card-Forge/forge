@@ -47,7 +47,7 @@
   </object>
   <object id="202" template="../../../../../../common/maps/obj/door_up.tx" x="220.413" y="176.555">
    <properties>
-    <property name="teleport" value="../common/maps/map/zedruu/zedruu_f4.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/zedruu/zedruu_f4.tmx"/>
     <property name="teleportObjectId" value="114"/>
    </properties>
   </object>

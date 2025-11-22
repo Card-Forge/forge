@@ -189,7 +189,7 @@
   <object id="88" template="../../../../../../common/maps/obj/manashards.tx" x="192.25" y="128.5"/>
   <object id="89" template="../../../../../../common/maps/obj/entry_up.tx" gid="1073753167" x="192.087" y="64" rotation="0">
    <properties>
-    <property name="teleport" value="../common/maps/map/monastery/unhallowed_abbey_2F.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/monastery/unhallowed_abbey_2F.tmx"/>
    </properties>
   </object>
  </objectgroup>

@@ -38,7 +38,7 @@
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="308.242" y="247.89" width="38.2392" height="39.9582">
    <properties>
     <property name="direction" value="up"/>
-    <property name="teleport" value="../common/maps/map/djinnpalace/djinnpalace_1.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/djinnpalace/djinnpalace_1.tmx"/>
     <property name="teleportObjectId" value="69"/>
    </properties>
   </object>
@@ -115,7 +115,7 @@
   <object id="76" template="../../../../../../common/maps/obj/entry_up.tx" x="204.017" y="51.835" width="25.4153" height="17.3026">
    <properties>
     <property name="direction" value="down"/>
-    <property name="teleport" value="../common/maps/map/djinnpalace/djinnpalace_2B.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/djinnpalace/djinnpalace_2B.tmx"/>
    </properties>
   </object>
  </objectgroup>

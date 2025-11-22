@@ -34,7 +34,7 @@
   <object id="54" template="../../../../../../common/maps/obj/treasure.tx" x="416.667" y="523.5"/>
   <object id="55" template="../../../../../../common/maps/obj/door_up.tx" x="457.333" y="956.667">
    <properties>
-    <property name="teleport" value="../common/maps/map/merfolkpool/merfolkpool_6.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/merfolkpool/merfolkpool_6.tmx"/>
     <property name="teleportObjectId" value="61"/>
    </properties>
   </object>

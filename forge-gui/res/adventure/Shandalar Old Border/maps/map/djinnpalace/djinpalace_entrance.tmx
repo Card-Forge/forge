@@ -198,7 +198,7 @@
   <object id="118" template="../../../../../../common/maps/obj/entry_up.tx" x="307.667" y="191" width="58.6667" height="25.3333">
    <properties>
     <property name="direction" value="down"/>
-    <property name="teleport" value="../common/maps/map/djinnpalace/djinnpalace_1.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/djinnpalace/djinnpalace_1.tmx"/>
     <property name="teleportObjectId" value="38"/>
    </properties>
   </object>

@@ -41,7 +41,7 @@
  <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
   <object id="114" template="../../../../../../common/maps/obj/entry_up.tx" x="300.842" y="317.718" width="48" height="16">
    <properties>
-    <property name="teleport" value="../common/maps/map/barbariancamp/barbariancamp_kobold.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/barbariancamp/barbariancamp_kobold.tmx"/>
     <property name="teleportObjectId" value="108"/>
    </properties>
   </object>

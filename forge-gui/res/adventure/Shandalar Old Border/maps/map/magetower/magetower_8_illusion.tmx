@@ -165,7 +165,7 @@
   <object id="102" template="../../../../../../common/maps/obj/waypoint.tx" x="197.57" y="89.588"/>
   <object id="104" template="../../../../../../common/maps/obj/entry_up.tx" x="320.565" y="158.304">
    <properties>
-    <property name="teleport" value="../common/maps/map/magetower/magetower_8_illusion_basement.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/magetower/magetower_8_illusion_basement.tmx"/>
    </properties>
   </object>
   <object id="105" template="../../../../../../common/maps/obj/manashards.tx" x="158.667" y="68.6667"/>

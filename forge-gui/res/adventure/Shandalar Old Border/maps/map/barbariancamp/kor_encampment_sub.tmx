@@ -76,7 +76,7 @@
   <object id="66" template="../../../../../../common/maps/obj/gold.tx" x="147" y="312"/>
   <object id="71" template="../../../../../../common/maps/obj/door_left.tx" gid="2147494992" x="720" y="144" width="16" height="48" rotation="0">
    <properties>
-    <property name="teleport" value="../common/maps/map/barbariancamp/kor_encampment.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/barbariancamp/kor_encampment.tmx"/>
     <property name="teleportObjectId" value="79"/>
    </properties>
   </object>
@@ -98,7 +98,7 @@
   <object id="96" template="../../../../../../common/maps/obj/door_down.tx" x="40.3333" y="388.333">
    <properties>
     <property name="direction" value="left"/>
-    <property name="teleport" value="../common/maps/map/barbariancamp/kor_encampment.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/barbariancamp/kor_encampment.tmx"/>
     <property name="teleportObjectId" value="106"/>
    </properties>
   </object>

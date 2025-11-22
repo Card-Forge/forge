@@ -91,7 +91,7 @@
   </object>
   <object id="79" template="../../../../../../common/maps/obj/door_down.tx" x="472.75" y="64.6667">
    <properties>
-    <property name="teleport" value="../common/maps/map/barbariancamp/kor_encampment_sub.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/barbariancamp/kor_encampment_sub.tmx"/>
     <property name="teleportObjectId" value="71"/>
    </properties>
   </object>
@@ -117,7 +117,7 @@
   </object>
   <object id="106" template="../../../../../../common/maps/obj/door_down.tx" x="117" y="287">
    <properties>
-    <property name="teleport" value="../common/maps/map/barbariancamp/kor_encampment_sub.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/barbariancamp/kor_encampment_sub.tmx"/>
     <property name="teleportObjectId" value="96"/>
    </properties>
   </object>

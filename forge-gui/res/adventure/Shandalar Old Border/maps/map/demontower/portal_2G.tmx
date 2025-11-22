@@ -42,7 +42,7 @@
   <object id="62" template="../../../../../../common/maps/obj/entry_up.tx" x="207.5" y="145.192"/>
   <object id="63" template="../../../../../../common/maps/obj/door_left.tx" x="176.5" y="49">
    <properties>
-    <property name="teleport" value="../common/maps/map/demontower/portal_2F.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/demontower/portal_2F.tmx"/>
     <property name="teleportObjectId" value="58"/>
    </properties>
   </object>

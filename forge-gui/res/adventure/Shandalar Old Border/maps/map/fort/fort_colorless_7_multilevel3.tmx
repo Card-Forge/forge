@@ -37,13 +37,13 @@
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="450.334" y="239.188">
    <properties>
     <property name="direction" value="down"/>
-    <property name="teleport" value="../common/maps/map/fort/fort_colorless_7_multilevel4.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/fort/fort_colorless_7_multilevel4.tmx"/>
     <property name="teleportObjectId" value="38"/>
    </properties>
   </object>
   <object id="49" template="../../../../../../common/maps/obj/entry_down.tx" x="273.154" y="384.89">
    <properties>
-    <property name="teleport" value="../common/maps/map/fort/fort_colorless_7_multilevel2.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/fort/fort_colorless_7_multilevel2.tmx"/>
     <property name="teleportObjectId" value="38"/>
    </properties>
   </object>
