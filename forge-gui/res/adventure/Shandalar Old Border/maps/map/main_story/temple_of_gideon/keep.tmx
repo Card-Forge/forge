@@ -4,9 +4,9 @@
   <property name="canFailDungeon" type="bool" value="true"/>
   <property name="respawnEnemies" type="bool" value="true"/>
  </properties>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Tile Layer 1" width="55" height="19">
   <data encoding="csv">
 4107,4107,764,1117,1117,1117,1117,1117,1117,1117,1117,1117,764,1936,1936,1149,1781,1781,1781,1781,1781,1781,764,1149,1149,1149,1149,1149,1149,1149,1149,1149,764,3641,3641,3641,4632,4632,4632,3641,3641,3641,764,6164,6164,6164,6164,6164,6164,6164,6164,6164,764,4107,0,
@@ -103,12 +103,12 @@
 </data>
  </layer>
  <objectgroup id="2" name="Objects">
-  <object id="2" template="../../../../../../common/maps/obj/collision.tx" x="-16" y="0" width="16" height="304"/>
-  <object id="3" template="../../../../../../common/maps/obj/collision.tx" x="-16" y="304" width="912" height="16"/>
-  <object id="4" template="../../../../../../common/maps/obj/collision.tx" x="880" y="0" width="16" height="304"/>
-  <object id="5" template="../../../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="912" height="16"/>
-  <object id="183" template="../../../../../../common/maps/obj/entry_up.tx" x="64" y="304" width="112" height="16"/>
-  <object id="224" template="../../../../../../common/maps/obj/enemy.tx" x="64" y="224">
+  <object id="2" template="../../../../../../../common/maps/obj/collision.tx" x="-16" y="0" width="16" height="304"/>
+  <object id="3" template="../../../../../../../common/maps/obj/collision.tx" x="-16" y="304" width="912" height="16"/>
+  <object id="4" template="../../../../../../../common/maps/obj/collision.tx" x="880" y="0" width="16" height="304"/>
+  <object id="5" template="../../../../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="912" height="16"/>
+  <object id="183" template="../../../../../../../common/maps/obj/entry_up.tx" x="64" y="304" width="112" height="16"/>
+  <object id="224" template="../../../../../../../common/maps/obj/enemy.tx" x="64" y="224">
    <properties>
     <property name="dialog">[ {
   &quot;text&quot;:&quot;HELLO AGAIN PLANESWALKER {var=player_name}&quot;, 
@@ -153,43 +153,43 @@
     <property name="enemy" value="Adept Black Wizard"/>
    </properties>
   </object>
-  <object id="226" template="../../../../../../common/maps/obj/portal.tx" type="portal" x="112" y="112">
+  <object id="226" template="../../../../../../../common/maps/obj/portal.tx" type="portal" x="112" y="112">
    <properties>
     <property name="portalState" value="active"/>
     <property name="sprite" value="sprites/portal.atlas"/>
-    <property name="teleport" value="./main_story/temple_of_gideon/steppe.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_gideon/steppe.tmx"/>
     <property name="teleportObjectId" value="270"/>
    </properties>
   </object>
-  <object id="227" template="../../../../../../common/maps/obj/portal.tx" type="portal" x="272" y="112">
+  <object id="227" template="../../../../../../../common/maps/obj/portal.tx" type="portal" x="272" y="112">
    <properties>
     <property name="portalState" value="closed"/>
     <property name="sprite" value="sprites/portal.atlas"/>
-    <property name="teleport" value="./main_story/temple_of_liliana/graveyard.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/graveyard.tmx"/>
     <property name="teleportObjectId" value="269"/>
    </properties>
   </object>
-  <object id="228" template="../../../../../../common/maps/obj/portal.tx" type="portal" x="432" y="112">
+  <object id="228" template="../../../../../../../common/maps/obj/portal.tx" type="portal" x="432" y="112">
    <properties>
     <property name="portalState" value="closed"/>
     <property name="sprite" value="sprites/portal.atlas"/>
-    <property name="teleport" value="./main_story/temple_of_liliana/bog.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/bog.tmx"/>
     <property name="teleportObjectId" value="270"/>
    </properties>
   </object>
-  <object id="238" template="../../../../../../common/maps/obj/portal.tx" type="portal" x="592" y="112">
+  <object id="238" template="../../../../../../../common/maps/obj/portal.tx" type="portal" x="592" y="112">
    <properties>
     <property name="portalState" value="closed"/>
     <property name="sprite" value="sprites/portal.atlas"/>
-    <property name="teleport" value="./main_story/temple_of_liliana/town.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/town.tmx"/>
     <property name="teleportObjectId" value="183"/>
    </properties>
   </object>
-  <object id="239" template="../../../../../../common/maps/obj/portal.tx" type="portal" x="752" y="112">
+  <object id="239" template="../../../../../../../common/maps/obj/portal.tx" type="portal" x="752" y="112">
    <properties>
     <property name="portalState" value="inactive"/>
     <property name="sprite" value="sprites/portal.atlas"/>
-    <property name="teleport" value="./main_story/temple_of_liliana/town.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/town.tmx"/>
     <property name="teleportObjectId" value="279"/>
    </properties>
   </object>
