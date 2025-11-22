@@ -3,10 +3,10 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
- <tileset firstgid="22017" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="30" height="60">
   <data encoding="base64" compression="zlib">
    eJzt0zEOgCAQRUEqEy9mye29jwUNscDuozjFtPt2Sah7KRUGzq1J92Z3k/10t5+fvnfUXvW9n/qzun/41/d2stu3010AAAC+7XjBDgCs7QKLZ34b
@@ -26,34 +26,34 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="66" template="../../../../../../common/maps/obj/door_up.tx" x="303" y="958">
+  <object id="66" template="../../../../../../../common/maps/obj/door_up.tx" x="303" y="958">
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/cave_21B.tmx"/>
     <property name="teleportObjectId" value="67"/>
    </properties>
   </object>
-  <object id="67" template="../../../../../../common/maps/obj/door_down.tx" x="207.333" y="18.3333">
+  <object id="67" template="../../../../../../../common/maps/obj/door_down.tx" x="207.333" y="18.3333">
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/cave_21D.tmx"/>
     <property name="teleportObjectId" value="83"/>
    </properties>
   </object>
-  <object id="75" template="../../../../../../common/maps/obj/enemy.tx" x="142" y="762">
+  <object id="75" template="../../../../../../../common/maps/obj/enemy.tx" x="142" y="762">
    <properties>
     <property name="enemy" value="Gorgon 2"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="76" template="../../../../../../common/maps/obj/enemy.tx" x="324" y="266">
+  <object id="76" template="../../../../../../../common/maps/obj/enemy.tx" x="324" y="266">
    <properties>
     <property name="enemy" value="Gorgon 2"/>
     <property name="speedModifier" type="float" value="12"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="77" template="../../../../../../common/maps/obj/manashards.tx" x="206" y="239"/>
-  <object id="78" template="../../../../../../common/maps/obj/manashards.tx" x="282" y="510"/>
-  <object id="79" template="../../../../../../common/maps/obj/booster.tx" x="352" y="296">
+  <object id="77" template="../../../../../../../common/maps/obj/manashards.tx" x="206" y="239"/>
+  <object id="78" template="../../../../../../../common/maps/obj/manashards.tx" x="282" y="510"/>
+  <object id="79" template="../../../../../../../common/maps/obj/booster.tx" x="352" y="296">
    <properties>
     <property name="reward">[
   {
