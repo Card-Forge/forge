@@ -135,7 +135,7 @@
   </object>
   <object id="182" template="../../../../../../common/maps/obj/enemy.tx" x="231.038" y="148.247" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Grolnok's Boss Effect&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Swamp|LEA&quot;, &quot;Forest|LEA&quot;, &quot;Worry Beads|MMQ&quot;, &quot;Worry Beads|MMQ&quot;, &quot;Mortal Combat|TOR&quot; ]
 }</property>
     <property name="enemy" value="Grolnok"/>
     <property name="reward">[

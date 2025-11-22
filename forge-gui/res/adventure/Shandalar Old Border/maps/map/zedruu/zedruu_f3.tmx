@@ -38,7 +38,7 @@
  <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
   <object id="201" template="../../../../../../common/maps/obj/enemy.tx" x="213.399" y="128.82">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Zedruu's Boss Effect&quot; ]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Mountain|LEA&quot;, &quot;Mountain|LEA&quot;, &quot;Island|LEA&quot;, &quot;Island|LEA&quot;, &quot;Plains|LEA&quot;, &quot;Plains|LEA&quot;, &quot;Wall of Swords|LEA&quot;, &quot;Storm Crow|ALL&quot;, &quot;Hulking Cyclops|PTK&quot; ]
 }</property>
     <property name="enemy" value="Zedruu"/>
     <property name="spawn.Easy" type="bool" value="true"/>

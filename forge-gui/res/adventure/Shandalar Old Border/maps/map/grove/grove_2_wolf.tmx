@@ -120,7 +120,7 @@
   <object id="88" template="../../../../../../common/maps/obj/enemy.tx" x="386.5" y="144">
    <properties>
     <property name="displayNameOverride" value="Alpha Wolf"/>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Howling Moon&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Familiar Ground|WTH&quot;]
 }</property>
     <property name="enemy" value="Wolf"/>
     <property name="threatRange" type="int" value="50"/>

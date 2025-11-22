@@ -353,7 +353,7 @@
    <properties>
     <property name="effect">{
  &quot;lifeModifier&quot;: 4,
- &quot;startBattleWithCard&quot;: [ &quot;Carrion Screecher&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Aphetto Vulture|ONS&quot; ]
 }</property>
     <property name="enemy" value="Harpy 2"/>
     <property name="threatRange" type="int" value="70"/>

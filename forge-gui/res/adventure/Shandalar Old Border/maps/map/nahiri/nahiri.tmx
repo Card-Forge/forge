@@ -79,7 +79,7 @@
   </object>
   <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="176" y="107.5">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Nahiri Boss Effect&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Plains|LEA&quot;, &quot;Plains|LEA&quot;, &quot;Plains|LEA&quot;, &quot;Lin Sivvi, Defiant Hero|NMS&quot;, &quot;Cho-Manno, Revolutionary|MMQ&quot; ]
 }</property>
     <property name="enemy" value="Nahiri"/>
    </properties>

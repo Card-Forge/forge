@@ -40,7 +40,7 @@
   <object id="55" template="../../../../../../common/maps/obj/treasure.tx" x="42.4167" y="115"/>
   <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="208.083" y="82.5">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Waste Not&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Megrim|STH&quot;]
 }</property>
     <property name="enemy" value="Cloaker"/>
     <property name="threatRange" type="int" value="40"/>

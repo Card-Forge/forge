@@ -5,7 +5,7 @@
  </editorsettings>
  <properties>
   <property name="dungeonEffect">{
-  &quot;startBattleWithCard&quot;: [ &quot;Sulfuric Vortex|EMA|1&quot; ],
+  &quot;startBattleWithCard&quot;: [ &quot;Sulfuric Vortex|SCG|1&quot; ],
 }</property>
  </properties>
  <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
@@ -144,7 +144,7 @@
    <properties>
     <property name="effect">{
  &quot;lifeModifier&quot;: 6,
- &quot;startBattleWithCard&quot;: [ &quot;c_a_treasure_sac&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Enchantress's Presence|ONS&quot;, &quot;Black Market|MMQ&quot;, &quot;Grim Feast|INV&quot; ]
 }</property>
     <property name="enemy" value="Fire Giant"/>
    </properties>
@@ -153,7 +153,7 @@
    <properties>
     <property name="effect">{
  &quot;lifeModifier&quot;: 4,
- &quot;startBattleWithCard&quot;: [ &quot;Irencrag Pyromancer|ELD|1&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Thran Dynamo|UDS|1&quot; ]
 }</property>
     <property name="enemy" value="Mindclaw Shaman"/>
    </properties>

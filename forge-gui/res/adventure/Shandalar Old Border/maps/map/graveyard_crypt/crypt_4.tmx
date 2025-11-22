@@ -72,7 +72,7 @@
   </object>
   <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="184.25" y="217.5">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Demonic Rising&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Sol'kanar the Swamp King|LEG&quot;]
 }</property>
     <property name="enemy" value="Immersturm Demon"/>
     <property name="threatRange" type="int" value="60"/>

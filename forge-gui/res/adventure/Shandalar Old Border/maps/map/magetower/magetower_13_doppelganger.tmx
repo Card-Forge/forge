@@ -5,7 +5,7 @@
  </editorsettings>
  <properties>
   <property name="dungeonEffect">{
-  &quot;startBattleWithCard&quot;: [ &quot;As Foretold&quot; ],
+  &quot;startBattleWithCard&quot;: [ &quot;Mana Flare|LEB|LEB&quot; ],
 }</property>
  </properties>
  <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
@@ -61,7 +61,7 @@
     <property name="effect">{
  &quot;lifeModifier&quot;: 15,
  &quot;changeStartCards&quot;: 2,
- &quot;startBattleWithCard&quot;: [ &quot;Fellwar Stone&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Fellwar Stone|DRK|1&quot; ]
 }</property>
     <property name="enemy" value="Doppelganger"/>
    </properties>
@@ -71,7 +71,7 @@
     <property name="effect">{
  &quot;lifeModifier&quot;: 15,
  &quot;changeStartCards&quot;: 2,
- &quot;startBattleWithCard&quot;: [ &quot;Fellwar Stone&quot;, &quot;Frozen Aether&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Fellwar Stone|DRK|1&quot;, &quot;Kismet|LEG&quot; ]
 }</property>
     <property name="enemy" value="Doppelganger"/>
    </properties>
@@ -80,7 +80,7 @@
    <properties>
     <property name="effect">{
  &quot;lifeModifier&quot;: 10,
- &quot;startBattleWithCard&quot;: [ &quot;Hesitation&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Hesitation|STH|1&quot; ]
 }</property>
     <property name="enemy" value="Master Blue Wizard"/>
    </properties>
@@ -98,7 +98,7 @@
  &quot;lifeModifier&quot;: 30,
  &quot;changeStartCards&quot;: 4,
   &quot;opponent&quot;: {
-    &quot;startBattleWithCard&quot;: [ &quot;King Suleiman&quot; ],
+    &quot;startBattleWithCard&quot;: [ &quot;King Suleiman|ARN|1&quot; ],
   }
 }</property>
     <property name="enemy" value="Djinn"/>

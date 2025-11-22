@@ -87,7 +87,7 @@
   <object id="61" template="../../../../../../common/maps/obj/gold.tx" x="111" y="352.667"/>
   <object id="63" template="../../../../../../common/maps/obj/enemy.tx" x="216.333" y="183">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Mask of Griselbrand&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Necropotence|ICE&quot;]
 }</property>
     <property name="enemy" value="Archfiend"/>
    </properties>

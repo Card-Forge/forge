@@ -133,7 +133,7 @@
   </object>
   <object id="82" template="../../../../../../common/maps/obj/enemy.tx" x="348.702" y="123.925" visible="1">
    <properties>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Subversion|ULG&quot; ] }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Jet Medallion|TMP|1&quot; ] }"/>
     <property name="enemy" value="Unholy Knight"/>
     <property name="hidden" type="bool" value="false"/>
     <property name="pursueRange" type="float" value="60"/>

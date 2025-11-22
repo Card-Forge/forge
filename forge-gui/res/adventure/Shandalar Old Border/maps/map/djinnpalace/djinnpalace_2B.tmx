@@ -44,7 +44,7 @@
    <properties>
     <property name="effect">{
  &quot;lifeModifier&quot;: 4,
- &quot;startBattleWithCard&quot;: [ &quot;Rhystic Study|PCY&quot;, &quot;Emberwilde Caliph|MIR&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Rhystic Study|PCY&quot;,&quot;Emberwilde Caliph|MIR&quot; ]
 }</property>
     <property name="enemy" value="Mighty Djinn"/>
     <property name="hidden" type="bool" value="true"/>

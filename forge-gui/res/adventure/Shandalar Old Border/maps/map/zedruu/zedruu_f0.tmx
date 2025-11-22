@@ -62,7 +62,7 @@
   <object id="176" template="../../../../../../common/maps/obj/waypoint.tx" x="215.342" y="355.605"/>
   <object id="178" template="../../../../../../common/maps/obj/enemy.tx" x="332.175" y="105.438">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Tome of the Infinite&quot;,&quot;Thayan Evokers&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Mountain|LEA&quot;, &quot;Island|LEA&quot;, &quot;Plains|LEA&quot; ]
 }</property>
     <property name="enemy" value="Conjurer"/>
     <property name="reward">[

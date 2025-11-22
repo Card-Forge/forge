@@ -5,7 +5,7 @@
  </editorsettings>
  <properties>
   <property name="dungeonEffect">{
-  &quot;startBattleWithCard&quot;: [ &quot;Kher Keep&quot; ],
+  &quot;startBattleWithCard&quot;: [ &quot;Goblin Burrows|ONS&quot; ],
 }</property>
  </properties>
  <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
@@ -155,7 +155,7 @@
    <properties>
     <property name="effect">{
  &quot;lifeModifier&quot;: 4,
- &quot;startBattleWithCard&quot;: [ &quot;Fearsome Whelp&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Dragonspeaker Shaman|SCG|1&quot; ]
 }</property>
     <property name="enemy" value="Vulcano Dragon"/>
     <property name="fleeRange" value="0"/>

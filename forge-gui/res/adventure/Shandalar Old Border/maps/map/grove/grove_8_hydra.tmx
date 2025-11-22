@@ -91,7 +91,7 @@
   <object id="105" template="../../../../../../common/maps/obj/enemy.tx" x="221.39" y="243.01">
    <properties>
     <property name="effect">{
-	&quot;startBattleWithCard&quot;: [ &quot;First Head of the Hydra&quot;, &quot;Second Head of the Hydra&quot;, &quot;Third Head of the Hydra&quot;, &quot;Fourth Head of the Hydra&quot;, &quot;Fifth Head of the Hydra&quot;, &quot;Sixth Head of the Hydra&quot; ]
+	&quot;startBattleWithCard&quot;: [ &quot;Mountain|LEA&quot;, &quot;Forest|LEA&quot;, &quot;Mana Flare|LEA&quot;, &quot;Primal Rage|STH&quot; ]
 }</property>
     <property name="enemy" value="The Hydra of Shandalaar"/>
     <property name="reward">[
@@ -153,8 +153,7 @@
   <object id="121" template="../../../../../../common/maps/obj/enemy.tx" x="222.406" y="242.409">
    <properties>
     <property name="effect">{
-	&quot;startBattleWithCard&quot;: [ &quot;First Head of the Hydra&quot;, &quot;Second Head of the Hydra&quot;, &quot;Third Head of the Hydra&quot;, &quot;Fourth Head of the Hydra&quot;, &quot;Fifth Head of the Hydra&quot;, &quot;Sixth Head of the Hydra&quot; ],
-	&quot;startBattleWithCard&quot;: [ &quot;The Hydra of Shandalar&quot; ]
+	&quot;startBattleWithCard&quot;: [ &quot;Mountain|LEA&quot;, &quot;Forest|LEA&quot;, &quot;Mana Flare|LEA&quot;, &quot;Primal Rage|STH&quot; ]
 }</property>
     <property name="enemy" value="The Hydra of Shandalaar"/>
     <property name="reward">[

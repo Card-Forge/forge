@@ -34,7 +34,7 @@
    <properties>
     <property name="effect">{
  &quot;lifeModifier&quot;: 8,
- &quot;startBattleWithCard&quot;: [ &quot;Quest for the Gravelord&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Zombie Infestation|ODY&quot; ]
 }</property>
     <property name="enemy" value="Grave Titan"/>
    </properties>

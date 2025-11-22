@@ -76,7 +76,7 @@
 		]
 	}
 ]</property>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Mana Crypt&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Swamp|LEA&quot;, &quot;Swamp|LEA&quot;, &quot;Swamp|LEA&quot;, &quot;Urborg Stalker|WTH&quot; ]
 }</property>
     <property name="enemy" value="Demon of Tibalt"/>
     <property name="threatRange" type="int" value="60"/>

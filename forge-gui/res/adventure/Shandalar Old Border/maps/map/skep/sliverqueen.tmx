@@ -56,7 +56,7 @@
   }
 ]</property>
     <property name="effect">{
- &quot;startBattleWithCard&quot;: [ &quot;Sliver Queen's Boss Effect&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;City of Brass|CHR&quot;, &quot;Reflecting Pool|TMP&quot;, &quot;Metallic Sliver|TMP&quot;, &quot;Primitive Etchings|SCG&quot; ]
 }</property>
     <property name="enemy" value="Sliver Queen"/>
     <property name="spawn.Easy" type="bool" value="true"/>

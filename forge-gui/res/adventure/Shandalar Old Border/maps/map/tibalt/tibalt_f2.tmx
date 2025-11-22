@@ -79,7 +79,7 @@
 	}
 ]</property>
     <property name="displayNameOverride" value="Tibalt's Pet Cyclops"/>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Krark's Thumb&quot;,&quot;Chance Encounter&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Mountain|LEA&quot;, &quot;Mountain|LEA&quot;, &quot;Mana Crypt|PHPR&quot;, &quot;Chance Encounter|ODY&quot;, &quot;Goblin Bomb|WTH&quot;, &quot;Impulsive Maneuvers|ODY&quot; ]
 }</property>
     <property name="enemy" value="Giant Cyclops"/>
     <property name="spawn.Hard" type="bool" value="true"/>

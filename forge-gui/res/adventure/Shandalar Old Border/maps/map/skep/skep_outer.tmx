@@ -211,7 +211,7 @@
     ]
    }
 ]</property>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Metallic Sliver&quot;,&quot;Metallic Sliver&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Metallic Sliver|TMP&quot;, &quot;Metallic Sliver|TMP&quot;, &quot;Metallic Sliver|TMP&quot; ]
 }</property>
     <property name="enemy" value="Metallic Sliver"/>
     <property name="spawn.Easy" type="bool" value="true"/>
@@ -477,7 +477,7 @@
     ]
    }
 ]</property>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Shrine of the Forsaken Gods&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Barbed Sliver|TMP&quot;, &quot;Root Sliver|LGN&quot; ]
 }</property>
     <property name="enemy" value="Slivdrazi Experiment"/>
     <property name="spawn.Easy" type="bool" value="true"/>
@@ -981,7 +981,7 @@
     ]
    }
 ]</property>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Hivestone&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Island|LEA&quot;, &quot;Swamp|LEA&quot; ]
 }</property>
     <property name="enemy" value="Recruiter Sliver"/>
     <property name="spawn.Easy" type="bool" value="true"/>

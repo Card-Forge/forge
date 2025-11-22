@@ -45,7 +45,7 @@
   <object id="115" template="../../../../../../common/maps/obj/gold.tx" x="92.4733" y="149.744"/>
   <object id="117" template="../../../../../../common/maps/obj/enemy.tx" x="410.167" y="232.68" width="16.6667" height="12.6667">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Chef's Boss Effect&quot; ]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;An-Havva Township|HML&quot;, &quot;An-Havva Township|HML&quot;, &quot;An-Havva Township|HML&quot;, &quot;An-Havva Township|HML&quot;, &quot;Folk of An-Havva|HML&quot;, &quot;Dwarven Trader|HML&quot;, &quot;Abbey Matron|HML&quot; ]
 }</property>
     <property name="enemy" value="The Cheff"/>
     <property name="reward">[

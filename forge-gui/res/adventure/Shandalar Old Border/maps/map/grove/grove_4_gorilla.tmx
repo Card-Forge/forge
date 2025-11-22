@@ -102,7 +102,7 @@
   <object id="76" template="../../../../../../common/maps/obj/waypoint.tx" x="309.074" y="284.234"/>
   <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="469.273" y="312.909">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Ragavan, Nimble Pilferer&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Raging Gorilla|VIS&quot;]
 }</property>
     <property name="enemy" value="Monkey"/>
     <property name="threatRange" type="int" value="50"/>

@@ -5,7 +5,7 @@
  </editorsettings>
  <properties>
   <property name="dungeonEffect">{
-  &quot;startBattleWithCard&quot;: [ &quot;Howling Mine&quot; ],
+  &quot;startBattleWithCard&quot;: [ &quot;Howling Mine|LEA|1&quot; ],
 }</property>
  </properties>
  <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>

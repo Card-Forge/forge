@@ -216,7 +216,7 @@
   </object>
   <object id="101" template="../../../../../../common/maps/obj/enemy.tx" x="425" y="477.497" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Asceticism&quot;,&quot;Grismold, the Dreadsower&quot;]
+    <property name="effect">{ &quot;startBattleWithCard": [ "Dense Foliage|WTH","Treetop Village|ULG"]
 }</property>
     <property name="enemy" value="Swamp Troll"/>
     <property name="threatRange" type="int" value="60"/>
@@ -311,7 +311,7 @@
   </object>
   <object id="155" template="../../../../../../common/maps/obj/enemy.tx" x="585" y="524.664" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Enchantress's Presence&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Enchantress's Presence|ONS&quot;, &quot;Black Market|MMQ&quot;, &quot;Grim Feast|INV&quot; ]
 }</property>
     <property name="enemy" value="Dark Enchanter"/>
     <property name="reward">[
@@ -467,14 +467,14 @@
   </object>
   <object id="197" template="../../../../../../common/maps/obj/enemy.tx" x="40" y="55.1638" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Bone Dragon&quot;]
+    <property name="effect">{ &quot;startBattleWithCard": [ "Ashen Ghoul|ICE"]
 }</property>
     <property name="enemy" value="Bone Dragon"/>
    </properties>
   </object>
   <object id="198" template="../../../../../../common/maps/obj/enemy.tx" x="148" y="155.164" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Bull Hippo&quot;]
+    <property name="effect">{ &quot;startBattleWithCard": [ "Bull Hippo|POR"]
 }</property>
     <property name="enemy" value="Hippo"/>
     <property name="threatRange" type="int" value="20"/>

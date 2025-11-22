@@ -1462,7 +1462,7 @@
 ]</property>
     <property name="effect">{
  &quot;lifeModifier&quot;: 15,
- &quot;startBattleWithCard&quot;: [ &quot;Skeleton Key&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Zombie Master|LEA&quot; ]
 }</property>
     <property name="enemy" value="Zombie Lord"/>
     <property name="fleeRange" type="float" value="125"/>
@@ -1627,7 +1627,7 @@
    }
 ]
 </property>
-    <property name="effect" value="{&quot;lifeModifier&quot;: 10,&quot;startBattleWithCard&quot;: [ &quot;Captivating Vampire&quot; ]}"/>
+    <property name="effect" value="{&quot;lifeModifier&quot;: 10,&quot;startBattleWithCard&quot;: [ &quot;Krovikan Vampire|ICE&quot; ]}"/>
     <property name="enemy" value="Vampire"/>
     <property name="reward">[
   {
@@ -1779,7 +1779,7 @@
   <object id="251" template="../../../../../../common/maps/obj/enemy.tx" x="864" y="112">
    <properties>
     <property name="effect">{
- &quot;startBattleWithCard&quot;: [ &quot;Waker of the Dead&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Call to the Grave|SCG&quot;]
 }</property>
     <property name="enemy" value="Liliana"/>
     <property name="reward">[
@@ -1835,7 +1835,7 @@
    }
 ]
 </property>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Endless Ranks of the Dead&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Call to the Grave|SCG&quot;]
 }</property>
     <property name="enemy" value="Greater Zombie"/>
     <property name="hidden" type="bool" value="true"/>

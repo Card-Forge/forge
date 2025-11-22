@@ -5,7 +5,7 @@
  </editorsettings>
  <properties>
   <property name="dungeonEffect">{
-  &quot;startBattleWithCard&quot;: [ &quot;Crawlspace|C13|1&quot; ],
+  &quot;startBattleWithCard&quot;: [ &quot;Crawlspace|ULG|1&quot; ],
 }</property>
  </properties>
  <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
@@ -81,7 +81,7 @@
    <properties>
     <property name="effect">{
  &quot;lifeModifier&quot;: 4,
- &quot;startBattleWithCard&quot;: [ &quot;Ensnaring Bridge|2XM|1&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Ensnaring Bridge|STH&quot; ]
 }</property>
     <property name="enemy" value="Archmage"/>
    </properties>
