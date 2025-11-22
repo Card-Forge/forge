@@ -1,15 +1,17 @@
 [metadata]
-Name=furnacetormentor
+Name=Red Phyrexian Boss
 [Main]
-10 Forest|4ED|2
-4 Elvish Archers|4ED|1
-4 Elvish Berserker|EXO|1
-4 Elvish Champion|7ED|1
-4 Elvish Piper|UDS|1
-4 Giant Growth|ICE|1
-4 Goblin Piledriver|ONS|1
-4 Incinerate|5ED|1
-4 Karplusan Forest|ICE|1
-4 Lightning Bolt|4ED|1
-4 Shivan Dragon|4ED|1
-9 Mountain|4ED|2
+4 Sulfurous Springs|5ED
+4 Tainted Peak|TOR
+4 Mountain|TMP
+8 Swamp|TMP
+4 Dark Ritual|ICE
+4 Phyrexian Purge|MIR
+4 Terminate|PLS
+4 Plague Spores|INV
+4 Agonizing Demise|INV
+4 Phyrexian Scuta|PLS
+2 Tsabo Tavoc|INV
+2 Blazing Specter|INV
+4 Blistering Firecat|ONS
+4 Juggernaut|4ED
