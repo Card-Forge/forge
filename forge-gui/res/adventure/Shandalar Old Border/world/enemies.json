@@ -31530,7 +31530,7 @@
 	},
 	{
 		"name": "Jakub Šlemr '99",
-		"sprite": "sprites/enemy/humanoid/human/warlock/warlock.atlas",
+		"sprite": "sprites/enemy/humanoid/human/warlock/witch.atlas",
 		"deck": [
 			"decks/standard/wc99_jakub_slemr.dck"
 		],
@@ -31698,7 +31698,7 @@
 	},
 	{
 		"name": "Raphael Levy '02",
-		"sprite": "sprites/enemy/humanoid/human/wizard/green_wiz.atlas",
+		"sprite": "sprites/enemy/humanoid/human/wizard/green_wiz1.atlas",
 		"deck": [
 			"decks/standard/wc02_raphael_levy.dck"
 		],
@@ -31712,7 +31712,7 @@
 	},
 	{
 		"name": "Daniel Zink '03",
-		"sprite": "sprites/enemy/humanoid/human/wizard/white_wiz.atlas",
+		"sprite": "sprites/enemy/humanoid/human/wizard/white_wiz2.atlas",
 		"deck": [
 			"decks/standard/wc03_daniel_zink.dck"
 		],
@@ -31726,7 +31726,7 @@
 	},
 	{
 		"name": "Dave Humpherys '03",
-		"sprite": "sprites/enemy/humanoid/human/wizard/green_wiz.atlas",
+		"sprite": "sprites/enemy/humanoid/human/wizard/green_wiz1.atlas",
 		"deck": [
 			"decks/standard/wc03_dave_humpherys.dck"
 		],
@@ -31754,7 +31754,7 @@
 	},
 	{
 		"name": "Peer Kroger '03",
-		"sprite": "sprites/enemy/humanoid/human/necromancer/dark_necro.atlas",
+		"sprite": "sprites/enemy/humanoid/human/wizard/black_wizard.atlas",
 		"deck": [
 			"decks/standard/wc03_peer_kroger.dck"
 		],
@@ -31782,7 +31782,7 @@
 	},
 	{
 		"name": "Bertrand Lestree '94",
-		"sprite": "sprites/enemy/humanoid/human/warrior/skirmisher.atlas",
+		"sprite": "sprites/enemy/humanoid/human/warrior/warrior.atlas",
 		"deck": [
 			"decks/standard/wc94_bertrand_lestree.dck"
 		],
@@ -31796,7 +31796,7 @@
 	},
 	{
 		"name": "Dominic Symens '94",
-		"sprite": "sprites/enemy/humanoid/human/warlock/warlock.atlas",
+		"sprite": "sprites/enemy/humanoid/human/warlock/witch.atlas",
 		"deck": [
 			"decks/standard/wc94_dominic_symens.dck"
 		],
@@ -31810,7 +31810,7 @@
 	},
 	{
 		"name": "Cyrille deFoucaud '94",
-		"sprite": "sprites/enemy/humanoid/human/wizard/red_wiz.atlas",
+		"sprite": "sprites/enemy/humanoid/human/wizard/red_wiz2.atlas",
 		"deck": [
 			"decks/standard/wc94_cyrille_defoucaud.dck"
 		],
@@ -31824,7 +31824,7 @@
 	},
 	{
 		"name": "Alexander Blumke '95",
-		"sprite": "sprites/enemy/humanoid/human/necromancer/dark_necro.atlas",
+		"sprite": "sprites/enemy/humanoid/human/wizard/black_wizard.atlas",
 		"deck": [
 			"decks/standard/wc95_alexander_blumke.dck"
 		],
@@ -31852,7 +31852,7 @@
 	},
 	{
 		"name": "Mark Justice '95",
-		"sprite": "sprites/enemy/humanoid/human/warrior/skirmisher.atlas",
+		"sprite": "sprites/enemy/humanoid/human/warrior/warrior.atlas",
 		"deck": [
 			"decks/standard/wc95_mark_justice.dck"
 		],
@@ -31866,7 +31866,7 @@
 	},
 	{
 		"name": "Henry Stern '95",
-		"sprite": "sprites/enemy/humanoid/human/wizard/red_wiz.atlas",
+		"sprite": "sprites/enemy/humanoid/human/wizard/red_wiz2.atlas",
 		"deck": [
 			"decks/standard/wc95_henry_stern.dck"
 		],
@@ -31894,7 +31894,7 @@
 	},
 	{
 		"name": "Mark Justice '96",
-		"sprite": "sprites/enemy/humanoid/human/warrior/skirmisher.atlas",
+		"sprite": "sprites/enemy/humanoid/human/warrior/warrior.atlas",
 		"deck": [
 			"decks/standard/wc96_mark_justice.dck"
 		],
@@ -31908,7 +31908,7 @@
 	},
 	{
 		"name": "Henry Stern '96",
-		"sprite": "sprites/enemy/humanoid/human/necromancer/dark_necro.atlas",
+		"sprite": "sprites/enemy/humanoid/human/wizard/black_wizard.atlas",
 		"deck": [
 			"decks/standard/wc96_henry_stern.dck"
 		],
