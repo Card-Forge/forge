@@ -41,7 +41,7 @@
   <object id="38" template="../../../../../../common/maps/obj/entry_down.tx" x="193" y="35" width="31" height="16">
    <properties>
     <property name="direction" value="down"/>
-    <property name="teleport" value="./dig_site_0.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/dig_site_0.tmx"/>
     <property name="teleportObjectId" value="60"/>
    </properties>
   </object>
@@ -120,7 +120,7 @@
   </object>
   <object id="104" template="../../../../../../common/maps/obj/entry_down.tx" x="316" y="37" width="26" height="28">
    <properties>
-    <property name="teleport" value="./dig_site_2.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/dig_site_2.tmx"/>
     <property name="teleportObjectId" value="98"/>
    </properties>
   </object>

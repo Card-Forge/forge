@@ -229,13 +229,13 @@
   <object id="4" template="../../../../../../common/maps/obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
   <object id="7" template="../../../../../../common/maps/obj/entry_up.tx" x="208" y="304" width="64" height="16">
    <properties>
-    <property name="teleport" value="./library_of_varsil_1.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/library_of_varsil_1.tmx"/>
     <property name="teleportObjectId" value="24"/>
    </properties>
   </object>
   <object id="24" template="../../../../../../common/maps/obj/entry_down.tx" x="224" y="32" width="32" height="16">
    <properties>
-    <property name="teleport" value="./library_of_varsil_3.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/library_of_varsil_3.tmx"/>
     <property name="teleportObjectId" value="7"/>
    </properties>
   </object>
