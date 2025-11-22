@@ -264,7 +264,7 @@
 		"iconName": "ChandrasTome",
 		"effect": {
 			"startBattleWithCard": [
-				"Jayemdae Tome"
+				"Jayemdae Tome|LEA"
 			]
 		}
 	},
@@ -275,7 +275,7 @@
 		"iconName": "PhoenixCharm",
 		"effect": {
 			"startBattleWithCard": [
-				"Ring of Renewal"
+				"Ring of Renewal|FEM"
 			]
 		}
 	},
@@ -291,7 +291,7 @@
 		"iconName": "PhoenixCharm",
 		"effect": {
 			"startBattleWithCard": [
-				"Mogg Fanatic"
+				"Mogg Fanatic|TMP"
 			]
 		}
 	},
@@ -307,7 +307,7 @@
 		"iconName": "DemonicContract",
 		"effect": {
 			"startBattleWithCard": [
-				"Bottle of Suleiman"
+				"Bottle of Suleiman|ARN"
 			]
 		}
 	},
@@ -318,7 +318,7 @@
 		"cost": 1500,
 		"effect": {
 			"startBattleWithCard": [
-				"Scryb Sprites"
+				"Scryb Sprites|LEA"
 			]
 		}
 	},
@@ -329,7 +329,7 @@
 		"iconName": "SleepWand",
 		"effect": {
 			"startBattleWithCard": [
-				"Ivory Cup"
+				"Ivory Cup|LEA"
 			]
 		}
 	},
@@ -340,7 +340,7 @@
 		"iconName": "HillGiantClub",
 		"effect": {
 			"startBattleWithCard": [
-				"War Barge"
+				"War Barge|DRK"
 			]
 		}
 	},
@@ -376,7 +376,7 @@
 		"cost": 5000,
 		"effect": {
 			"startBattleWithCard": [
-				"Eager Cadet|USG"
+				"Eager Cadet|7ED"
 			]
 		}
 	},
@@ -388,7 +388,7 @@
 		"cost": 5000,
 		"effect": {
 			"startBattleWithCard": [
-				"Miracle Worker|MMQ"
+				"Miracle Worker|DRK"
 			]
 		}
 	},
@@ -399,7 +399,7 @@
 		"cost": 3000,
 		"effect": {
 			"startBattleWithCard": [
-				"Aegis of the Meek|MIR"
+				"Aegis of the Meek|ICE"
 			]
 		}
 	},
@@ -443,7 +443,7 @@
 		"cost": 3000,
 		"effect": {
 			"startBattleWithCard": [
-				"Helm of Chatzuk|FEM"
+				"Helm of Chatzuk|LEA"
 			]
 		}
 	},
@@ -465,7 +465,7 @@
 		"cost": 5000,
 		"effect": {
 			"startBattleWithCard": [
-				"Fugitive Wizard|USG"
+				"Fugitive Wizard|LGN"
 			]
 		}
 	},
@@ -498,7 +498,7 @@
 		"cost": 5000,
 		"effect": {
 			"startBattleWithCard": [
-				"Aven Envoy|ONS"
+				"Aven Envoy|LGN"
 			]
 		}
 	},
@@ -612,7 +612,7 @@
 		"cost": 5000,
 		"effect": {
 			"startBattleWithCard": [
-				"Mons's Goblin Raiders|FEM"
+				"Mons's Goblin Raiders|LEA"
 			]
 		}
 	},
@@ -623,7 +623,7 @@
 		"cost": 3000,
 		"effect": {
 			"startBattleWithCard": [
-				"Zelyon Sword|ICE"
+				"Zelyon Sword|FEM"
 			]
 		}
 	},
@@ -645,7 +645,7 @@
 		"cost": 5000,
 		"effect": {
 			"startBattleWithCard": [
-				"Roc Hatchling|MIR"
+				"Roc Hatchling|WTH"
 			]
 		}
 	},
@@ -668,7 +668,7 @@
 		"cost": 1500,
 		"effect": {
 			"startBattleWithCard": [
-				"Need for Speed|ONS"
+				"Need for Speed|ODY"
 			]
 		}
 	},
@@ -701,7 +701,7 @@
 		"cost": 3000,
 		"effect": {
 			"startBattleWithCard": [
-				"Dragon Mask|MMQ"
+				"Dragon Mask|VIS"
 			]
 		}
 	},
@@ -800,24 +800,13 @@
 		"questItem": true
 	},
 	{
-		"name": "Axt",
-		"equipmentSlot": "Left",
-		"iconName": "SteelAxt",
-		"cost": 2500,
-		"effect": {
-			"startBattleWithCard": [
-				"Bonesplitter"
-			]
-		}
-	},
-	{
 		"name": "Dwarven Warriors",
 		"equipmentSlot": "Left",
 		"iconName": "BronzeSword",
 		"cost": 2500,
 		"effect": {
 			"startBattleWithCard": [
-				"Dwarven Warriors"
+				"Dwarven Warriors|LEA"
 			]
 		}
 	},
@@ -849,17 +838,6 @@
 		}
 	},
 	{
-		"name": "Bonesplitter",
-		"equipmentSlot": "Left",
-		"iconName": "SteelSword",
-		"cost": 4500,
-		"effect": {
-			"startBattleWithCard": [
-				"Bonesplitter"
-			]
-		}
-	},
-	{
 		"name": "Steel Boots",
 		"equipmentSlot": "Boots",
 		"iconName": "SteelBoots",
@@ -876,7 +854,7 @@
 		"cost": 6500,
 		"effect": {
 			"startBattleWithCard": [
-				"Thunder Wall|LEG"
+				"Thunder Wall|ICE"
 			]
 		}
 	},
@@ -1004,7 +982,7 @@
 		"effect": {
 			"lifeModifier": 2,
 			"startBattleWithCard": [
-				"Soul Warden"
+				"Soul Warden|EXO"
 			]
 		}
 	},
@@ -1020,25 +998,13 @@
 		}
 	},
 	{
-		"name": "Cheat",
-		"equipmentSlot": "Neck",
-		"iconName": "Goose",
-		"effect": {
-			"startBattleWithCard": [
-				"Blightsteel Colossus",
-				"Urabrask the Hidden",
-				"Avatar of Slaughter"
-			]
-		}
-	},
-	{
 		"name": "Aladdin's Ring",
 		"equipmentSlot": "Right",
 		"cost": 1000,
 		"iconName": "AladdinsRing",
 		"effect": {
 			"startBattleWithCard": [
-				"Aladdin's Ring"
+				"Aladdin's Ring|ARN"
 			]
 		}
 	},
@@ -1057,7 +1023,7 @@
 		"iconName": "CursedRing",
 		"effect": {
 			"startBattleWithCard": [
-				"Goblin Balloon Brigade"
+				"Goblin Balloon Brigade|LEA"
 			]
 		}
 	},
@@ -1077,7 +1043,7 @@
 		"cost": 5000,
 		"effect": {
 			"startBattleWithCard": [
-				"Willow Elf|POR"
+				"Willow Elf|S99"
 			]
 		}
 	},
@@ -1153,7 +1119,7 @@
 		"effect": {
 			"lifeModifier": 2,
 			"startBattleWithCard": [
-				"Serpent Generator"
+				"Serpent Generator|LEG"
 			]
 		}
 	},
@@ -1187,7 +1153,7 @@
 		"cost": 3000,
 		"effect": {
 			"startBattleWithCard": [
-				"Triangle of War|WTH"
+				"Triangle of War|VIS"
 			]
 		}
 	},
@@ -1198,7 +1164,7 @@
 		"cost": 3500,
 		"effect": {
 			"startBattleWithCard": [
-				"Skull of Orm"
+				"Skull of Orm|DRK"
 			]
 		}
 	},
@@ -1209,7 +1175,7 @@
 		"iconName": "FlameSword",
 		"effect": {
 			"startBattleWithCard": [
-				"Dwarven Blastminer"
+				"Dwarven Blastminer|ONS"
 			]
 		}
 	},
@@ -1220,7 +1186,7 @@
 		"iconName": "MirrorShield",
 		"effect": {
 			"startBattleWithCard": [
-				"Wall of Spears"
+				"Wall of Spears|ATQ"
 			]
 		}
 	},
@@ -1231,7 +1197,7 @@
 		"cost": 12000,
 		"effect": {
 			"startBattleWithCard": [
-				"Library of Leng"
+				"Library of Leng|LEA"
 			]
 		}
 	},
@@ -1242,7 +1208,7 @@
 		"cost": 1000,
 		"effect": {
 			"startBattleWithCard": [
-				"Aladdin's Lamp"
+				"Aladdin's Lamp|ARN"
 			]
 		}
 	},
@@ -1253,7 +1219,7 @@
 		"cost": 1000,
 		"effect": {
 			"startBattleWithCard": [
-				"Fyndhorn Bow"
+				"Fyndhorn Bow|ICE"
 			]
 		}
 	},
@@ -1313,7 +1279,7 @@
 		"cost": 2500,
 		"effect": {
 			"startBattleWithCard": [
-				"Wall of Shadows"
+				"Wall of Shadows|LEG"
 			],
 			"lifeModifier": -1
 		}
@@ -1325,7 +1291,7 @@
 		"iconName": "DarkArmor",
 		"effect": {
 			"startBattleWithCard": [
-				"Skeletal Snake"
+				"Skeletal Snake|POR"
 			],
 			"lifeModifier": -1
 		}
@@ -1337,7 +1303,7 @@
 		"cost": 1000,
 		"effect": {
 			"startBattleWithCard": [
-				"Carrion Feeder"
+				"Carrion Feeder|SCG"
 			]
 		}
 	},
@@ -1348,7 +1314,7 @@
 		"cost": 3000,
 		"effect": {
 			"startBattleWithCard": [
-				"Mind Stone"
+				"Mind Stone|WTH"
 			]
 		}
 	},
@@ -1359,7 +1325,7 @@
 		"cost": 1000,
 		"effect": {
 			"startBattleWithCard": [
-				"Serenity"
+				"Serenity|WTH"
 			]
 		}
 	},
@@ -1370,7 +1336,7 @@
 		"cost": 5000,
 		"effect": {
 			"startBattleWithCard": [
-				"Howling Mine"
+				"Howling Mine|LEA"
 			]
 		}
 	},
@@ -1381,7 +1347,7 @@
 		"cost": 5000,
 		"effect": {
 			"startBattleWithCard": [
-				"Treasure Trove"
+				"Treasure Trove|EXO"
 			]
 		}
 	},
@@ -1392,7 +1358,7 @@
 		"cost": 3500,
 		"effect": {
 			"startBattleWithCard": [
-				"Mystic Remora"
+				"Mystic Remora|ICE"
 			]
 		}
 	},
@@ -1402,7 +1368,7 @@
 		"iconName": "MadStaff",
 		"effect": {
 			"startBattleWithCard": [
-				"Rod of Ruin"
+				"Rod of Ruin|LEA"
 			]
 		}
 	},
@@ -1413,7 +1379,7 @@
 		"iconName": "DarkAmulet",
 		"effect": {
 			"startBattleWithCard": [
-				"Soldevi Digger"
+				"Soldevi Digger|ALL"
 			]
 		}
 	},
@@ -1424,7 +1390,7 @@
 		"cost": 1500,
 		"effect": {
 			"startBattleWithCard": [
-				"Barbed Sextant"
+				"Barbed Sextant|ICE"
 			]
 		}
 	},
@@ -1440,34 +1406,13 @@
 		}
 	},
 	{
-		"name": "Entrancing Lyre",
-		"equipmentSlot": "Right",
-		"iconName": "EntrancingLyre",
-		"effect": {
-			"startBattleWithCard": [
-				"Entrancing Lyre"
-			]
-		}
-	},
-	{
-		"name": "Heavy Arbalest",
-		"equipmentSlot": "Left",
-		"iconName": "HeavyArbalest",
-		"cost": 1500,
-		"effect": {
-			"startBattleWithCard": [
-				"Heavy Arbalest"
-			]
-		}
-	},
-	{
 		"name": "Planar Portal",
 		"equipmentSlot": "Right",
 		"iconName": "RingofThreeWishes",
 		"cost": 2500,
 		"effect": {
 			"startBattleWithCard": [
-				"Planar Portal"
+				"Planar Portal|INV"
 			]
 		}
 	},
@@ -1478,7 +1423,7 @@
 		"cost": 3500,
 		"effect": {
 			"startBattleWithCard": [
-				"Iron Star"
+				"Iron Star|LEA"
 			]
 		}
 	},
@@ -1489,7 +1434,7 @@
 		"cost": 1500,
 		"effect": {
 			"startBattleWithCard": [
-				"Unerring Sling"
+				"Unerring Sling|MIR"
 			]
 		}
 	},
@@ -1500,18 +1445,7 @@
 		"iconName": "JeweledAmulet",
 		"effect": {
 			"startBattleWithCard": [
-				"Jeweled Amulet"
-			]
-		}
-	},
-	{
-		"name": "Traveler's Amulet",
-		"equipmentSlot": "Neck",
-		"iconName": "TravelersAmulet",
-		"cost": 5000,
-		"effect": {
-			"startBattleWithCard": [
-				"Traveler's Amulet"
+				"Jeweled Amulet|ICE"
 			]
 		}
 	},
@@ -1522,18 +1456,7 @@
 		"cost": 2500,
 		"effect": {
 			"startBattleWithCard": [
-				"Amulet of Kroog"
-			]
-		}
-	},
-	{
-		"name": "Amulet of Vigor",
-		"equipmentSlot": "Neck",
-		"iconName": "AmuletofVigor",
-		"cost": 7000,
-		"effect": {
-			"startBattleWithCard": [
-				"Amulet of Vigor"
+				"Amulet of Kroog|ATQ"
 			]
 		}
 	},
@@ -1544,7 +1467,7 @@
 		"cost": 5000,
 		"effect": {
 			"startBattleWithCard": [
-				"Jade Monolith"
+				"Jade Monolith|LEA"
 			]
 		}
 	},
@@ -1555,7 +1478,7 @@
 		"cost": 2500,
 		"effect": {
 			"startBattleWithCard": [
-				"Jandor's Ring"
+				"Jandor's Ring|ARN"
 			]
 		}
 	},
@@ -1577,7 +1500,7 @@
 		"iconName": "Nine-RingedBo",
 		"effect": {
 			"startBattleWithCard": [
-				"Tormod's Crypt"
+				"Tormod's Crypt|DRK"
 			]
 		}
 	},
@@ -1587,7 +1510,7 @@
 		"iconName": "RingofImmortals",
 		"effect": {
 			"startBattleWithCard": [
-				"Ring of Immortals"
+				"Ring of Immortals|LEG"
 			]
 		}
 	},
@@ -1598,7 +1521,7 @@
 		"cost": 2000,
 		"effect": {
 			"startBattleWithCard": [
-				"Mana Prism"
+				"Mana Prism|MIR"
 			]
 		}
 	},
@@ -1608,7 +1531,7 @@
 		"iconName": "RingofRenewal",
 		"effect": {
 			"startBattleWithCard": [
-				"Ring of Renewal"
+				"Ring of Renewal|FEM"
 			]
 		}
 	},
@@ -1619,7 +1542,7 @@
 		"cost": 1500,
 		"effect": {
 			"startBattleWithCard": [
-				"Serrated Arrows"
+				"Serrated Arrows|HML"
 			]
 		}
 	},
@@ -1652,7 +1575,7 @@
 				"lifeModifier": 5
 			},
 			"startBattleWithCard": [
-				"Ivory Tower"
+				"Ivory Tower|ATQ"
 			]
 		},
 		"description": "Brings life to both friend and foe",
@@ -1825,7 +1748,7 @@
 		"effect": {
 			"lifeModifier": 2,
 			"startBattleWithCard": [
-				"Staff of the Ages"
+				"Staff of the Ages|ICE"
 			]
 		}
 	},
@@ -1836,7 +1759,7 @@
 		"effect": {
 			"lifeModifier": -1,
 			"startBattleWithCard": [
-				"Jester's Cap"
+				"Jester's Cap|ICE"
 			]
 		}
 	},
@@ -1848,7 +1771,7 @@
 			"lifeModifier": -1,
 			"moveSpeed": 1.2,
 			"startBattleWithCard": [
-				"Gaea's Touch"
+				"Gaea's Touch|DRK"
 			]
 		}
 	},
@@ -1860,7 +1783,7 @@
 			"lifeModifier": -1,
 			"moveSpeed": 1.2,
 			"startBattleWithCard": [
-				"Snake Basket"
+				"Snake Basket|VIS"
 			],
 			"opponent": {
 				"startBattleWithCard": [
@@ -1877,7 +1800,7 @@
 			"lifeModifier": -1,
 			"cardRewardBonus": 1,
 			"startBattleWithCard": [
-				"Robe of Mirrors"
+				"Robe of Mirrors|EXO"
 			]
 		}
 	},
@@ -1889,7 +1812,7 @@
 			"lifeModifier": 1,
 			"cardRewardBonus": 1,
 			"startBattleWithCard": [
-				"Teferi's Puzzle Box"
+				"Teferi's Puzzle Box|VIS"
 			]
 		}
 	},
@@ -1900,7 +1823,7 @@
 		"effect": {
 			"lifeModifier": 3,
 			"startBattleWithCard": [
-				"Hidden Ancients"
+				"Hidden Ancients|USG"
 			]
 		}
 	},
@@ -1911,7 +1834,7 @@
 		"effect": {
 			"lifeModifier": 3,
 			"startBattleWithCard": [
-				"Dwarven Hold"
+				"Dwarven Hold|FEM"
 			]
 		}
 	},
@@ -1922,7 +1845,7 @@
 		"effect": {
 			"lifeModifier": 1,
 			"startBattleWithCard": [
-				"Dark Sphere"
+				"Dark Sphere|DRK"
 			]
 		}
 	},
@@ -1944,7 +1867,7 @@
 		"effect": {
 			"lifeModifier": 1,
 			"startBattleWithCard": [
-				"Goblin Tinkerer"
+				"Goblin Tinkerer|MIR"
 			]
 		}
 	},
@@ -1955,7 +1878,7 @@
 		"effect": {
 			"lifeModifier": 2,
 			"startBattleWithCard": [
-				"Crown of the Ages"
+				"Crown of the Ages|ICE"
 			]
 		}
 	},
@@ -1965,18 +1888,7 @@
 		"iconName": "UnderworldCookbook",
 		"effect": {
 			"startBattleWithCard": [
-				"Cursed Rack"
-			]
-		}
-	},
-	{
-		"name": "Mantle of Ancient Lore",
-		"equipmentSlot": "Body",
-		"iconName": "Conjurer's Mantle",
-		"effect": {
-			"lifeModifier": 1,
-			"startBattleWithCard": [
-				"Mantle of Ancient Lore"
+				"Cursed Rack|ATQ"
 			]
 		}
 	},
@@ -1987,18 +1899,7 @@
 		"effect": {
 			"lifeModifier": 1,
 			"startBattleWithCard": [
-				"Crystal Rod"
-			]
-		}
-	},
-	{
-		"name": "Grolnok's Skin",
-		"equipmentSlot": "Right",
-		"iconName": "FrogSkin",
-		"effect": {
-			"lifeModifier": 3,
-			"startBattleWithCard": [
-				"Grolnok's Skin"
+				"Crystal Rod|LEA"
 			]
 		}
 	},
@@ -2010,7 +1911,7 @@
 			"lifeModifier": 1,
 			"moveSpeed": 1.35,
 			"startBattleWithCard": [
-				"Land's Edge"
+				"Land's Edge|LEG"
 			]
 		}
 	},
@@ -2021,7 +1922,7 @@
 		"iconName": "HallowedSigil",
 		"effect": {
 			"startBattleWithCard": [
-				"Serra's Blessing"
+				"Serra's Blessing|WTH"
 			]
 		}
 	},
@@ -2032,7 +1933,7 @@
 		"iconName": "UnhallowedSigil",
 		"effect": {
 			"startBattleWithCard": [
-				"Cursed Totem"
+				"Cursed Totem|MIR"
 			]
 		}
 	},
@@ -2125,7 +2026,7 @@
 		"cost": 3000,
 		"effect": {
 			"startBattleWithCard": [
-				"Whalebone Glider|WTH"
+				"Whalebone Glider|ICE"
 			]
 		}
 	},
@@ -2171,7 +2072,7 @@
 		"cost": 1000,
 		"effect": {
 			"startBattleWithCard": [
-				"Necropolis of Azar|DRK"
+				"Necropolis|DRK"
 			]
 		}
 	},
@@ -2182,7 +2083,7 @@
 		"cost": 1500,
 		"effect": {
 			"startBattleWithCard": [
-				"Phyrexian Splicer|VIS"
+				"Phyrexian Splicer|TMP"
 			]
 		}
 	},
@@ -2193,7 +2094,7 @@
 		"cost": 3000,
 		"effect": {
 			"startBattleWithCard": [
-				"Pyromania|5ED"
+				"Pyromania|TOR"
 			]
 		}
 	},
@@ -2205,16 +2106,6 @@
 		"effect": {
 			"startBattleWithCard": [
 				"Concordant Crossroads|LEG"
-			]
-		}
-	},
-	{
-		"name": "Baron Sengir Starting Setup",
-		"equipmentSlot": "Accessory",
-		"iconName": "b",
-		"effect": {
-			"startBattleWithCardInCommandZone": [
-				"Baron Sengir's Domain"
 			]
 		}
 	},
@@ -2279,10 +2170,10 @@
 		"iconName": "w",
 		"effect": {
 			"startBattleWithCard": [
-				"Plains|PGRU",
-				"Plains|PGRU",
-				"Plains|PGRU",
-				"Tormented Angel|USG",
+				"Plains|LEA",
+				"Plains|LEA",
+				"Plains|LEA",
+				"Tormented Angel|UDS",
 				"Serra's Blessing|WTH",
 				"Serra's Liturgy|USG"
 			]
@@ -2294,9 +2185,9 @@
 		"iconName": "brg",
 		"effect": {
 			"startBattleWithCard": [
-				"Mountain|LEA",
-				"Swamp|LEA",
-				"Forest|LEA",
+				"Mountain|PGRU",
+				"Swamp|PGRU",
+				"Forest|PGRU",
 				"Xira Arien|LEG",
 				"The Hive|LEA",
 				"Fecundity|USG"
@@ -2311,7 +2202,7 @@
 			"startBattleWithCard": [
 				"Mountain|UGL",
 				"Mountain|UGL",
-				"Goblin Spy|MMQ",
+				"Goblin Spy|INV",
 				"Goblin War Drums|FEM"
 			]
 		}
@@ -2322,9 +2213,9 @@
 		"iconName": "brg",
 		"effect": {
 			"startBattleWithCard": [
-				"Mountain|LEA",
-				"Forest|LEA",
-				"Swamp|LEA"
+				"Mountain|PALP",
+				"Forest|PALP",
+				"Swamp|PALP"
 			]
 		}
 	},
@@ -2406,9 +2297,9 @@
 		"iconName": "wur",
 		"effect": {
 			"startBattleWithCard": [
-				"Mountain|PGRU",
-				"Island|PGRU",
-				"Plains|PGRU"
+				"Mountain|PELP",
+				"Island|PELP",
+				"Plains|PELP"
 			]
 		}
 	},
@@ -2531,7 +2422,7 @@
 				"Mountain|LEA",
 				"Forest|LEA",
 				"Mana Flare|LEA",
-				"Primal Rage|WTH"
+				"Primal Rage|STH"
 			]
 		}
 	},
@@ -2561,7 +2452,7 @@
 				"Urza's Power Plant|ATQ",
 				"Tolarian Academy|USG",
 				"Urza's Armor|USG",
-				"Urza's Blueprints|USG"
+				"Urza's Blueprints|ULG"
 			]
 		}
 	},
@@ -2695,7 +2586,7 @@
 		"effect": {
 			"lifeModifier": -3,
 			"startBattleWithCard": [
-				"Ravenous Vampire|ODY"
+				"Ravenous Vampire|MIR"
 			]
 		}
 	},
@@ -2866,6 +2757,424 @@
 		"effect": {
 			"startBattleWithCard": [
 				"Urza's Armor|USG"
+			]
+		}
+	},
+	{
+		"name": "Memory Crystal",
+		"equipmentSlot": "Neck",
+		"iconName": "RelicAmulet",
+		"effect": {
+			"startBattleWithCard": [
+				"Memory Crystal|EXO"
+			]
+		}
+	},
+	{
+		"name": "Distorting Lens",
+		"equipmentSlot": "Neck",
+		"iconName": "RelicAmulet",
+		"effect": {
+			"startBattleWithCard": [
+				"Distorting Lens|MMQ"
+			]
+		}
+	},
+	{
+		"name": "Jandor's Saddlebags",
+		"equipmentSlot": "Body",
+		"iconName": "TravelersAmulet",
+		"effect": {
+			"startBattleWithCard": [
+				"Jandor's Saddlebags|ARN"
+			]
+		}
+	},
+	{
+		"name": "Gladiator's Greaves",
+		"equipmentSlot": "Boots",
+		"iconName": "MetallicBoots",
+		"effect": {
+			"startBattleWithCard": [
+				"Arena|PHPR"
+			]
+		}
+	},
+	{
+		"name": "Shoes of Safety",
+		"equipmentSlot": "Boots",
+		"iconName": "LightBoots",
+		"effect": {
+			"startBattleWithCard": [
+				"Safe Haven|DRK"
+			]
+		}
+	},
+	{
+		"name": "Dragon Blood",
+		"equipmentSlot": "Left",
+		"iconName": "Blood",
+		"effect": {
+			"startBattleWithCard": [
+				"Dragon Blood|USG"
+			]
+		}
+	},
+	{
+		"name": "Cursed Lamp",
+		"equipmentSlot": "Right",
+		"iconName": "AladdinsLamp",
+		"effect": {
+			"startBattleWithCard": [
+				"Fledgling Djinn|WTH"
+			]
+		}
+	},
+	{
+		"name": "Pirate's Hook",
+		"equipmentSlot": "Right",
+		"iconName": "Dagger",
+		"effect": {
+			"lifeModifier": -1,
+			"startBattleWithCard": [
+				"Cloud Pirates|POR"
+			]
+		}
+	},
+	{
+		"name": "Grizzly Glaive",
+		"equipmentSlot": "Right",
+		"iconName": "SteelSword",
+		"effect": {
+			"startBattleWithCard": [
+				"Grizzly Bears|LEA"
+			]
+		}
+	},
+	{
+		"name": "Shaman's Staff",
+		"equipmentSlot": "Right",
+		"iconName": "MadStaff",
+		"effect": {
+			"startBattleWithCard": [
+				"Gorilla Shaman|ALL"
+			]
+		}
+	},
+	{
+		"name": "Miller's Shoes",
+		"equipmentSlot": "Boots",
+		"iconName": "GooeyShoes",
+		"effect": {
+			"lifeModifier": 2,
+			"startBattleWithCard": [
+				"Millstone|ATQ"
+			]
+		}
+	},
+	{
+		"name": "War Beast Rider's Boots",
+		"equipmentSlot": "Boots",
+		"iconName": "MetallicBoots",
+		"effect": {
+			"startBattleWithCard": [
+				"Phyrexian War Beast|ALL"
+			]
+		}
+	},
+	{
+		"name": "Tome of the Gate",
+		"equipmentSlot": "Left",
+		"iconName": "SpellBook",
+		"effect": {
+			"lifeModifier": -2,
+			"startBattleWithCard": [
+				"Gate to Phyrexia|ATQ"
+			]
+		}
+	},
+	{
+		"name": "Phyrexian Grimoire",
+		"equipmentSlot": "Left",
+		"iconName": "SpellBook",
+		"effect": {
+			"lifeModifier": -3,
+			"startBattleWithCard": [
+				"Phyrexian Grimoire|TMP"
+			]
+		}
+	},
+	{
+		"name": "Tome of the Vault",
+		"equipmentSlot": "Left",
+		"iconName": "SpellBook",
+		"effect": {
+			"lifeModifier": -2,
+			"startBattleWithCard": [
+				"Phyrexian Vault|MIR"
+			]
+		}
+	},
+	{
+		"name": "Tome of the Portal",
+		"equipmentSlot": "Left",
+		"iconName": "SpellBook",
+		"effect": {
+			"lifeModifier": -3,
+			"startBattleWithCard": [
+				"Phyrexian Portal|ALL"
+			]
+		}
+	},
+	{
+		"name": "Infiltrator's Mask",
+		"equipmentSlot": "Neck",
+		"iconName": "TorturersHood",
+		"effect": {
+			"lifeModifier": -4,
+			"startBattleWithCard": [
+				"Phyrexian Infiltrator|INV"
+			]
+		}
+	},
+	{
+		"name": "Broodling Egg",
+		"equipmentSlot": "Right",
+		"iconName": "DragonEgg",
+		"effect": {
+			"lifeModifier": -2,
+			"startBattleWithCard": [
+				"Phyrexian Broodlings|ULG"
+			]
+		}
+	},
+	{
+		"name": "Armor of Evil",
+		"equipmentSlot": "Body",
+		"iconName": "DarkArmor",
+		"effect": {
+			"startBattleWithCard": [
+				"Lurking Evil|USG"
+			]
+		}
+	},
+	{
+		"name": "Eye of Yawgmoth",
+		"equipmentSlot": "Neck",
+		"iconName": "EyeOfHorror",
+		"effect": {
+			"startBattleWithCard": [
+				"Eye of Yawgmoth|NMS"
+			]
+		}
+	},
+	{
+		"name": "Ashnod's Battle Gear",
+		"equipmentSlot": "Body",
+		"iconName": "SteelArmor",
+		"effect": {
+			"lifeModifier": 4,
+			"startBattleWithCard": [
+				"Ashnod's Battle Gear|ATQ"
+			]
+		}
+	},
+	{
+		"name": "Grovetender's Robes",
+		"equipmentSlot": "Body",
+		"iconName": "BlueRobes",
+		"effect": {
+			"startBattleWithCard": [
+				"Afiya Grove|MIR"
+			]
+		}
+	},
+	{
+		"name": "Winter Boots",
+		"equipmentSlot": "Boots",
+		"iconName": "LightBoots",
+		"effect": {
+			"startBattleWithCard": [
+				"Winter's Night|ALL"
+			]
+		}
+	},
+	{
+		"name": "Prismatic Egg",
+		"equipmentSlot": "Right",
+		"iconName": "ChickenEgg",
+		"effect": {
+			"lifeModifier": -4,
+			"startBattleWithCard": [
+				"Rainbow Efreet|VIS"
+			]
+		}
+	},
+	{
+		"name": "Faerie Dragon Egg",
+		"equipmentSlot": "Right",
+		"iconName": "DragonEgg",
+		"effect": {
+			"lifeModifier": -4,
+			"startBattleWithCard": [
+				"Mist Dragon|MIR"
+			]
+		}
+	},
+	{
+		"name": "Goblin Trumpet",
+		"equipmentSlot": "Left",
+		"iconName": "EntrancingLyre",
+		"effect": {
+			"startBattleWithCard": [
+				"Goblin Polka Band|UGL"
+			]
+		}
+	},
+	{
+		"name": "Rainbow Spear",
+		"equipmentSlot": "Right",
+		"iconName": "SteelSword",
+		"effect": {
+			"lifeModifier": -2,
+			"startBattleWithCard": [
+				"Order of the Sacred Torch|ICE"
+			]
+		}
+	},
+	{
+		"name": "Catalyst Stone",
+		"equipmentSlot": "Neck",
+		"iconName": "RelicAmulet",
+		"effect": {
+			"startBattleWithCard": [
+				"Catalyst Stone|ODY"
+			]
+		}
+	},
+	{
+		"name": "Flaming Skull",
+		"equipmentSlot": "Left",
+		"iconName": "DeathRing",
+		"effect": {
+			"startBattleWithCard": [
+				"Deadapult|PLS"
+			]
+		}
+	},
+	{
+		"name": "Triassic Egg",
+		"equipmentSlot": "Left",
+		"iconName": "ChickenEgg",
+		"effect": {
+			"startBattleWithCard": [
+				"Triassic Egg|LEG"
+			]
+		}
+	},
+	{
+		"name": "Thran Lens",
+		"equipmentSlot": "Neck",
+		"iconName": "RelicAmulet",
+		"effect": {
+			"startBattleWithCard": [
+				"Thran Lens|ULG"
+			]
+		}
+	},
+	{
+		"name": "Spawning Staff",
+		"equipmentSlot": "Left",
+		"iconName": "MadStaff",
+		"effect": {
+			"startBattleWithCard": [
+				"Homarid Spawning Bed|FEM"
+			]
+		}
+	},
+	{
+		"name": "Cave Diver's Boots",
+		"equipmentSlot": "Boots",
+		"iconName": "MetallicBoots",
+		"effect": {
+			"lifeModifier": -3,
+			"startBattleWithCard": [
+				"Rhystic Cave|PCY"
+			]
+		}
+	},
+	{
+		"name": "Shoes of Sorrow",
+		"equipmentSlot": "Boots",
+		"iconName": "LeatherBoots",
+		"effect": {
+			"lifeModifier": 2,
+			"startBattleWithCard": [
+				"Sorrow's Path|DRK"
+			]
+		}
+	},
+	{
+		"name": "Pandora's Box",
+		"equipmentSlot": "Left",
+		"iconName": "PandorasBox",
+		"effect": {
+			"lifeModifier": 3,
+			"startBattleWithCard": [
+				"Chaos Orb|LEA"
+			]
+		}
+	},
+	{
+		"name": "Diamond Kaleidoscope",
+		"equipmentSlot": "Left",
+		"iconName": "PrismRing",
+		"effect": {
+			"startBattleWithCard": [
+				"Diamond Kaleidoscope|VIS"
+			]
+		}
+	},
+	{
+		"name": "Map to the Vale",
+		"equipmentSlot": "Left",
+		"iconName": "DungeonMap",
+		"effect": {
+			"startBattleWithCard": [
+				"Rainbow Vale|FEM"
+			]
+		}
+	},
+	{
+		"name": "Power Armor",
+		"equipmentSlot": "Body",
+		"iconName": "SteelArmor",
+		"effect": {
+			"startBattleWithCard": [
+				"Power Armor|INV"
+			]
+		}
+	},
+	{
+		"name": "Amulet of Azar",
+		"equipmentSlot": "Neck",
+		"iconName": "AmuletOfAzar",
+		"effect": {
+			"startBattleWithCard": [
+				"Necropolis of Azar|AST"
+			]
+		}
+	},
+	{
+		"name": "Baron Sengir Starting Setup",
+		"equipmentSlot": "Accessory",
+		"iconName": "b",
+		"effect": {
+			"startBattleWithCard": [
+				"Swamp|PELP",
+				"Swamp|PELP",
+				"Swamp|PELP",
+				"Subversion|ULG"
 			]
 		}
 	}
