@@ -3733,7 +3733,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean isCursed() {
-        return CardLists.count(getAttachedCards(), CardPredicates.CURSE) > 0;
+        return CardLists.count(getAttachedCards(), Card::isCurse) > 0;
     }
 
     public boolean canDiscardBy(SpellAbility sa, final boolean effect) {
@@ -3993,7 +3993,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             String label = Localizer.getInstance().getMessage("lblCrank", this.crankCounter);
             contraptionSprocketEffect.setOverlayText(label);
         }
-        else if (this.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.CONTRAPTIONS)) {
+        else if (this.getCardsIn(ZoneType.Battlefield).anyMatch(Card::isContraption)) {
             this.createContraptionSprockets();
         }
     }

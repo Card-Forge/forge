@@ -24,18 +24,6 @@ public final class SpellAbilityPredicates extends CardTraitPredicates {
     public static Predicate<SpellAbility> isManaAbility() {
         return SpellAbility::isManaAbility;
     }
-    
-    public static Predicate<SpellAbility> isIntrinsic() {
-        return CardTraitBase::isIntrinsic;
-    }
-
-    public static Predicate<SpellAbility> isChapter() {
-        return SpellAbility::isChapter;
-    }
-
-    public static Predicate<SpellAbility> isTrigger() {
-        return SpellAbility::isTrigger;
-    }
 
     public static Predicate<SpellAbility> isValid(String[] restrictions, Player sourceController, Card source, CardTraitBase spellAbility) {
         return sa -> sa.isValid(restrictions, sourceController, source, spellAbility);
