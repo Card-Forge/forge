@@ -699,7 +699,7 @@ public class FSkin {
             return this.image.getHeight(null);
         }
 
-        protected ImageIcon getIcon() {
+        public ImageIcon getIcon() {
             if (this.imageIcon == null) {
                 /*float screenScale = GuiBase.getInterface().getScreenScale();
                 int iconWidth = Math.round(image.getWidth(null) / screenScale);
@@ -872,7 +872,7 @@ public class FSkin {
         }
 
         @Override
-        protected ImageIcon getIcon() { //can skip null check since imageIcon will always be set
+        public ImageIcon getIcon() { //can skip null check since imageIcon will always be set
             return this.imageIcon;
         }
     }

@@ -40,10 +40,13 @@ import javax.swing.event.ListSelectionListener;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
+import forge.card.MagicColor;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FList;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
+import forge.toolbox.FSkin;
 import forge.util.Localizer;
 
 /**
@@ -305,8 +308,11 @@ public class ListChooser<T> {
          */
         @Override
         public Component getListCellRendererComponent(final JList<? extends T> list, final T value, final int index, final boolean isSelected, final boolean cellHasFocus) {
-            // TODO Auto-generated method stub
-            return defRenderer.getListCellRendererComponent(list, transformer.apply(value), index, isSelected, cellHasFocus);
+            Component result = defRenderer.getListCellRendererComponent(list, transformer.apply(value), index, isSelected, cellHasFocus);
+            if (value instanceof MagicColor.Color c) {
+                defRenderer.setIcon(FSkin.getImage(FSkinProp.iconFromColor(c), 24, 24).getIcon());
+            }
+            return result;
         }
     }
 }
