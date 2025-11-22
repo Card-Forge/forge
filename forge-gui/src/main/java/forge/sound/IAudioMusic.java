@@ -7,4 +7,5 @@ public interface IAudioMusic {
     void stop();
     void dispose();
     void setVolume(float value);
+    boolean isPlaying();
 }

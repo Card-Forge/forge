@@ -48,10 +48,10 @@ import com.sipgate.mp3wav.Converter;
  */
 public class AudioClip implements IAudioClip {
     private final int maxSize = 16;
-    private String filename;
-    private List<ClipWrapper> clips;
+    private final String filename;
+    private final List<ClipWrapper> clips;
     private boolean failed;
-    private static Map<String, byte[]> audioClips = new HashMap<>(30);
+    private static final Map<String, byte[]> audioClips = new HashMap<>(30);
 
     public static byte[] getAudioClips(File file) throws IOException {
         if (!audioClips.containsKey(file.toString()) ) {
@@ -61,8 +61,8 @@ public class AudioClip implements IAudioClip {
     }
 
     public static boolean fileExists(String fileName) {
-        File fSound = new File(SoundSystem.instance.getSoundDirectory(), fileName);
-        return fSound.exists();
+        File fSound = SoundSystem.instance.getSoundResource(fileName);
+        return fSound != null && fSound.exists();
     }
 
     public AudioClip(final String filename) {
@@ -200,9 +200,9 @@ public class AudioClip implements IAudioClip {
         }
 
         private Clip createClip(String filename) {
-            File fSound = new File(SoundSystem.instance.getSoundDirectory(), filename);
-            if (!fSound.exists()) {
-                throw new IllegalArgumentException("Sound file " + fSound.toString() + " does not exist, cannot make a clip of it");
+            File fSound = SoundSystem.instance.getSoundResource(filename);
+            if (fSound == null || !fSound.exists()) {
+                throw new IllegalArgumentException("Sound file " + fSound + " does not exist, cannot make a clip of it");
             }
             try {
                 ByteArrayInputStream bis = new ByteArrayInputStream(getAudioClips(fSound));
@@ -217,7 +217,7 @@ public class AudioClip implements IAudioClip {
             } catch (LineUnavailableException ex) {
                 System.err.println("Error initializing sound system: " + ex);
             } catch (UnsupportedAudioFileException ex) {
-                System.err.println("Unsupported file type of the sound file: " + fSound.toString() + " - " + ex.getMessage());
+                System.err.println("Unsupported file type of the sound file: " + fSound + " - " + ex.getMessage());
                 return null;
             }
             throw new MissingResourceException("Sound clip failed to load", this.getClass().getName(), filename);
