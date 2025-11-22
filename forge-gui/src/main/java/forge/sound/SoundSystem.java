@@ -185,14 +185,16 @@ public class SoundSystem {
         if(playlist == shelvedPlaylist && playlist != null) {
             if(!shelvePrevious) {
                 //Dispose current, resume shelved.
-                currentTrack.dispose();
+                if (currentTrack != null)
+                    currentTrack.dispose();
                 currentTrack = shelvedTrack;
                 shelvedTrack = null;
                 shelvedPlaylist = null;
             }
             else {
                 //Swap current and shelved.
-                currentTrack.pause();
+                if (currentTrack != null)
+                    currentTrack.pause();
                 IAudioMusic temp = currentTrack;
                 currentTrack = shelvedTrack;
                 shelvedTrack = temp;
@@ -209,7 +211,8 @@ public class SoundSystem {
         }
         if (shelvePrevious) {
             //Shelve current.
-            currentTrack.pause();
+            if(currentTrack != null)
+                currentTrack.pause();
             shelvedTrack = currentTrack;
             shelvedPlaylist = currentPlaylist;
             currentTrack = null;
@@ -266,6 +269,9 @@ public class SoundSystem {
     public void refreshVolume() {
         if (currentTrack != null) {
             currentTrack.setVolume(FModel.getPreferences().getPrefInt(FPref.UI_VOL_MUSIC) / 100f);
+        }
+        else if (currentPlaylist != null) {
+            changeBackgroundTrack();
         }
     }
     public void pause() {

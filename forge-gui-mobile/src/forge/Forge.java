@@ -931,6 +931,7 @@ public class Forge implements ApplicationListener {
                             currentScene.act(delta);
                         } catch (IllegalStateException | NullPointerException ie) {
                             //silence this..
+                            //TODO: Don't silence this.
                         }
                     }
                     if (showFPS)
