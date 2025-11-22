@@ -1,9 +1,30 @@
-{                                    
-"name":"Blue bad",
-  "template":
-  {
-   "count":80,
-   "colors":["Blue"], 
-   "rares":0.1
-  }
+{
+  "name": "Blue bad",
+  "mainDeck": [
+    {
+      "count": 34,
+      "colors": [
+        "Blue"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 4,
+      "colors": [
+        "Blue"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 22,
+      "cardName": "Island|PALP"
+    }
+  ]
 }

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="89">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzFVVEOgzAI7X/rCYwX07PozqXWu02yvORJCtZNs5eQEAs8oBRD+B+GJoQl2dI3vg3OLDv5XkKX7JzEp00fsXzh36ZyLM9XMMYQ8q5vu7zi0a+W95t6M8XeSK/ltXBWL+c1kA5erqUnfTPiondnvK2qF70GL9c1q17Cjm0wZ1d4O6qDea3aYCfnUzxKvsArea4FXmBUsWH3xFxxLVm9X9h11HfBUnG/1lwJh75PFq/3yMfjnWnnrGTr7SuclcDz5vH+iqv7qjSDluBt6bmaaNfVzrP3T9A9PduJltzVR6unT+BO3je90nMD
+  </data>
+ </layer>
+ <layer id="7" name="Floor" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxTZWdgUB1API8TN6a1vYTYw83e0XAevuE8ikfxKB7FxGIAZfNnhA==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzbwcPAsIMOWAYNg8QuM9EeY7PXDCiODyiyMzAo4cHK7BB1JkzYzTIh0979QHNlgVgOiA8gYZjYQRrauxuI96DZCxOD2YsLEGNvJAcDQxQHpr0ge5xZGRjiOCDYhRVhPzXsdWSFYGz2gsyfyQnBsRwIN8RzIMwnN5yJtRcdw8yfzogdU8te5DSOnJ7JzUe44heUdiM4EHbtGSbpGRtATkPYcDwHfv3k2kssIDWccaVBbHgGI8SsaSTowZWeSalTYP6B+YHcOole9g6Uf9HtBQDeTMDJ
+  </data>
+ </layer>
+ <layer id="8" name="Walls Supplementary" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBg4YMZEHXNMmLCbZUIl82kB5NkZGBTY6W/nI1YGhoes9LV7P5JdB0ftJQqQk56Hsr3kgL1Au1yAadkZiPfROS+B7Ka3nfQGI7l8Hu4AAKceEGU=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBiZ4BcO8RWaxOkvgaq7C6TvaWLStAY/gXb80sSkRwJ4qM7A8EidfvYVQ8P1L9DOf2TYm48lXi5oUOam4QgEdRgYYqHsczrkmeErSJ6+fmgcPSMzXZFjbySUjgP6NZqA2mIq5u1CoFl/oGwRMsN5FAxtAACq4B2q
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="270.665" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="117.217" y="90.704">
+   <properties>
+    <property name="enemy" value="Clay Golem"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="88,87,86,85,83"/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../../../common/maps/obj/gold.tx" x="192.391" y="145.196"/>
+  <object id="66" template="../../../../../../common/maps/obj/gold.tx" x="19.3334" y="46.6666"/>
+  <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="243.575" y="213.45">
+   <properties>
+    <property name="enemy" value="Clay Golem"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="84,82,81,82"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="325.845" y="85.3379">
+   <properties>
+    <property name="enemy" value="Golem"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="79,80"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="224.586" y="125.875">
+   <properties>
+    <property name="enemy" value="Golem"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../../../common/maps/obj/gold.tx" x="330.667" y="179.333"/>
+  <object id="73" template="../../../../../../common/maps/obj/booster.tx" x="49.5" y="44.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;USG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;USG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;USG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="74" template="../../../../../../common/maps/obj/enemy.tx" x="96.5" y="218">
+   <properties>
+    <property name="enemy" value="Clay Golem"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="83,85,86,87,88"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../../../common/maps/obj/treasure.tx" x="194" y="114">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
+  &quot;addMaxCount&quot;: 2
+}]</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../../../common/maps/obj/manashards.tx" x="392.5" y="83.5"/>
+  <object id="77" template="../../../../../../common/maps/obj/manashards.tx" x="366.5" y="157.5"/>
+  <object id="79" template="../../../../../../common/maps/obj/waypoint.tx" x="357.5" y="86.5"/>
+  <object id="80" template="../../../../../../common/maps/obj/waypoint.tx" x="295" y="87.5"/>
+  <object id="81" template="../../../../../../common/maps/obj/waypoint.tx" x="293.5" y="166"/>
+  <object id="82" template="../../../../../../common/maps/obj/waypoint.tx" x="288.5" y="214"/>
+  <object id="83" template="../../../../../../common/maps/obj/waypoint.tx" x="97" y="217.5"/>
+  <object id="84" template="../../../../../../common/maps/obj/waypoint.tx" x="189" y="215.5"/>
+  <object id="85" template="../../../../../../common/maps/obj/waypoint.tx" x="25.5" y="180.5"/>
+  <object id="86" template="../../../../../../common/maps/obj/waypoint.tx" x="29.5" y="47"/>
+  <object id="87" template="../../../../../../common/maps/obj/waypoint.tx" x="111.5" y="45"/>
+  <object id="88" template="../../../../../../common/maps/obj/waypoint.tx" x="136" y="128"/>
+ </objectgroup>
+</map>

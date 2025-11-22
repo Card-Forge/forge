@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="63">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAAAAMCXARkAAAE=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7C+M1f/cupjJJBeUlVVVVVV1UcHjs4f3w==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmGsOgkAMhPnJJl7LRzyJN1PRW4Grx5AGG8dSTHQXnESaNCgbyMe02xZWoShWs1N4VRZF0x7P5e9ZPLZLexSryRiRTWzf/r8RcKnH1o/lk0/0O5WdM+ho9UPbErMxxHnjsAnXgYDNyz2GmL5jZIipdebaJ25zcI7va+yw1lam5uq6xncbpu3Da4id5JZwaH9oQr/21eE1F0/Aap8th3ZDtfdTU+7lSNrlMMzNb7S013i9IcVsXuAcIb5b9JlwXa9pgp9bY5vH92uTmF9D5x6fnD88+rnto1NwYa0UPo/Rq7N6j9zMHtcnHkHT2wh7OGd98TRNtdzzQ2qN1lkVczynhqn6Wb1iQu4NudRp3Cv6e+9w45oex55n9Jkj7Bs8Z2crXGOYpXWPM87OuH8Y3z0wvrlr27/FVxll9mH59vKu/zHEO4auX3s1nOk9087abHs5goZMullGlu9WU/kdsJfw5Q==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt2EEKgCAQBdDZlHX/I2TRMaNFIEZag8xX+28nIvNxEEURIrIwowN0YEIHeLCgA9CvOXQAogpsijVj8RR3Xto/o2H+1bh26t4fEnPxnodjTd9dpp5GrW8ahNwZief9y3UWzj6ic+zg+kRE9M31f6B5v1pC329EJR27fgW0
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="59" template="../../../../../../common/maps/obj/door_right.tx" x="0.16667" y="335.333">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_4/cave_23A6.tmx"/>
+    <property name="teleportObjectId" value="62"/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../../../common/maps/obj/door_left.tx" x="543.962" y="320.672">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_4/cave_23A8.tmx"/>
+    <property name="teleportObjectId" value="59"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,12 +1,64 @@
-{                                    
-"name":"Sliver",
-  "template":
-  {
-   "count":60,
-   "colors":["White","Red","Green","Blue","Black"],
-   "tribe":"Sliver",        
-   "tribeCards":1.0,
-   "tribeSynergyCards":0.2,
-   "rares":0.4
-  }
+{
+  "name": "Sliver",
+  "mainDeck": [
+    {
+      "count": 23,
+      "colors": [
+        "White",
+        "Red",
+        "Green",
+        "Blue",
+        "Black"
+      ],
+      "subTypes": [
+        "Sliver"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 15,
+      "colors": [
+        "White",
+        "Red",
+        "Green",
+        "Blue",
+        "Black"
+      ],
+      "subTypes": [
+        "Sliver"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 5,
+      "cardName": "Plains|MIR"
+    },
+    {
+      "type": "card",
+      "count": 5,
+      "cardName": "Mountain|MIR"
+    },
+    {
+      "type": "card",
+      "count": 4,
+      "cardName": "Forest|MIR"
+    },
+    {
+      "type": "card",
+      "count": 4,
+      "cardName": "Island|MIR"
+    },
+    {
+      "type": "card",
+      "count": 4,
+      "cardName": "Swamp|MIR"
+    }
+  ]
 }

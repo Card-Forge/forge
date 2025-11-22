@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="85">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyrZWFgqB3Fo3gUj+JRPIpH8YjAADIiAQ4=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNVcsKAjEMLFSlraD+5F49+JOrshcfH6ShBLPLNE0riANhD5tkptO0de7/MAbnLuF3dVx7jDlKPUr9fcp1m9TOG9KH9wp6S10IU9A11zgp1kD3Kdb9KP0fQf4Q55xorYSt0LYr+El+LzWzTyhXW6fEU3ht2cva3iCdpbzJMH+MQ9J5W8Ee1bT6Tl5tPV7hlOeNPUI5CDzjrfcB76nmBeegGZEeWbktnAR5hjRuy8wNlXOI+mrn0sLJWDXkSu67QSt5Tn6e37FP+XvrfBPoLnoYapf3qYze9+gbTgv3CxE0QwE=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJyVVUFSwzAMFMxADs0vUkhhOHMoV17Th0AZSo4M32kKKbyHC0esiZeIrWyDZjRJbEW7Wsv2XERW0W+PRe5m07e+n9Ui58Hbepzncc9fTsuuuSTiiMEDh13I8xr8rR6/v0583CbGwa8rkecMrshvXM1pn9CBOe0IB7wQq89lBtvmZev94R9THPCDDTJpoqbYN9VYv9VgRblSHP5ryAsO0GoZ8W3MYP5rzPuCcl4ciWxpbB+frRxqgF65D/4UfD37W32siTXGsGb5KmZv+tDmbTP5tUa1z6rMC1qoZh/i9z/qvcpgQn/LCzxKBj0Y13LdR+6lPrbzTTJqxNzENe0dXK2Z+8Rbdx7z1p1jLhNnGuK4Z2GpNU/FM6/3gLFwcLWnu7j/rWZcf8lS/DRvCnsb8R8ye4L3C3h562E567x67h7BnWPPaPRF5+x1bx4xyKHn1cbpK667m008bTzmBsJFHY8RG72GO7OEyZqvnfi2njDncngGgRvO4xzmN1snfZw=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="271.5" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="368.136" y="55.0834"/>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="36.909" y="103.993" visible="1">
+   <properties>
+    <property name="enemy" value="Tiger"/>
+    <property name="fleeRange" value="30"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="67,68,71,70,71"/>
+   </properties>
+  </object>
+  <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="48.6663" y="28.5"/>
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="216.564" y="123.961" visible="1">
+   <properties>
+    <property name="enemy" value="Leonin Warrior"/>
+    <property name="fleeRange" value="30"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="185.441" y="109.578">
+   <properties>
+    <property name="enemy" value="Leonin Weaponmaster"/>
+    <property name="fleeRange" value="30"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../../../common/maps/obj/enemy.tx" x="164.48" y="205.18" visible="1">
+   <properties>
+    <property name="enemy" value="Leonin Warrior"/>
+    <property name="fleeRange" value="30"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="74,78"/>
+   </properties>
+  </object>
+  <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="176.454" y="147.33">
+   <properties>
+    <property name="enemy" value="Leonin Weaponmaster"/>
+    <property name="fleeRange" value="30"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../../../common/maps/obj/booster.tx" x="163.657" y="111.145">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;MIR&quot;, &quot;VIS&quot;, &quot;WTH&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot;]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MIR&quot;, &quot;VIS&quot;, &quot;WTH&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MIR&quot;, &quot;VIS&quot;, &quot;WTH&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="67" template="../../../../../../common/maps/obj/waypoint.tx" x="42.3057" y="67.4585"/>
+  <object id="68" template="../../../../../../common/maps/obj/waypoint.tx" x="40.5406" y="141.152"/>
+  <object id="70" template="../../../../../../common/maps/obj/waypoint.tx" x="112.469" y="122.618"/>
+  <object id="71" template="../../../../../../common/maps/obj/waypoint.tx" x="42.747" y="103.643"/>
+  <object id="72" template="../../../../../../common/maps/obj/waypoint.tx" x="370.175" y="106.732"/>
+  <object id="73" template="../../../../../../common/maps/obj/waypoint.tx" x="298.247" y="127.914"/>
+  <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="288.98" y="203.372"/>
+  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="339.286" y="208.667"/>
+  <object id="76" template="../../../../../../common/maps/obj/waypoint.tx" x="345.022" y="158.803"/>
+  <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="349.876" y="136.739" visible="1">
+   <properties>
+    <property name="enemy" value="Tiger"/>
+    <property name="fleeRange" value="30"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="72,76,75,74,75,76"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../../../common/maps/obj/waypoint.tx" x="72.3126" y="204.696"/>
+  <object id="79" template="../../../../../../common/maps/obj/manashards.tx" x="160.127" y="50.2487"/>
+  <object id="80" template="../../../../../../common/maps/obj/enemy.tx" x="369.5" y="68" visible="1">
+   <properties>
+    <property name="enemy" value="Tiger"/>
+    <property name="fleeRange" value="30"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="72,76,75,74,75,76"/>
+   </properties>
+  </object>
+  <object id="81" template="../../../../../../common/maps/obj/collision.tx" x="-15.5" y="0.028" width="16" height="273.444"/>
+  <object id="82" template="../../../../../../common/maps/obj/collision.tx" x="481.5" y="-0.222" width="16" height="273.444"/>
+  <object id="83" template="../../../../../../common/maps/obj/collision.tx" x="-15.73" y="-16.5" width="516.96" height="16"/>
+  <object id="84" template="../../../../../../common/maps/obj/collision.tx" x="-14.48" y="273" width="516.96" height="16"/>
+ </objectgroup>
+</map>

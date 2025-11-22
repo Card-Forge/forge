@@ -1,22 +1,27 @@
 [metadata]
-Name=scarecrowcaptain
+Name=Scarecrow Captain
 [Main]
-1 Forest|ONS|3
-1 Island|ONS|3
-1 Plains|ONS|3
-1 Yavimaya Coast|APC|1
-18 Swamp|ONS|3
-2 Bad Moon|5ED|1
-2 Underground River|ICE|1
-2 Vile Consumption|INV|1
-4 Captain Sisay|INV|1
-4 Cruel Revival|ONS|1
-4 Duress|7ED|1
-4 Hymn to Tourach|FEM|1
-4 Llanowar Wastes|APC|1
-4 Order of the Ebon Hand|FEM|1
-4 Plague Beetle|ULG|1
-4 Scarecrow|DRK|1
-4 Shepherd of Rot|ONS|1
-4 Withered Wretch|LGN|1
-4 Zombie Master|LEA|1
+4 Savannah|LEA
+4 Windswept Heath|ONS
+4 Brushland|5ED
+4 Serra's Sanctum|USG
+8 Plains|LEA
+8 Forest|LEA
+4 Wild Growth|LEA
+4 Overgrowth|STH
+4 Mirari's Wake|JUD
+4 Verduran Enchantress|WTH
+4 Argothian Enchantress|USG
+4 Enchantress's Presence|ONS
+4 Rabid Wombat|LEG
+4 Fugitive Druid|TMP
+4 Rancor|ULG
+4 Ancestral Mask|MMQ
+4 Armadillo Cloak|INV
+2 Gaea's Embrace|USG
+2 Serra's Embrace|USG
+4 Mythic Proportions|ONS
+4 Sterling Grove|INV
+4 Aura of Silence|WTH
+4 Karmic Justice|ODY
+4 Pacifism|LEA

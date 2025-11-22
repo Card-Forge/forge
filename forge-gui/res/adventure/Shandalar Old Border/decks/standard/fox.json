@@ -1,12 +1,36 @@
-{                                    
-"name":"Fox",
-  "template":
-  {
-   "count":60,
-   "colors":["White"],
-   "tribe":"Fox",        
-   "tribeCards":0.5,
-   "tribeSynergyCards":0.2,
-   "rares":0.2
-  }
+{
+  "name": "Fox",
+  "mainDeck": [
+    {
+      "count": 30,
+      "colors": [
+        "White"
+      ],
+      "subTypes": [
+        "Fox"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 8,
+      "colors": [
+        "White"
+      ],
+      "subTypes": [
+        "Fox"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 22,
+      "cardName": "Plains|MIR"
+    }
+  ]
 }

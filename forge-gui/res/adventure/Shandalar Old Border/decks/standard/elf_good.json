@@ -1,10 +1,36 @@
-{                                    
-"name":"Elf good",
-  "template":
-  {
-   "count":60,
-   "colors":["Green"],
-   "tribe":"Elf",
-   "rares":0.8
-  }
+{
+  "name": "Elf good",
+  "mainDeck": [
+    {
+      "count": 8,
+      "colors": [
+        "Green"
+      ],
+      "subTypes": [
+        "Elf"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 30,
+      "colors": [
+        "Green"
+      ],
+      "subTypes": [
+        "Elf"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 22,
+      "cardName": "Forest|POR"
+    }
+  ]
 }
