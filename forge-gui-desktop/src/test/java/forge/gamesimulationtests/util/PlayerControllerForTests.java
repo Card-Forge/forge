@@ -550,7 +550,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options) {
+    public ColorSet chooseColors(String message, SpellAbility sa, int min, int max, ColorSet options) {
         throw new UnsupportedOperationException("No idea how a test player controller would choose colors");
     }
 

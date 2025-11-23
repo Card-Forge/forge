@@ -94,6 +94,13 @@ public enum ColorSet implements Iterable<Color>, Serializable {
         }
         return fromMask(mask);
     }
+    public static ColorSet fromEnums(final Iterable<Color> colors) {
+        byte mask = 0;
+        for (Color e : colors) {
+            mask |= e.getColorMask();
+        }
+        return fromMask(mask);
+    }
 
     public static ColorSet fromNames(final String... colors) {
         byte mask = 0;
