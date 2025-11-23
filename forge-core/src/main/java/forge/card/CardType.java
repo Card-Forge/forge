@@ -644,7 +644,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
                 newType.allCreatureTypes = true;
             }
             // remove specific creature types from all creature types
-            if (ct.getRemoveType() != null && newType.allCreatureTypes) {
+            if (ct.removeType() != null && newType.allCreatureTypes) {
                 newType.excludedCreatureSubtypes.addAll(Lists.newArrayList(IterableUtil.filter(ct.removeType(), CardType::isACreatureType)));
             }
         }
