@@ -132,6 +132,14 @@ Parameters:
 These can be used to chain effects together. However, for common cases many effects already support this directly, e.g. `PutCounter | Choices$``.  
 Besides making the script shorter using such shortcuts usually also helps the AI making better use of the effect.
 
+### ChooseColor
+
+### ChooseGeneric
+
+### ChooseNumber
+
+### ChoosePlayer
+
 ### ChooseType
 This can be used when a player is asked to choose a card (sub)type.
 
@@ -167,6 +175,8 @@ Parameters:
 ### ControlSpell
 
 ## Copies
+
+### Clone
 
 ### CopyPermanent
 Copies a permanent.
@@ -394,6 +404,8 @@ Parameters:
 Usually you choose a player and that player has to sacrifice something of their choice
 
 ## Scry
+
+## Surveil
 
 ## StoreSVar
 

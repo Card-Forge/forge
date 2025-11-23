@@ -1354,7 +1354,7 @@ public class AdvancedSearch {
 
     private static abstract class ColorEvaluator<T extends InventoryItem> extends CustomListEvaluator<T, MagicColor.Color> {
         public ColorEvaluator() {
-            super(Arrays.asList(MagicColor.Color.values()), MagicColor.Color::getSymbol);
+            super(Arrays.asList(MagicColor.Color.values()), MagicColor.Color::getSymbol, MagicColor.Color::getTranslatedName);
         }
 
         @Override

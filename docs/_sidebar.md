@@ -9,11 +9,11 @@
     - [Network Extra](Networking-Extras.md)
   - [Advanced search](Advanced-Search.md)
 
-- [Adventure Mode](Adventure/Adventure-Mode.md)
+- Adventure Mode
 
     - Gameplay Guide
       - [Getting Started](Adventure/Gameplay-Guide.md)
-      - [Different Planes](Adventure/Different-Planes.md)
+      - [Different Planes](Adventure/Planes.md)
       - [Currency](Adventure/Currency.md)
       - [Deck Building Tips](Adventure/Deck-Building-Tips.md)
       - [Towns & Capitals](Adventure/Towns-&-Capitals.md)
