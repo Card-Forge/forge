@@ -851,7 +851,7 @@ public final class StaticAbilityContinuous {
 
             // add Types
             if ((addTypes != null && !addTypes.isEmpty()) || (removeTypes != null && !removeTypes.isEmpty()) || addAllCreatureTypes || !remove.isEmpty()) {
-                affectedCard.addChangedCardTypes(addTypes, removeTypes, addAllCreatureTypes, remove,
+                affectedCard.addChangedCardTypes(addTypes != null ? new CardType(addTypes, true) : null, removeTypes != null ? new CardType(removeTypes, true) : null, addAllCreatureTypes, remove,
                         se.getTimestamp(), stAb.getId(), false, stAb.isCharacteristicDefining());
             }
 
