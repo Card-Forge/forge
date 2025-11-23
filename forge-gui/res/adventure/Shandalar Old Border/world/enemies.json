@@ -3086,7 +3086,7 @@
 			},
 			{
 				"type": "item",
-				"probability": 1,
+				"probability": 0.15,
 				"count": 1,
 				"itemName": "Grizzly Glaive"
 			}
