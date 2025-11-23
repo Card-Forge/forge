@@ -631,21 +631,21 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
                     newType.subtypes.removeIf(Predicates.IS_ENCHANTMENT_TYPE);
                 }
             }
-            if (ct.getRemoveType() != null) {
-                newType.removeAll(ct.getRemoveType());
+            if (ct.removeType() != null) {
+                newType.removeAll(ct.removeType());
             }
-            if (ct.getAddType() != null) {
-                newType.addAll(ct.getAddType());
-                if (ct.getAddType().hasAllCreatureTypes()) {
+            if (ct.addType() != null) {
+                newType.addAll(ct.addType());
+                if (ct.addType().hasAllCreatureTypes()) {
                     newType.allCreatureTypes = true;
                 }
             }
-            if (ct.isAddAllCreatureTypes()) {
+            if (ct.addAllCreatureTypes()) {
                 newType.allCreatureTypes = true;
             }
             // remove specific creature types from all creature types
-            if (ct.getRemoveType() != null && newType.allCreatureTypes) {
-                newType.excludedCreatureSubtypes.addAll(Lists.newArrayList(IterableUtil.filter(ct.getRemoveType(), Predicates.IS_CREATURE_TYPE)));
+            if (ct.removeType() != null && newType.allCreatureTypes) {
+                newType.excludedCreatureSubtypes.addAll(Lists.newArrayList(IterableUtil.filter(ct.removeType(), Predicates.IS_CREATURE_TYPE)));
             }
         }
         // sanisfy subtypes

@@ -4318,22 +4318,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
     }
 
-    public final void addChangedCardTypes(final Iterable<String> types, final Iterable<String> removeTypes, final boolean addAllCreatureTypes,
-            final Set<RemoveType> remove,
-            final long timestamp, final long staticId, final boolean updateView, final boolean cda) {
-        CardType addType = null;
-        CardType removeType = null;
-        if (types != null) {
-            addType = new CardType(types, true);
-        }
-
-        if (removeTypes != null) {
-            removeType = new CardType(removeTypes, true);
-        }
-
-        addChangedCardTypes(addType, removeType, addAllCreatureTypes, remove, timestamp, staticId, updateView, cda);
-    }
-
     public final void removeChangedCardTypes(final long timestamp, final long staticId) {
         removeChangedCardTypes(timestamp, staticId, true);
     }
