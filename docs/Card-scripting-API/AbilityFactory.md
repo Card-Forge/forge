@@ -28,19 +28,19 @@ Syntax definitions like the above will use different symbols to separate the var
 
 Secondary abilities such as the DB executed by triggers or replacements (usually) don't need costs. (This is one reason to use DB over AB in these cases.)
 
-Read more about it in [Costs](Costs)
+Read more about it in [Costs](Costs.md)
 
 ## Defined / ValidTgts
 Most effects need to know (at least implicitly) which players or objects they're trying to affect. There are two different ways for that:
 - `Defined$ {Defined}` if the ability describes on what it's applied
 - `ValidTgts$ {Valid}` for abilities that target
 
-Read more about it in [Affected / Targets](Targeting)
+Read more about it in [Affected / Targets](Targeting.md)
 
 ## Restrictions / Conditions
 Restrictions limit when abilities can be put on the stack and Conditions apply during resolving. Typical examples are "Activate only once each turn" or "If this spell’s additional cost was paid, [...]".
 
-Read more about it in [Restriction](Restrictions)
+Read more about it in [Restriction](Restrictions.md)
 
 ## SpellDescription
 `SpellDescription$ {String}` is how the text of the ability will display on the card and in the option dialog for cards with multiple abilities.

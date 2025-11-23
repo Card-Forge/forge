@@ -281,8 +281,7 @@ public class StaticAbilityCantAttackBlock {
         return false;
     }
 
-    public static boolean applyCanBlockIfReachAbility(final StaticAbility stAb, final Card attacker,
-            final Card blocker) {
+    public static boolean applyCanBlockIfReachAbility(final StaticAbility stAb, final Card attacker, final Card blocker) {
         if (!stAb.matchesValidParam("ValidAttacker", attacker)) {
             return false;
         }

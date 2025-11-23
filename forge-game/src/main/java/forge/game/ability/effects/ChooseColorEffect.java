@@ -2,7 +2,6 @@ package forge.game.ability.effects;
 
 import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.deck.DeckRecognizer;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -61,7 +60,7 @@ public class ChooseColorEffect extends SpellAbilityEffect {
             if (!p.isInGame()) {
                 p = getNewChooser(sa, p);
             }
-            List<String> chosenColors = new ArrayList<>();
+
             int cntMin = sa.hasParam("UpTo") ? 0 : sa.hasParam("TwoColors") ? 2 : 1;
             int cntMax = sa.hasParam("TwoColors") ? 2 : sa.hasParam("OrColors") ? colorChoices.size() : 1;
             String prompt = null;
@@ -76,24 +75,25 @@ public class ChooseColorEffect extends SpellAbilityEffect {
             } else {
                 prompt = Localizer.getInstance().getMessage("lblChooseNColors", Lang.getNumeral(cntMax));
             }
+            ColorSet chosenColors = ColorSet.C;
             Player noNotify = p;
             if (sa.hasParam("Random")) {
                 String choice;
                 for (int i=0; i<cntMin; i++) {
                     choice = Aggregates.random(colorChoices);
                     colorChoices.remove(choice);
-                    chosenColors.add(choice);
+                    chosenColors = ColorSet.combine(chosenColors, ColorSet.fromNames(choice));
                 }
                 noNotify = null;
             } else {
-                chosenColors = p.getController().chooseColors(prompt, sa, cntMin, cntMax, colorChoices);
+                chosenColors = p.getController().chooseColors(prompt, sa, cntMin, cntMax, ColorSet.fromNames(colorChoices));
             }
-            if (chosenColors.isEmpty()) {
+            if (chosenColors.isColorless()) {
                 return;
             }
-            card.setChosenColors(chosenColors);
-            chosenColors = chosenColors.stream().map(DeckRecognizer::getLocalisedMagicColorName).collect(Collectors.toList());
-            p.getGame().getAction().notifyOfValue(sa, p, Lang.joinHomogenous(chosenColors), noNotify);
+            card.setChosenColors(chosenColors.stream().map(MagicColor.Color::getName).collect(Collectors.toList()));
+            String desc = Lang.joinHomogenous(chosenColors.stream().map(MagicColor.Color::getTranslatedName).collect(Collectors.toList()));
+            p.getGame().getAction().notifyOfValue(sa, p, desc, noNotify);
         }
     }
 }

@@ -23,7 +23,7 @@ There are a few other properties that will appear in many cards. These are
 
 | Property | Description
 | - | -
-|`A`|[Ability effect](Card-scripting-API/AbilityFactory.md)
+|`A`|[Ability effect](AbilityFactory.md)
 |`AI`|`RemoveDeck:`<br />* `All`<br />This will prevent the card from appearing in random AI decks. It is applicable for cards the AI can't use at all and also for cards that the AI could use, but only ineffectively. The AI won't draft these cards.<br />* `Random`<br /> This will prevent the card from appearing in random decks. It is only applicable for cards that are too narrow for random decks like *Root Cage* or *Into the North*. The AI won't draft these cards.<br />* `NonCommander`<br />
 |`Colors`|Color(s) of the card<br /><br />When a card's color is determined by a color indicator rather than shards in a mana cost, this property must be defined. If no identifier is needed, this property should be omitted.<br /><br />Example:<br />`Colors:red,green` - Since *Arlinn, Embraced by the Moon* has no mana cost (it's the back of a double-faced card), the red and green indicator must be included.
 |`DeckHints`|AI-related hints for a deck including this card<br /><br />To improve synergy this will increase the rank of of all other cards that share some of its DeckHints types. The following types are supported:<br />* Color<br />* Keyword<br />* Name<br />* Type<br /><br />This helps with smoothing the selection so cards without these Entries won't be at an unfair disadvantage.<br /><br />The relevant code can be found in the [CardRanker](https://github.com/Card-Forge/forge/blob/master/forge-gui/src/main/java/forge/gamemodes/limited/CardRanker.java) class.
@@ -35,10 +35,10 @@ There are a few other properties that will appear in many cards. These are
 |`Name`|Name of the card<br /><br />A string of text that serves as the name of the card. Note that the registered trademark symbol cannot be included, and this property must have at least one character.
 |`Oracle`|The current Oracle text used by the card.<br /><br />We actually have a Python Script that runs to be able to fill in this information, so don't worry about manually editing a lot of cards when Wizards decides to change the rules. <br /><br />This field is used by the Deck Editor to allow non-Legendary Creatures to be marked as potential commanders. Make sure "CARDNAME can be your commander." appears in the oracle text.
 |`PT`|Power and toughness
-|`R`|[Replacement effect](Card-scripting-API/Replacements.md)
-|`S`|[Static ability](Card-scripting-API/Statics.md)
+|`R`|[Replacement effect](Replacements.md)
+|`S`|[Static ability](Statics.md)
 |`SVar`|String variable. Used throughout scripting in a handful of different ways.
-|`T`|[Triggered ability](Card-scripting-API/Triggers.md)
+|`T`|[Triggered ability](Triggers.md)
 |`Text`|Additional text that needs to be displayed on the CardDetailPanel that doesn't have any spell/ability that generates a description for it, e.g. "CARDNAME can be your commander." or "X can't be 0.".
 |`Types`|Card types and subtypes<br /><br />Include all card types and subtypes, separated by spaces.<br /><br />Example:<br />`Types:Enchantment Artifact Creature Golem` for a card that reads "Enchantment Artifact Creature -- Golem"
 

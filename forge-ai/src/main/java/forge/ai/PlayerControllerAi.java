@@ -49,6 +49,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 
 /**
@@ -1051,8 +1052,8 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options) {
-        return ComputerUtilCard.chooseColor(sa, min, max, options);
+    public ColorSet chooseColors(String message, SpellAbility sa, int min, int max, ColorSet options) {
+        return ColorSet.fromNames(ComputerUtilCard.chooseColor(sa, min, max, options.stream().map(MagicColor.Color::getName).collect(Collectors.toList())));
     }
 
     /*
