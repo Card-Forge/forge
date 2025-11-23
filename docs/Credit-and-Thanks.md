@@ -1,13 +1,11 @@
 ## Special Thanks
-
 1. Quest icons created by Teekatas, from his Legendora set - [Link](http://raindropmemory.deviantart.com/)
 1. Thanks to the XMage team for permission to use their targeting arrows.
 1. Thanks to http://www.freesound.org/browse/ for providing some sound files.
 1. Credit to Kevin Macleod for the royalty free music that is used.
 1. Credit to Juhani Junkala for the royalty free music for boss battles - [Link](https://opengameart.org/content/boss-battle-music)
 
-## Adventure Mode Sprites and tiles. 
-
+## Adventure Mode Sprites and tiles.
 Some of the sprites and tiles that are used in Adventure mode come from external artists. These fall under the ownership of their respective artists and may be used only under the conditions laid out in their respective licence.
 
 1. Credit to Reddit user [wampastompah](https://www.reddit.com/user/wampastompah) for the sprites of iconic MTG characters that are used in Adventure mode

@@ -2,7 +2,6 @@ Everyone is free to work on whatever part they're interested in. This is just me
 The "Ancestors" column is basically there to list currently inactive developers that might still be around to provide implementation details on Discord. In that case please use the Search function and make a decent effort to understand the code first, unnecessary pinging for simple things might give you a bad reputation :P
 
 ## DevOps
-
 | Concept | Owners | Ancestors | Example tasks |
 | - | - | - | - |
 | PC Releases | friarsol | Agetian | - update Maven dependencies |

@@ -5,9 +5,15 @@ The base syntax looks like this:
 
 - `ReplacementType` is the event being replaced
 - Most replacement effects will also have a `ReplaceWith$` parameter which points to an SVar which contains the subability that should replace the event
-- `Layer$` is optional
+- `Layer$ {CantHappen/Control/Copy/Transform}` is optional and needs to be set if the effect is ordered to happen before others. <br />Notable `CantHappen` is Forge's way to handle [CR 614.17](https://yawgatog.com/resources/magic-rules/#R61417), though not available for every replacement since some are also implemented as [Statics](Statics.md) instead
 
 Similarly to triggers, the replacing code can access special variables pertaining to the event it replaced. These are specific to each event, and the most common ones are listed below.
+
+# AddCounter
+
+# BeginPhase / BeginTurn
+
+# CreateToken
 
 # DamageDone
 This event gets checked when damage is about to be assigned to a card or player.
@@ -24,6 +30,8 @@ ReplacedObjects:
 - `DamageAmount` - The amount of damage to be assigned
 - `Target` - The target of the damage
 - `Source` - The source of the damage
+
+# Destroy
 
 # Discard
 This event gets checked when a player is about to discard a card.
@@ -56,6 +64,10 @@ This event gets checked when a player would lose.
 Parameters:
 - `ValidPlayer` - The player who would lose must match this
 
+# LoseMana
+
+# ProduceMana
+
 # Moved
 This event gets checked when a card would be moved between zones.
 
@@ -66,3 +78,5 @@ Parameters:
 
 ReplacedObjects:
 - `Card` - The moving card
+
+# Untap
