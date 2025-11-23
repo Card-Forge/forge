@@ -16479,7 +16479,7 @@
 		"rewards": [
 			{
 				"type": "item",
-				"probability": 1,
+				"probability": 0.2,
 				"count": 1,
 				"itemName": "Molten Mantle"
 			},
