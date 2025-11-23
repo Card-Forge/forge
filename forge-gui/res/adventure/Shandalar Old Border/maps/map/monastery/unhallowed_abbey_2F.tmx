@@ -402,7 +402,7 @@
     }]
 }]
 </property>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Marble Diamond|MIR&quot;, &quot;Charcoal Diamond|MIR&quot;, &quot;Edgewalker|SCG&quot;, &quot;Righteous War|INV&quot;, &quot;Purgatory|MIR&quot; ]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Marble Diamond|MIR&quot;, &quot;Charcoal Diamond|MIR&quot;, &quot;Edgewalker|SCG&quot;, &quot;Righteous War|VIS&quot;, &quot;Purgatory|MIR&quot; ]
 }</property>
     <property name="enemy" value="Valyx Feaster of Torment"/>
    </properties>

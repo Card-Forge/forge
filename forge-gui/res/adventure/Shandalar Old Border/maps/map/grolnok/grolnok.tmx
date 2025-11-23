@@ -311,7 +311,7 @@
   </object>
   <object id="155" template="../../../../../../common/maps/obj/enemy.tx" x="585" y="524.664" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Enchantress's Presence|ONS&quot;, &quot;Black Market|MMQ&quot;, &quot;Grim Feast|INV&quot; ]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Enchantress's Presence|ONS&quot;, &quot;Black Market|MMQ&quot;, &quot;Grim Feast|MIR&quot; ]
 }</property>
     <property name="enemy" value="Dark Enchanter"/>
     <property name="reward">[

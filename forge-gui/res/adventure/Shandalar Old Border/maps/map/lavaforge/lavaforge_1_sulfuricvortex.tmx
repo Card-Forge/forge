@@ -144,7 +144,7 @@
    <properties>
     <property name="effect">{
  &quot;lifeModifier&quot;: 6,
- &quot;startBattleWithCard&quot;: [ &quot;Enchantress's Presence|ONS&quot;, &quot;Black Market|MMQ&quot;, &quot;Grim Feast|INV&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Enchantress's Presence|ONS&quot;, &quot;Black Market|MMQ&quot;, &quot;Grim Feast|MIR&quot; ]
 }</property>
     <property name="enemy" value="Fire Giant"/>
    </properties>

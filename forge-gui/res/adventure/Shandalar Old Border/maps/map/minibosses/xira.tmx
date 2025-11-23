@@ -34,7 +34,7 @@
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="350" y="56.6638" width="16" height="17.6724">
    <properties>
     <property name="effect">{
- &quot;startBattleWithCard&quot;: [ &quot;Mountain|LEA&quot;, &quot;Swamp|LEA&quot;, &quot;Forest|LEA&quot;, &quot;Xira Arien|LEG&quot;, &quot;The Hive|LEG&quot;, &quot;Fecundity|USG&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Mountain|LEA&quot;, &quot;Swamp|LEA&quot;, &quot;Forest|LEA&quot;, &quot;Xira Arien|LEG&quot;, &quot;The Hive|LEA&quot;, &quot;Fecundity|USG&quot; ]
 }</property>
     <property name="enemy" value="Xira"/>
    </properties>

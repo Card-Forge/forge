@@ -51,7 +51,7 @@
    }]
 }]</property>
     <property name="effect">{
- &quot;startBattleWithCard&quot;: [ &quot;Plains|LEA&quot;, &quot;Plains|LEA&quot;, &quot;Plains|LEA&quot;, &quot;Tormented Angel|TMP&quot;, &quot;Serra's Blessing|WTH&quot;, &quot;Serra's Liturgy|ULG&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Plains|LEA&quot;, &quot;Plains|LEA&quot;, &quot;Plains|LEA&quot;, &quot;Tormented Angel|UDS&quot;, &quot;Serra's Blessing|WTH&quot;, &quot;Serra's Liturgy|USG&quot; ]
 }</property>
     <property name="enemy" value="Akroma"/>
     <property name="threatRange" type="int" value="50"/>
