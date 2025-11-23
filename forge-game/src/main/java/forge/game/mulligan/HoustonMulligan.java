@@ -17,22 +17,15 @@ public class HoustonMulligan extends AbstractMulligan {
     }
 
     public HoustonMulligan(Player p, boolean firstMullFree) {
-        super(p, false);
+        super(p, firstMullFree);
     }
 
     @Override
     public void keep() {
-        if (timesMulliganed == 0) {
-            mulligan();
+        if (kept) {
             return;
         }
 
-        kept = true;
-        timesMulliganed = 1;
-    }
-
-    @Override
-    public void afterMulligan() {
         List<Card> cardsToTuckDown = Lists.newArrayList(
                 player.getController().londonMulliganReturnCards(player, TUCK_COUNT)
         );
@@ -44,6 +37,13 @@ public class HoustonMulligan extends AbstractMulligan {
                     (SpellAbility)null
             );
         }
+
+        if (player != null) {
+            player.setMaxHandSize(7);
+        }
+
+        kept = true;
+        timesMulliganed = 1;
     }
 
     @Override
@@ -51,4 +51,8 @@ public class HoustonMulligan extends AbstractMulligan {
         return false;
     }
 
+    @Override
+    public int getModifiedHandSize(int startingHandSize) {
+        return 10;
+    }
 }

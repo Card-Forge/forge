@@ -15,6 +15,8 @@ import forge.game.card.CardCollectionView;
 import forge.game.event.Event;
 import forge.game.event.GameEventAnteCardsSelected;
 import forge.game.event.GameEventGameFinished;
+import forge.game.mulligan.AbstractMulligan;
+import forge.game.mulligan.HoustonMulligan;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.player.RegisteredPlayer;
@@ -76,8 +78,12 @@ public class Match {
         MulliganDefs.MulliganRule selectedRule = StaticData.instance().getMulliganRule();
 
         if (selectedRule == MulliganDefs.MulliganRule.Houston) {
+
+            AbstractMulligan dummyMulligan = new HoustonMulligan(null, false);
+
             for (RegisteredPlayer rp : players) {
-                rp.setStartingHand(selectedRule.getModifiedHandSize(rp.getStartingHand()));
+                int newSize = dummyMulligan.getModifiedHandSize(rp.getStartingHand());
+                rp.setStartingHand(newSize);
             }
         }
 
