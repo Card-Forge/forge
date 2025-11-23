@@ -69,9 +69,56 @@ Add your card image in the folder. Ther are various online tools to create custo
 
 <img src="https://github.com/user-attachments/assets/55363e68-0232-42e2-a1f7-8971686119e6" width="250"/>
 
-5. Add a Triggered Ability
+5. Building a full trigger from scratch
+So we've created a creature card and added it to the game. However our creature is a little... boring, so let's update it to have a triggered ability.
 
-So we've created a creature card and added it to the game. However our creature is a little... boring, so let's update it to have a triggered ability. 
+Learn by example!
+We'll use the existing card *Contagion Clasp*:
+> When Contagion Clasp enters the battlefield, put a -1/-1 counter on target creature.
+
+The first thing to do is to identify the WHEN, i.e. when the trigger should go off so that we can decide on the proper mode.
+Here it should go off when a particular card moves from one zone into another, so ChangesZone is the logical mode here.  
+`T:Mode$ ChangesZone`  
+Next we look at which of ChangesZone's 3 special parameters we want to
+make use of. Well, we want the trigger to go off when the card enters
+one specific zone, so we'll want to use the Destination parameter. Also,
+we only care about when it's a specific card being moved so we'll use
+ValidCard.  
+`T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$
+Card.Self`  
+There, we've defined a trigger that goes off when this card moves from
+any zone (remember, Origin and Destination defaults to "Any") to the
+battlefield zone. But we still have to use two more parameters. First,
+"Execute". Execute should contain the name of the SVar that holds the
+Ability you want to be triggered. It can be any valid SVar name. We like
+to follow the convention "Trig<name of the abilityfactory used>" but
+your mileage may vary.  
+`T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self |
+Execute$ TrigPutCounter`  
+Lastly, "TriggerDescription". This is what will be put in the cards text
+box, i.e. the rules text. Always try to keep it as close to Oracle
+wording as possible. Also, you should use "CARDNAME" instead of the name
+of the card for convention.  
+`T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self |
+Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the
+battlefield, put a -1/-1 counter on target creature.`  
+So we're all done,then?No, it's not a triggered <b>ability</b> until it
+actually has an ability. To define the ability we want to be triggered
+we simply use an [AbilityFactory](AbilityFactory.md) but
+instead of putting it on it's own line beginning with "A:", we put it in
+an SVar named what we put for the Execute parameter.  
+`T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self |
+Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the
+battlefield, put a -1/-1 counter on target creature.`  
+`SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Tgt$ TgtC | CounterType$
+M1M1 | CounterNum$ 1`  
+You may notice some strange things about the ability, namely the Cost
+parameter and the lack of a SpellDescription parameter.The reasoning for
+these things is that AbilityFactory requires non-drawback abilities to
+have a cost and drawback abilities not to have one. But if you want to
+do something like "When CARDNAME comes into play, you may pay 1 to...",
+that's where you'd use the Cost parameter here. The SpellDescription is
+missing because triggers use their own TriggerDescription instead.
 
 "Whenever Goblin Card Guide deals damage to an opponent, draw a card."
 
@@ -88,8 +135,7 @@ PT:2/2
 K:Haste
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
-Oracle:Haste
-\nWhenever Goblin Card Guide deals damage to an opponent, draw a card.
+Oracle:Haste\nWhenever Goblin Card Guide deals damage to an opponent, draw a card.
 ```
 
 Let's take a look at our changes:
@@ -103,13 +149,9 @@ Let's take a look at our changes:
  - NumCards$ 1 - Draw 1 card. This could be changed to any number to trigger drawing that many card. 
  - TriggerDescription$ - The description of the trigger.
 
-*"Drawback" is a connotation that has since been replaced with "SubAbility".
-The original connotation differentiated between AB (Ability), SP (Spell) and DB (Drawback).
-AP and SP require costs, whereas Drawback do not. The card scripts still use the "DB$" connotation.
-
 6. Updating our Image
 
-Finally since we createda new effect on our card, we need to update the image. Card images are simply .jpg files and don't update or read from any scripts or gamefiles. 
+Finally since we created a new effect on our card, we need to update the image. Card images are simply .jpg files and don't update or read from any scripts or gamefiles. 
 
 I used the same online card creator to make the change to our card:
 
@@ -123,14 +165,13 @@ Simply save and rename the image to "Goblin Card Guide.fullborder.jpg" then over
 
 You can check the [Abilities](AbilityFactory) and [Triggers](Triggers) documentation for more information on this topic. These documents are meant as a guide and are unlikely to contain information about every ability in the game.
 
-The sinmlest method for creating an effect on your card is to find another card that does the same thing and copying the ability. These can be found in your Forge folder:
+The simplest method for creating an effect on your card is to find another card that does the same thing and copying the ability. These can be found in your Forge folder:
 
 >./Forge/res/cardsfolder/cardsfolder.zip
 
 Unzipping this file will sllow you to search for any card in the containing subfolders. 
 
 # Custom mechanics
-
 We don't accept new mechanics from outside of official Cards into the main repository. This restriction is needed to keep the engine healthy.
 
 However there is some support to simulate them using named abilities:

@@ -32,7 +32,6 @@ import java.util.Map;
  * The Class CostExile.
  */
 public class CostExileFromStack extends CostPart {
-    // ExileFromStack<Num/Type{/TypeDescription}>
 
     private static final long serialVersionUID = 1L;
 
