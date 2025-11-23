@@ -520,7 +520,7 @@
   </object>
   <object id="203" template="../../../../../../../common/maps/obj/scroll.tx" x="592" y="528">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Liliana's Defeat&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Dark Banishing|ICE&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="205" template="../../../../../../../common/maps/obj/treasure.tx" x="688" y="16">
@@ -1681,7 +1681,7 @@
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;cardName&quot;:&quot;The Chain Veil&quot;
+  &quot;cardName&quot;:&quot;Necropotence|ICE&quot;
 }
 ]
 
@@ -2172,15 +2172,15 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Griselbrand&quot;
+      &quot;cardName&quot;: &quot;Spirit of the Night|MIR&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Desecration Demon&quot;
+      &quot;cardName&quot;: &quot;Sengir Vampire|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Damnation&quot;
+      &quot;cardName&quot;: &quot;Mutilate|TOR&quot;
     },
     {
       &quot;count&quot;:1,
@@ -2230,19 +2230,19 @@
   &quot;cardUnion&quot;: [
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Blood Crypt&quot;
+      &quot;cardName&quot;: &quot;Badlands|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Godless Shrine&quot;
+      &quot;cardName&quot;: &quot;Scrubland|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Overgrown Tomb&quot;
+      &quot;cardName&quot;: &quot;Bayou|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Watery Grave&quot;
+      &quot;cardName&quot;: &quot;Underground Sea|LEA&quot;
     }
   ]
 },
@@ -2253,19 +2253,19 @@
   &quot;cardUnion&quot;: [
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Blood Crypt&quot;
+      &quot;cardName&quot;: &quot;Badlands|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Godless Shrine&quot;
+      &quot;cardName&quot;: &quot;Scrubland|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Overgrown Tomb&quot;
+      &quot;cardName&quot;: &quot;Bayou|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Watery Grave&quot;
+      &quot;cardName&quot;: &quot;Underground Sea|LEA&quot;
     }
   ]
 }]</property>

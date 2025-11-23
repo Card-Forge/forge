@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Staff of the Wild Magus&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Emerald Medallion|TMP&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
@@ -58,7 +58,7 @@
 &quot;type&quot;: &quot;card&quot;,
 &quot;probability&quot;: 1,
 &quot;count&quot;: 1,
-&quot;cardName&quot;: &quot;Staff of the Wild Magus&quot;}]</property>
+&quot;cardName&quot;: &quot;Emerald Medallion|TMP&quot;}]</property>
    </properties>
   </object>
   <object id="71" template="../../../../../../common/maps/obj/booster.tx" x="374.31" y="126.36">

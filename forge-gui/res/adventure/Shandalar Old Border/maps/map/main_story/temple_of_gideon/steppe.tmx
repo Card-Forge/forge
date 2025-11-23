@@ -302,7 +302,7 @@
   </object>
   <object id="203" template="../../../../../../../common/maps/obj/scroll.tx" x="272" y="256">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Gideon's Defeat&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Swords to Plowshares|LEA&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="205" template="../../../../../../../common/maps/obj/treasure.tx" x="-80" y="528">
@@ -516,7 +516,7 @@
 	&quot;name&quot;:&quot;Let her leave&quot;,
 	&quot;text&quot;:&quot;She bows her head and scrambles away, leaving her staff behind.&quot;,
 	&quot;action&quot;:[
-	    {&quot;grantRewards&quot;:[{&quot;type&quot;:&quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Staff of the Death Magus&quot;}]},
+	    {&quot;grantRewards&quot;:[{&quot;type&quot;:&quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Jet Medallion|TMP&quot;}]},
 	    {&quot;deleteMapObject&quot;:240}
 	],
 	&quot;options&quot;:[ {&quot;name&quot;:&quot;(Continue)&quot;} ]
@@ -533,7 +533,7 @@
 	&quot;name&quot;:&quot;Let her leave&quot;,
 	&quot;text&quot;:&quot;She bows her head and scrambles away, leaving her staff behind.&quot;,
 	&quot;action&quot;:[
-	    {&quot;grantRewards&quot;:[{&quot;type&quot;:&quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Staff of the Death Magus&quot;}]},
+	    {&quot;grantRewards&quot;:[{&quot;type&quot;:&quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Jet Medallion|TMP&quot;}]},
 	    {&quot;deleteMapObject&quot;:240}
 	],
 	&quot;options&quot;:[ {&quot;name&quot;:&quot;(Continue)&quot;} ]

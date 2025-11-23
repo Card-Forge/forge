@@ -34,7 +34,7 @@
  <objectgroup id="5" name="Objects">
   <object id="26" template="../../../../../../common/maps/obj/scroll.tx" x="272" y="80">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Myr Convert&quot;, &quot;count&quot;: 1 }, { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Coretapper&quot;, &quot;count&quot;: 1 }, { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Myr Custodian&quot;, &quot;count&quot;: 1 }, { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Myr Adapter&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Bottle Gnomes|TMP&quot;, &quot;count&quot;: 1 }, { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Triskelion|ATQ&quot;, &quot;count&quot;: 1 }, { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Clockwork Beast|LEA&quot;, &quot;count&quot;: 1 }, { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Brass Man|ARN&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="27" template="../../../../../../common/maps/obj/enemy.tx" x="232" y="172">

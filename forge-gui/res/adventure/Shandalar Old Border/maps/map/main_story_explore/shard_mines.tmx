@@ -517,11 +517,11 @@
   &quot;cardUnion&quot;: [
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Mine Worker&quot;
+      &quot;cardName&quot;: &quot;Dwarven Miner|MIR&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Aethergeode Miner&quot;
+      &quot;cardName&quot;: &quot;Dwarven Trader|HML&quot;
     },
     {
       &quot;count&quot;:1,
@@ -533,7 +533,7 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Goblin Kaboomist&quot;
+      &quot;cardName&quot;: &quot;Goblin Grenadiers|WTH&quot;
     },
     {
       &quot;count&quot;:1,
@@ -541,19 +541,19 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Duergar Mine-Captain&quot;
+      &quot;cardName&quot;: &quot;Dwarven Weaponsmith|ATQ&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Akki Underminer&quot;
+      &quot;cardName&quot;: &quot;Dwarven Demolition Team|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Miner's Bane&quot;
+      &quot;cardName&quot;: &quot;Cave Tiger|USG&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Mine Excavation&quot;
+      &quot;cardName&quot;: &quot;Excavation|PCY&quot;
     },
     {
       &quot;count&quot;:1,
@@ -565,7 +565,7 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Dwarven Mine&quot;
+      &quot;cardName&quot;: &quot;Dwarven Ruins|FEM&quot;
     },
     {
       &quot;count&quot;:1,
@@ -585,7 +585,7 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Excavation Explosion&quot;
+      &quot;cardName&quot;: &quot;Shattering Pulse|EXO&quot;
     },
     {
       &quot;count&quot;:1,
@@ -593,7 +593,7 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Dig Up&quot;
+      &quot;cardName&quot;: &quot;Entomb|ODY&quot;
     },
     {
       &quot;count&quot;:1,
@@ -601,15 +601,15 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Digsite Engineer&quot;
+      &quot;cardName&quot;: &quot;Dwarven Armorer|FEM&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Destructive Digger&quot;
+      &quot;cardName&quot;: &quot;Dwarven Soldier|FEM&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Crystal Grotto&quot;
+      &quot;cardName&quot;: &quot;Gemstone Mine|WTH&quot;
     },
     {
       &quot;count&quot;:1,
@@ -621,19 +621,19 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Stone Quarry&quot;
+      &quot;cardName&quot;: &quot;Ruins of Trokair|FEM&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Duergar Cave-Guard&quot;
+      &quot;cardName&quot;: &quot;Dwarven Lieutenant|FEM&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Gilded Assault Cart&quot;
+      &quot;cardName&quot;: &quot;Juggernaut|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Aggressive Mining&quot;
+      &quot;cardName&quot;: &quot;Strip Mine|ATQ&quot;
     }
   ]
 }]</property>
@@ -648,11 +648,11 @@
   &quot;cardUnion&quot;: [
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Mine Worker&quot;
+      &quot;cardName&quot;: &quot;Dwarven Miner|MIR&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Aethergeode Miner&quot;
+      &quot;cardName&quot;: &quot;Dwarven Trader|HML&quot;
     },
     {
       &quot;count&quot;:1,
@@ -664,7 +664,7 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Goblin Kaboomist&quot;
+      &quot;cardName&quot;: &quot;Goblin Grenadiers|WTH&quot;
     },
     {
       &quot;count&quot;:1,
@@ -672,19 +672,19 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Duergar Mine-Captain&quot;
+      &quot;cardName&quot;: &quot;Dwarven Weaponsmith|ATQ&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Akki Underminer&quot;
+      &quot;cardName&quot;: &quot;Dwarven Demolition Team|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Miner's Bane&quot;
+      &quot;cardName&quot;: &quot;Cave Tiger|USG&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Mine Excavation&quot;
+      &quot;cardName&quot;: &quot;Excavation|PCY&quot;
     },
     {
       &quot;count&quot;:1,
@@ -696,7 +696,7 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Dwarven Mine&quot;
+      &quot;cardName&quot;: &quot;Dwarven Ruins|FEM&quot;
     },
     {
       &quot;count&quot;:1,
@@ -716,7 +716,7 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Excavation Explosion&quot;
+      &quot;cardName&quot;: &quot;Shattering Pulse|EXO&quot;
     },
     {
       &quot;count&quot;:1,
@@ -724,7 +724,7 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Dig Up&quot;
+      &quot;cardName&quot;: &quot;Entomb|ODY&quot;
     },
     {
       &quot;count&quot;:1,
@@ -732,15 +732,15 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Digsite Engineer&quot;
+      &quot;cardName&quot;: &quot;Dwarven Armorer|FEM&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Destructive Digger&quot;
+      &quot;cardName&quot;: &quot;Dwarven Soldier|FEM&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Crystal Grotto&quot;
+      &quot;cardName&quot;: &quot;Gemstone Mine|WTH&quot;
     },
     {
       &quot;count&quot;:1,
@@ -752,19 +752,19 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Stone Quarry&quot;
+      &quot;cardName&quot;: &quot;Ruins of Trokair|FEM&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Duergar Cave-Guard&quot;
+      &quot;cardName&quot;: &quot;Dwarven Lieutenant|FEM&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Gilded Assault Cart&quot;
+      &quot;cardName&quot;: &quot;Juggernaut|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Aggressive Mining&quot;
+      &quot;cardName&quot;: &quot;Strip Mine|ATQ&quot;
     }
 
   ]
@@ -780,11 +780,11 @@
   &quot;cardUnion&quot;: [
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Mine Worker&quot;
+      &quot;cardName&quot;: &quot;Dwarven Miner|MIR&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Aethergeode Miner&quot;
+      &quot;cardName&quot;: &quot;Dwarven Trader|HML&quot;
     },
     {
       &quot;count&quot;:1,
@@ -796,7 +796,7 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Goblin Kaboomist&quot;
+      &quot;cardName&quot;: &quot;Goblin Grenadiers|WTH&quot;
     },
     {
       &quot;count&quot;:1,
@@ -804,19 +804,19 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Duergar Mine-Captain&quot;
+      &quot;cardName&quot;: &quot;Dwarven Weaponsmith|ATQ&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Akki Underminer&quot;
+      &quot;cardName&quot;: &quot;Dwarven Demolition Team|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Miner's Bane&quot;
+      &quot;cardName&quot;: &quot;Cave Tiger|USG&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Mine Excavation&quot;
+      &quot;cardName&quot;: &quot;Excavation|PCY&quot;
     },
     {
       &quot;count&quot;:1,
@@ -828,7 +828,7 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Dwarven Mine&quot;
+      &quot;cardName&quot;: &quot;Dwarven Ruins|FEM&quot;
     },
     {
       &quot;count&quot;:1,
@@ -848,7 +848,7 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Excavation Explosion&quot;
+      &quot;cardName&quot;: &quot;Shattering Pulse|EXO&quot;
     },
     {
       &quot;count&quot;:1,
@@ -856,7 +856,7 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Dig Up&quot;
+      &quot;cardName&quot;: &quot;Entomb|ODY&quot;
     },
     {
       &quot;count&quot;:1,
@@ -864,15 +864,15 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Digsite Engineer&quot;
+      &quot;cardName&quot;: &quot;Dwarven Armorer|FEM&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Destructive Digger&quot;
+      &quot;cardName&quot;: &quot;Dwarven Soldier|FEM&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Crystal Grotto&quot;
+      &quot;cardName&quot;: &quot;Gemstone Mine|WTH&quot;
     },
     {
       &quot;count&quot;:1,
@@ -884,19 +884,19 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Stone Quarry&quot;
+      &quot;cardName&quot;: &quot;Ruins of Trokair|FEM&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Duergar Cave-Guard&quot;
+      &quot;cardName&quot;: &quot;Dwarven Lieutenant|FEM&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Gilded Assault Cart&quot;
+      &quot;cardName&quot;: &quot;Juggernaut|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Aggressive Mining&quot;
+      &quot;cardName&quot;: &quot;Strip Mine|ATQ&quot;
     }
 
   ]
@@ -912,11 +912,11 @@
   &quot;cardUnion&quot;: [
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Mine Worker&quot;
+      &quot;cardName&quot;: &quot;Dwarven Miner|MIR&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Aethergeode Miner&quot;
+      &quot;cardName&quot;: &quot;Dwarven Trader|HML&quot;
     },
     {
       &quot;count&quot;:1,
@@ -928,7 +928,7 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Goblin Kaboomist&quot;
+      &quot;cardName&quot;: &quot;Goblin Grenadiers|WTH&quot;
     },
     {
       &quot;count&quot;:1,
@@ -936,19 +936,19 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Duergar Mine-Captain&quot;
+      &quot;cardName&quot;: &quot;Dwarven Weaponsmith|ATQ&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Akki Underminer&quot;
+      &quot;cardName&quot;: &quot;Dwarven Demolition Team|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Miner's Bane&quot;
+      &quot;cardName&quot;: &quot;Cave Tiger|USG&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Mine Excavation&quot;
+      &quot;cardName&quot;: &quot;Excavation|PCY&quot;
     },
     {
       &quot;count&quot;:1,
@@ -960,7 +960,7 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Dwarven Mine&quot;
+      &quot;cardName&quot;: &quot;Dwarven Ruins|FEM&quot;
     },
     {
       &quot;count&quot;:1,
@@ -980,7 +980,7 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Excavation Explosion&quot;
+      &quot;cardName&quot;: &quot;Shattering Pulse|EXO&quot;
     },
     {
       &quot;count&quot;:1,
@@ -988,7 +988,7 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Dig Up&quot;
+      &quot;cardName&quot;: &quot;Entomb|ODY&quot;
     },
     {
       &quot;count&quot;:1,
@@ -996,15 +996,15 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Digsite Engineer&quot;
+      &quot;cardName&quot;: &quot;Dwarven Armorer|FEM&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Destructive Digger&quot;
+      &quot;cardName&quot;: &quot;Dwarven Soldier|FEM&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Crystal Grotto&quot;
+      &quot;cardName&quot;: &quot;Gemstone Mine|WTH&quot;
     },
     {
       &quot;count&quot;:1,
@@ -1016,19 +1016,19 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Stone Quarry&quot;
+      &quot;cardName&quot;: &quot;Ruins of Trokair|FEM&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Duergar Cave-Guard&quot;
+      &quot;cardName&quot;: &quot;Dwarven Lieutenant|FEM&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Gilded Assault Cart&quot;
+      &quot;cardName&quot;: &quot;Juggernaut|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Aggressive Mining&quot;
+      &quot;cardName&quot;: &quot;Strip Mine|ATQ&quot;
     }
 
   ]
@@ -1044,11 +1044,11 @@
   &quot;cardUnion&quot;: [
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Mine Worker&quot;
+      &quot;cardName&quot;: &quot;Dwarven Miner|MIR&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Aethergeode Miner&quot;
+      &quot;cardName&quot;: &quot;Dwarven Trader|HML&quot;
     },
     {
       &quot;count&quot;:1,
@@ -1060,7 +1060,7 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Goblin Kaboomist&quot;
+      &quot;cardName&quot;: &quot;Goblin Grenadiers|WTH&quot;
     },
     {
       &quot;count&quot;:1,
@@ -1068,19 +1068,19 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Duergar Mine-Captain&quot;
+      &quot;cardName&quot;: &quot;Dwarven Weaponsmith|ATQ&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Akki Underminer&quot;
+      &quot;cardName&quot;: &quot;Dwarven Demolition Team|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Miner's Bane&quot;
+      &quot;cardName&quot;: &quot;Cave Tiger|USG&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Mine Excavation&quot;
+      &quot;cardName&quot;: &quot;Excavation|PCY&quot;
     },
     {
       &quot;count&quot;:1,
@@ -1092,7 +1092,7 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Dwarven Mine&quot;
+      &quot;cardName&quot;: &quot;Dwarven Ruins|FEM&quot;
     },
     {
       &quot;count&quot;:1,
@@ -1112,7 +1112,7 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Excavation Explosion&quot;
+      &quot;cardName&quot;: &quot;Shattering Pulse|EXO&quot;
     },
     {
       &quot;count&quot;:1,
@@ -1120,7 +1120,7 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Dig Up&quot;
+      &quot;cardName&quot;: &quot;Entomb|ODY&quot;
     },
     {
       &quot;count&quot;:1,
@@ -1128,15 +1128,15 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Digsite Engineer&quot;
+      &quot;cardName&quot;: &quot;Dwarven Armorer|FEM&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Destructive Digger&quot;
+      &quot;cardName&quot;: &quot;Dwarven Soldier|FEM&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Crystal Grotto&quot;
+      &quot;cardName&quot;: &quot;Gemstone Mine|WTH&quot;
     },
     {
       &quot;count&quot;:1,
@@ -1148,19 +1148,19 @@
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Stone Quarry&quot;
+      &quot;cardName&quot;: &quot;Ruins of Trokair|FEM&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Duergar Cave-Guard&quot;
+      &quot;cardName&quot;: &quot;Dwarven Lieutenant|FEM&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Gilded Assault Cart&quot;
+      &quot;cardName&quot;: &quot;Juggernaut|LEA&quot;
     },
     {
       &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Aggressive Mining&quot;
+      &quot;cardName&quot;: &quot;Strip Mine|ATQ&quot;
     }
   ]
 },

@@ -115,7 +115,7 @@
 &quot;type&quot;: &quot;card&quot;,
 &quot;probability&quot;: 1,
 &quot;count&quot;: 1,
-&quot;cardName&quot;: &quot;Staff of the Death Magus&quot;}]</property>
+&quot;cardName&quot;: &quot;Jet Medallion|TMP&quot;}]</property>
     <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>

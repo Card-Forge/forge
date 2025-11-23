@@ -435,7 +435,7 @@
   </object>
   <!-- BOSS TESTING ARENA - All bosses in a circle around center -->
   <object id="200" template="../../../../../../common/maps/obj/enemy.tx" x="360" y="240"><properties><property name="enemy" value="Lathliss" /><property name="name" value="1. Rorix Bladewing" /></properties></object>
-  <object id="201" template="../../../../../../common/maps/obj/enemy.tx" x="350" y="280"><properties><property name="enemy" value="Griselbrand" /><property name="name" value="2. Lord of the Pit" /></properties></object>
+  <object id="201" template="../../../../../../common/maps/obj/enemy.tx" x="350" y="280"><properties><property name="enemy" value="Spirit of the Night|MIR" /><property name="name" value="2. Lord of the Pit" /></properties></object>
   <object id="202" template="../../../../../../common/maps/obj/enemy.tx" x="330" y="315"><properties><property name="enemy" value="Lorthos" /><property name="name" value="3. Leviathan" /></properties></object>
   <object id="203" template="../../../../../../common/maps/obj/enemy.tx" x="300" y="345"><properties><property name="enemy" value="Ghalta" /><property name="name" value="4. Queen of Beasts" /></properties></object>
   <object id="204" template="../../../../../../common/maps/obj/enemy.tx" x="265" y="365"><properties><property name="enemy" value="Akroma" /><property name="name" value="5. Akroma" /></properties></object>

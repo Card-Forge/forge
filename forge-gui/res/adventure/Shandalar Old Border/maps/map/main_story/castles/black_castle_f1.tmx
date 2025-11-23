@@ -53,7 +53,7 @@
     <property name="effect">{
  &quot;startBattleWithCard&quot;: [ &quot;Swamp|LEA&quot;, &quot;Swamp|LEA&quot;, &quot;Swamp|LEA&quot;, &quot;Swamp|LEA&quot;, &quot;Swamp|LEA&quot;, &quot;Breeding Pit|FEM&quot;, &quot;Black Market|MMQ&quot; ]
 }</property>
-    <property name="enemy" value="Griselbrand"/>
+    <property name="enemy" value="Spirit of the Night|MIR"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>

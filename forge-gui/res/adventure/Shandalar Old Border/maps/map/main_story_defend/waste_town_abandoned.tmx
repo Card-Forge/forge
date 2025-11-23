@@ -271,37 +271,37 @@
   <object id="84" template="../../../../../../common/maps/obj/manashards.tx" x="560" y="448" visible="0"/>
   <object id="85" template="../../../../../../common/maps/obj/scroll.tx" x="48" y="336">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wastes&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wasteland|TMP&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="86" template="../../../../../../common/maps/obj/scroll.tx" x="256" y="112">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wastes&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wasteland|TMP&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="87" template="../../../../../../common/maps/obj/scroll.tx" x="496" y="144">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wastes&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wasteland|TMP&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="88" template="../../../../../../common/maps/obj/scroll.tx" x="736" y="304">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wastes&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wasteland|TMP&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="89" template="../../../../../../common/maps/obj/scroll.tx" x="192" y="288">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wastes&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wasteland|TMP&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="90" template="../../../../../../common/maps/obj/scroll.tx" x="448" y="240">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wastes&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wasteland|TMP&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="91" template="../../../../../../common/maps/obj/scroll.tx" x="160" y="480">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wastes&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wasteland|TMP&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="92" template="../../../../../../common/maps/obj/scroll.tx" x="352" y="128">
