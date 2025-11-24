@@ -35,7 +35,7 @@ public class AudioClip implements IAudioClip {
 
     public static AudioClip createClip(File file) {
         if(file == null) return null;
-        FileHandle fileHandle = new FileHandle(file);
+        FileHandle fileHandle = Gdx.files.absolute(file.getPath());
         if(!fileHandle.exists()) return null;
         return new AudioClip(fileHandle);
     }
