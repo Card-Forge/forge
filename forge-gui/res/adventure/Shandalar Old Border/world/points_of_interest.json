@@ -3902,8 +3902,8 @@
 		]
 	},
 	{
-		"name": "Temple of Chandra",
-		"displayName": "Temple of Chandra",
+		"name": "Temple of Jaya",
+		"displayName": "Temple of Jaya",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3926,8 +3926,8 @@
 		]
 	},
 	{
-		"name": "Temple of Liliana",
-		"displayName": "Temple of Liliana",
+		"name": "Temple of Yawgmoth",
+		"displayName": "Temple of Yawgmoth",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
