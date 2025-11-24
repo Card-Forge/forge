@@ -946,8 +946,11 @@
   <object id="171" template="../../../../../../common/maps/obj/enemy.tx" x="736.083" y="497.25">
    <properties>
     <property name="enemy" value="Jaya Ballard" />
+    <property name="effect">{
+ "startBattleWithCard": [ "Mountain|LEA", "Mountain|LEA", "Mountain|LEA", "Mountain|LEA", "Blood Moon|DRK", "Fire Elemental|LEA", "Wall of Diffusion|TMP", "Book of Rass|DRK", "Sulfuric Vapors|USG" ]
+}</property>
     <property name="ignoreDungeonEffect" type="bool" value="true" />
-    
+
     <property name="spawn.Hard" type="bool" value="false" />
     <property name="spawn.Normal" type="bool" value="false" />
    </properties>

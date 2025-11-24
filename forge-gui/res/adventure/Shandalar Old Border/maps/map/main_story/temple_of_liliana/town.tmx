@@ -1463,7 +1463,7 @@
 ]</property>
     <property name="effect">{
  &quot;lifeModifier&quot;: 15,
- &quot;startBattleWithCard&quot;: [ &quot;Zombie Master|LEA&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Priest of Gix|USG&quot;, &quot;Priest of Gix|USG&quot;, &quot;Tainted Aether|USG&quot;, &quot;Oppression|USG&quot;, &quot;Bereavement|USG&quot; ]
 }</property>
     <property name="enemy" value="Gix"/>
     <property name="fleeRange" type="float" value="125"/>
