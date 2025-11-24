@@ -1,12 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="61" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="188">
  <properties>
-  <property name="canFailDungeon" type="bool" value="true" />
-  <property name="dungeonEffect" value="{"startBattleWithCard":["Shivan Gorge|USG","Wall of Lava|ICE","Grim Lavamancer|TOR","Gorilla Shaman|ALL","Task Mage Assembly|PCY","Havoc|TMP","Scald|USG"]}"/>
-  <property name="dungeonEffect">{
-  "startBattleWithCard": [ "Ancient Tomb|TMP" ],
-}</property>
-  <property name="respawnEnemies" type="bool" value="true" />
+  <property name="canFailDungeon" type="bool" value="true"/>
+  <property name="dungeonEffect">{&quot;startBattleWithCard&quot;: [&quot;Shivan Gorge|USG&quot;, &quot;Wall of Lava|ICE&quot;, &quot;Grim Lavamancer|TOR&quot;, &quot;Gorilla Shaman|ALL&quot;, &quot;Task Mage Assembly|PCY&quot;, &quot;Havoc|TMP&quot;, &quot;Scald|USG&quot;, &quot;Ancient Tomb|TMP&quot;]}</property>
+  <property name="respawnEnemies" type="bool" value="true"/>
  </properties>
  <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
  <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
@@ -559,13 +556,12 @@
    </properties>
   </object>
   <object id="33" template="../../../../../../common/maps/obj/gold.tx" x="879.5" y="230.5" />
-  <object id="34" template="../../../../../../common/maps/obj/enemy.tx" x="64.3333" y="830.67">
+ <object id="34" template="../../../../../../common/maps/obj/enemy.tx" x="64.3333" y="830.67">
    <properties>
     <property name="effect">{
  "startBattleWithCard": [ "Shard Phoenix|STH" ]
 }</property>
     <property name="enemy" value="Phoenix" />
-    <property name="ignoreDungeonEffect" type="bool" value="true" />
     
     <property name="spawn.Normal" type="bool" value="true" />
     <property name="threatRange" type="int" value="80" />
@@ -949,7 +945,6 @@
     <property name="effect">{
  "startBattleWithCard": [ "Mountain|ICE", "Mountain|ICE", "Mountain|ICE", "Mountain|ICE", "Blood Moon|DRK", "Fire Elemental|LEA", "Wall of Diffusion|TMP", "Book of Rass|DRK", "Sulfuric Vapors|USG" ]
 }</property>
-    <property name="ignoreDungeonEffect" type="bool" value="true" />
 
     <property name="spawn.Hard" type="bool" value="false" />
     <property name="spawn.Normal" type="bool" value="false" />
