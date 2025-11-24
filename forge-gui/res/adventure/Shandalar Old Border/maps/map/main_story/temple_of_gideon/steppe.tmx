@@ -253,7 +253,7 @@
   </object>
   <object id="198" template="../../../../../../../common/maps/obj/enemy.tx" x="-256" y="320">
    <properties>
-    <property name="enemy" value="Liliana's Alchemist"/>
+    <property name="enemy" value="Yawgmoth's Alchemist"/>
    </properties>
   </object>
   <object id="199" template="../../../../../../../common/maps/obj/enemy.tx" x="-352" y="256">
@@ -342,7 +342,7 @@
     <property name="effect">{
  &quot;lifeModifier&quot;: 8,
 }</property>
-    <property name="enemy" value="Liliana's Alchemist"/>
+    <property name="enemy" value="Yawgmoth's Alchemist"/>
     <property name="pursueRange" type="int" value="75"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
@@ -394,7 +394,7 @@
   </object>
   <object id="236" template="../../../../../../../common/maps/obj/enemy.tx" x="-160" y="272">
    <properties>
-    <property name="enemy" value="Liliana's Alchemist"/>
+    <property name="enemy" value="Yawgmoth's Alchemist"/>
     <property name="pursueRange" type="int" value="80"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="253,254,wait3,260,254,wait3"/>

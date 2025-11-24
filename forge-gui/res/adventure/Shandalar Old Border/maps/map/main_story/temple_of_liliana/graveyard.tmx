@@ -2,7 +2,7 @@
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="31" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="271">
  <properties>
   <property name="canFailDungeon" type="bool" value="true"/>
-  <property name="dungeonEffect" value=""/>
+  <property name="dungeonEffect" value="{"startBattleWithCard":["Phyrexian Tower|USG","Gate to Phyrexia|ATQ","Phyrexian Arena|APC","Putrefaction|MMQ"]}"/>
   <property name="respawnEnemies" type="bool" value="true"/>
  </properties>
  <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx"/>
@@ -393,7 +393,7 @@
 ]</property>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Opal Archangel|USG&quot;, &quot;Angelic Shield|INV&quot;,&quot;Angelic Renewal|WTH&quot;]
 }</property>
-    <property name="enemy" value="Guardian Angel"/>
+    <property name="enemy" value="Tsabo Tavoc"/>
     <property name="flying" type="bool" value="true"/>
     <property name="inactive" type="bool" value="true"/>
     <property name="pursueRange" type="int" value="500"/>

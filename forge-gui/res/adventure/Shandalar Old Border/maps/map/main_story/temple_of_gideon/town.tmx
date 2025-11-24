@@ -1257,7 +1257,7 @@
    }
 ]
 </property>
-    <property name="enemy" value="Liliana's Alchemist"/>
+    <property name="enemy" value="Yawgmoth's Alchemist"/>
     <property name="reward">[
   {
     &quot;type&quot;: &quot;item&quot;,
@@ -2125,7 +2125,7 @@
    <properties>
     <property name="dialog">[
 {
-   &quot;text&quot;: &quot;Liliana's ritual appears to be nearing completion. You see a portal on the other side of her leading out of her domain.&quot;,
+   &quot;text&quot;: &quot;The ritual appears to be nearing completion. You see a portal on the other side leading out of this domain.&quot;,
    &quot;options&quot;: [
    {
       &quot;name&quot;: &quot;(Continue)&quot;,

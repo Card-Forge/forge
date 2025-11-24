@@ -2,6 +2,7 @@
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="31" height="37" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="273">
  <properties>
   <property name="canFailDungeon" type="bool" value="true"/>
+  <property name="dungeonEffect" value="{"startBattleWithCard":["Phyrexian Tower|USG","Gate to Phyrexia|ATQ","Phyrexian Arena|APC","Putrefaction|MMQ"]}"/>
   <property name="respawnEnemies" type="bool" value="true"/>
  </properties>
  <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx"/>
@@ -255,7 +256,7 @@
   </object>
   <object id="198" template="../../../../../../../common/maps/obj/enemy.tx" x="272" y="304">
    <properties>
-    <property name="enemy" value="Liliana's Alchemist"/>
+    <property name="enemy" value="Yawgmoth's Alchemist"/>
    </properties>
   </object>
   <object id="199" template="../../../../../../../common/maps/obj/enemy.tx" x="176" y="240">
@@ -344,7 +345,7 @@
     <property name="effect">{
  &quot;lifeModifier&quot;: 8,
 }</property>
-    <property name="enemy" value="Liliana's Alchemist"/>
+    <property name="enemy" value="Yawgmoth's Alchemist"/>
     <property name="pursueRange" type="int" value="75"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
@@ -385,7 +386,7 @@
   </object>
   <object id="236" template="../../../../../../../common/maps/obj/enemy.tx" x="400" y="192">
    <properties>
-    <property name="enemy" value="Liliana's Alchemist"/>
+    <property name="enemy" value="Yawgmoth's Alchemist"/>
     <property name="pursueRange" type="int" value="80"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="253,254,wait3,260,254,wait3"/>
@@ -517,7 +518,7 @@
  &quot;lifeModifier&quot;: 4,
  
 }</property>
-    <property name="enemy" value="Witch"/>
+    <property name="enemy" value="Ashnod"/>
    </properties>
   </object>
   <object id="241" template="../../../../../../../common/maps/obj/entry_down.tx" x="0" y="16" width="144" height="16">

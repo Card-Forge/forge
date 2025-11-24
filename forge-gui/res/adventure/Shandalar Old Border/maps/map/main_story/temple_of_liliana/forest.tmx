@@ -2,7 +2,7 @@
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="272">
  <properties>
   <property name="canFailDungeon" type="bool" value="true"/>
-  <property name="dungeonEffect" value=""/>
+  <property name="dungeonEffect" value="{"startBattleWithCard":["Phyrexian Tower|USG","Gate to Phyrexia|ATQ","Phyrexian Arena|APC","Putrefaction|MMQ"]}"/>
   <property name="respawnEnemies" type="bool" value="true"/>
  </properties>
  <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx"/>
@@ -227,7 +227,7 @@
 	]
   }
 ]</property>
-    <property name="enemy" value="Orzhov Cleric"/>
+    <property name="enemy" value="Mishra"/>
    </properties>
   </object>
   <object id="188" template="../../../../../../../common/maps/obj/enemy.tx" x="319.182" y="352.227">
@@ -356,7 +356,7 @@
   </object>
   <object id="235" template="../../../../../../../common/maps/obj/enemy.tx" x="176" y="319.5">
    <properties>
-    <property name="enemy" value="Liliana's Herbalist"/>
+    <property name="enemy" value="Yawgmoth's Herbalist"/>
     <property name="pursueRange" type="int" value="75"/>
     <property name="threatRange" type="int" value="50"/>
     <property name="waypoints" value="252,253,wait5,252,254,255,266,wait5,255,254"/>
@@ -377,12 +377,12 @@
   </object>
   <object id="238" template="../../../../../../../common/maps/obj/enemy.tx" x="16.375" y="239.25">
    <properties>
-    <property name="enemy" value="Liliana's Herbalist"/>
+    <property name="enemy" value="Yawgmoth's Herbalist"/>
    </properties>
   </object>
   <object id="239" template="../../../../../../../common/maps/obj/enemy.tx" x="112.042" y="56.6667">
    <properties>
-    <property name="enemy" value="Liliana's Herbalist"/>
+    <property name="enemy" value="Yawgmoth's Herbalist"/>
     <property name="threatRange" type="float" value="0"/>
    </properties>
   </object>
@@ -410,7 +410,7 @@
   </object>
   <object id="243" template="../../../../../../../common/maps/obj/enemy.tx" x="374" y="464">
    <properties>
-    <property name="enemy" value="Liliana's Herbalist"/>
+    <property name="enemy" value="Yawgmoth's Herbalist"/>
    </properties>
   </object>
   <object id="244" template="../../../../../../../common/maps/obj/manashards.tx" x="416" y="464"/>

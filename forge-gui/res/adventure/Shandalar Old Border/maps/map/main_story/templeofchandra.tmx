@@ -2,6 +2,7 @@
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="61" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="188">
  <properties>
   <property name="canFailDungeon" type="bool" value="true" />
+  <property name="dungeonEffect" value="{"startBattleWithCard":["Shivan Gorge|USG","Wall of Lava|ICE","Grim Lavamancer|TOR","Gorilla Shaman|ALL","Task Mage Assembly|PCY","Havoc|TMP","Scald|USG"]}"/>
   <property name="dungeonEffect">{
   "startBattleWithCard": [ "Ancient Tomb|TMP" ],
 }</property>
@@ -585,7 +586,7 @@
     <property name="effect">{
  "startBattleWithCard": [ "Goblin Sharpshooter|ONS" ]
 }</property>
-    <property name="enemy" value="Chandra's Pyromancer" />
+    <property name="enemy" value="Jaya's Pyromancer" />
     
    </properties>
   </object>
@@ -604,7 +605,7 @@
     <property name="effect">{
  "startBattleWithCard": [ "Fires of Yavimaya|INV" ]
 }</property>
-    <property name="enemy" value="Chandra's Pyromancer" />
+    <property name="enemy" value="Jaya's Pyromancer" />
     
    </properties>
   </object>
@@ -628,7 +629,7 @@
   </object>
   <object id="41" template="../../../../../../common/maps/obj/enemy.tx" x="736" y="508.33">
    <properties>
-    <property name="enemy" value="Chandra" />
+    <property name="enemy" value="Jaya Ballard" />
     <property name="effect">{
  "startBattleWithCard": [ "Mountain|UGL", "Mountain|UGL", "Gratuitous Violence|ONS" ]
 }</property>
@@ -643,7 +644,7 @@
     <property name="effect">{
  "startBattleWithCard": [ "Goblin Sharpshooter|ONS" ]
 }</property>
-    <property name="enemy" value="Chandra's Pyromancer" />
+    <property name="enemy" value="Jaya's Pyromancer" />
     
     <property name="spawn.Normal" type="bool" value="true" />
    </properties>
@@ -653,7 +654,7 @@
     <property name="effect">{
  "startBattleWithCard": [ "Goblin Sharpshooter|ONS" ]
 }</property>
-    <property name="enemy" value="Chandra's Immolator" />
+    <property name="enemy" value="Jaya's Immolator" />
     
     <property name="spawn.Normal" type="bool" value="true" />
    </properties>
@@ -707,7 +708,7 @@
     <property name="effect">{
  "startBattleWithCard": [ "Caltrops|UDS" ]
 }</property>
-    <property name="enemy" value="Chandra's Scorcher" />
+    <property name="enemy" value="Jaya's Scorcher" />
     
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="waypoints" value="" />
@@ -715,7 +716,7 @@
   </object>
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="673" y="844.83">
    <properties>
-    <property name="enemy" value="Chandra's Scorcher" />
+    <property name="enemy" value="Jaya's Scorcher" />
     
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="waypoints" value="" />
@@ -723,7 +724,7 @@
   </object>
   <object id="51" template="../../../../../../common/maps/obj/enemy.tx" x="922.25" y="634.5">
    <properties>
-    <property name="enemy" value="Chandra's Hellhound" />
+    <property name="enemy" value="Jaya's Hellhound" />
     
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="threatRange" type="int" value="80" />
@@ -732,7 +733,7 @@
   </object>
   <object id="52" template="../../../../../../common/maps/obj/enemy.tx" x="511.167" y="928.92">
    <properties>
-    <property name="enemy" value="Chandra's Hellhound" />
+    <property name="enemy" value="Jaya's Hellhound" />
     
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="threatRange" type="int" value="60" />
@@ -741,7 +742,7 @@
   </object>
   <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="223.667" y="545.33">
    <properties>
-    <property name="enemy" value="Chandra's Hellhound" />
+    <property name="enemy" value="Jaya's Hellhound" />
     
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="threatRange" type="int" value="30" />
@@ -753,7 +754,7 @@
   <object id="56" template="../../../../../../common/maps/obj/gold.tx" x="343" y="145" />
   <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="175.5" y="192">
    <properties>
-    <property name="enemy" value="Chandra's Hellhound" />
+    <property name="enemy" value="Jaya's Hellhound" />
     
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -777,7 +778,7 @@
     <property name="effect">{
  "startBattleWithCard": [ "Iron Star|LEA" ]
 }</property>
-    <property name="enemy" value="Chandra's Pyromancer" />
+    <property name="enemy" value="Jaya's Pyromancer" />
     
     <property name="spawn.Normal" type="bool" value="true" />
    </properties>
@@ -787,7 +788,7 @@
     <property name="effect">{
  "startBattleWithCard": [ "Ruby Medallion|TMP" ]
 }</property>
-    <property name="enemy" value="Chandra's Acolyte" />
+    <property name="enemy" value="Jaya's Acolyte" />
     
     <property name="spawn.Normal" type="bool" value="true" />
    </properties>
@@ -797,7 +798,7 @@
     <property name="effect">{
  "startBattleWithCard": [ "Blood Moon|DRK" ]
 }</property>
-    <property name="enemy" value="Chandra's Lavamancer" />
+    <property name="enemy" value="Jaya's Lavamancer" />
     
     <property name="spawn.Normal" type="bool" value="true" />
    </properties>
@@ -807,7 +808,7 @@
     <property name="effect">{
  "startBattleWithCard": [ "Seal of Fire|NMS" ]
 }</property>
-    <property name="enemy" value="Chandra's Scorcher" />
+    <property name="enemy" value="Jaya's Scorcher" />
     
     <property name="spawn.Normal" type="bool" value="true" />
    </properties>
@@ -817,7 +818,7 @@
     <property name="effect">{
  "startBattleWithCard": [ "Skirk Prospector|ONS" ]
 }</property>
-    <property name="enemy" value="Chandra's Scorcher" />
+    <property name="enemy" value="Jaya's Scorcher" />
     
     <property name="threatRange" type="int" value="20" />
     <property name="waypoints" value="74,75,76,77" />
@@ -851,7 +852,7 @@
     <property name="effect">{
  "startBattleWithCard": [ "Goblin Sharpshooter|ONS" ]
 }</property>
-    <property name="enemy" value="Chandra's Acolyte" />
+    <property name="enemy" value="Jaya's Acolyte" />
     
     <property name="spawn.Normal" type="bool" value="true" />
     <property name="threatRange" type="int" value="20" />
@@ -859,14 +860,14 @@
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="834.045" y="873.68">
    <properties>
-    <property name="enemy" value="Chandra's Acolyte" />
+    <property name="enemy" value="Jaya's Acolyte" />
     
     <property name="waypoints" value="101,103,102,103,104,105,wait1,104,103,102,103,101,wait1" />
    </properties>
   </object>
   <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="766" y="888.5">
    <properties>
-    <property name="enemy" value="Chandra's Firestarter" />
+    <property name="enemy" value="Jaya's Firestarter" />
     
     <property name="waypoints" value="106,107,108,167,109,102,166, 168" />
    </properties>
@@ -908,12 +909,12 @@
   "text":"HELLO AGAIN PLANESWALKER {var=player_name}", 
    "options":[
     { 
-		"name":"Yeah, yeah, defeat Chandra. Got it.",
+		"name":"Yeah, yeah, defeat Jaya. Got it.",
 		"condition":[ { "checkMapFlag": "intro" }] 
 	},
 	{
 	  "name":"Why am I here?",
-	  "text":"YOU HAVE FREED THE LEGENDARY PLANESWALKER CHANDRA FROM CAPTIVITY...",
+	  "text":"THE PYROMANCER JAYA BALLARD HAS TAKEN CONTROL OF THIS TEMPLE...",
 	  "options":[
 		{ 
 			"name":"Okay, yeah, I remember this now.",
@@ -929,7 +930,7 @@
 			},
 			{      
 				"name":"So... what now?",
-				"text":"DEFEAT CHANDRA AND I CAN HELP HER RECOVER, SO THAT SHE MAY AID YOU IN BATTLES YET TO COME. TAKE HEED, {var=player_name}, THIS WILL BE A DIFFICULT TASK.",
+				"text":"DEFEAT JAYA BALLARD AND QUENCH HER FLAMES. TAKE HEED, {var=player_name}, THIS WILL BE A DIFFICULT TASK.",
 				"options":[
 				{
 					"name":"Thank you for the warning.",
@@ -944,7 +945,7 @@
   </object>
   <object id="171" template="../../../../../../common/maps/obj/enemy.tx" x="736.083" y="497.25">
    <properties>
-    <property name="enemy" value="Chandra" />
+    <property name="enemy" value="Jaya Ballard" />
     <property name="ignoreDungeonEffect" type="bool" value="true" />
     
     <property name="spawn.Hard" type="bool" value="false" />
@@ -987,7 +988,7 @@
   </object>
   <object id="174" template="../../../../../../common/maps/obj/enemy.tx" x="326.212" y="880.852">
    <properties>
-    <property name="enemy" value="Chandra's Scorcher" />
+    <property name="enemy" value="Jaya's Scorcher" />
     
     <property name="spawn.Normal" type="bool" value="true" />
     <property name="threatRange" type="int" value="60" />

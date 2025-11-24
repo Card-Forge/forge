@@ -2,6 +2,7 @@
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="290">
  <properties>
   <property name="canFailDungeon" type="bool" value="true"/>
+  <property name="dungeonEffect" value="{"startBattleWithCard":["Phyrexian Tower|USG","Gate to Phyrexia|ATQ","Phyrexian Arena|APC","Putrefaction|MMQ"]}"/>
   <property name="respawnEnemies" type="bool" value="true"/>
  </properties>
  <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx"/>
@@ -1257,7 +1258,7 @@
    }
 ]
 </property>
-    <property name="enemy" value="Liliana's Alchemist"/>
+    <property name="enemy" value="Yawgmoth's Alchemist"/>
     <property name="reward">[
   {
     &quot;type&quot;: &quot;item&quot;,
@@ -1443,7 +1444,7 @@
    <properties>
     <property name="defeatDialog">[
 {
-   &quot;text&quot;:&quot;You pry the key away from the mayor's cold dead (and dead again) hands. Having that, there's not much between you and Liliana now.&quot;,
+   &quot;text&quot;:&quot;You pry the key away from the mayor's cold dead (and dead again) hands. Having that, there's not much between you and Yawgmoth now.&quot;,
    &quot;options&quot;:[
 	{&quot;name&quot;:&quot;(continue)&quot;,
 &quot;action&quot;:[{&quot;deleteMapObject&quot;: 278}, {&quot;deleteMapObject&quot;: -1}]}
@@ -1464,7 +1465,7 @@
  &quot;lifeModifier&quot;: 15,
  &quot;startBattleWithCard&quot;: [ &quot;Zombie Master|LEA&quot; ]
 }</property>
-    <property name="enemy" value="Zombie Lord"/>
+    <property name="enemy" value="Gix"/>
     <property name="fleeRange" type="float" value="125"/>
     <property name="hidden" type="bool" value="false"/>
     <property name="inactive" type="bool" value="false"/>
@@ -1781,7 +1782,7 @@
     <property name="effect">{
  &quot;startBattleWithCard&quot;: [ &quot;Call to the Grave|SCG&quot;]
 }</property>
-    <property name="enemy" value="Liliana"/>
+    <property name="enemy" value="Yawgmoth"/>
     <property name="reward">[
   {
     &quot;type&quot;: &quot;item&quot;,
@@ -2082,7 +2083,7 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;Behind this gate, you see the legendary Liliana. She appears to be deep into a ritual of some sort. But to reach her, you need to find the mayor first.&quot;,
+    &quot;text&quot;:&quot;Behind this gate, you see the legendary Yawgmoth. He appears to be deep into a ritual of some sort. But to reach him, you need to find the mayor first.&quot;,
     &quot;loctext&quot;:&quot;&quot;,
     &quot;condition&quot;: [ { &quot;actorID&quot;: 224 } ],
     &quot;options&quot;:[ { &quot;name&quot;:&quot;(Continue)&quot; } ]
@@ -2128,11 +2129,11 @@
    <properties>
     <property name="dialog">[
 {
-   &quot;text&quot;: &quot;Liliana's ritual appears to be nearing completion. You see a portal on the other side of her leading out of her domain.&quot;,
+   &quot;text&quot;: &quot;Yawgmoth's ritual appears to be nearing completion. You see a portal on the other side of him leading out of his domain.&quot;,
    &quot;options&quot;: [
    {
       &quot;name&quot;: &quot;(Continue)&quot;,
-      &quot;text&quot;: &quot;As you open the gate, she reaches the apex of her incantations, and the piles of dead on either side of the portal begin to rise. You must stop her before this horde of undead is set loose upon Shandalar!!!&quot;,
+      &quot;text&quot;: &quot;As you open the gate, he reaches the apex of his incantations, and the piles of dead on either side of the portal begin to rise. You must stop him before this horde of undead is set loose upon Shandalar!!!&quot;,
       &quot;options&quot;: [
       {
          &quot;name&quot;: &quot;(Continue)&quot;,

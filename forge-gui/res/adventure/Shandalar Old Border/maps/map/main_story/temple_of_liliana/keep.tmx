@@ -2,6 +2,7 @@
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="55" height="19" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="244">
  <properties>
   <property name="canFailDungeon" type="bool" value="true"/>
+  <property name="dungeonEffect" value="{"startBattleWithCard":["Phyrexian Tower|USG","Gate to Phyrexia|ATQ","Phyrexian Arena|APC","Putrefaction|MMQ"]}"/>
   <property name="respawnEnemies" type="bool" value="true"/>
  </properties>
  <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx"/>
@@ -114,12 +115,12 @@
   &quot;text&quot;:&quot;HELLO AGAIN PLANESWALKER {var=player_name}&quot;, 
    &quot;options&quot;:[
     { 
-		&quot;name&quot;:&quot;Yeah, yeah, defeat Liliana. Got it.&quot;,
+		&quot;name&quot;:&quot;Yeah, yeah, defeat Yawgmoth. Got it.&quot;,
 		&quot;condition&quot;:[ { &quot;checkMapFlag&quot;: &quot;intro&quot; }] 
 	},
 	{
 	  &quot;name&quot;:&quot;Why am I here?&quot;,
-	  &quot;text&quot;:&quot;YOU HAVE FREED THE LEGENDARY PLANESWALKER LILIANA FROM CAPTIVITY...&quot;,
+	  &quot;text&quot;:&quot;THE DARK LORD YAWGMOTH HAS TAKEN CONTROL OF THIS TEMPLE...&quot;,
 	  &quot;options&quot;:[
 		{ 
 			&quot;name&quot;:&quot;Okay, yeah, I remember this now.&quot;,
@@ -135,10 +136,10 @@
 			},
 			{      
 				&quot;name&quot;:&quot;So... what now?&quot;,
-				&quot;text&quot;:&quot;DEFEAT LILIANA AND I CAN HELP HER RECOVER, SO THAT SHE MAY AID YOU IN BATTLES YET TO COME. TAKE HEED, {var=player_name}, THIS WILL BE A DIFFICULT TASK.&quot;,
+				&quot;text&quot;:&quot;DEFEAT YAWGMOTH AND PURGE HIS PHYREXIAN CORRUPTION FROM THIS PLACE. TAKE HEED, {var=player_name}, THIS WILL BE A DIFFICULT TASK.&quot;,
 				&quot;options&quot;:[
 				{
-					&quot;text&quot;:&quot;THE PORTALS BEHIND ME LEAD TO PARTS OF HER REALM. ONCE ACTIVATED, YOU MAY USE THEM TO TRAVEL MORE QUICKLY.&quot;
+					&quot;text&quot;:&quot;THE PORTALS BEHIND ME LEAD TO PARTS OF HIS REALM. ONCE ACTIVATED, YOU MAY USE THEM TO TRAVEL MORE QUICKLY.&quot;
 					&quot;name&quot;:&quot;Thank you for the warning.&quot;,
 					&quot;options&quot;:[
 					{
