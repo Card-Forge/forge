@@ -1780,7 +1780,7 @@
   <object id="251" template="../../../../../../../common/maps/obj/enemy.tx" x="864" y="112">
    <properties>
     <property name="effect">{
- &quot;startBattleWithCard&quot;: [ &quot;Call to the Grave|SCG&quot;]
+ &quot;startBattleWithCard&quot;: [ &quot;Swamp|LEA&quot;, &quot;Swamp|LEA&quot;, &quot;Swamp|LEA&quot;, &quot;Phyrexian Lens|INV&quot;, &quot;Phyrexian Altar|INV&quot;, &quot;Yawgmoth's Bargain|UDS&quot;, &quot;Eye of Yawgmoth|NMS&quot;, &quot;Order of Yawgmoth|USG&quot;, &quot;Phyrexian Reclamation|ULG&quot;, &quot;Phyrexian Walker|VIS&quot;, &quot;Phyrexian Walker|VIS&quot;, &quot;Phyrexian Walker|VIS&quot;, &quot;Phyrexian Walker|VIS&quot;, &quot;Phyrexian Battleflies|INV&quot;, &quot;Phyrexian Battleflies|INV&quot;, &quot;Phyrexian Battleflies|INV&quot;, &quot;Phyrexian Battleflies|INV&quot; ]
 }</property>
     <property name="enemy" value="Yawgmoth"/>
     <property name="reward">[

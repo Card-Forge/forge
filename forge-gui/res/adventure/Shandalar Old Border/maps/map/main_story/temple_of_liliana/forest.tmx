@@ -227,6 +227,9 @@
 	]
   }
 ]</property>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Mishra's Workshop|ATQ&quot;, &quot;Mishra's Groundbreaker|ALL&quot;, &quot;Ankh of Mishra|LEA&quot;, &quot;Dragon Engine|ATQ&quot; ]
+}</property>
     <property name="enemy" value="Mishra"/>
    </properties>
   </object>

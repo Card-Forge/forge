@@ -631,7 +631,7 @@
    <properties>
     <property name="enemy" value="Jaya Ballard" />
     <property name="effect">{
- "startBattleWithCard": [ "Mountain|UGL", "Mountain|UGL", "Gratuitous Violence|ONS" ]
+ "startBattleWithCard": [ "Mountain|LEA", "Mountain|LEA", "Mountain|LEA", "Mountain|LEA", "Blood Moon|DRK", "Fire Elemental|LEA", "Wall of Diffusion|TMP", "Book of Rass|DRK", "Sulfuric Vapors|USG" ]
 }</property>
     <property name="ignoreDungeonEffect" type="bool" value="false" />
 

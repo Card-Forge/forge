@@ -516,7 +516,7 @@
 ]</property>
     <property name="effect">{
  &quot;lifeModifier&quot;: 4,
- 
+ &quot;startBattleWithCard&quot;: [ &quot;Swamp|LEA&quot;, &quot;Mountain|LEA&quot;, &quot;Island|LEA&quot;, &quot;Ashnod's Altar|ATQ&quot;, &quot;Ashnod's Battle Gear|ATQ&quot;, &quot;Ashnod's Cylix|ALL&quot;, &quot;Ashnod's Transmogrant|ATQ&quot;, &quot;Phyrexian Walker|VIS&quot;, &quot;Phyrexian Walker|VIS&quot;, &quot;Phyrexian Walker|VIS&quot;, &quot;Phyrexian Walker|VIS&quot; ]
 }</property>
     <property name="enemy" value="Ashnod"/>
    </properties>

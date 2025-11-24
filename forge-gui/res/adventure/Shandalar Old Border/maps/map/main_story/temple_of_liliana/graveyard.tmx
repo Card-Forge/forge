@@ -391,7 +391,7 @@
 	]
   }
 ]</property>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Opal Archangel|USG&quot;, &quot;Angelic Shield|INV&quot;,&quot;Angelic Renewal|WTH&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Tsabo's Web|INV&quot;, &quot;Tsabo's Assassin|INV&quot;, &quot;Metathran Zombie|INV&quot;, &quot;Vodalian Zombie|INV&quot;, &quot;Phyrexian Slayer|INV&quot;, &quot;Antagonism|USG&quot;, &quot;Phyrexian Lens|INV&quot; ]
 }</property>
     <property name="enemy" value="Tsabo Tavoc"/>
     <property name="flying" type="bool" value="true"/>
