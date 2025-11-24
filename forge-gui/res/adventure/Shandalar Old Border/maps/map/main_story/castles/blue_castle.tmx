@@ -70,7 +70,7 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Merfolk Fighter"/>
+    <property name="enemy" value="Merfolk King"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
@@ -187,7 +187,7 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Brain Mole"/>
+    <property name="enemy" value="Mill Mole"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>

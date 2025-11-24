@@ -194,7 +194,7 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Forest Giant"/>
+    <property name="enemy" value="Forest Titan"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
