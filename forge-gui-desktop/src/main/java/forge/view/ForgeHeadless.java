@@ -34,6 +34,10 @@ import org.jupnp.UpnpServiceConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.PrintStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import forge.game.event.*;
 
 public class ForgeHeadless {
 
@@ -121,6 +125,9 @@ public class ForgeHeadless {
         Game game = match.createGame();
 
         // Start Game
+        HeadlessGameObserver observer = new HeadlessGameObserver();
+        match.subscribeToEvents(observer);
+        game.subscribeToEvents(observer);
         match.startGame(game);
     }
 
@@ -349,6 +356,107 @@ public class ForgeHeadless {
                     System.out.println("Unknown command: " + command);
                 }
             }
+        }
+    }
+
+    private static class HeadlessGameObserver extends forge.game.event.IGameEventVisitor.Base<Void> {
+        private PrintStream logStream;
+
+        public HeadlessGameObserver() {
+            try {
+                logStream = new PrintStream(new FileOutputStream("headless_game.log"), true);
+            } catch (IOException e) {
+                System.err.println("Error creating log file: " + e.getMessage());
+                logStream = System.out;
+            }
+        }
+
+        private void log(String message) {
+            logStream.println(message);
+            // System.out.println(message); // Uncomment to also see in console
+        }
+
+        @com.google.common.eventbus.Subscribe
+        public void receive(forge.game.event.GameEvent ev) {
+            ev.visit(this);
+        }
+
+        @Override
+        public Void visit(GameEventTurnBegan event) {
+            log("\n=== Turn " + event.turnNumber() + " - " + event.turnOwner().getName() + " ===");
+            return null;
+        }
+
+        @Override
+        public Void visit(GameEventTurnPhase event) {
+            log("Phase: " + event.phase());
+            return null;
+        }
+
+        @Override
+        public Void visit(GameEventGameOutcome event) {
+            log("\n*** GAME OVER ***");
+            log("Result: " + event.result().getOutcomeStrings());
+            return null;
+        }
+
+        @Override
+        public Void visit(GameEventSpellAbilityCast event) {
+            log("CAST: " + event.sa().getHostCard().getName() + " by " + event.sa().getActivatingPlayer().getName());
+            return null;
+        }
+
+        @Override
+        public Void visit(GameEventLandPlayed event) {
+            log("LAND: " + event.land().getName() + " played by " + event.player().getName());
+            return null;
+        }
+
+        @Override
+        public Void visit(GameEventPlayerLivesChanged event) {
+            log("LIFE: " + event.player().getName() + " is now at " + event.newLives());
+            return null;
+        }
+
+        @Override
+        public Void visit(GameEventAttackersDeclared event) {
+            if (!event.attackersMap().isEmpty()) {
+                log("COMBAT: Attackers declared by " + event.player().getName());
+                event.attackersMap().asMap().forEach((target, attackers) -> {
+                    log("  Target: " + target);
+                    for (Card attacker : attackers) {
+                        log("    - " + attacker.getName() + " (" + attacker.getNetPower() + "/" + attacker.getNetToughness() + ")");
+                    }
+                });
+            }
+            return null;
+        }
+
+        @Override
+        public Void visit(GameEventBlockersDeclared event) {
+            if (!event.blockers().isEmpty()) {
+                log("COMBAT: Blockers declared by " + event.defendingPlayer().getName());
+                event.blockers().forEach((defender, map) -> {
+                    map.forEach((attacker, blockers) -> {
+                         for (Card blocker : blockers) {
+                             log("    - " + blocker.getName() + " blocks " + attacker.getName());
+                         }
+                    });
+                });
+            }
+            return null;
+        }
+
+        @Override
+        public Void visit(GameEventPlayerDamaged event) {
+            log("DAMAGE: " + event.target().getName() + " took " + event.amount() + " damage from " + event.source());
+            return null;
+        }
+
+        @Override
+        public Void visit(GameEventCardDamaged event) {
+            log("DAMAGE: " + event.card().getName() + " took " + event.amount() + " damage from " + event.source());
+            return null;
         }
     }
 
