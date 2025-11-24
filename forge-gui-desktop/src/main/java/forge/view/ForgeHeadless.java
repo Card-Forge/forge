@@ -40,6 +40,17 @@ import java.io.IOException;
 import forge.game.event.*;
 
 public class ForgeHeadless {
+    // ANSI Color Constants
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
+    public static final String ANSI_BOLD = "\u001B[1m";
 
     public static void main(String[] args) {
         System.err.println("DEBUG: ForgeHeadless main started");
@@ -383,13 +394,13 @@ public class ForgeHeadless {
 
         @Override
         public Void visit(GameEventTurnBegan event) {
-            log("\n=== Turn " + event.turnNumber() + " - " + event.turnOwner().getName() + " ===");
+            log("\n" + ANSI_WHITE + "=== Turn " + event.turnNumber() + " - " + event.turnOwner().getName() + " ===" + ANSI_RESET);
             return null;
         }
 
         @Override
         public Void visit(GameEventTurnPhase event) {
-            log("Phase: " + event.phase());
+            log(ANSI_WHITE + "Phase: " + event.phase() + ANSI_RESET);
             return null;
         }
 
@@ -402,30 +413,30 @@ public class ForgeHeadless {
 
         @Override
         public Void visit(GameEventSpellAbilityCast event) {
-            log("CAST: " + event.sa().getHostCard().getName() + " by " + event.sa().getActivatingPlayer().getName());
+            log(ANSI_CYAN + "CAST: " + event.sa().getHostCard().getName() + " by " + event.sa().getActivatingPlayer().getName() + ANSI_RESET);
             return null;
         }
 
         @Override
         public Void visit(GameEventLandPlayed event) {
-            log("LAND: " + event.land().getName() + " played by " + event.player().getName());
+            log(ANSI_GREEN + "LAND: " + event.land().getName() + " played by " + event.player().getName() + ANSI_RESET);
             return null;
         }
 
         @Override
         public Void visit(GameEventPlayerLivesChanged event) {
-            log("LIFE: " + event.player().getName() + " is now at " + event.newLives());
+            log(ANSI_YELLOW + "LIFE: " + event.player().getName() + " is now at " + event.newLives() + ANSI_RESET);
             return null;
         }
 
         @Override
         public Void visit(GameEventAttackersDeclared event) {
             if (!event.attackersMap().isEmpty()) {
-                log("COMBAT: Attackers declared by " + event.player().getName());
+                log(ANSI_RED + "COMBAT: Attackers declared by " + event.player().getName() + ANSI_RESET);
                 event.attackersMap().asMap().forEach((target, attackers) -> {
-                    log("  Target: " + target);
+                    log(ANSI_PURPLE + "  Target: " + target + ANSI_RESET);
                     for (Card attacker : attackers) {
-                        log("    - " + attacker.getName() + " (" + attacker.getNetPower() + "/" + attacker.getNetToughness() + ")");
+                        log(ANSI_RED + "    - " + attacker.getName() + " (" + attacker.getNetPower() + "/" + attacker.getNetToughness() + ")" + ANSI_RESET);
                     }
                 });
             }
@@ -435,11 +446,11 @@ public class ForgeHeadless {
         @Override
         public Void visit(GameEventBlockersDeclared event) {
             if (!event.blockers().isEmpty()) {
-                log("COMBAT: Blockers declared by " + event.defendingPlayer().getName());
+                log(ANSI_RED + "COMBAT: Blockers declared by " + event.defendingPlayer().getName() + ANSI_RESET);
                 event.blockers().forEach((defender, map) -> {
                     map.forEach((attacker, blockers) -> {
                          for (Card blocker : blockers) {
-                             log("    - " + blocker.getName() + " blocks " + attacker.getName());
+                             log(ANSI_RED + "    - " + blocker.getName() + " blocks " + attacker.getName() + ANSI_RESET);
                          }
                     });
                 });
@@ -449,13 +460,13 @@ public class ForgeHeadless {
 
         @Override
         public Void visit(GameEventPlayerDamaged event) {
-            log("DAMAGE: " + event.target().getName() + " took " + event.amount() + " damage from " + event.source());
+            log(ANSI_BOLD + ANSI_RED + "DAMAGE: " + event.target().getName() + " took " + event.amount() + " damage from " + event.source() + ANSI_RESET);
             return null;
         }
 
         @Override
         public Void visit(GameEventCardDamaged event) {
-            log("DAMAGE: " + event.card().getName() + " took " + event.amount() + " damage from " + event.source());
+            log(ANSI_BOLD + ANSI_RED + "DAMAGE: " + event.card().getName() + " took " + event.amount() + " damage from " + event.source() + ANSI_RESET);
             return null;
         }
     }
