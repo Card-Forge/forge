@@ -1,9 +1,9 @@
 [metadata]
 Name=Portal Master
 [Main]
-10 Mountain|UGL
-10 Plains|UGL
-10 Island|UGL
+10 Mountain|LEA
+10 Plains|LEA
+10 Island|LEA
 4 Archangel|VIS
 2 Alabaster Dragon|POR
 4 Breath of Life|POR
@@ -13,16 +13,21 @@ Name=Portal Master
 4 Cloud Dragon|POR
 4 Djinn of the Lamp|POR
 4 Snapping Drake|POR
-4 Exhaustion|POR
-4 Time Ebb|POR
+2 Exhaustion|POR
+2 Mystic Denial|POR
+2 Time Ebb|POR
+2 Symbol of Unsummoning|POR
 2 Ancestral Memories|MIR
-4 Blaze|POR
+2 Blaze|POR
+2 Seasoned Marshal|POR
 2 Fire Dragon|POR
 2 Earthquake|LEA
-2 Rain of Salt|POR
+2 Thundermare|POR
 2 Lava Axe|POR
 2 Forked Lightning|POR
-4 Lava Flow|POR
+2 Lava Flow|POR
+2 Fire Snake|POR
 4 Path of Peace|POR
-4 Volcanic Dragon|MIR
+2 Volcanic Dragon|MIR
+2 Fire Tempest|POR
 2 Thing from the Deep|POR
