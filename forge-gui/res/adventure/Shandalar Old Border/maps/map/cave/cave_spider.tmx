@@ -43,9 +43,6 @@
       &quot;probability&quot;: 1,
       &quot;count&quot;: 1,
       &quot;addMaxCount&quot;: 5,
-      &quot;colors&quot;: [
-        &quot;Black&quot;
-      ],
       &quot;rarity&quot;: [
         &quot;Common&quot;,
         &quot;Rare&quot;,
