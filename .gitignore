@@ -95,3 +95,4 @@ forge-gui/tools/PerSetTrackingResults
 __pycache__
 *.pyc
 headless_game.log
+HEADLESS_README.md

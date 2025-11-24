@@ -58,6 +58,7 @@ public class ForgeHeadless {
         // Parse command-line arguments
         boolean player1IsHuman = true;  // default
         boolean player2IsHuman = false; // default
+        boolean verboseLogging = false; // default
         
         for (String arg : args) {
             if (arg.equals("--both-human")) {
@@ -70,6 +71,8 @@ public class ForgeHeadless {
                 player1IsHuman = false;
             } else if (arg.equals("--p2-human")) {
                 player2IsHuman = true;
+            } else if (arg.equals("--verbose")) {
+                verboseLogging = true;
             } else if (arg.equals("--help")) {
                 printUsage();
                 System.exit(0);
@@ -78,32 +81,7 @@ public class ForgeHeadless {
         
         GuiBase.setInterface(new HeadlessGui());
         FModel.initialize(null, null);
-        runGame(player1IsHuman, player2IsHuman);
-    }
-    
-    private static void printUsage() {
-        System.out.println("ForgeHeadless - Headless Magic: The Gathering Game Engine");
-        System.out.println("\nUsage: java -cp <jar> forge.view.ForgeHeadless [options]");
-        System.out.println("\nOptions:");
-        System.out.println("  --both-human    Both players are human-controlled (interactive)");
-        System.out.println("  --both-ai       Both players are AI-controlled (simulation mode)");
-        System.out.println("  --p1-ai         Player 1 is AI-controlled (default: human)");
-        System.out.println("  --p2-human      Player 2 is human-controlled (default: AI)");
-        System.out.println("  --help          Show this help message");
-        System.out.println("\nDefault: Player 1 human-controlled, Player 2 AI-controlled");
-        System.out.println("\nAvailable interactive commands:");
-        System.out.println("  get_state           - View current game state as JSON");
-        System.out.println("  possible_actions    - List all available actions");
-        System.out.println("  play_action <index> - Execute the action at given index");
-        System.out.println("  pass_priority       - Pass priority without taking action");
-        System.out.println("  concede             - Exit the game");
-    }
 
-    private static void initialize() {
-        // FModel.initialize() is called in main
-    }
-
-    private static void runGame(boolean player1IsHuman, boolean player2IsHuman) {
         // Generate Decks
         Deck deck1 = DeckgenUtil.getRandomColorDeck(FModel.getFormats().getStandard().getFilterPrinted(), true);
         Deck deck2 = DeckgenUtil.getRandomColorDeck(FModel.getFormats().getStandard().getFilterPrinted(), true);
@@ -135,10 +113,40 @@ public class ForgeHeadless {
         Match match = new Match(rules, players, "Headless Match");
         Game game = match.createGame();
 
+        runGame(match, game, player1IsHuman, player2IsHuman, verboseLogging);
+    }
+    
+    private static void printUsage() {
+        System.out.println("ForgeHeadless - Headless Magic: The Gathering Game Engine");
+        System.out.println("\nUsage: java -cp <jar> forge.view.ForgeHeadless [options]");
+        System.out.println("\nOptions:");
+        System.out.println("  --both-human    Both players are human-controlled (interactive)");
+        System.out.println("  --both-ai       Both players are AI-controlled (simulation mode)");
+        System.out.println("  --p1-ai         Player 1 is AI-controlled (default: human)");
+        System.out.println("  --p2-human      Player 2 is human-controlled (default: AI)");
+        System.out.println("  --verbose       Enable verbose logging of game events");
+        System.out.println("  --help          Show this help message");
+        System.out.println("\nDefault: Player 1 human-controlled, Player 2 AI-controlled");
+        System.out.println("\nAvailable interactive commands:");
+        System.out.println("  get_state (gs)          - View current game state as JSON");
+        System.out.println("  possible_actions (pa)   - List all available actions");
+        System.out.println("  play_action <index>     - Execute the action at given index");
+        System.out.println("    (play <index>)");
+        System.out.println("  pass_priority (pp|pass) - Pass priority without taking action");
+        System.out.println("  concede (c)             - Exit the game");
+    }
+
+    private static void initialize() {
+        // FModel.initialize() is called in main
+    }
+
+    private static void runGame(Match match, Game game, boolean player1IsHuman, boolean player2IsHuman, boolean verboseLogging) {
         // Start Game
-        HeadlessGameObserver observer = new HeadlessGameObserver();
-        match.subscribeToEvents(observer);
-        game.subscribeToEvents(observer);
+        if (verboseLogging) {
+            HeadlessGameObserver observer = new HeadlessGameObserver();
+            match.subscribeToEvents(observer);
+            game.subscribeToEvents(observer);
+        }
         match.startGame(game);
     }
 
@@ -329,15 +337,15 @@ public class ForgeHeadless {
                 String[] parts = input.split(" ");
                 String command = parts[0];
 
-                if (command.equals("get_state")) {
+                if (command.equals("get_state") || command.equals("gs")) {
                     Gson gson = new GsonBuilder().setPrettyPrinting().create();
                     System.out.println(gson.toJson(extractGameState(getGame())));
-                } else if (command.equals("possible_actions")) {
+                } else if (command.equals("possible_actions") || command.equals("pa")) {
                     Gson gson = new GsonBuilder().setPrettyPrinting().create();
                     System.out.println(gson.toJson(getPossibleActions(player, getGame())));
-                } else if (command.equals("play_action")) {
+                } else if (command.equals("play_action") || command.equals("play")) {
                     if (parts.length < 2) {
-                        System.out.println("Usage: play_action <index>");
+                        System.out.println("Usage: play_action|play <index>");
                         continue;
                     }
                     
@@ -358,9 +366,9 @@ public class ForgeHeadless {
                     } catch (NumberFormatException e) {
                         System.out.println("Invalid action index. Please provide a number.");
                     }
-                } else if (command.equals("pass_priority")) {
+                } else if (command.equals("pass_priority") || command.equals("pp") || command.equals("pass")) {
                     return null; // Pass priority
-                } else if (command.equals("concede")) {
+                } else if (command.equals("concede") || command.equals("c")) {
                     System.exit(0);
                     return null;
                 } else {
@@ -509,6 +517,7 @@ public class ForgeHeadless {
         @Override public void clearImageCache() {}
         @Override public void showSpellShop() {}
         @Override public void showBazaar() {}
+        @Override public boolean isSupportedAudioFormat(java.io.File file) { return false; }
         @Override public IGuiGame getNewGuiGame() { return null; }
         @Override public HostedMatch hostMatch() { return null; }
         @Override public void runBackgroundTask(String message, Runnable task) { task.run(); }
