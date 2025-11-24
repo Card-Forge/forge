@@ -768,3 +768,15 @@ WinterBoots
 ZelyonSword
   xy: 176, 672
   size: 16, 16
+GroundbreakerBoots
+  xy: 144, 144
+  size: 16, 16
+RiverWaders
+  xy: 96, 96
+  size: 16, 16
+ClawsOfGix
+  xy: 304, 848
+  size: 16, 16
+SulfuricStaff
+  xy: 304, 560
+  size: 16, 16

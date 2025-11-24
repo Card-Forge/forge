@@ -3177,5 +3177,48 @@
 				"Subversion|ULG"
 			]
 		}
+	},
+	{
+		"name": "Groundbreaker Boots",
+		"equipmentSlot": "Boots",
+		"iconName": "GroundbreakerBoots",
+		"effect": {
+			"startBattleWithCard": [
+				"Mishra's Groundbreaker|ALL"
+			]
+		}
+	},
+	{
+		"name": "River Waders",
+		"equipmentSlot": "Boots",
+		"iconName": "RiverWaders",
+		"effect": {
+			"lifeModifier": -2,
+			"startBattleWithCard": [
+				"Raging River|LEA"
+			]
+		}
+	},
+	{
+		"name": "Claws of Gix",
+		"equipmentSlot": "Left",
+		"iconName": "ClawsOfGix",
+		"effect": {
+			"lifeModifier": 3,
+			"startBattleWithCard": [
+				"Claws of Gix|USG"
+			]
+		}
+	},
+	{
+		"name": "Sulfuric Staff",
+		"equipmentSlot": "Right",
+		"iconName": "SulfuricStaff",
+		"effect": {
+			"lifeModifier": -4,
+			"startBattleWithCard": [
+				"Sulfuric Vapors|USG"
+			]
+		}
 	}
 ]
