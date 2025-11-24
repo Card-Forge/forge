@@ -172,14 +172,14 @@
   <object id="106" template="../../obj/gate.tx" x="320.167" y="133" width="14.9999" height="22">
    <properties>
     <property name="dialog">[{
-    &quot;text&quot;:&quot;This door is locked. Judging by the scrapes and scratches on the floor, however, it seems to be opened frequently so the key can probably be found nearby.&quot;,
+    &quot;text&quot;:&quot;This door is locked. Judging by the scrapes and scratches on the floor, however, it seems to be opened frequently, so the key can probably be found nearby.&quot;,
     &quot;options&quot;:[
     { &quot;name&quot;:&quot;(Leave)&quot; },
     {      
         &quot;name&quot;:&quot;Unlock the gate with the Illusionist's key&quot;,     
         &quot;condition&quot;:[{&quot;item&quot;:&quot;Illusionist's Key&quot;}],    
         &quot;text&quot;:&quot;The door swings open and you can continue to explore the tower.&quot;,
-        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Illusionist's Key&quot;}]} ]
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Illusionist's Key&quot;}]} ]
     }
     ]
 }]</property>

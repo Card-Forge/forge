@@ -254,7 +254,7 @@
     <property name="dialog">[{
     &quot;text&quot;:&quot;A translucent, shimmering red field blocks your path. Pained screams echo through the room behind you.&quot;,
     &quot;options&quot;:[
-    { &quot;name&quot;:&quot;Leave.&quot; } 
+    { &quot;name&quot;:&quot;Leave&quot; } 
     ]
 }]</property>
    </properties>
@@ -268,13 +268,13 @@
 	{ 
 		&quot;text&quot;:&quot;As the third captive is freed, you hear the sound of shattering as the barrier in the center of the chamber fails. Time to end this.&quot;,
 		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
-		&quot;name&quot;:&quot;Free them.&quot; 
+		&quot;name&quot;:&quot;Free them&quot; 
 			&quot;options&quot;:[{
 			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:3}}],
 			&quot;action&quot;:[{&quot;deleteMapObject&quot;:108}],
 			&quot;name&quot;:&quot;ok&quot; }]
 	},
-	{ &quot;name&quot;:&quot;Leave.&quot; } 	
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
 	] 
 	} 
 	
@@ -290,13 +290,13 @@
 	{ 
 		&quot;text&quot;:&quot;As the third captive is freed, you hear the sound of shattering as the barrier in the center of the chamber fails. Time to end this.&quot;,
 		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
-		&quot;name&quot;:&quot;Free them.&quot; 
+		&quot;name&quot;:&quot;Free them&quot; 
 			&quot;options&quot;:[{
 			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:3}}],
 			&quot;action&quot;:[{&quot;deleteMapObject&quot;:108}],
 			&quot;name&quot;:&quot;ok&quot; }]
 	},
-	{ &quot;name&quot;:&quot;Leave.&quot; } 	
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
 	] 
 	} 
 	
@@ -312,13 +312,13 @@
 	{ 
 		&quot;text&quot;:&quot;As the third captive is freed, you hear the sound of shattering as the barrier in the center of the chamber fails. Time to end this.&quot;,
 		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
-		&quot;name&quot;:&quot;Free them.&quot; 
+		&quot;name&quot;:&quot;Free them&quot; 
 			&quot;options&quot;:[{
 			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:3}}],
 			&quot;action&quot;:[{&quot;deleteMapObject&quot;:108}],
 			&quot;name&quot;:&quot;ok&quot; }]
 	},
-	{ &quot;name&quot;:&quot;Leave.&quot; } 	
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
 	] 
 	} 
 	
@@ -333,7 +333,7 @@
 	&quot;name&quot;:&quot;Because you're a monster, and you should be stopped!&quot;,  
 	&quot;text&quot;:&quot;*The demon sneers.*\n Ah, a noble *hero*. I should have guessed. Your kind die like anyone else when your power runs dry - allow me to demonstrate!&quot;,
 	&quot;options&quot;:[{
-		&quot;name&quot;:&quot;End&quot;,
+		&quot;name&quot;:&quot;Continue&quot;,
 		&quot;action&quot;:[{&quot;deleteMapObject&quot;:113}]
 		}]
    	},
@@ -341,7 +341,7 @@
 	&quot;name&quot;:&quot;I want power. I'll take it from what's left of you.&quot;,  
 	&quot;text&quot;:&quot;*The demon chuckles.*\n I'll commend your ambition, if not your sense. Fight hard enough, and I might let you replace that failure you dealt with upstairs.&quot;,
 	&quot;options&quot;:[{
-		&quot;name&quot;:&quot;End&quot;,
+		&quot;name&quot;:&quot;Continue&quot;,
 		&quot;action&quot;:[{&quot;deleteMapObject&quot;:113}]
 		}]
     	},
@@ -349,7 +349,7 @@
 	&quot;name&quot;:&quot;Honestly, you just looked like you'd be a good fight.&quot;,  
 	&quot;text&quot;:&quot;*The demon blinks in surprise, then laughs.*\n Well, if that's what you seek, you'll find more than you bargained for here. I hope you enjoy the last battle of your life, *mortal*.&quot;,
 	&quot;options&quot;:[{
-		&quot;name&quot;:&quot;End&quot;,
+		&quot;name&quot;:&quot;Continue&quot;,
 		&quot;action&quot;:[{&quot;deleteMapObject&quot;:113}]
 		}]
     	},
@@ -357,7 +357,7 @@
 	&quot;name&quot;:&quot;...&quot;,  
 	&quot;text&quot;:&quot;*The fiend's eyes narrow.*\n Too scared for words? So be it, mortal. You'll die all the same.&quot;,
 	&quot;options&quot;:[{
-		&quot;name&quot;:&quot;End&quot;,
+		&quot;name&quot;:&quot;Continue&quot;,
 		&quot;action&quot;:[{&quot;deleteMapObject&quot;:113}]
 		}]
     }]
@@ -372,7 +372,7 @@
 	&quot;name&quot;:&quot;I have no need for power from something as vile as you. Die!&quot;,  
 	&quot;text&quot;:&quot;*The demon's eyes widen in fear.* \n No! I will not be destroyed by- \n *A final blast of power reduces him to mana in the air of this place, and something clatters to the ground. A holy symbol of this place - or rather, what it once was. As the unholy energy around it fades, you can still feel magic coursing through it.*&quot;
 	&quot;options&quot;:[{
-		&quot;name&quot;:&quot;End&quot;,
+		&quot;name&quot;:&quot;Continue&quot;,
 		&quot;action&quot;:[{&quot;addItem&quot;:&quot;Hallowed Sigil&quot;},{&quot;deleteMapObject&quot;:116}]
 		}]
    	},
@@ -380,7 +380,7 @@
 	&quot;name&quot;:&quot;If you knew anything worth teaching me directly, I wouldn't have been able to defeat you.&quot;,  
 	&quot;text&quot;:&quot;*The demon's eyes widen in fear.* \n No! I will not be destroyed by- \n *A final blast of power reduces him to mana in the air of this place, and something clatters to the ground. A holy symbol of this place - or rather, what it once was. As the unholy energy around it fades, you can still feel magic coursing through it.*&quot;
 	&quot;options&quot;:[{
-		&quot;name&quot;:&quot;End&quot;,
+		&quot;name&quot;:&quot;Continue&quot;,
 		&quot;action&quot;:[{&quot;addItem&quot;:&quot;Hallowed Sigil&quot;},{&quot;deleteMapObject&quot;:116}]
 		}]
     	},
@@ -388,7 +388,7 @@
 	&quot;name&quot;:&quot;...Very well, even a monster like you deserves mercy. *Once.*&quot;,  
 	&quot;text&quot;:&quot;*The demon smiles, moving his hand in an arcane gesture.* \n *As you unconsciously mimic it, you feel a dark, repulsive power crystallize in your hand. \n *The demon smiles as he begins to fade into a cloud of smoke.* \n Very well, mortal. My power is yours to wield...until next time.&quot;
 	&quot;options&quot;:[{
-		&quot;name&quot;:&quot;End&quot;,
+		&quot;name&quot;:&quot;Continue&quot;,
 		&quot;action&quot;:[{&quot;addItem&quot;:&quot;Unhallowed Sigil&quot;},{&quot;deleteMapObject&quot;:116}]
 		}]
     	},
@@ -396,7 +396,7 @@
 	&quot;name&quot;:&quot;As you should. I'll take your offer.&quot;,  
 	&quot;text&quot;:&quot;*The demon smiles, moving his hand in an arcane gesture.* \n *As you unconsciously mimic it, you feel a dark, repulsive power crystallize in your hand. \n *The demon smiles as he begins to fade into a cloud of smoke.* \n Very well, mortal. My power is yours to wield...until next time.&quot;
 	&quot;options&quot;:[{
-		&quot;name&quot;:&quot;End&quot;,
+		&quot;name&quot;:&quot;Continue&quot;,
 		&quot;action&quot;:[{&quot;addItem&quot;:&quot;Unhallowed Sigil&quot;},{&quot;deleteMapObject&quot;:116}]
 		}]
     }]

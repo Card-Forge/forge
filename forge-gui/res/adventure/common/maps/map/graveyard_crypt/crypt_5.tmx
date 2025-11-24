@@ -91,9 +91,9 @@
    <properties>
     <property name="dialog">[
   { 
-    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
+    &quot;text&quot;:&quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
     &quot;options&quot;:[ 
-	{ &quot;name&quot;:&quot;go away&quot; } 	
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
 	] 
 	} 
 	
@@ -104,9 +104,9 @@
    <properties>
     <property name="dialog">[
   { 
-    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
+    &quot;text&quot;:&quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
     &quot;options&quot;:[ 
-	{ &quot;name&quot;:&quot;go away&quot; } 	
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
 	] 
 	} 
 	
@@ -117,11 +117,11 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;Hmm... A big switch is embedded into the wall.&quot;,
+    &quot;text&quot;: &quot;A big switch is embedded into the wall.&quot;,
     &quot;options&quot;: [
       {
-        &quot;text&quot;: &quot;You hear some loud sounds coming from the north&quot;,
-        &quot;name&quot;: &quot;flip the switch&quot;,
+        &quot;text&quot;: &quot;You hear some loud sounds coming from the north.&quot;,
+        &quot;name&quot;: &quot;Flip the switch&quot;,
         &quot;options&quot;: [
           {
             &quot;action&quot;: [ { &quot;deleteMapObject&quot;: 65 } ],
@@ -129,7 +129,7 @@
           }
         ]
       },
-      { &quot;name&quot;: &quot;go away&quot; }
+      { &quot;name&quot;: &quot;Leave&quot; }
     ]
   }
 
@@ -140,9 +140,9 @@
    <properties>
     <property name="dialog">[
   { 
-    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
+    &quot;text&quot;:&quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
     &quot;options&quot;:[ 
-	{ &quot;name&quot;:&quot;go away&quot; } 	
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
 	] 
 	} 
 	
@@ -153,9 +153,9 @@
    <properties>
     <property name="dialog">[
   { 
-    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
+    &quot;text&quot;:&quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
     &quot;options&quot;:[ 
-	{ &quot;name&quot;:&quot;go away&quot; } 	
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
 	] 
 	} 
 	
@@ -176,9 +176,9 @@
    <properties>
     <property name="dialog">[
   { 
-    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
+    &quot;text&quot;:&quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
     &quot;options&quot;:[ 
-	{ &quot;name&quot;:&quot;go away&quot; } 	
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
 	] 
 	} 
 	
@@ -189,9 +189,9 @@
    <properties>
     <property name="dialog">[
   { 
-    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
+    &quot;text&quot;:&quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
     &quot;options&quot;:[ 
-	{ &quot;name&quot;:&quot;go away&quot; } 	
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
 	] 
 	} 
 	
@@ -291,9 +291,9 @@
    <properties>
     <property name="dialog">[
   { 
-    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
+    &quot;text&quot;:&quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
     &quot;options&quot;:[ 
-	{ &quot;name&quot;:&quot;go away&quot; } 	
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
 	] 
 	} 
 	

@@ -100,9 +100,9 @@
   <object id="102" template="../../obj/gate.tx" x="207.807" y="95.793">
    <properties>
     <property name="dialog">[{
-    &quot;text&quot;:&quot;A gate is blocking the path. I looks like it is open elsewhere&quot;,
+    &quot;text&quot;:&quot;A gate is blocking the path. It looks like it is opened from elsewhere.&quot;,
     &quot;options&quot;:[
-    { &quot;name&quot;:&quot;continue&quot; } 
+    { &quot;name&quot;:&quot;Continue&quot; } 
     ]
 }]</property>
    </properties>
@@ -111,18 +111,18 @@
    <properties>
     <property name="dialog">[
   { 
-    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall&quot;, 
+    &quot;text&quot;:&quot;A big switch is embedded into the wall.&quot;, 
     &quot;options&quot;:[ 
 	{ 
-		&quot;text&quot;:&quot;You hear some loud sounds from the center&quot;,
+		&quot;text&quot;:&quot;You hear some loud sounds from the center.&quot;,
 		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
-		&quot;name&quot;:&quot;flip the switch&quot; 
+		&quot;name&quot;:&quot;Flip the switch&quot; 
 			&quot;options&quot;:[{
 			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:2}}],
 			&quot;action&quot;:[{&quot;deleteMapObject&quot;:102}],
 			&quot;name&quot;:&quot;ok&quot; }]
 	},
-	{ &quot;name&quot;:&quot;go away&quot; } 	
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
 	] 
 	} 
 	
@@ -133,18 +133,18 @@
    <properties>
     <property name="dialog">[
   { 
-    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall&quot;, 
+    &quot;text&quot;:&quot;A big switch is embedded into the wall.&quot;, 
     &quot;options&quot;:[ 
 	{ 
-		&quot;text&quot;:&quot;You hear some loud sounds from the center&quot;,
+		&quot;text&quot;:&quot;You hear some loud sounds from the center.&quot;,
 		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
-		&quot;name&quot;:&quot;flip the switch&quot; 
+		&quot;name&quot;:&quot;Flip the switch&quot; 
 			&quot;options&quot;:[{
 			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:2}}],
 			&quot;action&quot;:[{&quot;deleteMapObject&quot;:102}],
 			&quot;name&quot;:&quot;ok&quot; }]
 	},
-	{ &quot;name&quot;:&quot;go away&quot; } 	
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
 	] 
 	} 
 	

@@ -347,8 +347,8 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;This ominous black gate stands between you and your goal and/or doom. Well oiled gears are holding it closed.&quot;,
-    &quot;options&quot;:[ { &quot;name&quot;:&quot;Okay...&quot; } ]
+    &quot;text&quot;:&quot;This ominous black gate stands between you and your goal and/or doom. Well-oiled gears are holding it closed.&quot;,
+    &quot;options&quot;:[ { &quot;name&quot;:&quot;Leave&quot; } ]
   }
 ]</property>
    </properties>
@@ -357,18 +357,18 @@
    <properties>
     <property name="dialog">[
   { 
-    &quot;text&quot;:&quot;Hmm... A big switch is embedded into the wall.&quot;,
+    &quot;text&quot;:&quot;A big switch is embedded into the wall.&quot;,
     &quot;options&quot;:[ 
 	{ 
-		&quot;text&quot;:&quot;You hear some loud sounds coming from the east&quot;,
+		&quot;text&quot;:&quot;You hear some loud sounds coming from the east.&quot;,
 		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
-		&quot;name&quot;:&quot;flip the switch&quot;
+		&quot;name&quot;:&quot;Flip the switch&quot;
 			&quot;options&quot;:[{
 			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:2}}],
 			&quot;action&quot;:[{&quot;deleteMapObject&quot;:18}],
 			&quot;name&quot;:&quot;ok&quot; }]
 	},
-	{ &quot;name&quot;:&quot;go away&quot; } 	
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
 	] 
 	} 
 	
@@ -379,18 +379,18 @@
    <properties>
     <property name="dialog">[
   { 
-    &quot;text&quot;:&quot;Hmm... A big switch is embedded into the wall.&quot;,
+    &quot;text&quot;:&quot;A big switch is embedded into the wall.&quot;,
     &quot;options&quot;:[ 
 	{ 
-		&quot;text&quot;:&quot;You hear some loud sounds coming from the east&quot;,
+		&quot;text&quot;:&quot;You hear some loud sounds coming from the east.&quot;,
 		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
-		&quot;name&quot;:&quot;flip the switch&quot;
+		&quot;name&quot;:&quot;Flip the switch&quot;
 			&quot;options&quot;:[{
 			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:2}}],
 			&quot;action&quot;:[{&quot;deleteMapObject&quot;:18}],
 			&quot;name&quot;:&quot;ok&quot; }]
 	},
-	{ &quot;name&quot;:&quot;go away&quot; } 	
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
 	] 
 	} 
 	
@@ -401,16 +401,16 @@
    <properties>
     <property name="dialog">[
   { 
-    &quot;text&quot;:&quot;Hmm... A big switch is embedded into the wall.&quot;,
+    &quot;text&quot;:&quot;A big switch is embedded into the wall.&quot;,
     &quot;options&quot;:[ 
 	{ 
-		&quot;text&quot;:&quot;You hear some loud sounds coming from the north&quot;,
-		&quot;name&quot;:&quot;flip the switch&quot;
+		&quot;text&quot;:&quot;You hear some loud sounds coming from the north.&quot;,
+		&quot;name&quot;:&quot;Flip the switch&quot;
 			&quot;options&quot;:[{
 			&quot;action&quot;:[{&quot;deleteMapObject&quot;:17}],
 			&quot;name&quot;:&quot;ok&quot; }]
 	},
-	{ &quot;name&quot;:&quot;go away&quot; } 	
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
 	] 
 	} 
 	
@@ -421,9 +421,9 @@
    <properties>
     <property name="dialog">[
   { 
-    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
+    &quot;text&quot;:&quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
     &quot;options&quot;:[ 
-	{ &quot;name&quot;:&quot;go away&quot; } 	
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
 	] 
 	} 
 	
@@ -434,7 +434,7 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;This gate appears to be connected to the machinery to the west&quot;,
+    &quot;text&quot;:&quot;This gate appears to be connected to the machinery to the west.&quot;,
     &quot;options&quot;:[ { &quot;name&quot;:&quot;Now to find a way to turn it on...&quot; } ]
   }
 ]</property>
@@ -444,16 +444,16 @@
    <properties>
     <property name="dialog">[
   { 
-    &quot;text&quot;:&quot;Hmm... A big switch is embedded into the wall.&quot;,
+    &quot;text&quot;:&quot;A big switch is embedded into the wall.&quot;,
     &quot;options&quot;:[ 
 	{ 
 		&quot;text&quot;:&quot;You hear some rumbling and commotion from the south. The final gate appears to be open.&quot;,
-		&quot;name&quot;:&quot;flip the switch&quot;
+		&quot;name&quot;:&quot;Flip the switch&quot;
 			&quot;options&quot;:[{
 			&quot;action&quot;:[{&quot;deleteMapObject&quot;:6}],
 			&quot;name&quot;:&quot;ok&quot; }]
 	},
-	{ &quot;name&quot;:&quot;go away&quot; } 	
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
 	] 
 	} 
 	
@@ -464,9 +464,9 @@
    <properties>
     <property name="dialog">[
   { 
-    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
+    &quot;text&quot;:&quot;A big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.&quot;, 
     &quot;options&quot;:[ 
-	{ &quot;name&quot;:&quot;go away&quot; } 	
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
 	] 
 	} 
 	
@@ -502,12 +502,12 @@
 	{ 
 		&quot;text&quot;:&quot;The connected machinery whirrs to life, and the gate to your east opens.&quot;,
 		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1}],
-		&quot;name&quot;:&quot;flip the switch&quot;
+		&quot;name&quot;:&quot;Flip the switch&quot;
 			&quot;options&quot;:[{
 			&quot;action&quot;:[{&quot;deleteMapObject&quot;:11}],
 			&quot;name&quot;:&quot;ok&quot; }]
 	},
-	{ &quot;name&quot;:&quot;go away&quot; } 	
+	{ &quot;name&quot;:&quot;Leave&quot; } 	
 	] 
 	}
 ] 
