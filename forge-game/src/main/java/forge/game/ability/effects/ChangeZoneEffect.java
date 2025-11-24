@@ -672,6 +672,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     movedCard.setUnearthed(true);
 
                     final Card eff = createEffect(sa, sa.getActivatingPlayer(), "Unearth Effect", hostCard.getImageKey());
+                    eff.setRenderForUI(false);
+                    eff.addRemembered(movedCard);
 
                     // It gains haste.
                     String s = "Mode$ Continuous | Affected$ Card.IsRemembered | EffectZone$ Command | AddKeyword$ Haste";
@@ -679,9 +681,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                     // If it would leave the battlefield, exile it instead of putting it anywhere else.
                     addLeaveBattlefieldReplacement(eff, "Exile");
-
-                    eff.addRemembered(movedCard);
-
                     movedCard.addLeavesPlayCommand(exileEffectCommand(game, eff));
 
                     game.getAction().moveToCommand(eff, sa);
