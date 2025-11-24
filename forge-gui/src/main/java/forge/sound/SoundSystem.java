@@ -232,6 +232,10 @@ public class SoundSystem {
         return currentPlaylist;
     }
 
+    public MusicPlaylist getShelvedPlaylist() {
+        return shelvedPlaylist;
+    }
+
     public void clearShelvedPlaylist() {
         if(this.shelvedTrack == null)
             return;
