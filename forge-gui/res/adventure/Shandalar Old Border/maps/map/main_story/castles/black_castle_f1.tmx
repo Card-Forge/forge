@@ -36,7 +36,7 @@
    <properties>
     <property name="defeatDialog">[{
    &quot;condition&quot;: [{&quot;checkQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;, &quot;not&quot;:true}],
-   &quot;text&quot;: &quot;As you land your final blow against Griselbrand, you feel a significant pulse of mana. But with the immediate threat removed, you can now see clearly that the locked room at the north end of the chamber does not hold any prisoners.&quot;,
+   &quot;text&quot;: &quot;As you land your final blow against the Lord of the Pit, you feel a significant pulse of mana. But with the immediate threat removed, you can now see clearly that the locked room at the north end of the chamber does not hold any prisoners.&quot;,
    &quot;options&quot;: [{
       &quot;name&quot;: &quot;(Continue)&quot;, 
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;Ch1BlackCastleComplete&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}, {&quot;advanceQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;}]
@@ -44,7 +44,7 @@
 },
 {
    &quot;condition&quot;: [{&quot;checkQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;}],
-   &quot;text&quot;: &quot;As you land your final blow against Griselbrand, you feel a another pulse of mana. But just as before, the locked room behind your fallen foe does not hold any prisoners.&quot;,
+   &quot;text&quot;: &quot;As you land your final blow against the Lord of the Pit, you feel a another pulse of mana. But just as before, the locked room behind your fallen foe does not hold any prisoners.&quot;,
    &quot;options&quot;: [{
       &quot;name&quot;: &quot;(Continue)&quot;, 
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;Ch1BlackCastleComplete&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}, {&quot;advanceQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;}]
@@ -53,7 +53,7 @@
     <property name="effect">{
  &quot;startBattleWithCard&quot;: [ &quot;Swamp|LEA&quot;, &quot;Swamp|LEA&quot;, &quot;Swamp|LEA&quot;, &quot;Swamp|LEA&quot;, &quot;Swamp|LEA&quot;, &quot;Breeding Pit|FEM&quot;, &quot;Black Market|MMQ&quot; ]
 }</property>
-    <property name="enemy" value="Spirit of the Night|MIR"/>
+    <property name="enemy" value="Griselbrand"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>

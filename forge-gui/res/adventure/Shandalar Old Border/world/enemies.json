@@ -854,6 +854,12 @@
 				"type": "landSketchbookShop",
 				"probability": 0.05,
 				"count": 1
+			},
+			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "White Key"
 			}
 		],
 		"equipment": [
@@ -12182,6 +12188,12 @@
 				"type": "landSketchbookShop",
 				"probability": 0.05,
 				"count": 1
+			},
+			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "Green Key"
 			}
 		],
 		"equipment": [
@@ -13398,6 +13410,12 @@
 				"type": "landSketchbookShop",
 				"probability": 0.05,
 				"count": 1
+			},
+			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "Black Key"
 			}
 		],
 		"equipment": [
@@ -18369,6 +18387,12 @@
 				"type": "landSketchbookShop",
 				"probability": 0.05,
 				"count": 1
+			},
+			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "Red Key"
 			}
 		],
 		"equipment": [
@@ -19012,6 +19036,12 @@
 				"type": "landSketchbookShop",
 				"probability": 0.05,
 				"count": 1
+			},
+			{
+				"type": "item",
+				"probability": 1,
+				"count": 1,
+				"itemName": "Blue Key"
 			}
 		],
 		"equipment": [
