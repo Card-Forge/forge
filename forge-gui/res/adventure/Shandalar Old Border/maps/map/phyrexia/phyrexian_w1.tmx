@@ -64,21 +64,21 @@
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;editions&quot;: [ &quot;USG&quot;,&quot;ULG&quot;,&quot;UDS&quot;,&quot;INV&quot;,&quot;APC&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 10,
     &quot;rarity&quot;: [ &quot;Common&quot; ]
     &quot;colors&quot;: [ &quot;white&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;editions&quot;: [ &quot;USG&quot;,&quot;ULG&quot;,&quot;UDS&quot;,&quot;INV&quot;,&quot;APC&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
     &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
     &quot;colors&quot;: [ &quot;white&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;editions&quot;: [ &quot;USG&quot;,&quot;ULG&quot;,&quot;UDS&quot;,&quot;INV&quot;,&quot;APC&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
     &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
