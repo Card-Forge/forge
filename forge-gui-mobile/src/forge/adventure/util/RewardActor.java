@@ -118,6 +118,15 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             Talt.dispose();
     }
 
+    @Override
+    public boolean remove() {
+        if (ownedLabel != null) {
+            ownedLabel.remove();
+        }
+
+        return super.remove();
+    }
+
     public boolean toolTipIsVisible() {
         if (holdTooltip != null)
             return holdTooltip.tooltip_actor.getStage() != null;
@@ -934,7 +943,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
         if (reward.type.equals(Reward.Type.Card) && ownedLabel != null) {
             if (isNew) {
-                if (autoSell != null) {
+                if (isLoot && autoSell != null) {
                     ownedLabel.setPosition(
                         autoSell.getX() + autoSell.getWidth() / 2 - ownedLabel.layout.getWidth() / 2,
                         autoSell.getY() + autoSell.getHeight());

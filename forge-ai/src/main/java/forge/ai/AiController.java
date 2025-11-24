@@ -2067,7 +2067,7 @@ public class AiController {
                         break;
                     }
                 } else {
-                    CardCollectionView viableOptions = CardLists.filter(pool, CardPredicates.isControlledByAnyOf(sa.getActivatingPlayer().getOpponents()), CardPredicates.CAN_BE_DESTROYED);
+                    CardCollectionView viableOptions = CardLists.filter(pool, CardPredicates.isControlledByAnyOf(sa.getActivatingPlayer().getOpponents()), Card::canBeDestroyed);
                     Card best = ComputerUtilCard.getBestAI(viableOptions);
                     if (best != null) {
                         result.add(best);
@@ -2251,7 +2251,7 @@ public class AiController {
 
         // filter list by ApiTypes
         List<SpellAbility> discard = filterListByApi(activePlayerSAs, ApiType.Discard);
-        List<SpellAbility> mandatoryDiscard = filterList(discard, SpellAbilityPredicates.isMandatory());
+        List<SpellAbility> mandatoryDiscard = filterList(discard, SpellAbility::isMandatory);
 
         List<SpellAbility> draw = filterListByApi(activePlayerSAs, ApiType.Draw);
 

@@ -67,6 +67,7 @@ import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 
 import static java.lang.Math.max;
 
@@ -3549,7 +3550,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             if (ck.isRemoveNonMana()) {
                 // List only has nonMana
                 if (null == mana) {
-                    list.removeIf(SpellAbilityPredicates.isManaAbility().negate());
+                    list.removeIf(Predicate.not(SpellAbility::isManaAbility));
                 } else if (false == mana) {
                     list.clear();
                 }
@@ -4021,11 +4022,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final CardCollectionView getEquippedBy() {
-        return CardLists.filter(getAttachedCards(), CardPredicates.EQUIPMENT);
+        return CardLists.filter(getAttachedCards(), Card::isEquipment);
     }
 
     public final boolean isEquipped() {
-        return getAttachedCards().anyMatch(CardPredicates.EQUIPMENT);
+        return getAttachedCards().anyMatch(Card::isEquipment);
     }
     public final boolean isEquippedBy(Card c) {
         return this.hasCardAttachment(c);
@@ -4174,7 +4175,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         getGame().fireEvent(new GameEventCardAttachment(this, entity, null));
 
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Attach, this);
+        runParams.put(AbilityKey.AttachSource, this);
         runParams.put(AbilityKey.Object, old);
         getGame().getTriggerHandler().runTrigger(TriggerType.Unattach, runParams, false);
 
@@ -4316,22 +4317,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (updateView) {
             updateTypesForView();
         }
-    }
-
-    public final void addChangedCardTypes(final Iterable<String> types, final Iterable<String> removeTypes, final boolean addAllCreatureTypes,
-            final Set<RemoveType> remove,
-            final long timestamp, final long staticId, final boolean updateView, final boolean cda) {
-        CardType addType = null;
-        CardType removeType = null;
-        if (types != null) {
-            addType = new CardType(types, true);
-        }
-
-        if (removeTypes != null) {
-            removeType = new CardType(removeTypes, true);
-        }
-
-        addChangedCardTypes(addType, removeType, addAllCreatureTypes, remove, timestamp, staticId, updateView, cda);
     }
 
     public final void removeChangedCardTypes(final long timestamp, final long staticId) {

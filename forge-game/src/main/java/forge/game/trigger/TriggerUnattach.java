@@ -56,7 +56,7 @@ public class TriggerUnattach extends Trigger {
         if (!matchesValidParam("ValidObject", runParams.get(AbilityKey.Object))) {
             return false;
         }
-        if (!matchesValidParam("ValidAttachment", runParams.get(AbilityKey.Attach))) {
+        if (!matchesValidParam("ValidAttachment", runParams.get(AbilityKey.AttachSource))) {
             return false;
         }
 
@@ -66,14 +66,14 @@ public class TriggerUnattach extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Object, AbilityKey.Attach);
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Object, AbilityKey.AttachSource);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
         sb.append(Localizer.getInstance().getMessage("lblObject")).append(": ").append(sa.getTriggeringObject(AbilityKey.Object)).append(", ");
-        sb.append(Localizer.getInstance().getMessage("lblAttachment")).append(": ").append(sa.getTriggeringObject(AbilityKey.Attach));
+        sb.append(Localizer.getInstance().getMessage("lblAttachment")).append(": ").append(sa.getTriggeringObject(AbilityKey.AttachSource));
         return sb.toString();
     }
 

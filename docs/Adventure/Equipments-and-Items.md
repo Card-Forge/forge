@@ -62,7 +62,7 @@ Starting life Modifier: +2
 1. **Price** : 5000 gold
 
 #### Xira's Fancy Hat
-1. **Effect** : +2 starting life + Extra card starting in your command zone.
+1. **Effect** : +2 starting life + Extra card starting in your battlefield zone.
 1. **Location** : Xira's Hive
 
 ![Xira's Hive fullborder](https://github.com/Card-Forge/forge/assets/67333662/5e852d00-60af-4a19-ad0b-3659d751cd19)

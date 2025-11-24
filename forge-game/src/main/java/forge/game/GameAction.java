@@ -24,7 +24,6 @@ import forge.card.CardStateName;
 import forge.card.CardType.Supertype;
 import forge.card.ColorSet;
 import forge.card.GamePieceType;
-import forge.card.MagicColor;
 import forge.deck.DeckSection;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
@@ -42,7 +41,6 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityContinuous;
@@ -1551,7 +1549,7 @@ public class GameAction {
 
             if (desCreats != null) {
                 if (desCreats.size() > 1 && !orderedDesCreats) {
-                    desCreats = CardLists.filter(desCreats, CardPredicates.CAN_BE_DESTROYED);
+                    desCreats = CardLists.filter(desCreats, Card::canBeDestroyed);
                     if (!desCreats.isEmpty()) {
                         desCreats = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, desCreats, ZoneType.Graveyard, null);
                     }
@@ -1634,7 +1632,7 @@ public class GameAction {
         if (c.getCounters(CounterEnumType.LORE) < c.getFinalChapterNr()) {
             return false;
         }
-        if (!game.getStack().hasSourceOnStack(c, SpellAbilityPredicates.isChapter())) {
+        if (!game.getStack().hasSourceOnStack(c, SpellAbility::isChapter)) {
             sacrificeList.add(c);
             checkAgain = true;
         }
@@ -1680,7 +1678,7 @@ public class GameAction {
         }
         // 704.5v If a battle has defense 0 and it isn't the source of an ability that has triggered but not yet left the stack,
         // it’s put into its owner’s graveyard.
-        if (!game.getStack().hasSourceOnStack(c, SpellAbilityPredicates.isTrigger())) {
+        if (!game.getStack().hasSourceOnStack(c, SpellAbility::isTrigger)) {
             removeList.add(c);
             checkAgain = true;
         }
@@ -2441,8 +2439,7 @@ public class GameAction {
                                 Localizer.getInstance().getMessage("lblChooseNColors", Lang.getNumeral(2));
                         SpellAbility sa = new SpellAbility.EmptySa(ApiType.ChooseColor, c, takesAction);
                         sa.putParam("AILogic", "MostProminentInComputerDeck");
-                        ColorSet chosenColors = ColorSet.fromNames(takesAction.getController().chooseColors(prompt, sa, 2, 2, MagicColor.Constant.ONLY_COLORS));
-                        c.setMarkedColors(chosenColors);
+                        c.setMarkedColors(takesAction.getController().chooseColors(prompt, sa, 2, 2, ColorSet.WUBRG));
                     }
                 }
             }
