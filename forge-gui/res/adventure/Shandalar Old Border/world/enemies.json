@@ -32038,15 +32038,7 @@
 				"count": 1,
 				"cardName": "Ancient Tomb|TMP"
 			}
-		],
-		"effect": {
-			"startBattleWithCard": [
-				"Mishra's Workshop|ATQ",
-				"Mishra's Groundbreaker|ALL",
-				"Ankh of Mishra|LEA",
-				"Dragon Engine|ATQ"
-			]
-		}
+		]
 	},
 	{
 		"name": "Tsabo Tavoc",
@@ -32116,18 +32108,7 @@
 				"count": 1,
 				"cardName": "Bend or Break|INV"
 			}
-		],
-		"effect": {
-			"startBattleWithCard": [
-				"Tsabo's Web|INV",
-				"Tsabo's Assassin|INV",
-				"Metathran Zombie|INV",
-				"Vodalian Zombie|INV",
-				"Phyrexian Slayer|INV",
-				"Antagonism|USG",
-				"Phyrexian Lens|INV"
-			]
-		}
+		]
 	},
 	{
 		"name": "Ashnod",
@@ -32209,22 +32190,7 @@
 				"count": 1,
 				"cardName": "Wheel of Fortune|LEA"
 			}
-		],
-		"effect": {
-			"startBattleWithCard": [
-				"Swamp|LEA",
-				"Mountain|LEA",
-				"Island|LEA",
-				"Ashnod's Altar|ATQ",
-				"Ashnod's Battle Gear|ATQ",
-				"Ashnod's Cylix|ALL",
-				"Ashnod's Transmogrant|ATQ",
-				"Phyrexian Walker|VIS",
-				"Phyrexian Walker|VIS",
-				"Phyrexian Walker|VIS",
-				"Phyrexian Walker|VIS"
-			]
-		}
+		]
 	},
 	{
 		"name": "Gix",
@@ -32282,16 +32248,7 @@
 				"count": 1,
 				"cardName": "Chimeric Staff|USG"
 			}
-		],
-		"effect": {
-			"startBattleWithCard": [
-				"Priest of Gix|USG",
-				"Priest of Gix|USG",
-				"Tainted Aether|USG",
-				"Oppression|USG",
-				"Bereavement|USG"
-			]
-		}
+		]
 	},
 	{
 		"name": "Yawgmoth",
@@ -32373,28 +32330,7 @@
 				"count": 1,
 				"cardName": "Strip Mine|ATQ"
 			}
-		],
-		"effect": {
-			"startBattleWithCard": [
-				"Swamp|LEA",
-				"Swamp|LEA",
-				"Swamp|LEA",
-				"Phyrexian Lens|INV",
-				"Phyrexian Altar|INV",
-				"Yawgmoth's Bargain|UDS",
-				"Eye of Yawgmoth|NMS",
-				"Order of Yawgmoth|USG",
-				"Phyrexian Reclamation|ULG",
-				"Phyrexian Walker|VIS",
-				"Phyrexian Walker|VIS",
-				"Phyrexian Walker|VIS",
-				"Phyrexian Walker|VIS",
-				"Phyrexian Battleflies|INV",
-				"Phyrexian Battleflies|INV",
-				"Phyrexian Battleflies|INV",
-				"Phyrexian Battleflies|INV"
-			]
-		}
+		]
 	},
 	{
 		"name": "Jaya Ballard",
@@ -32493,19 +32429,6 @@
 				"count": 1,
 				"cardName": "Pyrokinesis|ALL"
 			}
-		],
-		"effect": {
-			"startBattleWithCard": [
-				"Mountain|LEA",
-				"Mountain|LEA",
-				"Mountain|LEA",
-				"Mountain|LEA",
-				"Blood Moon|DRK",
-				"Fire Elemental|LEA",
-				"Wall of Diffusion|TMP",
-				"Book of Rass|DRK",
-				"Sulfuric Vapors|USG"
-			]
-		}
+		]
 	}
 ]
