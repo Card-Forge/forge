@@ -2846,6 +2846,7 @@
 		"equipmentSlot": "Right",
 		"iconName": "GrizzlyGlaive",
 		"effect": {
+			"lifeModifier": -1,
 			"startBattleWithCard": [
 				"Grizzly Bears|LEA"
 			]
