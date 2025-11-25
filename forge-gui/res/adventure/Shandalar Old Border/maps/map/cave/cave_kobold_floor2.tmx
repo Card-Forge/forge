@@ -3,9 +3,9 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="1" name="Background" width="60" height="40">
   <data encoding="base64" compression="zlib">
    eJztwzENAAAMA6C+M1f/cqphPyT0kqqqqqqqqqqqqvo+qPovzg==
@@ -30,48 +30,48 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="66" template="../../../../../../../common/maps/obj/door_up.tx" x="543" y="638">
+  <object id="66" template="../../../../../../common/maps/obj/door_up.tx" x="543" y="638">
    <properties>
     <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_kobold.tmx"/>
     <property name="teleportObjectId" value="67"/>
    </properties>
   </object>
-  <object id="75" template="../../../../../../../common/maps/obj/treasure.tx" x="187.5" y="91.75"/>
-  <object id="76" template="../../../../../../../common/maps/obj/treasure.tx" x="148.5" y="92"/>
-  <object id="77" template="../../../../../../../common/maps/obj/gold.tx" x="168.5" y="90.25"/>
-  <object id="78" template="../../../../../../../common/maps/obj/enemy.tx" x="169.135" y="119.291">
+  <object id="75" template="../../../../../../common/maps/obj/treasure.tx" x="187.5" y="91.75"/>
+  <object id="76" template="../../../../../../common/maps/obj/treasure.tx" x="148.5" y="92"/>
+  <object id="77" template="../../../../../../common/maps/obj/gold.tx" x="168.5" y="90.25"/>
+  <object id="78" template="../../../../../../common/maps/obj/enemy.tx" x="169.135" y="119.291">
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Kobold Taskmaster&quot; ] }"/>
     <property name="enemy" value="Kobold Dragoncaller"/>
     <property name="threatRange" type="int" value="100"/>
    </properties>
   </object>
-  <object id="79" template="../../../../../../../common/maps/obj/enemy.tx" x="199.5" y="234">
+  <object id="79" template="../../../../../../common/maps/obj/enemy.tx" x="199.5" y="234">
    <properties>
     <property name="enemy" value="Kobold Shaman"/>
    </properties>
   </object>
-  <object id="80" template="../../../../../../../common/maps/obj/enemy.tx" x="442.2" y="409.647">
+  <object id="80" template="../../../../../../common/maps/obj/enemy.tx" x="442.2" y="409.647">
    <properties>
     <property name="enemy" value="Kobold Shaman"/>
     <property name="threatRange" type="int" value="50"/>
     <property name="waypoints" value="88,89,88,90,91,90,88"/>
    </properties>
   </object>
-  <object id="81" template="../../../../../../../common/maps/obj/manashards.tx" x="758.726" y="85.5031"/>
-  <object id="82" template="../../../../../../../common/maps/obj/manashards.tx" x="753.877" y="302.292"/>
-  <object id="83" template="../../../../../../../common/maps/obj/manashards.tx" x="159.613" y="612.584"/>
-  <object id="84" template="../../../../../../../common/maps/obj/gold.tx" x="441.508" y="77.1917"/>
-  <object id="85" template="../../../../../../../common/maps/obj/gold.tx" x="793.356" y="321.685"/>
-  <object id="86" template="../../../../../../../common/maps/obj/gold.tx" x="642.366" y="197.707"/>
-  <object id="87" template="../../../../../../../common/maps/obj/enemy.tx" x="758.726" y="326.533">
+  <object id="81" template="../../../../../../common/maps/obj/manashards.tx" x="758.726" y="85.5031"/>
+  <object id="82" template="../../../../../../common/maps/obj/manashards.tx" x="753.877" y="302.292"/>
+  <object id="83" template="../../../../../../common/maps/obj/manashards.tx" x="159.613" y="612.584"/>
+  <object id="84" template="../../../../../../common/maps/obj/gold.tx" x="441.508" y="77.1917"/>
+  <object id="85" template="../../../../../../common/maps/obj/gold.tx" x="793.356" y="321.685"/>
+  <object id="86" template="../../../../../../common/maps/obj/gold.tx" x="642.366" y="197.707"/>
+  <object id="87" template="../../../../../../common/maps/obj/enemy.tx" x="758.726" y="326.533">
    <properties>
     <property name="enemy" value="Kobold Shaman"/>
    </properties>
   </object>
-  <object id="88" template="../../../../../../../common/maps/obj/waypoint.tx" x="502.458" y="372.246"/>
-  <object id="89" template="../../../../../../../common/maps/obj/waypoint.tx" x="592.498" y="206.711"/>
-  <object id="90" template="../../../../../../../common/maps/obj/waypoint.tx" x="369.476" y="447.741"/>
-  <object id="91" template="../../../../../../../common/maps/obj/waypoint.tx" x="151.302" y="410.34"/>
+  <object id="88" template="../../../../../../common/maps/obj/waypoint.tx" x="502.458" y="372.246"/>
+  <object id="89" template="../../../../../../common/maps/obj/waypoint.tx" x="592.498" y="206.711"/>
+  <object id="90" template="../../../../../../common/maps/obj/waypoint.tx" x="369.476" y="447.741"/>
+  <object id="91" template="../../../../../../common/maps/obj/waypoint.tx" x="151.302" y="410.34"/>
  </objectgroup>
 </map>

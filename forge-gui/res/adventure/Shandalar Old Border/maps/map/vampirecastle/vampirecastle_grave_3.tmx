@@ -6,9 +6,9 @@
  <properties>
   <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Grave Pact|STH&quot; ]}"/>
  </properties>
- <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJybxsnAMG0Uj+JRPIpH8SgexSMCAwDOljzS
@@ -33,20 +33,20 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="269" width="48" height="16">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="269" width="48" height="16">
    <properties>
     <property name="teleport" value="../Shandalar Old Border/maps/map/vampirecastle/vampirecastle_3.tmx"/>
    </properties>
   </object>
-  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="72.697" y="184.76">
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="72.697" y="184.76">
    <properties>
     <property name="displayNameOverride" value="Vampire Guardian"/>
     <property name="enemy" value="High Vampire"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="62" template="../../../../common/maps/obj/gold.tx" x="185.431" y="37.9964"/>
-  <object id="64" template="../../../../common/maps/obj/enemy.tx" x="342.353" y="173.156">
+  <object id="62" template="../../../../../../common/maps/obj/gold.tx" x="185.431" y="37.9964"/>
+  <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="342.353" y="173.156">
    <properties>
     <property name="deckOverride" value="decks/standard/vampire_monob.dck"/>
     <property name="enemy" value="Ancient Vampire"/>
@@ -55,7 +55,7 @@
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="65" template="../../../../common/maps/obj/enemy.tx" x="174.262" y="162.311">
+  <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="174.262" y="162.311">
    <properties>
     <property name="displayNameOverride" value="Vampire Feeder"/>
     <property name="enemy" value="Vampire"/>
@@ -72,7 +72,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="67" template="../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="338.774" y="175.211" width="24.9204" height="14.6679" visible="1">
+  <object id="67" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="338.774" y="175.211" width="24.9204" height="14.6679" visible="1">
    <properties>
     <property name="dialog">[
   {
@@ -105,18 +105,18 @@
 ]</property>
    </properties>
   </object>
-  <object id="68" template="../../../../common/maps/obj/gold.tx" x="48.2296" y="159.484"/>
-  <object id="69" template="../../../../common/maps/obj/enemy.tx" x="239.812" y="163.5">
+  <object id="68" template="../../../../../../common/maps/obj/gold.tx" x="48.2296" y="159.484"/>
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="239.812" y="163.5">
    <properties>
     <property name="displayNameOverride" value="Vampire Feeder"/>
     <property name="enemy" value="Vampire"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="70" template="../../../../common/maps/obj/gold.tx" x="48.2296" y="212.099"/>
-  <object id="71" template="../../../../common/maps/obj/manashards.tx" x="154.263" y="68.7132"/>
-  <object id="72" template="../../../../common/maps/obj/manashards.tx" x="264.714" y="67.91"/>
-  <object id="73" template="../../../../common/maps/obj/treasure.tx" x="248.246" y="42.6066">
+  <object id="70" template="../../../../../../common/maps/obj/gold.tx" x="48.2296" y="212.099"/>
+  <object id="71" template="../../../../../../common/maps/obj/manashards.tx" x="154.263" y="68.7132"/>
+  <object id="72" template="../../../../../../common/maps/obj/manashards.tx" x="264.714" y="67.91"/>
+  <object id="73" template="../../../../../../common/maps/obj/treasure.tx" x="248.246" y="42.6066">
    <properties>
     <property name="reward">[
   {
@@ -158,7 +158,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="74" template="../../../../common/maps/obj/treasure.tx" x="158.279" y="41.4017">
+  <object id="74" template="../../../../../../common/maps/obj/treasure.tx" x="158.279" y="41.4017">
    <properties>
     <property name="reward">[
   {
@@ -200,7 +200,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="75" template="../../../../common/maps/obj/booster.tx" x="214.509" y="40.5984">
+  <object id="75" template="../../../../../../common/maps/obj/booster.tx" x="214.509" y="40.5984">
    <properties>
     <property name="reward">[
 	{

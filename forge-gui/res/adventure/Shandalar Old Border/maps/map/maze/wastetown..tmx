@@ -2,7 +2,7 @@
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="158">
  <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../../common/maps/map/autotiles.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/map/autotiles.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
    eJztmNEOgjAMRfu48YG+qZ8KDj9LJ22gCZKpZNJY4iU52Ra27tJ0a8MhErWBiBqizP2O+4+pVWRcYv7+1dxLGO2X1inzOd2k5RRH2sV4KxLbvXF7Z44f5opfShqSkTbdU/1Tu0eu9Ms12HzTVn6x8jnwiWVM9pW29f6Q9WvukFpqz3+Oz3cuzgwAAPwXkqM813Pf1LcAAADs6B3nDkGeX2sANiTnsXd2oGHP+rIDDe/YU/zp/yhPtX5e9D3V+uIvyW0DnLyk1Q==

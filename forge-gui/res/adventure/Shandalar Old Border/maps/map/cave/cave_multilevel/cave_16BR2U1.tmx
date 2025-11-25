@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzz42Rg8BvFo3gUj+JRPIpH8YjAAAvyrVM=
@@ -24,25 +24,25 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="78" template="../../../../../../../../common/maps/obj/door_up.tx" x="209.971" y="272.629">
+  <object id="78" template="../../../../../../../common/maps/obj/door_up.tx" x="209.971" y="272.629">
    <properties>
     <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel/cave_16BR2.tmx"/>
     <property name="teleportObjectId" value="76"/>
    </properties>
   </object>
-  <object id="79" template="../../../../../../../../common/maps/obj/door_down.tx" x="193.306" y="17.9975">
+  <object id="79" template="../../../../../../../common/maps/obj/door_down.tx" x="193.306" y="17.9975">
    <properties>
     <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel/cave_16BR2U2.tmx"/>
     <property name="teleportObjectId" value="72"/>
    </properties>
   </object>
-  <object id="80" template="../../../../../../../../common/maps/obj/door_left.tx" x="463.269" y="111.318">
+  <object id="80" template="../../../../../../../common/maps/obj/door_left.tx" x="463.269" y="111.318">
    <properties>
     <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel/cave_16BR3U.tmx"/>
     <property name="teleportObjectId" value="78"/>
    </properties>
   </object>
-  <object id="82" template="../../../../../../../../common/maps/obj/treasure.tx" x="86" y="44">
+  <object id="82" template="../../../../../../../common/maps/obj/treasure.tx" x="86" y="44">
    <properties>
     <property name="reward">[
   {
@@ -54,8 +54,8 @@
 ]</property>
    </properties>
   </object>
-  <object id="83" template="../../../../../../../../common/maps/obj/manashards.tx" x="92" y="240"/>
-  <object id="84" template="../../../../../../../../common/maps/obj/enemy.tx" x="140" y="143.333">
+  <object id="83" template="../../../../../../../common/maps/obj/manashards.tx" x="92" y="240"/>
+  <object id="84" template="../../../../../../../common/maps/obj/enemy.tx" x="140" y="143.333">
    <properties>
     <property name="enemy" value="Cave Spider"/>
     <property name="speedModifier" type="float" value="10"/>

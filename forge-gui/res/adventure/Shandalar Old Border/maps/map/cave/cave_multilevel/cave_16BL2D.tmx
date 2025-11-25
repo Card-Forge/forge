@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUEANquRkY9vDQ315poJ2yA2DvTqCduwbA3lEwCkYBbQEAnAwDLA==
@@ -34,37 +34,37 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="67" template="../../../../../../../../common/maps/obj/door_down.tx" x="223.169" y="18.5974">
+  <object id="67" template="../../../../../../../common/maps/obj/door_down.tx" x="223.169" y="18.5974">
    <properties>
     <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel/cave_16BL2.tmx"/>
     <property name="teleportObjectId" value="77"/>
    </properties>
   </object>
-  <object id="68" template="../../../../../../../../common/maps/obj/treasure.tx" x="455" y="239"/>
-  <object id="69" template="../../../../../../../../common/maps/obj/gold.tx" x="369" y="103.5"/>
-  <object id="70" template="../../../../../../../../common/maps/obj/gold.tx" x="368" y="175"/>
-  <object id="71" template="../../../../../../../../common/maps/obj/treasure.tx" x="208" y="251.5"/>
-  <object id="72" template="../../../../../../../../common/maps/obj/enemy.tx" x="198.5" y="91">
+  <object id="68" template="../../../../../../../common/maps/obj/treasure.tx" x="455" y="239"/>
+  <object id="69" template="../../../../../../../common/maps/obj/gold.tx" x="369" y="103.5"/>
+  <object id="70" template="../../../../../../../common/maps/obj/gold.tx" x="368" y="175"/>
+  <object id="71" template="../../../../../../../common/maps/obj/treasure.tx" x="208" y="251.5"/>
+  <object id="72" template="../../../../../../../common/maps/obj/enemy.tx" x="198.5" y="91">
    <properties>
     <property name="enemy" value="Goblin"/>
    </properties>
   </object>
-  <object id="73" template="../../../../../../../../common/maps/obj/enemy.tx" x="274" y="168">
+  <object id="73" template="../../../../../../../common/maps/obj/enemy.tx" x="274" y="168">
    <properties>
     <property name="enemy" value="Goblin"/>
    </properties>
   </object>
-  <object id="74" template="../../../../../../../../common/maps/obj/enemy.tx" x="351.5" y="174.5">
+  <object id="74" template="../../../../../../../common/maps/obj/enemy.tx" x="351.5" y="174.5">
    <properties>
     <property name="enemy" value="Goblin"/>
    </properties>
   </object>
-  <object id="75" template="../../../../../../../../common/maps/obj/enemy.tx" x="365.818" y="124.455">
+  <object id="75" template="../../../../../../../common/maps/obj/enemy.tx" x="365.818" y="124.455">
    <properties>
     <property name="enemy" value="Goblin Warrior"/>
    </properties>
   </object>
-  <object id="76" template="../../../../../../../../common/maps/obj/enemy.tx" x="438.5" y="228.5">
+  <object id="76" template="../../../../../../../common/maps/obj/enemy.tx" x="438.5" y="228.5">
    <properties>
     <property name="enemy" value="Goblin Chief"/>
    </properties>

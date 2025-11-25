@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzz42Rg8BvFo3gUjwi8gGHg3TCKR/EoHlgMADJSrZw=
@@ -24,32 +24,32 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="70" template="../../../../../../../../common/maps/obj/door_up.tx" x="208.638" y="272.629">
+  <object id="70" template="../../../../../../../common/maps/obj/door_up.tx" x="208.638" y="272.629">
    <properties>
     <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel/cave_16C.tmx"/>
     <property name="teleportObjectId" value="63"/>
    </properties>
   </object>
-  <object id="71" template="../../../../../../../../common/maps/obj/enemy.tx" x="205.909" y="90.6438">
+  <object id="71" template="../../../../../../../common/maps/obj/enemy.tx" x="205.909" y="90.6438">
    <properties>
     <property name="enemy" value="Snake"/>
     <property name="threatRange" type="int" value="50"/>
     <property name="waypoints" value="78,79"/>
    </properties>
   </object>
-  <object id="73" template="../../../../../../../../common/maps/obj/enemy.tx" x="209.952" y="188.445">
+  <object id="73" template="../../../../../../../common/maps/obj/enemy.tx" x="209.952" y="188.445">
    <properties>
     <property name="enemy" value="Snake"/>
     <property name="threatRange" type="int" value="50"/>
     <property name="waypoints" value="78,79"/>
    </properties>
   </object>
-  <object id="74" template="../../../../../../../../common/maps/obj/treasure.tx" x="227" y="27.5"/>
-  <object id="75" template="../../../../../../../../common/maps/obj/gold.tx" x="250.667" y="104"/>
-  <object id="76" template="../../../../../../../../common/maps/obj/gold.tx" x="249" y="153"/>
-  <object id="77" template="../../../../../../../../common/maps/obj/gold.tx" x="236.667" y="40.3333"/>
-  <object id="78" template="../../../../../../../../common/maps/obj/waypoint.tx" x="205.749" y="51.0678"/>
-  <object id="79" template="../../../../../../../../common/maps/obj/waypoint.tx" x="209.148" y="168.353"/>
-  <object id="80" template="../../../../../../../../common/maps/obj/manashards.tx" x="178.127" y="56.5921"/>
+  <object id="74" template="../../../../../../../common/maps/obj/treasure.tx" x="227" y="27.5"/>
+  <object id="75" template="../../../../../../../common/maps/obj/gold.tx" x="250.667" y="104"/>
+  <object id="76" template="../../../../../../../common/maps/obj/gold.tx" x="249" y="153"/>
+  <object id="77" template="../../../../../../../common/maps/obj/gold.tx" x="236.667" y="40.3333"/>
+  <object id="78" template="../../../../../../../common/maps/obj/waypoint.tx" x="205.749" y="51.0678"/>
+  <object id="79" template="../../../../../../../common/maps/obj/waypoint.tx" x="209.148" y="168.353"/>
+  <object id="80" template="../../../../../../../common/maps/obj/manashards.tx" x="178.127" y="56.5921"/>
  </objectgroup>
 </map>

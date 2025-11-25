@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzz42Rg8BvFo3gUjwi8gGHg3TCKR/EoHlgMADJSrZw=
@@ -24,35 +24,35 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="72" template="../../../../../../../../common/maps/obj/door_up.tx" x="209.304" y="272.629">
+  <object id="72" template="../../../../../../../common/maps/obj/door_up.tx" x="209.304" y="272.629">
    <properties>
     <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel/cave_16BR2U1.tmx"/>
     <property name="teleportObjectId" value="79"/>
    </properties>
   </object>
-  <object id="73" template="../../../../../../../../common/maps/obj/treasure.tx" x="211.919" y="40.8401"/>
-  <object id="74" template="../../../../../../../../common/maps/obj/gold.tx" x="245.667" y="153.333"/>
-  <object id="75" template="../../../../../../../../common/maps/obj/gold.tx" x="232.333" y="140"/>
-  <object id="76" template="../../../../../../../../common/maps/obj/gold.tx" x="235" y="43"/>
-  <object id="77" template="../../../../../../../../common/maps/obj/enemy.tx" x="202.067" y="83.4196">
+  <object id="73" template="../../../../../../../common/maps/obj/treasure.tx" x="211.919" y="40.8401"/>
+  <object id="74" template="../../../../../../../common/maps/obj/gold.tx" x="245.667" y="153.333"/>
+  <object id="75" template="../../../../../../../common/maps/obj/gold.tx" x="232.333" y="140"/>
+  <object id="76" template="../../../../../../../common/maps/obj/gold.tx" x="235" y="43"/>
+  <object id="77" template="../../../../../../../common/maps/obj/enemy.tx" x="202.067" y="83.4196">
    <properties>
     <property name="enemy" value="Demon"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="78" template="../../../../../../../../common/maps/obj/enemy.tx" x="191.404" y="152.392">
+  <object id="78" template="../../../../../../../common/maps/obj/enemy.tx" x="191.404" y="152.392">
    <properties>
     <property name="enemy" value="Devil"/>
     <property name="threatRange" type="int" value="10"/>
    </properties>
   </object>
-  <object id="79" template="../../../../../../../../common/maps/obj/enemy.tx" x="207.4" y="192.832">
+  <object id="79" template="../../../../../../../common/maps/obj/enemy.tx" x="207.4" y="192.832">
    <properties>
     <property name="enemy" value="Devil"/>
     <property name="threatRange" type="int" value="10"/>
    </properties>
   </object>
-  <object id="81" template="../../../../../../../../common/maps/obj/treasure.tx" x="231.246" y="25.5709">
+  <object id="81" template="../../../../../../../common/maps/obj/treasure.tx" x="231.246" y="25.5709">
    <properties>
     <property name="reward">[
   {

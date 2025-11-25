@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzz42Rg8BvFo3gUj+JRPIpH8YjAAAvyrVM=
@@ -24,24 +24,24 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="66" template="../../../../../../../common/maps/obj/door_up.tx" x="208" y="272.5">
+  <object id="66" template="../../../../../../common/maps/obj/door_up.tx" x="208" y="272.5">
    <properties>
     <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_zombie.tmx"/>
     <property name="teleportObjectId" value="65"/>
    </properties>
   </object>
-  <object id="73" template="../../../../../../../common/maps/obj/enemy.tx" x="326.654" y="155.342">
+  <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="326.654" y="155.342">
    <properties>
     <property name="enemy" value="Graven Revenant"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="74" template="../../../../../../../common/maps/obj/gold.tx" x="321.5" y="188.5"/>
-  <object id="75" template="../../../../../../../common/maps/obj/gold.tx" x="351.5" y="185.5"/>
-  <object id="76" template="../../../../../../../common/maps/obj/gold.tx" x="341" y="220.5"/>
-  <object id="77" template="../../../../../../../common/maps/obj/treasure.tx" x="78.9233" y="76.8454"/>
-  <object id="78" template="../../../../../../../common/maps/obj/manashards.tx" x="85.8494" y="237.879"/>
-  <object id="79" template="../../../../../../../common/maps/obj/enemy.tx" x="102.126" y="123.597">
+  <object id="74" template="../../../../../../common/maps/obj/gold.tx" x="321.5" y="188.5"/>
+  <object id="75" template="../../../../../../common/maps/obj/gold.tx" x="351.5" y="185.5"/>
+  <object id="76" template="../../../../../../common/maps/obj/gold.tx" x="341" y="220.5"/>
+  <object id="77" template="../../../../../../common/maps/obj/treasure.tx" x="78.9233" y="76.8454"/>
+  <object id="78" template="../../../../../../common/maps/obj/manashards.tx" x="85.8494" y="237.879"/>
+  <object id="79" template="../../../../../../common/maps/obj/enemy.tx" x="102.126" y="123.597">
    <properties>
     <property name="enemy" value="Graven Revenant"/>
     <property name="threatRange" type="int" value="50"/>

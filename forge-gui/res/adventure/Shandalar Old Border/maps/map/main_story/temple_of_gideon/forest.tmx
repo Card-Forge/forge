@@ -5,9 +5,9 @@
   <property name="dungeonEffect" value=""/>
   <property name="respawnEnemies" type="bool" value="true"/>
  </properties>
- <tileset firstgid="1" source="../../../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Tile Layer 1" width="30" height="30">
   <data encoding="csv">
 5106,5106,5106,5106,5106,5106,5106,5106,5106,5106,5106,5106,5106,5106,5106,5106,5106,5106,5106,5106,5106,5106,5106,5106,5106,5106,5106,5106,5106,5106,
@@ -182,10 +182,10 @@
 </data>
  </layer>
  <objectgroup id="2" name="Objects">
-  <object id="3" template="../../../../../../../../common/maps/obj/collision.tx" x="-16" y="480.75" width="512.75" height="16"/>
-  <object id="4" template="../../../../../../../../common/maps/obj/collision.tx" x="480.072" y="0" width="16" height="480"/>
-  <object id="225" template="../../../../../../../../common/maps/obj/collision.tx" x="-16" y="-16.6667" width="512" height="16"/>
-  <object id="226" template="../../../../../../../../common/maps/obj/collision.tx" x="-16" y="0" width="16" height="480"/>
+  <object id="3" template="../../../../../../../common/maps/obj/collision.tx" x="-16" y="480.75" width="512.75" height="16"/>
+  <object id="4" template="../../../../../../../common/maps/obj/collision.tx" x="480.072" y="0" width="16" height="480"/>
+  <object id="225" template="../../../../../../../common/maps/obj/collision.tx" x="-16" y="-16.6667" width="512" height="16"/>
+  <object id="226" template="../../../../../../../common/maps/obj/collision.tx" x="-16" y="0" width="16" height="480"/>
  </objectgroup>
  <objectgroup id="7" name="Waypoints"/>
 </map>

@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJybycnAMHMUj+JRPIpH8SgexSMCAwCsCkLM
@@ -29,16 +29,16 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="60" template="../../../../../../../../common/maps/obj/door_left.tx" x="462.668" y="135.761">
+  <object id="60" template="../../../../../../../common/maps/obj/door_left.tx" x="462.668" y="135.761">
    <properties>
     <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_2/cave_18C.tmx"/>
     <property name="teleportObjectId" value="63"/>
    </properties>
   </object>
-  <object id="61" template="../../../../../../../../common/maps/obj/gold.tx" x="23.6667" y="64.8333"/>
-  <object id="62" template="../../../../../../../../common/maps/obj/gold.tx" x="39.25" y="212.167"/>
-  <object id="63" template="../../../../../../../../common/maps/obj/gold.tx" x="265.417" y="233.25"/>
-  <object id="64" template="../../../../../../../../common/maps/obj/enemy.tx" x="360" y="133">
+  <object id="61" template="../../../../../../../common/maps/obj/gold.tx" x="23.6667" y="64.8333"/>
+  <object id="62" template="../../../../../../../common/maps/obj/gold.tx" x="39.25" y="212.167"/>
+  <object id="63" template="../../../../../../../common/maps/obj/gold.tx" x="265.417" y="233.25"/>
+  <object id="64" template="../../../../../../../common/maps/obj/enemy.tx" x="360" y="133">
    <properties>
     <property name="enemy" value="Symbiote"/>
     <property name="threatRange" type="int" value="50"/>

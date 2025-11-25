@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFgxFI8wy0C0bBKBj6oI57YOzdNYjy71I62LEH6N9oXjpYNAqoAgAGsANM
@@ -29,19 +29,19 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="66" template="../../../../../../../../common/maps/obj/door_down.tx" x="224.547" y="17.2198">
+  <object id="66" template="../../../../../../../common/maps/obj/door_down.tx" x="224.547" y="17.2198">
    <properties>
     <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel/cave_16BR2.tmx"/>
     <property name="teleportObjectId" value="75"/>
    </properties>
   </object>
-  <object id="67" template="../../../../../../../../common/maps/obj/enemy.tx" x="197.813" y="162.522">
+  <object id="67" template="../../../../../../../common/maps/obj/enemy.tx" x="197.813" y="162.522">
    <properties>
     <property name="enemy" value="Master Blue Wizard"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="68" template="../../../../../../../../common/maps/obj/treasure.tx" x="207" y="252.25"/>
-  <object id="69" template="../../../../../../../../common/maps/obj/gold.tx" x="193" y="250.75"/>
+  <object id="68" template="../../../../../../../common/maps/obj/treasure.tx" x="207" y="252.25"/>
+  <object id="69" template="../../../../../../../common/maps/obj/gold.tx" x="193" y="250.75"/>
  </objectgroup>
 </map>

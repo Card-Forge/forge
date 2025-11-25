@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzz42Rg8BvFo3gUjwi8gGHg3TCKR/EoHlgMADJSrZw=
@@ -24,24 +24,24 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="63" template="../../../../../../../../common/maps/obj/door_down.tx" x="224" y="17.5">
+  <object id="63" template="../../../../../../../common/maps/obj/door_down.tx" x="224" y="17.5">
    <properties>
     <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel/cave_16D.tmx"/>
     <property name="teleportObjectId" value="70"/>
    </properties>
   </object>
-  <object id="64" template="../../../../../../../../common/maps/obj/door_up.tx" x="209.5" y="271.5">
+  <object id="64" template="../../../../../../../common/maps/obj/door_up.tx" x="209.5" y="271.5">
    <properties>
     <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel/cave_16B.tmx"/>
     <property name="teleportObjectId" value="67"/>
    </properties>
   </object>
-  <object id="65" template="../../../../../../../../common/maps/obj/door_right.tx" x="1" y="80">
+  <object id="65" template="../../../../../../../common/maps/obj/door_right.tx" x="1" y="80">
    <properties>
     <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel/cave_16CL.tmx"/>
     <property name="teleportObjectId" value="73"/>
    </properties>
   </object>
-  <object id="66" template="../../../../../../../../common/maps/obj/manashards.tx" x="234.645" y="148.806"/>
+  <object id="66" template="../../../../../../../common/maps/obj/manashards.tx" x="234.645" y="148.806"/>
  </objectgroup>
 </map>

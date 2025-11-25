@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
@@ -34,39 +34,39 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="60" template="../../../../../../../../common/maps/obj/door_up.tx" x="192.102" y="272.145">
+  <object id="60" template="../../../../../../../common/maps/obj/door_up.tx" x="192.102" y="272.145">
    <properties>
     <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_2/cave_18.tmx"/>
     <property name="teleportObjectId" value="59"/>
    </properties>
   </object>
-  <object id="61" template="../../../../../../../../common/maps/obj/door_down.tx" x="192.462" y="17.2541">
+  <object id="61" template="../../../../../../../common/maps/obj/door_down.tx" x="192.462" y="17.2541">
    <properties>
     <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_2/cave_18N.tmx"/>
     <property name="teleportObjectId" value="60"/>
    </properties>
   </object>
-  <object id="62" template="../../../../../../../../common/maps/obj/door_left.tx" x="464.545" y="82.0692">
+  <object id="62" template="../../../../../../../common/maps/obj/door_left.tx" x="464.545" y="82.0692">
    <properties>
     <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_2/cave_18E.tmx"/>
     <property name="teleportObjectId" value="60"/>
    </properties>
   </object>
-  <object id="63" template="../../../../../../../../common/maps/obj/door_right.tx" x="0.333333" y="76.3333" width="27" height="28">
+  <object id="63" template="../../../../../../../common/maps/obj/door_right.tx" x="0.333333" y="76.3333" width="27" height="28">
    <properties>
     <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_2/cave_18W.tmx"/>
     <property name="teleportObjectId" value="60"/>
    </properties>
   </object>
-  <object id="64" template="../../../../../../../../common/maps/obj/enemy.tx" x="180" y="151">
+  <object id="64" template="../../../../../../../common/maps/obj/enemy.tx" x="180" y="151">
    <properties>
     <property name="enemy" value="Red Beast"/>
     <property name="threatRange" type="int" value="50"/>
     <property name="waypoints" value="67,65,66,65"/>
    </properties>
   </object>
-  <object id="65" template="../../../../../../../../common/maps/obj/waypoint.tx" x="243" y="160"/>
-  <object id="66" template="../../../../../../../../common/maps/obj/waypoint.tx" x="299" y="214"/>
-  <object id="67" template="../../../../../../../../common/maps/obj/waypoint.tx" x="132" y="140"/>
+  <object id="65" template="../../../../../../../common/maps/obj/waypoint.tx" x="243" y="160"/>
+  <object id="66" template="../../../../../../../common/maps/obj/waypoint.tx" x="299" y="214"/>
+  <object id="67" template="../../../../../../../common/maps/obj/waypoint.tx" x="132" y="140"/>
  </objectgroup>
 </map>

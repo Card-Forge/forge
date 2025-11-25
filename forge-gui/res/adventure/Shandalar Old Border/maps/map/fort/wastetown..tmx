@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="58">
- <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
  <tileset firstgid="11905" name="dungeon large" tilewidth="16" tileheight="16" tilecount="16384" columns="128">
-  <image source="../../../../../../../common/maps/tileset/dungeon/dungeon_bis.png" width="2048" height="2048"/>
+  <image source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.png" width="2048" height="2048"/>
  </tileset>
- <tileset firstgid="28289" source="../../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="6" name="Collision" width="35" height="25">
   <data encoding="base64" compression="zlib">
    eJztlFEOwiAMQPmXncDtYnoP/5xX8RqweTdptEnXlKUMG3/6kiawDXh00DGGMDbE86aPvXkkNOtfhxBy/MRl2PbxmWYPvS6w7kLGptKe2FxJ4cNzBUBf68I9EO5yxAfbWhdpzZoLcG48b5y9ca8Sj5ONi4T2zGayvuR4L/1VeRePnN3a/tERablPv3bp+UfuYuOS4vYM88Aa9I+81LB0gbs7C/VFYja+05B/2KtU7yhQW6bv91Yu6IP5keob5qPFo8clEyfKyt73ujiO41jxBoesd8U=
@@ -35,35 +35,35 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../../../../../common/maps/obj/entry_up.tx" x="192" y="281" width="48" height="16">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="281" width="48" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="50" template="../../../../../../../common/maps/obj/enemy.tx" x="249.864" y="120.181">
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="249.864" y="120.181">
    <properties>
     <property name="enemy" value="Human Bard"/>
    </properties>
   </object>
-  <object id="51" template="../../../../../../../common/maps/obj/treasure.tx" x="151.644" y="112.184"/>
-  <object id="52" template="../../../../../../../common/maps/obj/gold.tx" x="99.1001" y="131.475"/>
-  <object id="53" template="../../../../../../../common/maps/obj/enemy.tx" x="123.014" y="131.377">
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="151.644" y="112.184"/>
+  <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="99.1001" y="131.475"/>
+  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="123.014" y="131.377">
    <properties>
     <property name="enemy" value="Human Elite"/>
    </properties>
   </object>
-  <object id="54" template="../../../../../../../common/maps/obj/enemy.tx" x="286.167" y="186.333">
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="286.167" y="186.333">
    <properties>
     <property name="enemy" value="Human"/>
    </properties>
   </object>
-  <object id="55" template="../../../../../../../common/maps/obj/enemy.tx" x="131" y="187.167">
+  <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="131" y="187.167">
    <properties>
     <property name="enemy" value="Human guard"/>
    </properties>
   </object>
-  <object id="56" template="../../../../../../../common/maps/obj/gold.tx" x="99.2609" y="112.417"/>
-  <object id="57" template="../../../../../../../common/maps/obj/enemy.tx" x="208.5" y="224">
+  <object id="56" template="../../../../../../common/maps/obj/gold.tx" x="99.2609" y="112.417"/>
+  <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="208.5" y="224">
    <properties>
     <property name="enemy" value="Human"/>
    </properties>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="20">
- <tileset firstgid="1" source="../../../../../common/maps/map/autotiles.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/map/autotiles.tsx"/>
  <tileset firstgid="433" source="../../../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10545" source="../../../../../../common/maps/tileset/desertbuildingtiles.tsx"/>
  <tileset firstgid="11581" source="../../../../../../common/maps/tileset/buildings.tsx"/>

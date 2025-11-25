@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../../../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzz42Rg8BvFo3gUj+JRPIpH8YjAAAvyrVM=
@@ -24,13 +24,13 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="74" template="../../../../../../../../common/maps/obj/door_left.tx" x="462.602" y="113.984">
+  <object id="74" template="../../../../../../../common/maps/obj/door_left.tx" x="462.602" y="113.984">
    <properties>
     <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel/cave_16B.tmx"/>
     <property name="teleportObjectId" value="72"/>
    </properties>
   </object>
-  <object id="75" template="../../../../../../../../common/maps/obj/door_right.tx" x="1.99972" y="111.984">
+  <object id="75" template="../../../../../../../common/maps/obj/door_right.tx" x="1.99972" y="111.984">
    <properties>
     <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel/cave_16BL2.tmx"/>
     <property name="teleportObjectId" value="72"/>
