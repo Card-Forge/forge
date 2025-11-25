@@ -36,7 +36,11 @@
     <property name="enemy" value="Djinn"/>
    </properties>
   </object>
-  <object id="65" template="../../../../../../common/maps/obj/treasure.tx" x="228.493" y="187.969"/>
+  <object id="65" template="../../../../../../common/maps/obj/treasure.tx" x="228.493" y="187.969">
+   <properties>
+    <property name="reward">[{ &quot;type&quot;: &quot;card&quot;, &quot;probability&quot;: 1, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Hanna, Ship's Navigator|INV&quot; }]</property>
+   </properties>
+  </object>
   <object id="66" template="../../../../../../common/maps/obj/gold.tx" x="164.873" y="252.007"/>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="208.866" y="47.7002">
    <properties>

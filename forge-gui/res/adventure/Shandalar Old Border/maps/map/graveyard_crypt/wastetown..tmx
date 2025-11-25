@@ -27,7 +27,11 @@
    </properties>
   </object>
   <object id="47" template="../../../../../../common/maps/obj/gold.tx" x="363.5" y="66.5"/>
-  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="57" y="72.5"/>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="57" y="72.5">
+   <properties>
+    <property name="reward">[{ &quot;type&quot;: &quot;card&quot;, &quot;probability&quot;: 1, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Dakkon Blackblade|LEG&quot; }]</property>
+   </properties>
+  </object>
   <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="55" y="194"/>
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="113.902" y="72.7253">
    <properties>

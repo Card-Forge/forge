@@ -25,7 +25,11 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="15" y="75.75"/>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="15" y="75.75">
+   <properties>
+    <property name="reward">[{ &quot;type&quot;: &quot;card&quot;, &quot;probability&quot;: 1, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Stangg|LEG&quot; }]</property>
+   </properties>
+  </object>
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="323.5" y="177.5">
    <properties>
     <property name="enemy" value="Goblin Warrior"/>
@@ -33,7 +37,11 @@
     <property name="waypoints" value="64,71,61,71,64"/>
    </properties>
   </object>
-  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="432.333" y="59.3333"/>
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="432.333" y="59.3333">
+   <properties>
+    <property name="reward">[{ &quot;type&quot;: &quot;card&quot;, &quot;probability&quot;: 1, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Johan|LEG&quot; }]</property>
+   </properties>
+  </object>
   <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="402.583" y="257.75"/>
   <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="54.333" y="146.667">
    <properties>

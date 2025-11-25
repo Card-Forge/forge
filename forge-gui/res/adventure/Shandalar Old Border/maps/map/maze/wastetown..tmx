@@ -50,7 +50,11 @@
   </object>
   <object id="54" template="../../../../../../common/maps/obj/gold.tx" x="253.41" y="28.384"/>
   <object id="55" template="../../../../../../common/maps/obj/treasure.tx" x="172.722" y="505.771"/>
-  <object id="57" template="../../../../../../common/maps/obj/treasure.tx" x="398.994" y="57.3676"/>
+  <object id="57" template="../../../../../../common/maps/obj/treasure.tx" x="398.994" y="57.3676">
+   <properties>
+    <property name="reward">[{ &quot;type&quot;: &quot;card&quot;, &quot;probability&quot;: 1, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Bartel Runeaxe|LEG&quot; }]</property>
+   </properties>
+  </object>
   <object id="58" template="../../../../../../common/maps/obj/treasure.tx" x="220.343" y="303.161"/>
   <object id="59" template="../../../../../../common/maps/obj/treasure.tx" x="248.738" y="300.795"/>
   <object id="60" template="../../../../../../common/maps/obj/treasure.tx" x="615.21" y="229.512"/>

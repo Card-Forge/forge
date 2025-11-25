@@ -58,7 +58,11 @@
     <property name="enemy" value="Undead Roamer"/>
    </properties>
   </object>
-  <object id="70" template="../../../../../../common/maps/obj/treasure.tx" x="390.083" y="317.167"/>
+  <object id="70" template="../../../../../../common/maps/obj/treasure.tx" x="390.083" y="317.167">
+   <properties>
+    <property name="reward">[{ &quot;type&quot;: &quot;card&quot;, &quot;probability&quot;: 1, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Gwendlyn Di Corci|LEG&quot; }]</property>
+   </properties>
+  </object>
   <object id="71" template="../../../../../../common/maps/obj/booster.tx" x="730.462" y="324.215">
    <properties>
     <property name="reward">[
