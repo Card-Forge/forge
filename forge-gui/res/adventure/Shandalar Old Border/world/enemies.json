@@ -19156,7 +19156,7 @@
 			},
 			{
 				"type": "item",
-				"probability": 1,
+				"probability": 0.2,
 				"count": 1,
 				"itemName": "Diamond Kaleidoscope"
 			}
@@ -32429,6 +32429,540 @@
 				"count": 1,
 				"cardName": "Pyrokinesis|ALL"
 			}
+		]
+	},
+	{
+		"name": "Legendary Mage of the Savannah",
+		"sprite": "sprites/enemy/humanoid/human/wizard/white_wiz2.atlas",
+		"deck": [
+			"decks/standard/legendary_savannah.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.3,
+		"difficulty": 0.6,
+		"speed": 28,
+		"life": 25,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 2,
+				"addMaxCount": 4,
+				"rarity": [
+					"Rare"
+				]
+			},
+			{
+				"type": "gold",
+				"probability": 1,
+				"count": 50,
+				"addMaxCount": 100
+			},
+			{
+				"type": "shards",
+				"probability": 0.5,
+				"count": 5,
+				"addMaxCount": 10
+			}
+		],
+		"colors": "GW",
+		"questTags": [
+			"Wizard",
+			"Human",
+			"Legendary",
+			"IdentityWhite",
+			"IdentityGreen",
+			"IdentitySelesnya",
+			"BiomeWhite",
+			"BiomeGreen",
+			"BiomeColorless"
+		]
+	},
+	{
+		"name": "Legendary Mage of the Taiga",
+		"sprite": "sprites/enemy/humanoid/human/wizard/green_wiz2.atlas",
+		"deck": [
+			"decks/standard/legendary_taiga.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.3,
+		"difficulty": 0.6,
+		"speed": 28,
+		"life": 25,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 2,
+				"addMaxCount": 4,
+				"rarity": [
+					"Rare"
+				]
+			},
+			{
+				"type": "gold",
+				"probability": 1,
+				"count": 50,
+				"addMaxCount": 100
+			},
+			{
+				"type": "shards",
+				"probability": 0.5,
+				"count": 5,
+				"addMaxCount": 10
+			}
+		],
+		"colors": "RG",
+		"questTags": [
+			"Wizard",
+			"Human",
+			"Legendary",
+			"IdentityRed",
+			"IdentityGreen",
+			"IdentityGruul",
+			"BiomeRed",
+			"BiomeGreen",
+			"BiomeColorless"
+		]
+	},
+	{
+		"name": "Legendary Mage of the Tundra",
+		"sprite": "sprites/enemy/humanoid/human/wizard/blue_wiz2.atlas",
+		"deck": [
+			"decks/standard/legendary_tundra.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.3,
+		"difficulty": 0.6,
+		"speed": 28,
+		"life": 25,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 2,
+				"addMaxCount": 4,
+				"rarity": [
+					"Rare"
+				]
+			},
+			{
+				"type": "gold",
+				"probability": 1,
+				"count": 50,
+				"addMaxCount": 100
+			},
+			{
+				"type": "shards",
+				"probability": 0.5,
+				"count": 5,
+				"addMaxCount": 10
+			}
+		],
+		"colors": "WU",
+		"questTags": [
+			"Wizard",
+			"Human",
+			"Legendary",
+			"IdentityWhite",
+			"IdentityBlue",
+			"IdentityAzorius",
+			"BiomeWhite",
+			"BiomeBlue",
+			"BiomeColorless"
+		]
+	},
+	{
+		"name": "Legendary Mage of the Badlands",
+		"sprite": "sprites/enemy/humanoid/human/wizard/red_wiz2.atlas",
+		"deck": [
+			"decks/standard/legendary_badlands.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.3,
+		"difficulty": 0.6,
+		"speed": 28,
+		"life": 25,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 2,
+				"addMaxCount": 4,
+				"rarity": [
+					"Rare"
+				]
+			},
+			{
+				"type": "gold",
+				"probability": 1,
+				"count": 50,
+				"addMaxCount": 100
+			},
+			{
+				"type": "shards",
+				"probability": 0.5,
+				"count": 5,
+				"addMaxCount": 10
+			}
+		],
+		"colors": "BR",
+		"questTags": [
+			"Wizard",
+			"Human",
+			"Legendary",
+			"IdentityBlack",
+			"IdentityRed",
+			"IdentityRakdos",
+			"BiomeBlack",
+			"BiomeRed",
+			"BiomeColorless"
+		]
+	},
+	{
+		"name": "Legendary Mage of the Underground Sea",
+		"sprite": "sprites/enemy/humanoid/human/wizard/black_wiz2.atlas",
+		"deck": [
+			"decks/standard/legendary_undergroundsea.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.3,
+		"difficulty": 0.6,
+		"speed": 28,
+		"life": 25,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 2,
+				"addMaxCount": 4,
+				"rarity": [
+					"Rare"
+				]
+			},
+			{
+				"type": "gold",
+				"probability": 1,
+				"count": 50,
+				"addMaxCount": 100
+			},
+			{
+				"type": "shards",
+				"probability": 0.5,
+				"count": 5,
+				"addMaxCount": 10
+			}
+		],
+		"colors": "UB",
+		"questTags": [
+			"Wizard",
+			"Human",
+			"Legendary",
+			"IdentityBlue",
+			"IdentityBlack",
+			"IdentityDimir",
+			"BiomeBlue",
+			"BiomeBlack",
+			"BiomeColorless"
+		]
+	},
+	{
+		"name": "Tropical Islander of Treva",
+		"sprite": "sprites/enemy/humanoid/human/wizard/green_wiz2.atlas",
+		"deck": [
+			"decks/standard/legendary_treva.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.25,
+		"difficulty": 0.7,
+		"speed": 28,
+		"life": 28,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 2,
+				"addMaxCount": 4,
+				"rarity": [
+					"Rare"
+				]
+			},
+			{
+				"type": "gold",
+				"probability": 1,
+				"count": 75,
+				"addMaxCount": 125
+			},
+			{
+				"type": "shards",
+				"probability": 0.5,
+				"count": 8,
+				"addMaxCount": 12
+			}
+		],
+		"colors": "GWU",
+		"questTags": [
+			"Wizard",
+			"Human",
+			"Legendary",
+			"IdentityWhite",
+			"IdentityBlue",
+			"IdentityGreen",
+			"IdentityBant",
+			"BiomeWhite",
+			"BiomeBlue",
+			"BiomeGreen",
+			"BiomeColorless"
+		]
+	},
+	{
+		"name": "Plateau Dweller of Rith",
+		"sprite": "sprites/enemy/humanoid/human/wizard/red_wiz2.atlas",
+		"deck": [
+			"decks/standard/legendary_rith.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.25,
+		"difficulty": 0.7,
+		"speed": 28,
+		"life": 28,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 2,
+				"addMaxCount": 4,
+				"rarity": [
+					"Rare"
+				]
+			},
+			{
+				"type": "gold",
+				"probability": 1,
+				"count": 75,
+				"addMaxCount": 125
+			},
+			{
+				"type": "shards",
+				"probability": 0.5,
+				"count": 8,
+				"addMaxCount": 12
+			}
+		],
+		"colors": "RGW",
+		"questTags": [
+			"Wizard",
+			"Human",
+			"Legendary",
+			"IdentityWhite",
+			"IdentityRed",
+			"IdentityGreen",
+			"IdentityNaya",
+			"BiomeWhite",
+			"BiomeRed",
+			"BiomeGreen",
+			"BiomeColorless"
+		]
+	},
+	{
+		"name": "Scrublander of Dromar",
+		"sprite": "sprites/enemy/humanoid/human/wizard/white_wiz2.atlas",
+		"deck": [
+			"decks/standard/legendary_dromar.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.25,
+		"difficulty": 0.7,
+		"speed": 28,
+		"life": 28,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 2,
+				"addMaxCount": 4,
+				"rarity": [
+					"Rare"
+				]
+			},
+			{
+				"type": "gold",
+				"probability": 1,
+				"count": 75,
+				"addMaxCount": 125
+			},
+			{
+				"type": "shards",
+				"probability": 0.5,
+				"count": 8,
+				"addMaxCount": 12
+			}
+		],
+		"colors": "WUB",
+		"questTags": [
+			"Wizard",
+			"Human",
+			"Legendary",
+			"IdentityWhite",
+			"IdentityBlue",
+			"IdentityBlack",
+			"IdentityEsper",
+			"BiomeWhite",
+			"BiomeBlue",
+			"BiomeBlack",
+			"BiomeColorless"
+		]
+	},
+	{
+		"name": "Volcanic Islander of Crosis",
+		"sprite": "sprites/enemy/humanoid/human/wizard/blue_wiz2.atlas",
+		"deck": [
+			"decks/standard/legendary_crosis.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.25,
+		"difficulty": 0.7,
+		"speed": 28,
+		"life": 28,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 2,
+				"addMaxCount": 4,
+				"rarity": [
+					"Rare"
+				]
+			},
+			{
+				"type": "gold",
+				"probability": 1,
+				"count": 75,
+				"addMaxCount": 125
+			},
+			{
+				"type": "shards",
+				"probability": 0.5,
+				"count": 8,
+				"addMaxCount": 12
+			}
+		],
+		"colors": "UBR",
+		"questTags": [
+			"Wizard",
+			"Human",
+			"Legendary",
+			"IdentityBlue",
+			"IdentityBlack",
+			"IdentityRed",
+			"IdentityGrixis",
+			"BiomeBlue",
+			"BiomeBlack",
+			"BiomeRed",
+			"BiomeColorless"
+		]
+	},
+	{
+		"name": "Bayou Dweller of Darigaaz",
+		"sprite": "sprites/enemy/humanoid/human/wizard/black_wiz2.atlas",
+		"deck": [
+			"decks/standard/legendary_darigaaz.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.25,
+		"difficulty": 0.7,
+		"speed": 28,
+		"life": 28,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 2,
+				"addMaxCount": 4,
+				"rarity": [
+					"Rare"
+				]
+			},
+			{
+				"type": "gold",
+				"probability": 1,
+				"count": 75,
+				"addMaxCount": 125
+			},
+			{
+				"type": "shards",
+				"probability": 0.5,
+				"count": 8,
+				"addMaxCount": 12
+			}
+		],
+		"colors": "BRG",
+		"questTags": [
+			"Wizard",
+			"Human",
+			"Legendary",
+			"IdentityBlack",
+			"IdentityRed",
+			"IdentityGreen",
+			"IdentityJund",
+			"BiomeBlack",
+			"BiomeRed",
+			"BiomeGreen",
+			"BiomeColorless"
+		]
+	},
+	{
+		"name": "Domain Keeper of Cromat",
+		"sprite": "sprites/enemy/celestial/cromat_angel.atlas",
+		"deck": [
+			"decks/standard/legendary_cromat.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.15,
+		"difficulty": 0.8,
+		"speed": 30,
+		"life": 30,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 3,
+				"addMaxCount": 5,
+				"rarity": [
+					"Rare"
+				]
+			},
+			{
+				"type": "gold",
+				"probability": 1,
+				"count": 100,
+				"addMaxCount": 150
+			},
+			{
+				"type": "shards",
+				"probability": 0.75,
+				"count": 10,
+				"addMaxCount": 15
+			},
+			{
+				"type": "item",
+				"probability": 0.1,
+				"count": 1,
+				"itemName": "Power Armor"
+			}
+		],
+		"colors": "WUBRG",
+		"questTags": [
+			"Wizard",
+			"Human",
+			"Legendary",
+			"IdentityWUBRG",
+			"BiomeWhite",
+			"BiomeBlue",
+			"BiomeBlack",
+			"BiomeRed",
+			"BiomeGreen",
+			"BiomeColorless"
 		]
 	}
 ]
