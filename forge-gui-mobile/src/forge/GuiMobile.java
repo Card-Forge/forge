@@ -303,7 +303,7 @@ public class GuiMobile implements IGuiBase {
         Gdx.net.openURI(url);
     }
 
-    private static final Set<String> LWJGL_SUPPORTED_AUDIO_TYPES = Set.of(".wav", ".mp3", ".ogg");
+    private static final Set<String> LWJGL_SUPPORTED_AUDIO_TYPES = Set.of(".wav", ".mp3", ".ogg", ".m4a");
 
     @Override
     public boolean isSupportedAudioFormat(File file) {
