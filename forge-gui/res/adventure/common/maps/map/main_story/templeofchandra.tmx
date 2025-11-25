@@ -366,7 +366,7 @@
 			&quot;options&quot;:[{
 			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:2}}],
 			&quot;action&quot;:[{&quot;deleteMapObject&quot;:18}],
-			&quot;name&quot;:&quot;ok&quot; }]
+			&quot;name&quot;:&quot;Continue&quot; }]
 	},
 	{ &quot;name&quot;:&quot;Leave&quot; } 	
 	] 
@@ -388,7 +388,7 @@
 			&quot;options&quot;:[{
 			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:2}}],
 			&quot;action&quot;:[{&quot;deleteMapObject&quot;:18}],
-			&quot;name&quot;:&quot;ok&quot; }]
+			&quot;name&quot;:&quot;Continue&quot; }]
 	},
 	{ &quot;name&quot;:&quot;Leave&quot; } 	
 	] 
@@ -408,7 +408,7 @@
 		&quot;name&quot;:&quot;Flip the switch&quot;
 			&quot;options&quot;:[{
 			&quot;action&quot;:[{&quot;deleteMapObject&quot;:17}],
-			&quot;name&quot;:&quot;ok&quot; }]
+			&quot;name&quot;:&quot;Continue&quot; }]
 	},
 	{ &quot;name&quot;:&quot;Leave&quot; } 	
 	] 
@@ -451,7 +451,7 @@
 		&quot;name&quot;:&quot;Flip the switch&quot;
 			&quot;options&quot;:[{
 			&quot;action&quot;:[{&quot;deleteMapObject&quot;:6}],
-			&quot;name&quot;:&quot;ok&quot; }]
+			&quot;name&quot;:&quot;Continue&quot; }]
 	},
 	{ &quot;name&quot;:&quot;Leave&quot; } 	
 	] 
@@ -505,7 +505,7 @@
 		&quot;name&quot;:&quot;Flip the switch&quot;
 			&quot;options&quot;:[{
 			&quot;action&quot;:[{&quot;deleteMapObject&quot;:11}],
-			&quot;name&quot;:&quot;ok&quot; }]
+			&quot;name&quot;:&quot;Continue&quot; }]
 	},
 	{ &quot;name&quot;:&quot;Leave&quot; } 	
 	] 

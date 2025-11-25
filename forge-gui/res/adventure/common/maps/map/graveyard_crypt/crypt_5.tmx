@@ -125,7 +125,7 @@
         &quot;options&quot;: [
           {
             &quot;action&quot;: [ { &quot;deleteMapObject&quot;: 65 } ],
-            &quot;name&quot;: &quot;ok&quot;
+            &quot;name&quot;: &quot;Continue&quot;
           }
         ]
       },
