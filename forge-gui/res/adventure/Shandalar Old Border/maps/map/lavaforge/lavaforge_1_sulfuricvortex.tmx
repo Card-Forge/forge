@@ -144,7 +144,7 @@
    <properties>
     <property name="effect">{
  &quot;lifeModifier&quot;: 6,
- &quot;startBattleWithCard&quot;: [ &quot;Enchantress's Presence|ONS&quot;, &quot;Black Market|MMQ&quot;, &quot;Grim Feast|MIR&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Thran Dynamo|UDS&quot; ]
 }</property>
     <property name="enemy" value="Fire Giant"/>
    </properties>
@@ -153,7 +153,7 @@
    <properties>
     <property name="effect">{
  &quot;lifeModifier&quot;: 4,
- &quot;startBattleWithCard&quot;: [ &quot;Thran Dynamo|UDS|1&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Enchantress's Presence|ONS&quot;, &quot;Black Market|MMQ&quot;, &quot;Grim Feast|MIR&quot; ]
 }</property>
     <property name="enemy" value="Mindclaw Shaman"/>
    </properties>

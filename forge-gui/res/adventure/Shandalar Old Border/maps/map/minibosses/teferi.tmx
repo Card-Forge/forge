@@ -58,7 +58,7 @@
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="567.529" y="62.7573">
    <properties>
     <property name="effect">{
- &quot;startBattleWithCard&quot;: [ &quot;Teferi's Isle|MIR&quot;, &quot;Plains|LEA&quot;, &quot;Teferi's Puzzle Box|VIS&quot;, &quot;Teferi's Realm|VIS&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Teferi's Isle|MIR&quot;, &quot;Plains|LEA&quot;, &quot;Teferi's Puzzle Box|VIS&quot;, &quot;Teferi's Honor Guard|VIS&quot; ]
 }</property>
     <property name="enemy" value="Teferi"/>
    </properties>
