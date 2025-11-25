@@ -780,3 +780,18 @@ ClawsOfGix
 SulfuricStaff
   xy: 304, 560
   size: 16, 16
+BelbesArmor
+  xy: 272, 48
+  size: 16, 16
+ShieldOfTheAges
+  xy: 208, 144
+  size: 16, 16
+LifeChisel
+  xy: 288, 304
+  size: 16, 16
+PhyrexianSplicer
+  xy: 112, 384
+  size: 16, 16
+FeverbringersCloak
+  xy: 80, 32
+  size: 16, 16

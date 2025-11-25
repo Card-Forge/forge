@@ -406,7 +406,7 @@
 	{
 		"name": "Shield of the Ages",
 		"equipmentSlot": "Left",
-		"iconName": "SteelShield",
+		"iconName": "ShieldOfTheAges",
 		"cost": 2000,
 		"effect": {
 			"startBattleWithCard": [
@@ -417,7 +417,7 @@
 	{
 		"name": "Belbe's Armor",
 		"equipmentSlot": "Body",
-		"iconName": "SteelArmor",
+		"iconName": "BelbesArmor",
 		"cost": 3000,
 		"effect": {
 			"startBattleWithCard": [
@@ -932,7 +932,7 @@
 	{
 		"name": "Life Chisel",
 		"equipmentSlot": "Left",
-		"iconName": "RelicAmulet",
+		"iconName": "LifeChisel",
 		"cost": 3000,
 		"effect": {
 			"lifeModifier": -1,
@@ -2056,7 +2056,7 @@
 	{
 		"name": "Feverbringer's Cloak",
 		"equipmentSlot": "Body",
-		"iconName": "DarkArmor",
+		"iconName": "FeverbringersCloak",
 		"cost": 3000,
 		"effect": {
 			"lifeModifier": -3,
@@ -2079,7 +2079,7 @@
 	{
 		"name": "Splicer's Charm",
 		"equipmentSlot": "Neck",
-		"iconName": "RelicAmulet",
+		"iconName": "PhyrexianSplicer",
 		"cost": 1500,
 		"effect": {
 			"startBattleWithCard": [
