@@ -5,7 +5,7 @@
  </editorsettings>
  <properties>
   <property name="dungeonEffect">{
-  &quot;startBattleWithCard&quot;: [ &quot;Wall of Water|3ED|3ED&quot; ]
+  &quot;startBattleWithCard&quot;: [ &quot;Wall of Water|3ED&quot; ]
 }</property>
  </properties>
  <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>

@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Infernal Genesis|PCY|PCY&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Infernal Genesis|PCY&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
@@ -33,7 +33,7 @@
  </layer>
  <objectgroup id="4" name="Objects">
   <properties>
-   <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Infernal Genesis|PCY|PCY&quot; ]}"/>
+   <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Infernal Genesis|PCY&quot; ]}"/>
   </properties>
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="279.165" width="48" height="16">
    <properties>
@@ -47,7 +47,7 @@
 &quot;type&quot;: &quot;card&quot;,
 &quot;probability&quot;: 1,
 &quot;count&quot;: 1,
-&quot;cardName&quot;: &quot;Infernal Genesis&quot;}]</property>
+&quot;cardName&quot;: &quot;Infernal Genesis|PCY&quot;}]</property>
    </properties>
   </object>
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="207.902" y="90.5586">
