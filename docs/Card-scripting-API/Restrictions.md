@@ -6,18 +6,6 @@ This can accept several different values which basically follow the text of the 
 - Threshold
 - Hellbent
 
-## ActivationZone
-`ActivationZone$ {ZoneType}` for cards that have abilities that you can activate outside of the Battlefield.
-
-## SorcerySpeed
-`SorcerySpeed $True` for cards that can only activate if you could cast a sorcery.
-
-## PlayerTurn
-`PlayerTurn $True` for cards that can only be activated during the activating player's turn.
-
-# OpponentTurn
-`OpponentTurn $True` for cards that can only be activated during the opponent's turn of the activating player.
-
 ## ActivationLimit
 `[Game]ActivationLimit$ {Integer}` for cards that have a limited amount of uses per game/turn.
 
@@ -27,10 +15,22 @@ This can accept several different values which basically follow the text of the 
 This can also be handled in a range, e.g.:  
 `ActivationPhases$ BeginCombat->EndCombat` for abilities that can only be played during combat.
 
+## ActivationZone
+`ActivationZone$ {ZoneType}` for cards that have abilities that you can activate outside of the Battlefield.
+
+## OpponentTurn
+`OpponentTurn $True` for cards that can only be activated during the opponent's turn of the activating player.
+
+## PlayerTurn
+`PlayerTurn $True` for cards that can only be activated during the activating player's turn.
+
 ## Planeswalker
 `Planeswalker$ True` for Planeswalker abilities.
 
 Add `Ultimate$ True` when applicable for the AI and achievements.
+
+## SorcerySpeed
+`SorcerySpeed $True` for cards that can only activate if you could cast a sorcery.
 
 ## CheckSVar
 CheckSVar specifies that the results computed from an SVar must be evaluated against a certain value which you can specify in the accompanying `SVarCompare$ {cmp}{SVar}` parameter.  

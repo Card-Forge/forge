@@ -21,7 +21,10 @@ public class AudioMusic implements IAudioMusic {
         if (music == null)
             return;
         started = true;
-        music.setOnCompletionListener(music -> onComplete.run());
+        music.setOnCompletionListener(music -> {
+            if (music.isPlaying())
+                onComplete.run(); //Pausing a track can cause OpenAL to still fire its completion listener after a bit.
+        });
         music.play();
     }
 

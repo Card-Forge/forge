@@ -232,6 +232,10 @@ public class SoundSystem {
         return currentPlaylist;
     }
 
+    public MusicPlaylist getShelvedPlaylist() {
+        return shelvedPlaylist;
+    }
+
     public void clearShelvedPlaylist() {
         if(this.shelvedTrack == null)
             return;
@@ -247,9 +251,7 @@ public class SoundSystem {
             currentTrack = null;
         }
 
-        if (currentPlaylist == null || GuiBase.getInterface().isLibgdxPort()
-                ? FModel.getPreferences().getPrefInt(FPref.UI_VOL_MUSIC) < 1
-                : !FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_MUSIC)) {
+        if (currentPlaylist == null || isMuted()) {
             return;
         }
 
@@ -329,6 +331,12 @@ public class SoundSystem {
         if (currentTrack != null) {
             currentTrack.setVolume((FModel.getPreferences().getPrefInt(FPref.UI_VOL_MUSIC)*value)/100f);
         }
+    }
+
+    private boolean isMuted() {
+        return GuiBase.getInterface().isLibgdxPort()
+                ? FModel.getPreferences().getPrefInt(FPref.UI_VOL_MUSIC) < 1
+                : !FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_MUSIC);
     }
 
     private static final Map<Integer, List<String>> soundResourceDirectoryCache = new HashMap<>();

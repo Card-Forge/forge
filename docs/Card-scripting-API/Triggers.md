@@ -13,7 +13,7 @@ Optional parameters that triggers can use are:
 - `ResolvingCheck`
 - `NoResolvingCheck$ True` - Makes a trigger not recheck its condition to resolve
 - `OptionalDecider {DefinedPlayer}`
-- `TriggerZones {ZoneType}` - By default triggers work in all zones. This parameter can be used to restrict which zone the card must be in in order for the trigger to go off. For example, if the trigger should only go off while the card is in the graveyard (as in *Auntie's Snitch*) you can use `TriggerZones$ Graveyard`. If a trigger's condition instead only applies to itself it's usually not required to explicitly add this since most events can only happen for cards in a single specific zone anyway.
+- `TriggerZones {ZoneType}` - By default triggers work in all zones. This parameter can be used to restrict which zone the card must be in, in order for the trigger to go off. For example, if it should only go off while the card is in the graveyard (as in *Auntie's Snitch*) you can use `TriggerZones$ Graveyard`. If a trigger's condition instead only applies to itself it's usually not required to explicitly add this since most events can only happen for cards in a single specific zone anyway.
 
 You can use certain parameters to further restrict when a trigger should go off. These parameters are defined in [Restrictions](Restrictions.md).
 
@@ -117,6 +117,10 @@ TriggeredObjects:
 - `Blocker` - The card of the blocking creaure
 - `NumBlockers` - The number of things blocking the attacker
 
+## AttackerBlockedOnce
+
+## AttackerBlockedByCreature
+
 ## AttackerUnblocked
 AttackerUnblocked-triggers go off when a creature attacks and is not blocked, right after the declare blockers step.
 
@@ -125,6 +129,8 @@ Parameters:
 
 TriggeredObjects:
 - `Attacker` - The card of the attacking creature
+
+## AttackerUnblockedOnce
 
 ## AttackersDeclared
 Goes off after attackers are declared, if any attackers were declared, once a combat only.
@@ -201,6 +207,8 @@ TriggeredObjects:
 
 # Damage
 
+## DamageAll
+
 ## DamageDone
 DamageDone-triggers go off whenever any source deals damage to any target.
 
@@ -226,7 +234,7 @@ TriggeredObjects:
 - `Sources` - A collection of the game entities that dealt the damage
 - `Target` - The game entity that received damage
 
-## DealtDamageOnce
+## DamageDealtOnce
 Goes off \*once\* for each creature that deals damage
 
 Parameters:
@@ -236,6 +244,8 @@ Parameters:
 TriggeredObjects:
 - `Target` - The game entity that recieves damage
 - `Source` - The card that dealt damage
+
+## ExcessDamage
 
 # Destroyed
 Goes off when a permanent is destroyed.

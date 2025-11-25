@@ -3,7 +3,6 @@ Using the Forge API you can create your own custom cards and sets. This tutorial
 If you are trying to script cards for a new set make sure you take advantage of the [Developer Mode](Development/DevMode.md) for testing to try and contribute without any obvious bugs.
 
 ## Creating a New Card
-
 In this tutorial we'll create a new card called "Goblin Card Guide".
 
 1. Open Script Directory

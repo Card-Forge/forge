@@ -1,5 +1,4 @@
-### Disclaimer:
-
+### Disclaimer
 While multiplayer over a network *does* currently work, and complete games *have* been played, it is still very much a "*work in progress*". This means;
 
 * You **will** find bugs. When they appear;
@@ -11,7 +10,7 @@ While multiplayer over a network *does* currently work, and complete games *have
 
 ***
 
-### Support:
+### Support
 **We have a discord channel dedicated for network play related matters: https://discord.gg/nsAhGwD**
 
 I've created a Networking FAQ, check the sidebar for it. I'll update it as I get **Q's** in discord that are **FA**.
@@ -21,8 +20,7 @@ Note: This guide has been written to be as comprehensive as possible; from a qui
 
 ***
 
-### Requirements:
-
+### Requirements
 * **At least two devices**, all devices must be running the same version of Forge.
    * Host: The device running forge as the "server."
    * Client: The device connecting to the Forge server.
@@ -37,8 +35,7 @@ Note: This guide has been written to be as comprehensive as possible; from a qui
 
 ***
 
-### Quick Start:
-
+### Quick Start
 * Start Forge on both devices; please confirm versions numbers are the same before continuing.
    * Mobile players: Choose "Classic Mode"
 * Go to 
@@ -58,10 +55,9 @@ Note: This guide has been written to be as comprehensive as possible; from a qui
 
 ***
 
-### Troubleshooting:
+### Troubleshooting
 Folks in discord are there to help you get your game going!
 #### Current Network-based Multiplayer Known Issues
-
 * Some points where the game is waiting on an opponent's decision/action do not properly indicate this. #158
 * On mobile, if you are in the same room without Wi-Fi access, try "personal hotspot"/"WiFi-Direct" options first, you don't need a port forward that way.
   * If you are on the same Private Wi-Fi, you do not need to do this.
@@ -80,14 +76,12 @@ _Please consider reading "Hosting a Server" section for the concepts behind the 
 ### Local Network:
 
 #### **Host Based Firewall**
-
 * Mobile Device: There shouldn't be much you need to do, start Forge, host a server. Anyone else on the same local network should be able to connect.
 * Desktop Device: Depending on your OS, you may need to allow Forge through the host based firewall. Windows Defender Firewall, Ubuntu would have UFW. 
    * Either allow the app itself.
    * or the default port of 36743. 
 
 #### **Validate**
-
 * Android Device: You can test from your mobile device with PortDroid, to scan if the port is open:
    * Setup
       *  Install [**PortDroid**](https://play.google.com/store/apps/details?id=com.stealthcopter.portdroid)
@@ -125,12 +119,10 @@ _Please consider reading "Hosting a Server" section for the concepts behind the 
 
 If you've passed the validation, then your configuration should be good and you can provide your partner the IP address of your device. Please confirm your IP address with your devices' network configuration settings.
 
-### Remote Network:
-
+### Remote Network
 A Remote Network setup **MUST** pass the local network setup above.
 
 #### **Port Forwarding or "NAT"**
-
 _Each router is different, so instead of specific step by step instructions here, this is general theory._
 
 * Setup
@@ -158,7 +150,6 @@ If you've passed both of the local and remote testing, then your configuration s
 ***
 
 ## Network Configuration - Hosting a Server
-
    Welcome to hosting a server, this is a more descriptive view as to what's going on when you host a server. These concepts can be applied to most server set ups, but we will focus on Forge in three different configurations:
 
 * **Local Networks (Over your local network)**
@@ -167,22 +158,19 @@ If you've passed both of the local and remote testing, then your configuration s
    * Networks you don't control. (Cell to Cell, or Public Hotspots.)
    * Network you do control. (Home internet.)
 
-#### Local Private Network:
-
+#### Local Private Network
 A local network's IP addresses are typically self managed by your router, with what is called the DHCP server. These addresses are assigned to your devices automatically and are what you would use to connect to each other device. These devices will talk to each other over the Wi-Fi Access Point (which is typically your router.) In a wired environment they will talk across the wire through a switch (also typically your router.)
 
 When you do a "Wi-Fi direct" in Android, this allows one device to be the Wi-Fi access point, other devices can connect to this network as a local private network.
 
-#### Remote Network:
-
+#### Remote Network
 Remote networks are two networks separated by the internet, or by what is called VLANs. On public hotspots, two devices on that "same Wi-Fi" will be separated by these VLANs, and can not talk to each other directly. Similarly, two cell phones on the same provider will be separated by VLANs, or just by given an IPv6 address.
 
 If you do not control your internet connection, like a public hotspot or a cell provided internet you'll need to do a software defined network (SDN), or a virtual private network (VPN) which is outside the scope of this wiki and any discord help. It is recommended to connect via "Wi-Fi Direct" if you are near each other instead.
 
 If you control your internet connection's network, such as it's your home network and can access the router configuration, you can host a game by opening the ports on your network, and allowing the game through the router's firewall. This allows the remote player, on practically any other internet connected network to connect through your router to your server.
 
-### Firewalls:
-
+### Firewalls
 Firewalls are kind of archaic, but are still implemented, and are designed to block your connection intentionally. 
 
 A quick history; Computer OS's used to respond with a port being "closed" if no service was available on it, and "open" if a connection was able to be opened. An OS should not report a port as "closed", just ignore the request. (Reporting a port as "closed" is like hearing a knock on the door, opening the door and slamming it shut.) This wasn't a security concern at the time, so attackers were able to identify if a computer was "alive" if it responded with a "closed" port, and would moved on if it didn't get a response at all. Any response from a computer triggered a deeper attack to find which ports were actually "open." Thus firewalls were born...
@@ -191,8 +179,7 @@ Firewalls were initially implemented to prevent open ports from talking to just 
 
 In devices with firewalls you need to allow a port for a service through the Host Based Firewall. You'll also need to do this on your router for remote games as well for the Network Based Firewall. I believe, most Linux devices (including Android) no longer report "closed" for ports without services, and firewalls are typically not needed as the only ports that should be open are ones with services needing ports open. In Windows this is not the case, and is why Windows Defender Firewall is implemented and ports will need to be opened to allow Forge to accept a connection. You should however be able to connect to a mobile device without concerns of a firewall blocking you.
 
-### Port Forwarding:
-
+### Port Forwarding
 In routers, just after the firewall is a routing function called Network Address Translation. "NAT" allows a computer behind the router (from the internet perspective) to provide its service as if it is the router itself. In most routers, when you enable a NAT/Port Forward, it will also allow the Port through the Firewall.
 
 ```[Device](Internet) ---> 36743{Router} ---> 36743[Host]```
@@ -201,8 +188,7 @@ Once this initial communication is started, the two devices will talk over their
 
 If you've used PlayStation systems you might recognize the term "NAT"; level 1, 2, or 3. This naming is not part of the standard, and is bad and confusing; (I believe) "Level 1" meant no NAT'ing all traffic was redirected through PlayStation servers, "Level 2" meant Half Open or Static NAT (which is what we will do for Forge), and "Level 3" mean the use of UPnP/DLNA which was automatic NAT services and allows ALL software to control your firewall for you. (UPnP should be concerning from a security perspective.)
 
-### Network Topology:
-
+### Network Topology
 Here's how your typical network topology and network flow will look, when connecting and playing with Forge.
 
 * Typical Wi-Fi Home Network with 2 devices
@@ -213,4 +199,3 @@ Here's how your typical network topology and network flow will look, when connec
 * Typical Remote Network Connection with 2 devices
    * A Figure of Remote Game Connection through Firewall and Port Forward on Router.
 ![image](https://user-images.githubusercontent.com/1243145/186335351-c2c670bd-599e-497a-a210-ab866d7ebd95.png)
-

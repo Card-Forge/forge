@@ -202,10 +202,6 @@ public final class CardPredicates {
         return c -> c.getCMC() % 2 == 1;
     }
 
-    public static Predicate<Card> hasSuspend() {
-        return Card::hasSuspend;
-    }
-
     public static Predicate<Card> hasCounters() {
         return GameEntity::hasCounters;
     }
