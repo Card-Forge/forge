@@ -68,19 +68,19 @@
   </object>
   <object id="60" template="../../../../../../common/maps/obj/door_down.tx" x="79.8159" y="16.3908">
    <properties>
-    <property name="teleport" value="maps/map/portal_1B.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/portal_1B.tmx"/>
     <property name="teleportObjectId" value="60"/>
    </properties>
   </object>
   <object id="61" template="../../../../../../common/maps/obj/door_up.tx" x="73.4021" y="203.816">
    <properties>
-    <property name="teleport" value="maps/map/portal_1B3.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/portal_1B3.tmx"/>
     <property name="teleportObjectId" value="60"/>
    </properties>
   </object>
   <object id="62" template="../../../../../../common/maps/obj/door_left.tx" x="320.689" y="188.137">
    <properties>
-    <property name="teleport" value="maps/map/portal_1B4.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/portal_1B4.tmx"/>
     <property name="teleportObjectId" value="66"/>
    </properties>
   </object>

@@ -70,7 +70,7 @@
   </object>
   <object id="74" template="../../../../../../common/maps/obj/door_down.tx" x="191.75" y="16.25">
    <properties>
-    <property name="teleport" value="maps/map/grove_12B.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/grove_12B.tmx"/>
     <property name="teleportObjectId" value="72"/>
    </properties>
   </object>

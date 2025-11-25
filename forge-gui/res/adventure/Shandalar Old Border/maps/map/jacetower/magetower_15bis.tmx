@@ -36,7 +36,7 @@
  <objectgroup id="4" name="Objects">
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="208" y="224.543">
    <properties>
-    <property name="teleport" value="maps/map/magetower_7.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/magetower_7.tmx"/>
    </properties>
   </object>
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="206.644" y="57.6553">

@@ -32,7 +32,7 @@
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="207.632" y="272.303"/>
   <object id="49" template="../../../../../../common/maps/obj/entry_down.tx" x="208.488" y="144.557">
    <properties>
-    <property name="teleport" value="maps/map/magetower_7B.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/magetower_7B.tmx"/>
    </properties>
   </object>
  </objectgroup>

@@ -36,37 +36,37 @@
  <objectgroup id="4" name="Objects">
   <object id="69" template="../../../../../../common/maps/obj/door_up.tx" x="208" y="143.5">
    <properties>
-    <property name="teleport" value="maps/map/portal_1.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/portal_1.tmx"/>
     <property name="teleportObjectId" value="76"/>
    </properties>
   </object>
   <object id="74" template="../../../../../../common/maps/obj/door_up.tx" x="208.359" y="271.521">
    <properties>
-    <property name="teleport" value="maps/map/portal_1G2.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/portal_1G2.tmx"/>
     <property name="teleportObjectId" value="62"/>
    </properties>
   </object>
   <object id="75" template="../../../../../../common/maps/obj/door_down.tx" x="176" y="209.5">
    <properties>
-    <property name="teleport" value="maps/map/portal_1R.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/portal_1R.tmx"/>
     <property name="teleportObjectId" value="69"/>
    </properties>
   </object>
   <object id="76" template="../../../../../../common/maps/obj/door_down.tx" x="241.602" y="208.842">
    <properties>
-    <property name="teleport" value="maps/map/portal_1B.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/portal_1B.tmx"/>
     <property name="teleportObjectId" value="61"/>
    </properties>
   </object>
   <object id="77" template="../../../../../../common/maps/obj/door_down.tx" x="208.16" y="79.1689">
    <properties>
-    <property name="teleport" value="maps/map/portal_1W.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/portal_1W.tmx"/>
     <property name="teleportObjectId" value="76"/>
    </properties>
   </object>
   <object id="78" template="../../../../../../common/maps/obj/door_down.tx" x="272.314" y="145.37">
    <properties>
-    <property name="teleport" value="maps/map/portal_1U.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/portal_1U.tmx"/>
     <property name="teleportObjectId" value="78"/>
    </properties>
   </object>

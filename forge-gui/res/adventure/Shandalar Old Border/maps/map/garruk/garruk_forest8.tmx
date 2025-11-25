@@ -41,13 +41,13 @@
   </object>
   <object id="69" template="../../../../../../common/maps/obj/door_down.tx" x="39.5" y="17.5">
    <properties>
-    <property name="teleport" value="maps/map/grove_11U.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/grove_11U.tmx"/>
     <property name="teleportObjectId" value="70"/>
    </properties>
   </object>
   <object id="70" template="../../../../../../common/maps/obj/door_left.tx" x="544" y="279.5">
    <properties>
-    <property name="teleport" value="maps/map/grove_11R.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/grove_11R.tmx"/>
     <property name="teleportObjectId" value="77"/>
    </properties>
   </object>

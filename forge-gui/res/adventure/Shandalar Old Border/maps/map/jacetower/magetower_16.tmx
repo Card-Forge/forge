@@ -36,13 +36,13 @@
  <objectgroup id="4" name="Objects">
   <object id="87" template="../../../../../../common/maps/obj/door_down.tx" x="273" y="209">
    <properties>
-    <property name="teleport" value="maps/map/magetower_9.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/magetower_9.tmx"/>
     <property name="teleportObjectId" value="83"/>
    </properties>
   </object>
   <object id="88" template="../../../../../../common/maps/obj/door_right.tx" x="128.5" y="81">
    <properties>
-    <property name="teleport" value="maps/map/magetower_9C.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/magetower_9C.tmx"/>
     <property name="teleportObjectId" value="90"/>
    </properties>
   </object>
