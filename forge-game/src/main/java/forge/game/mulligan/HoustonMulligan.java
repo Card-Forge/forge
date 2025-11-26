@@ -22,9 +22,6 @@ public class HoustonMulligan extends AbstractMulligan {
 
     @Override
     public void keep() {
-        if (kept) {
-            return;
-        }
 
         List<Card> cardsToTuckDown = Lists.newArrayList(
                 player.getController().londonMulliganReturnCards(player, TUCK_COUNT)
@@ -53,6 +50,6 @@ public class HoustonMulligan extends AbstractMulligan {
 
     @Override
     public int getModifiedHandSize(int startingHandSize) {
-        return 10;
+        return startingHandSize + TUCK_COUNT;
     }
 }
