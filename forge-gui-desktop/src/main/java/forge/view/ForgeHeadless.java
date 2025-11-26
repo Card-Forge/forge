@@ -38,6 +38,11 @@ import java.io.PrintStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import forge.game.event.*;
+import forge.game.GameEntity;
+import forge.util.collect.FCollectionView;
+import forge.game.player.DelayedReveal;
+import java.util.Map;
+import java.util.Collection;
 
 public class ForgeHeadless {
     // ANSI Color Constants
@@ -83,14 +88,20 @@ public class ForgeHeadless {
         FModel.initialize(null, null);
 
         // Generate Decks
-        Deck deck1 = DeckgenUtil.getRandomColorDeck(FModel.getFormats().getStandard().getFilterPrinted(), true);
-        Deck deck2 = DeckgenUtil.getRandomColorDeck(FModel.getFormats().getStandard().getFilterPrinted(), true);
+        // Generate Decks
+        Deck deck1 = new Deck("Manual Test Deck");
+        for (int i=0; i<20; i++) deck1.getMain().add(FModel.getMagicDb().getCommonCards().getCard("Mountain"));
+        for (int i=0; i<20; i++) deck1.getMain().add(FModel.getMagicDb().getCommonCards().getCard("Shock"));
+        
+        Deck deck2 = new Deck("AI Test Deck");
+        for (int i=0; i<60; i++) deck2.getMain().add(FModel.getMagicDb().getCommonCards().getCard("Swamp"));
 
         // Setup Players based on configuration
         List<RegisteredPlayer> players = new ArrayList<>();
         
         if (player1IsHuman) {
             RegisteredPlayer rp1 = new RegisteredPlayer(deck1).setPlayer(new HeadlessLobbyPlayer("Player 1"));
+            rp1.setStartingLife(1000);
             players.add(rp1);
         } else {
             RegisteredPlayer rp1 = new RegisteredPlayer(deck1).setPlayer(new forge.ai.LobbyPlayerAi("AI Player 1", null));
@@ -254,6 +265,19 @@ public class ForgeHeadless {
                 action.addProperty("ability_description", sa.getDescription());
                 action.addProperty("mana_cost", sa.getPayCosts() != null ? sa.getPayCosts().toSimpleString() : "");
                 
+                // Add target information
+                if (sa.usesTargeting()) {
+                    forge.game.spellability.TargetRestrictions tgt = sa.getTargetRestrictions();
+                    if (tgt != null) {
+                        action.addProperty("requires_targets", true);
+                        action.addProperty("target_min", tgt.getMinTargets(sa.getHostCard(), sa));
+                        action.addProperty("target_max", tgt.getMaxTargets(sa.getHostCard(), sa));
+                        action.addProperty("target_zone", tgt.getZone() != null ? tgt.getZone().toString() : "any");
+                    }
+                } else {
+                    action.addProperty("requires_targets", false);
+                }
+                
                 actionsList.add(action);
             }
         }
@@ -291,6 +315,88 @@ public class ForgeHeadless {
         @Override
         public boolean mulliganKeepHand(Player player, int cardsToReturn) {
             return true; // Always keep hand
+        }
+
+        private <T extends GameEntity> void printTargetOptions(FCollectionView<T> optionList, int min, int max, String title) {
+            JsonObject result = new JsonObject();
+            result.addProperty("min", min);
+            result.addProperty("max", max);
+            result.addProperty("title", title);
+            
+            JsonArray options = new JsonArray();
+            int index = 0;
+            for (T target : optionList) {
+                JsonObject option = new JsonObject();
+                option.addProperty("index", index++);
+                option.addProperty("type", target.getClass().getSimpleName());
+                option.addProperty("name", target.getName());
+                option.addProperty("id", target.getId());
+                
+                if (target instanceof Player) {
+                    option.addProperty("life", ((Player)target).getLife());
+                }
+                
+                options.add(option);
+            }
+            result.add("targets", options);
+            
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            System.out.println("Targets required: " + gson.toJson(result));
+        }
+
+        @Override
+        public <T extends GameEntity> T chooseSingleEntityForEffect(FCollectionView<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
+            List<T> results = chooseEntitiesForEffect(optionList, isOptional ? 0 : 1, 1, delayedReveal, sa, title, targetedPlayer, params);
+            return results.isEmpty() ? null : results.get(0);
+        }
+
+        @Override
+        public <T extends GameEntity> List<T> chooseEntitiesForEffect(FCollectionView<T> optionList, int min, int max, DelayedReveal delayedReveal, SpellAbility sa, String title, Player targetedPlayer, Map<String, Object> params) {
+            printTargetOptions(optionList, min, max, title);
+            
+            List<T> selected = new ArrayList<>();
+            List<T> options = new ArrayList<>();
+            for (T t : optionList) options.add(t);
+            
+            if (options.isEmpty()) return selected;
+
+            while (selected.size() < max) {
+                if (selected.size() >= min) {
+                    System.out.print("Choose target index (" + selected.size() + "/" + max + ") or -1 to finish: ");
+                } else {
+                    System.out.print("Choose target index (" + selected.size() + "/" + max + "): ");
+                }
+
+                try {
+                    String input = scanner.nextLine();
+                    int index = Integer.parseInt(input.trim());
+                    
+                    if (index == -1) {
+                        if (selected.size() >= min) break;
+                        System.out.println("Must select at least " + min + " targets.");
+                        continue;
+                    }
+                    
+                    if (index >= 0 && index < options.size()) {
+                        T target = options.get(index);
+                        // For now, allow selecting same target multiple times if game rules allow (engine validates?)
+                        // Actually, usually you can't target same thing twice for same instance unless specified
+                        // But let's just add it and let engine/player handle it. 
+                        // Better: check if already selected
+                        if (!selected.contains(target)) {
+                             selected.add(target);
+                             if (selected.size() == max) break; // Auto-finish if max reached
+                        } else {
+                            System.out.println("Already selected.");
+                        }
+                    } else {
+                        System.out.println("Invalid index.");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Invalid input.");
+                }
+            }
+            return selected;
         }
 
         private List<SpellAbility> getPossibleSpellAbilities() {

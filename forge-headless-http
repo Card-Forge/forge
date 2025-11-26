@@ -1,0 +1,21 @@
+#!/bin/bash
+# Forge Headless HTTP Launcher Script
+# Quick start script for ForgeHeadlessHttp game engine
+
+# Get the directory where the script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+PROJECT_DIR="$SCRIPT_DIR"
+
+# Path to the jar file
+JAR_PATH="$PROJECT_DIR/forge-gui-desktop/target/forge-gui-desktop-2.0.07-SNAPSHOT-jar-with-dependencies.jar"
+
+# Check if jar exists
+if [ ! -f "$JAR_PATH" ]; then
+    echo "Error: Jar file not found at $JAR_PATH"
+    echo "Please run 'mvn clean install -DskipTests' to build the project first."
+    exit 1
+fi
+
+# Run ForgeHeadlessHttp with any arguments passed to the script
+# Use system java
+java -Xmx4096m -cp "$JAR_PATH" forge.view.ForgeHeadlessHttp "$@"
