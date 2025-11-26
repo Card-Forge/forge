@@ -75,6 +75,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Set;
 
 public class Main extends AndroidApplication {
     private AndroidAdapter Gadapter;
@@ -835,6 +836,18 @@ public class Main extends AndroidApplication {
         @Override
         public ArrayList<String> getGamepads() {
             return gamepads;
+        }
+
+        //Commonly supported Android audio formats, taken from https://developer.android.com/media/platform/supported-formats#audio-formats
+        Set<String> ANDROID_SUPPORTED_AUDIO_TYPES = Set.of(".wav", ".mp3", ".ogg", ".mp4", ".m4a", ".aac", ".mkv");
+        @Override
+        public boolean isSupportedAudioFormat(File file) {
+            //At some point it's worth considering switching this out for a more elaborate method
+            //that checks the mime type against the MediaCodecList. Might also throw in some logic
+            //that distinguishes between sound effects and music and disallows any SFX that are over
+            //1 MB in size, since the Android SFX implementation fully loads SFX files into RAM.
+            String path = file.getPath().toLowerCase();
+            return ANDROID_SUPPORTED_AUDIO_TYPES.stream().anyMatch(path::endsWith);
         }
     }
 
