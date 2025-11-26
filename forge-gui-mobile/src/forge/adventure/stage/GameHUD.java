@@ -525,7 +525,7 @@ public class GameHUD extends Stage {
         if (playlist == currentPlaylist) {
             return;
         }
-        //If we're going from an interior to an exterior, skip the fade out.
+        //If we're going from an interior to an exterior or vice versa, skip the fade out.
         if(PLAYLIST_OVERWORLD.contains(playlist) != PLAYLIST_OVERWORLD.contains(currentPlaylist)) {
             if(SoundSystem.instance.getShelvedPlaylist() == playlist)
                 fadeTransition = 0.2f; // Resuming from the middle - do a little bit of fade in to reduce the abruptness.
