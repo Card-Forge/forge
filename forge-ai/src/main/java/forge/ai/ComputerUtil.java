@@ -382,27 +382,14 @@ public class ComputerUtil {
             }
 
             // try everything when about to die
-            if (game.getPhaseHandler().getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-                // in some rare situations the call to lifeInDanger could lead us back here, this will prevent an overflow
-                boolean preventReturn = sa != null && sa.isManaAbility();
-                if (preventReturn) {
-                    AiCardMemory.rememberCard(ai, sa.getHostCard(), MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL);
-                }
-
-                boolean danger = ComputerUtilCombat.lifeInSeriousDanger(ai, game.getCombat());
-
-                if (preventReturn) {
-                    AiCardMemory.forgetCard(ai, sa.getHostCard(), MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL);
-                }
-
-                if (danger) {
-                    final CardCollection nonCreatures = CardLists.getNotType(typeList, "Creature");
-                    if (!nonCreatures.isEmpty()) {
-                        return ComputerUtilCard.getWorstAI(nonCreatures);
-                    } else if (!typeList.isEmpty()) {
-                        // TODO make sure survival is possible in case the creature blocks a trampler
-                        return ComputerUtilCard.getWorstAI(typeList);
-                    }
+            if (game.getPhaseHandler().getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS) && ComputerUtil.protectRecursion(sa,
+                        () -> ComputerUtilCombat.lifeInSeriousDanger(ai, game.getCombat()), false)) {
+                final CardCollection nonCreatures = CardLists.getNotType(typeList, "Creature");
+                if (!nonCreatures.isEmpty()) {
+                    return ComputerUtilCard.getWorstAI(nonCreatures);
+                } else if (!typeList.isEmpty()) {
+                    // TODO make sure survival is possible in case the creature blocks a trampler
+                    return ComputerUtilCard.getWorstAI(typeList);
                 }
             }
         }
