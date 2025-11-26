@@ -35,10 +35,6 @@ public class HoustonMulligan extends AbstractMulligan {
             );
         }
 
-        if (player != null) {
-            player.setMaxHandSize(7);
-        }
-
         kept = true;
         timesMulliganed = 1;
     }
