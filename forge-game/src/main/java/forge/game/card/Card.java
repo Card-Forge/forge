@@ -158,7 +158,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private final Table<Long, Long, CardColor> changedCardColorsCharacterDefining = TreeBasedTable.create(); // Layer 5 CDA
     private final Table<Long, Long, CardColor> changedCardColors = TreeBasedTable.create(); // Layer 5
 
-    protected final Table<Long, Long, ManaCost> changedCardManaCost = TreeBasedTable.create(); // Layer 3
+    protected final Table<Long, Long, CardManaCost> changedCardManaCost = TreeBasedTable.create(); // Layer 3
 
     private final NavigableMap<Long, CardCloneStates> clonedStates = Maps.newTreeMap(); // Layer 1
 
@@ -438,6 +438,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public void updateManaCostForView() {
         currentState.getView().updateManaCost(this);
+
+        // TODO re-factor Spell ManaCost fallback to CardState ManaCost
+        if (getFirstSpellAbility() != null) {
+            getFirstSpellAbility().setPayCosts(getFirstSpellAbility().getPayCosts().copyWithDefinedMana(getManaCost()));
+        }
     }
 
     public void updatePTforView() {
@@ -2048,21 +2053,32 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public final ManaCost getManaCost() {
         ManaCost result = getOriginalManaCost();
-        for (ManaCost mc : changedCardManaCost.values()) {
-            result = mc;
+        if (changedCardManaCost.isEmpty()) {
+            return result;
+        }
+        for (CardManaCost mc : changedCardManaCost.values()) {
+            if (mc.additional()) {
+                result = ManaCost.combine(result, mc.mana());
+            } else {
+                result = mc.mana();
+            }
         }
         return result;
     }
 
-    public ManaCost getChangedManaCost(long timestamp, long staticId) {
-        return changedCardManaCost.get(timestamp, staticId);
-    }
-    public void addChangedManaCost(ManaCost cost, long timestamp, long staticId) {
-        changedCardManaCost.put(timestamp, staticId, cost);
+    public void addChangedManaCost(ManaCost cost, boolean additional, long timestamp, long staticId) {
+        changedCardManaCost.put(timestamp, staticId, new CardManaCost(cost, additional));
+        updateManaCostForView();
     }
     public boolean removeChangedManaCost(long timestamp, long staticId) {
-        return changedCardManaCost.remove(timestamp, staticId) != null;
+        boolean result = changedCardManaCost.remove(timestamp, staticId) != null;
+        updateManaCostForView();
+        return result;
     }
+    private record CardManaCost(ManaCost mana, boolean additional) {
+
+    }
+
 
     public final boolean hasChosenPlayer() {
         return chosenPlayer != null;
