@@ -1392,7 +1392,7 @@ public class PlayerControllerAi extends PlayerController {
         // Filter out creatures if AI hasn't attacked yet
         if (ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             if (!creatures) {
-                untapped = CardLists.filter(untapped, Card::isCreature);
+                untapped = CardLists.filter(untapped, c -> !c.isCreature());
             } else {
                 // TODO AI needs to learn how to use Convoke or Waterbend
                 return new HashMap<>();
