@@ -127,7 +127,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                             srcCards.size(), true, params);
                 }
             } else {
-                // target cant receive this counter type
+                // target can't receive this counter type
                 if (!dest.canReceiveCounters(cType)) {
                     return;
                 }

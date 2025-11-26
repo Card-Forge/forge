@@ -341,7 +341,7 @@ public class PlayerControllerAi extends PlayerController {
         // Ideally, it would do something like
         // Verify we actually want to play this. Including: "Would play with assistance" and "would play without assistance"
         // Find an ally/player that might be helpful to pay for an effect
-        // If noone seems likely, just return null
+        // If no one seems likely, just return null
         // If player fails to assist, don't try to request assistance until next turn
         // If player fails to assist, maybe still cast it anyway?
 
