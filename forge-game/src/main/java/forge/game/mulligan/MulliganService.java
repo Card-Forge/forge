@@ -42,6 +42,8 @@ public class MulliganService {
         boolean firstMullFree = game.getPlayers().size() > 2 || game.getRules().hasAppliedVariant(GameType.Brawl);
 
         for (Player player : whoCanMulligan) {
+            final int baseHandSize = player.getStartingHandSize();
+
             MulliganDefs.MulliganRule rule = StaticData.instance().getMulliganRule();
             switch (rule) {
                 case Original:

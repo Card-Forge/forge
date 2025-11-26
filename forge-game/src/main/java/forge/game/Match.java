@@ -79,11 +79,15 @@ public class Match {
 
         if (selectedRule == MulliganDefs.MulliganRule.Houston) {
 
-            AbstractMulligan dummyMulligan = new HoustonMulligan(null, false);
-
             for (RegisteredPlayer rp : players) {
-                int newSize = dummyMulligan.getModifiedHandSize(rp.getStartingHand());
-                rp.setStartingHand(newSize);
+
+                int baseHandSize = rp.getStartingHand();
+
+                AbstractMulligan currentMulligan = new HoustonMulligan(null, false);
+
+                int newDrawSize = currentMulligan.getModifiedHandSize(baseHandSize);
+
+                rp.setStartingHand(newDrawSize);
             }
         }
 
