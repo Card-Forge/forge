@@ -1322,10 +1322,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return newSA;
     }
 
-    public SpellAbility copyWithDefinedCost(String abCost) {
-        return copyWithDefinedCost(new Cost(abCost, isAbility()));
-    }
-
     public SpellAbility copyWithManaCostReplaced(Player active, Cost abCost) {
         final SpellAbility newSA = copy(active);
         if (newSA == null) {
@@ -1814,7 +1810,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public void setTargets(TargetChoices targets) {
-        // .getTargets().add() is used more!
         // TODO should copy the target choices?
         targetChosen = targets;
     }

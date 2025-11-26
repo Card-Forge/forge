@@ -27,7 +27,6 @@ import forge.util.Aggregates;
 
 import java.util.List;
 
-
 /**
  * <p>
  * AbilityFactory_Counters class.
@@ -37,7 +36,6 @@ import java.util.List;
  * @version $Id$
  */
 public abstract class CountersAi extends SpellAbilityAi {
-    // An AbilityFactory subclass for Putting or Removing Counters on Cards.
 
     /**
      * <p>
@@ -102,19 +100,15 @@ public abstract class CountersAi extends SpellAbilityAi {
         } else if (type.equals("CHARGE")) {
             final CardCollection boon = CardLists.filter(list, c -> c.getCounters(CounterEnumType.CHARGE) < c.getKeywordMagnitude(Keyword.STATION) || c.getOracleText().matches(".*(for|number|emove) \\w+ (?:charge )counter.*"));
             choice = ComputerUtilCard.getMostExpensivePermanentAI(boon);
-        } else if (type.equals("COIN")) {
-            final CardCollection boon = CardLists.filter(list, c -> c.getOracleText().contains("coin counter") || (!c.isToken() && c.getCounters(CounterEnumType.COIN) == 0));
-            choice = ComputerUtilCard.getMostExpensivePermanentAI(boon);
-        } else if (type.equals("DIVINITY")) {
-            final CardCollection boon = CardLists.filter(list, c -> c.getCounters(CounterEnumType.DIVINITY) == 0);
-            choice = ComputerUtilCard.getMostExpensivePermanentAI(boon);
-        } else if (type.equals("SHIELD")) {
-            final CardCollection boon = CardLists.filter(list, c -> c.getCounters(CounterEnumType.SHIELD) == 0);
-            choice = ComputerUtilCard.getMostExpensivePermanentAI(boon);
         } else if (CounterType.getType(type).isKeywordCounter()) {
             choice = ComputerUtilCard.getBestCreatureAI(CardLists.getNotKeyword(list, type));
         } else {
-            choice = Aggregates.random(list);
+            final CardCollection pref = CardLists.filter(list, c -> c.getCounters(CounterEnumType.getType(type)) == 0);
+            if (!pref.isEmpty()) {
+                choice = ComputerUtilCard.getMostExpensivePermanentAI(pref);
+            } else if (!type.equals("DIVINITY")) {
+                choice = Aggregates.random(list);
+            }
         }
         return choice;
     }
