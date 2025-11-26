@@ -3179,7 +3179,7 @@ public class ComputerUtil {
         return isThreatened;
     }
 
-    public static <T> T protectRecursion(SpellAbility sa, Supplier<T> s, T fallback) {
+    public static <T> T protectRecursion(SpellAbility sa, Supplier<T> loopableMethod, T fallback) {
         boolean unskip = false;
         if (sa != null) {
             if (sa.isSkip()) {
@@ -3189,7 +3189,7 @@ public class ComputerUtil {
                 unskip = true;
             }
         }
-        T result = s.get();
+        T result = loopableMethod.get();
         if (unskip) {
             sa.setSkip(false);
         }
