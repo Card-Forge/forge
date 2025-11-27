@@ -21,6 +21,7 @@ public class AirbendAi extends SpellAbilityAi {
                         || (combat != null && ComputerUtilCombat.combatantWouldBeDestroyed(aiPlayer, card, combat))));
         if (!threatenedTgts.isEmpty()) {
             Card bestSaved = ComputerUtilCard.getBestAI(threatenedTgts);
+            sa.resetTargets();
             sa.getTargets().add(bestSaved);
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
@@ -31,6 +32,7 @@ public class AirbendAi extends SpellAbilityAi {
         if (ph.is(PhaseType.MAIN1, aiPlayer) || (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == aiPlayer)) {
             final CardCollection opposingThreats = aiPlayer.getOpponents().getCreaturesInPlay();
             if (!opposingThreats.isEmpty()) {
+                sa.resetTargets();
                 sa.getTargets().add(ComputerUtilCard.getBestAI(opposingThreats));
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }

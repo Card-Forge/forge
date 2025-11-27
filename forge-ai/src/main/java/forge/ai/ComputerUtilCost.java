@@ -30,12 +30,7 @@ import forge.util.IterableUtil;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 
-
 public class ComputerUtilCost {
-    private static boolean suppressRecursiveSacCostCheck = false;
-    public static void setSuppressRecursiveSacCostCheck(boolean shouldSuppress) {
-        suppressRecursiveSacCostCheck = shouldSuppress;
-    }
 
     /**
      * Check add m1 m1 counter cost.
@@ -335,15 +330,7 @@ public class ComputerUtilCost {
         }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostSacrifice sac) {
-                if (suppressRecursiveSacCostCheck) {
-                    return false;
-                }
-
-                final int amount = AbilityUtils.calculateAmount(source, sac.getAmount(), sourceAbility);
-
-                String type = sac.getType();
-
-                if (type.equals("CARDNAME")) {
+                if (sac.payCostFromSource()) {
                     if (!important) {
                         return false;
                     }
@@ -367,6 +354,7 @@ public class ComputerUtilCost {
                     continue;
                 }
 
+                String type = sac.getType();
                 boolean differentNames = false;
                 if (type.contains("+WithDifferentNames")) {
                     type = type.replace("+WithDifferentNames", "");
@@ -386,6 +374,7 @@ public class ComputerUtilCost {
                     typeList.addAll(uniqueNameCards);
                 }
 
+                final int amount = AbilityUtils.calculateAmount(source, sac.getAmount(), sourceAbility);
                 // don't sacrifice the card we're pumping
                 typeList = paymentChoicesWithoutTargets(typeList, sourceAbility, ai);
 
