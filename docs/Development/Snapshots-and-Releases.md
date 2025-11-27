@@ -1,5 +1,4 @@
 ## Snapshots
-
 Currently (as of Dec 2023), Desktop and Android snapshots have been automated via GithubActions. 
 
 You can see the workflows here.
@@ -9,13 +8,11 @@ These run daily at around 2pm ET time for people looking for them. The upload sc
 The latest daily snapshots can be found [here](https://github.com/Card-Forge/forge/releases/tag/daily-snapshots)
 
 ## Releases
-
 Currently (as of Dec 2023), Desktop releases run an automated script with a few manual pieces. 
 
 Currently (as of Dec 4, 2023), Android releases are not run. Although, hopefully with the Android snapshot now automated we'll be able to get back to getting a full release for Android as well. 
 
 ### Desktop Release Process
-
 It would be useful for other people to be comfortable with the release process. Currently, GitHub has the secrets required to add a snapshot or full release, so it's mostly just running through the steps below to kick off and validate a release. 
 
 1. Run Build

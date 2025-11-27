@@ -24,7 +24,6 @@ import forge.card.CardStateName;
 import forge.card.CardType.Supertype;
 import forge.card.ColorSet;
 import forge.card.GamePieceType;
-import forge.card.MagicColor;
 import forge.deck.DeckSection;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
@@ -2440,8 +2439,7 @@ public class GameAction {
                                 Localizer.getInstance().getMessage("lblChooseNColors", Lang.getNumeral(2));
                         SpellAbility sa = new SpellAbility.EmptySa(ApiType.ChooseColor, c, takesAction);
                         sa.putParam("AILogic", "MostProminentInComputerDeck");
-                        ColorSet chosenColors = ColorSet.fromNames(takesAction.getController().chooseColors(prompt, sa, 2, 2, MagicColor.Constant.ONLY_COLORS));
-                        c.setMarkedColors(chosenColors);
+                        c.setMarkedColors(takesAction.getController().chooseColors(prompt, sa, 2, 2, ColorSet.WUBRG));
                     }
                 }
             }

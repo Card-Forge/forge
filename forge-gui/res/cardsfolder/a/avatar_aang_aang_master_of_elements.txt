@@ -4,7 +4,7 @@ Types:Legendary Creature Human Avatar Ally
 PT:4/4
 K:Flying
 K:Firebending:2
-T:Mode$ ElementalBend | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you waterbend, earthbend, firebend, or airbend, draw a card. Then if you've done all four this turn, transform CARDNAME.
+T:Mode$ ElementalBend | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you waterbend, earthbend, firebend, or airbend, draw a card. Then if you've done all four this turn, transform CARDNAME.
 SVar:TrigDraw:DB$ Draw | SubAbility$ DBTransform
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | ConditionCheckSVar$ X
 SVar:X:Count$AllFourBend.1.0

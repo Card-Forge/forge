@@ -1,5 +1,4 @@
 # Advanced Search
-
 Forge implements many ways to help you find the cards you want in your ever growing collection.
 
 Pressing Ctrl+Enter in current search adds another editable search bar.  
@@ -11,7 +10,6 @@ Click the "X" in the upper right corner of each search widget to remove that fil
 Find-as-you-type is implemented for Deck Editor tables. Just start typing while the table has focus and the next card with a matching string in its name will be highlighted. If more than one card matches, hit Enter to select the next matching card. A popup panel will appear with the search string so you know what you are searching for. If no cards match the string, the string will be highlighted in red. Find-as-you-type mode is automatically exited after 5 seconds of inactivity, or hit Escape to exit find-as-you-type mode immediately.
 
 ## Additional information
-
 Another way to filter is using [Scryfall-like syntax](https://scryfall.com/docs/syntax) in the collection search bar.
 
 If no operators are passed between tokens, Forge will assume it is joined by `and`. For example, `t:cat t:warrior t:creature` will search for "creatures that are a cat **and** a warrior". Make sure to use `|` or `or` for your queries, as well as parentheses `( )` when needed.
@@ -25,7 +23,6 @@ If no keywords are used, Forge will search in their name, type and oracle text f
 ### Colors
 
 #### Keyword(s): `color`, `c`
-
 You can find cards that are a certain color using the `c:` or `color:` keyword. Both keywords accepts full color names like blue or the abbreviated color letters `w`, `u`, `r`, `b` and `g`.
 
 You can use many nicknames for color sets: all guild names (e.g. `azorius`), all shard names (e.g. `bant`), all college names (e.g., `quandrix`), all wedge names (e.g. `abzan`), and the four-color nicknames `chaos`, `aggression`, `altruism`, `growth`, `artifice` are supported.
@@ -42,7 +39,6 @@ You can use comparison expressions (`>`, `<`, `>=`, `<=`, and `!=`) to check aga
 ### Card Types
 
 #### Keyword(s): `type:`, `t:`
-
 Find cards of a certain card type with the `t:` or `type:` keywords. You can search for any supertype, card type, or subtype.
 
 Using only partial words is allowed.
@@ -54,7 +50,6 @@ Using only partial words is allowed.
 ### Card Text
 
 #### Keyword(s): `oracle:`, `o:`
-
 Use the `o:` or `oracle:` keywords to find cards that have specific phrases in their text box.
 
 You must put quotes `" "` around text with punctuation or spaces.
@@ -63,7 +58,6 @@ You must put quotes `" "` around text with punctuation or spaces.
 `o:"enters tapped"` - Cards that enter the battlefield tapped
 
 #### Keyword(s): `keyword:`, `kw:`
-
 You can use `keyword:` or `kw:` to search for cards with a specific keyword ability.
 
 > Note: Known to be buggy. You can search by oracle text instead.
@@ -72,7 +66,6 @@ You can use `keyword:` or `kw:` to search for cards with a specific keyword abil
 `kw:flying -t:creature` - Noncreatures that have the flying keyword
 
 #### Keyword(s): `name:`
-
 You can find cards with certain words in their name using `name`.
 
 Supports `!` (exact search), `!=` (doesn't contain), and `:` or `=` (contains).
@@ -82,13 +75,11 @@ Supports `!` (exact search), `!=` (doesn't contain), and `:` or `=` (contains).
 `name:Phyrexian`- Cards that contain Phyrexian in their name
 
 #### Keyword(s): `is:vanilla`
-
 Find vanilla cratures (Creatures with no abilities).
 
 ### Mana Costs
 
 #### Keyword(s): `manavalue`, `mv`, `cmc`
-
 You can find cards of a specific mana value with `manavalue`, `mv`, or `cmc`, comparing with a numeric expression (>, <, =, >=, <=, and !=).
 
 *Exemples:*
@@ -97,7 +88,6 @@ You can find cards of a specific mana value with `manavalue`, `mv`, or `cmc`, co
 ### Power, Toughness, and Loyalty
 
 #### Keyword(s): `power`, `pow`
-
 You can use numeric expressions (>, <, =, >=, <=, and !=) to find cards with certain power using `power` or `pow`.
 
 *Exemples:*
@@ -105,14 +95,12 @@ You can use numeric expressions (>, <, =, >=, <=, and !=) to find cards with cer
 `pow>tou c:w t:creature` - White creatures that are top-heavy
 
 #### Keyword(s): `toughness`, `tou`
-
 You can use numeric expressions (>, <, =, >=, <=, and !=) to find cards with certain toughness using `toughness` or `tou`.
 
 *Exemples:*
 `tou<=4` - Cards with 4 or less thoughness
 
 #### Keyword(s): `loyalty`, `loy`
-
 You can use numeric expressions (`>`, `<`, `=`, `>=`, `<=`, and `!=`) to find cards with certain starting loyalty using `loyalty` or `loy`.
 
 *Exemples:*
@@ -121,14 +109,12 @@ You can use numeric expressions (`>`, `<`, `=`, `>=`, `<=`, and `!=`) to find ca
 ### Sets (Editions)
 
 #### Keyword(s): `set:`, `s:`, `edition:`, `e`
-
 Use `s:`, `e:`, `set:`, or `edition:` to find cards using their Magic set code.
 
 Examples:
 `e:war` - Cards from War of the Spark
 
 #### Keyword(s): `in:` (set)
-
 The `in:` keyword finds cards that appeared in given set code.
 
 Examples:
@@ -137,7 +123,6 @@ Examples:
 ### Rarity
 
 #### Keyword(s): `rarity:`, `r:`
-
 Use `r:` or `rarity:` to find cards by their print rarity. You can search for `land` (`l`) (usually only basic lands), `common` (`c`), `uncommon` (`u`), `rare` (`r`), `mythic` (`m`), and `special` (`s`). You can also use comparison operators like `<` and `>=.`
 
 Examples:
@@ -145,7 +130,6 @@ Examples:
 `r>=r`- Cards at rare rarity or above (rares and mythics)
 
 #### Keyword(s): `in:` (rarity)
-
 You can find cards that have been printed in a given rarity using `in:`
 
 Examples:
@@ -154,39 +138,30 @@ Examples:
 ### Multi-faced cards
 
 #### Keyword(s): `is:split`
-
 Find split-faced cards.
 
 #### Keyword(s): `is:flip`
-
 Find flip cards.
 
 #### Keyword(s): `is:transform`
-
 Find cards that transform.
 
 #### Keyword(s): `is:meld`
-
 Find cards that meld.
 
 #### Keyword(s) `is:leveler`
-
 Find cards with Level Up.
 
 ### Others
 
 #### Keyword(s): `is:modal`
-
 Find modal cards.
 
 #### Keyword(s): `is:custom`
-
 Find cards from custom sets.
 
 #### Keyword(s) `is:foil`
-
 Find foil cards.
 
 #### Keyword(s) `is:nonfoil`
-
 Find nonfoil cards.

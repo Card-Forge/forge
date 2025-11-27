@@ -498,8 +498,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             runParams.put(AbilityKey.FirstTime, firstGain);
             game.getTriggerHandler().runTrigger(TriggerType.LifeGained, runParams, false);
 
-            game.getTriggerHandler().runTrigger(TriggerType.LifeChanged, runParams, false);
-
             game.fireEvent(new GameEventPlayerLivesChanged(this, oldLife, life));
             return true;
         }
@@ -559,8 +557,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         runParams.put(AbilityKey.LifeAmount, toLose);
         runParams.put(AbilityKey.FirstTime, firstLost);
         game.getTriggerHandler().runTrigger(TriggerType.LifeLost, runParams, false);
-
-        game.getTriggerHandler().runTrigger(TriggerType.LifeChanged, runParams, false);
 
         return toLose;
     }
