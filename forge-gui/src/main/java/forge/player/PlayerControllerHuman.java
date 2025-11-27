@@ -10,7 +10,6 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.CardPool;
 import forge.deck.Deck;
-import forge.deck.DeckRecognizer;
 import forge.deck.DeckSection;
 import forge.game.*;
 import forge.game.ability.AbilityKey;
@@ -1834,11 +1833,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public List<String> chooseColors(final String message, final SpellAbility sa, final int min, final int max,
-                                     List<String> options) {
-        options = options.stream().map(DeckRecognizer::getLocalisedMagicColorName).collect(Collectors.toList());
-        List<String> choices = getGui().getChoices(message, min, max, options);
-        return choices.stream().map(DeckRecognizer::getColorNameByLocalisedName).collect(Collectors.toList());
+    public ColorSet chooseColors(final String message, final SpellAbility sa, final int min, final int max, ColorSet options) {
+        return ColorSet.fromEnums(getGui().getChoices(message, min, max, Lists.newArrayList(options.getOrderedColors()),
+                null, MagicColor.Color::getTranslatedName));
     }
 
     @Override
@@ -1867,22 +1864,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     private byte chooseColorCommon(final String message, final Card c, final ColorSet colors,
                                    final boolean withColorless) {
-        final ImmutableList.Builder<String> colorNamesBuilder = ImmutableList.builder();
-        if (withColorless) {
-            colorNamesBuilder.add(MagicColor.toLongString(MagicColor.COLORLESS));
+        List<MagicColor.Color> choices = Lists.newArrayList(colors.getOrderedColors());
+        if (withColorless && !colors.isColorless()) {
+            choices.add(MagicColor.Color.COLORLESS);
         }
-        for (final MagicColor.Color color : colors) {
-            colorNamesBuilder.add(color.getName());
-        }
-        final ImmutableList<String> colorNames = colorNamesBuilder.build();
-        if (colorNames.size() > 2) {
-            return MagicColor.fromName(getGui().one(message, colorNames));
+        if (choices.size() > 2) {
+            return getGui().one(message, choices, MagicColor.Color::getTranslatedName).getColorMask();
         }
 
         boolean confirmed = false;
-        confirmed = InputConfirm.confirm(this, CardView.get(c), message, true, colorNames);
+        confirmed = InputConfirm.confirm(this, CardView.get(c), message, true, choices.stream().map(MagicColor.Color::getTranslatedName).collect(Collectors.toList()));
         final int idxChosen = confirmed ? 0 : 1;
-        return MagicColor.fromName(colorNames.get(idxChosen));
+        return choices.get(idxChosen).getColorMask();
     }
 
     @Override

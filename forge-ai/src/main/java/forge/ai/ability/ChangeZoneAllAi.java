@@ -240,15 +240,13 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
      * <p>
      * changeZoneAllPlayDrawbackAI.
      * </p>
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param aiPlayer
-     *            a {@link forge.game.player.Player} object.
-     * 
+     *
+     * @param aiPlayer a {@link Player} object.
+     * @param sa       a {@link SpellAbility} object.
      * @return a boolean.
      */
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
         // if putting cards from hand to library and parent is drawing cards
         // make sure this will actually do something:
 

@@ -255,7 +255,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (!isCreature() && !isKindred()) {
             return false;
         }
-        boolean changed = subtypes.removeIf(Predicates.IS_CREATURE_TYPE);
+        boolean changed = subtypes.removeIf(CardType::isACreatureType);
         // need to remove AllCreatureTypes too when setting Creature Type
         if (allCreatureTypes) {
             changed = true;
@@ -298,7 +298,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             creatureTypes.addAll(getAllCreatureTypes());
             creatureTypes.removeAll(this.excludedCreatureSubtypes);
         } else {
-            subtypes.stream().filter(Predicates.IS_CREATURE_TYPE).forEach(creatureTypes::add);
+            subtypes.stream().filter(CardType::isACreatureType).forEach(creatureTypes::add);
         }
         return creatureTypes;
     }
@@ -401,7 +401,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     @Override
     public boolean hasABasicLandType() {
-        return this.subtypes.stream().anyMatch(Predicates.IS_BASIC_LAND_TYPE);
+        return this.subtypes.stream().anyMatch(CardType::isABasicLandType);
     }
     @Override
     public boolean hasANonBasicLandType() {
@@ -617,35 +617,35 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             }
             else if (!newType.subtypes.isEmpty()) {
                 if (ct.isRemoveLandTypes()) {
-                    newType.subtypes.removeIf(Predicates.IS_LAND_TYPE);
+                    newType.subtypes.removeIf(CardType::isALandType);
                 }
                 if (ct.isRemoveCreatureTypes()) {
-                    newType.subtypes.removeIf(Predicates.IS_CREATURE_TYPE);
+                    newType.subtypes.removeIf(CardType::isACreatureType);
                     // need to remove AllCreatureTypes too when removing creature Types
                     newType.allCreatureTypes = false;
                 }
                 if (ct.isRemoveArtifactTypes()) {
-                    newType.subtypes.removeIf(Predicates.IS_ARTIFACT_TYPE);
+                    newType.subtypes.removeIf(CardType::isAnArtifactType);
                 }
                 if (ct.isRemoveEnchantmentTypes()) {
-                    newType.subtypes.removeIf(Predicates.IS_ENCHANTMENT_TYPE);
+                    newType.subtypes.removeIf(CardType::isAnEnchantmentType);
                 }
             }
-            if (ct.getRemoveType() != null) {
-                newType.removeAll(ct.getRemoveType());
+            if (ct.removeType() != null) {
+                newType.removeAll(ct.removeType());
             }
-            if (ct.getAddType() != null) {
-                newType.addAll(ct.getAddType());
-                if (ct.getAddType().hasAllCreatureTypes()) {
+            if (ct.addType() != null) {
+                newType.addAll(ct.addType());
+                if (ct.addType().hasAllCreatureTypes()) {
                     newType.allCreatureTypes = true;
                 }
             }
-            if (ct.isAddAllCreatureTypes()) {
+            if (ct.addAllCreatureTypes()) {
                 newType.allCreatureTypes = true;
             }
             // remove specific creature types from all creature types
-            if (ct.getRemoveType() != null && newType.allCreatureTypes) {
-                newType.excludedCreatureSubtypes.addAll(Lists.newArrayList(IterableUtil.filter(ct.getRemoveType(), Predicates.IS_CREATURE_TYPE)));
+            if (ct.removeType() != null && newType.allCreatureTypes) {
+                newType.excludedCreatureSubtypes.addAll(Lists.newArrayList(IterableUtil.filter(ct.removeType(), CardType::isACreatureType)));
             }
         }
         // sanisfy subtypes
@@ -668,31 +668,31 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         }
         Predicate<String> allowedTypes = x -> false;
         if (isCreature() || isKindred()) {
-            allowedTypes = allowedTypes.or(Predicates.IS_CREATURE_TYPE);
+            allowedTypes = allowedTypes.or(CardType::isACreatureType);
         }
         if (isLand()) {
-            allowedTypes = allowedTypes.or(Predicates.IS_LAND_TYPE);
+            allowedTypes = allowedTypes.or(CardType::isALandType);
         }
         if (isArtifact()) {
-            allowedTypes = allowedTypes.or(Predicates.IS_ARTIFACT_TYPE);
+            allowedTypes = allowedTypes.or(CardType::isAnArtifactType);
         }
         if (isEnchantment()) {
-            allowedTypes = allowedTypes.or(Predicates.IS_ENCHANTMENT_TYPE);
+            allowedTypes = allowedTypes.or(CardType::isAnEnchantmentType);
         }
         if (isInstant() || isSorcery()) {
-            allowedTypes = allowedTypes.or(Predicates.IS_SPELL_TYPE);
+            allowedTypes = allowedTypes.or(CardType::isASpellType);
         }
         if (isPlaneswalker()) {
-            allowedTypes = allowedTypes.or(Predicates.IS_WALKER_TYPE);
+            allowedTypes = allowedTypes.or(CardType::isADungeonType);
         }
         if (isDungeon()) {
-            allowedTypes = allowedTypes.or(Predicates.IS_DUNGEON_TYPE);
+            allowedTypes = allowedTypes.or(CardType::isADungeonType);
         }
         if (isBattle()) {
-            allowedTypes = allowedTypes.or(Predicates.IS_BATTLE_TYPE);
+            allowedTypes = allowedTypes.or(CardType::isABattleType);
         }
         if (isPlane()) {
-            allowedTypes = allowedTypes.or(Predicates.IS_PLANAR_TYPE);
+            allowedTypes = allowedTypes.or(CardType::isAPlanarType);
         }
 
         subtypes.removeIf(allowedTypes.negate());
@@ -929,23 +929,6 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
                 "Rogue",
                 "Warrior",
                 "Wizard");
-    }
-    public static class Predicates {
-        public static Predicate<String> IS_LAND_TYPE = CardType::isALandType;
-        public static Predicate<String> IS_BASIC_LAND_TYPE = CardType::isABasicLandType;
-        public static Predicate<String> IS_ARTIFACT_TYPE = CardType::isAnArtifactType;
-
-        public static Predicate<String> IS_CREATURE_TYPE = CardType::isACreatureType;
-
-        public static Predicate<String> IS_ENCHANTMENT_TYPE = CardType::isAnEnchantmentType;
-
-        public static Predicate<String> IS_SPELL_TYPE = CardType::isASpellType;
-
-        public static Predicate<String> IS_WALKER_TYPE = CardType::isAPlaneswalkerType;
-        public static Predicate<String> IS_DUNGEON_TYPE = CardType::isADungeonType;
-        public static Predicate<String> IS_BATTLE_TYPE = CardType::isABattleType;
-
-        public static Predicate<String> IS_PLANAR_TYPE = CardType::isAPlanarType;
     }
 
     ///////// Utility methods

@@ -936,10 +936,6 @@ public class AiController {
             }
         }
 
-        // When processing a new SA, clear the previously remembered cards that have been marked to avoid re-entry
-        // which might potentially cause a stack overflow.
-        memory.clearMemorySet(AiCardMemory.MemorySet.MARKED_TO_AVOID_REENTRY);
-
         // TODO before suspending some spells try to predict if relevant targets can be expected
         if (sa.getApi() != null) {
 
@@ -1600,7 +1596,8 @@ public class AiController {
             saList = ComputerUtilAbility.getSpellAbilities(cards, player);
         }
 
-        saList.removeIf(spellAbility -> { //don't include removedAI cards if somehow the AI can play the ability or gain control of unsupported card
+        saList.removeIf(spellAbility -> {
+            // don't include removedAI cards if somehow the AI can play the ability or gain control of unsupported card
             // TODO allow when experimental profile?
             return spellAbility.isLandAbility() || (spellAbility.getHostCard() != null && ComputerUtilCard.isCardRemAIDeck(spellAbility.getHostCard()));
         });
@@ -2067,7 +2064,7 @@ public class AiController {
                         break;
                     }
                 } else {
-                    CardCollectionView viableOptions = CardLists.filter(pool, CardPredicates.isControlledByAnyOf(sa.getActivatingPlayer().getOpponents()), CardPredicates.CAN_BE_DESTROYED);
+                    CardCollectionView viableOptions = CardLists.filter(pool, CardPredicates.isControlledByAnyOf(sa.getActivatingPlayer().getOpponents()), Card::canBeDestroyed);
                     Card best = ComputerUtilCard.getBestAI(viableOptions);
                     if (best != null) {
                         result.add(best);
@@ -2251,7 +2248,7 @@ public class AiController {
 
         // filter list by ApiTypes
         List<SpellAbility> discard = filterListByApi(activePlayerSAs, ApiType.Discard);
-        List<SpellAbility> mandatoryDiscard = filterList(discard, SpellAbilityPredicates.isMandatory());
+        List<SpellAbility> mandatoryDiscard = filterList(discard, SpellAbility::isMandatory);
 
         List<SpellAbility> draw = filterListByApi(activePlayerSAs, ApiType.Draw);
 

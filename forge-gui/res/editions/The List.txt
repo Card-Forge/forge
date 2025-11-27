@@ -3349,7 +3349,7 @@ MMQ-205 U Mercadia's Downfall @Pete Venters
 MMQ-208 R Puppet's Verdict @Edward P. Beard, Jr.
 MMQ-218 R Thieves' Auction @Kevin Murphy
 MMQ-219 C Thunderclap @Tom Wänerstrand
-MMQ-229 C Ancestral Mask @Massimilano Frezzato
+MMQ-229 C Ancestral Mask @Massimiliano Frezzato
 MMQ-232 U Briar Patch @Rebecca Guay
 MMQ-246 R Food Chain @Val Mayerik
 MMQ-253 U Hunted Wumpus @Brian Snõddy
@@ -3462,7 +3462,7 @@ NEC-21 R Komainu Battle Armor @Néstor Ossandón Leal
 NEC-95 U Reality Shift @Howard Lyon
 NEC-111 R Taurean Mauler @Dominick Domingo
 NEM-1 U Angelic Favor @Paolo Parente
-NEM-8 C Fanatical Devotion @Massimilano Frezzato
+NEM-8 C Fanatical Devotion @Massimiliano Frezzato
 NEM-17 R Parallax Wave @Greg Staples
 NEM-41 R Seahunter @Heather Hudson
 NEM-42 C Seal of Removal @Christopher Moeller

@@ -44,7 +44,7 @@ public class DamageEachAi extends DamageAiBase {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
         // check AI life before playing this drawback?
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }

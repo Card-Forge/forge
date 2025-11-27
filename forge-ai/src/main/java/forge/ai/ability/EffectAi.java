@@ -332,7 +332,7 @@ public class EffectAi extends SpellAbilityAi {
             } else if (logic.equals("CantRegenerate")) {
                 if (sa.usesTargeting()) {
                     CardCollection list = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
-                    list = CardLists.filter(list, CardPredicates.CAN_BE_DESTROYED, input -> {
+                    list = CardLists.filter(list, Card::canBeDestroyed, input -> {
                         Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(input);
                         runParams.put(AbilityKey.Regeneration, true);
                         List<ReplacementEffect> repDestroyList = game.getReplacementHandler().getReplacementList(ReplacementType.Destroy, runParams, ReplacementLayer.Other);
@@ -640,7 +640,7 @@ public class EffectAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+    public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         final String aiLogic = sa.getParam("UnlessAI");
         if ("WillAttack".equals(aiLogic)) {
             // TODO use AiController::getPredictedCombat
@@ -651,6 +651,6 @@ public class EffectAi extends SpellAbilityAi {
                 return false;
             }
         }
-        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+        return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
     }
 }

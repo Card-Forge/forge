@@ -57,12 +57,12 @@ import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.StreamUtil;
-import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 
 /**
@@ -382,27 +382,14 @@ public class ComputerUtil {
             }
 
             // try everything when about to die
-            if (game.getPhaseHandler().getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-                // in some rare situations the call to lifeInDanger could lead us back here, this will prevent an overflow
-                boolean preventReturn = sa != null && sa.isManaAbility();
-                if (preventReturn) {
-                    AiCardMemory.rememberCard(ai, sa.getHostCard(), MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL);
-                }
-
-                boolean danger = ComputerUtilCombat.lifeInSeriousDanger(ai, game.getCombat());
-
-                if (preventReturn) {
-                    AiCardMemory.forgetCard(ai, sa.getHostCard(), MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL);
-                }
-
-                if (danger) {
-                    final CardCollection nonCreatures = CardLists.getNotType(typeList, "Creature");
-                    if (!nonCreatures.isEmpty()) {
-                        return ComputerUtilCard.getWorstAI(nonCreatures);
-                    } else if (!typeList.isEmpty()) {
-                        // TODO make sure survival is possible in case the creature blocks a trampler
-                        return ComputerUtilCard.getWorstAI(typeList);
-                    }
+            if (game.getPhaseHandler().getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS) && ComputerUtil.protectRecursion(sa,
+                        () -> ComputerUtilCombat.lifeInSeriousDanger(ai, game.getCombat()), false)) {
+                final CardCollection nonCreatures = CardLists.getNotType(typeList, "Creature");
+                if (!nonCreatures.isEmpty()) {
+                    return ComputerUtilCard.getWorstAI(nonCreatures);
+                } else if (!typeList.isEmpty()) {
+                    // TODO make sure survival is possible in case the creature blocks a trampler
+                    return ComputerUtilCard.getWorstAI(typeList);
                 }
             }
         }
@@ -938,10 +925,9 @@ public class ComputerUtil {
             }
         }
 
-        for (int ip = 0; ip < 6; ip++) { // priority 0 is the lowest, priority 5 the highest
-            final int priority = 6 - ip;
+        for (int prio = 6; prio > 0; prio--) {
             for (Card card : remaining) {
-                if (card.hasSVar("SacMe") && Integer.parseInt(card.getSVar("SacMe")) == priority) {
+                if (card.hasSVar("SacMe") && Integer.parseInt(card.getSVar("SacMe")) == prio) {
                     return card;
                 }
             }
@@ -979,59 +965,45 @@ public class ComputerUtil {
             return false;
         }
 
-        boolean canRegen = false;
-        ComputerUtilCombat.setCombatRegenTestSuppression(true); // do not check canRegenerate recursively from combat code
-
         final Player controller = card.getController();
         final Game game = controller.getGame();
         final CardCollectionView l = controller.getCardsIn(ZoneType.Battlefield);
         for (final Card c : l) {
             for (final SpellAbility sa : c.getSpellAbilities()) {
-                // This try/catch should fix the "computer is thinking" bug
-                try {
+                if (!sa.isActivatedAbility() || sa.getApi() != ApiType.Regenerate) {
+                    continue; // Not a Regenerate ability
+                }
+                sa.setActivatingPlayer(controller);
+                if (!(sa.canPlay() && ComputerUtilCost.canPayCost(sa, controller, false))) {
+                    continue; // Can't play ability
+                }
 
-                    if (!sa.isActivatedAbility() || sa.getApi() != ApiType.Regenerate) {
-                        continue; // Not a Regenerate ability
-                    }
-                    sa.setActivatingPlayer(controller);
-                    if (!(sa.canPlay() && ComputerUtilCost.canPayCost(sa, controller, false))) {
-                        continue; // Can't play ability
-                    }
+                if (controller == ai) {
+                    final Cost abCost = sa.getPayCosts();
+                    if (abCost != null) {
+                        if (!ComputerUtilCost.checkLifeCost(controller, abCost, c, 4, sa)) {
+                            continue; // Won't play ability
+                        }
 
-                    if (controller == ai) {
-                        final Cost abCost = sa.getPayCosts();
-                        if (abCost != null) {
-                            if (!ComputerUtilCost.checkLifeCost(controller, abCost, c, 4, sa)) {
-                                continue; // Won't play ability
-                            }
-
-                            if (!ComputerUtilCost.checkSacrificeCost(controller, abCost, c, sa)) {
-                                continue; // Won't play ability
-                            }
-
-                            if (!ComputerUtilCost.checkCreatureSacrificeCost(controller, abCost, c, sa)) {
-                                continue; // Won't play ability
-                            }
+                        if (ComputerUtil.protectRecursion(sa, () -> !ComputerUtilCost.checkSacrificeCost(controller, abCost, c, sa)
+                                || !ComputerUtilCost.checkCreatureSacrificeCost(controller, abCost, c, sa), true)) {
+                            continue; // Won't play ability
                         }
                     }
+                }
 
-                    final TargetRestrictions tgt = sa.getTargetRestrictions();
-                    if (tgt != null) {
-                        if (CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getHostCard(), sa).contains(card)) {
-                            canRegen = true;
-                        }
-                    } else if (AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa).contains(card)) {
-                        canRegen = true;
+                final TargetRestrictions tgt = sa.getTargetRestrictions();
+                if (tgt != null) {
+                    if (CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getHostCard(), sa).contains(card)) {
+                        return true;
                     }
-
-                } catch (final Exception ex) {
-                    throw new RuntimeException(TextUtil.concatNoSpace("There is an error in the card code for ", c.getName(), ":", ex.getMessage()), ex);
+                } else if (AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa).contains(card)) {
+                    return true;
                 }
             }
         }
 
-        ComputerUtilCombat.setCombatRegenTestSuppression(false);
-        return canRegen;
+        return false;
     }
 
     public static int possibleDamagePrevention(final Card card) {
@@ -1044,27 +1016,22 @@ public class ComputerUtil {
         for (final Card c : l) {
             for (final SpellAbility sa : c.getSpellAbilities()) {
                 // if SA is from AF_Counter don't add to getPlayable
-                // This try/catch should fix the "computer is thinking" bug
-                try {
-                    if (sa.getApi() == null || !sa.isActivatedAbility()) {
-                        continue;
-                    }
+                if (!sa.isActivatedAbility() || sa.getApi() != ApiType.PreventDamage) {
+                    continue;
+                }
 
-                    if (sa.getApi() == ApiType.PreventDamage && sa.canPlay()
-                            && ComputerUtilCost.canPayCost(sa, controller, false)) {
-                        if (AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa).contains(card)) {
-                            prevented += AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
-                        }
-                        final TargetRestrictions tgt = sa.getTargetRestrictions();
-                        if (tgt != null) {
-                            if (CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getHostCard(), sa).contains(card)) {
-                                prevented += AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
-                            }
+                if (!(sa.canPlay() && ComputerUtilCost.canPayCost(sa, controller, false))) {
+                    continue;
+                }
 
-                        }
+                if (AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa).contains(card)) {
+                    prevented += AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
+                }
+                final TargetRestrictions tgt = sa.getTargetRestrictions();
+                if (tgt != null) {
+                    if (CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getHostCard(), sa).contains(card)) {
+                        prevented += AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
                     }
-                } catch (final Exception ex) {
-                    throw new RuntimeException(TextUtil.concatNoSpace("There is an error in the card code for ", c.getName(), ":", ex.getMessage()), ex);
                 }
             }
         }
@@ -1153,7 +1120,7 @@ public class ComputerUtil {
             if (card.getSVar("PlayMain1").equals("ALWAYS") || sa.getPayCosts().hasNoManaCost()) {
                 return true;
             } else if (card.getSVar("PlayMain1").equals("OPPONENTCREATURES")) {
-                //Only play these main1 when the opponent has creatures (stealing and giving them haste)
+                // Only play these main1 when the opponent has creatures (stealing and giving them haste)
                 if (!ai.getOpponents().getCreaturesInPlay().isEmpty()) {
                     return true;
                 }
@@ -1323,8 +1290,8 @@ public class ComputerUtil {
             }
         }
 
-        final CardCollectionView buffed = ai.getCardsIn(ZoneType.Battlefield);
         boolean checkThreshold = sa.isSpell() && !ai.hasThreshold() && !source.isInZone(ZoneType.Graveyard);
+        final CardCollectionView buffed = ai.getCardsIn(ZoneType.Battlefield);
         for (Card buffedCard : buffed) {
             if (buffedCard.hasSVar("BuffedBy")) {
                 final String buffedby = buffedCard.getSVar("BuffedBy");
@@ -1398,9 +1365,7 @@ public class ComputerUtil {
         }
         for (final CostPart part : abCost.getCostParts()) {
             if (part instanceof CostSacrifice sac) {
-                final String type = sac.getType();
-
-                if (type.equals("CARDNAME")) {
+                if (sac.payCostFromSource()) {
                     if (source.getSVar("SacMe").equals("6")) {
                         return true;
                     } else if (shouldSacrificeThreatenedCard(ai, source, sa)) {
@@ -1410,7 +1375,7 @@ public class ComputerUtil {
                 }
 
                 final CardCollection typeList =
-                        CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type, source.getController(), source, sa);
+                        CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), sac.getType(), source.getController(), source, sa);
                 for (Card c : typeList) {
                     if (c.getSVar("SacMe").equals("6")) {
                         return true;
@@ -1545,17 +1510,9 @@ public class ComputerUtil {
                     continue;
                 }
 
-                // Avoid re-entry for cards already being considered (e.g. in case the AI is considering
-                // Convoke or Improvise for a Fog-like effect)
-                if (c.hasKeyword(Keyword.CONVOKE) || c.hasKeyword(Keyword.IMPROVISE)) {
+                if ((c.hasKeyword(Keyword.CONVOKE) || c.hasKeyword(Keyword.IMPROVISE)) && sa.isSpell() && !c.getController().isAI()) {
                     // TODO skipping for now else this will lead to GUI interaction
-                    if (!c.getController().isAI()) {
-                        continue;
-                    }
-                    if (AiCardMemory.isRememberedCard(defender, c, AiCardMemory.MemorySet.MARKED_TO_AVOID_REENTRY)) {
-                        continue;
-                    }
-                    AiCardMemory.rememberCard(defender, c, AiCardMemory.MemorySet.MARKED_TO_AVOID_REENTRY);
+                    continue;
                 }
 
                 if (!ComputerUtilCost.canPayCost(sa, defender, false)) {
@@ -3067,13 +3024,17 @@ public class ComputerUtil {
         return numInHand > 0 || numInDeck >= 3;
     }
 
-    public static CardCollection filterAITgts(SpellAbility sa, Player ai, CardCollection srcList, boolean alwaysStrict) {
+    // this function should be called by most API to give scripters the option of helping AI
+    public static CardCollection filterAITgts(SpellAbility sa, Player ai, CardCollection targetables, boolean alwaysStrict) {
+        // TODO support players
         final Card source = sa.getHostCard();
         if (source == null || !sa.hasParam("AITgts")) {
-            return srcList;
+            return targetables;
         }
 
-        CardCollection list;
+        // TODO randomize the order, just so human can't predict in advance which of two equal cards AI might pick
+
+        CardCollection filtered;
         String aiTgts = sa.getParam("AITgts");
         if (aiTgts.startsWith("BetterThan")) {
             int value = 0;
@@ -3093,15 +3054,28 @@ public class ComputerUtil {
                 value = ComputerUtilCard.evaluateCreature(source);
             }
             final int totalValue = value;
-            list = CardLists.filter(srcList, c -> ComputerUtilCard.evaluateCreature(c) > totalValue + 30);
+            filtered = CardLists.filter(targetables, c -> ComputerUtilCard.evaluateCreature(c) > totalValue + 30);
         } else {
-            list = CardLists.getValidCards(srcList, sa.getParam("AITgts"), sa.getActivatingPlayer(), source, sa);
+            filtered = CardLists.getValidCards(targetables, aiTgts, sa.getActivatingPlayer(), source, sa);
         }
 
-        if (!list.isEmpty() || sa.hasParam("AITgtsStrict") || alwaysStrict) {
-            return list;
+        if (sa.hasParam("AITgtsStrict") || alwaysStrict) {
+            return filtered;
         }
-        return srcList;
+        if (!filtered.isEmpty()) {
+            // try to fill up with other regular targets to increase chance of playing
+            for (Card tgt : targetables) {
+                if (filtered.size() >= sa.getMinTargets()) {
+                    break;
+                }
+                if (filtered.contains(tgt)) {
+                    continue;
+                }
+                filtered.add(tgt);
+            }
+            return filtered;
+        }
+        return targetables;
     }
 
     // Check if AI life is in danger/serious danger based on next expected combat
@@ -3185,13 +3159,27 @@ public class ComputerUtil {
         } else if (sa != null && sa.getApi() == ApiType.Regenerate && sa.getHostCard().equals(c)) {
             return false; // no use in sacrificing a card in an attempt to regenerate it
         }
-        ComputerUtilCost.setSuppressRecursiveSacCostCheck(true);
-        Game game = ai.getGame();
-        Combat combat = game.getCombat();
+        Combat combat = ai.getGame().getCombat();
         boolean isThreatened = (c.isCreature() && ComputerUtil.predictCreatureWillDieThisTurn(ai, c, sa, false)
                 && (!ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, c, combat) && !ComputerUtilCombat.isDangerousToSacInCombat(ai, c, combat)))
                 || (!c.isCreature() && ComputerUtil.predictThreatenedObjects(ai, sa).contains(c));
-        ComputerUtilCost.setSuppressRecursiveSacCostCheck(false);
         return isThreatened;
+    }
+
+    public static <T> T protectRecursion(SpellAbility sa, Supplier<T> loopableMethod, T fallback) {
+        boolean unskip = false;
+        if (sa != null) {
+            if (sa.isSkip()) {
+                return fallback;
+            } else {
+                sa.setSkip(true);
+                unskip = true;
+            }
+        }
+        T result = loopableMethod.get();
+        if (unskip) {
+            sa.setSkip(false);
+        }
+        return result;
     }
 }

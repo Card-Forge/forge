@@ -1,5 +1,6 @@
 package forge.game.cost;
 
+import forge.card.ColorSet;
 import forge.game.GameEntityCounterTable;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -14,7 +15,7 @@ import java.util.List;
 public class PaymentDecision {
     public int c = 0;
     public String type;
-    public List<String> colors;
+    public ColorSet colors;
 
     public final CardCollection cards = new CardCollection();
     public final List<Mana> mana;
@@ -51,7 +52,7 @@ public class PaymentDecision {
         type = choice;
     }
 
-    public PaymentDecision(List<String> choices) {
+    public PaymentDecision(ColorSet choices) {
         this(null, null, null, null, null);
         colors = choices;
     }
@@ -96,7 +97,7 @@ public class PaymentDecision {
         return new PaymentDecision(choice);
     }
 
-    public static PaymentDecision colors(List<String> choices) {
+    public static PaymentDecision colors(ColorSet choices) {
         return new PaymentDecision(choices);
     }
 

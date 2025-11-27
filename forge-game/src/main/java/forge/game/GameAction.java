@@ -24,7 +24,6 @@ import forge.card.CardStateName;
 import forge.card.CardType.Supertype;
 import forge.card.ColorSet;
 import forge.card.GamePieceType;
-import forge.card.MagicColor;
 import forge.deck.DeckSection;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
@@ -42,7 +41,6 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityContinuous;
@@ -65,6 +63,7 @@ import org.jgrapht.graph.DefaultDirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * Methods for common actions performed during a game.
@@ -1142,7 +1141,7 @@ public class GameAction {
                         affectedPerAbility.put(stAb, affectedHere);
                     }
                 } else {
-                    // 613.6 If an effect starts to apply in one layer and/or sublayer, it will continue to be applied
+                    // CR 613.6 If an effect starts to apply in one layer and/or sublayer, it will continue to be applied
                     // to the same set of objects in each other applicable layer and/or sublayer,
                     // even if the ability generating the effect is removed during this process.
                     affectedHere = previouslyAffected;
@@ -1158,7 +1157,7 @@ public class GameAction {
                         }
                     }
                 }
-                // 613.8c. After each effect is applied, the order of remaining effects is reevaluated
+                // CR 613.8c After each effect is applied, the order of remaining effects is reevaluated
                 // and may change if an effect that has not yet been applied becomes
                 // dependent on or independent of one or more other effects that have not yet been applied.
             }
@@ -1240,17 +1239,27 @@ public class GameAction {
 
     private StaticAbility findStaticAbilityToApply(StaticAbilityLayer layer, List<StaticAbility> staticsForLayer, CardCollectionView preList, Map<StaticAbility, CardCollectionView> affectedPerAbility,
                                                    Table<StaticAbility, StaticAbility, Set<StaticAbilityLayer>> dependencies) {
+        StaticAbility first = staticsForLayer.get(0);
         if (staticsForLayer.size() == 1) {
-            return staticsForLayer.get(0);
+            return first;
         }
         if (!StaticAbilityLayer.CONTINUOUS_LAYERS_WITH_DEPENDENCY.contains(layer)) {
-            return staticsForLayer.get(0);
+            return first;
+        }
+        // CR 611.2c continuous effects from resolved abilities always affect the same objects the same way
+        Predicate<StaticAbility> isResolved = stAb -> stAb.getHostCard().isImmutable() && !stAb.getHostCard().isEmblem();
+        if (isResolved.test(first)) {
+            return first;
         }
 
         DefaultDirectedGraph<StaticAbility, DefaultEdge> dependencyGraph = new DefaultDirectedGraph<>(DefaultEdge.class);
 
         for (StaticAbility stAb : staticsForLayer) {
             dependencyGraph.addVertex(stAb);
+
+            if (isResolved.test(stAb)) {
+                continue;
+            }
 
             boolean exists = stAb.getHostCard().getStaticAbilities().contains(stAb);
             boolean compareAffected = false;
@@ -1259,7 +1268,7 @@ public class GameAction {
                 affectedHere = StaticAbilityContinuous.getAffectedCards(stAb, preList);
                 compareAffected = true;
             }
-            List<Object> effectResults = generateStaticAbilityResult(layer, stAb);
+            Iterable<Object> effectResults = generateContinuousEffectChanges(layer, stAb);
 
             for (StaticAbility otherStAb : staticsForLayer) {
                 if (stAb == otherStAb) {
@@ -1279,7 +1288,8 @@ public class GameAction {
                     otherStAb.applyContinuousAbility(layer, affectedOther);
                 }
 
-                // 613.8a. An effect is said to "depend on" another if
+                // CR 613.8a An effect is said to "depend on" another if
+                // * (a) + (c) already handled *
                 // (b) applying the other would change the text or the existence of the first effect...
                 boolean dependency = exists != stAb.getHostCard().getStaticAbilities().contains(stAb);
                 // ...what it applies to...
@@ -1289,7 +1299,7 @@ public class GameAction {
                 }
                 // ...or what it does to any of the things it applies to
                 if (!dependency) {
-                    List<Object> effectResultsAfterOther = generateStaticAbilityResult(layer, stAb);
+                    Iterable<Object> effectResultsAfterOther = generateContinuousEffectChanges(layer, stAb);
                     dependency = !effectResults.equals(effectResultsAfterOther);
                 }
 
@@ -1311,12 +1321,12 @@ public class GameAction {
             // when lucky the effect with the earliest timestamp has no dependency
             // then we can safely return it - otherwise we need to build the whole graph
             // because it might still be part of a loop
-            if (dependencyGraph.edgeSet().isEmpty() && stAb == staticsForLayer.get(0)) {
+            if (dependencyGraph.edgeSet().isEmpty() && stAb == first) {
                 return stAb;
             }
         }
 
-        // 613.8b. If several dependent effects form a dependency loop, then this rule is ignored
+        // CR 613.8b If several dependent effects form a dependency loop, then this rule is ignored
         List<List<StaticAbility>> cycles = new SzwarcfiterLauerSimpleCycles<>(dependencyGraph).findSimpleCycles();
         for (List<StaticAbility> cyc : cycles) {
             for (int i = 0 ; i < cyc.size() - 1 ; i++) {
@@ -1342,12 +1352,13 @@ public class GameAction {
         return statics.get(0);
     }
 
-    private List<Object> generateStaticAbilityResult(StaticAbilityLayer layer, StaticAbility stAb) {
-        List<Object> results = Lists.newArrayList();
+    private Iterable<Object> generateContinuousEffectChanges(StaticAbilityLayer layer, StaticAbility stAb) {
+        List<Object> result = Collections.EMPTY_LIST;
         if (layer == StaticAbilityLayer.CONTROL) {
-            results.addAll(AbilityUtils.getDefinedPlayers(stAb.getHostCard(), stAb.getParam("GainControl"), stAb));
+            result = Lists.newArrayList();
+            result.addAll(AbilityUtils.getDefinedPlayers(stAb.getHostCard(), stAb.getParam("GainControl"), stAb));
         }
-        return results;
+        return result;
     }
 
     public final boolean checkStateEffects(final boolean runEvents) {
@@ -1538,7 +1549,7 @@ public class GameAction {
 
             if (desCreats != null) {
                 if (desCreats.size() > 1 && !orderedDesCreats) {
-                    desCreats = CardLists.filter(desCreats, CardPredicates.CAN_BE_DESTROYED);
+                    desCreats = CardLists.filter(desCreats, Card::canBeDestroyed);
                     if (!desCreats.isEmpty()) {
                         desCreats = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, desCreats, ZoneType.Graveyard, null);
                     }
@@ -1621,7 +1632,7 @@ public class GameAction {
         if (c.getCounters(CounterEnumType.LORE) < c.getFinalChapterNr()) {
             return false;
         }
-        if (!game.getStack().hasSourceOnStack(c, SpellAbilityPredicates.isChapter())) {
+        if (!game.getStack().hasSourceOnStack(c, SpellAbility::isChapter)) {
             sacrificeList.add(c);
             checkAgain = true;
         }
@@ -1667,7 +1678,7 @@ public class GameAction {
         }
         // 704.5v If a battle has defense 0 and it isn't the source of an ability that has triggered but not yet left the stack,
         // it’s put into its owner’s graveyard.
-        if (!game.getStack().hasSourceOnStack(c, SpellAbilityPredicates.isTrigger())) {
+        if (!game.getStack().hasSourceOnStack(c, SpellAbility::isTrigger)) {
             removeList.add(c);
             checkAgain = true;
         }
@@ -2428,8 +2439,7 @@ public class GameAction {
                                 Localizer.getInstance().getMessage("lblChooseNColors", Lang.getNumeral(2));
                         SpellAbility sa = new SpellAbility.EmptySa(ApiType.ChooseColor, c, takesAction);
                         sa.putParam("AILogic", "MostProminentInComputerDeck");
-                        ColorSet chosenColors = ColorSet.fromNames(takesAction.getController().chooseColors(prompt, sa, 2, 2, MagicColor.Constant.ONLY_COLORS));
-                        c.setMarkedColors(chosenColors);
+                        c.setMarkedColors(takesAction.getController().chooseColors(prompt, sa, 2, 2, ColorSet.WUBRG));
                     }
                 }
             }

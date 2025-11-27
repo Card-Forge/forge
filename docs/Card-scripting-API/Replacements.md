@@ -1,90 +1,82 @@
-Replacement create replacement effects, as you'd expect. Their script
-follows the format introduced by AbilityFactory; simply begin a line
-with "R:", to indicate that it's for a replacement effect, followed by a
-collection of name-value pairs (name and value are separated by $)
-separated by pipes (|). All Replacement effects expect an "Event$"
-parameter, which declares what event should be replaced. Most replacement effects will also have a "ReplaceWith$" parameter which points to an SVar which contains what should replace the event. They may have a "Prevent$True" parameter, instead though, which means that nothing happens instead of the event.
+This page covers how to create replacement effects.  
+The base syntax looks like this:
 
-Similarly to triggers, the replacing code can access special variables
-pertaining to the event it replaced (like triggered-variables). These
-are specific to each event, and is listed below. Most replacement effects
-will also have a "Description$" parameter which is simply the card text
-for the ability.
+`R:Event$ <ReplacementType> | <Type-specific params> | [Description$ {String}]`
 
-## DamageDone
+- `ReplacementType` is the event being replaced
+- Most replacement effects will also have a `ReplaceWith$` parameter which points to an SVar which contains the subability that should replace the event
+- `Layer$ {CantHappen/Control/Copy/Transform}` is optional and needs to be set if the effect is ordered to happen before others. <br />Notable `CantHappen` is Forge's way to handle [CR 614.17](https://yawgatog.com/resources/magic-rules/#R61417), though not available for every replacement since some are also implemented as [Statics](Statics.md) instead
 
-DamageDone events are checked when damage is about to be assigned to a
-card or player. There are 5 special parameters:
+Similarly to triggers, the replacing code can access special variables pertaining to the event it replaced. These are specific to each event, and the most common ones are listed below.
 
-  - ValidSource - The damage source must match this for the event to be
-    replaced.
-  - ValidTarget - The damage target must match this for the event to be
-    replaced.
-  - DamageAmount - The amount of damage must match this.
-  - IsCombat - If true, the damage must be combat damage, if false, it
-    can't be.
-  - IsEquipping - If true, the host card must be equipping something.
+# AddCounter
 
-There are 3 Replaced-variables:
+# BeginPhase / BeginTurn
 
-  - DamageAmount - The amount of damage to be assigned.
-  - Target - The target of the damage.
-  - Source - The source of the damage.
+# CreateToken
 
-## Discard
+# DamageDone
+This event gets checked when damage is about to be assigned to a card or player.
 
-Discard events are checked when a player is about to discard a card.
-There are 4 special parameters:
+They may have a `Prevent$ True` parameter instead of an `Execute$` though, which means that nothing happens instead of the event.
 
-  - ValidPlayer - The player who would discard must match this.
-  - ValidCard - The the card that would be discarded must match this.
-  - ValidSource - The card causing the discard must match this.
-  - DiscardFromEffect - If true, only discards caused by spells/effects
-    will be replaced. Cleanup/statebased discards will not.
+Parameters:
+- `ValidSource` - The damage source must match this for the event to be replaced
+- `ValidTarget` - The damage target must match this for the event to be replaced
+- `DamageAmount` - The amount of damage must match this
+- `IsCombat` - If true, the damage must be combat damage, if false, it can't be
 
-There are 2 Replaced-variables:
+ReplacedObjects:
+- `DamageAmount` - The amount of damage to be assigned
+- `Target` - The target of the damage
+- `Source` - The source of the damage
 
-  - Card - The card that would be discarded.
-  - Player - The player that would have discarded
+# Destroy
 
-## Draw
+# Discard
+This event gets checked when a player is about to discard a card.
 
-Draw events are checked when a player is about to draw a card. There is
-1 special parameter:
+Parameters:
+- `ValidPlayer` - The player who would discard must match this
+- `ValidCard` - The card that would be discarded must match this
+- `ValidSource` - The card causing the discard must match this
+- DiscardFromEffect - If true, only discards caused by spells/effects will be replaced. Cleanup/statebased discards will not.
 
-  - ValidPlayer - The player who would draw must match this.
+ReplacedObjects:
+- `Card` - The card that would be discarded
+- `Player` - The player that would have discarded
 
-There are no Replaced-variables.
+# Draw
+This events gets checked when a player is about to draw a card.
 
-## GainLife
+Parameters:
+- `ValidPlayer` - The player who would draw must match this
 
-GainLife events are checked when a player would gain life. There is 1
-special parameter:
+# GainLife
+This events gets checked when a player would gain life.
 
-  - ValidPlayer - The player who would gain life must match this.
+Parameters:
+- `ValidPlayer` - The player who would gain life must match this
 
-There is 1 Replaced-variable:
+# GameLoss
+This event gets checked when a player would lose.
 
-  - LifeGained - The amount of damage to be gained.
+Parameters:
+- `ValidPlayer` - The player who would lose must match this
 
-## GameLoss
+# LoseMana
 
-GameLoss events are checked when a player would lose. There is 1 special
-parameter:
+# ProduceMana
 
-  - ValidPlayer - The player who would lose must match this.
+# Moved
+This event gets checked when a card would be moved between zones.
 
-There are no Replaced-variables.
+Parameters:
+- `ValidCard` - The moving card must match this
+- `Origin` - The card must be moving from this zone
+- `Destination` - The card must be moving to this zone
 
-## Moved
+ReplacedObjects:
+- `Card` - The moving card
 
-Moved events are checked when a card would be moved between zones. There
-are 3 special parameters:
-
-  - ValidCard - The moving card must match this.
-  - Origin - The card must be moving from this zone.
-  - Destination - The card must be moving to this zone.
-
-There is 1 Replaced-variable:
-
-  - Card - The moving card.
+# Untap

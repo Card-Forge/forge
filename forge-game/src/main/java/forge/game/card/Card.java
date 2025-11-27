@@ -67,6 +67,7 @@ import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 
 import static java.lang.Math.max;
 
@@ -172,7 +173,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     // don't use Enum Set Values or it causes a slow down
     private final Multimap<Long, Keyword> cantHaveKeywords = MultimapBuilder.hashKeys().hashSetValues().build();
 
-    private final Map<CounterType, Long> counterTypeTimestamps = Maps.newHashMap();
+    private final Map<CounterType, StaticAbility> counterTypeKeywordStatic = Maps.newHashMap();
 
     private final Map<Long, Integer> canBlockAdditional = Maps.newTreeMap();
     private final Set<Long> canBlockAny = Sets.newHashSet();
@@ -1817,9 +1818,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             getGame().addCounterAddedThisTurn(source, counterType, this, addAmount);
             view.updateCounters(this);
         }
-        if (newValue <= 0) {
-            removeCounterTimestamp(counterType);
-        } else if (addCounterTimestamp(counterType, false)) {
+        if (createCounterStatic(counterType)) {
             updateKeywords();
         }
         if (table != null) {
@@ -1827,55 +1826,29 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
     }
 
-    public boolean addCounterTimestamp(CounterType counterType) {
-        return addCounterTimestamp(counterType, true);
-    }
-    public boolean addCounterTimestamp(CounterType counterType, boolean updateView) {
+    public boolean createCounterStatic(CounterType counterType) {
+        StaticAbility result;
         if (counterType.is(CounterEnumType.MANABOND)) {
-            removeCounterTimestamp(counterType);
+            result = counterTypeKeywordStatic.computeIfAbsent(counterType, ct -> {
+                String s = "Mode$ Continuous | AffectedDefined$ Self | EffectZone$ All | AddType$ Land | RemoveCardTypes$ True | RemoveSubTypes$ True | RemoveAllAbilities$ True | AddAbility$ ManaReflected";
+                StaticAbility stAb = StaticAbility.create(s, this, currentState, true);
+                String abStr = "AB$ ManaReflected | Cost$ T | Valid$ Defined.Self | ColorOrType$ Color | ReflectProperty$ Is | SpellDescription$ Add one mana of any of this card's colors.";
+                stAb.setSVar("ManaReflected", abStr);
+                return stAb;
+            });
+        } else if (counterType.isKeywordCounter()) {
+            result = counterTypeKeywordStatic.computeIfAbsent(counterType, ct -> {
+                return StaticAbility.create("Mode$ Continuous | AffectedDefined$ Self | EffectZone$ All | AddKeyword$ " + ct.toString(), this, currentState, true);
+            });
 
-            long timestamp = game.getNextTimestamp();
-            counterTypeTimestamps.put(counterType, timestamp);
-            // becomes land in instead of other card types
-            addChangedCardTypes(new CardType(ImmutableList.of("Land"), false), null, false,
-                    EnumSet.of(RemoveType.CardTypes, RemoveType.SubTypes),
-                    timestamp, 0, updateView, false);
-
-            String abStr = "AB$ ManaReflected | Cost$ T | Valid$ Defined.Self | ColorOrType$ Color | ReflectProperty$ Is | SpellDescription$ Add one mana of any of this card's colors.";
-
-            SpellAbility sa = AbilityFactory.getAbility(abStr, this);
-            sa.setIntrinsic(false);
-
-            addChangedCardTraits(ImmutableList.of(sa), null, null, null, null, true, false, timestamp, 0);
-            return true;
-        }
-        if (!counterType.isKeywordCounter()) {
+            if (!Keyword.smartValueOf(counterType.toString().split(":")[0]).isMultipleRedundant()) {
+                result.putParam("KeywordMultiplier", String.valueOf(getCounters(counterType)));
+            }
+        } else {
             return false;
         }
-        removeCounterTimestamp(counterType);
-
-        long timestamp = game.getNextTimestamp();
-        counterTypeTimestamps.put(counterType, timestamp);
-
-        int num = 1;
-        if (!Keyword.smartValueOf(counterType.toString().split(":")[0]).isMultipleRedundant()) {
-            num = getCounters(counterType);
-        }
-        addChangedCardKeywords(Collections.nCopies(num, counterType.toString()), null, false, timestamp, null, updateView);
+        result.putParam("Timestamp", String.valueOf(game.getNextTimestamp()));
         return true;
-    }
-
-    public boolean removeCounterTimestamp(CounterType counterType) {
-        return removeCounterTimestamp(counterType, true);
-    }
-    public boolean removeCounterTimestamp(CounterType counterType, boolean updateView) {
-        Long old = counterTypeTimestamps.remove(counterType);
-        if (old != null) {
-            removeChangedCardTypes(old, 0, updateView);
-            removeChangedCardTraits(old, 0);
-            removeChangedCardKeywords(old, 0, updateView);
-        }
-        return old != null;
     }
 
     @Override
@@ -1917,10 +1890,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         setCounters(counterName, newValue);
         view.updateCounters(this);
 
-        if (newValue <= 0) {
-            if (removeCounterTimestamp(counterName, false)) {
-                updateKeywords();
-            }
+        if (newValue <= 0 && (counterName.is(CounterEnumType.MANABOND) || counterName.isKeywordCounter())) {
+            updateKeywords();
         }
 
         //fire card stats changed event if p/t bonuses or loyalty changed from subtracted counters
@@ -1951,18 +1922,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     @Override
     public final void setCounters(final Map<CounterType, Integer> allCounters) {
-        boolean changed = false;
-        for (CounterType ct : counters.keySet()) {
-            if (removeCounterTimestamp(ct, false)) {
-                changed = true;
-            }
-        }
+        boolean changed = counters.containsKey(CounterEnumType.MANABOND) || counters.keySet().stream().allMatch(CounterType::isKeywordCounter);
         counters = allCounters;
         view.updateCounters(this);
 
-        for (CounterType ct : counters.keySet()) {
-            if (addCounterTimestamp(ct, false)) {
-                changed = true;
+        if (!isLKI()) {
+            for (CounterType ct : counters.keySet()) {
+                if (createCounterStatic(ct)) {
+                    changed = true;
+                }
             }
         }
         if (changed) {
@@ -1973,15 +1941,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     @Override
     public final void clearCounters() {
         if (counters.isEmpty()) { return; }
+        boolean changed = counters.containsKey(CounterEnumType.MANABOND) || counters.keySet().stream().allMatch(CounterType::isKeywordCounter);
+
         counters.clear();
         view.updateCounters(this);
 
-        boolean changed = false;
-        for (CounterType ct : Lists.newArrayList(counterTypeTimestamps.keySet())) {
-            if (removeCounterTimestamp(ct, false)) {
-                changed = true;
-            }
-        }
         if (changed) {
             updateKeywords();
         }
@@ -3586,7 +3550,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             if (ck.isRemoveNonMana()) {
                 // List only has nonMana
                 if (null == mana) {
-                    list.removeIf(SpellAbilityPredicates.isManaAbility().negate());
+                    list.removeIf(Predicate.not(SpellAbility::isManaAbility));
                 } else if (false == mana) {
                     list.clear();
                 }
@@ -4058,11 +4022,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final CardCollectionView getEquippedBy() {
-        return CardLists.filter(getAttachedCards(), CardPredicates.EQUIPMENT);
+        return CardLists.filter(getAttachedCards(), Card::isEquipment);
     }
 
     public final boolean isEquipped() {
-        return getAttachedCards().anyMatch(CardPredicates.EQUIPMENT);
+        return getAttachedCards().anyMatch(Card::isEquipment);
     }
     public final boolean isEquippedBy(Card c) {
         return this.hasCardAttachment(c);
@@ -4211,7 +4175,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         getGame().fireEvent(new GameEventCardAttachment(this, entity, null));
 
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Attach, this);
+        runParams.put(AbilityKey.AttachSource, this);
         runParams.put(AbilityKey.Object, old);
         getGame().getTriggerHandler().runTrigger(TriggerType.Unattach, runParams, false);
 
@@ -4353,22 +4317,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (updateView) {
             updateTypesForView();
         }
-    }
-
-    public final void addChangedCardTypes(final Iterable<String> types, final Iterable<String> removeTypes, final boolean addAllCreatureTypes,
-            final Set<RemoveType> remove,
-            final long timestamp, final long staticId, final boolean updateView, final boolean cda) {
-        CardType addType = null;
-        CardType removeType = null;
-        if (types != null) {
-            addType = new CardType(types, true);
-        }
-
-        if (removeTypes != null) {
-            removeType = new CardType(removeTypes, true);
-        }
-
-        addChangedCardTypes(addType, removeType, addAllCreatureTypes, remove, timestamp, staticId, updateView, cda);
     }
 
     public final void removeChangedCardTypes(final long timestamp, final long staticId) {
@@ -6785,7 +6733,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
             String effect = "Mode$ CantBlock | ValidCard$ Creature.Self | Description$ CARDNAME can't block.";
             suspectedStatic.setSVar("SuspectedCantBlockBy", effect);
-
         } else {
             suspectedStatic = null;
         }
@@ -7290,6 +7237,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         // Suspected
         if (this.isInPlay() && this.isSuspected()) {
             result.add(suspectedStatic);
+        }
+        for (Map.Entry<CounterType, StaticAbility> e : this.counterTypeKeywordStatic.entrySet()) {
+            if (this.getCounters(e.getKey()) > 0) {
+                result.add(e.getValue());
+            }
         }
         return result;
     }
@@ -8384,5 +8336,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         setChangedCardTraitsByText(in.getChangedCardTraitsByText());
         setChangedCardKeywordsByText(in.getChangedCardKeywordsByText());
+
+        for (Map.Entry<CounterType, StaticAbility> e : in.counterTypeKeywordStatic.entrySet()) {
+            this.counterTypeKeywordStatic.put(e.getKey(), e.getValue().copy(this, true));
+        }
     }
 }
