@@ -36,17 +36,20 @@ public class AlterAttributeAi extends SpellAbilityAi {
                     case "Suspect":
                     case "Suspected":
                         // below, Suspected is treated as better, so target own beefy stuff for now to give it Menace
-                        CardCollection creaturesOTB = aiPlayer.getCreaturesInPlay();
-                        if (!creaturesOTB.isEmpty()) {
-                            Card bestTgt = ComputerUtilCard.getBestAI(CardLists.filter(creaturesOTB,
+                        CardCollection targetableCards = CardLists.getTargetableCards(aiPlayer.getCreaturesInPlay(), sa);
+                        if (!targetableCards.isEmpty()) {
+                            Card bestTgt = ComputerUtilCard.getBestAI(CardLists.filter(targetableCards,
                                     CardPredicates.hasKeyword(Keyword.MENACE).negate()));
                             if (bestTgt == null) {
-                                bestTgt = ComputerUtilCard.getBestAI(aiPlayer.getCreaturesInPlay());
+                                bestTgt = ComputerUtilCard.getBestAI(targetableCards);
                             }
                             sa.resetTargets();
                             sa.getTargets().add(bestTgt);
                             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                         }
+                        // TODO: Improve to suspect opposing chump blockers and creatures with Defender or Vigilance,
+                        // and to also prefer own biggest tapped attackers that aren't already suspected if this trigger
+                        // happens during an attack.
                         break;
                 }
             }
