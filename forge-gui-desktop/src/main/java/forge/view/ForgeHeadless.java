@@ -313,6 +313,8 @@ public class ForgeHeadless {
 
     private static class HeadlessPlayerController extends forge.ai.PlayerControllerAi {
         private final java.util.Scanner scanner = new java.util.Scanner(System.in);
+        private List<SpellAbility> cachedActions = null;
+        private int cachedActionTurn = -1;
 
         public HeadlessPlayerController(Game game, Player player, forge.ai.LobbyPlayerAi lobbyPlayer) {
             super(game, player, lobbyPlayer);
@@ -418,6 +420,14 @@ public class ForgeHeadless {
         }
 
         private List<SpellAbility> getPossibleSpellAbilities() {
+            int currentTurn = getGame().getPhaseHandler().getTurn();
+
+            // Return cached list if still valid
+            if (cachedActions != null && cachedActionTurn == currentTurn) {
+                return cachedActions;
+            }
+
+            // Rebuild and cache
             List<SpellAbility> allAbilities = new ArrayList<>();
 
             // Get available lands to play
@@ -442,7 +452,67 @@ public class ForgeHeadless {
                 }
             }
 
+            // Cache the result
+            cachedActions = allAbilities;
+            cachedActionTurn = currentTurn;
+
             return allAbilities;
+        }
+
+        private JsonObject getPossibleActionsJson() {
+            List<SpellAbility> actions = getPossibleSpellAbilities();
+            JsonObject result = new JsonObject();
+            JsonArray actionsList = new JsonArray();
+
+            for (SpellAbility sa : actions) {
+                JsonObject action = new JsonObject();
+                Card source = sa.getHostCard();
+
+                // Determine action type
+                if (source != null && source.isLand() && sa.isSpell()) {
+                    action.addProperty("type", "play_land");
+                    action.addProperty("card_id", source.getId());
+                    action.addProperty("card_name", source.getName());
+                } else if (sa.isSpell()) {
+                    action.addProperty("type", "cast_spell");
+                    action.addProperty("card_id", source != null ? source.getId() : -1);
+                    action.addProperty("card_name", source != null ? source.getName() : "Unknown");
+                    action.addProperty("ability_description", sa.getDescription());
+                    action.addProperty("mana_cost", sa.getPayCosts() != null ? sa.getPayCosts().toSimpleString() : "");
+
+                    // Add target information
+                    if (sa.usesTargeting()) {
+                        forge.game.spellability.TargetRestrictions tgt = sa.getTargetRestrictions();
+                        if (tgt != null) {
+                            action.addProperty("requires_targets", true);
+                            action.addProperty("target_min", tgt.getMinTargets(sa.getHostCard(), sa));
+                            action.addProperty("target_max", tgt.getMaxTargets(sa.getHostCard(), sa));
+                            action.addProperty("target_zone", tgt.getZone() != null ? tgt.getZone().toString() : "any");
+                        }
+                    } else {
+                        action.addProperty("requires_targets", false);
+                    }
+                } else {
+                    action.addProperty("type", "activate_ability");
+                    action.addProperty("card_id", source != null ? source.getId() : -1);
+                    action.addProperty("card_name", source != null ? source.getName() : "Unknown");
+                    action.addProperty("ability_description", sa.getDescription());
+                    action.addProperty("mana_cost",
+                            sa.getPayCosts() != null ? sa.getPayCosts().toSimpleString() : "no cost");
+                    action.addProperty("requires_targets", sa.usesTargeting());
+                }
+
+                actionsList.add(action);
+            }
+
+            // Always available: pass priority
+            JsonObject passAction = new JsonObject();
+            passAction.addProperty("type", "pass_priority");
+            actionsList.add(passAction);
+
+            result.add("actions", actionsList);
+            result.addProperty("count", actionsList.size());
+            return result;
         }
 
         @Override
@@ -511,7 +581,7 @@ public class ForgeHeadless {
                     System.out.println(gson.toJson(extractGameState(getGame())));
                 } else if (command.equals("possible_actions") || command.equals("pa")) {
                     Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                    System.out.println(gson.toJson(getPossibleActions(player, getGame())));
+                    System.out.println(gson.toJson(getPossibleActionsJson()));
                 } else if (command.equals("play_action") || command.equals("play")) {
                     if (parts.length < 2) {
                         System.out.println("Usage: play_action|play <index>");
@@ -537,6 +607,7 @@ public class ForgeHeadless {
                         System.out.println("Invalid action index. Please provide a number.");
                     }
                 } else if (command.equals("pass_priority") || command.equals("pp") || command.equals("pass")) {
+                    cachedActions = null; // Invalidate cache
                     return null; // Pass priority
                 } else if (command.equals("concede") || command.equals("c")) {
                     System.exit(0);
