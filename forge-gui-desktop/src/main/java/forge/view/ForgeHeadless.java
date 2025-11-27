@@ -4,8 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpServer;
+
 import forge.deck.Deck;
-import forge.deck.DeckgenUtil;
 import forge.game.Game;
 import forge.game.GameRules;
 import forge.game.GameType;
@@ -37,12 +40,18 @@ import java.util.List;
 import java.io.PrintStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+
 import forge.game.event.*;
 import forge.game.GameEntity;
 import forge.util.collect.FCollectionView;
 import forge.game.player.DelayedReveal;
 import java.util.Map;
-import java.util.Collection;
 
 public class ForgeHeadless {
     // ANSI Color Constants
@@ -56,6 +65,13 @@ public class ForgeHeadless {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
     public static final String ANSI_BOLD = "\u001B[1m";
+
+    // Server & State
+    private static final int PORT = 8081;
+    private static final BlockingQueue<String> inputQueue = new LinkedBlockingQueue<>();
+    private static volatile Game currentGame = null;
+    private static volatile String currentPromptType = "none"; // "action", "target", "none"
+    private static volatile JsonObject currentPromptData = new JsonObject();
 
     public static void main(String[] args) {
         System.err.println("DEBUG: ForgeHeadless main started");
@@ -84,10 +100,12 @@ public class ForgeHeadless {
             }
         }
 
+        // Start HTTP Server
+        startHttpServer();
+
         GuiBase.setInterface(new HeadlessGui());
         FModel.initialize(null, null);
 
-        // Generate Decks
         // Generate Decks
         Deck deck1 = new Deck("Manual Test Deck");
         for (int i = 0; i < 20; i++)
@@ -128,8 +146,134 @@ public class ForgeHeadless {
         GameRules rules = new GameRules(GameType.Constructed);
         Match match = new Match(rules, players, "Headless Match");
         Game game = match.createGame();
+        currentGame = game;
 
         runGame(match, game, player1IsHuman, player2IsHuman, verboseLogging);
+    }
+
+    private static void startHttpServer() {
+        try {
+            HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
+            
+            // GET /state
+            server.createContext("/state", exchange -> {
+                if (!"GET".equals(exchange.getRequestMethod())) {
+                    sendResponse(exchange, 405, "Method Not Allowed");
+                    return;
+                }
+                if (currentGame == null) {
+                    sendResponse(exchange, 503, "Game not started");
+                    return;
+                }
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                String response = gson.toJson(extractGameState(currentGame));
+                sendResponse(exchange, 200, response);
+            });
+
+            // GET /input
+            server.createContext("/input", exchange -> {
+                if (!"GET".equals(exchange.getRequestMethod())) {
+                    sendResponse(exchange, 405, "Method Not Allowed");
+                    return;
+                }
+                JsonObject response = new JsonObject();
+                response.addProperty("type", currentPromptType);
+                response.add("data", currentPromptData);
+                sendResponse(exchange, 200, response.toString());
+            });
+
+            // POST /action
+            server.createContext("/action", exchange -> {
+                if (!"POST".equals(exchange.getRequestMethod())) {
+                    sendResponse(exchange, 405, "Method Not Allowed");
+                    return;
+                }
+                String body = readRequestBody(exchange);
+                try {
+                    JsonObject json = JsonParser.parseString(body).getAsJsonObject();
+                    if (json.has("index")) {
+                        int index = json.get("index").getAsInt();
+                        inputQueue.offer("play_action " + index);
+                        sendResponse(exchange, 200, "Action queued");
+                    } else {
+                        sendResponse(exchange, 400, "Missing 'index' field");
+                    }
+                } catch (Exception e) {
+                    sendResponse(exchange, 400, "Invalid JSON");
+                }
+            });
+
+            // POST /target
+            server.createContext("/target", exchange -> {
+                if (!"POST".equals(exchange.getRequestMethod())) {
+                    sendResponse(exchange, 405, "Method Not Allowed");
+                    return;
+                }
+                String body = readRequestBody(exchange);
+                try {
+                    JsonObject json = JsonParser.parseString(body).getAsJsonObject();
+                    if (json.has("index")) {
+                        int index = json.get("index").getAsInt();
+                        inputQueue.offer(String.valueOf(index));
+                        sendResponse(exchange, 200, "Target selection queued");
+                    } else {
+                        sendResponse(exchange, 400, "Missing 'index' field");
+                    }
+                } catch (Exception e) {
+                    sendResponse(exchange, 400, "Invalid JSON");
+                }
+            });
+
+            // POST /control
+            server.createContext("/control", exchange -> {
+                if (!"POST".equals(exchange.getRequestMethod())) {
+                    sendResponse(exchange, 405, "Method Not Allowed");
+                    return;
+                }
+                String body = readRequestBody(exchange);
+                try {
+                    JsonObject json = JsonParser.parseString(body).getAsJsonObject();
+                    if (json.has("command")) {
+                        String cmd = json.get("command").getAsString();
+                        inputQueue.offer(cmd);
+                        sendResponse(exchange, 200, "Command queued");
+                    } else {
+                        sendResponse(exchange, 400, "Missing 'command' field");
+                    }
+                } catch (Exception e) {
+                    sendResponse(exchange, 400, "Invalid JSON");
+                }
+            });
+
+            server.setExecutor(null);
+            server.start();
+            System.out.println("HTTP Server started on port " + PORT);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Failed to start HTTP server. Exiting.");
+            System.exit(1);
+        }
+    }
+
+    private static void sendResponse(HttpExchange exchange, int statusCode, String response) throws IOException {
+        byte[] bytes = response.getBytes(StandardCharsets.UTF_8);
+        exchange.getResponseHeaders().set("Content-Type", "application/json");
+        exchange.sendResponseHeaders(statusCode, bytes.length);
+        try (OutputStream os = exchange.getResponseBody()) {
+            os.write(bytes);
+        }
+    }
+
+    private static String readRequestBody(HttpExchange exchange) throws IOException {
+        try (InputStreamReader reader = new InputStreamReader(exchange.getRequestBody(), StandardCharsets.UTF_8)) {
+            StringBuilder sb = new StringBuilder();
+            char[] buffer = new char[1024];
+            int read;
+            while ((read = reader.read(buffer)) != -1) {
+                sb.append(buffer, 0, read);
+            }
+            return sb.toString();
+        }
     }
 
     private static void printUsage() {
@@ -142,14 +286,7 @@ public class ForgeHeadless {
         System.out.println("  --p2-human      Player 2 is human-controlled (default: AI)");
         System.out.println("  --verbose       Enable verbose logging of game events");
         System.out.println("  --help          Show this help message");
-        System.out.println("\nDefault: Player 1 human-controlled, Player 2 AI-controlled");
-        System.out.println("\nAvailable interactive commands:");
-        System.out.println("  get_state (gs)          - View current game state as JSON");
-        System.out.println("  possible_actions (pa)   - List all available actions");
-        System.out.println("  play_action <index>     - Execute the action at given index");
-        System.out.println("    (play <index>)");
-        System.out.println("  pass_priority (pp|pass) - Pass priority without taking action");
-        System.out.println("  concede (c)             - Exit the game");
+        System.out.println("\nHTTP Server running on port " + PORT);
     }
 
     private static void initialize() {
@@ -174,6 +311,7 @@ public class ForgeHeadless {
         state.addProperty("turn", game.getPhaseHandler().getTurn());
         state.addProperty("phase", game.getPhaseHandler().getPhase().toString());
         state.addProperty("activePlayerId", game.getPhaseHandler().getPlayerTurn().getId());
+        state.addProperty("priorityPlayerId", game.getPhaseHandler().getPlayerTurn().getId()); // Approximate
 
         // Stack - show what spells/abilities are on the stack
         JsonArray stackArray = new JsonArray();
@@ -312,7 +450,6 @@ public class ForgeHeadless {
     }
 
     private static class HeadlessPlayerController extends forge.ai.PlayerControllerAi {
-        private final java.util.Scanner scanner = new java.util.Scanner(System.in);
         private List<SpellAbility> cachedActions = null;
         private int cachedActionTurn = -1;
 
@@ -325,8 +462,11 @@ public class ForgeHeadless {
             return true; // Always keep hand
         }
 
-        private <T extends GameEntity> void printTargetOptions(FCollectionView<T> optionList, int min, int max,
-                String title) {
+        // TODO: Implement manual control for declaring attackers and blockers.
+        // Currently, this class extends PlayerControllerAi, which handles combat automatically.
+        // To support manual combat, we need to override declareAttackers, declareBlockers, etc.
+
+        private <T extends GameEntity> JsonObject createTargetOptionsJson(FCollectionView<T> optionList, int min, int max, String title) {
             JsonObject result = new JsonObject();
             result.addProperty("min", min);
             result.addProperty("max", max);
@@ -348,9 +488,7 @@ public class ForgeHeadless {
                 options.add(option);
             }
             result.add("targets", options);
-
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            System.out.println("Targets required: " + gson.toJson(result));
+            return result;
         }
 
         @Override
@@ -366,25 +504,27 @@ public class ForgeHeadless {
         public <T extends GameEntity> List<T> chooseEntitiesForEffect(FCollectionView<T> optionList, int min, int max,
                 DelayedReveal delayedReveal, SpellAbility sa, String title, Player targetedPlayer,
                 Map<String, Object> params) {
-            printTargetOptions(optionList, min, max, title);
+            
+            // Update global prompt state
+            currentPromptType = "target";
+            currentPromptData = createTargetOptionsJson(optionList, min, max, title);
+            
+            System.out.println("Waiting for target selection via HTTP...");
 
             List<T> selected = new ArrayList<>();
             List<T> options = new ArrayList<>();
             for (T t : optionList)
                 options.add(t);
 
-            if (options.isEmpty())
+            if (options.isEmpty()) {
+                currentPromptType = "none";
                 return selected;
+            }
 
             while (selected.size() < max) {
-                if (selected.size() >= min) {
-                    System.out.print("Choose target index (" + selected.size() + "/" + max + ") or -1 to finish: ");
-                } else {
-                    System.out.print("Choose target index (" + selected.size() + "/" + max + "): ");
-                }
-
                 try {
-                    String input = scanner.nextLine();
+                    // Block waiting for input
+                    String input = inputQueue.take();
                     int index = Integer.parseInt(input.trim());
 
                     if (index == -1) {
@@ -396,26 +536,25 @@ public class ForgeHeadless {
 
                     if (index >= 0 && index < options.size()) {
                         T target = options.get(index);
-                        // For now, allow selecting same target multiple times if game rules allow
-                        // (engine validates?)
-                        // Actually, usually you can't target same thing twice for same instance unless
-                        // specified
-                        // But let's just add it and let engine/player handle it.
-                        // Better: check if already selected
                         if (!selected.contains(target)) {
                             selected.add(target);
                             if (selected.size() == max)
-                                break; // Auto-finish if max reached
+                                break; 
                         } else {
                             System.out.println("Already selected.");
                         }
                     } else {
                         System.out.println("Invalid index.");
                     }
-                } catch (Exception e) {
-                    System.out.println("Invalid input.");
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    break;
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input received: " + e.getMessage());
                 }
             }
+            
+            currentPromptType = "none";
             return selected;
         }
 
@@ -524,11 +663,6 @@ public class ForgeHeadless {
             forge.game.spellability.TargetRestrictions tgt = sa.getTargetRestrictions();
             List<GameEntity> candidates = tgt.getAllCandidates(sa, true);
 
-            // Filter out candidates that are already targeted if unique targets are
-            // required?
-            // getAllCandidates might return everything valid.
-            // But chooseEntitiesForEffect handles selection.
-
             forge.util.collect.FCollection<GameEntity> optionList = new forge.util.collect.FCollection<>();
             optionList.addAll(candidates);
 
@@ -539,7 +673,6 @@ public class ForgeHeadless {
             List<GameEntity> chosen = chooseEntitiesForEffect(optionList, min, max, null, sa, title, player, null);
 
             if (chosen.size() < min) {
-                // User cancelled or didn't pick enough
                 return false;
             }
 
@@ -552,7 +685,6 @@ public class ForgeHeadless {
 
         @Override
         public boolean playChosenSpellAbility(SpellAbility sa) {
-            // setupTargets will call chooseTargetsFor for the ability and its sub-abilities
             if (!sa.setupTargets()) {
                 return false;
             }
@@ -561,59 +693,60 @@ public class ForgeHeadless {
 
         @Override
         public java.util.List<forge.game.spellability.SpellAbility> chooseSpellAbilityToPlay() {
+            // Update global prompt state
+            currentPromptType = "action";
+            currentPromptData = getPossibleActionsJson();
+            
+            System.out.println("Waiting for action via HTTP...");
+
             while (true) {
-                System.out.print(player.getName() + "> ");
-                String input = "";
                 try {
-                    input = scanner.nextLine();
-                } catch (java.util.NoSuchElementException e) {
-                    System.exit(0); // End of input
-                }
-
-                if (input.trim().isEmpty())
-                    continue;
-
-                String[] parts = input.split(" ");
-                String command = parts[0];
-
-                if (command.equals("get_state") || command.equals("gs")) {
-                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                    System.out.println(gson.toJson(extractGameState(getGame())));
-                } else if (command.equals("possible_actions") || command.equals("pa")) {
-                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                    System.out.println(gson.toJson(getPossibleActionsJson()));
-                } else if (command.equals("play_action") || command.equals("play")) {
-                    if (parts.length < 2) {
-                        System.out.println("Usage: play_action|play <index>");
+                    String input = inputQueue.take();
+                    
+                    if (input.trim().isEmpty())
                         continue;
-                    }
 
-                    try {
-                        int actionIndex = Integer.parseInt(parts[1]);
-                        List<SpellAbility> actions = getPossibleSpellAbilities();
+                    String[] parts = input.split(" ");
+                    String command = parts[0];
 
-                        if (actionIndex < 0 || actionIndex >= actions.size()) {
-                            System.out.println("Invalid action index: " + actionIndex + ". Valid range: 0-"
-                                    + (actions.size() - 1));
+                    if (command.equals("play_action") || command.equals("play")) {
+                        if (parts.length < 2) {
+                            System.out.println("Usage: play_action|play <index>");
                             continue;
                         }
 
-                        SpellAbility chosenAbility = actions.get(actionIndex);
-                        List<SpellAbility> result = new ArrayList<>();
-                        result.add(chosenAbility);
-                        return result;
+                        try {
+                            int actionIndex = Integer.parseInt(parts[1]);
+                            List<SpellAbility> actions = getPossibleSpellAbilities();
 
-                    } catch (NumberFormatException e) {
-                        System.out.println("Invalid action index. Please provide a number.");
+                            if (actionIndex < 0 || actionIndex >= actions.size()) {
+                                System.out.println("Invalid action index: " + actionIndex);
+                                continue;
+                            }
+
+                            SpellAbility chosenAbility = actions.get(actionIndex);
+                            List<SpellAbility> result = new ArrayList<>();
+                            result.add(chosenAbility);
+                            
+                            currentPromptType = "none";
+                            return result;
+
+                        } catch (NumberFormatException e) {
+                            System.out.println("Invalid action index.");
+                        }
+                    } else if (command.equals("pass_priority") || command.equals("pp") || command.equals("pass")) {
+                        cachedActions = null; // Invalidate cache
+                        currentPromptType = "none";
+                        return null; // Pass priority
+                    } else if (command.equals("concede") || command.equals("c")) {
+                        System.exit(0);
+                        return null;
+                    } else {
+                        System.out.println("Unknown command: " + command);
                     }
-                } else if (command.equals("pass_priority") || command.equals("pp") || command.equals("pass")) {
-                    cachedActions = null; // Invalidate cache
-                    return null; // Pass priority
-                } else if (command.equals("concede") || command.equals("c")) {
-                    System.exit(0);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
                     return null;
-                } else {
-                    System.out.println("Unknown command: " + command);
                 }
             }
         }
