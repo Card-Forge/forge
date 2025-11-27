@@ -1386,7 +1386,7 @@ public class PlayerControllerAi extends PlayerController {
     public Map<Card, ManaCostShard> chooseCardsForConvokeOrImprovise(SpellAbility sa, ManaCost manaCost, CardCollectionView untappedCards, boolean artifacts, boolean creatures, Integer maxReduction) {
         final Player ai = sa.getActivatingPlayer();
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
-        //Filter out mana sources that will interfere with payManaCost()
+        // Filter out mana sources that will interfere with payManaCost()
         CardCollection untapped = CardLists.filter(untappedCards, c -> c.getManaAbilities().isEmpty());
 
         // Filter out creatures if AI hasn't attacked yet
@@ -1399,14 +1399,14 @@ public class PlayerControllerAi extends PlayerController {
             }
         }
 
-        //Do not convoke potential blockers until after opponent's attack
-        final CardCollectionView blockers = ComputerUtilCard.getLikelyBlockers(ai, null);
         if ((ph.isPlayerTurn(ai) && ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN)) ||
                 (!ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
-            untapped.removeAll((List<?>)blockers);
-            //Add threatened creatures
-            if (!ai.getGame().getStack().isEmpty()) {
-                final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), null);
+            // Do not convoke potential blockers until after opponent's attack
+            final CardCollectionView blockers = ComputerUtil.protectRecursion(sa, () -> ComputerUtilCard.getLikelyBlockers(ai, null), CardCollection.EMPTY);
+            untapped.removeAll(blockers);
+            // Add threatened creatures
+            if (!ai.getGame().getStack().isEmpty() && !blockers.isEmpty()) {
+                final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(ai, null);
                 for (Card c : blockers) {
                     if (objects.contains(c) && (creatures || c.isArtifact())) {
                         untapped.add(c);

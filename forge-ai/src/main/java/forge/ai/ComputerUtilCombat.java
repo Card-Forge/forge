@@ -63,12 +63,6 @@ import java.util.Map;
  */
 public class ComputerUtilCombat {
 
-    // A special flag used in ComputerUtil#canRegenerate to avoid recursive reentry and stack overflow
-    private static boolean dontTestRegen = false;
-    public static void setCombatRegenTestSuppression(boolean shouldSuppress) {
-        dontTestRegen = shouldSuppress;
-    }
-
     /**
      * <p>
      * canAttackNextTurn.
@@ -1811,10 +1805,9 @@ public class ComputerUtilCombat {
                     && !blocker.hasKeyword(Keyword.INDESTRUCTIBLE)) {
                 return true;
             }
-        } // flanking
+        }
 
-        if (blocker.hasKeyword(Keyword.INDESTRUCTIBLE) || dontTestRegen
-                || ComputerUtil.canRegenerate(blocker.getController(), blocker)) {
+        if (blocker.hasKeyword(Keyword.INDESTRUCTIBLE) || ComputerUtil.canRegenerate(blocker.getController(), blocker)) {
             return false;
         }
 

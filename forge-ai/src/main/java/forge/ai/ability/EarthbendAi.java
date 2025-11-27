@@ -35,8 +35,7 @@ public class EarthbendAi extends SpellAbilityAi {
                     return false;
                 });
 
-        Card tgtLand = null;
-
+        Card tgtLand;
         if (!fetchLands.isEmpty()) {
             // Prioritize fetchlands as they can be reused later
             tgtLand = ComputerUtilCard.getBestLandToAnimate(fetchLands);
@@ -44,6 +43,7 @@ public class EarthbendAi extends SpellAbilityAi {
             tgtLand = ComputerUtilCard.getBestLandToAnimate(lands);
         }
 
+        sa.resetTargets();
         sa.getTargets().add(tgtLand);
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
