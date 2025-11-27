@@ -1,341 +1,319 @@
 # ForgeHeadless Documentation
 
 ## Overview
-ForgeHeadless is a command-line interface for running Magic: The Gathering games in a headless environment. It supports both AI vs AI simulations and interactive human gameplay modes, with comprehensive game state logging.
+ForgeHeadless is a headless Magic: The Gathering game engine. The current build exposes an embedded HTTP server so external tooling can drive the match loop, but the **long-term plan is for Java to become the HTTP client** that calls out to a custom AI service (owned by you) for every decision. Use this document as the canonical reference while we migrate to that architecture.
 
-## Installation & Setup
+- **Today**: Java hosts an HTTP API (`GET /state`, `GET /input`, etc.) so that a separate process can poll for prompts and push actions.
+- **Planned**: Java will call a configurable AI endpoint with the full game history and possible actions (PA) and expect back a chosen action/target.
+- **Goal**: Replace the old CLI/Scanner bridge with a network-friendly decision surface that lets us swap in your bespoke AI without touching the core rules engine.
+
+## Architecture
+
+### Current (v0)
+
+```
+┌─────────────────┐       HTTP        ┌──────────────────┐
+│   Your AI/LLM   │ ◄──────────────► │  ForgeHeadless   │
+│   (Python, etc) │   JSON API        │  (Java Server)   │
+└─────────────────┘                   └──────────────────┘
+                │
+                ▼
+              ┌──────────────────┐
+              │   Forge Engine   │
+              │  (Game Rules)    │
+              └──────────────────┘
+```
+
+External automations poll `GET /input` and push `POST /action`/`POST /target`. This is the bridge we just landed.
+
+### Roadmap (v1)
+
+```
+┌──────────────────┐   HTTPS (client)   ┌────────────────────┐
+│  ForgeHeadless   │ ─────────────────► │  Your AI Endpoint  │
+│   (Java Engine)  │   game_state+PA    │  (LLM/RL service)  │
+└──────────────────┘ ◄───────────────── └────────────────────┘
+    │                  action/targets
+    ▼
+  ┌──────────────────┐
+  │   Forge Engine   │
+  │  (Game Rules)    │
+  └──────────────────┘
+```
+
+In v1, Java will send serialized game state + possible actions to your hosted AI, wait for the response, and then execute it locally. The outbound call can reuse the same JSON contracts documented below; we simply flip the client/server ownership. Until that lands, keep using the embedded HTTP server for local testing.
+
+## Quick Start
 
 ### Building
 ```bash
 mvn clean install -DskipTests
 ```
 
-### Running
-```bash
-./forge-headless [options]
-```
-
-## Usage Modes
-
-### 1. AI vs AI Mode
-Run a fully automated game between two AI players:
-```bash
-./forge-headless --both-ai
-```
-
-**Output:**
-- Game progresses automatically
-- Detailed event log written to `headless_game.log`
-- Process exits when game completes
-
-### 2. Interactive Mode (Default)
-One human player against one AI player:
+### Running the Server
 ```bash
 ./forge-headless
 ```
+Server starts on **port 8081**.
 
-**Available Commands:**
-- `get_state` - Returns current game state as JSON
-- `possible_actions` - Returns all available actions as JSON
-- `play_action <index>` - Executes action at given index
-- `pass_priority` - Passes priority to opponent
-- `concede` - Concedes the game
-
-### 3. Hotseat Mode
-Two human players:
+### Testing the API
 ```bash
-./forge-headless --both-human
+# Get game state
+curl http://localhost:8081/state
+
+# Get available actions
+curl http://localhost:8081/input
+
+# Take an action (pass priority)
+curl -X POST -d '{"index": 0}' http://localhost:8081/action
 ```
 
-### 4. AI as Player 1
-AI plays as Player 1, human as Player 2:
-```bash
-./forge-headless --p1-ai
-```
+## HTTP API Reference
 
-## Game State API
+### `GET /state`
+Returns the complete game state as JSON.
 
-### `get_state` Command
-Returns comprehensive JSON representation of current game state.
-
-**Response Structure:**
+**Response:**
 ```json
 {
-  "turn": 5,
+  "turn": 1,
   "phase": "MAIN1",
-  "active_player": "Player 1",
-  "priority_player": "Player 1",
-  "stack_size": 0,
+  "activePlayerId": 0,
+  "priorityPlayerId": 0,
   "stack": [],
+  "stack_size": 0,
   "players": [
     {
       "id": 0,
       "name": "Player 1",
-      "life": 18,
-      "libraryCount": 52,
-      "hand": [...],
-      "graveyard": [...],
-      "battlefield": [...],
-      "exile": [...]
-    }
+      "life": 20,
+      "libraryCount": 53,
+      "hand": [{"name": "Mountain", "id": 7, "zone": "Hand"}, ...],
+      "graveyard": [],
+      "battlefield": [],
+      "exile": []
+    },
+    ...
   ]
 }
 ```
 
-**Card Object Structure:**
+### `GET /input`
+Returns the current prompt type and available options.
+
+**Response (when action needed):**
 ```json
 {
-  "name": "Forest",
-  "id": 12345,
-  "zone": "Battlefield"
+  "type": "action",
+  "data": {
+    "actions": [
+      {
+        "type": "play_land",
+        "card_id": 7,
+        "card_name": "Mountain"
+      },
+      {
+        "type": "cast_spell",
+        "card_id": 34,
+        "card_name": "Shock",
+        "ability_description": "CARDNAME deals 2 damage to any target.",
+        "mana_cost": "{R}",
+        "requires_targets": true,
+        "target_min": 1,
+        "target_max": 1
+      },
+      {
+        "type": "pass_priority"
+      }
+    ],
+    "count": 3
+  }
 }
 ```
 
-### `possible_actions` Command
-Returns all legal actions the current player can take.
-
-**Response Structure:**
+**Response (when target selection needed):**
 ```json
 {
-  "actions": [
-    {
-      "type": "play_land",
-      "card_id": 123,
-      "card_name": "Forest"
-    },
-    {
-      "type": "cast_spell",
-      "card_id": 456,
-      "card_name": "Lightning Bolt",
-      "ability_description": "Lightning Bolt deals 3 damage to any target.",
-      "mana_cost": "R"
-    },
-    {
-      "type": "activate_ability",
-      "card_id": 789,
-      "card_name": "Llanowar Elves",
-      "ability_description": "Add {G}.",
-      "mana_cost": "T"
-    },
-    {
-      "type": "pass_priority"
-    }
-  ],
-  "count": 4
+  "type": "target",
+  "data": {
+    "min": 1,
+    "max": 1,
+    "title": "Select targets for Shock",
+    "targets": [
+      {"index": 0, "type": "Player", "name": "Player 1", "id": 0, "life": 20},
+      {"index": 1, "type": "Player", "name": "AI Player 2", "id": 1, "life": 20}
+    ]
+  }
 }
 ```
 
-**Action Types:**
-- `play_land` - Play a land card
-- `cast_spell` - Cast a spell from hand
-- `activate_ability` - Activate an ability of a permanent
-- `pass_priority` - Pass priority (always available)
+**Response (when no input needed):**
+```json
+{
+  "type": "none",
+  "data": {}
+}
+```
 
-### `play_action <index>` Command
-Executes the action at the specified index from the `possible_actions` list.
+### `POST /action`
+Submit an action by index from the `/input` response.
 
-**Example Workflow:**
+**Request:**
+```json
+{"index": 0}
+```
+
+**Response:**
+```
+Action queued
+```
+
+### `POST /target`
+Submit a target selection by index.
+
+**Request:**
+```json
+{"index": 1}
+```
+
+**Response:**
+```
+Target selection queued
+```
+
+### `POST /control`
+Send control commands.
+
+**Request:**
+```json
+{"command": "pass_priority"}
+```
+or
+```json
+{"command": "concede"}
+```
+
+**Response:**
+```
+Command queued
+```
+
+## Command Line Options
+
 ```bash
-# Get possible actions
-possible_actions
-# Returns actions with indices 0-3
-
-# Play the first action (index 0)
-play_action 0
-
-# Game processes the action and returns control
+./forge-headless [options]
 ```
 
-## Logging System
+| Option | Description |
+|--------|-------------|
+| (default) | Player 1 = Human (HTTP-controlled), Player 2 = AI |
+| `--both-ai` | Both players AI-controlled (simulation mode) |
+| `--both-human` | Both players HTTP-controlled |
+| `--p1-ai` | Player 1 = AI, Player 2 = HTTP-controlled |
+| `--p2-human` | Player 2 = HTTP-controlled |
+| `--verbose` | Enable detailed game event logging |
+| `--help` | Show help message |
 
-### File Output: `headless_game.log`
-Automatically generated during AI vs AI games. Contains detailed event log.
+## AI/LLM Integration
+
+### Recommended Flow
+
+```python
+import requests
+import time
+
+BASE_URL = "http://localhost:8081"
+
+def play_game():
+    while True:
+        # 1. Check what input is needed
+        input_resp = requests.get(f"{BASE_URL}/input").json()
+        
+        if input_resp["type"] == "none":
+            time.sleep(0.1)  # Wait for game to need input
+            continue
+            
+        elif input_resp["type"] == "action":
+            # 2. Get game state for context
+            state = requests.get(f"{BASE_URL}/state").json()
+            
+            # 3. Your AI decides which action to take
+            action_index = your_llm_decides(state, input_resp["data"])
+            
+            # 4. Submit the action
+            requests.post(f"{BASE_URL}/action", json={"index": action_index})
+            
+        elif input_resp["type"] == "target":
+            # Handle target selection
+            target_index = your_llm_selects_target(input_resp["data"])
+            requests.post(f"{BASE_URL}/target", json={"index": target_index})
+```
+
+### TODO: LLM Endpoint Integration
+
+- [ ] Add configuration for outbound AI endpoint (URL, auth, timeout)
+- [ ] Serialize full decision context (game history + PA payload) in a single request body
+- [ ] Handle streaming/async responses from the AI service
+- [ ] Fall back to embedded HTTP server when endpoint is unavailable (dev mode)
+
+> **Heads-up**: The custom AI is owned by you. Please drop the endpoint contract (request/response schema, auth expectations) into this README once finalized so we can wire Java directly to it.
+
+## Logging
+
+### Verbose Mode
+Enable with `--verbose` flag. Logs written to `headless_game.log`.
 
 **Logged Events:**
-- **Turn markers**: `=== Turn N - Player Name ===`
-- **Phase transitions**: `Phase: MAIN1`, `Phase: COMBAT_BEGIN`, etc.
-- **Land plays**: `LAND: Forest played by Player 1`
-- **Spell casts**: `CAST: Lightning Bolt by Player 2`
-- **Combat events**:
-  - `COMBAT: Attackers declared by Player 1`
-  - `COMBAT: Blockers declared by Player 2`
-- **Damage**: `DAMAGE: Player 1 took 3 damage from Lightning Bolt`
-- **Life changes**: `LIFE: Player 1 is now at 17`
-- **Game end**: `*** GAME OVER ***` with outcome details
+- Turn/phase transitions
+- Land plays and spell casts
+- Combat declarations
+- Damage and life changes
+- Game outcomes
 
-### Example Log Output
-```
-=== Turn 4 - AI Player 1 ===
-Phase: UNTAP
-Phase: UPKEEP
-Phase: DRAW
-Phase: MAIN1
-LAND: Forest played by AI Player 1
-CAST: Llanowar Elves by AI Player 1
-Phase: COMBAT_BEGIN
-Phase: COMBAT_DECLARE_ATTACKERS
-COMBAT: Attackers declared by AI Player 1
-  Target: AI Player 2
-    - Grizzly Bears (2/2)
-Phase: COMBAT_DECLARE_BLOCKERS
-COMBAT: Blockers declared by AI Player 2
-Phase: COMBAT_DAMAGE
-DAMAGE: AI Player 2 took 2 damage from Grizzly Bears
-LIFE: AI Player 2 is now at 18
-Phase: COMBAT_END
-Phase: MAIN2
-Phase: END_OF_TURN
-Phase: CLEANUP
-```
+## Current Limitations
 
-## Targeting
+1. **Combat is AI-controlled**: Declaring attackers/blockers uses AI logic
+   - TODO: Add `POST /attackers` and `POST /blockers` endpoints
+2. **Fixed test decks**: Currently uses hardcoded test decks
+3. **Single game**: No match/sideboard support yet
+4. **No authentication**: API is open (intended for local use)
 
-### Interactive Target Selection
-When you cast a spell or activate an ability that requires targets, the game will interactively prompt you to select targets.
+## Ongoing TODOs
 
-**Example Workflow:**
-```bash
-# Cast a spell requiring targets (e.g., Shock)
-play_action 3
-
-# Game prompts for target selection
-Targets required: {
-  "min": 1,
-  "max": 1,
-  "title": "Select targets for Shock",
-  "targets": [
-    {
-      "index": 0,
-      "type": "Player",
-      "name": "Player 1",
-      "id": 0,
-      "life": 20
-    },
-    {
-      "index": 1,
-      "type": "Player",
-      "name": "AI Player 2",
-      "id": 1,
-      "life": 18
-    }
-  ]
-}
-Choose target index (0/1): 1
-
-# Spell is cast targeting AI Player 2
-```
-
-**Target Selection:**
-- The game displays all valid targets with indexed options
-- Enter the index number of your chosen target
-- For spells requiring multiple targets, you'll be prompted multiple times
-- Enter `-1` to cancel (only if minimum targets already selected)
-- Invalid selections will prompt you to try again
-
-**Target Information:**
-Each target option includes:
-- **index**: Selection number to enter
-- **type**: "Player", "Card", or other game object type
-- **name**: Display name of the target
-- **id**: Unique game object ID
-- Additional context (life total for players, power/toughness for creatures, etc.)
-
-**Notes:**
-- Mana costs are paid automatically from available mana
-- Targets must be selected before the spell can be cast
-- The game validates target legality automatically
-
-## Technical Details
-
-### Architecture
-- **Main Class**: `forge.view.ForgeHeadless`
-- **Player Controller**: `HeadlessPlayerController` extends `PlayerControllerAi`
-- **Game Observer**: `HeadlessGameObserver` implements event logging
-- **Deck Generation**: Random decks generated via `DeckgenUtil.generateRandomDeck()`
-
-### Event System
-Uses Guava's `EventBus` with `@Subscribe` pattern:
-- `HeadlessGameObserver` subscribes to game events
-- Events processed via visitor pattern (`IGameEventVisitor`)
-- Logs written to file in real-time with auto-flush
-
-### Game Flow
-1. Initialize game with specified player types
-2. Generate random decks for both players
-3. Create match and game objects
-4. Register event observer (for logging)
-5. Start game loop
-6. Process player actions via controller
-7. Game ends when win condition met
+1. Plug ForgeHeadless into the upcoming AI service (Java acts as HTTP client).
+2. Define and document the external AI endpoint schema (request/response, auth, timeout).
+3. Add manual combat control (attacker/blocker selection) via new endpoints.
+4. Support configurable decks and match formats (deck import, best-of series).
+5. Implement optional authentication/rate limiting for the HTTP surface.
 
 ## Files
 
-### Core Files
-- `forge-gui-desktop/src/main/java/forge/view/ForgeHeadless.java` - Main implementation
-- `forge-headless` - Launch script
-
-### Generated Files
-- `headless_game.log` - Game event log (gitignored)
-
-## Limitations & Known Issues
-
-1. **Random Decks Only**: Currently generates random decks; custom deck loading not supported
-2. **No Replay**: Games cannot be replayed or saved/loaded mid-game
-3. **Automatic Targeting**: Interactive mode uses AI targeting logic
-4. **Limited Error Handling**: Invalid commands print error but don't exit gracefully
-5. **No Turn Timeout**: Interactive games can wait indefinitely for input
-
-## Future Enhancements
-
-- [ ] Manual target selection for interactive mode
-- [ ] Custom deck loading from file
-- [ ] Game state save/load functionality
-- [ ] Multiplayer support (3+ players)
-- [ ] Replay system
-- [ ] Enhanced error messages and validation
-- [ ] Optional logging verbosity levels
-- [ ] Match statistics and analysis tools
+| File | Description |
+|------|-------------|
+| `forge-gui-desktop/src/main/java/forge/view/ForgeHeadless.java` | Main implementation |
+| `forge-headless` | Launch script |
+| `test_http_endpoints.sh` | API test script |
+| `headless_game.log` | Game event log (when verbose) |
 
 ## Development
 
-### Adding New Commands
-1. Add command handler in `HeadlessPlayerController.chooseSpellAbilityToPlay()`
-2. Parse command arguments
-3. Execute appropriate game logic
-4. Return result or continue game loop
-
-### Extending Logging
-1. Override additional visit methods in `HeadlessGameObserver`
-2. Format log output in visit method
-3. Call `log()` helper to write to file
-
 ### Testing
 ```bash
-# Build project
+# Build
 mvn clean install -DskipTests
 
-# Run AI vs AI game
-./forge-headless --both-ai
-
-# Check log output
-cat headless_game.log
+# Run test script
+./test_http_endpoints.sh
 ```
 
-## Troubleshooting
+### Extending the API
+1. Add new endpoint in `startHttpServer()` method
+2. Add handler logic
+3. Update this README
 
-**Problem**: `forge-headless` script fails
-- **Solution**: Ensure Java 17+ is installed and in PATH
-- **Check**: `java -version`
+## License
 
-**Problem**: Permission denied on `forge-headless`
-- **Solution**: `chmod +x forge-headless`
+Part of the Forge MTG project. See main project README for license information.
 
-**Problem**: No log file generated
-- **Solution**: Check write permissions in project directory
-
-**Problem**: Game hangs in interactive mode
-- **Solution**: Type `pass_priority` to continue or `concede` to exit
-
-## License & Credits
-
-Part of the Forge MTG project. See main project README for full license information.
+---
+*Generated by Copilot*
