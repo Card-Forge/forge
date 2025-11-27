@@ -1,11 +1,17 @@
 package forge.ai.ability;
 
+import com.google.common.base.Predicates;
 import forge.ai.AiAbilityDecision;
 import forge.ai.AiPlayDecision;
+import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.combat.CombatUtil;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -26,6 +32,25 @@ public class AlterAttributeAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             // TODO add targeting logic
             // needed for Suspected
+            for (String attr : attributes) {
+                switch (attr.trim()) {
+                    case "Suspect":
+                    case "Suspected":
+                        // below, Suspected is treated as better, so target own beefy stuff for now to give it Menace
+                        CardCollection creaturesOTB = aiPlayer.getCreaturesInPlay();
+                        if (!creaturesOTB.isEmpty()) {
+                            Card bestTgt = ComputerUtilCard.getBestAI(CardLists.filter(creaturesOTB,
+                                    CardPredicates.hasKeyword(Keyword.MENACE).negate()));
+                            if (bestTgt == null) {
+                                bestTgt = ComputerUtilCard.getBestAI(aiPlayer.getCreaturesInPlay());
+                            }
+                            sa.resetTargets();
+                            sa.getTargets().add(bestTgt);
+                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                        }
+                        break;
+                }
+            }
             return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
