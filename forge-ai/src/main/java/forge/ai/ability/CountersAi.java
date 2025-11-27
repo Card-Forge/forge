@@ -17,6 +17,7 @@
  */
 package forge.ai.ability;
 
+import com.google.common.collect.Iterables;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.*;
@@ -100,14 +101,16 @@ public abstract class CountersAi extends SpellAbilityAi {
         } else if (type.equals("CHARGE")) {
             final CardCollection boon = CardLists.filter(list, c -> c.getCounters(CounterEnumType.CHARGE) < c.getKeywordMagnitude(Keyword.STATION) || c.getOracleText().matches(".*(for|number|emove) \\w+ (?:charge )counter.*"));
             choice = ComputerUtilCard.getMostExpensivePermanentAI(boon);
-        } else if (type.equals("DIVINITY") || type.equals("SHIELD")) {
-            final CardCollection boon = CardLists.filter(list, Card::canBeDestroyed);
-            choice = ComputerUtilCard.getMostExpensivePermanentAI(boon);
         } else if (CounterType.getType(type).isKeywordCounter()) {
             choice = ComputerUtilCard.getBestCreatureAI(CardLists.getNotKeyword(list, type));
         } else {
-            final CardCollection pref = CardLists.filter(list, c -> c.getCounters(CounterEnumType.getType(type)) == 0);
-            if (pref.isEmpty()) {
+            CardCollectionView pref = list;
+            if (Iterables.any(CounterEnumType.values, ct -> ct.toString().equals(type))) {
+                pref = CardLists.filter(list, c -> c.getCounters(CounterEnumType.getType(type)) == 0);
+            }
+            if (type.equals("DIVINITY") || type.equals("SHIELD")) {
+                choice = ComputerUtilCard.getMostExpensivePermanentAI(CardLists.filter(pref, Card::canBeDestroyed));
+            } else if (pref.isEmpty()) {
                 choice = Aggregates.random(list);
             } else {
                 choice = ComputerUtilCard.getMostExpensivePermanentAI(pref);
