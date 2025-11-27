@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.base.Predicates;
 import forge.ai.AiAbilityDecision;
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilCard;
