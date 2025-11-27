@@ -87,7 +87,7 @@ public abstract class CountersAi extends SpellAbilityAi {
      * @return a {@link Card} object.
      */
     public static Card chooseBoonTarget(final CardCollectionView list, final String type) {
-        Card choice = null;
+        Card choice;
 
         if (type.equals("P1P1")) {
             // TODO look for modified
