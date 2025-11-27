@@ -38,6 +38,11 @@ import java.io.PrintStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import forge.game.event.*;
+import forge.game.GameEntity;
+import forge.util.collect.FCollectionView;
+import forge.game.player.DelayedReveal;
+import java.util.Map;
+import java.util.Collection;
 
 public class ForgeHeadless {
     // ANSI Color Constants
@@ -54,12 +59,12 @@ public class ForgeHeadless {
 
     public static void main(String[] args) {
         System.err.println("DEBUG: ForgeHeadless main started");
-        
+
         // Parse command-line arguments
-        boolean player1IsHuman = true;  // default
+        boolean player1IsHuman = true; // default
         boolean player2IsHuman = false; // default
         boolean verboseLogging = false; // default
-        
+
         for (String arg : args) {
             if (arg.equals("--both-human")) {
                 player1IsHuman = true;
@@ -78,33 +83,44 @@ public class ForgeHeadless {
                 System.exit(0);
             }
         }
-        
+
         GuiBase.setInterface(new HeadlessGui());
         FModel.initialize(null, null);
 
         // Generate Decks
-        Deck deck1 = DeckgenUtil.getRandomColorDeck(FModel.getFormats().getStandard().getFilterPrinted(), true);
-        Deck deck2 = DeckgenUtil.getRandomColorDeck(FModel.getFormats().getStandard().getFilterPrinted(), true);
+        // Generate Decks
+        Deck deck1 = new Deck("Manual Test Deck");
+        for (int i = 0; i < 20; i++)
+            deck1.getMain().add(FModel.getMagicDb().getCommonCards().getCard("Mountain"));
+        for (int i = 0; i < 20; i++)
+            deck1.getMain().add(FModel.getMagicDb().getCommonCards().getCard("Shock"));
+
+        Deck deck2 = new Deck("AI Test Deck");
+        for (int i = 0; i < 60; i++)
+            deck2.getMain().add(FModel.getMagicDb().getCommonCards().getCard("Swamp"));
 
         // Setup Players based on configuration
         List<RegisteredPlayer> players = new ArrayList<>();
-        
+
         if (player1IsHuman) {
             RegisteredPlayer rp1 = new RegisteredPlayer(deck1).setPlayer(new HeadlessLobbyPlayer("Player 1"));
+            rp1.setStartingLife(1000);
             players.add(rp1);
         } else {
-            RegisteredPlayer rp1 = new RegisteredPlayer(deck1).setPlayer(new forge.ai.LobbyPlayerAi("AI Player 1", null));
+            RegisteredPlayer rp1 = new RegisteredPlayer(deck1)
+                    .setPlayer(new forge.ai.LobbyPlayerAi("AI Player 1", null));
             players.add(rp1);
         }
-        
+
         if (player2IsHuman) {
             RegisteredPlayer rp2 = new RegisteredPlayer(deck2).setPlayer(new HeadlessLobbyPlayer("Player 2"));
             players.add(rp2);
         } else {
-            RegisteredPlayer rp2 = new RegisteredPlayer(deck2).setPlayer(new forge.ai.LobbyPlayerAi("AI Player 2", null));
+            RegisteredPlayer rp2 = new RegisteredPlayer(deck2)
+                    .setPlayer(new forge.ai.LobbyPlayerAi("AI Player 2", null));
             players.add(rp2);
         }
-        
+
         System.err.println("DEBUG: Player 1 - " + (player1IsHuman ? "Human" : "AI"));
         System.err.println("DEBUG: Player 2 - " + (player2IsHuman ? "Human" : "AI"));
 
@@ -115,7 +131,7 @@ public class ForgeHeadless {
 
         runGame(match, game, player1IsHuman, player2IsHuman, verboseLogging);
     }
-    
+
     private static void printUsage() {
         System.out.println("ForgeHeadless - Headless Magic: The Gathering Game Engine");
         System.out.println("\nUsage: java -cp <jar> forge.view.ForgeHeadless [options]");
@@ -140,7 +156,8 @@ public class ForgeHeadless {
         // FModel.initialize() is called in main
     }
 
-    private static void runGame(Match match, Game game, boolean player1IsHuman, boolean player2IsHuman, boolean verboseLogging) {
+    private static void runGame(Match match, Game game, boolean player1IsHuman, boolean player2IsHuman,
+            boolean verboseLogging) {
         // Start Game
         if (verboseLogging) {
             HeadlessGameObserver observer = new HeadlessGameObserver();
@@ -152,7 +169,7 @@ public class ForgeHeadless {
 
     private static JsonObject extractGameState(Game game) {
         JsonObject state = new JsonObject();
-        
+
         // General Game Info
         state.addProperty("turn", game.getPhaseHandler().getTurn());
         state.addProperty("phase", game.getPhaseHandler().getPhase().toString());
@@ -181,7 +198,7 @@ public class ForgeHeadless {
             playerObj.addProperty("name", p.getName());
             playerObj.addProperty("life", p.getLife());
             playerObj.addProperty("libraryCount", p.getCardsIn(ZoneType.Library).size());
-            
+
             // Hand
             JsonArray handArray = new JsonArray();
             for (Card c : p.getCardsIn(ZoneType.Hand)) {
@@ -236,24 +253,37 @@ public class ForgeHeadless {
         // Get available spells and abilities
         CardCollection availableCards = ComputerUtilAbility.getAvailableCards(game, player);
         List<SpellAbility> spellAbilities = ComputerUtilAbility.getSpellAbilities(availableCards, player);
-        
+
         for (SpellAbility sa : spellAbilities) {
             // Filter to only abilities the player can actually activate
             if (sa.canPlay() && sa.getActivatingPlayer() == player) {
                 JsonObject action = new JsonObject();
                 Card source = sa.getHostCard();
-                
+
                 if (sa.isSpell()) {
                     action.addProperty("type", "cast_spell");
                 } else {
                     action.addProperty("type", "activate_ability");
                 }
-                
+
                 action.addProperty("card_id", source != null ? source.getId() : -1);
                 action.addProperty("card_name", source != null ? source.getName() : "Unknown");
                 action.addProperty("ability_description", sa.getDescription());
                 action.addProperty("mana_cost", sa.getPayCosts() != null ? sa.getPayCosts().toSimpleString() : "");
-                
+
+                // Add target information
+                if (sa.usesTargeting()) {
+                    forge.game.spellability.TargetRestrictions tgt = sa.getTargetRestrictions();
+                    if (tgt != null) {
+                        action.addProperty("requires_targets", true);
+                        action.addProperty("target_min", tgt.getMinTargets(sa.getHostCard(), sa));
+                        action.addProperty("target_max", tgt.getMaxTargets(sa.getHostCard(), sa));
+                        action.addProperty("target_zone", tgt.getZone() != null ? tgt.getZone().toString() : "any");
+                    }
+                } else {
+                    action.addProperty("requires_targets", false);
+                }
+
                 actionsList.add(action);
             }
         }
@@ -283,6 +313,8 @@ public class ForgeHeadless {
 
     private static class HeadlessPlayerController extends forge.ai.PlayerControllerAi {
         private final java.util.Scanner scanner = new java.util.Scanner(System.in);
+        private List<SpellAbility> cachedActions = null;
+        private int cachedActionTurn = -1;
 
         public HeadlessPlayerController(Game game, Player player, forge.ai.LobbyPlayerAi lobbyPlayer) {
             super(game, player, lobbyPlayer);
@@ -293,9 +325,111 @@ public class ForgeHeadless {
             return true; // Always keep hand
         }
 
+        private <T extends GameEntity> void printTargetOptions(FCollectionView<T> optionList, int min, int max,
+                String title) {
+            JsonObject result = new JsonObject();
+            result.addProperty("min", min);
+            result.addProperty("max", max);
+            result.addProperty("title", title);
+
+            JsonArray options = new JsonArray();
+            int index = 0;
+            for (T target : optionList) {
+                JsonObject option = new JsonObject();
+                option.addProperty("index", index++);
+                option.addProperty("type", target.getClass().getSimpleName());
+                option.addProperty("name", target.getName());
+                option.addProperty("id", target.getId());
+
+                if (target instanceof Player) {
+                    option.addProperty("life", ((Player) target).getLife());
+                }
+
+                options.add(option);
+            }
+            result.add("targets", options);
+
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            System.out.println("Targets required: " + gson.toJson(result));
+        }
+
+        @Override
+        public <T extends GameEntity> T chooseSingleEntityForEffect(FCollectionView<T> optionList,
+                DelayedReveal delayedReveal, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer,
+                Map<String, Object> params) {
+            List<T> results = chooseEntitiesForEffect(optionList, isOptional ? 0 : 1, 1, delayedReveal, sa, title,
+                    targetedPlayer, params);
+            return results.isEmpty() ? null : results.get(0);
+        }
+
+        @Override
+        public <T extends GameEntity> List<T> chooseEntitiesForEffect(FCollectionView<T> optionList, int min, int max,
+                DelayedReveal delayedReveal, SpellAbility sa, String title, Player targetedPlayer,
+                Map<String, Object> params) {
+            printTargetOptions(optionList, min, max, title);
+
+            List<T> selected = new ArrayList<>();
+            List<T> options = new ArrayList<>();
+            for (T t : optionList)
+                options.add(t);
+
+            if (options.isEmpty())
+                return selected;
+
+            while (selected.size() < max) {
+                if (selected.size() >= min) {
+                    System.out.print("Choose target index (" + selected.size() + "/" + max + ") or -1 to finish: ");
+                } else {
+                    System.out.print("Choose target index (" + selected.size() + "/" + max + "): ");
+                }
+
+                try {
+                    String input = scanner.nextLine();
+                    int index = Integer.parseInt(input.trim());
+
+                    if (index == -1) {
+                        if (selected.size() >= min)
+                            break;
+                        System.out.println("Must select at least " + min + " targets.");
+                        continue;
+                    }
+
+                    if (index >= 0 && index < options.size()) {
+                        T target = options.get(index);
+                        // For now, allow selecting same target multiple times if game rules allow
+                        // (engine validates?)
+                        // Actually, usually you can't target same thing twice for same instance unless
+                        // specified
+                        // But let's just add it and let engine/player handle it.
+                        // Better: check if already selected
+                        if (!selected.contains(target)) {
+                            selected.add(target);
+                            if (selected.size() == max)
+                                break; // Auto-finish if max reached
+                        } else {
+                            System.out.println("Already selected.");
+                        }
+                    } else {
+                        System.out.println("Invalid index.");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Invalid input.");
+                }
+            }
+            return selected;
+        }
+
         private List<SpellAbility> getPossibleSpellAbilities() {
+            int currentTurn = getGame().getPhaseHandler().getTurn();
+
+            // Return cached list if still valid
+            if (cachedActions != null && cachedActionTurn == currentTurn) {
+                return cachedActions;
+            }
+
+            // Rebuild and cache
             List<SpellAbility> allAbilities = new ArrayList<>();
-            
+
             // Get available lands to play
             CardCollection lands = ComputerUtilAbility.getAvailableLandsToPlay(getGame(), player);
             if (lands != null && !lands.isEmpty()) {
@@ -310,15 +444,119 @@ public class ForgeHeadless {
             // Get available spells and abilities
             CardCollection availableCards = ComputerUtilAbility.getAvailableCards(getGame(), player);
             List<SpellAbility> spellAbilities = ComputerUtilAbility.getSpellAbilities(availableCards, player);
-            
+
             for (SpellAbility sa : spellAbilities) {
                 // Filter to only abilities the player can actually activate
                 if (sa.canPlay() && sa.getActivatingPlayer() == player) {
                     allAbilities.add(sa);
                 }
             }
-            
+
+            // Cache the result
+            cachedActions = allAbilities;
+            cachedActionTurn = currentTurn;
+
             return allAbilities;
+        }
+
+        private JsonObject getPossibleActionsJson() {
+            List<SpellAbility> actions = getPossibleSpellAbilities();
+            JsonObject result = new JsonObject();
+            JsonArray actionsList = new JsonArray();
+
+            for (SpellAbility sa : actions) {
+                JsonObject action = new JsonObject();
+                Card source = sa.getHostCard();
+
+                // Determine action type
+                if (source != null && source.isLand() && sa.isSpell()) {
+                    action.addProperty("type", "play_land");
+                    action.addProperty("card_id", source.getId());
+                    action.addProperty("card_name", source.getName());
+                } else if (sa.isSpell()) {
+                    action.addProperty("type", "cast_spell");
+                    action.addProperty("card_id", source != null ? source.getId() : -1);
+                    action.addProperty("card_name", source != null ? source.getName() : "Unknown");
+                    action.addProperty("ability_description", sa.getDescription());
+                    action.addProperty("mana_cost", sa.getPayCosts() != null ? sa.getPayCosts().toSimpleString() : "");
+
+                    // Add target information
+                    if (sa.usesTargeting()) {
+                        forge.game.spellability.TargetRestrictions tgt = sa.getTargetRestrictions();
+                        if (tgt != null) {
+                            action.addProperty("requires_targets", true);
+                            action.addProperty("target_min", tgt.getMinTargets(sa.getHostCard(), sa));
+                            action.addProperty("target_max", tgt.getMaxTargets(sa.getHostCard(), sa));
+                            action.addProperty("target_zone", tgt.getZone() != null ? tgt.getZone().toString() : "any");
+                        }
+                    } else {
+                        action.addProperty("requires_targets", false);
+                    }
+                } else {
+                    action.addProperty("type", "activate_ability");
+                    action.addProperty("card_id", source != null ? source.getId() : -1);
+                    action.addProperty("card_name", source != null ? source.getName() : "Unknown");
+                    action.addProperty("ability_description", sa.getDescription());
+                    action.addProperty("mana_cost",
+                            sa.getPayCosts() != null ? sa.getPayCosts().toSimpleString() : "no cost");
+                    action.addProperty("requires_targets", sa.usesTargeting());
+                }
+
+                actionsList.add(action);
+            }
+
+            // Always available: pass priority
+            JsonObject passAction = new JsonObject();
+            passAction.addProperty("type", "pass_priority");
+            actionsList.add(passAction);
+
+            result.add("actions", actionsList);
+            result.addProperty("count", actionsList.size());
+            return result;
+        }
+
+        @Override
+        public boolean chooseTargetsFor(SpellAbility sa) {
+            if (!sa.usesTargeting()) {
+                return true;
+            }
+
+            forge.game.spellability.TargetRestrictions tgt = sa.getTargetRestrictions();
+            List<GameEntity> candidates = tgt.getAllCandidates(sa, true);
+
+            // Filter out candidates that are already targeted if unique targets are
+            // required?
+            // getAllCandidates might return everything valid.
+            // But chooseEntitiesForEffect handles selection.
+
+            forge.util.collect.FCollection<GameEntity> optionList = new forge.util.collect.FCollection<>();
+            optionList.addAll(candidates);
+
+            int min = tgt.getMinTargets(sa.getHostCard(), sa);
+            int max = tgt.getMaxTargets(sa.getHostCard(), sa);
+            String title = "Select targets for " + sa.getHostCard().getName();
+
+            List<GameEntity> chosen = chooseEntitiesForEffect(optionList, min, max, null, sa, title, player, null);
+
+            if (chosen.size() < min) {
+                // User cancelled or didn't pick enough
+                return false;
+            }
+
+            for (GameEntity entity : chosen) {
+                sa.getTargets().add(entity);
+            }
+
+            return true;
+        }
+
+        @Override
+        public boolean playChosenSpellAbility(SpellAbility sa) {
+            // setupTargets will call chooseTargetsFor for the ability and its sub-abilities
+            if (!sa.setupTargets()) {
+                return false;
+            }
+            return super.playChosenSpellAbility(sa);
         }
 
         @Override
@@ -332,7 +570,8 @@ public class ForgeHeadless {
                     System.exit(0); // End of input
                 }
 
-                if (input.trim().isEmpty()) continue;
+                if (input.trim().isEmpty())
+                    continue;
 
                 String[] parts = input.split(" ");
                 String command = parts[0];
@@ -342,31 +581,33 @@ public class ForgeHeadless {
                     System.out.println(gson.toJson(extractGameState(getGame())));
                 } else if (command.equals("possible_actions") || command.equals("pa")) {
                     Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                    System.out.println(gson.toJson(getPossibleActions(player, getGame())));
+                    System.out.println(gson.toJson(getPossibleActionsJson()));
                 } else if (command.equals("play_action") || command.equals("play")) {
                     if (parts.length < 2) {
                         System.out.println("Usage: play_action|play <index>");
                         continue;
                     }
-                    
+
                     try {
                         int actionIndex = Integer.parseInt(parts[1]);
                         List<SpellAbility> actions = getPossibleSpellAbilities();
-                        
+
                         if (actionIndex < 0 || actionIndex >= actions.size()) {
-                            System.out.println("Invalid action index: " + actionIndex + ". Valid range: 0-" + (actions.size() - 1));
+                            System.out.println("Invalid action index: " + actionIndex + ". Valid range: 0-"
+                                    + (actions.size() - 1));
                             continue;
                         }
-                        
+
                         SpellAbility chosenAbility = actions.get(actionIndex);
                         List<SpellAbility> result = new ArrayList<>();
                         result.add(chosenAbility);
                         return result;
-                        
+
                     } catch (NumberFormatException e) {
                         System.out.println("Invalid action index. Please provide a number.");
                     }
                 } else if (command.equals("pass_priority") || command.equals("pp") || command.equals("pass")) {
+                    cachedActions = null; // Invalidate cache
                     return null; // Pass priority
                 } else if (command.equals("concede") || command.equals("c")) {
                     System.exit(0);
@@ -402,7 +643,8 @@ public class ForgeHeadless {
 
         @Override
         public Void visit(GameEventTurnBegan event) {
-            log("\n" + ANSI_WHITE + "=== Turn " + event.turnNumber() + " - " + event.turnOwner().getName() + " ===" + ANSI_RESET);
+            log("\n" + ANSI_WHITE + "=== Turn " + event.turnNumber() + " - " + event.turnOwner().getName() + " ==="
+                    + ANSI_RESET);
             return null;
         }
 
@@ -421,7 +663,8 @@ public class ForgeHeadless {
 
         @Override
         public Void visit(GameEventSpellAbilityCast event) {
-            log(ANSI_CYAN + "CAST: " + event.sa().getHostCard().getName() + " by " + event.sa().getActivatingPlayer().getName() + ANSI_RESET);
+            log(ANSI_CYAN + "CAST: " + event.sa().getHostCard().getName() + " by "
+                    + event.sa().getActivatingPlayer().getName() + ANSI_RESET);
             return null;
         }
 
@@ -444,7 +687,8 @@ public class ForgeHeadless {
                 event.attackersMap().asMap().forEach((target, attackers) -> {
                     log(ANSI_PURPLE + "  Target: " + target + ANSI_RESET);
                     for (Card attacker : attackers) {
-                        log(ANSI_RED + "    - " + attacker.getName() + " (" + attacker.getNetPower() + "/" + attacker.getNetToughness() + ")" + ANSI_RESET);
+                        log(ANSI_RED + "    - " + attacker.getName() + " (" + attacker.getNetPower() + "/"
+                                + attacker.getNetToughness() + ")" + ANSI_RESET);
                     }
                 });
             }
@@ -457,9 +701,9 @@ public class ForgeHeadless {
                 log(ANSI_RED + "COMBAT: Blockers declared by " + event.defendingPlayer().getName() + ANSI_RESET);
                 event.blockers().forEach((defender, map) -> {
                     map.forEach((attacker, blockers) -> {
-                         for (Card blocker : blockers) {
-                             log(ANSI_RED + "    - " + blocker.getName() + " blocks " + attacker.getName() + ANSI_RESET);
-                         }
+                        for (Card blocker : blockers) {
+                            log(ANSI_RED + "    - " + blocker.getName() + " blocks " + attacker.getName() + ANSI_RESET);
+                        }
                     });
                 });
             }
@@ -468,62 +712,237 @@ public class ForgeHeadless {
 
         @Override
         public Void visit(GameEventPlayerDamaged event) {
-            log(ANSI_BOLD + ANSI_RED + "DAMAGE: " + event.target().getName() + " took " + event.amount() + " damage from " + event.source() + ANSI_RESET);
+            log(ANSI_BOLD + ANSI_RED + "DAMAGE: " + event.target().getName() + " took " + event.amount()
+                    + " damage from " + event.source() + ANSI_RESET);
             return null;
         }
 
         @Override
         public Void visit(GameEventCardDamaged event) {
-            log(ANSI_BOLD + ANSI_RED + "DAMAGE: " + event.card().getName() + " took " + event.amount() + " damage from " + event.source() + ANSI_RESET);
+            log(ANSI_BOLD + ANSI_RED + "DAMAGE: " + event.card().getName() + " took " + event.amount() + " damage from "
+                    + event.source() + ANSI_RESET);
             return null;
         }
     }
 
     private static class HeadlessGui implements IGuiBase {
-        @Override public boolean isRunningOnDesktop() { return true; }
-        @Override public boolean isLibgdxPort() { return false; }
-        @Override public String getCurrentVersion() { return "Headless"; }
-        @Override public String getAssetsDir() { return "./forge-gui/"; }
-        @Override public ImageFetcher getImageFetcher() { return null; }
-        @Override public void invokeInEdtNow(Runnable runnable) { runnable.run(); }
-        @Override public void invokeInEdtLater(Runnable runnable) { runnable.run(); }
-        @Override public void invokeInEdtAndWait(Runnable proc) { proc.run(); }
-        @Override public boolean isGuiThread() { return true; }
-        @Override public ISkinImage getSkinIcon(FSkinProp skinProp) { return null; }
-        @Override public ISkinImage getUnskinnedIcon(String path) { return null; }
-        @Override public ISkinImage getCardArt(PaperCard card) { return null; }
-        @Override public ISkinImage getCardArt(PaperCard card, boolean backFace) { return null; }
-        @Override public ISkinImage createLayeredImage(PaperCard card, FSkinProp background, String overlayFilename, float opacity) { return null; }
-        @Override public void showBugReportDialog(String title, String text, boolean showExitAppBtn) {}
-        @Override public void showImageDialog(ISkinImage image, String message, String title) {}
-        @Override public int showOptionDialog(String message, String title, FSkinProp icon, List<String> options, int defaultOption) { return defaultOption; }
-        @Override public String showInputDialog(String message, String title, FSkinProp icon, String initialInput, List<String> inputOptions, boolean isNumeric) { return initialInput; }
-        @Override public <T> List<T> getChoices(String message, int min, int max, java.util.Collection<T> choices, java.util.Collection<T> selected, java.util.function.Function<T, String> display) { return new ArrayList<>(selected); }
-        @Override public <T> List<T> order(String title, String top, int remainingObjectsMin, int remainingObjectsMax, List<T> sourceChoices, List<T> destChoices) { return destChoices; }
-        @Override public String showFileDialog(String title, String defaultDir) { return null; }
-        @Override public java.io.File getSaveFile(java.io.File defaultFile) { return defaultFile; }
-        @Override public void download(GuiDownloadService service, java.util.function.Consumer<Boolean> callback) { callback.accept(false); }
-        @Override public void refreshSkin() {}
-        @Override public void showCardList(String title, String message, List<PaperCard> list) {}
-        @Override public boolean showBoxedProduct(String title, String message, List<PaperCard> list) { return true; }
-        @Override public PaperCard chooseCard(String title, String message, List<PaperCard> list) { return list.isEmpty() ? null : list.get(0); }
-        @Override public int getAvatarCount() { return 0; }
-        @Override public int getSleevesCount() { return 0; }
-        @Override public void copyToClipboard(String text) {}
-        @Override public void browseToUrl(String url) throws java.io.IOException, java.net.URISyntaxException {}
-        @Override public IAudioClip createAudioClip(String filename) { return null; }
-        @Override public IAudioMusic createAudioMusic(String filename) { return null; }
-        @Override public void startAltSoundSystem(String filename, boolean isSynchronized) {}
-        @Override public void clearImageCache() {}
-        @Override public void showSpellShop() {}
-        @Override public void showBazaar() {}
-        @Override public boolean isSupportedAudioFormat(java.io.File file) { return false; }
-        @Override public IGuiGame getNewGuiGame() { return null; }
-        @Override public HostedMatch hostMatch() { return null; }
-        @Override public void runBackgroundTask(String message, Runnable task) { task.run(); }
-        @Override public String encodeSymbols(String str, boolean formatReminderText) { return str; }
-        @Override public void preventSystemSleep(boolean preventSleep) {}
-        @Override public float getScreenScale() { return 1.0f; }
-        @Override public UpnpServiceConfiguration getUpnpPlatformService() { return null; }
+        @Override
+        public boolean isRunningOnDesktop() {
+            return true;
+        }
+
+        @Override
+        public boolean isLibgdxPort() {
+            return false;
+        }
+
+        @Override
+        public String getCurrentVersion() {
+            return "Headless";
+        }
+
+        @Override
+        public String getAssetsDir() {
+            return "./forge-gui/";
+        }
+
+        @Override
+        public ImageFetcher getImageFetcher() {
+            return null;
+        }
+
+        @Override
+        public void invokeInEdtNow(Runnable runnable) {
+            runnable.run();
+        }
+
+        @Override
+        public void invokeInEdtLater(Runnable runnable) {
+            runnable.run();
+        }
+
+        @Override
+        public void invokeInEdtAndWait(Runnable proc) {
+            proc.run();
+        }
+
+        @Override
+        public boolean isGuiThread() {
+            return true;
+        }
+
+        @Override
+        public ISkinImage getSkinIcon(FSkinProp skinProp) {
+            return null;
+        }
+
+        @Override
+        public ISkinImage getUnskinnedIcon(String path) {
+            return null;
+        }
+
+        @Override
+        public ISkinImage getCardArt(PaperCard card) {
+            return null;
+        }
+
+        @Override
+        public ISkinImage getCardArt(PaperCard card, boolean backFace) {
+            return null;
+        }
+
+        @Override
+        public ISkinImage createLayeredImage(PaperCard card, FSkinProp background, String overlayFilename,
+                float opacity) {
+            return null;
+        }
+
+        @Override
+        public void showBugReportDialog(String title, String text, boolean showExitAppBtn) {
+        }
+
+        @Override
+        public void showImageDialog(ISkinImage image, String message, String title) {
+        }
+
+        @Override
+        public int showOptionDialog(String message, String title, FSkinProp icon, List<String> options,
+                int defaultOption) {
+            return defaultOption;
+        }
+
+        @Override
+        public String showInputDialog(String message, String title, FSkinProp icon, String initialInput,
+                List<String> inputOptions, boolean isNumeric) {
+            return initialInput;
+        }
+
+        @Override
+        public <T> List<T> getChoices(String message, int min, int max, java.util.Collection<T> choices,
+                java.util.Collection<T> selected, java.util.function.Function<T, String> display) {
+            return new ArrayList<>(selected);
+        }
+
+        @Override
+        public <T> List<T> order(String title, String top, int remainingObjectsMin, int remainingObjectsMax,
+                List<T> sourceChoices, List<T> destChoices) {
+            return destChoices;
+        }
+
+        @Override
+        public String showFileDialog(String title, String defaultDir) {
+            return null;
+        }
+
+        @Override
+        public java.io.File getSaveFile(java.io.File defaultFile) {
+            return defaultFile;
+        }
+
+        @Override
+        public void download(GuiDownloadService service, java.util.function.Consumer<Boolean> callback) {
+            callback.accept(false);
+        }
+
+        @Override
+        public void refreshSkin() {
+        }
+
+        @Override
+        public void showCardList(String title, String message, List<PaperCard> list) {
+        }
+
+        @Override
+        public boolean showBoxedProduct(String title, String message, List<PaperCard> list) {
+            return true;
+        }
+
+        @Override
+        public PaperCard chooseCard(String title, String message, List<PaperCard> list) {
+            return list.isEmpty() ? null : list.get(0);
+        }
+
+        @Override
+        public int getAvatarCount() {
+            return 0;
+        }
+
+        @Override
+        public int getSleevesCount() {
+            return 0;
+        }
+
+        @Override
+        public void copyToClipboard(String text) {
+        }
+
+        @Override
+        public void browseToUrl(String url) throws java.io.IOException, java.net.URISyntaxException {
+        }
+
+        @Override
+        public IAudioClip createAudioClip(String filename) {
+            return null;
+        }
+
+        @Override
+        public IAudioMusic createAudioMusic(String filename) {
+            return null;
+        }
+
+        @Override
+        public void startAltSoundSystem(String filename, boolean isSynchronized) {
+        }
+
+        @Override
+        public void clearImageCache() {
+        }
+
+        @Override
+        public void showSpellShop() {
+        }
+
+        @Override
+        public void showBazaar() {
+        }
+
+        @Override
+        public boolean isSupportedAudioFormat(java.io.File file) {
+            return false;
+        }
+
+        @Override
+        public IGuiGame getNewGuiGame() {
+            return null;
+        }
+
+        @Override
+        public HostedMatch hostMatch() {
+            return null;
+        }
+
+        @Override
+        public void runBackgroundTask(String message, Runnable task) {
+            task.run();
+        }
+
+        @Override
+        public String encodeSymbols(String str, boolean formatReminderText) {
+            return str;
+        }
+
+        @Override
+        public void preventSystemSleep(boolean preventSleep) {
+        }
+
+        @Override
+        public float getScreenScale() {
+            return 1.0f;
+        }
+
+        @Override
+        public UpnpServiceConfiguration getUpnpPlatformService() {
+            return null;
+        }
     }
 }
