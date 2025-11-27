@@ -824,11 +824,10 @@ public class CountersPutAi extends CountersAi {
             CardCollection list = ComputerUtil.filterAITgts(sa, ai, targetables, true);
             if (list.isEmpty() || list.equals(targetables)) {
                 if (sa.isCurse()) {
-                    list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
+                    list = CardLists.filterControlledBy(targetables, ai.getOpponents());
                 } else {
-                    list = ai.getYourTeam().getCardsIn(ZoneType.Battlefield);
+                    list = CardLists.filterControlledBy(targetables, ai);
                 }
-                list.retainAll(targetables);
             }
             int totalTargets = list.size();
             boolean preferred = true;
@@ -848,7 +847,7 @@ public class CountersPutAi extends CountersAi {
                     if (list.isEmpty()) {
                         // Still an empty list, but we have to choose something (mandatory); expand targeting to
                         // include AI's own cards to see if there's anything targetable (e.g. Plague Belcher).
-                        list = CardLists.filterControlledBy(targetables, ai);
+                        list = CardLists.filterControlledBy(targetables, ai.getYourTeam());
                         preferred = false;
                     }
                 }
