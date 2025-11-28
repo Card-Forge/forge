@@ -636,7 +636,7 @@ public final class StaticAbilityContinuous {
                 if (stAb.hasParam("Incorporate")) {
                     final ManaCost manaCost = new ManaCost(new ManaCostParser(stAb.getParam("Incorporate")));
                     affectedCard.addChangedManaCost(manaCost, true, se.getTimestamp(), stAb.getId());
-                    affectedCard.addColorByText(ColorSet.fromMask(manaCost.getColorProfile()), true, se.getTimestamp(), stAb.getId());
+                    affectedCard.addColorByText(ColorSet.fromMask(manaCost.getColorProfile()), true, se.getTimestamp(), stAb);
                 }
                 if (stAb.hasParam("ManaCost")) {
                     final ManaCost manaCost = new ManaCost(new ManaCostParser(stAb.getParam("ManaCost")));
