@@ -1536,7 +1536,7 @@
 	},
 	{
 		"name": "Emrakul",
-		"displayName": "Emrakul's Castle",
+		"displayName": "Temple of the False God",
 		"type": "castle",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1546,12 +1546,6 @@
 		"questTags": [
 			"Castle",
 			"BiomeColorless"
-		],
-		"questFlagsToActivate": [
-			{
-				"key": "mainQuest",
-				"val": 2
-			}
 		]
 	},
 	{
@@ -3899,54 +3893,6 @@
 			"Boss",
 			"Planeswalker",
 			"Teferi"
-		]
-	},
-	{
-		"name": "Temple of Jaya",
-		"displayName": "Temple of Jaya",
-		"type": "dungeon",
-		"count": 1,
-		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
-		"sprite": "hall_of_flame",
-		"map": "../Shandalar Old Border/maps/map/main_story/templeofchandra.tmx",
-		"radiusFactor": 0.8,
-		"questTags": [
-			"Story",
-			"BiomeRed",
-			"Temple",
-			"DungeonEffect",
-			"Hostile",
-			"Boss"
-		],
-		"questFlagsToActivate": [
-			{
-				"key": "mainQuest",
-				"val": 2
-			}
-		]
-	},
-	{
-		"name": "Temple of Yawgmoth",
-		"displayName": "Temple of Yawgmoth",
-		"type": "dungeon",
-		"count": 1,
-		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
-		"sprite": "hall_of_fear",
-		"map": "../Shandalar Old Border/maps/map/main_story/temple_of_liliana/keep.tmx",
-		"radiusFactor": 0.8,
-		"questTags": [
-			"Story",
-			"BiomeBlack",
-			"Temple",
-			"DungeonEffect",
-			"Hostile",
-			"Boss"
-		],
-		"questFlagsToActivate": [
-			{
-				"key": "mainQuest",
-				"val": 2
-			}
 		]
 	},
 	{

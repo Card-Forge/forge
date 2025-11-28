@@ -34,26 +34,10 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="47" template="../../../../../../common/maps/obj/gold.tx" x="323" y="219"/>
-  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="214" y="150">
+  <object id="50" template="../../../../../../common/maps/obj/portal.tx" x="210" y="220">
    <properties>
-    <property name="reward">[{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;Pandora's Box&quot;
-}]</property>
-   </properties>
-  </object>
-  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="106" y="216"/>
-  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="182.772" y="284.992" width="64" height="64">
-   <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Urza's Tower|ATQ&quot;, &quot;Urza's Mine|ATQ&quot;, &quot;Urza's Power Plant|ATQ&quot;, &quot;Tolarian Academy|USG&quot;, &quot;Urza's Armor|USG&quot;, &quot;Urza's Blueprints|ULG&quot;, &quot;Urza's Avenger|ATQ&quot;, &quot;Urza's Engine|ALL&quot; ]
-}</property>
-    <property name="enemy" value="Emrakul"/>
-    <property name="spawn.Easy" type="bool" value="false"/>
-    <property name="spawn.Hard" type="bool" value="true"/>
-    <property name="spawn.Insane" type="bool" value="true"/>
-    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="portalState" value="active"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/end_palace/white_end_palace.tmx"/>
    </properties>
   </object>
   <object id="51" template="../../../../../../common/maps/obj/entry_up.tx" x="209" y="480">
@@ -61,47 +45,57 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="52" template="../../../../../../common/maps/obj/enemy.tx" x="182.772" y="284.992" width="64" height="64">
-     <properties>
-      <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Urza's Tower|ATQ&quot;, &quot;Urza's Mine|ATQ&quot;, &quot;Urza's Power Plant|ATQ&quot;, &quot;Tolarian Academy|USG&quot;, &quot;Urza's Armor|USG&quot;, &quot;Urza's Blueprints|ULG&quot;, &quot;Urza's Avenger|ATQ&quot;, &quot;Urza's Engine|ALL&quot; ]
-}</property>
-      <property name="enemy" value="Emrakul"/>
-      <property name="spawn.Easy" type="bool" value="true"/>
-      <property name="spawn.Hard" type="bool" value="false"/>
-      <property name="spawn.Insane" type="bool" value="false"/>
-      <property name="spawn.Normal" type="bool" value="true"/>
-     </properties>
-    </object>
-  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="132.844" y="401.619">
+  <object id="52" template="../../../../../../common/maps/obj/portal.tx" x="280" y="250">
    <properties>
-    <property name="dialog">[{
-  &quot;text&quot;:&quot;Hello, planeswalker {var=player_name}, Lord Emrakul awaits you for the final challenge. Be prepared.&quot;,
-  &quot;options&quot;:[
-    { &quot;name&quot;:&quot;Ok&quot; }
-  ]
-}]</property>
-    <property name="enemy" value="Homarid"/>
+    <property name="portalState" value="active"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/end_palace/blue_end_palace.tmx"/>
    </properties>
   </object>
-  <object id="70" template="../../../../../../common/maps/obj/gate.tx" x="208" y="448">
+  <object id="53" template="../../../../../../common/maps/obj/portal.tx" x="260" y="340">
+   <properties>
+    <property name="portalState" value="active"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/end_palace/black_end_palace.tmx"/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../../../common/maps/obj/portal.tx" x="160" y="340">
+   <properties>
+    <property name="portalState" value="active"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/end_palace/red_end_palace.tmx"/>
+   </properties>
+  </object>
+  <object id="55" template="../../../../../../common/maps/obj/portal.tx" x="140" y="250">
+   <properties>
+    <property name="portalState" value="active"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/end_palace/green_end_palace.tmx"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../../../common/maps/obj/gate.tx" x="208" y="142">
    <properties>
     <property name="dialog">[
 	{
-		&quot;text&quot;: &quot;A massive gate with a strange lock is blocking the path.&quot;,
+		&quot;text&quot;: &quot;A massive gate with five colored locks is blocking the path to the False God.&quot;,
 		&quot;options&quot;: [
 			{ &quot;name&quot;: &quot;go away&quot; },
 			{
-				&quot;name&quot;: &quot;unlock with the strange key&quot;,
+				&quot;name&quot;: &quot;unlock with the five keys to the False God&quot;,
 				&quot;condition&quot;: [
-					{ &quot;item&quot;: &quot;Strange Key&quot; }
+					{ &quot;item&quot;: &quot;White Key to the False God&quot; },
+					{ &quot;item&quot;: &quot;Blue Key to the False God&quot; },
+					{ &quot;item&quot;: &quot;Black Key to the False God&quot; },
+					{ &quot;item&quot;: &quot;Red Key to the False God&quot; },
+					{ &quot;item&quot;: &quot;Green Key to the False God&quot; }
 				],
-				&quot;text&quot;: &quot;The gate is unlocked&quot;,
+				&quot;text&quot;: &quot;The gate is unlocked. You may now face the False God, Karona.&quot;,
 				&quot;options&quot;: [
 					{
 						&quot;name&quot;: &quot;continue&quot;,
 						&quot;action&quot;: [
 							{ &quot;deleteMapObject&quot;: -1 },
-							{ &quot;removeItem&quot;: &quot;Strange Key&quot; }
+							{ &quot;removeItem&quot;: &quot;White Key to the False God&quot; },
+							{ &quot;removeItem&quot;: &quot;Blue Key to the False God&quot; },
+							{ &quot;removeItem&quot;: &quot;Black Key to the False God&quot; },
+							{ &quot;removeItem&quot;: &quot;Red Key to the False God&quot; },
+							{ &quot;removeItem&quot;: &quot;Green Key to the False God&quot; }
 						]
 					}
 				]
@@ -111,5 +105,13 @@
 ]</property>
    </properties>
   </object>
+  <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="195" y="94" width="64" height="64">
+   <properties>
+    <property name="enemy" value="Karona"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../../../common/maps/obj/block.tx" x="192" y="142"/>
+  <object id="73" template="../../../../../../common/maps/obj/block.tx" x="224" y="142"/>
  </objectgroup>
 </map>
