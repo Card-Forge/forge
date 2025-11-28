@@ -91,7 +91,7 @@ public class CounterAi extends SpellAbilityAi {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
         } else {
-            // This spell doesn't target. Must be a "Coutner All" or "Counter trigger" type of ability.
+            // This spell doesn't target. Must be a "Counter All" or "Counter trigger" type of ability.
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
