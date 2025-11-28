@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="287">
  <properties>
-  <property name="canFailDungeon" type="bool" value="true"/>
-  <property name="respawnEnemies" type="bool" value="true"/>
+  <property name="canFailDungeon" type="bool" value="true" />
+  <property name="respawnEnemies" type="bool" value="true" />
  </properties>
- <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
- <tileset firstgid="13697" source="../../../../../../../common/maps/tileset/main-nocollide.tsx"/>
- <tileset firstgid="23809" source="../../../../../../../common/maps/tileset/FarmFood.tsx"/>
+ <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../../common/maps/tileset/buildings-nocollide.tsx" />
+ <tileset firstgid="13697" source="../../../../../../../common/maps/tileset/main-nocollide.tsx" />
+ <tileset firstgid="23809" source="../../../../../../../common/maps/tileset/FarmFood.tsx" />
  <layer id="1" name="Tile Layer 1" width="60" height="34">
   <data encoding="csv">
 2422,2422,2422,2422,2422,2422,2422,2422,2422,2422,2422,2422,2422,2946,2946,2946,2946,2946,2946,2946,2946,2946,2462,2422,7711,7712,7711,2422,2422,2422,2422,2422,2422,2422,2422,2422,2422,2422,5535,2462,2462,2462,5531,2462,2462,2462,2462,5537,2422,2422,6164,6164,6164,6164,6164,6164,6164,6164,6164,6164,
@@ -87,7 +87,7 @@
  </layer>
  <layer id="4" name="Tile Layer 3" width="60" height="34">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="csv">
 1208,1051,1051,1051,1051,1051,1051,1051,1051,1210,0,0,5531,6186,2147489834,9731,5544,5544,5544,6027,6185,2147489832,5531,0,8275,8276,8277,8899,0,0,0,406,407,407,407,407,407,408,0,0,5230,5230,0,0,0,0,0,0,3650,4110,3654,3809,3811,3809,3812,3809,3811,3809,3653,4110,
@@ -165,106 +165,106 @@
 </data>
  </layer>
  <objectgroup id="2" name="Objects">
-  <object id="2" template="../../../../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="16" height="576"/>
-  <object id="3" template="../../../../../../../common/maps/obj/collision.tx" x="0" y="544" width="960" height="15.25"/>
-  <object id="4" template="../../../../../../../common/maps/obj/collision.tx" x="960" y="-16" width="16" height="576"/>
-  <object id="5" template="../../../../../../../common/maps/obj/collision.tx" x="0" y="-16" width="960" height="16"/>
+  <object id="2" template="../../../../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="16" height="576" />
+  <object id="3" template="../../../../../../../common/maps/obj/collision.tx" x="0" y="544" width="960" height="15.25" />
+  <object id="4" template="../../../../../../../common/maps/obj/collision.tx" x="960" y="-16" width="16" height="576" />
+  <object id="5" template="../../../../../../../common/maps/obj/collision.tx" x="0" y="-16" width="960" height="16" />
   <object id="187" template="../../../../../../../common/maps/obj/enemy.tx" x="864" y="464">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;street&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"street", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;street&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"street"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking street as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking street as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be out on the main road through town",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="enemy" value="Necromancer"/>
-    <property name="pursueRange" type="int" value="200"/>
-    <property name="threatRange" type="int" value="5"/>
+    <property name="enemy" value="Necromancer" />
+    <property name="pursueRange" type="int" value="200" />
+    <property name="threatRange" type="int" value="5" />
    </properties>
   </object>
   <object id="188" template="../../../../../../../common/maps/obj/enemy.tx" x="384" y="48">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;alley&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"alley", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;alley&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"alley"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking alley as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking alley as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the alleyways&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be in the alleyways",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="enemy" value="Scarecrow"/>
+    <property name="enemy" value="Scarecrow" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.02,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.02,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
@@ -273,401 +273,401 @@
   <object id="189" template="../../../../../../../common/maps/obj/treasure.tx" x="880" y="80">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 8,
-  &quot;editions&quot;: [ &quot;LEG&quot;, &quot;CHR&quot;, &quot;3ED&quot; ]
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 8,
+  "editions": [ "LEG", "CHR", "3ED" ]
+  "colors": [ "colorID" ]
 }]</property>
-    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Easy" type="bool" value="false" />
    </properties>
   </object>
   <object id="192" template="../../../../../../../common/maps/obj/enemy.tx" x="448" y="464">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;docks&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"docks", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;docks&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"docks"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking docks as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking docks as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be at the docks&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be at the docks",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
     <property name="effect">{
- &quot;lifeModifier&quot;: 10,
+ "lifeModifier": 10,
 }</property>
-    <property name="enemy" value="Wild Rat"/>
+    <property name="enemy" value="Wild Rat" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.02,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.02,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
-    <property name="threatRange" type="int" value="75"/>
+    <property name="threatRange" type="int" value="75" />
    </properties>
   </object>
   <object id="193" template="../../../../../../../common/maps/obj/enemy.tx" x="640" y="112">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;warehouse&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"warehouse", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;warehouse&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"warehouse"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking warehouse as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking warehouse as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the warehouse&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be in the warehouse",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="enemy" value="Demon"/>
+    <property name="enemy" value="Demon" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.02,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.02,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
    </properties>
   </object>
-  <object id="194" template="../../../../../../../common/maps/obj/treasure.tx" x="512" y="32"/>
+  <object id="194" template="../../../../../../../common/maps/obj/treasure.tx" x="512" y="32" />
   <object id="197" template="../../../../../../../common/maps/obj/enemy.tx" x="112" y="96">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;temple&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"temple", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;temple&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"temple"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking temple as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking temple as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the temple&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be in the temple",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="enemy" value="Necromancer"/>
+    <property name="enemy" value="Necromancer" />
    </properties>
   </object>
   <object id="200" template="../../../../../../../common/maps/obj/enemy.tx" x="784" y="512">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;street&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"street", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;street&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"street"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking street as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking street as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be out on the main road through town",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="enemy" value="High Vampire"/>
+    <property name="enemy" value="High Vampire" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.02,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.02,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
-    <property name="threatRange" type="int" value="80"/>
+    <property name="threatRange" type="int" value="80" />
    </properties>
   </object>
   <object id="202" template="../../../../../../../common/maps/obj/treasure.tx" x="736" y="16">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 2,
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 2,
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;probability&quot;: 0.5,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 1,
+  "probability": 0.5,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 3,
-  &quot;addMaxCount&quot;: 2
+  "type": "randomCard",
+  "count": 3,
+  "addMaxCount": 2
 },{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;probability&quot;: 0.02,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;Demonic Contract&quot;
+  "type": "item",
+  "probability": 0.02,
+  "count": 1,
+  "itemName": "Demonic Contract"
 }]</property>
    </properties>
   </object>
   <object id="203" template="../../../../../../../common/maps/obj/scroll.tx" x="592" y="528">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Dark Banishing|ICE&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Dark Banishing|ICE&quot;, &quot;count&quot;: 1 } ]" />
    </properties>
   </object>
   <object id="205" template="../../../../../../../common/maps/obj/treasure.tx" x="688" y="16">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 2,
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 2,
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;probability&quot;: 0.5,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 1,
+  "probability": 0.5,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 3,
-  &quot;addMaxCount&quot;: 2
+  "type": "randomCard",
+  "count": 3,
+  "addMaxCount": 2
 },{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;probability&quot;: 0.02,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;Demonic Contract&quot;
+  "type": "item",
+  "probability": 0.02,
+  "count": 1,
+  "itemName": "Demonic Contract"
 }]</property>
    </properties>
   </object>
   <object id="206" template="../../../../../../../common/maps/obj/treasure.tx" x="112" y="33">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 2,
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 2,
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;probability&quot;: 0.5,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 1,
+  "probability": 0.5,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 3,
-  &quot;addMaxCount&quot;: 2
+  "type": "randomCard",
+  "count": 3,
+  "addMaxCount": 2
 },{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;probability&quot;: 0.02,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;Demonic Contract&quot;
+  "type": "item",
+  "probability": 0.02,
+  "count": 1,
+  "itemName": "Demonic Contract"
 }]</property>
    </properties>
   </object>
   <object id="207" template="../../../../../../../common/maps/obj/treasure.tx" x="32" y="33">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 2,
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 2,
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;probability&quot;: 0.5,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 1,
+  "probability": 0.5,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 3,
-  &quot;addMaxCount&quot;: 2
+  "type": "randomCard",
+  "count": 3,
+  "addMaxCount": 2
 },{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;probability&quot;: 0.02,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;Demonic Contract&quot;
+  "type": "item",
+  "probability": 0.02,
+  "count": 1,
+  "itemName": "Demonic Contract"
 }]</property>
    </properties>
   </object>
   <object id="208" template="../../../../../../../common/maps/obj/treasure.tx" x="464" y="16">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 2,
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 2,
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;probability&quot;: 0.5,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 1,
+  "probability": 0.5,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 3,
-  &quot;addMaxCount&quot;: 2
+  "type": "randomCard",
+  "count": 3,
+  "addMaxCount": 2
 },{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;probability&quot;: 0.02,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;Demonic Contract&quot;
+  "type": "item",
+  "probability": 0.02,
+  "count": 1,
+  "itemName": "Demonic Contract"
 }]</property>
    </properties>
   </object>
   <object id="209" template="../../../../../../../common/maps/obj/enemy.tx" x="72" y="40">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;temple&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"temple", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;temple&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"temple"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking temple as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking temple as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the temple&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be in the temple",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="enemy" value="Immersturm Demon"/>
+    <property name="enemy" value="Immersturm Demon" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.05,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.05,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
@@ -676,264 +676,264 @@
   <object id="210" template="../../../../../../../common/maps/obj/enemy.tx" x="32" y="96">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;temple&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"temple", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;temple&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"temple"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking temple as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking temple as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the temple&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be in the temple",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="enemy" value="Necromancer"/>
+    <property name="enemy" value="Necromancer" />
    </properties>
   </object>
   <object id="211" template="../../../../../../../common/maps/obj/enemy.tx" x="704" y="80">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;warehouse&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"warehouse", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;warehouse&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"warehouse"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking warehouse as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking warehouse as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the warehouse&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be in the warehouse",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="enemy" value="Volcano Elemental"/>
-    <property name="pursueRange" type="int" value="80"/>
+    <property name="enemy" value="Volcano Elemental" />
+    <property name="pursueRange" type="int" value="80" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.02,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.02,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
-    <property name="threatRange" type="int" value="40"/>
+    <property name="threatRange" type="int" value="40" />
    </properties>
   </object>
   <object id="212" template="../../../../../../../common/maps/obj/enemy.tx" x="384" y="208">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;street&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"street", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;street&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"street"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking street as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking street as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be out on the main road through town",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="enemy" value="High Vampire"/>
+    <property name="enemy" value="High Vampire" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.02,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.02,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
-    <property name="threatRange" type="int" value="75"/>
-    <property name="waypoints" value="255,256,257,258"/>
+    <property name="threatRange" type="int" value="75" />
+    <property name="waypoints" value="255,256,257,258" />
    </properties>
   </object>
   <object id="213" template="../../../../../../../common/maps/obj/enemy.tx" x="544" y="64">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;hut&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"hut", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;hut&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"hut"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking hut as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking hut as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the witch's hut&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be in the witch's hut",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="enemy" value="Bog Witch"/>
+    <property name="enemy" value="Bog Witch" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.02,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.02,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
-    <property name="threatRange" type="int" value="25"/>
+    <property name="threatRange" type="int" value="25" />
    </properties>
   </object>
   <object id="214" template="../../../../../../../common/maps/obj/enemy.tx" x="544" y="128">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;hut&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"hut", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;hut&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"hut"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking hut as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking hut as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the witch's hut&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be in the witch's hut",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="enemy" value="Bog Witch"/>
+    <property name="enemy" value="Bog Witch" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.02,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.02,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
@@ -942,52 +942,52 @@
   <object id="215" template="../../../../../../../common/maps/obj/enemy.tx" x="167" y="50">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;alley&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"alley", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;alley&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"alley"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking alley as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking alley as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the alleyways&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be in the alleyways",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="enemy" value="Rogue"/>
+    <property name="enemy" value="Rogue" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.02,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.02,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
@@ -996,108 +996,108 @@
   <object id="216" template="../../../../../../../common/maps/obj/enemy.tx" x="240" y="224">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;street&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"street", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;street&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"street"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking street as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking street as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be out on the main road through town",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="enemy" value="Rakdos Wizard"/>
+    <property name="enemy" value="Rakdos Wizard" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.02,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.02,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
-    <property name="threatRange" type="int" value="75"/>
-    <property name="waypoints" value="246,249"/>
+    <property name="threatRange" type="int" value="75" />
+    <property name="waypoints" value="246,249" />
    </properties>
   </object>
   <object id="217" template="../../../../../../../common/maps/obj/enemy.tx" x="72" y="144">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;temple&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"temple", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;temple&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"temple"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking temple as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking temple as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the temple&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be in the temple",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="enemy" value="Orzhov Cleric"/>
+    <property name="enemy" value="Orzhov Cleric" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.02,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.02,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
@@ -1106,164 +1106,164 @@
   <object id="218" template="../../../../../../../common/maps/obj/enemy.tx" x="465" y="33">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;alley&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"alley", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;alley&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"alley"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking alley as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking alley as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the alleyways&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be in the alleyways",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="enemy" value="Rogue"/>
+    <property name="enemy" value="Rogue" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.02,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.02,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
-    <property name="threatRange" type="int" value="40"/>
+    <property name="threatRange" type="int" value="40" />
    </properties>
   </object>
   <object id="219" template="../../../../../../../common/maps/obj/enemy.tx" x="352" y="208">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;street&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"street", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;street&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"street"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking street as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking street as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be out on the main road through town",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="effect" value="{&quot;lifeModifier&quot;: 10, &quot;startBattleWithCard&quot;: [ &quot;Black Knight&quot; ]}"/>
-    <property name="enemy" value="Death Knight"/>
+    <property name="effect" value="{&quot;lifeModifier&quot;: 10, &quot;startBattleWithCard&quot;: [ &quot;Black Knight&quot; ]}" />
+    <property name="enemy" value="Death Knight" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.02,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.02,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
-    <property name="threatRange" type="int" value="75"/>
-    <property name="waypoints" value="245,248"/>
+    <property name="threatRange" type="int" value="75" />
+    <property name="waypoints" value="245,248" />
    </properties>
   </object>
   <object id="220" template="../../../../../../../common/maps/obj/enemy.tx" x="223" y="64">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;tavern&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"tavern", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;tavern&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"tavern"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking tavern as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking tavern as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the tavern&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be in the tavern",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="enemy" value="Yawgmoth's Alchemist"/>
+    <property name="enemy" value="Yawgmoth's Alchemist" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.02,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.02,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
@@ -1272,394 +1272,395 @@
   <object id="221" template="../../../../../../../common/maps/obj/enemy.tx" x="576" y="224">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;street&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"street", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;street&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"street"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking street as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking street as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be out on the main road through town",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
     <property name="effect">{
- &quot;lifeModifier&quot;: 10,
+ "lifeModifier": 10,
 }</property>
-    <property name="enemy" value="Greater Zombie"/>
+    <property name="enemy" value="Greater Zombie" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.02,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.02,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
-    <property name="threatRange" type="int" value="75"/>
-    <property name="waypoints" value="246,249"/>
+    <property name="threatRange" type="int" value="75" />
+    <property name="waypoints" value="246,249" />
    </properties>
   </object>
   <object id="222" template="../../../../../../../common/maps/obj/enemy.tx" x="266" y="99">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;tavern&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"tavern", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;tavern&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"tavern"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking tavern as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking tavern as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the tavern&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be in the tavern",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="enemy" value="Rakdos Wizard"/>
+    <property name="enemy" value="Rakdos Wizard" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.02,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.02,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
-    <property name="threatRange" type="int" value="75"/>
+    <property name="threatRange" type="int" value="75" />
    </properties>
   </object>
   <object id="223" template="../../../../../../../common/maps/obj/enemy.tx" x="416" y="240">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;street&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"street", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;street&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"street"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking street as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking street as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be out on the main road through town",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="enemy" value="Skeleton Champion"/>
+    <property name="enemy" value="Skeleton Champion" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.02,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.02,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
-    <property name="threatRange" type="int" value="75"/>
-    <property name="waypoints" value="247,250"/>
+    <property name="threatRange" type="int" value="75" />
+    <property name="waypoints" value="247,250" />
    </properties>
   </object>
   <object id="224" template="../../../../../../../common/maps/obj/enemy.tx" x="48" y="288">
    <properties>
     <property name="defeatDialog">[
 {
-   &quot;text&quot;:&quot;You pry the key away from the mayor's cold dead (and dead again) hands. Having that, there's not much between you and Liliana now.&quot;,
-   &quot;options&quot;:[
-	{&quot;name&quot;:&quot;(continue)&quot;
+   "text":"You pry the key away from the mayor's cold dead (and dead again) hands. Having that, there's not much between you and Liliana now.",
+   "options":[
+	{"name":"(continue)"
 	}
-	{&quot;action&quot;:[{&quot;deleteMapObject&quot;: 278}, {&quot;deleteMapObject&quot;: -1}]}
+	{"action":[{"deleteMapObject": 278}, {"deleteMapObject": -1}]}
 	]
 }
 ]</property>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;The mayor can only keep away from you for so long before you manage to fight through the crowd and reach him.&quot;,
-    &quot;options&quot;:[
-      { &quot;name&quot;:&quot;Walk away&quot; },
-      { &quot;name&quot;:&quot;Attack the Mayor&quot;,
-	  &quot;action&quot;:[{&quot;battleWithActorID&quot;:-1}]}
+    "text":"The mayor can only keep away from you for so long before you manage to fight through the crowd and reach him.",
+    "options":[
+      { "name":"Walk away" },
+      { "name":"Attack the Mayor",
+	  "action":[{"battleWithActorID":-1}]}
         
    }
 ]</property>
     <property name="effect">{
- &quot;lifeModifier&quot;: 15,
+ "lifeModifier": 15,
  
 }</property>
-    <property name="enemy" value="Zombie Lord"/>
-    <property name="fleeRange" type="float" value="125"/>
-    <property name="hidden" type="bool" value="false"/>
-    <property name="inactive" type="bool" value="false"/>
+    <property name="enemy" value="Zombie Lord" />
+    <property name="fleeRange" type="float" value="125" />
+    <property name="hidden" type="bool" value="false" />
+    <property name="inactive" type="bool" value="false" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.02,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.02,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
-    <property name="waypoints" value="255"/>
+    <property name="waypoints" value="255" />
    </properties>
   </object>
-  <object id="231" template="../../../../../../../common/maps/obj/manashards.tx" x="624" y="16"/>
-  <object id="232" template="../../../../../../../common/maps/obj/gold.tx" x="166" y="25"/>
+  <object id="231" template="../../../../../../../common/maps/obj/manashards.tx" x="624" y="16" />
+  <object id="232" template="../../../../../../../common/maps/obj/gold.tx" x="166" y="25" />
   <object id="233" template="../../../../../../../common/maps/obj/treasure.tx" x="335" y="83">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 2,
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 2,
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;probability&quot;: 0.5,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 1,
+  "probability": 0.5,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 3,
-  &quot;addMaxCount&quot;: 2
+  "type": "randomCard",
+  "count": 3,
+  "addMaxCount": 2
 },{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;probability&quot;: 0.02,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;Demonic Contract&quot;
+  "type": "item",
+  "probability": 0.02,
+  "count": 1,
+  "itemName": "Demonic Contract"
 }]</property>
    </properties>
   </object>
   <object id="234" template="../../../../../../../common/maps/obj/treasure.tx" x="223" y="33">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 2,
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 2,
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;probability&quot;: 0.5,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 1,
+  "probability": 0.5,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 3,
-  &quot;addMaxCount&quot;: 2
+  "type": "randomCard",
+  "count": 3,
+  "addMaxCount": 2
 },{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;probability&quot;: 0.02,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;Demonic Contract&quot;
+  "type": "item",
+  "probability": 0.02,
+  "count": 1,
+  "itemName": "Demonic Contract"
 }]</property>
    </properties>
   </object>
   <object id="235" template="../../../../../../../common/maps/obj/enemy.tx" x="624" y="480">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;archive&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"archive", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;archive&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"archive"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking archive as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking archive as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the archives&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be in the archives",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="enemy" value="Lich"/>
+    <property name="enemy" value="Lich" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.1,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.1,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
-    <property name="threatRange" type="int" value="40"/>
+    <property name="threatRange" type="int" value="40" />
    </properties>
   </object>
   <object id="236" template="../../../../../../../common/maps/obj/enemy.tx" x="96" y="208">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;street&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"street", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;street&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"street"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking street as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking street as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be out on the main road through town",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them at the end of the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="effect" value="{&quot;lifeModifier&quot;: 10}"/>
-    <property name="enemy" value="Vampire"/>
+    <property name="effect">{ "startBattleWithCard": [ "Swamp|2ED","Cemetery Gate|HML","Cemetery Gate|HML","Cemetery Gate|HML","Cemetery Gate|HML","Crovax the Cursed|STH" ]
+}</property>
+    <property name="enemy" value="Vampire" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.02,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.02,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
-    <property name="threatRange" type="int" value="75"/>
-    <property name="waypoints" value="245,248"/>
+    <property name="threatRange" type="int" value="75" />
+    <property name="waypoints" value="245,248" />
    </properties>
   </object>
   <object id="237" template="../../../../../../../common/maps/obj/dialog.tx" x="0" y="478" width="144" height="16">
    <properties>
     <property name="dialog">[
 {
-   &quot;text&quot;: &quot;At the northern edge of the bog you find a small settlement of unusual make-up. Even deep withing in the swamplands, it is rare to see anywhere near so many denizens of the night and practitioners of unholy arts in one location.&quot;,
-   &quot;options&quot;: [
+   "text": "At the northern edge of the bog you find a small settlement of unusual make-up. Even deep withing in the swamplands, it is rare to see anywhere near so many denizens of the night and practitioners of unholy arts in one location.",
+   "options": [
    {
-      &quot;name&quot;: &quot;(Continue)&quot;,
-      &quot;text&quot;: &quot;Ahead of you, you see a rather regal looking mage with a large key hanging from his belt. It seems the mayor is easy enough to identify. However, he yelps in recognition as you approach, and obviously is not interested in staying to chat with you.&quot;,
-      &quot;options&quot;: [
+      "name": "(Continue)",
+      "text": "Ahead of you, you see a rather regal looking mage with a large key hanging from his belt. It seems the mayor is easy enough to identify. However, he yelps in recognition as you approach, and obviously is not interested in staying to chat with you.",
+      "options": [
       {
-         &quot;name&quot;: &quot;(Continue)&quot;,
-         &quot;text&quot;: &quot;The mayor disappears in a cloud of black smoke, but you feel fairly certain that he's still somewhere in the area. It's just a matter of finding him&quot;,
-      &quot;options&quot;: [
+         "name": "(Continue)",
+         "text": "The mayor disappears in a cloud of black smoke, but you feel fairly certain that he's still somewhere in the area. It's just a matter of finding him",
+      "options": [
       {
-         &quot;name&quot;: &quot;(Continue)&quot;,
-         &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+         "name": "(Continue)",
+         "action": [{"deleteMapObject": -1}]
       }
       ]
       }
@@ -1668,20 +1669,20 @@
    ]
 }
 ]</property>
-    <property name="type" value="dialog"/>
+    <property name="type" value="dialog" />
    </properties>
   </object>
   <object id="238" template="../../../../../../../common/maps/obj/treasure.tx" x="864" y="96">
    <properties>
     <property name="reward">[{
-	&quot;type&quot;: &quot;shards&quot;,
-	&quot;probability&quot;: 1,
-	&quot;count&quot;: 200
+	"type": "shards",
+	"probability": 1,
+	"count": 200
 },
 {
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;cardName&quot;:&quot;Necropotence|ICE&quot;
+  "type": "randomCard",
+  "count": 1,
+  "cardName":"Necropotence|ICE"
 }
 ]
 
@@ -1691,102 +1692,102 @@
   <object id="239" template="../../../../../../../common/maps/obj/treasure.tx" x="576" y="32">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 2,
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 2,
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;probability&quot;: 0.5,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 1,
+  "probability": 0.5,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 3,
-  &quot;addMaxCount&quot;: 2
+  "type": "randomCard",
+  "count": 3,
+  "addMaxCount": 2
 },{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;probability&quot;: 0.02,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;Demonic Contract&quot;
+  "type": "item",
+  "probability": 0.02,
+  "count": 1,
+  "itemName": "Demonic Contract"
 }]</property>
    </properties>
   </object>
   <object id="240" template="../../../../../../../common/maps/obj/enemy.tx" x="304" y="464">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;docks&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"docks", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;docks&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"docks"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking docks as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking docks as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be at the docks&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be at the docks",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="enemy" value="Eye"/>
-    <property name="pursueRange" type="int" value="90"/>
+    <property name="enemy" value="Eye" />
+    <property name="pursueRange" type="int" value="90" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.02,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.02,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
-    <property name="threatRange" type="int" value="60"/>
+    <property name="threatRange" type="int" value="60" />
    </properties>
   </object>
   <object id="241" template="../../../../../../../common/maps/obj/entry_up.tx" x="0" y="544" width="144" height="16">
    <properties>
-    <property name="spawn" type="bool" value="true"/>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/bog.tmx"/>
-    <property name="teleportObjectId" value="241"/>
+    <property name="spawn" type="bool" value="true" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/bog.tmx" />
+    <property name="teleportObjectId" value="241" />
    </properties>
   </object>
-  <object id="242" template="../../../../../../../common/maps/obj/manashards.tx" x="832" y="96"/>
-  <object id="243" template="../../../../../../../common/maps/obj/manashards.tx" x="896" y="96"/>
+  <object id="242" template="../../../../../../../common/maps/obj/manashards.tx" x="832" y="96" />
+  <object id="243" template="../../../../../../../common/maps/obj/manashards.tx" x="896" y="96" />
   <object id="251" template="../../../../../../../common/maps/obj/enemy.tx" x="864" y="112">
    <properties>
-    <property name="effect"></property>
-    <property name="enemy" value="Liliana"/>
+    <property name="effect" />
+    <property name="enemy" value="Liliana" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.05,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.05,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
@@ -1795,255 +1796,255 @@
   <object id="259" template="../../../../../../../common/maps/obj/enemy.tx" x="288" y="320" visible="1">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;graveyard&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"graveyard", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;graveyard&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"graveyard"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking graveyard as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking graveyard as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the graveyard&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be in the graveyard",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="effect"></property>
-    <property name="enemy" value="Greater Zombie"/>
-    <property name="hidden" type="bool" value="true"/>
-    <property name="pursueRange" type="float" value="60"/>
+    <property name="effect" />
+    <property name="enemy" value="Greater Zombie" />
+    <property name="hidden" type="bool" value="true" />
+    <property name="pursueRange" type="float" value="60" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.02,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.02,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
-    <property name="threatRange" type="float" value="30"/>
+    <property name="threatRange" type="float" value="30" />
    </properties>
   </object>
   <object id="260" template="../../../../../../../common/maps/obj/enemy.tx" x="464" y="336" visible="1">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;graveyard&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"graveyard", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;graveyard&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"graveyard"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking graveyard as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking graveyard as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the graveyard&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be in the graveyard",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Black Market&quot;]}"/>
-    <property name="enemy" value="Skeleton Champion"/>
-    <property name="hidden" type="bool" value="true"/>
-    <property name="pursueRange" type="float" value="60"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Black Market&quot;]}" />
+    <property name="enemy" value="Skeleton Champion" />
+    <property name="hidden" type="bool" value="true" />
+    <property name="pursueRange" type="float" value="60" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.02,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.02,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
-    <property name="threatRange" type="float" value="30"/>
+    <property name="threatRange" type="float" value="30" />
    </properties>
   </object>
   <object id="262" template="../../../../../../../common/maps/obj/enemy.tx" x="240" y="384" visible="1">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;graveyard&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"graveyard", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;graveyard&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"graveyard"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking graveyard as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking graveyard as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the graveyard&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be in the graveyard",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Death Pits of Rath&quot;]}"/>
-    <property name="enemy" value="Skeleton Champion"/>
-    <property name="hidden" type="bool" value="true"/>
-    <property name="pursueRange" type="float" value="60"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Death Pits of Rath&quot;]}" />
+    <property name="enemy" value="Skeleton Champion" />
+    <property name="hidden" type="bool" value="true" />
+    <property name="pursueRange" type="float" value="60" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.02,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.02,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
-    <property name="threatRange" type="float" value="30"/>
+    <property name="threatRange" type="float" value="30" />
    </properties>
   </object>
   <object id="263" template="../../../../../../../common/maps/obj/enemy.tx" x="368" y="368" visible="1">
    <properties>
     <property name="defeatDialog">[
-{&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;checkMapFlag&quot;:&quot;graveyard&quot;, &quot;not&quot;:true}
+{"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"checkMapFlag":"graveyard", "not":true}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;graveyard&quot;},
-      {&quot;advanceMapFlag&quot;:&quot;placesAlreadyChecked&quot;},
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"advanceMapFlag":"graveyard"},
+      {"advanceMapFlag":"placesAlreadyChecked"},
+      {"deleteMapObject": -1}
 ],
-   &quot;text&quot;: &quot;Marking graveyard as checked&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "Marking graveyard as checked",
+   "options":[{"name":"(Continue)","action": [
+      {"deleteMapObject": -1}]}]
    },
 
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true}, 
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&lt;","val":6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the graveyard&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]}]
+   "text": "The mayor does not appear to be in the graveyard",
+   "options":[{"name":"(Continue your search)","action": [
+      {"deleteMapObject": -1}]}]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true},
-      {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:6}}
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned", "not":true},
+      {"getMapFlag":{"key":"placesAlreadyChecked","op":"&gt;=","val":6}}
       ],
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;mayorSpawned&quot;,&quot;activateMapObject&quot;:224}],
-   &quot;text&quot;: &quot;After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!&quot;,
-   &quot;options&quot;:[{&quot;name&quot;:&quot;(Chase after them!!!)&quot;,&quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}]
+   "action": [
+      {"advanceMapFlag":"mayorSpawned","activateMapObject":224}],
+   "text": "After searching most of the town, you still haven't found the mayor, but as you glance back in that direction you finally spot them out in the street!",
+   "options":[{"name":"(Chase after them!!!)","action": [
+      {"deleteMapObject": -1}]
    }]
    },
-   {&quot;condition&quot;: [
-      {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;}],
-	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+   {"condition": [
+      {"checkMapFlag":"mayorSpawned"}],
+	  "action": [{"deleteMapObject": -1}]
    }
 ]
 </property>
-    <property name="effect"></property>
-    <property name="enemy" value="Greater Zombie"/>
-    <property name="hidden" type="bool" value="true"/>
-    <property name="pursueRange" type="float" value="60"/>
+    <property name="effect" />
+    <property name="enemy" value="Greater Zombie" />
+    <property name="hidden" type="bool" value="true" />
+    <property name="pursueRange" type="float" value="60" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 0.02,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Demonic Contract&quot;
+    "type": "item",
+    "probability": 0.02,
+    "count": 1,
+    "itemName": "Demonic Contract"
   }
 ]
 </property>
-    <property name="threatRange" type="float" value="30"/>
+    <property name="threatRange" type="float" value="30" />
    </properties>
   </object>
   <object id="264" template="../../../../../../../common/maps/obj/booster.tx" x="160" y="448">
    <properties>
     <property name="reward">[
   {
-    &quot;colors&quot;: [&quot;Black&quot;],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    "colors": ["Black"],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
   },
   {
-    &quot;colors&quot;: [&quot;Black&quot;],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    "colors": ["Black"],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
   },
   {
-    &quot;colors&quot;: [&quot;Black&quot;],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+    "colors": ["Black"],
+    "type": "card",
+    "count": 1,
+    "rarity": [ "Rare" ]
   }
 ]
 </property>
@@ -2052,70 +2053,70 @@
   <object id="265" template="../../../../../../../common/maps/obj/treasure.tx" x="560" y="512">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 2,
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 2,
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;probability&quot;: 0.5,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 1,
+  "probability": 0.5,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 3,
-  &quot;addMaxCount&quot;: 2
+  "type": "randomCard",
+  "count": 3,
+  "addMaxCount": 2
 },{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;probability&quot;: 0.02,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;Demonic Contract&quot;
+  "type": "item",
+  "probability": 0.02,
+  "count": 1,
+  "itemName": "Demonic Contract"
 }]</property>
    </properties>
   </object>
-  <object id="266" template="../../../../../../../common/maps/obj/gold.tx" x="496" y="304"/>
-  <object id="267" template="../../../../../../../common/maps/obj/gold.tx" x="512" y="288"/>
-  <object id="268" template="../../../../../../../common/maps/obj/manashards.tx" x="192" y="336"/>
+  <object id="266" template="../../../../../../../common/maps/obj/gold.tx" x="496" y="304" />
+  <object id="267" template="../../../../../../../common/maps/obj/gold.tx" x="512" y="288" />
+  <object id="268" template="../../../../../../../common/maps/obj/manashards.tx" x="192" y="336" />
   <object id="278" template="../../../../../../../common/maps/obj/gate.tx" x="864" y="176">
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;Behind this gate, you see the legendary Liliana. She appears to be deep into a ritual of some sort. But to reach her, you need to find the mayor first.&quot;,
-    &quot;loctext&quot;:&quot;&quot;,
-    &quot;condition&quot;: [ { &quot;actorID&quot;: 224 } ],
-    &quot;options&quot;:[ { &quot;name&quot;:&quot;(Continue)&quot; } ]
+    "text":"Behind this gate, you see the legendary Liliana. She appears to be deep into a ritual of some sort. But to reach her, you need to find the mayor first.",
+    "loctext":"",
+    "condition": [ { "actorID": 224 } ],
+    "options":[ { "name":"(Continue)" } ]
   }
 ]</property>
-    <property name="type" value="dialog"/>
+    <property name="type" value="dialog" />
    </properties>
   </object>
   <object id="279" template="../../../../../../../common/maps/obj/portal.tx" x="864" y="32">
    <properties>
-    <property name="portalState" value="active"/>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/keep.tmx"/>
-    <property name="teleportObjectId" value="239"/>
+    <property name="portalState" value="active" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/keep.tmx" />
+    <property name="teleportObjectId" value="239" />
    </properties>
   </object>
   <object id="280" template="../../../../../../../common/maps/obj/booster.tx" x="544" y="32">
    <properties>
     <property name="reward">[
   {
-    &quot;colors&quot;: [&quot;Black&quot;],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    "colors": ["Black"],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
   },
   {
-    &quot;colors&quot;: [&quot;Black&quot;],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    "colors": ["Black"],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
   },
   {
-    &quot;colors&quot;: [&quot;Black&quot;],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+    "colors": ["Black"],
+    "type": "card",
+    "count": 1,
+    "rarity": [ "Rare" ]
   }
 ]
 </property>
@@ -2125,166 +2126,166 @@
    <properties>
     <property name="dialog">[
 {
-   &quot;text&quot;: &quot;The ritual appears to be nearing completion. You see a portal on the other side leading out of this domain.&quot;,
-   &quot;options&quot;: [
+   "text": "The ritual appears to be nearing completion. You see a portal on the other side leading out of this domain.",
+   "options": [
    {
-      &quot;name&quot;: &quot;(Continue)&quot;,
-      &quot;text&quot;: &quot;As you open the gate, she reaches the apex of her incantations, and the piles of dead on either side of the portal begin to rise. You must stop her before this horde of undead is set loose upon Shandalar!!!&quot;,
-      &quot;options&quot;: [
+      "name": "(Continue)",
+      "text": "As you open the gate, she reaches the apex of her incantations, and the piles of dead on either side of the portal begin to rise. You must stop her before this horde of undead is set loose upon Shandalar!!!",
+      "options": [
       {
-         &quot;name&quot;: &quot;(Continue)&quot;,
-         &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]
+         "name": "(Continue)",
+         "action": [{"deleteMapObject": -1}]
       }
       ]
    }
    ]
 }
 ]</property>
-    <property name="type" value="dialog"/>
+    <property name="type" value="dialog" />
    </properties>
   </object>
   <object id="286" template="../../../../../../../common/maps/obj/treasure.tx" x="848" y="80">
    <properties>
     <property name="reward">[{
-  &quot;count&quot;:2,
-  &quot;type&quot;:&quot;Union&quot;,
-  &quot;probability&quot;: 1,
-  &quot;cardUnion&quot;: [
+  "count":2,
+  "type":"Union",
+  "probability": 1,
+  "cardUnion": [
     {
-      &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Dark Ritual&quot;
+      "count":1,
+      "cardName": "Dark Ritual"
     },
     {
-      &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Nightmare&quot;
+      "count":1,
+      "cardName": "Nightmare"
     },
     {
-      &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Drain Life&quot;
+      "count":1,
+      "cardName": "Drain Life"
     },
     {
-      &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Terror&quot;
+      "count":1,
+      "cardName": "Terror"
     },
     {
-      &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Yawgmoth's Will&quot;
+      "count":1,
+      "cardName": "Yawgmoth's Will"
     },
     {
-      &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Spirit of the Night|MIR&quot;
+      "count":1,
+      "cardName": "Spirit of the Night|MIR"
     },
     {
-      &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Sengir Vampire|LEA&quot;
+      "count":1,
+      "cardName": "Sengir Vampire|LEA"
     },
     {
-      &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Mutilate|TOR&quot;
+      "count":1,
+      "cardName": "Mutilate|TOR"
     },
     {
-      &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Recurring Nightmare&quot;
+      "count":1,
+      "cardName": "Recurring Nightmare"
     },
     {
-      &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Avatar of Woe&quot;
+      "count":1,
+      "cardName": "Avatar of Woe"
     }
   ]
 },
 {
-  &quot;count&quot;:1,
-  &quot;type&quot;:&quot;Union&quot;,
-  &quot;probability&quot;: 0.5,
-  &quot;cardUnion&quot;: [
+  "count":1,
+  "type":"Union",
+  "probability": 0.5,
+  "cardUnion": [
     {
-      &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Mox Jet&quot;
+      "count":1,
+      "cardName": "Mox Jet"
     },
     {
-      &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Cabal Coffers&quot;
+      "count":1,
+      "cardName": "Cabal Coffers"
     },
     {
-      &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Underground Sea&quot;
+      "count":1,
+      "cardName": "Underground Sea"
     },
     {
-      &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Scrubland&quot;
+      "count":1,
+      "cardName": "Scrubland"
     },
     {
-      &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Badlands&quot;
+      "count":1,
+      "cardName": "Badlands"
     },
     {
-      &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Bayou&quot;
+      "count":1,
+      "cardName": "Bayou"
     }
   ]
 },
 {
-  &quot;count&quot;:1,
-  &quot;type&quot;:&quot;Union&quot;,
-  &quot;probability&quot;: 1,
-  &quot;cardUnion&quot;: [
+  "count":1,
+  "type":"Union",
+  "probability": 1,
+  "cardUnion": [
     {
-      &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Badlands|LEA&quot;
+      "count":1,
+      "cardName": "Badlands|LEA"
     },
     {
-      &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Scrubland|LEA&quot;
+      "count":1,
+      "cardName": "Scrubland|LEA"
     },
     {
-      &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Bayou|LEA&quot;
+      "count":1,
+      "cardName": "Bayou|LEA"
     },
     {
-      &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Underground Sea|LEA&quot;
+      "count":1,
+      "cardName": "Underground Sea|LEA"
     }
   ]
 },
 {
-  &quot;count&quot;:1,
-  &quot;type&quot;:&quot;Union&quot;,
-  &quot;probability&quot;: 0.5,
-  &quot;cardUnion&quot;: [
+  "count":1,
+  "type":"Union",
+  "probability": 0.5,
+  "cardUnion": [
     {
-      &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Badlands|LEA&quot;
+      "count":1,
+      "cardName": "Badlands|LEA"
     },
     {
-      &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Scrubland|LEA&quot;
+      "count":1,
+      "cardName": "Scrubland|LEA"
     },
     {
-      &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Bayou|LEA&quot;
+      "count":1,
+      "cardName": "Bayou|LEA"
     },
     {
-      &quot;count&quot;:1,
-      &quot;cardName&quot;: &quot;Underground Sea|LEA&quot;
+      "count":1,
+      "cardName": "Underground Sea|LEA"
     }
   ]
 }]</property>
-    <property name="spawn.Easy" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="spawn.Easy" type="bool" value="false" />
+    <property name="spawn.Normal" type="bool" value="false" />
    </properties>
   </object>
  </objectgroup>
  <objectgroup id="7" name="Waypoints">
-  <object id="244" template="../../../../../../../common/maps/obj/waypoint.tx" x="48" y="208"/>
-  <object id="245" template="../../../../../../../common/maps/obj/waypoint.tx" x="48" y="208"/>
-  <object id="246" template="../../../../../../../common/maps/obj/waypoint.tx" x="48" y="224"/>
-  <object id="247" template="../../../../../../../common/maps/obj/waypoint.tx" x="48" y="240"/>
-  <object id="248" template="../../../../../../../common/maps/obj/waypoint.tx" x="720" y="208"/>
-  <object id="249" template="../../../../../../../common/maps/obj/waypoint.tx" x="720" y="224"/>
-  <object id="250" template="../../../../../../../common/maps/obj/waypoint.tx" x="720" y="240"/>
-  <object id="255" template="../../../../../../../common/maps/obj/waypoint.tx" x="256" y="208"/>
-  <object id="256" template="../../../../../../../common/maps/obj/waypoint.tx" x="256" y="240"/>
-  <object id="257" template="../../../../../../../common/maps/obj/waypoint.tx" x="464" y="240"/>
-  <object id="258" template="../../../../../../../common/maps/obj/waypoint.tx" x="464" y="208"/>
+  <object id="244" template="../../../../../../../common/maps/obj/waypoint.tx" x="48" y="208" />
+  <object id="245" template="../../../../../../../common/maps/obj/waypoint.tx" x="48" y="208" />
+  <object id="246" template="../../../../../../../common/maps/obj/waypoint.tx" x="48" y="224" />
+  <object id="247" template="../../../../../../../common/maps/obj/waypoint.tx" x="48" y="240" />
+  <object id="248" template="../../../../../../../common/maps/obj/waypoint.tx" x="720" y="208" />
+  <object id="249" template="../../../../../../../common/maps/obj/waypoint.tx" x="720" y="224" />
+  <object id="250" template="../../../../../../../common/maps/obj/waypoint.tx" x="720" y="240" />
+  <object id="255" template="../../../../../../../common/maps/obj/waypoint.tx" x="256" y="208" />
+  <object id="256" template="../../../../../../../common/maps/obj/waypoint.tx" x="256" y="240" />
+  <object id="257" template="../../../../../../../common/maps/obj/waypoint.tx" x="464" y="240" />
+  <object id="258" template="../../../../../../../common/maps/obj/waypoint.tx" x="464" y="208" />
  </objectgroup>
 </map>

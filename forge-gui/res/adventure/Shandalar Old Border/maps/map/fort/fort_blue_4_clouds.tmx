@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="65">
  <editorsettings>
-  <export target="wastetown..tmx" format="tmx"/>
+  <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
- <tileset firstgid="28289" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx" />
+ <tileset firstgid="28289" source="../../../../../../common/maps/tileset/main-nocollide.tsx" />
  <layer id="6" name="Collision" width="30" height="30" visible="0" opacity="0.6">
   <data encoding="base64" compression="zlib">
    eJy9lkFOwzAQRb1PE7FjEeiGC4BK8TJngC33YNVGXIK2rGHDGiEkJA5ReiHylXxlMth1HNJ+adQ0tf08zp9JjenKZsZsUmNuMnM0gSf1k/2NQ+xnrta8KrpxYY25XY7L1rlqSf6YbKzzUuXzaus9uM74OT0cO5Q32DPB/liMw+4jsq+L/lw7kifpwT7c6aS9fkzG4+o68DH/w7aNx3aCa5X/uI+8Yp47uK69hJg7kds2q+9pketaP4apcwyJ53j50N5bpfFM8NCrQuKYrdgn2KHadGneMJ/Sej5yWVef70X9e5nUQZXKM0OYkpurWlg369E3uDcV13LsaWRvkWc8U8+WPJdfNTump0nv7uP6ahEs8mJ6GvNk5CovedaaDc7novt9CJOe0pLsr0kbd8vuOPRl7T8XU8rHdLH76Fud2xDmUDa94WJC+pmG2L5zpJDHvdgfajQ76QaEvuPzK+bjzJgnavdszz41k1yfXDlj/lvTE8EO9V0Xk1ydL3PWXM739Wsw6F2Gi0mubw3tK3iC9SXFeot55+D/kvajz8v0IrmyxmPf52SvRPjqB8+zVHUzlDlE5JfJ8ZhSoZr16ReQQoXh
@@ -34,7 +34,7 @@
  </layer>
  <layer id="10" name="CloudsClutter" width="30" height="30">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="base64" compression="zlib">
    eJztlt8KwiAUxn2Rblasm4Jtji7detm6KXB/qNfrSEpGerTUFbEPhE1hPz3fp5OQV12YoXMC7ZrvcFNpruNviIMPHbR+Yj84+EChjQ62azyEXSFZKBPlRLB75Nu1HFO+mFQkmNsoeQMzr53LMZNC/RE81d5RzGy4+FxjlR659ZHIoPC7k3k0qdBYao5Ybn1ky6B+DhQaKxbXJlXPun3em6m4XMu5qP/Yyn5ZF9WP7dNQpunbsZlCA3NnOzYTE7Zv8oqQdZWGi+XoAMxjAJc29jPM5Ol1T8gCeDmF9VI/hl4zLp91b1P9r5Rf2PnvUgZrzWCdS2gren+36QSMM3uwP2Uq+d4zN1C/bcQazvfM/9MND89aRQ==
@@ -43,44 +43,45 @@
  <objectgroup id="4" name="Objects">
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="202" y="415.5" width="48" height="32.5">
    <properties>
-    <property name="direction" value="left"/>
-    <property name="teleport" value=""/>
+    <property name="direction" value="left" />
+    <property name="teleport" value="" />
    </properties>
   </object>
-  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="62.75" y="49"/>
-  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="71" y="425.333"/>
-  <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="91.5" y="423"/>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="62.75" y="49" />
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="71" y="425.333" />
+  <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="91.5" y="423" />
   <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="231.263" y="156.93">
    <properties>
-    <property name="enemy" value="Cloud Guardian"/>
+    <property name="enemy" value="Shapeshifter of Shandalar" />
    </properties>
   </object>
   <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="354.825" y="227.365">
    <properties>
-    <property name="enemy" value="Cloud Giant"/>
+    <property name="enemy" value="Thought Invoker of Shandalar" />
    </properties>
   </object>
   <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="92.7585" y="386.594">
    <properties>
-    <property name="enemy" value="Master Blue Wizard"/>
-    <property name="threatRange" type="int" value="50"/>
+    <property name="enemy" value="Whim of Shandalar" />
+    <property name="threatRange" type="int" value="50" />
    </properties>
   </object>
-  <object id="56" template="../../../../../../common/maps/obj/gold.tx" x="438.5" y="150"/>
-  <object id="58" template="../../../../../../common/maps/obj/collision.tx" x="1.75" y="479" width="482" height="16"/>
-  <object id="59" template="../../../../../../common/maps/obj/collision.tx" x="-1" y="-16.5" width="482" height="16"/>
-  <object id="60" template="../../../../../../common/maps/obj/collision.tx" x="-16" y="-2.5415" width="16" height="502.083"/>
-  <object id="61" template="../../../../../../common/maps/obj/collision.tx" x="481.5" y="-11.0415" width="16" height="502.083"/>
+  <object id="56" template="../../../../../../common/maps/obj/gold.tx" x="438.5" y="150" />
+  <object id="58" template="../../../../../../common/maps/obj/collision.tx" x="1.75" y="479" width="482" height="16" />
+  <object id="59" template="../../../../../../common/maps/obj/collision.tx" x="-1" y="-16.5" width="482" height="16" />
+  <object id="60" template="../../../../../../common/maps/obj/collision.tx" x="-16" y="-2.5415" width="16" height="502.083" />
+  <object id="61" template="../../../../../../common/maps/obj/collision.tx" x="481.5" y="-11.0415" width="16" height="502.083" />
   <object id="62" template="../../../../../../common/maps/obj/enemy.tx" x="175.622" y="197.414">
    <properties>
-    <property name="enemy" value="Cloud Guardian"/>
+    <property name="enemy" value="Cloud Guardian" />
    </properties>
   </object>
   <object id="63" template="../../../../../../common/maps/obj/enemy.tx" x="231.718" y="263.196">
    <properties>
-    <property name="enemy" value="Cloud Giant"/>
+    <property name="enemy" value="Cloud Giant" />
    </properties>
   </object>
-  <object id="64" template="../../../../../../common/maps/obj/manashards.tx" x="297.095" y="174.815"/>
- </objectgroup>
+  <object id="64" template="../../../../../../common/maps/obj/manashards.tx" x="297.095" y="174.815" />
+ <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="240" y="50"><properties><property name="enemy" value="Starcryst the Astral Visionary" /><property name="threatRange" type="int" value="50" /><property name="effect">{ "startBattleWithCard": [ "Mystical Tutor|MIR","Accumulated Knowledge|NMS","Stronghold Machinist|NMS","Thwart|MMQ","Force of Will|ALL" ]
+}</property></properties></object></objectgroup>
 </map>

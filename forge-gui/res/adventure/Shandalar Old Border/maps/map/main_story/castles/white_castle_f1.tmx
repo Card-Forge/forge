@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="55">
  <editorsettings>
-  <export target="wastetown..tmx" format="tmx"/>
+  <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
  <properties>
-  <property name="dungeonEffect">{&quot;startBattleWithCard&quot;: [&quot;Glorious Anthem|USG&quot;]}</property>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [&quot;Glorious Anthem|USG&quot;]}">{"startBattleWithCard": ["Glorious Anthem|USG"]}</property>
  </properties>
- <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../../common/maps/tileset/buildings.tsx" />
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJztwzEJAAAMA7C+8w/VWyFLIL2kqqqqvjuO1S8b
@@ -20,7 +20,7 @@
  </layer>
  <layer id="3" name="Foreground" width="30" height="30">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="base64" compression="zlib">
    eJztwQEBAAAAgiD/r25IQAEAAPBoDhAAAQ==
@@ -35,65 +35,65 @@
   <object id="50" template="../../../../../../../common/maps/obj/enemy.tx" x="195.849" y="285.618" width="32" height="32">
    <properties>
     <property name="defeatDialog">[{
-   &quot;condition&quot;: [{&quot;checkQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;, &quot;not&quot;:true}],
-   &quot;text&quot;: &quot;As you land your final blow against Akroma, you feel a significant pulse of mana. But with the immediate threat removed, you can now see clearly that the locked room at the north end of the chamber does not hold any prisoners.&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, 
-      &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;Ch1WhiteCastleComplete&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}, {&quot;advanceQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;}]
+   "condition": [{"checkQuestFlag": "Ch1CastlesComplete", "not":true}],
+   "text": "As you land your final blow against Akroma, you feel a significant pulse of mana. But with the immediate threat removed, you can now see clearly that the locked room at the north end of the chamber does not hold any prisoners.",
+   "options": [{
+      "name": "(Continue)", 
+      "action": [{"setQuestFlag": {"key":"Ch1WhiteCastleComplete", "val": 1} }, {"deleteMapObject": -1}, {"advanceQuestFlag": "Ch1CastlesComplete"}]
    }]
 },
 {
-   &quot;condition&quot;: [{&quot;checkQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;}],
-   &quot;text&quot;: &quot;As you land your final blow against Akroma, you feel a another pulse of mana. But just as before, the locked room behind your fallen foe does not hold any prisoners.&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, 
-      &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;Ch1WhiteCastleComplete&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}, {&quot;advanceQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;}]
+   "condition": [{"checkQuestFlag": "Ch1CastlesComplete"}],
+   "text": "As you land your final blow against Akroma, you feel a another pulse of mana. But just as before, the locked room behind your fallen foe does not hold any prisoners.",
+   "options": [{
+      "name": "(Continue)", 
+      "action": [{"setQuestFlag": {"key":"Ch1WhiteCastleComplete", "val": 1} }, {"deleteMapObject": -1}, {"advanceQuestFlag": "Ch1CastlesComplete"}]
    }]
 }]</property>
     <property name="effect">{
- &quot;startBattleWithCard&quot;: [ &quot;Plains|LEA&quot;, &quot;Plains|LEA&quot;, &quot;Plains|LEA&quot;, &quot;Tormented Angel|UDS&quot;, &quot;Serra's Blessing|WTH&quot;, &quot;Serra's Liturgy|USG&quot; ]
+ "startBattleWithCard": [ "Plains|LEA", "Plains|LEA", "Plains|LEA", "Tormented Angel|UDS", "Serra's Blessing|WTH", "Serra's Liturgy|USG" ]
 }</property>
-    <property name="enemy" value="Akroma"/>
-    <property name="threatRange" type="int" value="50"/>
+    <property name="enemy" value="Akroma" />
+    <property name="threatRange" type="int" value="50" />
    </properties>
   </object>
   <object id="51" template="../../../../../../../common/maps/obj/entry_up.tx" x="209" y="480">
    <properties>
-    <property name="teleport" value=""/>
+    <property name="teleport" value="" />
    </properties>
   </object>
   <object id="53" template="../../../../../../../common/maps/obj/scroll.tx" x="209" y="77.6667">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Mox Pearl&quot;, &quot;count&quot;: 1 }, {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Strange Key&quot;} ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Mox Pearl&quot;, &quot;count&quot;: 1 }, {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Strange Key&quot;} ]" />
    </properties>
   </object>
   <object id="54" template="../../../../../../../common/maps/obj/gate.tx" x="209" y="160">
    <properties>
     <property name="dialog">[
 	{
-		&quot;text&quot;: &quot;A big gate is blocking the path, through the bars you can see a Mox Pearl in the room beyond. (you need all five colored keys to open this gate)&quot;,
-		&quot;options&quot;: [
-			{ &quot;name&quot;: &quot;go away&quot; },
+		"text": "A big gate is blocking the path, through the bars you can see a Mox Pearl in the room beyond. (you need all five colored keys to open this gate)",
+		"options": [
+			{ "name": "go away" },
 			{
-				&quot;name&quot;: &quot;unlock with the five colored keys&quot;,
-				&quot;condition&quot;: [
-					{ &quot;item&quot;: &quot;Blue Key&quot; },
-					{ &quot;item&quot;: &quot;Green Key&quot; },
-					{ &quot;item&quot;: &quot;Black Key&quot; },
-					{ &quot;item&quot;: &quot;White Key&quot; },
-					{ &quot;item&quot;: &quot;Red Key&quot; }
+				"name": "unlock with the five colored keys",
+				"condition": [
+					{ "item": "Blue Key" },
+					{ "item": "Green Key" },
+					{ "item": "Black Key" },
+					{ "item": "White Key" },
+					{ "item": "Red Key" }
 				],
-				&quot;text&quot;: &quot;The gate is unlocked&quot;,
-				&quot;options&quot;: [
+				"text": "The gate is unlocked",
+				"options": [
 					{
-						&quot;name&quot;: &quot;continue&quot;,
-						&quot;action&quot;: [
-							{ &quot;deleteMapObject&quot;: -1 },
-							{ &quot;removeItem&quot;: &quot;Blue Key&quot; },
-							{ &quot;removeItem&quot;: &quot;Green Key&quot; },
-							{ &quot;removeItem&quot;: &quot;Black Key&quot; },
-							{ &quot;removeItem&quot;: &quot;White Key&quot; },
-							{ &quot;removeItem&quot;: &quot;Red Key&quot; }
+						"name": "continue",
+						"action": [
+							{ "deleteMapObject": -1 },
+							{ "removeItem": "Blue Key" },
+							{ "removeItem": "Green Key" },
+							{ "removeItem": "Black Key" },
+							{ "removeItem": "White Key" },
+							{ "removeItem": "Red Key" }
 						]
 					}
 				]

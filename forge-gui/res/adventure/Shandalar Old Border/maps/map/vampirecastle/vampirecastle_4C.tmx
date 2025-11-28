@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="88">
  <editorsettings>
-  <export target="wastetown..tmx" format="tmx"/>
+  <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
  <layer id="1" name="Background" width="60" height="40">
   <data encoding="base64" compression="zlib">
    eJztwzEJAAAMA7C+8w/VWw37E0gvqaqqqqqqqqqqqu8DFRHS7A==
@@ -17,7 +17,7 @@
  </layer>
  <layer id="3" name="Clutter" width="60" height="40">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="base64" compression="zlib">
    eJzt17EJwzAQQNHTAC68Q8AgXLvWGlkmZTYIuMgc8Sj2AJ7CVSAoJBhBdEGSTfJfo0Mnna4SnAgAjSVRnfOXOY3OvOJLoprYF+fXebVft+E4xs2KDFafexobkanRvalxzVcaG3Jvcb9VE16J/xkAgJIO5vMZ4FecKv2dmDknJGb2yT0f4b85xdljriYAAAAAAMDDHbGFE3Q=
@@ -26,133 +26,134 @@
  <objectgroup id="4" name="Objects">
   <object id="66" template="../../../../../../common/maps/obj/door_up.tx" x="35.2402" y="285.749">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/vampirecastle/vampirecastle_4B.tmx"/>
-    <property name="teleportObjectId" value="66"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/vampirecastle/vampirecastle_4B.tmx" />
+    <property name="teleportObjectId" value="66" />
    </properties>
   </object>
-  <object id="75" template="../../../../../../common/maps/obj/treasure.tx" x="784.167" y="63.75"/>
-  <object id="76" template="../../../../../../common/maps/obj/treasure.tx" x="704.5" y="64.6667"/>
-  <object id="77" template="../../../../../../common/maps/obj/gold.tx" x="744.5" y="62.9167"/>
+  <object id="75" template="../../../../../../common/maps/obj/treasure.tx" x="784.167" y="63.75" />
+  <object id="76" template="../../../../../../common/maps/obj/treasure.tx" x="704.5" y="64.6667" />
+  <object id="77" template="../../../../../../common/maps/obj/gold.tx" x="744.5" y="62.9167" />
   <object id="78" template="../../../../../../common/maps/obj/enemy.tx" x="374.417" y="306.667">
    <properties>
-    <property name="enemy" value="Vampire"/>
-   </properties>
+    <property name="enemy" value="Vampire" />
+   <property name="effect">{ "startBattleWithCard": [ "Swamp|2ED","Cemetery Gate|HML","Cemetery Gate|HML","Cemetery Gate|HML","Cemetery Gate|HML","Crovax the Cursed|STH" ]
+}</property></properties>
   </object>
   <object id="79" template="../../../../../../common/maps/obj/enemy.tx" x="744.5" y="143.954">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Swamp|LEA&quot;, &quot;Swamp|LEA&quot;, &quot;Swamp|LEA&quot;, &quot;Subversion|ULG&quot; ]
+    <property name="effect">{ "startBattleWithCard": [ "Swamp|LEA", "Swamp|LEA", "Swamp|LEA", "Subversion|ULG" ]
 }</property>
-    <property name="enemy" value="Sorin"/>
+    <property name="enemy" value="Sorin" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 1,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Sorin's Amulet&quot;,
+    "type": "item",
+    "probability": 1,
+    "count": 1,
+    "itemName": "Sorin's Amulet",
   },
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 1,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Sorin's Key&quot;,
+    "type": "item",
+    "probability": 1,
+    "count": 1,
+    "itemName": "Sorin's Key",
   }
 ]
 </property>
-    <property name="speedModifier" type="float" value="20"/>
-    <property name="threatRange" type="int" value="50"/>
+    <property name="speedModifier" type="float" value="20" />
+    <property name="threatRange" type="int" value="50" />
    </properties>
   </object>
   <object id="80" template="../../../../../../common/maps/obj/enemy.tx" x="601.124" y="138.781">
    <properties>
-    <property name="enemy" value="Vampire Lord"/>
+    <property name="enemy" value="Vampire Lord" />
    </properties>
   </object>
   <object id="81" template="../../../../../../common/maps/obj/booster.tx" x="786.91" y="92.8676">
    <properties>
     <property name="reward">[
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Terror|LEA&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Terror|LEA"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Mutilate|TOR&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Mutilate|TOR"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;itemName&quot;: &quot;Dark Ritual|LEA&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"itemName": "Dark Ritual|LEA"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;itemName&quot;: &quot;Necrologia|VIS&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"itemName": "Necrologia|VIS"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Dark Banishing|ICE&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Dark Banishing|ICE"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Vendetta|MMQ&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Vendetta|MMQ"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;itemName&quot;: &quot;Murder&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"itemName": "Murder"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Terror|LEA&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Terror|LEA"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Mutilate|TOR&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Mutilate|TOR"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;itemName&quot;: &quot;Dark Ritual|LEA&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"itemName": "Dark Ritual|LEA"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;itemName&quot;: &quot;Necrologia|VIS&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"itemName": "Necrologia|VIS"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Dark Banishing|ICE&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Dark Banishing|ICE"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Vendetta|MMQ&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Vendetta|MMQ"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;itemName&quot;: &quot;Murder&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"itemName": "Murder"
 	}
 ]</property>
    </properties>
@@ -161,108 +162,108 @@
    <properties>
     <property name="reward">[
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Terror|LEA&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Terror|LEA"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Mutilate|TOR&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Mutilate|TOR"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;itemName&quot;: &quot;Dark Ritual|LEA&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"itemName": "Dark Ritual|LEA"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;itemName&quot;: &quot;Necrologia|VIS&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"itemName": "Necrologia|VIS"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Dark Banishing|ICE&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Dark Banishing|ICE"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Vendetta|MMQ&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Vendetta|MMQ"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;itemName&quot;: &quot;Murder&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"itemName": "Murder"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Terror|LEA&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Terror|LEA"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Mutilate|TOR&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Mutilate|TOR"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;itemName&quot;: &quot;Dark Ritual|LEA&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"itemName": "Dark Ritual|LEA"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;itemName&quot;: &quot;Necrologia|VIS&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"itemName": "Necrologia|VIS"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Dark Banishing|ICE&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Dark Banishing|ICE"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Vendetta|MMQ&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Vendetta|MMQ"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;itemName&quot;: &quot;Murder&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"itemName": "Murder"
 	}
 ]</property>
    </properties>
   </object>
   <object id="83" template="../../../../../../common/maps/obj/enemy.tx" x="709.178" y="228.9">
    <properties>
-    <property name="enemy" value="Unholy Skull"/>
-    <property name="threatRange" type="int" value="50"/>
-    <property name="waypoints" value="80,81"/>
+    <property name="enemy" value="Unholy Skull" />
+    <property name="threatRange" type="int" value="50" />
+    <property name="waypoints" value="80,81" />
    </properties>
   </object>
   <object id="84" template="../../../../../../common/maps/obj/enemy.tx" x="145.615" y="224.273">
    <properties>
-    <property name="enemy" value="Unholy Skull"/>
-    <property name="threatRange" type="int" value="50"/>
-    <property name="waypoints" value="80,81"/>
+    <property name="enemy" value="Unholy Skull" />
+    <property name="threatRange" type="int" value="50" />
+    <property name="waypoints" value="80,81" />
    </properties>
   </object>
-  <object id="85" template="../../../../../../common/maps/obj/waypoint.tx" x="74.3597" y="227.049"/>
-  <object id="86" template="../../../../../../common/maps/obj/manashards.tx" x="505.592" y="73.4344"/>
-  <object id="87" template="../../../../../../common/maps/obj/manashards.tx" x="790.612" y="392.694"/>
+  <object id="85" template="../../../../../../common/maps/obj/waypoint.tx" x="74.3597" y="227.049" />
+  <object id="86" template="../../../../../../common/maps/obj/manashards.tx" x="505.592" y="73.4344" />
+  <object id="87" template="../../../../../../common/maps/obj/manashards.tx" x="790.612" y="392.694" />
  </objectgroup>
 </map>

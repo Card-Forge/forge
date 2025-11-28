@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="31" height="37" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="275">
  <properties>
-  <property name="canFailDungeon" type="bool" value="true"/>
-  <property name="respawnEnemies" type="bool" value="true"/>
+  <property name="canFailDungeon" type="bool" value="true" />
+  <property name="respawnEnemies" type="bool" value="true" />
  </properties>
- <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
- <tileset firstgid="13697" source="../../../../../../../common/maps/tileset/main-nocollide.tsx"/>
- <tileset firstgid="23809" source="../../../../../../../common/maps/tileset/rivers.tsx"/>
- <tileset firstgid="41089" source="../../../../../../../common/maps/tileset/rivers-nocolide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../../common/maps/tileset/buildings-nocollide.tsx" />
+ <tileset firstgid="13697" source="../../../../../../../common/maps/tileset/main-nocollide.tsx" />
+ <tileset firstgid="23809" source="../../../../../../../common/maps/tileset/rivers.tsx" />
+ <tileset firstgid="41089" source="../../../../../../../common/maps/tileset/rivers-nocolide.tsx" />
  <layer id="1" name="Tile Layer 1" width="31" height="37">
   <data encoding="csv">
 3176,3176,3176,3176,3176,3176,3176,3176,3176,3176,3176,3176,3176,3176,3176,3176,3176,3176,3176,24169,2374,2374,3176,3176,3176,3176,3176,3176,3176,3176,3176,
@@ -94,7 +94,7 @@
  </layer>
  <layer id="4" name="Tile Layer 3" width="31" height="37">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2373,0,0,0,0,0,0,0,0,0,0,0,
@@ -178,265 +178,265 @@
 </data>
  </layer>
  <objectgroup id="2" name="Objects">
-  <object id="2" template="../../../../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="16" height="624"/>
-  <object id="3" template="../../../../../../../common/maps/obj/collision.tx" x="0.25" y="592.75" width="495.75" height="15.25"/>
-  <object id="4" template="../../../../../../../common/maps/obj/collision.tx" x="496" y="-16" width="16" height="624"/>
-  <object id="5" template="../../../../../../../common/maps/obj/collision.tx" x="0" y="-16" width="496.295" height="16"/>
+  <object id="2" template="../../../../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="16" height="624" />
+  <object id="3" template="../../../../../../../common/maps/obj/collision.tx" x="0.25" y="592.75" width="495.75" height="15.25" />
+  <object id="4" template="../../../../../../../common/maps/obj/collision.tx" x="496" y="-16" width="16" height="624" />
+  <object id="5" template="../../../../../../../common/maps/obj/collision.tx" x="0" y="-16" width="496.295" height="16" />
   <object id="187" template="../../../../../../../common/maps/obj/enemy.tx" x="-304" y="240">
    <properties>
     <property name="effect">{
- &quot;lifeModifier&quot;: 5,
+ "lifeModifier": 5,
  
 }</property>
-    <property name="enemy" value="Golgari Fungus"/>
+    <property name="enemy" value="Golgari Fungus" />
    </properties>
   </object>
   <object id="188" template="../../../../../../../common/maps/obj/enemy.tx" x="-352" y="304">
    <properties>
-    <property name="enemy" value="Necromancer"/>
+    <property name="enemy" value="Necromancer" />
    </properties>
   </object>
   <object id="189" template="../../../../../../../common/maps/obj/treasure.tx" x="432" y="224">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 2,
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 2,
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;probability&quot;: 0.5,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 1,
+  "probability": 0.5,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 3,
-  &quot;addMaxCount&quot;: 2
+  "type": "randomCard",
+  "count": 3,
+  "addMaxCount": 2
 },{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;probability&quot;: 0.01,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;(WHITE ITEM)&quot;
+  "type": "item",
+  "probability": 0.01,
+  "count": 1,
+  "itemName": "(WHITE ITEM)"
 }]</property>
    </properties>
   </object>
   <object id="193" template="../../../../../../../common/maps/obj/enemy.tx" x="326" y="474">
    <properties>
-    <property name="enemy" value="White Sliver"/>
-    <property name="pursueRange" type="int" value="60"/>
-    <property name="threatRange" type="int" value="40"/>
+    <property name="enemy" value="White Sliver" />
+    <property name="pursueRange" type="int" value="60" />
+    <property name="threatRange" type="int" value="40" />
    </properties>
   </object>
   <object id="194" template="../../../../../../../common/maps/obj/treasure.tx" x="-64" y="432">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 2,
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 2,
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;probability&quot;: 0.5,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 1,
+  "probability": 0.5,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 3,
-  &quot;addMaxCount&quot;: 2
+  "type": "randomCard",
+  "count": 3,
+  "addMaxCount": 2
 },{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;probability&quot;: 0.01,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;(WHITE ITEM)&quot;
+  "type": "item",
+  "probability": 0.01,
+  "count": 1,
+  "itemName": "(WHITE ITEM)"
 }]</property>
    </properties>
   </object>
   <object id="198" template="../../../../../../../common/maps/obj/enemy.tx" x="-256" y="320">
    <properties>
-    <property name="enemy" value="Yawgmoth's Alchemist"/>
+    <property name="enemy" value="Yawgmoth's Alchemist" />
    </properties>
   </object>
   <object id="199" template="../../../../../../../common/maps/obj/enemy.tx" x="-352" y="256">
    <properties>
-    <property name="enemy" value="Dimir Faerie"/>
-    <property name="pursueRange" type="int" value="90"/>
-    <property name="threatRange" type="int" value="60"/>
-    <property name="waypoints" value="250,251,252,249"/>
+    <property name="enemy" value="Dimir Faerie" />
+    <property name="pursueRange" type="int" value="90" />
+    <property name="threatRange" type="int" value="60" />
+    <property name="waypoints" value="250,251,252,249" />
    </properties>
   </object>
   <object id="200" template="../../../../../../../common/maps/obj/enemy.tx" x="-176" y="320">
    <properties>
-    <property name="enemy" value="Golgari Treefolk"/>
-    <property name="pursueRange" type="int" value="60"/>
-    <property name="threatRange" type="int" value="40"/>
+    <property name="enemy" value="Golgari Treefolk" />
+    <property name="pursueRange" type="int" value="60" />
+    <property name="threatRange" type="int" value="40" />
    </properties>
   </object>
   <object id="201" template="../../../../../../../common/maps/obj/enemy.tx" x="-304" y="336">
    <properties>
-    <property name="enemy" value="Dimir Faerie"/>
+    <property name="enemy" value="Dimir Faerie" />
    </properties>
   </object>
   <object id="202" template="../../../../../../../common/maps/obj/treasure.tx" x="16" y="576">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 2,
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 2,
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;probability&quot;: 0.5,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 1,
+  "probability": 0.5,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 3,
-  &quot;addMaxCount&quot;: 2
+  "type": "randomCard",
+  "count": 3,
+  "addMaxCount": 2
 },{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;probability&quot;: 0.01,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;(WHITE ITEM)&quot;
+  "type": "item",
+  "probability": 0.01,
+  "count": 1,
+  "itemName": "(WHITE ITEM)"
 }]</property>
    </properties>
   </object>
   <object id="203" template="../../../../../../../common/maps/obj/scroll.tx" x="272" y="256">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Swords to Plowshares|LEA&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Swords to Plowshares|LEA&quot;, &quot;count&quot;: 1 } ]" />
    </properties>
   </object>
   <object id="205" template="../../../../../../../common/maps/obj/treasure.tx" x="-80" y="528">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 2,
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 2,
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;probability&quot;: 0.5,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 1,
+  "probability": 0.5,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 3,
-  &quot;addMaxCount&quot;: 2
+  "type": "randomCard",
+  "count": 3,
+  "addMaxCount": 2
 },{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;probability&quot;: 0.01,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;(WHITE ITEM)&quot;
+  "type": "item",
+  "probability": 0.01,
+  "count": 1,
+  "itemName": "(WHITE ITEM)"
 }]</property>
    </properties>
   </object>
   <object id="211" template="../../../../../../../common/maps/obj/enemy.tx" x="176" y="288">
    <properties>
-    <property name="enemy" value="Orzhov Cleric"/>
-    <property name="pursueRange" type="int" value="75"/>
-    <property name="threatRange" type="int" value="20"/>
+    <property name="enemy" value="Orzhov Cleric" />
+    <property name="pursueRange" type="int" value="75" />
+    <property name="threatRange" type="int" value="20" />
    </properties>
   </object>
   <object id="212" template="../../../../../../../common/maps/obj/enemy.tx" x="-240" y="272">
    <properties>
-    <property name="Type" value="enemy"/>
+    <property name="Type" value="enemy" />
     <property name="effect">{
- &quot;lifeModifier&quot;: 8,
+ "lifeModifier": 8,
 }</property>
-    <property name="enemy" value="Yawgmoth's Alchemist"/>
-    <property name="pursueRange" type="int" value="75"/>
-    <property name="threatRange" type="int" value="20"/>
+    <property name="enemy" value="Yawgmoth's Alchemist" />
+    <property name="pursueRange" type="int" value="75" />
+    <property name="threatRange" type="int" value="20" />
    </properties>
   </object>
   <object id="215" template="../../../../../../../common/maps/obj/enemy.tx" x="-224" y="320">
    <properties>
-    <property name="enemy" value="Kor Weaponsmith"/>
-    <property name="threatRange" type="int" value="70"/>
+    <property name="enemy" value="Kor Weaponsmith" />
+    <property name="threatRange" type="int" value="70" />
    </properties>
   </object>
   <object id="216" template="../../../../../../../common/maps/obj/enemy.tx" x="-304" y="304">
    <properties>
-    <property name="enemy" value="Harpy"/>
-    <property name="pursueRange" type="int" value="90"/>
-    <property name="threatRange" type="int" value="70"/>
+    <property name="enemy" value="Harpy" />
+    <property name="pursueRange" type="int" value="90" />
+    <property name="threatRange" type="int" value="70" />
    </properties>
   </object>
-  <object id="231" template="../../../../../../../common/maps/obj/manashards.tx" x="96" y="464"/>
-  <object id="232" template="../../../../../../../common/maps/obj/gold.tx" x="112" y="480"/>
+  <object id="231" template="../../../../../../../common/maps/obj/manashards.tx" x="96" y="464" />
+  <object id="232" template="../../../../../../../common/maps/obj/gold.tx" x="112" y="480" />
   <object id="233" template="../../../../../../../common/maps/obj/treasure.tx" x="336" y="272">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 2,
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 2,
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;probability&quot;: 0.5,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 1,
+  "probability": 0.5,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 3,
-  &quot;addMaxCount&quot;: 2
+  "type": "randomCard",
+  "count": 3,
+  "addMaxCount": 2
 },{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;probability&quot;: 0.01,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;(WHITE ITEM)&quot;
+  "type": "item",
+  "probability": 0.01,
+  "count": 1,
+  "itemName": "(WHITE ITEM)"
 }]</property>
    </properties>
   </object>
   <object id="235" template="../../../../../../../common/maps/obj/enemy.tx" x="64" y="544">
    <properties>
-    <property name="enemy" value="Kor Weaponsmith"/>
-    <property name="threatRange" type="int" value="70"/>
+    <property name="enemy" value="Kor Weaponsmith" />
+    <property name="threatRange" type="int" value="70" />
    </properties>
   </object>
   <object id="236" template="../../../../../../../common/maps/obj/enemy.tx" x="-160" y="272">
    <properties>
-    <property name="enemy" value="Yawgmoth's Alchemist"/>
-    <property name="pursueRange" type="int" value="80"/>
-    <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value="253,254,wait3,260,254,wait3"/>
+    <property name="enemy" value="Yawgmoth's Alchemist" />
+    <property name="pursueRange" type="int" value="80" />
+    <property name="threatRange" type="int" value="40" />
+    <property name="waypoints" value="253,254,wait3,260,254,wait3" />
    </properties>
   </object>
   <object id="237" template="../../../../../../../common/maps/obj/dialog.tx" x="-128" y="384">
    <properties>
     <property name="dialog">[
     {
-        &quot;name&quot;: &quot;&quot;,
-        &quot;text&quot;: &quot;You enter the gate.&quot;,
-        &quot;loctext&quot;: &quot;&quot;,
-        &quot;options&quot;: [
+        "name": "",
+        "text": "You enter the gate.",
+        "loctext": "",
+        "options": [
             {
-                &quot;name&quot;: &quot;Lathliss! It's time to end this!&quot;,
-                &quot;action&quot;: [ { &quot;deleteMapObject&quot;: 55 } ],
-                &quot;condition&quot;: [
+                "name": "Lathliss! It's time to end this!",
+                "action": [ { "deleteMapObject": 55 } ],
+                "condition": [
                     {
-                        &quot;getMapFlag&quot;: {
-                            &quot;key&quot;: &quot;enemiesDefeated&quot;,
-                            &quot;op&quot;: &quot;&gt;=&quot;,
-                            &quot;val&quot;: 3
+                        "getMapFlag": {
+                            "key": "enemiesDefeated",
+                            "op": "&gt;=",
+                            "val": 3
                         }
                     }
                 ],
-                &quot;text&quot;:    &quot;With a gust of red flames, the door burns away, leaving only ashes in your path. You are now free to pass.&quot;,
-                &quot;options&quot;:
-                    [ { &quot;name&quot;: &quot;(continue)&quot; } ]
+                "text":    "With a gust of red flames, the door burns away, leaving only ashes in your path. You are now free to pass.",
+                "options":
+                    [ { "name": "(continue)" } ]
             },
             {
-                &quot;name&quot;: &quot;You knock on the door&quot;,
-                &quot;condition&quot;: [
+                "name": "You knock on the door",
+                "condition": [
                     {
-                        &quot;getMapFlag&quot;: {
-                            &quot;key&quot;: &quot;enemiesDefeated&quot;,
-                            &quot;op&quot;: &quot;&lt;=&quot;,
-                            &quot;val&quot;: 2
+                        "getMapFlag": {
+                            "key": "enemiesDefeated",
+                            "op": "&lt;=",
+                            "val": 2
                         }
                     }
                 ],
-                &quot;text&quot;: &quot;YOU ARE NOT WORTHY, BEGONE!&quot;,
-                &quot;loctext&quot;: &quot;&quot;
+                "text": "YOU ARE NOT WORTHY, BEGONE!",
+                "loctext": ""
             }
         ]
     }
@@ -446,48 +446,48 @@
   <object id="238" template="../../../../../../../common/maps/obj/treasure.tx" x="-64" y="480">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 2,
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 2,
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;probability&quot;: 0.5,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 1,
+  "probability": 0.5,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 3,
-  &quot;addMaxCount&quot;: 2
+  "type": "randomCard",
+  "count": 3,
+  "addMaxCount": 2
 },{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;probability&quot;: 0.01,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;(WHITE ITEM)&quot;
+  "type": "item",
+  "probability": 0.01,
+  "count": 1,
+  "itemName": "(WHITE ITEM)"
 }]</property>
    </properties>
   </object>
   <object id="239" template="../../../../../../../common/maps/obj/treasure.tx" x="144" y="48">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 2,
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 2,
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;probability&quot;: 0.5,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 1,
+  "probability": 0.5,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 3,
-  &quot;addMaxCount&quot;: 2
+  "type": "randomCard",
+  "count": 3,
+  "addMaxCount": 2
 },{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;probability&quot;: 0.01,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;(WHITE ITEM)&quot;
+  "type": "item",
+  "probability": 0.01,
+  "count": 1,
+  "itemName": "(WHITE ITEM)"
 }]</property>
    </properties>
   </object>
@@ -495,169 +495,167 @@
    <properties>
     <property name="defeatDialog">[
   {
-     &quot;text&quot;: &quot;Defeated, the witch drops her staff entirely, the last of her spells fizzle out. \&quot;Wait... Let me go, and I will not raise any alarm.\&quot;&quot;,
-     &quot;options&quot;:[
+     "text": "Defeated, the witch drops her staff entirely, the last of her spells fizzle out. \"Wait... Let me go, and I will not raise any alarm.\"",
+     "options":[
      {
-	&quot;name&quot;:&quot;Hear her out&quot;,
-	&quot;text&quot;:&quot;\&quot;...And these mushrooms are poisonous if given properly, but I suppose you could heal with them in the right dosage.\&quot; She pauses for a moment, as if considering that she might need to do so herself.&quot;,
-	&quot;options&quot;: [
+	"name":"Hear her out",
+	"text":"\"...And these mushrooms are poisonous if given properly, but I suppose you could heal with them in the right dosage.\" She pauses for a moment, as if considering that she might need to do so herself.",
+	"options": [
 	{
-	   &quot;name&quot;:&quot;Trust her word&quot;,
-	   &quot;action&quot;: [{&quot;addLife&quot;: 10, &quot;deleteMapObject&quot;:240}],
-	   &quot;text&quot;:&quot;She takes a handful of the mushrooms and crushes them into a vial already containing some unknown liquid. She then takes a swig of it, and slowly places it down on the ground for you before leaving hurriedly. (+10 health recovered)&quot;
+	   "name":"Trust her word",
+	   "action": [{"addLife": 10, "deleteMapObject":240}],
+	   "text":"She takes a handful of the mushrooms and crushes them into a vial already containing some unknown liquid. She then takes a swig of it, and slowly places it down on the ground for you before leaving hurriedly. (+10 health recovered)"
 	},
      {
-	&quot;name&quot;:&quot;Finish her off&quot;,
-	&quot;action&quot;: [{&quot;addGold&quot;: 250, &quot;deleteMapObject&quot;:240}],
-	&quot;text&quot;:&quot;She is unable to put up much more of a fight. You find a bunch of questionable mushrooms and some gold on her. (+250 gold)&quot;
-	&quot;options&quot;:[ {&quot;name&quot;:&quot;(Continue)&quot;} ]
+	"name":"Finish her off",
+	"action": [{"addGold": 250, "deleteMapObject":240}],
+	"text":"She is unable to put up much more of a fight. You find a bunch of questionable mushrooms and some gold on her. (+250 gold)"
+	"options":[ {"name":"(Continue)"} ]
      },
      {
-	&quot;name&quot;:&quot;Let her leave&quot;,
-	&quot;text&quot;:&quot;She bows her head and scrambles away, leaving her staff behind.&quot;,
-	&quot;action&quot;:[
-	    {&quot;grantRewards&quot;:[{&quot;type&quot;:&quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Jet Medallion|TMP&quot;}]},
-	    {&quot;deleteMapObject&quot;:240}
+	"name":"Let her leave",
+	"text":"She bows her head and scrambles away, leaving her staff behind.",
+	"action":[
+	    {"grantRewards":[{"type":"card", "count": 1, "cardName": "Jet Medallion|TMP"}]},
+	    {"deleteMapObject":240}
 	],
-	&quot;options&quot;:[ {&quot;name&quot;:&quot;(Continue)&quot;} ]
+	"options":[ {"name":"(Continue)"} ]
      }
 	]
      },
      {
-	&quot;name&quot;:&quot;Finish her off&quot;,
-	&quot;action&quot;: [{&quot;addGold&quot;: 250, &quot;deleteMapObject&quot;:240}],
-	&quot;text&quot;:&quot;She is unable to put up much more of a fight. You find a bunch of questionable mushrooms and some gold on her. (+250 gold)&quot;
-	&quot;options&quot;:[ {&quot;name&quot;:&quot;(Continue)&quot;} ]
+	"name":"Finish her off",
+	"action": [{"addGold": 250, "deleteMapObject":240}],
+	"text":"She is unable to put up much more of a fight. You find a bunch of questionable mushrooms and some gold on her. (+250 gold)"
+	"options":[ {"name":"(Continue)"} ]
      },
      {
-	&quot;name&quot;:&quot;Let her leave&quot;,
-	&quot;text&quot;:&quot;She bows her head and scrambles away, leaving her staff behind.&quot;,
-	&quot;action&quot;:[
-	    {&quot;grantRewards&quot;:[{&quot;type&quot;:&quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Jet Medallion|TMP&quot;}]},
-	    {&quot;deleteMapObject&quot;:240}
+	"name":"Let her leave",
+	"text":"She bows her head and scrambles away, leaving her staff behind.",
+	"action":[
+	    {"grantRewards":[{"type":"card", "count": 1, "cardName": "Jet Medallion|TMP"}]},
+	    {"deleteMapObject":240}
 	],
-	&quot;options&quot;:[ {&quot;name&quot;:&quot;(Continue)&quot;} ]
+	"options":[ {"name":"(Continue)"} ]
      }
      ]
   }
 ]</property>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;An old crone leers at you, but does not raise her staff to attack.&quot;,
-    &quot;options&quot;:[
-      { &quot;name&quot;:&quot;Walk away&quot; },
-      { &quot;name&quot;:&quot;Attack the witch&quot;,
-	  &quot;action&quot;:[{&quot;battleWithActorID&quot;:-1}]},
+    "text":"An old crone leers at you, but does not raise her staff to attack.",
+    "options":[
+      { "name":"Walk away" },
+      { "name":"Attack the witch",
+	  "action":[{"battleWithActorID":-1}]},
       {
-        &quot;name&quot;:&quot;Approach her slowly&quot;,
-        &quot;text&quot;: &quot;\&quot;Be gone with you! You will not have them!\&quot; She steps back, dropping some of the herbs and mushrooms that she appears to have been gathering.&quot;,
-        &quot;options&quot;: [
-	{ &quot;name&quot;:&quot;Walk away&quot; },
-	{ &quot;name&quot;:&quot;Attack the witch&quot;,
-	  &quot;action&quot;:[{&quot;battleWithActorID&quot;:-1}]
+        "name":"Approach her slowly",
+        "text": "\"Be gone with you! You will not have them!\" She steps back, dropping some of the herbs and mushrooms that she appears to have been gathering.",
+        "options": [
+	{ "name":"Walk away" },
+	{ "name":"Attack the witch",
+	  "action":[{"battleWithActorID":-1}]
 	}
 	]
       }]
    }
 ]</property>
-    <property name="effect">{
- &quot;lifeModifier&quot;: 4,
- 
+    <property name="effect">{ "startBattleWithCard": [ "Swamp|2ED","Swamp|2ED","Vile Consumption|INV" ]
 }</property>
-    <property name="enemy" value="Witch"/>
+    <property name="enemy" value="Witch" />
    </properties>
   </object>
   <object id="241" template="../../../../../../../common/maps/obj/entry_down.tx" x="-528" y="32" width="144" height="16">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/town.tmx"/>
-    <property name="teleportObjectId" value="241"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/town.tmx" />
+    <property name="teleportObjectId" value="241" />
    </properties>
   </object>
   <object id="242" template="../../../../../../../common/maps/obj/enemy.tx" x="-256" y="288">
    <properties>
-    <property name="enemy" value="Viper"/>
-    <property name="waypoints" value="243,244,wait5"/>
+    <property name="enemy" value="Viper" />
+    <property name="waypoints" value="243,244,wait5" />
    </properties>
   </object>
   <object id="245" template="../../../../../../../common/maps/obj/treasure.tx" x="-112" y="432">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 2,
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 2,
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;probability&quot;: 0.5,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 1,
+  "probability": 0.5,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 3,
-  &quot;addMaxCount&quot;: 2
+  "type": "randomCard",
+  "count": 3,
+  "addMaxCount": 2
 },{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;probability&quot;: 0.01,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;(WHITE ITEM)&quot;
+  "type": "item",
+  "probability": 0.01,
+  "count": 1,
+  "itemName": "(WHITE ITEM)"
 }]</property>
    </properties>
   </object>
-  <object id="249" template="../../../../../../../common/maps/obj/waypoint.tx" x="-224" y="176"/>
-  <object id="250" template="../../../../../../../common/maps/obj/waypoint.tx" x="-224" y="208"/>
+  <object id="249" template="../../../../../../../common/maps/obj/waypoint.tx" x="-224" y="176" />
+  <object id="250" template="../../../../../../../common/maps/obj/waypoint.tx" x="-224" y="208" />
   <object id="259" template="../../../../../../../common/maps/obj/enemy.tx" x="464" y="256">
    <properties>
-    <property name="enemy" value="White Sliver"/>
-    <property name="pursueRange" type="int" value="60"/>
-    <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value=""/>
+    <property name="enemy" value="White Sliver" />
+    <property name="pursueRange" type="int" value="60" />
+    <property name="threatRange" type="int" value="40" />
+    <property name="waypoints" value="" />
    </properties>
   </object>
   <object id="261" template="../../../../../../../common/maps/obj/enemy.tx" x="-288" y="272">
    <properties>
     <property name="effect">{
- &quot;lifeModifier&quot;: 8,
+ "lifeModifier": 8,
  
 }</property>
-    <property name="enemy" value="Harpy"/>
-    <property name="threatRange" type="int" value="60"/>
+    <property name="enemy" value="Harpy" />
+    <property name="threatRange" type="int" value="60" />
    </properties>
   </object>
   <object id="263" template="../../../../../../../common/maps/obj/enemy.tx" x="32" y="464">
    <properties>
-    <property name="enemy" value="Dimir Faerie"/>
-    <property name="pursueRange" type="int" value="90"/>
-    <property name="threatRange" type="int" value="60"/>
-    <property name="waypoints" value="252,249,250,251"/>
+    <property name="enemy" value="Dimir Faerie" />
+    <property name="pursueRange" type="int" value="90" />
+    <property name="threatRange" type="int" value="60" />
+    <property name="waypoints" value="252,249,250,251" />
    </properties>
   </object>
   <object id="270" template="../../../../../../../common/maps/obj/portal.tx" x="320" y="560">
    <properties>
-    <property name="direction" value="up"/>
-    <property name="portalState" value="active"/>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_gideon/keep.tmx"/>
-    <property name="teleportObjectId" value=""/>
+    <property name="direction" value="up" />
+    <property name="portalState" value="active" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_gideon/keep.tmx" />
+    <property name="teleportObjectId" value="" />
    </properties>
   </object>
-  <object id="271" template="../../../../../../../common/maps/obj/collision.tx" x="300" y="430" width="4" height="26"/>
-  <object id="272" template="../../../../../../../common/maps/obj/collision.tx" x="320" y="430" width="4" height="26"/>
-  <object id="273" template="../../../../../../../common/maps/obj/collision.tx" x="300" y="380" width="4" height="12"/>
-  <object id="274" template="../../../../../../../common/maps/obj/collision.tx" x="320" y="380" width="4" height="12"/>
+  <object id="271" template="../../../../../../../common/maps/obj/collision.tx" x="300" y="430" width="4" height="26" />
+  <object id="272" template="../../../../../../../common/maps/obj/collision.tx" x="320" y="430" width="4" height="26" />
+  <object id="273" template="../../../../../../../common/maps/obj/collision.tx" x="300" y="380" width="4" height="12" />
+  <object id="274" template="../../../../../../../common/maps/obj/collision.tx" x="320" y="380" width="4" height="12" />
  </objectgroup>
  <objectgroup id="7" name="Waypoints">
-  <object id="243" template="../../../../../../../common/maps/obj/waypoint.tx" x="-128" y="112"/>
-  <object id="244" template="../../../../../../../common/maps/obj/waypoint.tx" x="-80" y="112"/>
-  <object id="246" template="../../../../../../../common/maps/obj/waypoint.tx" x="-80" y="176"/>
-  <object id="247" template="../../../../../../../common/maps/obj/waypoint.tx" x="-224" y="144"/>
-  <object id="248" template="../../../../../../../common/maps/obj/waypoint.tx" x="-80" y="144"/>
-  <object id="251" template="../../../../../../../common/maps/obj/waypoint.tx" x="-128" y="208"/>
-  <object id="252" template="../../../../../../../common/maps/obj/waypoint.tx" x="-176" y="112"/>
-  <object id="253" template="../../../../../../../common/maps/obj/waypoint.tx" x="-128" y="144"/>
-  <object id="254" template="../../../../../../../common/maps/obj/waypoint.tx" x="-128" y="176"/>
-  <object id="255" template="../../../../../../../common/maps/obj/waypoint.tx" x="-176" y="208"/>
-  <object id="256" template="../../../../../../../common/maps/obj/waypoint.tx" x="-176" y="176"/>
-  <object id="257" template="../../../../../../../common/maps/obj/waypoint.tx" x="-224" y="112"/>
-  <object id="258" template="../../../../../../../common/maps/obj/waypoint.tx" x="-176" y="144"/>
-  <object id="260" template="../../../../../../../common/maps/obj/waypoint.tx" x="-80" y="208"/>
+  <object id="243" template="../../../../../../../common/maps/obj/waypoint.tx" x="-128" y="112" />
+  <object id="244" template="../../../../../../../common/maps/obj/waypoint.tx" x="-80" y="112" />
+  <object id="246" template="../../../../../../../common/maps/obj/waypoint.tx" x="-80" y="176" />
+  <object id="247" template="../../../../../../../common/maps/obj/waypoint.tx" x="-224" y="144" />
+  <object id="248" template="../../../../../../../common/maps/obj/waypoint.tx" x="-80" y="144" />
+  <object id="251" template="../../../../../../../common/maps/obj/waypoint.tx" x="-128" y="208" />
+  <object id="252" template="../../../../../../../common/maps/obj/waypoint.tx" x="-176" y="112" />
+  <object id="253" template="../../../../../../../common/maps/obj/waypoint.tx" x="-128" y="144" />
+  <object id="254" template="../../../../../../../common/maps/obj/waypoint.tx" x="-128" y="176" />
+  <object id="255" template="../../../../../../../common/maps/obj/waypoint.tx" x="-176" y="208" />
+  <object id="256" template="../../../../../../../common/maps/obj/waypoint.tx" x="-176" y="176" />
+  <object id="257" template="../../../../../../../common/maps/obj/waypoint.tx" x="-224" y="112" />
+  <object id="258" template="../../../../../../../common/maps/obj/waypoint.tx" x="-176" y="144" />
+  <object id="260" template="../../../../../../../common/maps/obj/waypoint.tx" x="-80" y="208" />
  </objectgroup>
 </map>
