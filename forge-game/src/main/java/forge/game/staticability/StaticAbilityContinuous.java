@@ -631,6 +631,15 @@ public final class StaticAbilityContinuous {
                         affectedCard.addNewPTByText(state.getBasePower(), state.getBaseToughness(), se.getTimestamp(), stAb.getId());
                     }
                 }
+                if (stAb.hasParam("Incorporate")) {
+                    final ManaCost manaCost = new ManaCost(new ManaCostParser(stAb.getParam("Incorporate")));
+                    affectedCard.addChangedManaCost(manaCost, true, se.getTimestamp(), stAb.getId());
+                    affectedCard.addColorByText(ColorSet.fromMask(manaCost.getColorProfile()), true, se.getTimestamp(), stAb.getId());
+                }
+                if (stAb.hasParam("ManaCost")) {
+                    final ManaCost manaCost = new ManaCost(new ManaCostParser(stAb.getParam("ManaCost")));
+                    affectedCard.addChangedManaCost(manaCost, false, se.getTimestamp(), stAb.getId());
+                }
 
                 if (stAb.hasParam("AddNames")) { // currently only for AllNonLegendaryCreatureNames
                     affectedCard.addChangedName(null, true, se.getTimestamp(), stAb.getId());
