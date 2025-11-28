@@ -33853,7 +33853,7 @@
   },
   {
     "name": "Kiska-Ra of Shandalar",
-    "sprite": "sprites/heroes/dragonplayer_w.atlas",
+    "sprite": "sprites/enemy/dragon/dragonlarge.atlas",
     "deck": [
       "decks/standard/shandalar97_colorless_kiskara.dck"
     ],
@@ -33890,7 +33890,7 @@
   },
   {
     "name": "Whim of Shandalar",
-    "sprite": "sprites/heroes/dragonplayer_u.atlas",
+    "sprite": "sprites/enemy/dragon/dragonlarge.atlas",
     "deck": [
       "decks/standard/shandalar97_colorless_whim.dck"
     ],
@@ -33927,7 +33927,7 @@
   },
   {
     "name": "Mandurang of Shandalar",
-    "sprite": "sprites/heroes/dragonplayer_b.atlas",
+    "sprite": "sprites/enemy/dragon/dragonlarge.atlas",
     "deck": [
       "decks/standard/shandalar97_colorless_mandurang.dck"
     ],
@@ -33964,7 +33964,7 @@
   },
   {
     "name": "Dracur of Shandalar",
-    "sprite": "sprites/heroes/dragonplayer_r.atlas",
+    "sprite": "sprites/enemy/dragon/dragonlarge.atlas",
     "deck": [
       "decks/standard/shandalar97_colorless_dracur.dck"
     ],
@@ -34001,7 +34001,7 @@
   },
   {
     "name": "Prismat of Shandalar",
-    "sprite": "sprites/heroes/dragonplayer_g.atlas",
+    "sprite": "sprites/enemy/dragon/dragonlarge.atlas",
     "deck": [
       "decks/standard/shandalar97_colorless_prismat.dck"
     ],
