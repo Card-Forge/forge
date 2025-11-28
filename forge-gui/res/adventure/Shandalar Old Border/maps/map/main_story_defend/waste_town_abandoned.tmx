@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="118">
+ <editorsettings>
+  <export target="waste_town.abandoned.tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="preventEscape" type="bool" value="true"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="13697" source="../../../../../../common/maps/tileset/rivers.tsx"/>
+ <tileset firstgid="30977" source="../../../../../../common/maps/tileset/rivers-nocolide.tsx"/>
+ <layer id="1" name="Background" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmUsOgjAURTt3pK7D/4e6BHfEx6hxCRrjKlyGiS7EgbuQFyBpCIUCr320YXCDA0zuyX23H/UHjPkd1pIzdvLofWDovqP30FbHOIvxlt5Hn0WiH6f3gCGXeg4sn7gj3/QJEtlGlvXnGSVP6P48ZTrHnx+WdQhyecfeV7nOTBzqELUHLGW9iRxaE/YhY0PLul/G48p6ffDcYIEzjQvnGmCA+bK9K9m+UieTiyCVd8R3q77XVK9tkgVW54v8y5iwBQywp2D0hJIjy2Uh2fNVvclmyMRciZLloeJRlcUEx7SkI00yoZgrkSW/BmMzmGKBPX7D1TjacOpkgPvXLNd3XRy6WK4BY7dAfzd0ZgE55O+QOnl0cdS996p6NckRFnSiiqGMq4pbVxZY53YTa6lMmL8NU3HUnaeucmDfA3uOngMUIP9OQsVRdLa1kQOEOVtUHGuO+7+iKY4/AhwTSA==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzVWUtOG0EQ7SELNB+fYcwOCc5A5IDDCRBiPXAPPkdgRxZDpJDIdwIpwnjNAsEKJKaZLlEudfXfYEoquedX3a/+3RbCj5pCiMOOtyohVsp5/lZ6CvOktpN/XaWZJ1Nrvql6mSvo+veCccD837u5joo4OVInl2W/ZhjD9UdQSpt8NoFNpH/H2uUzCfxA2kXnYxDDXwVjy/h09oHxukjKmNz5Jxdi1cJ/c71M07dXDnIxr3d8a/GVRtWE0DwwYuRz923PQonzNSBb7Pwv9Do06c+GI3W8Nqh+p8rbz7UZB8yZKl4b0oOkrD8mHKlzDvQhwLr6I3X7UvvL5nCA7lL0H1ge7QepXS6GQvwa+svncGTMPKFEbQH9IM0Hplxpyq1cDkiNA3qymN7clpP2B+Z5dfPp8lhjyWtZyffm58w3DwNx7IqDI1MdAJwQq5JtvWNsbw447hg8+P4MjTkdgd7pPshmw1iSOMq8ZxudOswPesf1rC3fn0FOteW5adHr8CfzS8c/mDqv68/WKjcckGuoj/jYZJL3esu732H1zkXeM4zlr7SBtEcXL2+Ydov+W8ljdC3HrnHUMv4t9e/TdwCOM/LeTLOOuurXVxgwY7w6Ga6Efc0Fx0k5j+N+0/y+i54B7zgCi299qJX+JA6Xfcm2Y3zsqHzwzyEf6MhUHziSvrU34HWdo7W42ONJyZpoMBzYP3+jkB5gouzBrXGM7rvGb+yeKqTOnaAc87jR6XMjfn2jwl4/bL2HL0GMcHvAkPi4VThwfMC68Vls6lpdkxwqcY1JLZwpm03RffwO5KapqiU5qYW0dsf0HK575LqarxGAa4TWiOsHxq3DgPe1lwG+Twmfp/r4Z43qG10jPMf1nz5fxDkutq/PXnOicNDa7zNvKhy6va1Pfo7BwfVSobLgTBhwuMqOxZGS6P9PPvpZJhzYHjYMdK8di+NRs3ePpTZgLctkjxhaNhyh58XLhgOfs/hgccUh4yo2Fl4BWmjU8A==
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="50" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztWElOwzAU/UitaJHaFQvUIDV01YENArGBDSu4AAsug3KHIlr1CHCBMiy6Yc8BKEKcASgLkHAm1Zg4/p6SoPZJVibH+c/vD44BllgCh6ELXt425IFxCcD5p+22NOdxWk7md1GxP4c7Vb33advp834lH5/c3QbYI82pp39/2gZ4bs+veTxs4NLF9dtfkR9bhsfRGkCjHszVLzSp6wFpsx7AZ0/87WsH4K4u7pcGkssCYHg8kRialkIeJhDH24RwuCf+M3L1x8TwOK+FR1M8aBAf8r6a+uOIePSpXOXziOPQJFg9+gr5MYlHh5MDbegRQ2Z+kuqAbJzzQPwchgAe1h5Tur6uh0eWR5qmL4THajW95YUs64dNyPC4cvS+ZXN9k8YjrjE8tDRrmElg9GBjZlPT/qQYd6kxVXTj8YjzgCp4tpio3UkoSpw3GY0nkprL8Ggo+JNsbVZdo5jSg/X5gy7AYVfcz4e/7mXvb1nUAwP/H2Pgyj/ThSoPX//vyAdGgv2Ms2i9PKvhxhbVqaR/FhUe77huAbL4t/fB48HGdLsaNhFuyHvHHYAT0h42/j6n44B3roKi5F0ajy1cP1LjvPg8jQd2Lwa7fxD19ZLuDzj3sXlbVw+M/4tsGRtYp5n0K8zcYdfMstxo29/KdvcrA/ss7Yt+SGrAzrnIr1iNi5JLZLGIPLKqmSpYRD1oFE2bRdejaMiaxw9yRHM0
+  </data>
+ </layer>
+ <layer id="5" name="Overlay" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt180NgjAYBuB3C7lp4gXaMojugQenqIM4hYl3TRzBgz9buAA/8YAE0oKpbc37JARoPpL3IxQoQERkZyWAdbUVAnojmnM95vqZAhJlrjulwDmdGNJC3Uedf7ts9roY2UdIHhJ4St8pKCa28zAGLwd9hHZ/bPP01V0SN5mmKnLfCYjiFdq76RvXP+mD3Oo+8/Pq330hzHWmcR92ljmGvtt7fj+p41at/+7vNaDMAJX117XnwdBxLNrz45h/jOufh3HswDlPREREFIQSiasegg==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="364" y="624" width="56" height="16"/>
+  <object id="55" template="../../../../../../common/maps/obj/treasure.tx" x="432" y="304" visible="0">
+   <properties>
+    <property name="reward">[{
+	  &quot;count&quot;:4,
+	  &quot;type&quot;:&quot;Union&quot;,
+	  &quot;cardUnion&quot;: [
+		{
+		  &quot;count&quot;:1,
+		  &quot;subTypes&quot;: [&quot;Zombie&quot;]
+		},
+		{
+		  &quot;count&quot;:1,
+		  &quot;cardText&quot;: &quot;Zombie&quot;
+		}
+	  ]
+	}]</property>
+   </properties>
+  </object>
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="512" y="368" visible="0">
+   <properties>
+    <property name="reward">[{
+      &quot;count&quot;:4,
+      &quot;subTypes&quot;: [&quot;Wall&quot;]
+    }]</property>
+   </properties>
+  </object>
+  <object id="53" template="../../../../../../common/maps/obj/treasure.tx" x="464" y="432" visible="0">
+   <properties>
+    <property name="reward">[{
+	  &quot;count&quot;:4,
+	  &quot;type&quot;:&quot;Union&quot;,
+	  &quot;cardUnion&quot;: [
+		{
+		  &quot;count&quot;:1,
+		  &quot;subTypes&quot;: [&quot;Spirit&quot;]
+		},
+		{
+		  &quot;count&quot;:1,
+		  &quot;cardText&quot;: &quot;Spirit&quot;
+		}
+	  ]
+	}]</property>
+   </properties>
+  </object>
+  <object id="64" template="../../../../../../common/maps/obj/treasure.tx" x="256" y="373" visible="0">
+   <properties>
+    <property name="reward">[{
+      &quot;count&quot;:4,
+      &quot;colorType&quot;: &quot;Colorless&quot;
+    }]</property>
+   </properties>
+  </object>
+  <object id="65" template="../../../../../../common/maps/obj/treasure.tx" x="289.5" y="227.25" visible="0">
+   <properties>
+    <property name="reward">[{
+	  &quot;count&quot;:4,
+	  &quot;type&quot;:&quot;Union&quot;,
+	  &quot;cardUnion&quot;: [
+		{
+		  &quot;count&quot;:1,
+		  &quot;subTypes&quot;: [&quot;Demon&quot;]
+		},
+		{
+		  &quot;count&quot;:1,
+		  &quot;cardText&quot;: &quot;Demon&quot;
+		}
+	  ]
+	}]</property>
+   </properties>
+  </object>
+  <object id="66" template="../../../../../../common/maps/obj/treasure.tx" x="96" y="144"/>
+  <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="495.333" y="236.667">
+   <properties>
+    <property name="enemy" value="Demon"/>
+    <property name="inactive" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="5"/>
+    <property name="threatRange" type="int" value="5000"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="473.333" y="350.667">
+   <properties>
+    <property name="enemy" value="Demon"/>
+    <property name="inactive" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="5000"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="219.333" y="212.667">
+   <properties>
+    <property name="enemy" value="Demon"/>
+    <property name="inactive" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="5000"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="240.667" y="396.667">
+   <properties>
+    <property name="enemy" value="Demon"/>
+    <property name="inactive" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="5000"/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="658" y="303.333">
+   <properties>
+    <property name="enemy" value="Demon"/>
+    <property name="inactive" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="2"/>
+    <property name="threatRange" type="int" value="5000"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="534.667" y="482">
+   <properties>
+    <property name="enemy" value="Demon"/>
+    <property name="fleeRange" value="5000"/>
+    <property name="inactive" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="2000"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="354.667" y="291.333">
+   <properties>
+    <property name="enemy" value="Demon"/>
+    <property name="inactive" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="5000"/>
+   </properties>
+  </object>
+  <object id="74" template="../../../../../../common/maps/obj/enemy.tx" x="48" y="272">
+   <properties>
+    <property name="enemy" value="Demon"/>
+    <property name="inactive" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="5"/>
+    <property name="threatRange" type="int" value="5000"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../../../common/maps/obj/dialog.tx" x="80" y="208" width="96" height="96">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;condition&quot;: [{&quot;checkMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;}, &quot;not&quot;: true}]
+   &quot;text&quot;: &quot;A fountain borders the walkway here. The stonework is chipped and dirty, but the water appears to be surprisingly clean and clear.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="76" template="../../../../../../common/maps/obj/dialog.tx" x="656" y="175" width="117" height="98">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;condition&quot;: [{&quot;checkMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;}, &quot;not&quot;: true}],
+   &quot;text&quot;: &quot;One of the few sounds in the area, the water wheel on this old mill creaks as it spins gradually in the slowly moving and oddly colored water.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="77" template="../../../../../../common/maps/obj/dialog.tx" x="400" y="448" width="160" height="190" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;condition&quot;: [{&quot;checkMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;}, &quot;not&quot;: true}],
+   &quot;text&quot;: &quot;These shops are as lifeless as the rest of the town, but it looks as though there might be some items left behind, suspiciously untouched after however long.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="78" template="../../../../../../common/maps/obj/dialog.tx" x="202" y="448" width="166" height="159">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;condition&quot;: [{&quot;checkMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;}, &quot;not&quot;: true}],
+   &quot;text&quot;: &quot;The inn is locked up tightly. The town hall in contrast is missing its' front door, but you find nothing out of the ordinary inside, just well organized crumbling papers coveered in illegibly smeared ink.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="79" template="../../../../../../common/maps/obj/dialog.tx" x="448" y="192" width="80" height="80" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;condition&quot;: [{&quot;checkMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;}, &quot;not&quot;: true}],
+   &quot;text&quot;: &quot;The vines covering these houses look sickly, as if they are searching for sustenance not found in the soil here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="80" template="../../../../../../common/maps/obj/scroll.tx" x="320" y="400">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wasteland&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="81" template="../../../../../../common/maps/obj/scroll.tx" x="704" y="128">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Millstone&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="82" template="../../../../../../common/maps/obj/dialog.tx" x="240" y="176" width="160" height="112">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;condition&quot;: [{&quot;checkMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;}, &quot;not&quot;: true}],
+   &quot;text&quot;: &quot;'Deathly still' seems a fitting description for the graveyard. You find yourself almost wishing for the dead to rise just to have something happen.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="83" template="../../../../../../common/maps/obj/dialog.tx" x="336" y="560" width="112" height="16">
+   <properties>
+    <property name="dialog">[{
+   &quot;condition&quot;: [{&quot;checkMapFlag&quot;:&quot;demonsActive&quot;},{&quot;checkMapFlag&quot;: &quot;escaped&quot;, &quot;not&quot;: true}],
+   &quot;action&quot;: [{&quot;setMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;, &quot;val&quot;: 0}}]
+},
+{
+   &quot;condition&quot;: [{&quot;checkMapFlag&quot;: &quot;introShown&quot;, &quot;not&quot;: true}],
+   &quot;action&quot;: [{&quot;advanceMapFlag&quot;: &quot;introShown&quot;}],
+   &quot;text&quot;: &quot;Just as the merchant described, an empty town lies behind these gates. Even the wind seems more still here as if afraid to disturb anything.&quot;,
+   &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;text&quot;: &quot;As you move closer, it becomes obvious that most of the buildings are intact but in a state of disrepair or are outright overgrown. It is doubtful that anyone has resided here in quite some time.&quot;,
+      &quot;options&quot;: [{&quot;name&quot;: &quot;Time to go portal hunting. I don't guess I can ask anyone for directions...&quot;}]
+   }]
+}]
+</property>
+    <property name="hidden" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../../../common/maps/obj/manashards.tx" x="560" y="448" visible="0"/>
+  <object id="85" template="../../../../../../common/maps/obj/scroll.tx" x="48" y="336">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wasteland|TMP&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="86" template="../../../../../../common/maps/obj/scroll.tx" x="256" y="112">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wasteland|TMP&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="87" template="../../../../../../common/maps/obj/scroll.tx" x="496" y="144">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wasteland|TMP&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="88" template="../../../../../../common/maps/obj/scroll.tx" x="736" y="304">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wasteland|TMP&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="89" template="../../../../../../common/maps/obj/scroll.tx" x="192" y="288">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wasteland|TMP&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="90" template="../../../../../../common/maps/obj/scroll.tx" x="448" y="240">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wasteland|TMP&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../../../common/maps/obj/scroll.tx" x="160" y="480">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wasteland|TMP&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../../../common/maps/obj/scroll.tx" x="352" y="128">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Abandoned Outpost&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="93" template="../../../../../../common/maps/obj/enemy.tx" x="370.667" y="147.333">
+   <properties>
+    <property name="enemy" value="Demon"/>
+    <property name="inactive" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="5000"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../../../common/maps/obj/dialog.tx" x="240" y="272" width="80" height="80" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;condition&quot;: [{&quot;checkMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;}, &quot;not&quot;: true}],
+   &quot;text&quot;: &quot;Perhaps just a trick of the mind, you can't shake the feeling that you're being watched as you explore the area.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="95" template="../../../../../../common/maps/obj/dialog.tx" x="96" y="176" width="64" height="16">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;condition&quot;: [{&quot;checkMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;}, &quot;not&quot;: true}]
+   &quot;text&quot;: &quot;And here lies gruesome confirmation of the merchant's tale, by way of the remains of a merfolk tail. It appears that there was indeed one of the aquatic people here far from their normal territory which it will never return to.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;text&quot;: &quot;Investigating the scene will have to wait, however, as it appears you have determined the cause of death. Seemingly out of nowhere, demons come running at you from all directions.&quot;,
+      &quot;options&quot;: [{
+          &quot;name&quot;: &quot;RUN!!!&quot;,
+          &quot;action&quot;: [{&quot;setMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;, &quot;val&quot;: 1}},{&quot;deleteMapObject&quot;: -1}, {&quot;activateMapObject&quot;: 67},{&quot;activateMapObject&quot;: 68},{&quot;activateMapObject&quot;: 69},{&quot;activateMapObject&quot;: 70},{&quot;activateMapObject&quot;: 71},{&quot;activateMapObject&quot;: 72},{&quot;activateMapObject&quot;: 73},{&quot;activateMapObject&quot;: 74},{&quot;activateMapObject&quot;: 93},{&quot;activateMapObject&quot;: 98},{&quot;activateMapObject&quot;: 99},{&quot;activateMapObject&quot;: 100},{&quot;activateMapObject&quot;: 101},{&quot;activateMapObject&quot;: 102},{&quot;activateMapObject&quot;: 103}]
+      }]
+}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="96" template="../../../../../../common/maps/obj/dialog.tx" x="336" y="528" width="112" height="16">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;condition&quot;: [{&quot;checkMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;}},{&quot;checkMapFlag&quot;: {&quot;key&quot;:&quot;escaped&quot;}, &quot;not&quot;: true}]
+   &quot;action&quot;: [{&quot;setMapFlag&quot;: {&quot;key&quot;:&quot;escaped&quot;, &quot;val&quot;: 1}}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="97" template="../../../../../../common/maps/obj/treasure.tx" x="162" y="195" visible="0">
+   <properties>
+    <property name="reward">[{
+	  &quot;count&quot;:4,
+	  &quot;type&quot;:&quot;Union&quot;,
+	  &quot;cardUnion&quot;: [
+		{
+		  &quot;count&quot;:1,
+		  &quot;subTypes&quot;: [&quot;Golem&quot;]
+		},
+		{
+		  &quot;count&quot;:1,
+		  &quot;cardText&quot;: &quot;Golem&quot;
+		}
+	  ]
+	}]</property>
+   </properties>
+  </object>
+  <object id="98" template="../../../../../../common/maps/obj/enemy.tx" x="32" y="96">
+   <properties>
+    <property name="enemy" value="Demon"/>
+    <property name="inactive" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="8"/>
+    <property name="threatRange" type="int" value="5000"/>
+   </properties>
+  </object>
+  <object id="99" template="../../../../../../common/maps/obj/enemy.tx" x="657" y="133">
+   <properties>
+    <property name="enemy" value="Demon"/>
+    <property name="inactive" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="5000"/>
+   </properties>
+  </object>
+  <object id="100" template="../../../../../../common/maps/obj/enemy.tx" x="200" y="488">
+   <properties>
+    <property name="enemy" value="Demon"/>
+    <property name="fleeRange" value="5000"/>
+    <property name="inactive" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="7.5"/>
+    <property name="threatRange" type="int" value="1000"/>
+   </properties>
+  </object>
+  <object id="101" template="../../../../../../common/maps/obj/enemy.tx" x="383" y="383">
+   <properties>
+    <property name="enemy" value="Demon"/>
+    <property name="inactive" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="2.5"/>
+    <property name="threatRange" type="int" value="5000"/>
+   </properties>
+  </object>
+  <object id="102" template="../../../../../../common/maps/obj/enemy.tx" x="32" y="480">
+   <properties>
+    <property name="enemy" value="Demon"/>
+    <property name="inactive" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="1"/>
+    <property name="threatRange" type="int" value="5000"/>
+   </properties>
+  </object>
+  <object id="103" template="../../../../../../common/maps/obj/enemy.tx" x="624" y="416">
+   <properties>
+    <property name="enemy" value="Demon"/>
+    <property name="inactive" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="5000"/>
+   </properties>
+  </object>
+  <object id="116" template="../../../../../../common/maps/obj/collision.tx" x="330" y="640" width="126" height="29"/>
+  <object id="117" template="../../../../../../common/maps/obj/waypoint.tx" x="384" y="239"/>
+ </objectgroup>
+</map>

@@ -1,12 +1,43 @@
-{                                    
-"name":"Spider",
-  "template":
-  {
-   "count":60,
-   "colors":["Green","Black"],
-   "tribe":"Spider",        
-   "tribeCards":1.0,
-   "tribeSynergyCards":0.3,
-   "rares":0.8
-  }
+{
+  "name": "Spider",
+  "mainDeck": [
+    {
+      "count": 8,
+      "colors": [
+        "Green",
+        "Black"
+      ],
+      "subTypes": [
+        "Spider"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 30,
+      "colors": [
+        "Green",
+        "Black"
+      ],
+      "subTypes": [
+        "Spider"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 11,
+      "cardName": "Forest|PALP"
+    },
+    {
+      "type": "card",
+      "count": 11,
+      "cardName": "Swamp|PALP"
+    }
+  ]
 }

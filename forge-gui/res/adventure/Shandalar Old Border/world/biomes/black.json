@@ -32,6 +32,12 @@
 	"Shroom2"
 ],
 "enemies": [
+	"Legendary Mage of the Badlands",
+	"Legendary Mage of the Underground Sea",
+	"Scrublander of Dromar",
+	"Volcanic Islander of Crosis",
+	"Bayou Dweller of Darigaaz",
+	"Domain Keeper of Cromat",
 	"Adept Black Wizard",
 	"Apprentice Black Wizard",
 	"Bat",
@@ -116,7 +122,7 @@
 		"CaveRat",
 		"CaveLarge1",
 		"Slimefoots Lair",
-		"Temple of Liliana",
+		"Temple of Yawgmoth",
 		"Grolnoks Bog",
 		"Lich's Mirror",
 		"DemonTower",

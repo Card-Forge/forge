@@ -1,11 +1,36 @@
-{                                    
-"name":"Zombie bad",
-  "template":
-  {
-   "count":80,
-   "colors":["Black"],
-   "tribe":"Zombie",    
-   "tribeCards":1.0,
-   "rares":0.1
-  }
+{
+  "name": "Zombie bad",
+  "mainDeck": [
+    {
+      "count": 34,
+      "colors": [
+        "Black"
+      ],
+      "subTypes": [
+        "Zombie"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 4,
+      "colors": [
+        "Black"
+      ],
+      "subTypes": [
+        "Zombie"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 22,
+      "cardName": "Swamp|USG"
+    }
+  ]
 }

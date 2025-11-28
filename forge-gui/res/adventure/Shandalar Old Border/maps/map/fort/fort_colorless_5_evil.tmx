@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="80">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="6" name="Collision" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlj0KwzAMhUOXYLJ0S4euuUqO6PMWU0zMi2QJS2o65IEwibE+ZP3gaYrXY/kBJIC7J9k8uZxfLXdU23wYfuNeBFf7/5+5NSe9/HB3aeWicfnzzKmFa9Eo1yqp95CX09e8VLjvtc/1ZnKKjrWovefqP6cz15uHK1VLGK+lzjT1LNX5aLwW7qiunFfIL5JYEfNL8hs9yyhG7a1ovraPvONt/ePcuIpLsT1V6/z15Pcs70nuLHKpmeLB5XxQ3Fs6fQACPkMB
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzN1j0OwjAMBeAqC6pYED9HYGBHXdl6ETbOwDkYexwuwMghmNnAElZSy07sJAWe9Baq9muUttjNm8ZN3PO7j0UzytTmv7t961vLhWtZXMjN+UIu7fj8+8Yfv658w+vkuJDtzJcmtEpcKBfOjNmcoXHRecpcdL3UpuHczsXXp3FTyXHx2bJaJS6YUMsad0vehXdB2l/OhVjWyrlgcq4Ubq05oeY3XdpUSs1cF6N5145rvds5vZuyp3JT4Vx8h3JczVo5F5/dkv2VHFrqQjhX2hOrib9pXO4ec3I68HsRW2+NhG74PYq5dN4Ig99n6ZkKZxMondUwkim5aNPr00K4GVHjSvPh8LmnITFzal3tXIr/z3tnn2lD13puDdd6Xo3+yoW+AK0kpuc=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlktOwzAQhqdGJAoNSFREIKF2hcMFSrkCcAW4ANdgAYgDACv2FRyiPE7Aa8dJ2GDLGWq7HjtOChv4pV+JbGe+jMdpB+Dv6rIDcKX5uvMzscqeuXbIAE66U49Yc64v1vGaf+1jqoyS9y9sdvxQ+Mjiyvmm3FI8y4XvMzWvX3nF/STy3YrgPjMznyeCK4XcvA+wLLzSN2M9VDG2RS3fF5UpLqpMp7G5tp/cMb65A3ArmHcW9zvvnsn0cWO0NwDYFz4Y0MwY7iSj53y6WFV25VmH21R6jjq3bn0n2Wx9Y5nIijlXPKXPla2bzIzv4uqK5VJy8Vz8EDdGMTxkSn8sAazn5lzdfY7Jz/a8c3RJ57ThSo2LMM8W6yqmvP6mJA/tkl3fvFDj1O9zXWGuvnypc4XfqtxnZI6LetwQM8T1fddvzHy23DC5LmFPJPf5LAE4T8L/g9T7niYqhuSGejWq36Biu7TLFMvXb4S4rvihnIcVl7fgLmRuj6oayvXUGum6XOyv0K8t+th5xvpXc30Bjv2S9g==
+  </data>
+ </layer>
+ <layer id="8" name="Castle" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJy9l9tKw0AQhsf0qk1SqNp6gHoleIAiSlF8Be98BN+hUpXeiloPKILgO/gcPoDWC+vhDTxhvXeHZMhks5ts2rQ/DGU3Q76d2e3MBsBTrQhw7gJ8OwAfwn4db74sfiu+vRcA9uyoHdiQWj3GWBTsJd/WilHflsR7Fet4EzblpOcia1nBQG1b4THGjpyKo+Y1XHMu5XR9LN16B9WJWONVinWS6n4udiYDS6MvxztLn4Z7RAzO7UfXItZjV32ONqX95bE9+c+cKoArrFhVvz+X96xdApgfD+ZXBW9Fc64erDBbzidfx52Ce1QKjw/Z+KWgZnI2F3E3pP3dmjNnoqbFvnYLyXw553Ur6nOTj/JUus0HNQD5cWyZo+ImMZFHxmtPXN1J4prGiYZS1dhHS227Oe95Ixee7yhiTxKPldfqYQvPIsb6I3gL4v90llC7+q0Tsv78vod1C+uHrkdkrVM3qFmjYqKwL1y4+prVj0x6RS2mTg7KzOos6DiDyKTv308ENuyYhvVuXpMt27MsparjKN4PsmbqhBy8E+/bo+c2bT1X1x9MfGQ/zkRrxXCfRS5mEvpyGuF9nLizjrrnIxOfmdwJyL8bs07sO9gLiCv3X/pGaLL7AJ4Bfh+iHPJcltn3E/pyfs/vO9gLKKfcl6+TuDhPcevuJLQf5CffndqCd+n3HuL+A5Q4j/w=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzFll9Kw0AQxtcIilbRxPYEahvpa2mhB/AK+qAF6RV86IOU+iBKLiC+eRl7AIsgeAivYIZkyHQyu9lJS/3go392N7+d2dkhxtTTw6F+TScyJs69SWm5V2ls1zXis3Hb/xDvReqg4Z7XD4xZCAZJ/1P3gvpc0EHLPXbXzIzaaRvTPZLnV3H7wl4lIZOzR2QOzVG8Ji5nuxSTmqLcKalXyr3fXp1LmW97/vG62Depbx37At5TmDEnjYwJngr3knJH5WGV8Ex/WgWzKl6sS1dN+3Ip0zfPC48661h6EHIhxxMlt0rP6fmdOXofsF/CZW4SZusSZpi3KnMeFeZ1leTrYubTyM7fnRX7szGBA3drEJTPFvzeLHvO+PuzZeM+QZyLPHTPwpUE53seFfu4fCyb5hDmUB7Vl4XruxfUmDyX92epZ2m4EG93y83nDPj9cVKeN8jvhk+s34EcixQb/eTf8Xx9uL/HxgwJdyzExXOKsUpjvlzwq5DjobKXoOizbPmVagrPWdvDbPLhUpaWK71f1eFqpeF+rimXLml6xTpYElPbs+pwN820cf8AS0BpeA==
+  </data>
+ </layer>
+ <layer id="9" name="Bridge" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztls1OwkAUhW9ZDoXEBml160LimneRjbDmCSwJWxNQ1xrlycTCExAWJroQSDyT4YapMoTCTInRk5x00sV8597MH9G/suqtdOgE2yku/m7uJfrcyNBrW9x3MD8scT/3j/NDN0fqmwgHk9P6zMwsoNbQd8MwSTLZeUln/gVufADuWaC+OrddccPi9asr3rHeq5CoCbfC7Dz2Lj2egTeHFxq3Fph5rJFYmbl6FrZJTxHRMzyIsmdmTXBmTP10FrZtcY2SeV4mus/pvpZcZvbAvCibs9nm3oJ3V1pfq6s9Leesoca+gfvgET169rksyf7eY5mpXnDHZIY+Zpu4Nt8AzHrBvnkV+dSrc6/hTk53hF6r5EbYW0OMT3xVu2vmKTjHcHV5bo2FyuCKzcxEpNdVt6j+2Xh3bWLK+b8AGcs/JA==
+  </data>
+ </layer>
+ <layer id="10" name="Tree" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYCAOvOFhYHiLB7/jwa8eXZ5YoMHHwKCJB2vx4VePLj8KaA8CmQbaBbQHVwaBHyu4B8bOO1wDY6c4mWUIuXaCcBWdwxjZXuR8FCXBwCAjDsG0tBvZv7vEUTG97KUnANlbxzsw9g4EoGceGmzgDY62SAkzA0MpM/HmkKIeZKc6sA3SwUvftkgXL/3thNnbMwD5aaDs1RhtY6KAN1Ro82Mzj5A8LI9Ro82PnGdxAVj+otQ+5PAippygJL1hswu9nwQAHApAlA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="210" y="447.167" width="48" height="47">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="122.943" y="190.449"/>
+  <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="91.2775" y="337.979"/>
+  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="188.782" y="304.035">
+   <properties>
+    <property name="enemy" value="Walking Brain"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../../../common/maps/obj/manashards.tx" x="345.926" y="92.0841"/>
+  <object id="57" template="../../../../../../common/maps/obj/manashards.tx" x="377.001" y="321.309"/>
+  <object id="61" template="../../../../../../common/maps/obj/enemy.tx" x="358.247" y="199.334">
+   <properties>
+    <property name="enemy" value="Jellyfish"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="67,65,66"/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../../../common/maps/obj/waypoint.tx" x="324.117" y="128.506"/>
+  <object id="65" template="../../../../../../common/maps/obj/waypoint.tx" x="261.376" y="274.226"/>
+  <object id="66" template="../../../../../../common/maps/obj/waypoint.tx" x="53.9813" y="255.436"/>
+  <object id="67" template="../../../../../../common/maps/obj/waypoint.tx" x="411.612" y="135.255"/>
+  <object id="68" template="../../../../../../common/maps/obj/waypoint.tx" x="358.033" y="289.427"/>
+  <object id="70" template="../../../../../../common/maps/obj/booster.tx" x="207.333" y="90.3333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ATQ&quot;, &quot;USG&quot;, &quot;ULG&quot;, &quot;UDS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ATQ&quot;, &quot;USG&quot;, &quot;ULG&quot;, &quot;UDS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ATQ&quot;, &quot;USG&quot;, &quot;ULG&quot;, &quot;UDS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="71" template="../../../../../../common/maps/obj/enemy.tx" gid="1073753243" x="333.667" y="342.333" rotation="0">
+   <properties>
+    <property name="enemy" value="Walking Brain"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="73,75,68,75,73"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../../../common/maps/obj/waypoint.tx" x="157.926" y="130.635"/>
+  <object id="73" template="../../../../../../common/maps/obj/waypoint.tx" x="286.333" y="373.333"/>
+  <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="194.667" y="358"/>
+  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="363.333" y="344.333"/>
+  <object id="76" template="../../../../../../common/maps/obj/enemy.tx" x="187.325" y="228.489">
+   <properties>
+    <property name="enemy" value="Cyclops"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="112.666" y="348.751">
+   <properties>
+    <property name="enemy" value="Walking Brain"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../../../common/maps/obj/enemy.tx" x="234.946" y="129.616">
+   <properties>
+    <property name="enemy" value="Cyclops"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="62,72"/>
+   </properties>
+  </object>
+  <object id="79" template="../../../../../../common/maps/obj/enemy.tx" x="122.755" y="154.637">
+   <properties>
+    <property name="enemy" value="Cyclops"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

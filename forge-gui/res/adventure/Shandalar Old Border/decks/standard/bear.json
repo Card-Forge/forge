@@ -1,12 +1,36 @@
-{                                    
-"name":"Bear",
-  "template":
-  {
-   "count":60,
-   "colors":["Green"],
-   "tribe":"Bear",        
-   "tribeCards":1.0,
-   "tribeSynergyCards":0.2,
-   "rares":0.4
-  }
+{
+  "name": "Bear",
+  "mainDeck": [
+    {
+      "count": 23,
+      "colors": [
+        "Green"
+      ],
+      "subTypes": [
+        "Bear"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 15,
+      "colors": [
+        "Green"
+      ],
+      "subTypes": [
+        "Bear"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 22,
+      "cardName": "Forest|ONS"
+    }
+  ]
 }

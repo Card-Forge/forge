@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="49">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJztldEOgzAIRZuo0/GhOv1RO/Wj5CZrwpKu0K3dkw/nScMFLtDx7tz4JRMzKzTk3DHYY278767Qka4LloxaHoZ4FlbOb6D3elqqqys1oYd+B29+8c7S3014Aq+DN6i5jXhv9U6bKS2OnLsSmqXzu7CD+fbMk+kpDr6V1gw7hR2tuUeyRnk7/qEbu5G3xL2qqZsCOflXj2K9s/qf+x5Jgr4XXuX0o/lwE2u9vamen7FF4yE=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYMANbJgYGOYzUgfbMeG25yAa+yYetaQCkFkH8cgj+7GKmTw7jmMRq2DG72dq+pEUs9HltNmxs2lt70l27Gxa25vBwcDQzwbBZwjYSyg88MUxPjeh+xfdHkLhoY5m/lE89k4E+ncSB3ZzQWGhx46bjw3g8he6uD4nA4MBJ25z0cVgbsMV5ujmq+FxTx8bIo4zofGty44qBuPD5LM4sNuLK46Jzb/oYU5KWsdmB7H2khO32OzAF864AKF0hg5g5TM2OwiVo/jshdkNi/cJbNj1YbP3INRuYuowcssvYsIUmztAeAEjxN55ZNTFoHoOAIlHVtg=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzT5mFg0AFieoE2bgh9EmjnKR7sckMFLCbDvYPNj5+0EWxjHQYGE52Bc8tgA8SGRxad7BkJYDCHBaXxPNjATWDev6WNW55W/v0KtPMbHnsHAuQAcS4Sn15xzcXIwMDNiGknre0HABP1EEs=
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBj8IAuH+EEgPgRlZwNxDhrOpYM7ljMyMKwAYh4g5oJibkbSzb6mjWCL6zAwSOhgqjmEKcTASaG9+MBxPHIwf4PwSirbiw5whQc97TlKppnHoLQWmfoHCiCHRRYD7jxICOhxUstF9APk+nUg7D5GWAlOcBNY5tzSRhUbSL9TC5wYaAfgAYMlfAGGKxXV
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="240" y="272"/>
+  <object id="41" template="../../../../../../common/maps/obj/shop.tx" x="129" y="82">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf"/>
+   </properties>
+  </object>
+  <object id="42" template="../../../../../../common/maps/obj/shop.tx" x="304" y="114">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
+   </properties>
+  </object>
+  <object id="43" template="../../../../../../common/maps/obj/shop.tx" x="352" y="162">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
+   </properties>
+  </object>
+  <object id="44" template="../../../../../../common/maps/obj/shop.tx" x="177" y="81">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf"/>
+   </properties>
+  </object>
+  <object id="45" template="../../../../../../common/maps/obj/shop.tx" x="240" y="129">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
+   </properties>
+  </object>
+  <object id="46" template="../../../../../../common/maps/obj/shop.tx" x="368" y="226">
+   <properties>
+    <property name="shopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,GreenBoosterPackShop,Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf"/>
+   </properties>
+  </object>
+  <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="137" y="162"/>
+  <object id="48" template="../../../../../../common/maps/obj/shop.tx" x="304" y="48">
+   <properties>
+    <property name="shopList" value="Forest"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
