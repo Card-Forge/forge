@@ -36,7 +36,7 @@
     "ICE", "CHR", "HML", "ALL", "MIR", "VIS", "5ED", "POR", "WTH", "TMP",
     "STH", "EXO", "PO2", "USG", "ATH", "ULG", "UDS", "6ED", "PTK", "S99",
     "MMQ", "BRB", "NMS", "S00", "PCY", "INV", "BTD", "PLS", "APC", "7ED",
-    "ODY", "DKM", "TOR", "JUD", "ONS", "LGN", "SCG", "PHPR"
+    "ODY", "DKM", "TOR", "JUD", "ONS", "LGN", "SCG", "PHPR", "PAST", "DRC94"
   ],
   "difficulties": [
     {
