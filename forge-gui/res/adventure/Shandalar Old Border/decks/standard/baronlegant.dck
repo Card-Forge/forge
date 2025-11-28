@@ -1,16 +1,26 @@
 [metadata]
-Name=baronlegant
+Name=Baron Von Gant
 [Main]
-1 Mountain|MIR|3
-16 Plains|MIR|3
-2 Benalish Hero|4ED|1
-2 Valorous Charge|POR|1
-2 Warrior's Oath|PTK|1
-4 Battlefield Forge|APC|1
-4 Healing Salve|USG|1
-4 Holy Strength|5ED|1
-4 Orim's Thunder|APC|1
-4 Pariah|USG|1
-4 Radiant, Archangel|ULG|1
-4 Sacred Mesa|ATH|1
-4 Serra Angel|2ED|1
+12 Plains|ONS
+4 Daru Encampment|ONS
+4 Forbidding Watchtower|ULG
+4 Daru Warchief|SCG
+2 Enlistment Officer|APC
+2 Gempalm Avenger|LGN
+2 Frontline Strategist|SCG
+2 Pearlspear Courier|ONS
+2 Unified Strike|ONS
+2 Piety Charm|ONS
+2 Shared Triumph|ONS
+2 Catapult Master|ONS
+2 Catapult Squad|ONS
+2 Steam Catapult|PO2
+2 Intrepid Hero|USG
+2 Aven Brigadier|ONS
+2 Gustcloak Savior|ONS
+2 Aysen Crusader|HML
+1 Lieutenant Kirtar|ODY
+1 Commander Eesha|JUD
+2 Soltari Champion|STH
+2 Soltari Trooper|TMP
+2 Sunstrike Legionnaire|LGN
