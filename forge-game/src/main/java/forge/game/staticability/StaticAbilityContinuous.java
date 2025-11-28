@@ -29,6 +29,8 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
+import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostParser;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
