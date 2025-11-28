@@ -749,13 +749,16 @@
 		"description": "Start battles with Metallic Sliver in play."
 	},
 	{
-		"name": "Life Amulet",
-		"description": "A protective amulet that grants +2 starting life.",
+		"name": "Amulet of Kroog",
+		"description": "+2 life. Start battles with Amulet of Kroog in play.",
 		"equipmentSlot": "Neck",
-		"iconName": "LifeAmulet",
+		"iconName": "AmuletofKroog",
 		"cost": 2000,
 		"effect": {
-			"lifeModifier": 2
+			"lifeModifier": 2,
+			"startBattleWithCard": [
+				"Amulet of Kroog|ATQ"
+			]
 		}
 	},
 	{
@@ -831,6 +834,31 @@
 	{
 		"name": "Tibalt's Key",
 		"iconName": "StrangeKey",
+		"questItem": true
+	},
+	{
+		"name": "White Key to the False God",
+		"iconName": "WhiteKey",
+		"questItem": true
+	},
+	{
+		"name": "Blue Key to the False God",
+		"iconName": "BlueKey",
+		"questItem": true
+	},
+	{
+		"name": "Black Key to the False God",
+		"iconName": "BlackKey",
+		"questItem": true
+	},
+	{
+		"name": "Red Key to the False God",
+		"iconName": "RedKey",
+		"questItem": true
+	},
+	{
+		"name": "Green Key to the False God",
+		"iconName": "GreenKey",
 		"questItem": true
 	},
 	{
@@ -1539,19 +1567,6 @@
 		"effect": {
 			"startBattleWithCard": [
 				"Jeweled Amulet|ICE"
-			]
-		}
-	},
-	{
-		"name": "Amulet of Kroog",
-		"description": "+2 life. Start battles with Amulet of Kroog in play.",
-		"equipmentSlot": "Neck",
-		"iconName": "AmuletofKroog",
-		"cost": 2500,
-		"effect": {
-			"lifeModifier": 2,
-			"startBattleWithCard": [
-				"Amulet of Kroog|ATQ"
 			]
 		}
 	},
@@ -2915,11 +2930,12 @@
 		"equipmentSlot": "Body",
 		"iconName": "UrzasArmor",
 		"effect": {
+			"lifeModifier": -3,
 			"startBattleWithCard": [
 				"Urza's Armor|USG"
 			]
 		},
-		"description": "Start battles with Urza's Armor in play."
+		"description": "-3 life. Start battles with Urza's Armor in play."
 	},
 	{
 		"name": "Memory Crystal",
@@ -3497,11 +3513,11 @@
 	},
 	{
 		"name": "Dementia Mask",
-		"description": "Start battles with Ichorid in play.",
+		"description": "-1 starting hand size. Start battles with Ichorid in play.",
 		"equipmentSlot": "Neck",
 		"iconName": "DementiaMask",
 		"effect": {
-			"handSizeModifier": -1,
+			"changeStartCards": -1,
 			"startBattleWithCard": [
 				"Ichorid|TOR"
 			]
@@ -3599,5 +3615,348 @@
 			]
 		},
 		"description": "-2 life. Start battles with Bog Glider in play."
+	},
+	{
+		"name": "Ebony Horseshoe",
+		"equipmentSlot": "Boots",
+		"iconName": "EbonyHorseshoe",
+		"effect": {
+			"startBattleWithCard": [
+				"Ebony Horse|3ED"
+			]
+		},
+		"description": "Start battles with Ebony Horse in play."
+	},
+	{
+		"name": "Narcissist's Mask",
+		"equipmentSlot": "Neck",
+		"iconName": "NarcissistsMask",
+		"effect": {
+			"lifeModifier": -3,
+			"startBattleWithCard": [
+				"Narcissism|TOR"
+			]
+		},
+		"description": "-3 life. Start battles with Narcissism in play."
+	},
+	{
+		"name": "Serrated Quiver",
+		"equipmentSlot": "Right",
+		"iconName": "SerratedQuiver",
+		"effect": {
+			"lifeModifier": -4,
+			"startBattleWithCard": [
+				"Serrated Arrows|HML"
+			]
+		},
+		"description": "-4 life. Start battles with Serrated Arrows in play."
+	},
+	{
+		"name": "Map to Paradise",
+		"equipmentSlot": "Left",
+		"iconName": "MaptoParadise",
+		"effect": {
+			"lifeModifier": -5,
+			"startBattleWithCard": [
+				"Undiscovered Paradise|VIS"
+			]
+		},
+		"description": "-5 life. Start battles with Undiscovered Paradise in play."
+	},
+	{
+		"name": "Ring of Infestation",
+		"equipmentSlot": "Right",
+		"iconName": "RingofInfestation",
+		"effect": {
+			"startBattleWithCard": [
+				"Saproling Infestation|INV"
+			]
+		},
+		"description": "Start battles with Saproling Infestation in play."
+	},
+	{
+		"name": "Ivy Seer's Amulet",
+		"equipmentSlot": "Neck",
+		"iconName": "IvySeersAmulet",
+		"effect": {
+			"startBattleWithCard": [
+				"Ivy Seer|UDS"
+			]
+		},
+		"description": "Start battles with Ivy Seer in play."
+	},
+	{
+		"name": "Multani's Boots",
+		"equipmentSlot": "Boots",
+		"iconName": "MultanisBoots",
+		"effect": {
+			"lifeModifier": -5,
+			"startBattleWithCard": [
+				"Multani's Presence|ULG"
+			]
+		},
+		"description": "-5 life. Start battles with Multani's Presence in play."
+	},
+	{
+		"name": "Garments of Gaea",
+		"equipmentSlot": "Body",
+		"iconName": "GarmentsofGaea",
+		"effect": {
+			"handSizeModifier": -1,
+			"startBattleWithCard": [
+				"Pulse of Llanowar|INV"
+			]
+		},
+		"description": "-1 hand size. Start battles with Pulse of Llanowar in play."
+	},
+	{
+		"name": "Hymnal Hood",
+		"equipmentSlot": "Neck",
+		"iconName": "HymnalHood",
+		"effect": {
+			"lifeModifier": 1,
+			"startBattleWithCard": [
+				"Serra's Hymn|USG"
+			]
+		},
+		"description": "+1 life. Start battles with Serra's Hymn in play."
+	},
+	{
+		"name": "Celestial Sword",
+		"equipmentSlot": "Right",
+		"iconName": "CelestialSword",
+		"effect": {
+			"startBattleWithCard": [
+				"Celestial Sword|ICE"
+			]
+		},
+		"description": "Start battles with Celestial Sword in play."
+	},
+	{
+		"name": "Paladin's Greaves",
+		"equipmentSlot": "Boots",
+		"iconName": "PaladinsGreaves",
+		"effect": {
+			"lifeModifier": -2,
+			"startBattleWithCard": [
+				"Serra Paladin|HML"
+			]
+		},
+		"description": "-2 life. Start battles with Serra Paladin in play."
+	},
+	{
+		"name": "Robes of Renewal",
+		"equipmentSlot": "Body",
+		"iconName": "RobesofRenewal",
+		"effect": {
+			"lifeModifier": -2,
+			"startBattleWithCard": [
+				"Angelic Renewal|WTH"
+			]
+		},
+		"description": "-2 life. Start battles with Angelic Renewal in play."
+	},
+	{
+		"name": "Serra's Prayer Book",
+		"equipmentSlot": "Left",
+		"iconName": "SerrasPrayerBook",
+		"effect": {
+			"lifeModifier": -4,
+			"startBattleWithCard": [
+				"Serra's Liturgy|USG"
+			]
+		},
+		"description": "-4 life. Start battles with Serra's Liturgy in play."
+	},
+	{
+		"name": "Serpent Ring",
+		"equipmentSlot": "Right",
+		"iconName": "SerpentRing",
+		"effect": {
+			"startBattleWithCard": [
+				"Serpent Generator|LEG"
+			]
+		},
+		"description": "Start battles with Serpent Generator in play."
+	},
+	{
+		"name": "Barrin's Codex",
+		"equipmentSlot": "Left",
+		"iconName": "BarrinsCodex",
+		"effect": {
+			"lifeModifier": -8,
+			"startBattleWithCard": [
+				"Barrin's Codex|USG"
+			]
+		},
+		"description": "-8 life. Start battles with Barrin's Codex in play."
+	},
+	{
+		"name": "Rayne's Writ",
+		"equipmentSlot": "Right",
+		"iconName": "RaynesWrit",
+		"effect": {
+			"lifeModifier": -6,
+			"startBattleWithCard": [
+				"Rayne, Academy Chancellor|UDS"
+			]
+		},
+		"description": "-6 life. Start battles with Rayne, Academy Chancellor in play."
+	},
+	{
+		"name": "Shield of Tears",
+		"equipmentSlot": "Left",
+		"iconName": "ShieldofTears",
+		"effect": {
+			"lifeModifier": -4,
+			"startBattleWithCard": [
+				"Wall of Tears|STH"
+			]
+		},
+		"description": "-4 life. Start battles with Wall of Tears in play."
+	},
+	{
+		"name": "Urza Planeswalker Starting Setup",
+		"equipmentSlot": "Accessory",
+		"iconName": "c",
+		"effect": {
+			"startBattleWithCard": [
+				"Soldevi Excavations|ALL",
+				"Urza's Armor|USG",
+				"Mind Over Matter|EXO",
+				"Urza's Avenger|ATQ"
+			]
+		},
+		"description": "Start battles with Soldevi Excavations, Urza's Armor, Mind Over Matter, and Urza's Avenger in play."
+	},
+	{
+		"name": "Yawgmoth Starting Setup",
+		"equipmentSlot": "Accessory",
+		"iconName": "c",
+		"effect": {
+			"startBattleWithCard": [
+				"Swamp|LEA",
+				"Swamp|LEA",
+				"Swamp|LEA",
+				"Phyrexian Lens|INV",
+				"Phyrexian Altar|INV",
+				"Yawgmoth's Bargain|UDS",
+				"Eye of Yawgmoth|NMS",
+				"Order of Yawgmoth|USG",
+				"Phyrexian Reclamation|ULG",
+				"Phyrexian Walker|VIS",
+				"Phyrexian Walker|VIS",
+				"Phyrexian Walker|VIS",
+				"Phyrexian Walker|VIS",
+				"Phyrexian Battleflies|INV",
+				"Phyrexian Battleflies|INV",
+				"Phyrexian Battleflies|INV",
+				"Phyrexian Battleflies|INV"
+			]
+		},
+		"description": "Start battles with 3 Swamps, Phyrexian artifacts and creatures in play."
+	},
+	{
+		"name": "Jaya Ballard Starting Setup",
+		"equipmentSlot": "Accessory",
+		"iconName": "c",
+		"effect": {
+			"startBattleWithCard": [
+				"Mountain|LEA",
+				"Mountain|LEA",
+				"Mountain|LEA",
+				"Blood Moon|DRK",
+				"Fire Elemental|LEA",
+				"Wall of Diffusion|TMP",
+				"Book of Rass|DRK",
+				"Sulfuric Vapors|USG"
+			]
+		},
+		"description": "Start battles with 3 Mountains, Blood Moon, and red permanents in play."
+	},
+	{
+		"name": "Gaea, the Worldsoul Starting Setup",
+		"equipmentSlot": "Accessory",
+		"iconName": "c",
+		"effect": {
+			"startBattleWithCard": [
+				"Forest|LEA",
+				"Tropical Island|LEA",
+				"Taiga|LEA",
+				"Bayou|LEA",
+				"Savannah|LEA",
+				"Gaea's Avenger|ATQ",
+				"Cradle Guard|USG",
+				"Magnigoth Treefolk|PLS",
+				"Pulse of Llanowar|INV"
+			]
+		},
+		"description": "Start battles with multicolor lands and Gaea's creatures in play."
+	},
+	{
+		"name": "Serra the Benevolent Starting Setup",
+		"equipmentSlot": "Accessory",
+		"iconName": "c",
+		"effect": {
+			"startBattleWithCard": [
+				"Serra Angel|LEA",
+				"Worship|USG",
+				"Serra's Liturgy|USG",
+				"Remembrance|USG",
+				"Noble Purpose|MMQ",
+				"Karmic Justice|ODY",
+				"Absolute Law|USG",
+				"Absolute Grace|USG"
+			]
+		},
+		"description": "Start battles with Serra Angel and powerful white enchantments in play."
+	},
+	{
+		"name": "Karona Starting Setup",
+		"equipmentSlot": "Accessory",
+		"iconName": "c",
+		"effect": {
+			"startBattleWithCard": [
+				"Karona, False God|SCG",
+				"Plains|LEA",
+				"Island|LEA",
+				"Swamp|LEA",
+				"Mountain|LEA",
+				"Forest|LEA",
+				"Temple of the False God|SCG",
+				"Mirari's Wake|JUD",
+				"Cloud Cover|PLS",
+				"Fires of Yavimaya|INV",
+				"Reckless Assault|INV",
+				"Unfulfilled Desires|MIR",
+				"Howling Mine|LEA"
+			]
+		},
+		"description": "Start battles with Karona, False God, basic lands, and five-color enchantments in play."
+	},
+	{
+		"name": "Crown of the False God",
+		"equipmentSlot": "Accessory",
+		"iconName": "CrownoftheFalseGod",
+		"effect": {
+			"handSizeModifier": -1,
+			"startBattleWithCard": [
+				"Temple of the False God|SCG",
+				"Temple of the False God|SCG"
+			]
+		},
+		"description": "-1 hand size. Start battles with 2 Temple of the False God in play."
+	},
+	{
+		"name": "Copper Angel's Amulet",
+		"equipmentSlot": "Neck",
+		"iconName": "CopperAngelsAmulet",
+		"effect": {
+			"lifeModifier": -5,
+			"startBattleWithCard": [
+				"Copper-Leaf Angel|UDS"
+			]
+		},
+		"description": "-5 life. Start battles with Copper-Leaf Angel in play."
 	}
 ]

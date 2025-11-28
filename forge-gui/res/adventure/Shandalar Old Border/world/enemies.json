@@ -9955,6 +9955,166 @@
     "gamesPerMatch": 3
   },
   {
+    "name": "White End Boss",
+    "sprite": "sprites/enemy/humanoid/human/cleric/cleric_white.atlas",
+    "deck": [
+      "decks/standard/white_weenie.dck"
+    ],
+    "boss": true,
+    "life": 60,
+    "rewards": [
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Mox Pearl|LEA"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "White Key to the False God"
+      }
+    ],
+    "colors": "W"
+  },
+  {
+    "name": "Blue End Boss",
+    "sprite": "sprites/enemy/humanoid/human/wizard/wizard_blue.atlas",
+    "deck": [
+      "decks/standard/blue_control.dck"
+    ],
+    "boss": true,
+    "life": 60,
+    "rewards": [
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Mox Sapphire|LEA"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Blue Key to the False God"
+      }
+    ],
+    "colors": "U"
+  },
+  {
+    "name": "Black End Boss",
+    "sprite": "sprites/enemy/humanoid/human/assassin/assassin_black.atlas",
+    "deck": [
+      "decks/standard/black_control.dck"
+    ],
+    "boss": true,
+    "life": 60,
+    "rewards": [
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Mox Jet|LEA"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Black Key to the False God"
+      }
+    ],
+    "colors": "B"
+  },
+  {
+    "name": "Red End Boss",
+    "sprite": "sprites/enemy/humanoid/human/warrior/warrior_red.atlas",
+    "deck": [
+      "decks/standard/red_aggro.dck"
+    ],
+    "boss": true,
+    "life": 60,
+    "rewards": [
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Mox Ruby|LEA"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Red Key to the False God"
+      }
+    ],
+    "colors": "R"
+  },
+  {
+    "name": "Green End Boss",
+    "sprite": "sprites/enemy/humanoid/elf/druid/druid_green.atlas",
+    "deck": [
+      "decks/standard/green_ramp.dck"
+    ],
+    "boss": true,
+    "life": 60,
+    "rewards": [
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Mox Emerald|LEA"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Green Key to the False God"
+      }
+    ],
+    "colors": "G"
+  },
+  {
+    "name": "Karona",
+    "nameOverride": "Karona, False God",
+    "sprite": "sprites/enemy/aberration/sliver_queen.atlas",
+    "deck": [
+      "decks/boss/karona.dck"
+    ],
+    "boss": true,
+    "life": 80,
+    "rewards": [
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Crown of the False God"
+      },
+      {
+        "type": "life",
+        "probability": 1,
+        "count": 1
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Black Lotus|LEA"
+      },
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 10000,
+        "addMaxCount": 5000
+      }
+    ],
+    "equipment": [
+      "Karona Starting Setup"
+    ],
+    "colors": "WUBRG",
+    "gamesPerMatch": 3
+  },
+  {
     "name": "Esper Artificer",
     "nameOverride": "",
     "sprite": "sprites/enemy/humanoid/human/artificer/esper_artificer.atlas",
@@ -32269,7 +32429,7 @@
     "name": "Yawgmoth",
     "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
     "deck": [
-      "decks/miniboss/yawgmoth.dck"
+      "decks/boss/yawgmoth.dck"
     ],
     "ai": "",
     "boss": true,
@@ -32301,6 +32461,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Eye of Yawgmoth"
+      },
+      {
+        "type": "life",
+        "probability": 1,
+        "count": 1
       },
       {
         "type": "card",
@@ -32343,14 +32508,29 @@
         "probability": 1,
         "count": 1,
         "cardName": "Strip Mine|ATQ"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Mox Jet|LEA"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Black Key to the False God"
       }
+    ],
+    "equipment": [
+      "Yawgmoth Starting Setup"
     ]
   },
   {
     "name": "Jaya Ballard",
     "sprite": "sprites/enemy/humanoid/human/wizard/jaya.atlas",
     "deck": [
-      "decks/miniboss/jaya_ballard.dck"
+      "decks/boss/jaya.dck"
     ],
     "ai": "",
     "boss": true,
@@ -32441,7 +32621,22 @@
         "probability": 1,
         "count": 1,
         "cardName": "Pyrokinesis|ALL"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Mox Ruby|LEA"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Red Key to the False God"
       }
+    ],
+    "equipment": [
+      "Jaya Ballard Starting Setup"
     ]
   },
   {
@@ -35242,5 +35437,170 @@
       "IdentityBlack",
       "BiomeBlack"
     ]
+  },
+  {
+    "name": "Urza Planeswalker",
+    "sprite": "sprites/enemy/humanoid/human/wizard/blue_wiz3.atlas",
+    "deck": [
+      "decks/boss/urza.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 30,
+    "life": 60,
+    "gamesPerMatch": 3,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 10000,
+        "addMaxCount": 5000
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Urza's Armor"
+      },
+      {
+        "type": "life",
+        "probability": 1,
+        "count": 1
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Mox Sapphire|LEA"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Blue Key to the False God"
+      }
+    ],
+    "equipment": [
+      "Urza Planeswalker Starting Setup"
+    ],
+    "colors": "U"
+  },
+  {
+    "name": "Gaea, the Worldsoul",
+    "sprite": "sprites/enemy/humanoid/elf/elf_druid.atlas",
+    "deck": [
+      "decks/boss/gaea.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 30,
+    "life": 60,
+    "gamesPerMatch": 3,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 10000,
+        "addMaxCount": 5000
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Garments of Gaea"
+      },
+      {
+        "type": "life",
+        "probability": 1,
+        "count": 1
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Mox Emerald|LEA"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Green Key to the False God"
+      }
+    ],
+    "equipment": [
+      "Gaea, the Worldsoul Starting Setup"
+    ],
+    "colors": "G"
+  },
+  {
+    "name": "Serra the Benevolent",
+    "sprite": "sprites/enemy/divine/angel/angel_white.atlas",
+    "deck": [
+      "decks/boss/serra.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 30,
+    "life": 60,
+    "gamesPerMatch": 3,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 10000,
+        "addMaxCount": 5000
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Serra's Prayer Book"
+      },
+      {
+        "type": "life",
+        "probability": 1,
+        "count": 1
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Mox Pearl|LEA"
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "White Key to the False God"
+      }
+    ],
+    "equipment": [
+      "Serra the Benevolent Starting Setup"
+    ],
+    "colors": "W"
   }
 ]
