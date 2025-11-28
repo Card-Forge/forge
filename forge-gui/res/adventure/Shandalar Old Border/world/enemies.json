@@ -33866,13 +33866,16 @@
     "life": 24,
     "rewards": [
       {
-        "type": "deckCard",
+        "type": "card",
         "probability": 1,
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "Rare"
-        ]
+        "count": 1,
+        "cardName": "Rainbow Knights|PAST"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Aswan Jaguar|PAST"
       },
       {
         "type": "gold",
@@ -33903,13 +33906,16 @@
     "life": 24,
     "rewards": [
       {
-        "type": "deckCard",
+        "type": "card",
         "probability": 1,
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "Rare"
-        ]
+        "count": 1,
+        "cardName": "Whimsy|PAST"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Call from the Grave|PAST"
       },
       {
         "type": "gold",
@@ -33940,13 +33946,16 @@
     "life": 24,
     "rewards": [
       {
-        "type": "deckCard",
+        "type": "card",
         "probability": 1,
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "Rare"
-        ]
+        "count": 1,
+        "cardName": "Power Struggle|PAST"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Goblin Polka Band|PAST"
       },
       {
         "type": "gold",
@@ -33977,13 +33986,16 @@
     "life": 24,
     "rewards": [
       {
-        "type": "deckCard",
+        "type": "card",
         "probability": 1,
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "Rare"
-        ]
+        "count": 1,
+        "cardName": "Necropolis of Azar|PAST"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Faerie Dragon|PAST"
       },
       {
         "type": "gold",
@@ -34014,13 +34026,16 @@
     "life": 24,
     "rewards": [
       {
-        "type": "deckCard",
+        "type": "card",
         "probability": 1,
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "Rare"
-        ]
+        "count": 1,
+        "cardName": "Prismatic Dragon|PAST"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Orcish Catapult|PAST"
       },
       {
         "type": "gold",
