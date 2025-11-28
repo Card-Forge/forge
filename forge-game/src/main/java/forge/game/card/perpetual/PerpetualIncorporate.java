@@ -14,6 +14,6 @@ public record PerpetualIncorporate(long timestamp, ManaCost incorporate) impleme
     public void applyEffect(Card c) {
         ColorSet colors = ColorSet.fromMask(incorporate.getColorProfile());
         c.addChangedManaCost(incorporate, true, timestamp, (long) 0);
-        c.addColor(colors, true, timestamp, null);
+        c.addColorByText(colors, true, timestamp, null);
     }
 }

@@ -4351,8 +4351,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return !changedCardColorsByText.isEmpty() || !changedCardColorsCharacterDefining.isEmpty() || !changedCardColors.isEmpty();
     }
 
-    public void addColorByText(final ColorSet color, final long timestamp, final StaticAbility stAb) {
-        changedCardColorsByText.put(timestamp, (long)stAb.getId(), new CardColor(color, false));
+    public void addColorByText(final ColorSet color, final boolean addToColors, final long timestamp, final StaticAbility stAb) {
+        changedCardColorsByText.put(timestamp, stAb != null ? stAb.getId() : (long)0, new CardColor(color, addToColors));
         updateColorForView();
     }
 

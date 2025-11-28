@@ -620,7 +620,7 @@ public final class StaticAbilityContinuous {
                         // Mana cost
                         affectedCard.addChangedManaCost(state.getManaCost(), false, se.getTimestamp(), stAb.getId());
                         // color
-                        affectedCard.addColorByText(state.getColor(), se.getTimestamp(), stAb);
+                        affectedCard.addColorByText(state.getColor(), false, se.getTimestamp(), stAb);
                         // type
                         affectedCard.addChangedCardTypesByText(new CardType(state.getType()), se.getTimestamp(), stAb.getId());
                         // abilities
