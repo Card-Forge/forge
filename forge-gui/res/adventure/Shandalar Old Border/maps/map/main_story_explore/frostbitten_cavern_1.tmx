@@ -222,7 +222,7 @@
   <object id="5" template="../../../../../../common/maps/obj/waypoint.tx" name="5" x="240" y="96" />
   <object id="7" template="../../../../../../common/maps/obj/entry_up.tx" x="296" y="327" width="124" height="16">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/frostbitten_cavern_0.tmx" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story_explore/frostbitten_cavern_0.tmx" />
     <property name="teleportObjectId" value="31" />
    </properties>
   </object>

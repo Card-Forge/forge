@@ -45,7 +45,7 @@
   <object id="60" template="../../../../../../common/maps/obj/gold.tx" x="136.867" y="257.909" />
   <object id="63" template="../../../../../../common/maps/obj/door_down.tx" x="210.691" y="15.1909">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/portal_1R2.tmx" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/jacetower/portal_1R2.tmx" />
     <property name="teleportObjectId" value="62" />
    </properties>
   </object>

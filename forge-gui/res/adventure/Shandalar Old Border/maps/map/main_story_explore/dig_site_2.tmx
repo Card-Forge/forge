@@ -99,7 +99,7 @@
   <object id="97" template="../../../../../../common/maps/obj/gold.tx" x="377" y="44" />
   <object id="98" template="../../../../../../common/maps/obj/entry_down.tx" x="316" y="37" width="26" height="25">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/dig_site_1.tmx" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story_explore/dig_site_1.tmx" />
     <property name="teleportObjectId" value="104" />
    </properties>
   </object>

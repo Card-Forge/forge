@@ -55,19 +55,19 @@
   </object>
   <object id="60" template="../../../../../../common/maps/obj/door_down.tx" x="367.884" y="15.8514">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/portal_1R.tmx" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/jacetower/portal_1R.tmx" />
     <property name="teleportObjectId" value="65" />
    </properties>
   </object>
   <object id="61" template="../../../../../../common/maps/obj/door_right.tx" x="27" y="182.5">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/portal_1R4.tmx" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/jacetower/portal_1R4.tmx" />
     <property name="teleportObjectId" value="63" />
    </properties>
   </object>
   <object id="62" template="../../../../../../common/maps/obj/door_up.tx" x="328.5" y="240">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/portal_1R3.tmx" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/jacetower/portal_1R3.tmx" />
     <property name="teleportObjectId" value="63" />
    </properties>
   </object>
