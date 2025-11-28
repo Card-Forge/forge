@@ -127,20 +127,29 @@ public class AIAgentClient {
     
     /**
      * Check if the AI agent endpoint is reachable.
+     * Uses a minimal POST request since some AI endpoints may not support HEAD.
      * 
-     * @return true if the endpoint responds, false otherwise
+     * @return true if the endpoint responds with a 2xx status, false otherwise
      */
     public boolean isAvailable() {
         HttpURLConnection connection = null;
         try {
             URL url = URI.create(endpointUrl).toURL();
             connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("HEAD");
+            connection.setRequestMethod("POST");
             connection.setConnectTimeout(5000);
             connection.setReadTimeout(5000);
+            connection.setDoOutput(true);
+            connection.setRequestProperty("Content-Type", "application/json");
+            
+            // Send minimal health check request
+            try (OutputStream os = connection.getOutputStream()) {
+                os.write("{\"healthCheck\":true}".getBytes(StandardCharsets.UTF_8));
+            }
             
             int responseCode = connection.getResponseCode();
-            return responseCode >= 200 && responseCode < 500;
+            // Only accept 2xx responses as truly available
+            return responseCode >= 200 && responseCode < 300;
         } catch (IOException e) {
             return false;
         } finally {

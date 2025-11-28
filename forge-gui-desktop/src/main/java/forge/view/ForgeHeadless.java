@@ -52,6 +52,7 @@ import forge.game.GameEntity;
 import forge.util.collect.FCollectionView;
 import forge.game.player.DelayedReveal;
 import java.util.Map;
+import java.util.UUID;
 
 public class ForgeHeadless {
     // ANSI Color Constants
@@ -119,7 +120,7 @@ public class ForgeHeadless {
             aiAgentClient = new AIAgentClient(aiAgentEndpoint);
             System.out.println("AI Agent mode enabled. Endpoint: " + aiAgentEndpoint);
             if (gameId == null) {
-                gameId = java.util.UUID.randomUUID().toString();
+                gameId = UUID.randomUUID().toString();
             }
             System.out.println("Game ID: " + gameId);
         }
