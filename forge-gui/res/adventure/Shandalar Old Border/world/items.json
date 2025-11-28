@@ -3702,7 +3702,7 @@
 		"equipmentSlot": "Body",
 		"iconName": "GarmentsofGaea",
 		"effect": {
-			"handSizeModifier": -1,
+			"changeStartCards": -1,
 			"startBattleWithCard": [
 				"Pulse of Llanowar|INV"
 			]
@@ -3939,7 +3939,7 @@
 		"equipmentSlot": "Accessory",
 		"iconName": "CrownoftheFalseGod",
 		"effect": {
-			"handSizeModifier": -1,
+			"changeStartCards": -1,
 			"startBattleWithCard": [
 				"Temple of the False God|SCG",
 				"Temple of the False God|SCG"
