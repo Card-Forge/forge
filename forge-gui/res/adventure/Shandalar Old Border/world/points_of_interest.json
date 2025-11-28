@@ -247,7 +247,7 @@
 	},
 	{
 		"name": "FortBlue4",
-		"displayName": "Cloud Fort",
+		"displayName": "Palace of the Visionary",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -296,7 +296,7 @@
 	},
 	{
 		"name": "Castle1",
-		"displayName": "Fort",
+		"displayName": "Fort of the Sainted One",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2002,7 +2002,7 @@
 	},
 	{
 		"name": "Fort5",
-		"displayName": "Mind Slaver's Encampment",
+		"displayName": "Arzakon's Fortress",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2201,7 +2201,7 @@
 	},
 	{
 		"name": "Graveyard3",
-		"displayName": "Graveyard",
+		"displayName": "Grave of the Lich Lord",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2342,7 +2342,7 @@
 	},
 	{
 		"name": "Grove6",
-		"displayName": "Long Forgotten Temple",
+		"displayName": "Temple of the Dragon Lord",
 		"type": "cave",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2374,7 +2374,7 @@
 	},
 	{
 		"name": "Grove8",
-		"displayName": "Corrupted Forest",
+		"displayName": "Great Druid's Grove",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3959,7 +3959,7 @@
 	},
 	{
 		"name": "Tibalts Fortress",
-		"displayName": "Tibalt's Fortress",
+		"displayName": "Specter's Fortress",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -3987,7 +3987,7 @@
 	},
 	{
 		"name": "VampireCastle",
-		"displayName": "Vampire Castle",
+		"displayName": "Castle Sengir",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -4004,7 +4004,7 @@
 	},
 	{
 		"name": "VampireCastle1",
-		"displayName": "Vampire Castle",
+		"displayName": "Swamp Queen's Castle",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -4021,7 +4021,7 @@
 	},
 	{
 		"name": "VampireCastle2",
-		"displayName": "Vampire Castle",
+		"displayName": "Chainer's Castle",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -4038,7 +4038,7 @@
 	},
 	{
 		"name": "VampireCastle3",
-		"displayName": "Vampire Dungeon",
+		"displayName": "Cateran Castle",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -4171,7 +4171,7 @@
 	},
 	{
 		"name": "Zedruu City",
-		"displayName": "Zedruu City",
+		"displayName": "Mysterious City",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
