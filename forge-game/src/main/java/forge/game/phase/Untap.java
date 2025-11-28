@@ -246,7 +246,7 @@ public class Untap extends Phase {
             game.getTriggerHandler().runTrigger(TriggerType.PhaseOutAll, runParams, false);
         }
         if (!toPhase.isEmpty()) {
-            // refresh statistics for phased in permanents (e.g. so King of the Oathbreakers sees Changeling)
+            // refresh statics for phased in permanents (e.g. so King of the Oathbreakers sees Changeling)
             game.getAction().checkStaticAbilities();
             // collect now before some zone change during Untap resets triggers
             game.getTriggerHandler().collectTriggerForWaiting();
