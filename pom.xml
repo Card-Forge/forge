@@ -114,6 +114,10 @@
                         <source>17</source>
                         <target>17</target>
                         <release>17</release>
+						<compilerArgs>
+							<arg>-Xlint:deprecation</arg>
+							<arg>-Xlint:unchecked</arg>
+						</compilerArgs>
                     </configuration>
                 </plugin>
 
