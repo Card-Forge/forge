@@ -357,7 +357,7 @@ public class ComputerUtilAbility {
                 if (ComputerUtilCard.isCardRemAIDeck(sa.getOriginalHost() != null ? sa.getOriginalHost() : source)) {
                     p -= 10;
                 }
-                // don't play equipments before having any creatures
+                // don't play equipment before having any creatures
                 if (source.isEquipment() && noCreatures) {
                     p -= 9;
                 }

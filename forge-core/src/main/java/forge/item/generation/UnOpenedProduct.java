@@ -35,7 +35,7 @@ public class UnOpenedProduct implements IUnOpenedProduct {
         sheets = null;
     }
 
-    // Invoke this constructor only if you are sure that the pool is not equal to deafult carddb
+    // Invoke this constructor only if you are sure that the pool is not equal to default carddb
     public UnOpenedProduct(SealedTemplate template, ItemPool<PaperCard> pool) {
         this(template, pool.toFlatList());
     }

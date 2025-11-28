@@ -264,7 +264,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
             tok.attachToEntity(aTo, sa);
             return true;
         }
-        // not a GameEntity, cant be attach
+        // not a GameEntity, can't be attach
         return false;
     }
 

@@ -1213,7 +1213,7 @@ public class AttachAi extends SpellAbilityAi {
             });
         }
 
-        //some auras/equipments aren't useful in multiples
+        //some auras/equipment aren't useful in multiples
         if (attachSource.hasSVar("NonStackingAttachEffect")) {
             prefList = CardLists.filter(prefList, Predicate.not(
                     CardPredicates.isEquippedBy(attachSource.getName())

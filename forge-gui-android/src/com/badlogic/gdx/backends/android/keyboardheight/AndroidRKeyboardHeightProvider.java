@@ -47,7 +47,7 @@ public class AndroidRKeyboardHeightProvider implements KeyboardHeightProvider {
 						keyboardLandscapeHeight = insets.bottom;
 					}
 
-					// I don't know whether I went completly insane now, but WindowInsets.Type.all() isn't existing?
+					// I don't know whether I went completely insane now, but WindowInsets.Type.all() isn't existing?
 					@SuppressLint("WrongConstant")
 					int leftInset = windowInsets.getInsets(0xFFFFFFFF).left;
 					@SuppressLint("WrongConstant")

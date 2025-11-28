@@ -394,7 +394,7 @@ public class CardProperty {
             }
 
             Card host = source;
-            //Static Abilites doesn't have spellAbility or OriginalHost
+            //Static Abilities doesn't have spellAbility or OriginalHost
             if (spellAbility != null) {
                 host = spellAbility.getOriginalHost();
                 if (host == null) {
@@ -410,7 +410,7 @@ public class CardProperty {
             }
 
             Card host = source;
-            //Static Abilites doesn't have spellAbility or OriginalHost
+            //Static Abilities doesn't have spellAbility or OriginalHost
             if (spellAbility != null) {
                 host = spellAbility.getOriginalHost();
                 if (host == null) {

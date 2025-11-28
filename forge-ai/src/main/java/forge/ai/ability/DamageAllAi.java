@@ -112,7 +112,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         }
 
         final String validP = sa.getParamOrDefault("ValidPlayers", "");
-        // TODO: if damage is dependant on mana paid, maybe have X be human's max life
+        // TODO: if damage is dependent on mana paid, maybe have X be human's max life
         // Don't kill yourself
         if (validP.equals("Player") && (ai.getLife() <= ComputerUtilCombat.predictDamageTo(ai, dmg, source, false))) {
             return -1;

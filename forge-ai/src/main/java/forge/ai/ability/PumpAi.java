@@ -163,7 +163,7 @@ public class PumpAi extends PumpAiBase {
                         }
 
                         final Card srcCardCpy = CardCopyService.getLKICopy(card);
-                        // cant use substract on Copy
+                        // can't use subtract on Copy
                         srcCardCpy.setCounters(cType, srcCardCpy.getCounters(cType) - amount);
 
                         if (cType.is(CounterEnumType.P1P1) && srcCardCpy.getNetToughness() <= 0) {
@@ -208,7 +208,7 @@ public class PumpAi extends PumpAiBase {
                             }
 
                             final Card srcCardCpy = CardCopyService.getLKICopy(card);
-                            // cant use substract on Copy
+                            // can't use subtract on Copy
                             srcCardCpy.setCounters(cType, srcCardCpy.getCounters(cType) - amount);
 
                             if (cType.is(CounterEnumType.P1P1) && srcCardCpy.getNetToughness() <= 0) {

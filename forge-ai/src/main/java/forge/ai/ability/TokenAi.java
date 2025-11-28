@@ -448,7 +448,7 @@ public class TokenAi extends SpellAbilityAi {
 
             // TODO check for trigger to turn token ETB into +1/+1 counter for host
             // TODO check for trigger to turn token ETB into damage or life loss for opponent
-            // in this cases Token might be prefered even if they would not survive
+            // in this cases Token might be preferred even if they would not survive
             final Card tokenCard = TokenAi.spawnToken(payer, sa);
 
             // Token would not survive

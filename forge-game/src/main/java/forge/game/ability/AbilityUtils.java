@@ -1301,7 +1301,7 @@ public class AbilityUtils {
 
     /////////////////////////////////////////////////////////////////////////////////////
     //
-    // BELOW ARE resove() METHOD AND ITS DEPENDANTS, CONSIDER MOVING TO DEDICATED CLASS
+    // BELOW ARE resolve() METHOD AND ITS DEPENDANTS, CONSIDER MOVING TO DEDICATED CLASS
     //
     /////////////////////////////////////////////////////////////////////////////////////
     public static void resolve(final SpellAbility sa) {

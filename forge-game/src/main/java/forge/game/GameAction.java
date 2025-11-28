@@ -757,7 +757,7 @@ public class GameAction {
                 default -> moveTo(c.getOwner().getZone(name), c, cause); // sideboard will also get there
             };
         } catch (Exception e) {
-            String msg = "GameAction:moveTo: Exception occured";
+            String msg = "GameAction:moveTo: Exception occurred";
 
             Breadcrumb bread = new Breadcrumb(msg);
             bread.setData("Card", c.getName());
@@ -2398,7 +2398,7 @@ public class GameAction {
 
         if (goesFirst == null) {
             // This happens in hotseat matches when 2 equal lobbyplayers play.
-            // Noone of them has lost, so cannot decide who goes first .
+            // No one of them has lost, so cannot decide who goes first .
             goesFirst = game.getPlayers().get(0); // does not really matter who plays first - it's controlled from the same computer.
         }
 

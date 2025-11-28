@@ -45,14 +45,16 @@ an argument to the Java VM.)
 If you plan to eventually download all card images make sure you have several gigabytes of free drive space.
 
 # Install and Run
-> Warning: Do **NOT** owerwrite an existing installation. Always unpack/install the package in a new folder to avoid problems!
+> Warning: Do **NOT** overwrite an existing installation. Always unpack/install the package in a new folder to avoid problems!
 
 ## Install Wizard (jar)
-* Run/Double click "**forge-installer**-VERSION.jar" where VERSION is the current release version and click next until the Target Path window appears. If double clicking the .jar file doesn't load the main interface you can run it via terminal/command line ```java -jar FILENAME.jar``` where FILENAME is the name of the installer.
+* Run/Double click "**forge-installer**-VERSION.jar" where VERSION is the current release version and click next until the Target Path window appears. If double clicking the .jar file doesn't load the main interface you can run it via terminal/command line `java -jar FILENAME.jar` where FILENAME is the name of the installer.
 
 * Browse to your preferred install directory and click next until installation starts.
 
-![image](https://github.com/Card-Forge/forge/assets/9781539/b7575f49-f6b3-4933-a15f-726314547c4f)
+**If you're on Windows and not running the installer as administrator, you probably won't be able to install to the program files directories.**
+
+![image](installer.png)
 
 * After the installation finishes, close the installer. Run the executable forge|forge-adventure (.exe/.sh/.cmd)
 

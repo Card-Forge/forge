@@ -389,7 +389,7 @@ public abstract class SpellAbilityAi {
 
         if (payNever) { return false; }
 
-        // AI will only pay when it's not already payed and only opponents abilities
+        // AI will only pay when it's not already paid and only opponents abilities
         if (alreadyPaid || (payers.size() > 1 && isMine)) {
             return false;
         }
