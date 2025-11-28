@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="52">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFAwGieRkYdvFQD0fxEmevLA91/SFNpHmj9lIGduKId1rbSyygtr213AwMdVgwre2VHqBwHmnpmVh79/JgTwfk4j0DlD8GGwAA7/Apnw==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy1lFEOgyAQRPlpgniM2saj9SLaeEGvYG08hCRkE9isi2TgY35Y4DFkd5bOmMVrs8b8Iu02rCOavOYLEXN06frb4ewc96r+bexXqv+915fDuE9//rD3uTWYOc/8XcRcH6kQz4MgXieftbilQrlbxXksYdJc8pn49EEtuNRLcX/yXGrxN7xXpFyS/qZGVkn3Slw+Z2hWaUyNi3rWmDFXyjTEs5bNs7IXzcoSbpxpaD7nuCcDYCPB
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAPqOGF0NW8pOl7QkD+GRYxmB2vSbOKbOCBQ5xUv+IC6zkYGN5zQvBGDvxqQXbWkWDvBU5Me2B2+ALZflD8jgi7QQBkN7H+fs0JsfMDkh0bkPjY7EZPD1+A4m1A+U943HaeE1MM3Q5cGJ+/yYnfLRzE2QvC/ljcjQvgSoMgsB5LmOLCm4Bq35JgL7o9oLCCpSNq2dkHlNPjwi0fBI0nYu2D4QAy/QkDoPRLSnxSGr6U2E1KWiLG7s0cEPwGzR2boGIwTA2/4gJBaPl0AwdxZRQugC8PIQOY/5H9DUtLhOorYtXgA+j+JsfPABNhYDo=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYCAOVPASqZBMUE6C+aSorcKjtpLGfsIHtrAwMIhTEW9jIc7eQFYI/QqLnA8Z/oCZR6y6RkYGhhYobmJEVcMuxMDAIUQbexWZEGLKTJjqrpAYfsSqkwfadQCKFYD4JZq6s+wMDHqchM37QIK93mhi6HwQOAe014KFMHZmx46x2UsMAPmXmPy7hcrxcRaLm8k1D1SmwNSxIaVXbGyYvYTUwcwjFDYwdfpI/sHGhtlLSB2yf7GV8TAxmLocDgaGyWwQnIuFjU6js/M4MO3FB0Dpnprl5Cci7R0MgNz6iRh9AM+aMOo=
+  </data>
+ </layer>
+ <layer id="5" name="Rooftops" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFowAVvBZkYHgjONCuGAWjgHjwSpAwmxR1o2AUDGcAAKgTB9w=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="41" template="../../../../../../common/maps/obj/shop.tx" x="97" y="193"/>
+  <object id="42" template="../../../../../../common/maps/obj/shop.tx" x="304" y="193"/>
+  <object id="43" template="../../../../../../common/maps/obj/shop.tx" x="352" y="194"/>
+  <object id="44" template="../../../../../../common/maps/obj/shop.tx" x="144" y="194"/>
+  <object id="45" template="../../../../../../common/maps/obj/shop.tx" x="255" y="194"/>
+  <object id="46" template="../../../../../../common/maps/obj/shop.tx" x="192" y="193"/>
+  <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="225" y="99"/>
+  <object id="51" template="../../../../../../common/maps/obj/door_left.tx" x="386" y="146">
+   <properties>
+    <property name="teleportObjectId" value="61"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

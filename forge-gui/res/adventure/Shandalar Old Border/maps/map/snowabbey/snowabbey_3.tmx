@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="65">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzt0kEKgDAMBMDSm+ZDfsWP5nGepEighE2NsCqIh4Uclgy0qVJKBVmnI4vkYn2060rectuubc671mW4mrRbR4XnZuzeZLoj25tst7fVzb7Hds1G81dd/85PuP4/I5vpRjeEbJYbmZHNcM9MZN9xV5n8Ls4OYH1n9w==
+  </data>
+ </layer>
+ <layer id="7" name="Background2" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNldsJgDAMRfObzqT42Ep8jOJkKo5iL7EgaLVqbT2QLyHH5jaUSCiZqFFEra5OUVDgHtYKSaXPWbD4DYmSsnH1HaQsc8winCdWjsYdI8eZ9zn+nZ6lbHx1d668TYR7Cwa+58aO+fhPeHNdtcOuwImd8jEjeEeHHsZp9moK5J03u+w6nzPu9Cg9OcFRD585uvI0x7fvkS3HBTs+Law=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAOdvGQhykFsmSYIT1q76i9BEAdNwJTUy0hMOpfwmAop6tRe0ftpYW9yHkSW/4kJE8IAADjWhu9
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1lU0KwjAQhWPFlb2BeIB6m4ggXsYT+AeeT3duLKgVRJdmiIPPcZqG/nwwtGTavLxkktjEmE3fmKt7Xlzs3DsxTs0fI2gL5XPIWei/gCBeA59jTeSQGXPMynUxj1CfyF5o2+SbyxUPmh/UjYE0aByoXaVVF/SDbQ+YZ4L15fw0Rfoiz1tlPdsCx8/ez+nvPPA32Ebrtxz6qIK/0+o5lqp/TpmPJn2STwt7CSnz25v4QKRfTYvR9Lqoba1ep0qtt0FoT8yd5trV86wjbU2fvN8++/cu5rvt/ct6DOuuOvKs1QrVFJ8bUjtUW7Hnc0ytFuB7ofiuex+FxmLFnfiE+6nJ/St1EPb/BvHbWxg=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="272.5" width="32" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="298.521" y="134.391"/>
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="101.527" y="134.913"/>
+  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="139.382" y="133.036">
+   <properties>
+    <property name="enemy" value="Adept Red Wizard"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="266.429" y="134.025">
+   <properties>
+    <property name="enemy" value="Adept Red Wizard"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../../../common/maps/obj/gold.tx" x="199.84" y="21.8333"/>
+  <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="111.25" y="58.25">
+   <properties>
+    <property name="enemy" value="Magma Fire Elemental"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="62,61"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../../../common/maps/obj/manashards.tx" x="296" y="28.75"/>
+  <object id="60" template="../../../../../../common/maps/obj/waypoint.tx" x="260.5" y="81.75"/>
+  <object id="61" template="../../../../../../common/maps/obj/waypoint.tx" x="131.25" y="69.75"/>
+  <object id="62" template="../../../../../../common/maps/obj/waypoint.tx" x="284.25" y="224.25"/>
+  <object id="63" template="../../../../../../common/maps/obj/waypoint.tx" x="115" y="222.75"/>
+  <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="276.5" y="65.75">
+   <properties>
+    <property name="enemy" value="Magma Fire Elemental"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="60,63"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

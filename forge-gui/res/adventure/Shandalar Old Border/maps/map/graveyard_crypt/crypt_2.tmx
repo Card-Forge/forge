@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="43" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="79">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon.tsx"/>
+ <layer id="1" name="Background" width="43" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztlcENgCAMRb2aOIAHXZujCziAjmc8NJBvW4piQEOTHxIo8FoKuL7rXCFNg5fmQ1aKs7GWj6ex/rcGvsyKRmM1sIa8Ugw1sUq8tdXAF1lJS2NNZlh6/ZxrqoG/seK7iv278mfklsQqMSLvyUr1VFJ3WDmjfvRJZcEW18/FamGx+Gu5sLJy8ZKtc1wxpnDMZcortw9ybaPXPFxZpdy9wYp7prBK5yL9D0/uFidk3UcvLq9vvgMWaetYZLHY/ANTjBtb
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="43" height="25">
+  <data encoding="base64" compression="zlib">
+   eJy9lkFOAzEMRbNFzbCiq3aqwh16B8QRYMFBEHATxBp6gBbohpMxUcbCY2zHTkO/9DVSk595VtOvLmMIS4fvuhA+hudt58txeSxpv7QHzgGn83Zx6n7MLxQOnMfrNE85uLzEms55mP16EXVWbm29CeFy8NXm7zwa6054v5V1H6dzJn+OeWkNs1JZ8rWsj4OfiJ9nOSetpRzlfTnLxtLyNazcndTuq5TnWKmkvMR6iNM5v5ysUt7KyuUlVos1VslWVk9n/SdrLZ+0v9SPJVYpX2IFefsVq6ZfQfS3xQlyIG+/YtX0K2YFcawt+hWrpl85Vm8/17DSO0kl3WVg5foV76HntuzXEqulXzXWlv1aYrX0K8da01leVmvey6rxarq/KNu6T3MtH8dqmcU6q/cdHnX98Wdo/wdaslLRXsSKfZ7tHM237cusLe4A6L3PLq2/jc8tYeX4Wt9XL+v1Kj9vVtO17/VpWLXv/HWePwNWzon7FD3QQsf0N9YPOUL6jw==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="43" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzll01OwzAQhUfqgkVjViAhFfcWWSJYAns2ZUF7j7ZcpUisKAfg7yYILsAB2iUetVGswWOP7SaNxEhPjmI/z9epM0oAuh+nxUYpcXOQlzvW72N97KVz5Hi5PXLqKo1Xs/8b0XvBz3HRFOu4BJiUm+tZH2BOdN+v19K5VNbPRNaF4Xwo3blQeptz4Mh9zuRv4wzQXCHWkL+N2Cfrd+R6yor+/1jXnB45VQArM87V31xS1rb76xr8/RXD7qm++uSwXgTmq5rOmN5Z+X091Q6O9Ws7njEe6Xn7IXlorkFEf0+p6y6fjRBryC/xdInV/s/oGsqakyvGX+3B8dm6VbL3JIlc/pFy87l+a4gVa3l3tFsVGkAZHepwjWNZlU4X8thsyPpkxqXRcwOsuC8X+E661LyQx2ZD1sshwJXR9bAZ1or35aTW4rh+3nysNhs9D11j5c4thpRVIk32od8eOE/vxehD0L98vbRrgWy/cYSWrg==
+  </data>
+ </layer>
+ <layer id="6" name="Objects" width="43" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt0LkNACAMBDCmYALGYRv2l2gRBY9QqOwuTe6SlAAAADhRc9zuVu6yd3OU05zxnt1tkVZ9546/fsi7DtqhBaI=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="209" y="380.5" width="62.5" height="45">
+   <properties>
+    <property name="direction" value="right"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/graveyard_crypt/graveyard_2.tmx"/>
+   </properties>
+  </object>
+  <object id="47" template="../../../../../../common/maps/obj/gold.tx" x="337" y="175"/>
+  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="60" y="176.5"/>
+  <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="336" y="201.5" visible="1">
+   <properties>
+    <property name="enemy" value="Skeleton Soldier"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="pursueRange" type="float" value="60"/>
+    <property name="threatRange" type="float" value="30"/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../../../common/maps/obj/gold.tx" x="334" y="41.5"/>
+  <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="333.5" y="75.5" visible="1">
+   <properties>
+    <property name="enemy" value="Cave Spider"/>
+    <property name="pursueRange" type="float" value="60"/>
+    <property name="threatRange" type="float" value="50"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../../../common/maps/obj/treasure.tx" x="595" y="216.5"/>
+  <object id="59" template="../../../../../../common/maps/obj/manashards.tx" x="606.5" y="48"/>
+  <object id="60" template="../../../../../../common/maps/obj/manashards.tx" x="315" y="303.5"/>
+  <object id="61" template="../../../../../../common/maps/obj/enemy.tx" x="320" y="353" visible="1">
+   <properties>
+    <property name="enemy" value="Poisonous Snake"/>
+    <property name="pursueRange" type="float" value="60"/>
+    <property name="threatRange" type="float" value="30"/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../../../common/maps/obj/enemy.tx" x="567" y="201" visible="1">
+   <properties>
+    <property name="enemy" value="Spider"/>
+    <property name="pursueRange" type="float" value="60"/>
+    <property name="threatRange" type="float" value="30"/>
+    <property name="waypoints" value="72,74,62"/>
+   </properties>
+  </object>
+  <object id="63" template="../../../../../../common/maps/obj/enemy.tx" x="569" y="71" visible="1">
+   <properties>
+    <property name="enemy" value="Spider"/>
+    <property name="pursueRange" type="float" value="60"/>
+    <property name="threatRange" type="float" value="30"/>
+    <property name="waypoints" value="73,75"/>
+   </properties>
+  </object>
+  <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="99" y="72" visible="1">
+   <properties>
+    <property name="enemy" value="Spider"/>
+    <property name="pursueRange" type="float" value="60"/>
+    <property name="threatRange" type="float" value="30"/>
+    <property name="waypoints" value="66,71,70,68,75"/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="98" y="199" visible="1">
+   <properties>
+    <property name="enemy" value="Spider"/>
+    <property name="pursueRange" type="float" value="60"/>
+    <property name="threatRange" type="float" value="30"/>
+    <property name="waypoints" value="72,74,70,69,70,72"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../../../common/maps/obj/waypoint.tx" x="206.5" y="71"/>
+  <object id="67" template="../../../../../../common/maps/obj/waypoint.tx" x="209" y="271"/>
+  <object id="68" template="../../../../../../common/maps/obj/waypoint.tx" x="464" y="55.5"/>
+  <object id="69" template="../../../../../../common/maps/obj/waypoint.tx" x="464" y="272.5"/>
+  <object id="70" template="../../../../../../common/maps/obj/waypoint.tx" x="467" y="204.5"/>
+  <object id="71" template="../../../../../../common/maps/obj/waypoint.tx" x="207" y="202.5"/>
+  <object id="72" template="../../../../../../common/maps/obj/waypoint.tx" x="60" y="199"/>
+  <object id="73" template="../../../../../../common/maps/obj/waypoint.tx" x="595" y="73.5"/>
+  <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="592.5" y="202"/>
+  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="68" y="72.5"/>
+  <object id="76" template="../../../../../../common/maps/obj/enemy.tx" x="201" y="137.5" visible="1">
+   <properties>
+    <property name="enemy" value="Spider"/>
+    <property name="pursueRange" type="float" value="60"/>
+    <property name="threatRange" type="float" value="30"/>
+    <property name="waypoints" value="67,66"/>
+   </properties>
+  </object>
+  <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="467.5" y="152" visible="1">
+   <properties>
+    <property name="enemy" value="Spider"/>
+    <property name="pursueRange" type="float" value="60"/>
+    <property name="threatRange" type="float" value="30"/>
+    <property name="waypoints" value="68,69"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../../../common/maps/obj/booster.tx" x="63.5" y="48">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ODY&quot;, &quot;TOR&quot;, &quot;JUD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ODY&quot;, &quot;TOR&quot;, &quot;JUD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ODY&quot;, &quot;TOR&quot;, &quot;JUD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

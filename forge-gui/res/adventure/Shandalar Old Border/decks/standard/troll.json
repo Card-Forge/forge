@@ -1,10 +1,43 @@
-{                                    
-"name":"Troll",
-  "template":
-  {
-   "count":60,
-   "colors":["Red","Green"],
-   "tribe":"Troll",
-   "rares":0.8
-  }
+{
+  "name": "Troll",
+  "mainDeck": [
+    {
+      "count": 8,
+      "colors": [
+        "Red",
+        "Green"
+      ],
+      "subTypes": [
+        "Troll"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 30,
+      "colors": [
+        "Red",
+        "Green"
+      ],
+      "subTypes": [
+        "Troll"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 11,
+      "cardName": "Mountain|INV"
+    },
+    {
+      "type": "card",
+      "count": 11,
+      "cardName": "Forest|INV"
+    }
+  ]
 }

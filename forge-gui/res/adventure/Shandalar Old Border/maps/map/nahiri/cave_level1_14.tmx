@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="62">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7Ae8++kHutjJJBeUlVVVVVV1UcH72FSfQ==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzNmG1ugzAMhvlJpB1h14FVXLSM7lastMdYrPEK17WhEW6IJUtF4uPJ66+kbaiq1slP0ck6x3d6+FBX1SX6tUC+gXGRneP1vQAu+BT9u174StIOjrwrlQ8alhZbOHKwKYDFYiMrkY/nXol8U1jqd4y/f6P/1MdzWYwl1gjPwTFBP3qO9L7M84eeG96gPc9BqwdqRmsivfvot/Cv+5e41zu+ZFp8NUMuQEfSj95FvHifd3ytGtasU3IDccaaPz/2udTPmm8Wn8wNcBIjxdqDr2V5o/HJ+u5n1/IN1szPefOhB8o+SN9CDfC6vSp8vEd58Mk9II8TegecuCymW1h0HeY89OCzYpRiTVj24VjD6KSf7C/n+vH6VT5tnV75h/yy+uyWWbXsxWfV7KtadkocPPjWfJq15NparLzn5eKTM0abX1sa5uI7hef5hT7N949Sw1x8/Jvo4XLWahoewaflHZhwjVres29J4dNqUzLy/29wfy6+LcYuPM5w8Obgw9xaq1/OxzXMwcfjqNWEVhcp55g9fFs1AS1lneC+I/gsLbX+l6s+1jjBiL0F1/BoPjCiX2Pfnbv/pRjOHn3G/pfKhzNKiXwUb5xRSuTj9gfeKtlO
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="60" template="../../../../../../common/maps/obj/door_left.tx" x="542" y="322">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_4/cave_23I9.tmx"/>
+    <property name="teleportObjectId" value="59"/>
+   </properties>
+  </object>
+  <object id="61" template="../../../../../../common/maps/obj/door_down.tx" x="319.333" y="19.3333">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_4/cave_23H8.tmx"/>
+    <property name="teleportObjectId" value="62"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

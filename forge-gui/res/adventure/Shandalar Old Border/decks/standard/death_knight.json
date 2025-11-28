@@ -1,10 +1,36 @@
-{                                    
-"name":"Death Knight",
-  "template":
-  {
-   "count":60,
-   "colors":["Black"],
-   "tribe":"Knight",        
-   "rares":0.5
-  }
+{
+  "name": "Death Knight",
+  "mainDeck": [
+    {
+      "count": 19,
+      "colors": [
+        "Black"
+      ],
+      "subTypes": [
+        "Knight"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 19,
+      "colors": [
+        "Black"
+      ],
+      "subTypes": [
+        "Knight"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 22,
+      "cardName": "Swamp|TMP"
+    }
+  ]
 }

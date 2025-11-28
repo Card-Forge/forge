@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="84">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/FarmFood.tsx"/>
+ <tileset firstgid="16001" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <layer id="10" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJyr5GRgqBzFo3gE4UZ+BoYmInEzP/XslRdgYFAgEisKUNfeTBH62AuyBxZ2Kkj2gmh0jG43JWGOzXxSMTl+H7WXPDxq76i91HIDJXaNZHtH8SgexaMYGQMALfO8Qg==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJy9l1FOwzAMhlOe2r7Ae4HtEGi3yzZ6CMq5gHfGtoMQi1oxxk6cNcNSVK1t8tmO/TdzLm2frXPr3rltF8dj+P3VZiYuMIlJ2atKfODQdUaBdwzPz+1f/hIffFhn16W5wIEcAP8+XE/Ej0vyjzndJ7jAOs28hz6+N/TRB3rfGuuRzfOEx1m1jOcYbCAxvN/Yh9Uwx5yLtglrre9saz0ZubRX9v/IpbVDuc+3MW8fhAtXaaC9JXIOMUK/HZguUO5KWb9k0Ngxr9j/tP92V+LSvcT+B/NXjhf6gmrctvu9xzTeTUE/aCbFS7mDoDU1uahJNGbNanKHWetGFi//DtXmoqGOn2fWKGgkcKfmZ7w2dtZLE+dNyjxP6krTSPTBajm9whpDrqaRtbnYs7Cv3sCdlPzx+1puwST9SOU5FZM1F9pZrYRbahqTnzOkvqrN5LqM79U6I0tnQxhcHz15VoPtFW7Ov6XsS7m5moN9OSTqQcszX6O01vHbiv8buA85rsS0nptR71Hz0c9ULX8D5+C7Qg==
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzFVkFuAjEMDD33ktz6CqiEeEE/UwLfof0Tu1Rq+5iqB8RGYMWEsePdpq2liN2N8WQmdmLnbm3unXv0YELwXQfn3oz+mvXeFocw98PvNvwMs7b+NL+4jNaYWqykxcGffTbhbzCTxWGuM+5DDW+sZrEBzxRjE3TNPu7GjVa2YrGe7vNA70sD7ty4R6sRHCy4vYLL9fq8PB8fbv3Kb+8VXMpf/r5g59QYjpKV3HnNkPX+Op8RroWvhIvqFJ1RLfkiTKl2rbVi8YugTqXa/Y39tViJ+z2Mr3/AnWISrnZuvMzy8+tM9ittJ/jyXqI8N6Q+o8V5lbCeQ85jjind91NwSw78/un8NaZ0DybNy4HmED+kXwzZR7t7eW+D4qD9of5Awrb0g7U7WuJGPRGKjbjyO8LS00rc0DmlrZX3UKinseqK/OibtlbKe+LN+1ekXcmP1w7F4NpKevA1Ub7XejG0DvLn67D8t1PynWup5QLlL8WqWS3fI9AV7ek6ZN202pnaV/M94DEOPo+EewKpaqsU
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzNljsKwkAQQAdBbZJCRLCyUhAs/YCd6S09gscQY+U5LPUcfsA2pdjpPTRhHQhhkp2ZJMQHQ747L/sPgGEOxRCEMagDDMO4ZUTEg5Fv5/LdV4sTvRwk7VGkV8K5Ii+6+ynOS0leHFsaZ3yszWp85+T3LtXWZdUzSeReN0ygM2CWlcwfJCDOo+OGkYtqW3dsjp5jIu0eMhH0TxzMlcxnu/ecmpDiu7SXW1+tt0qwf48dE3H2YbwWAO+FOU9D279ZfEInePSzU8cEBXedPzj2d+Jsibli2+8egu+xsezpyiXnb7IeeH3tpufI07++Yr3KUy5C0ub3NsCqpXdRaPYjLZx/rlEzn0PLnfBmfW9R84XyZsHZB8vwFsU/ejnjUlvOVl/JGBKtFX/Yzja+cQFfWA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="238.666" y="480.166">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../../../common/maps/obj/door_down.tx" x="232.5" y="235.5">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/demontower/portal_2B.tmx"/>
+    <property name="teleportObjectId" value="69"/>
+   </properties>
+  </object>
+  <object id="83" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="258" y="288.667" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;The inscription reads: Congratulations Adventurer! By just finding this place you have won a prize!&quot;,
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;You happily walk toward your prize&quot; }
+]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

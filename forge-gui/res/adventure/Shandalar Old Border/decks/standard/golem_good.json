@@ -1,11 +1,64 @@
-{                                    
-"name":"Golem good",
-  "template":
-  {
-   "count":60,
-   "colors":["White","Blue","Red","Green","Black"],
-   "tribe":"Golem",    
-   "tribeCards":0.8,
-   "rares":0.7
-  }
+{
+  "name": "Golem good",
+  "mainDeck": [
+    {
+      "count": 11,
+      "colors": [
+        "White",
+        "Blue",
+        "Red",
+        "Green",
+        "Black"
+      ],
+      "subTypes": [
+        "Golem"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 27,
+      "colors": [
+        "White",
+        "Blue",
+        "Red",
+        "Green",
+        "Black"
+      ],
+      "subTypes": [
+        "Golem"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 5,
+      "cardName": "Plains|POR"
+    },
+    {
+      "type": "card",
+      "count": 5,
+      "cardName": "Island|POR"
+    },
+    {
+      "type": "card",
+      "count": 4,
+      "cardName": "Mountain|POR"
+    },
+    {
+      "type": "card",
+      "count": 4,
+      "cardName": "Forest|POR"
+    },
+    {
+      "type": "card",
+      "count": 4,
+      "cardName": "Swamp|POR"
+    }
+  ]
 }

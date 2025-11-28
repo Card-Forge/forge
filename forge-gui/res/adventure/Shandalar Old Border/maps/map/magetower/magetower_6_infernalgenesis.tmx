@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="93">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Infernal Genesis|PCY&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF6CCKF798NAF5csFOHtx2g+zczUMbe5HtrueG8Gu5aW8nst0we5DZo2AUjIJRMAqoDwB+gwmw
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJybx8nAMG8Uj+JRPIpH8SgexSMCAwBydkzC
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzt1G0KgzAMBuD8N55At4NtZ9nHsXSbd7NFXggltUmQ/RgLBCG2eVrQTEw0fSHHIi17rj3Ri+t56Y9z8T6bz47okVKLW6qfDbbnvtl8p+fMug0Ta/ZsqwsTUdrSlGtqtsUtTdkX9ZnrazTb4p6Ufp4Ygvf9u7/tLlyfE63I/9cn6I5BG6bW1zMnPfae6Z2TVrtlel1p37st5ZxErWVG3HIPvvUhcH6ZKypt1zI=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF+EAwOyo9UkEkFc2q48XOHizgB5SmhttqCJgRRbkVBEEUDja9QQ2WeI/EIkcOQE+f9E5XP9D46O4ZyHAHAZD7aBEm2OI0Co1PK4Ae5iDwnYHytDQSAAB1Mw+3
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <properties>
+   <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Infernal Genesis|PCY&quot; ]}"/>
+  </properties>
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="279.165" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="208" y="48.4166">
+   <properties>
+    <property name="reward">[{&quot;type&quot;: &quot;randomCard&quot;,&quot;colors&quot;: [&quot;Black&quot;], &quot;count&quot;: 5 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Steel Shield&quot;},
+{
+&quot;type&quot;: &quot;card&quot;,
+&quot;probability&quot;: 1,
+&quot;count&quot;: 1,
+&quot;cardName&quot;: &quot;Infernal Genesis|PCY&quot;}]</property>
+   </properties>
+  </object>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="207.902" y="90.5586">
+   <properties>
+    <property name="enemy" value="Necromancer"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="88,87"/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="128.5" y="145.5">
+   <properties>
+    <property name="enemy" value="Reassembling Skeleton"/>
+    <property name="threatRange" type="int" value="10"/>
+    <property name="waypoints" value="80,73,77,78"/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="285.5" y="146.167">
+   <properties>
+    <property name="enemy" value="Reassembling Skeleton"/>
+    <property name="threatRange" type="int" value="10"/>
+    <property name="waypoints" value="74,78,83,81,80"/>
+   </properties>
+  </object>
+  <object id="64" template="../../../../../../common/maps/obj/gold.tx" x="92.083" y="146.083"/>
+  <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="188.418" y="176.852">
+   <properties>
+    <property name="enemy" value="Reassembling Skeleton"/>
+    <property name="threatRange" type="int" value="10"/>
+    <property name="waypoints" value="80,86,73,84"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="127.833" y="192.833">
+   <properties>
+    <property name="enemy" value="Reassembling Skeleton"/>
+    <property name="threatRange" type="int" value="10"/>
+    <property name="waypoints" value="89,80,74,82"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="124.833" y="95">
+   <properties>
+    <property name="enemy" value="Reassembling Skeleton"/>
+    <property name="threatRange" type="int" value="10"/>
+    <property name="waypoints" value="89,80,74,82,85,76"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="273.333" y="92.5">
+   <properties>
+    <property name="enemy" value="Reassembling Skeleton"/>
+    <property name="threatRange" type="int" value="10"/>
+    <property name="waypoints" value="89,80,81"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="229.5" y="134.667">
+   <properties>
+    <property name="enemy" value="Reassembling Skeleton"/>
+    <property name="threatRange" type="int" value="10"/>
+    <property name="waypoints" value="86,78,83"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="168.667" y="125.667">
+   <properties>
+    <property name="enemy" value="Reassembling Skeleton"/>
+    <property name="threatRange" type="int" value="10"/>
+    <property name="waypoints" value="78,81"/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="261.667" y="188.833">
+   <properties>
+    <property name="enemy" value="Reassembling Skeleton"/>
+    <property name="threatRange" type="int" value="10"/>
+    <property name="waypoints" value="89,80,74,82"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../../../common/maps/obj/booster.tx" x="319.5" y="133.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="73" template="../../../../../../common/maps/obj/waypoint.tx" x="180.5" y="156.5"/>
+  <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="266.5" y="125.5"/>
+  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="103.5" y="175.5"/>
+  <object id="76" template="../../../../../../common/maps/obj/waypoint.tx" x="129.5" y="76" width="14.5" height="16"/>
+  <object id="77" template="../../../../../../common/maps/obj/waypoint.tx" x="268" y="230"/>
+  <object id="78" template="../../../../../../common/maps/obj/waypoint.tx" x="310.5" y="167"/>
+  <object id="79" template="../../../../../../common/maps/obj/waypoint.tx" x="292.5" y="78"/>
+  <object id="80" template="../../../../../../common/maps/obj/waypoint.tx" x="201.5" y="207.5"/>
+  <object id="81" template="../../../../../../common/maps/obj/waypoint.tx" x="108.5" y="113.5"/>
+  <object id="82" template="../../../../../../common/maps/obj/waypoint.tx" x="299" y="104.5"/>
+  <object id="83" template="../../../../../../common/maps/obj/waypoint.tx" x="294" y="201.5"/>
+  <object id="84" template="../../../../../../common/maps/obj/waypoint.tx" x="154" y="174"/>
+  <object id="85" template="../../../../../../common/maps/obj/waypoint.tx" x="152.5" y="100"/>
+  <object id="86" template="../../../../../../common/maps/obj/waypoint.tx" x="219.5" y="169.5"/>
+  <object id="87" template="../../../../../../common/maps/obj/waypoint.tx" x="207" y="110.5"/>
+  <object id="88" template="../../../../../../common/maps/obj/waypoint.tx" x="207" y="71.5"/>
+  <object id="89" template="../../../../../../common/maps/obj/waypoint.tx" x="161" y="233"/>
+  <object id="90" template="../../../../../../common/maps/obj/enemy.tx" x="135.5" y="116">
+   <properties>
+    <property name="enemy" value="Reassembling Skeleton"/>
+    <property name="threatRange" type="int" value="10"/>
+    <property name="waypoints" value="76,75"/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../../../common/maps/obj/enemy.tx" x="323.5" y="108">
+   <properties>
+    <property name="enemy" value="Reassembling Skeleton"/>
+    <property name="threatRange" type="int" value="10"/>
+    <property name="waypoints" value="81,82"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../../../common/maps/obj/manashards.tx" x="202" y="153"/>
+ </objectgroup>
+</map>

@@ -1,11 +1,33 @@
-{                                    
-"name":"Hydra",
-  "template":
-  {
-   "count":60,
-   "colors":["Red"],
-   "tribe":"Hydra",        
-   "tribeCards":8.0,
-   "rares":0.8
-  }
+{
+  "name": "Hydra",
+  "mainDeck": [
+    {
+      "count": 12,
+      "colors": [
+        "Red"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 26,
+      "colors": [
+        "Red"
+      ],
+      "subTypes": [
+        "Hydra"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 22,
+      "cardName": "Mountain|INV"
+    }
+  ]
 }
