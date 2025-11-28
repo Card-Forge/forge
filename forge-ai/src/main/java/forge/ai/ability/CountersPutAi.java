@@ -820,33 +820,34 @@ public class CountersPutAi extends CountersAi {
 
             sa.resetTargets();
 
-            Iterable<Card> filteredField;
-            if (sa.isCurse()) {
-                filteredField = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
-            } else {
-                filteredField = ai.getCardsIn(ZoneType.Battlefield);
+            CardCollection targetables = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
+            CardCollection list = ComputerUtil.filterAITgts(sa, ai, targetables, true);
+            if (list.isEmpty() || list.equals(targetables)) {
+                if (sa.isCurse()) {
+                    list = CardLists.filterControlledBy(targetables, ai.getOpponents());
+                } else {
+                    list = CardLists.filterControlledBy(targetables, ai);
+                }
             }
-            CardCollection list = CardLists.getTargetableCards(filteredField, sa);
-            list = ComputerUtil.filterAITgts(sa, ai, list, false);
             int totalTargets = list.size();
             boolean preferred = true;
 
             while (sa.canAddMoreTarget()) {
                 if (mandatory) {
                     if ((list.isEmpty() || !preferred) && sa.isTargetNumberValid()) {
-                        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+                        return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
                     }
 
                     if (list.isEmpty() && preferred) {
                         // If it's required to choose targets and the list is empty, get a new list
-                        list = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
+                        list = CardLists.filterControlledBy(targetables, ai.getOpponents());
                         preferred = false;
                     }
 
                     if (list.isEmpty()) {
                         // Still an empty list, but we have to choose something (mandatory); expand targeting to
                         // include AI's own cards to see if there's anything targetable (e.g. Plague Belcher).
-                        list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
+                        list = CardLists.filterControlledBy(targetables, ai.getYourTeam());
                         preferred = false;
                     }
                 }
