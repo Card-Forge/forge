@@ -35,8 +35,13 @@ public class AlterAttributeAi extends SpellAbilityAi {
                 switch (attr.trim()) {
                     case "Suspect":
                     case "Suspected":
-                        // below, Suspected is treated as better, so target own beefy stuff for now to give it Menace
+                        // below, Suspected is treated as better, so target own beefy stuff to give it Menace if possible
+                        // first, check our own and our teammates' cards
                         CardCollection targetableCards = CardLists.getTargetableCards(aiPlayer.getCreaturesInPlay(), sa);
+                        if (targetableCards.isEmpty()) {
+                            // look for allied stuff if we have nothing
+                            targetableCards = CardLists.getTargetableCards(aiPlayer.getAllies().getCreaturesInPlay(), sa);
+                        }
                         if (!targetableCards.isEmpty()) {
                             Card bestTgt = ComputerUtilCard.getBestAI(CardLists.filter(targetableCards,
                                     CardPredicates.hasKeyword(Keyword.MENACE).negate()));
@@ -47,9 +52,20 @@ public class AlterAttributeAi extends SpellAbilityAi {
                             sa.getTargets().add(bestTgt);
                             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                         }
-                        // TODO: Improve to suspect opposing chump blockers and creatures with Defender or Vigilance,
-                        // and to also prefer own biggest tapped attackers that aren't already suspected if this trigger
-                        // happens during an attack.
+                        // still no target, so look at the opposing stuff, try to target things that have Defender, Vigilance, or are weak
+                        // in general, target worst stuff here, hopefully chump blockers and the like
+                        targetableCards = CardLists.getTargetableCards(aiPlayer.getOpponents().getCreaturesInPlay(), sa);
+                        if (!targetableCards.isEmpty()) {
+                            Card bestTgt = ComputerUtilCard.getWorstAI(CardLists.filter(targetableCards,
+                                    CardPredicates.hasKeyword(Keyword.VIGILANCE).or(CardPredicates.hasKeyword(Keyword.DEFENDER))));
+                            if (bestTgt == null) {
+                                bestTgt = ComputerUtilCard.getWorstAI(targetableCards);
+                            }
+                            sa.resetTargets();
+                            sa.getTargets().add(bestTgt);
+                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                        }
+                        // still no target, so bail, because nothing is targetable at this point
                         break;
                 }
             }
