@@ -80,7 +80,7 @@
 		"options":
 			[
 				{
-					"name": "Ghalta, I've done as you asked! It's time to end this!",
+					"name": "Gaea, I've done as you asked! It's time to end this!",
 					"action": [ { "deleteMapObject": 55 } ],
 					"condition": [
 						{
@@ -99,7 +99,7 @@
 					"options": [ { "name": "(continue)" } ]
 				},
 				{
-                	"name": "Ghalta, I've done as you asked! It's time to end this!",
+                	"name": "Gaea, I've done as you asked! It's time to end this!",
                 	"action": [ { "deleteMapObject": 55 } ],
                 	"condition": [
                 		{
@@ -152,9 +152,9 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Squirrel" />
+    <property name="enemy" value="Jolrael, Empress of Beasts" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|TMP", "Nut Collector|ODY", "Primal Rage|STH", "Rowen|VIS" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": ["Jolrael, Empress of Beasts|PCY", "Undiscovered Paradise|VIS", "Jolrael's Centaur|MIR", "Nature's Revolt|PCY"] }</property></properties>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="658.333" y="600">
    <properties>
@@ -166,9 +166,9 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Gorilla" />
+    <property name="enemy" value="Verdeloth the Ancient" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|2ED", "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL", "Mountain|USG", "Primal Rage|STH", "Rowen|VIS", "Treetop Village|ULG" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": ["Heart of Yavimaya|ALL", "Yavimaya Hollow|UDS", "Greener Pastures|UDS", "Saproling Infestation|INV", "Night Soil|MIR", "Fires of Yavimaya|INV", "Yavimaya Gnats|ULG"] }</property></properties>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="663.666" y="409.333">
    <properties>
@@ -180,9 +180,9 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Wolf" />
+    <property name="enemy" value="Rofellos" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|ICE", "Plains|LEB", "Primal Rage|STH", "Rowen|VIS", "Timber Wolves|LEA" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": ["Forest|LEA", "Wirewood Lodge|ONS", "Rofellos, Llanowar Emissary|UDS", "Ivy Seer|ONS", "Heedless One|ONS", "Braidwood Cup|INV"] }</property></properties>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="363.833" y="223.874">
    <properties>
@@ -208,9 +208,9 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Elephant" />
+    <property name="enemy" value="Multani" />
     <property name="threatRange" type="int" value="30" />
-   </properties>
+   <property name="effect">{ "startBattleWithCard": ["Heart of Yavimaya|ALL", "Yavimaya Hollow|UDS", "Multani's Presence|UDS", "Rowen|VIS", "Primitive Etchings|SCG", "Library of Leng|LEA", "Primal Rage|STH", "Fires of Yavimaya|INV", "Yavimaya Gnats|ULG"] }</property></properties>
   </object>
   <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="600.667" y="494">
    <properties>
@@ -223,11 +223,11 @@
    <properties>
     <property name="dialog">[
   {
-    "text": "Welcome {var=player_name}, queen Ghalta has been waiting eagerly for this moment.",
+    "text": "Welcome {var=player_name}, queen Gaea has been waiting eagerly for this moment.",
     "options": [
       {
         "name": "Is that so? I guess you wouldn't mind opening that gate in front of me?",
-        "text": "I'm afraid I'm not allowed to do that, I am a mere servant of the mighty Ghalta, queen of Dinosaurs.",
+        "text": "I'm afraid I'm not allowed to do that, I am a mere servant of the mighty Gaea, queen of Dinosaurs.",
         "options": [
           {
             "name": "What do I need to do to get passed though this gate?",

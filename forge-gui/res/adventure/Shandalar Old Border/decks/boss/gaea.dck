@@ -24,7 +24,18 @@ Name=Gaea, the Worldsoul
 4 Ordered Migration|INV
 4 Allied Strategies|PLS
 4 Collective Restraint|INV
-4 Blanchwood Armor|USG
+4 Blanchwood Armor|7ED
 4 Constant Mists|STH
-2 Whirlwind|USG
-2 Gang of Elk|ULG
+2 Whirlwind|LEA
+2 Gang of Elk|HML
+
+[StartInBattle_Reference]
+1 Forest|LEA
+1 Tropical Island|LEA
+1 Taiga|LEA
+1 Bayou|LEA
+1 Savannah|LEA
+1 Gaea's Avenger|PLS
+1 Cradle Guard|UDS
+1 Magnigoth Treefolk|UDS
+1 Pulse of Llanowar|INV
