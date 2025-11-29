@@ -142,7 +142,7 @@
    <properties>
     <property name="enemy" value="Dark Ages Preacher" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Exorcist|DRK", "Plains|2ED", "Preacher|DRK", "Witch Hunter|DRK" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": ["Plains|2ED", "Plains|2ED", "Plains|2ED", "Preacher|DRK", "Exorcist|DRK", "Witch Hunter|DRK"] }</property></properties>
   </object>
  </objectgroup>
 </map>

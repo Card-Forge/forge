@@ -352,7 +352,7 @@
    <properties>
     <property name="enemy" value="Uncle Istvan" />
     <property name="threatRange" type="int" value="50" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamps", "Uncle Istvan|DRK" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": ["Swamp|2ED", "Swamp|2ED", "Swamp|2ED", "Uncle Istvan|DRK"] }</property></properties>
   </object>
  </objectgroup>
 </map>
