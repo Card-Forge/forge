@@ -7,7 +7,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerZones$ Ba
 SVar:TrigDiscard:DB$ Discard | Defined$ Player | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-A:AB$ Sacrifice | Cost$ 8 | SacValid$ Permanent | SacMessage$ Permanent | Defined$ Player.Opponent | SorcerySpeed$ True | SubAbility$ DBTransform | SpellDescription$ Each opponent sacrifices a permanent of their choice. Transform NICKNAME. Activate only as a sorcery.
+A:AB$ Sacrifice | Cost$ 8 | SacValid$ Permanent | Defined$ Player.Opponent | SorcerySpeed$ True | SubAbility$ DBTransform | SpellDescription$ Each opponent sacrifices a permanent of their choice. Transform NICKNAME. Activate only as a sorcery.
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:X:Remembered$CardTypes
 AlternateMode:DoubleFaced
