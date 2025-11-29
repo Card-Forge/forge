@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="59">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1LEKACAIBND2fti5L291iLxAU+qG29SnBElvTRiGCc1QQWp0rdXnsdMulV10FmJluFn3VnAR+zXXsrPeN8KP/h883VWfNdPj1pN9boQuXbr/uhNtp9Ws
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzVl0tOwzAQhg0skB33DIZ1OUNRBIEjcIDCQQpH4AAFCYFyJ5AQIWtWYY1HttWJm9jTxI3ESKO4TuLvn44fk4Vk7DBj7Ej7FLYUjN0Kw5ySe5BtmODn0ui4E/tjQqwL2eZOEbcfq/MPreV5Ym5q3s1su2+tGe+yHSe2x7QStthP1sfE+t0zD3F/jdopYsq48ZjdB+KqhNF41XP12y+ad0zwV+2nsp9bcqOL6+uJ3Ljgxl0brhBjjjRcC/MueIF+QzuP7AeO+0DItZJmPBHQiPXVAfYqa3N/zsLsWBxYXxFgK6sPuJTcXQhafi+FGfctMP9Ky6XEQnnGPVdG5vy+uDFboTnYzBn7nafhhtYvmMvxJyF31Px+WS7O77JDs/LWBOgovL2jtv9Jhfqxu7lb2bXMvb0DzqXYOa9ke406HTkaE69frLOL6c7+XesMhfYDf0x3H+9v/n3/LAQ+lV1aLmVv6zL//KfWOGO564E1x1gu2JA6JxU3xvRrpbHcZjasxkkR7xD7z1z3nbTL9wmVC/Oi6aijwf4AV6hrzg==
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4B2YAcLA4M0jfEuFkx7Q1lJd+sUDtLUY7ODHHtJBdS211iHgcFEB5MNA7BwIcdeUsMUGxiK4TyZAn8TYy+2eMIGcMUtNv1DMZxB4D07Kk0IaDBit+MrCfZSkq5J8e9hoFvdNRkYPIBYjxNTfiTELyX2oudDmL3ExB+5eZhY/xJjPiytkmvvF1by6lBS6u1vSPai+4lQOKO7mZx0QU48UcNecgAp9lKj7iTHXmoCcu2l1O9Dzb+DxV4AiyIukg==
+  </data>
+ </layer>
+ <layer id="5" name="Overlay" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt0bENwCAQBMHtAlpA//33AtU4cIgtET7STnTBZQuSKmgJPfetuk47/bW1c20zYMW7Y0CO7599JUk3ewCmfgdy
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="204" y="368" width="56" height="16"/>
+  <object id="41" template="../../../../../../common/maps/obj/shop.tx" x="256" y="208">
+   <properties>
+    <property name="shopList" value=" Instant,Creature,Land,Colorless,
+    Artifact,Multicolor,
+    Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Golem,Sliver"/>
+   </properties>
+  </object>
+  <object id="55" template="../../../../../../common/maps/obj/shop.tx" x="272" y="144">
+   <properties>
+    <property name="shopList" value=" Instant,Creature,Land,Colorless,Artifact,Multicolor,Golem,Sliver"/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../../../common/maps/obj/shop.tx" x="320" y="144">
+   <properties>
+    <property name="shopList" value=" Instant,Creature,Land,Colorless,Artifact,Multicolor,Golem,Sliver"/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../../../common/maps/obj/shop.tx" x="304" y="208">
+   <properties>
+    <property name="shopList" value=" Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Golem,Sliver"/>
+   </properties>
+  </object>
+  <object id="51" template="../../../../../../common/maps/obj/shop.tx" x="352" y="208">
+   <properties>
+    <property name="shopList" value=" Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Golem,Sliver"/>
+   </properties>
+  </object>
+  <object id="52" template="../../../../../../common/maps/obj/shop.tx" x="352" y="272">
+   <properties>
+    <property name="shopList" value=" Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Golem,Sliver"/>
+   </properties>
+  </object>
+  <object id="53" template="../../../../../../common/maps/obj/shop.tx" x="304" y="272">
+   <properties>
+    <property name="shopList" value=" Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Golem,Sliver"/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../../../common/maps/obj/shop.tx" x="256" y="272">
+   <properties>
+    <property name="shopList" value=" Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Golem,Sliver"/>
+   </properties>
+  </object>
+  <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="150" y="273"/>
+  <object id="48" template="../../../../../../common/maps/obj/shop.tx" x="104" y="272">
+   <properties>
+    <property name="shopList" value="Equipment"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../../../common/maps/obj/shop.tx" x="97" y="209">
+   <properties>
+    <property name="shopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Golem,Sliver"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

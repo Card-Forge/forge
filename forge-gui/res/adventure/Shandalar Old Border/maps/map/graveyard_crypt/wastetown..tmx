@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="45" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="53">
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="45" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzt1EsKgCAQBmC3QQdwUdd22TXyeG0SIWoejq+J+eFfpfExWmFxLkxYKKNtZjazmefs7GZuRnu1ztnMZtZkPu5qMif3n8zcxLWfu6Y53beRlZihPNdwTV/vb2XmzIk7z1Iztld61tizEjNn1qfP3Yn7sXORmrF7C5mhtPoGKY0+923OPf4blG7C1swFhTACvg==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="45" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztlUsOgkAQRNkah6Ur8GJ6FKPexHgMv3eTiUxs2v7MFzCxkgqLTjUvk6FoTVW1Ad7WVXXrnps6LBeal0Ttc7Z7L2bodb+vEXhgHs65PJXxZbb7dsuPGyMzUzOcl5hdjsrEMl/RGVjf+33cDOaxuHxO5n3nA/KxZ+FmFPNp8TYUzOdkpu6sdJ+5PMUM353C/DTDc3sEMnN5jZnK+DL7WGLmrDGndF1J5tB3+zJr/aoxc3mNObWfoWL62Ql/g5Ry9TNUTD9DZieKOWc/Q8X0M8fsuKl8TmZ8Z6UszlP9jHeM0c8as9bPHHPJfo7Naswl+zk275ibTMxjiPsPQs2BE+oXma2mZsa97KOpmUvozyzfhfPqe+57X6Dmds4p/U/pBYiGzDU=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="45" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgZIJR9YPWPAghYwgyhd/IwMOxCw7t5UOXQ9Qw0qOVmYKhDw/XcCPk6btx6yQG3ydRnj0VMhgeBZaFhK82DX89AA0JuHoxgMLj5Honq0d0M0j8azpSBGl4Ghu9Auo4XIUYPN4dQoZ76wYC/fAYBepbPDgTkYWFci6VMRtZPrfL5LpS2xSJHSty+RtIDw8hAGkmMluUzuemRkJtpCYaDm4m1E5ubYeLkgmhezPyNC6O3y0jVgwxg8lG8DCQDWNjN48SPYYCQOmLMQeaTk05IdTMhtdgAPvXkupnY8MEGQOUvOeFLjXAmFB4we3dIIPACUdL0DzY3k5OuQYAcN+/lwewDIWN0gC4vS0A/IbyHTmX1QAIARFqfDQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="209" y="380.5" width="62.5" height="45">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/graveyard_crypt/graveyard_2.tmx"/>
+   </properties>
+  </object>
+  <object id="47" template="../../../../../../common/maps/obj/gold.tx" x="363.5" y="66.5"/>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="57" y="72.5">
+   <properties>
+    <property name="reward">[{ &quot;type&quot;: &quot;card&quot;, &quot;probability&quot;: 1, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Dakkon Blackblade|LEG&quot; }]</property>
+   </properties>
+  </object>
+  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="55" y="194"/>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="113.902" y="72.7253">
+   <properties>
+    <property name="enemy" value="High Vampire"/>
+   </properties>
+  </object>
+  <object id="51" template="../../../../../../common/maps/obj/enemy.tx" x="297.5" y="72">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="52" template="../../../../../../common/maps/obj/enemy.tx" x="118" y="200">
+   <properties>
+    <property name="enemy" value="Big Zombie"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

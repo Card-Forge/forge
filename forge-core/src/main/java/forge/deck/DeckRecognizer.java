@@ -596,7 +596,7 @@ public class DeckRecognizer {
             line = refLine.trim();  // Remove any trailing formatting
 
         // Some websites export split card names with a single slash. Replace with double slash.
-        // Final fantasy cards like Summon: Choco/Mog should be ommited to be recognized. TODO: fix maybe for future cards
+        // Final fantasy cards like Summon: Choco/Mog should be omitted to be recognized. TODO: fix maybe for future cards
         if (!line.contains("Summon:"))
             line = SEARCH_SINGLE_SLASH.matcher(line).replaceFirst(" // ");
         if (line.startsWith(ASTERISK))  // Markdown lists (tappedout md export)

@@ -40,7 +40,7 @@ public class ChooseGenericAi extends SpellAbilityAi {
     @Override
     protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
         if (sa.hasParam("AILogic")) {
-            // This is equivilant to what was here before but feels bad
+            // This is equivalent to what was here before but feels bad
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 

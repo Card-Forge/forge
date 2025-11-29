@@ -1,10 +1,36 @@
-{                                    
-"name":"Goblin good",
-  "template":
-  {
-   "count":60,
-   "colors":["Red"],
-   "tribe":"Goblin",
-   "rares":0.8
-  }
+{
+  "name": "Goblin good",
+  "mainDeck": [
+    {
+      "count": 8,
+      "colors": [
+        "Red"
+      ],
+      "subTypes": [
+        "Goblin"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 30,
+      "colors": [
+        "Red"
+      ],
+      "subTypes": [
+        "Goblin"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 22,
+      "cardName": "Mountain|LEA"
+    }
+  ]
 }
