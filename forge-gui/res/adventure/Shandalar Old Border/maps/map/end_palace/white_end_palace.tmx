@@ -80,7 +80,7 @@
 		"options":
 			[
 				{
-					"name": "Akroma, I've done as you asked! It's time to end this!",
+					"name": "Serra, I've done as you asked! It's time to end this!",
 					"action": [ { "deleteMapObject": 55 } ],
 					"condition": [
 						{
@@ -99,7 +99,7 @@
 					"options": [ { "name": "(continue)" } ]
 				},
 					{
-                	    "name": "Akroma, I've done as you asked! It's time to end this!",
+                	    "name": "Serra, I've done as you asked! It's time to end this!",
                 		"action": [ { "deleteMapObject": 55 } ],
                 		"condition": [
                 			{
@@ -153,10 +153,10 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Dwarf Warlord" />
+    <property name="enemy" value="Hazduhr the Abbot" />
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
-   </properties>
+   <property name="effect">{ "startBattleWithCard": ["Hazduhr the Abbot|HML", "Serra's Hymn|USG", "Serra Inquisitors|HML", "Doubtless One|ONS", "Beloved Chaplain|ODY"] }</property></properties>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="671.667" y="411.333">
    <properties>
@@ -168,9 +168,9 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Holy Paladin" />
+    <property name="enemy" value="Selenia, Dark Angel" />
     <property name="threatRange" type="int" value="30" />
-   </properties>
+   <property name="effect">{ "startBattleWithCard": ["Salt Flats|TMP", "Selenia, Dark Angel|TMP", "Sword of the Chosen|STH", "Haunted Angel|APC"] }</property></properties>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="365.5" y="229.667">
    <properties>
@@ -197,9 +197,9 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Holy Apparition" />
+    <property name="enemy" value="Archangel Radiant" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Glorious Anthem|USG", "Mobilization|ONS", "Serra\u2019s Sanctum|USG" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": ["Serra Aviary|HML", "Knighthood|APC", "Serra Paladin|HML", "Sustainer of the Realm|USG", "Serra Zealot|USG"] }</property></properties>
   </object>
   <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="84" y="405.667">
    <properties>
@@ -211,9 +211,9 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Royal King" />
+    <property name="enemy" value="Reya Dawnbringer" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Angelic Chorus|USG", "Fortified Area|LEG", "Glorious Anthem|USG", "Plains|ONS", "Rolling Stones|STH", "Wall of Essence|STH" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": ["Reya Dawnbringer|UDS", "Worry Beads|MIR", "Millikin|ODY", "Angelic Renewal|WTH"] }</property></properties>
   </object>
   <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="187.167" y="500.333">
    <properties>
@@ -226,11 +226,11 @@
    <properties>
     <property name="dialog">[
   {
-    "text": "Welcome {var=player_name}, Akroma has been waiting eagerly for this moment.",
+    "text": "Welcome {var=player_name}, Serra has been waiting eagerly for this moment.",
     "options": [
       {
         "name": "Is that so? I guess you wouldn't mind opening that gate in front of me?",
-        "text": "I'm afraid I'm not allowed to do that, I am a mere servant of the mighty Akroma, ruler of Angels.",
+        "text": "I'm afraid I'm not allowed to do that, I am a mere servant of the mighty Serra, ruler of Angels.",
         "options": [
           {
             "name": "What do I need to do to get passed though this gate?",
