@@ -28,6 +28,7 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -886,7 +887,7 @@ public class DeckRecognizer {
         String nonCardToken = nonCardTokenMatch(lineAsIs);
         if (nonCardToken == null)
             return false;
-        return StringUtils.startsWithAny(nonCardToken.toLowerCase(), CARD_TYPES);
+        return Strings.CS.startsWithAny(nonCardToken.toLowerCase(), CARD_TYPES);
     }
 
     public static boolean isCardRarity(final String lineAsIs){
@@ -905,7 +906,7 @@ public class DeckRecognizer {
         String nonCardToken = nonCardTokenMatch(lineAsIs);
         if (nonCardToken == null)
             return false;
-        return StringUtils.equalsAnyIgnoreCase(nonCardToken, DECK_SECTION_NAMES);
+        return Strings.CI.equalsAny(nonCardToken, DECK_SECTION_NAMES);
     }
 
     private static String nonCardTokenMatch(final String lineAsIs){

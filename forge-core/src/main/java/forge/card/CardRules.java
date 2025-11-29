@@ -25,6 +25,7 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -921,7 +922,7 @@ public final class CardRules implements ICardCharacteristics {
             if (mainPart.getType().isLand()) {
                 colors = getColorIdentity().getColor();
                 for (int i = 0; i < 5; i++) {
-                    if (containsIgnoreCase(mainPart.getOracleText(), BASIC_LANDS.get(i))) {
+                    if (Strings.CI.contains(mainPart.getOracleText(), BASIC_LANDS.get(i))) {
                         colors |= 1 << i;
                     }
                 }

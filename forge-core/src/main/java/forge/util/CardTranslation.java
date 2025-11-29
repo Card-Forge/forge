@@ -2,6 +2,7 @@ package forge.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.text.similarity.LevenshteinDistance;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -366,7 +367,7 @@ public class CardTranslation {
         for (int i = 0; i < mapping.size(); i++) {
             String toracle = mapping.get(i).getLeft();
             int threshold = Math.min(toracle.length(), tcompare.length()) / 3;
-            int distance = StringUtils.getLevenshteinDistance(toracle, tcompare, threshold);
+            int distance = new LevenshteinDistance(threshold).apply(toracle, tcompare);
             if (distance != -1 && distance < minDistance) {
                 minDistance = distance;
                 candidateIndex = i;

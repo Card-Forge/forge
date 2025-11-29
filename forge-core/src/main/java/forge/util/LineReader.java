@@ -88,16 +88,6 @@ public class LineReader implements Iterable<String>, Closeable {
     }
 
     /**
-     * Makes sure the underlying stream is closed.
-     *
-     * @throws Throwable the throwable
-     */
-    @Override
-    protected void finalize() throws Throwable {
-        this.close();
-    }
-
-    /**
      * Returns an iterator over the lines remaining to be read.
      * 
      * <p>

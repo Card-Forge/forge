@@ -18,6 +18,7 @@
 package forge.util;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 import java.util.function.Predicate;
 
@@ -55,9 +56,9 @@ public abstract class PredicateString<T> implements Predicate<T> {
     protected final boolean op(final String op1, final String op2) {
         switch (this.getOperator()) {
         case CONTAINS_IC:
-            return StringUtils.containsIgnoreCase(op1, op2);
+            return Strings.CI.contains(op1, op2);
         case CONTAINS:
-            return StringUtils.contains(op1, op2);
+            return Strings.CS.contains(op1, op2);
         case EQUALS:
             return op1.equals(op2);
         case EQUALS_IC:

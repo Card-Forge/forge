@@ -19,6 +19,7 @@
 package forge.util;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -52,8 +53,8 @@ public class BuildInfo {
 
     public static boolean isDevelopmentVersion() {
         String forgeVersion = getVersionString();
-        return StringUtils.containsIgnoreCase(forgeVersion, "git") ||
-                StringUtils.containsIgnoreCase(forgeVersion, "snapshot");
+        return Strings.CI.contains(forgeVersion, "git") ||
+                Strings.CI.contains(forgeVersion, "snapshot");
     }
 
     public static Date getTimestamp() {
