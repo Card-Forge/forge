@@ -239,7 +239,7 @@
     <property name="fleeRange" value="60" />
     <property name="pursueRange" type="int" value="60" />
     <property name="threatRange" type="int" value="60" />
-   <property name="effect">{ "startBattleWithCard": [ "Phyrexian Arena|APC", "Swamp|TMP", "Vile Consumption|INV" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP", "Swamp|TMP", "Vile Consumption|INV" ] }</property></properties>
   </object>
   <object id="125" template="../../../../../../common/maps/obj/enemy.tx" x="932" y="321.664" width="16" height="17.6724">
    <properties>
@@ -255,7 +255,7 @@
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="96,93" />
-   <property name="effect">{ "startBattleWithCard": [ "Phyrexian Arena|APC", "Swamp|TMP", "Vile Consumption|INV" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP", "Swamp|TMP", "Vile Consumption|INV" ] }</property></properties>
   </object>
   <object id="127" template="../../../../../../common/maps/obj/waypoint.tx" x="609.333" y="270.333" />
   <object id="128" template="../../../../../../common/maps/obj/waypoint.tx" x="677" y="415" />
@@ -577,7 +577,7 @@
     <property name="fleeRange" value="60" />
     <property name="pursueRange" type="int" value="60" />
     <property name="threatRange" type="int" value="60" />
-   <property name="effect">{ "startBattleWithCard": [ "Phyrexian Arena|APC", "Swamp|TMP", "Vile Consumption|INV" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP", "Swamp|TMP", "Vile Consumption|INV" ] }</property></properties>
   </object>
   <object id="218" template="../../../../../../common/maps/obj/enemy.tx" x="697" y="269.164" width="16" height="17.6724">
    <properties>
