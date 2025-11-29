@@ -3,7 +3,7 @@ ManaCost:3 R R
 Types:Instant
 K:Entwine:3 R
 A:SP$ Charm | Choices$ DBDestroyArtifact,DBDestroyLand | CharmNum$ 1
-SVar:DBDestroyArtifact:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
+SVar:DBDestroyArtifact:DB$ Destroy | ValidTgts$ Artifact | SpellDescription$ Destroy target artifact.
 SVar:DBDestroyLand:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
 AI:RemoveDeck:All
 Oracle:Choose one —\n• Destroy target artifact.\n• Destroy target land.\nEntwine {3}{R} (Choose both if you pay the entwine cost.)
