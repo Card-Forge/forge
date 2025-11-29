@@ -15,3 +15,9 @@ Name=stormtitan
 4 Kaervek's Torch|MIR|1
 4 Incinerate|ICE|1
 4 Mind Bomb|4ED|1
+
+[StartInBattle_Reference]
+1 Island|2ED
+1 Mountain|2ED
+1 Pendrell Mists|WTH
+1 Rhystic Study|PCY

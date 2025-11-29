@@ -14,3 +14,9 @@ Name=Dark Ages Preacher
 2 Blood of the Martyr|DRK
 2 Dust to Dust|DRK
 2 Exorcist|DRK
+
+[StartInBattle_Reference]
+1 Exorcist|DRK
+1 Plains|2ED
+1 Preacher|DRK
+1 Witch Hunter|DRK

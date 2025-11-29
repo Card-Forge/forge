@@ -14,3 +14,9 @@ Name=goblinking
 4 Goblin War Strike|PO2|1
 4 Goblin Offensive|USG|1
 2 Mogg Infestation|STH|1
+
+[StartInBattle_Reference]
+1 Fervor|WTH
+1 Goblin King|LEA
+1 Goblin Trenches|APC
+1 Mountain|2ED

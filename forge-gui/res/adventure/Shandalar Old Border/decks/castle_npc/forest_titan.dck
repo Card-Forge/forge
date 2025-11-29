@@ -15,3 +15,9 @@ Name=forest_titan
 4 Uktabi Wildcats|6ED|1
 2 Natural Affinity|MMQ|1
 2 Plow Under|UDS|1
+
+[StartInBattle_Reference]
+1 Forest|2ED
+1 Primal Rage|STH
+1 Rowen|VIS
+1 Treefolk Seedlings|USG

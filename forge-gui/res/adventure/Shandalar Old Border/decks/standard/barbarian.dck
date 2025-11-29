@@ -14,3 +14,9 @@ Name=barbarian
 4 Blood Lust|4ED|1
 4 Gratuitous Violence|ONS|1
 4 Threaten|ONS|1
+
+[StartInBattle_Reference]
+1 Balthor the Stout|TOR
+1 Fervor|WTH
+1 Keldon Warlord|LEA
+1 Mountain|2ED

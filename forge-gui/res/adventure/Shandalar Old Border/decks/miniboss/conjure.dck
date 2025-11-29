@@ -1,9 +1,9 @@
 [metadata]
 Name=Three Kingdoms Commander
 [Main]
-8 Mountain|PELP
-8 Island|PELP
-8 Plains|PELP
+8 Mountain|PTK
+8 Island|PTK
+8 Plains|PTK
 2 Huang Zhong, Shu General|PTK
 2 Guan Yu, Sainted Warrior|PTK
 2 Liu Bei, Lord of Shu|PTK
@@ -16,9 +16,14 @@ Name=Three Kingdoms Commander
 2 Lu Bu, Master-at-Arms|PTK
 2 Yuan Shao, the Indecisive|PTK
 2 Ma Chao, Western Warrior|PTK
-2 Vengeance|POR
+2 Vengeance|PTK
 2 Guan Yu's 1,000-Li March|PTK
 2 Capture of Jingzhou|PTK
 2 Brilliant Plan|PTK
 2 Rolling Earthquake|PTK
-2 Relentless Assault|VIS
+2 Relentless Assault|PTK
+
+[StartInBattle_Reference]
+1 Island|LEA
+1 Mountain|LEA
+1 Plains|LEA

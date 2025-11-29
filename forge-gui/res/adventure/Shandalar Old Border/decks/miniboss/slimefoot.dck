@@ -17,3 +17,9 @@ Name=Fungus of Verdeloth
 2 Spore Flower|FEM
 2 Spidersilk Armor|MMQ
 2 Overrun|TMP
+
+[StartInBattle_Reference]
+1 Elvish Farmer|FEM
+1 Forest|LEA
+1 Sporogenesis|USG
+2 Thallid|FEM

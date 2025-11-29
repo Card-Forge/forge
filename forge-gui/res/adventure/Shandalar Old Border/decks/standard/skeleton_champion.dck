@@ -13,3 +13,6 @@ Name=skeleton_champion
 4 Phyrexian Negator|UDS|1
 4 Sinkhole|LEA|1
 4 Urborg Skeleton|INV|1
+
+[StartInBattle_Reference]
+1 Death Pit Offering

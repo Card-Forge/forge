@@ -12,3 +12,9 @@ Name=merfolk_king
 4 Unsummon|LEA|1
 4 Boomerang|MIR|1
 4 Counterspell|ICE|1
+
+[StartInBattle_Reference]
+1 Islands
+1 Lord of Atlantis|LEA
+1 Rhystic Study|PCY
+1 Tidal Warrior|STH

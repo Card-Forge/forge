@@ -17,3 +17,7 @@ Name=swamptroll
 4 Priest of Titania|USG|1
 4 Sarcomancy|TMP|1
 8 Forest|USG|3
+
+[StartInBattle_Reference]
+1 Dense Foliage|WTH
+1 Treetop Village|ULG

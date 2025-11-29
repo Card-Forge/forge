@@ -14,3 +14,6 @@ Name=bonedragon
 4 Unholy Strength|LEB|1
 4 Volcanic Dragon|S99|1
 4 Zombie Infestation|ODY|1
+
+[StartInBattle_Reference]
+1 Ashen Ghoul|ICE

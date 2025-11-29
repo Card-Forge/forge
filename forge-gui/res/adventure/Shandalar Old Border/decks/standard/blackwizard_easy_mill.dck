@@ -12,3 +12,6 @@ Name=Agent K 1
 4 Plague Beetle|ULG|1
 4 Raise Dead|S99|1
 4 Sinkhole|LEA|1
+
+[StartInBattle_Reference]
+1 Wall of Bone|LEA|1

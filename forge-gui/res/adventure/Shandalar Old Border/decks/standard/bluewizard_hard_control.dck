@@ -18,3 +18,6 @@ Name=Kojak 3
 4 Tundra|LEA|1
 5 Plains|5ED|2
 8 Island|5ED|2
+
+[StartInBattle_Reference]
+1 Hesitation|STH|1

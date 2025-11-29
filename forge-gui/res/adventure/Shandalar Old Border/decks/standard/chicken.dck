@@ -12,3 +12,11 @@ Name=chicken
 4 Plague Beetle|ULG|1
 4 Raise Dead|7ED|1
 4 Zombie Infestation|ODY|1
+
+[StartInBattle_Reference]
+1 Chicken Egg
+1 Chicken à la King
+1 Forest|2ED
+1 Island|2ED
+1 Mountain|2ED
+1 Poultrygeist

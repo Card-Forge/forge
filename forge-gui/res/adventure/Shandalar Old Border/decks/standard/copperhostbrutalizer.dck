@@ -15,3 +15,9 @@ Name=Green Phyrexian Boss
 4 Phyrexian Colossus|USG
 4 Phyrexian Gargantua|APC
 4 Phyrexian Hulk|TMP
+
+[StartInBattle_Reference]
+1 Eladamri’s Vineyard|TMP
+1 Phyrexian Arena|APC
+1 Phyrexian Walker|VIS
+1 Phyrexian War Beast|ALL

@@ -19,3 +19,9 @@ Name=Black Phyrexian Boss
 4 Do or Die|INV
 2 Pestilence|6ED
 2 Tsabo's Decree|INV
+
+[StartInBattle_Reference]
+1 Phyrexian Arena|APC
+1 Phyrexian Broodlings|ULG
+1 Phyrexian Negator|UDS
+1 Phyrexian Walker|VIS

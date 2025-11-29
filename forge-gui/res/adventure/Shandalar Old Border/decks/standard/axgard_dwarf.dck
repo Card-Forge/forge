@@ -15,3 +15,6 @@ Name=axgard_dwarf
 4 Dwarven Warriors|4ED|1
 4 Juggernaut|3ED|1
 6 Plains|4ED|1
+
+[StartInBattle_Reference]
+1 Ancient Tomb|TMP|1

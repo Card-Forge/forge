@@ -18,3 +18,8 @@ Name=mindclaw_shaman
 4 Torment|STH|1
 4 Urborg Volcano|INV|1
 5 Mountain|MIR|3
+
+[StartInBattle_Reference]
+1 Black Market|MMQ
+1 Enchantress's Presence|ONS
+1 Grim Feast|MIR

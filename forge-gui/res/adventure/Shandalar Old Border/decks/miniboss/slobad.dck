@@ -19,3 +19,8 @@ Name=Squee, Goblin Nabob
 2 Goblin Offensive|USG
 2 Mogg Infestation|STH
 2 Shatterstorm|ATQ
+
+[StartInBattle_Reference]
+1 Goblin Spy|INV
+1 Goblin War Drums|FEM
+1 Mountain|LEA

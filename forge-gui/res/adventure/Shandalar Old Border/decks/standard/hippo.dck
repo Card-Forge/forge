@@ -20,3 +20,6 @@ Name=hippo
 4 Windswept Heath|ONS|1
 6 Forest|ONS|3
 8 Plains|ONS|3
+
+[StartInBattle_Reference]
+1 Bull Hippo|POR

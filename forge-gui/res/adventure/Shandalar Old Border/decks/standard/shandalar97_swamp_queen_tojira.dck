@@ -20,3 +20,10 @@ Name=Swamp Queen Tojira
 2 Raise Dead|LEA
 2 Chorus of Woe|PO2
 2 Bloodcurdling Scream|PO2
+
+[StartInBattle_Reference]
+1 Breathstealer|MIR
+1 Everglades|VIS
+1 Feral Shadow|MIR
+1 Lake of the Dead|ALL
+1 Nightstalker Engine|PO2

@@ -18,3 +18,10 @@ Name=wolfboss
 2 Disenchant|2ED|1
 2 Naturalize|ONS|1
 4 Overrun|ODY|1
+
+[StartInBattle_Reference]
+1 Forest|2ED
+1 Plains|2ED
+1 Primal Rage|STH
+1 Rowen|VIS
+1 Timber Wolves|LEA

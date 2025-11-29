@@ -18,3 +18,10 @@ Name=Skavius Slaan the Lichlord of Azar
 1 Gloom|LEA
 2 Greed|LEG
 22 Swamp|LEA
+
+[StartInBattle_Reference]
+1 Cabal Coffers|TOR
+1 Diabolic Servitude|UDS
+1 Lake of the Dead|ALL
+1 Living Death|TMP
+1 Phyrexian Negator|UDS

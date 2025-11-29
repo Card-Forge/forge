@@ -13,3 +13,7 @@ Name=Mimic
 4 Salt Marsh|INV|1
 4 Thawing Glaciers|ALL|1
 4 Tidal Wave|MIR|1
+
+[StartInBattle_Reference]
+1 Fellwar Stone|DRK|1
+1 Kismet|LEG

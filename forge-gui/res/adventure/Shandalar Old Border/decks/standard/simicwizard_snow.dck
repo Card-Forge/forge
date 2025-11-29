@@ -30,3 +30,13 @@ Name=Snow Wizard
 2 Goblin Ski Patrol|ICE
 2 Folk of the Pines|ICE
 2 Seraph|ICE
+
+[StartInBattle_Reference]
+1 Ice Floe|ICE
+1 Snow Fortress|ICE
+1 Snow-Covered Forest|ICE
+1 Snow-Covered Mountain|ICE
+1 Snow-Covered Plains|ICE
+1 Tinder Wall|ICE
+1 Wall of Pine Needles|ICE
+1 Winter’s Night|ALL

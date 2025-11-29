@@ -25,3 +25,9 @@ Name=Homelands Chef
 3 Retribution|HML
 3 Ambush Party|HML
 3 An-Havva Constable|HML
+
+[StartInBattle_Reference]
+1 Abbey Matron|HML
+1 An-Havva Township|HML
+1 Dwarven Trader|HML
+1 Folk of An-Havva|HML

@@ -19,3 +19,8 @@ Name=dwarf_lord
 4 Soltari Trooper|TMP|1
 2 Commander Eesha|JUD|1
 2 Gerrard Capashen|APC|1
+
+[StartInBattle_Reference]
+1 Daru Warchief|SCG
+1 Glorious Anthem|USG
+1 Kjeldoran Outpost|ALL

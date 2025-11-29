@@ -11,3 +11,6 @@ Name=zombie_black_medium
 4 Noxious Ghoul|LGN|1
 4 Plague Rats|LEA|1
 4 Zombie Master|LEA|1
+
+[StartInBattle_Reference]
+1 Carrion Feeder|SCG

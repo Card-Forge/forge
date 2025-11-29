@@ -16,3 +16,8 @@ Name=unholyknight
 4 Terror|5ED|1
 4 Unholy Strength|2ED|1
 4 Vampiric Tutor|VIS|1
+
+[StartInBattle_Reference]
+1 Maze of Shadows|TMP
+1 Rhystic Cave|PCY
+1 Wall of Shadows|LEG

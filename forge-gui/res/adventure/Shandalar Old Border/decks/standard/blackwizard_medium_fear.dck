@@ -16,3 +16,6 @@ Name=blackwizard_medium_fear
 4 Polluted Delta|ONS|1
 4 Ravenous Rats|INV|1
 4 The Rack|3ED|1
+
+[StartInBattle_Reference]
+1 Wall of Bone|LEA|1

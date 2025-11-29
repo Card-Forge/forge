@@ -17,3 +17,8 @@ Name=millwizard
 4 Millstone|5ED|1
 4 Shivan Reef|APC|1
 4 Thawing Glaciers|ALL|1
+
+[StartInBattle_Reference]
+1 Ambassador Laquatus|TOR
+1 Propaganda|TMP
+1 Sky Diamond|MIR

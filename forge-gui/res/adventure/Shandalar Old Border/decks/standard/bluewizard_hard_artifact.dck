@@ -19,3 +19,6 @@ Name=Nox 3
 4 Tundra|LEA|1
 4 Underground Sea|LEA|1
 7 Swamp|USG|1
+
+[StartInBattle_Reference]
+1 Hesitation|STH|1

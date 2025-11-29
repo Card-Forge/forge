@@ -20,3 +20,10 @@ Name=archmage
 2 Prophetic Bolt|APC|1
 4 Benthic Djinn|MIR|1
 4 Blazing Specter|INV|1
+
+[StartInBattle_Reference]
+1 Island|2ED
+1 Mountain|2ED
+1 Phyrexian Tyranny|PLS
+1 Rhystic Study|PCY
+1 Swamp|2ED

@@ -15,3 +15,7 @@ Name=hellion
 4 Lotus Petal|TMP|1
 4 Mind Stone|WTH|1
 4 Sneak Attack|USG|1
+
+[StartInBattle_Reference]
+1 Forest|LEA
+1 Mountain|LEA

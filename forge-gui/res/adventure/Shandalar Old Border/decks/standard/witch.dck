@@ -13,3 +13,8 @@ Name=witch
 4 Choking Sands|MIR|1
 2 Dregs of Sorrow|7ED|1
 2 Forced March|MMQ|1
+
+[StartInBattle_Reference]
+1 Phyrexian Arena|APC
+1 Swamp|2ED
+1 Vile Consumption|INV
