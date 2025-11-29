@@ -80,7 +80,7 @@
 		"options":
 			[
 				{
-					"name": "Lathliss, I've done as you asked! It's time to end this!",
+					"name": "Jaya, I've done as you asked! It's time to end this!",
 					"action": [ { "deleteMapObject": 55 } ],
 					"condition": [
 						{
@@ -152,9 +152,9 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Barbarian" />
+    <property name="enemy" value="Latulla, Keldon Overseer" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Balthor the Stout|TOR", "Fervor|WTH", "Keldon Warlord|LEA", "Mountain|TMP" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": ["Latulla, Keldon Overseer|PCY", "Keldon Necropolis|INV", "Citadel of Pain|PCY", "Copper-Leaf Angel|PCY", "Sulfuric Vortex|SCG"] }</property></properties>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="649.5" y="599">
    <properties>
@@ -166,9 +166,9 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Goblin King" />
+    <property name="enemy" value="Márton Stromgald" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Fervor|WTH", "Goblin King|LEA", "Goblin Trenches|APC", "Mountain|7ED" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": ["Márton Stromgald|ICE", "Agent of Stromgald|ALL", "Stromgald Cabal|ALL", "Knight of Stromgald|ICE", "Ebony Horse|ARB"] }</property></properties>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="660" y="409.5">
    <properties>
@@ -180,9 +180,9 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Pyromancer" />
+    <property name="enemy" value="Jeska, Warrior Adept" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Fervor|WTH", "Mountain|BRB", "Smoke|LEA", "Sulfuric Vortex|SCG" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": ["Shivan Oasis|INV", "Jeska, Warrior Adept|JUD", "Fires of Yavimaya|INV", "Overabundance|INV", "Narcissism|TOR"] }</property></properties>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="368.5" y="228.091">
    <properties>
@@ -208,9 +208,9 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Minotaur Warcaller" />
+    <property name="enemy" value="Eron the Relentless" />
     <property name="threatRange" type="int" value="20" />
-   </properties>
+   <property name="effect">{ "startBattleWithCard": ["Koskun Keep|HML", "Reflecting Pool|TMP", "Eron the Relentless|HML", "Serrated Arrows|HML"] }</property></properties>
   </object>
   <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="520.254" y="498.533">
    <properties>
@@ -223,15 +223,15 @@
    <properties>
     <property name="dialog">[
   {
-    "text": "Welcome {var=player_name}, dragon queen Lathliss has been waiting eagerly for this moment.",
+    "text": "Welcome {var=player_name}, the legendary Jaya Ballard has been waiting eagerly for this moment.",
     "options": [
       {
         "name": "Is that so? I guess you wouldn't mind opening that gate in front of me?",
-        "text": "I'm afraid I'm not allowed to do that, I am only an ordinary dragon, a mere servant of the mighty Lathliss, queen of dragons.",
+        "text": "I'm afraid I'm not allowed to do that, I am only a humble servant of the legendary Jaya Ballard, master of fire.",
         "options": [
           {
             "name": "What do I need to do to get passed though this gate?",
-            "text": "To show you are worthy, you must prove your strength by defeating at least four of the five enemies lurking within this dungeon in order to be worthy of an audience with my illustrious master, who holds dominion over this realm of flames.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.",
+            "text": "To show you are worthy, you must prove your strength by defeating at least four of Jaya's five lieutenants lurking within this palace in order to be worthy of an audience with my illustrious master, who holds dominion over this realm of flames.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.",
             "options": [
               {
                 "name": "I'll show my worth, just make sure to open the gate when I defeat your challengers.",
