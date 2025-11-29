@@ -5646,6 +5646,14 @@
     "speed": 31,
     "scale": 0.75,
     "life": 25,
+    "startBattleWith": [
+      "Island|UGL",
+      "Forest|UGL",
+      "Mountain|UGL",
+      "Poultrygeist|UGL",
+      "Chicken Egg|UGL",
+      "Chicken à la King|UGL"
+    ],
     "rewards": [
       {
         "type": "card",
@@ -15794,12 +15802,6 @@
         "probability": 1,
         "count": 50,
         "addMaxCount": 100
-      },
-      {
-        "type": "item",
-        "probability": 1,
-        "count": 1,
-        "itemName": "Spawning Staff"
       }
     ],
     "questTags": [
@@ -19047,7 +19049,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Leviathan Caller's Staff"
+        "itemName": "Serpent Caller' Staff"
       },
       {
         "type": "gold",
@@ -32560,7 +32562,7 @@
     ]
   },
   {
-    "name": "Legendary Mage of the Savannah",
+    "name": "Legend of the Savannah",
     "sprite": "sprites/enemy/humanoid/human/wizard/white_wiz2.atlas",
     "deck": [
       "decks/standard/legendary_savannah.dck"
@@ -32607,7 +32609,7 @@
     ]
   },
   {
-    "name": "Legendary Mage of the Taiga",
+    "name": "Legend of the Taiga",
     "sprite": "sprites/enemy/humanoid/human/wizard/green_wiz2.atlas",
     "deck": [
       "decks/standard/legendary_taiga.dck"
@@ -32654,7 +32656,7 @@
     ]
   },
   {
-    "name": "Legendary Mage of the Tundra",
+    "name": "Legend of the Tundra",
     "sprite": "sprites/enemy/humanoid/human/wizard/blue_wiz2.atlas",
     "deck": [
       "decks/standard/legendary_tundra.dck"
@@ -32701,7 +32703,7 @@
     ]
   },
   {
-    "name": "Legendary Mage of the Badlands",
+    "name": "Legend of the Badlands",
     "sprite": "sprites/enemy/humanoid/human/wizard/red_wiz2.atlas",
     "deck": [
       "decks/standard/legendary_badlands.dck"
@@ -32748,7 +32750,7 @@
     ]
   },
   {
-    "name": "Legendary Mage of the Underground Sea",
+    "name": "Legend of the Underground Sea",
     "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz2.atlas",
     "deck": [
       "decks/standard/legendary_undergroundsea.dck"
@@ -34881,6 +34883,12 @@
     "difficulty": 0.1,
     "speed": 24,
     "life": 25,
+    "startBattleWith": [
+      "Swamp|2ED",
+      "Swamp|2ED",
+      "Swamp|2ED",
+      "Uncle Istvan|DRK"
+    ],
     "rewards": [
       {
         "type": "deckCard",
@@ -34946,6 +34954,14 @@
     "difficulty": 0.1,
     "speed": 24,
     "life": 25,
+    "startBattleWith": [
+      "Plains|2ED",
+      "Plains|2ED",
+      "Plains|2ED",
+      "Preacher|DRK",
+      "Exorcist|DRK",
+      "Witch Hunter|DRK"
+    ],
     "rewards": [
       {
         "type": "deckCard",
@@ -35011,6 +35027,13 @@
     "difficulty": 0.1,
     "speed": 24,
     "life": 25,
+    "startBattleWith": [
+      "Lake of the Dead|ALL",
+      "Everglades|VIS",
+      "Nightstalker Engine|PO2",
+      "Feral Shadow|MIR",
+      "Breathstealer|MIR"
+    ],
     "rewards": [
       {
         "type": "deckCard",
@@ -35135,6 +35158,10 @@
     "difficulty": 0.1,
     "speed": 24,
     "life": 25,
+    "startBattleWith": [
+      "Chainer, Dementia Master|TOR",
+      "Cabal Coffers|TOR"
+    ],
     "rewards": [
       {
         "type": "deckCard",
@@ -35303,7 +35330,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Bog Glider"
+        "itemName": "Bog Glider Greaves"
       }
     ],
     "colors": "B",
