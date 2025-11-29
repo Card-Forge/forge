@@ -3,6 +3,6 @@ ManaCost:4 G G
 Types:Sorcery
 A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 3 | Choices$ DestroyArtifact,DestroyEnchantment,DestroyLand
 SVar:DestroyArtifact:DB$ Destroy | ValidTgts$ Artifact | SpellDescription$ Destroy target artifact.
-SVar:DestroyEnchantment:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
+SVar:DestroyEnchantment:DB$ Destroy | ValidTgts$ Enchantment | SpellDescription$ Destroy target enchantment.
 SVar:DestroyLand:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
 Oracle:Choose one or more —\n• Destroy target artifact.\n• Destroy target enchantment.\n• Destroy target land.
