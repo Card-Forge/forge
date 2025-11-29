@@ -578,7 +578,7 @@ public class MultiLineLabelUI extends BasicLabelUI implements ComponentListener 
         }
 
         final int width = MultiLineLabelUI.paintTextR.width;
-        final int p = p0 + Utilities.getBreakLocation(segment, this.metrics, 0, width, null, p0);
+        final int p = p0 + Utilities.getBreakLocation(segment, this.metrics, 0.0f, (float) width, null, p0);
         SegmentCache.releaseSegment(segment);
         return p;
     }

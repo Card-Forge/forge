@@ -28,7 +28,7 @@ public class InferenceFactory {
     public static Inference getInstance(InferenceMethod method) {
         Inference clazz = null;
         try {
-            clazz = (Inference)Class.forName(method.toString()).newInstance();
+            clazz = (Inference)Class.forName(method.toString()).getDeclaredConstructor().newInstance();
         } catch (ReflectiveOperationException roe) {
             roe.printStackTrace();
         }

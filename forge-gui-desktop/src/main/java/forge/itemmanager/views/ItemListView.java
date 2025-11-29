@@ -388,7 +388,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 clipboard.setContents(selection, selection);
             };
 
-            final KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(), false);
+            final KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx(), false);
             this.registerKeyboardAction(listener, "Copy", stroke, JComponent.WHEN_FOCUSED);
         }
         @Override

@@ -10,7 +10,7 @@ public class FloatSpinner extends JSpinner{
     }
     public FloatSpinner(float min,float max,float stepSize)
     {
-        super(new SpinnerNumberModel(new Float(0.0f), new Float(min), new Float (max), new Float(stepSize)));
+        super(new SpinnerNumberModel(Float.valueOf(0.0f), Float.valueOf(min), Float.valueOf(max), Float.valueOf(stepSize)));
     }
     public float floatValue()
     {

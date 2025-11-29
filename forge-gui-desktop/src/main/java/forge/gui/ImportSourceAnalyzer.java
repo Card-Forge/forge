@@ -26,7 +26,6 @@ import java.util.function.Predicate;
 
 import forge.card.CardDb;
 import forge.item.PaperCardPredicates;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -109,11 +108,11 @@ public class ImportSourceAnalyzer {
 
                 if (file.isFile()) {
                     final String filename = file.getName();
-                    if (StringUtils.endsWithIgnoreCase(filename, ".dck")) {
+                    if (Strings.CI.endsWith(filename, ".dck")) {
                         analyzeDecksDir(root);
                         numUnhandledFiles = 0;
                         break;
-                    } else if (StringUtils.endsWithIgnoreCase(filename, ".jpg")) {
+                    } else if (Strings.CI.endsWith(filename, ".jpg")) {
                         analyzeCardPicsDir(root);
                         numUnhandledFiles = 0;
                         break;
@@ -169,7 +168,7 @@ public class ImportSourceAnalyzer {
             void onFile(final File file) {
                 // we don't really expect any files in here, but if we find a .dck file, add it to the unknown list
                 final String filename = file.getName();
-                if (StringUtils.endsWithIgnoreCase(filename, ".dck")) {
+                if (Strings.CI.endsWith(filename, ".dck")) {
                     final File targetFile = new File(lcaseExt(filename));
                     cb.addOp(OpType.UNKNOWN_DECK, file, targetFile);
                 }
@@ -223,7 +222,7 @@ public class ImportSourceAnalyzer {
             @Override
             void onFile(final File file) {
                 final String filename = file.getName();
-                if (StringUtils.endsWithIgnoreCase(filename, ".dck")) {
+                if (Strings.CI.endsWith(filename, ".dck")) {
                     final File targetFile = new File(targetDir, lcaseExt(filename));
                     if (!file.equals(targetFile)) {
                         cb.addOp(opType, file, targetFile);
@@ -250,7 +249,7 @@ public class ImportSourceAnalyzer {
             void onFile(final File file) {
                 // find *.dat files, but exclude LOCKED_*
                 final String filename = file.getName();
-                if (StringUtils.endsWithIgnoreCase(filename, ".dat") && !filename.startsWith("LOCKED_")) {
+                if (Strings.CI.endsWith(filename, ".dat") && !filename.startsWith("LOCKED_")) {
                     final File targetFile = new File(ForgeConstants.GAUNTLET_DIR.userPrefLoc, lcaseExt(filename));
                     if (!file.equals(targetFile)) {
                         cb.addOp(OpType.GAUNTLET_DATA, file, targetFile);
@@ -270,7 +269,7 @@ public class ImportSourceAnalyzer {
             void onFile(final File file) {
                 // find *_preferred.xml files
                 final String filename = file.getName();
-                if (StringUtils.endsWithIgnoreCase(filename, "_preferred.xml")) {
+                if (Strings.CI.endsWith(filename, "_preferred.xml")) {
                     final File targetFile = new File(ForgeConstants.USER_PREFS_DIR,
                             file.getName().toLowerCase(Locale.ENGLISH).replace("_preferred", ""));
                     cb.addOp(OpType.PREFERENCE_FILE, file, targetFile);
@@ -415,8 +414,8 @@ public class ImportSourceAnalyzer {
                 }
                 if (validFilenames.containsKey(filename)) {
                     return validFilenames.get(filename);
-                } else if (StringUtils.endsWithIgnoreCase(filename, ".jpg")
-                        || StringUtils.endsWithIgnoreCase(filename, ".png")) {
+                } else if (Strings.CI.endsWith(filename, ".jpg")
+                        || Strings.CI.endsWith(filename, ".png")) {
                     return filename;
                 }
                 return null;
@@ -564,7 +563,7 @@ public class ImportSourceAnalyzer {
             @Override
             void onFile(final File file) {
                 final String filename = file.getName();
-                if (StringUtils.endsWithIgnoreCase(filename, ".dat")) {
+                if (Strings.CI.endsWith(filename, ".dat")) {
                     final File targetFile = new File(ForgeConstants.QUEST_SAVE_DIR, lcaseExt(filename));
                     if (!file.equals(targetFile)) {
                         cb.addOp(OpType.QUEST_DATA, file, targetFile);

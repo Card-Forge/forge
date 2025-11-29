@@ -454,7 +454,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                     KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, InputEvent.META_DOWN_MASK | InputEvent.CTRL_DOWN_MASK),
                     () -> getNextItemManager().focus());
             GuiUtils.addMenuItem(menu, localizer.getMessage("lblJumptotextfilter"),
-                    KeyStroke.getKeyStroke(KeyEvent.VK_F, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                    KeyStroke.getKeyStroke(KeyEvent.VK_F, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()),
                     () -> getItemManager().focusSearch());
         }
 
@@ -568,11 +568,11 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             if (this.menu.getComponentCount() > 0) {
                 this.menu.addSeparator();
             }
-            //yes, CTRL_DOWN_MASK and not getMenuShortcutKeyMask().  On OSX, cmd-space is hard-coded to bring up Spotlight
+            //yes, CTRL_DOWN_MASK and not getMenuShortcutKeyMaskEx().  On OSX, cmd-space is hard-coded to bring up Spotlight
             addItems(verb, dest, true, InputEvent.CTRL_DOWN_MASK,
-                    //getMenuShortcutKeyMask() instead of CTRL_DOWN_MASK since on OSX, ctrl-shift-space brings up the window manager
-                    InputEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(),
-                    InputEvent.ALT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+                    //getMenuShortcutKeyMaskEx() instead of CTRL_DOWN_MASK since on OSX, ctrl-shift-space brings up the window manager
+                    InputEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx(),
+                    InputEvent.ALT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx());
         }
         public void addSetColorID() {
             String label = localizer.getMessage("lblColorIdentity");

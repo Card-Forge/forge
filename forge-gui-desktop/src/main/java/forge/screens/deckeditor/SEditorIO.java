@@ -2,7 +2,6 @@ package forge.screens.deckeditor;
 
 import forge.screens.deckeditor.controllers.*;
 import forge.screens.deckeditor.views.*;
-import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableList;
 
@@ -13,6 +12,7 @@ import forge.gui.framework.FScreen;
 import forge.model.FModel;
 import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
+import org.apache.commons.lang3.Strings;
 
 /** 
  * Handles editor preferences saving and loading.
@@ -40,7 +40,7 @@ public class SEditorIO {
         }
         // Confirm if overwrite
         else if (controller.fileExists(name)) {
-            if (!StringUtils.equals(name, controller.getModelName())) { // prompt only if name was changed
+            if (!Strings.CS.equals(name, controller.getModelName())) { // prompt only if name was changed
                 performSave = FOptionPane.showConfirmDialog(
                     Localizer.getInstance().getMessage("lblAlreadyDeckName") + name + Localizer.getInstance().getMessage("lblOverwriteConfirm"),
                     Localizer.getInstance().getMessage("lblOverwriteDeck"));

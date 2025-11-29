@@ -11,7 +11,7 @@ public class IntSpinner extends JSpinner {
     }
     public IntSpinner(int min,int max,int stepSize)
     {
-        super(new SpinnerNumberModel(new Integer(0), new Integer(min), new Integer (max), new Integer(stepSize)));
+        super(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(min), Integer.valueOf(max), Integer.valueOf(stepSize)));
     }
     public int intValue()
     {

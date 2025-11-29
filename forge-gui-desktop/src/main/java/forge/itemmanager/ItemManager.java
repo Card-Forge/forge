@@ -218,7 +218,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
             } else {
                 final JMenu addMenu = GuiUtils.createMenu(Localizer.getInstance().getMessage("lblAddOrEditFilter"));
                 GuiUtils.addMenuItem(addMenu, Localizer.getInstance().getMessage("lblCurrentTextSearch"),
-                        KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                        KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()),
                         cmdAddCurrentSearch, !mainSearchFilter.isEmpty());
                 if (config != ItemManagerConfig.STRING_ONLY) {
                     buildAddFilterMenu(addMenu);

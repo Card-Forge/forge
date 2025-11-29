@@ -15,7 +15,7 @@ public final class MenuUtil {
     private MenuUtil() { }
 
     // Get appropriate OS standard accelerator key for menu shortcuts.
-    private static final int DEFAULT_MenuShortcutKeyMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+    private static final int DEFAULT_MenuShortcutKeyMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx();
 
     public static void openUrlInBrowser(String url) {
         try {
