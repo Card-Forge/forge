@@ -3,7 +3,7 @@ ManaCost:W U B R G
 Types:Legendary Planeswalker Urza
 Loyalty:4
 A:AB$ GenericChoice | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | AtRandom$ Urza | ShowChoice$ Description | Choices$ Pump1,PutCounter2,Destroy3,Token4,Token5,Token6,Dig7,MustAttack8,PutCounter9,Effect10,Exile11,Dig12,Animate13,Draw14,Animate15,PumpAll16,Dig17,DealDamage18,Animate19,Mana20 | ShowChoice$ Description | StackDescription$ SpellDescription | SpellDescription$ Head to AskUrza.com and click +1.
-SVar:Pump1:DB$ Pump | TargetMin$ 0 | TargetMax$ 1 | KW$ First Strike & Vigilance & Lifelink | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | KW$ First Strike & Vigilance & Lifelink | SpellDescription$ Until end of turn, up to one target creature gets +1/+1 and gains first strike, vigilance, and lifelink.
+SVar:Pump1:DB$ Pump | TargetMin$ 0 | TargetMax$ 1 | KW$ First Strike & Vigilance & Lifelink | ValidTgts$ Creature | NumAtt$ +1 | NumDef$ +1 | KW$ First Strike & Vigilance & Lifelink | SpellDescription$ Until end of turn, up to one target creature gets +1/+1 and gains first strike, vigilance, and lifelink.
 SVar:PutCounter2:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to distribute counters to | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ Distribute three +1/+1 counters among one, two, or three target creatures you control.
 SVar:Destroy3:DB$ Destroy | ValidTgts$ Permanent.nonCreature | TgtPrompt$ Select target noncreature permanent | SpellDescription$ Destroy target noncreature permanent.
 SVar:Token4:DB$ Token | TokenAmount$ 2 | TokenScript$ r_3_1_elemental_haste | AtEOT$ Exile | SpellDescription$ Create two 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step.
@@ -35,10 +35,10 @@ SVar:Mana20:DB$ Mana | Produced$ Combo Any | Amount$ X20 | SpellDescription$ Add
 SVar:X20:Count$Valid Creature.YouCtrl
 A:AB$ GenericChoice | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | AtRandom$ Urza | ShowChoice$ Description | Choices$ DamageAll1M,GainControl2M,DealDamage3M,Destroy4M,Effect5M,ChangeZone6M,Draw7M,Mill8M,Dig9M,Exile10M,Reveal11M,Tutor12M,Sacrifice13M,Token14M,Token15M,SetLife16M,Destroy17M,Return18M,Token19M,Draw20M | ShowChoice$ Description | StackDescription$ SpellDescription | SpellDescription$ Head to AskUrza.com and click -1.
 SVar:DamageAll1M:DB$ DamageAll | NumDmg$ 3 | ValidCards$ Creature | SpellDescription$ NICKNAME deals 3 damage to each creature.
-SVar:GainControl2M:DB$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Gain control of target creature.
+SVar:GainControl2M:DB$ GainControl | ValidTgts$ Creature | SpellDescription$ Gain control of target creature.
 SVar:DealDamage3M:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | SubAbility$ DBGainLife3M | SpellDescription$ NICKNAME deals 4 damage to any target and you gain 4 life.
 SVar:DBGainLife3M:DB$ GainLife | Defined$ You | LifeAmount$ 4
-SVar:Destroy4M:DB$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife4M | SpellDescription$ Destroy target creature. You gain life equal to its toughness.
+SVar:Destroy4M:DB$ Destroy | ValidTgts$ Creature | SubAbility$ DBGainLife4M | SpellDescription$ Destroy target creature. You gain life equal to its toughness.
 SVar:DBGainLife4M:DB$ GainLife | Defined$ You | LifeAmount$ X4M
 SVar:X4M:Targeted$CardToughness
 SVar:Effect5M:DB$ Effect | Name$ Emblem — Urza, Academy Headmaster (5M) | StaticAbilities$ STPump5M | Duration$ Permanent | SpellDescription$ You get an emblem with "Creatures you control get +1/+1."
