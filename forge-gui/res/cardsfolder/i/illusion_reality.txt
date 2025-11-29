@@ -11,5 +11,5 @@ ALTERNATE
 Name:Reality
 ManaCost:2 G
 Types:Instant
-A:SP$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
+A:SP$ Destroy | ValidTgts$ Artifact | SpellDescription$ Destroy target artifact.
 Oracle:Destroy target artifact.

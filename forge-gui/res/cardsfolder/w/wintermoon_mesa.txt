@@ -4,6 +4,6 @@ Types:Land
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Tap | Cost$ 2 T Sac<1/CARDNAME> | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select target land | ValidTgts$ Land | SpellDescription$ Tap two target lands.
+A:AB$ Tap | Cost$ 2 T Sac<1/CARDNAME> | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Land | SpellDescription$ Tap two target lands.
 AI:RemoveDeck:Random
 Oracle:Wintermoon Mesa enters tapped.\n{T}: Add {C}.\n{2}, {T}, Sacrifice Wintermoon Mesa: Tap two target lands.

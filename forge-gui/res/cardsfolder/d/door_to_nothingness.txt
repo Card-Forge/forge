@@ -3,6 +3,6 @@ ManaCost:5
 Types:Artifact
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-A:AB$ LosesGame | Cost$ W W U U B B R R G G T Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player loses the game.
+A:AB$ LosesGame | Cost$ W W U U B B R R G G T Sac<1/CARDNAME> | ValidTgts$ Player | SpellDescription$ Target player loses the game.
 AI:RemoveDeck:Random
 Oracle:Door to Nothingness enters tapped.\n{W}{W}{U}{U}{B}{B}{R}{R}{G}{G}, {T}, Sacrifice Door to Nothingness: Target player loses the game.

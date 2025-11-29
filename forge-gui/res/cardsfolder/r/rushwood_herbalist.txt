@@ -2,6 +2,6 @@ Name:Rushwood Herbalist
 ManaCost:2 G
 Types:Creature Human Spellshaper
 PT:2/2
-A:AB$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Cost$ G T Discard<1/Card> | SpellDescription$ Regenerate target creature.
+A:AB$ Regenerate | ValidTgts$ Creature | Cost$ G T Discard<1/Card> | SpellDescription$ Regenerate target creature.
 AI:RemoveDeck:All
 Oracle:{G}, {T}, Discard a card: Regenerate target creature.

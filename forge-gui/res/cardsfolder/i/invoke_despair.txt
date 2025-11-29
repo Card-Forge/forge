@@ -1,7 +1,7 @@
 Name:Invoke Despair
 ManaCost:1 B B B B
 Types:Sorcery
-A:SP$ Sacrifice | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ DBLoseLifeC | StackDescription$ {p:Targeted} sacrifices a creature. | SpellDescription$ Target opponent sacrifices a creature.
+A:SP$ Sacrifice | ValidTgts$ Opponent | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ DBLoseLifeC | StackDescription$ {p:Targeted} sacrifices a creature. | SpellDescription$ Target opponent sacrifices a creature.
 SVar:DBLoseLifeC:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 2 | SubAbility$ DBDrawC | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | StackDescription$ SpellDescription | SpellDescription$ If they can't, they lose 2 life
 SVar:DBDrawC:DB$ Draw | NumCards$ 1 | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanC | StackDescription$ and {p:You} draws a card. | SpellDescription$ and you draw a card.
 SVar:DBCleanC:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBSacrificeE

@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Artifact
 T:Mode$ ChangesZone | ValidCard$ Card.Self,Artifact.Other+YouCtrl | Destination$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever CARDNAME or another artifact you control enters, put a charge counter on CARDNAME.
 SVar:TrigCounter:DB$ PutCounter | CounterType$ CHARGE | CounterNum$ 1
-A:AB$ DealDamage | Cost$ 4 Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ X | SubAbility$ DBDamage | SpellDescription$ It deals damage equal to the number of charge counters on it to target player and that much damage to up to one target creature.
+A:AB$ DealDamage | Cost$ 4 Sac<1/CARDNAME> | ValidTgts$ Player | NumDmg$ X | SubAbility$ DBDamage | SpellDescription$ It deals damage equal to the number of charge counters on it to target player and that much damage to up to one target creature.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | NumDmg$ X
 SVar:X:Count$CardCounters.CHARGE
 SVar:BuffedBy:Artifact

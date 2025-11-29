@@ -2,7 +2,7 @@ Name:Fain, the Broker
 ManaCost:2 B
 Types:Legendary Creature Human Warlock
 PT:3/3
-A:AB$ PutCounter | Cost$ T Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on target creature.
+A:AB$ PutCounter | Cost$ T Sac<1/Creature> | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on target creature.
 A:AB$ Token | Cost$ T RemoveAnyCounter<1/Any/Creature.YouCtrl/a creature you control> | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token.
 A:AB$ Token | Cost$ T Sac<1/Artifact> | TokenScript$ wb_2_1_inkling_flying | SpellDescription$ Create a 2/1 white and black Inkling creature token with flying.
 A:AB$ Untap | Cost$ 3 B | SpellDescription$ Untap CARDNAME.

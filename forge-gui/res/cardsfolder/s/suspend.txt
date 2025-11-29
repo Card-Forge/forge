@@ -1,7 +1,7 @@
 Name:Suspend
 ManaCost:U
 Types:Instant
-A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | WithCountersType$ TIME | WithCountersAmount$ 2 | RememberChanged$ True | SubAbility$ DBPump | StackDescription$ Exile {c:Targeted} and put two time counters on it. | SpellDescription$ Exile target creature and put two time counters on it. If it doesn't have suspend, it gains suspend.
+A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | WithCountersType$ TIME | WithCountersAmount$ 2 | RememberChanged$ True | SubAbility$ DBPump | StackDescription$ Exile {c:Targeted} and put two time counters on it. | SpellDescription$ Exile target creature and put two time counters on it. If it doesn't have suspend, it gains suspend.
 SVar:DBPump:DB$ Pump | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card.withoutSuspend | PumpZone$ Exile | KW$ Suspend | Duration$ Permanent | SubAbility$ DBCleanup | StackDescription$ If it doesn't have suspend, it gains suspend.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Counters

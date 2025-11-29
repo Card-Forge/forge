@@ -2,7 +2,7 @@ Name:Foam Weapons Kiosk
 ManaCost:no cost
 Types:Artifact Attraction
 K:Visit:TrigCounter
-SVar:TrigCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature you control. It gains Vigilance until end of turn.
+SVar:TrigCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature you control. It gains Vigilance until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Vigilance
 DeckHas:Ability$Counters
 Oracle:Visit — Put a +1/+1 counter on target creature you control. That creature gains vigilance until end of turn.

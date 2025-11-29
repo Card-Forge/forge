@@ -6,7 +6,7 @@ S:Mode$ Continuous | CharacteristicDefining$ True | IsPresent$ Card.Self+!attack
 SVar:X:Count$Valid Forest.YouCtrl
 S:Mode$ Continuous | CharacteristicDefining$ True | IsPresent$ Card.Self+attacking | SetPower$ Y | SetToughness$ Y
 SVar:Y:Count$Valid Forest.DefenderCtrl
-A:AB$ Animate | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ Forest | RemoveLandTypes$ True | Duration$ UntilHostLeavesPlay | SpellDescription$ Target land becomes a Forest until CARDNAME leaves the battlefield.
+A:AB$ Animate | Cost$ T | ValidTgts$ Land | Types$ Forest | RemoveLandTypes$ True | Duration$ UntilHostLeavesPlay | SpellDescription$ Target land becomes a Forest until CARDNAME leaves the battlefield.
 SVar:BuffedBy:Forest
 AI:RemoveDeck:All
 DeckHints:Type$Forest & Keyword$Forestwalk & Name$Yavimaya, Cradle of Growth

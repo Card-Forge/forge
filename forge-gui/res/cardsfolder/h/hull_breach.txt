@@ -2,10 +2,10 @@ Name:Hull Breach
 ManaCost:R G
 Types:Sorcery
 A:SP$ Charm | Choices$ DBDestroy1,DBDestroy2,DBDestroy3 | CharmNum$ 1
-SVar:DBDestroy1:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
-SVar:DBDestroy2:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
-SVar:DBDestroy3:DB$ Pump | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | AILogic$ Destroy | IsCurse$ True | SubAbility$ DestroyEnch | SpellDescription$ Destroy target artifact and target enchantment. | StackDescription$ None
-SVar:DestroyEnch:DB$ Pump | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | AILogic$ Destroy | IsCurse$ True | SubAbility$ DBDestroy | StackDescription$ None
+SVar:DBDestroy1:DB$ Destroy | ValidTgts$ Artifact | SpellDescription$ Destroy target artifact.
+SVar:DBDestroy2:DB$ Destroy | ValidTgts$ Enchantment | SpellDescription$ Destroy target enchantment.
+SVar:DBDestroy3:DB$ Pump | ValidTgts$ Artifact | AILogic$ Destroy | IsCurse$ True | SubAbility$ DestroyEnch | SpellDescription$ Destroy target artifact and target enchantment. | StackDescription$ None
+SVar:DestroyEnch:DB$ Pump | ValidTgts$ Enchantment | AILogic$ Destroy | IsCurse$ True | SubAbility$ DBDestroy | StackDescription$ None
 SVar:DBDestroy:DB$ Destroy | Defined$ Targeted
 AI:RemoveDeck:All
 Oracle:Choose one —\n• Destroy target artifact.\n• Destroy target enchantment.\n• Destroy target artifact and target enchantment.

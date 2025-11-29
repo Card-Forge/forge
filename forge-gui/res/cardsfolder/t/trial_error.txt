@@ -1,7 +1,7 @@
 Name:Trial
 ManaCost:W U
 Types:Instant
-A:SP$ ChangeZoneAll | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberTargets$ True | ChangeType$ Creature.blockingRemembered,Creature.isBlockedByRemembered | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBCleanup | UseAllOriginZones$ True | SpellDescription$ Return all creatures blocking or blocked by target creature to their owner's hand.
+A:SP$ ChangeZoneAll | ValidTgts$ Creature | RememberTargets$ True | ChangeType$ Creature.blockingRemembered,Creature.isBlockedByRemembered | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBCleanup | UseAllOriginZones$ True | SpellDescription$ Return all creatures blocking or blocked by target creature to their owner's hand.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 AlternateMode:Split

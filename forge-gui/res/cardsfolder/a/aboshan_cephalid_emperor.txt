@@ -2,6 +2,6 @@ Name:Aboshan, Cephalid Emperor
 ManaCost:4 U U
 Types:Legendary Creature Octopus Noble
 PT:3/3
-A:AB$ Tap | Cost$ tapXType<1/Octopus> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Tap target permanent.
+A:AB$ Tap | Cost$ tapXType<1/Octopus> | ValidTgts$ Permanent | SpellDescription$ Tap target permanent.
 A:AB$ TapAll | Cost$ U U U | ValidCards$ Creature.withoutFlying | SpellDescription$ Tap all creatures without flying.
 Oracle:Tap an untapped Octopus you control: Tap target permanent.\n{U}{U}{U}: Tap all creatures without flying.

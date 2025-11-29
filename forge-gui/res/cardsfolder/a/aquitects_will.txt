@@ -1,7 +1,7 @@
 Name:Aquitect's Will
 ManaCost:U
 Types:Kindred Sorcery Merfolk
-A:SP$ PutCounter | ValidTgts$ Land | TgtPrompt$ Select target land | CounterType$ FLOOD | CounterNum$ 1 | SubAbility$ DBEffect | SpellDescription$ Put a flood counter on target land. That land is an island in addition to its other types for as long as it has a flood counter on it. If you control a Merfolk, draw a card.
+A:SP$ PutCounter | ValidTgts$ Land | CounterType$ FLOOD | CounterNum$ 1 | SubAbility$ DBEffect | SpellDescription$ Put a flood counter on target land. That land is an island in addition to its other types for as long as it has a flood counter on it. If you control a Merfolk, draw a card.
 SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ FountainStatic | ForgetOnMoved$ Battlefield | ForgetCounter$ FLOOD | Duration$ Permanent | SubAbility$ DBDraw
 SVar:FountainStatic:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Island | Description$ That land is an island in addition to its other types for as long as it has a flood counter on it.
 SVar:DBDraw:DB$ Draw | ConditionPresent$ Merfolk.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control a Merfolk,

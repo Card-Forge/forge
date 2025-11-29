@@ -2,7 +2,7 @@ Name:Far
 ManaCost:1 U
 Types:Instant
 K:Fuse
-A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
 AlternateMode:Split
 Oracle:Return target creature to its owner's hand.\nFuse (You may cast one or both halves of this card from your hand.)
 

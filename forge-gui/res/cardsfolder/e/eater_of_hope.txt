@@ -4,7 +4,7 @@ Types:Creature Demon
 PT:6/4
 K:Flying
 A:AB$ Regenerate | Cost$ B Sac<1/Creature.Other/another creature> | SpellDescription$ Regenerate CARDNAME.
-A:AB$ Destroy | Cost$ 2 B Sac<2/Creature.Other/other creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
+A:AB$ Destroy | Cost$ 2 B Sac<2/Creature.Other/other creature> | ValidTgts$ Creature | SpellDescription$ Destroy target creature.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 Oracle:Flying\n{B}, Sacrifice another creature: Regenerate Eater of Hope.\n{2}{B}, Sacrifice two other creatures: Destroy target creature.
