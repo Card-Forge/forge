@@ -2,7 +2,7 @@ Name:Memnarch
 ManaCost:7
 Types:Legendary Artifact Creature Wizard
 PT:4/5
-A:AB$ Animate | Cost$ 1 U U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Types$ Artifact | Duration$ Permanent | SpellDescription$ Target permanent becomes an artifact in addition to its other types. (This effect lasts indefinitely.)
+A:AB$ Animate | Cost$ 1 U U | ValidTgts$ Permanent | Types$ Artifact | Duration$ Permanent | SpellDescription$ Target permanent becomes an artifact in addition to its other types. (This effect lasts indefinitely.)
 A:AB$ GainControl | Cost$ 3 U | ValidTgts$ Artifact | SpellDescription$ Gain control of target artifact. (This effect lasts indefinitely.)
 AI:RemoveDeck:Random
 Oracle:{1}{U}{U}: Target permanent becomes an artifact in addition to its other types. (This effect lasts indefinitely.)\n{3}{U}: Gain control of target artifact. (This effect lasts indefinitely.)
