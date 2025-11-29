@@ -18,3 +18,8 @@ Name=Slime Mother
 2 Terror|LEA
 2 Lightning Bolt|LEA
 4 Rancor|ULG
+
+[StartInBattle_Reference]
+1 Mountain|PALP
+1 Forest|PALP
+1 Swamp|PALP
