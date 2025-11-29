@@ -73,7 +73,7 @@
   <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="184.25" y="217.5">
    <properties>
     <property name="effect">{ "startBattleWithCard": [ "Mox Jet|LEA", "Will-o'-the-Wisp|LEA", "Bog Imp|DRK" ] }</property>
-    <property name="enemy" value="Skavius Slaan the Lichlord" />
+    <property name="enemy" value="The Lichlord of Azar" />
     <property name="threatRange" type="int" value="60" />
    </properties>
   </object>

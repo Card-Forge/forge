@@ -5652,7 +5652,7 @@
       "Mountain|UGL",
       "Poultrygeist|UGL",
       "Chicken Egg|UGL",
-      "Chicken à la King|UGL"
+      "Chicken \u00e0 la King|UGL"
     ],
     "rewards": [
       {
@@ -16620,7 +16620,7 @@
     "name": "The Hydra of Shandalaar",
     "sprite": "sprites/enemy/monstrosity/hydra_large.atlas",
     "deck": [
-      "decks/standard/hydraboss.dck"
+      "decks/miniboss/hydra.dck"
     ],
     "ai": "",
     "boss": true,
@@ -16698,7 +16698,8 @@
       "Giant",
       "Aberration",
       "IdentitySimic"
-    ]
+    ],
+    "gamesPerMatch": 3
   },
   {
     "name": "Holy Apparition",
@@ -33170,8 +33171,8 @@
     ]
   },
   {
-    "name": "Alsadim K'mer the Sainted One",
-    "sprite": "sprites/enemy/humanoid/human/wizard/white_wiz2.atlas",
+    "name": "The Sainted One",
+    "sprite": "sprites/enemy/humanoid/human/cleric/priest.atlas",
     "deck": [
       "decks/standard/shandalar97_white_alsadim.dck"
     ],
@@ -33232,7 +33233,8 @@
       "Legendary",
       "Boss",
       "BiomeWhite"
-    ]
+    ],
+    "gamesPerMatch": 3
   },
   {
     "name": "Shapeshifter of Shandalar",
@@ -33308,7 +33310,7 @@
     ]
   },
   {
-    "name": "Starcryst the Astral Visionary",
+    "name": "The Astral Visionary",
     "sprite": "sprites/enemy/humanoid/merfolk/merfolk_lord.atlas",
     "deck": [
       "decks/standard/shandalar97_blue_starcryst.dck"
@@ -33363,7 +33365,8 @@
       "Legendary",
       "Boss",
       "BiomeBlue"
-    ]
+    ],
+    "gamesPerMatch": 3
   },
   {
     "name": "Nether Fiend of Shandalar",
@@ -33440,8 +33443,8 @@
     ]
   },
   {
-    "name": "Skavius Slaan the Lichlord",
-    "sprite": "sprites/enemy/undead/lich_2.atlas",
+    "name": "The Lichlord of Azar",
+    "sprite": "sprites/enemy/undead/lich.atlas",
     "deck": [
       "decks/standard/shandalar97_black_skavius.dck"
     ],
@@ -33495,7 +33498,8 @@
       "Legendary",
       "Boss",
       "BiomeBlack"
-    ]
+    ],
+    "gamesPerMatch": 3
   },
   {
     "name": "Crag Hydra of Shandalar",
@@ -33572,8 +33576,8 @@
     ]
   },
   {
-    "name": "Kyzzn the Dragon Lord",
-    "sprite": "sprites/enemy/humanoid/human/shaman/chandra.atlas",
+    "name": "The Dragon Lord",
+    "sprite": "sprites/enemy/humanoid/human/wizard/red_wiz2.atlas",
     "deck": [
       "decks/standard/shandalar97_red_kyzzn.dck"
     ],
@@ -33633,7 +33637,8 @@
       "Legendary",
       "Boss",
       "BiomeRed"
-    ]
+    ],
+    "gamesPerMatch": 3
   },
   {
     "name": "Beast Master of Shandalar",
@@ -33710,8 +33715,8 @@
     ]
   },
   {
-    "name": "Morgane the Great Druid",
-    "sprite": "sprites/enemy/humanoid/elf/druid_2.atlas",
+    "name": "The Great Druid",
+    "sprite": "sprites/enemy/humanoid/elf/druid.atlas",
     "deck": [
       "decks/standard/shandalar97_green_morgane.dck"
     ],
@@ -33771,7 +33776,8 @@
       "Legendary",
       "Boss",
       "BiomeGreen"
-    ]
+    ],
+    "gamesPerMatch": 3
   },
   {
     "name": "Kiska-Ra of Shandalar",
@@ -33975,7 +33981,7 @@
   },
   {
     "name": "Arzakon, Doom of Shandalar",
-    "sprite": "sprites/enemy/aberration/emrakul.atlas",
+    "sprite": "sprites/enemy/fiend/scourgemaster.atlas",
     "deck": [
       "decks/standard/shandalar97_colorless_arzakon.dck"
     ],
@@ -34091,7 +34097,8 @@
       "Boss",
       "BiomeColorless",
       "FinalBoss"
-    ]
+    ],
+    "gamesPerMatch": 3
   },
   {
     "name": "Baron Von Gant",

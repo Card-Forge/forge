@@ -60,7 +60,7 @@
   </object>
   <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="304.49" y="112.991">
    <properties>
-    <property name="enemy" value="Morgane the Great Druid" />
+    <property name="enemy" value="The Great Druid" />
     <property name="speedModifier" type="float" value="15" />
     <property name="threatRange" type="int" value="50" />
    <property name="effect">{ "startBattleWithCard": [ "Mox Emerald|LEA", "Llanowar Elves|LEA", "Killer Bees|LEG" ] }</property></properties>

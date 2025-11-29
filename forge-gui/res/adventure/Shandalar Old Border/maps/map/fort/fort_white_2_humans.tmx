@@ -149,5 +149,5 @@
     <property name="waypoints" value="69,70" />
    </properties>
   </object>
- <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="220" y="240"><properties><property name="enemy" value="Alsadim K'mer the Sainted One" /><property name="threatRange" type="int" value="50" /><property name="effect">{ "startBattleWithCard": [ "Mox Pearl|LEA", "Rainbow Knights|PAST", "White Knight|LEA" ] }</property></properties></object></objectgroup>
+ <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="220" y="240"><properties><property name="enemy" value="The Sainted One" /><property name="threatRange" type="int" value="50" /><property name="effect">{ "startBattleWithCard": [ "Mox Pearl|LEA", "Rainbow Knights|PAST", "White Knight|LEA" ] }</property></properties></object></objectgroup>
 </map>

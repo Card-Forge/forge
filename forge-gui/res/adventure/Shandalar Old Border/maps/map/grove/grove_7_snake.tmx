@@ -70,7 +70,7 @@
   <object id="63" template="../../../../../../common/maps/obj/gold.tx" x="316.333" y="200.667" />
   <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="237.575" y="398.439">
    <properties>
-    <property name="enemy" value="Kyzzn the Dragon Lord" />
+    <property name="enemy" value="The Dragon Lord" />
     <property name="threatRange" type="int" value="50" />
    <property name="effect">{ "startBattleWithCard": [ "Mox Ruby|LEA", "Nalathni Dragon|DRC94", "Dragon Engine|ATQ" ] }</property></properties>
   </object>
