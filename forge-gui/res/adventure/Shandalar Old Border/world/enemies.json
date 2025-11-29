@@ -5646,14 +5646,6 @@
     "speed": 31,
     "scale": 0.75,
     "life": 25,
-    "startBattleWith": [
-      "Island|UGL",
-      "Forest|UGL",
-      "Mountain|UGL",
-      "Poultrygeist|UGL",
-      "Chicken Egg|UGL",
-      "Chicken \u00e0 la King|UGL"
-    ],
     "rewards": [
       {
         "type": "card",
@@ -34893,12 +34885,6 @@
     "difficulty": 0.1,
     "speed": 24,
     "life": 25,
-    "startBattleWith": [
-      "Swamp|2ED",
-      "Swamp|2ED",
-      "Swamp|2ED",
-      "Uncle Istvan|DRK"
-    ],
     "rewards": [
       {
         "type": "deckCard",
@@ -34964,14 +34950,6 @@
     "difficulty": 0.1,
     "speed": 24,
     "life": 25,
-    "startBattleWith": [
-      "Plains|2ED",
-      "Plains|2ED",
-      "Plains|2ED",
-      "Preacher|DRK",
-      "Exorcist|DRK",
-      "Witch Hunter|DRK"
-    ],
     "rewards": [
       {
         "type": "deckCard",
@@ -35037,13 +35015,6 @@
     "difficulty": 0.1,
     "speed": 24,
     "life": 25,
-    "startBattleWith": [
-      "Lake of the Dead|ALL",
-      "Everglades|VIS",
-      "Nightstalker Engine|PO2",
-      "Feral Shadow|MIR",
-      "Breathstealer|MIR"
-    ],
     "rewards": [
       {
         "type": "deckCard",
@@ -35168,10 +35139,6 @@
     "difficulty": 0.1,
     "speed": 24,
     "life": 25,
-    "startBattleWith": [
-      "Chainer, Dementia Master|TOR",
-      "Cabal Coffers|TOR"
-    ],
     "rewards": [
       {
         "type": "deckCard",
