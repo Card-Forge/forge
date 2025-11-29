@@ -3,7 +3,7 @@ ManaCost:2 R G
 Types:Sorcery
 A:SP$ Pump | ValidTgts$ Artifact | SubAbility$ DestroyCreature | AILogic$ Destroy | IsCurse$ True | SpellDescription$ Destroy target artifact, target creature, target enchantment, and target land. | StackDescription$ None
 SVar:DestroyCreature:DB$ Pump | ValidTgts$ Creature | AILogic$ Destroy | IsCurse$ True | SubAbility$ DestroyEnch | StackDescription$ None
-SVar:DestroyEnch:DB$ Pump | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | AILogic$ Destroy | IsCurse$ True | SubAbility$ DestroyLand | StackDescription$ None
+SVar:DestroyEnch:DB$ Pump | ValidTgts$ Enchantment | AILogic$ Destroy | IsCurse$ True | SubAbility$ DestroyLand | StackDescription$ None
 SVar:DestroyLand:DB$ Pump | ValidTgts$ Land | TgtPrompt$ Select target land | AILogic$ Destroy | IsCurse$ True | SubAbility$ DBDestroy | StackDescription$ None
 SVar:DBDestroy:DB$ Destroy | Defined$ Targeted
 Oracle:Destroy target artifact, target creature, target enchantment, and target land.

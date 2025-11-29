@@ -4,6 +4,6 @@ Types:Instant
 K:Escalate:G
 A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 3 | Choices$ DBDestroyArtifact,DBDestroyEnchantment,DBPump
 SVar:DBDestroyArtifact:DB$ Destroy | ValidTgts$ Artifact | SpellDescription$ Destroy target artifact.
-SVar:DBDestroyEnchantment:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
+SVar:DBDestroyEnchantment:DB$ Destroy | ValidTgts$ Enchantment | SpellDescription$ Destroy target enchantment.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | KW$ Hexproof & Indestructible | SpellDescription$ Target artifact or creature gains hexproof and indestructible until end of turn.
 Oracle:Escalate {G} (Pay this cost for each mode chosen beyond the first.)\nChoose one or more —\n• Destroy target artifact.\n• Destroy target enchantment.\n• Target creature gains hexproof and indestructible until end of turn.
