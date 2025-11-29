@@ -128,6 +128,9 @@ Hivestone
   size: 16, 16
 BattleStandard
   xy: 96, 592
+  size: 16, 16
+DragonMask
+  xy: 80, 592
   size: 16, 16 
 HiveLordArmor
   xy: 112, 0
@@ -271,6 +274,9 @@ Treasure
   xy: 48, 768
   size: 16, 16
 Shard
+  xy: 16, 608
+  size: 16, 16
+CelestialPrism
   xy: 16, 608
   size: 16, 16
 DarkAmulet
@@ -681,6 +687,9 @@ InfiltratorsMask
 JandorsSaddlebags
   xy: 112, 624
   size: 16, 16
+MedicineBag
+  xy: 112, 624
+  size: 16, 16
 JestersCap
   xy: 112, 320
   size: 16, 16
@@ -695,6 +704,9 @@ MapToTheVale
   size: 16, 16
 MemoryCrystal
   xy: 0, 608
+  size: 16, 16
+WhaleboneGlider
+  xy: 64, 608
   size: 16, 16
 MillersShoes
   xy: 128, 144

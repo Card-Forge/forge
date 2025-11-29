@@ -729,7 +729,7 @@
 		"name": "Dragon Mask",
 		"description": "Return an attacking creature to save it, draw a card.",
 		"equipmentSlot": "Neck",
-		"iconName": "CursedRing",
+		"iconName": "DragonMask",
 		"cost": 3000,
 		"effect": {
 			"startBattleWithCard": [
@@ -1183,7 +1183,7 @@
 		"name": "Medicine Bag",
 		"description": "Pay 1 and discard a card to regenerate target creature.",
 		"equipmentSlot": "Body",
-		"iconName": "UnderworldCookbook",
+		"iconName": "MedicineBag",
 		"cost": 1000,
 		"effect": {
 			"startBattleWithCard": [
@@ -2127,7 +2127,7 @@
 		"name": "Celestial Prism",
 		"description": "Pay 2 and tap to convert one mana to any color.",
 		"equipmentSlot": "Neck",
-		"iconName": "RelicAmulet",
+		"iconName": "CelestialPrism",
 		"cost": 9000,
 		"effect": {
 			"startBattleWithCard": [
@@ -2162,7 +2162,7 @@
 		"name": "Whalebone Glider",
 		"description": "Pay 2 to give target creature with power 3 or less flying.",
 		"equipmentSlot": "Boots",
-		"iconName": "MetallicBoots",
+		"iconName": "WhaleboneGlider",
 		"cost": 3000,
 		"effect": {
 			"startBattleWithCard": [
