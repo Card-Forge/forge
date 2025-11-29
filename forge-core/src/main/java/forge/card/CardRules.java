@@ -31,7 +31,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static forge.card.MagicColor.Constant.BASIC_LANDS;
-import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
 
 /**
  * A collection of methods containing full
