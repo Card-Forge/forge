@@ -26,13 +26,6 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="240.561" y="404.87" width="64" height="64">
-   <properties>
-    <property name="enemy" value="Emrakul"/>
-    <property name="speedModifier" type="float" value="30"/>
-    <property name="threatRange" type="int" value="50"/>
-   </properties>
-  </object>
   <object id="51" template="../../../../../../common/maps/obj/entry_up.tx" x="226" y="941" width="90" height="16">
    <properties>
     <property name="teleport" value=""/>

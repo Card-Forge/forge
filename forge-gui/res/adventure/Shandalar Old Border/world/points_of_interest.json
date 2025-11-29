@@ -1535,13 +1535,13 @@
 		]
 	},
 	{
-		"name": "Emrakul",
+		"name": "KaronaTemple",
 		"displayName": "Temple of the False God",
 		"type": "castle",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "colorless_castle",
-		"map": "../Shandalar Old Border/maps/map/emrakul/emrakul_legacy.tmx",
+		"map": "../Shandalar Old Border/maps/map/karona_temple/karona_legacy.tmx",
 		"radiusFactor": 0.4,
 		"questTags": [
 			"Castle",

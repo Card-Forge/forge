@@ -9875,88 +9875,8 @@
     ]
   },
   {
-    "name": "Emrakul",
-    "nameOverride": "Urza, Planeswalker",
-    "sprite": "sprites/enemy/aberration/emrakul.atlas",
-    "deck": [
-      "decks/boss/emrakul.dck"
-    ],
-    "ai": "",
-    "boss": true,
-    "flying": true,
-    "speed": 25,
-    "scale": 1.5,
-    "life": 80,
-    "rewards": [
-      {
-        "type": "gold",
-        "probability": 1,
-        "count": 5000,
-        "addMaxCount": 2500
-      },
-      {
-        "type": "item",
-        "probability": 1,
-        "count": 1,
-        "itemName": "Urza's Armor"
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Sol Ring|LEA"
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Mana Crypt|PHPR"
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Tolarian Academy|USG"
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Timetwister|LEA"
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Time Walk|LEA"
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Ancestral Recall|LEA"
-      },
-      {
-        "type": "landSketchbookShop",
-        "probability": 0.05,
-        "count": 1
-      }
-    ],
-    "equipment": [
-      "Urza Starting Setup"
-    ],
-    "colors": "C",
-    "questTags": [
-      "Huge",
-      "Eldrazi",
-      "Boss",
-      "IdentityColorless"
-    ],
-    "gamesPerMatch": 3
-  },
-  {
     "name": "White End Boss",
-    "sprite": "sprites/enemy/humanoid/human/cleric/cleric_white.atlas",
+    "sprite": "sprites/enemy/humanoid/human/cleric/cleric.atlas",
     "deck": [
       "decks/standard/white_weenie.dck"
     ],
@@ -9980,7 +9900,7 @@
   },
   {
     "name": "Blue End Boss",
-    "sprite": "sprites/enemy/humanoid/human/wizard/wizard_blue.atlas",
+    "sprite": "sprites/enemy/humanoid/human/wizard/blue_wiz2.atlas",
     "deck": [
       "decks/standard/blue_control.dck"
     ],
@@ -10004,7 +9924,7 @@
   },
   {
     "name": "Black End Boss",
-    "sprite": "sprites/enemy/humanoid/human/assassin/assassin_black.atlas",
+    "sprite": "sprites/enemy/humanoid/human/rogue/rogue.atlas",
     "deck": [
       "decks/standard/black_control.dck"
     ],
@@ -10028,7 +9948,7 @@
   },
   {
     "name": "Red End Boss",
-    "sprite": "sprites/enemy/humanoid/human/warrior/warrior_red.atlas",
+    "sprite": "sprites/enemy/humanoid/human/warrior/gladiator.atlas",
     "deck": [
       "decks/standard/red_aggro.dck"
     ],
@@ -10052,7 +9972,7 @@
   },
   {
     "name": "Green End Boss",
-    "sprite": "sprites/enemy/humanoid/elf/druid/druid_green.atlas",
+    "sprite": "sprites/enemy/humanoid/elf/druid_2.atlas",
     "deck": [
       "decks/standard/green_ramp.dck"
     ],
@@ -31697,7 +31617,7 @@
   },
   {
     "name": "Kai Budde '99",
-    "sprite": "sprites/enemy/humanoid/human/artificer/artificer.atlas",
+    "sprite": "sprites/enemy/humanoid/human/artificer/esper_artificer.atlas",
     "deck": [
       "decks/standard/wc99_kai_budde.dck"
     ],
@@ -31753,7 +31673,7 @@
   },
   {
     "name": "Jon Finkel '00",
-    "sprite": "sprites/enemy/humanoid/human/artificer/artificer.atlas",
+    "sprite": "sprites/enemy/humanoid/human/artificer/esper_artificer.atlas",
     "deck": [
       "decks/standard/wc00_jon_finkel.dck"
     ],
@@ -31949,7 +31869,7 @@
   },
   {
     "name": "Wolfgang Eder '03",
-    "sprite": "sprites/enemy/humanoid/goblin/chief.atlas",
+    "sprite": "sprites/enemy/humanoid/goblin/goblinking.atlas",
     "deck": [
       "decks/standard/wc03_wolfgang_eder.dck"
     ],
@@ -31977,7 +31897,7 @@
   },
   {
     "name": "Zak Dolan '94",
-    "sprite": "sprites/enemy/humanoid/human/noble/noble.atlas",
+    "sprite": "sprites/enemy/humanoid/human/wizard/mage.atlas",
     "deck": [
       "decks/standard/wc94_zak_dolan.dck"
     ],
@@ -32528,7 +32448,7 @@
   },
   {
     "name": "Jaya Ballard",
-    "sprite": "sprites/enemy/humanoid/human/wizard/jaya.atlas",
+    "sprite": "sprites/enemy/humanoid/human/shaman/chandra.atlas",
     "deck": [
       "decks/boss/jaya.dck"
     ],
@@ -33121,7 +33041,7 @@
   },
   {
     "name": "Domain Keeper of Cromat",
-    "sprite": "sprites/enemy/celestial/cromat_angel.atlas",
+    "sprite": "sprites/enemy/celestial/angel_2.atlas",
     "deck": [
       "decks/standard/legendary_cromat.dck"
     ],
@@ -33314,7 +33234,7 @@
   },
   {
     "name": "Shapeshifter of Shandalar",
-    "sprite": "sprites/enemy/humanoid/doppelganger.atlas",
+    "sprite": "sprites/enemy/undead/doppelganger.atlas",
     "deck": [
       "decks/standard/shandalar97_blue_shapeshifter.dck"
     ],
@@ -33577,7 +33497,7 @@
   },
   {
     "name": "Crag Hydra of Shandalar",
-    "sprite": "sprites/enemy/beast/hydra.atlas",
+    "sprite": "sprites/enemy/monstrosity/hydra.atlas",
     "deck": [
       "decks/standard/shandalar97_red_craghydra.dck"
     ],
@@ -33651,7 +33571,7 @@
   },
   {
     "name": "Kyzzn the Dragon Lord",
-    "sprite": "sprites/enemy/humanoid/human/wizard/chandra.atlas",
+    "sprite": "sprites/enemy/humanoid/human/shaman/chandra.atlas",
     "deck": [
       "decks/standard/shandalar97_red_kyzzn.dck"
     ],
@@ -33715,7 +33635,7 @@
   },
   {
     "name": "Beast Master of Shandalar",
-    "sprite": "sprites/enemy/humanoid/human/ranger/druid.atlas",
+    "sprite": "sprites/enemy/humanoid/elf/druid.atlas",
     "deck": [
       "decks/standard/shandalar97_green_beastmaster.dck"
     ],
@@ -33789,7 +33709,7 @@
   },
   {
     "name": "Morgane the Great Druid",
-    "sprite": "sprites/enemy/humanoid/elf/elf_elder.atlas",
+    "sprite": "sprites/enemy/humanoid/elf/druid_2.atlas",
     "deck": [
       "decks/standard/shandalar97_green_morgane.dck"
     ],
@@ -35455,7 +35375,7 @@
   },
   {
     "name": "Urza Planeswalker",
-    "sprite": "sprites/enemy/humanoid/human/wizard/blue_wiz3.atlas",
+    "sprite": "sprites/enemy/humanoid/human/wizard/blue_wiz2.atlas",
     "deck": [
       "decks/boss/urza.dck"
     ],
@@ -35510,7 +35430,7 @@
   },
   {
     "name": "Gaea, the Worldsoul",
-    "sprite": "sprites/enemy/humanoid/elf/elf_druid.atlas",
+    "sprite": "sprites/enemy/humanoid/elf/druid.atlas",
     "deck": [
       "decks/boss/gaea.dck"
     ],
@@ -35565,7 +35485,7 @@
   },
   {
     "name": "Serra the Benevolent",
-    "sprite": "sprites/enemy/divine/angel/angel_white.atlas",
+    "sprite": "sprites/enemy/celestial/angel_1.atlas",
     "deck": [
       "decks/boss/serra.dck"
     ],

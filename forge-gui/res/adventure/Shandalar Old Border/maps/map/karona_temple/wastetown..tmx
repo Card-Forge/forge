@@ -22,11 +22,6 @@
  <objectgroup id="4" name="Objects" visible="0" locked="1">
   <object id="47" template="../../../../../../common/maps/obj/gold.tx" x="339" y="395"/>
   <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="122" y="392"/>
-  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="197.561" y="469.87" width="64" height="64">
-   <properties>
-    <property name="enemy" value="Emrakul"/>
-   </properties>
-  </object>
   <object id="51" template="../../../../../../common/maps/obj/entry_up.tx" x="225" y="656">
    <properties>
     <property name="teleport" value=""/>

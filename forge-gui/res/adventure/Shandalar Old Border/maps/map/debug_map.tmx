@@ -47,8 +47,8 @@
   "startBattleWithCard": [ "c_0_1_eldrazi_spawn_sac", "c_0_1_eldrazi_spawn_sac", "c_0_1_eldrazi_spawn_sac", "c_0_1_eldrazi_spawn_sac" ]
  }
 }</property>
-    <property name="enemy" value="Emrakul" />
-    <property name="name" value="Emrakul, the promised rest" />
+    <property name="enemy" value="Karona" />
+    <property name="name" value="Karona, False God" />
    </properties>
   </object>
   <object id="51" template="../../../../../common/maps/obj/entry_up.tx" x="208" y="480" width="48" height="16">
@@ -120,13 +120,13 @@
         "options": [ { "name": "Awesome.", "action": [ { "setColorIdentity": "G" } ]} ]
       },
       {
-        "name":"I wanna fight Emrakul over there!",
-        "text": "Really? Oh well... your funeral.\nHEY EMMY! THIS CHUMP WANTS TO DANCE!",
+        "name":"I wanna fight Karona over there!",
+        "text": "Really? Oh well... your funeral.\nHEY KARONA! THIS CHUMP WANTS TO DANCE!",
         "condition": [ { "actorID": 50 } ],
         "options": [ { "name": "WAIT IT WAS A JOKE!!!", "action": [ { "battleWithActorID": 50 } ]} ]
       },
       {
-        "name":"Where did Emrakul go?",
+        "name":"Where did Karona go?",
         "text": "She left. Crying. You monster.",
         "condition": [ { "actorID": 50, "not": true } ],
         "options": [ { "name": "Sorry..." } ]
