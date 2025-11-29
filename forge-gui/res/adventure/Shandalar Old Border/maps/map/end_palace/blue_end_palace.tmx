@@ -87,7 +87,7 @@
 		"options":
 			[
 				{
-					"name": "Lorthos, I've done as you asked! It's time to end this!",
+					"name": "Urza, I've done as you asked! It's time to end this!",
 					"action": [ { "deleteMapObject": 55 } ],
 					"condition": [
 						{
@@ -106,7 +106,7 @@
 					"options": [ { "name": "(continue)" } ]
 				},
 				{
-                	"name": "Lorthos, I've done as you asked! It's time to end this!",
+                	"name": "Urza, I've done as you asked! It's time to end this!",
                 	"action": [ { "deleteMapObject": 55 } ],
                 	"condition": [
                 		{
@@ -159,9 +159,9 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Aether Channeler" />
+    <property name="enemy" value="Tawnos" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Dream Chisel|ONS", "Ixidor, Reality Sculptor|ONS", "Rhystic Study|PCY", "Tropical Island|LEA", "Underground Sea|LEA" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": ["Candelabra of Tawnos|ATQ", "Tawnos's Coffin|ATQ", "Tawnos's Wand|ATQ", "Tawnos's Weaponry|ATQ", "Serpent Generator|LEG", "Clay Statue|ATQ", "Mantis Engine|ULG"] }</property></properties>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="649" y="601.333">
    <properties>
@@ -173,9 +173,9 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Archmage" />
+    <property name="enemy" value="Barrin" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Island|2ED", "Mountain|2ED", "Phyrexian Tyranny|PLS", "Rhystic Study|PCY", "Swamp|2ED" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": ["Barrin, Master Wizard|USG", "Barrin's Codex|USG", "Mental Discipline|WTH", "Barren Moor|ONS"] }</property></properties>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="677.667" y="410.666">
    <properties>
@@ -187,9 +187,9 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Brain Mole" />
+    <property name="enemy" value="Rayne, Academy Chancellor" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Ambassador Laquatus|TOR", "Propaganda|TMP", "Sky Diamond|MIR" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": ["Rayne, Academy Chancellor|UDS", "Thieving Magpie|USG", "Bubbling Beebles|UDS"] }</property></properties>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="365" y="223.333">
    <properties>
@@ -201,9 +201,9 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Storm Titan" />
+    <property name="enemy" value="Karn" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Island|ONS", "Mountain|ATH", "Pendrell Mists|WTH", "Rhystic Study|PCY" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": ["Karn, Silver Golem|USG", "Treasure Trove|EXO", "Scrapheap|UDS", "Wall of Tears|STH", "Wall of Essence|STH"] }</property></properties>
   </object>
   <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="226.667" y="538">
    <properties>
@@ -233,11 +233,11 @@
    <properties>
     <property name="dialog">[
   {
-    "text": "Welcome {var=player_name}, Lorthos has been waiting eagerly for this moment.",
+    "text": "Welcome {var=player_name}, Urza has been waiting eagerly for this moment.",
     "options": [
       {
         "name": "Is that so? I guess you wouldn't mind opening that gate in front of me?",
-        "text": "I'm afraid I'm not allowed to do that, I am a mere servant of the mighty Lorthos, master of the depths of the sea.",
+        "text": "I'm afraid I'm not allowed to do that, I am a mere servant of the mighty Urza, master of the depths of the sea.",
         "options": [
           {
             "name": "What do I need to do to get passed though this gate?",
