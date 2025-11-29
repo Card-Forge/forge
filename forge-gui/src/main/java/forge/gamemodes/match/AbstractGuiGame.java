@@ -21,6 +21,7 @@ import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableTypes;
+import forge.util.FSerializableFunction;
 import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
@@ -619,7 +620,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public <T> T one(final String message, final List<T> choices) {
         return one(message, choices, null);
     }
-    public <T> T one(final String message, final List<T> choices, Function<T, String> display) {
+    public <T> T one(final String message, final List<T> choices, FSerializableFunction<T> display) {
         if (choices == null || choices.isEmpty()) {
             return null;
         }

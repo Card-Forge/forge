@@ -5,7 +5,6 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -355,7 +354,7 @@ public class ConquestAEtherScreen extends FScreen {
         private final List<T> options;
         protected T selectedOption;
 
-        private AbstractFilterButton(String caption0, T[] options0, final Function<T, String> display) {
+        private AbstractFilterButton(String caption0, T[] options0, final FSerializableFunction<T> display) {
             super(new FLabel.Builder().iconInBackground().pressedColor(FILTER_BUTTON_PRESSED_COLOR)
                     .textColor(FILTER_BUTTON_TEXT_COLOR).alphaComposite(1f).align(Align.center));
             caption = caption0;
