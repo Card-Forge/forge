@@ -72,8 +72,7 @@
    <properties>
     <property name="enemy" value="Kyzzn the Dragon Lord" />
     <property name="threatRange" type="int" value="50" />
-   <property name="effect">{ "startBattleWithCard": [ "Furnace of Rath|TMP","Rathi Dragon|TMP","Sneak Attack|USG","Ancient Tomb|TMP","Avalanche Riders|ULG" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Mox Ruby|LEA", "Nalathni Dragon|DRC94", "Dragon Engine|ATQ" ] }</property></properties>
   </object>
   <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="274.026" y="206.114">
    <properties>
@@ -143,6 +142,5 @@
   <object id="96" template="../../../../../../common/maps/obj/waypoint.tx" x="413.5" y="563.5" />
   <object id="97" template="../../../../../../common/maps/obj/waypoint.tx" x="363" y="395.5" />
   <object id="98" template="../../../../../../common/maps/obj/waypoint.tx" x="63" y="553.5" />
- <object id="99" template="../../../../../../common/maps/obj/enemy.tx" x="250" y="150"><properties><property name="enemy" value="Dracur of Shandalar" /><property name="threatRange" type="int" value="100" /><property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN" ]
-}</property></properties></object></objectgroup>
+ <object id="99" template="../../../../../../common/maps/obj/enemy.tx" x="250" y="150"><properties><property name="enemy" value="Dracur of Shandalar" /><property name="threatRange" type="int" value="100" /><property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN" ] }</property></properties></object></objectgroup>
 </map>

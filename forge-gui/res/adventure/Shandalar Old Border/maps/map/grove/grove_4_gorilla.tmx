@@ -44,8 +44,7 @@
   <object id="62" template="../../../../../../common/maps/obj/enemy.tx" x="195.864" y="101.5">
    <properties>
     <property name="displayNameOverride" value="Kogla" />
-    <property name="effect">{ "startBattleWithCard": [ "Forest|2ED","Mountain|2ED","Treetop Village|ULG","Gorilla Chieftain|ALL","Gorilla Shaman|ALL" ]
-}</property>
+    <property name="effect">{ "startBattleWithCard": [ "Forest|2ED", "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL", "Mountain|USG", "Primal Rage|STH", "Rowen|VIS", "Treetop Village|ULG" ] }</property>
     <property name="enemy" value="Gorilla" />
     <property name="speedModifier" type="float" value="40" />
     <property name="threatRange" type="int" value="50" />
@@ -56,16 +55,14 @@
     <property name="enemy" value="Gorilla" />
     <property name="speedModifier" type="float" value="4" />
     <property name="threatRange" type="int" value="50" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|2ED","Mountain|2ED","Treetop Village|ULG","Gorilla Chieftain|ALL","Gorilla Shaman|ALL" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Forest|2ED", "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL", "Mountain|USG", "Primal Rage|STH", "Rowen|VIS", "Treetop Village|ULG" ] }</property></properties>
   </object>
   <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="297.499" y="239.542">
    <properties>
     <property name="enemy" value="Gorilla" />
     <property name="threatRange" type="int" value="50" />
     <property name="waypoints" value="74,76,71,72,71,76" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|2ED","Mountain|2ED","Treetop Village|ULG","Gorilla Chieftain|ALL","Gorilla Shaman|ALL" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Forest|2ED", "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL", "Mountain|USG", "Primal Rage|STH", "Rowen|VIS", "Treetop Village|ULG" ] }</property></properties>
   </object>
   <object id="65" template="../../../../../../common/maps/obj/treasure.tx" x="152.773" y="65.0909" />
   <object id="66" template="../../../../../../common/maps/obj/booster.tx" x="196.479" y="60.7985">
@@ -104,8 +101,7 @@
   <object id="76" template="../../../../../../common/maps/obj/waypoint.tx" x="309.074" y="284.234" />
   <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="469.273" y="312.909">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Raging Gorilla|VIS"]
-}</property>
+    <property name="effect">{ "startBattleWithCard": [ "Raging Gorilla|VIS" ] }</property>
     <property name="enemy" value="Monkey" />
     <property name="threatRange" type="int" value="50" />
    </properties>
@@ -121,6 +117,5 @@
   <object id="86" template="../../../../../../common/maps/obj/collision.tx" x="-3.76536" y="-15.7273" width="580.258" height="16" />
   <object id="87" template="../../../../../../common/maps/obj/collision.tx" x="-15.2727" y="-13.7677" width="16" height="590.717" />
   <object id="88" template="../../../../../../common/maps/obj/collision.tx" x="576.545" y="-10.3585" width="16" height="590.717" />
- <object id="89" template="../../../../../../common/maps/obj/enemy.tx" x="200" y="100"><properties><property name="enemy" value="Kogla" /><property name="threatRange" type="int" value="80" /><property name="effect">{ "startBattleWithCard": [ "Snow-covered Forest|ICE","Snow-covered Forest|ICE","Snow-covered Forest|ICE" ]
-}</property></properties></object></objectgroup>
+ <object id="89" template="../../../../../../common/maps/obj/enemy.tx" x="200" y="100"><properties><property name="enemy" value="Kogla" /><property name="threatRange" type="int" value="80" /><property name="effect">{ "startBattleWithCard": [ "Snow-covered Forest|ICE" ] }</property></properties></object></objectgroup>
 </map>

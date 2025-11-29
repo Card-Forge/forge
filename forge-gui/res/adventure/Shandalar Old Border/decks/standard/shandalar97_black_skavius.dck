@@ -20,8 +20,6 @@ Name=Skavius Slaan the Lichlord of Azar
 22 Swamp|LEA
 
 [StartInBattle_Reference]
-1 Cabal Coffers|TOR
-1 Diabolic Servitude|UDS
-1 Lake of the Dead|ALL
-1 Living Death|TMP
-1 Phyrexian Negator|UDS
+1 Mox Jet|LEA
+1 Will-o'-the-Wisp|LEA
+1 Bog Imp|DRK

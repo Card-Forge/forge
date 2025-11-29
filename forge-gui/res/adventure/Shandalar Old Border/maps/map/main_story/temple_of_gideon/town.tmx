@@ -883,7 +883,7 @@
 ]
 </property>
     <property name="threatRange" type="int" value="25" />
-   </properties>
+   <property name="effect">{ "startBattleWithCard": [ "Phyrexian Arena|APC", "Swamp|TMP", "Vile Consumption|INV" ] }</property></properties>
   </object>
   <object id="214" template="../../../../../../../common/maps/obj/enemy.tx" x="544" y="128">
    <properties>
@@ -937,7 +937,7 @@
   }
 ]
 </property>
-   </properties>
+   <property name="effect">{ "startBattleWithCard": [ "Phyrexian Arena|APC", "Swamp|TMP", "Vile Consumption|INV" ] }</property></properties>
   </object>
   <object id="215" template="../../../../../../../common/maps/obj/enemy.tx" x="167" y="50">
    <properties>
@@ -1437,7 +1437,7 @@
 </property>
     <property name="threatRange" type="int" value="75" />
     <property name="waypoints" value="247,250" />
-   </properties>
+   <property name="effect">{ "startBattleWithCard": [ "Death Pit Offering" ] }</property></properties>
   </object>
   <object id="224" template="../../../../../../../common/maps/obj/enemy.tx" x="48" y="288">
    <properties>
@@ -1461,10 +1461,7 @@
         
    }
 ]</property>
-    <property name="effect">{
- "lifeModifier": 15,
- 
-}</property>
+    <property name="effect">{ "startBattleWithCard": [ "Carrion Feeder|SCG" ] }</property>
     <property name="enemy" value="Zombie Lord" />
     <property name="fleeRange" type="float" value="125" />
     <property name="hidden" type="bool" value="false" />
@@ -1584,7 +1581,7 @@
 ]
 </property>
     <property name="threatRange" type="int" value="40" />
-   </properties>
+   <property name="effect">{ "startBattleWithCard": [ "Mirror Universe|LEG|1" ] }</property></properties>
   </object>
   <object id="236" template="../../../../../../../common/maps/obj/enemy.tx" x="96" y="208">
    <properties>
@@ -1628,8 +1625,7 @@
    }
 ]
 </property>
-    <property name="effect">{ "startBattleWithCard": [ "Swamp|2ED","Cemetery Gate|HML","Cemetery Gate|HML","Cemetery Gate|HML","Cemetery Gate|HML","Crovax the Cursed|STH" ]
-}</property>
+    <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property>
     <property name="enemy" value="Vampire" />
     <property name="reward">[
   {
@@ -1893,7 +1889,7 @@
    }
 ]
 </property>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Black Market&quot;]}" />
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Black Market&quot;]}">{ "startBattleWithCard": [ "Death Pit Offering" ] }</property>
     <property name="enemy" value="Skeleton Champion" />
     <property name="hidden" type="bool" value="true" />
     <property name="pursueRange" type="float" value="60" />
@@ -1951,7 +1947,7 @@
    }
 ]
 </property>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Death Pits of Rath&quot;]}" />
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Death Pits of Rath&quot;]}">{ "startBattleWithCard": [ "Death Pit Offering" ] }</property>
     <property name="enemy" value="Skeleton Champion" />
     <property name="hidden" type="bool" value="true" />
     <property name="pursueRange" type="float" value="60" />

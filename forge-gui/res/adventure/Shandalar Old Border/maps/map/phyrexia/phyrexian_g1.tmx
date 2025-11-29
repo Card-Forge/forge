@@ -99,8 +99,7 @@
     <property name="enemy" value="Copper Host Brutalizer" />
     <property name="threatRange" value="30" />
     <property name="waypoints" value="" />
-   <property name="effect">{ "startBattleWithCard": [ "Phyrexian Arena|APC","Phyrexian War Beast|ALL","Eladamri’s Vineyard|TMP","Phyrexian Walker|VIS" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Eladamri\u2019s Vineyard|TMP", "Phyrexian Arena|APC", "Phyrexian Walker|VIS", "Phyrexian War Beast|ALL" ] }</property></properties>
   </object>
   <object id="74" template="../../../../../../common/maps/obj/treasure.tx" x="217" y="71" />
  </objectgroup>

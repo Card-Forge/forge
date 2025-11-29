@@ -90,7 +90,7 @@
    <properties>
     <property name="enemy" value="Fire Giant" />
     <property name="threatRange" type="int" value="50" />
-   </properties>
+   <property name="effect">{ "startBattleWithCard": [ "Thran Dynamo|UDS" ] }</property></properties>
   </object>
   <object id="163" template="../../../../../../common/maps/obj/waypoint.tx" x="483.175" y="416.438" />
   <object id="165" template="../../../../../../common/maps/obj/waypoint.tx" x="487.569" y="321.045" />
@@ -152,8 +152,7 @@
    <properties>
     <property name="enemy" value="Grave Titan" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|2ED","Swamp|2ED","Swamp|2ED","Swamp|2ED","Rotting Giant|ODY" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Gate to Phyrexia|ATQ", "Phyrexian Arena|APC", "Phyrexian Tower|USG", "Putrefaction|MMQ", "Rotting Giant|ODY", "Swamp", "Swamp|ONS" ] }</property></properties>
   </object>
   <object id="212" template="../../../../../../common/maps/obj/waypoint.tx" x="423.842" y="263.772" />
   <object id="213" template="../../../../../../common/maps/obj/waypoint.tx" x="472.175" y="210.105" />

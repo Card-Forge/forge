@@ -53,8 +53,7 @@
     <property name="enemy" value="Dross Grimnarch" />
     <property name="threatRange" value="50" />
     <property name="waypoints" value="" />
-   <property name="effect">{ "startBattleWithCard": [ "Phyrexian Arena|APC","Phyrexian Negator|UDS","Phyrexian Broodlings|ULG","Phyrexian Walker|VIS" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Phyrexian Arena|APC", "Phyrexian Broodlings|ULG", "Phyrexian Negator|UDS", "Phyrexian Walker|VIS" ] }</property></properties>
   </object>
   <object id="75" template="../../../../../../common/maps/obj/booster.tx" x="449.75" y="143.25">
    <properties>

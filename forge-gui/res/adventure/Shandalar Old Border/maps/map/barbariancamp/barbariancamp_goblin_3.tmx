@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="91">
  <editorsettings>
-  <export target="wastetown..tmx" format="tmx"/>
+  <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
- <tileset firstgid="22017" source="../../../../../../common/maps/tileset/dungeon/animatedtiles.tsx"/>
- <tileset firstgid="38401" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx" />
+ <tileset firstgid="22017" source="../../../../../../common/maps/tileset/dungeon/animatedtiles.tsx" />
+ <tileset firstgid="38401" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx" />
  <layer id="11" name="Collision" width="30" height="25">
   <data encoding="base64" compression="zlib">
    eJwz4WMgCZjwQTClgBQzqGUnqfZSE5Dq38Fk71ReBoYZQHyJD4JnAtnTeQmbRYzd6OYi8y9h0U8Nu0F2XEaSv8iHyscGzIlQQ4zdhOSQMbF2Ems2LnFzCtMbqfaS4zdS7TVDiwdCdoqJQjAIbAHS14Tx20vIbj4B8vy5WRS/PKE8BbL3EhlhWyyC8D8ue8lN18QCXPbT2l58ZuPDtLR3IMBA2EvrsBypdtIjnY6CgQMAxz0qnQ==
@@ -35,7 +35,7 @@
  </layer>
  <layer id="10" name="Bridge" width="30" height="25">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="base64" compression="zlib">
    eJxjYCAOzOYmUiGVAV57aeimuUCzNTgZGBK5sMuBxJHxQIGBihdYGNAyDvCBQZkeR+0d8vZqctLPrv9I5cc8GvuXnnYhg5GUfv7TOWxhYCSF8UDZOxBxO1LsBIGRlJaoYS8A+WEbLA==
@@ -44,104 +44,104 @@
  <objectgroup id="4" name="Objects">
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192.667" y="400.167" width="95.3333" height="16">
    <properties>
-    <property name="teleport" value=""/>
+    <property name="teleport" value="" />
    </properties>
   </object>
-  <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="221.583" y="19.75"/>
+  <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="221.583" y="19.75" />
   <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="386" y="129.834">
    <properties>
-    <property name="enemy" value="Goblin Stalker"/>
-    <property name="threatRange" type="int" value="60"/>
-    <property name="waypoints" value="72,70"/>
+    <property name="enemy" value="Goblin Stalker" />
+    <property name="threatRange" type="int" value="60" />
+    <property name="waypoints" value="72,70" />
    </properties>
   </object>
   <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="238.166" y="256">
    <properties>
-    <property name="enemy" value="Goblin Stalker"/>
-    <property name="speedModifier" type="float" value="5"/>
-    <property name="threatRange" type="int" value="50"/>
+    <property name="enemy" value="Goblin Stalker" />
+    <property name="speedModifier" type="float" value="5" />
+    <property name="threatRange" type="int" value="50" />
    </properties>
   </object>
   <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="284.834" y="187.5">
    <properties>
-    <property name="enemy" value="Goblin Chief"/>
-    <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value="74,73,72,63,72,73"/>
+    <property name="enemy" value="Goblin Chief" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="74,73,72,63,72,73" />
    </properties>
   </object>
   <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="319.833" y="193.334">
    <properties>
-    <property name="enemy" value="Goblin Stalker"/>
-    <property name="threatRange" type="int" value="30"/>
+    <property name="enemy" value="Goblin Stalker" />
+    <property name="threatRange" type="int" value="30" />
    </properties>
   </object>
   <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="272.167" y="262.834">
    <properties>
-    <property name="enemy" value="Goblin Stalker"/>
-    <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value="61,85"/>
+    <property name="enemy" value="Goblin Stalker" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="61,85" />
    </properties>
   </object>
   <object id="59" template="../../../../../../common/maps/obj/enemy.tx" x="137.667" y="301.333">
    <properties>
-    <property name="enemy" value="Fire Giant"/>
-    <property name="threatRange" type="int" value="30"/>
-   </properties>
+    <property name="enemy" value="Fire Giant" />
+    <property name="threatRange" type="int" value="30" />
+   <property name="effect">{ "startBattleWithCard": [ "Thran Dynamo|UDS" ] }</property></properties>
   </object>
-  <object id="60" template="../../../../../../common/maps/obj/waypoint.tx" x="8.5" y="198"/>
-  <object id="61" template="../../../../../../common/maps/obj/waypoint.tx" x="260.333" y="302.667" width="16" height="14"/>
-  <object id="63" template="../../../../../../common/maps/obj/waypoint.tx" x="411.667" y="373.5"/>
-  <object id="65" template="../../../../../../common/maps/obj/waypoint.tx" x="112.333" y="358.833"/>
+  <object id="60" template="../../../../../../common/maps/obj/waypoint.tx" x="8.5" y="198" />
+  <object id="61" template="../../../../../../common/maps/obj/waypoint.tx" x="260.333" y="302.667" width="16" height="14" />
+  <object id="63" template="../../../../../../common/maps/obj/waypoint.tx" x="411.667" y="373.5" />
+  <object id="65" template="../../../../../../common/maps/obj/waypoint.tx" x="112.333" y="358.833" />
   <object id="67" template="../../../../../../common/maps/obj/booster.tx" x="296.5" y="161.333">
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;ICE&quot;, &quot;ALL&quot;, &quot;PTK&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    "editions": [ "ICE", "ALL", "PTK" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ICE&quot;, &quot;ALL&quot;, &quot;PTK&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    "editions": [ "ICE", "ALL", "PTK" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ICE&quot;, &quot;ALL&quot;, &quot;PTK&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+    "editions": [ "ICE", "ALL", "PTK" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Rare" ]
   }
 ]
 </property>
    </properties>
   </object>
-  <object id="70" template="../../../../../../common/maps/obj/waypoint.tx" x="386.167" y="192.333" width="16" height="14"/>
-  <object id="72" template="../../../../../../common/maps/obj/waypoint.tx" x="384" y="79.1667"/>
-  <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="311" y="258.167"/>
-  <object id="75" template="../../../../../../common/maps/obj/manashards.tx" x="409.333" y="20.1667"/>
-  <object id="76" template="../../../../../../common/maps/obj/manashards.tx" x="66.5" y="63.3333"/>
+  <object id="70" template="../../../../../../common/maps/obj/waypoint.tx" x="386.167" y="192.333" width="16" height="14" />
+  <object id="72" template="../../../../../../common/maps/obj/waypoint.tx" x="384" y="79.1667" />
+  <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="311" y="258.167" />
+  <object id="75" template="../../../../../../common/maps/obj/manashards.tx" x="409.333" y="20.1667" />
+  <object id="76" template="../../../../../../common/maps/obj/manashards.tx" x="66.5" y="63.3333" />
   <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="395.833" y="356.167">
    <properties>
-    <property name="enemy" value="Phoenix"/>
-    <property name="waypoints" value="63,72,70,60"/>
+    <property name="enemy" value="Phoenix" />
+    <property name="waypoints" value="63,72,70,60" />
    </properties>
   </object>
   <object id="78" template="../../../../../../common/maps/obj/treasure.tx" x="101.333" y="69.3333">
    <properties>
     <property name="reward">[
 	{
-		&quot;type&quot;: &quot;randomCard&quot;,
-		&quot;colors&quot;: [ &quot;Red&quot; ],
-		&quot;subTypes&quot;: [ &quot;Goblin&quot; ],
-		&quot;count&quot;: 5
+		"type": "randomCard",
+		"colors": [ "Red" ],
+		"subTypes": [ "Goblin" ],
+		"count": 5
 	},
 	{
-		&quot;type&quot;: &quot;item&quot;,
-		&quot;count&quot;: 1,
-		&quot;probability&quot;: 0.2,
-		&quot;itemName&quot;: &quot;Battle Standard&quot;
+		"type": "item",
+		"count": 1,
+		"probability": 0.2,
+		"itemName": "Battle Standard"
 	}
 ]</property>
    </properties>
@@ -150,16 +150,16 @@
    <properties>
     <property name="reward">[
 	{
-		&quot;type&quot;: &quot;randomCard&quot;,
-		&quot;colors&quot;: [ &quot;Red&quot; ],
-		&quot;subTypes&quot;: [ &quot;Goblin&quot; ],
-		&quot;count&quot;: 5
+		"type": "randomCard",
+		"colors": [ "Red" ],
+		"subTypes": [ "Goblin" ],
+		"count": 5
 	},
 	{
-		&quot;type&quot;: &quot;item&quot;,
-		&quot;count&quot;: 1,
-		&quot;probability&quot;: 0.2,
-		&quot;itemName&quot;: &quot;Battle Standard&quot;
+		"type": "item",
+		"count": 1,
+		"probability": 0.2,
+		"itemName": "Battle Standard"
 	}
 ]</property>
    </properties>
@@ -168,25 +168,25 @@
    <properties>
     <property name="reward">[
 	{
-		&quot;type&quot;: &quot;randomCard&quot;,
-		&quot;colors&quot;: [ &quot;Red&quot; ],
-		&quot;subTypes&quot;: [ &quot;Goblin&quot; ],
-		&quot;count&quot;: 5
+		"type": "randomCard",
+		"colors": [ "Red" ],
+		"subTypes": [ "Goblin" ],
+		"count": 5
 	},
 	{
-		&quot;type&quot;: &quot;item&quot;,
-		&quot;count&quot;: 1,
-		&quot;probability&quot;: 0.2,
-		&quot;itemName&quot;: &quot;Battle Standard&quot;
+		"type": "item",
+		"count": 1,
+		"probability": 0.2,
+		"itemName": "Battle Standard"
 	}
 ]</property>
    </properties>
   </object>
-  <object id="85" template="../../../../../../common/maps/obj/waypoint.tx" x="290" y="211" width="16" height="14"/>
-  <object id="86" template="../../../../../../common/maps/obj/gold.tx" x="392.5" y="294.5"/>
-  <object id="87" template="../../../../../../common/maps/obj/collision.tx" x="-2.73" y="401" width="483.96" height="16"/>
-  <object id="88" template="../../../../../../common/maps/obj/collision.tx" x="-2.98" y="-16" width="483.96" height="16"/>
-  <object id="89" template="../../../../../../common/maps/obj/collision.tx" x="479.5" y="-16.472" width="16" height="434.944"/>
-  <object id="90" template="../../../../../../common/maps/obj/collision.tx" x="-17" y="-15.472" width="16" height="434.944"/>
+  <object id="85" template="../../../../../../common/maps/obj/waypoint.tx" x="290" y="211" width="16" height="14" />
+  <object id="86" template="../../../../../../common/maps/obj/gold.tx" x="392.5" y="294.5" />
+  <object id="87" template="../../../../../../common/maps/obj/collision.tx" x="-2.73" y="401" width="483.96" height="16" />
+  <object id="88" template="../../../../../../common/maps/obj/collision.tx" x="-2.98" y="-16" width="483.96" height="16" />
+  <object id="89" template="../../../../../../common/maps/obj/collision.tx" x="479.5" y="-16.472" width="16" height="434.944" />
+  <object id="90" template="../../../../../../common/maps/obj/collision.tx" x="-17" y="-15.472" width="16" height="434.944" />
  </objectgroup>
 </map>

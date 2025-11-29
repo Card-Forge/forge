@@ -113,8 +113,7 @@
    <properties>
     <property name="enemy" value="Arzakon, Doom of Shandalar" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN","Volrath's Stronghold|STH","Cursed Scroll|TMP","Nevinyrral's Disk|5ED","Karn, Silver Golem|USG" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Black Lotus|LEA", "Celestial Prism|LEA", "Clay Statue|ATQ" ] }</property></properties>
   </object>
   <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="112.666" y="348.751">
    <properties>
@@ -135,10 +134,5 @@
     <property name="threatRange" type="int" value="40" />
    </properties>
   </object>
- <object id="80" template="../../../../../../common/maps/obj/enemy.tx" x="250" y="150"><properties><property name="enemy" value="Kiska-Ra of Shandalar" /><property name="threatRange" type="int" value="100" /><property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN" ]
-}</property></properties></object><object id="81" template="../../../../../../common/maps/obj/enemy.tx" x="280" y="150"><properties><property name="enemy" value="Whim of Shandalar" /><property name="threatRange" type="int" value="100" /><property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN" ]
-}</property></properties></object><object id="82" template="../../../../../../common/maps/obj/enemy.tx" x="310" y="150"><properties><property name="enemy" value="Mandurang of Shandalar" /><property name="threatRange" type="int" value="100" /><property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN" ]
-}</property></properties></object><object id="83" template="../../../../../../common/maps/obj/enemy.tx" x="340" y="150"><properties><property name="enemy" value="Dracur of Shandalar" /><property name="threatRange" type="int" value="100" /><property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN" ]
-}</property></properties></object><object id="84" template="../../../../../../common/maps/obj/enemy.tx" x="370" y="150"><properties><property name="enemy" value="Prismat of Shandalar" /><property name="threatRange" type="int" value="100" /><property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN" ]
-}</property></properties></object></objectgroup>
+ <object id="80" template="../../../../../../common/maps/obj/enemy.tx" x="250" y="150"><properties><property name="enemy" value="Kiska-Ra of Shandalar" /><property name="threatRange" type="int" value="100" /><property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN" ] }</property></properties></object><object id="81" template="../../../../../../common/maps/obj/enemy.tx" x="280" y="150"><properties><property name="enemy" value="Whim of Shandalar" /><property name="threatRange" type="int" value="100" /><property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN" ] }</property></properties></object><object id="82" template="../../../../../../common/maps/obj/enemy.tx" x="310" y="150"><properties><property name="enemy" value="Mandurang of Shandalar" /><property name="threatRange" type="int" value="100" /><property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN" ] }</property></properties></object><object id="83" template="../../../../../../common/maps/obj/enemy.tx" x="340" y="150"><properties><property name="enemy" value="Dracur of Shandalar" /><property name="threatRange" type="int" value="100" /><property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN" ] }</property></properties></object><object id="84" template="../../../../../../common/maps/obj/enemy.tx" x="370" y="150"><properties><property name="enemy" value="Prismat of Shandalar" /><property name="threatRange" type="int" value="100" /><property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN" ] }</property></properties></object></objectgroup>
 </map>

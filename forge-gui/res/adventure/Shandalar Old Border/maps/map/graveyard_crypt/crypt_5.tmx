@@ -67,14 +67,13 @@
    <properties>
     <property name="enemy" value="Vampire" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|2ED","Cemetery Gate|HML","Cemetery Gate|HML","Cemetery Gate|HML","Cemetery Gate|HML","Crovax the Cursed|STH" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property></properties>
   </object>
   <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="205.333" y="521.333">
    <properties>
     <property name="enemy" value="Lich" />
     <property name="threatRange" type="int" value="40" />
-   </properties>
+   <property name="effect">{ "startBattleWithCard": [ "Mirror Universe|LEG|1" ] }</property></properties>
   </object>
   <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="414.333" y="664">
    <properties>
@@ -257,7 +256,7 @@
     <property name="enemy" value="Adept Black Wizard" />
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="75,74" />
-   </properties>
+   <property name="effect">{ "startBattleWithCard": [ "Wall of Bone|LEA|1" ] }</property></properties>
   </object>
   <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="304.333" y="774.333" />
   <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="307.667" y="240.667" />
@@ -301,6 +300,5 @@
 ]</property>
    </properties>
   </object>
- <object id="82" template="../../../../../../common/maps/obj/enemy.tx" x="250" y="150"><properties><property name="enemy" value="Mandurang of Shandalar" /><property name="threatRange" type="int" value="100" /><property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN" ]
-}</property></properties></object></objectgroup>
+ <object id="82" template="../../../../../../common/maps/obj/enemy.tx" x="250" y="150"><properties><property name="enemy" value="Mandurang of Shandalar" /><property name="threatRange" type="int" value="100" /><property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN" ] }</property></properties></object></objectgroup>
 </map>

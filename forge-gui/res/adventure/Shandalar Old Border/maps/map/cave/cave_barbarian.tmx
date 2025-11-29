@@ -43,8 +43,7 @@
     <property name="enemy" value="Barbarian" />
     <property name="speedModifier" type="float" value="3" />
     <property name="threatRange" type="int" value="60" />
-   <property name="effect">{ "startBattleWithCard": [ "Mountain|2ED","Mountain|2ED","Balthor the Stout|TOR","Keldon Warlord|LEA" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Balthor the Stout|TOR", "Fervor|WTH", "Keldon Warlord|LEA", "Mountain|TMP" ] }</property></properties>
   </object>
   <object id="59" template="../../../../../../common/maps/obj/enemy.tx" x="51.0224" y="132.277">
    <properties>

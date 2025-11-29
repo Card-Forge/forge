@@ -154,8 +154,7 @@
 ]</property>
     <property name="enemy" value="Barbarian" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Mountain|2ED","Mountain|2ED","Balthor the Stout|TOR","Keldon Warlord|LEA" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Balthor the Stout|TOR", "Fervor|WTH", "Keldon Warlord|LEA", "Mountain|TMP" ] }</property></properties>
   </object>
   <object id="67" template="../../../../../../../common/maps/obj/enemy.tx" x="649.5" y="599">
    <properties>
@@ -169,8 +168,7 @@
 ]</property>
     <property name="enemy" value="Goblin King" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Mountain|2ED","Mountain|2ED","Goblin King|LEA","Goblin Trenches|APC" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Fervor|WTH", "Goblin King|LEA", "Goblin Trenches|APC", "Mountain|7ED" ] }</property></properties>
   </object>
   <object id="68" template="../../../../../../../common/maps/obj/enemy.tx" x="660" y="409.5">
    <properties>
@@ -184,8 +182,7 @@
 ]</property>
     <property name="enemy" value="Pyromancer" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Mountain|2ED","Mountain|2ED","Mountain|2ED","Smoke|LEA","Sulfuric Vortex|SCG" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Fervor|WTH", "Mountain|BRB", "Smoke|LEA", "Sulfuric Vortex|SCG" ] }</property></properties>
   </object>
   <object id="69" template="../../../../../../../common/maps/obj/enemy.tx" x="368.5" y="228.091">
    <properties>
@@ -199,7 +196,7 @@
 ]</property>
     <property name="enemy" value="Fire Giant" />
     <property name="threatRange" type="int" value="20" />
-   </properties>
+   <property name="effect">{ "startBattleWithCard": [ "Thran Dynamo|UDS" ] }</property></properties>
   </object>
   <object id="70" template="../../../../../../../common/maps/obj/enemy.tx" x="78.5" y="405.5">
    <properties>
@@ -248,7 +245,7 @@
   }
 ]</property>
     <property name="enemy" value="Dragon" />
-   </properties>
+   <property name="effect">{ "startBattleWithCard": [ "Fellwar Stone|4ED|1" ] }</property></properties>
   </object>
   <object id="75" template="../../../../../../../common/maps/obj/waypoint.tx" x="54.5" y="495" />
   <object id="76" template="../../../../../../../common/maps/obj/waypoint.tx" x="223.5" y="498.5" />
@@ -264,8 +261,7 @@
    <properties>
     <property name="enemy" value="Fire Titan" />
     <property name="threatRange" type="int" value="45" />
-   <property name="effect">{ "startBattleWithCard": [ "Mountain|2ED","Mountain|2ED","Mountain|2ED","Mountain|2ED","Loafing Giant|INV" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Fervor|WTH", "Loafing Giant|INV", "Mountain|2ED" ] }</property></properties>
   </object>
  </objectgroup>
 </map>

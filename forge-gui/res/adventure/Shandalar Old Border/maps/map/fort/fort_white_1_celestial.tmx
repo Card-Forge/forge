@@ -185,6 +185,5 @@
     <property name="threatRange" type="int" value="40" />
    </properties>
   </object>
- <object id="89" template="../../../../../../common/maps/obj/enemy.tx" x="250" y="150"><properties><property name="enemy" value="Kiska-Ra of Shandalar" /><property name="threatRange" type="int" value="100" /><property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN" ]
-}</property></properties></object></objectgroup>
+ <object id="89" template="../../../../../../common/maps/obj/enemy.tx" x="250" y="150"><properties><property name="enemy" value="Kiska-Ra of Shandalar" /><property name="threatRange" type="int" value="100" /><property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN" ] }</property></properties></object></objectgroup>
 </map>

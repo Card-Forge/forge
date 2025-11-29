@@ -40,8 +40,7 @@
     <property name="inactive" type="bool" value="true" />
     <property name="speedModifier" type="float" value="10" />
     <property name="threatRange" type="int" value="50" />
-   <property name="effect">{ "startBattleWithCard": [ "Lake of the Dead|ALL","Everglades|VIS","Nightstalker Engine|PO2","Feral Shadow|MIR","Breathstealer|MIR" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Breathstealer|MIR", "Everglades|VIS", "Feral Shadow|MIR", "Lake of the Dead|ALL", "Nightstalker Engine|PO2" ] }</property></properties>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="160" y="140">
    <properties>

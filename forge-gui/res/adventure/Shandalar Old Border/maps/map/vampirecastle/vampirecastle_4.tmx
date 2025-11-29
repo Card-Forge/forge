@@ -40,8 +40,7 @@
    <properties>
     <property name="enemy" value="Vampire" />
     <property name="waypoints" value="95,94" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|2ED","Cemetery Gate|HML","Cemetery Gate|HML","Cemetery Gate|HML","Cemetery Gate|HML","Crovax the Cursed|STH" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property></properties>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="272.917" y="202.438">
    <properties>
@@ -230,16 +229,14 @@
     <property name="enemy" value="Vampire" />
     <property name="speedModifier" type="float" value="30" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|2ED","Cemetery Gate|HML","Cemetery Gate|HML","Cemetery Gate|HML","Cemetery Gate|HML","Crovax the Cursed|STH" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property></properties>
   </object>
   <object id="93" template="../../../../../../common/maps/obj/enemy.tx" x="225.333" y="308">
    <properties>
     <property name="enemy" value="Vampire" />
     <property name="speedModifier" type="float" value="30" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|2ED","Cemetery Gate|HML","Cemetery Gate|HML","Cemetery Gate|HML","Cemetery Gate|HML","Crovax the Cursed|STH" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property></properties>
   </object>
   <object id="94" template="../../../../../../common/maps/obj/waypoint.tx" x="277.333" y="510.667" />
   <object id="95" template="../../../../../../common/maps/obj/waypoint.tx" x="545.333" y="505.333" />

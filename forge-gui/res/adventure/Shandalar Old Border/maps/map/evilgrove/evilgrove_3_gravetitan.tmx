@@ -32,8 +32,7 @@
   </object>
   <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="213.957" y="105.166">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Swamp|2ED","Swamp|2ED","Swamp|2ED","Swamp|2ED","Rotting Giant|ODY" ]
-}</property>
+    <property name="effect">{ "startBattleWithCard": [ "Gate to Phyrexia|ATQ", "Phyrexian Arena|APC", "Phyrexian Tower|USG", "Putrefaction|MMQ", "Rotting Giant|ODY", "Swamp", "Swamp|ONS" ] }</property>
     <property name="enemy" value="Grave Titan" />
    </properties>
   </object>

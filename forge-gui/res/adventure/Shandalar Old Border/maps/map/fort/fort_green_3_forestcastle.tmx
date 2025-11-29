@@ -46,20 +46,19 @@
    <properties>
     <property name="enemy" value="Master Green Wizard" />
     <property name="threatRange" type="int" value="40" />
-   </properties>
+   <property name="effect">{ "startBattleWithCard": [ "Jayemdae Tome|LEB|1" ] }</property></properties>
   </object>
   <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="111.281" y="326.714">
    <properties>
     <property name="enemy" value="Beastmaster" />
     <property name="threatRange" type="int" value="40" />
-   </properties>
+   <property name="effect">{ "startBattleWithCard": [ "Dual Nature" ] }</property></properties>
   </object>
   <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="233.761" y="301.764">
    <properties>
     <property name="enemy" value="Squirrel" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|2ED","Forest|2ED","Nut Collector|ODY" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Forest|TMP", "Nut Collector|ODY", "Primal Rage|STH", "Rowen|VIS" ] }</property></properties>
   </object>
   <object id="56" template="../../../../../../common/maps/obj/treasure.tx" x="346.878" y="113.617" />
   <object id="57" template="../../../../../../common/maps/obj/booster.tx" x="256.739" y="94.5055">

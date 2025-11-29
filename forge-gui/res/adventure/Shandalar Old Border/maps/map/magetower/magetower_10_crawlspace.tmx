@@ -79,8 +79,7 @@
   </object>
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" gid="11419" x="288.527" y="172.914" rotation="0">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Island|2ED","Swamp|2ED","Mountain|2ED","Phyrexian Tyranny|PLS" ]
-}</property>
+    <property name="effect">{ "startBattleWithCard": [ "Island|2ED", "Mountain|2ED", "Phyrexian Tyranny|PLS", "Rhystic Study|PCY", "Swamp|2ED" ] }</property>
     <property name="enemy" value="Archmage" />
    </properties>
   </object>

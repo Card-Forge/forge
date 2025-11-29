@@ -72,8 +72,7 @@
   </object>
   <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="184.25" y="217.5">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Lake of the Dead|ALL","Cabal Coffers|TOR","Phyrexian Negator|UDS","Diabolic Servitude|UDS","Living Death|TMP" ]
-}</property>
+    <property name="effect">{ "startBattleWithCard": [ "Mox Jet|LEA", "Will-o'-the-Wisp|LEA", "Bog Imp|DRK" ] }</property>
     <property name="enemy" value="Skavius Slaan the Lichlord" />
     <property name="threatRange" type="int" value="60" />
    </properties>
@@ -83,7 +82,7 @@
     <property name="enemy" value="Mandurang of Shandalar" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="87,88,87,84,83" />
-   </properties>
+   <property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN" ] }</property></properties>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="142" y="71.75">
    <properties>
@@ -128,7 +127,7 @@
    <properties>
     <property name="enemy" value="Adept Black Wizard" />
     <property name="threatRange" type="int" value="30" />
-   </properties>
+   <property name="effect">{ "startBattleWithCard": [ "Wall of Bone|LEA|1" ] }</property></properties>
   </object>
   <object id="78" template="../../../../../../common/maps/obj/enemy.tx" x="259" y="106">
    <properties>

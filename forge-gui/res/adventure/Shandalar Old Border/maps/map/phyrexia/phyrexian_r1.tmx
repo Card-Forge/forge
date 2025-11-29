@@ -46,8 +46,7 @@
    <properties>
     <property name="enemy" value="Furnace Tormentor" />
     <property name="threatRange" value="20" />
-   <property name="effect">{ "startBattleWithCard": [ "Phyrexian Arena|APC","Gate to Phyrexia|ATQ","Phyrexian Tyranny|PLS","Phyrexian Walker|VIS" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Gate to Phyrexia|ATQ", "Phyrexian Arena|APC", "Phyrexian Tyranny|PLS", "Phyrexian Walker|VIS" ] }</property></properties>
   </object>
   <object id="78" template="../../../../../../common/maps/obj/enemy.tx" x="136.333" y="219.333">
    <properties>

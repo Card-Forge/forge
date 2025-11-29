@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="102">
  <editorsettings>
-  <export target="wastetown..tmx" format="tmx"/>
+  <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
  <properties>
   <property name="dungeonEffect">{
-  &quot;startBattleWithCard&quot;: [ &quot;Mana Flare|LEB&quot; ],
+  "startBattleWithCard": [ "Mana Flare|LEB" ],
 }</property>
  </properties>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
  <layer id="6" name="Collision" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJztyDENAAAIwDAE4F8M6jgQAC9Jm+xZBAAAAB9UTtu7auBAAxk=
@@ -32,7 +32,7 @@
  </layer>
  <layer id="3" name="Clutter" width="30" height="30">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIJRMApGwSiAgEZx4tS10dYZwxLI8lCmX5pC/egAPQ5H43TkAGLz+UCZNwroCwCDVQOr
@@ -41,103 +41,92 @@
  <objectgroup id="4" name="Objects">
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="478.665" width="48" height="16">
    <properties>
-    <property name="teleport" value=""/>
+    <property name="teleport" value="" />
    </properties>
   </object>
   <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="163.605" y="388.194">
    <properties>
-    <property name="enemy" value="Doppelganger"/>
-   </properties>
+    <property name="enemy" value="Doppelganger" />
+   <property name="effect">{ "startBattleWithCard": [ "Fellwar Stone|DRK|1", "Kismet|LEG" ] }</property></properties>
   </object>
   <object id="75" template="../../../../../../common/maps/obj/enemy.tx" x="106.034" y="305.243">
    <properties>
     <property name="defeatDialog">[
    {
-   &quot;action&quot;: [
-      {&quot;deleteMapObject&quot;: -1}
+   "action": [
+      {"deleteMapObject": -1}
     ]
    }
 ]</property>
-    <property name="effect">{
- &quot;lifeModifier&quot;: 15,
- &quot;changeStartCards&quot;: 2,
- &quot;startBattleWithCard&quot;: [ &quot;Fellwar Stone|DRK|1&quot; ]
-}</property>
-    <property name="enemy" value="Doppelganger"/>
+    <property name="effect">{ "startBattleWithCard": [ "Fellwar Stone|DRK|1", "Kismet|LEG" ], "lifeModifier": 15, "changeStartCards": 2 }</property>
+    <property name="enemy" value="Doppelganger" />
    </properties>
   </object>
   <object id="74" template="../../../../../../common/maps/obj/enemy.tx" x="231.069" y="255.542">
    <properties>
-    <property name="effect">{
- &quot;lifeModifier&quot;: 15,
- &quot;changeStartCards&quot;: 2,
- &quot;startBattleWithCard&quot;: [ &quot;Fellwar Stone|DRK|1&quot;, &quot;Kismet|LEG&quot; ]
-}</property>
-    <property name="enemy" value="Doppelganger"/>
+    <property name="effect">{ "startBattleWithCard": [ "Fellwar Stone|DRK|1", "Kismet|LEG" ], "lifeModifier": 15, "changeStartCards": 2 }</property>
+    <property name="enemy" value="Doppelganger" />
    </properties>
   </object>
   <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="140.117" y="386.888">
    <properties>
-    <property name="effect">{
- &quot;lifeModifier&quot;: 10,
- &quot;startBattleWithCard&quot;: [ &quot;Hesitation|STH|1&quot; ]
-}</property>
-    <property name="enemy" value="Master Blue Wizard"/>
+    <property name="effect">{ "startBattleWithCard": [ "Hesitation|STH|1" ], "lifeModifier": 10 }</property>
+    <property name="enemy" value="Master Blue Wizard" />
    </properties>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="247.673" y="379.931">
    <properties>
-    <property name="enemy" value="Djinn"/>
-    <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value="87,85,87,97"/>
+    <property name="enemy" value="Djinn" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="87,85,87,97" />
    </properties>
   </object>
   <object id="82" template="../../../../../../common/maps/obj/enemy.tx" x="205.049" y="301.238">
    <properties>
     <property name="effect">{
- &quot;lifeModifier&quot;: 30,
- &quot;changeStartCards&quot;: 4,
-  &quot;opponent&quot;: {
-    &quot;startBattleWithCard&quot;: [ &quot;King Suleiman|ARN|1&quot; ],
+ "lifeModifier": 30,
+ "changeStartCards": 4,
+  "opponent": {
+    "startBattleWithCard": [ "King Suleiman|ARN|1" ],
   }
 }</property>
-    <property name="enemy" value="Djinn"/>
-    <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value="100,93,92,93"/>
+    <property name="enemy" value="Djinn" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="100,93,92,93" />
    </properties>
   </object>
   <object id="80" template="../../../../../../common/maps/obj/enemy.tx" x="285.049" y="316.722">
    <properties>
-    <property name="enemy" value="Master Blue Wizard"/>
-    <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value="90,91,88"/>
-   </properties>
+    <property name="enemy" value="Master Blue Wizard" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="90,91,88" />
+   <property name="effect">{ "startBattleWithCard": [ "Hesitation|STH|1" ] }</property></properties>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/scroll.tx" x="96" y="352">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Storm Crow&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Storm Crow&quot;, &quot;count&quot;: 1 } ]" />
    </properties>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/booster.tx" x="96" y="368">
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 1,
+    "rarity": [ "Rare" ]
   }
 ]
 </property>
@@ -147,19 +136,19 @@
    <properties>
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
   },
   {
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
   },
   {
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+    "type": "card",
+    "count": 1,
+    "rarity": [ "Rare" ]
   }
 ]
 </property>
@@ -169,19 +158,19 @@
    <properties>
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
   },
   {
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
   },
   {
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+    "type": "card",
+    "count": 1,
+    "rarity": [ "Rare" ]
   }
 ]
 </property>
@@ -191,19 +180,19 @@
    <properties>
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
   },
   {
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
   },
   {
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+    "type": "card",
+    "count": 1,
+    "rarity": [ "Rare" ]
   }
 ]
 </property>
@@ -213,9 +202,9 @@
    <properties>
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;gold&quot;,
-    &quot;count&quot;: 250,
-    &quot;addMaxCount&quot;: 250
+    "type": "gold",
+    "count": 250,
+    "addMaxCount": 250
  }
 ]</property>
    </properties>
@@ -224,9 +213,9 @@
    <properties>
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;gold&quot;,
-    &quot;count&quot;: 250,
-    &quot;addMaxCount&quot;: 250
+    "type": "gold",
+    "count": 250,
+    "addMaxCount": 250
  }
 ]</property>
    </properties>
@@ -235,9 +224,9 @@
    <properties>
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;gold&quot;,
-    &quot;count&quot;: 250,
-    &quot;addMaxCount&quot;: 250
+    "type": "gold",
+    "count": 250,
+    "addMaxCount": 250
  }
 ]</property>
    </properties>
@@ -245,48 +234,48 @@
   <object id="72" template="../../../../../../common/maps/obj/treasure.tx" x="123" y="352">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 2,
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 2,
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;Life Amulet&quot;
+  "type": "item",
+  "count": 1,
+  "itemName": "Life Amulet"
 }]</property>
    </properties>
   </object>
-  <object id="83" template="../../../../../../common/maps/obj/waypoint.tx" x="249.944" y="418.758"/>
-  <object id="84" template="../../../../../../common/maps/obj/waypoint.tx" x="249.944" y="418.758"/>
-  <object id="85" template="../../../../../../common/maps/obj/waypoint.tx" x="249.944" y="418.758"/>
-  <object id="86" template="../../../../../../common/maps/obj/waypoint.tx" x="158.454" y="428.203"/>
-  <object id="87" template="../../../../../../common/maps/obj/waypoint.tx" x="295.984" y="393.377"/>
-  <object id="88" template="../../../../../../common/maps/obj/waypoint.tx" x="124.218" y="316.053"/>
-  <object id="89" template="../../../../../../common/maps/obj/waypoint.tx" x="157.273" y="262.93"/>
-  <object id="90" template="../../../../../../common/maps/obj/waypoint.tx" x="265.881" y="301.887"/>
-  <object id="91" template="../../../../../../common/maps/obj/waypoint.tx" x="179.703" y="305.428"/>
-  <object id="92" template="../../../../../../common/maps/obj/waypoint.tx" x="206.855" y="416.988"/>
-  <object id="93" template="../../../../../../common/maps/obj/waypoint.tx" x="208.035" y="339.073"/>
-  <object id="94" template="../../../../../../common/maps/obj/waypoint.tx" x="263.52" y="251.715"/>
-  <object id="95" template="../../../../../../common/maps/obj/waypoint.tx" x="161.405" y="350.288"/>
-  <object id="96" template="../../../../../../common/maps/obj/waypoint.tx" x="114.774" y="388.065"/>
-  <object id="97" template="../../../../../../common/maps/obj/waypoint.tx" x="292.443" y="355.601"/>
-  <object id="98" template="../../../../../../common/maps/obj/waypoint.tx" x="205.084" y="251.715"/>
-  <object id="99" template="../../../../../../common/maps/obj/manashards.tx" x="112.413" y="408.134"/>
-  <object id="100" template="../../../../../../common/maps/obj/waypoint.tx" x="216.299" y="293.623"/>
+  <object id="83" template="../../../../../../common/maps/obj/waypoint.tx" x="249.944" y="418.758" />
+  <object id="84" template="../../../../../../common/maps/obj/waypoint.tx" x="249.944" y="418.758" />
+  <object id="85" template="../../../../../../common/maps/obj/waypoint.tx" x="249.944" y="418.758" />
+  <object id="86" template="../../../../../../common/maps/obj/waypoint.tx" x="158.454" y="428.203" />
+  <object id="87" template="../../../../../../common/maps/obj/waypoint.tx" x="295.984" y="393.377" />
+  <object id="88" template="../../../../../../common/maps/obj/waypoint.tx" x="124.218" y="316.053" />
+  <object id="89" template="../../../../../../common/maps/obj/waypoint.tx" x="157.273" y="262.93" />
+  <object id="90" template="../../../../../../common/maps/obj/waypoint.tx" x="265.881" y="301.887" />
+  <object id="91" template="../../../../../../common/maps/obj/waypoint.tx" x="179.703" y="305.428" />
+  <object id="92" template="../../../../../../common/maps/obj/waypoint.tx" x="206.855" y="416.988" />
+  <object id="93" template="../../../../../../common/maps/obj/waypoint.tx" x="208.035" y="339.073" />
+  <object id="94" template="../../../../../../common/maps/obj/waypoint.tx" x="263.52" y="251.715" />
+  <object id="95" template="../../../../../../common/maps/obj/waypoint.tx" x="161.405" y="350.288" />
+  <object id="96" template="../../../../../../common/maps/obj/waypoint.tx" x="114.774" y="388.065" />
+  <object id="97" template="../../../../../../common/maps/obj/waypoint.tx" x="292.443" y="355.601" />
+  <object id="98" template="../../../../../../common/maps/obj/waypoint.tx" x="205.084" y="251.715" />
+  <object id="99" template="../../../../../../common/maps/obj/manashards.tx" x="112.413" y="408.134" />
+  <object id="100" template="../../../../../../common/maps/obj/waypoint.tx" x="216.299" y="293.623" />
   <object id="101" template="../../../../../../common/maps/obj/treasure.tx" x="184.097" y="253.106">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 1,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 4,
-  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
-  &quot;addMaxCount&quot;: 2
+  "type": "randomCard",
+  "count": 4,
+  "rarity": [ "uncommon" ],
+  "addMaxCount": 2
 }]</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="false" />
    </properties>
   </object>
  </objectgroup>

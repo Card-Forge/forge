@@ -84,8 +84,7 @@
 	}
 ]</property>
     <property name="displayNameOverride" value="Tibalt's Torturer" />
-    <property name="effect">{ "startBattleWithCard": [ "Wheel of Torture|ULG" ]
-}</property>
+    <property name="effect">{ "startBattleWithCard": [ "Wheel of Torture|ULG" ] }</property>
     <property name="enemy" value="Tibalt's Torturer" />
     <property name="reward">[
   {

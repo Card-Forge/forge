@@ -216,8 +216,7 @@
   </object>
   <object id="101" template="../../../../../../common/maps/obj/enemy.tx" x="425" y="477.497" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Dense Foliage|WTH","Treetop Village|ULG"]
-}</property>
+    <property name="effect">{ "startBattleWithCard": [ "Dense Foliage|WTH", "Treetop Village|ULG" ] }</property>
     <property name="enemy" value="Swamp Troll" />
     <property name="threatRange" type="int" value="60" />
    </properties>
@@ -240,8 +239,7 @@
     <property name="fleeRange" value="60" />
     <property name="pursueRange" type="int" value="60" />
     <property name="threatRange" type="int" value="60" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|2ED","Swamp|2ED","Vile Consumption|INV" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Phyrexian Arena|APC", "Swamp|TMP", "Vile Consumption|INV" ] }</property></properties>
   </object>
   <object id="125" template="../../../../../../common/maps/obj/enemy.tx" x="932" y="321.664" width="16" height="17.6724">
    <properties>
@@ -257,8 +255,7 @@
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="96,93" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|2ED","Swamp|2ED","Vile Consumption|INV" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Phyrexian Arena|APC", "Swamp|TMP", "Vile Consumption|INV" ] }</property></properties>
   </object>
   <object id="127" template="../../../../../../common/maps/obj/waypoint.tx" x="609.333" y="270.333" />
   <object id="128" template="../../../../../../common/maps/obj/waypoint.tx" x="677" y="415" />
@@ -280,8 +277,7 @@
     <property name="enemy" value="Shade" />
     <property name="fleeRange" value="30" />
     <property name="threatRange" type="int" value="60" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|2ED","Swamp|2ED","Swamp|2ED","Frozen Shade|LEA" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Frozen Shade|LEA", "Phyrexian Arena|APC", "Swamp|3ED" ] }</property></properties>
   </object>
   <object id="150" template="../../../../../../common/maps/obj/gold.tx" x="1026.5" y="416.5" />
   <object id="151" template="../../../../../../common/maps/obj/gold.tx" x="902.5" y="599.5" />
@@ -314,8 +310,7 @@
   </object>
   <object id="155" template="../../../../../../common/maps/obj/enemy.tx" x="585" y="524.664" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Enchantress's Presence|ONS", "Black Market|MMQ", "Grim Feast|MIR" ]
-}</property>
+    <property name="effect">{ "startBattleWithCard": [ "Black Market|MMQ", "Enchantress's Presence|ONS", "Grim Feast|MIR" ] }</property>
     <property name="enemy" value="Dark Enchanter" />
     <property name="reward">[
   {
@@ -470,15 +465,13 @@
   </object>
   <object id="197" template="../../../../../../common/maps/obj/enemy.tx" x="40" y="55.1638" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Ashen Ghoul|ICE"]
-}</property>
+    <property name="effect">{ "startBattleWithCard": [ "Ashen Ghoul|ICE" ] }</property>
     <property name="enemy" value="Bone Dragon" />
    </properties>
   </object>
   <object id="198" template="../../../../../../common/maps/obj/enemy.tx" x="148" y="155.164" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Bull Hippo|POR"]
-}</property>
+    <property name="effect">{ "startBattleWithCard": [ "Bull Hippo|POR" ] }</property>
     <property name="enemy" value="Hippo" />
     <property name="threatRange" type="int" value="20" />
    </properties>
@@ -584,8 +577,7 @@
     <property name="fleeRange" value="60" />
     <property name="pursueRange" type="int" value="60" />
     <property name="threatRange" type="int" value="60" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|2ED","Swamp|2ED","Vile Consumption|INV" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Phyrexian Arena|APC", "Swamp|TMP", "Vile Consumption|INV" ] }</property></properties>
   </object>
   <object id="218" template="../../../../../../common/maps/obj/enemy.tx" x="697" y="269.164" width="16" height="17.6724">
    <properties>
@@ -593,7 +585,7 @@
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="224,127" />
-   </properties>
+   <property name="effect">{ "startBattleWithCard": [ "Phyrexian Arena|APC", "Swamp|TMP", "Vile Consumption|INV" ] }</property></properties>
   </object>
   <object id="219" template="../../../../../../common/maps/obj/manashards.tx" x="837.333" y="100" />
   <object id="220" template="../../../../../../common/maps/obj/manashards.tx" x="1023" y="30.6667" />

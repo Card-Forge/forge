@@ -64,7 +64,7 @@
    <properties>
     <property name="enemy" value="Whim of Shandalar" />
     <property name="threatRange" type="int" value="50" />
-   </properties>
+   <property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN" ] }</property></properties>
   </object>
   <object id="56" template="../../../../../../common/maps/obj/gold.tx" x="438.5" y="150" />
   <object id="58" template="../../../../../../common/maps/obj/collision.tx" x="1.75" y="479" width="482" height="16" />
@@ -82,6 +82,5 @@
    </properties>
   </object>
   <object id="64" template="../../../../../../common/maps/obj/manashards.tx" x="297.095" y="174.815" />
- <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="240" y="50"><properties><property name="enemy" value="Starcryst the Astral Visionary" /><property name="threatRange" type="int" value="50" /><property name="effect">{ "startBattleWithCard": [ "Mystical Tutor|MIR","Accumulated Knowledge|NMS","Stronghold Machinist|NMS","Thwart|MMQ","Force of Will|ALL" ]
-}</property></properties></object></objectgroup>
+ <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="240" y="50"><properties><property name="enemy" value="Starcryst the Astral Visionary" /><property name="threatRange" type="int" value="50" /><property name="effect">{ "startBattleWithCard": [ "Mox Sapphire|LEA", "Zephyr Falcon|LEG", "Yotian Soldier|ATQ" ] }</property></properties></object></objectgroup>
 </map>

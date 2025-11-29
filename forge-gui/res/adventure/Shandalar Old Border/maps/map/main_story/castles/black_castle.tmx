@@ -151,8 +151,7 @@
     <property name="enemy" value="Shade" />
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|2ED","Swamp|2ED","Swamp|2ED","Frozen Shade|LEA" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Frozen Shade|LEA", "Phyrexian Arena|APC", "Swamp|3ED" ] }</property></properties>
   </object>
   <object id="67" template="../../../../../../../common/maps/obj/enemy.tx" x="649.5" y="604">
    <properties>
@@ -182,8 +181,7 @@
     <property name="enemy" value="Witch" />
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|2ED","Swamp|2ED","Vile Consumption|INV" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Phyrexian Arena|APC", "Swamp|TMP", "Vile Consumption|INV" ] }</property></properties>
   </object>
   <object id="69" template="../../../../../../../common/maps/obj/enemy.tx" x="365" y="232.63">
    <properties>
@@ -195,8 +193,7 @@
     ]
    }
 ]</property>
-    <property name="effect">{ "startBattleWithCard": [ "Swamp|2ED","Swamp|2ED","Swamp|2ED","Swamp|2ED","Rotting Giant|ODY" ]
-}</property>
+    <property name="effect">{ "startBattleWithCard": [ "Gate to Phyrexia|ATQ", "Phyrexian Arena|APC", "Phyrexian Tower|USG", "Putrefaction|MMQ", "Rotting Giant|ODY", "Swamp", "Swamp|ONS" ] }</property>
     <property name="enemy" value="Grave Titan" />
     <property name="pursueRange" type="int" value="10" />
     <property name="threatRange" type="int" value="10" />
@@ -272,8 +269,7 @@
    <properties>
     <property name="enemy" value="Ghoulcaller Ghoul" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|2ED","Swamp|2ED","Lord of the Undead|PLS" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Lord of the Undead|PLS", "Phyrexian Arena|APC", "Swamp|2ED" ] }</property></properties>
   </object>
  </objectgroup>
 </map>

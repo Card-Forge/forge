@@ -53,8 +53,7 @@
     <property name="inactive" type="bool" value="true" />
     <property name="speedModifier" type="float" value="20" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Black Market|MMQ","Larceny|MMQ","Misshapen Fiend|MMQ","Spineless Thug|NMS","Rathi Assassin|NMS" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Black Market|MMQ", "Larceny|MMQ", "Misshapen Fiend|MMQ", "Rathi Assassin|NMS", "Spineless Thug|NMS" ] }</property></properties>
   </object>
   <object id="76" template="../../../../../../common/maps/obj/enemy.tx" x="380" y="145">
    <properties>
@@ -67,8 +66,7 @@
     <property name="displayNameOverride" value="Vampire Feeder" />
     <property name="enemy" value="Vampire" />
     <property name="threatRange" type="int" value="50" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|2ED","Cemetery Gate|HML","Cemetery Gate|HML","Cemetery Gate|HML","Cemetery Gate|HML","Crovax the Cursed|STH" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property></properties>
   </object>
   <object id="66" name="Ward" type="dialog" gid="11912" x="196.5" y="129.361" width="39.5656" height="16">
    <properties>
@@ -119,8 +117,7 @@
     <property name="displayNameOverride" value="Vampire Feeder" />
     <property name="enemy" value="Vampire" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|2ED","Cemetery Gate|HML","Cemetery Gate|HML","Cemetery Gate|HML","Cemetery Gate|HML","Crovax the Cursed|STH" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property></properties>
   </object>
   <object id="70" template="../../../../../../common/maps/obj/gold.tx" x="48.2296" y="212.099" />
   <object id="71" template="../../../../../../common/maps/obj/manashards.tx" x="154.263" y="68.7132" />

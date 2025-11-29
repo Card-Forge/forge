@@ -50,8 +50,7 @@
   <object id="59" template="../../../../../../common/maps/obj/enemy.tx" x="237.909" y="67.2727">
    <properties>
     <property name="enemy" value="Minotaur" />
-   <property name="effect">{ "startBattleWithCard": [ "Mountain|2ED","Mountain|2ED","Didgeridoo|HML","Anaba Spirit Crafter|HML" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Anaba Spirit Crafter|HML", "Didgeridoo|HML", "Mountain|TMP" ] }</property></properties>
   </object>
   <object id="60" template="../../../../../../common/maps/obj/door_down.tx" x="367.884" y="15.8514">
    <properties>

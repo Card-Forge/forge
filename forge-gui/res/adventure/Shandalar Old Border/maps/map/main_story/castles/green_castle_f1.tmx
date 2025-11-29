@@ -55,9 +55,7 @@
       "action": [{"setQuestFlag": {"key":"Ch1GreenCastleComplete", "val": 1} }, {"deleteMapObject": -1}, {"advanceQuestFlag": "Ch1CastlesComplete"}]
    }]
 }]</property>
-    <property name="effect">{
- "startBattleWithCard": [ "Forest|LEA", "Forest|LEA", "Forest|LEA", "Forest|LEA", "City of Solitude|VIS", "Dense Foliage|WTH", "Kavu Lair|INV" ]
-}</property>
+    <property name="effect">{ "startBattleWithCard": [ "City of Solitude|VIS", "Dense Foliage|WTH", "Forest|LEA", "Kavu Lair|INV", "Primal Rage|STH", "Rowen|VIS" ] }</property>
     <property name="enemy" value="Ghalta" />
     <property name="threatRange" type="int" value="50" />
    </properties>

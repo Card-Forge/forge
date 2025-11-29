@@ -143,17 +143,13 @@
   </object>
   <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="252.833" y="45.3333">
    <properties>
-    <property name="effect">{
- "lifeModifier": 4,
- "startBattleWithCard": [ "Ancient Tomb|TMP|1" ]
-}</property>
+    <property name="effect">{ "startBattleWithCard": [ "Ancient Tomb|TMP|1" ], "lifeModifier": 4 }</property>
     <property name="enemy" value="Axgard Dwarf" />
    </properties>
   </object>
   <object id="59" template="../../../../../../common/maps/obj/enemy.tx" x="389.666" y="111.5">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Mountain|2ED","Mountain|2ED","Mountain|2ED","Smoke|LEA","Sulfuric Vortex|SCG" ]
-}</property>
+    <property name="effect">{ "startBattleWithCard": [ "Fervor|WTH", "Mountain|BRB", "Smoke|LEA", "Sulfuric Vortex|SCG" ] }</property>
     <property name="enemy" value="Pyromancer" />
    </properties>
   </object>

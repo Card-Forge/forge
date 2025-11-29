@@ -45,8 +45,7 @@
   <object id="143" template="../../../../../../common/maps/obj/enemy.tx" x="1580" y="1622">
    <properties>
     <property name="enemy" value="Minotaur" />
-   <property name="effect">{ "startBattleWithCard": [ "Mountain|2ED","Mountain|2ED","Didgeridoo|HML","Anaba Spirit Crafter|HML" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Anaba Spirit Crafter|HML", "Didgeridoo|HML", "Mountain|TMP" ] }</property></properties>
   </object>
  </objectgroup>
 </map>

@@ -76,8 +76,7 @@
 		]
 	}
 ]</property>
-    <property name="effect">{ "startBattleWithCard": [ "Swamp|2ED","Swamp|2ED","Swamp|2ED","Urborg Stalker|WTH" ]
-}</property>
+    <property name="effect">{ "startBattleWithCard": [ "Swamp|2ED", "Urborg Stalker|WTH" ] }</property>
     <property name="enemy" value="Demon of Tibalt" />
     <property name="threatRange" type="int" value="60" />
     <property name="waypoints" value="208,198,210,209" />
@@ -117,7 +116,7 @@
    <properties>
     <property name="enemy" value="Adept Black Wizard" />
     <property name="threatRange" type="int" value="40" />
-   </properties>
+   <property name="effect">{ "startBattleWithCard": [ "Wall of Bone|LEA|1" ] }</property></properties>
   </object>
   <object id="201" template="../../../../../../common/maps/obj/enemy.tx" x="250.342" y="313.772">
    <properties>

@@ -101,17 +101,13 @@
   <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="72" y="200" />
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="199.823" y="96.2516">
    <properties>
-    <property name="effect">{
- "lifeModifier": 4,
- "startBattleWithCard": [ "Mirror Universe|LEG|1" ]
-}</property>
+    <property name="effect">{ "startBattleWithCard": [ "Mirror Universe|LEG|1" ], "lifeModifier": 4 }</property>
     <property name="enemy" value="Lich" />
    </properties>
   </object>
   <object id="51" template="../../../../../../common/maps/obj/enemy.tx" x="200.079" y="127.263">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Tropical Island|LEA","Underground Sea|LEA","Dream Chisel|ONS","Ixidor, Reality Sculptor|ONS" ]
-}</property>
+    <property name="effect">{ "startBattleWithCard": [ "Dream Chisel|ONS", "Ixidor, Reality Sculptor|ONS", "Rhystic Study|PCY", "Tropical Island|LEA", "Underground Sea|LEA" ] }</property>
     <property name="enemy" value="Aether Channeler" />
    </properties>
   </object>

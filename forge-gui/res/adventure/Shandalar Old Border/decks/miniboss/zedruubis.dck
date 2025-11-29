@@ -34,8 +34,8 @@ Name=Portal Master
 
 [StartInBattle_Reference]
 1 Hulking Cyclops|VIS
-1 Island|LEA
-1 Mountain|LEA
-1 Plains|LEA
+1 Island|POR
+1 Mountain|POR
+1 Plains|POR
 1 Storm Crow|ALL
 1 Wall of Swords|LEA

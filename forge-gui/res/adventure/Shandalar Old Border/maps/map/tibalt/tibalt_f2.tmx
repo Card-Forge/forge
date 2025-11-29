@@ -81,7 +81,7 @@
     <property name="displayNameOverride" value="Tibalt's Pet Cyclops" />
     <property name="effect">{ "startBattleWithCard": [ "Mountain|LEA", "Mountain|LEA", "Mana Crypt|PHPR", "Chance Encounter|ODY", "Goblin Bomb|WTH", "Impulsive Maneuvers|ODY" ]
 }</property>
-    <property name="enemy" value="Giant Cyclops" />
+    <property name="enemy" value="Cyclops" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="speedModifier" type="float" value="10" />
     <property name="threatRange" type="int" value="50" />
@@ -124,12 +124,5 @@
   </object>
   <object id="205" template="../../../../../../common/maps/obj/waypoint.tx" x="355.216" y="289.224" />
   <object id="206" template="../../../../../../common/maps/obj/waypoint.tx" x="504.526" y="309.104" />
-  <object id="207" template="../../../../../../common/maps/obj/enemy.tx" x="280" y="195">
-   <properties>
-    <property name="enemy" value="Tibalt's Cyclops" />
-    <property name="threatRange" type="int" value="50" />
-   <property name="effect">{ "startBattleWithCard": [ "Mountains","Mountains","Mana Crypt|PHPR","Chance Encounter|ODY","Goblin Bomb|WTH","Impulsive Maneuvers|ODY" ]
-}</property></properties>
-  </object>
  </objectgroup>
 </map>

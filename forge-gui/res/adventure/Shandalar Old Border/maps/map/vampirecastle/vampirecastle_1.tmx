@@ -80,8 +80,7 @@
     <property name="speedModifier" type="float" value="2" />
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="89,88,91,90,89,88" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|2ED","Cemetery Gate|HML","Cemetery Gate|HML","Cemetery Gate|HML","Cemetery Gate|HML","Crovax the Cursed|STH" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property></properties>
   </object>
   <object id="74" template="../../../../../../common/maps/obj/enemy.tx" x="156.322" y="278.539">
    <properties>

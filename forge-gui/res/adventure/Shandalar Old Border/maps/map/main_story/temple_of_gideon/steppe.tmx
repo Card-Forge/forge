@@ -560,8 +560,7 @@
       }]
    }
 ]</property>
-    <property name="effect">{ "startBattleWithCard": [ "Swamp|2ED","Swamp|2ED","Vile Consumption|INV" ]
-}</property>
+    <property name="effect">{ "startBattleWithCard": [ "Phyrexian Arena|APC", "Swamp|TMP", "Vile Consumption|INV" ] }</property>
     <property name="enemy" value="Witch" />
    </properties>
   </object>

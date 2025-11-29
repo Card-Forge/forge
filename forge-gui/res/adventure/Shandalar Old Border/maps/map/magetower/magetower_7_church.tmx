@@ -104,8 +104,7 @@
     <property name="enemy" value="Holy Apparition" />
     <property name="speedModifier" type="float" value="5" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Serra’s Sanctum|USG","Mobilization|ONS" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Glorious Anthem|USG", "Mobilization|ONS", "Serra\u2019s Sanctum|USG" ] }</property></properties>
   </object>
   <object id="87" template="../../../../../../common/maps/obj/enemy.tx" x="276.711" y="206.275">
    <properties>
@@ -143,8 +142,7 @@
    <properties>
     <property name="enemy" value="Dark Ages Preacher" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Plains|2ED","Plains|2ED","Plains|2ED","Preacher|DRK","Exorcist|DRK","Witch Hunter|DRK" ]
-}</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Exorcist|DRK", "Plains|2ED", "Preacher|DRK", "Witch Hunter|DRK" ] }</property></properties>
   </object>
  </objectgroup>
 </map>

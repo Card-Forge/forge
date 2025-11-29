@@ -42,8 +42,7 @@
   </object>
   <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="206.712" y="152.781">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Island|2ED","Swamp|2ED","Old Man of the Sea|ARN","Fledgling Djinn|WTH" ]
-}</property>
+    <property name="effect">{ "startBattleWithCard": [ "Fledgling Djinn|WTH", "Island|6ED", "Old Man of the Sea|ARN", "Swamp|6ED" ] }</property>
     <property name="enemy" value="Mighty Djinn" />
     <property name="hidden" type="bool" value="true" />
     <property name="threatRange" type="int" value="40" />
@@ -100,6 +99,5 @@
 </property>
    </properties>
   </object>
- <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="250" y="150"><properties><property name="enemy" value="Whim of Shandalar" /><property name="threatRange" type="int" value="100" /><property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN" ]
-}</property></properties></object></objectgroup>
+ <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="250" y="150"><properties><property name="enemy" value="Whim of Shandalar" /><property name="threatRange" type="int" value="100" /><property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN" ] }</property></properties></object></objectgroup>
 </map>
