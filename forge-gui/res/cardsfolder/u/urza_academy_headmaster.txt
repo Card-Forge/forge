@@ -14,7 +14,7 @@ SVar:MustAttack8:DB$ DelayedTrigger | ValidTgts$ Opponent | Mode$ Phase | Phase$
 SVar:TrigEffect:DB$ Effect | RememberObjects$ DelayTriggerRemembered | StaticAbilities$ MustAttack | SubAbility$ DBCleanup
 SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Creature.RememberedPlayerCtrl | MustAttack$ EffectSource | Description$ During target player's next turn, creatures that player controls attack EFFECTSOURCE if able.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:PutCounter9:DB$ PutCounter | Defined$ Self | CounterType$ LOYALTY | CounterNum$ X9 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | StackDescription$ SpellDescription | SpellDescription$ Put a loyalty counter on NICKNAME for each creature target opponent controls.
+SVar:PutCounter9:DB$ PutCounter | Defined$ Self | CounterType$ LOYALTY | CounterNum$ X9 | ValidTgts$ Opponent | StackDescription$ SpellDescription | SpellDescription$ Put a loyalty counter on NICKNAME for each creature target opponent controls.
 SVar:X9:TargetedPlayer$CreaturesInPlay
 SVar:Effect10:DB$ Effect | Triggers$ TrigAttack10 | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.
 SVar:TrigAttack10:Mode$ Attacks | ValidCard$ Creature.OppCtrl | TriggerZones$ Command | Execute$ DebuffAttacker10 | TriggerDescription$ Whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.
