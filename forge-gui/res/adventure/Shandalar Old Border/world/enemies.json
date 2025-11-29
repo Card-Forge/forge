@@ -32061,7 +32061,7 @@
   },
   {
     "name": "Mishra",
-    "sprite": "sprites/enemy/humanoid/human/wizard/rakdos_wiz.atlas",
+    "sprite": "sprites/enemy/humanoid/human/wizard/corrupted_bluewiz.atlas",
     "deck": [
       "decks/miniboss/mishra.dck"
     ],
@@ -32136,7 +32136,7 @@
   },
   {
     "name": "Tsabo Tavoc",
-    "sprite": "sprites/enemy/beast/spider_purple.atlas",
+    "sprite": "sprites/enemy/humanoid/phyrexian/drossgrimnarch.atlas",
     "deck": [
       "decks/miniboss/tsabo_tavoc.dck"
     ],
@@ -32205,7 +32205,7 @@
   },
   {
     "name": "Ashnod",
-    "sprite": "sprites/enemy/humanoid/human/warlock/dawnhart_witch.atlas",
+    "sprite": "sprites/enemy/humanoid/human/warlock/witch.atlas",
     "deck": [
       "decks/miniboss/ashnod.dck"
     ],
@@ -32286,7 +32286,7 @@
   },
   {
     "name": "Gix",
-    "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
+    "sprite": "sprites/enemy/humanoid/phyrexian/phyrexianduelist.atlas",
     "deck": [
       "decks/miniboss/gix.dck"
     ],
@@ -32342,8 +32342,232 @@
     ]
   },
   {
+    "name": "Latulla, Keldon Overseer",
+    "sprite": "sprites/enemy/humanoid/human/warlock/deftsorceress.atlas",
+    "deck": [
+      "decks/miniboss/latulla.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 30,
+    "life": 40,
+    "rewards": []
+  },
+  {
+    "name": "Márton Stromgald",
+    "sprite": "sprites/enemy/humanoid/human/knight/cavalier_2.atlas",
+    "deck": [
+      "decks/miniboss/marton_stromgald.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 30,
+    "life": 40,
+    "rewards": []
+  },
+  {
+    "name": "Jeska, Warrior Adept",
+    "sprite": "sprites/enemy/humanoid/human/hunter/hunter_2.atlas",
+    "deck": [
+      "decks/miniboss/jeska.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 30,
+    "life": 40,
+    "rewards": []
+  },
+  {
+    "name": "Eron the Relentless",
+    "sprite": "sprites/enemy/humanoid/human/bard/humanbard.atlas",
+    "deck": [
+      "decks/miniboss/eron.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 30,
+    "life": 40,
+    "rewards": []
+  },
+  {
+    "name": "Jolrael, Empress of Beasts",
+    "sprite": "sprites/enemy/humanoid/human/wizard/green_wiz3.atlas",
+    "deck": [
+      "decks/miniboss/jolrael.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 30,
+    "life": 40,
+    "rewards": []
+  },
+  {
+    "name": "Verdeloth the Ancient",
+    "sprite": "sprites/enemy/treant/treant_2.atlas",
+    "deck": [
+      "decks/miniboss/verdeloth.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 30,
+    "life": 40,
+    "rewards": []
+  },
+  {
+    "name": "Rofellos",
+    "sprite": "sprites/enemy/humanoid/elf/hunter/hunter.atlas",
+    "deck": [
+      "decks/miniboss/rofellos.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 30,
+    "life": 40,
+    "rewards": []
+  },
+  {
+    "name": "Multani",
+    "sprite": "sprites/enemy/treant/treant.atlas",
+    "deck": [
+      "decks/miniboss/multani.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 30,
+    "life": 40,
+    "rewards": []
+  },
+  {
+    "name": "Hazduhr the Abbot",
+    "sprite": "sprites/enemy/humanoid/human/wizard/white_wiz2.atlas",
+    "deck": [
+      "decks/miniboss/hazduhr.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 30,
+    "life": 40,
+    "rewards": []
+  },
+  {
+    "name": "Selenia, Dark Angel",
+    "sprite": "sprites/enemy/angel/fallen_angel.atlas",
+    "deck": [
+      "decks/miniboss/selenia.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 30,
+    "life": 40,
+    "rewards": []
+  },
+  {
+    "name": "Archangel Radiant",
+    "sprite": "sprites/enemy/angel/angel_2.atlas",
+    "deck": [
+      "decks/miniboss/archangel_radiant.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 30,
+    "life": 40,
+    "rewards": []
+  },
+  {
+    "name": "Reya Dawnbringer",
+    "sprite": "sprites/enemy/angel/angel_1.atlas",
+    "deck": [
+      "decks/miniboss/reya.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 30,
+    "life": 40,
+    "rewards": []
+  },
+  {
+    "name": "Tawnos",
+    "sprite": "sprites/enemy/humanoid/human/archaeologist/archaeologist.atlas",
+    "deck": [
+      "decks/miniboss/tawnos.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 30,
+    "life": 40,
+    "rewards": []
+  },
+  {
+    "name": "Barrin",
+    "sprite": "sprites/enemy/humanoid/human/wizard/esper_artificer.atlas",
+    "deck": [
+      "decks/miniboss/barrin.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 30,
+    "life": 40,
+    "rewards": []
+  },
+  {
+    "name": "Rayne, Academy Chancellor",
+    "sprite": "sprites/enemy/humanoid/human/priest/priest.atlas",
+    "deck": [
+      "decks/miniboss/rayne.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 30,
+    "life": 40,
+    "rewards": []
+  },
+  {
+    "name": "Karn",
+    "sprite": "sprites/enemy/golem/golem.atlas",
+    "deck": [
+      "decks/miniboss/karn.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 30,
+    "life": 40,
+    "rewards": []
+  },
+  {
     "name": "Yawgmoth",
-    "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
+    "sprite": "sprites/enemy/eldrazi/eldrazi_large.atlas",
     "deck": [
       "decks/boss/yawgmoth.dck"
     ],
@@ -35379,7 +35603,7 @@
   },
   {
     "name": "Urza Planeswalker",
-    "sprite": "sprites/enemy/humanoid/human/wizard/blue_wiz2.atlas",
+    "sprite": "sprites/enemy/humanoid/human/wizard/archmage.atlas",
     "deck": [
       "decks/boss/urza.dck"
     ],
@@ -35434,7 +35658,7 @@
   },
   {
     "name": "Gaea, the Worldsoul",
-    "sprite": "sprites/enemy/humanoid/elf/druid.atlas",
+    "sprite": "sprites/enemy/humanoid/elf/hiddenbush.atlas",
     "deck": [
       "decks/boss/gaea.dck"
     ],
@@ -35489,7 +35713,7 @@
   },
   {
     "name": "Serra the Benevolent",
-    "sprite": "sprites/enemy/celestial/angel_1.atlas",
+    "sprite": "sprites/enemy/celestial/angelwarrior.atlas",
     "deck": [
       "decks/boss/serra.dck"
     ],
