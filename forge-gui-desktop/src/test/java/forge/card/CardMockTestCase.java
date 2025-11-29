@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
@@ -52,13 +53,13 @@ public class CardMockTestCase extends PowerMockTestCase {
 
         final String fallbackDataDir = TextUtil.concatNoSpace(homeDir, "/.forge/");
 
-        if (StringUtils.containsIgnoreCase(osName, "windows")) {
+        if (Strings.CI.contains(osName, "windows")) {
             String appRoot = System.getenv().get("APPDATA");
             if (StringUtils.isEmpty(appRoot)) {
                 appRoot = fallbackDataDir;
             }
             return appRoot + File.separator + "Forge" + File.separator;
-        } else if (StringUtils.containsIgnoreCase(osName, "mac os x")) {
+        } else if (Strings.CI.contains(osName, "mac os x")) {
             return TextUtil.concatNoSpace(homeDir, "/Library/Application Support/Forge/");
         }
         // Linux and everything else

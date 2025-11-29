@@ -30,7 +30,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import org.apache.commons.lang3.CharUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import forge.item.InventoryItem;
 import forge.itemmanager.ColumnDef;
@@ -47,6 +46,7 @@ import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.ToolTipListener;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
+import org.apache.commons.lang3.Strings;
 
 public abstract class ItemView<T extends InventoryItem> {
     private static final SkinColor BORDER_COLOR = FSkin.getColor(FSkin.Colors.CLR_TEXT);
@@ -384,7 +384,7 @@ public abstract class ItemView<T extends InventoryItem> {
                     break;
                 }
 
-                if (StringUtils.containsIgnoreCase(item.getName(), searchStr)) {
+                if (Strings.CI.contains(item.getName(), searchStr)) {
                     ItemView.this.setSelectedIndex(idx);
                     found = true;
                     break;

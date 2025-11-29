@@ -23,7 +23,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.SwingUtilities;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.jupnp.DefaultUpnpServiceConfiguration;
 import org.jupnp.UpnpServiceConfiguration;
 
@@ -85,7 +85,7 @@ public class GuiDesktop implements IGuiBase {
 
     @Override
     public String getAssetsDir() {
-        return StringUtils.containsIgnoreCase(BuildInfo.getVersionString(), "git") ?
+        return Strings.CI.contains(BuildInfo.getVersionString(), "git") ?
                 // FIXME: replace this hardcoded value!!
                 "../forge-gui/" : "";
     }

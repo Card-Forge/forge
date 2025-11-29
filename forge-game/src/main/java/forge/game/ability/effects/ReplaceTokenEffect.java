@@ -113,7 +113,7 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
                 }
                 Player controller = e.getKey().getController();
                 // TODO should still merge the amounts to avoid additional prototypes when sourceSA doesn't use ForEach
-                //int old = ObjectUtils.defaultIfNull(toInsertMap.get(controller), 0);
+                //int old = ObjectUtils.getIfNull(toInsertMap.get(controller), 0);
                 Pair<Integer, Iterable<Object>> tokenAmountPair = new ImmutablePair<>(e.getValue(), e.getKey().getRemembered());
                 toInsertMap.put(controller, tokenAmountPair);
                 toRemoveSet.add(e.getKey());

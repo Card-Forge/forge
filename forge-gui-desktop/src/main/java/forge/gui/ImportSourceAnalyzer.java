@@ -27,6 +27,7 @@ import java.util.function.Predicate;
 import forge.card.CardDb;
 import forge.item.PaperCardPredicates;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.card.CardEdition;
@@ -90,7 +91,7 @@ public class ImportSourceAnalyzer {
         else if ("plane".equalsIgnoreCase(dirname) || "planar".equalsIgnoreCase(dirname)) { analyzePlanarDeckDir(root); }
         else if ("scheme".equalsIgnoreCase(dirname))       { analyzeSchemeDeckDir(root);      }
         else if ("sealed".equalsIgnoreCase(dirname))       { analyzeSealedDeckDir(root);      }
-        else if (StringUtils.containsIgnoreCase(dirname, "deck")) { analyzeDecksDir(root);    }
+        else if (Strings.CI.contains(dirname, "deck")) { analyzeDecksDir(root);    }
         else if ("gauntlet".equalsIgnoreCase(dirname))     { analyzeGauntletDataDir(root);    }
         else if ("layouts".equalsIgnoreCase(dirname))      { analyzeLayoutsDir(root);         }
         else if ("pics".equalsIgnoreCase(dirname))         { analyzeCardPicsDir(root);        }

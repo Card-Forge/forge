@@ -173,7 +173,7 @@ public class ForgeProfileProperties {
 
         final String fallbackDataDir = TextUtil.concatNoSpace(homeDir, "/.forge");
 
-        if (StringUtils.containsIgnoreCase(osName, "windows")) {
+        if (Strings.CI.contains(osName, "windows")) {
             // the split between appdata and localappdata on windows is relatively recent.  If
             // localappdata is not defined, use appdata for both.  and if appdata is not defined,
             // fall back to a linux-style dot dir in the home directory
