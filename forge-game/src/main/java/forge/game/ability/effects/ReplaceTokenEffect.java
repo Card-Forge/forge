@@ -67,7 +67,7 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
                     continue;
                 }
                 Player contoller = e.getKey().getController();
-                int old = ObjectUtils.defaultIfNull(byController.get(contoller), 0);
+                int old = ObjectUtils.getIfNull(byController.get(contoller), 0);
                 byController.put(contoller, old + e.getValue());
             }
 

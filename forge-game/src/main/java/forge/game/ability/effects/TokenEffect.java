@@ -22,6 +22,7 @@ import java.util.List;
 
 import forge.util.Lang;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
 import forge.game.Game;
@@ -51,7 +52,7 @@ public class TokenEffect extends TokenEffectBase {
                 if (desc.contains("you")) {
                     desc = desc.replaceAll("you", sa.getActivatingPlayer().getName());
                 }
-            } else if (StringUtils.containsIgnoreCase(desc,"Create")) {
+            } else if (Strings.CI.contains(desc,"Create")) {
                 String verb = creators.size() == 1 ? "creates" : "create";
                 String start = Lang.joinHomogenous(creators) + " " + verb;
                 String create = desc.contains("Create") ? "Create" : "create";

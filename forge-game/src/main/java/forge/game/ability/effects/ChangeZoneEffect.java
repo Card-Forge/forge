@@ -25,6 +25,7 @@ import forge.util.*;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Arrays;
@@ -233,7 +234,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 sb.append(verb);
                 if (defined) {
                     sb.append(type);
-                } else if (StringUtils.containsIgnoreCase(type, "Card")) {
+                } else if (Strings.CI.contains(type, "Card")) {
                     sb.append(Lang.nounWithNumeralExceptOne(num, type));
                 } else {
                     sb.append(Lang.nounWithNumeralExceptOne(num, type + " card"));

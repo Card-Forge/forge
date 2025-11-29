@@ -21,6 +21,7 @@ import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 public class DigEffect extends SpellAbilityEffect {
 
@@ -79,7 +80,7 @@ public class DigEffect extends SpellAbilityEffect {
                 if (sa.hasParam("ChangeValid")) {
                     String what = sa.hasParam("ChangeValidDesc") ? sa.getParam("ChangeValidDesc") :
                         sa.getParam("ChangeValid");
-                    if (!StringUtils.containsIgnoreCase(what, "card")) {
+                    if (!Strings.CI.contains(what, "card")) {
                         what = what + " card";
                     }
                     sb.append(Lang.nounWithNumeralExceptOne(numToChange, what)).append(" from among them").append(where);

@@ -8,6 +8,7 @@ import forge.card.GamePieceType;
 import forge.item.PaperCardPredicates;
 import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
 import com.google.common.collect.Lists;
@@ -154,10 +155,10 @@ public class CopyPermanentEffect extends TokenEffectBase {
                     valid = TextUtil.fastReplace(valid,
                             "X", Integer.toString(AbilityUtils.calculateAmount(host, "X", sa)));
                 }
-                if (StringUtils.containsIgnoreCase(valid, "creature")) {
+                if (Strings.CI.contains(valid, "creature")) {
                     cards = IterableUtil.filter(cards, PaperCardPredicates.IS_CREATURE);
                 }
-                if (StringUtils.containsIgnoreCase(valid, "equipment")) {
+                if (Strings.CI.contains(valid, "equipment")) {
                     Predicate<PaperCard> cpp = PaperCardPredicates.fromRules(CardRulesPredicates.IS_EQUIPMENT);
                     cards = IterableUtil.filter(cards, cpp);
                 }

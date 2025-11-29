@@ -280,7 +280,7 @@ public class Game {
         if (c == null) {
             return null;
         }
-        return ObjectUtils.defaultIfNull(changeZoneLKIInfo.get(c.getId(), c.getGameTimestamp()), c);
+        return ObjectUtils.getIfNull(changeZoneLKIInfo.get(c.getId(), c.getGameTimestamp()), c);
     }
     public final void clearChangeZoneLKIInfo() {
         changeZoneLKIInfo.clear();

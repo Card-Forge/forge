@@ -27,7 +27,7 @@ public class TokenCreateTable extends ForwardingTable<Player, Card, Integer> {
     }
 
     public int add(Player p, Card c, int i) {
-        int old = ObjectUtils.defaultIfNull(this.get(p, c), 0);
+        int old = ObjectUtils.getIfNull(this.get(p, c), 0);
         int newValue = old + i;
         this.put(p, c, newValue);
         return newValue;

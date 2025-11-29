@@ -42,6 +42,7 @@ import forge.util.FileSection;
 import forge.util.Visitor;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
+import org.apache.commons.lang3.Strings;
 
 public class TriggerHandler {
     private final Set<TriggerType> suppressedModes = Collections.synchronizedSet(EnumSet.noneOf(TriggerType.class));
@@ -239,7 +240,7 @@ public class TriggerHandler {
                     TriggerType.Destroyed.equals(t.getMode()) ||
                     TriggerType.Sacrificed.equals(t.getMode()) || TriggerType.SacrificedOnce.equals(t.getMode()) ||
                     ((TriggerType.ChangesZone.equals(t.getMode()) || TriggerType.ChangesZoneAll.equals(t.getMode()))
-                            && StringUtils.contains(t.getParam("Origin"), "Battlefield"))) {
+                            && Strings.CS.contains(t.getParam("Origin"), "Battlefield"))) {
                 registerOneTrigger(t);
             }
         }

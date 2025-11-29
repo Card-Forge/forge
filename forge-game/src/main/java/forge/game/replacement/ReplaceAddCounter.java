@@ -92,7 +92,7 @@ public class ReplaceAddCounter extends ReplacementEffect {
                 if (!e.getValue().containsKey(ct)) {
                     continue;
                 }
-                if (0 >= ObjectUtils.defaultIfNull(e.getValue().get(ct), 0)) {
+                if (0 >= ObjectUtils.getIfNull(e.getValue().get(ct), 0)) {
                     continue;
                 }
                 return true;
