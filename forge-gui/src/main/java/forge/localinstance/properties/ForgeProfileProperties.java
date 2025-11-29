@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.gui.GuiBase;
@@ -188,7 +189,7 @@ public class ForgeProfileProperties {
             // same directory on windows and we need to distinguish them.
             return Pair.of(appRoot + File.separator + "Forge", cacheRoot + File.separator + "Forge" + File.separator + "Cache");
         }
-        else if (StringUtils.containsIgnoreCase(osName, "mac os x")) {
+        else if (Strings.CI.contains(osName, "mac os x")) {
             return Pair.of(TextUtil.concatNoSpace(homeDir, "/Library/Application Support/Forge"),
                     TextUtil.concatNoSpace(homeDir, "/Library/Caches/Forge"));
         }
