@@ -1834,8 +1834,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public ColorSet chooseColors(final String message, final SpellAbility sa, final int min, final int max, ColorSet options) {
-        return ColorSet.fromEnums(getGui().getChoices(message, min, max, Lists.newArrayList(options.getOrderedColors()),
-                null, MagicColor.Color::getTranslatedName));
+        return ColorSet.fromEnums(getGui().getChoices(message, min, max, Lists.newArrayList(options.getOrderedColors())));
     }
 
     @Override
@@ -1869,7 +1868,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             choices.add(MagicColor.Color.COLORLESS);
         }
         if (choices.size() > 2) {
-            return getGui().one(message, choices, MagicColor.Color::getTranslatedName).getColorMask();
+            return getGui().one(message, choices).getColorMask();
         }
 
         boolean confirmed = false;

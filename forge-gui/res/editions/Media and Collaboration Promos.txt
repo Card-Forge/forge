@@ -6,7 +6,6 @@ Type=Promo
 ScryfallCode=PMEI
 
 [cards]
-24 R Iroh, Grand Lotus @Jo Cordisco
 1995-1 C Fireball @Mark Tedin
 1995-2 C Blue Elemental Blast @Richard Thomas
 1996-1 C Sandbar Crocodile @Una Fricker
@@ -86,3 +85,5 @@ ScryfallCode=PMEI
 2025-21 M Cloud, Midgar Mercenary @Square Enix
 2025-22 M Peter Parker @Randy Gallegos
 2025-23 M Spider-Man, Miles Morales @InHyuk Lee
+2025-24 R Iroh, Grand Lotus @Jo Cordisco
+2026-01 R Command Tower @Constantin Marin

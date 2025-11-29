@@ -683,7 +683,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             allowedTypes = allowedTypes.or(CardType::isASpellType);
         }
         if (isPlaneswalker()) {
-            allowedTypes = allowedTypes.or(CardType::isADungeonType);
+            allowedTypes = allowedTypes.or(CardType::isAPlaneswalkerType);
         }
         if (isDungeon()) {
             allowedTypes = allowedTypes.or(CardType::isADungeonType);
