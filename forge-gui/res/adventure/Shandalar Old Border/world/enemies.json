@@ -21098,7 +21098,8 @@
       "IdentityWhite",
       "IdentityBoros"
     ],
-    "boss": true
+    "boss": true,
+    "gamesPerMatch": 3
   },
   {
     "name": "Naked Mole Rat",
@@ -24530,7 +24531,7 @@
     "name": "Scarecrow Captain",
     "sprite": "sprites/enemy/construct/scarecrow.atlas",
     "deck": [
-      "decks/standard/scarecrowcaptain.dck"
+      "decks/miniboss/scarecrowcaptain.dck"
     ],
     "ai": "",
     "boss": true,
@@ -33174,7 +33175,7 @@
     "name": "The Sainted One",
     "sprite": "sprites/enemy/humanoid/human/cleric/priest.atlas",
     "deck": [
-      "decks/standard/shandalar97_white_alsadim.dck"
+      "decks/miniboss/shandalar97_white_alsadim.dck"
     ],
     "ai": "",
     "boss": true,
@@ -33313,7 +33314,7 @@
     "name": "The Astral Visionary",
     "sprite": "sprites/enemy/humanoid/merfolk/merfolk_lord.atlas",
     "deck": [
-      "decks/standard/shandalar97_blue_starcryst.dck"
+      "decks/miniboss/shandalar97_blue_starcryst.dck"
     ],
     "ai": "",
     "boss": true,
@@ -33446,7 +33447,7 @@
     "name": "The Lichlord of Azar",
     "sprite": "sprites/enemy/undead/lich.atlas",
     "deck": [
-      "decks/standard/shandalar97_black_skavius.dck"
+      "decks/miniboss/shandalar97_black_skavius.dck"
     ],
     "ai": "",
     "boss": true,
@@ -33579,7 +33580,7 @@
     "name": "The Dragon Lord",
     "sprite": "sprites/enemy/humanoid/human/wizard/red_wiz2.atlas",
     "deck": [
-      "decks/standard/shandalar97_red_kyzzn.dck"
+      "decks/miniboss/shandalar97_red_kyzzn.dck"
     ],
     "ai": "",
     "boss": true,
@@ -33718,7 +33719,7 @@
     "name": "The Great Druid",
     "sprite": "sprites/enemy/humanoid/elf/druid.atlas",
     "deck": [
-      "decks/standard/shandalar97_green_morgane.dck"
+      "decks/miniboss/shandalar97_green_morgane.dck"
     ],
     "ai": "",
     "boss": true,
@@ -33983,7 +33984,7 @@
     "name": "Arzakon, Doom of Shandalar",
     "sprite": "sprites/enemy/fiend/scourgemaster.atlas",
     "deck": [
-      "decks/standard/shandalar97_colorless_arzakon.dck"
+      "decks/miniboss/shandalar97_colorless_arzakon.dck"
     ],
     "ai": "",
     "boss": true,
@@ -34104,7 +34105,7 @@
     "name": "Baron Von Gant",
     "sprite": "sprites/enemy/humanoid/human/soldier/legionite.atlas",
     "deck": [
-      "decks/standard/baronlegant.dck"
+      "decks/miniboss/baronlegant.dck"
     ],
     "ai": "",
     "boss": true,
@@ -34137,13 +34138,14 @@
       "Leader",
       "IdentityWhite",
       "BiomeWhite"
-    ]
+    ],
+    "gamesPerMatch": 3
   },
   {
     "name": "Baron Levilain",
     "sprite": "sprites/enemy/humanoid/human/soldier/legionite.atlas",
     "deck": [
-      "decks/standard/barronlevilain.dck"
+      "decks/miniboss/barronlevilain.dck"
     ],
     "ai": "",
     "boss": true,
@@ -34171,7 +34173,8 @@
       "Leader",
       "IdentityWhite",
       "BiomeWhite"
-    ]
+    ],
+    "gamesPerMatch": 3
   },
   {
     "name": "Gorilla Chief",
