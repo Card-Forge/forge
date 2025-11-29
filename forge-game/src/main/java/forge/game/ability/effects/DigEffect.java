@@ -20,7 +20,6 @@ import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
 
 public class DigEffect extends SpellAbilityEffect {

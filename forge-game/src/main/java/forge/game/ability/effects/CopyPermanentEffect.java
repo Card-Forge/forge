@@ -7,7 +7,6 @@ import java.util.function.Predicate;
 import forge.card.GamePieceType;
 import forge.item.PaperCardPredicates;
 import forge.util.*;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 

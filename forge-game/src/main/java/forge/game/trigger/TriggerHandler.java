@@ -19,8 +19,6 @@ package forge.game.trigger;
 
 import java.util.*;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.*;
 
 import forge.game.CardTraitBase;
