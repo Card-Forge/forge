@@ -480,10 +480,9 @@
     "nameOverride": "",
     "sprite": "sprites/enemy/dragon/ancientsilverdragon.atlas",
     "deck": [
-      "decks/standard/bluedragon.dck"
+      "decks/elite/ancient_silver_dragon.dck"
     ],
     "ai": "",
-    "boss": true,
     "flying": true,
     "spawnRate": 1,
     "difficulty": 0.3,
@@ -705,6 +704,7 @@
   },
   {
     "name": "Aether Channeler",
+    "nameOverride": "Master of Morph",
     "sprite": "sprites/enemy/humanoid/human/cleric/monk_3.atlas",
     "deck": [
       "decks/standard/aether_channeler.dck"
@@ -2077,6 +2077,7 @@
   },
   {
     "name": "Archmage",
+    "nameOverride": "Tyrant Mage",
     "sprite": "sprites/enemy/humanoid/human/wizard/archmage.atlas",
     "deck": [
       "decks/standard/archmage.dck"
@@ -3914,6 +3915,7 @@
   },
   {
     "name": "Brain Mole",
+    "nameOverride": "Mole of Laquatus",
     "sprite": "sprites/enemy/monstrosity/brainmole.atlas",
     "deck": [
       "decks/standard/millwizard.dck"
@@ -4783,122 +4785,6 @@
       "BiomeBlue",
       "BiomeBlack"
     ]
-  },
-  {
-    "name": "Chandra",
-    "sprite": "sprites/enemy/humanoid/human/shaman/chandra.atlas",
-    "deck": [
-      "decks/miniboss/Fire of Kaladesh.dck"
-    ],
-    "ai": "",
-    "boss": false,
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 30,
-    "life": 70,
-    "rewards": [
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Teeka's Dragon|MIR"
-      },
-      {
-        "type": "Union",
-        "probability": 1,
-        "count": 4,
-        "cardUnion": [
-          {
-            "count": 1,
-            "subTypes": [
-              "Chandra"
-            ]
-          },
-          {
-            "count": 1,
-            "colors": [
-              "red"
-            ],
-            "superTypes": [
-              "Legend",
-              "Legendary"
-            ],
-            "cardText": "Chandra"
-          },
-          {
-            "count": 1,
-            "cardName": "Cursed Scroll|TMP"
-          },
-          {
-            "count": 1,
-            "cardName": "Mirari|ODY"
-          },
-          {
-            "count": 1,
-            "cardName": "Hammer of Bogardan|MIR"
-          },
-          {
-            "count": 1,
-            "cardName": "Fork|3ED"
-          }
-        ]
-      },
-      {
-        "count": 1,
-        "cardName": "Wheel of Fortune|3ED"
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.5,
-        "count": 4,
-        "addMaxCount": 2,
-        "rarity": [
-          "uncommon"
-        ],
-        "cardTypes": [
-          "Creature",
-          "Artifact",
-          "Enchantment",
-          "Instant",
-          "Sorcery"
-        ]
-      },
-      {
-        "type": "gold",
-        "probability": 1,
-        "count": 1000,
-        "addMaxCount": 9000
-      },
-      {
-        "type": "item",
-        "probability": 1,
-        "count": 1,
-        "itemName": "Chandra's Stone"
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Mountain|UGL"
-      },
-      {
-        "type": "landSketchbookShop",
-        "probability": 0.05,
-        "count": 1
-      }
-    ],
-    "colors": "R",
-    "questTags": [
-      "Human",
-      "Wizard",
-      "Pyromancer",
-      "Planeswalker",
-      "Boss",
-      "Chandra",
-      "Fire",
-      "IdentityRed"
-    ],
-    "gamesPerMatch": 3
   },
   {
     "name": "Jaya's Acolyte",
@@ -7212,10 +7098,9 @@
     "name": "Dark Enchanter",
     "sprite": "sprites/enemy/humanoid/viashino/dreamwalker.atlas",
     "deck": [
-      "decks/standard/darkenchanter.dck"
+      "decks/elite/dark_enchanter.dck"
     ],
     "ai": "",
-    "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -9615,6 +9500,7 @@
   },
   {
     "name": "Elephant",
+    "nameOverride": "War Mammoth",
     "sprite": "sprites/enemy/beast/elephant.atlas",
     "deck": [
       "decks/standard/elephant.json"
@@ -9873,126 +9759,6 @@
       "IdentityGreen",
       "BiomeGreen"
     ]
-  },
-  {
-    "name": "White End Boss",
-    "sprite": "sprites/enemy/humanoid/human/cleric/cleric.atlas",
-    "deck": [
-      "decks/standard/white_weenie.dck"
-    ],
-    "boss": true,
-    "life": 60,
-    "rewards": [
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Mox Pearl|LEA"
-      },
-      {
-        "type": "item",
-        "probability": 1,
-        "count": 1,
-        "itemName": "White Key to the False God"
-      }
-    ],
-    "colors": "W"
-  },
-  {
-    "name": "Blue End Boss",
-    "sprite": "sprites/enemy/humanoid/human/wizard/blue_wiz2.atlas",
-    "deck": [
-      "decks/standard/blue_control.dck"
-    ],
-    "boss": true,
-    "life": 60,
-    "rewards": [
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Mox Sapphire|LEA"
-      },
-      {
-        "type": "item",
-        "probability": 1,
-        "count": 1,
-        "itemName": "Blue Key to the False God"
-      }
-    ],
-    "colors": "U"
-  },
-  {
-    "name": "Black End Boss",
-    "sprite": "sprites/enemy/humanoid/human/rogue/rogue.atlas",
-    "deck": [
-      "decks/standard/black_control.dck"
-    ],
-    "boss": true,
-    "life": 60,
-    "rewards": [
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Mox Jet|LEA"
-      },
-      {
-        "type": "item",
-        "probability": 1,
-        "count": 1,
-        "itemName": "Black Key to the False God"
-      }
-    ],
-    "colors": "B"
-  },
-  {
-    "name": "Red End Boss",
-    "sprite": "sprites/enemy/humanoid/human/warrior/gladiator.atlas",
-    "deck": [
-      "decks/standard/red_aggro.dck"
-    ],
-    "boss": true,
-    "life": 60,
-    "rewards": [
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Mox Ruby|LEA"
-      },
-      {
-        "type": "item",
-        "probability": 1,
-        "count": 1,
-        "itemName": "Red Key to the False God"
-      }
-    ],
-    "colors": "R"
-  },
-  {
-    "name": "Green End Boss",
-    "sprite": "sprites/enemy/humanoid/elf/druid_2.atlas",
-    "deck": [
-      "decks/standard/green_ramp.dck"
-    ],
-    "boss": true,
-    "life": 60,
-    "rewards": [
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Mox Emerald|LEA"
-      },
-      {
-        "type": "item",
-        "probability": 1,
-        "count": 1,
-        "itemName": "Green Key to the False God"
-      }
-    ],
-    "colors": "G"
   },
   {
     "name": "Karona",
@@ -13162,6 +12928,7 @@
   },
   {
     "name": "Grave Titan",
+    "nameOverride": "Rotting Giant",
     "sprite": "sprites/enemy/giant/gravetitan.atlas",
     "deck": [
       "decks/standard/gravetitan.dck"
@@ -13679,6 +13446,7 @@
   },
   {
     "name": "Gorilla",
+    "nameOverride": "Savage Chieftain",
     "sprite": "sprites/enemy/beast/gorilla.atlas",
     "deck": [
       "decks/standard/gorilla.dck"
@@ -14138,6 +13906,7 @@
   },
   {
     "name": "Goblin King",
+    "nameOverride": "Goblin King of Kings",
     "sprite": "sprites/enemy/humanoid/goblin/goblinking.atlas",
     "deck": [
       "decks/standard/goblinking.dck"
@@ -15047,7 +14816,8 @@
     "colors": "WUBRG",
     "questTags": [
       "Special Encounter"
-    ]
+    ],
+    "boss": true
   },
   {
     "name": "Harpy",
@@ -16004,6 +15774,7 @@
   },
   {
     "name": "Royal King",
+    "nameOverride": "King of Walls",
     "sprite": "sprites/enemy/humanoid/human/knight/king_large.atlas",
     "deck": [
       "decks/standard/whiteking.dck"
@@ -16695,6 +16466,7 @@
   },
   {
     "name": "Holy Apparition",
+    "nameOverride": "Sanctum Seraphim",
     "sprite": "sprites/enemy/celestial/seraphim.atlas",
     "deck": [
       "decks/standard/seraphim.dck"
@@ -17580,6 +17352,7 @@
   },
   {
     "name": "Knight",
+    "nameOverride": "Holy Crusader",
     "sprite": "sprites/enemy/humanoid/human/knight/paladin.atlas",
     "deck": [
       "decks/standard/knight.json"
@@ -18687,122 +18460,6 @@
       "Inhuman",
       "IdentityRed"
     ]
-  },
-  {
-    "name": "Liliana",
-    "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
-    "deck": [
-      "decks/miniboss/liliana_zombies.dck"
-    ],
-    "ai": "",
-    "boss": false,
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 30,
-    "life": 70,
-    "rewards": [
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Wasteland|TMP"
-      },
-      {
-        "type": "Union",
-        "probability": 1,
-        "count": 4,
-        "cardUnion": [
-          {
-            "count": 1,
-            "subTypes": [
-              "Liliana"
-            ]
-          },
-          {
-            "count": 1,
-            "colors": [
-              "black"
-            ],
-            "superTypes": [
-              "Legend",
-              "Legendary"
-            ],
-            "cardText": "Liliana"
-          },
-          {
-            "count": 1,
-            "cardName": "Phyrexian Tower|USG"
-          },
-          {
-            "count": 1,
-            "cardName": "Necropotence|ICE"
-          },
-          {
-            "count": 1,
-            "cardName": "Vampiric Tutor|VIS"
-          },
-          {
-            "count": 1,
-            "cardName": "Demonic Tutor|3ED"
-          }
-        ]
-      },
-      {
-        "count": 1,
-        "cardName": "Yawgmoth's Bargain|UDS"
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.5,
-        "count": 4,
-        "addMaxCount": 2,
-        "rarity": [
-          "uncommon"
-        ],
-        "cardTypes": [
-          "Creature",
-          "Artifact",
-          "Enchantment",
-          "Instant",
-          "Sorcery"
-        ]
-      },
-      {
-        "type": "gold",
-        "probability": 1,
-        "count": 1000,
-        "addMaxCount": 9000
-      },
-      {
-        "type": "item",
-        "probability": 1,
-        "count": 1,
-        "itemName": "Liliana's Stone"
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Swamp|PELP"
-      },
-      {
-        "type": "landSketchbookShop",
-        "probability": 0.05,
-        "count": 1
-      }
-    ],
-    "colors": "B",
-    "questTags": [
-      "Human",
-      "Wizard",
-      "Necromancer",
-      "Planeswalker",
-      "Boss",
-      "Liliana",
-      "Death",
-      "IdentityBlack"
-    ],
-    "gamesPerMatch": 3
   },
   {
     "name": "Yawgmoth's Alchemist",
@@ -20470,7 +20127,7 @@
   },
   {
     "name": "Minotaur",
-    "nameOverride": "Minotaur King",
+    "nameOverride": "Anaba Warlord",
     "sprite": "sprites/enemy/humanoid/minotaur/minotaur.atlas",
     "deck": [
       "decks/standard/minotaur.json",
@@ -21012,9 +20669,10 @@
     "nameOverride": "Lin Sivvi, Defiant Hero",
     "sprite": "sprites/enemy/humanoid/kor/nahiri.atlas",
     "deck": [
-      "decks/miniboss/nahiri.dck"
+      "decks/boss/nahiri.dck"
     ],
     "ai": "",
+    "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 30,
@@ -22961,6 +22619,7 @@
   },
   {
     "name": "Pyromancer",
+    "nameOverride": "Sulfuric Pyromancer",
     "sprite": "sprites/enemy/humanoid/human/shaman/pyromancer.atlas",
     "deck": [
       "decks/standard/pyromancer.dck"
@@ -24825,6 +24484,7 @@
   },
   {
     "name": "Shade",
+    "nameOverride": "Frozen Shade",
     "sprite": "sprites/enemy/undead/shade.atlas",
     "deck": [
       "decks/standard/shade.dck"
@@ -26383,6 +26043,7 @@
   },
   {
     "name": "Storm Titan",
+    "nameOverride": "Pendrell Titan",
     "sprite": "sprites/enemy/giant/stormtitan.atlas",
     "deck": [
       "decks/standard/stormtitan.dck"
@@ -26575,6 +26236,7 @@
   },
   {
     "name": "Squirrel",
+    "nameOverride": "Nut Collector",
     "sprite": "sprites/enemy/beast/squirrel.atlas",
     "deck": [
       "decks/standard/squirrel.dck"
@@ -27316,7 +26978,8 @@
       "IdentityBlack",
       "Evil"
     ],
-    "gamesPerMatch": 3
+    "gamesPerMatch": 3,
+    "boss": true
   },
   {
     "name": "Turtle",
@@ -27667,9 +27330,10 @@
     "name": "Valyx the Tormentor",
     "sprite": "sprites/enemy/fiend/valyx.atlas",
     "deck": [
-      "decks/miniboss/valyx.dck"
+      "decks/boss/valyx.dck"
     ],
     "ai": "",
+    "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 31,
@@ -27759,6 +27423,7 @@
   },
   {
     "name": "Vampire",
+    "nameOverride": "Crovax the Cursed",
     "sprite": "sprites/enemy/undead/vampire.atlas",
     "deck": [
       "decks/standard/vampire.dck"
@@ -28785,6 +28450,7 @@
   },
   {
     "name": "Wolf",
+    "nameOverride": "Timber Alpha",
     "sprite": "sprites/enemy/beast/wolf.atlas",
     "deck": [
       "decks/standard/wolfboss.dck"
@@ -29062,6 +28728,7 @@
   },
   {
     "name": "Witch",
+    "nameOverride": "Vile Witch",
     "sprite": "sprites/enemy/humanoid/human/warlock/witchlarge.atlas",
     "deck": [
       "decks/standard/witch.dck"
@@ -29188,7 +28855,7 @@
       "decks/miniboss/sliver_shandalar.dck"
     ],
     "ai": "reckless",
-    "boss": false,
+    "boss": true,
     "life": 30,
     "rewards": [
       {
@@ -31218,6 +30885,7 @@
   },
   {
     "name": "Dwarf Lord",
+    "nameOverride": "Daru Warchief",
     "sprite": "sprites/enemy/humanoid/dwarf/dwarf.atlas",
     "deck": [
       "decks/castle_npc/dwarf_lord.dck"
@@ -31271,6 +30939,7 @@
   },
   {
     "name": "Sun Titan",
+    "nameOverride": "Ivory Guardian",
     "sprite": "sprites/enemy/giant/gravetitan.atlas",
     "deck": [
       "decks/castle_npc/sun_titan.dck"
@@ -31403,6 +31072,7 @@
   },
   {
     "name": "Merfolk King",
+    "nameOverride": "Lord of Atlantis",
     "sprite": "sprites/enemy/humanoid/merfolk/merfolk_lord.atlas",
     "deck": [
       "decks/castle_npc/merfolk_king.dck"
@@ -31444,6 +31114,7 @@
   },
   {
     "name": "Forest Titan",
+    "nameOverride": "Titanic Tree Overseer",
     "sprite": "sprites/enemy/elemental/walkingleef.atlas",
     "deck": [
       "decks/castle_npc/forest_titan.dck"
@@ -32356,7 +32027,7 @@
     "rewards": []
   },
   {
-    "name": "Márton Stromgald",
+    "name": "M\u00e1rton Stromgald",
     "sprite": "sprites/enemy/humanoid/human/knight/cavalier_2.atlas",
     "deck": [
       "decks/miniboss/marton_stromgald.dck"
@@ -34197,7 +33868,7 @@
     ]
   },
   {
-    "name": "Arzakon, Doom of Shandalar",
+    "name": "Arzakon, Shandalar's Doom",
     "sprite": "sprites/enemy/fiend/scourgemaster.atlas",
     "deck": [
       "decks/miniboss/shandalar97_colorless_arzakon.dck"
@@ -34321,7 +33992,7 @@
     "name": "Baron Von Gant",
     "sprite": "sprites/enemy/humanoid/human/soldier/legionite.atlas",
     "deck": [
-      "decks/miniboss/baronlegant.dck"
+      "decks/boss/baronlegant.dck"
     ],
     "ai": "",
     "boss": true,
@@ -34982,6 +34653,7 @@
   },
   {
     "name": "Ghoulcaller Ghoul",
+    "nameOverride": "Lord of the Undead",
     "sprite": "sprites/enemy/undead/zombie.atlas",
     "deck": [
       "decks/standard/shandalar97_ghoulcaller_ghoul.dck"
@@ -35041,6 +34713,7 @@
   },
   {
     "name": "Fire Titan",
+    "nameOverride": "Loafing Flame Titan",
     "sprite": "sprites/enemy/giant/firegiant.atlas",
     "deck": [
       "decks/standard/shandalar97_fire_titan.dck"
