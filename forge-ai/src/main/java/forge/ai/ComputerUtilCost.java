@@ -700,7 +700,7 @@ public class ComputerUtilCost {
                 }
             }
         }
-        return ObjectUtils.defaultIfNull(val, 0);
+        return ObjectUtils.getIfNull(val, 0);
     }
 
     public static CardCollection paymentChoicesWithoutTargets(Iterable<Card> choices, SpellAbility source, Player ai) {
