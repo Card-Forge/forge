@@ -16,10 +16,5 @@ Name=gravetitan
 4 Annihilate|INV|1
 
 [StartInBattle_Reference]
-1 Gate to Phyrexia|ATQ
-1 Phyrexian Arena|APC
-1 Phyrexian Tower|USG
-1 Putrefaction|MMQ
+4 Swamp|ONS
 1 Rotting Giant|ODY
-1 Swamp
-1 Swamp|ONS
