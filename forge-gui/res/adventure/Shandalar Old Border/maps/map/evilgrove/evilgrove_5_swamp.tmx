@@ -306,13 +306,13 @@
   </object>
   <object id="115" template="../../../../../../common/maps/obj/enemy.tx" x="755" y="32">
    <properties>
-    <property name="enemy" value="Demonic Black Wizard" />
+    <property name="enemy" value="Adept Black Wizard" />
     <property name="threatRange" type="int" value="30" />
    <property name="effect">{ "startBattleWithCard": [ "Wall of Bone|LEA|1" ] }</property></properties>
   </object>
   <object id="116" template="../../../../../../common/maps/obj/enemy.tx" x="2" y="292">
    <properties>
-    <property name="enemy" value="Demonic Black Wizard" />
+    <property name="enemy" value="Adept Black Wizard" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="118,119,120,83,120,119,118,121,122,121" />
    <property name="effect">{ "startBattleWithCard": [ "Wall of Bone|LEA|1" ] }</property></properties>

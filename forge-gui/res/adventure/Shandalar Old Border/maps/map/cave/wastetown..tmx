@@ -88,7 +88,7 @@
   <object id="62" template="../../../../../../common/maps/obj/enemy.tx" x="209" y="52.3333">
    <properties>
     <property name="effect">{ "startBattleWithCard": [ "Wall of Bone|LEA|1" ] }</property>
-    <property name="enemy" value="Demonic Black Wizard" />
+    <property name="enemy" value="Adept Black Wizard" />
     <property name="pursueRange" type="int" value="20" />
     <property name="threatRange" type="int" value="50" />
    </properties>

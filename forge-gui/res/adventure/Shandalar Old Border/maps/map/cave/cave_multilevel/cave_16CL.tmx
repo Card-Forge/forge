@@ -32,7 +32,7 @@
   </object>
   <object id="74" template="../../../../../../../common/maps/obj/enemy.tx" x="113.061" y="120.971">
    <properties>
-    <property name="enemy" value="Demonic Black Wizard" />
+    <property name="enemy" value="Adept Black Wizard" />
     <property name="threatRange" type="int" value="50" />
    <property name="effect">{ "startBattleWithCard": [ "Wall of Bone|LEA|1" ] }</property></properties>
   </object>

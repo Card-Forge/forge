@@ -86,7 +86,7 @@
   </object>
   <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="164.667" y="79.6667">
    <properties>
-    <property name="enemy" value="Demonic Black Wizard" />
+    <property name="enemy" value="Adept Black Wizard" />
     <property name="threatRange" type="int" value="30" />
    <property name="effect">{ "startBattleWithCard": [ "Wall of Bone|LEA|1" ] }</property></properties>
   </object>
@@ -116,21 +116,21 @@
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="139.333" y="214.667">
    <properties>
-    <property name="enemy" value="Demonic Black Wizard" />
+    <property name="enemy" value="Adept Black Wizard" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="80,72,79,81" />
    <property name="effect">{ "startBattleWithCard": [ "Wall of Bone|LEA|1" ] }</property></properties>
   </object>
   <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="226.333" y="346.333">
    <properties>
-    <property name="enemy" value="Demonic Black Wizard" />
+    <property name="enemy" value="Adept Black Wizard" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="81,72,73,77,73,72,81" />
    <property name="effect">{ "startBattleWithCard": [ "Wall of Bone|LEA|1" ] }</property></properties>
   </object>
   <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="363.667" y="193.667">
    <properties>
-    <property name="enemy" value="Demonic Black Wizard" />
+    <property name="enemy" value="Adept Black Wizard" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="75,74,82,74" />
    <property name="effect">{ "startBattleWithCard": [ "Wall of Bone|LEA|1" ] }</property></properties>

@@ -150,7 +150,7 @@
 		}]
 	}]
 } ]</property>
-    <property name="enemy" value="Demonic Black Wizard" />
+    <property name="enemy" value="Adept Black Wizard" />
    <property name="effect">{ "startBattleWithCard": [ "Wall of Bone|LEA|1" ] }</property></properties>
   </object>
   <object id="226" template="../../../../../../../common/maps/obj/portal.tx" type="portal" x="112" y="112">

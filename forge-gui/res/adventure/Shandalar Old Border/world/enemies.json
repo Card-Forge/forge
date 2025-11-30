@@ -71,7 +71,7 @@
     ]
   },
   {
-    "name": "Demonic Black Wizard",
+    "name": "Adept Black Wizard",
     "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz2.atlas",
     "deck": [
       "decks/elite/blackwizard_medium_demonicpact.dck",
