@@ -3950,7 +3950,7 @@
 	},
 	{
 		"name": "VampireCastle1",
-		"displayName": "Swamp Queen's Castle",
+		"displayName": "Chainer's Castle",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",

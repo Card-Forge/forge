@@ -45,7 +45,7 @@
   {
     "type": "randomCard",
     "colors": [ "Black" ],
-    "subTypes": [ "Nightstalker" ],
+    "subTypes": [ "Dementia" ],
     "count": 5
   },
   {
@@ -81,9 +81,16 @@
 ]</property>
    </properties>
   </object>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="243.161" y="219.409" width="26.041" height="20.418">
+   <properties>
+    <property name="enemy" value="Chainer Dementia Master" />
+    <property name="inactive" type="bool" value="true" />
+    <property name="threatRange" type="int" value="50" />
+   <property name="effect">{ "startBattleWithCard": ["Chainer, Dementia Master|TOR", "Cabal Coffers|TOR"] }</property></properties>
+  </object>
   <object id="105" template="../../../../../../common/maps/obj/enemy.tx" x="280" y="260">
    <properties>
-    <property name="enemy" value="Nightstalker" />
+    <property name="enemy" value="Dementia Beast" />
     <property name="threatRange" type="int" value="40" />
    </properties>
   </object>
@@ -93,7 +100,7 @@
   {
     "type": "randomCard",
     "colors": [ "Black" ],
-    "subTypes": [ "Nightstalker" ],
+    "subTypes": [ "Dementia" ],
     "count": 5
   },
   {
@@ -139,19 +146,19 @@
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Breathstealer|MIR"
+		"cardName": "Chainer's Edict|TOR"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Feral Shadow|MIR"
+		"cardName": "Mesmeric Fiend|TOR"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Nightstalker Engine|PO2"
+		"cardName": "Laquatus's Champion|TOR"
 	},
 	{
 		"type": "card",
@@ -163,7 +170,7 @@
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Everglades|VIS"
+		"cardName": "Cabal Coffers|TOR"
 	},
 	{
 		"type": "card",
@@ -211,7 +218,7 @@
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Drain Life|MIR"
+		"cardName": "Diabolic Edict|TMP"
 	},
 	{
 		"type": "card",
@@ -341,7 +348,7 @@
   </object>
   <object id="92" template="../../../../../../common/maps/obj/enemy.tx" x="209.287" y="239.41">
    <properties>
-    <property name="enemy" value="Nightstalker" />
+    <property name="enemy" value="Dementia Beast" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="95,94" />
    <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property></properties>
@@ -653,6 +660,38 @@
                         }
                       ]
                     }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="106" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="243" y="235" width="27.7319" height="14.6679" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    "text": "You see an ornate black coffin at the center of the crypt. Dark energy pulses from within, and you can hear whispers of madness emanating from it.",
+    "options": [
+      { "name": "Walk away" },
+      {
+        "name": "Examine the coffin more closely",
+        "text": "The coffin is adorned with symbols of the Cabal. You sense an overwhelming presence of dementia and nightmares within. This is no ordinary resting place.",
+        "options": [
+          { "name": "Leave it undisturbed" },
+          {
+            "name": "Open the coffin",
+            "text": "As you lift the lid, a powerful figure rises from the depths. 'YOU DARE DISTURB THE DEMENTIA MASTER?' bellows Chainer, his eyes glowing with dark power!",
+            "options": [
+              {
+                "name": "Face the Dementia Master!",
+                "action": [
+                  { "activateMapObject": 50 },
+                  { "deleteMapObject": -1 }
                 ]
               }
             ]
