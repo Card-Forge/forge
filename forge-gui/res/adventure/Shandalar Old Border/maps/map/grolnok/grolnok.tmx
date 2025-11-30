@@ -465,7 +465,7 @@
   </object>
   <object id="197" template="../../../../../../common/maps/obj/enemy.tx" x="40" y="55.1638" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Dwarven Ruins|FEM", "Ebon Stronghold|FEM", "Dragonspeaker Shaman|SCG", "Bladewing's Thrall|SCG", "Wall of Bone|2ED" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Dwarven Ruins|FEM", "Ebon Stronghold|FEM", "Dragonspeaker Shaman|SCG", "Bladewing's Thrall|SCG", "Wall of Bone|LEA" ] }</property>
     <property name="enemy" value="Bone Dragon" />
    </properties>
   </object>
