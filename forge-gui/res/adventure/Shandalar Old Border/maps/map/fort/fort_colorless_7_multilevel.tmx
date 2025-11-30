@@ -43,24 +43,11 @@
   </object>
   <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="391.848" y="282.871">
    <properties>
-    <property name="enemy" value="Corrupted Red Wizard"/>
-    <property name="threatRange" type="int" value="40"/>
-   </properties>
-  </object>
-  <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="383.166" y="385.704">
-   <properties>
-    <property name="enemy" value="Corrupted Blue Wizard"/>
-    <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value="62,63,64,63"/>
-   </properties>
+    <property name="enemy" value="Kiska-Ra of Shandalar"/>
+    <property name="threatRange" type="int" value="100"/>
+   <property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN" ] }</property></properties>
   </object>
   <object id="59" template="../../../../../../common/maps/obj/gold.tx" x="275.167" y="296.667"/>
-  <object id="60" template="../../../../../../common/maps/obj/enemy.tx" x="515.083" y="355.083">
-   <properties>
-    <property name="enemy" value="Corrupted Red Wizard"/>
-    <property name="threatRange" type="int" value="40"/>
-   </properties>
-  </object>
   <object id="61" template="../../../../../../common/maps/obj/manashards.tx" x="328" y="234"/>
   <object id="62" template="../../../../../../common/maps/obj/waypoint.tx" x="474" y="380.667"/>
   <object id="63" template="../../../../../../common/maps/obj/waypoint.tx" x="267.667" y="381"/>

@@ -1948,7 +1948,7 @@
 	},
 	{
 		"name": "FortMultilevel",
-		"displayName": "Cultists' Outpost",
+		"displayName": "Arzakon's Fortress",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
