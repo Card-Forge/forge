@@ -473,6 +473,7 @@
    <properties>
     <property name="effect">{ "startBattleWithCard": [ "Bull Hippo|POR", "Island|POR|1", "Plains|POR|1", "Forest|POR|1" ] }</property>
     <property name="enemy" value="Hippo" />
+   <property name="effect">{ "startBattleWithCard": [ "Bull Hippo|POR", "Island|POR", "Plains|POR", "Forest|POR" ] }</property>
     <property name="threatRange" type="int" value="20" />
    </properties>
   </object>

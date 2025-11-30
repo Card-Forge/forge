@@ -199,7 +199,7 @@
 ]</property>
     <property name="enemy" value="Holy Apparition" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Glorious Anthem|USG", "Mobilization|ONS", "Serra\u2019s Sanctum|USG" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Mobilization|ONS", "Serra's Sanctum|USG" ] }</property>
   </object>
   <object id="72" template="../../../../../../../common/maps/obj/enemy.tx" x="84" y="405.667">
    <properties>

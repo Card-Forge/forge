@@ -132,7 +132,7 @@
    <properties>
     <property name="enemy" value="Joven" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Joven|HML", "Joven\u2019s Ferrets|HML", "Joven\u2019s Tools|HML" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Joven's Ferrets|HML", "Joven's Tools|HML", "Joven|HML" ] }</property>
   </object>
  </objectgroup>
 </map>

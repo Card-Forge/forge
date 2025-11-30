@@ -102,6 +102,7 @@
   <object id="86" template="../../../../../../common/maps/obj/enemy.tx" x="201.666" y="83">
    <properties>
     <property name="enemy" value="Holy Apparition"/>
+   <property name="effect">{ "startBattleWithCard": [ "Mobilization|ONS", "Serra's Sanctum|USG" ] }</property>
     <property name="speedModifier" type="float" value="5"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
