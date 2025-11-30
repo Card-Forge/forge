@@ -640,7 +640,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         final Set<String> sets = new HashSet<>();
         for (final PaperCard cp : aiPlayables) {
             final CardEdition ee = FModel.getMagicDb().getEditions().get(cp.getEdition());
-            if( !sets.contains(cp.getEdition()) && CardEdition.Predicates.hasBasicLands.test(ee)) {
+            if( !sets.contains(cp.getEdition()) && ee != null && ee.hasBasicLands()) {
                 sets.add(cp.getEdition());
             }
         }

@@ -300,7 +300,11 @@ public class RewardData implements Serializable {
                         }
 
                         endDate = endDate == 0 ? 9999 : endDate;
-                        allEditions.removeIf(q -> q.getDate().getYear()+1900 < startDate || q.getDate().getYear()+1900 > endDate);
+                        allEditions.removeIf(q -> {
+                            Calendar cal = Calendar.getInstance();
+                            cal.setTime(q.getDate());
+                            return cal.get(Calendar.YEAR) < startDate || cal.get(Calendar.YEAR) > endDate;
+                        });
                         for (int i = 0; i < count + addedCount; i++) {
                             ret.add(new Reward(AdventureEventController.instance().generateBooster(
                                 allEditions.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(allEditions.size())).getCode())));

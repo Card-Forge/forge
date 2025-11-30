@@ -85,7 +85,7 @@ public final class QuestUtilCards {
             for (String edCode : availableEditions) {
                 CardEdition ed = FModel.getMagicDb().getEditions().get(edCode);
                 // Duel decks might have only 2 types of basic lands
-                if (CardEdition.Predicates.hasBasicLands.test(ed)) {
+                if (ed != null && ed.hasBasicLands()) {
                     landCodes.add(edCode);
                 }
             }
