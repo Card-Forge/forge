@@ -3089,7 +3089,7 @@
 	},
 	{
 		"name": "Monastery",
-		"displayName": "Monastery",
+		"displayName": "Dark Age Church",
 		"type": "dungeon",
 		"count": 3,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
