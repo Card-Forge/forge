@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="77">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="79">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
@@ -40,66 +40,26 @@
   </object>
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="72.697" y="184.76">
    <properties>
-    <property name="displayNameOverride" value="Nightstalker Guardian" />
-    <property name="enemy" value="Nightstalker" />
+    <property name="displayNameOverride" value="Cateran Guard" />
+    <property name="enemy" value="Cateran Slaver" />
     <property name="threatRange" type="int" value="30" />
    </properties>
   </object>
   <object id="62" template="../../../../../../common/maps/obj/gold.tx" x="185.431" y="37.9964" />
-  <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="215" y="75">
-   <properties>
-    <property name="enemy" value="Swamp Queen Tojira" />
-    <property name="inactive" type="bool" value="true" />
-    <property name="speedModifier" type="float" value="10" />
-    <property name="threatRange" type="int" value="50" />
-   <property name="effect">{ "startBattleWithCard": [ "Breathstealer|MIR", "Everglades|VIS", "Feral Shadow|MIR", "Lake of the Dead|ALL", "Nightstalker Engine|PO2" ] }</property></properties>
-  </object>
   <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="174.262" y="162.311">
    <properties>
-    <property name="displayNameOverride" value="Nightstalker Feeder" />
-    <property name="enemy" value="Nightstalker" />
+    <property name="displayNameOverride" value="Cateran Raider" />
+    <property name="enemy" value="Cateran Slaver" />
     <property name="threatRange" type="int" value="50" />
-   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property></properties>
-  </object>
-  <object id="67" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="215" y="90" width="24.9204" height="14.6679" visible="1">
-   <properties>
-    <property name="dialog">[
-  {
-    "text": "You see a coffin lying at the center of the crypt. This relic of vampiric history, once a vessel for the undying, now stood as a time-worn testament to the passage of ages, a silent witness to the secrets and shadows that had unfolded within its confines. The ancient coffin, a repository of centuries, exuded an aura of both menace and melancholy, a silent sentinel to the mysteries of the nocturnal realm.",
-    "options": [
-      { "name": "Walk away" },
-      {
-        "name": "Take a closer look at the rusty coffin",
-        "text": "You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.",
-        "options": [
-          { "name": "Walk away" },
-          {
-            "name": "Open the coffin",
-            "text": "As you open the coffin, an ancient figure awakes in the gloom. It cries out in an ancient voice: YOU DARE WAKE ME, PUNY MORTAL?",
-            "options": [
-              {
-                "name": "Prepare yourself!",
-                "action": [
-                  { "activateMapObject": 64 },
-                  { "deleteMapObject": -1 }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
-]</property>
    </properties>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/gold.tx" x="48.2296" y="159.484" />
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="239.812" y="163.5">
    <properties>
-    <property name="displayNameOverride" value="Nightstalker Feeder" />
-    <property name="enemy" value="Nightstalker" />
+    <property name="displayNameOverride" value="Cateran Bruiser" />
+    <property name="enemy" value="Cateran Slaver" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property></properties>
+   </properties>
   </object>
   <object id="70" template="../../../../../../common/maps/obj/gold.tx" x="48.2296" y="212.099" />
   <object id="71" template="../../../../../../common/maps/obj/manashards.tx" x="154.263" y="68.7132" />
@@ -110,7 +70,7 @@
   {
     "type": "randomCard",
     "colors": [ "Black" ],
-    "subTypes": [ "Nightstalker" ],
+    "subTypes": [ "Mercenary" ],
     "count": 5
   },
   {
@@ -152,7 +112,7 @@
   {
     "type": "randomCard",
     "colors": [ "Black" ],
-    "subTypes": [ "Nightstalker" ],
+    "subTypes": [ "Mercenary" ],
     "count": 5
   },
   {
@@ -195,86 +155,126 @@
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Breathstealer|MIR"
+		"cardName": "Cateran Overlord|MMQ"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Feral Shadow|MIR"
+		"cardName": "Black Market|MMQ"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Nightstalker Engine|PO2"
+		"cardName": "Larceny|MMQ"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Lake of the Dead|ALL"
+		"cardName": "Intimidation|MMQ"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Everglades|VIS"
+		"cardName": "Extortion|MMQ"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Nether Shadow|LEA"
+		"cardName": "Cateran Slaver|MMQ"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Sengir Autocrat|HML"
+		"cardName": "Cateran Enforcer|MMQ"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Ebon Praetor|FEM"
+		"cardName": "Rathi Assassin|NMS"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Phyrexian Negator|UDS"
+		"cardName": "Cateran Kidnappers|MMQ"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Contamination|USG"
+		"cardName": "Highway Robber|MMQ"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Hatred|EXO"
+		"cardName": "Strongarm Thug|MMQ"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Twisted Abomination|SCG"
+		"cardName": "Snuff Out|MMQ"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Faceless Butcher|TOR"
+		"cardName": "Vendetta|MMQ"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Corrupt|USG"
+		"cardName": "Cabal Coffers|TOR"
 	}
+]</property>
+   </properties>
+  </object>
+  <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="215" y="75">
+   <properties>
+    <property name="enemy" value="Cateran Overlord" />
+    <property name="inactive" type="bool" value="true" />
+    <property name="speedModifier" type="float" value="10" />
+    <property name="threatRange" type="int" value="50" />
+   <property name="effect">{ "startBattleWithCard": [ "Black Market|MMQ", "Larceny|MMQ", "Misshapen Fiend|MMQ", "Rathi Assassin|NMS", "Spineless Thug|NMS" ] }</property></properties>
+  </object>
+  <object id="78" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="215" y="90" width="24.9204" height="14.6679" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    "text": "At the heart of the crypt lies an ornate chest adorned with mercenary insignias. Dark energy emanates from within, and you hear the faint clink of coins and steel.",
+    "options": [
+      { "name": "Walk away" },
+      {
+        "name": "Examine the chest more closely",
+        "text": "The chest bears the mark of the Cateran mercenaries. You sense the presence of a powerful warlord within, waiting to strike at any who dare disturb his treasure.",
+        "options": [
+          { "name": "Leave it undisturbed" },
+          {
+            "name": "Open the chest",
+            "text": "As you lift the lid, a formidable figure rises from within. 'YOU DARE STEAL FROM THE CATERAN OVERLORD?' bellows the warlord, his blades gleaming with deadly intent!",
+            "options": [
+              {
+                "name": "Face the Overlord!",
+                "action": [
+                  { "activateMapObject": 77 },
+                  { "deleteMapObject": -1 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 ]</property>
    </properties>
   </object>

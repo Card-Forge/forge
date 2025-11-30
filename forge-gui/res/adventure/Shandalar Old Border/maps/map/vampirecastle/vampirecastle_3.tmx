@@ -69,16 +69,16 @@
   </object>
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="184.641" y="206.252">
    <properties>
-    <property name="enemy" value="Vampire" />
-   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property></properties>
+    <property name="enemy" value="Cateran Slaver" />
+   </properties>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="192.466" y="320.645">
    <properties>
-    <property name="displayNameOverride" value="Minor Vampire" />
-    <property name="enemy" value="Vampire" />
+    <property name="displayNameOverride" value="Cateran Scout" />
+    <property name="enemy" value="Cateran Slaver" />
     <property name="speedModifier" type="float" value="40" />
     <property name="waypoints" value="71,70" />
-   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property></properties>
+   </properties>
   </object>
   <object id="70" template="../../../../../../common/maps/obj/waypoint.tx" x="194.701" y="255.065" />
   <object id="71" template="../../../../../../common/maps/obj/waypoint.tx" x="193.211" y="398.893" />
@@ -96,7 +96,7 @@
 	{
 		"type": "randomCard",
 		"colors": [ "Black" ],
-		"subTypes": [ "Vampire" ],
+		"subTypes": [ "Mercenary" ],
 		"count": 5
 	}
 ]</property>
