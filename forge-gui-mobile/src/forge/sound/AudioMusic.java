@@ -32,8 +32,7 @@ public class AudioMusic implements IAudioMusic {
             //sometimes cause a paused audio track to rapidly advance its position to the end (silently)
             //and then fire a completion listener. Setting the position manually right before pausing
             //seems to prevent this.
-            float pauseTimestamp = music.getPosition();
-            music.setPosition(pauseTimestamp);
+            music.setPosition(music.getPosition());
             music.pause();
         }
     }
