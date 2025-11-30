@@ -112,7 +112,7 @@
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="466.333" y="198.333">
    <properties>
     <property name="enemy" value="Bone Dragon" />
-   <property name="effect">{ "startBattleWithCard": [ "Ashen Ghoul|ICE" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Dwarven Ruins|FEM", "Ebon Stronghold|FEM", "Dragonspeaker Shaman|SCG", "Bladewing's Thrall|SCG", "Wall of Bone|2ED" ] }</property></properties>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="139.333" y="214.667">
    <properties>
