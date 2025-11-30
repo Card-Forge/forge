@@ -33,12 +33,12 @@
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="287.074" y="141.29">
    <properties>
     <property name="enemy" value="Mimic" />
-   <property name="effect">{ "startBattleWithCard": [ "Fellwar Stone|DRK|1", "Kismet|LEG" ] }</property></properties>
+   </properties>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="128.033" y="143.933">
    <properties>
     <property name="enemy" value="Mimic" />
-   <property name="effect">{ "startBattleWithCard": [ "Fellwar Stone|DRK|1", "Kismet|LEG" ] }</property></properties>
+   </properties>
   </object>
   <object id="70" template="../../../../../../common/maps/obj/entry_down.tx" x="272.342" y="211.743">
    <properties>

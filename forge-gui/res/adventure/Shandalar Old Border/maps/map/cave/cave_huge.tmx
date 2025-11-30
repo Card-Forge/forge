@@ -89,7 +89,7 @@
   <object id="98" template="../../../../../../common/maps/obj/enemy.tx" x="1639.33" y="2433.33">
    <properties>
     <property name="enemy" value="Mimic" />
-   <property name="effect">{ "startBattleWithCard": [ "Fellwar Stone|DRK|1", "Kismet|LEG" ] }</property></properties>
+   </properties>
   </object>
   <object id="99" template="../../../../../../common/maps/obj/enemy.tx" x="1557.5" y="1108.5">
    <properties>
