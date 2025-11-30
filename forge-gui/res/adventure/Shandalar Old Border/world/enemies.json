@@ -704,10 +704,10 @@
   },
   {
     "name": "Aether Channeler",
-    "nameOverride": "Master of Morph",
+    "nameOverride": "Morph Master",
     "sprite": "sprites/enemy/humanoid/human/cleric/monk_3.atlas",
     "deck": [
-      "decks/standard/aether_channeler.dck"
+      "decks/elite/aether_channeler.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -776,8 +776,7 @@
       "IdentityBlue",
       "IdentityAzorius",
       "Mystic"
-    ],
-    "nameOverride": "Morph Master"
+    ]
   },
   {
     "name": "Akroma",
@@ -2080,7 +2079,7 @@
     "nameOverride": "Tyrant Mage",
     "sprite": "sprites/enemy/humanoid/human/wizard/archmage.atlas",
     "deck": [
-      "decks/standard/archmage.dck"
+      "decks/elite/archmage.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -2909,7 +2908,7 @@
     "nameOverride": "Keldon Warlord",
     "sprite": "sprites/enemy/humanoid/human/barbarian/barbarian.atlas",
     "deck": [
-      "decks/standard/barbarian.dck"
+      "decks/elite/barbarian.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -3832,7 +3831,7 @@
     "nameOverride": "",
     "sprite": "sprites/enemy/dragon/bonedragon.atlas",
     "deck": [
-      "decks/standard/bonedragon.dck"
+      "decks/elite/bonedragon.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -3915,10 +3914,10 @@
   },
   {
     "name": "Brain Mole",
-    "nameOverride": "Mole of Laquatus",
+    "nameOverride": "Mill Mole",
     "sprite": "sprites/enemy/monstrosity/brainmole.atlas",
     "deck": [
-      "decks/standard/millwizard.dck"
+      "decks/elite/millwizard.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -3966,8 +3965,7 @@
       "Wandering",
       "Unholy",
       "Evil"
-    ],
-    "nameOverride": "Mill Mole"
+    ]
   },
   {
     "name": "Camel",
@@ -5524,7 +5522,7 @@
     "name": "Chicken",
     "sprite": "sprites/enemy/beast/chicken.atlas",
     "deck": [
-      "decks/standard/chicken.dck"
+      "decks/elite/chicken.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -6113,7 +6111,7 @@
     "name": "Copper Host Brutalizer",
     "sprite": "sprites/enemy/aberration/copperhostbrutalizer.atlas",
     "deck": [
-      "decks/standard/copperhostbrutalizer.dck"
+      "decks/miniboss/copperhostbrutalizer.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -6191,7 +6189,8 @@
       "Phyrexian",
       "Copper Host",
       "Humanoid"
-    ]
+    ],
+    "boss": true
   },
   {
     "name": "Copper Host Infector",
@@ -7599,7 +7598,7 @@
     "nameOverride": "Specter's Horror",
     "sprite": "sprites/enemy/fiend/cacodaemon.atlas",
     "deck": [
-      "decks/standard/tibalt_demon.dck"
+      "decks/miniboss/tibalt_demon.dck"
     ],
     "ai": "",
     "flying": true,
@@ -7663,7 +7662,8 @@
       "Unholy",
       "IdentityBlack",
       "BiomeBlack"
-    ]
+    ],
+    "boss": true
   },
   {
     "name": "Demoncaller",
@@ -8248,7 +8248,7 @@
     "name": "Doppelganger",
     "sprite": "sprites/enemy/undead/doppelganger.atlas",
     "deck": [
-      "decks/standard/mimic.dck"
+      "decks/elite/mimic.dck"
     ],
     "copyPlayerDeck": true,
     "ai": "",
@@ -8605,7 +8605,7 @@
     "name": "Dross Grimnarch",
     "sprite": "sprites/enemy/aberration/drossgrimnarch.atlas",
     "deck": [
-      "decks/standard/drossgrimnarch.dck"
+      "decks/miniboss/drossgrimnarch.dck"
     ],
     "ai": "",
     "spawnRate": 0.2,
@@ -8686,7 +8686,8 @@
       "IdentityBlack",
       "IdentityBlue",
       "IdentityDimir"
-    ]
+    ],
+    "boss": true
   },
   {
     "name": "Dwarf",
@@ -9503,7 +9504,7 @@
     "nameOverride": "War Mammoth",
     "sprite": "sprites/enemy/beast/elephant.atlas",
     "deck": [
-      "decks/standard/elephant.json"
+      "decks/elite/elephant.json"
     ],
     "ai": "",
     "spawnRate": 0.8,
@@ -11588,7 +11589,7 @@
     "name": "Furnace Tormentor",
     "sprite": "sprites/enemy/aberration/furnacetormentor.atlas",
     "deck": [
-      "decks/standard/furnacetormentor.dck"
+      "decks/miniboss/furnacetormentor.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -11669,7 +11670,8 @@
       "IdentityRed",
       "IdentityGreen",
       "IdentityGruul"
-    ]
+    ],
+    "boss": true
   },
   {
     "name": "Gargoyle",
@@ -12763,7 +12765,7 @@
     "name": "Gitaxian Scientist",
     "sprite": "sprites/enemy/aberration/gitaxianscientist.atlas",
     "deck": [
-      "decks/standard/gitaxianscientist.dck"
+      "decks/miniboss/gitaxianscientist.dck"
     ],
     "ai": "",
     "spawnRate": 0.6,
@@ -12845,7 +12847,8 @@
       "IdentityBlue",
       "IdentityGreen",
       "IdentitySimic"
-    ]
+    ],
+    "boss": true
   },
   {
     "name": "Gitaxian Underling",
@@ -12931,7 +12934,7 @@
     "nameOverride": "Rotting Giant",
     "sprite": "sprites/enemy/giant/gravetitan.atlas",
     "deck": [
-      "decks/standard/gravetitan.dck"
+      "decks/elite/gravetitan.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -13449,7 +13452,7 @@
     "nameOverride": "Savage Chieftain",
     "sprite": "sprites/enemy/beast/gorilla.atlas",
     "deck": [
-      "decks/standard/gorilla.dck"
+      "decks/elite/gorilla.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -13909,7 +13912,7 @@
     "nameOverride": "Goblin King of Kings",
     "sprite": "sprites/enemy/humanoid/goblin/goblinking.atlas",
     "deck": [
-      "decks/standard/goblinking.dck"
+      "decks/elite/goblinking.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -15475,7 +15478,7 @@
     "nameOverride": "Giant Bull Hippo",
     "sprite": "sprites/enemy/beast/hippo.atlas",
     "deck": [
-      "decks/standard/hippo.dck"
+      "decks/elite/hippo.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -15777,7 +15780,7 @@
     "nameOverride": "King of Walls",
     "sprite": "sprites/enemy/humanoid/human/knight/king_large.atlas",
     "deck": [
-      "decks/standard/whiteking.dck"
+      "decks/elite/whiteking.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -16469,7 +16472,7 @@
     "nameOverride": "Sanctum Seraphim",
     "sprite": "sprites/enemy/celestial/seraphim.atlas",
     "deck": [
-      "decks/standard/seraphim.dck"
+      "decks/elite/seraphim.dck"
     ],
     "ai": "",
     "spawnRate": 0.2,
@@ -17355,7 +17358,7 @@
     "nameOverride": "Holy Crusader",
     "sprite": "sprites/enemy/humanoid/human/knight/paladin.atlas",
     "deck": [
-      "decks/standard/knight.json"
+      "decks/elite/knight.json"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -19124,10 +19127,10 @@
     "name": "Master Blue Wizard",
     "sprite": "sprites/enemy/humanoid/human/wizard/mage_2.atlas",
     "deck": [
-      "decks/standard/bluewizard_hard_control.dck",
-      "decks/standard/bluewizard_hard_control2.dck",
-      "decks/standard/bluewizard_hard_artifact.dck",
-      "decks/standard/bluewizard_hard_bounce.dck"
+      "decks/elite/bluewizard_hard_control.dck",
+      "decks/elite/bluewizard_hard_control2.dck",
+      "decks/elite/bluewizard_hard_artifact.dck",
+      "decks/elite/bluewizard_hard_bounce.dck"
     ],
     "ai": "",
     "flying": true,
@@ -19753,7 +19756,7 @@
     "nameOverride": "Crystalline Sliver",
     "sprite": "sprites/enemy/aberration/sliver_black.atlas",
     "deck": [
-      "decks/standard/sliver_metallicsliver.dck"
+      "decks/miniboss/sliver_metallicsliver.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -19811,13 +19814,14 @@
       "Swarm",
       "Construct",
       "IdentityColorless"
-    ]
+    ],
+    "boss": true
   },
   {
     "name": "Mighty Djinn",
     "sprite": "sprites/enemy/elemental/genie.atlas",
     "deck": [
-      "decks/standard/mighty_djinn.dck"
+      "decks/miniboss/mighty_djinn.dck"
     ],
     "ai": "",
     "flying": true,
@@ -19866,7 +19870,8 @@
       "Wind",
       "IdentityBlue",
       "Djinn"
-    ]
+    ],
+    "boss": true
   },
   {
     "name": "Mimic",
@@ -20130,10 +20135,10 @@
     "nameOverride": "Anaba Warlord",
     "sprite": "sprites/enemy/humanoid/minotaur/minotaur.atlas",
     "deck": [
-      "decks/standard/minotaur.json",
-      "decks/standard/minotaurblackredmadness.dck",
-      "decks/standard/minotaurmid.dck",
-      "decks/standard/minotaurmonored.dck"
+      "decks/elite/minotaur.json",
+      "decks/elite/minotaurblackredmadness.dck",
+      "decks/elite/minotaurmid.dck",
+      "decks/elite/minotaurmonored.dck"
     ],
     "ai": "",
     "randomizeDeck": true,
@@ -20748,7 +20753,6 @@
       "IdentityWhite",
       "IdentityBoros"
     ],
-    "boss": true,
     "gamesPerMatch": 3
   },
   {
@@ -21926,7 +21930,7 @@
     "name": "Pirate Captain",
     "sprite": "sprites/enemy/humanoid/human/rogue/pirate_captain.atlas",
     "deck": [
-      "decks/standard/pirate_captain.dck"
+      "decks/elite/pirate_captain.dck"
     ],
     "ai": "",
     "randomizeDeck": true,
@@ -22087,7 +22091,7 @@
     "name": "Pharaoh",
     "sprite": "sprites/enemy/undead/pharaoh.atlas",
     "deck": [
-      "decks/standard/pharaoh.dck"
+      "decks/miniboss/pharaoh.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -22132,7 +22136,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Ring of Ma'r\u00fbf"
+        "itemName": "Ring of Ma'rûf"
       }
     ],
     "questTags": [
@@ -22145,7 +22149,8 @@
       "IdentityOrzhov",
       "BiomeColorless",
       "BiomeBlack"
-    ]
+    ],
+    "boss": true
   },
   {
     "name": "Plant",
@@ -22622,7 +22627,7 @@
     "nameOverride": "Sulfuric Pyromancer",
     "sprite": "sprites/enemy/humanoid/human/shaman/pyromancer.atlas",
     "deck": [
-      "decks/standard/pyromancer.dck"
+      "decks/elite/pyromancer.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -23496,7 +23501,7 @@
     "nameOverride": "Hibernation Sliver",
     "sprite": "sprites/enemy/aberration/sliver_black.atlas",
     "deck": [
-      "decks/standard/sliver_recruitersliver.dck"
+      "decks/miniboss/sliver_recruitersliver.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -23539,7 +23544,8 @@
       "IdentityBlue",
       "IdentityGrixis",
       "BiomeBlack"
-    ]
+    ],
+    "boss": true
   },
   {
     "name": "Red Beast",
@@ -24487,7 +24493,7 @@
     "nameOverride": "Frozen Shade",
     "sprite": "sprites/enemy/undead/shade.atlas",
     "deck": [
-      "decks/standard/shade.dck"
+      "decks/elite/shade.dck"
     ],
     "ai": "",
     "flying": true,
@@ -25643,7 +25649,7 @@
     "name": "Snow Wizard",
     "sprite": "sprites/enemy/humanoid/human/wizard/simic_wiz.atlas",
     "deck": [
-      "decks/standard/simicwizard_snow.dck"
+      "decks/miniboss/simicwizard_snow.dck"
     ],
     "ai": "",
     "randomizeDeck": true,
@@ -25707,7 +25713,8 @@
       "IdentityBlue",
       "IdentityGreen",
       "IdentitySimic"
-    ]
+    ],
+    "boss": true
   },
   {
     "name": "Sphinx",
@@ -26046,7 +26053,7 @@
     "nameOverride": "Pendrell Titan",
     "sprite": "sprites/enemy/giant/stormtitan.atlas",
     "deck": [
-      "decks/standard/stormtitan.dck"
+      "decks/elite/stormtitan.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -26239,7 +26246,7 @@
     "nameOverride": "Nut Collector",
     "sprite": "sprites/enemy/beast/squirrel.atlas",
     "deck": [
-      "decks/standard/squirrel.dck"
+      "decks/elite/squirrel.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -27418,15 +27425,14 @@
       "Unholy",
       "IdentityBlack"
     ],
-    "gamesPerMatch": 3,
-    "boss": true
+    "gamesPerMatch": 3
   },
   {
     "name": "Vampire",
     "nameOverride": "Crovax the Cursed",
     "sprite": "sprites/enemy/undead/vampire.atlas",
     "deck": [
-      "decks/standard/vampire.dck"
+      "decks/elite/vampire.dck"
     ],
     "ai": "",
     "flying": true,
@@ -28081,7 +28087,7 @@
     "name": "Werebear",
     "sprite": "sprites/enemy/beast/bear_large.atlas",
     "deck": [
-      "decks/standard/bearboss.dck"
+      "decks/miniboss/bearboss.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -28154,7 +28160,8 @@
       "Domesticated",
       "IdentityGreen",
       "BiomeGreen"
-    ]
+    ],
+    "boss": true
   },
   {
     "name": "Werewolf",
@@ -28453,7 +28460,7 @@
     "nameOverride": "Timber Alpha",
     "sprite": "sprites/enemy/beast/wolf.atlas",
     "deck": [
-      "decks/standard/wolfboss.dck"
+      "decks/elite/wolfboss.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -28731,7 +28738,7 @@
     "nameOverride": "Vile Witch",
     "sprite": "sprites/enemy/humanoid/human/warlock/witchlarge.atlas",
     "deck": [
-      "decks/standard/witch.dck"
+      "decks/elite/witch.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -29566,7 +29573,7 @@
     "name": "Unholy Knight",
     "sprite": "sprites/enemy/undead/deathknightidle.atlas",
     "deck": [
-      "decks/standard/unholyknight.dck"
+      "decks/miniboss/unholyknight.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -29643,7 +29650,8 @@
       "Hostile",
       "Unholy"
     ],
-    "nameOverride": "Knight of Shadow"
+    "nameOverride": "Knight of Shadow",
+    "boss": true
   },
   {
     "name": "Undead Goblin",
@@ -30888,7 +30896,7 @@
     "nameOverride": "Daru Warchief",
     "sprite": "sprites/enemy/humanoid/dwarf/dwarf.atlas",
     "deck": [
-      "decks/castle_npc/dwarf_lord.dck"
+      "decks/elite/dwarf_lord.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -30942,7 +30950,7 @@
     "nameOverride": "Ivory Guardian",
     "sprite": "sprites/enemy/giant/gravetitan.atlas",
     "deck": [
-      "decks/castle_npc/sun_titan.dck"
+      "decks/elite/sun_titan.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -31075,7 +31083,7 @@
     "nameOverride": "Lord of Atlantis",
     "sprite": "sprites/enemy/humanoid/merfolk/merfolk_lord.atlas",
     "deck": [
-      "decks/castle_npc/merfolk_king.dck"
+      "decks/elite/merfolk_king.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -31109,15 +31117,14 @@
       "IdentityBlue",
       "BiomeBlue",
       "Leader"
-    ],
-    "nameOverride": "Lord of Atlantis"
+    ]
   },
   {
     "name": "Forest Titan",
     "nameOverride": "Titanic Tree Overseer",
     "sprite": "sprites/enemy/elemental/walkingleef.atlas",
     "deck": [
-      "decks/castle_npc/forest_titan.dck"
+      "decks/elite/forest_titan.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -31325,7 +31332,7 @@
     "colors": "G"
   },
   {
-    "name": "Jakub \u0160lemr '99",
+    "name": "Jakub Šlemr '99",
     "sprite": "sprites/enemy/humanoid/human/warlock/witch.atlas",
     "deck": [
       "decks/standard/wc99_jakub_slemr.dck"
@@ -31353,7 +31360,7 @@
     "colors": "U"
   },
   {
-    "name": "Janosch K\u00fchn '00",
+    "name": "Janosch Kühn '00",
     "sprite": "sprites/enemy/humanoid/elf/shaman.atlas",
     "deck": [
       "decks/standard/wc00_janosch_kuhn.dck"
@@ -32027,7 +32034,7 @@
     "rewards": []
   },
   {
-    "name": "M\u00e1rton Stromgald",
+    "name": "Márton Stromgald",
     "sprite": "sprites/enemy/humanoid/human/knight/cavalier_2.atlas",
     "deck": [
       "decks/miniboss/marton_stromgald.dck"
@@ -33671,7 +33678,7 @@
     "name": "Kiska-Ra of Shandalar",
     "sprite": "sprites/enemy/dragon/dragonlarge.atlas",
     "deck": [
-      "decks/standard/shandalar97_colorless_kiskara.dck"
+      "decks/elite/shandalar97_colorless_kiskara.dck"
     ],
     "ai": "",
     "flying": true,
@@ -33711,7 +33718,7 @@
     "name": "Whim of Shandalar",
     "sprite": "sprites/enemy/dragon/dragonlarge.atlas",
     "deck": [
-      "decks/standard/shandalar97_colorless_whim.dck"
+      "decks/elite/shandalar97_colorless_whim.dck"
     ],
     "ai": "",
     "flying": true,
@@ -33751,7 +33758,7 @@
     "name": "Mandurang of Shandalar",
     "sprite": "sprites/enemy/dragon/dragonlarge.atlas",
     "deck": [
-      "decks/standard/shandalar97_colorless_mandurang.dck"
+      "decks/elite/shandalar97_colorless_mandurang.dck"
     ],
     "ai": "",
     "flying": true,
@@ -33791,7 +33798,7 @@
     "name": "Dracur of Shandalar",
     "sprite": "sprites/enemy/dragon/dragonlarge.atlas",
     "deck": [
-      "decks/standard/shandalar97_colorless_dracur.dck"
+      "decks/elite/shandalar97_colorless_dracur.dck"
     ],
     "ai": "",
     "flying": true,
@@ -33831,7 +33838,7 @@
     "name": "Prismat of Shandalar",
     "sprite": "sprites/enemy/dragon/dragonlarge.atlas",
     "deck": [
-      "decks/standard/shandalar97_colorless_prismat.dck"
+      "decks/elite/shandalar97_colorless_prismat.dck"
     ],
     "ai": "",
     "flying": true,
@@ -34067,7 +34074,7 @@
     "name": "Gorilla Chief",
     "sprite": "sprites/enemy/beast/elephant.atlas",
     "deck": [
-      "decks/standard/shandalar97_gorilla_chief.dck"
+      "decks/miniboss/shandalar97_gorilla_chief.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -34128,13 +34135,14 @@
       "IdentityGreen",
       "BiomeGreen"
     ],
-    "nameOverride": "Hidden Wumpus"
+    "nameOverride": "Hidden Wumpus",
+    "boss": true
   },
   {
     "name": "Slivdrazi Monstrosity",
     "sprite": "sprites/enemy/aberration/sliver.atlas",
     "deck": [
-      "decks/standard/shandalar97_slivdrazi_monstrosity.dck"
+      "decks/miniboss/shandalar97_slivdrazi_monstrosity.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -34189,13 +34197,14 @@
       "IdentityGreen",
       "BiomeBlue"
     ],
-    "nameOverride": "Spined Sliver"
+    "nameOverride": "Spined Sliver",
+    "boss": true
   },
   {
     "name": "Tibalt's Torturer",
     "sprite": "sprites/enemy/humanoid/human/wizard/black_wizard.atlas",
     "deck": [
-      "decks/standard/shandalar97_tibalts_torturer.dck"
+      "decks/miniboss/shandalar97_tibalts_torturer.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -34256,13 +34265,14 @@
       "IdentityRed",
       "BiomeRed"
     ],
-    "nameOverride": "Specter's Torturer"
+    "nameOverride": "Specter's Torturer",
+    "boss": true
   },
   {
     "name": "Tibalt's Cyclops",
     "sprite": "sprites/enemy/giant/cyclops.atlas",
     "deck": [
-      "decks/standard/shandalar97_tibalts_cyclops.dck"
+      "decks/miniboss/shandalar97_tibalts_cyclops.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -34322,7 +34332,8 @@
       "IdentityRed",
       "BiomeRed"
     ],
-    "nameOverride": "Specter's Cyclops"
+    "nameOverride": "Specter's Cyclops",
+    "boss": true
   },
   {
     "name": "Lim-Dul the Necromancer",
@@ -34388,13 +34399,13 @@
       "Necromancer",
       "IdentityBlack"
     ],
-    "nameOverride": "Lim-D\u00fbl, the Necromancer"
+    "nameOverride": "Lim-Dûl, the Necromancer"
   },
   {
     "name": "Chandler",
     "sprite": "sprites/enemy/humanoid/human/bandit/bandit.atlas",
     "deck": [
-      "decks/standard/shandalar97_chandler.dck"
+      "decks/miniboss/shandalar97_chandler.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -34452,13 +34463,14 @@
       "Humanoid",
       "Bandit",
       "IdentityRed"
-    ]
+    ],
+    "boss": true
   },
   {
     "name": "Joven",
     "sprite": "sprites/enemy/humanoid/human/bandit/bandit.atlas",
     "deck": [
-      "decks/standard/shandalar97_joven.dck"
+      "decks/miniboss/shandalar97_joven.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -34516,13 +34528,14 @@
       "Humanoid",
       "Bandit",
       "IdentityRed"
-    ]
+    ],
+    "boss": true
   },
   {
     "name": "Kogla",
     "sprite": "sprites/enemy/beast/gorilla.atlas",
     "deck": [
-      "decks/standard/shandalar97_kogla.dck"
+      "decks/miniboss/shandalar97_kogla.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -34583,13 +34596,14 @@
       "IdentityGreen",
       "BiomeGreen"
     ],
-    "nameOverride": "Gargantuan Gorilla"
+    "nameOverride": "Gargantuan Gorilla",
+    "boss": true
   },
   {
     "name": "Phyrexian Angel",
     "sprite": "sprites/enemy/celestial/fallen_angel.atlas",
     "deck": [
-      "decks/standard/shandalar97_phyrexian_angel.dck"
+      "decks/miniboss/shandalar97_phyrexian_angel.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -34649,14 +34663,15 @@
       "IdentityWhite",
       "IdentityBlack",
       "BiomeWhite"
-    ]
+    ],
+    "boss": true
   },
   {
     "name": "Ghoulcaller Ghoul",
     "nameOverride": "Lord of the Undead",
     "sprite": "sprites/enemy/undead/zombie.atlas",
     "deck": [
-      "decks/standard/shandalar97_ghoulcaller_ghoul.dck"
+      "decks/elite/shandalar97_ghoulcaller_ghoul.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -34775,7 +34790,7 @@
     "name": "Uncle Istvan",
     "sprite": "sprites/enemy/humanoid/human/wizard/black_wizard.atlas",
     "deck": [
-      "decks/standard/shandalar97_uncle_istvan.dck"
+      "decks/miniboss/shandalar97_uncle_istvan.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -34834,13 +34849,14 @@
       "Horror",
       "IdentityBlack",
       "BiomeBlack"
-    ]
+    ],
+    "boss": true
   },
   {
     "name": "Dark Ages Preacher",
     "sprite": "sprites/enemy/humanoid/human/cleric/cleric.atlas",
     "deck": [
-      "decks/standard/shandalar97_dark_ages_preacher.dck"
+      "decks/miniboss/shandalar97_dark_ages_preacher.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -34899,13 +34915,14 @@
       "Cleric",
       "IdentityWhite",
       "BiomeWhite"
-    ]
+    ],
+    "boss": true
   },
   {
     "name": "Swamp Queen Tojira",
     "sprite": "sprites/enemy/humanoid/human/warlock/witch.atlas",
     "deck": [
-      "decks/standard/shandalar97_swamp_queen_tojira.dck"
+      "decks/miniboss/shandalar97_swamp_queen_tojira.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -34964,7 +34981,8 @@
       "Nightstalker",
       "IdentityBlack",
       "BiomeBlack"
-    ]
+    ],
+    "boss": true
   },
   {
     "name": "Nightstalker",
@@ -35154,7 +35172,7 @@
     "name": "Cateran Overlord",
     "sprite": "sprites/enemy/fiend/spikedravager.atlas",
     "deck": [
-      "decks/standard/shandalar97_cateran_overlord.dck"
+      "decks/miniboss/shandalar97_cateran_overlord.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -35213,7 +35231,8 @@
       "Humanoid",
       "IdentityBlack",
       "BiomeBlack"
-    ]
+    ],
+    "boss": true
   },
   {
     "name": "Cateran Slaver",
