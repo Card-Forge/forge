@@ -73,12 +73,12 @@
   <object id="61" template="../../../../../../common/maps/obj/collision.tx" x="481.5" y="-11.0415" width="16" height="502.083" />
   <object id="62" template="../../../../../../common/maps/obj/enemy.tx" x="175.622" y="197.414">
    <properties>
-    <property name="enemy" value="Cloud Guardian" />
+    <property name="enemy" value="Shapeshifter of Shandalar" />
    </properties>
   </object>
   <object id="63" template="../../../../../../common/maps/obj/enemy.tx" x="231.718" y="263.196">
    <properties>
-    <property name="enemy" value="Cloud Giant" />
+    <property name="enemy" value="Thought Invoker of Shandalar" />
    </properties>
   </object>
   <object id="64" template="../../../../../../common/maps/obj/manashards.tx" x="297.095" y="174.815" />
