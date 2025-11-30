@@ -118,4 +118,5 @@
   <object id="87" template="../../../../../../common/maps/obj/collision.tx" x="-15.2727" y="-13.7677" width="16" height="590.717" />
   <object id="88" template="../../../../../../common/maps/obj/collision.tx" x="576.545" y="-10.3585" width="16" height="590.717" />
  <object id="89" template="../../../../../../common/maps/obj/enemy.tx" x="200" y="100"><properties><property name="enemy" value="Kogla" /><property name="threatRange" type="int" value="80" /><property name="effect">{ "startBattleWithCard": [ "Snow-covered Forest|ICE" ] }</property></properties></object></objectgroup>
+   <property name="effect">{ "startBattleWithCard": [ "Snow-Covered Forest|ICE", "Snow-Covered Forest|ICE", "Snow-Covered Forest|ICE" ] }</property>
 </map>

@@ -43,6 +43,7 @@
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Kobold Taskmaster&quot; ] }"/>
     <property name="enemy" value="Kobold Dragoncaller"/>
+   <property name="effect">{ "startBattleWithCard": [ "Crimson Kobolds|LEG", "Crookshank Kobolds|LEG", "Kobolds of Kher Keep|LEG", "Ghitu War Cry|ULG" ] }</property>
     <property name="threatRange" type="int" value="100"/>
    </properties>
   </object>

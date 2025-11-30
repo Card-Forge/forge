@@ -213,6 +213,7 @@
 ]</property>
     <property name="effect">{ "startBattleWithCard": [ "Metallic Sliver|TMP" ] }</property>
     <property name="enemy" value="Metallic Sliver" />
+   <property name="effect">{ "startBattleWithCard": [ "Metallic Sliver|TMP", "Metallic Sliver|TMP", "Metallic Sliver|TMP" ] }</property>
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />

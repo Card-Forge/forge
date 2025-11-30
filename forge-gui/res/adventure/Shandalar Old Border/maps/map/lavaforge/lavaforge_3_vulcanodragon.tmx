@@ -103,6 +103,7 @@
   <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="223.344" y="96.8626">
    <properties>
     <property name="enemy" value="Kobold Dragoncaller"/>
+   <property name="effect">{ "startBattleWithCard": [ "Crimson Kobolds|LEG", "Crookshank Kobolds|LEG", "Kobolds of Kher Keep|LEG", "Ghitu War Cry|ULG" ] }</property>
     <property name="threatRange" type="int" value="20"/>
     <property name="waypoints" value="78,77,85,77,78"/>
    </properties>

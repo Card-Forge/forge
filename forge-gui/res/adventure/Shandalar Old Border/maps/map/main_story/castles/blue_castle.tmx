@@ -72,7 +72,7 @@
 ]</property>
     <property name="enemy" value="Merfolk King" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Islands", "Lord of Atlantis|LEA", "Rhystic Study|PCY", "Tidal Warrior|STH" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Island|USG|2", "Island|USG|2", "Lord of Atlantis|LEA", "Tidal Warrior|STH" ] }</property>
   </object>
   <object id="55" template="../../../../../../../common/maps/obj/gate.tx" x="368" y="639.333">
    <properties>
@@ -189,7 +189,7 @@
 ]</property>
     <property name="enemy" value="Mill Mole" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Ambassador Laquatus|TOR", "Propaganda|TMP", "Rhystic Study|PCY", "Sky Diamond|MIR" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Ambassador Laquatus|TOR", "Propaganda|TMP", "Sky Diamond|MIR", "Sky Diamond|MIR" ] }</property>
   </object>
   <object id="69" template="../../../../../../../common/maps/obj/enemy.tx" x="365" y="223.333">
    <properties>

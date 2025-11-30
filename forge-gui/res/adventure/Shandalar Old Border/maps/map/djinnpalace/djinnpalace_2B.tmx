@@ -44,6 +44,7 @@
    <properties>
     <property name="effect">{ "startBattleWithCard": [ "Fledgling Djinn|WTH", "Island|6ED", "Old Man of the Sea|ARN", "Swamp|6ED" ] }</property>
     <property name="enemy" value="Mighty Djinn" />
+   <property name="effect">{ "startBattleWithCard": [ "Fledgling Djinn|WTH", "Island|6ED", "Old Man of the Sea|ARN", "Swamp|6ED" ] }</property>
     <property name="hidden" type="bool" value="true" />
     <property name="threatRange" type="int" value="40" />
    </properties>

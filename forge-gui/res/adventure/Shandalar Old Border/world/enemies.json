@@ -18541,7 +18541,7 @@
     "difficulty": 0.1,
     "speed": 31,
     "scale": 0.75,
-    "life": 12,
+    "life": 20,
     "rewards": [
       {
         "type": "deckCard",
@@ -33610,7 +33610,7 @@
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 22,
-    "life": 28,
+    "life": 30,
     "rewards": [
       {
         "type": "gold",
