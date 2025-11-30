@@ -3933,7 +3933,7 @@
 	},
 	{
 		"name": "VampireCastle",
-		"displayName": "Castle Sengir",
+		"displayName": "Vampire Castle",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3984,7 +3984,7 @@
 	},
 	{
 		"name": "VampireCastle3",
-		"displayName": "Cateran Castle",
+		"displayName": "Castle Sengir",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
