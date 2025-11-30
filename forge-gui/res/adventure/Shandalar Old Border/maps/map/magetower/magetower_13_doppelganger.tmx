@@ -85,10 +85,7 @@
    <properties>
     <property name="effect">{
  "lifeModifier": 30,
- "changeStartCards": 4,
-  "opponent": {
-    "startBattleWithCard": [ "King Suleiman|ARN|1" ],
-  }
+ "changeStartCards": 4
 }</property>
     <property name="enemy" value="Djinn" />
     <property name="threatRange" type="int" value="30" />
