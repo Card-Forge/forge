@@ -5,7 +5,7 @@
  </editorsettings>
  <properties>
   <property name="dungeonEffect">{
-  "startBattleWithCard": [ "Portcullis|STH|1" ],
+  "startBattleWithCard": [ "Crawlspace|ULG" ],
 }</property>
  </properties>
  <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
