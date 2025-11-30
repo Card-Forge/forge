@@ -11,5 +11,5 @@ ALTERNATE
 Name:Away
 ManaCost:2 B
 Types:Instant
-A:SP$ Sacrifice | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature | SpellDescription$ Target player sacrifices a creature.
+A:SP$ Sacrifice | ValidTgts$ Player | SacValid$ Creature | SpellDescription$ Target player sacrifices a creature.
 Oracle:Target player sacrifices a creature.\nFuse (You may cast one or both halves of this card from your hand.)
