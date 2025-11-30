@@ -43,7 +43,7 @@
   <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="209.317" y="145.131">
    <properties>
     <property name="displayNameOverride" value="Master of Demonology" />
-    <property name="enemy" value="Adept Black Wizard" />
+    <property name="enemy" value="Demonic Black Wizard" />
     <property name="threatRange" type="int" value="50" />
     <property name="waypoints" value="72,81,77,76,81" />
    <property name="effect">{ "startBattleWithCard": [ "Wall of Bone|LEA|1" ] }</property></properties>

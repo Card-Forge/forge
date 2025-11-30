@@ -54,7 +54,7 @@
   </object>
   <object id="119" template="../../../../../../common/maps/obj/enemy.tx" x="109.031" y="115.107">
    <properties>
-    <property name="enemy" value="Adept Black Wizard" />
+    <property name="enemy" value="Demonic Black Wizard" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="179,204,183" />
