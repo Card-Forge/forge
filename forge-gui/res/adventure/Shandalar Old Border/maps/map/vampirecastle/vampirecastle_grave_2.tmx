@@ -139,85 +139,85 @@
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Terror|LEA"
+		"cardName": "Breathstealer|MIR"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Feral Shadow|MIR"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Nightstalker Engine|PO2"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Lake of the Dead|ALL"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Everglades|VIS"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Corrupt|UDS"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Faceless Butcher|TOR"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Nether Spirit|MMQ"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Phyrexian Negator|UDS"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Contamination|USG"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Hatred|EXO"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Twisted Abomination|SCG"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Drain Life|MIR"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
 		"cardName": "Mutilate|TOR"
-	},
-	{
-		"type": "card",
-		"probability": 0.5,
-		"count": 1,
-		"itemName": "Dark Ritual|LEA"
-	},
-	{
-		"type": "card",
-		"probability": 0.5,
-		"count": 1,
-		"itemName": "Necrologia|VIS"
-	},
-	{
-		"type": "card",
-		"probability": 0.5,
-		"count": 1,
-		"cardName": "Dark Banishing|ICE"
-	},
-	{
-		"type": "card",
-		"probability": 0.5,
-		"count": 1,
-		"cardName": "Vendetta|MMQ"
-	},
-	{
-		"type": "card",
-		"probability": 0.5,
-		"count": 1,
-		"itemName": "Murder"
-	},
-	{
-		"type": "card",
-		"probability": 0.5,
-		"count": 1,
-		"cardName": "Terror|LEA"
-	},
-	{
-		"type": "card",
-		"probability": 0.5,
-		"count": 1,
-		"cardName": "Mutilate|TOR"
-	},
-	{
-		"type": "card",
-		"probability": 0.5,
-		"count": 1,
-		"itemName": "Dark Ritual|LEA"
-	},
-	{
-		"type": "card",
-		"probability": 0.5,
-		"count": 1,
-		"itemName": "Necrologia|VIS"
-	},
-	{
-		"type": "card",
-		"probability": 0.5,
-		"count": 1,
-		"cardName": "Dark Banishing|ICE"
-	},
-	{
-		"type": "card",
-		"probability": 0.5,
-		"count": 1,
-		"cardName": "Vendetta|MMQ"
-	},
-	{
-		"type": "card",
-		"probability": 0.5,
-		"count": 1,
-		"itemName": "Murder"
 	}
 ]</property>
    </properties>

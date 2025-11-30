@@ -195,85 +195,85 @@
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Snuff Out|MMQ|1"
+		"cardName": "Breathstealer|MIR"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Vendetta|MMQ|1"
+		"cardName": "Feral Shadow|MIR"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Ambition's Cost|MIR|1"
+		"cardName": "Nightstalker Engine|PO2"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Bone Harvest|MIR|1"
+		"cardName": "Lake of the Dead|ALL"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Dark Banishing|ICE|1"
+		"cardName": "Everglades|VIS"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Terror|LEA|1"
+		"cardName": "Nether Shadow|LEA"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Diabolic Edict|TMP|1"
+		"cardName": "Sengir Autocrat|HML"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Snuff Out|MMQ|1"
+		"cardName": "Ebon Praetor|FEM"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Vendetta|MMQ|1"
+		"cardName": "Phyrexian Negator|UDS"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Ambition's Cost|MIR|1"
+		"cardName": "Contamination|USG"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Bone Harvest|MIR|1"
+		"cardName": "Hatred|EXO"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Dark Banishing|ICE|1"
+		"cardName": "Twisted Abomination|SCG"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Terror|LEA|1"
+		"cardName": "Faceless Butcher|TOR"
 	},
 	{
 		"type": "card",
 		"probability": 0.5,
 		"count": 1,
-		"cardName": "Diabolic Edict|TMP|1"
+		"cardName": "Corrupt|UDS"
 	}
 ]</property>
    </properties>
