@@ -1871,9 +1871,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return getGui().one(message, choices).getColorMask();
         }
 
-        boolean confirmed = false;
-        confirmed = InputConfirm.confirm(this, CardView.get(c), message, true, choices.stream().map(MagicColor.Color::getTranslatedName).collect(Collectors.toList()));
-        final int idxChosen = confirmed ? 0 : 1;
+        final int idxChosen = InputConfirm.confirm(this, CardView.get(c), message, true, choices.stream().map(MagicColor.Color::getTranslatedName).collect(Collectors.toList()))
+                ? 0 : 1;
         return choices.get(idxChosen).getColorMask();
     }
 

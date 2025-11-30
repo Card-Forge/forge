@@ -4,6 +4,6 @@ Types:Creature Human Warrior
 PT:2/2
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, target creature gets +2/+0 until end of turn.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Pump | NumAtt$ +2
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | AILogic$ Pump | NumAtt$ +2
 SVar:PlayMain1:TRUE
 Oracle:Haste\nWhen Daybreak Combatants enters, target creature gets +2/+0 until end of turn.
