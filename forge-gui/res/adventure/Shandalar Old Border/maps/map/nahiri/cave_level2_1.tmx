@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="72">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1U0KgzAQBeBZdOUcpFa8aFPtrfxdeKZm6AxESLYZhSd8iHGRR16ix4PoAAC4iXdDtDFRiPdP45/HMgXNtfN/bIjPC/vnSjOlXhfIlstlVu3Y1lXU7HuK830z80mvMt7ymUffU2a+VfuWPKOauW42Ow8h07Gtn+w/uTz2Xqlb0cV3T/Y/H31hfuu3c8xXOruD7rXxAt++0tqF5P9R+5sCAAAAAAAAPn7MNBIs
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztl19OwzAMxvPAQ7JyDyTENbYhTsJV+HcOBuMaE4IHLkEpPQb5tH6a5yWZ0CbFoFr6FDWVl19sx+lmwbnZqFGjRo3613r2zrVxfPH1WVJsX3F8jGNvgCfFBvs0GL/LgY12ZYBJqov6jnrydvOLc4EcTw3wpOKH2FnMLTUPNviQy6Xoc3jGSD6c3zbs74P0++3a9NG9llzsI2TBM0dtmOde5H5a4bf0G12fltno04btfiafbybO3U12WTD/1qTf6f3krMQnexh6BOtdM7xHhvMmPX8fx9cm75+axxx6E1Ti4xlk/5K8WP9WMSz8WvC5UGy9OC/SpmodMMleCb59jH3Yvq9gZ8P6DwNDr3xWzXqeDHq/um934bAezt+mcf3c3YBYf5zsvifHoTw5xoWql9zdMB/4atwdui5LfLW+XUr5Ya2CD6p9f2ix9lL1Z0HMv8XYUbXrryRZf9bza/HbVObXIp/Mr8XzwdhZPR9d2Px3g1mMIcTvMYsxZBz/Sgyt8x2zz/wAa384WA==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt1j0OgCAMgNFOChdz8JqicfBgHsOFgcES7FBM+N5Cw2+BkCACAAAwrrl3AoDBFUSW6LPW0dhvKuI12vKrDUkvddr7PXMZlPY752c9Q23eL/Yi1vbhdcfett4JAADM/v53bv23ABjHAysGB58=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="62" template="../../../../../../common/maps/obj/door_up.tx" x="321.655" y="637.409">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_4/cave_23B2.tmx"/>
+    <property name="teleportObjectId" value="61"/>
+   </properties>
+  </object>
+  <object id="63" template="../../../../../../common/maps/obj/treasure.tx" x="40.3333" y="338.333"/>
+  <object id="64" template="../../../../../../common/maps/obj/gold.tx" x="56.3333" y="312.667"/>
+  <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="79.6667" y="331.333">
+   <properties>
+    <property name="enemy" value="Hydra"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="312" y="226.333">
+   <properties>
+    <property name="enemy" value="Green Beast"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../../../common/maps/obj/gold.tx" x="326.667" y="168"/>
+  <object id="68" template="../../../../../../common/maps/obj/gold.tx" x="278.667" y="206"/>
+  <object id="69" template="../../../../../../common/maps/obj/treasure.tx" x="510.333" y="315.667"/>
+  <object id="70" template="../../../../../../common/maps/obj/treasure.tx" x="467.667" y="315.667"/>
+  <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="429.333" y="329.667">
+   <properties>
+    <property name="enemy" value="Cyclops"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,7 +1,6 @@
 # Downloads
 
 ## Snapshots
-
 * Snapshots are automated daily builds of the source code.
 * They contain the latest bug fixes, features and cards.
 * If the snapshot isn't in the location below, it's because its in the middle of uploading a new snapshot - come back later to grab it.
@@ -15,7 +14,6 @@
 <https://github.com/user-attachments/assets/7a0c7bb8-7cf9-4800-8091-bcc30ff2f4d8>
 
 ## Releases
-
 * "Releases" are really intended where "99% cards implemented are working and stable".
 * **They are NOT bug-free.** They are not updated after they're built, meaning you need to wait for the next release if you encounter a bug, or use the SNAPSHOT version instead.
 * If you are looking for newly spoiled cards as soon as possible, grab the SNAPSHOT version instead.
@@ -26,7 +24,6 @@
 * Grab the installer file that ends in .jar
 
 # System Requirements
-
 **Forge Requires Java** to run, please make sure you have Java installed on your machine prior to attempting to run.
 
 * **Java 17** is required as minimum version and can be acquired through the Standard Edition Development Kit (JDK) or the OpenJDK. Continued development provides new features in those editions, therefore you need the Java Development Kit to have those newer editions:
@@ -48,21 +45,20 @@ an argument to the Java VM.)
 If you plan to eventually download all card images make sure you have several gigabytes of free drive space.
 
 # Install and Run
-
-> Warning: Do **NOT** owerwrite an existing installation. Always unpack/install the package in a new folder to avoid problems!
+> Warning: Do **NOT** overwrite an existing installation. Always unpack/install the package in a new folder to avoid problems!
 
 ## Install Wizard (jar)
-
-* Run/Double click "**forge-installer**-VERSION.jar" where VERSION is the current release version and click next until the Target Path window appears. If double clicking the .jar file doesn't load the main interface you can run it via terminal/command line ```java -jar FILENAME.jar``` where FILENAME is the name of the installer.
+* Run/Double click "**forge-installer**-VERSION.jar" where VERSION is the current release version and click next until the Target Path window appears. If double clicking the .jar file doesn't load the main interface you can run it via terminal/command line `java -jar FILENAME.jar` where FILENAME is the name of the installer.
 
 * Browse to your preferred install directory and click next until installation starts.
 
-![image](https://github.com/Card-Forge/forge/assets/9781539/b7575f49-f6b3-4933-a15f-726314547c4f)
+**If you're on Windows and not running the installer as administrator, you probably won't be able to install to the program files directories.**
+
+![image](installer.png)
 
 * After the installation finishes, close the installer. Run the executable forge|forge-adventure (.exe/.sh/.cmd)
 
 ### What if double-clicking doesn’t work?
-
 Sometimes double-clicking will open the jar file in a different program.
 In Windows, you may need to right-click and open the properties to change the launching program to Java.
 This might be different in OSX or Linux systems (file permission related).
@@ -70,14 +66,12 @@ This might be different in OSX or Linux systems (file permission related).
 ## Manual Extraction (tar.bz2)
 
 ### Desktop Windows
-
 * Unpack "forge...*tar.bz2*" with any unpacking/unzipping app (e.g. 7-zip, winrar, etc)
   * You'll end up with "forge...*tar*".
 * Unpack that ".tar" file once more into its own folder.
 * Run Forge app/exe
 
 ### Desktop Linux/Mac
-
 * Unpack "forge...*tar.bz2*" with any unpacking app. (Check your package repository, or app store.)
   * You'll probably end up with just a folder, and fully extracted.
   * If you do end up with a ".tar" file, unpack that file also into its own folder.
@@ -88,7 +82,6 @@ This might be different in OSX or Linux systems (file permission related).
     * Additionally OSX needs to have a JRE AND a JDK installed because reasons.
 
 ### Android
-
 * Sideload/Install "forge...apk"
 * Run Forge
 
@@ -120,7 +113,6 @@ If you have a directory full of deck files, you can use the Import Data dialog t
 We know some people are colorblind and may not be able to differentiate between colors of the default theme. Forge does have access to other [Skins](Skins.md), which use other color palettes that might be more suitable for you.
 
 # Play Adventure Mode on Desktop
-
 * Run the Adventure Mode EXE or Script in the Folder you extracted.
 * The game will start with an option for Adventure or Classic Mobile UI.
 * Android/Mobile builds are built as the Adventure Mode or Mobile UI and nothing special is needed.

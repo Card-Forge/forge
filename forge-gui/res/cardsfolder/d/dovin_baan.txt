@@ -2,7 +2,7 @@ Name:Dovin Baan
 ManaCost:2 W U
 Types:Legendary Planeswalker Dovin
 Loyalty:3
-A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumAtt$ -3 | IsCurse$ True | Duration$ UntilYourNextTurn | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBEffect | SpellDescription$ Until your next turn, up to one target creature gets -3/-0 and its activated abilities can't be activated.
+A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumAtt$ -3 | IsCurse$ True | Duration$ UntilYourNextTurn | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | SubAbility$ DBEffect | SpellDescription$ Until your next turn, up to one target creature gets -3/-0 and its activated abilities can't be activated.
 SVar:DBEffect:DB$ Effect | RememberObjects$ ParentTarget | StaticAbilities$ DBCantBeActivated | ForgetOnMoved$ Battlefield | IsCurse$ True | Duration$ UntilYourNextTurn
 SVar:DBCantBeActivated:Mode$ CantBeActivated | ValidCard$ Card.IsRemembered | Description$ Remembered activated abilities can't be activated.
 A:AB$ GainLife | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | Defined$ You | LifeAmount$ 2 | SubAbility$ DBDraw | SpellDescription$ You gain 2 life and draw a card.

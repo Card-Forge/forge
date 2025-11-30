@@ -6,5 +6,5 @@ SVar:DBExile:DB$ Dig | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZo
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play those cards.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ +2 | NumDef$ +1 | SpellDescription$ Up to two target creatures each get +2/+1 until end of turn.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ +2 | NumDef$ +1 | SpellDescription$ Up to two target creatures each get +2/+1 until end of turn.
 Oracle:Choose one —\n• Exile the top two cards of your library. Until the end of your next turn, you may play those cards.\n• Up to two target creatures each get +2/+1 until end of turn.

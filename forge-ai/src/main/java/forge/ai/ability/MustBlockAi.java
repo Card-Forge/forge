@@ -46,7 +46,7 @@ public class MustBlockAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
         if (sa.hasParam("DefinedAttacker")) {
             // The AI can't handle "target creature blocks another target creature" abilities yet
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);

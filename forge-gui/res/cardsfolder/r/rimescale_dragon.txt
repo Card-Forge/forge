@@ -4,7 +4,7 @@ Types:Snow Creature Dragon
 PT:5/5
 K:Flying
 R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.counters_GE1_ICE | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Creatures with ice counters on them don't untap during their controllers' untap steps.
-A:AB$ PutCounter | Cost$ 2 S | ValidTgts$ Creature | IsCurse$ True | TgtPrompt$ Select target creature | CounterType$ ICE | CounterNum$ 1 | SubAbility$ DBTap | SpellDescription$ Put an ice counter on target creature. Tap that creature.
+A:AB$ PutCounter | Cost$ 2 S | ValidTgts$ Creature | IsCurse$ True | CounterType$ ICE | CounterNum$ 1 | SubAbility$ DBTap | SpellDescription$ Put an ice counter on target creature. Tap that creature.
 SVar:DBTap:DB$ Tap | Defined$ Targeted
 AI:RemoveDeck:Random
 Oracle:Flying\n{2}{S}: Tap target creature and put an ice counter on it. ({S} can be paid with one mana from a snow source.)\nCreatures with ice counters on them don't untap during their controllers' untap steps.

@@ -6,7 +6,7 @@ R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | D
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of each upkeep, create a 3/3 blue Serpent creature token named Koma's Coil.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ komas_coil | TokenOwner$ You
 A:AB$ Charm | Cost$ Sac<1/Serpent.Other/another Serpent> | Choices$ DBTap,DBPump
-SVar:DBTap:DB$ Tap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SubAbility$ DBConstrict | StackDescription$ Tap {c:Targeted}. Its activated abilities can't be activated this turn. | SpellDescription$ Tap target permanent. Its activated abilities can't be activated this turn.
+SVar:DBTap:DB$ Tap | ValidTgts$ Permanent | SubAbility$ DBConstrict | StackDescription$ Tap {c:Targeted}. Its activated abilities can't be activated this turn. | SpellDescription$ Tap target permanent. Its activated abilities can't be activated this turn.
 SVar:DBConstrict:DB$ Effect | RememberObjects$ ParentTarget | StaticAbilities$ DBCantBeActivated | ForgetOnMoved$ Battlefield
 SVar:DBCantBeActivated:Mode$ CantBeActivated | ValidCard$ Card.IsRemembered | Description$ Remembered activated abilities can't be activated.
 SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Indestructible | SpellDescription$ CARDNAME gains indestructible until end of turn.

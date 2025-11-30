@@ -3,7 +3,7 @@ ManaCost:X W W
 Types:Instant
 A:SP$ Charm | Choices$ DBDestroy,DBGainLife
 SVar:DBDestroy:DB$ Destroy | TargetMin$ X | TargetMax$ X | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select X target artifacts and/or enchantments | SpellDescription$ Destroy X target artifacts and/or enchantments.
-SVar:DBGainLife:DB$ GainLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ XX | SpellDescription$ Target player gains twice X life.
+SVar:DBGainLife:DB$ GainLife | ValidTgts$ Player | LifeAmount$ XX | SpellDescription$ Target player gains twice X life.
 SVar:X:Count$xPaid
 SVar:XX:SVar$X/Twice
 DeckHas:Ability$LifeGain

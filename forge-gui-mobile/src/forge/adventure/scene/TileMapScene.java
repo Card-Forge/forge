@@ -132,6 +132,10 @@ public class TileMapScene extends HudScene {
 
     public void load(PointOfInterest point) {
         AdventureQuestController.instance().mostRecentPOI = point;
+        if (rootPoint != point) {
+            // If we go from one town to another, don't resume the previous track.
+            SoundSystem.instance.clearShelvedPlaylist();
+        }
         rootPoint = point;
         oldMap = point.getData().map;
         map = new TemplateTmxMapLoader().load(Config.instance().getCommonFilePath(point.getData().map));

@@ -63,12 +63,6 @@ import java.util.Map;
  */
 public class ComputerUtilCombat {
 
-    // A special flag used in ComputerUtil#canRegenerate to avoid recursive reentry and stack overflow
-    private static boolean dontTestRegen = false;
-    public static void setCombatRegenTestSuppression(boolean shouldSuppress) {
-        dontTestRegen = shouldSuppress;
-    }
-
     /**
      * <p>
      * canAttackNextTurn.
@@ -705,7 +699,7 @@ public class ComputerUtilCombat {
         int firstStrikeBlockerDmg = 0;
 
         for (final Card defender : blockers) {
-            if (!(defender.isWitherDamage()) && canDestroyAttacker(ai, attacker, defender, combat, true)) {
+            if (!defender.isWitherDamage() && canDestroyAttacker(ai, attacker, defender, combat, true)) {
                 return true;
             }
             if (defender.hasFirstStrike() || defender.hasDoubleStrike()) {
@@ -1784,7 +1778,7 @@ public class ComputerUtilCombat {
         final List<Card> attackers = combat.getAttackersBlockedBy(blocker);
 
         for (Card attacker : attackers) {
-            if (!(attacker.isWitherDamage()) && canDestroyBlocker(ai, blocker, attacker, combat, true)) {
+            if (!attacker.isWitherDamage() && canDestroyBlocker(ai, blocker, attacker, combat, true)) {
                 return true;
             }
         }
@@ -1811,10 +1805,9 @@ public class ComputerUtilCombat {
                     && !blocker.hasKeyword(Keyword.INDESTRUCTIBLE)) {
                 return true;
             }
-        } // flanking
+        }
 
-        if (blocker.hasKeyword(Keyword.INDESTRUCTIBLE) || dontTestRegen
-                || ComputerUtil.canRegenerate(blocker.getController(), blocker)) {
+        if (blocker.hasKeyword(Keyword.INDESTRUCTIBLE) || ComputerUtil.canRegenerate(blocker.getController(), blocker)) {
             return false;
         }
 

@@ -3,5 +3,5 @@ ManaCost:1 G
 Types:Creature Faerie
 PT:1/1
 K:Flying
-A:AB$ Destroy | Cost$ 3 G Sac<1/CARDNAME> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
+A:AB$ Destroy | Cost$ 3 G Sac<1/CARDNAME> | ValidTgts$ Artifact | SpellDescription$ Destroy target artifact.
 Oracle:Flying\n{3}{G}, Sacrifice Uktabi Faerie: Destroy target artifact.

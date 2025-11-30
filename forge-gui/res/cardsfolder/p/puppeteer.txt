@@ -2,6 +2,6 @@ Name:Puppeteer
 ManaCost:2 U
 Types:Creature Human Wizard
 PT:1/2
-A:AB$ TapOrUntap | Cost$ U T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ You may tap or untap target creature.
+A:AB$ TapOrUntap | Cost$ U T | ValidTgts$ Creature | SpellDescription$ You may tap or untap target creature.
 AI:RemoveDeck:All
 Oracle:{U}, {T}: You may tap or untap target creature.

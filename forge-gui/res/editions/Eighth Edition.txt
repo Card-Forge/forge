@@ -185,7 +185,7 @@ ScryfallCode=8ED
 168 R Underworld Dreams @Carl Critchlow
 169 C Unholy Strength @Puddnhead
 170 R Vampiric Spirit @Anson Maddocks
-171 C Vicious Hunger @Massimilano Frezzato
+171 C Vicious Hunger @Massimiliano Frezzato
 172 R Warped Devotion @Eric Peterson
 173 R Western Paladin @Carl Critchlow
 174 U Zombify @Mark Romanoski

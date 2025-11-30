@@ -26,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.function.Function;
 
 public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private PlayerView currentPlayer = null;
@@ -616,6 +617,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
      */
     @Override
     public <T> T one(final String message, final List<T> choices) {
+        return one(message, choices, null);
+    }
+    public <T> T one(final String message, final List<T> choices, Function<T, String> display) {
         if (choices == null || choices.isEmpty()) {
             return null;
         }
@@ -623,7 +627,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             return Iterables.getFirst(choices, null);
         }
 
-        final List<T> choice = getChoices(message, 1, 1, choices);
+        final List<T> choice = getChoices(message, 1, 1, choices, null, display);
         assert choice.size() == 1;
         return choice.get(0);
     }

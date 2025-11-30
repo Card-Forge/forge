@@ -18,7 +18,6 @@ public enum AbilityKey {
     Affected("Affected"),
     AllVotes("AllVotes"),
     Amount("Amount"),
-    Attach("Attach"),
     AttachSource("AttachSource"),
     AttachTarget("AttachTarget"),
     Attacked("Attacked"),

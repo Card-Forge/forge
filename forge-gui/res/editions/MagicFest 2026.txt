@@ -1,0 +1,9 @@
+[metadata]
+Code=PF26
+Date=2026-01-01
+Name=MagicFest 2026
+Type=Promo
+ScryfallCode=PF26
+
+[cards]
+1F R Wayfarer's Bauble @Diego Gisbert

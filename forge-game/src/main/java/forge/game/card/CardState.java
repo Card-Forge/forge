@@ -37,7 +37,6 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.LandAbility;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
@@ -477,7 +476,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     }
 
     public final Iterable<SpellAbility> getIntrinsicSpellAbilities() {
-        return IterableUtil.filter(getSpellAbilities(), SpellAbilityPredicates.isIntrinsic());
+        return IterableUtil.filter(getSpellAbilities(), CardTraitBase::isIntrinsic);
     }
 
     public final SpellAbility getFirstAbility() {

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="62">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAAAAMCXARkAAAE=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7C+M1f/cupjJJBeUlVVVVVV1UcHjs4f3w==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztlEEOwiAQRVkOiddqvYo3U1tvJVWOIYT8OCKkrWLq4pO8kM4w8GYW7a0xPSGEEEIIIR8wiDEX2d5hDDibXOAU9ynErjblkG/Zi64Z5PUNeEUHrOgCJx3XefSi+3GqbpQnh927k1Po/vFe/v3NqvWBVfL7xTqGWZxl+dm7TZT8YvwkiTV31mpizoc79zO9w8srl+hXcgQ3O++J93WNPt9lccwSPujLVxyWkL9Zc8vPl9y92lv+R0qz7GbOt3ZYM8va7P6BrWZDCCGEEFLiAc2KCW4=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztz0kKgDAMAMCcrP7/CS74TC89NlKwIOjMJZCELBEAAABtR2ffNGDXclPbGrmS9J41zs/OSY2Yu9dYIv/jq9a3DwAA4Dcuu2gDbw==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="59" template="../../../../../../common/maps/obj/door_right.tx" x="3.33333e-06" y="336.333">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_4/cave_23B8.tmx"/>
+    <property name="teleportObjectId" value="60"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../../../common/maps/obj/door_left.tx" x="542" y="322">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_4/cave_23B10.tmx"/>
+    <property name="teleportObjectId" value="59"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

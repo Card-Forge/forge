@@ -29,7 +29,7 @@ public class SurveilAi extends SpellAbilityAi {
      * @see forge.ai.SpellAbilityAi#chkAIDrawback(forge.game.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         return doTriggerNoCost(ai, sa, false);
     }
 

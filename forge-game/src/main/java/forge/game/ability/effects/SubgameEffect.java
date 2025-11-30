@@ -47,7 +47,7 @@ public class SubgameEffect extends SpellAbilityEffect {
                 // Build mapping between maingame cards and subgame cards,
                 // so when subgame pick a card from maingame (like Wish effects),
                 // The maingame card will also be moved.
-                // (Will be move to Subgame zone, which will be added back to libary after subgame ends.)
+                // (Will be move to Subgame zone, which will be added back to library after subgame ends.)
                 player.addMaingameCardMapping(newCard, card);
             }
         }

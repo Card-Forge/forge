@@ -4,7 +4,7 @@ Types:Enchantment Saga
 K:Chapter:3:DBToken,DBSacrifice,DBDraw
 SVar:DBToken:DB$ Token | TokenScript$ w_2_2_astartes_warrior_vigilance | TokenAmount$ X | SpellDescription$ Create a 2/2 white Astartes Warrior creature token with vigilance for each opponent you have.
 SVar:X:PlayerCountOpponents$Amount
-SVar:DBSacrifice:DB$ Sacrifice | Defined$ Opponent | SacValid$ Creature | SacMessage$ creature | SpellDescription$ Each opponent sacrifices a creature.
+SVar:DBSacrifice:DB$ Sacrifice | Defined$ Opponent | SacValid$ Creature | SpellDescription$ Each opponent sacrifices a creature.
 SVar:DBDraw:DB$ Draw | NumCards$ Y | NumCardsDesc$ two cards for each opponent who controls fewer creatures than you | SpellDescription$ Draw two cards for each opponent who controls fewer creatures than you.
 SVar:Y:PlayerCountOpponents$HasPropertyhasFewerCreaturesInPlayThanYou/Times.2
 DeckHas:Ability$Token & Type$Astartes|Warrior

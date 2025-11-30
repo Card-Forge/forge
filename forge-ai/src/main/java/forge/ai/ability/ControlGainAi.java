@@ -299,12 +299,12 @@ public class ControlGainAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, final Player ai) {
+    public AiAbilityDecision chkDrawback(final Player ai, SpellAbility sa) {
         final Game game = ai.getGame();
 
         // Special card logic that is processed elsewhere
         if (sa.hasParam("AILogic")) {
-            if (("DonateTargetPerm").equals(sa.getParam("AILogic"))) {
+            if ("DonateTargetPerm".equals(sa.getParam("AILogic"))) {
                 // Donate step 2 - target a donatable permanent.
                 return SpecialCardAi.Donate.considerDonatingPermanent(ai, sa);
             }
@@ -346,7 +346,7 @@ public class ControlGainAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+    public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         // Pay to gain Control
         if (sa.hasParam("UnlessSwitched")) {
             final Card host = sa.getHostCard();
@@ -360,6 +360,6 @@ public class ControlGainAi extends SpellAbilityAi {
             }
         }
 
-        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+        return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
     }
 }

@@ -1,7 +1,7 @@
 Name:Quest for the Gemblades
 ManaCost:1 G
 Types:Enchantment
-A:AB$ PutCounter | Cost$ SubCounter<1/QUEST> Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 4 | SpellDescription$ Put four +1/+1 counters on target creature.
+A:AB$ PutCounter | Cost$ SubCounter<1/QUEST> Sac<1/CARDNAME> | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 4 | SpellDescription$ Put four +1/+1 counters on target creature.
 T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Creature | TriggerZones$ Battlefield | OptionalDecider$ You | CombatDamage$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control deals combat damage to a creature, you may put a quest counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
 SVar:MaxQuestEffect:1

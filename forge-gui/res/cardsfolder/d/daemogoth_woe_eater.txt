@@ -3,7 +3,7 @@ ManaCost:1 B BG G
 Types:Creature Demon
 PT:7/6
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature.
-SVar:TrigSacrifice:DB$ Sacrifice | Defined$ You | SacValid$ Creature | SacMessage$ creature
+SVar:TrigSacrifice:DB$ Sacrifice | Defined$ You | SacValid$ Creature
 T:Mode$ Sacrificed | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ When you sacrifice CARDNAME, each opponent discards a card, you draw a card, and you gain 2 life.
 SVar:TrigDiscard:DB$ Discard | Defined$ Opponent | Mode$ TgtChoose | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | SubAbility$ DBGainLife

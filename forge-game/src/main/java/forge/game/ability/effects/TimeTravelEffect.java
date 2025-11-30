@@ -41,7 +41,7 @@ public class TimeTravelEffect extends SpellAbilityEffect {
 
         for (int i = 0; i < num; i++) {
             // card you own that is suspended
-            CardCollection list = CardLists.filter(activator.getCardsIn(ZoneType.Exile), CardPredicates.hasSuspend());
+            CardCollection list = CardLists.filter(activator.getCardsIn(ZoneType.Exile), Card::hasSuspend);
             // permanent you control with time counter
             list.addAll(CardLists.filter(activator.getCardsIn(ZoneType.Battlefield), CardPredicates.hasCounter(counterType)));
 

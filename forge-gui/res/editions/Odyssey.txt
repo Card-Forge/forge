@@ -53,7 +53,7 @@ ScryfallCode=ODY
 38 C Patrol Hound @Daren Bader
 39 R Pianna, Nomad Captain @D. Alexander Gregory
 40 C Pilgrim of Justice @Dany Orizio
-41 C Pilgrim of Virtue @Massimilano Frezzato
+41 C Pilgrim of Virtue @Massimiliano Frezzato
 42 C Ray of Distortion @Carl Critchlow
 43 U Resilient Wanderer @Clyde Caldwell
 44 C Sacred Rites @Bradley Williams

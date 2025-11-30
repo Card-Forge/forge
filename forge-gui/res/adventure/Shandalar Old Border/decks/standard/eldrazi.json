@@ -1,10 +1,50 @@
-{                                    
-"name":"Eldrazi",
-  "template":
-  {
-   "count":60,
-   "colors":["Blue","Black","Green"],
-   "tribe":"Phyrexian",
-   "rares":0.6
-  }
+{
+  "name": "Eldrazi",
+  "mainDeck": [
+    {
+      "count": 15,
+      "colors": [
+        "Blue",
+        "Black",
+        "Green"
+      ],
+      "subTypes": [
+        "Phyrexian"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 23,
+      "colors": [
+        "Blue",
+        "Black",
+        "Green"
+      ],
+      "subTypes": [
+        "Phyrexian"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 8,
+      "cardName": "Island|INV"
+    },
+    {
+      "type": "card",
+      "count": 7,
+      "cardName": "Swamp|INV"
+    },
+    {
+      "type": "card",
+      "count": 7,
+      "cardName": "Forest|INV"
+    }
+  ]
 }

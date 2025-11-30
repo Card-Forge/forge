@@ -4,7 +4,7 @@ Types:Creature Eldrazi
 PT:2/1
 K:Devoid
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigSacrifice | TriggerDescription$ When you cast CARDNAME, you may pay {1}{C}. If you do, target opponent sacrifices a creature. ({C} represents colorless mana.)
-SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 1 C | ValidTgts$ Opponent | SacValid$ Creature | SacMessage$ Creature
+SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 1 C | ValidTgts$ Opponent | SacValid$ Creature
 K:Flying
 S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
 DeckHints:Ability$Mana.Colorless

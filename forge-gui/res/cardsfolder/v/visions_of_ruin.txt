@@ -1,7 +1,7 @@
 Name:Visions of Ruin
 ManaCost:3 R
 Types:Sorcery
-A:SP$ Sacrifice | Defined$ Player.Opponent | SacValid$ Artifact | SacMessage$ artifact | SubAbility$ DBToken | RememberSacrificed$ True | StackDescription$ SpellDescription | SpellDescription$ Each opponent sacrifices an artifact.
+A:SP$ Sacrifice | Defined$ Player.Opponent | SacValid$ Artifact | SubAbility$ DBToken | RememberSacrificed$ True | StackDescription$ SpellDescription | SpellDescription$ Each opponent sacrifices an artifact.
 SVar:DBToken:DB$ Token | TokenAmount$ Y | TokenScript$ c_a_treasure_sac | SubAbility$ DBCleanup | SpellDescription$ For each artifact sacrificed this way, you create a Treasure token.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Count$RememberedSize

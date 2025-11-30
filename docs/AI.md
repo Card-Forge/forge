@@ -1,5 +1,4 @@
 # About Forge's Artificial Intelligence
-
 The AI is *not* "trained". It uses basic rules and can be easy to overcome knowing its weaknesses.
 
 The AI is:
@@ -13,13 +12,11 @@ Defining general concepts of smart play can help improve the win rate much easie
 If you want to train a model for the AI, please do. We would love to see something like that implemented in Forge.
 
 # AI Matches from Command Line
-
 The AI can battle itself in the command line, allowing the tests to be performed on headless servers or on computers that have poor graphic performance, and when you just don't need to see the match. This can be useful if you want to script testing of decks, test a large tournament, or just bash 100's of games out to see how well a deck performs.
 
 Please understand, the AI is still the AI, and it's limitations exist even against itself. Games can lag and become almost unbearably long when the AI has a lot to think about, and you can't see what's on the table for it to play against. It's best if you set up the tournament and walk away, you can analyze logs later, results are printed at the end.
 
-## Syntax 
-
+## Syntax
 `sim -d <deck1[.dck]> ... <deckX[.dck]> -D [path] -n [N] -f [F] -t [T] -p [P] -q`
 
 In linux and mac, command line arguments are not currently passed through the sh script, please call `java -jar` manually, instead of the exe.

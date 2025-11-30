@@ -202,10 +202,6 @@ public final class CardPredicates {
         return c -> c.getCMC() % 2 == 1;
     }
 
-    public static Predicate<Card> hasSuspend() {
-        return Card::hasSuspend;
-    }
-
     public static Predicate<Card> hasCounters() {
         return GameEntity::hasCounters;
     }
@@ -296,19 +292,13 @@ public final class CardPredicates {
     }
 
     public static final Predicate<Card> TAPPED = Card::isTapped;
-    public static final Predicate<Card> FACE_DOWN = Card::isFaceDown;
     public static final Predicate<Card> UNTAPPED = Card::isUntapped;
     public static final Predicate<Card> CAN_TAP = Card::canTap;
     public static final Predicate<Card> CAN_CREW = Card::canCrew;
     public static final Predicate<Card> CREATURES = Card::isCreature;
     public static final Predicate<Card> NON_CREATURES = c -> !c.isCreature();
     public static final Predicate<Card> ENCHANTMENTS = Card::isEnchantment;
-    public static final Predicate<Card> AURA = Card::isAura;
-    public static final Predicate<Card> EQUIPMENT = Card::isEquipment;
     public static final Predicate<Card> FORTIFICATION = Card::isFortification;
-    public static final Predicate<Card> CURSE = Card::isCurse;
-    public static final Predicate<Card> UNENCHANTED = c -> !c.isEnchanted();
-    public static final Predicate<Card> ENCHANTED = GameEntity::isEnchanted;
     public static final Predicate<Card> NON_TOKEN = c -> !(c.isToken() || c.isTokenCard());
     public static final Predicate<Card> TOKEN = c -> c.isToken() || c.isTokenCard();
     public static final Predicate<Card> BASIC_LANDS = c -> {
@@ -327,10 +317,6 @@ public final class CardPredicates {
     public static final Predicate<Card> NONLAND_PERMANENTS = c -> c.isPermanent() && !c.isLand();
     public static final Predicate<Card> hasFirstStrike = c -> c.isCreature() && (c.hasFirstStrike() || c.hasDoubleStrike());
     public static final Predicate<Card> hasSecondStrike = c -> c.isCreature() && (!c.hasFirstStrike() || c.hasDoubleStrike());
-    public static final Predicate<Card> SNOW_LANDS = c -> c.isLand() && c.isSnow();
     public static final Predicate<Card> PLANESWALKERS = Card::isPlaneswalker;
     public static final Predicate<Card> BATTLES = Card::isBattle;
-    public static final Predicate<Card> CAN_BE_DESTROYED = Card::canBeDestroyed;
-    public static final Predicate<Card> ATTRACTIONS = Card::isAttraction;
-    public static final Predicate<Card> CONTRAPTIONS = Card::isContraption;
 }

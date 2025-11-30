@@ -1,12 +1,50 @@
-{                                    
-"name":"Berserker",
-  "template":
-  {
-   "count":60,
-   "colors":["Red","Black","Green"],
-   "tribe":"Berserker",        
-   "tribeCards":1.0,
-   "tribeSynergyCards":0.2,
-   "rares":0.4
-  }
+{
+  "name": "Berserker",
+  "mainDeck": [
+    {
+      "count": 23,
+      "colors": [
+        "Red",
+        "Black",
+        "Green"
+      ],
+      "subTypes": [
+        "Berserker"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 15,
+      "colors": [
+        "Red",
+        "Black",
+        "Green"
+      ],
+      "subTypes": [
+        "Berserker"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 8,
+      "cardName": "Mountain|PTK"
+    },
+    {
+      "type": "card",
+      "count": 7,
+      "cardName": "Swamp|PTK"
+    },
+    {
+      "type": "card",
+      "count": 7,
+      "cardName": "Forest|PTK"
+    }
+  ]
 }

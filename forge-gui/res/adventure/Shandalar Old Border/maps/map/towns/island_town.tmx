@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="50">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzbwM7AsIHG2JiVgeEKEHdyIjBI3IiVtvZeR7MTZu8FEuwFub2EDROb4DHjIlDODIt/SbELPbxg+DIB94DstkDCxNhXyobdLmIwyD34woKYtEAuvkqCvdjSArm4mED808KvpIQ3Nf1KSngPlL3Y8hu90hcsv1HLflOgOWtIKOMo9TvIPiF2TDsJlXHE+N0UrSxCxrj8CMtfpNgPwpZIbiClXIDlU1LjHVv4k6IPW9lAqrs3spOmD9lOAPPDPGo=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFowA/KOWljz2T2BgYJkOxETtCXB8HmxxQRsAvZ9kJs2kBzrEj/J7LgWDncUDkCbmbXEArf2FLM/o4whMmjk5TCxCKU3SaWiAHKR7PY4lfGA2LY1oAWqdbZFDCi6DpaS8yGLWXOAAAywwdJA==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYKAfKORgYCgC4mIOOloKBPycDAwCQCzISV97KQWdWgwMXVr0t3cp0M5lQKw3SMLLWIeBwUQHk00pyOUiT24UkAdwxR1MHJ2mFaB13C7jpq35o4D64Ao7A8NVdvrbOxD1IQgAAJpJDjM=
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgxV0ajEwdGkNtCsQQFyHgUFCB5M9CoYWwBV3MHF0ehSMglEwvAAARWUEkg==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="256" y="271"/>
+  <object id="41" template="../../../../../../common/maps/obj/shop.tx" x="304" y="98">
+   <properties>
+    <property name="shopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,BlueBoosterPackShop,Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
+   </properties>
+  </object>
+  <object id="42" template="../../../../../../common/maps/obj/shop.tx" x="368" y="162">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
+   </properties>
+  </object>
+  <object id="43" template="../../../../../../common/maps/obj/shop.tx" x="353" y="98">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
+   </properties>
+  </object>
+  <object id="44" template="../../../../../../common/maps/obj/shop.tx" x="208" y="162">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
+   </properties>
+  </object>
+  <object id="45" template="../../../../../../common/maps/obj/shop.tx" x="304" y="162">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
+   </properties>
+  </object>
+  <object id="46" template="../../../../../../common/maps/obj/shop.tx" x="336" y="162">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
+   </properties>
+  </object>
+  <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="215" y="82"/>
+  <object id="48" template="../../../../../../common/maps/obj/shop.tx" x="176" y="192">
+   <properties>
+    <property name="shopList" value="Island"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

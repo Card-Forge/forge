@@ -100,7 +100,7 @@ public class DigAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
         // TODO: improve this check in ways that may be specific to a subability
         return canPlay(aiPlayer, sa);
     }

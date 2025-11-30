@@ -409,7 +409,7 @@ public class TokenAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+    public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         final Card source = sa.getHostCard();
         Player p = sa.getActivatingPlayer();
         if (sa.isKeyword(Keyword.FABRICATE)) {
@@ -448,7 +448,7 @@ public class TokenAi extends SpellAbilityAi {
 
             // TODO check for trigger to turn token ETB into +1/+1 counter for host
             // TODO check for trigger to turn token ETB into damage or life loss for opponent
-            // in this cases Token might be prefered even if they would not survive
+            // in this cases Token might be preferred even if they would not survive
             final Card tokenCard = TokenAi.spawnToken(payer, sa);
 
             // Token would not survive
@@ -508,6 +508,6 @@ public class TokenAi extends SpellAbilityAi {
                 return true;
             }
         }
-        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+        return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
     }
 }

@@ -4,7 +4,7 @@ Types:Legendary Creature Phyrexian Praetor
 PT:4/4
 K:First Strike
 T:Mode$ SpellCast | ValidCard$ Card.Instant,Card.Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME deals 1 damage to target opponent. Add {R}.
-SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ 1 | SubAbility$ DBMana
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ 1 | SubAbility$ DBMana
 SVar:DBMana:DB$ Mana | Produced$ R | Amount$ 1
 A:AB$ ChangeZone | Cost$ R | CheckSVar$ X | SVarCompare$ GE3 | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SorcerySpeed$ True | StackDescription$ SpellDescription | SpellDescription$ Exile CARDNAME, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery and only if you've cast three or more instant and/or sorcery spells this turn.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | ForgetOtherRemembered$ True | SubAbility$ DBCleanup | StackDescription$ None

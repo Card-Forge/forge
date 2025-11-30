@@ -5,7 +5,6 @@ import forge.card.CardRarity;
 import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.deck.DeckRecognizer;
 import forge.game.GameView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
@@ -459,7 +458,7 @@ public class CardDetailUtil {
         if (card.getChosenColors() != null && !card.getChosenColors().isEmpty()) {
             area.append("\n");
             area.append("(").append(Localizer.getInstance().getMessage("lblChosenColors")).append(" ");
-            area.append(Lang.joinHomogenous(card.getChosenColors().stream().map(DeckRecognizer::getLocalisedMagicColorName).collect(Collectors.toList())));
+            area.append(Lang.joinHomogenous(ColorSet.fromNames(card.getChosenColors()).stream().map(MagicColor.Color::getTranslatedName).collect(Collectors.toList())));
             area.append(")");
         }
 

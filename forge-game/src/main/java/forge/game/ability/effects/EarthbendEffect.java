@@ -1,9 +1,10 @@
 package forge.game.ability.effects;
 
-import java.util.Arrays;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Map;
 
+import forge.card.CardType;
 import forge.card.RemoveType;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
@@ -58,8 +59,8 @@ public class EarthbendEffect extends SpellAbilityEffect {
         // Earthbend should only target one land
         for (Card c : getTargetCards(sa)) {
             c.addNewPT(0, 0, ts, 0);
-            c.addChangedCardTypes(Arrays.asList("Creature"), null, false, EnumSet.noneOf(RemoveType.class), ts, 0, true, false);
-            c.addChangedCardKeywords(Arrays.asList("Haste"), null, false, ts, null);
+            c.addChangedCardTypes(new CardType(List.of("Creature"), true), null, false, EnumSet.noneOf(RemoveType.class), ts, 0, true, false);
+            c.addChangedCardKeywords(List.of("Haste"), null, false, ts, null);
 
             GameEntityCounterTable table = new GameEntityCounterTable();
             c.addCounter(CounterEnumType.P1P1, num, pl, table);

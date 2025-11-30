@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="75">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzV10EKAzEIBdDZFnqEOc/c/0hdBYLoz/erLRXcTE18ySQDfV7X9ZC5BzumO/e437M+O3/GtnwrbUT99lqmF2v0AvmiutNaovFZW8WoBDIyY6t7+A3fpFH12Z6ob9WnGD1f1Fux2Xkn95C1RWvuOoOeIfoNWSZ91nJ6VvVl72bV582PbNX52XWhul/7TnXq2fOs3WPQGZyK7JrQHZn2sfWVd6z2rO6deqY6fauWub/Z7yyyT/rYzK4j68saTz2UsciGzmD2e8xavRr1P0gl/sXH1Cm+yvvNxMkXGbt90VyMzzPuZ2NFVO89Z3swNiUjX1d+AGfcjXg=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAMA6Aes13vtbEDEnpJVVVVVfXpAffWXM8=
+  </data>
+ </layer>
+ <layer id="2" name="Grass" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJy1V21u6zAMy8802ddFvQ69aLp1B5q9hYDAUbLibgKCt5cqMiVTtLwu0/RQn895ms6n6dtK/fe1Pm/7/61t1e+5+r/U52P++fZx+e1n4+Bp/uy77mu335/q3++zjrWaddZFr9uwZXBZXw9b+x1Yehib73X2sdscbqIGyorBhVwspkJYPIy2JlgXe9jDuzk52dqBM3gHzqg9AkaLBe8s1/Cu5eHVFeudBUfLXrcbrcO1V/mtgjf8jrmjOBHttVqDsUT59cxyAc9IHGsXyvPi9PMoRq/3VW95+2b5pmo8grHtIXNW5WHry7X6b+vlyr97+nmPZTQwqzu977KcsGY1JdKTo5xW33FvwEetbfNQWmjxe3qicudzmvefsXl9yDUb6Ss+q5pdTrlzGn7oQYXH21fmicdR1cMZjbZ+ZZ+XvFgqT/aNcsnUPdIdnp+8WJyjx5URfYvmNi/WRvvn9RHigye2V7z+yOJX/IWh5ldTm0hDVO05fi9PFTOaNew5O3Jmsy5l5uGmPVmtz94BejGYp8wDWElqD8fHLMD6fIRLzaLZiefoo2t4s+qReJH2RVo2Mk9wPGg0Y47uIvBXM66aq0fnMqt/2fMdvInuq94dqpeLiqU4jxpH848yqyvefGR73eOZN4dE6/H3DXPmPsr5FZofeve4zD2eMaOuEQdQf28W690x/0K/R84mz+xcdg82xnhU/78AR0z7Ww==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlzEOwjAMRbvAJWCjEtBrwyXKVgZA6qUQg6UoCrH9bTcI9U1tkzip/e0kXbcSwan1Av6Aa7D9h2HsUdl/SJ43jnYljMnz7DjXDhhzrrTdwXX0jP0LaFdKyQ+34DmXJEKTCPk6SNcHwBYXn73C1sx3gfkV3xOTcTzFivuvp3GenJezPS0j38UE6ZX2lta60ewNmlwjpHu3tPaXdO1VwzW+iIybxTbni2i99dk7p5nofPsQWfdTWueyF9sv36XaKp3tavcsa8339LunVoZKG1JLc9BzeATpXakUjyXynAO5B6348AYH3Rhd
+  </data>
+ </layer>
+ <layer id="7" name="Walls of Trees " width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJy1l2FOwzAMhfd/u8WactN1E4g7QTdRcSoaCQtjnuPnRFjynyaNv7jOczqfDof528+735XPyp9211bM+H97ZXsABmFGY946df4UxIrmRGzCUPN2Of4dW1WedRzJ8+Yw6FgbweixCcPH7jfAZ+dNhk9sO/2umU8w3mK06/UyFnI9ZC1GZr1C7qPGeCP24sUY4WPiSowexl6+ZY/zTsaVGK2azvJFMXXtR/NLB1vd/1XloPeMIA1BfEy9CFPEla3B1nypAzumWTJMI3z1G9c4+jsjfVkcFttHo16SOZt6fV1nq/NsCt5D63uMNidenWQ0mD3TUT+/g71FPTbDF70zos+WldUPXX9ZjcjUXq9l9Xo0h1mTnDDrvzTOeo/eszlnNTvKHbqDttZhc87yeXcsq6dXkB+kMy09srqd2Yune1bjvOeRHk3gXe8fgeFj+s7Z4UGGNBPl2prXC6O+sybPj33X3s28mhi5X42Y/kdt9aiRf6QRY/Pfqr2a91enNpaE1o0Yc39BjCXgzxo6x17viBj1e8/HnzGvh6Dn6P58c2Iw7umeHvPuJIVYgxnX/gVfaPFK
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="271.951" y="480.787">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="78.8337" y="33.9163"/>
+  <object id="63" template="../../../../../../common/maps/obj/gold.tx" x="502.666" y="206.5"/>
+  <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="271.917" y="435.333">
+   <properties>
+    <property name="enemy" value="Green Beast"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="342.166" y="197">
+   <properties>
+    <property name="enemy" value="Ape"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../../../common/maps/obj/gold.tx" x="509.667" y="67.333"/>
+  <object id="69" template="../../../../../../common/maps/obj/treasure.tx" x="16" y="257.5"/>
+  <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="391" y="439">
+   <properties>
+    <property name="enemy" value="Ape"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="199" y="280">
+   <properties>
+    <property name="enemy" value="Ape"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="87" y="233">
+   <properties>
+    <property name="enemy" value="Ape"/>
+   </properties>
+  </object>
+  <object id="74" template="../../../../../../common/maps/obj/door_down.tx" x="191.75" y="16.25">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/grove_12B.tmx"/>
+    <property name="teleportObjectId" value="72"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -493,7 +493,7 @@ public class CostAdjustment {
         } else {
             final String color = staticAbility.getParamOrDefault("Cost", staticAbility.getParam("Color"));
             int sumGeneric = 0;
-            // might be problematic for wierd hybrid combinations
+            // might be problematic for weird hybrid combinations
             for (final String cost : color.split(" ")) {
                 if (StringUtils.isNumeric(cost)) {
                     sumGeneric += Integer.parseInt(cost) * value;

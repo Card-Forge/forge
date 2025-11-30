@@ -13,7 +13,6 @@ import forge.gui.events.UiEventNextGameDecision;
 import forge.util.TextUtil;
 import forge.util.maps.MapOfLists;
 
-import java.io.File;
 import java.util.Collection;
 
 /**
@@ -314,13 +313,13 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
             } else {
                 effect = TextUtil.fastReplace(TextUtil.fastReplace(
                         TextUtil.fastReplace(c.getName(), ",", ""),
-                        " ", "_"), "'", "").toLowerCase() + ".mp3";
+                        " ", "_"), "'", "").toLowerCase();
 
             }
         }
 
         // Only proceed if the file actually exists
-        return new File(SoundSystem.instance.getSoundDirectory(), effect).exists();
+        return SoundSystem.instance.getSoundResource(effect) != null;
     }
 
 
@@ -351,7 +350,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
             } else {
                 return TextUtil.fastReplace(TextUtil.fastReplace(
                         TextUtil.fastReplace(c.getName(), ",", ""),
-                        " ", "_"), "'", "").toLowerCase() + ".mp3";
+                        " ", "_"), "'", "").toLowerCase();
             }
         }
     }

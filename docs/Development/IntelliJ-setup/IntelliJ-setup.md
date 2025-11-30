@@ -1,7 +1,6 @@
 ## Part 1
 
 ### Install IntelliJ
-
 IntelliJ comes in two versions:
 
 - **Community Edition**: Free to download and sufficient for this project (it is not a trial version that expires).
@@ -14,7 +13,6 @@ No additional plugins are required for this project.
   * start IntelliJ
 
 ![01-01-initial-prompt](01-01-initial-prompt.png)
-
 
   * select **Do not import settings**
   * click **OK**
@@ -42,7 +40,6 @@ You will receive a prompt indicating that your checkout from version control con
 
 ![01-05-do-not-open-it](01-05-do-not-open-it.png)
 
-
   * click **No**
 
 ![01-06-click-open](01-06-click-open.png)
@@ -57,18 +54,15 @@ Browse to the folder you specified for the parent and inside the folder you spec
 
 ![01-08-open-as-project](01-08-open-as-project.png)
 
-
   * select **Open as Project**
 
 At this point IntelliJ should be open with the Forge project.  However, it will take a while for IntelliJ to download all the project dependencies.  This is reflected in the bottom status bar by default.
-
 
 ## Part 2
   * select **File**
   * select **Project Structure...**
 
 ![02-01-project-settings](02-01-project-settings.png)
-
 
   * select **New**
   * select **JDK**
@@ -78,12 +72,10 @@ At this point IntelliJ should be open with the Forge project.  However, it will 
 
 ![02-03-jdk-homedirectory](02-03-jdk-homedirectory.png)
 
-
 If necessary browse to the JDK directory.
   * click **OK**
 
 ![02-04-after-jdk-setup](02-04-after-jdk-setup.png)
-
 
   * click **OK**
 
@@ -92,13 +84,11 @@ If necessary browse to the JDK directory.
 
 ![02-05-edit-configurations](02-05-edit-configurations.png)
 
-
   * select **Edit Configurations...**
 
   * click the **+** in the upper left
 
 ![02-06-application](02-06-application.png)
-
 
   * select "Application"
 
@@ -120,7 +110,6 @@ If necessary browse to the JDK directory.
 If all goes well, you should eventually see the Forge splash screen followed by the main UI.
 
 ### Adventure Mode debugging on Desktop
-
 Follow the same steps to create a Run Configuration, but use forge-gui-mobile-dev instead of forge-gui-desktop as the module and directory.
 
   * select **Run** from the top menu

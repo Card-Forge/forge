@@ -134,7 +134,7 @@ public class ChooseCardAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         if (sa.hasParam("AILogic") && !checkAiLogic(ai, sa, sa.getParam("AILogic"))) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }

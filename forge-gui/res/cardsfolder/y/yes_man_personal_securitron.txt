@@ -2,7 +2,7 @@ Name:Yes Man, Personal Securitron
 ManaCost:2 W
 Types:Legendary Artifact Creature Robot
 PT:2/2
-A:AB$ GainControl | Cost$ T | Defined$ Self | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBImmediateTrigger | PlayerTurn$ True | StackDescription$ SpellDescription | SpellDescription$ Target opponent gains control of CARDNAME. When they do, you draw two cards and put a quest counter on NICKNAME. Activate only during your turn.
+A:AB$ GainControl | Cost$ T | Defined$ Self | ValidTgts$ Opponent | SubAbility$ DBImmediateTrigger | PlayerTurn$ True | StackDescription$ SpellDescription | SpellDescription$ Target opponent gains control of CARDNAME. When they do, you draw two cards and put a quest counter on NICKNAME. Activate only during your turn.
 SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Self | ConditionPresent$ Card.ControlledBy ParentTarget | Execute$ DBDraw | TriggerDescription$ When they do, you draw two cards and put a quest counter on NICKNAME.
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBCounter
 SVar:DBCounter:DB$ PutCounter | Defined$ Self | CounterType$ QUEST | CounterNum$ 1

@@ -108,7 +108,7 @@ public class FightAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(final SpellAbility sa, final Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(final Player aiPlayer, final SpellAbility sa) {
         if ("Always".equals(sa.getParam("AILogic"))) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay); // e.g. Hunt the Weak, the AI logic was already checked through canFightAi
         }

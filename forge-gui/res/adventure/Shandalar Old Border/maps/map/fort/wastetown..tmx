@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="58">
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" name="dungeon large" tilewidth="16" tileheight="16" tilecount="16384" columns="128">
+  <image source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.png" width="2048" height="2048"/>
+ </tileset>
+ <tileset firstgid="28289" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="Collision" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztlFEOwiAMQPmXncDtYnoP/5xX8RqweTdptEnXlKUMG3/6kiawDXh00DGGMDbE86aPvXkkNOtfhxBy/MRl2PbxmWYPvS6w7kLGptKe2FxJ4cNzBUBf68I9EO5yxAfbWhdpzZoLcG48b5y9ca8Sj5ONi4T2zGayvuR4L/1VeRePnN3a/tERablPv3bp+UfuYuOS4vYM88Aa9I+81LB0gbs7C/VFYja+05B/2KtU7yhQW6bv91Yu6IP5keob5qPFo8clEyfKyt73ujiO41jxBoesd8U=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJyT4WFgkMGCm7gR+HozcRimHqQfxMdmLgxjA8jyxNpJLKbULdjCpYIIjKwenxvIcQsIE+MGdIzP7sHollONDAynGweHW7yaGBi8m6jnFu1KTAxzi5k1gXABuuM0ndyyjYBbqJ1esLkFhOmRdnHZTQ+3EGPvbTvsYiA8VPI0MW5Bx9R2C7J9Q9Ut1K6PBpNb0NMMuW7BFW/EqCcUZ6NgFIyCUUAPAAAv89Zg
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztlVEKwjAMQMMU3HYSXfEE6sFk+/MCXkCUfQnqeTyK+GdDCW6lWbu1c0MWeFBKmz6aZgMwR5QAzCTzhFngsP55UBwX33ETeixzgJUnmUTk/i5XmeOBOYvu3OX+m+bi4mNywTwYF6Y+3HxZmR+TC0aIGo3RhXqD4FzEvs4v7yXS3MgB+7kvl7Njjcjl5Omi+3R5L+RS9uCydnTJCjOi8HfRvejMTVp/w8g2VeB4l6p1XB+1obqvqRa2COHC1SuUC313OWwuof/TXVxsvGN1zituty+0hw9j8eCchnap+gztMTHxj3wApzsJdQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="35" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztljsOgzAMhrP1KrymUiZg6qlQytQL9Bi8uhQ4Cz1OjVokQ2KgEGDJL30D2EQfVoJo7ow1G4HzOE1DPas6ql0KzpgVMfbk+7rkN5Hk55JzeR33rXXBPnYsgl1kddyX+wrnEou4AWMXwAvk9Y4lLm0oFzsSKcGhAupgvHcPFzeEuQBe+L0eZq6L7P7fcwGHCqjD4+eCa2N9ql1MLuL6fZczXFtcxBm4vK/THl2wiwHfBzOQU/r993/5dK+N9vecmchcElijADICfK6pnpZ0hUsXA/alA1gE+FxTPS3mYH8vSQJrFEBGgM811dOSKnCZCnWuj8jW/xY6Ojo6W+QDSF4obQ==
+  </data>
+ </layer>
+ <layer id="8" name="ClutterBis" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztkrsNgzAQQG+3DODYrskMwBTAcuHTpIFZ8pqQIrHkSD6nuSc9IYvink4nos/jUmFIJtbynVeLG0Su6DFgHP7Xcmf2jAuuuBVsaTqRG+54dO93qsWN7AU9BoxjuZazqaehT/8/98LsGRdccVNo2ek4MlrcxF7QY8A4lWtoWvbRfn6TLYq3+2uL5u3mUvN2c6lxu7lo3q5hGIZhlOIJRypUaw==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="281" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="249.864" y="120.181">
+   <properties>
+    <property name="enemy" value="Human Bard"/>
+   </properties>
+  </object>
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="151.644" y="112.184"/>
+  <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="99.1001" y="131.475"/>
+  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="123.014" y="131.377">
+   <properties>
+    <property name="enemy" value="Human Elite"/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="286.167" y="186.333">
+   <properties>
+    <property name="enemy" value="Human"/>
+   </properties>
+  </object>
+  <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="131" y="187.167">
+   <properties>
+    <property name="enemy" value="Human guard"/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../../../common/maps/obj/gold.tx" x="99.2609" y="112.417"/>
+  <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="208.5" y="224">
+   <properties>
+    <property name="enemy" value="Human"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

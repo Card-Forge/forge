@@ -28,7 +28,7 @@ public class SpellApiBased extends Spell {
 
     @Override
     public String getStackDescription() {
-        // prefer setted stack Description if able 
+        // prefer set stack Description if able 
         final String result = super.getStackDescription();
         if (result.isEmpty()) {
             return effect.getStackDescriptionWithSubs(mapParams, this);

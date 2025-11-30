@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+import javax.sound.sampled.AudioSystem;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.SwingUtilities;
@@ -282,6 +283,17 @@ public class GuiDesktop implements IGuiBase {
     @Override
     public void browseToUrl(final String url) throws IOException, URISyntaxException {
         Desktop.getDesktop().browse(new URI(url));
+    }
+
+    @Override
+    public boolean isSupportedAudioFormat(File file) {
+        try {
+            return AudioSystem.getAudioFileFormat(file) != null;
+        }
+        catch (Exception e) {
+            System.err.printf("Unable to open audio resource '%s': %s\n", file.getPath(), e.getMessage());
+            return false;
+        }
     }
 
     @Override

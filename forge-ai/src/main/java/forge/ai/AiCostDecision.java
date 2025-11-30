@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 
 import forge.ai.AiCardMemory.MemorySet;
 import forge.card.CardType;
-import forge.card.MagicColor;
+import forge.card.ColorSet;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
@@ -60,9 +60,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
     @Override
     public PaymentDecision visit(CostChooseColor cost) {
         int c = cost.getAbilityAmount(ability);
-        List<String> choices = player.getController().chooseColors("Color", ability, c, c,
-                new ArrayList<>(MagicColor.Constant.ONLY_COLORS));
-        return PaymentDecision.colors(choices);
+        return PaymentDecision.colors(player.getController().chooseColors("Color", ability, c, c, ColorSet.WUBRG));
     }
 
     @Override

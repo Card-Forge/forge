@@ -55,7 +55,7 @@ ScryfallCode=DDD
 47 U Genju of the Fens @Tsutomu Kawade
 48 R Bad Moon @Gary Leach
 49 C Sign in Blood @Howard Lyon
-50 C Vicious Hunger @Massimilano Frezzato
+50 C Vicious Hunger @Massimiliano Frezzato
 51 C Ichor Slick @Zoltan Boros & Gabor Szikszai
 52 C Hideous End @Zoltan Boros & Gabor Szikszai
 53 C Snuff Out @Steve Argyle

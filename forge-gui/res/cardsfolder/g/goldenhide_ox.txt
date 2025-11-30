@@ -3,7 +3,7 @@ ManaCost:5 G
 Types:Enchantment Creature Ox
 PT:5/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Enchantment.Other+YouCtrl | Execute$ TrigPump | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment you control enters, target creature must be blocked this turn if able.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME must be blocked if able. | AILogic$ Pump
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | KW$ HIDDEN CARDNAME must be blocked if able. | AILogic$ Pump
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Enchantment
 Oracle:Constellation — Whenever Goldenhide Ox or another enchantment you control enters, target creature must be blocked this turn if able.

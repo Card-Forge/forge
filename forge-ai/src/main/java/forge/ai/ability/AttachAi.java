@@ -968,7 +968,7 @@ public class AttachAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(final SpellAbility sa, final Player ai) {
+    public AiAbilityDecision chkDrawback(final Player ai, final SpellAbility sa) {
         if (sa.isTrigger() && sa.usesTargeting()) {
             CardCollection targetables = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
             CardCollection source = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Object"), sa);
@@ -1213,7 +1213,7 @@ public class AttachAi extends SpellAbilityAi {
             });
         }
 
-        //some auras/equipments aren't useful in multiples
+        //some auras/equipment aren't useful in multiples
         if (attachSource.hasSVar("NonStackingAttachEffect")) {
             prefList = CardLists.filter(prefList, Predicate.not(
                     CardPredicates.isEquippedBy(attachSource.getName())
