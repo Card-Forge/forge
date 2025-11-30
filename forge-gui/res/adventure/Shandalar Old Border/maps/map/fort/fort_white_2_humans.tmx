@@ -50,7 +50,7 @@
     <property name="teleport" value="" />
    </properties>
   </object>
-  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="277.606" y="130.186">
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="220" y="240">
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Elvish Bard|ALL&quot; ] }" />
     <property name="enemy" value="Arch Angel of Shandalar" />
@@ -149,5 +149,5 @@
     <property name="waypoints" value="69,70" />
    </properties>
   </object>
- <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="220" y="240"><properties><property name="enemy" value="The Sainted One" /><property name="threatRange" type="int" value="50" /><property name="effect">{ "startBattleWithCard": [ "Mox Pearl|LEA", "Rainbow Knights|PAST", "White Knight|LEA" ] }</property></properties></object></objectgroup>
+ <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="277.606" y="130.186"><properties><property name="enemy" value="The Sainted One" /><property name="threatRange" type="int" value="50" /><property name="effect">{ "startBattleWithCard": [ "Mox Pearl|LEA", "Rainbow Knights|PAST", "White Knight|LEA" ] }</property></properties></object></objectgroup>
 </map>
