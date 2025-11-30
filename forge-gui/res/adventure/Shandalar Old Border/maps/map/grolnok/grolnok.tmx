@@ -471,7 +471,7 @@
   </object>
   <object id="198" template="../../../../../../common/maps/obj/enemy.tx" x="148" y="155.164" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Bull Hippo|POR", "Island|ONS", "Forest|ONS", "Plains|ONS" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Bull Hippo|POR", "Island|POR|1", "Plains|POR|1", "Forest|POR|1" ] }</property>
     <property name="enemy" value="Hippo" />
     <property name="threatRange" type="int" value="20" />
    </properties>

@@ -37,7 +37,7 @@
     <property name="speedModifier" type="float" value="20" />
     <property name="threatRange" type="int" value="50" />
     <property name="waypoints" value="" />
-   <property name="effect">{ "startBattleWithCard": [ "Bull Hippo|POR", "Island|ONS", "Forest|ONS", "Plains|ONS" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Bull Hippo|POR", "Island|POR|1", "Plains|POR|1", "Forest|POR|1" ] }</property></properties>
   </object>
   <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="105.75" y="54.25">
    <properties>
