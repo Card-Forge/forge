@@ -62,6 +62,7 @@
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [&quot;Black Market&quot;]}" />
     <property name="enemy" value="Cosmic Horror" />
+   <property name="effect">{ "startBattleWithCard": [ "Cursed Monstrosity|ODY" ] }</property>
     <property name="threatRange" type="int" value="40" />
    </properties>
   </object>

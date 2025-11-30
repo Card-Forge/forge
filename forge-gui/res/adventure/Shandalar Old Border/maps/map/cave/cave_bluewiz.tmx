@@ -49,6 +49,7 @@
   <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="336.341" y="207.974">
    <properties>
     <property name="enemy" value="Djinn" />
+   <property name="effect">{ "startBattleWithCard": [ "Island|LEA", "Mountain|ARB", "Swamp|LEA", "Aladdin's Lamp|ARB", "Keeper of Kookus|VIS" ] }</property>
     <property name="threatRange" type="int" value="50" />
    </properties>
   </object>

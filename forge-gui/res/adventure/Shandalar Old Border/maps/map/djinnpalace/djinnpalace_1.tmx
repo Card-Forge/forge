@@ -39,6 +39,7 @@
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="133.045" y="158.394">
    <properties>
     <property name="enemy" value="Djinn"/>
+   <property name="effect">{ "startBattleWithCard": [ "Island|LEA", "Mountain|ARB", "Swamp|LEA", "Aladdin's Lamp|ARB", "Keeper of Kookus|VIS" ] }</property>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
@@ -47,12 +48,14 @@
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="208.866" y="81.1234">
    <properties>
     <property name="enemy" value="Djinn"/>
+   <property name="effect">{ "startBattleWithCard": [ "Island|LEA", "Mountain|ARB", "Swamp|LEA", "Aladdin's Lamp|ARB", "Keeper of Kookus|VIS" ] }</property>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="248.146" y="187.807">
    <properties>
     <property name="enemy" value="Djinn"/>
+   <property name="effect">{ "startBattleWithCard": [ "Island|LEA", "Mountain|ARB", "Swamp|LEA", "Aladdin's Lamp|ARB", "Keeper of Kookus|VIS" ] }</property>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>

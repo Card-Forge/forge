@@ -156,7 +156,7 @@
     <property name="enemy" value="Dwarf Lord" />
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Daru Warchief|SCG", "Glorious Anthem|USG", "Kjeldoran Outpost|ALL" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Daru Warchief|SCG", "Kjeldoran Outpost|ALL" ] }</property>
   </object>
   <object id="68" template="../../../../../../../common/maps/obj/enemy.tx" x="671.667" y="411.333">
    <properties>

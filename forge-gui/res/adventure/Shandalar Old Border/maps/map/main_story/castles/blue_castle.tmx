@@ -255,6 +255,7 @@
   }
 ]</property>
     <property name="enemy" value="Djinn" />
+   <property name="effect">{ "startBattleWithCard": [ "Island|LEA", "Mountain|ARB", "Swamp|LEA", "Aladdin's Lamp|ARB", "Keeper of Kookus|VIS" ] }</property>
    </properties>
   </object>
  </objectgroup>

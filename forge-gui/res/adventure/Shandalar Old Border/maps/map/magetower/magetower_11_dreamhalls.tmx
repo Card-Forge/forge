@@ -126,6 +126,7 @@
    <properties>
     <property name="effect">{ "startBattleWithCard": [ "Fellwar Stone|4ED|1" ], "lifeModifier": 3 }</property>
     <property name="enemy" value="Dragon" />
+   <property name="effect">{ "startBattleWithCard": [ "Fire Diamond|MIR" ] }</property>
    </properties>
   </object>
   <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="95.9379" y="221.137">

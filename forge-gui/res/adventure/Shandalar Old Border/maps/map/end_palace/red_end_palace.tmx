@@ -245,7 +245,7 @@
   }
 ]</property>
     <property name="enemy" value="Dragon" />
-   <property name="effect">{ "startBattleWithCard": [ "Fellwar Stone|4ED|1" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Fire Diamond|MIR" ] }</property>
   </object>
   <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="54.5" y="495" />
   <object id="76" template="../../../../../../common/maps/obj/waypoint.tx" x="223.5" y="498.5" />
