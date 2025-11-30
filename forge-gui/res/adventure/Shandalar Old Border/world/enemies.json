@@ -1836,7 +1836,7 @@
     "name": "Archfiend",
     "sprite": "sprites/enemy/fiend/archfiend.atlas",
     "deck": [
-      "decks/standard/demon_landdestruction.dck"
+      "decks/elite/demon_landdestruction.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -2672,7 +2672,7 @@
     "name": "Bandit Leader",
     "sprite": "sprites/enemy/humanoid/human/bandit/banditleader.atlas",
     "deck": [
-      "decks/standard/banditleader_bolas.dck",
+      "decks/elite/banditleader_bolas.dck",
       "decks/standard/banditleader_hellbent.dck",
       "decks/standard/banditleader_rakdos.dck"
     ],
@@ -3303,7 +3303,7 @@
     "name": "Big Zombie",
     "sprite": "sprites/enemy/undead/zombie_2.atlas",
     "deck": [
-      "decks/standard/zombie_bad.json"
+      "decks/elite/zombie_bad.json"
     ],
     "ai": "",
     "spawnRate": 1,
