@@ -45,7 +45,7 @@
   {
     "type": "randomCard",
     "colors": [ "Black" ],
-    "subTypes": [ "Vampire" ],
+    "subTypes": [ "Nightstalker" ],
     "count": 5
   },
   {
@@ -81,28 +81,10 @@
 ]</property>
    </properties>
   </object>
-  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="243.161" y="219.409" width="26.041" height="20.418">
-   <properties>
-    <property name="deckOverride" value="decks/standard/vampire_wb.dck" />
-    <property name="enemy" value="Chainer Dementia Master" />
-    <property name="inactive" type="bool" value="true" />
-    <property name="threatRange" type="int" value="50" />
-   <property name="effect">{ "startBattleWithCard": ["Chainer, Dementia Master|TOR", "Cabal Coffers|TOR"] }</property></properties>
-  </object>
   <object id="105" template="../../../../../../common/maps/obj/enemy.tx" x="280" y="260">
    <properties>
-    <property name="enemy" value="Dementia Beast" />
+    <property name="enemy" value="Nightstalker" />
     <property name="threatRange" type="int" value="40" />
-   </properties>
-  </object>
-  <object id="63" name="Ward" type="dialog" gid="11912" x="196.5" y="127.353" width="23.9016" height="18.8115">
-   <properties>
-    <property name="dialog">[{
-    "text":"A translucent, shimmering red field blocks your path. Pained screams echo through the room behind you.",
-    "options":[
-    { "name":"Leave." } 
-    ]
-}]</property>
    </properties>
   </object>
   <object id="65" template="../../../../../../common/maps/obj/treasure.tx" x="228.164" y="25.3361">
@@ -111,7 +93,7 @@
   {
     "type": "randomCard",
     "colors": [ "Black" ],
-    "subTypes": [ "Vampire" ],
+    "subTypes": [ "Nightstalker" ],
     "count": 5
   },
   {
@@ -240,39 +222,6 @@
 ]</property>
    </properties>
   </object>
-  <object id="79" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="242.588" y="239.611" width="25.7101" height="16.0008" visible="1">
-   <properties>
-    <property name="dialog">[
-  {
-    "text": "You approach a cobweb covered coffin lying at the center of the room.",
-    "options": [
-      { "name": "Walk away" },
-      {
-        "name": "Take a closer look at the rusty coffin",
-        "text": "You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.",
-        "options": [
-          { "name": "Walk away" },
-          {
-            "name": "Open the coffin",
-            "text": "As you open the coffin, an ancient figure awakes in the gloom. It cries out in an ancient voice: YOU DARE WAKE ME, PUNY MORTAL?",
-            "options": [
-              {
-                "name": "Prepare yourself!",
-                "action": [
-                  { "activateMapObject": 50 },
-                  { "deleteMapObject": 63 },
-                  { "deleteMapObject": -1 }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
-]</property>
-   </properties>
-  </object>
   <object id="80" template="../../../../../../common/maps/obj/enemy.tx" x="159.283" y="181.373" width="26.041" height="20.418">
    <properties>
     <property name="enemy" value="Naked Mole Rat" />
@@ -392,7 +341,7 @@
   </object>
   <object id="92" template="../../../../../../common/maps/obj/enemy.tx" x="209.287" y="239.41">
    <properties>
-    <property name="enemy" value="Vampire" />
+    <property name="enemy" value="Nightstalker" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="95,94" />
    <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property></properties>

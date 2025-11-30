@@ -40,45 +40,28 @@
   </object>
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="72.697" y="184.76">
    <properties>
-    <property name="displayNameOverride" value="Vampire Guardian" />
-    <property name="enemy" value="High Vampire" />
+    <property name="displayNameOverride" value="Nightstalker Guardian" />
+    <property name="enemy" value="Nightstalker" />
     <property name="threatRange" type="int" value="30" />
    </properties>
   </object>
   <object id="62" template="../../../../../../common/maps/obj/gold.tx" x="185.431" y="37.9964" />
-  <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="342.353" y="173.156">
+  <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="215" y="75">
    <properties>
-    <property name="deckOverride" value="decks/standard/vampire_monob.dck" />
-    <property name="enemy" value="Cateran Overlord" />
+    <property name="enemy" value="Swamp Queen Tojira" />
     <property name="inactive" type="bool" value="true" />
-    <property name="speedModifier" type="float" value="20" />
-    <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Black Market|MMQ", "Larceny|MMQ", "Misshapen Fiend|MMQ", "Rathi Assassin|NMS", "Spineless Thug|NMS" ] }</property></properties>
-  </object>
-  <object id="76" template="../../../../../../common/maps/obj/enemy.tx" x="380" y="145">
-   <properties>
-    <property name="enemy" value="Cateran Slaver" />
-    <property name="threatRange" type="int" value="35" />
-   </properties>
+    <property name="speedModifier" type="float" value="10" />
+    <property name="threatRange" type="int" value="50" />
+   <property name="effect">{ "startBattleWithCard": [ "Breathstealer|MIR", "Everglades|VIS", "Feral Shadow|MIR", "Lake of the Dead|ALL", "Nightstalker Engine|PO2" ] }</property></properties>
   </object>
   <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="174.262" y="162.311">
    <properties>
-    <property name="displayNameOverride" value="Vampire Feeder" />
-    <property name="enemy" value="Vampire" />
+    <property name="displayNameOverride" value="Nightstalker Feeder" />
+    <property name="enemy" value="Nightstalker" />
     <property name="threatRange" type="int" value="50" />
    <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property></properties>
   </object>
-  <object id="66" name="Ward" type="dialog" gid="11912" x="196.5" y="129.361" width="39.5656" height="16">
-   <properties>
-    <property name="dialog">[{
-    "text":"A translucent, shimmering red field blocks your path. An ancient Evil is lurking in these crypts, preventing you from entering the room in front of you ...",
-    "options":[
-    { "name":"Leave." } 
-    ]
-}]</property>
-   </properties>
-  </object>
-  <object id="67" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="338.774" y="175.211" width="24.9204" height="14.6679" visible="1">
+  <object id="67" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="215" y="90" width="24.9204" height="14.6679" visible="1">
    <properties>
     <property name="dialog">[
   {
@@ -98,7 +81,6 @@
                 "name": "Prepare yourself!",
                 "action": [
                   { "activateMapObject": 64 },
-                  { "deleteMapObject": 66 },
                   { "deleteMapObject": -1 }
                 ]
               }
@@ -114,8 +96,8 @@
   <object id="68" template="../../../../../../common/maps/obj/gold.tx" x="48.2296" y="159.484" />
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="239.812" y="163.5">
    <properties>
-    <property name="displayNameOverride" value="Vampire Feeder" />
-    <property name="enemy" value="Vampire" />
+    <property name="displayNameOverride" value="Nightstalker Feeder" />
+    <property name="enemy" value="Nightstalker" />
     <property name="threatRange" type="int" value="40" />
    <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property></properties>
   </object>
@@ -128,7 +110,7 @@
   {
     "type": "randomCard",
     "colors": [ "Black" ],
-    "subTypes": [ "Vampire" ],
+    "subTypes": [ "Nightstalker" ],
     "count": 5
   },
   {
@@ -170,7 +152,7 @@
   {
     "type": "randomCard",
     "colors": [ "Black" ],
-    "subTypes": [ "Vampire" ],
+    "subTypes": [ "Nightstalker" ],
     "count": 5
   },
   {
