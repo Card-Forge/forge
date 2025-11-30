@@ -5,7 +5,7 @@
  </editorsettings>
  <properties>
   <property name="dungeonEffect">{
-  "startBattleWithCard": [ "Titania's Song|ATQ" ],
+  "startBattleWithCard": [ "Squee, Goblin Nabob|MMQ", "Squee's Toy|TMP" ],
 }</property>
  </properties>
  <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
