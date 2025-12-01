@@ -3,7 +3,7 @@
     "name": "Abyssal Baron",
     "sprite": "sprites/enemy/fiend/abyssalbaron.atlas",
     "deck": [
-      "decks/standard/demon_swamp.dck"
+      "decks/elite/demon_swamp.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -141,7 +141,7 @@
     "name": "Adept Blue Wizard",
     "sprite": "sprites/enemy/humanoid/human/wizard/blue_wiz2.atlas",
     "deck": [
-      "decks/standard/bluewizard_medium_donate.dck",
+      "decks/elite/bluewizard_medium_donate.dck",
       "decks/standard/bluewizard_medium_dragons.dck",
       "decks/standard/bluewizard_easy_artifact.dck",
       "decks/standard/bluewizard_easy_control.dck",
@@ -215,7 +215,7 @@
     "name": "Adept Green Wizard",
     "sprite": "sprites/enemy/humanoid/human/wizard/green_wiz2.atlas",
     "deck": [
-      "decks/standard/greenwizard_medium_cheatramp.dck",
+      "decks/elite/greenwizard_medium_cheatramp.dck",
       "decks/standard/greenwizard_medium_nissa.dck",
       "decks/standard/greenwizard_medium_snakes.dck",
       "decks/standard/greenwizard_medium_trample.dck"
@@ -291,7 +291,7 @@
     "name": "Adept Red Wizard",
     "sprite": "sprites/enemy/humanoid/human/wizard/red_wiz2.atlas",
     "deck": [
-      "decks/standard/redwizard_medium_artifact.dck",
+      "decks/elite/redwizard_medium_artifact.dck",
       "decks/standard/redwizard_medium_giant.dck",
       "decks/standard/redwizard_medium_circleofflame.dck",
       "decks/standard/redwizard_medium_ralburn.dck",
@@ -372,7 +372,7 @@
     "name": "Adept White Wizard",
     "sprite": "sprites/enemy/humanoid/human/wizard/white_wiz2.atlas",
     "deck": [
-      "decks/standard/whitewizard_medium_aggro.dck",
+      "decks/elite/whitewizard_medium_aggro.dck",
       "decks/standard/whitewizard_medium_basri.dck",
       "decks/standard/whitewizard_medium_control.dck",
       "decks/standard/whitewizard_medium_knight.dck"
@@ -704,7 +704,7 @@
     "nameOverride": "",
     "sprite": "sprites/enemy/fiend/aerie_guard.atlas",
     "deck": [
-      "decks/standard/aerie_guard.dck"
+      "decks/elite/aerie_guard.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -1028,7 +1028,7 @@
     "name": "Ancient Vampire",
     "sprite": "sprites/enemy/undead/vampire_4.atlas",
     "deck": [
-      "decks/standard/ancientvampire.dck"
+      "decks/elite/ancientvampire.dck"
     ],
     "ai": "",
     "flying": true,
@@ -1102,7 +1102,7 @@
     "name": "Angel Warrior",
     "sprite": "sprites/enemy/celestial/angelwarrior.atlas",
     "deck": [
-      "decks/standard/angelwarrior.dck"
+      "decks/elite/angelwarrior.dck"
     ],
     "ai": "",
     "flying": true,
@@ -1177,7 +1177,7 @@
     "nameOverride": "Minotaur Shaman",
     "sprite": "sprites/enemy/humanoid/minotaur/amonkhet_minotaur.atlas",
     "deck": [
-      "decks/standard/amonkhet_minotaur.dck"
+      "decks/elite/amonkhet_minotaur.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -1254,7 +1254,7 @@
     "nameOverride": "Ape Behemoth",
     "sprite": "sprites/enemy/beast/behemoth.atlas",
     "deck": [
-      "decks/standard/ape.json"
+      "decks/elite/ape.json"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -1329,7 +1329,7 @@
     "name": "Apprentice Black Wizard",
     "sprite": "sprites/enemy/humanoid/human/wizard/black_wizard.atlas",
     "deck": [
-      "decks/standard/blackwizard_easy_bog.dck",
+      "decks/elite/blackwizard_easy_bog.dck",
       "decks/standard/blackwizard_easy_humans.dck",
       "decks/standard/blackwizard_easy_pile.dck",
       "decks/standard/blackwizard_easy_thrull.dck",
@@ -1405,7 +1405,7 @@
     "name": "Apprentice Blue Wizard",
     "sprite": "sprites/enemy/humanoid/human/wizard/mage.atlas",
     "deck": [
-      "decks/standard/bluewizard_apprentice_1.dck",
+      "decks/elite/bluewizard_apprentice_1.dck",
       "decks/standard/bluewizard_apprentice_2.dck",
       "decks/standard/bluewizard_apprentice_3.dck",
       "decks/standard/bluewizard_easy.json"
@@ -1483,7 +1483,7 @@
     "name": "Apprentice Green Wizard",
     "sprite": "sprites/enemy/humanoid/human/wizard/green_wiz1.atlas",
     "deck": [
-      "decks/standard/greenwizard_easy_elf.dck",
+      "decks/elite/greenwizard_easy_elf.dck",
       "decks/standard/greenwizard_easy_enchantment.dck",
       "decks/standard/greenwizard_easy_vanilla.dck",
       "decks/standard/greenwizard_easy.json"
@@ -1559,7 +1559,7 @@
     "name": "Apprentice Red Wizard",
     "sprite": "sprites/enemy/humanoid/human/wizard/enchanter.atlas",
     "deck": [
-      "decks/standard/redwizard_easy.json",
+      "decks/elite/redwizard_easy.json",
       "decks/standard/redwizard_easy_1.dck",
       "decks/standard/redwizard_easy_2.dck",
       "decks/standard/redwizard_apprentice_1.dck",
@@ -1637,7 +1637,7 @@
     "name": "Apprentice White Wizard",
     "sprite": "sprites/enemy/humanoid/human/cleric/priest.atlas",
     "deck": [
-      "decks/standard/whitewizard_easy_ajani.dck",
+      "decks/elite/whitewizard_easy_ajani.dck",
       "decks/standard/whitewizard_easy_wanderer.dck",
       "decks/standard/whitewizard_easy_angelhuman.dck"
     ],
@@ -1713,7 +1713,7 @@
     "name": "Arcane Golem",
     "sprite": "sprites/enemy/construct/arcane_golem.atlas",
     "deck": [
-      "decks/standard/jodah.dck"
+      "decks/elite/jodah.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -1789,7 +1789,7 @@
     "nameOverride": "Human Archer",
     "sprite": "sprites/enemy/humanoid/human/archer/archer_2.atlas",
     "deck": [
-      "decks/standard/human_archer.dck"
+      "decks/elite/human_archer.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -2217,7 +2217,7 @@
     "name": "Armored Knight",
     "sprite": "sprites/enemy/humanoid/knight.atlas",
     "deck": [
-      "decks/standard/armored_knight.dck"
+      "decks/elite/armored_knight.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -2345,7 +2345,7 @@
     "name": "Artifact Warrior",
     "sprite": "sprites/enemy/construct/artifactsoldier.atlas",
     "deck": [
-      "decks/standard/artifactwarrior.dck"
+      "decks/elite/artifactwarrior.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -2643,7 +2643,7 @@
     "name": "Badger",
     "sprite": "sprites/enemy/beast/badger.atlas",
     "deck": [
-      "decks/standard/badger.dck"
+      "decks/elite/badger.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -2792,7 +2792,7 @@
     "name": "Bandit Scoundrel",
     "sprite": "sprites/enemy/humanoid/human/bandit/bandit.atlas",
     "deck": [
-      "decks/standard/bandit_monor.dck",
+      "decks/elite/bandit_monor.dck",
       "decks/standard/bandit_mutate.dck",
       "decks/standard/bandit_zoo.dck"
     ],
@@ -2871,7 +2871,7 @@
     "name": "Bandit Archer",
     "sprite": "sprites/enemy/humanoid/human/bandit/banditarcher.atlas",
     "deck": [
-      "decks/standard/banditarcher_blink.dck",
+      "decks/elite/banditarcher_blink.dck",
       "decks/standard/banditarcher_damage.dck"
     ],
     "ai": "",
@@ -3029,7 +3029,7 @@
     "name": "Bandit Slingshot",
     "sprite": "sprites/enemy/humanoid/human/bandit/banditslingshot.atlas",
     "deck": [
-      "decks/standard/banditslingshot_flyers.dck",
+      "decks/elite/banditslingshot_flyers.dck",
       "decks/standard/banditslingshot_vehicles.dck"
     ],
     "ai": "",
@@ -3107,7 +3107,7 @@
     "name": "Bandit Trapmaster",
     "sprite": "sprites/enemy/humanoid/human/bandit/bandittrapster.atlas",
     "deck": [
-      "decks/standard/bandittrapper_hazezon.dck"
+      "decks/elite/bandittrapper_hazezon.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -3243,7 +3243,7 @@
     "name": "Bat",
     "sprite": "sprites/enemy/beast/bat.atlas",
     "deck": [
-      "decks/standard/bat.dck"
+      "decks/elite/bat.dck"
     ],
     "ai": "",
     "flying": true,
@@ -3322,7 +3322,7 @@
     "nameOverride": "Brown Bear",
     "sprite": "sprites/enemy/beast/bear.atlas",
     "deck": [
-      "decks/standard/bear.json"
+      "decks/elite/bear.json"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -3395,7 +3395,7 @@
     "nameOverride": "Human Beastmaster",
     "sprite": "sprites/enemy/humanoid/human/warrior/caribou_elite.atlas",
     "deck": [
-      "decks/standard/beastmaster.dck"
+      "decks/elite/beastmaster.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -3470,7 +3470,7 @@
     "name": "Beholder",
     "sprite": "sprites/enemy/aberration/beholder.atlas",
     "deck": [
-      "decks/standard/beholder.dck"
+      "decks/elite/beholder.dck"
     ],
     "ai": "",
     "flying": true,
@@ -3776,7 +3776,7 @@
     "name": "Black Golem",
     "sprite": "sprites/enemy/construct/golem_black.atlas",
     "deck": [
-      "decks/standard/blackconstruct.dck"
+      "decks/elite/blackconstruct.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -3849,7 +3849,7 @@
     "name": "Blue Golem",
     "sprite": "sprites/enemy/construct/golem_blue.atlas",
     "deck": [
-      "decks/standard/blue_golem.dck"
+      "decks/elite/blue_golem.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -3922,7 +3922,7 @@
     "name": "Boar",
     "sprite": "sprites/enemy/beast/boar.atlas",
     "deck": [
-      "decks/standard/boar.json",
+      "decks/elite/boar.json",
       "decks/standard/boar_gruul.dck",
       "decks/standard/boar_monogreenlifegain.dck"
     ],
@@ -4075,7 +4075,7 @@
     "name": "Bull",
     "sprite": "sprites/enemy/beast/bull.atlas",
     "deck": [
-      "decks/standard/bull.dck"
+      "decks/elite/bull.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -4341,7 +4341,7 @@
     "nameOverride": "",
     "sprite": "sprites/enemy/beast/camel.atlas",
     "deck": [
-      "decks/standard/camel.dck"
+      "decks/elite/camel.dck"
     ],
     "ai": "",
     "randomizeDeck": true,
@@ -4490,7 +4490,7 @@
     "nameOverride": "Human Raider",
     "sprite": "sprites/enemy/humanoid/human/soldier/cathar.atlas",
     "deck": [
-      "decks/standard/cathar.dck"
+      "decks/elite/cathar.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -4566,7 +4566,7 @@
     "name": "Cave Spider",
     "sprite": "sprites/enemy/beast/spider_cave.atlas",
     "deck": [
-      "decks/standard/cave_spider.dck"
+      "decks/elite/cave_spider.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -4647,7 +4647,7 @@
     "name": "Centaur",
     "sprite": "sprites/enemy/fey/centaur.atlas",
     "deck": [
-      "decks/standard/centaur.json"
+      "decks/elite/centaur.json"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -4796,7 +4796,7 @@
     "nameOverride": "Cephalid Mindslaver",
     "sprite": "sprites/enemy/aberration/mindflayer.atlas",
     "deck": [
-      "decks/standard/cephalid.dck"
+      "decks/elite/cephalid.dck"
     ],
     "ai": "",
     "flying": true,
@@ -4869,7 +4869,7 @@
     "name": "Cerodon",
     "sprite": "sprites/enemy/beast/cerodon.atlas",
     "deck": [
-      "decks/standard/cerodon.dck"
+      "decks/elite/cerodon.dck"
     ],
     "ai": "",
     "spawnRate": 0.2,
@@ -5739,7 +5739,7 @@
     "name": "Chimera",
     "sprite": "sprites/enemy/aberration/chimera.atlas",
     "deck": [
-      "decks/standard/chimera.dck"
+      "decks/elite/chimera.dck"
     ],
     "ai": "",
     "spawnRate": 0.8,
@@ -5812,7 +5812,7 @@
     "name": "Clay Golem",
     "sprite": "sprites/enemy/construct/golem_2.atlas",
     "deck": [
-      "decks/standard/golem_good.json"
+      "decks/elite/golem_good.json"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -5882,7 +5882,7 @@
     "name": "Cleric",
     "sprite": "sprites/enemy/humanoid/human/cleric/cleric.atlas",
     "deck": [
-      "decks/standard/cleric.json"
+      "decks/elite/cleric.json"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -6277,7 +6277,7 @@
     "nameOverride": "Rustic Construct",
     "sprite": "sprites/enemy/construct/golem_3.atlas",
     "deck": [
-      "decks/standard/artificer.dck",
+      "decks/elite/artificer.dck",
       "decks/standard/construct.json",
       "decks/standard/rustic_construct.dck"
     ],
@@ -6438,7 +6438,7 @@
     "name": "Copper Host Infector",
     "sprite": "sprites/enemy/aberration/copperhostinfector.atlas",
     "deck": [
-      "decks/standard/copperhostinfector.json"
+      "decks/elite/copperhostinfector.json"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -6780,7 +6780,7 @@
     "name": "Cosmic Horror",
     "sprite": "sprites/enemy/monstrosity/cosmic_horror.atlas",
     "deck": [
-      "decks/standard/cosmic_horror.dck"
+      "decks/elite/cosmic_horror.dck"
     ],
     "ai": "",
     "spawnRate": 0.3,
@@ -6857,7 +6857,7 @@
     "name": "Crab",
     "sprite": "sprites/enemy/beast/crab.atlas",
     "deck": [
-      "decks/standard/crab.json",
+      "decks/elite/crab.json",
       "decks/standard/giant_crab.dck"
     ],
     "ai": "",
@@ -7016,7 +7016,7 @@
     "name": "Crocodile",
     "sprite": "sprites/enemy/beast/crocodile_water.atlas",
     "deck": [
-      "decks/standard/crocodile.dck"
+      "decks/elite/crocodile.dck"
     ],
     "ai": "",
     "flying": true,
@@ -7093,7 +7093,7 @@
     "name": "Curselord",
     "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz2.atlas",
     "deck": [
-      "decks/standard/curselord.dck"
+      "decks/elite/curselord.dck"
     ],
     "ai": "",
     "spawnRate": 0.4,
@@ -7215,7 +7215,7 @@
     "name": "Giant Cyclops",
     "sprite": "sprites/enemy/giant/cyclops_large.atlas",
     "deck": [
-      "decks/standard/luckyminotaur.dck"
+      "decks/elite/luckyminotaur.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -7290,7 +7290,7 @@
     "name": "Mountain Ogre",
     "sprite": "sprites/enemy/monstrosity/ogre_large.atlas",
     "deck": [
-      "decks/standard/ogre_large.dck"
+      "decks/elite/ogre_large.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -7583,7 +7583,7 @@
     "name": "Dark Knight",
     "sprite": "sprites/enemy/humanoid/human/knight/death_knight.atlas",
     "deck": [
-      "decks/standard/death_knight.dck"
+      "decks/elite/death_knight.dck"
     ],
     "ai": "",
     "spawnRate": 0.8,
@@ -7657,7 +7657,7 @@
     "name": "Dark Spirit",
     "sprite": "sprites/enemy/undead/ghost.atlas",
     "deck": [
-      "decks/standard/dark_spirit.dck"
+      "decks/elite/dark_spirit.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -7876,7 +7876,7 @@
     "name": "Demon",
     "sprite": "sprites/enemy/fiend/demon_3.atlas",
     "deck": [
-      "decks/standard/demon.json",
+      "decks/elite/demon.json",
       "decks/standard/demonshard.dck",
       "decks/standard/demonblackred.dck",
       "decks/standard/demonmonoblack.dck"
@@ -8023,7 +8023,7 @@
     "name": "Demoncaller",
     "sprite": "sprites/enemy/fiend/krampus.atlas",
     "deck": [
-      "decks/standard/demoncaller.dck"
+      "decks/elite/demoncaller.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -8096,7 +8096,7 @@
     "name": "Imp",
     "sprite": "sprites/enemy/fiend/imp.atlas",
     "deck": [
-      "decks/standard/imp.json"
+      "decks/elite/imp.json"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -8168,7 +8168,7 @@
     "name": "Devil of Tibalt",
     "sprite": "sprites/enemy/fiend/implarge.atlas",
     "deck": [
-      "decks/standard/tibalt_devil.dck"
+      "decks/elite/tibalt_devil.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -8241,7 +8241,7 @@
     "name": "Dimir Faerie",
     "sprite": "sprites/enemy/fey/pixie_dimir.atlas",
     "deck": [
-      "decks/standard/dimir_faerie.dck"
+      "decks/elite/dimir_faerie.dck"
     ],
     "ai": "",
     "flying": true,
@@ -8396,7 +8396,7 @@
     "nameOverride": "Giant Carnosaur",
     "sprite": "sprites/enemy/beast/ancient_2.atlas",
     "deck": [
-      "decks/standard/dinosaur_w_r.dck"
+      "decks/elite/dinosaur_w_r.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -8475,7 +8475,7 @@
     "name": "Disciple of Teferi",
     "sprite": "sprites/enemy/humanoid/human/cleric/monk.atlas",
     "deck": [
-      "decks/standard/disciple_of_teferi.dck"
+      "decks/elite/disciple_of_teferi.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -8551,7 +8551,7 @@
     "name": "Djinn",
     "sprite": "sprites/enemy/elemental/djinn.atlas",
     "deck": [
-      "decks/standard/djinn.json"
+      "decks/elite/djinn.json"
     ],
     "ai": "",
     "flying": true,
@@ -8840,7 +8840,7 @@
     "name": "Dragonfly",
     "sprite": "sprites/enemy/beast/dragonfly.atlas",
     "deck": [
-      "decks/standard/insect.dck"
+      "decks/elite/insect.dck"
     ],
     "ai": "",
     "flying": true,
@@ -8922,7 +8922,7 @@
     "name": "Drake",
     "sprite": "sprites/enemy/dragon/drake.atlas",
     "deck": [
-      "decks/standard/drake_ur_beginner.dck",
+      "decks/elite/drake_ur_beginner.dck",
       "decks/standard/drake_ur_mid.dck",
       "decks/standard/drake_ur_unfair.dck"
     ],
@@ -8998,7 +8998,7 @@
     "name": "Dross Gladiator",
     "sprite": "sprites/enemy/aberration/drossgladiator.atlas",
     "deck": [
-      "decks/standard/drossgladiator.json"
+      "decks/elite/drossgladiator.json"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -9156,7 +9156,7 @@
     "name": "Dwarf",
     "sprite": "sprites/enemy/humanoid/dwarf/dwarf_2.atlas",
     "deck": [
-      "decks/standard/dwarf.json"
+      "decks/elite/dwarf.json"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -9233,7 +9233,7 @@
     "nameOverride": "",
     "sprite": "sprites/enemy/humanoid/dwarf/dwarf_3.atlas",
     "deck": [
-      "decks/standard/dwarfdemolisher.dck"
+      "decks/elite/dwarfdemolisher.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -9307,7 +9307,7 @@
     "nameOverride": "",
     "sprite": "sprites/enemy/humanoid/dwarf/dwarf_4.atlas",
     "deck": [
-      "decks/standard/dwarfmercenary.dck"
+      "decks/elite/dwarfmercenary.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -9603,7 +9603,7 @@
     "name": "Efreet",
     "sprite": "sprites/enemy/elemental/efreet_2.atlas",
     "deck": [
-      "decks/standard/efreet.dck"
+      "decks/elite/efreet.dck"
     ],
     "ai": "",
     "flying": true,
@@ -9832,7 +9832,7 @@
     "name": "Eldrazi",
     "sprite": "sprites/enemy/aberration/eldrazi/eldrazi.atlas",
     "deck": [
-      "decks/standard/eldrazi.dck"
+      "decks/elite/eldrazi.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -9909,7 +9909,7 @@
     "name": "Eldrazi Devastator",
     "sprite": "sprites/enemy/aberration/eldrazi/eldrazi_large.atlas",
     "deck": [
-      "decks/standard/eldrazilarge.dck"
+      "decks/elite/eldrazilarge.dck"
     ],
     "ai": "",
     "flying": true,
@@ -10041,7 +10041,7 @@
     "nameOverride": "Air Elemental",
     "sprite": "sprites/enemy/elemental/crystalelemental.atlas",
     "deck": [
-      "decks/standard/elemental_air.dck"
+      "decks/elite/elemental_air.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -10111,7 +10111,7 @@
     "name": "Elf",
     "sprite": "sprites/enemy/humanoid/elf/druid.atlas",
     "deck": [
-      "decks/standard/elf_bad.json"
+      "decks/elite/elf_bad.json"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -10183,7 +10183,7 @@
     "name": "Elf warrior",
     "sprite": "sprites/enemy/humanoid/elf/hunter.atlas",
     "deck": [
-      "decks/standard/elf_mid.json"
+      "decks/elite/elf_mid.json"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -10255,7 +10255,7 @@
     "name": "Elk",
     "sprite": "sprites/enemy/beast/deer_2.atlas",
     "deck": [
-      "decks/standard/elk.dck"
+      "decks/elite/elk.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -10441,7 +10441,7 @@
     "name": "Eye",
     "sprite": "sprites/enemy/aberration/eye.atlas",
     "deck": [
-      "decks/standard/eye.dck"
+      "decks/elite/eye.dck"
     ],
     "ai": "",
     "flying": true,
@@ -10666,7 +10666,7 @@
     "name": "Falcon",
     "sprite": "sprites/enemy/beast/falcon.atlas",
     "deck": [
-      "decks/standard/falcon_w.dck"
+      "decks/elite/falcon_w.dck"
     ],
     "ai": "",
     "flying": true,
@@ -10813,7 +10813,7 @@
     "name": "Fallen Angel",
     "sprite": "sprites/enemy/celestial/fallen_angel.atlas",
     "deck": [
-      "decks/standard/fallen_angel.dck"
+      "decks/elite/fallen_angel.dck"
     ],
     "ai": "",
     "flying": true,
@@ -11029,7 +11029,7 @@
     "nameOverride": "",
     "sprite": "sprites/enemy/humanoid/human/peasant/farmer.atlas",
     "deck": [
-      "decks/standard/farmer.dck"
+      "decks/elite/farmer.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -11106,7 +11106,7 @@
     "nameOverride": "",
     "sprite": "sprites/enemy/dragon/firedragon.atlas",
     "deck": [
-      "decks/standard/firedragon.dck"
+      "decks/elite/firedragon.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -11325,7 +11325,7 @@
     "name": "Flame Elemental",
     "sprite": "sprites/enemy/elemental/magmaelemental.atlas",
     "deck": [
-      "decks/standard/flame_elemental.dck"
+      "decks/elite/flame_elemental.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -11396,7 +11396,7 @@
     "name": "Flesh Abomination",
     "sprite": "sprites/enemy/monstrosity/flesh_horror.atlas",
     "deck": [
-      "decks/standard/flesh_horror.dck"
+      "decks/elite/flesh_horror.dck"
     ],
     "ai": "",
     "spawnRate": 0.3,
@@ -11610,7 +11610,7 @@
     "name": "Forest Giant",
     "sprite": "sprites/enemy/giant/forestgiant.atlas",
     "deck": [
-      "decks/standard/foresttitan.dck"
+      "decks/elite/foresttitan.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -11682,7 +11682,7 @@
     "name": "Fox",
     "sprite": "sprites/enemy/beast/fox.atlas",
     "deck": [
-      "decks/standard/fox.json",
+      "decks/elite/fox.json",
       "decks/standard/fox_greenwhite.dck"
     ],
     "ai": "",
@@ -11759,7 +11759,7 @@
     "name": "Frog",
     "sprite": "sprites/enemy/beast/frog.atlas",
     "deck": [
-      "decks/standard/frog.json"
+      "decks/elite/frog.json"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -11913,7 +11913,7 @@
     "name": "Fungus",
     "sprite": "sprites/enemy/plant/fungus.atlas",
     "deck": [
-      "decks/standard/fungus.json"
+      "decks/elite/fungus.json"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -11987,7 +11987,7 @@
     "name": "Furnace Goblin",
     "sprite": "sprites/enemy/aberration/furnacegoblin.atlas",
     "deck": [
-      "decks/standard/furnacegoblin.json"
+      "decks/elite/furnacegoblin.json"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -12146,7 +12146,7 @@
     "nameOverride": "Obsidian Gargoyle",
     "sprite": "sprites/enemy/construct/gargoyle.atlas",
     "deck": [
-      "decks/standard/gargoyle.json"
+      "decks/elite/gargoyle.json"
     ],
     "ai": "",
     "flying": true,
@@ -12229,7 +12229,7 @@
     "nameOverride": "Granite Gargoyle",
     "sprite": "sprites/enemy/construct/gargoyle_2.atlas",
     "deck": [
-      "decks/standard/gargoyle.dck"
+      "decks/elite/gargoyle.dck"
     ],
     "ai": "",
     "flying": true,
@@ -12306,7 +12306,7 @@
     "name": "Geonid Death-Cap",
     "sprite": "sprites/enemy/aberration/geonid.atlas",
     "deck": [
-      "decks/standard/geonid.dck"
+      "decks/elite/geonid.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -12695,7 +12695,7 @@
     "name": "Geist",
     "sprite": "sprites/enemy/undead/ghost.atlas",
     "deck": [
-      "decks/standard/ghost_blue.dck"
+      "decks/elite/ghost_blue.dck"
     ],
     "ai": "",
     "flying": true,
@@ -12768,7 +12768,7 @@
     "name": "Geistmage",
     "sprite": "sprites/enemy/humanoid/human/wizard/geistmage.atlas",
     "deck": [
-      "decks/standard/geistmage.dck"
+      "decks/elite/geistmage.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -12841,7 +12841,7 @@
     "name": "Ghoul",
     "sprite": "sprites/enemy/undead/ghoul.atlas",
     "deck": [
-      "decks/standard/ghoul.dck"
+      "decks/elite/ghoul.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -12915,7 +12915,7 @@
     "name": "Ghoul Gravecaller",
     "sprite": "sprites/enemy/undead/ghoullarge.atlas",
     "deck": [
-      "decks/standard/ghoulgravecrawler.dck"
+      "decks/elite/ghoulgravecrawler.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -12992,7 +12992,7 @@
     "nameOverride": "Haunting Apparition",
     "sprite": "sprites/enemy/undead/ghost_2.atlas",
     "deck": [
-      "decks/standard/ghost.json"
+      "decks/elite/ghost.json"
     ],
     "ai": "",
     "flying": true,
@@ -13220,7 +13220,7 @@
     "name": "Giant Spider",
     "sprite": "sprites/enemy/beast/spider_purple.atlas",
     "deck": [
-      "decks/standard/spider_token.dck"
+      "decks/elite/spider_token.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -13383,7 +13383,7 @@
     "name": "Gitaxian Underling",
     "sprite": "sprites/enemy/aberration/gitaxianunderling.atlas",
     "deck": [
-      "decks/standard/gitaxianunderling.json"
+      "decks/elite/gitaxianunderling.json"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -13518,7 +13518,7 @@
     "name": "Greater Sandwurm",
     "sprite": "sprites/enemy/monstrosity/sandwurm2.atlas",
     "deck": [
-      "decks/standard/sandwurm.dck"
+      "decks/elite/sandwurm.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -13587,7 +13587,7 @@
     "name": "Greater Zombie",
     "sprite": "sprites/enemy/undead/zombie.atlas",
     "deck": [
-      "decks/standard/zombie_greater.dck"
+      "decks/elite/zombie_greater.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -13662,7 +13662,7 @@
     "name": "Green Golem",
     "sprite": "sprites/enemy/construct/golem_green.atlas",
     "deck": [
-      "decks/standard/greengolem.dck"
+      "decks/elite/greengolem.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -13942,7 +13942,7 @@
     "name": "Froghemoth",
     "sprite": "sprites/enemy/aberration/froghemoth.atlas",
     "deck": [
-      "decks/standard/froghemoth.dck"
+      "decks/elite/froghemoth.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -14107,7 +14107,7 @@
     "nameOverride": "",
     "sprite": "sprites/enemy/humanoid/elf/shaman.atlas",
     "deck": [
-      "decks/standard/loamspeaker.dck"
+      "decks/elite/loamspeaker.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -14257,7 +14257,7 @@
     "nameOverride": "Goblin Worker",
     "sprite": "sprites/enemy/humanoid/goblin/goblin.atlas",
     "deck": [
-      "decks/standard/goblin_warrior_easy.dck"
+      "decks/elite/goblin_warrior_easy.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -14335,7 +14335,7 @@
     "name": "Goblin Artificer",
     "sprite": "sprites/enemy/humanoid/goblin/goblin_bomber.atlas",
     "deck": [
-      "decks/standard/goblin_artificer.dck"
+      "decks/elite/goblin_artificer.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -14413,7 +14413,7 @@
     "name": "Goblin Chief",
     "sprite": "sprites/enemy/humanoid/goblin/wolf_rider_2.atlas",
     "deck": [
-      "decks/standard/goblin_chief_medium.dck"
+      "decks/elite/goblin_chief_medium.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -14875,7 +14875,7 @@
     "nameOverride": "Rusted Golem",
     "sprite": "sprites/enemy/construct/golem.atlas",
     "deck": [
-      "decks/standard/golem.json",
+      "decks/elite/golem.json",
       "decks/standard/rustic_golem.dck"
     ],
     "ai": "",
@@ -14950,7 +14950,7 @@
     "name": "Golem Sentinel",
     "sprite": "sprites/enemy/construct/golem_4.atlas",
     "deck": [
-      "decks/standard/golem_sentinel.dck",
+      "decks/elite/golem_sentinel.dck",
       "decks/standard/golem_sentinel_2.dck",
       "decks/standard/golem_sentinel_3.dck"
     ],
@@ -15093,7 +15093,7 @@
     "name": "Golgari Fungus",
     "sprite": "sprites/enemy/plant/fungus_golgari.atlas",
     "deck": [
-      "decks/standard/fungus_golgari.dck"
+      "decks/elite/fungus_golgari.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -15169,7 +15169,7 @@
     "name": "Golgari Treefolk",
     "sprite": "sprites/enemy/plant/treant_golgari.atlas",
     "deck": [
-      "decks/standard/treefolk_golgari.dck"
+      "decks/elite/treefolk_golgari.dck"
     ],
     "spawnRate": 1,
     "difficulty": 0.2,
@@ -15243,7 +15243,7 @@
     "name": "Gorgon",
     "sprite": "sprites/enemy/monstrosity/gorgone.atlas",
     "deck": [
-      "decks/standard/gorgon.dck"
+      "decks/elite/gorgon.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -15395,7 +15395,7 @@
     "nameOverride": "Giant Green Basilisk",
     "sprite": "sprites/enemy/monstrosity/basilisk.atlas",
     "deck": [
-      "decks/standard/beast_green.json"
+      "decks/elite/beast_green.json"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -15468,7 +15468,7 @@
     "name": "Griffin",
     "sprite": "sprites/enemy/monstrosity/griffin.atlas",
     "deck": [
-      "decks/standard/griffin.json"
+      "decks/elite/griffin.json"
     ],
     "ai": "",
     "flying": true,
@@ -15577,7 +15577,7 @@
     "name": "Harpy",
     "sprite": "sprites/enemy/monstrosity/harpy.atlas",
     "deck": [
-      "decks/standard/harpy.dck"
+      "decks/elite/harpy.dck"
     ],
     "ai": "",
     "flying": true,
@@ -15799,7 +15799,7 @@
     "name": "Hellhound",
     "sprite": "sprites/enemy/fiend/hellhound_2.atlas",
     "deck": [
-      "decks/standard/hellhound.dck"
+      "decks/elite/hellhound.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -15876,7 +15876,7 @@
     "name": "Hidden Bush",
     "sprite": "sprites/enemy/plant/hiddenbush.atlas",
     "deck": [
-      "decks/standard/plant.dck"
+      "decks/elite/plant.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -15950,7 +15950,7 @@
     "name": "Hidden Snake",
     "sprite": "sprites/enemy/beast/cobradungeon.atlas",
     "deck": [
-      "decks/standard/snake.json"
+      "decks/elite/snake.json"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -16092,7 +16092,7 @@
     "name": "High Elf",
     "sprite": "sprites/enemy/humanoid/elf/druid_2.atlas",
     "deck": [
-      "decks/standard/elf_good.json"
+      "decks/elite/elf_good.json"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -16168,7 +16168,7 @@
     "name": "High Vampire",
     "sprite": "sprites/enemy/undead/vampire_2.atlas",
     "deck": [
-      "decks/standard/vampire.json"
+      "decks/elite/vampire.json"
     ],
     "ai": "",
     "flying": true,
@@ -16294,7 +16294,7 @@
     "nameOverride": "Homarid Explorer",
     "sprite": "sprites/enemy/monstrosity/homarid.atlas",
     "deck": [
-      "decks/standard/homarid.dck"
+      "decks/elite/homarid.dck"
     ],
     "ai": "",
     "spawnRate": 0.8,
@@ -16444,7 +16444,7 @@
     "name": "Horror of Tibalt",
     "sprite": "sprites/enemy/fiend/akaname.atlas",
     "deck": [
-      "decks/standard/tibalt_horror.dck"
+      "decks/elite/tibalt_horror.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -16519,7 +16519,7 @@
     "name": "Holy Paladin",
     "sprite": "sprites/enemy/humanoid/human/knight/paladin_large.atlas",
     "deck": [
-      "decks/standard/holypaladin.dck"
+      "decks/elite/holypaladin.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -16650,7 +16650,7 @@
     "name": "Horse",
     "sprite": "sprites/enemy/beast/horseblack.atlas",
     "deck": [
-      "decks/standard/horse.dck"
+      "decks/elite/horse.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -16877,7 +16877,7 @@
     "nameOverride": "Human Footsoldier",
     "sprite": "sprites/enemy/humanoid/human/soldier/pikeman.atlas",
     "deck": [
-      "decks/standard/human_bad.json"
+      "decks/elite/human_bad.json"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -17100,7 +17100,7 @@
     "nameOverride": "Legionnaire",
     "sprite": "sprites/enemy/humanoid/human/soldier/legionite.atlas",
     "deck": [
-      "decks/standard/human_good.json"
+      "decks/elite/human_good.json"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -17173,7 +17173,7 @@
     "nameOverride": "Human Guard",
     "sprite": "sprites/enemy/humanoid/human/soldier/swordsman.atlas",
     "deck": [
-      "decks/standard/human_mid.json"
+      "decks/elite/human_mid.json"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -17248,7 +17248,7 @@
     "nameOverride": "",
     "sprite": "sprites/enemy/humanoid/swordsman_3.atlas",
     "deck": [
-      "decks/standard/humanmercenary.dck"
+      "decks/elite/humanmercenary.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -17323,7 +17323,7 @@
     "name": "Hydra",
     "sprite": "sprites/enemy/monstrosity/hydra.atlas",
     "deck": [
-      "decks/standard/hydra.json"
+      "decks/elite/hydra.json"
     ],
     "ai": "",
     "spawnRate": 0.8,
@@ -17753,7 +17753,7 @@
     "name": "Illusionist",
     "sprite": "sprites/enemy/humanoid/human/wizard/blue_wiz2.atlas",
     "deck": [
-      "decks/standard/illusion.dck"
+      "decks/elite/illusion.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -17825,7 +17825,7 @@
     "name": "Immersturm Demon",
     "sprite": "sprites/enemy/fiend/devil_2.atlas",
     "deck": [
-      "decks/standard/immersturm_demon.dck"
+      "decks/elite/immersturm_demon.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -17900,7 +17900,7 @@
     "name": "Khenra Warrior",
     "sprite": "sprites/enemy/humanoid/khenra/jackalwarrior.atlas",
     "deck": [
-      "decks/standard/jackal.dck"
+      "decks/elite/jackal.dck"
     ],
     "ai": "",
     "spawnRate": 0.3,
@@ -18070,7 +18070,7 @@
     "name": "Jellyfish",
     "sprite": "sprites/enemy/beast/jellyfish.atlas",
     "deck": [
-      "decks/standard/jellyfish.dck"
+      "decks/elite/jellyfish.dck"
     ],
     "ai": "",
     "flying": true,
@@ -18140,7 +18140,7 @@
     "name": "Kavu",
     "sprite": "sprites/enemy/monstrosity/kavu.atlas",
     "deck": [
-      "decks/standard/kavu.dck",
+      "decks/elite/kavu.dck",
       "decks/standard/kavu_domain.dck"
     ],
     "ai": "",
@@ -18225,7 +18225,7 @@
     "nameOverride": "Human Raider",
     "sprite": "sprites/enemy/humanoid/human/knight/cavalier.atlas",
     "deck": [
-      "decks/standard/mardu.dck"
+      "decks/elite/mardu.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -18458,7 +18458,7 @@
     "nameOverride": "",
     "sprite": "sprites/enemy/humanoid/human/knight/cavalier_2.atlas",
     "deck": [
-      "decks/standard/knightmercenary.dck"
+      "decks/elite/knightmercenary.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -18682,7 +18682,7 @@
     "nameOverride": "",
     "sprite": "sprites/enemy/humanoid/kobold/koboldshaman.atlas",
     "deck": [
-      "decks/standard/roshnakhtheroic.dck"
+      "decks/elite/roshnakhtheroic.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -18762,7 +18762,7 @@
     "nameOverride": "",
     "sprite": "sprites/enemy/humanoid/kobold/koboldslinger.atlas",
     "deck": [
-      "decks/standard/kobold.dck"
+      "decks/elite/kobold.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -19080,7 +19080,7 @@
     "name": "Kor Warrior",
     "sprite": "sprites/enemy/humanoid/kor/mineguard.atlas",
     "deck": [
-      "decks/standard/kor_warrior.dck"
+      "decks/elite/kor_warrior.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -19577,7 +19577,7 @@
     "name": "Lightning Elemental",
     "sprite": "sprites/enemy/elemental/lightningelemental.atlas",
     "deck": [
-      "decks/standard/lightning_elemental.dck"
+      "decks/elite/lightning_elemental.dck"
     ],
     "ai": "",
     "flying": true,
@@ -19648,7 +19648,7 @@
     "name": "Yawgmoth's Alchemist",
     "sprite": "sprites/enemy/humanoid/human/wizard/dimir_wiz.atlas",
     "deck": [
-      "decks/standard/dimir_ninja.dck"
+      "decks/elite/dimir_ninja.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -20122,7 +20122,7 @@
     "name": "Magma Elemental",
     "sprite": "sprites/enemy/elemental/magmaelemental.atlas",
     "deck": [
-      "decks/standard/magma_elemental.dck"
+      "decks/elite/magma_elemental.dck"
     ],
     "ai": "",
     "flying": true,
@@ -20266,7 +20266,7 @@
     "name": "Master Black Wizard",
     "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
     "deck": [
-      "decks/standard/blackwizard_hard_gravepact.dck",
+      "decks/elite/blackwizard_hard_gravepact.dck",
       "decks/standard/blackwizard_hard_knight.dck",
       "decks/standard/blackwizard_hard_liliana.dck",
       "decks/standard/blackwizard_hard_sacrifice.dck"
@@ -20447,7 +20447,7 @@
     "name": "Master Red Wizard",
     "sprite": "sprites/enemy/humanoid/human/wizard/red_wiz3.atlas",
     "deck": [
-      "decks/standard/redwizard_hard_burn.dck",
+      "decks/elite/redwizard_hard_burn.dck",
       "decks/standard/redwizard_hard_dragons.dck",
       "decks/standard/redwizard_hard_fight.dck",
       "decks/standard/redwizard_hard_lavaaxe.dck"
@@ -20524,7 +20524,7 @@
     "name": "Master White Wizard",
     "sprite": "sprites/enemy/humanoid/human/wizard/white_wiz3.atlas",
     "deck": [
-      "decks/standard/whitewizard_hard_humility.dck",
+      "decks/elite/whitewizard_hard_humility.dck",
       "decks/standard/whitewizard_hard_hatebears.dck",
       "decks/standard/whitewizard_hard_humansoldier.dck",
       "decks/standard/whitewizard_hard_armaggedon.dck",
@@ -20677,7 +20677,7 @@
     "name": "Merfolk Avatar",
     "sprite": "sprites/enemy/elemental/iceelemental.atlas",
     "deck": [
-      "decks/standard/merfolk_good.json"
+      "decks/elite/merfolk_good.json"
     ],
     "ai": "",
     "flying": true,
@@ -20846,7 +20846,7 @@
     "name": "Merfolk Fighter",
     "sprite": "sprites/enemy/humanoid/merfolk/merfolk.atlas",
     "deck": [
-      "decks/standard/merfolk_lords.dck"
+      "decks/elite/merfolk_lords.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -21001,7 +21001,7 @@
     "name": "Merfolk Soldier",
     "sprite": "sprites/enemy/humanoid/merfolk/mermaid.atlas",
     "deck": [
-      "decks/standard/merfolk_v_goblins.dck"
+      "decks/elite/merfolk_v_goblins.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -21612,7 +21612,7 @@
     "name": "Minotaur Warcaller",
     "sprite": "sprites/enemy/humanoid/minotaur/minotaurlarge.atlas",
     "deck": [
-      "decks/standard/minotaur_monored_castle.dck"
+      "decks/elite/minotaur_monored_castle.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -21689,7 +21689,7 @@
     "name": "Monk",
     "sprite": "sprites/enemy/humanoid/human/cleric/monk.atlas",
     "deck": [
-      "decks/standard/monk.json"
+      "decks/elite/monk.json"
     ],
     "ai": "",
     "randomizeDeck": true,
@@ -21842,7 +21842,7 @@
     "name": "Mummy",
     "sprite": "sprites/enemy/undead/mummy.atlas",
     "deck": [
-      "decks/standard/mummy.dck"
+      "decks/elite/mummy.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -22162,7 +22162,7 @@
     "name": "Naked Mole Rat",
     "sprite": "sprites/enemy/beast/nakedmolerat.atlas",
     "deck": [
-      "decks/standard/shrinemole.dck"
+      "decks/elite/shrinemole.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -22235,7 +22235,7 @@
     "name": "Nantuko Guard",
     "sprite": "sprites/enemy/humanoid/nantuko/deadlymantis.atlas",
     "deck": [
-      "decks/standard/nantuko_morpher.dck"
+      "decks/elite/nantuko_morpher.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -22312,7 +22312,7 @@
     "name": "Necrogoyf",
     "sprite": "sprites/enemy/monstrosity/shardsoul_slayer.atlas",
     "deck": [
-      "decks/standard/necrogoyf.dck"
+      "decks/elite/necrogoyf.dck"
     ],
     "ai": "",
     "flying": true,
@@ -22386,7 +22386,7 @@
     "name": "Necromancer",
     "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz2.atlas",
     "deck": [
-      "decks/standard/reanimator.dck"
+      "decks/elite/reanimator.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -22457,7 +22457,7 @@
     "name": "Nezumi Leader",
     "sprite": "sprites/enemy/humanoid/nezumi/nezumi_berserker.atlas",
     "deck": [
-      "decks/standard/rat_leader.dck"
+      "decks/elite/rat_leader.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -22530,7 +22530,7 @@
     "name": "Nezumi Ninja",
     "sprite": "sprites/enemy/humanoid/nezumi/nezumi_ninja.atlas",
     "deck": [
-      "decks/standard/humanoidrat.dck"
+      "decks/elite/humanoidrat.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -22603,7 +22603,7 @@
     "name": "Nightmare",
     "sprite": "sprites/enemy/fiend/nightmare.atlas",
     "deck": [
-      "decks/standard/nightmare.dck"
+      "decks/elite/nightmare.dck"
     ],
     "ai": "",
     "spawnRate": 0.3,
@@ -22680,7 +22680,7 @@
     "name": "Octopus",
     "sprite": "sprites/enemy/beast/octopus.atlas",
     "deck": [
-      "decks/standard/octopus.dck"
+      "decks/elite/octopus.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -22752,7 +22752,7 @@
     "name": "Ooze",
     "sprite": "sprites/enemy/ooze/ooze.atlas",
     "deck": [
-      "decks/standard/ooze.json",
+      "decks/elite/ooze.json",
       "decks/standard/ooze_greenblackred.dck",
       "decks/standard/ooze_monogreen.dck",
       "decks/standard/ooze_greenblue.dck"
@@ -22945,7 +22945,7 @@
     "name": "Owl",
     "sprite": "sprites/enemy/beast/owl.atlas",
     "deck": [
-      "decks/standard/owl.dck"
+      "decks/elite/owl.dck"
     ],
     "ai": "",
     "flying": true,
@@ -23024,7 +23024,7 @@
     "name": "Orzhov Cleric",
     "sprite": "sprites/enemy/humanoid/human/cleric/cleric_orzhov.atlas",
     "deck": [
-      "decks/standard/cleric_orzhov.dck"
+      "decks/elite/cleric_orzhov.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -23100,7 +23100,7 @@
     "name": "Penguin",
     "sprite": "sprites/enemy/beast/penguin.atlas",
     "deck": [
-      "decks/standard/penguin.dck"
+      "decks/elite/penguin.dck"
     ],
     "ai": "",
     "spawnRate": 0.3,
@@ -23172,7 +23172,7 @@
     "name": "Pirate",
     "sprite": "sprites/enemy/humanoid/human/rogue/pirate.atlas",
     "deck": [
-      "decks/standard/pirate.dck"
+      "decks/elite/pirate.dck"
     ],
     "ai": "",
     "spawnRate": 0.8,
@@ -23252,7 +23252,7 @@
     "nameOverride": "Buccaneer",
     "sprite": "sprites/enemy/humanoid/human/rogue/pirate2.atlas",
     "deck": [
-      "decks/standard/pirate2.dck"
+      "decks/elite/pirate2.dck"
     ],
     "ai": "",
     "spawnRate": 0.8,
@@ -23332,7 +23332,7 @@
     "nameOverride": "Plunderer",
     "sprite": "sprites/enemy/humanoid/human/rogue/pirate3.atlas",
     "deck": [
-      "decks/standard/pirate3.dck"
+      "decks/elite/pirate3.dck"
     ],
     "ai": "",
     "spawnRate": 0.8,
@@ -23634,7 +23634,7 @@
     "name": "Plant",
     "sprite": "sprites/enemy/plant/plant.atlas",
     "deck": [
-      "decks/standard/plant.json",
+      "decks/elite/plant.json",
       "decks/standard/plant.dck"
     ],
     "ai": "",
@@ -23706,7 +23706,7 @@
     "nameOverride": "",
     "sprite": "sprites/enemy/beast/snake_cobra.atlas",
     "deck": [
-      "decks/standard/poisonoussnake.dck"
+      "decks/elite/poisonoussnake.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -23780,7 +23780,7 @@
     "name": "Polar Bear",
     "sprite": "sprites/enemy/beast/polarbear.atlas",
     "deck": [
-      "decks/standard/polarbear.dck"
+      "decks/elite/polarbear.dck"
     ],
     "ai": "",
     "spawnRate": 0.3,
@@ -23853,7 +23853,7 @@
     "name": "Porcupine",
     "sprite": "sprites/enemy/beast/porcupine.atlas",
     "deck": [
-      "decks/standard/porcupine.dck"
+      "decks/elite/porcupine.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -23927,7 +23927,7 @@
     "name": "Blue Prototype",
     "sprite": "sprites/enemy/construct/prototype_blue.atlas",
     "deck": [
-      "decks/standard/prototype_blue.dck"
+      "decks/elite/prototype_blue.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -24000,7 +24000,7 @@
     "name": "Green Prototype",
     "sprite": "sprites/enemy/construct/prototype_green.atlas",
     "deck": [
-      "decks/standard/prototype_green.dck"
+      "decks/elite/prototype_green.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -24073,7 +24073,7 @@
     "name": "Priest Fanatic",
     "sprite": "sprites/enemy/humanoid/human/cleric/fanatic_priest.atlas",
     "deck": [
-      "decks/standard/fanaticpriest.dck"
+      "decks/elite/fanaticpriest.dck"
     ],
     "ai": "",
     "spawnRate": 0.2,
@@ -24434,7 +24434,7 @@
     "name": "Orthodoxy Angel",
     "sprite": "sprites/enemy/aberration/phyrexianangel.atlas",
     "deck": [
-      "decks/standard/phyrexianangel.dck"
+      "decks/elite/phyrexianangel.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -24506,7 +24506,7 @@
     "name": "Orthodoxy Duelist",
     "sprite": "sprites/enemy/aberration/phyrexianduelist.atlas",
     "deck": [
-      "decks/standard/phyrexianduelist.json"
+      "decks/elite/phyrexianduelist.json"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -24652,7 +24652,7 @@
     "name": "Parrot",
     "sprite": "sprites/enemy/beast/parrot.atlas",
     "deck": [
-      "decks/standard/parrot.dck"
+      "decks/elite/parrot.dck"
     ],
     "ai": "",
     "flying": true,
@@ -24729,7 +24729,7 @@
     "name": "Phoenix",
     "sprite": "sprites/enemy/elemental/phoenix.atlas",
     "deck": [
-      "decks/standard/phoenix.dck"
+      "decks/elite/phoenix.dck"
     ],
     "ai": "",
     "flying": true,
@@ -24956,7 +24956,7 @@
     "name": "Rakdos Wizard",
     "sprite": "sprites/enemy/humanoid/human/wizard/rakdos_wiz.atlas",
     "deck": [
-      "decks/standard/rakdos_vamps.dck"
+      "decks/elite/rakdos_vamps.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -25029,7 +25029,7 @@
     "name": "Raven",
     "sprite": "sprites/enemy/beast/raven.atlas",
     "deck": [
-      "decks/standard/raven.dck"
+      "decks/elite/raven.dck"
     ],
     "ai": "",
     "flying": true,
@@ -25161,7 +25161,7 @@
     "nameOverride": "Giant Red Basilisk",
     "sprite": "sprites/enemy/monstrosity/basilisk_2.atlas",
     "deck": [
-      "decks/standard/beast_red.json"
+      "decks/elite/beast_red.json"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -25234,7 +25234,7 @@
     "name": "Reassembling Skeleton",
     "sprite": "sprites/enemy/undead/skeleton.atlas",
     "deck": [
-      "decks/standard/reassemblingskeleton.dck"
+      "decks/elite/reassemblingskeleton.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -25306,7 +25306,7 @@
     "name": "Rhino",
     "sprite": "sprites/enemy/beast/rhino.atlas",
     "deck": [
-      "decks/standard/rhino.dck"
+      "decks/elite/rhino.dck"
     ],
     "ai": "",
     "randomizeDeck": true,
@@ -25381,7 +25381,7 @@
     "name": "Rogue",
     "sprite": "sprites/enemy/humanoid/human/rogue/rogue.atlas",
     "deck": [
-      "decks/standard/rogue.json"
+      "decks/elite/rogue.json"
     ],
     "ai": "",
     "spawnRate": 0.8,
@@ -25530,7 +25530,7 @@
     "name": "Sand Golem",
     "sprite": "sprites/enemy/elemental/sandelemental.atlas",
     "deck": [
-      "decks/standard/sandgolem.dck"
+      "decks/elite/sandgolem.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -25801,7 +25801,7 @@
     "name": "Scarab",
     "sprite": "sprites/enemy/beast/scarab.atlas",
     "deck": [
-      "decks/standard/scarab.dck"
+      "decks/elite/scarab.dck"
     ],
     "ai": "",
     "spawnRate": 0.8,
@@ -26035,7 +26035,7 @@
     "name": "Scorpion",
     "sprite": "sprites/enemy/beast/scorpion.atlas",
     "deck": [
-      "decks/standard/scorpion.dck"
+      "decks/elite/scorpion.dck"
     ],
     "ai": "",
     "spawnRate": 0.8,
@@ -26110,7 +26110,7 @@
     "name": "Scourgemaster",
     "sprite": "sprites/enemy/fiend/scourgemaster.atlas",
     "deck": [
-      "decks/standard/demon_hellbent.dck",
+      "decks/elite/demon_hellbent.dck",
       "decks/standard/demon_humansac.dck"
     ],
     "ai": "",
@@ -26185,7 +26185,7 @@
     "name": "Sea Monster",
     "sprite": "sprites/enemy/aberration/leech_2.atlas",
     "deck": [
-      "decks/standard/sea_monster.dck"
+      "decks/elite/sea_monster.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -26404,7 +26404,7 @@
     "nameOverride": "",
     "sprite": "sprites/enemy/humanoid/viashino/pikelizard.atlas",
     "deck": [
-      "decks/standard/shamanelite.dck"
+      "decks/elite/shamanelite.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -26556,7 +26556,7 @@
     "name": "Skeleton",
     "sprite": "sprites/enemy/undead/skeleton.atlas",
     "deck": [
-      "decks/standard/skeleton.dck"
+      "decks/elite/skeleton.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -26628,7 +26628,7 @@
     "name": "Skeleton Soldier",
     "sprite": "sprites/enemy/undead/skeleton_2.atlas",
     "deck": [
-      "decks/standard/skeleton_2.dck"
+      "decks/elite/skeleton_2.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -26701,7 +26701,7 @@
     "name": "Skeleton Champion",
     "sprite": "sprites/enemy/undead/skeleton_2.atlas",
     "deck": [
-      "decks/standard/skeleton_champion.dck"
+      "decks/elite/skeleton_champion.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -26908,7 +26908,7 @@
     "name": "Sliver",
     "sprite": "sprites/enemy/aberration/sliver.atlas",
     "deck": [
-      "decks/standard/sliver.json"
+      "decks/elite/sliver.json"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -27805,7 +27805,7 @@
     "name": "Spider",
     "sprite": "sprites/enemy/beast/spider_black.atlas",
     "deck": [
-      "decks/standard/spider.json"
+      "decks/elite/spider.json"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -27881,7 +27881,7 @@
     "name": "Spiked Ravager",
     "sprite": "sprites/enemy/fiend/spikedravager.atlas",
     "deck": [
-      "decks/standard/demon_demonicpact.dck"
+      "decks/elite/demon_demonicpact.dck"
     ],
     "ai": "",
     "flying": true,
@@ -27954,7 +27954,7 @@
     "name": "Spirit",
     "sprite": "sprites/enemy/undead/ghost_3.atlas",
     "deck": [
-      "decks/standard/spirit.dck"
+      "decks/elite/spirit.dck"
     ],
     "ai": "",
     "flying": true,
@@ -28239,7 +28239,7 @@
     "name": "Sun Giant",
     "sprite": "sprites/enemy/giant/ascendedtitan.atlas",
     "deck": [
-      "decks/standard/sun titan.dck"
+      "decks/elite/sun titan.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -28462,7 +28462,7 @@
     "name": "Symbiote",
     "sprite": "sprites/enemy/monstrosity/basilisk_3.atlas",
     "deck": [
-      "decks/standard/symbiote.dck"
+      "decks/elite/symbiote.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -29101,7 +29101,7 @@
     "name": "Turtle",
     "sprite": "sprites/enemy/beast/turtle.atlas",
     "deck": [
-      "decks/standard/turtle.json"
+      "decks/elite/turtle.json"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -29178,7 +29178,7 @@
     "name": "Treefolk",
     "sprite": "sprites/enemy/plant/treant.atlas",
     "deck": [
-      "decks/standard/treefolk.json"
+      "decks/elite/treefolk.json"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -29398,7 +29398,7 @@
     "name": "Troll",
     "sprite": "sprites/enemy/giant/troll.atlas",
     "deck": [
-      "decks/standard/troll.json"
+      "decks/elite/troll.json"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -29607,7 +29607,7 @@
     "name": "Vampire Lord",
     "sprite": "sprites/enemy/undead/vampire_3.atlas",
     "deck": [
-      "decks/standard/vampire_blood_token_fly.dck"
+      "decks/elite/vampire_blood_token_fly.dck"
     ],
     "ai": "",
     "flying": true,
@@ -29685,7 +29685,7 @@
     "name": "Viashino",
     "sprite": "sprites/enemy/humanoid/viashino/battler.atlas",
     "deck": [
-      "decks/standard/viashino.dck"
+      "decks/elite/viashino.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -29761,7 +29761,7 @@
     "name": "Viper",
     "sprite": "sprites/enemy/beast/big_snake_2.atlas",
     "deck": [
-      "decks/standard/snake.dck"
+      "decks/elite/snake.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -29913,7 +29913,7 @@
     "name": "Volcano Elemental",
     "sprite": "sprites/enemy/elemental/volcanoelemental.atlas",
     "deck": [
-      "decks/standard/br_elemental.dck"
+      "decks/elite/br_elemental.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -29987,7 +29987,7 @@
     "name": "Walking Brain",
     "sprite": "sprites/enemy/aberration/walkingbrain.atlas",
     "deck": [
-      "decks/standard/walkingbrain.dck"
+      "decks/elite/walkingbrain.dck"
     ],
     "ai": "",
     "spawnRate": 0.3,
@@ -30136,7 +30136,7 @@
     "nameOverride": "Desert Warrior",
     "sprite": "sprites/enemy/humanoid/human/warrior/warrior.atlas",
     "deck": [
-      "decks/standard/human_warrior_amonkhet.dck"
+      "decks/elite/human_warrior_amonkhet.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -30218,7 +30218,7 @@
     "name": "Wasp",
     "sprite": "sprites/enemy/beast/wasp.atlas",
     "deck": [
-      "decks/standard/wasp.dck"
+      "decks/elite/wasp.dck"
     ],
     "ai": "",
     "flying": true,
@@ -30378,7 +30378,7 @@
     "name": "Werewolf",
     "sprite": "sprites/enemy/fiend/hellhound.atlas",
     "deck": [
-      "decks/standard/werewolf.dck"
+      "decks/elite/werewolf.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -30530,7 +30530,7 @@
     "name": "Plague Rat Swarm",
     "sprite": "sprites/enemy/beast/wildratpoison.atlas",
     "deck": [
-      "decks/standard/rat_poisonrat.dck"
+      "decks/elite/rat_poisonrat.dck"
     ],
     "ai": "",
     "randomizeDeck": true,
@@ -30608,7 +30608,7 @@
     "name": "Wild Rat",
     "sprite": "sprites/enemy/beast/wildrat.atlas",
     "deck": [
-      "decks/standard/infectrat.dck",
+      "decks/elite/infectrat.dck",
       "decks/standard/rat.json",
       "decks/standard/ratswarm.dck"
     ],
@@ -30688,7 +30688,7 @@
     "name": "Wild-Magic Sorcerer",
     "sprite": "sprites/enemy/humanoid/viashino/dreamwalker_2.atlas",
     "deck": [
-      "decks/standard/wild-magic_sorcerer.dck"
+      "decks/elite/wild-magic_sorcerer.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -30835,7 +30835,7 @@
     "name": "Wolf Pup",
     "sprite": "sprites/enemy/beast/wolfcub.atlas",
     "deck": [
-      "decks/standard/wolf.json"
+      "decks/elite/wolf.json"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -30912,7 +30912,7 @@
     "name": "Wurm",
     "sprite": "sprites/enemy/monstrosity/wurm.atlas",
     "deck": [
-      "decks/standard/wurm.json"
+      "decks/elite/wurm.json"
     ],
     "ai": "reckless",
     "spawnRate": 1,
@@ -30983,7 +30983,7 @@
     "name": "Vulture",
     "sprite": "sprites/enemy/beast/vulture.atlas",
     "deck": [
-      "decks/standard/vulture.dck"
+      "decks/elite/vulture.dck"
     ],
     "ai": "",
     "flying": true,
@@ -31056,7 +31056,7 @@
     "name": "Water Elemental",
     "sprite": "sprites/enemy/elemental/waterelemental_3.atlas",
     "deck": [
-      "decks/standard/water_elemental.dck"
+      "decks/elite/water_elemental.dck"
     ],
     "ai": "",
     "spawnRate": 0.7,
@@ -31187,7 +31187,7 @@
     "name": "Wraith",
     "sprite": "sprites/enemy/undead/wraith.atlas",
     "deck": [
-      "decks/standard/wraithswampwalk.dck"
+      "decks/elite/wraithswampwalk.dck"
     ],
     "ai": "",
     "flying": true,
@@ -31401,7 +31401,7 @@
     "name": "Yeti",
     "sprite": "sprites/enemy/monstrosity/yeti_2.atlas",
     "deck": [
-      "decks/standard/yeti.dck"
+      "decks/elite/yeti.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -31597,7 +31597,7 @@
     "nameOverride": "Walking Zombie",
     "sprite": "sprites/enemy/undead/zombie.atlas",
     "deck": [
-      "decks/standard/zombie_black_easy.dck"
+      "decks/elite/zombie_black_easy.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -32081,7 +32081,7 @@
     "name": "Undead Goblin",
     "sprite": "sprites/enemy/undead/goblinzombie.atlas",
     "deck": [
-      "decks/standard/monobgoblins.dck"
+      "decks/elite/monobgoblins.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -32742,7 +32742,7 @@
     "name": "Unholy Skull",
     "sprite": "sprites/enemy/undead/unholyskull.atlas",
     "deck": [
-      "decks/standard/unholyskull.dck"
+      "decks/elite/unholyskull.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -37955,7 +37955,7 @@
     "name": "Arch Angel of Shandalar",
     "sprite": "sprites/enemy/celestial/angel_1.atlas",
     "deck": [
-      "decks/standard/shandalar97_white_archangel.dck"
+      "decks/elite/shandalar97_white_archangel.dck"
     ],
     "ai": "",
     "flying": true,
@@ -38025,7 +38025,7 @@
     "name": "High Priest of Shandalar",
     "sprite": "sprites/enemy/humanoid/human/cleric/priest.atlas",
     "deck": [
-      "decks/standard/shandalar97_white_highpriest.dck"
+      "decks/elite/shandalar97_white_highpriest.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -38161,7 +38161,7 @@
     "name": "Shapeshifter of Shandalar",
     "sprite": "sprites/enemy/undead/doppelganger.atlas",
     "deck": [
-      "decks/standard/shandalar97_blue_shapeshifter.dck"
+      "decks/elite/shandalar97_blue_shapeshifter.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -38230,7 +38230,7 @@
     "name": "Thought Invoker of Shandalar",
     "sprite": "sprites/enemy/humanoid/human/wizard/blue_wiz2.atlas",
     "deck": [
-      "decks/standard/shandalar97_blue_thoughtinvoker.dck"
+      "decks/elite/shandalar97_blue_thoughtinvoker.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -38359,7 +38359,7 @@
     "name": "Nether Fiend of Shandalar",
     "sprite": "sprites/enemy/fiend/demon.atlas",
     "deck": [
-      "decks/standard/shandalar97_black_netherfiend.dck"
+      "decks/elite/shandalar97_black_netherfiend.dck"
     ],
     "ai": "",
     "flying": true,
@@ -38429,7 +38429,7 @@
     "name": "Necromancer of Shandalar",
     "sprite": "sprites/enemy/undead/lich.atlas",
     "deck": [
-      "decks/standard/shandalar97_black_necromancer.dck"
+      "decks/elite/shandalar97_black_necromancer.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -38558,7 +38558,7 @@
     "name": "Crag Hydra of Shandalar",
     "sprite": "sprites/enemy/monstrosity/hydra.atlas",
     "deck": [
-      "decks/standard/shandalar97_red_craghydra.dck"
+      "decks/elite/shandalar97_red_craghydra.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -38628,7 +38628,7 @@
     "name": "War Mage of Shandalar",
     "sprite": "sprites/enemy/humanoid/human/wizard/red_wiz2.atlas",
     "deck": [
-      "decks/standard/shandalar97_red_warmage.dck"
+      "decks/elite/shandalar97_red_warmage.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -38763,7 +38763,7 @@
     "name": "Beast Master of Shandalar",
     "sprite": "sprites/enemy/humanoid/elf/druid.atlas",
     "deck": [
-      "decks/standard/shandalar97_green_beastmaster.dck"
+      "decks/elite/shandalar97_green_beastmaster.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -38833,7 +38833,7 @@
     "name": "Summoner of Shandalar",
     "sprite": "sprites/enemy/humanoid/human/wizard/green_wiz2.atlas",
     "deck": [
-      "decks/standard/shandalar97_green_summoner.dck"
+      "decks/elite/shandalar97_green_summoner.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -40278,7 +40278,7 @@
     "name": "Nightstalker",
     "sprite": "sprites/enemy/undead/pestilencelord.atlas",
     "deck": [
-      "decks/standard/shandalar97_nightstalker.dck"
+      "decks/elite/shandalar97_nightstalker.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -40539,7 +40539,7 @@
     "name": "Cateran Slaver",
     "sprite": "sprites/enemy/fiend/nightmare.atlas",
     "deck": [
-      "decks/standard/shandalar97_cateran_slaver.dck"
+      "decks/elite/shandalar97_cateran_slaver.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
