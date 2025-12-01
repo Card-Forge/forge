@@ -56,6 +56,7 @@
     <property name="speedModifier" type="float" value="4" />
     <property name="threatRange" type="int" value="50" />
    <property name="effect">{"startBattleWithCard": ["Forest|2ED", "Mountain|USG", "Treetop Village|ULG", "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL"]}</property>
+    </properties>
   </object>
   <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="297.499" y="239.542">
    <properties>
@@ -63,6 +64,7 @@
     <property name="threatRange" type="int" value="50" />
     <property name="waypoints" value="74,76,71,72,71,76" />
    <property name="effect">{"startBattleWithCard": ["Forest|2ED", "Mountain|USG", "Treetop Village|ULG", "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL"]}</property>
+    </properties>
   </object>
   <object id="65" template="../../../../../../common/maps/obj/treasure.tx" x="152.773" y="65.0909" />
   <object id="66" template="../../../../../../common/maps/obj/booster.tx" x="196.479" y="60.7985">

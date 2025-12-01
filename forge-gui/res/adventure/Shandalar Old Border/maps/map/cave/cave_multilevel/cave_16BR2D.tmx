@@ -40,6 +40,7 @@
     <property name="enemy" value="Master Blue Wizard" />
     <property name="threatRange" type="int" value="50" />
    <property name="effect">{"startBattleWithCard": ["Hesitation|STH"]}</property>
+    </properties>
   </object>
   <object id="68" template="../../../../../../../common/maps/obj/treasure.tx" x="207" y="252.25" />
   <object id="69" template="../../../../../../../common/maps/obj/gold.tx" x="193" y="250.75" />

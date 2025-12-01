@@ -1,10 +1,10 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="79">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Throne of Bone|LEA|1&quot; ]}" />
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [&quot;Throne of Bone|LEA&quot;]}" />
  </properties>
  <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
  <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
@@ -34,7 +34,7 @@
  </layer>
  <objectgroup id="4" name="Objects">
   <properties>
-   <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Throne of Bone|LEA|1&quot; ]}" />
+   <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [&quot;Throne of Bone|LEA&quot;]}" />
   </properties>
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="274.665" width="48" height="16">
    <properties>

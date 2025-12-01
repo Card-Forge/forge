@@ -53,12 +53,14 @@
     <property name="enemy" value="Storm Titan" />
     <property name="threatRange" type="int" value="30" />
    <property name="effect">{"startBattleWithCard": ["Island|ONS", "Mountain|ATH", "Pendrell Mists|WTH"]}</property>
+    </properties>
   </object>
   <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="361.936" y="358.345">
    <properties>
     <property name="enemy" value="Ancient Silver Dragon" />
     <property name="threatRange" type="int" value="30" />
    <property name="effect">{"startBattleWithCard": ["Dragon Arch|APC"]}</property>
+    </properties>
   </object>
   <object id="58" template="../../../../../../common/maps/obj/collision.tx" x="-0.5" y="480.667" width="481" height="16" />
   <object id="59" template="../../../../../../common/maps/obj/collision.tx" x="-10.1667" y="-16.6667" width="497.667" height="16" />

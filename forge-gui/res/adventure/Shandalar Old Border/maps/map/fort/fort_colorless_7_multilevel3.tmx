@@ -53,6 +53,7 @@
     <property name="threatRange" type="int" value="100"/>
     <property name="waypoints" value="64,65"/>
    <property name="effect">{"startBattleWithCard": ["City of Brass|ARN"]}</property>
+    </properties>
   </object>
   <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="427.333" y="425.121">
    <properties>
@@ -60,6 +61,7 @@
     <property name="threatRange" type="int" value="100"/>
     <property name="waypoints" value="61,62,61,63"/>
    <property name="effect">{"startBattleWithCard": ["City of Brass|ARN"]}</property>
+    </properties>
   </object>
   <object id="58" template="../../../../../../common/maps/obj/treasure.tx" x="354" y="242.333"/>
   <object id="59" template="../../../../../../common/maps/obj/gold.tx" x="513.667" y="383.667"/>

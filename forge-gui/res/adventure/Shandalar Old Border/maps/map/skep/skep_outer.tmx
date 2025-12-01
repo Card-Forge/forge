@@ -41,6 +41,7 @@
    eJztm1tu1DAUhj0DbWnaPkzLBgoVJKUSbAGJV7YASNwr3pHgmWkRhU3QhZQp7TBlyjIQEiyCYwVrjJtknMSJL/k/6WguchKPfx8fH9vDGAAAAAAAAAAAAAAAAAAAAHCNP7YrAIBH/LJdAQAAaAHMDQC4COYAAACb/LZdgY6z12Nsvzf7DD3a5/ViasAudTQY9uaXCYFpxNg52Y+o/LX3ajz3p0YZeRwb9as/q04924RrsbSavl9YtVuXLL7W0MA3ZC2Gy6n50o/qoOOXbSNr4SsutmsVphXihE+47uMiXgvz3S98JiRfUMen+1ZqAYA5qo7locTqIlyMczzfy8q7u6CHi/B8r07erQO0NYOL/gwAALpMKJ9apnz2e0B5lQ1M7fm9Wklfr0AT63DfiKS1nq5rIsYK3fHiZcLYbmLu+Xx/ZlEyvn/WVU2y+uY83pEWQ4N6qAh9urg+KsZtnwj5nIqPeoRAXk6cpYc6hoH2yNJD12d24VvG4bHzPLr4Xd4ZoSn2I60gz0HlPeE24PuDWHMEprHVp96T30xWUvvQwRzOBWTtd0iHWIrtVXU5i2bWFjcCPCd5Qu3/SWpDoY0PvsL3lMf98HRRNeFsl5gPF83pmoTvKSdkp4HpweGafIxmNi6ZnwhNQjpb5jsLHV1HBAAAYA8+d92TbL8j/0t0lS1lzsrnsNDEHiKXkOGadMlXXFuHzdKEE1r+7ROqJnG/W//ndRGhCbRwh5GmFrrlAAiBENdqTZE3/zI1Rny+lP09NCmHqZzg7uX69wDmOPy3x7IRM3Y1Ln99nn+B8nAtDpL09TZpcaeCHsK/DnG2r1E2B/9/zmpvucxBg+f1Q6bK+CL7UVEZGVVPkE1e/L5J7ReTJYPqsSRUrlGbXFdsq6H+Jvr1Cd3/lGw8KB9LtumaW2Q7g9k9Q4onR/S7vig2KtBDHhtEvvJmjbG3a+n7vLaR2+3xOmNPyJ6u69VRvv83ev6E7EzSIyQeUJs8JDuW9GjCP+bFYLWf58WEZ1TX52QvNLX0lSNN/9Bls0L/zRt75mkZYjwXfsLtkWbfa6MdVI2K9P0LmXyX8g==
   </data>
  </layer>
+ <objectgroup id="4" name="Objects">
 <object id="103" template="../../../../../../common/maps/obj/gold.tx" x="1527.67" y="945.667" visible="1">
    <properties>
     <property name="reward">[{
@@ -709,7 +710,7 @@
     <property name="threatRange" type="int" value="0" />
     <property name="waypoints" value="75,242,243,244,245,246,247,248,247,246,245,244,243,242" />
    <property name="effect">{"startBattleWithCard": ["Plains|2ED", "Darkest Hour|USG"]}</property>
-}</property></properties>
+</properties>
   </object>
   <object id="242" template="../../../../../../common/maps/obj/waypoint.tx" x="224.333" y="1086.67" />
   <object id="243" template="../../../../../../common/maps/obj/waypoint.tx" x="207" y="1055.67" />
@@ -945,6 +946,7 @@
     <property name="enemy" value="Slivdrazi Monstrosity" />
     <property name="threatRange" type="int" value="60" />
    <property name="effect">{"startBattleWithCard": ["Barbed Sliver|TMP", "Root Sliver|LGN"]}</property>
+    </properties>
   </object>
  </objectgroup>
 </map>

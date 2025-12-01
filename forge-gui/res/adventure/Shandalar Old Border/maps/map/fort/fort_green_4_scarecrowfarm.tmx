@@ -71,12 +71,14 @@
     <property name="threatRange" type="int" value="60" />
     <property name="waypoints" value="112,113" />
    <property name="effect">{"startBattleWithCard": ["Forest|TMP", "Forest|TMP", "Nut Collector|ODY"]}</property>
+    </properties>
   </object>
   <object id="64" template="../../../../../../common/maps/obj/treasure.tx" x="12.1132" y="367.884" />
   <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="254.374" y="297.137">
    <properties>
     <property name="enemy" value="Chicken" />
    <property name="effect">{"startBattleWithCard": ["Island|UGL", "Forest|UGL", "Mountain|UGL"]}</property>
+    </properties>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="314.5" y="155">
    <properties>
@@ -89,6 +91,7 @@
    <properties>
     <property name="enemy" value="Chicken" />
    <property name="effect">{"startBattleWithCard": ["Island|UGL", "Forest|UGL", "Mountain|UGL"]}</property>
+    </properties>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="78.5" y="364.75">
    <properties>

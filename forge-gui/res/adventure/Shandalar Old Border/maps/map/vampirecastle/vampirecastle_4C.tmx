@@ -37,6 +37,7 @@
    <properties>
     <property name="enemy" value="Vampire" />
    <property name="effect">{"startBattleWithCard": ["Swamp|TMP", "Cemetery Gate|HML", "Cemetery Gate|HML", "Cemetery Gate|HML", "Cemetery Gate|HML", "Crovax the Cursed|STH"]}</property>
+    </properties>
   </object>
   <object id="79" template="../../../../../../common/maps/obj/enemy.tx" x="744.5" y="143.954">
    <properties>

@@ -48,6 +48,7 @@
     <property name="enemy" value="Arzakon, Shandalar's Doom"/>
     <property name="threatRange" type="int" value="80"/>
    <property name="effect">{"startBattleWithCard": ["Black Lotus|LEA", "Celestial Prism|LEA", "Clay Statue|ATQ"]}</property>
+    </properties>
   </object>
   <object id="78" template="../../../../../../common/maps/obj/treasure.tx" x="521.333" y="328"/>
   <object id="79" template="../../../../../../common/maps/obj/gold.tx" x="521.333" y="307.667"/>

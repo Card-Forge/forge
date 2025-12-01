@@ -152,6 +152,7 @@
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
    <property name="effect">{"startBattleWithCard": ["Swamp|3ED", "Swamp|3ED", "Swamp|3ED", "Frozen Shade|LEA"]}</property>
+    </properties>
   </object>
   <object id="67" template="../../../../../../../common/maps/obj/enemy.tx" x="649.5" y="604">
    <properties>
@@ -182,6 +183,7 @@
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
    <property name="effect">{"startBattleWithCard": ["Swamp|TMP", "Swamp|TMP", "Vile Consumption|INV"]}</property>
+    </properties>
   </object>
   <object id="69" template="../../../../../../../common/maps/obj/enemy.tx" x="365" y="232.63">
    <properties>
@@ -270,6 +272,7 @@
     <property name="enemy" value="Ghoulcaller Ghoul" />
     <property name="threatRange" type="int" value="40" />
    <property name="effect">{"startBattleWithCard": ["Swamp|2ED", "Swamp|2ED", "Lord of the Undead|PLS"]}</property>
+    </properties>
   </object>
  </objectgroup>
 </map>

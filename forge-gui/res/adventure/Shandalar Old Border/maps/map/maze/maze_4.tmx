@@ -46,6 +46,7 @@
    <properties>
     <property name="enemy" value="Minotaur" />
    <property name="effect">{"startBattleWithCard": ["Mountain|ICE", "Mountain|ICE", "Didgeridoo|HML", "Anaba Spirit Crafter|HML"]}</property>
+    </properties>
   </object>
  </objectgroup>
 </map>

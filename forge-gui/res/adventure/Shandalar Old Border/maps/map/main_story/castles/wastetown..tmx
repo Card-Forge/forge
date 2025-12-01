@@ -40,6 +40,7 @@
     <property name="enemy" value="Ghalta" />
     <property name="threatRange" type="int" value="50" />
    <property name="effect">{"startBattleWithCard": ["Forest|LEA", "Forest|LEA", "Forest|LEA", "Forest|LEA", "City of Solitude|VIS", "Dense Foliage|WTH", "Kavu Lair|INV"]}</property>
+    </properties>
   </object>
   <object id="54" template="../../../../../../../common/maps/obj/scroll.tx" x="202" y="65.5">
    <properties>

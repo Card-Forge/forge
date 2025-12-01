@@ -29,6 +29,7 @@
    <properties>
     <property name="enemy" value="Zombie Lord" />
    <property name="effect">{ "startBattleWithCard": [ "Carrion Feeder|SCG", "Zombie Master|LEA" ] }</property>
+    </properties>
   </object>
   <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="159.848" y="336.886" />
   <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="767.75" y="783.417" />
@@ -83,6 +84,7 @@
    <properties>
     <property name="enemy" value="Grave Titan" />
    <property name="effect">{"startBattleWithCard": ["Swamp|ONS", "Swamp|ONS", "Swamp|ONS", "Swamp|ONS", "Rotting Giant|ODY"]}</property>
+    </properties>
   </object>
  </objectgroup>
 </map>

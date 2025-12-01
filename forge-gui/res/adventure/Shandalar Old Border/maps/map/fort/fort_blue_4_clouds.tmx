@@ -65,6 +65,7 @@
     <property name="enemy" value="Whim of Shandalar" />
     <property name="threatRange" type="int" value="50" />
    <property name="effect">{"startBattleWithCard": ["City of Brass|ARN"]}</property>
+    </properties>
   </object>
   <object id="56" template="../../../../../../common/maps/obj/gold.tx" x="438.5" y="150" />
   <object id="58" template="../../../../../../common/maps/obj/collision.tx" x="1.75" y="479" width="482" height="16" />

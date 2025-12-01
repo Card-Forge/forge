@@ -83,6 +83,7 @@
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="87,88,87,84,83" />
    <property name="effect">{"startBattleWithCard": ["City of Brass|ARN"]}</property>
+    </properties>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="142" y="71.75">
    <properties>

@@ -155,6 +155,7 @@
     <property name="enemy" value="Jolrael, Empress of Beasts" />
     <property name="threatRange" type="int" value="30" />
    <property name="effect">{"startBattleWithCard": ["Jolrael, Empress of Beasts|PCY", "Undiscovered Paradise|VIS", "Jolrael's Centaur|MIR", "Nature's Revolt|TMP"]}</property>
+    </properties>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="658.333" y="600">
    <properties>
@@ -169,6 +170,7 @@
     <property name="enemy" value="Verdeloth the Ancient" />
     <property name="threatRange" type="int" value="30" />
    <property name="effect">{"startBattleWithCard": ["Heart of Yavimaya|ALL", "Yavimaya Hollow|UDS", "Greener Pastures|USG", "Saproling Infestation|INV", "Night Soil|FEM", "Fires of Yavimaya|INV", "Yavimaya Gnats|ICE"]}</property>
+    </properties>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="663.666" y="409.333">
    <properties>
@@ -183,6 +185,7 @@
     <property name="enemy" value="Rofellos" />
     <property name="threatRange" type="int" value="30" />
    <property name="effect">{"startBattleWithCard": ["Forest|ICE", "Wirewood Lodge|ONS", "Rofellos, Llanowar Emissary|UDS", "Ivy Seer|UDS", "Heedless One|ONS", "Braidwood Cup|UDS"]}</property>
+    </properties>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="363.833" y="223.874">
    <properties>
@@ -211,6 +214,7 @@
     <property name="enemy" value="Multani" />
     <property name="threatRange" type="int" value="30" />
    <property name="effect">{"startBattleWithCard": ["Heart of Yavimaya|ALL", "Yavimaya Hollow|UDS", "Multani's Presence|ULG", "Rowen|VIS", "Primitive Etchings|SCG", "Library of Leng|LEA", "Primal Rage|STH", "Fires of Yavimaya|INV", "Yavimaya Gnats|ICE"]}</property>
+    </properties>
   </object>
   <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="600.667" y="494">
    <properties>

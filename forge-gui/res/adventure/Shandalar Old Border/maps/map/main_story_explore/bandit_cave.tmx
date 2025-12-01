@@ -127,12 +127,14 @@
     <property name="enemy" value="Chandler" />
     <property name="threatRange" type="int" value="40" />
    <property name="effect">{"startBattleWithCard": ["Chandler|HML", "Uphill Battle|MMQ"]}</property>
+    </properties>
   </object>
   <object id="30" template="../../../../../../common/maps/obj/enemy.tx" x="192" y="176">
    <properties>
     <property name="enemy" value="Joven" />
     <property name="threatRange" type="int" value="40" />
    <property name="effect">{"startBattleWithCard": ["Joven|HML", "Joven's Ferrets|HML", "Joven's Tools|HML"]}</property>
+    </properties>
   </object>
  </objectgroup>
 </map>

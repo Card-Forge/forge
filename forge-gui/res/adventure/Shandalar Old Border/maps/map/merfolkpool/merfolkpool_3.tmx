@@ -38,6 +38,7 @@
     <property name="threatRange" type="int" value="50" />
     <property name="waypoints" value="" />
    <property name="effect">{"startBattleWithCard": ["Bull Hippo|POR", "Island|POR", "Forest|POR", "Plains|POR"]}</property>
+    </properties>
   </object>
   <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="105.75" y="54.25">
    <properties>
@@ -57,7 +58,7 @@
    <properties>
     <property name="enemy" value="Elephant" />
    <property name="effect">{"startBattleWithCard": ["Forest|2ED", "Plains|2ED", "Elephant Graveyard|ARN", "War Mammoth|LEA"]}</property>
-}</property></properties>
+</properties>
   </object>
   <object id="62" template="../../../../../../common/maps/obj/waypoint.tx" x="93.4863" y="129.484" />
   <object id="63" template="../../../../../../common/maps/obj/waypoint.tx" x="5.01107" y="132.953" />

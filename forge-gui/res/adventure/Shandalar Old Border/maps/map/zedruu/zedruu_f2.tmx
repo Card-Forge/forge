@@ -203,6 +203,7 @@
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="192,173" />
    <property name="effect">{"startBattleWithCard": ["Hesitation|STH"]}</property>
+    </properties>
   </object>
   <object id="218" template="../../../../../../common/maps/obj/waypoint.tx" x="432.509" y="228.439" />
   <object id="219" template="../../../../../../common/maps/obj/waypoint.tx" x="395.509" y="229.105" />

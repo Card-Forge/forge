@@ -42,6 +42,7 @@
     <property name="enemy" value="Dark Enchanter" />
     <property name="threatRange" type="int" value="20" />
    <property name="effect">{"startBattleWithCard": ["Enchantress's Presence|ONS", "Black Market|MMQ", "Grim Feast|MIR"]}</property>
+    </properties>
   </object>
   <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="392.478" y="158.24" />
   <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="484.432" y="220.344">
@@ -49,6 +50,7 @@
     <property name="enemy" value="Minotaur" />
     <property name="threatRange" type="int" value="50" />
    <property name="effect">{"startBattleWithCard": ["Mountain|ICE", "Mountain|ICE", "Didgeridoo|HML", "Anaba Spirit Crafter|HML"]}</property>
+    </properties>
   </object>
   <object id="54" template="../../../../../../common/maps/obj/gold.tx" x="253.41" y="28.384" />
   <object id="55" template="../../../../../../common/maps/obj/treasure.tx" x="172.722" y="505.771" />
@@ -143,6 +145,7 @@
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="108,105,103,135,103,105" />
    <property name="effect">{"startBattleWithCard": ["Mountain|ICE", "Mountain|ICE", "Didgeridoo|HML", "Anaba Spirit Crafter|HML"]}</property>
+    </properties>
   </object>
   <object id="86" template="../../../../../../common/maps/obj/enemy.tx" x="62.1" y="257.611">
    <properties>
@@ -150,12 +153,14 @@
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="94,93,92,93,94,95,96,97,98,99,100,101,100,99,98,97,96" />
    <property name="effect">{"startBattleWithCard": ["Mountain|ICE", "Mountain|ICE", "Didgeridoo|HML", "Anaba Spirit Crafter|HML"]}</property>
+    </properties>
   </object>
   <object id="87" template="../../../../../../common/maps/obj/enemy.tx" x="241.047" y="39.325">
    <properties>
     <property name="enemy" value="Minotaur" />
     <property name="threatRange" type="int" value="60" />
    <property name="effect">{"startBattleWithCard": ["Mountain|ICE", "Mountain|ICE", "Didgeridoo|HML", "Anaba Spirit Crafter|HML"]}</property>
+    </properties>
   </object>
   <object id="88" template="../../../../../../common/maps/obj/enemy.tx" x="472.052" y="122.144">
    <properties>
@@ -163,6 +168,7 @@
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="159,142,159,136,144" />
    <property name="effect">{"startBattleWithCard": ["Mountain|ICE", "Mountain|ICE", "Didgeridoo|HML", "Anaba Spirit Crafter|HML"]}</property>
+    </properties>
   </object>
   <object id="89" template="../../../../../../common/maps/obj/enemy.tx" x="360.248" y="473.827">
    <properties>
@@ -170,6 +176,7 @@
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="113,114,115,114,113,157" />
    <property name="effect">{"startBattleWithCard": ["Mountain|ICE", "Mountain|ICE", "Didgeridoo|HML", "Anaba Spirit Crafter|HML"]}</property>
+    </properties>
   </object>
   <object id="90" template="../../../../../../common/maps/obj/enemy.tx" x="498.672" y="341.909">
    <properties>
@@ -177,6 +184,7 @@
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="120,122,123,125,123,124,155,124,123,122,120,121,119,121,120,122,123" />
    <property name="effect">{"startBattleWithCard": ["Mountain|ICE", "Mountain|ICE", "Didgeridoo|HML", "Anaba Spirit Crafter|HML"]}</property>
+    </properties>
   </object>
   <object id="91" template="../../../../../../common/maps/obj/waypoint.tx" x="167.99" y="78.0722" />
   <object id="92" template="../../../../../../common/maps/obj/waypoint.tx" x="149.06" y="99.6642" />
@@ -232,6 +240,7 @@
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="92,151,92,91,150,92,93" />
    <property name="effect">{"startBattleWithCard": ["Mountain|ICE", "Mountain|ICE", "Didgeridoo|HML", "Anaba Spirit Crafter|HML"]}</property>
+    </properties>
   </object>
   <object id="150" template="../../../../../../common/maps/obj/waypoint.tx" x="206.737" y="121.256" />
   <object id="151" template="../../../../../../common/maps/obj/waypoint.tx" x="79.5511" y="77.1849" />

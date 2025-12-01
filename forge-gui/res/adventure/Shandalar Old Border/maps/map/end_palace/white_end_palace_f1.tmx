@@ -37,6 +37,7 @@
     <property name="enemy" value="Serra the Benevolent"/>
     <property name="threatRange" type="int" value="50"/>
    <property name="effect">{"startBattleWithCard": ["Serra Angel|LEA", "Worship|USG", "Serra's Liturgy|USG", "Remembrance|USG", "Noble Purpose|MMQ", "Karmic Justice|ODY", "Absolute Law|USG"]}</property>
+    </properties>
   </object>
   <object id="51" template="../../../../../../common/maps/obj/entry_up.tx" x="209" y="480">
    <properties>

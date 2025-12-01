@@ -64,6 +64,7 @@
     <property name="speedModifier" type="float" value="15" />
     <property name="threatRange" type="int" value="50" />
    <property name="effect">{"startBattleWithCard": ["Mox Emerald|LEA", "Llanowar Elves|LEA", "Killer Bees|LEG"]}</property>
+    </properties>
   </object>
   <object id="72" template="../../../../../../common/maps/obj/manashards.tx" x="441.407" y="39.8314" />
   <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="339.949" y="453.019" />

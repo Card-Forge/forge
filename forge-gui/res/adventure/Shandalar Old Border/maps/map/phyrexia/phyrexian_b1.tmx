@@ -47,6 +47,7 @@
     <property name="threatRange" value="20" />
     <property name="waypoints" value="68,69,70" />
    <property name="effect">{"startBattleWithCard": ["Phyrexian Arena|APC", "Phyrexian Infiltrator|INV", "Howling Mine|LEA", "Phyrexian Walker|VIS"]}</property>
+    </properties>
   </object>
   <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="273" y="145.112">
    <properties>

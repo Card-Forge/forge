@@ -153,6 +153,7 @@
     <property name="enemy" value="Grave Titan" />
     <property name="threatRange" type="int" value="40" />
    <property name="effect">{"startBattleWithCard": ["Swamp|ONS", "Swamp|ONS", "Swamp|ONS", "Swamp|ONS", "Rotting Giant|ODY"]}</property>
+    </properties>
   </object>
   <object id="212" template="../../../../../../common/maps/obj/waypoint.tx" x="423.842" y="263.772" />
   <object id="213" template="../../../../../../common/maps/obj/waypoint.tx" x="472.175" y="210.105" />

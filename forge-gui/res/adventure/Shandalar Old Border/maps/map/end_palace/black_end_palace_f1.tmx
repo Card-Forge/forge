@@ -37,6 +37,7 @@
     <property name="enemy" value="Yawgmoth"/>
     <property name="threatRange" type="int" value="50"/>
    <property name="effect">{"startBattleWithCard": ["Swamp|LEA", "Swamp|LEA", "Swamp|LEA", "Phyrexian Lens|INV", "Phyrexian Altar|INV", "Yawgmoth's Bargain|UDS", "Eye of Yawgmoth|NMS", "Order of Yawgmoth|USG", "Phyrexian Reclamation|ULG", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Battleflies|INV", "Phyrexian Battleflies|INV", "Phyrexian Battleflies|INV", "Phyrexian Battleflies|INV"]}</property>
+    </properties>
   </object>
   <object id="51" template="../../../../../../common/maps/obj/entry_up.tx" x="209" y="480">
    <properties>

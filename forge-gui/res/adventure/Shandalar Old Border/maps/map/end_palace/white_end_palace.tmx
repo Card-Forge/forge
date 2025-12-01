@@ -157,6 +157,7 @@
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
    <property name="effect">{"startBattleWithCard": ["Hazduhr the Abbot|HML", "Serra's Hymn|USG", "Serra Inquisitors|HML", "Doubtless One|ONS", "Beloved Chaplain|ODY"]}</property>
+    </properties>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="671.667" y="411.333">
    <properties>
@@ -171,6 +172,7 @@
     <property name="enemy" value="Selenia, Dark Angel" />
     <property name="threatRange" type="int" value="30" />
    <property name="effect">{"startBattleWithCard": ["Salt Flats|TMP", "Selenia, Dark Angel|TMP", "Sword of the Chosen|STH", "Haunted Angel|APC"]}</property>
+    </properties>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="365.5" y="229.667">
    <properties>
@@ -200,6 +202,7 @@
     <property name="enemy" value="Archangel Radiant" />
     <property name="threatRange" type="int" value="30" />
    <property name="effect">{"startBattleWithCard": ["Serra Aviary|HML", "Knighthood|ULG", "Serra Paladin|HML", "Sustainer of the Realm|ULG", "Serra Zealot|USG"]}</property>
+    </properties>
   </object>
   <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="84" y="405.667">
    <properties>
@@ -214,6 +217,7 @@
     <property name="enemy" value="Reya Dawnbringer" />
     <property name="threatRange" type="int" value="40" />
    <property name="effect">{"startBattleWithCard": ["Reya Dawnbringer|INV", "Worry Beads|MMQ", "Millikin|ODY", "Angelic Renewal|WTH"]}</property>
+    </properties>
   </object>
   <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="187.167" y="500.333">
    <properties>
