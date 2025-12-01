@@ -399,7 +399,7 @@
 		"name": "Aegis of the Meek",
 		"description": "Pay 1 to give a 1/1 creature +1/+2 until end of turn.",
 		"equipmentSlot": "Right",
-		"iconName": "MirrorShield",
+		"iconName": "AegisOfTheMeek",
 		"cost": 3000,
 		"effect": {
 			"startBattleWithCard": [
