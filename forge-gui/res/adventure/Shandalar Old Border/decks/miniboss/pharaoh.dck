@@ -25,11 +25,11 @@ Name=pharaoh
 7 Swamp|LEA|1
 
 [StartInBattle_Reference]
-1 City of Brass|ARN
-1 Cyclopean Mummy|LEG
 1 Desert|ARN
+1 Library of Alexandria|ARN
+1 City of Brass|ARN
+1 Oasis|ARN
 1 Diamond Valley|ARN
 1 Island of Wak-Wak|ARN
-1 Library of Alexandria|ARN
-1 Oasis|ARN
+1 Cyclopean Mummy|LEG
 1 Pyramids|ARN

@@ -27,7 +27,7 @@ Name=Homelands Chef
 3 An-Havva Constable|HML
 
 [StartInBattle_Reference]
-1 Abbey Matron|HML
-1 An-Havva Township|HML
-1 Dwarven Trader|HML
+4 An-Havva Township|HML
 1 Folk of An-Havva|HML
+1 Dwarven Trader|HML
+1 Abbey Matron|HML

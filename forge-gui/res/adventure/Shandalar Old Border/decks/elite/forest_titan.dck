@@ -17,7 +17,5 @@ Name=forest_titan
 2 Plow Under|UDS|1
 
 [StartInBattle_Reference]
-1 Forest|TMP
-1 Primal Rage|STH
-1 Rowen|VIS
+4 Forest|TMP
 1 Treefolk Seedlings|USG

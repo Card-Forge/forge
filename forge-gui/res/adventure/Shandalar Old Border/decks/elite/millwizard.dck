@@ -19,6 +19,6 @@ Name=millwizard
 4 Thawing Glaciers|ALL|1
 
 [StartInBattle_Reference]
-1 Ambassador Laquatus|TOR
-1 Propaganda|TMP
 2 Sky Diamond|MIR
+1 Propaganda|TMP
+1 Ambassador Laquatus|TOR

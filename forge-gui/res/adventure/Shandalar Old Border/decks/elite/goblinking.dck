@@ -16,7 +16,6 @@ Name=goblinking
 2 Mogg Infestation|STH|1
 
 [StartInBattle_Reference]
-1 Fervor|WTH
+2 Mountain|7ED
 1 Goblin King|LEA
 1 Goblin Trenches|APC
-1 Mountain|7ED

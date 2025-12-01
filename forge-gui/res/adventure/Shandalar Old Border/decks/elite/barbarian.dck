@@ -16,7 +16,6 @@ Name=barbarian
 4 Threaten|ONS|1
 
 [StartInBattle_Reference]
+2 Mountain|TMP
 1 Balthor the Stout|TOR
-1 Fervor|WTH
 1 Keldon Warlord|LEA
-1 Mountain|TMP

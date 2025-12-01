@@ -24,16 +24,16 @@ Name=Hidden Wumpus
 2 Hidden Stag|USG
 
 [StartInBattle_Reference]
+1 Plains|2ED
+1 Island|2ED
+1 Swamp|2ED
+1 Mountain|2ED
 1 Forest|2ED
+1 Ley Line|MMQ
 1 Hidden Ancients|USG
-1 Hidden Gibbons|ULG
 1 Hidden Guerrillas|USG
 1 Hidden Herd|USG
 1 Hidden Predators|USG
 1 Hidden Spider|USG
 1 Hidden Stag|USG
-1 Island|2ED
-1 Ley Line|MMQ
-1 Mountain|2ED
-1 Plains|2ED
-1 Swamp|2ED
+1 Hidden Gibbons|ULG
