@@ -71,3 +71,26 @@ I verified the implementation by:
 6.  Verifying the game restarted (Turn reset to 1).
 
 All tests passed successfully.
++
++# Walkthrough - Manual Agent Interface
++
++## Overview
++I have implemented a manual agent interface to test the AI Agent Mode of ForgeHeadless. This interface allows a human to act as the AI agent, receiving game states and selecting actions via a web UI.
++
++## Components
++1.  **Manual Agent Backend (`manual_agent.py`)**: A Python HTTP server (using `http.server`) running on port 5001. It receives POST requests from ForgeHeadless and exposes a polling API for the frontend.
++2.  **Frontend (`templates/index.html`)**: A simple HTML/JS interface that polls the backend for requests and displays them. It allows users to click buttons for actions or input manual JSON for complex decisions (like combat).
++3.  **Scripts**:
++    *   `run_manual_test.sh`: Starts the manual agent and ForgeHeadless.
++    *   `stop_manual_test.sh`: Stops all related processes.
++
++## Verification
++*   **Browser Test**: Verified that the browser can load the interface, receive a request from ForgeHeadless, and send a response back.
++*   **Process Management**: Verified that the scripts correctly start and stop the processes.
++*   **Timeout**: Increased the read timeout in `AIAgentClient.java` to 10 minutes to allow for manual interaction.
++
++## How to Run
++1.  Run `./run_manual_test.sh`.
++2.  Open `http://localhost:5001` in your browser.
++3.  Wait for Forge to start and send a request (Status will change to "ACTION REQUIRED").
++4.  Click an action button to send a decision.

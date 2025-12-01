@@ -63,6 +63,15 @@ Server starts on **port 8081**.
 ```
 
 When `--ai-endpoint` is provided, the game will call out to your AI service for all decisions instead of waiting for HTTP input.
+66: 
+67: ### Running Manual Agent Interface (Testing)
+68: A manual agent interface is provided to test the AI Agent Mode. It intercepts requests from ForgeHeadless and allows you to manually select actions via a web interface.
+69: 
+70: ```bash
+71: ./run_manual_test.sh
+72: ```
+73: This will start the manual agent on port 5001 and ForgeHeadless. Open `http://localhost:5001` in your browser to control the game.
+74: Use `Ctrl+C` to stop the test, or run `./stop_manual_test.sh`.
 
 ### Testing the API (HTTP Server Mode)
 ```bash
