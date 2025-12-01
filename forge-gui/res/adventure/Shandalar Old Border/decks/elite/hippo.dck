@@ -3,9 +3,9 @@ Name=hippo
 [Main]
 4 Island|POR|1
 4 Plains|POR|1
-4 Brushland|5ED
+4 Brushland|ICE
 4 Yavimaya Coast|APC
-4 Adarkar Wastes|5ED
+4 Adarkar Wastes|ICE
 3 Forest|POR|1
 1 Yavimaya Hollow|UDS
 4 Pygmy Hippo|VIS
@@ -16,11 +16,11 @@ Name=hippo
 4 Treva's Charm|PLS
 4 Rancor|ULG
 4 Armadillo Cloak|INV
-4 Swords to Plowshares|LEA
+4 Swords to Plowshares|ICE
 4 Arcane Denial|ALL
 
 [StartInBattle_Reference]
 1 Bull Hippo|POR
 1 Island|POR
-1 Plains|POR
 1 Forest|POR
+1 Plains|POR

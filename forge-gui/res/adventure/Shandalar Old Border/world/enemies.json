@@ -14721,7 +14721,7 @@
     "name": "Goblin Stalker",
     "sprite": "sprites/enemy/humanoid/goblin/goblin_4.atlas",
     "deck": [
-      "decks/standard/evilgoblin.dck"
+      "decks/elite/evilgoblin.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -18534,7 +18534,7 @@
     "nameOverride": "",
     "sprite": "sprites/enemy/humanoid/kobold/kobolddragoncaller.atlas",
     "deck": [
-      "decks/standard/kobolddragoncaller.dck"
+      "decks/elite/kobolddragoncaller.dck"
     ],
     "ai": "",
     "spawnRate": 1,
