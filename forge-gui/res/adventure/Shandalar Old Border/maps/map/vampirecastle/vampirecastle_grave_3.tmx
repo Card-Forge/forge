@@ -244,7 +244,7 @@
     <property name="inactive" type="bool" value="true" />
     <property name="speedModifier" type="float" value="10" />
     <property name="threatRange" type="int" value="50" />
-   <property name="effect">{ "startBattleWithCard": [ "Black Market|MMQ", "Larceny|MMQ", "Misshapen Fiend|MMQ", "Rathi Assassin|NMS", "Spineless Thug|NMS" ] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Black Market|MMQ", "Larceny|MMQ", "Misshapen Fiend|MMQ", "Spineless Thug|NMS", "Rathi Assassin|NMS"]}</property>
   </object>
   <object id="78" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="215" y="90" width="24.9204" height="14.6679" visible="1">
    <properties>

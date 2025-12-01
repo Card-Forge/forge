@@ -64,7 +64,7 @@
   }
 ]</property>
     <property name="enemy" value="Snow Wizard" />
-   <property name="effect">{ "startBattleWithCard": [ "Ice Floe|ICE", "Snow Fortress|ICE", "Snow-Covered Forest|ICE", "Snow-Covered Mountain|ICE", "Snow-Covered Plains|ICE", "Tinder Wall|ICE", "Wall of Pine Needles|ICE", "Winter's Night|ALL" ] }</property>
+   <property name="effect">{"startBattleWithCard": ["Snow-Covered Forest|ICE", "Snow-Covered Plains|ICE", "Snow-Covered Mountain|ICE", "Ice Floe|ICE", "Wall of Pine Needles|ICE", "Tinder Wall|ICE", "Snow Fortress|ICE", "Winter's Night|ALL"]}</property>
   </object>
   <object id="9" template="../../../../../../common/maps/obj/enemy.tx" x="308" y="255">
    <properties>

@@ -44,7 +44,7 @@
    <properties>
     <property name="enemy" value="Shade" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Frozen Shade|LEA", "Swamp|3ED", "Swamp|3ED", "Swamp|3ED" ] }</property>
+   <property name="effect">{"startBattleWithCard": ["Swamp|3ED", "Swamp|3ED", "Swamp|3ED", "Frozen Shade|LEA"]}</property>
   </object>
   <object id="55" template="../../../../../../common/maps/obj/gold.tx" x="225.44" y="96.3423" />
   <object id="56" template="../../../../../../common/maps/obj/collision.tx" x="-16" y="0" width="16" height="272" />

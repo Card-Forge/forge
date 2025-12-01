@@ -154,7 +154,7 @@
 ]</property>
     <property name="enemy" value="Squirrel" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|TMP", "Nut Collector|ODY" ] }</property>
+   <property name="effect">{"startBattleWithCard": ["Forest|TMP", "Forest|TMP", "Nut Collector|ODY"]}</property>
   </object>
   <object id="67" template="../../../../../../../common/maps/obj/enemy.tx" x="658.333" y="600">
    <properties>
@@ -168,7 +168,7 @@
 ]</property>
     <property name="enemy" value="Gorilla" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|2ED", "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL", "Mountain|USG", "Primal Rage|STH", "Rowen|VIS", "Treetop Village|ULG" ] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Forest|2ED", "Mountain|USG", "Treetop Village|ULG", "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL"]}</property>
   </object>
   <object id="68" template="../../../../../../../common/maps/obj/enemy.tx" x="663.666" y="409.333">
    <properties>
@@ -182,7 +182,7 @@
 ]</property>
     <property name="enemy" value="Wolf" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|ICE", "Plains|ICE", "Timber Wolves|LEA", "Timber Wolves|LEA", "Timber Wolves|LEA", "Timber Wolves|LEA" ] }</property>
+   <property name="effect">{"startBattleWithCard": ["Forest|ICE", "Plains|LEB", "Timber Wolves|LEA", "Timber Wolves|LEA", "Timber Wolves|LEA", "Timber Wolves|LEA"]}</property>
   </object>
   <object id="69" template="../../../../../../../common/maps/obj/enemy.tx" x="363.833" y="223.874">
    <properties>
@@ -196,7 +196,7 @@
 ]</property>
     <property name="enemy" value="Forest Titan" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|TMP", "Primal Rage|STH", "Rowen|VIS", "Treefolk Seedlings|USG" ] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Forest|TMP", "Forest|TMP", "Forest|TMP", "Forest|TMP", "Treefolk Seedlings|USG"]}</property>
   </object>
   <object id="70" template="../../../../../../../common/maps/obj/enemy.tx" x="97" y="410">
    <properties>
@@ -210,7 +210,7 @@
 ]</property>
     <property name="enemy" value="Elephant" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|2ED","Plains|2ED","Elephant Graveyard|ARN","War Mammoth|LEA" ]
+   <property name="effect">{"startBattleWithCard": ["Forest|2ED", "Plains|2ED", "Elephant Graveyard|ARN", "War Mammoth|LEA"]}</property>
 }</property></properties>
   </object>
   <object id="71" template="../../../../../../../common/maps/obj/enemy.tx" x="600.667" y="494">

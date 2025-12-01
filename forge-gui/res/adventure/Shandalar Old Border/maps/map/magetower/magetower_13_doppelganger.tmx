@@ -47,7 +47,7 @@
   <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="163.605" y="388.194">
    <properties>
     <property name="enemy" value="Doppelganger" />
-   <property name="effect">{ "startBattleWithCard": [ "Fellwar Stone|DRK|1", "Kismet|LEG" ] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Kismet|LEG", "Fellwar Stone|DRK"]}</property>
   </object>
   <object id="75" template="../../../../../../common/maps/obj/enemy.tx" x="106.034" y="305.243">
    <properties>
@@ -58,38 +58,35 @@
     ]
    }
 ]</property>
-    <property name="effect">{ "startBattleWithCard": [ "Fellwar Stone|DRK|1", "Kismet|LEG" ], "lifeModifier": 15, "changeStartCards": 2 }</property>
+    <property name="effect">{"startBattleWithCard": ["Kismet|LEG", "Fellwar Stone|DRK"]}</property>
     <property name="enemy" value="Doppelganger" />
    </properties>
   </object>
   <object id="74" template="../../../../../../common/maps/obj/enemy.tx" x="231.069" y="255.542">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Fellwar Stone|DRK|1", "Kismet|LEG" ], "lifeModifier": 15, "changeStartCards": 2 }</property>
+    <property name="effect">{"startBattleWithCard": ["Kismet|LEG", "Fellwar Stone|DRK"]}</property>
     <property name="enemy" value="Doppelganger" />
    </properties>
   </object>
   <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="140.117" y="386.888">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Hesitation|STH|1" ], "lifeModifier": 10 }</property>
+    <property name="effect">{"startBattleWithCard": ["Hesitation|STH"]}</property>
     <property name="enemy" value="Master Blue Wizard" />
    </properties>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="247.673" y="379.931">
    <properties>
     <property name="enemy" value="Djinn" />
-   <property name="effect">{ "startBattleWithCard": [ "Island|LEA", "Mountain|ARB", "Swamp|LEA", "Aladdin's Lamp|ARB", "Keeper of Kookus|VIS" ] }</property>
+   <property name="effect">{"startBattleWithCard": ["Island|2ED", "Mountain|2ED", "Swamp|2ED", "Aladdin's Lamp|3ED", "Keeper of Kookus|VIS"]}</property>
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="87,85,87,97" />
    </properties>
   </object>
   <object id="82" template="../../../../../../common/maps/obj/enemy.tx" x="205.049" y="301.238">
    <properties>
-    <property name="effect">{
- "lifeModifier": 30,
- "changeStartCards": 4
-}</property>
+    <property name="effect">{"startBattleWithCard": ["Island|2ED", "Mountain|2ED", "Swamp|2ED", "Aladdin's Lamp|3ED", "Keeper of Kookus|VIS"]}</property>
     <property name="enemy" value="Djinn" />
-   <property name="effect">{ "startBattleWithCard": [ "Island|LEA", "Mountain|ARB", "Swamp|LEA", "Aladdin's Lamp|ARB", "Keeper of Kookus|VIS" ] }</property>
+   <property name="effect">{"startBattleWithCard": ["Island|2ED", "Mountain|2ED", "Swamp|2ED", "Aladdin's Lamp|3ED", "Keeper of Kookus|VIS"]}</property>
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="100,93,92,93" />
    </properties>
@@ -99,7 +96,7 @@
     <property name="enemy" value="Master Blue Wizard" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="90,91,88" />
-   <property name="effect">{ "startBattleWithCard": [ "Hesitation|STH|1" ] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Hesitation|STH"]}</property>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/scroll.tx" x="96" y="352">
    <properties>

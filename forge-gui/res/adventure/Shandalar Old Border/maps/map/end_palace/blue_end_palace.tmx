@@ -161,7 +161,7 @@
 ]</property>
     <property name="enemy" value="Tawnos" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": ["Candelabra of Tawnos|ATQ", "Tawnos's Coffin|ATQ", "Tawnos's Wand|ATQ", "Tawnos's Weaponry|ATQ", "Serpent Generator|LEG", "Clay Statue|ATQ", "Mantis Engine|ULG"] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Candelabra of Tawnos|ATQ", "Tawnos's Coffin|ATQ", "Tawnos's Wand|ATQ", "Tawnos's Weaponry|ATQ", "Serpent Generator|LEG", "Clay Statue|ATQ", "Mantis Engine|UDS"]}</property>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="649" y="601.333">
    <properties>
@@ -175,7 +175,7 @@
 ]</property>
     <property name="enemy" value="Barrin" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": ["Barrin, Master Wizard|USG", "Barrin's Codex|USG", "Mental Discipline|WTH", "Barren Moor|ONS"] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Barrin, Master Wizard|USG", "Barrin's Codex|USG", "Mental Discipline|UDS", "Barren Moor|ONS"]}</property>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="677.667" y="410.666">
    <properties>
@@ -189,7 +189,7 @@
 ]</property>
     <property name="enemy" value="Rayne, Academy Chancellor" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": ["Rayne, Academy Chancellor|UDS", "Thieving Magpie|USG", "Bubbling Beebles|UDS"] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Rayne, Academy Chancellor|UDS", "Thieving Magpie|UDS", "Bubbling Beebles|UDS"]}</property>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="365" y="223.333">
    <properties>
@@ -203,14 +203,14 @@
 ]</property>
     <property name="enemy" value="Karn" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": ["Karn, Silver Golem|USG", "Treasure Trove|EXO", "Scrapheap|UDS", "Wall of Tears|STH", "Wall of Essence|STH"] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Karn, Silver Golem|USG", "Treasure Trove|EXO", "Scrapheap|ULG", "Wall of Tears|STH", "Wall of Essence|STH"]}</property>
   </object>
   <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="226.667" y="538">
    <properties>
     <property name="enemy" value="Master Blue Wizard" />
     <property name="threatRange" type="int" value="20" />
     <property name="waypoints" value="75,73,82,81,79,80,79,78,77,74,76" />
-   <property name="effect">{ "startBattleWithCard": [ "Hesitation|STH|1" ] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Hesitation|STH"]}</property>
   </object>
   <object id="73" template="../../../../../../common/maps/obj/waypoint.tx" x="56" y="492" />
   <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="58" y="698" />
@@ -227,7 +227,7 @@
     <property name="enemy" value="Master Blue Wizard" />
     <property name="threatRange" type="int" value="20" />
     <property name="waypoints" value="79,80,79,78,77,74,76,75,73,82,81" />
-   <property name="effect">{ "startBattleWithCard": [ "Hesitation|STH|1" ] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Hesitation|STH"]}</property>
   </object>
   <object id="85" template="../../../../../../common/maps/obj/enemy.tx" x="398.667" y="652.667">
    <properties>
@@ -255,7 +255,7 @@
   }
 ]</property>
     <property name="enemy" value="Djinn" />
-   <property name="effect">{ "startBattleWithCard": [ "Island|LEA", "Mountain|ARB", "Swamp|LEA", "Aladdin's Lamp|ARB", "Keeper of Kookus|VIS" ] }</property>
+   <property name="effect">{"startBattleWithCard": ["Island|2ED", "Mountain|2ED", "Swamp|2ED", "Aladdin's Lamp|3ED", "Keeper of Kookus|VIS"]}</property>
    </properties>
   </object>
  </objectgroup>

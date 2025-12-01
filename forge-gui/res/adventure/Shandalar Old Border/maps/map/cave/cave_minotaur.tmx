@@ -36,7 +36,7 @@
     <property name="enemy" value="Minotaur" />
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="68,67" />
-   <property name="effect">{ "startBattleWithCard": [ "Anaba Spirit Crafter|HML", "Didgeridoo|HML", "Mountain|TMP" ] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Mountain|ICE", "Mountain|ICE", "Didgeridoo|HML", "Anaba Spirit Crafter|HML"]}</property>
   </object>
   <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="359.333" y="170.667" />
   <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="359.167" y="152" />
@@ -45,21 +45,21 @@
     <property name="enemy" value="Minotaur" />
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="76,75,74,75,76" />
-   <property name="effect">{ "startBattleWithCard": [ "Anaba Spirit Crafter|HML", "Didgeridoo|HML", "Mountain|TMP" ] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Mountain|ICE", "Mountain|ICE", "Didgeridoo|HML", "Anaba Spirit Crafter|HML"]}</property>
   </object>
   <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="324.667" y="263">
    <properties>
     <property name="enemy" value="Minotaur" />
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="79,78,77,76,77,78,79" />
-   <property name="effect">{ "startBattleWithCard": [ "Anaba Spirit Crafter|HML", "Didgeridoo|HML", "Mountain|TMP" ] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Mountain|ICE", "Mountain|ICE", "Didgeridoo|HML", "Anaba Spirit Crafter|HML"]}</property>
   </object>
   <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="13" y="190.666">
    <properties>
     <property name="enemy" value="Minotaur" />
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="87,62,63,64,63,62,87,61,65,66,65,61,87" />
-   <property name="effect">{ "startBattleWithCard": [ "Anaba Spirit Crafter|HML", "Didgeridoo|HML", "Mountain|TMP" ] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Mountain|ICE", "Mountain|ICE", "Didgeridoo|HML", "Anaba Spirit Crafter|HML"]}</property>
   </object>
   <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="16.3333" y="35">
    <properties>
@@ -73,7 +73,7 @@
     <property name="enemy" value="Minotaur" />
     <property name="threatRange" type="int" value="50" />
     <property name="waypoints" value="77,81,80,81,76" />
-   <property name="effect">{ "startBattleWithCard": [ "Anaba Spirit Crafter|HML", "Didgeridoo|HML", "Mountain|TMP" ] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Mountain|ICE", "Mountain|ICE", "Didgeridoo|HML", "Anaba Spirit Crafter|HML"]}</property>
   </object>
   <object id="58" template="../../../../../../common/maps/obj/manashards.tx" x="60.6667" y="77" />
   <object id="59" template="../../../../../../common/maps/obj/manashards.tx" x="354" y="214.667" />

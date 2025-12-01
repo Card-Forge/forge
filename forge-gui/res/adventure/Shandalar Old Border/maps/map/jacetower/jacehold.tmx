@@ -223,7 +223,7 @@
     <property name="enemy" value="Squirrel" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="95,96" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|TMP", "Nut Collector|ODY" ] }</property>
+   <property name="effect">{"startBattleWithCard": ["Forest|TMP", "Forest|TMP", "Nut Collector|ODY"]}</property>
   </object>
   <object id="80" template="../../../../../../common/maps/obj/waypoint.tx" x="112" y="239.5" />
   <object id="81" template="../../../../../../common/maps/obj/waypoint.tx" x="349.5" y="235.5" />

@@ -53,14 +53,16 @@
     <property name="enemy" value="Goblin Stalker" />
     <property name="threatRange" type="int" value="60" />
     <property name="waypoints" value="72,70" />
-   </properties>
+   <property name="effect">{"startBattleWithCard": ["Goblin Burrows|ONS", "Dralnu's Crusade|PLS", "Marsh Goblins|DRK"]}</property>
+  </properties>
   </object>
   <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="238.166" y="256">
    <properties>
     <property name="enemy" value="Goblin Stalker" />
     <property name="speedModifier" type="float" value="5" />
     <property name="threatRange" type="int" value="50" />
-   </properties>
+   <property name="effect">{"startBattleWithCard": ["Goblin Burrows|ONS", "Dralnu's Crusade|PLS", "Marsh Goblins|DRK"]}</property>
+  </properties>
   </object>
   <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="284.834" y="187.5">
    <properties>
@@ -73,14 +75,16 @@
    <properties>
     <property name="enemy" value="Goblin Stalker" />
     <property name="threatRange" type="int" value="30" />
-   </properties>
+   <property name="effect">{"startBattleWithCard": ["Goblin Burrows|ONS", "Dralnu's Crusade|PLS", "Marsh Goblins|DRK"]}</property>
+  </properties>
   </object>
   <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="272.167" y="262.834">
    <properties>
     <property name="enemy" value="Goblin Stalker" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="61,85" />
-   </properties>
+   <property name="effect">{"startBattleWithCard": ["Goblin Burrows|ONS", "Dralnu's Crusade|PLS", "Marsh Goblins|DRK"]}</property>
+  </properties>
   </object>
   <object id="59" template="../../../../../../common/maps/obj/enemy.tx" x="137.667" y="301.333">
    <properties>

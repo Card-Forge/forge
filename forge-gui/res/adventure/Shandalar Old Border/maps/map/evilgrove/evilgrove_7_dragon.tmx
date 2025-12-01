@@ -44,7 +44,7 @@
    <properties>
     <property name="enemy" value="Bone Dragon" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Dwarven Ruins|FEM", "Ebon Stronghold|FEM", "Dragonspeaker Shaman|SCG", "Bladewing's Thrall|SCG", "Wall of Bone|LEA" ] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Dwarven Ruins|FEM", "Ebon Stronghold|FEM", "Dragonspeaker Shaman|SCG", "Bladewing's Thrall|SCG", "Wall of Bone|LEA"]}</property>
   </object>
   <object id="55" template="../../../../../../common/maps/obj/gold.tx" x="241.585" y="89.9901" />
   <object id="56" template="../../../../../../common/maps/obj/collision.tx" x="-16" y="0" width="16" height="272" />

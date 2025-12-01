@@ -49,7 +49,7 @@
   <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="336.341" y="207.974">
    <properties>
     <property name="enemy" value="Djinn" />
-   <property name="effect">{ "startBattleWithCard": [ "Island|LEA", "Mountain|ARB", "Swamp|LEA", "Aladdin's Lamp|ARB", "Keeper of Kookus|VIS" ] }</property>
+   <property name="effect">{"startBattleWithCard": ["Island|2ED", "Mountain|2ED", "Swamp|2ED", "Aladdin's Lamp|3ED", "Keeper of Kookus|VIS"]}</property>
     <property name="threatRange" type="int" value="50" />
    </properties>
   </object>
@@ -132,7 +132,7 @@
    <properties>
     <property name="enemy" value="Master Blue Wizard" />
     <property name="threatRange" type="int" value="50" />
-   <property name="effect">{ "startBattleWithCard": [ "Hesitation|STH|1" ] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Hesitation|STH"]}</property>
   </object>
   <object id="66" template="../../../../../../common/maps/obj/booster.tx" x="432.418" y="144.188">
    <properties>

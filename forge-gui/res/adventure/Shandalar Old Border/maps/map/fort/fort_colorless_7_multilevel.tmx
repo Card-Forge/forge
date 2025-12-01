@@ -45,7 +45,7 @@
    <properties>
     <property name="enemy" value="Kiska-Ra of Shandalar"/>
     <property name="threatRange" type="int" value="100"/>
-   <property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN" ] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["City of Brass|ARN"]}</property>
   </object>
   <object id="59" template="../../../../../../common/maps/obj/gold.tx" x="275.167" y="296.667"/>
   <object id="61" template="../../../../../../common/maps/obj/manashards.tx" x="328" y="234"/>

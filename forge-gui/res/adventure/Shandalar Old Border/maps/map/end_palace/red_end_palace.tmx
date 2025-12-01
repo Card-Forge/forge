@@ -154,7 +154,7 @@
 ]</property>
     <property name="enemy" value="Latulla, Keldon Overseer" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": ["Latulla, Keldon Overseer|PCY", "Keldon Necropolis|INV", "Citadel of Pain|PCY", "Copper-Leaf Angel|PCY", "Sulfuric Vortex|SCG"] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Latulla, Keldon Overseer|PCY", "Keldon Necropolis|INV", "Citadel of Pain|PCY", "Copper-Leaf Angel|PCY", "Sulfuric Vortex|SCG"]}</property>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="649.5" y="599">
    <properties>
@@ -168,7 +168,7 @@
 ]</property>
     <property name="enemy" value="Márton Stromgald" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": ["Márton Stromgald|ICE", "Agent of Stromgald|ALL", "Stromgald Cabal|ALL", "Knight of Stromgald|ICE", "Ebony Horse|ARB"] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["M\u00e1rton Stromgald|ICE", "Agent of Stromgald|ALL", "Stromgald Cabal|ICE", "Knight of Stromgald|ICE", "Ebony Horse|3ED"]}</property>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="660" y="409.5">
    <properties>
@@ -182,7 +182,7 @@
 ]</property>
     <property name="enemy" value="Jeska, Warrior Adept" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": ["Shivan Oasis|INV", "Jeska, Warrior Adept|JUD", "Fires of Yavimaya|INV", "Overabundance|INV", "Narcissism|TOR"] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Shivan Oasis|INV", "Jeska, Warrior Adept|JUD", "Fires of Yavimaya|INV", "Overabundance|INV", "Narcissism|TOR"]}</property>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="368.5" y="228.091">
    <properties>
@@ -210,7 +210,7 @@
 ]</property>
     <property name="enemy" value="Eron the Relentless" />
     <property name="threatRange" type="int" value="20" />
-   <property name="effect">{ "startBattleWithCard": ["Koskun Keep|HML", "Reflecting Pool|TMP", "Eron the Relentless|HML", "Serrated Arrows|HML"] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Koskun Keep|HML", "Reflecting Pool|TMP", "Eron the Relentless|HML", "Serrated Arrows|HML"]}</property>
   </object>
   <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="520.254" y="498.533">
    <properties>

@@ -55,7 +55,7 @@
    <properties>
     <property name="enemy" value="Witch" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP", "Swamp|TMP", "Vile Consumption|INV" ] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Swamp|TMP", "Swamp|TMP", "Vile Consumption|INV"]}</property>
   </object>
   <object id="54" template="../../../../../../common/maps/obj/gold.tx" x="271.167" y="30.6667" />
   <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="216" y="126" visible="1">

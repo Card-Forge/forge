@@ -82,7 +82,7 @@
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="140.549" y="338.286">
    <properties>
     <property name="enemy" value="Grave Titan" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|ONS", "Swamp|ONS", "Swamp|ONS", "Swamp|ONS", "Rotting Giant|ODY" ] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Swamp|ONS", "Swamp|ONS", "Swamp|ONS", "Swamp|ONS", "Rotting Giant|ODY"]}</property>
   </object>
  </objectgroup>
 </map>

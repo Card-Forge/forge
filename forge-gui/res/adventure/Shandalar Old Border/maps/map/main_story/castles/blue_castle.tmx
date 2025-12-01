@@ -72,7 +72,7 @@
 ]</property>
     <property name="enemy" value="Merfolk King" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Island|USG|2", "Island|USG|2", "Lord of Atlantis|LEA", "Tidal Warrior|STH" ] }</property>
+   <property name="effect">{"startBattleWithCard": ["Island|S99", "Island|S99", "Lord of Atlantis|LEA", "Tidal Warrior|STH"]}</property>
   </object>
   <object id="55" template="../../../../../../../common/maps/obj/gate.tx" x="368" y="639.333">
    <properties>
@@ -161,7 +161,7 @@
 ]</property>
     <property name="enemy" value="Aether Channeler" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Dream Chisel|ONS", "Ixidor, Reality Sculptor|ONS", "Rhystic Study|PCY", "Tropical Island|LEA", "Underground Sea|LEA" ] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Tropical Island|LEA", "Underground Sea|LEA", "Dream Chisel|ONS", "Ixidor, Reality Sculptor|ONS"]}</property>
   </object>
   <object id="67" template="../../../../../../../common/maps/obj/enemy.tx" x="649" y="601.333">
    <properties>
@@ -175,7 +175,7 @@
 ]</property>
     <property name="enemy" value="Archmage" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Island|2ED", "Mountain|2ED", "Phyrexian Tyranny|PLS", "Rhystic Study|PCY", "Swamp|2ED" ] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Island|2ED", "Swamp|2ED", "Mountain|2ED", "Phyrexian Tyranny|PLS"]}</property>
   </object>
   <object id="68" template="../../../../../../../common/maps/obj/enemy.tx" x="677.667" y="410.666">
    <properties>
@@ -203,14 +203,14 @@
 ]</property>
     <property name="enemy" value="Storm Titan" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Island|ONS", "Mountain|ATH", "Pendrell Mists|WTH", "Rhystic Study|PCY" ] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Island|ONS", "Mountain|ATH", "Pendrell Mists|WTH"]}</property>
   </object>
   <object id="72" template="../../../../../../../common/maps/obj/enemy.tx" x="226.667" y="538">
    <properties>
     <property name="enemy" value="Master Blue Wizard" />
     <property name="threatRange" type="int" value="20" />
     <property name="waypoints" value="75,73,82,81,79,80,79,78,77,74,76" />
-   <property name="effect">{ "startBattleWithCard": [ "Hesitation|STH|1" ] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Hesitation|STH"]}</property>
   </object>
   <object id="73" template="../../../../../../../common/maps/obj/waypoint.tx" x="56" y="492" />
   <object id="74" template="../../../../../../../common/maps/obj/waypoint.tx" x="58" y="698" />
@@ -227,7 +227,7 @@
     <property name="enemy" value="Master Blue Wizard" />
     <property name="threatRange" type="int" value="20" />
     <property name="waypoints" value="79,80,79,78,77,74,76,75,73,82,81" />
-   <property name="effect">{ "startBattleWithCard": [ "Hesitation|STH|1" ] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Hesitation|STH"]}</property>
   </object>
   <object id="85" template="../../../../../../../common/maps/obj/enemy.tx" x="398.667" y="652.667">
    <properties>
@@ -255,7 +255,7 @@
   }
 ]</property>
     <property name="enemy" value="Djinn" />
-   <property name="effect">{ "startBattleWithCard": [ "Island|LEA", "Mountain|ARB", "Swamp|LEA", "Aladdin's Lamp|ARB", "Keeper of Kookus|VIS" ] }</property>
+   <property name="effect">{"startBattleWithCard": ["Island|2ED", "Mountain|2ED", "Swamp|2ED", "Aladdin's Lamp|3ED", "Keeper of Kookus|VIS"]}</property>
    </properties>
   </object>
  </objectgroup>

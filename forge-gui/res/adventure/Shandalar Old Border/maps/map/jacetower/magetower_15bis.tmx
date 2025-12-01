@@ -36,18 +36,18 @@
  <objectgroup id="4" name="Objects">
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="208" y="224.543">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/magetower_7.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/magetower_7.tmx" />
    </properties>
   </object>
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="206.644" y="57.6553">
    <properties>
-    <property name="enemy" value="Apprentice Blue Wizard"/>
+    <property name="enemy" value="Apprentice Blue Wizard" />
    </properties>
   </object>
   <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="41.5904" y="125.514">
    <properties>
-    <property name="enemy" value="Djinn"/>
-   <property name="effect">{ "startBattleWithCard": [ "Island|LEA", "Mountain|ARB", "Swamp|LEA", "Aladdin's Lamp|ARB", "Keeper of Kookus|VIS" ] }</property>
+    <property name="enemy" value="Djinn" />
+   <property name="effect">{"startBattleWithCard": ["Island|2ED", "Mountain|2ED", "Swamp|2ED", "Aladdin's Lamp|3ED", "Keeper of Kookus|VIS"]}</property>
    </properties>
   </object>
  </objectgroup>

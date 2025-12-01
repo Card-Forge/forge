@@ -41,7 +41,7 @@
    <properties>
     <property name="enemy" value="Jaya Ballard"/>
     <property name="threatRange" type="int" value="50"/>
-   <property name="effect">{ "startBattleWithCard": ["Mountain|LEA", "Mountain|LEA", "Mountain|LEA", "Blood Moon|DRK", "Fire Elemental|LEA", "Wall of Diffusion|TMP", "Book of Rass|DRK", "Sulfuric Vapors|USG"] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Mountain|ICE", "Mountain|ICE", "Mountain|ICE", "Blood Moon|DRK", "Fire Elemental|LEA", "Wall of Diffusion|TMP", "Book of Rass|DRK", "Sulfuric Vapors|USG"]}</property>
   </object>
  </objectgroup>
 </map>

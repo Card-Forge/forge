@@ -149,7 +149,7 @@
     <property name="enemy" value="Shade" />
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Frozen Shade|LEA", "Swamp|3ED", "Swamp|3ED", "Swamp|3ED" ] }</property>
+   <property name="effect">{"startBattleWithCard": ["Swamp|3ED", "Swamp|3ED", "Swamp|3ED", "Frozen Shade|LEA"]}</property>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="649.5" y="604">
    <properties>
@@ -164,7 +164,7 @@
     <property name="enemy" value="Mishra" />
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="20" />
-   <property name="effect">{ "startBattleWithCard": ["Mishra's Workshop|ATQ", "Mishra's Groundbreaker|ALL", "Ankh of Mishra|LEA", "Dragon Engine|ATQ"] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Mishra's Workshop|ATQ", "Mishra's Groundbreaker|ALL", "Ankh of Mishra|LEA", "Dragon Engine|3ED"]}</property>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="629.5" y="410.5">
    <properties>
@@ -179,7 +179,7 @@
     <property name="enemy" value="Ashnod" />
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": ["Swamp|LEA", "Mountain|LEA", "Island|LEA", "Ashnod's Altar|ATQ", "Ashnod's Battle Gear|ATQ", "Ashnod's Cylix|ALL", "Ashnod's Transmogrant|ATQ", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS"] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Swamp|2ED", "Mountain|2ED", "Island|2ED", "Ashnod's Altar|ATQ", "Ashnod's Battle Gear|ATQ", "Ashnod's Cylix|ALL", "Ashnod's Transmogrant|ATQ", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS"]}</property>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="365" y="232.63">
    <properties>
@@ -210,7 +210,7 @@
     <property name="enemy" value="Gix" />
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": ["Priest of Gix|USG", "Priest of Gix|USG", "Tainted Aether|USG", "Oppression|USG", "Bereavement|USG"] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Priest of Gix|USG", "Priest of Gix|USG", "Tainted Aether|USG", "Oppression|USG", "Bereavement|USG"]}</property>
   </object>
   <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="366.694" y="701.945">
    <properties>

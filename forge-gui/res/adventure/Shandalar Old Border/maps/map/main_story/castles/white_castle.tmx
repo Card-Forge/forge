@@ -156,7 +156,7 @@
     <property name="enemy" value="Dwarf Lord" />
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Daru Warchief|SCG", "Kjeldoran Outpost|ALL" ] }</property>
+   <property name="effect">{"startBattleWithCard": ["Kjeldoran Outpost|ALL", "Daru Warchief|SCG"]}</property>
   </object>
   <object id="68" template="../../../../../../../common/maps/obj/enemy.tx" x="671.667" y="411.333">
    <properties>
@@ -185,7 +185,7 @@
     <property name="enemy" value="Sun Titan" />
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Ivory Guardians|LEG", "Plains|INV", "Plains|INV", "Plains|INV", "Plains|INV" ] }</property>
+   <property name="effect">{"startBattleWithCard": ["Plains|INV", "Plains|INV", "Plains|INV", "Plains|INV", "Ivory Guardians|LEG"]}</property>
   </object>
   <object id="71" template="../../../../../../../common/maps/obj/enemy.tx" x="82.5" y="606.667">
    <properties>
@@ -199,7 +199,7 @@
 ]</property>
     <property name="enemy" value="Holy Apparition" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Mobilization|ONS", "Serra's Sanctum|USG" ] }</property>
+   <property name="effect">{"startBattleWithCard": ["Serra's Sanctum|USG", "Mobilization|ONS"]}</property>
   </object>
   <object id="72" template="../../../../../../../common/maps/obj/enemy.tx" x="84" y="405.667">
    <properties>
@@ -213,7 +213,7 @@
 ]</property>
     <property name="enemy" value="Royal King" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Angelic Chorus|USG", "Fortified Area|LEG", "Plains|ONS", "Rolling Stones|STH", "Wall of Essence|STH" ] }</property>
+   <property name="effect">{"startBattleWithCard": ["Plains|ONS", "Rolling Stones|STH", "Fortified Area|LEG", "Angelic Chorus|USG", "Wall of Essence|STH"]}</property>
   </object>
   <object id="73" template="../../../../../../../common/maps/obj/enemy.tx" x="187.167" y="500.333">
    <properties>

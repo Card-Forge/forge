@@ -36,7 +36,7 @@
    <properties>
     <property name="enemy" value="Urza Planeswalker"/>
     <property name="threatRange" type="int" value="50"/>
-   <property name="effect">{ "startBattleWithCard": ["Soldevi Excavations|ALL", "Urza's Armor|USG", "Mind Over Matter|EXO", "Urza's Avenger|ATQ"] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Soldevi Excavations|ALL", "Urza's Armor|USG", "Mind Over Matter|EXO", "Urza's Avenger|ATQ"]}</property>
   </object>
   <object id="51" template="../../../../../../common/maps/obj/entry_up.tx" x="209" y="480">
    <properties>

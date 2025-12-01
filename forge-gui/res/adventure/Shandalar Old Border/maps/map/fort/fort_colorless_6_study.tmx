@@ -48,7 +48,7 @@
    <properties>
     <property name="enemy" value="Shade" />
     <property name="threatRange" type="int" value="50" />
-   <property name="effect">{ "startBattleWithCard": [ "Frozen Shade|LEA", "Swamp|3ED", "Swamp|3ED", "Swamp|3ED" ] }</property>
+   <property name="effect">{"startBattleWithCard": ["Swamp|3ED", "Swamp|3ED", "Swamp|3ED", "Frozen Shade|LEA"]}</property>
   </object>
   <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="276.084" y="266.166">
    <properties>
@@ -73,7 +73,7 @@
     <property name="enemy" value="Shade" />
     <property name="threatRange" type="int" value="50" />
     <property name="waypoints" value="60,63,64,62,61" />
-   <property name="effect">{ "startBattleWithCard": [ "Frozen Shade|LEA", "Swamp|3ED", "Swamp|3ED", "Swamp|3ED" ] }</property>
+   <property name="effect">{"startBattleWithCard": ["Swamp|3ED", "Swamp|3ED", "Swamp|3ED", "Frozen Shade|LEA"]}</property>
   </object>
   <object id="59" template="../../../../../../common/maps/obj/enemy.tx" x="227" y="277.75">
    <properties>
