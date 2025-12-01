@@ -3933,7 +3933,7 @@
 	},
 	{
 		"name": "VampireCastle",
-		"displayName": "Swamp Queen's Castle",
+		"displayName": "Chainer's Castle",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3950,7 +3950,7 @@
 	},
 	{
 		"name": "VampireCastle1",
-		"displayName": "Chainer's Castle",
+		"displayName": "Cateran Castle",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3967,7 +3967,7 @@
 	},
 	{
 		"name": "VampireCastle2",
-		"displayName": "Cateran Castle",
+		"displayName": "Castle Sengir",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3984,7 +3984,7 @@
 	},
 	{
 		"name": "VampireCastle3",
-		"displayName": "Castle Sengir",
+		"displayName": "Swamp Queen's Castle",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
