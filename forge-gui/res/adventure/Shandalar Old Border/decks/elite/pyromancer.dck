@@ -1,18 +1,18 @@
 [metadata]
 Name=pyromancer
 [Main]
-24 Mountain|BRB|1
-2 Ancient Runes|TMP|1
-2 Blood Moon|CHR|1
-4 Mudslide|ICE|1
-4 Repercussion|UDS|1
-4 Rolling Earthquake|PTK|1
-4 Lightning Bolt|LEB|1
-4 Chain Lightning|LEG|1
-4 Disintegrate|LEB|1
-4 Fireball|3ED|1
-2 Form of the Dragon|SCG|1
-2 Earthquake|7ED|1
+24 Mountain|BRB
+2 Ancient Runes|TMP
+2 Blood Moon|CHR
+4 Mudslide|ICE
+4 Repercussion|UDS
+4 Rolling Earthquake|PTK
+4 Lightning Bolt|LEB
+4 Chain Lightning|LEG
+4 Disintegrate|LEB
+4 Fireball|3ED
+2 Form of the Dragon|SCG
+2 Earthquake|7ED
 
 [StartInBattle_Reference]
 3 Mountain|BRB

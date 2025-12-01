@@ -1,19 +1,19 @@
 [metadata]
 Name=gravetitan
 [Main]
-16 Swamp|ONS|1
-4 Cabal Coffers|TOR|1
-4 Scion of Darkness|LGN|1
-4 Avatar of Woe|PCY|1
-2 Phage the Untouchable|LGN|1
-2 Visara the Dreadful|ONS|1
-4 Nightmare|2ED|1
-4 Dakmor Sorceress|S99|1
-4 Plague Wind|PCY|1
-4 Decree of Pain|SCG|1
-4 Cabal Conditioning|SCG|1
-4 Final Punishment|SCG|1
-4 Annihilate|INV|1
+16 Swamp|ONS
+4 Cabal Coffers|TOR
+4 Scion of Darkness|LGN
+4 Avatar of Woe|PCY
+2 Phage the Untouchable|LGN
+2 Visara the Dreadful|ONS
+4 Nightmare|2ED
+4 Dakmor Sorceress|S99
+4 Plague Wind|PCY
+4 Decree of Pain|SCG
+4 Cabal Conditioning|SCG
+4 Final Punishment|SCG
+4 Annihilate|INV
 
 [StartInBattle_Reference]
 4 Swamp|ONS

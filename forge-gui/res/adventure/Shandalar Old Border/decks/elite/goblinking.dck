@@ -1,19 +1,19 @@
 [metadata]
 Name=goblinking
 [Main]
-16 Mountain|7ED|1
-4 Goblin Burrows|ONS|1
-4 Goblin King|ATH|1
-4 Siege-Gang Commander|SCG|1
-4 Goblin Ringleader|APC|1
-4 Battle Squadron|MMQ|1
-4 Goblin Marshal|UDS|1
-4 Mogg Alarm|NMS|1
-4 Goblin Scouts|MIR|1
-2 Goblin Assassin|LGN|1
-4 Goblin War Strike|PO2|1
-4 Goblin Offensive|USG|1
-2 Mogg Infestation|STH|1
+16 Mountain|7ED
+4 Goblin Burrows|ONS
+4 Goblin King|ATH
+4 Siege-Gang Commander|SCG
+4 Goblin Ringleader|APC
+4 Battle Squadron|MMQ
+4 Goblin Marshal|UDS
+4 Mogg Alarm|NMS
+4 Goblin Scouts|MIR
+2 Goblin Assassin|LGN
+4 Goblin War Strike|PO2
+4 Goblin Offensive|USG
+2 Mogg Infestation|STH
 
 [StartInBattle_Reference]
 2 Mountain|7ED

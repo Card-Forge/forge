@@ -1,17 +1,17 @@
 [metadata]
 Name=whiteking
 [Main]
-20 Plains|ONS|1
-4 Shield Sphere|ALL|1
-4 Shifting Wall|STH|1
-4 Wall of Swords|2ED|1
-4 Sunweb|MIR|1
-4 Rolling Stones|7ED|1
-4 Shimmering Barrier|USG|1
-4 Wall of Nets|EXO|1
-4 Ageless Sentinels|SCG|1
-4 Retribution of the Meek|VIS|1
-4 Crackdown|MMQ|1
+20 Plains|ONS
+4 Shield Sphere|ALL
+4 Shifting Wall|STH
+4 Wall of Swords|2ED
+4 Sunweb|MIR
+4 Rolling Stones|7ED
+4 Shimmering Barrier|USG
+4 Wall of Nets|EXO
+4 Ageless Sentinels|SCG
+4 Retribution of the Meek|VIS
+4 Crackdown|MMQ
 
 [StartInBattle_Reference]
 1 Plains|ONS

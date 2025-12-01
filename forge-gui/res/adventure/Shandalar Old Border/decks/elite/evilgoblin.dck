@@ -3,8 +3,8 @@ Name=evilgoblin
 [Main]
 4 Sulfurous Springs|ICE
 4 Urborg Volcano|INV
-6 Mountain|ONS|1
-6 Swamp|ONS|1
+6 Mountain|ONS
+6 Swamp|ONS
 4 Festering Goblin|ONS
 3 Cabal Slaver|ONS
 3 Dralnu's Crusade|PLS
@@ -15,7 +15,7 @@ Name=evilgoblin
 4 Goblin Piledriver|ONS
 3 Goblin King|5ED
 3 Goblin Warchief|SCG
-4 Goblin Grenade|FEM|1
+4 Goblin Grenade|FEM
 2 Goblin Glider|PO2
 3 Bad Moon|5ED
 
