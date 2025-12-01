@@ -18,3 +18,8 @@ Name=evilgoblin
 4 Goblin Grenade|FEM|1
 2 Goblin Glider|PO2
 3 Bad Moon|5ED
+
+[StartInBattle_Reference]
+1 Goblin Burrows|ONS
+1 Dralnu's Crusade|PLS
+1 Marsh Goblins|DRK
