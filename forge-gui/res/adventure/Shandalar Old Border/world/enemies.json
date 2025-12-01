@@ -4147,7 +4147,7 @@
     "name": "Bog Witch",
     "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
     "deck": [
-      "decks/standard/witch.dck"
+      "decks/elite/witch.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -7802,7 +7802,7 @@
     "name": "Death Knight",
     "sprite": "sprites/enemy/humanoid/human/knight/death_knight_2.atlas",
     "deck": [
-      "decks/standard/death_knight.dck"
+      "decks/elite/death_knight.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -10886,7 +10886,7 @@
     "name": "False Knight",
     "sprite": "sprites/enemy/humanoid/human/knight/false_knight.atlas",
     "deck": [
-      "decks/standard/death_knight.dck"
+      "decks/elite/death_knight.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -11472,7 +11472,7 @@
     "name": "Flying Witch",
     "sprite": "sprites/enemy/humanoid/human/warlock/flyingwitch.atlas",
     "deck": [
-      "decks/standard/witch.dck"
+      "decks/elite/witch.dck"
     ],
     "ai": "",
     "flying": true,
@@ -13066,7 +13066,7 @@
     "name": "Giant Fly",
     "sprite": "sprites/enemy/beast/giantfly.atlas",
     "deck": [
-      "decks/standard/insect.dck"
+      "decks/elite/insect.dck"
     ],
     "ai": "",
     "flying": true,
@@ -16725,7 +16725,7 @@
     "name": "Sunmare",
     "sprite": "sprites/enemy/beast/horsearabian.atlas",
     "deck": [
-      "decks/standard/horse.dck"
+      "decks/elite/horse.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -18615,7 +18615,7 @@
     "nameOverride": "",
     "sprite": "sprites/enemy/humanoid/kobold/koboldpyromancer.atlas",
     "deck": [
-      "decks/standard/pyromancer.dck"
+      "decks/elite/pyromancer.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -18923,7 +18923,7 @@
     "nameOverride": "",
     "sprite": "sprites/enemy/humanoid/kobold/koboldwarrior.atlas",
     "deck": [
-      "decks/standard/kobold.dck"
+      "decks/elite/kobold.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -20194,7 +20194,7 @@
     "name": "Magma Fire Elemental",
     "sprite": "sprites/enemy/elemental/magmafireelemental.atlas",
     "deck": [
-      "decks/standard/magma_elemental.dck"
+      "decks/elite/magma_elemental.dck"
     ],
     "ai": "",
     "flying": true,
@@ -27580,7 +27580,7 @@
     "name": "Snake",
     "sprite": "sprites/enemy/beast/big_snake.atlas",
     "deck": [
-      "decks/standard/snake.json"
+      "decks/elite/snake.json"
     ],
     "ai": "",
     "spawnRate": 1,
