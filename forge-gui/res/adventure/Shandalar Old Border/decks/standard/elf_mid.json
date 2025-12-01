@@ -1,0 +1,36 @@
+{
+  "name": "Elf mid",
+  "mainDeck": [
+    {
+      "count": 19,
+      "colors": [
+        "Green"
+      ],
+      "subTypes": [
+        "Elf"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 19,
+      "colors": [
+        "Green"
+      ],
+      "subTypes": [
+        "Elf"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 22,
+      "cardName": "Forest|6ED"
+    }
+  ]
+}

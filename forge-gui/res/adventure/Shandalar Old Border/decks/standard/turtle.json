@@ -1,0 +1,43 @@
+{
+  "name": "Turtle",
+  "mainDeck": [
+    {
+      "count": 19,
+      "colors": [
+        "Blue",
+        "Green"
+      ],
+      "subTypes": [
+        "Turtle"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 19,
+      "colors": [
+        "Blue",
+        "Green"
+      ],
+      "subTypes": [
+        "Turtle"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 11,
+      "cardName": "Island|6ED"
+    },
+    {
+      "type": "card",
+      "count": 11,
+      "cardName": "Forest|6ED"
+    }
+  ]
+}
