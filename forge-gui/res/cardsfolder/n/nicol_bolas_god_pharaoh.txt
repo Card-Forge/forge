@@ -2,7 +2,7 @@ Name:Nicol Bolas, God-Pharaoh
 ManaCost:4 U B R
 Types:Legendary Planeswalker Bolas
 Loyalty:7
-A:AB$ DigUntil | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Valid$ Card.nonLand | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | IsCurse$ True | SubAbility$ DBEffect | StackDescription$ {p:Targeted} exiles cards from the top of their library until they exile a nonland card. Until end of turn, {p:You} may cast that card without paying its mana cost. | SpellDescription$ Target opponent exiles cards from the top of their library until they exile a nonland card. Until end of turn, you may cast that card without paying its mana cost.
+A:AB$ DigUntil | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Opponent | Valid$ Card.nonLand | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | IsCurse$ True | SubAbility$ DBEffect | StackDescription$ {p:Targeted} exiles cards from the top of their library until they exile a nonland card. Until end of turn, {p:You} may cast that card without paying its mana cost. | SpellDescription$ Target opponent exiles cards from the top of their library until they exile a nonland card. Until end of turn, you may cast that card without paying its mana cost.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ MayPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
 SVar:MayPlay:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ Until end of turn, you may cast this card without paying its mana cost.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

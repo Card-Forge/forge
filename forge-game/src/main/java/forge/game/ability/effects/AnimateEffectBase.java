@@ -96,8 +96,6 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
                 PerpetualManaCost p = new PerpetualManaCost(timestamp, manaCost);
                 c.addPerpetual(p);
                 p.applyEffect(c);
-            } else {
-                c.addChangedManaCost(manaCost, timestamp, (long) 0);
             }
         }
         

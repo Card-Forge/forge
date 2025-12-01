@@ -10,7 +10,6 @@ public class AudioMusic implements IAudioMusic {
     private final FileHandle file;
 
     private boolean started = false;
-    private float pauseTimestamp = 0f;
 
     public AudioMusic(String filename) {
         file = Gdx.files.absolute(filename);
@@ -21,10 +20,7 @@ public class AudioMusic implements IAudioMusic {
         if (music == null)
             return;
         started = true;
-        music.setOnCompletionListener(music -> {
-            if (music.isPlaying())
-                onComplete.run(); //Pausing a track can cause OpenAL to still fire its completion listener after a bit.
-        });
+        music.setOnCompletionListener(music -> onComplete.run());
         music.play();
     }
 
@@ -32,7 +28,11 @@ public class AudioMusic implements IAudioMusic {
         if (music == null)
             return;
         if (music.isPlaying()) {
-            pauseTimestamp = music.getPosition();
+            //Hack: There's an issue with the interaction between LibGDX and OpenAL Soft which can
+            //sometimes cause a paused audio track to rapidly advance its position to the end (silently)
+            //and then fire a completion listener. Setting the position manually right before pausing
+            //seems to prevent this.
+            music.setPosition(music.getPosition());
             music.pause();
         }
     }
@@ -45,7 +45,6 @@ public class AudioMusic implements IAudioMusic {
             System.err.println("Audio " + file.name() + " resumed without a call to AudioMusic.play()");
         }
         if (!music.isPlaying()) {
-            music.setPosition(pauseTimestamp);
             music.play();
         }
     }
