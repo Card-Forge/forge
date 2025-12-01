@@ -22,7 +22,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -120,7 +120,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "addMaxCount": 3,
         "rarity": [
@@ -167,7 +167,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -238,7 +238,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -318,7 +318,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -395,7 +395,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -646,7 +646,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -724,7 +724,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -973,7 +973,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -1049,7 +1049,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -1122,7 +1122,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -1196,7 +1196,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -1273,7 +1273,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -1353,7 +1353,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -1429,7 +1429,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -1506,7 +1506,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -1583,7 +1583,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -1659,7 +1659,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -1733,7 +1733,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -1808,7 +1808,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -1883,7 +1883,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -1957,7 +1957,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -2091,7 +2091,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -2163,7 +2163,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -2236,7 +2236,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -2364,7 +2364,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -2437,7 +2437,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -2534,7 +2534,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -2590,7 +2590,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -2663,7 +2663,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -2736,7 +2736,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -2815,7 +2815,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -2893,7 +2893,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -2973,7 +2973,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -3051,7 +3051,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -3127,7 +3127,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -3264,7 +3264,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -3341,7 +3341,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -3414,7 +3414,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -3490,7 +3490,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -3567,7 +3567,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -3645,7 +3645,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -3719,7 +3719,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -3795,7 +3795,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -3868,7 +3868,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -3945,7 +3945,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -4018,7 +4018,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -4095,7 +4095,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -4361,7 +4361,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -4435,7 +4435,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -4509,7 +4509,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -4586,7 +4586,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -4666,7 +4666,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -4739,7 +4739,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -4817,7 +4817,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -4888,7 +4888,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -4963,7 +4963,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -5046,7 +5046,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -5129,7 +5129,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -5207,7 +5207,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -5279,7 +5279,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -5351,7 +5351,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -5422,7 +5422,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -5494,7 +5494,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -5566,7 +5566,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -5638,7 +5638,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -5758,7 +5758,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -5831,7 +5831,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -5901,7 +5901,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -5975,7 +5975,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -6050,7 +6050,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -6299,7 +6299,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -6457,7 +6457,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -6526,7 +6526,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -6594,7 +6594,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -6663,7 +6663,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -6731,7 +6731,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -6800,7 +6800,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -6879,7 +6879,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -6957,7 +6957,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -7036,7 +7036,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -7112,7 +7112,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -7235,7 +7235,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -7310,7 +7310,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -7385,7 +7385,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -7460,7 +7460,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -7602,7 +7602,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -7676,7 +7676,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -7748,7 +7748,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -7821,7 +7821,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -7899,7 +7899,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -8043,7 +8043,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -8115,7 +8115,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -8188,7 +8188,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -8261,7 +8261,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -8335,7 +8335,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -8416,7 +8416,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -8494,7 +8494,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -8571,7 +8571,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -8649,7 +8649,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -8861,7 +8861,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -8946,7 +8946,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -9017,7 +9017,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -9175,7 +9175,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -9252,7 +9252,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -9326,7 +9326,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -9401,7 +9401,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -9479,7 +9479,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -9551,7 +9551,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -9623,7 +9623,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -9699,7 +9699,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -9775,7 +9775,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -9851,7 +9851,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -9929,7 +9929,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -10060,7 +10060,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -10130,7 +10130,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -10202,7 +10202,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -10274,7 +10274,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -10386,7 +10386,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -10462,7 +10462,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -10535,7 +10535,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -10611,7 +10611,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -10686,7 +10686,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -10757,7 +10757,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -10833,7 +10833,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -10905,7 +10905,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -10977,7 +10977,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -11048,7 +11048,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -11126,7 +11126,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -11199,7 +11199,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -11344,7 +11344,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -11416,7 +11416,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -11555,7 +11555,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -11630,7 +11630,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -11704,7 +11704,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -11778,7 +11778,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -11856,7 +11856,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -11933,7 +11933,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -12006,7 +12006,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -12166,7 +12166,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -12249,7 +12249,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -12326,7 +12326,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -12715,7 +12715,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -12788,7 +12788,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -12860,7 +12860,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -12935,7 +12935,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -13012,7 +13012,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -13087,7 +13087,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -13165,7 +13165,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -13239,7 +13239,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -13402,7 +13402,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -13536,7 +13536,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -13606,7 +13606,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -13681,7 +13681,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -13962,7 +13962,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -14126,7 +14126,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -14199,7 +14199,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -14276,7 +14276,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -14355,7 +14355,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -14432,7 +14432,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -14511,7 +14511,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -14651,7 +14651,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -14740,7 +14740,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -14817,7 +14817,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -14896,7 +14896,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -14971,7 +14971,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -15038,7 +15038,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -15113,7 +15113,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -15187,7 +15187,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -15262,7 +15262,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -15338,7 +15338,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -15414,7 +15414,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -15488,7 +15488,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -15597,7 +15597,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -15671,7 +15671,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -15747,7 +15747,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -15818,7 +15818,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -15896,7 +15896,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -15970,7 +15970,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -16041,7 +16041,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -16111,7 +16111,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -16188,7 +16188,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -16314,7 +16314,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -16389,7 +16389,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -16464,7 +16464,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -16539,7 +16539,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -16670,7 +16670,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -16745,7 +16745,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -16820,7 +16820,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -16896,7 +16896,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -16971,7 +16971,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -17046,7 +17046,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -17119,7 +17119,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -17192,7 +17192,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -17267,7 +17267,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -17549,7 +17549,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -17625,7 +17625,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -17700,7 +17700,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -17772,7 +17772,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -17844,7 +17844,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -17920,7 +17920,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -18091,7 +18091,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -18161,7 +18161,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -18244,7 +18244,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -18477,7 +18477,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -18554,7 +18554,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -18702,7 +18702,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -18782,7 +18782,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -18863,7 +18863,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -18943,7 +18943,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -19021,7 +19021,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -19099,7 +19099,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -19176,7 +19176,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -19442,7 +19442,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -19520,7 +19520,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -19597,7 +19597,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -19667,7 +19667,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -19741,7 +19741,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -19817,7 +19817,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -19993,7 +19993,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -20068,7 +20068,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -20142,7 +20142,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -20214,7 +20214,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -20289,7 +20289,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -20470,7 +20470,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -20548,7 +20548,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -20621,7 +20621,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -20697,7 +20697,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -20865,7 +20865,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -20942,7 +20942,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -21020,7 +21020,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -21098,7 +21098,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -21466,7 +21466,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -21632,7 +21632,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -21709,7 +21709,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -21862,7 +21862,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -22019,7 +22019,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -22182,7 +22182,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -22255,7 +22255,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -22333,7 +22333,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -22405,7 +22405,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -22477,7 +22477,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -22550,7 +22550,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -22623,7 +22623,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -22700,7 +22700,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -22776,7 +22776,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -22966,7 +22966,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -23043,7 +23043,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -23119,7 +23119,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -23191,7 +23191,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -23271,7 +23271,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -23351,7 +23351,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -23511,7 +23511,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -23614,7 +23614,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Ring of Ma'r\u00fbf"
+        "itemName": "Ring of Ma'rûf"
       }
     ],
     "questTags": [
@@ -23656,7 +23656,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -23726,7 +23726,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -23799,7 +23799,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -23873,7 +23873,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -23946,7 +23946,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -24019,7 +24019,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -24092,7 +24092,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -24221,7 +24221,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -24299,7 +24299,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -24377,7 +24377,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -24453,7 +24453,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -24525,7 +24525,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -24598,7 +24598,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -24673,7 +24673,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -24749,7 +24749,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -24822,7 +24822,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -24901,7 +24901,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -24975,7 +24975,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -25050,7 +25050,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -25180,7 +25180,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -25253,7 +25253,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -25327,7 +25327,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -25400,7 +25400,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -25476,7 +25476,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -25549,7 +25549,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -25670,7 +25670,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -25745,7 +25745,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -25821,7 +25821,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -26055,7 +26055,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -26133,7 +26133,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -26204,7 +26204,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -26347,7 +26347,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -26423,7 +26423,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -26501,7 +26501,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -26575,7 +26575,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -26647,7 +26647,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -26720,7 +26720,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -26927,7 +26927,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -27006,7 +27006,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -27086,7 +27086,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -27166,7 +27166,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -27248,7 +27248,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -27328,7 +27328,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -27599,7 +27599,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -27746,7 +27746,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -27824,7 +27824,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -27902,7 +27902,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -27974,7 +27974,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -28047,7 +28047,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -28186,7 +28186,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -28259,7 +28259,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -28481,7 +28481,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -28559,7 +28559,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -28969,7 +28969,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -29121,7 +29121,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -29197,7 +29197,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -29270,7 +29270,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -29343,7 +29343,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -29417,7 +29417,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -29627,7 +29627,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -29704,7 +29704,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -29780,7 +29780,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -29860,7 +29860,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -29932,7 +29932,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -30007,7 +30007,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -30081,7 +30081,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -30155,7 +30155,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -30239,7 +30239,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -30397,7 +30397,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -30477,7 +30477,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -30551,7 +30551,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -30631,7 +30631,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -30707,7 +30707,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -30855,7 +30855,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -30931,7 +30931,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -31004,7 +31004,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -31075,7 +31075,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -31207,7 +31207,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -31420,7 +31420,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -31616,7 +31616,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -31733,7 +31733,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -31805,7 +31805,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -31873,7 +31873,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -31948,7 +31948,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -32101,7 +32101,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -32174,7 +32174,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -32247,7 +32247,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -32321,7 +32321,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -32396,7 +32396,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -32469,7 +32469,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -32542,7 +32542,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -32615,7 +32615,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -32688,7 +32688,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -32761,7 +32761,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -32835,7 +32835,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -32911,7 +32911,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -32987,7 +32987,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -33059,7 +33059,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -33131,7 +33131,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -33207,7 +33207,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -33278,7 +33278,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -33355,7 +33355,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -33433,7 +33433,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -33791,7 +33791,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -33859,7 +33859,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -33925,7 +33925,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -33989,7 +33989,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -34054,7 +34054,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -34122,7 +34122,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -34186,7 +34186,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -34250,7 +34250,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -34314,7 +34314,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -34378,7 +34378,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -34442,7 +34442,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -34484,7 +34484,7 @@
     "colors": "G"
   },
   {
-    "name": "Jakub \u0160lemr '99",
+    "name": "Jakub Šlemr '99",
     "sprite": "sprites/enemy/humanoid/human/warlock/witch.atlas",
     "deck": [
       "decks/standard/wc99_jakub_slemr.dck"
@@ -34506,7 +34506,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -34570,7 +34570,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -34612,7 +34612,7 @@
     "colors": "U"
   },
   {
-    "name": "Janosch K\u00fchn '00",
+    "name": "Janosch Kühn '00",
     "sprite": "sprites/enemy/humanoid/elf/shaman.atlas",
     "deck": [
       "decks/standard/wc00_janosch_kuhn.dck"
@@ -34634,7 +34634,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -34699,7 +34699,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -34764,7 +34764,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -34829,7 +34829,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -34894,7 +34894,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -34958,7 +34958,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -35024,7 +35024,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -35090,7 +35090,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -35155,7 +35155,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -35221,7 +35221,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -35287,7 +35287,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -35352,7 +35352,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -35418,7 +35418,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -35483,7 +35483,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -35548,7 +35548,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -35613,7 +35613,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -35679,7 +35679,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -35746,7 +35746,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -35813,7 +35813,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -35880,7 +35880,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -35945,7 +35945,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -36010,7 +36010,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -36075,7 +36075,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -36140,7 +36140,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -36204,7 +36204,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -36270,7 +36270,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -36334,7 +36334,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -36673,7 +36673,7 @@
     "rewards": []
   },
   {
-    "name": "M\u00e1rton Stromgald",
+    "name": "Márton Stromgald",
     "sprite": "sprites/enemy/humanoid/human/knight/cavalier_2.atlas",
     "deck": [
       "decks/miniboss/marton_stromgald.dck"
@@ -37119,7 +37119,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -37195,7 +37195,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -37271,7 +37271,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -37347,7 +37347,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -37423,7 +37423,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -37499,7 +37499,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -37578,7 +37578,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -37657,7 +37657,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -37736,7 +37736,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -37815,7 +37815,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -37894,7 +37894,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -37975,7 +37975,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -38044,7 +38044,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -38180,7 +38180,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -38249,7 +38249,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -38379,7 +38379,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -38448,7 +38448,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -38578,7 +38578,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -38647,7 +38647,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -38782,7 +38782,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -38852,7 +38852,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -39655,7 +39655,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "addMaxCount": 2,
         "rarity": [
@@ -39689,7 +39689,7 @@
       "Necromancer",
       "IdentityBlack"
     ],
-    "nameOverride": "Lim-D\u00fbl, the Necromancer"
+    "nameOverride": "Lim-Dûl, the Necromancer"
   },
   {
     "name": "Chandler",
@@ -39987,7 +39987,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "addMaxCount": 2,
         "rarity": [
@@ -40047,7 +40047,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "addMaxCount": 2,
         "rarity": [
@@ -40297,7 +40297,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
@@ -40374,7 +40374,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "addMaxCount": 2,
         "rarity": [
@@ -40440,7 +40440,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "addMaxCount": 2,
         "rarity": [
@@ -40558,7 +40558,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 0.25,
         "count": 1,
         "rarity": [
           "rare"
