@@ -11284,7 +11284,7 @@
     "name": "Forest Giant",
     "sprite": "sprites/enemy/giant/forestgiant.atlas",
     "deck": [
-      "decks/standard/foresttitan.dck"
+      "decks/elite/forest_titan.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -30683,80 +30683,6 @@
       }
     ],
     "colors": "B",
-    "questTags": [
-      "Evil",
-      "Zombie",
-      "Necromancer",
-      "BiomeBlack",
-      "Inhuman",
-      "Wizard",
-      "IdentityDimir"
-    ]
-  },
-  {
-    "name": "Plaguelord",
-    "sprite": "sprites/enemy/undead/zombiepoisoner.atlas",
-    "deck": [
-      "decks/standard/zombiepoisoner.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 21,
-    "life": 20,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Blue",
-          "Black"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 200
-      }
-    ],
-    "colors": "UB",
     "questTags": [
       "Evil",
       "Zombie",
