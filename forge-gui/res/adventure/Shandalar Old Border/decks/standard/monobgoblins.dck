@@ -13,3 +13,8 @@ Name=monobgoblins
 4 Goblin Warchief|SCG|1
 4 Lightning Blast|7ED|1
 4 Shock|ONS|1
+
+[StartInBattle_Reference]
+1 Goblin Burrows|ONS
+1 Dralnu's Crusade|PLS
+1 Marsh Goblins|DRK

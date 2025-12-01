@@ -70,7 +70,7 @@
     <property name="enemy" value="Squirrel" />
     <property name="threatRange" type="int" value="60" />
     <property name="waypoints" value="112,113" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|TMP", "Nut Collector|ODY", "Primal Rage|STH", "Rowen|VIS" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Forest|TMP", "Nut Collector|ODY" ] }</property>
   </object>
   <object id="64" template="../../../../../../common/maps/obj/treasure.tx" x="12.1132" y="367.884" />
   <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="254.374" y="297.137">

@@ -40,7 +40,7 @@
    <properties>
     <property name="enemy" value="Zombie Lord" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Carrion Feeder|SCG" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Carrion Feeder|SCG", "Zombie Master|LEA" ] }</property>
   </object>
   <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="143.348" y="341.386" />
   <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="657.25" y="779.417" />
@@ -352,7 +352,7 @@
    <properties>
     <property name="enemy" value="Uncle Istvan" />
     <property name="threatRange" type="int" value="50" />
-   <property name="effect">{ "startBattleWithCard": ["Swamp|2ED", "Swamp|2ED", "Swamp|2ED", "Uncle Istvan|DRK"] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Swamp|P02|3", "Swamp|P02|3", "Swamp|P02|3", "Uncle Istvan|DRK" ] }</property>
   </object>
  </objectgroup>
 </map>

@@ -58,7 +58,7 @@
    <properties>
     <property name="enemy" value="Squirrel" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|TMP", "Nut Collector|ODY", "Primal Rage|STH", "Rowen|VIS" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Forest|TMP", "Nut Collector|ODY" ] }</property>
   </object>
   <object id="63" template="../../../../../../common/maps/obj/enemy.tx" x="513.96" y="174.058">
    <properties>

@@ -185,7 +185,7 @@
     <property name="enemy" value="Sun Titan" />
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Glorious Anthem|USG", "Ivory Guardians|LEG", "Plains|INV" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Ivory Guardians|LEG", "Plains|INV", "Plains|INV", "Plains|INV", "Plains|INV" ] }</property>
   </object>
   <object id="71" template="../../../../../../../common/maps/obj/enemy.tx" x="82.5" y="606.667">
    <properties>
@@ -213,7 +213,7 @@
 ]</property>
     <property name="enemy" value="Royal King" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Angelic Chorus|USG", "Fortified Area|LEG", "Glorious Anthem|USG", "Plains|ONS", "Rolling Stones|STH", "Wall of Essence|STH" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Angelic Chorus|USG", "Fortified Area|LEG", "Plains|ONS", "Rolling Stones|STH", "Wall of Essence|STH" ] }</property>
   </object>
   <object id="73" template="../../../../../../../common/maps/obj/enemy.tx" x="187.167" y="500.333">
    <properties>

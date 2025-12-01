@@ -122,6 +122,7 @@
     <property name="displayNameOverride" value="Alpha Wolf" />
     <property name="effect">{ "startBattleWithCard": [ "Forest|ICE", "Plains|LEB", "Primal Rage|STH", "Rowen|VIS", "Timber Wolves|LEA" ] }</property>
     <property name="enemy" value="Wolf" />
+   <property name="effect">{ "startBattleWithCard": [ "Forest|ICE", "Plains|ICE", "Timber Wolves|LEA", "Timber Wolves|LEA", "Timber Wolves|LEA", "Timber Wolves|LEA" ] }</property>
     <property name="threatRange" type="int" value="50" />
    </properties>
   </object>

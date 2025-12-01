@@ -1463,6 +1463,7 @@
 ]</property>
     <property name="effect">{ "startBattleWithCard": [ "Carrion Feeder|SCG" ] }</property>
     <property name="enemy" value="Zombie Lord" />
+   <property name="effect">{ "startBattleWithCard": [ "Carrion Feeder|SCG", "Zombie Master|LEA" ] }</property>
     <property name="fleeRange" type="float" value="125" />
     <property name="hidden" type="bool" value="false" />
     <property name="inactive" type="bool" value="false" />

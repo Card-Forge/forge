@@ -93,7 +93,7 @@
    <properties>
     <property name="enemy" value="Phyrexian Angel" />
     <property name="threatRange" type="int" value="50" />
-   <property name="effect">{ "startBattleWithCard": [ "Haunted Angel|APC", "Phyrexian Arena|APC", "Phyrexian Grimoire|TMP", "Phyrexian Walker|VIS" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Haunted Angel|APC", "Phyrexian Arena|APC", "Phyrexian Grimoire|TMP", "Phyrexian Walker|VIS" ] }</property>
   </object>
  </objectgroup>
  <objectgroup id="8" name="Waypoints">

@@ -41,6 +41,7 @@
    <properties>
     <property name="effect">{ "startBattleWithCard": [ "Carrion Feeder|SCG" ], "lifeModifier": 8 }</property>
     <property name="enemy" value="Zombie Lord" />
+   <property name="effect">{ "startBattleWithCard": [ "Carrion Feeder|SCG", "Zombie Master|LEA" ] }</property>
     <property name="threatRange" type="int" value="40" />
    </properties>
   </object>

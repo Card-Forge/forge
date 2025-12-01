@@ -154,7 +154,7 @@
 ]</property>
     <property name="enemy" value="Squirrel" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|TMP", "Nut Collector|ODY", "Primal Rage|STH", "Rowen|VIS" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Forest|TMP", "Nut Collector|ODY" ] }</property>
   </object>
   <object id="67" template="../../../../../../../common/maps/obj/enemy.tx" x="658.333" y="600">
    <properties>
@@ -182,7 +182,7 @@
 ]</property>
     <property name="enemy" value="Wolf" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|ICE", "Plains|LEB", "Primal Rage|STH", "Rowen|VIS", "Timber Wolves|LEA" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Forest|ICE", "Plains|ICE", "Timber Wolves|LEA", "Timber Wolves|LEA", "Timber Wolves|LEA", "Timber Wolves|LEA" ] }</property>
   </object>
   <object id="69" template="../../../../../../../common/maps/obj/enemy.tx" x="363.833" y="223.874">
    <properties>

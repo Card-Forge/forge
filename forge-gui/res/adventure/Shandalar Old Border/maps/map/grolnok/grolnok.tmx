@@ -277,7 +277,7 @@
     <property name="enemy" value="Shade" />
     <property name="fleeRange" value="30" />
     <property name="threatRange" type="int" value="60" />
-   <property name="effect">{ "startBattleWithCard": [ "Frozen Shade|LEA", "Phyrexian Arena|APC", "Swamp|3ED" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Frozen Shade|LEA", "Swamp|3ED", "Swamp|3ED", "Swamp|3ED" ] }</property>
   </object>
   <object id="150" template="../../../../../../common/maps/obj/gold.tx" x="1026.5" y="416.5" />
   <object id="151" template="../../../../../../common/maps/obj/gold.tx" x="902.5" y="599.5" />

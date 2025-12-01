@@ -149,7 +149,7 @@
     <property name="enemy" value="Shade" />
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Frozen Shade|LEA", "Phyrexian Arena|APC", "Swamp|3ED" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Frozen Shade|LEA", "Swamp|3ED", "Swamp|3ED", "Swamp|3ED" ] }</property>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="649.5" y="604">
    <properties>

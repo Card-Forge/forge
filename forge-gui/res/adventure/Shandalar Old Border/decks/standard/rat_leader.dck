@@ -13,3 +13,7 @@ Name=rat_leader
 4 Thorn Elemental|7ED|1
 4 Verdant Force|TMP|1
 7 Swamp|5ED|1
+
+[StartInBattle_Reference]
+1 Swarm of Rats|P02
+1 Dirty Wererat|ODY

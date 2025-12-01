@@ -49,7 +49,7 @@
   <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="220" y="66.6667">
    <properties>
     <property name="enemy" value="Zombie Lord" />
-   <property name="effect">{ "startBattleWithCard": [ "Carrion Feeder|SCG" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Carrion Feeder|SCG", "Zombie Master|LEA" ] }</property>
   </object>
   <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="351.333" y="136.667">
    <properties>

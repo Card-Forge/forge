@@ -40,6 +40,7 @@
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Dralnu's Crusade&quot; ] }"/>
     <property name="enemy" value="Undead Goblin"/>
+   <property name="effect">{ "startBattleWithCard": [ "Goblin Burrows|ONS", "Dralnu's Crusade|PLS", "Marsh Goblins|DRK" ] }</property>
     <property name="hidden" type="bool" value="false"/>
     <property name="pursueRange" type="float" value="60"/>
     <property name="threatRange" type="float" value="30"/>
