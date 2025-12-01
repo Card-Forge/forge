@@ -44,7 +44,7 @@
   </object>
   <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="68.5909" y="52.9852">
    <properties>
-    <property name="enemy" value="Red Wiz1" />
+    <property name="enemy" value="Apprentice Red Wizard" />
    </properties>
   </object>
   <object id="59" template="../../../../../../common/maps/obj/enemy.tx" x="237.909" y="67.2727">

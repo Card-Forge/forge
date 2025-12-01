@@ -41,414 +41,7 @@
    eJztm1tu1DAUhj0DbWnaPkzLBgoVJKUSbAGJV7YASNwr3pHgmWkRhU3QhZQp7TBlyjIQEiyCYwVrjJtknMSJL/k/6WguchKPfx8fH9vDGAAAAAAAAAAAAAAAAAAAAHCNP7YrAIBH/LJdAQAAaAHMDQC4COYAAACb/LZdgY6z12Nsvzf7DD3a5/ViasAudTQY9uaXCYFpxNg52Y+o/LX3ajz3p0YZeRwb9as/q04924RrsbSavl9YtVuXLL7W0MA3ZC2Gy6n50o/qoOOXbSNr4SsutmsVphXihE+47uMiXgvz3S98JiRfUMen+1ZqAYA5qo7locTqIlyMczzfy8q7u6CHi/B8r07erQO0NYOL/gwAALpMKJ9apnz2e0B5lQ1M7fm9Wklfr0AT63DfiKS1nq5rIsYK3fHiZcLYbmLu+Xx/ZlEyvn/WVU2y+uY83pEWQ4N6qAh9urg+KsZtnwj5nIqPeoRAXk6cpYc6hoH2yNJD12d24VvG4bHzPLr4Xd4ZoSn2I60gz0HlPeE24PuDWHMEprHVp96T30xWUvvQwRzOBWTtd0iHWIrtVXU5i2bWFjcCPCd5Qu3/SWpDoY0PvsL3lMf98HRRNeFsl5gPF83pmoTvKSdkp4HpweGafIxmNi6ZnwhNQjpb5jsLHV1HBAAAYA8+d92TbL8j/0t0lS1lzsrnsNDEHiKXkOGadMlXXFuHzdKEE1r+7ROqJnG/W//ndRGhCbRwh5GmFrrlAAiBENdqTZE3/zI1Rny+lP09NCmHqZzg7uX69wDmOPy3x7IRM3Y1Ln99nn+B8nAtDpL09TZpcaeCHsK/DnG2r1E2B/9/zmpvucxBg+f1Q6bK+CL7UVEZGVVPkE1e/L5J7ReTJYPqsSRUrlGbXFdsq6H+Jvr1Cd3/lGw8KB9LtumaW2Q7g9k9Q4onR/S7vig2KtBDHhtEvvJmjbG3a+n7vLaR2+3xOmNPyJ6u69VRvv83ev6E7EzSIyQeUJs8JDuW9GjCP+bFYLWf58WEZ1TX52QvNLX0lSNN/9Bls0L/zRt75mkZYjwXfsLtkWbfa6MdVI2K9P0LmXyX8g==
   </data>
  </layer>
- <objectgroup id="4" name="Objects">
-  <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="841.833" y="798.667" width="16" height="16" visible="1">
-   <properties>
-    <property name="dialog">[
-  {
-    "text": "The Wounded Sliver looks at you interestedly",
-    "options": [
-      {
-        "name": "What are you?",
-        "text": "I'm the queen of the Slivers of the Skep, at least I used to be until my position was usurped.",
-        "options": [
-          {
-            "name": "Usurped? What are you talking about?",
-            "text": "For millenia I've been keeping the Slivers of the Skep healthy and peaceful, keeping them under control to prevent them attacking outsiders. Everything changed when the Sliver Queen attacked the Skep. She attacked me and took control over this hive. As you can see, I was unable to defeat her.",
-            "options": [
-              {
-                "name": "So I guess the Sliver Queen is causing the Slivers of the Skep to be this aggressive? ",
-                "text": "Exactly, she's been assembling a mighty host of Slivers from all around the multiverse. Soon enough she will have an army large enough to conquer the whole of Shandalar",
-                "options": [
-                  {
-                    "name": "Where is she located? I will take care of it.",
-                    "text": "I appreciate your enthusiasm, however the queen is not an opponent to take on lightly. First of all, in order to gain access to her lair you need to defeat her three of her lieutenants that are scattered around here in the Skep. Only then will the magic shield disappear and will you be able to enter her lair.",
-                    "options": [
-                      {
-                        "name": "Consider it done",
-                        "text": "Once you have dealt with the queen, return to me. Once I'm installed as the hive queen of the slivers of Shandalar, I will promise you to that the Slivers of the Skep will never be a danger to the people of Shandalar. Also, take this Hivestone, It will allow your creatures to become Slivers, causing confusion for the Sliver Queen.",
-                        "action": [
-                          { "addItem": "Hivestone" },
-                          {
-                            "setMapFlag": {
-                              "key": "TalkToFallen",
-                              "val": 1
-                            }
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "condition": [
-      { "checkMapFlag": "TalkToFallen" },
-      {
-        "checkMapFlag": "SliverQueenDefeated",
-        "not": true
-      }
-    ],
-    "text": "Weak, ... I am, defeat the Sliver Queen ... Before I lose the last of my strength.",
-    "options": [
-      {
-        "name": "(Continue)"
-      }
-    ]
-  },
-  {
-    "condition": [
-      { "checkMapFlag": "TalkToFallen" },
-      { "checkQuestFlag": "SliverQueenDefeated" }
-    ],
-    "name": "The Sliver Queen has been defeated!",
-    "text": "My ... my gratitude to you stranger. I feel my strength slowly returning. As promised, I'll take control of the Slivers again as their queen. The people of Shandalar shouldn't fear the Slivers of the Skep anymore. Though be warned, adventurer, my children will still defend against any intruder who goes into the Skep. Goodbye, adventurer!",
-    "options": [
-      {
-        "name": "(Continue)",
-        "action": [
-          { "deleteMapObject": -1 },
-          {
-          }
-        ]
-      }
-    ]
-  }
-]</property>
-    <property name="enemy" value="Wounded Sliver" />
-    <property name="spawn.Easy" type="bool" value="true" />
-    <property name="spawn.Hard" type="bool" value="true" />
-    <property name="spawn.Normal" type="bool" value="true" />
-   </properties>
-  </object>
-  <object id="59" template="../../../../../../common/maps/obj/gold.tx" x="34" y="655" visible="1">
-   <properties>
-    <property name="reward">[{
- "type": "gold", "count": 250
-}]</property>
-   </properties>
-  </object>
-  <object id="64" template="../../../../../../common/maps/obj/gold.tx" x="960" y="193" visible="1">
-   <properties>
-    <property name="reward">[{
- "type": "gold", "count": 250
-}]</property>
-   </properties>
-  </object>
-  <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="473.5" y="789.333" width="16" height="16" visible="1">
-   <properties>
-    <property name="enemy" value="Blue Sliver" />
-    <property name="spawn.Easy" type="bool" value="true" />
-    <property name="spawn.Hard" type="bool" value="true" />
-    <property name="spawn.Normal" type="bool" value="true" />
-    <property name="threatRange" type="int" value="30" />
-    <property name="waypoints" value="81,205,206,80,80,206,205" />
-   </properties>
-  </object>
-  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="638" y="624.5" width="16" height="16" visible="1">
-   <properties>
-    <property name="enemy" value="Blue Sliver" />
-    <property name="spawn.Easy" type="bool" value="true" />
-    <property name="spawn.Hard" type="bool" value="true" />
-    <property name="spawn.Normal" type="bool" value="true" />
-    <property name="threatRange" type="int" value="30" />
-    <property name="waypoints" value="83,202,203,162,203,202,83" />
-   </properties>
-  </object>
-  <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="884.5" y="555" width="16" height="16" visible="1">
-   <properties>
-    <property name="enemy" value="Blue Sliver" />
-    <property name="spawn.Easy" type="bool" value="true" />
-    <property name="spawn.Hard" type="bool" value="true" />
-    <property name="spawn.Normal" type="bool" value="true" />
-    <property name="threatRange" type="int" value="30" />
-    <property name="waypoints" value="85,224,85,225,226,225,84,225" />
-   </properties>
-  </object>
-  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="1374.33" y="741.333" width="16" height="16" visible="1">
-   <properties>
-    <property name="enemy" value="Blue Sliver" />
-    <property name="spawn.Easy" type="bool" value="true" />
-    <property name="spawn.Hard" type="bool" value="true" />
-    <property name="spawn.Normal" type="bool" value="true" />
-    <property name="threatRange" type="int" value="30" />
-    <property name="waypoints" value="184,220,223,172,172,222,221,172,223,220" />
-   </properties>
-  </object>
-  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="1344.83" y="963.667" width="16" height="16" visible="1">
-   <properties>
-    <property name="enemy" value="Blue Sliver" />
-    <property name="spawn.Easy" type="bool" value="true" />
-    <property name="spawn.Hard" type="bool" value="true" />
-    <property name="spawn.Normal" type="bool" value="true" />
-    <property name="threatRange" type="int" value="30" />
-    <property name="waypoints" value="185,186,185,184,178,184,185" />
-   </properties>
-  </object>
-  <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="1535" y="877" width="16" height="16" visible="1">
-   <properties>
-    <property name="enemy" value="Blue Sliver" />
-    <property name="spawn.Easy" type="bool" value="true" />
-    <property name="spawn.Hard" type="bool" value="true" />
-    <property name="spawn.Normal" type="bool" value="true" />
-    <property name="threatRange" type="int" value="30" />
-    <property name="waypoints" value="158,159,158,157,156,187,155,187,156,157" />
-   </properties>
-  </object>
-  <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="960.333" y="223.833" width="16" height="16" visible="1">
-   <properties>
-    <property name="defeatDialog">[
-   {
-   "action": [
-      {"advanceMapFlag":"commandersDefeated"},
-      {"deleteMapObject": -1}
-    ]
-   }
-]</property>
-    <property name="effect">{ "startBattleWithCard": [ "Metallic Sliver|TMP" ] }</property>
-    <property name="enemy" value="Metallic Sliver" />
-   <property name="effect">{ "startBattleWithCard": [ "Metallic Sliver|TMP", "Metallic Sliver|TMP", "Metallic Sliver|TMP" ] }</property>
-    <property name="spawn.Easy" type="bool" value="true" />
-    <property name="spawn.Hard" type="bool" value="true" />
-    <property name="spawn.Normal" type="bool" value="true" />
-   </properties>
-  </object>
-  <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="477.5" y="389.667" width="16" height="16" visible="1">
-   <properties>
-    <property name="enemy" value="Blue Sliver" />
-    <property name="spawn.Easy" type="bool" value="true" />
-    <property name="spawn.Hard" type="bool" value="true" />
-    <property name="spawn.Normal" type="bool" value="true" />
-    <property name="threatRange" type="int" value="30" />
-    <property name="waypoints" value="160,164,161,162,161,189" />
-   </properties>
-  </object>
-  <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="1378.5" y="1327.75" width="16" height="16" visible="1">
-   <properties>
-    <property name="dialog">[
-  {
-    "text": "Many mouths to feed, little time for smalltalk.",
-    "options": [
-      {
-        "name": "leave"
-      }
-    ]
-  }
-]</property>
-    <property name="enemy" value="Farmer" />
-    <property name="spawn.Easy" type="bool" value="true" />
-    <property name="spawn.Hard" type="bool" value="true" />
-    <property name="spawn.Normal" type="bool" value="true" />
-    <property name="threatRange" type="int" value="0" />
-    <property name="waypoints" value="90,89,88,91,88,89,90" />
-   </properties>
-  </object>
-  <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="492" y="1081.33" />
-  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="225.833" y="1333" />
-  <object id="76" template="../../../../../../common/maps/obj/waypoint.tx" x="650.5" y="1217.5" />
-  <object id="77" template="../../../../../../common/maps/obj/waypoint.tx" x="873" y="1207" />
-  <object id="78" template="../../../../../../common/maps/obj/waypoint.tx" x="777.5" y="1223" />
-  <object id="79" template="../../../../../../common/maps/obj/waypoint.tx" x="847" y="985.167" />
-  <object id="80" template="../../../../../../common/maps/obj/waypoint.tx" x="553" y="1100.5" />
-  <object id="81" template="../../../../../../common/maps/obj/waypoint.tx" x="448.5" y="818" />
-  <object id="82" template="../../../../../../common/maps/obj/waypoint.tx" x="362" y="645.167" />
-  <object id="83" template="../../../../../../common/maps/obj/waypoint.tx" x="578.333" y="746" />
-  <object id="84" template="../../../../../../common/maps/obj/waypoint.tx" x="735.5" y="584" />
-  <object id="85" template="../../../../../../common/maps/obj/waypoint.tx" x="937.333" y="530.667" />
-  <object id="86" template="../../../../../../common/maps/obj/waypoint.tx" x="1111" y="509.5" />
-  <object id="87" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="320.75" y="1104.33" width="16" height="16" visible="1">
-   <properties>
-    <property name="dialog">[
-  {
-    "text":"The inscription reads: Stranger, tell our kinsmen that we lay here, staying faithful to our fight against the sliver menace.",
-    "options":[
-      { "name":"Walk away" }
-]
-}
-]</property>
-   </properties>
-  </object>
-  <object id="88" template="../../../../../../common/maps/obj/waypoint.tx" x="703.25" y="1342.92" />
-  <object id="89" template="../../../../../../common/maps/obj/waypoint.tx" x="431.75" y="1341.75" />
-  <object id="90" template="../../../../../../common/maps/obj/waypoint.tx" x="432.5" y="1267" />
-  <object id="91" template="../../../../../../common/maps/obj/waypoint.tx" x="703.75" y="1373.75" />
-  <object id="92" template="../../../../../../common/maps/obj/entry_up.tx" x="208.75" y="1376.5" width="48" height="16">
-   <properties>
-    <property name="teleport" value="" />
-   </properties>
-  </object>
-  <object id="93" template="../../../../../../common/maps/obj/collision.tx" x="-0.75" y="1376" width="1600.5" height="16" />
-  <object id="94" template="../../../../../../common/maps/obj/collision.tx" x="-0.25" y="-15.5" width="1600.5" height="16" />
-  <object id="95" template="../../../../../../common/maps/obj/collision.tx" x="-16.75" y="-2" width="17" height="1395" />
-  <object id="97" template="../../../../../../common/maps/obj/collision.tx" x="1600" y="3" width="17" height="1395" />
-  <object id="98" template="../../../../../../common/maps/obj/enemy.tx" x="329.333" y="1215.33" width="16" height="16" visible="1">
-   <properties>
-    <property name="dialog">[
-  {
-    "text": "G'day to you, adventurer",
-    "options": [
-      {
-        "name": "leave"
-      }
-    ]
-  }
-]</property>
-    <property name="enemy" value="Knight" />
-    <property name="spawn.Easy" type="bool" value="true" />
-    <property name="spawn.Hard" type="bool" value="true" />
-    <property name="spawn.Normal" type="bool" value="true" />
-    <property name="threatRange" type="int" value="0" />
-   <property name="effect">{ "startBattleWithCard": [ "Plains|2ED","Darkest Hour|USG" ]
-}</property></properties>
-  </object>
-  <object id="99" template="../../../../../../common/maps/obj/enemy.tx" x="360" y="1215.33" width="16" height="16" visible="1">
-   <properties>
-    <property name="dialog">[
-  {
-    "text": "G'day to you, adventurer",
-    "options": [
-      {
-        "name": "leave"
-      }
-    ]
-  }
-]</property>
-    <property name="enemy" value="Knight" />
-    <property name="spawn.Easy" type="bool" value="true" />
-    <property name="spawn.Hard" type="bool" value="true" />
-    <property name="spawn.Normal" type="bool" value="true" />
-    <property name="threatRange" type="int" value="0" />
-   <property name="effect">{ "startBattleWithCard": [ "Plains|2ED","Darkest Hour|USG" ]
-}</property></properties>
-  </object>
-  <object id="100" template="../../../../../../common/maps/obj/enemy.tx" x="400" y="1216" width="16" height="16" visible="1">
-   <properties>
-    <property name="dialog">[
-  {
-    "text": "G'day to you, adventurer",
-    "options": [
-      {
-        "name": "leave"
-      }
-    ]
-  }
-]</property>
-    <property name="enemy" value="Knight" />
-    <property name="spawn.Easy" type="bool" value="true" />
-    <property name="spawn.Hard" type="bool" value="true" />
-    <property name="spawn.Normal" type="bool" value="true" />
-    <property name="threatRange" type="int" value="0" />
-   <property name="effect">{ "startBattleWithCard": [ "Plains|2ED","Darkest Hour|USG" ]
-}</property></properties>
-  </object>
-  <object id="101" template="../../../../../../common/maps/obj/enemy.tx" x="357.667" y="1185.66" width="16" height="16" visible="1">
-   <properties>
-    <property name="dialog">[
-  {
-    "condition": [
-      {
-        "checkMapFlag": "TalkToCommander",
-        "not": true
-      }
-    ],
-    "text": "Good day, Adventurer. As you can see, we have quite a situation right here",
-    "options": [
-      {
-        "name": "What is happening around here?",
-        "text": "Well, for an unknown reason, the Slivers of the Skep have become hostile and have been launching raiding parties into the various towns of Shandalar. General Jarkhald has summoned a large host to deal with this situation.",
-        "options": [
-          {
-            "name": "So you intend to just storm the hive, and hope for the best?",
-            "text": "Well, we tried that before but due to the huge amount of Slivers we haven't had much progress outside of walling off the hive to prevent further attacks against the surrounding villagers.",
-            "options": [
-              {
-                "name": "Any way I could be of use to deal with the Slivers?",
-                "text": "Well, Slivers form a hivemind, meaning that if their queen would somehow be neutralized, the sliver won't be a problem anymore. Sadly, we don't have a brave volunteer who is willing to enter the hive and deal with the queen ... ",
-                "options": [
-                  {
-                    "name": "I'll can deal with the queen, but what's in it for me?",
-                    "text": " Outside of the thanks of the people of Shandalar for dealing with these horrific creatures, I will give you a fancy new piece of armor that will help you in your upcoming adventures. Deal with the queen and come back to me to receive your reward. I'll have my men open the gate to let you enter the hive. Good luck Adventurer!",
-                    "options": [
-                      {
-                        "name": "End",
-                        "action": [
-                          { "deleteMapObject": 249 },
-                          {
-                            "setMapFlag": {
-                              "key": "TalkToCommander",
-                              "val": 1
-                            }
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "condition": [
-      { "checkMapFlag": "TalkToCommander" },
-      {
-        "checkMapFlag": "SliverQueenDefeated",
-        "not": true
-      }
-    ],
-    "text": "Those things are still creeping beyond the walls, I take it you haven't yet took care of the task?'",
-    "options": [
-      {
-        "name": "(Continue)"
-      }
-    ]
-  },
-  {
-    "condition": [
-      { "checkMapFlag": "TalkToCommander" },
-      { "checkQuestFlag": "SliverQueenDefeated" }
-    ],
-    "name": "The Slivers won't be a problem anymore.",
-    "text": "I didn't think you would actually be able to do that, as promised I'll give you the item I spoke of before. Thanks Adventurer. BOYS listen up! Our job here is done, the leader of these things is dead! Let's get out of this creepy place, Ales' on me!",
-    "options": [
-      {
-        "name": "(Continue)",
-        "options": [
-          {
-            "action": [
-                { "deleteMapObject": -1 },
-                { "deleteMapObject": 98 },
-                { "deleteMapObject": 99 },
-                { "deleteMapObject": 100 },
-                { "deleteMapObject": 238 },
-                { "deleteMapObject": 239 },
-                { "deleteMapObject": 240 },
-                { "addItem": "Armor of the Hivelord" }
-            ]
-          }
-        ]
-      }
-    ]
-  }
-]
-        </property>
-    <property name="displayNameOverride" value="Lord Garrin" />
-    <property name="enemy" value="Legionnaire" />
-    <property name="spawn.Easy" type="bool" value="true" />
-    <property name="spawn.Hard" type="bool" value="true" />
-    <property name="spawn.Normal" type="bool" value="true" />
-    <property name="threatRange" type="int" value="0" />
-   </properties>
-  </object>
+ 
   <object id="103" template="../../../../../../common/maps/obj/gold.tx" x="1527.67" y="945.667" visible="1">
    <properties>
     <property name="reward">[{
@@ -587,7 +180,7 @@
   </object>
   <object id="123" template="../../../../../../common/maps/obj/enemy.tx" x="1263" y="814" width="16" height="16" visible="1">
    <properties>
-    <property name="enemy" value="Green Sliver" />
+    <property name="enemy" value="Sliver_Green" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -597,7 +190,7 @@
   </object>
   <object id="124" template="../../../../../../common/maps/obj/enemy.tx" x="508" y="699" width="16" height="16" visible="1">
    <properties>
-    <property name="enemy" value="Green Sliver" />
+    <property name="enemy" value="Sliver_Green" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -607,7 +200,7 @@
   </object>
   <object id="125" template="../../../../../../common/maps/obj/enemy.tx" x="175.333" y="820" width="16" height="16" visible="1">
    <properties>
-    <property name="enemy" value="Green Sliver" />
+    <property name="enemy" value="Sliver_Green" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -617,7 +210,7 @@
   </object>
   <object id="126" template="../../../../../../common/maps/obj/enemy.tx" x="672" y="1069" width="16" height="16" visible="1">
    <properties>
-    <property name="enemy" value="Green Sliver" />
+    <property name="enemy" value="Sliver_Green" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -627,7 +220,7 @@
   </object>
   <object id="127" template="../../../../../../common/maps/obj/enemy.tx" x="642" y="925.667" width="16" height="16" visible="1">
    <properties>
-    <property name="enemy" value="Black Sliver" />
+    <property name="enemy" value="Sliver_Black" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -637,7 +230,7 @@
   </object>
   <object id="128" template="../../../../../../common/maps/obj/enemy.tx" x="1019" y="910" width="16" height="16" visible="1">
    <properties>
-    <property name="enemy" value="Black Sliver" />
+    <property name="enemy" value="Sliver_Black" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -647,7 +240,7 @@
   </object>
   <object id="129" template="../../../../../../common/maps/obj/enemy.tx" x="1157.33" y="591.333" width="16" height="16" visible="1">
    <properties>
-    <property name="enemy" value="Black Sliver" />
+    <property name="enemy" value="Sliver_Black" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -657,7 +250,7 @@
   </object>
   <object id="130" template="../../../../../../common/maps/obj/enemy.tx" x="530.334" y="440.666" width="16" height="16" visible="1">
    <properties>
-    <property name="enemy" value="Black Sliver" />
+    <property name="enemy" value="Sliver_Black" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -667,7 +260,7 @@
   </object>
   <object id="131" template="../../../../../../common/maps/obj/enemy.tx" x="776" y="395" width="20" height="17" visible="1">
    <properties>
-    <property name="enemy" value="White Sliver" />
+    <property name="enemy" value="Sliver_White" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -677,7 +270,7 @@
   </object>
   <object id="132" template="../../../../../../common/maps/obj/enemy.tx" x="286" y="483.5" width="20" height="17" visible="1">
    <properties>
-    <property name="enemy" value="Green Sliver" />
+    <property name="enemy" value="Sliver_Green" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -687,7 +280,7 @@
   </object>
   <object id="133" template="../../../../../../common/maps/obj/enemy.tx" x="0.666667" y="746.833" width="20" height="17" visible="1">
    <properties>
-    <property name="enemy" value="White Sliver" />
+    <property name="enemy" value="Sliver_White" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -697,7 +290,7 @@
   </object>
   <object id="134" template="../../../../../../common/maps/obj/enemy.tx" x="1401" y="1100.5" width="20" height="17" visible="1">
    <properties>
-    <property name="enemy" value="White Sliver" />
+    <property name="enemy" value="Sliver_White" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -707,7 +300,7 @@
   </object>
   <object id="135" template="../../../../../../common/maps/obj/enemy.tx" x="769" y="989.833" width="20" height="17" visible="1">
    <properties>
-    <property name="enemy" value="White Sliver" />
+    <property name="enemy" value="Sliver_White" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -717,7 +310,7 @@
   </object>
   <object id="136" template="../../../../../../common/maps/obj/enemy.tx" x="373" y="673.833" width="20" height="17" visible="1">
    <properties>
-    <property name="enemy" value="White Sliver" />
+    <property name="enemy" value="Sliver_White" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -727,7 +320,7 @@
   </object>
   <object id="137" template="../../../../../../common/maps/obj/enemy.tx" x="950.333" y="328.166" width="20" height="17" visible="1">
    <properties>
-    <property name="enemy" value="Black Sliver" />
+    <property name="enemy" value="Sliver_Black" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -737,7 +330,7 @@
   </object>
   <object id="139" template="../../../../../../common/maps/obj/enemy.tx" x="1116.67" y="1108.5" width="20" height="17" visible="1">
    <properties>
-    <property name="enemy" value="Red Sliver" />
+    <property name="enemy" value="Sliver_Red" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -747,7 +340,7 @@
   </object>
   <object id="140" template="../../../../../../common/maps/obj/enemy.tx" x="1021" y="1165.17" width="20" height="17" visible="1">
    <properties>
-    <property name="enemy" value="Red Sliver" />
+    <property name="enemy" value="Sliver_Red" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -757,7 +350,7 @@
   </object>
   <object id="141" template="../../../../../../common/maps/obj/enemy.tx" x="1018.67" y="752.833" width="20" height="17" visible="1">
    <properties>
-    <property name="enemy" value="Red Sliver" />
+    <property name="enemy" value="Sliver_Red" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -767,7 +360,7 @@
   </object>
   <object id="142" template="../../../../../../common/maps/obj/enemy.tx" x="758" y="590" width="16" height="16" visible="1">
    <properties>
-    <property name="enemy" value="Black Sliver" />
+    <property name="enemy" value="Sliver_Black" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -777,7 +370,7 @@
   </object>
   <object id="143" template="../../../../../../common/maps/obj/enemy.tx" x="106" y="885" width="16" height="16" visible="1">
    <properties>
-    <property name="enemy" value="Black Sliver" />
+    <property name="enemy" value="Sliver_Black" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -787,7 +380,7 @@
   </object>
   <object id="144" template="../../../../../../common/maps/obj/enemy.tx" x="365.333" y="1051" width="16" height="16" visible="1">
    <properties>
-    <property name="enemy" value="Black Sliver" />
+    <property name="enemy" value="Sliver_Black" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -797,7 +390,7 @@
   </object>
   <object id="145" template="../../../../../../common/maps/obj/enemy.tx" x="697" y="1227" width="16" height="16" visible="1">
    <properties>
-    <property name="enemy" value="Black Sliver" />
+    <property name="enemy" value="Sliver_Black" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -807,7 +400,7 @@
   </object>
   <object id="146" template="../../../../../../common/maps/obj/enemy.tx" x="899" y="1104" width="16" height="16" visible="1">
    <properties>
-    <property name="enemy" value="Black Sliver" />
+    <property name="enemy" value="Sliver_Black" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -817,7 +410,7 @@
   </object>
   <object id="147" template="../../../../../../common/maps/obj/enemy.tx" x="537.667" y="1058.5" width="20" height="17" visible="1">
    <properties>
-    <property name="enemy" value="White Sliver" />
+    <property name="enemy" value="Sliver_White" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -827,7 +420,7 @@
   </object>
   <object id="148" template="../../../../../../common/maps/obj/enemy.tx" x="343.334" y="772.5" width="20" height="17" visible="1">
    <properties>
-    <property name="enemy" value="White Sliver" />
+    <property name="enemy" value="Sliver_White" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -837,7 +430,7 @@
   </object>
   <object id="149" template="../../../../../../common/maps/obj/enemy.tx" x="167" y="595.833" width="20" height="17" visible="1">
    <properties>
-    <property name="enemy" value="White Sliver" />
+    <property name="enemy" value="Sliver_White" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -892,7 +485,7 @@
   </object>
   <object id="154" template="../../../../../../common/maps/obj/enemy.tx" x="1156.33" y="768.833" width="20" height="17" visible="1">
    <properties>
-    <property name="enemy" value="Red Sliver" />
+    <property name="enemy" value="Sliver_Red" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -935,7 +528,7 @@
   <object id="187" template="../../../../../../common/maps/obj/waypoint.tx" x="1281" y="545" />
   <object id="188" template="../../../../../../common/maps/obj/enemy.tx" x="1374" y="597.667" width="16" height="16" visible="1">
    <properties>
-    <property name="enemy" value="Red Sliver" />
+    <property name="enemy" value="Sliver_Red" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -999,7 +592,7 @@
   <object id="226" template="../../../../../../common/maps/obj/waypoint.tx" x="932.333" y="696.667" />
   <object id="227" template="../../../../../../common/maps/obj/enemy.tx" x="1071.67" y="510" width="16" height="16" visible="1">
    <properties>
-    <property name="enemy" value="Green Sliver" />
+    <property name="enemy" value="Sliver_Green" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -1011,7 +604,7 @@
   <object id="229" template="../../../../../../common/maps/obj/waypoint.tx" x="608.667" y="607.667" />
   <object id="230" template="../../../../../../common/maps/obj/enemy.tx" x="673.333" y="580.667" width="16" height="16" visible="1">
    <properties>
-    <property name="enemy" value="Blue Sliver" />
+    <property name="enemy" value="Sliver_Blue" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -1026,7 +619,7 @@
   <object id="236" template="../../../../../../common/maps/obj/waypoint.tx" x="1291" y="996.667" />
   <object id="237" template="../../../../../../common/maps/obj/enemy.tx" x="535" y="1132" width="16" height="16" visible="1">
    <properties>
-    <property name="enemy" value="Green Sliver" />
+    <property name="enemy" value="Sliver_Green" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />
@@ -1290,7 +883,7 @@
   </object>
   <object id="263" template="../../../../../../common/maps/obj/enemy.tx" x="1525.67" y="1161.67" width="16" height="16" visible="1">
    <properties>
-    <property name="enemy" value="Blue Sliver" />
+    <property name="enemy" value="Sliver_Blue" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />

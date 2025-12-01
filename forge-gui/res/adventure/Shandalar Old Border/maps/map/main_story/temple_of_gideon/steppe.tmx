@@ -222,7 +222,7 @@
   </object>
   <object id="193" template="../../../../../../../common/maps/obj/enemy.tx" x="326" y="474">
    <properties>
-    <property name="enemy" value="White Sliver" />
+    <property name="enemy" value="Sliver_White" />
     <property name="pursueRange" type="int" value="60" />
     <property name="threatRange" type="int" value="40" />
    </properties>
@@ -349,7 +349,7 @@
   </object>
   <object id="215" template="../../../../../../../common/maps/obj/enemy.tx" x="-224" y="320">
    <properties>
-    <property name="enemy" value="Kor Weaponsmith" />
+    <property name="enemy" value="Kor Warrior" />
     <property name="threatRange" type="int" value="70" />
    </properties>
   </object>
@@ -388,7 +388,7 @@
   </object>
   <object id="235" template="../../../../../../../common/maps/obj/enemy.tx" x="64" y="544">
    <properties>
-    <property name="enemy" value="Kor Weaponsmith" />
+    <property name="enemy" value="Kor Warrior" />
     <property name="threatRange" type="int" value="70" />
    </properties>
   </object>
@@ -604,7 +604,7 @@
   <object id="250" template="../../../../../../../common/maps/obj/waypoint.tx" x="-224" y="208" />
   <object id="259" template="../../../../../../../common/maps/obj/enemy.tx" x="464" y="256">
    <properties>
-    <property name="enemy" value="White Sliver" />
+    <property name="enemy" value="Sliver_White" />
     <property name="pursueRange" type="int" value="60" />
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="" />

@@ -15606,7 +15606,7 @@
     "name": "High Vampire",
     "sprite": "sprites/enemy/undead/vampire_2.atlas",
     "deck": [
-      "decks/elite/vampire.json"
+      "decks/standard/vampire.json"
     ],
     "ai": "",
     "flying": true,
@@ -23988,7 +23988,7 @@
     "name": "Rakdos Wizard",
     "sprite": "sprites/enemy/humanoid/human/wizard/rakdos_wiz.atlas",
     "deck": [
-      "decks/elite/rakdos_vamps.dck"
+      "decks/standard/rakdos_vamps.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -25730,7 +25730,7 @@
     "nameOverride": "Black Sliver",
     "sprite": "sprites/enemy/aberration/sliver_black.atlas",
     "deck": [
-      "decks/standard/sliver_black.dck"
+      "decks/elite/sliver_black.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -25810,7 +25810,7 @@
     "nameOverride": "Blue Sliver",
     "sprite": "sprites/enemy/aberration/sliver_blue.atlas",
     "deck": [
-      "decks/standard/sliver_blue.dck"
+      "decks/elite/sliver_blue.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -25890,7 +25890,7 @@
     "nameOverride": "Green Sliver",
     "sprite": "sprites/enemy/aberration/sliver_green.atlas",
     "deck": [
-      "decks/standard/sliver_green.dck"
+      "decks/elite/sliver_green.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -25972,7 +25972,7 @@
     "nameOverride": "Red Sliver",
     "sprite": "sprites/enemy/aberration/sliver_red.atlas",
     "deck": [
-      "decks/standard/sliver_red.dck"
+      "decks/elite/sliver_red.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -26052,7 +26052,7 @@
     "nameOverride": "White Sliver",
     "sprite": "sprites/enemy/aberration/sliver_white.atlas",
     "deck": [
-      "decks/standard/sliver_white.dck"
+      "decks/elite/sliver_white.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,

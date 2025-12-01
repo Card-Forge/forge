@@ -2225,7 +2225,7 @@
 	},
 	{
 		"name": "Grolnoks Bog",
-		"displayName": "Grolnok's Bog",
+		"displayName": "Grave Frog Bog",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
