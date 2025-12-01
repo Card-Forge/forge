@@ -10537,7 +10537,7 @@
     "name": "False Knight",
     "sprite": "sprites/enemy/humanoid/human/knight/false_knight.atlas",
     "deck": [
-      "decks/elite/death_knight.dck"
+      "decks/standard/death_knight.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -25694,7 +25694,7 @@
     "name": "Sliver",
     "sprite": "sprites/enemy/aberration/sliver.atlas",
     "deck": [
-      "decks/elite/sliver.json"
+      "decks/standard/sliver.json"
     ],
     "ai": "",
     "spawnRate": 0.5,
