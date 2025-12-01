@@ -10,15 +10,15 @@ Name=Tawnos
 2 Monkey Cage|MMQ
 2 Clay Statue|ATQ
 4 Clockwork Beast|LEA
-4 Clockwork Avian|LEG
+4 Clockwork Avian|ATQ
 4 Metalworker|UDS
 2 Riptide Replicator|ONS
-2 Mantis Engine|ULG
-4 Beast of Burden|UDS
+2 Mantis Engine|UDS
+4 Beast of Burden|ULG
 4 Sword of the Ages|LEG
 2 Tawnos's Coffin|ATQ
 2 Thopter Squadron|EXO
-2 Tetravus|LEG
+2 Tetravus|ATQ
 2 Masticore|UDS
 
 [StartInBattle_Reference]

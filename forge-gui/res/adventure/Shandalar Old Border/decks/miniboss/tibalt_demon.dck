@@ -1,18 +1,18 @@
 [metadata]
 Name=Specter's Horror
 [Main]
-20 Swamp
-4 Dark Ritual
-4 Mesmeric Fiend
-4 Faceless Butcher
-4 Laquatus's Champion
-4 Dread Reaper
-4 Dark Hatchling
-2 Hypnox
-2 Devouring Strossus
-4 Terror
-4 Fear
-4 Dark Banishing
+20 Swamp|2ED
+4 Dark Ritual|LEA
+4 Mesmeric Fiend|TOR
+4 Faceless Butcher|TOR
+4 Laquatus's Champion|TOR
+4 Dread Reaper|POR
+4 Dark Hatchling|USG
+2 Hypnox|TOR
+2 Devouring Strossus|INV
+4 Terror|LEA
+4 Fear|LEA
+4 Dark Banishing|ICE
 
 [StartInBattle_Reference]
 3 Swamp|2ED

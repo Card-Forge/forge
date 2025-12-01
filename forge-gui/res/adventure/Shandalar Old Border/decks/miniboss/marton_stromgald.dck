@@ -3,9 +3,9 @@ Name=Márton Stromgald
 [Main]
 20 Mountain|ICE
 4 Gauntlet of Might|LEA
-4 Firecat Blitz|ONS
-4 Goblin Offensive|ONS
-4 Siege-Gang Commander|ONS
+4 Firecat Blitz|JUD
+4 Goblin Offensive|USG
+4 Siege-Gang Commander|SCG
 2 Mogg Infestation|STH
 2 War Cadence|MMQ
 2 Mercadia's Downfall|MMQ
@@ -15,7 +15,7 @@ Name=Márton Stromgald
 2 Shivan Harvest|INV
 2 Insurrection|ONS
 4 Avalanche Riders|ULG
-4 Goblin Marshal|7ED
+4 Goblin Marshal|UDS
 
 [StartInBattle_Reference]
 1 Márton Stromgald|ICE
