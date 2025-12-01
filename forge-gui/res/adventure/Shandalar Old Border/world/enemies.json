@@ -397,7 +397,7 @@
     "nameOverride": "",
     "sprite": "sprites/enemy/dragon/adultgreendragon.atlas",
     "deck": [
-      "decks/standard/greendragon.dck"
+      "decks/elite/greendragon.dck"
     ],
     "ai": "",
     "flying": true,
@@ -14256,7 +14256,7 @@
     "name": "Goblin Stalker",
     "sprite": "sprites/enemy/humanoid/goblin/goblin_4.atlas",
     "deck": [
-      "decks/standard/evilgoblin.dck"
+      "decks/elite/evilgoblin.dck"
     ],
     "ai": "",
     "spawnRate": 1,
