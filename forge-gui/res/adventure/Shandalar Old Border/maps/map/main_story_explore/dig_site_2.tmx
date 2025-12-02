@@ -66,11 +66,9 @@
   </object>
   <object id="92" template="../../../../../../common/maps/obj/enemy.tx" x="96" y="161">
    <properties>
-    <property name="enemy" value="Black Golem" />
-    <property name="pursueRange" type="int" value="100" />
+    <property name="enemy" value="Lim-Dul the Necromancer" />
     <property name="threatRange" type="int" value="50" />
-    <property name="waypoints" value="99" />
-   </properties>
+   <property name="effect">{ "startBattleWithCard": [ "Drift of the Dead|ICE", "Ghostly Flame|ICE", "Kjeldoran Dead|ICE", "Legions of Lim-Dûl|ICE", "Lim-Dûl's Cohort|ICE", "Lim-Dûl's Hex|ICE", "Skeleton Ship|ICE", "Snow-Covered Island|ICE", "Snow-Covered Swamp|ICE", "Staff of the Ages|ICE" ] }</property></properties>
   </object>
   <object id="94" template="../../../../../../common/maps/obj/treasure.tx" x="346.5" y="119">
    <properties>
@@ -144,11 +142,5 @@
   <object id="113" template="../../../../../../common/maps/obj/collision.tx" x="480" y="-16" width="16" height="304" />
   <object id="114" template="../../../../../../common/maps/obj/collision.tx" x="0" y="272" width="480" height="16" />
   <object id="115" template="../../../../../../common/maps/obj/collision.tx" x="0" y="-16" width="480" height="16" />
-  <object id="116" template="../../../../../../common/maps/obj/enemy.tx" x="380" y="185">
-   <properties>
-    <property name="enemy" value="Lim-Dul the Necromancer" />
-    <property name="threatRange" type="int" value="50" />
-   <property name="effect">{ "startBattleWithCard": [ "Drift of the Dead|ICE", "Ghostly Flame|ICE", "Kjeldoran Dead|ICE", "Legions of Lim-D\u00fbl|ICE", "Lim-D\u00fbl's Cohort|ICE", "Lim-D\u00fbl's Hex|ICE", "Skeleton Ship|ICE", "Snow-Covered Island|ICE", "Snow-Covered Swamp|ICE", "Staff of the Ages|ICE" ] }</property></properties>
-  </object>
  </objectgroup>
 </map>
