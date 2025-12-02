@@ -1,6 +1,6 @@
 Name:Raven Eagle
 ManaCost:2 B
-Types:Enchantment Creature Bird Assassin
+Types:Creature Bird Assassin
 PT:2/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever this creature enters or attacks, exile up to one target card from a graveyard. If a creature card is exiled this way, create a Clue token. (It's an artifact with "{2}, Sacrifice this token: Draw a card.")
