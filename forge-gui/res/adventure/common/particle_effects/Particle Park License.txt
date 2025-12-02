@@ -1,10 +1,10 @@
-Particle Park Flame Pixel License
+Particle Park "Forge effects" License
 
 ------------------------------------------------------------------------------------------
 
 Copyright © 2019 Raymond Buckley
 
-Particle Park Flame Pixel can be used under the Creative Commons Attribution 4.0 International license.
+Particle Park Blood/Burnout/Dust/Dust Left/Dust Right/Explosion/Explosion Enemy/Fireball/Fireball Blue/Fireworks/Fireworks Tracer/Fireworks Tracer With Dazzler/Flame/Flame Pixel/Glass/Hallucinogen/Hallucinogen Full/Laser/Muzzle Flash/Muzzle Flash With Smoke/Pentagram/Pentagram Glitchy/Rain/Rain Cinematic/Smoke/Smoke Trail/Smoke Train/Snow Flakes/Sparks/Splash/Splash Pixel/Star/Star Trail/Starlight/Stink/Thrust/Thruster/Thruster Pixel/Trail/Trail Fart/Trail Pixel can be used under the Creative Commons Attribution 4.0 International license.
 
 See a human readable version here: https://creativecommons.org/licenses/by/4.0/
 
