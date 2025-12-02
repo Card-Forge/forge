@@ -625,8 +625,8 @@ public class CardFactory {
             }
 
             // SVars to add to clone
-            if (cause.hasParam("AddSVars") || cause.hasParam("GainTextSVars")) {
-                final String str = cause.getParamOrDefault("GainTextSVars", cause.getParam("AddSVars"));
+            if (cause.hasParam("AddSVars")) {
+                final String str = cause.getParam("AddSVars");
                 for (final String s : str.split(",")) {
                     if (origSVars.containsKey(s)) {
                         final String actualsVar = origSVars.get(s);
