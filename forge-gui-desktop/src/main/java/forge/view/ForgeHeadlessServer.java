@@ -3,7 +3,7 @@ package forge.view;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.JsonElement;
+
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 
@@ -14,8 +14,7 @@ import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
+
 import forge.game.combat.Combat;
 import forge.game.zone.ZoneType;
 import forge.game.player.Player;
@@ -34,7 +33,7 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
@@ -49,14 +48,12 @@ import java.util.stream.Collectors;
 public class ForgeHeadlessServer {
     private static final int PORT = 8080;
     private static final int HTTP_OK = 200;
-    private static final int HTTP_BAD_REQUEST = 400;
     private static final int HTTP_METHOD_NOT_ALLOWED = 405;
-    private static final int HTTP_INTERNAL_ERROR = 500;
+
     private static final int BUFFER_SIZE = 1024;
     private static final int WAIT_TIMEOUT_MS = 5000;
     private static final int SLEEP_INTERVAL_MS = 10;
     private static final int DECK_SIZE_SMALL = 20;
-    private static final int DECK_SIZE_LARGE = 60;
 
     private static volatile Game currentGame = null;
     private static final BlockingQueue<String> ACTION_QUEUE = new LinkedBlockingQueue<>();
@@ -501,25 +498,6 @@ public class ForgeHeadlessServer {
         exchange.sendResponseHeaders(statusCode, bytes.length);
         try (OutputStream os = exchange.getResponseBody()) {
             os.write(bytes);
-        }
-    }
-
-    /**
-     * Reads the request body from an HttpExchange.
-     * 
-     * @param exchange The HttpExchange object.
-     * @return The request body as a String.
-     * @throws IOException If an I/O error occurs.
-     */
-    private static String readRequestBody(final HttpExchange exchange) throws IOException {
-        try (InputStreamReader reader = new InputStreamReader(exchange.getRequestBody(), StandardCharsets.UTF_8)) {
-            final StringBuilder sb = new StringBuilder();
-            final char[] buffer = new char[BUFFER_SIZE];
-            int read;
-            while ((read = reader.read(buffer)) != -1) {
-                sb.append(buffer, 0, read);
-            }
-            return sb.toString();
         }
     }
 
