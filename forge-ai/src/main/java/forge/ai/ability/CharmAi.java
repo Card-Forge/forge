@@ -185,12 +185,12 @@ public class CharmAi extends SpellAbilityAi {
         }
         
         if (!ai.canLoseLife() || ai.cantLose()) {
-            // ai cant lose life, or cant lose the game, don't think about others
+            // ai can't lose life, or can't lose the game, don't think about others
             chosenList.add(allyTainted ? gain : lose);
         } else if (oppTainted || ai.getGame().isCardInPlay("Rain of Gore")) {
             // Rain of Gore does negate lifegain, so don't benefit the others
             // same for if a opponent does control Tainted Remedy
-            // but if ai cant gain life, the effects are negated
+            // but if ai can't gain life, the effects are negated
             chosenList.add(ai.canGainLife() ? lose : gain);
         } else if (ai.getGame().isCardInPlay("Sulfuric Vortex")) {
             // no life gain, but extra life loss.
@@ -206,7 +206,7 @@ public class CharmAi extends SpellAbilityAi {
             // critical Life try to gain more
             chosenList.add(gain);
         } else if (!ai.canGainLife() && aiLife == 14) {
-            // ai cant gain life, but try to avoid falling to 13
+            // ai can't gain life, but try to avoid falling to 13
             // but if a opponent does control Tainted Remedy its irrelevant
             chosenList.add(oppTainted ? lose : gain);
         } else if (allyTainted) {

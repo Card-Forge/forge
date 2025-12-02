@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="82">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="6" name="Collision" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1TEKgDAMheEuUjqLVxZcPJPgXTyHhBIIpSko2FfwfZBFB39SqCEQERFRT3tCF/ikjX3vINuW2H6vbSPuzrb16jtiHrE1vonam/bZTqW96DNtNQp03zWN3bemPOecx4Po0zY7nlqf3EflfN3nNSL3Vz6rQd0vT4z436D/ugGr1SsW
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1jFOAzEQBVA3i+MkEtVehZoTcA5EC8oRkFJwgDSU1HsBJA4AFTkDNUdAg/ns7MQ29sRLGo/0pc2m8NN41vJgjRlaWn4Sq6fO51SuT5POKY0x086Fjf/l2nd+zVwfjLLmsl2vwoYSLzKHrdSXM6M1bVrfo/PBs9a3D8zyBdtXROvjTkqv6JN83ye+V41PM4OwvS7zzxKtjfe/1GbXdW3Sh/l4tv53yezfrKbzUHNf0Tc5u7TGe+T85jbqXW/r+uS8xXxb5413Z2Okjfa1li/2LcDH5+be+WxFYrZjfCGTDPmoProx5EMfuS9k0/hi/Yrl9tz8Fox8/ZQtxyfP2hIb1Yv1MWZc73ITtqR8qfOl1PWdxWiDb1D4rhbT1LgPPLipDcH+ki/XyO8CyFw+pMT3tjwMvT+mj9KD2eOVu79/hd9juBnP8n8U99WytLS0TPMFcsnGeQ==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF9AQF/NjxYAB8ArjxYAFrBDCxwCBzIwh8ZUewV2Nx42CLe2Q3Dsb4zweGUxEQCyLFOwzQOv57OBgYejmIc9taHO6gpRu1OBkYtDmxy6WKMDDwQu3mx2M/Lw3dh55fcYkjh90zVgYGT1ZU91HbTeQCkNuesaKKUdt95AJ0t32AYmq7758kefpckNwWzQHBtHAfJaCJDeE2EBhM4YcMFKB1zAfKjaI62At02252iBtB7gOVLaDy8RwXdcxHDj9y8/JepDoa5LYvwPhm5aGeG6kFVkP9B8rX2lC3gdzYiaPMHyhwgB2CS8oh4XiWC4LZeQbaZRAAc59QBX3smw309xwgXgjEiwiEAcxtB6BpEhSGtAaWvAwMVkBsD8QOvNjVvAfmCX0uVLweGH4b6BSGhMAkYB44wEQ/+5KB/k8lonyAhZUBncsSRm4GBmZu+tm3hsQyiN7uIxXgcx+pfqWWXmQwlMOPFgAAW0VNMQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlr1uE0EQxycRcD5LFx+SMU5HgYJtgUhLT4OE+Oh4CxuIYj8AH1WMeASQqLATFINTQYEi8gjQgOkQEhBIaPgomNHO6Ob29nw+I4eGkUY+797O/u6/M3MH8N8OwpolgFYpff76mLlZG7HdyNj/ZunfMArbQghwNBx/70Ez2mx99Ld1gHd1M6+vNWPLyoXWjLiDMM52zQP4gTw/mUlfZ9kstBW+kjrXuQbAfCN57bJeaHwWjKuBm29SG6Gu7+vm97FaP00sbU2VP5J7eWKOmOkX+u+6yYmRyoG/4dP1oF1i3jqeXGOPEcuOD3B/DuCFF+lIlvdZ6QxdbFQPnypR/kwS8y4YrTQb/Rcdp+FLY+urGKTPJDGfI8sJL64bsX6F6Hzz8O0WANqsn91HyBpVgJNVc00xX2OdvhlTq8L46FBcx+X56fjWcP3qkTgfrT1VTd5L47drAHdq0dhLXP/KN7/bfpxRdBS2vPlH2vUw5qaX5Ftivrql3wNke1hzx7ONGM8fNteSf5P2AmJbLhrtOg79llL0s883TT/b7G+LfgZfj891C5+x4tBPrOHgzGvERr05DNPZdA8R7ehcF5mvafVhO/+kX9vvpW3Wb4d/XWyim177vZDOR/VK2rWVfvJ8xKffj58r5pf2sHtOlo3rV2mmtRuwP+XzTWM8KLY+6r/lRzXR9eP14WKcho3M1Uuz7Avqto9eRr2GXvx8ySQHNOO5heneRdN+83T9qC6OeSYXh17yPlvHluV09k3HeNY3D+XX2aLxb6pG9gumZrqqr1Q5/xaZrx3EY2lG17dMkDLn+uYRNrvnihGvzAkb1QXxlh36acaewymn0ubs+2w2nVNiup8Imx5zWW/M+yCP2Wyy/0qQHB8oNj2mbSVI7tFxjLnsGT7TOvuQ+0UncJ+bnWt6vKzG9vD5BhxvgzWjXjTgfTZy6HgF9bjKfhH9Q9Ewbipt9rgWspgrrPEZjLGLfonjEecT9As8Tj1pUvvIcS7zWllP9Ul+umj2W3No5GK+x9r8AStiA8g=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="183" y="481" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="176.25" y="138"/>
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="109.102" y="206.939"/>
+  <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="226.5" y="136.5"/>
+  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="179.598" y="328.385">
+   <properties>
+    <property name="enemy" value="Blue Golem"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="71,69"/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="219.533" y="151.634">
+   <properties>
+    <property name="enemy" value="Esper Artificer"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="118.183" y="301.039">
+   <properties>
+    <property name="enemy" value="Blue Golem"/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../../../common/maps/obj/collision.tx" x="-10.5" y="-17.5" width="652.5" height="16"/>
+  <object id="58" template="../../../../../../common/maps/obj/collision.tx" x="-1.75" y="480" width="653" height="16"/>
+  <object id="59" template="../../../../../../common/maps/obj/collision.tx" x="-16" y="-18.0415" width="16" height="516.083"/>
+  <object id="60" template="../../../../../../common/maps/obj/collision.tx" x="639.5" y="0.9585" width="16" height="502.083"/>
+  <object id="61" template="../../../../../../common/maps/obj/enemy.tx" x="302.341" y="280.952">
+   <properties>
+    <property name="enemy" value="Blue Golem"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="75,68"/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../../../common/maps/obj/enemy.tx" x="198.222" y="243.824">
+   <properties>
+    <property name="enemy" value="Blue Golem"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="70,74,69,74,73,74,69,74"/>
+   </properties>
+  </object>
+  <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="96.1197" y="239.789">
+   <properties>
+    <property name="enemy" value="Esper Artificer"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../../../common/maps/obj/booster.tx" x="239.385" y="255.931">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;MMQ&quot;, &quot;NMS&quot;, &quot;PCY&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MMQ&quot;, &quot;NMS&quot;, &quot;PCY&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MMQ&quot;, &quot;NMS&quot;, &quot;PCY&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="66" template="../../../../../../common/maps/obj/manashards.tx" x="241.807" y="288.62"/>
+  <object id="67" template="../../../../../../common/maps/obj/manashards.tx" x="274.495" y="123.159"/>
+  <object id="68" template="../../../../../../common/maps/obj/waypoint.tx" x="303.552" y="343.505"/>
+  <object id="69" template="../../../../../../common/maps/obj/waypoint.tx" x="200.239" y="369.737"/>
+  <object id="70" template="../../../../../../common/maps/obj/waypoint.tx" x="220.821" y="163.111"/>
+  <object id="71" template="../../../../../../common/maps/obj/waypoint.tx" x="209.118" y="210.732"/>
+  <object id="73" template="../../../../../../common/maps/obj/waypoint.tx" x="114.28" y="298.306"/>
+  <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="194.993" y="294.674"/>
+  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="290.234" y="232.121"/>
+  <object id="76" template="../../../../../../common/maps/obj/enemy.tx" x="389.914" y="408.48">
+   <properties>
+    <property name="enemy" value="Ooze"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="80,79,81,79"/>
+   </properties>
+  </object>
+  <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="481.121" y="330.591">
+   <properties>
+    <property name="enemy" value="Ooze"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../../../common/maps/obj/gold.tx" x="620.754" y="174.008"/>
+  <object id="79" template="../../../../../../common/maps/obj/waypoint.tx" x="412.111" y="400.004"/>
+  <object id="80" template="../../../../../../common/maps/obj/waypoint.tx" x="367.315" y="431.079"/>
+  <object id="81" template="../../../../../../common/maps/obj/waypoint.tx" x="443.993" y="385.476"/>
+ </objectgroup>
+</map>

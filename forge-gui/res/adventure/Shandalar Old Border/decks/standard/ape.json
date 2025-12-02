@@ -1,10 +1,43 @@
-{                                    
-"name":"Ape",
-  "template":
-  {
-   "count":60,
-   "colors":["Red","Green"],
-   "tribe":"Ape",        
-   "rares":0.6
-  }
+{
+  "name": "Ape",
+  "mainDeck": [
+    {
+      "count": 15,
+      "colors": [
+        "Red",
+        "Green"
+      ],
+      "subTypes": [
+        "Ape"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 23,
+      "colors": [
+        "Red",
+        "Green"
+      ],
+      "subTypes": [
+        "Ape"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 11,
+      "cardName": "Mountain|2ED"
+    },
+    {
+      "type": "card",
+      "count": 11,
+      "cardName": "Forest|2ED"
+    }
+  ]
 }

@@ -1,11 +1,36 @@
-{                                    
-"name":"Zombie good",
-  "template":
-  {
-   "count":60,
-   "colors":["Black"],
-   "tribe":"Zombie",        
-   "tribeCards":1.0,
-   "rares":0.8
-  }
+{
+  "name": "Zombie good",
+  "mainDeck": [
+    {
+      "count": 8,
+      "colors": [
+        "Black"
+      ],
+      "subTypes": [
+        "Zombie"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 30,
+      "colors": [
+        "Black"
+      ],
+      "subTypes": [
+        "Zombie"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 22,
+      "cardName": "Swamp|ICE"
+    }
+  ]
 }

@@ -1,12 +1,36 @@
-{                                    
-"name":"Plant",
-  "template":
-  {
-   "count":60,
-   "colors":["Green"],
-   "tribe":"Plant",        
-   "tribeCards":1.0,
-   "tribeSynergyCards":0.2,
-   "rares":0.4
-  }
+{
+  "name": "Plant",
+  "mainDeck": [
+    {
+      "count": 23,
+      "colors": [
+        "Green"
+      ],
+      "subTypes": [
+        "Plant"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 15,
+      "colors": [
+        "Green"
+      ],
+      "subTypes": [
+        "Plant"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 22,
+      "cardName": "Forest|4ED"
+    }
+  ]
 }

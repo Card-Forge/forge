@@ -33,7 +33,7 @@ public class StoreSVarEffect extends SpellAbilityEffect {
         }
 
         if (key == null || type == null || expr == null) {
-            System.out.println("SVar, Type and Expression paramaters required for StoreSVar. They are missing for " + source.getName());
+            System.out.println("SVar, Type and Expression parameters required for StoreSVar. They are missing for " + source.getName());
             return;
         }
 

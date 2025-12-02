@@ -5,7 +5,7 @@ PT:3/3
 K:Flying
 T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast an instant or sorcery spell, put a +1/+1 counter on this creature. Then this creature deals damage equal to its power to target opponent.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDamage
-SVar:DBDamage:DB$ DealDamage | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ X
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ X
 SVar:X:Count$CardPower
 SVar:BuffedBy:Spell.Instant,Spell.Sorcery
 DeckHas:Ability$Counters

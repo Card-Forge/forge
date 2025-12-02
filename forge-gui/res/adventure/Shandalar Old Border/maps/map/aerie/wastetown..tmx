@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="129">
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon.tsx"/>
+ <tileset firstgid="16001" source="../../../../../../common/maps/tileset/FarmFood.tsx"/>
+ <layer id="10" name="Collision" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztz0EKgDAMRNHu9QbqVT2Z3k1dBEQQ2yTFtPwH2SVhJiUAAIB+rcP3RLeNeXt75t4fcjuIiF1KO4hIXbQdRIQu05lhMebw+GFFD98fVvTw/WFFD98fHmZjBuu9lyuHNovl1ptkKc2jvavlnic3k+amtmcmzUTRQwfRQwfxlrWlDgAAtOYAbb4bLg==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt170JgDAQhuFDbBwgreNaOoMLuI7zSCob/3In5Iu8gacRlHshQjINZhMAAMBPbaNZlw6eb+RVu2NJz2rP+EWDektJg2KLZ37FlmiHSgsddNBBRysd0Zb8vsJ5KtJSe+YrZ+vuuarSjllg5ujeUu5421J7Ro+1998Llaj/0wAAtG4HkAhvWw==
+  </data>
+ </layer>
+ <layer id="8" name="Ground" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJy9WUtuU0EQHAMSfrG9ZJEVN4EDgE1kcQOTHfsQ5TCBAyBMwopLxAcIB4jzcY7Aa/mVXHS652ebkkaxnHk9XT013f3G834IP9tRgmU7bpsQfrXPPbR/5xU2NH4YNqat7aNm/flk9O/cR/qfYNF+vm9CFcDlov/UxpeR/QzjjOaMm3VMmAu+u1K2OYarLo4MKyaCRYTnbSQON53NVcaenbacLikesqbYlr237IOLcLzob2wIhP+Hyr1hOwD2X9a5NPas1J6GcLkz4sixzdEFcObMxTre/wVXhm52CY9HzKda+9DeNrY97d8U2knFFRqxzqDsm9ad2AI/zF8qv3P30dsTK5beGdYaXxh5ybMvcyddfuW8+z7tejG8s5YzH74hriejp3MlJyH3eBqx9sXbKyvu2o8YPP1q3zVieT31rLXutLHrHdvKsbsPlKwbi8v/BueKVI7zavsusDqsfxa1Nbev22f8hUcpF4k7OExobNN/CKxzW+JfDZcx+V/b6+T6VeKbN9+qW7wXVr7ZBT6/rtd8DnetJ09Lug6VnnHty8fD+LCe9/yfq56ZtRTrneQ8TTN6B8+PFIcSHuKHaMzTEXiu1HshgPOUy8XjkQuLB2vJ0xH6yzuHY+l52qYe6OdZS5Oupy3RBmxAiyW9X4pHKpfx91NVH2ryk+4vc1FTCwDWoFXntK5yeynU8dKer4YLP/Pq5eZcQg/eXUwuvPeBEr9y5zNwbrGu1xtxnYzd5WyDFJeaur8vpHpl9tUbpdC1WWtlGWzss2+PwdIy9+r6nXR2EMKnA9sWnrPylpydXWmS7wticcO5wf0hfJfxZhjCn6H/HO5PZb/E/qm6I7HWtGLZG4Tw/UUIv521AOt+V84z+6x9/zpYj28D3y644N6FOSyM77xYzro9P+7+encSuEdB7zdzfPZ8P3a0JRh3GuI8Z9XKaaTeyH48a8dztS7z0e8bM+W/+Mx13qopb4c+Fy9/i67vm82d36OhiRiP2D0Rc+CYI35YW+N6uOFSer+qe0or92kesbtHj0OqLgrOB2suet8teL+n8BlijcAv4YFYsSatuZoD453jh0Bi2hvE9RWDdy/KHDCwhqVB8SHGIQXRBfZE1tE5rnZoDszFm5+jCQ9SFx46Ljq3bTOuHR5WDs2pAylwn39k6K72t5Vzg0tKN3gXtPIA+4EczPpkHvJ96je5EvTUXkA3ON86v/HvObF7f+u9+y9EEbFd
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1UEKwjAQheHUjRTEXYLiol6kZuEVPIZ4FPEOHtAr2BGnibW2SYRmKO+DEQQL82NClQIAAACYp1uplF6GzZBrOc2+fXi/03Z8Qlpy4L0eAQ00/jNSdPcJ6ZDWktrQbcmN7wOL7fDvS05j97qP1I5fu9HsNm6Oa9n/x1BHtwkdcjqk33OW2rDa5++4VM2Hdt9T3h9F8/y5yrJ+izpqo14tse8RQg3WyOgg3BKDG4iUDlKbuGet93tJHf/I3fEl8GwVkWdwanS2Fvpz7u85GDc28gwCAADA/D0BI19YEg==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="50" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlr9KA0EQh4crjU2MAdPcrWB1nRGsLPYVFGs12mrKPIDvYKuJVvoGvoQKCupTWNo6i1ludnJ/EgLuIPPBj+MumzAfuzcTAEVRFEVRlP9JPwVomeZsp9FKbMQ5rBqAJ7w+1+QFs2JkulCHe7we9ors5wAHeXH/YGS6cIevXpgLdBjmoZs0l9J9aIc1ex/6zK2R5DLMys+SSx18X86zv6i2GufhauAOTS50jf+NmJR50DP0moTZTQqP77ZcD/6OP24UGXdDj6s1uR7cpc5jpyPbg7rwc/WWzK6V4uH7Jp15vNfSezoX+9N+G9vD9c1PMgPozOPvinfya/zseZ/27diMstDlsvWbql7sPqMOo8h74XF1cJcqB3+WqIM0D+pS95+dO0jx6Jiwpo+0OXR918Q2KOAu80aSg2dRF4kOHueyzuLgzyQ7LMrWXuwKlmeADqeYM0EuqQXIMAazaef7zgTrv8XcCfI4sgDHmBPMwMatZRmuLcANZoyZ2Li1KIoyyw87O7ox
+  </data>
+ </layer>
+ <layer id="9" name="Shades" width="50" height="40" opacity="0.6">
+  <data encoding="base64" compression="zlib">
+   eJztzjENAAAIA7D9PPhXiwwCaRU0AQAAAAAALqjeHgDAbwPnlAAc
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="90" template="../../../../../../common/maps/obj/door_left.tx" x="397.5" y="496.5" width="20" height="20">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/aerie/aerie_1.tmx"/>
+    <property name="teleportObjectId" value="38"/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../../../common/maps/obj/enemy.tx" x="138.284" y="133.754">
+   <properties>
+    <property name="enemy" value="Griffin"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="118,121,120"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../../../common/maps/obj/enemy.tx" x="336.16" y="575.997">
+   <properties>
+    <property name="enemy" value="Aerie Guard"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../../../common/maps/obj/gold.tx" x="709.083" y="51.833"/>
+  <object id="95" template="../../../../../../common/maps/obj/gold.tx" x="23.894" y="33.341"/>
+  <object id="97" template="../../../../../../common/maps/obj/enemy.tx" x="400.5" y="513.333">
+   <properties>
+    <property name="enemy" value="Artifact Warrior"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="99" template="../../../../../../common/maps/obj/enemy.tx" x="129.829" y="248.132">
+   <properties>
+    <property name="enemy" value="Scarab"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="119,120,119,117"/>
+   </properties>
+  </object>
+  <object id="100" template="../../../../../../common/maps/obj/enemy.tx" x="407.538" y="233.709">
+   <properties>
+    <property name="enemy" value="Griffin"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="102" template="../../../../../../common/maps/obj/gold.tx" x="431.962" y="417.046"/>
+  <object id="103" template="../../../../../../common/maps/obj/gold.tx" x="414.938" y="417.887"/>
+  <object id="104" template="../../../../../../common/maps/obj/door_left.tx" x="386.212" y="335.546" width="20" height="39.5">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/aerie/aerie_4.tmx"/>
+    <property name="teleportObjectId" value="88"/>
+   </properties>
+  </object>
+  <object id="105" template="../../../../../../common/maps/obj/manashards.tx" x="371.712" y="418.546"/>
+  <object id="106" template="../../../../../../common/maps/obj/manashards.tx" x="393.712" y="418.546"/>
+  <object id="108" template="../../../../../../common/maps/obj/enemy.tx" x="471.212" y="379.546">
+   <properties>
+    <property name="enemy" value="Griffin"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="110" template="../../../../../../common/maps/obj/booster.tx" x="372.5" y="403">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;TMP&quot;, &quot;STH&quot;, &quot;EXO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;TMP&quot;, &quot;STH&quot;, &quot;EXO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;TMP&quot;, &quot;STH&quot;, &quot;EXO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="111" template="../../../../../../common/maps/obj/booster.tx" x="394.5" y="402">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;TMP&quot;, &quot;STH&quot;, &quot;EXO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;TMP&quot;, &quot;STH&quot;, &quot;EXO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;TMP&quot;, &quot;STH&quot;, &quot;EXO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="112" template="../../../../../../common/maps/obj/booster.tx" x="415.5" y="403.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;TMP&quot;, &quot;STH&quot;, &quot;EXO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;TMP&quot;, &quot;STH&quot;, &quot;EXO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;TMP&quot;, &quot;STH&quot;, &quot;EXO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="113" template="../../../../../../common/maps/obj/enemy.tx" x="327" y="378.5">
+   <properties>
+    <property name="enemy" value="Griffin"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="114" template="../../../../../../common/maps/obj/enemy.tx" x="733" y="275">
+   <properties>
+    <property name="enemy" value="Griffin"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="123,124,122"/>
+   </properties>
+  </object>
+  <object id="115" template="../../../../../../common/maps/obj/enemy.tx" x="608.5" y="151.5">
+   <properties>
+    <property name="enemy" value="Scarab"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="125,123,127,128,122,128"/>
+   </properties>
+  </object>
+  <object id="116" template="../../../../../../common/maps/obj/shop.tx" x="319" y="568">
+   <properties>
+    <property name="commonShopList" value="Plains"/>
+    <property name="noRestock" type="bool" value="true"/>
+    <property name="signXOffset" type="float" value="-32"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="117" template="../../../../../../common/maps/obj/waypoint.tx" x="70" y="217.5"/>
+  <object id="118" template="../../../../../../common/maps/obj/waypoint.tx" x="329.5" y="46"/>
+  <object id="119" template="../../../../../../common/maps/obj/waypoint.tx" x="181.5" y="367.5"/>
+  <object id="120" template="../../../../../../common/maps/obj/waypoint.tx" x="51.5" y="488.5"/>
+  <object id="121" template="../../../../../../common/maps/obj/waypoint.tx" x="56.5" y="59.5"/>
+  <object id="122" template="../../../../../../common/maps/obj/waypoint.tx" x="706.5" y="79.5"/>
+  <object id="123" template="../../../../../../common/maps/obj/waypoint.tx" x="577.5" y="322.5"/>
+  <object id="124" template="../../../../../../common/maps/obj/waypoint.tx" x="749.5" y="490"/>
+  <object id="125" template="../../../../../../common/maps/obj/waypoint.tx" x="571" y="203.5"/>
+  <object id="126" template="../../../../../../common/maps/obj/waypoint.tx" x="623" y="614"/>
+  <object id="127" template="../../../../../../common/maps/obj/waypoint.tx" x="645" y="159"/>
+  <object id="128" template="../../../../../../common/maps/obj/waypoint.tx" x="712" y="158.5"/>
+ </objectgroup>
+</map>

@@ -2,6 +2,6 @@ Name:Slimy Kavu
 ManaCost:2 R
 Types:Creature Kavu
 PT:2/2
-A:AB$ Animate | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ Swamp | RemoveLandTypes$ True | SpellDescription$ Target land becomes a Swamp until end of turn.
+A:AB$ Animate | Cost$ T | ValidTgts$ Land | Types$ Swamp | RemoveLandTypes$ True | SpellDescription$ Target land becomes a Swamp until end of turn.
 AI:RemoveDeck:All
 Oracle:{T}: Target land becomes a Swamp until end of turn.

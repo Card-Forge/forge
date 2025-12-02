@@ -17,6 +17,7 @@
  */
 package forge.ai.ability;
 
+import com.google.common.collect.Iterables;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.*;
@@ -27,7 +28,6 @@ import forge.util.Aggregates;
 
 import java.util.List;
 
-
 /**
  * <p>
  * AbilityFactory_Counters class.
@@ -37,7 +37,6 @@ import java.util.List;
  * @version $Id$
  */
 public abstract class CountersAi extends SpellAbilityAi {
-    // An AbilityFactory subclass for Putting or Removing Counters on Cards.
 
     /**
      * <p>
@@ -89,7 +88,7 @@ public abstract class CountersAi extends SpellAbilityAi {
      * @return a {@link Card} object.
      */
     public static Card chooseBoonTarget(final CardCollectionView list, final String type) {
-        Card choice = null;
+        Card choice;
 
         if (type.equals("P1P1")) {
             // TODO look for modified
@@ -99,16 +98,23 @@ public abstract class CountersAi extends SpellAbilityAi {
                 // We'd only get here if list isn't empty, maybe we're trying to animate a land?
                 choice = ComputerUtilCard.getBestLandToAnimate(list);
             }
-        } else if (type.equals("DIVINITY")) {
-            final CardCollection boon = CardLists.filter(list, c -> c.getCounters(CounterEnumType.DIVINITY) == 0);
+        } else if (type.equals("CHARGE")) {
+            final CardCollection boon = CardLists.filter(list, c -> c.getCounters(CounterEnumType.CHARGE) < c.getKeywordMagnitude(Keyword.STATION) || c.getOracleText().matches(".*(for|number|emove) \\w+ (?:charge )counter.*"));
             choice = ComputerUtilCard.getMostExpensivePermanentAI(boon);
         } else if (CounterType.getType(type).isKeywordCounter()) {
             choice = ComputerUtilCard.getBestCreatureAI(CardLists.getNotKeyword(list, type));
         } else {
-            // The AI really should put counters on cards that can use it.
-            // Charge counters on things with Charge abilities, etc. Expand
-            // these above
-            choice = Aggregates.random(list);
+            CardCollectionView pref = list;
+            if (Iterables.any(CounterEnumType.values, ct -> ct.toString().equals(type))) {
+                pref = CardLists.filter(list, c -> c.getCounters(CounterEnumType.getType(type)) == 0);
+            }
+            if (type.equals("DIVINITY") || type.equals("SHIELD")) {
+                choice = ComputerUtilCard.getMostExpensivePermanentAI(CardLists.filter(pref, Card::canBeDestroyed));
+            } else if (pref.isEmpty()) {
+                choice = Aggregates.random(list);
+            } else {
+                choice = ComputerUtilCard.getMostExpensivePermanentAI(pref);
+            }
         }
         return choice;
     }

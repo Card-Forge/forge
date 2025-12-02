@@ -1,20 +1,19 @@
 [metadata]
-Name=hydraboss
+Name=The Hydra of Shandalar
 [Main]
-1 Plains|ODY|3
-2 Beast Attack|ODY|1
-2 Call of the Herd|ODY|1
-2 Elephant Guide|JUD|1
-2 Giant Growth|4ED|1
-2 Krosan Beast|ODY|1
-2 Life Burst|ODY|1
-2 Llanowar Elves|4ED|1
-2 Nantuko Disciple|ODY|1
-20 Forest|ODY|3
-4 Brushland|ICE|1
-4 Explosive Vegetation|ONS|1
-4 Fertile Ground|BRB|1
-4 Genesis|JUD|1
-4 Krosan Warchief|SCG|1
-4 Nantuko Mentor|ODY|1
-4 Wild Mongrel|ODY|1
+4 Taiga|LEA
+8 Forest|LEA
+8 Mountain|LEA
+4 Rock Hydra|LEA
+4 Spitting Hydra|STH
+4 Balduvian Hydra|ICE
+2 Ancient Hydra|MIR
+2 Molten Hydra|ULG
+4 Krakilin|TMP
+4 Ivy Elemental|ODY
+2 Hurricane|LEA
+2 Earthquake|LEA
+2 Savage Twister|MIR
+2 New Frontiers|ODY
+4 Rolling Thunder|TMP
+4 Rampant Growth|MIR

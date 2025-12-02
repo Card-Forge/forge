@@ -30,6 +30,9 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingLabel;
+
+import java.util.EnumSet;
+
 import forge.Forge;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.data.AdventureQuestData;
@@ -515,10 +518,25 @@ public class GameHUD extends Stage {
             }
     }
 
+    private static final EnumSet<MusicPlaylist> PLAYLIST_OVERWORLD = EnumSet.of(MusicPlaylist.WHITE, MusicPlaylist.BLUE, MusicPlaylist.BLACK, MusicPlaylist.RED, MusicPlaylist.GREEN, MusicPlaylist.COLORLESS);
+
     void changeBGM(MusicPlaylist playlist) {
-        if (playlist != SoundSystem.instance.getCurrentPlaylist()) {
-            targetPlaylist = playlist;
+        MusicPlaylist currentPlaylist = SoundSystem.instance.getCurrentPlaylist();
+        if (playlist == currentPlaylist) {
+            return;
         }
+        //If we're going from an interior to an exterior or vice versa, skip the fade out.
+        if(PLAYLIST_OVERWORLD.contains(playlist) != PLAYLIST_OVERWORLD.contains(currentPlaylist)) {
+            if(SoundSystem.instance.getShelvedPlaylist() == playlist)
+                fadeTransition = 0.2f; // Resuming from the middle - do a little bit of fade in to reduce the abruptness.
+            else
+                fadeTransition = 1f; // Playing from the start, no fade needed.
+            SoundSystem.instance.setBackgroundMusic(playlist, true);
+            fadeAudio(fadeTransition * fadeDialog);
+            targetPlaylist = null;
+        }
+        else //Otherwise, fade from one to the other.
+            targetPlaylist = playlist;
     }
 
     //Fade for transitioning between playlists.
