@@ -95,3 +95,4 @@ forge-gui/tools/PerSetTrackingResults
 __pycache__
 *.pyc
 headless_game.log
+travis_test_file.py

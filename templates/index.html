@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forge Manual Agent</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .panel {
+            flex: 1;
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        pre {
+            background: #eee;
+            padding: 10px;
+            overflow-x: auto;
+            max-height: 500px;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            margin: 5px 0;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .action-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        #status {
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .waiting {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .idle {
+            background-color: #e2e3e5;
+            color: #383d41;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Forge Manual Agent Interface</h1>
+
+    <div id="status" class="idle">Status: Idle (Waiting for Forge...)</div>
+
+    <div class="container" id="main-ui" style="display:none;">
+        <div class="panel">
+            <h2>Game State</h2>
+            <pre id="game-state">No data</pre>
+        </div>
+
+        <div class="panel">
+            <h2>Decision</h2>
+            <div id="action-buttons"></div>
+
+            <h3>Manual JSON Response</h3>
+            <textarea id="manual-json"></textarea>
+            <button onclick="sendManualResponse()">Send JSON Response</button>
+        </div>
+    </div>
+
+    <script>
+        let currentRequest = null;
+
+        function updateStatus(waiting) {
+            const el = document.getElementById('status');
+            const mainUi = document.getElementById('main-ui');
+            if (waiting) {
+                el.textContent = "Status: ACTION REQUIRED";
+                el.className = "waiting";
+                mainUi.style.display = "flex";
+            } else {
+                el.textContent = "Status: Idle (Waiting for Forge...)";
+                el.className = "idle";
+                // Don't hide UI immediately so user can see last state, or hide it? 
+                // Let's keep it visible but maybe grayed out? For now just keep it.
+            }
+        }
+
+        async function poll() {
+            try {
+                const res = await fetch('/api/poll');
+                const data = await res.json();
+
+                if (data.waiting) {
+                    if (!currentRequest) { // New request
+                        currentRequest = data.data;
+                        renderRequest(currentRequest);
+                        updateStatus(true);
+                    }
+                } else {
+                    if (currentRequest) { // Request processed
+                        currentRequest = null;
+                        updateStatus(false);
+                    }
+                }
+            } catch (e) {
+                console.error("Poll error", e);
+            }
+            setTimeout(poll, 1000);
+        }
+
+        function renderRequest(req) {
+            // Render Game State
+            document.getElementById('game-state').textContent = JSON.stringify(req.gameState, null, 2);
+
+            // Render Actions
+            const container = document.getElementById('action-buttons');
+            container.innerHTML = '';
+
+            // Set default manual JSON
+            let defaultResponse = {};
+
+            if (req.requestType === 'action' || req.requestType === 'possible_actions') {
+                const decisionType = req.requestType;
+                document.getElementById('manual-json').value = JSON.stringify({
+                    decision: { type: decisionType, index: 0 }
+                }, null, 2);
+
+                req.actionState.actions.forEach((action, index) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'action-btn';
+                    let label = `[${index}] ${action.type}`;
+                    if (action.card_name) label += ` - ${action.card_name}`;
+                    if (action.ability_description) label += ` (${action.ability_description})`;
+                    if (action.mana_cost) label += ` [${action.mana_cost}]`;
+
+                    btn.textContent = label;
+                    btn.onclick = () => sendAction(index, decisionType);
+                    container.appendChild(btn);
+                });
+            } else if (req.requestType === 'declare_attackers') {
+                document.getElementById('manual-json').value = JSON.stringify({
+                    decision: { type: "declare_attackers", attackers: [] }
+                }, null, 2);
+                container.innerHTML = '<p>Use Manual JSON for combat declarations.</p>';
+            } else if (req.requestType === 'declare_blockers') {
+                document.getElementById('manual-json').value = JSON.stringify({
+                    decision: { type: "declare_blockers", blocks: [] }
+                }, null, 2);
+                container.innerHTML = '<p>Use Manual JSON for combat declarations.</p>';
+            } else if (req.requestType === 'target') {
+                document.getElementById('manual-json').value = JSON.stringify({
+                    decision: { type: "target", index: 0 } // or indices: []
+                }, null, 2);
+
+                req.actionState.targets.forEach((target, index) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'action-btn';
+                    btn.textContent = `[${index}] ${target.type} - ${target.name} (ID: ${target.id})`;
+                    btn.onclick = () => sendAction(index, "target");
+                    container.appendChild(btn);
+                });
+            } else {
+                container.innerHTML = '<p>Unknown request type: ' + req.requestType + '</p>';
+                document.getElementById('manual-json').value = JSON.stringify(req, null, 2);
+            }
+        }
+
+        async function sendAction(index, type) {
+            const response = {
+                decision: {
+                    type: type,
+                    index: index
+                }
+            };
+            await postResponse(response);
+        }
+
+        async function sendManualResponse() {
+            try {
+                const json = document.getElementById('manual-json').value;
+                const response = JSON.parse(json);
+                await postResponse(response);
+            } catch (e) {
+                alert("Invalid JSON");
+            }
+        }
+
+        async function postResponse(response) {
+            await fetch('/api/respond', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(response)
+            });
+            currentRequest = null;
+            updateStatus(false);
+        }
+
+        // Start polling
+        poll();
+    </script>
+</body>
+
+</html>

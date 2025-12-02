@@ -21,6 +21,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.model.FModel;
 import forge.ai.ComputerUtilAbility;
+import forge.ai.AIAgentClient;
 
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiBase;
@@ -48,10 +49,14 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import forge.game.event.*;
+import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
+import forge.game.card.CardLists;
 import forge.game.GameEntity;
 import forge.util.collect.FCollectionView;
 import forge.game.player.DelayedReveal;
 import java.util.Map;
+import java.util.UUID;
 
 public class ForgeHeadless {
     // ANSI Color Constants
@@ -73,6 +78,11 @@ public class ForgeHeadless {
     private static volatile String currentPromptType = "none"; // "action", "target", "none"
     private static volatile JsonObject currentPromptData = new JsonObject();
 
+    // AI Agent Configuration
+    private static volatile String aiAgentEndpoint = null;
+    private static volatile String gameId = null;
+    private static volatile AIAgentClient aiAgentClient = null;
+
     public static void main(String[] args) {
         System.err.println("DEBUG: ForgeHeadless main started");
 
@@ -81,7 +91,8 @@ public class ForgeHeadless {
         boolean player2IsHuman = false; // default
         boolean verboseLogging = false; // default
 
-        for (String arg : args) {
+        for (int i = 0; i < args.length; i++) {
+            String arg = args[i];
             if (arg.equals("--both-human")) {
                 player1IsHuman = true;
                 player2IsHuman = true;
@@ -97,10 +108,28 @@ public class ForgeHeadless {
             } else if (arg.equals("--help")) {
                 printUsage();
                 System.exit(0);
+            } else if (arg.equals("--ai-endpoint") && i + 1 < args.length) {
+                aiAgentEndpoint = args[++i];
+            } else if (arg.startsWith("--ai-endpoint=")) {
+                aiAgentEndpoint = arg.substring("--ai-endpoint=".length());
+            } else if (arg.equals("--game-id") && i + 1 < args.length) {
+                gameId = args[++i];
+            } else if (arg.startsWith("--game-id=")) {
+                gameId = arg.substring("--game-id=".length());
             }
         }
 
-        // Start HTTP Server
+        // Initialize AI Agent Client if endpoint is configured
+        if (aiAgentEndpoint != null && !aiAgentEndpoint.isEmpty()) {
+            aiAgentClient = new AIAgentClient(aiAgentEndpoint);
+            System.out.println("AI Agent mode enabled. Endpoint: " + aiAgentEndpoint);
+            if (gameId == null) {
+                gameId = UUID.randomUUID().toString();
+            }
+            System.out.println("Game ID: " + gameId);
+        }
+
+        // Start HTTP Server (still needed for fallback and monitoring)
         startHttpServer();
 
         GuiBase.setInterface(new HeadlessGui());
@@ -154,7 +183,7 @@ public class ForgeHeadless {
     private static void startHttpServer() {
         try {
             HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
-            
+
             // GET /state
             server.createContext("/state", exchange -> {
                 if (!"GET".equals(exchange.getRequestMethod())) {
@@ -279,14 +308,22 @@ public class ForgeHeadless {
     private static void printUsage() {
         System.out.println("ForgeHeadless - Headless Magic: The Gathering Game Engine");
         System.out.println("\nUsage: java -cp <jar> forge.view.ForgeHeadless [options]");
-        System.out.println("\nOptions:");
+        System.out.println("\nPlayer Options:");
         System.out.println("  --both-human    Both players are human-controlled (interactive)");
         System.out.println("  --both-ai       Both players are AI-controlled (simulation mode)");
         System.out.println("  --p1-ai         Player 1 is AI-controlled (default: human)");
         System.out.println("  --p2-human      Player 2 is human-controlled (default: AI)");
+        System.out.println("\nAI Agent Options:");
+        System.out.println("  --ai-endpoint <url>   URL of external AI agent for decision-making");
+        System.out.println("  --game-id <id>        Unique game ID for tracking (auto-generated if not provided)");
+        System.out.println("\nOther Options:");
         System.out.println("  --verbose       Enable verbose logging of game events");
         System.out.println("  --help          Show this help message");
         System.out.println("\nHTTP Server running on port " + PORT);
+        System.out.println("\nAI Agent Mode:");
+        System.out.println("  When --ai-endpoint is provided, the game will call out to the specified");
+        System.out.println("  endpoint for all player decisions instead of waiting for HTTP input.");
+        System.out.println("  The endpoint receives game state + action options and returns decisions.");
     }
 
     private static void initialize() {
@@ -462,11 +499,172 @@ public class ForgeHeadless {
             return true; // Always keep hand
         }
 
-        // TODO: Implement manual control for declaring attackers and blockers.
-        // Currently, this class extends PlayerControllerAi, which handles combat automatically.
-        // To support manual combat, we need to override declareAttackers, declareBlockers, etc.
+        @Override
+        public void declareAttackers(Player attacker, Combat combat) {
+            if (aiAgentClient != null) {
+                try {
+                    JsonObject gameState = extractGameState(currentGame);
+                    JsonObject actionState = new JsonObject();
 
-        private <T extends GameEntity> JsonObject createTargetOptionsJson(FCollectionView<T> optionList, int min, int max, String title) {
+                    // Attackers
+                    JsonArray attackersJson = new JsonArray();
+                    CardCollection potentialAttackers = CardLists.filter(attacker.getCreaturesInPlay(),
+                            c -> CombatUtil.canAttack(c));
+                    for (int i = 0; i < potentialAttackers.size(); i++) {
+                        Card c = potentialAttackers.get(i);
+                        JsonObject att = new JsonObject();
+                        att.addProperty("index", i);
+                        att.addProperty("id", c.getId());
+                        att.addProperty("name", c.getName());
+                        att.addProperty("power", c.getNetPower());
+                        att.addProperty("toughness", c.getNetToughness());
+                        attackersJson.add(att);
+                    }
+                    actionState.add("attackers", attackersJson);
+
+                    // Defenders
+                    JsonArray defendersJson = new JsonArray();
+                    List<GameEntity> defenders = new ArrayList<GameEntity>();
+                    for (GameEntity d : combat.getDefenders()) {
+                        defenders.add(d);
+                    }
+                    for (int i = 0; i < defenders.size(); i++) {
+                        GameEntity d = defenders.get(i);
+                        JsonObject def = new JsonObject();
+                        def.addProperty("index", i);
+                        def.addProperty("id", d.getId());
+                        def.addProperty("name", d.getName());
+                        def.addProperty("type", d instanceof Player ? "Player" : "Planeswalker");
+                        defendersJson.add(def);
+                    }
+                    actionState.add("defenders", defendersJson);
+
+                    JsonObject context = new JsonObject();
+                    context.addProperty("requestType", "declare_attackers");
+                    context.addProperty("phase", currentGame.getPhaseHandler().getPhase().toString());
+                    context.addProperty("turn", currentGame.getPhaseHandler().getTurn());
+                    context.addProperty("playerName", player.getName());
+
+                    AIAgentClient.AIAgentRequest request = new AIAgentClient.AIAgentRequest(
+                            gameId, "declare_attackers", gameState, actionState, context);
+
+                    System.out.println("Calling AI agent for declare_attackers...");
+                    AIAgentClient.AIAgentResponse response = aiAgentClient.requestDecision(request);
+
+                    if ("declare_attackers".equals(response.getDecisionType())) {
+                        JsonArray attackersDec = response.getAttackers();
+                        if (attackersDec != null) {
+                            for (int i = 0; i < attackersDec.size(); i++) {
+                                JsonObject dec = attackersDec.get(i).getAsJsonObject();
+                                int attIdx = dec.get("attacker_index").getAsInt();
+                                int defIdx = dec.get("defender_index").getAsInt();
+
+                                if (attIdx >= 0 && attIdx < potentialAttackers.size() &&
+                                        defIdx >= 0 && defIdx < defenders.size()) {
+                                    Card attackerCard = potentialAttackers.get(attIdx);
+                                    GameEntity defenderEntity = defenders.get(defIdx);
+                                    combat.addAttacker(attackerCard, defenderEntity);
+                                    System.out.println("AI declared attacker: " + attackerCard.getName() + " -> "
+                                            + defenderEntity.getName());
+                                }
+                            }
+                        }
+                    }
+                    return;
+                } catch (Exception e) {
+                    System.err.println("AI agent error in declareAttackers: " + e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+            // Fallback to default AI
+            super.declareAttackers(attacker, combat);
+        }
+
+        @Override
+        public void declareBlockers(Player defender, Combat combat) {
+            if (aiAgentClient != null) {
+                try {
+                    JsonObject gameState = extractGameState(currentGame);
+                    JsonObject actionState = new JsonObject();
+
+                    // Attackers (to be blocked)
+                    JsonArray attackersJson = new JsonArray();
+                    CardCollection attackers = combat.getAttackers();
+                    for (int i = 0; i < attackers.size(); i++) {
+                        Card c = attackers.get(i);
+                        JsonObject att = new JsonObject();
+                        att.addProperty("index", i);
+                        att.addProperty("id", c.getId());
+                        att.addProperty("name", c.getName());
+                        att.addProperty("power", c.getNetPower());
+                        att.addProperty("toughness", c.getNetToughness());
+                        GameEntity attacked = combat.getDefenderByAttacker(c);
+                        att.addProperty("attacking", attacked != null ? attacked.getName() : "Unknown");
+                        attackersJson.add(att);
+                    }
+                    actionState.add("attackers", attackersJson);
+
+                    // Blockers
+                    JsonArray blockersJson = new JsonArray();
+                    CardCollection potentialBlockers = CardLists.filter(defender.getCreaturesInPlay(),
+                            c -> CombatUtil.canBlock(c));
+                    for (int i = 0; i < potentialBlockers.size(); i++) {
+                        Card c = potentialBlockers.get(i);
+                        JsonObject blk = new JsonObject();
+                        blk.addProperty("index", i);
+                        blk.addProperty("id", c.getId());
+                        blk.addProperty("name", c.getName());
+                        blk.addProperty("power", c.getNetPower());
+                        blk.addProperty("toughness", c.getNetToughness());
+                        blockersJson.add(blk);
+                    }
+                    actionState.add("blockers", blockersJson);
+
+                    JsonObject context = new JsonObject();
+                    context.addProperty("requestType", "declare_blockers");
+                    context.addProperty("phase", currentGame.getPhaseHandler().getPhase().toString());
+                    context.addProperty("turn", currentGame.getPhaseHandler().getTurn());
+                    context.addProperty("playerName", player.getName());
+
+                    AIAgentClient.AIAgentRequest request = new AIAgentClient.AIAgentRequest(
+                            gameId, "declare_blockers", gameState, actionState, context);
+
+                    System.out.println("Calling AI agent for declare_blockers...");
+                    AIAgentClient.AIAgentResponse response = aiAgentClient.requestDecision(request);
+
+                    if ("declare_blockers".equals(response.getDecisionType())) {
+                        JsonArray blocksDec = response.getBlocks();
+                        if (blocksDec != null) {
+                            for (int i = 0; i < blocksDec.size(); i++) {
+                                JsonObject dec = blocksDec.get(i).getAsJsonObject();
+                                int blkIdx = dec.get("blocker_index").getAsInt();
+                                int attIdx = dec.get("attacker_index").getAsInt();
+
+                                if (blkIdx >= 0 && blkIdx < potentialBlockers.size() &&
+                                        attIdx >= 0 && attIdx < attackers.size()) {
+                                    Card blockerCard = potentialBlockers.get(blkIdx);
+                                    Card attackerCard = attackers.get(attIdx);
+                                    combat.addBlocker(attackerCard, blockerCard);
+                                    System.out.println("AI declared blocker: " + blockerCard.getName() + " -> "
+                                            + attackerCard.getName());
+                                }
+                            }
+                        }
+                    }
+                    return;
+                } catch (Exception e) {
+                    System.err.println("AI agent error in declareBlockers: " + e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+            // Fallback to default AI
+            super.declareBlockers(defender, combat);
+        }
+        // To support manual combat, we need to override declareAttackers,
+        // declareBlockers, etc.
+
+        private <T extends GameEntity> JsonObject createTargetOptionsJson(FCollectionView<T> optionList, int min,
+                int max, String title) {
             JsonObject result = new JsonObject();
             result.addProperty("min", min);
             result.addProperty("max", max);
@@ -504,12 +702,6 @@ public class ForgeHeadless {
         public <T extends GameEntity> List<T> chooseEntitiesForEffect(FCollectionView<T> optionList, int min, int max,
                 DelayedReveal delayedReveal, SpellAbility sa, String title, Player targetedPlayer,
                 Map<String, Object> params) {
-            
-            // Update global prompt state
-            currentPromptType = "target";
-            currentPromptData = createTargetOptionsJson(optionList, min, max, title);
-            
-            System.out.println("Waiting for target selection via HTTP...");
 
             List<T> selected = new ArrayList<>();
             List<T> options = new ArrayList<>();
@@ -520,6 +712,54 @@ public class ForgeHeadless {
                 currentPromptType = "none";
                 return selected;
             }
+
+            // Create action state for target selection
+            JsonObject actionState = createTargetOptionsJson(optionList, min, max, title);
+
+            // If AI agent is configured, call out to it for decision
+            if (aiAgentClient != null) {
+                try {
+                    JsonObject gameState = extractGameState(currentGame);
+                    JsonObject context = new JsonObject();
+                    context.addProperty("requestType", "target");
+                    context.addProperty("spellName",
+                            sa != null && sa.getHostCard() != null ? sa.getHostCard().getName() : "Unknown");
+                    context.addProperty("spellDescription", sa != null ? sa.getDescription() : "");
+
+                    AIAgentClient.AIAgentRequest request = new AIAgentClient.AIAgentRequest(
+                            gameId, "target", gameState, actionState, context);
+
+                    System.out.println("Calling AI agent for target selection...");
+                    AIAgentClient.AIAgentResponse response = aiAgentClient.requestDecision(request);
+
+                    // Handle multi-select responses
+                    if (response.getIndices() != null) {
+                        for (int idx : response.getIndices()) {
+                            if (idx >= 0 && idx < options.size() && selected.size() < max) {
+                                T target = options.get(idx);
+                                if (!selected.contains(target)) {
+                                    selected.add(target);
+                                }
+                            }
+                        }
+                    } else if (response.getIndex() >= 0 && response.getIndex() < options.size()) {
+                        selected.add(options.get(response.getIndex()));
+                    }
+
+                    System.out.println("AI agent selected " + selected.size() + " target(s)");
+                    return selected;
+
+                } catch (AIAgentClient.AIAgentException e) {
+                    System.err.println("AI agent error, falling back to HTTP input: " + e.getMessage());
+                    // Fall through to HTTP input below
+                }
+            }
+
+            // Fallback: Update global prompt state for HTTP input
+            currentPromptType = "target";
+            currentPromptData = actionState;
+
+            System.out.println("Waiting for target selection via HTTP...");
 
             while (selected.size() < max) {
                 try {
@@ -539,7 +779,7 @@ public class ForgeHeadless {
                         if (!selected.contains(target)) {
                             selected.add(target);
                             if (selected.size() == max)
-                                break; 
+                                break;
                         } else {
                             System.out.println("Already selected.");
                         }
@@ -553,7 +793,7 @@ public class ForgeHeadless {
                     System.out.println("Invalid input received: " + e.getMessage());
                 }
             }
-            
+
             currentPromptType = "none";
             return selected;
         }
@@ -693,16 +933,110 @@ public class ForgeHeadless {
 
         @Override
         public java.util.List<forge.game.spellability.SpellAbility> chooseSpellAbilityToPlay() {
-            // Update global prompt state
+            // Build action state
+            JsonObject actionState = getPossibleActionsJson();
+            List<SpellAbility> actions = getPossibleSpellAbilities();
+
+            // OPTIMIZATION: If only one action is available (which is always "pass
+            // priority"),
+            // automatically take it without calling the AI agent.
+            if (actions.isEmpty()) { // Should not happen given getPossibleActionsJson adds pass_priority
+                // But if getPossibleSpellAbilities returns empty, it means only pass is
+                // available
+                // Actually getPossibleSpellAbilities does NOT include pass_priority,
+                // getPossibleActionsJson does.
+                // Let's check the JSON count or just trust the logic.
+                // The actions list from getPossibleSpellAbilities only contains
+                // spells/abilities.
+                // If it is empty, it means the only thing we can do is pass.
+                // However, we should check if we can play lands too.
+                // Let's look at getPossibleActionsJson() implementation again.
+                // It adds lands, spells, abilities, and THEN pass_priority.
+                // So if actions list is empty AND no lands to play...
+                // Actually, let's rely on the JSON count since that aggregates everything.
+                if (actionState.has("count") && actionState.get("count").getAsInt() == 1) {
+                    // The only action is "pass_priority" (or technically a single forced action,
+                    // but usually pass)
+                    // Let's verify it is pass_priority just to be safe, although currently it's
+                    // always added last.
+                    JsonArray actionsList = actionState.getAsJsonArray("actions");
+                    if (actionsList.size() > 0) {
+                        JsonObject firstAction = actionsList.get(0).getAsJsonObject();
+                        if ("pass_priority".equals(firstAction.get("type").getAsString())) {
+                            System.out.println("Auto-passing priority (only option)...");
+                            cachedActions = null;
+                            return null;
+                        }
+                    }
+                }
+            }
+
+            // If AI agent is configured, call out to it for decision
+            if (aiAgentClient != null) {
+                try {
+                    JsonObject gameState = extractGameState(currentGame);
+                    JsonObject context = new JsonObject();
+                    context.addProperty("requestType", "action");
+                    context.addProperty("phase", currentGame.getPhaseHandler().getPhase().toString());
+                    context.addProperty("turn", currentGame.getPhaseHandler().getTurn());
+                    context.addProperty("playerName", player.getName());
+
+                    AIAgentClient.AIAgentRequest request = new AIAgentClient.AIAgentRequest(
+                            gameId, "action", gameState, actionState, context);
+
+                    System.out.println("Calling AI agent for action decision...");
+                    AIAgentClient.AIAgentResponse response = aiAgentClient.requestDecision(request);
+
+                    // Handle pass decision (explicit)
+                    if (response.isPass()) {
+                        cachedActions = null; // Invalidate cache
+                        System.out.println("AI agent decided to pass priority");
+                        return null;
+                    }
+
+                    // Handle action selection
+                    int actionIndex = response.getIndex();
+
+                    // TRANSLATION LAYER: Check if the selected index corresponds to "pass_priority"
+                    JsonArray actionsList = actionState.getAsJsonArray("actions");
+                    if (actionIndex >= 0 && actionIndex < actionsList.size()) {
+                        JsonObject selectedActionJson = actionsList.get(actionIndex).getAsJsonObject();
+                        if ("pass_priority".equals(selectedActionJson.get("type").getAsString())) {
+                            System.out.println("AI agent selected pass_priority via index " + actionIndex);
+                            cachedActions = null;
+                            return null;
+                        }
+                    }
+
+                    if (actionIndex >= 0 && actionIndex < actions.size()) {
+                        SpellAbility chosenAbility = actions.get(actionIndex);
+                        List<SpellAbility> result = new ArrayList<>();
+                        result.add(chosenAbility);
+                        System.out.println("AI agent selected action: " +
+                                (chosenAbility.getHostCard() != null ? chosenAbility.getHostCard().getName()
+                                        : "Unknown"));
+                        return result;
+                    } else {
+                        System.err.println("AI agent returned invalid action index: " + actionIndex);
+                        // Fall through to HTTP input
+                    }
+
+                } catch (AIAgentClient.AIAgentException e) {
+                    System.err.println("AI agent error, falling back to HTTP input: " + e.getMessage());
+                    // Fall through to HTTP input below
+                }
+            }
+
+            // Fallback: Update global prompt state for HTTP input
             currentPromptType = "action";
-            currentPromptData = getPossibleActionsJson();
-            
+            currentPromptData = actionState;
+
             System.out.println("Waiting for action via HTTP...");
 
             while (true) {
                 try {
                     String input = inputQueue.take();
-                    
+
                     if (input.trim().isEmpty())
                         continue;
 
@@ -717,7 +1051,6 @@ public class ForgeHeadless {
 
                         try {
                             int actionIndex = Integer.parseInt(parts[1]);
-                            List<SpellAbility> actions = getPossibleSpellAbilities();
 
                             if (actionIndex < 0 || actionIndex >= actions.size()) {
                                 System.out.println("Invalid action index: " + actionIndex);
@@ -727,7 +1060,7 @@ public class ForgeHeadless {
                             SpellAbility chosenAbility = actions.get(actionIndex);
                             List<SpellAbility> result = new ArrayList<>();
                             result.add(chosenAbility);
-                            
+
                             currentPromptType = "none";
                             return result;
 

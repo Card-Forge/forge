@@ -1,15 +1,16 @@
 # ForgeHeadless Documentation
 
 ## Overview
-ForgeHeadless is a headless Magic: The Gathering game engine. The current build exposes an embedded HTTP server so external tooling can drive the match loop, but the **long-term plan is for Java to become the HTTP client** that calls out to a custom AI service (owned by you) for every decision. Use this document as the canonical reference while we migrate to that architecture.
+ForgeHeadless is a headless Magic: The Gathering game engine that supports two modes of operation:
 
-- **Today**: Java hosts an HTTP API (`GET /state`, `GET /input`, etc.) so that a separate process can poll for prompts and push actions.
-- **Planned**: Java will call a configurable AI endpoint with the full game history and possible actions (PA) and expect back a chosen action/target.
-- **Goal**: Replace the old CLI/Scanner bridge with a network-friendly decision surface that lets us swap in your bespoke AI without touching the core rules engine.
+1. **HTTP Server Mode (v0)**: Java hosts an HTTP API and external processes poll for prompts and push actions.
+2. **AI Agent Mode (v1)**: Java calls out to YOUR external AI endpoint for every decision.
+
+Use this document as the canonical reference for both architectures.
 
 ## Architecture
 
-### Current (v0)
+### HTTP Server Mode (v0 - Default)
 
 ```
 ┌─────────────────┐       HTTP        ┌──────────────────┐
@@ -24,9 +25,9 @@ ForgeHeadless is a headless Magic: The Gathering game engine. The current build 
               └──────────────────┘
 ```
 
-External automations poll `GET /input` and push `POST /action`/`POST /target`. This is the bridge we just landed.
+External automations poll `GET /input` and push `POST /action`/`POST /target`.
 
-### Roadmap (v1)
+### AI Agent Mode (v1 - NEW!)
 
 ```
 ┌──────────────────┐   HTTPS (client)   ┌────────────────────┐
@@ -41,7 +42,7 @@ External automations poll `GET /input` and push `POST /action`/`POST /target`. T
   └──────────────────┘
 ```
 
-In v1, Java will send serialized game state + possible actions to your hosted AI, wait for the response, and then execute it locally. The outbound call can reuse the same JSON contracts documented below; we simply flip the client/server ownership. Until that lands, keep using the embedded HTTP server for local testing.
+In AI Agent mode, Java sends serialized game state + possible actions to your hosted AI endpoint, waits for the response, and executes it locally. **Your AI is in control.**
 
 ## Quick Start
 
@@ -50,13 +51,29 @@ In v1, Java will send serialized game state + possible actions to your hosted AI
 mvn clean install -DskipTests
 ```
 
-### Running the Server
+### Running in HTTP Server Mode (v0)
 ```bash
 ./forge-headless
 ```
 Server starts on **port 8081**.
 
-### Testing the API
+### Running in AI Agent Mode (v1)
+```bash
+./forge-headless --ai-endpoint http://your-ai-service:5000/decide --game-id my-game-123
+```
+
+When `--ai-endpoint` is provided, the game will call out to your AI service for all decisions instead of waiting for HTTP input.
+66: 
+67: ### Running Manual Agent Interface (Testing)
+68: A manual agent interface is provided to test the AI Agent Mode. It intercepts requests from ForgeHeadless and allows you to manually select actions via a web interface.
+69: 
+70: ```bash
+71: ./run_manual_test.sh
+72: ```
+73: This will start the manual agent on port 5001 and ForgeHeadless. Open `http://localhost:5001` in your browser to control the game.
+74: Use `Ctrl+C` to stop the test, or run `./stop_manual_test.sh`.
+
+### Testing the API (HTTP Server Mode)
 ```bash
 # Get game state
 curl http://localhost:8081/state
@@ -66,6 +83,152 @@ curl http://localhost:8081/input
 
 # Take an action (pass priority)
 curl -X POST -d '{"index": 0}' http://localhost:8081/action
+```
+
+## AI Agent Mode
+
+### Command Line Options
+
+| Option | Description |
+|--------|-------------|
+| `--ai-endpoint <url>` | URL of your AI agent endpoint |
+| `--game-id <id>` | Unique game ID for tracking (auto-generated if not provided) |
+
+### Request Format (sent to your AI)
+
+For **action decisions** (choosing spells, abilities, passing priority):
+```json
+{
+  "gameId": "my-game-123",
+  "requestType": "action",
+  "gameState": {
+    "turn": 1,
+    "phase": "MAIN1",
+    "activePlayerId": 0,
+    "priorityPlayerId": 0,
+    "stack": [],
+    "players": [...]
+  },
+  "actionState": {
+    "actions": [
+      {"type": "play_land", "card_id": 7, "card_name": "Mountain"},
+      {"type": "cast_spell", "card_id": 34, "card_name": "Shock", "requires_targets": true, ...},
+      {"type": "pass_priority"}
+    ],
+    "count": 3
+  },
+  "context": {
+    "requestType": "action",
+    "phase": "MAIN1",
+    "turn": 1,
+    "playerName": "Player 1"
+  }
+}
+```
+
+For **target selection** (choosing targets for spells/abilities):
+```json
+{
+  "gameId": "my-game-123",
+  "requestType": "target",
+  "gameState": { ... },
+  "actionState": {
+    "min": 1,
+    "max": 1,
+    "title": "Select targets for Shock",
+    "targets": [
+      {"index": 0, "type": "Player", "name": "Player 1", "id": 0, "life": 20},
+      {"index": 1, "type": "Player", "name": "AI Player 2", "id": 1, "life": 20}
+    ]
+  },
+  "context": {
+    "requestType": "target",
+    "spellName": "Shock",
+    "spellDescription": "Shock deals 2 damage to any target."
+  }
+}
+```
+
+### Response Format (expected from your AI)
+
+For **action decisions**:
+```json
+{
+  "decision": {
+    "type": "action",
+    "index": 0
+  }
+}
+```
+
+To **pass priority**:
+```json
+{
+  "decision": {
+    "type": "pass"
+  }
+}
+```
+
+For **target selection** (single target):
+```json
+{
+  "decision": {
+    "type": "target",
+    "index": 1
+  }
+}
+```
+
+For **target selection** (multiple targets):
+```json
+{
+  "decision": {
+    "type": "target",
+    "indices": [0, 2]
+  }
+}
+```
+
+### Example AI Endpoint (Python Flask)
+
+```python
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+@app.route('/decide', methods=['POST'])
+def decide():
+    data = request.json
+    game_id = data.get('gameId')
+    request_type = data.get('requestType')
+    game_state = data.get('gameState')
+    action_state = data.get('actionState')
+    context = data.get('context')
+    
+    if request_type == 'action':
+        # Your AI logic here
+        # For now, always pass priority
+        return jsonify({
+            "decision": {
+                "type": "pass"
+            }
+        })
+    
+    elif request_type == 'target':
+        # Your AI logic here
+        # For now, select first target
+        return jsonify({
+            "decision": {
+                "type": "target",
+                "index": 0
+            }
+        })
+    
+    return jsonify({"error": "Unknown request type"}), 400
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
 ```
 
 ## HTTP API Reference
@@ -204,13 +367,24 @@ Command queued
 ./forge-headless [options]
 ```
 
+### Player Options
 | Option | Description |
 |--------|-------------|
-| (default) | Player 1 = Human (HTTP-controlled), Player 2 = AI |
-| `--both-ai` | Both players AI-controlled (simulation mode) |
-| `--both-human` | Both players HTTP-controlled |
-| `--p1-ai` | Player 1 = AI, Player 2 = HTTP-controlled |
-| `--p2-human` | Player 2 = HTTP-controlled |
+| (default) | Player 1 = Human (HTTP-controlled or AI-agent-controlled), Player 2 = AI |
+| `--both-ai` | Both players AI-controlled (simulation mode, uses built-in AI) |
+| `--both-human` | Both players HTTP/AI-agent-controlled |
+| `--p1-ai` | Player 1 = built-in AI, Player 2 = HTTP/AI-agent-controlled |
+| `--p2-human` | Player 2 = HTTP/AI-agent-controlled |
+
+### AI Agent Options
+| Option | Description |
+|--------|-------------|
+| `--ai-endpoint <url>` | URL of your external AI agent endpoint for decision-making |
+| `--game-id <id>` | Unique game ID for tracking (auto-generated UUID if not provided) |
+
+### Other Options
+| Option | Description |
+|--------|-------------|
 | `--verbose` | Enable detailed game event logging |
 | `--help` | Show help message |
 
@@ -249,14 +423,19 @@ def play_game():
             requests.post(f"{BASE_URL}/target", json={"index": target_index})
 ```
 
-### TODO: LLM Endpoint Integration
+### AI Agent Mode Integration (DONE ✓)
 
-- [ ] Add configuration for outbound AI endpoint (URL, auth, timeout)
-- [ ] Serialize full decision context (game history + PA payload) in a single request body
+The following features have been implemented:
+
+- [x] Add configuration for outbound AI endpoint (URL, auth, timeout)
+- [x] Serialize full decision context (game state + action options) in a single request body
+- [x] Fall back to embedded HTTP server when endpoint is unavailable (dev mode)
+
+**Still TODO:**
 - [ ] Handle streaming/async responses from the AI service
-- [ ] Fall back to embedded HTTP server when endpoint is unavailable (dev mode)
+- [ ] Add authentication token support via command-line
 
-> **Heads-up**: The custom AI is owned by you. Please drop the endpoint contract (request/response schema, auth expectations) into this README once finalized so we can wire Java directly to it.
+> **Note**: Your custom AI endpoint is owned by you. See the "AI Agent Mode" section above for the complete request/response schema.
 
 ## Logging
 
@@ -280,17 +459,19 @@ Enable with `--verbose` flag. Logs written to `headless_game.log`.
 
 ## Ongoing TODOs
 
-1. Plug ForgeHeadless into the upcoming AI service (Java acts as HTTP client).
-2. Define and document the external AI endpoint schema (request/response, auth, timeout).
-3. Add manual combat control (attacker/blocker selection) via new endpoints.
+1. ~~Plug ForgeHeadless into the upcoming AI service (Java acts as HTTP client).~~ ✓ DONE
+2. ~~Define and document the external AI endpoint schema (request/response, auth, timeout).~~ ✓ DONE
+3. Add manual combat control (attacker/blocker selection) via new endpoints or AI agent calls.
 4. Support configurable decks and match formats (deck import, best-of series).
 5. Implement optional authentication/rate limiting for the HTTP surface.
+6. Add authentication token support for AI agent endpoint.
 
 ## Files
 
 | File | Description |
 |------|-------------|
 | `forge-gui-desktop/src/main/java/forge/view/ForgeHeadless.java` | Main implementation |
+| `forge-gui-desktop/src/main/java/forge/view/AIAgentClient.java` | AI Agent HTTP client |
 | `forge-headless` | Launch script |
 | `test_http_endpoints.sh` | API test script |
 | `headless_game.log` | Game event log (when verbose) |

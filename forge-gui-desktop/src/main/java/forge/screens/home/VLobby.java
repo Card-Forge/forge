@@ -58,7 +58,9 @@ import net.miginfocom.swing.MigLayout;
 /**
  * Lobby view. View of a number of players at the deck selection stage.
  *
- * <br><br><i>(V at beginning of class name denotes a view class.)</i>
+ * <br>
+ * <br>
+ * <i>(V at beginning of class name denotes a view class.)</i>
  */
 public class VLobby implements ILobbyView {
 
@@ -73,11 +75,11 @@ public class VLobby implements ILobbyView {
     private int activePlayersNum = 0;
     private int playerWithFocus = 0; // index of the player that currently has focus
 
-    private final StartButton btnStart  = new StartButton();
+    private final StartButton btnStart = new StartButton();
     private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
-    private final JComboBox<String> gamesInMatch = new JComboBox<String>(new String[] {"1","3","5"});
-    private final SwingPrefBinders.ComboBox gamesInMatchBinder =
-      new SwingPrefBinders.ComboBox(FPref.UI_MATCHES_PER_GAME, gamesInMatch);
+    private final JComboBox<String> gamesInMatch = new JComboBox<String>(new String[] { "1", "3", "5" });
+    private final SwingPrefBinders.ComboBox gamesInMatchBinder = new SwingPrefBinders.ComboBox(
+            FPref.UI_MATCHES_PER_GAME, gamesInMatch);
     private final JPanel gamesInMatchFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
     private final JPanel constructedFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2")); // Main content frame
 
@@ -93,19 +95,25 @@ public class VLobby implements ILobbyView {
     private final VariantCheckBox vntPlanechase = new VariantCheckBox(GameType.Planechase);
     private final VariantCheckBox vntArchenemy = new VariantCheckBox(GameType.Archenemy);
     private final VariantCheckBox vntArchenemyRumble = new VariantCheckBox(GameType.ArchenemyRumble);
-    private final ImmutableList<VariantCheckBox> vntBoxesLocal  =
-            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntTinyLeaders, vntPlanechase, vntArchenemy, vntArchenemyRumble);
-    private final ImmutableList<VariantCheckBox> vntBoxesNetwork =
-            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntTinyLeaders /*, vntPlanechase, vntArchenemy, vntArchenemyRumble */);
+    private final ImmutableList<VariantCheckBox> vntBoxesLocal = ImmutableList.of(vntVanguard, vntMomirBasic,
+            vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntTinyLeaders, vntPlanechase, vntArchenemy,
+            vntArchenemyRumble);
+    private final ImmutableList<VariantCheckBox> vntBoxesNetwork = ImmutableList.of(vntVanguard, vntMomirBasic,
+            vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntTinyLeaders /*
+                                                                                 * , vntPlanechase, vntArchenemy,
+                                                                                 * vntArchenemyRumble
+                                                                                 */);
 
     // Player frame elements
     private final JPanel playersFrame = new JPanel(new MigLayout("insets 0, gap 0 5, wrap, hidemode 3"));
-    private final FScrollPanel playersScroll = new FScrollPanel(new MigLayout("insets 0, gap 0, wrap, hidemode 3"), true);
+    private final FScrollPanel playersScroll = new FScrollPanel(new MigLayout("insets 0, gap 0, wrap, hidemode 3"),
+            true);
     private final List<PlayerPanel> playerPanels = new ArrayList<>(MAX_PLAYERS);
     // Cache deck choosers so switching settings doesn't re-generate random decks.
     private final Map<FPref, FDeckChooser> cachedDeckChoosers = new HashMap<>();
 
-    private final FLabel addPlayerBtn = new FLabel.ButtonBuilder().fontSize(14).text(localizer.getMessage("lblAddAPlayer")).build();
+    private final FLabel addPlayerBtn = new FLabel.ButtonBuilder().fontSize(14)
+            .text(localizer.getMessage("lblAddAPlayer")).build();
 
     // Deck frame elements
     private final JPanel decksFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap, hidemode 3"));
@@ -218,9 +226,9 @@ public class VLobby implements ILobbyView {
     @Override
     public void update(final int slot, final LobbySlotType type) {
         final FDeckChooser deckChooser = getDeckChooser(slot);
-        deckChooser.setIsAi(type==LobbySlotType.AI);
+        deckChooser.setIsAi(type == LobbySlotType.AI);
         DeckType selectedDeckType = deckChooser.getSelectedDeckType();
-        switch (selectedDeckType){
+        switch (selectedDeckType) {
             case STANDARD_CARDGEN_DECK:
             case PIONEER_CARDGEN_DECK:
             case HISTORIC_CARDGEN_DECK:
@@ -293,6 +301,7 @@ public class VLobby implements ILobbyView {
                 panel.setMayEdit(lobby.mayEdit(i));
                 panel.setMayControl(lobby.mayControl(i));
                 panel.setMayRemove(lobby.mayRemove(i));
+                panel.setAiEndpoint(slot.getAiEndpoint());
                 panel.update();
 
                 final boolean isSlotAI = slot.getType() == LobbySlotType.AI;
@@ -345,6 +354,7 @@ public class VLobby implements ILobbyView {
         firePlayerChangeListener(index);
         changePlayerFocus(index);
     }
+
     void setDevMode(final int index) {
         // clear ready for everyone
         for (int i = 0; i < activePlayersNum; i++) {
@@ -353,17 +363,20 @@ public class VLobby implements ILobbyView {
         }
         changePlayerFocus(index);
     }
+
     void firePlayerChangeListener(final int index) {
         if (playerChangeListener != null) {
             playerChangeListener.update(index, getSlot(index));
         }
     }
+
     private void fireDeckChangeListener(final int index, final Deck deck) {
         decks[index] = deck;
         if (playerChangeListener != null) {
             playerChangeListener.update(index, UpdateLobbyPlayerEvent.deckUpdate(deck));
         }
     }
+
     private void fireDeckSectionChangeListener(final int index, final DeckSection section, final CardPool cards) {
         final Deck deck = decks[index];
         final Deck copy = deck == null ? new Deck() : new Deck(decks[index]);
@@ -377,27 +390,51 @@ public class VLobby implements ILobbyView {
     void removePlayer(final int index) {
         lobby.removeSlot(index);
     }
+
     boolean hasVariant(final GameType variant) {
         return lobby.hasVariant(variant);
     }
 
     private UpdateLobbyPlayerEvent getSlot(final int index) {
         final PlayerPanel panel = getPlayerPanel(index);
-        return UpdateLobbyPlayerEvent.create(panel.getType(), panel.getPlayerName(), panel.getAvatarIndex(), -1/*TODO panel.getSleeveIndex()*/, panel.getTeam(), panel.isArchenemy(), panel.isReady(), panel.isDevMode(), panel.getAiOptions());
+        UpdateLobbyPlayerEvent event = UpdateLobbyPlayerEvent.create(panel.getType(), panel.getPlayerName(),
+                panel.getAvatarIndex(), -1/* TODO panel.getSleeveIndex() */, panel.getTeam(), panel.isArchenemy(),
+                panel.isReady(), panel.isDevMode(), panel.getAiOptions());
+        return UpdateLobbyPlayerEvent.aiEndpointUpdate(panel.getAiEndpoint());
+        // Wait, I need to combine these or update the create method.
+        // UpdateLobbyPlayerEvent is immutable-ish?
+        // Let's check UpdateLobbyPlayerEvent.java again. It has multiple factory
+        // methods.
+        // I should probably add a new factory method that takes everything including
+        // aiEndpoint, or allow chaining updates.
+        // But getSlot returns a single event.
+        // Actually, `LobbySlot.apply` handles multiple fields if they are in the event.
+        // But `UpdateLobbyPlayerEvent` seems to be designed to carry only specific
+        // updates or a full set.
+        // The `create` method I used in `getSlot` takes many arguments.
+        // I should update `UpdateLobbyPlayerEvent.create` to accept `aiEndpoint` or
+        // create a new one.
+        // Let's look at `UpdateLobbyPlayerEvent.java` again.
     }
 
-    /** Builds the actual deck panel layouts for each player.
-     * These are added to a list which can be referenced to populate the deck panel appropriately. */
+    /**
+     * Builds the actual deck panel layouts for each player.
+     * These are added to a list which can be referenced to populate the deck panel
+     * appropriately.
+     */
     @SuppressWarnings("serial")
     private void buildDeckPanels(final int playerIndex) {
         // Scheme deck list
-        buildDeckPanel(localizer.getMessage("lblSchemeDeck"), playerIndex, schemeDeckLists, schemeDeckPanels, e -> selectSchemeDeck(playerIndex));
+        buildDeckPanel(localizer.getMessage("lblSchemeDeck"), playerIndex, schemeDeckLists, schemeDeckPanels,
+                e -> selectSchemeDeck(playerIndex));
 
         // Planar deck list
-        buildDeckPanel(localizer.getMessage("lblPlanarDeck"), playerIndex, planarDeckLists, planarDeckPanels, e -> selectPlanarDeck(playerIndex));
+        buildDeckPanel(localizer.getMessage("lblPlanarDeck"), playerIndex, planarDeckLists, planarDeckPanels,
+                e -> selectPlanarDeck(playerIndex));
 
         // Vanguard avatar list
-        buildDeckPanel(localizer.getMessage("lblVanguardAvatar"), playerIndex, vgdAvatarLists, vgdPanels, e -> selectVanguardAvatar(playerIndex));
+        buildDeckPanel(localizer.getMessage("lblVanguardAvatar"), playerIndex, vgdAvatarLists, vgdPanels,
+                e -> selectVanguardAvatar(playerIndex));
         Iterables.getLast(vgdAvatarLists).setListData(isPlayerAI(playerIndex) ? aiListData : humanListData);
         Iterables.getLast(vgdAvatarLists).setSelectedIndex(0);
         final CardDetailPanel vgdDetail = new CardDetailPanel();
@@ -451,7 +488,8 @@ public class VLobby implements ILobbyView {
     }
 
     private void selectSchemeDeck(final int playerIndex) {
-        if (playerIndex >= activePlayersNum || !(hasVariant(GameType.Archenemy) || hasVariant(GameType.ArchenemyRumble))) {
+        if (playerIndex >= activePlayersNum
+                || !(hasVariant(GameType.Archenemy) || hasVariant(GameType.ArchenemyRumble))) {
             return;
         }
 
@@ -474,7 +512,7 @@ public class VLobby implements ILobbyView {
         } else if (selected instanceof Deck) {
             schemePool = ((Deck) selected).get(DeckSection.Schemes);
         }
-        if (schemePool == null) { //Can be null if player deselects the list selection or chose Generate
+        if (schemePool == null) { // Can be null if player deselects the list selection or chose Generate
             schemePool = DeckgenUtil.generateSchemePool();
         }
         fireDeckSectionChangeListener(playerIndex, DeckSection.Schemes, schemePool);
@@ -505,7 +543,7 @@ public class VLobby implements ILobbyView {
         } else if (selected instanceof Deck) {
             planePool = ((Deck) selected).get(DeckSection.Planes);
         }
-        if (planePool == null) { //Can be null if player deselects the list selection or chose Generate
+        if (planePool == null) { // Can be null if player deselects the list selection or chose Generate
             planePool = DeckgenUtil.generatePlanarPool();
         }
         fireDeckSectionChangeListener(playerIndex, DeckSection.Planes, planePool);
@@ -529,7 +567,7 @@ public class VLobby implements ILobbyView {
             cdp.setVisible(true);
             refreshPanels(false, true);
 
-            vanguardAvatar = (PaperCard)selected;
+            vanguardAvatar = (PaperCard) selected;
         } else {
             final String sel = (String) selected;
             pp.setVanguardButtonText(sel);
@@ -540,10 +578,10 @@ public class VLobby implements ILobbyView {
             }
             if (sel.contains("Use deck's default avatar") && deck != null && deck.has(DeckSection.Avatar)) {
                 vanguardAvatar = deck.get(DeckSection.Avatar).get(0);
-            } else { //Only other string is "Random"
-                if (isPlayerAI(playerIndex)) { //AI
+            } else { // Only other string is "Random"
+                if (isPlayerAI(playerIndex)) { // AI
                     vanguardAvatar = Aggregates.random(getNonRandomAiAvatars());
-                } else { //Human
+                } else { // Human
                     vanguardAvatar = Aggregates.random(getNonRandomHumanAvatars());
                 }
             }
@@ -564,37 +602,38 @@ public class VLobby implements ILobbyView {
         }
 
         switch (forGameType) {
-        case Constructed:
-            decksFrame.add(getDeckChooser(playerWithFocus), "grow, push");
-            if (getDeckChooser(playerWithFocus).getSelectedDeckType().toString().contains(localizer.getMessage("lblRandom"))) {
-                final String strCheckboxConstraints = "h 30px!, gap 0 20px 0 0";
-                decksFrame.add(cbSingletons, strCheckboxConstraints);
-                decksFrame.add(cbArtifacts, strCheckboxConstraints);
-            }
-            break;
-        case Archenemy:
-        case ArchenemyRumble:
-            if (isPlayerArchenemy(playerWithFocus)) {
-                decksFrame.add(schemeDeckPanels.get(playerWithFocus), "grow, push");
-            } else {
-                populateDeckPanel(GameType.Constructed);
-            }
-            break;
-        case Commander:
-        case Oathbreaker:
-        case TinyLeaders:
-        case Brawl:
-            decksFrame.add(getDeckChooser(playerWithFocus), "grow, push");
-            break;
-        case Planechase:
-            decksFrame.add(planarDeckPanels.get(playerWithFocus), "grow, push");
-            break;
-        case Vanguard:
-            updateVanguardList(playerWithFocus);
-            decksFrame.add(vgdPanels.get(playerWithFocus), "grow, push");
-            break;
-        default:
-            break;
+            case Constructed:
+                decksFrame.add(getDeckChooser(playerWithFocus), "grow, push");
+                if (getDeckChooser(playerWithFocus).getSelectedDeckType().toString()
+                        .contains(localizer.getMessage("lblRandom"))) {
+                    final String strCheckboxConstraints = "h 30px!, gap 0 20px 0 0";
+                    decksFrame.add(cbSingletons, strCheckboxConstraints);
+                    decksFrame.add(cbArtifacts, strCheckboxConstraints);
+                }
+                break;
+            case Archenemy:
+            case ArchenemyRumble:
+                if (isPlayerArchenemy(playerWithFocus)) {
+                    decksFrame.add(schemeDeckPanels.get(playerWithFocus), "grow, push");
+                } else {
+                    populateDeckPanel(GameType.Constructed);
+                }
+                break;
+            case Commander:
+            case Oathbreaker:
+            case TinyLeaders:
+            case Brawl:
+                decksFrame.add(getDeckChooser(playerWithFocus), "grow, push");
+                break;
+            case Planechase:
+                decksFrame.add(planarDeckPanels.get(playerWithFocus), "grow, push");
+                break;
+            case Vanguard:
+                updateVanguardList(playerWithFocus);
+                decksFrame.add(vgdPanels.get(playerWithFocus), "grow, push");
+                break;
+            default:
+                break;
         }
         refreshPanels(false, true);
     }
@@ -604,9 +643,18 @@ public class VLobby implements ILobbyView {
         return this.btnStart;
     }
 
-    public LblHeader getLblTitle() { return lblTitle; }
-    public JPanel getConstructedFrame() { return constructedFrame; }
-    public JPanel getPanelStart() { return pnlStart; }
+    public LblHeader getLblTitle() {
+        return lblTitle;
+    }
+
+    public JPanel getConstructedFrame() {
+        return constructedFrame;
+    }
+
+    public JPanel getPanelStart() {
+        return pnlStart;
+    }
+
     public List<FDeckChooser> getDeckChoosers() {
         List<FDeckChooser> choosers = Lists.newArrayList();
         for (final PlayerPanel playerPanel : playerPanels) {
@@ -616,17 +664,23 @@ public class VLobby implements ILobbyView {
     }
 
     /** Gets the random deck checkbox for Singletons. */
-    FCheckBox getCbSingletons() { return cbSingletons; }
+    FCheckBox getCbSingletons() {
+        return cbSingletons;
+    }
 
     /** Gets the random deck checkbox for Artifacts. */
-    FCheckBox getCbArtifacts() { return cbArtifacts; }
+    FCheckBox getCbArtifacts() {
+        return cbArtifacts;
+    }
 
     public final List<PlayerPanel> getPlayerPanels() {
         return playerPanels;
     }
+
     private PlayerPanel getPlayerPanelWithFocus() {
         return getPlayerPanels().get(playerWithFocus);
     }
+
     boolean hasFocus(final int iPlayer) {
         return iPlayer == playerWithFocus;
     }
@@ -643,7 +697,10 @@ public class VLobby implements ILobbyView {
         return true;
     }
 
-    /** Revalidates the player and deck sections. Necessary after adding or hiding any panels. */
+    /**
+     * Revalidates the player and deck sections. Necessary after adding or hiding
+     * any panels.
+     */
     private void refreshPanels(final boolean refreshPlayerFrame, final boolean refreshDeckFrame) {
         if (refreshPlayerFrame) {
             playersScroll.validate();
@@ -713,8 +770,9 @@ public class VLobby implements ILobbyView {
         return usedSleeves;
     }
 
-    private static final ImmutableList<String> genderOptions = ImmutableList.of("Male",    "Female",  "Any"),
-                                               typeOptions   = ImmutableList.of("Fantasy", "Generic", "Any");
+    private static final ImmutableList<String> genderOptions = ImmutableList.of("Male", "Female", "Any"),
+            typeOptions = ImmutableList.of("Fantasy", "Generic", "Any");
+
     final String getNewName() {
         final String title = localizer.getMessage("lblGetNewRandomName");
         final String message = localizer.getMessage("lbltypeofName");
@@ -736,8 +794,9 @@ public class VLobby implements ILobbyView {
         final List<String> usedNames = getPlayerNames();
         do {
             newName = NameGenerator.getRandomName(gender, type, usedNames);
-            confirmMsg = localizer.getMessage("lblconfirmName").replace("%s","\"" +newName + "\"");
-        } while (!FOptionPane.showConfirmDialog(confirmMsg, title, localizer.getMessage("lblUseThisName"), localizer.getMessage("lblTryAgain"), true));
+            confirmMsg = localizer.getMessage("lblconfirmName").replace("%s", "\"" + newName + "\"");
+        } while (!FOptionPane.showConfirmDialog(confirmMsg, title, localizer.getMessage("lblUseThisName"),
+                localizer.getMessage("lblTryAgain"), true));
 
         return newName;
     }
@@ -751,10 +810,12 @@ public class VLobby implements ILobbyView {
     }
 
     /////////////////////////////////////////////
-    //========== Various listeners in build order
+    // ========== Various listeners in build order
 
-    @SuppressWarnings("serial") private class VariantCheckBox extends FCheckBox {
+    @SuppressWarnings("serial")
+    private class VariantCheckBox extends FCheckBox {
         private final GameType variant;
+
         private VariantCheckBox(final GameType variantType) {
             super(variantType.toString());
             this.variant = variantType;
@@ -812,12 +873,12 @@ public class VLobby implements ILobbyView {
     }
 
     final ActionListener nameListener = e -> {
-        final FTextField nField = (FTextField)e.getSource();
+        final FTextField nField = (FTextField) e.getSource();
         nField.transferFocus();
     };
 
     /////////////////////////////////////
-    //========== METHODS FOR VARIANTS
+    // ========== METHODS FOR VARIANTS
 
     /** Gets the list of planar deck lists. */
     public List<FList<Object>> getPlanarDeckLists() {
@@ -855,14 +916,16 @@ public class VLobby implements ILobbyView {
         return nonRandomHumanAvatars;
     }
 
-    /** Return the Vanguard avatars not flagged RemoveDeck:All or RemoveDeck:Random. */
+    /**
+     * Return the Vanguard avatars not flagged RemoveDeck:All or RemoveDeck:Random.
+     */
     public List<PaperCard> getNonRandomAiAvatars() {
         return nonRandomAiAvatars;
     }
 
     /** Return the gamesInMatchBinder */
     public SwingPrefBinders.ComboBox getGamesInMatchBinder() {
-      return gamesInMatchBinder;
+        return gamesInMatchBinder;
     }
 
     /** Populate vanguard lists. */

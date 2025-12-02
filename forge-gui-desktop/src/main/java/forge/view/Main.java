@@ -23,6 +23,7 @@ import forge.error.ExceptionHandler;
 import forge.gui.GuiBase;
 import forge.gui.card.CardReaderExperiments;
 import forge.util.BuildInfo;
+import forge.model.FModel;
 import io.sentry.Sentry;
 
 /**
@@ -44,23 +45,36 @@ public final class Main {
                 options.setDsn("https://87bc8d329e49441895502737c069067b@sentry.cardforge.org//3");
         }, true);
 
-        // HACK - temporary solution to "Comparison method violates it's general contract!" crash
+        // HACK - temporary solution to "Comparison method violates it's general
+        // contract!" crash
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
 
-        //Turn off the Java 2D system's use of Direct3D to improve rendering speed (particularly when Full Screen)
+        // Turn off the Java 2D system's use of Direct3D to improve rendering speed
+        // (particularly when Full Screen)
         System.setProperty("sun.java2d.d3d", "false");
 
-        //Turn on OpenGl acceleration to improve performance
-        //System.setProperty("sun.java2d.opengl", "True");
+        // Turn on OpenGl acceleration to improve performance
+        // System.setProperty("sun.java2d.opengl", "True");
 
-        //setup GUI interface
+        // setup GUI interface
         GuiBase.setInterface(new GuiDesktop());
 
-        //install our error handler
+        // install our error handler
         ExceptionHandler.registerErrorHandling();
 
-        // Start splash screen first, then data models, then controller.
-        if (args.length == 0) {
+        // Check for AI endpoint argument
+        String aiEndpoint = null;
+        for (int i = 0; i < args.length; i++) {
+            if ("--ai-endpoint".equals(args[i]) && i + 1 < args.length) {
+                aiEndpoint = args[i + 1];
+                System.out.println("AI endpoint argument found: " + aiEndpoint);
+                FModel.setAiEndpoint(aiEndpoint);
+                break;
+            }
+        }
+
+        // If args only contain the endpoint (2 args) or are empty, start GUI
+        if (args.length == 0 || (aiEndpoint != null && args.length == 2)) {
             Singletons.initializeOnce(true);
 
             // Controller can now step in and take over.
@@ -70,6 +84,13 @@ public final class Main {
 
         // command line startup here
         String mode = args[0].toLowerCase();
+
+        // Skip flag if it's the first arg (though logic above handles the pure GUI
+        // case)
+        if (mode.startsWith("--")) {
+            System.out.println("Unknown mode or flag used incorrectly.\nKnown mode is 'sim', 'parse' ");
+            System.exit(0);
+        }
 
         switch (mode) {
             case "sim":
