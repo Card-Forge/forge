@@ -43,6 +43,7 @@ public abstract class GameLobby implements IHasGameType {
     private final boolean allowNetworking;
     private HostedMatch hostedMatch;
     private final HashMap<LobbySlot, IGameController> gameControllers = Maps.newHashMap();
+
     protected GameLobby(final boolean allowNetworking) {
         this.allowNetworking = allowNetworking;
     }
@@ -62,6 +63,7 @@ public abstract class GameLobby implements IHasGameType {
     public GameLobbyData getData() {
         return data;
     }
+
     public void setData(final GameLobbyData data) {
         this.data = data;
         updateView(true);
@@ -70,6 +72,7 @@ public abstract class GameLobby implements IHasGameType {
     public GameType getGameType() {
         return currentGameType;
     }
+
     public void setGameType(final GameType type) {
         currentGameType = type;
     }
@@ -85,12 +88,14 @@ public abstract class GameLobby implements IHasGameType {
     public int getNumberOfSlots() {
         return data.slots.size();
     }
+
     public LobbySlot getSlot(final int index) {
         if (index < 0 || index >= getNumberOfSlots()) {
             return null;
         }
         return data.slots.get(index);
     }
+
     public void applyToSlot(final int index, final UpdateLobbyPlayerEvent event) {
         final LobbySlot slot = getSlot(index);
         if (slot == null || event == null) {
@@ -121,8 +126,8 @@ public abstract class GameLobby implements IHasGameType {
         }
 
         if (event.getType() != null) {
-            //refresh decklist for slot
-            listener.update(index,event.getType());
+            // refresh decklist for slot
+            listener.update(index, event.getType());
         }
 
         if (changed) {
@@ -133,22 +138,32 @@ public abstract class GameLobby implements IHasGameType {
     public IGameController getController(final int index) {
         return gameControllers.get(getSlot(index));
     }
+
     public GameView getGameView() {
         return hostedMatch.getGameView();
     }
 
     public abstract boolean hasControl();
+
     public abstract boolean mayEdit(int index);
+
     public abstract boolean mayControl(int index);
+
     public abstract boolean mayRemove(int index);
+
     protected abstract IGuiGame getGui(int index);
+
     protected abstract void onGameStarted();
 
     public void addSlot() {
         final int newIndex = getNumberOfSlots();
         final LobbySlotType type = allowNetworking ? LobbySlotType.OPEN : LobbySlotType.AI;
-        addSlot(new LobbySlot(type, null, newIndex, newIndex, newIndex, false, !allowNetworking, Collections.emptySet()));
+        final LobbySlot slot = new LobbySlot(type, null, newIndex, newIndex, newIndex, false, !allowNetworking,
+                Collections.emptySet());
+        slot.setAiEndpoint(FModel.getAiEndpoint());
+        addSlot(slot);
     }
+
     protected final void addSlot(final LobbySlot slot) {
         if (slot == null) {
             throw new NullPointerException();
@@ -168,6 +183,7 @@ public abstract class GameLobby implements IHasGameType {
         }
         updateView(true);
     }
+
     private String randomName() {
         final List<String> names = Lists.newArrayListWithCapacity(MAX_PLAYERS);
         for (final LobbySlot slot : data.slots) {
@@ -175,9 +191,11 @@ public abstract class GameLobby implements IHasGameType {
         }
         return NameGenerator.getRandomName("Any", "Any", names);
     }
+
     protected final static String localName() {
         return FModel.getPreferences().getPref(FPref.PLAYER_NAME);
     }
+
     protected final static int[] localAvatarIndices() {
         final String[] sAvatars = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
         final int[] result = new int[sAvatars.length];
@@ -187,6 +205,7 @@ public abstract class GameLobby implements IHasGameType {
         }
         return result;
     }
+
     protected final static int[] localSleeveIndices() {
         final String[] sSleeves = FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",");
         final int[] result = new int[sSleeves.length];
@@ -220,64 +239,64 @@ public abstract class GameLobby implements IHasGameType {
         setGameType(variant);
         data.appliedVariants.add(variant);
 
-        //ensure other necessary variants are unchecked
+        // ensure other necessary variants are unchecked
         switch (variant) {
-        case Archenemy:
-            data.appliedVariants.remove(GameType.ArchenemyRumble);
-            break;
-        case ArchenemyRumble:
-            data.appliedVariants.remove(GameType.Archenemy);
-            break;
-        case Commander:
-            data.appliedVariants.remove(GameType.Oathbreaker);
-            data.appliedVariants.remove(GameType.TinyLeaders);
-            data.appliedVariants.remove(GameType.Brawl);
-            data.appliedVariants.remove(GameType.MomirBasic);
-            data.appliedVariants.remove(GameType.MoJhoSto);
-            break;
-        case Oathbreaker:
-            data.appliedVariants.remove(GameType.Commander);
-            data.appliedVariants.remove(GameType.TinyLeaders);
-            data.appliedVariants.remove(GameType.Brawl);
-            data.appliedVariants.remove(GameType.MomirBasic);
-            data.appliedVariants.remove(GameType.MoJhoSto);
-            break;
-        case TinyLeaders:
-            data.appliedVariants.remove(GameType.Commander);
-            data.appliedVariants.remove(GameType.Oathbreaker);
-            data.appliedVariants.remove(GameType.Brawl);
-            data.appliedVariants.remove(GameType.MomirBasic);
-            data.appliedVariants.remove(GameType.MoJhoSto);
-            break;
-        case Brawl:
-            data.appliedVariants.remove(GameType.Commander);
-            data.appliedVariants.remove(GameType.Oathbreaker);
-            data.appliedVariants.remove(GameType.TinyLeaders);
-            data.appliedVariants.remove(GameType.MomirBasic);
-            data.appliedVariants.remove(GameType.MoJhoSto);
-            break;
-        case Vanguard:
-            data.appliedVariants.remove(GameType.MomirBasic);
-            data.appliedVariants.remove(GameType.MoJhoSto);
-            break;
-        case MomirBasic:
-            data.appliedVariants.remove(GameType.Commander);
-            data.appliedVariants.remove(GameType.Oathbreaker);
-            data.appliedVariants.remove(GameType.TinyLeaders);
-            data.appliedVariants.remove(GameType.Brawl);
-            data.appliedVariants.remove(GameType.Vanguard);
-            data.appliedVariants.remove(GameType.MoJhoSto);
-            break;
-        case MoJhoSto:
-            data.appliedVariants.remove(GameType.Commander);
-            data.appliedVariants.remove(GameType.Oathbreaker);
-            data.appliedVariants.remove(GameType.TinyLeaders);
-            data.appliedVariants.remove(GameType.Brawl);
-            data.appliedVariants.remove(GameType.Vanguard);
-            data.appliedVariants.remove(GameType.MomirBasic);
-            break;
-        default:
-            break;
+            case Archenemy:
+                data.appliedVariants.remove(GameType.ArchenemyRumble);
+                break;
+            case ArchenemyRumble:
+                data.appliedVariants.remove(GameType.Archenemy);
+                break;
+            case Commander:
+                data.appliedVariants.remove(GameType.Oathbreaker);
+                data.appliedVariants.remove(GameType.TinyLeaders);
+                data.appliedVariants.remove(GameType.Brawl);
+                data.appliedVariants.remove(GameType.MomirBasic);
+                data.appliedVariants.remove(GameType.MoJhoSto);
+                break;
+            case Oathbreaker:
+                data.appliedVariants.remove(GameType.Commander);
+                data.appliedVariants.remove(GameType.TinyLeaders);
+                data.appliedVariants.remove(GameType.Brawl);
+                data.appliedVariants.remove(GameType.MomirBasic);
+                data.appliedVariants.remove(GameType.MoJhoSto);
+                break;
+            case TinyLeaders:
+                data.appliedVariants.remove(GameType.Commander);
+                data.appliedVariants.remove(GameType.Oathbreaker);
+                data.appliedVariants.remove(GameType.Brawl);
+                data.appliedVariants.remove(GameType.MomirBasic);
+                data.appliedVariants.remove(GameType.MoJhoSto);
+                break;
+            case Brawl:
+                data.appliedVariants.remove(GameType.Commander);
+                data.appliedVariants.remove(GameType.Oathbreaker);
+                data.appliedVariants.remove(GameType.TinyLeaders);
+                data.appliedVariants.remove(GameType.MomirBasic);
+                data.appliedVariants.remove(GameType.MoJhoSto);
+                break;
+            case Vanguard:
+                data.appliedVariants.remove(GameType.MomirBasic);
+                data.appliedVariants.remove(GameType.MoJhoSto);
+                break;
+            case MomirBasic:
+                data.appliedVariants.remove(GameType.Commander);
+                data.appliedVariants.remove(GameType.Oathbreaker);
+                data.appliedVariants.remove(GameType.TinyLeaders);
+                data.appliedVariants.remove(GameType.Brawl);
+                data.appliedVariants.remove(GameType.Vanguard);
+                data.appliedVariants.remove(GameType.MoJhoSto);
+                break;
+            case MoJhoSto:
+                data.appliedVariants.remove(GameType.Commander);
+                data.appliedVariants.remove(GameType.Oathbreaker);
+                data.appliedVariants.remove(GameType.TinyLeaders);
+                data.appliedVariants.remove(GameType.Brawl);
+                data.appliedVariants.remove(GameType.Vanguard);
+                data.appliedVariants.remove(GameType.MomirBasic);
+                break;
+            default:
+                break;
         }
         updateView(true);
     }
@@ -353,16 +372,20 @@ public abstract class GameLobby implements IHasGameType {
 
         for (final LobbySlot slot : activeSlots) {
             if (!slot.isReady()) {
-                SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblPlayerIsNotReady", slot.getName()));
+                SOptionPane
+                        .showMessageDialog(Localizer.getInstance().getMessage("lblPlayerIsNotReady", slot.getName()));
                 return null;
             }
             if (slot.getDeck() == null) {
-                SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblPleaseSpecifyPlayerDeck", slot.getName()));
+                SOptionPane.showMessageDialog(
+                        Localizer.getInstance().getMessage("lblPleaseSpecifyPlayerDeck", slot.getName()));
                 return null;
             }
-            if (hasVariant(GameType.Commander) || hasVariant(GameType.Oathbreaker) || hasVariant(GameType.TinyLeaders) || hasVariant(GameType.Brawl)) {
+            if (hasVariant(GameType.Commander) || hasVariant(GameType.Oathbreaker) || hasVariant(GameType.TinyLeaders)
+                    || hasVariant(GameType.Brawl)) {
                 if (!slot.getDeck().has(DeckSection.Commander)) {
-                    SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblPlayerDoesntHaveCommander", slot.getName()));
+                    SOptionPane.showMessageDialog(
+                            Localizer.getInstance().getMessage("lblPlayerDoesntHaveCommander", slot.getName()));
                     return null;
                 }
             }
@@ -379,7 +402,8 @@ public abstract class GameLobby implements IHasGameType {
             isOathbreakerMatch = variantTypes.contains(GameType.Oathbreaker);
             isTinyLeadersMatch = variantTypes.contains(GameType.TinyLeaders);
             isBrawlMatch = variantTypes.contains(GameType.Brawl);
-            isCommanderMatch = isBrawlMatch || isTinyLeadersMatch || isOathbreakerMatch || variantTypes.contains(GameType.Commander);
+            isCommanderMatch = isBrawlMatch || isTinyLeadersMatch || isOathbreakerMatch
+                    || variantTypes.contains(GameType.Commander);
             if (!isCommanderMatch) {
                 for (final GameType variant : variantTypes) {
                     if (variant.isAutoGenerated()) {
@@ -392,14 +416,15 @@ public abstract class GameLobby implements IHasGameType {
 
         final boolean checkLegality = FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY);
 
-        //Auto-generated decks don't need to be checked here
-        //Commander deck replaces regular deck and is checked later
+        // Auto-generated decks don't need to be checked here
+        // Commander deck replaces regular deck and is checked later
         if (checkLegality && autoGenerateVariant == null && !isCommanderMatch) {
             for (final LobbySlot slot : activeSlots) {
                 final String name = slot.getName();
                 final String errMsg = GameType.Constructed.getDeckFormat().getDeckConformanceProblem(slot.getDeck());
                 if (null != errMsg) {
-                    SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblPlayerDeckError", name, errMsg), Localizer.getInstance().getMessage("lblInvalidDeck"));
+                    SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblPlayerDeckError", name, errMsg),
+                            Localizer.getInstance().getMessage("lblInvalidDeck"));
                     return null;
                 }
             }
@@ -421,9 +446,9 @@ public abstract class GameLobby implements IHasGameType {
             final boolean isAI = slot.getType() == LobbySlotType.AI;
             final LobbyPlayer lobbyPlayer;
             if (isAI) {
-                lobbyPlayer = GamePlayerUtil.createAiPlayer(name, avatar, sleeve, aiOptions);
-            }
-            else {
+                lobbyPlayer = GamePlayerUtil.createAiPlayer(name, avatar, sleeve, aiOptions,
+                        slot.getAiEndpoint() != null ? slot.getAiEndpoint() : FModel.getAiEndpoint());
+            } else {
                 boolean setNameNow = false;
                 if (!hasNameBeenSet && slot.getType() == LobbySlotType.LOCAL) {
                     setNameNow = true;
@@ -437,20 +462,20 @@ public abstract class GameLobby implements IHasGameType {
 
             if (!variantTypes.isEmpty()) {
                 if (isCommanderMatch) {
-                    final GameType commanderGameType =
-                            isOathbreakerMatch ? GameType.Oathbreaker :
-                                isTinyLeadersMatch ? GameType.TinyLeaders :
-                                    isBrawlMatch ? GameType.Brawl :
-                                        GameType.Commander;
+                    final GameType commanderGameType = isOathbreakerMatch ? GameType.Oathbreaker
+                            : isTinyLeadersMatch ? GameType.TinyLeaders
+                                    : isBrawlMatch ? GameType.Brawl : GameType.Commander;
                     if (checkLegality) {
                         final String errMsg = commanderGameType.getDeckFormat().getDeckConformanceProblem(deck);
                         if (errMsg != null) {
-                            SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblPlayerDeckError", name, errMsg), Localizer.getInstance().getMessage("lblInvalidCommanderGameTypeDeck", commanderGameType));
+                            SOptionPane.showErrorDialog(
+                                    Localizer.getInstance().getMessage("lblPlayerDeckError", name, errMsg),
+                                    Localizer.getInstance().getMessage("lblInvalidCommanderGameTypeDeck",
+                                            commanderGameType));
                             return null;
                         }
                     }
-                }
-                else if (autoGenerateVariant != null) {
+                } else if (autoGenerateVariant != null) {
                     Deck autoDeck = autoGenerateVariant.autoGenerateDeck(rp);
                     deck = new Deck();
                     for (DeckSection d : DeckSection.values()) {
@@ -475,7 +500,9 @@ public abstract class GameLobby implements IHasGameType {
                     if (checkLegality) {
                         final String errMsg = DeckFormat.getSchemeSectionConformanceProblem(schemePool);
                         if (null != errMsg) {
-                            SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblPlayerDeckError", name, errMsg), Localizer.getInstance().getMessage("lblInvalidSchemeDeck"));
+                            SOptionPane.showErrorDialog(
+                                    Localizer.getInstance().getMessage("lblPlayerDeckError", name, errMsg),
+                                    Localizer.getInstance().getMessage("lblInvalidSchemeDeck"));
                             return null;
                         }
                     }
@@ -487,7 +514,9 @@ public abstract class GameLobby implements IHasGameType {
                     if (checkLegality) {
                         final String errMsg = DeckFormat.getPlaneSectionConformanceProblem(planePool);
                         if (null != errMsg) {
-                            SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblPlayerDeckError", name, errMsg), Localizer.getInstance().getMessage("lblInvalidPlanarDeck"));
+                            SOptionPane.showErrorDialog(
+                                    Localizer.getInstance().getMessage("lblPlayerDeckError", name, errMsg),
+                                    Localizer.getInstance().getMessage("lblInvalidPlanarDeck"));
                             return null;
                         }
                     }
@@ -495,13 +524,15 @@ public abstract class GameLobby implements IHasGameType {
                 }
 
                 if (variantTypes.contains(GameType.Vanguard)) {
-                    if (avatarPool == null || avatarPool.countAll() == 0) { //ERROR! null if avatar deselected on list
-                        SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblNoSelectedVanguardAvatarForPlayer", name));
+                    if (avatarPool == null || avatarPool.countAll() == 0) { // ERROR! null if avatar deselected on list
+                        SOptionPane.showMessageDialog(
+                                Localizer.getInstance().getMessage("lblNoSelectedVanguardAvatarForPlayer", name));
                         return null;
                     }
                 }
 
-                rp = RegisteredPlayer.forVariants(activeSlots.size(), variantTypes, deck, schemes, isArchenemy, planes, avatarPool);
+                rp = RegisteredPlayer.forVariants(activeSlots.size(), variantTypes, deck, schemes, isArchenemy, planes,
+                        avatarPool);
             }
 
             rp.setTeamNumber(team);
@@ -510,16 +541,17 @@ public abstract class GameLobby implements IHasGameType {
             if (!isAI) {
                 guis.put(rp, gui);
             }
-            //override starting life for 1v1 Brawl
-            if (hasVariant(GameType.Brawl) && activeSlots.size() == 2){
-                for (RegisteredPlayer player : players){
+            // override starting life for 1v1 Brawl
+            if (hasVariant(GameType.Brawl) && activeSlots.size() == 2) {
+                for (RegisteredPlayer player : players) {
                     player.setStartingLife(25);
                 }
             }
             playerToSlot.put(rp, slot);
         }
 
-        //if above checks succeed, return runnable that can be used to finish starting game
+        // if above checks succeed, return runnable that can be used to finish starting
+        // game
         return () -> {
             hostedMatch = GuiBase.getInterface().hostMatch();
             hostedMatch.startMatch(GameType.Constructed, variantTypes, players, guis);
