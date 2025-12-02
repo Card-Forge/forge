@@ -17,13 +17,18 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Set;
 
 public final class GamePlayerUtil {
-    private GamePlayerUtil() { }
+    private GamePlayerUtil() {
+    }
+
     private static Localizer localizer = Localizer.getInstance();
     private static final LobbyPlayer guiPlayer = new LobbyPlayerHuman("Human");
+
     public static LobbyPlayer getGuiPlayer() {
         return guiPlayer;
     }
-    public static LobbyPlayer getGuiPlayer(final String name, final int avatarIndex, final int sleeveIndex, final boolean writePref) {
+
+    public static LobbyPlayer getGuiPlayer(final String name, final int avatarIndex, final int sleeveIndex,
+            final boolean writePref) {
         if (writePref) {
             if (!name.equals(guiPlayer.getName())) {
                 guiPlayer.setName(name);
@@ -35,46 +40,63 @@ public final class GamePlayerUtil {
             guiPlayer.setSleeveIndex(sleeveIndex);
             return guiPlayer;
         }
-        //use separate LobbyPlayerHuman instance for human players beyond first
+        // use separate LobbyPlayerHuman instance for human players beyond first
         return new LobbyPlayerHuman(name, avatarIndex, sleeveIndex);
     }
 
     public static LobbyPlayer getQuestPlayer() {
-        return guiPlayer; //TODO: Make this a separate player
+        return guiPlayer; // TODO: Make this a separate player
     }
 
     public static LobbyPlayer createAiPlayer() {
         return createAiPlayer(GuiDisplayUtil.getRandomAiName());
     }
+
     public static LobbyPlayer createAiPlayer(final String name) {
         final int avatarCount = GuiBase.getInterface().getAvatarCount();
         final int sleeveCount = GuiBase.getInterface().getSleevesCount();
-        return createAiPlayer(name, avatarCount == 0 ? 0 : MyRandom.getRandom().nextInt(avatarCount), sleeveCount == 0 ? 0 : MyRandom.getRandom().nextInt(sleeveCount));
+        return createAiPlayer(name, avatarCount == 0 ? 0 : MyRandom.getRandom().nextInt(avatarCount),
+                sleeveCount == 0 ? 0 : MyRandom.getRandom().nextInt(sleeveCount));
     }
+
     public static LobbyPlayer createAiPlayer(final String name, final String profileOverride) {
         final int avatarCount = GuiBase.getInterface().getAvatarCount();
         final int sleeveCount = GuiBase.getInterface().getSleevesCount();
-        return createAiPlayer(name, avatarCount == 0 ? 0 : MyRandom.getRandom().nextInt(avatarCount), sleeveCount == 0 ? 0 : MyRandom.getRandom().nextInt(sleeveCount), null, profileOverride);
+        return createAiPlayer(name, avatarCount == 0 ? 0 : MyRandom.getRandom().nextInt(avatarCount),
+                sleeveCount == 0 ? 0 : MyRandom.getRandom().nextInt(sleeveCount), null, profileOverride);
     }
+
     public static LobbyPlayer createAiPlayer(final String name, final int avatarIndex) {
         final int sleeveCount = GuiBase.getInterface().getSleevesCount();
-        return createAiPlayer(name, avatarIndex, sleeveCount == 0 ? 0 : MyRandom.getRandom().nextInt(sleeveCount), null, "");
+        return createAiPlayer(name, avatarIndex, sleeveCount == 0 ? 0 : MyRandom.getRandom().nextInt(sleeveCount), null,
+                "");
     }
+
     public static LobbyPlayer createAiPlayer(final String name, final int avatarIndex, final int sleeveIndex) {
         return createAiPlayer(name, avatarIndex, sleeveIndex, null, "");
     }
-    public static LobbyPlayer createAiPlayer(final String name, final int avatarIndex, final int sleeveIndex, final Set<AIOption> options) {
-        return createAiPlayer(name, avatarIndex, sleeveIndex, options, "");
+
+    public static LobbyPlayer createAiPlayer(final String name, final int avatarIndex, final int sleeveIndex,
+            final Set<AIOption> options) {
+        return createAiPlayer(name, avatarIndex, sleeveIndex, options, "", null);
     }
-    public static LobbyPlayer createAiPlayer(final String name, final int avatarIndex, final int sleeveIndex, final Set<AIOption> options, final String profileOverride) {
-        final LobbyPlayerAi player = new LobbyPlayerAi(name, options);
+
+    public static LobbyPlayer createAiPlayer(final String name, final int avatarIndex, final int sleeveIndex,
+            final Set<AIOption> options, final String aiEndpoint) {
+        return createAiPlayer(name, avatarIndex, sleeveIndex, options, "", aiEndpoint);
+    }
+
+    public static LobbyPlayer createAiPlayer(final String name, final int avatarIndex, final int sleeveIndex,
+            final Set<AIOption> options, final String profileOverride, final String aiEndpoint) {
+        final LobbyPlayerAi player = new LobbyPlayerAi(name, options, aiEndpoint);
 
         // TODO: implement specific AI profiles for quest mode.
         String profile = "";
         if (profileOverride.isEmpty()) {
             String lastProfileChosen = FModel.getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
             if (!AiProfileUtil.getProfilesDisplayList().contains(lastProfileChosen)) {
-                System.out.println("[AI Preferences] Unknown profile " + lastProfileChosen + " was requested, resetting to default.");
+                System.out.println("[AI Preferences] Unknown profile " + lastProfileChosen
+                        + " was requested, resetting to default.");
                 lastProfileChosen = "Default";
                 FModel.getPreferences().setPref(FPref.UI_CURRENT_AI_PROFILE, "Default");
                 FModel.getPreferences().save();
@@ -89,7 +111,7 @@ public final class GamePlayerUtil {
         }
 
         assert (!profile.isEmpty());
-        
+
         player.setAiProfile(profile);
         player.setAvatarIndex(avatarIndex);
         player.setSleeveIndex(sleeveIndex);
@@ -106,8 +128,8 @@ public final class GamePlayerUtil {
             } else {
                 newPlayerName = getVerifiedPlayerName(getPlayerNameUsingStandardPrompt(oldPlayerName), oldPlayerName);
             }
-        } catch (final IllegalStateException ise){
-            //now is not a good time for this...
+        } catch (final IllegalStateException ise) {
+            // now is not a good time for this...
             newPlayerName = StringUtils.isBlank(oldPlayerName) ? "Human" : oldPlayerName;
         }
 
@@ -137,8 +159,8 @@ public final class GamePlayerUtil {
         return SOptionPane.showInputDialog(
                 "By default, Forge will refer to you as the \"Human\" during gameplay.\n" +
                         "If you would prefer a different name please enter it now.",
-                        "Personalize Forge Gameplay",
-                        SOptionPane.QUESTION_ICON);
+                "Personalize Forge Gameplay",
+                SOptionPane.QUESTION_ICON);
     }
 
     private static String getPlayerNameUsingStandardPrompt(final String playerName) {
@@ -156,32 +178,27 @@ public final class GamePlayerUtil {
                 null,
                 serverPort.toString(),
                 null,
-                true
-        );
+                true);
         Integer port;
         try {
-             port = Integer.parseInt(input);
+            port = Integer.parseInt(input);
         } catch (NumberFormatException nfe) {
             SOptionPane.showErrorDialog(localizer.getMessage("sOPServerPromptError", input));
             return serverPort;
         }
-        if(port < 0 || port > 65535) {
+        if (port < 0 || port > 65535) {
             SOptionPane.showErrorDialog(localizer.getMessage("sOPServerPromptError", input));
             return serverPort;
         }
-        return  port;
+        return port;
     }
 
     private static String getVerifiedPlayerName(String newName, final String oldName) {
-        if (newName == null || !StringUtils.isAlphanumericSpace(newName)) {
-            newName = (StringUtils.isBlank(oldName) ? "Human" : oldName);
-        } else if (StringUtils.isWhitespace(newName)) {
-            newName = "Human";
-        } else {
-            newName = newName.trim();
+        if (StringUtils.isBlank(newName)) {
+            SOptionPane.showErrorDialog("Please specify a player name.");
+            return oldName;
         }
         return newName;
     }
-
 
 }

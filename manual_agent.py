@@ -45,9 +45,17 @@ class ManualAgentHandler(BaseHTTPRequestHandler):
         global current_request, current_response
         
         parsed = urlparse(self.path)
-        if parsed.path == '/decide':
+        # Handle both /decide and root path / for requests
+        if parsed.path == '/decide' or parsed.path == '/':
             length = int(self.headers.get('content-length', 0))
             body = self.rfile.read(length)
+            
+            # If it's a health check or empty body, just return OK
+            if length == 0 or body == b'{"healthCheck":true}':
+                self.send_response(200)
+                self.end_headers()
+                return
+
             data = json.loads(body)
             
             logger.info(f"Received request from Forge: {data.get('requestType', 'unknown')}")

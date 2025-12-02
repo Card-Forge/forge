@@ -11,12 +11,18 @@ import forge.game.player.PlayerController;
 public class LobbyPlayerAi extends LobbyPlayer implements IGameEntitiesFactory {
 
     private String aiProfile = "";
+    private String aiEndpoint;
     private boolean rotateProfileEachGame;
     private boolean allowCheatShuffle;
     private boolean useSimulation;
 
     public LobbyPlayerAi(String name, Set<AIOption> options) {
+        this(name, options, null);
+    }
+
+    public LobbyPlayerAi(String name, Set<AIOption> options, String aiEndpoint) {
         super(name);
+        this.aiEndpoint = aiEndpoint;
         if (options != null && options.contains(AIOption.USE_SIMULATION)) {
             this.useSimulation = true;
         }
@@ -25,6 +31,7 @@ public class LobbyPlayerAi extends LobbyPlayer implements IGameEntitiesFactory {
     public boolean isAllowCheatShuffle() {
         return allowCheatShuffle;
     }
+
     public void setAllowCheatShuffle(boolean allowCheatShuffle) {
         this.allowCheatShuffle = allowCheatShuffle;
     }
@@ -32,15 +39,28 @@ public class LobbyPlayerAi extends LobbyPlayer implements IGameEntitiesFactory {
     public void setAiProfile(String profileName) {
         aiProfile = profileName;
     }
+
     public String getAiProfile() {
         return aiProfile;
+    }
+
+    public String getAiEndpoint() {
+        return aiEndpoint;
     }
 
     public void setRotateProfileEachGame(boolean rotateProfileEachGame) {
         this.rotateProfileEachGame = rotateProfileEachGame;
     }
 
-    private PlayerControllerAi createControllerFor(Player ai) {
+    private PlayerController createControllerFor(Player ai) {
+        System.out.println("LobbyPlayerAi.createControllerFor called for: " + ai.getName());
+        System.out.println("aiEndpoint is: " + aiEndpoint);
+        if (aiEndpoint != null && !aiEndpoint.isEmpty()) {
+            System.out.println("Creating PlayerControllerRemote...");
+            AIAgentClient client = new AIAgentClient(aiEndpoint);
+            return new PlayerControllerRemote(ai.getGame(), ai, this, client);
+        }
+        System.out.println("Creating default PlayerControllerAi...");
         PlayerControllerAi result = new PlayerControllerAi(ai.getGame(), ai, this);
         result.setUseSimulation(useSimulation);
         result.allowCheatShuffle(allowCheatShuffle);
@@ -59,11 +79,16 @@ public class LobbyPlayerAi extends LobbyPlayer implements IGameEntitiesFactory {
 
         if (rotateProfileEachGame) {
             setAiProfile(AiProfileUtil.getRandomProfile());
-            /*System.out.println(String.format("AI profile %s was chosen for the lobby player %s.", getAiProfile(), getName()));*/
+            /*
+             * System.out.println(String.
+             * format("AI profile %s was chosen for the lobby player %s.", getAiProfile(),
+             * getName()));
+             */
         }
         return ai;
     }
 
     @Override
-    public void hear(LobbyPlayer player, String message) { /* Local AI is deaf. */ }
+    public void hear(LobbyPlayer player, String message) {
+        /* Local AI is deaf. */ }
 }

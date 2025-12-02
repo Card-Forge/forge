@@ -156,16 +156,22 @@
             // Set default manual JSON
             let defaultResponse = {};
 
-            if (req.requestType === 'action') {
+            if (req.requestType === 'action' || req.requestType === 'possible_actions') {
+                const decisionType = req.requestType;
                 document.getElementById('manual-json').value = JSON.stringify({
-                    decision: { type: "action", index: 0 }
+                    decision: { type: decisionType, index: 0 }
                 }, null, 2);
 
                 req.actionState.actions.forEach((action, index) => {
                     const btn = document.createElement('button');
                     btn.className = 'action-btn';
-                    btn.textContent = `[${index}] ${action.type} - ${action.card_name || 'N/A'} (${action.details || ''})`;
-                    btn.onclick = () => sendAction(index);
+                    let label = `[${index}] ${action.type}`;
+                    if (action.card_name) label += ` - ${action.card_name}`;
+                    if (action.ability_description) label += ` (${action.ability_description})`;
+                    if (action.mana_cost) label += ` [${action.mana_cost}]`;
+
+                    btn.textContent = label;
+                    btn.onclick = () => sendAction(index, decisionType);
                     container.appendChild(btn);
                 });
             } else if (req.requestType === 'declare_attackers') {
@@ -178,15 +184,28 @@
                     decision: { type: "declare_blockers", blocks: [] }
                 }, null, 2);
                 container.innerHTML = '<p>Use Manual JSON for combat declarations.</p>';
+            } else if (req.requestType === 'target') {
+                document.getElementById('manual-json').value = JSON.stringify({
+                    decision: { type: "target", index: 0 } // or indices: []
+                }, null, 2);
+
+                req.actionState.targets.forEach((target, index) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'action-btn';
+                    btn.textContent = `[${index}] ${target.type} - ${target.name} (ID: ${target.id})`;
+                    btn.onclick = () => sendAction(index, "target");
+                    container.appendChild(btn);
+                });
             } else {
-                container.innerHTML = '<p>Unknown request type</p>';
+                container.innerHTML = '<p>Unknown request type: ' + req.requestType + '</p>';
+                document.getElementById('manual-json').value = JSON.stringify(req, null, 2);
             }
         }
 
-        async function sendAction(index) {
+        async function sendAction(index, type) {
             const response = {
                 decision: {
-                    type: "action",
+                    type: type,
                     index: index
                 }
             };

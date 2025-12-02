@@ -27,24 +27,37 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     private Set<AIOption> aiOptions = null;
     private String AvatarVanguard = null;
     private String SchemeDeckName = null;
-    private String PlanarDeckName = null;
-    private String DeckName = null;
+    private String PlanarDeckName;
+    private String DeckName;
+    private String aiEndpoint = null;
 
-
-    public static UpdateLobbyPlayerEvent create(final LobbySlotType type, final String name, final int avatarIndex, final int sleeveIndex, final int team, final boolean isArchenemy, final boolean isReady, final Set<AIOption> aiOptions) {
+    public static UpdateLobbyPlayerEvent create(final LobbySlotType type, final String name, final int avatarIndex,
+            final int sleeveIndex, final int team, final boolean isArchenemy, final boolean isReady,
+            final Set<AIOption> aiOptions) {
         return new UpdateLobbyPlayerEvent(type, name, avatarIndex, sleeveIndex, team, isArchenemy, isReady, aiOptions);
     }
-    public static UpdateLobbyPlayerEvent create(final LobbySlotType type, final String name, final int avatarIndex, final int sleeveIndex, final int team, final boolean isArchenemy, final boolean isReady, final boolean isDevMode, final Set<AIOption> aiOptions) {
-        return new UpdateLobbyPlayerEvent(type, name, avatarIndex, sleeveIndex, team, isArchenemy, isReady, isDevMode, aiOptions);
+
+    public static UpdateLobbyPlayerEvent create(final LobbySlotType type, final String name, final int avatarIndex,
+            final int sleeveIndex, final int team, final boolean isArchenemy, final boolean isReady,
+            final boolean isDevMode, final Set<AIOption> aiOptions) {
+        return new UpdateLobbyPlayerEvent(type, name, avatarIndex, sleeveIndex, team, isArchenemy, isReady, isDevMode,
+                aiOptions);
     }
+
     public static UpdateLobbyPlayerEvent deckUpdate(final Deck deck) {
         return new UpdateLobbyPlayerEvent(deck);
     }
+
     public static UpdateLobbyPlayerEvent deckUpdate(final DeckSection section, final CardPool cards) {
         return new UpdateLobbyPlayerEvent(section, cards);
     }
+
     public static UpdateLobbyPlayerEvent nameUpdate(final String name) {
         return new UpdateLobbyPlayerEvent(name);
+    }
+
+    public static UpdateLobbyPlayerEvent aiEndpointUpdate(final String aiEndpoint) {
+        return new UpdateLobbyPlayerEvent(aiEndpoint, true); // Use a private constructor or flag
     }
 
     private UpdateLobbyPlayerEvent(String name) {
@@ -54,32 +67,45 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     public static UpdateLobbyPlayerEvent avatarUpdate(final int index) {
         return new UpdateLobbyPlayerEvent(index, true);
     }
+
     public static UpdateLobbyPlayerEvent sleeveUpdate(final int index) {
         return new UpdateLobbyPlayerEvent(index, false);
     }
+
     public static UpdateLobbyPlayerEvent isReadyUpdate(final boolean isReady) {
         return new UpdateLobbyPlayerEvent(isReady);
     }
+
     public static UpdateLobbyPlayerEvent teamUpdate(int team) {
         return new UpdateLobbyPlayerEvent(team);
     }
-    public static UpdateLobbyPlayerEvent setDeckSchemePlaneVanguard(final String DeckName, final String Scheme, final String Plane, final String Vanguard) {
+
+    public static UpdateLobbyPlayerEvent setDeckSchemePlaneVanguard(final String DeckName, final String Scheme,
+            final String Plane, final String Vanguard) {
         return new UpdateLobbyPlayerEvent(DeckName, Scheme, Plane, Vanguard);
     }
+
     private UpdateLobbyPlayerEvent(final int index, final boolean avatar) {
         if (avatar)
             this.avatarIndex = index;
         else
             this.sleeveIndex = index;
     }
+
     private UpdateLobbyPlayerEvent(final int team) {
         this.team = team;
     }
-    private UpdateLobbyPlayerEvent(final String DeckName, final String Scheme, final String Plane, final String Vanguard) {
+
+    private UpdateLobbyPlayerEvent(final String DeckName, final String Scheme, final String Plane,
+            final String Vanguard) {
         this.SchemeDeckName = Scheme;
         this.PlanarDeckName = Plane;
         this.AvatarVanguard = Vanguard;
         this.DeckName = DeckName;
+    }
+
+    private UpdateLobbyPlayerEvent(final String aiEndpoint, final boolean isAiEndpoint) {
+        this.aiEndpoint = aiEndpoint;
     }
 
     private UpdateLobbyPlayerEvent(final Deck deck) {
@@ -142,41 +168,68 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     public LobbySlotType getType() {
         return type;
     }
+
     public String getName() {
         return name;
     }
+
     public int getAvatarIndex() {
         return avatarIndex;
     }
+
     public int getSleeveIndex() {
         return sleeveIndex;
     }
+
     public int getTeam() {
         return team;
     }
+
     public Boolean getArchenemy() {
         return isArchenemy;
     }
+
     public Boolean getReady() {
         return isReady;
     }
+
     public Boolean getDevMode() {
         return isDevMode;
     }
+
     public Deck getDeck() {
         return deck;
     }
+
     public DeckSection getSection() {
         return section;
     }
+
     public CardPool getCards() {
         return cards;
     }
+
     public Set<AIOption> getAiOptions() {
         return aiOptions == null ? null : Collections.unmodifiableSet(aiOptions);
     }
-    public String getAvatarVanguard() { return AvatarVanguard; }
-    public String getSchemeDeckName() { return SchemeDeckName; }
-    public String getPlanarDeckName() { return PlanarDeckName; }
-    public String getDeckName() { return DeckName; }
+
+    public String getAvatarVanguard() {
+        return AvatarVanguard;
+    }
+
+    public String getSchemeDeckName() {
+        return SchemeDeckName;
+    }
+
+    public String getPlanarDeckName() {
+        return PlanarDeckName;
+    }
+
+    public String getDeckName() {
+        return DeckName;
+    }
+
+    public String getAiEndpoint() {
+        return aiEndpoint;
+    }
 }
