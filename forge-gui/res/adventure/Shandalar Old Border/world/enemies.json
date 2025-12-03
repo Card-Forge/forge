@@ -10037,7 +10037,17 @@
       "Karona Starting Setup"
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3
+    "gamesPerMatch": 3,
+    "preBattleDialogue": [
+      "The false god looms before you. Prepare yourself.",
+      "The final challenge is here.",
+      "Your whole journey has led to this."
+    ],
+    "winDialogue": [
+      "What hope have you against a god, even a false one?",
+      "Rise again, and overcome the final challenge.",
+      "Your journey does not end here. Keep on fighting."
+    ]
   },
   {
     "name": "Esper Artificer",
