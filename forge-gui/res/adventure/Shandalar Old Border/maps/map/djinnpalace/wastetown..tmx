@@ -34,7 +34,7 @@
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="155.82" y="124.379">
    <properties>
     <property name="enemy" value="Djinn" />
-   <property name="effect">{"startBattleWithCard": ["Island|2ED", "Mountain|2ED", "Swamp|2ED", "Aladdin's Lamp|3ED", "Keeper of Kookus|VIS"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Island|LEA", "Mountain|ARN", "Swamp|LEA", "Aladdin's Lamp|ARN", "Keeper of Kookus|VIS"]}</property>
    </properties>
   </object>
   <object id="65" template="../../../../../../common/maps/obj/treasure.tx" x="228.493" y="187.969">
@@ -46,13 +46,13 @@
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="208.866" y="47.7002">
    <properties>
     <property name="enemy" value="Djinn" />
-   <property name="effect">{"startBattleWithCard": ["Island|2ED", "Mountain|2ED", "Swamp|2ED", "Aladdin's Lamp|3ED", "Keeper of Kookus|VIS"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Island|LEA", "Mountain|ARN", "Swamp|LEA", "Aladdin's Lamp|ARN", "Keeper of Kookus|VIS"]}</property>
    </properties>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="265.893" y="131.904">
    <properties>
     <property name="enemy" value="Djinn" />
-   <property name="effect">{"startBattleWithCard": ["Island|2ED", "Mountain|2ED", "Swamp|2ED", "Aladdin's Lamp|3ED", "Keeper of Kookus|VIS"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Island|LEA", "Mountain|ARN", "Swamp|LEA", "Aladdin's Lamp|ARN", "Keeper of Kookus|VIS"]}</property>
    </properties>
   </object>
  </objectgroup>

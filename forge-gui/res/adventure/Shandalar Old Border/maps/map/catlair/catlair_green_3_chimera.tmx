@@ -32,9 +32,8 @@
   <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="229.386" y="104.333"/>
   <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="230.621" y="123.08">
    <properties>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Mana Flare|LEA&quot; ] }"/>
+    <property name="effect">{ "startBattleWithCard": [ "Thran Dynamo|UDS" ] }</property>
     <property name="enemy" value="Chimera"/>
-   <property name="effect">{ "startBattleWithCard": [ "Mana Flare|LEA" ] }</property>
     <property name="fleeRange" value="30"/>
     <property name="pursueRange" type="int" value="30"/>
     <property name="threatRange" type="int" value="30"/>

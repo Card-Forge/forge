@@ -53,10 +53,11 @@
   </object>
   <object id="59" template="../../../../../../common/maps/obj/enemy.tx" name="Hellion" x="145.802" y="183.221">
    <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Pandemonium|EXO", "Smoldering Crater|USG" ] }</property>
     <property name="enemy" value="Hellion" />
     <property name="threatRange" type="int" value="20" />
     <property name="waypoints" value="112,108,109,110,111" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|LEA", "Mountain|6ED" ] }</property></properties>
+   </properties>
   </object>
   <object id="60" template="../../../../../../common/maps/obj/enemy.tx" name="Scorpion" x="561.495" y="298.815">
    <properties>
@@ -104,10 +105,11 @@
   <object id="78" template="../../../../../../common/maps/obj/waypoint.tx" x="599.5" y="504.5" />
   <object id="79" template="../../../../../../common/maps/obj/enemy.tx" name="Hellion" x="371.5" y="630">
    <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Pandemonium|EXO", "Smoldering Crater|USG" ] }</property>
     <property name="enemy" value="Hellion" />
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="79,75,76,77" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|LEA", "Mountain|6ED" ] }</property></properties>
+   </properties>
   </object>
   <object id="80" template="../../../../../../common/maps/obj/waypoint.tx" x="20" y="431.5" />
   <object id="81" template="../../../../../../common/maps/obj/waypoint.tx" x="167" y="436.5" />
@@ -122,17 +124,19 @@
   </object>
   <object id="86" template="../../../../../../common/maps/obj/enemy.tx" name="Hellion" x="118" y="751.5">
    <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Pandemonium|EXO", "Smoldering Crater|USG" ] }</property>
     <property name="enemy" value="Hellion" />
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="79,75,76,77" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|LEA", "Mountain|6ED" ] }</property></properties>
+   </properties>
   </object>
   <object id="87" template="../../../../../../common/maps/obj/enemy.tx" name="Hellion" x="579.5" y="699.5">
    <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Pandemonium|EXO", "Smoldering Crater|USG" ] }</property>
     <property name="enemy" value="Hellion" />
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="79,75,76,77" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|LEA", "Mountain|6ED" ] }</property></properties>
+   </properties>
   </object>
   <object id="88" template="../../../../../../common/maps/obj/waypoint.tx" x="211" y="749.5" />
   <object id="89" template="../../../../../../common/maps/obj/waypoint.tx" x="217.5" y="583.5" />
@@ -235,10 +239,11 @@
   <object id="112" template="../../../../../../common/maps/obj/waypoint.tx" x="200.5" y="232" />
   <object id="113" template="../../../../../../common/maps/obj/enemy.tx" name="Hellion" x="571" y="127">
    <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Pandemonium|EXO", "Smoldering Crater|USG" ] }</property>
     <property name="enemy" value="Hellion" />
     <property name="threatRange" type="int" value="20" />
     <property name="waypoints" value="118,115,72,71,67" />
-   <property name="effect">{ "startBattleWithCard": [ "Forest|LEA", "Mountain|6ED" ] }</property></properties>
+   </properties>
   </object>
   <object id="114" template="../../../../../../common/maps/obj/waypoint.tx" x="509.5" y="244" />
   <object id="115" template="../../../../../../common/maps/obj/waypoint.tx" x="514" y="104.5" />
