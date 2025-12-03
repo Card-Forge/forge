@@ -49,7 +49,7 @@
 	},
 	{
 		"name": "KorEncampment",
-		"displayName": "Kor Outpost",
+		"displayName": "King Kane's War Camp",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -98,7 +98,7 @@
 	},
 	{
 		"name": "BarbarianCamp4",
-		"displayName": "Barbarian Camp",
+		"displayName": "King Phil's Court",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2304,7 +2304,7 @@
 	},
 	{
 		"name": "Grove4",
-		"displayName": "Grove of the Forest Titan",
+		"displayName": "Grove of Queen Guay",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3137,7 +3137,7 @@
 	},
 	{
 		"name": "Monastery3",
-		"displayName": "Monastery",
+		"displayName": "Church of Queen Kaja",
 		"type": "dungeon",
 		"count": 5,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",

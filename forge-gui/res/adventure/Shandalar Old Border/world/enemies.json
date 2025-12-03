@@ -27231,6 +27231,144 @@
     ]
   },
   {
+    "name": "Sorceress Queen Kaja",
+    "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.png",
+    "deck": [
+      "decks/miniboss/sorceressqueenkaja.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 1,
+    "difficulty": 1,
+    "speed": 30,
+    "life": 30,
+    "gamesPerMatch": 3,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 500,
+        "addMaxCount": 500
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Map to the Vale"
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 15,
+        "addMaxCount": 10
+      }
+    ],
+    "colors": "WUR"
+  },
+  {
+    "name": "Goblin King Phil",
+    "sprite": "sprites/enemy/humanoid/goblin/goblinking.png",
+    "deck": [
+      "decks/miniboss/goblinkingphil.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 1,
+    "difficulty": 1,
+    "speed": 30,
+    "life": 30,
+    "gamesPerMatch": 3,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 500,
+        "addMaxCount": 500
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Tasty Tome"
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 15,
+        "addMaxCount": 10
+      }
+    ],
+    "colors": "UBR"
+  },
+  {
+    "name": "King Kane Ferguson",
+    "sprite": "sprites/enemy/undead/deathknightidle.png",
+    "deck": [
+      "decks/miniboss/kingkaneferguson.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 1,
+    "difficulty": 1,
+    "speed": 30,
+    "life": 30,
+    "gamesPerMatch": 3,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 500,
+        "addMaxCount": 500
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Shield of Air"
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 15,
+        "addMaxCount": 10
+      }
+    ],
+    "colors": "WUBRG"
+  },
+  {
+    "name": "Elf Queen Guay",
+    "sprite": "sprites/enemy/humanoid/elf/deftsorceress.png",
+    "deck": [
+      "decks/miniboss/elfqueenguay.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 1,
+    "difficulty": 1,
+    "speed": 30,
+    "life": 30,
+    "gamesPerMatch": 3,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 500,
+        "addMaxCount": 500
+      },
+      {
+        "type": "item",
+        "itemName": "Attendant's Robes"
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 15,
+        "addMaxCount": 10
+      }
+    ],
+    "colors": "WUG"
+  },
+  {
     "name": "Squirrel",
     "nameOverride": "Nut Collector",
     "sprite": "sprites/enemy/beast/squirrel.atlas",

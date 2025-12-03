@@ -315,6 +315,9 @@ RelicAmulet
 SorinAmulet
   xy: 96, 800
   size: 16, 16
+AttendantsRobes
+  xy: 272, 80
+  size: 16, 16
 AmuletofKroog
   xy: 128, 864
   size: 16, 16
@@ -701,6 +704,12 @@ MadStaff
   size: 16, 16
 MapToTheVale
   xy: 176, 880
+  size: 16, 16
+TastyTome
+  xy: 112, 688
+  size: 16, 16
+ShieldOfAir
+  xy: 256, 192
   size: 16, 16
 MemoryCrystal
   xy: 0, 608

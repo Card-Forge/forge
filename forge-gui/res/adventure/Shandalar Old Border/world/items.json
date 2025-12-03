@@ -3360,6 +3360,40 @@
 		"description": "Start battles with Rainbow Vale in play."
 	},
 	{
+		"name": "Tasty Tome",
+		"equipmentSlot": "Left",
+		"iconName": "TastyTome",
+		"effect": {
+			"startBattleWithCard": [
+				"Orcish Librarian|ICE"
+			]
+		},
+		"description": "Start battles with Orcish Librarian in play."
+	},
+	{
+		"name": "Shield of Air",
+		"equipmentSlot": "Left",
+		"iconName": "ShieldOfAir",
+		"effect": {
+			"startBattleWithCard": [
+				"Wall of Air|5ED"
+			],
+			"lifeModifier": -6
+		},
+		"description": "Start battles with Wall of Air in play. -6 Max Life."
+	},
+	{
+		"name": "Attendant's Robes",
+		"equipmentSlot": "Body",
+		"iconName": "AttendantsRobes",
+		"effect": {
+			"startBattleWithCard": [
+				"Silent Attendant|INV"
+			]
+		},
+		"description": "Start battles with Silent Attendant in play."
+	},
+	{
 		"name": "Power Armor",
 		"equipmentSlot": "Body",
 		"iconName": "PowerArmor",
