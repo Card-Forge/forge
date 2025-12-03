@@ -36,7 +36,7 @@ public class PumpEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
         final String duration = sa.getParam("Duration");
-        final boolean perpetual = ("Perpetual").equals(duration);
+        final boolean perpetual = "Perpetual".equals(duration);
 
         // do Game Check there in case of LKI
         final Card gameCard = game.getCardState(applyTo, null);

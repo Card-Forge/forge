@@ -1,5 +1,4 @@
 # Affected
-
 A `Defined` parameter states what is receiving the action. Remember this is non-targeted!
 
 To combine multiple entities use `&`.
@@ -12,9 +11,9 @@ You can combine Defined with Valid Syntax (explained in the [Targets](#Targets) 
 Defined Players are for SAs like "Draw" or "GainLife".
 
 ### You
-The most common of these is `Defined$ You`. It means exactly what you think: "You draw/discard/... a card."
+The most common of these is `Defined$ You`. It means exactly what one can expect: "You draw/discard/... a card."
 
-This is also the default value. But it is important to include this in SAs that have an unclear "Default" value such as Damage.
+This is also the default value. But it's important to include this in SAs that have an unclear "Default" value such as Damage.
 
 ### Opponent
 This means "Deals damage to each opponent" or "Each opponent discards a card."
@@ -31,9 +30,9 @@ Things like "Whenever Souls of the Faultless is dealt combat damage, you gain th
 Defined Cards are for SAs like "Pump" or "Regenerate".
 
 ### Self
-The most common of these is `Defined$ Self`. It means exactly what you think: "This creature gains flying" or "Regenerate this creature."
+The most common of these is `Defined$ Self`. It means exactly what one can expect: "This creature gains flying" or "Regenerate this creature."
 
-This is also the default value. Again it is important to include this in SAs that have an unclear "Default" value.
+This is also the default value. Again it's important to include this in SAs that have an unclear "Default" value.
 
 ### Enchanted
 Enchanted is often needed on Auras. It means "do this action to the card I'm Enchanted to".
@@ -47,22 +46,18 @@ Example: *No Rest for the Wicked* and the like would use
 ### Targeted
 Targeted will usually appear on a SubAbility. It means "Do this action to whatever a parent Ability targeted".
 
-That may sound confusing so here's an example:
-
-If you had an effect that says "Untap target Creature. It gains +1/+1 until end of turn" it would look like similar to this:
+That may sound confusing so here's how an example:
 ```
-SP$ Untap | ValidTgts$ Creature | SubAbility$ DBPump
+SP$ Untap | ValidTgts$ Creature | SubAbility$ DBPump | SpellDescription$ Untap target Creature. It gains +1/+1 until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +1 | NumDef$ +1
 ```
 
 # Targets
 Each element follows the form:
-`{CardType/PlayerType}{.restriction}{+furtherRestriction}`
-
-The restrictions are optional.
+`<{CardType/PlayerType}>[{.restriction}{+furtherRestriction}]`
 
 CardType may be any type, generally the supertypes like `Creature`, `Artifact`, etc. However, it could also be `Elf` or `Goblin` - though that would also include Elf Enchantments.  
-To specify an Elf Creature, then it should be `Creature.Elf`. `Permanent` represents any permanent, `Card` any card.  
+To specify an "Elf Creature", then it should be `Creature.Elf`. `Permanent` represents any permanent, `Card` any card.  
 All restrictions can be negated by prefixing them with a `!`.
 
 Try to be precise with your restrictions, e.g. just `Elf` instead of `Card.Elf` etc. The engine will thank you!
@@ -96,6 +91,5 @@ For the full list of all available properties see the classes [CardProperty](htt
 ## TargetType
 
 ## TgtPrompt
-
 Auto-generated, so try to avoid them when only targeting single word restrictions.  
 Example: `TgtPrompt$ Select target creature that entered this turn`

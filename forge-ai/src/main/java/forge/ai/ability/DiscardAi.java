@@ -79,10 +79,8 @@ public class DiscardAi extends SpellAbilityAi {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 sa.setXManaCostPaid(cardsToDiscard);
-            } else {
-                if (AbilityUtils.calculateAmount(source, sa.getParam("NumCards"), sa) < 1) {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-                }
+            } else if (AbilityUtils.calculateAmount(source, sa.getParam("NumCards"), sa) < 1) {
+               return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
