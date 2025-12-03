@@ -67,6 +67,8 @@ import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 
+//only SpellAbility can go on the stack
+//override any methods as needed
 /**
  * <p>
  * Abstract SpellAbility class.
@@ -90,6 +92,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private int id;
 
+    // choices for constructor isPermanent argument
     private String originalDescription = "", description = "";
     private String originalStackDescription = "", stackDescription = "";
 
@@ -119,9 +122,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private boolean aftermath = false;
 
-    // TODO move AI specific field to its module
     private boolean skip = false;
-
+    /** The pay costs. */
     private Cost payCosts;
     private SpellAbilityRestriction restrictions;
     private SpellAbilityCondition conditions = new SpellAbilityCondition();
@@ -150,7 +152,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private boolean isCopied = false;
     private boolean mayChooseNewTargets = false;
-    private boolean useMassSelect = false; // Should the UI show "select mine/select all" function
 
     private boolean isCastFromPlayEffect = false;
 
@@ -1250,7 +1251,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
             // always set this to false, it is only set in CopyEffect
             clone.mayChooseNewTargets = false;
-            clone.useMassSelect = useMassSelect;
 
             clone.triggeringObjects = AbilityKey.newMap(this.triggeringObjects);
             if (!lki) {
@@ -1320,6 +1320,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         final SpellAbility newSA = copy();
         newSA.setPayCosts(abCost);
         return newSA;
+    }
+
+    public SpellAbility copyWithDefinedCost(String abCost) {
+        return copyWithDefinedCost(new Cost(abCost, isAbility()));
     }
 
     public SpellAbility copyWithManaCostReplaced(Player active, Cost abCost) {
@@ -1742,14 +1746,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setMayChooseNewTargets(boolean value) {
         mayChooseNewTargets = value;
-    }
-
-    public boolean isUseMassSelect() {
-        return useMassSelect;
-    }
-
-    public void setUseMassSelect(boolean useMassSelect) {
-        this.useMassSelect = useMassSelect;
     }
 
     /**
@@ -2703,9 +2699,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setMaxWaterbend(Cost cost) {
         if (cost == null || cost.getMaxWaterbend() == null) {
-            if (maxWaterbend != null) {
-                maxWaterbend = 0;
-            }
             return;
         }
         maxWaterbend = AbilityUtils.calculateAmount(getHostCard(), cost.getMaxWaterbend(), this);

@@ -60,7 +60,6 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
             list.addAll(game.getPlayers().filter(PlayerPredicates.hasCounters()));
             list.addAll(CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.hasCounters()));
 
-            sa.setUseMassSelect(true);
             List<GameEntity> result = pc.chooseEntitiesForEffect(list, 0, list.size(), null, sa,
                     Localizer.getInstance().getMessage("lblChooseProliferateTarget"), p, null);
 

@@ -2,6 +2,7 @@ package forge.gamemodes.match.input;
 
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardView;
@@ -174,7 +175,9 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
     @Override
     public void showMessage() {
         super.showMessage();
-        if (sa != null && sa.isUseMassSelect()) { // Boolean is set for proliferate; to work generally must match (min == 0 && max == validChoices.size())
+        // Use mass select mode for proliferate. If you wanted to add it to a different effect
+        // the effect must allow you to select any number of targets between "none" and "all valid targets"
+        if (sa != null && ApiType.Proliferate == sa.getApi()) {
             massSelectMode = MassSelectMode.NONE;
             updateMassSelectButton();
         }
