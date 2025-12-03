@@ -61,9 +61,9 @@
   </object>
   <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="452" y="422">
    <properties>
-    <property name="enemy" value="Elephant" />
+    <property name="enemy" value="Forest Titan" />
     <property name="threatRange" type="int" value="50" />
-   <property name="effect">{"startBattleWithCard": ["Forest|2ED", "Plains|2ED", "Elephant Graveyard|ARN", "War Mammoth|LEA"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Forest|TMP", "Forest|TMP", "Forest|TMP", "Forest|TMP", "Treefolk Seedlings|USG"]}</property>
 </properties>
   </object>
   <object id="65" template="../../../../../../common/maps/obj/waypoint.tx" x="511" y="30.5" />
@@ -117,10 +117,10 @@
   <object id="80" template="../../../../../../common/maps/obj/gold.tx" x="498.5" y="163.5" />
   <object id="81" template="../../../../../../common/maps/obj/enemy.tx" x="97" y="209.5">
    <properties>
-    <property name="enemy" value="Elephant" />
+    <property name="enemy" value="Forest Titan" />
     <property name="threatRange" type="int" value="50" />
     <property name="waypoints" value="82,66,65,66" />
-   <property name="effect">{"startBattleWithCard": ["Forest|2ED", "Plains|2ED", "Elephant Graveyard|ARN", "War Mammoth|LEA"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Forest|TMP", "Forest|TMP", "Forest|TMP", "Forest|TMP", "Treefolk Seedlings|USG"]}</property>
 </properties>
   </object>
   <object id="82" template="../../../../../../common/maps/obj/waypoint.tx" x="22" y="174.5" />

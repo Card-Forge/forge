@@ -17781,7 +17781,7 @@
     "nameOverride": "Holy Crusader",
     "sprite": "sprites/enemy/humanoid/human/knight/paladin.atlas",
     "deck": [
-      "decks/elite/knight.json"
+      "decks/elite/knight.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -23570,13 +23570,13 @@
     "name": "Orthodoxy Angel",
     "sprite": "sprites/enemy/aberration/phyrexianangel.atlas",
     "deck": [
-      "decks/elite/phyrexianangel.dck"
+      "decks/miniboss/shandalar97_phyrexian_angel.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
-    "life": 19,
+    "life": 25,
     "rewards": [
       {
         "type": "deckCard",

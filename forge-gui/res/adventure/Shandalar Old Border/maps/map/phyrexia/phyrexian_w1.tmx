@@ -91,7 +91,7 @@
   <object id="78" template="../../../../../../common/maps/obj/treasure.tx" x="315" y="74" />
   <object id="79" template="../../../../../../common/maps/obj/enemy.tx" x="140" y="80">
    <properties>
-    <property name="enemy" value="Phyrexian Angel" />
+    <property name="enemy" value="Orthodoxy Angel" />
     <property name="threatRange" type="int" value="50" />
    <property name="effect">{ "startBattleWithCard": [ "Haunted Angel|APC", "Phyrexian Arena|APC", "Phyrexian Grimoire|TMP", "Phyrexian Walker|VIS" ] }</property>
     </properties>

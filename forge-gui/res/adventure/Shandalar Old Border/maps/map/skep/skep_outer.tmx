@@ -684,34 +684,6 @@
     <property name="threatRange" type="int" value="0" />
    </properties>
   </object>
-  <object id="241" template="../../../../../../common/maps/obj/enemy.tx" x="1516.33" y="1365.67" width="16" height="16" visible="1">
-   <properties>
-    <property name="dialog">[
-	{
-		"text": "G'day to you, adventurer",
-		"condition": [
-			{
-				"checkMapFlag": "mayorSpawned",
-				"not": true
-			}
-		],
-			"options":
-			[
-				{
-					"name": "leave"
-				}
-			]
-	}
-]</property>
-    <property name="enemy" value="Knight" />
-    <property name="spawn.Easy" type="bool" value="true" />
-    <property name="spawn.Hard" type="bool" value="true" />
-    <property name="spawn.Normal" type="bool" value="true" />
-    <property name="threatRange" type="int" value="0" />
-    <property name="waypoints" value="75,242,243,244,245,246,247,248,247,246,245,244,243,242" />
-   <property name="effect">{"startBattleWithCard": ["Plains|2ED", "Darkest Hour|USG"]}</property>
-</properties>
-  </object>
   <object id="242" template="../../../../../../common/maps/obj/waypoint.tx" x="224.333" y="1086.67" />
   <object id="243" template="../../../../../../common/maps/obj/waypoint.tx" x="207" y="1055.67" />
   <object id="244" template="../../../../../../common/maps/obj/waypoint.tx" x="176.333" y="1054.67" />
