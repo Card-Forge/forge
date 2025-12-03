@@ -45,6 +45,8 @@ public class EnemyData implements Serializable {
     public String[] questTags = new String[0];
     public float lifetime;
     public int gamesPerMatch = 1;
+    public String[] preBattleDialogue;
+    public String[] winDialogue;
 
     public EnemyData() {
     }
@@ -71,6 +73,8 @@ public class EnemyData implements Serializable {
         questTags       = enemyData.questTags.clone();
         lifetime        = enemyData.lifetime;
         gamesPerMatch   = enemyData.gamesPerMatch;
+        preBattleDialogue = enemyData.preBattleDialogue == null ? null : enemyData.preBattleDialogue.clone();
+        winDialogue     = enemyData.winDialogue == null ? null : enemyData.winDialogue.clone();
         if (enemyData.scale == 0.0f) {
             scale = 1.0f;
         }
