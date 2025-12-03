@@ -13616,7 +13616,7 @@
     "difficulty": 0.8,
     "speed": 18,
     "scale": 0.55,
-    "life": 25,
+    "life": 30,
     "rewards": [
       {
         "type": "gold",
@@ -28052,7 +28052,7 @@
     "name": "Turtle",
     "sprite": "sprites/enemy/beast/turtle.atlas",
     "deck": [
-      "decks/standard/turtle.json"
+      "decks/standard/turtle.dck"
     ],
     "ai": "",
     "spawnRate": 1,
