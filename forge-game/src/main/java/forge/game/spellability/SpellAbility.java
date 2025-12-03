@@ -150,6 +150,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private boolean isCopied = false;
     private boolean mayChooseNewTargets = false;
+    private boolean useMassSelect = false; // Should the UI show "select mine/select all" function
 
     private boolean isCastFromPlayEffect = false;
 
@@ -1249,6 +1250,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
             // always set this to false, it is only set in CopyEffect
             clone.mayChooseNewTargets = false;
+            clone.useMassSelect = useMassSelect;
 
             clone.triggeringObjects = AbilityKey.newMap(this.triggeringObjects);
             if (!lki) {
@@ -1740,6 +1742,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setMayChooseNewTargets(boolean value) {
         mayChooseNewTargets = value;
+    }
+
+    public boolean isUseMassSelect() {
+        return useMassSelect;
+    }
+
+    public void setUseMassSelect(boolean useMassSelect) {
+        this.useMassSelect = useMassSelect;
     }
 
     /**

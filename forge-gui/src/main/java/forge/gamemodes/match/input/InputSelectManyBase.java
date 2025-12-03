@@ -74,7 +74,7 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     protected abstract String getMessage();
 
     @Override
-    public final void showMessage() {
+    public void showMessage() {
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT) &&
                 card != null) {
             final StringBuilder sb = new StringBuilder();
@@ -101,7 +101,7 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     }
 
     @Override
-    protected final void onCancel() {
+    protected void onCancel() {
         bCancelled = true;
         resetUsedToPay();
         this.getSelected().clear();
