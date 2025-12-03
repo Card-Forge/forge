@@ -3218,10 +3218,10 @@
 		"effect": {
 			"lifeModifier": -4,
 			"startBattleWithCard": [
-				"Mist Dragon|MIR"
+				"Faerie Dragon|PAST"
 			]
 		},
-		"description": "-4 life. Start battles with Mist Dragon in play."
+		"description": "-4 life. Start battles with Faerie Dragon in play."
 	},
 	{
 		"name": "Goblin Trumpet",
