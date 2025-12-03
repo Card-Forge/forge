@@ -882,17 +882,7 @@
       "IdentityWhite",
       "Akroma"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "I will not stay my hand.",
-      "No rest. No mercy. No matter what.",
-      "I am justice. You stand no chance."
-    ],
-    "winDialogue": [
-      "Another stain wiped from this world.",
-      "Return if you must. My wrath is endless.",
-      "Lay down your blade and worship me."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Amphin Warrior",
@@ -10073,17 +10063,7 @@
       "Karona Starting Setup"
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "The false god looms before you. Prepare yourself.",
-      "The final challenge is here.",
-      "Your whole journey has led to this."
-    ],
-    "winDialogue": [
-      "What hope have you against a god, even a false one?",
-      "Rise again, and overcome the final challenge.",
-      "Your journey does not end here. Keep on fighting."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Esper Artificer",
@@ -12267,17 +12247,7 @@
       "IdentityGreen",
       "Ghalta"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "The beast lets out an ear-shattering roar and charges.",
-      "The beast stalks slowly forward, jaws slavering.",
-      "The beast's eyes glint with primal hunger."
-    ],
-    "winDialogue": [
-      "You escape seconds before her jaws close.",
-      "You barely flee, trailing blood and nearly torn apart.",
-      "The beast seems to deem you unworthy of eating."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Garruk",
@@ -12370,17 +12340,7 @@
       "IdentityBlack",
       "IdentityGolgari"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "True strength lies in action. Let us fight.",
-      "Krosa's fury will crush you!",
-      "My strength is as endless as the woods. Die."
-    ],
-    "winDialogue": [
-      "Pain teaches lessons no scholar can.",
-      "You wouldn't last a minute in the pits.",
-      "Do not return to my forest, weakling."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Sorin",
@@ -12479,17 +12439,7 @@
       "IdentityBlack",
       "IdentityOrzhov"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "Bold of you to come here, prey.",
-      "A volunteer for the torture vaults? How lovely.",
-      "Your blood smells delightful. Let our meal commence."
-    ],
-    "winDialogue": [
-      "Do come back. I'm hungry for a second course.",
-      "When your will breaks, you'll be a fine minion.",
-      "Pathetic. As if a mortal could best me."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Geist",
@@ -13518,17 +13468,7 @@
       "IdentityBlack",
       "Griselbrand"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "Let me show you true power, mortal.",
-      "Your soul will make a fine addition to my holdings.",
-      "Another fool who thinks they can defeat hell itself."
-    ],
-    "winDialogue": [
-      "Another piece of your soul for my collection.",
-      "Your doom is inevitable. Submit to me.",
-      "You are marked by the pit now. You shall never win."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Grolnok",
@@ -13635,17 +13575,7 @@
       "Giant",
       "IdentitySultai"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "The scent of death is overpowering.",
-      "The great monstrosity looks hungrily at you.",
-      "You feel like a fly must feel before being eaten."
-    ],
-    "winDialogue": [
-      "You narrowly escape digestion, covered in slime.",
-      "You will find no grave today, but fear returning.",
-      "The great frog has devoured a shard of your soul."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Froghemoth",
@@ -16856,17 +16786,7 @@
       "Aberration",
       "IdentitySimic"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "Each of the many heads eyes you hungrily.",
-      "Dozens of eyes stare you down, filled with hate.",
-      "A dozen overlapping roars drown out your thoughts."
-    ],
-    "winDialogue": [
-      "Burned and bleeding, you somehow escape.",
-      "A dozen wounds cover your body as you flee.",
-      "It let you go. It seems to enjoy playing with its food."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Holy Apparition",
@@ -17449,17 +17369,7 @@
       "IdentityWhite",
       "IdentityAzorius"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "I know all. You will lose here.",
-      "My might is limitless. Your defeat is certain.",
-      "I have never lost in the pits. I won't lose here."
-    ],
-    "winDialogue": [
-      "An unavoidable outcome.",
-      "Abandon your foolish dreams of beating me.",
-      "I am omnipotent. You never stood a chance."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Jellyfish",
@@ -17806,17 +17716,7 @@
       "IdentityBlue",
       "IdentitySimic"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "So you have come to give yourself to me? Delightful.",
-      "By entering this palace, you are already mine.",
-      "Foolish landwalker. The waves will drown you."
-    ],
-    "winDialogue": [
-      "Surrender. You belong to me.",
-      "You will return, plaything. And then you will submit.",
-      "Bow before your empress."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Knight",
@@ -18761,17 +18661,7 @@
       "Boss",
       "Lathliss"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "You seek glory through combat? Excellent.",
-      "You seem a worthy foe. Let us fight.",
-      "Prepare to burn, kindling."
-    ],
-    "winDialogue": [
-      "I overestimated you. Pathetic.",
-      "A halfway worthy attempt.",
-      "When your burns heal, I will accept a rematch."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Leonin Weaponmaster",
@@ -19361,17 +19251,7 @@
       "IdentityBlue",
       "Lorthos"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "The leviathan looms, unfathomably large.",
-      "The titanic leviathan turns its gaze to you...",
-      "Primal fear fill you. Such a massive beast..."
-    ],
-    "winDialogue": [
-      "You wonder if defeating it is even possible?",
-      "From within its vast belly, you plot a rematch...",
-      "You fear the entire ocean may now despise you."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Mageripper",
@@ -21267,17 +21147,7 @@
       "Dungeon",
       "Boss"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "Ancient doom awakens.",
-      "More mountain than foe, the colossus looms tall.",
-      "Each step, an earthquake. Fear fills you."
-    ],
-    "winDialogue": [
-      "You are crushed beneath its colossal heels.",
-      "The colossus still towers high, unscathed.",
-      "Will you ever be able to topple this titan?"
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Naga Warrior",
@@ -21439,17 +21309,7 @@
       "IdentityWhite",
       "IdentityBoros"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "For the rebellion!",
-      "For our people! For victory!",
-      "For freedom!"
-    ],
-    "winDialogue": [
-      "Another tyrant vanquished.",
-      "The rebellion lives on!",
-      "Our people are free of you, tyrant."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Naked Mole Rat",
@@ -22151,17 +22011,7 @@
       "IdentityGolgari"
     ],
     "gamesPerMatch": 3,
-    "nameOverride": "The Mother Slime",
-    "preBattleDialogue": [
-      "Become one with the ooze!",
-      "Come to feed yourself to mother?",
-      "Let the slime engulf you, small one."
-    ],
-    "winDialogue": [
-      "Give in and let the ooze consume you.",
-      "A few more losses and you'll be slime too.",
-      "Return swiftly... I hunger for more."
-    ]
+    "nameOverride": "The Mother Slime"
   },
   {
     "name": "Owl",
@@ -22839,7 +22689,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Ring of Ma'rûf"
+        "itemName": "Ring of Ma'r\u00fbf"
       }
     ],
     "questTags": [
@@ -25103,17 +24953,7 @@
       "Leader",
       "IdentityAll"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "The scarecrow emanates immense magic.",
-      "Mighty enchantments swirl around your foe.",
-      "No mere straw is this, but woven from raw mana."
-    ],
-    "winDialogue": [
-      "You must be a crow. You're certainly scared of it now.",
-      "Its raw magic overwhelmed you. Can it be beaten?",
-      "Far tougher than it looks. Perhaps next time..."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Scorpion",
@@ -25850,17 +25690,7 @@
       "IdentityGreen",
       "IdentityGolgari"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "Our spores are already inside you!",
-      "Soon you will become our fertilizer!",
-      "Our spread is inevitable!"
-    ],
-    "winDialogue": [
-      "You make fine soil for our thallids.",
-      "You are nothing but mulch for us.",
-      "Return soon. We still require sustenance."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Slivdrazi Experiment",
@@ -26438,17 +26268,7 @@
       "Loner",
       "IdentityRed"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "Attack the squishy parts!",
-      "Everybody else - Charge!",
-      "GOBLINS FOREVER!!!"
-    ],
-    "winDialogue": [
-      "Let's do it again!",
-      "Bring some tasty bugs next time!",
-      "GOBLINS FOREVER!!!"
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Sliver Queen",
@@ -26545,17 +26365,7 @@
       "Nesting",
       "IdentityAll"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "You threaten my children? Die.",
-      "This hive will be your grave.",
-      "Our power ever grows. You cannot win."
-    ],
-    "winDialogue": [
-      "Never return, trespasser.",
-      "Next time we will end you for good.",
-      "We are stronger still. You will never win."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Snake",
@@ -27852,17 +27662,7 @@
       "IdentityAzorius"
     ],
     "gamesPerMatch": 3,
-    "boss": true,
-    "preBattleDialogue": [
-      "I mourn your impending demise.",
-      "I don't have time for you right now.",
-      "I do not wish to fight. But I must protect my people."
-    ],
-    "winDialogue": [
-      "Rest now. This battle is over for you.",
-      "It seems you've run out of time.",
-      "It's time for you to leave."
-    ]
+    "boss": true
   },
   {
     "name": "The Cheff",
@@ -28076,17 +27876,7 @@
       "Planeswalker",
       "IdentityRed"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "Let the madness commence!",
-      "Say goodbye to your sanity.",
-      "Sacrificing yourself to me? Excellent."
-    ],
-    "winDialogue": [
-      "Your mind shattered beautifully for me.",
-      "Seeing you break was delightful.",
-      "Do come back. I want the last of your sanity."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Tiger",
@@ -28676,17 +28466,7 @@
       "Unholy",
       "IdentityBlack"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "Scream for me, mortal.",
-      "Let us begin our lesson on pain.",
-      "A volunteer for torture? Excellent."
-    ],
-    "winDialogue": [
-      "Your screams of pain are a delight.",
-      "Come back and suffer for me more.",
-      "Your torment is just beginning."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Vampire",
@@ -30293,17 +30073,7 @@
       "IdentityRed",
       "IdentityJund"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "Welcome to my hive, darling!",
-      "Shall we dance?",
-      "A guest! My insects were getting lonely..."
-    ],
-    "winDialogue": [
-      "That was fun. Do come back.",
-      "Please return soon. My insects are always hungry.",
-      "Ta ta, darling!"
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Yeti",
@@ -30506,13 +30276,7 @@
       "Leader",
       "Large"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "Step through my portal into the past..."
-    ],
-    "winDialogue": [
-      "The portal is always open if you wish to try again..."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Zombie",
@@ -33302,7 +33066,7 @@
     "colors": "G"
   },
   {
-    "name": "Jakub Šlemr '99",
+    "name": "Jakub \u0160lemr '99",
     "sprite": "sprites/enemy/humanoid/human/warlock/witch.atlas",
     "deck": [
       "decks/standard/wc99_jakub_slemr.dck"
@@ -33430,7 +33194,7 @@
     "colors": "U"
   },
   {
-    "name": "Janosch Kühn '00",
+    "name": "Janosch K\u00fchn '00",
     "sprite": "sprites/enemy/humanoid/elf/shaman.atlas",
     "deck": [
       "decks/standard/wc00_janosch_kuhn.dck"
@@ -35491,7 +35255,7 @@
     "rewards": []
   },
   {
-    "name": "Márton Stromgald",
+    "name": "M\u00e1rton Stromgald",
     "sprite": "sprites/enemy/humanoid/human/knight/cavalier_2.atlas",
     "deck": [
       "decks/miniboss/marton_stromgald.dck"
@@ -35799,16 +35563,6 @@
     ],
     "equipment": [
       "Yawgmoth Starting Setup"
-    ],
-    "preBattleDialogue": [
-      "Whatever I mark, dies. There is no escape.",
-      "You inhibit the grand evolution. You will be erased.",
-      "I am glistening oil and perfection. Surrender to me."
-    ],
-    "winDialogue": [
-      "Phyrexia's victory is inevitable. You can't win.",
-      "You will be remade in glorious metal.",
-      "Die."
     ]
   },
   {
@@ -35922,16 +35676,6 @@
     ],
     "equipment": [
       "Jaya Ballard Starting Setup"
-    ],
-    "preBattleDialogue": [
-      "Oh, no—not you again?!",
-      "I sure hope you're fireproof.",
-      "You might want to step back."
-    ],
-    "winDialogue": [
-      "GOTCHA!",
-      "Anybody want some … toast?",
-      "Destruction is best left to professionals."
     ]
   },
   {
@@ -36933,13 +36677,7 @@
       "Boss",
       "BiomeWhite"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "From Shandalar past, a great foe arises to face you."
-    ],
-    "winDialogue": [
-      "As so many before have fallen, so too have you."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Shapeshifter of Shandalar",
@@ -37071,13 +36809,7 @@
       "Boss",
       "BiomeBlue"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "From Shandalar past, a great foe arises to face you."
-    ],
-    "winDialogue": [
-      "As so many before have fallen, so too have you."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Nether Fiend of Shandalar",
@@ -37210,13 +36942,7 @@
       "Boss",
       "BiomeBlack"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "From Shandalar past, a great foe arises to face you."
-    ],
-    "winDialogue": [
-      "As so many before have fallen, so too have you."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Crag Hydra of Shandalar",
@@ -37355,13 +37081,7 @@
       "Boss",
       "BiomeRed"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "From Shandalar past, a great foe arises to face you."
-    ],
-    "winDialogue": [
-      "As so many before have fallen, so too have you."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Beast Master of Shandalar",
@@ -37500,13 +37220,7 @@
       "Boss",
       "BiomeGreen"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "From Shandalar past, a great foe arises to face you."
-    ],
-    "winDialogue": [
-      "As so many before have fallen, so too have you."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Kiska-Ra of Shandalar",
@@ -37827,13 +37541,7 @@
       "BiomeColorless",
       "FinalBoss"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "From Shandalar past, the ultimate foe arises to face you."
-    ],
-    "winDialogue": [
-      "Your doom was inevitable, it seems."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Baron Von Gant",
@@ -37873,17 +37581,7 @@
       "IdentityWhite",
       "BiomeWhite"
     ],
-    "gamesPerMatch": 3,
-    "preBattleDialogue": [
-      "Guards? Execute the trespasser.",
-      "You dare confront my majesty?",
-      "Bow before me, worm."
-    ],
-    "winDialogue": [
-      "Begone, peasant!",
-      "Away, you vile thing!",
-      "Don't dare return, weakling."
-    ]
+    "gamesPerMatch": 3
   },
   {
     "name": "Baron Levilain",
@@ -38249,7 +37947,7 @@
       "Necromancer",
       "IdentityBlack"
     ],
-    "nameOverride": "Lim-Dûl, the Necromancer"
+    "nameOverride": "Lim-D\u00fbl, the Necromancer"
   },
   {
     "name": "Chandler",
@@ -39196,17 +38894,7 @@
     "equipment": [
       "Urza Planeswalker Starting Setup"
     ],
-    "colors": "U",
-    "preBattleDialogue": [
-      "I knew you'd come. Let us begin.",
-      "Let us see if you have anything new to show me.",
-      "I am afraid you have already lost."
-    ],
-    "winDialogue": [
-      "Did I know I would win? I was counting on it.",
-      "I know your magic now. My next victory is assured.",
-      "Let us have a rematch. I wish to study your magic further."
-    ]
+    "colors": "U"
   },
   {
     "name": "Gaea, the Worldsoul",
@@ -39261,17 +38949,7 @@
     "equipment": [
       "Gaea, the Worldsoul Starting Setup"
     ],
-    "colors": "G",
-    "preBattleDialogue": [
-      "All of nature sings for me, and for your defeat.",
-      "I am as eternal as the world itself. You can't defeat me.",
-      "The very land will rise up to crush you at my command."
-    ],
-    "winDialogue": [
-      "I am nature itself. I cannot be defeated.",
-      "You could no more break the world than defeat me.",
-      "I am eternal. Surrender this pointless quest."
-    ]
+    "colors": "G"
   },
   {
     "name": "Serra the Benevolent",
@@ -39332,16 +39010,6 @@
     "equipment": [
       "Serra the Benevolent Starting Setup"
     ],
-    "colors": "W",
-    "preBattleDialogue": [
-      "Consider yourself dead, wicked one.",
-      "Face perfect justice.",
-      "Come, hear the singing of my sword."
-    ],
-    "winDialogue": [
-      "Another shadow banished from the world.",
-      "The will of the divine ensured your defeat.",
-      "You have roused my fury. Do not return."
-    ]
+    "colors": "W"
   }
 ]
