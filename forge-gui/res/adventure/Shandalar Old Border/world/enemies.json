@@ -1107,6 +1107,12 @@
         ],
         "colorType": "Colorless",
         "cardText": "\\{W\\}"
+      },
+      {
+        "type": "card",
+        "probability": 0.2,
+        "count": 1,
+        "cardName": "Serra Angel (Guay)"
       }
     ],
     "colors": "W",
@@ -10572,6 +10578,12 @@
         "probability": 0.3,
         "count": 10,
         "addMaxCount": 90
+      },
+      {
+        "type": "card",
+        "probability": 0.2,
+        "count": 1,
+        "cardName": "Serra Angel (Guay)"
       }
     ],
     "colors": "BW",
@@ -19497,6 +19509,12 @@
         "type": "gold",
         "probability": 0.3,
         "count": 200
+      },
+      {
+        "type": "card",
+        "probability": 0.2,
+        "count": 1,
+        "cardName": "Serra Angel (Guay)"
       }
     ],
     "colors": "W",
@@ -27394,6 +27412,12 @@
         "probability": 1,
         "count": 15,
         "addMaxCount": 10
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Serra Angel (Guay)"
       }
     ],
     "colors": "WUG"
@@ -31730,6 +31754,12 @@
         "type": "gold",
         "probability": 0.3,
         "count": 200
+      },
+      {
+        "type": "card",
+        "probability": 0.2,
+        "count": 1,
+        "cardName": "Serra Angel (Guay)"
       }
     ],
     "colors": "W",
@@ -31803,6 +31833,12 @@
         "type": "gold",
         "probability": 0.3,
         "count": 200
+      },
+      {
+        "type": "card",
+        "probability": 0.2,
+        "count": 1,
+        "cardName": "Serra Angel (Guay)"
       }
     ],
     "colors": "uw",
@@ -36781,6 +36817,12 @@
         "probability": 1,
         "count": 75,
         "addMaxCount": 50
+      },
+      {
+        "type": "card",
+        "probability": 0.2,
+        "count": 1,
+        "cardName": "Serra Angel (Guay)"
       }
     ],
     "colors": "W",
@@ -39279,6 +39321,12 @@
         "probability": 1,
         "count": 1,
         "itemName": "White Key to the False God"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Serra Angel (Guay)"
       }
     ],
     "equipment": [
