@@ -129,7 +129,7 @@ public class ComputerUtil {
             }
             return true;
         }
-        // FIXME: Should not arrive here, though the card seems to be stucked on stack zone and invalidated and nowhere to be found, try to put back to original zone and maybe try to cast again if possible at later time?
+        // FIXME: Should not arrive here, though the card seems to be stuck on stack zone and invalidated and nowhere to be found, try to put back to original zone and maybe try to cast again if possible at later time?
         System.out.println("[" + sa.getActivatingPlayer() + "] AI failed to play " + sa.getHostCard() + " [" + sa.getHostCard().getZone() + "]");
         sa.setSkip(true);
         if (host != null && hz != null && hz.is(ZoneType.Stack)) {
@@ -589,7 +589,7 @@ public class ComputerUtil {
         Collections.reverse(typeList);
 
         // TODO AI needs some improvements here
-        // Whats the best way to choose evidence to collect?
+        // What's the best way to choose evidence to collect?
         // Probably want to filter out cards that have graveyard abilities/castable from graveyard
         // Ideally we remove as few cards as possible "Don't overspend"
 
@@ -1192,7 +1192,7 @@ public class ComputerUtil {
             return true;
         }
 
-        //cast equipments in Main1 when there are creatures to equip and no other unequipped equipment
+        //cast equipment in Main1 when there are creatures to equip and no other unequipped equipment
         if (card.isEquipment()) {
             boolean playNow = false;
             for (Card c : card.getController().getCardsIn(ZoneType.Battlefield)) {

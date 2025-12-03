@@ -2,7 +2,7 @@ Name:Basri, Devoted Paladin
 ManaCost:4 W W
 Types:Legendary Planeswalker Basri
 Loyalty:4
-A:AB$ PutCounter | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | CounterNum$ 1 | CounterType$ P1P1 | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on up to one target creature. It gains vigilance until end of turn.
+A:AB$ PutCounter | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | CounterNum$ 1 | CounterType$ P1P1 | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on up to one target creature. It gains vigilance until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Vigilance
 A:AB$ Effect | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | Triggers$ TrigAttack | SpellDescription$ Whenever a creature attacks this turn, put a +1/+1 counter on it.
 SVar:TrigAttack:Mode$ Attacks | ValidCard$ Creature | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature attacks this turn, put a +1/+1 counter on it.
