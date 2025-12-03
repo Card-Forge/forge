@@ -5571,6 +5571,36 @@
         "itemNames": [
           "Chicken Egg"
         ]
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Plains|UGL"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Island|UGL"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Swamp|UGL"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Mountain|UGL"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Forest|UGL"
       }
     ],
     "colors": "WG",
