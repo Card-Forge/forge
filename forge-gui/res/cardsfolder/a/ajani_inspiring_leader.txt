@@ -3,7 +3,7 @@ ManaCost:4 W W
 Types:Legendary Planeswalker Ajani
 Loyalty:5
 A:AB$ GainLife | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | LifeAmount$ 2 | SubAbility$ DBPutCounter | SpellDescription$ You gain 2 life. Put two +1/+1 counters on up to one target creature.
-SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 2 | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target creature | ValidTgts$ Creature
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 2 | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature
 A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBGainLife | SpellDescription$ Exile target creature. Its controller gains 2 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ TargetedController | LifeAmount$ 2
 A:AB$ PumpAll | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Creature.YouCtrl | KW$ Flying & Double Strike | SpellDescription$ Creatures you control gain flying and double strike until end of turn.
