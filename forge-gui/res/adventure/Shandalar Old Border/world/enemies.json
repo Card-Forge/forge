@@ -5580,7 +5580,7 @@
     "name": "Chimera",
     "sprite": "sprites/enemy/aberration/chimera.atlas",
     "deck": [
-      "decks/standard/chimera.dck"
+      "decks/elite/chimera.dck"
     ],
     "ai": "",
     "spawnRate": 0.8,
@@ -7877,7 +7877,7 @@
     "name": "Imp",
     "sprite": "sprites/enemy/fiend/imp.atlas",
     "deck": [
-      "decks/standard/imp.json"
+      "decks/standard/imp.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -8280,14 +8280,14 @@
     "name": "Djinn",
     "sprite": "sprites/enemy/elemental/djinn.atlas",
     "deck": [
-      "decks/elite/djinn.json"
+      "decks/elite/djinn.dck"
     ],
     "ai": "",
     "flying": true,
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 32,
-    "life": 18,
+    "life": 25,
     "rewards": [
       {
         "type": "deckCard",
@@ -9637,14 +9637,14 @@
     "name": "Eldrazi Devastator",
     "sprite": "sprites/enemy/aberration/eldrazi/eldrazi_large.atlas",
     "deck": [
-      "decks/standard/eldrazilarge.dck"
+      "decks/elite/eldrazilarge.dck"
     ],
     "ai": "",
     "flying": true,
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 25,
-    "life": 30,
+    "life": 25,
     "rewards": [
       {
         "type": "deckCard",
@@ -14950,7 +14950,7 @@
     "name": "Griffin",
     "sprite": "sprites/enemy/monstrosity/griffin.atlas",
     "deck": [
-      "decks/standard/griffin.json"
+      "decks/standard/griffin.dck"
     ],
     "ai": "",
     "flying": true,
@@ -15438,7 +15438,7 @@
     "name": "Hidden Snake",
     "sprite": "sprites/enemy/beast/cobradungeon.atlas",
     "deck": [
-      "decks/standard/snake.json"
+      "decks/standard/snake.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -24498,14 +24498,14 @@
     "name": "Hellion",
     "sprite": "sprites/enemy/monstrosity/sandwurm.atlas",
     "deck": [
-      "decks/standard/hellion.dck"
+      "decks/elite/hellion.dck"
     ],
     "ai": "",
     "spawnRate": 0.2,
     "difficulty": 0.1,
     "speed": 13,
     "scale": 1.6,
-    "life": 15,
+    "life": 25,
     "rewards": [
       {
         "type": "deckCard",
@@ -26323,7 +26323,7 @@
     "name": "Snake",
     "sprite": "sprites/enemy/beast/big_snake.atlas",
     "deck": [
-      "decks/standard/snake.json"
+      "decks/standard/snake.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -29198,7 +29198,7 @@
     "sprite": "sprites/enemy/beast/wildrat.atlas",
     "deck": [
       "decks/standard/infectrat.dck",
-      "decks/standard/rat.json",
+      "decks/standard/rat.dck",
       "decks/standard/ratswarm.dck"
     ],
     "ai": "",

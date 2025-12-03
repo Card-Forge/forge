@@ -1,15 +1,19 @@
 [metadata]
-Name=illusion
+Name=Illusion
 [Main]
-1 Plains|MIR|2
-18 Island|MIR|2
-4 Adarkar Wastes|ICE
-4 Ancestral Memories|MIR
-4 Counterspell|BRB
-4 Dream Halls|STH
-4 Gilded Light|SCG
-4 Hydroblast|ICE
-4 Mana Leak|STH
-4 Mystical Tutor|MIR
-4 Phantom Monster|3ED
-4 Tidal Wave|MIR
+22 Island|POR|1
+2 High Tide|FEM|2
+2 Cloudskate|NEM
+2 Fleeting Image|ULG
+2 Phantom Warrior|POR
+2 Thalakos Mistfolk|TMP
+2 Aura Thief|UDS
+2 Chameleon Spirit|MMQ
+2 Somnophore|USG
+2 Phantom Monster|5ED
+2 Ephemeron|EXO
+2 Zephid|USG
+1 Cloud Dragon|POR
+1 Amugaba|ODY
+2 Palinchron|ULG
+4 Snap|ULG

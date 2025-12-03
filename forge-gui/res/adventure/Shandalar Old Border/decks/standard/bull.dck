@@ -1,12 +1,14 @@
 [metadata]
-Name=bull
+Name=Bull
 [Main]
-20 Forest|5ED|3
+24 Forest|P02
+4 Wild Growth|4ED
+4 Ironhoof Ox|P02
+4 Wild Ox|P02
+4 Zodiac Ox|P02
 4 Aurochs|ICE
-4 Fallow Earth|6ED
-4 Giant Growth|LEA
-4 Lure|5ED
-4 Shanodin Dryads|5ED
-4 Verdant Force|TMP
-4 Wirewood Savage|ONS
-4 Zodiac Ox|PTK
+4 Stampede|ICE
+4 Overrun|ODY
+2 Fallow Earth|MIR
+2 Plow Under|UDS
+4 Giant Growth|4ED

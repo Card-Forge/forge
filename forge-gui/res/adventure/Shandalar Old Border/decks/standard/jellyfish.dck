@@ -1,16 +1,19 @@
 [metadata]
-Name=jellyfish
+Name=Jellyfish
 [Main]
-2 Hydroblast|ICE
-2 Old Man of the Sea|ARN
-2 Vodalian Knights|FEM
-26 Island|TMP
-4 Boomerang|LEG
-4 Capsize|TMP
-4 Counterspell|TMP
-4 Dream Prowler|STH
-4 Lord of Atlantis|LEA
-4 Mahamoti Djinn|3ED
-4 Phantom Monster|2ED
-4 Sea Serpent|4ED
-4 Spindrift Drake|STH
+24 Island|MIR
+4 Man-o'-War|VIS
+4 Avizoa|WTH
+4 Glowing Anemone|MMQ
+2 Stinging Barrier|MMQ
+2 Cephalid Constable|JUD
+2 Boomerang|LEG
+2 Snap|ULG
+2 Undo|VIS
+2 Wash Out|INV
+2 Unsummon|LEA
+2 Seal of Removal|NEM
+2 Rushing River|PLS
+2 Churning Eddy|TOR
+2 Equilibrium|EXO
+2 Capsize|TMP

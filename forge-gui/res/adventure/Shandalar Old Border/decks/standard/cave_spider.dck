@@ -1,15 +1,20 @@
 [metadata]
-Name=cave_spider
+Name=Cave Spider
 [Main]
-15 Forest|ONS|3
-4 Elvish Guidance|ONS
-4 Elvish Pioneer|ONS
-4 Elvish Scrapper|ONS
-4 Elvish Warrior|ONS
-4 Heedless One|ONS
-4 Tranquil Thicket|ONS
-4 Tribal Unity|ONS
-4 Wirewood Symbiote|SCG
-4 Wirewood Elf|ONS
-4 Wirewood Lodge|ONS
-4 Wirewood Pride|ONS
+4 Llanowar Wastes|APC
+10 Forest|ONS
+10 Swamp|ONS
+4 Hidden Spider|USG
+3 Woolly Spider|ICE
+1 Giant Spider|LEA
+3 Silklash Spider|ONS
+1 Plated Spider|UDS
+4 Giant Growth|ICE
+2 Venom|DRK
+2 Tangle|INV
+2 Dauthi Slayer|TMP
+2 Dauthi Warlord|EXO
+4 Dauthi Horror|TMP
+2 Dauthi Ghoul|TMP
+2 Dauthi Mindripper|TMP
+4 Terror|4ED

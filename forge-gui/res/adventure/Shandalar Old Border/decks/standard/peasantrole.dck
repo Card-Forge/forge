@@ -1,18 +1,21 @@
 [metadata]
-Name=peasantrole
+Name=Peasant
 [Main]
-19 Forest|3ED
-2 Elvish Aberration|SCG
-2 Explosive Vegetation|ONS
-2 Llanowar Elves|7ED
-2 Plains|3ED
-2 Wild Mongrel|ODY
-4 Brushland|ICE
-4 Call of the Herd|ODY
-4 Centaur Chieftain|TOR
-4 Centaur Veteran|TOR
-4 Elvish Pioneer|ONS
-4 Elvish Piper|7ED
-4 Giant Growth|4ED
-4 Healing Salve|4ED
-4 Nomadic Elf|INV
+20 Plains|P02
+4 Icatian Town|FEM
+2 Icatian Moneychanger|FEM|3
+2 Town Sentry|P02
+2 Volunteer Militia|P02
+2 Devout Harpist|ULG
+2 Carrier Pigeons|ALL
+2 Tragic Poet|ULG
+2 Aysen Bureaucrats|HML
+2 Millstone|ATQ
+2 Festival of Trokin|P02
+2 Festival|DRK
+2 Holy Day|LEG
+1 Inheritance|ALL
+1 Farmstead|LEA
+4 Swords to Plowshares|LEA
+4 Path of Peace|P02
+4 Pacifism|7ED

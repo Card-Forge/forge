@@ -1,14 +1,23 @@
 [metadata]
-Name=necrogoyf
+Name=Necrogoyf
 [Main]
-2 Contagion|ALL
-2 Corrupt|7ED
-2 Deathgrip|2ED
-2 Mind Twist|2ED
-20 Swamp|3ED|3
-4 Carnophage|EXO
-4 Choking Sands|MIR
-4 Dark Ritual|3ED
-4 Drain Life|3ED
-4 Hymn to Tourach|FEM
-4 Plague Rats|4ED
+4 Llanowar Wastes|APC
+5 Swamp|ICE|1
+5 Forest|ICE|1
+2 Pine Barrens|TMP
+2 Cabal Pit|ODY
+2 Centaur Garden|ODY
+4 Lotus Vale|WTH
+4 Mulch|STH
+2 Diligent Farmhand|ODY
+2 Keeper of the Dead|EXO
+2 Filth|JUD
+2 Brawn|JUD
+2 Apprentice Necromancer|ONS
+2 Doomed Necromancer|ONS
+2 Hermit Druid|STH
+2 Morality Shift|JUD
+4 Mortivore|ODY
+4 Lhurgoyf|ICE
+4 Terravore|ODY
+4 Morgue Thrull|STH

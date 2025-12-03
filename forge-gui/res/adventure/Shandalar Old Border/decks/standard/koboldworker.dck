@@ -1,15 +1,18 @@
 [metadata]
-Name=koboldworker
+Name=Kobold Worker
 [Main]
-2 Mogg Maniac|STH
-2 Shivan Dragon|5ED
-25 Mountain|TMP|2
-4 Fireblast|VIS
-4 Goblin Cadets|USG
-4 Goblin Warrens|ATH
-4 Incinerate|ICE
-4 Jackal Pup|TMP
-4 Kobold Taskmaster|LEG
+14 Mountain|MIR
+6 Swamp|MIR
+4 Urborg Volcano|INV
+4 Crimson Kobolds|LEG
+4 Crookshank Kobolds|LEG
 4 Kobolds of Kher Keep|LEG
-4 Mogg Fanatic|TMP
-4 Rites of Initiation|ODY
+4 Kobold Overlord|LEG
+4 Kobold Taskmaster|LEG
+4 Kobold Drill Sergeant|LEG
+2 Rohgahh of Kher Keep|LEG
+2 Orgg|FEM
+2 Ogre Enforcer|VIS
+2 Goblin Goon|LGN
+4 Incinerate|MIR
+4 Terror|4ED

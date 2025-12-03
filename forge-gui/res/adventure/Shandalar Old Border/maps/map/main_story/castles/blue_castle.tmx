@@ -177,7 +177,7 @@
 ]</property>
     <property name="enemy" value="Archmage" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{"startBattleWithCard": ["Island|2ED", "Swamp|2ED", "Mountain|2ED", "Phyrexian Tyranny|PLS"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Island|LEA", "Swamp|LEA", "Mountain|ARN", "Phyrexian Tyranny|PLS"]}</property>
     </properties>
   </object>
   <object id="68" template="../../../../../../../common/maps/obj/enemy.tx" x="677.667" y="410.666">
@@ -262,7 +262,7 @@
   }
 ]</property>
     <property name="enemy" value="Djinn" />
-   <property name="effect">{"startBattleWithCard": ["Island|2ED", "Mountain|2ED", "Swamp|2ED", "Aladdin's Lamp|3ED", "Keeper of Kookus|VIS"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Island|LEA", "Mountain|ARN", "Swamp|LEA", "Aladdin's Lamp|ARN", "Keeper of Kookus|VIS"]}</property>
    </properties>
   </object>
  </objectgroup>

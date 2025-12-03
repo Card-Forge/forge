@@ -1,20 +1,16 @@
 [metadata]
-Name=kobold
+Name=Kobold
 [Main]
-1 Anarchy|ICE
-1 Swamp|LEA
-18 Mountain|LEA
-2 Dwarven Warriors|LEB
-2 Fireblast|VIS
-2 Kobold Overlord|LEG
-2 Lightning Bolt|4ED
-2 Orcish Artillery|LEB
-2 Orcish Cannoneers|ICE
-2 Shivan Dragon|LEB
-2 Terminate|PLS
-4 Goblin Piledriver|ONS
-4 Goblin Warchief|SCG
-4 Kobold Taskmaster|LEG
+20 Mountain|MIR
+4 Crimson Kobolds|LEG
+4 Crookshank Kobolds|LEG
 4 Kobolds of Kher Keep|LEG
-4 Rites of Initiation|ODY
-4 Sulfurous Springs|ICE
+4 Kobold Overlord|LEG
+4 Kobold Taskmaster|LEG
+4 Kobold Drill Sergeant|LEG
+4 Trumpet Blast|UDS
+2 War Cadence|MMQ
+2 Goblin War Drums|FEM|3
+2 Bravado|USG
+2 Falter|USG
+4 Incinerate|MIR

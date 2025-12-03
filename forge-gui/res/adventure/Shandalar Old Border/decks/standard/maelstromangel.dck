@@ -1,21 +1,23 @@
 [metadata]
-Name=Adventure - Maelstrom Angel
+Name=Maelstrom Angel
 [Main]
-1 Battlefield Forge|APC
-1 Swamp|4ED
-2 Shivan Reef|APC
-3 Forest|4ED
-4 Adarkar Wastes|ICE
-4 Chromatic Sphere|INV
-4 City of Brass|ARN
-4 Counterspell|4ED
-4 Duress|USG
+8 Forest|INV
+3 Island|INV
+3 Mountain|INV
+3 Swamp|INV
+3 Plains|INV
+4 City of Brass|5ED
+4 Rampant Growth|MIR
+2 Untamed Wilds|P02
+2 New Frontiers|ODY
+4 Lightning Angel|APC
 4 Iridescent Angel|ODY
-4 Island|4ED
-4 Lightning Bolt|4ED
-4 Mountain|4ED
-4 Plains|4ED
-4 Rofellos, Llanowar Emissary|UDS
-4 Serra Angel|LEA
-4 Shivan Dragon|2ED
-4 Thran Dynamo|UDS
+4 Wrath of God|7ED
+2 Cromat|APC
+1 Legacy Weapon|APC
+1 Global Ruin|INV
+2 Collective Restraint|INV
+3 Tribal Flames|INV
+3 Allied Strategies|PLS
+2 Samite Pilgrim|PLS
+2 Ordered Migration|INV

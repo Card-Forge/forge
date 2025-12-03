@@ -1,27 +1,25 @@
 [metadata]
-Name=greengolem
+Name=Green Golem
 [Main]
-1 Arrogant Wurm|TOR
-1 Genesis|JUD
-1 Masticore|UDS
-1 Rith's Grove|PLS
-1 Sylvan Library|4ED
-1 Sylvan Library|4ED
-2 Forgotten Cave|ONS
-2 Karplusan Forest|5ED
-2 Karplusan Forest|ICE
-2 Rites of Initiation|ODY
-2 Roar of the Wurm|ODY
-2 Squee, Goblin Nabob|MMQ
-2 Tranquil Thicket|ONS
-3 Lava Blister|ODY
-3 Wooded Foothills|ONS
-4 Basking Rootwalla|TOR
-4 Devastating Dreams|TOR
-4 Fiery Temper|TOR
-4 Lightning Bolt|2ED
-4 Terravore|ODY
-4 Wasteland|TMP
-4 Wild Mongrel|ODY
-8 Forest|ODY|3
-9 Mountain|ODY|3
+12 Forest|USG
+4 Mishra's Factory|ATQ|4
+4 Stalking Stones|TMP
+4 Scorched Ruins|WTH
+1 Living Artifact|LEA
+1 Scarwood Bandits|DRK
+2 Tribal Unity|ONS
+2 Wild Growth|ICE
+2 Ley Druid|LEA
+2 Krosan Restorer|TOR
+2 Argothian Elder|USG
+4 Brass Herald|APC
+2 Patagia Golem|MIR
+2 Soldevi Golem|ICE
+4 Clay Statue|ATQ
+1 Igneous Golem|MIR
+1 Lead Golem|MIR
+1 Matopi Golem|VIS
+1 Basalt Golem|MIR
+2 Beast of Burden|ULG
+2 Phyrexian Colossus|7ED
+4 Overgrowth|STH

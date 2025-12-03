@@ -1,28 +1,19 @@
 [metadata]
-Name=snake
+Name=Snake
 [Main]
-1 Battlefield Forge|APC
-1 Coiled Tinviper|TMP
-1 Elvish Scout|FEM
-1 Emerald Charm|VIS
-1 Giant Growth|6ED
-1 Llanowar Elves|LEB
-1 Lure|7ED
-1 Quirion Ranger|VIS
-1 Regeneration|6ED
-1 Snake Basket|VIS
-1 Sylvan Library|LEG
-1 Verdant Force|TMP
-16 Forest|4ED|2
-2 Brushland|ICE
-2 Mountain|4ED|2
-2 Plains|4ED|2
-4 Blood Lust|4ED
-4 Carnivorous Plant|4ED
-4 Elven Warhounds|TMP
-4 Giant Spider|ATH
-4 Green Ward|LEA
-4 Ironroot Treefolk|4ED
-4 Karplusan Forest|ICE
-4 Scryb Sprites|LEB
-4 Serrated Arrows|ATH
+10 Forest|MIR
+10 Island|MIR
+4 Rampant Growth|MIR
+3 Ophidian|WTH
+4 Mystic Snake|APC
+4 River Boa|VIS
+2 Marsh Boa|PCY
+2 Nafs Asp|ARN
+2 Anaconda|POR
+2 Boa Constrictor|MMQ
+3 Ribbon Snake|PCY
+4 Memory Lapse|MIR
+3 Psychic Venom|LEA
+2 Snake Basket|VIS
+3 Overrun|TMP
+2 Snake Pit|MMQ
