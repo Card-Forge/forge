@@ -1102,7 +1102,7 @@
         "type": "card",
         "probability": 0.2,
         "count": 1,
-        "cardName": "Serra Angel (Guay)"
+        "cardName": "Serra Angel|O90P"
       }
     ],
     "colors": "W",
@@ -10563,7 +10563,7 @@
         "type": "card",
         "probability": 0.2,
         "count": 1,
-        "cardName": "Serra Angel (Guay)"
+        "cardName": "Serra Angel|O90P"
       }
     ],
     "colors": "BW",
@@ -19394,7 +19394,7 @@
         "type": "card",
         "probability": 0.2,
         "count": 1,
-        "cardName": "Serra Angel (Guay)"
+        "cardName": "Serra Angel|O90P"
       }
     ],
     "colors": "W",
@@ -27090,7 +27090,7 @@
   },
   {
     "name": "Sorceress Queen Kaja",
-    "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.png",
+    "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
     "deck": [
       "decks/miniboss/sorceressqueenkaja.dck"
     ],
@@ -27125,7 +27125,7 @@
   },
   {
     "name": "Goblin King Phil",
-    "sprite": "sprites/enemy/humanoid/goblin/goblinking.png",
+    "sprite": "sprites/enemy/humanoid/goblin/goblinking.atlas",
     "deck": [
       "decks/miniboss/goblinkingphil.dck"
     ],
@@ -27160,7 +27160,7 @@
   },
   {
     "name": "King Kane Ferguson",
-    "sprite": "sprites/enemy/undead/deathknightidle.png",
+    "sprite": "sprites/enemy/undead/deathknightidle.atlas",
     "deck": [
       "decks/miniboss/kingkaneferguson.dck"
     ],
@@ -27195,7 +27195,7 @@
   },
   {
     "name": "Elf Queen Guay",
-    "sprite": "sprites/enemy/humanoid/elf/deftsorceress.png",
+    "sprite": "sprites/enemy/humanoid/elf/deftsorceress.atlas",
     "deck": [
       "decks/miniboss/elfqueenguay.dck"
     ],
@@ -27227,7 +27227,7 @@
         "type": "card",
         "probability": 1,
         "count": 1,
-        "cardName": "Serra Angel (Guay)"
+        "cardName": "Serra Angel|O90P"
       }
     ],
     "colors": "WUG"
@@ -31523,7 +31523,7 @@
         "type": "card",
         "probability": 0.2,
         "count": 1,
-        "cardName": "Serra Angel (Guay)"
+        "cardName": "Serra Angel|O90P"
       }
     ],
     "colors": "W",
@@ -31602,7 +31602,7 @@
         "type": "card",
         "probability": 0.2,
         "count": 1,
-        "cardName": "Serra Angel (Guay)"
+        "cardName": "Serra Angel|O90P"
       }
     ],
     "colors": "uw",
@@ -36566,7 +36566,7 @@
         "type": "card",
         "probability": 0.2,
         "count": 1,
-        "cardName": "Serra Angel (Guay)"
+        "cardName": "Serra Angel|O90P"
       }
     ],
     "colors": "W",
@@ -39004,7 +39004,7 @@
         "type": "card",
         "probability": 1,
         "count": 1,
-        "cardName": "Serra Angel (Guay)"
+        "cardName": "Serra Angel|O90P"
       }
     ],
     "equipment": [
