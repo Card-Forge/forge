@@ -15,27 +15,27 @@ Name=Elf Queen Guay
 1 Thoughtleech|7ED
 2 Respite|TMP
 2 Resuscitate|EXO
-2 Quirion Trailblazer|PLS
+2 Quirion Trailblazer|INV
 2 Planeswalker's Favor|PLS
-2 Norwood Riders|P02
-1 Norwood Warrior|P02
-1 Norwood Archers|P02
+2 Norwood Riders|PO2
+1 Norwood Warrior|PO2
+1 Norwood Archers|PO2
 2 Moment's Peace|ODY
-1 Lynx|P02
+1 Lynx|PO2
 1 Kaysa|ALL
 1 Elven Cache|POR
 2 Defense of the Heart|ULG
-1 Fog Patch|NEM
-2 Deathcoil Wurm|P02
+1 Fog Patch|NMS
+2 Deathcoil Wurm|PO2
 1 Elvish Lyrist|USG
-1 Barbtooth Wurm|P02
+1 Barbtooth Wurm|PO2
 1 Wall of Tears|STH
 1 Sea Sprite|5ED
 2 Wonder|JUD
 1 Traveler's Cloak|INV
 1 Thornwind Faeries|ULG
 1 Memory Lapse|MIR
-1 Sea Drake|P02
+1 Sea Drake|PO2
 1 Phantom Monster|5ED
 1 Boomerang|7ED
 2 Starlit Angel|POR
@@ -51,7 +51,7 @@ Name=Elf Queen Guay
 1 Auramancer|ODY
 1 Devout Harpist|ULG
 1 Embolden|ODY
-1 Angelic Wall|P02
+1 Angelic Wall|PO2
 
 [StartInBattle_Reference]
 2 Plains|CMM|2
