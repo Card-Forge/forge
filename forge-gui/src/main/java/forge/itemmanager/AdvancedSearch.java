@@ -21,8 +21,6 @@ import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.CardType;
-import forge.card.CardType.CoreType;
-import forge.card.CardType.Supertype;
 import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.CardPool;
@@ -174,39 +172,30 @@ public class AdvancedSearch {
                 return input.getRules().getColor().countColors();
             }
         }),
-        CARD_TYPE("lblType", PaperCard.class, FilterOperator.COMBINATION_OPS, new CustomListEvaluator<PaperCard, String>(CardType.getCombinedSuperAndCoreTypes()) {
+        CARD_TYPE("lblType", PaperCard.class, FilterOperator.COMBINATION_OPS, new CustomListEvaluator<PaperCard, CardType.CoreType>(List.of(CardType.CoreType.values()), CardType.CoreType::getTranslatedName) {
             @Override
-            protected String getItemValue(PaperCard input) {
+            protected CardType.CoreType getItemValue(PaperCard input) {
                 throw new RuntimeException("getItemValues should be called instead");
             }
 
             @Override
-            protected Set<String> getItemValues(PaperCard input) {
+            protected Set<CardType.CoreType> getItemValues(PaperCard input) {
                 final CardType type = input.getRules().getType();
-                final Set<String> types = new HashSet<>();
+                final Set<CardType.CoreType> types = new HashSet<>();
                 CardSplitType cardSplitType = input.getRules().getSplitType();
                 if (cardSplitType != CardSplitType.None && cardSplitType != CardSplitType.Split) {
                     if (input.getRules().getOtherPart() != null) {
-                        for (Supertype supertype : input.getRules().getOtherPart().getType().getSupertypes()) {
-                            types.add(supertype.name());
+                        for (CardType.CoreType coreType : input.getRules().getOtherPart().getType().getCoreTypes()) {
+                            types.add(coreType);
                         }
-                        for (CoreType coreType : input.getRules().getOtherPart().getType().getCoreTypes()) {
-                            types.add(coreType.name());
-                        }
-                        for (Supertype supertype : input.getRules().getMainPart().getType().getSupertypes()) {
-                            types.add(supertype.name());
-                        }
-                        for (CoreType coreType : input.getRules().getMainPart().getType().getCoreTypes()) {
-                            types.add(coreType.name());
+                        for (CardType.CoreType coreType : input.getRules().getMainPart().getType().getCoreTypes()) {
+                            types.add(coreType);
                         }
                         return types;
                     }
                 }
-                for (Supertype t : type.getSupertypes()) {
-                    types.add(t.name());
-                }
-                for (CoreType t : type.getCoreTypes()) {
-                    types.add(t.name());
+                for (CardType.CoreType t : type.getCoreTypes()) {
+                    types.add(t);
                 }
                 return types;
             }
@@ -432,24 +421,21 @@ public class AdvancedSearch {
                 return ((PaperCard) input).getRules().getColor().countColors();
             }
         }),
-        INVITEM_TYPE("lblType", InventoryItem.class, FilterOperator.COMBINATION_OPS, new CustomListEvaluator<InventoryItem, String>(CardType.getCombinedSuperAndCoreTypes()) {
+        INVITEM_TYPE("lblType", InventoryItem.class, FilterOperator.COMBINATION_OPS, new CustomListEvaluator<InventoryItem, CardType.CoreType>(List.of(CardType.CoreType.values()), CardType.CoreType::getTranslatedName) {
             @Override
-            protected String getItemValue(InventoryItem input) {
+            protected CardType.CoreType getItemValue(InventoryItem input) {
                 throw new RuntimeException("getItemValues should be called instead");
             }
 
             @Override
-            protected Set<String> getItemValues(InventoryItem input) {
+            protected Set<CardType.CoreType> getItemValues(InventoryItem input) {
                 if (!(input instanceof PaperCard)) {
                     return new HashSet<>();
                 }
                 final CardType type = ((PaperCard) input).getRules().getType();
-                final Set<String> types = new HashSet<>();
-                for (Supertype t : type.getSupertypes()) {
-                    types.add(t.name());
-                }
-                for (CoreType t : type.getCoreTypes()) {
-                    types.add(t.name());
+                final Set<CardType.CoreType> types = new HashSet<>();
+                for (CardType.CoreType t : type.getCoreTypes()) {
+                    types.add(t);
                 }
                 return types;
             }
