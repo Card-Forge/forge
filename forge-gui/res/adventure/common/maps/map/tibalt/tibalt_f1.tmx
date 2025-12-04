@@ -64,7 +64,7 @@
    <properties>
     <property name="defeatDialog">[
 	{
-		&quot;text&quot;: &quot;The Devil unleashes a shrill scream as he falls unto the ground. His blood mixes with that of his victims, you see the red barrier disappear. The way above is open&quot;,
+		&quot;text&quot;: &quot;The Devil unleashes a shrill scream as he falls unto the ground. His blood mixes with that of his victims, you see the red barrier disappear. The way above is open.&quot;,
 		&quot;options&quot;: [
 			{
 				&quot;name&quot;: &quot;(Continue)&quot;,
@@ -183,9 +183,9 @@
   <object id="218" name="Ward" type="dialog" gid="56584" x="556.362" y="180.439" width="63.961" height="16">
    <properties>
     <property name="dialog">[{
-    &quot;text&quot;:&quot;A translucent, shimmering red field blocks your path. An ancient Evil is lurking in these crypts, preventing you from entering the room in front of you ...&quot;,
+    &quot;text&quot;:&quot;A translucent, shimmering red field blocks your path. An ancient evil is lurking in these crypts, preventing you from entering the room in front of you ...&quot;,
     &quot;options&quot;:[
-    { &quot;name&quot;:&quot;Leave.&quot; } 
+    { &quot;name&quot;:&quot;Leave&quot; } 
     ]
 }]</property>
    </properties>
