@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="75">
  <editorsettings>
-  <export target="wastetown..tmx" format="tmx"/>
+  <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
    eJztmH0KwzAIxXuEjbIz9nw7WU8wKGEIEtRpksW3roX3T7/85ZnU1G1dls3QfntLu2Y9q+l110XxuFpitKjEQmWzvKPzWXxSTCQ+r49IfJzR8juTzzMfslk0tmyOswhtzVh82SyXPucqm+EX2c4sdN/R+f5dV35y/UCvvRE+um/UmKS9fa9/I/3W/j+Q8uvhi+T2G3weH2dzRfOcLY1vRt56YqDOqxn50npVKIryofFLYxn9vucDi4/qDbH18nnz71nHvNfA+Vo5PWx1/ZXqcb1vKarZoozeNcN5pF6M1D8ilaOFL/K9OQD3N2II
@@ -23,43 +23,43 @@
  <objectgroup id="4" name="Objects">
   <object id="59" template="../../../../../../common/maps/obj/door_right.tx" x="0.16667" y="335.833">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_4/cave_23J1.tmx"/>
-    <property name="teleportObjectId" value="60"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_4/cave_23J1.tmx" />
+    <property name="teleportObjectId" value="60" />
    </properties>
   </object>
   <object id="63" template="../../../../../../common/maps/obj/enemy.tx" x="555.257" y="223.523">
    <properties>
-    <property name="enemy" value="Fire Giant"/>
-   </properties>
+    <property name="enemy" value="Fire Giant" />
+   <property name="effect">{ "startBattleWithCard": [ "Thran Dynamo|UDS" ] }</property></properties>
   </object>
   <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="445.333" y="567.333">
    <properties>
-    <property name="enemy" value="Wurm"/>
+    <property name="enemy" value="Wurm" />
    </properties>
   </object>
-  <object id="65" template="../../../../../../common/maps/obj/treasure.tx" x="457.888" y="343.28"/>
-  <object id="67" template="../../../../../../common/maps/obj/treasure.tx" x="427.471" y="316.299"/>
-  <object id="68" template="../../../../../../common/maps/obj/treasure.tx" x="344" y="83.3333"/>
-  <object id="69" template="../../../../../../common/maps/obj/gold.tx" x="329.667" y="152.333"/>
-  <object id="70" template="../../../../../../common/maps/obj/gold.tx" x="477.591" y="349.98"/>
-  <object id="71" template="../../../../../../common/maps/obj/gold.tx" x="436.096" y="331.337"/>
+  <object id="65" template="../../../../../../common/maps/obj/treasure.tx" x="457.888" y="343.28" />
+  <object id="67" template="../../../../../../common/maps/obj/treasure.tx" x="427.471" y="316.299" />
+  <object id="68" template="../../../../../../common/maps/obj/treasure.tx" x="344" y="83.3333" />
+  <object id="69" template="../../../../../../common/maps/obj/gold.tx" x="329.667" y="152.333" />
+  <object id="70" template="../../../../../../common/maps/obj/gold.tx" x="477.591" y="349.98" />
+  <object id="71" template="../../../../../../common/maps/obj/gold.tx" x="436.096" y="331.337" />
   <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="284.181" y="90.4698">
    <properties>
-    <property name="enemy" value="Lightning Elemental"/>
-    <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value=""/>
+    <property name="enemy" value="Lightning Elemental" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="" />
    </properties>
   </object>
   <object id="73" template="../../../../../../common/maps/obj/door_right.tx" x="305.166" y="17.2901">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_4/cave_23J1.tmx"/>
-    <property name="teleportObjectId" value="60"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_4/cave_23J1.tmx" />
+    <property name="teleportObjectId" value="60" />
    </properties>
   </object>
   <object id="74" template="../../../../../../common/maps/obj/door_right.tx" x="632.323" y="178.178">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_4/cave_23J1.tmx"/>
-    <property name="teleportObjectId" value="60"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_4/cave_23J1.tmx" />
+    <property name="teleportObjectId" value="60" />
    </properties>
   </object>
  </objectgroup>

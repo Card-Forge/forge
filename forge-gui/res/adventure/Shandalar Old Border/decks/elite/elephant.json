@@ -1,0 +1,43 @@
+{
+  "name": "Elephant",
+  "mainDeck": [
+    {
+      "count": 15,
+      "colors": [
+        "White",
+        "Green"
+      ],
+      "subTypes": [
+        "Elephant"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 23,
+      "colors": [
+        "White",
+        "Green"
+      ],
+      "subTypes": [
+        "Elephant"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 11,
+      "cardName": "Plains|TMP"
+    },
+    {
+      "type": "card",
+      "count": 11,
+      "cardName": "Forest|TMP"
+    }
+  ]
+}

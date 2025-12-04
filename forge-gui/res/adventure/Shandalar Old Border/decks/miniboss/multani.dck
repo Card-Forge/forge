@@ -1,0 +1,28 @@
+[metadata]
+Name=Multani
+[Main]
+20 Forest|ICE
+4 Multani, Maro-Sorcerer|ULG
+4 Maro|MIR
+4 Forgotten Ancient|SCG
+2 Multani's Decree|UDS
+2 Seeds of Innocence|MIR
+2 Greater Good|USG
+2 Sylvan Library|LEG
+4 Moment's Peace|ODY
+4 Tangle|INV
+4 Yavimaya Elder|UDS
+2 Yavimaya Wurm|ULG
+2 Yavimaya Ancients|ALL
+4 Multani's Acolyte|ULG
+
+[StartInBattle_Reference]
+1 Heart of Yavimaya|ALL
+1 Yavimaya Hollow|UDS
+1 Multani's Presence|ULG
+1 Rowen|VIS
+1 Primitive Etchings|SCG
+1 Library of Leng|LEA
+1 Primal Rage|STH
+1 Fires of Yavimaya|INV
+1 Yavimaya Gnats|ICE

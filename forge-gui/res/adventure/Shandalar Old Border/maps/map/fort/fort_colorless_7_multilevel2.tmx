@@ -44,23 +44,18 @@
   <object id="74" template="../../../../../../common/maps/obj/treasure.tx" x="269.75" y="354.416"/>
   <object id="75" template="../../../../../../common/maps/obj/enemy.tx" x="417.084" y="368.917">
    <properties>
-    <property name="enemy" value="False Monk"/>
-    <property name="threatRange" type="int" value="40"/>
+    <property name="enemy" value="Mandurang of Shandalar"/>
+    <property name="threatRange" type="int" value="100"/>
     <property name="waypoints" value="84,83"/>
-   </properties>
+   <property name="effect">{"startBattleWithCard": ["City of Brass|ARN"]}</property>
+    </properties>
   </object>
   <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="370.584" y="329.833">
    <properties>
-    <property name="enemy" value="False Knight"/>
-    <property name="threatRange" type="int" value="50"/>
-   </properties>
-  </object>
-  <object id="78" template="../../../../../../common/maps/obj/enemy.tx" x="448.5" y="306.833">
-   <properties>
-    <property name="enemy" value="False Monk"/>
-    <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value="85,86"/>
-   </properties>
+    <property name="enemy" value="Whim of Shandalar"/>
+    <property name="threatRange" type="int" value="100"/>
+   <property name="effect">{"startBattleWithCard": ["City of Brass|ARN"]}</property>
+    </properties>
   </object>
   <object id="79" template="../../../../../../common/maps/obj/entry_up.tx" x="336.171" y="478.828">
    <properties>
@@ -69,20 +64,6 @@
    </properties>
   </object>
   <object id="80" template="../../../../../../common/maps/obj/manashards.tx" x="435.168" y="237.433"/>
-  <object id="81" template="../../../../../../common/maps/obj/enemy.tx" x="293" y="360.333">
-   <properties>
-    <property name="enemy" value="High Cultist"/>
-    <property name="spawn.Easy" type="bool" value="true"/>
-    <property name="threatRange" type="int" value="30"/>
-   </properties>
-  </object>
-  <object id="82" template="../../../../../../common/maps/obj/enemy.tx" x="369.333" y="395.667">
-   <properties>
-    <property name="displayNameOverride" value=""/>
-    <property name="enemy" value="False Knight"/>
-    <property name="threatRange" type="int" value="50"/>
-   </properties>
-  </object>
   <object id="83" template="../../../../../../common/maps/obj/waypoint.tx" x="419" y="262.667"/>
   <object id="84" template="../../../../../../common/maps/obj/waypoint.tx" x="415" y="423"/>
   <object id="85" template="../../../../../../common/maps/obj/waypoint.tx" x="450" y="281.667"/>

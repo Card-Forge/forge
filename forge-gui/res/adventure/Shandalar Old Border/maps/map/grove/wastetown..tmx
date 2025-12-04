@@ -58,6 +58,7 @@
   </object>
   <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="304.49" y="112.991">
    <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Mountain|S99", "Mountain|S99", "Island|S99", "Island|S99", "Merfolk of the Pearl Trident|S99", "Mons's Goblin Raiders|S99" ] }</property>
     <property name="enemy" value="Eldrazi Devastator"/>
     <property name="speedModifier" type="float" value="5"/>
     <property name="threatRange" type="int" value="80"/>

@@ -1,0 +1,36 @@
+[metadata]
+Name=Arzakon, Shandalar's Doom
+[Main]
+2 Clay Statue|ATQ
+2 Clockwork Avian|ATQ
+2 Clockwork Beast|LEA
+2 Colossus of Sardia|ATQ
+2 Dancing Scimitar|ARN
+2 Juggernaut|LEA
+2 Rock Hydra|LEA
+2 Triskelion|ATQ
+2 Yotian Soldier|ATQ
+1 Braingeyser|LEA
+2 Disintegrate|LEA
+2 Earthquake|LEA
+2 Fireball|LEA
+2 Hurricane|LEA
+2 Stream of Life|LEA
+1 Timetwister|LEA
+1 Wheel of Fortune|LEA
+1 Black Lotus|LEA
+4 Howling Mine|LEA
+4 Rocket Launcher|ATQ
+2 Circle of Protection: Red|LEA
+4 City of Brass|ARN
+4 Taiga|LEA
+2 Tropical Island|LEA
+2 Volcanic Island|LEB
+4 Urza's Mine|ATQ
+4 Urza's Power Plant|ATQ
+4 Urza's Tower|ATQ
+
+[StartInBattle_Reference]
+1 Black Lotus|LEA
+1 Celestial Prism|LEA
+1 Clay Statue|ATQ

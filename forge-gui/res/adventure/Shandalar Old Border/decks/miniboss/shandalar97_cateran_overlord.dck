@@ -1,0 +1,42 @@
+[metadata]
+Name=Cateran Overlord
+[Main]
+36 Swamp|2ED
+4 Cabal Coffers|TOR
+4 Intimidation|MMQ
+2 Extortion|MMQ
+2 Cateran Overlord|MMQ
+2 Cateran Slaver|MMQ
+2 Primeval Shambler|MMQ
+2 Cateran Enforcer|MMQ
+2 Rathi Assassin|NMS
+2 Rathi Fiend|NMS
+2 Highway Robber|MMQ
+2 Cateran Kidnappers|MMQ
+2 Strongarm Thug|MMQ
+2 Skulking Fugitive|MMQ
+2 Rathi Intimidator|NMS
+2 Phyrexian Driver|NMS
+2 Doomed Necromancer|ONS
+2 Cateran Brute|MMQ
+2 Cateran Summons|MMQ
+2 Dauthi Mercenary|TMP
+2 Death Charmer|PCY
+2 Bog Glider|PCY
+2 Alley Grifters|MMQ
+2 Silent Assassin|MMQ
+2 Cateran Persuader|MMQ
+2 Molting Harpy|MMQ
+2 Rampart Crawler|MMQ
+2 Vendetta|MMQ
+2 Snuff Out|MMQ
+1 Spineless Thug|NMS
+1 Misshapen Fiend|MMQ
+2 Bog Smugglers|MMQ
+
+[StartInBattle_Reference]
+1 Black Market|MMQ
+1 Larceny|MMQ
+1 Misshapen Fiend|MMQ
+1 Spineless Thug|NMS
+1 Rathi Assassin|NMS

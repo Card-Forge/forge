@@ -28,28 +28,31 @@
  <objectgroup id="4" name="Objects">
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="270.665" width="48" height="16">
    <properties>
-    <property name="teleport" value=""/>
+    <property name="teleport" value="" />
    </properties>
   </object>
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="155.82" y="124.379">
    <properties>
-    <property name="enemy" value="Djinn"/>
+    <property name="enemy" value="Djinn" />
+   <property name="effect">{"startBattleWithCard": ["Island|LEA", "Mountain|ARN", "Swamp|LEA", "Aladdin's Lamp|ARN", "Keeper of Kookus|VIS"]}</property>
    </properties>
   </object>
   <object id="65" template="../../../../../../common/maps/obj/treasure.tx" x="228.493" y="187.969">
    <properties>
-    <property name="reward">[{ &quot;type&quot;: &quot;card&quot;, &quot;probability&quot;: 1, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Hanna, Ship's Navigator|INV&quot; }]</property>
+    <property name="reward">[{ "type": "card", "probability": 1, "count": 1, "cardName": "Hanna, Ship's Navigator|INV" }]</property>
    </properties>
   </object>
-  <object id="66" template="../../../../../../common/maps/obj/gold.tx" x="164.873" y="252.007"/>
+  <object id="66" template="../../../../../../common/maps/obj/gold.tx" x="164.873" y="252.007" />
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="208.866" y="47.7002">
    <properties>
-    <property name="enemy" value="Djinn"/>
+    <property name="enemy" value="Djinn" />
+   <property name="effect">{"startBattleWithCard": ["Island|LEA", "Mountain|ARN", "Swamp|LEA", "Aladdin's Lamp|ARN", "Keeper of Kookus|VIS"]}</property>
    </properties>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="265.893" y="131.904">
    <properties>
-    <property name="enemy" value="Djinn"/>
+    <property name="enemy" value="Djinn" />
+   <property name="effect">{"startBattleWithCard": ["Island|LEA", "Mountain|ARN", "Swamp|LEA", "Aladdin's Lamp|ARN", "Keeper of Kookus|VIS"]}</property>
    </properties>
   </object>
  </objectgroup>

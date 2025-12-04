@@ -1,16 +1,18 @@
 [metadata]
-Name=camel
+Name=Camel
 [Main]
-19 Plains|LEA|1
-2 Swamp|LEA|1
-4 Armored Pegasus|TMP|1
-4 Benalish Hero|3ED|1
-4 Caves of Koilos|APC|1
-4 Healing Salve|2ED|1
-4 Pearled Unicorn|LEB|1
-4 Ramosian Lieutenant|MMQ|1
-4 Ramosian Sergeant|MMQ|1
-4 Rebel Informer|PCY|1
-4 Serra Angel|LEA|1
-4 Serra's Blessing|WTH|1
-4 Tundra Wolves|6ED|1
+18 Plains|4ED
+4 Desert|ARN
+2 Oasis|ARN
+4 Camel|ARN
+4 Abu Ja'far|ARN
+4 Army of Allah|ARN
+4 Moorish Cavalry|ARN
+4 Eye for an Eye|ARN
+2 Repentant Blacksmith|ARN
+2 War Elephant|ARN
+2 Piety|ARN
+2 King Suleiman|ARN
+4 Dancing Scimitar|ARN
+2 Brass Man|ARN
+2 Flying Carpet|ARN

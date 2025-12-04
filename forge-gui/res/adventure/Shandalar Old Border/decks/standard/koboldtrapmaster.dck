@@ -1,15 +1,17 @@
 [metadata]
-Name=koboldtrapmaster
+Name=Kobold Trapmaster
 [Main]
-14 Mountain|TMP|2
-2 Orcish Cannoneers|DKM|1
-3 Swamp|TMP|2
-4 Enfeeblement|MIR|1
-4 Fireblast|VIS|1
-4 Incinerate|DKM|1
-4 Kobold Drill Sergeant|LEG|1
-4 Kobold Overlord|LEG|1
-4 Kobold Taskmaster|LEG|1
-4 Lightning Bolt|4ED|1
-4 Shock|STH|1
-4 Sulfurous Springs|ICE|1
+16 Mountain|MIR
+4 Quicksand|VIS
+4 Crimson Kobolds|LEG
+4 Crookshank Kobolds|LEG
+4 Kobolds of Kher Keep|LEG
+4 Kobold Overlord|LEG
+4 Kobold Taskmaster|LEG
+4 Kobold Drill Sergeant|LEG
+4 Pit Trap|ICE
+4 Blazing Salvo|ODY
+2 Lava Blister|ODY
+2 Molten Influence|ODY
+2 Skullscorch|TOR
+2 Browbeat|JUD

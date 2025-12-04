@@ -6,9 +6,9 @@ Name=Homelands Chef
 4 Plateau|LEA
 2 Brushland|ICE
 2 Karplusan Forest|ICE
-2 Forest|UGL
-2 Plains|UGL
-2 Mountain|UGL
+2 Forest|ICE
+2 Plains|ICE
+2 Mountain|ICE
 2 Joven's Tools|HML
 4 Serrated Arrows|HML
 2 Ebony Rhino|HML
@@ -25,3 +25,9 @@ Name=Homelands Chef
 3 Retribution|HML
 3 Ambush Party|HML
 3 An-Havva Constable|HML
+
+[StartInBattle_Reference]
+4 An-Havva Township|HML
+1 Folk of An-Havva|HML
+1 Dwarven Trader|HML
+1 Abbey Matron|HML

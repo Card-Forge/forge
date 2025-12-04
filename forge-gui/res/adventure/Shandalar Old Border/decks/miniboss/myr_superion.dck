@@ -9,8 +9,8 @@ Name=Colossus of Sardia
 4 Thran Dynamo|UDS
 4 Teeka's Dragon|MIR
 2 Colossus of Sardia|ATQ
-2 Diabolic Machine|ATQ
-2 Aladdin's Ring|2ED
+2 Diabolic Machine|DRK
+2 Aladdin's Ring|3ED
 4 Phyrexian Colossus|USG
 2 Lotus Guardian|INV
 4 Triskelion|ATQ
@@ -19,3 +19,8 @@ Name=Colossus of Sardia
 4 Juggernaut|LEA
 2 Sword of the Ages|LEG
 2 Armageddon Clock|4ED
+
+[StartInBattle_Reference]
+1 Mishra's Workshop|ATQ
+1 Sol Ring|LEA
+1 Colossus of Sardia|ATQ

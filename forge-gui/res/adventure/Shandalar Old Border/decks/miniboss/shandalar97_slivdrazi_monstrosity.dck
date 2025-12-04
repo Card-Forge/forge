@@ -1,0 +1,21 @@
+[metadata]
+Name=Spined Sliver
+[Main]
+6 Mountain|2ED
+6 Forest|2ED
+4 Taiga|LEA
+4 Karplusan Forest|ICE
+4 Wooded Foothills|ONS
+4 Muscle Sliver|TMP
+4 Spined Sliver|STH
+4 Horned Sliver|TMP
+4 Brood Sliver|LGN
+4 Heart Sliver|TMP
+4 Blade Sliver|LGN
+4 Magma Sliver|LGN
+4 Hunter Sliver|LGN
+4 Lightning Bolt|LEA
+
+[StartInBattle_Reference]
+1 Barbed Sliver|TMP
+1 Root Sliver|LGN

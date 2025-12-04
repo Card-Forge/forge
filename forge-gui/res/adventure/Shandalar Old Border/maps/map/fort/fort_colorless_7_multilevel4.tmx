@@ -45,10 +45,10 @@
   <object id="74" template="../../../../../../common/maps/obj/treasure.tx" x="521.917" y="349.416"/>
   <object id="75" template="../../../../../../common/maps/obj/enemy.tx" x="391.751" y="324.417">
    <properties>
-    <property name="enemy" value="Eldrazi Devastator"/>
-    <property name="speedModifier" type="float" value="20"/>
+    <property name="enemy" value="Arzakon, Shandalar's Doom"/>
     <property name="threatRange" type="int" value="80"/>
-   </properties>
+   <property name="effect">{"startBattleWithCard": ["Black Lotus|LEA", "Celestial Prism|LEA", "Clay Statue|ATQ"]}</property>
+    </properties>
   </object>
   <object id="78" template="../../../../../../common/maps/obj/treasure.tx" x="521.333" y="328"/>
   <object id="79" template="../../../../../../common/maps/obj/gold.tx" x="521.333" y="307.667"/>

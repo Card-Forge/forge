@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="200" height="200" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="153">
  <editorsettings>
-  <export target="wastetown..tmx" format="tmx"/>
+  <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx" />
  <layer id="6" name="Collision" width="200" height="200">
   <data encoding="base64" compression="zlib">
    eJzt0zENAEAIBEEEIAH/Lt7bhwINUMwk11+zEQAAAABsqtx+AHd1H7OnFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOOEDKtEBag==
@@ -23,7 +23,7 @@
  </layer>
  <layer id="3" name="Clutter" width="200" height="200">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="base64" compression="zlib">
    eJzt3VuO3EQUgOF+IUxHymwj7AMREDvgtpMoj2wEhpkAi+EN3kckkVgAEPHAFD0WbneVL+W6nMv/Sa10Jp1pt+1TdU5V2X04AAAAAACAml49670FwHYfFPxdX0V+9nXB349LV5Gffdh8K8r49uHx6/PD4bfnp+cWzMXX7eOfw/G6G/3bN3U2BxXE4q1kuypdifbmhw2v9bRvS2Gf6RfLr1DHk8nfb2Ze+33me0z/3/Q9kXa7/BIgi4T6KVbXlURb0853vTcAZ1J9+V3i54O/S28IkrbUgxJ+r0UvZ+Y0xn3kkIvNvR7bSchDaqkxHtFqjOOfRu+zx3XvDYB7QzxSa+Qr2QdwHADkGtdOEuaT3jd8LyljOEOtJWH/Q4bxPJKU8xRAe9M55bn6gXpALstjfxYQO+2R88qXml8jL9XPU5/EPHE5NfYl81vI5akdgw+114tKYqkOsPRZ0BbnTj/UB0ghLvXzVCN4+qylEOMopWf8kcfoxvGTYek4DOsy6GvtY20AkIf2EVaUOJeX7kmgBXENAADGrOYGzBEAsOzF8fIB4Fzv+PCei0j//J7Wb2sn/VyywGpNmCv3OwYQJ+X7A1i/g1yS2kgJ26K1jST3A4DyJNdq5H51bd2/Uu9R1GINmIT8DYBcuf2V9vqG6zlQi5X13VJIzvcD2pJyrO3Lp703oBJqi22kt2G1Tc8X7fkjgH3WtIkl5vSltr3Wch2ryHVkIJeeJ3XcYWv727u9tjaHV3MNjdb1OSiH/jHNWluyhHMBuNQ7p4lZG6v08QAgB2OHkEJCjSNhGwAAkMrKuhuJ4ylI43gB8jF/A8CCLWtHwxyXt7aPMTMAuDT0BTXn2Wh/92Fdikyex3qGdsPzPoBe3mqgGGJ3Xul7qpEH6cBx0oev7slDHwBvWud+4/djPfMla/2tt9rC2+cFsE6tsWtJ6zulfB8TAF2s5b5brP3snveRFXuOoaYxKqnfwyJZ6n5umo470FJsHDG0sVLvjQjUFGpwxiH3k7wPr0fPNdYE47EwyfuZ8Sx4krrf9s3oOetLAPlxIH37SnlxPD0+8/KBgQ1CbPx4dTj8Xjk+9qznInRlszqWP+077g+y61HUxbE/HH6++j8uyK2Ac/fH8xiplVtJWtc3J7SZVvMDLIutTQgx8tPV6THExvh1f7bYMAFa3q9C4zyQBOP91uJ4jd/j9iE+7h4er7U09kAl09orxMa7xxzrzTEdIy+flXl/DWvshvk56tR8GvfdfeRn7xI1OnmAXN66+XGb2iPuatfoFmjo93LcKs+rw6a/b/A+GmLD6jka06qd/Fz4MU9hrBGlzOXKWuMDCLnP22PdscVPiA8YMDe2uAfxASs+zTiXl66/JT5gRU58zBnmvgALSudYoTb/+Hr5dYAWOTGSuuaG+LDJ+z2z18TImvkTxnZh1ZvHcd8w/vs2o0+RUnuwjskeicd0S941xEbIrTzlVzfLL4Fha67/LNVveM9xoc9SHyIlp5rTeo2d4qWZptVaf5jqQ3JjY00uyTmGHnJKg1Qf4mWefHqv1Wk75GkNeIzE2rm1WB8S7jUg/foFSaZxxXp6O2qtZWylRO7J+AFSwpjtnnuZrW0rNV5jHpBj6FEjHw7xQS6FHmrXd1LbNu91LYA2qPUhWcv7ZQKQ71Wh+zsC6GvruOj09YqnNpCQ+s7JrZj3kalWTm/5eNceq2TMEfCLcZY6Ws/7UxujBalzpyXl5kQe9g2APizXuZpxXABfWD8DwCLGBBGj9VqmgHkueBKLVXJWAABkoo8GUJvmWh7I0Xpcs3WMcU0MsC7u9qzZWPo+UwC2xe7rzByTP6k139RXKMXTeoxYPHmLpVLXwddW8rhs+V2S11u3vgaInAMAgDxSxs0l9eVS9kkJOXmqo6/0/Q/XrgMnJetLT2M3APbRuv6Tdg6AFT3roVb3H5M8jwIAADBH0rwJUEuJr2Nee59wb2vuoJ/WsVNAqnE/8Ee3rQBkYb3MeswN9kEODwCAfeSk0GLP2pO1ea2la1ggT+z8Wqp199RkQ/u+t55mvhQecd4DgC5r2+21r2sxLj59D/oeaMW4kn4t2jzGW8ri+iygjl8+Ov8TduX2fayfoW4BpkKf8WTyd9i1JQ/nGhS7Sh9b+lbf6DeAedRgcnAs1qu5rxhnxxLm7AAArZAf+tBzjFPavQSkbQ/qoo3zgfrpHPsDALBGy7ntnjlZqX7Rc15Z4r7GAOzy3D4COJG6ZlLqdk3RjgKAD4zbY8nT0XPyA1jEOo1lQ+y33ldejs0Xo+da6kWghr8O59dVr/1eyh4s50TWrle/6b0BjXzZ8b2tnTO1Sb5ej/EBPXLatlJ9F2s0kMvbfSwtfl76fLSU22/F8pnWYy2W68XeLO7buc9UKj+n/faLYw+vrM+z5M6dWaxRAAAAAACAPv8C8GbA2g==
@@ -33,167 +33,167 @@
   <object id="74" template="../../../../../../common/maps/obj/treasure.tx" x="729.333" y="692.333">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;Cave Diver's Boots&quot;
+  "type": "item",
+  "count": 1,
+  "itemName": "Cave Diver's Boots"
 }]</property>
    </properties>
   </object>
   <object id="80" template="../../../../../../common/maps/obj/enemy.tx" x="968.667" y="788.333">
    <properties>
-    <property name="enemy" value="Beholder"/>
+    <property name="enemy" value="Beholder" />
    </properties>
   </object>
   <object id="84" template="../../../../../../common/maps/obj/enemy.tx" x="183" y="923">
    <properties>
-    <property name="enemy" value="Death Knight"/>
+    <property name="enemy" value="Death Knight" />
    </properties>
   </object>
-  <object id="85" template="../../../../../../common/maps/obj/treasure.tx" x="184.5" y="1597.5"/>
-  <object id="86" template="../../../../../../common/maps/obj/gold.tx" x="200.5" y="1595.5"/>
+  <object id="85" template="../../../../../../common/maps/obj/treasure.tx" x="184.5" y="1597.5" />
+  <object id="86" template="../../../../../../common/maps/obj/gold.tx" x="200.5" y="1595.5" />
   <object id="87" template="../../../../../../common/maps/obj/enemy.tx" x="578.25" y="1866.25">
    <properties>
-    <property name="enemy" value="Geist"/>
+    <property name="enemy" value="Geist" />
    </properties>
   </object>
   <object id="88" template="../../../../../../common/maps/obj/enemy.tx" x="349.75" y="1960.25">
    <properties>
-    <property name="enemy" value="Geist"/>
+    <property name="enemy" value="Geist" />
    </properties>
   </object>
-  <object id="89" template="../../../../../../common/maps/obj/gold.tx" x="479.75" y="2012.5"/>
-  <object id="90" template="../../../../../../common/maps/obj/treasure.tx" x="24.6667" y="1947"/>
+  <object id="89" template="../../../../../../common/maps/obj/gold.tx" x="479.75" y="2012.5" />
+  <object id="90" template="../../../../../../common/maps/obj/treasure.tx" x="24.6667" y="1947" />
   <object id="91" template="../../../../../../common/maps/obj/enemy.tx" x="592.333" y="3030.67">
    <properties>
-    <property name="enemy" value="Zombie"/>
+    <property name="enemy" value="Zombie" />
    </properties>
   </object>
   <object id="92" template="../../../../../../common/maps/obj/enemy.tx" x="591.333" y="3008">
    <properties>
-    <property name="enemy" value="Big Zombie"/>
+    <property name="enemy" value="Big Zombie" />
    </properties>
   </object>
   <object id="93" template="../../../../../../common/maps/obj/enemy.tx" x="591.333" y="2984">
    <properties>
-    <property name="enemy" value="Ghoul"/>
+    <property name="enemy" value="Ghoul" />
    </properties>
   </object>
   <object id="94" template="../../../../../../common/maps/obj/enemy.tx" x="521.667" y="3000.67">
    <properties>
-    <property name="enemy" value="Lich"/>
-   </properties>
+    <property name="enemy" value="Lich" />
+   <property name="effect">{ "startBattleWithCard": [ "Mirror Universe|LEG|1" ] }</property></properties>
   </object>
-  <object id="95" template="../../../../../../common/maps/obj/treasure.tx" x="473.667" y="3004.33"/>
-  <object id="96" template="../../../../../../common/maps/obj/gold.tx" x="475" y="3017.67"/>
-  <object id="97" template="../../../../../../common/maps/obj/gold.tx" x="489.333" y="3048.33"/>
+  <object id="95" template="../../../../../../common/maps/obj/treasure.tx" x="473.667" y="3004.33" />
+  <object id="96" template="../../../../../../common/maps/obj/gold.tx" x="475" y="3017.67" />
+  <object id="97" template="../../../../../../common/maps/obj/gold.tx" x="489.333" y="3048.33" />
   <object id="98" template="../../../../../../common/maps/obj/enemy.tx" x="1639.33" y="2433.33">
    <properties>
-    <property name="enemy" value="Mimic"/>
+    <property name="enemy" value="Mimic" />
    </properties>
   </object>
   <object id="99" template="../../../../../../common/maps/obj/enemy.tx" x="1557.5" y="1108.5">
    <properties>
-    <property name="enemy" value="Harpy"/>
+    <property name="enemy" value="Harpy" />
    </properties>
   </object>
   <object id="100" template="../../../../../../common/maps/obj/enemy.tx" x="1630" y="1257.5">
    <properties>
-    <property name="enemy" value="Harpy"/>
+    <property name="enemy" value="Harpy" />
    </properties>
   </object>
   <object id="101" template="../../../../../../common/maps/obj/enemy.tx" x="1341" y="1289.5">
    <properties>
-    <property name="enemy" value="Harpy"/>
+    <property name="enemy" value="Harpy" />
    </properties>
   </object>
-  <object id="102" template="../../../../../../common/maps/obj/gold.tx" x="1653.5" y="1257.5"/>
-  <object id="103" template="../../../../../../common/maps/obj/treasure.tx" x="1322.5" y="1292"/>
-  <object id="104" template="../../../../../../common/maps/obj/treasure.tx" x="1455.5" y="1356.5"/>
-  <object id="105" template="../../../../../../common/maps/obj/gold.tx" x="1503.5" y="1280"/>
+  <object id="102" template="../../../../../../common/maps/obj/gold.tx" x="1653.5" y="1257.5" />
+  <object id="103" template="../../../../../../common/maps/obj/treasure.tx" x="1322.5" y="1292" />
+  <object id="104" template="../../../../../../common/maps/obj/treasure.tx" x="1455.5" y="1356.5" />
+  <object id="105" template="../../../../../../common/maps/obj/gold.tx" x="1503.5" y="1280" />
   <object id="106" template="../../../../../../common/maps/obj/enemy.tx" x="2112.33" y="112.167">
    <properties>
-    <property name="enemy" value="Vampire Lord"/>
+    <property name="enemy" value="Vampire Lord" />
    </properties>
   </object>
-  <object id="107" template="../../../../../../common/maps/obj/treasure.tx" x="2071.33" y="91.6667"/>
+  <object id="107" template="../../../../../../common/maps/obj/treasure.tx" x="2071.33" y="91.6667" />
   <object id="108" template="../../../../../../common/maps/obj/enemy.tx" x="2843" y="330">
    <properties>
-    <property name="enemy" value="Cyclops"/>
+    <property name="enemy" value="Cyclops" />
    </properties>
   </object>
   <object id="109" template="../../../../../../common/maps/obj/enemy.tx" x="2909" y="165.5">
    <properties>
-    <property name="enemy" value="Elk"/>
+    <property name="enemy" value="Elk" />
    </properties>
   </object>
   <object id="110" template="../../../../../../common/maps/obj/enemy.tx" x="3038" y="157">
    <properties>
-    <property name="enemy" value="Elk"/>
+    <property name="enemy" value="Elk" />
    </properties>
   </object>
   <object id="111" template="../../../../../../common/maps/obj/enemy.tx" x="2978.5" y="238.5">
    <properties>
-    <property name="enemy" value="Elk"/>
+    <property name="enemy" value="Elk" />
    </properties>
   </object>
-  <object id="112" template="../../../../../../common/maps/obj/gold.tx" x="2968.5" y="132.5"/>
-  <object id="113" template="../../../../../../common/maps/obj/gold.tx" x="3112" y="167"/>
-  <object id="114" template="../../../../../../common/maps/obj/gold.tx" x="3036" y="275"/>
+  <object id="112" template="../../../../../../common/maps/obj/gold.tx" x="2968.5" y="132.5" />
+  <object id="113" template="../../../../../../common/maps/obj/gold.tx" x="3112" y="167" />
+  <object id="114" template="../../../../../../common/maps/obj/gold.tx" x="3036" y="275" />
   <object id="115" template="../../../../../../common/maps/obj/enemy.tx" x="3007.67" y="1415.67">
    <properties>
-    <property name="enemy" value="Red Beast"/>
+    <property name="enemy" value="Red Beast" />
    </properties>
   </object>
-  <object id="116" template="../../../../../../common/maps/obj/gold.tx" x="3109.67" y="1475.67"/>
-  <object id="117" template="../../../../../../common/maps/obj/treasure.tx" x="3090.67" y="1362.33"/>
-  <object id="118" template="../../../../../../common/maps/obj/treasure.tx" x="2840" y="2658.5"/>
-  <object id="119" template="../../../../../../common/maps/obj/treasure.tx" x="3047.5" y="2741.5"/>
-  <object id="120" template="../../../../../../common/maps/obj/gold.tx" x="3001" y="2569.5"/>
-  <object id="121" template="../../../../../../common/maps/obj/gold.tx" x="2925.5" y="2571.5"/>
+  <object id="116" template="../../../../../../common/maps/obj/gold.tx" x="3109.67" y="1475.67" />
+  <object id="117" template="../../../../../../common/maps/obj/treasure.tx" x="3090.67" y="1362.33" />
+  <object id="118" template="../../../../../../common/maps/obj/treasure.tx" x="2840" y="2658.5" />
+  <object id="119" template="../../../../../../common/maps/obj/treasure.tx" x="3047.5" y="2741.5" />
+  <object id="120" template="../../../../../../common/maps/obj/gold.tx" x="3001" y="2569.5" />
+  <object id="121" template="../../../../../../common/maps/obj/gold.tx" x="2925.5" y="2571.5" />
   <object id="122" template="../../../../../../common/maps/obj/enemy.tx" x="2889" y="2745.5">
    <properties>
-    <property name="enemy" value="Hellhound"/>
+    <property name="enemy" value="Hellhound" />
    </properties>
   </object>
   <object id="123" template="../../../../../../common/maps/obj/enemy.tx" x="2858.5" y="2656.5">
    <properties>
-    <property name="enemy" value="Devil"/>
+    <property name="enemy" value="Devil" />
    </properties>
   </object>
   <object id="124" template="../../../../../../common/maps/obj/enemy.tx" x="3030" y="2738.5">
    <properties>
-    <property name="enemy" value="Demon"/>
+    <property name="enemy" value="Demon" />
    </properties>
   </object>
   <object id="125" template="../../../../../../common/maps/obj/enemy.tx" x="2983" y="2602">
    <properties>
-    <property name="enemy" value="Apprentice Black Wizard"/>
+    <property name="enemy" value="Apprentice Black Wizard" />
    </properties>
   </object>
   <object id="126" template="../../../../../../common/maps/obj/enemy.tx" x="2089.5" y="3097.5">
    <properties>
-    <property name="enemy" value="Spider"/>
+    <property name="enemy" value="Spider" />
    </properties>
   </object>
   <object id="127" template="../../../../../../common/maps/obj/enemy.tx" x="2102" y="2874">
    <properties>
-    <property name="enemy" value="Giant Spider"/>
+    <property name="enemy" value="Giant Spider" />
    </properties>
   </object>
   <object id="128" template="../../../../../../common/maps/obj/enemy.tx" x="2132" y="3016">
    <properties>
-    <property name="enemy" value="Giant Spider"/>
+    <property name="enemy" value="Giant Spider" />
    </properties>
   </object>
   <object id="129" template="../../../../../../common/maps/obj/enemy.tx" x="2211.5" y="3104">
    <properties>
-    <property name="enemy" value="Apprentice Green Wizard"/>
+    <property name="enemy" value="Apprentice Green Wizard" />
    </properties>
   </object>
-  <object id="130" template="../../../../../../common/maps/obj/treasure.tx" x="2144.5" y="3149"/>
-  <object id="131" template="../../../../../../common/maps/obj/gold.tx" x="2185" y="3032.5"/>
-  <object id="132" template="../../../../../../common/maps/obj/gold.tx" x="2137" y="3003.5"/>
-  <object id="133" template="../../../../../../common/maps/obj/treasure.tx" x="2231.5" y="3107"/>
-  <object id="134" template="../../../../../../common/maps/obj/entry_up.tx" x="1712" y="3199.5" width="48" height="16"/>
+  <object id="130" template="../../../../../../common/maps/obj/treasure.tx" x="2144.5" y="3149" />
+  <object id="131" template="../../../../../../common/maps/obj/gold.tx" x="2185" y="3032.5" />
+  <object id="132" template="../../../../../../common/maps/obj/gold.tx" x="2137" y="3003.5" />
+  <object id="133" template="../../../../../../common/maps/obj/treasure.tx" x="2231.5" y="3107" />
+  <object id="134" template="../../../../../../common/maps/obj/entry_up.tx" x="1712" y="3199.5" width="48" height="16" />
  </objectgroup>
 </map>

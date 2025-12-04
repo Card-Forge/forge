@@ -8,7 +8,7 @@ Name=Tsabo Tavoc
 2 Plague Spores|INV
 2 Reckless Spite|TMP
 2 Do or Die|INV
-2 Annihilate|LEG
+2 Annihilate|INV
 2 Tsabo's Decree|INV
 2 Tsabo Tavoc|INV
 2 Raging River|LEA
@@ -21,3 +21,12 @@ Name=Tsabo Tavoc
 2 Skullscorch|TOR
 2 Lava Blister|ODY
 4 Phyrexian Scuta|PLS
+
+[StartInBattle_Reference]
+1 Tsabo's Web|INV
+1 Tsabo's Assassin|INV
+1 Metathran Zombie|INV
+1 Vodalian Zombie|INV
+1 Phyrexian Slayer|INV
+1 Antagonism|USG
+1 Phyrexian Lens|INV
