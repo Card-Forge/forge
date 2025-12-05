@@ -50,7 +50,7 @@
       "action": [{"setQuestFlag": {"key":"Ch1WhiteCastleComplete", "val": 1} }, {"deleteMapObject": -1}, {"advanceQuestFlag": "Ch1CastlesComplete"}]
    }]
 }]</property>
-    <property name="effect">{ "startBattleWithCard": [ "Glorious Anthem|USG", "Plains|LEA", "Serra's Blessing|WTH", "Serra's Liturgy|USG", "Tormented Angel|UDS" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Glorious Anthem|USG", "Plains|LEA", "Plains|LEA", "Plains|LEA", "Serra's Blessing|WTH", "Serra's Liturgy|USG", "Tormented Angel|UDS" ] }</property>
     <property name="enemy" value="Akroma" />
     <property name="threatRange" type="int" value="50" />
    </properties>

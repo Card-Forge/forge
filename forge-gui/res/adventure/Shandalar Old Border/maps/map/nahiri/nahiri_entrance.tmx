@@ -77,7 +77,7 @@
   </object>
   <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="177" y="171">
    <properties>
-    <property name="enemy" value="Armored Knight " />
+    <property name="enemy" value="Armored Knight" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="96,95" />
    </properties>
@@ -91,7 +91,7 @@
   <object id="72" template="../../../../../../common/maps/obj/treasure.tx" x="87.024" y="381.417" />
   <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="413.724" y="311.841">
    <properties>
-    <property name="enemy" value="Armored Knight " />
+    <property name="enemy" value="Armored Knight" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="97,103" />
    </properties>
