@@ -1,14 +1,16 @@
 [metadata]
-Name=minotaur_monored_castle
+Name=Minotaur Warcaller - Minotaur Tribal
 [Main]
-2 City of Brass|ARN|1
-21 Mountain|4ED|3
-4 Earthquake|4ED|1
-4 Fireblast|VIS|1
-4 Lightning Bolt|4ED|1
-4 Minotaur Explorer|ODY|1
-4 Minotaur Warrior|POR|1
-4 Orcish Artillery|4ED|1
-4 Orcish Cannoneers|ICE|1
-4 Shivan Dragon|4ED|1
-4 Stone Rain|4ED|1
+16 Mountain|PO2
+4 Shivan Reef|APC
+4 Maze of Ith|DRK
+8 Anaba Spirit Crafter|HML
+4 Hurloon Minotaur|LEA
+2 Minotaur Illusionist|APC
+2 Tahngarth, Talruum Hero|PLS
+4 Talruum Champion|VIS
+4 Talruum Piper|VIS
+2 Hurloon Shaman|WTH
+2 Anaba Shaman|HML
+4 Lightning Bolt|LEA
+4 Lightning Blast|TMP

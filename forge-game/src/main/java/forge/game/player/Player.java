@@ -1592,7 +1592,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         Iterable<Card> milledView = getCardsIn(ZoneType.Library);
-        // 614.13c
+        // CR 614.13c
         if (sa.getRootAbility().getReplacingObject(AbilityKey.SimultaneousETB) != null) {
             milledView = IterableUtil.filter(milledView, c -> !((CardCollection) sa.getRootAbility().getReplacingObject(AbilityKey.SimultaneousETB)).contains(c));
         }

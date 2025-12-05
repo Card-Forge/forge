@@ -1,16 +1,25 @@
 [metadata]
-Name=drake_ur_beginner
+Name=Drake Tribal
 [Main]
-10 Island|5ED|2
-2 Arc Lightning|USG|1
-2 Fireblast|VIS|1
-2 Shivan Dragon|5ED|1
-4 Counterspell|LEA|1
-4 Drake Hatchling|MMQ|1
-4 Hydroblast|5ED|1
-4 Lightning Bolt|4ED|1
-4 Mana Leak|BRB|1
-4 Power Sink|5ED|1
-4 Pyrostatic Pillar|SCG|1
-4 Shivan Reef|APC|1
-7 Mountain|5ED|2
+24 Island|MIR|4
+2 Azimaet Drake|MIR
+1 Teferi's Drake|MIR
+1 Hunting Drake|PLS
+3 Gilded Drake|USG
+3 Spiketail Hatchling|PCY
+1 Sea Drake|PO2
+1 Tolarian Drake|WTH
+1 Azure Drake|LEG
+1 Azure Drake|5ED
+1 Timid Drake|MMQ
+1 Wind Drake|POR
+1 Spindrift Drake|STH
+2 Snapping Drake|POR
+2 Cerulean Wyvern|MIR
+2 Peregrine Drake|USG
+1 Spiketail Drake|PCY
+2 Iridescent Drake|UDS
+2 Silver Wyvern|STH
+4 Unstable Mutation|ARN
+2 Binding Grasp|ICE
+2 Force Spike|5ED

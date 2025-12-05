@@ -1,15 +1,20 @@
 [metadata]
-Name=Mimic
+Name=Mimic - Clone Control
 [Main]
-16 Island|2ED|3
-4 Control Magic|LEA|1
-4 Copy Artifact|3ED|1
-4 Counterspell|2ED|1
-4 Hydroblast|ICE|1
-4 Impulse|BTD|1
-4 Lord of Atlantis|2ED|1
-4 Mana Leak|BRB|1
-4 Mystical Tutor|MIR|1
-4 Salt Marsh|INV|1
-4 Thawing Glaciers|ALL|1
-4 Tidal Wave|MIR|1
+20 Island|MMQ
+4 Mind Stone|WTH
+4 Clone|LEA
+4 Copy Artifact|LEA
+4 Vesuvan Doppelganger|LEA
+4 Mischievous Quanar|SCG
+4 Unstable Shapeshifter|TMP
+4 Dance of Many|DRK
+2 Bribery|MMQ
+2 Echo Chamber|TMP
+4 Pit Trap|ICE
+4 Chain of Vapor|ONS
+
+[StartInBattle_Reference]
+1 Fellwar Stone|DRK
+1 Kismet|LEG
+1 Shivan Dragon|LEB

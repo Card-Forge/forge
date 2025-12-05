@@ -1,0 +1,41 @@
+[metadata]
+Name=Lin Sivvi
+[Main]
+26 Plains|PALP
+4 Kor Haven|NMS
+1 Ramosian Sergeant|MMQ
+1 Defiant Falcon|NMS
+1 Fresh Volunteers|MMQ
+1 Ramosian Lieutenant|MMQ
+1 Steadfast Guard|MMQ
+1 Sword Dancer|PCY
+1 Whipcorder|ONS
+1 Defiant Vanguard|NMS
+1 Lawbringer|NMS
+1 Lightbringer|NMS
+2 Nightwind Glider|MMQ
+2 Ramosian Captain|MMQ
+2 Shield Dancer|PCY
+2 Soul Charmer|PCY
+2 Task Force|MMQ
+2 Thermal Glider|MMQ
+2 Ballista Squad|MMQ
+2 Pious Warrior|MMQ
+2 Rappelling Scouts|MMQ
+2 Reveille Squad|PCY
+2 Trenching Steed|PCY
+2 Jhovall Rider|MMQ
+4 Ramosian Sky Marshal|MMQ
+4 Cho-Arrim Bruiser|MMQ
+4 Jhovall Queen|MMQ
+4 Glorious Anthem|USG
+4 Shared Triumph|ONS
+4 Harsh Mercy|ONS
+4 Disenchant|LEA
+4 Swords to Plowshares|LEA
+2 Coat of Arms|EXO
+
+[StartInBattle_Reference]
+3 Plains|PALP
+1 Lin Sivvi, Defiant Hero|NMS
+1 Cho-Manno, Revolutionary|MMQ

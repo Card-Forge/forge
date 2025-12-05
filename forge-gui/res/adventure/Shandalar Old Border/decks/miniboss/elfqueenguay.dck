@@ -1,0 +1,66 @@
+[metadata]
+Name=Elf Queen Guay
+[Main]
+12 Plains|CMM|2
+12 Island|CMM|2
+12 Forest|CMM|2
+4 Priest of Titania|USG
+2 Sky Spirit|TMP
+1 Asmira, Holy Avenger|MIR
+1 Vitalizing Cascade|MIR
+2 Wood Elves|POR
+1 Wanderlust|5ED
+2 Taunting Elf|ONS
+1 Seedtime|JUD
+1 Thoughtleech|7ED
+2 Respite|TMP
+2 Resuscitate|EXO
+2 Quirion Trailblazer|INV
+2 Planeswalker's Favor|PLS
+2 Norwood Riders|PO2
+1 Norwood Warrior|PO2
+1 Norwood Archers|PO2
+2 Moment's Peace|ODY
+1 Lynx|PO2
+1 Kaysa|ALL
+1 Elven Cache|POR
+2 Defense of the Heart|ULG
+1 Fog Patch|NMS
+2 Deathcoil Wurm|PO2
+1 Elvish Lyrist|USG
+1 Barbtooth Wurm|PO2
+1 Wall of Tears|STH
+1 Sea Sprite|5ED
+2 Wonder|JUD
+1 Traveler's Cloak|INV
+1 Thornwind Faeries|ULG
+1 Memory Lapse|MIR
+1 Sea Drake|PO2
+1 Phantom Monster|5ED
+1 Boomerang|7ED
+2 Starlit Angel|POR
+1 Angelic Page|USG
+2 Serra Angel|O90P
+1 Gaea's Blessing|WTH
+1 Vigilant Martyr|MIR
+1 Sustaining Spirit|ALL
+2 Reverent Mantra|MMQ
+1 Commander Eesha|JUD
+1 Atalya, Samite Master|INV
+1 Angelic Renewal|WTH
+1 Auramancer|ODY
+1 Devout Harpist|ULG
+1 Embolden|ODY
+1 Angelic Wall|PO2
+
+[StartInBattle_Reference]
+2 Plains|CMM|2
+2 Island|CMM|2
+2 Forest|CMM|2
+1 Vernal Equinox|MMQ
+1 Briar Patch|MMQ
+1 Serra's Blessing|WTH
+1 Dispersing Orb|ONS
+1 Silent Attendant|USG
+1 Diplomatic Escort|MMQ
+1 Heartwood Dryad|TMP

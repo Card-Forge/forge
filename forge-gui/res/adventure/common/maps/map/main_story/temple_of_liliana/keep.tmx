@@ -111,7 +111,7 @@
   <object id="224" template="../../../obj/enemy.tx" x="64" y="224">
    <properties>
     <property name="dialog">[ {
-  &quot;text&quot;:&quot;HELLO AGAIN PLANESWALKER {var=player_name}&quot;, 
+  &quot;text&quot;:&quot;HELLO AGAIN PLANESWALKER {var=player_name}.&quot;, 
    &quot;options&quot;:[
     { 
 		&quot;name&quot;:&quot;Yeah, yeah, defeat Liliana. Got it.&quot;,

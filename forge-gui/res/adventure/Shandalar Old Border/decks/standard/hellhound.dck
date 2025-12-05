@@ -1,15 +1,19 @@
 [metadata]
-Name=hellhound
+Name=Hellhound - BR Hounds
 [Main]
-1 Plains|3ED|1
-19 Swamp|3ED|1
-4 Black Knight|4ED|1
-4 Black Ward|3ED|1
-4 Blackmail|ONS|1
-4 Caves of Koilos|APC|1
-4 Dark Ritual|5ED|1
-4 Demonic Consultation|ICE|1
-4 Demonic Hordes|LEA|1
-4 Hymn to Tourach|FEM|1
-4 Lord of the Pit|LEB|1
-4 Raise Dead|3ED|1
+10 Swamp|MMQ
+10 Mountain|MMQ
+4 Sulfurous Springs|6ED
+4 Lava Hounds|WTH
+2 Mad Dog|ODY
+2 Blood Hound|MMQ
+2 Monstrous Hound|EXO
+2 Lightning Hounds|MMQ
+2 Filthy Cur|ODY
+2 Hollow Dogs|7ED
+4 Dark Ritual|MMQ
+2 Vampire Hounds|EXO
+2 Plague Dogs|UDS
+4 Howl from Beyond|ICE
+4 Falter|USG
+4 Terminate|PLS

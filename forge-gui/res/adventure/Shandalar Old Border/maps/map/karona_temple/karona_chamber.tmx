@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="72">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+ </properties>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztkzEOwDAIA7N27iP7o/yo/+qQLaor28BSMdwSiRyYZB5jzKZpfst1LvYzpi7LjWB6zXKpvVQ7nYz3WsfnOpUMszJmPOjtuG52Z+juyMzRt1rlZeucP4T8zHzVOX/53HmVf/NW52bM7hn1lOF1so94lVwrvGo2TR53ZyrzAH9WER8=
+  </data>
+ </layer>
+ <layer id="6" name="BackgroundBlend" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKhDRxEIXQ4HjX45CixcyDAQNgdSn8r4YCSuBtId5MLwsjU95mqrqAPeAJMy1/I1EvtPE0vQKq7kdPwIzLz/hMKyoxQCu11ocBucu2tFWNgcAXqdUPSD8sfuNyDnO/ItRcZgOxHxujuQ3abCxY1tAKwsKGXfaNgaAAAL10Ung==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJyTEGBgkBjFGFgaiLdhwVI0tlcSiLEB8VF7qYpr+RkYqoC4mh9iXyWUX8NPn/QF8zet/UlPe3HlGRDeDrV3Kx415OYtbGnoEzv2dIVNnNywgNnbCEwzTSTgZn7q2CsPpBVIwIoUxv2ovaP2jto7ai+59u4F0vuwYFUc4vupZC8uoERAftRe4jCsLYUNg9pXIHsr8aihRZsLFBYgeweifTWU7QUAWLuklw==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALqgJ0CDAw7BDBpZIBNfqcAdvNGwSgYBaNgFIyCUTD0QB0/hG7gp6+9MtD2hNxou4IkAAD01grd
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztzkENADAIADEcDA0YxfpEQLLHWgGXiwAAANjT5/XBHyrnjQsIsADB
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="182.772" y="284.992" width="64" height="64">
+   <properties>
+    <property name="enemy" value="Karona"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="51" template="../../../../../../common/maps/obj/entry_up.tx" x="209" y="480">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

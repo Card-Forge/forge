@@ -1,0 +1,27 @@
+[metadata]
+Name=Black Phyrexian Boss
+[Main]
+16 Swamp|TMP
+3 Wasteland|TMP
+1 Phyrexian Tower|USG
+2 Dark Ritual|ICE
+2 Culling the Weak|EXO
+4 Phyrexian Denouncer|ULG
+2 Phyrexian Debaser|ULG
+2 Phyrexian Defiler|ULG
+4 Phyrexian Plaguelord|ULG
+4 Phyrexian Delver|INV
+4 Phyrexian Scuta|PLS
+2 Victimize|USG
+2 Reanimate|TMP
+2 Hatred|EXO
+2 Annihilate|INV
+4 Do or Die|INV
+2 Pestilence|6ED
+2 Tsabo's Decree|INV
+
+[StartInBattle_Reference]
+1 Phyrexian Arena|APC
+1 Phyrexian Negator|UDS
+1 Phyrexian Broodlings|ULG
+1 Phyrexian Walker|VIS

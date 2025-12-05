@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="69">
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx" />
  <layer id="1" name="Background" width="50" height="50">
   <data encoding="base64" compression="zlib">
    eJzt2t9qgzAUBnAZk672RihjezYv+xCFPUSfqtBXKGUvs0l28BBOnMn58qchFx8Gbc35maitOI1dN7Gc93Iur0v7NJrwdVJObH/9zuTWd93HYL5LebyZ5f13+Tm4+7fD65K2/xcybP0cGcgR0uda6JhRnz7x9aZwhNQYMm4pHcj9uxwxLLEMrnk1t2NYJAPK5nKQBT2vpPoR8y2Vgywug1RPiQ7X9Qrl4JEcKMsWB2Ke8fsgX48cE9/7X8jYlORAzKmaHShLbINtsdejLCkMsWNfr8jFl8+eUMfX3iT1eIT+l5Jq32q4RvrtjnKknjNoB1maQ2+oYV7NBnre86xjwWvQWnI7zmw+aCy+jpfDEuR4UDvUkvv8mJ9D2v1rLLkcrvDnvSkdoeP6Puj71tYg7SPn2Gr713wfdR/U1qE9BiU5NH0jHdwizXNpG+p8QDvsY4usNbUjR5qjvDRHWanBUcv50RxlpTnKSk2O3DU0h9ux9k6Y77tddvv7712xI3smMLdpvd2/tN+1/AB0LVyq
@@ -24,65 +24,67 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="127.833" y="672.917"/>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="127.833" y="672.917" />
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="110.583" y="673.75">
    <properties>
-    <property name="enemy" value="Zombie Lord"/>
-   </properties>
+    <property name="enemy" value="Zombie Lord" />
+   <property name="effect">{ "startBattleWithCard": [ "Carrion Feeder|SCG", "Zombie Master|LEA" ] }</property>
+    </properties>
   </object>
-  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="159.848" y="336.886"/>
-  <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="767.75" y="783.417"/>
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="159.848" y="336.886" />
+  <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="767.75" y="783.417" />
   <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="736.205" y="50.333">
    <properties>
-    <property name="enemy" value="Death Knight"/>
+    <property name="enemy" value="Death Knight" />
    </properties>
   </object>
   <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="130.778" y="174.128">
    <properties>
-    <property name="enemy" value="Lich"/>
-   </properties>
+    <property name="enemy" value="Lich" />
+   <property name="effect">{ "startBattleWithCard": [ "Mirror Universe|LEG|1" ] }</property></properties>
   </object>
   <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="767.069" y="767.78">
    <properties>
-    <property name="enemy" value="Ghost"/>
+    <property name="enemy" value="Ghost" />
    </properties>
   </object>
   <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="438.667" y="631.667">
    <properties>
-    <property name="enemy" value="Ghoul"/>
+    <property name="enemy" value="Ghoul" />
    </properties>
   </object>
   <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="643.333" y="337.5">
    <properties>
-    <property name="enemy" value="Big Zombie"/>
+    <property name="enemy" value="Big Zombie" />
    </properties>
   </object>
   <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="358.606" y="385.031">
    <properties>
-    <property name="enemy" value="Zombie"/>
+    <property name="enemy" value="Zombie" />
    </properties>
   </object>
   <object id="59" template="../../../../../../common/maps/obj/enemy.tx" x="384" y="63.333">
    <properties>
-    <property name="enemy" value="Geist"/>
+    <property name="enemy" value="Geist" />
    </properties>
   </object>
-  <object id="62" template="../../../../../../common/maps/obj/entry_down.tx" x="384" y="16" width="48" height="16"/>
-  <object id="63" template="../../../../../../common/maps/obj/gold.tx" x="720.667" y="46.6667"/>
+  <object id="62" template="../../../../../../common/maps/obj/entry_down.tx" x="384" y="16" width="48" height="16" />
+  <object id="63" template="../../../../../../common/maps/obj/gold.tx" x="720.667" y="46.6667" />
   <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="416" y="63.6667">
    <properties>
-    <property name="enemy" value="Skeleton Soldier"/>
+    <property name="enemy" value="Skeleton Soldier" />
    </properties>
   </object>
   <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="276" y="208">
    <properties>
-    <property name="enemy" value="Skeleton"/>
+    <property name="enemy" value="Skeleton" />
    </properties>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="140.549" y="338.286">
    <properties>
-    <property name="enemy" value="Grave Titan"/>
-   </properties>
+    <property name="enemy" value="Grave Titan" />
+   <property name="effect">{"startBattleWithCard": ["Swamp|ONS", "Swamp|ONS", "Swamp|ONS", "Swamp|ONS", "Rotting Giant|ODY"]}</property>
+    </properties>
   </object>
  </objectgroup>
 </map>

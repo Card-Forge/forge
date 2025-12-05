@@ -1,14 +1,17 @@
 [metadata]
-Name=redwizard_hard_burn
+Name=Master Red Wizard - Mono Red Burn
 [Main]
-2 Wheel of Fortune|2ED|1
-24 Mountain|6ED|2
-4 Earthquake|4ED|1
-4 Fireblast|VIS|1
-4 Incinerate|MIR|1
-4 Lightning Bolt|4ED|1
-4 Mogg Fanatic|TMP|1
-4 Orcish Artillery|4ED|1
-4 Orcish Cannoneers|ICE|1
-4 Shivan Dragon|4ED|1
-4 Stone Rain|TMP|1
+22 Mountain|LEA
+2 Blood Moon|DRK
+4 Lightning Bolt|LEA
+4 Chain Lightning|LEG
+2 Wheel of Fortune|LEA
+2 Price of Progress|EXO
+4 Ball Lightning|DRK
+2 Fork|LEA
+2 Pyroclasm|ICE
+4 Flametongue Kavu|PLS
+4 Blistering Firecat|ONS
+2 Sulfuric Vortex|SCG
+2 Smoke|LEA
+4 Rolling Earthquake|PTK

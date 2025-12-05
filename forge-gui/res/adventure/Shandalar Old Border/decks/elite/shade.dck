@@ -1,0 +1,21 @@
+[metadata]
+Name=shade
+[Main]
+16 Swamp|3ED
+4 Cabal Coffers|TOR
+4 Bubbling Muck|UDS
+4 Nantuko Shade|TOR
+4 Dungeon Shade|STH
+2 Darkling Stalker|TMP
+2 Ihsan's Shade|HML
+4 Intimidation|MMQ
+2 Plague Wind|PCY
+2 Mind Sludge|TOR
+4 Dark Banishing|7ED
+4 Snuff Out|MMQ
+4 Will-o'-the-Wisp|LEB
+4 Chainer's Edict|TOR
+
+[StartInBattle_Reference]
+3 Swamp|3ED
+1 Frozen Shade|LEA

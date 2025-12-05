@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="76">
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="79">
  <editorsettings>
-  <export target="wastetown..tmx" format="tmx"/>
+  <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Grave Pact|STH&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Grave Pact|STH&quot; ]}" />
  </properties>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx" />
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJybxsnAMG0Uj+JRPIpH8SgexSMCAwDOljzS
@@ -21,7 +21,7 @@
  </layer>
  <layer id="3" name="Clutter" width="30" height="17">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="base64" compression="zlib">
    eJxjYBgF2ADrQDsADQw291ATsEHp4exHeoALwtjZ2PjEqMOlh1SwhET1bISVgIE9EtsOi/xKUQT7LhofGVxXZ2C4oU6kpWj23yGgBuYueyxy2MTwAeRwIRSmhNxFjBlDBZAajqOAgQEAq8oPJQ==
@@ -35,125 +35,73 @@
  <objectgroup id="4" name="Objects">
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="269" width="48" height="16">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/vampirecastle/vampirecastle_3.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/vampirecastle/vampirecastle_3.tmx" />
    </properties>
   </object>
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="72.697" y="184.76">
    <properties>
-    <property name="displayNameOverride" value="Vampire Guardian"/>
-    <property name="enemy" value="High Vampire"/>
-    <property name="threatRange" type="int" value="30"/>
+    <property name="displayNameOverride" value="Cateran Guard" />
+    <property name="enemy" value="Cateran Slaver" />
+    <property name="threatRange" type="int" value="30" />
    </properties>
   </object>
-  <object id="62" template="../../../../../../common/maps/obj/gold.tx" x="185.431" y="37.9964"/>
-  <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="342.353" y="173.156">
-   <properties>
-    <property name="deckOverride" value="decks/standard/vampire_monob.dck"/>
-    <property name="enemy" value="Ancient Vampire"/>
-    <property name="inactive" type="bool" value="true"/>
-    <property name="speedModifier" type="float" value="20"/>
-    <property name="threatRange" type="int" value="40"/>
-   </properties>
-  </object>
+  <object id="62" template="../../../../../../common/maps/obj/gold.tx" x="185.431" y="37.9964" />
   <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="174.262" y="162.311">
    <properties>
-    <property name="displayNameOverride" value="Vampire Feeder"/>
-    <property name="enemy" value="Vampire"/>
-    <property name="threatRange" type="int" value="50"/>
+    <property name="displayNameOverride" value="Cateran Raider" />
+    <property name="enemy" value="Cateran Slaver" />
+    <property name="threatRange" type="int" value="50" />
    </properties>
   </object>
-  <object id="66" name="Ward" type="dialog" gid="11912" x="196.5" y="129.361" width="39.5656" height="16">
-   <properties>
-    <property name="dialog">[{
-    &quot;text&quot;:&quot;A translucent, shimmering red field blocks your path. An ancient Evil is lurking in these crypts, preventing you from entering the room in front of you ...&quot;,
-    &quot;options&quot;:[
-    { &quot;name&quot;:&quot;Leave.&quot; } 
-    ]
-}]</property>
-   </properties>
-  </object>
-  <object id="67" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="338.774" y="175.211" width="24.9204" height="14.6679" visible="1">
-   <properties>
-    <property name="dialog">[
-  {
-    &quot;text&quot;: &quot;You see a coffin lying at the center of the crypt. This relic of vampiric history, once a vessel for the undying, now stood as a time-worn testament to the passage of ages, a silent witness to the secrets and shadows that had unfolded within its confines. The ancient coffin, a repository of centuries, exuded an aura of both menace and melancholy, a silent sentinel to the mysteries of the nocturnal realm.&quot;,
-    &quot;options&quot;: [
-      { &quot;name&quot;: &quot;Walk away&quot; },
-      {
-        &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
-        &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
-        &quot;options&quot;: [
-          { &quot;name&quot;: &quot;Walk away&quot; },
-          {
-            &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;text&quot;: &quot;As you open the coffin, an ancient figure awakes in the gloom. It cries out in an ancient voice: YOU DARE WAKE ME, PUNY MORTAL?&quot;,
-            &quot;options&quot;: [
-              {
-                &quot;name&quot;: &quot;Prepare yourself!&quot;,
-                &quot;action&quot;: [
-                  { &quot;activateMapObject&quot;: 64 },
-                  { &quot;deleteMapObject&quot;: 66 },
-                  { &quot;deleteMapObject&quot;: -1 }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
-]</property>
-   </properties>
-  </object>
-  <object id="68" template="../../../../../../common/maps/obj/gold.tx" x="48.2296" y="159.484"/>
+  <object id="68" template="../../../../../../common/maps/obj/gold.tx" x="48.2296" y="159.484" />
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="239.812" y="163.5">
    <properties>
-    <property name="displayNameOverride" value="Vampire Feeder"/>
-    <property name="enemy" value="Vampire"/>
-    <property name="threatRange" type="int" value="40"/>
+    <property name="displayNameOverride" value="Cateran Bruiser" />
+    <property name="enemy" value="Cateran Slaver" />
+    <property name="threatRange" type="int" value="40" />
    </properties>
   </object>
-  <object id="70" template="../../../../../../common/maps/obj/gold.tx" x="48.2296" y="212.099"/>
-  <object id="71" template="../../../../../../common/maps/obj/manashards.tx" x="154.263" y="68.7132"/>
-  <object id="72" template="../../../../../../common/maps/obj/manashards.tx" x="264.714" y="67.91"/>
+  <object id="70" template="../../../../../../common/maps/obj/gold.tx" x="48.2296" y="212.099" />
+  <object id="71" template="../../../../../../common/maps/obj/manashards.tx" x="154.263" y="68.7132" />
+  <object id="72" template="../../../../../../common/maps/obj/manashards.tx" x="264.714" y="67.91" />
   <object id="73" template="../../../../../../common/maps/obj/treasure.tx" x="248.246" y="42.6066">
    <properties>
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;randomCard&quot;,
-    &quot;colors&quot;: [ &quot;Black&quot; ],
-    &quot;subTypes&quot;: [ &quot;Vampire&quot; ],
-    &quot;count&quot;: 5
+    "type": "randomCard",
+    "colors": [ "Black" ],
+    "subTypes": [ "Mercenary" ],
+    "count": 5
   },
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;count&quot;: 1,
-    &quot;probability&quot;: 0.1,
-    &quot;itemName&quot;: &quot;Dark Boots&quot;
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Dark Boots"
   },
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;count&quot;: 1,
-    &quot;probability&quot;: 0.1,
-    &quot;itemName&quot;: &quot;Dark Shield&quot;
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Dark Shield"
   },
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;count&quot;: 1,
-    &quot;probability&quot;: 0.1,
-    &quot;itemName&quot;: &quot;Dark Armor&quot;
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Dark Armor"
   },
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;count&quot;: 1,
-    &quot;probability&quot;: 0.1,
-    &quot;itemName&quot;: &quot;Blood Vial&quot;
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Blood Vial"
   },
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;count&quot;: 1,
-    &quot;probability&quot;: 0.1,
-    &quot;itemName&quot;: &quot;Dark Amulet&quot;
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Dark Amulet"
   }
 ]</property>
    </properties>
@@ -162,40 +110,40 @@
    <properties>
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;randomCard&quot;,
-    &quot;colors&quot;: [ &quot;Black&quot; ],
-    &quot;subTypes&quot;: [ &quot;Vampire&quot; ],
-    &quot;count&quot;: 5
+    "type": "randomCard",
+    "colors": [ "Black" ],
+    "subTypes": [ "Mercenary" ],
+    "count": 5
   },
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;count&quot;: 1,
-    &quot;probability&quot;: 0.1,
-    &quot;itemName&quot;: &quot;Dark Boots&quot;
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Dark Boots"
   },
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;count&quot;: 1,
-    &quot;probability&quot;: 0.1,
-    &quot;itemName&quot;: &quot;Dark Shield&quot;
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Dark Shield"
   },
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;count&quot;: 1,
-    &quot;probability&quot;: 0.1,
-    &quot;itemName&quot;: &quot;Dark Armor&quot;
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Dark Armor"
   },
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;count&quot;: 1,
-    &quot;probability&quot;: 0.1,
-    &quot;itemName&quot;: &quot;Blood Vial&quot;
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Blood Vial"
   },
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;count&quot;: 1,
-    &quot;probability&quot;: 0.1,
-    &quot;itemName&quot;: &quot;Dark Amulet&quot;
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Dark Amulet"
   }
 ]</property>
    </properties>
@@ -204,89 +152,130 @@
    <properties>
     <property name="reward">[
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Snuff Out|MMQ|1&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Cateran Overlord|MMQ"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Vendetta|MMQ|1&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Black Market|MMQ"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Ambition's Cost|MIR|1&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Larceny|MMQ"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Bone Harvest|MIR|1&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Intimidation|MMQ"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Dark Banishing|ICE|1&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Extortion|MMQ"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Terror|LEA|1&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Cateran Slaver|MMQ"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Diabolic Edict|TMP|1&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Cateran Enforcer|MMQ"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Snuff Out|MMQ|1&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Rathi Assassin|NMS"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Vendetta|MMQ|1&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Cateran Kidnappers|MMQ"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Ambition's Cost|MIR|1&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Highway Robber|MMQ"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Bone Harvest|MIR|1&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Strongarm Thug|MMQ"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Dark Banishing|ICE|1&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Snuff Out|MMQ"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Terror|LEA|1&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Vendetta|MMQ"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Diabolic Edict|TMP|1&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Cabal Coffers|TOR"
 	}
+]</property>
+   </properties>
+  </object>
+  <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="215" y="75">
+   <properties>
+    <property name="enemy" value="Cateran Overlord" />
+    <property name="inactive" type="bool" value="true" />
+    <property name="speedModifier" type="float" value="10" />
+    <property name="threatRange" type="int" value="50" />
+   <property name="effect">{"startBattleWithCard": ["Black Market|MMQ", "Larceny|MMQ", "Misshapen Fiend|MMQ", "Spineless Thug|NMS", "Rathi Assassin|NMS"]}</property>
+    </properties>
+  </object>
+  <object id="78" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="215" y="90" width="24.9204" height="14.6679" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    "text": "At the heart of the crypt lies an ornate chest adorned with mercenary insignias. Dark energy emanates from within, and you hear the faint clink of coins and steel.",
+    "options": [
+      { "name": "Walk away" },
+      {
+        "name": "Examine the chest more closely",
+        "text": "The chest bears the mark of the Cateran mercenaries. You sense the presence of a powerful warlord within, waiting to strike at any who dare disturb his treasure.",
+        "options": [
+          { "name": "Leave it undisturbed" },
+          {
+            "name": "Open the chest",
+            "text": "As you lift the lid, a formidable figure rises from within. 'YOU DARE STEAL FROM THE CATERAN OVERLORD?' bellows the warlord, his blades gleaming with deadly intent!",
+            "options": [
+              {
+                "name": "Face the Overlord!",
+                "action": [
+                  { "activateMapObject": 77 },
+                  { "deleteMapObject": -1 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 ]</property>
    </properties>
   </object>

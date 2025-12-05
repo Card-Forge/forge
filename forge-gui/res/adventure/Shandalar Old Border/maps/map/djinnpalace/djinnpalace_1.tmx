@@ -31,58 +31,61 @@
  <objectgroup id="4" name="Objects">
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="270.665" width="48" height="16">
    <properties>
-    <property name="direction" value="up"/>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/djinnpalace/djinpalace_entrance.tmx"/>
-    <property name="teleportObjectId" value="118"/>
+    <property name="direction" value="up" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/djinnpalace/djinpalace_entrance.tmx" />
+    <property name="teleportObjectId" value="118" />
    </properties>
   </object>
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="133.045" y="158.394">
    <properties>
-    <property name="enemy" value="Djinn"/>
-    <property name="threatRange" type="int" value="20"/>
+    <property name="enemy" value="Djinn" />
+   <property name="effect">{"startBattleWithCard": ["Island|LEA", "Mountain|ARN", "Swamp|LEA", "Aladdin's Lamp|ARN", "Keeper of Kookus|VIS"]}</property>
+    <property name="threatRange" type="int" value="20" />
    </properties>
   </object>
-  <object id="65" template="../../../../../../common/maps/obj/treasure.tx" x="228.493" y="187.969"/>
-  <object id="66" template="../../../../../../common/maps/obj/gold.tx" x="164.873" y="252.007"/>
+  <object id="65" template="../../../../../../common/maps/obj/treasure.tx" x="228.493" y="187.969" />
+  <object id="66" template="../../../../../../common/maps/obj/gold.tx" x="164.873" y="252.007" />
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="208.866" y="81.1234">
    <properties>
-    <property name="enemy" value="Djinn"/>
-    <property name="threatRange" type="int" value="30"/>
+    <property name="enemy" value="Djinn" />
+   <property name="effect">{"startBattleWithCard": ["Island|LEA", "Mountain|ARN", "Swamp|LEA", "Aladdin's Lamp|ARN", "Keeper of Kookus|VIS"]}</property>
+    <property name="threatRange" type="int" value="30" />
    </properties>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="248.146" y="187.807">
    <properties>
-    <property name="enemy" value="Djinn"/>
-    <property name="threatRange" type="int" value="30"/>
+    <property name="enemy" value="Djinn" />
+   <property name="effect">{"startBattleWithCard": ["Island|LEA", "Mountain|ARN", "Swamp|LEA", "Aladdin's Lamp|ARN", "Keeper of Kookus|VIS"]}</property>
+    <property name="threatRange" type="int" value="30" />
    </properties>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/entry_up.tx" x="301.655" y="175.384" width="48" height="36.1131">
    <properties>
-    <property name="direction" value="down"/>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/djinnpalace/djinnpalace_2.tmx"/>
-    <property name="teleportObjectId" value="38"/>
+    <property name="direction" value="down" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/djinnpalace/djinnpalace_2.tmx" />
+    <property name="teleportObjectId" value="38" />
    </properties>
   </object>
   <object id="70" template="../../../../../../common/maps/obj/booster.tx" x="158.228" y="144.031">
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;ARN&quot;, &quot;CHR&quot;, &quot;MIR&quot;, &quot;VIS&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    "editions": [ "ARN", "CHR", "MIR", "VIS" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ARN&quot;, &quot;CHR&quot;, &quot;MIR&quot;, &quot;VIS&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    "editions": [ "ARN", "CHR", "MIR", "VIS" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ARN&quot;, &quot;CHR&quot;, &quot;MIR&quot;, &quot;VIS&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+    "editions": [ "ARN", "CHR", "MIR", "VIS" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Rare" ]
   }
 ]
 </property>
@@ -90,19 +93,19 @@
   </object>
   <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="195.497" y="144.031">
    <properties>
-    <property name="enemy" value="Adept White Wizard"/>
-    <property name="threatRange" type="int" value="20"/>
-    <property name="waypoints" value="73,74,75,76,77,78,79,78,77,76,75,74,73,72"/>
+    <property name="enemy" value="Adept White Wizard" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="73,74,75,76,77,78,79,78,77,76,75,74,73,72" />
    </properties>
   </object>
-  <object id="72" template="../../../../../../common/maps/obj/waypoint.tx" x="196.089" y="234.54"/>
-  <object id="73" template="../../../../../../common/maps/obj/waypoint.tx" x="195.497" y="40.8038"/>
-  <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="262.344" y="43.4659"/>
-  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="269.738" y="91.0866"/>
-  <object id="76" template="../../../../../../common/maps/obj/waypoint.tx" x="300.204" y="94.6359"/>
-  <object id="77" template="../../../../../../common/maps/obj/waypoint.tx" x="302.274" y="121.848"/>
-  <object id="78" template="../../../../../../common/maps/obj/waypoint.tx" x="269.147" y="126.58"/>
-  <object id="79" template="../../../../../../common/maps/obj/waypoint.tx" x="270.921" y="224.779"/>
-  <object id="80" template="../../../../../../common/maps/obj/manashards.tx" x="233.357" y="81.9174"/>
+  <object id="72" template="../../../../../../common/maps/obj/waypoint.tx" x="196.089" y="234.54" />
+  <object id="73" template="../../../../../../common/maps/obj/waypoint.tx" x="195.497" y="40.8038" />
+  <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="262.344" y="43.4659" />
+  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="269.738" y="91.0866" />
+  <object id="76" template="../../../../../../common/maps/obj/waypoint.tx" x="300.204" y="94.6359" />
+  <object id="77" template="../../../../../../common/maps/obj/waypoint.tx" x="302.274" y="121.848" />
+  <object id="78" template="../../../../../../common/maps/obj/waypoint.tx" x="269.147" y="126.58" />
+  <object id="79" template="../../../../../../common/maps/obj/waypoint.tx" x="270.921" y="224.779" />
+  <object id="80" template="../../../../../../common/maps/obj/manashards.tx" x="233.357" y="81.9174" />
  </objectgroup>
 </map>

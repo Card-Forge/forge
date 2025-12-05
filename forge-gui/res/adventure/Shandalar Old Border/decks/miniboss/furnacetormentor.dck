@@ -1,0 +1,23 @@
+[metadata]
+Name=Red Phyrexian Boss
+[Main]
+4 Sulfurous Springs|5ED
+4 Tainted Peak|TOR
+5 Mountain|TMP
+9 Swamp|TMP
+4 Dark Ritual|ICE
+4 Phyrexian Purge|MIR
+4 Terminate|PLS
+4 Plague Spores|INV
+4 Agonizing Demise|INV
+4 Phyrexian Scuta|PLS
+2 Tsabo Tavoc|INV
+2 Blazing Specter|INV
+4 Blistering Firecat|ONS
+4 Juggernaut|3ED
+
+[StartInBattle_Reference]
+1 Phyrexian Arena|APC
+1 Gate to Phyrexia|ATQ
+1 Sulfuric Vortex|SCG
+1 Phyrexian Walker|VIS

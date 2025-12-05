@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="79">
  <editorsettings>
-  <export target="cave_1..tmx" format="tmx"/>
+  <export target="cave_1..tmx" format="tmx" />
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
  <layer id="8" name="Lowest" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJxjYBgFgxFcZRt89oLkYJjW9iLbhY6paSet7SDV7lEwCkbBKBgFo2AUjIJRMAroCQADehY/
@@ -27,7 +27,7 @@
  </layer>
  <layer id="7" name="Foreground" width="30" height="30">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="base64" compression="zlib">
    eJztljtOw0AQhl0g5NgWlDzEARAHiaIUaXgcgZprICSuEcXQpEKio4hCS8EJECESl2BG3pF/RjsG79qp8kuj9Uv7zYxnZ3c4SJKhx8o0SR6cPab1865k8T4Vo2u25o7cvFPifNH1LK3uPzqMVXNLFycz13A/cSZiH3Q+YrirQRWjjzlRnHkc1qwpzdTcWFnMs7w/pnBxzeB/65u7cnV7TeNNDwyLi+xNc7Gecd1ugqt96JMtdYV9UPcu1AHV+aGzozyOy7FxD8J9oFS1fZtV4zOxvncquyrC2b68cp/UOV7Q/PfZby7bUyQX41s3/N9zivHEsY9pvCzCuZqJe+ErzX2X1d9z3My+KMKZwh2pPUjEa/k0r3rm+25tC8jt0r37i2Fxua64niS/8wausJfwPJTLQjbGK7nWbDRL1nlBahm/Yzb7skesfbI3VV9tuJZwHYnGLgfW3t6W+9LAxXyPlR9NYuY0oJ9a5xzWf9k++WK0uLFn1LZ+dn0m32qrH7YWnWs=
@@ -41,74 +41,71 @@
  <objectgroup id="4" name="Objects">
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="196" y="480" width="40" height="8">
    <properties>
-    <property name="teleport" value=""/>
+    <property name="teleport" value="" />
    </properties>
   </object>
-  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="112.522" y="340.819"/>
+  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="112.522" y="340.819" />
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="134.676" y="345.362">
    <properties>
-    <property name="enemy" value="Poisonous Snake"/>
-    <property name="threatRange" type="int" value="20"/>
+    <property name="enemy" value="Poisonous Snake" />
+    <property name="threatRange" type="int" value="20" />
    </properties>
   </object>
   <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="220.966" y="236.941">
    <properties>
-    <property name="effect">{
- &quot;lifeModifier&quot;: 4,
- &quot;startBattleWithCard&quot;: [ &quot;Forest|LEA&quot;, &quot;Mountain|LEA&quot; ]
-}</property>
-    <property name="enemy" value="Hellion"/>
-    <property name="threatRange" type="int" value="30"/>
+    <property name="effect">{ "startBattleWithCard": [ "Pandemonium|EXO", "Smoldering Crater|USG" ] }</property>
+    <property name="enemy" value="Hellion" />
+    <property name="threatRange" type="int" value="30" />
    </properties>
   </object>
   <object id="58" template="../../../../../../common/maps/obj/treasure.tx" x="70.4356" y="65.1836">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 1,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 4,
-  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
-  &quot;addMaxCount&quot;: 2
+  "type": "randomCard",
+  "count": 4,
+  "rarity": [ "uncommon" ],
+  "addMaxCount": 2
 }]</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="false" />
    </properties>
   </object>
   <object id="60" template="../../../../../../common/maps/obj/enemy.tx" x="364.086" y="354.805">
    <properties>
-    <property name="enemy" value="Hidden Snake"/>
-    <property name="threatRange" type="int" value="30"/>
+    <property name="enemy" value="Hidden Snake" />
+    <property name="threatRange" type="int" value="30" />
    </properties>
   </object>
   <object id="61" template="../../../../../../common/maps/obj/enemy.tx" x="71.906" y="237.367">
    <properties>
-    <property name="enemy" value="Snake"/>
-    <property name="threatRange" type="int" value="20"/>
+    <property name="enemy" value="Snake" />
+    <property name="threatRange" type="int" value="20" />
    </properties>
   </object>
   <object id="62" template="../../../../../../common/maps/obj/booster.tx" x="65.0452" y="369.737">
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;TMP&quot;, &quot;STH&quot;, &quot;EXO&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    "editions": [ "TMP", "STH", "EXO" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
   },
   {
-    &quot;editions&quot;: [ &quot;TMP&quot;, &quot;STH&quot;, &quot;EXO&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    "editions": [ "TMP", "STH", "EXO" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
   },
   {
-    &quot;editions&quot;: [ &quot;TMP&quot;, &quot;STH&quot;, &quot;EXO&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+    "editions": [ "TMP", "STH", "EXO" ],
+    "type": "card",
+    "count": 1,
+    "rarity": [ "Rare" ]
   }
 ]
 </property>
@@ -116,44 +113,44 @@
   </object>
   <object id="63" template="../../../../../../common/maps/obj/enemy.tx" x="124.369" y="26.7066">
    <properties>
-    <property name="enemy" value="Poisonous Snake"/>
-    <property name="threatRange" type="int" value="20"/>
+    <property name="enemy" value="Poisonous Snake" />
+    <property name="threatRange" type="int" value="20" />
    </properties>
   </object>
-  <object id="64" template="../../../../../../common/maps/obj/waypoint.tx" x="147.372" y="300.727"/>
-  <object id="65" template="../../../../../../common/maps/obj/waypoint.tx" x="138.09" y="111.859"/>
-  <object id="66" template="../../../../../../common/maps/obj/waypoint.tx" x="333.416" y="113.473"/>
+  <object id="64" template="../../../../../../common/maps/obj/waypoint.tx" x="147.372" y="300.727" />
+  <object id="65" template="../../../../../../common/maps/obj/waypoint.tx" x="138.09" y="111.859" />
+  <object id="66" template="../../../../../../common/maps/obj/waypoint.tx" x="333.416" y="113.473" />
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="139.301" y="222.436">
    <properties>
-    <property name="enemy" value="Viper"/>
-    <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value="65,66,72,64"/>
+    <property name="enemy" value="Viper" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="65,66,72,64" />
    </properties>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="307.991" y="186.115">
    <properties>
-    <property name="enemy" value="Viper"/>
-    <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value="66,72,64,65"/>
+    <property name="enemy" value="Viper" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="66,72,64,65" />
    </properties>
   </object>
   <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="61.4131" y="144.144">
    <properties>
-    <property name="enemy" value="Poisonous Snake"/>
-    <property name="threatRange" type="int" value="30"/>
+    <property name="enemy" value="Poisonous Snake" />
+    <property name="threatRange" type="int" value="30" />
    </properties>
   </object>
-  <object id="71" template="../../../../../../common/maps/obj/gold.tx" x="36.7957" y="142.53"/>
-  <object id="72" template="../../../../../../common/maps/obj/waypoint.tx" x="320.905" y="295.884"/>
-  <object id="73" template="../../../../../../common/maps/obj/manashards.tx" x="151.408" y="75.1344"/>
-  <object id="74" template="../../../../../../common/maps/obj/manashards.tx" x="372.965" y="97.734"/>
-  <object id="75" template="../../../../../../common/maps/obj/manashards.tx" x="384.265" y="256.739"/>
+  <object id="71" template="../../../../../../common/maps/obj/gold.tx" x="36.7957" y="142.53" />
+  <object id="72" template="../../../../../../common/maps/obj/waypoint.tx" x="320.905" y="295.884" />
+  <object id="73" template="../../../../../../common/maps/obj/manashards.tx" x="151.408" y="75.1344" />
+  <object id="74" template="../../../../../../common/maps/obj/manashards.tx" x="372.965" y="97.734" />
+  <object id="75" template="../../../../../../common/maps/obj/manashards.tx" x="384.265" y="256.739" />
   <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="269.249" y="64.2381">
    <properties>
-    <property name="enemy" value="Poisonous Snake"/>
-    <property name="threatRange" type="int" value="20"/>
+    <property name="enemy" value="Poisonous Snake" />
+    <property name="threatRange" type="int" value="20" />
    </properties>
   </object>
-  <object id="78" template="../../../../../../common/maps/obj/gold.tx" x="398.793" y="348.348"/>
+  <object id="78" template="../../../../../../common/maps/obj/gold.tx" x="398.793" y="348.348" />
  </objectgroup>
 </map>

@@ -39,7 +39,7 @@
  <objectgroup id="5" name="Objects">
   <object id="13" template="../../../../../../common/maps/obj/entry_down.tx" x="224" y="184" width="32" height="16">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/library_of_varsil_1.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story_explore/library_of_varsil_1.tmx"/>
     <property name="teleportObjectId" value="7"/>
    </properties>
   </object>
@@ -48,7 +48,7 @@
     <property name="activeQuestFlag" value="defeatedLibraryOfVarsilBoss"/>
     <property name="portalState" value="inactive"/>
     <property name="sprite" value="sprites/portal3.atlas"/>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/library_of_varsil_4.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story_explore/library_of_varsil_4.tmx"/>
     <property name="teleportObjectId" value="34"/>
    </properties>
   </object>

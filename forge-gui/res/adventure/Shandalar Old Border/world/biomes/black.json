@@ -32,8 +32,8 @@
 	"Shroom2"
 ],
 "enemies": [
-	"Legendary Mage of the Badlands",
-	"Legendary Mage of the Underground Sea",
+	"Legend of the Badlands",
+	"Legend of the Underground Sea",
 	"Scrublander of Dromar",
 	"Volcanic Islander of Crosis",
 	"Bayou Dweller of Darigaaz",
@@ -81,7 +81,9 @@
 	"Zombie",
 	"Zombie Lord",
 	"Walking Brain",
-	"Wild Rat"
+	"Wild Rat",
+	"Nether Fiend of Shandalar",
+	"Necromancer of Shandalar"
 ],
 	"pointsOfInterest": [
 		"Black Castle",

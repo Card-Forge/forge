@@ -1,23 +1,17 @@
 [metadata]
-Name=scorpion
+Name=Scorpion - GB Poison
 [Main]
-1 Underground River|ICE|1
-18 Forest|4ED|1
-2 Duress|USG|1
-2 Island|4ED|1
-2 Overrun|TMP|1
-2 Yavimaya Coast|APC|1
-2 Yavimaya Enchantress|UDS|1
-4 Dakmor Scorpion|S99|1
-4 Deadly Insect|BTD|1
-4 Fog|3ED|1
-4 Giant Growth|4ED|1
-4 Kukemssa Serpent|MIR|1
-4 Llanowar Elves|4ED|1
-4 Llanowar Wastes|APC|1
-4 Muscle Sliver|TMP|1
-4 Scryb Sprites|4ED|1
-4 Swamp|4ED|1
-4 Twisted Abomination|SCG|1
-4 Web|4ED|1
-4 Wild Mongrel|ODY|1
+10 Swamp|POR
+10 Forest|POR
+4 Elves of Deep Shadow|DRK
+2 Pit Scorpion|LEG
+2 Pit Scorpion|5ED
+2 Dakmor Scorpion|PO2
+2 Dauthi Embrace|TMP
+4 Deadly Insect|ALL|2
+4 Swamp Mosquito|ALL|2
+4 Suq'Ata Assassin|VIS
+4 Terror|4ED
+4 Sylvan Might|ODY
+4 Naturalize|ONS
+4 Cruel Edict|PO2

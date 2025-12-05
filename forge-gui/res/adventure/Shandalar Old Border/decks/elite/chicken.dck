@@ -1,0 +1,24 @@
+[metadata]
+Name=chicken
+[Main]
+10 Mountain|UGL
+5 Island|UGL
+5 Forest|UGL
+4 Jack-in-the-Mox|UGL
+4 Chicken Egg|UGL
+4 Roc Hatchling|WTH
+4 Rukh Egg|ARN
+4 Krazy Kow|UGL
+4 Zodiac Rooster|PTK
+4 Flock of Rabid Sheep|UGL
+4 Fowl Play|UGL
+4 Chicken à la King|UGL
+1 Paper Tiger|UGL
+1 Rock Lobster|UGL
+1 Scissors Lizard|UGL
+1 Urza's Science Fair Project|UGL
+
+[StartInBattle_Reference]
+1 Island|UGL
+1 Forest|UGL
+1 Mountain|UGL

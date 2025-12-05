@@ -45,7 +45,7 @@
 			"BarbarianCamp",
 			"BiomeRed",
 			"Sidequest"
-	]
+		]
 	},
 	{
 		"name": "KorEncampment",
@@ -62,7 +62,7 @@
 			"BiomeRed",
 			"BiomeWhite",
 			"Sidequest"
-	]
+		]
 	},
 	{
 		"name": "BarbarianCamp2",
@@ -458,7 +458,7 @@
 			"Hostile",
 			"BiomeBlack",
 			"Sidequest"
-	]
+		]
 	},
 	{
 		"name": "CaveZombie",
@@ -473,7 +473,7 @@
 			"Cave",
 			"Hostile",
 			"BiomeBlack"
-	]
+		]
 	},
 	{
 		"name": "CaveKobold",
@@ -488,7 +488,7 @@
 			"Cave",
 			"Hostile",
 			"BiomeBlack"
-	]
+		]
 	},
 	{
 		"name": "CaveReptile",
@@ -503,7 +503,7 @@
 			"Cave",
 			"Hostile",
 			"BiomeGreen"
-	]
+		]
 	},
 	{
 		"name": "CaveTroll",
@@ -518,7 +518,7 @@
 			"Cave",
 			"Hostile",
 			"BiomeColorless"
-	]
+		]
 	},
 	{
 		"name": "CaveLarge1",
@@ -1966,7 +1966,7 @@
 			"Dungeon",
 			"Fort",
 			"Sidequest"
-	]
+		]
 	},
 	{
 		"name": "Fort3",
@@ -2098,7 +2098,7 @@
 	},
 	{
 		"name": "Garruk Forest",
-		"displayName": "Garruk's Forest",
+		"displayName": "Kamahl's Forest",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -3017,7 +3017,7 @@
 			"MerfolkPool",
 			"Hostile",
 			"Sidequest"
-	]
+		]
 	},
 	{
 		"name": "MerfolkPool5",
@@ -3031,7 +3031,7 @@
 		"questTags": [
 			"MerfolkPool",
 			"Hostile"
-	]
+		]
 	},
 	{
 		"name": "MerfolkPool1",
@@ -3247,7 +3247,7 @@
 	},
 	{
 		"name": "Nahiri Encampment",
-		"displayName": "Nahiri's Encampment",
+		"displayName": "Rebel Encampment",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -3678,7 +3678,7 @@
 	},
 	{
 		"name": "Slimefoots Lair",
-		"displayName": "Slimefoot's Lair",
+		"displayName": "Thallid Grove",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -3902,54 +3902,6 @@
 		]
 	},
 	{
-		"name": "Temple of Chandra",
-		"displayName": "Temple of Chandra",
-		"type": "dungeon",
-		"count": 1,
-		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
-		"sprite": "hall_of_flame",
-		"map": "../common/maps/map/main_story/templeofchandra.tmx",
-		"radiusFactor": 0.8,
-		"questTags": [
-			"Story",
-			"BiomeRed",
-			"Temple",
-			"DungeonEffect",
-			"Hostile",
-			"Boss"
-		],
-		"questFlagsToActivate": [
-			{
-				"key": "mainQuest",
-				"val": 2
-			}
-		]
-	},
-	{
-		"name": "Temple of Liliana",
-		"displayName": "Temple of Liliana",
-		"type": "dungeon",
-		"count": 1,
-		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
-		"sprite": "hall_of_fear",
-		"map": "../common/maps/map/main_story/temple_of_liliana/keep.tmx",
-		"radiusFactor": 0.8,
-		"questTags": [
-			"Story",
-			"BiomeBlack",
-			"Temple",
-			"DungeonEffect",
-			"Hostile",
-			"Boss"
-		],
-		"questFlagsToActivate": [
-			{
-				"key": "mainQuest",
-				"val": 2
-			}
-		]
-	},
-	{
 		"name": "Test",
 		"count": 100,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -4034,7 +3986,7 @@
 			"BiomeBlack",
 			"Dungeon",
 			"Sidequest"
-	]
+		]
 	},
 	{
 		"name": "VampireCastle3",
@@ -4050,7 +4002,7 @@
 			"Hostile",
 			"BiomeBlack",
 			"Dungeon"
-	]
+		]
 	},
 	{
 		"name": "Waste Town Generic",

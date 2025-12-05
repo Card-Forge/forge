@@ -22,3 +22,9 @@ Name=Grolnok
 4 Terror|LEA
 4 Naturalize|ONS
 4 Muscle Burst|ODY
+
+[StartInBattle_Reference]
+1 Swamp|PELP
+1 Forest|PELP
+2 Worry Beads|MMQ
+1 Mortal Combat|TOR

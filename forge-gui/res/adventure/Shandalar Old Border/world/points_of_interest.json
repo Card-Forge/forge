@@ -49,7 +49,7 @@
 	},
 	{
 		"name": "KorEncampment",
-		"displayName": "Kor Outpost",
+		"displayName": "King Kane's War Camp",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -98,7 +98,7 @@
 	},
 	{
 		"name": "BarbarianCamp4",
-		"displayName": "Barbarian Camp",
+		"displayName": "King Phil's Court",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -247,7 +247,7 @@
 	},
 	{
 		"name": "FortBlue4",
-		"displayName": "Cloud Fort",
+		"displayName": "Palace of the Visionary",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -296,7 +296,7 @@
 	},
 	{
 		"name": "Castle1",
-		"displayName": "Fort",
+		"displayName": "Fort of the Sainted One",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -1535,23 +1535,17 @@
 		]
 	},
 	{
-		"name": "Emrakul",
-		"displayName": "Emrakul's Castle",
+		"name": "KaronaTemple",
+		"displayName": "Temple of the False God",
 		"type": "castle",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "colorless_castle",
-		"map": "../Shandalar Old Border/maps/map/emrakul/emrakul_legacy.tmx",
+		"map": "../Shandalar Old Border/maps/map/karona_temple/karona_legacy.tmx",
 		"radiusFactor": 0.4,
 		"questTags": [
 			"Castle",
 			"BiomeColorless"
-		],
-		"questFlagsToActivate": [
-			{
-				"key": "mainQuest",
-				"val": 2
-			}
 		]
 	},
 	{
@@ -1954,7 +1948,7 @@
 	},
 	{
 		"name": "FortMultilevel",
-		"displayName": "Cultists' Outpost",
+		"displayName": "Arzakon's Fortress",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2002,7 +1996,7 @@
 	},
 	{
 		"name": "Fort5",
-		"displayName": "Mind Slaver's Encampment",
+		"displayName": "Arzakon's Fortress",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2201,7 +2195,7 @@
 	},
 	{
 		"name": "Graveyard3",
-		"displayName": "Graveyard",
+		"displayName": "Grave of the Lich Lord",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2231,7 +2225,7 @@
 	},
 	{
 		"name": "Grolnoks Bog",
-		"displayName": "Grolnok's Bog",
+		"displayName": "Grave Frog Bog",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2310,7 +2304,7 @@
 	},
 	{
 		"name": "Grove4",
-		"displayName": "Grove of the Forest Titan",
+		"displayName": "Grove of Queen Guay",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2342,7 +2336,7 @@
 	},
 	{
 		"name": "Grove6",
-		"displayName": "Long Forgotten Temple",
+		"displayName": "Temple of the Dragon Lord",
 		"type": "cave",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2374,7 +2368,7 @@
 	},
 	{
 		"name": "Grove8",
-		"displayName": "Corrupted Forest",
+		"displayName": "Great Druid's Grove",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3095,7 +3089,7 @@
 	},
 	{
 		"name": "Monastery",
-		"displayName": "Monastery",
+		"displayName": "Dark Age Church",
 		"type": "dungeon",
 		"count": 3,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3143,7 +3137,7 @@
 	},
 	{
 		"name": "Monastery3",
-		"displayName": "Monastery",
+		"displayName": "Church of Queen Kaja",
 		"type": "dungeon",
 		"count": 5,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3724,7 +3718,7 @@
 	},
 	{
 		"name": "Slobads Factory",
-		"displayName": "Slobad's Factory",
+		"displayName": "Squee's Factory",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3902,54 +3896,6 @@
 		]
 	},
 	{
-		"name": "Temple of Jaya",
-		"displayName": "Temple of Jaya",
-		"type": "dungeon",
-		"count": 1,
-		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
-		"sprite": "hall_of_flame",
-		"map": "../Shandalar Old Border/maps/map/main_story/templeofchandra.tmx",
-		"radiusFactor": 0.8,
-		"questTags": [
-			"Story",
-			"BiomeRed",
-			"Temple",
-			"DungeonEffect",
-			"Hostile",
-			"Boss"
-		],
-		"questFlagsToActivate": [
-			{
-				"key": "mainQuest",
-				"val": 2
-			}
-		]
-	},
-	{
-		"name": "Temple of Yawgmoth",
-		"displayName": "Temple of Yawgmoth",
-		"type": "dungeon",
-		"count": 1,
-		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
-		"sprite": "hall_of_fear",
-		"map": "../Shandalar Old Border/maps/map/main_story/temple_of_liliana/keep.tmx",
-		"radiusFactor": 0.8,
-		"questTags": [
-			"Story",
-			"BiomeBlack",
-			"Temple",
-			"DungeonEffect",
-			"Hostile",
-			"Boss"
-		],
-		"questFlagsToActivate": [
-			{
-				"key": "mainQuest",
-				"val": 2
-			}
-		]
-	},
-	{
 		"name": "Test",
 		"count": 100,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3959,7 +3905,7 @@
 	},
 	{
 		"name": "Tibalts Fortress",
-		"displayName": "Tibalt's Fortress",
+		"displayName": "Specter's Fortress",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -3987,7 +3933,7 @@
 	},
 	{
 		"name": "VampireCastle",
-		"displayName": "Vampire Castle",
+		"displayName": "Chainer's Castle",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -4004,7 +3950,7 @@
 	},
 	{
 		"name": "VampireCastle1",
-		"displayName": "Vampire Castle",
+		"displayName": "Cateran Castle",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -4021,7 +3967,7 @@
 	},
 	{
 		"name": "VampireCastle2",
-		"displayName": "Vampire Castle",
+		"displayName": "Castle Sengir",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -4038,7 +3984,7 @@
 	},
 	{
 		"name": "VampireCastle3",
-		"displayName": "Vampire Dungeon",
+		"displayName": "Swamp Queen's Castle",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -4171,7 +4117,7 @@
 	},
 	{
 		"name": "Zedruu City",
-		"displayName": "Zedruu City",
+		"displayName": "Mysterious City",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
