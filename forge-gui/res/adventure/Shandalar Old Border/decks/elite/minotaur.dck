@@ -1,5 +1,5 @@
 [metadata]
-Name=Minotaur Warcaller - Minotaur Tribal
+Name=Anaba Warlord - Minotaur Tribal
 [Main]
 16 Mountain|PO2
 4 Shivan Reef|APC
@@ -14,3 +14,8 @@ Name=Minotaur Warcaller - Minotaur Tribal
 2 Anaba Shaman|HML
 4 Lightning Bolt|LEA
 4 Lightning Blast|TMP
+
+[StartInBattle_Reference]
+2 Mountain|ICE
+1 Didgeridoo|HML
+1 Anaba Spirit Crafter|HML
