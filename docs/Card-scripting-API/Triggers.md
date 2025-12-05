@@ -31,7 +31,7 @@ Below are the currently available modes.
 Always-triggers represent State triggers, a special kind of triggers with their own rule ([CR 603.8](https://yawgatog.com/resources/magic-rules/#R6038)).
 
 # Attached / Unattach
-Attached-triggers go off when a card becomes attached, via enchanting or equipping, to another card or player.
+Goes off when a card becomes attached, via enchanting or equipping, to another card or player.
 
 Parameters:
 - `ValidSource` - The card that is being attached to another must match this for the trigger to go off
@@ -42,7 +42,7 @@ TriggeredObjects:
 - `Target` - The card that is being attached to
 
 # BecomeMonstrous
-BecomeMonstrous-triggers go off when a creature becomes Monstrous.
+Goes off when a creature becomes Monstrous.
 
 Parameters:
 - `ValidCard` - The card that becomes monstrous must match this
@@ -83,7 +83,7 @@ TriggeredObjects:
 - `Card` - The card whose controller changes
 
 # ChangesZone
-ChangesZone-triggers go off whenever a card changes zone.
+Goes off whenever a card changes zone.
 
 Parameters:
 - `ValidCard` - The card that was moved must match this for the trigger to go off
@@ -97,7 +97,7 @@ TriggeredObjects:
 # ChangesZoneAll
 
 # Clashed
-Clashed-triggers go off whenever a player has clashed, regardless of wether you won or not.
+Goes off whenever a player has clashed, regardless of whether you won or not.
 
 Parameters:
 - `ValidPlayer` - Who clashed
@@ -106,7 +106,7 @@ Parameters:
 # Combat
 
 ## AttackerBlocked
-AttackerBlocked-triggers go off when at least one creature becomes blocked. It goes off only once (no matter how many blockers there are) right after the declare blockers step.
+Goes off when at least one creature becomes blocked. It goes off only once (no matter how many blockers there are) right after the declare blockers step.
 
 Parameters:
 - `ValidCard` - The attacking creature must match this for the trigger to go off
@@ -122,7 +122,7 @@ TriggeredObjects:
 ## AttackerBlockedByCreature
 
 ## AttackerUnblocked
-AttackerUnblocked-triggers go off when a creature attacks and is not blocked, right after the declare blockers step.
+Goes off when a creature attacks and is not blocked, right after the declare blockers step.
 
 Parameters:
 - `ValidCard` - The attacking creature must match this for the trigger to go off
@@ -145,7 +145,7 @@ TriggeredObjects:
 - `AttackedTarget` - Collection of game entities that each attacker is attacking
 
 ## Attacks
-Attacks-triggers go off when a creature attacks. That is, it goes off once for each creature that attacks during your each combat phase (Right after the declare attackers step).
+Goes off when a creature attacks. That is, it goes off once for each creature that attacks during your each combat phase (Right after the declare attackers step).
 
 Parameters:
 - `ValidCard` - The attacking creature must match this for the trigger to go off
@@ -279,7 +279,7 @@ TriggeredObjects:
 - `Card` - The discarded card
 
 # Drawn
-Drawn-triggers go off when a player draws a card.
+Goes off when a player draws a card.
 
 Parameters:
 - `ValidCard` - The drawn card must match this
@@ -308,7 +308,7 @@ TriggeredObjects:
 - `Player` - The player who flipped the coin
 
 # LandPlayed
-LandPlayed-triggers of course go off when a land is played.
+Goes off when a land is played.
 
 Parameters:
 - `ValidCard` - The played card must match this
@@ -426,7 +426,7 @@ TriggeredObjects:
 - `Scheme` - The scheme card that is set in motion
 
 # Shuffled
-Shuffled-triggers go off whenever a player shuffles his/her library.
+Goes off whenever a player shuffles his/her library.
 
 Parameters:
 - `ValidPlayer` - The player who's turn it should be
@@ -435,7 +435,7 @@ TriggeredObjects:
 - `Player` - The player whose turn it is
 
 # SpellCast / AbilityCast / SpellAbilityCast
-Triggers go off whenever a spell,ability or either respectively is cast by either player.
+These triggers go off whenever a spell,ability or either respectively is cast by either player.
 
 Parameters:
 - `ValidActivatingPlayer` - The player who activated the ability/spell must match this. (NOTE: For spells, the activator and controller are the same. They usually the same for abilities too, with the exception being abilities that can be activated by any player)
@@ -458,7 +458,7 @@ TriggeredObjects:
 - `Card` - The card that was tapped/untapped
 
 # TapsForMana
-This trigger goes off when a land is tapped for a mana ability.
+Goes off when a land is tapped for a mana ability.
 
 Parameters:
 - `ValidCard` - The card that taps

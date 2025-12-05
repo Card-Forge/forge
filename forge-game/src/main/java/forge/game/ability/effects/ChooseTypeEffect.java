@@ -43,9 +43,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("ValidTypes")) {
             validTypes.addAll(Arrays.asList(sa.getParam("ValidTypes").split(",")));
-        }
-
-        if (validTypes.isEmpty()) {
+        } else {
             switch (type) {
             case "Card":
                 validTypes.addAll(CardType.getAllCardTypes());
