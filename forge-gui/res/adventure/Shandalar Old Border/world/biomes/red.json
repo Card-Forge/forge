@@ -26,8 +26,8 @@
 	"Gravel"
 ],
 "enemies": [
-	"Legendary Mage of the Taiga",
-	"Legendary Mage of the Badlands",
+	"Legend of the Taiga",
+	"Legend of the Badlands",
 	"Plateau Dweller of Rith",
 	"Volcanic Islander of Crosis",
 	"Bayou Dweller of Darigaaz",
@@ -84,7 +84,9 @@
 	"Vampire Lord",
 	"Viashino",
 	"Wild-Magic Sorcerer",
-	"Yeti"
+	"Yeti",
+	"Crag Hydra of Shandalar",
+	"War Mage of Shandalar"
 ],
 	"pointsOfInterest": [
 		"Red Castle",

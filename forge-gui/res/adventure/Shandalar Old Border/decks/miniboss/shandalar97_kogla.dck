@@ -1,0 +1,17 @@
+[metadata]
+Name=Gargantuan Gorilla
+[Main]
+20 Snow-Covered Forest|ICE
+4 Treetop Village|ULG
+4 Apes of Rath|TMP
+4 Gorilla Warrior|POR
+4 Ancient Silverback|UDS
+4 Gargantuan Gorilla|ALL
+4 Gorilla Titan|ODY
+4 Giant Growth|LEA
+4 Gorilla Chieftain|ALL
+4 Silverback Ape|S99
+4 Simian Grunts|ULG
+
+[StartInBattle_Reference]
+3 Snow-Covered Forest|ICE

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="34" height="59" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="70">
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../../../common/maps/tileset/dungeon/animatedtiles.tsx"/>
+ <layer id="8" name="Bridge" width="34" height="59">
+  <data encoding="base64" compression="zlib">
+   eJztmF9S4zAMxlP+lB6DlPed5QrJAco7XCZAaY5BcgBg94TYJCpfv0i2UmZfduqZb5bGWetnSZbVFsVpnMZpnMZp/G9jURXFWdB50EXQZdAy6Kr6dzbPlLWb8Owx6CnoOWhbTef+3BfF+w8ke4zryb4n/qjD86DzoIv6+/lVPcxFhnLzM603g/24nsXRhLnHoKegZ+DYAUOnSNZPid/DHJj4Q5lbVocM/bhOPwrX7hPi91IcmB9xbBWGHvYn67PfWT39Le+Z/oD8iIMZOsWmFpuUX9bw7u+HIWdT+aHFQos1+8djP8eBMfv1YK/NcWJbpfGOlwPzI3LgeugX9EdH9rT/g5wo0x+QH+IP7YxgHDqyyZ97ZQ30hzYwP8QfyI+fmVHmtef4uXRwpPIDObR6UBIL7p851hkOyY8F5AfHntfC88wcGCctR7z+wFzkusFnR8vPjua4tlgceN9rHNo56WjeYtD8FTmWynkRjgXkh+YTzDes71x3+Zx6OcQXkeMtvPP3fhrrMiHNBxwPPD8fGQ7pUW6BBe1wPNgefmbF+XhnCIPW6+3jUg8sjcLCNcCSFhtkSPWcclaasf8S3VKMuJZo4tqHDNz/ps5tZEFpLBx3S8jA/e+Lcc8tQNy7MwvWypSE4cvn0P9eBi3rKYf1nWEFiizSe0emV8oD+fsNevQPqFfY/26DXhQOy35LWtWDYo153ej+iXPi1wbi7OHgvbNdUTuKOeTfG+Bo5PwZDDuFg/fOdkXsD77/hAMZ5nDw3vd2Da4ch4eh1fzB+ybfyHOJX9YfR3KgDevsYg57OFL2rTq2Ats5Bg+HvLer0+tZ59bD0Do49jHNrMlDnuc4JF+y/hjzOreeVT+y/nCeF8nruRyy16w/xrxjjjVx7I7kcDFU3/mPHHi/Cwf2mbP84WBf0Xctqesah4eh1fxR++oGc1j5wWfPWpcH9qZzOKx7jjm03wG1PijaWoBPmIc/sz+Yg88e/w5o9UFxv1/3QZXvzZYODqlh2Gt6+o+93frwd0Xv/TLxRz2wHMPh6Q2t+2Xij7Ge4poai5anll3uDbX7ReNomUNh0fIj15OichxYTzHmOQ60P/feLzMcc+qpNy84Lvh9l8+taA6HzHvzNdq6vgu+IN3cHfYfcn6tOo/jE5nlC2g=
+  </data>
+ </layer>
+ <layer id="7" name="BackGround" width="34" height="59">
+  <data encoding="base64" compression="zlib">
+   eJzNWQuSwiAMtWtrPVc5hl6ma932NM4ecUkF+khDP6uAmcl0Vyx5vISQ4EkdDrXWvnk+v/TzqLXUWmk9aS0a+fNa6xl0EMaW3sX/fwiDwbL1/bNgn/Ss57jTnM1zXYMZ/9Z609o1/rg3r8FQ71z3wOyTDlorWo+Zc/yM5tTPo9aSjaON3vKxw761i/ZJO+JDTRwPZvxb642Nczv22Qe4C60blePmWNZiA3HUAe6kdaPP13y5KTbgKXHX87UDN9Z+u2ArFBscQw/PRftqHhOtwVKocBxujY0S/h7XFnhPwlUYLGvvSD7jODr0ywK3EvetWuci5DOOqYTctTRfyN4aF6H3EEdncNQb4nTNXhXQNrC2sgFVEw7iHwX98or8XmTsncFguajUlDtqY5P4Quxuzut+HI/rEwvN5+UO5XNB47h3Q1z8B4OEhdbG4wLXbDk5CVy8gkHCcjcxilycID7ezcMaFs6FrX9i8LCEZeYTNf9+DAwcC8eB+TWllMw3OXGg7U/B4eqgD8Hxag7fK/xcxzyWUmb5Q6X3CYk963h9mFrsWYc4UvvEYcm4Xx8XGUcOn0g4cvFCgns3Jw7cuzny6dh/sVqoTrB3Oedj/9X4vY3rLyPt3Uqo9Qqht4mdP+5CzdsKPVHsuJB6EKkvy7FPJByp8hje10g4OGcx7HNd6pdJYpw7RTPtU6cMR8nyBq+R3iHjvZHyFXHYfht9wmukd4i1y9XxYfJq7NpDyhUYD+7+I2ENNN5lNf6dmTtfEtdids84LErud2PXai3gQD5m/oqMowDfeHcxzF50PgCHdxeTGAdJwXxi74OsvVk/ERHH7H4Mcmeq/orXhI6PwPkSa0+XAb9YiXG+SBg6wS9oL8b5wqWTfJIhn+Jdci4c3u8dmXBIv7nkwmGxSHfrf1R+m0g=
+  </data>
+ </layer>
+ <layer id="9" name="Tentacles" width="34" height="59">
+  <data encoding="base64" compression="zlib">
+   eJzt1DkSwCAMQ1GTm8N1WM4Yt1TgKO7+qzViKCwzAMhXu1nrekZVhtkz9Iyqen87vHGTUZXpf516RlW9vx3euMmoyvK/Lj2Db7I2INqbtQHR3qwNiPZmbUC0N2sDor1ZGxDt5V523MuOewEAAAAAAPjfC6KBQvE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects" visible="0" locked="1">
+  <object id="47" template="../../../../../../common/maps/obj/gold.tx" x="339" y="395"/>
+  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="122" y="392"/>
+  <object id="51" template="../../../../../../common/maps/obj/entry_up.tx" x="225" y="656">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="205.747" y="594.972">
+   <properties>
+    <property name="dialog">[{
+  &quot;text&quot;:&quot;Hello, planeswalker {var=player_name}, this area is currently under construction and subject to change. Also this is a hard boss, so be prepared with a strong deck&quot;,
+  &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Ok&quot; }
+  ]
+}]</property>
+    <property name="enemy" value="Homarid"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,38 @@
+[metadata]
+Name=Djinn
+[Main]
+4 Shivan Reef|APC
+4 Underground River|ICE
+4 City of Brass|ARN
+4 Island|POR
+2 Mountain|ARN
+2 Swamp|POR
+4 Desert|ARN
+2 Old Man of the Sea|ARN
+2 Indentured Djinn|MMQ
+2 Mahamoti Djinn|7ED
+1 Djinn of the Lamp|POR
+1 Zanam Djinn|INV
+1 Mijae Djinn|ARN
+1 Emberwilde Djinn|MIR
+2 Kookus|VIS
+1 Halam Djinn|INV
+2 Juzám Djinn|ARN
+2 Fledgling Djinn|WTH
+2 Aku Djinn|VIS
+1 Goham Djinn|INV
+2 Emberwilde Caliph|MIR
+2 Benthic Djinn|MIR
+2 Bottle of Suleiman|ARN
+2 Cryptic Gateway|ONS
+2 Crosis's Charm|PLS
+2 Arcane Denial|ALL
+2 Lightning Bolt|LEA
+2 Dark Banishing|MIR
+
+[StartInBattle_Reference]
+1 Island|LEA
+1 Mountain|ARN
+1 Swamp|LEA
+1 Aladdin's Lamp|ARN
+1 Keeper of Kookus|VIS

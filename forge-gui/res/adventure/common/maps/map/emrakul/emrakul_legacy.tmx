@@ -64,9 +64,9 @@
   <object id="69" template="../../obj/enemy.tx" x="132.844" y="401.619">
    <properties>
     <property name="dialog">[{
-  &quot;text&quot;:&quot;Hello, planeswalker {var=player_name}, Lord Emrakul awaits you for the final challenge. Be prepared.&quot;,
+  &quot;text&quot;:&quot;Hello, planeswalker {var=player_name}. Lord Emrakul awaits you for the final challenge. Be prepared.&quot;,
   &quot;options&quot;:[
-    { &quot;name&quot;:&quot;Ok&quot; }
+    { &quot;name&quot;:&quot;Continue&quot; }
   ]
 }]</property>
     <property name="enemy" value="Homarid"/>
@@ -78,16 +78,16 @@
 	{
 		&quot;text&quot;: &quot;A massive gate with a strange lock is blocking the path.&quot;,
 		&quot;options&quot;: [
-			{ &quot;name&quot;: &quot;go away&quot; },
+			{ &quot;name&quot;: &quot;Leave&quot; },
 			{
-				&quot;name&quot;: &quot;unlock with the strange key&quot;,
+				&quot;name&quot;: &quot;Unlock with the strange key&quot;,
 				&quot;condition&quot;: [
 					{ &quot;item&quot;: &quot;Strange Key&quot; }
 				],
-				&quot;text&quot;: &quot;The gate is unlocked&quot;,
+				&quot;text&quot;: &quot;The gate is unlocked.&quot;,
 				&quot;options&quot;: [
 					{
-						&quot;name&quot;: &quot;continue&quot;,
+						&quot;name&quot;: &quot;Continue&quot;,
 						&quot;action&quot;: [
 							{ &quot;deleteMapObject&quot;: -1 },
 							{ &quot;removeItem&quot;: &quot;Strange Key&quot; }

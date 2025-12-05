@@ -1,0 +1,26 @@
+[metadata]
+Name=bluewizard_hard_bounce
+[Main]
+1 Fact or Fiction|INV
+11 Plains|5ED
+2 Coastal Tower|INV
+2 Flooded Strand|ONS
+2 Impulse|BTD
+2 Memory Lapse|5ED
+2 Parallax Wave|NMS
+2 Skycloud Expanse|ODY
+2 Whipcorder|ONS
+3 Mother of Runes|ULG
+3 Parallax Tide|NMS
+4 Adarkar Wastes|5ED
+4 Exalted Angel|ONS
+4 Meddling Mage|PLS
+4 Mishra's Factory|4ED
+4 Seal of Cleansing|NMS
+4 Swords to Plowshares|2ED
+4 Tundra|LEA
+4 Urza's Bauble|5ED
+5 Island|5ED
+
+[StartInBattle_Reference]
+1 Hesitation|STH

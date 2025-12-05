@@ -1,0 +1,34 @@
+[metadata]
+Name=Kiska-Ra of Shandalar
+[Main]
+2 Birds of Paradise|LEA
+2 Elvish Archers|LEA
+2 Giant Tortoise|ARN
+2 Pikemen|DRK
+2 Samite Healer|LEA
+2 Savannah Lions|LEA
+2 Scryb Sprites|LEA
+2 Timber Wolves|LEA
+2 Tundra Wolves|LEG
+2 Zephyr Falcon|LEG
+1 Ancestral Recall|LEA
+3 Giant Growth|LEA
+1 Braingeyser|LEA
+2 Desert Twister|ARN
+1 Regrowth|LEA
+1 Time Walk|LEA
+1 Timetwister|LEA
+1 Mox Emerald|LEA
+1 Mox Pearl|LEA
+1 Mox Sapphire|LEA
+4 Tawnos's Weaponry|ATQ
+2 Control Magic|LEA
+3 Holy Strength|LEA
+3 Unstable Mutation|ARN
+4 City of Brass|ARN
+4 Savannah|LEA
+4 Tropical Island|LEA
+4 Tundra|LEA
+
+[StartInBattle_Reference]
+1 City of Brass|ARN

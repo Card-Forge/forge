@@ -13,12 +13,17 @@ Name=Rorix Bladewing
 2 Two-Headed Dragon|MMQ
 2 Shivan Hellkite|USG
 4 Shivan Dragon|LEA
+1 Shichifukujin Dragon|PCEL
 2 Zirilan of the Claw|MIR
 2 Gratuitous Violence|ONS
-3 Torrent of Fire|SCG
+2 Torrent of Fire|SCG
 2 Kaervek's Torch|MIR
 2 Aftershock|TMP
 2 Insurrection|ONS
 2 Ruination|STH
 2 Relentless Assault|VIS
 2 Flame Wave|STH
+
+[StartInBattle_Reference]
+4 Mountain|LEA
+1 Dragon Roost|ONS

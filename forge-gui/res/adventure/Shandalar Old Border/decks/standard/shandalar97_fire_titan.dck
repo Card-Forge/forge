@@ -1,0 +1,18 @@
+[metadata]
+Name=Fire Titan
+[Main]
+20 Mountain|2ED
+4 Gauntlet of Might|LEA
+4 Bloodfire Colossus|APC
+4 Avatar of Fury|PCY
+4 Rockshard Elemental|LGN
+4 Laccolith Titan|NMS
+4 Butcher Orgg|ONS
+4 Gratuitous Violence|ONS
+4 Thundermare|POR
+4 Crater Hellion|USG
+4 Earthquake|LEA
+
+[StartInBattle_Reference]
+4 Mountain|2ED
+1 Loafing Giant|INV

@@ -128,6 +128,9 @@ Hivestone
   size: 16, 16
 BattleStandard
   xy: 96, 592
+  size: 16, 16
+DragonMask
+  xy: 80, 592
   size: 16, 16 
 HiveLordArmor
   xy: 112, 0
@@ -273,6 +276,9 @@ Treasure
 Shard
   xy: 16, 608
   size: 16, 16
+CelestialPrism
+  xy: 16, 608
+  size: 16, 16
 DarkAmulet
   xy: 80, 816
   size: 16, 16
@@ -308,6 +314,9 @@ RelicAmulet
   size: 16, 16
 SorinAmulet
   xy: 96, 800
+  size: 16, 16
+AttendantsRobes
+  xy: 272, 80
   size: 16, 16
 AmuletofKroog
   xy: 128, 864
@@ -633,6 +642,9 @@ ConcordantBoots
 CrownOfTheAges
   xy: 128, 384
   size: 16, 16
+CrownoftheFalseGod
+  xy: 16, 352
+  size: 16, 16
 CursedLamp
   xy: 128, 528
   size: 16, 16
@@ -678,6 +690,9 @@ InfiltratorsMask
 JandorsSaddlebags
   xy: 112, 624
   size: 16, 16
+MedicineBag
+  xy: 112, 624
+  size: 16, 16
 JestersCap
   xy: 112, 320
   size: 16, 16
@@ -690,8 +705,17 @@ MadStaff
 MapToTheVale
   xy: 176, 880
   size: 16, 16
+TastyTome
+  xy: 112, 688
+  size: 16, 16
+ShieldOfAir
+  xy: 256, 192
+  size: 16, 16
 MemoryCrystal
   xy: 0, 608
+  size: 16, 16
+WhaleboneGlider
+  xy: 64, 608
   size: 16, 16
 MillersShoes
   xy: 128, 144
@@ -794,4 +818,94 @@ PhyrexianSplicer
   size: 16, 16
 FeverbringersCloak
   xy: 80, 32
+  size: 16, 16
+SerpentCallerStaff
+  xy: 208, 560
+  size: 16, 16
+GuardsArmor
+  xy: 176, 48
+  size: 16, 16
+StaffoftheAges
+  xy: 176, 624
+  size: 16, 16
+TomeoftheTrove
+  xy: 112, 688
+  size: 16, 16
+Spyglass
+  xy: 96, 576
+  size: 16, 16
+FerretFood
+  xy: 128, 608
+  size: 16, 16
+LeyLineWalkerBoots
+  xy: 0, 112
+  size: 16, 16
+IstvansAxe
+  xy: 192, 288
+  size: 16, 16
+BogGliderGreaves
+  xy: 64, 448
+  size: 16, 16
+DementiaMask
+  xy: 0, 400
+  size: 16, 16
+BreathstealersRobe
+  xy: 176, 16
+  size: 16, 16
+EbonyHorseshoe
+  xy: 96, 608
+  size: 16, 16
+NarcissistsMask
+  xy: 0, 528
+  size: 16, 16
+SerratedQuiver
+  xy: 144, 560
+  size: 16, 16
+MaptoParadise
+  xy: 176, 896
+  size: 16, 16
+RingofInfestation
+  xy: 128, 896
+  size: 16, 16
+IvySeersAmulet
+  xy: 0, 800
+  size: 16, 16
+MultanisBoots
+  xy: 80, 176
+  size: 16, 16
+GarmentsofGaea
+  xy: 176, 96
+  size: 16, 16
+HymnalHood
+  xy: 352, 32
+  size: 16, 16
+CelestialSword
+  xy: 176, 672
+  size: 16, 16
+PaladinsGreaves
+  xy: 128, 176
+  size: 16, 16
+RobesofRenewal
+  xy: 256, 64
+  size: 16, 16
+SerrasPrayerBook
+  xy: 112, 656
+  size: 16, 16
+SerpentRing
+  xy: 112, 960
+  size: 16, 16
+BarrinsCodex
+  xy: 48, 688
+  size: 16, 16
+RaynesWrit
+  xy: 272, 976
+  size: 16, 16
+ShieldofTears
+  xy: 192, 176
+  size: 16, 16
+CopperAngelsAmulet
+  xy: 32, 832
+  size: 16, 16
+AegisOfTheMeek
+  xy: 240, 656
   size: 16, 16

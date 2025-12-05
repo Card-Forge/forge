@@ -1,0 +1,35 @@
+[metadata]
+Name=Eron the Relentless
+[Main]
+3 Rocky Tar Pit|MIR
+3 Mountain Valley|MIR
+6 Mountain|ICE
+4 Forest|ICE
+4 Swamp|ICE
+4 Wooded Foothills|ONS
+1 Adun Oakenshield|LEG
+1 Darigaaz, the Igniter|INV
+2 Misfortune|ALL
+2 Void|INV
+2 Backlash|INV
+2 Hull Breach|PLS
+2 Decimate|ODY
+2 Pernicious Deed|APC
+2 Spiritmonger|APC
+2 An-Zerrin Ruins|HML
+2 Retribution|HML
+2 Primal Order|HML
+2 Broken Visage|HML
+1 Vhati il-Dal|TMP
+1 Cauldron Dance|INV
+2 Frenzied Tilling|INV
+2 Destructive Flow|PLS
+2 Lightning Bolt|LEA
+2 Rampant Growth|MIR
+2 Animate Dead|LEA
+
+[StartInBattle_Reference]
+1 Koskun Keep|HML
+1 Reflecting Pool|TMP
+1 Eron the Relentless|HML
+1 Serrated Arrows|HML

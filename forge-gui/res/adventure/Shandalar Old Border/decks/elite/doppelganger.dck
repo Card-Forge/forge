@@ -1,0 +1,19 @@
+[metadata]
+Name=Doppelganger
+[Main]
+16 Island|2ED|3
+4 Control Magic|LEA
+4 Copy Artifact|3ED
+4 Counterspell|2ED
+4 Hydroblast|ICE
+4 Impulse|BTD
+4 Lord of Atlantis|2ED
+4 Mana Leak|BRB
+4 Mystical Tutor|MIR
+4 Salt Marsh|INV
+4 Thawing Glaciers|ALL
+4 Tidal Wave|MIR
+
+[StartInBattle_Reference]
+1 Kismet|LEG
+1 Fellwar Stone|DRK

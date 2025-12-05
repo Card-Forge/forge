@@ -1,0 +1,24 @@
+[metadata]
+Name=millwizard
+[Main]
+13 Island|5ED
+2 Chill|TMP
+2 Forbid|EXO
+2 Impulse|VIS
+2 Mountain|5ED
+2 Mystical Tutor|MIR
+2 Phyrexian Furnace|WTH
+2 Powder Keg|UDS
+4 Avalanche Riders|ULG
+4 Brainstorm|MMQ
+4 Counterspell|TMP
+4 Force Spike|LEG
+4 Hydroblast|5ED
+4 Millstone|5ED
+4 Shivan Reef|APC
+4 Thawing Glaciers|ALL
+
+[StartInBattle_Reference]
+2 Sky Diamond|MIR
+1 Propaganda|TMP
+1 Ambassador Laquatus|TOR

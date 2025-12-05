@@ -45,7 +45,8 @@
   <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="152.5" y="374.5"/>
   <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="214.827" y="151.762">
    <properties>
-    <property name="enemy" value="Sun Giant"/>
+    <property name="enemy" value="Sorceress Queen Kaja"/>
+   <property name="effect">{"startBattleWithCard": ["Island|UGL", "Plains|UGL", "Mountain|UGL", "Cuombajj Witches|ARN", "Sorceress Queen|ARN", "Millstone|ATQ", "Rainbow Vale|FEM", "Elven Lyre|FEM"]}</property>
    </properties>
   </object>
   <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="280.296" y="316.458">

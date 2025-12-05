@@ -71,7 +71,7 @@
    <properties>
     <property name="defeatDialog">[
 	{
-		&quot;text&quot;: &quot;The Torturer unleashes a shrill scream as he falls unto the ground. His blood mixes with that of his tortured victims, you see the red barrier disappear. The way to Tibalt's chambers is open&quot;,
+		&quot;text&quot;: &quot;The Torturer unleashes a shrill scream as he falls unto the ground. His blood mixes with that of his tortured victims, you see the red barrier disappear. The way to Tibalt's chambers is open.&quot;,
 		&quot;options&quot;: [
 			{
 				&quot;name&quot;: &quot;(Continue)&quot;,
@@ -188,9 +188,9 @@
   <object id="201" name="Ward" type="dialog" gid="23816" x="461.029" y="123.772" width="35.6276" height="16">
    <properties>
     <property name="dialog">[{
-    &quot;text&quot;:&quot;A translucent, shimmering red field blocks your path. An ancient Evil is lurking in these crypts, preventing you from entering the room in front of you ...&quot;,
+    &quot;text&quot;:&quot;A translucent, shimmering red field blocks your path. An ancient evil is lurking in these crypts, preventing you from entering the room in front of you ...&quot;,
     &quot;options&quot;:[
-    { &quot;name&quot;:&quot;Leave.&quot; } 
+    { &quot;name&quot;:&quot;Leave&quot; } 
     ]
 }]</property>
    </properties>
@@ -223,14 +223,14 @@
   <object id="204" template="../../obj/gate.tx" x="576.842" y="281.439" width="11.6666" height="22">
    <properties>
     <property name="dialog">[{
-    &quot;text&quot;:&quot;This door is locked&quot;,
+    &quot;text&quot;:&quot;This door is locked.&quot;,
     &quot;options&quot;:[
-    { &quot;name&quot;:&quot;go away&quot; },
+    { &quot;name&quot;:&quot;Leave&quot; },
     {      
-        &quot;name&quot;:&quot;unlock with Torturer's key&quot;,     
+        &quot;name&quot;:&quot;Unlock with Torturer's key&quot;,     
         &quot;condition&quot;:[{&quot;item&quot;:&quot;Torturer's Key&quot;}],    
-        &quot;text&quot;:&quot;The gate is unlocked, though the key breaks as you open the door&quot;,
-        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Torturer's Key&quot;}]} ]
+        &quot;text&quot;:&quot;The gate is unlocked, though the key breaks as you open the door.&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Torturer's Key&quot;}]} ]
     }
     ]
 }]</property>

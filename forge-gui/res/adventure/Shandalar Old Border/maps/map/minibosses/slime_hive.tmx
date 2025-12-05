@@ -65,7 +65,8 @@
     <property name="displayNameOverride" value="The Mother Slime"/>
     <property name="enemy" value="Ooze Boss"/>
     <property name="threatRange" type="int" value="30"/>
-   </properties>
+   <property name="effect">{"startBattleWithCard": ["Mountain|PALP", "Forest|PALP", "Swamp|PALP"]}</property>
+    </properties>
   </object>
   <object id="101" template="../../../../../../common/maps/obj/enemy.tx" x="439.44" y="279.41">
    <properties>

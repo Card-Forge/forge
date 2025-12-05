@@ -1,0 +1,21 @@
+[metadata]
+Name=whiteking
+[Main]
+20 Plains|ONS
+4 Shield Sphere|ALL
+4 Shifting Wall|STH
+4 Wall of Swords|2ED
+4 Sunweb|MIR
+4 Rolling Stones|7ED
+4 Shimmering Barrier|USG
+4 Wall of Nets|EXO
+4 Ageless Sentinels|SCG
+4 Retribution of the Meek|VIS
+4 Crackdown|MMQ
+
+[StartInBattle_Reference]
+1 Plains|ONS
+1 Rolling Stones|STH
+1 Fortified Area|LEG
+1 Angelic Chorus|USG
+1 Wall of Essence|STH

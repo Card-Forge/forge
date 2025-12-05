@@ -35,123 +35,125 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="229.833" y="327.25"/>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="229.833" y="327.25" />
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="106.591" y="85.4096">
    <properties>
-    <property name="enemy" value="Fire Dragon"/>
+    <property name="enemy" value="Fire Dragon" />
    </properties>
   </object>
-  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="42.9997" y="157"/>
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="42.9997" y="157" />
   <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="258.666" y="84.3337">
    <properties>
-    <property name="enemy" value="Kobold Dragoncaller"/>
-    <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value="71,73,72"/>
+    <property name="enemy" value="Kobold Dragoncaller" />
+   <property name="effect">{"startBattleWithCard": ["Crimson Kobolds|LEG", "Crookshank Kobolds|LEG", "Kobolds of Kher Keep|LEG", "Ghitu War Cry|ULG"]}</property>
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="71,73,72" />
    </properties>
   </object>
   <object id="59" template="../../../../../../common/maps/obj/enemy.tx" x="333.5" y="240.333">
    <properties>
-    <property name="enemy" value="Kobold Warrior"/>
-    <property name="threatRange" type="int" value="50"/>
+    <property name="enemy" value="Kobold Warrior" />
+    <property name="threatRange" type="int" value="50" />
    </properties>
   </object>
-  <object id="67" template="../../../../../../common/maps/obj/gold.tx" x="189.5" y="320.5"/>
+  <object id="67" template="../../../../../../common/maps/obj/gold.tx" x="189.5" y="320.5" />
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="454.001" y="312.666">
    <properties>
-    <property name="enemy" value="Kobold Warrior"/>
-    <property name="threatRange" type="int" value="50"/>
+    <property name="enemy" value="Kobold Warrior" />
+    <property name="threatRange" type="int" value="50" />
    </properties>
   </object>
-  <object id="69" template="../../../../../../common/maps/obj/gold.tx" x="278" y="325.333"/>
-  <object id="70" template="../../../../../../common/maps/obj/gold.tx" x="200.333" y="390.333"/>
-  <object id="71" template="../../../../../../common/maps/obj/waypoint.tx" x="234" y="42.6667"/>
-  <object id="72" template="../../../../../../common/maps/obj/waypoint.tx" x="224.333" y="126"/>
-  <object id="73" template="../../../../../../common/maps/obj/waypoint.tx" x="290.667" y="107.333"/>
+  <object id="69" template="../../../../../../common/maps/obj/gold.tx" x="278" y="325.333" />
+  <object id="70" template="../../../../../../common/maps/obj/gold.tx" x="200.333" y="390.333" />
+  <object id="71" template="../../../../../../common/maps/obj/waypoint.tx" x="234" y="42.6667" />
+  <object id="72" template="../../../../../../common/maps/obj/waypoint.tx" x="224.333" y="126" />
+  <object id="73" template="../../../../../../common/maps/obj/waypoint.tx" x="290.667" y="107.333" />
   <object id="74" template="../../../../../../common/maps/obj/enemy.tx" x="76" y="266.667">
    <properties>
-    <property name="enemy" value="Kobold Dragoncaller"/>
-    <property name="threatRange" type="int" value="50"/>
+    <property name="enemy" value="Kobold Dragoncaller" />
+   <property name="effect">{"startBattleWithCard": ["Crimson Kobolds|LEG", "Crookshank Kobolds|LEG", "Kobolds of Kher Keep|LEG", "Ghitu War Cry|ULG"]}</property>
+    <property name="threatRange" type="int" value="50" />
    </properties>
   </object>
   <object id="75" template="../../../../../../common/maps/obj/enemy.tx" x="197" y="336.667">
    <properties>
-    <property name="enemy" value="Kobold Slinger"/>
-    <property name="threatRange" type="int" value="30"/>
+    <property name="enemy" value="Kobold Slinger" />
+    <property name="threatRange" type="int" value="30" />
    </properties>
   </object>
   <object id="76" template="../../../../../../common/maps/obj/enemy.tx" x="278.333" y="343.667">
    <properties>
-    <property name="enemy" value="Kobold Slinger"/>
-    <property name="threatRange" type="int" value="30"/>
+    <property name="enemy" value="Kobold Slinger" />
+    <property name="threatRange" type="int" value="30" />
    </properties>
   </object>
   <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="274" y="377.667">
    <properties>
-    <property name="enemy" value="Kobold Shaman"/>
-    <property name="threatRange" type="int" value="30"/>
+    <property name="enemy" value="Kobold Shaman" />
+    <property name="threatRange" type="int" value="30" />
    </properties>
   </object>
   <object id="78" template="../../../../../../common/maps/obj/enemy.tx" x="176.333" y="375.667">
    <properties>
-    <property name="enemy" value="Kobold Shaman"/>
-    <property name="threatRange" type="int" value="30"/>
+    <property name="enemy" value="Kobold Shaman" />
+    <property name="threatRange" type="int" value="30" />
    </properties>
   </object>
   <object id="79" template="../../../../../../common/maps/obj/enemy.tx" x="202" y="506.333">
    <properties>
-    <property name="enemy" value="Kobold Warrior"/>
-    <property name="threatRange" type="int" value="50"/>
-    <property name="waypoints" value="97,101,102,100"/>
+    <property name="enemy" value="Kobold Warrior" />
+    <property name="threatRange" type="int" value="50" />
+    <property name="waypoints" value="97,101,102,100" />
    </properties>
   </object>
   <object id="80" template="../../../../../../common/maps/obj/enemy.tx" x="456.333" y="500.333">
    <properties>
-    <property name="enemy" value="Kobold Warrior"/>
-    <property name="threatRange" type="int" value="50"/>
-    <property name="waypoints" value="103,95,96,95"/>
+    <property name="enemy" value="Kobold Warrior" />
+    <property name="threatRange" type="int" value="50" />
+    <property name="waypoints" value="103,95,96,95" />
    </properties>
   </object>
   <object id="81" template="../../../../../../common/maps/obj/enemy.tx" x="43.3333" y="417.333">
    <properties>
-    <property name="enemy" value="Kobold Warrior"/>
-    <property name="threatRange" type="int" value="50"/>
-    <property name="waypoints" value="99,98"/>
+    <property name="enemy" value="Kobold Warrior" />
+    <property name="threatRange" type="int" value="50" />
+    <property name="waypoints" value="99,98" />
    </properties>
   </object>
   <object id="82" template="../../../../../../common/maps/obj/enemy.tx" x="455.333" y="130.667">
    <properties>
-    <property name="enemy" value="Kobold Warrior"/>
-    <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value="88,90,89,90"/>
+    <property name="enemy" value="Kobold Warrior" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="88,90,89,90" />
    </properties>
   </object>
   <object id="83" template="../../../../../../common/maps/obj/enemy.tx" x="507.667" y="262.333">
    <properties>
-    <property name="enemy" value="Kobold Warrior"/>
-    <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value="92,93,92,91"/>
+    <property name="enemy" value="Kobold Warrior" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="92,93,92,91" />
    </properties>
   </object>
   <object id="84" template="../../../../../../common/maps/obj/booster.tx" x="206.667" y="354">
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;ICE&quot;, &quot;ALL&quot;, &quot;PTK&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    "editions": [ "ICE", "ALL", "PTK" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ICE&quot;, &quot;ALL&quot;, &quot;PTK&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    "editions": [ "ICE", "ALL", "PTK" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ICE&quot;, &quot;ALL&quot;, &quot;PTK&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+    "editions": [ "ICE", "ALL", "PTK" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Rare" ]
   }
 ]
 </property>
@@ -161,22 +163,22 @@
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;ICE&quot;, &quot;ALL&quot;, &quot;PTK&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    "editions": [ "ICE", "ALL", "PTK" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ICE&quot;, &quot;ALL&quot;, &quot;PTK&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    "editions": [ "ICE", "ALL", "PTK" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ICE&quot;, &quot;ALL&quot;, &quot;PTK&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+    "editions": [ "ICE", "ALL", "PTK" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Rare" ]
   }
 ]
 </property>
@@ -186,22 +188,22 @@
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;ICE&quot;, &quot;ALL&quot;, &quot;PTK&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    "editions": [ "ICE", "ALL", "PTK" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ICE&quot;, &quot;ALL&quot;, &quot;PTK&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    "editions": [ "ICE", "ALL", "PTK" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ICE&quot;, &quot;ALL&quot;, &quot;PTK&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+    "editions": [ "ICE", "ALL", "PTK" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Rare" ]
   }
 ]
 </property>
@@ -209,34 +211,34 @@
   </object>
   <object id="87" template="../../../../../../common/maps/obj/entry_right.tx" x="608" y="311.333">
    <properties>
-    <property name="direction" value="right"/>
+    <property name="direction" value="right" />
    </properties>
   </object>
-  <object id="88" template="../../../../../../common/maps/obj/waypoint.tx" x="491" y="89.6667"/>
-  <object id="89" template="../../../../../../common/maps/obj/waypoint.tx" x="337" y="159.334"/>
-  <object id="90" template="../../../../../../common/maps/obj/waypoint.tx" x="495.667" y="160.334"/>
-  <object id="91" template="../../../../../../common/maps/obj/waypoint.tx" x="523" y="199.667"/>
-  <object id="92" template="../../../../../../common/maps/obj/waypoint.tx" x="521.333" y="278.667"/>
-  <object id="93" template="../../../../../../common/maps/obj/waypoint.tx" x="448.333" y="280.667"/>
-  <object id="94" template="../../../../../../common/maps/obj/waypoint.tx" x="448.333" y="340.667"/>
-  <object id="95" template="../../../../../../common/maps/obj/waypoint.tx" x="433" y="525"/>
-  <object id="96" template="../../../../../../common/maps/obj/waypoint.tx" x="349" y="439"/>
-  <object id="97" template="../../../../../../common/maps/obj/waypoint.tx" x="205" y="527"/>
-  <object id="98" template="../../../../../../common/maps/obj/waypoint.tx" x="118.333" y="419.333"/>
-  <object id="99" template="../../../../../../common/maps/obj/waypoint.tx" x="41.6667" y="386"/>
-  <object id="100" template="../../../../../../common/maps/obj/waypoint.tx" x="207" y="441.333"/>
-  <object id="101" template="../../../../../../common/maps/obj/waypoint.tx" x="156" y="562"/>
-  <object id="102" template="../../../../../../common/maps/obj/waypoint.tx" x="292.667" y="447.333"/>
-  <object id="103" template="../../../../../../common/maps/obj/waypoint.tx" x="480" y="471"/>
-  <object id="104" template="../../../../../../common/maps/obj/manashards.tx" x="41.3333" y="500.333"/>
-  <object id="105" template="../../../../../../common/maps/obj/manashards.tx" x="17.6667" y="245.333"/>
-  <object id="106" template="../../../../../../common/maps/obj/manashards.tx" x="527.333" y="559.333"/>
-  <object id="107" template="../../../../../../common/maps/obj/manashards.tx" x="480.667" y="67.6667"/>
+  <object id="88" template="../../../../../../common/maps/obj/waypoint.tx" x="491" y="89.6667" />
+  <object id="89" template="../../../../../../common/maps/obj/waypoint.tx" x="337" y="159.334" />
+  <object id="90" template="../../../../../../common/maps/obj/waypoint.tx" x="495.667" y="160.334" />
+  <object id="91" template="../../../../../../common/maps/obj/waypoint.tx" x="523" y="199.667" />
+  <object id="92" template="../../../../../../common/maps/obj/waypoint.tx" x="521.333" y="278.667" />
+  <object id="93" template="../../../../../../common/maps/obj/waypoint.tx" x="448.333" y="280.667" />
+  <object id="94" template="../../../../../../common/maps/obj/waypoint.tx" x="448.333" y="340.667" />
+  <object id="95" template="../../../../../../common/maps/obj/waypoint.tx" x="433" y="525" />
+  <object id="96" template="../../../../../../common/maps/obj/waypoint.tx" x="349" y="439" />
+  <object id="97" template="../../../../../../common/maps/obj/waypoint.tx" x="205" y="527" />
+  <object id="98" template="../../../../../../common/maps/obj/waypoint.tx" x="118.333" y="419.333" />
+  <object id="99" template="../../../../../../common/maps/obj/waypoint.tx" x="41.6667" y="386" />
+  <object id="100" template="../../../../../../common/maps/obj/waypoint.tx" x="207" y="441.333" />
+  <object id="101" template="../../../../../../common/maps/obj/waypoint.tx" x="156" y="562" />
+  <object id="102" template="../../../../../../common/maps/obj/waypoint.tx" x="292.667" y="447.333" />
+  <object id="103" template="../../../../../../common/maps/obj/waypoint.tx" x="480" y="471" />
+  <object id="104" template="../../../../../../common/maps/obj/manashards.tx" x="41.3333" y="500.333" />
+  <object id="105" template="../../../../../../common/maps/obj/manashards.tx" x="17.6667" y="245.333" />
+  <object id="106" template="../../../../../../common/maps/obj/manashards.tx" x="527.333" y="559.333" />
+  <object id="107" template="../../../../../../common/maps/obj/manashards.tx" x="480.667" y="67.6667" />
   <object id="108" template="../../../../../../common/maps/obj/entry_right.tx" x="71" y="73.6667">
    <properties>
-    <property name="direction" value="down"/>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/barbariancamp/barbariancamp_kobold_mine.tmx"/>
-    <property name="teleportObjectId" value="114"/>
+    <property name="direction" value="down" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/barbariancamp/barbariancamp_kobold_mine.tmx" />
+    <property name="teleportObjectId" value="114" />
    </properties>
   </object>
  </objectgroup>

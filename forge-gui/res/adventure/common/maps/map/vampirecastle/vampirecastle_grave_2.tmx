@@ -94,7 +94,7 @@
     <property name="dialog">[{
     &quot;text&quot;:&quot;A translucent, shimmering red field blocks your path. Pained screams echo through the room behind you.&quot;,
     &quot;options&quot;:[
-    { &quot;name&quot;:&quot;Leave.&quot; } 
+    { &quot;name&quot;:&quot;Leave&quot; } 
     ]
 }]</property>
    </properties>
@@ -238,17 +238,17 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;You approach a cobweb covered coffin lying at the center of the room.&quot;,
+    &quot;text&quot;: &quot;You approach a cobweb-covered coffin lying at the center of the room.&quot;,
     &quot;options&quot;: [
-      { &quot;name&quot;: &quot;Walk away&quot; },
+      { &quot;name&quot;: &quot;Leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
         &quot;options&quot;: [
-          { &quot;name&quot;: &quot;Walk away&quot; },
+          { &quot;name&quot;: &quot;Leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;text&quot;: &quot;As you open the coffin, an ancient figure awakes in the gloom. It cries out in an ancient voice: YOU DARE WAKE ME, PUNY MORTAL?&quot;,
+            &quot;text&quot;: &quot;As you open the coffin, a powerful figure awakes in the gloom. It cries out in an ancient voice: YOU DARE WAKE ME, PUNY MORTAL?&quot;,
             &quot;options&quot;: [
               {
                 &quot;name&quot;: &quot;Prepare yourself!&quot;,
@@ -286,17 +286,17 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;You approach a cobweb covered coffin lying at the center of the room.&quot;,
+    &quot;text&quot;: &quot;You approach a cobweb-covered coffin lying at the center of the room.&quot;,
     &quot;options&quot;: [
-      { &quot;name&quot;: &quot;Walk away&quot; },
+      { &quot;name&quot;: &quot;Leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
         &quot;options&quot;: [
-          { &quot;name&quot;: &quot;Walk away&quot; },
+          { &quot;name&quot;: &quot;Leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;text&quot;: &quot;As you open the coffin, a giant mole rat jumps from the coffin looking at you very annoyed and angry&quot;,
+            &quot;text&quot;: &quot;As you open the coffin, a giant mole rat jumps from the coffin, looking very annoyed and angry.&quot;,
             &quot;options&quot;: [
               {
                 &quot;name&quot;: &quot;Time for some pest control!&quot;,
@@ -318,17 +318,17 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;You approach a cobweb covered coffin lying at the center of the room.&quot;,
+    &quot;text&quot;: &quot;You approach a cobweb-covered coffin lying at the center of the room.&quot;,
     &quot;options&quot;: [
-      { &quot;name&quot;: &quot;Walk away&quot; },
+      { &quot;name&quot;: &quot;Leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
         &quot;options&quot;: [
-          { &quot;name&quot;: &quot;Walk away&quot; },
+          { &quot;name&quot;: &quot;Leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;text&quot;: &quot;As you open the coffin, a giant mole rat jumps from the coffin looking at you very annoyed and angry&quot;,
+            &quot;text&quot;: &quot;As you open the coffin, a giant mole rat jumps from the coffin, looking very annoyed and angry&quot;,
             &quot;options&quot;: [
               {
                 &quot;name&quot;: &quot;Time for some pest control!&quot;,
@@ -350,20 +350,20 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;You approach a cobweb covered coffin lying at the center of the room.&quot;,
+    &quot;text&quot;: &quot;You approach a cobweb-covered coffin lying at the center of the room.&quot;,
     &quot;options&quot;: [
-      { &quot;name&quot;: &quot;Walk away&quot; },
+      { &quot;name&quot;: &quot;Leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
         &quot;options&quot;: [
-          { &quot;name&quot;: &quot;Walk away&quot; },
+          { &quot;name&quot;: &quot;Leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;text&quot;: &quot;As you open the coffin, expecting an acient evil arriving from it, you realize that was only in your imagination&quot;,
+            &quot;text&quot;: &quot;As you open the coffin, expecting an ancient evil to spring from it, you realize that the feeling was only your imagination.&quot;,
             &quot;options&quot;: [
               {
-                &quot;name&quot;: &quot;You grab the loot from the empty coffin&quot;,
+                &quot;name&quot;: &quot;Grab the loot from the empty coffin&quot;,
                 &quot;action&quot;: [
                     {&quot;deleteMapObject&quot;: -1 },
                     {&quot;grantRewards&quot;: [
@@ -409,20 +409,20 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;You approach a cobweb covered coffin lying at the center of the room.&quot;,
+    &quot;text&quot;: &quot;You approach a cobweb-covered coffin lying at the center of the room.&quot;,
     &quot;options&quot;: [
-      { &quot;name&quot;: &quot;Walk away&quot; },
+      { &quot;name&quot;: &quot;Leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
         &quot;options&quot;: [
-          { &quot;name&quot;: &quot;Walk away&quot; },
+          { &quot;name&quot;: &quot;Leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;text&quot;: &quot;As you open the coffin, expecting an acient evil arriving from it, you realize that was only in your imagination&quot;,
+            &quot;text&quot;: &quot;As you open the coffin, expecting an ancient evil to spring from it, you realize that the feeling was only your imagination.&quot;,
             &quot;options&quot;: [
               {
-                &quot;name&quot;: &quot;You grab the loot from the empty coffin&quot;,
+                &quot;name&quot;: &quot;Grab the loot from the empty coffin&quot;,
                 &quot;action&quot;: [
                     {&quot;deleteMapObject&quot;: -1 },
                     {&quot;grantRewards&quot;: [
@@ -447,20 +447,20 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;You approach a cobweb covered coffin lying at the center of the room.&quot;,
+    &quot;text&quot;: &quot;You approach a cobweb-covered coffin lying at the center of the room.&quot;,
     &quot;options&quot;: [
-      { &quot;name&quot;: &quot;Walk away&quot; },
+      { &quot;name&quot;: &quot;Leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
         &quot;options&quot;: [
-          { &quot;name&quot;: &quot;Walk away&quot; },
+          { &quot;name&quot;: &quot;Leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;text&quot;: &quot;As you open the coffin, expecting an acient evil arriving from it, you realize that was only in your imagination&quot;,
+            &quot;text&quot;: &quot;As you open the coffin, expecting an ancient evil to spring from it, you realize that the feeling was only your imagination.&quot;,
             &quot;options&quot;: [
               {
-                &quot;name&quot;: &quot;You grab the loot from the empty coffin&quot;,
+                &quot;name&quot;: &quot;Grab the loot from the empty coffin&quot;,
                 &quot;action&quot;: [
                     {&quot;deleteMapObject&quot;: -1 },
                     {&quot;grantRewards&quot;: [
@@ -485,20 +485,20 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;You approach a cobweb covered coffin lying at the center of the room.&quot;,
+    &quot;text&quot;: &quot;You approach a cobweb-covered coffin lying at the center of the room.&quot;,
     &quot;options&quot;: [
-      { &quot;name&quot;: &quot;Walk away&quot; },
+      { &quot;name&quot;: &quot;Leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
         &quot;options&quot;: [
-          { &quot;name&quot;: &quot;Walk away&quot; },
+          { &quot;name&quot;: &quot;Leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;text&quot;: &quot;As you open the coffin, expecting an acient evil arriving from it, you realize that was only in your imagination&quot;,
+            &quot;text&quot;: &quot;As you open the coffin, expecting an ancient evil to spring from it, you realize that the feeling was only your imagination.&quot;,
             &quot;options&quot;: [
               {
-                &quot;name&quot;: &quot;You grab the loot from the empty coffin&quot;,
+                &quot;name&quot;: &quot;Grab the loot from the empty coffin&quot;,
                 &quot;action&quot;: [
                     {&quot;deleteMapObject&quot;: -1 },
                     {&quot;grantRewards&quot;: [
@@ -523,20 +523,20 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;You approach a cobweb covered coffin lying at the center of the room.&quot;,
+    &quot;text&quot;: &quot;You approach a cobweb-covered coffin lying at the center of the room.&quot;,
     &quot;options&quot;: [
-      { &quot;name&quot;: &quot;Walk away&quot; },
+      { &quot;name&quot;: &quot;Leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
         &quot;options&quot;: [
-          { &quot;name&quot;: &quot;Walk away&quot; },
+          { &quot;name&quot;: &quot;Leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;text&quot;: &quot;As you open the coffin, expecting an acient evil arriving from it, you realize that was only in your imagination&quot;,
+            &quot;text&quot;: &quot;As you open the coffin, expecting an ancient evil to spring from it, you realize that the feeling was only your imagination.&quot;,
             &quot;options&quot;: [
               {
-                &quot;name&quot;: &quot;You grab the loot from the empty coffin&quot;,
+                &quot;name&quot;: &quot;Grab the loot from the empty coffin&quot;,
                 &quot;action&quot;: [
                     {&quot;deleteMapObject&quot;: -1 },
                     {&quot;grantRewards&quot;: [
@@ -561,20 +561,20 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;You approach a cobweb covered coffin lying at the center of the room.&quot;,
+    &quot;text&quot;: &quot;You approach a cobweb-covered coffin lying at the center of the room.&quot;,
     &quot;options&quot;: [
-      { &quot;name&quot;: &quot;Walk away&quot; },
+      { &quot;name&quot;: &quot;Leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
         &quot;options&quot;: [
-          { &quot;name&quot;: &quot;Walk away&quot; },
+          { &quot;name&quot;: &quot;Leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;text&quot;: &quot;As you open the coffin, expecting an acient evil arriving from it, you realize that was only in your imagination&quot;,
+            &quot;text&quot;: &quot;As you open the coffin, expecting an ancient evil to spring from it, you realize that the feeling was only your imagination.&quot;,
             &quot;options&quot;: [
               {
-                &quot;name&quot;: &quot;You grab the loot from the empty coffin&quot;,
+                &quot;name&quot;: &quot;Grab the loot from the empty coffin&quot;,
                 &quot;action&quot;: [
                     {&quot;deleteMapObject&quot;: -1 },
                     {&quot;grantRewards&quot;: [
@@ -599,20 +599,20 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;You approach a cobweb covered coffin lying at the center of the room.&quot;,
+    &quot;text&quot;: &quot;You approach a cobweb-covered coffin lying at the center of the room.&quot;,
     &quot;options&quot;: [
-      { &quot;name&quot;: &quot;Walk away&quot; },
+      { &quot;name&quot;: &quot;Leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
         &quot;options&quot;: [
-          { &quot;name&quot;: &quot;Walk away&quot; },
+          { &quot;name&quot;: &quot;Leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;text&quot;: &quot;As you open the coffin, expecting an acient evil arriving from it, you realize that was only in your imagination&quot;,
+            &quot;text&quot;: &quot;As you open the coffin, expecting an ancient evil to spring from it, you realize that the feeling was only your imagination.&quot;,
             &quot;options&quot;: [
               {
-                &quot;name&quot;: &quot;You grab the loot from the empty coffin&quot;,
+                &quot;name&quot;: &quot;Grab the loot from the empty coffin&quot;,
                 &quot;action&quot;: [
                     {&quot;deleteMapObject&quot;: -1 },
                     {&quot;grantRewards&quot;: [
@@ -637,20 +637,20 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;You approach a cobweb covered coffin lying at the center of the room.&quot;,
+    &quot;text&quot;: &quot;You approach a cobweb-covered coffin lying at the center of the room.&quot;,
     &quot;options&quot;: [
-      { &quot;name&quot;: &quot;Walk away&quot; },
+      { &quot;name&quot;: &quot;Leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
         &quot;options&quot;: [
-          { &quot;name&quot;: &quot;Walk away&quot; },
+          { &quot;name&quot;: &quot;Leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;text&quot;: &quot;As you open the coffin, expecting an acient evil arriving from it, you realize that was only in your imagination&quot;,
+            &quot;text&quot;: &quot;As you open the coffin, expecting an ancient evil to spring from it, you realize that the feeling was only your imagination.&quot;,
             &quot;options&quot;: [
               {
-                &quot;name&quot;: &quot;You grab the loot from the empty coffin&quot;,
+                &quot;name&quot;: &quot;Grab the loot from the empty coffin&quot;,
                 &quot;action&quot;: [
                     {&quot;deleteMapObject&quot;: -1 },
                     {&quot;grantRewards&quot;: [
@@ -675,20 +675,20 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;You approach a cobweb covered coffin lying at the center of the room.&quot;,
+    &quot;text&quot;: &quot;You approach a cobweb-covered coffin lying at the center of the room.&quot;,
     &quot;options&quot;: [
-      { &quot;name&quot;: &quot;Walk away&quot; },
+      { &quot;name&quot;: &quot;Leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
         &quot;options&quot;: [
-          { &quot;name&quot;: &quot;Walk away&quot; },
+          { &quot;name&quot;: &quot;Leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;text&quot;: &quot;As you open the coffin, expecting an acient evil arriving from it, you realize that was only in your imagination&quot;,
+            &quot;text&quot;: &quot;As you open the coffin, expecting an ancient evil to spring from it, you realize that the feeling was only your imagination.&quot;,
             &quot;options&quot;: [
               {
-                &quot;name&quot;: &quot;You grab the loot from the empty coffin&quot;,
+                &quot;name&quot;: &quot;Grab the loot from the empty coffin&quot;,
                 &quot;action&quot;: [
                     {&quot;deleteMapObject&quot;: -1 },
                     {&quot;grantRewards&quot;: [

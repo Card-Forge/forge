@@ -1,0 +1,21 @@
+[metadata]
+Name=minotaurmonored
+[Main]
+18 Mountain|TMP
+3 Swamp|TMP
+4 Anaba Ancestor|HML
+4 Enfeeblement|TMP
+4 Fireblast|VIS
+4 Incinerate|ICE
+4 Lightning Bolt|3ED
+4 Magma Burst|PLS
+4 Minotaur Explorer|ODY
+4 Minotaur Warrior|POR
+4 Pyroclasm|DKM
+4 Raging Minotaur|POR
+4 Sulfurous Springs|ICE
+
+[StartInBattle_Reference]
+2 Mountain|ICE
+1 Didgeridoo|HML
+1 Anaba Spirit Crafter|HML

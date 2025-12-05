@@ -172,14 +172,14 @@
   <object id="86" template="../../obj/gate.tx" x="207.75" y="124.5" width="16.4999" height="22">
    <properties>
     <property name="dialog">[{
-    &quot;text&quot;:&quot;This door is locked&quot;,
+    &quot;text&quot;:&quot;This door is locked.&quot;,
     &quot;options&quot;:[
     { &quot;name&quot;:&quot;Leave&quot; },
     {      
         &quot;name&quot;:&quot;Unlock with Cultist's Key&quot;,     
         &quot;condition&quot;:[{&quot;item&quot;:&quot;Cultist's Key&quot;}],    
         &quot;text&quot;:&quot;The gate is unlocked.&quot;,
-        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue.&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Cultist's Key&quot;}]} ]
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Cultist's Key&quot;}]} ]
     }
     ]
 }]</property>

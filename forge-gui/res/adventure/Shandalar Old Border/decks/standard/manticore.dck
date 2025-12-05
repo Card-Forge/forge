@@ -1,17 +1,18 @@
 [metadata]
-Name=manticore
+Name=Manticore
 [Main]
-11 Mountain|TMP|2
-2 Hymn to Tourach|FEM|1
-2 Raise Dead|5ED|1
-2 Red Elemental Blast|3ED|1
-2 Terror|5ED|1
-4 Bad Moon|5ED|1
-4 Black Knight|5ED|1
-4 Dragon Whelp|LEA|1
-4 Fireball|5ED|1
-4 Firebreathing|5ED|1
-4 Lightning Bolt|4ED|1
-4 Shivan Dragon|4ED|1
-4 Sulfurous Springs|ICE|1
-8 Swamp|TMP|2
+8 Mountain|4ED
+8 Forest|4ED
+4 Karplusan Forest|5ED
+4 Masticore|UDS
+4 Flailing Manticore|MMQ
+4 Crimson Manticore|LEG
+4 Sawback Manticore|MIR
+2 Tranquility|4ED
+2 Shatter|4ED
+4 Wild Growth|4ED
+4 Lightning Bolt|4ED
+4 Fireball|4ED
+4 Birds of Paradise|4ED
+2 Nevinyrral's Disk|4ED
+2 Earthquake|4ED
