@@ -2,6 +2,7 @@
 Name=rustic_construct
 [Main]
 4 Ancient Tomb|TMP
+4 Black Vise|LEA
 4 Howling Mine|6ED
 4 Icy Manipulator|2ED
 4 Ivory Tower|ATQ
@@ -10,7 +11,6 @@ Name=rustic_construct
 4 Strip Mine|ATQ
 4 Su-Chi|ATQ
 4 Tawnos's Coffin|ATQ
-4 The Rack|ATQ
 4 Triskelion|ATQ
 4 Urza's Mine|ATQ
 4 Urza's Power Plant|ATQ

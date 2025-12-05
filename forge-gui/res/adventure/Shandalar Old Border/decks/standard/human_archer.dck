@@ -1,18 +1,16 @@
 [metadata]
-Name=human_archer
+Name=Human Archer - GW Elves
 [Main]
-1 Karplusan Forest|ICE
-2 Battlefield Forge|APC
-2 Giant Growth|4ED
-2 Mountain|LEB|3
-2 Squirrel Nest|ODY
+17 Forest|ONS|2
+3 Plains|ONS|2
+3 Skyshroud Elf|TMP
 4 Brushland|ICE
+4 Elvish Pioneer|ONS
 4 Elvish Scout|FEM
-4 Longbow Archer|VIS
-4 Ranger en-Vec|TMP
-4 Serrated Arrows|ATH
-4 True Believer|ONS
-4 Wildfire|USG
-4 Wooden Sphere|6ED
-5 Forest|LEB|3
-7 Plains|LEB|3
+4 Femeref Archers|MIR
+4 Longbow Archer|7ED
+4 Maro|6ED
+4 Quirion Elves|BTD
+4 Quirion Ranger|VIS
+4 Wild Might|PCY
+4 Yavimaya Enchantress|UDS

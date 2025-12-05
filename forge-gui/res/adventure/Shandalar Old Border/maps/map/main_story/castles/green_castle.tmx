@@ -169,7 +169,7 @@
 ]</property>
     <property name="enemy" value="Gorilla" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{"startBattleWithCard": ["Forest|2ED", "Mountain|USG", "Treetop Village|ULG", "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Concordant Crossroads|CHR", "Forest|USG", "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL", "Monkey Cage|MMQ", "Mountain|USG", "Treetop Village|ULG", "Treetop Village|ULG"]}</property>
     </properties>
   </object>
   <object id="68" template="../../../../../../../common/maps/obj/enemy.tx" x="663.666" y="409.333">

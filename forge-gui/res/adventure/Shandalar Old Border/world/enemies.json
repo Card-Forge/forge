@@ -77,7 +77,7 @@
     "spawnRate": 0.75,
     "difficulty": 0.1,
     "speed": 24,
-    "life": 15,
+    "life": 20,
     "rewards": [
       {
         "type": "deckCard",
@@ -145,7 +145,7 @@
     "spawnRate": 0.75,
     "difficulty": 0.1,
     "speed": 24,
-    "life": 15,
+    "life": 20,
     "rewards": [
       {
         "type": "deckCard",
@@ -201,7 +201,7 @@
     "spawnRate": 0.75,
     "difficulty": 0.1,
     "speed": 24,
-    "life": 15,
+    "life": 20,
     "rewards": [
       {
         "type": "deckCard",
@@ -271,7 +271,7 @@
     "spawnRate": 0.75,
     "difficulty": 0.1,
     "speed": 24,
-    "life": 15,
+    "life": 20,
     "rewards": [
       {
         "type": "deckCard",
@@ -338,7 +338,7 @@
     "spawnRate": 0.75,
     "difficulty": 0.1,
     "speed": 24,
-    "life": 15,
+    "life": 20,
     "rewards": [
       {
         "type": "deckCard",
@@ -624,12 +624,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UW",
@@ -940,12 +942,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GR",
@@ -1373,7 +1377,7 @@
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
-    "life": 10,
+    "life": 15,
     "rewards": [
       {
         "type": "deckCard",
@@ -1445,7 +1449,7 @@
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
-    "life": 10,
+    "life": 15,
     "rewards": [
       {
         "type": "deckCard",
@@ -1506,7 +1510,7 @@
     "name": "Apprentice Red Wizard",
     "sprite": "sprites/enemy/humanoid/human/wizard/enchanter.atlas",
     "deck": [
-      "decks/standard/redwizard_easy.json",
+      "decks/standard/redwizard_apprentice_4ed.dck",
       "decks/standard/redwizard_easy_1.dck",
       "decks/standard/redwizard_easy_2.dck",
       "decks/standard/redwizard_apprentice_1.dck",
@@ -1517,7 +1521,7 @@
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
-    "life": 10,
+    "life": 15,
     "rewards": [
       {
         "type": "deckCard",
@@ -1588,7 +1592,7 @@
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
-    "life": 10,
+    "life": 15,
     "rewards": [
       {
         "type": "deckCard",
@@ -1823,12 +1827,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GW",
@@ -1897,12 +1903,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UW",
@@ -2030,12 +2038,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "U",
@@ -2103,12 +2113,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GW",
@@ -2365,12 +2377,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "BR",
@@ -2518,12 +2532,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UW",
@@ -2662,12 +2678,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "BR",
@@ -3488,12 +3506,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "BGR",
@@ -3612,12 +3632,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "U",
@@ -3914,12 +3936,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GR",
@@ -4323,12 +4347,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "G",
@@ -4339,6 +4365,45 @@
       "BiomeGreen",
       "Large",
       "Hunter",
+      "Beast"
+    ]
+  },
+  {
+    "name": "Cat",
+    "sprite": "sprites/enemy/beast/cat.atlas",
+    "deck": [
+      "decks/standard/straycat.dck"
+    ],
+    "ai": "",
+    "randomizeDeck": true,
+    "spawnRate": 0.8,
+    "difficulty": 0.1,
+    "speed": 18,
+    "scale": 0.7,
+    "life": 10,
+    "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 50
+      }
+    ],
+    "colors": "GW",
+    "questTags": [
+      "Cat",
+      "Animal",
+      "IdentityGreen",
+      "IdentityWhite",
+      "BiomeWhite",
+      "BiomeGreen",
       "Beast"
     ]
   },
@@ -4585,12 +4650,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GW",
@@ -4845,12 +4912,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UBRWG",
@@ -4928,12 +4997,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UBRWG",
@@ -5011,12 +5082,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UBRWG",
@@ -5029,509 +5102,6 @@
       "BiomeWhite",
       "BiomeBlue",
       "BiomeBlack"
-    ]
-  },
-  {
-    "name": "Jaya's Acolyte",
-    "sprite": "sprites/enemy/humanoid/human/wizard/red_wiz2.atlas",
-    "deck": [
-      "decks/standard/chandra1.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 24,
-    "life": 20,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Red"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 200
-      }
-    ],
-    "colors": "R",
-    "questTags": [
-      "Pyromancer",
-      "Human",
-      "Wizard",
-      "Chandra",
-      "Fire",
-      "IdentityRed"
-    ]
-  },
-  {
-    "name": "Jaya's Firestarter",
-    "sprite": "sprites/enemy/humanoid/human/wizard/red_wiz3.atlas",
-    "deck": [
-      "decks/standard/chandra2.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 24,
-    "life": 25,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Red"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 200
-      }
-    ],
-    "colors": "R",
-    "questTags": [
-      "Pyromancer",
-      "Wizard",
-      "Human",
-      "Chandra",
-      "Fire",
-      "IdentityRed"
-    ]
-  },
-  {
-    "name": "Jaya's Hellhound",
-    "sprite": "sprites/enemy/fiend/hellhound_2.atlas",
-    "deck": [
-      "decks/standard/hellhound2.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 25,
-    "life": 20,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Red"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 200
-      }
-    ],
-    "colors": "R",
-    "questTags": [
-      "Aberration",
-      "Animal",
-      "Chandra",
-      "Fire",
-      "IdentityRed"
-    ]
-  },
-  {
-    "name": "Jaya's Immolator",
-    "sprite": "sprites/enemy/humanoid/human/wizard/red_wiz2.atlas",
-    "deck": [
-      "decks/standard/chandra3.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 24,
-    "life": 20,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Red"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 200
-      }
-    ],
-    "colors": "R",
-    "questTags": [
-      "Chandra",
-      "Human",
-      "Pyromancer",
-      "Wizard",
-      "Fire",
-      "IdentityRed"
-    ]
-  },
-  {
-    "name": "Jaya's Lavamancer",
-    "sprite": "sprites/enemy/humanoid/human/wizard/red_wiz3.atlas",
-    "deck": [
-      "decks/standard/chandra4.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 24,
-    "life": 20,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Red"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 200
-      }
-    ],
-    "colors": "R",
-    "questTags": [
-      "Chandra",
-      "Pyromancer",
-      "Human",
-      "Wizard",
-      "Fire",
-      "IdentityRed"
-    ]
-  },
-  {
-    "name": "Jaya's Pyromancer",
-    "sprite": "sprites/enemy/humanoid/human/wizard/red_wiz2.atlas",
-    "deck": [
-      "decks/standard/chandra5.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 24,
-    "life": 25,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Red"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 200
-      }
-    ],
-    "colors": "R",
-    "questTags": [
-      "Pyromancer",
-      "Wizard",
-      "Chandra",
-      "Human",
-      "Fire",
-      "IdentityRed"
-    ]
-  },
-  {
-    "name": "Jaya's Scorcher",
-    "sprite": "sprites/enemy/humanoid/human/wizard/red_wiz2.atlas",
-    "deck": [
-      "decks/standard/chandra6.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 24,
-    "life": 20,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Red"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 200
-      }
-    ],
-    "colors": "R",
-    "questTags": [
-      "Human",
-      "Pyromancer",
-      "Chandra",
-      "Wizard",
-      "Fire",
-      "IdentityRed"
     ]
   },
   {
@@ -5849,12 +5419,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "WUG",
@@ -5923,12 +5495,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "WU",
@@ -6399,12 +5973,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "questTags": [
@@ -6467,12 +6043,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "questTags": [
@@ -6536,12 +6114,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "questTags": [
@@ -6604,12 +6184,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "questTags": [
@@ -6693,7 +6275,7 @@
     "name": "Crab",
     "sprite": "sprites/enemy/beast/crab.atlas",
     "deck": [
-      "decks/standard/crab.json",
+      "decks/standard/crab.dck",
       "decks/standard/giant_crab.dck"
     ],
     "ai": "",
@@ -6702,7 +6284,7 @@
     "difficulty": 0.1,
     "speed": 20,
     "scale": 0.9,
-    "life": 11,
+    "life": 20,
     "rewards": [
       {
         "type": "card",
@@ -6822,12 +6404,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "WU",
@@ -7200,12 +6784,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UG",
@@ -7274,12 +6860,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "G",
@@ -7580,12 +7168,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GW",
@@ -8157,12 +7747,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GRW",
@@ -8454,12 +8046,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "W",
@@ -9220,12 +8814,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "RW",
@@ -9297,12 +8893,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "W",
@@ -9369,12 +8967,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "U",
@@ -9480,12 +9080,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GU",
@@ -9556,12 +9158,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "RW",
@@ -9667,7 +9271,8 @@
       "IdentityBlue",
       "IdentitySultai",
       "BiomeColorless"
-    ]
+    ],
+    "nameOverride": "Minion of Origin"
   },
   {
     "name": "Eldrazi Devastator",
@@ -9761,7 +9366,8 @@
       "IdentityBlue",
       "IdentitySultai",
       "BiomeColorless"
-    ]
+    ],
+    "nameOverride": "Elder Entity of Origin"
   },
   {
     "name": "Elephant",
@@ -10057,6 +9663,18 @@
         "probability": 1,
         "count": 10000,
         "addMaxCount": 5000
+      },
+      {
+        "type": "card",
+        "cardName": "1996 World Champion|PCEL",
+        "count": 1,
+        "probability": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Karona, False God|SCG",
+        "count": 1,
+        "probability": 1
       }
     ],
     "equipment": [
@@ -10121,12 +9739,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UB",
@@ -10267,12 +9887,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "BGU",
@@ -10342,12 +9964,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "BU",
@@ -10466,12 +10090,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "W",
@@ -10710,12 +10336,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "B",
@@ -10944,12 +10572,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "R",
@@ -11303,12 +10933,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "WG",
@@ -11581,12 +11213,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "WU",
@@ -11866,7 +11500,7 @@
     "nameOverride": "Obsidian Gargoyle",
     "sprite": "sprites/enemy/construct/gargoyle.atlas",
     "deck": [
-      "decks/standard/gargoyle.json"
+      "decks/standard/gargoyle.dck"
     ],
     "ai": "",
     "flying": true,
@@ -12892,12 +12526,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "G",
@@ -13860,12 +13496,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "R",
@@ -14120,12 +13758,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GR",
@@ -14259,12 +13899,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "R",
@@ -14398,12 +14040,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "R",
@@ -14579,12 +14223,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "BG",
@@ -14754,7 +14400,7 @@
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
-    "life": 14,
+    "life": 20,
     "rewards": [
       {
         "type": "deckCard",
@@ -14839,7 +14485,7 @@
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
-    "life": 14,
+    "life": 20,
     "rewards": [
       {
         "type": "deckCard",
@@ -14884,12 +14530,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "BG",
@@ -15247,12 +14895,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "BU",
@@ -15322,12 +14972,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "U",
@@ -15579,12 +15231,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "B",
@@ -15897,12 +15551,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "BU",
@@ -16251,12 +15907,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UW",
@@ -16374,12 +16032,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "RW",
@@ -16449,12 +16109,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UW",
@@ -16912,12 +16574,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GU",
@@ -16987,12 +16651,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "U",
@@ -17062,12 +16728,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "R",
@@ -18172,12 +17840,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "RB",
@@ -18316,12 +17986,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "RB",
@@ -18408,7 +18080,7 @@
     "difficulty": 0.1,
     "speed": 30,
     "scale": 0.5,
-    "life": 14,
+    "life": 40,
     "rewards": [
       {
         "type": "deckCard",
@@ -18452,12 +18124,20 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
+      },
+      {
+        "type": "item",
+        "itemName": "Water of Youth",
+        "count": 1,
+        "probability": 0.5
       }
     ],
     "colors": "G",
@@ -18474,7 +18154,8 @@
       "IdentityGreen",
       "IdentityAbzan",
       "BiomeGreen"
-    ]
+    ],
+    "nameOverride": "Kid's Pet Ladybug"
   },
   {
     "name": "Lich",
@@ -18719,12 +18400,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GW",
@@ -18797,12 +18480,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GW",
@@ -19057,12 +18742,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "BG",
@@ -19132,12 +18819,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "W",
@@ -19310,12 +18999,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GUR",
@@ -19383,18 +19074,25 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       },
       {
         "type": "card",
         "probability": 0.2,
         "count": 1,
         "cardName": "Serra Angel|O90P"
+      },
+      {
+        "type": "item",
+        "probability": 0.5,
+        "itemName": "Diamond Kaleidoscope"
       }
     ],
     "colors": "W",
@@ -19590,7 +19288,7 @@
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 25,
-    "life": 20,
+    "life": 25,
     "rewards": [
       {
         "type": "card",
@@ -19643,7 +19341,7 @@
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 25,
-    "life": 20,
+    "life": 25,
     "rewards": [
       {
         "type": "card",
@@ -19695,7 +19393,7 @@
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
-    "life": 20,
+    "life": 25,
     "rewards": [
       {
         "type": "card",
@@ -19748,7 +19446,7 @@
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
-    "life": 20,
+    "life": 25,
     "rewards": [
       {
         "type": "card",
@@ -19803,7 +19501,7 @@
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
-    "life": 20,
+    "life": 25,
     "rewards": [
       {
         "type": "card",
@@ -19897,12 +19595,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "U",
@@ -20175,12 +19875,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GU",
@@ -20304,12 +20006,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "U",
@@ -20457,7 +20161,7 @@
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 15,
-    "life": 12,
+    "life": 20,
     "rewards": [
       {
         "type": "deckCard",
@@ -20673,12 +20377,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "BR",
@@ -20700,7 +20406,7 @@
     "nameOverride": "Anaba Warlord",
     "sprite": "sprites/enemy/humanoid/minotaur/minotaur.atlas",
     "deck": [
-      "decks/elite/minotaur.json",
+      "decks/elite/minotaur.dck",
       "decks/elite/minotaurblackredmadness.dck",
       "decks/elite/minotaurmid.dck",
       "decks/elite/minotaurmonored.dck"
@@ -21204,12 +20910,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "BR",
@@ -22617,12 +22325,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "B",
@@ -23287,12 +22997,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "BR",
@@ -23365,12 +23077,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "BR",
@@ -23443,12 +23157,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "BR",
@@ -23686,12 +23402,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GW",
@@ -23934,12 +23652,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "BR",
@@ -24013,12 +23733,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "RW",
@@ -24476,12 +24198,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "B",
@@ -24645,12 +24369,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GR",
@@ -24720,12 +24446,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GR",
@@ -25291,12 +25019,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GR",
@@ -25454,12 +25184,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UG",
@@ -25830,12 +25562,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "BUR",
@@ -25910,12 +25644,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UWB",
@@ -25992,12 +25728,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GWRBU",
@@ -26072,12 +25810,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "RBG",
@@ -26152,12 +25892,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "WGU",
@@ -26578,12 +26320,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "WU",
@@ -26864,12 +26608,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "RG",
@@ -27002,12 +26748,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "W",
@@ -27524,12 +27272,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "RU",
@@ -27933,12 +27683,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "G",
@@ -28205,12 +27957,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "G",
@@ -28279,12 +28033,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GW",
@@ -28742,12 +28498,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "R",
@@ -28989,12 +28747,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "RW",
@@ -29302,12 +29062,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "W",
@@ -30427,12 +30189,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GW",
@@ -30495,12 +30259,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "questTags": [
@@ -30567,12 +30333,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GW",
@@ -30641,12 +30409,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "B",
@@ -30866,12 +30636,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "B",
@@ -30940,12 +30712,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UB",
@@ -31014,12 +30788,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "B",
@@ -31087,12 +30863,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "W",
@@ -31160,12 +30938,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "B",
@@ -31233,12 +31013,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "B",
@@ -31306,12 +31088,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "B",
@@ -31437,12 +31221,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GB",
@@ -31512,12 +31298,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       },
       {
         "type": "card",
@@ -31591,12 +31379,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       },
       {
         "type": "card",
@@ -31669,12 +31459,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "b",
@@ -31745,12 +31537,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UB",
@@ -31817,12 +31611,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "brw",
@@ -31892,12 +31688,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GW",
@@ -31972,12 +31770,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "WUBRG",
@@ -32046,12 +31846,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "B",
@@ -32408,12 +32210,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "WUBRG"
@@ -32474,12 +32278,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "WUR"
@@ -32538,12 +32344,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "G"
@@ -32603,12 +32411,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UR"
@@ -32671,12 +32481,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "WUBRG"
@@ -32735,12 +32547,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "R"
@@ -32799,12 +32613,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "W"
@@ -32863,12 +32679,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "U"
@@ -32927,12 +32745,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "R"
@@ -32991,12 +32811,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "R"
@@ -33055,12 +32877,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "G"
@@ -33119,12 +32943,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "B"
@@ -33183,12 +33009,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "U"
@@ -33248,12 +33076,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "RG"
@@ -33313,12 +33143,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "WU"
@@ -33378,12 +33210,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "WG"
@@ -33443,12 +33277,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "BR"
@@ -33507,12 +33343,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "U"
@@ -33573,12 +33411,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UBR"
@@ -33639,12 +33479,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "BRG"
@@ -33704,12 +33546,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UB"
@@ -33770,12 +33614,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UGR"
@@ -33836,12 +33682,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GWR"
@@ -33901,12 +33749,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UG"
@@ -33967,12 +33817,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "WUG"
@@ -34032,12 +33884,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UG"
@@ -34097,12 +33951,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "BR"
@@ -34162,12 +34018,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "BR"
@@ -34228,12 +34086,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "WUG"
@@ -34295,12 +34155,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UBRG"
@@ -34362,12 +34224,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UBRG"
@@ -34429,12 +34293,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UBRG"
@@ -34494,12 +34360,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "WB"
@@ -34559,12 +34427,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "WR"
@@ -34624,12 +34494,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "RG"
@@ -34689,12 +34561,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "RG"
@@ -34753,12 +34627,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "W"
@@ -34819,12 +34695,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "WRG"
@@ -34883,12 +34761,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "B"
@@ -34948,12 +34828,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "RG"
@@ -35035,7 +34917,7 @@
   },
   {
     "name": "Tsabo Tavoc",
-    "sprite": "sprites/enemy/humanoid/phyrexian/drossgrimnarch.atlas",
+    "sprite": "sprites/enemy/aberration/drossgrimnarch.atlas",
     "deck": [
       "decks/miniboss/tsabo_tavoc.dck"
     ],
@@ -35185,7 +35067,7 @@
   },
   {
     "name": "Gix",
-    "sprite": "sprites/enemy/humanoid/phyrexian/phyrexianduelist.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexianduelist.atlas",
     "deck": [
       "decks/miniboss/gix.dck"
     ],
@@ -35242,7 +35124,7 @@
   },
   {
     "name": "Latulla, Keldon Overseer",
-    "sprite": "sprites/enemy/humanoid/human/warlock/deftsorceress.atlas",
+    "sprite": "sprites/enemy/humanoid/elf/deftsorceress.atlas",
     "deck": [
       "decks/miniboss/latulla.dck"
     ],
@@ -35252,7 +35134,40 @@
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
-    "rewards": []
+    "rewards": [
+      {
+        "type": "card",
+        "cardName": "Latulla, Keldon Overseer|PCY",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Repercussion|UDS",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Starstorm|ONS",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Fork|LEA",
+        "count": 1
+      },
+      {
+        "type": "shards",
+        "count": 20
+      },
+      {
+        "type": "gold",
+        "count": 2000
+      },
+      {
+        "type": "item",
+        "itemName": "Copper Angel's Amulet"
+      }
+    ]
   },
   {
     "name": "M\u00e1rton Stromgald",
@@ -35266,11 +35181,36 @@
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
-    "rewards": []
+    "rewards": [
+      {
+        "type": "card",
+        "cardName": "Latulla, Keldon Overseer|PCY"
+      },
+      {
+        "type": "card",
+        "cardName": "Repercussion|UDS"
+      },
+      {
+        "type": "card",
+        "cardName": "Starstorm|ONS"
+      },
+      {
+        "type": "card",
+        "cardName": "Fork|LEA"
+      },
+      {
+        "type": "shards",
+        "count": 20
+      },
+      {
+        "type": "gold",
+        "count": 2000
+      }
+    ]
   },
   {
     "name": "Jeska, Warrior Adept",
-    "sprite": "sprites/enemy/humanoid/human/hunter/hunter_2.atlas",
+    "sprite": "sprites/enemy/humanoid/elf/hunter_2.atlas",
     "deck": [
       "decks/miniboss/jeska.dck"
     ],
@@ -35294,11 +35234,44 @@
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
-    "rewards": []
+    "rewards": [
+      {
+        "type": "card",
+        "cardName": "Eron the Relentless|HML",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Darigaaz, the Igniter|INV",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "An-Zerrin Ruins|HML",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Destructive Flow|PLS",
+        "count": 1
+      },
+      {
+        "type": "shards",
+        "count": 20
+      },
+      {
+        "type": "gold",
+        "count": 2000
+      },
+      {
+        "type": "item",
+        "itemName": "Serrated Quiver"
+      }
+    ]
   },
   {
     "name": "Jolrael, Empress of Beasts",
-    "sprite": "sprites/enemy/humanoid/human/wizard/green_wiz3.atlas",
+    "sprite": "sprites/enemy/humanoid/elf/green_wiz3.atlas",
     "deck": [
       "decks/miniboss/jolrael.dck"
     ],
@@ -35308,11 +35281,60 @@
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
-    "rewards": []
+    "rewards": [
+      {
+        "type": "gold",
+        "count": 1000,
+        "addMaxCount": 10000,
+        "probability": 1
+      },
+      {
+        "type": "shards",
+        "count": 20,
+        "addMaxCount": 10,
+        "probability": 1
+      },
+      {
+        "type": "item",
+        "itemName": "Empress's Crown",
+        "count": 1,
+        "probability": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Jolrael, Empress of Beasts|PCY",
+        "count": 1,
+        "probability": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Seedborn Muse|LGN",
+        "count": 1,
+        "probability": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Decree of Savagery|SCG",
+        "count": 1,
+        "probability": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Collective Unconscious|MMQ",
+        "count": 1,
+        "probability": 1
+      },
+      {
+        "type": "item",
+        "itemName": "Green Key to the False God",
+        "count": 1,
+        "probability": 1
+      }
+    ]
   },
   {
     "name": "Verdeloth the Ancient",
-    "sprite": "sprites/enemy/treant/treant_2.atlas",
+    "sprite": "sprites/enemy/plant/treant_2.atlas",
     "deck": [
       "decks/miniboss/verdeloth.dck"
     ],
@@ -35322,11 +35344,44 @@
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
-    "rewards": []
+    "rewards": [
+      {
+        "type": "card",
+        "cardName": "Verdeloth the Ancient|INV",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Nemata, Grove Guardian|PLS",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Weatherseed Treefolk|ULG",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Primal Growth|PLS",
+        "count": 1
+      },
+      {
+        "type": "shards",
+        "count": 20
+      },
+      {
+        "type": "gold",
+        "count": 2000
+      },
+      {
+        "type": "item",
+        "itemName": "Ring of Infestation"
+      }
+    ]
   },
   {
     "name": "Rofellos",
-    "sprite": "sprites/enemy/humanoid/elf/hunter/hunter.atlas",
+    "sprite": "sprites/enemy/humanoid/elf/hunter.atlas",
     "deck": [
       "decks/miniboss/rofellos.dck"
     ],
@@ -35336,11 +35391,40 @@
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
-    "rewards": []
+    "rewards": [
+      {
+        "type": "card",
+        "cardName": "Rofellos, Llanowar Emissary|UDS",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Elvish Champion|7ED",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Voice of the Woods|ONS",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Eladamri, Lord of Leaves|TMP",
+        "count": 1
+      },
+      {
+        "type": "shards",
+        "count": 20
+      },
+      {
+        "type": "gold",
+        "count": 2000
+      }
+    ]
   },
   {
     "name": "Multani",
-    "sprite": "sprites/enemy/treant/treant.atlas",
+    "sprite": "sprites/enemy/plant/treant.atlas",
     "deck": [
       "decks/miniboss/multani.dck"
     ],
@@ -35350,7 +35434,32 @@
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
-    "rewards": []
+    "rewards": [
+      {
+        "type": "card",
+        "cardName": "Multani, Maro-Sorcerer|ULG"
+      },
+      {
+        "type": "card",
+        "cardName": "Greater Good|USG"
+      },
+      {
+        "type": "card",
+        "cardName": "Sylvan Library|LEG"
+      },
+      {
+        "type": "card",
+        "cardName": "Forgotten Ancient|SCG"
+      },
+      {
+        "type": "shards",
+        "count": 20
+      },
+      {
+        "type": "gold",
+        "count": 2000
+      }
+    ]
   },
   {
     "name": "Hazduhr the Abbot",
@@ -35364,11 +35473,44 @@
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
-    "rewards": []
+    "rewards": [
+      {
+        "type": "card",
+        "cardName": "Hazduhr the Abbot|HML",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Worship|USG",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Academy Rector|UDS",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Divine Sacrament|ODY",
+        "count": 1
+      },
+      {
+        "type": "shards",
+        "count": 20
+      },
+      {
+        "type": "gold",
+        "count": 2000
+      },
+      {
+        "type": "item",
+        "itemName": "Hymnal Hood"
+      }
+    ]
   },
   {
     "name": "Selenia, Dark Angel",
-    "sprite": "sprites/enemy/angel/fallen_angel.atlas",
+    "sprite": "sprites/enemy/celestial/fallen_angel.atlas",
     "deck": [
       "decks/miniboss/selenia.dck"
     ],
@@ -35378,11 +35520,44 @@
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
-    "rewards": []
+    "rewards": [
+      {
+        "type": "card",
+        "cardName": "Selenia, Dark Angel|TMP",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Winds of Rath|TMP",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Blinding Angel|NMS",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Vindicate|APC",
+        "count": 1
+      },
+      {
+        "type": "shards",
+        "count": 20
+      },
+      {
+        "type": "gold",
+        "count": 2000
+      },
+      {
+        "type": "item",
+        "itemName": "Celestial Sword"
+      }
+    ]
   },
   {
     "name": "Archangel Radiant",
-    "sprite": "sprites/enemy/angel/angel_2.atlas",
+    "sprite": "sprites/enemy/celestial/angel_2.atlas",
     "deck": [
       "decks/miniboss/archangel_radiant.dck"
     ],
@@ -35392,11 +35567,44 @@
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
-    "rewards": []
+    "rewards": [
+      {
+        "type": "card",
+        "cardName": "Decree of Justice|SCG",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Catastrophe|USG",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Radiant, Archangel|ULG",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Pariah|USG",
+        "count": 1
+      },
+      {
+        "type": "shards",
+        "count": 20
+      },
+      {
+        "type": "gold",
+        "count": 2000
+      },
+      {
+        "type": "item",
+        "itemName": "Paladin's Greaves"
+      }
+    ]
   },
   {
     "name": "Reya Dawnbringer",
-    "sprite": "sprites/enemy/angel/angel_1.atlas",
+    "sprite": "sprites/enemy/celestial/angel_1.atlas",
     "deck": [
       "decks/miniboss/reya.dck"
     ],
@@ -35406,11 +35614,40 @@
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
-    "rewards": []
+    "rewards": [
+      {
+        "type": "card",
+        "cardName": "Reya Dawnbringer|INV",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Planar Collapse|ULG",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Karmic Guide|ULG",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Replenish|UDS",
+        "count": 1
+      },
+      {
+        "type": "shards",
+        "count": 20
+      },
+      {
+        "type": "gold",
+        "count": 2000
+      }
+    ]
   },
   {
     "name": "Tawnos",
-    "sprite": "sprites/enemy/humanoid/human/archaeologist/archaeologist.atlas",
+    "sprite": "sprites/enemy/humanoid/human/artificer/archaeologist.atlas",
     "deck": [
       "decks/miniboss/tawnos.dck"
     ],
@@ -35420,11 +35657,44 @@
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
-    "rewards": []
+    "rewards": [
+      {
+        "type": "card",
+        "cardName": "Candelabra of Tawnos|ATQ",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Masticore|UDS",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Sword of the Ages|LEG",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Tawnos's Coffin|ATQ",
+        "count": 1
+      },
+      {
+        "type": "shards",
+        "count": 20
+      },
+      {
+        "type": "gold",
+        "count": 2000
+      },
+      {
+        "type": "item",
+        "itemName": "Serpent Ring"
+      }
+    ]
   },
   {
     "name": "Barrin",
-    "sprite": "sprites/enemy/humanoid/human/wizard/esper_artificer.atlas",
+    "sprite": "sprites/enemy/humanoid/human/artificer/esper_artificer.atlas",
     "deck": [
       "decks/miniboss/barrin.dck"
     ],
@@ -35434,11 +35704,44 @@
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
-    "rewards": []
+    "rewards": [
+      {
+        "type": "card",
+        "cardName": "Tolarian Academy|USG",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Underground Sea|LEA",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Crawlspace|ULG",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Forcefield|LEA",
+        "count": 1
+      },
+      {
+        "type": "shards",
+        "count": 20
+      },
+      {
+        "type": "gold",
+        "count": 2000
+      },
+      {
+        "type": "item",
+        "itemName": "Barrin's Codex"
+      }
+    ]
   },
   {
     "name": "Rayne, Academy Chancellor",
-    "sprite": "sprites/enemy/humanoid/human/priest/priest.atlas",
+    "sprite": "sprites/enemy/humanoid/human/cleric/priest.atlas",
     "deck": [
       "decks/miniboss/rayne.dck"
     ],
@@ -35448,11 +35751,44 @@
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
-    "rewards": []
+    "rewards": [
+      {
+        "type": "card",
+        "cardName": "Rayne, Academy Chancellor|UDS",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Blizzard Elemental|UDS",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Enchantress's Presence|ONS",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Thran Golem|UDS",
+        "count": 1
+      },
+      {
+        "type": "shards",
+        "count": 20
+      },
+      {
+        "type": "gold",
+        "count": 2000
+      },
+      {
+        "type": "item",
+        "itemName": "Rayne's Writ"
+      }
+    ]
   },
   {
     "name": "Karn",
-    "sprite": "sprites/enemy/golem/golem.atlas",
+    "sprite": "sprites/enemy/construct/golem.atlas",
     "deck": [
       "decks/miniboss/karn.dck"
     ],
@@ -35462,11 +35798,54 @@
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
-    "rewards": []
+    "rewards": [
+      {
+        "type": "gold",
+        "count": 1000,
+        "addMaxCount": 10000,
+        "probability": 1
+      },
+      {
+        "type": "shards",
+        "count": 20,
+        "addMaxCount": 10,
+        "probability": 1
+      },
+      {
+        "type": "item",
+        "itemName": "Karn's Touch",
+        "count": 1,
+        "probability": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Karn, Silver Golem|USG",
+        "count": 1,
+        "probability": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Test of Endurance|JUD",
+        "count": 1,
+        "probability": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Humility|TMP",
+        "count": 1,
+        "probability": 1
+      },
+      {
+        "type": "item",
+        "itemName": "Blue Key to the False God",
+        "count": 1,
+        "probability": 1
+      }
+    ]
   },
   {
     "name": "Yawgmoth",
-    "sprite": "sprites/enemy/eldrazi/eldrazi_large.atlas",
+    "sprite": "sprites/enemy/aberration/eldrazi/eldrazi_large.atlas",
     "deck": [
       "decks/boss/yawgmoth.dck"
     ],
@@ -35733,12 +36112,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GW",
@@ -35809,12 +36190,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "RG",
@@ -35885,12 +36268,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "WU",
@@ -35961,12 +36346,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "BR",
@@ -36037,12 +36424,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UB",
@@ -36114,12 +36503,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "GWU",
@@ -36193,12 +36584,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "RGW",
@@ -36272,12 +36665,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "WUB",
@@ -36351,12 +36746,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "UBR",
@@ -36430,12 +36827,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "BRG",
@@ -36511,12 +36910,14 @@
       {
         "type": "shards",
         "probability": 0.25,
-        "count": 3
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
         "probability": 0.3,
-        "count": 200
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "WUBRG",
@@ -37599,7 +38000,7 @@
       {
         "type": "item",
         "probability": 1,
-        "itemName": "Miller's Boots"
+        "itemName": "Miller's Shoes"
       },
       {
         "type": "gold",
@@ -37672,7 +38073,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Ley Line Walker's Boots"
+        "itemName": "Ley Line Walker Boots"
       }
     ],
     "colors": "G",
@@ -38655,7 +39056,9 @@
       "IdentityBlack",
       "BiomeBlack"
     ],
-    "nameOverride": "Chainer, Dementia Master"
+    "nameOverride": "Chainer, Dementia Master",
+    "boss": true,
+    "gamesPerMatch": 3
   },
   {
     "name": "Dementia Beast",
@@ -38898,7 +39301,7 @@
   },
   {
     "name": "Gaea, the Worldsoul",
-    "sprite": "sprites/enemy/humanoid/elf/hiddenbush.atlas",
+    "sprite": "sprites/enemy/plant/hiddenbush.atlas",
     "deck": [
       "decks/boss/gaea.dck"
     ],

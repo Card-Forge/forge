@@ -1,0 +1,21 @@
+[metadata]
+Name=Anaba Warlord - Minotaur Tribal
+[Main]
+16 Mountain|PO2
+4 Shivan Reef|APC
+4 Maze of Ith|DRK
+8 Anaba Spirit Crafter|HML
+4 Hurloon Minotaur|LEA
+2 Minotaur Illusionist|APC
+2 Tahngarth, Talruum Hero|PLS
+4 Talruum Champion|VIS
+4 Talruum Piper|VIS
+2 Hurloon Shaman|WTH
+2 Anaba Shaman|HML
+4 Lightning Bolt|LEA
+4 Lightning Blast|TMP
+
+[StartInBattle_Reference]
+2 Mountain|ICE
+1 Didgeridoo|HML
+1 Anaba Spirit Crafter|HML

@@ -41,7 +41,7 @@
    <properties>
     <property name="enemy" value="Gaea, the Worldsoul"/>
     <property name="threatRange" type="int" value="50"/>
-   <property name="effect">{"startBattleWithCard": ["Forest|LEA", "Tropical Island|LEA", "Taiga|LEA", "Bayou|LEA", "Savannah|LEA", "Gaea's Avenger|ATQ", "Cradle Guard|USG", "Magnigoth Treefolk|PLS", "Pulse of Llanowar|INV"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Forest|LEA", "Tropical Island|LEA", "Taiga|LEA", "Bayou|LEA", "Savannah|LEA", "Gaea's Avenger|ATQ", "Cradle Guard|USG", "Magnigoth Treefolk|PLS"]}</property>
     </properties>
   </object>
  </objectgroup>

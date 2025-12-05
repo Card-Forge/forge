@@ -158,7 +158,7 @@
  "lifeModifier": 4,
  "startBattleWithCard": [ "Dragonspeaker Shaman|SCG|1" ]
 }</property>
-    <property name="enemy" value="Vulcano Dragon" />
+    <property name="enemy" value="Volcano Dragon" />
     <property name="fleeRange" value="0" />
     <property name="threatRange" type="int" value="30" />
    </properties>
