@@ -301,7 +301,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
 
                 if (sa.hasParam("RememberRevealed")) {
                     final ZoneType removeZone = foundDest;
-                    host.removeRemembered(revealed.filter(c -> !c.isInZone(removeZone)));
+                    host.removeRemembered(moved.filter(c -> !c.isInZone(removeZone)));
                 }
             }
         } // end foreach player
