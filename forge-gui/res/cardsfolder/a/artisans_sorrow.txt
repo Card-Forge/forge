@@ -3,4 +3,4 @@ ManaCost:3 G
 Types:Instant
 A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBScry | SpellDescription$ Destroy target artifact or enchantment. Scry 2.
 SVar:DBScry:DB$ Scry | ScryNum$ 2
-Oracle:Destroy target artifact or enchantment. Scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+Oracle:Destroy target artifact or enchantment. Scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)
