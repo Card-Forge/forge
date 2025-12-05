@@ -564,12 +564,6 @@
     <property name="enemy" value="Witch" />
    </properties>
   </object>
-  <object id="241" template="../../../../../../../common/maps/obj/entry_down.tx" x="-528" y="32" width="144" height="16">
-   <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/town.tmx" />
-    <property name="teleportObjectId" value="241" />
-   </properties>
-  </object>
   <object id="242" template="../../../../../../../common/maps/obj/enemy.tx" x="-256" y="288">
    <properties>
     <property name="enemy" value="Viper" />

@@ -132,12 +132,6 @@
   <object id="3" template="../../../../../../../common/maps/obj/collision.tx" x="-16" y="400" width="528" height="16" />
   <object id="4" template="../../../../../../../common/maps/obj/collision.tx" x="496" y="0" width="16" height="400" />
   <object id="5" template="../../../../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="528.5" height="16" />
-  <object id="183" template="../../../../../../../common/maps/obj/entry_up.tx" x="165.583" y="384.667" width="73.5" height="16">
-   <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/forest.tmx" />
-    <property name="teleportObjectId" value="240" />
-   </properties>
-  </object>
   <object id="189" template="../../../../../../../common/maps/obj/treasure.tx" x="288" y="337">
    <properties>
     <property name="reward">[{
@@ -480,12 +474,6 @@
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Dark Banishing|ICE&quot;, &quot;count&quot;: 1 } ]" />
    </properties>
   </object>
-  <object id="267" template="../../../../../../../common/maps/obj/entry_left.tx" x="1.45455" y="206.909" width="16.3636" height="72.7273">
-   <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/bog.tmx" />
-    <property name="teleportObjectId" value="228" />
-   </properties>
-  </object>
   <object id="268" template="../../../../../../../common/maps/obj/dialog.tx" x="176" y="352" width="48" height="16">
    <properties>
     <property name="dialog">[
@@ -525,13 +513,6 @@
 }
 ]</property>
     <property name="type" value="dialog" />
-   </properties>
-  </object>
-  <object id="269" template="../../../../../../../common/maps/obj/portal.tx" x="144" y="320">
-   <properties>
-    <property name="direction" value="left" />
-    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/keep.tmx" />
-    <property name="teleportObjectId" value="267" />
    </properties>
   </object>
  </objectgroup>
