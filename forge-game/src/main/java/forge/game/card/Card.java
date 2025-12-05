@@ -4243,12 +4243,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return ImmutableList.of();
         }
         Iterable<CardChangedType> byText = changedTypeByText == null ? ImmutableList.of() : ImmutableList.of(this.changedTypeByText);
-        return ImmutableList.copyOf(Iterables.concat(
-                changedCardTypesByText.values(), // Layer 3
-                byText, // Layer 3 by Word Changes,
-                changedCardTypesCharacterDefining.values(), // Layer 4
-                changedCardTypes.values() // Layer 6
-            ));
+        return ImmutableList.<CardChangedType>builder()
+            .addAll(changedCardTypesByText.values()) // Layer 3
+            .addAll(byText) // Layer 3 by Word Changes,
+            .addAll(changedCardTypesCharacterDefining.values()) // Layer 4
+            .addAll(changedCardTypes.values()) // Layer 6
+            .build();
     }
 
     public boolean clearChangedCardTypes() {
