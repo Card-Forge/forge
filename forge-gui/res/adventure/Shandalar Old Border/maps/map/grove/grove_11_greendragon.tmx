@@ -99,7 +99,8 @@
     <property name="enemy" value="Adult Green Dragon"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="40"/>
-   </properties>
+   <property name="effect">{"startBattleWithCard": ["Rith's Grove|PLS", "Canopy Dragon|MIR"]}</property>
+    </properties>
   </object>
   <object id="108" template="../../../../../../common/maps/obj/enemy.tx" x="534.459" y="267.275">
    <properties>

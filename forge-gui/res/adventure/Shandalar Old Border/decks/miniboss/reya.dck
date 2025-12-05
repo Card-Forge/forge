@@ -1,0 +1,27 @@
+[metadata]
+Name=Reya Dawnbringer
+[Main]
+18 Plains|ICE
+1 Karakas|LEG
+1 Kor Haven|NMS
+4 Drifting Meadow|USG
+2 Akroma, Angel of Wrath|LGN
+2 Radiant, Archangel|ULG
+2 Silver Seraph|JUD
+2 Exalted Angel|ONS
+2 Blinding Angel|NMS
+2 Serra Angel|LEA
+4 Karmic Guide|ULG
+4 Voice of All|PLS
+2 Aurification|ONS
+2 Harsh Mercy|ONS
+2 Replenish|UDS
+2 Planar Collapse|ULG
+4 Aura of Silence|WTH
+4 Swords to Plowshares|ICE
+
+[StartInBattle_Reference]
+1 Reya Dawnbringer|INV
+1 Worry Beads|MMQ
+1 Millikin|ODY
+1 Angelic Renewal|WTH

@@ -36,37 +36,37 @@
  <objectgroup id="4" name="Objects">
   <object id="76" template="../../../../../../common/maps/obj/door_up.tx" x="208" y="272">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/portal_1U2.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/jacetower/portal_1U2.tmx"/>
     <property name="teleportObjectId" value="83"/>
    </properties>
   </object>
   <object id="77" template="../../../../../../common/maps/obj/door_down.tx" x="208" y="145.333">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/portal_1.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/jacetower/portal_1.tmx"/>
     <property name="teleportObjectId" value="87"/>
    </properties>
   </object>
   <object id="78" template="../../../../../../common/maps/obj/door_down.tx" x="144" y="145.333">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/portal_1G.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/jacetower/portal_1G.tmx"/>
     <property name="teleportObjectId" value="78"/>
    </properties>
   </object>
   <object id="79" template="../../../../../../common/maps/obj/door_down.tx" x="207.333" y="80">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/portal_1W.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/jacetower/portal_1W.tmx"/>
     <property name="teleportObjectId" value="77"/>
    </properties>
   </object>
   <object id="80" template="../../../../../../common/maps/obj/door_down.tx" x="176.667" y="208">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/portal_1R.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/jacetower/portal_1R.tmx"/>
     <property name="teleportObjectId" value="71"/>
    </properties>
   </object>
   <object id="81" template="../../../../../../common/maps/obj/door_down.tx" x="241.333" y="209.333">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/portal_1B.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/jacetower/portal_1B.tmx"/>
     <property name="teleportObjectId" value="65"/>
    </properties>
   </object>

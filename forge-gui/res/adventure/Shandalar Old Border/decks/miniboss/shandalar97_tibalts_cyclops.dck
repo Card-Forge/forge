@@ -1,0 +1,22 @@
+[metadata]
+Name=Specter's Cyclops
+[Main]
+20 Mountain|2ED
+4 Planar Chaos|JUD
+4 Mogg Assassin|EXO
+4 Chaotic Goo|TMP
+2 Scoria Wurm|USG
+4 Chaos Orb|LEA
+4 Falling Star|LEG
+4 Crazed Firecat|TOR
+2 Wild Wurm|TMP
+4 Bottle of Suleiman|3ED
+4 Mijae Djinn|3ED
+4 Ydwen Efreet|ARN
+
+[StartInBattle_Reference]
+2 Mountain|2ED
+1 Mana Crypt|PHPR
+1 Chance Encounter|ODY
+1 Goblin Bomb|WTH
+1 Impulsive Maneuvers|ODY

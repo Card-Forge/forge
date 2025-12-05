@@ -52,6 +52,7 @@
   <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="281.867" y="93.0662">
    <properties>
     <property name="enemy" value="Cosmic Horror"/>
+   <property name="effect">{ "startBattleWithCard": [ "Cursed Monstrosity|ODY" ] }</property>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>

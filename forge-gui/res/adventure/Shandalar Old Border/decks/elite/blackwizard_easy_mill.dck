@@ -1,0 +1,17 @@
+[metadata]
+Name=Agent K 1
+[Main]
+25 Swamp|BTD
+4 Bad Moon|LEB
+4 Black Knight|2ED
+4 Carrion Feeder|SCG
+4 Dark Ritual|USG
+4 Drain Life|LEA
+4 Hymn to Tourach|ATH
+4 Phyrexian Ghoul|USG
+4 Plague Beetle|ULG
+4 Raise Dead|S99
+4 Sinkhole|LEA
+
+[StartInBattle_Reference]
+1 Wall of Bone|LEA

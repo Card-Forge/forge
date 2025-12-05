@@ -1,0 +1,21 @@
+[metadata]
+Name=barbarian
+[Main]
+20 Mountain|TMP
+4 Balduvian Horde|ALL
+2 Kamahl, Pit Fighter|ODY
+2 Jeska, Warrior Adept|JUD
+4 Halberdier|ODY
+4 Balduvian Barbarians|7ED
+4 Pillaging Horde|POR
+2 Coat of Arms|7ED
+2 Gauntlet of Might|LEA
+4 Pillage|7ED
+4 Blood Lust|4ED
+4 Gratuitous Violence|ONS
+4 Threaten|ONS
+
+[StartInBattle_Reference]
+2 Mountain|TMP
+1 Balthor the Stout|TOR
+1 Keldon Warlord|LEA

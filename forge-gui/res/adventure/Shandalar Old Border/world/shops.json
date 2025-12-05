@@ -551,16 +551,15 @@
 	"name":"WhiteItems",                  
 	"spriteAtlas":"maps/tileset/buildings.atlas",   
 	"sprite":"ItemShop",   
-	  "rewards": [ 
+	  "rewards": [
 		{ "type": "item","count":1, "itemName": "White rune"  },
 		{ "type": "item","count":1, "itemName": "White Staff"  },
 		{ "type": "item","count":1, "itemName": "Cadet's Sword"  },
-		{ "type": "item","count":1, "itemName": "Holy Symbol"  },
 		{ "type": "item","count":1, "itemName": "Shield of the Ages"  },
 		{ "type": "item","count":1, "itemName": "Belbe's Armor"  },
 		{ "type": "item","count":1, "itemName": "Riding Boots"  },
 		{ "type": "life","count":1    }
-		
+
 		]
 
 	},{                                      

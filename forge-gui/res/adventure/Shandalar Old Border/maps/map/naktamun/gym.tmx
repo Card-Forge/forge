@@ -9,7 +9,7 @@
    <properties>
     <property name="direction" value="up"/>
     <property name="portalState" value="active"/>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/naktamun.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/naktamun/naktamun.tmx"/>
     <property name="teleportObjectId" value="47"/>
    </properties>
   </object>

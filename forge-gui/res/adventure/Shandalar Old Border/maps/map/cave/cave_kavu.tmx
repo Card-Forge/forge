@@ -81,6 +81,7 @@
   <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="177.5" y="201.5">
    <properties>
     <property name="enemy" value="Kavu"/>
+   <property name="effect">{ "startBattleWithCard": [ "Kavu Monarch|INV" ] }</property>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="71,78,71,72,73,72"/>
    </properties>
@@ -88,6 +89,7 @@
   <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="333.318" y="210.697">
    <properties>
     <property name="enemy" value="Kavu"/>
+   <property name="effect">{ "startBattleWithCard": [ "Kavu Monarch|INV" ] }</property>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="79,78,71,78,79"/>
    </properties>
@@ -95,6 +97,7 @@
   <object id="59" template="../../../../../../common/maps/obj/enemy.tx" x="123.167" y="88.25">
    <properties>
     <property name="enemy" value="Kavu"/>
+   <property name="effect">{ "startBattleWithCard": [ "Kavu Monarch|INV" ] }</property>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="74,75,77,76,77,75,74"/>
    </properties>
@@ -109,12 +112,14 @@
  }
 }</property>
     <property name="enemy" value="Kavu"/>
+   <property name="effect">{ "startBattleWithCard": [ "Kavu Monarch|INV" ] }</property>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
   <object id="60" template="../../../../../../common/maps/obj/enemy.tx" x="47.5332" y="84.5411">
    <properties>
     <property name="enemy" value="Kavu"/>
+   <property name="effect">{ "startBattleWithCard": [ "Kavu Monarch|INV" ] }</property>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>

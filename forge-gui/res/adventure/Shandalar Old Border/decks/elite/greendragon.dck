@@ -1,0 +1,28 @@
+[metadata]
+Name=Green Dragon
+[Main]
+4 Brushland|ICE
+4 Karplusan Forest|ICE
+4 Battlefield Forge|APC
+2 Mountain|MIR
+2 Plains|MIR
+8 Forest|MIR
+4 Rampant Growth|MIR
+4 Explosive Vegetation|ONS
+3 Rith, the Awakener|INV
+1 Palladia-Mors|LEG
+4 Viashivan Dragon|VIS
+2 Canopy Dragon|MIR
+2 Pearl Dragon|MIR
+2 Two-Headed Dragon|MMQ
+2 Shivan Dragon|7ED
+2 Rith's Charm|PLS
+2 Fiery Justice|ICE
+2 Fireball|LEA
+2 Earthquake|LEA
+2 Aura Shards|INV
+2 Armadillo Cloak|INV
+
+[StartInBattle_Reference]
+1 Rith's Grove|PLS
+1 Canopy Dragon|MIR

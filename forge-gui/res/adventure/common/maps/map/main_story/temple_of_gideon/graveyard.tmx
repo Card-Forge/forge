@@ -413,14 +413,14 @@
     &quot;text&quot;:&quot;At the edge of a reflecting pool stands a carved stone depiction angel. Posed as if fighting while in flight, the air around the statue's sword and shield shimmers with a prismatic haze. In another setting, it would be majestic. But here, it is ominous.&quot;,
     &quot;condition&quot;: [ { &quot;actorID&quot;: 254 } ],
     &quot;options&quot;:[
-      { &quot;name&quot;:&quot;Walk away&quot; },
+      { &quot;name&quot;:&quot;Leave&quot; },
       {
         &quot;name&quot;:&quot;Take a closer look at the statue&quot;,
-        &quot;text&quot;: &quot;You sense an immense amount of power radiating from the monument. You also begin to note that many of the familiar holy symbols engraved around the base are twisted, incomplete, altered, or otherwise seem 'wrong'&quot;,
+        &quot;text&quot;: &quot;You sense an immense amount of power radiating from the monument. You also begin to note that many of the familiar holy symbols engraved around the base are twisted, incomplete, altered, or otherwise seem 'wrong'.&quot;,
         &quot;options&quot;: [
-	{ &quot;name&quot;:&quot;Walk away&quot; },
+	{ &quot;name&quot;:&quot;Leave&quot; },
 	{ &quot;name&quot;:&quot;Drain the power from the statue&quot;,
-	  &quot;text&quot;:&quot;Whatever you're doing, it seems to be working. The glow around the statue's armaments begins to clear away, as does the barrier around the graveyard. You also find that you are able to channel this energy, and feel somewhat refreshed by it (+15 health recovered)&quot;,
+	  &quot;text&quot;:&quot;Whatever you're doing, it seems to be working. The glow around the statue's armaments begins to clear away, as does the barrier around the graveyard. You also find that you are able to channel this energy, and feel somewhat refreshed by it. (+15 health recovered)&quot;,
 	  &quot;action&quot;:[{&quot;addLife&quot;:15}],
 	  &quot;options&quot;:[{
 		&quot;name&quot;:&quot;(Continue)&quot;,
@@ -505,7 +505,7 @@
 {
    &quot;text&quot;: &quot;In sharp contrast to the forest behind you, this graveyard is eerily quiet. So quiet in fact, that you feel like you can hear a slight hum in the air coming from the stone wall around the area.&quot;,
    &quot;options&quot;: [{
-      &quot;name&quot;: &quot;Take a closer look at the wall.&quot;,
+      &quot;name&quot;: &quot;Take a closer look at the wall&quot;,
       &quot;text&quot;: &quot;It doesn't take long to identify the source of the sound - Extending above the wall is a hazy shimmer of enchantment, some form of a barrier intended to help keep something out of the graveyard. Or in.&quot;,
       &quot;options&quot;: [{
          &quot;name&quot;: &quot;Look for the source of the enchantment&quot;,

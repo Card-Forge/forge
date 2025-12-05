@@ -1,0 +1,31 @@
+[metadata]
+Name=Tawnos
+[Main]
+4 Urza's Tower|ATQ
+4 Urza's Mine|ATQ
+4 Urza's Power Plant|ATQ
+4 Mishra's Factory|ATQ
+4 Stalking Stones|TMP
+4 Snake Basket|VIS
+2 Monkey Cage|MMQ
+2 Clay Statue|ATQ
+4 Clockwork Beast|LEA
+4 Clockwork Avian|ATQ
+4 Metalworker|UDS
+2 Riptide Replicator|ONS
+2 Mantis Engine|UDS
+4 Beast of Burden|ULG
+4 Sword of the Ages|LEG
+2 Tawnos's Coffin|ATQ
+2 Thopter Squadron|EXO
+2 Tetravus|ATQ
+2 Masticore|UDS
+
+[StartInBattle_Reference]
+1 Candelabra of Tawnos|ATQ
+1 Tawnos's Coffin|ATQ
+1 Tawnos's Wand|ATQ
+1 Tawnos's Weaponry|ATQ
+1 Serpent Generator|LEG
+1 Clay Statue|ATQ
+1 Mantis Engine|UDS

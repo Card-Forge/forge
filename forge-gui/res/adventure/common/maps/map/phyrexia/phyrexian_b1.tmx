@@ -122,7 +122,7 @@
     <property name="dialog">[{
     &quot;text&quot;:&quot;This gate is locked. There must be a way to open it somewhere else in here.&quot;,
     &quot;options&quot;:[
-    { &quot;name&quot;:&quot;continue&quot; } 
+    { &quot;name&quot;:&quot;Continue&quot; } 
     ]
 }]</property>
    </properties>

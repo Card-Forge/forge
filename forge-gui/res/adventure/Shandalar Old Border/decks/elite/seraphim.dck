@@ -1,0 +1,18 @@
+[metadata]
+Name=seraphim
+[Main]
+20 Plains|ONS
+4 Moat|LEG
+4 Karmic Justice|ODY
+4 Worship|USG
+4 Opalescence|UDS
+4 Sacred Mesa|ATH
+4 Crackdown|MMQ
+4 Aurification|ONS
+4 Planar Collapse|ULG
+4 Arrest|MMQ
+4 Pacifism|MIR
+
+[StartInBattle_Reference]
+1 Serra's Sanctum|USG
+1 Mobilization|ONS

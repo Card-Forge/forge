@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="70">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="40" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt2QEKgzAMheFir2DFy4jn2a30prOIWCRT18Qm3d7gBxmFfWvUIZuCcxPRvNT2a+nxcd32fk7U595t6Jzz4Rkfx0XtYbQ2Yc0b9KXNQvO17pNwlvBxnEdfPP/G7hlfjpPaP4nrV8prwbfdN6jiLLV93P3W9mj7zuZLrZf4/Si5h9qWXF/60jTe8ZU2/sJ8/9X3aves+VJbDb5PRsyXl2UbfPBpV4Pvas1APLsgpJE3fC0hhBBCqL44/y/lZt33zXfQdlz53mY9CP8=
+  </data>
+ </layer>
+ <layer id="6" name="BackgroundBlend" width="40" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1lEKgzAQRVFpt6AheynaLlV3UXdn/RCTVExMJskT3oWhFKucDiI2DWOMMcYYW2v1PoiZPkQjum/W+4xdbc1/9KVVwvdRea6LUOjOtt+tn+Y57vdYgztnx2KGPvrok/f5zu9V/f2F+FF9UsYSSflev3vm0dnzFPgPOfc3Ce0Y3Rfr9JXjHQt5f3fwXTHSd0+f2dEzF8n31fZMF3wloi8t9/57q3TfoOw5K+f7QYgzpFq+mNB9vkzfApE9IoY=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt12tOAjEQB/AKR8AW7mI2fPFK6nHwEf2ufvIC3kNPQkdpdjIOfWynsw3yTxpCF+iPPneNycu9HQvOjrx/sMc/G/ud2kj6NHNqvoWvWyoaS32Qwek5U77YeEo7P1e/7Zf6UnNO0jnVl7suwImLpk9j7aZ8u4SvtZHzwTg8Hl5hLi0rjK3HFxLme7Dg9nLsuX3NraccH/0MvVbiixWunVPwhfHFY9qTL+YtnX8pH5wZtb7LTbv+m+p7tmN5aTi+tf334fvu2sn5qKUnH02N78uN5buRDyKxPuj3NceX7nVP9u8ZisvW6a4PyXD91IMP9sdjJceHjb35IC19MdvZV2/kXBdoL1iQNYL3Ey5hfxkcf73UGOs3SFgf2Ijr6Pqm7dWG67st+u/UEjNxRkkftdVG0ge2K0EbRNJXes6nIj3/Snw3a2Nufblb59Vr+1aHvrGbvHpt36tv/82XdzKGuH5On2bOvroEH33G7yXc+RuspgNn7P4KnD9nyozOnOekQdCI752kfME4x7wsed5M3ZtqOaemdOy08x99e892j50=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="40" height="50">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt2V0KgCAQBOB+rlDRZaKjVnTR8EFYrAzR1snmAyHoZdJadKuqd2399TUK5osjM01Dvhx3TKYWcN4kZkzjKaO532R+hhLmEYFdS3doMDVv9QwEzJcWej4iolg76xsRvWAW/QG7f9c+Z3Tjefho91xCshk58oVA7FlJXznrMmM8ZkwD/ZtGz7eA53N7a1SOkL2Flvqij6v9/rk1V2aaM/7Xsv1Gt6ah1bi/5jsAvQwryw==
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="40" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1d0KwjAMhuGqt7CK9yLDGxV/2IXqcjCMMeuibdeA3wOFbXjw0i01BAAAgPWd4/v9cd+mw6vu0LogDX15tL5b/HzWinX/5O/W2ndP73czvrctW5fop4/aTsrZ6qFvro146OvHtt3MTFKf58Zv+h5dCEN8XZdGjdp8WPvuUb9eIueSryW1+1LfvkXNvtw2UrPvWuB/8p/7Uuea1TRHgzJPctb4t9Qbv6vcxmn/+B7yZyXObnmu/XK+aMsLbz2S5zbivQ8AAAAA7J6sNx9x
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="47" template="../../../../../../common/maps/obj/gold.tx" x="272.333" y="191.667"/>
+  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="544" y="400"/>
+  <object id="51" template="../../../../../../common/maps/obj/entry_up.tx" x="525.667" y="719.333" width="33.3333" height="46.6667">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="189.747" y="418.972">
+   <properties>
+    <property name="dialog">[{
+  &quot;text&quot;:&quot;Hello, planeswalker {var=player_name}, this area is currently under construction and subject to change. Also this is a hard boss, so be prepared with a strong deck&quot;,
+  &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Ok&quot; }
+  ]
+}]</property>
+    <property name="enemy" value="Homarid"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,18 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="46" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="208">
  <editorsettings>
-  <export format="tmx"/>
+  <export format="tmx" />
  </editorsettings>
  <properties>
-  <property name="canFailDungeon" type="bool" value="true"/>
-  <property name="respawnEnemies" type="bool" value="true"/>
+  <property name="canFailDungeon" type="bool" value="true" />
+  <property name="respawnEnemies" type="bool" value="true" />
  </properties>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
- <tileset firstgid="13697" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
- <tileset firstgid="23809" source="../../../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx"/>
- <tileset firstgid="23839" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx" />
+ <tileset firstgid="13697" source="../../../../../../common/maps/tileset/main-nocollide.tsx" />
+ <tileset firstgid="23809" source="../../../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx" />
+ <tileset firstgid="23839" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx" />
  <layer id="17" name="Collision" width="46" height="28">
   <data encoding="base64" compression="zlib">
    eJztlUEKgDAMBIs3L+JBv+TNR/gnH+oTJEhApYa2rKuFDCxEjXEIBUPAMbUhNKMd6UmJzrOeI71TnbQ/9923vJfhmlhPrM51Z3ifry3vp5lMb6m7/ojev7umfp/prc4SoRZvdT3XpTPf9hass10C0xuJe3Nxb5sNPM/3zcW9ubj3wTrj3Cx833iHkqSA+pewvVH81Rvp9fW+a/C+z61l37WeE6b3Dq6GfrU=
@@ -40,7 +40,7 @@
  </layer>
  <layer id="19" name="HighestLayer" width="46" height="28">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="base64" compression="zlib">
    eJztlsEOwTAYgP/YwcVcZAs74+rIhRBvIs7EXTzJYjyGF/ASxLPYn67R/FlZ659Osi/503Zq/VptfwA1NTU1/08cAMxCAC9w67EaANxSj3soSuSutBvEL8naU9fuQ/uvunA/M41Xpvu6B7BJY9sTdfztj5qxDr75+8tyb0QArTT8SNSRhIxj46vC5T7OPOZh/ufUuzl6lbJuiq37si3KSYG1k957pe+plVUi87El784N+qmhPisKXW8uNxNvOodd38zDdG8vNHsP+cZbpej+Rq4dETbI/KS7pxATbx3oTT1lOy844PCeZjmchhe49Zb3xEOzT3RudD6c+eSTt3rOTO+NS/cVSPxDb4lNDqTenHDsbx2uvLnnwYmtd9XmRXO92qb9bP8XlIHOM69flda7KK7PwBMe6154
@@ -54,143 +54,142 @@
  <objectgroup id="12" name="Objects" opacity="0.9" offsetx="2.65789" offsety="6.89474">
   <object id="114" template="../../../../../../common/maps/obj/entry_up.tx" x="364.676" y="361.886" width="67" height="50">
    <properties>
-    <property name="direction" value="right"/>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt_f2.tmx"/>
-    <property name="teleportObjectId" value="144"/>
+    <property name="direction" value="right" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt_f2.tmx" />
+    <property name="teleportObjectId" value="144" />
    </properties>
   </object>
-  <object id="115" template="../../../../../../common/maps/obj/gold.tx" x="525.88" y="209.537"/>
+  <object id="115" template="../../../../../../common/maps/obj/gold.tx" x="525.88" y="209.537" />
   <object id="117" template="../../../../../../common/maps/obj/enemy.tx" x="143.319" y="265.121">
    <properties>
-    <property name="displayNameOverride" value="Prisoner"/>
-    <property name="enemy" value="Farmer"/>
-    <property name="threatRange" type="int" value="0"/>
+    <property name="displayNameOverride" value="Prisoner" />
+    <property name="enemy" value="Farmer" />
+    <property name="threatRange" type="int" value="0" />
    </properties>
   </object>
   <object id="119" template="../../../../../../common/maps/obj/enemy.tx" x="348.532" y="174.94">
    <properties>
     <property name="defeatDialog">[
 	{
-		&quot;text&quot;: &quot;The Torturer unleashes a shrill scream as he falls unto the ground. His blood mixes with that of his tortured victims, you see the red barrier disappear. The way to Tibalt's chambers is open&quot;,
-		&quot;options&quot;: [
+		"text": "The Torturer unleashes a shrill scream as he falls unto the ground. His blood mixes with that of his tortured victims, you see the red barrier disappear. The way to Tibalt's chambers is open",
+		"options": [
 			{
-				&quot;name&quot;: &quot;(Continue)&quot;,
-				&quot;action&quot;: [
-					{ &quot;deleteMapObject&quot;: 201 },
-					{ &quot;deleteMapObject&quot;: -1 }
+				"name": "(Continue)",
+				"action": [
+					{ "deleteMapObject": 201 },
+					{ "deleteMapObject": -1 }
 				]
 			}
 		]
 	}
 ]</property>
-    <property name="displayNameOverride" value="Tibalt's Torturer"/>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Wheel of Torture|ULG&quot; ]
-}</property>
-    <property name="enemy" value="Torturer"/>
+    <property name="displayNameOverride" value="Tibalt's Torturer" />
+    <property name="effect">{ "startBattleWithCard": [ "Wheel of Torture|ULG" ] }</property>
+    <property name="enemy" value="Tibalt's Torturer" />
     <property name="reward">[
   {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 1,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Torturer's Key&quot;
+    "type": "item",
+    "probability": 1,
+    "count": 1,
+    "itemName": "Torturer's Key"
   }
 ]
 </property>
-    <property name="spawn.Hard" type="bool" value="true"/>
-    <property name="speedModifier" type="float" value="15"/>
-    <property name="threatRange" type="int" value="50"/>
+    <property name="spawn.Hard" type="bool" value="true" />
+    <property name="speedModifier" type="float" value="15" />
+    <property name="threatRange" type="int" value="50" />
    </properties>
   </object>
   <object id="136" template="../../../../../../common/maps/obj/enemy.tx" x="399.524" y="258.907">
    <properties>
-    <property name="enemy" value="Horror of Tibalt"/>
-    <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value="196,185"/>
+    <property name="enemy" value="Horror of Tibalt" />
+    <property name="threatRange" type="int" value="40" />
+    <property name="waypoints" value="196,185" />
    </properties>
   </object>
   <object id="141" template="../../../../../../common/maps/obj/treasure.tx" x="509.503" y="120.175">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 1,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 4,
-  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
-  &quot;addMaxCount&quot;: 2
+  "type": "randomCard",
+  "count": 4,
+  "rarity": [ "uncommon" ],
+  "addMaxCount": 2
 }]</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="false" />
    </properties>
   </object>
   <object id="150" template="../../../../../../common/maps/obj/enemy.tx" x="378.676" y="44.1053">
    <properties>
-    <property name="enemy" value="Necromancer"/>
-    <property name="spawn.Hard" type="bool" value="true"/>
-    <property name="threatRange" type="int" value="60"/>
-    <property name="waypoints" value="182,181"/>
+    <property name="enemy" value="Necromancer" />
+    <property name="spawn.Hard" type="bool" value="true" />
+    <property name="threatRange" type="int" value="60" />
+    <property name="waypoints" value="182,181" />
    </properties>
   </object>
-  <object id="168" template="../../../../../../common/maps/obj/gold.tx" x="525.509" y="246.272"/>
-  <object id="169" template="../../../../../../common/maps/obj/gold.tx" x="540.009" y="209.938"/>
-  <object id="170" template="../../../../../../common/maps/obj/gold.tx" x="525.175" y="231.605"/>
-  <object id="171" template="../../../../../../common/maps/obj/gold.tx" x="538.509" y="246.772"/>
-  <object id="172" template="../../../../../../common/maps/obj/manashards.tx" x="317.675" y="40.7719"/>
-  <object id="173" template="../../../../../../common/maps/obj/manashards.tx" x="476.009" y="179.438"/>
-  <object id="174" template="../../../../../../common/maps/obj/manashards.tx" x="511.009" y="169.105"/>
+  <object id="168" template="../../../../../../common/maps/obj/gold.tx" x="525.509" y="246.272" />
+  <object id="169" template="../../../../../../common/maps/obj/gold.tx" x="540.009" y="209.938" />
+  <object id="170" template="../../../../../../common/maps/obj/gold.tx" x="525.175" y="231.605" />
+  <object id="171" template="../../../../../../common/maps/obj/gold.tx" x="538.509" y="246.772" />
+  <object id="172" template="../../../../../../common/maps/obj/manashards.tx" x="317.675" y="40.7719" />
+  <object id="173" template="../../../../../../common/maps/obj/manashards.tx" x="476.009" y="179.438" />
+  <object id="174" template="../../../../../../common/maps/obj/manashards.tx" x="511.009" y="169.105" />
   <object id="178" template="../../../../../../common/maps/obj/enemy.tx" x="208.676" y="256.439">
    <properties>
-    <property name="enemy" value="Devil of Tibalt"/>
-    <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value="187,193,195,193"/>
+    <property name="enemy" value="Devil of Tibalt" />
+    <property name="threatRange" type="int" value="40" />
+    <property name="waypoints" value="187,193,195,193" />
    </properties>
   </object>
   <object id="179" template="../../../../../../common/maps/obj/booster.tx" x="511.009" y="148.772">
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;ODY&quot;, &quot;TOR&quot;, &quot;JUD&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ODY&quot;, &quot;TOR&quot;, &quot;JUD&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ODY&quot;, &quot;TOR&quot;, &quot;JUD&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Rare" ]
   }
 ]
 </property>
    </properties>
   </object>
-  <object id="181" template="../../../../../../common/maps/obj/waypoint.tx" x="426.342" y="46.1053"/>
-  <object id="182" template="../../../../../../common/maps/obj/waypoint.tx" x="335.342" y="43.4386"/>
-  <object id="185" template="../../../../../../common/maps/obj/waypoint.tx" x="486.342" y="253.772"/>
-  <object id="187" template="../../../../../../common/maps/obj/waypoint.tx" x="218.676" y="204.438"/>
-  <object id="193" template="../../../../../../common/maps/obj/waypoint.tx" x="213.009" y="353.438"/>
-  <object id="195" template="../../../../../../common/maps/obj/waypoint.tx" x="310.676" y="353.439"/>
-  <object id="196" template="../../../../../../common/maps/obj/waypoint.tx" x="316.675" y="256.105"/>
+  <object id="181" template="../../../../../../common/maps/obj/waypoint.tx" x="426.342" y="46.1053" />
+  <object id="182" template="../../../../../../common/maps/obj/waypoint.tx" x="335.342" y="43.4386" />
+  <object id="185" template="../../../../../../common/maps/obj/waypoint.tx" x="486.342" y="253.772" />
+  <object id="187" template="../../../../../../common/maps/obj/waypoint.tx" x="218.676" y="204.438" />
+  <object id="193" template="../../../../../../common/maps/obj/waypoint.tx" x="213.009" y="353.438" />
+  <object id="195" template="../../../../../../common/maps/obj/waypoint.tx" x="310.676" y="353.439" />
+  <object id="196" template="../../../../../../common/maps/obj/waypoint.tx" x="316.675" y="256.105" />
   <object id="198" template="../../../../../../common/maps/obj/door_up.tx" x="461.105" y="86.8501" width="32.7127" height="80.0112" rotation="359.74">
    <properties>
-    <property name="direction" value="down"/>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt_f4.tmx"/>
-    <property name="teleportObjectId" value="170"/>
+    <property name="direction" value="down" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt_f4.tmx" />
+    <property name="teleportObjectId" value="170" />
    </properties>
   </object>
   <object id="201" name="Ward" type="dialog" gid="23816" x="461.029" y="123.772" width="35.6276" height="16">
    <properties>
     <property name="dialog">[{
-    &quot;text&quot;:&quot;A translucent, shimmering red field blocks your path. An ancient Evil is lurking in these crypts, preventing you from entering the room in front of you ...&quot;,
-    &quot;options&quot;:[
-    { &quot;name&quot;:&quot;Leave.&quot; } 
+    "text":"A translucent, shimmering red field blocks your path. An ancient Evil is lurking in these crypts, preventing you from entering the room in front of you ...",
+    "options":[
+    { "name":"Leave." } 
     ]
 }]</property>
    </properties>
@@ -199,22 +198,22 @@
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;ODY&quot;, &quot;TOR&quot;, &quot;JUD&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ODY&quot;, &quot;TOR&quot;, &quot;JUD&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ODY&quot;, &quot;TOR&quot;, &quot;JUD&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Rare" ]
   }
 ]
 </property>
@@ -223,14 +222,14 @@
   <object id="204" template="../../../../../../common/maps/obj/gate.tx" x="576.842" y="281.439" width="11.6666" height="22">
    <properties>
     <property name="dialog">[{
-    &quot;text&quot;:&quot;This door is locked&quot;,
-    &quot;options&quot;:[
-    { &quot;name&quot;:&quot;go away&quot; },
+    "text":"This door is locked",
+    "options":[
+    { "name":"go away" },
     {      
-        &quot;name&quot;:&quot;unlock with Torturer's key&quot;,     
-        &quot;condition&quot;:[{&quot;item&quot;:&quot;Torturer's Key&quot;}],    
-        &quot;text&quot;:&quot;The gate is unlocked, though the key breaks as you open the door&quot;,
-        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Torturer's Key&quot;}]} ]
+        "name":"unlock with Torturer's key",     
+        "condition":[{"item":"Torturer's Key"}],    
+        "text":"The gate is unlocked, though the key breaks as you open the door",
+        "options":[{"name":"continue", "action":[ {"deleteMapObject":-1},{"removeItem":"Torturer's Key"}]} ]
     }
     ]
 }]</property>
@@ -238,23 +237,23 @@
   </object>
   <object id="205" template="../../../../../../common/maps/obj/enemy.tx" x="141.675" y="196.105">
    <properties>
-    <property name="displayNameOverride" value="Prisoner"/>
-    <property name="enemy" value="Farmer"/>
-    <property name="threatRange" type="int" value="0"/>
+    <property name="displayNameOverride" value="Prisoner" />
+    <property name="enemy" value="Farmer" />
+    <property name="threatRange" type="int" value="0" />
    </properties>
   </object>
   <object id="206" template="../../../../../../common/maps/obj/enemy.tx" x="126.342" y="278.439">
    <properties>
-    <property name="displayNameOverride" value="Prisoner"/>
-    <property name="enemy" value="Farmer"/>
-    <property name="threatRange" type="int" value="0"/>
+    <property name="displayNameOverride" value="Prisoner" />
+    <property name="enemy" value="Farmer" />
+    <property name="threatRange" type="int" value="0" />
    </properties>
   </object>
   <object id="207" template="../../../../../../common/maps/obj/enemy.tx" x="140.009" y="331.772">
    <properties>
-    <property name="displayNameOverride" value="Prisoner"/>
-    <property name="enemy" value="Farmer"/>
-    <property name="threatRange" type="int" value="0"/>
+    <property name="displayNameOverride" value="Prisoner" />
+    <property name="enemy" value="Farmer" />
+    <property name="threatRange" type="int" value="0" />
    </properties>
   </object>
  </objectgroup>

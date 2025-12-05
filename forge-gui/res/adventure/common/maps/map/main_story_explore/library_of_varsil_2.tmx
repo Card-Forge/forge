@@ -124,7 +124,7 @@
    <properties>
     <property name="dialog">[
 {
-   &quot;text&quot;: &quot;You find a book on the biology of Elves. One page is marked with a folded corner and describes a type of Elf that you've seen nowhere on Shandalar&quot;,
+   &quot;text&quot;: &quot;You find a book on the biology of Elves. One page is marked with a folded corner and describes a type of Elf that you've seen nowhere on Shandalar.&quot;,
    &quot;options&quot;: [{
       &quot;name&quot;: &quot;(Continue)&quot;, 
       &quot;action&quot;: [{

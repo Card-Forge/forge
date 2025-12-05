@@ -571,7 +571,7 @@
    <properties>
     <property name="direction" value="left"/>
     <property name="portalState" value="active"/>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/naktamun.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/naktamun/naktamun.tmx"/>
     <property name="teleportObjectId" value="37"/>
    </properties>
   </object>
@@ -579,7 +579,7 @@
    <properties>
     <property name="direction" value="right"/>
     <property name="portalState" value="active"/>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/naktamun.tmx"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/naktamun/naktamun.tmx"/>
     <property name="teleportObjectId" value="36"/>
    </properties>
   </object>

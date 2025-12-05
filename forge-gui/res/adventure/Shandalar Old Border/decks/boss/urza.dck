@@ -1,0 +1,48 @@
+[metadata]
+Name=Urza Planeswalker
+[Main]
+4 Urza's Tower|ATQ
+4 Urza's Mine|ATQ
+4 Urza's Power Plant|ATQ
+4 Strip Mine|ATQ
+4 Tolarian Academy|USG
+8 Island|LEA
+2 Thran Dynamo|UDS
+2 Sol Ring|LEA
+2 Mana Crypt|PHPR
+2 Mox Sapphire|LEA
+2 Mox Diamond|STH
+2 Metalworker|UDS
+2 Triskelion|ATQ
+2 Tetravus|ATQ
+2 Teeka's Dragon|MIR
+2 Xanthic Statue|WTH
+2 Masticore|UDS
+2 Power Matrix|MMQ
+2 Morphling|USG
+2 Palinchron|ULG
+1 Karn, Silver Golem|USG
+1 Barrin, Master Wizard|USG
+2 Urza's Avenger|ATQ
+4 Copy Artifact|LEA
+2 Treachery|UDS
+2 Desertion|VIS
+2 Bribery|MMQ
+2 Blatant Thievery|ONS
+2 Confiscate|USG
+2 Time Walk|LEA
+2 Temporal Manipulation|PO2
+2 Urza's Armor|USG
+2 Time Spiral|USG
+2 Timetwister|LEA
+4 Stroke of Genius|USG
+2 Ancestral Recall|LEA
+2 Urza's Blueprints|ULG
+4 Mana Drain|LEG
+4 Counterspell|LEA
+
+[StartInBattle_Reference]
+1 Soldevi Excavations|ALL
+1 Urza's Armor|USG
+1 Mind Over Matter|EXO
+1 Urza's Avenger|ATQ

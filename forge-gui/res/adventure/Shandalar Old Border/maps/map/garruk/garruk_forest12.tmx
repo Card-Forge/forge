@@ -50,7 +50,7 @@
   <object id="69" template="../../../../../../common/maps/obj/treasure.tx" x="502.667" y="209.333"/>
   <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="263.323" y="118.856">
    <properties>
-    <property name="enemy" value="Green Wiz1"/>
+    <property name="enemy" value="Apprentice Green Wizard"/>
    </properties>
   </object>
   <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="502.667" y="295.333">

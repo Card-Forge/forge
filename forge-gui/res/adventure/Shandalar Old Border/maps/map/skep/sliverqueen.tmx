@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="69">
  <editorsettings>
-  <export format="tmx"/>
+  <export format="tmx" />
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJzt1z0OABAMBWCbSKzu2NM4s9hE4qe0jVSHt75v4QWIzgFRcpiHsgsbaW/H5TJHNrfXu1Je60qb5r6R5M9i7lvuaK843dk+m6vT1Xyef9wNc2XvEZfb96/ezzcu1b+nZsek9DA2pqsA8yt8nw==
@@ -22,7 +22,7 @@
  </layer>
  <layer id="7" name="Foreground" width="30" height="30">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="base64" compression="zlib">
    eJxjYMAN3DhJw4QAIbWkmEUI+ALxayiNbDYuO2kFKAkvatuNDup4qWsfobCmNRgIOweDvb74lVEVuKLF7Ws62ft4gMJ4FNAfkFp+zOIh3y4vJLuwlZcWVC4jsdmLDGhdlgyEvTN5sNtLz3qQ3nai2z9QdcRwBNRut1AK6FUHDjQgpu1Kadygm09u+3kmjjrBHMl95PRpKGnLU7sPRYsyBQBQFSjU
@@ -36,63 +36,61 @@
  <objectgroup id="4" name="Objects">
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="480" width="112" height="8">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/skep/skep_outer.tmx"/>
-    <property name="teleportObjectId" value="153"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/skep/skep_outer.tmx" />
+    <property name="teleportObjectId" value="153" />
    </properties>
   </object>
   <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="224.189" y="175.454" width="16" height="16" visible="1">
    <properties>
     <property name="defeatDialog">[
   {
-    &quot;action&quot;: [
+    "action": [
       {
-        &quot;setQuestFlag&quot;: {
-          &quot;key&quot;: &quot;SliverQueenDefeated&quot;,
-          &quot;val&quot;: 1
+        "setQuestFlag": {
+          "key": "SliverQueenDefeated",
+          "val": 1
         },
-        &quot;deleteMapObject&quot;: -1
+        "deleteMapObject": -1
       }
     ]
   }
 ]</property>
-    <property name="effect">{
- &quot;startBattleWithCard&quot;: [ &quot;City of Brass|CHR&quot;, &quot;Reflecting Pool|TMP&quot;, &quot;Metallic Sliver|TMP&quot;, &quot;Primitive Etchings|SCG&quot; ]
-}</property>
-    <property name="enemy" value="Sliver Queen"/>
-    <property name="spawn.Easy" type="bool" value="true"/>
-    <property name="spawn.Hard" type="bool" value="true"/>
-    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="effect">{ "startBattleWithCard": [ "City of Brass|CHR", "Metallic Sliver|TMP", "Primitive Etchings|SCG", "Reflecting Pool|TMP" ] }</property>
+    <property name="enemy" value="Sliver Queen" />
+    <property name="spawn.Easy" type="bool" value="true" />
+    <property name="spawn.Hard" type="bool" value="true" />
+    <property name="spawn.Normal" type="bool" value="true" />
    </properties>
   </object>
-  <object id="65" template="../../../../../../common/maps/obj/manashards.tx" x="416.954" y="46.4813"/>
-  <object id="66" template="../../../../../../common/maps/obj/manashards.tx" x="32.76" y="210.329"/>
-  <object id="67" template="../../../../../../common/maps/obj/manashards.tx" x="456.503" y="368.93"/>
+  <object id="65" template="../../../../../../common/maps/obj/manashards.tx" x="416.954" y="46.4813" />
+  <object id="66" template="../../../../../../common/maps/obj/manashards.tx" x="32.76" y="210.329" />
+  <object id="67" template="../../../../../../common/maps/obj/manashards.tx" x="456.503" y="368.93" />
   <object id="68" template="../../../../../../common/maps/obj/treasure.tx" x="288.62" y="50.1133">
    <properties>
     <property name="reward">[
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Evacuation|STH&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Evacuation|STH"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 1,
-		&quot;cardName&quot;: &quot;Mutilate|TOR&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Mutilate|TOR"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 1,
-		&quot;count&quot;: 2,
-		&quot;itemName&quot;: &quot;Fumigate&quot;
+		"type": "card",
+		"probability": 1,
+		"count": 2,
+		"itemName": "Fumigate"
 	},
 	{
-		&quot;type&quot;: &quot;card&quot;,
-		&quot;probability&quot;: 0.5,
-		&quot;count&quot;: 2,
-		&quot;itemName&quot;: &quot;Favored Enemy&quot;
+		"type": "card",
+		"probability": 0.5,
+		"count": 2,
+		"itemName": "Favored Enemy"
 	}
 ]</property>
    </properties>

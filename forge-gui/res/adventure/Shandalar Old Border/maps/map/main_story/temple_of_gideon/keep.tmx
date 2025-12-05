@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="55" height="19" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="244">
  <properties>
-  <property name="canFailDungeon" type="bool" value="true"/>
-  <property name="respawnEnemies" type="bool" value="true"/>
+  <property name="canFailDungeon" type="bool" value="true" />
+  <property name="respawnEnemies" type="bool" value="true" />
  </properties>
- <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../../common/maps/tileset/buildings-nocollide.tsx" />
  <layer id="1" name="Tile Layer 1" width="55" height="19">
   <data encoding="csv">
 4107,4107,764,1117,1117,1117,1117,1117,1117,1117,1117,1117,764,1936,1936,1149,1781,1781,1781,1781,1781,1781,764,1149,1149,1149,1149,1149,1149,1149,1149,1149,764,3641,3641,3641,4632,4632,4632,3641,3641,3641,764,6164,6164,6164,6164,6164,6164,6164,6164,6164,764,4107,0,
@@ -78,7 +78,7 @@
  </layer>
  <layer id="5" name="Tile Layer 4" width="55" height="19">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,390,711,0,0,0,0,0,0,0,0,0,0,0,0,0,1055,1056,1057,2405,2406,2407,0,0,0,0,0,0,0,0,0,0,0,5700,0,0,0,0,0,5702,0,0,0,0,0,0,0,
@@ -103,96 +103,96 @@
 </data>
  </layer>
  <objectgroup id="2" name="Objects">
-  <object id="2" template="../../../../../../../common/maps/obj/collision.tx" x="-16" y="0" width="16" height="304"/>
-  <object id="3" template="../../../../../../../common/maps/obj/collision.tx" x="-16" y="304" width="912" height="16"/>
-  <object id="4" template="../../../../../../../common/maps/obj/collision.tx" x="880" y="0" width="16" height="304"/>
-  <object id="5" template="../../../../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="912" height="16"/>
-  <object id="183" template="../../../../../../../common/maps/obj/entry_up.tx" x="64" y="304" width="112" height="16"/>
+  <object id="2" template="../../../../../../../common/maps/obj/collision.tx" x="-16" y="0" width="16" height="304" />
+  <object id="3" template="../../../../../../../common/maps/obj/collision.tx" x="-16" y="304" width="912" height="16" />
+  <object id="4" template="../../../../../../../common/maps/obj/collision.tx" x="880" y="0" width="16" height="304" />
+  <object id="5" template="../../../../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="912" height="16" />
+  <object id="183" template="../../../../../../../common/maps/obj/entry_up.tx" x="64" y="304" width="112" height="16" />
   <object id="224" template="../../../../../../../common/maps/obj/enemy.tx" x="64" y="224">
    <properties>
     <property name="dialog">[ {
-  &quot;text&quot;:&quot;HELLO AGAIN PLANESWALKER {var=player_name}&quot;, 
-   &quot;options&quot;:[
+  "text":"HELLO AGAIN PLANESWALKER {var=player_name}", 
+   "options":[
     { 
-		&quot;name&quot;:&quot;Yeah, yeah, defeat Liliana. Got it.&quot;,
-		&quot;condition&quot;:[ { &quot;checkMapFlag&quot;: &quot;intro&quot; }] 
+		"name":"Yeah, yeah, defeat Liliana. Got it.",
+		"condition":[ { "checkMapFlag": "intro" }] 
 	},
 	{
-	  &quot;name&quot;:&quot;Why am I here?&quot;,
-	  &quot;text&quot;:&quot;YOU HAVE FREED THE LEGENDARY PLANESWALKER LILIANA FROM CAPTIVITY...&quot;,
-	  &quot;options&quot;:[
+	  "name":"Why am I here?",
+	  "text":"YOU HAVE FREED THE LEGENDARY PLANESWALKER LILIANA FROM CAPTIVITY...",
+	  "options":[
 		{ 
-			&quot;name&quot;:&quot;Okay, yeah, I remember this now.&quot;,
-			&quot;condition&quot;:[ { &quot;checkMapFlag&quot;: &quot;intro&quot; }] 
+			"name":"Okay, yeah, I remember this now.",
+			"condition":[ { "checkMapFlag": "intro" }] 
 		},   
 		{      
-			&quot;name&quot;:&quot;I did, just like you asked.&quot;,
-			&quot;text&quot;:&quot;...BUT HER MIND IS STILL IMPRISONED.&quot;
-			&quot;options&quot;:[
+			"name":"I did, just like you asked.",
+			"text":"...BUT HER MIND IS STILL IMPRISONED."
+			"options":[
 			{ 	
-				&quot;name&quot;:&quot;Okay, yeah, I remember this now.&quot;,
-				&quot;condition&quot;:[ { &quot;checkMapFlag&quot;: &quot;intro&quot; }] 
+				"name":"Okay, yeah, I remember this now.",
+				"condition":[ { "checkMapFlag": "intro" }] 
 			},
 			{      
-				&quot;name&quot;:&quot;So... what now?&quot;,
-				&quot;text&quot;:&quot;DEFEAT LILIANA AND I CAN HELP HER RECOVER, SO THAT SHE MAY AID YOU IN BATTLES YET TO COME. TAKE HEED, {var=player_name}, THIS WILL BE A DIFFICULT TASK.&quot;,
-				&quot;options&quot;:[
+				"name":"So... what now?",
+				"text":"DEFEAT LILIANA AND I CAN HELP HER RECOVER, SO THAT SHE MAY AID YOU IN BATTLES YET TO COME. TAKE HEED, {var=player_name}, THIS WILL BE A DIFFICULT TASK.",
+				"options":[
 				{
-					&quot;text&quot;:&quot;THE PORTALS BEHIND ME LEAD TO PARTS OF HER REALM. ONCE ACTIVATED, YOU MAY USE THEM TO TRAVEL MORE QUICKLY.&quot;
-					&quot;name&quot;:&quot;Thank you for the warning.&quot;,
-					&quot;options&quot;:[
+					"text":"THE PORTALS BEHIND ME LEAD TO PARTS OF HER REALM. ONCE ACTIVATED, YOU MAY USE THEM TO TRAVEL MORE QUICKLY."
+					"name":"Thank you for the warning.",
+					"options":[
 					{
-						&quot;name&quot;:&quot;(Continue)&quot;,
-						&quot;action&quot;:[{&quot;advanceMapFlag&quot;:&quot;intro&quot;}]
+						"name":"(Continue)",
+						"action":[{"advanceMapFlag":"intro"}]
 					}]
 				}]
 			}]
 		}]
 	}]
 } ]</property>
-    <property name="enemy" value="Adept Black Wizard"/>
-   </properties>
+    <property name="enemy" value="Adept Black Wizard" />
+   <property name="effect">{ "startBattleWithCard": [ "Wall of Bone|LEA|1" ] }</property></properties>
   </object>
   <object id="226" template="../../../../../../../common/maps/obj/portal.tx" type="portal" x="112" y="112">
    <properties>
-    <property name="portalState" value="active"/>
-    <property name="sprite" value="sprites/portal.atlas"/>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_gideon/steppe.tmx"/>
-    <property name="teleportObjectId" value="270"/>
+    <property name="portalState" value="active" />
+    <property name="sprite" value="sprites/portal.atlas" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_gideon/steppe.tmx" />
+    <property name="teleportObjectId" value="270" />
    </properties>
   </object>
   <object id="227" template="../../../../../../../common/maps/obj/portal.tx" type="portal" x="272" y="112">
    <properties>
-    <property name="portalState" value="closed"/>
-    <property name="sprite" value="sprites/portal.atlas"/>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/graveyard.tmx"/>
-    <property name="teleportObjectId" value="269"/>
+    <property name="portalState" value="closed" />
+    <property name="sprite" value="sprites/portal.atlas" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/graveyard.tmx" />
+    <property name="teleportObjectId" value="269" />
    </properties>
   </object>
   <object id="228" template="../../../../../../../common/maps/obj/portal.tx" type="portal" x="432" y="112">
    <properties>
-    <property name="portalState" value="closed"/>
-    <property name="sprite" value="sprites/portal.atlas"/>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/bog.tmx"/>
-    <property name="teleportObjectId" value="270"/>
+    <property name="portalState" value="closed" />
+    <property name="sprite" value="sprites/portal.atlas" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/bog.tmx" />
+    <property name="teleportObjectId" value="270" />
    </properties>
   </object>
   <object id="238" template="../../../../../../../common/maps/obj/portal.tx" type="portal" x="592" y="112">
    <properties>
-    <property name="portalState" value="closed"/>
-    <property name="sprite" value="sprites/portal.atlas"/>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/town.tmx"/>
-    <property name="teleportObjectId" value="183"/>
+    <property name="portalState" value="closed" />
+    <property name="sprite" value="sprites/portal.atlas" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/town.tmx" />
+    <property name="teleportObjectId" value="183" />
    </properties>
   </object>
   <object id="239" template="../../../../../../../common/maps/obj/portal.tx" type="portal" x="752" y="112">
    <properties>
-    <property name="portalState" value="inactive"/>
-    <property name="sprite" value="sprites/portal.atlas"/>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/town.tmx"/>
-    <property name="teleportObjectId" value="279"/>
+    <property name="portalState" value="inactive" />
+    <property name="sprite" value="sprites/portal.atlas" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/town.tmx" />
+    <property name="teleportObjectId" value="279" />
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="7" name="Waypoints"/>
+ <objectgroup id="7" name="Waypoints" />
 </map>

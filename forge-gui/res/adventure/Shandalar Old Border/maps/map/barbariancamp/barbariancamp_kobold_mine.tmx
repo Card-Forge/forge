@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="32" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="165">
  <editorsettings>
-  <export format="tmx"/>
+  <export format="tmx" />
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
  <layer id="13" name="BackgroundBis" width="32" height="20">
   <data encoding="base64" compression="zlib">
    eJzNlcENwjAMRTsCqCpnluHcETgyXzdikUo0gi++LNux05Zi6UtpEvnZTuLO566bP3r03/ER+hd+Jo5p2I7PvkoMW9WD/cJqeZa1iBXf3hrEZp039nKcv+bLOq3hw6fc6913xPtUdD29VdZxP7x6sT/Jt+4X9t+X8W3QaziJea1mPG/xuRZSWi5eza34ZG7MjPIlr/ZtWaZX1PxA4yXGbuVHczuCn8m9he+x8X724mt9a61l+Zyr5S8TZ2v+2nuIvEGrj2TOv6Y9+RnT/nGaSc4LNbFpuQ==
@@ -32,7 +32,7 @@
  </layer>
  <layer id="3" name="Clutter" width="32" height="20" offsetx="-1.21053" offsety="-2.91228">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="base64" compression="zlib">
    eJxjYBicoF2DgaFDY+DsXwy0ewkV7U8UZGCYLYSK0cEfQfxmdALd04XkpvuaxNv/D4/ZN0QhmJD9S4F2LyMzTAjZHweSxxIm1AL/geYnYHFDvCAEo9v9B0o78UDoBTz4zUeWjwPij+yYarCFwV9BBCYXRGCxyxRL2sAXB8igVgwRLjCMLexIBf8FcYc3IUCs22lhXiMwPJrEqGs/LCxoDe4C08E9TdLKCnTAqcPA4Ewg/YOAExY1P4H2/qKC/eSC/cDy6gAQp2qRpg9WJoIwzH5tbQgmBdwG2n2HjDITZjeloEoHgYkFsLISZj+XDirGBzaxke9WbG4gFxAqr4l1A3o5SG75NVgBADbSRNU=
@@ -41,98 +41,98 @@
  <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
   <object id="114" template="../../../../../../common/maps/obj/entry_up.tx" x="300.842" y="317.718" width="48" height="16">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/barbariancamp/barbariancamp_kobold.tmx"/>
-    <property name="teleportObjectId" value="108"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/barbariancamp/barbariancamp_kobold.tmx" />
+    <property name="teleportObjectId" value="108" />
    </properties>
   </object>
-  <object id="115" template="../../../../../../common/maps/obj/gold.tx" x="315.713" y="81.5369"/>
+  <object id="115" template="../../../../../../common/maps/obj/gold.tx" x="315.713" y="81.5369" />
   <object id="141" template="../../../../../../common/maps/obj/treasure.tx" x="272.842" y="82.1053">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 1,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 4,
-  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
-  &quot;addMaxCount&quot;: 2
+  "type": "randomCard",
+  "count": 4,
+  "rarity": [ "uncommon" ],
+  "addMaxCount": 2
 }]</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="false" />
    </properties>
   </object>
   <object id="142" template="../../../../../../common/maps/obj/treasure.tx" x="100.176" y="78.4386">
    <properties>
     <property name="reward">[{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 1,
-  &quot;rarity&quot;: [ &quot;rare&quot; ],
-  &quot;colors&quot;: [ &quot;colorID&quot; ]
+  "type": "randomCard",
+  "count": 1,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
 },{
-  &quot;type&quot;: &quot;randomCard&quot;,
-  &quot;count&quot;: 4,
-  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
-  &quot;addMaxCount&quot;: 2
+  "type": "randomCard",
+  "count": 4,
+  "rarity": [ "uncommon" ],
+  "addMaxCount": 2
 }]</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="false" />
    </properties>
   </object>
   <object id="150" template="../../../../../../common/maps/obj/enemy.tx" x="307.842" y="123.772">
    <properties>
-    <property name="enemy" value="Curselord"/>
-    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="enemy" value="Curselord" />
+    <property name="spawn.Hard" type="bool" value="true" />
    </properties>
   </object>
   <object id="159" template="../../../../../../common/maps/obj/booster.tx" x="335.359" y="82.7761">
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;ICE&quot;, &quot;ALL&quot;, &quot;PTK&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    "editions": [ "ICE", "ALL", "PTK" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ICE&quot;, &quot;ALL&quot;, &quot;PTK&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    "editions": [ "ICE", "ALL", "PTK" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ICE&quot;, &quot;ALL&quot;, &quot;PTK&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+    "editions": [ "ICE", "ALL", "PTK" ],
+    "type": "card",
+    "count": 1,
+    "rarity": [ "Rare" ]
   }
 ]
 </property>
    </properties>
   </object>
-  <object id="160" template="../../../../../../common/maps/obj/manashards.tx" x="215.177" y="53.3151"/>
+  <object id="160" template="../../../../../../common/maps/obj/manashards.tx" x="215.177" y="53.3151" />
   <object id="161" template="../../../../../../common/maps/obj/enemy.tx" x="310.122" y="169.575">
    <properties>
-    <property name="enemy" value="Kobold Pyromancer"/>
-    <property name="threatRange" type="int" value="50"/>
-   </properties>
+    <property name="enemy" value="Kobold Pyromancer" />
+    <property name="threatRange" type="int" value="50" />
+   <property name="effect">{ "startBattleWithCard": [ "Fervor|WTH", "Mountain|BRB", "Smoke|LEA", "Sulfuric Vortex|SCG" ] }</property></properties>
   </object>
   <object id="162" template="../../../../../../common/maps/obj/enemy.tx" x="179.289" y="106.725">
    <properties>
-    <property name="enemy" value="Kobold Pyromancer"/>
-    <property name="threatRange" type="int" value="50"/>
-   </properties>
+    <property name="enemy" value="Kobold Pyromancer" />
+    <property name="threatRange" type="int" value="50" />
+   <property name="effect">{ "startBattleWithCard": [ "Fervor|WTH", "Mountain|BRB", "Smoke|LEA", "Sulfuric Vortex|SCG" ] }</property></properties>
   </object>
   <object id="163" template="../../../../../../common/maps/obj/enemy.tx" x="334.241" y="259.913">
    <properties>
-    <property name="enemy" value="Kobold Pyromancer"/>
-    <property name="threatRange" type="int" value="50"/>
-   </properties>
+    <property name="enemy" value="Kobold Pyromancer" />
+    <property name="threatRange" type="int" value="50" />
+   <property name="effect">{ "startBattleWithCard": [ "Fervor|WTH", "Mountain|BRB", "Smoke|LEA", "Sulfuric Vortex|SCG" ] }</property></properties>
   </object>
   <object id="164" template="../../../../../../common/maps/obj/enemy.tx" x="180.928" y="198.735">
    <properties>
-    <property name="enemy" value="Kobold Pyromancer"/>
-    <property name="threatRange" type="int" value="50"/>
-   </properties>
+    <property name="enemy" value="Kobold Pyromancer" />
+    <property name="threatRange" type="int" value="50" />
+   <property name="effect">{ "startBattleWithCard": [ "Fervor|WTH", "Mountain|BRB", "Smoke|LEA", "Sulfuric Vortex|SCG" ] }</property></properties>
   </object>
  </objectgroup>
 </map>

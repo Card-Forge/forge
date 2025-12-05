@@ -321,6 +321,8 @@ public enum CounterEnumType implements CounterType {
 
     PAIN("PAIN", 255, 108, 111),
 
+    PALLIATION("PALLI", 114, 243, 250),
+
     PARALYZATION("PRLYZ", 220, 201, 0),
 
     PETAL("PETAL", 255, 162, 216),

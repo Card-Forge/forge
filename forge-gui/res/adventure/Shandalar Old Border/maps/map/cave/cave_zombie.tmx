@@ -38,6 +38,7 @@
   <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="66.1099" y="156.843">
    <properties>
     <property name="enemy" value="Undead Goblin"/>
+   <property name="effect">{ "startBattleWithCard": [ "Goblin Burrows|ONS", "Dralnu's Crusade|PLS", "Marsh Goblins|DRK" ] }</property>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
