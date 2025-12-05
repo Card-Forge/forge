@@ -5,7 +5,6 @@ import com.google.common.collect.Sets;
 import forge.ai.*;
 import forge.game.Game;
 import forge.game.GameObject;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
