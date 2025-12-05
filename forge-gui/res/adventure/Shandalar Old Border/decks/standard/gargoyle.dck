@@ -1,15 +1,21 @@
 [metadata]
-Name=gargoyle
+Name=Gargoyle Tribal
 [Main]
-2 Worship|7ED
-25 Plains|USG|2
-3 Disenchant|USG
-3 Pacifism|USG
-4 Angelic Page|BRB
-4 Angelic Renewal|WTH
-4 Marble Diamond|7ED
+12 Plains|USG
+6 Island|USG
+4 Coastal Tower|INV
+2 Sky Diamond|MIR
+2 Marble Diamond|MIR
+2 Worship|USG
 4 Opal Gargoyle|USG
-4 Pegasus Charger|ATH
-4 Radiant's Judgment|ULG
-4 Sanctum Guardian|USG
-4 Serra's Embrace|USG
+4 Abbey Gargoyles|HML
+2 Harbor Guardian|MIR
+2 Ivory Gargoyle|ALL
+4 Leering Gargoyle|MIR
+4 Pacifism|USG
+4 Disenchant|ICE
+2 Opal Archangel|USG
+1 Opal Titan|USG
+2 Teferi's Moat|INV
+2 Wrath of God|POR
+4 Angelic Shield|INV

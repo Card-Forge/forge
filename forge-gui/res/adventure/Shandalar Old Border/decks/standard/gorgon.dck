@@ -1,27 +1,17 @@
 [metadata]
-Name=gorgon
+Name=Gorgon - Medusa Control
 [Main]
-1 Carrion Feeder|SCG
-1 Giant Growth|4ED
-1 Lure|5ED
-1 Visara the Dreadful|ONS
-1 Yavimaya Coast|APC
-2 Bad Moon|4ED
-2 Island|4ED|3
-2 Petrified Field|ODY
-2 Raise Dead|4ED
-2 Snake Basket|VIS
-2 Snake Pit|MMQ
-2 Tainted Wood|TOR
-2 Underground River|ICE
-2 Verdant Force|TMP
-2 Visara the Dreadful|ONS
-3 Animate Dead|5ED
-3 Carrion Feeder|SCG
-3 Giant Growth|4ED
-3 Lure|5ED
-3 Mystic Snake|APC
-4 Dark Ritual|4ED
-4 Llanowar Wastes|APC
-8 Forest|4ED|3
-8 Swamp|4ED|3
+20 Swamp|ONS
+4 Mind Stone|WTH
+4 Dark Ritual|MMQ
+4 Infernal Medusa|LEG
+4 Masked Gorgon|JUD
+3 Visara the Dreadful|ONS
+3 Snake Basket|VIS
+2 Worn Powerstone|USG
+4 Serpent Assassin|POR
+2 Decree of Pain|SCG
+2 Dirge of Dread|ONS
+2 Dregs of Sorrow|7ED
+2 Infest|ONS
+4 Stupor|MIR

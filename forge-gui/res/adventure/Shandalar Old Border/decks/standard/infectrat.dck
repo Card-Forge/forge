@@ -1,15 +1,7 @@
 [metadata]
-Name=infectrat
+Name=Wild Rat - Plague Rats
 [Main]
-2 Corrupt|7ED
-2 Demonic Tutor|LEA
-2 Disease Carriers|UDS
-24 Swamp|LEA|2
-4 Bad Moon|LEA
-4 Bog Rats|6ED
-4 Crypt Rats|VIS
-4 Dark Ritual|LEA
-4 Drain Life|LEA
-4 Hymn to Tourach|FEM
-4 Plague Rats|4ED
-4 Raise Dead|LEA
+20 Swamp|LEA
+8 Dark Ritual|LEA
+2 Intimidation|MMQ
+30 Plague Rats|LEA

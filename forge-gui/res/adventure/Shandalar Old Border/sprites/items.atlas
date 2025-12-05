@@ -909,3 +909,10 @@ CopperAngelsAmulet
 AegisOfTheMeek
   xy: 240, 656
   size: 16, 16
+WaterOfYouth
+  rotate: false
+  xy: 192, 928
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1

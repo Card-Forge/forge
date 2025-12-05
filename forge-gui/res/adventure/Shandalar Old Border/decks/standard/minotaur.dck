@@ -1,30 +1,16 @@
 [metadata]
-Name=minotaur
+Name=Minotaur Flayer - Minotaur Tribal
 [Main]
-1 Coastal Tower|INV
-1 Decree of Justice|SCG
-1 Faerie Conclave|ULG
-1 Grand Coliseum|ONS
-1 Treetop Village|ULG
-1 Treva's Ruins|PLS
-1 Triskelion|4ED
-1 Windswept Heath|ONS
-1 Wrath of God|2ED
-2 Adarkar Wastes|5ED
-2 Brushland|5ED
-2 Disenchant|2ED
-2 Gaea's Blessing|WTH
-2 Mana Leak|BRB
-2 Mox Diamond|STH
-2 Reflecting Pool|TMP
-2 Sylvan Library|4ED
-3 Flooded Strand|ONS
-3 Forest|2ED|2
-3 Plains|2ED|2
-3 Yavimaya Coast|APC
-4 Counterspell|2ED
-4 Fact or Fiction|INV
-4 Impulse|BTD
-4 Oath of Druids|EXO
-4 Swords to Plowshares|2ED
-6 Island|2ED|2
+16 Mountain|PO2
+4 Shivan Reef|APC
+4 Maze of Ith|DRK
+8 Anaba Spirit Crafter|HML
+4 Hurloon Minotaur|LEA
+2 Minotaur Illusionist|APC
+2 Tahngarth, Talruum Hero|PLS
+4 Talruum Champion|VIS
+4 Talruum Piper|VIS
+2 Hurloon Shaman|WTH
+2 Anaba Shaman|HML
+4 Lightning Bolt|LEA
+4 Lightning Blast|TMP

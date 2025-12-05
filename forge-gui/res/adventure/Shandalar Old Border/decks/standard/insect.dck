@@ -1,16 +1,18 @@
 [metadata]
-Name=insect_toxic
+Name=Dragonfly Swamp
 [Main]
-16 Forest|USG|3
-4 Brood of Cockroaches|VIS
-4 Creeping Mold|VIS
-4 Crypt Rats|VIS
-4 Elven Cache|VIS
-4 Emerald Charm|VIS
-4 Llanowar Wastes|APC
-4 Natural Order|VIS
-4 Quirion Elves|MIR
-4 Quirion Ranger|VIS
-4 Uktabi Wildcats|6ED
-4 Vampiric Tutor|VIS
-5 Swamp|USG|3
+10 Forest|MIR
+6 Swamp|MIR
+4 Pine Barrens|TMP
+4 Evil Presence|5ED
+4 Bayou Dragonfly|LEG
+2 Emerald Dragonfly|LEG
+2 Venomous Dragonfly|MMQ
+4 Fertile Ground|USG
+4 Swamp Mosquito|ALL
+4 Suq'Ata Assassin|VIS
+2 Filth|JUD
+2 Funeral Charm|VIS
+4 Whip Vine|ALL
+4 Fog|MIR
+4 Dark Banishing|MIR
