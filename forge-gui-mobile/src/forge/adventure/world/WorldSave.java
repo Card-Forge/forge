@@ -1,5 +1,7 @@
 package forge.adventure.world;
 
+import java.util.Arrays;
+
 import forge.adventure.data.DifficultyData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterest;
@@ -78,16 +80,21 @@ public class WorldSave {
                     WorldStage.getInstance().load(mainData.readSubData("worldStage"));
 
                 } catch (Exception e) {
-                    System.err.println("Generating New World");
-                    if (!currentSave.world.generateNew(0))
-                        return false;
+                    System.err.println("Error loading save file: " + e.getMessage());
+                    System.err.println("Stack trace: " + Arrays.toString(e.getStackTrace()));
+                    return false;
+
+//                    System.err.println("Generating New World");
+//                    if (!currentSave.world.generateNew(0))
+//                        return false;
                 }
 
                 currentSave.onLoadList.emit();
 
             }
         } catch (ClassNotFoundException | IOException e) {
-            e.printStackTrace();
+            System.err.println("Error loading save file: " + e.getMessage());
+            System.err.println("Stack trace: " + Arrays.toString(e.getStackTrace()));
             return false;
         }
         return true;

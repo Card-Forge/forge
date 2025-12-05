@@ -1,9 +1,11 @@
 package forge.adventure.pointofintrest;
 
+import com.badlogic.gdx.utils.Json;
 import forge.adventure.util.SaveFileContent;
 import forge.adventure.util.SaveFileData;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -88,9 +90,17 @@ public class PointOfInterestMap implements SaveFileContent {
                 int arraySize=data.readInt("mapObjects["+x +"]["+y+"]");
                 for(int i=0;i<arraySize;i++)
                 {
-                    PointOfInterest pointsOfInterest=new PointOfInterest();
-                    pointsOfInterest.load(data.readSubData("mapObjects["+x +"]["+y+"]["+i+"]"));
-                    mapObjects[x][y].add(pointsOfInterest);
+                    PointOfInterest pointOfInterest=new PointOfInterest();
+                    SaveFileData saveFileData=data.readSubData("mapObjects[" + x + "][" + y + "][" + i + "]");
+                    try {
+                        pointOfInterest.load(saveFileData);
+                        mapObjects[x][y].add(pointOfInterest);
+                    } catch (Exception e) {
+                        Json json = new Json();
+                        System.err.println(json.toJson(saveFileData));
+                        System.err.println("Error loading point of interest: " + e.getMessage());
+                        System.err.println("Stack trace: " + Arrays.toString(e.getStackTrace()));
+                    }
                 }
             }
         }
@@ -110,7 +120,15 @@ public class PointOfInterestMap implements SaveFileContent {
                 data.store("mapObjects["+x +"]["+y+"]",mapObjects[x][y].size());
                 for(int i=0;i<mapObjects[x][y].size();i++)
                 {
-                    data.store("mapObjects["+x +"]["+y+"]["+i+"]",mapObjects[x][y].get(i).save());
+                    PointOfInterest poi = mapObjects[x][y].get(i);
+                    try {
+                        data.store("mapObjects["+x +"]["+y+"]["+i+"]", poi.save());
+                    } catch (Exception e) {
+                        Json json = new Json();
+                        System.err.println(json.toJson(poi));
+                        System.err.println("Error saving point of interest: " + e.getMessage());
+                        System.err.println("Stack trace: " + Arrays.toString(e.getStackTrace()));
+                    }
                 }
             }
         }
