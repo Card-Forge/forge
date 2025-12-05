@@ -1,0 +1,11 @@
+Name:Char-Dog
+ManaCost:2 R
+Types:Artifact Creature Dog Food
+PT:1/1
+K:Protection from red
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBFourDamage | TriggerDescription$ When this creature enters, it deals 4 damage to any target and 2 damage to you.
+SVar:DBFourDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | DamageMap$ True | SubAbility$ DBTwoDamage
+SVar:DBTwoDamage:DB$ DealDamage | Defined$ You | NumDmg$ 2 | SubAbility$ DBDamageResolve
+SVar:DBDamageResolve:DB$ DamageResolve
+A:AB$ GainLife | Cost$ G T Sac<1/CARDNAME/this creature> | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+Oracle:Protection from red\nWhen this creature enters, it deals 4 damage to any target and 2 damage to you.\n{G}, {T}, Sacrifice this creature: You gain 3 life.
