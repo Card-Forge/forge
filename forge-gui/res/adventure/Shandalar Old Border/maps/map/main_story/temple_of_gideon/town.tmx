@@ -462,13 +462,6 @@
     <property name="type" value="dialog" />
    </properties>
   </object>
-  <object id="279" template="../../../../../../../common/maps/obj/portal.tx" x="864" y="32">
-   <properties>
-    <property name="portalState" value="active" />
-    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/temple_of_liliana/keep.tmx" />
-    <property name="teleportObjectId" value="239" />
-   </properties>
-  </object>
   <object id="280" template="../../../../../../../common/maps/obj/booster.tx" x="544" y="32">
    <properties>
     <property name="reward">[
