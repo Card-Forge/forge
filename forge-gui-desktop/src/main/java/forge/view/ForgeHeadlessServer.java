@@ -56,9 +56,13 @@ public class ForgeHeadlessServer {
     private static final int DECK_SIZE_SMALL = 20;
 
     private static volatile Game currentGame = null;
+    private static volatile Thread currentGameThread = null;
     private static final BlockingQueue<String> ACTION_QUEUE = new LinkedBlockingQueue<>();
     private static final AtomicReference<JsonObject> LAST_GAME_STATE = new AtomicReference<>(new JsonObject());
     private static volatile boolean waitingForInput = false;
+    private static volatile boolean shouldStopGame = false;
+    private static volatile Deck player1InitialDeck = null;
+    private static volatile Deck player2InitialDeck = null;
 
     /**
      * Main entry point.
@@ -170,43 +174,137 @@ public class ForgeHeadlessServer {
      * @param options Configuration options for the new game (e.g. decks).
      */
     private static void resetGame(final JsonObject options) {
-        // Stop existing game if any
+        // Stop existing game and thread if any
         if (currentGame != null) {
-            // Logic to stop game?
-            currentGame = null;
+            System.out.println("Stopping existing game...");
+            shouldStopGame = true;
+            
+            try {
+                // Wait for the old game thread to finish (with timeout)
+                if (currentGameThread != null && currentGameThread.isAlive()) {
+                    System.out.println("Waiting for old game thread to finish...");
+                    currentGameThread.join(2000); // Wait up to 2 seconds
+                    if (currentGameThread.isAlive()) {
+                        System.err.println("Old game thread didn't finish, interrupting...");
+                        currentGameThread.interrupt();
+                    }
+                }
+            } catch (Exception e) {
+                System.err.println("Error stopping game: " + e.getMessage());
+                e.printStackTrace();
+            }
         }
+        
+        // Clear everything - INCLUDING LAST_GAME_STATE to avoid returning stale observations
+        currentGame = null;
+        currentGameThread = null;
         ACTION_QUEUE.clear();
+        LAST_GAME_STATE.set(new JsonObject()); // CRITICAL: Clear old game state!
+        waitingForInput = false;
+        shouldStopGame = false;
+
+        System.out.println("Starting new game thread...");
+
+        // Generate decks BEFORE starting the thread
+        // This ensures we fail fast if deck generation fails
+        Deck deck1 = null;
+        Deck deck2 = null;
+
+        // Check for custom decks in options
+        // TODO: Implement parsing of custom deck lists from JSON
+
+        // Default to Random Standard Decks if not provided
+        if (deck1 == null) {
+            System.out.println("Generating Random Standard Deck for Player 1...");
+            deck1 = generateRandomStandardDeck();
+        }
+        if (deck2 == null) {
+            System.out.println("Generating Random Standard Deck for Player 2...");
+            deck2 = generateRandomStandardDeck();
+        }
+
+        final Deck finalDeck1 = deck1;
+        final Deck finalDeck2 = deck2;
+        
+        // Store the initial decks so we can include them in the observation
+        player1InitialDeck = finalDeck1;
+        player2InitialDeck = finalDeck2;
 
         // Start a new game thread
-        new Thread(() -> {
-            System.out.println("Starting new game thread...");
+        currentGameThread = new Thread(() -> {
+            try {
+                final List<RegisteredPlayer> players = new ArrayList<>();
+                players.add(new RegisteredPlayer(finalDeck1).setPlayer(new ServerPlayer("Player 1")));
+                players.add(new RegisteredPlayer(finalDeck2).setPlayer(new forge.ai.LobbyPlayerAi("AI Player 2", null)));
 
-            Deck deck1 = null;
-            Deck deck2 = null;
-
-            // Check for custom decks in options
-            // TODO: Implement parsing of custom deck lists from JSON
-
-            // Default to Random Standard Decks if not provided
-            if (deck1 == null) {
-                System.out.println("Generating Random Standard Deck for Player 1...");
-                deck1 = generateRandomStandardDeck();
+                final GameRules rules = new GameRules(GameType.Constructed);
+                final Match match = new Match(rules, players, "Server Match");
+                
+                // Create the game - this is synchronous
+                currentGame = match.createGame();
+                System.out.println("Game created! Starting match...");
+                
+                // Start the game - this will block until game is over
+                match.startGame(currentGame);
+                System.out.println("Match finished");
+            } catch (Exception e) {
+                System.err.println("Error in game thread: " + e.getMessage());
+                e.printStackTrace();
             }
-            if (deck2 == null) {
-                System.out.println("Generating Random Standard Deck for Player 2...");
-                deck2 = generateRandomStandardDeck();
+        });
+        currentGameThread.start();
+        
+        // STEP 1: Wait for the new game to actually be created
+        System.out.println("Waiting for new game object to be created...");
+        int waited = 0;
+        while (currentGame == null && waited < 5000) {
+            try {
+                Thread.sleep(50);
+                waited += 50;
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;
             }
-
-            final List<RegisteredPlayer> players = new ArrayList<>();
-            players.add(new RegisteredPlayer(deck1).setPlayer(new ServerPlayer("Player 1")));
-            players.add(new RegisteredPlayer(deck2).setPlayer(new forge.ai.LobbyPlayerAi("AI Player 2", null)));
-
-            final GameRules rules = new GameRules(GameType.Constructed);
-            final Match match = new Match(rules, players, "Server Match");
-            currentGame = match.createGame();
-
-            match.startGame(currentGame);
-        }).start();
+        }
+        
+        if (currentGame == null) {
+            throw new RuntimeException("Failed to create new game within timeout!");
+        }
+        
+        System.out.println("Game object created, now waiting for Turn 1...");
+        
+        // STEP 2: Wait for the new game to reach Turn 1
+        // This ensures we don't return with stale state or Turn 0
+        waited = 0;
+        int maxWaitForTurn1 = 10000; // 10 seconds
+        while (waited < maxWaitForTurn1) {
+            try {
+                if (currentGame != null && 
+                    currentGame.getPhaseHandler() != null) {
+                    int turn = currentGame.getPhaseHandler().getTurn();
+                    if (turn >= 1) {
+                        System.out.println("New game reached Turn " + turn + "! Reset complete.");
+                        break;
+                    }
+                }
+                Thread.sleep(100);
+                waited += 100;
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;
+            } catch (Exception e) {
+                // Ignore exceptions during transition
+            }
+        }
+        
+        // STEP 3: Give the game a moment to stabilize and update state
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        
+        System.out.println("New game is ready and initialized!");
     }
 
     private static Deck generateRandomStandardDeck() {
@@ -216,19 +314,23 @@ public class ForgeHeadlessServer {
             for (int i = 1; i <= count; i++) {
                 colors.add("Random " + i);
             }
-            return DeckgenUtil.buildColorDeck(colors, FModel.getFormats().getStandard().getFilterPrinted(), true);
-        } catch (Exception e) {
-            System.err.println("Error generating random deck: " + e.getMessage());
-            e.printStackTrace();
-            // Fallback to simple deck
-            final Deck deck = new Deck("Fallback Deck");
-            for (int i = 0; i < DECK_SIZE_SMALL; i++) {
-                deck.getMain().add(FModel.getMagicDb().getCommonCards().getCard("Mountain"));
+            Deck deck = DeckgenUtil.buildColorDeck(colors, FModel.getFormats().getStandard().getFilterPrinted(), true);
+            
+            // Validate the deck was actually generated with cards
+            if (deck == null || deck.getMain().isEmpty()) {
+                throw new RuntimeException("Generated deck is null or empty!");
             }
-            for (int i = 0; i < DECK_SIZE_SMALL; i++) {
-                deck.getMain().add(FModel.getMagicDb().getCommonCards().getCard("Shock"));
-            }
+            
+            System.out.println("Successfully generated random deck with " + deck.getMain().countAll() + " cards");
             return deck;
+        } catch (Exception e) {
+            // FAIL LOUD - Don't hide deck generation failures!
+            System.err.println("FATAL ERROR: Failed to generate random deck!");
+            System.err.println("Error: " + e.getMessage());
+            e.printStackTrace();
+            
+            // Throw the exception to make the problem visible
+            throw new RuntimeException("Deck generation failed - cannot start game without valid decks!", e);
         }
     }
 
@@ -394,6 +496,62 @@ public class ForgeHeadlessServer {
     }
 
     /**
+     * Helper method to convert a Deck to JSON representation.
+     * Returns an array of objects with card name and count.
+     * 
+     * @param deck The deck to serialize
+     * @return JsonArray containing card information
+     */
+    private static JsonArray deckToJson(final Deck deck) {
+        final JsonArray deckArray = new JsonArray();
+        if (deck == null) {
+            return deckArray;
+        }
+        
+        try {
+            // Get the main deck cards
+            final forge.deck.CardPool mainDeck = deck.getMain();
+            if (mainDeck != null) {
+                for (final java.util.Map.Entry<forge.item.PaperCard, Integer> entry : mainDeck) {
+                    final JsonObject cardInfo = new JsonObject();
+                    final forge.item.PaperCard card = entry.getKey();
+                    cardInfo.addProperty("name", card.getName());
+                    cardInfo.addProperty("count", entry.getValue());
+                    
+                    // Add card's ability text (oracle text)
+                    try {
+                        if (card.getRules() != null) {
+                            final String oracleText = card.getRules().getOracleText();
+                            if (oracleText != null && !oracleText.isEmpty()) {
+                                cardInfo.addProperty("text", oracleText);
+                            }
+                            
+                            // Also add mana cost for reference
+                            if (card.getRules().getManaCost() != null) {
+                                cardInfo.addProperty("mana_cost", card.getRules().getManaCost().toString());
+                            }
+                            
+                            // Add card type
+                            if (card.getRules().getType() != null) {
+                                cardInfo.addProperty("type", card.getRules().getType().toString());
+                            }
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Error getting card details for " + card.getName() + ": " + e.getMessage());
+                    }
+                    
+                    deckArray.add(cardInfo);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error serializing deck to JSON: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        return deckArray;
+    }
+
+    /**
      * Updates the last known game state for external clients.
      * 
      * @param game The game instance to update from.
@@ -406,6 +564,15 @@ public class ForgeHeadlessServer {
                 state.addProperty("phase", game.getPhaseHandler().getPhase().toString());
             } else {
                 state.addProperty("phase", "SETUP");
+            }
+            
+            // Include deck information in the initial observation
+            // This helps the agent know what cards they're playing with
+            // Only send Player 1's deck (the agent) - don't leak opponent's deck!
+            if (game.getPhaseHandler().getTurn() == 1 && player1InitialDeck != null) {
+                final JsonObject deckInfo = new JsonObject();
+                deckInfo.add("player1_deck", deckToJson(player1InitialDeck));
+                state.add("initial_decks", deckInfo);
             }
 
             if (game.isGameOver()) {
