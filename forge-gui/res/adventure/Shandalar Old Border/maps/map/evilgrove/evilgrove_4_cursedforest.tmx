@@ -74,9 +74,8 @@
   </object>
   <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="153" y="516">
    <properties>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Discordant Dirge|USG&quot; ] }" />
     <property name="enemy" value="Fallen Angel" />
-   <property name="effect">{ "startBattleWithCard": [ "Fallen Angel|LEG" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Discordant Dirge|USG", "Fallen Angel|LEG" ] }</property>
     <property name="threatRange" type="int" value="60" />
    </properties>
   </object>

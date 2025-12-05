@@ -1,23 +1,21 @@
 [metadata]
-Name=fallen_angel
+Name=Fallen Angel - Aristocrats
 [Main]
-1 Angel of Retribution|TOR
-1 Brushland|ICE
-1 Forest|2ED|3
-10 Swamp|2ED|3
-2 Black Knight|2ED
-2 Corrupt|USG
-2 Deathgrip|LEB
-2 Fallen Angel|CHR
-2 Hymn to Tourach|ATH
-2 Llanowar Wastes|APC
-2 Phyrexian Negator|UDS
-2 Plains|2ED|3
-2 Reanimate|TMP
-2 Serra Angel|7ED
-2 Swords to Plowshares|LEA
-2 Vampiric Tutor|6ED
-4 Caves of Koilos|APC
-4 City of Brass|ARN
-4 Dark Ritual|2ED
-4 Llanowar Elves|3ED
+22 Swamp|6ED
+2 Cabal Coffers|TOR
+4 Fallen Angel|6ED
+2 Black Market|MMQ
+2 Grave Pact|STH
+4 Sengir Autocrat|HML
+2 Expunge|USG
+2 Dark Offering|PO2
+2 Infernal Genesis|PCY
+2 Tombstone Stairwell|MIR
+4 Rotlung Reanimator|ONS
+4 Doomed Necromancer|ONS
+4 Priest of Gix|USG
+4 Will-o'-the-Wisp|LEA
+
+[StartInBattle_Reference]
+1 Discordant Dirge|USG
+1 Fallen Angel|LEG

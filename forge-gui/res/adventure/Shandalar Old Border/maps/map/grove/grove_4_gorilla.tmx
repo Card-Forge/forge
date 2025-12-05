@@ -44,7 +44,7 @@
   <object id="62" template="../../../../../../common/maps/obj/enemy.tx" x="195.864" y="101.5">
    <properties>
     <property name="displayNameOverride" value="Kogla" />
-    <property name="effect">{"startBattleWithCard": ["Forest|2ED", "Mountain|USG", "Treetop Village|ULG", "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL"]}</property>
+    <property name="effect">{"startBattleWithCard": ["Concordant Crossroads|CHR", "Forest|USG", "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL", "Monkey Cage|MMQ", "Mountain|USG", "Treetop Village|ULG", "Treetop Village|ULG"]}</property>
     <property name="enemy" value="Gorilla" />
     <property name="speedModifier" type="float" value="40" />
     <property name="threatRange" type="int" value="50" />

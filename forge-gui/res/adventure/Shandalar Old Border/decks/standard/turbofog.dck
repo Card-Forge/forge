@@ -1,20 +1,17 @@
 [metadata]
-Name=turbofog
+Name=Turbofog Mill
 [Main]
-2 Skyshroud Forest|TMP
-2 Sunstone|ICE
-2 Wild Mongrel|ODY
-2 Wooded Foothills|ONS
-2 Wrath of God|3ED
-3 Forest|ODY
-4 Aven Cloudchaser|ODY
-4 Brushland|ICE
-4 Life Burst|ODY
-4 Mirari|ODY
+8 Forest|7ED
+8 Plains|7ED
+4 Elfhame Palace|INV
+4 Howling Mine|7ED
+4 Peace Talks|VIS
+4 Holy Day|LEG
 4 Moment's Peace|ODY
 4 Orim's Chant|PLS
-4 Peace Talks|VIS
-4 Seton's Desire|ODY
-4 Temple of the False God|SCG
-4 Tranquil Thicket|ONS
-7 Plains|ODY
+4 Constant Mists|STH
+4 Fog|LEA
+4 Tangle|INV
+4 Millstone|7ED
+2 Ensnaring Bridge|STH
+2 Horn of Greed|STH

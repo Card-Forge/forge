@@ -1,16 +1,16 @@
 [metadata]
-Name=werewolf
+Name=Werewolf - BG Werewolves
 [Main]
-10 Mountain|ODY
-2 Frenzied Tilling|INV
-2 Shivan Dragon|LEB
-4 Beast Attack|ODY
-4 Karplusan Forest|ICE
-4 Keldon Vandals|UDS
-4 Lightning Dart|INV
-4 Mogg Fanatic|TMP
-4 Sonic Seizure|TOR
-4 Thunderscape Battlemage|PLS
+10 Forest|ODY
+10 Swamp|ODY
+4 Tainted Wood|TOR
 4 Werebear|ODY
-4 Wild Mongrel|ODY
-9 Forest|ODY
+4 Lesser Werewolf|LEG
+4 Greater Werewolf|HML
+4 Treacherous Werewolf|JUD
+4 Consume Strength|APC
+4 Beast Attack|ODY
+4 Mulch|STH
+4 Sylvan Might|ODY
+2 Fatal Blow|WTH
+2 Reckless Spite|TMP
