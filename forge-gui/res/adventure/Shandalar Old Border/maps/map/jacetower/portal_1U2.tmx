@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="86">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYGBg2MWDHSMDYtSMglEwmIEsNL1K0zndjtpLXzBQ9g4kILZMHi5lN7F+GA5+pQTgyosAE8QSvA==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy9lE0OgjAQRtk0yoKfkHAtlx6JpWdwjyhcgr0sOI8zoV8yNlNKpGLykpZW3tcBpj8lyUDcUp3r2U9B/3sQ/Y+0RKm4cX9fptcOp88dcsby9k69Q869NZa8zXLmLc6J9s4mjnftWbvnnCN74a7s+E6MZplXEWsbAt4jXEd6M+JC71Muxsw/vex5EjXRiTEYA++QzKyta9czxaPBPYLd2N+JmvC8SZdruZNF7pX+YYOzts8ZaOv8Q20A1jiTzMX58b2GvHwfn1PL51tfcxdi3thegT6xlnHrPtnX0SuYyXzP0Z/cfaXI5fYUXx1j9PVW8YFZZJc9D2f4APjWF9I=
+  </data>
+ </layer>
+ <layer id="7" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAevOJgYHjDQYIGKgGQvZ2c9Le7gxNirwYXfe1V46K/nSMBtDAOtAtGAT3AT2b62AMql15Dy0R6lU2wslCdC0J3cULEf0P9/AuL35HLbXR1xJbpyGUSMeUTzJ241HUguZ2agJDbRmrZGoeWLgCHJRrD
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYECAXC4GDHCWHZVfwguhPTCVkg1gZoKAqyADg5MgxF4QGx3kYXEjpQBkpgHQvslsDAznobQRkHbGYj81AcyfjlDaBYkPAmW8+PWTCuQFGBgUBCDsbA4GBgeofSB/gvi0AtZAO22g9sLCFJauQGEgC5STE6Cd/SAAs+MVO4JtCcRWNLYXZgfIXnrYhw5esRNWM5zspQcoRcuXpJRJ2MpYWgBY2VFCoAwhRh1MDtntMH0b2CCYEMCljlrlOTHm0CvsCQFCcUJtgC0vAgAvvCJz
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="83" template="../../../../../../common/maps/obj/door_down.tx" x="128" y="16.6667">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/jacetower/portal_1U.tmx" />
+    <property name="teleportObjectId" value="76" />
+   </properties>
+  </object>
+  <object id="84" template="../../../../../../common/maps/obj/door_up.tx" x="402" y="270.667">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/jacetower/portal_1U3.tmx" />
+    <property name="teleportObjectId" value="85" />
+   </properties>
+  </object>
+  <object id="85" template="../../../../../../common/maps/obj/enemy.tx" x="328.022" y="216.915">
+   <properties>
+    <property name="enemy" value="Djinn" />
+   <property name="effect">{"startBattleWithCard": ["Island|LEA", "Mountain|ARN", "Swamp|LEA", "Aladdin's Lamp|ARN", "Keeper of Kookus|VIS"]}</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

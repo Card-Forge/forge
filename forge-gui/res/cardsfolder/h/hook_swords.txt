@@ -1,0 +1,10 @@
+Name:Hook Swords
+ManaCost:2 RW
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this Equipment enters, create a 1/1 white Ally creature token, then attach this Equipment to it.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_ally | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ During your turn, equipped creature gets +1/+1 and has first strike.
+K:Equip:3
+Oracle:When this Equipment enters, create a 1/1 white Ally creature token, then attach this Equipment to it.\nDuring your turn, equipped creature gets +1/+1 and has first strike.\nEquip {3}

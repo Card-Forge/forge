@@ -428,6 +428,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 game.getTriggerHandler().runTrigger(TriggerType.AbilityCast, runParams, true);
             }
 
+            if (sp.getMaxWaterbend() != null) {
+                activator.triggerElementalBend(TriggerType.Waterbend);
+            }
+
             // Run Cycled triggers
             if (sp.isCycling()) {
                 activator.addCycled(sp);

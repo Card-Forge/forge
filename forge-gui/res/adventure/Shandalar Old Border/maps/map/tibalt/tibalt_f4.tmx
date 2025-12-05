@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="22" height="21" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="177">
+ <editorsettings>
+  <export format="tmx" />
+ </editorsettings>
+ <properties>
+  <property name="canFailDungeon" type="bool" value="true" />
+  <property name="preventEscape" type="bool" value="true" />
+ </properties>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx" />
+ <tileset firstgid="22017" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx" />
+ <layer id="16" name="Collision" width="22" height="21">
+  <data encoding="base64" compression="zlib">
+   eJxjYBhY4MaJwJTqJ4RJNdeEjzAmx1xK/EWpuaTqHWhzsakjZC6yPIyNLkZO+OJSR0k6QzcHn93UNpeQHDnm0jIcCMkNBnOR/U6Nsg2fHdQ2FxufEnPx2UMNc6mRzsitLwAC3x8G
+  </data>
+ </layer>
+ <layer id="15" name="Background" width="22" height="21">
+  <data encoding="base64" compression="zlib">
+   eJxjYBhY4MaJwJTqJ4RJNRcEEkVwY2R15Jh7VBgTI5tLih/QzUUG6Obi0kuJufj0EmMuvnAg11wYhpmHHm+khi+6Olh4UJLOsLk9WQQTU8tcdPNHzaWuuSZ8EAxjU8NcEICZSU33jpqLai46xgcAXgw/JA==
+  </data>
+ </layer>
+ <layer id="14" name="Ground" width="22" height="21">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAOnPkow7gAtc1lEiUOE7IbGzgqjNsfyPLkmtvIz8DQhISb+VHlFQQgGOR+EI1sFz5z5QUQekFYUQBVHkQj44E2dy/QnH1ArAql91PJXBBoEWdgUBKA0Mjyc6BpAhauMIDPXFg8gDDIDCUojZ7WyMkX6G7HlvZGzaUc0NrcY8KYmBoAmznnpRF4KJhLDYBs7npR2thBDAAAhGFUqw==
+  </data>
+ </layer>
+ <layer id="13" name="Foreground" width="22" height="21">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxz42RgcMOCKQXYzKSFuYyiDAxMQJwoycCQBMTJQJyCBTOLIsx4J0bY3PlA9VxSDAz/gXoZgDQjEDNhwQuRzO0RJ85cYsAcqL9AGGQuiEb2A6nmJotAaGzqFhJhLkw/LnDQhTxzaeHet1jiFxmwqaGGLwzbI+lDN9cWKmcnhhoPIHBDDKIfJDePgL9w5QvkMFESQNXTIo7qZ2qZCwLUNvcfML+oSNDWvfj0DqS5BwQQ5ZGyC4SeR6G52yUgGDk8YemB2uZSIxyQzVWToJ65MDY1zQXlaTsotkZigzCoLMCnFwAyyG7i
+  </data>
+ </layer>
+ <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
+  <object id="140" template="../../../../../../common/maps/obj/treasure.tx" x="240.675" y="89.0923">
+   <properties>
+    <property name="reward">[{
+  "type": "randomCard",
+  "count": 1,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
+},{
+  "type": "randomCard",
+  "count": 4,
+  "rarity": [ "uncommon" ],
+  "addMaxCount": 2
+}]</property>
+    <property name="spawn.Hard" type="bool" value="false" />
+   </properties>
+  </object>
+  <object id="150" template="../../../../../../common/maps/obj/enemy.tx" x="141.842" y="91.272">
+   <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Anvil of Bogardan|VIS", "Charcoal Diamond|MIR", "Fire Diamond|MIR", "Megrim|STH" ] }</property>
+    <property name="enemy" value="Tibalt" />
+    <property name="reward">[
+  {
+    "type": "item",
+    "probability": 1,
+    "count": 1,
+    "itemName": "Tibalt's Key"
+  }
+]
+</property>
+    <property name="spawn.Easy" type="bool" value="true" />
+    <property name="spawn.Hard" type="bool" value="true" />
+   </properties>
+  </object>
+  <object id="166" template="../../../../../../common/maps/obj/manashards.tx" x="275.818" y="86.5449" />
+  <object id="167" template="../../../../../../common/maps/obj/booster.tx" x="242.398" y="116.332">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="168" template="../../../../../../common/maps/obj/gate.tx" gid="3221229597" x="226.93" y="108.325" width="9.99747" height="21.9971" rotation="90.4687">
+   <properties>
+    <property name="dialog">[{
+    "text":"This door is locked",
+    "options":[
+    { "name":"go away" },
+    {      
+        "name":"unlock with Tibalt's Key",     
+        "condition":[{"item":"Tibalt's Key"}],    
+        "text":"The gate is unlocked",
+        "options":[{"name":"continue", "action":[ {"deleteMapObject":-1},{"removeItem":"Tibalt's Key"}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="170" template="../../../../../../common/maps/obj/door_down.tx" x="124.811" y="303.18" width="32.3503" height="30.8105" rotation="0.284412">
+   <properties>
+    <property name="direction" value="up" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt_f3.tmx" />
+    <property name="teleportObjectId" value="198" />
+   </properties>
+  </object>
+  <object id="174" template="../../../../../../common/maps/obj/door_down.tx" x="261.1" y="80.3289" width="32.3503" height="30.8105" rotation="0.284412">
+   <properties>
+    <property name="direction" value="down" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt_f0.tmx" />
+    <property name="teleportObjectId" value="176" />
+   </properties>
+  </object>
+  <object id="175" template="../../../../../../common/maps/obj/portal.tx" x="174.951" y="164.293">
+   <properties>
+    <property name="activeQuestFlag" value="TibaltPortal" />
+    <property name="portalState" value="inactive" />
+    <property name="sprite" value="sprites/portal3.atlas" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt.tmx" />
+    <property name="teleportObjectId" value="222" />
+   </properties>
+  </object>
+  <object id="176" template="../../../../../../common/maps/obj/dialog.tx" x="115.291" y="237.614" width="115.864" height="96.0731">
+   <properties>
+    <property name="dialog">[
+  {
+    "text": "A low, haunting melody plays in the background, emanating from unseen sources. The sound seems to echo from the very walls, creating an unsettling ambiance that adds to the sense of foreboding. Strange artifacts and arcane relics are scattered throughout the chamber, testifying to Tibalt's mastery of dark magic.",
+    "options": [
+      {
+        "action": [
+          {
+            "setQuestFlag": {
+              "key": "TibaltPortal",
+              "val": 1
+            },
+              "activateMapObject": 175,
+              "deleteMapObject": -1
+          }
+        ],
+        "name": "(Continue)"
+      }
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

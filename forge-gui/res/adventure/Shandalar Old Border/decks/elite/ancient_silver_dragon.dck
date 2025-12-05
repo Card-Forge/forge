@@ -1,0 +1,40 @@
+[metadata]
+Name=Ancient Silver Dragon
+[Main]
+2 Reflecting Pool|TMP
+4 City of Brass|5ED
+3 Meteor Crater|PLS
+2 Underground Sea|3ED
+2 Taiga|3ED
+1 Plateau|3ED
+2 Savannah|3ED
+1 Scrubland|3ED
+2 Badlands|3ED
+1 Volcanic Island|3ED
+1 Tropical Island|3ED
+1 Bayou|3ED
+2 Tundra|3ED
+2 Crosis, the Purger|INV
+2 Treva, the Renewer|INV
+2 Dromar, the Banisher|INV
+2 Darigaaz, the Igniter|INV
+2 Rith, the Awakener|INV
+1 Nicol Bolas|LEG
+1 Chromium|LEG
+1 Arcades Sabboth|LEG
+1 Palladia-Mors|LEG
+1 Vaevictis Asmadi|LEG
+1 Karona, False God|SCG
+2 Bladewing the Risen|SCG
+2 Draco|PLS
+2 Tek|INV
+2 Dragon Arch|APC
+2 Charmed Pendant|ODY
+2 Phyrexian Lens|INV
+2 Tribal Flames|INV
+2 Exotic Curse|INV
+2 Allied Strategies|PLS
+2 Wandering Stream|INV
+
+[StartInBattle_Reference]
+1 Dragon Arch|APC

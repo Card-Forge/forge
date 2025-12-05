@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="82">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/dungeon_2.tsx"/>
+ <layer id="1" name="Background" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt10EKwjAQQNEssildeVtPIvQQc0cpUgxDmtomkzrhLx64KNpPOjouUwgLAAAAYOg5h/CafrNee/f91jb8Q8sjfkj8vr7SkLZs71di1dGiQbeUeqw7ahs2ukF/jqcOfSbeO/T8WXeIYYdu8d4hA3SkLV7nQz9bnjtGea56zLkYn0eP7930vFvvJbndxKIjtzO02BNzM9FrPmpbdMNdv4O64+z/qKOG3h0S9++rtMOeubZ1BwAAAABgDG/+mcqs
+  </data>
+ </layer>
+ <layer id="7" name="Ground" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJy1WmtuE0EMniQrld3kDm3VY4S2+VP1FMBZeF2hUosUcRPgLIFTIARrJZ9iHNvjmZ180ipSMg9/fo3Hm2Wf0odlSr+GZKIbxzwpz7zXx2/H7++c9SQeB1uGzbBf73Y4jvtprN2P465X/l7r4Sg7rbk21vr7ar/v1uCoYXnQJT1cDnCAvvi4nO49dBnZOAfPJg/K90uhS77O7XA6FlwskA5KfMLiYNlkd/ANjQuXYev4LeFypdsEcy0dWPvNDnt1bO68/1+ONdMN12WtX1iySB1qHCi2SJfYm8cf0AnZOeg3cKZ4vFrtPwl8XQtk7/vh+Cn9lvZbMHkWCg/kCXpob8Q8H3cf0K1lY9ioRc601njP5OdxCH2TfjaKfnLgPklokTMRM1bsWeu39MkocjnTin8PrXxSYtMg/slXvZw4U/RR65MS3L5RSP8EPLtgHz6v1ie1dVv7p7Y3/AGPxqX2PDiHf1L+0ewk93wqsH0ULfyT5Edt4dUDD4Ezqwat/dPjENlPw5t5Su/m+XFT/LOEA4DzN8rlZpbSt/H5PovxyeVMDVEeUkdUH0VsTXhepPRp/Pyc9nzeZuzj2QX1lYzhSI07NR8BnM+fjF2snEk5plNyJuyQqxEitZwFGR+/53u7WDbx8uXusL/MuyU1DuxSAuLwY5T5enb8juzyMj5fFqfjvZyJMySXM6HvnTNG2oXktPwdHD4mXeZSkB6vhL+h3pbjInc14oI7EOkW8cu5tOagwavHoG8ZZ969XfOTmwyH6JliIdcHIPTie877zqgvJXBmSFnhh2QrLWfV3g0jkD2E3F2GAH/j8c19jfKvZauau2EUyN0lkOd4ztdKEdGnBsoDJfUC4gZ2eTZyrYfafloONedhrfyl/TQ5H7Bk5Xm3NWrvhhx8ntcDJ0RrxFLU3A05ztXb3l2Mcy/K55XeDQmlvW2rR6GhhkfN3TDS25axvS7oH9bao+aucHIuQMY+rncLtTyAaD+Nj+G92ly+iOppKo9oP43Hu+RgnfklNp/KgxDppwGl/YboeSh5tH6no9VLr4f290PNHt47HYD30zxE+mnR+6EEf6dj+VWu317aT4ONvZ519E6uvdOJxAc/j2r7abn3xNH7oZXnJI9cz7y2n9aJvb8qc3P3Q4JVF3EekZ551/v5nuDly67AjvJ+yCHXBo+Snvm5+2kcWr7T6iJuj9Y1ck0/zVpH1gzS5lPOwZJ+GvBYaR8t73JM4VHSTyMQB+/dMnJixBdl7HAepWe59T8gyMXzZav/PkkuiH9pj8hZznGp/K7108793yfNr2re/3No/bR/T/F/ig==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1o0JwjAQBeCkHcUVSrfRDiOuYG0dRl1BXUcwRzgMV4kREV7gfRAaReSelx+dIyIiIiL6v1tTNpBJffeCGq/AWUozKMQsaYZ1eG7CGJo4HzK1ImVJ65C6L965bZgfW+emNj5zULL0SR/SDN/oQHL8kgGF5JD1Mydr6NO+sFD6ITqzvh6V51hVur5681uWnFEWYj/eqeF/SkkttmcWQj/GsB8OPv+ZXI69j9+BQLPIWXX25WcuUgYl9cge34X5yS/z2DsFMYPSLLO5F/Wu1NfIGdTol0Ny2PeIiIiIiIiI6OUJvx9Kjw==
+  </data>
+ </layer>
+ <layer id="8" name="Ornamental Walls" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1kEKgCAURVFrTdFW21gLCok3CAI1+/WQe2aBA28K/pQAAACAeOtcXrNUrPlTTYO4trQ0iFvLkwZxackNe+deXFpw4jwQweleOe0lSul9cfgHPW+gkzc6HM4jG2EukRHmRBlhbpe7lm26frs3AAAAAADwtQM+cgcD
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="50" height="50">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzdmtGNwjAMhuEFWIQBYBomYoF2FwYD3lFAlSIrdmzHrl2+l5N6pfnj/rZj7na7NvMJ+QXCdS+734qpoXOW3NvZJycOreduGRg/KgZWe5+0nzOOPeYdjIuT77HnwuuS/UtzGgOuKY2ZFkms19JkgeQdbqXW1P1A4zuvvIqmfn91XKL6ZzQlBhF75/Ybr3yLzmPO/lsaubr/NX+xfT0Ov59PcP3lqoYH551l0NlCey6kgO+oButVXN9b1TJKY+F25D+raKJ68HJWIu8xqFe9PaFrI9c185wHGXInup9ArPJ2pI9o/CZZz3oOkuqN8HrNecUeHzXP3RWfsZznspyjRuc5CDYHaclQgyl6ua3tjaN4nK+8ydbrChk1cdDOc7261MrpZS3PeR+um/V7lRG/bNVrBareRJ9nWnNQdP/l+lkaO22sMT1b9mRGLOI56ueeBo1Gbh+JqAVRf9eS8I4WEIBVD/fwcw/oY8v8i6bWp53n1vJzpjlH6mfR9wmyR3+R6PGoyyM+t9SD6YjKQ2rdET+3/r9ndJ6T6Mlc1z4AW1Iw
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="272.333" y="382.543">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/fort/fort_colorless_7_multilevel3.tmx"/>
+    <property name="teleportObjectId" value="38"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../../../common/maps/obj/gold.tx" x="522.917" y="363.166"/>
+  <object id="74" template="../../../../../../common/maps/obj/treasure.tx" x="521.917" y="349.416"/>
+  <object id="75" template="../../../../../../common/maps/obj/enemy.tx" x="391.751" y="324.417">
+   <properties>
+    <property name="enemy" value="Arzakon, Shandalar's Doom"/>
+    <property name="threatRange" type="int" value="80"/>
+   <property name="effect">{"startBattleWithCard": ["Black Lotus|LEA", "Celestial Prism|LEA", "Clay Statue|ATQ"]}</property>
+    </properties>
+  </object>
+  <object id="78" template="../../../../../../common/maps/obj/treasure.tx" x="521.333" y="328"/>
+  <object id="79" template="../../../../../../common/maps/obj/gold.tx" x="521.333" y="307.667"/>
+  <object id="80" template="../../../../../../common/maps/obj/manashards.tx" x="408" y="411"/>
+  <object id="81" template="../../../../../../common/maps/obj/booster.tx" x="504.333" y="282.667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ATQ&quot;, &quot;USG&quot;, &quot;ULG&quot;, &quot;UDS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ATQ&quot;, &quot;USG&quot;, &quot;ULG&quot;, &quot;UDS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ATQ&quot;, &quot;USG&quot;, &quot;ULG&quot;, &quot;UDS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

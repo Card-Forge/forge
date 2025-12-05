@@ -103,8 +103,8 @@
                             &quot;not&quot;: true
                         }
 					],
-					&quot;text&quot;: &quot;Suddenly, the gate disappears right in front of your eyes, You are now free to pass.&quot;,
-					&quot;options&quot;: [ { &quot;name&quot;: &quot;(continue)&quot; } ]
+					&quot;text&quot;: &quot;Suddenly, the gate disappears right in front of your eyes. You are now free to pass.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
 				},
 				{
                 	&quot;name&quot;: &quot;Lorthos, I've done as you asked! It's time to end this!&quot;,
@@ -125,15 +125,15 @@
                              &quot;checkQuestFlag&quot;: &quot;mainQuest&quot;
                         }
                 	],
-                		&quot;text&quot;: &quot;Suddenly, the gate disappears right in front of your eyes, You are now free to pass.&quot;,
-                		&quot;options&quot;: [ { &quot;name&quot;: &quot;(continue)&quot; } ]
+                		&quot;text&quot;: &quot;Suddenly, the gate disappears right in front of your eyes. You are now free to pass.&quot;,
+                		&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
                 },
 				{
-					&quot;name&quot;: &quot;You knock on the door&quot;,
+					&quot;name&quot;: &quot;You knock on the door.&quot;,
 					&quot;condition&quot;: [ { &quot;checkMapFlag&quot;: &quot;intro&quot; } ],
 					&quot;text&quot;: &quot;YOU ARE NOT WORTHY, BEGONE!&quot;,
 					&quot;loctext&quot;: &quot;&quot;,
-					&quot;options&quot;: [ { &quot;name&quot;: &quot;(continue)&quot; } ]
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
 				}
 			]
 	}
@@ -234,7 +234,7 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;Welcome {var=player_name}, Lorthos has been waiting eagerly for this moment.&quot;,
+    &quot;text&quot;: &quot;Welcome, {var=player_name}. Lorthos has been waiting eagerly for this moment.&quot;,
     &quot;options&quot;: [
       {
         &quot;name&quot;: &quot;Is that so? I guess you wouldn't mind opening that gate in front of me?&quot;,
@@ -242,7 +242,7 @@
         &quot;options&quot;: [
           {
             &quot;name&quot;: &quot;What do I need to do to get passed though this gate?&quot;,
-            &quot;text&quot;: &quot;To show you are worthy, you must prove your strength by defeating at least four of the five enemies lurking within this dungeon to be worthy of an audience with my illustrious master.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.&quot;,
+            &quot;text&quot;: &quot;You must prove your strength by defeating at least four of the five enemies lurking within this dungeon to be worthy of an audience with my illustrious master.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.&quot;,
             &quot;options&quot;: [
               {
                 &quot;name&quot;: &quot;I'll show my worth, just make sure to open the gate when I do defeat your challengers.&quot;,

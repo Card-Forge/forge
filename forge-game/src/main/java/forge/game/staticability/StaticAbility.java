@@ -141,7 +141,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         }
 
         if (hasParam("ChangeColorWordsTo") || hasParam("GainTextOf") || hasParam("AddNames") ||
-                hasParam("SetName")) {
+                hasParam("SetName") || hasParam("Incorporate") || hasParam("ManaCost")) {
             layers.add(StaticAbilityLayer.TEXT);
         }
 
@@ -253,7 +253,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             setActiveZone(EnumSet.copyOf(ZoneType.listValueOf(getParam("EffectZone"))));
         }
         if (hasParam("Mode")) {
-            setMode(EnumSet.copyOf(StaticAbilityMode.listValueOf(getParam("Mode"))));
+            setMode(StaticAbilityMode.setValueOf(getParam("Mode")));
         }
         this.layers = this.generateLayer();
     }
@@ -297,7 +297,9 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
      *         conditions are fulfilled.
      */
     private boolean shouldApplyContinuousAbility(final StaticAbilityLayer layer, final boolean previousRun) {
-        return layers.contains(layer) && checkConditions(StaticAbilityMode.Continuous) && (previousRun || getHostCard().getStaticAbilities().contains(this));
+        return layers.contains(layer) && checkConditions(StaticAbilityMode.Continuous) && ( previousRun ||
+                getHostCard().getStaticAbilities().contains(this) ||
+                getHostCard().getHiddenStaticAbilities().contains(this));
     }
 
     public final Cost getAttackCost(final Card attacker, final GameEntity target, final List<Card> attackersWithOptionalCost) {
@@ -581,6 +583,13 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         .compare(getHostCard(),arg0.getHostCard())
         .compare(getId(), arg0.getId())
         .result();
+    }
+
+    public long getTimestamp() {
+        if (hasParam("Timestamp")) {
+            return Long.valueOf(getParam("Timestamp"));
+        }
+        return getHostCard().getLayerTimestamp();
     }
 
     @Override

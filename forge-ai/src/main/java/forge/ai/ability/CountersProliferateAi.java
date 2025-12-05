@@ -93,7 +93,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         if ("Always".equals(sa.getParam("AILogic"))) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
@@ -112,7 +112,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
 
         final CounterType poison = CounterEnumType.POISON;
 
-        boolean aggroAI = (((PlayerControllerAi) ai.getController()).getAi()).getBooleanProperty(AiProps.PLAY_AGGRO);
+        boolean aggroAI = AiProfileUtil.getBoolProperty(ai, AiProps.PLAY_AGGRO);
         // because countertype can't be chosen anymore, only look for poison counters
         for (final Player p : IterableUtil.filter(options, Player.class)) {
             if (p.isOpponentOf(ai)) {

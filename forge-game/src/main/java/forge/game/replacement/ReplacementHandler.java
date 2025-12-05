@@ -45,7 +45,6 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.util.CardTranslation;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.Visitor;
@@ -234,7 +233,9 @@ public class ReplacementHandler {
         // if its updated, try to call event again
         if (res == ReplacementResult.Updated) {
             Map<AbilityKey, Object> params = AbilityKey.newMap(runParams);
+            params.remove(AbilityKey.ReplacementResult);
 
+            // CR 614.16
             if (params.containsKey(AbilityKey.EffectOnly)) {
                 params.put(AbilityKey.EffectOnly, true);
             }
@@ -310,7 +311,7 @@ public class ReplacementHandler {
                         replacementEffect.getParam("OptionalDecider"), effectSA).get(0);
             }
 
-            String name = CardTranslation.getTranslatedName(MoreObjects.firstNonNull(host.getRenderForUI() ? host.getCardForUi() : null, host).getName());
+            String name = MoreObjects.firstNonNull(host.getRenderForUI() ? host.getCardForUi() : null, host).getTranslatedName();
             String effectDesc = TextUtil.fastReplace(replacementEffect.getDescription(), "CARDNAME", name);
             final String question = runParams.containsKey(AbilityKey.Card)
                 ? Localizer.getInstance().getMessage("lblApplyCardReplacementEffectToCardConfirm", name, runParams.get(AbilityKey.Card).toString(), effectDesc)

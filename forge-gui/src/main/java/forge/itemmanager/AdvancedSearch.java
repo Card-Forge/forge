@@ -60,17 +60,7 @@ public class AdvancedSearch {
 
             @Override
             protected Set<String> getItemValues(PaperCard input) {
-                Set<String> names = new HashSet<>();
-                names.add(input.getName());
-                names.add(CardTranslation.getTranslatedName(input.getName()));
-                CardSplitType cardSplitType = input.getRules().getSplitType();
-                if (cardSplitType != CardSplitType.None && cardSplitType != CardSplitType.Split) {
-                    if (input.getRules().getOtherPart() != null) {
-                        names.add(input.getRules().getOtherPart().getName());
-                        names.add(CardTranslation.getTranslatedName(input.getRules().getOtherPart().getName()));
-                    }
-                }
-                return names;
+                return input.getAllSearchableNames();
             }
         }),
         CARD_RULES_TEXT("lblRulesText", PaperCard.class, FilterOperator.STRINGS_OPS, new StringEvaluator<PaperCard>() {
@@ -310,7 +300,7 @@ public class AdvancedSearch {
         INVITEM_NAME("lblName", InventoryItem.class, FilterOperator.STRING_OPS, new StringEvaluator<InventoryItem>() {
             @Override
             protected String getItemValue(InventoryItem input) {
-                return input.getName();
+                return input.getDisplayName();
             }
         }),
         INVITEM_RULES_TEXT("lblRulesText", InventoryItem.class, FilterOperator.STRING_OPS, new StringEvaluator<InventoryItem>() {
@@ -573,7 +563,7 @@ public class AdvancedSearch {
         DECK_NAME("lblName", DeckProxy.class, FilterOperator.STRING_OPS, new StringEvaluator<DeckProxy>() {
             @Override
             protected String getItemValue(DeckProxy input) {
-                return input.getName();
+                return input.getDisplayName();
             }
         }),
         DECK_FOLDER("lblFolder", DeckProxy.class, FilterOperator.STRING_OPS, new StringEvaluator<DeckProxy>() {
@@ -675,7 +665,7 @@ public class AdvancedSearch {
         COMMANDER_NAME("lblName", ConquestCommander.class, FilterOperator.STRING_OPS, new StringEvaluator<ConquestCommander>() {
             @Override
             protected String getItemValue(ConquestCommander input) {
-                return input.getName();
+                return input.getDisplayName();
             }
         }),
         COMMANDER_ORIGIN("lblOrigin", ConquestCommander.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<ConquestCommander, ConquestPlane>(ImmutableList.copyOf(FModel.getPlanes())) {
@@ -1364,7 +1354,7 @@ public class AdvancedSearch {
 
     private static abstract class ColorEvaluator<T extends InventoryItem> extends CustomListEvaluator<T, MagicColor.Color> {
         public ColorEvaluator() {
-            super(Arrays.asList(MagicColor.Color.values()), MagicColor.Color::getSymbol);
+            super(Arrays.asList(MagicColor.Color.values()), MagicColor.Color::getSymbol, MagicColor.Color::getTranslatedName);
         }
 
         @Override
@@ -1391,7 +1381,7 @@ public class AdvancedSearch {
 
             Integer amount = -1;
             if (operator == FilterOperator.CONTAINS_X_COPIES_OF_CARD) { //prompt for quantity if needed
-                amount = SGuiChoose.getInteger(Localizer.getInstance().getMessage("lblHowManyCopiesOfN", CardTranslation.getTranslatedName(card.getName())), 0, 4);
+                amount = SGuiChoose.getInteger(Localizer.getInstance().getMessage("lblHowManyCopiesOfN", CardTranslation.getTranslatedName(card.getDisplayName())), 0, 4);
                 if (amount == null) {
                     return null;
                 }

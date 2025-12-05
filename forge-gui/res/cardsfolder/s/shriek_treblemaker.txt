@@ -1,8 +1,8 @@
 Name:Shriek, Treblemaker
+Variant:UniversesWithin:FlavorName:Crash, Reckless Endrider
 ManaCost:2 BR
 Types:Legendary Creature Mutant Villain
 PT:2/3
-K:Menace
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | Execute$ DBImmediateTrig | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your first main phase, you may discard a card. When you do, target creature can't block this turn.
 SVar:DBImmediateTrig:AB$ ImmediateTrigger | Cost$ Discard<1/Card> | Execute$ TrigPump | TriggerDescription$ You may discard a card. When you do, target creature can't block this turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. | TgtPrompt$ Select target creature. | IsCurse$ True

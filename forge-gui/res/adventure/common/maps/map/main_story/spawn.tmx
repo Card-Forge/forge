@@ -31,7 +31,7 @@
    <properties>
     <property name="dialog">[
     {
-        &quot;text&quot;: &quot;Hello, planeswalker {var=player_name}&quot;,
+        &quot;text&quot;: &quot;Hello, planeswalker {var=player_name}.&quot;,
         &quot;options&quot;: [
             {
                 &quot;name&quot;: &quot;Why am I here?&quot;,
@@ -138,7 +138,7 @@
                                                 ]
                                             },
                                             {
-                                                &quot;name&quot;: &quot;Thank you&quot;,
+                                                &quot;name&quot;: &quot;Thank you.&quot;,
                                                 &quot;text&quot;: &quot;I will reopen the portal you arrived through now, but it cannot send you back from wherever you have come. On the other side, you will find the barrens of Shandalar which I, and now you, call home.&quot;,
                                                 &quot;condition&quot;: [
                                                     {
@@ -169,7 +169,7 @@
                 ]
             },
             {
-                &quot;name&quot;: &quot;Bye&quot;
+                &quot;name&quot;: &quot;Goodbye.&quot;
             }
         ]
     },
@@ -187,7 +187,7 @@
         &quot;text&quot;: &quot;\&quot;{var=player_name}! I feel the Guardians' spell growing weaker! Defeat them all and you may save us yet.\&quot;&quot;,
         &quot;options&quot;: [
             {
-                &quot;name&quot;: &quot;\&quot;Bye.\&quot;&quot;
+                &quot;name&quot;: &quot;\&quot;Goodbye.\&quot;&quot;
             }
         ]
     },
@@ -226,7 +226,7 @@
                 &quot;options&quot;: [
                     {
                         &quot;name&quot;: &quot;\&quot;Effects such as what?\&quot;&quot;,
-                        &quot;text&quot;: &quot;\&quot;You likely saw a very focused version of the effects of their presence within their castles. But they also shrouded certain areas of our world, causing them to be... 'hidden', for the lack of a better term\&quot;&quot;,
+                        &quot;text&quot;: &quot;\&quot;You likely saw a very focused version of the effects of their presence within their castles. But they also shrouded certain areas of our world, causing them to be... 'hidden', for the lack of a better term.\&quot;&quot;,
                         &quot;options&quot;: [
                             {
                                 &quot;name&quot;: &quot;(Continue)&quot;,

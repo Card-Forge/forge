@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="64">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="3477" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy9VVsOwyAM47/0BKg7GD3LtnN1o3dbo87CSgGNCbAU8aiJSQh0nY1ZD3vZ2Hqay5l8z/FkjuEVR8aLPU24uz15zpoLtH9Zs31bzXurOT9Hg39oSutIV8egfUFvUXFqHvxxLh1xJdbndF2Tg46zBGdjLjfKM/zU+PoX9yO2YGN+eQ89gTzvdK6ps2kNznOqfltDNB5T7KOeewNxIr+52u+FkbWkdd2gu5PSrX0vWunyW5jaA+45+jV7FL7U8K3w/kKTx1oz0Ln8kivo8JpQ0Bak9FP/w5I265Z8jLQPjfZyjQ==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyL5GRgiITi7RwMDHGcEBxJR/wZStPbXhgOg9odBsU7Oejvhl1AO78OkP9H8eDAnynQe5GZMruJSXug8mEg8sYPTki+pLe9ezgGpkwCpQNa2bsdGn+44pEW9hKKP1LsBIXNbhLKSh82CB1OQ79ewZP3BmuZDgCqn82d
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyNlc9KAzEQxkO2Lc3iy4gelZa+Qe2h9OCfJxA81hafQGtBfBkRiuJjbMGLV2sLolAV85kMOzubbB0Y2mYn8/tmNpMutVJL76/Wj4xSC/8b36+Toi910eVz+Idd5/amy/s4c2r3PDWVmiSOfWJUySTjs65UlzipUi+N8p6Jj10EmLeJi1kbl2si8k+TPM+zjcmsz7kuzzwOaIVB2w1jg9kyTLNyNSMH1w4t3Dp2zyh132csHv7QLPL4fmJnbD/P/WXXv5n2feP0xWqJcaX1beyVZY8tc6XjcZT3InUaY2xiPjImtI7TYty77/NKh7m89qFnkrdM8fmhybm8R6SVs/k7pjPTragb7I5gy3p5rTJ+7s8Q9TmWJ2aUS/ZvUzydIZrlTKzDcD5/KnScp8V4GOk+E+cedbdZLs5tBxjoWxWbG87Pnu/ZaT0eh3qIS8ydmlK7tTwGM4x7EmzMhZxfMlof+h6AOwvMEX+34F7az552PhDnit8f2/+sHdzQXclrJQd7oHM+aaA7s+r+i3F5/N+cpOH/B2LTvcQ1hOyAPUNeuiu3GuV68ewuUC+5nHPU2hd9IKcZpPcEzch93yzOcdf3jb/bkGdsPnsbYkP9Wvt7XeqVeX4BQq/VvQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJytlVkKwjAQhodUBaHQXkXwIlVfPITLi97BBUXBI7hcx2souPTJRyfY4DidpLH6w4+FTPPNElOATy2Dt+8qbyppncb0q1BKdK+LeuXCdVX5uE3wHfcU+ufUqL9+F8FnjzTzHPpxN0IdRbwk6+fDsbeLm+L7XfXeh+ss9MAWa3I4VgCa6Khm595Z3qaeX+QzV3r+pNq+le6FxOXzSB09luSapxHnSu+kDmZSohfHbK5SPJ0hr5fHmzPiaylnSZo7igDGkbxe9s4xst0JmrtC5jrj8vxd/4V/ypyBonn6ztsVZ+7WueXeorPiZ5OelSQGaKHb6E7slxf/ptAcuirP52taPWT10QP0MJbz9GEX9YF/FyfImqJn6LlnvS6uTTey1sbnLbJ26D36UMB9AtuiY8A=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="64" y="31.75" />
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="173" y="220">
+   <properties>
+    <property name="enemy" value="Imp" />
+   </properties>
+  </object>
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="240.166" y="48.6666" />
+  <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="453.083" y="120.75" />
+  <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="430.742" y="100.349">
+   <properties>
+    <property name="enemy" value="Goblin Chief" />
+   </properties>
+  </object>
+  <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="68.5909" y="52.9852">
+   <properties>
+    <property name="enemy" value="Apprentice Red Wizard" />
+   </properties>
+  </object>
+  <object id="59" template="../../../../../../common/maps/obj/enemy.tx" x="237.909" y="67.2727">
+   <properties>
+    <property name="enemy" value="Minotaur" />
+   <property name="effect">{"startBattleWithCard": ["Mountain|ICE", "Mountain|ICE", "Didgeridoo|HML", "Anaba Spirit Crafter|HML"]}</property>
+    </properties>
+  </object>
+  <object id="60" template="../../../../../../common/maps/obj/door_down.tx" x="367.884" y="15.8514">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/jacetower/portal_1R.tmx" />
+    <property name="teleportObjectId" value="65" />
+   </properties>
+  </object>
+  <object id="61" template="../../../../../../common/maps/obj/door_right.tx" x="27" y="182.5">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/jacetower/portal_1R4.tmx" />
+    <property name="teleportObjectId" value="63" />
+   </properties>
+  </object>
+  <object id="62" template="../../../../../../common/maps/obj/door_up.tx" x="328.5" y="240">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/jacetower/portal_1R3.tmx" />
+    <property name="teleportObjectId" value="63" />
+   </properties>
+  </object>
+  <object id="63" template="../../../../../../common/maps/obj/gold.tx" x="152.5" y="245.5" />
+ </objectgroup>
+</map>

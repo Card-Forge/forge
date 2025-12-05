@@ -1,0 +1,470 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="111">
+ <editorsettings>
+  <export format="tmx" />
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  "startBattleWithCard": [ "Recycle" ],
+  "opponent": {
+    "startBattleWithCard": [ "Recycle" ],
+  }
+}</property>
+ </properties>
+ <tileset firstgid="1" source="../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../common/maps/tileset/buildings-nocollide.tsx" />
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYGBgkBCiL4aBUXtH7R21d3ja+0AUFdPC3mmcEDwS7IXZaciFaTe5WAMN47MXm5+Hq71TBtC/Axm/IH4aJwIjm6UggImR5cs4ERjEn8CO3150TE17QRhXPqKVvdgwOeUzIXuJwaP2kmY/OfpG7R21dzjaCwBbaKfR
+  </data>
+ </layer>
+ <layer id="6" name="BGBlend" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwWABFzgo0/+AAv1t3JTZPQoIAx4uyvTLUKh/FIyCUTAK0AEAlJ4Cjg==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztljtLA0EQgAcMeeHdRRFNjCB26cUH0Sr/QCU/Q4Om8pFCxfwD0SBaWaaOldpaGgQRLfSnOMPu4rrOXm6Ti1UGPvaRvf1uluxw+RxAfgRLEekwzA7ZW6B28i8zI2+sNAKAA+QwEL59OT4Khus18x52nv/pLcrWvDM0dye9FNy9GuRuFWRrBjfHhctZrPgAy76793YMYKMEsFkSfRcvOV+QrnQXtDNTYY5VVBIA2+jcKYm+8k4gbUnO4l3y+fPaSvH9qNFJCjxHb1wR5n3K4H8V320R+1MR/z+2qOAegbaHzdvyAC6Qc+TSE97ntKCbFs8eY106YTgNxO+fuO5LQt46zu8iNWQvpKa1pJP6er61jGjnLWewIOcbmd/50j6Usy1Xjri89R656vdyEO873qOPxI83CmaMZwVeNpq3iOvmJP14Vb0yo5dXD1Wv1tG/5vAOcXnL6FwN8UaJe1z3gDTlvTkLxPjReL6aEl7K9Q15DcnZJVTeXJ62sOUcp7fK1PGws9ZR31I6YV5zLX1zlX13L8d0kvfSPLf+BmvfleTa699LNA0vjQfZzwXd2+8e3zU/nhQ=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBg4oCAAweh8ZDFyzECmiVFDin2EzMBnJjY1pNpNrF8Gyr+Ewp3S+EW3Axt/FFAXkJpudgDV7RRA0NgAsjw+dfQGA5m2yMkfo2AUUBu08TAwtPKQrs+MCnar8FLBEBIByK8dZPjXlPpOGQWjYBSMggEDAHPWFBI=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="47" template="../../../../../common/maps/obj/gold.tx" x="48" y="352" />
+  <object id="50" template="../../../../../common/maps/obj/enemy.tx" x="128" y="192" width="64" height="64">
+   <properties>
+    <property name="effect">{
+ "lifeModifier": -25,
+ "opponent":{
+  "startBattleWithCard": [ "c_0_1_eldrazi_spawn_sac", "c_0_1_eldrazi_spawn_sac", "c_0_1_eldrazi_spawn_sac", "c_0_1_eldrazi_spawn_sac" ]
+ }
+}</property>
+    <property name="enemy" value="Karona" />
+    <property name="name" value="Karona, False God" />
+   </properties>
+  </object>
+  <object id="51" template="../../../../../common/maps/obj/entry_up.tx" x="208" y="480" width="48" height="16">
+   <properties>
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+  <object id="52" template="../../../../../common/maps/obj/gate.tx" x="224" y="384">
+   <properties>
+    <property name="dialog">[{
+  "text":"I am a big gate. Greetings.",
+  "options":[ { "name":"Okay..." } ],
+  "action": [ { "setMapFlag": {"key": "gate", "val": 1} } ]
+}]</property>
+   </properties>
+  </object>
+  <object id="54" template="../../../../../common/maps/obj/treasure.tx" x="336" y="176">
+   <properties>
+    <property name="reward">[
+  {
+    "type": "life",
+    "count": 3
+  }
+]</property>
+    <property name="spawn.Easy" type="bool" value="false" />
+    <property name="spawn.Hard" type="bool" value="false" />
+    <property name="spawn.Normal" type="bool" value="false" />
+    <property name="sprite" value="sprites/3life.atlas" />
+   </properties>
+  </object>
+  <object id="69" template="../../../../../common/maps/obj/treasure.tx" x="64" y="336" />
+  <object id="74" template="../../../../../common/maps/obj/treasure.tx" x="240" y="64" />
+  <object id="70" template="../../../../../common/maps/obj/booster.tx" x="48" y="336" />
+  <object id="72" template="../../../../../common/maps/obj/booster.tx" x="208" y="64" />
+  <object id="71" template="../../../../../common/maps/obj/gold.tx" x="64" y="352" />
+  <object id="79" template="../../../../../common/maps/obj/gate.tx" x="144" y="208" width="32" height="16" visible="1">
+   <properties>
+    <property name="dialog">[{
+ "text":"Don't mind me, just chilling.",
+ "options":[ { "name":"Sure." } ]
+}]</property>
+   </properties>
+  </object>
+  <object id="80" template="../../../../../common/maps/obj/enemy.tx" x="112" y="304">
+   <properties>
+    <property name="defeatDialog">[
+  {
+    "text":"Impressive...",
+    "loctext":"",
+    "options":[ { "name":"Hey why are you still standing...?" } ]
+  }
+]</property>
+    <property name="dialog">[
+  {
+    "text":"I am an elf. I do elf things like hugging trees and being pretty.",
+    "options":[
+      { "name":"OK" },
+      {
+        "name":"Fight me, elf!",
+        "text": "Gladly.",
+        "options": [
+          { "name": "Hey aren't you a bit swole for an elf...?", "action": [ { "battleWithActorID": -1 } ] }
+        ]
+      },
+      {
+        "name": "I want to be eco-friendly too.",
+        "text": "Listen to the forest, friend.\nYour color identity is now green!",
+        "condition": [ { "colorIdentity": "G", "not": true } ],
+        "options": [ { "name": "Awesome.", "action": [ { "setColorIdentity": "G" } ]} ]
+      },
+      {
+        "name":"I wanna fight Karona over there!",
+        "text": "Really? Oh well... your funeral.\nHEY KARONA! THIS CHUMP WANTS TO DANCE!",
+        "condition": [ { "actorID": 50 } ],
+        "options": [ { "name": "WAIT IT WAS A JOKE!!!", "action": [ { "battleWithActorID": 50 } ]} ]
+      },
+      {
+        "name":"Where did Karona go?",
+        "text": "She left. Crying. You monster.",
+        "condition": [ { "actorID": 50, "not": true } ],
+        "options": [ { "name": "Sorry..." } ]
+      },
+      {
+        "name":"That's cool my green dude.",
+        "text": "You get it! Take this item.",
+        "condition": [ { "item": "Treasure", "not": true }, { "colorIdentity": "G" } ],
+        "action": [ { "addItem": "Treasure" } ],
+        "options": [ { "name": "Thanks bro." } ]
+      },
+      {
+        "name":"Thanks for the blessing.",
+        "text": "You are welcome.",
+        "condition": [ { "hasBlessing": "Debug Elf" } ],
+        "options": [ { "name": "Thumbs up emoji" } ]
+      },
+      {
+        "name":"Got any fancy elven blessing?",
+        "text": "If you give me a Treasure, I will give you the blessing of the Debug Elf.\nWhich is a Llanowar Elves and 2 extra life in your next battle. Sounds good?",
+        "condition": [ { "item": "Treasure" }, { "hasBlessing":  "Debug Elf", "not": true } ],
+        "options": [
+          { "name": "But I love my Treasure! I humbly refuse."},
+          {
+            "name": "I'll take it",
+            "action": [
+              { "removeItem": "Treasure", "giveBlessing": { "name": "Debug Elf" ,"goldModifier":0.2, "lifeModifier": 2, "startBattleWithCard": [ "Llanowar Elves" ] } }
+            ]
+          }
+        ]
+      },
+      {
+        "name":"Can you open that hidden wall?",
+        "text": "Since you asked nicely, I shall.",
+        "condition": [ { "actorID": 83 } ],
+        "options": [ { "name": "Thanks bro.", "action": [ { "deleteMapObject": 83 } ]} ]
+      },
+      {
+        "name": "Got a quest?",
+        "text": "Ah, perhaps you can help me. Can you ask the Debug Demon about his favorite color?",
+        "condition": [ { "checkQuestFlag":  "128", "not": true} ],
+        "options": [
+          { "name": "That's weird, but sure.", "action": [ { "setQuestFlag":  {"key":"128", "val": 1} } ] },
+          { "name": "That guy scares me, I'd rather not." }
+        ]
+      },
+      {
+        "name": "About that quest...",
+        "text": "Please let me know what the Debug Demon's answer is.",
+        "condition": [ { "getQuestFlag":  { "key": "128", "op":"&lt;", "val": 3 } } ],
+        "options": [
+          { "name": "Sure" }
+        ]
+      },
+      {
+        "name": "Got it, bro.",
+        "text": "Ah. I see. Thank you friend, have this gold for your inconvenience.",
+        "condition": [ { "getQuestFlag":  { "key": "128", "op":"=", "val": 3 } } ],
+        "options": [
+          { "name": "Thanks", "action": [ { "setQuestFlag": {"key":"128", "val": 4}, "addGold": 250 } ] }
+        ]
+      }
+    ]
+  }
+]</property>
+    <property name="effect">{
+ "lifeModifier": 190,
+ "startBattleWithCard": [ "Llanowar Elves", "Llanowar Elves", "Forest", "Forest" ]
+}</property>
+    <property name="enemy" value="Elf warrior" />
+    <property name="name" value="Debug Elf" />
+   </properties>
+  </object>
+  <object id="81" template="../../../../../common/maps/obj/enemy.tx" x="64" y="224">
+   <properties>
+    <property name="dialog">[
+  {
+    "text": "You...you hurt Grog!\nYou...you filthy swine! I will stop at nothing until I see you defeated!\nGods...anyone! Grant me strength! Grant me REVENGE!!!!",
+    "condition": [
+      {
+        "actorID": 82,
+        "not": true
+      }
+    ],
+    "options": [
+      {
+        "name": "Uh oh.",
+        "action": [
+          {
+            "setEffect": {
+              "lifeModifier": 99,
+              "startBattleWithCard": [
+                "Avacyn, Angel of Hope",
+                "Urabrask the Hidden",
+                "Elesh Norn, Grand Cenobite",
+                "Emrakul, the Aeons Torn"
+              ]
+            }, "battleWithActorID": -1
+          }
+        ]
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Goblin" />
+   </properties>
+  </object>
+  <object id="82" template="../../../../../common/maps/obj/enemy.tx" gid="2147495067" x="48" y="224">
+   <properties>
+    <property name="dialog">[
+  {
+    "text":"...",
+    "condition":[ { "getQuestFlag":  { "key": "128", "op":"&lt;", "val": 3 } } ],
+    "options":[
+      { "name":"???" }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Goblin" />
+   </properties>
+  </object>
+  <object id="83" template="../../../../../common/maps/obj/gate.tx" type="dummy" gid="3651" x="80" y="336" width="16" height="16" />
+  <object id="84" template="../../../../../common/maps/obj/enemy.tx" x="336" y="304">
+   <properties>
+    <property name="dialog">[
+  {
+    "text":"I have some things to offer for that life you have...",
+    "options":[
+      { "name":"You are suspicious and have two shadows, I'm out." },
+      {
+        "name":"I'll vanquish you, demon!",
+        "text": "Oh look we got a tough guy over here!",
+        "options": [ { "name": "Have at thee!", "action": [ { "battleWithActorID": -1 } ]} ]
+      },
+      {
+        "name": "I dig your edge.",
+        "text": "You can be dark and edgy like me. Maybe for some of your life force...",
+        "condition": [ { "colorIdentity": "B", "not": true }, { "hasLife":  2 } ],
+        "options": [
+          { "name": "Not my life force, I'll die without it!" },
+          { "name": "I'm doing nothing better with it.", "action": [ { "setColorIdentity": "B", "addLife": -2 } ] }
+        ]
+      },
+      {
+        "name": "I dig your edge.",
+        "text": "You don't have enough life force...come back with more to offer.\nEat healthy, read a book, get that soul juicy.",
+        "condition": [ { "colorIdentity": "B", "not": true }, { "hasLife":  2, "not": true } ],
+        "options": [ { "name": "Aw man..." } ]
+      },
+      {
+        "name": "Any cool demon deals?",
+        "text": "I can offer you this Treasure for the fair price of 200 gold.",
+        "condition": [ { "colorIdentity": "B" }, { "hasGold":  200 } ],
+        "options": [
+          { "name": "This gem has a lot of edge, just like me. Deal!" , "action": [ { "addGold": -200, "addItem": "Treasure" } ] },
+          { "name": "I'll think about it." }
+        ]
+      },
+      {
+        "name":"Got any fancy demon blessing?",
+        "text": "Give me that Treasure of yours...\n(+1 health, Manasight, move speed 120%, Lord of the Pit starts in play)",
+        "condition": [ {"colorIdentity": "B"}, { "item": "Treasure" }, { "hasBlessing":  "Debug Demon", "not": true } ],
+        "options": [
+          { "name": "That's shady."},
+          {
+            "name": "What can possibly go wrong?",
+            "action": [
+              { "removeItem": "Treasure", "giveBlessing": { "name": "Debug Demon" , "lifeModifier": 1, "colorView": true, "moveSpeed": 2, "startBattleWithCard": [ "Lord of the Pit" ] } }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Hey what's your favorite color?",
+        "text": "Pink. It's the color of my favorite blood milkshakes.\nVery dark and evil.",
+        "condition": [ {"getQuestFlag":  { "key":"128", "op":"=", "val":1 } } ],
+        "options": [
+          { "name":  "Thank you Satan.", "action":  [ { "setQuestFlag":  { "key":"128", "val":3 } } ] }
+        ]
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Demon" />
+    <property name="name" value="Debug Demon" />
+   </properties>
+  </object>
+  <object id="85" template="../../../../../common/maps/obj/scroll.tx" x="224" y="96">
+   <properties>
+    <property name="reward">[
+]</property>
+    <property name="spawn.Easy" type="bool" value="false" />
+    <property name="spawn.Hard" type="bool" value="false" />
+    <property name="spawn.Normal" type="bool" value="false" />
+   </properties>
+  </object>
+  <object id="86" template="../../../../../common/maps/obj/treasure.tx" x="336" y="368" visible="0">
+   <properties>
+    <property name="reward">[{
+ "type": "randomCard",
+ "colors": [ "colorID" ],
+ "count": 8
+}]</property>
+   </properties>
+  </object>
+  <object id="87" template="../../../../../common/maps/obj/enemy.tx" x="48" y="384">
+   <properties>
+    <property name="enemy" value="Geist" />
+    <property name="pursueRange" type="int" value="80" />
+    <property name="spawn.Hard" type="bool" value="true" />
+    <property name="spawn.Normal" type="bool" value="true" />
+    <property name="threatRange" type="int" value="40" />
+   </properties>
+  </object>
+  <object id="88" template="../../../../../common/maps/obj/enemy.tx" x="48" y="400">
+   <properties>
+    <property name="enemy" value="Geist" />
+    <property name="spawn.Easy" type="bool" value="false" />
+    <property name="spawn.Hard" type="bool" value="true" />
+   </properties>
+  </object>
+  <object id="89" template="../../../../../common/maps/obj/enemy.tx" x="48" y="416">
+   <properties>
+    <property name="enemy" value="Geist" />
+    <property name="spawn.Easy" type="bool" value="false" />
+    <property name="spawn.Normal" type="bool" value="false" />
+   </properties>
+  </object>
+  <object id="93" template="../../../../../common/maps/obj/enemy.tx" x="304" y="400">
+   <properties>
+    <property name="enemy" value="Geist" />
+    <property name="reward" value="" />
+    <property name="spawn.Easy" type="bool" value="true" />
+    <property name="spawn.Normal" type="bool" value="true" />
+   </properties>
+  </object>
+  <object id="90" template="../../../../../common/maps/obj/treasure.tx" x="32" y="400">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false" />
+   </properties>
+  </object>
+  <object id="92" template="../../../../../common/maps/obj/treasure.tx" x="32" y="416">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false" />
+    <property name="spawn.Normal" type="bool" value="false" />
+   </properties>
+  </object>
+  <object id="91" template="../../../../../common/maps/obj/treasure.tx" x="32" y="384" />
+  <object id="94" template="../../../../../common/maps/obj/enemy.tx" x="400" y="240">
+   <properties>
+    <property name="dialog">[
+  {
+    "text":"*glub*\n(According to your Fish to English dictionary, he's greeting you)",
+    "options":[
+      { "name":"Glub." },
+      {
+        "name": "I like your fishiness. I would like to be blue and smell funny too.",
+        "text": "*glub*\n(Your color identify is now blue)",
+        "condition": [ { "colorIdentity": "U", "not": true } ],
+        "options": [ { "name": "It's working. Man, I can go eat some krill right now.", "action": [ { "setColorIdentity": "U" } ]} ]
+      },{
+        "name": "I talked to the gate. Somehow I think you will find this relevant.",
+        "text": "*glub, glub*\n (Fascinating.)",
+        "condition": [ {"checkMapFlag": "gate" } ],
+        "options": [
+          { "name": "I know, right?" }
+        ]
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Merfolk Soldier" />
+   </properties>
+  </object>
+  <object id="95" template="../../../../../common/maps/obj/enemy.tx" x="288" y="224">
+   <properties>
+    <property name="enemy" value="Doppelganger" />
+   <property name="effect">{"startBattleWithCard": ["Kismet|LEG", "Fellwar Stone|DRK"]}</property>
+    </properties>
+  </object>
+  <object id="96" template="../../../../../common/maps/obj/enemy.tx" x="304" y="224">
+   <properties>
+    <property name="enemy" value="Doppelganger" />
+   <property name="effect">{"startBattleWithCard": ["Kismet|LEG", "Fellwar Stone|DRK"]}</property>
+    </properties>
+  </object>
+  <object id="97" template="../../../../../common/maps/obj/inn.tx" type="spellsmith" gid="10499" x="224" y="368" width="16" height="16" />
+  <object id="98" template="../../../../../common/maps/obj/portal.tx" type="portal" x="176" y="272">
+   <properties>
+    <property name="portalState" value="active" />
+    <property name="sprite" value="sprites/portal.atlas" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/debug_map.tmx" />
+    <property name="teleportObjectId" value="99" />
+   </properties>
+  </object>
+  <object id="99" template="../../../../../common/maps/obj/portal.tx" type="portal" x="272" y="272">
+   <properties>
+    <property name="portalState" value="active" />
+    <property name="sprite" value="sprites/portal.atlas" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/debug_map.tmx" />
+    <property name="teleportObjectId" value="98" />
+   </properties>
+  </object>
+  <object id="101" template="../../../../../common/maps/obj/enemy.tx" x="128" y="400">
+   <properties>
+    <property name="enemy" value="Plague Rat Swarm" />
+   </properties>
+  </object>
+  
+  <object id="200" template="../../../../../common/maps/obj/enemy.tx" x="360" y="240"><properties><property name="enemy" value="Lathliss" /><property name="name" value="1. Rorix Bladewing" /><property name="effect">{"startBattleWithCard": ["Mountain|LEA", "Mountain|LEA", "Mountain|LEA", "Mountain|LEA", "Dragon Roost|ONS"]}</property></properties></object>
+  <object id="201" template="../../../../../common/maps/obj/enemy.tx" x="350" y="280"><properties><property name="enemy" value="Spirit of the Night|MIR" /><property name="name" value="2. Lord of the Pit" /></properties></object>
+  <object id="202" template="../../../../../common/maps/obj/enemy.tx" x="330" y="315"><properties><property name="enemy" value="Lorthos" /><property name="name" value="3. Leviathan" /><property name="effect">{"startBattleWithCard": ["Island|LEA", "Island|LEA", "Island|LEA", "Island|LEA", "Island|LEA", "Island|LEA"]}</property></properties></object>
+  <object id="203" template="../../../../../common/maps/obj/enemy.tx" x="300" y="345"><properties><property name="enemy" value="Ghalta" /><property name="name" value="4. Queen of Beasts" /><property name="effect">{"startBattleWithCard": ["Forest|LEA", "Forest|LEA", "Forest|LEA", "Forest|LEA", "City of Solitude|VIS", "Dense Foliage|WTH", "Kavu Lair|INV"]}</property></properties></object>
+  <object id="204" template="../../../../../common/maps/obj/enemy.tx" x="265" y="365"><properties><property name="enemy" value="Akroma" /><property name="name" value="5. Akroma" /><property name="effect">{"startBattleWithCard": ["Plains|LEA", "Plains|LEA", "Plains|LEA", "Tormented Angel|UDS", "Serra's Blessing|WTH", "Serra's Liturgy|USG"]}</property></properties></object>
+  <object id="205" template="../../../../../common/maps/obj/enemy.tx" x="240" y="120"><properties><property name="enemy" value="Garruk" /><property name="name" value="6. Kamahl" /><property name="effect">{"startBattleWithCard": ["Forest|PALP", "Forest|PALP", "Forest|PALP", "Overwhelming Instinct|ONS", "Epic Struggle|JUD"]}</property></properties></object>
+  <object id="206" template="../../../../../common/maps/obj/enemy.tx" x="200" y="365"><properties><property name="enemy" value="Nahiri" /><property name="name" value="7. Lin Sivvi" /><property name="effect">{"startBattleWithCard": ["Plains|PALP", "Plains|PALP", "Plains|PALP", "Lin Sivvi, Defiant Hero|NMS", "Cho-Manno, Revolutionary|MMQ"]}</property></properties></object>
+  <object id="207" template="../../../../../common/maps/obj/enemy.tx" x="165" y="345"><properties><property name="enemy" value="Kiora" /><property name="name" value="8. Empress Galina" /><property name="effect">{"startBattleWithCard": ["Island|PALP", "Forest|PALP", "Howling Mine|LEA"]}</property></properties></object>
+  <object id="208" template="../../../../../common/maps/obj/enemy.tx" x="135" y="315"><properties><property name="enemy" value="Teferi" /><property name="name" value="9. Teferi" /><property name="effect">{"startBattleWithCard": ["Teferi's Isle|MIR", "Plains|PGRU", "Teferi's Puzzle Box|VIS", "Teferi's Honor Guard|VIS"]}</property></properties></object>
+  <object id="209" template="../../../../../common/maps/obj/enemy.tx" x="115" y="280"><properties><property name="enemy" value="Jace" /><property name="name" value="10. Arcanis" /><property name="effect">{"startBattleWithCard": ["Island|LEA", "Island|LEA", "Island|LEA", "Rhystic Study|PCY"]}</property></properties></object>
+  <object id="210" template="../../../../../common/maps/obj/enemy.tx" x="105" y="240"><properties><property name="enemy" value="Sorin" /><property name="name" value="11. Baron Sengir" /><property name="effect">{"startBattleWithCard": ["Swamp|PELP", "Swamp|PELP", "Swamp|PELP", "Subversion|ULG"]}</property></properties></object>
+  <object id="211" template="../../../../../common/maps/obj/enemy.tx" x="115" y="200"><properties><property name="effect">{"startBattleWithCard": ["Marble Diamond|MIR", "Charcoal Diamond|MIR", "Edgewalker|SCG", "Righteous War|VIS", "Purgatory|MIR"]}</property><property name="enemy" value="Valyx the Tormentor" /><property name="name" value="12. Valyx" /></properties></object>
+  <object id="212" template="../../../../../common/maps/obj/enemy.tx" x="135" y="165"><properties><property name="enemy" value="Grolnok" /><property name="name" value="13. Grave Frog" /><property name="effect">{"startBattleWithCard": ["Swamp|PELP", "Forest|PELP", "Worry Beads|MMQ", "Worry Beads|MMQ", "Mortal Combat|TOR"]}</property></properties></object>
+  <object id="213" template="../../../../../common/maps/obj/enemy.tx" x="165" y="135"><properties><property name="enemy" value="Scarecrow Captain" /><property name="name" value="14. Scarecrow" /><property name="effect">{"startBattleWithCard": ["Forest|LEA", "Plains|LEA", "Argothian Enchantress|USG", "Spellbook|EXO", "Scarecrow|DRK"]}</property></properties></object>
+  <object id="214" template="../../../../../common/maps/obj/enemy.tx" x="200" y="115"><properties><property name="enemy" value="The Hydra of Shandalaar" /><property name="name" value="15. Hydra" /><property name="effect">{"startBattleWithCard": ["Mountain|LEA", "Forest|LEA", "Mana Flare|LEA", "Primal Rage|STH"]}</property></properties></object>
+  <object id="215" template="../../../../../common/maps/obj/enemy.tx" x="240" y="105"><properties><property name="effect">{"startBattleWithCard": ["Mishra's Workshop|ATQ", "Sol Ring|LEA", "Colossus of Sardia|ATQ"]}</property><property name="enemy" value="Myr Superion" /><property name="name" value="16. Colossus" /></properties></object>
+  <object id="216" template="../../../../../common/maps/obj/enemy.tx" x="280" y="115"><properties><property name="enemy" value="Sliver Queen" /><property name="name" value="17. Sliver Queen" /><property name="effect">{"startBattleWithCard": ["City of Brass|ARN", "Reflecting Pool|TMP", "Metallic Sliver|TMP", "Primitive Etchings|SCG"]}</property></properties></object>
+  <object id="217" template="../../../../../common/maps/obj/enemy.tx" x="315" y="135"><properties><property name="enemy" value="Metallic Sliver" /><property name="name" value="18. Metallic Sliver" /><property name="effect">{"startBattleWithCard": ["Metallic Sliver|TMP", "Metallic Sliver|TMP", "Metallic Sliver|TMP"]}</property></properties></object>
+   <property name="effect">{ "startBattleWithCard": [ "Metallic Sliver|TMP", "Metallic Sliver|TMP", "Metallic Sliver|TMP" ] }</property>
+  <object id="219" template="../../../../../common/maps/obj/enemy.tx" x="365" y="200"><properties><property name="enemy" value="Slivdrazi Experiment" /><property name="name" value="20. Spined Sliver" /><property name="effect">{ "startBattleWithCard": [ "Barbed Sliver|TMP", "Root Sliver|LGN" ] }</property></properties></object>
+  <object id="220" template="../../../../../common/maps/obj/enemy.tx" x="290" y="240"><properties><property name="enemy" value="Tibalt" /><property name="name" value="21. Specter King" /><property name="effect">{"startBattleWithCard": ["Charcoal Diamond|MIR", "Fire Diamond|MIR", "Megrim|STH", "Anvil of Bogardan|VIS"]}</property></properties></object>
+  <object id="221" template="../../../../../common/maps/obj/enemy.tx" x="320" y="240"><properties><property name="enemy" value="Demon of Tibalt" /><property name="name" value="22. Specter's Horror" /><property name="effect">{"startBattleWithCard": ["Swamp|2ED", "Swamp|2ED", "Swamp|2ED", "Urborg Stalker|WTH"]}</property></properties></object>
+  <object id="222" template="../../../../../common/maps/obj/enemy.tx" x="280" y="270"><properties><property name="enemy" value="Giant Cyclops" /><property name="name" value="23. Specter's Cyclops" /><property name="effect">{ "startBattleWithCard": [ "Chance Encounter|ODY", "Goblin Bomb|WTH", "Impulsive Maneuvers|ODY", "Mana Crypt|PHPR", "Mountain|LEA" ] }</property></properties></object>
+  <object id="223" template="../../../../../common/maps/obj/enemy.tx" x="280" y="210"><properties><property name="enemy" value="Torturer" /><property name="name" value="24. Specter's Torturer" /></properties></object>
+  <object id="224" template="../../../../../common/maps/obj/enemy.tx" x="190" y="240"><properties><property name="enemy" value="Xira" /><property name="name" value="25. Xira Arien" /><property name="effect">{"startBattleWithCard": ["Mountain|PGRU", "Swamp|PGRU", "Forest|PGRU", "Xira Arien|LEG", "The Hive|LEA", "Hornet Cannon|STH", "Fecundity|USG"]}</property></properties></object>
+  <object id="225" template="../../../../../common/maps/obj/enemy.tx" x="160" y="240"><properties><property name="enemy" value="Slobad" /><property name="name" value="26. Squee" /><property name="effect">{"startBattleWithCard": ["Mountain|UGL", "Mountain|UGL", "Goblin Spy|INV", "Goblin War Drums|FEM"]}</property></properties></object>
+  <object id="226" template="../../../../../common/maps/obj/enemy.tx" x="200" y="270"><properties><property name="enemy" value="Slimefoot" /><property name="name" value="27. Thallid Lord" /><property name="effect">{"startBattleWithCard": ["Forest|PALP", "Thallid|FEM", "Elvish Farmer|FEM", "Sporogenesis|USG", "Mindbender Spores|MIR"]}</property></properties></object>
+  <object id="227" template="../../../../../common/maps/obj/enemy.tx" x="200" y="210"><properties><property name="enemy" value="The Cheff" /><property name="name" value="28. Homelands Chef" /><property name="effect">{"startBattleWithCard": ["An-Havva Township|HML", "An-Havva Township|HML", "An-Havva Township|HML", "An-Havva Township|HML", "Folk of An-Havva|HML", "Dwarven Trader|HML", "Abbey Matron|HML"]}</property></properties></object>
+  <object id="228" template="../../../../../common/maps/obj/enemy.tx" x="240" y="290"><properties><property name="enemy" value="Conjurer" /><property name="name" value="29. Three Kingdoms Commander" /><property name="effect">{"startBattleWithCard": ["Mountain|PTK", "Island|PTK", "Plains|PTK"]}</property></properties></object>
+  <object id="229" template="../../../../../common/maps/obj/enemy.tx" x="240" y="190"><properties><property name="enemy" value="Zedruu" /><property name="name" value="30. Portal Master" /><property name="effect">{"startBattleWithCard": ["Mountain|POR", "Mountain|POR", "Island|POR", "Island|POR", "Plains|POR", "Plains|POR", "Wall of Swords|LEA", "Storm Crow|ALL", "Craven Giant|POR"]}</property></properties></object>
+ </objectgroup>
+</map>

@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="19" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="117">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value=""/>
+ </properties>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx"/>
+ <layer id="6" name="Collision" width="30" height="19">
+  <data encoding="base64" compression="zlib">
+   eJxjYBi8wI2TMKaFnU8JmPuYynYTYye17SbFTmrZjctOdDOx2UGJ3SB903gxMUh8Nw9x6si1FxsAmYmPj6yfHLuxhScuc7DJDXV76aUfpG8lB3l6l3NQnpdgdhMbzpTaiW43MfZSy050u/EBatuJbDe+dEurOgnZHnz84WgvtcIWAIOHLCo=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="19">
+  <data encoding="base64" compression="zlib">
+   eJx7ws7A8GQI4UJ54jE1zCAVD4Sd+Oynt33UjD9y7B6u4QyzE91uevkRXYxe4YzN/8MtXvHZTUt34Ms/tPY/NrMHMv8OZN1ArDtM+BhQQBM3+XaBzCIFIwNS9Q4GDAAw7Fue
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="19">
+  <data encoding="base64" compression="zlib">
+   eJzV1F0KwkAMBOB9788F2tIzCD2NnsIDqNeqtb2bK7IQFpvMBFcwMBS2bL/koZnrEOYfpM+C3Dk1ISz1fo7N99z0/mU+4lOrO2Az8yImaqMuYyI24npMy0bcQZjn0U5enXPeQZkV6aGEm2ytp1KuVaXcQ4e5U8u5W8yt8s16ifdW57y9007mp+8ye5KxNZPdk6htmawr7Wv1jvxP05lletz8jtwRbP8ybGn78R/qCRGT22E=
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="19">
+  <data encoding="base64" compression="zlib">
+   eJzl1G0OQDAMBuD+ZnoFcRXBwdzFvTDugcwSZsOqPhJv0tik2xM/CuCbkQFAGR5XH/CbidjviwWffdbktF1mFaky11y26zszXO9T3PZom+p2450S18/JLWYrR+Xa+q64tjTjne3s1qj2Puep7t3n/+hSZ0HPICXUOfT913DYHKavzWmatq5llu85TTM294m86ZpFzQDLEj8K
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="19">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDDZQKE89sx5rMjA80SRdjlLwH2SuFulyo4A0MBq/o2AU4AcAe0YOPQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="66" template="../../../../../../common/maps/obj/treasure.tx" x="256.447" y="95.763">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+}]</property>
+   </properties>
+  </object>
+  <object id="75" template="../../../../../../common/maps/obj/enemy.tx" x="291.571" y="166.141">
+   <properties>
+    <property name="enemy" value="Demon"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="100,101,99"/>
+   </properties>
+  </object>
+  <object id="83" template="../../../../../../common/maps/obj/waypoint.tx" x="193.014" y="286.598"/>
+  <object id="86" template="../../../../../../common/maps/obj/entry_up.tx" x="208.316" y="175.684">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/monastery/unhallowed_abbey_1F.tmx"/>
+   </properties>
+  </object>
+  <object id="87" template="../../../../../../common/maps/obj/booster.tx" x="272.228" y="95.7719">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="88" template="../../../../../../common/maps/obj/treasure.tx" x="240.333" y="47.6667">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+}]</property>
+   </properties>
+  </object>
+  <object id="89" template="../../../../../../common/maps/obj/booster.tx" x="257.333" y="47.3333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="90" template="../../../../../../common/maps/obj/treasure.tx" x="175.667" y="48.3333">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+}]</property>
+   </properties>
+  </object>
+  <object id="91" template="../../../../../../common/maps/obj/treasure.tx" x="144.333" y="95">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+}]</property>
+   </properties>
+  </object>
+  <object id="92" template="../../../../../../common/maps/obj/booster.tx" x="127.667" y="94">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="93" template="../../../../../../common/maps/obj/booster.tx" x="159" y="47">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="94" template="../../../../../../common/maps/obj/enemy.tx" x="208.666" y="270.394">
+   <properties>
+    <property name="enemy" value="Demon"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="98,97,83"/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../../../common/maps/obj/enemy.tx" x="122.212" y="172.727">
+   <properties>
+    <property name="enemy" value="Demon"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="104,102,103"/>
+   </properties>
+  </object>
+  <object id="97" template="../../../../../../common/maps/obj/waypoint.tx" x="192.727" y="255.455"/>
+  <object id="98" template="../../../../../../common/maps/obj/waypoint.tx" x="223.091" y="255.455"/>
+  <object id="99" template="../../../../../../common/maps/obj/waypoint.tx" x="288.545" y="127.273"/>
+  <object id="100" template="../../../../../../common/maps/obj/waypoint.tx" x="287.636" y="192"/>
+  <object id="101" template="../../../../../../common/maps/obj/waypoint.tx" x="319.091" y="159.273"/>
+  <object id="102" template="../../../../../../common/maps/obj/waypoint.tx" x="97.4545" y="159.636"/>
+  <object id="103" template="../../../../../../common/maps/obj/waypoint.tx" x="126.545" y="127.455"/>
+  <object id="104" template="../../../../../../common/maps/obj/waypoint.tx" x="125.636" y="200.909"/>
+  <object id="108" name="Ward" type="dialog" gid="11912" x="192.063" y="128.292" width="48" height="16">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;A translucent, shimmering red field blocks your path. Pained screams echo through the room behind you.&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Leave.&quot; } 
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="109" name="Sacrifice1" type="dialog" gid="11905" x="159.667" y="123.333" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;A captive lies tied to the altar. Glowing red runes encircle them.&quot;, 
+    &quot;options&quot;:[ 
+	{ 
+		&quot;text&quot;:&quot;As the third captive is freed, you hear the sound of shattering as the barrier in the center of the chamber fails. Time to end this.&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
+		&quot;name&quot;:&quot;Free them.&quot; 
+			&quot;options&quot;:[{
+			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:3}}],
+			&quot;action&quot;:[{&quot;deleteMapObject&quot;:108}],
+			&quot;name&quot;:&quot;ok&quot; }]
+	},
+	{ &quot;name&quot;:&quot;Leave.&quot; } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="110" name="Sacrifice2" type="dialog" gid="11906" x="256.667" y="123.667" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;A captive lies tied to the altar. Glowing red runes encircle them.&quot;, 
+    &quot;options&quot;:[ 
+	{ 
+		&quot;text&quot;:&quot;As the third captive is freed, you hear the sound of shattering as the barrier in the center of the chamber fails. Time to end this.&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
+		&quot;name&quot;:&quot;Free them.&quot; 
+			&quot;options&quot;:[{
+			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:3}}],
+			&quot;action&quot;:[{&quot;deleteMapObject&quot;:108}],
+			&quot;name&quot;:&quot;ok&quot; }]
+	},
+	{ &quot;name&quot;:&quot;Leave.&quot; } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="111" name="Sacrifice3" type="dialog" gid="11907" x="224" y="285.333" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;A captive lies tied to the altar. Glowing red runes encircle them.&quot;, 
+    &quot;options&quot;:[ 
+	{ 
+		&quot;text&quot;:&quot;As the third captive is freed, you hear the sound of shattering as the barrier in the center of the chamber fails. Time to end this.&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
+		&quot;name&quot;:&quot;Free them.&quot; 
+			&quot;options&quot;:[{
+			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:3}}],
+			&quot;action&quot;:[{&quot;deleteMapObject&quot;:108}],
+			&quot;name&quot;:&quot;ok&quot; }]
+	},
+	{ &quot;name&quot;:&quot;Leave.&quot; } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="113" template="../../../../../../common/maps/obj/dialog.tx" x="209.364" y="114.091" width="13.8182" height="13.3636">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;*The large, imposing demon before you smirks*\n Ah, so you must be the one who's been freeing my sacrifices...and the volunteer to be my new one. Tell me, mortal, as your last words that aren't a howl of pain - why challenge me?&quot;,
+    &quot;options&quot;:[{ 
+	&quot;name&quot;:&quot;Because you're a monster, and you should be stopped!&quot;,  
+	&quot;text&quot;:&quot;*The demon sneers.*\n Ah, a noble *hero*. I should have guessed. Your kind die like anyone else when your power runs dry - allow me to demonstrate!&quot;,
+	&quot;options&quot;:[{
+		&quot;name&quot;:&quot;End&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:113}]
+		}]
+   	},
+	{ 
+	&quot;name&quot;:&quot;I want power. I'll take it from what's left of you.&quot;,  
+	&quot;text&quot;:&quot;*The demon chuckles.*\n I'll commend your ambition, if not your sense. Fight hard enough, and I might let you replace that failure you dealt with upstairs.&quot;,
+	&quot;options&quot;:[{
+		&quot;name&quot;:&quot;End&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:113}]
+		}]
+    	},
+	{ 
+	&quot;name&quot;:&quot;Honestly, you just looked like you'd be a good fight.&quot;,  
+	&quot;text&quot;:&quot;*The demon blinks in surprise, then laughs.*\n Well, if that's what you seek, you'll find more than you bargained for here. I hope you enjoy the last battle of your life, *mortal*.&quot;,
+	&quot;options&quot;:[{
+		&quot;name&quot;:&quot;End&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:113}]
+		}]
+    	},
+	{ 
+	&quot;name&quot;:&quot;...&quot;,  
+	&quot;text&quot;:&quot;*The fiend's eyes narrow.*\n Too scared for words? So be it, mortal. You'll die all the same.&quot;,
+	&quot;options&quot;:[{
+		&quot;name&quot;:&quot;End&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:113}]
+		}]
+    }]
+}]</property>
+   </properties>
+  </object>
+  <object id="116" template="../../../../../../common/maps/obj/enemy.tx" x="203.566" y="96.2358" width="24" height="24">
+   <properties>
+    <property name="defeatDialog">[{
+    &quot;text&quot;:&quot;*With a snarl of pain, the demon collapses to the floor.* \n Congratulations, mortal, you've bested me. In exchange for my life, I offer a lesson - the same killing power I wield.&quot;,
+    &quot;options&quot;:[{ 
+	&quot;name&quot;:&quot;I have no need for power from something as vile as you. Die!&quot;,  
+	&quot;text&quot;:&quot;*The demon's eyes widen in fear.* \n No! I will not be destroyed by- \n *A final blast of power reduces him to mana in the air of this place, and something clatters to the ground. A holy symbol of this place - or rather, what it once was. As the unholy energy around it fades, you can still feel magic coursing through it.*&quot;
+	&quot;options&quot;:[{
+		&quot;name&quot;:&quot;End&quot;,
+		&quot;action&quot;:[{&quot;addItem&quot;:&quot;Hallowed Sigil&quot;},{&quot;deleteMapObject&quot;:116}]
+		}]
+   	},
+	{ 
+	&quot;name&quot;:&quot;If you knew anything worth teaching me directly, I wouldn't have been able to defeat you.&quot;,  
+	&quot;text&quot;:&quot;*The demon's eyes widen in fear.* \n No! I will not be destroyed by- \n *A final blast of power reduces him to mana in the air of this place, and something clatters to the ground. A holy symbol of this place - or rather, what it once was. As the unholy energy around it fades, you can still feel magic coursing through it.*&quot;
+	&quot;options&quot;:[{
+		&quot;name&quot;:&quot;End&quot;,
+		&quot;action&quot;:[{&quot;addItem&quot;:&quot;Hallowed Sigil&quot;},{&quot;deleteMapObject&quot;:116}]
+		}]
+    	},
+	{ 
+	&quot;name&quot;:&quot;...Very well, even a monster like you deserves mercy. *Once.*&quot;,  
+	&quot;text&quot;:&quot;*The demon smiles, moving his hand in an arcane gesture.* \n *As you unconsciously mimic it, you feel a dark, repulsive power crystallize in your hand. \n *The demon smiles as he begins to fade into a cloud of smoke.* \n Very well, mortal. My power is yours to wield...until next time.&quot;
+	&quot;options&quot;:[{
+		&quot;name&quot;:&quot;End&quot;,
+		&quot;action&quot;:[{&quot;addItem&quot;:&quot;Unhallowed Sigil&quot;},{&quot;deleteMapObject&quot;:116}]
+		}]
+    	},
+	{ 
+	&quot;name&quot;:&quot;As you should. I'll take your offer.&quot;,  
+	&quot;text&quot;:&quot;*The demon smiles, moving his hand in an arcane gesture.* \n *As you unconsciously mimic it, you feel a dark, repulsive power crystallize in your hand. \n *The demon smiles as he begins to fade into a cloud of smoke.* \n Very well, mortal. My power is yours to wield...until next time.&quot;
+	&quot;options&quot;:[{
+		&quot;name&quot;:&quot;End&quot;,
+		&quot;action&quot;:[{&quot;addItem&quot;:&quot;Unhallowed Sigil&quot;},{&quot;deleteMapObject&quot;:116}]
+		}]
+    }]
+}]
+</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Marble Diamond|MIR&quot;, &quot;Charcoal Diamond|MIR&quot;, &quot;Edgewalker|SCG&quot;, &quot;Righteous War|VIS&quot;, &quot;Purgatory|MIR&quot; ]
+}</property>
+    <property name="enemy" value="Valyx the Tormentor"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

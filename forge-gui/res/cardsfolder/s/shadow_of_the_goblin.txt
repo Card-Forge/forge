@@ -1,4 +1,5 @@
 Name:Shadow of the Goblin
+Variant:UniversesWithin:FlavorName:Quint's Insight
 ManaCost:1 R
 Types:Enchantment
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Unreliable Visions — At the beginning of your first main phase, discard a card. If you do, draw a card.

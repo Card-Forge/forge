@@ -1,0 +1,30 @@
+[metadata]
+Name=Jeska, Warrior Adept
+[Main]
+4 Taiga|LEA
+4 Wooded Foothills|ONS
+6 Mountain|ICE
+6 Forest|ICE
+4 Avatar of Fury|PCY
+2 Jeska, Warrior Adept|JUD
+2 Kamahl, Pit Fighter|ODY
+2 Kamahl, Fist of Krosa|ONS
+2 Decimate|ODY
+2 Viashivan Dragon|VIS
+1 Livonya Silone|LEG
+1 Stangg|LEG
+2 Hull Breach|PLS
+2 Artifact Mutation|INV
+4 Gratuitous Violence|ONS
+4 Avatar of Might|PCY
+2 Ancient Ooze|SCG
+2 Symbiotic Wurm|ONS
+4 Flametongue Kavu|PLS
+4 Ravenous Baboons|EXO
+
+[StartInBattle_Reference]
+1 Shivan Oasis|INV
+1 Jeska, Warrior Adept|JUD
+1 Fires of Yavimaya|INV
+1 Overabundance|INV
+1 Narcissism|TOR

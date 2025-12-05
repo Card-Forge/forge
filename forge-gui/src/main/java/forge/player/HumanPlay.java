@@ -560,9 +560,7 @@ public class HumanPlay {
         }
 
         CardCollection cardsToDelve = new CardCollection();
-        if (!effect) {
-            CostAdjustment.adjust(toPay, ability, cardsToDelve, false);
-        }
+        CostAdjustment.adjust(toPay, ability, activator, cardsToDelve, false, effect);
 
         Card offering = null;
         Card emerge = null;

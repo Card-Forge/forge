@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="31" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="90">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/phyrexia/DrossPitTiles.tsx" />
+ <layer id="6" name="Collision" width="31" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzVlM0NgCAMRrkYT3YZo67nEuJc6ia6gHAgYG1JIWBik+8g1L7+Bd0opQWqYRJubfYOtL5g596XZM9t/L7kfHLYEzOfEbyvJC98ZmNQ96EG47N0Sp3gtZrvHmR9wTvGGVXfAW+OzWcjfGM15FqP8h0i+WOTssO+4v5iNp4DJ2kPuHnj/lJzSFFobt8pP66eC55xJLxUdsn3l/rH7WjNdy2MH9uL2uxSffwD+wZNG6DH
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="31" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzr1mNgaBkg3D0E7N7BA6FBAJkeCH8PpN0DFd9N3APnXmqE96jdI89uctL5QNs9UGXLqN30t5taGACvMGLt
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="31" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYGBg6NYbGAwCU4H0FBx4Mo3t7oHS2EDXCLF7r97A2X2MjnaD0tN0GoU5chrGlmYJAUrsRg7PaVjcQS+7sZk5kHY3QXEfAXXk4GYk85FxI5K/sbnxvB7ldhOTx7DZfWMA7aZGmA8FuwmlC1raPRAYAAIpNm8=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="31" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2Dwgvl6DAztWPACPdrb3Q+0ow2IZyLhDiCeSEW7D+Lw3yws9oDcMwNN3SEK3HIKqHcCDozNbnQ1pymw+zJauOILX2zxcIUG8Y8tfLHFAy3AChzhsZIOdo+CUUAOAAA9nDWk
+  </data>
+ </layer>
+ <layer id="8" name="Archway" width="31" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwSggHgAACDwAAQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_left.tx" x="0.706867" y="192" width="16" height="80" />
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="432.239" y="155.641" />
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="96.485" y="173.992">
+   <properties>
+    <property name="enemy" value="Dross Gladiator" />
+    <property name="speedModifier" type="float" value="4" />
+    <property name="threatRange" value="45" />
+    <property name="waypoints" value="82,81,80,83,84,88,70,79,87,83" />
+   </properties>
+  </object>
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="399.841" y="149.68">
+   <properties>
+    <property name="enemy" value="Dross Grimnarch" />
+    <property name="threatRange" value="50" />
+    <property name="waypoints" value="" />
+   <property name="effect">{"startBattleWithCard": ["Phyrexian Arena|APC", "Phyrexian Negator|UDS", "Phyrexian Broodlings|ULG", "Phyrexian Walker|VIS"]}</property>
+    </properties>
+  </object>
+  <object id="75" template="../../../../../../common/maps/obj/booster.tx" x="449.75" y="143.25">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "USG","ULG","UDS","INV","APC" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
+    "colors": [ "black" ]
+  },
+  {
+    "editions": [ "USG","ULG","UDS","INV","APC" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
+    "colors": [ "black" ]
+  },
+  {
+    "editions": [ "USG","ULG","UDS","INV","APC" ],
+    "type": "card",
+    "count": 1,
+    "rarity": [ "Rare", "Mythic Rare" ]
+    "colors": [ "black" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="76" template="../../../../../../common/maps/obj/treasure.tx" x="432" y="143" />
+  <object id="85" template="../../../../../../common/maps/obj/enemy.tx" x="216.75" y="165.25">
+   <properties>
+    <property name="enemy" value="Dross Gladiator" />
+    <property name="speedModifier" type="float" value="4" />
+    <property name="threatRange" value="50" />
+    <property name="waypoints" value="66,78,65,77" />
+   </properties>
+  </object>
+  <object id="86" template="../../../../../../common/maps/obj/enemy.tx" x="276" y="105.25">
+   <properties>
+    <property name="enemy" value="Dross Gladiator" />
+    <property name="speedModifier" type="float" value="4" />
+    <property name="threatRange" value="50" />
+    <property name="waypoints" value="65,78,66,77" />
+   </properties>
+  </object>
+  <object id="89" template="../../../../../../common/maps/obj/enemy.tx" x="47.75" y="87.5">
+   <properties>
+    <property name="enemy" value="Dross Gladiator" />
+    <property name="speedModifier" type="float" value="4" />
+    <property name="threatRange" value="45" />
+    <property name="waypoints" value="88,87,79,70,88,84,83,82,81,80,83,84" />
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="7" name="Waypoints">
+  <object id="65" template="../../../../../../common/maps/obj/waypoint.tx" x="295" y="107" />
+  <object id="66" template="../../../../../../common/maps/obj/waypoint.tx" x="218" y="185" />
+  <object id="70" template="../../../../../../common/maps/obj/waypoint.tx" x="44" y="61" />
+  <object id="77" template="../../../../../../common/maps/obj/waypoint.tx" x="218" y="107" />
+  <object id="78" template="../../../../../../common/maps/obj/waypoint.tx" x="295" y="185" />
+  <object id="79" template="../../../../../../common/maps/obj/waypoint.tx" x="84" y="61" />
+  <object id="80" template="../../../../../../common/maps/obj/waypoint.tx" x="80" y="236" />
+  <object id="81" template="../../../../../../common/maps/obj/waypoint.tx" x="114" y="236" />
+  <object id="82" template="../../../../../../common/maps/obj/waypoint.tx" x="114" y="175" />
+  <object id="83" template="../../../../../../common/maps/obj/waypoint.tx" x="80" y="175" />
+  <object id="84" template="../../../../../../common/maps/obj/waypoint.tx" x="54.75" y="162" />
+  <object id="87" template="../../../../../../common/maps/obj/waypoint.tx" x="84" y="118" />
+  <object id="88" template="../../../../../../common/maps/obj/waypoint.tx" x="44" y="118" />
+ </objectgroup>
+</map>

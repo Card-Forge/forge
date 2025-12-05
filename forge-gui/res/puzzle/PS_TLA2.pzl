@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Avatar: The Last Airbender #02
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2025/11/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Your opponent cast Secret of Bloodbending (without additional cost) on their last turn, so they control your combat step. Ensure your solution satisfies all actions your opponent could take during your combat (including their blocks.)
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Hustle // Bustle;Deadly Precision;Lightning Strike;Carnage, Crimson Chaos|Set:PSPM|Art:1;Jet's Brainwashing
+p0graveyard=Ball Lightning;Abandon Attachments;Flamewake Phoenix
+p0battlefield=Juggernaut;Geyser Leaper;Fire Nation Cadets;Bespoke Battlegarb;Red Herring;Ominous Asylum;Ominous Asylum;Ominous Asylum;Peculiar Lighthouse;Peculiar Lighthouse
+p1life=13
+p1battlefield=Archangel of Tithes;Fog Bank
+p1precast=Secret of Bloodbending->Human

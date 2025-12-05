@@ -1,0 +1,34 @@
+[metadata]
+Name=Arcanis the Omnipotent
+[Main]
+32 Island|LEA
+4 Maze of Ith|DRK
+4 Arcanis the Omnipotent|ONS
+4 Nameless One|ONS
+2 Patron Wizard|ODY
+2 Aven Fateshaper|ONS
+2 Ghosthelm Courier|ONS
+2 Thalakos Seer|TMP
+2 Thalakos Dreamsower|TMP
+4 Prodigal Sorcerer|LEA
+4 Zuran Spellcaster|ICE
+4 Suq'Ata Firewalker|MIR
+4 Daring Apprentice|MIR
+2 Supreme Inquisitor|ONS
+2 Mahamoti Djinn|LEA
+4 Ixidor's Will|ONS
+2 Counterspell|LEA
+2 Force of Will|ALL
+2 Time Warp|TMP
+2 Spelljack|JUD
+2 Decree of Silence|SCG
+2 Treachery|UDS
+2 Control Magic|LEA
+2 Dominate|NMS
+2 Propaganda|TMP
+2 Time Spiral|USG
+2 Levitation|ULG
+
+[StartInBattle_Reference]
+3 Island|LEA
+1 Rhystic Study|PCY

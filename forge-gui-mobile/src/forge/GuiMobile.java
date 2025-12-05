@@ -303,8 +303,13 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
+    public boolean isSupportedAudioFormat(File file) {
+        return Forge.getDeviceAdapter().isSupportedAudioFormat(file);
+    }
+
+    @Override
     public IAudioClip createAudioClip(final String filename) {
-        return AudioClip.createClip(SoundSystem.instance.getSoundDirectory() + filename);
+        return AudioClip.createClip(SoundSystem.instance.getSoundResource(filename));
     }
 
     @Override

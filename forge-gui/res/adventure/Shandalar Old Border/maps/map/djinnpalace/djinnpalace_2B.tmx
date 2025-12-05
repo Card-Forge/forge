@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="78">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyL5mVg2MVDXxwFtFMWSNMbSPOM2jtq76i9o/aO2jtqL6q9e4G4npt+dtYC7doDtHMnneteEN4NxAD/oTSv
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzr5GRg6BzFo3gUj+JRPIpH8YjAAGRZIuw=
+  </data>
+ </layer>
+ <layer id="7" name="Floor" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJz7w8TA8GcUj+JRPIpH8SgexSMCAwCWUPoU
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAooA9/YB9oFo4BYAACu/AD+
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="208.667" y="225.21">
+   <properties>
+    <property name="direction" value="up" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/djinnpalace/djinnpalace_2.tmx" />
+   </properties>
+  </object>
+  <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="206.712" y="152.781">
+   <properties>
+    <property name="effect">{"startBattleWithCard": ["Island|6ED", "Swamp|6ED", "Old Man of the Sea|ARN", "Fledgling Djinn|WTH"]}</property>
+    <property name="enemy" value="Mighty Djinn" />
+   <property name="effect">{"startBattleWithCard": ["Island|6ED", "Swamp|6ED", "Old Man of the Sea|ARN", "Fledgling Djinn|WTH"]}</property>
+    <property name="hidden" type="bool" value="true" />
+    <property name="threatRange" type="int" value="40" />
+   </properties>
+  </object>
+  <object id="74" template="../../../../../../common/maps/obj/treasure.tx" x="206.037" y="135.253" />
+  <object id="75" template="../../../../../../common/maps/obj/booster.tx" x="189.184" y="118.4">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "ARN", "CHR", "MIR", "VIS" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "ARN", "CHR", "MIR", "VIS" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "ARN", "CHR", "MIR", "VIS" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="76" template="../../../../../../common/maps/obj/booster.tx" x="219.52" y="118.063">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "ARN", "CHR", "MIR", "VIS" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "ARN", "CHR", "MIR", "VIS" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "ARN", "CHR", "MIR", "VIS" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="250" y="150"><properties><property name="enemy" value="Whim of Shandalar" /><property name="threatRange" type="int" value="100" /><property name="effect">{"startBattleWithCard": ["City of Brass|ARN"]}</property></properties></object></objectgroup>
+</map>

@@ -1,0 +1,8 @@
+Name:Swampbenders
+ManaCost:4 G G
+Types:Creature Human Druid Ally
+PT:*/*
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Swamps on the battlefield.
+S:Mode$ Continuous | Affected$ Land.YouCtrl | AddType$ Swamp | Description$ Lands you control are Swamps in addition to their other types.
+SVar:X:Count$Valid Swamp
+Oracle:Swampbenders's power and toughness are each equal to the number of Swamps on the battlefield.\nLands you control are Swamps in addition to their other types.

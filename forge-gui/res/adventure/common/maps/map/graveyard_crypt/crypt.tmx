@@ -143,19 +143,19 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;Hmm... A big switch is embedded into the wall.&quot;,
+    &quot;text&quot;: &quot;A big switch is embedded into the wall.&quot;,
     &quot;options&quot;: [
       {
-        &quot;text&quot;: &quot;You hear some loud sounds coming from the north&quot;,
-        &quot;name&quot;: &quot;flip the switch&quot;,
+        &quot;text&quot;: &quot;You hear some loud sounds coming from the north.&quot;,
+        &quot;name&quot;: &quot;Flip the switch&quot;,
         &quot;options&quot;: [
           {
             &quot;action&quot;: [ { &quot;deleteMapObject&quot;: 85 } ],
-            &quot;name&quot;: &quot;ok&quot;
+            &quot;name&quot;: &quot;Continue&quot;
           }
         ]
       },
-      { &quot;name&quot;: &quot;go away&quot; }
+      { &quot;name&quot;: &quot;Leave&quot; }
     ]
   }
 

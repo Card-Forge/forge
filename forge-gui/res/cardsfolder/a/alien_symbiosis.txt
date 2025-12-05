@@ -1,4 +1,5 @@
 Name:Alien Symbiosis
+Variant:UniversesWithin:FlavorName:Aggressive Symbiosis
 ManaCost:1 B
 Types:Enchantment Aura
 K:Enchant:Creature

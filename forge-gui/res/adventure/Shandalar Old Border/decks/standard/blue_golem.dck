@@ -1,15 +1,23 @@
 [metadata]
-Name=blue_golem
+Name=Blue Golem
 [Main]
-2 Rainbow Efreet|VIS|1
-2 Sea Sprite|5ED|1
-2 Serrated Arrows|ATH|1
-2 Spindrift Drake|STH|1
-2 Tidal Wave|MIR|1
-21 Island|ICE|1
-4 Cloud Sprite|MMQ|1
-4 Dream Halls|STH|1
-4 Force of Will|ALL|1
-4 Hydroblast|ICE|1
-4 Man-o'-War|PAL02|1
-4 Mystical Tutor|MIR|1
+12 Island|MIR
+4 Mishra's Factory|ATQ|4
+4 Stalking Stones|TMP
+4 Scorched Ruins|WTH
+4 Copy Artifact|LEA
+2 Argivan Restoration|WTH
+2 Magus of the Unseen|ICE
+2 Opportunity|ULG
+2 Words of Wisdom|ODY
+4 Brass Herald|APC
+2 Patagia Golem|MIR
+2 Soldevi Golem|ICE
+4 Clay Statue|ATQ
+1 Igneous Golem|MIR
+1 Lead Golem|MIR
+1 Matopi Golem|VIS
+1 Basalt Golem|MIR
+2 Beast of Burden|ULG
+2 Phyrexian Colossus|7ED
+4 Thran Dynamo|UDS

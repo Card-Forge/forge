@@ -1,0 +1,44 @@
+[metadata]
+Name=Serra the Benevolent
+[Main]
+22 Plains|LEA
+4 Secluded Steppe|ONS
+4 Drifting Meadow|USG
+2 Karakas|LEG
+2 Kor Haven|NMS
+2 Serra's Sanctum|USG
+2 Purify|ULG
+2 Worship|USG
+1 Serra Angel|LEA
+1 Serra Angel|ATH
+1 Serra Angel|7ED
+1 Serra Angel|O90P
+4 Serra Advocate|UDS
+4 Herald of Serra|USG
+4 Exalted Angel|ONS
+4 Voice of All|PLS
+1 Radiant, Archangel|ULG
+1 Reya Dawnbringer|INV
+1 Akroma, Angel of Wrath|LGN
+1 Silver Seraph|JUD
+4 Replenish|UDS
+3 Moat|LEG
+3 Crackdown|MMQ
+2 Karmic Justice|ODY
+4 Harsh Mercy|ONS
+2 Aura of Silence|WTH
+2 Serra's Liturgy|USG
+4 Swords to Plowshares|LEA
+4 Mother of Runes|ULG
+4 Academy Rector|UDS
+2 Wrath of God|LEA
+2 Sigil of the New Dawn|ONS
+
+[StartInBattle_Reference]
+1 Serra Angel|LEA
+1 Worship|USG
+1 Serra's Liturgy|USG
+1 Remembrance|USG
+1 Noble Purpose|MMQ
+1 Karmic Justice|ODY
+1 Absolute Law|USG

@@ -1,0 +1,7 @@
+Name:Momo's Heist
+ManaCost:2 R
+Types:Sorcery
+A:SP$ GainControl | ValidTgts$ Artifact | Untap$ True | AddKWs$ Haste | SubAbility$ DBPump | SpellDescription$ Gain control of target artifact. Untap it. It gains haste. At the beginning of the next end step, sacrifice it.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | AtEOT$ Sacrifice
+SVar:PlayMain1:TRUE
+Oracle:Gain control of target artifact. Untap it. It gains haste. At the beginning of the next end step, sacrifice it.

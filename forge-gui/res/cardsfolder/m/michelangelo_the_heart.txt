@@ -1,0 +1,11 @@
+Name:Michelangelo, the Heart
+ManaCost:1 G
+Types:Legendary Creature Mutant Ninja Turtle
+PT:2/1
+K:Trample
+T:Mode$ Phase | Phase$ Main | PhaseCount$ 2 | ValidPlayer$ You | CheckSVar$ RaidTest | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Raid (the Fridge) — At the beginning of your second main phase, if you attacked this turn, put a +1/+1 counter on target creature and create a Food token.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ c_a_food_sac
+K:Partner - Character select
+SVar:RaidTest:Count$AttackersDeclared
+Oracle:Trample\nRaid (the Fridge) — At the beginning of your second main phase, if you attacked this turn, put a +1/+1 counter on target creature and create a Food token.\nPartner—Character select (You can have two commanders if both have this ability.)

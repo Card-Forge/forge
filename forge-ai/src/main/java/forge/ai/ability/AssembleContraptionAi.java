@@ -93,9 +93,9 @@ public class AssembleContraptionAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
         if(getDeck(aiPlayer, sa).isEmpty())
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        return super.chkDrawback(sa, aiPlayer);
+        return super.chkDrawback(aiPlayer, sa);
     }
 }

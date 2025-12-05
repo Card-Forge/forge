@@ -63,12 +63,6 @@ import java.util.Map;
  */
 public class ComputerUtilCombat {
 
-    // A special flag used in ComputerUtil#canRegenerate to avoid recursive reentry and stack overflow
-    private static boolean dontTestRegen = false;
-    public static void setCombatRegenTestSuppression(boolean shouldSuppress) {
-        dontTestRegen = shouldSuppress;
-    }
-
     /**
      * <p>
      * canAttackNextTurn.
@@ -443,23 +437,18 @@ public class ComputerUtilCombat {
             }
         }
 
-        int threshold = 0;
-        int maxTreshold = 0;
-        if (ai.getController().isAI()) {
-            threshold = ((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD);
-            maxTreshold = ((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_MAX_THRESHOLD) - threshold;
+        if (resultingPoison(ai, combat) > Math.max(7, ai.getPoisonCounters())) {
+            return true;
         }
 
+        int threshold = AiProfileUtil.getIntProperty(ai, AiProps.AI_IN_DANGER_THRESHOLD);
+        int maxTreshold = AiProfileUtil.getIntProperty(ai, AiProps.AI_IN_DANGER_MAX_THRESHOLD) - threshold;
         int chance = MyRandom.getRandom().nextInt(80) + 5;
         while (maxTreshold > 0) {
             if (MyRandom.getRandom().nextInt(100) < chance) {
                 threshold++;
             }
             maxTreshold--;
-        }
-
-        if (resultingPoison(ai, combat) > Math.max(7, ai.getPoisonCounters())) {
-            return true;
         }
 
         return !ai.cantLoseForZeroOrLessLife() && lifeThatWouldRemain(ai, combat) - payment < Math.min(threshold, ai.getLife());
@@ -710,7 +699,7 @@ public class ComputerUtilCombat {
         int firstStrikeBlockerDmg = 0;
 
         for (final Card defender : blockers) {
-            if (!(defender.isWitherDamage()) && canDestroyAttacker(ai, attacker, defender, combat, true)) {
+            if (!defender.isWitherDamage() && canDestroyAttacker(ai, attacker, defender, combat, true)) {
                 return true;
             }
             if (defender.hasFirstStrike() || defender.hasDoubleStrike()) {
@@ -1433,7 +1422,11 @@ public class ComputerUtilCombat {
                 int damage = AbilityUtils.calculateAmount(source, sa.getParam("NumDmg"), sa);
 
                 toughness -= predictDamageTo(attacker, damage, source, false);
-                continue;
+            } else if (sa.getApi() == ApiType.EachDamage && "TriggeredAttackerLKICopy".equals(sa.getParam("Defined"))) {
+                List<Card> valid = CardLists.getValidCards(source.getController().getCreaturesInPlay(), sa.getParam("ValidCards"), source.getController(), source, sa);
+                // TODO: this assumes that 1 damage is dealt per creature. Improve this to check the parameter/X to determine
+                // how much damage is dealt by each of the creatures in the valid list.
+                toughness -= valid.size();
             } else if (ApiType.Pump.equals(sa.getApi())) {
                 if (!sa.hasParam("NumDef")) {
                     continue;
@@ -1785,7 +1778,7 @@ public class ComputerUtilCombat {
         final List<Card> attackers = combat.getAttackersBlockedBy(blocker);
 
         for (Card attacker : attackers) {
-            if (!(attacker.isWitherDamage()) && canDestroyBlocker(ai, blocker, attacker, combat, true)) {
+            if (!attacker.isWitherDamage() && canDestroyBlocker(ai, blocker, attacker, combat, true)) {
                 return true;
             }
         }
@@ -1812,10 +1805,9 @@ public class ComputerUtilCombat {
                     && !blocker.hasKeyword(Keyword.INDESTRUCTIBLE)) {
                 return true;
             }
-        } // flanking
+        }
 
-        if (blocker.hasKeyword(Keyword.INDESTRUCTIBLE) || dontTestRegen
-                || ComputerUtil.canRegenerate(blocker.getController(), blocker)) {
+        if (blocker.hasKeyword(Keyword.INDESTRUCTIBLE) || ComputerUtil.canRegenerate(blocker.getController(), blocker)) {
             return false;
         }
 
@@ -2047,7 +2039,7 @@ public class ComputerUtilCombat {
         }
 
         // Order the combatants in preferred order in case legacy ordering is disabled
-        if (!self.getGame().getRules().hasOrderCombatants()) {
+        if (isAttacking && overrideOrder) {
             if (combatant.isAttacking()) { 
                 opposedCombatants = AiBlockController.orderBlockers(combatant, new CardCollection(opposedCombatants));
             } else {

@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="69">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [&quot;Orcish Oriflamme|LEA&quot;]}" />
+ </properties>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx" />
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJybxsnAMG0Uj+JRPIpH8SgexSMCAwDOljzS
+  </data>
+ </layer>
+ <layer id="2" name="Floor" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyT4WFgkCEBR/MyMOwC0lG8pOmjFMsCMQhI09FOetsLC1sQ3g21dycPQoxWYQ7yYwQvbkwrv8PCFhnA7KRlmGOzFxmM2jtq71Cydy8Q13FDcD03xK5aboTYHhrZi83vw7l8Hgz2guI6mYPyOAUAs91TwQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgxFoM9LXPh0c9uESpza4Sx9rCAIHGpvfBqWvqzMw3ABiezRxegK7AbATBO7QyR5k/9ErfYHiEZv/BiJ+R8EowAUAPEcJCQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="268" width="48" height="16">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/vampirecastle/vampirecastle_1.tmx" />
+   </properties>
+  </object>
+  <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="160" y="140">
+   <properties>
+    <property name="enemy" value="Nightstalker" />
+    <property name="threatRange" type="int" value="40" />
+   </properties>
+  </object>
+  <object id="64" template="../../../../../../common/maps/obj/manashards.tx" x="154.394" y="169.462" />
+  <object id="65" template="../../../../../../common/maps/obj/treasure.tx" x="208.637" y="23.8091">
+   <properties>
+    <property name="reward">[
+  {
+    "type": "randomCard",
+    "colors": [ "Black" ],
+    "subTypes": [ "Nightstalker" ],
+    "count": 5
+  },
+  {
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Dark Boots"
+  },
+  {
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Dark Shield"
+  },
+  {
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Dark Armor"
+  },
+  {
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Blood Vial"
+  },
+  {
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Dark Amulet"
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="66" template="../../../../../../common/maps/obj/booster.tx" x="197.253" y="42.225">
+   <properties>
+    <property name="reward">[
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Terror|LEA"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Mutilate|TOR"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"itemName": "Dark Ritual|LEA"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"itemName": "Necrologia|VIS"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Dark Banishing|ICE"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Vendetta|MMQ"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"itemName": "Murder"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Terror|LEA"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Mutilate|TOR"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"itemName": "Dark Ritual|LEA"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"itemName": "Necrologia|VIS"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Dark Banishing|ICE"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Vendetta|MMQ"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"itemName": "Murder"
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="193.5" y="80">
+   <properties>
+    <property name="enemy" value="Swamp Queen Tojira" />
+    <property name="speedModifier" type="float" value="10" />
+    <property name="threatRange" type="int" value="50" />
+   <property name="effect">{"startBattleWithCard": ["Lake of the Dead|ALL", "Everglades|VIS", "Nightstalker Engine|PO2", "Feral Shadow|MIR", "Breathstealer|MIR"]}</property>
+    </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="45" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="97">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="38401" source="../../../../../../common/maps/tileset/dungeon/dungeon_2.tsx"/>
+ <layer id="7" name="Background" width="60" height="45">
+  <data encoding="base64" compression="zlib">
+   eJzt1DEOgCAQRUFaLuZRvJyHxN6oSGHILlNMQ8XLJ7SjlAYApLLV+XcAAAAAAIBo9npv9r3+ah05j+jLhtF7R97paq1ZeldpvW6c9Y9acddeY/TOXmuWxrfeTFs+tWZqPAHdWE8X
+  </data>
+ </layer>
+ <layer id="9" name="Foreground" width="60" height="45">
+  <data encoding="base64" compression="zlib">
+   eJztllsOgjAQRfks3QIG3aiPsB0XBYL7wE5gYqlFQfpAuSYn8krpuTOtttckaQEAAPwd9Ik9h1COW3DdUl0BAAAAAAAAAAAAAAAgNKVIkkqxlx36sY1KPKHzm4jvMNWROKg5n9LvyeVrXnzOx6EyMd9VOnJ8R63G36nxm/77LrpMOA+f7mb+Pj1t9dazpRzY3Zezb7e5ObB77qnXqaeaPtfYvra+13u9cuAdso+n+JlrmuZVa9eW1npNteUeJqdMDr3pWqGeOafLa8xjM7EzuKTDuem1drWXlcbvY8z+5vXKXnqt+f5S50yub++yebt0Zo4RHWtL5mP/D1w5F5Frqu9Xn/pNX+u/WN+xPh7znrtfPwBkYg1B
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="53" template="../../../../../../common/maps/obj/treasure.tx" x="120.5" y="177"/>
+  <object id="59" template="../../../../../../common/maps/obj/enemy.tx" x="317.667" y="195">
+   <properties>
+    <property name="enemy" value="Cave Spider"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="82,83"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../../../common/maps/obj/enemy.tx" x="383.5" y="267.833">
+   <properties>
+    <property name="enemy" value="Horror"/>
+    <property name="threatRange" type="int" value="10"/>
+    <property name="waypoints" value="89,90"/>
+   </properties>
+  </object>
+  <object id="61" template="../../../../../../common/maps/obj/enemy.tx" x="165.333" y="241">
+   <properties>
+    <property name="enemy" value="Skeleton"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="81,80,79,80,81,82"/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../../../common/maps/obj/enemy.tx" x="441.5" y="199.5">
+   <properties>
+    <property name="enemy" value="Water Elemental"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="88,87"/>
+   </properties>
+  </object>
+  <object id="63" template="../../../../../../common/maps/obj/enemy.tx" x="649.5" y="190">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="92,91"/>
+   </properties>
+  </object>
+  <object id="64" template="../../../../../../common/maps/obj/gold.tx" x="681" y="244"/>
+  <object id="65" template="../../../../../../common/maps/obj/gold.tx" x="498" y="322"/>
+  <object id="66" template="../../../../../../common/maps/obj/gold.tx" x="147" y="312"/>
+  <object id="71" template="../../../../../../common/maps/obj/door_left.tx" gid="2147494992" x="720" y="144" width="16" height="48" rotation="0">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/nahiri/nahiri.tmx"/>
+    <property name="teleportObjectId" value="79"/>
+   </properties>
+  </object>
+  <object id="74" template="../../../../../../common/maps/obj/manashards.tx" x="520" y="263"/>
+  <object id="75" template="../../../../../../common/maps/obj/manashards.tx" x="484" y="321"/>
+  <object id="76" template="../../../../../../common/maps/obj/manashards.tx" x="152" y="298"/>
+  <object id="77" template="../../../../../../common/maps/obj/manashards.tx" x="165" y="101"/>
+  <object id="78" template="../../../../../../common/maps/obj/booster.tx" x="50.6667" y="338">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;STH&quot;, &quot;EXO&quot;, &quot;NMS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;STH&quot;, &quot;EXO&quot;, &quot;NMS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;STH&quot;, &quot;EXO&quot;, &quot;NMS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="79" template="../../../../../../common/maps/obj/waypoint.tx" x="122" y="296"/>
+  <object id="80" template="../../../../../../common/maps/obj/waypoint.tx" x="120.667" y="262"/>
+  <object id="81" template="../../../../../../common/maps/obj/waypoint.tx" x="142.667" y="238"/>
+  <object id="82" template="../../../../../../common/maps/obj/waypoint.tx" x="302.667" y="231.333"/>
+  <object id="83" template="../../../../../../common/maps/obj/waypoint.tx" x="320" y="170.667"/>
+  <object id="87" template="../../../../../../common/maps/obj/waypoint.tx" x="387.333" y="204.667"/>
+  <object id="88" template="../../../../../../common/maps/obj/waypoint.tx" x="558" y="201.333"/>
+  <object id="89" template="../../../../../../common/maps/obj/waypoint.tx" x="405.333" y="270"/>
+  <object id="90" template="../../../../../../common/maps/obj/waypoint.tx" x="357.333" y="262.667"/>
+  <object id="91" template="../../../../../../common/maps/obj/waypoint.tx" x="652.667" y="225.333"/>
+  <object id="92" template="../../../../../../common/maps/obj/waypoint.tx" x="642" y="146"/>
+  <object id="96" template="../../../../../../common/maps/obj/door_down.tx" x="40.3333" y="388.333">
+   <properties>
+    <property name="direction" value="left"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/nahiri/nahiri.tmx"/>
+    <property name="teleportObjectId" value="106"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="71">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAOonkZGHbxoOIoXoQ4MhtdDSVAlgdTTJoHIY7MRldDC3uR/Usve4kBw8leesQvrrSKbO9wT8/EgOFk70CWGyMpPRMDhku6quVmYNiDJrYXyK/npq696PEGwuhmymJRs4tIewF12C1k
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzr42Rg6MOCNbjJx22chDE2O0ftHbV31N5Re0ftHbV31F7a2gsAxCrEbw==
+  </data>
+ </layer>
+ <layer id="2" name="Walls and Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy1VdsNwjAM9B9JWYRFgC9AQszFGoiv8ugeDFJaGIFYwephkqgl5aQoTWP56uTOJSKqDNHaduPi1tbNhRpTtY7FIJ6QU6O2n7wbNw72O+7o3t1m/pnnWAyjNGnOEHeT4K0d327i5xTvKsC5D8QLd/PeC+XsA+GtoQYNzY/rXF7G/YccqTMcEhPD2YTPfV4QLdRYFsNjGKyxk/FcAr6D1vp3D9vt5dYrtZTg0Rbyo3/EQ7GcfaC/bavyt0p36KGxeLlmzn81XW9CX8kean5sXaFHY+A7GVNXMaCepb/920ca0lNz7pe1g94QxPrkE/SVw6v1q/k18H+Yc87amzFurJ97apWpK80b4n4Bd6Jxcg==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYICA85wQupqXgSqAkDmE5LW1ibOHGHVVULsucBJnJjnAB4l9Hos9yHZX8qLqaSPRLnT1FUTEWRWV4hUXgMXnKySxl0hsbGFCCcAWl6BwICYsBgKQm55JiTdq5V0YQI7LSjSz8bmLkvRMajqhZZ4GAWT3wNgvsSslG1ASb7QoJ0EA2U3lNMpTxMQdchqktJzE5Q9YfNI6LREDqFVOe0Np5PSLHKcAj1AhkA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="281" width="48" height="16">
+   <properties>
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="109.504" y="99.3562" />
+  <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="309.163" y="97.8565" />
+  <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="209.435" y="97.0941">
+   <properties>
+    <property name="enemy" value="Angel Warrior" />
+    <property name="threatRange" type="int" value="20" />
+   </properties>
+  </object>
+  <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="207.184" y="67.9197">
+   <properties>
+    <property name="enemy" value="Knight" />
+    <property name="threatRange" type="int" value="40" />
+    <property name="waypoints" value="70,69" />
+   <property name="effect">{"startBattleWithCard": ["Plains|2ED", "Darkest Hour|USG"]}</property>
+</properties>
+  </object>
+  <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="128.648" y="137.313">
+   <properties>
+    <property name="enemy" value="Monk" />
+    <property name="threatRange" type="int" value="20" />
+   </properties>
+  </object>
+  <object id="59" template="../../../../../../common/maps/obj/enemy.tx" x="286.626" y="137.313">
+   <properties>
+    <property name="enemy" value="Apprentice White Wizard" />
+    <property name="threatRange" type="int" value="20" />
+   </properties>
+  </object>
+  <object id="60" template="../../../../../../common/maps/obj/enemy.tx" x="287.292" y="215.969">
+   <properties>
+    <property name="enemy" value="Apprentice White Wizard" />
+    <property name="threatRange" type="int" value="20" />
+   </properties>
+  </object>
+  <object id="61" template="../../../../../../common/maps/obj/enemy.tx" x="128.648" y="217.969">
+   <properties>
+    <property name="enemy" value="Cleric" />
+    <property name="threatRange" type="int" value="20" />
+   </properties>
+  </object>
+  <object id="62" template="../../../../../../common/maps/obj/booster.tx" x="268.03" y="102.547">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 10,
+    "colors": [ "white" ],
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 3,
+    "colors": [ "white" ],
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 1,
+    "colors": [ "white" ],
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="67" template="../../../../../../common/maps/obj/manashards.tx" x="107.973" y="135.78" />
+  <object id="69" template="../../../../../../common/maps/obj/waypoint.tx" x="150.7" y="76.0975" />
+  <object id="70" template="../../../../../../common/maps/obj/waypoint.tx" x="274.812" y="73.3847" />
+ </objectgroup>
+</map>

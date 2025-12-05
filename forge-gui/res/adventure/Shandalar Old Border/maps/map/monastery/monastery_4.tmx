@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="62">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlmEKgCAMhf0b1Qms63SIukv3quxuJTZYkkZtGcI+GIMt38NFLKUEIR1NRQuK71Arpfc8o+hrV4eMe+3Rp/qOpdPGaKTZevrW056h+vq6lgnVlou+Zpjzle8dufvqBxrwPOd9u+KcQ7Xc5wykvq+83zgcvuuL84ZpL8xIA/YCEOp/MefYXoB+zr6TpxHzXZi+o/XYwTgM0gz1qb5//OcIAoUNp+8uUA==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzr42Rg6MOC22iMsdk5au+ovbS0N4ObgeEXF4R+wk48n1J7ybETRFPDv6TaCeJTai85dlLLv6PxOxq/o/FLvr190PidywIxE0SD+CCAzEeXB9H4zCQGYzOTGD6l9pJjJ7X8S6qdID6l9pJj52j8juJRPPwxAOAWMRg=
+  </data>
+ </layer>
+ <layer id="2" name="Ground and Walls" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJy9l0FOw0AMRWeZSXMH4DDAilL1FJym10BdFSi3CknZIjbEAis/v/bMQCK+NFKSyfiNE9txQgjhtQphHcfxMpz/VgdnzXvCZhun3PuY5+zgHmGK/WeynWJa7C6O9vrh+GTYRK7a7+G+O4O5c/xpgSna0nPoEz7p2MSpH53BYj6f83u32HwPct4K3penErbYl/ss3zzJeu+5x+F6TWM1jMvme3jzLImTJ3o/uH+ZRz8eDRv7WDavvhyq6XNCrpdDlt2LZjy+as7n97TGik0R526X4eaEXPFZ7B+rMU4wr3SO42IuF8U5aknrz5JcS1bNW/8DF4X156/cktrqMedwc7WVxbVpCS7nLQr915on8b4U1/sOaizxvizuwyrPFc6xsnOTmda+lohn9AljLdUTaN1Xcd3PzYu8HirVE8z5Lqi8HirVEyzBZbayUj3BUlxll/YF13UINzRu6/J5lFerrJ7A08dg+/PHPn5fN4X+IDNXWzwu1lasidq7eH7yni229tFqE7lenmyNvaByPYFVV5Dr5Ukbz/fk/YdwzHm1DLnMxvWpHiol71+Dudae8bpVp78Ad33b4Q==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzFljsOwjAMhruhDjlGJ44CKysSp4DSnUtwqHINcgYkUNVaci3bsZOofIshj8b23zpumpmxne0QGpFXK8/dyT7tOZZ58Oed4QsFfPPsoVwFf8G/IxobmXPw2X1Y78G5kM6h3AL/W4LqwxEXe1gsjsOqZ0RjWDuakxItpP1THiy5+AenXd5ai25ASiMvWMuePNvjlwfu29EofY9SYH+0mvTcz/bSrS03BmuBGrp9u7WVxjSwplxNwvNnEpMWr4RFu0j+f0hMnnhTNVzzp0RfD9J35Y03p4ZvTY172YO3tlihtdHSS9VEO4e7l0tI1X3pXgYejrOktVwvtSU4B1tpLfVSWvywjtPMcn97e6ncnsBaB3om71ZS/TllYO48ivU9TOVRO2PyVZrP6Q21OjDF8wNht13W
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="208" y="391.287" width="32" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="279.5" y="375"/>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="159.006" y="286.459">
+   <properties>
+    <property name="enemy" value="Cleric"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="216.171" y="122.719"/>
+  <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="152.5" y="374.5"/>
+  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="214.827" y="151.762">
+   <properties>
+    <property name="enemy" value="Sorceress Queen Kaja"/>
+   <property name="effect">{"startBattleWithCard": ["Island|UGL", "Plains|UGL", "Mountain|UGL", "Cuombajj Witches|ARN", "Sorceress Queen|ARN", "Millstone|ATQ", "Rainbow Vale|FEM", "Elven Lyre|FEM"]}</property>
+   </properties>
+  </object>
+  <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="280.296" y="316.458">
+   <properties>
+    <property name="enemy" value="White Dwarf"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../../../common/maps/obj/booster.tx" x="127.641" y="236.154">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;colors&quot;: [ &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="58" template="../../../../../../common/maps/obj/manashards.tx" x="303.975" y="224.625"/>
+  <object id="59" template="../../../../../../common/maps/obj/enemy.tx" x="238.878" y="221.935">
+   <properties>
+    <property name="enemy" value="Apprentice White Wizard"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../../../common/maps/obj/enemy.tx" x="191.392" y="220.555">
+   <properties>
+    <property name="enemy" value="Apprentice White Wizard"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="61" template="../../../../../../common/maps/obj/enemy.tx" x="272.777" y="254.466">
+   <properties>
+    <property name="enemy" value="Monk"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

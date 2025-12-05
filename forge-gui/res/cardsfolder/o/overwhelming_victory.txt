@@ -1,0 +1,6 @@
+Name:Overwhelming Victory
+ManaCost:4 R
+Types:Instant Lesson
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 5 | ExcessSVar$ Excess | SubAbility$ DBPumpAll | SpellDescription$ CARDNAME deals 5 damage to target creature. Each creature you control gains trample and gets +X/+0 until end of turn, where X is the amount of excess damage dealt this way.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Trample | NumAtt$ +Excess
+Oracle:Overwhelming Victory deals 5 damage to target creature. Each creature you control gains trample and gets +X/+0 until end of turn, where X is the amount of excess damage dealt this way.

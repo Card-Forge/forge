@@ -1,10 +1,36 @@
-{                                    
-"name":"Treefolk",
-  "template":
-  {
-   "count":60,
-   "colors":["Green"],
-   "tribe":"Treefolk",        
-   "rares":0.8
-  }
+{
+  "name": "Treefolk",
+  "mainDeck": [
+    {
+      "count": 8,
+      "colors": [
+        "Green"
+      ],
+      "subTypes": [
+        "Treefolk"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 30,
+      "colors": [
+        "Green"
+      ],
+      "subTypes": [
+        "Treefolk"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 22,
+      "cardName": "Forest|INV"
+    }
+  ]
 }

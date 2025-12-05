@@ -1,0 +1,264 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="48">
+ <properties>
+  <property name="preventEscape" type="bool" value="true" />
+ </properties>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <layer id="1" name="Background" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzjVWdg4B3Fo3gUj+JRPIpH8SgexVTDAA08eeE=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBhaYIsEBNMbbJeAYHoDeQEGBkUB6ph1EGjOISJxOz9DgqoAQwKx6g9TyY3U9O9A2dvIz8DQRCRWAdqpLEC8+mZ+/H5QoBHGFzZ7gXL7iMRtQPe38hOvfv9ouoKD0fxLH3tHwxk74FVH2Ati0wvA6t6BqoMpAQDikGk6
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="30" height="20">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzVVksOgkAMrcYtrjAEljB4AVEP5FIOAcYzGL2Cp5ArcCAjE5nMUDofoxP1JS+U0vaF0mYo5gDFH1Hg3Trbjm3HjEnmbHjP2fZxAi2Rh5n3eRtCd93XapiZHIdI6taRe97KoOsTJt2UQWXqWcbG9ajvofpSh/e9WfrVELq2+F/u82wp4+6xtFW/Drrc68Ku6xMmXTwffM7w3GCgeaoo26Y7SQCmyfOKKfwYVCymTdcnXPpM7aRLn/mu7uJxvk3XdRdVqM90+2/T9QmdbhkC7EMZp9oCx2jsqxVfGQ5ttQalewkATo7EcM07B5858wW+/Q/yCh8SAZfQ
+  </data>
+ </layer>
+ <layer id="4" name="Overlay" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20JT6AAAHgaCWAAAQ==
+  </data>
+ </layer>
+ <objectgroup id="5" name="Objects">
+  <object id="25" template="../../../../../../common/maps/obj/enemy.tx" x="80" y="272">
+   <properties>
+    <property name="enemy" value="Mimic" />
+   </properties>
+  </object>
+  <object id="26" template="../../../../../../common/maps/obj/dialog.tx" x="272" y="112">
+   <properties>
+    <property name="dialog">[
+{
+   "text": "'Damnation of the Mad Jester' is presented as the fictional tale of a man named Kuthuman whose meticulously detailed tales of fanciful worlds elevated his stature from a beggar to a royal entertainer before being dragged away by demons in the midst of the king's court which harmed not another soul.",
+   "options": [{
+      "name": "(Continue)",
+      "text": "This copy is prefaced, however, by a scribe's notes that all of the historical figures in the text of note and their interactions appear to be extremely accurately depicted, calling into question the fictional origin of Kuthuman's tale.",
+      "options": [{
+         "name": "(Continue)", "action": [{"deleteMapObject":-1}]}]
+      }]
+}   
+]</property>
+   </properties>
+  </object>
+  <object id="27" template="../../../../../../common/maps/obj/dialog.tx" x="352" y="112">
+   <properties>
+    <property name="dialog">[
+{
+   "text": "This shelf is simply a jumble of pages which seem to have come unbound from various books throughout the library. You see nothing of particular importance among them.",
+   "options": [{
+      "name": "(Continue)", "action": [{"deleteMapObject":-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="28" template="../../../../../../common/maps/obj/dialog.tx" x="320" y="200">
+   <properties>
+    <property name="dialog">[
+{
+   "text": "'Magical Meteorology', 'The Destructive Power of the Heavens', these books all seem to focus on things falling from the sky.",
+   
+   "options": [{
+      "name": "(Continue)", 
+      "action": [{"deleteMapObject":-1},{
+         "grantRewards": [{
+            "type": "card",
+            "count": 1,
+            "cardName": "Stone Rain"
+         }]
+      }]
+   }]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="29" template="../../../../../../common/maps/obj/dialog.tx" x="368" y="200">
+   <properties>
+    <property name="dialog">[
+{
+   "text": "'Dealing with the Magically Impaired' describes the difficulties in Shandalar communities of allowing people without magical talent to feel as though they are fully contributing members of society.",
+   "options": [{
+      "name": "(Continue)", "action": [{"deleteMapObject":-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="30" template="../../../../../../common/maps/obj/dialog.tx" x="80" y="200">
+   <properties>
+    <property name="dialog">[
+{
+   "text": "A pile of children's books lie on this shelf. The topmost tells a tale of a Goblin Balloon Brigade whose members do not have names and all address each other as 'Dumber Than X', where X is equal to the number of their peers that are agreed to be smarter on that day.",
+   "options": [{
+      "name": "(Continue)", "action": [{"deleteMapObject":-1},{
+         "grantRewards": [{
+            "type": "card",
+            "count": 1,
+            "cardName": "Goblin Balloon Brigade"
+         }]
+      }]
+   }]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="31" template="../../../../../../common/maps/obj/dialog.tx" x="144" y="200">
+   <properties>
+    <property name="dialog">[
+{
+   "text": "Genealgy reports and census data collections cover this bookcase. Understandably, these are rather dusty, which makes it all the more obvious that several books have been recently removed.",
+   "options": [{
+      "name": "(Continue)", "action": [{"deleteMapObject":-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="32" template="../../../../../../common/maps/obj/dialog.tx" x="176" y="200">
+   <properties>
+    <property name="dialog">[
+{
+   "text": "You find a book on the biology of Elves. One page is marked with a folded corner and describes a type of Elf that you've seen nowhere on Shandalar",
+   "options": [{
+      "name": "(Continue)", 
+      "action": [{
+         "deleteMapObject":-1
+      },{
+         "grantRewards": [{
+            "type": "card",
+            "count": 1,
+            "cardName": "Llanowar Elves"
+         }]
+      }]
+   }]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="34" template="../../../../../../common/maps/obj/dialog.tx" x="400" y="64">
+   <properties>
+    <property name="dialog">[
+{
+   "text": "'A Historical Account of a Coastal Raid', this is a collection of interviews conducted with the survivors of a coastal fishing village which was plundered by unknown creatures who simply walked out of the sea.",
+   "options": [{
+      "name": "(Continue)", "action": [{"deleteMapObject":-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="35" template="../../../../../../common/maps/obj/dialog.tx" x="112" y="64">
+   <properties>
+    <property name="dialog">[
+{
+   "text": "A collection of writings on Mana Shards - from theories on how they absorb mana while buried underground, to fanciful drawings such as a grain mill functioning beside a dry riverbed and powered by shards instead.",
+   "options": [{
+      "name": "(Continue)", "action": [{"deleteMapObject":-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="36" template="../../../../../../common/maps/obj/dialog.tx" x="96" y="240">
+   <properties>
+    <property name="dialog">[
+{
+   "text": "'The Price of Magic' focuses not on the direct effects of spells, but the cost and consequences of casting them. It isn't a very popular book.",
+   "options": [{
+      "name": "(Continue)", "action": [{"deleteMapObject":-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="38" template="../../../../../../common/maps/obj/dialog.tx" x="352" y="240">
+   <properties>
+    <property name="dialog">[
+{
+   "text": "'The Missing Lynx' appears to be a biological and behavioral comparison between domesticated felines and Leonin. Various theories are posited in the text, with the conclusion that one or the other was the result of an ancient wizard's research having been misapplied.",
+   "options": [{
+      "name": "(Continue)", "action": [{"deleteMapObject":-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="40" template="../../../../../../common/maps/obj/enemy.tx" x="232" y="160">
+   <properties>
+    <property name="enemy" value="Golem Sentinel" />
+    <property name="pursueRange" type="int" value="60" />
+    <property name="threatRange" type="int" value="40" />
+    <property name="waypoints" value="r5-8-15-18-19-20-21,r5-8-15-18-19-20-21-22-23" />
+   </properties>
+  </object>
+  <object id="41" template="../../../../../../common/maps/obj/enemy.tx" x="48" y="224">
+   <properties>
+    <property name="enemy" value="Black Golem" />
+    <property name="threatRange" type="int" value="50" />
+    <property name="waypoints" value="22,r11-12,r18-21,5,r8-15, r18-21, r11-12,r9-13" />
+   </properties>
+  </object>
+  <object id="42" template="../../../../../../common/maps/obj/enemy.tx" x="416" y="224">
+   <properties>
+    <property name="enemy" value="Black Golem" />
+    <property name="threatRange" type="int" value="50" />
+    <property name="waypoints" value="23,r45-46,r19-20,r8-15,r19-20,r45-46,r10-14" />
+   </properties>
+  </object>
+  <object id="43" template="../../../../../../common/maps/obj/enemy.tx" x="232" y="48">
+   <properties>
+    <property name="enemy" value="Spirit" />
+    <property name="spawn.Easy" type="bool" value="true" />
+   </properties>
+  </object>
+  <object id="44" template="../../../../../../common/maps/obj/enemy.tx" x="232" y="112">
+   <properties>
+    <property name="enemy" value="Spirit" />
+    <property name="pursueRange" type="int" value="100" />
+    <property name="spawn.Easy" type="bool" value="false" />
+    <property name="threatRange" type="int" value="40" />
+    <property name="waypoints" value="r5-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23-45-46,w2" />
+   </properties>
+  </object>
+  <object id="47" template="../../../../../../common/maps/obj/treasure.tx" x="304" y="272" />
+  <object id="1" template="../../../../../../common/maps/obj/collision.tx" x="-32" y="0" width="32" height="320" />
+  <object id="2" template="../../../../../../common/maps/obj/collision.tx" x="-32" y="320" width="544" height="32" />
+  <object id="3" template="../../../../../../common/maps/obj/collision.tx" x="480" y="0" width="32" height="320" />
+  <object id="4" template="../../../../../../common/maps/obj/collision.tx" x="-32" y="-32" width="544" height="32" />
+  <object id="7" template="../../../../../../common/maps/obj/entry_up.tx" x="208" y="304" width="64" height="16">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story_explore/library_of_varsil_1.tmx" />
+    <property name="teleportObjectId" value="24" />
+   </properties>
+  </object>
+  <object id="24" template="../../../../../../common/maps/obj/entry_down.tx" x="224" y="32" width="32" height="16">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story_explore/library_of_varsil_3.tmx" />
+    <property name="teleportObjectId" value="7" />
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="6" name="Waypoints">
+  <object id="5" template="../../../../../../common/maps/obj/waypoint.tx" name="5" x="232" y="144" />
+  <object id="8" template="../../../../../../common/maps/obj/waypoint.tx" name="8" x="232" y="208" />
+  <object id="9" template="../../../../../../common/maps/obj/waypoint.tx" name="9" x="48" y="208" />
+  <object id="10" template="../../../../../../common/maps/obj/waypoint.tx" name="10" x="416" y="208" />
+  <object id="11" template="../../../../../../common/maps/obj/waypoint.tx" name="11" x="48" y="128" />
+  <object id="12" template="../../../../../../common/maps/obj/waypoint.tx" name="12" x="48" y="160" />
+  <object id="13" template="../../../../../../common/maps/obj/waypoint.tx" name="13" x="48" y="80" />
+  <object id="14" template="../../../../../../common/maps/obj/waypoint.tx" name="14" x="416" y="80" />
+  <object id="15" template="../../../../../../common/maps/obj/waypoint.tx" name="15" x="232" y="80" />
+  <object id="16" template="../../../../../../common/maps/obj/waypoint.tx" name="16" x="48" y="256" />
+  <object id="17" template="../../../../../../common/maps/obj/waypoint.tx" name="17" x="416" y="256" />
+  <object id="18" template="../../../../../../common/maps/obj/waypoint.tx" name="18" x="130" y="158" />
+  <object id="19" template="../../../../../../common/maps/obj/waypoint.tx" name="19" x="334" y="158" />
+  <object id="20" template="../../../../../../common/maps/obj/waypoint.tx" name="20" x="334" y="128" />
+  <object id="21" template="../../../../../../common/maps/obj/waypoint.tx" name="21" x="130" y="128" />
+  <object id="22" template="../../../../../../common/maps/obj/waypoint.tx" name="22" x="128" y="256" />
+  <object id="23" template="../../../../../../common/maps/obj/waypoint.tx" name="23" x="336" y="256" />
+  <object id="45" template="../../../../../../common/maps/obj/waypoint.tx" name="45" x="416" y="160" />
+  <object id="46" template="../../../../../../common/maps/obj/waypoint.tx" name="46" x="416" y="128" />
+ </objectgroup>
+</map>

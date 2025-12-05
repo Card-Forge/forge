@@ -1,0 +1,21 @@
+[metadata]
+Name=The Dragon Lord
+[Main]
+4 Aladdin|ARN
+4 Dragon Whelp|LEA
+4 Dragon Engine|ATQ
+4 Nalathni Dragon|DRC94
+4 Shivan Dragon|LEA
+4 Lightning Bolt|LEA
+1 Wheel of Fortune|LEA
+1 Black Lotus|LEA
+4 Gauntlet of Might|LEA
+1 Mox Ruby|LEA
+1 Sol Ring|LEA
+4 Mana Flare|LEA
+22 Mountain|LEA
+
+[StartInBattle_Reference]
+1 Mox Ruby|LEA
+1 Nalathni Dragon|DRC94
+1 Dragon Engine|3ED

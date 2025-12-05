@@ -30,6 +30,12 @@
 	"Wood"
 ],
 "enemies": [
+	"Legend of the Savannah",
+	"Legend of the Taiga",
+	"Tropical Islander of Treva",
+	"Plateau Dweller of Rith",
+	"Bayou Dweller of Darigaaz",
+	"Domain Keeper of Cromat",
 	"Adept Green Wizard",
 	"Ape",
 	"Apprentice Green Wizard",
@@ -80,7 +86,9 @@
 	"Viper",
 	"Werewolf",
 	"Wild-Magic Sorcerer",
-	"Wurm"
+	"Wurm",
+	"Beast Master of Shandalar",
+	"Summoner of Shandalar"
 ],
 	"pointsOfInterest": [
 		"Green Castle",

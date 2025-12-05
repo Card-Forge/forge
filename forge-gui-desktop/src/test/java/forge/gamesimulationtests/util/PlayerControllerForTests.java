@@ -550,7 +550,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options) {
+    public ColorSet chooseColors(String message, SpellAbility sa, int min, int max, ColorSet options) {
         throw new UnsupportedOperationException("No idea how a test player controller would choose colors");
     }
 
@@ -690,7 +690,7 @@ public class PlayerControllerForTests extends PlayerController {
 
     @Override
     public Map<Card, ManaCostShard> chooseCardsForConvokeOrImprovise(SpellAbility sa, ManaCost manaCost,
-                                                                     CardCollectionView untappedCards, boolean improvise) {
+                                                                     CardCollectionView untappedCards, boolean artifacts, boolean creatures, Integer maxReduction) {
         // TODO: AI to choose a creature to tap would go here
         // Probably along with deciding how many creatures to tap
         return new HashMap<>();

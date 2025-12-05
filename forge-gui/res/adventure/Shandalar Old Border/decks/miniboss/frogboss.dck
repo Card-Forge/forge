@@ -1,0 +1,30 @@
+[metadata]
+Name=Grolnok
+[Main]
+4 Bayou|LEA
+4 Tainted Wood|TOR
+14 Forest|PELP
+14 Swamp|PELP
+4 Lhurgoyf|ICE
+4 Mortivore|ODY
+4 Terravore|ODY
+4 Revenant|STH
+4 Spiritmonger|APC
+4 Diligent Farmhand|ODY
+4 Blood Pet|TMP
+4 Spore Frog|PCY
+4 Doomed Necromancer|ONS
+4 Ashen Ghoul|ICE
+4 Phyrexian Plaguelord|ULG
+2 Grim Feast|MIR
+2 Avatar of Woe|PCY
+4 Necromancy|VIS
+4 Terror|LEA
+4 Naturalize|ONS
+4 Muscle Burst|ODY
+
+[StartInBattle_Reference]
+1 Swamp|PELP
+1 Forest|PELP
+2 Worry Beads|MMQ
+1 Mortal Combat|TOR

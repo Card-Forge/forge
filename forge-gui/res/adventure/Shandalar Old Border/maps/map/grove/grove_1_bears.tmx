@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="101">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx" />
+ <tileset firstgid="28289" source="../../../../../../common/maps/tileset/main-nocollide.tsx" />
+ <layer id="6" name="Collision" width="30" height="35">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20JT6AAAAAAPgYQaAAB
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="35">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAMA6C+M1r/EmpiJyT0kqqqqqo+HP9Ix1Y=
+  </data>
+ </layer>
+ <layer id="2" name="Grass" width="30" height="35">
+  <data encoding="base64" compression="zlib">
+   eJy9l/9OE0EQxzfB3O31qvgWRhLkMagvgL6AifxBa+4xqPwKRJ4BqrwHSmIRX8EChoo/IuFPZ7L7zU3H2+OuzTHJZO/a3f3Mj53Z1phq8tka87hlzK/ImLexMWMaN2l8k+Rz1uj5I837RHpC+ojmz3s9tRVBgsfrmHmtmF/ou4etSW5E78f0+RyND1r/21CVz3sxbz0uZ7Kk9P7VOnbs+atJbgP4VdjM3SDOD+Jt07gTYEr2mXX814njQucE+y6BD2Azl9cNbXnuEHPpt2QXCecU+w79eerSmi1i9mMXc+jPqPj8sL1tEXfJfpUUc5HT30KZ8YTWXtHzMz+y/2wH5sAG6b/OOasNxDnzvo09A7pkXW6Rv0XxHWxgdi/J48Y2IOftVq4hf2VMeS/wcJ7kXkX5Zx7bX6d+Mn+G4YvuD1oQS9j6J3LzYT/b0itZL/dpKw3VjYzRop30mc/jgnXvZXbPItpnzk23pr/TSqZ8Rl9t0l/cG7LOZV+t2h/rSiZqHjxZ36ht9CNt89BrXdtkzXNPWfL1LfsLehyfd8gB2XBIOqh5b2huX9S7rG3d4yDfUmOOaN5FOh0b99aV+j0gaxLnfRxNrl0mZid17Euvg4psXfNF9Y6YPFX7wedOmivbgPjPeh5l/9I2S/Z7Gj+QjvxnA3Eep7EhxIXIXF96f7+n0+dec/sBrmTLmHdmZMseHhId8xC7Tv+TPfwuYTbnWPOfp+53Q92+izu2qoA/8uN5Wu1+1MKx7jZ4N5Vxr0vy25TUjfOsIv/v3FeccTevUHxfeL1P5j7F9y+Ntw1zi5isNw1yQ37u0vNeQ+eqzM9ug/XLtaKZrO9id6Zekv4D/sv9og==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="35">
+  <data encoding="base64" compression="zlib">
+   eJy9V2tOwzAMzq+pTQQcqzD1KgjErToeV0ETZ1jZ9geOQCxqxXWdNmndflJU9TF/8eOzM2N00VhjDn5dXLi+WmUSAZXnuWfr7MI++B4aG3+Xg5O38WGH3HQP1H7t79/8/btf324+L3KDnRj/A7Ffk3ho5QP4W8H/fccLMb52/sJ3S/2V+Cn3ubNfCf5rg3PjM4285nCvjZ+dMb+7Pnc7k7dZqLU5fIeuBrVrfwz1hBbXAGpta17ed7W0/lmEernz61j039eET1Nzj+W/T9i3bxk31r+2xl/Kft9C3+k8XaN2nQ284POVXGlfXTonJUgze2qOaWBqZsdm91j/ahJyBLGWeoO0YIYei6DrfSQGqbNu6qyAWoK6hpqfmmUV+T4FYzGn5zSMIdc7AGORWw85dfZcDn+POYvlYI7PPOZPjJf28zn1T/ujdEYDm4Ud+luxb3JB68aROmrJ8y+f2xumK95vtp7TsTmi3XdTz8TacUjVq3bPPY34KPFulXsE1UWuvpeA9oa1z2gS9xb/Uyj+AJgdvpI=
+  </data>
+ </layer>
+ <layer id="7" name="Trees" width="30" height="35">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJylV1tu2zAQFOij+De+QX6KQE6ixOlR3BukTlw5ak4VIC2KopeI5Tpy7d6hXHgGXK1JSUAXIChRJPc1+1CWHSl3WfZ5lGXvfn7y897Pb3gWmvjx+imL0szvu/XjW/xzVuB7Zu4gT+HzOArvf/087uBHnld+/Han63d+TBPfC8Xzi58/uqOuh8jeGMnenTvKKHSm1sV2X/2dD6NgN+rZ4LvwFLn++FH657Wf7/18meB9MT/OC79n6/dcu7A3d+GumH1ET9qT8lGuEnLSBpq+m7tK8CYf6vI8au+jPG8u2Jf8hT7M23c+mfMxEr2flcz2DP35DgzJaFzbv/9LE8zEt2CzMfYU2gMX1UDd+iiG/z3wovWqsXY7QNccsVggTlJnLubtd4sBuWeJta64YTwuRwEPu4gOml7Ne4mzIivx0Icf8c8G8soZxiVjaCguGhNfxMBP75tfyj/MAzWwJzLW51g7P2Kiz1ZC9HmpcK99USt5xlibwb4pezQDc9uZec+VnWrcoWWxtrGkY7eLdK5nXue9jClNe/hQ8JAj12t//uhneULMIZS3ieCEOCKONwrH03n83j6ytWKhaoKNzQrfDi7E0JCYj5HYW8ZYrVXQ7zHiM9Yf8rY+ad3dw/cla+e2lx5ZS8Xb8qX/py5dQ4XER+Rp+5QC52O2FL1XERzXyP8r+E9wexORIVWDCuD8AJxNcT4lB6mB3++wn/XWxj5z5o3BsLblATlyg+f7yH4h8Q/z18aFPieGE9psG8nxxBdz8RpYkvvWHfwr7O/KJTxTKt4pPOgYW8K/rAsp2+seVscMfSe8hvRzWr4p8nbMlsSk5JnYfQ+Kl+hemfcUb9o/VStq+HiHmf2mjulK6cDavsZe4rIrFnNlS90fbIFl4iJWWzR+r13w3woy8Ax7NvayUhN0LWnA4xo25hyLJSGpe/wnou7so+Qc+Wqc8P0KfLmXMbSGjdkvUE5LjdKVvPlMvrovoI+IK/aqjKG94Zki/c+hc5X+r6pduhbUrt131K5dU62tdF5eIOZXaugcYO+2cosPCxdiQ9fZamBfMjO5iP+nmm+s1tn+v+iJByHmFPLQvmx6/DVRz7ae67zCfTli7tKF/wCLfcF7ac7zbp7hf7bNNzN3mkf/AfZvR7I=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="214.2" y="560.233" width="65.6" height="16">
+   <properties>
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="184.867" y="211.75">
+   <properties>
+    <property name="reward">[{
+  "type": "randomCard",
+  "count": 2,
+  "colors": [ "Green" ]
+},{
+  "type": "randomCard",
+  "count": 1,
+  "probability": 0.5,
+  "rarity": [ "rare" ],
+  "colors": [ "Green" ]
+},{
+  "type": "randomCard",
+  "count": 3,
+  "addMaxCount": 2,
+  "colors": [ "Green" ]
+}]</property>
+   </properties>
+  </object>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="281.256" y="318.37">
+   <properties>
+    <property name="displayNameOverride" value="Grisly Honeyguard" />
+    <property name="enemy" value="Bear" />
+    <property name="threatRange" type="int" value="50" />
+   </properties>
+  </object>
+  <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="78.783" y="69.25" />
+  <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="280.233" y="266.179">
+   <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Bear Cub|PO2", "Grizzly Bears|LEA", "Werebear|ODY" ] }</property>
+    <property name="enemy" value="Werebear" />
+    <property name="inactive" type="bool" value="true" />
+    <property name="speedModifier" type="float" value="5" />
+    <property name="threatRange" type="int" value="80" />
+   </properties>
+  </object>
+  <object id="62" template="../../../../../../common/maps/obj/booster.tx" x="225.068" y="191.63">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "MIR", "VIS", "WTH", "POR" ],
+    "type": "card",
+    "count": 10,
+    "colors": [ "green" ],
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "MIR", "VIS", "WTH", "POR" ],
+    "type": "card",
+    "count": 3,
+    "colors": [ "green" ],
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "MIR", "VIS", "WTH", "POR" ],
+    "type": "card",
+    "count": 1,
+    "colors": [ "green" ],
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="82" template="../../../../../../common/maps/obj/manashards.tx" x="441.821" y="470.157" />
+  <object id="83" template="../../../../../../common/maps/obj/enemy.tx" x="143.9" y="290.8">
+   <properties>
+    <property name="displayNameOverride" value="Grisly Honeyguard" />
+    <property name="enemy" value="Bear" />
+    <property name="threatRange" type="int" value="50" />
+    <property name="waypoints" value="95,96,97,98,97,96,95" />
+   </properties>
+  </object>
+  <object id="85" template="../../../../../../common/maps/obj/enemy.tx" x="164.887" y="409.808">
+   <properties>
+    <property name="deckOverride" value="" />
+    <property name="displayNameOverride" value="Grisly Honeyguard" />
+    <property name="enemy" value="Bear" />
+    <property name="threatRange" type="int" value="50" />
+    <property name="waypoints" value="87,88,86,94,86,88" />
+   </properties>
+  </object>
+  <object id="86" template="../../../../../../common/maps/obj/waypoint.tx" x="47.565" y="315.763" />
+  <object id="87" template="../../../../../../common/maps/obj/waypoint.tx" x="231.887" y="438.731" />
+  <object id="88" template="../../../../../../common/maps/obj/waypoint.tx" x="119.543" y="392.472" />
+  <object id="89" template="../../../../../../common/maps/obj/collision.tx" x="0.171222" y="-15.2693" width="478.77" height="16" />
+  <object id="90" template="../../../../../../common/maps/obj/collision.tx" x="2.48425" y="559.666" width="478.77" height="16" />
+  <object id="91" template="../../../../../../common/maps/obj/collision.tx" x="478.382" y="-17.1519" width="16" height="592.718" />
+  <object id="92" template="../../../../../../common/maps/obj/collision.tx" x="-13.9476" y="-14.1782" width="16" height="592.718" />
+  <object id="93" template="../../../../../../common/maps/obj/manashards.tx" x="7" y="202.5" />
+  <object id="94" template="../../../../../../common/maps/obj/waypoint.tx" x="47.5" y="191" />
+  <object id="95" template="../../../../../../common/maps/obj/waypoint.tx" x="205.5" y="323" />
+  <object id="96" template="../../../../../../common/maps/obj/waypoint.tx" x="120" y="264.5" />
+  <object id="97" template="../../../../../../common/maps/obj/waypoint.tx" x="96.5" y="191" />
+  <object id="98" template="../../../../../../common/maps/obj/waypoint.tx" x="69" y="154" />
+  <object id="99" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="194.25" y="223.5" width="81.5" height="54" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		"text": "Suddenly you hear strange sounds coming behind you. A coarse voice thunders behind you: HONEY MINE, YOU DIE!",
+		"options": [
+			{
+				"name": "You have a bad feeling about this.",
+				"action": [
+					{ "activateMapObject": 57 },			{ "deleteMapObject": -1 }
+
+				]
+
+			}
+
+		]
+
+	}
+
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

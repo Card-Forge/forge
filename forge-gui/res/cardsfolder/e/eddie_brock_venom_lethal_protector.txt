@@ -1,4 +1,5 @@
 Name:Eddie Brock
+Variant:UniversesWithin:FlavorName:Viggo, Enforcer of Ig's Crossing
 ManaCost:2 B
 Types:Legendary Creature Human Hero Villain
 PT:3/3
@@ -12,6 +13,7 @@ Oracle:When Eddie Brock enters, return target creature card with mana value 1 or
 ALTERNATE
 
 Name:Venom, Lethal Protector
+Variant:UniversesWithin:FlavorName:Viggo, End of Ig's Crossing
 ManaCost:3 B R G
 Types:Legendary Creature Symbiote Hero Villain
 PT:5/5

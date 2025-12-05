@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="54" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="71">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="40" height="54">
+  <data encoding="base64" compression="zlib">
+   eJzt1ksKgDAMAFGvIOIZPZ8HFFy4EWxiQ9Mm4iweCCId7Qe3ZZo2R8d8uV/feY7V0vdGe6/RjTXfMqrPci9iXt/W6Oi+yIaWXstzWd+vtJ8iO6Q9HHleag1Z+yx7X7KvTz2apD5t/NK92j6Pc1Eav4Znn2XuvBoznmN/lek/UmvzWNMju6K/6Zfbsq+7DH1SZ3Rb5q5SX3SLNr8AAAAAAADo4wRv63sN
+  </data>
+ </layer>
+ <layer id="7" name="Tilelaag 3" width="40" height="54">
+  <data encoding="base64" compression="zlib">
+   eJztmFsOwiAQRdkCuBz3Uo270qorxUfmg3QK6ISk2FtzTzIfJCScQMsM49ych58CDe2WBwo1r5rnWt5jmOLkyzHiniYumSMi4midPQpxA+eN6kbaOPgyjsa5Dg1zW7kHNQj1OU9jzfiLb/ODm/Ay9iUC/DfWHhJC5gwd7rslyesGtPy8lTpxZH1DCFkY1HtZuIUyd6T+AwJ5bruCeCX2O1w3DXrdj+5HyL+T7jHkt474SZ/lHNo85Q3nOtf3eR61+kG6n+Yqebi3X3LUPUDhm1PvWsZax3JYs85CrvMIIYT05Q2su4sg
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="40" height="54">
+  <data encoding="base64" compression="zlib">
+   eJztWFtSwzAM7Gf82UOFMD0EHI9CuVWh9BLMEA/ZyWaRH3Ft4COa0aR1G3mtlWTLd263u6uoL91u99otP/vnm5vHb7XvbZXau4x6ney8j8/DNPY8fj+Pz5OBXz/H9H5UL0/d9zyla/TY2IbHeOxmnB7L4ObPWFfO+tkG/Hkiv6Z8O0xrPBh8wH5vzJXiFHjeJ/s9+VPlEIk7C4MX9RXPpfZCPgMvx4kbxufHP9y3XmVtn/slP4Ob5xzIBmLwzc3YcmKJ13ImHhUvYzoZcRbKk5j0K7BhPeCEedH4Ytyai4yfBRwcp6fGupXPPB+4G8Su+pS5Ao5zABNju7plvCOvMafGKHOId2NzlArb5/UxL1Y+Q/pIrDzsZy6Zl1xcHLvKS08+YW6QW7y2x/2siEFgs3hJYVRO8B5qAHBz7db1WH5/ovdQxyxe1BchbFoXQrXY2kPYBufHC/kbdRq/A/PglvkIf3K9wX+O3dJna/d0rrk8hnFe28UY030j5pO/1HuXrrd/pYiTlvhyz2EhbJw/tXEhH3ivwD6VOv/o/lgr5rgu+jOIpan5Lu7nfo1971Y/hjABl+Z1jv9YYue6Unxaw0ux1eC5xF+s1vl6zfpy8ZWuVWOvBqeK71YeGGPN3PVaw17L2ldjrRqDNfmtoS35zeGOa63uf9oPcE9ee4+zVHtX7oP4PK7/sc7cLXxX2idZZ+7aOGPn95Bwbdb3b41Nja3Q3UtMDmTL4h5xkXt2OHU/e2ztw9cI99ep/i6nDrWQ1D0CJOecjZ6K+6/fkrV1XDnRe6I1Euo70ROuPScxRu5TS3IYvrFqd+0amBPnlujdaat9r7RGcx6XctnSf8BYo0dKKe5emCvcNanwb3i2Ps9c3PIe7CpjGmP823+4e2kdY5tuuummm266Vr8AdaJC6w==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="59" template="../../../../../../common/maps/obj/door_right.tx" x="0.66667" y="560.333">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_4/cave_23J9.tmx"/>
+    <property name="teleportObjectId" value="62"/>
+   </properties>
+  </object>
+  <object id="61" template="../../../../../../common/maps/obj/door_down.tx" x="-7.82355" y="198.134">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_4/cave_23I10.tmx"/>
+    <property name="teleportObjectId" value="62"/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../../../common/maps/obj/treasure.tx" x="488.333" y="546"/>
+  <object id="63" template="../../../../../../common/maps/obj/treasure.tx" x="489" y="578.167"/>
+  <object id="64" template="../../../../../../common/maps/obj/gold.tx" x="488.167" y="558.5"/>
+  <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="192.084" y="527.482">
+   <properties>
+    <property name="enemy" value="Apprentice Green Wizard"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="431.75" y="537.333">
+   <properties>
+    <property name="enemy" value="Green Beast"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="431.583" y="553.75">
+   <properties>
+    <property name="enemy" value="Troll"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="431.167" y="570.417">
+   <properties>
+    <property name="enemy" value="Red Beast"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="432.167" y="586.5">
+   <properties>
+    <property name="enemy" value="Giant Spider"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../../../common/maps/obj/manashards.tx" x="241.672" y="651.312"/>
+ </objectgroup>
+</map>

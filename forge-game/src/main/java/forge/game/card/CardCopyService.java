@@ -301,9 +301,10 @@ public class CardCopyService {
         // extra copy PT boost
         newCopy.setPTBoost(copyFrom.getPTBoostTable());
 
+        newCopy.copyFrom(copyFrom);
         newCopy.setCounters(Maps.newHashMap(copyFrom.getCounters()));
 
-        newCopy.setColor(copyFrom.getColor().getColor());
+        newCopy.setColor(copyFrom.getColor());
         newCopy.setPhasedOut(copyFrom.getPhasedOut());
         newCopy.setTapped(copyFrom.isTapped());
         newCopy.setTributed(copyFrom.isTributed());
@@ -315,7 +316,7 @@ public class CardCopyService {
         newCopy.setSaddled(copyFrom.isSaddled());
         if (newCopy.isSaddled()) newCopy.setSaddledByThisTurn(copyFrom.getSaddledByThisTurn());
         if (copyFrom.isSuspected()) {
-            newCopy.setSuspectedEffect(getLKICopy(copyFrom.getSuspectedEffect(), cachedMap));
+            newCopy.setSuspectedStatic(copyFrom.getSuspectedStatic().copy(newCopy, true));
         }
 
         newCopy.setDamageHistory(copyFrom.getDamageHistory());
@@ -351,8 +352,6 @@ public class CardCopyService {
             newCopy.setChosenNumber(copyFrom.getChosenNumber());
         }
         newCopy.setChosenEvenOdd(copyFrom.getChosenEvenOdd());
-
-        newCopy.copyFrom(copyFrom);
 
         // for getReplacementList (run after setChangedCardKeywords for caching)
         newCopy.setStoredKeywords(copyFrom.getStoredKeywords(), true);

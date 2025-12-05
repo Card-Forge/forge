@@ -71,7 +71,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                         if (ph.getCombat().isAttacking(c)) {
                             // get copy of creature with removed Counter
                             final Card cpy = CardCopyService.getLKICopy(c);
-                            // cant use substract on Copy
+                            // can't use subtract on Copy
                             cpy.setCounters(cType, a - amount);
 
                             // a removed counter would kill it
@@ -176,7 +176,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                 }
 
                 final Card srcCopy = CardCopyService.getLKICopy(src);
-                // cant use substract on Copy
+                // can't use subtract on Copy
                 srcCopy.setCounters(cType, a - amount);
 
                 final Card destCopy = CardCopyService.getLKICopy(dest);
@@ -204,7 +204,7 @@ public class CountersMoveAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         if (sa.usesTargeting()) {
             sa.resetTargets();
             return moveTgtAI(ai, sa);
@@ -265,7 +265,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
-            // prefered logic for this: try to steal counter
+            // preferred logic for this: try to steal counter
             List<Card> oppList = CardLists.filterControlledBy(tgtCards, ai.getOpponents());
             if (!oppList.isEmpty()) {
                 List<Card> best = CardLists.filter(oppList, card -> {
@@ -275,7 +275,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                     }
 
                     final Card srcCardCpy = CardCopyService.getLKICopy(card);
-                    // cant use substract on Copy
+                    // can't use subtract on Copy
                     srcCardCpy.setCounters(cType, srcCardCpy.getCounters(cType) - amount);
 
                     // do not steal a P1P1 from Undying if it would die this way
@@ -285,7 +285,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                     return true;
                 });
 
-                // if no Prefered found, try normal list
+                // if no Preferred found, try normal list
                 if (best.isEmpty()) {
                     best = oppList;
                 }
@@ -424,7 +424,7 @@ public class CountersMoveAi extends SpellAbilityAi {
 
             // move counter to opponents creature but only if you can not steal them
             // try to move to something useless or something that would leave play
-            boolean isNegative = ComputerUtil.isNegativeCounter(cType, src);
+            boolean isNegative = cType != null && ComputerUtil.isNegativeCounter(cType, src);
             List<Card> filteredTgtList;
             filteredTgtList = isNegative ? CardLists.filterControlledBy(tgtCards, ai.getOpponents()) :
                 CardLists.filterControlledBy(tgtCards, ai.getYourTeam());

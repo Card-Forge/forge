@@ -1,0 +1,22 @@
+[metadata]
+Name=Kamahl, Fist of Krosa
+[Main]
+16 Forest|PALP
+4 Nature's Lore|ICE
+4 Skyshroud Claim|NMS
+4 Vernal Bloom|USG
+4 Kamahl, Fist of Krosa|ONS
+4 Symbiotic Wurm|ONS
+4 Symbiotic Beast|ONS
+4 Roar of the Wurm|ODY
+4 Call of the Herd|ODY
+4 Naturalize|ONS
+2 Overrun|TMP
+2 Grizzly Fate|JUD
+2 Crush of Wurms|JUD
+2 Spidersilk Armor|MMQ
+
+[StartInBattle_Reference]
+3 Forest|PALP
+1 Overwhelming Instinct|ONS
+1 Epic Struggle|JUD

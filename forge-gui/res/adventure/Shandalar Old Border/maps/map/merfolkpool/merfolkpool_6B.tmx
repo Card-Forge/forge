@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="58">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="60" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztw7ENAAAMAiDXPu/N/tFAQi+pqqqqqqqqqqqqqqqqqvrqAKuZS+k=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="60" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztmFsOgkAMRfkyTKI7cDugYSWuhm343JVKXIbTaEOpEB9xMky5TU5M/OpJ4U6H0mVZCQAAAAAAAAAAAAAAAAAAAAAA4CcOeZYdPae8+/9yHr+3EK5X/1t7zu7V2RorD1X9dK5G0FNI1k9fdrY+48azz7szLkbQVyj4/Z2Kr3yeqbbe/zaCvkLRuPZ5tu7KUEZPxZXfX+u5LGfLVbh21+rbtywg9w2aMWc1lcXdo3GPvOKzqFbzjt3fv5H7M0PZtTOaX3z+Sl/L2aXvC5Z3rL5d0qqvdNW+1nYP7ap9LZ1D71w5ry7ORmbJfWrIl0vn9CbB71nf+Epnck3Rt3Ht/e8TX6rKpevb5zzkK/eslH2189BsZU6n7svOND95X5CzlXNN3bVv1vpuRI6zRfz+QjrrjLLqS8hvlbHmewe7yXpy
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="60" height="60">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt1zEKgDAMBdCcTvT+RxDFY7hUEAen2mD73pJm+9CSkggAAAAAAAAAgIgtO0CSJTsAn5mzAwDwypymB94xfzfdzqPuhD0ym8awP/qj1Ov+14ZZoDZ/EtR1AjqLB1g=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="421.621" y="735.341">
+   <properties>
+    <property name="enemy" value="Cerodon"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="54" template="../../../../../../common/maps/obj/treasure.tx" x="416.667" y="523.5">
+   <properties>
+    <property name="reward" value="[{&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:1,&quot;itemName&quot;: &quot;Spawning Staff&quot;}]"/>
+   </properties>
+  </object>
+  <object id="55" template="../../../../../../common/maps/obj/door_up.tx" x="457.333" y="956.667">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/merfolkpool/merfolkpool_6.tmx"/>
+    <property name="teleportObjectId" value="61"/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../../../common/maps/obj/manashards.tx" x="472.667" y="681.333"/>
+ </objectgroup>
+</map>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="55">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{&quot;startBattleWithCard&quot;: [&quot;Serra's Sanctum|USG&quot;, &quot;Serra's Blessing|WTH&quot;, &quot;Greater Realm of Preservation|LEG&quot;, &quot;Serra Advocate|UDS&quot;]}</property>
+ </properties>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7C+8w/VWyFLIL2kqqqqvjuO1S8b
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJyz5GNgsBzFGNgGiK9jwdY0ttcKiLEBi1F7qYrn8TIwzAbiObwQ+2ZB+XN56ZO+YP6mtT/paS8oz9wC4ptY6BtQe6/hkAfR5OYtbGkolB17usImTm5YwOxt5GdgaCIBN/NTx155AQYGBRKwosCovaP2jto7au/A2LsXaM4+LFgVh/h+KtmLCygJ4JcftZc4DGtLYcOg9hXI3ll41NCizQUKC5C9A9G+Gsr2AgDj7PCe
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztwQEBAAAAgiD/r25IQAEAAPBoDhAAAQ==
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztzbENADAIA0FvAANEGZUwOpHSU9LkT7JcvgTgF2HSuUub7S5/v322CwAAgF4BRR8CBQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="195.849" y="285.618" width="32" height="32">
+   <properties>
+    <property name="enemy" value="Serra the Benevolent"/>
+    <property name="threatRange" type="int" value="50"/>
+   <property name="effect">{"startBattleWithCard": ["Serra Angel|LEA", "Worship|USG", "Serra's Liturgy|USG", "Remembrance|USG", "Noble Purpose|MMQ", "Karmic Justice|ODY", "Absolute Law|USG"]}</property>
+    </properties>
+  </object>
+  <object id="51" template="../../../../../../common/maps/obj/entry_up.tx" x="209" y="480">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,4 +1,5 @@
 Name:Living Brain, Mechanical Marvel
+Variant:UniversesWithin:FlavorName:Error-9, Viral Node
 ManaCost:4
 Types:Legendary Artifact Creature Robot Villain
 PT:3/3

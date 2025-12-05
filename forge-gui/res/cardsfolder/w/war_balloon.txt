@@ -1,0 +1,9 @@
+Name:War Balloon
+ManaCost:2 R
+Types:Artifact Vehicle
+PT:4/3
+K:Flying
+A:AB$ PutCounter | Cost$ 1 | CounterType$ FIRE | CounterNum$ 1 | SpellDescription$ Put a fire counter on this Vehicle.
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE3_FIRE | AddType$ Artifact & Creature | Description$ As long as this Vehicle has three or more fire counters on it, it's an artifact creature.
+K:Crew:3
+Oracle:Flying\n{1}: Put a fire counter on this Vehicle.\nAs long as this Vehicle has three or more fire counters on it, it's an artifact creature.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)

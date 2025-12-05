@@ -9,5 +9,8 @@ ScryfallCode=PSPL
 1 R Terror of the Peaks @Richard Kane Ferguson
 2 M Kaldra Compleat @Monztre
 3 M Sword of Forge and Frontier @Sam Guay
-5 M Cloud, Midgar Mercenary @Tetsuya Nomura
-6 R Get Lost @Dominik Mayer
+4 M Cloud, Midgar Mercenary @Tetsuya Nomura
+5 R Get Lost @Dominik Mayer
+6 R Spectacular Spider-Man @Julian Totino Tedesco
+7 R Day of Black Sun @Dom Lay
+8 R Vendilion Clique @Jason A. Engle

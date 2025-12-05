@@ -19,7 +19,6 @@ import forge.game.player.PlayerController;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.CardTranslation;
 import forge.util.Localizer;
 
 public class TimeTravelEffect extends SpellAbilityEffect {
@@ -42,7 +41,7 @@ public class TimeTravelEffect extends SpellAbilityEffect {
 
         for (int i = 0; i < num; i++) {
             // card you own that is suspended
-            CardCollection list = CardLists.filter(activator.getCardsIn(ZoneType.Exile), CardPredicates.hasSuspend());
+            CardCollection list = CardLists.filter(activator.getCardsIn(ZoneType.Exile), Card::hasSuspend);
             // permanent you control with time counter
             list.addAll(CardLists.filter(activator.getCardsIn(ZoneType.Battlefield), CardPredicates.hasCounter(counterType)));
 
@@ -53,7 +52,7 @@ public class TimeTravelEffect extends SpellAbilityEffect {
                 Map<String, Object> params = Maps.newHashMap();
                 params.put("Target", c);
                 params.put("CounterType", counterType);
-                prompt = Localizer.getInstance().getMessage("lblWhatToDoWithTargetCounter", counterType.getName(), CardTranslation.getTranslatedName(c.getName())) + " ";
+                prompt = Localizer.getInstance().getMessage("lblWhatToDoWithTargetCounter", counterType.getName(), c.getTranslatedName()) + " ";
                 boolean putCounter = pc.chooseBinary(sa, prompt, BinaryChoiceType.AddOrRemove, params);
 
                 if (putCounter) {

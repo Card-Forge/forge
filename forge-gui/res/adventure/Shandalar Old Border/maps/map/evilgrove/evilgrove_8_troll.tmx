@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="56">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx" />
+ <layer id="7" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFyEDBDBWTKk+pfcjm4pKj1H5C5pEqTq5d5GJK/UhLe4ebn+kZx+hmDVb/ErIfG9g3QPbi00cpINfN9AYDYedgBwB5gkMj
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy9lU1KQzEQxwdeingGbcUjvMLLGeoH7xoV3LvTakEUPZCuuteFeIr6hXcwQzJkMmSSZxcdGMpLMvOb+SdpRjsAoy34xW7qpTnymw5g6fy6S9ctwviSzefyDq2J5zttAL6cPxiAZ5ty9t03tz2b8ks955iY787EfMh+B8+/6iBrs8b/vrQ+Vvau6bxQeuB9rJv8/C+raz4FOHN+b9K+Ne75NNa8iZEmPyzHodV75lzaSzLSbKitRd2ok9YzcQ9srBvZx0yzWThXmxj1rHHHbv619azecT5D7d9BvxM2Jg11wdijUN+jibXznrXzjFpzuzWe11f2HWvD2I8m7jOvk+9zbr8ll3TmdulqX1nveKeQiQy+rhffNe7Y6veTeBObrn9rdd0pbqJwa2w809iX9j8qY+bh/uJY7VxJ9op5iamx8Tw9MX0ko/ZulN4R6ZzN9c3l/w93yNtCWuWYJe623uA/tTGecQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1VcFOwzAM9QEOPfAxbQadkBD7m30FKoKvG7emXbjwMdTCT31zw7p28KTIie341YnjikzxdjfO22FEst1n/DfmE2yeQ1WI1DRX9MPohrE1fSS+lmID6rfLcPs9tcXWPJLpGsupLMa9kfZ7rkuBs2mdXvN6cLpEvvjmKOuhMT7K09y3zufRZJAx3zXoaL6vprF2JvXsG6qftXzgyelwfr/FvobzHKKTWktPNkfOf8l9KH/uF8AdH8lH7+VrJs5xxr4U3B/+EzhLvGdwJ7n8nEMm3hJ0Tir8W2fwu0BPRB1fWxvgDU4fSc8cm4Wcvkdq/0I/CcYP7pbkub7SzNSK1maSad/qyc78mHPffDapcWpZDuzBHSey+e9/p/Xh5tRWFZIF4uN/8OnsOG/P1Tn7q9n3t+Navwd+vUzhY77Y+htublIt
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="281" width="48" height="16">
+   <properties>
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="209.038" y="33.8697" />
+  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="214.534" y="103.123">
+   <properties>
+    <property name="enemy" value="Swamp Troll" />
+    <property name="threatRange" type="int" value="60" />
+   <property name="effect">{ "startBattleWithCard": [ "Dense Foliage|WTH", "Treetop Village|ULG" ] }</property></properties>
+  </object>
+  <object id="55" template="../../../../../../common/maps/obj/manashards.tx" x="430" y="89.3333" />
+ </objectgroup>
+</map>

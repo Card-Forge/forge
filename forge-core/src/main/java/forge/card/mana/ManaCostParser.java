@@ -82,5 +82,5 @@ public class ManaCostParser implements IParserManaCost {
      */
     @Override
     public void remove() {
-    } // unsuported
+    } // unsupported
 }

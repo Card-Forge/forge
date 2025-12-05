@@ -94,18 +94,21 @@ public class CharmAi extends SpellAbilityAi {
     private List<AbilitySub> chooseOptionsAi(SpellAbility sa, List<AbilitySub> choices, final Player ai, boolean isTrigger, int num, int min) {
         List<AbilitySub> chosenList = Lists.newArrayList();
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-        boolean allowRepeat = sa.hasParam("CanRepeatModes"); // FIXME: unused for now, the AI doesn't know how to effectively handle repeated choices
+        // TODO unused for now, the AI doesn't know how to effectively handle repeated choices
+        boolean allowRepeat = sa.hasParam("CanRepeatModes");
 
         // Pawprint
         final int pawprintLimit = sa.hasParam("Pawprint") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Pawprint"), sa) : 0;
         if (pawprintLimit > 0) {
-            Collections.reverse(choices); // try to pay for the more expensive subs first
+            // try to pay for the more expensive subs first
+            Collections.reverse(choices);
         }
         int pawprintAmount = 0;
 
         // First pass using standard canPlayAi() for good choices
         for (AbilitySub sub : choices) {
             sub.setActivatingPlayer(ai);
+            // TODO refactor to obtain the AiAbilityDecision instead, then we can check all to sort by value
             if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
                 if (pawprintLimit > 0) {
                     int curPawprintAmount = AbilityUtils.calculateAmount(sub.getHostCard(), sub.getParamOrDefault("Pawprint", "0"), sub);
@@ -116,7 +119,8 @@ public class CharmAi extends SpellAbilityAi {
                 }
                 chosenList.add(sub);
                 if (chosenList.size() == num) {
-                    return chosenList; // maximum choices reached
+                    // maximum choices reached
+                    return chosenList;
                 }
             }
         }
@@ -145,7 +149,8 @@ public class CharmAi extends SpellAbilityAi {
             }
         }
         if (chosenList.size() < min) {
-            chosenList.clear(); // not enough choices
+            // not enough choices
+            chosenList.clear();
         }
         return chosenList;
     }
@@ -180,12 +185,12 @@ public class CharmAi extends SpellAbilityAi {
         }
         
         if (!ai.canLoseLife() || ai.cantLose()) {
-            // ai cant lose life, or cant lose the game, don't think about others
+            // ai can't lose life, or can't lose the game, don't think about others
             chosenList.add(allyTainted ? gain : lose);
         } else if (oppTainted || ai.getGame().isCardInPlay("Rain of Gore")) {
             // Rain of Gore does negate lifegain, so don't benefit the others
             // same for if a opponent does control Tainted Remedy
-            // but if ai cant gain life, the effects are negated
+            // but if ai can't gain life, the effects are negated
             chosenList.add(ai.canGainLife() ? lose : gain);
         } else if (ai.getGame().isCardInPlay("Sulfuric Vortex")) {
             // no life gain, but extra life loss.
@@ -201,7 +206,7 @@ public class CharmAi extends SpellAbilityAi {
             // critical Life try to gain more
             chosenList.add(gain);
         } else if (!ai.canGainLife() && aiLife == 14) {
-            // ai cant gain life, but try to avoid falling to 13
+            // ai can't gain life, but try to avoid falling to 13
             // but if a opponent does control Tainted Remedy its irrelevant
             chosenList.add(oppTainted ? lose : gain);
         } else if (allyTainted) {

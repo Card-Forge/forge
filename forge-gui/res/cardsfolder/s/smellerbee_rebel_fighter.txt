@@ -1,0 +1,14 @@
+Name:Smellerbee, Rebel Fighter
+ManaCost:3 R
+Types:Legendary Creature Human Rebel Ally
+PT:3/3
+K:First Strike
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Haste | Description$ Other creatures you control have haste.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME attacks, you may discard your hand. If you do, draw cards equal to the number of attacking creatures.
+SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Hand> | NumCards$ X
+SVar:X:Count$Valid Creature.attacking
+SVar:PlayMain1:TRUE
+SVar:HasAttackEffect:TRUE
+SVar:BuffedBy:Creature.attacking
+DeckHas:Ability$Discard
+Oracle:First strike\nOther creatures you control have haste.\nWhenever Smellerbee attacks, you may discard your hand. If you do, draw cards equal to the number of attacking creatures.

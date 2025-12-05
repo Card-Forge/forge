@@ -1,0 +1,24 @@
+[metadata]
+Name=Baron Sengir
+[Main]
+20 Swamp|PELP
+4 Dark Ritual|LEA
+4 Sengir Vampire|LEA
+2 Baron Sengir|HML
+2 Krovikan Vampire|ICE
+2 Ascendant Evincar|NMS
+2 Shauku, Endbringer|MIR
+2 Soul Collector|SCG
+2 Snuff Out|MMQ
+2 Dark Banishing|ICE
+2 Ashes to Ashes|DRK
+4 Drain Life|LEA
+4 Necromancy|VIS
+2 No Mercy|ULG
+2 Phyrexian Arena|APC
+2 Patriarch's Bidding|ONS
+2 Plague Wind|PCY
+
+[StartInBattle_Reference]
+3 Swamp|PELP
+1 Subversion|ULG

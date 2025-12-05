@@ -551,18 +551,17 @@
 	"name":"WhiteItems",                  
 	"spriteAtlas":"maps/tileset/buildings.atlas",   
 	"sprite":"ItemShop",   
-	  "rewards": [ 
+	  "rewards": [
 		{ "type": "item","count":1, "itemName": "White rune"  },
 		{ "type": "item","count":1, "itemName": "White Staff"  },
-		{ "type": "item","count":1, "itemName": "Haunted Crossroads"  },
-		{ "type": "item","count":1, "itemName": "Millstone"  },
-		{ "type": "item","count":1, "itemName": "Scryb Sprites"  },
-		{ "type": "item","count":1, "itemName": "Ivory Cup"  },
-		{ "type": "item","count":1, "itemName": "War Barge"  },
+		{ "type": "item","count":1, "itemName": "Cadet's Sword"  },
+		{ "type": "item","count":1, "itemName": "Shield of the Ages"  },
+		{ "type": "item","count":1, "itemName": "Belbe's Armor"  },
+		{ "type": "item","count":1, "itemName": "Riding Boots"  },
 		{ "type": "life","count":1    }
-		
+
 		]
-	
+
 	},{                                      
 	"name":"RedItems",                  
 	"spriteAtlas":"maps/tileset/buildings.atlas",    
@@ -570,14 +569,14 @@
 	  "rewards": [ 
 		{ "type": "item","count":1, "itemName": "Red rune"  },
 		{ "type": "item","count":1, "itemName": "Red Staff"  },
-		{ "type": "item","count":1, "itemName": "Haunted Crossroads"  },
-		{ "type": "item","count":1, "itemName": "Millstone"  },
-		{ "type": "item","count":1, "itemName": "Scryb Sprites"  },
-		{ "type": "item","count":1, "itemName": "Ivory Cup"  },
-		{ "type": "item","count":1, "itemName": "War Barge"  },
+		{ "type": "item","count":1, "itemName": "Mons's Dagger"  },
+		{ "type": "item","count":1, "itemName": "Dwarven Shield"  },
+		{ "type": "item","count":1, "itemName": "Flowstone Armor"  },
+		{ "type": "item","count":1, "itemName": "Sandals of Speed"  },
+		{ "type": "item","count":1, "itemName": "Dragon Mask"  },
 		{ "type": "life","count":1    }
 		]
-	
+
 	},{                                      
 	"name":"BlueItems",                  
 	"spriteAtlas":"maps/tileset/buildings.atlas",    
@@ -585,15 +584,15 @@
 	  "rewards": [ 
 		{ "type": "item","count":1, "itemName": "Blue rune"  },
 		{ "type": "item","count":1, "itemName": "Blue Staff"  },
-		{ "type": "item","count":1, "itemName": "Haunted Crossroads"  },
-		{ "type": "item","count":1, "itemName": "Millstone"  },
-		{ "type": "item","count":1, "itemName": "Scryb Sprites"  },
-		{ "type": "item","count":1, "itemName": "Ivory Cup"  },
-		{ "type": "item","count":1, "itemName": "War Barge"  },
+		{ "type": "item","count":1, "itemName": "Pearl Trident"  },
+		{ "type": "item","count":1, "itemName": "Dream Chisel"  },
+		{ "type": "item","count":1, "itemName": "Cloak of Dreams"  },
+		{ "type": "item","count":1, "itemName": "Whalebone Glider"  },
+		{ "type": "item","count":1, "itemName": "Amulet of Telepathy"  },
 		{ "type": "life","count":1    }
 		
 		]
-	
+
 	},
 	{                                      
 	"name":"BlackItems",                  
@@ -602,15 +601,15 @@
 	  "rewards": [ 
 		{ "type": "item","count":1, "itemName": "Black rune"  },
 		{ "type": "item","count":1, "itemName": "Black Staff"  },
-		{ "type": "item","count":1, "itemName": "Haunted Crossroads"  },
-		{ "type": "item","count":1, "itemName": "Millstone"  },
-		{ "type": "item","count":1, "itemName": "Scryb Sprites"  },
-		{ "type": "item","count":1, "itemName": "Ivory Cup"  },
-		{ "type": "item","count":1, "itemName": "War Barge"  },
+		{ "type": "item","count":1, "itemName": "Scathe Scythe"  },
+		{ "type": "item","count":1, "itemName": "Life Chisel"  },
+		{ "type": "item","count":1, "itemName": "Feverbringer's Cloak"  },
+		{ "type": "item","count":1, "itemName": "Boots of the Crossroads"  },
+		{ "type": "item","count":1, "itemName": "Splicer's Charm"  },
 		{ "type": "life","count":1    }
 		
 		]
-	
+
 	},
 	{                                      
 	"name":"GreenItems",                  
@@ -619,12 +618,96 @@
 	  "rewards": [ 
 		{ "type": "item","count":1, "itemName": "Green rune"  },
 		{ "type": "item","count":1, "itemName": "Green Staff"  },
-		{ "type": "item","count":1, "itemName": "Haunted Crossroads"  },
-		{ "type": "item","count":1, "itemName": "Millstone"  },
-		{ "type": "item","count":1, "itemName": "Scryb Sprites"  },
-		{ "type": "item","count":1, "itemName": "Ivory Cup"  },
-		{ "type": "item","count":1, "itemName": "War Barge"  },
+		{ "type": "item","count":1, "itemName": "Willow Bow"  },
+		{ "type": "item","count":1, "itemName": "Wooden Shield"  },
+		{ "type": "item","count":1, "itemName": "Medicine Bag"  },
+		{ "type": "item","count":1, "itemName": "Chariot Rider's Boots"  },
+		{ "type": "item","count":1, "itemName": "Lotus Petal"  },
 		{ "type": "life","count":1   }
+		
+		]
+	
+	},{
+	"name":"WhiteEquipment",                  
+	"spriteAtlas":"maps/tileset/buildings.atlas",   
+	"sprite":"EquipmentShop",   
+	  "rewards": [ 
+		{ "type": "item","count":1, "itemName": "Sword of the Chosen"  },
+		{ "type": "item","count":1, "itemName": "Silver Shield"  },
+		{ "type": "item","count":1, "itemName": "Disrupting Scepter"  },
+		{ "type": "item","count":1, "itemName": "Celestial Prism"  },
+		{ "type": "item","count":1, "itemName": "Credit Voucher"  },
+		{ "type": "item","count":1, "itemName": "Steel Armor"  }
+		
+		]
+	
+	},{
+	"name":"BlueEquipment",                  
+	"spriteAtlas":"maps/tileset/buildings.atlas",   
+	"sprite":"EquipmentShop",   
+	  "rewards": [ 
+		{ "type": "item","count":1, "itemName": "Sword of the Chosen"  },
+		{ "type": "item","count":1, "itemName": "Silver Shield"  },
+		{ "type": "item","count":1, "itemName": "Disrupting Scepter"  },
+		{ "type": "item","count":1, "itemName": "Celestial Prism"  },
+		{ "type": "item","count":1, "itemName": "Credit Voucher"  },
+		{ "type": "item","count":1, "itemName": "Steel Armor"  }
+		
+		]
+	
+	},{
+	"name":"BlackEquipment",                  
+	"spriteAtlas":"maps/tileset/buildings.atlas",   
+	"sprite":"EquipmentShop",   
+	  "rewards": [ 
+		{ "type": "item","count":1, "itemName": "Sword of the Chosen"  },
+		{ "type": "item","count":1, "itemName": "Silver Shield"  },
+		{ "type": "item","count":1, "itemName": "Disrupting Scepter"  },
+		{ "type": "item","count":1, "itemName": "Celestial Prism"  },
+		{ "type": "item","count":1, "itemName": "Credit Voucher"  },
+		{ "type": "item","count":1, "itemName": "Steel Armor"  }
+		
+		]
+	
+	},{
+	"name":"RedEquipment",                  
+	"spriteAtlas":"maps/tileset/buildings.atlas",   
+	"sprite":"EquipmentShop",   
+	  "rewards": [ 
+		{ "type": "item","count":1, "itemName": "Sword of the Chosen"  },
+		{ "type": "item","count":1, "itemName": "Silver Shield"  },
+		{ "type": "item","count":1, "itemName": "Disrupting Scepter"  },
+		{ "type": "item","count":1, "itemName": "Celestial Prism"  },
+		{ "type": "item","count":1, "itemName": "Credit Voucher"  },
+		{ "type": "item","count":1, "itemName": "Steel Armor"  }
+		
+		]
+	
+	},{
+	"name":"GreenEquipment",                  
+	"spriteAtlas":"maps/tileset/buildings.atlas",   
+	"sprite":"EquipmentShop",   
+	  "rewards": [ 
+		{ "type": "item","count":1, "itemName": "Sword of the Chosen"  },
+		{ "type": "item","count":1, "itemName": "Silver Shield"  },
+		{ "type": "item","count":1, "itemName": "Disrupting Scepter"  },
+		{ "type": "item","count":1, "itemName": "Celestial Prism"  },
+		{ "type": "item","count":1, "itemName": "Credit Voucher"  },
+		{ "type": "item","count":1, "itemName": "Steel Armor"  }
+		
+		]
+	
+	},{
+	"name":"Equipment",                  
+	"spriteAtlas":"maps/tileset/buildings.atlas",   
+	"sprite":"EquipmentShop",   
+	  "rewards": [ 
+		{ "type": "item","count":1, "itemName": "Sword of the Chosen"  },
+		{ "type": "item","count":1, "itemName": "Silver Shield"  },
+		{ "type": "item","count":1, "itemName": "Disrupting Scepter"  },
+		{ "type": "item","count":1, "itemName": "Celestial Prism"  },
+		{ "type": "item","count":1, "itemName": "Credit Voucher"  },
+		{ "type": "item","count":1, "itemName": "Steel Armor"  }
 		
 		]
 	
@@ -2178,11 +2261,11 @@
 	  "sprite":"DwarfShop",
 	  "rewards": [ { "count":8, "type":"Union", "cardUnion": [ { "subTypes": ["Dwarf"] }, { "cardText": "Dwarf" }, { "cardText": "Dwarves" } ] } ]
 	},{
-	  "name":"Devil",
-	  "description":"Deal With the Devil",
+	  "name":"Imp",
+	  "description":"Imp's Bargain",
 	  "spriteAtlas":"maps/tileset/buildings.atlas",
 	  "sprite":"DevilShop",
-	  "rewards": [ { "count":8, "type":"Union", "cardUnion": [ { "subTypes": ["Devil"] }, { "cardText": "Devil" } ] } ]
+	  "rewards": [ { "count":8, "type":"Union", "cardUnion": [ { "subTypes": ["Imp"] }, { "cardText": "Imp" } ] } ]
 	},{                                    
 	"name":"ToDo", 
 	 "description":"To Do",

@@ -73,11 +73,8 @@ public class AttachAi extends SpellAbilityAi {
             }
         }
 
-        // Flash logic
-        boolean advancedFlash = false;
-        if (ai.getController().isAI()) {
-            advancedFlash = ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.FLASH_ENABLE_ADVANCED_LOGIC);
-        }
+        boolean advancedFlash = AiProfileUtil.getBoolProperty(ai, AiProps.FLASH_ENABLE_ADVANCED_LOGIC);
+
         if ((source.hasKeyword(Keyword.FLASH) || (!ai.canCastSorcery() && sa.canCastTiming(ai)))
                 && source.isAura() && advancedFlash && !doAdvancedFlashAuraLogic(ai, sa, sa.getTargetCard())) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
@@ -108,9 +105,8 @@ public class AttachAi extends SpellAbilityAi {
         Card source = sa.getHostCard();
         Game game = ai.getGame();
         Combat combat = game.getCombat();
-        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
 
-        if (!aic.getBooleanProperty(AiProps.FLASH_USE_BUFF_AURAS_AS_COMBAT_TRICKS)) {
+        if (!AiProfileUtil.getBoolProperty(ai, AiProps.FLASH_USE_BUFF_AURAS_AS_COMBAT_TRICKS)) {
             // Currently this only works with buff auras, so if the relevant toggle is disabled, just return true
             // for instant speed use. To be improved later.
             return true;
@@ -190,9 +186,9 @@ public class AttachAi extends SpellAbilityAi {
             return false;
         }
 
-        int chanceToCastAtEOT = aic.getIntProperty(AiProps.FLASH_BUFF_AURA_CHANCE_CAST_AT_EOT);
-        int chanceToCastEarly = aic.getIntProperty(AiProps.FLASH_BUFF_AURA_CHANCE_TO_CAST_EARLY);
-        int chanceToRespondToStack = aic.getIntProperty(AiProps.FLASH_BUFF_AURA_CHANCE_TO_RESPOND_TO_STACK);
+        int chanceToCastAtEOT = AiProfileUtil.getIntProperty(ai, AiProps.FLASH_BUFF_AURA_CHANCE_CAST_AT_EOT);
+        int chanceToCastEarly = AiProfileUtil.getIntProperty(ai, AiProps.FLASH_BUFF_AURA_CHANCE_TO_CAST_EARLY);
+        int chanceToRespondToStack = AiProfileUtil.getIntProperty(ai, AiProps.FLASH_BUFF_AURA_CHANCE_TO_RESPOND_TO_STACK);
 
         boolean hasFloatMana = ai.getManaPool().totalMana() > 0;
         boolean willDiscardNow = game.getPhaseHandler().is(PhaseType.END_OF_TURN, ai)
@@ -912,7 +908,7 @@ public class AttachAi extends SpellAbilityAi {
         if (sa.getHostCard().getAttachedTo() != null && sa.getHostCard().getAttachedTo().isCreature()
                 && sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
             final int oldEvalRating = ComputerUtilCard.evaluateCreature(sa.getHostCard().getAttachedTo());
-            final int threshold = ai.isAI() ? ((PlayerControllerAi)ai.getController()).getAi().getIntProperty(AiProps.SAC_TO_REATTACH_TARGET_EVAL_THRESHOLD) : Integer.MAX_VALUE;
+            final int threshold = AiProfileUtil.getIntProperty(ai, AiProps.SAC_TO_REATTACH_TARGET_EVAL_THRESHOLD);
             prefList = CardLists.filter(prefList, c -> {
                 if (!c.isCreature()) {
                     return false;
@@ -972,7 +968,7 @@ public class AttachAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(final SpellAbility sa, final Player ai) {
+    public AiAbilityDecision chkDrawback(final Player ai, final SpellAbility sa) {
         if (sa.isTrigger() && sa.usesTargeting()) {
             CardCollection targetables = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
             CardCollection source = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Object"), sa);
@@ -1217,7 +1213,7 @@ public class AttachAi extends SpellAbilityAi {
             });
         }
 
-        //some auras/equipments aren't useful in multiples
+        //some auras/equipment aren't useful in multiples
         if (attachSource.hasSVar("NonStackingAttachEffect")) {
             prefList = CardLists.filter(prefList, Predicate.not(
                     CardPredicates.isEquippedBy(attachSource.getName())
@@ -1388,7 +1384,7 @@ public class AttachAi extends SpellAbilityAi {
             }
 
             // make sure to prioritize casting spells in main 2 (creatures, other equipment, etc.) rather than moving equipment around
-            boolean decideMoveFromUseless = uselessCreature && aic.getBooleanProperty(AiProps.PRIORITIZE_MOVE_EQUIPMENT_IF_USELESS);
+            boolean decideMoveFromUseless = uselessCreature && aic.getBoolProperty(AiProps.PRIORITIZE_MOVE_EQUIPMENT_IF_USELESS);
 
             if (!decideMoveFromUseless && AiCardMemory.isMemorySetEmpty(aiPlayer, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2)) {
                 SpellAbility futureSpell = aic.predictSpellToCastInMain2(ApiType.Attach);

@@ -20,7 +20,7 @@ FoilAlwaysInCommonSlot=False
 5 C Defender en-Vec @Bradley Williams
 6 C Defiant Falcon @Heather Hudson
 7 U Defiant Vanguard @Pete Venters
-8 C Fanatical Devotion @Massimilano Frezzato
+8 C Fanatical Devotion @Massimiliano Frezzato
 9 C Lashknife @Hannibal King
 10 C Lawbringer @Matt Cavotta
 11 C Lightbringer @Paolo Parente
@@ -86,7 +86,7 @@ FoilAlwaysInCommonSlot=False
 71 C Spineless Thug @Matthew D. Wilson
 72 C Spiteful Bully @Chippy
 73 C Stronghold Discipline @Li Tie
-74 C Vicious Hunger @Massimilano Frezzato
+74 C Vicious Hunger @Massimiliano Frezzato
 75 R Volrath the Fallen @Kev Walker
 76 U Ancient Hydra @Scott M. Fischer
 77 U Arc Mage @Terese Nielsen
@@ -100,7 +100,7 @@ FoilAlwaysInCommonSlot=False
 85 U Flowstone Surge @Scott Hampton
 86 C Flowstone Wall @Jeff Miracola
 87 C Laccolith Grunt @Arnie Swekel
-88 C Laccolith Rig @Massimilano Frezzato
+88 C Laccolith Rig @Massimiliano Frezzato
 89 R Laccolith Titan @Tony Szczudlo
 90 U Laccolith Warrior @Mark Zug
 91 C Laccolith Whelp @Dave Dorman

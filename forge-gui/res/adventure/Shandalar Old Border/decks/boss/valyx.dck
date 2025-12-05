@@ -1,0 +1,27 @@
+[metadata]
+Name=Valyx the Tormentor
+[Main]
+4 Scrubland|LEA
+4 Caves of Koilos|APC
+4 Plains|2ED
+4 Swamp|2ED
+4 Grim Monolith|ULG
+4 Desolation Angel|APC
+2 Selenia, Dark Angel|TMP
+2 Fallen Angel|LEG
+4 Soltari Visionary|EXO
+4 Rotlung Reanimator|ONS
+4 Preacher|DRK
+2 False Prophet|UDS
+2 Wrath of God|LEA
+4 Gerrard's Verdict|APC
+4 Death Grasp|APC
+4 Armageddon|LEA
+4 Vindicate|APC
+
+[StartInBattle_Reference]
+1 Marble Diamond|MIR
+1 Charcoal Diamond|MIR
+1 Edgewalker|SCG
+1 Righteous War|VIS
+1 Purgatory|MIR

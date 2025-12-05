@@ -1,0 +1,25 @@
+[metadata]
+Name=The Lichlord of Azar
+[Main]
+3 Bog Imp|DRK
+4 Hypnotic Specter|LEA
+2 Lord of the Pit|LEA
+4 Sengir Vampire|LEA
+3 Tetravus|ATQ
+3 Will-o'-the-Wisp|LEA
+4 Dark Ritual|LEA
+4 Howl from Beyond|LEA
+4 Drain Life|LEA
+1 Mind Twist|LEA
+1 Black Lotus|LEA
+1 Black Vise|LEA
+1 Mox Jet|LEA
+1 Sol Ring|LEA
+1 Gloom|LEA
+2 Greed|LEG
+22 Swamp|LEA
+
+[StartInBattle_Reference]
+1 Mox Jet|LEA
+1 Will-o'-the-Wisp|LEA
+1 Bog Imp|DRK

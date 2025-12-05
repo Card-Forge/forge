@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="65">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBjcQIZn1F56ADdO0sSpYT4hs8nRg009KExhmFj96OrIsRcZoMcrSB6GSTGHGvYSY+5Q9e9AxS8xZlAjPZNiNr70Ti17RwF9AXJZRgkAAMEHDNY=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17" tintcolor="#8a3440">
+  <data encoding="base64" compression="zlib">
+   eJybx8nAMI8ILMNDnDpqYJhdIJre9iLj4Wgvul0wDALYxFloaC8uO6lpNz4729gYGNqRcAcb9f2NzR0q7AwoQI2ddvGPz15apruBsteOC2HuIaC9h5Ewsp0OXNS1F91ubOFBCzuR7a7nxgxbWtpJb0zPMnmw2Y1eJ1LqHgBPPRY8
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy91F0OwjAIAGDey06w6sHmWfw51tR5NyWGpCMglDSSkGVZ4Bvd2hUB1j9kFRmpOU0A8+f6MHKZxrn8nMwnfl0r7gG7Z142KX65ETvqtib31db4VgCuxbcjrjS9OSN2xD0YpqytqNtzct52HSMu2/y+Wbetj7oUI11eO889l3Gu/G6WS+YR93su475w/3+yrbnSpPst6VbD1mbVTK1vzzkpbe3ciJi956S0rfDMXre1L8VOz8y4ssbazz09KN+IXe73
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBjcYBfPwNmtwjhwdo+CoQ9koWlXegDSsOoISruyA1hGDGZQyz3QLhh+oG6YhCkAzaYCnA==
+  </data>
+ </layer>
+ <layer id="8" name="Over Sprites" width="30" height="17" tintcolor="#ffaa00">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAdRBqSoYkKYNRe+oCbTKP2jto7CkbBKBiuAABzcgZw
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="58" template="../../../../../../common/maps/obj/door_right.tx" x="177.5" y="46.333">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/demontower/portal_2G.tmx"/>
+    <property name="teleportObjectId" value="63"/>
+   </properties>
+  </object>
+  <object id="59" template="../../../../../../common/maps/obj/door_down.tx" x="98" y="144">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/demontower/portal_2E.tmx"/>
+    <property name="teleportObjectId" value="56"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../../../common/maps/obj/gold.tx" x="331.263" y="134.829"/>
+  <object id="61" template="../../../../../../common/maps/obj/enemy.tx" x="313.625" y="134.138">
+   <properties>
+    <property name="enemy" value="Cosmic Horror"/>
+   <property name="effect">{ "startBattleWithCard": [ "Cursed Monstrosity|ODY" ] }</property>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="62,63,64,62,63"/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../../../common/maps/obj/waypoint.tx" x="313.28" y="104.396"/>
+  <object id="63" template="../../../../../../common/maps/obj/waypoint.tx" x="314.663" y="184.975"/>
+  <object id="64" template="../../../../../../common/maps/obj/waypoint.tx" x="265.209" y="233.046"/>
+ </objectgroup>
+</map>

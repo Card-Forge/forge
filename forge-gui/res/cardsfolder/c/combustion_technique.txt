@@ -1,0 +1,7 @@
+Name:Combustion Technique
+ManaCost:1 R
+Types:Instant Lesson
+A:SP$ DealDamage | NumDmg$ X | ValidTgts$ Creature | ReplaceDyingDefined$ Targeted | SpellDescription$ CARDNAME deals damage equal to 2 plus the number of Lesson cards in your graveyard to target creature. If that creature would die this turn, exile it instead.
+SVar:X:Count$ValidGraveyard Lesson.YouOwn/Plus.2
+DeckHints:Type$Lesson
+Oracle:Combustion Technique deals damage equal to 2 plus the number of Lesson cards in your graveyard to target creature. If that creature would die this turn, exile it instead.

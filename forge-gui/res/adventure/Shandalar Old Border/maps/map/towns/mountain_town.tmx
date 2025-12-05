@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="50">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzFlN0KgCAMRr3N9+n3rbLoRTPqcdrASMS1RWoXB4Rcx28rbaWUDdiA3XFEniMdMOl7H8VK1HPvG2E9MGf76qUyxGpTeZ/65mfGfUbLesx5JbNCdy+caVhnHOG8pD37in+Gkl4f9M7gb3/wlspcA43j8pbITH3bOd2YddH0P5XLLbm3cril93Rqt9Sb0s3NNpf7TdaU92jMewIfOqPa
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJytld0OwUAQhacX2HoAJC68AQnB0yDxSBJBvAYSXKifh/LPTNrGZM1ut2WSE9maPd8c29Y0DzBNqTGqW4CvqnoAtUhL1ApVQpVRFe/TQ+u0vE5BZlKt0W+D2nqfaws2A+8hH1eZeDsF8PJD7ZXc41JtL7mH86AI0PdDPTOyySuI/OjT5EF9nMc18OU9TUuenuZhmn8o8H7JrHNjn4CdYWDJyvfo592y5LXlyCLX7DfsO6n/sk3nLbHvqKNKN8NBhXu4yOeR4T5zzU9Mk39SnXPy9aQzT8N0fTdQ2TL/kjMuU14T28ZsaLku6H1lcp1jLLDpPh1F34+E/XXGnmj/McS+MX9bZqpext9X55JmeXM/zTFn6ziz/kxKeW3cN3fBlwQ=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFQwXsYGFgkMaDd7FQph8X/saK39xQCuR3sSHYmZoMDFma+M0i1V5jHQYGEx0IH5kNA3qcDAytQDvbqGyvPjuCj8xGBmdxiFNibw4HA8NkNgi+QCd7v7CipkFk85HDHJc4LjYhe9HdeBZHmOMSx8Um1V7kMM9FYp9nxy6OzM7jIM9e5DBHLwNA/iUlrxPK38SGA8heUvxADTBqL3kAAOTKMnc=
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4D2QFyHgUFCB5M9CugDcIU5rngZjaNRMAqGLwAAMLIDKw==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="208" y="272"/>
+  <object id="41" template="../../../../../../common/maps/obj/shop.tx" x="64" y="115">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
+   </properties>
+  </object>
+  <object id="42" template="../../../../../../common/maps/obj/shop.tx" x="113" y="115">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
+   </properties>
+  </object>
+  <object id="43" template="../../../../../../common/maps/obj/shop.tx" x="161" y="163">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
+   </properties>
+  </object>
+  <object id="44" template="../../../../../../common/maps/obj/shop.tx" x="257" y="162">
+   <properties>
+    <property name="shopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,RedBoosterPackShop,Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
+   </properties>
+  </object>
+  <object id="45" template="../../../../../../common/maps/obj/shop.tx" x="304" y="162">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
+   </properties>
+  </object>
+  <object id="46" template="../../../../../../common/maps/obj/shop.tx" x="351" y="162">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
+   </properties>
+  </object>
+  <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="214" y="114"/>
+  <object id="48" template="../../../../../../common/maps/obj/shop.tx" x="160" y="96">
+   <properties>
+    <property name="shopList" value="Mountain"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

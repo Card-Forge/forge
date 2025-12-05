@@ -26,6 +26,12 @@
 	"DarkGras"
 ],
 "enemies": [
+	"Legend of the Savannah",
+	"Legend of the Tundra",
+	"Tropical Islander of Treva",
+	"Plateau Dweller of Rith",
+	"Scrublander of Dromar",
+	"Domain Keeper of Cromat",
 	"Adept White Wizard",
 	"Adventurer",
 	"Aether Channeler",
@@ -79,7 +85,9 @@
 	"Triceratops",
 	"Warrior",
 	"White Dwarf",
-	"White Sliver"
+	"White Sliver",
+	"Arch Angel of Shandalar",
+	"High Priest of Shandalar"
 ],
 "pointsOfInterest": [
 	"White Castle",

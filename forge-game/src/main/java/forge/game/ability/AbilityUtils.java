@@ -4,6 +4,7 @@ import com.google.common.collect.*;
 import com.google.common.math.IntMath;
 import forge.card.CardStateName;
 import forge.card.CardType;
+import forge.card.CardTypeView;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
@@ -14,6 +15,7 @@ import forge.game.*;
 import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
+import forge.game.cost.CostAdjustment;
 import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -42,6 +44,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class AbilityUtils {
     private final static ImmutableList<String> cmpList = ImmutableList.of("LT", "LE", "EQ", "GE", "GT", "NE");
@@ -185,7 +188,12 @@ public class AbilityUtils {
                 if (crd instanceof Card) {
                     c = game.getCardState((Card) crd);
                 } else if (crd instanceof Iterable) {
-                    cards.addAll(IterableUtil.filter((Iterable<?>) crd, Card.class));
+                    for (Card gameCard : IterableUtil.filter((Iterable<?>) crd, Card.class)) {
+                        if (gameCard.isLKI()) {
+                            gameCard = game.getCardState(gameCard);
+                        }
+                        cards.add(gameCard);
+                    }
                 }
             }
         } else if (defined.startsWith("Replaced") && sa instanceof SpellAbility) {
@@ -273,27 +281,6 @@ public class AbilityUtils {
         } else if (defined.equals("Imprinted")) {
             for (final Card imprint : hostCard.getImprintedCards()) {
                 cards.add(game.getCardState(imprint));
-            }
-        } else if (defined.startsWith("ThisTurnEntered")) {
-            final String[] workingCopy = defined.split("_");
-            ZoneType destination, origin;
-            String validFilter;
-
-            destination = ZoneType.smartValueOf(workingCopy[1]);
-            if (workingCopy[2].equals("from")) {
-                origin = ZoneType.smartValueOf(workingCopy[3]);
-                validFilter = workingCopy[4];
-            } else {
-                origin = null;
-                validFilter = workingCopy[2];
-            }
-            for (final Card cl : CardUtil.getThisTurnEntered(destination, origin, validFilter, hostCard, sa, player)) {
-                Card gameState = game.getCardState(cl, null);
-                // cards that use this should only care about if it is still in that zone
-                // TODO if all LKI needs to be returned, need to change CardCollection return from this function
-                if (gameState != null && gameState.equalsWithGameTimestamp(cl)) {
-                    cards.add(gameState);
-                }
             }
         } else if (defined.equals("ChosenCard")) {
             for (final Card chosen : hostCard.getChosenCards()) {
@@ -982,6 +969,9 @@ public class AbilityUtils {
             for (final Card c : getDefinedCards(card, "Targeted", sa)) {
                 players.add(c.getOwner());
             }
+            for (final SpellAbility s : getDefinedSpellAbilities(card, "Targeted", sa)) {
+                players.add(s.getHostCard().getOwner());
+            }
         } else if (defined.equals("TargetedAndYou") && sa instanceof SpellAbility) {
             final SpellAbility saTargeting = ((SpellAbility)sa).getSATargetingPlayer();
             if (saTargeting != null) {
@@ -1118,10 +1108,8 @@ public class AbilityUtils {
                 final String replacingType = defined.substring(8);
                 o = root.getReplacingObject(AbilityKey.fromString(replacingType));
             }
-            if (o != null) {
-                if (o instanceof Player) {
-                    players.add((Player) o);
-                }
+            if (o instanceof Player) {
+                players.add((Player) o);
             }
         } else if (defined.startsWith("Non")) {
             players.addAll(game.getPlayersInTurnOrder());
@@ -1313,7 +1301,7 @@ public class AbilityUtils {
 
     /////////////////////////////////////////////////////////////////////////////////////
     //
-    // BELOW ARE resove() METHOD AND ITS DEPENDANTS, CONSIDER MOVING TO DEDICATED CLASS
+    // BELOW ARE resolve() METHOD AND ITS DEPENDANTS, CONSIDER MOVING TO DEDICATED CLASS
     //
     /////////////////////////////////////////////////////////////////////////////////////
     public static void resolve(final SpellAbility sa) {
@@ -1332,7 +1320,7 @@ public class AbilityUtils {
         resolvePreAbilities(sa, game);
 
         // count times ability resolves this turn
-        if (!sa.isWrapper()) {
+        if (!sa.isWrapper() && sa.isAbility()) {
             final Card host = sa.getHostCard();
             if (host != null) {
                 host.addAbilityResolved(sa);
@@ -1519,6 +1507,7 @@ public class AbilityUtils {
         else {
             cost = new Cost(unlessCost, true);
         }
+        cost = CostAdjustment.adjust(cost, sa, true);
         return cost;
     }
 
@@ -2426,6 +2415,11 @@ public class AbilityUtils {
             return doXMath(sum, expr, c, ctb);
         }
 
+        if (sq[0].equals("SingleMaxDamageThisTurn")) {
+            int sum = game.getSingleMaxDamageDoneThisTurn();
+            return doXMath(sum, expr, c, ctb);
+        }
+
         if (sq[0].contains("DamageThisTurn")) {
             String[] props = l[0].split(" ");
             Boolean isCombat = null;
@@ -2590,61 +2584,65 @@ public class AbilityUtils {
         }
 
         if (sq[0].contains("Party")) {
-            CardCollection adventurers = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield),
-                    "Creature.Cleric,Creature.Rogue,Creature.Warrior,Creature.Wizard", player, c, ctb);
-
-            Set<String> partyTypes = Sets.newHashSet("Cleric", "Rogue", "Warrior", "Wizard");
-            int partySize = 0;
-
-            HashMap<String, Card> chosenParty = new HashMap<>();
-            List<Card> wildcard = Lists.newArrayList();
-            HashMap<Card, Set<String>> multityped = new HashMap<>();
+            Set<String> chosenParty = Sets.newHashSet();
+            int wildcard = 0;
+            ListMultimap<String, Card> multityped = MultimapBuilder.hashKeys().arrayListValues().build();
+            List<Card> chosenMulti = Lists.newArrayList();
 
             // Figure out how to count each class separately.
-            for (Card card : adventurers) {
-                // cards with all creature types will just return full list
-                Set<String> creatureTypes = card.getType().getCreatureTypes();
-                creatureTypes.retainAll(partyTypes);
-
-                if (creatureTypes.size() == 4) {
-                    wildcard.add(card);
-
-                    if (wildcard.size() >= 4) {
-                        break;
-                    }
+            for (Card card : player.getCardsIn(ZoneType.Battlefield)) {
+                if (!card.isCreature()) {
                     continue;
-                } else if (creatureTypes.size() == 1) {
-                    String type = (String)(creatureTypes.toArray()[0]);
+                }
+                CardTypeView type = card.getType();
+                Set<String> creatureTypes;
 
-                    if (!chosenParty.containsKey(type)) {
-                        chosenParty.put(type, card);
+                // extra logic for "all creature types" cards
+                if (type.hasAllCreatureTypes()) {
+                    // one of the party types could be excluded, so check each of them separate
+                    creatureTypes = CardType.Constant.PARTY_TYPES.stream().filter(p -> type.hasCreatureType(p)).collect(Collectors.toSet());
+                } else { // shortcut for others 
+                    creatureTypes = type.getCreatureTypes();
+                    creatureTypes.retainAll(CardType.Constant.PARTY_TYPES);
+                }
+
+                switch (creatureTypes.size()) {
+                case 0:
+                    continue;
+                case 4:
+                    wildcard++;
+                    break;
+                case 1:
+                    chosenParty.addAll(creatureTypes);
+                    break;
+                default:
+                    for (String t : creatureTypes) {
+                        multityped.put(t, card);
                     }
-                } else {
-                    multityped.put(card, creatureTypes);
+                }
+
+                // found enough
+                if (chosenParty.size() + wildcard >= 4) {
+                    break;
                 }
             }
 
-            partySize = Math.min(chosenParty.size() + wildcard.size(), 4);
+            if (chosenParty.size() + wildcard < 4) {
+                multityped.keySet().removeAll(chosenParty);
 
-            if (partySize < 4) {
-                partyTypes.removeAll(chosenParty.keySet());
-
-                // Here I'm left with just the party types that I haven't selected.
-                for (Card multi : multityped.keySet()) {
-                    Set<String> types = multityped.get(multi);
-                    types.retainAll(partyTypes);
-
-                    for (String type : types) {
-                        chosenParty.put(type, multi);
-                        partyTypes.remove(type);
-                        break;
-                    }
-                }
+                // sort by amount of members
+                Multimaps.asMap(multityped).entrySet().stream()
+                    .sorted(Map.Entry.<String, List<Card>>comparingByValue(Comparator.<List<Card>>comparingInt(Collection::size)))
+                    .forEach(e -> {
+                        e.getValue().removeAll(chosenMulti);
+                        if (e.getValue().size() > 0) {
+                            chosenParty.add(e.getKey());
+                            chosenMulti.add(e.getValue().get(0));
+                        }
+                    });
             }
 
-            partySize = Math.min(chosenParty.size() + wildcard.size(), 4);
-
-            return doXMath(partySize, expr, c, ctb);
+            return doXMath(Math.min(chosenParty.size() + wildcard, 4), expr, c, ctb);
         }
 
         // TODO make AI part to understand Sunburst better so this isn't needed
@@ -2824,7 +2822,7 @@ public class AbilityUtils {
             ZoneType origin = hasFrom ? ZoneType.smartValueOf(workingCopy[3]) : null;
             String validFilter = workingCopy[hasFrom ? 4 : 2];
 
-            if (workingCopy[0].contains("This")) {
+            if (sq[0].startsWith("This")) {
                 someCards = CardUtil.getThisTurnEntered(destination, origin, validFilter, c, ctb, player);
             } else {
                 someCards = CardUtil.getLastTurnEntered(destination, origin, validFilter, c, ctb, player);
@@ -3402,7 +3400,6 @@ public class AbilityUtils {
     }
 
     public static int playerXProperty(final Player player, final String s, final Card source, CardTraitBase ctb) {
-
         final String[] l = s.split("/");
         final String m = CardFactoryUtil.extractOperators(s);
 

@@ -1,12 +1,43 @@
-{                                    
-"name":"Fungus",
-  "template":
-  {
-   "count":60,
-   "colors":["Green","Black"],
-   "tribe":"Fungus",        
-   "tribeCards":1.0,
-   "tribeSynergyCards":0.2,
-   "rares":0.2
-  }
+{
+  "name": "Fungus",
+  "mainDeck": [
+    {
+      "count": 30,
+      "colors": [
+        "Green",
+        "Black"
+      ],
+      "subTypes": [
+        "Fungus"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 8,
+      "colors": [
+        "Green",
+        "Black"
+      ],
+      "subTypes": [
+        "Fungus"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 11,
+      "cardName": "Forest|7ED"
+    },
+    {
+      "type": "card",
+      "count": 11,
+      "cardName": "Swamp|7ED"
+    }
+  ]
 }

@@ -94,6 +94,13 @@ public enum ColorSet implements Iterable<Color>, Serializable {
         }
         return fromMask(mask);
     }
+    public static ColorSet fromEnums(final Iterable<Color> colors) {
+        byte mask = 0;
+        for (Color e : colors) {
+            mask |= e.getColorMask();
+        }
+        return fromMask(mask);
+    }
 
     public static ColorSet fromNames(final String... colors) {
         byte mask = 0;
@@ -121,6 +128,14 @@ public enum ColorSet implements Iterable<Color>, Serializable {
 
     public static ColorSet fromManaCost(final ManaCost mana) {
         return fromMask(mana.getColorProfile());
+    }
+
+    public static ColorSet combine(final ColorSet... colors) {
+        byte mask = 0;
+        for (ColorSet c : colors) {
+            mask |= c.getColor();
+        }
+        return fromMask(mask);
     }
 
     /**

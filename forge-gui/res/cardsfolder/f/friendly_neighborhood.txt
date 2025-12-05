@@ -1,4 +1,5 @@
 Name:Friendly Neighborhood
+Variant:UniversesWithin:FlavorName:Remarkable Readings
 ManaCost:3 W
 Types:Enchantment Aura
 K:Enchant:Land

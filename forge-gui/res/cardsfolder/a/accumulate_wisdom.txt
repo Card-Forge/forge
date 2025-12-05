@@ -1,0 +1,8 @@
+Name:Accumulate Wisdom
+ManaCost:1 U
+Types:Instant Lesson
+A:SP$ Dig | DigNum$ 3 | ChangeNum$ X | NoReveal$ True | SpellDescription$ Look at the top three cards of your library. Put one of those cards into your hand and the rest on the bottom of your library in any order. Put each of those cards into your hand instead if there are three or more Lesson cards in your graveyard.
+SVar:X:Count$Compare Y GE3.3.1
+SVar:Y:Count$ValidGraveyard Lesson.YouOwn
+DeckHints:Type$Lesson
+Oracle:Look at the top three cards of your library. Put one of those cards into your hand and the rest on the bottom of your library in any order. Put each of those cards into your hand instead if there are three or more Lesson cards in your graveyard.

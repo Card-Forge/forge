@@ -1,10 +1,50 @@
-{                                    
-"name":"Dog",
-  "template":
-  {
-   "count":60,
-   "colors":["White","Green","Red"],
-   "tribe":"Dog",        
-   "rares":0.6
-  }
+{
+  "name": "Dog",
+  "mainDeck": [
+    {
+      "count": 15,
+      "colors": [
+        "White",
+        "Green",
+        "Red"
+      ],
+      "subTypes": [
+        "Dog"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 23,
+      "colors": [
+        "White",
+        "Green",
+        "Red"
+      ],
+      "subTypes": [
+        "Dog"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 8,
+      "cardName": "Plains|USG"
+    },
+    {
+      "type": "card",
+      "count": 7,
+      "cardName": "Forest|USG"
+    },
+    {
+      "type": "card",
+      "count": 7,
+      "cardName": "Mountain|USG"
+    }
+  ]
 }

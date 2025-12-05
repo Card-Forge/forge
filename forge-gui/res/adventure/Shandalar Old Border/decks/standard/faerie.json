@@ -1,11 +1,43 @@
-{                                    
-"name":"Faerie",
-  "template":
-  {
-   "count":60,
-   "colors":["Blue","Green"],
-   "tribe":"Faerie",         
-   "tribeCards":0.5,     
-   "rares":0.5
-  }
+{
+  "name": "Faerie",
+  "mainDeck": [
+    {
+      "count": 19,
+      "colors": [
+        "Blue",
+        "Green"
+      ],
+      "subTypes": [
+        "Faerie"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 19,
+      "colors": [
+        "Blue",
+        "Green"
+      ],
+      "subTypes": [
+        "Faerie"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 11,
+      "cardName": "Island|ODY"
+    },
+    {
+      "type": "card",
+      "count": 11,
+      "cardName": "Forest|ODY"
+    }
+  ]
 }

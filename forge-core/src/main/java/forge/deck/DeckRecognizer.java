@@ -596,7 +596,7 @@ public class DeckRecognizer {
             line = refLine.trim();  // Remove any trailing formatting
 
         // Some websites export split card names with a single slash. Replace with double slash.
-        // Final fantasy cards like Summon: Choco/Mog should be ommited to be recognized. TODO: fix maybe for future cards
+        // Final fantasy cards like Summon: Choco/Mog should be omitted to be recognized. TODO: fix maybe for future cards
         if (!line.contains("Summon:"))
             line = SEARCH_SINGLE_SLASH.matcher(line).replaceFirst(" // ");
         if (line.startsWith(ASTERISK))  // Markdown lists (tappedout md export)
@@ -1013,36 +1013,6 @@ public class DeckRecognizer {
         return MagicColor.Color.fromByte(MagicColor.fromName(colorName.toLowerCase()));
     }
 
-    public static String getLocalisedMagicColorName(String colorName){
-        Localizer localizer = Localizer.getInstance();
-        return switch (colorName.toLowerCase()) {
-            case MagicColor.Constant.WHITE -> localizer.getMessage("lblWhite");
-            case MagicColor.Constant.BLUE -> localizer.getMessage("lblBlue");
-            case MagicColor.Constant.BLACK -> localizer.getMessage("lblBlack");
-            case MagicColor.Constant.RED -> localizer.getMessage("lblRed");
-            case MagicColor.Constant.GREEN -> localizer.getMessage("lblGreen");
-            case MagicColor.Constant.COLORLESS -> localizer.getMessage("lblColorless");
-            case "multicolour", "multicolor" -> localizer.getMessage("lblMulticolor");
-            default -> "";
-        };
-    }
-
-    /**
-     * Get the magic color by the localised/translated name.
-     * @param localisedName String of localised color name.
-     * @return The string of the magic color.
-     */
-    public static String getColorNameByLocalisedName(String localisedName) {
-        Localizer localizer = Localizer.getInstance();
-
-        if(localisedName.equals(localizer.getMessage("lblWhite"))) return MagicColor.Constant.WHITE;
-        if(localisedName.equals(localizer.getMessage("lblBlue"))) return MagicColor.Constant.BLUE;
-        if(localisedName.equals(localizer.getMessage("lblBlack"))) return MagicColor.Constant.BLACK;
-        if(localisedName.equals(localizer.getMessage("lblRed"))) return MagicColor.Constant.RED;
-        if(localisedName.equals(localizer.getMessage("lblGreen"))) return MagicColor.Constant.GREEN;
-
-        return "";
-    }
     public static boolean isDeckName(final String lineAsIs) {
         if (lineAsIs == null)
             return false;

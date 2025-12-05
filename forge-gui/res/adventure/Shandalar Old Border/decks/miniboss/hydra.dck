@@ -1,0 +1,25 @@
+[metadata]
+Name=The Hydra of Shandalar
+[Main]
+4 Taiga|LEA
+8 Forest|LEA
+8 Mountain|LEA
+4 Rock Hydra|LEA
+4 Spitting Hydra|STH
+4 Balduvian Hydra|ICE
+2 Ancient Hydra|NMS
+2 Molten Hydra|ULG
+4 Krakilin|TMP
+4 Ivy Elemental|ODY
+2 Hurricane|LEA
+2 Earthquake|LEA
+2 Savage Twister|MIR
+2 New Frontiers|ODY
+4 Rolling Thunder|TMP
+4 Rampant Growth|MIR
+
+[StartInBattle_Reference]
+1 Forest|LEA
+1 Mana Flare|LEA
+1 Mountain|LEA
+1 Primal Rage|STH

@@ -11,15 +11,17 @@ ScryfallCode=PF25
 2 R Ponder @Mark Zug
 3 M The First Sliver @Svetlin Velinov
 F4 R Second City @Mark Rosewater
-5 M Yoshimaru, Ever Faithful @Kazuya Takahashi
+5 M Yoshimaru, Ever Faithful @Kazuya Takahashi ${"flavorName": "Torgal, Clive's Companion"}
 6 M Ugin, the Spirit Dragon @Raymond Swanland
 7 R Sliver Hive @Igor Kieryluk
 F8 R All-You-Can-Eat Buffet @Mark Rosewater
 9 R Tifa Lockhart @Nijihayashi
 10 R Arcane Signet @David Astruga
-11 R Rograkh, Son of Rohgahh @Square Enix
+11 R Rograkh, Son of Rohgahh @Square Enix ${"flavorName": "Joshua Rosfield"}
 12 R Swords to Plowshares @Kodai Okamoto
 13 R Lightning Bolt @Christopher Moeller
 14 R Scourge of Valkas @Svetlin Velinov
 15 M The Ur-Dragon @Jaime Jones
 F16 R Spaghetti Junction @Mark Rosewater
+17 R J. Jonah Jameson @Borja Pindado
+18 R Sokka, Bold Boomeranger @Brian Yuen

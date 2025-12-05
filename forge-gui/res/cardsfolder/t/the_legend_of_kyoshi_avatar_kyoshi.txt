@@ -1,0 +1,25 @@
+Name:The Legend of Kyoshi
+ManaCost:4 G G
+Types:Enchantment Saga
+K:Chapter:3:DBDraw,DBEarthbend,DBTransform
+SVar:DBDraw:DB$ Draw | NumCards$ X | SpellDescription$ Draw cards equal to the greatest power among creatures you control.
+SVar:DBEarthbend:DB$ Earthbend | Num$ Y | SubAbility$ DBAnimate | SpellDescription$ Earthbend X, where X is the number of cards in your hand. That land becomes an Island in addition to its other types.
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Types$ Island | Duration$ Permanent
+SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | GainControl$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
+SVar:Y:Count$ValidHand Card.YouOwn
+AlternateMode:DoubleFaced
+Oracle:(As this Saga enters, and after your draw step, add a lore counter.)\nI — Draw cards equal to the greatest power among creatures you control.\nII — Earthbend X, where X is the number of cards in your hand. That land becomes an Island in addition to its other types.\nIII — Exile this Saga, then return it to the battlefield transformed under your control.
+
+ALTERNATE
+
+Name:Avatar Kyoshi
+ManaCost:no cost
+Types:Legendary Creature Avatar
+PT:5/4
+S:Mode$ Continuous | Affected$ Land.YouCtrl | AddKeyword$ Trample & Hexproof | Description$ Lands you control have trample and hexproof.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | SpellDescription$ Add X mana of any one color, where X is the greatest power among creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
+Oracle:Lands you control have trample and hexproof.\n{T}: Add X mana of any one color, where X is the greatest power among creatures you control.

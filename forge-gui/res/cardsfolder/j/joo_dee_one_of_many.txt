@@ -1,0 +1,8 @@
+Name:Joo Dee, One of Many
+ManaCost:1 B
+Types:Creature Human Advisor
+PT:2/2
+A:AB$ Surveil | Cost$ B T | Amount$ 1 | SorcerySpeed$ True | SubAbility$ DBCopy | SpellDescription$ Surveil 1. Create a token that's a copy of this creature, then sacrifice an artifact or creature. Activate only as a sorcery.
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Self | NumCopies$ 1 | SubAbility$ DBSac
+SVar:DBSac:DB$ Sacrifice | Defined$ You | SacValid$ Artifact,Creature
+Oracle:{B}, {T}: Surveil 1. Create a token that's a copy of this creature, then sacrifice an artifact or creature. Activate only as a sorcery.

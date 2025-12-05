@@ -1,0 +1,9 @@
+Name:Cruel Administrator
+ManaCost:3 B R
+Types:Creature Human Soldier
+PT:5/4
+K:etbCounter:P1P1:1:CheckSVar$ RaidTest:Raid — CARDNAME enters with a +1/+1 counter on it if you attacked this turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature attacks, create a 2/2 red Soldier creature token with firebending 1. (Whenever it attacks, add {R}. This mana lasts until end of combat.)
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_2_2_soldier_firebending_1 | TokenOwner$ You
+SVar:RaidTest:Count$AttackersDeclared
+Oracle:Raid — This creature enters with a +1/+1 counter on it if you attacked this turn.\nWhenever this creature attacks, create a 2/2 red Soldier creature token with firebending 1. (Whenever it attacks, add {R}. This mana lasts until end of combat.)

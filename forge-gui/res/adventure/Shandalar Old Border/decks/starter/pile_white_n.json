@@ -1,48 +1,94 @@
-{                                    
-"name":"White",
+{
+  "name": "White",
   "mainDeck": [
-    {  
-      "count":15, 
-      "cardName": "Plains" 
-    },        
-    {  
-      "count":6, 
-      "cardName": "Forest" 
-    },   
-    {  
-      "count":6, 
-      "cardName": "Island" 
+    {
+      "type": "card",
+      "count": 9,
+      "cardName": "Plains|7ED"
     },
-    {  
-      "count":9,
-      "colors": ["white"],
-      "rarity": ["Uncommon","Common"],   
-      "manaCosts": [1,2]
+    {
+      "type": "card",
+      "count": 9,
+      "cardName": "Forest|7ED"
     },
-    {  
-      "count":6,
-      "colors": ["green","blue"],
-      "rarity": ["Uncommon","Common"],   
-      "manaCosts": [1,2]
+    {
+      "type": "card",
+      "count": 9,
+      "cardName": "Island|7ED"
     },
-    {  
-      "count":6,
-      "colors": ["white"],
-      "rarity": ["Uncommon","Common"],   
-      "manaCosts": [3,4]
+    {
+      "count": 9,
+      "colors": [
+        "white"
+      ],
+      "rarity": [
+        "Uncommon",
+        "Common"
+      ],
+      "manaCosts": [
+        1,
+        2
+      ]
     },
-    {  
-      "count":3,
-      "colors": ["green","blue"],
-      "rarity": ["Uncommon","Common"],   
-      "manaCosts": [3,4]
+    {
+      "count": 6,
+      "colors": [
+        "green",
+        "blue"
+      ],
+      "rarity": [
+        "Uncommon",
+        "Common"
+      ],
+      "manaCosts": [
+        1,
+        2
+      ]
     },
-    {  
-      "count":9,
-      "colors": ["white"],
-      "rarity": ["rare"],   
-      "manaCosts": [5,6,7,8,9] 
+    {
+      "count": 6,
+      "colors": [
+        "white"
+      ],
+      "rarity": [
+        "Uncommon",
+        "Common"
+      ],
+      "manaCosts": [
+        3,
+        4
+      ]
+    },
+    {
+      "count": 3,
+      "colors": [
+        "green",
+        "blue"
+      ],
+      "rarity": [
+        "Uncommon",
+        "Common"
+      ],
+      "manaCosts": [
+        3,
+        4
+      ]
+    },
+    {
+      "count": 9,
+      "colors": [
+        "white"
+      ],
+      "rarity": [
+        "rare"
+      ],
+      "manaCosts": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
     }
-    ]
+  ]
 }
-

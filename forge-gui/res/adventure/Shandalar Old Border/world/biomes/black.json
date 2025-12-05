@@ -32,6 +32,12 @@
 	"Shroom2"
 ],
 "enemies": [
+	"Legend of the Badlands",
+	"Legend of the Underground Sea",
+	"Scrublander of Dromar",
+	"Volcanic Islander of Crosis",
+	"Bayou Dweller of Darigaaz",
+	"Domain Keeper of Cromat",
 	"Adept Black Wizard",
 	"Apprentice Black Wizard",
 	"Bat",
@@ -75,7 +81,9 @@
 	"Zombie",
 	"Zombie Lord",
 	"Walking Brain",
-	"Wild Rat"
+	"Wild Rat",
+	"Nether Fiend of Shandalar",
+	"Necromancer of Shandalar"
 ],
 	"pointsOfInterest": [
 		"Black Castle",
@@ -116,7 +124,7 @@
 		"CaveRat",
 		"CaveLarge1",
 		"Slimefoots Lair",
-		"Temple of Liliana",
+		"Temple of Yawgmoth",
 		"Grolnoks Bog",
 		"Lich's Mirror",
 		"DemonTower",

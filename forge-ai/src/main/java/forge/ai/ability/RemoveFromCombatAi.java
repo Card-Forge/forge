@@ -16,7 +16,7 @@ public class RemoveFromCombatAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
         // AI should only activate this during Human's turn
 
         if ("RemoveBestAttacker".equals(sa.getParam("AILogic"))) {

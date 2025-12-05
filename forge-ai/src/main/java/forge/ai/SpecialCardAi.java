@@ -173,7 +173,7 @@ public class SpecialCardAi {
             final CardCollection library = CardLists.filter(ai.getCardsIn(ZoneType.Library),
                     CardPredicates.INSTANTS_AND_SORCERIES);
             if (!library.isEmpty()) {
-                // get max cmc of instant or sorceries in the libary
+                // get max cmc of instant or sorceries in the library
                 int maxCMC = 0;
                 for (final Card c : library) {
                     int v = c.getCMC();
@@ -189,7 +189,7 @@ public class SpecialCardAi {
                     return false;
                 }
                 int maxToRemove = counterNum - maxCMC + 1;
-                // no Scry 0, even if its catched from later stuff
+                // no Scry 0, even if its caught from later stuff
                 if (maxToRemove <= 0) {
                     return false;
                 }
@@ -798,7 +798,7 @@ public class SpecialCardAi {
     public static class Intuition {
         public static CardCollection considerMultiple(final Player ai, final SpellAbility sa) {
             if (ai.getController().isAI()) {
-                if (!((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.INTUITION_ALTERNATIVE_LOGIC)) {
+                if (!((PlayerControllerAi) ai.getController()).getAi().getBoolProperty(AiProps.INTUITION_ALTERNATIVE_LOGIC)) {
                     return new CardCollection(); // fall back to standard ChangeZoneAi considerations
                 }
             }

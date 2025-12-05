@@ -37,10 +37,10 @@
   <object id="69" template="../../../../../common/maps/obj/enemy.tx" gid="2147495067" x="208" y="224">
    <properties>
     <property name="dialog">[{
-  &quot;text&quot;:&quot;Hello, planeswalker {var=player_name}, welcome to my abode&quot;,
+  &quot;text&quot;:&quot;Hello, planeswalker {var=player_name}. Welcome to my abode&quot;,
   &quot;options&quot;:[
     {
-	  &quot;name&quot;:&quot;Why am I here&quot;,      
+	  &quot;name&quot;:&quot;Why am I here?&quot;,      
 	  &quot;condition&quot;:[ { &quot;checkQuestFlag&quot;: &quot;mainQuest&quot; ,&quot;not&quot;:true} ],    
 	  &quot;text&quot;:&quot;You are on a plane called Innistrad, a realm of equal parts horror and joy; darkness and light. Where the shadows cling like a thick morning dew... You are here, because you alone could see through the shadows and found my beacon...&quot;,
 	  &quot;options&quot;:[
@@ -68,8 +68,8 @@
 							&quot;options&quot;:[{&quot;name&quot;:&quot;Where are these contests?&quot;,
 								&quot;text&quot;: &quot;Show the coins to innkeepers. If there is a point of power in the town, the innkeeper will direct you to it and its contest.&quot;,
 								&quot;options&quot;:[{ 
-									&quot;name&quot;:&quot;Thank you&quot;,
-									&quot;text&quot;:&quot;I will now re-open the portal you came through. So that you may return to Innistrad, where you can seek to find freedom from your imprisonment... Good luck&quot;,
+									&quot;name&quot;:&quot;Thank you.&quot;,
+									&quot;text&quot;:&quot;I will now re-open the portal you came through. So that you may return to Innistrad, where you can seek to find freedom from your imprisonment... Good luck.&quot;,
 									&quot;options&quot;:[
 									{
 										&quot;name&quot;:&quot;(Leave)&quot;,
@@ -80,8 +80,8 @@
 						}]
 					},
 					{ 
-						&quot;name&quot;:&quot;Thank you&quot;,
-						&quot;text&quot;:&quot;I will now re-open the portal you came through. So that you may return to Innistrad, where you can seek to find freedom from your imprisonment... Good luck&quot;,
+						&quot;name&quot;:&quot;Thank you.&quot;,
+						&quot;text&quot;:&quot;I will now re-open the portal you came through. Once you return to Innistrad, you can seek freedom from your imprisonment... Good luck.&quot;,
 						&quot;condition&quot;:[{ &quot;checkCharacterFlag&quot;: &quot;freeChallengeCoins&quot;} ],  
 						&quot;options&quot;:[
 						{
@@ -94,7 +94,7 @@
 		} 
 	  ]
 	},
-    { &quot;name&quot;:&quot;Bye&quot; }
+    { &quot;name&quot;:&quot;Goodbye.&quot; }
   ]
 },
 {

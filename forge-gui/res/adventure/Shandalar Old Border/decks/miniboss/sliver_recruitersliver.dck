@@ -1,0 +1,22 @@
+[metadata]
+Name=Sinister Sliver
+[Main]
+4 Polluted Delta|ONS
+4 Underground Sea|LEA
+4 Underground River|ICE
+6 Swamp|2ED
+6 Island|2ED
+4 Winged Sliver|TMP
+4 Synapse Sliver|LGN
+4 Toxin Sliver|LGN
+4 Clot Sliver|TMP
+2 Spectral Sliver|LGN
+2 Hibernation Sliver|STH
+4 Counterspell|LEA
+4 Undermine|INV
+4 Terror|LEA
+4 Recoil|INV
+
+[StartInBattle_Reference]
+1 Island|2ED
+1 Swamp|2ED

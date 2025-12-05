@@ -14,6 +14,7 @@ import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.IAfterMatch;
 import forge.adventure.util.AdventureEventController;
+import forge.adventure.util.AdventureModes;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.assets.FBufferedImage;
@@ -36,6 +37,7 @@ import forge.screens.LoadingOverlay;
 import forge.screens.TransitionScreen;
 import forge.screens.match.MatchController;
 import forge.sound.MusicPlaylist;
+import forge.sound.SoundSystem;
 import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
 import forge.util.Aggregates;
@@ -132,7 +134,7 @@ public class DuelScene extends ForgeScene {
     void afterGameEnd(String enemyName, boolean winner) {
         Forge.advFreezePlayerControls = winner;
         endRunnable = () -> Gdx.app.postRunnable(() -> {
-            GameHUD.getInstance().switchAudio();
+            GameHUD.getInstance().updateBGM();
             dungeonEffect = null;
             callbackExit = false;
             Forge.clearTransitionScreen();
@@ -191,12 +193,14 @@ public class DuelScene extends ForgeScene {
 
     @Override
     public void enter() {
-        GameHUD.getInstance().unloadAudio();
+        SoundSystem.instance.stopBackgroundMusic();
         GameType mainGameType;
         boolean isDeckMissing = false;
         String isDeckMissingMsg = "";
         if (eventData != null && eventData.eventRules != null) {
             mainGameType = eventData.eventRules.gameType;
+        } else if (AdventurePlayer.current().getAdventureMode() == AdventureModes.Commander){
+            mainGameType = GameType.Commander;
         } else {
             mainGameType = GameType.Adventure;
         }

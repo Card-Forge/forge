@@ -1,14 +1,26 @@
 [metadata]
 Name=darkenchanter
 [Main]
-13 Forest|INV|3
-3 Plains|INV|3
-4 Armadillo Cloak|INV|1
-4 Brushland|ICE|1
-4 Elephant Guide|JUD|1
-4 Enchantress's Presence|ONS|1
-4 Fertile Ground|USG|1
-4 Sterling Grove|INV|1
-4 Utopia Tree|INV|1
-4 Verduran Enchantress|5ED|1
-4 Wild Growth|2ED|1
+4 Bayou|LEA
+4 Llanowar Wastes|APC
+8 Forest|BRB
+4 Swamp|POR
+4 Fertile Ground|USG
+4 Rancor|ULG
+2 Animate Dead|2ED
+2 Necromancy|VIS
+2 Dance of the Dead|ICE
+4 Ancestral Mask|MMQ
+4 Spiritmonger|APC
+4 Albino Troll|USG
+2 Verduran Enchantress|4ED
+4 Seal of Doom|NMS
+2 Grave Pact|STH
+2 Enchantress's Presence|ONS
+2 Pestilence|USG
+2 No Mercy|ULG
+
+[StartInBattle_Reference]
+1 Black Market|MMQ
+1 Enchantress's Presence|ONS
+1 Grim Feast|MIR

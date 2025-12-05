@@ -6,8 +6,8 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 import forge.GameCommand;
 import forge.card.CardRarity;
+import forge.card.ColorSet;
 import forge.card.GamePieceType;
-import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -147,7 +147,7 @@ public abstract class SpellAbilityEffect {
             sb.append(TextUtil.enclosedParen(TextUtil.concatNoSpace("X","=",String.valueOf(amount))));
         }
 
-        String currentName = CardTranslation.getTranslatedName(sa.getHostCard().getName());
+        String currentName = sa.getHostCard().getTranslatedName();
         String substitutedDesc = TextUtil.fastReplace(sb.toString(), "CARDNAME", currentName);
         substitutedDesc = TextUtil.fastReplace(substitutedDesc, "NICKNAME", Lang.getInstance().getNickName(currentName));
         return substitutedDesc;
@@ -617,10 +617,10 @@ public abstract class SpellAbilityEffect {
         if (name.startsWith("Emblem")) {
             eff.setEmblem(true);
             // Emblem needs to be colorless
-            eff.setColor(MagicColor.COLORLESS);
+            eff.setColor(ColorSet.C);
             eff.setRarity(CardRarity.Common);
         } else {
-            eff.setColor(hostCard.getColor().getColor());
+            eff.setColor(hostCard.getColor());
             eff.setRarity(hostCard.getRarity());
         }
 
@@ -670,7 +670,7 @@ public abstract class SpellAbilityEffect {
             }
 
             // build an Effect with that information
-            String name = host.getName() + "'s Effect";
+            String name = host.getDisplayName() + "'s Effect";
 
             final Card eff = createEffect(sa, controller, name, host.getImageKey());
             if (cards != null) {
@@ -735,7 +735,7 @@ public abstract class SpellAbilityEffect {
             Map<String, Object> params = Maps.newHashMap();
             params.put("Attacker", c);
             defender = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(defs, sa,
-                    Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())), false, params);
+                    Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", c.getTranslatedName()), false, params);
 
             if (defender != null && !combat.getAttackersOf(defender).contains(c)) {
                 // we might be reselecting
@@ -891,10 +891,6 @@ public abstract class SpellAbilityEffect {
                 runParams.put(AbilityKey.Cause, sa);
                 runParams.put(AbilityKey.DiscardedBefore, discardedBefore.get(p));
                 p.getGame().getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);
-
-                if (sa.hasParam("RememberDiscardingPlayers")) {
-                    sa.getHostCard().addRemembered(p);
-                }
             }
         }
     }

@@ -1,0 +1,10 @@
+Name:South Pole Voyager
+ManaCost:1 W
+Types:Creature Human Scout Ally
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Ally.Other+YouCtrl | Execute$ TrigGainLife | TriggerDescription$ Whenever this creature or another Ally you control enters, you gain 1 life. If this is the second time this ability has resolved this turn, you draw a card.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ Resolved | ConditionSVarCompare$ EQ2
+SVar:Resolved:Count$ResolvedThisTurn
+SVar:BuffedBy:Ally
+Oracle:Whenever this creature or another Ally you control enters, you gain 1 life. If this is the second time this ability has resolved this turn, you draw a card.

@@ -2,17 +2,17 @@
 Name=faerieleader
 [Main]
 13 Island|4ED|2
-2 Coastal Tower|INV|1
-2 Counterspell|6ED|1
-2 Forbid|F02|1
+2 Coastal Tower|INV
+2 Counterspell|6ED
+2 Forbid|EXO
 3 Plains|4ED|2
-4 Adarkar Wastes|ICE|1
-4 Cloud of Faeries|ULG|1
-4 Faerie Conclave|ULG|1
-4 Faerie Squadron|INV|1
-4 Intuition|TMP|1
-4 Memory Lapse|5ED|1
-4 Snap|ULG|1
-4 Soltari Visionary|EXO|1
-4 Stroke of Genius|USG|1
-4 Thwart|MMQ|1
+4 Adarkar Wastes|ICE
+4 Cloud of Faeries|ULG
+4 Faerie Conclave|ULG
+4 Faerie Squadron|INV
+4 Intuition|TMP
+4 Memory Lapse|5ED
+4 Snap|ULG
+4 Soltari Visionary|EXO
+4 Stroke of Genius|USG
+4 Thwart|MMQ

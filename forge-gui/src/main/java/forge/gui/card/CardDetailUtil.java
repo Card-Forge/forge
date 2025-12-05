@@ -5,7 +5,6 @@ import forge.card.CardRarity;
 import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.deck.DeckRecognizer;
 import forge.game.GameView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
@@ -153,7 +152,7 @@ public class CardDetailUtil {
         if (item instanceof PreconDeck) {
             return ((PreconDeck) item).getDescription();
         }
-        return item.getName();
+        return item.getDisplayName();
     }
 
     public static String formatCardName(final CardView card, final boolean canShow, final boolean forAltState) {
@@ -245,13 +244,13 @@ public class CardDetailUtil {
                 PaperCard origPaperCard = null;
                 Card origCard = null;
                 try {
-                    if (!card.getName().isEmpty()) {
-                        origPaperCard = FModel.getMagicDb().getCommonCards().getCard(card.getName());
+                    if (!card.getOracleName().isEmpty()) {
+                        origPaperCard = FModel.getMagicDb().getCommonCards().getCard(card.getOracleName());
                     } else {
                         // probably a morph or manifest, try to get its identity from the alternate state
-                        String altName = card.getAlternateState().getName();
+                        String altName = card.getAlternateState().getOracleName();
                         if (!altName.isEmpty()) {
-                            origPaperCard = FModel.getMagicDb().getCommonCards().getCard(card.getAlternateState().getName());
+                            origPaperCard = FModel.getMagicDb().getCommonCards().getCard(altName);
                         }
                     }
                     if (origPaperCard != null) {
@@ -259,7 +258,7 @@ public class CardDetailUtil {
                     }
                     origIdent = origCard != null ? getCurrentColors(origCard.isFaceDown() ? CardView.get(origCard).getState(false) : CardView.get(origCard).getCurrentState()) : "";
                 } catch(Exception ex) {
-                    System.err.println("Unexpected behavior: card " + card.getName() + "[" + card.getId() + "] tripped an exception when trying to process current card colors.");
+                    System.err.println("Unexpected behavior: card " + card.getOracleName() + "[" + card.getId() + "] tripped an exception when trying to process current card colors.");
                 }
                 isChanged = !curColors.equals(origIdent);
             }
@@ -420,7 +419,7 @@ public class CardDetailUtil {
         if (pl != null) {
             Map<String, String> notes = pl.getDraftNotes();
             if (notes != null) {
-                String note = notes.get(card.getName());
+                String note = notes.get(card.getOracleName());
                 if (note != null) {
                     area.append("\n");
                     area.append("Draft Notes: ").append(note);
@@ -459,7 +458,7 @@ public class CardDetailUtil {
         if (card.getChosenColors() != null && !card.getChosenColors().isEmpty()) {
             area.append("\n");
             area.append("(").append(Localizer.getInstance().getMessage("lblChosenColors")).append(" ");
-            area.append(Lang.joinHomogenous(card.getChosenColors().stream().map(DeckRecognizer::getLocalisedMagicColorName).collect(Collectors.toList())));
+            area.append(Lang.joinHomogenous(ColorSet.fromNames(card.getChosenColors()).stream().map(MagicColor.Color::getTranslatedName).collect(Collectors.toList())));
             area.append(")");
         }
 

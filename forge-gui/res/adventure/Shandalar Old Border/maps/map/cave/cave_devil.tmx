@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="63">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Furnace of Rath|TMP&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJw7x8LAcG4Uj+JRPIpH8SgexSMCAwCNIqJs
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNlEsKwjAURW/9QIvNKtyDE51apNtxKu5Ep9bPrvx1ESLm8vJoKw4sscHChdCE3HfeJ1kCZH+sQwwcrU5xc9217yMFxiPgbNdXq+VE1l16k49ecwArI/6q/Ie5fM/hzWofC+PGem9R+foyKxPvXhu5r15P7vGbRsAskjM8u7N7pQfrIpH4mUveVcTCWK+nMqpf33oPjV+Omcu7U/nhH2OgZwZ/xm/1TIWZfvW4upbW4Be926a/yaq9FuKtIKf2kPZZCGbtqzKpZonMPc8ebqOBac7WxSnUO83cw82SvmEhck9fznDu6lAEmmXl9WV8AUbcxPM=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="282" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="175.25" y="45.0833"/>
+  <object id="53" template="../../../../../../common/maps/obj/gold.tx" x="249.5" y="64.0833"/>
+  <object id="55" template="../../../../../../common/maps/obj/treasure.tx" x="42.4167" y="115"/>
+  <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="166.833" y="144.5">
+   <properties>
+    <property name="enemy" value="Demon"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="200.167" y="229.083">
+   <properties>
+    <property name="enemy" value="Imp"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="183.417" y="198.167">
+   <properties>
+    <property name="enemy" value="Imp"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="60" template="../../../../../../common/maps/obj/manashards.tx" x="203.475" y="60.0213"/>
+  <object id="61" template="../../../../../../common/maps/obj/manashards.tx" x="62.9327" y="124.072"/>
+  <object id="62" template="../../../../../../common/maps/obj/booster.tx" x="189.447" y="111.368">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ODY&quot;, &quot;TOR&quot;, &quot;JUD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ODY&quot;, &quot;TOR&quot;, &quot;JUD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ODY&quot;, &quot;TOR&quot;, &quot;JUD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
