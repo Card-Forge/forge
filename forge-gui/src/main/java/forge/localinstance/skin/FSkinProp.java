@@ -22,6 +22,7 @@ import java.util.Map;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
+import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.deck.DeckSection;
@@ -716,6 +717,20 @@ public enum FSkinProp {
             case RED -> IMG_MANA_R;
             case GREEN -> IMG_MANA_G;
             case COLORLESS -> IMG_MANA_COLORLESS;
+        };
+    }
+
+    public static FSkinProp iconFromCoreType(CardType.CoreType core) {
+        return switch (core) {
+            case Artifact -> IMG_ARTIFACT;
+            case Creature -> IMG_CREATURE;
+            case Enchantment -> IMG_ENCHANTMENT;
+            case Instant -> IMG_INSTANT;
+            case Land -> IMG_LAND;
+            case Planeswalker -> IMG_PLANESWALKER;
+            case Sorcery -> IMG_SORCERY;
+            case Battle -> IMG_BATTLE;
+            default -> null;
         };
     }
 
