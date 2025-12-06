@@ -1,0 +1,6 @@
+{
+  "name": "Must Play Land",
+  "forced_hand": ["Swamp", "Swamp", "Plains"],
+  "forced_library": ["Dark Ritual", "Giant Growth"],
+  "expected_action": "play_land"
+}

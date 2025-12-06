@@ -28,6 +28,9 @@ import forge.game.trigger.WrappedAbility;
 import forge.model.FModel;
 import forge.gui.GuiBase;
 import forge.util.Aggregates;
+import forge.util.FileSection;
+import forge.util.FileUtil;
+import forge.gamemodes.puzzle.Puzzle;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -313,7 +316,105 @@ public class ForgeHeadlessServer {
             Thread.currentThread().interrupt();
         }
 
+        // Apply any requested scenarios (Cheats for testing)
+        if (options != null) {
+            setupScenario(currentGame, options);
+        }
+
         System.out.println("New game is ready and initialized!");
+    }
+
+    private static void setupScenario(final Game game, final JsonObject options) {
+        // --- Puzzle Mode: Load from a .pzl file ---
+        if (options.has("puzzle_file")) {
+            final String puzzleFilePath = options.get("puzzle_file").getAsString();
+            System.out.println("Loading puzzle from: " + puzzleFilePath);
+            try {
+                final List<String> pfData = FileUtil.readFile(puzzleFilePath);
+                final Map<String, List<String>> puzzleSections = FileSection.parseSections(pfData);
+                // Create puzzle and apply to game
+                final Puzzle puzzle = new Puzzle(puzzleSections, puzzleFilePath, false);
+                puzzle.applyToGame(game);
+                System.out.println("Puzzle applied successfully!");
+                return; // Puzzle overrides all other scenario settings
+            } catch (Exception e) {
+                System.err.println("Failed to load puzzle: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+
+        if (!options.has("forced_hand") && !options.has("forced_library")) {
+            return;
+        }
+
+        System.out.println("Applying scenario cheats...");
+        // Assumes Player 1 is the agent (index 0)
+        if (game.getPlayers().isEmpty()) {
+            System.err.println("Cannot apply scenario: No players found in game!");
+            return;
+        }
+        final Player player = game.getPlayers().get(0);
+
+        // Handle Forced Hand
+        if (options.has("forced_hand")) {
+            final JsonArray forcedHand = options.getAsJsonArray("forced_hand");
+            for (int i = 0; i < forcedHand.size(); i++) {
+                final String cardName = forcedHand.get(i).getAsString();
+                final Card card = findCardInOwnerZones(player, cardName);
+                if (card != null) {
+                    game.getAction().moveTo(ZoneType.Hand, card, null, null);
+                    System.out.println("Moved " + cardName + " to Hand");
+                } else {
+                    System.err.println("Could not find card for forced hand: " + cardName);
+                }
+            }
+        }
+
+        // Handle Forced Library (Stacking the deck)
+        // Note: The first item in the array becomes the TOP card of the library
+        if (options.has("forced_library")) {
+            final JsonArray forcedLibrary = options.getAsJsonArray("forced_library");
+            // Iterate in reverse order because moveTo(Library) puts cards on TOP
+            // So if we want [A, B, C] on top (A is top), we typically need to ensure
+            // the order is preserved. Default moveTo Library is "Top".
+            // If we move A, then B, then C -> C is on top.
+            // If the JSON is ["A", "B", "C"] (A is top, B is next), we should apply C, then
+            // B, then A.
+            for (int i = forcedLibrary.size() - 1; i >= 0; i--) {
+                final String cardName = forcedLibrary.get(i).getAsString();
+                final Card card = findCardInOwnerZones(player, cardName);
+                if (card != null) {
+                    game.getAction().moveTo(ZoneType.Library, card, null, null);
+                    System.out.println("Moved " + cardName + " to Top of Library");
+                } else {
+                    System.err.println("Could not find card for forced library: " + cardName);
+                }
+            }
+        }
+    }
+
+    private static Card findCardInOwnerZones(final Player player, final String cardName) {
+        // Search Hand
+        for (final Card c : player.getCardsIn(ZoneType.Hand)) {
+            if (c.getName().equalsIgnoreCase(cardName))
+                return c;
+        }
+        // Search Library
+        for (final Card c : player.getCardsIn(ZoneType.Library)) {
+            if (c.getName().equalsIgnoreCase(cardName))
+                return c;
+        }
+        // Search Graveyard (unlikely at start but possible)
+        for (final Card c : player.getCardsIn(ZoneType.Graveyard)) {
+            if (c.getName().equalsIgnoreCase(cardName))
+                return c;
+        }
+        // Search Exile (unlikely at start but possible)
+        for (final Card c : player.getCardsIn(ZoneType.Exile)) {
+            if (c.getName().equalsIgnoreCase(cardName))
+                return c;
+        }
+        return null;
     }
 
     private static Deck generateRandomStandardDeck() {
