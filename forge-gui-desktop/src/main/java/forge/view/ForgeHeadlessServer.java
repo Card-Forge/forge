@@ -380,8 +380,83 @@ public class ForgeHeadlessServer {
         }
 
         @Override
-        public Player createIngamePlayer(final Game game, final int id) {
-            final Player ai = new Player(getName(), game, id);
+        public void declareAttackers(final Player attacker, final Combat combat) {
+            System.out.println("ServerPlayer: declareAttackers called - agent has control");
+            
+            // Get all creatures that could potentially attack
+            final CardCollectionView potentialAttackers = attacker.getCreaturesInPlay();
+            
+            // Build options list with all possible attackers
+            while (true) {
+                final JsonArray attackerOptions = new JsonArray();
+                
+                // Add each potential attacker as an option
+                for (final Card creature : potentialAttackers) {
+                    if (combat.isAttacking(creature)) {
+                        continue; // Already declared as attacker
+                    }
+                    if (!creature.canAttackThisTurn()) {
+                        continue; // Can't attack (e.g., summoning sickness, tapped)
+                    }
+                    
+                    final JsonObject option = new JsonObject();
+                    option.addProperty("type", "declare_attacker");
+                    option.addProperty("creature", creature.toString());
+                    option.addProperty("creature_id", creature.getId());
+                    attackerOptions.add(option);
+                }
+                
+                // Add "pass priority" option to signal done
+                final JsonObject passOption = new JsonObject();
+                passOption.addProperty("type", "pass_priority");
+                attackerOptions.add(passOption);
+                
+                // Wait for agent's choice
+                waitingForInput = true;
+                LAST_GAME_STATE.set(buildGameState(currentGame));
+                
+                final JsonObject actionPayload = waitForNextAction();
+                waitingForInput = false;
+                
+                if (actionPayload == null) {
+                    System.err.println("No action received, finishing attack declaration");
+                    break;
+                }
+                
+                // Check if agent passed priority (done declaring attackers)
+                final String actionType = actionPayload.has("action") ? 
+                    actionPayload.get("action").getAsString() : "";
+                
+                if ("pass_priority".equals(actionType)) {
+                    System.out.println("Agent passed priority - done declaring attackers");
+                    break;
+                }
+                
+                // Apply attacker declaration
+                if (actionPayload.has("index")) {
+                    final int index = actionPayload.get("index").getAsInt();
+                    if (index >= 0 && index < attackerOptions.size()) {
+                        final JsonObject selectedOption = attackerOptions.get(index).getAsJsonObject();
+                        if ("pass_priority".equals(selectedOption.get("type").getAsString())) {
+                            System.out.println("Agent passed priority (via index) - done declaring attackers");
+                            break;
+                        }
+                        
+                        // Find and declare the attacker
+                        final int creatureId = selectedOption.get("creature_id").getAsInt();
+                        for (final Card creature : potentialAttackers) {
+                            if (creature.getId() == creatureId) {
+                                // Declare this creature as an attacker
+                                final GameEntity defender = combat.getDefenders().iterator().next();
+                                combat.addAttacker(creature, defender);
+                                System.out.println("Declared " + creature + " as attacker");
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
             ai.setFirstController(new ServerPlayerController(game, ai, this));
             return ai;
         }
@@ -445,7 +520,106 @@ public class ForgeHeadlessServer {
 
         @Override
         public void declareBlockers(final Player defender, final Combat combat) {
-            updateGameState(getGame());
+            System.out.println("ServerPlayer: declareBlockers called - agent has control");
+            
+            // Get all creatures that could potentially block
+            final CardCollectionView potentialBlockers = defender.getCreaturesInPlay();
+            final List<Card> attackers = new ArrayList<>(combat.getAttackers());
+            
+            // Build options and loop until agent passes priority
+            while (true) {
+                final JsonArray blockerOptions = new JsonArray();
+                
+                // For each potential blocker, show which attackers it can block
+                for (final Card blocker : potentialBlockers) {
+                    if (combat.isBlocking(blocker)) {
+                        continue; // Already declared as blocker
+                    }
+                    if (!blocker.canBlock()) {
+                        continue; // Can't block (e.g., tapped, ability restriction)
+                    }
+                    
+                    // Check each attacker this blocker could block
+                    for (final Card attacker : attackers) {
+                        if (combat.canBlock(attacker, blocker)) {
+                            final JsonObject option = new JsonObject();
+                            option.addProperty("type", "declare_blocker");
+                            option.addProperty("blocker", blocker.toString());
+                            option.addProperty("blocker_id", blocker.getId());
+                            option.addProperty("attacker", attacker.toString());
+                            option.addProperty("attacker_id", attacker.getId());
+                            blockerOptions.add(option);
+                        }
+                    }
+                }
+                
+                // Add "pass priority" option to signal done
+                final JsonObject passOption = new JsonObject();
+                passOption.addProperty("type", "pass_priority");
+                blockerOptions.add(passOption);
+                
+                // Wait for agent's choice
+                waitingForInput = true;
+                LAST_GAME_STATE.set(buildGameState(currentGame));
+                
+                final JsonObject actionPayload = waitForNextAction();
+                waitingForInput = false;
+                
+                if (actionPayload == null) {
+                    System.err.println("No action received, finishing block declaration");
+                    break;
+                }
+                
+                // Check if agent passed priority (done declaring blockers)
+                final String actionType = actionPayload.has("action") ? 
+                    actionPayload.get("action").getAsString() : "";
+                
+                if ("pass_priority".equals(actionType)) {
+                    System.out.println("Agent passed priority - done declaring blockers");
+                    break;
+                }
+                
+                // Apply blocker declaration
+                if (actionPayload.has("index")) {
+                    final int index = actionPayload.get("index").getAsInt();
+                    if (index >= 0 && index < blockerOptions.size()) {
+                        final JsonObject selectedOption = blockerOptions.get(index).getAsJsonObject();
+                        if ("pass_priority".equals(selectedOption.get("type").getAsString())) {
+                            System.out.println("Agent passed priority (via index) - done declaring blockers");
+                            break;
+                        }
+                        
+                        // Find and declare the blocker
+                        final int blockerId = selectedOption.get("blocker_id").getAsInt();
+                        final int attackerId = selectedOption.get("attacker_id").getAsInt();
+                        
+                        Card blockerCard = null;
+                        Card attackerCard = null;
+                        
+                        for (final Card blocker : potentialBlockers) {
+                            if (blocker.getId() == blockerId) {
+                                blockerCard = blocker;
+                                break;
+                            }
+                        }
+                        
+                        for (final Card attacker : attackers) {
+                            if (attacker.getId() == attackerId) {
+                                attackerCard = attacker;
+                                break;
+                            }
+                        }
+                        
+                        if (blockerCard != null && attackerCard != null) {
+                            combat.addBlocker(attackerCard, blockerCard);
+                            System.out.println("Declared " + blockerCard + " to block " + attackerCard);
+                        } else {
+                            System.err.println("Could not find blocker or attacker cards");
+                        }
+                    }
+                }
+            }
+        }
             final String action = askPython();
             // Fallback to AI
             super.declareBlockers(defender, combat);
