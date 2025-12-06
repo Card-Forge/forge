@@ -96,3 +96,6 @@ __pycache__
 *.pyc
 headless_game.log
 travis_test_file.py
+# Local maven installation
+apache-maven-*
+*.tar.gz
