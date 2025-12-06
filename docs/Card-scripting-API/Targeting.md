@@ -7,16 +7,18 @@ Example: `Defined$ Valid Creature & Player`
 You can combine Defined with Valid Syntax (explained in the [Targets](#Targets) section) like so:
 `{Defined}.{Valid}`
 
+*Note:* Sometimes you might still use both on a single effect if it's affecting more than its targets, e.g. *Flumph*. 
+
 ## Defined Players
 Defined Players are for SAs like "Draw" or "GainLife".
 
 ### You
-The most common of these is `Defined$ You`. It means exactly what one can expect: "You draw/discard/... a card."
+The most common of these is `Defined$ You`. It means exactly what one can expect: "You draw/learn/...".
 
 This is also the default value. But it's important to include this in SAs that have an unclear "Default" value such as Damage.
 
 ### Opponent
-This means "Deals damage to each opponent" or "Each opponent discards a card."
+This means "Deals damage to each opponent" or "Each opponent discards."
 
 ### Player
 Each player.
@@ -24,7 +26,6 @@ Each player.
 ### TargetedController / TargetedOwner
 
 ### AttackingPlayer / DefendingPlayer
-Things like "Whenever Souls of the Faultless is dealt combat damage, you gain that much life and attacking player loses that much life."
 
 ## Defined Cards
 Defined Cards are for SAs like "Pump" or "Regenerate".

@@ -22,6 +22,7 @@ Syntax definitions like the above will use different symbols to separate the var
 > - a good knowledge of the game rules is often helpful for some of the more complex cases covered
 
 # Common Parameters
+*Tip:* the convention is to put most of these before AF-specific params for readability (with the exception of Descriptions better suited at the very end)
 
 ## Cost / UnlessCost
 `Cost$ {AbilityCost}` is the appropriate way to set the cost of the ability. Currently for spells, any additional costs including the original Mana cost need to appear in the Cost param in the AbilityFactory. For each card that uses it, the order in which the cost is paid will always be the same.
@@ -59,7 +60,7 @@ Because cards keep their remembered parts when changing zones manual [cleanup](#
 
 Values:
 - EndOfTurn (Default)  
-Note: since more often an effect only lasts until end of turn this was chosen as default instead of following how the rule defines it
+*Note:* since more often an effect only lasts until end of turn this was chosen as default instead of following how the rule defines it
 - Permanent
 - AsLongAsControl
 - AsLongAsInPlay - it really depends on each card's wording if this or the below one is correct, since here *CR 702.26f* defines phasing out as an extra way of ending the effect
@@ -82,7 +83,7 @@ Normally the AI will only prefer targeting cards that satisfy the constraint. Ho
 ## Animate
 Animate handles animation effects like "This card becomes a 5/5 green creature with flying until end of turn."
 
-Parameters:
+Parameters (all optional):
 - `Power` - the power to assign to the animated card
 - `Toughness` - the toughness to assign to the animated card
 - `Types/RemoveTypes` - the types to give to/remove from the animated card; comma delimited
@@ -132,15 +133,15 @@ SVar:PutLandCreature:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | 
 SVar:X:Count$Valid Enchantment.YouCtrl
 ```
 
-Note: sometimes you could also implement this via standard ability Conditions instead, but that requires careful consideration if the relevant property could be changed by one of the applicable effects.
+*Note:* sometimes you could also implement this via standard ability Conditions instead, but that requires careful consideration if the relevant property could be changed by one of the applicable effects.
 
 ## Charm
 This AF represents modal effects.
 
 Parameters:
-- `CharmNum$ {Integer}` - number of modes to choose
-- `MinCharmNum$ {Integer}` (Optional) - if "up to" allows a variable number
-- `Choices` - a comma delimited list of SVars containing the modes
+- `CharmNum$ {Integer}` (Default: 1) - number of modes to choose
+- `MinCharmNum$ {Integer}` (Default: same as CharmNum) - if "up to" allows a variable number
+- `Choices$ {SubAbilities}` - a comma delimited list of SVars containing the modes
 
 ## Choices
 AF in this group let the player make choices from all kinds of categories and are often used to chain effects together. However, for common cases many effects already support this directly, e.g. `PutCounter | Choices$`.  
@@ -160,28 +161,28 @@ This can be used when a player is asked to choose a card (sub)type.
 Parameters:
 - `Type` - Typically "Card", "Creature" or a few special cases
 - `ValidTypes {String}` - alternative to above param to explicitly define the types
-- `InvalidTypes$ {String}` (Optional) - used to specify any type that cannot be chosen
+- `InvalidTypes$ {String}` (Optional) - used to specify any type that can't be chosen
 
 ## Clash
 This AF handles clashing.
 
 Parameters:
-- `WinSubAbility$ {SubAbility}` optional
-- `OtherwiseSubAbility`
+- `WinSubAbility$` (Optional)
+- `OtherwiseSubAbility$` (Optional)
 
 ## Cleanup
 A non-functional, maintenance AF used for cleaning up certain variables before a spell finishes resolving.
 
 Parameters:
-- `ClearRemembered$ True` clear this card's remembered list. Generally useful for Cards that Remember a card, do something to it, then need to forget it once it's done
-- `ClearImprinted$ True` clear the imprinted cards
-- `ClearChosenCard$ True` clear the chosen cards
+- `ClearRemembered$ True` - clear this card's remembered list. Generally useful for abilities that remember an object, do something to it, then need to forget it once it's done
+- `ClearImprinted$ True` - clear the imprinted cards
+- `ClearChosenCard$ True` - clear the chosen cards
 
 ## Control
 
 ### GainControl
 Parameters:
-- `NewController$ {Defined}`
+- `NewController$ {Defined}` (Default: You)
 
 ### ControlExchange
 
@@ -197,12 +198,12 @@ Parameters:
 Copies a permanent.
 
 Parameters:
-- `NumCopies` - optional - the number of copies to put onto the battlefield.
-- `Keywords` - optional - a list of keywords to add to the copies
+- `NumCopies` (Default: 1) - the number of copies to put onto the battlefield.
+- `Keywords` (Optional) - a list of keywords to add to the copies
 
 ### CopySpellAbility
 Parameters:
-- `Num$ {Integer}` Default:1
+- `Num$ {Integer}` (Default: 1)
 
 ## Counter
 Countering Spells or Abilities.
@@ -212,20 +213,22 @@ Parameters:
     - TopDeck
 
 ## Counters
-Factories to handle counters on cards.
+Factories to handle counters on cards or players.
 
 ### Poison
 Poison gives a player the specified number of poison counters.
 
 Parameters:
-- `Num` (required) - the number of poison counters to give
+- `Num$ {Integer}` - the number of poison counters to give
 
 ### PutCounter
 Put any type of counter on a game object.
 
 Parameters:
 - `CounterType` - specifies the type of counter and should appear in all caps
-- `CounterNum` - how many counters will be put on the chosen card
+- `CounterNum$ {Integer}` (Default: 1) - how many counters will be put on the chosen card
+- `Placer$ {Defined}`
+- `ETB$ True` - for ETB counters
 
 ### RemoveCounter
 Remove any type of counter from a game object.
@@ -255,7 +258,7 @@ Parameters:
 Deal damage to a specified player or permanent.
 
 Parameters:
-- `NumDmg` - amount of damage dealt
+- `NumDmg$ {Integer}` - amount of damage dealt
 
 ### EachDamage
 
@@ -268,6 +271,9 @@ Parameters:
 
 ## Destroy
 Handles destruction of permanents.
+
+Parameters:
+- `NoRegen$ True`
 
 ## Effect
 Effect is an oddball of the AF family. Where usually AFs have similarities to each other to help with AI use, this one's used for all sorts of continuous effects.
@@ -282,15 +288,14 @@ SVar:TrigMana:DB$ Mana | Produced$ U | Amount$ 1 | Defined$ TriggeredActivator
 Effect is most similar to Token as it creates a pseudo-permanent, except Effect creates in the command zone rather than the battlefield.
 
 Parameters:
-- `Abilities,Triggers,SVars` are comma separated lists which contain SVars that point to the appropriate type that the Effect will gain. You don't need to put the zone-specific params like EffectZone$ onto these.
+- `Abilities,Triggers,ReplacementEffects,StaticAbilities,SVars` - comma separated lists which contain SVars that point to the appropriate type that the Effect will gain. You don't need to put the zone-specific params like EffectZone$ onto these
 - `Duration`
-- Stackable$ False - Most Effects are assumed to be Stackable. By
-  setting the Stackable Flag to False, the AI will know having a
-  second one in play is useless, so will save it's Resource for
-  something else.
-- Name, usually auto-generated
-- Image - a file\_name\_without\_extension (image needs to reside in
-  the tokens directory)
+- `EffectOwner$ {Defined}`
+- `ForgetOnMoved$ {ZoneType}` - gets rid of the effect if all remembered cards have left the affected zone
+- `RememberObjects$ {Defined}`
+- `Stackable$ False` - most effects are assumed to be stackable. By using this flag, the AI will know having a second one active is (at least mostly) useless, so it will save its resources for something else
+- `Name$ {String}` (Optional) - usually auto-generated
+- `Image$ filename\without\extension` (Optional) - image needs to reside in the tokens directory
 
 ## Explore
 
@@ -303,7 +308,7 @@ This AF is based on the original *Fog* spell: "Prevent all combat damage that wo
 Have a player gain or lose the specified amount of life.
 
 Parameters:
-- `LifeAmount` - the value to modify the life total(s)
+- `LifeAmount$ {Integer}` - the value to modify the life total(s)
 
 ## Game outcome
 
@@ -318,10 +323,33 @@ Used in the script of *Karn Liberated*.
 
 ## Goad
 
+## Loops
+Repeat the specified ability.
+
+### Repeat
+Parameters:
+- `MaxRepeat` - optional - the maximum times to repeat, execute repeat ability at least once
+- `RepeatSubAbility` - setup subability to repeat
+- `RepeatOptional$ True` - you make the choice whether to repeat the process
+- RepeatPresent, RepeatCompare, RepeatDefined, RepeatCheckSVar, RepeatSVarCompare - optional - condition check
+
+### RepeatEach
+A more complex variant that iterates over objects of some type instead. During each `RepeatSubAbility` execution the current object is remembered.
+
+Parameters:
+- `RepeatSubAbility` - required - to set up repeat subability
+- `RepeatCards` - to repeat for each valid card (zone: present zone of the valid repeat cards, default: battlefield)
+- `DefinedCards`
+- `RepeatPlayers` - to repeat for each valid player
+- `RepeatCounters` - to repeat for each valid counters
+
 ## Mana
 Add mana to a player's mana pool.
 
-## Manifest
+Parameters:
+- `Produced$ {String}`
+
+## Manifest / Cloak
 
 ## Permanent State
 AF for effects that alter a permanent's state.
@@ -341,13 +369,13 @@ Changing a cards state. This is mostly for Flip Cards or the Transform mechanic.
 Playing cards as part of another ability. The player may have to make a choice about which card to play if there are more choices than the number of cards to play.
 
 Parameters:
-- `Amount$ {Integer/All}` - how many cards can be played
+- `Amount$ {Integer/All}` (Default: 1) - how many cards can be played
 - `Valid` - selection criteria for valid cards from the zone to cast
 - `ValidSA` - applied after Valid, this will filter based on all spells of the cards
 - `ValidZone` - the zone to look in to determine the valid cards
-- `Optional` - playing is optional
-- `RememberPlayed` - remember the card played
-- `PlayCost`
+- `Optional$ True` - playing is optional
+- `RememberPlayed$ True` - remember the card played
+- `PlayCost$ {AbilityCost}`
 - `WithoutManaCost$ True` - The card can be cast without its normal mana cost
 - `Controller$ {Defined}` (Default: You) - controller of the ability
 
@@ -357,39 +385,18 @@ Parameters:
 Grants protection from traits like colors or card types.
 
 Parameters:
-- `Gains` - required - the thing to gain protection from (green, artifacts,
-Demons, etc.) or "Choice" if you can choose one of a comma-delimited list of Choices$
+- `Gains` - the thing to gain protection from (green, artifacts, Demons, etc.) or "Choice" if you can choose one of a comma-delimited list of `Choices$`
 
 ## Pump
 Handles pumping creatures power/toughness or granting keywords to cards or players.
 
-Parameters:
-- `NumAtt$` pumps Power
-- `NumDef$` pumps Toughness
-- `KW$` gives keywords
+Parameters (all optional):
+- `NumAtt$` - pumps Power
+- `NumDef$` - pumps Toughness
+- `KW$` - gives keywords
 
 ## Regenerate
 Regenerate is for creating regeneration shields.
-
-## Repeat
-Repeat the specified ability.
-
-### Repeat
-`A:SP$ Repeat | Cost$ 3 B B | RepeatSubAbility$ DBDig | RepeatOptional$ True`
-
-Parameters:
-- `MaxRepeat` - optional - the maxium times to repeat, execute repeat ability at least once
-- `RepeatSubAbility` - required - setup subability to repeat
-- `RepeatOptional` - optional - you make the choice whether to repeat the process
-- RepeatPresent, RepeatCompare, RepeatDefined, RepeatCheckSVar, RepeatSVarCompare - optional - condition check
-
-### RepeatEach
-Parameters:
-- `RepeatSubAbility` - required - to set up repeat subability
-- `RepeatCards` - to repeat for each valid card (zone: present zone of the valid repeat cards, default: battlefield)
-- `DefinedCards`
-- `RepeatPlayers` - to repeat for each valid player
-- `RepeatCounters` - to repeat for each valid counters
 
 ## Reveal
 
@@ -401,7 +408,7 @@ Parameters:
 - `RevealValid` to limit the valid cards
 - `AnyNumber`
 - `Random`
-- `RememberRevealed:` to remember the cards revealed
+- `RememberRevealed` to remember the cards revealed
 
 ### PeekAndReveal
 This AF is very similar to things that Dig can do, but handle a much simpler form, with less complex coding underneath. Similar to how RearrangeTopOfLibrary could be handled with Dig.
@@ -421,7 +428,7 @@ Parameters:
 Forces a player to sacrifice something of their choice.
 
 Parameters:
-- `SacValid$ {ValidCard}`
+- `SacValid$ {ValidCard}` (Default: Card.Self)
 
 ## Scry
 
@@ -439,9 +446,9 @@ Parameters:
 Token lets you create tokens of any type. They get defined by creating scripts in the `res/tokenscripts` folder.
 
 Parameters:
-- `TokenScript$ {filename[,filename]}` list of tokens to create
-- `TokenAmount$ {Integer}` defaults to 1
-- `TokenOwner$ {DefinedPlayer}` defaults to "You"
+- `TokenScript$ {filename[,filename]}` - list of tokens to create
+- `TokenAmount$ {Integer}` (Default: 1)
+- `TokenOwner$ {DefinedPlayer}` (Default: You)
 
 ## Triggers
 If possible split the SpellDescription of the effect so the part for the trigger can become the StackDescription directly.
@@ -451,7 +458,7 @@ The trigger-specific params are defined in [Triggers](Triggers.md).
 
 ### ImmediateTrigger
 Parameters:
-- `TriggerAmount`
+- `TriggerAmount$ {Integer}`
 
 ## Turn structure
 
@@ -462,6 +469,7 @@ Parameters:
 ### EndTurn
 
 ### ReverseTurnOrder
+No own parameters.
 
 ### SkipPhase
 
@@ -470,37 +478,40 @@ Parameters:
 ## Vote
 
 ## Zone Affecting
-For effects that handle zones in a specific manner.
+For effects that modify zones in a specific manner.
 
 ### ChangeZone
-ChangeZone is a united front of any card that changes zone. This does not include: drawing, discarding, destroying, or milling, as these represent specific words on which triggers and replacements can react.
+ChangeZone is a united front of any card that changes zone. This does not include: drawing, destroying, etc. as these represent specific words on which triggers and replacements can react.
 
-- `Origin` is where the card is coming from.
-- `Destination` is where the card is going to.
-If Destination is Library, a LibraryPosition is recommended, but not required. **Default value of the LibraryPosition is 0.** 0 represents the top of the library, -1 represents the bottom.
+Two primary forms are available after setting these parameters, depending on how the effect is templated:
+- `Origin$ {ZoneType}` is where the card is coming from
+- `Destination$ {ZoneType}` is where the card is going to
+- `LibraryPosition {Integer}` (Default: 0) - ignored when not moving to library. 0 represents the top, -1 the bottom
 
-There are two primary forms, but the distinction is handled mostly in the codebase.
+**Hidden syntax**
 
-#### Hidden Origin
-The first is hidden, generally used for Origin zones that are not known information, e.g. the Library. The choice of "What card is changing zones?" happens during resolution.
+Hidden is generally used for origin zones that are not known information, e.g. the Library. The choice of "What card is changing zones?" happens during resolution. **If you need this for public zones `Hidden$ True` is required.**
 
-`A:SP$ ChangeZone | Cost$ W | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Artifact,Enchantment | ChangeNum$ 1 | SpellDescription$ Search your library for an artifact or enchantment card and reveal that card. Shuffle your library, then put the card on top of it.`
+Example (*Call the Gatewatch*):  
+`A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Planeswalker | SpellDescription$ Search your library for a planeswalker card, reveal it, put it into your hand, then shuffle.`
 
 Parameters:
-- `ChangeType`
-- `ChangeNum`
-- `Chooser` defines which player has to decide which card changes zone.
-- `Mandatory` most of these abilities are not mandatory, but some are.
+- `ChangeType$ {ValidCard}`
+- `ChangeNum$ {Integer}`
+- `Chooser$ {DefinedPlayer} -` which player decides which card changes zone
+- `Mandatory$ True` - most of these abilities aren't mandatory, but **CR 701.23d.** means cards like *Demonic Tutor* are different
 
-#### Known Origin
-The second is known, generally used for Origin zones that are known information, like the Battlefield or the Graveyard. The choice of "What card is changing zones?" happens on activation.
+**Known syntax**
 
-`A:AB$ ChangeZone | Cost$ 1 U T | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | Origin$ Graveyard | Destination$ Library | SpellDescription$ Put target artifact card from your graveyard on top of your library.`
+The second is known, instead designed for origin zones that are known information, like the battlefield. The choice of "What card is changing zones?" happens when it's put on the stack (or is at least fixed some other way).
+
+Example (**Excommunicate**):  
+`A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target creature on top of its owner's library.`
 
 ### ChangeZoneResolve
 This is a helper AF, for chained effects that create multiple permanents which should enter the battlefield at the same time.
 
-To use it, you need to set the param "ChangeZoneTable" on the first effect and then call this at the end.
+To use it, you need to set the param `ChangeZoneTable$ True` on the first effect and then call this at the end.
 
 This is supported by the following effects:
 - Amass
@@ -512,39 +523,39 @@ This is supported by the following effects:
 Dig is for an ability that does basically this: "You look at the X cards of your Library, put Y of them somewhere, then put the rest somewhere."
 
 Parameters:
-- `DigNum` - Required - look at the top number of cards of your library
-- `Reveal` - Optional - for abilities that say "Reveal the top X cards of your library". Default is false.
-- `SourceZone` - Optional - the zone to dig in. Default is Library
-- `DestinationZone` - Optional - the zone to put the Y cards in. Default is Hand
-- `LibraryPosition` - Optional - if DestinationZone is Library, use this to specify position. Default is -1 (bottom of library)
-- `ChangeNum` - Optional - the number of cards to move to the DestinationZone (or "All" when it's for things like "put all lands revealed this way into your hand"). Default is 1.
-- `ChangeValid` - Optional - use this to specify if "you may move an artifact to DestinationZone". Default is any Card
-- `AnyNumber` - Optional - use if you can move any number of Cards to DestinationZone. Default is false. (think of Lead the Stampede)
-- `Optional` - Optional - set this if you "may" move a card to DestinationZone. Default is false.
-- `DestinationZone2` - Optional - the zone to put the rest of the cards in. If it is library, you are prompted for the order. Default is Library.
-- `LibraryPosition2` - Optional - if DestinationZone2 is Library, use this to specify position. Default is -1 (bottom of library).
+- `DigNum$ {Integer}` - look at the top X number of cards
+- `Reveal$ True` (Default: False)
+- `ChangeNum$ {Integer/Any/All}` (Default: 1)
+  - the number of cards to move to the DestinationZone
+  - "Any" if you can move any number of Cards to DestinationZone
+  - "All" when it's for things like "put all lands revealed this way into your hand"
+- `ChangeValid$ {ValidCard}` (Default: Card) - use this to specify if only certain types can be moved to DestinationZone
+- `Optional$ True` (Default: False) - if you "may" move a card to DestinationZone
+- `SourceZone$ {ZoneType}` (Default: Library) - the zone to dig in
+- `DestinationZone$ {ZoneType}` (Default: Hand) - the zone to put the Y cards in
+- `DestinationZone2$ {ZoneType}` (Default: Library) - the zone to put the rest in
+- `LibraryPosition/LibraryPosition2 {Integer}` (Default: -1) - if DestinationZone is Library, use this to specify position
 
 ### DigUntil
 
 ### Discard
-
 Parameters:
-- `NumCards$ {Integer}` - the number of cards to discard. Defaults to 1
-- Mode - the mode of discard
-     - Random
-     - TgtChoose
-     - RevealYouChoose
-     - Hand
-- `DiscardValid$ {String}` - acceptable cards to discard
-- `UnlessType$ {String}` - ValidCards expression for "discard X unless you discard <Type>"
+- `NumCards$ {Integer}` (Default: 1) - the number of cards to discard
+- `Mode$ {String}` - the mode of discard
+  - Random
+  - TgtChoose
+  - RevealYouChoose
+  - Hand
+- `DiscardValid$ {ValidCard}` (Default: Card) - acceptable cards to discard
+- `UnlessType$ {ValidCard}` - expression for "discard X unless you discard valid"
 
 ### Draw
 Parameters:
-- `NumCards$ {Integer}` - the number of cards to draw. Defaults to 1
+- `NumCards$ {Integer}` (Default: 1) - the number of cards to draw
 
 ### Mill
 Parameters:
-- `NumCards$ {Integer}` - the number of cards to mill. Defaults to 1
+- `NumCards$ {Integer}` (Default: 1) - the number of cards to mill
 
 ### RearrangeTopOfLibrary
 
@@ -552,6 +563,6 @@ Parameters:
 Used for shuffling a player's library.
 
 Parameters:
-- `Optional$ True` - Set this param if the activator gets to decide if each affected player shuffles
+- `Optional$ True` - if the activator gets to decide if each affected player shuffles
 
 ### TwoPiles
