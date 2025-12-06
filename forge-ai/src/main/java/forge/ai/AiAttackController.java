@@ -820,6 +820,26 @@ public class AiAttackController {
 
         final boolean bAssault = doAssault();
 
+        // Don't overkill too much / keep blockers for multiplayer or unexpected fog.
+        if (bAssault) {
+            int target_damage = this.defendingOpponent.getLife();
+            int n_attackers = this.attackers.size();
+            int n_defenders = this.defendingOpponent.getCreaturesInPlay().size();
+            if (n_attackers - n_defenders > 4) {
+                int damage_guess = 0;
+                int last_needed_attacker = 0;
+                for (int i = n_defenders; i < this.attackers.size(); ++i) {
+                    if (damage_guess < target_damage) {
+                        last_needed_attacker = i;
+                    }
+                    damage_guess += this.attackers.get(i).getNetPower();
+                }
+                for (int j = this.attackers.size() - 1; j > last_needed_attacker; --j) {
+                    this.attackers.remove(j);
+                }
+            }
+        }
+
         // Determine who will be attacked
         GameEntity defender = chooseDefender(combat, bAssault);
 
