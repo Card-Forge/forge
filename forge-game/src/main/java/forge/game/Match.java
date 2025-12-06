@@ -3,6 +3,8 @@ package forge.game;
 import com.google.common.collect.*;
 import com.google.common.eventbus.EventBus;
 import forge.LobbyPlayer;
+import forge.MulliganDefs;
+import forge.StaticData;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckFormat;
@@ -13,6 +15,8 @@ import forge.game.card.CardCollectionView;
 import forge.game.event.Event;
 import forge.game.event.GameEventAnteCardsSelected;
 import forge.game.event.GameEventGameFinished;
+import forge.game.mulligan.AbstractMulligan;
+import forge.game.mulligan.HoustonMulligan;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.player.RegisteredPlayer;
@@ -69,7 +73,25 @@ public class Match {
     }
 
     public Game createGame() {
-        return new Game(players, rules, this);
+        final GameRules currentRules = this.getRules();
+
+        MulliganDefs.MulliganRule selectedRule = StaticData.instance().getMulliganRule();
+
+        if (selectedRule == MulliganDefs.MulliganRule.Houston) {
+
+            for (RegisteredPlayer rp : players) {
+
+                int baseHandSize = rp.getStartingHand();
+
+                AbstractMulligan currentMulligan = new HoustonMulligan(null, false);
+
+                int newDrawSize = currentMulligan.getModifiedHandSize(baseHandSize);
+
+                rp.setStartingHand(newDrawSize);
+            }
+        }
+
+        return new Game(players, currentRules, this);
     }
 
     public void startGame(final Game game) {
