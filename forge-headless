@@ -7,7 +7,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 PROJECT_DIR="$SCRIPT_DIR"
 
 # Path to the jar file
-JAR_PATH="$PROJECT_DIR/forge-gui-desktop/target/forge-gui-desktop-2.0.07-SNAPSHOT-jar-with-dependencies.jar"
+JAR_PATH="$PROJECT_DIR/forge-gui-desktop/target/forge-gui-desktop-2.0.08-SNAPSHOT-jar-with-dependencies.jar"
 
 # Check if jar exists
 if [ ! -f "$JAR_PATH" ]; then
