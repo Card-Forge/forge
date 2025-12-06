@@ -5,7 +5,6 @@ import com.google.common.collect.Sets;
 import forge.ai.*;
 import forge.game.Game;
 import forge.game.GameObject;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
@@ -81,21 +80,11 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         if (abCost.getTotalMana().countX() > 0 && sa.getSVar("X").equals("Count$xPaid")) {
-            // Set PayX here to maximum value. (Endless Scream and Venarian Gold)
             final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-
             if (xPay == 0) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
             }
-
             sa.setXManaCostPaid(xPay);
-        }
-
-        if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Chained to the Rocks")) {
-            final SpellAbility effectExile = AbilityFactory.getAbility(source.getSVar("TrigExile"), source);
-            effectExile.setActivatingPlayer(ai);
-            final List<Card> targets = CardUtil.getValidCardsToTarget(effectExile);
-            return !targets.isEmpty() ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
