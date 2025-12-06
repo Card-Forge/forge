@@ -19,6 +19,6 @@ ManaCost:no cost
 Colors:green
 Types:Enchantment Creature Human Monk
 PT:3/3
-T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME becomes blocked, untap up to three lands you control.
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ Whenever this creature becomes blocked, untap up to three lands you control.
 SVar:TrigUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land.YouCtrl | Amount$ 3
-Oracle:Whenever Likeness of the Seeker becomes blocked, untap up to three lands you control.
+Oracle:Whenever this creature becomes blocked, untap up to three lands you control.
