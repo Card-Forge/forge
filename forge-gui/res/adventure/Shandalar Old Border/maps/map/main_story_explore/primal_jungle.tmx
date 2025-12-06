@@ -117,7 +117,7 @@
     <property name="pursueRange" type="int" value="100" />
     <property name="threatRange" type="int" value="60" />
     <property name="waypoints" value="37" />
-   <property name="effect">{ "startBattleWithCard": [ "Elephant Graveyard|ARN", "Forest|ICE", "Plains|ICE", "War Mammoth|LEA" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Elephant Graveyard|ARN", "Forest|2ED", "Plains|2ED", "War Mammoth|LEA" ] }</property>
 </properties>
   </object>
   <object id="39" template="../../../../../../common/maps/obj/enemy.tx" x="416" y="336">
