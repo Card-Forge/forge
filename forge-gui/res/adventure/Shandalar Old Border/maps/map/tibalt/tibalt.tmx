@@ -90,7 +90,7 @@
    <properties>
     <property name="enemy" value="Fire Giant" />
     <property name="threatRange" type="int" value="50" />
-   <property name="effect">{ "startBattleWithCard": [ "Thran Dynamo|UDS" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Mountain|INV|1", "Mountain|INV|2", "Mountain|INV|3", "Mountain|INV|4", "Loafing Giant|INV" ] }</property></properties>
   </object>
   <object id="163" template="../../../../../../common/maps/obj/waypoint.tx" x="483.175" y="416.438" />
   <object id="165" template="../../../../../../common/maps/obj/waypoint.tx" x="487.569" y="321.045" />
@@ -152,7 +152,7 @@
    <properties>
     <property name="enemy" value="Grave Titan" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{"startBattleWithCard": ["Swamp|ONS", "Swamp|ONS", "Swamp|ONS", "Swamp|ONS", "Rotting Giant|ODY"]}</property>
+   <property name="effect">{ "startBattleWithCard": [ "Rotting Giant|ODY", "Swamp|ODY|1", "Swamp|ODY|2", "Swamp|ODY|3", "Swamp|ODY|4" ] }</property>
     </properties>
   </object>
   <object id="212" template="../../../../../../common/maps/obj/waypoint.tx" x="423.842" y="263.772" />

@@ -19,7 +19,10 @@ Name=Lord of the Pit
 4 Animate Dead|LEA
 
 [StartInBattle_Reference]
-5 Swamp|LEA
 1 Black Market|MMQ
 1 Breeding Pit|FEM
-1 Phyrexian Arena|APC
+1 Swamp|LEA|1
+1 Swamp|LEA|1
+1 Swamp|LEA|2
+1 Swamp|LEA|2
+1 Swamp|LEA|2

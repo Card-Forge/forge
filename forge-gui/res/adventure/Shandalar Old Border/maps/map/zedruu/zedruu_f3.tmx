@@ -38,7 +38,7 @@
  <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
   <object id="201" template="../../../../../../common/maps/obj/enemy.tx" x="213.399" y="128.82">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Craven Giant|POR", "Island|POR", "Island|POR", "Mountain|POR", "Mountain|POR", "Plains|POR", "Plains|POR", "Storm Crow|POR", "Wall of Swords|POR" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Craven Giant|POR", "Island|POR|1", "Mountain|POR|1", "Plains|POR|1", "Island|POR|2", "Mountain|POR|2", "Plains|POR|2", "Storm Crow|ALL", "Wall of Swords|LEA" ] }</property>
     <property name="enemy" value="Zedruu" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Normal" type="bool" value="true" />

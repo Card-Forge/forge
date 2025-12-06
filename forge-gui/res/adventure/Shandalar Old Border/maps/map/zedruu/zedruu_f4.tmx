@@ -158,7 +158,7 @@
     <property name="enemy" value="Fire Giant" />
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="191,190,189" />
-   <property name="effect">{ "startBattleWithCard": [ "Thran Dynamo|UDS" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Mountain|INV|1", "Mountain|INV|2", "Mountain|INV|3", "Mountain|INV|4", "Loafing Giant|INV" ] }</property></properties>
   </object>
   <object id="239" template="../../../../../../common/maps/obj/door_up.tx" x="227.922" y="152.857" width="19.6114" height="29.1114">
    <properties>

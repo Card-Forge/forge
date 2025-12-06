@@ -38,7 +38,7 @@
    <properties>
     <property name="enemy" value="Dark Enchanter" />
     <property name="threatRange" type="int" value="20" />
-   <property name="effect">{"startBattleWithCard": ["Enchantress's Presence|ONS", "Black Market|MMQ", "Grim Feast|MIR"]}</property>
+   <property name="effect">{ "startBattleWithCard": [ "Black Market|MMQ", "Enchantress's Presence|ONS", "Grim Feast|MIR" ] }</property>
     </properties>
   </object>
   <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="392.478" y="158.24" />

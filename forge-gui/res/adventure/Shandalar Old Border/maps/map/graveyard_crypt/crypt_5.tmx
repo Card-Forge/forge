@@ -35,6 +35,7 @@
   <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="458.5" y="521" />
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="207.069" y="231.808">
    <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Mox Jet|LEA", "Wall of Bones|LEA" ] }</property>
     <property name="enemy" value="Master Black Wizard" />
     <property name="threatRange" type="int" value="40" />
    </properties>
@@ -67,7 +68,7 @@
    <properties>
     <property name="enemy" value="Vampire" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{"startBattleWithCard": ["Swamp|TMP", "Cemetery Gate|HML", "Cemetery Gate|HML", "Cemetery Gate|HML", "Cemetery Gate|HML", "Crovax the Cursed|STH"]}</property>
+   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property>
     </properties>
   </object>
   <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="205.333" y="521.333">
@@ -257,7 +258,7 @@
     <property name="enemy" value="Adept Black Wizard" />
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="75,74" />
-   <property name="effect">{ "startBattleWithCard": [ "Wall of Bone|LEA|1" ] }</property></properties>
+   </properties>
   </object>
   <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="304.333" y="774.333" />
   <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="307.667" y="240.667" />

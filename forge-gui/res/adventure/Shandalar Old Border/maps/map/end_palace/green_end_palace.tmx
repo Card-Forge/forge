@@ -65,7 +65,7 @@
     <property name="enemy" value="Master Green Wizard" />
     <property name="threatRange" type="int" value="20" />
     <property name="waypoints" value="73,81,74,76,82,78,82,75,77,80,79,81" />
-   <property name="effect">{ "startBattleWithCard": [ "Jayemdae Tome|LEB|1" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Wall of Brambles|LEA", "Mox Emerald|LEA" ] }</property></properties>
   </object>
   <object id="55" template="../../../../../../common/maps/obj/gate.tx" x="368.667" y="638.667">
    <properties>
@@ -221,7 +221,7 @@
     <property name="enemy" value="Master Green Wizard" />
     <property name="threatRange" type="int" value="20" />
     <property name="waypoints" value="82,75,77,80,79,81,73,81,74,76,82,78" />
-   <property name="effect">{ "startBattleWithCard": [ "Jayemdae Tome|LEB|1" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Wall of Brambles|LEA", "Mox Emerald|LEA" ] }</property></properties>
   </object>
   <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="398.667" y="648.667">
    <properties>

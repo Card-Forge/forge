@@ -46,7 +46,7 @@
     <property name="enemy" value="Adept Black Wizard" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="68,71" />
-   <property name="effect">{ "startBattleWithCard": [ "Wall of Bone|LEA|1" ] }</property></properties>
+   </properties>
   </object>
   <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="153" y="130.5">
    <properties>

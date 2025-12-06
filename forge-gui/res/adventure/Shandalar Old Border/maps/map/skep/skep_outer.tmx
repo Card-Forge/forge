@@ -483,7 +483,7 @@
     <property name="teleportObjectId" value="38" />
    </properties>
   </object>
-  <object id="268" template="../../../../../../common/maps/obj/enemy.tx" x="720" y="783" width="16" height="16" visible="1">
+  <object id="268" template="../../../../../../common/maps/obj/enemy.tx" x="841.833" y="798.667" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[
   {

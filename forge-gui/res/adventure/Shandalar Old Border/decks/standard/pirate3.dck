@@ -1,21 +1,23 @@
 [metadata]
 Name=pirate3
 [Main]
-1 Llanowar Wastes|APC
-13 Island|4ED|2
-2 Control Magic|4ED
-2 Hymn to Tourach|FEM
-2 Sunken Hope|PLS
-2 Yavimaya Coast|APC
-3 Forest|4ED|2
-4 Counterspell|S99
-4 Dark Ritual|BTD
-4 Lord of Atlantis|3ED
-4 Master of the Hunt|LEG
-4 Mystical Tutor|6ED
-4 Phantom Monster|LEA
-4 Raise Dead|7ED
-4 Sea Serpent|4ED
-4 Siren's Call|4ED
-4 Swamp|4ED|2
-4 Underground River|ICE
+11 Island|PO2|1
+11 Island|PO2|2
+2 Rishadan Port|MMQ
+4 Cloud Pirates|POR
+2 Talas Explorer|PO2
+2 Talas Scout|PO2
+2 Reef Pirates|HML
+2 Talas Merchant|PO2
+2 Rishadan Cutpurse|MMQ
+2 Rishadan Airship|MMQ
+2 Kukemssa Pirates|MIR
+2 Talas Warrior|PO2
+4 Coastal Piracy|MMQ
+2 Pirate Ship|LEA
+1 Armored Galleon|PO2
+1 Steam Frigate|PO2
+2 Sea's Claim|ONS
+2 Deluge|ODY
+2 Legacy's Allure|TMP
+2 Steal Artifact|5ED

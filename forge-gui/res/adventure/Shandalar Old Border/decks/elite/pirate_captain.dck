@@ -23,6 +23,7 @@ Name=Pirate Captain
 4 Sea's Claim|ONS
 
 [StartInBattle_Reference]
-2 Island|6ED
 1 Coastal Piracy|MMQ
+1 Island|6ED|1
+1 Island|6ED|2
 1 Pirate Ship|LEA

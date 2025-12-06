@@ -1,23 +1,19 @@
 [metadata]
-Name=Cuthbert's Ka-tet 2
+Name=banditarcher_blink
 [Main]
-1 Caves of Koilos|APC
-1 Plains|6ED
-1 Swamp|6ED
-14 Forest|6ED
-2 Eladamri, Lord of Leaves|TMP
-2 Elvish Champion|7ED
-2 Elvish Pioneer|ONS
-2 Elvish Scrapper|ONS
-2 Lifeforce|4ED
-2 Llanowar Wastes|APC
-2 Ramosian Lieutenant|MMQ
-2 Ramosian Rally|MMQ
-2 Squirrel Wrangler|PCY
-2 Wellwisher|ONS
-2 Wild Mongrel|ODY
-4 Brushland|ICE
-4 Rebel Informer|PCY
-4 Safe Haven|CHR
-4 Squirrel Mob|ODY
-4 Squirrel Nest|ODY
+12 Swamp|PTK
+12 Mountain|PTK
+3 Fire Bowman|PTK
+2 Tor Wauki|LEG
+3 Mountain Bandit|PTK
+4 Poison Arrow|PTK
+4 Bounty Hunter|TMP
+1 Cao Ren, Wei Commander|PTK
+1 Zhang He, Wei General|PTK
+1 Yuan Shao, the Indecisive|PTK
+1 Barbarian General|PTK
+4 Fire Ambush|PTK
+4 Serrated Arrows|HML
+4 Blackmail|ONS
+2 Browbeat|JUD
+2 Deadshot|TMP

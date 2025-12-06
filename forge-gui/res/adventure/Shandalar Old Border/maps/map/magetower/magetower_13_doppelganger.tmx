@@ -47,7 +47,7 @@
   <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="163.605" y="388.194">
    <properties>
     <property name="enemy" value="Doppelganger" />
-   <property name="effect">{"startBattleWithCard": ["Kismet|LEG", "Fellwar Stone|DRK"]}</property>
+   <property name="effect">{ "startBattleWithCard": [ "Fellwar Stone|DRK", "Kismet|LEG" ] }</property>
     </properties>
   </object>
   <object id="75" template="../../../../../../common/maps/obj/enemy.tx" x="106.034" y="305.243">
@@ -59,19 +59,19 @@
     ]
    }
 ]</property>
-    <property name="effect">{"startBattleWithCard": ["Kismet|LEG", "Fellwar Stone|DRK"]}</property>
+    <property name="effect">{ "startBattleWithCard": [ "Fellwar Stone|DRK", "Kismet|LEG" ] }</property>
     <property name="enemy" value="Doppelganger" />
    </properties>
   </object>
   <object id="74" template="../../../../../../common/maps/obj/enemy.tx" x="231.069" y="255.542">
    <properties>
-    <property name="effect">{"startBattleWithCard": ["Kismet|LEG", "Fellwar Stone|DRK"]}</property>
+    <property name="effect">{ "startBattleWithCard": [ "Fellwar Stone|DRK", "Kismet|LEG" ] }</property>
     <property name="enemy" value="Doppelganger" />
    </properties>
   </object>
   <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="140.117" y="386.888">
    <properties>
-    <property name="effect">{"startBattleWithCard": ["Hesitation|STH"]}</property>
+    <property name="effect">{ "startBattleWithCard": [ "Wall of Air|LEA", "Mox Sapphire|LEA" ] }</property>
     <property name="enemy" value="Master Blue Wizard" />
    </properties>
   </object>
@@ -97,7 +97,7 @@
     <property name="enemy" value="Master Blue Wizard" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="90,91,88" />
-   <property name="effect">{"startBattleWithCard": ["Hesitation|STH"]}</property>
+   <property name="effect">{ "startBattleWithCard": [ "Wall of Air|LEA", "Mox Sapphire|LEA" ] }</property>
     </properties>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/scroll.tx" x="96" y="352">
