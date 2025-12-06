@@ -1,5 +1,5 @@
 [metadata]
-Name=magma_elemental
+Name=magma_fire_elemental
 [Main]
 21 Mountain|TMP
 3 Dormant Volcano|VIS
@@ -8,14 +8,13 @@ Name=magma_elemental
 4 Pardic Firecat|ODY
 4 Flame Burst|ODY
 2 Rockshard Elemental|LGN
-2 Ashen Firebeast|ODY
-2 Magmasaur|TMP
-2 Magma Giant|P02
+4 Fire Elemental|LEA
 2 Lava Burst|ICE
 2 Cinder Elemental|MMQ
 2 Lava Blister|ODY
-2 Lavaborn Muse|LGN
+2 Firecat Blitz|JUD
 2 Lava Flow|POR
 1 Lava Axe|POR
 1 Lava Axe|P02
 2 Lava Storm|WTH
+2 Torrent of Lava|MIR

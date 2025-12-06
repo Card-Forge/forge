@@ -1211,7 +1211,7 @@
     "nameOverride": "Ape Behemoth",
     "sprite": "sprites/enemy/beast/behemoth.atlas",
     "deck": [
-      "decks/standard/ape.json"
+      "decks/standard/ape.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -3224,7 +3224,7 @@
     "nameOverride": "Brown Bear",
     "sprite": "sprites/enemy/beast/bear.atlas",
     "deck": [
-      "decks/standard/bear.json"
+      "decks/standard/bear.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -3534,7 +3534,7 @@
     "name": "Big Zombie",
     "sprite": "sprites/enemy/undead/zombie_2.atlas",
     "deck": [
-      "decks/standard/zombie_bad.json"
+      "decks/standard/zombie_bad.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -3811,7 +3811,7 @@
     "name": "Boar",
     "sprite": "sprites/enemy/beast/boar.atlas",
     "deck": [
-      "decks/standard/boar.json",
+      "decks/standard/boar.dck",
       "decks/standard/boar_gruul.dck",
       "decks/standard/boar_monogreenlifegain.dck"
     ],
@@ -4564,7 +4564,7 @@
     "name": "Centaur",
     "sprite": "sprites/enemy/fey/centaur.atlas",
     "deck": [
-      "decks/standard/centaur.json"
+      "decks/standard/centaur.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -5236,7 +5236,7 @@
     "name": "Clay Golem",
     "sprite": "sprites/enemy/construct/golem_2.atlas",
     "deck": [
-      "decks/standard/golem_good.json"
+      "decks/standard/golem_good.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -5282,7 +5282,7 @@
     "name": "Cleric",
     "sprite": "sprites/enemy/humanoid/human/cleric/cleric.atlas",
     "deck": [
-      "decks/standard/cleric.json"
+      "decks/standard/cleric.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -7277,7 +7277,7 @@
     "name": "Demon",
     "sprite": "sprites/enemy/fiend/demon_3.atlas",
     "deck": [
-      "decks/standard/demon.json",
+      "decks/standard/demon.dck",
       "decks/standard/demonshard.dck",
       "decks/standard/demonblackred.dck",
       "decks/standard/demonmonoblack.dck"
@@ -8520,13 +8520,13 @@
     "name": "Dwarf",
     "sprite": "sprites/enemy/humanoid/dwarf/dwarf_2.atlas",
     "deck": [
-      "decks/standard/dwarf.json"
+      "decks/standard/dwarf.dck"
     ],
     "ai": "",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 22,
-    "life": 13,
+    "life": 20,
     "rewards": [
       {
         "type": "deckCard",
@@ -8685,7 +8685,7 @@
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
-    "life": 13,
+    "life": 20,
     "rewards": [
       {
         "type": "deckCard",
@@ -8769,7 +8769,7 @@
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
-    "life": 13,
+    "life": 20,
     "rewards": [
       {
         "type": "deckCard",
@@ -11031,7 +11031,7 @@
     "name": "Fox",
     "sprite": "sprites/enemy/beast/fox.atlas",
     "deck": [
-      "decks/standard/fox.json",
+      "decks/standard/fox.dck",
       "decks/standard/fox_greenwhite.dck"
     ],
     "ai": "",
@@ -11040,7 +11040,7 @@
     "difficulty": 0.1,
     "speed": 20,
     "scale": 0.7,
-    "life": 10,
+    "life": 20,
     "rewards": [
       {
         "type": "deckCard",
@@ -11095,7 +11095,7 @@
     "name": "Frog",
     "sprite": "sprites/enemy/beast/frog.atlas",
     "deck": [
-      "decks/standard/frog.json"
+      "decks/standard/frog.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -11240,7 +11240,7 @@
     "name": "Fungus",
     "sprite": "sprites/enemy/plant/fungus.atlas",
     "deck": [
-      "decks/standard/fungus.json"
+      "decks/standard/fungus.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -11500,7 +11500,7 @@
     "nameOverride": "Obsidian Gargoyle",
     "sprite": "sprites/enemy/construct/gargoyle.atlas",
     "deck": [
-      "decks/standard/gargoyle.dck"
+      "decks/standard/gargoyle_obsidian.dck"
     ],
     "ai": "",
     "flying": true,
@@ -12332,7 +12332,7 @@
     "nameOverride": "Haunting Apparition",
     "sprite": "sprites/enemy/undead/ghost_2.atlas",
     "deck": [
-      "decks/standard/ghost.json"
+      "decks/standard/ghost.dck"
     ],
     "ai": "",
     "flying": true,
@@ -13990,7 +13990,7 @@
     "name": "Goblin Warrior",
     "sprite": "sprites/enemy/humanoid/goblin/wolf_rider.atlas",
     "deck": [
-      "decks/standard/goblin_mid.json"
+      "decks/standard/goblin_mid.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -14069,7 +14069,7 @@
     "nameOverride": "Rusted Golem",
     "sprite": "sprites/enemy/construct/golem.atlas",
     "deck": [
-      "decks/standard/golem.json",
+      "decks/standard/golem.dck",
       "decks/standard/rustic_golem.dck"
     ],
     "ai": "",
@@ -14557,7 +14557,7 @@
     "nameOverride": "Giant Green Basilisk",
     "sprite": "sprites/enemy/monstrosity/basilisk.atlas",
     "deck": [
-      "decks/standard/beast_green.json"
+      "decks/standard/beast_green.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -15302,7 +15302,7 @@
     "name": "High Vampire",
     "sprite": "sprites/enemy/undead/vampire_2.atlas",
     "deck": [
-      "decks/standard/vampire.json"
+      "decks/standard/vampire_highvampire.dck"
     ],
     "ai": "",
     "flying": true,
@@ -16316,7 +16316,7 @@
     "name": "Hydra",
     "sprite": "sprites/enemy/monstrosity/hydra.atlas",
     "deck": [
-      "decks/standard/hydra.json"
+      "decks/standard/hydra.dck"
     ],
     "ai": "",
     "spawnRate": 0.8,
@@ -19215,7 +19215,7 @@
     "name": "Magma Fire Elemental",
     "sprite": "sprites/enemy/elemental/magmafireelemental.atlas",
     "deck": [
-      "decks/standard/magma_elemental.dck"
+      "decks/standard/magma_fire_elemental.dck"
     ],
     "ai": "",
     "flying": true,
@@ -19545,7 +19545,7 @@
     "nameOverride": "Merfolk Raider",
     "sprite": "sprites/enemy/elemental/waterelemental.atlas",
     "deck": [
-      "decks/standard/merfolk_bad.json"
+      "decks/standard/merfolk_bad.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -19622,7 +19622,7 @@
     "name": "Merfolk Avatar",
     "sprite": "sprites/enemy/elemental/iceelemental.atlas",
     "deck": [
-      "decks/standard/merfolk_good.json"
+      "decks/standard/merfolk_good.dck"
     ],
     "ai": "",
     "flying": true,
@@ -20552,7 +20552,7 @@
     "name": "Monk",
     "sprite": "sprites/enemy/humanoid/human/cleric/monk.atlas",
     "deck": [
-      "decks/standard/monk.json"
+      "decks/standard/monk.dck"
     ],
     "ai": "",
     "randomizeDeck": true,
@@ -21546,7 +21546,7 @@
     "name": "Ooze",
     "sprite": "sprites/enemy/ooze/ooze.atlas",
     "deck": [
-      "decks/standard/ooze.json",
+      "decks/standard/ooze.dck",
       "decks/standard/ooze_greenblackred.dck",
       "decks/standard/ooze_monogreen.dck",
       "decks/standard/ooze_greenblue.dck"
@@ -23962,7 +23962,7 @@
     "nameOverride": "Giant Red Basilisk",
     "sprite": "sprites/enemy/monstrosity/basilisk_2.atlas",
     "deck": [
-      "decks/standard/beast_red.json"
+      "decks/standard/beast_red.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -24107,7 +24107,7 @@
     "name": "Rogue",
     "sprite": "sprites/enemy/humanoid/human/rogue/rogue.atlas",
     "deck": [
-      "decks/standard/rogue.json"
+      "decks/standard/rogue.dck"
     ],
     "ai": "",
     "spawnRate": 0.8,
@@ -26349,7 +26349,7 @@
     "name": "Spider",
     "sprite": "sprites/enemy/beast/spider_black.atlas",
     "deck": [
-      "decks/standard/spider.json"
+      "decks/standard/spider.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -27043,7 +27043,7 @@
     "difficulty": 0.1,
     "speed": 25,
     "scale": 0.65,
-    "life": 35,
+    "life": 25,
     "rewards": [
       {
         "type": "deckCard",
@@ -27850,7 +27850,7 @@
     "name": "Treefolk",
     "sprite": "sprites/enemy/plant/treant.atlas",
     "deck": [
-      "decks/standard/treefolk.json"
+      "decks/standard/treefolk_tribal.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -28058,7 +28058,7 @@
     "name": "Troll",
     "sprite": "sprites/enemy/giant/troll.atlas",
     "deck": [
-      "decks/standard/troll.json"
+      "decks/standard/troll.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -31247,7 +31247,7 @@
     "name": "Angelic Page",
     "sprite": "sprites/enemy/celestial/angel_1.atlas",
     "deck": [
-      "decks/standard/angel.json"
+      "decks/standard/angel.dck"
     ],
     "ai": "",
     "flying": true,
@@ -37652,8 +37652,14 @@
       {
         "type": "gold",
         "probability": 1,
-        "count": 150,
-        "addMaxCount": 100
+        "count": 1500,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 10
       }
     ],
     "colors": "WUG",
@@ -37692,8 +37698,14 @@
       {
         "type": "gold",
         "probability": 1,
-        "count": 150,
-        "addMaxCount": 100
+        "count": 1500,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 10
       }
     ],
     "colors": "WUB",
@@ -37732,8 +37744,14 @@
       {
         "type": "gold",
         "probability": 1,
-        "count": 150,
-        "addMaxCount": 100
+        "count": 1500,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 10
       }
     ],
     "colors": "UBR",
@@ -37772,8 +37790,14 @@
       {
         "type": "gold",
         "probability": 1,
-        "count": 150,
-        "addMaxCount": 100
+        "count": 1500,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 10
       }
     ],
     "colors": "BRG",
@@ -37812,8 +37836,14 @@
       {
         "type": "gold",
         "probability": 1,
-        "count": 150,
-        "addMaxCount": 100
+        "count": 1500,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 10
       }
     ],
     "colors": "WRG",

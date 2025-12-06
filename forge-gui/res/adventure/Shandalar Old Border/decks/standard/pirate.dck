@@ -1,14 +1,23 @@
 [metadata]
-Name=pirates
+Name=pirate
 [Main]
-12 Mountain|4ED
+11 Island|P02|1
+11 Island|P02|2
+2 Rishadan Port|MMQ
+4 Cloud Pirates|POR
+2 Talas Explorer|P02
+2 Talas Scout|P02
+2 Reef Pirates|HML
+2 Talas Merchant|P02
+2 Rishadan Cutpurse|MMQ
+2 Rishadan Airship|MMQ
+2 Kukemssa Pirates|TMP
+2 Talas Warrior|P02
 4 Coastal Piracy|MMQ
-4 Dwarven Warriors|4ED
-4 Fireblast|VIS
-4 Goblin Balloon Brigade|4ED
-4 Incinerate|DKM
-4 Island|4ED
-4 Lightning Bolt|4ED
-4 Orcish Artillery|4ED
-4 Pirate Ship|3ED
-4 Shivan Reef|APC
+2 Pirate Ship|LEA
+1 Armored Galleon|P02
+1 Steam Frigate|P02
+2 Sea's Claim|ONS
+2 Deluge|ODY
+2 Legacy's Allure|TMP
+2 Steal Artifact|5ED
