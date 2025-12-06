@@ -58,7 +58,7 @@
     <property name="spawn.Hard" type="bool" value="true" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="179,204,183" />
-   <property name="effect">{ "startBattleWithCard": [ "Wall of Bone|LEA|1" ] }</property></properties>
+   </properties>
   </object>
   <object id="122" template="../../../../../../common/maps/obj/enemy.tx" x="45.042" y="175.604">
    <properties>

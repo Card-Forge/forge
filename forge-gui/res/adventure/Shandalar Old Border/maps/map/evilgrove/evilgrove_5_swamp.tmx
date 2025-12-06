@@ -82,14 +82,14 @@
    <properties>
     <property name="enemy" value="Hippo" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{"startBattleWithCard": ["Bull Hippo|POR", "Island|POR", "Forest|POR", "Plains|POR"]}</property>
+   <property name="effect">{ "startBattleWithCard": [ "Bull Hippo|POR", "Forest|POR", "Island|POR", "Plains|POR" ] }</property>
     </properties>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="213" y="409.5">
    <properties>
     <property name="enemy" value="Hippo" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{"startBattleWithCard": ["Bull Hippo|POR", "Island|POR", "Forest|POR", "Plains|POR"]}</property>
+   <property name="effect">{ "startBattleWithCard": [ "Bull Hippo|POR", "Forest|POR", "Island|POR", "Plains|POR" ] }</property>
     </properties>
   </object>
   <object id="70" template="../../../../../../common/maps/obj/gold.tx" x="243" y="685.5" />
@@ -311,14 +311,14 @@
    <properties>
     <property name="enemy" value="Adept Black Wizard" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Wall of Bone|LEA|1" ] }</property></properties>
+   </properties>
   </object>
   <object id="116" template="../../../../../../common/maps/obj/enemy.tx" x="2" y="292">
    <properties>
     <property name="enemy" value="Adept Black Wizard" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="118,119,120,83,120,119,118,121,122,121" />
-   <property name="effect">{ "startBattleWithCard": [ "Wall of Bone|LEA|1" ] }</property></properties>
+   </properties>
   </object>
   <object id="117" template="../../../../../../common/maps/obj/waypoint.tx" x="0.5" y="385.5" />
   <object id="118" template="../../../../../../common/maps/obj/waypoint.tx" x="1.5" y="224" />

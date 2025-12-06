@@ -45,7 +45,7 @@
   <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="368" y="109">
    <properties>
     <property name="enemy" value="Grave Titan" />
-   <property name="effect">{"startBattleWithCard": ["Swamp|ONS", "Swamp|ONS", "Swamp|ONS", "Swamp|ONS", "Rotting Giant|ODY"]}</property>
+   <property name="effect">{ "startBattleWithCard": [ "Rotting Giant|ODY", "Swamp|ODY|1", "Swamp|ODY|2", "Swamp|ODY|3", "Swamp|ODY|4" ] }</property>
     </properties>
   </object>
   <object id="54" template="../../../../../../common/maps/obj/gold.tx" x="162" y="161" />
@@ -130,7 +130,7 @@
    <properties>
     <property name="enemy" value="Adept Black Wizard" />
     <property name="threatRange" type="int" value="60" />
-   <property name="effect">{ "startBattleWithCard": [ "Wall of Bone|LEA|1" ] }</property></properties>
+   </properties>
   </object>
   <object id="73" template="../../../../../../common/maps/obj/treasure.tx" x="29.5" y="22" />
   <object id="74" template="../../../../../../common/maps/obj/treasure.tx" x="368.5" y="93" />

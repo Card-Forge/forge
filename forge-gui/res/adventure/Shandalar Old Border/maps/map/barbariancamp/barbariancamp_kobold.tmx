@@ -45,7 +45,7 @@
   <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="258.666" y="84.3337">
    <properties>
     <property name="enemy" value="Kobold Dragoncaller" />
-   <property name="effect">{"startBattleWithCard": ["Crimson Kobolds|LEG", "Crookshank Kobolds|LEG", "Kobolds of Kher Keep|LEG", "Ghitu War Cry|ULG"]}</property>
+   <property name="effect">{ "startBattleWithCard": [ "Crimson Kobolds|LEG", "Crookshank Kobolds|LEG", "Ghitu War Cry|ULG", "Kobolds of Kher Keep|LEG" ] }</property>
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="71,73,72" />
    </properties>
@@ -71,7 +71,7 @@
   <object id="74" template="../../../../../../common/maps/obj/enemy.tx" x="76" y="266.667">
    <properties>
     <property name="enemy" value="Kobold Dragoncaller" />
-   <property name="effect">{"startBattleWithCard": ["Crimson Kobolds|LEG", "Crookshank Kobolds|LEG", "Kobolds of Kher Keep|LEG", "Ghitu War Cry|ULG"]}</property>
+   <property name="effect">{ "startBattleWithCard": [ "Crimson Kobolds|LEG", "Crookshank Kobolds|LEG", "Ghitu War Cry|ULG", "Kobolds of Kher Keep|LEG" ] }</property>
     <property name="threatRange" type="int" value="50" />
    </properties>
   </object>

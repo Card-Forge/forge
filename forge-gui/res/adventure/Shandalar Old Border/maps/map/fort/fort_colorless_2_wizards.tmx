@@ -57,7 +57,7 @@
 ]</property>
     <property name="enemy" value="Adept Black Wizard" />
     <property name="threatRange" type="int" value="20" />
-   <property name="effect">{ "startBattleWithCard": [ "Wall of Bone|LEA|1" ] }</property></properties>
+   </properties>
   </object>
   <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="145.001" y="221.083" width="16" height="20">
    <properties>

@@ -13,3 +13,8 @@ Name=flying_witch
 4 Choking Sands|MIR
 2 Dregs of Sorrow|7ED
 2 Forced March|MMQ
+
+[StartInBattle_Reference]
+1 Swamp|TMP|1
+1 Swamp|TMP|2
+1 Vile Consumption|INV

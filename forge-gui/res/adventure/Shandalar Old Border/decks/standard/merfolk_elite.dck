@@ -13,3 +13,9 @@ Name=merfolk_elite
 4 Quirion Elves|BTD
 4 Tidal Wave|MIR
 4 Yavimaya Coast|APC
+
+[StartInBattle_Reference]
+1 Island|USG|1
+1 Island|USG|2
+1 Lord of Atlantis|LEA
+1 Tidal Warrior|STH
