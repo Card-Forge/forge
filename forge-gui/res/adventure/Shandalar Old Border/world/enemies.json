@@ -3384,7 +3384,7 @@
     "name": "Big Zombie",
     "sprite": "sprites/enemy/undead/zombie_2.atlas",
     "deck": [
-      "decks/elite/zombie_bad.dck"
+      "decks/standard/zombie_bad.dck"
     ],
     "ai": "reckless",
     "spawnRate": 1,
@@ -10522,7 +10522,8 @@
     "name": "Fox",
     "sprite": "sprites/enemy/beast/fox.atlas",
     "deck": [
-      "decks/standard/fox.dck"
+      "decks/standard/fox.dck",
+      "decks/standard/fox_greenwhite.dck"
     ],
     "ai": "cautious",
     "randomizeDeck": true,
