@@ -14,8 +14,11 @@ import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
+import forge.game.GameEntity;
 
 import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
 import forge.game.zone.ZoneType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -380,6 +383,62 @@ public class ForgeHeadlessServer {
         }
 
         @Override
+        public Player createIngamePlayer(final Game game, final int id) {
+            System.out.println("ServerPlayer.createIngamePlayer called for: " + getName());
+            final Player player = new Player(getName(), game, id);
+            // Install our custom controller that gives agent control
+            player.setFirstController(new ServerPlayerController(game, player, this));
+            System.out.println("ServerPlayer: Installed ServerPlayerController for " + getName());
+            return player;
+        }
+
+        @Override
+        public forge.ai.PlayerControllerAi createMindSlaveController(final Player master, final Player slave) {
+            final Game game = slave.getGame();
+            return new ServerPlayerController(game, slave, this);
+        }
+    }
+
+    /**
+     * Custom player controller for the server, intercepting decision points.
+     */
+    private static class ServerPlayerController extends forge.ai.PlayerControllerAi {
+        /**
+         * Constructs a ServerPlayerController.
+         * 
+         * @param game        The game instance.
+         * @param player      The player this controller belongs to.
+         * @param lobbyPlayer The lobby player associated with this controller.
+         */
+        ServerPlayerController(final Game game, final Player player, final forge.ai.LobbyPlayerAi lobbyPlayer) {
+            super(game, player, lobbyPlayer);
+        }
+
+        // --- Hybrid Agent Interception Points ---
+
+        public List<SpellAbility> chooseSpellAbilityToPlay() {
+            // 1. Update Game State
+            updateGameState(getGame());
+
+            // 2. Ask Python for action
+            // We expect "play_action <index>" or "pass_priority"
+            final String action = askPython();
+
+            if (action.startsWith("play_action")) {
+                final int index = Integer.parseInt(action.split(" ")[1]);
+                final JsonObject actions = getPossibleActions(player, getGame());
+                final JsonArray list = actions.getAsJsonArray("actions");
+                if (index >= 0 && index < list.size()) {
+                    // In a real impl, we'd map this back to the actual SpellAbility object
+                    // For now, let's just return null (pass priority) if it's the pass action
+                    // This part needs the same logic as ForgeHeadless to map index -> SpellAbility
+                    return null; // Placeholder
+                }
+            }
+            return null; // Default to pass
+        }
+
+        @Override
         public void declareAttackers(final Player attacker, final Combat combat) {
             System.out.println("ServerPlayer: declareAttackers called - agent has control");
             
@@ -395,7 +454,8 @@ public class ForgeHeadlessServer {
                     if (combat.isAttacking(creature)) {
                         continue; // Already declared as attacker
                     }
-                    if (!creature.canAttackThisTurn()) {
+                    // Use CombatUtil to check if creature can attack
+                    if (!CombatUtil.canAttack(creature)) {
                         continue; // Can't attack (e.g., summoning sickness, tapped)
                     }
                     
@@ -413,9 +473,9 @@ public class ForgeHeadlessServer {
                 
                 // Wait for agent's choice
                 waitingForInput = true;
-                LAST_GAME_STATE.set(buildGameState(currentGame));
+                ForgeHeadlessServer.updateGameState(currentGame);
                 
-                final JsonObject actionPayload = waitForNextAction();
+                final JsonObject actionPayload = ForgeHeadlessServer.waitForNextAction();
                 waitingForInput = false;
                 
                 if (actionPayload == null) {
@@ -457,66 +517,6 @@ public class ForgeHeadlessServer {
                 }
             }
         }
-            ai.setFirstController(new ServerPlayerController(game, ai, this));
-            return ai;
-        }
-    }
-
-    /**
-     * Custom player controller for the server, intercepting decision points.
-     */
-    private static class ServerPlayerController extends forge.ai.PlayerControllerAi {
-        /**
-         * Constructs a ServerPlayerController.
-         * 
-         * @param game        The game instance.
-         * @param player      The player this controller belongs to.
-         * @param lobbyPlayer The lobby player associated with this controller.
-         */
-        ServerPlayerController(final Game game, final Player player, final forge.ai.LobbyPlayerAi lobbyPlayer) {
-            super(game, player, lobbyPlayer);
-        }
-
-        // --- Hybrid Agent Interception Points ---
-
-        @Override
-        public List<SpellAbility> chooseSpellAbilityToPlay() {
-            // 1. Update Game State
-            updateGameState(getGame());
-
-            // 2. Ask Python for action
-            // We expect "play_action <index>" or "pass_priority"
-            final String action = askPython();
-
-            if (action.startsWith("play_action")) {
-                final int index = Integer.parseInt(action.split(" ")[1]);
-                final JsonObject actions = getPossibleActions(player, getGame());
-                final JsonArray list = actions.getAsJsonArray("actions");
-                if (index >= 0 && index < list.size()) {
-                    // In a real impl, we'd map this back to the actual SpellAbility object
-                    // For now, let's just return null (pass priority) if it's the pass action
-                    // This part needs the same logic as ForgeHeadless to map index -> SpellAbility
-                    return null; // Placeholder
-                }
-            }
-            return null; // Default to pass
-        }
-
-        @Override
-        public void declareAttackers(final Player attacker, final Combat combat) {
-            updateGameState(getGame());
-            // In a real impl, we would send the list of possible attackers
-            // and wait for a list of indices to attack with.
-            // For MVP, we'll just ask Python and if it says "attack_all", we attack with
-            // all.
-            // If it says "skip", we skip.
-            final String action = askPython();
-            if ("attack_all".equals(action)) {
-                // combat.addAttacker(card, defender);
-            }
-            // For now, fall back to AI to keep the game moving if not fully implemented
-            super.declareAttackers(attacker, combat);
-        }
 
         @Override
         public void declareBlockers(final Player defender, final Combat combat) {
@@ -535,13 +535,13 @@ public class ForgeHeadlessServer {
                     if (combat.isBlocking(blocker)) {
                         continue; // Already declared as blocker
                     }
-                    if (!blocker.canBlock()) {
-                        continue; // Can't block (e.g., tapped, ability restriction)
+                    if (blocker.isTapped()) {
+                        continue; // Can't block (tapped)
                     }
                     
                     // Check each attacker this blocker could block
                     for (final Card attacker : attackers) {
-                        if (combat.canBlock(attacker, blocker)) {
+                        if (CombatUtil.canBlock(attacker, blocker, combat)) {
                             final JsonObject option = new JsonObject();
                             option.addProperty("type", "declare_blocker");
                             option.addProperty("blocker", blocker.toString());
@@ -560,9 +560,9 @@ public class ForgeHeadlessServer {
                 
                 // Wait for agent's choice
                 waitingForInput = true;
-                LAST_GAME_STATE.set(buildGameState(currentGame));
+                ForgeHeadlessServer.updateGameState(currentGame);
                 
-                final JsonObject actionPayload = waitForNextAction();
+                final JsonObject actionPayload = ForgeHeadlessServer.waitForNextAction();
                 waitingForInput = false;
                 
                 if (actionPayload == null) {
@@ -620,10 +620,6 @@ public class ForgeHeadlessServer {
                 }
             }
         }
-            final String action = askPython();
-            // Fallback to AI
-            super.declareBlockers(defender, combat);
-        }
 
         @Override
         public boolean confirmAction(final SpellAbility sa, final PlayerActionConfirmMode mode, final String message,
@@ -666,7 +662,27 @@ public class ForgeHeadlessServer {
                 return "quit";
             }
         }
+    }
 
+    /**
+     * Waits for the next action from the agent and returns it as a JsonObject.
+     * This is a blocking call that waits for input via the ACTION_QUEUE.
+     * 
+     * @return JsonObject containing the action, or null if interrupted
+     */
+    private static JsonObject waitForNextAction() {
+        try {
+            final String actionJson = ACTION_QUEUE.take();
+            System.out.println("Received action JSON: " + actionJson);
+            return JsonParser.parseString(actionJson).getAsJsonObject();
+        } catch (final InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.err.println("Interrupted while waiting for action");
+            return null;
+        } catch (Exception e) {
+            System.err.println("Error parsing action JSON: " + e.getMessage());
+            return null;
+        }
     }
 
     /**
@@ -789,6 +805,42 @@ public class ForgeHeadlessServer {
 
                         // Add library count
                         state.addProperty("library_count", agent.getCardsIn(ZoneType.Library).size());
+                          
+                        // Add combat information (attackers and blockers)
+                        final Combat combat = game.getCombat();
+                        if (combat != null) {
+                            final JsonObject combatInfo = new JsonObject();
+                              
+                            // Add attackers
+                            final JsonArray attackersArray = new JsonArray();
+                            for (final Card attacker : combat.getAttackers()) {
+                                attackersArray.add(attacker.toString());
+                            }
+                            if (attackersArray.size() > 0) {
+                                combatInfo.add("attackers", attackersArray);
+                            }
+                              
+                            // Add blockers with what they're blocking
+                            final JsonArray blockersArray = new JsonArray();
+                            for (final Card attacker : combat.getAttackers()) {
+                                final CardCollectionView blockers = combat.getBlockers(attacker);
+                                if (blockers != null && !blockers.isEmpty()) {
+                                    for (final Card blocker : blockers) {
+                                        final JsonObject blockInfo = new JsonObject();
+                                        blockInfo.addProperty("blocker", blocker.toString());
+                                        blockInfo.addProperty("blocking", attacker.toString());
+                                        blockersArray.add(blockInfo);
+                                    }
+                                }
+                            }
+                            if (blockersArray.size() > 0) {
+                                combatInfo.add("blockers", blockersArray);
+                            }
+                              
+                            if (combatInfo.size() > 0) {
+                                state.add("combat", combatInfo);
+                            }
+                        }
                     } catch (Exception e) {
                         System.err.println("Error adding hand/library info: " + e.getMessage());
                         e.printStackTrace();
@@ -804,8 +856,8 @@ public class ForgeHeadlessServer {
     }
 
     /**
-     * Duplicates ForgeHeadless.getPossibleActions (simplified) to provide
-     * available actions to the client.
+     * Gets all possible actions available to the player.
+     * This includes playing lands, casting spells, activating abilities, and passing priority.
      * 
      * @param player The player whose actions are being queried.
      * @param game   The current game state.
@@ -815,12 +867,63 @@ public class ForgeHeadlessServer {
         final JsonObject actions = new JsonObject();
         final JsonArray actionsList = new JsonArray();
 
+        // Get available lands to play
+        final forge.game.card.CardCollection lands = forge.ai.ComputerUtilAbility.getAvailableLandsToPlay(game, player);
+        if (lands != null && !lands.isEmpty()) {
+            for (final Card land : lands) {
+                final JsonObject action = new JsonObject();
+                action.addProperty("type", "play_land");
+                action.addProperty("card_id", land.getId());
+                action.addProperty("card_name", land.getName());
+                actionsList.add(action);
+            }
+        }
+
+        // Get available spells and abilities
+        final forge.game.card.CardCollection availableCards = forge.ai.ComputerUtilAbility.getAvailableCards(game, player);
+        final List<SpellAbility> spellAbilities = forge.ai.ComputerUtilAbility.getSpellAbilities(availableCards, player);
+
+        for (final SpellAbility sa : spellAbilities) {
+            // Filter to only abilities the player can actually activate
+            if (sa.canPlay() && sa.getActivatingPlayer() == player) {
+                final JsonObject action = new JsonObject();
+                final Card source = sa.getHostCard();
+
+                if (sa.isSpell()) {
+                    action.addProperty("type", "cast_spell");
+                } else {
+                    action.addProperty("type", "activate_ability");
+                }
+
+                action.addProperty("card_id", source != null ? source.getId() : -1);
+                action.addProperty("card_name", source != null ? source.getName() : "Unknown");
+                action.addProperty("ability_description", sa.getDescription());
+                action.addProperty("mana_cost", sa.getPayCosts() != null ? sa.getPayCosts().toSimpleString() : "");
+
+                // Add target information
+                if (sa.usesTargeting()) {
+                    final forge.game.spellability.TargetRestrictions tgt = sa.getTargetRestrictions();
+                    if (tgt != null) {
+                        action.addProperty("requires_targets", true);
+                        action.addProperty("target_min", tgt.getMinTargets(sa.getHostCard(), sa));
+                        action.addProperty("target_max", tgt.getMaxTargets(sa.getHostCard(), sa));
+                        action.addProperty("target_zone", tgt.getZone() != null ? tgt.getZone().toString() : "any");
+                    }
+                } else {
+                    action.addProperty("requires_targets", false);
+                }
+
+                actionsList.add(action);
+            }
+        }
+
         // Always available: pass priority
         final JsonObject passAction = new JsonObject();
         passAction.addProperty("type", "pass_priority");
         actionsList.add(passAction);
 
         actions.add("actions", actionsList);
+        actions.addProperty("count", actionsList.size());
         return actions;
     }
 
