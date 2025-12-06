@@ -354,6 +354,30 @@ public class ComputerUtilAbility {
                 if (source.isInPlay() && source.hasSVar("EndOfTurnLeavePlay")) {
                     p += 1;
                 }
+
+                // Triggered abilities
+                for (Trigger trigger : source.getTriggers()) {
+                    if (!"Battlefield".equals(trigger.getParam("TriggerZones"))) continue;
+                    final TriggerType mode = trigger.getMode();
+                    if (mode != null) {
+                        // 1024+ cards match `Mode\$ SpellCast.*?ValidActivatingPlayer\$ You`
+                        // Aetherflux Reservoir etc
+                        if (mode == TriggerType.SpellCast && "You".equals(sa.getParam("ValidActivatingPlayer"))) {
+                            p += 1;
+                        }
+                    }
+                }
+
+                // Static abilities
+                for (StaticAbility sta : source.getStaticAbilities()) {
+                    final Set<StaticAbilityMode> mode = sta.getMode();
+                    // 210+ cards match `S:Mode\$ ReduceCost.*?Activator\$ You`
+                    // reduce cost to enable more plays
+                    if (mode.contains(StaticAbilityMode.ReduceCost) && "You".equals(sta.getParam("Activator"))) {
+                        p += 1;
+                    }
+                }
+
                 if (ComputerUtilCard.isCardRemAIDeck(sa.getOriginalHost() != null ? sa.getOriginalHost() : source)) {
                     p -= 10;
                 }
