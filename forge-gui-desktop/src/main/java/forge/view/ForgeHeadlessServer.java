@@ -66,8 +66,9 @@ public class ForgeHeadlessServer {
     private static volatile boolean shouldStopGame = false;
     private static volatile Deck player1InitialDeck = null;
     private static volatile Deck player2InitialDeck = null;
-    
-    // Store current combat actions so getPossibleActions can access them during combat phases
+
+    // Store current combat actions so getPossibleActions can access them during
+    // combat phases
     private static volatile JsonArray currentCombatActions = null;
 
     /**
@@ -184,7 +185,7 @@ public class ForgeHeadlessServer {
         if (currentGame != null) {
             System.out.println("Stopping existing game...");
             shouldStopGame = true;
-            
+
             try {
                 // Wait for the old game thread to finish (with timeout)
                 if (currentGameThread != null && currentGameThread.isAlive()) {
@@ -200,8 +201,9 @@ public class ForgeHeadlessServer {
                 e.printStackTrace();
             }
         }
-        
-        // Clear everything - INCLUDING LAST_GAME_STATE to avoid returning stale observations
+
+        // Clear everything - INCLUDING LAST_GAME_STATE to avoid returning stale
+        // observations
         currentGame = null;
         currentGameThread = null;
         ACTION_QUEUE.clear();
@@ -231,7 +233,7 @@ public class ForgeHeadlessServer {
 
         final Deck finalDeck1 = deck1;
         final Deck finalDeck2 = deck2;
-        
+
         // Store the initial decks so we can include them in the observation
         player1InitialDeck = finalDeck1;
         player2InitialDeck = finalDeck2;
@@ -241,15 +243,16 @@ public class ForgeHeadlessServer {
             try {
                 final List<RegisteredPlayer> players = new ArrayList<>();
                 players.add(new RegisteredPlayer(finalDeck1).setPlayer(new ServerPlayer("Player 1")));
-                players.add(new RegisteredPlayer(finalDeck2).setPlayer(new forge.ai.LobbyPlayerAi("AI Player 2", null)));
+                players.add(
+                        new RegisteredPlayer(finalDeck2).setPlayer(new forge.ai.LobbyPlayerAi("AI Player 2", null)));
 
                 final GameRules rules = new GameRules(GameType.Constructed);
                 final Match match = new Match(rules, players, "Server Match");
-                
+
                 // Create the game - this is synchronous
                 currentGame = match.createGame();
                 System.out.println("Game created! Starting match...");
-                
+
                 // Start the game - this will block until game is over
                 match.startGame(currentGame);
                 System.out.println("Match finished");
@@ -259,7 +262,7 @@ public class ForgeHeadlessServer {
             }
         });
         currentGameThread.start();
-        
+
         // STEP 1: Wait for the new game to actually be created
         System.out.println("Waiting for new game object to be created...");
         int waited = 0;
@@ -272,21 +275,21 @@ public class ForgeHeadlessServer {
                 break;
             }
         }
-        
+
         if (currentGame == null) {
             throw new RuntimeException("Failed to create new game within timeout!");
         }
-        
+
         System.out.println("Game object created, now waiting for Turn 1...");
-        
+
         // STEP 2: Wait for the new game to reach Turn 1
         // This ensures we don't return with stale state or Turn 0
         waited = 0;
         int maxWaitForTurn1 = 10000; // 10 seconds
         while (waited < maxWaitForTurn1) {
             try {
-                if (currentGame != null && 
-                    currentGame.getPhaseHandler() != null) {
+                if (currentGame != null &&
+                        currentGame.getPhaseHandler() != null) {
                     int turn = currentGame.getPhaseHandler().getTurn();
                     if (turn >= 1) {
                         System.out.println("New game reached Turn " + turn + "! Reset complete.");
@@ -302,14 +305,14 @@ public class ForgeHeadlessServer {
                 // Ignore exceptions during transition
             }
         }
-        
+
         // STEP 3: Give the game a moment to stabilize and update state
         try {
             Thread.sleep(200);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        
+
         System.out.println("New game is ready and initialized!");
     }
 
@@ -321,12 +324,12 @@ public class ForgeHeadlessServer {
                 colors.add("Random " + i);
             }
             Deck deck = DeckgenUtil.buildColorDeck(colors, FModel.getFormats().getStandard().getFilterPrinted(), true);
-            
+
             // Validate the deck was actually generated with cards
             if (deck == null || deck.getMain().isEmpty()) {
                 throw new RuntimeException("Generated deck is null or empty!");
             }
-            
+
             System.out.println("Successfully generated random deck with " + deck.getMain().countAll() + " cards");
             return deck;
         } catch (Exception e) {
@@ -334,7 +337,7 @@ public class ForgeHeadlessServer {
             System.err.println("FATAL ERROR: Failed to generate random deck!");
             System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
-            
+
             // Throw the exception to make the problem visible
             throw new RuntimeException("Deck generation failed - cannot start game without valid decks!", e);
         }
@@ -444,14 +447,14 @@ public class ForgeHeadlessServer {
         @Override
         public void declareAttackers(final Player attacker, final Combat combat) {
             System.out.println("ServerPlayer: declareAttackers called - agent has control");
-            
+
             // Get all creatures that could potentially attack
             final CardCollectionView potentialAttackers = attacker.getCreaturesInPlay();
-            
+
             // Build options list with all possible attackers
             while (true) {
                 final JsonArray attackerOptions = new JsonArray();
-                
+
                 // Add each potential attacker as an option
                 for (final Card creature : potentialAttackers) {
                     if (combat.isAttacking(creature)) {
@@ -461,14 +464,14 @@ public class ForgeHeadlessServer {
                     if (!CombatUtil.canAttack(creature)) {
                         continue; // Can't attack (e.g., summoning sickness, tapped)
                     }
-                    
+
                     final JsonObject option = new JsonObject();
                     option.addProperty("type", "declare_attacker");
                     option.addProperty("creature", creature.toString());
                     option.addProperty("creature_id", creature.getId());
                     attackerOptions.add(option);
                 }
-                
+
                 // Add "pass priority" option to signal done
                 final JsonObject passOption = new JsonObject();
                 passOption.addProperty("type", "pass_priority");
@@ -480,24 +483,23 @@ public class ForgeHeadlessServer {
                 // Wait for agent's choice
                 waitingForInput = true;
                 ForgeHeadlessServer.updateGameState(currentGame);
-                
+
                 final JsonObject actionPayload = ForgeHeadlessServer.waitForNextAction();
                 waitingForInput = false;
-                
+
                 if (actionPayload == null) {
                     System.err.println("No action received, finishing attack declaration");
                     break;
                 }
-                
+
                 // Check if agent passed priority (done declaring attackers)
-                final String actionType = actionPayload.has("action") ? 
-                    actionPayload.get("action").getAsString() : "";
-                
+                final String actionType = actionPayload.has("action") ? actionPayload.get("action").getAsString() : "";
+
                 if ("pass_priority".equals(actionType)) {
                     System.out.println("Agent passed priority - done declaring attackers");
                     break;
                 }
-                
+
                 // Apply attacker declaration
                 if (actionPayload.has("index")) {
                     final int index = actionPayload.get("index").getAsInt();
@@ -507,7 +509,7 @@ public class ForgeHeadlessServer {
                             System.out.println("Agent passed priority (via index) - done declaring attackers");
                             break;
                         }
-                        
+
                         // Find and declare the attacker
                         final int creatureId = selectedOption.get("creature_id").getAsInt();
                         for (final Card creature : potentialAttackers) {
@@ -522,7 +524,7 @@ public class ForgeHeadlessServer {
                     }
                 }
             }
-            
+
             // Clear combat actions after finishing attacker declarations
             currentCombatActions = null;
         }
@@ -530,8 +532,12 @@ public class ForgeHeadlessServer {
         @Override
         public void declareBlockers(final Player defender, final Combat combat) {
             System.out.println("ServerPlayer: declareBlockers called - agent has control");
-            
+
             // Build list of possible blocker assignments
+            // Define missing variables
+            final CardCollectionView potentialBlockers = defender.getCreaturesInPlay();
+            final CardCollectionView attackers = combat.getAttackers();
+
             while (true) {
                 final JsonArray blockerOptions = new JsonArray();
 
@@ -579,8 +585,7 @@ public class ForgeHeadlessServer {
                 }
 
                 // Check if agent passed priority (done declaring blockers)
-                final String actionType = actionPayload.has("action") ?
-                    actionPayload.get("action").getAsString() : "";
+                final String actionType = actionPayload.has("action") ? actionPayload.get("action").getAsString() : "";
 
                 if ("pass_priority".equals(actionType)) {
                     System.out.println("Agent passed priority - done declaring blockers");
@@ -706,7 +711,7 @@ public class ForgeHeadlessServer {
         if (deck == null) {
             return deckArray;
         }
-        
+
         try {
             // Get the main deck cards
             final forge.deck.CardPool mainDeck = deck.getMain();
@@ -716,7 +721,7 @@ public class ForgeHeadlessServer {
                     final forge.item.PaperCard card = entry.getKey();
                     cardInfo.addProperty("name", card.getName());
                     cardInfo.addProperty("count", entry.getValue());
-                    
+
                     // Add card's ability text (oracle text)
                     try {
                         if (card.getRules() != null) {
@@ -724,12 +729,12 @@ public class ForgeHeadlessServer {
                             if (oracleText != null && !oracleText.isEmpty()) {
                                 cardInfo.addProperty("text", oracleText);
                             }
-                            
+
                             // Also add mana cost for reference
                             if (card.getRules().getManaCost() != null) {
                                 cardInfo.addProperty("mana_cost", card.getRules().getManaCost().toString());
                             }
-                            
+
                             // Add card type
                             if (card.getRules().getType() != null) {
                                 cardInfo.addProperty("type", card.getRules().getType().toString());
@@ -738,7 +743,7 @@ public class ForgeHeadlessServer {
                     } catch (Exception e) {
                         System.err.println("Error getting card details for " + card.getName() + ": " + e.getMessage());
                     }
-                    
+
                     deckArray.add(cardInfo);
                 }
             }
@@ -746,7 +751,7 @@ public class ForgeHeadlessServer {
             System.err.println("Error serializing deck to JSON: " + e.getMessage());
             e.printStackTrace();
         }
-        
+
         return deckArray;
     }
 
@@ -764,7 +769,7 @@ public class ForgeHeadlessServer {
             } else {
                 state.addProperty("phase", "SETUP");
             }
-            
+
             // Include deck information in the initial observation
             // This helps the agent know what cards they're playing with
             // Only send Player 1's deck (the agent) - don't leak opponent's deck!
@@ -814,17 +819,17 @@ public class ForgeHeadlessServer {
 
                         // Add library count
                         state.addProperty("library_count", agent.getCardsIn(ZoneType.Library).size());
-                          
+
                         // Add battlefield state for both players
                         final JsonObject battlefield = new JsonObject();
-                          
+
                         // Player 1 creatures (our agent)
                         final JsonArray player1Creatures = new JsonArray();
                         for (final Card creature : agent.getCreaturesInPlay()) {
                             player1Creatures.add(creature.toString());
                         }
                         battlefield.add("player1_creatures", player1Creatures);
-                          
+
                         // Player 2 creatures (opponent)
                         final Player opponent = agent.getSingleOpponent();
                         if (opponent != null) {
@@ -834,14 +839,14 @@ public class ForgeHeadlessServer {
                             }
                             battlefield.add("player2_creatures", player2Creatures);
                         }
-                          
+
                         state.add("battlefield", battlefield);
-                          
+
                         // Add combat information (attackers and blockers)
                         final Combat combat = game.getCombat();
                         if (combat != null) {
                             final JsonObject combatInfo = new JsonObject();
-                              
+
                             // Add attackers
                             final JsonArray attackersArray = new JsonArray();
                             for (final Card attacker : combat.getAttackers()) {
@@ -850,7 +855,7 @@ public class ForgeHeadlessServer {
                             if (attackersArray.size() > 0) {
                                 combatInfo.add("attackers", attackersArray);
                             }
-                              
+
                             // Add blockers with what they're blocking
                             final JsonArray blockersArray = new JsonArray();
                             for (final Card attacker : combat.getAttackers()) {
@@ -867,7 +872,7 @@ public class ForgeHeadlessServer {
                             if (blockersArray.size() > 0) {
                                 combatInfo.add("blockers", blockersArray);
                             }
-                              
+
                             if (combatInfo.size() > 0) {
                                 state.add("combat", combatInfo);
                             }
@@ -888,7 +893,8 @@ public class ForgeHeadlessServer {
 
     /**
      * Gets all possible actions available to the player.
-     * This includes playing lands, casting spells, activating abilities, and passing priority.
+     * This includes playing lands, casting spells, activating abilities, and
+     * passing priority.
      * During combat phases, returns combat-specific actions (attackers/blockers).
      * 
      * @param player The player whose actions are being queried.
@@ -920,8 +926,10 @@ public class ForgeHeadlessServer {
         }
 
         // Get available spells and abilities
-        final forge.game.card.CardCollection availableCards = forge.ai.ComputerUtilAbility.getAvailableCards(game, player);
-        final List<SpellAbility> spellAbilities = forge.ai.ComputerUtilAbility.getSpellAbilities(availableCards, player);
+        final forge.game.card.CardCollection availableCards = forge.ai.ComputerUtilAbility.getAvailableCards(game,
+                player);
+        final List<SpellAbility> spellAbilities = forge.ai.ComputerUtilAbility.getSpellAbilities(availableCards,
+                player);
 
         for (final SpellAbility sa : spellAbilities) {
             // Filter to only abilities the player can actually activate
@@ -1081,7 +1089,7 @@ public class ForgeHeadlessServer {
         @Override
         public String showInputDialog(final String message, final String title,
                 final forge.localinstance.skin.FSkinProp icon, final String initialInput,
-                final List<String> inputOptions, final boolean isNumeric) {
+                final List<String> options, final boolean isNumeric) {
             return initialInput;
         }
 
