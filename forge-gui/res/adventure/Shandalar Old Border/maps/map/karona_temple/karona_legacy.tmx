@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="72">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="77">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -45,6 +45,36 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
+  <object id="74" template="../../../../../../common/maps/obj/gate.tx" x="208" y="400">
+   <properties>
+    <property name="dialog">[
+	{
+		"text": "A strange lock bars your path. It seems to require a peculiar key.",
+		"options": [
+			{ "name": "go away" },
+			{
+				"name": "unlock with Strange Key",
+				"condition": [
+					{ "item": "Strange Key" }
+				],
+				"text": "The lock clicks open. You may now enter the portal chamber.",
+				"options": [
+					{
+						"name": "continue",
+						"action": [
+							{ "deleteMapObject": -1 },
+							{ "removeItem": "Strange Key" }
+						]
+					}
+				]
+			}
+		]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="75" template="../../../../../../common/maps/obj/block.tx" x="192" y="400"/>
+  <object id="76" template="../../../../../../common/maps/obj/block.tx" x="224" y="400"/>
   <object id="52" template="../../../../../../common/maps/obj/portal.tx" x="280" y="250">
    <properties>
     <property name="portalState" value="active"/>

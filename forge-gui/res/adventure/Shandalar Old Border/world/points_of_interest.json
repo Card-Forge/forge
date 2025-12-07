@@ -1996,7 +1996,7 @@
 	},
 	{
 		"name": "Fort5",
-		"displayName": "Arzakon's Fortress",
+		"displayName": "Mind Slaver's Fort",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3671,8 +3671,8 @@
 		]
 	},
 	{
-		"name": "Slimefoots Lair",
-		"displayName": "Slimefoot's Lair",
+		"name": "Thallid Grove",
+		"displayName": "Thallid Grove",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
