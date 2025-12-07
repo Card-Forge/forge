@@ -102,14 +102,14 @@
    <properties>
     <property name="enemy" value="Elephant" />
     <property name="threatRange" type="int" value="20" />
-   <property name="effect">{ "startBattleWithCard": [ "Elephant Graveyard|ARN", "Forest|2ED", "Plains|2ED", "War Mammoth|LEA" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Elephant Graveyard|ARN", "Forest|ICE", "Plains|ICE", "War Mammoth|LEA" ] }</property>
 </properties>
   </object>
   <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="592.919" y="362.496">
    <properties>
     <property name="enemy" value="Elephant" />
     <property name="threatRange" type="int" value="20" />
-   <property name="effect">{ "startBattleWithCard": [ "Elephant Graveyard|ARN", "Forest|2ED", "Plains|2ED", "War Mammoth|LEA" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Elephant Graveyard|ARN", "Forest|ICE", "Plains|ICE", "War Mammoth|LEA" ] }</property>
 </properties>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="61.1269" y="152.084">

@@ -47,7 +47,7 @@
     <property name="enemy" value="Knight" />
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="70,69" />
-   <property name="effect">{"startBattleWithCard": ["Plains|2ED", "Darkest Hour|USG"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Plains|ICE", "Darkest Hour|USG"]}</property>
 </properties>
   </object>
   <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="128.648" y="137.313">

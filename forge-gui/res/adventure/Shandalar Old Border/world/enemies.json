@@ -3384,7 +3384,7 @@
     "name": "Big Zombie",
     "sprite": "sprites/enemy/undead/zombie_2.atlas",
     "deck": [
-      "decks/standard/zombie_bad.dck"
+      "decks/elite/zombie_bad.dck"
     ],
     "ai": "reckless",
     "spawnRate": 1,
