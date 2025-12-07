@@ -9375,7 +9375,7 @@
     "nameOverride": "War Mammoth",
     "sprite": "sprites/enemy/beast/elephant.atlas",
     "deck": [
-      "decks/elite/elephant.json"
+      "decks/elite/elephant.dck"
     ],
     "ai": "",
     "spawnRate": 0.8,
