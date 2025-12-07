@@ -6238,6 +6238,85 @@
     ]
   },
   {
+    "name": "Giant Cyclops",
+    "sprite": "sprites/enemy/giant/cyclops_large.atlas",
+    "deck": [
+      "decks/standard/luckyminotaur.dck"
+    ],
+    "ai": "reckless",
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 16,
+    "scale": 0.7,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 100,
+        "addMaxCount": 200
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 10,
+        "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Lucky Clover"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Chaos Orb|LEA"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Falling Star|LEG"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Goblin Bomb|WTH"
+      },
+      {
+        "type": "card",
+        "probability": 0.5,
+        "count": 1,
+        "cardName": "Bottle of Suleiman|ARN"
+      },
+      {
+        "type": "card",
+        "probability": 0.5,
+        "count": 1,
+        "cardName": "Mijae Djinn|ARN"
+      },
+      {
+        "type": "card",
+        "probability": 0.5,
+        "count": 1,
+        "cardName": "Ydwen Efreet|ARN"
+      }
+    ],
+    "colors": "UR",
+    "questTags": [
+      "Humanoid",
+      "Giant",
+      "Barbarian",
+      "Loner",
+      "Mythical",
+      "IdentityRed",
+      "BiomeRed"
+    ]
+  },
+  {
     "name": "Mountain Ogre",
     "sprite": "sprites/enemy/monstrosity/ogre_large.atlas",
     "deck": [
@@ -12932,6 +13011,85 @@
     ]
   },
   {
+    "name": "Gladiator",
+    "nameOverride": "",
+    "sprite": "sprites/enemy/humanoid/human/warrior/gladiator.atlas",
+    "deck": [
+      "decks/standard/gladiator.dck"
+    ],
+    "ai": "reckless",
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 21,
+    "life": 18,
+    "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.25,
+        "count": 1,
+        "rarity": [
+          "rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "probability": 1,
+        "count": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "card",
+        "probability": 0.5,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon",
+          "rare"
+        ],
+        "colors": [
+          "Red"
+        ]
+      },
+      {
+        "type": "shards",
+        "probability": 0.25,
+        "count": 0,
+        "addMaxCount": 3
+      },
+      {
+        "type": "gold",
+        "probability": 0.3,
+        "count": 0,
+        "addMaxCount": 300
+      }
+    ],
+    "colors": "R",
+    "questTags": [
+      "Humanoid",
+      "Barbarian",
+      "Aggressive",
+      "Fighter",
+      "Human",
+      "Warrior",
+      "IdentityRed",
+      "IdentityBoros",
+      "IdentityWhite",
+      "Gladiator"
+    ]
+  },
+  {
     "name": "Goblin",
     "nameOverride": "Goblin Worker",
     "sprite": "sprites/enemy/humanoid/goblin/goblin.atlas",
@@ -13257,6 +13415,97 @@
     ]
   },
   {
+    "name": "Goblin Pack",
+    "sprite": "sprites/enemy/humanoid/goblin/goblin_group.atlas",
+    "deck": [
+      "decks/standard/goblin_bad.json"
+    ],
+    "ai": "reckless",
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 27,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.25,
+        "count": 1,
+        "rarity": [
+          "rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "probability": 1,
+        "count": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "card",
+        "probability": 0.5,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon",
+          "rare"
+        ],
+        "colors": [
+          "Red"
+        ]
+      },
+      {
+        "type": "shards",
+        "probability": 0.25,
+        "count": 0,
+        "addMaxCount": 3
+      },
+      {
+        "type": "gold",
+        "probability": 0.3,
+        "count": 0,
+        "addMaxCount": 300
+      }
+    ],
+    "colors": "R",
+    "nextEnemy": {
+      "name": "Goblin",
+      "deck": [
+        "decks/standard/goblin_bad.json"
+      ],
+      "ai": "",
+      "life": 8,
+      "nextEnemy": {
+        "name": "Goblin",
+        "deck": [
+          "decks/standard/goblin_bad.json"
+        ],
+        "ai": "",
+        "life": 8,
+        "teamNumber": 1
+      },
+      "teamNumber": 1
+    },
+    "teamNumber": 1,
+    "questTags": [
+      "Goblin",
+      "Horde",
+      "Aggressive",
+      "IdentityRed"
+    ]
+  },
+  {
     "name": "Goblin Stalker",
     "sprite": "sprites/enemy/humanoid/goblin/goblin_4.atlas",
     "deck": [
@@ -13486,6 +13735,82 @@
       "IdentityColorless",
       "Construct",
       "Dungeon"
+    ]
+  },
+  {
+    "name": "Golgari Elf",
+    "sprite": "sprites/enemy/humanoid/elf/elf_golgari.atlas",
+    "deck": [
+      "decks/standard/elf_golgari.dck"
+    ],
+    "ai": "reckless",
+    "spawnRate": 1,
+    "difficulty": 0.2,
+    "speed": 24,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.25,
+        "count": 1,
+        "rarity": [
+          "rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "probability": 1,
+        "count": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "card",
+        "probability": 0.5,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon",
+          "rare"
+        ],
+        "colors": [
+          "Black",
+          "Green"
+        ]
+      },
+      {
+        "type": "shards",
+        "probability": 0.25,
+        "count": 0,
+        "addMaxCount": 3
+      },
+      {
+        "type": "gold",
+        "probability": 0.3,
+        "count": 0,
+        "addMaxCount": 300
+      }
+    ],
+    "colors": "BG",
+    "questTags": [
+      "Elf",
+      "Humanoid",
+      "Tribal",
+      "IdentityBlack",
+      "IdentityGreen",
+      "IdentityGolgari",
+      "Leader"
     ]
   },
   {
@@ -13965,6 +14290,39 @@
       "IdentityWhite",
       "BiomeWhite"
     ]
+  },
+  {
+    "name": "Guardian Angel",
+    "sprite": "sprites/enemy/celestial/akroma.atlas",
+    "deck": [
+      "decks/miniboss/angel_rainbow_encounter.dck"
+    ],
+    "ai": "cautious",
+    "difficulty": 0.2,
+    "speed": 20,
+    "life": 50,
+    "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 2,
+        "addMaxCount": 4
+      },
+      {
+        "type": "randomCard",
+        "probability": 1,
+        "count": 1,
+        "addMaxCount": 4,
+        "rarity": [
+          "rare"
+        ]
+      }
+    ],
+    "colors": "WUBRG",
+    "questTags": [
+      "Special Encounter"
+    ],
+    "boss": true
   },
   {
     "name": "Harpy",
@@ -16919,6 +17277,88 @@
     ]
   },
   {
+    "name": "Kobold Trapmaster",
+    "nameOverride": "",
+    "sprite": "sprites/enemy/humanoid/kobold/koboldtrapmaster.atlas",
+    "deck": [
+      "decks/standard/koboldtrapmaster.dck"
+    ],
+    "ai": "reckless",
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 31,
+    "scale": 0.75,
+    "life": 12,
+    "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.25,
+        "count": 1,
+        "rarity": [
+          "rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "probability": 1,
+        "count": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "card",
+        "probability": 0.5,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon",
+          "rare"
+        ],
+        "colors": [
+          "Red",
+          "Black"
+        ]
+      },
+      {
+        "type": "shards",
+        "probability": 0.25,
+        "count": 0,
+        "addMaxCount": 3
+      },
+      {
+        "type": "gold",
+        "probability": 0.3,
+        "count": 0,
+        "addMaxCount": 300
+      }
+    ],
+    "colors": "RB",
+    "questTags": [
+      "Kobold",
+      "Coward",
+      "Sneaky",
+      "Small",
+      "Humanoid",
+      "Thief",
+      "IdentityRed",
+      "IdentityBlack",
+      "IdentityRakdos",
+      "BiomeRed",
+      "Trapmaster"
+    ]
+  },
+  {
     "name": "Kobold Warrior",
     "nameOverride": "",
     "sprite": "sprites/enemy/humanoid/kobold/koboldwarrior.atlas",
@@ -16981,6 +17421,87 @@
       "IdentityRakdos",
       "BiomeRed",
       "Warrior"
+    ]
+  },
+  {
+    "name": "Kobold Worker",
+    "sprite": "sprites/enemy/humanoid/kobold/koboldworker.atlas",
+    "deck": [
+      "decks/standard/koboldworker.dck"
+    ],
+    "ai": "reckless",
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 31,
+    "scale": 0.75,
+    "life": 12,
+    "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.25,
+        "count": 1,
+        "rarity": [
+          "rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "probability": 1,
+        "count": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "card",
+        "probability": 0.5,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon",
+          "rare"
+        ],
+        "colors": [
+          "Red",
+          "Black"
+        ]
+      },
+      {
+        "type": "shards",
+        "probability": 0.25,
+        "count": 0,
+        "addMaxCount": 3
+      },
+      {
+        "type": "gold",
+        "probability": 0.3,
+        "count": 0,
+        "addMaxCount": 300
+      }
+    ],
+    "colors": "RB",
+    "questTags": [
+      "Kobold",
+      "Coward",
+      "Sneaky",
+      "Small",
+      "Humanoid",
+      "Thief",
+      "IdentityRed",
+      "IdentityBlack",
+      "IdentityRakdos",
+      "BiomeRed",
+      "Worker"
     ]
   },
   {
@@ -17577,6 +18098,162 @@
       "Lightning",
       "Inhuman",
       "IdentityRed"
+    ]
+  },
+  {
+    "name": "Yawgmoth's Alchemist",
+    "sprite": "sprites/enemy/humanoid/human/wizard/dimir_wiz.atlas",
+    "deck": [
+      "decks/standard/dimir_ninja.dck"
+    ],
+    "ai": "",
+    "spawnRate": 1,
+    "difficulty": 0.2,
+    "speed": 24,
+    "life": 25,
+    "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 1,
+        "addMaxCount": 2,
+        "rarity": [
+          "uncommon"
+        ],
+        "cardTypes": [
+          "Creature",
+          "Artifact",
+          "Enchantment",
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.5,
+        "count": 1,
+        "addMaxCount": 1,
+        "rarity": [
+          "rare"
+        ],
+        "cardTypes": [
+          "Creature",
+          "Artifact",
+          "Enchantment",
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "probability": 0.3,
+        "count": 1,
+        "rarity": [
+          "rare"
+        ]
+      },
+      {
+        "type": "gold",
+        "probability": 0.3,
+        "count": 150,
+        "addMaxCount": 150
+      }
+    ],
+    "colors": "BG",
+    "questTags": [
+      "Wizard",
+      "Necromancer",
+      "IdentityBlack",
+      "IdentityBlue",
+      "IdentityDimir",
+      "Poison",
+      "Liliana"
+    ]
+  },
+  {
+    "name": "Yawgmoth's Herbalist",
+    "sprite": "sprites/enemy/humanoid/human/wizard/black_wizard.atlas",
+    "deck": [
+      "decks/standard/lilianas_herbalist.dck"
+    ],
+    "ai": "reckless",
+    "spawnRate": 1,
+    "difficulty": 0.2,
+    "speed": 24,
+    "life": 25,
+    "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.25,
+        "count": 1,
+        "rarity": [
+          "rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "probability": 1,
+        "count": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "card",
+        "probability": 0.5,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon",
+          "rare"
+        ],
+        "colors": [
+          "Black",
+          "Green"
+        ]
+      },
+      {
+        "type": "shards",
+        "probability": 0.25,
+        "count": 0,
+        "addMaxCount": 3
+      },
+      {
+        "type": "gold",
+        "probability": 0.3,
+        "count": 0,
+        "addMaxCount": 300
+      }
+    ],
+    "colors": "BG",
+    "questTags": [
+      "Wizard",
+      "Necromancer",
+      "IdentityBlack",
+      "IdentityGreen",
+      "IdentityGolgari",
+      "Poison",
+      "Liliana"
     ]
   },
   {
@@ -21087,6 +21764,86 @@
     ]
   },
   {
+    "name": "Pirate Captain 2",
+    "nameOverride": "Pirate Captain",
+    "sprite": "sprites/enemy/humanoid/human/rogue/pirate3.atlas",
+    "deck": [
+      "decks/standard/pirate_captain_2.dck"
+    ],
+    "ai": "reckless",
+    "spawnRate": 0.8,
+    "difficulty": 0.1,
+    "speed": 24,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.25,
+        "count": 1,
+        "rarity": [
+          "rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "probability": 1,
+        "count": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "card",
+        "probability": 0.5,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon",
+          "rare"
+        ],
+        "colors": [
+          "Black"
+        ]
+      },
+      {
+        "type": "shards",
+        "probability": 0.25,
+        "count": 0,
+        "addMaxCount": 3
+      },
+      {
+        "type": "gold",
+        "probability": 0.3,
+        "count": 0,
+        "addMaxCount": 300
+      }
+    ],
+    "colors": "B",
+    "questTags": [
+      "Leader",
+      "Aggressive",
+      "Human",
+      "Warrior",
+      "Water",
+      "Bandit",
+      "Thief",
+      "IdentityBlack",
+      "Dungeon",
+      "Pirate",
+      "Captain"
+    ]
+  },
+  {
     "name": "Pharaoh",
     "sprite": "sprites/enemy/undead/pharaoh.atlas",
     "deck": [
@@ -21135,7 +21892,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Ring of Ma'r\u00fbf"
+        "itemName": "Ring of Ma'rûf"
       }
     ],
     "questTags": [
@@ -22488,6 +23245,85 @@
       "Lizard",
       "Dinosaur",
       "Beast"
+    ]
+  },
+  {
+    "name": "Rakdos Wizard",
+    "sprite": "sprites/enemy/humanoid/human/wizard/rakdos_wiz.atlas",
+    "deck": [
+      "decks/standard/rakdos_vamps.dck"
+    ],
+    "ai": "reckless",
+    "spawnRate": 1,
+    "difficulty": 0.2,
+    "speed": 24,
+    "life": 25,
+    "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 1,
+        "addMaxCount": 2,
+        "rarity": [
+          "uncommon"
+        ],
+        "cardTypes": [
+          "Creature",
+          "Artifact",
+          "Enchantment",
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.5,
+        "count": 1,
+        "addMaxCount": 1,
+        "rarity": [
+          "rare"
+        ],
+        "cardTypes": [
+          "Creature",
+          "Artifact",
+          "Enchantment",
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "probability": 0.3,
+        "count": 1,
+        "rarity": [
+          "rare"
+        ]
+      },
+      {
+        "type": "gold",
+        "probability": 0.3,
+        "count": 150,
+        "addMaxCount": 150
+      }
+    ],
+    "colors": "BG",
+    "questTags": [
+      "Wizard",
+      "Necromancer",
+      "Pyromancer",
+      "IdentityBlack",
+      "IdentityRed",
+      "IdentityRakdos"
     ]
   },
   {
@@ -28699,6 +29535,153 @@
     ]
   },
   {
+    "name": "Juggernaut",
+    "sprite": "sprites/enemy/construct/juggernaut.atlas",
+    "deck": [
+      "decks/standard/juggernaut.dck"
+    ],
+    "ai": "reckless",
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 21,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.25,
+        "count": 1,
+        "rarity": [
+          "rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "probability": 1,
+        "count": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "card",
+        "probability": 0.5,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon",
+          "rare"
+        ]
+      },
+      {
+        "type": "shards",
+        "probability": 0.25,
+        "count": 0,
+        "addMaxCount": 3
+      },
+      {
+        "type": "gold",
+        "probability": 0.3,
+        "count": 0,
+        "addMaxCount": 300
+      }
+    ],
+    "questTags": [
+      "Stone",
+      "Wall",
+      "Construct",
+      "Artifact",
+      "Hidden",
+      "Juggernaut"
+    ]
+  },
+  {
+    "name": "Bone Golem",
+    "sprite": "sprites/enemy/undead/bonegolem.atlas",
+    "deck": [
+      "decks/standard/bonegolem.dck"
+    ],
+    "ai": "",
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 21,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.25,
+        "count": 1,
+        "rarity": [
+          "rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "probability": 1,
+        "count": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "card",
+        "probability": 0.5,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon",
+          "rare"
+        ],
+        "colors": [
+          "Green",
+          "White"
+        ]
+      },
+      {
+        "type": "shards",
+        "probability": 0.25,
+        "count": 0,
+        "addMaxCount": 3
+      },
+      {
+        "type": "gold",
+        "probability": 0.3,
+        "count": 0,
+        "addMaxCount": 300
+      }
+    ],
+    "colors": "GW",
+    "questTags": [
+      "Skeleton",
+      "IdentityBlack",
+      "Golem",
+      "Undead",
+      "Zombie",
+      "Aberration",
+      "Monster",
+      "Evil"
+    ]
+  },
+  {
     "name": "Hulking Brute",
     "sprite": "sprites/enemy/undead/hulkingbrute.atlas",
     "deck": [
@@ -28932,6 +29915,308 @@
       "decks/standard/giralfgisa.dck"
     ],
     "ai": "",
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 21,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.25,
+        "count": 1,
+        "rarity": [
+          "rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "probability": 1,
+        "count": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "card",
+        "probability": 0.5,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon",
+          "rare"
+        ],
+        "colors": [
+          "Black"
+        ]
+      },
+      {
+        "type": "shards",
+        "probability": 0.25,
+        "count": 0,
+        "addMaxCount": 3
+      },
+      {
+        "type": "gold",
+        "probability": 0.3,
+        "count": 0,
+        "addMaxCount": 300
+      }
+    ],
+    "colors": "B",
+    "questTags": [
+      "Evil",
+      "Zombie",
+      "Necromancer",
+      "BiomeBlack",
+      "Inhuman",
+      "Wizard",
+      "IdentityDimir"
+    ]
+  },
+  {
+    "name": "Royal Sentinel",
+    "sprite": "sprites/enemy/undead/royalsentinel.atlas",
+    "deck": [
+      "decks/standard/trap.dck"
+    ],
+    "ai": "",
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 21,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.25,
+        "count": 1,
+        "rarity": [
+          "rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "probability": 1,
+        "count": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "card",
+        "probability": 0.5,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon",
+          "rare"
+        ],
+        "colors": [
+          "Blue",
+          "Black"
+        ]
+      },
+      {
+        "type": "shards",
+        "probability": 0.25,
+        "count": 0,
+        "addMaxCount": 3
+      },
+      {
+        "type": "gold",
+        "probability": 0.3,
+        "count": 0,
+        "addMaxCount": 300
+      }
+    ],
+    "colors": "UB",
+    "questTags": [
+      "Evil",
+      "Zombie",
+      "Necromancer",
+      "BiomeBlack",
+      "Inhuman",
+      "Wizard",
+      "IdentityDimir",
+      "Guardian"
+    ]
+  },
+  {
+    "name": "Lord Pestilence",
+    "sprite": "sprites/enemy/undead/pestilencelord.atlas",
+    "deck": [
+      "decks/standard/trap.dck"
+    ],
+    "ai": "",
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 21,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.25,
+        "count": 1,
+        "rarity": [
+          "rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "probability": 1,
+        "count": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "card",
+        "probability": 0.5,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon",
+          "rare"
+        ],
+        "colors": [
+          "Black"
+        ]
+      },
+      {
+        "type": "shards",
+        "probability": 0.25,
+        "count": 0,
+        "addMaxCount": 3
+      },
+      {
+        "type": "gold",
+        "probability": 0.3,
+        "count": 0,
+        "addMaxCount": 300
+      }
+    ],
+    "colors": "B",
+    "questTags": [
+      "Evil",
+      "Zombie",
+      "Necromancer",
+      "BiomeBlack",
+      "Inhuman",
+      "Wizard",
+      "IdentityDimir"
+    ]
+  },
+  {
+    "name": "Sand Ghoul",
+    "sprite": "sprites/enemy/undead/sandghoul.atlas",
+    "deck": [
+      "decks/standard/sandghoul.dck"
+    ],
+    "ai": "",
+    "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 21,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.25,
+        "count": 1,
+        "rarity": [
+          "rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "probability": 1,
+        "count": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "card",
+        "probability": 0.5,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon",
+          "rare"
+        ],
+        "colors": [
+          "White"
+        ]
+      },
+      {
+        "type": "shards",
+        "probability": 0.25,
+        "count": 0,
+        "addMaxCount": 3
+      },
+      {
+        "type": "gold",
+        "probability": 0.3,
+        "count": 0,
+        "addMaxCount": 300
+      }
+    ],
+    "colors": "W",
+    "questTags": [
+      "Zombie",
+      "Giant",
+      "Golem",
+      "IdentityWhite",
+      "Aberration",
+      "Aggressive",
+      null
+    ]
+  },
+  {
+    "name": "Tomb Guardian",
+    "sprite": "sprites/enemy/undead/tombguardian.atlas",
+    "deck": [
+      "decks/standard/tombguardian.dck"
+    ],
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 21,
@@ -29591,6 +30876,88 @@
       "BiomeColorless",
       "Looter",
       "Farm",
+      null,
+      null
+    ]
+  },
+  {
+    "name": "Supreme Elemental",
+    "sprite": "sprites/enemy/elemental/magicelemental.atlas",
+    "deck": [
+      "decks/standard/supremeelemental.dck"
+    ],
+    "ai": "reckless",
+    "flying": true,
+    "spawnRate": 0.6,
+    "scale": 1.2,
+    "difficulty": 0.1,
+    "speed": 21,
+    "life": 18,
+    "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.25,
+        "count": 1,
+        "rarity": [
+          "rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "probability": 1,
+        "count": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "card",
+        "probability": 0.5,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon",
+          "rare"
+        ],
+        "colors": [
+          "White",
+          "Blue",
+          "Black",
+          "Red",
+          "Green"
+        ]
+      },
+      {
+        "type": "shards",
+        "probability": 0.25,
+        "count": 0,
+        "addMaxCount": 3
+      },
+      {
+        "type": "gold",
+        "probability": 0.3,
+        "count": 0,
+        "addMaxCount": 300
+      }
+    ],
+    "colors": "WUBRG",
+    "questTags": [
+      "Elemental",
+      "Aberration",
+      "Aggressive",
+      "Arcane",
+      "Beast",
+      "IdentityWUBRG",
       null,
       null
     ]
@@ -30693,7 +32060,7 @@
     "colors": "G"
   },
   {
-    "name": "Jakub \u0160lemr '99",
+    "name": "Jakub Šlemr '99",
     "sprite": "sprites/enemy/humanoid/human/warlock/witch.atlas",
     "deck": [
       "decks/standard/wc99_jakub_slemr.dck"
@@ -30825,7 +32192,7 @@
     "colors": "U"
   },
   {
-    "name": "Janosch K\u00fchn '00",
+    "name": "Janosch Kühn '00",
     "sprite": "sprites/enemy/humanoid/elf/shaman.atlas",
     "deck": [
       "decks/standard/wc00_janosch_kuhn.dck"
@@ -32973,7 +34340,7 @@
     ]
   },
   {
-    "name": "M\u00e1rton Stromgald",
+    "name": "Márton Stromgald",
     "sprite": "sprites/enemy/humanoid/human/knight/cavalier_2.atlas",
     "deck": [
       "decks/miniboss/marton_stromgald.dck"
@@ -36051,6 +37418,73 @@
     "boss": true
   },
   {
+    "name": "Tibalt's Cyclops",
+    "sprite": "sprites/enemy/giant/cyclops.atlas",
+    "deck": [
+      "decks/miniboss/shandalar97_tibalts_cyclops.dck"
+    ],
+    "ai": "reckless",
+    "spawnRate": 0.5,
+    "difficulty": 0.1,
+    "speed": 24,
+    "life": 25,
+    "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 1,
+        "addMaxCount": 4,
+        "rarity": [
+          "uncommon"
+        ],
+        "cardTypes": [
+          "Creature",
+          "Artifact",
+          "Enchantment",
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.5,
+        "count": 1,
+        "addMaxCount": 2,
+        "rarity": [
+          "rare"
+        ],
+        "cardTypes": [
+          "Creature",
+          "Artifact",
+          "Enchantment",
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "gold",
+        "probability": 0.3,
+        "count": 10,
+        "addMaxCount": 90
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Lucky Clover"
+      }
+    ],
+    "colors": "R",
+    "questTags": [
+      "Giant",
+      "Chaotic",
+      "IdentityRed",
+      "BiomeRed"
+    ],
+    "nameOverride": "Specter's Cyclops",
+    "boss": true
+  },
+  {
     "name": "Lim-Dul the Necromancer",
     "sprite": "sprites/enemy/undead/lich.atlas",
     "deck": [
@@ -36114,7 +37548,7 @@
       "Necromancer",
       "IdentityBlack"
     ],
-    "nameOverride": "Lim-D\u00fbl, the Necromancer"
+    "nameOverride": "Lim-Dûl, the Necromancer"
   },
   {
     "name": "Chandler",
