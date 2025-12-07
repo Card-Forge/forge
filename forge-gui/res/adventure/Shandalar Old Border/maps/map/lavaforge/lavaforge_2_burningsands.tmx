@@ -143,7 +143,7 @@
   </object>
   <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="252.833" y="45.3333">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Ancient Tomb|TMP|1" ], "lifeModifier": 4 }</property>
+    <property name="effect">{ "lifeModifier": 4 }</property>
     <property name="enemy" value="Axgard Dwarf" />
    </properties>
   </object>

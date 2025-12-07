@@ -149,7 +149,7 @@
   </object>
   <object id="59" template="../../../../../../common/maps/obj/enemy.tx" x="366" y="125.5">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Black Market|MMQ", "Enchantress's Presence|ONS", "Grim Feast|MIR" ], "lifeModifier": 4 }</property>
+    <property name="effect">{ "lifeModifier": 4 }</property>
     <property name="enemy" value="Mindclaw Shaman" />
    </properties>
   </object>

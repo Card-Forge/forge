@@ -117,7 +117,7 @@
     <property name="pursueRange" type="int" value="100" />
     <property name="threatRange" type="int" value="60" />
     <property name="waypoints" value="37" />
-   <property name="effect">{ "startBattleWithCard": [ "Elephant Graveyard|ARN", "Forest|2ED", "Plains|2ED", "War Mammoth|LEA" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Elephant Graveyard|ARN", "Forest|ICE", "Plains|ICE", "War Mammoth|LEA" ] }</property>
 </properties>
   </object>
   <object id="39" template="../../../../../../common/maps/obj/enemy.tx" x="416" y="336">
@@ -231,7 +231,7 @@
    <properties>
     <property name="enemy" value="Gorilla Chief" />
     <property name="threatRange" type="int" value="60" />
-   <property name="effect">{"startBattleWithCard": ["Plains|2ED", "Island|2ED", "Swamp|2ED", "Mountain|2ED", "Forest|2ED", "Ley Line|MMQ", "Hidden Ancients|USG", "Hidden Guerrillas|USG", "Hidden Herd|USG", "Hidden Predators|USG", "Hidden Spider|USG", "Hidden Stag|USG", "Hidden Gibbons|ULG"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Plains|ICE", "Island|2ED", "Swamp|2ED", "Mountain|2ED", "Forest|ICE", "Ley Line|MMQ", "Hidden Ancients|USG", "Hidden Guerrillas|USG", "Hidden Herd|USG", "Hidden Predators|USG", "Hidden Spider|USG", "Hidden Stag|USG", "Hidden Gibbons|ULG"]}</property>
     </properties>
   </object>
   <object id="1" template="../../../../../../common/maps/obj/collision.tx" x="-32" y="0" width="32" height="640" />
