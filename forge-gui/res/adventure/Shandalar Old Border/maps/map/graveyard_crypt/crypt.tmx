@@ -93,6 +93,7 @@
   </object>
   <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="288.333" y="69">
    <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Wheel of Torture|ULG" ] }</property>
     <property name="enemy" value="Torturer" />
     <property name="threatRange" type="int" value="30" />
    </properties>

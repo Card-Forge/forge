@@ -30,6 +30,6 @@ Name=angel_rainbow_encounter
 9 Swamp|PGRU|2
 
 [StartInBattle_Reference]
-1 Angelic Renewal
-1 Angelic Shield
-1 Opal Archangel
+1 Angelic Renewal|WTH
+1 Angelic Shield|INV
+1 Opal Archangel|USG

@@ -197,6 +197,7 @@
     ]
    }
 ]</property>
+    <property name="effect">{ "startBattleWithCard": [ "Forest|TMP", "Forest|TMP", "Forest|TMP", "Forest|TMP", "Treefolk Seedlings|USG" ] }</property>
     <property name="enemy" value="Forest Giant" />
     <property name="threatRange" type="int" value="30" />
    </properties>
