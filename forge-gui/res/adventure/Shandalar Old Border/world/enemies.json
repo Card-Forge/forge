@@ -10522,8 +10522,7 @@
     "name": "Fox",
     "sprite": "sprites/enemy/beast/fox.atlas",
     "deck": [
-      "decks/standard/fox.dck",
-      "decks/standard/fox_greenwhite.dck"
+      "decks/standard/fox.dck"
     ],
     "ai": "cautious",
     "randomizeDeck": true,
