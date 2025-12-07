@@ -140,7 +140,7 @@
       "decks/standard/bluewizard_medium_midrange.dck",
       "decks/standard/bluewizard_medium_mill.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "randomizeDeck": true,
     "spawnRate": 0.75,
     "difficulty": 0.1,
@@ -196,7 +196,7 @@
       "decks/standard/greenwizard_medium_snakes.dck",
       "decks/standard/greenwizard_medium_trample.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.75,
     "difficulty": 0.1,
@@ -266,7 +266,7 @@
       "decks/standard/redwizard_easy_dragons.dck",
       "decks/standard/redwizard_easy_gauntletofmight.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.75,
     "difficulty": 0.1,
@@ -333,7 +333,7 @@
       "decks/standard/whitewizard_medium_control.dck",
       "decks/standard/whitewizard_medium_knight.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "randomizeDeck": true,
     "spawnRate": 0.75,
     "difficulty": 0.1,
@@ -892,7 +892,7 @@
     "deck": [
       "decks/standard/amphin_warrior.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 27,
@@ -1040,7 +1040,7 @@
     "deck": [
       "decks/standard/angelwarrior.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "flying": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -1127,7 +1127,7 @@
     "deck": [
       "decks/standard/amonkhet_minotaur.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -1213,7 +1213,7 @@
     "deck": [
       "decks/standard/ape.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
@@ -1371,7 +1371,7 @@
       "decks/standard/bluewizard_apprentice_3.dck",
       "decks/standard/bluewizard_easy.json"
     ],
-    "ai": "",
+    "ai": "cautious",
     "flying": true,
     "randomizeDeck": true,
     "spawnRate": 1,
@@ -1444,7 +1444,7 @@
       "decks/standard/greenwizard_easy_vanilla.dck",
       "decks/standard/greenwizard_easy.json"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -1516,7 +1516,7 @@
       "decks/standard/redwizard_apprentice_1.dck",
       "decks/standard/redwizard_easy_3.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -1587,7 +1587,7 @@
       "decks/standard/whitewizard_easy_wanderer.dck",
       "decks/standard/whitewizard_easy_angelhuman.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "randomizeDeck": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -1656,7 +1656,7 @@
     "deck": [
       "decks/standard/jodah.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.8,
     "speed": 18,
@@ -2055,7 +2055,8 @@
       "Mystic",
       "IdentityBlue",
       "Dungeon"
-    ]
+    ],
+    "ai": "cautious"
   },
   {
     "name": "Armadillo",
@@ -2063,7 +2064,7 @@
     "deck": [
       "decks/standard/armadillo.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 15,
@@ -2139,7 +2140,7 @@
     "deck": [
       "decks/standard/armored_knight.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 15,
@@ -2205,7 +2206,7 @@
     "deck": [
       "decks/elite/archmage.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 27,
@@ -2328,7 +2329,7 @@
     "deck": [
       "decks/standard/ashmouth_devil.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 31,
@@ -2404,7 +2405,7 @@
     "deck": [
       "decks/standard/axgard_dwarf.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 22,
@@ -2557,7 +2558,7 @@
     "deck": [
       "decks/standard/badger.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 15,
@@ -2629,7 +2630,7 @@
     "deck": [
       "decks/standard/bandit.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
@@ -2708,7 +2709,7 @@
       "decks/standard/bandit_mutate.dck",
       "decks/standard/bandit_zoo.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -2786,7 +2787,7 @@
       "decks/standard/banditarcher_blink.dck",
       "decks/standard/banditarcher_damage.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -2866,7 +2867,7 @@
       "decks/standard/banditleader_hellbent.dck",
       "decks/standard/banditleader_rakdos.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -2945,7 +2946,7 @@
       "decks/standard/banditslingshot_flyers.dck",
       "decks/standard/banditslingshot_vehicles.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -3022,7 +3023,7 @@
     "deck": [
       "decks/standard/bandittrapper_hazezon.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
@@ -3100,7 +3101,7 @@
     "deck": [
       "decks/elite/barbarian.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 21,
@@ -3226,7 +3227,7 @@
     "deck": [
       "decks/standard/bear.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -3305,7 +3306,7 @@
     "deck": [
       "decks/standard/beastmaster.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
@@ -3536,7 +3537,7 @@
     "deck": [
       "decks/standard/zombie_bad.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 15,
@@ -3815,7 +3816,7 @@
       "decks/standard/boar_gruul.dck",
       "decks/standard/boar_monogreenlifegain.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.5,
     "difficulty": 0.4,
@@ -3887,7 +3888,7 @@
     "deck": [
       "decks/standard/eyeblight.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 27,
@@ -3965,7 +3966,7 @@
     "deck": [
       "decks/standard/bull.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.8,
     "speed": 31,
@@ -4086,7 +4087,7 @@
     "deck": [
       "decks/elite/bonedragon.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.3,
     "speed": 20,
@@ -4172,7 +4173,7 @@
     "deck": [
       "decks/elite/millwizard.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 27,
@@ -4297,7 +4298,7 @@
     "deck": [
       "decks/standard/caracal.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.8,
     "difficulty": 0.1,
@@ -4374,7 +4375,7 @@
     "deck": [
       "decks/standard/straycat.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.8,
     "difficulty": 0.1,
@@ -4500,7 +4501,7 @@
     "deck": [
       "decks/standard/cave_spider.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 23,
@@ -4601,7 +4602,7 @@
     "deck": [
       "decks/standard/centaur_warrior.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 30,
@@ -4679,7 +4680,7 @@
     "deck": [
       "decks/standard/cephalid.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "flying": true,
     "spawnRate": 0.8,
     "difficulty": 0.1,
@@ -4775,7 +4776,7 @@
     "deck": [
       "decks/standard/cerodon.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.2,
     "difficulty": 0.1,
     "speed": 25,
@@ -4859,7 +4860,7 @@
       "decks/standard/challenger_20_final_adventure.dck",
       "decks/standard/challenger_20_flash_of_ferocity.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.25,
     "difficulty": 0.25,
@@ -4944,7 +4945,7 @@
       "decks/standard/challenger_21_mono-green_stompy.dck",
       "decks/standard/challenger_21_mono-red_aggro.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.25,
     "difficulty": 0.25,
@@ -5029,7 +5030,7 @@
       "decks/standard/challenger_22_mono_white_aggro.dck",
       "decks/standard/challenger_22_rakdos_vampires.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.25,
     "difficulty": 0.25,
@@ -5284,7 +5285,7 @@
     "deck": [
       "decks/standard/cleric.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
@@ -5928,7 +5929,7 @@
     "deck": [
       "decks/standard/bluewiz_corrupted.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0.2,
     "difficulty": 0.1,
     "speed": 25,
@@ -6139,7 +6140,7 @@
     "deck": [
       "decks/standard/redwiz_corrupted.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.2,
     "difficulty": 0.1,
     "speed": 25,
@@ -6278,7 +6279,7 @@
       "decks/standard/crab.dck",
       "decks/standard/giant_crab.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "randomizeDeck": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -6435,7 +6436,7 @@
     "deck": [
       "decks/standard/crocodile.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "flying": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -6554,7 +6555,7 @@
     "deck": [
       "decks/standard/cyclops.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 16,
@@ -6598,7 +6599,7 @@
     "deck": [
       "decks/standard/luckyminotaur.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 16,
@@ -6677,7 +6678,7 @@
     "deck": [
       "decks/standard/ogre_large.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 16,
@@ -6734,7 +6735,7 @@
     "deck": [
       "decks/standard/hermitcrab.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 15,
@@ -6811,7 +6812,7 @@
     "deck": [
       "decks/standard/hedgehog.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 15,
@@ -6956,7 +6957,7 @@
     "deck": [
       "decks/standard/death_knight.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.8,
     "difficulty": 0.1,
     "speed": 30,
@@ -7380,7 +7381,7 @@
     "deck": [
       "decks/miniboss/tibalt_demon.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "flying": true,
     "randomizeDeck": true,
     "spawnRate": 1,
@@ -7451,7 +7452,7 @@
     "deck": [
       "decks/standard/demoncaller.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -7505,7 +7506,7 @@
     "deck": [
       "decks/standard/imp.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
@@ -7560,7 +7561,7 @@
     "deck": [
       "decks/standard/tibalt_devil.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
@@ -7620,7 +7621,7 @@
     "deck": [
       "decks/standard/dimir_faerie.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "flying": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -7696,7 +7697,7 @@
     "deck": [
       "decks/standard/dinosaurelite.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 15,
@@ -7779,7 +7780,7 @@
     "deck": [
       "decks/standard/dinosaur_w_r.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 15,
@@ -7833,7 +7834,7 @@
     "deck": [
       "decks/standard/disciple_of_teferi.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 23,
@@ -7996,7 +7997,7 @@
       "decks/standard/dog.dck",
       "decks/standard/dog_w_beginner.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -8271,7 +8272,7 @@
       "decks/standard/drake_ur_mid.dck",
       "decks/standard/drake_ur_unfair.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "flying": true,
     "randomizeDeck": true,
     "spawnRate": 0.5,
@@ -8765,7 +8766,7 @@
     "deck": [
       "decks/standard/dwarfpilot.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -8992,7 +8993,7 @@
     "deck": [
       "decks/standard/efreet.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "flying": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -9429,7 +9430,7 @@
     "deck": [
       "decks/standard/elemental_air.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 31,
@@ -9566,7 +9567,7 @@
     "deck": [
       "decks/standard/elk.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 29,
@@ -10207,7 +10208,7 @@
     "deck": [
       "decks/standard/death_knight.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 30,
@@ -10447,7 +10448,7 @@
     "deck": [
       "decks/standard/firedragon.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.3,
     "speed": 20,
@@ -10523,7 +10524,7 @@
     "deck": [
       "decks/standard/fire_elemental.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "flying": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -10671,7 +10672,7 @@
     "deck": [
       "decks/standard/flame_elemental.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 23,
@@ -10820,7 +10821,7 @@
     "deck": [
       "decks/standard/flying_witch.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "flying": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -10884,7 +10885,7 @@
     "deck": [
       "decks/standard/turbofog.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 15,
@@ -11033,7 +11034,7 @@
     "deck": [
       "decks/standard/fox.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "randomizeDeck": true,
     "spawnRate": 0.6,
     "difficulty": 0.1,
@@ -11501,7 +11502,7 @@
     "deck": [
       "decks/standard/gargoyle_obsidian.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "flying": true,
     "spawnRate": 0.5,
     "difficulty": 0.1,
@@ -11592,7 +11593,7 @@
     "deck": [
       "decks/standard/gargoyle.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "flying": true,
     "spawnRate": 0.5,
     "difficulty": 0.1,
@@ -12156,7 +12157,7 @@
     "deck": [
       "decks/standard/geistmage.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 18,
@@ -12239,7 +12240,7 @@
     "deck": [
       "decks/standard/ghoul.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 15,
@@ -12477,7 +12478,7 @@
     "deck": [
       "decks/standard/giantpanda.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 13,
@@ -12553,7 +12554,7 @@
     "deck": [
       "decks/standard/spider_token.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 23,
@@ -12823,7 +12824,7 @@
     "deck": [
       "decks/standard/sandwurm.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "life": 12,
@@ -13277,7 +13278,7 @@
     "deck": [
       "decks/elite/gorilla.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.8,
     "speed": 18,
@@ -13447,7 +13448,7 @@
     "deck": [
       "decks/standard/gladiator.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 21,
@@ -13526,7 +13527,7 @@
     "deck": [
       "decks/standard/goblin_warrior_easy.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 27,
@@ -13582,7 +13583,7 @@
     "deck": [
       "decks/standard/goblin_artificer.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.3,
     "speed": 27,
@@ -13656,7 +13657,7 @@
     "deck": [
       "decks/standard/goblin_chief_medium.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 29,
@@ -13708,7 +13709,7 @@
     "deck": [
       "decks/standard/goblin_fanatic.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 29,
@@ -13790,7 +13791,7 @@
     "deck": [
       "decks/elite/goblinking.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 27,
@@ -13850,7 +13851,7 @@
     "deck": [
       "decks/standard/goblin_bad.json"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 27,
@@ -13941,7 +13942,7 @@
     "deck": [
       "decks/elite/evilgoblin.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 29,
@@ -13991,7 +13992,7 @@
     "deck": [
       "decks/standard/goblin_mid.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 28,
@@ -14173,7 +14174,7 @@
     "deck": [
       "decks/standard/elf_golgari.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.2,
     "speed": 24,
@@ -14727,7 +14728,7 @@
     "deck": [
       "decks/miniboss/angel_rainbow_encounter.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "difficulty": 0.2,
     "speed": 20,
     "life": 50,
@@ -14922,7 +14923,7 @@
     "deck": [
       "decks/standard/manticore.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 18,
@@ -14996,7 +14997,7 @@
     "deck": [
       "decks/standard/hellhound.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -15082,7 +15083,7 @@
     "deck": [
       "decks/standard/plant.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -15133,7 +15134,7 @@
     "deck": [
       "decks/standard/snake.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -15439,7 +15440,7 @@
     "deck": [
       "decks/standard/homarid.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0.8,
     "difficulty": 0.1,
     "speed": 15,
@@ -15577,7 +15578,7 @@
     "deck": [
       "decks/standard/tibalt_horror.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
@@ -16181,7 +16182,7 @@
     "deck": [
       "decks/standard/human_mid.json"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
@@ -16456,7 +16457,7 @@
     "deck": [
       "decks/elite/seraphim.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0.2,
     "difficulty": 0.1,
     "speed": 35,
@@ -16888,7 +16889,7 @@
     "deck": [
       "decks/standard/jackal.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.3,
     "difficulty": 0.1,
     "speed": 20,
@@ -16945,7 +16946,7 @@
     "deck": [
       "decks/miniboss/jace.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -17044,7 +17045,7 @@
     "deck": [
       "decks/standard/jellyfish.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "flying": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -17197,7 +17198,7 @@
     "deck": [
       "decks/standard/mardu.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 30,
@@ -17522,7 +17523,7 @@
     "deck": [
       "decks/elite/kobolddragoncaller.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 31,
@@ -17589,7 +17590,7 @@
     "deck": [
       "decks/standard/pyromancer.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -17656,7 +17657,7 @@
     "deck": [
       "decks/standard/roshnakhtheroic.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 31,
@@ -17722,7 +17723,7 @@
     "deck": [
       "decks/standard/kobold.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 31,
@@ -17789,7 +17790,7 @@
     "deck": [
       "decks/standard/koboldtrapmaster.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 31,
@@ -17871,7 +17872,7 @@
     "deck": [
       "decks/standard/kobold.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 31,
@@ -17935,7 +17936,7 @@
     "deck": [
       "decks/standard/koboldworker.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 31,
@@ -18016,7 +18017,7 @@
     "deck": [
       "decks/standard/kor_warrior.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 30,
@@ -18430,7 +18431,7 @@
     "deck": [
       "decks/standard/leoninwarrior.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 27,
@@ -18508,7 +18509,7 @@
     "deck": [
       "decks/standard/lightning_elemental.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "flying": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -18692,7 +18693,7 @@
     "deck": [
       "decks/standard/lilianas_herbalist.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.2,
     "speed": 24,
@@ -18768,7 +18769,7 @@
     "deck": [
       "decks/standard/lion.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.8,
     "difficulty": 0.1,
@@ -18947,7 +18948,7 @@
     "deck": [
       "decks/standard/mageripper.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -19334,7 +19335,7 @@
       "decks/elite/bluewizard_hard_artifact.dck",
       "decks/elite/bluewizard_hard_bounce.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "flying": true,
     "randomizeDeck": true,
     "spawnRate": 0.5,
@@ -19387,7 +19388,7 @@
       "decks/elite/greenwizard_hard_rampbis.dck",
       "decks/elite/greenwizard_hard_sapproling.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.5,
     "difficulty": 0.1,
@@ -19440,7 +19441,7 @@
       "decks/standard/redwizard_hard_fight.dck",
       "decks/standard/redwizard_hard_lavaaxe.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.5,
     "difficulty": 0.1,
@@ -19495,7 +19496,7 @@
       "decks/standard/whitewizard_hard_armaggedon.dck",
       "decks/standard/whitewizard_hard_enchantments.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "randomizeDeck": true,
     "spawnRate": 0.5,
     "difficulty": 0.1,
@@ -19765,7 +19766,7 @@
     "deck": [
       "decks/standard/merfolk_lords.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.2,
     "speed": 22,
@@ -19905,7 +19906,7 @@
     "deck": [
       "decks/standard/merfolk_v_goblins.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 22,
@@ -20035,7 +20036,7 @@
     "deck": [
       "decks/miniboss/sliver_metallicsliver.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "speed": 24,
     "life": 25,
@@ -20410,7 +20411,7 @@
       "decks/elite/minotaurmid.dck",
       "decks/elite/minotaurmonored.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -20860,7 +20861,7 @@
     "deck": [
       "decks/standard/nagawarrior.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -21485,7 +21486,7 @@
     "deck": [
       "decks/standard/octopus.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 15,
@@ -21550,7 +21551,7 @@
       "decks/standard/ooze_monogreen.dck",
       "decks/standard/ooze_greenblue.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.3,
     "difficulty": 0.1,
@@ -21880,7 +21881,7 @@
     "deck": [
       "decks/standard/penguin.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0.3,
     "difficulty": 0.1,
     "speed": 24,
@@ -21952,7 +21953,7 @@
     "deck": [
       "decks/standard/pirate.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.8,
     "difficulty": 0.1,
     "speed": 24,
@@ -22034,7 +22035,7 @@
     "deck": [
       "decks/standard/pirate2.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.8,
     "difficulty": 0.1,
     "speed": 24,
@@ -22115,7 +22116,7 @@
     "deck": [
       "decks/standard/pirate3.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.8,
     "difficulty": 0.1,
     "speed": 24,
@@ -22195,7 +22196,7 @@
     "deck": [
       "decks/elite/pirate_captain.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.5,
     "difficulty": 0.1,
@@ -22276,7 +22277,7 @@
     "deck": [
       "decks/standard/pirate_captain_2.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.8,
     "difficulty": 0.1,
     "speed": 24,
@@ -22398,7 +22399,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Ring of Ma'r\u00fbf"
+        "itemName": "Ring of Ma'rûf"
       }
     ],
     "questTags": [
@@ -22421,7 +22422,7 @@
       "decks/standard/plant.json",
       "decks/standard/plant.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "randomizeDeck": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -22482,7 +22483,7 @@
     "deck": [
       "decks/standard/poisonoussnake.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 15,
@@ -22553,7 +22554,7 @@
     "deck": [
       "decks/standard/polarbear.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.3,
     "difficulty": 0.1,
     "speed": 24,
@@ -22626,7 +22627,7 @@
     "deck": [
       "decks/standard/porcupine.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 20,
@@ -22682,7 +22683,7 @@
     "deck": [
       "decks/standard/prototype_blue.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.3,
     "speed": 20,
@@ -22757,7 +22758,7 @@
     "deck": [
       "decks/standard/prototype_green.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.3,
     "speed": 20,
@@ -22832,7 +22833,7 @@
     "deck": [
       "decks/standard/fanaticpriest.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.2,
     "difficulty": 0.1,
     "speed": 35,
@@ -22891,7 +22892,7 @@
     "deck": [
       "decks/elite/pyromancer.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 21,
@@ -22946,7 +22947,7 @@
     "deck": [
       "decks/standard/orc_brute.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 21,
@@ -23026,7 +23027,7 @@
     "deck": [
       "decks/standard/orc_hunter.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 21,
@@ -23106,7 +23107,7 @@
     "deck": [
       "decks/standard/orc_warrior.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 21,
@@ -23351,7 +23352,7 @@
     "deck": [
       "decks/standard/enchantment_aggro.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 20,
@@ -23495,7 +23496,7 @@
     "deck": [
       "decks/standard/phoenix.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "flying": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -23602,7 +23603,7 @@
     "deck": [
       "decks/standard/rakdos_devil.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
@@ -23682,7 +23683,7 @@
     "deck": [
       "decks/standard/dinosaur_rw_enrage.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 25,
@@ -23759,7 +23760,7 @@
     "deck": [
       "decks/standard/rakdos_vamps.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.2,
     "speed": 24,
@@ -23912,7 +23913,7 @@
     "deck": [
       "decks/miniboss/sliver_recruitersliver.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "speed": 24,
     "life": 25,
@@ -24004,7 +24005,7 @@
     "deck": [
       "decks/standard/reassemblingskeleton.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 10,
@@ -24046,7 +24047,7 @@
     "deck": [
       "decks/standard/rhino.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.8,
     "difficulty": 0.1,
@@ -24108,7 +24109,7 @@
     "deck": [
       "decks/standard/rogue.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.8,
     "difficulty": 0.1,
     "speed": 25,
@@ -24224,7 +24225,7 @@
     "deck": [
       "decks/standard/sandgolem.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 23,
@@ -24271,7 +24272,7 @@
     "deck": [
       "decks/elite/hellion.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.2,
     "difficulty": 0.1,
     "speed": 13,
@@ -25047,7 +25048,7 @@
     "deck": [
       "decks/standard/shamanelite.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
@@ -25923,7 +25924,7 @@
     "deck": [
       "decks/miniboss/slobad.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.8,
@@ -26017,7 +26018,7 @@
     "deck": [
       "decks/boss/sliver_queen.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "boss": true,
     "speed": 1,
     "life": 40,
@@ -26114,7 +26115,7 @@
     "deck": [
       "decks/standard/snake.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -26198,7 +26199,7 @@
     "deck": [
       "decks/miniboss/simicwizard_snow.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "randomizeDeck": true,
     "spawnRate": 0.25,
     "difficulty": 1,
@@ -26350,7 +26351,7 @@
     "deck": [
       "decks/standard/spider.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 22,
@@ -26557,7 +26558,7 @@
     "deck": [
       "decks/standard/dinosaur_gruul_etali.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 20,
@@ -26697,7 +26698,7 @@
       "decks/standard/cat_greenwhite.dck",
       "decks/standard/cat_greenwhite2.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -26841,7 +26842,7 @@
     "deck": [
       "decks/miniboss/sorceressqueenkaja.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 1,
@@ -26876,7 +26877,7 @@
     "deck": [
       "decks/miniboss/goblinkingphil.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 1,
@@ -27067,7 +27068,7 @@
     "deck": [
       "decks/standard/swamptroll.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -27166,7 +27167,7 @@
     "deck": [
       "decks/standard/symbiote.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 27,
@@ -27251,7 +27252,7 @@
     "deck": [
       "decks/standard/djinn_tarkir.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "flying": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -27329,7 +27330,7 @@
     "deck": [
       "decks/miniboss/teferi_boss.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.8,
     "speed": 31,
@@ -27663,7 +27664,7 @@
     "deck": [
       "decks/standard/tiger.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.8,
     "difficulty": 0.1,
@@ -27740,7 +27741,7 @@
     "deck": [
       "decks/miniboss/torturer.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 20,
@@ -27817,7 +27818,7 @@
     "deck": [
       "decks/standard/turtle.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 5,
@@ -27881,7 +27882,7 @@
     "deck": [
       "decks/standard/treefolk_tribal.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 16,
@@ -27938,7 +27939,7 @@
     "deck": [
       "decks/standard/treefolk.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 16,
@@ -28013,7 +28014,7 @@
     "deck": [
       "decks/standard/dinosaur_gw_ramp.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 20,
@@ -28089,7 +28090,7 @@
     "deck": [
       "decks/standard/troll.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -28333,7 +28334,7 @@
     "deck": [
       "decks/standard/viashino.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -28413,7 +28414,7 @@
     "deck": [
       "decks/standard/snake.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -28478,7 +28479,7 @@
     "deck": [
       "decks/standard/junddragon.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.3,
     "speed": 20,
@@ -28553,7 +28554,7 @@
     "deck": [
       "decks/standard/br_elemental.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 28,
@@ -28659,7 +28660,7 @@
     "deck": [
       "decks/standard/walkingbrain.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0.3,
     "difficulty": 0.1,
     "speed": 15,
@@ -28727,7 +28728,7 @@
     "deck": [
       "decks/standard/wanderinggiant.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.8,
     "difficulty": 0.1,
     "speed": 15,
@@ -28803,7 +28804,7 @@
     "deck": [
       "decks/standard/human_warrior_amonkhet.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 21,
@@ -28861,7 +28862,7 @@
     "deck": [
       "decks/standard/wasp.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "flying": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -28922,7 +28923,7 @@
     "deck": [
       "decks/miniboss/bearboss.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -29002,7 +29003,7 @@
     "deck": [
       "decks/standard/werewolf.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 26,
@@ -29184,7 +29185,7 @@
       "decks/standard/rat.dck",
       "decks/standard/ratswarm.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.6,
     "difficulty": 0.1,
@@ -29249,7 +29250,7 @@
     "deck": [
       "decks/standard/wild-magic_sorcerer.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 22,
@@ -29404,7 +29405,7 @@
     "deck": [
       "decks/standard/wolf.json"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 35,
@@ -29612,7 +29613,7 @@
     "deck": [
       "decks/elite/witch.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 12,
@@ -30076,7 +30077,7 @@
     "deck": [
       "decks/standard/zombie_black_easy.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 15,
@@ -30124,7 +30125,7 @@
     "deck": [
       "decks/standard/zombie_black_medium.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.7,
     "difficulty": 0.1,
     "speed": 21,
@@ -30170,7 +30171,7 @@
     "deck": [
       "decks/standard/hiddenwall.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "life": 20,
@@ -30243,7 +30244,7 @@
     "deck": [
       "decks/standard/juggernaut.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 21,
@@ -30544,7 +30545,7 @@
     "deck": [
       "decks/standard/monobgoblins.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 21,
@@ -30919,7 +30920,7 @@
     "deck": [
       "decks/standard/tombguardian.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 21,
@@ -31594,7 +31595,7 @@
     "deck": [
       "decks/standard/demonwander.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0.6,
     "scale": 1.2,
     "difficulty": 0.1,
@@ -31668,7 +31669,7 @@
     "deck": [
       "decks/standard/peasantrole.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.6,
     "difficulty": 0.1,
     "speed": 21,
@@ -31745,7 +31746,7 @@
     "deck": [
       "decks/standard/supremeelemental.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "flying": true,
     "spawnRate": 0.6,
     "scale": 1.2,
@@ -31827,7 +31828,7 @@
     "deck": [
       "decks/standard/zombie_black_hard.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.4,
     "difficulty": 0.1,
     "speed": 21,
@@ -32019,7 +32020,7 @@
     "deck": [
       "decks/castle_npc/mill_mole.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 22,
@@ -32089,7 +32090,7 @@
     "deck": [
       "decks/elite/merfolk_king.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 28,
@@ -32257,7 +32258,7 @@
     "deck": [
       "decks/standard/wc97_janosch_kuhn.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -32325,7 +32326,7 @@
     "deck": [
       "decks/standard/wc97_svend_geertsen.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -32391,7 +32392,7 @@
     "deck": [
       "decks/standard/wc97_paul_mccabe.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -32528,7 +32529,7 @@
     "deck": [
       "decks/standard/wc98_ben_rubin.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -32660,7 +32661,7 @@
     "deck": [
       "decks/standard/wc98_randy_buehler.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -32792,7 +32793,7 @@
     "deck": [
       "decks/standard/wc99_mark_le_pine.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -32858,7 +32859,7 @@
     "deck": [
       "decks/standard/wc99_matt_linde.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -32919,7 +32920,7 @@
     "colors": "G"
   },
   {
-    "name": "Jakub \u0160lemr '99",
+    "name": "Jakub Šlemr '99",
     "sprite": "sprites/enemy/humanoid/human/warlock/witch.atlas",
     "deck": [
       "decks/standard/wc99_jakub_slemr.dck"
@@ -33051,12 +33052,12 @@
     "colors": "U"
   },
   {
-    "name": "Janosch K\u00fchn '00",
+    "name": "Janosch Kühn '00",
     "sprite": "sprites/enemy/humanoid/elf/shaman.atlas",
     "deck": [
       "decks/standard/wc00_janosch_kuhn.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -33123,7 +33124,7 @@
     "deck": [
       "decks/standard/wc00_tom_van_de_logt.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -33390,7 +33391,7 @@
     "deck": [
       "decks/standard/wc01_antoine_ruel.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -33526,7 +33527,7 @@
     "deck": [
       "decks/standard/wc02_carlos_romao.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -33796,7 +33797,7 @@
     "deck": [
       "decks/standard/wc03_daniel_zink.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -33864,7 +33865,7 @@
     "deck": [
       "decks/standard/wc03_dave_humpherys.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -33931,7 +33932,7 @@
     "deck": [
       "decks/standard/wc03_wolfgang_eder.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -34133,7 +34134,7 @@
     "deck": [
       "decks/standard/wc94_bertrand_lestree.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -34202,7 +34203,7 @@
     "deck": [
       "decks/standard/wc94_dominic_symens.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -34271,7 +34272,7 @@
     "deck": [
       "decks/standard/wc94_cyrille_defoucaud.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -34474,7 +34475,7 @@
     "deck": [
       "decks/standard/wc95_mark_justice.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -34541,7 +34542,7 @@
     "deck": [
       "decks/standard/wc95_henry_stern.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -34674,7 +34675,7 @@
     "deck": [
       "decks/standard/wc96_mark_justice.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -34808,7 +34809,7 @@
     "deck": [
       "decks/standard/wc96_olle_rade.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -35019,7 +35020,7 @@
     "deck": [
       "decks/miniboss/ashnod.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -35157,7 +35158,7 @@
     "deck": [
       "decks/miniboss/latulla.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -35199,12 +35200,12 @@
     ]
   },
   {
-    "name": "M\u00e1rton Stromgald",
+    "name": "Márton Stromgald",
     "sprite": "sprites/enemy/humanoid/human/knight/cavalier_2.atlas",
     "deck": [
       "decks/miniboss/marton_stromgald.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -35243,7 +35244,7 @@
     "deck": [
       "decks/miniboss/jeska.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -35257,7 +35258,7 @@
     "deck": [
       "decks/miniboss/eron.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -35367,7 +35368,7 @@
     "deck": [
       "decks/miniboss/verdeloth.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -35496,7 +35497,7 @@
     "deck": [
       "decks/miniboss/hazduhr.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -35637,7 +35638,7 @@
     "deck": [
       "decks/miniboss/reya.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -35727,7 +35728,7 @@
     "deck": [
       "decks/miniboss/barrin.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -35774,7 +35775,7 @@
     "deck": [
       "decks/miniboss/rayne.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -35821,7 +35822,7 @@
     "deck": [
       "decks/miniboss/karn.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -37151,7 +37152,7 @@
     "deck": [
       "decks/standard/shandalar97_blue_thoughtinvoker.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0.5,
     "difficulty": 0.6,
     "speed": 24,
@@ -37380,7 +37381,7 @@
     "deck": [
       "decks/standard/shandalar97_red_craghydra.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.5,
     "speed": 22,
@@ -37417,7 +37418,7 @@
     "deck": [
       "decks/standard/shandalar97_red_warmage.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.6,
     "speed": 24,
@@ -37556,7 +37557,7 @@
     "deck": [
       "decks/standard/shandalar97_green_summoner.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.6,
     "speed": 24,
@@ -37842,7 +37843,7 @@
     "deck": [
       "decks/elite/shandalar97_colorless_prismat.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "flying": true,
     "spawnRate": 0.4,
     "difficulty": 0.7,
@@ -38214,7 +38215,7 @@
     "deck": [
       "decks/miniboss/shandalar97_tibalts_torturer.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
@@ -38282,7 +38283,7 @@
     "deck": [
       "decks/miniboss/shandalar97_tibalts_cyclops.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
@@ -38407,7 +38408,7 @@
       "Necromancer",
       "IdentityBlack"
     ],
-    "nameOverride": "Lim-D\u00fbl, the Necromancer"
+    "nameOverride": "Lim-Dûl, the Necromancer"
   },
   {
     "name": "Chandler",
@@ -38415,7 +38416,7 @@
     "deck": [
       "decks/miniboss/shandalar97_chandler.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
@@ -38480,7 +38481,7 @@
     "deck": [
       "decks/miniboss/shandalar97_joven.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
@@ -38545,7 +38546,7 @@
     "deck": [
       "decks/miniboss/shandalar97_kogla.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
@@ -38681,7 +38682,7 @@
     "deck": [
       "decks/elite/shandalar97_ghoulcaller_ghoul.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
@@ -38741,7 +38742,7 @@
     "deck": [
       "decks/standard/shandalar97_fire_titan.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
@@ -38998,7 +38999,7 @@
     "deck": [
       "decks/standard/shandalar97_nightstalker.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
@@ -39125,7 +39126,7 @@
     "deck": [
       "decks/standard/shandalar97_dementia_beast.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
@@ -39250,7 +39251,7 @@
     "deck": [
       "decks/standard/shandalar97_cateran_slaver.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
@@ -39309,7 +39310,7 @@
     "deck": [
       "decks/boss/urza.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -39364,7 +39365,7 @@
     "deck": [
       "decks/boss/gaea.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -39419,7 +39420,7 @@
     "deck": [
       "decks/boss/serra.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
