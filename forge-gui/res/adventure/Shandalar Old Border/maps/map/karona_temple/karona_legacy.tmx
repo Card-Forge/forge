@@ -45,22 +45,22 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="74" template="../../../../../../common/maps/obj/gate.tx" x="208" y="400">
+  <object id="74" template="../../../../../../common/maps/obj/gate.tx" x="208" y="448">
    <properties>
     <property name="dialog">[
 	{
-		"text": "A strange lock bars your path. It seems to require a peculiar key.",
+		"text": "A massive gate with a strange lock is blocking the path.",
 		"options": [
-			{ "name": "go away" },
+			{ "name": "Leave" },
 			{
-				"name": "unlock with Strange Key",
+				"name": "Unlock with the strange key",
 				"condition": [
 					{ "item": "Strange Key" }
 				],
-				"text": "The lock clicks open. You may now enter the portal chamber.",
+				"text": "The gate is unlocked.",
 				"options": [
 					{
-						"name": "continue",
+						"name": "Continue",
 						"action": [
 							{ "deleteMapObject": -1 },
 							{ "removeItem": "Strange Key" }
@@ -73,8 +73,6 @@
 ]</property>
    </properties>
   </object>
-  <object id="75" template="../../../../../../common/maps/obj/block.tx" x="192" y="400"/>
-  <object id="76" template="../../../../../../common/maps/obj/block.tx" x="224" y="400"/>
   <object id="52" template="../../../../../../common/maps/obj/portal.tx" x="280" y="250">
    <properties>
     <property name="portalState" value="active"/>
