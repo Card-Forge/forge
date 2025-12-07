@@ -33,9 +33,11 @@ import forge.util.FileUtil;
 import forge.gamemodes.puzzle.Puzzle;
 
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -73,6 +75,13 @@ public class ForgeHeadlessServer {
     // Store current combat actions so getPossibleActions can access them during
     // combat phases
     private static volatile JsonArray currentCombatActions = null;
+
+    // Game log for recording actions
+    private static final StringBuilder GAME_LOG = new StringBuilder();
+    private static final String LOG_FILE = "game_log.txt";
+
+    // Unique game ID (UUID) that changes each game
+    private static volatile String currentGameId = java.util.UUID.randomUUID().toString();
 
     /**
      * Main entry point.
@@ -146,6 +155,15 @@ public class ForgeHeadlessServer {
                     String action = br.lines().collect(Collectors.joining("\n"));
                     System.out.println("Received /api/step action: " + action);
 
+                    // Log the action with timestamp
+                    String phase = currentGame != null && currentGame.getPhaseHandler() != null
+                            ? currentGame.getPhaseHandler().getPhase().toString()
+                            : "?";
+                    int turn = currentGame != null && currentGame.getPhaseHandler() != null
+                            ? currentGame.getPhaseHandler().getTurn()
+                            : 0;
+                    GAME_LOG.append(String.format("[Turn %d - %s] %s%n", turn, phase, action));
+
                     // Send action to game thread
                     ACTION_QUEUE.offer(action);
 
@@ -168,6 +186,42 @@ public class ForgeHeadlessServer {
                 sendResponse(exchange, HTTP_OK, LAST_GAME_STATE.get().toString());
             });
 
+            // GET /api/log - Retrieve game log
+            server.createContext("/api/log", exchange -> {
+                if (!"GET".equals(exchange.getRequestMethod())) {
+                    sendResponse(exchange, HTTP_METHOD_NOT_ALLOWED, "Method Not Allowed");
+                    return;
+                }
+                sendResponse(exchange, HTTP_OK, GAME_LOG.toString());
+            });
+
+            // GET /api/export_puzzle - Export current game state as a .pzl puzzle file
+            server.createContext("/api/export_puzzle", exchange -> {
+                if (!"GET".equals(exchange.getRequestMethod())) {
+                    sendResponse(exchange, HTTP_METHOD_NOT_ALLOWED, "Method Not Allowed");
+                    return;
+                }
+                if (currentGame == null) {
+                    sendResponse(exchange, 400, "No game in progress");
+                    return;
+                }
+                try {
+                    String puzzleContent = exportGameAsPuzzle(currentGame);
+                    // Save to file
+                    String filename = "exported_game_" + System.currentTimeMillis() + ".pzl";
+                    try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
+                        writer.print(puzzleContent);
+                    }
+                    JsonObject result = new JsonObject();
+                    result.addProperty("filename", filename);
+                    result.addProperty("content", puzzleContent);
+                    sendResponse(exchange, HTTP_OK, result.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    sendResponse(exchange, 500, "Failed to export: " + e.getMessage());
+                }
+            });
+
             server.setExecutor(null);
             server.start();
             System.out.println("HTTP Server started. Waiting for requests...");
@@ -179,11 +233,146 @@ public class ForgeHeadlessServer {
     }
 
     /**
+     * Saves the current game log to a file.
+     */
+    private static void saveGameLog() {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(LOG_FILE))) {
+            writer.print(GAME_LOG.toString());
+            System.out.println("Game log saved to: " + LOG_FILE);
+        } catch (IOException e) {
+            System.err.println("Failed to save game log: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Builds a JSON object for a creature with full details including counters and
+     * attachments.
+     */
+    private static JsonObject buildCreatureJson(final Card creature) {
+        JsonObject info = new JsonObject();
+        info.addProperty("name", creature.getName());
+        info.addProperty("tapped", creature.isTapped());
+        info.addProperty("power", creature.getNetPower());
+        info.addProperty("toughness", creature.getNetToughness());
+        info.addProperty("summoning_sick", creature.hasSickness());
+
+        // Add counters (including +1/+1 counters)
+        if (!creature.getCounters().isEmpty()) {
+            JsonObject counters = new JsonObject();
+            for (java.util.Map.Entry<forge.game.card.CounterType, Integer> entry : creature.getCounters().entrySet()) {
+                counters.addProperty(entry.getKey().getName(), entry.getValue());
+            }
+            info.add("counters", counters);
+        }
+
+        // Add attached cards (equipment, auras)
+        if (!creature.getAllAttachedCards().isEmpty()) {
+            JsonArray attachments = new JsonArray();
+            for (final Card attached : creature.getAllAttachedCards()) {
+                JsonObject attach = new JsonObject();
+                attach.addProperty("name", attached.getName());
+                attach.addProperty("type", attached.isEquipment() ? "equipment" : attached.isAura() ? "aura" : "other");
+                attachments.add(attach);
+            }
+            info.add("attachments", attachments);
+        }
+
+        return info;
+    }
+
+    /**
+     * Exports the current game state as a puzzle (.pzl) file content.
+     * This creates a snapshot that can be loaded in Forge's puzzle mode.
+     */
+    private static String exportGameAsPuzzle(final Game game) {
+        StringBuilder sb = new StringBuilder();
+
+        // Metadata section
+        sb.append("[metadata]\n");
+        sb.append("Name:Exported Game - Turn ").append(game.getPhaseHandler().getTurn()).append("\n");
+        sb.append("URL:https://github.com/Card-Forge/forge\n");
+        sb.append("Goal:Win\n");
+        sb.append("Turns:99\n");
+        sb.append("Difficulty:Medium\n");
+        sb.append("Description:Game state exported from ForgeHeadlessServer\n");
+
+        // State section
+        sb.append("[state]\n");
+        sb.append("turn=").append(game.getPhaseHandler().getTurn()).append("\n");
+        sb.append("activeplayer=p").append(game.getPlayers().indexOf(game.getPhaseHandler().getPlayerTurn()))
+                .append("\n");
+        sb.append("activephase=").append(game.getPhaseHandler().getPhase().toString()).append("\n");
+
+        // Player states
+        int playerIndex = 0;
+        for (Player player : game.getPlayers()) {
+            String prefix = "p" + playerIndex;
+            sb.append(prefix).append("life=").append(player.getLife()).append("\n");
+            sb.append(prefix).append("landsplayed=").append(player.getLandsPlayedThisTurn()).append("\n");
+
+            // Hand
+            sb.append(prefix).append("hand=");
+            sb.append(cardsToString(player.getCardsIn(ZoneType.Hand)));
+            sb.append("\n");
+
+            // Library
+            sb.append(prefix).append("library=");
+            sb.append(cardsToString(player.getCardsIn(ZoneType.Library)));
+            sb.append("\n");
+
+            // Battlefield
+            sb.append(prefix).append("battlefield=");
+            sb.append(cardsToString(player.getCardsIn(ZoneType.Battlefield)));
+            sb.append("\n");
+
+            // Graveyard
+            sb.append(prefix).append("graveyard=");
+            sb.append(cardsToString(player.getCardsIn(ZoneType.Graveyard)));
+            sb.append("\n");
+
+            // Exile
+            sb.append(prefix).append("exile=");
+            sb.append(cardsToString(player.getCardsIn(ZoneType.Exile)));
+            sb.append("\n");
+
+            playerIndex++;
+        }
+
+        return sb.toString();
+    }
+
+    /**
+     * Converts a collection of cards to puzzle file format string.
+     */
+    private static String cardsToString(CardCollectionView cards) {
+        if (cards.isEmpty()) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        boolean first = true;
+        for (Card card : cards) {
+            if (!first) {
+                sb.append(";");
+            }
+            first = false;
+            sb.append(card.getName());
+            if (card.isTapped()) {
+                sb.append("|Tapped");
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
      * Resets the current game and starts a new one in a separate thread.
      * 
      * @param options Configuration options for the new game (e.g. decks).
      */
     private static void resetGame(final JsonObject options) {
+        // Generate new game ID
+        currentGameId = java.util.UUID.randomUUID().toString();
+        System.out.println("New game ID: " + currentGameId);
+
         // Stop existing game and thread if any
         if (currentGame != null) {
             System.out.println("Stopping existing game...");
@@ -213,6 +402,13 @@ public class ForgeHeadlessServer {
         LAST_GAME_STATE.set(new JsonObject()); // CRITICAL: Clear old game state!
         waitingForInput = false;
         shouldStopGame = false;
+
+        // Save and clear game log
+        if (GAME_LOG.length() > 0) {
+            saveGameLog();
+            GAME_LOG.setLength(0);
+        }
+        GAME_LOG.append("=== NEW GAME STARTED ===\n");
 
         System.out.println("Starting new game thread...");
 
@@ -864,6 +1060,9 @@ public class ForgeHeadlessServer {
     private static void updateGameState(final Game game) {
         final JsonObject state = new JsonObject();
         try {
+            // Add unique game ID
+            state.addProperty("game_id", currentGameId);
+
             state.addProperty("turn", game.getPhaseHandler().getTurn());
             if (game.getPhaseHandler().getPhase() != null) {
                 state.addProperty("phase", game.getPhaseHandler().getPhase().toString());
@@ -924,24 +1123,76 @@ public class ForgeHeadlessServer {
                         // Add battlefield state for both players
                         final JsonObject battlefield = new JsonObject();
 
-                        // Player 1 creatures (our agent)
+                        // Player 1 creatures (our agent) with full details
                         final JsonArray player1Creatures = new JsonArray();
                         for (final Card creature : agent.getCreaturesInPlay()) {
-                            player1Creatures.add(creature.toString());
+                            player1Creatures.add(buildCreatureJson(creature));
                         }
                         battlefield.add("player1_creatures", player1Creatures);
 
-                        // Player 2 creatures (opponent)
+                        // Player 2 creatures (opponent) with full details
                         final Player opponent = agent.getSingleOpponent();
                         if (opponent != null) {
                             final JsonArray player2Creatures = new JsonArray();
                             for (final Card creature : opponent.getCreaturesInPlay()) {
-                                player2Creatures.add(creature.toString());
+                                player2Creatures.add(buildCreatureJson(creature));
                             }
                             battlefield.add("player2_creatures", player2Creatures);
                         }
 
+                        // Add lands for both players
+                        final JsonArray player1Lands = new JsonArray();
+                        for (final Card land : agent.getLandsInPlay()) {
+                            JsonObject landInfo = new JsonObject();
+                            landInfo.addProperty("name", land.getName());
+                            landInfo.addProperty("tapped", land.isTapped());
+                            player1Lands.add(landInfo);
+                        }
+                        battlefield.add("player1_lands", player1Lands);
+
+                        if (opponent != null) {
+                            final JsonArray player2Lands = new JsonArray();
+                            for (final Card land : opponent.getLandsInPlay()) {
+                                JsonObject landInfo = new JsonObject();
+                                landInfo.addProperty("name", land.getName());
+                                landInfo.addProperty("tapped", land.isTapped());
+                                player2Lands.add(landInfo);
+                            }
+                            battlefield.add("player2_lands", player2Lands);
+                        }
+
                         state.add("battlefield", battlefield);
+
+                        // Add player stats (public information)
+                        final JsonObject player1Stats = new JsonObject();
+                        player1Stats.addProperty("life", agent.getLife());
+                        player1Stats.addProperty("hand_size", agent.getCardsIn(ZoneType.Hand).size());
+                        player1Stats.addProperty("library_size", agent.getCardsIn(ZoneType.Library).size());
+                        player1Stats.addProperty("poison_counters", agent.getPoisonCounters());
+
+                        // Graveyard contents (public info)
+                        final JsonArray player1Graveyard = new JsonArray();
+                        for (final Card c : agent.getCardsIn(ZoneType.Graveyard)) {
+                            player1Graveyard.add(c.getName());
+                        }
+                        player1Stats.add("graveyard", player1Graveyard);
+                        state.add("player1", player1Stats);
+
+                        if (opponent != null) {
+                            final JsonObject player2Stats = new JsonObject();
+                            player2Stats.addProperty("life", opponent.getLife());
+                            player2Stats.addProperty("hand_size", opponent.getCardsIn(ZoneType.Hand).size());
+                            player2Stats.addProperty("library_size", opponent.getCardsIn(ZoneType.Library).size());
+                            player2Stats.addProperty("poison_counters", opponent.getPoisonCounters());
+
+                            // Opponent graveyard contents (public info)
+                            final JsonArray player2Graveyard = new JsonArray();
+                            for (final Card c : opponent.getCardsIn(ZoneType.Graveyard)) {
+                                player2Graveyard.add(c.getName());
+                            }
+                            player2Stats.add("graveyard", player2Graveyard);
+                            state.add("player2", player2Stats);
+                        }
 
                         // Add combat information (attackers and blockers)
                         final Combat combat = game.getCombat();

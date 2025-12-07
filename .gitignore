@@ -99,3 +99,6 @@ travis_test_file.py
 # Local maven installation
 apache-maven-*
 *.tar.gz
+
+# Game log files
+game_log*.txt

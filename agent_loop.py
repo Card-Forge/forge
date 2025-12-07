@@ -37,13 +37,59 @@ def forge_request(endpoint, data=None):
 
 def policy_request(game_state):
     """Send game state to policy and get action index."""
+    
+    # Parse hand - handle both string and object formats
+    raw_hand = game_state.get("hand", [])
+    hand = []
+    for card in raw_hand:
+        if isinstance(card, str):
+            hand.append(card)
+        elif isinstance(card, dict):
+            hand.append(card.get("name", str(card)))
+        else:
+            hand.append(str(card))
+    
+    # Transform to cleaner format for LLM consumption
+    structured_payload = {
+        "gameState": {
+            "game_id": game_state.get("game_id", ""),
+            "turn": game_state.get("turn", 0),
+            "phase": game_state.get("phase", "UNKNOWN"),
+            "game_over": game_state.get("game_over", False),
+            "hand": hand,
+            "library_count": game_state.get("library_count", 0),
+            "battlefield": game_state.get("battlefield", {}),
+            "player1": game_state.get("player1", {}),
+            "player2": game_state.get("player2", {}),
+            "combat": game_state.get("combat", {})
+        },
+        "actionState": {
+            "possible_actions": [
+                {
+                    "index": i,
+                    "type": action.get("type", "unknown"),
+                    "card": action.get("card_name", ""),
+                    "mana_cost": action.get("mana_cost", ""),
+                    "requires_targets": action.get("requires_targets", False)
+                }
+                for i, action in enumerate(game_state.get("possible_actions", {}).get("actions", []))
+            ]
+        }
+    }
+    
     req = urllib.request.Request(POLICY_URL)
-    req.data = json.dumps(game_state).encode('utf-8')
+    payload = json.dumps(structured_payload).encode('utf-8')
+    req.data = payload
     req.add_header('Content-Type', 'application/json')
+    
+    # Debug: show what we're sending
+    print(f"  [DEBUG] Sending to policy: {len(payload)} bytes")
+    print(f"  [DEBUG] Actions available: {len(structured_payload['actionState']['possible_actions'])}")
     
     try:
         with urllib.request.urlopen(req, timeout=60) as resp:
             result = json.load(resp)
+            print(f"  [DEBUG] Policy response: {result}")
             # Handle various response formats
             if isinstance(result, dict):
                 return result.get('action_index', result.get('index', 0))
@@ -74,6 +120,7 @@ def run_game(scenario=None):
     turn = 0
     step = 0
     max_steps = 500  # Safety limit
+    game_log = []  # Collect game log entries
     
     while not state.get("game_over") and step < max_steps:
         step += 1
@@ -83,12 +130,14 @@ def run_game(scenario=None):
         if current_turn != turn:
             turn = current_turn
             print(f"\n--- Turn {turn} ---")
+            game_log.append(f"\n=== Turn {turn} ===")
         
         actions = state.get("possible_actions", {}).get("actions", [])
         action_count = len(actions)
         
         if action_count == 0:
             print("No actions available!")
+            game_log.append("No actions available!")
             break
         
         # Get action from policy
@@ -105,15 +154,19 @@ def run_game(scenario=None):
         card_name = chosen_action.get("card_name", "")
         
         if action_type == "pass_priority":
-            print(f"  [{phase}] Pass priority")
+            log_entry = f"[{phase}] Pass priority"
         else:
-            print(f"  [{phase}] {action_type}: {card_name}")
+            log_entry = f"[{phase}] {action_type}: {card_name}"
+        
+        print(f"  {log_entry}")
+        game_log.append(log_entry)
         
         # Execute the action
         state = forge_request("/api/step", f"play_action {action_index}")
         
         if not state:
             print("Failed to get state after action!")
+            game_log.append("ERROR: Failed to get state after action!")
             break
     
     if step >= max_steps:
@@ -124,6 +177,17 @@ def run_game(scenario=None):
         print("\n" + "=" * 60)
         print("GAME OVER")
         # You can add more end-game stats here
+    
+    # Save game log
+    if game_log:
+        log_file = f"game_log_{int(time.time())}.txt"
+        with open(log_file, 'w') as f:
+            f.write("=" * 60 + "\n")
+            f.write("FORGE HEADLESS GAME LOG\n")
+            f.write("=" * 60 + "\n\n")
+            for entry in game_log:
+                f.write(entry + "\n")
+        print(f"\nGame log saved to: {log_file}")
     
     return state
 
