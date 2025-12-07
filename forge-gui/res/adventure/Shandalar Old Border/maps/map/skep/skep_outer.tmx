@@ -939,9 +939,9 @@
   </object>
   <object id="267" template="../../../../../../common/maps/obj/enemy.tx" x="330" y="540">
    <properties>
-    <property name="enemy" value="Slivdrazi Monstrosity" />
+    <property name="effect">{ "startBattleWithCard": [ "Metallic Sliver|TMP", "Metallic Sliver|TMP", "Metallic Sliver|TMP" ] }</property>
+    <property name="enemy" value="Metallic Sliver" />
     <property name="threatRange" type="int" value="60" />
-   <property name="effect">{"startBattleWithCard": ["Barbed Sliver|TMP", "Root Sliver|LGN"]}</property>
     </properties>
   </object>
  </objectgroup>
