@@ -26901,6 +26901,36 @@
         "probability": 1,
         "count": 15,
         "addMaxCount": 10
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Sulfurous Springs|ICE"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Mishra's Factory|ATQ|4"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Urza's Science Fair Project|UGL"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Goblin King|5ED"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Mirror Universe|LEG"
       }
     ],
     "colors": "UBR"
