@@ -104,7 +104,7 @@
     <property name="enemy" value="Knight" />
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="77,78" />
-   <property name="effect">{"startBattleWithCard": ["Plains|ICE", "Darkest Hour|USG"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Plains|2ED", "Darkest Hour|USG"]}</property>
 </properties>
   </object>
   <object id="80" template="../../../../../../common/maps/obj/enemy.tx" x="288" y="133.5">
@@ -112,7 +112,7 @@
     <property name="enemy" value="Knight" />
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="76,75" />
-   <property name="effect">{"startBattleWithCard": ["Plains|ICE", "Darkest Hour|USG"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Plains|2ED", "Darkest Hour|USG"]}</property>
 </properties>
   </object>
   <object id="81" template="../../../../../../common/maps/obj/enemy.tx" x="210" y="131.5">
@@ -120,7 +120,7 @@
     <property name="enemy" value="Knight" />
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="73,74" />
-   <property name="effect">{"startBattleWithCard": ["Plains|ICE", "Darkest Hour|USG"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Plains|2ED", "Darkest Hour|USG"]}</property>
 </properties>
   </object>
  </objectgroup>

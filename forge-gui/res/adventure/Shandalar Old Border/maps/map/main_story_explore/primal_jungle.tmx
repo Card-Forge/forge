@@ -231,7 +231,7 @@
    <properties>
     <property name="enemy" value="Gorilla Chief" />
     <property name="threatRange" type="int" value="60" />
-   <property name="effect">{"startBattleWithCard": ["Plains|ICE", "Island|2ED", "Swamp|2ED", "Mountain|2ED", "Forest|ICE", "Ley Line|MMQ", "Hidden Ancients|USG", "Hidden Guerrillas|USG", "Hidden Herd|USG", "Hidden Predators|USG", "Hidden Spider|USG", "Hidden Stag|USG", "Hidden Gibbons|ULG"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Plains|2ED", "Island|2ED", "Swamp|2ED", "Mountain|2ED", "Forest|2ED", "Ley Line|MMQ", "Hidden Ancients|USG", "Hidden Guerrillas|USG", "Hidden Herd|USG", "Hidden Predators|USG", "Hidden Spider|USG", "Hidden Stag|USG", "Hidden Gibbons|ULG"]}</property>
     </properties>
   </object>
   <object id="1" template="../../../../../../common/maps/obj/collision.tx" x="-32" y="0" width="32" height="640" />

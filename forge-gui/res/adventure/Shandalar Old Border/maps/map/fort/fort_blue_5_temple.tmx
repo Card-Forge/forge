@@ -50,7 +50,6 @@
    <properties>
     <property name="effect">{ "startBattleWithCard": [ "Island|USG|1", "Island|USG|2", "Lord of Atlantis|LEA", "Tidal Warrior|STH" ] }</property>
     <property name="enemy" value="Merfolk Elite" />
-   <property name="effect">{ "startBattleWithCard": [ "Island|USG|2", "Island|USG|2", "Lord of Atlantis|LEA", "Tidal Warrior|STH" ] }</property>
     <property name="speedModifier" type="float" value="4" />
     <property name="threatRange" type="int" value="50" />
    </properties>

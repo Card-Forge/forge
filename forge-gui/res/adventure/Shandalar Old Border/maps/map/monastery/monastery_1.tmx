@@ -80,7 +80,7 @@
    <properties>
     <property name="enemy" value="Dark Ages Preacher"/>
     <property name="threatRange" type="int" value="40"/>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [&quot;Plains|ICE&quot;, &quot;Plains|ICE&quot;, &quot;Plains|ICE&quot;, &quot;Preacher|DRK&quot;, &quot;Exorcist|DRK&quot;, &quot;Witch Hunter|DRK&quot;] }</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [&quot;Plains|2ED&quot;, &quot;Plains|2ED&quot;, &quot;Plains|2ED&quot;, &quot;Preacher|DRK&quot;, &quot;Exorcist|DRK&quot;, &quot;Witch Hunter|DRK&quot;] }</property>
    </properties>
   </object>
   <object id="59" template="../../../../../../common/maps/obj/booster.tx" x="287.785" y="162.879">
