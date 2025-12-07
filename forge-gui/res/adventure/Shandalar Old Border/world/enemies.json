@@ -32018,7 +32018,7 @@
     "name": "Mill Mole",
     "sprite": "sprites/enemy/beast/nakedmolerat.atlas",
     "deck": [
-      "decks/castle_npc/mill_mole.dck"
+      "decks/elite/mill_mole.dck"
     ],
     "ai": "cautious",
     "spawnRate": 1,
