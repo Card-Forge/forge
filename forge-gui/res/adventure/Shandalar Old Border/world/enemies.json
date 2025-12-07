@@ -5493,7 +5493,7 @@
     "name": "Copper Host Infector",
     "sprite": "sprites/enemy/aberration/copperhostinfector.atlas",
     "deck": [
-      "decks/standard/copperhostinfector.json"
+      "decks/standard/copperhostinfector.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -7919,7 +7919,7 @@
     "name": "Dross Gladiator",
     "sprite": "sprites/enemy/aberration/drossgladiator.atlas",
     "deck": [
-      "decks/standard/drossgladiator.json"
+      "decks/standard/drossgladiator.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -10822,7 +10822,7 @@
     "name": "Furnace Goblin",
     "sprite": "sprites/enemy/aberration/furnacegoblin.atlas",
     "deck": [
-      "decks/standard/furnacegoblin.json"
+      "decks/standard/furnacegoblin.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -12168,7 +12168,7 @@
     "name": "Gitaxian Underling",
     "sprite": "sprites/enemy/aberration/gitaxianunderling.atlas",
     "deck": [
-      "decks/standard/gitaxianunderling.json"
+      "decks/standard/gitaxianunderling.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -22006,7 +22006,7 @@
     "name": "Orthodoxy Duelist",
     "sprite": "sprites/enemy/aberration/phyrexianduelist.atlas",
     "deck": [
-      "decks/standard/phyrexianduelist.json"
+      "decks/standard/phyrexianduelist.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
