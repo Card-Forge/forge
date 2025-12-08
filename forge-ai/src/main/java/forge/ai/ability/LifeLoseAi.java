@@ -14,10 +14,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
-import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
-
-import java.util.List;
 
 public class LifeLoseAi extends SpellAbilityAi {
 
@@ -163,17 +160,18 @@ public class LifeLoseAi extends SpellAbilityAi {
      * forge.game.spellability.SpellAbility, boolean)
      */
     @Override
-    protected AiAbilityDecision doTriggerNoCost(final Player ai, final SpellAbility sa,
-                                                final boolean mandatory) {
-        if (sa.usesTargeting()) {
-            if (!doTgt(ai, sa, mandatory)) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            }
+    protected AiAbilityDecision doTriggerNoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
+        if (sa.usesTargeting() && !doTgt(ai, sa, mandatory)) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
+        if (mandatory) {
+            return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
         }
 
         final Card source = sa.getHostCard();
         final String amountStr = sa.getParam("LifeAmount");
-        int amount = 0;
+        int amount;
         if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, true);
@@ -183,25 +181,15 @@ public class LifeLoseAi extends SpellAbilityAi {
             amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }
 
-        final List<Player> tgtPlayers = sa.usesTargeting() && !sa.hasParam("Defined")
-                ? new FCollection<>(sa.getTargets().getTargetPlayers())
-                : AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
-
-        // For cards like Foul Imp, ETB you lose life
-        if (mandatory) {
-            return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
-        }
-
-        if (!tgtPlayers.contains(ai) || amount <= 0 || amount + 3 <= ai.getLife()) {
+        // For cards like Foul Imp: ETB you lose life
+        if (!getPlayers(ai, sa).contains(ai) || amount <= 0 || amount + 3 <= ai.getLife()) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
-    public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid,
-                                     FCollectionView<Player> payers) {
+    public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         if (!payer.canLoseLife() || payer.cantLoseForZeroOrLessLife()) {
             return false;
         }
