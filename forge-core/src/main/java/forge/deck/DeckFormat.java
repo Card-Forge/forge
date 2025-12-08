@@ -68,6 +68,14 @@ public enum DeckFormat {
     Commander      ( Range.is(99),                         Range.of(0, 10), 1, null,
             card -> StaticData.instance().getCommanderPredicate().test(card)
     ),
+    RogueCommander ( Range.of(40, 45),                    Range.of(0, 10), 1, null,
+            card -> StaticData.instance().getCommanderPredicate().test(card)
+    ) {
+        @Override
+        public boolean hasCommander() {
+            return true;
+        }
+    },
     Oathbreaker      ( Range.is(58),                         Range.of(0, 10), 1, null,
             card -> StaticData.instance().getOathbreakerPredicate().test(card)
     ),
