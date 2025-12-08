@@ -65,7 +65,6 @@ public abstract class SpellAbilityAi {
 
     protected AiAbilityDecision canPlayWithoutRestrict(final Player ai, final SpellAbility sa) {
         final Card source = sa.getHostCard();
-        final Cost cost = sa.getPayCosts();
 
         if (sa.hasParam("AILogic")) {
             final String logic = sa.getParam("AILogic");
@@ -89,6 +88,7 @@ public abstract class SpellAbilityAi {
         }
 
         // needs to be after API logic because needs to check possible X Cost
+        final Cost cost = sa.getPayCosts();
         if (cost != null && !willPayCosts(ai, sa, cost, source)) {
             return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
         }

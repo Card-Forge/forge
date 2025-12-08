@@ -316,6 +316,9 @@ public class PermanentAi extends SpellAbilityAi {
 
     @Override
     protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        if (mandatory) {
+            return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
+        }
         if (!sa.metConditions()) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
@@ -324,20 +327,12 @@ public class PermanentAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
         final Cost cost = sa.getPayCosts();
-        final Card source = sa.getHostCard();
-        if (cost != null && !willPayCosts(ai, sa, cost, source)) {
+        if (cost != null && !willPayCosts(ai, sa, cost, sa.getHostCard())) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
         if (!checkPhaseRestrictions(ai, sa, ai.getGame().getPhaseHandler())) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
-        AiAbilityDecision decision = checkApiLogic(ai, sa);
-        if (decision.willingToPlay()) {
-            return decision;
-        } else if (mandatory) {
-            return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
-        } else {
-            return decision;
-        }
+        return checkApiLogic(ai, sa);
      }
 }
