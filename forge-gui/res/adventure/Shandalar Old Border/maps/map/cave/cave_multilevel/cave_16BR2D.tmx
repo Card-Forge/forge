@@ -39,7 +39,7 @@
    <properties>
     <property name="enemy" value="Master Blue Wizard" />
     <property name="threatRange" type="int" value="50" />
-   <property name="effect">{"startBattleWithCard": ["Hesitation|STH"]}</property>
+   <property name="effect">{ "startBattleWithCard": [ "Wall of Air|LEA", "Mox Sapphire|LEA" ] }</property>
     </properties>
   </object>
   <object id="68" template="../../../../../../../common/maps/obj/treasure.tx" x="207" y="252.25" />

@@ -157,7 +157,7 @@
     <property name="enemy" value="Hippo" />
     <property name="pursueRange" type="float" value="60" />
     <property name="threatRange" type="float" value="30" />
-   <property name="effect">{"startBattleWithCard": ["Bull Hippo|POR", "Island|POR", "Forest|POR", "Plains|POR"]}</property>
+   <property name="effect">{ "startBattleWithCard": [ "Bull Hippo|POR", "Forest|POR", "Island|POR", "Plains|POR" ] }</property>
     </properties>
   </object>
   <object id="86" template="../../../../../../common/maps/obj/enemy.tx" x="439" y="20" visible="1">

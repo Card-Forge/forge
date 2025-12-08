@@ -46,7 +46,7 @@
    <properties>
     <property name="enemy" value="Master Green Wizard" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Jayemdae Tome|LEB|1" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Wall of Brambles|LEA", "Mox Emerald|LEA" ] }</property></properties>
   </object>
   <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="111.281" y="326.714">
    <properties>

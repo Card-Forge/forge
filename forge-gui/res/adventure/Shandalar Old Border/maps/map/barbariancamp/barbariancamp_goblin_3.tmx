@@ -90,7 +90,7 @@
    <properties>
     <property name="enemy" value="Fire Giant" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Thran Dynamo|UDS" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Mountain|INV|1", "Mountain|INV|2", "Mountain|INV|3", "Mountain|INV|4", "Loafing Giant|INV" ] }</property></properties>
   </object>
   <object id="60" template="../../../../../../common/maps/obj/waypoint.tx" x="8.5" y="198" />
   <object id="61" template="../../../../../../common/maps/obj/waypoint.tx" x="260.333" y="302.667" width="16" height="14" />

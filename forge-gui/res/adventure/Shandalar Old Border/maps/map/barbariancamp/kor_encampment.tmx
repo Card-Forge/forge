@@ -57,7 +57,7 @@
    </properties>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/gold.tx" x="416.978" y="181.522"/>
-  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="471" y="285">
+  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="176" y="107.5">
    <properties>
     <property name="enemy" value="King Kane Ferguson"/>
     <property name="threatRange" type="int" value="30"/>
@@ -78,9 +78,10 @@
     <property name="waypoints" value="96,95"/>
    </properties>
   </object>
-  <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="176" y="107.5">
+  <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="471" y="285">
    <properties>
     <property name="enemy" value="Kor Warrior"/>
+    <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
   <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="413.724" y="311.841">

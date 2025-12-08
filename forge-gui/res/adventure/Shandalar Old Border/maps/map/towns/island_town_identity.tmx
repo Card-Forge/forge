@@ -82,7 +82,6 @@
   <object id="48" template="../../../../../../common/maps/obj/shop.tx" x="173.75" y="209.75" width="20.75" height="18.75">
    <properties>
     <property name="commonShopList" value="Island"/>
-    <property name="noRestock" type="bool" value="true"/>
    </properties>
   </object>
   <object id="52" template="../../../../../../common/maps/obj/quest.tx" x="159" y="146" width="34" height="16">

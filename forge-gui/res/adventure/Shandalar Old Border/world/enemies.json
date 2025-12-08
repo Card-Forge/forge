@@ -140,7 +140,7 @@
       "decks/standard/bluewizard_medium_midrange.dck",
       "decks/standard/bluewizard_medium_mill.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "randomizeDeck": true,
     "spawnRate": 0.75,
     "difficulty": 0.1,
@@ -196,7 +196,7 @@
       "decks/standard/greenwizard_medium_snakes.dck",
       "decks/standard/greenwizard_medium_trample.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.75,
     "difficulty": 0.1,
@@ -266,7 +266,7 @@
       "decks/standard/redwizard_easy_dragons.dck",
       "decks/standard/redwizard_easy_gauntletofmight.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.75,
     "difficulty": 0.1,
@@ -333,7 +333,7 @@
       "decks/standard/whitewizard_medium_control.dck",
       "decks/standard/whitewizard_medium_knight.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "randomizeDeck": true,
     "spawnRate": 0.75,
     "difficulty": 0.1,
@@ -892,7 +892,7 @@
     "deck": [
       "decks/standard/amphin_warrior.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 27,
@@ -1040,7 +1040,7 @@
     "deck": [
       "decks/standard/angelwarrior.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "flying": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -1127,7 +1127,7 @@
     "deck": [
       "decks/standard/amonkhet_minotaur.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -1211,9 +1211,9 @@
     "nameOverride": "Ape Behemoth",
     "sprite": "sprites/enemy/beast/behemoth.atlas",
     "deck": [
-      "decks/standard/ape.json"
+      "decks/standard/ape.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
@@ -1371,7 +1371,7 @@
       "decks/standard/bluewizard_apprentice_3.dck",
       "decks/standard/bluewizard_easy.json"
     ],
-    "ai": "",
+    "ai": "cautious",
     "flying": true,
     "randomizeDeck": true,
     "spawnRate": 1,
@@ -1444,7 +1444,7 @@
       "decks/standard/greenwizard_easy_vanilla.dck",
       "decks/standard/greenwizard_easy.json"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -1516,7 +1516,7 @@
       "decks/standard/redwizard_apprentice_1.dck",
       "decks/standard/redwizard_easy_3.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -1587,7 +1587,7 @@
       "decks/standard/whitewizard_easy_wanderer.dck",
       "decks/standard/whitewizard_easy_angelhuman.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "randomizeDeck": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -1656,7 +1656,7 @@
     "deck": [
       "decks/standard/jodah.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.8,
     "speed": 18,
@@ -1769,81 +1769,6 @@
       "IdentitySelesnya",
       "BiomeWhite",
       "Minion"
-    ]
-  },
-  {
-    "name": "Archer Elite",
-    "nameOverride": "",
-    "sprite": "sprites/enemy/humanoid/human/archer/bowmandefender.atlas",
-    "deck": [
-      "decks/standard/archerelite.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 25,
-    "life": 25,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Green",
-          "White"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "GW",
-    "questTags": [
-      "Human",
-      "Archer",
-      "Soldier",
-      "Leader",
-      "IdentitySelesnya"
     ]
   },
   {
@@ -2055,7 +1980,8 @@
       "Mystic",
       "IdentityBlue",
       "Dungeon"
-    ]
+    ],
+    "ai": "cautious"
   },
   {
     "name": "Armadillo",
@@ -2063,7 +1989,7 @@
     "deck": [
       "decks/standard/armadillo.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 15,
@@ -2139,7 +2065,7 @@
     "deck": [
       "decks/standard/armored_knight.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 15,
@@ -2205,7 +2131,7 @@
     "deck": [
       "decks/elite/archmage.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 27,
@@ -2328,7 +2254,7 @@
     "deck": [
       "decks/standard/ashmouth_devil.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 31,
@@ -2404,7 +2330,7 @@
     "deck": [
       "decks/standard/axgard_dwarf.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 22,
@@ -2476,88 +2402,12 @@
     ]
   },
   {
-    "name": "Auramancer",
-    "nameOverride": "",
-    "sprite": "sprites/enemy/humanoid/elf/deftsorceress.atlas",
-    "deck": [
-      "decks/standard/enchantress.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 21,
-    "scale": 1.25,
-    "life": 20,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Blue",
-          "White"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "UW",
-    "questTags": [
-      "Human",
-      "IdentityAzorius",
-      "Archaeologist",
-      "Scientist",
-      "Artificer"
-    ]
-  },
-  {
     "name": "Badger",
     "sprite": "sprites/enemy/beast/badger.atlas",
     "deck": [
       "decks/standard/badger.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 15,
@@ -2629,7 +2479,7 @@
     "deck": [
       "decks/standard/bandit.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
@@ -2708,7 +2558,7 @@
       "decks/standard/bandit_mutate.dck",
       "decks/standard/bandit_zoo.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -2786,7 +2636,7 @@
       "decks/standard/banditarcher_blink.dck",
       "decks/standard/banditarcher_damage.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -2866,7 +2716,7 @@
       "decks/standard/banditleader_hellbent.dck",
       "decks/standard/banditleader_rakdos.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -2945,7 +2795,7 @@
       "decks/standard/banditslingshot_flyers.dck",
       "decks/standard/banditslingshot_vehicles.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -3022,7 +2872,7 @@
     "deck": [
       "decks/standard/bandittrapper_hazezon.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
@@ -3100,7 +2950,7 @@
     "deck": [
       "decks/elite/barbarian.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 21,
@@ -3224,9 +3074,9 @@
     "nameOverride": "Brown Bear",
     "sprite": "sprites/enemy/beast/bear.atlas",
     "deck": [
-      "decks/standard/bear.json"
+      "decks/standard/bear.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -3305,7 +3155,7 @@
     "deck": [
       "decks/standard/beastmaster.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
@@ -3534,9 +3384,9 @@
     "name": "Big Zombie",
     "sprite": "sprites/enemy/undead/zombie_2.atlas",
     "deck": [
-      "decks/standard/zombie_bad.json"
+      "decks/elite/zombie_bad.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 15,
@@ -3811,11 +3661,11 @@
     "name": "Boar",
     "sprite": "sprites/enemy/beast/boar.atlas",
     "deck": [
-      "decks/standard/boar.json",
+      "decks/standard/boar.dck",
       "decks/standard/boar_gruul.dck",
       "decks/standard/boar_monogreenlifegain.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.5,
     "difficulty": 0.4,
@@ -3887,7 +3737,7 @@
     "deck": [
       "decks/standard/eyeblight.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 27,
@@ -3965,7 +3815,7 @@
     "deck": [
       "decks/standard/bull.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.8,
     "speed": 31,
@@ -4028,65 +3878,13 @@
     ]
   },
   {
-    "name": "Bog Witch",
-    "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
-    "deck": [
-      "decks/standard/witch.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 24,
-    "life": 16,
-    "rewards": [
-      {
-        "type": "randomCard",
-        "probability": 0.5,
-        "count": 2,
-        "colors": [
-          "Black"
-        ],
-        "rarity": [
-          "uncommon",
-          "rare"
-        ]
-      },
-      {
-        "type": "gold",
-        "probability": 1,
-        "count": 50,
-        "addMaxCount": 100
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "rarity": [
-          "uncommon",
-          "common"
-        ],
-        "cardTypes": [
-          "Land"
-        ]
-      }
-    ],
-    "colors": "B",
-    "questTags": [
-      "Mystic",
-      "Unholy",
-      "Wizard",
-      "Human",
-      "IdentityBlack"
-    ]
-  },
-  {
     "name": "Bone Dragon",
     "nameOverride": "",
     "sprite": "sprites/enemy/dragon/bonedragon.atlas",
     "deck": [
       "decks/elite/bonedragon.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.3,
     "speed": 20,
@@ -4172,7 +3970,7 @@
     "deck": [
       "decks/elite/millwizard.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 27,
@@ -4297,7 +4095,7 @@
     "deck": [
       "decks/standard/caracal.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.8,
     "difficulty": 0.1,
@@ -4374,7 +4172,7 @@
     "deck": [
       "decks/standard/straycat.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.8,
     "difficulty": 0.1,
@@ -4500,7 +4298,7 @@
     "deck": [
       "decks/standard/cave_spider.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 23,
@@ -4564,7 +4362,7 @@
     "name": "Centaur",
     "sprite": "sprites/enemy/fey/centaur.atlas",
     "deck": [
-      "decks/standard/centaur.json"
+      "decks/standard/centaur.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -4601,7 +4399,7 @@
     "deck": [
       "decks/standard/centaur_warrior.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 30,
@@ -4679,7 +4477,7 @@
     "deck": [
       "decks/standard/cephalid.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "flying": true,
     "spawnRate": 0.8,
     "difficulty": 0.1,
@@ -4775,7 +4573,7 @@
     "deck": [
       "decks/standard/cerodon.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.2,
     "difficulty": 0.1,
     "speed": 25,
@@ -4859,7 +4657,7 @@
       "decks/standard/challenger_20_final_adventure.dck",
       "decks/standard/challenger_20_flash_of_ferocity.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.25,
     "difficulty": 0.25,
@@ -4944,7 +4742,7 @@
       "decks/standard/challenger_21_mono-green_stompy.dck",
       "decks/standard/challenger_21_mono-red_aggro.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.25,
     "difficulty": 0.25,
@@ -5029,7 +4827,7 @@
       "decks/standard/challenger_22_mono_white_aggro.dck",
       "decks/standard/challenger_22_rakdos_vampires.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.25,
     "difficulty": 0.25,
@@ -5236,7 +5034,7 @@
     "name": "Clay Golem",
     "sprite": "sprites/enemy/construct/golem_2.atlas",
     "deck": [
-      "decks/standard/golem_good.json"
+      "decks/standard/golem_good.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -5282,9 +5080,9 @@
     "name": "Cleric",
     "sprite": "sprites/enemy/humanoid/human/cleric/cleric.atlas",
     "deck": [
-      "decks/standard/cleric.json"
+      "decks/standard/cleric.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
@@ -5359,159 +5157,6 @@
       "Holy",
       "IdentityWhite",
       "BiomeWhite"
-    ]
-  },
-  {
-    "name": "Cloud Giant",
-    "sprite": "sprites/enemy/giant/godlytitan.atlas",
-    "deck": [
-      "decks/standard/cloudgiant.dck"
-    ],
-    "ai": "",
-    "randomizeDeck": true,
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 31,
-    "scale": 0.8,
-    "life": 25,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "White",
-          "Blue",
-          "Green"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "WUG",
-    "questTags": [
-      "Aberration",
-      "Giant",
-      "IdentityBant",
-      "Guard"
-    ]
-  },
-  {
-    "name": "Cloud Guardian",
-    "sprite": "sprites/enemy/celestial/peerlesssolar.atlas",
-    "deck": [
-      "decks/standard/cloudguard.dck"
-    ],
-    "ai": "",
-    "flying": true,
-    "randomizeDeck": true,
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 31,
-    "scale": 0.8,
-    "life": 25,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "White",
-          "Blue"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "WU",
-    "questTags": [
-      "Angel",
-      "Guardian",
-      "IdentityAzorius",
-      "Celestial",
-      "Holy"
     ]
   },
   {
@@ -5848,7 +5493,7 @@
     "name": "Copper Host Infector",
     "sprite": "sprites/enemy/aberration/copperhostinfector.atlas",
     "deck": [
-      "decks/standard/copperhostinfector.json"
+      "decks/standard/copperhostinfector.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -5928,7 +5573,7 @@
     "deck": [
       "decks/standard/bluewiz_corrupted.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0.2,
     "difficulty": 0.1,
     "speed": 25,
@@ -6139,7 +5784,7 @@
     "deck": [
       "decks/standard/redwiz_corrupted.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.2,
     "difficulty": 0.1,
     "speed": 25,
@@ -6278,7 +5923,7 @@
       "decks/standard/crab.dck",
       "decks/standard/giant_crab.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "randomizeDeck": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -6435,7 +6080,7 @@
     "deck": [
       "decks/standard/crocodile.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "flying": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -6554,7 +6199,7 @@
     "deck": [
       "decks/standard/cyclops.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 16,
@@ -6593,91 +6238,12 @@
     ]
   },
   {
-    "name": "Giant Cyclops",
-    "sprite": "sprites/enemy/giant/cyclops_large.atlas",
-    "deck": [
-      "decks/standard/luckyminotaur.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 16,
-    "scale": 0.7,
-    "life": 30,
-    "rewards": [
-      {
-        "type": "gold",
-        "probability": 1,
-        "count": 100,
-        "addMaxCount": 200
-      },
-      {
-        "type": "shards",
-        "probability": 1,
-        "count": 10,
-        "addMaxCount": 10
-      },
-      {
-        "type": "item",
-        "probability": 1,
-        "count": 1,
-        "itemName": "Lucky Clover"
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Chaos Orb|LEA"
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Falling Star|LEG"
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Goblin Bomb|WTH"
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 1,
-        "cardName": "Bottle of Suleiman|ARN"
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 1,
-        "cardName": "Mijae Djinn|ARN"
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 1,
-        "cardName": "Ydwen Efreet|ARN"
-      }
-    ],
-    "colors": "UR",
-    "questTags": [
-      "Humanoid",
-      "Giant",
-      "Barbarian",
-      "Loner",
-      "Mythical",
-      "IdentityRed",
-      "BiomeRed"
-    ]
-  },
-  {
     "name": "Mountain Ogre",
     "sprite": "sprites/enemy/monstrosity/ogre_large.atlas",
     "deck": [
       "decks/standard/ogre_large.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 16,
@@ -6734,7 +6300,7 @@
     "deck": [
       "decks/standard/hermitcrab.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 15,
@@ -6811,7 +6377,7 @@
     "deck": [
       "decks/standard/hedgehog.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 15,
@@ -6956,7 +6522,7 @@
     "deck": [
       "decks/standard/death_knight.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.8,
     "difficulty": 0.1,
     "speed": 30,
@@ -7277,7 +6843,7 @@
     "name": "Demon",
     "sprite": "sprites/enemy/fiend/demon_3.atlas",
     "deck": [
-      "decks/standard/demon.json",
+      "decks/standard/demon.dck",
       "decks/standard/demonshard.dck",
       "decks/standard/demonblackred.dck",
       "decks/standard/demonmonoblack.dck"
@@ -7380,7 +6946,7 @@
     "deck": [
       "decks/miniboss/tibalt_demon.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "flying": true,
     "randomizeDeck": true,
     "spawnRate": 1,
@@ -7451,7 +7017,7 @@
     "deck": [
       "decks/standard/demoncaller.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -7505,7 +7071,7 @@
     "deck": [
       "decks/standard/imp.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
@@ -7560,7 +7126,7 @@
     "deck": [
       "decks/standard/tibalt_devil.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
@@ -7620,7 +7186,7 @@
     "deck": [
       "decks/standard/dimir_faerie.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "flying": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -7696,7 +7262,7 @@
     "deck": [
       "decks/standard/dinosaurelite.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 15,
@@ -7779,7 +7345,7 @@
     "deck": [
       "decks/standard/dinosaur_w_r.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 15,
@@ -7833,7 +7399,7 @@
     "deck": [
       "decks/standard/disciple_of_teferi.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 23,
@@ -7996,7 +7562,7 @@
       "decks/standard/dog.dck",
       "decks/standard/dog_w_beginner.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -8271,7 +7837,7 @@
       "decks/standard/drake_ur_mid.dck",
       "decks/standard/drake_ur_unfair.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "flying": true,
     "randomizeDeck": true,
     "spawnRate": 0.5,
@@ -8353,7 +7919,7 @@
     "name": "Dross Gladiator",
     "sprite": "sprites/enemy/aberration/drossgladiator.atlas",
     "deck": [
-      "decks/standard/drossgladiator.json"
+      "decks/standard/drossgladiator.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -8520,13 +8086,13 @@
     "name": "Dwarf",
     "sprite": "sprites/enemy/humanoid/dwarf/dwarf_2.atlas",
     "deck": [
-      "decks/standard/dwarf.json"
+      "decks/standard/dwarf.dck"
     ],
     "ai": "",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 22,
-    "life": 13,
+    "life": 20,
     "rewards": [
       {
         "type": "deckCard",
@@ -8685,7 +8251,7 @@
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
-    "life": 13,
+    "life": 20,
     "rewards": [
       {
         "type": "deckCard",
@@ -8765,11 +8331,11 @@
     "deck": [
       "decks/standard/dwarfpilot.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
-    "life": 13,
+    "life": 20,
     "rewards": [
       {
         "type": "deckCard",
@@ -8834,81 +8400,6 @@
       "Bandit",
       "Pilot",
       "IdentityBoros",
-      "Artificer"
-    ]
-  },
-  {
-    "name": "Dwarf Warlord",
-    "nameOverride": "",
-    "sprite": "sprites/enemy/humanoid/dwarf/dwarflarge.atlas",
-    "deck": [
-      "decks/standard/dwarf_whitecastle.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 21,
-    "scale": 0.75,
-    "life": 20,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "White"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "W",
-    "questTags": [
-      "Dwarf",
-      "Humanoid",
-      "Warlord",
-      "Leader",
       "Artificer"
     ]
   },
@@ -8992,7 +8483,7 @@
     "deck": [
       "decks/standard/efreet.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "flying": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -9374,7 +8865,7 @@
     "nameOverride": "War Mammoth",
     "sprite": "sprites/enemy/beast/elephant.atlas",
     "deck": [
-      "decks/elite/elephant.json"
+      "decks/elite/elephant.dck"
     ],
     "ai": "",
     "spawnRate": 0.8,
@@ -9429,7 +8920,7 @@
     "deck": [
       "decks/standard/elemental_air.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 31,
@@ -9566,7 +9057,7 @@
     "deck": [
       "decks/standard/elk.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 29,
@@ -10207,7 +9698,7 @@
     "deck": [
       "decks/standard/death_knight.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 30,
@@ -10447,7 +9938,7 @@
     "deck": [
       "decks/standard/firedragon.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.3,
     "speed": 20,
@@ -10523,7 +10014,7 @@
     "deck": [
       "decks/standard/fire_elemental.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "flying": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -10671,7 +10162,7 @@
     "deck": [
       "decks/standard/flame_elemental.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 23,
@@ -10820,7 +10311,7 @@
     "deck": [
       "decks/standard/flying_witch.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "flying": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -10884,7 +10375,7 @@
     "deck": [
       "decks/standard/turbofog.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 15,
@@ -11031,16 +10522,15 @@
     "name": "Fox",
     "sprite": "sprites/enemy/beast/fox.atlas",
     "deck": [
-      "decks/standard/fox.json",
-      "decks/standard/fox_greenwhite.dck"
+      "decks/standard/fox.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "randomizeDeck": true,
     "spawnRate": 0.6,
     "difficulty": 0.1,
     "speed": 20,
     "scale": 0.7,
-    "life": 10,
+    "life": 20,
     "rewards": [
       {
         "type": "deckCard",
@@ -11095,7 +10585,7 @@
     "name": "Frog",
     "sprite": "sprites/enemy/beast/frog.atlas",
     "deck": [
-      "decks/standard/frog.json"
+      "decks/standard/frog.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -11240,7 +10730,7 @@
     "name": "Fungus",
     "sprite": "sprites/enemy/plant/fungus.atlas",
     "deck": [
-      "decks/standard/fungus.json"
+      "decks/standard/fungus.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -11332,7 +10822,7 @@
     "name": "Furnace Goblin",
     "sprite": "sprites/enemy/aberration/furnacegoblin.atlas",
     "deck": [
-      "decks/standard/furnacegoblin.json"
+      "decks/standard/furnacegoblin.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -11500,9 +10990,9 @@
     "nameOverride": "Obsidian Gargoyle",
     "sprite": "sprites/enemy/construct/gargoyle.atlas",
     "deck": [
-      "decks/standard/gargoyle.dck"
+      "decks/standard/gargoyle_obsidian.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "flying": true,
     "spawnRate": 0.5,
     "difficulty": 0.1,
@@ -11593,7 +11083,7 @@
     "deck": [
       "decks/standard/gargoyle.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "flying": true,
     "spawnRate": 0.5,
     "difficulty": 0.1,
@@ -12157,7 +11647,7 @@
     "deck": [
       "decks/standard/geistmage.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 18,
@@ -12240,7 +11730,7 @@
     "deck": [
       "decks/standard/ghoul.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 15,
@@ -12332,7 +11822,7 @@
     "nameOverride": "Haunting Apparition",
     "sprite": "sprites/enemy/undead/ghost_2.atlas",
     "deck": [
-      "decks/standard/ghost.json"
+      "decks/standard/ghost.dck"
     ],
     "ai": "",
     "flying": true,
@@ -12478,7 +11968,7 @@
     "deck": [
       "decks/standard/giantpanda.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 13,
@@ -12554,7 +12044,7 @@
     "deck": [
       "decks/standard/spider_token.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 23,
@@ -12678,7 +12168,7 @@
     "name": "Gitaxian Underling",
     "sprite": "sprites/enemy/aberration/gitaxianunderling.atlas",
     "deck": [
-      "decks/standard/gitaxianunderling.json"
+      "decks/standard/gitaxianunderling.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -12824,7 +12314,7 @@
     "deck": [
       "decks/standard/sandwurm.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "life": 12,
@@ -13278,7 +12768,7 @@
     "deck": [
       "decks/elite/gorilla.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.8,
     "speed": 18,
@@ -13442,92 +12932,13 @@
     ]
   },
   {
-    "name": "Gladiator",
-    "nameOverride": "",
-    "sprite": "sprites/enemy/humanoid/human/warrior/gladiator.atlas",
-    "deck": [
-      "decks/standard/gladiator.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 21,
-    "life": 18,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Red"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "R",
-    "questTags": [
-      "Humanoid",
-      "Barbarian",
-      "Aggressive",
-      "Fighter",
-      "Human",
-      "Warrior",
-      "IdentityRed",
-      "IdentityBoros",
-      "IdentityWhite",
-      "Gladiator"
-    ]
-  },
-  {
     "name": "Goblin",
     "nameOverride": "Goblin Worker",
     "sprite": "sprites/enemy/humanoid/goblin/goblin.atlas",
     "deck": [
       "decks/standard/goblin_warrior_easy.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 27,
@@ -13583,7 +12994,7 @@
     "deck": [
       "decks/standard/goblin_artificer.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.3,
     "speed": 27,
@@ -13657,7 +13068,7 @@
     "deck": [
       "decks/standard/goblin_chief_medium.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 29,
@@ -13709,7 +13120,7 @@
     "deck": [
       "decks/standard/goblin_fanatic.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 29,
@@ -13791,7 +13202,7 @@
     "deck": [
       "decks/elite/goblinking.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 27,
@@ -13846,103 +13257,12 @@
     ]
   },
   {
-    "name": "Goblin Pack",
-    "sprite": "sprites/enemy/humanoid/goblin/goblin_group.atlas",
-    "deck": [
-      "decks/standard/goblin_bad.json"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 27,
-    "life": 20,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Red"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "R",
-    "nextEnemy": {
-      "name": "Goblin",
-      "deck": [
-        "decks/standard/goblin_bad.json"
-      ],
-      "ai": "",
-      "life": 8,
-      "nextEnemy": {
-        "name": "Goblin",
-        "deck": [
-          "decks/standard/goblin_bad.json"
-        ],
-        "ai": "",
-        "life": 8,
-        "teamNumber": 1
-      },
-      "teamNumber": 1
-    },
-    "teamNumber": 1,
-    "questTags": [
-      "Goblin",
-      "Horde",
-      "Aggressive",
-      "IdentityRed"
-    ]
-  },
-  {
     "name": "Goblin Stalker",
     "sprite": "sprites/enemy/humanoid/goblin/goblin_4.atlas",
     "deck": [
       "decks/elite/evilgoblin.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 29,
@@ -13990,9 +13310,9 @@
     "name": "Goblin Warrior",
     "sprite": "sprites/enemy/humanoid/goblin/wolf_rider.atlas",
     "deck": [
-      "decks/standard/goblin_mid.json"
+      "decks/standard/goblin_mid.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 28,
@@ -14069,7 +13389,7 @@
     "nameOverride": "Rusted Golem",
     "sprite": "sprites/enemy/construct/golem.atlas",
     "deck": [
-      "decks/standard/golem.json",
+      "decks/standard/golem.dck",
       "decks/standard/rustic_golem.dck"
     ],
     "ai": "",
@@ -14166,82 +13486,6 @@
       "IdentityColorless",
       "Construct",
       "Dungeon"
-    ]
-  },
-  {
-    "name": "Golgari Elf",
-    "sprite": "sprites/enemy/humanoid/elf/elf_golgari.atlas",
-    "deck": [
-      "decks/standard/elf_golgari.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.2,
-    "speed": 24,
-    "life": 20,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Black",
-          "Green"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "BG",
-    "questTags": [
-      "Elf",
-      "Humanoid",
-      "Tribal",
-      "IdentityBlack",
-      "IdentityGreen",
-      "IdentityGolgari",
-      "Leader"
     ]
   },
   {
@@ -14557,7 +13801,7 @@
     "nameOverride": "Giant Green Basilisk",
     "sprite": "sprites/enemy/monstrosity/basilisk.atlas",
     "deck": [
-      "decks/standard/beast_green.json"
+      "decks/standard/beast_green.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -14721,39 +13965,6 @@
       "IdentityWhite",
       "BiomeWhite"
     ]
-  },
-  {
-    "name": "Guardian Angel",
-    "sprite": "sprites/enemy/celestial/akroma.atlas",
-    "deck": [
-      "decks/miniboss/angel_rainbow_encounter.dck"
-    ],
-    "ai": "",
-    "difficulty": 0.2,
-    "speed": 20,
-    "life": 50,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "addMaxCount": 4
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 1,
-        "addMaxCount": 4,
-        "rarity": [
-          "rare"
-        ]
-      }
-    ],
-    "colors": "WUBRG",
-    "questTags": [
-      "Special Encounter"
-    ],
-    "boss": true
   },
   {
     "name": "Harpy",
@@ -14923,7 +14134,7 @@
     "deck": [
       "decks/standard/manticore.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 18,
@@ -14997,7 +14208,7 @@
     "deck": [
       "decks/standard/hellhound.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -15083,7 +14294,7 @@
     "deck": [
       "decks/standard/plant.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -15134,7 +14345,7 @@
     "deck": [
       "decks/standard/snake.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -15302,7 +14513,7 @@
     "name": "High Vampire",
     "sprite": "sprites/enemy/undead/vampire_2.atlas",
     "deck": [
-      "decks/standard/vampire.json"
+      "decks/standard/vampire_highvampire.dck"
     ],
     "ai": "",
     "flying": true,
@@ -15440,7 +14651,7 @@
     "deck": [
       "decks/standard/homarid.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0.8,
     "difficulty": 0.1,
     "speed": 15,
@@ -15578,7 +14789,7 @@
     "deck": [
       "decks/standard/tibalt_horror.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
@@ -16053,82 +15264,6 @@
     ]
   },
   {
-    "name": "Human Captain",
-    "nameOverride": "",
-    "sprite": "sprites/enemy/humanoid/human/knight/braveknight.atlas",
-    "deck": [
-      "decks/standard/humanelite.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 21,
-    "scale": 1.25,
-    "life": 20,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Blue",
-          "White"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "UW",
-    "questTags": [
-      "Human",
-      "IdentityAzorius",
-      "Archaeologist",
-      "Scientist",
-      "Artificer"
-    ]
-  },
-  {
     "name": "Human elite",
     "nameOverride": "Legionnaire",
     "sprite": "sprites/enemy/humanoid/human/soldier/legionite.atlas",
@@ -16182,7 +15317,7 @@
     "deck": [
       "decks/standard/human_mid.json"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
@@ -16316,7 +15451,7 @@
     "name": "Hydra",
     "sprite": "sprites/enemy/monstrosity/hydra.atlas",
     "deck": [
-      "decks/standard/hydra.json"
+      "decks/standard/hydra.dck"
     ],
     "ai": "",
     "spawnRate": 0.8,
@@ -16457,7 +15592,7 @@
     "deck": [
       "decks/elite/seraphim.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0.2,
     "difficulty": 0.1,
     "speed": 35,
@@ -16889,7 +16024,7 @@
     "deck": [
       "decks/standard/jackal.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.3,
     "difficulty": 0.1,
     "speed": 20,
@@ -16946,7 +16081,7 @@
     "deck": [
       "decks/miniboss/jace.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -17045,7 +16180,7 @@
     "deck": [
       "decks/standard/jellyfish.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "flying": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -17198,7 +16333,7 @@
     "deck": [
       "decks/standard/mardu.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 30,
@@ -17523,7 +16658,7 @@
     "deck": [
       "decks/elite/kobolddragoncaller.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 31,
@@ -17590,7 +16725,7 @@
     "deck": [
       "decks/standard/pyromancer.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -17657,7 +16792,7 @@
     "deck": [
       "decks/standard/roshnakhtheroic.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 31,
@@ -17723,7 +16858,7 @@
     "deck": [
       "decks/standard/kobold.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 31,
@@ -17784,95 +16919,13 @@
     ]
   },
   {
-    "name": "Kobold Trapmaster",
-    "nameOverride": "",
-    "sprite": "sprites/enemy/humanoid/kobold/koboldtrapmaster.atlas",
-    "deck": [
-      "decks/standard/koboldtrapmaster.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 31,
-    "scale": 0.75,
-    "life": 12,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Red",
-          "Black"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "RB",
-    "questTags": [
-      "Kobold",
-      "Coward",
-      "Sneaky",
-      "Small",
-      "Humanoid",
-      "Thief",
-      "IdentityRed",
-      "IdentityBlack",
-      "IdentityRakdos",
-      "BiomeRed",
-      "Trapmaster"
-    ]
-  },
-  {
     "name": "Kobold Warrior",
     "nameOverride": "",
     "sprite": "sprites/enemy/humanoid/kobold/koboldwarrior.atlas",
     "deck": [
       "decks/standard/kobold.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 31,
@@ -17931,93 +16984,12 @@
     ]
   },
   {
-    "name": "Kobold Worker",
-    "sprite": "sprites/enemy/humanoid/kobold/koboldworker.atlas",
-    "deck": [
-      "decks/standard/koboldworker.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 31,
-    "scale": 0.75,
-    "life": 12,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Red",
-          "Black"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "RB",
-    "questTags": [
-      "Kobold",
-      "Coward",
-      "Sneaky",
-      "Small",
-      "Humanoid",
-      "Thief",
-      "IdentityRed",
-      "IdentityBlack",
-      "IdentityRakdos",
-      "BiomeRed",
-      "Worker"
-    ]
-  },
-  {
     "name": "Kor Warrior",
     "sprite": "sprites/enemy/humanoid/kor/mineguard.atlas",
     "deck": [
       "decks/standard/kor_warrior.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 30,
@@ -18431,7 +17403,7 @@
     "deck": [
       "decks/standard/leoninwarrior.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 27,
@@ -18509,7 +17481,7 @@
     "deck": [
       "decks/standard/lightning_elemental.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "flying": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -18608,168 +17580,12 @@
     ]
   },
   {
-    "name": "Yawgmoth's Alchemist",
-    "sprite": "sprites/enemy/humanoid/human/wizard/dimir_wiz.atlas",
-    "deck": [
-      "decks/standard/dimir_ninja.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.2,
-    "speed": 24,
-    "life": 25,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 1,
-        "addMaxCount": 2,
-        "rarity": [
-          "uncommon"
-        ],
-        "cardTypes": [
-          "Creature",
-          "Artifact",
-          "Enchantment",
-          "Instant",
-          "Sorcery"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.5,
-        "count": 1,
-        "addMaxCount": 1,
-        "rarity": [
-          "rare"
-        ],
-        "cardTypes": [
-          "Creature",
-          "Artifact",
-          "Enchantment",
-          "Instant",
-          "Sorcery"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 0.3,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 150,
-        "addMaxCount": 150
-      }
-    ],
-    "colors": "BG",
-    "questTags": [
-      "Wizard",
-      "Necromancer",
-      "IdentityBlack",
-      "IdentityBlue",
-      "IdentityDimir",
-      "Poison",
-      "Liliana"
-    ]
-  },
-  {
-    "name": "Yawgmoth's Herbalist",
-    "sprite": "sprites/enemy/humanoid/human/wizard/black_wizard.atlas",
-    "deck": [
-      "decks/standard/lilianas_herbalist.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.2,
-    "speed": 24,
-    "life": 25,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Black",
-          "Green"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "BG",
-    "questTags": [
-      "Wizard",
-      "Necromancer",
-      "IdentityBlack",
-      "IdentityGreen",
-      "IdentityGolgari",
-      "Poison",
-      "Liliana"
-    ]
-  },
-  {
     "name": "Lion",
     "sprite": "sprites/enemy/beast/lion.atlas",
     "deck": [
       "decks/standard/lion.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.8,
     "difficulty": 0.1,
@@ -18948,7 +17764,7 @@
     "deck": [
       "decks/standard/mageripper.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -19215,7 +18031,7 @@
     "name": "Magma Fire Elemental",
     "sprite": "sprites/enemy/elemental/magmafireelemental.atlas",
     "deck": [
-      "decks/standard/magma_elemental.dck"
+      "decks/standard/magma_fire_elemental.dck"
     ],
     "ai": "",
     "flying": true,
@@ -19335,7 +18151,7 @@
       "decks/elite/bluewizard_hard_artifact.dck",
       "decks/elite/bluewizard_hard_bounce.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "flying": true,
     "randomizeDeck": true,
     "spawnRate": 0.5,
@@ -19388,7 +18204,7 @@
       "decks/elite/greenwizard_hard_rampbis.dck",
       "decks/elite/greenwizard_hard_sapproling.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.5,
     "difficulty": 0.1,
@@ -19441,7 +18257,7 @@
       "decks/standard/redwizard_hard_fight.dck",
       "decks/standard/redwizard_hard_lavaaxe.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.5,
     "difficulty": 0.1,
@@ -19496,7 +18312,7 @@
       "decks/standard/whitewizard_hard_armaggedon.dck",
       "decks/standard/whitewizard_hard_enchantments.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "randomizeDeck": true,
     "spawnRate": 0.5,
     "difficulty": 0.1,
@@ -19545,7 +18361,7 @@
     "nameOverride": "Merfolk Raider",
     "sprite": "sprites/enemy/elemental/waterelemental.atlas",
     "deck": [
-      "decks/standard/merfolk_bad.json"
+      "decks/standard/merfolk_bad.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -19622,7 +18438,7 @@
     "name": "Merfolk Avatar",
     "sprite": "sprites/enemy/elemental/iceelemental.atlas",
     "deck": [
-      "decks/standard/merfolk_good.json"
+      "decks/standard/merfolk_good.dck"
     ],
     "ai": "",
     "flying": true,
@@ -19766,7 +18582,7 @@
     "deck": [
       "decks/standard/merfolk_lords.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.2,
     "speed": 22,
@@ -19906,7 +18722,7 @@
     "deck": [
       "decks/standard/merfolk_v_goblins.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 22,
@@ -20036,7 +18852,7 @@
     "deck": [
       "decks/miniboss/sliver_metallicsliver.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "speed": 24,
     "life": 25,
@@ -20411,7 +19227,7 @@
       "decks/elite/minotaurmid.dck",
       "decks/elite/minotaurmonored.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -20552,7 +19368,7 @@
     "name": "Monk",
     "sprite": "sprites/enemy/humanoid/human/cleric/monk.atlas",
     "deck": [
-      "decks/standard/monk.json"
+      "decks/standard/monk.dck"
     ],
     "ai": "",
     "randomizeDeck": true,
@@ -20634,7 +19450,7 @@
     "name": "Monkey",
     "sprite": "sprites/enemy/beast/monkey_small.atlas",
     "deck": [
-      "decks/standard/ragavan.dck"
+      "decks/elite/ragavan.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -20861,7 +19677,7 @@
     "deck": [
       "decks/standard/nagawarrior.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -21486,7 +20302,7 @@
     "deck": [
       "decks/standard/octopus.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 15,
@@ -21546,12 +20362,12 @@
     "name": "Ooze",
     "sprite": "sprites/enemy/ooze/ooze.atlas",
     "deck": [
-      "decks/standard/ooze.json",
+      "decks/standard/ooze.dck",
       "decks/standard/ooze_greenblackred.dck",
       "decks/standard/ooze_monogreen.dck",
       "decks/standard/ooze_greenblue.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.3,
     "difficulty": 0.1,
@@ -21881,7 +20697,7 @@
     "deck": [
       "decks/standard/penguin.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0.3,
     "difficulty": 0.1,
     "speed": 24,
@@ -21953,7 +20769,7 @@
     "deck": [
       "decks/standard/pirate.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.8,
     "difficulty": 0.1,
     "speed": 24,
@@ -22035,7 +20851,7 @@
     "deck": [
       "decks/standard/pirate2.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.8,
     "difficulty": 0.1,
     "speed": 24,
@@ -22116,7 +20932,7 @@
     "deck": [
       "decks/standard/pirate3.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.8,
     "difficulty": 0.1,
     "speed": 24,
@@ -22196,7 +21012,7 @@
     "deck": [
       "decks/elite/pirate_captain.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.5,
     "difficulty": 0.1,
@@ -22266,86 +21082,6 @@
       "IdentityIzzet",
       "IdentityJund",
       "Leader",
-      "Pirate",
-      "Captain"
-    ]
-  },
-  {
-    "name": "Pirate Captain 2",
-    "nameOverride": "Pirate Captain",
-    "sprite": "sprites/enemy/humanoid/human/rogue/pirate3.atlas",
-    "deck": [
-      "decks/standard/pirate_captain_2.dck"
-    ],
-    "ai": "",
-    "spawnRate": 0.8,
-    "difficulty": 0.1,
-    "speed": 24,
-    "life": 20,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Black"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "B",
-    "questTags": [
-      "Leader",
-      "Aggressive",
-      "Human",
-      "Warrior",
-      "Water",
-      "Bandit",
-      "Thief",
-      "IdentityBlack",
-      "Dungeon",
       "Pirate",
       "Captain"
     ]
@@ -22422,7 +21158,7 @@
       "decks/standard/plant.json",
       "decks/standard/plant.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "randomizeDeck": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -22483,7 +21219,7 @@
     "deck": [
       "decks/standard/poisonoussnake.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 15,
@@ -22554,7 +21290,7 @@
     "deck": [
       "decks/standard/polarbear.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.3,
     "difficulty": 0.1,
     "speed": 24,
@@ -22627,7 +21363,7 @@
     "deck": [
       "decks/standard/porcupine.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 20,
@@ -22683,7 +21419,7 @@
     "deck": [
       "decks/standard/prototype_blue.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.3,
     "speed": 20,
@@ -22758,7 +21494,7 @@
     "deck": [
       "decks/standard/prototype_green.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.3,
     "speed": 20,
@@ -22833,7 +21569,7 @@
     "deck": [
       "decks/standard/fanaticpriest.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.2,
     "difficulty": 0.1,
     "speed": 35,
@@ -22892,7 +21628,7 @@
     "deck": [
       "decks/elite/pyromancer.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 21,
@@ -22947,7 +21683,7 @@
     "deck": [
       "decks/standard/orc_brute.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 21,
@@ -23027,7 +21763,7 @@
     "deck": [
       "decks/standard/orc_hunter.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 21,
@@ -23107,7 +21843,7 @@
     "deck": [
       "decks/standard/orc_warrior.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 21,
@@ -23270,7 +22006,7 @@
     "name": "Orthodoxy Duelist",
     "sprite": "sprites/enemy/aberration/phyrexianduelist.atlas",
     "deck": [
-      "decks/standard/phyrexianduelist.json"
+      "decks/standard/phyrexianduelist.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,
@@ -23352,7 +22088,7 @@
     "deck": [
       "decks/standard/enchantment_aggro.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 20,
@@ -23496,7 +22232,7 @@
     "deck": [
       "decks/standard/phoenix.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "flying": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -23603,7 +22339,7 @@
     "deck": [
       "decks/standard/rakdos_devil.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
@@ -23683,7 +22419,7 @@
     "deck": [
       "decks/standard/dinosaur_rw_enrage.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 25,
@@ -23752,85 +22488,6 @@
       "Lizard",
       "Dinosaur",
       "Beast"
-    ]
-  },
-  {
-    "name": "Rakdos Wizard",
-    "sprite": "sprites/enemy/humanoid/human/wizard/rakdos_wiz.atlas",
-    "deck": [
-      "decks/standard/rakdos_vamps.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.2,
-    "speed": 24,
-    "life": 25,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 1,
-        "addMaxCount": 2,
-        "rarity": [
-          "uncommon"
-        ],
-        "cardTypes": [
-          "Creature",
-          "Artifact",
-          "Enchantment",
-          "Instant",
-          "Sorcery"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.5,
-        "count": 1,
-        "addMaxCount": 1,
-        "rarity": [
-          "rare"
-        ],
-        "cardTypes": [
-          "Creature",
-          "Artifact",
-          "Enchantment",
-          "Instant",
-          "Sorcery"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 0.3,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 150,
-        "addMaxCount": 150
-      }
-    ],
-    "colors": "BG",
-    "questTags": [
-      "Wizard",
-      "Necromancer",
-      "Pyromancer",
-      "IdentityBlack",
-      "IdentityRed",
-      "IdentityRakdos"
     ]
   },
   {
@@ -23913,7 +22570,7 @@
     "deck": [
       "decks/miniboss/sliver_recruitersliver.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "speed": 24,
     "life": 25,
@@ -23962,7 +22619,7 @@
     "nameOverride": "Giant Red Basilisk",
     "sprite": "sprites/enemy/monstrosity/basilisk_2.atlas",
     "deck": [
-      "decks/standard/beast_red.json"
+      "decks/standard/beast_red.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -24005,7 +22662,7 @@
     "deck": [
       "decks/standard/reassemblingskeleton.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 10,
@@ -24047,7 +22704,7 @@
     "deck": [
       "decks/standard/rhino.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.8,
     "difficulty": 0.1,
@@ -24107,9 +22764,9 @@
     "name": "Rogue",
     "sprite": "sprites/enemy/humanoid/human/rogue/rogue.atlas",
     "deck": [
-      "decks/standard/rogue.json"
+      "decks/standard/rogue.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.8,
     "difficulty": 0.1,
     "speed": 25,
@@ -24225,7 +22882,7 @@
     "deck": [
       "decks/standard/sandgolem.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 23,
@@ -24272,7 +22929,7 @@
     "deck": [
       "decks/elite/hellion.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.2,
     "difficulty": 0.1,
     "speed": 13,
@@ -25048,7 +23705,7 @@
     "deck": [
       "decks/standard/shamanelite.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 24,
@@ -25127,85 +23784,6 @@
     ]
   },
   {
-    "name": "Simic Wizard",
-    "sprite": "sprites/enemy/humanoid/viashino/lizardwizard.atlas",
-    "deck": [
-      "decks/standard/simicwizard_intruderalarm.dck",
-      "decks/standard/simicwizard_evolve.dck"
-    ],
-    "ai": "",
-    "randomizeDeck": true,
-    "spawnRate": 0.5,
-    "difficulty": 0.1,
-    "speed": 25,
-    "scale": 0.6,
-    "life": 20,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Blue",
-          "Green"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "UG",
-    "questTags": [
-      "Wizard",
-      "BiomeBlue",
-      "BiomeGreen",
-      "Lizard",
-      "IdentityBlue",
-      "IdentityGreen",
-      "IdentitySimic"
-    ]
-  },
-  {
     "name": "Skeleton",
     "sprite": "sprites/enemy/undead/skeleton.atlas",
     "deck": [
@@ -25280,59 +23858,6 @@
       "IdentityBlack",
       "BiomeBlack",
       "Minion"
-    ]
-  },
-  {
-    "name": "Skeleton Champion",
-    "sprite": "sprites/enemy/undead/skeleton_2.atlas",
-    "deck": [
-      "decks/standard/skeleton_champion.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.2,
-    "speed": 20,
-    "life": 25,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "common",
-          "rare",
-          "Uncommon"
-        ]
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 10,
-        "addMaxCount": 90
-      },
-      {
-        "type": "shards",
-        "probability": 1,
-        "count": 10,
-        "addMaxCount": 10
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 3,
-        "addMaxCount": 4,
-        "cardText": "Skeleton"
-      }
-    ],
-    "colors": "B",
-    "questTags": [
-      "Undead",
-      "Skeleton",
-      "Soldier",
-      "Regenerating",
-      "IdentityBlack",
-      "BiomeBlack"
     ]
   },
   {
@@ -25924,7 +24449,7 @@
     "deck": [
       "decks/miniboss/slobad.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.8,
@@ -26018,7 +24543,7 @@
     "deck": [
       "decks/boss/sliver_queen.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "boss": true,
     "speed": 1,
     "life": 40,
@@ -26115,7 +24640,7 @@
     "deck": [
       "decks/standard/snake.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -26199,7 +24724,7 @@
     "deck": [
       "decks/miniboss/simicwizard_snow.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "randomizeDeck": true,
     "spawnRate": 0.25,
     "difficulty": 1,
@@ -26349,9 +24874,9 @@
     "name": "Spider",
     "sprite": "sprites/enemy/beast/spider_black.atlas",
     "deck": [
-      "decks/standard/spider.json"
+      "decks/standard/spider.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 22,
@@ -26558,7 +25083,7 @@
     "deck": [
       "decks/standard/dinosaur_gruul_etali.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 20,
@@ -26698,7 +25223,7 @@
       "decks/standard/cat_greenwhite.dck",
       "decks/standard/cat_greenwhite2.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -26842,7 +25367,7 @@
     "deck": [
       "decks/miniboss/sorceressqueenkaja.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 1,
@@ -26877,7 +25402,7 @@
     "deck": [
       "decks/miniboss/goblinkingphil.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 1,
@@ -26902,6 +25427,36 @@
         "probability": 1,
         "count": 15,
         "addMaxCount": 10
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Sulfurous Springs|ICE"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Mishra's Factory|ATQ|4"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Urza's Science Fair Project|UGL"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Goblin King|5ED"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Mirror Universe|LEG"
       }
     ],
     "colors": "UBR"
@@ -27038,12 +25593,12 @@
     "deck": [
       "decks/standard/swamptroll.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
     "scale": 0.65,
-    "life": 35,
+    "life": 25,
     "rewards": [
       {
         "type": "deckCard",
@@ -27137,7 +25692,7 @@
     "deck": [
       "decks/standard/symbiote.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 27,
@@ -27222,7 +25777,7 @@
     "deck": [
       "decks/standard/djinn_tarkir.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "flying": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -27300,7 +25855,7 @@
     "deck": [
       "decks/miniboss/teferi_boss.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.8,
     "speed": 31,
@@ -27634,7 +26189,7 @@
     "deck": [
       "decks/standard/tiger.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.8,
     "difficulty": 0.1,
@@ -27711,7 +26266,7 @@
     "deck": [
       "decks/miniboss/torturer.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 20,
@@ -27788,7 +26343,7 @@
     "deck": [
       "decks/standard/turtle.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 5,
@@ -27850,9 +26405,9 @@
     "name": "Treefolk",
     "sprite": "sprites/enemy/plant/treant.atlas",
     "deck": [
-      "decks/standard/treefolk.json"
+      "decks/standard/treefolk_tribal.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 16,
@@ -27909,7 +26464,7 @@
     "deck": [
       "decks/standard/treefolk.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 16,
@@ -27984,7 +26539,7 @@
     "deck": [
       "decks/standard/dinosaur_gw_ramp.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 20,
@@ -28058,9 +26613,9 @@
     "name": "Troll",
     "sprite": "sprites/enemy/giant/troll.atlas",
     "deck": [
-      "decks/standard/troll.json"
+      "decks/standard/troll.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -28304,7 +26859,7 @@
     "deck": [
       "decks/standard/viashino.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -28384,7 +26939,7 @@
     "deck": [
       "decks/standard/snake.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -28449,7 +27004,7 @@
     "deck": [
       "decks/standard/junddragon.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.3,
     "speed": 20,
@@ -28524,7 +27079,7 @@
     "deck": [
       "decks/standard/br_elemental.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 28,
@@ -28630,7 +27185,7 @@
     "deck": [
       "decks/standard/walkingbrain.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0.3,
     "difficulty": 0.1,
     "speed": 15,
@@ -28698,7 +27253,7 @@
     "deck": [
       "decks/standard/wanderinggiant.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.8,
     "difficulty": 0.1,
     "speed": 15,
@@ -28774,7 +27329,7 @@
     "deck": [
       "decks/standard/human_warrior_amonkhet.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 21,
@@ -28832,7 +27387,7 @@
     "deck": [
       "decks/standard/wasp.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "flying": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -28893,7 +27448,7 @@
     "deck": [
       "decks/miniboss/bearboss.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 25,
@@ -28973,7 +27528,7 @@
     "deck": [
       "decks/standard/werewolf.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 26,
@@ -29083,71 +27638,6 @@
     ]
   },
   {
-    "name": "Plague Rat Swarm",
-    "sprite": "sprites/enemy/beast/wildratpoison.atlas",
-    "deck": [
-      "decks/standard/rat_poisonrat.dck"
-    ],
-    "ai": "",
-    "randomizeDeck": true,
-    "spawnRate": 0.6,
-    "difficulty": 0.1,
-    "speed": 15,
-    "scale": 0.8,
-    "life": 14,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 1,
-        "rarity": [
-          "Rare"
-        ]
-      },
-      {
-        "type": "gold",
-        "probability": 1,
-        "count": 50,
-        "addMaxCount": 100
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "rarity": [
-          "uncommon",
-          "common"
-        ],
-        "cardTypes": [
-          "Land"
-        ]
-      }
-    ],
-    "colors": "B",
-    "questTags": [
-      "Subterranean",
-      "Animal",
-      "Wild",
-      "Sneaky",
-      "Small",
-      "Scavenger",
-      "Swarm",
-      "IdentityBlack",
-      "BiomeColorless",
-      "BiomeBlack"
-    ]
-  },
-  {
     "name": "Wild Rat",
     "sprite": "sprites/enemy/beast/wildrat.atlas",
     "deck": [
@@ -29155,7 +27645,7 @@
       "decks/standard/rat.dck",
       "decks/standard/ratswarm.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "randomizeDeck": true,
     "spawnRate": 0.6,
     "difficulty": 0.1,
@@ -29220,7 +27710,7 @@
     "deck": [
       "decks/standard/wild-magic_sorcerer.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 22,
@@ -29375,7 +27865,7 @@
     "deck": [
       "decks/standard/wolf.json"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 35,
@@ -29583,7 +28073,7 @@
     "deck": [
       "decks/elite/witch.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 12,
@@ -30047,7 +28537,7 @@
     "deck": [
       "decks/standard/zombie_black_easy.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 15,
@@ -30095,7 +28585,7 @@
     "deck": [
       "decks/standard/zombie_black_medium.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.7,
     "difficulty": 0.1,
     "speed": 21,
@@ -30141,7 +28631,7 @@
     "deck": [
       "decks/standard/hiddenwall.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "life": 20,
@@ -30206,153 +28696,6 @@
       "Construct",
       "Artifact",
       "Hidden"
-    ]
-  },
-  {
-    "name": "Juggernaut",
-    "sprite": "sprites/enemy/construct/juggernaut.atlas",
-    "deck": [
-      "decks/standard/juggernaut.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 21,
-    "life": 20,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "questTags": [
-      "Stone",
-      "Wall",
-      "Construct",
-      "Artifact",
-      "Hidden",
-      "Juggernaut"
-    ]
-  },
-  {
-    "name": "Bone Golem",
-    "sprite": "sprites/enemy/undead/bonegolem.atlas",
-    "deck": [
-      "decks/standard/bonegolem.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 21,
-    "life": 20,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Green",
-          "White"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "GW",
-    "questTags": [
-      "Skeleton",
-      "IdentityBlack",
-      "Golem",
-      "Undead",
-      "Zombie",
-      "Aberration",
-      "Monster",
-      "Evil"
     ]
   },
   {
@@ -30515,7 +28858,7 @@
     "deck": [
       "decks/standard/monobgoblins.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 21,
@@ -30587,308 +28930,6 @@
     "sprite": "sprites/enemy/undead/graverevenant.atlas",
     "deck": [
       "decks/standard/giralfgisa.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 21,
-    "life": 20,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Black"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "B",
-    "questTags": [
-      "Evil",
-      "Zombie",
-      "Necromancer",
-      "BiomeBlack",
-      "Inhuman",
-      "Wizard",
-      "IdentityDimir"
-    ]
-  },
-  {
-    "name": "Royal Sentinel",
-    "sprite": "sprites/enemy/undead/royalsentinel.atlas",
-    "deck": [
-      "decks/standard/trap.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 21,
-    "life": 20,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Blue",
-          "Black"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "UB",
-    "questTags": [
-      "Evil",
-      "Zombie",
-      "Necromancer",
-      "BiomeBlack",
-      "Inhuman",
-      "Wizard",
-      "IdentityDimir",
-      "Guardian"
-    ]
-  },
-  {
-    "name": "Lord Pestilence",
-    "sprite": "sprites/enemy/undead/pestilencelord.atlas",
-    "deck": [
-      "decks/standard/trap.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 21,
-    "life": 20,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Black"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "B",
-    "questTags": [
-      "Evil",
-      "Zombie",
-      "Necromancer",
-      "BiomeBlack",
-      "Inhuman",
-      "Wizard",
-      "IdentityDimir"
-    ]
-  },
-  {
-    "name": "Sand Ghoul",
-    "sprite": "sprites/enemy/undead/sandghoul.atlas",
-    "deck": [
-      "decks/standard/sandghoul.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 21,
-    "life": 20,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "White"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "W",
-    "questTags": [
-      "Zombie",
-      "Giant",
-      "Golem",
-      "IdentityWhite",
-      "Aberration",
-      "Aggressive",
-      null
-    ]
-  },
-  {
-    "name": "Tomb Guardian",
-    "sprite": "sprites/enemy/undead/tombguardian.atlas",
-    "deck": [
-      "decks/standard/tombguardian.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -31035,81 +29076,6 @@
     ]
   },
   {
-    "name": "Undead Shuffler",
-    "sprite": "sprites/enemy/undead/undeadshuffler.atlas",
-    "deck": [
-      "decks/standard/undeadshuffler.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 21,
-    "life": 20,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Black"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "B",
-    "questTags": [
-      "Aberration",
-      "Aggressive",
-      "Undead",
-      "Unholy",
-      "IdentityBlack",
-      null,
-      null
-    ]
-  },
-  {
     "name": "Unholy Skull",
     "sprite": "sprites/enemy/undead/unholyskull.atlas",
     "deck": [
@@ -31247,7 +29213,7 @@
     "name": "Angelic Page",
     "sprite": "sprites/enemy/celestial/angel_1.atlas",
     "deck": [
-      "decks/standard/angel.json"
+      "decks/standard/angel.dck"
     ],
     "ai": "",
     "flying": true,
@@ -31323,87 +29289,6 @@
       "Holy",
       "IdentityWhite",
       null,
-      null
-    ]
-  },
-  {
-    "name": "Angel Overseer",
-    "sprite": "sprites/enemy/celestial/angel_2.atlas",
-    "deck": [
-      "decks/standard/azoriusangel.dck"
-    ],
-    "ai": "",
-    "flying": true,
-    "spawnRate": 0.6,
-    "difficulty": 0.1,
-    "scale": 1.2,
-    "speed": 21,
-    "life": 18,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      },
-      {
-        "type": "card",
-        "probability": 0.2,
-        "count": 1,
-        "cardName": "Serra Angel|O90P"
-      }
-    ],
-    "colors": "uw",
-    "questTags": [
-      "Angel",
-      "Celestial",
-      "Flying",
-      "IdentityAzorius",
-      "Holy",
-      "BiomeBlue",
-      "BiomeWhite",
       null
     ]
   },
@@ -31565,7 +29450,7 @@
     "deck": [
       "decks/standard/demonwander.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0.6,
     "scale": 1.2,
     "difficulty": 0.1,
@@ -31639,7 +29524,7 @@
     "deck": [
       "decks/standard/peasantrole.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.6,
     "difficulty": 0.1,
     "speed": 21,
@@ -31711,94 +29596,12 @@
     ]
   },
   {
-    "name": "Supreme Elemental",
-    "sprite": "sprites/enemy/elemental/magicelemental.atlas",
-    "deck": [
-      "decks/standard/supremeelemental.dck"
-    ],
-    "ai": "",
-    "flying": true,
-    "spawnRate": 0.6,
-    "scale": 1.2,
-    "difficulty": 0.1,
-    "speed": 21,
-    "life": 18,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "White",
-          "Blue",
-          "Black",
-          "Red",
-          "Green"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "WUBRG",
-    "questTags": [
-      "Elemental",
-      "Aberration",
-      "Aggressive",
-      "Arcane",
-      "Beast",
-      "IdentityWUBRG",
-      null,
-      null
-    ]
-  },
-  {
     "name": "Zombie Master",
     "sprite": "sprites/enemy/undead/lich_3.atlas",
     "deck": [
       "decks/standard/zombie_black_hard.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.4,
     "difficulty": 0.1,
     "speed": 21,
@@ -31988,9 +29791,9 @@
     "name": "Mill Mole",
     "sprite": "sprites/enemy/beast/nakedmolerat.atlas",
     "deck": [
-      "decks/castle_npc/mill_mole.dck"
+      "decks/elite/mill_mole.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 22,
@@ -32060,7 +29863,7 @@
     "deck": [
       "decks/elite/merfolk_king.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 1,
     "difficulty": 0.1,
     "speed": 28,
@@ -32228,7 +30031,7 @@
     "deck": [
       "decks/standard/wc97_janosch_kuhn.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -32296,7 +30099,7 @@
     "deck": [
       "decks/standard/wc97_svend_geertsen.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -32362,7 +30165,7 @@
     "deck": [
       "decks/standard/wc97_paul_mccabe.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -32499,7 +30302,7 @@
     "deck": [
       "decks/standard/wc98_ben_rubin.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -32631,7 +30434,7 @@
     "deck": [
       "decks/standard/wc98_randy_buehler.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -32763,7 +30566,7 @@
     "deck": [
       "decks/standard/wc99_mark_le_pine.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -32829,7 +30632,7 @@
     "deck": [
       "decks/standard/wc99_matt_linde.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -33027,7 +30830,7 @@
     "deck": [
       "decks/standard/wc00_janosch_kuhn.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -33094,7 +30897,7 @@
     "deck": [
       "decks/standard/wc00_tom_van_de_logt.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -33361,7 +31164,7 @@
     "deck": [
       "decks/standard/wc01_antoine_ruel.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -33497,7 +31300,7 @@
     "deck": [
       "decks/standard/wc02_carlos_romao.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -33767,7 +31570,7 @@
     "deck": [
       "decks/standard/wc03_daniel_zink.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -33835,7 +31638,7 @@
     "deck": [
       "decks/standard/wc03_dave_humpherys.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -33902,7 +31705,7 @@
     "deck": [
       "decks/standard/wc03_wolfgang_eder.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -34104,7 +31907,7 @@
     "deck": [
       "decks/standard/wc94_bertrand_lestree.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -34173,7 +31976,7 @@
     "deck": [
       "decks/standard/wc94_dominic_symens.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -34242,7 +32045,7 @@
     "deck": [
       "decks/standard/wc94_cyrille_defoucaud.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -34445,7 +32248,7 @@
     "deck": [
       "decks/standard/wc95_mark_justice.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -34512,7 +32315,7 @@
     "deck": [
       "decks/standard/wc95_henry_stern.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -34645,7 +32448,7 @@
     "deck": [
       "decks/standard/wc96_mark_justice.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -34779,7 +32582,7 @@
     "deck": [
       "decks/standard/wc96_olle_rade.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0,
     "difficulty": 0.9,
     "speed": 28,
@@ -34990,7 +32793,7 @@
     "deck": [
       "decks/miniboss/ashnod.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -35128,7 +32931,7 @@
     "deck": [
       "decks/miniboss/latulla.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -35175,7 +32978,7 @@
     "deck": [
       "decks/miniboss/marton_stromgald.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -35214,7 +33017,7 @@
     "deck": [
       "decks/miniboss/jeska.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -35228,7 +33031,7 @@
     "deck": [
       "decks/miniboss/eron.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -35338,7 +33141,7 @@
     "deck": [
       "decks/miniboss/verdeloth.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -35467,7 +33270,7 @@
     "deck": [
       "decks/miniboss/hazduhr.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -35608,7 +33411,7 @@
     "deck": [
       "decks/miniboss/reya.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -35698,7 +33501,7 @@
     "deck": [
       "decks/miniboss/barrin.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -35745,7 +33548,7 @@
     "deck": [
       "decks/miniboss/rayne.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -35792,7 +33595,7 @@
     "deck": [
       "decks/miniboss/karn.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -37122,7 +34925,7 @@
     "deck": [
       "decks/standard/shandalar97_blue_thoughtinvoker.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0.5,
     "difficulty": 0.6,
     "speed": 24,
@@ -37351,7 +35154,7 @@
     "deck": [
       "decks/standard/shandalar97_red_craghydra.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.5,
     "speed": 22,
@@ -37388,7 +35191,7 @@
     "deck": [
       "decks/standard/shandalar97_red_warmage.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.6,
     "speed": 24,
@@ -37527,7 +35330,7 @@
     "deck": [
       "decks/standard/shandalar97_green_summoner.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.6,
     "speed": 24,
@@ -37652,8 +35455,14 @@
       {
         "type": "gold",
         "probability": 1,
-        "count": 150,
-        "addMaxCount": 100
+        "count": 1500,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 10
       }
     ],
     "colors": "WUG",
@@ -37692,8 +35501,14 @@
       {
         "type": "gold",
         "probability": 1,
-        "count": 150,
-        "addMaxCount": 100
+        "count": 1500,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 10
       }
     ],
     "colors": "WUB",
@@ -37732,8 +35547,14 @@
       {
         "type": "gold",
         "probability": 1,
-        "count": 150,
-        "addMaxCount": 100
+        "count": 1500,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 10
       }
     ],
     "colors": "UBR",
@@ -37772,8 +35593,14 @@
       {
         "type": "gold",
         "probability": 1,
-        "count": 150,
-        "addMaxCount": 100
+        "count": 1500,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 10
       }
     ],
     "colors": "BRG",
@@ -37789,7 +35616,7 @@
     "deck": [
       "decks/elite/shandalar97_colorless_prismat.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "flying": true,
     "spawnRate": 0.4,
     "difficulty": 0.7,
@@ -37812,8 +35639,14 @@
       {
         "type": "gold",
         "probability": 1,
-        "count": 150,
-        "addMaxCount": 100
+        "count": 1500,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 10
       }
     ],
     "colors": "WRG",
@@ -38155,7 +35988,7 @@
     "deck": [
       "decks/miniboss/shandalar97_tibalts_torturer.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
@@ -38215,73 +36048,6 @@
       "BiomeRed"
     ],
     "nameOverride": "Specter's Torturer",
-    "boss": true
-  },
-  {
-    "name": "Tibalt's Cyclops",
-    "sprite": "sprites/enemy/giant/cyclops.atlas",
-    "deck": [
-      "decks/miniboss/shandalar97_tibalts_cyclops.dck"
-    ],
-    "ai": "",
-    "spawnRate": 0.5,
-    "difficulty": 0.1,
-    "speed": 24,
-    "life": 25,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 1,
-        "addMaxCount": 4,
-        "rarity": [
-          "uncommon"
-        ],
-        "cardTypes": [
-          "Creature",
-          "Artifact",
-          "Enchantment",
-          "Instant",
-          "Sorcery"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.5,
-        "count": 1,
-        "addMaxCount": 2,
-        "rarity": [
-          "rare"
-        ],
-        "cardTypes": [
-          "Creature",
-          "Artifact",
-          "Enchantment",
-          "Instant",
-          "Sorcery"
-        ]
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 10,
-        "addMaxCount": 90
-      },
-      {
-        "type": "item",
-        "probability": 1,
-        "count": 1,
-        "itemName": "Lucky Clover"
-      }
-    ],
-    "colors": "R",
-    "questTags": [
-      "Giant",
-      "Chaotic",
-      "IdentityRed",
-      "BiomeRed"
-    ],
-    "nameOverride": "Specter's Cyclops",
     "boss": true
   },
   {
@@ -38356,7 +36122,7 @@
     "deck": [
       "decks/miniboss/shandalar97_chandler.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
@@ -38421,7 +36187,7 @@
     "deck": [
       "decks/miniboss/shandalar97_joven.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
@@ -38486,7 +36252,7 @@
     "deck": [
       "decks/miniboss/shandalar97_kogla.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
@@ -38549,80 +36315,13 @@
     "boss": true
   },
   {
-    "name": "Phyrexian Angel",
-    "sprite": "sprites/enemy/celestial/fallen_angel.atlas",
-    "deck": [
-      "decks/miniboss/shandalar97_phyrexian_angel.dck"
-    ],
-    "ai": "",
-    "spawnRate": 0.5,
-    "difficulty": 0.1,
-    "speed": 24,
-    "life": 25,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 1,
-        "addMaxCount": 4,
-        "rarity": [
-          "uncommon"
-        ],
-        "cardTypes": [
-          "Creature",
-          "Artifact",
-          "Enchantment",
-          "Instant",
-          "Sorcery"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.5,
-        "count": 1,
-        "addMaxCount": 2,
-        "rarity": [
-          "rare"
-        ],
-        "cardTypes": [
-          "Creature",
-          "Artifact",
-          "Enchantment",
-          "Instant",
-          "Sorcery"
-        ]
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 10,
-        "addMaxCount": 90
-      },
-      {
-        "type": "item",
-        "probability": 1,
-        "count": 1,
-        "itemName": "Phyrexian Grimoire"
-      }
-    ],
-    "colors": "WB",
-    "questTags": [
-      "Phyrexian",
-      "Angel",
-      "IdentityWhite",
-      "IdentityBlack",
-      "BiomeWhite"
-    ],
-    "boss": true
-  },
-  {
     "name": "Ghoulcaller Ghoul",
     "nameOverride": "Lord of the Undead",
     "sprite": "sprites/enemy/undead/zombie.atlas",
     "deck": [
       "decks/elite/shandalar97_ghoulcaller_ghoul.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
@@ -38682,7 +36381,7 @@
     "deck": [
       "decks/standard/shandalar97_fire_titan.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
@@ -38939,7 +36638,7 @@
     "deck": [
       "decks/standard/shandalar97_nightstalker.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
@@ -39066,7 +36765,7 @@
     "deck": [
       "decks/standard/shandalar97_dementia_beast.dck"
     ],
-    "ai": "",
+    "ai": "reckless",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
@@ -39191,7 +36890,7 @@
     "deck": [
       "decks/standard/shandalar97_cateran_slaver.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
@@ -39250,7 +36949,7 @@
     "deck": [
       "decks/boss/urza.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -39305,7 +37004,7 @@
     "deck": [
       "decks/boss/gaea.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,
@@ -39360,7 +37059,7 @@
     "deck": [
       "decks/boss/serra.dck"
     ],
-    "ai": "",
+    "ai": "cautious",
     "boss": true,
     "spawnRate": 1,
     "difficulty": 0.1,

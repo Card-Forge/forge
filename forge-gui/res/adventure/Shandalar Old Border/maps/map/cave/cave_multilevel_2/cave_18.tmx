@@ -56,7 +56,7 @@
     <property name="enemy" value="Dark Enchanter" />
     <property name="speedModifier" type="float" value="20" />
     <property name="threatRange" type="int" value="50" />
-   <property name="effect">{"startBattleWithCard": ["Enchantress's Presence|ONS", "Black Market|MMQ", "Grim Feast|MIR"]}</property>
+   <property name="effect">{ "startBattleWithCard": [ "Black Market|MMQ", "Enchantress's Presence|ONS", "Grim Feast|MIR" ] }</property>
     </properties>
   </object>
   <object id="63" template="../../../../../../../common/maps/obj/enemy.tx" x="95" y="148.5">

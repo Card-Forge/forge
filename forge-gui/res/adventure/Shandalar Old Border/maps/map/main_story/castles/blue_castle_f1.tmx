@@ -50,7 +50,7 @@
       "action": [{"setQuestFlag": {"key":"Ch1BlueCastleComplete", "val": 1} }, {"deleteMapObject": -1}, {"advanceQuestFlag": "Ch1CastlesComplete"}]
    }]
 }]</property>
-    <property name="effect">{ "startBattleWithCard": [ "Island|LEA", "Rhystic Study|PCY" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Island|LEA|1", "Island|LEA|1", "Island|LEA|1", "Island|LEA|2", "Island|LEA|2", "Island|LEA|2" ] }</property>
     <property name="enemy" value="Lorthos" />
     <property name="threatRange" type="int" value="50" />
    </properties>

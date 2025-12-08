@@ -39,11 +39,19 @@ Name=Yawgmoth
 2 Detonate|ATQ
 
 [StartInBattle_Reference]
-3 Swamp|USG
-1 Phyrexian Lens|INV
-1 Phyrexian Altar|INV
 1 Eye of Yawgmoth|NMS
 1 Order of Yawgmoth|USG
+1 Phyrexian Altar|INV
+1 Phyrexian Lens|INV
 1 Phyrexian Reclamation|ULG
-4 Phyrexian Walker|VIS
-4 Phyrexian Battleflies|INV
+1 Swamp|USG|1
+1 Swamp|USG|2
+1 Swamp|USG|3
+1 Phyrexian Walker|VIS
+1 Phyrexian Walker|VIS
+1 Phyrexian Walker|VIS
+1 Phyrexian Walker|VIS
+1 Phyrexian Battleflies|INV
+1 Phyrexian Battleflies|INV
+1 Phyrexian Battleflies|INV
+1 Phyrexian Battleflies|INV

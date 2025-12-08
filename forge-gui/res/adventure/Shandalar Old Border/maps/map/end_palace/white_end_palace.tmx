@@ -62,6 +62,7 @@
   </object>
   <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="532.667" y="497.167" width="16.6667" height="16">
    <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Mox Pearl|LEA", "Wall of Swords|LEA" ] }</property>
     <property name="enemy" value="Master White Wizard" />
     <property name="threatRange" type="int" value="20" />
     <property name="waypoints" value="81,77,76,75,78,83,84,83,79,80,81,82" />
@@ -221,6 +222,7 @@
   </object>
   <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="187.167" y="500.333">
    <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Mox Pearl|LEA", "Wall of Swords|LEA" ] }</property>
     <property name="enemy" value="Master White Wizard" />
     <property name="threatRange" type="int" value="20" />
     <property name="waypoints" value="83,84,83,79,80,81,82,81,77,76,75,78" />

@@ -19,3 +19,6 @@ Name=kavu
 4 Tribal Flames|INV
 8 Mountain|INV
 9 Forest|INV
+
+[StartInBattle_Reference]
+1 Kavu Monarch|INV

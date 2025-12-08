@@ -32,6 +32,7 @@
   <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="169.494" y="134.657">
    <properties>
     <property name="displayNameOverride" value="The Deceiver"/>
+    <property name="effect">{ "startBattleWithCard": [ "Wheel of Torture|ULG" ] }</property>
     <property name="enemy" value="Torturer"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>

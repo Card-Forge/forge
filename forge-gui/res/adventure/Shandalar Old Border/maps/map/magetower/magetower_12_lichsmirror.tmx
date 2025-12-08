@@ -107,7 +107,7 @@
   </object>
   <object id="51" template="../../../../../../common/maps/obj/enemy.tx" x="200.079" y="127.263">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Dream Chisel|ONS", "Ixidor, Reality Sculptor|ONS", "Rhystic Study|PCY", "Tropical Island|LEA", "Underground Sea|LEA" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Dream Chisel|ONS", "Ixidor, Reality Sculptor|ONS", "Tropical Island|LEA", "Underground Sea|LEA" ] }</property>
     <property name="enemy" value="Aether Channeler" />
    </properties>
   </object>

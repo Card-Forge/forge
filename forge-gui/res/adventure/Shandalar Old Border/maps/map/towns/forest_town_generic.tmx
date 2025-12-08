@@ -83,7 +83,6 @@
   <object id="48" template="../../../../../../common/maps/obj/shop.tx" x="304" y="48">
    <properties>
     <property name="commonShopList" value="Forest"/>
-    <property name="noRestock" type="bool" value="true"/>
    </properties>
   </object>
   <object id="49" template="../../../../../../common/maps/obj/quest.tx" x="80" y="162" width="34" height="16">
