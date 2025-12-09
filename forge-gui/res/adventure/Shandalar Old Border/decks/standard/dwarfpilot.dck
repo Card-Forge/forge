@@ -1,14 +1,19 @@
 [metadata]
 Name=dwarfpilot
 [Main]
-10 Swamp|ICE|3
-4 Counterspell|ICE
-4 Dark Ritual|BRB
-4 Disrupt|WTH
-4 Duress|USG
-4 Hymn to Tourach|ATH
-4 Phyrexian Negator|UDS
-4 Phyrexian Walker|VIS
-4 Steel Golem|WTH
-4 Underground River|ICE
-6 Island|ICE|3
+22 Mountain|ODY|2
+2 Dwarven Ruins|FEM
+2 Shower of Coals|ODY
+4 Dwarven Lieutenant|FEM
+2 Dwarven Miner|MIR
+4 Dwarven Grunt|ODY
+4 Dwarven Berserker|WTH
+4 Dwarven Bloodboiler|JUD
+2 Dwarven Strike Force|ODY
+2 Dwarven Vigilantes|VIS
+2 Dwarven Warriors|LEA
+2 Dwarven Landslide|APC
+2 Giant Strength|5ED
+1 Dwarven Soldier|FEM|2
+1 Dwarven Soldier|FEM|3
+4 Fit of Rage|WTH

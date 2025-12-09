@@ -257,7 +257,7 @@
     }
 ]</property>
     <property name="enemy" value="Adept Black Wizard" />
-   <property name="effect">{ "startBattleWithCard": [ "Wall of Bone|LEA|1" ] }</property></properties>
+   </properties>
   </object>
   <object id="70" template="../../../../../../common/maps/obj/entry_down.tx" x="192" y="160">
    <properties>

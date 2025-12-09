@@ -65,7 +65,7 @@
     <property name="enemy" value="Master Green Wizard" />
     <property name="threatRange" type="int" value="20" />
     <property name="waypoints" value="73,81,74,76,82,78,82,75,77,80,79,81" />
-   <property name="effect">{ "startBattleWithCard": [ "Jayemdae Tome|LEB|1" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Wall of Brambles|LEA", "Mox Emerald|LEA" ] }</property></properties>
   </object>
   <object id="55" template="../../../../../../../common/maps/obj/gate.tx" x="368.667" y="638.667">
    <properties>
@@ -169,7 +169,7 @@
 ]</property>
     <property name="enemy" value="Gorilla" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{"startBattleWithCard": ["Concordant Crossroads|CHR", "Forest|USG", "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL", "Monkey Cage|MMQ", "Mountain|USG", "Treetop Village|ULG", "Treetop Village|ULG"]}</property>
+   <property name="effect">{ "startBattleWithCard": [ "Forest|USG", "Gorilla Chieftain|ALL", "Gorilla Shaman|ALL", "Mountain|USG", "Treetop Village|ULG" ] }</property>
     </properties>
   </object>
   <object id="68" template="../../../../../../../common/maps/obj/enemy.tx" x="663.666" y="409.333">
@@ -184,7 +184,7 @@
 ]</property>
     <property name="enemy" value="Wolf" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{"startBattleWithCard": ["Forest|ICE", "Plains|LEB", "Timber Wolves|LEA", "Timber Wolves|LEA", "Timber Wolves|LEA", "Timber Wolves|LEA"]}</property>
+   <property name="effect">{ "startBattleWithCard": [ "Forest|ICE", "Plains|ICE", "Timber Wolves|LEA", "Timber Wolves|LEA", "Tundra Wolves|LEG", "Tundra Wolves|LEG" ] }</property>
     </properties>
   </object>
   <object id="69" template="../../../../../../../common/maps/obj/enemy.tx" x="363.833" y="223.874">
@@ -214,7 +214,7 @@
 ]</property>
     <property name="enemy" value="Elephant" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{"startBattleWithCard": ["Forest|2ED", "Plains|2ED", "Elephant Graveyard|ARN", "War Mammoth|LEA"]}</property>
+   <property name="effect">{ "startBattleWithCard": [ "Elephant Graveyard|ARN", "Forest|ICE", "Plains|ICE", "War Mammoth|LEA" ] }</property>
 </properties>
   </object>
   <object id="71" template="../../../../../../../common/maps/obj/enemy.tx" x="600.667" y="494">
@@ -222,7 +222,7 @@
     <property name="enemy" value="Master Green Wizard" />
     <property name="threatRange" type="int" value="20" />
     <property name="waypoints" value="82,75,77,80,79,81,73,81,74,76,82,78" />
-   <property name="effect">{ "startBattleWithCard": [ "Jayemdae Tome|LEB|1" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Wall of Brambles|LEA", "Mox Emerald|LEA" ] }</property></properties>
   </object>
   <object id="72" template="../../../../../../../common/maps/obj/enemy.tx" x="398.667" y="648.667">
    <properties>

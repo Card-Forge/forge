@@ -11,3 +11,6 @@ Name=cloaker
 4 Raise Dead|POR
 4 Specter's Wail|MMQ
 4 Unholy Strength|LEA
+
+[StartInBattle_Reference]
+1 Megrim|STH

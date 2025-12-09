@@ -1218,7 +1218,7 @@
   </object>
   <object id="25" template="../../../../../../common/maps/obj/enemy.tx" x="128" y="112">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Coastal Piracy|MMQ", "Island|6ED", "Pirate Ship|LEA" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Coastal Piracy|MMQ", "Island|6ED|1", "Island|6ED|2", "Pirate Ship|LEA" ] }</property>
     <property name="enemy" value="Pirate Captain" />
    </properties>
   </object>

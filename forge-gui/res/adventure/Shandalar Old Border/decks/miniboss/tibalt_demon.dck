@@ -15,5 +15,7 @@ Name=Specter's Horror
 4 Dark Banishing|ICE
 
 [StartInBattle_Reference]
-3 Swamp|2ED
+1 Swamp|TMP|1
+1 Swamp|TMP|2
+1 Swamp|TMP|3
 1 Urborg Stalker|WTH

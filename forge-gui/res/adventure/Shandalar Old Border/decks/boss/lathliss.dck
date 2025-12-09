@@ -25,5 +25,8 @@ Name=Rorix Bladewing
 2 Flame Wave|STH
 
 [StartInBattle_Reference]
-4 Mountain|LEA
 1 Dragon Roost|ONS
+1 Mountain|ONS|1
+1 Mountain|ONS|2
+1 Mountain|ONS|3
+1 Mountain|ONS|4

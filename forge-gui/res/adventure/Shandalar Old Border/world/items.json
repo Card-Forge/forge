@@ -2126,6 +2126,18 @@
     }
   },
   {
+    "name": "Braidwood Sextant",
+    "description": "Sacrifice to search your library for a basic land card and put it into your hand.",
+    "equipmentSlot": "Neck",
+    "iconName": "BraidwoodSextant",
+    "cost": 9000,
+    "effect": {
+      "startBattleWithCard": [
+        "Braidwood Sextant|UDS"
+      ]
+    }
+  },
+  {
     "name": "Credit Voucher",
     "description": "Sacrifice to shuffle your hand into your library and draw that many cards.",
     "equipmentSlot": "Neck",

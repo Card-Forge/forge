@@ -55,27 +55,27 @@
   <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="231.921" y="168.487" />
   <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="460.22" y="539.626">
    <properties>
-    <property name="enemy" value="Snake" />
+    <property name="enemy" value="Crag Hydra of Shandalar" />
     <property name="threatRange" type="int" value="50" />
     <property name="waypoints" value="98,69,79,83,97,83,79" />
    </properties>
   </object>
   <object id="62" template="../../../../../../common/maps/obj/enemy.tx" x="93.307" y="538.539">
    <properties>
-    <property name="enemy" value="Snake" />
+    <property name="enemy" value="Crag Hydra of Shandalar" />
     <property name="threatRange" type="int" value="50" />
     <property name="waypoints" value="79,69,98" />
    </properties>
   </object>
   <object id="63" template="../../../../../../common/maps/obj/gold.tx" x="316.333" y="200.667" />
-  <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="237.575" y="398.439">
+  <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="274.026" y="206.114">
    <properties>
     <property name="enemy" value="The Dragon Lord" />
     <property name="threatRange" type="int" value="50" />
    <property name="effect">{"startBattleWithCard": ["Mox Ruby|LEA", "Nalathni Dragon|DRC94", "Dragon Engine|3ED"]}</property>
     </properties>
   </object>
-  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="274.026" y="206.114">
+  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="237.575" y="398.439">
    <properties>
     <property name="enemy" value="Crag Hydra of Shandalar" />
     <property name="threatRange" type="int" value="50" />
@@ -129,14 +129,14 @@
   <object id="93" template="../../../../../../common/maps/obj/gold.tx" x="207" y="631" />
   <object id="94" template="../../../../../../common/maps/obj/enemy.tx" x="390.5" y="464.5">
    <properties>
-    <property name="enemy" value="Snake" />
+    <property name="enemy" value="Crag Hydra of Shandalar" />
     <property name="threatRange" type="int" value="50" />
     <property name="waypoints" value="77,69,73,74" />
    </properties>
   </object>
   <object id="95" template="../../../../../../common/maps/obj/enemy.tx" x="112" y="479">
    <properties>
-    <property name="enemy" value="Hidden Snake" />
+    <property name="enemy" value="War Mage of Shandalar" />
     <property name="threatRange" type="int" value="50" />
    </properties>
   </object>

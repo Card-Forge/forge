@@ -12,3 +12,10 @@ Name=firegiant
 4 Thundermare|POR
 4 Crater Hellion|USG
 4 Earthquake|7ED
+
+[StartInBattle_Reference]
+1 Mountain|INV|1
+1 Mountain|INV|2
+1 Mountain|INV|3
+1 Mountain|INV|4
+1 Loafing Giant|INV

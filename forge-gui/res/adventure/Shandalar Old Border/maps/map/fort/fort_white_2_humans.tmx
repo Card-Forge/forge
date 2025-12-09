@@ -85,7 +85,7 @@
     <property name="enemy" value="Elephant" />
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="67,68" />
-   <property name="effect">{"startBattleWithCard": ["Forest|2ED", "Plains|2ED", "Elephant Graveyard|ARN", "War Mammoth|LEA"]}</property>
+   <property name="effect">{ "startBattleWithCard": [ "Elephant Graveyard|ARN", "Forest|ICE", "Plains|ICE", "War Mammoth|LEA" ] }</property>
 </properties>
   </object>
   <object id="58" template="../../../../../../common/maps/obj/collision.tx" x="-2.71042" y="400.395" width="577.537" height="16" />
@@ -96,7 +96,7 @@
    <properties>
     <property name="enemy" value="Elephant" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{"startBattleWithCard": ["Forest|2ED", "Plains|2ED", "Elephant Graveyard|ARN", "War Mammoth|LEA"]}</property>
+   <property name="effect">{ "startBattleWithCard": [ "Elephant Graveyard|ARN", "Forest|ICE", "Plains|ICE", "War Mammoth|LEA" ] }</property>
 </properties>
   </object>
   <object id="63" template="../../../../../../common/maps/obj/enemy.tx" x="24.7443" y="140.714">
