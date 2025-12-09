@@ -21,6 +21,7 @@ public class NodeData {
     private String planeboundName;      // For PLANE/BOSS: e.g., "Meria, Scholar of Antiquity"
     private String deckPath;            // Path to Planebound deck file
     private boolean completed;          // Has this node been completed?
+    private int rowIndex;               // Which row this node is on (for life scaling: 5 + 5*rowIndex)
 
     // For Sanctum nodes
     private int healAmount;             // Life to restore (default: 5)
@@ -115,6 +116,14 @@ public class NodeData {
 
     public void setFreeRemoves(int freeRemoves) {
         this.freeRemoves = freeRemoves;
+    }
+
+    public int getRowIndex() {
+        return rowIndex;
+    }
+
+    public void setRowIndex(int rowIndex) {
+        this.rowIndex = rowIndex;
     }
 
     @Override

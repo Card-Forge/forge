@@ -129,7 +129,14 @@ public enum CSubmenuRogueMap implements ICDoc {
         try {
             // Generate shared plane deck for Planechase
             CardPool planePool = DeckgenUtil.generatePlanarPool();
-            List<PaperCard> sharedPlaneDeck = planePool.toFlatList();
+//            planePool.add(RogueConfig.getCard(node.getPlaneName(), StringUtils.EMPTY));
+            // filter pool by active plane from node
+            CardPool filteredPool = planePool.getFilteredPool(card -> {
+                String cardPlaneName = node.getPlaneName();
+                return cardPlaneName.equalsIgnoreCase(card.getName());
+            });
+
+            List<PaperCard> sharedPlaneDeck = filteredPool.toFlatList();
 
             // Configure Commander + Planechase variants
             Set<GameType> appliedVariants = EnumSet.of(GameType.Commander, GameType.Planechase);
@@ -163,6 +170,10 @@ public enum CSubmenuRogueMap implements ICDoc {
                 null                                   // vanguard avatar
             );
             ai.setPlayer(GamePlayerUtil.createAiPlayer());
+
+            // Calculate life based on row: 5 + (5 * rowIndex)
+            int planeboundLife = 5 + (5 * node.getRowIndex());
+            ai.setStartingLife(planeboundLife);
 
             // Start match
             List<RegisteredPlayer> players = Arrays.asList(human, ai);
