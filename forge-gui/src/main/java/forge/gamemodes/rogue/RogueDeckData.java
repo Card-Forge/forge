@@ -16,7 +16,7 @@ public class RogueDeckData {
     private String name;                    // Display name (e.g., "Aegar, the Freezing Flame")
     private String commanderCardName;       // Commander card name
     private Deck startDeck;                 // 40-45 card starting deck (includes commander)
-    private CardPool rewardPool;            // ~120 card pool for rewards during run
+    private CardPool rewardPool;            // ~100 card pool for rewards during run
     private String description;             // Flavor text for UI
     private String themeDescription;        // Theme/archetype (e.g., "Instants/Sorceries matter")
 

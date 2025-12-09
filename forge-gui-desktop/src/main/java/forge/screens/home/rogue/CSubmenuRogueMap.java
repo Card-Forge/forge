@@ -1,0 +1,210 @@
+package forge.screens.home.rogue;
+
+import forge.deck.CardPool;
+import forge.deck.Deck;
+import forge.deck.DeckgenUtil;
+import forge.deck.io.DeckSerializer;
+import forge.game.GameType;
+import forge.game.player.RegisteredPlayer;
+import forge.gamemodes.match.HostedMatch;
+import forge.gamemodes.rogue.NodeData;
+import forge.gamemodes.rogue.RogueConfig;
+import forge.gamemodes.rogue.RogueRunData;
+import forge.gui.GuiBase;
+import forge.gui.SOverlayUtils;
+import forge.gui.framework.ICDoc;
+import forge.item.PaperCard;
+import forge.localinstance.properties.ForgeConstants;
+import forge.player.GamePlayerUtil;
+
+import javax.swing.SwingUtilities;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Set;
+
+/**
+ * Controls the "rogue map" submenu in the home UI.
+ *
+ * <br><br><i>(C at beginning of class name denotes a control class.)</i>
+ */
+public enum CSubmenuRogueMap implements ICDoc {
+    SINGLETON_INSTANCE;
+
+    private final ActionListener actEnterNode = arg0 -> enterNode();
+    private final VSubmenuRogueMap view = VSubmenuRogueMap.SINGLETON_INSTANCE;
+
+    // Test run data (for MVP - will be replaced with proper loading later)
+    private RogueRunData currentRun;
+
+    @Override
+    public void update() {
+        // Initialize test run if needed
+        if (currentRun == null) {
+            createTestRun();
+        }
+
+        updateView();
+        SwingUtilities.invokeLater(() -> view.getBtnEnterNode().requestFocusInWindow());
+    }
+
+    @Override
+    public void register() {
+    }
+
+    @Override
+    public void initialize() {
+        view.getBtnEnterNode().addActionListener(actEnterNode);
+    }
+
+    private void createTestRun() {
+        // Create a test run using hardcoded config
+        currentRun = new RogueRunData(
+            "Aegar",
+            RogueConfig.loadRogueDecks().get(0).getStartDeck(),
+            RogueConfig.getDefaultPath()
+        );
+    }
+
+    private void updateView() {
+        if (currentRun == null) {
+            return;
+        }
+
+        String lifeText = "Life: " + currentRun.getCurrentLife() + " / " + currentRun.getStartingLife();
+
+        NodeData currentNode = currentRun.getCurrentNode();
+        String nodeText;
+        if (currentNode != null) {
+            String typeStr = currentNode.getType().toString();
+            String nameStr = currentNode.getPlaneboundName() != null ? currentNode.getPlaneboundName() :
+                            (currentNode.getPlaneName() != null ? currentNode.getPlaneName() : "Unknown");
+            nodeText = "Current Node: " + typeStr + " - " + nameStr;
+        } else {
+            nodeText = "Current Node: None (Run Complete)";
+        }
+
+        view.updateDisplay(lifeText, nodeText);
+    }
+
+    private void enterNode() {
+        if (currentRun == null || currentRun.getCurrentNode() == null) {
+            return;
+        }
+
+        NodeData node = currentRun.getCurrentNode();
+
+        // Handle different node types
+        switch (node.getType()) {
+            case PLANE:
+            case BOSS:
+            case ELITE:
+                startMatch(node);
+                break;
+            case SANCTUM:
+                // TODO: Show sanctum screen
+                currentRun.healLife(node.getHealAmount());
+                currentRun.nextNode();
+                updateView();
+                break;
+            case BAZAAR:
+            case EVENT:
+            case LOOT:
+                // TODO: Implement these node types
+                currentRun.nextNode();
+                updateView();
+                break;
+        }
+    }
+
+    private void startMatch(NodeData node) {
+        // Show loading overlay
+        SwingUtilities.invokeLater(() -> {
+            SOverlayUtils.startGameOverlay();
+            SOverlayUtils.showOverlay();
+        });
+
+        try {
+            // Generate shared plane deck for Planechase
+            CardPool planePool = DeckgenUtil.generatePlanarPool();
+            List<PaperCard> sharedPlaneDeck = planePool.toFlatList();
+
+            // Configure Commander + Planechase variants
+            Set<GameType> appliedVariants = EnumSet.of(GameType.Commander, GameType.Planechase);
+
+            // Create human player with persistent life
+            RegisteredPlayer human = RegisteredPlayer.forVariants(
+                2,                                    // player count
+                appliedVariants,                      // applied variants
+                currentRun.getCurrentDeck(),          // player's deck
+                null,                                  // schemes (not used)
+                false,                                 // is archenemy
+                sharedPlaneDeck,                      // shared plane deck
+                null                                   // vanguard avatar
+            );
+
+            // Override starting life with persistent life from run
+            human.setStartingLife(currentRun.getCurrentLife());
+            human.setPlayer(GamePlayerUtil.getGuiPlayer());
+
+            // Load Planebound deck
+            Deck planeboundDeck = loadPlaneboundDeck(node.getDeckPath());
+
+            // Create AI Planebound opponent
+            RegisteredPlayer ai = RegisteredPlayer.forVariants(
+                2,                                    // player count
+                appliedVariants,                      // applied variants
+                planeboundDeck,                       // Planebound deck
+                null,                                  // schemes (not used)
+                false,                                 // is archenemy
+                sharedPlaneDeck,                      // shared plane deck
+                null                                   // vanguard avatar
+            );
+            ai.setPlayer(GamePlayerUtil.createAiPlayer());
+
+            // Start match
+            List<RegisteredPlayer> players = Arrays.asList(human, ai);
+            HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
+            currentRun.setHostedMatch(hostedMatch);
+
+            hostedMatch.startMatch(
+                GameType.RogueCommander,
+                appliedVariants,
+                players,
+                human,
+                GuiBase.getInterface().getNewGuiGame()
+            );
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            SwingUtilities.invokeLater(() -> {
+                SOverlayUtils.hideOverlay();
+                // TODO: Show error message to user
+            });
+        }
+
+        SwingUtilities.invokeLater(SOverlayUtils::hideOverlay);
+    }
+
+    private Deck loadPlaneboundDeck(String deckPath) {
+        // Load deck from file path
+        // The deckPath is relative to the res directory, e.g., "rogue/planebounds/meria.dck"
+        File deckFile = new File(ForgeConstants.RES_DIR, deckPath);
+
+        if (!deckFile.exists()) {
+            throw new RuntimeException("Planebound deck not found: " + deckPath + " (full path: " + deckFile.getAbsolutePath() + ")");
+        }
+
+        return DeckSerializer.fromFile(deckFile);
+    }
+
+    public RogueRunData getCurrentRun() {
+        return currentRun;
+    }
+
+    public void setCurrentRun(RogueRunData run) {
+        this.currentRun = run;
+    }
+}

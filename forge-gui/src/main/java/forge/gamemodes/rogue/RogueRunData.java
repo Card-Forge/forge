@@ -47,8 +47,8 @@ public class RogueRunData {
     public RogueRunData() {
         this.startingLife = 20;
         this.currentLife = 20;
-        this.currentGold = 0;
-        this.currentEchoes = 0;
+        this.currentGold = 2;
+        this.currentEchoes = 2;
         this.currentNodeIndex = 0;
         this.matchResults = new ArrayList<>();
         this.completedMatches = 0;
