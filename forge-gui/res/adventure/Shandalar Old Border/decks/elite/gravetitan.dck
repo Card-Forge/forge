@@ -16,5 +16,8 @@ Name=gravetitan
 4 Annihilate|INV
 
 [StartInBattle_Reference]
-4 Swamp|ONS
 1 Rotting Giant|ODY
+1 Swamp|ODY|1
+1 Swamp|ODY|2
+1 Swamp|ODY|3
+1 Swamp|ODY|4

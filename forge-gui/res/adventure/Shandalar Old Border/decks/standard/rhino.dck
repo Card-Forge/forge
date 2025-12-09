@@ -1,19 +1,15 @@
 [metadata]
 Name=rhino
 [Main]
-1 Mountain|7ED|2
-1 Shivan Reef|APC
-15 Forest|7ED|2
-2 Karplusan Forest|ICE
-2 Rhox|S00
-3 Nantuko Disciple|ODY
-3 Nantuko Mentor|ODY
-4 Benthic Behemoth|TMP
-4 Island|7ED|2
-4 Kavu Climber|INV
-4 Kavu Howler|APC
-4 Kavu Mauler|APC
-4 Kavu Scout|INV
-4 Krosan Avenger|ODY
-4 Krosan Warchief|SCG
-4 Yavimaya Coast|APC
+24 Forest|MIR|2
+4 Wild Growth|4ED
+4 Wall of Roots|MIR
+4 Vine Trellis|MMQ
+4 Wall of Blossoms|STH
+2 Charging Rhino|POR
+2 Charging Rhino|TMP
+4 Crash of Rhinos|MIR
+4 Rhox|NMS
+2 Ebony Rhino|HML
+2 Snorting Gahr|MMQ
+4 Overrun|ODY

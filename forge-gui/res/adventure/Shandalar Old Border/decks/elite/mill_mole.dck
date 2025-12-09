@@ -1,0 +1,21 @@
+[metadata]
+Name=mill_mole
+[Main]
+20 Island|3ED
+4 Grindstone|TMP
+4 Brain Freeze|SCG
+4 Traumatize|ODY
+4 Vision Charm|VIS
+4 Propaganda|TMP
+4 Dreamborn Muse|LGN
+2 Winter Orb|2ED
+2 Back to Basics|USG
+4 Counterspell|MMQ
+4 Fog Bank|USG
+4 Meekstone|3ED
+
+[StartInBattle_Reference]
+1 Ambassador Laquatus|TOR
+1 Propaganda|TMP
+1 Sky Diamond|MIR
+1 Sky Diamond|7ED

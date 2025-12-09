@@ -38,6 +38,7 @@
     "MMQ", "BRB", "NMS", "S00", "PCY", "INV", "BTD", "PLS", "APC", "7ED",
     "ODY", "DKM", "TOR", "JUD", "ONS", "LGN", "SCG", "PHPR", "PAST", "DRC94"
   ],
+  "allowedJumpstart": [],
   "difficulties": [
     {
       "name": "Easy",

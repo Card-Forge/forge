@@ -1,15 +1,21 @@
 [metadata]
-Name=BR Elemental
+Name=magma_elemental
 [Main]
-21 Mountain|ONS|2
-4 Goblin Burrows|ONS
-4 Goblin Cadets|USG
-4 Goblin Matron|ATH
-4 Goblin Piledriver|ONS
-4 Goblin Ringleader|APC
-4 Goblin Sharpshooter|ONS
-4 Goblin Warchief|SCG
-4 Goblin Warrens|FEM
-4 Incinerate|ICE
-4 Lightning Bolt|LEB
-4 Siege-Gang Commander|SCG
+21 Mountain|TMP
+3 Dormant Volcano|VIS
+4 Fire Diamond|MIR
+4 Bogardan Firefiend|WTH
+4 Pardic Firecat|ODY
+4 Flame Burst|ODY
+2 Rockshard Elemental|LGN
+2 Ashen Firebeast|ODY
+2 Magmasaur|TMP
+2 Magma Giant|PO2
+2 Lava Burst|ICE
+2 Cinder Elemental|MMQ
+2 Lava Blister|ODY
+2 Lavaborn Muse|LGN
+2 Lava Flow|POR
+1 Lava Axe|POR
+1 Lava Axe|PO2
+2 Lava Storm|WTH

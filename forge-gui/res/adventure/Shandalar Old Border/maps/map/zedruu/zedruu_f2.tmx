@@ -202,7 +202,7 @@
     <property name="enemy" value="Master Blue Wizard" />
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="192,173" />
-   <property name="effect">{"startBattleWithCard": ["Hesitation|STH"]}</property>
+   <property name="effect">{ "startBattleWithCard": [ "Wall of Air|LEA", "Mox Sapphire|LEA" ] }</property>
     </properties>
   </object>
   <object id="218" template="../../../../../../common/maps/obj/waypoint.tx" x="432.509" y="228.439" />

@@ -163,7 +163,6 @@ number of instant and sorcery cards you own in exile and in your graveyard
 used for effects with X in their costs
 
 # Common AI specific SVars
-
 * `AIEvaluationModifier:{ValidAmount}`
 
 * `AIPreference:SacCost$Creature.token,Creature.cmcLE2`
@@ -210,6 +209,8 @@ Uses operand-operator syntax, where `{cmp}` is a comparator:
 **NE** *Not Equal*  
 **GE** *Greater than or Equal*  
 **GT** *Greater Than*  
+
+*Tip:* the AI is smart enough to not play permanents if they have ineffective ETB triggers.
 
 * `NonStackingEffect:True`
 

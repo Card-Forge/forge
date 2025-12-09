@@ -351,7 +351,7 @@
     <property name="enemy" value="Dementia Beast" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="95,94" />
-   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property></properties>
+   </properties>
   </object>
   <object id="93" template="../../../../../../common/maps/obj/enemy.tx" x="57.0657" y="336.607">
    <properties>

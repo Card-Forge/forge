@@ -110,21 +110,12 @@ If necessary browse to the JDK directory.
 If all goes well, you should eventually see the Forge splash screen followed by the main UI.
 
 ### Adventure Mode debugging on Desktop
-Follow the same steps to create a Run Configuration, but use forge-gui-mobile-dev instead of forge-gui-desktop as the module and directory.
+Follow the same steps to create a Run Configuration, but use `forge-gui-mobile-dev` as the module and `forge.app.Main` for the main class.
 
-  * select **Run** from the top menu
-  * select **Debug...** from the drop down
-  * select **Edit Configurations...**
-  * click the **+** in the upper left
-  * select "Application"
+### How to find & fix card errors
+When you have no initial lead a good idea is setting a breakpoint at `AbilityUtils.resolve`. From there you can step towards the individual effects (unless something is seriously broken):
+![02-08-debugger](02-08-debugger.png)
 
-  * set the **Name** to: Forge
-  * set the **Main class** to: forge.app.Main
-  * Latest IntelliJ Versions: click Modify options and check Add VM Options
-  * set the **VM options** to: 
-    * **(JAVA 17 and above)**
-      > -Xms768m -XX:+UseParallelGC -Dsun.java2d.xrender=false --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.text=ALL-UNNAMED --add-opens java.desktop/java.awt.font=ALL-UNNAMED --add-opens java.base/jdk.internal.misc=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.math=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.desktop/java.awt=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.desktop/javax.swing=ALL-UNNAMED --add-opens java.desktop/java.beans=ALL-UNNAMED --add-opens java.desktop/javax.swing.border=ALL-UNNAMED -Dio.netty.tryReflectionSetAccessible=true
-
-  * set the **Working directory** to %MODULE_WORKING_DIR%
-  * set **Use classpath of module** to: forge-gui-mobile-dev
-  * click **Debug**
+Another approach if you can't quickly find any obvious errors in the code:
+- compare scripts with the same effect variants (ideally newer ones)
+- use `git blame` to check if the script was recently updated - sometimes the cause is from a typo introduced

@@ -50,7 +50,7 @@
       "action": [{"setQuestFlag": {"key":"Ch1BlackCastleComplete", "val": 1} }, {"deleteMapObject": -1}, {"advanceQuestFlag": "Ch1CastlesComplete"}]
    }]
 }]</property>
-    <property name="effect">{ "startBattleWithCard": [ "Black Market|MMQ", "Breeding Pit|FEM", "Swamp|LEA", "Swamp|LEA", "Swamp|LEA", "Swamp|LEA", "Swamp|LEA" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Black Market|MMQ", "Breeding Pit|FEM", "Swamp|LEA|1", "Swamp|LEA|1", "Swamp|LEA|2", "Swamp|LEA|2", "Swamp|LEA|2" ] }</property>
     <property name="enemy" value="Griselbrand" />
     <property name="threatRange" type="int" value="50" />
    </properties>

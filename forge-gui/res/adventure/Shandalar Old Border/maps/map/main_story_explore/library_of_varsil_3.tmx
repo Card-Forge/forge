@@ -249,7 +249,7 @@
 ]</property>
     <property name="displayNameOverride" value="Book Mimic" />
     <property name="enemy" value="Mimic" />
-   <property name="effect">{ "startBattleWithCard": [ "Fellwar Stone|DRK|1", "Kismet|LEG" ] }</property></properties>
+   </properties>
   </object>
   <object id="37" template="../../../../../../common/maps/obj/dialog.tx" x="400" y="240">
    <properties>

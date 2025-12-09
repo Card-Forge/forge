@@ -154,7 +154,7 @@
   <object id="104" template="../../../../../../common/maps/obj/enemy.tx" x="327.667" y="213">
    <properties>
     <property name="enemy" value="Storm Titan" />
-   <property name="effect">{"startBattleWithCard": ["Island|ONS", "Mountain|ATH", "Pendrell Mists|WTH"]}</property>
+   <property name="effect">{ "startBattleWithCard": [ "Island|ONS", "Mountain|ATH", "Pendrell Mists|WTH" ] }</property>
     </properties>
   </object>
   <object id="105" template="../../../../../../common/maps/obj/enemy.tx" x="213.333" y="333.333">

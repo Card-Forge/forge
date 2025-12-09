@@ -54,6 +54,7 @@
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
    }]
 }]</property>
+    <property name="effect">{ "startBattleWithCard": [ "Colossus of Sardia|ATQ", "Mishra's Workshop|ATQ", "Sol Ring|LEA" ] }</property>
     <property name="enemy" value="Myr Superion"/>
     <property name="pursueRange" type="int" value="200"/>
     <property name="spawn.Hard" type="bool" value="false"/>

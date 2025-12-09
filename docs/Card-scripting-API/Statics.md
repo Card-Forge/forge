@@ -4,7 +4,8 @@ There are two major groups of static abilities:
 Syntax:  
 `S:Mode$ <Continuous> | <Affected$ {Valid Player/Card}> | [AffectedZone$ {ZoneType}] | [EffectZone$ {ZoneType}] | <Layer-specific$ Params> | [Description$ {String}]`
 
-By default `Affected-/EffectZone` are both Battlefield.
+By default `Affected-/EffectZone` are both Battlefield.  
+*Tip:* Use "All" as shortcut if it's supposed to affect (or work in) every zone.
 
 Here's an example for layer 7c:  
 `Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control get +1/+1.`
