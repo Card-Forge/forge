@@ -1,0 +1,9 @@
+Name:The Void
+ManaCost:no cost
+Colors:black
+Types:Legendary Creature Horror Villain
+PT:5/5
+K:Flying
+K:Indestructible
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+Oracle:Flying, indestructible
