@@ -18,8 +18,7 @@ K:Reach
 K:Trample
 T:Mode$ DamageDoneOnce | Execute$ TrigPutCounter | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, put a +1/+1 counter on him. If he's attacking, untap him and there is an additional combat phase after this phase.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBUntap
-SVar:DBUntap:DB$ Untap | Defined$ Self | ConditionCheckSVar$ Att | ConditionSVarCompare$ GE1 | SubAbility$ DBAddCombat
-SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat | ConditionCheckSVar$ Att | ConditionSVarCompare$ GE1
-SVar:Att:TriggeredTargetLKICopy$Valid Creature.attacking
+SVar:DBUntap:DB$ Untap | Defined$ Self | ConditionDefined$ TriggeredTargetLKICopy | ConditionPresent$ Creature.attacking | SubAbility$ DBAddCombat
+SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat | ConditionDefined$ TriggeredTargetLKICopy | ConditionPresent$ Creature.attacking
 SVar:HasCombatEffect:TRUE
 Oracle:Reach, trample\nEnrage — Whenever The Incredible Hulk is dealt damage, put a +1/+1 counter on him. If he's attacking, untap him and there is an additional combat phase after this phase.
