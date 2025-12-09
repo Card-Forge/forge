@@ -17,6 +17,7 @@ import forge.game.event.GameEventAnteCardsSelected;
 import forge.game.event.GameEventGameFinished;
 import forge.game.mulligan.AbstractMulligan;
 import forge.game.mulligan.HoustonMulligan;
+import forge.game.mulligan.MulliganService;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.player.RegisteredPlayer;
@@ -74,24 +75,8 @@ public class Match {
 
     public Game createGame() {
         final GameRules currentRules = this.getRules();
-
-        MulliganDefs.MulliganRule selectedRule = StaticData.instance().getMulliganRule();
-
-        if (selectedRule == MulliganDefs.MulliganRule.Houston) {
-
-            for (RegisteredPlayer rp : players) {
-
-                int baseHandSize = rp.getStartingHand();
-
-                AbstractMulligan currentMulligan = new HoustonMulligan(null, false);
-
-                int newDrawSize = currentMulligan.getModifiedHandSize(baseHandSize);
-
-                rp.setStartingHand(newDrawSize);
-            }
-        }
-
-        return new Game(players, currentRules, this);
+        MulliganService.applyPreDrawRules(this.players);
+        return new Game(this.players, currentRules, this);
     }
 
     public void startGame(final Game game) {

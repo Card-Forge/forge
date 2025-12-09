@@ -9,6 +9,7 @@ import forge.StaticData;
 import forge.game.Game;
 import forge.game.GameType;
 import forge.game.player.Player;
+import forge.game.player.RegisteredPlayer;
 
 public class MulliganService {
     Player firstPlayer;
@@ -103,6 +104,18 @@ public class MulliganService {
 
         for (AbstractMulligan mulligan : mulligans) {
             mulligan.afterMulligan();
+        }
+    }
+
+    public static void applyPreDrawRules(List<RegisteredPlayer> players) {
+        MulliganDefs.MulliganRule selectedRule = StaticData.instance().getMulliganRule();
+        if (selectedRule == MulliganDefs.MulliganRule.Houston) {
+            HoustonMulligan helperMulligan = new HoustonMulligan(null, false);
+            for (RegisteredPlayer rp : players) {
+                int baseHandSize = rp.getStartingHand();
+                int newDrawSize = helperMulligan.getModifiedHandSize(baseHandSize);
+                rp.setStartingHand(newDrawSize); // Update the RegisteredPlayer object
+            }
         }
     }
 }
