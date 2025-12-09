@@ -964,77 +964,6 @@
     ]
   },
   {
-    "name": "Ancient Vampire",
-    "sprite": "sprites/enemy/undead/vampire_4.atlas",
-    "deck": [
-      "decks/standard/ancientvampire.dck"
-    ],
-    "ai": "",
-    "flying": true,
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 29,
-    "scale": 0.85,
-    "life": 25,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "rare",
-          "Uncommon"
-        ],
-        "cardTypes": [
-          "Creature",
-          "Artifact",
-          "Enchantment",
-          "Instant",
-          "Sorcery"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "addMaxCount": 4,
-        "colors": [
-          "Black"
-        ],
-        "rarity": [
-          "rare"
-        ],
-        "subTypes": [
-          "Vampire"
-        ],
-        "cardTypes": [
-          "Land"
-        ]
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 10,
-        "addMaxCount": 90
-      },
-      {
-        "type": "shards",
-        "probability": 1,
-        "count": 10
-      }
-    ],
-    "colors": "B",
-    "questTags": [
-      "Vampire",
-      "Undead",
-      "Unholy",
-      "Evil",
-      "Wise",
-      "IdentityBlack"
-    ]
-  },
-  {
     "name": "Angel Warrior",
     "sprite": "sprites/enemy/celestial/angelwarrior.atlas",
     "deck": [
@@ -3431,7 +3360,7 @@
     "nameOverride": "Griffin Birdcaller",
     "sprite": "sprites/enemy/monstrosity/griffin_2.atlas",
     "deck": [
-      "decks/standard/bird_blue.json"
+      "decks/standard/bird_blue.dck"
     ],
     "ai": "",
     "flying": true,
@@ -8963,7 +8892,7 @@
     "name": "Elf",
     "sprite": "sprites/enemy/humanoid/elf/druid.atlas",
     "deck": [
-      "decks/standard/elf_bad.json"
+      "decks/standard/elf_bad.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -9009,7 +8938,7 @@
     "name": "Elf warrior",
     "sprite": "sprites/enemy/humanoid/elf/hunter.atlas",
     "deck": [
-      "decks/standard/elf_mid.json"
+      "decks/standard/elf_mid.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -9325,7 +9254,7 @@
     "name": "Faerie",
     "sprite": "sprites/enemy/fey/pixie_2.atlas",
     "deck": [
-      "decks/standard/faerie.json"
+      "decks/standard/faerie.dck"
     ],
     "ai": "",
     "flying": true,
@@ -9946,56 +9875,34 @@
     "life": 18,
     "rewards": [
       {
-        "type": "card",
+        "type": "deckCard",
         "probability": 1,
         "count": 2,
-        "addMaxCount": 5,
-        "colors": [
-          "Red"
-        ],
+        "addMaxCount": 0,
         "rarity": [
           "common",
-          "uncommon",
-          "rare"
-        ],
-        "subTypes": [
-          "Dragon"
+          "uncommon"
         ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.25,
+        "count": 1,
+        "rarity": [
+          "rare"
+        ]
+      },
+      {
+        "type": "shards",
+        "probability": 0.25,
+        "count": 0,
+        "addMaxCount": 3
       },
       {
         "type": "gold",
-        "probability": 0.7,
-        "count": 10,
-        "addMaxCount": 90
-      },
-      {
-        "type": "card",
-        "probability": 0.4,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ],
-        "cardTypes": [
-          "Artifact",
-          "Enchantment",
-          "Instant",
-          "Sorcery"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "rarity": [
-          "uncommon",
-          "common",
-          "Rare"
-        ],
-        "cardTypes": [
-          "Land"
-        ],
-        "colorType": "Colorless",
-        "cardText": "\\{R\\}"
+        "probability": 0.3,
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "R",
@@ -10740,71 +10647,34 @@
     "life": 10,
     "rewards": [
       {
-        "type": "item",
-        "probability": 1,
-        "count": 1,
-        "itemName": "Fungal Staff"
-      },
-      {
-        "type": "card",
+        "type": "deckCard",
         "probability": 1,
         "count": 2,
-        "addMaxCount": 4,
+        "addMaxCount": 0,
         "rarity": [
           "common",
           "uncommon"
-        ],
-        "cardText": "Saproling"
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 1,
-        "colors": [
-          "Black",
-          "Green"
-        ],
-        "rarity": [
-          "Rare"
-        ],
-        "colorType": "Any"
-      },
-      {
-        "type": "gold",
-        "probability": 1,
-        "count": 50,
-        "addMaxCount": 100
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "rarity": [
-          "uncommon",
-          "common"
-        ],
-        "cardTypes": [
-          "Land"
         ]
       },
       {
-        "type": "card",
-        "probability": 1,
-        "count": 2,
-        "addMaxCount": 4,
-        "colors": [
-          "Green",
-          "Black"
-        ],
+        "type": "deckCard",
+        "probability": 0.25,
+        "count": 1,
         "rarity": [
-          "common",
-          "uncommon",
-          "Rare"
-        ],
-        "subTypes": [
-          "Fungus"
-        ],
-        "colorType": "Any"
+          "rare"
+        ]
+      },
+      {
+        "type": "shards",
+        "probability": 0.25,
+        "count": 0,
+        "addMaxCount": 3
+      },
+      {
+        "type": "gold",
+        "probability": 0.3,
+        "count": 0,
+        "addMaxCount": 300
       }
     ],
     "colors": "G",
@@ -14464,7 +14334,7 @@
     "name": "High Elf",
     "sprite": "sprites/enemy/humanoid/elf/druid_2.atlas",
     "deck": [
-      "decks/standard/elf_good.json"
+      "decks/standard/elf_good.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -15145,7 +15015,7 @@
     "nameOverride": "Human Footsoldier",
     "sprite": "sprites/enemy/humanoid/human/soldier/pikeman.atlas",
     "deck": [
-      "decks/standard/human_bad.json"
+      "decks/standard/human_bad.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -15268,7 +15138,7 @@
     "nameOverride": "Legionnaire",
     "sprite": "sprites/enemy/humanoid/human/soldier/legionite.atlas",
     "deck": [
-      "decks/standard/human_good.json"
+      "decks/standard/human_good.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -15315,7 +15185,7 @@
     "nameOverride": "Human Guard",
     "sprite": "sprites/enemy/humanoid/human/soldier/swordsman.atlas",
     "deck": [
-      "decks/standard/human_mid.json"
+      "decks/standard/human_mid.dck"
     ],
     "ai": "cautious",
     "spawnRate": 1,
@@ -18771,7 +18641,7 @@
     "nameOverride": "Merfok Warrior",
     "sprite": "sprites/enemy/elemental/airelemental.atlas",
     "deck": [
-      "decks/standard/merfolk_mid.json"
+      "decks/standard/merfolk_mid.dck"
     ],
     "ai": "",
     "flying": true,
@@ -23700,7 +23570,7 @@
   },
   {
     "name": "Shaman of Zedruu",
-    "nameOverride": "",
+    "nameOverride": "Portal Disciple",
     "sprite": "sprites/enemy/humanoid/viashino/pikelizard.atlas",
     "deck": [
       "decks/standard/shamanelite.dck"
@@ -25169,37 +25039,36 @@
       {
         "type": "card",
         "probability": 1,
-        "count": 2,
-        "addMaxCount": 8,
+        "count": 1,
+        "addMaxCount": 1,
         "colors": [
           "Blue"
         ],
-        "subTypes": [
-          "Giant"
+        "rarity": [
+          "Rare"
         ],
         "colorType": "MonoColor"
       },
       {
-        "type": "gold",
-        "probability": 0.7,
-        "count": 100,
-        "addMaxCount": 900
-      },
-      {
-        "type": "card",
+        "type": "deckCard",
         "probability": 0.5,
-        "count": 3,
-        "colors": [
-          "White"
-        ],
+        "count": 1,
         "rarity": [
           "Rare"
         ]
       },
       {
+        "type": "deckCard",
+        "probability": 0.5,
+        "count": 1,
+        "rarity": [
+          "Uncommon"
+        ]
+      },
+      {
         "type": "shards",
         "probability": 1,
-        "count": 50,
+        "count": 10,
         "addMaxCount": 10
       }
     ],
@@ -25392,6 +25261,42 @@
         "probability": 1,
         "count": 15,
         "addMaxCount": 10
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Mishra's Factory|ATQ|3"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Kismet|LEG"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Hydroblast|ICE"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Pyroblast|ICE"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Al-abara's Carpet|LEG"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Swords to Plowshares|ICE"
       }
     ],
     "colors": "WUR"
@@ -25492,6 +25397,36 @@
         "probability": 1,
         "count": 15,
         "addMaxCount": 10
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Hazezon Tamar|LEG"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Dakkon Blackblade|LEG"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Sol'kanar the Swamp King|LEG"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Desertion|VIS"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Hymn of Rebirth|ICE"
       }
     ],
     "colors": "WUBRG"
@@ -25531,6 +25466,48 @@
         "probability": 1,
         "count": 1,
         "cardName": "Serra Angel|O90P"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Asmira, Holy Avenger|MIR"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Priest of Titania|USG"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Deathcoil Wurm|PO2"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Commander Eesha|JUD"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Moment's Peace|ODY"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Wonder|JUD"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Kaysa|ALL"
       }
     ],
     "colors": "WUG"
@@ -28452,13 +28429,13 @@
         "type": "card",
         "probability": 1,
         "count": 1,
-        "cardName": "Wrath of God|LEA"
+        "cardName": "Wrath of God|POR"
       },
       {
         "type": "card",
         "probability": 1,
         "count": 1,
-        "cardName": "Archangel|VIS"
+        "cardName": "Archangel|POR"
       },
       {
         "type": "card",
@@ -28482,19 +28459,19 @@
         "type": "card",
         "probability": 1,
         "count": 1,
-        "cardName": "Ancestral Memories|MIR"
+        "cardName": "Ancestral Memories|POR"
       },
       {
         "type": "card",
         "probability": 1,
         "count": 1,
-        "cardName": "Volcanic Dragon|MIR"
+        "cardName": "Volcanic Dragon|POR"
       },
       {
         "type": "card",
         "probability": 1,
         "count": 1,
-        "cardName": "Earthquake|LEA"
+        "cardName": "Earthquake|POR"
       },
       {
         "type": "card",
@@ -33023,7 +33000,43 @@
     "difficulty": 0.1,
     "speed": 30,
     "life": 40,
-    "rewards": []
+    "rewards": [
+      {
+        "type": "gold",
+        "count": 1000,
+        "addMaxCount": 2000
+      },
+      {
+        "type": "shards",
+        "count": 15,
+        "addMaxCount": 15
+      },
+      {
+        "type": "card",
+        "cardName": "Jeska, Warrior Adept|JUD",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Gratuitous Violence|ONS",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Kamahl, Fist of Krosa|ONS",
+        "count": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Decimate|ODY",
+        "count": 1
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 2
+      }
+    ]
   },
   {
     "name": "Eron the Relentless",
@@ -35796,15 +35809,40 @@
         "itemName": "Guard Armor"
       },
       {
-        "type": "life",
-        "probability": 1,
-        "count": 1
-      },
-      {
         "type": "gold",
         "probability": 1,
-        "count": 200,
-        "addMaxCount": 300
+        "count": 2000,
+        "addMaxCount": 0
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Intrepid Hero|USG"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Soltari Champion|STH"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Catapult Master|ONS"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Daru Warchief|SCG"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Shared Triumph|ONS"
       }
     ],
     "colors": "W",
@@ -35838,8 +35876,44 @@
       {
         "type": "gold",
         "probability": 1,
-        "count": 200,
-        "addMaxCount": 300
+        "count": 2000,
+        "addMaxCount": 0
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Steam Catapult|PO2"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Righteous Fury|PO2"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Angel of Fury|PO2"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Archangel|PO2"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Festival of Trokin|PO2"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Righteous Charge|PO2"
       }
     ],
     "colors": "W",

@@ -37,11 +37,8 @@
  <objectgroup id="4" name="Objects">
   <object id="56" template="../../../../../../common/maps/obj/shop.tx" x="208" y="162">
    <properties>
-    <property name="commonShopList" value="GreenBoosterPackShop,Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
-    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
-    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
+    <property name="commonShopList" value="CityCreatureGreen"/>
     <property name="signYOffset" type="float" value="-2"/>
-    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
   </object>
   <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="199" y="419"/>
@@ -49,7 +46,6 @@
   <object id="55" template="../../../../../../common/maps/obj/shop.tx" x="479" y="453">
    <properties>
     <property name="commonShopList" value="Forest"/>
-    <property name="noRestock" type="bool" value="true"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
@@ -63,80 +59,31 @@
   <object id="62" template="../../../../../../common/maps/obj/shop.tx" x="361" y="370">
    <properties>
     <property name="commonShopList" value="GreenEquipment"/>
-    <property name="hasSign" type="bool" value="true"/>
-    <property name="noRestock" type="bool" value="true"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
   <object id="63" template="../../../../../../common/maps/obj/shop.tx" x="216" y="290">
    <properties>
     <property name="commonShopList" value="GreenItems"/>
-    <property name="hasSign" type="bool" value="true"/>
-    <property name="noRestock" type="bool" value="true"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
   <object id="64" template="../../../../../../common/maps/obj/shop.tx" x="466" y="417">
    <properties>
-    <property name="commonShopList" value="Enchantment6Green,Creature6Green,GreenBoosterPackShop,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
-    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen"/>
-    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
+    <property name="commonShopList" value="CityEnchantmentGreen"/>
     <property name="signYOffset" type="float" value="-2"/>
-    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
   </object>
   <object id="65" template="../../../../../../common/maps/obj/shop.tx" x="530" y="386">
    <properties>
-    <property name="commonShopList" value="Enchantment6Green,Creature6Green,GreenBoosterPackShop,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
-    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
-    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
+    <property name="commonShopList" value="CitySpellGreen"/>
     <property name="signYOffset" type="float" value="-2"/>
-    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
-   </properties>
-  </object>
-  <object id="66" template="../../../../../../common/maps/obj/shop.tx" x="449" y="305">
-   <properties>
-    <property name="commonShopList" value="Enchantment6Green,Creature6Green,GreenBoosterPackShop,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
-    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
-    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
-    <property name="signYOffset" type="float" value="-2"/>
-    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
-   </properties>
-  </object>
-  <object id="67" template="../../../../../../common/maps/obj/shop.tx" x="513" y="241">
-   <properties>
-    <property name="commonShopList" value="Enchantment6Green,Creature6Green,GreenBoosterPackShop,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
-    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
-    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
-    <property name="signYOffset" type="float" value="-2"/>
-    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/shop.tx" x="448" y="130">
    <properties>
-    <property name="commonShopList" value="Enchantment6Green,Creature6Green,GreenBoosterPackShop,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
-    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
-    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
+    <property name="commonShopList" value="GammaBoosterPackShop"/>
     <property name="signYOffset" type="float" value="-2"/>
-    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
-   </properties>
-  </object>
-  <object id="69" template="../../../../../../common/maps/obj/shop.tx" x="257" y="194">
-   <properties>
-    <property name="commonShopList" value="Enchantment6Green,Creature6Green,GreenBoosterPackShop,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
-    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
-    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green"/>
-    <property name="signYOffset" type="float" value="-2"/>
-    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
-   </properties>
-  </object>
-  <object id="70" template="../../../../../../common/maps/obj/shop.tx" x="97" y="417">
-   <properties>
-    <property name="commonShopList" value="Enchantment6Green,Creature6Green,GreenBoosterPackShop,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
-    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
-    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
-    <property name="signYOffset" type="float" value="-2"/>
-    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
    </properties>
   </object>
   <object id="71" template="../../../../../../common/maps/obj/arena.tx" x="375" y="290">
@@ -187,46 +134,15 @@
     <property name="questtype" value="forest_capital"/>
    </properties>
   </object>
-  <object id="76" template="../../../../../../common/maps/obj/shop.tx" x="96" y="209">
-   <properties>
-    <property name="commonShopList" value="Enchantment6Green,Creature6Green,GreenBoosterPackShop,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
-    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen"/>
-    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
-    <property name="signXOffset" type="float" value="-16"/>
-    <property name="signYOffset" type="float" value="-8"/>
-    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
-   </properties>
-  </object>
-  <object id="77" template="../../../../../../common/maps/obj/shop.tx" x="96" y="304">
-   <properties>
-    <property name="commonShopList" value="Enchantment6Green,Creature6Green,GreenBoosterPackShop,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
-    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
-    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
-    <property name="signXOffset" type="float" value="-16"/>
-    <property name="signYOffset" type="float" value="-8"/>
-    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
-   </properties>
-  </object>
-  <object id="78" template="../../../../../../common/maps/obj/RotatingShop.tx" x="462" y="369">
-   <properties>
-    <property name="rotation" value="Green1,Green2,Green3,Green4,Green5,Green6"/>
-   </properties>
-  </object>
-  <object id="79" template="../../../../../../common/maps/obj/RotatingShop.tx" x="160" y="161">
-   <properties>
-    <property name="rotation" value="Green1,Green2,Green3,Green4,Green5,Green6"/>
-    <property name="signYOffset" type="float" value="0"/>
-   </properties>
-  </object>
-  <object id="80" template="../../../../../../common/maps/obj/RotatingShop.tx" x="160" y="370">
-   <properties>
-    <property name="rotation" value="Green1,Green2,Green3,Green4,Green5,Green6"/>
-    <property name="signYOffset" type="float" value="0"/>
-   </properties>
-  </object>
   <object id="81" template="../../../../../../common/maps/obj/shardtrader.tx" x="495" y="162" width="19" height="19">
    <properties>
     <property name="signXOffset" type="float" value="14"/>
+    <property name="signYOffset" type="float" value="-2"/>
+   </properties>
+  </object>
+  <object id="82" template="../../../../../../common/maps/obj/shop.tx" x="257" y="194">
+   <properties>
+    <property name="commonShopList" value="CityLandGreen"/>
     <property name="signYOffset" type="float" value="-2"/>
    </properties>
   </object>

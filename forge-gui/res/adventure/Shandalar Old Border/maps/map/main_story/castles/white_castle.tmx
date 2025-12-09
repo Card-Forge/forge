@@ -82,7 +82,7 @@
 			[
 				{
 					"name": "Akroma, I've done as you asked! It's time to end this!",
-					"action": [ { "deleteMapObject": 55 } ],
+					"action": [ { "deleteMapObject": -1 } ],
 					"condition": [
 						{
 							"getMapFlag": {
@@ -101,7 +101,7 @@
 				},
 					{
                 	    "name": "Akroma, I've done as you asked! It's time to end this!",
-                		"action": [ { "deleteMapObject": 55 } ],
+                		"action": [ { "deleteMapObject": -1 } ],
                 		"condition": [
                 			{
                 				"getMapFlag": {
@@ -170,25 +170,10 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Holy Paladin" />
+    <property name="enemy" value="Knight" />
     <property name="threatRange" type="int" value="30" />
+   <property name="effect">{"startBattleWithCard": ["Plains|2ED", "Darkest Hour|USG"]}</property>
    </properties>
-  </object>
-  <object id="69" template="../../../../../../../common/maps/obj/enemy.tx" x="365.5" y="229.667">
-   <properties>
-    <property name="defeatDialog">[
-   {
-   "action": [
-      {"advanceMapFlag":"enemiesDefeated"},
-      {"deleteMapObject": -1}
-    ]
-   }
-]</property>
-    <property name="enemy" value="Sun Titan" />
-    <property name="pursueRange" type="int" value="30" />
-    <property name="threatRange" type="int" value="30" />
-   <property name="effect">{"startBattleWithCard": ["Plains|INV", "Plains|INV", "Plains|INV", "Plains|INV", "Ivory Guardians|LEG"]}</property>
-    </properties>
   </object>
   <object id="71" template="../../../../../../../common/maps/obj/enemy.tx" x="82.5" y="606.667">
    <properties>
@@ -240,7 +225,7 @@
         "options": [
           {
             "name": "What do I need to do to get passed though this gate?",
-            "text": "To show you are worthy, you must prove your strength by defeating at least four of the five enemies lurking within this dungeon to be worthy of an audience with my illustrious master, who holds dominion over this realm of the holy.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.",
+            "text": "To show you are worthy, you must prove your strength by defeating all four enemies lurking within this dungeon to be worthy of an audience with my illustrious master, who holds dominion over this realm of the holy.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.",
             "options": [
               {
                 "name": "I'll show my worth, just make sure to open the gate when I do defeat your challengers.",

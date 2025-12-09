@@ -170,19 +170,19 @@
    <properties>
     <property name="reward">[
   {
-    "editions": [ "ONS", "LGN", "SCG" ],
+    "editions": [ "UGL" ],
     "type": "card",
     "count": 10,
     "rarity": [ "Common" ]
   },
   {
-    "editions": [ "ONS", "LGN", "SCG" ],
+    "editions": [ "UGL" ],
     "type": "card",
     "count": 3,
     "rarity": [ "Uncommon" ]
   },
   {
-    "editions": [ "ONS", "LGN", "SCG" ],
+    "editions": [ "UGL" ],
     "type": "card",
     "count": 3,
     "rarity": [ "Rare" ]

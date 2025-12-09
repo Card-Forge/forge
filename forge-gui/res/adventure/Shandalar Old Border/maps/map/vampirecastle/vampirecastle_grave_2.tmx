@@ -86,7 +86,7 @@
     <property name="enemy" value="Chainer Dementia Master" />
     <property name="inactive" type="bool" value="true" />
     <property name="threatRange" type="int" value="50" />
-   <property name="effect">{ "startBattleWithCard": ["Chainer, Dementia Master|TOR", "Cabal Coffers|TOR"] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": ["Swamp|ODY|1", "Swamp|ODY|2", "Swamp|ODY|3", "Chainer, Dementia Master|TOR"] }</property></properties>
   </object>
   <object id="105" template="../../../../../../common/maps/obj/enemy.tx" x="280" y="260">
    <properties>

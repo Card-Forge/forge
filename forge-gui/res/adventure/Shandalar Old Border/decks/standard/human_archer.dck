@@ -1,16 +1,14 @@
 [metadata]
-Name=Human Archer - GW Elves
+Name=Human Archer
 [Main]
-17 Forest|ONS|2
-3 Plains|ONS|2
-3 Skyshroud Elf|TMP
-4 Brushland|ICE
-4 Elvish Pioneer|ONS
-4 Elvish Scout|FEM
-4 Femeref Archers|MIR
-4 Longbow Archer|7ED
-4 Maro|6ED
-4 Quirion Elves|BTD
-4 Quirion Ranger|VIS
-4 Wild Might|PCY
-4 Yavimaya Enchantress|UDS
+24 Plains|POR|3
+4 Crossbow Infantry|MMQ
+4 D'Avenant Archer|LEG
+4 Elite Archers|USG
+4 Keen-Eyed Archers|POR
+4 Longbow Archer|VIS
+4 Mounted Archers|TMP
+2 Rashka the Slayer|HML
+4 Serrated Arrows|HML
+2 Serra's Blessing|WTH
+4 Disenchant|ICE

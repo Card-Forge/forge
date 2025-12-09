@@ -266,7 +266,7 @@
         "Jayemdae Tome|LEA"
       ]
     },
-    "description": "Start battles with Jayemdae Tome in play."
+    "description": "Pay 4 and tap to draw a card."
   },
   {
     "name": "Ring of Renewal",
@@ -277,11 +277,11 @@
         "Ring of Renewal|FEM"
       ]
     },
-    "description": "Start battles with Ring of Renewal in play."
+    "description": "Pay 5 and tap to discard a random card, then draw 2 cards."
   },
   {
     "name": "Mogg Fanatic",
-    "description": "Starts the battle with a Mogg Fanatic.",
+    "description": "A 1/1 Goblin. Sacrifice to deal 1 damage to any target.",
     "equipmentSlot": "Neck",
     "iconName": "PhoenixCharm",
     "effect": {
@@ -339,7 +339,7 @@
   },
   {
     "name": "Boots of the Crossroads",
-    "description": "Boots that carry the bargain of Haunted Crossroads.",
+    "description": "Pay B to put a creature from your graveyard on top of your library.",
     "equipmentSlot": "Boots",
     "iconName": "DarkBoots",
     "cost": 1500,
@@ -351,7 +351,7 @@
   },
   {
     "name": "Miller's Clothes",
-    "description": "Well worn garb that comes with a Millstone tucked away.",
+    "description": "Pay 2 and tap to mill target player 2 cards.",
     "equipmentSlot": "Body",
     "iconName": "SpellBook",
     "cost": 1500,
@@ -363,7 +363,7 @@
   },
   {
     "name": "Cadet's Sword",
-    "description": "Supports the early Soldier plan.",
+    "description": "Start with a 1/1 Human Soldier in play.",
     "equipmentSlot": "Right",
     "iconName": "SteelSword",
     "cost": 5000,
@@ -375,7 +375,7 @@
   },
   {
     "name": "Holy Symbol",
-    "description": "Bolsters Cleric-centric starts.",
+    "description": "A 1/1 Cleric. Tap to destroy an Aura on your creature.",
     "equipmentSlot": "Right",
     "iconName": "HallowedSigil",
     "cost": 5000,
@@ -455,7 +455,7 @@
         "Merfolk of the Pearl Trident|LEA"
       ]
     },
-    "description": "Start battles with Merfolk of the Pearl Trident in play."
+    "description": "Start with a 1/1 Merfolk in play."
   },
   {
     "name": "Fugitive Spellbook",
@@ -467,7 +467,7 @@
         "Fugitive Wizard|LGN"
       ]
     },
-    "description": "Start battles with Fugitive Wizard in play."
+    "description": "Start with a 1/1 Human Wizard in play."
   },
   {
     "name": "Tawnos's Wand",
@@ -503,7 +503,7 @@
         "Aven Envoy|LGN"
       ]
     },
-    "description": "Start battles with Aven Envoy in play."
+    "description": "Start with a 0/2 flying Bird Soldier in play."
   },
   {
     "name": "Cloak of Dreams",
@@ -628,7 +628,7 @@
         "Mons's Goblin Raiders|LEA"
       ]
     },
-    "description": "Start battles with Mons's Goblin Raiders in play."
+    "description": "Start with a 1/1 Goblin in play."
   },
   {
     "name": "Zelyon Sword",
@@ -652,7 +652,7 @@
         "Dwarven Armorer|FEM"
       ]
     },
-    "description": "Start battles with Dwarven Armorer in play."
+    "description": "A 0/2 Dwarf. Discard and tap to add a +1/+0 or +0/+1 counter."
   },
   {
     "name": "Roc Egg",
@@ -664,11 +664,11 @@
         "Roc Hatchling|WTH"
       ]
     },
-    "description": "Start battles with Roc Hatchling in play."
+    "description": "A 0/1 that grows into a 3/3 flier after 4 turns."
   },
   {
     "name": "Flowstone Armor",
-    "description": "Pay 2 to give target creature +1/-1 until end of turn. -2 starting life.",
+    "description": "Pay 3 and tap to give target creature +1/-1 while this stays tapped. -2 starting life.",
     "equipmentSlot": "Body",
     "iconName": "DarkArmor",
     "cost": 5000,
@@ -717,7 +717,7 @@
   },
   {
     "name": "Dragon Mask",
-    "description": "Return an attacking creature to save it, draw a card.",
+    "description": "Pay 3 and tap to give a creature +2/+2 until end of turn, then return it to hand.",
     "equipmentSlot": "Neck",
     "iconName": "DragonMask",
     "cost": 3000,
@@ -736,11 +736,11 @@
         "Metallic Sliver|TMP"
       ]
     },
-    "description": "Start battles with Metallic Sliver in play."
+    "description": "Start with a 1/1 artifact Sliver in play."
   },
   {
     "name": "Amulet of Kroog",
-    "description": "+2 life. Start battles with Amulet of Kroog in play.",
+    "description": "+2 life. Pay 2 and tap to prevent 1 damage to any target.",
     "equipmentSlot": "Neck",
     "iconName": "AmuletofKroog",
     "cost": 2000,
@@ -767,7 +767,7 @@
     "questItem": true
   },
   {
-    "name": "Nahiri's Key",
+    "name": "Rebel Key",
     "iconName": "RedKey",
     "questItem": true
   },
@@ -861,7 +861,7 @@
         "Dwarven Warriors|LEA"
       ]
     },
-    "description": "Start battles with Dwarven Warriors in play."
+    "description": "A 1/1. Tap to make a creature with power 2 or less unblockable."
   },
   {
     "name": "Iron Boots",
@@ -914,7 +914,7 @@
         "Thunder Wall|ICE"
       ]
     },
-    "description": "Start battles with Thunder Wall in play."
+    "description": "A 0/2 flying Wall. Pay U to get +1/+1 until end of turn."
   },
   {
     "name": "Steel Armor",
@@ -968,7 +968,7 @@
         "Zombie Cannibal|ODY"
       ]
     },
-    "description": "-1 life. Start battles with Zombie Cannibal in play."
+    "description": "-1 life. A 1/1 Zombie that exiles cards from opponent's graveyard."
   },
   {
     "name": "Pied Pipes",
@@ -980,7 +980,7 @@
         "Plague Rats|LEA"
       ]
     },
-    "description": "Start battles with Plague Rats in play."
+    "description": "A Rat with power/toughness equal to Plague Rats you control."
   },
   {
     "name": "Acidic Dagger",
@@ -996,7 +996,7 @@
   },
   {
     "name": "Life Chisel",
-    "description": "Start battles with Life Chisel in play.",
+    "description": "Sacrifice a creature during upkeep to gain life equal to its toughness.",
     "equipmentSlot": "Left",
     "iconName": "LifeChisel",
     "cost": 3000,
@@ -1053,7 +1053,7 @@
         "Soul Warden|EXO"
       ]
     },
-    "description": "+2 life. Start battles with Soul Warden in play."
+    "description": "+2 life. A 1/1 Cleric. Gain 1 life whenever another creature enters."
   },
   {
     "name": "Dagger",
@@ -1098,7 +1098,7 @@
         "Goblin Balloon Brigade|LEA"
       ]
     },
-    "description": "Start battles with Goblin Balloon Brigade in play."
+    "description": "A 1/1 Goblin. Pay R to gain flying until end of turn."
   },
   {
     "name": "Mithril Boots",
@@ -1120,7 +1120,7 @@
         "Willow Elf|S99"
       ]
     },
-    "description": "Start battles with Willow Elf in play."
+    "description": "Start with a 1/1 Elf in play."
   },
   {
     "name": "Thallid Farming Tools",
@@ -1133,7 +1133,7 @@
         "Thallid|FEM"
       ]
     },
-    "description": "-2 life. Start battles with Thallid in play."
+    "description": "-2 life. A 1/1 Fungus. Remove 3 spore counters to make a Saproling."
   },
   {
     "name": "Elven Lyre",
@@ -1157,7 +1157,7 @@
         "Wall of Wood|LEA"
       ]
     },
-    "description": "Start battles with Wall of Wood in play."
+    "description": "Start with a 0/3 Wall in play."
   },
   {
     "name": "Mithril Armor",
@@ -1264,7 +1264,7 @@
         "Dwarven Blastminer|ONS"
       ]
     },
-    "description": "Start battles with Dwarven Blastminer in play."
+    "description": "A 1/1 with morph. Pay 2R and tap to destroy a nonbasic land."
   },
   {
     "name": "Wall of Spears",
@@ -1276,7 +1276,7 @@
         "Wall of Spears|ATQ"
       ]
     },
-    "description": "Start battles with Wall of Spears in play."
+    "description": "Start with a 2/3 first strike Wall in play."
   },
   {
     "name": "Library of Leng",
@@ -1356,7 +1356,7 @@
   },
   {
     "name": "Dark Boots",
-    "description": "-2 life. Start battles with Drudge Spell in play.",
+    "description": "-2 life. Exile 2 creatures from graveyard to make a 1/1 Skeleton.",
     "equipmentSlot": "Boots",
     "iconName": "DarkBoots",
     "cost": 2000,
@@ -1378,7 +1378,7 @@
       ],
       "lifeModifier": -1
     },
-    "description": "-1 life. Start battles with Wall of Shadows in play."
+    "description": "-1 life. A 0/1 Wall that prevents all damage from blocked creatures."
   },
   {
     "name": "Dark Armor",
@@ -1391,7 +1391,7 @@
       ],
       "lifeModifier": -1
     },
-    "description": "-1 life. Start battles with Skeletal Snake in play."
+    "description": "-1 life. Start with a 2/1 Skeleton Snake in play."
   },
   {
     "name": "Carrion Feeder",
@@ -1403,7 +1403,7 @@
         "Carrion Feeder|SCG"
       ]
     },
-    "description": "Start battles with Carrion Feeder in play."
+    "description": "A 1/1 Zombie. Sacrifice a creature to add a +1/+1 counter."
   },
   {
     "name": "Mind Stone",
@@ -1860,7 +1860,7 @@
         "Staff of the Ages|ICE"
       ]
     },
-    "description": "+3 life. Start battles with Staff of the Ages in play."
+    "description": "+3 life. Creatures with landwalk can be blocked normally."
   },
   {
     "name": "Jester's Cap",
@@ -1872,7 +1872,7 @@
         "Jester's Cap|ICE"
       ]
     },
-    "description": "-1 life. Start battles with Jester's Cap in play."
+    "description": "-1 life. Pay 2 and sacrifice to exile 3 cards from opponent's library."
   },
   {
     "name": "Gaea's Touch",
@@ -1885,7 +1885,7 @@
         "Gaea's Touch|DRK"
       ]
     },
-    "description": "-1 life. Start battles with Gaea's Touch in play. +1.2 movement speed."
+    "description": "-1 life. Play an extra Forest each turn. Sacrifice for GG. Faster movement."
   },
   {
     "name": "Helm of Obedience",
@@ -1903,7 +1903,7 @@
         ]
       }
     },
-    "description": "-1 life. Start battles with Snake Basket in play. +1.2 movement speed."
+    "description": "-1 life. Pay X and sacrifice to create X 1/1 Snakes. Faster movement."
   },
   {
     "name": "Robe of Mirrors",
@@ -1916,10 +1916,10 @@
         "Robe of Mirrors|EXO"
       ]
     },
-    "description": "-1 life. Start battles with Robe of Mirrors in play."
+    "description": "-1 life. Enchanted creature gains shroud (can't be targeted)."
   },
   {
-    "name": "Teferi's Puzzle Box",
+    "name": "Mad Staff",
     "equipmentSlot": "Left",
     "iconName": "MadStaff",
     "effect": {
@@ -1929,7 +1929,7 @@
         "Teferi's Puzzle Box|VIS"
       ]
     },
-    "description": "+1 life. Start battles with Teferi's Puzzle Box in play."
+    "description": "+1 life. Each draw step, put hand on bottom, draw that many."
   },
   {
     "name": "Hidden Ancients",
@@ -1941,7 +1941,7 @@
         "Hidden Ancients|USG"
       ]
     },
-    "description": "+3 life. Start battles with Hidden Ancients in play."
+    "description": "+3 life. Becomes a 5/5 Treefolk when opponent casts an enchantment."
   },
   {
     "name": "Dwarven Hold",
@@ -1953,7 +1953,7 @@
         "Dwarven Hold|FEM"
       ]
     },
-    "description": "+3 life. Start battles with Dwarven Hold in play."
+    "description": "+3 life. A storage land - accumulate counters, tap to add R per counter."
   },
   {
     "name": "Dark Sphere",
@@ -1965,7 +1965,7 @@
         "Dark Sphere|DRK"
       ]
     },
-    "description": "+1 life. Start battles with Dark Sphere in play."
+    "description": "+1 life. Sacrifice to prevent half of next damage to you."
   },
   {
     "name": "Chicken Egg",
@@ -1977,7 +1977,7 @@
         "Chicken Egg"
       ]
     },
-    "description": "+1 life. Start battles with Chicken Egg in play."
+    "description": "+1 life. Roll d6 each upkeep; on 6, sacrifice to make a 4/4 Bird."
   },
   {
     "name": "Goblin Tinkerer",
@@ -1989,7 +1989,7 @@
         "Goblin Tinkerer|MIR"
       ]
     },
-    "description": "+1 life. Start battles with Goblin Tinkerer in play."
+    "description": "+1 life. A 1/2. Pay R and tap to destroy artifact (damages itself)."
   },
   {
     "name": "Crown of the Ages",
@@ -2001,7 +2001,7 @@
         "Crown of the Ages|ICE"
       ]
     },
-    "description": "+2 life. Start battles with Crown of the Ages in play."
+    "description": "+2 life. Pay 4 and tap to move an Aura to another creature."
   },
   {
     "name": "Cursed Rack",
@@ -2012,7 +2012,7 @@
         "Cursed Rack|ATQ"
       ]
     },
-    "description": "Start battles with Cursed Rack in play."
+    "description": "Choose an opponent - their maximum hand size is 4."
   },
   {
     "name": "Crystal Rod",
@@ -2195,7 +2195,7 @@
         "Scathe Zombies|LEA"
       ]
     },
-    "description": "-4 life. Start battles with Scathe Zombies in play."
+    "description": "-4 life. Start with a 2/2 Zombie in play."
   },
   {
     "name": "Feverbringer's Cloak",
@@ -2876,7 +2876,7 @@
     "iconName": "CrowcallersCharm",
     "effect": {
       "startBattleWithCard": [
-        "Storm Crow|ALL"
+        "Storm Crow|POR"
       ]
     },
     "description": "Start battles with Storm Crow in play."

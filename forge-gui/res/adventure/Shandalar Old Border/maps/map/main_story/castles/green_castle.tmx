@@ -81,7 +81,7 @@
 			[
 				{
 					"name": "Queen of Beasts, I've done as you asked! It's time to end this!",
-					"action": [ { "deleteMapObject": 55 } ],
+					"action": [ { "deleteMapObject": -1 } ],
 					"condition": [
 						{
 							"getMapFlag": {
@@ -100,7 +100,7 @@
 				},
 				{
                 	"name": "Queen of Beasts, I've done as you asked! It's time to end this!",
-                	"action": [ { "deleteMapObject": 55 } ],
+                	"action": [ { "deleteMapObject": -1 } ],
                 	"condition": [
                 		{
                 			"getMapFlag": {
@@ -187,21 +187,6 @@
    <property name="effect">{ "startBattleWithCard": [ "Forest|ICE", "Plains|ICE", "Timber Wolves|LEA", "Timber Wolves|LEA", "Tundra Wolves|LEG", "Tundra Wolves|LEG" ] }</property>
     </properties>
   </object>
-  <object id="69" template="../../../../../../../common/maps/obj/enemy.tx" x="363.833" y="223.874">
-   <properties>
-    <property name="defeatDialog">[
-   {
-   "action": [
-      {"advanceMapFlag":"enemiesDefeated"},
-      {"deleteMapObject": -1}
-    ]
-   }
-]</property>
-    <property name="enemy" value="Forest Titan" />
-    <property name="threatRange" type="int" value="30" />
-   <property name="effect">{"startBattleWithCard": ["Forest|TMP", "Forest|TMP", "Forest|TMP", "Forest|TMP", "Treefolk Seedlings|USG"]}</property>
-    </properties>
-  </object>
   <object id="70" template="../../../../../../../common/maps/obj/enemy.tx" x="97" y="410">
    <properties>
     <property name="defeatDialog">[
@@ -236,7 +221,7 @@
         "options": [
           {
             "name": "What do I need to do to get passed though this gate?",
-            "text": "To show you are worthy, you must prove your strength by defeating at least four of the five enemies lurking within this dungeon to be worthy of an audience with my illustrious master, who holds dominion over this realm of beasts.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.",
+            "text": "To show you are worthy, you must prove your strength by defeating all four enemies lurking within this dungeon to be worthy of an audience with my illustrious master, who holds dominion over this realm of beasts.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.",
             "options": [
               {
                 "name": "I'll show my worth, just make sure to open the gate when I do defeat your challengers.",

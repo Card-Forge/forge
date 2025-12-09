@@ -82,7 +82,7 @@
 			[
 				{
 					"name": "Rorix Bladewing, I've done as you asked! It's time to end this!",
-					"action": [ { "deleteMapObject": 55 } ],
+					"action": [ { "deleteMapObject": -1 } ],
 					"condition": [
 						{
 							"getMapFlag": {
@@ -101,7 +101,7 @@
 				},
 				{
                 	"name": "Rorix Bladewing, I've done as you asked! It's time to end this!",
-                	"action": [ { "deleteMapObject": 55 } ],
+                	"action": [ { "deleteMapObject": -1 } ],
                 	"condition": [
                 		{
                     		"getMapFlag": {
@@ -188,20 +188,6 @@
    <property name="effect">{ "startBattleWithCard": [ "Mountain|BRB", "Smoke|LEA", "Sulfuric Vortex|SCG" ] }</property>
     </properties>
   </object>
-  <object id="69" template="../../../../../../../common/maps/obj/enemy.tx" x="368.5" y="228.091">
-   <properties>
-    <property name="defeatDialog">[
-   {
-   "action": [
-      {"advanceMapFlag":"enemiesDefeated"},
-      {"deleteMapObject": -1}
-    ]
-   }
-]</property>
-    <property name="enemy" value="Fire Giant" />
-    <property name="threatRange" type="int" value="20" />
-   <property name="effect">{ "startBattleWithCard": [ "Mountain|INV|1", "Mountain|INV|2", "Mountain|INV|3", "Mountain|INV|4", "Loafing Giant|INV" ] }</property></properties>
-  </object>
   <object id="70" template="../../../../../../../common/maps/obj/enemy.tx" x="78.5" y="405.5">
    <properties>
     <property name="defeatDialog">[
@@ -236,7 +222,7 @@
         "options": [
           {
             "name": "What do I need to do to get passed though this gate?",
-            "text": "To show you are worthy, you must prove your strength by defeating at least four of the five enemies lurking within this dungeon in order to be worthy of an audience with my illustrious master, who holds dominion over this realm of flames.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.",
+            "text": "To show you are worthy, you must prove your strength by defeating all four enemies lurking within this dungeon in order to be worthy of an audience with my illustrious master, who holds dominion over this realm of flames.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.",
             "options": [
               {
                 "name": "I'll show my worth, just make sure to open the gate when I defeat your challengers.",
@@ -263,12 +249,5 @@
   <object id="82" template="../../../../../../../common/maps/obj/waypoint.tx" x="513.5" y="497" />
   <object id="83" template="../../../../../../../common/maps/obj/waypoint.tx" x="685" y="497" />
   <object id="84" template="../../../../../../../common/maps/obj/waypoint.tx" x="228.5" y="352.5" />
-  <object id="85" template="../../../../../../../common/maps/obj/enemy.tx" x="420" y="280">
-   <properties>
-    <property name="enemy" value="Fire Titan" />
-    <property name="threatRange" type="int" value="45" />
-   <property name="effect">{"startBattleWithCard": ["Mountain|2ED", "Mountain|2ED", "Mountain|2ED", "Mountain|2ED", "Loafing Giant|INV"]}</property>
-    </properties>
-  </object>
  </objectgroup>
 </map>
