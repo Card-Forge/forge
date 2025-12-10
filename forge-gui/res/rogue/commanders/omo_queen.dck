@@ -1,7 +1,7 @@
 [metadata]
 Name=Omo, Queen of Vesuva
 [Commander]
-1 Omo, Queen of Vesuva|M3C|1
+1 Omo, Queen of Vesuva|M3C|2
 [Main]
 1 Aven Courier|NCC|1
 1 Basilisk Gate|M3C|1
@@ -9,10 +9,10 @@ Name=Omo, Queen of Vesuva
 1 Cloudpost|M3C|1
 1 Command Tower|M3C|1
 1 Elvish Archdruid|KHC|1
-1 Elvish Champion|8ED|1
+1 Elvish Champion|9ED|2
 1 Elvish Rejuvenator|M3C|1
-2 Forest|MH3|1
-2 Forest|LCI|1
+2 Forest|MH3|2
+2 Forest|LCI|2
 1 Galerider Sliver|CMM|1
 1 Growth Spiral|LCC|1
 1 Harmonize|M3C|1
@@ -20,8 +20,8 @@ Name=Omo, Queen of Vesuva
 1 Heap Gate|CLB|1
 1 Herald of Hoofbeats|MOC|1
 1 Hinterland Harbor|LCC|1
-1 Island|MH3|1
-3 Island|LCI|1
+1 Island|MH3|3
+3 Island|LCI|3
 1 Llanowar Scout|DOM|1
 1 Lumbering Falls|M3C|1
 1 Magus of the Candelabra|M3C|1
