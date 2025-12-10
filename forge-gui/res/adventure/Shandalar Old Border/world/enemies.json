@@ -16952,23 +16952,14 @@
     "life": 25,
     "rewards": [
       {
-        "type": "card",
+        "type": "deckCard",
         "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ],
-        "deckCard": true
+        "count": 2
       },
       {
-        "type": "card",
+        "type": "deckCard",
         "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ],
-        "deckCard": true
+        "count": 1
       },
       {
         "type": "shards",
