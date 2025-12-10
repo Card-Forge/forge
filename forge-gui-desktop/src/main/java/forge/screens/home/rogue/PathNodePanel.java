@@ -1,6 +1,7 @@
 package forge.screens.home.rogue;
 
-import forge.StaticData;
+import forge.deck.CardPool;
+import forge.deck.DeckgenUtil;
 import forge.gamemodes.rogue.NodeData;
 import forge.gui.CardPicturePanel;
 import forge.item.PaperCard;
@@ -19,6 +20,9 @@ public class PathNodePanel extends SkinnedPanel {
     private static final int CARD_HEIGHT = 250;
     private static final int PANEL_WIDTH = CARD_WIDTH + 20;
     private static final int PANEL_HEIGHT = CARD_HEIGHT + 80;
+
+    // Cache the planar pool so we don't regenerate it for every node panel
+    private static CardPool cachedPlanarPool = null;
 
     private final NodeData node;
     private final boolean isCurrentNode;
@@ -47,9 +51,15 @@ public class PathNodePanel extends SkinnedPanel {
         // Card image (plane card)
         cardImage = new CardPicturePanel();
         cardImage.setOpaque(false);
+        cardImage.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
         PaperCard planeCard = getPlaneCard(node.getPlaneName());
         if (planeCard != null) {
+            System.out.println("DEBUG: Setting plane card: " + planeCard.getName());
             cardImage.setItem(planeCard);
+            cardImage.revalidate();
+            cardImage.repaint();
+        } else {
+            System.err.println("DEBUG: Plane card not found: " + node.getPlaneName());
         }
         add(cardImage);
 
@@ -131,13 +141,27 @@ public class PathNodePanel extends SkinnedPanel {
     }
 
     /**
-     * Get the plane card by name from the database.
+     * Get the plane card by name from the planar pool.
+     * Planes are not in the common cards database - they're in a separate planar pool.
      */
-    private PaperCard getPlaneCard(String planeName) {
+    private static PaperCard getPlaneCard(String planeName) {
         try {
-            return StaticData.instance().getCommonCards().getCard(planeName);
+            // Generate planar pool once and cache it (same method used during match setup)
+            if (cachedPlanarPool == null) {
+                cachedPlanarPool = DeckgenUtil.generatePlanarPool();
+            }
+
+            // Find the plane card by name
+            for (PaperCard card : cachedPlanarPool.toFlatList()) {
+                if (card.getName().equalsIgnoreCase(planeName)) {
+                    return card;
+                }
+            }
+
+            System.err.println("Warning: Could not find plane card in planar pool: " + planeName);
+            return null;
         } catch (Exception e) {
-            System.err.println("Warning: Could not find plane card: " + planeName);
+            System.err.println("Warning: Error loading plane card: " + planeName + " - " + e.getMessage());
             return null;
         }
     }
