@@ -236,6 +236,9 @@ public final class AbilityFactory {
         if (spellAbility.isExhaust()) {
             spellAbility.putParam("PrecostDesc", "Exhaust — ");
         }
+        if (spellAbility.isPowerUp()) {
+            spellAbility.putParam("PrecostDesc", "Power-Up — ");
+        }
 
         if (mapParams.containsKey("Named")) {
             spellAbility.setName(mapParams.get("Named"));
