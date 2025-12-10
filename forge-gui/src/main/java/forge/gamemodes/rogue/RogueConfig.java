@@ -125,14 +125,21 @@ public class RogueConfig {
      */
     public static PathData getDefaultPath() {
         // Create nodes
-        NodeData node0 = NodeData.createPlane("Stronghold Furnace", "Rakdos, Lord Of Riots", "rogue/planebounds/rakdos.dck");
+        NodeData node0 = NodeData.createPlane("Bloodhill Bastion", "Lyzolda, the Blood Witch", "rogue/planebounds/lyzolda.dck");
         NodeData node1 = NodeData.createPlane("Izzet Steam Maze", "Niv-Mizzet, the Firemind", "rogue/planebounds/niv_mizzet.dck");
+        NodeData node2 = NodeData.createPlane("The Zephyr Maze", "Isperia, Supreme Judge", "rogue/planebounds/isperia.dck");
+        NodeData node3 = NodeData.createPlane("Selesnya Loft Gardens", "Trostani, Selesnya's Voice", "rogue/planebounds/trostani.dck");
+        NodeData node4 = NodeData.createPlane("The Dark Barony", "Lazav, Dimir Mastermind", "rogue/planebounds/lazav.dck");
+        NodeData node5 = NodeData.createPlane("Stronghold Furnace", "Rakdos, Lord Of Riots", "rogue/planebounds/rakdos.dck");
 
         // Set row index for each node (determines Planebound life: 5 + 5*rowIndex)
         node0.setRowIndex(0);  // Row 0: 5 life
         node1.setRowIndex(1);  // Row 1: 10 life
+        node2.setRowIndex(2);  // Row 2: 15 life
+        node3.setRowIndex(3);  // Row 3: 20 life
+        node4.setRowIndex(4);  // Row 4: 25 life
 
-        return PathData.createLinearPath(node0, node1);
+        return PathData.createLinearPath(node0, node1, node2, node3, node4, node5);
     }
 
     // Helper method to get cards from the database
