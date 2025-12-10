@@ -77,7 +77,7 @@
   <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="254.374" y="297.137">
    <properties>
     <property name="enemy" value="Chicken" />
-   <property name="effect">{"startBattleWithCard": ["Island|UGL", "Forest|UGL", "Mountain|UGL"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Island|UGL", "Forest|UGL", "Mountain|UGL", "Poultrygeist|UGL", "Chicken Egg|UGL", "Chicken à la King|UGL"]}</property>
     </properties>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="314.5" y="155">
@@ -90,7 +90,7 @@
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="238" y="307.5">
    <properties>
     <property name="enemy" value="Chicken" />
-   <property name="effect">{"startBattleWithCard": ["Island|UGL", "Forest|UGL", "Mountain|UGL"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Island|UGL", "Forest|UGL", "Mountain|UGL", "Poultrygeist|UGL", "Chicken Egg|UGL", "Chicken à la King|UGL"]}</property>
     </properties>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="78.5" y="364.75">
