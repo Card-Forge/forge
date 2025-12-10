@@ -1790,7 +1790,7 @@
     "iconName": "WhiteStaff",
     "questItem": true,
     "shardsNeeded": 5,
-    "cost": 5000
+    "cost": 1000
   },
   {
     "name": "Black Staff",
@@ -1805,7 +1805,7 @@
     "iconName": "BlackStaff",
     "questItem": true,
     "shardsNeeded": 5,
-    "cost": 5000
+    "cost": 1000
   },
   {
     "name": "Blue Staff",
@@ -1819,7 +1819,7 @@
     "iconName": "BlueStaff",
     "questItem": true,
     "shardsNeeded": 5,
-    "cost": 5000
+    "cost": 1000
   },
   {
     "name": "Red Staff",
@@ -1833,7 +1833,7 @@
     "iconName": "RedStaff",
     "questItem": true,
     "shardsNeeded": 5,
-    "cost": 5000
+    "cost": 1000
   },
   {
     "name": "Green Staff",
@@ -1848,7 +1848,7 @@
     "iconName": "GreenStaff",
     "questItem": true,
     "shardsNeeded": 5,
-    "cost": 5000
+    "cost": 1000
   },
   {
     "name": "Staff of the Ages",
