@@ -33,7 +33,7 @@
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="204" y="368" width="56" height="16"/>
   <object id="41" template="../../../../../../common/maps/obj/shop.tx" x="256" y="208">
    <properties>
-    <property name="commonShopList" value="Artifact"/>
+    <property name="commonShopList" value="Land"/>
    </properties>
   </object>
   <object id="42" template="../../../../../../common/maps/obj/shop.tx" x="304" y="208">
