@@ -1133,7 +1133,7 @@
         "Thallid|FEM"
       ]
     },
-    "description": "Start battles with Thallid in play. A 1/1 Fungus that gains spore counters."
+    "description": "A 1/1 Fungus. Remove 3 spore counters to create a Saproling."
   },
   {
     "name": "Elven Lyre",
@@ -2222,7 +2222,7 @@
   },
   {
     "name": "Feverbringer's Cloak",
-    "description": "Start battles with Fevered Convulsions in play. Pay BB to put a -1/-1 counter on target creature.",
+    "description": "Pay BB to put a -1/-1 counter on target creature.",
     "equipmentSlot": "Body",
     "iconName": "FeverbringersCloak",
     "cost": 3000,
@@ -2559,7 +2559,7 @@
         "Wheel of Torture|ULG"
       ]
     },
-    "description": "Start battles with Wheel of Torture in play."
+    "description": "Deal damage equal to 3 minus cards in opponent's hand each upkeep."
   },
   {
     "name": "Homelands Chef Starting Setup",
@@ -2661,7 +2661,7 @@
         "The Hive|LEA"
       ]
     },
-    "description": "Start battles with The Hive in play."
+    "description": "Pay 5 and tap to create a 1/1 flying Wasp token."
   },
   {
     "name": "Warren Tender's Cloak",
@@ -2672,7 +2672,7 @@
         "Goblin Warrens|FEM"
       ]
     },
-    "description": "Start battles with Goblin Warrens in play."
+    "description": "Sacrifice 2 Goblins to create 3 Goblin tokens."
   },
   {
     "name": "Gooey Shoes",
@@ -2684,7 +2684,7 @@
         "Consumptive Goo|SCG"
       ]
     },
-    "description": "-2 life. Start battles with Consumptive Goo in play."
+    "description": "-2 life. A 1/1 Ooze. Pay BB and sac to give creature -1/-1."
   },
   {
     "name": "Rebel Falconer's Glove",
@@ -2695,7 +2695,7 @@
         "Defiant Falcon|NMS"
       ]
     },
-    "description": "Start battles with Defiant Falcon in play."
+    "description": "A 1/1 flying Rebel. Pay 1W and tap to search for Rebels."
   },
   {
     "name": "Ankh of Purgatory",
@@ -2706,7 +2706,7 @@
         "Purgatory|MIR"
       ]
     },
-    "description": "Start battles with Purgatory in play."
+    "description": "Pay 2WB and 2 life to return a dead creature to hand."
   },
   {
     "name": "Serra's Shield",
@@ -2717,7 +2717,7 @@
         "Serra's Blessing|WTH"
       ]
     },
-    "description": "Start battles with Serra's Blessing in play."
+    "description": "Your creatures have vigilance."
   },
   {
     "name": "Vodalian Shield",
@@ -2728,7 +2728,7 @@
         "Vodalian War Machine|FEM"
       ]
     },
-    "description": "Start battles with Vodalian War Machine in play."
+    "description": "A 0/4 trample. Tap untapped Merfolk you control to pump it."
   },
   {
     "name": "Imp Tamer's Glove",
@@ -2740,7 +2740,7 @@
         "Teferi's Imp|MIR"
       ]
     },
-    "description": "+2 life. Start battles with Teferi's Imp in play."
+    "description": "+2 life. A 1/1 flying phasing Imp. Causes discard when phasing in."
   },
   {
     "name": "Robes of Omniscience",
@@ -2761,7 +2761,7 @@
         "Metallic Sliver|TMP"
       ]
     },
-    "description": "Start battles with Metallic Sliver in play."
+    "description": "A 1/1 artifact Sliver creature."
   },
   {
     "name": "Glider Gloves",
@@ -2773,7 +2773,7 @@
         "Ornithopter|ATQ"
       ]
     },
-    "description": "Start battles with Ornithopter in play."
+    "description": "A 0/2 flying artifact creature for free."
   },
   {
     "name": "Vampire Bite",
@@ -2785,7 +2785,7 @@
         "Treacherous Vampire|JUD"
       ]
     },
-    "description": "-5 life. Start battles with Treacherous Vampire in play."
+    "description": "-5 life. A 4/4 flying. Sac permanents at threshold or exile it."
   },
   {
     "name": "Fungal Staff",
@@ -2797,7 +2797,7 @@
         "Thallid|FEM"
       ]
     },
-    "description": "+2 life. Start battles with Thallid in play."
+    "description": "+2 life. A 1/1 Fungus that creates Saprolings."
   },
   {
     "name": "Worry Beads",
@@ -2809,7 +2809,7 @@
         "Worry Beads|MMQ"
       ]
     },
-    "description": "+1 life. Start battles with Worry Beads in play."
+    "description": "+1 life. Each player mills 1 card each upkeep."
   },
   {
     "name": "Symbol of the Pit",
@@ -2821,7 +2821,7 @@
         "Unspeakable Symbol|SCG"
       ]
     },
-    "description": "+3 life. Start battles with Unspeakable Symbol in play."
+    "description": "+3 life. Pay 3 life to put +1/+1 counter on a creature."
   },
   {
     "name": "Eye of Horror",
@@ -2833,7 +2833,7 @@
         "Vebulid|USG"
       ]
     },
-    "description": "+1 life. Start battles with Vebulid in play."
+    "description": "+1 life. A 0/0 Horror that grows each upkeep. Must attack."
   },
   {
     "name": "Lucky Clover",
@@ -2844,7 +2844,7 @@
         "Chance Encounter|ODY"
       ]
     },
-    "description": "Start battles with Chance Encounter in play."
+    "description": "Win the game with 10 luck counters. Coin flips add counters."
   },
   {
     "name": "Torturer's Hood",
@@ -2856,7 +2856,7 @@
         "Wheel of Torture|ULG"
       ]
     },
-    "description": "-3 life. Start battles with Wheel of Torture in play."
+    "description": "-3 life. Deal damage to opponent for each card under max hand size."
   },
   {
     "name": "Crown of Madness",
@@ -2868,7 +2868,7 @@
         "Anvil of Bogardan|VIS"
       ]
     },
-    "description": "Start battles with Anvil of Bogardan in play. Draw 1 fewer card at game start."
+    "description": "All players draw extra then discard. -1 starting card."
   },
   {
     "name": "Joven's Tools",
@@ -2879,7 +2879,7 @@
         "Joven's Tools|HML"
       ]
     },
-    "description": "Start battles with Joven's Tools in play."
+    "description": "Pay 6 and tap to make target creature unblockable."
   },
   {
     "name": "Yellow Scarves Horseshoe",
@@ -2891,7 +2891,7 @@
         "Yellow Scarves Cavalry|PTK"
       ]
     },
-    "description": "-2 life. Start battles with Yellow Scarves Cavalry in play."
+    "description": "-2 life. A 1/1 horsemanship creature that can't block."
   },
   {
     "name": "Crowcaller's Charm",
@@ -2902,7 +2902,7 @@
         "Storm Crow|POR"
       ]
     },
-    "description": "Start battles with Storm Crow in play."
+    "description": "A 1/2 flying Bird."
   },
   {
     "name": "Dragon Egg",
@@ -2914,7 +2914,7 @@
         "Fledgling Dragon|JUD"
       ]
     },
-    "description": "-2 life. Start battles with Fledgling Dragon in play."
+    "description": "-2 life. A 2/2 that becomes 5/5 flying firebreather at threshold."
   },
   {
     "name": "Overwhelming Axe",
@@ -2925,7 +2925,7 @@
         "Overwhelming Instinct|ONS"
       ]
     },
-    "description": "Start battles with Overwhelming Instinct in play."
+    "description": "Draw a card when you attack with 3+ creatures."
   },
   {
     "name": "Wombat Tamer's Whip",
@@ -2936,7 +2936,7 @@
         "Rabid Wombat|LEG"
       ]
     },
-    "description": "Start battles with Rabid Wombat in play."
+    "description": "A 0/1 that gets +2/+2 for each Aura on it."
   },
   {
     "name": "Molten Mantle",
@@ -2948,7 +2948,7 @@
         "Molten Hydra|ULG"
       ]
     },
-    "description": "-3 life. Start battles with Molten Hydra in play."
+    "description": "-3 life. A 1/1 Hydra. Store +1/+1 counters, tap to deal damage."
   },
   {
     "name": "Urza's Armor",
@@ -2959,7 +2959,7 @@
         "Urza's Armor|USG"
       ]
     },
-    "description": "Start battles with Urza's Armor in play. Prevents 1 damage from each source."
+    "description": "Prevent 1 damage from each damage source dealt to you."
   },
   {
     "name": "Memory Crystal",
@@ -2970,7 +2970,7 @@
         "Memory Crystal|EXO"
       ]
     },
-    "description": "Start battles with Memory Crystal in play."
+    "description": "Buyback costs 2 less."
   },
   {
     "name": "Distorting Lens",
@@ -2981,7 +2981,7 @@
         "Distorting Lens|MMQ"
       ]
     },
-    "description": "Start battles with Distorting Lens in play."
+    "description": "Tap to change target permanent's color until end of turn."
   },
   {
     "name": "Jandor's Saddlebags",
@@ -2992,7 +2992,7 @@
         "Jandor's Saddlebags|ARN"
       ]
     },
-    "description": "Start battles with Jandor's Saddlebags in play."
+    "description": "Pay 3 and tap to untap target creature."
   },
   {
     "name": "Gladiator's Greaves",
@@ -3003,7 +3003,7 @@
         "Arena|PHPR"
       ]
     },
-    "description": "Start battles with Arena in play."
+    "description": "Tap to have your creature fight opponent's creature."
   },
   {
     "name": "Shoes of Safety",
@@ -3014,7 +3014,7 @@
         "Safe Haven|DRK"
       ]
     },
-    "description": "Start battles with Safe Haven in play."
+    "description": "Tap to exile your creature. Sacrifice to return it."
   },
   {
     "name": "Dragon Blood",
@@ -3025,7 +3025,7 @@
         "Dragon Blood|USG"
       ]
     },
-    "description": "Start battles with Dragon Blood in play."
+    "description": "Pay 3 and tap to put a +1/+1 counter on a creature."
   },
   {
     "name": "Cursed Lamp",
@@ -3036,7 +3036,7 @@
         "Fledgling Djinn|WTH"
       ]
     },
-    "description": "Start battles with Fledgling Djinn in play."
+    "description": "A 2/2 flying Djinn. Deals 1 damage to you each upkeep."
   },
   {
     "name": "Pirate's Hook",
@@ -3048,7 +3048,7 @@
         "Cloud Pirates|POR"
       ]
     },
-    "description": "-1 life. Start battles with Cloud Pirates in play."
+    "description": "-1 life. A 1/1 flying Pirate that can't block."
   },
   {
     "name": "Grizzly Glaive",
@@ -3059,7 +3059,7 @@
         "Grizzly Bears|LEA"
       ]
     },
-    "description": "Start battles with Grizzly Bears in play."
+    "description": "A 2/2 Bear."
   },
   {
     "name": "Shaman's Staff",
@@ -3070,7 +3070,7 @@
         "Gorilla Shaman|ALL"
       ]
     },
-    "description": "Start battles with Gorilla Shaman in play."
+    "description": "A 1/1 Ape. Pay XX1 to destroy artifact with cost X."
   },
   {
     "name": "Miller's Shoes",
@@ -3082,7 +3082,7 @@
         "Millstone|ATQ"
       ]
     },
-    "description": "+2 life. Start battles with Millstone in play."
+    "description": "+2 life. Pay 2 and tap to mill opponent 2 cards."
   },
   {
     "name": "War Beast Rider's Boots",
@@ -3093,7 +3093,7 @@
         "Phyrexian War Beast|ALL"
       ]
     },
-    "description": "Start battles with Phyrexian War Beast in play."
+    "description": "A 3/4 vigilance artifact creature. Returns a land when leaving."
   },
   {
     "name": "Tome of the Gate",
@@ -3105,7 +3105,7 @@
         "Gate to Phyrexia|ATQ"
       ]
     },
-    "description": "-2 life. Start battles with Gate to Phyrexia in play."
+    "description": "-2 life. Sac a creature during upkeep to destroy an artifact."
   },
   {
     "name": "Phyrexian Grimoire",
@@ -3117,7 +3117,7 @@
         "Phyrexian Grimoire|TMP"
       ]
     },
-    "description": "-3 life. Start battles with Phyrexian Grimoire in play."
+    "description": "-3 life. Pay 4 and tap to return a card from your graveyard."
   },
   {
     "name": "Tome of the Vault",
@@ -3129,7 +3129,7 @@
         "Phyrexian Vault|MIR"
       ]
     },
-    "description": "-2 life. Start battles with Phyrexian Vault in play."
+    "description": "-2 life. Pay 2 and sac a creature to draw a card."
   },
   {
     "name": "Tome of the Portal",
@@ -3141,7 +3141,7 @@
         "Phyrexian Portal|ALL"
       ]
     },
-    "description": "-3 life. Start battles with Phyrexian Portal in play."
+    "description": "-3 life. Pay 3 to separate top 10, opponent chooses pile to draw."
   },
   {
     "name": "Infiltrator's Mask",
@@ -3153,7 +3153,7 @@
         "Phyrexian Infiltrator|INV"
       ]
     },
-    "description": "-4 life. Start battles with Phyrexian Infiltrator in play."
+    "description": "-4 life. A 2/2 that can swap control with opponent's creature."
   },
   {
     "name": "Broodling Egg",
@@ -3165,7 +3165,7 @@
         "Phyrexian Broodlings|ULG"
       ]
     },
-    "description": "-2 life. Start battles with Phyrexian Broodlings in play."
+    "description": "-2 life. A 2/2 Minion. Sac a creature to put +1/+1 counters."
   },
   {
     "name": "Armor of Yawgmoth",
@@ -3176,7 +3176,7 @@
         "Order of Yawgmoth|USG"
       ]
     },
-    "description": "Start battles with Order of Yawgmoth in play."
+    "description": "A 2/2 fear creature. Opponent discards when it deals damage."
   },
   {
     "name": "Eye of Yawgmoth",
@@ -3187,7 +3187,7 @@
         "Eye of Yawgmoth|NMS"
       ]
     },
-    "description": "Start battles with Eye of Yawgmoth in play."
+    "description": "Pay 3 and sac a creature to look at cards equal to its power."
   },
   {
     "name": "Ashnod's Battle Gear",
@@ -3199,7 +3199,7 @@
         "Ashnod's Battle Gear|ATQ"
       ]
     },
-    "description": "+4 life. Start battles with Ashnod's Battle Gear in play."
+    "description": "+4 life. Tap to give creature +2/-2 until end of turn."
   },
   {
     "name": "Grovetender's Robes",
@@ -3210,7 +3210,7 @@
         "Afiya Grove|MIR"
       ]
     },
-    "description": "Start battles with Afiya Grove in play."
+    "description": "Enters with 3 counters. Move one to a creature each upkeep."
   },
   {
     "name": "Winter Boots",
@@ -3221,7 +3221,7 @@
         "Winter's Night|ALL"
       ]
     },
-    "description": "Start battles with Winter's Night in play."
+    "description": "Snow lands tap for double mana but deal 1 damage to you."
   },
   {
     "name": "Prismatic Egg",
@@ -3233,7 +3233,7 @@
         "Prismatic Dragon|PAST"
       ]
     },
-    "description": "-4 life. Start battles with Prismatic Dragon in play."
+    "description": "-4 life. A 2/1 flying Dragon. Pay mana to change its color."
   },
   {
     "name": "Faerie Dragon Egg",
@@ -3245,7 +3245,7 @@
         "Faerie Dragon|PAST"
       ]
     },
-    "description": "-4 life. Start battles with Faerie Dragon in play."
+    "description": "-4 life. A 1/1 flying Dragon. Pay mana to change its color."
   },
   {
     "name": "Goblin Trumpet",
@@ -3256,7 +3256,7 @@
         "Goblin Polka Band|UGL"
       ]
     },
-    "description": "Start battles with Goblin Polka Band in play."
+    "description": "Force creatures to dance. Dancing creatures can't attack or block."
   },
   {
     "name": "Rainbow Spear",
@@ -3268,7 +3268,7 @@
         "Rainbow Knights|PAST"
       ]
     },
-    "description": "-2 life. Start battles with Rainbow Knights in play."
+    "description": "-2 life. A 2/1 pro-black first strike. Pay to pump it."
   },
   {
     "name": "Catalyst Stone",
@@ -3280,7 +3280,7 @@
         "Catalyst Stone|ODY"
       ]
     },
-    "description": "Start battles with Catalyst Stone in play."
+    "description": "Your flashback costs 2 less. Opponents' costs 2 more."
   },
   {
     "name": "Flaming Skull",
@@ -3291,7 +3291,7 @@
         "Deadapult|PLS"
       ]
     },
-    "description": "Start battles with Deadapult in play."
+    "description": "Pay R and sac a Zombie to deal 2 damage to target creature."
   },
   {
     "name": "Triassic Egg",
@@ -3302,7 +3302,7 @@
         "Triassic Egg|LEG"
       ]
     },
-    "description": "Start battles with Triassic Egg in play."
+    "description": "Add hatch counters, then sac to put creature from hand/grave into play."
   },
   {
     "name": "Thran Lens",
@@ -3313,7 +3313,7 @@
         "Thran Lens|ULG"
       ]
     },
-    "description": "Start battles with Thran Lens in play."
+    "description": "All permanents are colorless."
   },
   {
     "name": "Spawning Staff",
@@ -3324,7 +3324,7 @@
         "Homarid Spawning Bed|FEM"
       ]
     },
-    "description": "Start battles with Homarid Spawning Bed in play."
+    "description": "Sac a blue creature to create X 1/1 Camarids (X = creature's cost)."
   },
   {
     "name": "Cave Diver's Boots",
@@ -3336,7 +3336,7 @@
         "Rhystic Cave|PCY"
       ]
     },
-    "description": "-3 life. Start battles with Rhystic Cave in play."
+    "description": "-3 life. Tap for any color unless an opponent pays 1."
   },
   {
     "name": "Shoes of Sorrow",
@@ -3348,7 +3348,7 @@
         "Sorrow's Path|DRK"
       ]
     },
-    "description": "+2 life. Start battles with Sorrow's Path in play."
+    "description": "+2 life. A famously bad land. Swap blockers and damage your creatures."
   },
   {
     "name": "Pandora's Box",
@@ -3360,7 +3360,7 @@
         "Chaos Orb|LEA"
       ]
     },
-    "description": "+5 life. Start battles with Chaos Orb in play."
+    "description": "+5 life. Tap, flip from height. Destroy permanents it touches."
   },
   {
     "name": "Diamond Kaleidoscope",
@@ -3371,7 +3371,7 @@
         "Diamond Kaleidoscope|VIS"
       ]
     },
-    "description": "Start battles with Diamond Kaleidoscope in play."
+    "description": "Tap to create a Prism token. Sac a Prism for any color mana."
   },
   {
     "name": "Map to the Vale",
@@ -3382,7 +3382,7 @@
         "Rainbow Vale|FEM"
       ]
     },
-    "description": "Start battles with Rainbow Vale in play."
+    "description": "Tap for any color. Gives itself to an opponent."
   },
   {
     "name": "Tasty Tome",
@@ -3393,7 +3393,7 @@
         "Orcish Librarian|ICE"
       ]
     },
-    "description": "Start battles with Orcish Librarian in play."
+    "description": "A 1/1 Orc. Tap to look at top 8 and rearrange 4, exile 4."
   },
   {
     "name": "Shield of Air",
@@ -3405,7 +3405,7 @@
       ],
       "lifeModifier": -6
     },
-    "description": "Start battles with Wall of Air in play. -6 Max Life."
+    "description": "-6 life. A 1/5 flying Wall."
   },
   {
     "name": "Attendant's Robes",
@@ -3416,7 +3416,7 @@
         "Silent Attendant|INV"
       ]
     },
-    "description": "Start battles with Silent Attendant in play."
+    "description": "A 1/1 Human Cleric. Tap to gain 1 life at threshold."
   },
   {
     "name": "Power Armor",
@@ -3427,7 +3427,7 @@
         "Power Armor|INV"
       ]
     },
-    "description": "Start battles with Power Armor in play."
+    "description": "Pay 3 and tap to give creature +1/+1 for each basic land type."
   },
   {
     "name": "Amulet of Azar",
@@ -3438,7 +3438,7 @@
         "Necropolis of Azar|AST"
       ]
     },
-    "description": "Start battles with Necropolis of Azar in play."
+    "description": "Creatures can't be regenerated."
   },
   {
     "name": "Baron Sengir Starting Setup",
@@ -3463,7 +3463,7 @@
         "Mishra's Groundbreaker|ALL"
       ]
     },
-    "description": "Start battles with Mishra's Groundbreaker in play."
+    "description": "Sac a land to create a 3/3 artifact or make a land an artifact."
   },
   {
     "name": "River Waders",
@@ -3475,7 +3475,7 @@
         "Raging River|LEA"
       ]
     },
-    "description": "-2 life. Start battles with Raging River in play."
+    "description": "-2 life. Defender splits attackers. Each side blocked separately."
   },
   {
     "name": "Claws of Gix",
@@ -3487,7 +3487,7 @@
         "Claws of Gix|USG"
       ]
     },
-    "description": "+3 life. Start battles with Claws of Gix in play."
+    "description": "+3 life. Pay 1 and sac a permanent to gain 1 life."
   },
   {
     "name": "Sulfuric Staff",
@@ -3498,7 +3498,7 @@
         "Sulfuric Vapors|USG"
       ]
     },
-    "description": "Start battles with Sulfuric Vapors in play. Red spells deal 1 extra damage."
+    "description": "Red instant and sorcery spells deal 1 extra damage."
   },
   {
     "name": "Ring of Ma'r\u00fbf",
@@ -3524,7 +3524,7 @@
   },
   {
     "name": "Spyglass",
-    "description": "-1 life. Start battles with Orcish Spy in play.",
+    "description": "-1 life. A 1/1 Orc Rogue. Tap to look at opponent's top 3 cards.",
     "equipmentSlot": "Neck",
     "iconName": "Spyglass",
     "effect": {
@@ -3547,7 +3547,7 @@
   },
   {
     "name": "Istvan's Axe",
-    "description": "-6 life. Start battles with Uncle Istvan in play.",
+    "description": "-6 life. A 1/3. Prevent all creature damage dealt to Uncle Istvan.",
     "equipmentSlot": "Right",
     "iconName": "IstvansAxe",
     "effect": {
@@ -3559,7 +3559,7 @@
   },
   {
     "name": "Breathstealer's Robe",
-    "description": "-3 life. Start battles with Breathstealer in play.",
+    "description": "-3 life. A 2/2. Sac to give target creature -2/-2.",
     "equipmentSlot": "Body",
     "iconName": "BreathstealersRobe",
     "effect": {
@@ -3571,7 +3571,7 @@
   },
   {
     "name": "Dementia Mask",
-    "description": "Start battles with Ichorid in play. A 3/1 haste that returns from graveyard.",
+    "description": "A 3/1 haste that returns from graveyard by exiling a black creature.",
     "equipmentSlot": "Neck",
     "iconName": "DementiaMask",
     "effect": {
@@ -3601,7 +3601,7 @@
         "Exploration|USG"
       ]
     },
-    "description": "-5 life. Start battles with Exploration in play."
+    "description": "-5 life. Play an additional land each turn."
   },
   {
     "name": "Serpent Caller' Staff",
@@ -3612,7 +3612,7 @@
         "Dreamwinder|ODY"
       ]
     },
-    "description": "Start battles with Dreamwinder in play."
+    "description": "A 4/3 Serpent. Sac an Island to make target land an Island."
   },
   {
     "name": "Phyrexian Splicer",
@@ -3623,7 +3623,7 @@
         "Phyrexian Splicer|TMP"
       ]
     },
-    "description": "Start battles with Phyrexian Splicer in play.",
+    "description": "Pay 2 and tap to move flying/first strike/shadow/trample.",
     "cost": 1500
   },
   {
@@ -3636,7 +3636,7 @@
         "Security Detail|MMQ"
       ]
     },
-    "description": "+2 life. Start battles with Security Detail in play."
+    "description": "+2 life. Create a 1/1 Soldier if you control no creatures."
   },
   {
     "name": "Tome of the Trove",
@@ -3648,7 +3648,7 @@
         "Treasure Trove|EXO"
       ]
     },
-    "description": "-4 life. Start battles with Treasure Trove in play."
+    "description": "-4 life. Pay 2UU to draw a card."
   },
   {
     "name": "Ley Line Walker Boots",
@@ -3659,7 +3659,7 @@
         "Ley Line|MMQ"
       ]
     },
-    "description": "Start battles with Ley Line in play."
+    "description": "Tap a green creature for any color mana."
   },
   {
     "name": "Bog Glider Greaves",
@@ -3671,7 +3671,7 @@
         "Bog Glider|PCY"
       ]
     },
-    "description": "-2 life. Start battles with Bog Glider in play."
+    "description": "-2 life. A 1/2 swampwalk. Sac to search library for a Swamp."
   },
   {
     "name": "Ebony Horseshoe",
@@ -3682,7 +3682,7 @@
         "Ebony Horse|3ED"
       ]
     },
-    "description": "Start battles with Ebony Horse in play."
+    "description": "Pay 2 and tap to untap and remove attacking creature from combat."
   },
   {
     "name": "Narcissist's Mask",
@@ -3694,7 +3694,7 @@
         "Narcissism|TOR"
       ]
     },
-    "description": "-3 life. Start battles with Narcissism in play."
+    "description": "-3 life. Sac a land to give target creature +2/+2."
   },
   {
     "name": "Serrated Quiver",
@@ -3706,7 +3706,7 @@
         "Serrated Arrows|HML"
       ]
     },
-    "description": "-4 life. Start battles with Serrated Arrows in play."
+    "description": "-4 life. Enters with 3 counters. Remove one to give creature -1/-1."
   },
   {
     "name": "Map to Paradise",
@@ -3718,7 +3718,7 @@
         "Undiscovered Paradise|VIS"
       ]
     },
-    "description": "-5 life. Start battles with Undiscovered Paradise in play."
+    "description": "-5 life. Tap for any color. Returns to hand at untap."
   },
   {
     "name": "Ring of Infestation",
@@ -3729,7 +3729,7 @@
         "Saproling Infestation|INV"
       ]
     },
-    "description": "Start battles with Saproling Infestation in play."
+    "description": "Create a 1/1 Saproling whenever a player kicks a spell."
   },
   {
     "name": "Ivy Seer's Amulet",
@@ -3740,7 +3740,7 @@
         "Ivy Seer|UDS"
       ]
     },
-    "description": "Start battles with Ivy Seer in play."
+    "description": "A 1/1 Elf Wizard. Tap to reveal hand, give +X/+X for green cards."
   },
   {
     "name": "Multani's Boots",
@@ -3752,7 +3752,7 @@
         "Multani's Presence|ULG"
       ]
     },
-    "description": "-5 life. Start battles with Multani's Presence in play."
+    "description": "-5 life. Draw a card whenever a spell of yours is countered."
   },
   {
     "name": "Garments of Gaea",
@@ -3763,7 +3763,7 @@
         "Pulse of Llanowar|INV"
       ]
     },
-    "description": "Start battles with Pulse of Llanowar in play. Mana-fixing enchantment."
+    "description": "Tap a tapped land to produce any mana that land could produce."
   },
   {
     "name": "Hymnal Hood",
@@ -3775,7 +3775,7 @@
         "Serra's Hymn|USG"
       ]
     },
-    "description": "+1 life. Start battles with Serra's Hymn in play."
+    "description": "+1 life. Gains verse counters. Remove to prevent X damage."
   },
   {
     "name": "Celestial Sword",
@@ -3786,7 +3786,7 @@
         "Celestial Sword|ICE"
       ]
     },
-    "description": "Start battles with Celestial Sword in play."
+    "description": "Pay 3 and tap to give creature +3/+3. Destroy it at end of turn."
   },
   {
     "name": "Paladin's Greaves",
@@ -3798,7 +3798,7 @@
         "Serra Paladin|HML"
       ]
     },
-    "description": "-2 life. Start battles with Serra Paladin in play."
+    "description": "-2 life. A 2/2 first strike. Tap with another to gain 3 life."
   },
   {
     "name": "Robes of Renewal",
@@ -3810,7 +3810,7 @@
         "Angelic Renewal|WTH"
       ]
     },
-    "description": "-2 life. Start battles with Angelic Renewal in play."
+    "description": "-2 life. Sac when a nontoken creature dies to return it."
   },
   {
     "name": "Serra's Prayer Book",
@@ -3821,7 +3821,7 @@
         "Serra's Liturgy|USG"
       ]
     },
-    "description": "Start battles with Serra's Liturgy in play. Echo enchantment that creates 1/1 Spirits."
+    "description": "Gains verse counters. Remove to create 1/1 Spirit tokens."
   },
   {
     "name": "Kobold King's Crown",
@@ -3846,7 +3846,7 @@
         "Chimeric Sphere|WTH"
       ]
     },
-    "description": "Start battles with Chimeric Sphere in play."
+    "description": "Pay 2 to become 2/1 flying or 3/2 until end of turn."
   },
   {
     "name": "Serpent Ring",
@@ -3857,7 +3857,7 @@
         "Serpent Generator|LEG"
       ]
     },
-    "description": "Start battles with Serpent Generator in play."
+    "description": "Pay 4 and tap to create a 1/1 poison Snake token."
   },
   {
     "name": "Barrin's Codex",
@@ -3869,7 +3869,7 @@
         "Barrin's Codex|USG"
       ]
     },
-    "description": "-8 life. Start battles with Barrin's Codex in play."
+    "description": "-8 life. Gains page counters. Sac to draw cards equal to pages."
   },
   {
     "name": "Rayne's Writ",
@@ -3881,7 +3881,7 @@
         "Rayne, Academy Chancellor|UDS"
       ]
     },
-    "description": "-6 life. Start battles with Rayne, Academy Chancellor in play."
+    "description": "-6 life. A 1/1. Draw a card when your permanents are targeted."
   },
   {
     "name": "Shield of Tears",
@@ -3893,7 +3893,7 @@
         "Wall of Tears|STH"
       ]
     },
-    "description": "-4 life. Start battles with Wall of Tears in play."
+    "description": "-4 life. A 0/4 Wall. Blocked creatures return to hand."
   },
   {
     "name": "Urza Planeswalker Starting Setup",
@@ -4025,7 +4025,7 @@
         "Temple of the False God|SCG"
       ]
     },
-    "description": "-1 hand size. Start battles with 2 Temple of the False God in play."
+    "description": "-1 hand size. 2 lands that tap for 2 mana if you have 5+ lands."
   },
   {
     "name": "Copper Angel's Amulet",
@@ -4037,7 +4037,7 @@
         "Copper-Leaf Angel|UDS"
       ]
     },
-    "description": "-5 life. Start battles with Copper-Leaf Angel in play."
+    "description": "-5 life. A 2/2 flying. Sac lands to add +1/+1 counters."
   },
   {
     "name": "Water of Youth",
