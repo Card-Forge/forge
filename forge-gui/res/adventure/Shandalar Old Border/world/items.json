@@ -2113,7 +2113,7 @@
   },
   {
     "name": "Sentry's Plate",
-    "description": "Start with a 0/1 Soldier artifact creature in play.",
+    "description": "Start with a 1/1 Soldier artifact creature in play.",
     "equipmentSlot": "Body",
     "iconName": "SentrysPlate",
     "cost": 2000,
