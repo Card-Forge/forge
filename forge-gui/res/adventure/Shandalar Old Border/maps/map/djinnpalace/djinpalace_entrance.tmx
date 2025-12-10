@@ -43,7 +43,6 @@
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="246.905" y="148.192">
    <properties>
     <property name="enemy" value="Djinn" />
-   <property name="effect">{"startBattleWithCard": ["Island|LEA", "Mountain|ARN", "Swamp|LEA", "Aladdin's Lamp|ARN", "Keeper of Kookus|VIS"]}</property>
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="82,80,81,79" />
    </properties>
@@ -53,7 +52,6 @@
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="397.753" y="151.232">
    <properties>
     <property name="enemy" value="Djinn" />
-   <property name="effect">{"startBattleWithCard": ["Island|LEA", "Mountain|ARN", "Swamp|LEA", "Aladdin's Lamp|ARN", "Keeper of Kookus|VIS"]}</property>
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="81,79,82,80" />
    </properties>
@@ -61,7 +59,6 @@
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="322" y="238">
    <properties>
     <property name="enemy" value="Djinn" />
-   <property name="effect">{"startBattleWithCard": ["Island|LEA", "Mountain|ARN", "Swamp|LEA", "Aladdin's Lamp|ARN", "Keeper of Kookus|VIS"]}</property>
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="79,82,80,81" />
    </properties>

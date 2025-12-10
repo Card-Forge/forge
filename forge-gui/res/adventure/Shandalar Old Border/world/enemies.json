@@ -4947,6 +4947,12 @@
         "rarity": [
           "Rare"
         ]
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Chimeric Sphere"
       }
     ],
     "colors": "GW",
@@ -7403,11 +7409,95 @@
     "name": "Djinn",
     "sprite": "sprites/enemy/elemental/djinn.atlas",
     "deck": [
-      "decks/elite/djinn.dck"
+      "decks/standard/djinn.dck"
     ],
     "ai": "",
     "flying": true,
     "spawnRate": 1,
+    "difficulty": 0.1,
+    "speed": 32,
+    "life": 25,
+    "rewards": [
+      {
+        "type": "deckCard",
+        "probability": 1,
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.5,
+        "count": 1,
+        "addMaxCount": 2,
+        "rarity": [
+          "uncommon"
+        ],
+        "cardTypes": [
+          "Creature",
+          "Artifact",
+          "Enchantment",
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.25,
+        "count": 1,
+        "addMaxCount": 1,
+        "rarity": [
+          "rare"
+        ],
+        "cardTypes": [
+          "Creature",
+          "Artifact",
+          "Enchantment",
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "probability": 0.1,
+        "count": 1,
+        "rarity": [
+          "rare"
+        ],
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "gold",
+        "probability": 0.3,
+        "count": 10,
+        "addMaxCount": 90
+      }
+    ],
+    "colors": "RU",
+    "questTags": [
+      "Elemental",
+      "Flying",
+      "Humanoid",
+      "IdentityRed",
+      "IdentityBlue",
+      "IdentityIzzet",
+      "BiomeBlue"
+    ]
+  },
+  {
+    "name": "Djinn Elite",
+    "sprite": "sprites/enemy/elemental/djinn.atlas",
+    "deck": [
+      "decks/elite/djinn_elite.dck"
+    ],
+    "ai": "",
+    "flying": true,
+    "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 32,
     "life": 25,
@@ -16854,6 +16944,69 @@
     ]
   },
   {
+    "name": "Kobold Worker",
+    "nameOverride": "King Rohgahh",
+    "sprite": "sprites/enemy/humanoid/kobold/koboldworker.atlas",
+    "deck": [
+      "decks/standard/koboldworker.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "spawnRate": 0.5,
+    "difficulty": 0.5,
+    "speed": 31,
+    "life": 25,
+    "rewards": [
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 2,
+        "rarity": [
+          "common",
+          "uncommon"
+        ],
+        "deckCard": true
+      },
+      {
+        "type": "card",
+        "probability": 0.25,
+        "count": 1,
+        "rarity": [
+          "rare"
+        ],
+        "deckCard": true
+      },
+      {
+        "type": "shards",
+        "probability": 0.25,
+        "count": 0,
+        "addMaxCount": 3
+      },
+      {
+        "type": "gold",
+        "probability": 0.3,
+        "count": 0,
+        "addMaxCount": 300
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Kobold King's Crown"
+      }
+    ],
+    "colors": "RB",
+    "questTags": [
+      "Kobold",
+      "Boss",
+      "Humanoid",
+      "IdentityRed",
+      "IdentityBlack",
+      "IdentityRakdos",
+      "BiomeRed"
+    ]
+  },
+  {
     "name": "Kor Warrior",
     "sprite": "sprites/enemy/humanoid/kor/mineguard.atlas",
     "deck": [
@@ -19481,7 +19634,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Glider Gloves"
+        "itemName": "Disrupting Scepter"
       },
       {
         "type": "life",
@@ -33688,7 +33841,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Armor of Evil"
+        "itemName": "Armor of Yawgmoth"
       },
       {
         "type": "item",
@@ -35476,6 +35629,12 @@
         "probability": 1,
         "count": 20,
         "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Celestial Prism"
       }
     ],
     "colors": "WUG",
@@ -35522,6 +35681,12 @@
         "probability": 1,
         "count": 20,
         "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Celestial Prism"
       }
     ],
     "colors": "WUB",
@@ -35568,6 +35733,12 @@
         "probability": 1,
         "count": 20,
         "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Celestial Prism"
       }
     ],
     "colors": "UBR",
@@ -35614,6 +35785,12 @@
         "probability": 1,
         "count": 20,
         "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Celestial Prism"
       }
     ],
     "colors": "BRG",
@@ -35660,6 +35837,12 @@
         "probability": 1,
         "count": 20,
         "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Celestial Prism"
       }
     ],
     "colors": "WRG",
@@ -35700,7 +35883,7 @@
         "type": "item",
         "probability": 1,
         "count": 1,
-        "itemName": "Prismatic Egg"
+        "itemName": "Pandora's Box"
       },
       {
         "type": "life",
