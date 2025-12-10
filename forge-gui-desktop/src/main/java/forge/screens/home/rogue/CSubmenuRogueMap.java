@@ -8,12 +8,13 @@ import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.rogue.NodeData;
-import forge.gamemodes.rogue.RogueConfig;
 import forge.gamemodes.rogue.RogueRunData;
 import forge.gui.GuiBase;
 import forge.gui.SOverlayUtils;
+import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.item.PaperCard;
+import forge.screens.home.CHomeUI;
 import forge.localinstance.properties.ForgeConstants;
 import forge.player.GamePlayerUtil;
 
@@ -41,9 +42,10 @@ public enum CSubmenuRogueMap implements ICDoc {
 
     @Override
     public void update() {
-        // Initialize test run if needed
+        // If no run exists, navigate to start screen
         if (currentRun == null) {
-            createTestRun();
+            CHomeUI.SINGLETON_INSTANCE.itemClick(EDocID.HOME_ROGUESTART);
+            return;
         }
 
         updateView();
@@ -57,15 +59,6 @@ public enum CSubmenuRogueMap implements ICDoc {
     @Override
     public void initialize() {
         view.getBtnEnterNode().addActionListener(actEnterNode);
-    }
-
-    private void createTestRun() {
-        // Create a test run using hardcoded config
-        currentRun = new RogueRunData(
-            "Aegar",
-            RogueConfig.loadRogueDecks().get(0).getStartDeck(),
-            RogueConfig.getDefaultPath()
-        );
     }
 
     private void updateView() {
@@ -128,15 +121,24 @@ public enum CSubmenuRogueMap implements ICDoc {
 
         try {
             // Generate shared plane deck for Planechase
+            // For Rogue Commander, we want to stay on the designated plane for this node
+            // Add multiple copies to prevent Planechase mechanics from breaking
             CardPool planePool = DeckgenUtil.generatePlanarPool();
-//            planePool.add(RogueConfig.getCard(node.getPlaneName(), StringUtils.EMPTY));
-            // filter pool by active plane from node
+
+            // Filter to get the designated plane for this node
             CardPool filteredPool = planePool.getFilteredPool(card -> {
                 String cardPlaneName = node.getPlaneName();
                 return cardPlaneName.equalsIgnoreCase(card.getName());
             });
 
-            List<PaperCard> sharedPlaneDeck = filteredPool.toFlatList();
+            List<PaperCard> sharedPlaneDeck = new java.util.ArrayList<>();
+            if (!filteredPool.isEmpty()) {
+                PaperCard designatedPlane = filteredPool.toFlatList().get(0);
+                // Add 10 copies of the same plane to satisfy Planechase mechanics
+                for (int i = 0; i < 10; i++) {
+                    sharedPlaneDeck.add(designatedPlane);
+                }
+            }
 
             // Configure Commander + Planechase variants
             Set<GameType> appliedVariants = EnumSet.of(GameType.Commander, GameType.Planechase);
@@ -173,7 +175,10 @@ public enum CSubmenuRogueMap implements ICDoc {
 
             // Calculate life based on row: 5 + (5 * rowIndex)
             int planeboundLife = 5 + (5 * node.getRowIndex());
-            ai.setStartingLife(planeboundLife);
+            //ai.setStartingLife(planeboundLife);
+
+            //for testing, set to 1 life
+            ai.setStartingLife(1);
 
             // Start match
             List<RegisteredPlayer> players = Arrays.asList(human, ai);
