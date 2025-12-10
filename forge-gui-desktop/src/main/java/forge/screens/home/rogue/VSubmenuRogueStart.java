@@ -66,12 +66,18 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
         txtDescription.setLineWrap(true);
         txtDescription.setWrapStyleWord(true);
         txtDescription.setFocusable(false);
+        txtDescription.setFont(FSkin.getFont());
+        txtDescription.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        txtDescription.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         txtTheme.setOpaque(true);
         txtTheme.setEditable(false);
         txtTheme.setLineWrap(true);
         txtTheme.setWrapStyleWord(true);
         txtTheme.setFocusable(false);
+        txtTheme.setFont(FSkin.getFont());
+        txtTheme.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        txtTheme.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         // Layout the content panel
         pnlContent.setOpaque(false);

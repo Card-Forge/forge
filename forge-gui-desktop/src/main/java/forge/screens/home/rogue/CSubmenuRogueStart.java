@@ -63,10 +63,17 @@ public enum CSubmenuRogueStart implements ICDoc {
 
     private void updateCommanderDetails() {
         selectedDeck = view.getCbxCommander().getSelectedItem();
+
         if (selectedDeck != null) {
             view.getLblCommanderName().setText(selectedDeck.getCommanderCardName());
             view.getTxtDescription().setText(selectedDeck.getDescription());
             view.getTxtTheme().setText(selectedDeck.getThemeDescription());
+
+            // Force UI refresh for text areas
+            view.getTxtDescription().revalidate();
+            view.getTxtDescription().repaint();
+            view.getTxtTheme().revalidate();
+            view.getTxtTheme().repaint();
         }
     }
 
