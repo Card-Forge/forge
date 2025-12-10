@@ -313,6 +313,12 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         getPnlCustom().add(lblMessage, CONSTRAINTS_TEXT);
     }
 
+    @Override
+    public List<PaperCard> showCardRewardDialog(String title, List<PaperCard> cards, int minSelections, int maxSelections) {
+        CardRewardDialog dialog = new CardRewardDialog(title, cards, minSelections, maxSelections);
+        return dialog.show();
+    }
+
     /**
      * JLabel header between reward sections.
      */

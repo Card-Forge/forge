@@ -6,7 +6,6 @@ import forge.game.GameView;
 import forge.game.player.PlayerView;
 import forge.gui.interfaces.IButton;
 import forge.gui.interfaces.IWinLoseView;
-import forge.gui.util.SGuiChoose;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.player.GamePlayerUtil;
@@ -131,12 +130,12 @@ public class RogueWinLoseController {
             return;
         }
 
-        // Let player choose up to 3 cards
-        List<PaperCard> chosenCards = SGuiChoose.getChoices(
-            "Choose up to 3 cards to add to your deck",
+        // Show visual card selection dialog
+        List<PaperCard> chosenCards = view.showCardRewardDialog(
+            "Choose Your Rewards",
+            rewardOptions,
             0,
-            3,
-            rewardOptions
+            3
         );
 
         if (chosenCards != null && !chosenCards.isEmpty()) {
