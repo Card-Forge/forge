@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Sorcery
 A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | UnlessCost$ 2 | UnlessPayer$ Player | Mandatory$ True | SpellDescription$ Unless any player pays {2}, search your library for a card, put that card into your hand, then shuffle.
 SVar:NeedsToPlayVar:Z LE1
-SVar:Z:Count$Valid Card.canProduceMana+OppCtrl+inZoneBattlefield+untapped
+SVar:Z:Count$Valid Card.canProduceMana+OppCtrl+untapped
 AI:RemoveDeck:Random
 Oracle:Unless any player pays {2}, search your library for a card, put that card into your hand, then shuffle.
