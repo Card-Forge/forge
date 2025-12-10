@@ -86,4 +86,5 @@ ScryfallCode=PMEI
 2025-22 M Peter Parker @Randy Gallegos
 2025-23 M Spider-Man, Miles Morales @InHyuk Lee
 2025-24 R Iroh, Grand Lotus @Jo Cordisco
+2025-25 R Aang, Air Nomad @Jinho Bae
 2026-01 R Command Tower @Constantin Marin
