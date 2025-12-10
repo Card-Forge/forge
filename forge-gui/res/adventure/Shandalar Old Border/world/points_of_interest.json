@@ -1351,7 +1351,7 @@
 		"count": 2,
 		"spriteAtlas": "sprites/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_dino.tmx",
+		"map": "../Shandalar Old Border/maps/map/cave/cave_kavu.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
@@ -1493,7 +1493,7 @@
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
 		"sprite": "Cave",
-		"map": "../Shandalar Old Border/maps/map/cave/cave_dino.tmx",
+		"map": "../Shandalar Old Border/maps/map/cave/cave_fog.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Hostile",
