@@ -362,14 +362,14 @@
     }
   },
   {
-    "name": "Cadet's Sword",
-    "description": "Start with a 1/1 Human Soldier in play.",
+    "name": "Hero's Sword",
+    "description": "Start with a 1/1 Human Soldier with banding in play.",
     "equipmentSlot": "Right",
     "iconName": "SteelSword",
-    "cost": 5000,
+    "cost": 2000,
     "effect": {
       "startBattleWithCard": [
-        "Eager Cadet|7ED"
+        "Benalish Hero|LEA"
       ]
     }
   },
@@ -446,16 +446,16 @@
     }
   },
   {
-    "name": "Pearl Trident",
+    "name": "Rootwater Trident",
     "equipmentSlot": "Right",
     "iconName": "ShellWand",
-    "cost": 5000,
+    "cost": 2000,
     "effect": {
       "startBattleWithCard": [
-        "Merfolk of the Pearl Trident|LEA"
+        "Rootwater Mystic|EXO"
       ]
     },
-    "description": "Start with a 1/1 Merfolk in play."
+    "description": "Start with a 1/1 Merfolk that can peek at opponent's top card."
   },
   {
     "name": "Fugitive Spellbook",
@@ -483,11 +483,12 @@
   },
   {
     "name": "Dream Chisel",
-    "description": "Face-down creature spells cost 1 less to cast.",
+    "description": "Face-down creature spells cost 1 less to cast. +2 max life.",
     "equipmentSlot": "Left",
     "iconName": "Armory",
     "cost": 2000,
     "effect": {
+      "lifeModifier": 2,
       "startBattleWithCard": [
         "Dream Chisel|ONS"
       ]
@@ -619,16 +620,16 @@
     }
   },
   {
-    "name": "Mons's Dagger",
+    "name": "Raging Dagger",
     "equipmentSlot": "Right",
     "iconName": "FlameSword",
-    "cost": 5000,
+    "cost": 2000,
     "effect": {
       "startBattleWithCard": [
-        "Mons's Goblin Raiders|LEA"
+        "Raging Goblin|POR"
       ]
     },
-    "description": "Start with a 1/1 Goblin in play."
+    "description": "Start with a 1/1 Goblin with haste in play."
   },
   {
     "name": "Zelyon Sword",
@@ -646,7 +647,7 @@
     "name": "Dwarven Shield",
     "equipmentSlot": "Left",
     "iconName": "Armory",
-    "cost": 5000,
+    "cost": 2000,
     "effect": {
       "startBattleWithCard": [
         "Dwarven Armorer|FEM"
@@ -668,12 +669,11 @@
   },
   {
     "name": "Flowstone Armor",
-    "description": "Pay 3 and tap to give target creature +1/-1 while this stays tapped. -2 starting life.",
+    "description": "Pay 3 and tap to give target creature +1/-1 while this stays tapped.",
     "equipmentSlot": "Body",
     "iconName": "DarkArmor",
-    "cost": 5000,
+    "cost": 3000,
     "effect": {
-      "lifeModifier": -2,
       "startBattleWithCard": [
         "Flowstone Armor|NMS"
       ]
@@ -878,7 +878,7 @@
     "description": "A solid iron shield granting +2 starting life.",
     "equipmentSlot": "Right",
     "iconName": "IronShield",
-    "cost": 6500,
+    "cost": 1000,
     "effect": {
       "lifeModifier": 2
     }
@@ -895,13 +895,12 @@
   },
   {
     "name": "Steel Boots",
-    "description": "Quality steel boots granting +1 life and faster movement.",
+    "description": "Quality steel boots granting +2 max life.",
     "equipmentSlot": "Boots",
     "iconName": "SteelBoots",
-    "cost": 4500,
+    "cost": 1000,
     "effect": {
-      "lifeModifier": 1,
-      "moveSpeed": 1.2
+      "lifeModifier": 2
     }
   },
   {
@@ -920,7 +919,7 @@
     "name": "Steel Armor",
     "description": "Fine steel armor granting +3 starting life.",
     "equipmentSlot": "Body",
-    "cost": 3000,
+    "cost": 1500,
     "iconName": "SteelArmor",
     "effect": {
       "lifeModifier": 3
@@ -1080,13 +1079,16 @@
     }
   },
   {
-    "name": "Spell Book",
-    "description": "A tome of arcane knowledge granting an extra starting card.",
+    "name": "Spellbook",
+    "description": "No maximum hand size. Draw an extra starting card.",
     "iconName": "SpellBook",
     "equipmentSlot": "Left",
-    "cost": 8000,
+    "cost": 5000,
     "effect": {
-      "changeStartCards": 1
+      "changeStartCards": 1,
+      "startBattleWithCard": [
+        "Spellbook|EXO"
+      ]
     }
   },
   {
@@ -1111,29 +1113,27 @@
     }
   },
   {
-    "name": "Willow Bow",
+    "name": "Defiant Bow",
     "equipmentSlot": "Right",
     "iconName": "WoodBow",
-    "cost": 5000,
+    "cost": 2000,
     "effect": {
       "startBattleWithCard": [
-        "Willow Elf|S99"
+        "Defiant Elf|LGN"
       ]
     },
-    "description": "Start with a 1/1 Elf in play."
+    "description": "Start with a 1/1 Elf with trample in play."
   },
   {
     "name": "Thallid Farming Tools",
     "equipmentSlot": "Right",
     "iconName": "FarmersTools",
-    "cost": 5000,
     "effect": {
-      "lifeModifier": -2,
       "startBattleWithCard": [
         "Thallid|FEM"
       ]
     },
-    "description": "-2 life. A 1/1 Fungus. Remove 3 spore counters to make a Saproling."
+    "description": "Start battles with Thallid in play. A 1/1 Fungus that gains spore counters."
   },
   {
     "name": "Elven Lyre",
@@ -1151,7 +1151,7 @@
     "name": "Wooden Shield",
     "equipmentSlot": "Left",
     "iconName": "KiteShield",
-    "cost": 4000,
+    "cost": 2000,
     "effect": {
       "startBattleWithCard": [
         "Wall of Wood|LEA"
@@ -1210,7 +1210,7 @@
     "description": "Pay 3 to give target creature trample until end of turn.",
     "equipmentSlot": "Boots",
     "iconName": "SteelBoots",
-    "cost": 3000,
+    "cost": 1000,
     "effect": {
       "startBattleWithCard": [
         "War Chariot|ICE"
@@ -1219,12 +1219,11 @@
   },
   {
     "name": "Lotus Petal",
-    "description": "A petal from the Black Lotus. Sacrifice for one mana of any color. -3 life.",
+    "description": "A petal from the Black Lotus. Sacrifice for one mana of any color.",
     "equipmentSlot": "Neck",
     "iconName": "BlackLotus",
     "cost": 10000,
     "effect": {
-      "lifeModifier": -3,
       "startBattleWithCard": [
         "Lotus Petal|TMP"
       ]
@@ -1505,7 +1504,6 @@
     "description": "Pay 3 and tap to force target player to discard a card.",
     "equipmentSlot": "Left",
     "iconName": "DisruptingScepter",
-    "cost": 6000,
     "effect": {
       "startBattleWithCard": [
         "Disrupting Scepter|LEA"
@@ -2114,12 +2112,37 @@
     }
   },
   {
+    "name": "Sentry's Plate",
+    "description": "Start with a 0/1 Soldier artifact creature in play.",
+    "equipmentSlot": "Body",
+    "iconName": "SentrysPlate",
+    "cost": 2000,
+    "effect": {
+      "startBattleWithCard": [
+        "Soldevi Sentry|ALL"
+      ]
+    }
+  },
+  {
+    "name": "Fortified Shield",
+    "description": "Tap an untapped creature to give it +0/+2 until end of turn. +2 max life.",
+    "equipmentSlot": "Left",
+    "iconName": "FortifiedShield",
+    "cost": 3000,
+    "effect": {
+      "lifeModifier": 2,
+      "startBattleWithCard": [
+        "Fortified Area|LEG"
+      ]
+    }
+  },
+  {
     "name": "Celestial Prism",
-    "description": "Pay 2 and tap to convert one mana to any color.",
+    "description": "Pay 2 and tap to convert one mana to any color. +2 max life.",
     "equipmentSlot": "Neck",
     "iconName": "CelestialPrism",
-    "cost": 9000,
     "effect": {
+      "lifeModifier": 2,
       "startBattleWithCard": [
         "Celestial Prism|LEA"
       ]
@@ -2130,7 +2153,7 @@
     "description": "Sacrifice to search your library for a basic land card and put it into your hand.",
     "equipmentSlot": "Neck",
     "iconName": "BraidwoodSextant",
-    "cost": 9000,
+    "cost": 3000,
     "effect": {
       "startBattleWithCard": [
         "Braidwood Sextant|UDS"
@@ -2142,7 +2165,7 @@
     "description": "Sacrifice to shuffle your hand into your library and draw that many cards.",
     "equipmentSlot": "Neck",
     "iconName": "GoldStack",
-    "cost": 8000,
+    "cost": 3000,
     "effect": {
       "startBattleWithCard": [
         "Credit Voucher|MMQ"
@@ -2188,23 +2211,22 @@
     "name": "Scathe Scythe",
     "equipmentSlot": "Right",
     "iconName": "Scythe",
-    "cost": 5000,
+    "cost": 2000,
     "effect": {
-      "lifeModifier": -4,
+      "lifeModifier": -2,
       "startBattleWithCard": [
         "Scathe Zombies|LEA"
       ]
     },
-    "description": "-4 life. Start with a 2/2 Zombie in play."
+    "description": "-2 life. Start with a 2/2 Zombie in play."
   },
   {
     "name": "Feverbringer's Cloak",
-    "description": "Pay BB to put a -1/-1 counter on target creature. -3 life.",
+    "description": "Start battles with Fevered Convulsions in play. Pay BB to put a -1/-1 counter on target creature.",
     "equipmentSlot": "Body",
     "iconName": "FeverbringersCloak",
     "cost": 3000,
     "effect": {
-      "lifeModifier": -3,
       "startBattleWithCard": [
         "Fevered Convulsions|TMP"
       ]
@@ -2743,8 +2765,9 @@
   },
   {
     "name": "Glider Gloves",
-    "equipmentSlot": "Left",
+    "equipmentSlot": "Right",
     "iconName": "GliderGloves",
+    "cost": 2000,
     "effect": {
       "startBattleWithCard": [
         "Ornithopter|ATQ"
@@ -2932,12 +2955,11 @@
     "equipmentSlot": "Body",
     "iconName": "UrzasArmor",
     "effect": {
-      "lifeModifier": -3,
       "startBattleWithCard": [
         "Urza's Armor|USG"
       ]
     },
-    "description": "-3 life. Start battles with Urza's Armor in play."
+    "description": "Start battles with Urza's Armor in play. Prevents 1 damage from each source."
   },
   {
     "name": "Memory Crystal",
@@ -3146,15 +3168,15 @@
     "description": "-2 life. Start battles with Phyrexian Broodlings in play."
   },
   {
-    "name": "Armor of Evil",
+    "name": "Armor of Yawgmoth",
     "equipmentSlot": "Body",
-    "iconName": "ArmorOfEvil",
+    "iconName": "ArmorOfYawgmoth",
     "effect": {
       "startBattleWithCard": [
-        "Lurking Evil|USG"
+        "Order of Yawgmoth|USG"
       ]
     },
-    "description": "Start battles with Lurking Evil in play."
+    "description": "Start battles with Order of Yawgmoth in play."
   },
   {
     "name": "Eye of Yawgmoth",
@@ -3252,6 +3274,7 @@
     "name": "Catalyst Stone",
     "equipmentSlot": "Neck",
     "iconName": "CatalystStone",
+    "cost": 2000,
     "effect": {
       "startBattleWithCard": [
         "Catalyst Stone|ODY"
@@ -3332,12 +3355,12 @@
     "equipmentSlot": "Left",
     "iconName": "PandorasBox",
     "effect": {
-      "lifeModifier": 3,
+      "lifeModifier": 5,
       "startBattleWithCard": [
         "Chaos Orb|LEA"
       ]
     },
-    "description": "+3 life. Start battles with Chaos Orb in play."
+    "description": "+5 life. Start battles with Chaos Orb in play."
   },
   {
     "name": "Diamond Kaleidoscope",
@@ -3471,12 +3494,11 @@
     "equipmentSlot": "Right",
     "iconName": "SulfuricStaff",
     "effect": {
-      "lifeModifier": -4,
       "startBattleWithCard": [
         "Sulfuric Vapors|USG"
       ]
     },
-    "description": "-4 life. Start battles with Sulfuric Vapors in play."
+    "description": "Start battles with Sulfuric Vapors in play. Red spells deal 1 extra damage."
   },
   {
     "name": "Ring of Ma'r\u00fbf",
@@ -3549,11 +3571,10 @@
   },
   {
     "name": "Dementia Mask",
-    "description": "-1 starting hand size. Start battles with Ichorid in play.",
+    "description": "Start battles with Ichorid in play. A 3/1 haste that returns from graveyard.",
     "equipmentSlot": "Neck",
     "iconName": "DementiaMask",
     "effect": {
-      "changeStartCards": -1,
       "startBattleWithCard": [
         "Ichorid|TOR"
       ]
@@ -3738,12 +3759,11 @@
     "equipmentSlot": "Body",
     "iconName": "GarmentsofGaea",
     "effect": {
-      "changeStartCards": -1,
       "startBattleWithCard": [
         "Pulse of Llanowar|INV"
       ]
     },
-    "description": "-1 hand size. Start battles with Pulse of Llanowar in play."
+    "description": "Start battles with Pulse of Llanowar in play. Mana-fixing enchantment."
   },
   {
     "name": "Hymnal Hood",
@@ -3797,12 +3817,36 @@
     "equipmentSlot": "Left",
     "iconName": "SerrasPrayerBook",
     "effect": {
-      "lifeModifier": -4,
       "startBattleWithCard": [
         "Serra's Liturgy|USG"
       ]
     },
-    "description": "-4 life. Start battles with Serra's Liturgy in play."
+    "description": "Start battles with Serra's Liturgy in play. Echo enchantment that creates 1/1 Spirits."
+  },
+  {
+    "name": "Kobold King's Crown",
+    "equipmentSlot": "Neck",
+    "iconName": "KoboldKingsCrown",
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Crimson Kobolds|LEG",
+        "Crookshank Kobolds|LEG",
+        "Kobolds of Kher Keep|LEG"
+      ]
+    },
+    "description": "-1 hand size. Start with three different Kobolds in play."
+  },
+  {
+    "name": "Chimeric Sphere",
+    "equipmentSlot": "Right",
+    "iconName": "ChimericSphere",
+    "effect": {
+      "startBattleWithCard": [
+        "Chimeric Sphere|WTH"
+      ]
+    },
+    "description": "Start battles with Chimeric Sphere in play."
   },
   {
     "name": "Serpent Ring",

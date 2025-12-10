@@ -163,7 +163,7 @@ SteelShield
   xy: 272, 208
   size: 16, 16
 SteelBoots
-  xy: 128, 128
+  xy: 48, 160
   size: 16, 16
 SteelSword
   xy: 272, 752
@@ -624,6 +624,9 @@ AmuletOfAzar
 ArmorOfEvil
   xy: 240, 96
   size: 16, 16
+ArmorOfYawgmoth
+  xy: 240, 96
+  size: 16, 16
 AshnodsBattleGear
   xy: 224, 80
   size: 16, 16
@@ -632,6 +635,12 @@ BroodlingEgg
   size: 16, 16
 CatalystStone
   xy: 144, 784
+  size: 16, 16
+ChimericSphere
+  xy: 160, 192
+  size: 16, 16
+KoboldKingsCrown
+  xy: 128, 368
   size: 16, 16
 CaveDiversBoots
   xy: 144, 96
@@ -918,4 +927,10 @@ WaterOfYouth
   index: -1
 BraidwoodSextant
   xy: 96, 832
+  size: 16, 16
+SentrysPlate
+  xy: 240, 48
+  size: 16, 16
+FortifiedShield
+  xy: 224, 192
   size: 16, 16

@@ -141,7 +141,7 @@
 		{ "count": 1, "cardText": "(Destroy|exile).*(attacking|defending|tapped|with)", "rarity": ["U"] },
 		{ "count": 1, "cardText": "(Destroy|exile).*(attacking|defending|tapped|with)", "rarity": ["C"] }
 	]
-},{                                      
+},{
 	"name":"WhiteItems",
 	"spriteAtlas":"maps/tileset/buildings.atlas",
 	"sprite":"ItemShop",
@@ -149,23 +149,24 @@
 	"rewards": [
 		{ "type": "item","count":1, "itemName": "White rune"  },
 		{ "type": "item","count":1, "itemName": "White Staff"  },
-		{ "type": "item","count":1, "itemName": "Cadet's Sword"  },
-		{ "type": "item","count":1, "itemName": "Shield of the Ages"  },
+		{ "type": "item","count":1, "itemName": "Hero's Sword"  },
+		{ "type": "item","count":1, "itemName": "Sword of the Chosen"  },
+		{ "type": "item","count":1, "itemName": "Fortified Shield"  },
 		{ "type": "item","count":1, "itemName": "Belbe's Armor"  },
 		{ "type": "item","count":1, "itemName": "Riding Boots"  },
 		{ "type": "life","count":1    }
 
 		]
 
-	},{                                      
+	},{
 	"name":"RedItems",
 	"spriteAtlas":"maps/tileset/buildings.atlas",
 	"sprite":"ItemShop",
 	"restockPrice": 5,
-	"rewards": [ 
+	"rewards": [
 		{ "type": "item","count":1, "itemName": "Red rune"  },
 		{ "type": "item","count":1, "itemName": "Red Staff"  },
-		{ "type": "item","count":1, "itemName": "Mons's Dagger"  },
+		{ "type": "item","count":1, "itemName": "Raging Dagger"  },
 		{ "type": "item","count":1, "itemName": "Dwarven Shield"  },
 		{ "type": "item","count":1, "itemName": "Flowstone Armor"  },
 		{ "type": "item","count":1, "itemName": "Sandals of Speed"  },
@@ -173,21 +174,20 @@
 		{ "type": "life","count":1    }
 		]
 
-	},{                                      
+	},{
 	"name":"BlueItems",
 	"spriteAtlas":"maps/tileset/buildings.atlas",
 	"sprite":"ItemShop",
 	"restockPrice": 5,
-	"rewards": [ 
+	"rewards": [
 		{ "type": "item","count":1, "itemName": "Blue rune"  },
 		{ "type": "item","count":1, "itemName": "Blue Staff"  },
 		{ "type": "item","count":1, "itemName": "Pearl Trident"  },
 		{ "type": "item","count":1, "itemName": "Dream Chisel"  },
-		{ "type": "item","count":1, "itemName": "Cloak of Dreams"  },
 		{ "type": "item","count":1, "itemName": "Whalebone Glider"  },
 		{ "type": "item","count":1, "itemName": "Amulet of Telepathy"  },
 		{ "type": "life","count":1    }
-		
+
 		]
 
 	},
@@ -300,14 +300,14 @@
 	"name":"Equipment",
 	"spriteAtlas":"maps/tileset/buildings.atlas",
 	"sprite":"EquipmentShop",
-	"rewards": [ 
-		{ "type": "item","count":1, "itemName": "Sword of the Chosen"  },
+	"rewards": [
+		{ "type": "item","count":1, "itemName": "Spellbook"  },
 		{ "type": "item","count":1, "itemName": "Silver Shield"  },
 		{ "type": "item","count":1, "itemName": "Disrupting Scepter"  },
 		{ "type": "item","count":1, "itemName": "Braidwood Sextant"  },
 		{ "type": "item","count":1, "itemName": "Credit Voucher"  },
-		{ "type": "item","count":1, "itemName": "Steel Armor"  }
-		
+		{ "type": "item","count":1, "itemName": "Sentry's Plate"  }
+
 		]
 	
 	},{
