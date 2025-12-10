@@ -1,5 +1,6 @@
 package forge.screens.home.rogue;
 
+import forge.gamemodes.rogue.RogueRunData;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -8,7 +9,7 @@ import forge.screens.home.IVSubmenu;
 import forge.screens.home.StartButton;
 import forge.screens.home.VHomeUI;
 import forge.toolbox.FLabel;
-import forge.toolbox.FPanel;
+import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
@@ -42,26 +43,32 @@ public enum VSubmenuRogueMap implements IVSubmenu<CSubmenuRogueMap> {
         .fontStyle(Font.BOLD)
         .build();
 
-    private final FLabel lblNodeInfo = new FLabel.Builder()
-        .text("Current Node: None")
-        .fontSize(12)
-        .build();
-
-    private final FPanel pnlPathDisplay = new FPanel(new MigLayout("insets 10, gap 10, wrap"));
+    private final PathVisualizerPanel pathVisualizer = new PathVisualizerPanel();
+    private final FScrollPane scrollPathDisplay;
 
     private final StartButton btnEnterNode = new StartButton();
 
     VSubmenuRogueMap() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        pnlPathDisplay.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        pnlPathDisplay.setCornerDiameter(10);
+
+        // Setup scroll pane for path visualizer
+        scrollPathDisplay = new FScrollPane(pathVisualizer, true);
+        scrollPathDisplay.setOpaque(false);
 
         btnEnterNode.setText("Enter Node");
     }
 
-    public void updateDisplay(String lifeText, String nodeText) {
-        lblLife.setText(lifeText);
-        lblNodeInfo.setText(nodeText);
+    /**
+     * Update the display with current run data.
+     */
+    public void updateDisplay(RogueRunData run) {
+        if (run != null) {
+            lblLife.setText("Life: " + run.getCurrentLife());
+            pathVisualizer.updatePath(run);
+        } else {
+            lblLife.setText("Life: 20");
+            pathVisualizer.clearPath();
+        }
     }
 
     @Override
@@ -86,12 +93,8 @@ public enum VSubmenuRogueMap implements IVSubmenu<CSubmenuRogueMap> {
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblLife, "ax center, gap 0 0 10px 10px");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlPathDisplay, "w 96%!, gap 2% 2% 0 0, pushy, growy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scrollPathDisplay, "w 96%!, gap 2% 2% 0 0, pushy, growy");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnEnterNode, "w 96%!, h 40px!, ax center, gap 2% 2% 20px 20px");
-
-        // Add node info to path display
-        pnlPathDisplay.removeAll();
-        pnlPathDisplay.add(lblNodeInfo, "w 100%!");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
@@ -101,8 +104,8 @@ public enum VSubmenuRogueMap implements IVSubmenu<CSubmenuRogueMap> {
         return btnEnterNode;
     }
 
-    public FPanel getPnlPathDisplay() {
-        return pnlPathDisplay;
+    public PathVisualizerPanel getPathVisualizer() {
+        return pathVisualizer;
     }
 
     @Override

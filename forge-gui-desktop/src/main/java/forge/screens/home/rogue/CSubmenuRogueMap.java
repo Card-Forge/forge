@@ -62,24 +62,7 @@ public enum CSubmenuRogueMap implements ICDoc {
     }
 
     private void updateView() {
-        if (currentRun == null) {
-            return;
-        }
-
-        String lifeText = "Life: " + currentRun.getCurrentLife() + " / " + currentRun.getStartingLife();
-
-        NodeData currentNode = currentRun.getCurrentNode();
-        String nodeText;
-        if (currentNode != null) {
-            String typeStr = currentNode.getType().toString();
-            String nameStr = currentNode.getPlaneboundName() != null ? currentNode.getPlaneboundName() :
-                            (currentNode.getPlaneName() != null ? currentNode.getPlaneName() : "Unknown");
-            nodeText = "Current Node: " + typeStr + " - " + nameStr;
-        } else {
-            nodeText = "Current Node: None (Run Complete)";
-        }
-
-        view.updateDisplay(lifeText, nodeText);
+        view.updateDisplay(currentRun);
     }
 
     private void enterNode() {

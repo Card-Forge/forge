@@ -280,4 +280,10 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
     public void showMessage(String message, String title, FSkinProp icon) {
         SOptionPane.showMessageDialog(message, title, icon);
     }
+
+    @Override
+    public List<PaperCard> showCardRewardDialog(String title, List<PaperCard> cards,
+        int minSelections, int maxSelections) {
+        return List.of();
+    }
 }
