@@ -1,0 +1,20 @@
+[metadata]
+Name=Time Walker
+[Main]
+20 Island|LEA|2
+4 Mox Sapphire|LEA
+4 Black Lotus|LEA
+4 Time Walk|LEA
+4 Time Warp|TMP
+2 Temporal Manipulation|PO2
+2 Capture of Jingzhou|PTK
+4 Escape Artist|ODY
+3 Phantom Warrior|WTH
+3 Covert Operative|LGN
+3 Time Elemental|LEG
+3 Temporal Adept|UDS
+2 Boomerang|LEG
+2 Temporal Fissure|SCG
+
+[StartInBattle_Reference]
+1 Underworld Dreams|LEG

@@ -80,8 +80,9 @@
   </object>
   <object id="150" template="../../../../../../common/maps/obj/enemy.tx" x="307.842" y="123.772">
    <properties>
-    <property name="enemy" value="Curselord" />
+    <property name="enemy" value="King Rohgahh" />
     <property name="spawn.Hard" type="bool" value="true" />
+    <property name="effect">{ "startBattleWithCard": [ "Kobolds of Kher Keep|LEG", "Kobolds of Kher Keep|LEG", "Kobolds of Kher Keep|LEG", "Kobolds of Kher Keep|LEG", "Mountain|4ED", "Swamp|4ED", "Kobold Overlord|LEG" ] }</property>
    </properties>
   </object>
   <object id="159" template="../../../../../../common/maps/obj/booster.tx" x="335.359" y="82.7761">

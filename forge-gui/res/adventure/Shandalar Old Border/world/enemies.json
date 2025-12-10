@@ -12789,12 +12789,6 @@
         "probability": 1,
         "count": 20,
         "addMaxCount": 10
-      },
-      {
-        "type": "item",
-        "probability": 1,
-        "count": 1,
-        "itemName": "Shaman's Staff"
       }
     ],
     "colors": "RG",
@@ -16944,17 +16938,17 @@
     ]
   },
   {
-    "name": "Kobold Worker",
-    "nameOverride": "King Rohgahh",
+    "name": "King Rohgahh",
     "sprite": "sprites/enemy/humanoid/kobold/koboldworker.atlas",
     "deck": [
-      "decks/standard/koboldworker.dck"
+      "decks/elite/king_rohgahh.dck"
     ],
     "ai": "",
     "boss": true,
     "spawnRate": 0.5,
     "difficulty": 0.5,
     "speed": 31,
+    "scale": 1.5,
     "life": 25,
     "rewards": [
       {
@@ -33117,19 +33111,19 @@
     "rewards": [
       {
         "type": "card",
-        "cardName": "Latulla, Keldon Overseer|PCY"
+        "cardName": "M\u00e1rton Stromgald|ICE"
       },
       {
         "type": "card",
-        "cardName": "Repercussion|UDS"
+        "cardName": "Mogg Infestation|STH"
       },
       {
         "type": "card",
-        "cardName": "Starstorm|ONS"
+        "cardName": "Insurrection|ONS"
       },
       {
         "type": "card",
-        "cardName": "Fork|LEA"
+        "cardName": "Goblin Marshal|UDS"
       },
       {
         "type": "shards",
@@ -33138,6 +33132,10 @@
       {
         "type": "gold",
         "count": 2000
+      },
+      {
+        "type": "item",
+        "itemName": "Ebony Horseshoe"
       }
     ]
   },
@@ -33265,7 +33263,7 @@
       },
       {
         "type": "item",
-        "itemName": "Empress's Crown",
+        "itemName": "Map to Paradise",
         "count": 1,
         "probability": 1
       },
@@ -33290,12 +33288,6 @@
       {
         "type": "card",
         "cardName": "Collective Unconscious|MMQ",
-        "count": 1,
-        "probability": 1
-      },
-      {
-        "type": "item",
-        "itemName": "Green Key to the False God",
         "count": 1,
         "probability": 1
       }
@@ -33388,6 +33380,10 @@
       {
         "type": "gold",
         "count": 2000
+      },
+      {
+        "type": "item",
+        "itemName": "Ivy Seer's Amulet"
       }
     ]
   },
@@ -33427,6 +33423,10 @@
       {
         "type": "gold",
         "count": 2000
+      },
+      {
+        "type": "item",
+        "itemName": "Multani's Boots"
       }
     ]
   },
@@ -33782,7 +33782,13 @@
       },
       {
         "type": "item",
-        "itemName": "Karn's Touch",
+        "itemName": "Shield of Tears",
+        "count": 1,
+        "probability": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Karn's Touch|USG",
         "count": 1,
         "probability": 1
       },
@@ -35634,7 +35640,7 @@
         "type": "item",
         "probability": 0.1,
         "count": 1,
-        "itemName": "Celestial Prism"
+        "itemName": "Prismatic Egg"
       }
     ],
     "colors": "WUG",
@@ -35686,7 +35692,7 @@
         "type": "item",
         "probability": 0.1,
         "count": 1,
-        "itemName": "Celestial Prism"
+        "itemName": "Prismatic Egg"
       }
     ],
     "colors": "WUB",
@@ -35738,7 +35744,7 @@
         "type": "item",
         "probability": 0.1,
         "count": 1,
-        "itemName": "Celestial Prism"
+        "itemName": "Prismatic Egg"
       }
     ],
     "colors": "UBR",
@@ -35790,7 +35796,7 @@
         "type": "item",
         "probability": 0.1,
         "count": 1,
-        "itemName": "Celestial Prism"
+        "itemName": "Prismatic Egg"
       }
     ],
     "colors": "BRG",
@@ -35842,7 +35848,7 @@
         "type": "item",
         "probability": 0.1,
         "count": 1,
-        "itemName": "Celestial Prism"
+        "itemName": "Prismatic Egg"
       }
     ],
     "colors": "WRG",
@@ -37370,5 +37376,83 @@
       "Serra the Benevolent Starting Setup"
     ],
     "colors": "W"
+  },
+  {
+    "name": "Recaller of Ancestry",
+    "sprite": "sprites/enemy/humanoid/human/wizard/archmage.atlas",
+    "deck": [
+      "decks/miniboss/recaller_of_ancestry.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "speed": 15,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Ancestral Recall|LEA"
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 100,
+        "addMaxCount": 100
+      }
+    ],
+    "colors": "UG"
+  },
+  {
+    "name": "Twister of Time",
+    "sprite": "sprites/enemy/celestial/seraphim.atlas",
+    "deck": [
+      "decks/miniboss/twister_of_time.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "speed": 15,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Timetwister|LEA"
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 150,
+        "addMaxCount": 100
+      }
+    ],
+    "colors": "UB"
+  },
+  {
+    "name": "Time Walker",
+    "sprite": "sprites/enemy/undead/bonegolem.atlas",
+    "deck": [
+      "decks/miniboss/time_walker.dck"
+    ],
+    "ai": "",
+    "boss": true,
+    "speed": 15,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Time Walk|LEA"
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 200,
+        "addMaxCount": 100
+      }
+    ],
+    "colors": "U"
   }
 ]

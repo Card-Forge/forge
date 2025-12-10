@@ -1559,12 +1559,11 @@
 		"radiusFactor": 0.8
 	},
 	{
-		"name": "Crawlspace",
-		"displayName": "Blue Tower",
+		"name": "Halls of Time",
 		"type": "dungeon",
 		"count": 1,
-		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
-		"sprite": "MageTowerBlue",
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Portal",
 		"map": "../Shandalar Old Border/maps/map/magetower/magetower_10_crawlspace.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
