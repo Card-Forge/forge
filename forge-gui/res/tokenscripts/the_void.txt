@@ -6,4 +6,4 @@ PT:5/5
 K:Flying
 K:Indestructible
 S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
-Oracle:Flying, indestructible
+Oracle:Flying, indestructible\nThe Void attacks each combat if able.
