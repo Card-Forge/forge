@@ -3,5 +3,5 @@ ManaCost:2 U
 Types:Creature Human Rogue
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other,Card.Self | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME or another creature dies, target player mills a card.
-SVar:TrigMill:DB$ Mill | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player
+SVar:TrigMill:DB$ Mill | NumCards$ 1 | ValidTgts$ Player
 Oracle:Whenever Selhoff Occultist or another creature dies, target player mills a card.

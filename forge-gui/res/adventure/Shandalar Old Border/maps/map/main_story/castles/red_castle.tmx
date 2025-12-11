@@ -62,6 +62,7 @@
   </object>
   <object id="54" template="../../../../../../../common/maps/obj/enemy.tx" x="223.57" y="537.245">
    <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Mox Ruby|LEA", "Wall of Fire|LEA" ] }</property>
     <property name="enemy" value="Master Red Wizard" />
     <property name="threatRange" type="int" value="20" />
     <property name="waypoints" value="76,75,76,84,81,82,83,82,79,80,78,77" />
@@ -184,7 +185,7 @@
 ]</property>
     <property name="enemy" value="Pyromancer" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{"startBattleWithCard": ["Mountain|BRB", "Mountain|BRB", "Mountain|BRB", "Smoke|LEA", "Sulfuric Vortex|SCG"]}</property>
+   <property name="effect">{ "startBattleWithCard": [ "Mountain|BRB", "Smoke|LEA", "Sulfuric Vortex|SCG" ] }</property>
     </properties>
   </object>
   <object id="69" template="../../../../../../../common/maps/obj/enemy.tx" x="368.5" y="228.091">
@@ -199,7 +200,7 @@
 ]</property>
     <property name="enemy" value="Fire Giant" />
     <property name="threatRange" type="int" value="20" />
-   <property name="effect">{ "startBattleWithCard": [ "Thran Dynamo|UDS" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Mountain|INV|1", "Mountain|INV|2", "Mountain|INV|3", "Mountain|INV|4", "Loafing Giant|INV" ] }</property></properties>
   </object>
   <object id="70" template="../../../../../../../common/maps/obj/enemy.tx" x="78.5" y="405.5">
    <properties>
@@ -217,6 +218,7 @@
   </object>
   <object id="71" template="../../../../../../../common/maps/obj/enemy.tx" x="520.254" y="498.533">
    <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Mox Ruby|LEA", "Wall of Fire|LEA" ] }</property>
     <property name="enemy" value="Master Red Wizard" />
     <property name="threatRange" type="int" value="20" />
     <property name="waypoints" value="83,82,79,80,78,77,76,75,84,81,82" />

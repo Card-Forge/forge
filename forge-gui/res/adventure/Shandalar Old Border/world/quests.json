@@ -9601,7 +9601,7 @@
 		},
 		{
 			"id": 2,
-			"name": "Defeat the $(enemy_2)",
+			"name": "Defeat the Pirate Captain",
 			"description": "Find and defeat the leader of the pirates in the $(poi_1).",
 			"mapFlag": "",
 			"mapFlagValue": 1,

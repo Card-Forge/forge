@@ -188,7 +188,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
      * change to if the button is clicked.
      */
     private void updateMassSelectButton() {
-        String selectButtonLabel = Localizer.getInstance().getMessage(massSelectMode.next().getLabelName());
+        String selectButtonLabel = massSelectMode.next().getTranslatedName();
         getController().getGui().updateButtons(getOwner(), Localizer.getInstance().getMessage("lblOK"),
                 selectButtonLabel, hasEnoughTargets(), allowCancel, true);
     }

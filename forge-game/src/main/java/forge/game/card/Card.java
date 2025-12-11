@@ -3446,10 +3446,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     if (CardUtil.getReflectableManaColors(mana).contains(s)) {
                         return true;
                     }
-                } else {
-                    if (mana.canProduce(MagicColor.toShortString(s))) {
-                        return true;
-                    }
+                } else if (mana.canProduce(MagicColor.toShortString(s))) {
+                    return true;
                 }
             }
         }
@@ -7662,8 +7660,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             if (sa.isAdventure() && isOnAdventure()) {
                 continue; // skip since it's already on adventure
             }
-            //add alternative costs as additional spell abilities
             abilities.add(sa);
+            //add alternative costs as additional spell abilities
             abilities.addAll(GameActionUtil.getAlternativeCosts(sa, player, false));
         }
 
@@ -7683,7 +7681,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         // Add Modal Spells
         if (isModal() && hasState(CardStateName.Backside)) {
             for (SpellAbility sa : getState(CardStateName.Backside).getSpellAbilities()) {
-                //add alternative costs as additional spell abilities
                 // only add Spells there
                 if (sa.isSpell() || sa.isLandAbility()) {
                     abilities.add(sa);

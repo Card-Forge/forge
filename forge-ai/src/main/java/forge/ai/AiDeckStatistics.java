@@ -35,7 +35,7 @@ public class AiDeckStatistics {
         this.numLands = numLands;
     }
 
-    public static AiDeckStatistics fromCards(List<Card> cards) {
+    public static AiDeckStatistics fromCards(Iterable<Card> cards) {
         int totalCMC = 0;
         int totalCount = 0;
         int numLands = 0;
@@ -72,7 +72,6 @@ public class AiDeckStatistics {
             // find the sources
             // What about non-mana-ability mana sources?
             // fetchlands, ramp spells, etc
-
         }
 
         return new AiDeckStatistics(totalCount == 0 ? 0 : totalCMC / (float)totalCount,
@@ -83,7 +82,6 @@ public class AiDeckStatistics {
                 numLands
                 );
     }
-
 
     public static AiDeckStatistics fromDeck(Deck deck, Player player) {
         List<Card> cardlist = new ArrayList<>();

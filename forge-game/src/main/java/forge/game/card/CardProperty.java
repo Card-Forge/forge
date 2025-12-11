@@ -1430,13 +1430,6 @@ public class CardProperty {
             if ((card.getCMC() % 2 == 0) == (source.getChosenEvenOdd() == EvenOdd.Even)) {
                 return false;
             }
-        } else if (property.equals("cmcChosen")) {
-            if (!source.hasChosenNumber()) {
-                return false;
-            }
-            if (card.getCMC() != source.getChosenNumber()) {
-                return false;
-            }
         } else if (property.startsWith("power") || property.startsWith("toughness") || property.startsWith("cmc")
                 || property.startsWith("totalPT") || property.startsWith("numColors")
                 || property.startsWith("basePower") || property.startsWith("baseToughness") || property.startsWith("numTypes")) {
@@ -1469,7 +1462,14 @@ public class CardProperty {
                 rhs = property.substring(10);
                 y = Iterables.size(card.getType().getCoreTypes());
             }
-            x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
+            if (rhs.equals("Chosen")) {
+                if (!source.hasChosenNumber()) {
+                    return false;
+                }
+                x = source.getChosenNumber();
+            } else {
+                x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
+            }
 
             if (!Expressions.compare(y, property, x)) {
                 return false;
@@ -1480,10 +1480,6 @@ public class CardProperty {
             }
         } else if (property.equals("HasCounters")) {
             if (!card.hasCounters()) {
-                return false;
-            }
-        } else if (property.equals("NoCounters")) {
-            if (card.hasCounters()) {
                 return false;
             }
         }

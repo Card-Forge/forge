@@ -9,6 +9,6 @@ SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardToughness
 SVar:NeedsToPlayVar:Z GE2
-SVar:Z:Count$Valid Creature.YouCtrl+inZoneBattlefield
+SVar:Z:Count$Valid Creature.YouCtrl
 AI:RemoveDeck:Random
 Oracle:Trample\nAt the beginning of your upkeep, sacrifice a creature. You gain life equal to that creature's toughness.

@@ -34,7 +34,7 @@
   <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="126.667" y="81.4997">
    <properties>
     <property name="enemy" value="Adept Black Wizard" />
-   <property name="effect">{ "startBattleWithCard": [ "Wall of Bone|LEA|1" ] }</property></properties>
+   </properties>
   </object>
   <object id="61" template="../../../../../../common/maps/obj/booster.tx" x="144.333" y="78.3333">
    <properties>

@@ -132,7 +132,7 @@
    <properties>
     <property name="enemy" value="Master Blue Wizard" />
     <property name="threatRange" type="int" value="50" />
-   <property name="effect">{"startBattleWithCard": ["Hesitation|STH"]}</property>
+   <property name="effect">{ "startBattleWithCard": [ "Wall of Air|LEA", "Mox Sapphire|LEA" ] }</property>
     </properties>
   </object>
   <object id="66" template="../../../../../../common/maps/obj/booster.tx" x="432.418" y="144.188">

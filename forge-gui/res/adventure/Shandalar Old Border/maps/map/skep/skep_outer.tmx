@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="100" height="86" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="269">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="100" height="86" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="270">
  <editorsettings>
   <export format="tmx" />
  </editorsettings>
@@ -42,6 +42,11 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
+  <object id="269" template="../../../../../../common/maps/obj/entry_up.tx" x="208.75" y="1376.5" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
 <object id="103" template="../../../../../../common/maps/obj/gold.tx" x="1527.67" y="945.667" visible="1">
    <properties>
     <property name="reward">[{
@@ -483,7 +488,7 @@
     <property name="teleportObjectId" value="38" />
    </properties>
   </object>
-  <object id="268" template="../../../../../../common/maps/obj/enemy.tx" x="720" y="783" width="16" height="16" visible="1">
+  <object id="268" template="../../../../../../common/maps/obj/enemy.tx" x="841.833" y="798.667" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[
   {
@@ -934,9 +939,9 @@
   </object>
   <object id="267" template="../../../../../../common/maps/obj/enemy.tx" x="330" y="540">
    <properties>
-    <property name="enemy" value="Slivdrazi Monstrosity" />
+    <property name="effect">{ "startBattleWithCard": [ "Metallic Sliver|TMP", "Metallic Sliver|TMP", "Metallic Sliver|TMP" ] }</property>
+    <property name="enemy" value="Metallic Sliver" />
     <property name="threatRange" type="int" value="60" />
-   <property name="effect">{"startBattleWithCard": ["Barbed Sliver|TMP", "Root Sliver|LGN"]}</property>
     </properties>
   </object>
  </objectgroup>

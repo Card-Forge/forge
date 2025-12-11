@@ -55,7 +55,7 @@
     ]
   }
 ]</property>
-    <property name="effect">{ "startBattleWithCard": [ "City of Brass|CHR", "Metallic Sliver|TMP", "Primitive Etchings|SCG", "Reflecting Pool|TMP" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN", "Metallic Sliver|TMP", "Primitive Etchings|SCG", "Reflecting Pool|TMP" ] }</property>
     <property name="enemy" value="Sliver Queen" />
     <property name="spawn.Easy" type="bool" value="true" />
     <property name="spawn.Hard" type="bool" value="true" />

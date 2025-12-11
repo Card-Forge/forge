@@ -33,9 +33,12 @@ Name=Portal Master
 2 Thing from the Deep|POR
 
 [StartInBattle_Reference]
-2 Mountain|POR
-2 Island|POR
-2 Plains|POR
-1 Wall of Swords|LEA
-1 Storm Crow|ALL
 1 Craven Giant|POR
+1 Island|POR|1
+1 Mountain|POR|1
+1 Plains|POR|1
+1 Island|POR|2
+1 Mountain|POR|2
+1 Plains|POR|2
+1 Storm Crow|ALL
+1 Wall of Swords|LEA

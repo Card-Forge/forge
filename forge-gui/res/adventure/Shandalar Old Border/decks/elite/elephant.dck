@@ -1,0 +1,29 @@
+[metadata]
+Name=elephant
+
+[Main]
+4 Savannah|LEA
+4 Brushland|ICE
+4 Windswept Heath|ONS
+2 Forest|ICE
+2 Plains|ICE
+4 Elephant Graveyard|ARN
+4 Call of the Herd|ODY
+4 Elephant Ambush|ODY
+4 Elephant Guide|JUD
+4 Trained Armodon|TMP
+4 Endangered Armodon|STH
+2 Iron Tusk Elephant|POR
+2 Vintara Elephant|PCY
+4 Rabid Elephant|ODY
+2 Purify|ULG
+1 Disenchant|TMP
+1 Naturalize|ONS
+4 Berserk|LEA
+4 Swords to Plowshares|LEA
+
+[StartInBattle_Reference]
+1 Forest|ICE
+1 Plains|ICE
+1 Elephant Graveyard|ARN
+1 War Mammoth|LEA

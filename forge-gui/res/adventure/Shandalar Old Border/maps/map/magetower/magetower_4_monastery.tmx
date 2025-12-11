@@ -44,6 +44,7 @@
   </object>
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="208.402" y="64.8086">
    <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Mox Pearl|LEA", "Wall of Swords|LEA" ] }</property>
     <property name="enemy" value="Master White Wizard" />
     <property name="threatRange" type="int" value="30" />
    </properties>

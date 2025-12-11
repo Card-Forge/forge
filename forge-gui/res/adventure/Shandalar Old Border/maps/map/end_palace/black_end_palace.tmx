@@ -181,7 +181,7 @@
     <property name="enemy" value="Ashnod" />
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{"startBattleWithCard": ["Swamp|2ED", "Mountain|2ED", "Island|2ED", "Ashnod's Altar|ATQ", "Ashnod's Battle Gear|ATQ", "Ashnod's Cylix|ALL", "Ashnod's Transmogrant|ATQ", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS"]}</property>
+   <property name="effect">{ "startBattleWithCard": [ "Ashnod's Altar|ATQ", "Ashnod's Battle Gear|ATQ", "Ashnod's Cylix|ALL", "Ashnod's Transmogrant|ATQ", "Island|2ED", "Mountain|2ED", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Swamp|2ED" ] }</property>
     </properties>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="365" y="232.63">
@@ -218,6 +218,7 @@
   </object>
   <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="366.694" y="701.945">
    <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Mox Jet|LEA", "Wall of Bones|LEA" ] }</property>
     <property name="enemy" value="Master Black Wizard" />
     <property name="threatRange" type="int" value="20" />
     <property name="waypoints" value="76,77,76,78,79,78,80,73,81,82,81,74,75,74" />

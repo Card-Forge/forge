@@ -55,7 +55,7 @@
       "action": [{"setQuestFlag": {"key":"Ch1RedCastleComplete", "val": 1} }, {"deleteMapObject": -1}, {"advanceQuestFlag": "Ch1CastlesComplete"}]
    }]
 }]</property>
-    <property name="effect">{ "startBattleWithCard": [ "Dragon Roost|ONS", "Fervor|WTH", "Mountain|LEA" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Dragon Roost|ONS", "Mountain|ONS|1", "Mountain|ONS|2", "Mountain|ONS|3", "Mountain|ONS|4" ] }</property>
     <property name="enemy" value="Lathliss" />
     <property name="spawn.Hard" type="bool" value="false" />
     <property name="threatRange" type="int" value="50" />
@@ -79,7 +79,7 @@
         "action": [{"setQuestFlag": {"key":"Ch1RedCastleComplete", "val": 1} }, {"deleteMapObject": -1}, {"advanceQuestFlag": "Ch1CastlesComplete"}]
      }]
   }]</property>
-      <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Mountain|LEA&quot;, &quot;Mountain|LEA&quot;, &quot;Mountain|LEA&quot;, &quot;Mountain|LEA&quot;, &quot;Dragon Roost|ONS&quot; ]}">{ "startBattleWithCard": [ "Dragon Roost|ONS", "Fervor|WTH", "Mountain|LEA" ] }</property>
+      <property name="effect">{ "startBattleWithCard": [ "Dragon Roost|ONS", "Mountain|ONS|1", "Mountain|ONS|2", "Mountain|ONS|3", "Mountain|ONS|4" ] }</property>
         <property name="enemy" value="Lathliss" />
         <property name="spawn.Easy" type="bool" value="false" />
         <property name="spawn.Hard" type="bool" value="true" />

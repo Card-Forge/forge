@@ -90,8 +90,6 @@ public class ComputerUtilAbility {
     }
 
     public static List<SpellAbility> getOriginalAndAltCostAbilities(final List<SpellAbility> originList, final Player player) {
-        final List<SpellAbility> newAbilities = Lists.newArrayList();
-
         List<SpellAbility> originListWithAddCosts = Lists.newArrayList();
         for (SpellAbility sa : originList) {
             // If this spell has alternative additional costs, add them instead of the unmodified SA itself
@@ -99,6 +97,7 @@ public class ComputerUtilAbility {
             originListWithAddCosts.addAll(GameActionUtil.getAdditionalCostSpell(sa));
         }
 
+        final List<SpellAbility> newAbilities = Lists.newArrayList();
         for (SpellAbility sa : originListWithAddCosts) {
             // determine which alternative costs are cheaper than the original and prioritize them
             List<SpellAbility> saAltCosts = GameActionUtil.getAlternativeCosts(sa, player, false);
@@ -323,10 +322,11 @@ public class ComputerUtilAbility {
             a1 += getSpellAbilityPriority(a);
             b1 += getSpellAbilityPriority(b);
 
-            // If both are creature spells sort them after
+            // if both are creature spells sort them after
             if (safeToEvaluateCreatures) {
-                a1 += Math.round(ComputerUtilCard.evaluateCreature(a) / 100f);
-                b1 += Math.round(ComputerUtilCard.evaluateCreature(b) / 100f);
+                // try to align the scales: if priority swings in either direction extra evaluation matters less
+                a1 += Math.round(ComputerUtilCard.evaluateCreature(a) / (10.5f + Math.abs(a1)));
+                b1 += Math.round(ComputerUtilCard.evaluateCreature(b) / (10.5f + Math.abs(b1)));
             }
 
             return b1 - a1;

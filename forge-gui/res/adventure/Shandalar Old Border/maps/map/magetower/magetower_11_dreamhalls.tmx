@@ -118,13 +118,13 @@
   <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="28.9129" y="186.082" />
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="80.4976" y="79.0146">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Jayemdae Tome|LEB|1" ], "lifeModifier": 4 }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Wall of Brambles|LEA", "Mox Emerald|LEA" ], "lifeModifier": 4 }</property>
     <property name="enemy" value="Master Green Wizard" />
    </properties>
   </object>
   <object id="51" template="../../../../../../common/maps/obj/enemy.tx" x="351.877" y="205.729">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Fellwar Stone|4ED|1" ], "lifeModifier": 3 }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Fire Diamond|MIR" ], "lifeModifier": 3 }</property>
     <property name="enemy" value="Dragon" />
    <property name="effect">{ "startBattleWithCard": [ "Fire Diamond|MIR" ] }</property>
    </properties>

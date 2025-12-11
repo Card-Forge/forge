@@ -19,7 +19,9 @@ Name=Akroma, Angel of Wrath
 2 Akroma's Vengeance|ONS
 
 [StartInBattle_Reference]
-3 Plains|LEA
-1 Tormented Angel|UDS
+1 Plains|ONS|2
+1 Plains|ONS|3
+1 Plains|ONS|4
 1 Serra's Blessing|WTH
 1 Serra's Liturgy|USG
+1 Tormented Angel|UDS

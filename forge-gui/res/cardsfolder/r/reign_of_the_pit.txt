@@ -7,6 +7,6 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardPower
 SVar:NeedsToPlayVar:Z EQ2
 SVar:Z:SVar$Z1/Plus.Z2
-SVar:Z1:Count$Valid Creature.YouCtrl+powerGE1+inZoneBattlefield/LimitMax.1
-SVar:Z2:Count$Valid Creature.OppCtrl+powerGE2+inZoneBattlefield/LimitMax.1
+SVar:Z1:Count$Valid Creature.YouCtrl+powerGE1/LimitMax.1
+SVar:Z2:Count$Valid Creature.OppCtrl+powerGE2/LimitMax.1
 Oracle:Each player sacrifices a creature. Create an X/X black Demon creature token with flying, where X is the total power of the creatures sacrificed this way.

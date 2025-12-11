@@ -12,6 +12,7 @@ ScryfallCode=O90P
 4 S Jester's Cap @Dan Frazier
 5 S Shivan Dragon @Melissa A. Benson
 6 S Hurloon Minotaur @Anson Maddocks
+7 S Serra Angel @Douglas Shuler
 8 S Serra Angel @Rebecca Guay
 10 S Incoming! @Quinton Hoover
 11 S Thorn Elemental @rk post

@@ -542,6 +542,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             if (sa.getActivationsThisGame() > 0 && !StaticAbilityExhaust.anyWithExhaust(activator)) {
                 return false;
             }
+        } else if (sa.isPowerUp()) {
+            if (sa.getActivationsThisGame() > 0) {
+                return false;
+            }
         }
 
         // Rule 605.3c about Mana Abilities

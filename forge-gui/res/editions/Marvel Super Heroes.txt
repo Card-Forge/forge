@@ -1,0 +1,28 @@
+[metadata]
+Code=MSH
+Date=2026-06-26
+Name=Marvel Super Heroes
+Type=Expansion
+ScryfallCode=MSH
+
+[cards]
+9 M Captain America, Super-Soldier @Anna Podedworna
+35 R The Sentry, Golden Guardian @Alexander Skripnikov
+47 U Attuma, Atlantean Warlord @Nanna Marie Steffensen
+49 M Bruce Banner @Tommy Arnold
+69 M Namor the Sub-Mariner @Chris Rallis
+87 R Baron Helmut Zemo @Wero Gallo
+95 M Doctor Doom @David Palumbo
+96 R Doom Reigns Supreme @Alexander Gering
+115 R Super-Skrull @Zoltan Boros
+117 R Thunderbolts Conspiracy @Lucio Parrillo
+148 R Quicksilver, Brash Blur @Michael MacRae
+197 R World War Hulk @Serena Malyon
+212 M The Coming of Galactus @Serena Malyon
+223 R Moon Girl and Devil Dinosaur @Zezhou Chen
+304 R World War Hulk @Steve Ellis
+307 M The Coming of Galactus @Veronica Fish
+387 M Captain America, Super-Soldier @Jack Kirby & John Romita Sr.
+390 M Bruce Banner @Jack Kirby & Paul Reinman
+391 M Namor the Sub-Mariner @John Buscema & Sol Brodsky
+394 M Doctor Doom @Larry Lieber & Vince Colletta

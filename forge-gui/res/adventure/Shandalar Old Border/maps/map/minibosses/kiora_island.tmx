@@ -60,7 +60,7 @@
   <object id="64" template="../../../../../../common/maps/obj/treasure.tx" x="225.969" y="32.1053" />
   <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="157.832" y="107.862" width="16" height="16">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Forest|PALP", "Howling Mine|LEA", "Island|PALP", "Wall of Water|3ED" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Forest|PALP", "Howling Mine|LEA", "Island|PALP" ] }</property>
     <property name="enemy" value="Kiora" />
     <property name="speedModifier" type="float" value="50" />
     <property name="threatRange" type="int" value="50" />
@@ -71,7 +71,7 @@
     <property name="enemy" value="Merfolk Elite" />
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="87,96" />
-   <property name="effect">{ "startBattleWithCard": [ "Island|USG|2", "Island|USG|2", "Lord of Atlantis|LEA", "Tidal Warrior|STH" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Island|USG|1", "Island|USG|2", "Lord of Atlantis|LEA", "Tidal Warrior|STH" ] }</property>
     </properties>
   </object>
   <object id="60" template="../../../../../../common/maps/obj/gold.tx" x="142.263" y="55" />
@@ -94,7 +94,7 @@
     <property name="speedModifier" type="float" value="40" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="88,118" />
-   <property name="effect">{ "startBattleWithCard": [ "Island|USG|2", "Island|USG|2", "Lord of Atlantis|LEA", "Tidal Warrior|STH" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Island|USG|1", "Island|USG|2", "Lord of Atlantis|LEA", "Tidal Warrior|STH" ] }</property>
     </properties>
   </object>
   <object id="76" template="../../../../../../common/maps/obj/enemy.tx" x="405.76" y="479.799">
