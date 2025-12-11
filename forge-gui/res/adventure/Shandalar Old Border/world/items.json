@@ -2093,7 +2093,7 @@
     "name": "Sword of the Chosen",
     "description": "Tap to give target legendary creature +2/+2 until end of turn.",
     "equipmentSlot": "Right",
-    "iconName": "SteelSword",
+    "iconName": "SwordOfTheChosen",
     "cost": 4000,
     "effect": {
       "startBattleWithCard": [
@@ -2926,11 +2926,12 @@
     "equipmentSlot": "Left",
     "iconName": "TriassicEgg",
     "effect": {
+      "lifeModifier": -3,
       "startBattleWithCard": [
         "Triassic Egg|LEG"
       ]
     },
-    "description": "Add hatch counters, then sac to put creature from hand/grave into play."
+    "description": "-3 life. Add hatch counters, then sac to put creature from hand/grave into play."
   },
   {
     "name": "Thran Lens",
