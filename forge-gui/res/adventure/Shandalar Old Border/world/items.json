@@ -716,12 +716,11 @@
     "equipmentSlot": "Body",
     "iconName": "HiveLordArmor",
     "effect": {
-    "effect": {
       "startBattleWithCard": [
         "Plated Sliver|LGN"
+      ]
     }
   },
-  }
   {
     "name": "Pied Pipes",
     "description": "Begin with a plague rat to start your swarm. Size equals the number in play",
@@ -975,7 +974,7 @@
     "name": "Manasight Amulet",
     "equipmentSlot": "Neck",
     "effect": {
-      "colorView": true"
+      "colorView": true,
       "lifeModifier": 2
     },
     "description": "Grants +2 life and Manasight, letting you know the colors used by your adversaries.",
@@ -1392,7 +1391,7 @@
     "equipmentSlot": "Body",
     "iconName": "WarrenTendersCloak",
     "effect": {
-      "lifeModifier": +3,  
+      "lifeModifier": 3,
       "startBattleWithCard": [   
         "Goblin Warrens|FEM"
       ]
@@ -2212,7 +2211,7 @@
   },
   {
     "name": "Ley Line Walker's Boots",
-    "description": ""Gives each player a +1/+1 counter each turn.",
+    "description": "Gives each player a +1/+1 counter each turn.",
     "equipmentSlot": "Boots",
     "iconName": "LeyLineWalkersBoots",
     "effect": {
