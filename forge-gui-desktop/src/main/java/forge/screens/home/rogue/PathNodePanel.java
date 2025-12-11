@@ -17,6 +17,8 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
@@ -292,6 +294,7 @@ public class PathNodePanel extends SkinnedPanel {
             };
             zoomOverlay.setLayout(new MigLayout("insets 0, wrap, ax center, ay center"));
             zoomOverlay.setOpaque(false);
+            zoomOverlay.setVisible(false);
 
             // Add click listener to close zoom
             zoomOverlay.addMouseListener(new MouseAdapter() {
@@ -301,8 +304,28 @@ public class PathNodePanel extends SkinnedPanel {
                 }
             });
 
-            frame.setGlassPane(zoomOverlay);
+            // Add mouse wheel listener to close zoom on scroll down
+            zoomOverlay.addMouseWheelListener(e -> {
+                if (e.getWheelRotation() > 0) { // Scroll down
+                    closeZoom();
+                }
+            });
+
+            // Add key listener for ESC to close
+            zoomOverlay.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                        closeZoom();
+                    }
+                }
+            });
+            zoomOverlay.setFocusable(true);
         }
+
+        // Always set glass pane (multiple PathNodePanels share the same frame)
+        // Each panel needs to set its own overlay as the active glass pane when zooming
+        frame.setGlassPane(zoomOverlay);
 
         // Clear previous content
         zoomOverlay.removeAll();
@@ -322,6 +345,8 @@ public class PathNodePanel extends SkinnedPanel {
 
         zoomOverlay.setVisible(true);
         zoomOverlay.requestFocusInWindow();
+        zoomOverlay.revalidate();
+        zoomOverlay.repaint();
     }
 
     /**
@@ -330,6 +355,7 @@ public class PathNodePanel extends SkinnedPanel {
     private void closeZoom() {
         if (zoomOverlay != null) {
             zoomOverlay.setVisible(false);
+            zoomOverlay.removeAll();
         }
     }
 }
