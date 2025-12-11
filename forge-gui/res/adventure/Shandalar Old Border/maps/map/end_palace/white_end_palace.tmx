@@ -202,7 +202,7 @@
 ]</property>
     <property name="enemy" value="Archangel Radiant" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{"startBattleWithCard": ["Serra Aviary|HML", "Knighthood|ULG", "Serra Paladin|HML", "Sustainer of the Realm|ULG", "Serra Zealot|USG"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Serra Aviary|HML", "Knighthood|ULG", "Serra Paladin|HML", "Serra Zealot|USG"]}</property>
     </properties>
   </object>
   <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="84" y="405.667">
@@ -217,7 +217,7 @@
 ]</property>
     <property name="enemy" value="Reya Dawnbringer" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{"startBattleWithCard": ["Reya Dawnbringer|INV", "Worry Beads|MMQ", "Millikin|ODY", "Angelic Renewal|WTH"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Reya Dawnbringer|INV", "Worry Beads|MMQ", "Angelic Renewal|WTH"]}</property>
     </properties>
   </object>
   <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="187.167" y="500.333">

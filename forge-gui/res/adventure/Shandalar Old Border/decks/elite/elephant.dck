@@ -23,7 +23,6 @@ Name=elephant
 4 Swords to Plowshares|LEA
 
 [StartInBattle_Reference]
-1 Forest|ICE
-1 Plains|ICE
+1 Brushland|ICE
 1 Elephant Graveyard|ARN
 1 War Mammoth|LEA

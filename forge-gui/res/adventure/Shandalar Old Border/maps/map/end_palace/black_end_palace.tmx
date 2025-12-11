@@ -181,7 +181,7 @@
     <property name="enemy" value="Ashnod" />
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Ashnod's Altar|ATQ", "Ashnod's Battle Gear|ATQ", "Ashnod's Cylix|ALL", "Ashnod's Transmogrant|ATQ", "Island|2ED", "Mountain|2ED", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Swamp|2ED" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Ashnod's Altar|ATQ", "Ashnod's Battle Gear|ATQ", "Ashnod's Cylix|ALL", "Ashnod's Transmogrant|ATQ", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Badlands|LEB", "Underground Sea|LEB" ] }</property>
     </properties>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="365" y="232.63">

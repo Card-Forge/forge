@@ -143,7 +143,7 @@
   </object>
   <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="250.613" y="155.704">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Mountain|INV|1", "Mountain|INV|2", "Mountain|INV|3", "Mountain|INV|4", "Loafing Giant|INV" ], "lifeModifier": 6 }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Mountain|INV|1", "Mountain|INV|2", "Mountain|INV|3", "Loafing Giant|INV" ], "lifeModifier": 6 }</property>
     <property name="enemy" value="Fire Giant" />
    </properties>
   </object>

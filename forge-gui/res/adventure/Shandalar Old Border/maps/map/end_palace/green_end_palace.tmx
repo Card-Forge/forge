@@ -184,7 +184,7 @@
 ]</property>
     <property name="enemy" value="Rofellos" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{"startBattleWithCard": ["Forest|ICE", "Wirewood Lodge|ONS", "Rofellos, Llanowar Emissary|UDS", "Ivy Seer|UDS", "Heedless One|ONS", "Braidwood Cup|UDS"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Rofellos, Llanowar Emissary|UDS", "Ivy Seer|UDS", "Heedless One|ONS", "Braidwood Cup|UDS"]}</property>
     </properties>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="363.833" y="223.874">
@@ -214,7 +214,7 @@
 ]</property>
     <property name="enemy" value="Multani" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{"startBattleWithCard": ["Heart of Yavimaya|ALL", "Yavimaya Hollow|UDS", "Multani's Presence|ULG", "Rowen|VIS", "Primitive Etchings|SCG", "Library of Leng|LEA", "Primal Rage|STH", "Fires of Yavimaya|INV", "Yavimaya Gnats|ICE"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Heart of Yavimaya|ALL", "Multani's Presence|ULG", "Rowen|VIS", "Primitive Etchings|SCG", "Library of Leng|LEA", "Primal Rage|STH", "Fires of Yavimaya|INV", "Yavimaya Gnats|ICE"]}</property>
     </properties>
   </object>
   <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="600.667" y="494">

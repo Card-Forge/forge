@@ -91,7 +91,7 @@
   </object>
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" gid="11419" x="288.527" y="172.914" rotation="0">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Underworld Dreams|LEG" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Covert Operative|LGN" ] }</property>
     <property name="enemy" value="Time Walker" />
    </properties>
   </object>

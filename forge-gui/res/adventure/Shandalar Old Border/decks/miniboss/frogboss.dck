@@ -3,8 +3,8 @@ Name=Grolnok
 [Main]
 4 Bayou|LEA
 4 Tainted Wood|TOR
-14 Forest|PELP
-14 Swamp|PELP
+14 Forest|PELP|2
+14 Swamp|PELP|2
 4 Lhurgoyf|ICE
 4 Mortivore|ODY
 4 Terravore|ODY
@@ -24,7 +24,6 @@ Name=Grolnok
 4 Muscle Burst|ODY
 
 [StartInBattle_Reference]
-1 Swamp|PELP
-1 Forest|PELP
+1 Bayou|LEA
 1 Worry Beads|MMQ
 1 Mortal Combat|TOR

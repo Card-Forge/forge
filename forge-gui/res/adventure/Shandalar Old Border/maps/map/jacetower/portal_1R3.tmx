@@ -39,7 +39,7 @@
   <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="360.667" y="229.501">
    <properties>
     <property name="enemy" value="Minotaur" />
-   <property name="effect">{"startBattleWithCard": ["Mountain|ICE", "Mountain|ICE", "Didgeridoo|HML", "Anaba Spirit Crafter|HML"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Didgeridoo|HML", "Anaba Spirit Crafter|HML"]}</property>
     </properties>
   </object>
   <object id="60" template="../../../../../../common/maps/obj/gold.tx" x="136.867" y="257.909" />
@@ -54,19 +54,19 @@
   <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="164" y="230.5">
    <properties>
     <property name="enemy" value="Minotaur" />
-   <property name="effect">{"startBattleWithCard": ["Mountain|ICE", "Mountain|ICE", "Didgeridoo|HML", "Anaba Spirit Crafter|HML"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Didgeridoo|HML", "Anaba Spirit Crafter|HML"]}</property>
     </properties>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="326.5" y="153.167">
    <properties>
     <property name="enemy" value="Minotaur" />
-   <property name="effect">{"startBattleWithCard": ["Mountain|ICE", "Mountain|ICE", "Didgeridoo|HML", "Anaba Spirit Crafter|HML"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Didgeridoo|HML", "Anaba Spirit Crafter|HML"]}</property>
     </properties>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="166" y="155.167">
    <properties>
     <property name="enemy" value="Minotaur" />
-   <property name="effect">{"startBattleWithCard": ["Mountain|ICE", "Mountain|ICE", "Didgeridoo|HML", "Anaba Spirit Crafter|HML"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Didgeridoo|HML", "Anaba Spirit Crafter|HML"]}</property>
     </properties>
   </object>
  </objectgroup>

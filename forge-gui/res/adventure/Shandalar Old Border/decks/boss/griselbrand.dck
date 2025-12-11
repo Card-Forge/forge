@@ -20,8 +20,5 @@ Name=Lord of the Pit
 [StartInBattle_Reference]
 1 Black Market|MMQ
 1 Breeding Pit|FEM
-1 Swamp|LEA|1
-1 Swamp|LEA|1
-1 Swamp|LEA|2
-1 Swamp|LEA|2
-1 Swamp|LEA|2
+1 Swamp|MIR|1
+1 Swamp|MIR|2

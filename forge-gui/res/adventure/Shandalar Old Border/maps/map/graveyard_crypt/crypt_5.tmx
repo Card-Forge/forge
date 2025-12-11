@@ -56,7 +56,7 @@
    <properties>
     <property name="enemy" value="Vampire" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML|1", "Cemetery Gate|HML|2", "Crovax the Cursed|STH", "Swamp|TMP|2" ] }</property>
    </properties>
   </object>
   <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="401.666" y="379.333">
@@ -69,7 +69,7 @@
    <properties>
     <property name="enemy" value="Vampire" />
     <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML|1", "Cemetery Gate|HML|2", "Crovax the Cursed|STH", "Swamp|TMP|2" ] }</property>
     </properties>
   </object>
   <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="205.333" y="521.333">

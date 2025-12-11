@@ -36,12 +36,12 @@
   <object id="78" template="../../../../../../common/maps/obj/enemy.tx" x="374.417" y="306.667">
    <properties>
     <property name="enemy" value="Vampire" />
-   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML|1", "Cemetery Gate|HML|2", "Crovax the Cursed|STH", "Swamp|TMP|2" ] }</property>
     </properties>
   </object>
   <object id="79" template="../../../../../../common/maps/obj/enemy.tx" x="744.5" y="143.954">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Subversion|ULG", "Swamp|PELP" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Castle Sengir|HML", "Ebon Stronghold|FEM", "Subversion|ULG" ] }</property>
     <property name="enemy" value="Sorin" />
     <property name="reward">[
   {
