@@ -1,0 +1,12 @@
+[metadata]
+Code=MSC
+Date=2026-06-26
+Name=Marvel Super Heroes Commander
+Type=Commander
+ScryfallCode=MSC
+
+[cards]
+1 M Invisible Woman @Erikas Perl
+2 M Mister Fantastic @Gintas Galvanauskas
+3 M Human Torch @Vilhelmas Banys
+4 M The Thing @Darius Zablockis

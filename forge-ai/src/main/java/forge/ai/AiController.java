@@ -400,30 +400,13 @@ public class AiController {
         return rightapi;
     }
 
-    private static List<SpellAbility> getPlayableCounters(final CardCollection l) {
+    private static List<SpellAbility> getPlayableCounters(final CardCollection all) {
         final List<SpellAbility> spellAbility = Lists.newArrayList();
-        for (final Card c : l) {
-            if (c.isForetold() && c.getAlternateState() != null) {
-                try {
-                    for (final SpellAbility sa : c.getAlternateState().getNonManaAbilities()) {
-                        // Check if this AF is a Counterspell
-                        if (sa.getApi() == ApiType.Counter) {
-                            spellAbility.add(sa);
-                        } else {
-                            if (sa.getApi() != null && sa.getApi().toString().contains("Foretell") && c.getAlternateState().getName().equalsIgnoreCase("Saw It Coming"))
-                                spellAbility.add(sa);
-                        }
-                    }
-                } catch (Exception e) {
-                    // facedown and alternatestate counters should be accessible
-                    e.printStackTrace();
-                }
-            } else {
-                for (final SpellAbility sa : c.getNonManaAbilities()) {
-                    // Check if this AF is a Counterspell
-                    if (sa.getApi() == ApiType.Counter) {
-                        spellAbility.add(sa);
-                    }
+        for (final Card c : all) {
+            CardState state = c.isForetold() && c.getAlternateState() != null ? c.getAlternateState() : c.getCurrentState();
+            for (final SpellAbility sa : state.getNonManaAbilities()) {
+                if (sa.getApi() == ApiType.Counter) {
+                    spellAbility.add(sa);
                 }
             }
         }

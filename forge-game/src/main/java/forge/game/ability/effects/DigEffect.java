@@ -35,7 +35,7 @@ public class DigEffect extends SpellAbilityEffect {
         } else {
             final int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
             final String toChange = sa.getParamOrDefault("ChangeNum", "1");
-            final int numToChange = toChange.startsWith("All") ? numToDig : AbilityUtils.calculateAmount(host, sa.getParam("ChangeNum"), sa);
+            final int numToChange = toChange.equals("All") || toChange.equals("Any") ? numToDig : AbilityUtils.calculateAmount(host, sa.getParam("ChangeNum"), sa);
 
             String verb = " looks at ";
             if (sa.hasParam("DestinationZone") && sa.getParam("DestinationZone").equals("Exile") &&
