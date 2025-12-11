@@ -1,0 +1,11 @@
+Name:Doctor Doom
+ManaCost:4 B B
+Types:Legendary Creature Human Scientist Villain
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create two 3/3 colorless Robot Villain artifact creature tokens named Doombot.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ doombot | TokenOwner$ You
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Indestructible | IsPresent$ Creature.Artifact+YouCtrl,Plan.YouCtrl | Description$ As long as you control an artifact creature or a Plan, CARDNAME has indestructible.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, you draw a card and lose 1 life.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
+Oracle:When Doctor Doom enters, create two 3/3 colorless Robot Villain artifact creature tokens named Doombot.\nAs long as you control an artifact creature or a Plan, Doctor Doom has indestructible.\nAt the beginning of your end step, you draw a card and lose 1 life.
