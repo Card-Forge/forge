@@ -270,11 +270,12 @@
   },
   {
     "name": "Boots of the Crossroads",
-    "description": "Pay B to put a creature from your graveyard on top of your library.",
+    "description": "+1 Life. Pay B to put a creature from your graveyard on top of your library.",
     "equipmentSlot": "Boots",
     "iconName": "DarkBoots",
     "cost": 1500,
     "effect": {
+      "lifeModifier": 1,
       "startBattleWithCard": [
         "Haunted Crossroads|MMQ"
       ]
@@ -342,11 +343,12 @@
   },
   {
     "name": "Riding Boots",
-    "description": "Pay 1W to give a creature first strike for a turn.",
+    "description": "+1 Life. Pay 1W to give a creature first strike for a turn.",
     "equipmentSlot": "Boots",
     "iconName": "GoldBoots",
     "cost": 3000,
     "effect": {
+      "lifeModifier": 1,
       "startBattleWithCard": [
         "Noble Steeds|ALL"
       ]
@@ -511,11 +513,12 @@
   },
   {
     "name": "Sandals of Speed",
-    "description": "Sacrifice a land to give target creature haste.",
+    "description": "+1 Life. Sacrifice a land to give target creature haste.",
     "equipmentSlot": "Boots",
     "iconName": "Sandals",
     "cost": 1500,
     "effect": {
+      "lifeModifier": 1,
       "startBattleWithCard": [
         "Need for Speed|ODY"
       ]
@@ -855,11 +858,12 @@
   },
   {
     "name": "Chariot Rider's Boots",
-    "description": "Pay 3 to give target creature trample until end of turn.",
+    "description": "+1 Life. Pay 3 to give target creature trample until end of turn.",
     "equipmentSlot": "Boots",
     "iconName": "SteelBoots",
     "cost": 1000,
     "effect": {
+      "lifeModifier": 1,
       "startBattleWithCard": [
         "War Chariot|ICE"
       ]
@@ -1292,10 +1296,11 @@
   },
   {
     "name": "Whalebone Glider",
-    "description": "Pay 2 to give target creature with power 3 or less flying.",
+    "description": "+1 life. Pay 2 to give target creature with power 3 or less flying.",
     "equipmentSlot": "Boots",
     "iconName": "WhaleboneGlider",
     "cost": 3000,
+    "lifeModifier": 1,
     "effect": {
       "startBattleWithCard": [
         "Whalebone Glider|ICE"
@@ -1625,18 +1630,19 @@
         "Fledgling Dragon|JUD"
       ]
     },
-    "description": "-2 life. A 2/2 that becomes 5/5 flying firebreather at threshold."
+    "description": "-2 life. A 2/2 flying that becomes a 5/5 firebreather at threshold."
   },
   {
     "name": "Overwhelming Axe",
     "equipmentSlot": "Right",
     "iconName": "OverwhelmingAxe",
     "effect": {
+      "lifeModifier": -3,
       "startBattleWithCard": [
         "Overwhelming Instinct|ONS"
       ]
     },
-    "description": "Draw a card when you attack with 3+ creatures."
+    "description": "-3 Max Life. Draw a card when you attack with 3+ creatures."
   },
   {
     "name": "Wombat Tamer's Whip",
@@ -1951,12 +1957,12 @@
     "equipmentSlot": "Right",
     "iconName": "FaerieDragonEgg",
     "effect": {
-      "lifeModifier": -4,
+      "lifeModifier": -3,
       "startBattleWithCard": [
         "Faerie Dragon|PAST"
       ]
     },
-    "description": "-4 life. A 1/3 flying dragon. Pay 1GG for a totally random effect."
+    "description": "-3 life. A 1/3 flying dragon. Pay 1GG for a totally random effect."
   },
   {
     "name": "Goblin Trumpet",
