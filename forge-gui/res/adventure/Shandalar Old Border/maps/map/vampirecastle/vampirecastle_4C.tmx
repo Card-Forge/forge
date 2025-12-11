@@ -48,13 +48,7 @@
     "type": "item",
     "probability": 1,
     "count": 1,
-    "itemName": "Sorin's Amulet",
-  },
-  {
-    "type": "item",
-    "probability": 1,
-    "count": 1,
-    "itemName": "Sorin's Key",
+    "itemName": "Baron's Key"
   }
 ]
 </property>
