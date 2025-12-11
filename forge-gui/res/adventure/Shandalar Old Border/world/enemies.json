@@ -871,9 +871,6 @@
         "itemName": "White Key"
       }
     ],
-    "equipment": [
-      "Akroma Starting Setup"
-    ],
     "colors": "W",
     "questTags": [
       "Angel",
@@ -5253,9 +5250,6 @@
         "count": 1
       }
     ],
-    "equipment": [
-      "Conjurer Starting Setup"
-    ],
     "colors": "UB",
     "questTags": [
       "Humanoid",
@@ -6158,9 +6152,6 @@
         "addMaxCount": 85
       }
     ],
-    "equipment": [
-      "Cyclops Starting Setup"
-    ],
     "colors": "R",
     "questTags": [
       "Humanoid",
@@ -6434,9 +6425,6 @@
         "probability": 0.05,
         "count": 1
       }
-    ],
-    "equipment": [
-      "Dark Enchanter Starting Setup"
     ],
     "colors": "GB",
     "questTags": [
@@ -6933,9 +6921,6 @@
         "cardName": "Devouring Strossus|INV"
       }
     ],
-    "equipment": [
-      "Specter's Horror Starting Setup"
-    ],
     "colors": "B",
     "questTags": [
       "Demon",
@@ -7409,7 +7394,7 @@
     "name": "Djinn",
     "sprite": "sprites/enemy/elemental/djinn.atlas",
     "deck": [
-      "decks/standard/djinn.dck"
+      "decks/elite/djinn.dck"
     ],
     "ai": "",
     "flying": true,
@@ -7490,86 +7475,46 @@
     ]
   },
   {
-    "name": "Djinn Elite",
-    "sprite": "sprites/enemy/elemental/djinn.atlas",
+    "name": "Mighty Djinn",
+    "sprite": "sprites/enemy/elemental/genie.atlas",
     "deck": [
-      "decks/elite/djinn_elite.dck"
+      "decks/miniboss/mighty_djinn.dck"
     ],
     "ai": "",
+    "boss": true,
     "flying": true,
     "spawnRate": 0,
-    "difficulty": 0.1,
+    "difficulty": 5,
     "speed": 32,
     "life": 25,
     "rewards": [
       {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.5,
-        "count": 1,
-        "addMaxCount": 2,
-        "rarity": [
-          "uncommon"
-        ],
-        "cardTypes": [
-          "Creature",
-          "Artifact",
-          "Enchantment",
-          "Instant",
-          "Sorcery"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "addMaxCount": 1,
-        "rarity": [
-          "rare"
-        ],
-        "cardTypes": [
-          "Creature",
-          "Artifact",
-          "Enchantment",
-          "Instant",
-          "Sorcery"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.1,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ],
-        "cardTypes": [
-          "Land"
-        ]
-      },
-      {
         "type": "gold",
-        "probability": 0.3,
+        "probability": 0.7,
+        "count": 50,
+        "addMaxCount": 95
+      },
+      {
+        "type": "shards",
+        "probability": 1,
         "count": 10,
-        "addMaxCount": 90
+        "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Cursed Lamp"
       }
     ],
-    "colors": "RU",
+    "colors": "UB",
     "questTags": [
       "Elemental",
       "Flying",
       "Humanoid",
-      "IdentityRed",
       "IdentityBlue",
-      "IdentityIzzet",
+      "IdentityBlack",
+      "IdentityDimir",
       "BiomeBlue"
     ]
   },
@@ -9186,9 +9131,6 @@
         "count": 1,
         "probability": 1
       }
-    ],
-    "equipment": [
-      "Karona Starting Setup"
     ],
     "colors": "WUBRG",
     "gamesPerMatch": 3
@@ -11318,9 +11260,6 @@
         "itemName": "Green Key"
       }
     ],
-    "equipment": [
-      "Ghalta Starting Setup"
-    ],
     "colors": "G",
     "questTags": [
       "Dinosaur",
@@ -11411,9 +11350,6 @@
         "probability": 0.05,
         "count": 1
       }
-    ],
-    "equipment": [
-      "Kamahl Starting Setup"
     ],
     "colors": "GB",
     "questTags": [
@@ -11510,9 +11446,6 @@
         "probability": 0.05,
         "count": 1
       }
-    ],
-    "equipment": [
-      "Baron Sengir Starting Setup"
     ],
     "colors": "GB",
     "questTags": [
@@ -12541,9 +12474,6 @@
         "itemName": "Black Key"
       }
     ],
-    "equipment": [
-      "Volrath Starting Setup"
-    ],
     "colors": "B",
     "questTags": [
       "Demon",
@@ -12590,11 +12520,6 @@
         "addMaxCount": 50
       },
       {
-        "type": "life",
-        "probability": 1,
-        "count": 1
-      },
-      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -12626,13 +12551,13 @@
       },
       {
         "type": "card",
-        "probability": 0.5,
+        "probability": 1,
         "count": 1,
         "cardName": "Avatar of Woe|PCY"
       },
       {
         "type": "card",
-        "probability": 0.5,
+        "probability": 1,
         "count": 1,
         "cardName": "Doomed Necromancer|ONS"
       },
@@ -12640,16 +12565,14 @@
         "type": "card",
         "probability": 1,
         "count": 1,
-        "cardName": "Forest|PGRU"
+        "cardName": "Forest|PELP|2"
       },
       {
-        "type": "landSketchbookShop",
-        "probability": 0.05,
-        "count": 1
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Swamp|PELP|2"
       }
-    ],
-    "equipment": [
-      "Grolnok Starting Setup"
     ],
     "colors": "BGU",
     "questTags": [
@@ -12736,59 +12659,21 @@
     "life": 30,
     "rewards": [
       {
-        "type": "card",
-        "probability": 1,
-        "count": 2,
-        "addMaxCount": 4,
-        "colors": [
-          "Red",
-          "Green"
-        ],
-        "rarity": [
-          "Rare",
-          "Uncommon",
-          "Common"
-        ],
-        "subTypes": [
-          "Ape"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "addMaxCount": 4,
-        "colors": [
-          "Green",
-          "Red"
-        ],
-        "rarity": [
-          "Rare"
-        ]
-      },
-      {
         "type": "gold",
         "probability": 1,
         "count": 200,
         "addMaxCount": 100
       },
       {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "rarity": [
-          "uncommon",
-          "common"
-        ],
-        "cardTypes": [
-          "Land"
-        ]
-      },
-      {
         "type": "shards",
         "probability": 1,
         "count": 20,
         "addMaxCount": 10
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "itemName": "Shaman's Staff"
       }
     ],
     "colors": "RG",
@@ -15526,9 +15411,6 @@
         "count": 1
       }
     ],
-    "equipment": [
-      "Hydra Starting Setup"
-    ],
     "colors": "G",
     "questTags": [
       "Wurm",
@@ -16113,9 +15995,6 @@
         "count": 1
       }
     ],
-    "equipment": [
-      "Arcanis Starting Setup"
-    ],
     "colors": "UW",
     "questTags": [
       "Boss",
@@ -16456,9 +16335,6 @@
         "probability": 0.05,
         "count": 1
       }
-    ],
-    "equipment": [
-      "Empress Galina Starting Setup"
     ],
     "colors": "UG",
     "questTags": [
@@ -17310,9 +17186,6 @@
         "itemName": "Red Key"
       }
     ],
-    "equipment": [
-      "Rorix Starting Setup"
-    ],
     "colors": "R",
     "questTags": [
       "IdentityRed",
@@ -17752,9 +17625,6 @@
         "count": 1,
         "itemName": "Blue Key"
       }
-    ],
-    "equipment": [
-      "Leviathan Starting Setup"
     ],
     "colors": "U",
     "questTags": [
@@ -20525,9 +20395,6 @@
         "probability": 0.05,
         "count": 1
       }
-    ],
-    "equipment": [
-      "Slime Mother Starting Setup"
     ],
     "colors": "GB",
     "questTags": [
@@ -23942,9 +23809,6 @@
         "count": 1
       }
     ],
-    "equipment": [
-      "Fungus Starting Setup"
-    ],
     "colors": "BG",
     "questTags": [
       "Fungus",
@@ -24530,9 +24394,6 @@
         "count": 1
       }
     ],
-    "equipment": [
-      "Squee Starting Setup"
-    ],
     "colors": "R",
     "questTags": [
       "Goblin",
@@ -24626,9 +24487,6 @@
         "probability": 0.05,
         "count": 1
       }
-    ],
-    "equipment": [
-      "Sliver Queen Starting Setup"
     ],
     "colors": "BGRUW",
     "questTags": [
@@ -26066,9 +25924,6 @@
         "cardName": "Island|PGRU"
       }
     ],
-    "equipment": [
-      "Teferi Starting Setup"
-    ],
     "colors": "WU",
     "questTags": [
       "Boss",
@@ -26190,9 +26045,6 @@
         "count": 1
       }
     ],
-    "equipment": [
-      "Homelands Chef Starting Setup"
-    ],
     "colors": "GBR",
     "questTags": [
       "Humanoid",
@@ -26284,9 +26136,6 @@
         "probability": 0.05,
         "count": 1
       }
-    ],
-    "equipment": [
-      "Chainer Starting Setup"
     ],
     "colors": "R",
     "questTags": [
@@ -26436,9 +26285,6 @@
         "count": 1,
         "cardName": "Swamp|PELP"
       }
-    ],
-    "equipment": [
-      "Specter's Torturer Starting Setup"
     ],
     "colors": "B",
     "questTags": [
@@ -28427,9 +28273,6 @@
         "count": 1
       }
     ],
-    "equipment": [
-      "Xira Starting Setup"
-    ],
     "colors": "BGR",
     "questTags": [
       "Insect",
@@ -28628,9 +28471,6 @@
         "probability": 0.05,
         "count": 1
       }
-    ],
-    "equipment": [
-      "Portal Master Starting Setup"
     ],
     "colors": "WUBR",
     "questTags": [
@@ -33905,9 +33745,6 @@
         "count": 1,
         "itemName": "Black Key to the False God"
       }
-    ],
-    "equipment": [
-      "Yawgmoth Starting Setup"
     ]
   },
   {
@@ -34018,9 +33855,6 @@
         "count": 1,
         "itemName": "Red Key to the False God"
       }
-    ],
-    "equipment": [
-      "Jaya Ballard Starting Setup"
     ]
   },
   {
@@ -37247,9 +37081,6 @@
         "itemName": "Blue Key to the False God"
       }
     ],
-    "equipment": [
-      "Urza Planeswalker Starting Setup"
-    ],
     "colors": "U"
   },
   {
@@ -37302,9 +37133,6 @@
         "itemName": "Green Key to the False God"
       }
     ],
-    "equipment": [
-      "Gaea, the Worldsoul Starting Setup"
-    ],
     "colors": "G"
   },
   {
@@ -37340,11 +37168,6 @@
         "itemName": "Serra's Prayer Book"
       },
       {
-        "type": "life",
-        "probability": 1,
-        "count": 1
-      },
-      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -37361,10 +37184,13 @@
         "probability": 1,
         "count": 1,
         "cardName": "Serra Angel|O90P"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Serra's Sanctum|USG"
       }
-    ],
-    "equipment": [
-      "Serra the Benevolent Starting Setup"
     ],
     "colors": "W"
   },

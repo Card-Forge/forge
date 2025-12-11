@@ -934,3 +934,27 @@ SentrysPlate
 FortifiedShield
   xy: 224, 192
   size: 16, 16
+HorribleHalberd
+  xy: 304, 288
+  size: 16, 16
+SoulcatcherCloak
+  xy: 64, 16
+  size: 16, 16
+ElixirOfVitality
+  xy: 48, 720
+  size: 16, 16
+ClockworkRidersBoots
+  xy: 96, 144
+  size: 16, 16
+OnuletArmor
+  xy: 288, 32
+  size: 16, 16
+AmuletOfUnmaking
+  xy: 64, 832
+  size: 16, 16
+SteelHelm
+  xy: 32, 304
+  size: 16, 16
+Aeolipile
+  xy: 96, 624
+  size: 16, 16

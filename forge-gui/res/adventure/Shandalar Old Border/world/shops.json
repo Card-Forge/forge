@@ -321,7 +321,39 @@
 		{ "type": "item","count":1, "itemName": "Spellbook"  }
 
 		]
-	
+
+	},{
+	"name":"WasteEquipment",
+	"spriteAtlas":"maps/tileset/buildings.atlas",
+	"sprite":"EquipmentShop",
+	"rewards": [
+		{ "type": "item","count":1, "itemName": "Glider Gloves"  },
+		{ "type": "item","count":1, "itemName": "Steel Shield"  },
+		{ "type": "item","count":1, "itemName": "Steel Armor"  },
+		{ "type": "item","count":1, "itemName": "Steel Boots"  },
+		{ "type": "item","count":1, "itemName": "Sentry's Plate"  },
+		{ "type": "item","count":1, "itemName": "Steel Helm"  },
+		{ "type": "item","count":1, "itemName": "Braidwood Sextant"  },
+		{ "type": "item","count":1, "itemName": "Aeolipile"  }
+
+		]
+
+	},{
+	"name":"ColorlessEquipment",
+	"spriteAtlas":"sprites/buildings.atlas",
+	"sprite":"BattleShop",
+	"rewards": [
+		{ "type": "item","count":1, "itemName": "Horrible Halberd"  },
+		{ "type": "item","count":1, "itemName": "Spellbook"  },
+		{ "type": "item","count":1, "itemName": "Soulcatcher Cloak"  },
+		{ "type": "item","count":1, "itemName": "Credit Voucher"  },
+		{ "type": "item","count":1, "itemName": "Elixir of Vitality"  },
+		{ "type": "item","count":1, "itemName": "Clockwork Rider's Boots"  },
+		{ "type": "item","count":1, "itemName": "Onulet Armor"  },
+		{ "type": "item","count":1, "itemName": "Amulet of Unmaking"  }
+
+		]
+
 	},{
 	"name":"GenericItems",
 	"description":"General Goods",

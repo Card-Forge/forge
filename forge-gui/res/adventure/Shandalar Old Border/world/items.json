@@ -1083,7 +1083,7 @@
     "description": "No maximum hand size. Draw an extra starting card.",
     "iconName": "SpellBook",
     "equipmentSlot": "Left",
-    "cost": 5000,
+    "cost": 7000,
     "effect": {
       "changeStartCards": 1,
       "startBattleWithCard": [
@@ -2165,7 +2165,7 @@
     "description": "Sacrifice to shuffle your hand into your library and draw that many cards.",
     "equipmentSlot": "Neck",
     "iconName": "GoldStack",
-    "cost": 3000,
+    "cost": 6000,
     "effect": {
       "startBattleWithCard": [
         "Credit Voucher|MMQ"
@@ -2279,378 +2279,6 @@
         "Concordant Crossroads|LEG"
       ]
     }
-  },
-  {
-    "name": "Arcanis Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "u",
-    "effect": {
-      "startBattleWithCard": [
-        "Island|PGRU",
-        "Island|PGRU",
-        "Island|PGRU",
-        "Rhystic Study|PCY"
-      ]
-    },
-    "description": "Start battles with 3 Islands and Rhystic Study in play."
-  },
-  {
-    "name": "Kamahl Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "g",
-    "effect": {
-      "startBattleWithCard": [
-        "Forest|PALP",
-        "Forest|PALP",
-        "Forest|PALP",
-        "Overwhelming Instinct|ONS",
-        "Epic Struggle|JUD"
-      ]
-    },
-    "description": "Start battles with 3 Forests, Overwhelming Instinct, and Epic Struggle in play."
-  },
-  {
-    "name": "Fungus Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "g",
-    "effect": {
-      "startBattleWithCard": [
-        "Forest|PALP",
-        "Forest|PALP",
-        "Thallid|FEM",
-        "Elvish Farmer|FEM",
-        "Sporogenesis|USG"
-      ]
-    },
-    "description": "Start battles with 2 Forests, Thallid, Elvish Farmer, and Sporogenesis in play."
-  },
-  {
-    "name": "Rorix Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "r",
-    "effect": {
-      "startBattleWithCard": [
-        "Mountain|LEA",
-        "Mountain|LEA",
-        "Mountain|LEA",
-        "Dragon Roost|ONS",
-        "Fervor|WTH"
-      ]
-    },
-    "description": "Start battles with 3 Mountains, Dragon Roost, and Fervor in play."
-  },
-  {
-    "name": "Akroma Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "w",
-    "effect": {
-      "startBattleWithCard": [
-        "Plains|LEA",
-        "Plains|LEA",
-        "Plains|LEA",
-        "Tormented Angel|UDS",
-        "Serra's Blessing|WTH",
-        "Serra's Liturgy|USG"
-      ]
-    },
-    "description": "Start battles with 3 Plains, Tormented Angel, Serra's Blessing, and Serra's Liturgy in play."
-  },
-  {
-    "name": "Xira Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "brg",
-    "effect": {
-      "startBattleWithCard": [
-        "Mountain|PGRU",
-        "Swamp|PGRU",
-        "Forest|PGRU",
-        "Xira Arien|LEG",
-        "The Hive|LEA",
-        "Fecundity|USG"
-      ]
-    },
-    "description": "Start battles with Mountain, Swamp, Forest, Xira Arien, The Hive, and Fecundity in play."
-  },
-  {
-    "name": "Squee Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "r",
-    "effect": {
-      "startBattleWithCard": [
-        "Mountain|UGL",
-        "Mountain|UGL",
-        "Goblin Spy|INV",
-        "Goblin War Drums|FEM"
-      ]
-    },
-    "description": "Start battles with 2 Mountains, Goblin Spy, and Goblin War Drums in play."
-  },
-  {
-    "name": "Slime Mother Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "brg",
-    "effect": {
-      "startBattleWithCard": [
-        "Mountain|PALP",
-        "Forest|PALP",
-        "Swamp|PALP"
-      ]
-    },
-    "description": "Start battles with Mountain, Forest, and Swamp in play."
-  },
-  {
-    "name": "Volrath Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "b",
-    "effect": {
-      "startBattleWithCard": [
-        "Swamp|LEA",
-        "Swamp|LEA",
-        "Swamp|LEA",
-        "Swamp|LEA",
-        "Swamp|LEA",
-        "Swamp|LEA",
-        "Swamp|LEA",
-        "Breeding Pit|FEM",
-        "Phyrexian Arena|APC"
-      ]
-    },
-    "description": "Start battles with 7 Swamps, Breeding Pit, and Phyrexian Arena in play."
-  },
-  {
-    "name": "Grolnok Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "bg",
-    "effect": {
-      "startBattleWithCard": [
-        "Swamp|PELP",
-        "Forest|PELP",
-        "Worry Beads|MMQ",
-        "Worry Beads|MMQ",
-        "Mortal Combat|TOR"
-      ]
-    },
-    "description": "Start battles with Swamp, Forest, Worry Beads, Worry Beads, and Mortal Combat in play."
-  },
-  {
-    "name": "Leviathan Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "u",
-    "effect": {
-      "startBattleWithCard": [
-        "Island|LEA",
-        "Island|LEA",
-        "Island|LEA",
-        "Island|LEA",
-        "Island|LEA",
-        "Island|LEA"
-      ]
-    },
-    "description": "Start battles with 6 Islands in play."
-  },
-  {
-    "name": "Empress Galina Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "ug",
-    "effect": {
-      "startBattleWithCard": [
-        "Island|PALP",
-        "Forest|PALP",
-        "Howling Mine|LEA"
-      ]
-    },
-    "description": "Start battles with Island, Forest, and Howling Mine in play."
-  },
-  {
-    "name": "Teferi Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "uw",
-    "effect": {
-      "startBattleWithCard": [
-        "Teferi's Isle|MIR",
-        "Plains|PGRU",
-        "Teferi's Puzzle Box|VIS",
-        "Teferi's Realm|VIS"
-      ]
-    },
-    "description": "Start battles with Plains, Teferi's Isle, Teferi's Puzzle Box, and Teferi's Realm in play."
-  },
-  {
-    "name": "Conjurer Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "wur",
-    "effect": {
-      "startBattleWithCard": [
-        "Mountain|PELP",
-        "Island|PELP",
-        "Plains|PELP"
-      ]
-    },
-    "description": "Start battles with Mountain, Island, and Plains in play."
-  },
-  {
-    "name": "Portal Master Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "wur",
-    "effect": {
-      "startBattleWithCard": [
-        "Mountain|UGL",
-        "Mountain|UGL",
-        "Island|UGL",
-        "Island|UGL",
-        "Plains|UGL",
-        "Plains|UGL",
-        "Wall of Swords|LEA",
-        "Storm Crow|ALL",
-        "Hulking Cyclops|POR"
-      ]
-    },
-    "description": "Start battles with 2 Mountains, 2 Islands, 2 Plains, Wall of Swords, Storm Crow, and Hulking Cyclops in play."
-  },
-  {
-    "name": "Cyclops Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "r",
-    "effect": {
-      "startBattleWithCard": [
-        "Mountain|UGL",
-        "Mountain|UGL",
-        "Mana Crypt|PHPR",
-        "Chance Encounter|ODY",
-        "Goblin Bomb|WTH",
-        "Impulsive Maneuvers|ODY"
-      ]
-    },
-    "description": "Start battles with 2 Mountains, Mana Crypt, Chance Encounter, Goblin Bomb, and Impulsive Maneuvers in play."
-  },
-  {
-    "name": "Dark Enchanter Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "bg",
-    "effect": {
-      "startBattleWithCard": [
-        "Enchantress's Presence|ONS",
-        "Black Market|MMQ",
-        "Grim Feast|MIR"
-      ]
-    },
-    "description": "Start battles with Enchantress's Presence, Black Market, and Grim Feast in play."
-  },
-  {
-    "name": "Specter's Horror Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "b",
-    "effect": {
-      "startBattleWithCard": [
-        "Swamp|PELP",
-        "Swamp|PELP",
-        "Swamp|PELP",
-        "Urborg Stalker|WTH"
-      ]
-    },
-    "description": "Start battles with 3 Swamps and Urborg Stalker in play."
-  },
-  {
-    "name": "Specter's Torturer Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "br",
-    "effect": {
-      "startBattleWithCard": [
-        "Wheel of Torture|ULG"
-      ]
-    },
-    "description": "Deal damage equal to 3 minus cards in opponent's hand each upkeep."
-  },
-  {
-    "name": "Homelands Chef Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "rgw",
-    "effect": {
-      "startBattleWithCard": [
-        "An-Havva Township|HML",
-        "An-Havva Township|HML",
-        "An-Havva Township|HML",
-        "An-Havva Township|HML",
-        "Folk of An-Havva|HML",
-        "Dwarven Trader|HML",
-        "Abbey Matron|HML"
-      ]
-    },
-    "description": "Start battles with An-Havva Township, An-Havva Township, An-Havva Township, An-Havva Township, Folk of An-Havva, Dwarven Trader, and Abbey Matron in play."
-  },
-  {
-    "name": "Chainer Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "br",
-    "effect": {
-      "startBattleWithCard": [
-        "Charcoal Diamond|MIR",
-        "Fire Diamond|MIR",
-        "Megrim|STH",
-        "Anvil of Bogardan|VIS"
-      ]
-    },
-    "description": "Start battles with Charcoal Diamond, Fire Diamond, Megrim, and Anvil of Bogardan in play."
-  },
-  {
-    "name": "Sliver Queen Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "bgruw",
-    "effect": {
-      "startBattleWithCard": [
-        "City of Brass|ARN",
-        "Reflecting Pool|TMP",
-        "Metallic Sliver|TMP",
-        "Primitive Etchings|SCG"
-      ]
-    },
-    "description": "Start battles with City of Brass, Reflecting Pool, Metallic Sliver, and Primitive Etchings in play."
-  },
-  {
-    "name": "Hydra Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "rg",
-    "effect": {
-      "startBattleWithCard": [
-        "Mountain|LEA",
-        "Forest|LEA",
-        "Mana Flare|LEA",
-        "Primal Rage|STH"
-      ]
-    },
-    "description": "Start battles with Mountain, Forest, Mana Flare, and Primal Rage in play."
-  },
-  {
-    "name": "Ghalta Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "g",
-    "effect": {
-      "startBattleWithCard": [
-        "Forest|LEA",
-        "Forest|LEA",
-        "Forest|LEA",
-        "Forest|LEA",
-        "City of Solitude|VIS",
-        "Dense Foliage|WTH"
-      ]
-    },
-    "description": "Start battles with 4 Forests, City of Solitude, and Dense Foliage in play."
-  },
-  {
-    "name": "Urza Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "c",
-    "effect": {
-      "startBattleWithCard": [
-        "Urza's Tower|ATQ",
-        "Urza's Mine|ATQ",
-        "Urza's Power Plant|ATQ",
-        "Tolarian Academy|USG",
-        "Urza's Armor|USG",
-        "Urza's Blueprints|ULG"
-      ]
-    },
-    "description": "Start battles with Urza's Tower, Urza's Mine, Urza's Power Plant, Tolarian Academy, Urza's Armor, and Urza's Blueprints in play."
   },
   {
     "name": "Hivecaller's Helm",
@@ -3441,20 +3069,6 @@
     "description": "Creatures can't be regenerated."
   },
   {
-    "name": "Baron Sengir Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "b",
-    "effect": {
-      "startBattleWithCard": [
-        "Swamp|PELP",
-        "Swamp|PELP",
-        "Swamp|PELP",
-        "Subversion|ULG"
-      ]
-    },
-    "description": "Start battles with 3 Swamps and Subversion in play."
-  },
-  {
     "name": "Groundbreaker Boots",
     "equipmentSlot": "Boots",
     "iconName": "GroundbreakerBoots",
@@ -3896,125 +3510,6 @@
     "description": "-4 life. A 0/4 Wall. Blocked creatures return to hand."
   },
   {
-    "name": "Urza Planeswalker Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "c",
-    "effect": {
-      "startBattleWithCard": [
-        "Soldevi Excavations|ALL",
-        "Urza's Armor|USG",
-        "Mind Over Matter|EXO",
-        "Urza's Avenger|ATQ"
-      ]
-    },
-    "description": "Start battles with Soldevi Excavations, Urza's Armor, Mind Over Matter, and Urza's Avenger in play."
-  },
-  {
-    "name": "Yawgmoth Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "c",
-    "effect": {
-      "startBattleWithCard": [
-        "Swamp|LEA",
-        "Swamp|LEA",
-        "Swamp|LEA",
-        "Phyrexian Lens|INV",
-        "Phyrexian Altar|INV",
-        "Yawgmoth's Bargain|UDS",
-        "Eye of Yawgmoth|NMS",
-        "Order of Yawgmoth|USG",
-        "Phyrexian Reclamation|ULG",
-        "Phyrexian Walker|VIS",
-        "Phyrexian Walker|VIS",
-        "Phyrexian Walker|VIS",
-        "Phyrexian Walker|VIS",
-        "Phyrexian Battleflies|INV",
-        "Phyrexian Battleflies|INV",
-        "Phyrexian Battleflies|INV",
-        "Phyrexian Battleflies|INV"
-      ]
-    },
-    "description": "Start battles with 3 Swamps, Phyrexian artifacts and creatures in play."
-  },
-  {
-    "name": "Jaya Ballard Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "c",
-    "effect": {
-      "startBattleWithCard": [
-        "Mountain|LEA",
-        "Mountain|LEA",
-        "Mountain|LEA",
-        "Blood Moon|DRK",
-        "Fire Elemental|LEA",
-        "Wall of Diffusion|TMP",
-        "Book of Rass|DRK",
-        "Sulfuric Vapors|USG"
-      ]
-    },
-    "description": "Start battles with 3 Mountains, Blood Moon, and red permanents in play."
-  },
-  {
-    "name": "Gaea, the Worldsoul Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "c",
-    "effect": {
-      "startBattleWithCard": [
-        "Forest|LEA",
-        "Tropical Island|LEA",
-        "Taiga|LEA",
-        "Bayou|LEA",
-        "Savannah|LEA",
-        "Gaea's Avenger|ATQ",
-        "Cradle Guard|USG",
-        "Magnigoth Treefolk|PLS",
-        "Pulse of Llanowar|INV"
-      ]
-    },
-    "description": "Start battles with multicolor lands and Gaea's creatures in play."
-  },
-  {
-    "name": "Serra the Benevolent Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "c",
-    "effect": {
-      "startBattleWithCard": [
-        "Serra Angel|LEA",
-        "Worship|USG",
-        "Serra's Liturgy|USG",
-        "Remembrance|USG",
-        "Noble Purpose|MMQ",
-        "Karmic Justice|ODY",
-        "Absolute Law|USG",
-        "Absolute Grace|USG"
-      ]
-    },
-    "description": "Start battles with Serra Angel and powerful white enchantments in play."
-  },
-  {
-    "name": "Karona Starting Setup",
-    "equipmentSlot": "Accessory",
-    "iconName": "c",
-    "effect": {
-      "startBattleWithCard": [
-        "Karona, False God|SCG",
-        "Plains|LEA",
-        "Island|LEA",
-        "Swamp|LEA",
-        "Mountain|LEA",
-        "Forest|LEA",
-        "Temple of the False God|SCG",
-        "Mirari's Wake|JUD",
-        "Cloud Cover|PLS",
-        "Fires of Yavimaya|INV",
-        "Reckless Assault|INV",
-        "Unfulfilled Desires|MIR",
-        "Howling Mine|LEA"
-      ]
-    },
-    "description": "Start battles with Karona, False God, basic lands, and five-color enchantments in play."
-  },
-  {
     "name": "Crown of the False God",
     "equipmentSlot": "Accessory",
     "iconName": "CrownoftheFalseGod",
@@ -4049,6 +3544,111 @@
       "lifeModifier": 2,
       "startBattleWithCard": [
         "Fountain of Youth|CHR"
+      ]
+    }
+  },
+  {
+    "name": "Horrible Halberd",
+    "description": "A 2/2 with rampage.",
+    "iconName": "HorribleHalberd",
+    "equipmentSlot": "Right",
+    "cost": 8000,
+    "effect": {
+      "startBattleWithCard": [
+        "Horrible Hordes|MIR"
+      ]
+    }
+  },
+  {
+    "name": "Soulcatcher Cloak",
+    "description": "Pay 1 when a creature dies for 1 life. +2 starting life.",
+    "iconName": "SoulcatcherCloak",
+    "equipmentSlot": "Body",
+    "cost": 9000,
+    "effect": {
+      "lifeModifier": 2,
+      "startBattleWithCard": [
+        "Soul Net|LEA"
+      ]
+    }
+  },
+  {
+    "name": "Elixir of Vitality",
+    "description": "Gain 4 life or pay 8 for 8 life.",
+    "iconName": "ElixirOfVitality",
+    "equipmentSlot": "Left",
+    "cost": 16000,
+    "effect": {
+      "startBattleWithCard": [
+        "Elixir of Vitality|MIR"
+      ]
+    }
+  },
+  {
+    "name": "Clockwork Rider's Boots",
+    "description": "A 0/3 that can be wound up to a 4/3.",
+    "iconName": "ClockworkRidersBoots",
+    "equipmentSlot": "Boots",
+    "cost": 20000,
+    "effect": {
+      "startBattleWithCard": [
+        "Clockwork Steed|HML"
+      ]
+    }
+  },
+  {
+    "name": "Onulet Armor",
+    "description": "A 2/2 that gives 2 life on death.",
+    "iconName": "OnuletArmor",
+    "equipmentSlot": "Body",
+    "cost": 12000,
+    "effect": {
+      "startBattleWithCard": [
+        "Onulet|ATQ"
+      ]
+    }
+  },
+  {
+    "name": "Amulet of Unmaking",
+    "description": "Pay 5 to exile something once.",
+    "iconName": "AmuletOfUnmaking",
+    "equipmentSlot": "Neck",
+    "cost": 10000,
+    "effect": {
+      "startBattleWithCard": [
+        "Amulet of Unmaking|MIR"
+      ]
+    }
+  },
+  {
+    "name": "Steel Shield",
+    "description": "A sturdy steel shield granting +2 max life.",
+    "equipmentSlot": "Left",
+    "iconName": "SteelShield",
+    "cost": 1000,
+    "effect": {
+      "lifeModifier": 2
+    }
+  },
+  {
+    "name": "Steel Helm",
+    "description": "A protective steel helm granting +2 max life.",
+    "equipmentSlot": "Neck",
+    "iconName": "SteelHelm",
+    "cost": 1000,
+    "effect": {
+      "lifeModifier": 2
+    }
+  },
+  {
+    "name": "Aeolipile",
+    "description": "Pay 1 to throw a bomb for 2 damage.",
+    "equipmentSlot": "Right",
+    "iconName": "Aeolipile",
+    "cost": 2000,
+    "effect": {
+      "startBattleWithCard": [
+        "Aeolipile|FEM"
       ]
     }
   }
