@@ -2168,12 +2168,11 @@
     "equipmentSlot": "Boots",
     "iconName": "RiverWaders",
     "effect": {
-      "lifeModifier": -2,
       "startBattleWithCard": [
         "Raging River|LEA"
       ]
     },
-    "description": "-2 life. Defender splits attackers. Each side blocked separately."
+    "description": "Defender splits attackers. Each side blocked separately."
   },
   {
     "name": "Claws of Gix",
@@ -2376,12 +2375,11 @@
     "equipmentSlot": "Neck",
     "iconName": "NarcissistsMask",
     "effect": {
-      "lifeModifier": -3,
       "startBattleWithCard": [
         "Narcissism|TOR"
       ]
     },
-    "description": "-3 life. Pay G and discard a card or sac this to give +2/+2."
+    "description": "Pay G and discard a card or sac this to give +2/+2."
   },
   {
     "name": "Serrated Quiver",
@@ -2400,12 +2398,11 @@
     "equipmentSlot": "Left",
     "iconName": "MaptoParadise",
     "effect": {
-      "lifeModifier": -5,
       "startBattleWithCard": [
         "Undiscovered Paradise|VIS"
       ]
     },
-    "description": "-5 life. Tap for any color. Returns to hand at untap."
+    "description": "Gives a land that taps for any color. Returns to hand at untap."
   },
   {
     "name": "Ring of Infestation",
@@ -2457,12 +2454,12 @@
     "equipmentSlot": "Neck",
     "iconName": "HymnalHood",
     "effect": {
-      "lifeModifier": 1,
+      "lifeModifier": 2,
       "startBattleWithCard": [
         "Serra's Hymn|USG"
       ]
     },
-    "description": "+1 life. Gains verse counters. Remove to prevent X damage once."
+    "description": "+2 life. Gains verse counters. Remove to prevent X damage once."
   },
   {
     "name": "Celestial Sword",
@@ -2480,24 +2477,22 @@
     "equipmentSlot": "Boots",
     "iconName": "PaladinsGreaves",
     "effect": {
-      "lifeModifier": -2,
       "startBattleWithCard": [
         "Serra Paladin|HML"
       ]
     },
-    "description": "-2 life. A 2/2 that can prevent 1 damage or pay 3 to give vigilance."
+    "description": "A 2/2 knight that can prevent 1 damage or pay 3 to give vigilance."
   },
   {
     "name": "Robes of Renewal",
     "equipmentSlot": "Body",
     "iconName": "RobesofRenewal",
     "effect": {
-      "lifeModifier": -2,
       "startBattleWithCard": [
         "Angelic Renewal|WTH"
       ]
     },
-    "description": "-2 life. Sac when a nontoken creature dies to return it."
+    "description": "Save a nontoken creature from death once."
   },
   {
     "name": "Serra's Prayer Book",
@@ -2551,12 +2546,11 @@
     "equipmentSlot": "Left",
     "iconName": "BarrinsCodex",
     "effect": {
-      "lifeModifier": -4,
       "startBattleWithCard": [
         "Barrin's Codex|USG"
       ]
     },
-    "description": "-4 life. Gains page counters. Sac and pay 4 to draw cards equal to pages."
+    "description": "Gains page counters. Sac and pay 4 to draw cards equal to pages."
   },
   {
     "name": "Rayne's Writ",
@@ -2597,12 +2591,12 @@
     "equipmentSlot": "Neck",
     "iconName": "CopperAngelsAmulet",
     "effect": {
-      "lifeModifier": -5,
+      "lifeModifier": -2,
       "startBattleWithCard": [
-        "Copper-Leaf Angel|UDS"
+        "Copper-Leaf Angel|PCY"
       ]
     },
-    "description": "-5 life. A 2/2 flying. Sac lands to add +1/+1 counters."
+    "description": "-2 Life. A 2/2 flying artifact creature. Sac lands to add +1/+1 counters."
   },
   {
     "name": "Water of Youth",
