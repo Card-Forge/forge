@@ -1,5 +1,5 @@
 [metadata]
-Name=Djinn Elite
+Name=Djinn
 [Main]
 4 Shivan Reef|APC
 4 Underground River|ICE
@@ -31,8 +31,5 @@ Name=Djinn Elite
 2 Dark Banishing|MIR
 
 [StartInBattle_Reference]
-1 Island|LEA
-1 Mountain|ARN
-1 Swamp|LEA
-1 Aladdin's Lamp|ARN
+1 City of Brass|ARN
 1 Keeper of Kookus|VIS

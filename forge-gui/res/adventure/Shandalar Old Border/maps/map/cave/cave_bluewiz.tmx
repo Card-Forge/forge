@@ -48,6 +48,7 @@
   <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="412.092" y="218.43" />
   <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="336.341" y="207.974">
    <properties>
+    <property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN", "Keeper of Kookus|VIS" ] }</property>
     <property name="enemy" value="Djinn" />
     <property name="threatRange" type="int" value="50" />
    </properties>

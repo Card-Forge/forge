@@ -161,7 +161,7 @@
 ]</property>
     <property name="enemy" value="Tawnos" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{"startBattleWithCard": ["Candelabra of Tawnos|ATQ", "Tawnos's Coffin|ATQ", "Tawnos's Wand|ATQ", "Tawnos's Weaponry|ATQ", "Serpent Generator|LEG", "Clay Statue|ATQ", "Mantis Engine|UDS"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Candelabra of Tawnos|ATQ", "Tawnos's Coffin|ATQ", "Tawnos's Wand|ATQ", "Tawnos's Weaponry|ATQ", "Serpent Generator|LEG", "Clay Statue|ATQ"]}</property>
     </properties>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="649" y="601.333">
@@ -260,6 +260,7 @@
     ]
   }
 ]</property>
+    <property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN", "Keeper of Kookus|VIS" ] }</property>
     <property name="enemy" value="Djinn" />
    </properties>
   </object>
