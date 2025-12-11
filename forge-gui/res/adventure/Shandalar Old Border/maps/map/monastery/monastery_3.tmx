@@ -45,7 +45,7 @@
   <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="207.184" y="67.9197">
    <properties>
     <property name="enemy" value="Holy Paladin" />
-    <property name="threatRange" type="int" value="40" />
+    <property name="threatRange" type="int" value="20" />
     <property name="waypoints" value="70,69" />
 </properties>
   </object>
