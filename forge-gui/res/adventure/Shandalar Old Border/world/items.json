@@ -874,9 +874,9 @@
     }
   },
   {
-    "name": "Iron Shield",
-    "description": "A solid iron shield granting +2 starting life.",
-    "equipmentSlot": "Right",
+    "name": "Steel Shield",
+    "description": "A solid steel shield granting +2 starting life.",
+    "equipmentSlot": "Left",
     "iconName": "IronShield",
     "cost": 1000,
     "effect": {
@@ -926,13 +926,14 @@
     }
   },
   {
-    "name": "Armor of the Hivelord",
-    "description": "Legendary armor granting +5 life and an extra starting card.",
+    "name": "Plated Hive Armor",
+    "description": "Grants you command of a sliver giving +0/+1.",
     "equipmentSlot": "Body",
     "iconName": "HiveLordArmor",
     "effect": {
-      "lifeModifier": 5,
-      "changeStartCards": 1
+    "effect": {
+      "startBattleWithCard": [
+        "Plated Sliver|LGN"
     }
   },
   {
@@ -971,6 +972,7 @@
   },
   {
     "name": "Pied Pipes",
+    "description": "Begin with a plague rat to start your swarm.",
     "equipmentSlot": "Right",
     "iconName": "PipersCharm",
     "cost": 2200,
@@ -983,7 +985,7 @@
   },
   {
     "name": "Acidic Dagger",
-    "description": "Pay 4 to deal 1 damage to a blocked creature at end of combat.",
+    "description": "Pay 4 to give old-fashioned deathtouch.",
     "equipmentSlot": "Right",
     "iconName": "AcidicDagger",
     "cost": 3000,
@@ -1007,7 +1009,7 @@
   },
   {
     "name": "Draconian Cylix",
-    "description": "Pay 2 and sacrifice a creature to draw a card.",
+    "description": "Pay 2 and discard at random to regenerate a creature.",
     "equipmentSlot": "Left",
     "iconName": "DraconianCylix",
     "cost": 3000,
@@ -2125,7 +2127,7 @@
   },
   {
     "name": "Fortified Shield",
-    "description": "Tap an untapped creature to give it +0/+2 until end of turn. +2 max life.",
+    "description": "Improves your walls. +2 max life.",
     "equipmentSlot": "Left",
     "iconName": "FortifiedShield",
     "cost": 3000,
