@@ -131,7 +131,7 @@ public enum VSubmenuRogueStart implements IVSubmenu<CSubmenuRogueStart> {
 
     @Override
     public String getMenuTitle() {
-        return "Rogue Commander";
+        return "Rogue Commander - New Run";
     }
 
     @Override

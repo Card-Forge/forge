@@ -136,8 +136,8 @@ public enum VHomeUI implements IVTopLevelUI {
         allSubmenus.add(VSubmenuGauntletContests.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuGauntletCommanderQuick.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuGauntletCommanderBuild.SINGLETON_INSTANCE);
-        allSubmenus.add(VSubmenuRogueMap.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuRogueStart.SINGLETON_INSTANCE);
+        allSubmenus.add(VSubmenuRogueMap.SINGLETON_INSTANCE);
 
         allSubmenus.add(VSubmenuPuzzleSolve.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuPuzzleCreate.SINGLETON_INSTANCE);
@@ -269,8 +269,8 @@ public enum VHomeUI implements IVTopLevelUI {
             int y2 = 0;
             int h1 = getHeight();
             int h2 = 0;
-            
-            if (lblSelected.isShowing()) {
+
+            if (lblSelected != null && lblSelected.isShowing()) {
                 int scrollPanelTop = scrollPanel.getY();
                 int labelTop = lblSelected.getY() + lblSelected.getParent().getY() + scrollPanelTop - scrollPanel.getVerticalScrollBar().getValue();
                 y2 = labelTop + lblSelected.getHeight();

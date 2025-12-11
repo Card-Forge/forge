@@ -158,10 +158,10 @@ public enum CSubmenuRogueMap implements ICDoc {
 
             // Calculate life based on row: 5 + (5 * rowIndex)
             int planeboundLife = 5 + (5 * node.getRowIndex());
-            //ai.setStartingLife(planeboundLife);
+            ai.setStartingLife(planeboundLife);
 
             //for testing, set to 1 life
-            ai.setStartingLife(1);
+            //ai.setStartingLife(1);
 
             // Start match
             List<RegisteredPlayer> players = Arrays.asList(human, ai);
