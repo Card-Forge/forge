@@ -2094,7 +2094,7 @@
 	},
 	{
 		"name": "Garruk Forest",
-		"displayName": "Garruk's Forest",
+		"displayName": "Kamahl's Forest",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2539,7 +2539,7 @@
 	},
 	{
 		"name": "Kiora Island",
-		"displayName": "Kiora's Island",
+		"displayName": "Court of Empress Gallina",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
