@@ -169,7 +169,7 @@
 ]</property>
     <property name="enemy" value="Verdeloth the Ancient" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{"startBattleWithCard": ["Heart of Yavimaya|ALL", "Yavimaya Hollow|UDS", "Greener Pastures|USG", "Saproling Infestation|INV", "Night Soil|FEM", "Fires of Yavimaya|INV", "Yavimaya Gnats|ICE"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Heart of Yavimaya|ALL", "Greener Pastures|USG", "Saproling Infestation|INV", "Night Soil|FEM", "Fires of Yavimaya|INV", "Yavimaya Gnats|ICE"]}</property>
     </properties>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="663.666" y="409.333">
@@ -186,21 +186,6 @@
     <property name="threatRange" type="int" value="30" />
    <property name="effect">{"startBattleWithCard": ["Rofellos, Llanowar Emissary|UDS", "Ivy Seer|UDS", "Heedless One|ONS", "Braidwood Cup|UDS"]}</property>
     </properties>
-  </object>
-  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="363.833" y="223.874">
-   <properties>
-    <property name="defeatDialog">[
-   {
-   "action": [
-      {"advanceMapFlag":"enemiesDefeated"},
-      {"deleteMapObject": -1}
-    ]
-   }
-]</property>
-    <property name="effect">{ "startBattleWithCard": [ "Forest|TMP", "Forest|TMP", "Forest|TMP", "Forest|TMP", "Treefolk Seedlings|USG" ] }</property>
-    <property name="enemy" value="Forest Giant" />
-    <property name="threatRange" type="int" value="30" />
-   </properties>
   </object>
   <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="97" y="410">
    <properties>

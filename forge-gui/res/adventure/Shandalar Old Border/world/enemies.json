@@ -819,11 +819,6 @@
         "itemName": "Serra's Shield"
       },
       {
-        "type": "life",
-        "probability": 1,
-        "count": 1
-      },
-      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -9103,11 +9098,6 @@
         "itemName": "Crown of the False God"
       },
       {
-        "type": "life",
-        "probability": 1,
-        "count": 1
-      },
-      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -9128,6 +9118,36 @@
       {
         "type": "card",
         "cardName": "Karona, False God|SCG",
+        "count": 1,
+        "probability": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Plains|PGRU",
+        "count": 1,
+        "probability": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Island|PGRU",
+        "count": 1,
+        "probability": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Swamp|PGRU",
+        "count": 1,
+        "probability": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Mountain|PGRU",
+        "count": 1,
+        "probability": 1
+      },
+      {
+        "type": "card",
+        "cardName": "Forest|PGRU",
         "count": 1,
         "probability": 1
       }
@@ -10382,79 +10402,6 @@
       "IdentityWhite",
       "IdentityGreen",
       "IdentitySelesnya"
-    ]
-  },
-  {
-    "name": "Forest Giant",
-    "sprite": "sprites/enemy/giant/forestgiant.atlas",
-    "deck": [
-      "decks/elite/forest_titan.dck"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 23,
-    "scale": 1.4,
-    "life": 25,
-    "rewards": [
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 2,
-        "addMaxCount": 4,
-        "colors": [
-          "Green"
-        ],
-        "subTypes": [
-          "Giant"
-        ],
-        "colorType": "MonoColor"
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "addMaxCount": 4,
-        "colors": [
-          "Green"
-        ],
-        "rarity": [
-          "Rare"
-        ],
-        "colorType": "MonoColor"
-      },
-      {
-        "type": "gold",
-        "probability": 1,
-        "count": 50,
-        "addMaxCount": 200
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "rarity": [
-          "uncommon",
-          "common"
-        ],
-        "cardTypes": [
-          "Land"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 1,
-        "count": 10,
-        "addMaxCount": 10
-      }
-    ],
-    "colors": "G",
-    "questTags": [
-      "Forest",
-      "Giant",
-      "Warrior",
-      "Territorial",
-      "IdentityGreen"
     ]
   },
   {
@@ -15489,163 +15436,6 @@
     ]
   },
   {
-    "name": "Ibis",
-    "sprite": "sprites/enemy/beast/ibis.atlas",
-    "deck": [
-      "decks/standard/bird_gu.dck"
-    ],
-    "ai": "",
-    "flying": true,
-    "spawnRate": 0.3,
-    "difficulty": 0.1,
-    "speed": 25,
-    "scale": 1.3,
-    "life": 11,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Green",
-          "Blue"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "GU",
-    "questTags": [
-      "Bird",
-      "Wild",
-      "Flying",
-      "IdentityGreen",
-      "IdentityBlue",
-      "IdentitySimic",
-      "BiomeGreen",
-      "BiomeBlue"
-    ]
-  },
-  {
-    "name": "Ibis-headed Aven Warrior",
-    "sprite": "sprites/enemy/humanoid/aven/ibisheadedaven.atlas",
-    "deck": [
-      "decks/standard/amonkhet_aven_u.dck"
-    ],
-    "ai": "",
-    "flying": true,
-    "spawnRate": 0.5,
-    "difficulty": 0.1,
-    "speed": 25,
-    "life": 16,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Blue"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "U",
-    "questTags": [
-      "Humanoid",
-      "Initiate",
-      "Aggressive",
-      "Aven",
-      "Flying",
-      "Tribal",
-      "IdentityBlue",
-      "BiomeBlue",
-      "Warrior"
-    ]
-  },
-  {
     "name": "Ice Elemental",
     "sprite": "sprites/enemy/elemental/iceelemental2.atlas",
     "deck": [
@@ -20333,51 +20123,57 @@
       },
       {
         "type": "card",
-        "probability": 0.5,
+        "probability": 1,
         "count": 1,
-        "cardName": "Dust Bowl|MMQ"
+        "cardName": "Sulfurous Springs|ICE"
       },
       {
         "type": "card",
-        "probability": 0.5,
+        "probability": 1,
         "count": 1,
-        "cardName": "Sphere of Resistance|EXO"
+        "cardName": "Karplusan Forest|ICE"
       },
       {
         "type": "card",
-        "probability": 0.5,
+        "probability": 1,
         "count": 1,
-        "cardName": "Dark Ritual|LEA"
+        "cardName": "Ancient Ooze|SCG"
       },
       {
         "type": "card",
-        "probability": 0.5,
+        "probability": 1,
         "count": 1,
-        "cardName": "Thawing Glaciers|ALL"
+        "cardName": "Weird Harvest|ONS"
       },
       {
         "type": "card",
-        "probability": 0.5,
+        "probability": 1,
         "count": 1,
-        "cardName": "Static Orb|TMP"
+        "cardName": "Gravity Sphere|LEG"
       },
       {
         "type": "card",
-        "probability": 0.5,
+        "probability": 1,
         "count": 1,
-        "cardName": "Undiscovered Paradise|VIS"
+        "cardName": "Lightning Bolt|LEA"
       },
       {
         "type": "card",
-        "probability": 0.5,
+        "probability": 1,
         "count": 1,
-        "cardName": "Rampant Growth|MIR"
+        "cardName": "Terror|LEA"
       },
       {
         "type": "card",
-        "probability": 0.5,
+        "probability": 1,
         "count": 1,
-        "cardName": "Jet Medallion|TMP"
+        "cardName": "Rancor|ULG"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Utopia Tree|INV"
       },
       {
         "type": "shards",
@@ -20975,30 +20771,46 @@
     "life": 25,
     "rewards": [
       {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "addMaxCount": 4
-      },
-      {
         "type": "card",
         "probability": 1,
-        "count": 5,
-        "rarity": [
-          "Rare"
-        ]
+        "count": 1,
+        "cardName": "Erhnam Djinn|ARN"
       },
       {
         "type": "card",
         "probability": 1,
         "count": 1,
-        "rarity": [
-          "uncommon",
-          "common"
-        ],
-        "cardTypes": [
-          "Land"
-        ]
+        "cardName": "Desert|ARN"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Mountain|ARN"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Ifh-Biff Efreet|ARN"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Diamond Valley|ARN"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Island of Wak-Wak|ARN"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Ali from Cairo|ARN"
       },
       {
         "type": "gold",
@@ -24436,21 +24248,16 @@
         "itemName": "Slivercaller's Gauntlet"
       },
       {
-        "type": "life",
+        "type": "card",
         "probability": 1,
-        "count": 1
+        "count": 1,
+        "cardName": "City of Brass|5ED"
       },
       {
         "type": "card",
         "probability": 1,
         "count": 1,
-        "cardName": "City of Brass|ARN"
-      },
-      {
-        "type": "card",
-        "probability": 1,
-        "count": 1,
-        "cardName": "Reflecting Pool|TMP"
+        "cardName": "Harsh Mercy|ONS"
       },
       {
         "type": "card",
@@ -24480,12 +24287,31 @@
         "type": "card",
         "probability": 1,
         "count": 1,
-        "cardName": "Forest|PGRU"
+        "cardName": "Synapse Sliver|LGN"
       },
       {
-        "type": "landSketchbookShop",
-        "probability": 0.05,
-        "count": 1
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Brood Sliver|LGN"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Magma Sliver|LGN"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Essence Sliver|LGN"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Toxin Sliver|LGN"
       }
     ],
     "colors": "BGRUW",
@@ -26250,14 +26076,8 @@
         "addMaxCount": 20
       },
       {
-        "type": "item",
-        "probability": 1,
-        "count": 1,
-        "itemName": "Torturer's Hood"
-      },
-      {
         "type": "card",
-        "probability": 0.25,
+        "probability": 1,
         "count": 1,
         "cardName": "Bloodstained Mire|ONS"
       },
@@ -26269,20 +26089,20 @@
       },
       {
         "type": "card",
-        "probability": 0.25,
+        "probability": 1,
         "count": 1,
         "cardName": "Mindslicer|ODY"
       },
       {
         "type": "card",
-        "probability": 0.5,
+        "probability": 1,
         "count": 1,
         "cardName": "Meekstone|LEA"
       },
       {
         "type": "card",
         "probability": 1,
-        "count": 1,
+        "count": 2,
         "cardName": "Swamp|PELP"
       }
     ],
@@ -28446,7 +28266,7 @@
         "type": "card",
         "probability": 1,
         "count": 1,
-        "cardName": "Volcanic Dragon|POR"
+        "cardName": "Thundermare|POR"
       },
       {
         "type": "card",
@@ -28467,9 +28287,16 @@
         "cardName": "Plains|UGL"
       },
       {
-        "type": "landSketchbookShop",
-        "probability": 0.05,
-        "count": 1
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Mountain|UGL"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Island|UGL"
       }
     ],
     "colors": "WUBR",
@@ -36083,48 +35910,51 @@
     "life": 25,
     "rewards": [
       {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 1,
-        "addMaxCount": 4,
-        "rarity": [
-          "uncommon"
-        ],
-        "cardTypes": [
-          "Creature",
-          "Artifact",
-          "Enchantment",
-          "Instant",
-          "Sorcery"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.5,
-        "count": 1,
-        "addMaxCount": 2,
-        "rarity": [
-          "rare"
-        ],
-        "cardTypes": [
-          "Creature",
-          "Artifact",
-          "Enchantment",
-          "Instant",
-          "Sorcery"
-        ]
-      },
-      {
         "type": "gold",
-        "probability": 0.3,
-        "count": 10,
-        "addMaxCount": 90
+        "probability": 1,
+        "count": 50,
+        "addMaxCount": 100
+      },
+      {
+        "type": "shards",
+        "probability": 1,
+        "count": 20,
+        "addMaxCount": 20
       },
       {
         "type": "item",
         "probability": 1,
-        "count": 1,
         "itemName": "Torturer's Hood"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Bloodstained Mire|ONS"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Pox|ICE"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Mindslicer|ODY"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Meekstone|LEA"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 2,
+        "cardName": "Swamp|PELP"
       }
     ],
     "colors": "BR",
@@ -36463,66 +36293,6 @@
     ]
   },
   {
-    "name": "Fire Titan",
-    "nameOverride": "Loafing Flame Titan",
-    "sprite": "sprites/enemy/giant/firegiant.atlas",
-    "deck": [
-      "decks/standard/shandalar97_fire_titan.dck"
-    ],
-    "ai": "reckless",
-    "spawnRate": 0.5,
-    "difficulty": 0.1,
-    "speed": 24,
-    "life": 30,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 1,
-        "addMaxCount": 4,
-        "rarity": [
-          "uncommon"
-        ],
-        "cardTypes": [
-          "Creature",
-          "Artifact",
-          "Enchantment",
-          "Instant",
-          "Sorcery"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.5,
-        "count": 1,
-        "addMaxCount": 2,
-        "rarity": [
-          "rare"
-        ],
-        "cardTypes": [
-          "Creature",
-          "Artifact",
-          "Enchantment",
-          "Instant",
-          "Sorcery"
-        ]
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 10,
-        "addMaxCount": 90
-      }
-    ],
-    "colors": "R",
-    "questTags": [
-      "Giant",
-      "Elemental",
-      "IdentityRed",
-      "BiomeRed"
-    ]
-  },
-  {
     "name": "Uncle Istvan",
     "sprite": "sprites/enemy/humanoid/human/wizard/black_wizard.atlas",
     "deck": [
@@ -36661,6 +36431,7 @@
       "decks/miniboss/shandalar97_swamp_queen_tojira.dck"
     ],
     "ai": "",
+    "boss": true,
     "spawnRate": 0.5,
     "difficulty": 0.1,
     "speed": 24,
@@ -37075,6 +36846,12 @@
         "cardName": "Mox Sapphire|LEA"
       },
       {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Tolarian Academy|USG"
+      },
+      {
         "type": "item",
         "probability": 1,
         "count": 1,
@@ -37125,6 +36902,12 @@
         "probability": 1,
         "count": 1,
         "cardName": "Mox Emerald|LEA"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Gaea's Cradle|USG"
       },
       {
         "type": "item",
