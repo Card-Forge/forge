@@ -2,10 +2,10 @@ Name:Bruce Banner
 ManaCost:U
 Types:Legendary Creature Human Scientist Hero
 PT:1/1
-AlternateMode:Modal
 A:AB$ Draw | Cost$ X X T | NumCards$ X | SorcerySpeed$ True | SpellDescription$ Draw X cards. Activate only as a sorcery.
 A:AB$ SetState | Cost$ 2 R R G G | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery.
 SVar:X:Count$xPaid
+AlternateMode:Modal
 Oracle:{X}{X}, {T}: Draw X cards. Activate only as a sorcery.\n{2}{R}{R}{G}{G}: Transform Bruce Banner. Activate only as a sorcery.
 
 ALTERNATE
