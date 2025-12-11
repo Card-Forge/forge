@@ -6,5 +6,5 @@ S:Mode$ Continuous | Affected$ Merfolk.Other+YouCtrl | AddPower$ 1 | AddToughnes
 T:Mode$ AttackersDeclaredOneTarget | AttackedTarget$ Player | ValidAttackers$ Creature.Merfolk+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever one or more Merfolk you control attack a player, draw a card.
 SVar:TrigDraw:DB$ Draw
 SVar:PlayMain1:TRUE
-SVar:BuffedBy:Merfolk
+DeckHints:Type$Merfolk
 Oracle:Other Merfolk you control get +1/+1.\nWhenever one or more Merfolk you control attack a player, draw a card.
