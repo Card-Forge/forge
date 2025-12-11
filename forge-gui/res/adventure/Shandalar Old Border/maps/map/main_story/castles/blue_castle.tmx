@@ -72,7 +72,7 @@
 ]</property>
     <property name="enemy" value="Merfolk King" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{"startBattleWithCard": ["Island|S99", "Island|S99", "Lord of Atlantis|LEA", "Tidal Warrior|STH"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Island|S99", "Lord of Atlantis|LEA", "Tidal Warrior|STH"]}</property>
     </properties>
   </object>
   <object id="55" template="../../../../../../../common/maps/obj/gate.tx" x="368" y="639.333">
@@ -177,7 +177,7 @@
 ]</property>
     <property name="enemy" value="Archmage" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{ "startBattleWithCard": [ "Island|2ED", "Mountain|2ED", "Phyrexian Tyranny|PLS", "Swamp|2ED" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Crosis's Catacombs|PLS", "Phyrexian Tyranny|PLS" ] }</property>
     </properties>
   </object>
   <object id="68" template="../../../../../../../common/maps/obj/enemy.tx" x="677.667" y="410.666">

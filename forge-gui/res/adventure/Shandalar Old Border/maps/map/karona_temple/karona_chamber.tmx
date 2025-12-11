@@ -38,7 +38,7 @@
  <objectgroup id="4" name="Objects">
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="182.772" y="284.992" width="64" height="64">
    <properties>
-    <property name="effect">{"startBattleWithCard": ["Karona, False God|SCG", "Plains|LEA", "Island|LEA", "Swamp|LEA", "Mountain|LEA", "Forest|LEA", "Temple of the False God|SCG", "Mirari's Wake|JUD", "Cloud Cover|PLS", "Fires of Yavimaya|INV", "Reckless Assault|INV", "Unfulfilled Desires|MIR", "Howling Mine|LEA"]}</property>
+    <property name="effect">{"startBattleWithCard": ["Karona, False God|SCG", "Plains|PGRU", "Island|PGRU", "Swamp|PGRU", "Mountain|PGRU", "Forest|PGRU", "Temple of the False God|SCG", "Sterling Grove|INV", "Cloud Cover|PLS", "Fires of Yavimaya|INV", "Reckless Assault|INV", "Unfulfilled Desires|MIR", "Howling Mine|LEA"]}</property>
     <property name="enemy" value="Karona"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>

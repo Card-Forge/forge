@@ -279,7 +279,7 @@
     <property name="enemy" value="Shade" />
     <property name="fleeRange" value="30" />
     <property name="threatRange" type="int" value="60" />
-   <property name="effect">{"startBattleWithCard": ["Swamp|3ED", "Swamp|3ED", "Swamp|3ED", "Frozen Shade|LEA"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Swamp|3ED", "Frozen Shade|LEA"]}</property>
     </properties>
   </object>
   <object id="150" template="../../../../../../common/maps/obj/gold.tx" x="1026.5" y="416.5" />
@@ -313,7 +313,7 @@
   </object>
   <object id="155" template="../../../../../../common/maps/obj/enemy.tx" x="585" y="524.664" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Black Market|MMQ", "Enchantress's Presence|ONS", "Grim Feast|MIR" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Enchantress's Presence|ONS", "Grim Feast|MIR" ] }</property>
     <property name="enemy" value="Dark Enchanter" />
     <property name="reward">[
   {
@@ -469,7 +469,7 @@
   </object>
   <object id="197" template="../../../../../../common/maps/obj/enemy.tx" x="40" y="55.1638" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Bladewing's Thrall|SCG", "Dragonspeaker Shaman|SCG", "Dwarven Ruins|FEM", "Ebon Stronghold|FEM", "Wall of Bone|LEA" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Bladewing's Thrall|SCG", "Dragonspeaker Shaman|SCG", "Wall of Bone|LEA" ] }</property>
     <property name="enemy" value="Bone Dragon" />
    </properties>
   </object>

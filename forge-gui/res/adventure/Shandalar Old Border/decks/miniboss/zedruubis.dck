@@ -1,17 +1,18 @@
 [metadata]
 Name=Portal Master
 [Main]
-10 Mountain|POR
-10 Plains|POR
-10 Island|POR
-4 Archangel|POR
+12 Mountain|POR
+12 Plains|POR
+12 Island|POR
+2 Archangel|POR
 2 Alabaster Dragon|POR
 4 Breath of Life|POR
 2 Starlit Angel|POR
-4 Vengeance|POR
-4 Wrath of God|POR
+2 Vengeance|POR
+2 Stone Rain|POR
+2 Wrath of God|POR
 4 Cloud Dragon|POR
-4 Djinn of the Lamp|POR
+2 Djinn of the Lamp|POR
 4 Snapping Drake|POR
 2 Exhaustion|POR
 2 Mystic Denial|POR
@@ -33,10 +34,7 @@ Name=Portal Master
 2 Thing from the Deep|POR
 
 [StartInBattle_Reference]
-1 Craven Giant|POR
-1 Island|POR|1
-1 Mountain|POR|1
-1 Plains|POR|1
+1 Wall of Granite|POR
 1 Island|POR|3
 1 Mountain|POR|3
 1 Plains|POR|3

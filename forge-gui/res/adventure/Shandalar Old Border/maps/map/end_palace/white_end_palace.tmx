@@ -157,7 +157,7 @@
     <property name="enemy" value="Hazduhr the Abbot" />
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{"startBattleWithCard": ["Hazduhr the Abbot|HML", "Serra's Hymn|USG", "Serra Inquisitors|HML", "Doubtless One|ONS", "Beloved Chaplain|ODY"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Hazduhr the Abbot|HML", "Serra's Hymn|USG", "Serra Inquisitors|HML", "Beloved Chaplain|ODY"]}</property>
     </properties>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="671.667" y="411.333">

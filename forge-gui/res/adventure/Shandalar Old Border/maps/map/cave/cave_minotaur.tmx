@@ -70,6 +70,7 @@
     <property name="enemy" value="Cyclops" />
     <property name="threatRange" type="int" value="50" />
     <property name="waypoints" value="70,71,72,73,72,71,70,69,68,67" />
+    <property name="effect">{ "startBattleWithCard": [ "Chance Encounter|ODY", "Goblin Bomb|WTH", "Impulsive Maneuvers|ODY", "Mana Crypt|PHPR" ] }</property>
    </properties>
   </object>
   <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="247" y="28.6667">
@@ -112,6 +113,7 @@
     <property name="enemy" value="Cyclops" />
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="83,84,83,82,76,82,83,84,83" />
+    <property name="effect">{ "startBattleWithCard": [ "Chance Encounter|ODY", "Goblin Bomb|WTH", "Impulsive Maneuvers|ODY", "Mana Crypt|PHPR" ] }</property>
    </properties>
   </object>
   <object id="86" template="../../../../../../common/maps/obj/booster.tx" x="166.333" y="183.667">
