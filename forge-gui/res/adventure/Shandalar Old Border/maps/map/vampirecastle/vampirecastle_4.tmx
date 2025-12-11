@@ -207,7 +207,7 @@
       {
         "name": "unlock with the key",
         "condition": [
-          { "item": "Sorin's Key" }
+          { "item": "Baron's Key" }
         ],
         "text": "The gate is unlocked",
         "options": [
@@ -215,7 +215,7 @@
             "name": "continue",
             "action": [
               { "deleteMapObject": -1 },
-              { "removeItem": "Sorin's Key" }
+              { "removeItem": "Baron's Key" }
             ]
           }
         ]
@@ -267,8 +267,8 @@
     "text": "*The poor peasant cowers before you* ",
     "options": [
       {
-        "name": "You are free to go, Sorin has been dealt with",
-        "text": "Thanks... Thank you sir, please take this item as a token of my gratitude",
+        "name": "You are free to go, Baron Sengir has been dealt with",
+        "text": "Thanks... Thank you brave hero, please take this item as a token of my gratitude",
         "options": [
           {
               "name": "(Take the Challenge Coin)",            
