@@ -2552,49 +2552,46 @@
     "equipmentSlot": "Left",
     "iconName": "BarrinsCodex",
     "effect": {
-      "lifeModifier": -8,
+      "lifeModifier": -4,
       "startBattleWithCard": [
         "Barrin's Codex|USG"
       ]
     },
-    "description": "-8 life. Gains page counters. Sac to draw cards equal to pages."
+    "description": "-4 life. Gains page counters. Sac and pay 4 to draw cards equal to pages."
   },
   {
     "name": "Rayne's Writ",
     "equipmentSlot": "Right",
     "iconName": "RaynesWrit",
     "effect": {
-      "lifeModifier": -6,
+      "lifeModifier": -3,
       "startBattleWithCard": [
         "Rayne, Academy Chancellor|UDS"
       ]
     },
-    "description": "-6 life. A 1/1. Draw a card when your permanents are targeted."
+    "description": "-3 life. A 1/1. Draw a card when your permanents are targeted."
   },
   {
     "name": "Shield of Tears",
     "equipmentSlot": "Left",
     "iconName": "ShieldofTears",
     "effect": {
-      "lifeModifier": -4,
       "startBattleWithCard": [
         "Wall of Tears|STH"
       ]
     },
-    "description": "-4 life. A 0/4 Wall. Blocked creatures return to hand."
+    "description": "A 0/4 Wall. Blocked creatures return to hand."
   },
   {
     "name": "Crown of the False God",
-    "equipmentSlot": "Accessory",
+    "equipmentSlot": "Neck",
     "iconName": "CrownoftheFalseGod",
     "effect": {
-      "changeStartCards": -1,
       "startBattleWithCard": [
-        "Temple of the False God|SCG",
         "Temple of the False God|SCG"
       ]
     },
-    "description": "-1 hand size. 2 lands that tap for 2 mana if you have 5+ lands."
+    "description": "Grants a the false god's power, giving 2 mana once you have five lands."
   },
   {
     "name": "Copper Angel's Amulet",
@@ -2611,7 +2608,7 @@
   {
     "name": "Water of Youth",
     "iconName": "WaterOfYouth",
-    "equipmentSlot": "leftHand",
+    "equipmentSlot": "Left",
     "cost": 0,
     "description": "Restores youthful optimism. +2 Life and pay 2 and tap for 1 more.",
     "effect": {
