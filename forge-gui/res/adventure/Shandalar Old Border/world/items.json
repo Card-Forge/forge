@@ -1,17 +1,17 @@
 [
   {
     "name": "Challenge Coin",
-    "description": "A heavy coin made of gold.",
+    "description": "A heavy coin made of gold. Redeem for a free draft.",
     "iconName": "ChallengeCoin"
   },
   {
     "name": "Silver Challenge Coin",
-    "description": "A decorative coin made of silver.",
+    "description": "No current use. Can be safely disposed of.",
     "iconName": "SilverChallengeCoin"
   },
   {
     "name": "Bronze Challenge Coin",
-    "description": "A lightweight coin made of bronze.",
+    "description": "No current use. Can be safely disposed of.",
     "iconName": "BronzeChallengeCoin"
   },
   {
@@ -269,75 +269,6 @@
     "description": "Pay 4 and tap to draw a card."
   },
   {
-    "name": "Ring of Renewal",
-    "equipmentSlot": "Neck",
-    "iconName": "PhoenixCharm",
-    "effect": {
-      "startBattleWithCard": [
-        "Ring of Renewal|FEM"
-      ]
-    },
-    "description": "Pay 5 and tap to discard a random card, then draw 2 cards."
-  },
-  {
-    "name": "Mogg Fanatic",
-    "description": "A 1/1 Goblin. Sacrifice to deal 1 damage to any target.",
-    "equipmentSlot": "Neck",
-    "iconName": "PhoenixCharm",
-    "effect": {
-      "startBattleWithCard": [
-        "Mogg Fanatic|TMP"
-      ]
-    }
-  },
-  {
-    "name": "Bottle of Suleiman",
-    "description": "An ancient bottle containing a bound Djinn. Flip a coin - heads summons a 5/5 Djinn, tails deals 5 damage to you.",
-    "equipmentSlot": "Right",
-    "iconName": "DemonicContract",
-    "effect": {
-      "startBattleWithCard": [
-        "Bottle of Suleiman|ARN"
-      ]
-    }
-  },
-  {
-    "name": "Scryb Sprites",
-    "description": "A charm that summons a 1/1 flying Faerie to your aid.",
-    "equipmentSlot": "Neck",
-    "iconName": "PipersCharm",
-    "cost": 1500,
-    "effect": {
-      "startBattleWithCard": [
-        "Scryb Sprites|LEA"
-      ]
-    }
-  },
-  {
-    "name": "Ivory Cup",
-    "description": "Gain 1 life whenever a white spell is cast.",
-    "equipmentSlot": "Left",
-    "cost": 1000,
-    "iconName": "SleepWand",
-    "effect": {
-      "startBattleWithCard": [
-        "Ivory Cup|LEA"
-      ]
-    }
-  },
-  {
-    "name": "War Barge",
-    "description": "Grant islandwalk to target creature you control.",
-    "equipmentSlot": "Right",
-    "cost": 2500,
-    "iconName": "HillGiantClub",
-    "effect": {
-      "startBattleWithCard": [
-        "War Barge|DRK"
-      ]
-    }
-  },
-  {
     "name": "Boots of the Crossroads",
     "description": "Pay B to put a creature from your graveyard on top of your library.",
     "equipmentSlot": "Boots",
@@ -346,18 +277,6 @@
     "effect": {
       "startBattleWithCard": [
         "Haunted Crossroads|MMQ"
-      ]
-    }
-  },
-  {
-    "name": "Miller's Clothes",
-    "description": "Pay 2 and tap to mill target player 2 cards.",
-    "equipmentSlot": "Body",
-    "iconName": "SpellBook",
-    "cost": 1500,
-    "effect": {
-      "startBattleWithCard": [
-        "Millstone|ATQ"
       ]
     }
   },
@@ -387,7 +306,7 @@
   },
   {
     "name": "Aegis of the Meek",
-    "description": "Pay 1 to give a 1/1 creature +1/+2 until end of turn.",
+    "description": "Pay 1 and tap to give a 1/1 creature +1/+2 until end of turn.",
     "equipmentSlot": "Right",
     "iconName": "AegisOfTheMeek",
     "cost": 3000,
@@ -423,7 +342,7 @@
   },
   {
     "name": "Riding Boots",
-    "description": "Your creatures gain first strike during your turn.",
+    "description": "Pay 1W to give a creature first strike for a turn.",
     "equipmentSlot": "Boots",
     "iconName": "GoldBoots",
     "cost": 3000,
@@ -455,7 +374,7 @@
         "Rootwater Mystic|EXO"
       ]
     },
-    "description": "Start with a 1/1 Merfolk that can peek at opponent's top card."
+    "description": "Start with a 1/1 Merfolk that can pay 1U to peek at opponent's top card."
   },
   {
     "name": "Fugitive Spellbook",
@@ -520,102 +439,13 @@
   },
   {
     "name": "Coral Helm",
-    "description": "Pay 3 and discard a card to give target creature +2/+2.",
+    "description": "Pay 3 and discard randomly to give target creature +2/+2.",
     "equipmentSlot": "Neck",
     "iconName": "KiteShield",
     "cost": 1000,
     "effect": {
       "startBattleWithCard": [
         "Coral Helm|ATQ"
-      ]
-    }
-  },
-  {
-    "name": "Telepathy",
-    "description": "Your opponents play with their hands revealed.",
-    "equipmentSlot": "Neck",
-    "iconName": "RelicAmulet",
-    "cost": 3000,
-    "effect": {
-      "startBattleWithCard": [
-        "Telepathy|USG"
-      ]
-    }
-  },
-  {
-    "name": "Sol Ring",
-    "description": "The legendary ring that taps for 2 colorless mana.",
-    "equipmentSlot": "Left",
-    "iconName": "SolRing",
-    "effect": {
-      "startBattleWithCard": [
-        "Sol Ring|LEA"
-      ]
-    }
-  },
-  {
-    "name": "Mox Emerald",
-    "description": "One of the fabled Moxen. Taps for one green mana.",
-    "equipmentSlot": "Neck",
-    "iconName": "MoxEmerald",
-    "effect": {
-      "startBattleWithCard": [
-        "Mox Emerald|LEA"
-      ]
-    }
-  },
-  {
-    "name": "Black Lotus",
-    "description": "The most powerful artifact ever created. Sacrifice for 3 mana of any one color.",
-    "equipmentSlot": "Right",
-    "iconName": "BlackLotus",
-    "effect": {
-      "startBattleWithCard": [
-        "Black Lotus|LEA"
-      ]
-    }
-  },
-  {
-    "name": "Mox Jet",
-    "description": "One of the fabled Moxen. Taps for one black mana.",
-    "equipmentSlot": "Neck",
-    "iconName": "MoxJet",
-    "effect": {
-      "startBattleWithCard": [
-        "Mox Jet|LEA"
-      ]
-    }
-  },
-  {
-    "name": "Mox Pearl",
-    "description": "One of the fabled Moxen. Taps for one white mana.",
-    "equipmentSlot": "Neck",
-    "iconName": "MoxPearl",
-    "effect": {
-      "startBattleWithCard": [
-        "Mox Pearl|LEA"
-      ]
-    }
-  },
-  {
-    "name": "Mox Ruby",
-    "description": "One of the fabled Moxen. Taps for one red mana.",
-    "equipmentSlot": "Neck",
-    "iconName": "MoxRuby",
-    "effect": {
-      "startBattleWithCard": [
-        "Mox Ruby|LEA"
-      ]
-    }
-  },
-  {
-    "name": "Mox Sapphire",
-    "description": "One of the fabled Moxen. Taps for one blue mana.",
-    "equipmentSlot": "Neck",
-    "iconName": "MoxSapphire",
-    "effect": {
-      "startBattleWithCard": [
-        "Mox Sapphire|LEA"
       ]
     }
   },
@@ -633,7 +463,7 @@
   },
   {
     "name": "Zelyon Sword",
-    "description": "Pay 3 to give target creature +2/+0 until end of turn.",
+    "description": "Pay 3 to give target creature +2/+0 until you switch holders.",
     "equipmentSlot": "Right",
     "iconName": "ZelyonSword",
     "cost": 3000,
@@ -653,7 +483,7 @@
         "Dwarven Armorer|FEM"
       ]
     },
-    "description": "A 0/2 Dwarf. Discard and tap to add a +1/+0 or +0/+1 counter."
+    "description": "A 0/2 Dwarf. Pay R, Discard and tap to add a +1/+0 or +0/+1 counter."
   },
   {
     "name": "Roc Egg",
@@ -693,7 +523,7 @@
   },
   {
     "name": "Goblin Kites",
-    "description": "Pay R to give target creature flying until end of turn. Flip a coin or it dies.",
+    "description": "Pay R to give a toughness 2 or less creature flying until end of turn. It dies on a lost flip at end step.",
     "equipmentSlot": "Boots",
     "iconName": "MetallicBoots",
     "cost": 1000,
@@ -704,8 +534,8 @@
     }
   },
   {
-    "name": "Jeweled Necklace",
-    "description": "Store mana for later use.",
+    "name": "Jeweled Amulet",
+    "description": "Store one mana for later use.",
     "equipmentSlot": "Neck",
     "iconName": "JeweledNecklace",
     "cost": 9000,
@@ -717,7 +547,7 @@
   },
   {
     "name": "Dragon Mask",
-    "description": "Pay 3 and tap to give a creature +2/+2 until end of turn, then return it to hand.",
+    "description": "Pay 3 and tap to give a creature +2/+2 until end of turn, it returns to hand at end step.",
     "equipmentSlot": "Neck",
     "iconName": "DragonMask",
     "cost": 3000,
@@ -726,17 +556,6 @@
         "Dragon Mask|VIS"
       ]
     }
-  },
-  {
-    "name": "Hivestone",
-    "equipmentSlot": "Left",
-    "iconName": "Hivestone",
-    "effect": {
-      "startBattleWithCard": [
-        "Metallic Sliver|TMP"
-      ]
-    },
-    "description": "Start with a 1/1 artifact Sliver in play."
   },
   {
     "name": "Amulet of Kroog",
@@ -852,28 +671,6 @@
     "questItem": true
   },
   {
-    "name": "Dwarven Warriors",
-    "equipmentSlot": "Left",
-    "iconName": "BronzeSword",
-    "cost": 2500,
-    "effect": {
-      "startBattleWithCard": [
-        "Dwarven Warriors|LEA"
-      ]
-    },
-    "description": "A 1/1. Tap to make a creature with power 2 or less unblockable."
-  },
-  {
-    "name": "Iron Boots",
-    "description": "Sturdy boots that increase movement speed.",
-    "equipmentSlot": "Boots",
-    "iconName": "IronBoots",
-    "cost": 2000,
-    "effect": {
-      "moveSpeed": 1.2
-    }
-  },
-  {
     "name": "Steel Shield",
     "description": "A solid steel shield granting +2 starting life.",
     "equipmentSlot": "Left",
@@ -885,7 +682,7 @@
   },
   {
     "name": "Iron Armor",
-    "description": "Protective iron armor granting +2 starting life.",
+    "description": "Simple iron armor granting +2 starting life.",
     "equipmentSlot": "Body",
     "cost": 3000,
     "iconName": "IronArmor",
@@ -902,18 +699,6 @@
     "effect": {
       "lifeModifier": 2
     }
-  },
-  {
-    "name": "Thunder Wall",
-    "equipmentSlot": "Right",
-    "iconName": "SteelShield",
-    "cost": 6500,
-    "effect": {
-      "startBattleWithCard": [
-        "Thunder Wall|ICE"
-      ]
-    },
-    "description": "A 0/2 flying Wall. Pay U to get +1/+1 until end of turn."
   },
   {
     "name": "Steel Armor",
@@ -937,17 +722,8 @@
     }
   },
   {
-    "name": "Leather Boots",
-    "description": "Simple leather boots for faster travel.",
-    "equipmentSlot": "Boots",
-    "iconName": "LeatherBoots",
-    "effect": {
-      "moveSpeed": 1.15
-    }
-  },
-  {
     "name": "Living Armor",
-    "description": "Sacrifice a creature to give another creature +0/+X.",
+    "description": "Gives a creature +0/+X permanently, where X is its mana value.",
     "equipmentSlot": "Body",
     "iconName": "DarkArmor",
     "cost": 2000,
@@ -958,21 +734,8 @@
     }
   },
   {
-    "name": "Zombie Cannibal",
-    "equipmentSlot": "Right",
-    "iconName": "DeathRing",
-    "cost": 5000,
-    "effect": {
-      "lifeModifier": -1,
-      "startBattleWithCard": [
-        "Zombie Cannibal|ODY"
-      ]
-    },
-    "description": "-1 life. A 1/1 Zombie that exiles cards from opponent's graveyard."
-  },
-  {
     "name": "Pied Pipes",
-    "description": "Begin with a plague rat to start your swarm.",
+    "description": "Begin with a plague rat to start your swarm. Size equals the number in play",
     "equipmentSlot": "Right",
     "iconName": "PipersCharm",
     "cost": 2200,
@@ -980,8 +743,7 @@
       "startBattleWithCard": [
         "Plague Rats|LEA"
       ]
-    },
-    "description": "A Rat with power/toughness equal to Plague Rats you control."
+    }
   },
   {
     "name": "Acidic Dagger",
@@ -1020,55 +782,6 @@
     }
   },
   {
-    "name": "Fevered Convulsions",
-    "description": "Pay BB to put a -1/-1 counter on target creature. -3 life.",
-    "equipmentSlot": "Body",
-    "iconName": "CursedRing",
-    "cost": 6000,
-    "effect": {
-      "lifeModifier": -3,
-      "startBattleWithCard": [
-        "Fevered Convulsions|TMP"
-      ]
-    }
-  },
-  {
-    "name": "Boots of Bone",
-    "description": "Gain 1 life whenever a black spell is cast.",
-    "equipmentSlot": "Boots",
-    "iconName": "DarkBoots",
-    "cost": 1000,
-    "effect": {
-      "startBattleWithCard": [
-        "Throne of Bone|LEA"
-      ]
-    }
-  },
-  {
-    "name": "Soul Warden",
-    "equipmentSlot": "Neck",
-    "iconName": "SorinAmulet",
-    "effect": {
-      "lifeModifier": 2,
-      "startBattleWithCard": [
-        "Soul Warden|EXO"
-      ]
-    },
-    "description": "+2 life. A 1/1 Cleric. Gain 1 life whenever another creature enters."
-  },
-  {
-    "name": "Dagger",
-    "description": "Pay 3 and tap to deal 1 damage to any target.",
-    "equipmentSlot": "Left",
-    "iconName": "Dagger",
-    "cost": 2000,
-    "effect": {
-      "startBattleWithCard": [
-        "Rod of Ruin|LEA"
-      ]
-    }
-  },
-  {
     "name": "Aladdin's Ring",
     "description": "Pay 8 and tap to deal 4 damage to any target.",
     "equipmentSlot": "Right",
@@ -1091,27 +804,6 @@
       "startBattleWithCard": [
         "Spellbook|EXO"
       ]
-    }
-  },
-  {
-    "name": "Goblin Balloon Brigade",
-    "equipmentSlot": "Right",
-    "iconName": "CursedRing",
-    "effect": {
-      "startBattleWithCard": [
-        "Goblin Balloon Brigade|LEA"
-      ]
-    },
-    "description": "A 1/1 Goblin. Pay R to gain flying until end of turn."
-  },
-  {
-    "name": "Mithril Boots",
-    "description": "Legendary boots forged from mithril granting +2 life.",
-    "equipmentSlot": "Boots",
-    "iconName": "MithrilBoots",
-    "cost": 10000,
-    "effect": {
-      "lifeModifier": 2
     }
   },
   {
@@ -1139,7 +831,7 @@
   },
   {
     "name": "Elven Lyre",
-    "description": "Pay 3 and tap to regenerate target creature.",
+    "description": "Pay 1 and sacrifice to give a target +2/+2 until end of turn.",
     "equipmentSlot": "Right",
     "iconName": "EntrancingLyre",
     "cost": 2000,
@@ -1162,16 +854,6 @@
     "description": "Start with a 0/3 Wall in play."
   },
   {
-    "name": "Mithril Armor",
-    "description": "Legendary armor forged from mithril granting +5 life.",
-    "equipmentSlot": "Body",
-    "iconName": "MithrilArmor",
-    "cost": 15000,
-    "effect": {
-      "lifeModifier": 5
-    }
-  },
-  {
     "name": "Medicine Bag",
     "description": "Pay 1 and discard a card to regenerate target creature.",
     "equipmentSlot": "Body",
@@ -1180,30 +862,6 @@
     "effect": {
       "startBattleWithCard": [
         "Medicine Bag|EXO"
-      ]
-    }
-  },
-  {
-    "name": "Jandor's Riding Gear",
-    "description": "Pay 3 and tap to untap target creature.",
-    "equipmentSlot": "Body",
-    "iconName": "TravelersAmulet",
-    "cost": 3000,
-    "effect": {
-      "startBattleWithCard": [
-        "Jandor's Saddlebags|ARN"
-      ]
-    }
-  },
-  {
-    "name": "Serpent Generator",
-    "description": "Pay 4 and tap to create a 1/1 poison Snake token. +2 life.",
-    "equipmentSlot": "Left",
-    "iconName": "PresenceoftheHydra",
-    "effect": {
-      "lifeModifier": 2,
-      "startBattleWithCard": [
-        "Serpent Generator|LEG"
       ]
     }
   },
@@ -1233,7 +891,7 @@
   },
   {
     "name": "Triangle of War",
-    "description": "Sacrifice to make two creatures fight.",
+    "description": "Pay 2 and sacrifice to make two creatures fight.",
     "equipmentSlot": "Neck",
     "iconName": "TriangleOfWar",
     "cost": 3000,
@@ -1241,108 +899,6 @@
       "startBattleWithCard": [
         "Triangle of War|VIS"
       ]
-    }
-  },
-  {
-    "name": "Skull of Orm",
-    "description": "Pay 5 and tap to return an enchantment from your graveyard.",
-    "equipmentSlot": "Right",
-    "iconName": "DeathRing",
-    "cost": 3500,
-    "effect": {
-      "startBattleWithCard": [
-        "Skull of Orm|DRK"
-      ]
-    }
-  },
-  {
-    "name": "Dwarven Blastminer",
-    "equipmentSlot": "Left",
-    "cost": 6000,
-    "iconName": "FlameSword",
-    "effect": {
-      "startBattleWithCard": [
-        "Dwarven Blastminer|ONS"
-      ]
-    },
-    "description": "A 1/1 with morph. Pay 2R and tap to destroy a nonbasic land."
-  },
-  {
-    "name": "Wall of Spears",
-    "equipmentSlot": "Right",
-    "cost": 2500,
-    "iconName": "MirrorShield",
-    "effect": {
-      "startBattleWithCard": [
-        "Wall of Spears|ATQ"
-      ]
-    },
-    "description": "Start with a 2/3 first strike Wall in play."
-  },
-  {
-    "name": "Library of Leng",
-    "description": "No maximum hand size. Discard to top of library instead of graveyard.",
-    "equipmentSlot": "Right",
-    "iconName": "DungeonMap",
-    "cost": 12000,
-    "effect": {
-      "startBattleWithCard": [
-        "Library of Leng|LEA"
-      ]
-    }
-  },
-  {
-    "name": "Aladdin's Lamp",
-    "description": "Pay X and tap to choose from the top X cards of your library.",
-    "equipmentSlot": "Right",
-    "iconName": "AladdinsLamp",
-    "cost": 1000,
-    "effect": {
-      "startBattleWithCard": [
-        "Aladdin's Lamp|ARN"
-      ]
-    }
-  },
-  {
-    "name": "Wood Bow",
-    "description": "Pay 3 and tap to deal 1 damage to target attacking or blocking creature.",
-    "equipmentSlot": "Left",
-    "iconName": "WoodBow",
-    "cost": 1000,
-    "effect": {
-      "startBattleWithCard": [
-        "Fyndhorn Bow|ICE"
-      ]
-    }
-  },
-  {
-    "name": "Sandals",
-    "description": "Light sandals for slightly faster travel.",
-    "equipmentSlot": "Boots",
-    "iconName": "Sandals",
-    "effect": {
-      "moveSpeed": 1.1
-    }
-  },
-  {
-    "name": "Gold Boots",
-    "description": "Ornate golden boots granting +2 life and faster movement.",
-    "equipmentSlot": "Boots",
-    "iconName": "GoldBoots",
-    "cost": 2000,
-    "effect": {
-      "lifeModifier": 2,
-      "moveSpeed": 1.3
-    }
-  },
-  {
-    "name": "Gold Shield",
-    "description": "A magnificent golden shield granting +3 starting life.",
-    "equipmentSlot": "Right",
-    "iconName": "GoldShield",
-    "cost": 13000,
-    "effect": {
-      "lifeModifier": 3
     }
   },
   {
@@ -1357,7 +913,7 @@
   },
   {
     "name": "Dark Boots",
-    "description": "-2 life. Exile 2 creatures from graveyard to make a 1/1 Skeleton.",
+    "description": "-2 life. Pay B and exile 2 of your dead guys to make a drudge skeletons token.",
     "equipmentSlot": "Boots",
     "iconName": "DarkBoots",
     "cost": 2000,
@@ -1367,19 +923,6 @@
         "Drudge Spell|HML"
       ]
     }
-  },
-  {
-    "name": "Wall of Shadows",
-    "equipmentSlot": "Right",
-    "iconName": "DarkShield",
-    "cost": 2500,
-    "effect": {
-      "startBattleWithCard": [
-        "Wall of Shadows|LEG"
-      ],
-      "lifeModifier": -1
-    },
-    "description": "-1 life. A 0/1 Wall that prevents all damage from blocked creatures."
   },
   {
     "name": "Dark Armor",
@@ -1395,78 +938,6 @@
     "description": "-1 life. Start with a 2/1 Skeleton Snake in play."
   },
   {
-    "name": "Carrion Feeder",
-    "equipmentSlot": "Right",
-    "iconName": "Blood",
-    "cost": 1000,
-    "effect": {
-      "startBattleWithCard": [
-        "Carrion Feeder|SCG"
-      ]
-    },
-    "description": "A 1/1 Zombie. Sacrifice a creature to add a +1/+1 counter."
-  },
-  {
-    "name": "Mind Stone",
-    "description": "Taps for colorless mana. Sacrifice to draw a card.",
-    "equipmentSlot": "Right",
-    "iconName": "Clue",
-    "cost": 3000,
-    "effect": {
-      "startBattleWithCard": [
-        "Mind Stone|WTH"
-      ]
-    }
-  },
-  {
-    "name": "Serenity",
-    "description": "At your upkeep, destroy all artifacts and enchantments.",
-    "equipmentSlot": "Right",
-    "iconName": "Cheese",
-    "cost": 1000,
-    "effect": {
-      "startBattleWithCard": [
-        "Serenity|WTH"
-      ]
-    }
-  },
-  {
-    "name": "Howling Mine",
-    "description": "Each player draws an extra card during their draw step.",
-    "equipmentSlot": "Right",
-    "iconName": "GoldStack",
-    "cost": 5000,
-    "effect": {
-      "startBattleWithCard": [
-        "Howling Mine|LEA"
-      ]
-    }
-  },
-  {
-    "name": "Treasure Trove",
-    "description": "Pay 2UU to draw a card.",
-    "equipmentSlot": "Right",
-    "iconName": "Treasure",
-    "cost": 5000,
-    "effect": {
-      "startBattleWithCard": [
-        "Treasure Trove|EXO"
-      ]
-    }
-  },
-  {
-    "name": "Mystic Remora",
-    "description": "Draw cards when opponents cast noncreature spells.",
-    "equipmentSlot": "Right",
-    "iconName": "Shard",
-    "cost": 3500,
-    "effect": {
-      "startBattleWithCard": [
-        "Mystic Remora|ICE"
-      ]
-    }
-  },
-  {
     "name": "Rod of Ruin",
     "description": "Pay 3 and tap to deal 1 damage to any target.",
     "equipmentSlot": "Left",
@@ -1474,30 +945,6 @@
     "effect": {
       "startBattleWithCard": [
         "Rod of Ruin|LEA"
-      ]
-    }
-  },
-  {
-    "name": "Soldevi Digger",
-    "description": "Pay 2 to put a card from your graveyard on the bottom of your library.",
-    "equipmentSlot": "Neck",
-    "cost": 3000,
-    "iconName": "DarkAmulet",
-    "effect": {
-      "startBattleWithCard": [
-        "Soldevi Digger|ALL"
-      ]
-    }
-  },
-  {
-    "name": "Barbed Sextant",
-    "description": "Sacrifice to add one mana of any color and draw a card.",
-    "equipmentSlot": "Right",
-    "iconName": "PandorasBox",
-    "cost": 1500,
-    "effect": {
-      "startBattleWithCard": [
-        "Barbed Sextant|ICE"
       ]
     }
   },
@@ -1513,98 +960,14 @@
     }
   },
   {
-    "name": "Planar Portal",
-    "description": "Pay 6 and tap to search your library for any card.",
-    "equipmentSlot": "Right",
-    "iconName": "RingofThreeWishes",
-    "cost": 2500,
-    "effect": {
-      "startBattleWithCard": [
-        "Planar Portal|INV"
-      ]
-    }
-  },
-  {
-    "name": "Iron Star",
-    "description": "Gain 1 life whenever a red spell is cast.",
-    "equipmentSlot": "Left",
-    "iconName": "TheBlackstaffofWaterdeep",
-    "cost": 3500,
-    "effect": {
-      "startBattleWithCard": [
-        "Iron Star|LEA"
-      ]
-    }
-  },
-  {
     "name": "Unerring Sling",
-    "description": "Pay 2 and tap an untapped creature to deal damage equal to its power.",
+    "description": "Pay 3 and tap to tap one of your creatures to shoot a flier.",
     "equipmentSlot": "Left",
     "iconName": "UnerringSling",
     "cost": 1500,
     "effect": {
       "startBattleWithCard": [
         "Unerring Sling|MIR"
-      ]
-    }
-  },
-  {
-    "name": "Jeweled Amulet",
-    "description": "Store mana for later use.",
-    "equipmentSlot": "Neck",
-    "cost": 5000,
-    "iconName": "JeweledAmulet",
-    "effect": {
-      "startBattleWithCard": [
-        "Jeweled Amulet|ICE"
-      ]
-    }
-  },
-  {
-    "name": "Jade Monolith",
-    "description": "Pay 1 to redirect damage from one creature to another.",
-    "equipmentSlot": "Neck",
-    "iconName": "VeilstoneAmulet",
-    "cost": 5000,
-    "effect": {
-      "startBattleWithCard": [
-        "Jade Monolith|LEA"
-      ]
-    }
-  },
-  {
-    "name": "Jandor's Ring",
-    "description": "Pay 2 and discard the last drawn card to draw a new card.",
-    "equipmentSlot": "Right",
-    "iconName": "JandorsRing",
-    "cost": 2500,
-    "effect": {
-      "startBattleWithCard": [
-        "Jandor's Ring|ARN"
-      ]
-    }
-  },
-  {
-    "name": "Jinxed Ring",
-    "description": "Your opponent starts with a cursed ring that damages them when creatures die.",
-    "equipmentSlot": "Right",
-    "iconName": "JinxedRing",
-    "effect": {
-      "opponent": {
-        "startBattleWithCard": [
-          "Jinxed Ring"
-        ]
-      }
-    }
-  },
-  {
-    "name": "Tormod's Crypt",
-    "description": "Sacrifice to exile all cards from target player's graveyard.",
-    "equipmentSlot": "Left",
-    "iconName": "Nine-RingedBo",
-    "effect": {
-      "startBattleWithCard": [
-        "Tormod's Crypt|DRK"
       ]
     }
   },
@@ -1620,86 +983,14 @@
     }
   },
   {
-    "name": "Mana Prism",
-    "description": "Tap to filter one colorless mana into any color.",
-    "equipmentSlot": "Right",
-    "iconName": "PrismRing",
-    "cost": 2000,
-    "effect": {
-      "startBattleWithCard": [
-        "Mana Prism|MIR"
-      ]
-    }
-  },
-  {
-    "name": "Ring of Renewal",
-    "description": "Pay 5 and tap to untap and gain 3 life.",
-    "equipmentSlot": "Right",
-    "iconName": "RingofRenewal",
-    "effect": {
-      "startBattleWithCard": [
-        "Ring of Renewal|FEM"
-      ]
-    }
-  },
-  {
-    "name": "Serrated Arrows",
-    "description": "Remove a counter to put a -1/-1 counter on target creature.",
-    "equipmentSlot": "Right",
-    "iconName": "KiteShield",
-    "cost": 1500,
-    "effect": {
-      "startBattleWithCard": [
-        "Serrated Arrows|HML"
-      ]
-    }
-  },
-  {
-    "name": "Shell Wand",
-    "description": "A wand that weakens your opponent, reducing their starting life by 2.",
-    "equipmentSlot": "Left",
-    "cost": 4000,
-    "effect": {
-      "opponent": {
-        "lifeModifier": -2
-      }
-    },
-    "iconName": "ShellWand"
-  },
-  {
     "name": "Manasight Amulet",
     "equipmentSlot": "Neck",
     "effect": {
-      "colorView": true
+      "colorView": true"
+      "lifeModifier": 2
     },
-    "description": "Grants Manasight, letting you know the colors used by your adversaries.",
+    "description": "Grants +2 life and Manasight, letting you know the colors used by your adversaries.",
     "iconName": "RelicAmulet"
-  },
-  {
-    "name": "Ivory Tower",
-    "equipmentSlot": "Boots",
-    "cost": 8000,
-    "effect": {
-      "opponent": {
-        "lifeModifier": 5
-      },
-      "startBattleWithCard": [
-        "Ivory Tower|ATQ"
-      ]
-    },
-    "description": "Gain life equal to cards in hand minus 4 each upkeep. Opponent starts with +5 life.",
-    "iconName": "LightBoots"
-  },
-  {
-    "name": "Fortune Coin",
-    "equipmentSlot": "Left",
-    "effect": {
-      "name": "",
-      "goldModifier": 0.85,
-      "cardRewardBonus": 1
-    },
-    "description": "A lucky coin that grants an extra card reward but reduces gold by 15%.",
-    "iconName": "FortuneCoin"
   },
   {
     "name": "Colorless rune",
@@ -1867,105 +1158,22 @@
     "equipmentSlot": "Left",
     "iconName": "JestersCap",
     "effect": {
-      "lifeModifier": -1,
       "startBattleWithCard": [
         "Jester's Cap|ICE"
       ]
     },
-    "description": "-1 life. Pay 2 and sacrifice to exile 3 cards from opponent's library."
-  },
-  {
-    "name": "Gaea's Touch",
-    "equipmentSlot": "Boots",
-    "iconName": "SteelBoots",
-    "effect": {
-      "lifeModifier": -1,
-      "moveSpeed": 1.2,
-      "startBattleWithCard": [
-        "Gaea's Touch|DRK"
-      ]
-    },
-    "description": "-1 life. Play an extra Forest each turn. Sacrifice for GG. Faster movement."
-  },
-  {
-    "name": "Helm of Obedience",
-    "equipmentSlot": "Neck",
-    "iconName": "MoxJet",
-    "effect": {
-      "lifeModifier": -1,
-      "moveSpeed": 1.2,
-      "startBattleWithCard": [
-        "Snake Basket|VIS"
-      ],
-      "opponent": {
-        "startBattleWithCard": [
-          "Helm of Obedience"
-        ]
-      }
-    },
-    "description": "-1 life. Pay X and sacrifice to create X 1/1 Snakes. Faster movement."
-  },
-  {
-    "name": "Robe of Mirrors",
-    "equipmentSlot": "Body",
-    "iconName": "BlueRobes",
-    "effect": {
-      "lifeModifier": -1,
-      "cardRewardBonus": 1,
-      "startBattleWithCard": [
-        "Robe of Mirrors|EXO"
-      ]
-    },
-    "description": "-1 life. Enchanted creature gains shroud (can't be targeted)."
+    "description": "Pay 2 and sacrifice to exile 3 cards from opponent's library."
   },
   {
     "name": "Mad Staff",
     "equipmentSlot": "Left",
     "iconName": "MadStaff",
     "effect": {
-      "lifeModifier": 1,
-      "cardRewardBonus": 1,
       "startBattleWithCard": [
-        "Teferi's Puzzle Box|VIS"
+        "Power Struggle|PAST"
       ]
     },
-    "description": "+1 life. Each draw step, put hand on bottom, draw that many."
-  },
-  {
-    "name": "Hidden Ancients",
-    "equipmentSlot": "Left",
-    "iconName": "GarrukAxe",
-    "effect": {
-      "lifeModifier": 3,
-      "startBattleWithCard": [
-        "Hidden Ancients|USG"
-      ]
-    },
-    "description": "+3 life. Becomes a 5/5 Treefolk when opponent casts an enchantment."
-  },
-  {
-    "name": "Dwarven Hold",
-    "equipmentSlot": "Right",
-    "iconName": "Armory",
-    "effect": {
-      "lifeModifier": 3,
-      "startBattleWithCard": [
-        "Dwarven Hold|FEM"
-      ]
-    },
-    "description": "+3 life. A storage land - accumulate counters, tap to add R per counter."
-  },
-  {
-    "name": "Dark Sphere",
-    "equipmentSlot": "Left",
-    "iconName": "Scythe",
-    "effect": {
-      "lifeModifier": 1,
-      "startBattleWithCard": [
-        "Dark Sphere|DRK"
-      ]
-    },
-    "description": "+1 life. Sacrifice to prevent half of next damage to you."
+    "description": "Randomly swap artifacts, creatures, or lands each upkeep."
   },
   {
     "name": "Chicken Egg",
@@ -1977,19 +1185,7 @@
         "Chicken Egg"
       ]
     },
-    "description": "+1 life. Roll d6 each upkeep; on 6, sacrifice to make a 4/4 Bird."
-  },
-  {
-    "name": "Goblin Tinkerer",
-    "equipmentSlot": "Left",
-    "iconName": "BurningBook",
-    "effect": {
-      "lifeModifier": 1,
-      "startBattleWithCard": [
-        "Goblin Tinkerer|MIR"
-      ]
-    },
-    "description": "+1 life. A 1/2. Pay R and tap to destroy artifact (damages itself)."
+    "description": "+1 life. A 0/1 chicken. Each upkeep, has a 1/6 chance to hatch into a 4/4."
   },
   {
     "name": "Crown of the Ages",
@@ -2002,64 +1198,6 @@
       ]
     },
     "description": "+2 life. Pay 4 and tap to move an Aura to another creature."
-  },
-  {
-    "name": "Cursed Rack",
-    "equipmentSlot": "Left",
-    "iconName": "UnderworldCookbook",
-    "effect": {
-      "startBattleWithCard": [
-        "Cursed Rack|ATQ"
-      ]
-    },
-    "description": "Choose an opponent - their maximum hand size is 4."
-  },
-  {
-    "name": "Crystal Rod",
-    "description": "Gain 1 life whenever a blue spell is cast. +1 starting life.",
-    "equipmentSlot": "Left",
-    "iconName": "ZedruuLantern",
-    "effect": {
-      "lifeModifier": 1,
-      "startBattleWithCard": [
-        "Crystal Rod|LEA"
-      ]
-    }
-  },
-  {
-    "name": "Land's Edge",
-    "description": "Discard a land to deal 2 damage to any target. +1 life, faster movement.",
-    "equipmentSlot": "Boots",
-    "iconName": "MetallicBoots",
-    "effect": {
-      "lifeModifier": 1,
-      "moveSpeed": 1.35,
-      "startBattleWithCard": [
-        "Land's Edge|LEG"
-      ]
-    }
-  },
-  {
-    "name": "Serra's Blessing",
-    "description": "A holy blessing from Serra. Your creatures have vigilance.",
-    "equipmentSlot": "Neck",
-    "iconName": "HallowedSigil",
-    "effect": {
-      "startBattleWithCard": [
-        "Serra's Blessing|WTH"
-      ]
-    }
-  },
-  {
-    "name": "Cursed Totem",
-    "description": "A totem of dark power. Activated abilities of creatures can't be activated.",
-    "equipmentSlot": "Right",
-    "iconName": "UnhallowedSigil",
-    "effect": {
-      "startBattleWithCard": [
-        "Cursed Totem|MIR"
-      ]
-    }
   },
   {
     "name": "Cultist's Key",
@@ -2104,18 +1242,8 @@
     }
   },
   {
-    "name": "Silver Shield",
-    "description": "A polished silver shield granting +2 starting life.",
-    "equipmentSlot": "Left",
-    "iconName": "SteelShield",
-    "cost": 2000,
-    "effect": {
-      "lifeModifier": 2
-    }
-  },
-  {
     "name": "Sentry's Plate",
-    "description": "Start with a 1/1 Soldier artifact creature in play.",
+    "description": "A sturdy 1/1 that can pay 1 and let opponent draw to regenerate.",
     "equipmentSlot": "Body",
     "iconName": "SentrysPlate",
     "cost": 2000,
@@ -2127,7 +1255,7 @@
   },
   {
     "name": "Fortified Shield",
-    "description": "Improves your walls. +2 max life.",
+    "description": "+2 max life. Your walls get +1/+0 and banding.",
     "equipmentSlot": "Left",
     "iconName": "FortifiedShield",
     "cost": 3000,
@@ -2152,7 +1280,7 @@
   },
   {
     "name": "Braidwood Sextant",
-    "description": "Sacrifice to search your library for a basic land card and put it into your hand.",
+    "description": "Pay 2 and sac to get a basic land from library to hand.",
     "equipmentSlot": "Neck",
     "iconName": "BraidwoodSextant",
     "cost": 3000,
@@ -2164,7 +1292,7 @@
   },
   {
     "name": "Credit Voucher",
-    "description": "Sacrifice to shuffle your hand into your library and draw that many cards.",
+    "description": "Pay 2 and sac to trade any number of cards in hand for new ones.",
     "equipmentSlot": "Neck",
     "iconName": "GoldStack",
     "cost": 6000,
@@ -2172,17 +1300,6 @@
       "startBattleWithCard": [
         "Credit Voucher|MMQ"
       ]
-    }
-  },
-  {
-    "name": "Planeswalker's Spellbook",
-    "description": "An extra starting card at the cost of 3 life.",
-    "equipmentSlot": "Right",
-    "iconName": "SpellBook",
-    "cost": 10000,
-    "effect": {
-      "changeStartCards": 1,
-      "lifeModifier": -3
     }
   },
   {
@@ -2199,7 +1316,7 @@
   },
   {
     "name": "Amulet of Telepathy",
-    "description": "Your opponents play with their hands revealed.",
+    "description": "Your opponent plays with their hand revealed.",
     "equipmentSlot": "Neck",
     "iconName": "RelicAmulet",
     "cost": 3000,
@@ -2224,7 +1341,7 @@
   },
   {
     "name": "Feverbringer's Cloak",
-    "description": "Pay BB to put a -1/-1 counter on target creature.",
+    "description": "Pay 2BB to put a -1/-1 counter on target creature.",
     "equipmentSlot": "Body",
     "iconName": "FeverbringersCloak",
     "cost": 3000,
@@ -2235,20 +1352,8 @@
     }
   },
   {
-    "name": "Amulet of Azar",
-    "description": "Exile a creature card from a graveyard to prevent damage to you.",
-    "equipmentSlot": "Neck",
-    "iconName": "AmuletOfAzar",
-    "cost": 1000,
-    "effect": {
-      "startBattleWithCard": [
-        "Necropolis|DRK"
-      ]
-    }
-  },
-  {
     "name": "Splicer's Charm",
-    "description": "Transfer flying, first strike, trample, or shadow between creatures.",
+    "description": "Pay 2 to temp transfer flying, first strike, trample, or shadow between creatures.",
     "equipmentSlot": "Neck",
     "iconName": "PhyrexianSplicer",
     "cost": 1500,
@@ -2260,8 +1365,8 @@
   },
   {
     "name": "Pyromaniac's Cloak",
-    "description": "Discard a card to deal 1 damage to any target.",
-    "equipmentSlot": "Boots",
+    "description": "Pay 1R and random discard or sac to ping for 1 damage.",
+    "equipmentSlot": "Body",
     "iconName": "PyromaniacsCloak",
     "cost": 3000,
     "effect": {
@@ -2298,11 +1403,12 @@
     "equipmentSlot": "Body",
     "iconName": "WarrenTendersCloak",
     "effect": {
-      "startBattleWithCard": [
+      "lifeModifier": +3,  
+      "startBattleWithCard": [   
         "Goblin Warrens|FEM"
       ]
     },
-    "description": "Sacrifice 2 Goblins to create 3 Goblin tokens."
+    "description": "+3 Life. Pay 2R and sac 2 Goblins to create 3 1/1 Goblin tokens."
   },
   {
     "name": "Gooey Shoes",
@@ -2314,7 +1420,7 @@
         "Consumptive Goo|SCG"
       ]
     },
-    "description": "-2 life. A 1/1 Ooze. Pay BB and sac to give creature -1/-1."
+    "description": "-2 life. A 1/1 Ooze. Pay 2BB to give a creature -1/-1 and a +1/+1 counter to the ooze."
   },
   {
     "name": "Rebel Falconer's Glove",
@@ -2325,7 +1431,7 @@
         "Defiant Falcon|NMS"
       ]
     },
-    "description": "A 1/1 flying Rebel. Pay 1W and tap to search for Rebels."
+    "description": "A 1/1 flying Rebel. Pay 4 and tap to tutor a 3 or less cost rebel to play."
   },
   {
     "name": "Ankh of Purgatory",
@@ -2336,7 +1442,7 @@
         "Purgatory|MIR"
       ]
     },
-    "description": "Pay 2WB and 2 life to return a dead creature to hand."
+    "description": "Your dead go to purgatory. Pay 4 and 2 life in upkeep to return them to play."
   },
   {
     "name": "Serra's Shield",
@@ -2358,7 +1464,7 @@
         "Vodalian War Machine|FEM"
       ]
     },
-    "description": "A 0/4 trample. Tap untapped Merfolk you control to pump it."
+    "description": "A 0/4 wall. Merfolk can let it attack and pump it."
   },
   {
     "name": "Imp Tamer's Glove",
@@ -2370,7 +1476,7 @@
         "Teferi's Imp|MIR"
       ]
     },
-    "description": "+2 life. A 1/1 flying phasing Imp. Causes discard when phasing in."
+    "description": "+2 life. A 1/1 flying phasing Imp. Discard on phase out, draw on phase in."
   },
   {
     "name": "Robes of Omniscience",
@@ -2403,7 +1509,7 @@
         "Ornithopter|ATQ"
       ]
     },
-    "description": "A 0/2 flying artifact creature for free."
+    "description": "A classic 0/2 flying artifact creature."
   },
   {
     "name": "Vampire Bite",
@@ -2415,31 +1521,18 @@
         "Treacherous Vampire|JUD"
       ]
     },
-    "description": "-5 life. A 4/4 flying. Sac permanents at threshold or exile it."
-  },
-  {
-    "name": "Fungal Staff",
-    "equipmentSlot": "Right",
-    "iconName": "FungalStaff",
-    "effect": {
-      "lifeModifier": 2,
-      "startBattleWithCard": [
-        "Thallid|FEM"
-      ]
-    },
-    "description": "+2 life. A 1/1 Fungus that creates Saprolings."
+    "description": "-5 life. A 4/4 flyer that costs grave cards to attack/block. At threshold, gets bigger at a cost."
   },
   {
     "name": "Worry Beads",
     "equipmentSlot": "Neck",
     "iconName": "WorryBeads",
     "effect": {
-      "lifeModifier": 1,
       "startBattleWithCard": [
         "Worry Beads|MMQ"
       ]
     },
-    "description": "+1 life. Each player mills 1 card each upkeep."
+    "description": "Each player mills 1 card each upkeep."
   },
   {
     "name": "Symbol of the Pit",
@@ -2463,7 +1556,7 @@
         "Vebulid|USG"
       ]
     },
-    "description": "+1 life. A 0/0 Horror that grows each upkeep. Must attack."
+    "description": "+1 life. A 1/1 Horror that grows each upkeep. Can only attack or block once."
   },
   {
     "name": "Lucky Clover",
@@ -2474,7 +1567,7 @@
         "Chance Encounter|ODY"
       ]
     },
-    "description": "Win the game with 10 luck counters. Coin flips add counters."
+    "description": "Win a coin flip for a counter. Win the game at 10 counters."
   },
   {
     "name": "Torturer's Hood",
@@ -2486,19 +1579,19 @@
         "Wheel of Torture|ULG"
       ]
     },
-    "description": "-3 life. Deal damage to opponent for each card under max hand size."
+    "description": "-3 life. Opponent loses life for each card under 3 at their upkeep."
   },
   {
     "name": "Crown of Madness",
     "equipmentSlot": "Neck",
     "iconName": "CrownOfMadness",
     "effect": {
-      "changeStartCards": -1,
+      "lifeModifier": -4,
       "startBattleWithCard": [
         "Anvil of Bogardan|VIS"
       ]
     },
-    "description": "All players draw extra then discard. -1 starting card."
+    "description": "-4 Life. All players draw extra then discard and have no max hand size."
   },
   {
     "name": "Joven's Tools",
@@ -2509,7 +1602,7 @@
         "Joven's Tools|HML"
       ]
     },
-    "description": "Pay 6 and tap to make target creature unblockable."
+    "description": "Pay 4 and tap to make a creature unblockable except by walls."
   },
   {
     "name": "Yellow Scarves Horseshoe",
@@ -2566,7 +1659,7 @@
         "Rabid Wombat|LEG"
       ]
     },
-    "description": "A 0/1 that gets +2/+2 for each Aura on it."
+    "description": "A 0/1 vigilance that gets +2/+2 for each Aura on it."
   },
   {
     "name": "Molten Mantle",
@@ -2578,7 +1671,7 @@
         "Molten Hydra|ULG"
       ]
     },
-    "description": "-3 life. A 1/1 Hydra. Store +1/+1 counters, tap to deal damage."
+    "description": "-3 life. A 1/1 Hydra. Pay 1RR for a +1/+1 counter, then tap and remove them for burn."
   },
   {
     "name": "Urza's Armor",
@@ -2633,7 +1726,7 @@
         "Arena|PHPR"
       ]
     },
-    "description": "Tap to have your creature fight opponent's creature."
+    "description": "Pay 3 to have you and opponent each choose a creature to tap and fight."
   },
   {
     "name": "Shoes of Safety",
@@ -2644,7 +1737,7 @@
         "Safe Haven|DRK"
       ]
     },
-    "description": "Tap to exile your creature. Sacrifice to return it."
+    "description": "Pay 2 and tap to hide your creatures. Sac later to return them."
   },
   {
     "name": "Dragon Blood",
@@ -2689,7 +1782,7 @@
         "Grizzly Bears|LEA"
       ]
     },
-    "description": "A 2/2 Bear."
+    "description": "A simple but dangerous 2/2 Bear."
   },
   {
     "name": "Shaman's Staff",
@@ -2723,7 +1816,7 @@
         "Phyrexian War Beast|ALL"
       ]
     },
-    "description": "A 3/4 vigilance artifact creature. Returns a land when leaving."
+    "description": "A powerful 3/4 creature, but you lose a land and 1 life when it leaves."
   },
   {
     "name": "Tome of the Gate",
@@ -2747,7 +1840,7 @@
         "Phyrexian Grimoire|TMP"
       ]
     },
-    "description": "-3 life. Pay 4 and tap to return a card from your graveyard."
+    "description": "-3 life. Pay 4 to return a card from your graveyard of opponent's choice."
   },
   {
     "name": "Tome of the Vault",
@@ -2771,7 +1864,7 @@
         "Phyrexian Portal|ALL"
       ]
     },
-    "description": "-3 life. Pay 3 to separate top 10, opponent chooses pile to draw."
+    "description": "-3 life. Pay 3, then opponent makes 2 piles, you get a card from one."
   },
   {
     "name": "Infiltrator's Mask",
@@ -2783,7 +1876,7 @@
         "Phyrexian Infiltrator|INV"
       ]
     },
-    "description": "-4 life. A 2/2 that can swap control with opponent's creature."
+    "description": "-4 life. A 2/2 that can pay 2UU to swap control with another creature."
   },
   {
     "name": "Broodling Egg",
@@ -2795,7 +1888,7 @@
         "Phyrexian Broodlings|ULG"
       ]
     },
-    "description": "-2 life. A 2/2 Minion. Sac a creature to put +1/+1 counters."
+    "description": "-2 life. A 2/2 that can pay 1 and sac a creature for a +1/+1 counter."
   },
   {
     "name": "Armor of Yawgmoth",
@@ -2817,7 +1910,7 @@
         "Eye of Yawgmoth|NMS"
       ]
     },
-    "description": "Pay 3 and sac a creature to look at cards equal to its power."
+    "description": "Pay 3 and sac a creature to look at its power in cards and keep one."
   },
   {
     "name": "Ashnod's Battle Gear",
@@ -2829,7 +1922,7 @@
         "Ashnod's Battle Gear|ATQ"
       ]
     },
-    "description": "+4 life. Tap to give creature +2/-2 until end of turn."
+    "description": "+4 life. Pay 2 to strap onto one of your creatures for +2/-2."
   },
   {
     "name": "Grovetender's Robes",
@@ -2840,7 +1933,7 @@
         "Afiya Grove|MIR"
       ]
     },
-    "description": "Enters with 3 counters. Move one to a creature each upkeep."
+    "description": "Enters with 3 +1/+1 counters. Move one to a creature each upkeep."
   },
   {
     "name": "Winter Boots",
@@ -2851,7 +1944,7 @@
         "Winter's Night|ALL"
       ]
     },
-    "description": "Snow lands tap for double mana but deal 1 damage to you."
+    "description": "Snow lands tap for double but only untap every other turn."
   },
   {
     "name": "Prismatic Egg",
@@ -2863,7 +1956,7 @@
         "Prismatic Dragon|PAST"
       ]
     },
-    "description": "-4 life. A 2/1 flying Dragon. Pay mana to change its color."
+    "description": "-4 life. A 2/3 flying Dragon. Randomly changes color each turn."
   },
   {
     "name": "Faerie Dragon Egg",
@@ -2875,7 +1968,7 @@
         "Faerie Dragon|PAST"
       ]
     },
-    "description": "-4 life. A 1/1 flying Dragon. Pay mana to change its color."
+    "description": "-4 life. A 1/3 flying dragon. Pay 1GG for a totally random effect."
   },
   {
     "name": "Goblin Trumpet",
@@ -2886,7 +1979,7 @@
         "Goblin Polka Band|UGL"
       ]
     },
-    "description": "Force creatures to dance. Dancing creatures can't attack or block."
+    "description": "A 1/1 goblin that can randomly tap creatures for lots of mana."
   },
   {
     "name": "Rainbow Spear",
@@ -2898,7 +1991,7 @@
         "Rainbow Knights|PAST"
       ]
     },
-    "description": "-2 life. A 2/1 pro-black first strike. Pay to pump it."
+    "description": "-2 life. A 2/1 that can pay to give first strike or a random pump."
   },
   {
     "name": "Catalyst Stone",
@@ -2921,7 +2014,7 @@
         "Deadapult|PLS"
       ]
     },
-    "description": "Pay R and sac a Zombie to deal 2 damage to target creature."
+    "description": "Pay R and sac a Zombie to deal 2 damage to any target."
   },
   {
     "name": "Triassic Egg",
@@ -2933,7 +2026,7 @@
         "Triassic Egg|LEG"
       ]
     },
-    "description": "-3 life. Add hatch counters, then sac to put creature from hand/grave into play."
+    "description": "-3 life. Pay 3 for a counter. After 2, sac to put creature from hand/grave into play."
   },
   {
     "name": "Thran Lens",
@@ -2988,10 +2081,10 @@
     "effect": {
       "lifeModifier": 5,
       "startBattleWithCard": [
-        "Chaos Orb|LEA"
+        "Pandora's Box|PAST"
       ]
     },
-    "description": "+5 life. Tap, flip from height. Destroy permanents it touches."
+    "description": "+5 life. Pay 3 to open the box, but you might regret doing so."
   },
   {
     "name": "Diamond Kaleidoscope",
@@ -3002,7 +2095,7 @@
         "Diamond Kaleidoscope|VIS"
       ]
     },
-    "description": "Tap to create a Prism token. Sac a Prism for any color mana."
+    "description": "Pay 3 and tap to make a 0/1 token that sacs for any color of mana."
   },
   {
     "name": "Map to the Vale",
@@ -3013,7 +2106,7 @@
         "Rainbow Vale|FEM"
       ]
     },
-    "description": "Tap for any color. Gives itself to an opponent."
+    "description": "Tap for any color. Gives itself to your opponent."
   },
   {
     "name": "Tasty Tome",
@@ -3047,7 +2140,7 @@
         "Silent Attendant|INV"
       ]
     },
-    "description": "A 1/1 Human Cleric. Tap to gain 1 life at threshold."
+    "description": "A 0/2 cleric that taps to gain 1 life."
   },
   {
     "name": "Power Armor",
@@ -3069,7 +2162,7 @@
         "Necropolis of Azar|AST"
       ]
     },
-    "description": "Creatures can't be regenerated."
+    "description": "Collects corpses. Pay 5 to turn them into 1d3/1d3 swampwalkers."
   },
   {
     "name": "Groundbreaker Boots",
@@ -3080,7 +2173,7 @@
         "Mishra's Groundbreaker|ALL"
       ]
     },
-    "description": "Sac a land to create a 3/3 artifact or make a land an artifact."
+    "description": "Sac to make a land into a 3/3 creature permanently."
   },
   {
     "name": "River Waders",
@@ -3119,7 +2212,7 @@
   },
   {
     "name": "Ring of Ma'r\u00fbf",
-    "description": "An ancient ring from the deserts of Rabiah, allowing wishes to be granted.",
+    "description": "Pay 5 and skip a draw to grant one wish for a sideboard card.",
     "equipmentSlot": "Neck",
     "iconName": "RingofThreeWishes",
     "effect": {
@@ -3130,7 +2223,7 @@
   },
   {
     "name": "Ley Line Walker's Boots",
-    "description": "Boots attuned to the ley lines of Shandalar, revealing hidden paths.",
+    "description": ""Gives each player a +1/+1 counter each turn.",
     "equipmentSlot": "Boots",
     "iconName": "LeyLineWalkersBoots",
     "effect": {
@@ -3153,7 +2246,7 @@
   },
   {
     "name": "Ferret Food",
-    "description": "A pouch of treats that attracts Joven's trained ferrets.",
+    "description": "A pouch of treats giving a 1/1 that's a 1/3 that taps down on attack.",
     "equipmentSlot": "Right",
     "iconName": "FerretFood",
     "effect": {
@@ -3164,7 +2257,7 @@
   },
   {
     "name": "Istvan's Axe",
-    "description": "-6 life. A 1/3. Prevent all creature damage dealt to Uncle Istvan.",
+    "description": "-6 life. A 1/3 who can't be damaged by creatures.",
     "equipmentSlot": "Right",
     "iconName": "IstvansAxe",
     "effect": {
@@ -3176,11 +2269,11 @@
   },
   {
     "name": "Breathstealer's Robe",
-    "description": "-3 life. A 2/2. Sac to give target creature -2/-2.",
+    "description": "-2 life. A 2/2. Pay B to give +1/-1.",
     "equipmentSlot": "Body",
     "iconName": "BreathstealersRobe",
     "effect": {
-      "lifeModifier": -3,
+      "lifeModifier": -2,
       "startBattleWithCard": [
         "Breathstealer|MIR"
       ]
@@ -3194,17 +2287,6 @@
     "effect": {
       "startBattleWithCard": [
         "Ichorid|TOR"
-      ]
-    }
-  },
-  {
-    "name": "Bog Glider",
-    "description": "A strange contraption that allows travel through marshes.",
-    "equipmentSlot": "Boots",
-    "iconName": "BogGlider",
-    "effect": {
-      "startBattleWithCard": [
-        "Bog Glider|PCY"
       ]
     }
   },
@@ -3253,7 +2335,7 @@
         "Security Detail|MMQ"
       ]
     },
-    "description": "+2 life. Create a 1/1 Soldier if you control no creatures."
+    "description": "+2 life. Pay WW to create a 1/1 Soldier if you control no creatures."
   },
   {
     "name": "Tome of the Trove",
@@ -3276,7 +2358,7 @@
         "Ley Line|MMQ"
       ]
     },
-    "description": "Tap a green creature for any color mana."
+    "description": "Gives each player a +1/+1 counter each turn."
   },
   {
     "name": "Bog Glider Greaves",
@@ -3288,7 +2370,7 @@
         "Bog Glider|PCY"
       ]
     },
-    "description": "-2 life. A 1/2 swampwalk. Sac to search library for a Swamp."
+    "description": "-2 life. A 1/1 flier. Tap and sac a swamp for a free 2 cost mercenary."
   },
   {
     "name": "Ebony Horseshoe",
@@ -3311,7 +2393,7 @@
         "Narcissism|TOR"
       ]
     },
-    "description": "-3 life. Sac a land to give target creature +2/+2."
+    "description": "-3 life. Pay G and discard a card or sac this to give +2/+2."
   },
   {
     "name": "Serrated Quiver",
@@ -3323,7 +2405,7 @@
         "Serrated Arrows|HML"
       ]
     },
-    "description": "-4 life. Enters with 3 counters. Remove one to give creature -1/-1."
+    "description": "-4 life. Enters with 3 arrows. Tap to shoot out a -1/-1 counter."
   },
   {
     "name": "Map to Paradise",
@@ -3357,7 +2439,7 @@
         "Ivy Seer|UDS"
       ]
     },
-    "description": "A 1/1 Elf Wizard. Tap to reveal hand, give +X/+X for green cards."
+    "description": "A 1/1 Elf Wizard. Pay 3 and tap to reveal hand, give +X/+X for green cards."
   },
   {
     "name": "Multani's Boots",
@@ -3380,7 +2462,7 @@
         "Pulse of Llanowar|INV"
       ]
     },
-    "description": "Tap a tapped land to produce any mana that land could produce."
+    "description": "Allows your basics to tap for any color."
   },
   {
     "name": "Hymnal Hood",
@@ -3392,7 +2474,7 @@
         "Serra's Hymn|USG"
       ]
     },
-    "description": "+1 life. Gains verse counters. Remove to prevent X damage."
+    "description": "+1 life. Gains verse counters. Remove to prevent X damage once."
   },
   {
     "name": "Celestial Sword",
@@ -3415,7 +2497,7 @@
         "Serra Paladin|HML"
       ]
     },
-    "description": "-2 life. A 2/2 first strike. Tap with another to gain 3 life."
+    "description": "-2 life. A 2/2 that can prevent 1 damage or pay 3 to give vigilance."
   },
   {
     "name": "Robes of Renewal",
@@ -3438,7 +2520,7 @@
         "Serra's Liturgy|USG"
       ]
     },
-    "description": "Gains verse counters. Remove to create 1/1 Spirit tokens."
+    "description": "Gains verse counters. Remove to destroy artifacts or enchantments."
   },
   {
     "name": "Kobold King's Crown",
@@ -3542,7 +2624,7 @@
     "iconName": "WaterOfYouth",
     "equipmentSlot": "leftHand",
     "cost": 0,
-    "description": "A vial of magical water that restores vitality.",
+    "description": "Restores youthful optimism. +2 Life and pay 2 and tap for 1 more.",
     "effect": {
       "lifeModifier": 2,
       "startBattleWithCard": [
@@ -3577,7 +2659,7 @@
   },
   {
     "name": "Elixir of Vitality",
-    "description": "Gain 4 life or pay 8 for 8 life.",
+    "description": "Gain 4 life early or pay 8 for 8 life later.",
     "iconName": "ElixirOfVitality",
     "equipmentSlot": "Left",
     "cost": 16000,
@@ -3589,7 +2671,7 @@
   },
   {
     "name": "Clockwork Rider's Boots",
-    "description": "A 0/3 that can be wound up to a 4/3.",
+    "description": "A 0/3 that can be wound up to a 4/3 with mana.",
     "iconName": "ClockworkRidersBoots",
     "equipmentSlot": "Boots",
     "cost": 20000,
@@ -3613,7 +2695,7 @@
   },
   {
     "name": "Amulet of Unmaking",
-    "description": "Pay 5 to exile something once.",
+    "description": "Pay 5 to exile a creature, artifact, or land once.",
     "iconName": "AmuletOfUnmaking",
     "equipmentSlot": "Neck",
     "cost": 10000,
@@ -3645,7 +2727,7 @@
   },
   {
     "name": "Aeolipile",
-    "description": "Pay 1 to throw a bomb for 2 damage.",
+    "description": "Pay 1 and sacrifice for 2 damage to any target.",
     "equipmentSlot": "Right",
     "iconName": "Aeolipile",
     "cost": 2000,
