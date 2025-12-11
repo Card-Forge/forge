@@ -721,18 +721,7 @@
         "Plated Sliver|LGN"
     }
   },
-  {
-    "name": "Living Armor",
-    "description": "Gives a creature +0/+X permanently, where X is its mana value.",
-    "equipmentSlot": "Body",
-    "iconName": "DarkArmor",
-    "cost": 2000,
-    "effect": {
-      "startBattleWithCard": [
-        "Living Armor|DRK"
-      ]
-    }
-  },
+  }
   {
     "name": "Pied Pipes",
     "description": "Begin with a plague rat to start your swarm. Size equals the number in play",
