@@ -270,11 +270,12 @@
   },
   {
     "name": "Boots of the Crossroads",
-    "description": "Pay B to put a creature from your graveyard on top of your library.",
+    "description": "+1 Life. Pay B to put a creature from your graveyard on top of your library.",
     "equipmentSlot": "Boots",
     "iconName": "DarkBoots",
     "cost": 1500,
     "effect": {
+      "lifeModifier": 1,
       "startBattleWithCard": [
         "Haunted Crossroads|MMQ"
       ]
@@ -342,11 +343,12 @@
   },
   {
     "name": "Riding Boots",
-    "description": "Pay 1W to give a creature first strike for a turn.",
+    "description": "+1 Life. Pay 1W to give a creature first strike for a turn.",
     "equipmentSlot": "Boots",
     "iconName": "GoldBoots",
     "cost": 3000,
     "effect": {
+      "lifeModifier": 1,
       "startBattleWithCard": [
         "Noble Steeds|ALL"
       ]
@@ -511,11 +513,12 @@
   },
   {
     "name": "Sandals of Speed",
-    "description": "Sacrifice a land to give target creature haste.",
+    "description": "+1 Life. Sacrifice a land to give target creature haste.",
     "equipmentSlot": "Boots",
     "iconName": "Sandals",
     "cost": 1500,
     "effect": {
+      "lifeModifier": 1,
       "startBattleWithCard": [
         "Need for Speed|ODY"
       ]
@@ -621,7 +624,7 @@
     "questItem": true
   },
   {
-    "name": "Grolnoks Key",
+    "name": "Grave Frog's Key",
     "iconName": "StrangeKey",
     "questItem": true
   },
@@ -636,12 +639,12 @@
     "questItem": true
   },
   {
-    "name": "Sorin's Key",
+    "name": "Baron's Key",
     "iconName": "StrangeKey",
     "questItem": true
   },
   {
-    "name": "Tibalt's Key",
+    "name": "Specter's Key",
     "iconName": "StrangeKey",
     "questItem": true
   },
@@ -855,11 +858,12 @@
   },
   {
     "name": "Chariot Rider's Boots",
-    "description": "Pay 3 to give target creature trample until end of turn.",
+    "description": "+1 Life. Pay 3 to give target creature trample until end of turn.",
     "equipmentSlot": "Boots",
     "iconName": "SteelBoots",
     "cost": 1000,
     "effect": {
+      "lifeModifier": 1,
       "startBattleWithCard": [
         "War Chariot|ICE"
       ]
@@ -1292,10 +1296,11 @@
   },
   {
     "name": "Whalebone Glider",
-    "description": "Pay 2 to give target creature with power 3 or less flying.",
+    "description": "+1 life. Pay 2 to give target creature with power 3 or less flying.",
     "equipmentSlot": "Boots",
     "iconName": "WhaleboneGlider",
     "cost": 3000,
+    "lifeModifier": 1,
     "effect": {
       "startBattleWithCard": [
         "Whalebone Glider|ICE"
@@ -1625,18 +1630,19 @@
         "Fledgling Dragon|JUD"
       ]
     },
-    "description": "-2 life. A 2/2 that becomes 5/5 flying firebreather at threshold."
+    "description": "-2 life. A 2/2 flying that becomes a 5/5 firebreather at threshold."
   },
   {
     "name": "Overwhelming Axe",
     "equipmentSlot": "Right",
     "iconName": "OverwhelmingAxe",
     "effect": {
+      "lifeModifier": -3,
       "startBattleWithCard": [
         "Overwhelming Instinct|ONS"
       ]
     },
-    "description": "Draw a card when you attack with 3+ creatures."
+    "description": "-3 Max Life. Draw a card when you attack with 3+ creatures."
   },
   {
     "name": "Wombat Tamer's Whip",
@@ -1951,12 +1957,12 @@
     "equipmentSlot": "Right",
     "iconName": "FaerieDragonEgg",
     "effect": {
-      "lifeModifier": -4,
+      "lifeModifier": -3,
       "startBattleWithCard": [
         "Faerie Dragon|PAST"
       ]
     },
-    "description": "-4 life. A 1/3 flying dragon. Pay 1GG for a totally random effect."
+    "description": "-3 life. A 1/3 flying dragon. Pay 1GG for a totally random effect."
   },
   {
     "name": "Goblin Trumpet",
@@ -2168,12 +2174,11 @@
     "equipmentSlot": "Boots",
     "iconName": "RiverWaders",
     "effect": {
-      "lifeModifier": -2,
       "startBattleWithCard": [
         "Raging River|LEA"
       ]
     },
-    "description": "-2 life. Defender splits attackers. Each side blocked separately."
+    "description": "Defender splits attackers. Each side blocked separately."
   },
   {
     "name": "Claws of Gix",
@@ -2376,12 +2381,11 @@
     "equipmentSlot": "Neck",
     "iconName": "NarcissistsMask",
     "effect": {
-      "lifeModifier": -3,
       "startBattleWithCard": [
         "Narcissism|TOR"
       ]
     },
-    "description": "-3 life. Pay G and discard a card or sac this to give +2/+2."
+    "description": "Pay G and discard a card or sac this to give +2/+2."
   },
   {
     "name": "Serrated Quiver",
@@ -2400,12 +2404,11 @@
     "equipmentSlot": "Left",
     "iconName": "MaptoParadise",
     "effect": {
-      "lifeModifier": -5,
       "startBattleWithCard": [
         "Undiscovered Paradise|VIS"
       ]
     },
-    "description": "-5 life. Tap for any color. Returns to hand at untap."
+    "description": "Gives a land that taps for any color. Returns to hand at untap."
   },
   {
     "name": "Ring of Infestation",
@@ -2457,12 +2460,12 @@
     "equipmentSlot": "Neck",
     "iconName": "HymnalHood",
     "effect": {
-      "lifeModifier": 1,
+      "lifeModifier": 2,
       "startBattleWithCard": [
         "Serra's Hymn|USG"
       ]
     },
-    "description": "+1 life. Gains verse counters. Remove to prevent X damage once."
+    "description": "+2 life. Gains verse counters. Remove to prevent X damage once."
   },
   {
     "name": "Celestial Sword",
@@ -2480,24 +2483,22 @@
     "equipmentSlot": "Boots",
     "iconName": "PaladinsGreaves",
     "effect": {
-      "lifeModifier": -2,
       "startBattleWithCard": [
         "Serra Paladin|HML"
       ]
     },
-    "description": "-2 life. A 2/2 that can prevent 1 damage or pay 3 to give vigilance."
+    "description": "A 2/2 knight that can prevent 1 damage or pay 3 to give vigilance."
   },
   {
     "name": "Robes of Renewal",
     "equipmentSlot": "Body",
     "iconName": "RobesofRenewal",
     "effect": {
-      "lifeModifier": -2,
       "startBattleWithCard": [
         "Angelic Renewal|WTH"
       ]
     },
-    "description": "-2 life. Sac when a nontoken creature dies to return it."
+    "description": "Save a nontoken creature from death once."
   },
   {
     "name": "Serra's Prayer Book",
@@ -2551,12 +2552,11 @@
     "equipmentSlot": "Left",
     "iconName": "BarrinsCodex",
     "effect": {
-      "lifeModifier": -4,
       "startBattleWithCard": [
         "Barrin's Codex|USG"
       ]
     },
-    "description": "-4 life. Gains page counters. Sac and pay 4 to draw cards equal to pages."
+    "description": "Gains page counters. Sac and pay 4 to draw cards equal to pages."
   },
   {
     "name": "Rayne's Writ",
@@ -2597,12 +2597,12 @@
     "equipmentSlot": "Neck",
     "iconName": "CopperAngelsAmulet",
     "effect": {
-      "lifeModifier": -5,
+      "lifeModifier": -2,
       "startBattleWithCard": [
-        "Copper-Leaf Angel|UDS"
+        "Copper-Leaf Angel|PCY"
       ]
     },
-    "description": "-5 life. A 2/2 flying. Sac lands to add +1/+1 counters."
+    "description": "-2 Life. A 2/2 flying artifact creature. Sac lands to add +1/+1 counters."
   },
   {
     "name": "Water of Youth",

@@ -60,7 +60,7 @@
     "type": "item",
     "probability": 1,
     "count": 1,
-    "itemName": "Tibalt's Key"
+    "itemName": "Specter's Key"
   }
 ]
 </property>
@@ -101,10 +101,10 @@
     "options":[
     { "name":"go away" },
     {      
-        "name":"unlock with Tibalt's Key",     
-        "condition":[{"item":"Tibalt's Key"}],    
+        "name":"unlock with Specter's Key",     
+        "condition":[{"item":"Specter's Key"}],    
         "text":"The gate is unlocked",
-        "options":[{"name":"continue", "action":[ {"deleteMapObject":-1},{"removeItem":"Tibalt's Key"}]} ]
+        "options":[{"name":"continue", "action":[ {"deleteMapObject":-1},{"removeItem":"Specter's Key"}]} ]
     }
     ]
 }]</property>

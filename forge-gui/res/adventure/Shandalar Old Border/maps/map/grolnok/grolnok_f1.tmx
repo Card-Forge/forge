@@ -87,10 +87,10 @@
     "options":[
     { "name":"go away" },
     {      
-        "name":"unlock with Grolnok's Key",     
-        "condition":[{"item":"Grolnok's Key"}],    
+        "name":"unlock with Grave Frog's Key",     
+        "condition":[{"item":"Grave Frog's Key"}],    
         "text":"The gate is unlocked",
-        "options":[{"name":"continue", "action":[ {"deleteMapObject":-1},{"removeItem":"Grolnok's Key"}]} ]
+        "options":[{"name":"continue", "action":[ {"deleteMapObject":-1},{"removeItem":"Grave Frog's Key"}]} ]
     }
     ]
 }]</property>
