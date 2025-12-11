@@ -578,8 +578,8 @@
 	"restockPrice": 5,
 	"rewards": [
 	    { "count": 1, "cardTypes": ["Artifact"], "rarity": ["R"] },
-	    { "count": 3, "cardTypes": ["Artifact"], "rarity": ["U"] },
-	    { "count": 4, "cardTypes": ["Artifact"], "rarity": ["C"] }
+	    { "count": 4, "cardTypes": ["Artifact"], "rarity": ["U"] },
+	    { "count": 3, "cardTypes": ["Artifact"], "rarity": ["C"] }
 	  ]
 	},{
 	  "name": "Dragon",
@@ -1356,8 +1356,8 @@
 	  "restockPrice": 5,
 	  "rewards": [
 		{ "count": 1, "cardTypes": ["Artifact"], "cardText": "\\Q{\\EW\\Q}\\E", "rarity": ["R"] },
-		{ "count": 3, "cardTypes": ["Artifact"], "cardText": "\\Q{\\EW\\Q}\\E", "rarity": ["U"] },
-		{ "count": 4, "cardTypes": ["Artifact"], "cardText": "\\Q{\\EW\\Q}\\E", "rarity": ["C"] }
+		{ "count": 4, "cardTypes": ["Artifact"], "cardText": "\\Q{\\EW\\Q}\\E", "rarity": ["U"] },
+		{ "count": 3, "cardTypes": ["Artifact"], "cardText": "\\Q{\\EW\\Q}\\E", "rarity": ["C"] }
 	  ]
 	},{
 	  "name": "CityArtifactBlue",
@@ -1368,8 +1368,8 @@
 	  "restockPrice": 5,
 	  "rewards": [
 		{ "count": 1, "cardTypes": ["Artifact"], "cardText": "\\Q{\\EU\\Q}\\E", "rarity": ["R"] },
-		{ "count": 3, "cardTypes": ["Artifact"], "cardText": "\\Q{\\EU\\Q}\\E", "rarity": ["U"] },
-		{ "count": 4, "cardTypes": ["Artifact"], "cardText": "\\Q{\\EU\\Q}\\E", "rarity": ["C"] }
+		{ "count": 4, "cardTypes": ["Artifact"], "cardText": "\\Q{\\EU\\Q}\\E", "rarity": ["U"] },
+		{ "count": 3, "cardTypes": ["Artifact"], "cardText": "\\Q{\\EU\\Q}\\E", "rarity": ["C"] }
 	  ]
 	},{
 	  "name": "CityArtifactBlack",
@@ -1380,8 +1380,8 @@
 	  "restockPrice": 5,
 	  "rewards": [
 		{ "count": 1, "cardTypes": ["Artifact"], "cardText": "\\Q{\\EB\\Q}\\E", "rarity": ["R"] },
-		{ "count": 3, "cardTypes": ["Artifact"], "cardText": "\\Q{\\EB\\Q}\\E", "rarity": ["U"] },
-		{ "count": 4, "cardTypes": ["Artifact"], "cardText": "\\Q{\\EB\\Q}\\E", "rarity": ["C"] }
+		{ "count": 4, "cardTypes": ["Artifact"], "cardText": "\\Q{\\EB\\Q}\\E", "rarity": ["U"] },
+		{ "count": 3, "cardTypes": ["Artifact"], "cardText": "\\Q{\\EB\\Q}\\E", "rarity": ["C"] }
 	  ]
 	},{
 	  "name": "CityArtifactRed",
@@ -1392,8 +1392,8 @@
 	  "restockPrice": 5,
 	  "rewards": [
 		{ "count": 1, "cardTypes": ["Artifact"], "cardText": "\\Q{\\ER\\Q}\\E", "rarity": ["R"] },
-		{ "count": 3, "cardTypes": ["Artifact"], "cardText": "\\Q{\\ER\\Q}\\E", "rarity": ["U"] },
-		{ "count": 4, "cardTypes": ["Artifact"], "cardText": "\\Q{\\ER\\Q}\\E", "rarity": ["C"] }
+		{ "count": 4, "cardTypes": ["Artifact"], "cardText": "\\Q{\\ER\\Q}\\E", "rarity": ["U"] },
+		{ "count": 3, "cardTypes": ["Artifact"], "cardText": "\\Q{\\ER\\Q}\\E", "rarity": ["C"] }
 	  ]
 	},{
 	  "name": "CityArtifactGreen",
@@ -1404,8 +1404,8 @@
 	  "restockPrice": 5,
 	  "rewards": [
 		{ "count": 1, "cardTypes": ["Artifact"], "cardText": "\\Q{\\EG\\Q}\\E", "rarity": ["R"] },
-		{ "count": 3, "cardTypes": ["Artifact"], "cardText": "\\Q{\\EG\\Q}\\E", "rarity": ["U"] },
-		{ "count": 4, "cardTypes": ["Artifact"], "cardText": "\\Q{\\EG\\Q}\\E", "rarity": ["C"] }
+		{ "count": 4, "cardTypes": ["Artifact"], "cardText": "\\Q{\\EG\\Q}\\E", "rarity": ["U"] },
+		{ "count": 3, "cardTypes": ["Artifact"], "cardText": "\\Q{\\EG\\Q}\\E", "rarity": ["C"] }
 	  ]
 	},{
 	  "name": "Shapeshifter",
