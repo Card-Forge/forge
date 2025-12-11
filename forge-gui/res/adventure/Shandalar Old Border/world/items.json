@@ -624,7 +624,7 @@
     "questItem": true
   },
   {
-    "name": "Grolnoks Key",
+    "name": "Grave Frog's Key",
     "iconName": "StrangeKey",
     "questItem": true
   },
@@ -639,12 +639,12 @@
     "questItem": true
   },
   {
-    "name": "Sorin's Key",
+    "name": "Baron's Key",
     "iconName": "StrangeKey",
     "questItem": true
   },
   {
-    "name": "Tibalt's Key",
+    "name": "Specter's Key",
     "iconName": "StrangeKey",
     "questItem": true
   },
