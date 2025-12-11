@@ -226,103 +226,8 @@
 		
 		]
 	
-	},{
-	"name":"WhiteEquipment",
-	"spriteAtlas":"maps/tileset/buildings.atlas",
-	"sprite":"EquipmentShop",
-	"rewards": [
-		{ "type": "item","count":1, "itemName": "Braidwood Sextant"  },
-		{ "type": "item","count":1, "itemName": "Credit Voucher"  },
-		{ "type": "item","count":1, "itemName": "Glider Gloves"  },
-		{ "type": "item","count":1, "itemName": "Iron Shield"  },
-		{ "type": "item","count":1, "itemName": "Steel Armor"  },
-		{ "type": "item","count":1, "itemName": "Steel Boots"  },
-		{ "type": "item","count":1, "itemName": "Sentry's Plate"  },
-		{ "type": "item","count":1, "itemName": "Spellbook"  }
-
-		]
-	
-	},{
-	"name":"BlueEquipment",
-	"spriteAtlas":"maps/tileset/buildings.atlas",
-	"sprite":"EquipmentShop",
-	"rewards": [
-		{ "type": "item","count":1, "itemName": "Braidwood Sextant"  },
-		{ "type": "item","count":1, "itemName": "Credit Voucher"  },
-		{ "type": "item","count":1, "itemName": "Glider Gloves"  },
-		{ "type": "item","count":1, "itemName": "Iron Shield"  },
-		{ "type": "item","count":1, "itemName": "Steel Armor"  },
-		{ "type": "item","count":1, "itemName": "Steel Boots"  },
-		{ "type": "item","count":1, "itemName": "Sentry's Plate"  },
-		{ "type": "item","count":1, "itemName": "Spellbook"  }
-
-		]
-	
-	},{
-	"name":"BlackEquipment",
-	"spriteAtlas":"maps/tileset/buildings.atlas",
-	"sprite":"EquipmentShop",
-	"rewards": [
-		{ "type": "item","count":1, "itemName": "Braidwood Sextant"  },
-		{ "type": "item","count":1, "itemName": "Credit Voucher"  },
-		{ "type": "item","count":1, "itemName": "Glider Gloves"  },
-		{ "type": "item","count":1, "itemName": "Iron Shield"  },
-		{ "type": "item","count":1, "itemName": "Steel Armor"  },
-		{ "type": "item","count":1, "itemName": "Steel Boots"  },
-		{ "type": "item","count":1, "itemName": "Sentry's Plate"  },
-		{ "type": "item","count":1, "itemName": "Spellbook"  }
-
-		]
-	
-	},{
-	"name":"RedEquipment",
-	"spriteAtlas":"maps/tileset/buildings.atlas",
-	"sprite":"EquipmentShop",
-	"rewards": [
-		{ "type": "item","count":1, "itemName": "Braidwood Sextant"  },
-		{ "type": "item","count":1, "itemName": "Credit Voucher"  },
-		{ "type": "item","count":1, "itemName": "Glider Gloves"  },
-		{ "type": "item","count":1, "itemName": "Iron Shield"  },
-		{ "type": "item","count":1, "itemName": "Steel Armor"  },
-		{ "type": "item","count":1, "itemName": "Steel Boots"  },
-		{ "type": "item","count":1, "itemName": "Sentry's Plate"  },
-		{ "type": "item","count":1, "itemName": "Spellbook"  }
-
-		]
-	
-	},{
-	"name":"GreenEquipment",
-	"spriteAtlas":"maps/tileset/buildings.atlas",
-	"sprite":"EquipmentShop",
-	"rewards": [
-		{ "type": "item","count":1, "itemName": "Braidwood Sextant"  },
-		{ "type": "item","count":1, "itemName": "Credit Voucher"  },
-		{ "type": "item","count":1, "itemName": "Glider Gloves"  },
-		{ "type": "item","count":1, "itemName": "Iron Shield"  },
-		{ "type": "item","count":1, "itemName": "Steel Armor"  },
-		{ "type": "item","count":1, "itemName": "Steel Boots"  },
-		{ "type": "item","count":1, "itemName": "Sentry's Plate"  },
-		{ "type": "item","count":1, "itemName": "Spellbook"  }
-
-		]
-	
-	},{
-	"name":"Equipment",
-	"spriteAtlas":"maps/tileset/buildings.atlas",
-	"sprite":"EquipmentShop",
-	"rewards": [
-		{ "type": "item","count":1, "itemName": "Braidwood Sextant"  },
-		{ "type": "item","count":1, "itemName": "Credit Voucher"  },
-		{ "type": "item","count":1, "itemName": "Glider Gloves"  },
-		{ "type": "item","count":1, "itemName": "Iron Shield"  },
-		{ "type": "item","count":1, "itemName": "Steel Armor"  },
-		{ "type": "item","count":1, "itemName": "Steel Boots"  },
-		{ "type": "item","count":1, "itemName": "Sentry's Plate"  },
-		{ "type": "item","count":1, "itemName": "Spellbook"  }
-
-		]
-
-	},{
+	},
+	{
 	"name":"WasteEquipment",
 	"spriteAtlas":"maps/tileset/buildings.atlas",
 	"sprite":"EquipmentShop",
@@ -354,22 +259,6 @@
 
 		]
 
-	},{
-	"name":"GenericItems",
-	"description":"General Goods",
-	"spriteAtlas":"maps/tileset/buildings.atlas",
-	"sprite":"EquipmentShop",
-	"restockPrice": 2, 
-	  "rewards": [ 
-		{ "type": "item","count":1, "itemName": "Steel Boots"  },
-		{ "type": "item","count":1, "itemName": "Thunder Wall"  },
-		{ "type": "item","count":1, "itemName": "Steel Armor"  },
-		{ "type": "item","count":1, "itemName": "Iron Boots"  },
-		{ "type": "item","count":1, "itemName": "Iron Shield"  },
-		{ "type": "item","count":1, "itemName": "Iron Armor"  }
-		
-		]
-	
 	},
 	{                                      
 	"name":"Swamp",    
