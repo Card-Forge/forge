@@ -1,6 +1,5 @@
 package forge.screens.home.rogue;
 
-import forge.deck.Deck;
 import forge.gamemodes.rogue.PathData;
 import forge.gamemodes.rogue.RogueConfig;
 import forge.gamemodes.rogue.RogueDeckData;
@@ -25,8 +24,7 @@ public enum CSubmenuRogueStart implements ICDoc {
     private final VSubmenuRogueStart view = VSubmenuRogueStart.SINGLETON_INSTANCE;
     private final ActionListener actCommanderSelected = e -> updateCommanderDetails();
 
-    private List<RogueDeckData> availableDecks;
-    private RogueDeckData selectedDeck;
+  private RogueDeckData selectedDeck;
 
     @Override
     public void register() {
@@ -45,7 +43,7 @@ public enum CSubmenuRogueStart implements ICDoc {
     }
 
     private void loadAvailableCommanders() {
-        availableDecks = RogueConfig.loadRogueDecks();
+      List<RogueDeckData> availableDecks = RogueConfig.loadRogueDecks();
 
         // Populate combo box
         view.getCbxCommander().removeAllItems();
@@ -83,18 +81,19 @@ public enum CSubmenuRogueStart implements ICDoc {
             return;
         }
 
-        // Create deep copy of start deck
-        Deck startDeckCopy = new Deck(selectedDeck.getStartDeck());
-
         // Generate path for the run
         PathData path = RogueConfig.getDefaultPath();
 
         // Create new run
         RogueRunData newRun = new RogueRunData(
-            selectedDeck.getName(),
-            startDeckCopy,
+            selectedDeck,
             path
         );
+
+        // Generate unique name for the run (used as filename)
+        // Format: DeckName_Timestamp (e.g., "MeriaRogueCommander_12-11-25_143022")
+        String runName = selectedDeck.getName() + "_" + System.currentTimeMillis();
+        newRun.setName(runName);
 
         // Save the run
         RogueIO.saveRun(newRun);

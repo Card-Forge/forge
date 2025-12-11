@@ -1,5 +1,6 @@
 package forge.screens.home.rogue;
 
+import forge.LobbyPlayer;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckgenUtil;
@@ -110,7 +111,7 @@ public enum CSubmenuRogueMap implements ICDoc {
 
             // Filter to get the designated plane for this node
             CardPool filteredPool = planePool.getFilteredPool(card -> {
-                String cardPlaneName = node.getPlaneName();
+                String cardPlaneName = node.getPlaneBoundConfig().planeName();
                 return cardPlaneName.equalsIgnoreCase(card.getName());
             });
 
@@ -139,10 +140,17 @@ public enum CSubmenuRogueMap implements ICDoc {
 
             // Override starting life with persistent life from run
             human.setStartingLife(currentRun.getCurrentLife());
-            human.setPlayer(GamePlayerUtil.getGuiPlayer());
+
+            // Use the singleton lobbyPlayer for consistent player identification
+            // This ensures isMatchWonBy() works correctly in RogueWinLoseController
+            LobbyPlayer lobbyPlayer = GamePlayerUtil.getGuiPlayer();
+            lobbyPlayer.setName(currentRun.getSelectedRogueDeck().getName());
+            lobbyPlayer.setAvatarIndex(currentRun.getSelectedRogueDeck().getAvatarIndex());
+            lobbyPlayer.setSleeveIndex(currentRun.getSelectedRogueDeck().getSleeveIndex());
+            human.setPlayer(lobbyPlayer);
 
             // Load Planebound deck
-            Deck planeboundDeck = loadPlaneboundDeck(node.getDeckPath());
+            Deck planeboundDeck = loadPlaneboundDeck(node.getPlaneBoundConfig().deckPath());
 
             // Create AI Planebound opponent
             RegisteredPlayer ai = RegisteredPlayer.forVariants(
@@ -154,14 +162,17 @@ public enum CSubmenuRogueMap implements ICDoc {
                 sharedPlaneDeck,                      // shared plane deck
                 null                                   // vanguard avatar
             );
-            ai.setPlayer(GamePlayerUtil.createAiPlayer());
+            ai.setPlayer(GamePlayerUtil.createAiPlayer(
+                node.getPlaneBoundConfig().planeboundName(),
+                node.getPlaneBoundConfig().avatarIndex(),
+                0));
 
             // Calculate life based on row: 5 + (5 * rowIndex)
             int planeboundLife = 5 + (5 * node.getRowIndex());
-            ai.setStartingLife(planeboundLife);
+            //ai.setStartingLife(planeboundLife);
 
             //for testing, set to 1 life
-            //ai.setStartingLife(1);
+            ai.setStartingLife(1);
 
             // Start match
             List<RegisteredPlayer> players = Arrays.asList(human, ai);

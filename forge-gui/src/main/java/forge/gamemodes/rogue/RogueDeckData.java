@@ -19,6 +19,8 @@ public class RogueDeckData {
     private CardPool rewardPool;            // ~100 card pool for rewards during run
     private String description;             // Flavor text for UI
     private String themeDescription;        // Theme/archetype (e.g., "Instants/Sorceries matter")
+    private int avatarIndex;                // Avatar image index
+    private int sleeveIndex;                // Sleeve image index
 
     // Constructors
     public RogueDeckData() {
@@ -120,6 +122,22 @@ public class RogueDeckData {
 
     public void setThemeDescription(String themeDescription) {
         this.themeDescription = themeDescription;
+    }
+
+    public int getAvatarIndex() {
+        return avatarIndex;
+    }
+
+    public void setAvatarIndex(int avatarIndex) {
+        this.avatarIndex = avatarIndex;
+    }
+
+    public int getSleeveIndex() {
+        return sleeveIndex;
+    }
+
+    public void setSleeveIndex(int sleeveIndex) {
+        this.sleeveIndex = sleeveIndex;
     }
 
     @Override

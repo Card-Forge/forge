@@ -34,13 +34,9 @@ public class PathGenerator {
         List<NodeData> nodes = new ArrayList<>();
         for (int i = 0; i < nodeCount; i++) {
             // Use modulo to wrap around if we need more nodes than available planebounds
-            PlaneboundConfig config = shuffled.get(i % shuffled.size());
+            PlaneboundConfig planeboundConfig = shuffled.get(i % shuffled.size());
 
-            NodeData node = NodeData.createPlane(
-                    config.getPlaneName(),
-                    config.getPlaneboundName(),
-                    config.getDeckPath()
-            );
+            NodeData node = NodeData.createPlane(planeboundConfig);
 
             // Set row index for life scaling: Row 0 = 5 life, Row 1 = 10 life, etc.
             node.setRowIndex(i);
@@ -66,13 +62,9 @@ public class PathGenerator {
 
         List<NodeData> nodes = new ArrayList<>();
         for (int i = 0; i < planeboundConfigs.size(); i++) {
-            PlaneboundConfig config = planeboundConfigs.get(i);
+            PlaneboundConfig planeboundConfig = planeboundConfigs.get(i);
 
-            NodeData node = NodeData.createPlane(
-                    config.getPlaneName(),
-                    config.getPlaneboundName(),
-                    config.getDeckPath()
-            );
+            NodeData node = NodeData.createPlane(planeboundConfig);
 
             node.setRowIndex(i);
             nodes.add(node);

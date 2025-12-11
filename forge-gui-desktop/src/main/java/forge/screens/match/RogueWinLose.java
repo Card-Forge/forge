@@ -23,7 +23,8 @@ public class RogueWinLose extends ControlWinLose {
     public RogueWinLose(final ViewWinLose view0, final GameView game0, final CMatchUI matchUI) {
         super(view0, game0, matchUI);
         // Get current run from the map controller and pass it to the controller
-        controller = new RogueWinLoseController(game0, view0, CSubmenuRogueMap.SINGLETON_INSTANCE.getCurrentRun());
+        var currentRun = CSubmenuRogueMap.SINGLETON_INSTANCE.getCurrentRun();
+        controller = new RogueWinLoseController(game0, view0, currentRun);
     }
 
     /**
@@ -33,6 +34,10 @@ public class RogueWinLose extends ControlWinLose {
      */
     @Override
     public final boolean populateCustomPanel() {
+        if (controller == null) {
+            System.err.println("ERROR: Controller is null in populateCustomPanel!");
+            return false;
+        }
         controller.showRewards();
         return true;
     }

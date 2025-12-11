@@ -17,11 +17,9 @@ public class NodeData {
     }
 
     private NodeType type;
-    private String planeName;           // For PLANE/BOSS: e.g., "Dominaria"
-    private String planeboundName;      // For PLANE/BOSS: e.g., "Meria, Scholar of Antiquity"
-    private String deckPath;            // Path to Planebound deck file
-    private boolean completed;          // Has this node been completed?
-    private int rowIndex;               // Which row this node is on (for life scaling: 5 + 5*rowIndex)
+    private PlaneboundConfig planeboundConfig;  // Config for Plane type
+    private boolean completed;                  // Has this node been completed?
+    private int rowIndex;                       // Which row this node is on (for life scaling: 5 + 5*rowIndex)
 
     // For Sanctum nodes
     private int healAmount;             // Life to restore (default: 5)
@@ -38,19 +36,15 @@ public class NodeData {
     }
 
     // Factory methods for convenience
-    public static NodeData createPlane(String planeName, String planeboundName, String deckPath) {
+    public static NodeData createPlane(PlaneboundConfig planeboundConfig) {
         NodeData node = new NodeData(NodeType.PLANE);
-        node.setPlaneName(planeName);
-        node.setPlaneboundName(planeboundName);
-        node.setDeckPath(deckPath);
+        node.setPlaneBoundConfig(planeboundConfig);
         return node;
     }
 
-    public static NodeData createBoss(String planeName, String planeboundName, String deckPath) {
+    public static NodeData createBoss(PlaneboundConfig planeboundConfig) {
         NodeData node = new NodeData(NodeType.BOSS);
-        node.setPlaneName(planeName);
-        node.setPlaneboundName(planeboundName);
-        node.setDeckPath(deckPath);
+        node.setPlaneBoundConfig(planeboundConfig);
         return node;
     }
 
@@ -70,28 +64,12 @@ public class NodeData {
         this.type = type;
     }
 
-    public String getPlaneName() {
-        return planeName;
+    public PlaneboundConfig getPlaneBoundConfig() {
+        return planeboundConfig;
     }
 
-    public void setPlaneName(String planeName) {
-        this.planeName = planeName;
-    }
-
-    public String getPlaneboundName() {
-        return planeboundName;
-    }
-
-    public void setPlaneboundName(String planeboundName) {
-        this.planeboundName = planeboundName;
-    }
-
-    public String getDeckPath() {
-        return deckPath;
-    }
-
-    public void setDeckPath(String deckPath) {
-        this.deckPath = deckPath;
+    public void setPlaneBoundConfig(PlaneboundConfig planeboundConfig) {
+        this.planeboundConfig = planeboundConfig;
     }
 
     public boolean isCompleted() {
@@ -130,9 +108,9 @@ public class NodeData {
     public String toString() {
         switch (type) {
             case PLANE:
-                return "Plane: " + planeName + " (vs " + planeboundName + ")";
+                return "Plane: " + planeboundConfig.planeName() + " (vs " + planeboundConfig.planeboundName() + ")";
             case BOSS:
-                return "Boss: " + planeName + " (vs " + planeboundName + ")";
+                return "Boss: " + planeboundConfig.planeName() + " (vs " + planeboundConfig.planeboundName() + ")";
             case SANCTUM:
                 return "Sanctum (Heal " + healAmount + ", Remove up to " + freeRemoves + ")";
             default:

@@ -106,19 +106,10 @@ public class RogueWinLoseController {
 
     private void awardCardRewards() {
         // Get the rogue deck data to draw rewards from
-        String commanderName = currentRun.getRogueDeckName();
-        RogueDeckData rogueDeck = null;
-
-        for (RogueDeckData deck : RogueConfig.loadRogueDecks()) {
-            if (deck.getName().equals(commanderName) ||
-                deck.getCommanderCardName().equals(commanderName)) {
-                rogueDeck = deck;
-                break;
-            }
-        }
+        RogueDeckData rogueDeck = currentRun.getSelectedRogueDeck();
 
         if (rogueDeck == null) {
-            System.err.println("Warning: Could not find rogue deck for commander: " + commanderName);
+            System.err.println("Warning: Could not find rogue deck for current run.");
             return;
         }
 
@@ -148,8 +139,8 @@ public class RogueWinLoseController {
             // Show confirmation
             view.showCards("Cards Added to Your Deck", chosenCards);
 
-            // Remove chosen cards from the reward pool
-            rogueDeck.removeFromRewardPool(chosenCards);
+            // Remove reward options (both chosen and unchosen) from the reward pool
+            rogueDeck.removeFromRewardPool(rewardOptions);
         }
     }
 

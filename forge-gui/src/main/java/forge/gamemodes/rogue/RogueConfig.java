@@ -114,6 +114,8 @@ public class RogueConfig {
         // Set metadata
         rogueDeck.setDescription(meta.getProperty("description", ""));
         rogueDeck.setThemeDescription(meta.getProperty("theme", ""));
+        rogueDeck.setAvatarIndex(Integer.parseInt(meta.getProperty("avatarIndex", "1")));
+        rogueDeck.setSleeveIndex(Integer.parseInt(meta.getProperty("sleeveIndex", "1")));
 
         return rogueDeck;
     }
@@ -129,32 +131,38 @@ public class RogueConfig {
         planebounds.add(new PlaneboundConfig(
                 "Bloodhill Bastion",
                 "Lyzolda, the Blood Witch",
-                "rogue/planebounds/lyzolda.dck"));
+                "rogue/planebounds/lyzolda.dck",
+                10));
 
         planebounds.add(new PlaneboundConfig(
                 "Izzet Steam Maze",
                 "Niv-Mizzet, the Firemind",
-                "rogue/planebounds/niv_mizzet.dck"));
+                "rogue/planebounds/niv_mizzet.dck",
+            20));
 
         planebounds.add(new PlaneboundConfig(
                 "The Zephyr Maze",
                 "Isperia, Supreme Judge",
-                "rogue/planebounds/isperia.dck"));
+                "rogue/planebounds/isperia.dck",
+            30));
 
         planebounds.add(new PlaneboundConfig(
                 "Selesnya Loft Gardens",
                 "Trostani, Selesnya's Voice",
-                "rogue/planebounds/trostani.dck"));
+                "rogue/planebounds/trostani.dck",
+            40));
 
         planebounds.add(new PlaneboundConfig(
                 "The Dark Barony",
                 "Lazav, Dimir Mastermind",
-                "rogue/planebounds/lazav.dck"));
+                "rogue/planebounds/lazav.dck",
+            50));
 
         planebounds.add(new PlaneboundConfig(
                 "Stronghold Furnace",
                 "Rakdos, Lord Of Riots",
-                "rogue/planebounds/rakdos.dck"));
+                "rogue/planebounds/rakdos.dck",
+            55));
 
         // Add more planebounds here as you create them
 
@@ -165,9 +173,7 @@ public class RogueConfig {
      * Generate the default linear path for a run.
      * Uses PathGenerator to create a randomized path from available planebounds.
      *
-     * @deprecated Use PathGenerator.generateRandomLinearPath() instead
      */
-    @Deprecated
     public static PathData getDefaultPath() {
         return PathGenerator.generateRandomLinearPath(5);
     }

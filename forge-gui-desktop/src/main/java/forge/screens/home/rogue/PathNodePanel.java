@@ -68,10 +68,8 @@ public class PathNodePanel extends SkinnedPanel {
         cardImage = new CardPicturePanel();
         cardImage.setOpaque(false);
         cardImage.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
-        PaperCard planeCard = getPlaneCard(node.getPlaneName());
+        PaperCard planeCard = getPlaneCard(node.getPlaneBoundConfig().planeName());
         if (planeCard != null) {
-            System.out.println("DEBUG: Setting plane card: " + planeCard.getName());
-
             // Get the card image and rotate it 90 degrees clockwise
             BufferedImage originalImage = getPlaneCardImage(planeCard);
             if (originalImage != null) {
@@ -84,8 +82,6 @@ public class PathNodePanel extends SkinnedPanel {
 
             cardImage.revalidate();
             cardImage.repaint();
-        } else {
-            System.err.println("DEBUG: Plane card not found: " + node.getPlaneName());
         }
         add(cardImage);
 
@@ -100,7 +96,7 @@ public class PathNodePanel extends SkinnedPanel {
         });
 
         // Planebound name label
-        lblPlaneboundName = new JLabel(node.getPlaneboundName());
+        lblPlaneboundName = new JLabel(node.getPlaneBoundConfig().planeboundName());
         lblPlaneboundName.setFont(FSkin.getRelativeFont(12).getBaseFont());
         lblPlaneboundName.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT).getColor());
         lblPlaneboundName.setHorizontalAlignment(SwingConstants.CENTER);
@@ -182,7 +178,6 @@ public class PathNodePanel extends SkinnedPanel {
      */
     private BufferedImage getPlaneCardImage(PaperCard planeCard) {
         try {
-            System.out.println("DEBUG: Getting image for plane: " + planeCard.getName());
             Card gameCard = Card.getCardForUi(planeCard);
             if (gameCard != null) {
                 CardView cardView = CardView.get(gameCard);
@@ -190,20 +185,12 @@ public class PathNodePanel extends SkinnedPanel {
                 // Try high-quality image first (actual artwork)
                 BufferedImage image = FImageUtil.getImageXlhq(cardView.getCurrentState());
                 if (image != null) {
-                    System.out.println("DEBUG: Got XLHQ image for " + planeCard.getName() + " - size: " + image.getWidth() + "x" + image.getHeight());
                     return image;
                 }
 
                 // Fall back to regular image
                 image = FImageUtil.getImage(cardView.getCurrentState());
-                if (image != null) {
-                    System.out.println("DEBUG: Got regular image for " + planeCard.getName() + " - size: " + image.getWidth() + "x" + image.getHeight());
-                } else {
-                    System.err.println("DEBUG: Image is null for " + planeCard.getName());
-                }
                 return image;
-            } else {
-                System.err.println("DEBUG: gameCard is null for " + planeCard.getName());
             }
         } catch (Exception e) {
             System.err.println("Warning: Could not get image for plane card: " + planeCard.getName());
@@ -220,8 +207,6 @@ public class PathNodePanel extends SkinnedPanel {
         int width = image.getWidth();
         int height = image.getHeight();
 
-        System.out.println("DEBUG: Rotating image - original size: " + width + "x" + height);
-
         // Create new image with swapped dimensions (width becomes height, height becomes width)
         BufferedImage rotated = new BufferedImage(height, width, image.getType());
 
@@ -237,8 +222,6 @@ public class PathNodePanel extends SkinnedPanel {
         // Draw the original image onto the rotated canvas
         g2d.drawImage(image, transform, null);
         g2d.dispose();
-
-        System.out.println("DEBUG: Rotated image - new size: " + rotated.getWidth() + "x" + rotated.getHeight());
 
         return rotated;
     }
@@ -260,21 +243,14 @@ public class PathNodePanel extends SkinnedPanel {
                         cachedPlanarPool.add(card);
                     }
                 }
-
-                System.out.println("DEBUG: Loaded " + cachedPlanarPool.toFlatList().size() + " plane cards from variant collection");
             }
-
-            System.out.println("DEBUG: Searching for plane: '" + planeName + "'");
 
             // Find the plane card by name
             for (PaperCard card : cachedPlanarPool.toFlatList()) {
                 if (card.getName().equalsIgnoreCase(planeName)) {
-                    System.out.println("DEBUG: Found match: " + card.getName());
                     return card;
                 }
             }
-
-            System.err.println("Warning: Could not find plane card: " + planeName);
             return null;
         } catch (Exception e) {
             System.err.println("Warning: Error loading plane card: " + planeName + " - " + e.getMessage());

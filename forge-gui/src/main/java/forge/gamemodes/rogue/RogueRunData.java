@@ -21,17 +21,17 @@ public class RogueRunData {
     private String name;  // Set based on filename on load
 
     // Run Configuration
-    private String rogueDeckName;          // Selected Rogue Deck identifier
-    private String timestamp;              // Creation timestamp
+    private RogueDeckData selectedRogueDeck;    // Selected Rogue Deck identifier
+    private String timestamp;                   // Creation timestamp
 
     // Run State
-    private Deck currentDeck;              // Player's evolving deck (starts as Start Deck copy)
-    private int currentLife;               // Persistent life total (starts at 20)
-    private int startingLife;              // Initial life (default: 20)
-    private int currentGold;               // Currency (for future Bazaar support)
-    private int currentEchoes;             // Meta-currency (for future Codex support)
-    private PathData path;                 // The generated path
-    private int currentNodeIndex;          // Current position on path
+    private Deck currentDeck;                   // Player's evolving deck (starts as Start Deck copy)
+    private int currentLife;                    // Persistent life total (starts at 20)
+    private int startingLife;                   // Initial life (default: 20)
+    private int currentGold;                    // Currency (for future Bazaar support)
+    private int currentEchoes;                  // Meta-currency (for future Codex support)
+    private PathData path;                      // The generated path
+    private int currentNodeIndex;               // Current position on path
 
     // Match History
     private List<String> matchResults;     // W/L record per match
@@ -57,10 +57,11 @@ public class RogueRunData {
         stamp();
     }
 
-    public RogueRunData(String rogueDeckName, Deck startingDeck, PathData path) {
+    public RogueRunData(RogueDeckData selectedRogueDeck, PathData path) {
         this();
-        this.rogueDeckName = rogueDeckName;
-        this.currentDeck = startingDeck;
+        this.selectedRogueDeck = selectedRogueDeck;
+        // Create deep copy of start deck
+        this.currentDeck = new Deck(selectedRogueDeck.getStartDeck());
         this.path = path;
     }
 
@@ -157,12 +158,12 @@ public class RogueRunData {
         return name;
     }
 
-    public String getRogueDeckName() {
-        return rogueDeckName;
+    public RogueDeckData getSelectedRogueDeck() {
+        return selectedRogueDeck;
     }
 
-    public void setRogueDeckName(String rogueDeckName) {
-        this.rogueDeckName = rogueDeckName;
+    public void setSelectedRogueDeck(RogueDeckData selectedRogueDeck) {
+        this.selectedRogueDeck = selectedRogueDeck;
     }
 
     public String getTimestamp() {
