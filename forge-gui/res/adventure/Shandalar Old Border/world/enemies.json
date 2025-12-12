@@ -856,7 +856,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.2,
         "count": 1
       },
       {
@@ -11197,7 +11197,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.2,
         "count": 1
       },
       {
@@ -11294,7 +11294,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
     ],
@@ -11390,7 +11390,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
     ],
@@ -12411,7 +12411,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.2,
         "count": 1
       },
       {
@@ -15349,7 +15349,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
     ],
@@ -15776,7 +15776,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
     ],
@@ -16117,7 +16117,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
     ],
@@ -16961,7 +16961,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.2,
         "count": 1
       },
       {
@@ -17401,7 +17401,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.2,
         "count": 1
       },
       {
@@ -19319,7 +19319,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
     ],
@@ -20183,7 +20183,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
     ],
@@ -23008,7 +23008,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
     ],
@@ -23612,7 +23612,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
     ],
@@ -24197,7 +24197,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
     ],
@@ -25862,7 +25862,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
     ],
@@ -25954,7 +25954,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
     ],
@@ -28078,7 +28078,7 @@
       },
       {
         "type": "landSketchbookShop",
-        "probability": 0.05,
+        "probability": 0.1,
         "count": 1
       }
     ],
@@ -33515,6 +33515,11 @@
         "probability": 1,
         "count": 1
       },
+                              {
+        "type": "landSketchbookShop",
+        "probability": 0.5,
+        "count": 1
+      },
       {
         "type": "card",
         "probability": 1,
@@ -33601,6 +33606,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Sulfuric Staff"
+      },
+                              {
+        "type": "landSketchbookShop",
+        "probability": 0.5,
+        "count": 1
       },
       {
         "type": "life",
@@ -34674,6 +34684,11 @@
         "probability": 1,
         "count": 1
       },
+                              {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
+      },
       {
         "type": "card",
         "probability": 1,
@@ -34801,6 +34816,11 @@
         "probability": 1,
         "count": 15,
         "addMaxCount": 10
+      },
+                              {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
       },
       {
         "type": "item",
@@ -34946,6 +34966,11 @@
         "probability": 1,
         "count": 1
       },
+                              {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
+      },
       {
         "type": "card",
         "probability": 1,
@@ -35067,6 +35092,11 @@
         "probability": 1,
         "count": 15,
         "addMaxCount": 10
+      },
+                              {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
       },
       {
         "type": "item",
@@ -35212,6 +35242,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Faerie Dragon Egg"
+      },
+                        {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
       },
       {
         "type": "life",
@@ -35569,6 +35604,11 @@
         "probability": 1,
         "count": 1
       },
+                        {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "card",
         "probability": 1,
@@ -35676,6 +35716,11 @@
         "count": 2000,
         "addMaxCount": 0
       },
+                        {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
+      },
       {
         "type": "card",
         "probability": 1,
@@ -35740,6 +35785,11 @@
         "probability": 1,
         "count": 2000,
         "addMaxCount": 0
+      },
+                        {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
       },
       {
         "type": "card",
@@ -36039,6 +36089,11 @@
         "count": 10,
         "addMaxCount": 90
       },
+                        {
+        "type": "landSketchbookShop",
+        "probability": 0.05,
+        "count": 1
+      },
       {
         "type": "item",
         "probability": 1,
@@ -36105,6 +36160,11 @@
         "count": 10,
         "addMaxCount": 90
       },
+                  {
+        "type": "landSketchbookShop",
+        "probability": 0.05,
+        "count": 1
+      },
       {
         "type": "item",
         "probability": 1,
@@ -36163,6 +36223,11 @@
           "Instant",
           "Sorcery"
         ]
+      },
+                  {
+        "type": "landSketchbookShop",
+        "probability": 0.05,
+        "count": 1
       },
       {
         "type": "gold",
@@ -36363,6 +36428,11 @@
         "count": 10,
         "addMaxCount": 90
       },
+            {
+        "type": "landSketchbookShop",
+        "probability": 0.05,
+        "count": 1
+      },
       {
         "type": "item",
         "probability": 1,
@@ -36435,6 +36505,11 @@
         "count": 1,
         "itemName": "Holy Symbol"
       }
+            {
+        "type": "landSketchbookShop",
+        "probability": 0.05,
+        "count": 1
+      },
     ],
     "colors": "W",
     "questTags": [
@@ -36489,6 +36564,11 @@
           "Instant",
           "Sorcery"
         ]
+      },
+            {
+        "type": "landSketchbookShop",
+        "probability": 0.05,
+        "count": 1
       },
       {
         "type": "gold",
@@ -36615,6 +36695,11 @@
           "Sorcery"
         ]
       },
+            {
+        "type": "landSketchbookShop",
+        "probability": 0.05,
+        "count": 1
+      },
       {
         "type": "gold",
         "probability": 0.3,
@@ -36725,6 +36810,11 @@
           "Instant",
           "Sorcery"
         ]
+      },
+            {
+        "type": "landSketchbookShop",
+        "probability": 0.05,
+        "count": 1
       },
       {
         "type": "deckCard",
@@ -36866,6 +36956,11 @@
         "count": 1,
         "cardName": "Mox Sapphire|LEA"
       },
+            {
+        "type": "landSketchbookShop",
+        "probability": 0.5,
+        "count": 1
+      },
       {
         "type": "card",
         "probability": 1,
@@ -36930,6 +37025,11 @@
         "count": 1,
         "cardName": "Gaea's Cradle|USG"
       },
+            {
+        "type": "landSketchbookShop",
+        "probability": 0.5,
+        "count": 1
+      },
       {
         "type": "item",
         "probability": 1,
@@ -36970,6 +37070,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Serra's Prayer Book"
+      },
+            {
+        "type": "landSketchbookShop",
+        "probability": 0.5,
+        "count": 1
       },
       {
         "type": "card",
