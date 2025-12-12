@@ -55,7 +55,7 @@
                         "options": [
                             {
                                 "name": "(Continue)",
-                                "text": "Explore the world and spells for your library and artifacts to equip yourself with. You shall need them.",
+                                "text": "Explore the world and gather spells for your library and artifacts to equip yourself with. You shall need their strength if you are to succeed.",
                                 "voiceFile": "audio/WizPAR3.mp3",
                                 "options": [
                                     {
