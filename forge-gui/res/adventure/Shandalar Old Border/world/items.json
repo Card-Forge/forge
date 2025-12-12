@@ -342,6 +342,18 @@
     }
   },
   {
+    "name": "Guard's Armor",
+    "description": "+2 Life. Start with a 2/2 white Soldier token.",
+    "equipmentSlot": "Body",
+    "iconName": "GuardsArmor",
+    "effect": {
+      "lifeModifier": 2,
+      "startBattleWithCard": [
+        "Security Detail|MMQ"
+      ]
+    }
+  },
+  {
     "name": "Riding Boots",
     "description": "+1 Life. Pay 1W to give a creature first strike for a turn.",
     "equipmentSlot": "Boots",
@@ -2210,17 +2222,6 @@
     "effect": {
       "startBattleWithCard": [
         "Ring of Ma'r\u00fbf|ARN"
-      ]
-    }
-  },
-  {
-    "name": "Ley Line Walker's Boots",
-    "description": "Gives each player a +1/+1 counter each turn.",
-    "equipmentSlot": "Boots",
-    "iconName": "LeyLineWalkersBoots",
-    "effect": {
-      "startBattleWithCard": [
-        "Ley Line|MMQ"
       ]
     }
   },
