@@ -44,7 +44,7 @@
       "name": "Easy",
       "startingLife": 16,
       "startingShards": 5,
-      "startingMoney": 500,
+      "startingMoney": 2000,
       "enemyLifeFactor": 0.8,
       "spawnRank": 0,
       "goldLoss": 0.02,
@@ -81,15 +81,14 @@
         "G": "decks/starter/commander/green_01.dck"
       },
       "startItems": [
-        "Manasight Amulet",
-        "Landscape Sketchbook - Seventh Edition"
+        "Manasight Amulet"
       ]
     },
     {
       "name": "Normal",
       "startingLife": 12,
-      "startingShards": 2,
-      "startingMoney": 250,
+      "startingShards": 10,
+      "startingMoney": 500,
       "startingDifficulty": true,
       "enemyLifeFactor": 1.0,
       "rewardMaxFactor": 1.0,
@@ -127,7 +126,6 @@
         "G": "decks/starter/commander/green_01.dck"
       },
       "startItems": [
-        "Landscape Sketchbook - Seventh Edition"
       ]
     },
     {
@@ -171,7 +169,6 @@
         "G": "decks/starter/commander/green_01.dck"
       },
       "startItems": [
-        "Landscape Sketchbook - Seventh Edition"
       ]
     },
     {
@@ -179,7 +176,7 @@
       "startingLife": 7,
       "startingShards": 0,
       "startingMoney": 0,
-      "enemyLifeFactor": 2.5,
+      "enemyLifeFactor": 2,
       "rewardMaxFactor": 0.0,
       "spawnRank": 2,
       "goldLoss": 0.5,
@@ -215,7 +212,6 @@
         "G": "decks/starter/commander/green_01.dck"
       },
       "startItems": [
-        "Landscape Sketchbook - Seventh Edition"
       ]
     }
   ],
