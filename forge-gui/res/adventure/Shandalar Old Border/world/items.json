@@ -1532,12 +1532,11 @@
     "equipmentSlot": "Neck",
     "iconName": "SymbolOfThePit",
     "effect": {
-      "lifeModifier": 3,
       "startBattleWithCard": [
-        "Unspeakable Symbol|SCG"
+        "Lurking Evil|USG"
       ]
     },
-    "description": "+3 life. Pay 3 life to put +1/+1 counter on a creature."
+    "description": "Pay half your life to turn this into a 4/4 flying horror."
   },
   {
     "name": "Eye of Horror",
@@ -2710,6 +2709,27 @@
       "lifeModifier": 2
     }
   },
+    {
+    "name": "Hallowed Sigil",
+    "description": "Pay W and discard a card to gain 3 life.",
+    "equipmentSlot": "Neck",
+    "iconName": "HallowedSigil",
+    "effect": {
+      "startBattleWithCard": [
+        "Peace of Mind|EXO"
+      ]
+    }
+  },
+  {
+    "name": "Unhallowed Sigil",
+    "description": "Pay 3 life to give a creature a +1/+1 counter.",
+    "equipmentSlot": "Neck",
+    "iconName": "UnhallowedSigil",
+    "effect": {
+      "startBattleWithCard": [
+        "Unspeakable Symbol|SCG"
+      ]
+    }
   {
     "name": "Aeolipile",
     "description": "Pay 1 and sacrifice for 2 damage to any target.",
