@@ -1300,8 +1300,8 @@
     "equipmentSlot": "Boots",
     "iconName": "WhaleboneGlider",
     "cost": 3000,
-    "lifeModifier": 1,
     "effect": {
+      "lifeModifier": 1,
       "startBattleWithCard": [
         "Whalebone Glider|ICE"
       ]
