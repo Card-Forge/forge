@@ -160,7 +160,7 @@ public class RogueConfig {
                 "Izzet Steam Maze",
                 "Niv-Mizzet, the Firemind",
                 "rogue/planebounds/niv_mizzet.dck",
-            59));
+            58));
 
         planebounds.add(new PlaneboundConfig(
                 "The Zephyr Maze",
