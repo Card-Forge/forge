@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+o<?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="84">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
@@ -56,7 +56,7 @@
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 8,
-  &quot;superTypes&quot;: [ &quot;Snow&quot; ]
+  &quot;editions&quot;: [ &quot;ICE&quot; ]
 }
 ]</property>
    </properties>
@@ -114,7 +114,7 @@
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 8,
-  &quot;superTypes&quot;: [ &quot;Snow&quot; ]
+  &quot;editions&quot;: [ &quot;ICE&quot; ]
 }
 ]</property>
    </properties>
@@ -146,7 +146,7 @@
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 8,
-  &quot;superTypes&quot;: [ &quot;Snow&quot; ]
+  &quot;editions&quot;: [ &quot;ALL&quot; ]
 }
 ]</property>
    </properties>
