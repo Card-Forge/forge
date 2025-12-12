@@ -45,17 +45,17 @@
                         "not": true
                     }
                 ],
-                "text": "This... is Shandalar. A plane where mana is so prevalent and used by all that is sentient. Even the common people use spells daily.",
+                "text": "This... is Shandalar. A plane where magic is as it once was, long ago.",
                 "voiceFile": "audio/WizPAR1.mp3",
                 "options": [
                     {
                         "name": "(Continue)",
-                        "text": "Like you, some planeswalkers have been imprisoned here by the guardians in the castles. You must defeat them in battle to release us from this plane. Use your powers of magic to challenge them.",
+                        "text": "The False God Karona has trapped you here. It will be a long road to defeating her - first you must conquer the five castles, then five more temples hidden within her own, each with powerful guardians.",
                         "voiceFile": "audio/WizPAR2.mp3",
                         "options": [
                             {
                                 "name": "(Continue)",
-                                "text": "Find the planeswalkers trapped here. Guide them to me, they will help you on your journey.",
+                                "text": "Explore the world and spells for your library and artifacts to equip yourself with. You shall need them.",
                                 "voiceFile": "audio/WizPAR3.mp3",
                                 "options": [
                                     {
@@ -70,7 +70,7 @@
                                         "options": [
                                             {
                                                 "name": "(Continue)",
-                                                "text": "I have something else for you, {var=player_name}. Take these coins, but do not spend them with merchants.",
+                                                "text": "I have something else for you, {var=player_name}. It isn't much, but perhaps it may help you out.",
                                                 "condition": [
                                                     {
                                                         "checkCharacterFlag": "freeChallengeCoins",
@@ -89,13 +89,13 @@
                                                                     },
                                                                     {
                                                                         "type": "item",
-                                                                        "count": 2,
-                                                                        "itemName": "Silver Challenge Coin"
+                                                                        "count": 1,
+                                                                        "itemName": "Landscape Sketchbook - Fourth Edition"
                                                                     },
                                                                     {
                                                                         "type": "item",
-                                                                        "count": 3,
-                                                                        "itemName": "Bronze Challenge Coin"
+                                                                        "count": 1,
+                                                                        "itemName": "Landscape Sketchbook - Seventh Edition"
                                                                     }
                                                                 ]
                                                             },
@@ -107,11 +107,11 @@
                                                             }
                                                         ],
                                                         "name": "What are they, then? What are they for?",
-                                                        "text": "These are Challenge Coins. Spellcasters of Shandalar will often gather to hold tests of skill. These coins will grant you entry to contests, and the prizes available can help you on your journey.",
+                                                        "text": "The coin can be redeemed at any inn to begin a challenge of skill and magic known to mages here as a draft.",
                                                         "options": [
                                                             {
-                                                                "name": "Where are these contests?",
-                                                                "text": "Show the coin to innkeepers. If there is a group in the town, the innkeeper will direct you to them.",
+                                                                "name": "And the sketchbooks?",
+                                                                "text": "They will allow you to choose the lands you draw power from in the add lands menu of the deck screen.",
                                                                 "options": [
                                                                     {
                                                                         "name": "Thank you",
@@ -222,19 +222,19 @@
                     }
                 ],
                 "name": "\"I have defeated the occupants of the five castles, but I did not find any captives.\"",
-                "text": "\"I suppose I should have explained further. The guardians you have defeated were not captors, not directly. But their mere presence had world altering effects.\"",
+                "text": "\"I suppose I should have explained further. The guardians you have defeated were not captors, not directly. But they guarded the keys to the temple of the false god.\"",
                 "options": [
                     {
-                        "name": "\"Effects such as what?\"",
-                        "text": "\"You likely saw a very focused version of the effects of their presence within their castles. But they also shrouded certain areas of our world, causing them to be... 'hidden', for the lack of a better term\"",
+                        "name": "\"And what is that?\"",
+                        "text": "\"It is located here in the wastelands. Within are portals to five more temples with yet more mighty guardians. Each must be defeated to face the false god.\"",
                         "options": [
                             {
                                 "name": "(Continue)",
-                                "text": "\"The spell their combined presences created caused subtle tricks of the mind which made us look right past parts of our world. Including the prisons which DO hold the Planeswalkers. I believe you will now be able to find them...\"",
+                                "text": "\"If you haven't already, use the five colored keys to unlock one of the castle gates. Take the strange key there and enter the temple of the false god.\"",
                                 "options": [
                                     {
                                         "name": "(Continue)",
-                                        "text": "[RED]Developer's note:[] You have now reached the end of the currently available story content, but there is more to be found in Shandalar. Several difficult dungeons have now been added to your world map, and your card collection can continue to grow.",
+                                        "text": "[RED]Developer's note:[] You have now reached the end of the story, but many mighty bosses within the final temples await, and your card collection can continue to grow.",
                                         "options": [
                                             {
                                                 "name": "(Continue)",
