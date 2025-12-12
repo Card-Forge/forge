@@ -1397,10 +1397,10 @@ public class CardView extends GameEntityView {
             return get(TrackableProperty.ManaCost);
         }
         void updateManaCost(CardState c) {
-            set(TrackableProperty.ManaCost, c.getManaCost());
+            set(TrackableProperty.ManaCost, c.getPerpetualAdjustedManaCost());
         }
         void updateManaCost(Card c) {
-            set(TrackableProperty.ManaCost, c.getManaCost());
+            set(TrackableProperty.ManaCost, c.getPerpetualAdjustedManaCost());
         }
 
         public String getOracleText() {
