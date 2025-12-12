@@ -12617,11 +12617,6 @@
         "count": 20,
         "addMaxCount": 10
       },
-      {
-        "type": "item",
-        "probability": 1,
-        "itemName": "Shaman's Staff"
-      }
     ],
     "colors": "RG",
     "questTags": [
@@ -26480,12 +26475,6 @@
     "life": 30,
     "rewards": [
       {
-        "type": "item",
-        "probability": 1,
-        "count": 1,
-        "itemName": "Ankh of Purgatory"
-      },
-      {
         "type": "life",
         "probability": 1,
         "count": 1
@@ -32820,6 +32809,12 @@
         "count": 15,
         "addMaxCount": 15
       },
+            {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Narcissist's Mask"
+      },
       {
         "type": "card",
         "cardName": "Jeska, Warrior Adept|JUD",
@@ -33131,8 +33126,10 @@
       },
       {
         "type": "item",
+        "probability": 1,
+        "count": 1,
         "itemName": "Hymnal Hood"
-      }
+      },
     ]
   },
   {
@@ -33178,7 +33175,7 @@
       },
       {
         "type": "item",
-        "itemName": "Celestial Sword"
+        "itemName": "Ankh of Purgatory"
       }
     ]
   },
@@ -33261,6 +33258,12 @@
         "type": "card",
         "cardName": "Replenish|UDS",
         "count": 1
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Robes of Renewal"
       },
       {
         "type": "shards",
@@ -33468,12 +33471,6 @@
         "count": 1,
         "probability": 1
       },
-      {
-        "type": "item",
-        "itemName": "Blue Key to the False God",
-        "count": 1,
-        "probability": 1
-      }
     ]
   },
   {
@@ -35340,6 +35337,12 @@
         "count": 20,
         "addMaxCount": 10
       },
+     {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Celestial Prism"
+      }
       {
         "type": "item",
         "probability": 0.1,
@@ -35392,6 +35395,12 @@
         "count": 20,
         "addMaxCount": 10
       },
+           {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Celestial Prism"
+      }
       {
         "type": "item",
         "probability": 0.1,
@@ -35444,6 +35453,12 @@
         "count": 20,
         "addMaxCount": 10
       },
+           {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Celestial Prism"
+      }
       {
         "type": "item",
         "probability": 0.1,
@@ -35496,6 +35511,12 @@
         "count": 20,
         "addMaxCount": 10
       },
+           {
+        "type": "item",
+        "probability": 0.1,
+        "count": 1,
+        "itemName": "Celestial Prism"
+      }
       {
         "type": "item",
         "probability": 0.1,
