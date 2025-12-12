@@ -131,9 +131,11 @@ public class PathNodePanel extends SkinnedPanel {
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    public void paint(Graphics g) {
+        // First paint everything (component + children)
+        super.paint(g);
 
+        // Then paint border and checkmark ON TOP of children
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 

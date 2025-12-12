@@ -129,13 +129,13 @@ public enum CSubmenuRogueMap implements ICDoc {
 
             // Create human player with persistent life
             RegisteredPlayer human = RegisteredPlayer.forVariants(
-                2,                                    // player count
-                appliedVariants,                      // applied variants
-                currentRun.getCurrentDeck(),          // player's deck
-                null,                                  // schemes (not used)
-                false,                                 // is archenemy
-                sharedPlaneDeck,                      // shared plane deck
-                null                                   // vanguard avatar
+                2,                   // player count
+                appliedVariants,                // applied variants
+                currentRun.getCurrentDeck(),    // player's deck
+                null,                           // schemes (not used)
+                false,                          // is archenemy
+                sharedPlaneDeck,                // shared plane deck
+                null                            // vanguard avatar
             );
 
             // Override starting life with persistent life from run
