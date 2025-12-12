@@ -10,6 +10,8 @@ By default `Affected-/EffectZone` are both Battlefield.
 Here's an example for layer 7c:  
 `Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control get +1/+1.`
 
+`CharacteristicDefining$ True`
+
 See [StaticAbility.generateLayer()](https://github.com/Card-Forge/forge/blob/master/forge-game/src/main/java/forge/game/staticability/StaticAbility.java) for the full list of params on each Layer.
 
 *Note:* Layer 1 is currently only implemented as a resolving effect instead.

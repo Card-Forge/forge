@@ -395,6 +395,12 @@ Parameters (all optional):
 - `NumDef$` - pumps Toughness
 - `KW$` - gives keywords
 
+Due to its generic nature Pump is also the conventional "helper AF" when an effect requires more than one target with different restrictions, e.g. *Political Trickery*:
+```
+A:SP$ Pump | ValidTgts$ Land.YouCtrl | TgtPrompt$ Choose target land you control | SubAbility$ DBExchange | SpellDescription$ Exchange control of target land you control and target land an opponent controls. (This effect lasts indefinitely.)
+SVar:DBExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Land.OppCtrl | TgtPrompt$ Choose target land an opponent controls
+```
+
 ## Regenerate
 Regenerate is for creating regeneration shields.
 
