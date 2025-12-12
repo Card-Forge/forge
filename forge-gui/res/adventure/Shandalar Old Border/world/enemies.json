@@ -12616,7 +12616,7 @@
         "probability": 1,
         "count": 20,
         "addMaxCount": 10
-      },
+      }
     ],
     "colors": "RG",
     "questTags": [
@@ -33129,7 +33129,7 @@
         "probability": 1,
         "count": 1,
         "itemName": "Hymnal Hood"
-      },
+      }
     ]
   },
   {
@@ -33470,7 +33470,7 @@
         "cardName": "Humility|TMP",
         "count": 1,
         "probability": 1
-      },
+      }
     ]
   },
   {
@@ -35377,7 +35377,7 @@
         "probability": 0.1,
         "count": 1,
         "itemName": "Celestial Prism"
-      }
+      },
       {
         "type": "item",
         "probability": 0.1,
@@ -35435,7 +35435,7 @@
         "probability": 0.1,
         "count": 1,
         "itemName": "Celestial Prism"
-      }
+      },
       {
         "type": "item",
         "probability": 0.1,
@@ -35493,7 +35493,7 @@
         "probability": 0.1,
         "count": 1,
         "itemName": "Celestial Prism"
-      }
+      },
       {
         "type": "item",
         "probability": 0.1,
@@ -35551,7 +35551,7 @@
         "probability": 0.1,
         "count": 1,
         "itemName": "Celestial Prism"
-      }
+      },
       {
         "type": "item",
         "probability": 0.1,
@@ -36504,12 +36504,12 @@
         "probability": 1,
         "count": 1,
         "itemName": "Holy Symbol"
-      }
-            {
+      },
+      {
         "type": "landSketchbookShop",
         "probability": 0.05,
         "count": 1
-      },
+      }
     ],
     "colors": "W",
     "questTags": [
