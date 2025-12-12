@@ -1271,17 +1271,17 @@ public class AdvancedSearch {
 
     private static abstract class CustomListEvaluator<T extends InventoryItem, V> extends FilterEvaluator<T, V> {
         private final Collection<V> choices;
-        private final FSerializableFunction<V> toShortString, toLongString;
+        private final FSerializableFunction<V, String> toShortString, toLongString;
 
         public CustomListEvaluator(Collection<V> choices0) {
             this(choices0, null, null);
         }
 
-        public CustomListEvaluator(Collection<V> choices0, FSerializableFunction<V> toShortString0) {
+        public CustomListEvaluator(Collection<V> choices0, FSerializableFunction<V, String> toShortString0) {
             this(choices0, toShortString0, null);
         }
 
-        public CustomListEvaluator(Collection<V> choices0, FSerializableFunction<V> toShortString0, FSerializableFunction<V> toLongString0) {
+        public CustomListEvaluator(Collection<V> choices0, FSerializableFunction<V, String> toShortString0, FSerializableFunction<V, String> toLongString0) {
             choices = choices0;
             toShortString = toShortString0;
             toLongString = toLongString0;
