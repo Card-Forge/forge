@@ -3,7 +3,6 @@ package forge.screens.home.rogue;
 import forge.LobbyPlayer;
 import forge.deck.CardPool;
 import forge.deck.Deck;
-import forge.deck.DeckgenUtil;
 import forge.deck.io.DeckSerializer;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
@@ -104,24 +103,28 @@ public enum CSubmenuRogueMap implements ICDoc {
         });
 
         try {
-            // Generate shared plane deck for Planechase
-            // For Rogue Commander, we want to stay on the designated plane for this node
-            // Add multiple copies to prevent Planechase mechanics from breaking
-            CardPool planePool = DeckgenUtil.generatePlanarPool();
+            // Get all plane cards from the centralized cache
+            CardPool allPlanes = forge.gamemodes.rogue.RogueConfig.getAllPlanes();
 
-            // Filter to get the designated plane for this node
-            CardPool filteredPool = planePool.getFilteredPool(card -> {
-                String cardPlaneName = node.getPlaneBoundConfig().planeName();
-                return cardPlaneName.equalsIgnoreCase(card.getName());
-            });
+            // Find the designated plane for this node
+            String cardPlaneName = node.getPlaneBoundConfig().planeName();
+            PaperCard designatedPlane = null;
+            for (PaperCard card : allPlanes.toFlatList()) {
+                if (cardPlaneName.equalsIgnoreCase(card.getName())) {
+                    designatedPlane = card;
+                    break;
+                }
+            }
 
+            // Create shared plane deck with multiple copies of the designated plane
             List<PaperCard> sharedPlaneDeck = new java.util.ArrayList<>();
-            if (!filteredPool.isEmpty()) {
-                PaperCard designatedPlane = filteredPool.toFlatList().get(0);
+            if (designatedPlane != null) {
                 // Add 10 copies of the same plane to satisfy Planechase mechanics
                 for (int i = 0; i < 10; i++) {
                     sharedPlaneDeck.add(designatedPlane);
                 }
+            } else {
+                System.err.println("Warning: Could not find plane card: " + cardPlaneName);
             }
 
             // Configure Commander + Planechase variants
@@ -169,10 +172,10 @@ public enum CSubmenuRogueMap implements ICDoc {
 
             // Calculate life based on row: 5 + (5 * rowIndex)
             int planeboundLife = 5 + (5 * node.getRowIndex());
-            //ai.setStartingLife(planeboundLife);
+            ai.setStartingLife(planeboundLife);
 
             //for testing, set to 1 life
-            ai.setStartingLife(1);
+            //ai.setStartingLife(1);
 
             // Start match
             List<RegisteredPlayer> players = Arrays.asList(human, ai);

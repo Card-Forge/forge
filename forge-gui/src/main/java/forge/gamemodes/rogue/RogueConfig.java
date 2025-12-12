@@ -24,6 +24,9 @@ public class RogueConfig {
 
     private static final StaticData db = StaticData.instance();
 
+    // Cache all plane cards to avoid reloading them repeatedly
+    private static CardPool cachedPlanarPool = null;
+
     /**
      * Load all available Rogue Decks from the commanders directory.
      * Scans for .dck files and their corresponding _rewards.dck and .meta files.
@@ -121,6 +124,25 @@ public class RogueConfig {
     }
 
     /**
+     * Get all plane cards from the variant cards collection.
+     * Returns a cached CardPool to avoid reloading planes repeatedly.
+     * This method is thread-safe and lazy-loads the planes on first call.
+     *
+     * @return CardPool containing all available plane cards
+     */
+    public static CardPool getAllPlanes() {
+        if (cachedPlanarPool == null) {
+            cachedPlanarPool = new CardPool();
+            for (PaperCard card : db.getVariantCards().getAllCards()) {
+                if (card.getRules().getType().isPlane()) {
+                    cachedPlanarPool.add(card);
+                }
+            }
+        }
+        return cachedPlanarPool;
+    }
+
+    /**
      * Get all available Planebound configurations.
      * These represent the pool of possible plane encounters.
      */
@@ -132,37 +154,37 @@ public class RogueConfig {
                 "Bloodhill Bastion",
                 "Lyzolda, the Blood Witch",
                 "rogue/planebounds/lyzolda.dck",
-                10));
+                100));
 
         planebounds.add(new PlaneboundConfig(
                 "Izzet Steam Maze",
                 "Niv-Mizzet, the Firemind",
                 "rogue/planebounds/niv_mizzet.dck",
-            20));
+            59));
 
         planebounds.add(new PlaneboundConfig(
                 "The Zephyr Maze",
                 "Isperia, Supreme Judge",
                 "rogue/planebounds/isperia.dck",
-            30));
+            47));
 
         planebounds.add(new PlaneboundConfig(
                 "Selesnya Loft Gardens",
                 "Trostani, Selesnya's Voice",
                 "rogue/planebounds/trostani.dck",
-            40));
+            74));
 
         planebounds.add(new PlaneboundConfig(
                 "The Dark Barony",
                 "Lazav, Dimir Mastermind",
                 "rogue/planebounds/lazav.dck",
-            50));
+            83));
 
         planebounds.add(new PlaneboundConfig(
                 "Stronghold Furnace",
                 "Rakdos, Lord Of Riots",
                 "rogue/planebounds/rakdos.dck",
-            55));
+            62));
 
         // Add more planebounds here as you create them
 

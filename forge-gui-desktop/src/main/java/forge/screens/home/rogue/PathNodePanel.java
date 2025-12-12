@@ -35,9 +35,6 @@ public class PathNodePanel extends SkinnedPanel {
     private static final int PANEL_WIDTH = CARD_WIDTH + 20;
     private static final int PANEL_HEIGHT = CARD_HEIGHT + 80;
 
-    // Cache the planar pool so we don't regenerate it for every node panel
-    private static CardPool cachedPlanarPool = null;
-
     private final NodeData node;
     private final boolean isCurrentNode;
     private final boolean isCompleted;
@@ -232,25 +229,15 @@ public class PathNodePanel extends SkinnedPanel {
 
     /**
      * Get the plane card by name from the variant cards collection.
-     * Planes are stored in variant cards, not in the common cards database.
-     * We access them directly instead of using generatePlanarPool() which randomly selects a subset.
+     * Uses the centralized RogueConfig.getAllPlanes() method.
      */
     private static PaperCard getPlaneCard(String planeName) {
         try {
-            // Get all variant cards (includes planes, schemes, etc.) and cache them
-            if (cachedPlanarPool == null) {
-                cachedPlanarPool = new CardPool();
-
-                // Get all plane cards from variant cards collection
-                for (PaperCard card : forge.model.FModel.getMagicDb().getVariantCards().getAllCards()) {
-                    if (card.getRules().getType().isPlane()) {
-                        cachedPlanarPool.add(card);
-                    }
-                }
-            }
+            // Get all plane cards from the centralized cache
+            CardPool allPlanes = forge.gamemodes.rogue.RogueConfig.getAllPlanes();
 
             // Find the plane card by name
-            for (PaperCard card : cachedPlanarPool.toFlatList()) {
+            for (PaperCard card : allPlanes.toFlatList()) {
                 if (card.getName().equalsIgnoreCase(planeName)) {
                     return card;
                 }
