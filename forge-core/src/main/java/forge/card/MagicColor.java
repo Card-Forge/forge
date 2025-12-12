@@ -88,29 +88,15 @@ public final class MagicColor {
     }
 
     public static String toShortString(final byte color) {
-        return switch (color) {
-            case WHITE -> "W";
-            case BLUE -> "U";
-            case BLACK -> "B";
-            case RED -> "R";
-            case GREEN -> "G";
-            default -> "C";
-        };
+        return Color.fromByte(color).getShortName();
     }
 
     public static String toLongString(final byte color) {
-        return switch (color) {
-            case WHITE -> Constant.WHITE;
-            case BLUE -> Constant.BLUE;
-            case BLACK -> Constant.BLACK;
-            case RED -> Constant.RED;
-            case GREEN -> Constant.GREEN;
-            default -> Constant.COLORLESS;
-        };
+        return Color.fromByte(color).getName();
     }
 
     public static String toSymbol(final byte color) {
-        return MagicColor.Color.fromByte(color).getSymbol();
+        return Color.fromByte(color).getSymbol();
     }
 
     public static String toSymbol(final String color) {
