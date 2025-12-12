@@ -234,11 +234,11 @@
                                 "options": [
                                     {
                                         "name": "(Continue)",
-                                        "text": "[RED]Developer's note:[] You have now reached the end of the story, but many mighty bosses within the final temples await, and your card collection can continue to grow.",
+                                        "text": "The final challenges within the temple of the false god await. Once she is defeated, you can call your quest complete or keep exploring to grow your collection.",
                                         "options": [
                                             {
                                                 "name": "(Continue)",
-                                                "text": "[RED}Developer's note:[] Check in with this NPC after updating Forge (or watch for announcements in our Discord) to continue the story when it is ready. And thanks for coming on this Adventure with us!",
+                                                "text": "Developer's Note: This is the last of the story prompts. Once you are satisfied with facing the final challenges and whatever else, you may start over or try new game+ where you keep cards and items but nothing else.",
                                                 "options": [
                                                     {
                                                         "name": "(Chapter 1 complete)"
