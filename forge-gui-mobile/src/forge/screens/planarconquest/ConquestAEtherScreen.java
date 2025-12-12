@@ -354,7 +354,7 @@ public class ConquestAEtherScreen extends FScreen {
         private final List<T> options;
         protected T selectedOption;
 
-        private AbstractFilterButton(String caption0, T[] options0, final FSerializableFunction<T> display) {
+        private AbstractFilterButton(String caption0, T[] options0, final FSerializableFunction<T, String> display) {
             super(new FLabel.Builder().iconInBackground().pressedColor(FILTER_BUTTON_PRESSED_COLOR)
                     .textColor(FILTER_BUTTON_TEXT_COLOR).alphaComposite(1f).align(Align.center));
             caption = caption0;

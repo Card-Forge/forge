@@ -246,7 +246,7 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
-    public <T> List<T> getChoices(final String message, final int min, final int max, final List<T> choices, final List<T> selected, final FSerializableFunction<T> display) {
+    public <T> List<T> getChoices(final String message, final int min, final int max, final List<T> choices, final List<T> selected, final FSerializableFunction<T, String> display) {
         return sendAndWait(ProtocolMethod.getChoices, message, min, max, choices, selected, display);
     }
 

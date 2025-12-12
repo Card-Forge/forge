@@ -208,7 +208,7 @@ public class GuiChoose {
         getChoices(message, min, max, choices, null, null, callback);
     }
 
-    public static <T> void getChoices(final String message, final int min, final int max, final Collection<T> choices, final Collection<T> selected, final FSerializableFunction<T> display, final Consumer<List<T>> callback) {
+    public static <T> void getChoices(final String message, final int min, final int max, final Collection<T> choices, final Collection<T> selected, final FSerializableFunction<T, String> display, final Consumer<List<T>> callback) {
         if (choices == null || choices.isEmpty()) {
             if (min == 0) {
                 callback.accept(new ArrayList<>());

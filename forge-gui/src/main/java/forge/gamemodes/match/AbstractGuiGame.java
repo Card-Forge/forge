@@ -619,7 +619,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public <T> T one(final String message, final List<T> choices) {
         return one(message, choices, null);
     }
-    public <T> T one(final String message, final List<T> choices, FSerializableFunction<T> display) {
+    public <T> T one(final String message, final List<T> choices, FSerializableFunction<T, String> display) {
         if (choices == null || choices.isEmpty()) {
             return null;
         }
