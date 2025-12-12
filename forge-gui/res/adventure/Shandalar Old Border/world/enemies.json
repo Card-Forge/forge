@@ -4942,7 +4942,7 @@
       },
       {
         "type": "item",
-        "probability": 0.1,
+        "probability": 1,
         "count": 1,
         "itemName": "Chimeric Sphere"
       }
