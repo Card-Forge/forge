@@ -1,0 +1,7 @@
+Name:Perfect Intimidation
+ManaCost:3 B
+Types:Sorcery
+A:SP$ Charm | Choices$ DBChangeZone,DBRemoveCounter | MinCharmNum$ 1 | CharmNum$ 2 | Defined$ You
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | ValidTgts$ Opponent | Chooser$ Targeted | ChangeType$ Card | ChangeNum$ 2 | IsCurse$ True | Mandatory$ True | SpellDescription$ Target opponent exiles two cards from their hand.
+SVar:DBRemoveCounter:DB$ RemoveCounter | ValidTgts$ Creature | CounterType$ All | CounterNum$ All | SpellDescription$ Remove all counters from target creature.
+Oracle:Choose one or both —\n• Target opponent exiles two cards from their hand.\n• Remove all counters from target creature.

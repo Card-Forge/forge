@@ -341,6 +341,8 @@ public enum CounterEnumType implements CounterType {
 
     PHYRESIS("PHYRE", 125, 97, 128),
 
+    PLAN("PLAN", 20, 35, 235),
+
     POINT("POINT", 153, 255, 130),
 
     POLYP("POLYP", 236, 185, 198),

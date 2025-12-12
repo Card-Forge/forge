@@ -69,14 +69,14 @@ public final class MagicColor {
     }
 
     public static byte fromName(final char c) {
-        switch (Character.toLowerCase(c)) {
-            case 'w': return MagicColor.WHITE;
-            case 'u': return MagicColor.BLUE;
-            case 'b': return MagicColor.BLACK;
-            case 'r': return MagicColor.RED;
-            case 'g': return MagicColor.GREEN;
-        }
-        return 0; // unknown means 'colorless'
+        return switch (Character.toLowerCase(c)) {
+            case 'w' -> MagicColor.WHITE;
+            case 'u' -> MagicColor.BLUE;
+            case 'b' -> MagicColor.BLACK;
+            case 'r' -> MagicColor.RED;
+            case 'g' -> MagicColor.GREEN;
+            default  -> 0; // unknown means 'colorless'
+        };
     }
 
     // This probably should be in ManaAtom since it cares about Mana, not Color.
@@ -88,29 +88,15 @@ public final class MagicColor {
     }
 
     public static String toShortString(final byte color) {
-        switch (color) {
-            case WHITE: return "W";
-            case BLUE:  return "U";
-            case BLACK: return "B";
-            case RED:   return "R";
-            case GREEN: return "G";
-            default:    return "C";
-        }
+        return Color.fromByte(color).getShortName();
     }
 
     public static String toLongString(final byte color) {
-        switch (color) {
-            case WHITE: return Constant.WHITE;
-            case BLUE:  return Constant.BLUE;
-            case BLACK: return Constant.BLACK;
-            case RED:   return Constant.RED;
-            case GREEN: return Constant.GREEN ;
-            default:    return Constant.COLORLESS;
-        }
+        return Color.fromByte(color).getName();
     }
 
     public static String toSymbol(final byte color) {
-        return MagicColor.Color.fromByte(color).getSymbol();
+        return Color.fromByte(color).getSymbol();
     }
 
     public static String toSymbol(final String color) {
@@ -180,14 +166,24 @@ public final class MagicColor {
         }
 
         public static Color fromByte(final byte color) {
-            switch (color) {
-                case MagicColor.WHITE: return WHITE;
-                case MagicColor.BLUE: return BLUE;
-                case MagicColor.BLACK: return BLACK;
-                case MagicColor.RED: return RED;
-                case MagicColor.GREEN: return GREEN;
-                default: return COLORLESS;
-            }
+            return switch (color) {
+                case MagicColor.WHITE -> WHITE;
+                case MagicColor.BLUE -> BLUE;
+                case MagicColor.BLACK -> BLACK;
+                case MagicColor.RED -> RED;
+                case MagicColor.GREEN -> GREEN;
+                default -> COLORLESS;
+            };
+        }
+        public static Color fromName(final String color) {
+            return switch (color) {
+                case MagicColor.Constant.WHITE -> WHITE;
+                case MagicColor.Constant.BLUE -> BLUE;
+                case MagicColor.Constant.BLACK -> BLACK;
+                case MagicColor.Constant.RED -> RED;
+                case MagicColor.Constant.GREEN -> GREEN;
+                default -> COLORLESS;
+            };
         }
 
         @Override

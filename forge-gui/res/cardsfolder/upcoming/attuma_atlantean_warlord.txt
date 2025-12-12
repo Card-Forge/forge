@@ -1,0 +1,10 @@
+Name:Attuma, Atlantean Warlord
+ManaCost:2 U U
+Types:Legendary Creature Merfolk Warrior Villain
+PT:3/4
+S:Mode$ Continuous | Affected$ Merfolk.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Merfolk you control get +1/+1.
+T:Mode$ AttackersDeclaredOneTarget | AttackedTarget$ Player | ValidAttackers$ Creature.Merfolk+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever one or more Merfolk you control attack a player, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:PlayMain1:TRUE
+DeckHints:Type$Merfolk
+Oracle:Other Merfolk you control get +1/+1.\nWhenever one or more Merfolk you control attack a player, draw a card.

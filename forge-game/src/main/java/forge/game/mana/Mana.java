@@ -29,15 +29,8 @@ import forge.game.spellability.SpellAbility;
  * Mana class.
  * This represents a single mana 'globe' floating in a player's pool.
  * </p>
- * 
- * @author Forge
- * @version $Id$
  */
-public class Mana {
-
-    private byte color;
-    private Card sourceCard = null;
-    private AbilityManaPart manaAbility = null;
+public record Mana(byte color, Card sourceCard, AbilityManaPart manaAbility) {
 
     @Override
     public int hashCode() {
@@ -87,10 +80,10 @@ public class Mana {
         return mp == mp2 || (mp.getManaRestrictions().equals(mp2.getManaRestrictions()) && mp.getExtraManaRestriction().equals(mp2.getExtraManaRestriction()));
     }
 
-    public Mana(final byte color, final Card source, final AbilityManaPart manaAbility) {
+    public Mana(final byte color, final Card sourceCard, final AbilityManaPart manaAbility) {
         this.color = color;
         this.manaAbility = manaAbility;
-        this.sourceCard = source.isInPlay() ? CardCopyService.getLKICopy(source) : source.getGame().getChangeZoneLKIInfo(source);
+        this.sourceCard = sourceCard.isInPlay() ? CardCopyService.getLKICopy(sourceCard) : sourceCard.getGame().getChangeZoneLKIInfo(sourceCard);
     }
 
     @Override

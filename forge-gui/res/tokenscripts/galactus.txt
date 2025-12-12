@@ -1,0 +1,11 @@
+Name:Galactus
+ManaCost:no cost
+Colors:black
+Types:Legendary Creature Elder Alien
+PT:16/16
+K:Flying
+K:Trample
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME attacks, destroy target land.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land
+SVar:HasAttackEffect:TRUE
+Oracle:Flying, trample\nWhenever Galactus attacks, destroy target land.
