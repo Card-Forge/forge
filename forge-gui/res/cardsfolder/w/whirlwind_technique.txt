@@ -1,0 +1,9 @@
+Name:Whirlwind Technique
+ManaCost:4 U U
+Types:Instant Lesson
+A:SP$ Draw | NumCards$ 2 | ValidTgts$ Player | SubAbility$ DBDiscard | SpellDescription$ Target player draws two cards, then discards a card. Airbend up to two target creatures. (To airbend a creature, exile it. While it's exiled, its owner may cast it for {2} rather than its mana cost.)
+SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | Defined$ ParentTarget | SubAbility$ DBAirbend
+SVar:DBAirbend:DB$ Airbend | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2
+DeckHas:Ability$Discard
+DeckHints:Keyword$Madness & Ability$Delirium
+Oracle:Target player draws two cards, then discards a card.\nAirbend up to two target creatures. (To airbend a creature, exile it. While it's exiled, its owner may cast it for {2} rather than its mana cost.)

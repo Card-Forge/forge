@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="29" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="31" nextobjectid="203">
+ <editorsettings>
+  <export format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/FarmFood.tsx" />
+ <tileset firstgid="16001" source="../../../../../../common/maps/tileset/dungeon.tsx" />
+ <layer id="30" name="Collision" width="29" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2B4AjdO4jE17STWXaN2jtqJzzx6pltS3DQKRsFwBQAJTwxZ
+  </data>
+ </layer>
+ <layer id="28" name="Stars" width="29" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzdlEkSwiAQRWnna8UxOVacr4VD9Fi+pQusbkNTVrl4O34X/AfEOoQLXOEGd+jgAU+QJoQBDGEEY5jAFGYQlXwFc1jAElaGmanMGjZQG/Ita7awgz0cPuzjfWYqc4QTnA35VA/aTK07LZ/qQZv5C599zpHrs885cn2W6CH3jpTwmXvHvvVZGWZ6+2wN3Xr7jAZf3j6l0bv19ikGX94+xfD+vH2K4a38g0+LrxL/bQmfL7OwhTA=
+  </data>
+ </layer>
+ <layer id="26" name="BackGround" width="29" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFMCDqy8AgBsTivqTJUQJCgeaFAXE4FnPxyVECpgLNmwbE07GYi09uFAwsoGYaJNYsaqZBYs2iZhocTc+jABmMlvGjeQIfAADbnCJj
+  </data>
+ </layer>
+ <layer id="27" name="Clutter" width="29" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFyKDdmzw5SsBxPObikyMXTPVlYJgGxNN9qW/2YAKiQP+JEcDiZIaBHDBe5IFYAS1+QoHmhRHA4b7EmYUO4oDy8UCcQAU7cZmFDuYB5ecD8QIq2InLLGIBOXZSCgbCTlj+xIeHe96lJRgt40cBLgAAACVFaQ==
+  </data>
+ </layer>
+ <layer id="29" name="Teleport" width="29" height="20">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRQCx4yDPQLhgFo2AU0AIAAJvdAO4=
+  </data>
+ </layer>
+ <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
+  <object id="201" template="../../../../../../common/maps/obj/enemy.tx" x="213.399" y="128.82">
+   <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Craven Giant|POR", "Island|POR|1", "Mountain|POR|1", "Plains|POR|1", "Island|POR|2", "Mountain|POR|2", "Plains|POR|2", "Storm Crow|ALL", "Wall of Swords|LEA" ] }</property>
+    <property name="enemy" value="Zedruu" />
+    <property name="spawn.Easy" type="bool" value="true" />
+    <property name="spawn.Normal" type="bool" value="true" />
+   </properties>
+  </object>
+  <object id="202" template="../../../../../../common/maps/obj/door_up.tx" x="220.413" y="176.555">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/zedruu/zedruu_f4.tmx" />
+    <property name="teleportObjectId" value="114" />
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,306 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="83">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <layer id="1" name="Background" width="40" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt0DEKwCAQRUHbQK6Qa1t61mAhBIukEXaD82EKK5+2o5QGAJuoQfTp06dPnz59+vTpA8iqbz4/p4+/elv0/V/Tp2/ccZ25+yL+b+Vboqcv524bfW09
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="40" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztme0KgyAUhv07tP+D2o1tlzK23cmuo33d25IWOdOzFPW0eA+8EInxcLLHwEYJ0aw0h0qIu/JnX/Hy7bpQVTP3D3zgA58/ry5n2ecie6aTHO89mflcveTu2RL57H1C7wut+g7F55qfujdHOaZWNJ9rzJ6fk++mpnvt48PnGyvJZ36j1PdrjpXkcz2fWn+536/pOZ/XKL4583MH/vtfvjl+5faz/V8S6uehcvnFrBg/l+SL8XNJvhg/5+SDn8EHP//uDfychg9+Dgv8DD74me7NdTMmxs/DXPgZfg7NGvys1/6w/rjPtSg+Xfq63fbh5gJfWr6lnXvkzhvotrAA
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="50">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFAwmuqzMw3ABiTyxio2AUjAIGhidYxGLp7opRMNKB2wDavU2LgWE7ELdRYMYKTao5h2SwiweVHgXYQfRAO4BGwH6gHQAEDgPtgCEO7g20AwY5sKSwfBXUoY47aAXqeAfWfocBtPsulLal0JzHlDpkFIyCUUAWoLR8pbR8Jwb8ob0VwxL8GmgHUAG8GGgHjIJRMIBgtHwevmC0fKYtkEUbV6vjRuB67oFxEzJAdx+xcvQCQ8l9tdyo8TsY3LeXB+GePYPAPfQCAK1wHpI=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="351.97" y="765.697" width="47.6667" height="46.6667">
+   <properties>
+    <property name="direction" value="right" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/graveyard_crypt/graveyard_5.tmx" />
+   </properties>
+  </object>
+  <object id="47" template="../../../../../../common/maps/obj/gold.tx" x="149.333" y="224.667" />
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="457" y="234" />
+  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="458.5" y="521" />
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="207.069" y="231.808">
+   <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Mox Jet|LEA", "Wall of Bones|LEA" ] }</property>
+    <property name="enemy" value="Master Black Wizard" />
+    <property name="threatRange" type="int" value="40" />
+   </properties>
+  </object>
+  <object id="51" template="../../../../../../common/maps/obj/enemy.tx" x="406.833" y="232.834">
+   <properties>
+    <property name="enemy" value="Geist" />
+    <property name="threatRange" type="int" value="40" />
+   </properties>
+  </object>
+  <object id="52" template="../../../../../../common/maps/obj/enemy.tx" x="404.667" y="520.667">
+   <properties>
+    <property name="enemy" value="Ghost" />
+    <property name="threatRange" type="int" value="40" />
+   </properties>
+  </object>
+  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="306.083" y="85.9167">
+   <properties>
+    <property name="enemy" value="Ancient Vampire" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="401.666" y="379.333">
+   <properties>
+    <property name="enemy" value="Ghoul" />
+    <property name="threatRange" type="int" value="40" />
+   </properties>
+  </object>
+  <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="210.667" y="378">
+   <properties>
+    <property name="enemy" value="Vampire" />
+    <property name="threatRange" type="int" value="40" />
+   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML", "Crovax the Cursed|STH", "Swamp|TMP" ] }</property>
+    </properties>
+  </object>
+  <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="205.333" y="521.333">
+   <properties>
+    <property name="enemy" value="Lich" />
+    <property name="threatRange" type="int" value="40" />
+   <property name="effect">{ "startBattleWithCard": [ "Mirror Universe|LEG|1" ] }</property></properties>
+  </object>
+  <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="414.333" y="664">
+   <properties>
+    <property name="enemy" value="Flesh Abomination" />
+    <property name="threatRange" type="int" value="40" />
+   </properties>
+  </object>
+  <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="179.667" y="663">
+   <properties>
+    <property name="enemy" value="Necrogoyf" />
+    <property name="threatRange" type="int" value="40" />
+   </properties>
+  </object>
+  <object id="59" name="switch" type="dialog" gid="4426" x="434.333" y="484.333" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    "text":"Hmm a big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.", 
+    "options":[ 
+	{ "name":"go away" } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="60" name="switch" type="dialog" gid="4426" x="434.333" y="338.667" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    "text":"Hmm a big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.", 
+    "options":[ 
+	{ "name":"go away" } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="62" name="switch" type="dialog" gid="4426" x="161" y="482.333" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  {
+    "text": "Hmm... A big switch is embedded into the wall.",
+    "options": [
+      {
+        "text": "You hear some loud sounds coming from the north",
+        "name": "flip the switch",
+        "options": [
+          {
+            "action": [ { "deleteMapObject": 65 } ],
+            "name": "ok"
+          }
+        ]
+      },
+      { "name": "go away" }
+    ]
+  }
+
+]</property>
+   </properties>
+  </object>
+  <object id="63" name="switch" type="dialog" gid="4426" x="160.333" y="626.667" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    "text":"Hmm a big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.", 
+    "options":[ 
+	{ "name":"go away" } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="64" name="switch" type="dialog" gid="4426" x="448.667" y="627" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    "text":"Hmm a big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.", 
+    "options":[ 
+	{ "name":"go away" } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="65" template="../../../../../../common/maps/obj/gate.tx" x="304.333" y="226">
+   <properties>
+    <property name="dialog">[
+  {
+    "text":"This gate appears to be locked in place by some mechanism, but you do not see any controls here.",
+    "options":[ { "name":"Time to find them!" } ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="66" name="switch" type="dialog" gid="4426" x="430.667" y="194" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    "text":"Hmm a big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.", 
+    "options":[ 
+	{ "name":"go away" } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="67" name="switch" type="dialog" gid="4426" x="173.667" y="194" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    "text":"Hmm a big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.", 
+    "options":[ 
+	{ "name":"go away" } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="68" template="../../../../../../common/maps/obj/manashards.tx" x="456" y="401.667" />
+  <object id="69" template="../../../../../../common/maps/obj/manashards.tx" x="154" y="505.333" />
+  <object id="70" template="../../../../../../common/maps/obj/booster.tx" x="438.333" y="663.667">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="71" template="../../../../../../common/maps/obj/treasure.tx" x="154.333" y="377.333" />
+  <object id="72" template="../../../../../../common/maps/obj/booster.tx" x="156.667" y="660.333">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="304" y="305">
+   <properties>
+    <property name="enemy" value="Adept Black Wizard" />
+    <property name="threatRange" type="int" value="40" />
+    <property name="waypoints" value="75,74" />
+   </properties>
+  </object>
+  <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="304.333" y="774.333" />
+  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="307.667" y="240.667" />
+  <object id="76" template="../../../../../../common/maps/obj/booster.tx" x="287.667" y="47.6667">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="79" template="../../../../../../common/maps/obj/treasure.tx" x="303.667" y="47.3333" />
+  <object id="80" template="../../../../../../common/maps/obj/gold.tx" x="321" y="46" />
+  <object id="81" name="switch" type="dialog" gid="4426" x="192" y="340" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    "text":"Hmm a big switch is embedded into the wall. Or, was. It seems to have been melted, which would have required enormous heat.", 
+    "options":[ 
+	{ "name":"go away" } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+ <object id="82" template="../../../../../../common/maps/obj/enemy.tx" x="250" y="150"><properties><property name="enemy" value="Mandurang of Shandalar" /><property name="threatRange" type="int" value="100" /><property name="effect">{"startBattleWithCard": ["City of Brass|ARN"]}</property></properties></object></objectgroup>
+</map>

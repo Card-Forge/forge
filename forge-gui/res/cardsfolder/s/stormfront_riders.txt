@@ -8,6 +8,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Hand | ValidCard$ Card.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ You
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | ChangeType$ Creature.YouCtrl | ChangeNum$ 2 | Mandatory$ True
 SVar:NeedsToPlayVar:Z GE2
-SVar:Z:Count$Valid Creature.YouCtrl+cmcLE4+inZoneBattlefield
+SVar:Z:Count$Valid Creature.YouCtrl+cmcLE4
 AI:RemoveDeck:Random
 Oracle:Flying\nWhen Stormfront Riders enters, return two creatures you control to their owner's hand.\nWhenever Stormfront Riders or another creature is returned to your hand from the battlefield, create a 1/1 white Soldier creature token.

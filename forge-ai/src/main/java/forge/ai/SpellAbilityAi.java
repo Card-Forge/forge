@@ -65,7 +65,6 @@ public abstract class SpellAbilityAi {
 
     protected AiAbilityDecision canPlayWithoutRestrict(final Player ai, final SpellAbility sa) {
         final Card source = sa.getHostCard();
-        final Cost cost = sa.getPayCosts();
 
         if (sa.hasParam("AILogic")) {
             final String logic = sa.getParam("AILogic");
@@ -89,6 +88,7 @@ public abstract class SpellAbilityAi {
         }
 
         // needs to be after API logic because needs to check possible X Cost
+        final Cost cost = sa.getPayCosts();
         if (cost != null && !willPayCosts(ai, sa, cost, source)) {
             return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
         }
@@ -247,7 +247,7 @@ public abstract class SpellAbilityAi {
      */
     public AiAbilityDecision chkDrawbackWithSubs(Player aiPlayer, AbilitySub ab) {
         final AbilitySub subAb = ab.getSubAbility();
-        AiAbilityDecision decision = SpellApiToAi.Converter.get(ab).chkDrawback(ab, aiPlayer);
+        AiAbilityDecision decision = SpellApiToAi.Converter.get(ab).chkDrawback(aiPlayer, ab);
         if (!decision.willingToPlay()) {
             return decision;
         }
@@ -262,7 +262,7 @@ public abstract class SpellAbilityAi {
     /**
      * Handles the AI decision to play a sub-SpellAbility
      */
-    public AiAbilityDecision chkDrawback(final SpellAbility sa, final Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(final Player aiPlayer, final SpellAbility sa) {
         // sub-SpellAbility might use targets too
         if (sa.usesTargeting()) {
             // no Candidates, no adding to Stack
@@ -365,14 +365,14 @@ public abstract class SpellAbilityAi {
      * <p>
      * Evaluated costs are: life, discard, sacrifice and counter-removal
      */
-    protected boolean willPayCosts(final Player ai, final SpellAbility sa, final Cost cost, final Card source) {
-        if (!ComputerUtilCost.checkLifeCost(ai, cost, source, 4, sa)) {
+    protected boolean willPayCosts(final Player payer, final SpellAbility sa, final Cost cost, final Card source) {
+        if (!ComputerUtilCost.checkLifeCost(payer, cost, source, 4, sa)) {
             return false;
         }
-        if (!ComputerUtilCost.checkDiscardCost(ai, cost, source, sa)) {
+        if (!ComputerUtilCost.checkDiscardCost(payer, cost, source, sa)) {
             return false;
         }
-        if (!ComputerUtilCost.checkSacrificeCost(ai, cost, source, sa)) {
+        if (!ComputerUtilCost.checkSacrificeCost(payer, cost, source, sa)) {
             return false;
         }
         if (!ComputerUtilCost.checkRemoveCounterCost(cost, source, sa)) {
@@ -381,7 +381,7 @@ public abstract class SpellAbilityAi {
         return true;
     }
 
-    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+    public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         final Card source = sa.getHostCard();
         final String aiLogic = sa.getParam("UnlessAI");
         boolean payNever = "Never".equals(aiLogic);
@@ -389,7 +389,7 @@ public abstract class SpellAbilityAi {
 
         if (payNever) { return false; }
 
-        // AI will only pay when it's not already payed and only opponents abilities
+        // AI will only pay when it's not already paid and only opponents abilities
         if (alreadyPaid || (payers.size() > 1 && isMine)) {
             return false;
         }
@@ -400,7 +400,7 @@ public abstract class SpellAbilityAi {
                 && (isMine || ComputerUtilCost.checkDiscardCost(payer, cost, source, sa));
     }
 
-    public List<OptionalCostValue> chooseOptionalCosts(SpellAbility chosen, Player player, List<OptionalCostValue> optionalCostValues) {
+    public List<OptionalCostValue> chooseOptionalCosts(Player payer, SpellAbility chosen, List<OptionalCostValue> optionalCostValues) {
         List<OptionalCostValue> chosenOptCosts = Lists.newArrayList();
         Cost costSoFar = chosen.getPayCosts().copy();
 
@@ -420,7 +420,7 @@ public abstract class SpellAbilityAi {
                 }
             }
 
-            if (ComputerUtilCost.canPayCost(fullCostSa, player, false)) {
+            if (ComputerUtilCost.canPayCost(fullCostSa, payer, false)) {
                 chosenOptCosts.add(opt);
                 costSoFar.add(opt.getCost());
             }

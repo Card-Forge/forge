@@ -1,0 +1,270 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="85">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{"startBattleWithCard": ["Serra's Sanctum|USG", "Serra's Blessing|WTH", "Greater Realm of Preservation|LEG", "Serra Advocate|UDS"]}</property>
+  <property name="respawnEnemies" type="bool" value="true" />
+ </properties>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <layer id="1" name="Background" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt2CEOwCAQAEFsXU19X43uU0lVP3DlDjJiHIENkJDQj9Y6AADAxu6z1jww03tvo2T1V5pHv379ces+12fF/tX3P6t/9ruT9c5V3X/9+qv0R43Rr1+/fv3/90f+K0SreEaV6d+/fwCiAV10
+  </data>
+ </layer>
+ <layer id="6" name="Floor" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztmEEOwjAMBPOD5AdVBR9tq/Ir4Gtw4YbAbtdxDjNSbpZ3VCWy1VIAAAAAAAAA4BtLLWUVnq329Z+att8s7vePj//+/m6Pdvzcaq7/2VxVn6xc/HNz8c/NVftb59JV7H9pmjnnnUsqf1XevfPc8c7Bp+iejXr/e+eO7L8Y3tzI/qqaCPC310SAv70mAvztNR68+9uvvUtVE7m/9Ua1v3l2vLP/KCL2NwtZb1MF/jZe3r59Qg==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt1zEKgDAMQFG9gHRxE3Hw4N7K60hxEJycjLHvQenYP4Wm6wAAvmMfogsA8pnKec8ltgMAnrr/+zPuAdt4nazWProA2hU996Lfh1b9YX9fErdX+mPpj1PnT+03f+K80X8AnvgJTA==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="48" height="48">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmEkOgzAMRbkAXfcgLFDhpB24Rg9SqeU4bVRQqRXHPyEDEo70V4nsp0z+SXOoqkalUqlUKpUqofqPXqBMQ8d2mfhPE1fs1ir/LviHuqougK71l+sMjr/V+c8ysk655nUv/Oj9OU78T3C83p/Kr/zpzmWXiR+5H2xnXeJqM/Ej8W1rFcqP1leuPsfiH6aYHM9c32n80H3LxeH8yZKN8xompsTD5V3u246MoX0h8+Bim+ObminVy5HJu+RpyRjaZ+NH8s5j6PldcyY5/vvxJ4Q/JKfyb4Pf902Sij/1W8eWMyb/Gg9hq9umSd7Bdz8g/D3Jj7wTXPmRnDH5ERbl/++jdwD3/8D5kNL8XDyffGv4Xf7NNWdc3Zfe7w+PtVz6N9fdKfm3VN5fmluJDfVv1LvFblLuFP6tRIvpf0q0UP8T8j4MfV+W/uvd6v+n8sfVG+B1QxQ=
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt17EJACAQA8Bs8Buro+sC1o94B+lTBZIAAAD8bVQyT1Z1NwEAAABu/Hegi/3hBRuEwwT/
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="47" template="../../../../../../common/maps/obj/gold.tx" x="422.333" y="462">
+   <properties>
+    <property name="reward">[
+  {
+    "type": "gold",
+    "count": 180,
+    "addMaxCount": 40
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="314" y="468.333">
+   <properties>
+    <property name="reward">[
+  {
+    "type": "gold",
+    "count": 180,
+    "addMaxCount": 40
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="532.667" y="497.167" width="16.6667" height="16">
+   <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Mox Pearl|LEA", "Wall of Swords|LEA" ] }</property>
+    <property name="enemy" value="Master White Wizard" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="81,77,76,75,78,83,84,83,79,80,81,82" />
+   </properties>
+  </object>
+  <object id="55" template="../../../../../../common/maps/obj/gate.tx" x="368" y="640">
+   <properties>
+    <property name="dialog">[
+	{
+		"name": "",
+		"text": "You come upon a gate.",
+		"loctext": "",
+		"action": [
+			{ "advanceMapFlag": "intro" }
+		],
+		"options":
+			[
+				{
+					"name": "Serra, I've done as you asked! It's time to end this!",
+					"action": [ { "deleteMapObject": 55 } ],
+					"condition": [
+						{
+							"getMapFlag": {
+								"key": "enemiesDefeated",
+								"op": "&gt;=",
+								"val": 4
+							}
+						},
+						{
+                            "checkQuestFlag": "mainQuest",
+                            "not": true
+                        }
+					],
+					"text": "With an extremely loud blast, the gate burst open, leaving only ashes in your path. You are now free to pass.",
+					"options": [ { "name": "(continue)" } ]
+				},
+					{
+                	    "name": "Serra, I've done as you asked! It's time to end this!",
+                		"action": [ { "deleteMapObject": 55 } ],
+                		"condition": [
+                			{
+                				"getMapFlag": {
+                					"key": "enemiesDefeated",
+                					"op": "&gt;=",
+                					"val": 4
+                				}
+                			},
+                			{
+                                "checkQuestFlag": "Ch1WhiteCastleComplete",
+                                "not": true
+                            },
+                            {
+                                "checkQuestFlag": "mainQuest"
+                            }
+                		],
+                		"text": "With an extremely loud blast, the gate burst open, leaving only ashes in your path. You are now free to pass.",
+                		"options": [ { "name": "(continue)" } ]
+                	},
+				{
+					"name": "You knock on the door",
+					"condition": [ { "checkMapFlag": "intro" } ],
+					"text": "YOU ARE NOT WORTHY, BEGONE!",
+					"loctext": "",
+					"options": [ { "name": "(continue)" } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="60" template="../../../../../../common/maps/obj/entry_up.tx" x="357" y="768" width="38" height="16">
+   <properties>
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+  <object id="65" template="../../../../../../common/maps/obj/entry_down.tx" x="353" y="543.5" width="46" height="21.5">
+   <properties>
+    <property name="teleport" value="../common/maps/map/main_story/castles/white_castle_f1.tmx" />
+   </properties>
+  </object>
+  <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="674.667" y="597.666">
+   <properties>
+    <property name="deckOverride" value="" />
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Hazduhr the Abbot" />
+    <property name="pursueRange" type="int" value="30" />
+    <property name="threatRange" type="int" value="30" />
+   <property name="effect">{"startBattleWithCard": ["Hazduhr the Abbot|HML", "Serra's Hymn|USG", "Serra Inquisitors|HML", "Doubtless One|ONS", "Beloved Chaplain|ODY"]}</property>
+    </properties>
+  </object>
+  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="671.667" y="411.333">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Selenia, Dark Angel" />
+    <property name="threatRange" type="int" value="30" />
+   <property name="effect">{"startBattleWithCard": ["Salt Flats|TMP", "Selenia, Dark Angel|TMP", "Sword of the Chosen|STH", "Haunted Angel|APC"]}</property>
+    </properties>
+  </object>
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="365.5" y="229.667">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Sun Giant" />
+    <property name="pursueRange" type="int" value="30" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="82.5" y="606.667">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Archangel Radiant" />
+    <property name="threatRange" type="int" value="30" />
+   <property name="effect">{"startBattleWithCard": ["Serra Aviary|HML", "Knighthood|ULG", "Serra Paladin|HML", "Sustainer of the Realm|ULG", "Serra Zealot|USG"]}</property>
+    </properties>
+  </object>
+  <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="84" y="405.667">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Reya Dawnbringer" />
+    <property name="threatRange" type="int" value="40" />
+   <property name="effect">{"startBattleWithCard": ["Reya Dawnbringer|INV", "Worry Beads|MMQ", "Millikin|ODY", "Angelic Renewal|WTH"]}</property>
+    </properties>
+  </object>
+  <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="187.167" y="500.333">
+   <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Mox Pearl|LEA", "Wall of Swords|LEA" ] }</property>
+    <property name="enemy" value="Master White Wizard" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="83,84,83,79,80,81,82,81,77,76,75,78" />
+   </properties>
+  </object>
+  <object id="74" template="../../../../../../common/maps/obj/enemy.tx" x="400" y="647">
+   <properties>
+    <property name="dialog">[
+  {
+    "text": "Welcome {var=player_name}, Serra has been waiting eagerly for this moment.",
+    "options": [
+      {
+        "name": "Is that so? I guess you wouldn't mind opening that gate in front of me?",
+        "text": "I'm afraid I'm not allowed to do that, I am a mere servant of the mighty Serra, ruler of Angels.",
+        "options": [
+          {
+            "name": "What do I need to do to get passed though this gate?",
+            "text": "To show you are worthy, you must prove your strength by defeating at least four of the five enemies lurking within this dungeon to be worthy of an audience with my illustrious master, who holds dominion over this realm of the holy.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.",
+            "options": [
+              {
+                "name": "I'll show my worth, just make sure to open the gate when I do defeat your challengers.",
+                "text": "Leave"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Angel Warrior" />
+   </properties>
+  </object>
+  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="56" y="702.667" />
+  <object id="76" template="../../../../../../common/maps/obj/waypoint.tx" x="692.667" y="704" />
+  <object id="77" template="../../../../../../common/maps/obj/waypoint.tx" x="514" y="704" />
+  <object id="78" template="../../../../../../common/maps/obj/waypoint.tx" x="220.667" y="703.333" />
+  <object id="79" template="../../../../../../common/maps/obj/waypoint.tx" x="224.667" y="350.667" />
+  <object id="80" template="../../../../../../common/maps/obj/waypoint.tx" x="512" y="358.667" />
+  <object id="81" template="../../../../../../common/maps/obj/waypoint.tx" x="516.667" y="496" />
+  <object id="82" template="../../../../../../common/maps/obj/waypoint.tx" x="688.667" y="498" />
+  <object id="83" template="../../../../../../common/maps/obj/waypoint.tx" x="220.667" y="496.667" />
+  <object id="84" template="../../../../../../common/maps/obj/waypoint.tx" x="47.3333" y="500" />
+ </objectgroup>
+</map>

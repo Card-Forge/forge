@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="54">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzFlN0KgCAMRr3N9+n3rbLoRTPqcdrASMS1RWoXB4Rcx28rbaWUDdiA3XFEniMdMOl7H8VK1HPvG2E9MGf76qUyxGpTeZ/65mfGfUbLesx5JbNCdy+caVhnHOG8pD37in+Gkl4f9M7gb3/wlspcA43j8pbITH3bOd2YddH0P5XLLbm3cril93Rqt9Sb0s3NNpf7TdaU92jMewIfOqPa
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJytld0OwUAQhacX2HoAJC68AQnB0yDxSBJBvAYSXKifh/LPTNrGZM1ut2WSE9maPd8c29Y0DzBNqTGqW4CvqnoAtUhL1ApVQpVRFe/TQ+u0vE5BZlKt0W+D2nqfaws2A+8hH1eZeDsF8PJD7ZXc41JtL7mH86AI0PdDPTOyySuI/OjT5EF9nMc18OU9TUuenuZhmn8o8H7JrHNjn4CdYWDJyvfo592y5LXlyCLX7DfsO6n/sk3nLbHvqKNKN8NBhXu4yOeR4T5zzU9Mk39SnXPy9aQzT8N0fTdQ2TL/kjMuU14T28ZsaLku6H1lcp1jLLDpPh1F34+E/XXGnmj/McS+MX9bZqpext9X55JmeXM/zTFn6ziz/kxKeW3cN3fBlwQ=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy9VF0OwUAQ/qhqncEBpCKa4I1rOAJCcAuevDkIj+IOxWHEI1aaSWeHrTZsv2Q6szPd+XZmf4DicC/bzV9yYl12dP8mUB/n7XereFio9VAB6ilyrPw23yQ3Fxh3kjzHqp536KbzpsV5rqnap5mSXQPYKxkpzm4L6LXieOQB/SYwaGbn5fO5TWjXgJXiXAdx/gmrc+4DW7W+sxfrpZ+dN/SSMbc5Ik/XpjjP+42X1vySiyHvSdTzK+/V1c8gny/375OfbIrT+BuvXGNk6LnJH4r+0zgvL+/5gtl0bqSfbNJZzxUH77l8A1715Lnrtxy8EvSmU/+pBvkG2wLnLYpT8haJf/E+ARjrRkU=
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFowA7mKzOwDBFHcIW12FgkNBByMlrMTAoaBFvFrJ+dLPIAXco1D/SAK4wxxcv1IinUTAKRsHgAwB69AbC
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="208" y="272"/>
+  <object id="41" template="../../../../../../common/maps/obj/shop.tx" x="64" y="115">
+   <properties>
+    <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,
+    Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
+    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
+    <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
+   </properties>
+  </object>
+  <object id="42" template="../../../../../../common/maps/obj/shop.tx" x="113" y="115">
+   <properties>
+    <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,
+    Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
+    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
+    <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
+   </properties>
+  </object>
+  <object id="43" template="../../../../../../common/maps/obj/shop.tx" x="161" y="163">
+   <properties>
+    <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,
+    Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
+    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
+    <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
+   </properties>
+  </object>
+  <object id="44" template="../../../../../../common/maps/obj/shop.tx" x="257" y="162">
+   <properties>
+    <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,
+    Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
+    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
+    <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
+   </properties>
+  </object>
+  <object id="45" template="../../../../../../common/maps/obj/shop.tx" x="304" y="162">
+   <properties>
+    <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,
+    Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
+    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
+    <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
+   </properties>
+  </object>
+  <object id="46" template="../../../../../../common/maps/obj/shop.tx" x="367" y="162">
+   <properties>
+    <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,
+    Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
+    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
+    <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
+   </properties>
+  </object>
+  <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="214" y="114"/>
+  <object id="48" template="../../../../../../common/maps/obj/shop.tx" x="160" y="96">
+   <properties>
+    <property name="commonShopList" value="Mountain"/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../../../common/maps/obj/shardtrader.tx" x="335" y="81">
+   <properties>
+    <property name="signXOffset" type="float" value="-16"/>
+    <property name="signYOffset" type="float" value="-8"/>
+   </properties>
+  </object>
+  <object id="51" template="../../../../../../common/maps/obj/quest.tx" x="353" y="98" width="33" height="16">
+   <properties>
+    <property name="questtype" value="mountain_town_tribal"/>
+   </properties>
+  </object>
+  <object id="52" template="../../../../../../common/maps/obj/shop.tx" x="304" y="97">
+   <properties>
+    <property name="commonShopList" value="Wolf4Red,Goblin,Devil,Dwarf,Dragon,
+    Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
+    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
+    <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
+   </properties>
+  </object>
+  <object id="53" template="../../../../../../common/maps/obj/shop.tx" x="240" y="97">
+   <properties>
+    <property name="commonShopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,
+    GammaBoosterPackShop,DeltaBoosterPackShop,RedBoosterPackShop,Wolf4Red,Goblin,Devil,Dwarf,Dragon,
+    Sliver2Red,Knight4Red,Soldier4Red,Minotaur,Shaman,Dinosaur4Red,Ogre4Red,Giant"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
+    <property name="rareShopList" value="Gruul,Izzet,Rakdos,Boros,Creature6Red,Multicolor,Land4Red,PhyrexianRed"/>
+    <property name="uncommonShopList" value="Creature2Red,Creature,Red"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

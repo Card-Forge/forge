@@ -2,7 +2,7 @@ Name:Basri Ket
 ManaCost:1 W W
 Types:Legendary Planeswalker Basri
 Loyalty:3
-A:AB$ PutCounter | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on up to one target creature. It gains indestructible until end of turn.
+A:AB$ PutCounter | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on up to one target creature. It gains indestructible until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Indestructible
 A:AB$ Effect | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Triggers$ TrigAttack | SpellDescription$ Whenever one or more nontoken creatures attack this turn, create that many 1/1 white Soldier creature tokens that are tapped and attacking.
 SVar:TrigAttack:Mode$ AttackersDeclared | ValidAttackers$ Creature.!token | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ Whenever one or more nontoken creatures attack this turn, create that many 1/1 white Soldier creature tokens that are tapped and attacking.

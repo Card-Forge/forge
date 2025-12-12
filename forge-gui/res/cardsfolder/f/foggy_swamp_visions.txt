@@ -1,0 +1,10 @@
+Name:Foggy Swamp Visions
+ManaCost:1 B B
+Types:Sorcery
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Activator$ You | Type$ Spell | Cost$ Waterbend<X> | EffectZone$ All | Description$ As an additional cost to cast this spell, waterbend {X}. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)
+A:SP$ ChangeZone | Announce$ X | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | TgtPrompt$ Choose X target creature cards from graveyards | TargetMin$ X | TargetMax$ X | SubAbility$ DBClone | RememberChanged$ True | SpellDescription$ Exile X target creature cards from graveyards. For each creature card exiled this way, create a token that's a copy of it. At the beginning of your next end step, sacrifice those tokens.
+SVar:DBClone:DB$ CopyPermanent | Defined$ Remembered | NumCopies$ 1 | AtEOT$ YourSacrifice | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+DeckHas:Ability$Token|Graveyard
+Oracle:As an additional cost to cast this spell, waterbend {X}. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)\nExile X target creature cards from graveyards. For each creature card exiled this way, create a token that's a copy of it. At the beginning of your next end step, sacrifice those tokens.

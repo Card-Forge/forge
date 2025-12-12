@@ -1,0 +1,268 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="85">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{"startBattleWithCard": ["Shivan Gorge|USG", "Dormant Volcano|VIS", "Wall of Lava|ICE", "Grim Lavamancer|TOR", "Gorilla Shaman|ALL", "Task Mage Assembly|PCY", "Havoc|TMP", "Scald|USG"]}</property>
+  <property name="respawnEnemies" type="bool" value="true" />
+ </properties>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <layer id="1" name="Background" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt2LEJACEQRUFTsyvhqrZeuRrc049MMJksDxUER29tAAAAXOx9subATt+9rXKqP2mOfv369etfn7fz3Tn1zqXuv379Kf1Va/Tr169f///9lf8K1RLPKJn++/snqiFdMg==
+  </data>
+ </layer>
+ <layer id="6" name="Floor" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztmEEOwjAMBPOD5AdVBR9tq/Ir4Gtw4YbAbtdxDjNSbpZ3VCWy1VIAAAAAAAAA4BtLLWUVnq329Z+att8s7vePj//+/m6Pdvzcaq7/2VxVn6xc/HNz8c/NVftb59JV7H9pmjnnnUsqf1XevfPc8c7Bp+iejXr/e+eO7L8Y3tzI/qqaCPC310SAv70mAvztNR68+9uvvUtVE7m/9Ua1v3l2vLP/KCL2NwtZb1MF/jZe3r59Qg==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt1zEKgDAMQFG9gHRxE3Hw4J7JE0lx0NHJGPselI79U2i6DgDgO/YhugAgn6mc91xiOwDgqfrv38brZNwD7v1ZrX10AbQreu5Fvw+t+sP+viRur/TH0h+nzp/ab/7EeaP/AL1iC1I=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="48" height="48">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmNsNwyAMRbNA+t09kiaT9jVJ52izUIsaVGphfEN4RIqR7lcs+4gAvtAfmqZXqVQqlUqlyqjxoxcoM9DYoRD/aeZKPTrl3wX/vW2aC6Br++U6g/G3tvxeRv5TqXndCz96fk4z/xOM1/NT+ZU/374cCvEj54Nvr0tcXSF+JL/vX8Xyo/2V68+p+O9zTo7H9neaP3bdcnk4f+KycV7D5JR4uLruuh1IDP0WMw8hNpvf9EypX05MXZenIzH0m48fqWtj6P5dsyc5/sfxJ4Q/pqbyb4N/6Z0kF3/uu46vZkr+NR7C17fNkLzD0vWA8I+kPnJPCNVHaqbkR1iU//8bPQO49wfOh9Tm5/ItqbeGP+TfQnPG9X3p/k59iMvmO88tW+jslPxbLu8vza3Ehvo335ylHFLtHP6txkjpf2qMWP8Tcz+MvV/Wfuvd6vun8qfVG7JpOnI=
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt17EJACAQA8Bs8Buro+sC1o94B+lTBZIAAAD8bVQyT1Z1NwEAAABu/Hegi/3hBRuEwwT/
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="47" template="../../../../../../common/maps/obj/gold.tx" x="432.5" y="463">
+   <properties>
+    <property name="reward">[
+  {
+    "type": "gold",
+    "count": 180,
+    "addMaxCount": 40
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="304.5" y="466">
+   <properties>
+    <property name="reward">[
+  {
+    "type": "gold",
+    "count": 180,
+    "addMaxCount": 40
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="223.57" y="537.245">
+   <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Mox Ruby|LEA", "Wall of Fire|LEA" ] }</property>
+    <property name="enemy" value="Master Red Wizard" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="76,75,76,84,81,82,83,82,79,80,78,77" />
+   </properties>
+  </object>
+  <object id="55" template="../../../../../../common/maps/obj/gate.tx" x="367.698" y="638.559" width="17" height="16">
+   <properties>
+    <property name="dialog">[
+	{
+		"name": "",
+		"text": "You come upon a gate.",
+		"loctext": "",
+		"action": [
+			{ "advanceMapFlag": "intro" }
+		],
+		"options":
+			[
+				{
+					"name": "Jaya, I've done as you asked! It's time to end this!",
+					"action": [ { "deleteMapObject": 55 } ],
+					"condition": [
+						{
+							"getMapFlag": {
+								"key": "enemiesDefeated",
+								"op": "&gt;=",
+								"val": 4
+							}
+						},
+						{
+                            "checkQuestFlag": "mainQuest",
+                            "not": true
+                        }
+					],
+					"text": "With a gust of red flames, the door burns away, leaving only ashes in your path. You are now free to pass.",
+					"options": [ { "name": "(continue)" } ]
+				},
+				{
+                	"name": "Lathliss, I've done as you asked! It's time to end this!",
+                	"action": [ { "deleteMapObject": 55 } ],
+                	"condition": [
+                		{
+                    		"getMapFlag": {
+                				"key": "enemiesDefeated",
+                				"op": "&gt;=",
+                				"val": 4
+                			}
+                		},
+                		{
+                            "checkQuestFlag": "Ch1RedCastleComplete",
+                            "not": true
+                        },
+                        {
+                            "checkQuestFlag": "mainQuest"
+                        }
+                	],
+                	"text": "With a gust of red flames, the door burns away, leaving only ashes in your path. You are now free to pass.",
+                	"options": [ { "name": "(continue)" } ]
+                },
+				{
+					"name": "You knock on the door",
+					"condition": [ { "checkMapFlag": "intro" } ],
+					"text": "YOU ARE NOT WORTHY, BEGONE!",
+					"loctext": "",
+					"options": [ { "name": "(continue)" } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="60" template="../../../../../../common/maps/obj/entry_up.tx" x="357" y="768" width="38" height="16">
+   <properties>
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+  <object id="65" template="../../../../../../common/maps/obj/entry_down.tx" x="354" y="542.5" width="44" height="23.5">
+   <properties>
+    <property name="teleport" value="../common/maps/map/main_story/castles/red_castle_f1.tmx" />
+   </properties>
+  </object>
+  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="81.5" y="606">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Latulla, Keldon Overseer" />
+    <property name="threatRange" type="int" value="40" />
+   <property name="effect">{"startBattleWithCard": ["Latulla, Keldon Overseer|PCY", "Keldon Necropolis|INV", "Citadel of Pain|PCY", "Copper-Leaf Angel|PCY", "Sulfuric Vortex|SCG"]}</property>
+    </properties>
+  </object>
+  <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="649.5" y="599">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Márton Stromgald" />
+    <property name="threatRange" type="int" value="30" />
+   <property name="effect">{"startBattleWithCard": ["M\u00e1rton Stromgald|ICE", "Agent of Stromgald|ALL", "Stromgald Cabal|ICE", "Knight of Stromgald|ICE", "Ebony Horse|3ED"]}</property>
+    </properties>
+  </object>
+  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="660" y="409.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Jeska, Warrior Adept" />
+    <property name="threatRange" type="int" value="30" />
+   <property name="effect">{"startBattleWithCard": ["Shivan Oasis|INV", "Jeska, Warrior Adept|JUD", "Fires of Yavimaya|INV", "Overabundance|INV", "Narcissism|TOR"]}</property>
+    </properties>
+  </object>
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="368.5" y="228.091">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Fire Giant" />
+    <property name="threatRange" type="int" value="20" />
+   <property name="effect">{ "startBattleWithCard": [ "Mountain|INV|1", "Mountain|INV|2", "Mountain|INV|3", "Mountain|INV|4", "Loafing Giant|INV" ] }</property></properties>
+  </object>
+  <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="78.5" y="405.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Eron the Relentless" />
+    <property name="threatRange" type="int" value="20" />
+   <property name="effect">{"startBattleWithCard": ["Koskun Keep|HML", "Reflecting Pool|TMP", "Eron the Relentless|HML", "Serrated Arrows|HML"]}</property>
+    </properties>
+  </object>
+  <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="520.254" y="498.533">
+   <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Mox Ruby|LEA", "Wall of Fire|LEA" ] }</property>
+    <property name="enemy" value="Master Red Wizard" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="83,82,79,80,78,77,76,75,84,81,82" />
+   </properties>
+  </object>
+  <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="401.5" y="655">
+   <properties>
+    <property name="dialog">[
+  {
+    "text": "Welcome {var=player_name}, the legendary Jaya Ballard has been waiting eagerly for this moment.",
+    "options": [
+      {
+        "name": "Is that so? I guess you wouldn't mind opening that gate in front of me?",
+        "text": "I'm afraid I'm not allowed to do that, I am only a humble servant of the legendary Jaya Ballard, master of fire.",
+        "options": [
+          {
+            "name": "What do I need to do to get passed though this gate?",
+            "text": "To show you are worthy, you must prove your strength by defeating at least four of Jaya's five lieutenants lurking within this palace in order to be worthy of an audience with my illustrious master, who holds dominion over this realm of flames.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.",
+            "options": [
+              {
+                "name": "I'll show my worth, just make sure to open the gate when I defeat your challengers.",
+                "text": "Leave"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Dragon" />
+   <property name="effect">{ "startBattleWithCard": [ "Fire Diamond|MIR" ] }</property>
+    </properties>
+  </object>
+  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="54.5" y="495" />
+  <object id="76" template="../../../../../../common/maps/obj/waypoint.tx" x="223.5" y="498.5" />
+  <object id="77" template="../../../../../../common/maps/obj/waypoint.tx" x="224.5" y="701" />
+  <object id="78" template="../../../../../../common/maps/obj/waypoint.tx" x="52.5" y="703" />
+  <object id="79" template="../../../../../../common/maps/obj/waypoint.tx" x="511" y="703" />
+  <object id="80" template="../../../../../../common/maps/obj/waypoint.tx" x="687" y="703.5" />
+  <object id="81" template="../../../../../../common/maps/obj/waypoint.tx" x="510.5" y="348.5" />
+  <object id="82" template="../../../../../../common/maps/obj/waypoint.tx" x="513.5" y="497" />
+  <object id="83" template="../../../../../../common/maps/obj/waypoint.tx" x="685" y="497" />
+  <object id="84" template="../../../../../../common/maps/obj/waypoint.tx" x="228.5" y="352.5" />
+ </objectgroup>
+</map>

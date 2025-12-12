@@ -1,0 +1,47 @@
+[metadata]
+Name=Sliver Queen
+[Main]
+2 Tundra|LEA
+2 Bayou|LEA
+2 Plateau|LEA
+2 Scrubland|LEA
+2 Badlands|LEA
+2 Underground Sea|LEA
+2 Savannah|LEA
+2 Tropical Island|LEA
+2 Volcanic Island|LEB
+2 Taiga|LEA
+2 Island|LEA
+2 Swamp|LEA
+2 Mountain|LEA
+2 Forest|LEA
+2 Plains|LEA
+2 Sliver Queen|STH
+2 Sliver Overlord|SCG
+2 Shifting Sliver|LGN
+2 Crypt Sliver|LGN
+2 Clot Sliver|TMP
+4 Synapse Sliver|LGN
+4 Crystalline Sliver|STH
+4 Brood Sliver|LGN
+4 Blade Sliver|LGN
+4 Essence Sliver|LGN
+4 Magma Sliver|LGN
+4 Muscle Sliver|TMP
+4 Plated Sliver|LGN
+4 Ward Sliver|LGN
+4 Winged Sliver|TMP
+2 Heart Sliver|TMP
+2 Horned Sliver|TMP
+2 Toxin Sliver|LGN
+2 Talon Sliver|TMP
+2 Root Sliver|LGN
+4 Vindicate|APC
+4 Harsh Mercy|ONS
+2 Coat of Arms|EXO
+
+[StartInBattle_Reference]
+1 City of Brass|ARN
+1 Metallic Sliver|TMP
+1 Primitive Etchings|SCG
+1 Reflecting Pool|TMP

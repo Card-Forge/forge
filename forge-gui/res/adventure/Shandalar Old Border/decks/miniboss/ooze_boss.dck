@@ -1,0 +1,25 @@
+[metadata]
+Name=Slime Mother
+[Main]
+4 Mountain|PALP
+4 Swamp|PALP
+4 Forest|PALP
+4 Sulfurous Springs|ICE
+4 Karplusan Forest|ICE
+4 Ancient Ooze|SCG
+4 Chaotic Goo|TMP
+4 Consumptive Goo|SCG
+2 Utopia Tree|INV
+4 Creeping Mold|VIS
+4 Smoldering Tar|INV
+4 Caustic Tar|ODY
+4 Misfortune|ALL
+2 Weird Harvest|ONS
+2 Terror|LEA
+2 Lightning Bolt|LEA
+4 Rancor|ULG
+
+[StartInBattle_Reference]
+1 Mountain|PALP
+1 Forest|PALP
+1 Swamp|PALP

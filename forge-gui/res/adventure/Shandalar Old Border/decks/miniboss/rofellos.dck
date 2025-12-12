@@ -1,0 +1,25 @@
+[metadata]
+Name=Rofellos
+[Main]
+20 Forest|ICE
+4 Priest of Titania|USG
+4 Wellwisher|ONS
+4 Wirewood Channeler|LGN
+4 Timberwatch Elf|LGN
+4 Elvish Champion|7ED
+4 Sylvan Messenger|APC
+2 Taunting Elf|ONS
+2 Voice of the Woods|ONS
+2 Eladamri, Lord of Leaves|TMP
+2 Slate of Ancestry|ONS
+2 Calming Verse|PCY
+2 Seeds of Innocence|MIR
+4 Tribal Unity|ONS
+
+[StartInBattle_Reference]
+1 Forest|ICE
+1 Wirewood Lodge|ONS
+1 Rofellos, Llanowar Emissary|UDS
+1 Ivy Seer|UDS
+1 Heedless One|ONS
+1 Braidwood Cup|UDS

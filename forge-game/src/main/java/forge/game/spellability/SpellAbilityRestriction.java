@@ -155,10 +155,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setActivateCardsInHand2(Integer.parseInt(params.get("OrActivationCardsInHand")));
         }
 
-        if (params.containsKey("ActivationChosenColor")) {
-            this.setColorToCheck(params.get("ActivationChosenColor"));
-        }
-
         if (params.containsKey("IsPresent")) {
             this.setIsPresent(params.get("IsPresent"));
             if (params.containsKey("PresentCompare")) {
@@ -404,11 +400,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
         }
 
-        if (getColorToCheck() != null) {
-            if (!sa.getHostCard().hasChosenColor(getColorToCheck())) {
-                return false;
-            }
-        }
         if (isHellbent()) {
             if (!activator.hasHellbent()) {
                 return false;
@@ -549,6 +540,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
         } else if (sa.isExhaust()) {
             if (sa.getActivationsThisGame() > 0 && !StaticAbilityExhaust.anyWithExhaust(activator)) {
+                return false;
+            }
+        } else if (sa.isPowerUp()) {
+            if (sa.getActivationsThisGame() > 0) {
                 return false;
             }
         }

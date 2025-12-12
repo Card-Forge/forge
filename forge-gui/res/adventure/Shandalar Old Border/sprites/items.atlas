@@ -1,0 +1,921 @@
+items.png
+size: 480,1008
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none      
+c
+  xy: 368,80
+  size: 16, 16
+b
+  xy: 384,80
+  size: 16, 16
+r
+  xy: 368,96
+  size: 16, 16
+g
+  xy: 384,96
+  size: 16, 16
+u
+  xy: 368,112
+  size: 16, 16
+w
+  xy: 384,112
+  size: 16, 16    
+CardBack 
+  xy: 0, 0
+  size: 48, 64
+Gold 
+  xy: 48, 0
+  size: 16, 16    
+Shards
+  xy: 32, 768
+  size: 16, 16    
+Life 
+  xy: 48, 16
+  size: 16, 16            
+Mana 
+  xy: 48, 32
+  size: 16, 16        
+Deck 
+  xy: 48, 48
+  size: 16, 16  
+ExitToWorldMap 
+  xy: 48, 64
+  size: 16, 16
+MovementSpeed 
+  xy: 48, 80
+  size: 16, 16
+VS
+  xy: 208, 928
+  size: 16, 16
+AWARD
+  xy: 144, 496
+  size: 16, 16
+Item 
+  xy: 0, 64
+  size: 16, 16  
+Refresh 
+  xy: 0, 80
+  size: 16, 16  
+Status 
+  xy: 16, 64
+  size: 16, 16  
+Exit 
+  xy: 16, 80
+  size: 16, 16  
+Menu 
+  xy: 32, 64
+  size: 16, 16  
+OK 
+  xy: 32, 80
+  size: 16, 16  
+Agent
+  xy: 368, 64
+  size: 16, 16  
+Pull
+  xy: 384, 129
+  size: 16, 16  
+CursedTreasure
+  xy: 336, 64
+  size: 16, 16  
+PipersCharm
+  xy: 240, 976
+  size: 16, 16  
+HillGiantClub
+  xy: 192, 576
+  size: 16, 16  
+SleepWand
+  xy: 304, 544
+  size: 16, 16  
+FarmersTools
+  xy: 288, 976
+  size: 16, 16
+PhoenixCharm
+  xy: 320, 160
+  size: 16, 16  
+ChandrasTome
+  xy: 240, 816
+  size: 16, 16  
+DemonicContract
+  xy: 208, 832
+  size: 16, 16  
+SolRing
+  xy: 320, 144
+  size: 16, 16          
+BlackLotus
+  xy: 320, 128
+  size: 16, 16
+MoxEmerald
+  xy: 320, 0
+  size: 16, 16
+MoxJet
+  xy: 320, 16
+  size: 16, 16
+MoxRuby
+  xy: 320, 32
+  size: 16, 16
+LightBoots
+  xy: 144, 464
+  size: 16, 16
+MoxSapphire
+  xy: 320, 48
+  size: 16, 16
+MoxPearl
+  xy: 320, 64
+  size: 16, 16
+Hivestone
+  xy: 144, 720
+  size: 16, 16
+BattleStandard
+  xy: 96, 592
+  size: 16, 16
+DragonMask
+  xy: 80, 592
+  size: 16, 16 
+HiveLordArmor
+  xy: 112, 0
+  size: 16, 16 
+LifeAmulet
+  xy: 0, 864
+  size: 16, 16       
+RedKey
+  xy: 176, 992
+  size: 16, 16             
+BlueKey
+  xy: 192, 992
+  size: 16, 16   
+GreenKey
+  xy: 208, 992
+  size: 16, 16   
+BlackKey
+  xy: 240, 992
+  size: 16, 16       
+StrangeKey
+  xy: 224, 992
+  size: 16, 16   
+WhiteKey
+  xy: 272, 992
+  size: 16, 16
+SteelArmor
+  xy: 176, 64
+  size: 16, 16     
+SteelShield
+  xy: 272, 208
+  size: 16, 16
+SteelBoots
+  xy: 128, 128
+  size: 16, 16
+SteelSword
+  xy: 272, 752
+  size: 16, 16
+IronArmor
+  xy: 224, 0
+  size: 16, 16     
+IronShield
+  xy: 256, 144
+  size: 16, 16
+IronBoots
+  xy: 48, 160
+  size: 16, 16
+BronzeSword
+  xy: 256, 720
+  size: 16, 16
+SteelAxt
+  xy: 160, 272
+  size: 16, 16     
+LeatherBoots
+  xy: 0, 96
+  size: 16, 16       
+JungleShield
+  xy: 240, 128
+  size: 16, 16       
+Dagger
+  xy: 288, 352
+  size: 16, 16
+Goose              
+  xy: 144, 624
+  size: 16, 16
+SpellBook
+  xy: 144, 688
+  size: 16, 16       
+Nine-RingedBo
+  xy: 272, 608
+  size: 16, 16   
+MithrilShield
+  xy: 224, 176
+  size: 16, 16
+MithrilArmor
+  xy: 224, 64
+  size: 16, 16       
+MithrilBoots
+  xy: 96, 176
+  size: 16, 16      
+AladdinsRing
+  xy: 112, 992
+  size: 16, 16         
+CursedRing
+  xy: 80, 928
+  size: 16, 16
+FlameSword
+  xy: 288, 656
+  size: 16, 16
+DeathRing
+  xy: 32, 944
+  size: 16, 16
+MirrorShield
+  xy: 256, 208
+  size: 16, 16
+AladdinsLamp
+  xy: 128, 528
+  size: 16, 16
+WoodBow
+  xy: 176, 464
+  size: 16, 16
+CompositeBow
+  xy: 224, 480
+  size: 16, 16
+Sandals
+  xy: 16, 112
+  size: 16, 16
+GoldBoots
+  xy: 64, 176
+  size: 16, 16
+GoldArmor
+  xy: 288, 96
+  size: 16, 16
+GoldShield
+  xy: 272, 144
+  size: 16, 16
+DarkBoots
+  xy: 32, 176
+  size: 16, 16
+DarkArmor
+  xy: 272, 112
+  size: 16, 16
+DarkShield
+  xy: 288, 160
+  size: 16, 16
+MadStaff
+  xy: 304, 608
+  size: 16, 16
+Clue
+  xy: 144, 976
+  size: 16, 16
+Blood
+  xy: 80, 528
+  size: 16, 16
+Cheese
+  xy: 80, 768
+  size: 16, 16
+GoldStack
+  xy: 208, 816
+  size: 16, 16
+Treasure
+  xy: 48, 768
+  size: 16, 16
+Shard
+  xy: 16, 608
+  size: 16, 16
+CelestialPrism
+  xy: 16, 608
+  size: 16, 16
+DarkAmulet
+  xy: 80, 816
+  size: 16, 16
+PandorasBox
+  xy: 320, 80
+  size: 16, 16
+DisruptingScepter
+  xy: 208, 576
+  size: 16, 16
+EntrancingLyre
+  xy: 128, 640
+  size: 16, 16
+HeavyArbalest
+  xy: 288, 448
+  size: 16, 16
+RingofThreeWishes
+  xy: 320, 96
+  size: 16, 16
+TheBlackstaffofWaterdeep
+  xy: 320, 112
+  size: 16, 16
+UnerringSling
+  xy: 176, 448
+  size: 16, 16
+JeweledAmulet
+  xy: 80, 848
+  size: 16, 16
+TravelersAmulet
+  xy: 144, 864
+  size: 16, 16
+RelicAmulet
+  xy: 144, 800
+  size: 16, 16
+SorinAmulet
+  xy: 96, 800
+  size: 16, 16
+AttendantsRobes
+  xy: 272, 80
+  size: 16, 16
+AmuletofKroog
+  xy: 128, 864
+  size: 16, 16
+AmuletofVigor
+  xy: 64, 848
+  size: 16, 16
+VeilstoneAmulet
+  xy: 48, 864
+  size: 16, 16
+JandorsRing
+  xy: 128, 976
+  size: 16, 16
+JinxedRing
+  xy: 48, 976
+  size: 16, 16
+ShellWand
+  xy: 224, 624
+  size: 16, 16
+RingofImmortals
+  xy: 48, 992
+  size: 16, 16
+PrismRing
+  xy: 16, 896
+  size: 16, 16
+RingofRenewal
+  xy: 16, 992
+  size: 16, 16
+KiteShield
+  xy: 272, 192
+  size: 16, 16      
+DungeonMap
+  xy: 176, 848
+  size: 16, 16
+FortuneCoin
+  xy: 336,64
+  size: 16, 16
+SpiritGuard
+  xy: 192,160
+  size: 16, 16
+MulticolorRune
+  xy: 352,64
+  size: 16, 16
+ColorlessRune
+  xy: 336,80
+  size: 16, 16
+BlackRune
+  xy: 352,80
+  size: 16, 16
+RedRune
+  xy: 336,96
+  size: 16, 16
+GreenRune
+  xy: 352,96
+  size: 16, 16
+BlueRune
+  xy: 336,112
+  size: 16, 16
+WhiteRune
+  xy: 352,112
+  size: 16, 16
+BlackStaff
+  xy: 352,128
+  size: 16, 16
+RedStaff
+  xy: 336,144 
+  size: 16, 16
+GreenStaff
+  xy: 352,144
+  size: 16, 16
+BlueStaff
+  xy: 336,160
+  size: 16, 16
+WhiteStaff
+  xy: 352,160
+  size: 16, 16
+BlueStaff
+  xy: 336,160
+  size: 16, 16
+DeathMagusStaff
+  xy: 176,608
+  size: 16, 16
+SunMagusStaff
+  xy: 304,560
+  size: 16, 16
+WildMagusStaff
+  xy: 192,560
+  size: 16, 16
+FireMagusStaff
+  xy: 240,560
+  size: 16, 16
+MindMagusStaff
+  xy: 208,560
+  size: 16, 16
+GarrukAxe
+  xy: 304,272
+  size: 16, 16
+BlueRobes
+  xy: 272,64
+  size: 16, 16
+Armory
+  xy: 128,512
+  size: 16, 16
+PresenceoftheHydra
+  xy: 288,928
+  size: 16, 16
+HorseHoove
+  xy: 80,496
+  size: 16, 16
+PirateFlag
+  xy: 0,496
+  size: 16, 16
+Scythe
+  xy: 288,976
+  size: 16, 16
+ChickenEgg
+  xy: 304,800
+  size: 16, 16
+ChallengeCoin
+  xy: 32,512
+  size: 16, 16
+SilverChallengeCoin
+  xy: 400,80
+  size: 16, 16
+BronzeChallengeCoin
+  xy: 400,96
+  size: 16, 16
+MetallicBoots
+  xy: 80,144
+  size: 16, 16
+BrownHat
+  xy: 80,336
+  size: 16, 16
+FrogSkin
+  xy: 111,495
+  size: 18, 18
+BurningBook
+  xy: 239,815
+  size: 18, 18
+GreenLeaf
+  xy: 48, 496
+  size: 16, 16
+GreenLeaf2
+  xy: 112, 608
+  size: 16, 16
+Dot
+  xy: 464, 48
+  size: 16, 16
+GoldCoin
+  xy: 464, 63
+  size: 16, 16
+Sell
+  xy: 464, 79
+  size: 16, 16
+Magnifier
+  xy: 448, 63
+  size: 16, 16
+Bookmark
+  xy: 432, 63
+  size: 16, 16
+Unmark
+  xy: 416, 63
+  size: 16, 16
+SearchPost
+  xy: 384, 63
+  size: 16, 16
+Flip
+  xy: 400, 63
+  size: 16, 16
+LogBook
+  xy: 240, 912
+  size: 16, 16
+GPS
+  xy: 464, 0
+  size: 16, 16
+Star
+  xy: 464, 16
+  size: 16, 16
+TreasureChest
+  xy: 464, 32
+  size: 16, 16
+ToolBox
+  xy: 448, 79
+  size: 16, 16
+UnderworldCookbook
+  xy: 304, 960
+  size: 16, 16
+Conjurer's Mantle
+  xy: 144, 448
+  size: 16, 16
+ZedruuLantern
+  xy: 336, 128
+  size: 16, 16
+CartoucheOfSolidarity
+  xy:320,176
+  size:16,16
+CartoucheOfKnowledge
+  xy:320,192
+  size:16,16
+CartoucheOfStrength
+  xy:320,208
+  size:16,16
+CartoucheOfAmbition
+  xy:320,224
+  size:16,16
+CartoucheOfZeal
+  xy:320,240
+  size:16,16
+HallowedSigil
+  xy:320,256
+  size:16,16
+UnhallowedSigil
+  xy:320,272
+  size:16,16
+SirDonovansAmulet
+  xy:112,880
+  size:16,16
+LandscapeSketchbook
+  xy:80,672
+  size:16,16
+RobesOfOmniscience
+  xy: 96, 0
+  size: 16, 16
+WarrenTendersCloak
+  xy: 144, 32
+  size: 16, 16
+MoltenMantle
+  xy: 112, 80
+  size: 16, 16
+UrzasArmor
+  xy: 192, 96
+  size: 16, 16
+GooeyShoes
+  xy: 128, 112
+  size: 16, 16
+ExplorersBoots
+  xy: 112, 144
+  size: 16, 16
+SerrasShield
+  xy: 176, 192
+  size: 16, 16
+SlivercallersGauntlet
+  xy: 32, 224
+  size: 16, 16
+RebelFalconersGlove
+  xy: 32, 240
+  size: 16, 16
+GliderGloves
+  xy: 96, 256
+  size: 16, 16
+ImpTamersGlove
+  xy: 32, 272
+  size: 16, 16
+OverwhelmingAxe
+  xy: 288, 288
+  size: 16, 16
+TorturersHood
+  xy: 48, 336
+  size: 16, 16
+HivecallersHelm
+  xy: 32, 352
+  size: 16, 16
+VampireBite
+  xy: 112, 368
+  size: 16, 16
+CrownOfMadness
+  xy: 128, 368
+  size: 16, 16
+JovensTools
+  xy: 304, 368
+  size: 16, 16
+WombatTamersWhip
+  xy: 208, 400
+  size: 16, 16
+EyeOfHorror
+  xy: 96, 512
+  size: 16, 16
+AnkhOfPurgatory
+  xy: 144, 512
+  size: 16, 16
+DragonEgg
+  xy: 32, 544
+  size: 16, 16
+FungalStaff
+  xy: 208, 592
+  size: 16, 16
+CrowcallersCharm
+  xy: 16, 816
+  size: 16, 16
+SymbolOfThePit
+  xy: 96, 816
+  size: 16, 16
+WorryBeads
+  xy: 112, 848
+  size: 16, 16
+AcidicDagger
+  xy: 304, 320
+  size: 16, 16
+AladdinsRing
+  xy: 112, 992
+  size: 16, 16
+AmuletOfAzar
+  xy: 80, 816
+  size: 16, 16
+ArmorOfEvil
+  xy: 240, 96
+  size: 16, 16
+AshnodsBattleGear
+  xy: 224, 80
+  size: 16, 16
+BroodlingEgg
+  xy: 96, 544
+  size: 16, 16
+CatalystStone
+  xy: 144, 784
+  size: 16, 16
+CaveDiversBoots
+  xy: 144, 96
+  size: 16, 16
+ConcordantBoots
+  xy: 48, 128
+  size: 16, 16
+CrownOfTheAges
+  xy: 128, 384
+  size: 16, 16
+CrownoftheFalseGod
+  xy: 16, 352
+  size: 16, 16
+CursedLamp
+  xy: 128, 528
+  size: 16, 16
+DiamondKaleidoscope
+  xy: 160, 576
+  size: 16, 16
+DistortingLens
+  xy: 48, 864
+  size: 16, 16
+DraconianCylix
+  xy: 96, 720
+  size: 16, 16
+DragonBlood
+  xy: 80, 528
+  size: 16, 16
+FaerieDragonEgg
+  xy: 48, 544
+  size: 16, 16
+FlamingSkull
+  xy: 224, 864
+  size: 16, 16
+GladiatorsGreaves
+  xy: 112, 432
+  size: 16, 16
+GoblinTrumpet
+  xy: 256, 928
+  size: 16, 16
+GoldArmor
+  xy: 288, 96
+  size: 16, 16
+GrizzlyGlaive
+  xy: 288, 544
+  size: 16, 16
+GrovetendersRobes
+  xy: 176, 96
+  size: 16, 16
+HelmOfChatzuk
+  xy: 64, 320
+  size: 16, 16
+InfiltratorsMask
+  xy: 96, 336
+  size: 16, 16
+JandorsSaddlebags
+  xy: 112, 624
+  size: 16, 16
+MedicineBag
+  xy: 112, 624
+  size: 16, 16
+JestersCap
+  xy: 112, 320
+  size: 16, 16
+JeweledNecklace
+  xy: 80, 848
+  size: 16, 16
+MadStaff
+  xy: 304, 608
+  size: 16, 16
+MapToTheVale
+  xy: 176, 880
+  size: 16, 16
+TastyTome
+  xy: 112, 688
+  size: 16, 16
+ShieldOfAir
+  xy: 256, 192
+  size: 16, 16
+MemoryCrystal
+  xy: 0, 608
+  size: 16, 16
+WhaleboneGlider
+  xy: 64, 608
+  size: 16, 16
+MillersShoes
+  xy: 128, 144
+  size: 16, 16
+PandorasBox
+  xy: 0, 736
+  size: 16, 16
+PhyrexianGrimoire
+  xy: 64, 672
+  size: 16, 16
+PiedPipe
+  xy: 240, 976
+  size: 16, 16
+PiratesHook
+  xy: 112, 208
+  size: 16, 16
+PowerArmor
+  xy: 192, 48
+  size: 16, 16
+PrismaticEgg
+  xy: 0, 544
+  size: 16, 16
+PyromaniacsCloak
+  xy: 144, 32
+  size: 16, 16
+RainbowSpear
+  xy: 240, 544
+  size: 16, 16
+RodOfRuin
+  xy: 288, 592
+  size: 16, 16
+ShamansStaff
+  xy: 176, 576
+  size: 16, 16
+ShoesOfSafety
+  xy: 112, 128
+  size: 16, 16
+ShoesOfSorrow
+  xy: 80, 96
+  size: 16, 16
+SpawningStaff
+  xy: 208, 560
+  size: 16, 16
+TawnossWand
+  xy: 192, 576
+  size: 16, 16
+ThranLens
+  xy: 64, 496
+  size: 16, 16
+TomeOfTheGate
+  xy: 128, 656
+  size: 16, 16
+TomeOfThePortal
+  xy: 128, 672
+  size: 16, 16
+TomeOfTheVault
+  xy: 128, 688
+  size: 16, 16
+TriangleOfWar
+  xy: 32, 880
+  size: 16, 16
+TriassicEgg
+  xy: 16, 544
+  size: 16, 16
+UnerringSling
+  xy: 176, 448
+  size: 16, 16
+WarBeastRidersBoots
+  xy: 48, 144
+  size: 16, 16
+WinterBoots
+  xy: 96, 128
+  size: 16, 16
+ZelyonSword
+  xy: 176, 672
+  size: 16, 16
+GroundbreakerBoots
+  xy: 144, 144
+  size: 16, 16
+RiverWaders
+  xy: 96, 96
+  size: 16, 16
+ClawsOfGix
+  xy: 304, 848
+  size: 16, 16
+SulfuricStaff
+  xy: 304, 560
+  size: 16, 16
+BelbesArmor
+  xy: 272, 48
+  size: 16, 16
+ShieldOfTheAges
+  xy: 208, 144
+  size: 16, 16
+LifeChisel
+  xy: 288, 304
+  size: 16, 16
+PhyrexianSplicer
+  xy: 112, 384
+  size: 16, 16
+FeverbringersCloak
+  xy: 80, 32
+  size: 16, 16
+SerpentCallerStaff
+  xy: 208, 560
+  size: 16, 16
+GuardsArmor
+  xy: 176, 48
+  size: 16, 16
+StaffoftheAges
+  xy: 176, 624
+  size: 16, 16
+TomeoftheTrove
+  xy: 112, 688
+  size: 16, 16
+Spyglass
+  xy: 96, 576
+  size: 16, 16
+FerretFood
+  xy: 128, 608
+  size: 16, 16
+LeyLineWalkerBoots
+  xy: 0, 112
+  size: 16, 16
+IstvansAxe
+  xy: 192, 288
+  size: 16, 16
+BogGliderGreaves
+  xy: 64, 448
+  size: 16, 16
+DementiaMask
+  xy: 0, 400
+  size: 16, 16
+BreathstealersRobe
+  xy: 176, 16
+  size: 16, 16
+EbonyHorseshoe
+  xy: 96, 608
+  size: 16, 16
+NarcissistsMask
+  xy: 0, 528
+  size: 16, 16
+SerratedQuiver
+  xy: 144, 560
+  size: 16, 16
+MaptoParadise
+  xy: 176, 896
+  size: 16, 16
+RingofInfestation
+  xy: 128, 896
+  size: 16, 16
+IvySeersAmulet
+  xy: 0, 800
+  size: 16, 16
+MultanisBoots
+  xy: 80, 176
+  size: 16, 16
+GarmentsofGaea
+  xy: 176, 96
+  size: 16, 16
+HymnalHood
+  xy: 352, 32
+  size: 16, 16
+CelestialSword
+  xy: 176, 672
+  size: 16, 16
+PaladinsGreaves
+  xy: 128, 176
+  size: 16, 16
+RobesofRenewal
+  xy: 256, 64
+  size: 16, 16
+SerrasPrayerBook
+  xy: 112, 656
+  size: 16, 16
+SerpentRing
+  xy: 112, 960
+  size: 16, 16
+BarrinsCodex
+  xy: 48, 688
+  size: 16, 16
+RaynesWrit
+  xy: 272, 976
+  size: 16, 16
+ShieldofTears
+  xy: 192, 176
+  size: 16, 16
+CopperAngelsAmulet
+  xy: 32, 832
+  size: 16, 16
+AegisOfTheMeek
+  xy: 240, 656
+  size: 16, 16
+WaterOfYouth
+  rotate: false
+  xy: 192, 928
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+BraidwoodSextant
+  xy: 96, 832
+  size: 16, 16

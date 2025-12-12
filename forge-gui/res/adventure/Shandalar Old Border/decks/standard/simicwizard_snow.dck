@@ -1,28 +1,32 @@
 [metadata]
-Name=simicwizard_snow
+Name=Snow Wizard
 [Main]
-1 Karplusan Forest|ICE|1
-1 Swamp|ICE|1
-13 Island|ICE|1
-2 Adun Oakenshield|LEG|1
-2 Force of Nature|4ED|1
-2 Frost Giant|LEG|1
-2 Icy Manipulator|LEB|1
-2 Winter's Chill|ICE|1
-2 Yavimaya Coast|APC|1
-2 Zuran Orb|ICE|1
-3 Forest|ICE|1
-3 Mountain|ICE|1
-4 Arcane Denial|ALL|1
-4 City of Brass|ARN|1
-4 Counterspell|6ED|1
-4 Hydroblast|ICE|1
-4 Ice Floe|5ED|1
-4 Mahamoti Djinn|LEA|1
-4 Mystic Remora|ICE|1
-4 Phantasmal Terrain|5ED|1
-4 Shivan Reef|APC|1
-4 Snow-Covered Forest|ICE|1
-4 Snow-Covered Island|ICE|1
-4 Snow-Covered Mountain|ICE|1
-4 Thawing Glaciers|ALL|1
+2 Karplusan Forest|ICE
+2 Brushland|ICE
+2 Timberline Ridge|ICE
+2 Veldt|ICE
+1 Kjeldoran Outpost|ALL
+1 Balduvian Trading Post|ALL
+1 Heart of Yavimaya|ALL
+1 Thawing Glaciers|ALL
+4 Snow-Covered Forest|ICE
+4 Snow-Covered Plains|ICE
+4 Snow-Covered Mountain|ICE
+2 Karplusan Giant|ICE
+2 Sunstone|ICE
+2 Blizzard|ICE
+2 Fiery Justice|ICE
+2 Disenchant|5ED
+2 Karplusan Yeti|ICE
+2 Icy Manipulator|ICE
+2 Goblin Snowman|ICE
+2 Hymn of Rebirth|ICE
+2 Johtull Wurm|ICE
+2 Wiitigo|ICE
+2 Kjeldoran Frostbeast|ICE
+2 Giant Trap Door Spider|ICE
+2 Centaur Archer|ICE
+2 Woolly Mammoths|ICE
+2 Goblin Ski Patrol|ICE
+2 Folk of the Pines|ICE
+2 Seraph|ICE

@@ -1,0 +1,30 @@
+[metadata]
+Name=Hazduhr the Abbot
+[Main]
+20 Plains|ICE
+4 Mother of Runes|ULG
+2 Master Apothecary|ODY
+2 Celestial Gatekeeper|LGN
+2 Ancestor's Chosen|JUD
+2 Ancestor's Prophet|ONS
+2 Fountain Watch|MMQ
+2 Doubtless One|ONS
+4 Academy Rector|UDS
+2 Serra Avatar|USG
+2 Opal Archangel|USG
+2 Karmic Justice|ODY
+2 Divine Sacrament|ODY
+1 Crackdown|MMQ
+1 Story Circle|MMQ
+2 Replenish|UDS
+2 Serra Bestiary|HML
+2 Aura of Silence|WTH
+2 Test of Endurance|JUD
+2 Worship|USG
+
+[StartInBattle_Reference]
+1 Hazduhr the Abbot|HML
+1 Serra's Hymn|USG
+1 Serra Inquisitors|HML
+1 Doubtless One|ONS
+1 Beloved Chaplain|ODY

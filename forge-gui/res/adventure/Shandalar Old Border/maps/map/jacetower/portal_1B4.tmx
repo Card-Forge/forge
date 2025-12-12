@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="71">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2DkgV081FEzWADIraRgcvUNpTAZBcMXDKf8S04epASDAADEMSwX
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJybxsnAMG0Uj+JRPIpH8SgexSMCAwDOljzS
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJztk0sKgDAMBbMUrCdQL6YrD6Jey/q5mw0quLD5tBVcGJjdkKQ0rzIAlYLJg6bHRVsAzMZPU/CexLl7SO2gqhR4EufuSVx77roQnsTRzk1Zmrl9DjA4xjzO0c596383c+zqY33w8F0941C9QsF3lZE9QvKLd2sZ54v5xf24zL2R3y6jvdR1zcX74zL35zfMSZHfWHbiCXJ9
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBi5YAYaf/GAuII4EElAnpWAfBwJ4nEkyBMjjg7qeFH5bFCakB+wgSgc4n9IMANm7xIobcZIhkNGAd2BPQlq70LpH1jk2LCIgQB6+UCJ/djUkqIflLeQ3bkESRyfWnz5dwkOcVoC9LyPD8QgsfGVzejhSEw5Tk5ZM5wAAPwjEAI=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="384.142" y="171.315"/>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="167.485" y="201.702">
+   <properties>
+    <property name="enemy" value="Apprentice Black Wizard"/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../../../common/maps/obj/gold.tx" x="231.828" y="40.3107"/>
+  <object id="63" template="../../../../../../common/maps/obj/treasure.tx" x="80.264" y="42.7647"/>
+  <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="151.667" y="215.333">
+   <properties>
+    <property name="enemy" value="Skeleton"/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="168.083" y="214.5">
+   <properties>
+    <property name="enemy" value="Skeleton"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../../../common/maps/obj/door_right.tx" x="4.5459" y="207.287">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/jacetower/portal_1B2.tmx"/>
+    <property name="teleportObjectId" value="62"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="151" y="201.667">
+   <properties>
+    <property name="enemy" value="Skeleton"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../../../common/maps/obj/gold.tx" x="234.5" y="250.5"/>
+  <object id="69" template="../../../../../../common/maps/obj/treasure.tx" x="375.333" y="42"/>
+  <object id="70" template="../../../../../../common/maps/obj/treasure.tx" x="392.667" y="42.0833"/>
+ </objectgroup>
+</map>

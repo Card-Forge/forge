@@ -1,0 +1,27 @@
+[metadata]
+Name=The Sainted One
+[Main]
+2 Personal Incarnation|LEA
+3 Rainbow Knights|PAST
+2 Serra Angel|LEA
+3 White Knight|LEA
+1 Disenchant|LEA
+2 Swords to Plowshares|LEA
+3 Armageddon|LEA
+1 Balance|LEA
+3 Armageddon Clock|ATQ
+1 Black Lotus|LEA
+3 Bottle of Suleiman|ARN
+3 Dingus Egg|LEA
+1 Mox Pearl|LEA
+1 Sol Ring|LEA
+2 White Mana Battery|LEG
+2 Blessing|LEA
+4 Circle of Protection: Artifacts|ATQ
+22 Plains|LEA
+1 Mishra's Workshop|ATQ
+
+[StartInBattle_Reference]
+1 Mox Pearl|LEA
+1 Rainbow Knights|PAST
+1 White Knight|LEA

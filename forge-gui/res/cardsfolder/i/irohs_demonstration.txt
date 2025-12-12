@@ -1,0 +1,7 @@
+Name:Iroh's Demonstration
+ManaCost:1 R
+Types:Sorcery Lesson
+A:SP$ Charm | Choices$ DBDamageAll,DBDamage
+SVar:DBDamageAll:DB$ DamageAll | ValidCards$ Creature.OppCtrl | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each creature your opponents control.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
+Oracle:Choose one —\n• Iroh's Demonstration deals 1 damage to each creature your opponents control.\n• Iroh's Demonstration deals 4 damage to target creature.

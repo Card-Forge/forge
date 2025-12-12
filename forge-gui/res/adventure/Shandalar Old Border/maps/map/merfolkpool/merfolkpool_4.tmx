@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="72">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzr42Rg6BvFVMEPGKhn1jFWCF7ATpy9lNoNswsfprafibETl92U2EusndjsJtdeUu1EthcWv6TaTY6duOymt73khDU17KRXHGOzk5ppGmQWLjvb0NIUNcstXBjdvjY62jWQfqWlPynBADEUPkU=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNlVkKwjAQhgdasM01isuT9TpV8T56BD2T5xCt762KYIY2OI2TNClR/CEvw0y+WbIAfOqcAGzT7joljOMXhOypaHgz8RtmKF1kzmOZ85XpFWezaRUBbORaR/2+E/Gek87JHHuoeHXLqwjXlodi79KuncuFY9Y99VUWNp4V/VyqPtjqfjj0tI+tyzYDlEutVE8PX9MMfJkon5oVW7+nrv2lKmTMfUAc1U3G72OApeM+IZg6n7ILJh+0HeJwTKW5nEHeroUw2/5J+F76voshpO5LZnirOWGuZdLElG1MPvJn07/Vhan/w8g/DuBSNu7xAkfnPrk=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy9VTEOwjAMdMQAVGKFif/wGTpRWHkQIxP8gj/0BawMxGpPtazYaVPESVHaprk7u3ZKRNRsiOqK6BRn4EA2buvh+tLPryXRNhDt4tiH4XkKUieFY2WvaV6+v0e9RxzPYPODs3a4NcCj93D8vKZ9fhbdzLkAGidW+Z6XbwkZP+9hD9CV0N4sfi/X71U3xiD3TRmybkoBjlTMwDnhpZ0vbepCb0wOStEa2v+AjMvqH1nLcwEuGW+T8eDV8VSwruyXX3JLWOdHCvCD+kfNlXiT/cF8WndqHVsevHisNd27qb71/FnnHJ7nesiq77H/DdSpd9ZpLise/e/QeY7315wfcMu8Ms8XG703QA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="280.333" width="48" height="16">
+   <properties>
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="227.847" y="118.678">
+   <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Island|ONS", "Mountain|ATH", "Pendrell Mists|WTH" ] }</property>
+    <property name="enemy" value="Storm Titan" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="56" template="../../../../../../common/maps/obj/gold.tx" x="242.75" y="25" />
+  <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="425.231" y="108.441">
+   <properties>
+    <property name="enemy" value="Water Elemental" />
+    <property name="threatRange" type="int" value="40" />
+    <property name="waypoints" value="67,65,66" />
+   </properties>
+  </object>
+  <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="42" y="62">
+   <properties>
+    <property name="enemy" value="Water Elemental" />
+    <property name="threatRange" type="int" value="40" />
+    <property name="waypoints" value="62,63,64" />
+   </properties>
+  </object>
+  <object id="59" template="../../../../../../common/maps/obj/treasure.tx" x="241.994" y="93.6658" />
+  <object id="60" template="../../../../../../common/maps/obj/booster.tx" x="214.489" y="93.92">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "FEM", "MMQ", "NMS", "PCY" ],
+    "type": "card",
+    "count": 10,
+    "colors": [ "blue" ],
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "FEM", "MMQ", "NMS", "PCY" ],
+    "type": "card",
+    "count": 3,
+    "colors": [ "blue" ],
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "FEM", "MMQ", "NMS", "PCY" ],
+    "type": "card",
+    "colors": [ "blue" ],
+    "count": 1,
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="61" template="../../../../../../common/maps/obj/manashards.tx" x="417.896" y="47.9476" />
+  <object id="62" template="../../../../../../common/maps/obj/waypoint.tx" x="39.2735" y="113.437" />
+  <object id="63" template="../../../../../../common/maps/obj/waypoint.tx" x="37.105" y="173.288" />
+  <object id="64" template="../../../../../../common/maps/obj/waypoint.tx" x="32.768" y="233.138" />
+  <object id="65" template="../../../../../../common/maps/obj/waypoint.tx" x="405.752" y="123.412" />
+  <object id="66" template="../../../../../../common/maps/obj/waypoint.tx" x="415.293" y="222.73" />
+  <object id="67" template="../../../../../../common/maps/obj/waypoint.tx" x="415.727" y="74.8371" />
+  <object id="68" template="../../../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="16" height="304" />
+  <object id="69" template="../../../../../../common/maps/obj/collision.tx" x="480" y="-16" width="16" height="304" />
+  <object id="70" template="../../../../../../common/maps/obj/collision.tx" x="0" y="-16" width="480" height="16" />
+  <object id="71" template="../../../../../../common/maps/obj/collision.tx" x="0" y="272" width="480" height="16" />
+ </objectgroup>
+</map>

@@ -5,7 +5,6 @@ This is a tutorial to start creating your own custom set, or implementing an exi
 ## Where do the files go?
 
 ### Non-image files
-
 Everything but your cards images go into `%appdata%/Forge/custom`. You will need to put the files in the correct directories in order for the game to load them correctly.
 
 The important folders are the following (you can create them if they don't exist):
@@ -15,7 +14,6 @@ The important folders are the following (you can create them if they don't exist
 * **tokens**: Your tokens definition files (.txt) go inside this folder.
 
 ### Image files
-
 Your card and token images go into `%localappdata%/Forge/Cache/pics`.
 
 The important folders are the following:
@@ -24,7 +22,6 @@ The important folders are the following:
 * **tokens**: Same as the cards folder, your tokens will go inside this folder. The naming convention is `token_script_name.jpg`. So if your token script name is `b_5_5_golem_trample`, then you can put your token image inside your edition folder named `b_5_5_golem_trample.jpg`. If there is a collector number, append it at the beginning, such as `1_b_5_5_golem_trample.jpg`
 
 ## Creating your edition definition file
-
 As mentioned in the opening section, we'll be partially implementing the **MSEM Champions** set. Let's create a new text file (.txt) inside `%appdata%/Forge/custom/editions`. Let's name it `MSEM Champions.txt`.
 
 > Note: The file's name don't matter, but it'll be easier to find it if you ever need to edit anything.
@@ -134,7 +131,6 @@ Save your file, and let's move onto another step.
 > If there is a conflict, you can add something in its name for differenciate it, such as a set tag (ie. `Master Chef (MSEM)`).
 
 ## Scripting your first cards
-
 Now, you might remember than Unearth was an existing MTG card so we do not need to create a custom card rule for it. Let's create a few others.
 > This tutorial will not teach you to script your cards, and they might not be perfect. Please check out [Creating a Custom Card](https://github.com/Card-Forge/forge/wiki/Creating-a-Custom-Card) if you want more info, or look at the existing cards to learn more complex scripting.
 
@@ -202,7 +198,6 @@ Artist:Artists
 Oh no! If you play with Inked Summoner now, you will crash when summoning a token. That's because they don't exist in MTG and we need to define them! Let's go onto the next step!
 
 ## Scripting custom tokens
-
 Let's add the new tokens we need to make Inked Summoner work!
 > Just like for card scripting, this tutorial will not teach you about scripting them.
 
@@ -245,7 +240,6 @@ Oracle:Trample
 Great! Now Inked Summoner no longer make the game crash! Now let's add some images to spice it all up.
 
 ## Adding card and token images
-
 You can find the card images for the MSEM Champions edition [here](https://msem-instigator.herokuapp.com/set/CHAMPIONS). Find the ones you need and save them inside `%appdata%/../Local/Forge/Cache/pics/cards/MSEM_CHAMPIONS` Remember the filename format should be `{cardname}.fullborder.jpg` if you only have one variant in your edition. If you have multiples, then it should be `{cardname}{number}.fullborder.jpg` (ie. `Fox of the Orange Orchard1.fullborder.jpg`, `Fox of the Orange Orchard2.fullborder.jpg`, etc). You can find the alternate images from [here](https://msem-instigator.herokuapp.com/set/MPS_MSE) if you want.
 
 For the tokens, we can deposit them inside `%localappdata%/Forge/Cache/pics/tokens/MSEM_CHAMPIONS`. They should be named the same as their number + token script so `1_b_1_1_bird_flying.jpg`, `2_b_3_3_cat_deathtouch.jpg`, and so forth.
@@ -257,7 +251,6 @@ For the tokens, we can deposit them inside `%localappdata%/Forge/Cache/pics/toke
 You can now start your game again, and see that the art loads correctly now.
 
 ## Excursion: Card variants
-
 There are currently multiple ways to specify a flavor name:
 * Manually, by writing `Variant:Foo:FlavorName:Loret Ipsum` in the card script, and adding `${"variant": "Foo"}` to the end of the edition entry. You'll also want to add `Variant:Foo:Oracle:When Loret Ipsum enters...` if the flavor name would appear in the Oracle text, or if it would otherwise be changed.
 * By lookup, again by using `Variant:Foo:FlavorName:Loret Ipsum` in the card script, but simply using "Loret Ipsum" as the name in the edition file.
@@ -266,5 +259,4 @@ There are currently multiple ways to specify a flavor name:
 The third method is the easiest, but besides a simple find/replace for the card name, it won't be able to make any changes to flavor the Oracle text, such as for ability words. They all function the same under the hood once the CardDB is loaded; the latter two are just shortcuts for the first.
 
 ## 🎉 Congratulations
-
 You’ve just added your first custom set in Forge! There's still much more to explore — scripting advanced abilities, custom mechanics, and set structures — but you now have a solid foundation to build from.

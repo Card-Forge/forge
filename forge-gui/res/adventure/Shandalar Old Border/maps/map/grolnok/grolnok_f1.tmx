@@ -1,0 +1,291 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="211">
+ <editorsettings>
+  <export format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx" />
+ <tileset firstgid="22017" source="../../../../../../common/maps/tileset/FarmFood.tsx" />
+ <tileset firstgid="26113" source="../../../../../../common/maps/tileset/dungeon/animatedtiles.tsx" />
+ <tileset firstgid="42497" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx" />
+ <layer id="17" name="Collision" width="30" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztksENwjAMRQO3XLggpK7AnQk4ZCsGYAnG6Twdoaogwgq25bQJUdT/JEtpHf/vOHEOAAD2wdS6AQAAAAAAAMAuCffWHeTRqt/e5gT6wD/qab+8nHtW9O2V4N8R5xaE+WlzpRwuzh0/IWlx2pqvFNw5gqLFcTv91tIYz3o+rbdC92r1Um7tea2+lvocUt9cn9K+y71dh+865v/hy625t7XV17p/i1+qo/2j3yU8ow7Vs0YNSvrOwZIqkA==
+  </data>
+ </layer>
+ <layer id="13" name="Background" width="30" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztmEtOwzAQhqt2EVi3qQCJx4ZjAJuqtwCE4EjsqCg9BSsQbCpxG04AZJSMMhjb88hrgX/pV107ns+ZOI6T0ShpKG2nvKV9Oa1zHVca18KNqStuX9JyX7O6/JKFj9NwQW9Z3K64dk6nVZ8jhntCYh8LxiXhgi93ePbnqLQkH1Iusq8i/K64Lt815R5mdb1FPm7IyAXWtZFn4YJx/aBly5qm5d7OhuFyeehz7UtKSkr6z5oU+7Cbmb9tlfvrNcJ9lk8hrk9NngvuGDTc2Pi16puLOeuaG+oj5eIeQCpuLgzJ1eQ6cXVcbj5vqvXqbr+f8dB28PhAFu+LjL/JfR7aL0tiaue+lMvFhPbFvD0ufYfguE3ON8S0cu+X8X6+dgvX1ydUj21dcGPvoRxXorbeQ63S5rspd7nLc7E9Ns6Nco8HXPB3cd3GeWlaRoPof/eYiZEL3w2x/JDX3zHouYGg/rE6Hn5x7bCeL8R5qryOcKEOeO+Lv1yMhddOyn3eK025+O0GDBw0ni+y2+RSjus+uZhj8MqZdxdzOxfifkx/x6emwnlEWU242wiXPvfa4p4VeTp37N7DsbxauV33/QHQgfb/
+  </data>
+ </layer>
+ <layer id="18" name="Foreground" width="30" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztmM1qU0EUx0clXAu2kGjSbBKKTVK7VrKpaQVdVH0HQXwSwS8EXbqxNs3W+gp+FutLiFAX2Un7Bjp/5h7uycmZ+5WpZNE//OHOzcz5zZyZufdOViJjBg1jLtSN2TtFn7PespxxxfnIeuWU2ZIJf4wm2ZvW5+thLZnoB8ZI7KvRtLcrs3lcmWaiH5RfsNvRZJ0v0Ww+Ns485siybiw5S/asPMk9uG7MwyvOnAsP6+5+XvZt2/cHF52zuF+jbO6bBec0NpgQ1YXuKPNShjuOY2tCHKpH/hy530Jwfeyj+P5JbOg3q0trKS+X9z+NS2MmLo01JJfakvNyucvkmdrKNSO5cl5v9Z2LcrXnCDfnbvUTjjT27qecXBLYtEelN/tJvYG9/uUx6iEm50KSSybxe9p9rt2FxHKf5eX6eFxaX2QfZBzJpXcgGc9r3v+yxvuHx8W7iM+v1CgQd+T5FvjfXLDmkTsQ3zt55lzOJc1nEa42J1k58M1lkfk9455xQ3O1/UB7AnsJ0rg7nnba+UfjjlJip/02VPLxeFnPg+Rm5bMo15d/zs0zj0W5lD+NO6xnc7tRkrOQXG3dgsW5RcfL10sRrmSGnt8srja/GnveuDI+cXmZzuP83QvR9W7A8Urmj8vOaHOpZcyi9VIrWc9abLTdsG1/sucUhPJuClcyye8tb9/6Q8uVfdy09eb7rwgC83nVmJexX1Rdm+22MXet77XLc5EnjY02YHZqxlyLvVpzbD525ORmozjXt49RXmNM8notHzONy1WG61uradxvTee1ZnmuL4d8XPLesc3PifWfRnI24txhDu6hYEsOYsoz4Cu7nl5bdzzjBbdrGc+qCfOpve7VXH1ax1iX8pkBfVfWOT9H0zmUc+k5idhgH8YGc7GVmM4P9J0jNRL3iS/PoPydL88kFH+/NW0Z38fl4v/Lcq7mUUAuRHF9XNIOi/OXneM3GnrcdzLPopw2Ru07mtTtOD9ifcD1/Z5zlspyDzrOkptXZbllWCG5683p6yfLet0y3Lee9bnanLzOO/5Zx8sFJjkkV+av13SW5dDckJoX7j/dwzl6
+  </data>
+ </layer>
+ <layer id="19" name="Above" width="30" height="60">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYKAvyGZmYHjEOjB27mMfvnbmMUMwyM6DdPQnMqBn+A6kncSCvQPotv0DZPeovcPb3uEIFogODnsbxWlrH8z8gfIvMgC5ARmPRHspjW9i9A8m/2IDuPxAbtgMdv+O2ksfe38OgJ3WYgwMzATCwj0SgcmxNw6IwwQZGMKBOEIQIvYdSr/axsDweht2s9ojERish0h7sYFYKD1ViLAf0P3rgcffuOwMEUTlGwtj11/Hi2Cj+7eDDHvJAaT6Fx2A4uUXEKuyQzCIj+wvXIBY/+LyK8wuGI0vfSADYv1L7XIC2b+vGUj3L3oeAoFIQUx16IAU/1IDwMoxUuKX2iBFEoLxAWLsLVYhzV4mKQim1F58AF+ZSU9ATB6HgYUk+Pk36U6hir3UBKTaS0pYjiTwVoz+diZLYmJSAKzMILXsoAYg1k5y/TYKRsEoGAWDGQAAh9KEDQ==
+  </data>
+ </layer>
+ <layer id="20" name="AboveSprites" width="30" height="60">
+  <data encoding="base64" compression="zlib">
+   eJzt1LEJACAQA0CncAEXsXBxN7O1EwUV8a4NPCnChwAAAADALqncbjDntb78ow62OcpX5bjnLvT8XuC0BlnLA5Y=
+  </data>
+ </layer>
+ <objectgroup id="12" name="Objects" opacity="0.9">
+  <object id="140" template="../../../../../../common/maps/obj/treasure.tx" x="308.807" y="867.623">
+   <properties>
+    <property name="reward">[{
+  "type": "randomCard",
+  "count": 1,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
+},{
+  "type": "randomCard",
+  "count": 4,
+  "rarity": [ "uncommon" ],
+  "addMaxCount": 2
+}]</property>
+    <property name="spawn.Hard" type="bool" value="false" />
+   </properties>
+  </object>
+  <object id="166" template="../../../../../../common/maps/obj/manashards.tx" x="328.662" y="867.554" />
+  <object id="167" template="../../../../../../common/maps/obj/booster.tx" x="308.266" y="840.594">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "MMQ", "NMS", "PCY" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "MMQ", "NMS", "PCY" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "MMQ", "NMS", "PCY" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="168" template="../../../../../../common/maps/obj/gate.tx" gid="3221229597" x="287.943" y="843.397" width="14.0077" height="18.6486" rotation="90.4687" visible="1">
+   <properties>
+    <property name="dialog">[{
+    "text":"This door is locked",
+    "options":[
+    { "name":"go away" },
+    {      
+        "name":"unlock with Grolnok's Key",     
+        "condition":[{"item":"Grolnok's Key"}],    
+        "text":"The gate is unlocked",
+        "options":[{"name":"continue", "action":[ {"deleteMapObject":-1},{"removeItem":"Grolnok's Key"}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="170" template="../../../../../../common/maps/obj/door_down.tx" x="112.057" y="895.107" width="34.2466" height="35.0741" rotation="0.284412">
+   <properties>
+    <property name="direction" value="down" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/grolnok/grolnok.tmx" />
+   </properties>
+  </object>
+  <object id="177" template="../../../../../../common/maps/obj/booster.tx" x="334.782" y="845.759">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "MMQ", "NMS", "PCY" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "MMQ", "NMS", "PCY" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "MMQ", "NMS", "PCY" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="181" template="../../../../../../common/maps/obj/enemy.tx" x="212.087" y="889.947" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Wild Rat" />
+    <property name="threatRange" type="int" value="20" />
+   </properties>
+  </object>
+  <object id="182" template="../../../../../../common/maps/obj/enemy.tx" x="231.038" y="148.247" width="16" height="17.6724">
+   <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Forest|PELP", "Mortal Combat|TOR", "Swamp|PELP", "Worry Beads|MMQ" ] }</property>
+    <property name="enemy" value="Grolnok" />
+    <property name="reward">[
+  {
+    "type": "item",
+    "probability": 1,
+    "count": 1,
+    "itemName": "Grolnok's Key"
+  }
+]
+</property>
+    <property name="threatRange" type="int" value="60" />
+   </properties>
+  </object>
+  <object id="183" template="../../../../../../common/maps/obj/gate.tx" gid="3221229597" x="226.355" y="821.63" width="15.7579" height="22.3749" rotation="0">
+   <properties>
+    <property name="dialog">[{
+    "text":"This door is locked",
+    "options":[
+    { "name":"go away" },
+    {      
+        "name":"unlock with Rusty Old Key",     
+        "condition":[{"item":"Rusty Old Key"}],    
+        "text":"The gate is unlocked",
+        "options":[{"name":"continue", "action":[ {"deleteMapObject":-1},{"removeItem":"Rusty Old Key"}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="189" template="../../../../../../common/maps/obj/enemy.tx" x="346" y="745.831" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Witch" />
+    <property name="threatRange" type="int" value="60" />
+   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP|1", "Swamp|TMP|2", "Vile Consumption|INV" ] }</property>
+    </properties>
+  </object>
+  <object id="190" template="../../../../../../common/maps/obj/enemy.tx" x="242" y="407.164" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Froghemoth" />
+    <property name="speedModifier" type="float" value="20" />
+    <property name="threatRange" type="int" value="80" />
+   </properties>
+  </object>
+  <object id="191" template="../../../../../../common/maps/obj/enemy.tx" x="134" y="678.497" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Frog" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="209,208" />
+   </properties>
+  </object>
+  <object id="192" template="../../../../../../common/maps/obj/enemy.tx" x="142" y="790.497" width="16" height="21.0057">
+   <properties>
+    <property name="enemy" value="Frog" />
+    <property name="threatRange" type="int" value="20" />
+   </properties>
+  </object>
+  <object id="193" template="../../../../../../common/maps/obj/enemy.tx" x="68" y="720.497" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Frog" />
+    <property name="threatRange" type="int" value="20" />
+   </properties>
+  </object>
+  <object id="194" template="../../../../../../common/maps/obj/manashards.tx" x="370.667" y="479.333" />
+  <object id="195" template="../../../../../../common/maps/obj/manashards.tx" x="161.333" y="480" />
+  <object id="196" template="../../../../../../common/maps/obj/manashards.tx" x="138" y="332" />
+  <object id="197" template="../../../../../../common/maps/obj/manashards.tx" x="429.333" y="102" />
+  <object id="198" template="../../../../../../common/maps/obj/booster.tx" x="97.3333" y="494">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "MMQ", "NMS", "PCY" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "MMQ", "NMS", "PCY" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "MMQ", "NMS", "PCY" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="199" template="../../../../../../common/maps/obj/booster.tx" x="50.6667" y="131.333">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "MMQ", "NMS", "PCY" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "MMQ", "NMS", "PCY" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "MMQ", "NMS", "PCY" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="200" template="../../../../../../common/maps/obj/gold.tx" x="394.667" y="762.667" />
+  <object id="201" template="../../../../../../common/maps/obj/gold.tx" x="431.333" y="122" />
+  <object id="202" template="../../../../../../common/maps/obj/gold.tx" x="84" y="626" />
+  <object id="203" template="../../../../../../common/maps/obj/enemy.tx" x="144" y="535.164" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Witch" />
+    <property name="threatRange" type="int" value="20" />
+   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP|1", "Swamp|TMP|2", "Vile Consumption|INV" ] }</property>
+    </properties>
+  </object>
+  <object id="204" template="../../../../../../common/maps/obj/enemy.tx" x="372.667" y="688.497" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Witch" />
+    <property name="threatRange" type="int" value="60" />
+   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP|1", "Swamp|TMP|2", "Vile Consumption|INV" ] }</property>
+    </properties>
+  </object>
+  <object id="205" template="../../../../../../common/maps/obj/enemy.tx" x="246" y="580.497" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Flying Witch" />
+    <property name="pursueRange" type="int" value="30" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="207,206" />
+   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP|1", "Swamp|TMP|2", "Vile Consumption|INV" ] }</property></properties>
+  </object>
+  <object id="206" template="../../../../../../common/maps/obj/waypoint.tx" x="247.333" y="438" />
+  <object id="207" template="../../../../../../common/maps/obj/waypoint.tx" x="244.667" y="780" />
+  <object id="208" template="../../../../../../common/maps/obj/waypoint.tx" x="132" y="739.333" />
+  <object id="209" template="../../../../../../common/maps/obj/waypoint.tx" x="141.333" y="629.333" />
+  <object id="210" template="../../../../../../common/maps/obj/enemy.tx" x="369.761" y="521.927" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Spider" />
+    <property name="threatRange" type="int" value="20" />
+   </properties>
+  </object>
+ </objectgroup>
+</map>

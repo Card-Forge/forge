@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="46" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="208">
+ <editorsettings>
+  <export format="tmx" />
+ </editorsettings>
+ <properties>
+  <property name="canFailDungeon" type="bool" value="true" />
+  <property name="respawnEnemies" type="bool" value="true" />
+ </properties>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx" />
+ <tileset firstgid="13697" source="../../../../../../common/maps/tileset/main-nocollide.tsx" />
+ <tileset firstgid="23809" source="../../../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx" />
+ <tileset firstgid="23839" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx" />
+ <layer id="17" name="Collision" width="46" height="28">
+  <data encoding="base64" compression="zlib">
+   eJztkkEKgDAMBIM37/olbz7CP/lQn+BBAkXaUtNNaiADAUF2M4QS4dhmWSY3tX+SPWjvNPtlkPT2efUudXr05t7wzvej0Xgnua5jeYZJvxE7NL2RaHszHrwtCO86F7gv7m1LeNsy0luyhzNo73OXZ1vQ8m5hWuXZkd4S3m4evWvzdz8L75Zdvb5W90Z5Wt1b09n6nYQ30Q14PGdB
+  </data>
+ </layer>
+ <layer id="18" name="BackgroundSub" width="46" height="28">
+  <data encoding="base64" compression="zlib">
+   eJztzsEJACAMBEF7EMHy7cIOrEt8iJKfIDGRHTjuuyFgaPF8FnjrnejWRbc+2SYfuKHm1wUAANhT0poHe6+3dgD/6EYiRQ4=
+  </data>
+ </layer>
+ <layer id="13" name="Background" width="46" height="28">
+  <data encoding="base64" compression="zlib">
+   eJzt2F9OAjEQBvCRN182JrAbL0N8MCHhAZEjcJSewwfiKTwBvK3AibSNTpwOM+2WdmFJ/JIv/BP2t0NphOoBoCrUuxpglNCvCZyEvl4opcyumzp8LJ632jdK1zX/Nd2bWn4dyXcL7ti53Ipbyr873T1tAHbjn6YmxylFMrj7ZnOA7djvjvVabs3AvUNyawa8rVnPtafMc/S7fhcG4MV2aftquzLy8WNGrR+P+W7J2Np+2u5tD7bHwm5t9nSWMTc34nnEZt6HO2feeB657i7rPdVN3xNpTSwjbrfn9T1v7uehbslKr4fmxx9bT8rtLVKoVZo9mqU9hbudtcteWMItWaX7nNuFrlsXupa3xI/VzO+J/zOE5h3aB6kbvXTWmEu4F8ZvaL0cjf9cyU9D3TQl3K3xS/2Sna+Dc9Yrfvd8avLc1Ebtkhs/dznuEtE+k+3A3TzTRj8fl9jvDpfOc/V3idX+Dhv6blEis/vT4jGpI2bm6dOsuV01c1d330md9VDs333hnzA=
+  </data>
+ </layer>
+ <layer id="15" name="Walls" width="46" height="28">
+  <data encoding="base64" compression="zlib">
+   eJztl9sNgjAUho84gpE4hq8mRicQdQCGOZPIFm7gm7eNbFMbajlCSy/0oV/yhzt8HE6gAIRhUwOs6//bMplMJgTF8jcNy/w7Dc2MXWNfAhwQoMKui+S2MDtfE8Fbdb6zPFD4qeGo80OE9qacn0j7mjpzXLy5065sU2jLPNtS7Ks6v0Z6X1dtXLwvFsfJvj6ynLDraevNmcpbxaRHZI1d+9rGu69PYmPirdf5jGI95RzrPsZ6v5Hed0pv/dp6f/Q5p1JvqtYV4R2714e8qVpT3rHxVW85PqG+P/p4wMdz8V1vn26+ScFbH4uavBdT8M6kR4x/qcz0fACix41z
+  </data>
+ </layer>
+ <layer id="16" name="Clutter" width="46" height="28">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBhAIDqQlqOCo5wMDMeA+DgnhP9OkIHhPRB/EMQuP1hAiCAEBwmSJz9QgFB4DtbwHsoghEAaICQ/VADTIChX7MQYGJgHgTvIAQvR3N0ojqC/8tLfPcQCdHcPNCA2HVLq7u0SlOknFwy28IYBtgL88sS4m1A6B5mxgM7+B9kJy4uUAHLdPZ9YfQTCn1ww0sKbEPBtZGDwA2J/IA4A4kAgFpSjXr6kl7tdxCDiA+1uQun7LNCt54D4PBBfGETuJgTQ3X0RGv4wAKqnKGkz0dPd1AQ0LwcHGbAVQ+UP1fYpCIDa17jwYAJuWPqv2MSGAhh1N33BYHA3AHJlRro=
+  </data>
+ </layer>
+ <layer id="19" name="Highest Layer" width="46" height="28">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlktuwjAQhl0WSN10A4m4C2pZdE2BA7Rn4ARIaStOgdSyKydA3bJgRx8HQu2McJTx1MSP2BFF+aRfIU6Evpk4joVoaGho+P8sEiFuUiFaiTrOz2PTTw/Hn67+OvrQDFL1+rZT5KVm95zN5SEunIK3C3t4Puuemjq99w/68ZXBAR3RFQnlfcwlJNSbjoVmdh/2/9DxlXkuPb1vr9RzW9e5R03Xci3ENTGPyRv9aOgYpz11d7LlLVHj6s1rKKMl6xhmQtxBRpBx5v+MKaG9qeMjeE/guIN8QD4hX57esfqdyXnLHb/ZbyRfC+h3hCYEPvPkCfr8PC16jzXh/MDe47qpW8NM3rTXsbzLeo91LMgeJBZV3kv+Pk7kPFnK9fi9V4RzkfzdZ7nUWcVb129b76przjl6u9ZhomzvXZd3jLqqwL/19JzfZ9oX1MkxT919p9RvW2K9A7b8Ari/oaM=
+  </data>
+ </layer>
+ <layer id="20" name="AboveSprites" width="46" height="28">
+  <data encoding="base64" compression="zlib">
+   eJzt1DENAAAIwDC8IAfTSMMFhKRVsGsRAGzIui4A2NOeBwDwxgCLLgF6
+  </data>
+ </layer>
+ <objectgroup id="12" name="Objects" opacity="0.9" offsetx="2.65789" offsety="6.89474">
+  <object id="114" template="../../../../../../common/maps/obj/entry_up.tx" x="348.569" y="361.886" width="64.496" height="50">
+   <properties>
+    <property name="direction" value="left" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt_f3.tmx" />
+    <property name="teleportObjectId" value="114" />
+   </properties>
+  </object>
+  <object id="119" template="../../../../../../common/maps/obj/enemy.tx" x="220.435" y="254.655">
+   <properties>
+    <property name="defeatDialog">[
+	{
+		"text": "The Cyclops unleashes a shrill scream as he falls unto the ground. His blood mixes with that of his victims, you see the red barrier disappear. The way to Tibalt is open",
+		"options": [
+			{
+				"name": "(Continue)",
+				"action": [
+					{ "deleteMapObject": 200 },
+					{ "deleteMapObject": -1 }
+				]
+			}
+		]
+	}
+]</property>
+    <property name="displayNameOverride" value="Tibalt's Pet Cyclops" />
+    <property name="effect">{ "startBattleWithCard": [ "Mountain|LEA", "Mountain|LEB", "Mana Crypt|PHPR", "Chance Encounter|ODY", "Goblin Bomb|WTH", "Impulsive Maneuvers|ODY" ] }</property>
+    <property name="enemy" value="Cyclops" />
+    <property name="spawn.Hard" type="bool" value="true" />
+    <property name="speedModifier" type="float" value="10" />
+    <property name="threatRange" type="int" value="50" />
+   </properties>
+  </object>
+  <object id="172" template="../../../../../../common/maps/obj/manashards.tx" x="319.79" y="104.641" />
+  <object id="173" template="../../../../../../common/maps/obj/manashards.tx" x="319.287" y="87.5206" />
+  <object id="174" template="../../../../../../common/maps/obj/manashards.tx" x="318.133" y="70.1288" />
+  <object id="181" template="../../../../../../common/maps/obj/waypoint.tx" x="501.259" y="148.045" />
+  <object id="195" template="../../../../../../common/maps/obj/waypoint.tx" x="355.432" y="164.585" />
+  <object id="198" template="../../../../../../common/maps/obj/door_up.tx" x="542.903" y="200.999" width="62.3015" height="63.8032" rotation="359.74">
+   <properties>
+    <property name="direction" value="up" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/tibalt/tibalt_f1.tmx" />
+    <property name="teleportObjectId" value="204" />
+   </properties>
+  </object>
+  <object id="200" name="Ward" type="dialog" gid="23816" x="414.206" y="321.794" width="64.6728" height="16">
+   <properties>
+    <property name="dialog">[{
+    "text":"A translucent, shimmering red field blocks your path. An ancient Evil is lurking in these crypts, preventing you from entering the room in front of you ...",
+    "options":[
+    { "name":"Leave." } 
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="201" template="../../../../../../common/maps/obj/enemy.tx" x="398.782" y="66.7395">
+   <properties>
+    <property name="enemy" value="Devil of Tibalt" />
+    <property name="threatRange" type="int" value="60" />
+   </properties>
+  </object>
+  <object id="202" template="../../../../../../common/maps/obj/enemy.tx" x="433.889" y="235.084">
+   <properties>
+    <property name="enemy" value="Devil of Tibalt" />
+    <property name="threatRange" type="int" value="60" />
+    <property name="waypoints" value="181,206,205,195" />
+   </properties>
+  </object>
+  <object id="205" template="../../../../../../common/maps/obj/waypoint.tx" x="355.216" y="289.224" />
+  <object id="206" template="../../../../../../common/maps/obj/waypoint.tx" x="504.526" y="309.104" />
+ </objectgroup>
+</map>

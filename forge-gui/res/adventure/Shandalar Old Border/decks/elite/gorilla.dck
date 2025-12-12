@@ -1,0 +1,26 @@
+[metadata]
+Name=gorilla
+[Main]
+4 Taiga|LEA
+4 Wooded Foothills|ONS
+4 Snow-Covered Forest|ICE
+4 Treetop Village|ULG
+4 Mountain|USG
+4 Uktabi Orangutan|6ED
+4 Raging Gorilla|VIS
+4 Gorilla Berserkers|ALL
+4 Ancient Silverback|UDS
+2 Gargantuan Gorilla|ALL
+2 Gorilla Titan|ODY
+4 Berserk|2ED
+4 Hidden Gibbons|ULG
+4 Guerrilla Tactics|DKM
+4 Gorilla War Cry|ALL
+4 Lightning Bolt|3ED
+
+[StartInBattle_Reference]
+1 Forest|USG
+1 Gorilla Chieftain|ALL
+1 Gorilla Shaman|ALL
+1 Mountain|USG
+1 Treetop Village|ULG

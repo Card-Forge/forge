@@ -1,0 +1,36 @@
+[metadata]
+Name=Ashnod
+[Main]
+4 Underground Sea|LEA
+4 Volcanic Island|LEB
+4 Badlands|LEA
+2 Polluted Delta|ONS
+2 Bloodstained Mire|ONS
+2 Tolarian Academy|USG
+2 The Tabernacle at Pendrell Vale|LEG
+4 Dark Ritual|LEA
+4 Mox Diamond|STH
+4 Phyrexian Tyranny|PLS
+4 Underworld Dreams|LEG
+4 Wheel of Fortune|LEA
+4 Time Spiral|USG
+4 Overburden|PCY
+2 Windfall|USG
+2 Teferi's Puzzle Box|VIS
+2 Megrim|STH
+2 Mind Twist|LEA
+2 Pendrell Mists|WTH
+2 Meekstone|LEA
+
+[StartInBattle_Reference]
+1 Ashnod's Altar|ATQ
+1 Ashnod's Battle Gear|ATQ
+1 Ashnod's Cylix|ALL
+1 Ashnod's Transmogrant|ATQ
+1 Island|2ED
+1 Mountain|2ED
+1 Phyrexian Walker|VIS
+1 Phyrexian Walker|VIS
+1 Phyrexian Walker|VIS
+1 Phyrexian Walker|VIS
+1 Swamp|2ED

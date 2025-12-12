@@ -1,0 +1,28 @@
+[metadata]
+Name=Leviathan
+[Main]
+16 Island|LEA
+4 Ancient Tomb|TMP
+4 High Tide|FEM
+4 Tidal Kraken|MMQ
+2 Benthic Behemoth|TMP
+4 Great Whale|USG
+1 Marjhan|HML
+1 Island Fish Jasconius|ARN
+1 Leviathan|DRK
+1 Deep Spawn|FEM
+2 Thing from the Deep|POR
+2 Levitation|ULG
+2 Sun Quan, Lord of Wu|PTK
+4 Sea's Claim|ONS
+4 Confiscate|USG
+4 Opportunity|ULG
+4 Mana Drain|LEG
+
+[StartInBattle_Reference]
+1 Island|LEA|1
+1 Island|LEA|1
+1 Island|LEA|1
+1 Island|LEA|2
+1 Island|LEA|2
+1 Island|LEA|2

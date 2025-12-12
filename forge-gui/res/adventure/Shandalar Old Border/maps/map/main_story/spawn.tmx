@@ -1,0 +1,275 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="83">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <properties>
+  <property name="preventEscape" type="bool" value="true" />
+ </properties>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1DEKwCAMBVAHt17YS3nHDl2kaBpj8j+UDB/EwWcSsV2ltExmM70+YZhjIs7V7Hm5Um3e7leNUiyzmXlo1xqWK9mRJtNd2eniXMabHvcRnrbnJ/ex/smrteRYTY85nJqaPrwtb3d2PqLeHTei1wwX/a6QffxTbui3Dvk=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztVe0KgzAQq7M/Zl/JrtuTDt9066GBeLYqsroxGghixUty/TKmouL38Loac3cjTTcnjzXd8dpcC1qPyGe35CXSx29tfNrI4PZpc45c7TUGt/w/p825jmitEflvbtTivn1aK5UfeW0hnRyHSbdkxlSv0edvZBXIXJfuteRM7aW+sHagNcuZZf+cNc/QPVOTdaGpz7WSPW8mPdHC+sZ8w0OJdSfaQZ3z+l7BOQZ/7KdNjO31qP/TtORx666DR+/mvtgfxrfQJ7x4VZvfeb4qKir+E28jjd6D
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxz42RgcBvFo3gU0xSv4mBgeAKkV3NAMIwNomF4DQf17XwKpGGgURyVhoHHVLQf3U584AM7hHalgl/dibQTBCLYEf4GxQEl/n4GxCs5iLcbGVDqbw8gXs5Bmv0g9S8otBfk5xdQGh2sFMVurxcV07UbDrtBYIUoAlPDr8TGubsY9cKXkN3PoRjkBphfqR2+xLqBln4dxaN4FI/iUUw/DADY/Rvw
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" gid="2147495067" x="208" y="224">
+   <properties>
+    <property name="dialog">[
+    {
+        "text": "Hello, planeswalker {var=player_name}",
+        "options": [
+            {
+                "name": "Why am I here?",
+                "condition": [
+                    {
+                        "checkQuestFlag": "mainQuest",
+                        "not": true
+                    },
+                    {
+                        "checkCharacterFlag": "noQuest",
+                        "not": true
+                    }
+                ],
+                "text": "This... is Shandalar. A plane where mana is so prevalent and used by all that is sentient. Even the common people use spells daily.",
+                "voiceFile": "audio/WizPAR1.mp3",
+                "options": [
+                    {
+                        "name": "(Continue)",
+                        "text": "Like you, some planeswalkers have been imprisoned here by the guardians in the castles. You must defeat them in battle to release us from this plane. Use your powers of magic to challenge them.",
+                        "voiceFile": "audio/WizPAR2.mp3",
+                        "options": [
+                            {
+                                "name": "(Continue)",
+                                "text": "Find the planeswalkers trapped here. Guide them to me, they will help you on your journey.",
+                                "voiceFile": "audio/WizPAR3.mp3",
+                                "options": [
+                                    {
+                                        "name": "(Continue)",
+                                        "text": "Take this rune. You can use it anytime to return here. Be careful, planeswalker.",
+                                        "action": [
+                                            {
+                                                "addItem": "Colorless rune"
+                                            }
+                                        ],
+                                        "voiceFile": "audio/WizPAR4.mp3",
+                                        "options": [
+                                            {
+                                                "name": "(Continue)",
+                                                "text": "I have something else for you, {var=player_name}. Take these coins, but do not spend them with merchants.",
+                                                "condition": [
+                                                    {
+                                                        "checkCharacterFlag": "freeChallengeCoins",
+                                                        "not": true
+                                                    }
+                                                ],
+                                                "options": [
+                                                    {
+                                                        "action": [
+                                                            {
+                                                                "grantRewards": [
+                                                                    {
+                                                                        "type": "item",
+                                                                        "count": 1,
+                                                                        "itemName": "Challenge Coin"
+                                                                    },
+                                                                    {
+                                                                        "type": "item",
+                                                                        "count": 2,
+                                                                        "itemName": "Silver Challenge Coin"
+                                                                    },
+                                                                    {
+                                                                        "type": "item",
+                                                                        "count": 3,
+                                                                        "itemName": "Bronze Challenge Coin"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "setCharacterFlag": {
+                                                                    "key": "freeChallengeCoins",
+                                                                    "val": 1
+                                                                }
+                                                            }
+                                                        ],
+                                                        "name": "What are they, then? What are they for?",
+                                                        "text": "These are Challenge Coins. Spellcasters of Shandalar will often gather to hold tests of skill. These coins will grant you entry to contests, and the prizes available can help you on your journey.",
+                                                        "options": [
+                                                            {
+                                                                "name": "Where are these contests?",
+                                                                "text": "Show the coin to innkeepers. If there is a group in the town, the innkeeper will direct you to them.",
+                                                                "options": [
+                                                                    {
+                                                                        "name": "Thank you",
+                                                                        "text": "I will reopen the portal you arrived through now, but it cannot send you back from wherever you have come. On the other side, you will find the barrens of Shandalar which I, and now you, call home.",
+                                                                        "options": [
+                                                                            {
+                                                                                "name": "(Leave)",
+                                                                                "action": [
+                                                                                    {
+                                                                                        "setQuestFlag": {
+                                                                                            "key": "mainQuest",
+                                                                                            "val": 1
+                                                                                        },
+                                                                                        "activateMapObject": 78
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "name": "Thank you",
+                                                "text": "I will reopen the portal you arrived through now, but it cannot send you back from wherever you have come. On the other side, you will find the barrens of Shandalar which I, and now you, call home.",
+                                                "condition": [
+                                                    {
+                                                        "checkCharacterFlag": "freeChallengeCoins"
+                                                    }
+                                                ],
+                                                "options": [
+                                                    {
+                                                        "name": "(Leave)",
+                                                        "action": [
+                                                            {
+                                                                "setQuestFlag": {
+                                                                    "key": "mainQuest",
+                                                                    "val": 1
+                                                                },
+                                                                "activateMapObject": 78
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Bye"
+            }
+        ]
+    },
+    {
+        "condition": [
+            {
+                "checkQuestFlag": "Ch1CastlesComplete",
+                "getQuestFlag": {
+                    "key": "Ch1CastlesComplete",
+                    "op": "&lt;",
+                    "val": 5
+                }
+            }
+        ],
+        "text": "\"{var=player_name}! I feel the Guardians' spell growing weaker! Defeat them all and you may save us yet.\"",
+        "options": [
+            {
+                "name": "\"Bye.\""
+            }
+        ]
+    },
+    {
+        "condition": [
+            {
+                "getQuestFlag": {
+                    "key": "Ch1CastlesComplete",
+                    "op": "&gt;=",
+                    "val": 5
+                }
+            }
+        ],
+        "text": "\"Good to see you again {var=player_name}. I take it that you have had some success in your quest?\"",
+        "options": [
+            {
+                "action": [
+                    {
+                        "removeItem": "",
+                        "setColorIdentity": "",
+                        "advanceQuestFlag": "",
+                        "advanceMapFlag": "",
+                        "setQuestFlag": {
+                            "key": "mainQuest",
+                            "val": 3
+                        },
+                        "setMapFlag": {
+                            "key": ""
+                        },
+                        "issueQuest": "",
+                        "POIReference": ""
+                    }
+                ],
+                "name": "\"I have defeated the occupants of the five castles, but I did not find any captives.\"",
+                "text": "\"I suppose I should have explained further. The guardians you have defeated were not captors, not directly. But their mere presence had world altering effects.\"",
+                "options": [
+                    {
+                        "name": "\"Effects such as what?\"",
+                        "text": "\"You likely saw a very focused version of the effects of their presence within their castles. But they also shrouded certain areas of our world, causing them to be... 'hidden', for the lack of a better term\"",
+                        "options": [
+                            {
+                                "name": "(Continue)",
+                                "text": "\"The spell their combined presences created caused subtle tricks of the mind which made us look right past parts of our world. Including the prisons which DO hold the Planeswalkers. I believe you will now be able to find them...\"",
+                                "options": [
+                                    {
+                                        "name": "(Continue)",
+                                        "text": "[RED]Developer's note:[] You have now reached the end of the currently available story content, but there is more to be found in Shandalar. Several difficult dungeons have now been added to your world map, and your card collection can continue to grow.",
+                                        "options": [
+                                            {
+                                                "name": "(Continue)",
+                                                "text": "[RED}Developer's note:[] Check in with this NPC after updating Forge (or watch for announcements in our Discord) to continue the story when it is ready. And thanks for coming on this Adventure with us!",
+                                                "options": [
+                                                    {
+                                                        "name": "(Chapter 1 complete)"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]</property>
+    <property name="enemy" value="Adept Black Wizard" />
+   </properties>
+  </object>
+  <object id="70" template="../../../../../../common/maps/obj/entry_down.tx" x="192" y="160">
+   <properties>
+    <property name="noExit" type="bool" value="true" />
+   </properties>
+  </object>
+  <object id="78" template="../../../../../../common/maps/obj/portal.tx" x="192" y="144">
+   <properties>
+    <property name="portalState" value="active" />
+    <property name="sprite" value="sprites/portal3.atlas" />
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+ </objectgroup>
+</map>

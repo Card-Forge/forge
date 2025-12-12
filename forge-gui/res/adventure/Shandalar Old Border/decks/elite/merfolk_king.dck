@@ -1,0 +1,19 @@
+[metadata]
+Name=merfolk_king
+[Main]
+20 Island|S99
+4 Lord of Atlantis|4ED
+4 Clone|3ED
+4 Tidal Warrior|STH
+4 Rootwater Hunter|TMP
+4 Tidal Courier|APC
+4 Rootwater Commando|NMS
+4 Manta Riders|TMP
+4 Unsummon|LEA
+4 Boomerang|MIR
+4 Counterspell|ICE
+
+[StartInBattle_Reference]
+2 Island|S99
+1 Lord of Atlantis|LEA
+1 Tidal Warrior|STH

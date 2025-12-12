@@ -1,0 +1,45 @@
+[metadata]
+Name=Sorceress Queen Kaja
+[Main]
+1 Mishra's Factory|ATQ|1
+1 Mishra's Factory|ATQ|2
+1 Mishra's Factory|ATQ|3
+1 Mishra's Factory|ATQ|4
+4 Mountain|UGL
+6 Plains|UGL
+6 Island|UGL
+1 Gift of Estates|POR
+1 Inheritance|ALL
+1 Kismet|LEG
+1 Shahrazad|ARN
+2 Icatian Phalanx|FEM
+4 Swords to Plowshares|ICE
+1 Spirit Link|LEG
+1 Orim, Samite Healer|TMP
+2 Daring Apprentice|MIR
+2 Exhaustion|PO2
+2 Giant Tortoise|ARN
+2 Manta Riders|TMP
+2 Magus of the Unseen|ICE
+1 Hydroblast|ICE
+1 Illusionary Presence|ICE
+2 Talas Researcher|PO2
+2 Touch of Brilliance|PO2
+2 Bird Maiden|ARN
+2 Stone Rain|ICE
+1 Pyroblast|ICE
+1 Al-abara's Carpet|LEG
+2 Primal Clay|ATQ
+2 Bottle Gnomes|TMP
+1 Amulet of Unmaking|MIR
+1 Teferi's Puzzle Box|VIS
+
+[StartInBattle_Reference]
+1 Island|UGL
+1 Plains|UGL
+1 Mountain|UGL
+1 Cuombajj Witches|ARN
+1 Sorceress Queen|ARN
+1 Millstone|ATQ
+1 Rainbow Vale|FEM
+1 Elven Lyre|FEM

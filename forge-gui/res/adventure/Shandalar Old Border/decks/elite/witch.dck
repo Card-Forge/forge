@@ -1,0 +1,20 @@
+[metadata]
+Name=witch
+[Main]
+24 Swamp|TMP
+4 Pestilence|BRB
+4 Mutilate|TOR
+4 Lethal Vapors|SCG
+2 Spreading Plague|INV
+2 No Mercy|ULG
+4 Corrupt|7ED
+4 Drain Life|BTD
+4 Innocent Blood|ODY
+4 Choking Sands|MIR
+2 Dregs of Sorrow|7ED
+2 Forced March|MMQ
+
+[StartInBattle_Reference]
+1 Swamp|TMP|1
+1 Swamp|TMP|2
+1 Vile Consumption|INV

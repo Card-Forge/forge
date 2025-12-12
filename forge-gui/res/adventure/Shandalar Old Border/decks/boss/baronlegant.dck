@@ -1,0 +1,34 @@
+[metadata]
+Name=Baron Von Gant
+[Main]
+12 Plains|ONS
+4 Daru Encampment|ONS
+4 Forbidding Watchtower|ULG
+4 Daru Warchief|SCG
+2 Enlistment Officer|APC
+2 Gempalm Avenger|LGN
+2 Frontline Strategist|SCG
+2 Pearlspear Courier|ONS
+2 Unified Strike|ONS
+2 Piety Charm|ONS
+2 Shared Triumph|ONS
+2 Catapult Master|ONS
+2 Catapult Squad|ONS
+2 Steam Catapult|PO2
+2 Intrepid Hero|USG
+2 Aven Brigadier|ONS
+2 Gustcloak Savior|ONS
+2 Aysen Crusader|HML
+1 Lieutenant Kirtar|ODY
+1 Commander Eesha|JUD
+2 Soltari Champion|STH
+2 Soltari Trooper|TMP
+2 Sunstrike Legionnaire|LGN
+
+[StartInBattle_Reference]
+1 Daru Encampment|ONS
+1 Forbidding Watchtower|ULG
+1 Kjeldoran Outpost|ALL
+1 Mobilization|ONS
+1 Grassland Crusader|ONS
+1 Icatian Lieutenant|FEM

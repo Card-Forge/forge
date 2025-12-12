@@ -1,0 +1,279 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="88">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <properties>
+  <property name="canFailDungeon" type="bool" value="true" />
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [&quot;Phyrexian Arena|APC&quot;]}">{
+ "startBattleWithCard": [ "Phyrexian Arena|APC" ]
+}</property>
+  <property name="respawnEnemies" type="bool" value="true" />
+ </properties>
+ <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../../common/maps/tileset/buildings.tsx" />
+ <layer id="1" name="Background" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt2EEKgCAURVGnzVpCq3a90cAd/PQpJziz+F1UEOpXax0AAOBgz501B2b6zm2VVf1Jc/Tr11/33fHs2r/7+q/qn33vrLrnUtdfv/6U/qp39OvXr1////2V/xWqJe5RMv3n97+IYlv0
+  </data>
+ </layer>
+ <layer id="6" name="Floor" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztmEEOwjAMBPOD5AdVBR9tq/Ir4Gtw4YbAbtdxDjNSbpZ3VCWy1VIAAAAAAAAA4BtLLWUVnq329Z+att8s7vePj//+/m6Pdvzcaq7/2VxVn6xc/HNz8c/NVftb59JV7H9pmjnnnUsqf1XevfPc8c7Bp+iejXr/e+eO7L8Y3tzI/qqaCPC310SAv70mAvztNR68+9uvvUtVE7m/9Ua1v3l2vLP/KCL2NwtZb1MF/jZe3r59Qg==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt17EJgDAQQNG4gKSxE7FwExd1NTeRYKGllWfMe3CkzK+OJCUAgO/Y++gCgPqM+TynHNsBAE+Vd/96mxr/AdtwTa2WLroA2hW996Lvh1b94f8+V9xe6I+lP07ZP6Xf/onzRv8BTFAKcQ==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="48" height="48">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmFsOgyAQRd2A/WvShbgCU11nP/pwB91O60paUomUMMwVeZg4JPdHyMwJAnOhOVRVIxKJRCKRSJRQ/VdvUKqhY7tM/OeJK3ZrhX8X/ENdVTdA9/rHdQXHP+r8exn5T7nmdS/86Pk5TvwvcLycn8Iv/On2ZZeJHzkfXHud42oz8SPxXf8qlB+tr1R9jsU/TDEpHl3f7fih65aKQ/kTk43yGiomx0PlNddtZ42x+0Lmwcem46uaydXLkchr8qhvl+Msu8/Fj+TVY+z9u2ZPUvzP0yyEPySn8G+Df+mdJBV/6ruOK2dM/jUewlW3VeO8w9L1gPD3Vn7knuDLj+SMyY+wCP9/n30GUO8PlA8pzU/FW5JvDb/Pv/nmjKr73P3d9iEmm+s812y+s5Pzb6m8Pze3HBvq31xzFrNxuVP4txItpv8p0UL9T8j9MPR+Wfqtd6vvn8IfVx+qQlaG
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt17EJACAQA8Bs8Buro+sC1o94B+lTBZIAAAD8bVQyT1Z1NwEAAABu/Hegi/3hBRuEwwT/
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="47" template="../../../../../../../common/maps/obj/gold.tx" x="427" y="467">
+   <properties>
+    <property name="reward">[
+  {
+    "type": "gold",
+    "count": 180,
+    "addMaxCount": 40
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="49" template="../../../../../../../common/maps/obj/gold.tx" x="310" y="466.5">
+   <properties>
+    <property name="reward">[
+  {
+    "type": "gold",
+    "count": 180,
+    "addMaxCount": 40
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="55" template="../../../../../../../common/maps/obj/gate.tx" x="368" y="640.333">
+   <properties>
+    <property name="dialog">[
+	{
+		"name": "",
+		"text": "You come upon the gate.",
+		"loctext": "",
+		"action": [
+			{ "advanceMapFlag": "intro" }
+		],
+		"options":
+			[
+				{
+					"name": "Lord, I've done as you asked! It's time to end this!",
+					"action": [ { "deleteMapObject": 55 } ],
+					"condition": [
+						{
+							"getMapFlag": {
+								"key": "enemiesDefeated",
+								"op": "&gt;=",
+								"val": 4
+							}
+						},
+						{
+                            "checkQuestFlag": "mainQuest",
+                            "not": true
+                        }
+					],
+					"text": "With a gust of black wind, the door scatters into thousands of pieces. You are now free to pass.",
+					"options": [ { "name": "(continue)" } ]
+				},
+				{
+                	"name": "Lord, I've done as you asked! It's time to end this!",
+                	"action": [ { "deleteMapObject": 55 } ],
+                	"condition": [
+                	{
+                		"getMapFlag": {
+                	    	"key": "enemiesDefeated",
+                			"op": "&gt;=",
+                			"val": 4
+                		}
+                	},
+                    {
+                        "checkQuestFlag": "Ch1BlackCastleComplete",
+                        "not": true
+                    },
+                    {
+                        "checkQuestFlag": "mainQuest"
+                    }
+                	],
+                		"text": "With a gust of black wind, the door scatters into thousands of pieces. You are now free to pass.",
+                		"options": [ { "name": "(continue)" } ]
+                },
+				{
+					"name": "You knock on the door",
+					"condition": [ { "checkMapFlag": "intro" } ],
+					"text": "YOU ARE NOT WORTHY, BEGONE!",
+					"loctext": "",
+					"options": [ { "name": "(continue)" } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="60" template="../../../../../../../common/maps/obj/entry_up.tx" x="357" y="768" width="38" height="16">
+   <properties>
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+  <object id="65" template="../../../../../../../common/maps/obj/entry_up.tx" x="355" y="543.5" width="44.5" height="52">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/castles/black_castle_f1.tmx" />
+   </properties>
+  </object>
+  <object id="66" template="../../../../../../../common/maps/obj/enemy.tx" x="89.5" y="601">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Shade" />
+    <property name="pursueRange" type="int" value="30" />
+    <property name="threatRange" type="int" value="30" />
+   <property name="effect">{"startBattleWithCard": ["Swamp|3ED", "Swamp|3ED", "Swamp|3ED", "Frozen Shade|LEA"]}</property>
+    </properties>
+  </object>
+  <object id="67" template="../../../../../../../common/maps/obj/enemy.tx" x="649.5" y="604">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Ghoul Gravecaller" />
+    <property name="pursueRange" type="int" value="30" />
+    <property name="threatRange" type="int" value="20" />
+   </properties>
+  </object>
+  <object id="68" template="../../../../../../../common/maps/obj/enemy.tx" x="629.5" y="410.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Witch" />
+    <property name="pursueRange" type="int" value="30" />
+    <property name="threatRange" type="int" value="30" />
+   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP|1", "Swamp|TMP|2", "Vile Consumption|INV" ] }</property>
+    </properties>
+  </object>
+  <object id="69" template="../../../../../../../common/maps/obj/enemy.tx" x="365" y="232.63">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="effect">{ "startBattleWithCard": [ "Rotting Giant|ODY", "Swamp|ODY|1", "Swamp|ODY|2", "Swamp|ODY|3", "Swamp|ODY|4" ] }</property>
+    <property name="enemy" value="Grave Titan" />
+    <property name="pursueRange" type="int" value="10" />
+    <property name="threatRange" type="int" value="10" />
+   </properties>
+  </object>
+  <object id="70" template="../../../../../../../common/maps/obj/enemy.tx" x="96.0511" y="407.602">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Ancient Vampire" />
+    <property name="pursueRange" type="int" value="30" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="71" template="../../../../../../../common/maps/obj/enemy.tx" x="366.694" y="701.945">
+   <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Mox Jet|LEA", "Wall of Bones|LEA" ] }</property>
+    <property name="enemy" value="Master Black Wizard" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="76,77,76,78,79,78,80,73,81,82,81,74,75,74" />
+   </properties>
+  </object>
+  <object id="72" template="../../../../../../../common/maps/obj/enemy.tx" x="378.182" y="348.768">
+   <properties>
+    <property name="enemy" value="Demon" />
+    <property name="waypoints" value="73,81,82,81,74,75,74,76,77,76,78,79,78,80" />
+   </properties>
+  </object>
+  <object id="73" template="../../../../../../../common/maps/obj/waypoint.tx" x="512.919" y="350.666" />
+  <object id="74" template="../../../../../../../common/maps/obj/waypoint.tx" x="512.919" y="704.587" />
+  <object id="75" template="../../../../../../../common/maps/obj/waypoint.tx" x="689.405" y="701.741" />
+  <object id="76" template="../../../../../../../common/maps/obj/waypoint.tx" x="222.571" y="703.638" />
+  <object id="77" template="../../../../../../../common/maps/obj/waypoint.tx" x="53.6753" y="702.689" />
+  <object id="78" template="../../../../../../../common/maps/obj/waypoint.tx" x="221.622" y="497.738" />
+  <object id="79" template="../../../../../../../common/maps/obj/waypoint.tx" x="44.1868" y="499.635" />
+  <object id="80" template="../../../../../../../common/maps/obj/waypoint.tx" x="216.878" y="344.024" />
+  <object id="81" template="../../../../../../../common/maps/obj/waypoint.tx" x="508.175" y="498.686" />
+  <object id="82" template="../../../../../../../common/maps/obj/waypoint.tx" x="692.252" y="495.84" />
+  <object id="85" template="../../../../../../../common/maps/obj/enemy.tx" x="399" y="650.5">
+   <properties>
+    <property name="dialog">[
+  {
+    "text": "Welcome {var=player_name}, my kind master, the Lord, has been waiting eagerly for this moment.",
+    "options": [
+      {
+        "name": "Is that so? I guess you wouldn't mind opening that gate in front of me?",
+        "text": "I'm afraid I'm not allowed to do that, I am a mere servant of the mighty Lord, ruler of everything unholy.",
+        "options": [
+          {
+            "name": "What do I need to do to get passed though this gate?",
+            "text": "To show you are worthy, you must prove your strength by defeating at least four of the five enemies lurking within this cursed dungeon to be worthy of an audience with my illustrious master, who holds dominion over this realm of evil. Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.",
+            "options": [
+              {
+                "name": "I'll show my worth, just make sure to open the gate when I defeat your challengers.",
+                "text": "Leave"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Demon" />
+   </properties>
+  </object>
+  <object id="87" template="../../../../../../../common/maps/obj/enemy.tx" x="150" y="450">
+   <properties>
+    <property name="enemy" value="Ghoulcaller Ghoul" />
+    <property name="threatRange" type="int" value="40" />
+   <property name="effect">{"startBattleWithCard": ["Swamp|2ED", "Swamp|2ED", "Lord of the Undead|PLS"]}</property>
+    </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -3,6 +3,7 @@ package forge.ai;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import com.google.common.collect.Lists;
 
@@ -25,6 +26,10 @@ import forge.game.spellability.OptionalCost;
 import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMode;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 public class ComputerUtilAbility {
@@ -85,8 +90,6 @@ public class ComputerUtilAbility {
     }
 
     public static List<SpellAbility> getOriginalAndAltCostAbilities(final List<SpellAbility> originList, final Player player) {
-        final List<SpellAbility> newAbilities = Lists.newArrayList();
-
         List<SpellAbility> originListWithAddCosts = Lists.newArrayList();
         for (SpellAbility sa : originList) {
             // If this spell has alternative additional costs, add them instead of the unmodified SA itself
@@ -94,6 +97,7 @@ public class ComputerUtilAbility {
             originListWithAddCosts.addAll(GameActionUtil.getAdditionalCostSpell(sa));
         }
 
+        final List<SpellAbility> newAbilities = Lists.newArrayList();
         for (SpellAbility sa : originListWithAddCosts) {
             // determine which alternative costs are cheaper than the original and prioritize them
             List<SpellAbility> saAltCosts = GameActionUtil.getAlternativeCosts(sa, player, false);
@@ -318,10 +322,11 @@ public class ComputerUtilAbility {
             a1 += getSpellAbilityPriority(a);
             b1 += getSpellAbilityPriority(b);
 
-            // If both are creature spells sort them after
+            // if both are creature spells sort them after
             if (safeToEvaluateCreatures) {
-                a1 += Math.round(ComputerUtilCard.evaluateCreature(a) / 100f);
-                b1 += Math.round(ComputerUtilCard.evaluateCreature(b) / 100f);
+                // try to align the scales: if priority swings in either direction extra evaluation matters less
+                a1 += Math.round(ComputerUtilCard.evaluateCreature(a) / (10.5f + Math.abs(a1)));
+                b1 += Math.round(ComputerUtilCard.evaluateCreature(b) / (10.5f + Math.abs(b1)));
             }
 
             return b1 - a1;
@@ -352,7 +357,7 @@ public class ComputerUtilAbility {
                 if (ComputerUtilCard.isCardRemAIDeck(sa.getOriginalHost() != null ? sa.getOriginalHost() : source)) {
                     p -= 10;
                 }
-                // don't play equipments before having any creatures
+                // don't play equipment before having any creatures
                 if (source.isEquipment() && noCreatures) {
                     p -= 9;
                 }
@@ -366,14 +371,31 @@ public class ComputerUtilAbility {
                     p -= 9;
                 }
                 // move snap-casted spells to front
-                if (source.isInZone(ZoneType.Graveyard)) {
-                    if (sa.getMayPlay() != null && source.mayPlay(sa.getMayPlay()) != null) {
-                        p += 50;
-                    }
+                if (source.isInZone(ZoneType.Graveyard) && source.mayPlay(sa.getMayPlay()) != null) {
+                    p += 50;
                 }
                 // if the profile specifies it, deprioritize Storm spells in an attempt to build up storm count
                 if (source.hasKeyword(Keyword.STORM) && ai.getController() instanceof PlayerControllerAi) {
                     p -= (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.PRIORITY_REDUCTION_FOR_STORM_SPELLS));
+                }
+
+                for (Trigger trig : source.getTriggers()) {
+                    if (!"Battlefield".equals(trig.getParam("TriggerZones"))) {
+                        continue;
+                    }
+                    final TriggerType mode = trig.getMode();
+                    // benefit from Magecraft abilities
+                    if ((mode == TriggerType.SpellCast || mode == TriggerType.SpellCastOrCopy) && "You".equals(sa.getParam("ValidActivatingPlayer"))) {
+                        p += 1;
+                    }
+                }
+
+                for (StaticAbility sta : source.getStaticAbilities()) {
+                    final Set<StaticAbilityMode> mode = sta.getMode();
+                    // reduce cost to enable more plays
+                    if (mode.contains(StaticAbilityMode.ReduceCost) && "You".equals(sta.getParam("Activator"))) {
+                        p += 1;
+                    }
                 }
             }
 

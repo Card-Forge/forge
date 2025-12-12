@@ -1,0 +1,232 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="27">
+ <properties>
+  <property name="preventEscape" type="bool" value="true" />
+ </properties>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <layer id="1" name="Background" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJx7L8DA8H4UD2k8QXDg3TCKR/EoHsWjeBSPYgQGAOukVWk=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJy1lV8OgjAMxpeo8Un2IjIP479LGRXvosbEBw/gGTyCGg/jGmkoZSsbaJMv4gL79WtHuWZKXX8kHmfHGsavmF24B6ulcevYggv7DZmOWZ0r5bcQcjmQ/SjTaKWeo68w+rruQeJKuaysTuRZYMIaDcjhVfAvjDtj97bJAbRN3Pcgm3OR3be/g0jvEI+iplP9/b938DeJm0v5sWzaR+ovhhva7yfxiD4ldghXqvl7VOWsPT1FVgw3pub/4IbU3MfdJdXrie7Gvdnnc7Knj4tekXm3/Zmbbn7HjJ0zNvVqirOA8yWE6Zo/Pp+pLsUD2K452aa33HNTQN1PHb1Sdsr4UGO+1sSl38MmJg9eY94HiYvzgs+MXlauc/neb9oHPGchdaY5SOdf+pZhH+Adwn0+8DHMnQ==
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="30" height="20">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1lU1uwjAQhQcBJV0k6QKFNRA4QDdtL4QQLIoEYs0tWHCDngRyASI23KHdVV00o3TwxHWcMYQnWXEs630z/hkD1Kfzk7zVqWu5swCgHZrbPHDnmvzQR+dOmfdxqPpvQ9i0LLGgP/lx5kOoPE4+wOc47+s5TAU5oX76+ZdiQf9JUM7kWsX5XC4vvOTnpGWsYqA4bNK5xD5ka5Jk7cWRL5WJy/nIRr0K+Gk2d23we264cVG437acU9/cr1IVl6952Z5/jOQ8KZfzE0E+20Hx/7t/GxclvWOor07xP9LO9724pN3g/1izB/BYcc9cuN0/r0VcHI+0mjUx1MkyldUf/Ux1tTmcSTUS2ZJaj6Jc32P7PKkk+2urtXVz+fvFmabaw8XXGdc4ewM2LlyqF1QzSHtfjetNcr8pHsk68xhs598T7EUUKp9f0D1aLQ==
+  </data>
+ </layer>
+ <layer id="4" name="Overlay" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFQx04SmCK2WMRo7WdtAYDYecoGAUjCRSoDLQL6AtoXU6OgoEFA5GemcURbAATVAL8
+  </data>
+ </layer>
+ <objectgroup id="5" name="Objects">
+  <object id="8" template="../../../../../../common/maps/obj/enemy.tx" x="350" y="120">
+   <properties>
+    <property name="defeatDialog">[
+  {
+    "action": [{"deleteMapObject": -1}]
+  }
+]</property>
+    <property name="dialog">[
+  {
+    "text":"The mage at the heart of the cavern snarls at you, \"If my companions haven't given you a cold enough welcoming, allow me...\" ",
+    "options":[
+      {
+        "name":"\"I just need one of those flowers...\"",
+        "text":"\"No. Now begone with you.",
+        "options":[
+            {
+              "name":"(Fight)",
+              "action": [ { "battleWithActorID": -1 } ]
+            },
+            {
+              "name":"(Flee)"
+            }
+         ]
+      },
+      {
+        "name":"(Fight)",
+        "action": [ { "battleWithActorID": -1 } ]
+      },
+      {
+        "name":"(Flee)"
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Snow Wizard" />
+   <property name="effect">{"startBattleWithCard": ["Snow-Covered Forest|ICE", "Snow-Covered Plains|ICE", "Snow-Covered Mountain|ICE", "Ice Floe|ICE", "Wall of Pine Needles|ICE", "Tinder Wall|ICE", "Snow Fortress|ICE", "Winter's Night|ALL"]}</property>
+    </properties>
+  </object>
+  <object id="9" template="../../../../../../common/maps/obj/enemy.tx" x="308" y="255">
+   <properties>
+    <property name="enemy" value="Yeti" />
+   </properties>
+  </object>
+  <object id="10" template="../../../../../../common/maps/obj/enemy.tx" x="413" y="186">
+   <properties>
+    <property name="enemy" value="Yeti" />
+    <property name="pursueRange" type="int" value="0" />
+   </properties>
+  </object>
+  <object id="11" template="../../../../../../common/maps/obj/enemy.tx" x="97" y="79">
+   <properties>
+    <property name="enemy" value="Polar Bear" />
+    <property name="pursueRange" type="int" value="60" />
+    <property name="threatRange" type="int" value="60" />
+    <property name="waypoints" value="21" />
+   </properties>
+  </object>
+  <object id="12" template="../../../../../../common/maps/obj/treasure.tx" x="64" y="64">
+   <properties>
+    <property name="reward">[{
+  "type": "randomCard",
+  "count": 2,
+  "colors": [ "colorID" ]
+},{
+  "type": "randomCard",
+  "count": 1,
+  "probability": 0.5,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
+},{
+  "type": "randomCard",
+  "count": 3,
+  "addMaxCount": 2
+},
+{
+   "type": "item",
+   "count": 1,
+   "itemName": "Landscape Sketchbook - Coldsnap"
+}]</property>
+   </properties>
+  </object>
+  <object id="13" template="../../../../../../common/maps/obj/gold.tx" x="96" y="304" />
+  <object id="14" template="../../../../../../common/maps/obj/enemy.tx" x="143" y="304">
+   <properties>
+    <property name="enemy" value="Polar Bear" />
+    <property name="threatRange" type="int" value="60" />
+    <property name="waypoints" value="22" />
+   </properties>
+  </object>
+  <object id="15" template="../../../../../../common/maps/obj/enemy.tx" x="208" y="112">
+   <properties>
+    <property name="enemy" value="Yeti" />
+    <property name="pursueRange" type="int" value="60" />
+    <property name="waypoints" value="r5-17-16" />
+   </properties>
+  </object>
+  <object id="19" template="../../../../../../common/maps/obj/manashards.tx" x="416" y="288" />
+  <object id="20" template="../../../../../../common/maps/obj/manashards.tx" x="177" y="79" />
+  <object id="21" template="../../../../../../common/maps/obj/waypoint.tx" name="21" x="97" y="79" />
+  <object id="22" template="../../../../../../common/maps/obj/waypoint.tx" name="22" x="143" y="304" />
+  <object id="23" template="../../../../../../common/maps/obj/dialog.tx" x="280" y="305" width="46" height="28">
+   <properties>
+    <property name="dialog">[
+{
+   "text": "Flowers grow, or attempt to, in all corners of the cave. Stalactites of ice dot a bright white roof of the cave like a chandelier, and it is much warmer in here than you would have expected.",
+   "options": [{"name": "(Continue)"}],
+   "action": [{"deleteMapObject":-1}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="24" template="../../../../../../common/maps/obj/dialog.tx" x="206" y="80" width="19" height="16">
+   <properties>
+    <property name="dialog">[
+    {
+        "text": "Not all of the plants are in good health, this one appears to have been chewed on by an animal. You're not even sure what color this flower used to be.",
+        "options": [
+            {
+                "name": "(Continue)"
+                "action": [
+                    {
+                        "deleteMapObject": -1
+                    }
+                ]
+            }
+        ]
+    }
+]</property>
+   </properties>
+  </object>
+  <object id="25" template="../../../../../../common/maps/obj/dialog.tx" x="304" y="176" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+    {
+        "text": "This flower has a very rich violet hue to it.",
+        "options": [
+            {
+                "name": "Take the flower",
+                "action": [
+                    {
+                        "deleteMapObject": -1,
+                        "setQuestFlag": {
+                            "key": "violetFlowerForViv",
+                            "val": 1
+                        },
+                        "setMapFlag": {
+                            "key": "hasAFlower",
+                            "val": 1
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]</property>
+   </properties>
+  </object>
+  <object id="26" template="../../../../../../common/maps/obj/dialog.tx" x="368" y="176" width="17" height="16">
+   <properties>
+    <property name="dialog">[
+    {
+        "text": "This flower is a very romantic shade of scarlet.",
+        "options": [
+            {
+                "name": "Take the flower",
+                "action": [
+                    {
+                        "deleteMapObject": -1,
+                        "setQuestFlag": {
+                            "key": "scarletFlowerForViv",
+                            "val": 1
+                        },
+                        "setMapFlag": {
+                            "key": "hasAFlower",
+                            "val": 1
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="6" name="Waypoints">
+  <object id="1" template="../../../../../../common/maps/obj/collision.tx" x="-32" y="0" width="32" height="320" />
+  <object id="2" template="../../../../../../common/maps/obj/collision.tx" x="-32" y="320" width="544" height="32" />
+  <object id="3" template="../../../../../../common/maps/obj/collision.tx" x="480" y="0" width="32" height="320" />
+  <object id="4" template="../../../../../../common/maps/obj/collision.tx" x="-32" y="-32" width="544" height="32" />
+  <object id="5" template="../../../../../../common/maps/obj/waypoint.tx" name="5" x="240" y="96" />
+  <object id="7" template="../../../../../../common/maps/obj/entry_up.tx" x="296" y="327" width="124" height="16">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story_explore/frostbitten_cavern_0.tmx" />
+    <property name="teleportObjectId" value="31" />
+   </properties>
+  </object>
+  <object id="16" template="../../../../../../common/maps/obj/waypoint.tx" name="16" x="176" y="160" />
+  <object id="17" template="../../../../../../common/maps/obj/waypoint.tx" name="17" x="144" y="96" />
+ </objectgroup>
+</map>

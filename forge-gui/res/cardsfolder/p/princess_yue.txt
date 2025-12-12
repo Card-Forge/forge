@@ -1,0 +1,12 @@
+Name:Princess Yue
+ManaCost:2 U
+Types:Legendary Creature Human Noble Ally
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+Creature+nonLand | Execute$ DBReturn | TriggerDescription$ When CARDNAME dies, if she was a nonland creature, return this card to the battlefield tapped under your control. She's a land named Moon. She gains "{T}: Add {C}." (She's still legendary.)
+SVar:DBReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Tapped$ True | RememberChanged$ True | StaticEffect$ Animate | SubAbility$ DBAnimate
+SVar:Animate:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Land | RemoveCardTypes$ True | SetName$ Moon | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Duration$ Permanent | Abilities$ ABMana | SubAbility$ DBCleanup
+SVar:ABMana:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Scry | Cost$ T | ScryNum$ 2 | SpellDescription$ Scry 2.
+Oracle:When Princess Yue dies, if she was a nonland creature, return this card to the battlefield tapped under your control. She's a land named Moon. She gains "{T}: Add {C}." (She's still legendary.)\n{T}: Scry 2.

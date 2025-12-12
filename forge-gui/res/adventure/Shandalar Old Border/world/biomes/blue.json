@@ -26,6 +26,12 @@
 	"Shell"
 ],
 "enemies": [
+	"Legend of the Tundra",
+	"Legend of the Underground Sea",
+	"Tropical Islander of Treva",
+	"Scrublander of Dromar",
+	"Volcanic Islander of Crosis",
+	"Domain Keeper of Cromat",
 	"Adept Blue Wizard",
 	"Aether Channeler",
 	"Angelic Overseer",
@@ -69,7 +75,9 @@
 	"Tarkir Djinn",
 	"Turtle",
 	"Walking Brain",
-	"Water Elemental"
+	"Water Elemental",
+	"Shapeshifter of Shandalar",
+	"Thought Invoker of Shandalar"
 
 ],
 "pointsOfInterest": [

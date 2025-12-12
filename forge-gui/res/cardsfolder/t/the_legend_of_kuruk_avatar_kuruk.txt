@@ -1,0 +1,23 @@
+Name:The Legend of Kuruk
+ManaCost:2 U U
+Types:Enchantment Saga
+K:Chapter:3:DBScry,DBScry,DBTransform
+SVar:DBScry:DB$ Scry | ScryNum$ 2 | SubAbility$ DBDraw | SpellDescription$ Scry 2, then draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | GainControl$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Draw|Token
+AlternateMode:DoubleFaced
+Oracle:(As this Saga enters and after your draw step, add a lore counter.)\nI, II — Scry 2, then draw a card.\nIII — Exile this Saga, then return it to the battlefield transformed under your control.
+
+ALTERNATE
+
+Name:Avatar Kuruk
+ManaCost:no cost
+Types:Legendary Creature Avatar
+PT:4/3
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a spell, create a 1/1 colorless Spirit creature token with "This token can't block or be blocked by non-Spirit creatures."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_spirit_spiritshadow | TokenOwner$ You
+A:AB$ AddTurn | Cost$ Waterbend<20> | NumTurns$ 1 | Exhaust$ True | SpellDescription$ Take an extra turn after this one.
+Oracle:Whenever you cast a spell, create a 1/1 colorless Spirit creature token with "This token can’t block or be blocked by non-Spirit creatures."\nExhaust — Waterbend {20}: Take an extra turn after this one. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}. Activate each exhaust ability only once.)

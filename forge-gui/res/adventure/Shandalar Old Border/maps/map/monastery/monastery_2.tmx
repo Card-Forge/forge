@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="82">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBjcQJaHgUGaB0KDAIwtzTMy7I3ipY+9u3ggeDfUnp08CLHhCEb9O+rf4QRGmn9BYA9a+byXTn6VRbOX1mUzLQAAu9ccxg==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyrYWNgqEHDYRyUY3QzCWFsZjxhJ4ypbS8xdmKzmxJ7SbET3W5S7YXZTY6dyHaTYy8ldsLwqL2j9o50ewcq/w5keUVp+UyvuoEa9SG+epUYu4ixDwC1sVGi
+  </data>
+ </layer>
+ <layer id="2" name="Floor and Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy91V0OgjAMB/A+sgxOYLwSvutZ0CP5+eLXiRDDEVxjGspsYVsWmyxGYPsx+RcBAC4FQG2GcXLftdqza99Gv46qn1izNWN35a23qQBupT7WVbwp2R1z0byX03u6CnaIye1YU7NbYQ8hFWNq9j9MzdbqKPz+y0STauHNxx7A580t6gc8hufxM6er9V0t9FBO1383kO33bpfZxfXPxeDzvqJzlL/cz5eMuXw/3bydTTMbN++RcN+UvRQ71cTqWb5ibG5KfRNi8tyF2GSidxDyO+drmUd7a7+D7qGxwzHaZ29++zLUfpmx7//HUtb9zGqmZn8AulhqKg==
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBic4DEXA0MTN2H8lIv6diry4Fcnz0M9u4m1k5p2k2ontewmx050u8m1lxIwau+ovbj0kZsXYHmQHEBuPiQ331NiNzXsJNVuatqJbjcMN0PjrhGtPqKmneigEc3eZgrSPQArjCuE
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy9lc0NwjAMhXNDldIZgGPYAy70yiwFemc9WAOmoFGwcB92/ih8UlXZjdPYz26H1kx4mDLuYJ/bzzXXJtwH4ZkUe2sKDwFo7+lHfyecS8I5YzYu7cP8YxwT+Xu24/47l/ZxeL1Or3d08tKkBjWg5tz+VksNXveYjsQF7JUN19oGe2nfPi0upp/U9/+Czyzpf1hM1+TmS3HY17xvfG/l1LyWnFruwZ5DXwR79xezQ1A9S74nnNx8c8A8555hvn8v1BR92tyhdpqWWnzuvw57rQaphn5WaW8+T6V9hufT4vlcPQH9Ryy1
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="279.665" width="48" height="16">
+   <properties>
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+  <object id="65" template="../../../../../../common/maps/obj/treasure.tx" x="199.167" y="48.8333" />
+  <object id="66" template="../../../../../../common/maps/obj/gold.tx" x="216.501" y="48.2141" />
+  <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="172.923" y="219.563">
+   <properties>
+    <property name="enemy" value="Apprentice White Wizard" />
+    <property name="threatRange" type="int" value="20" />
+   </properties>
+  </object>
+  <object id="68" template="../../../../../../common/maps/obj/booster.tx" x="318.799" y="126.939">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 10,
+    "colors": [ "white" ],
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 3,
+    "colors": [ "white" ],
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 1,
+    "colors": [ "white" ],
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="207.848" y="68.8154">
+   <properties>
+    <property name="enemy" value="Angel Warrior" />
+   </properties>
+  </object>
+  <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="237.51" y="183.254">
+   <properties>
+    <property name="enemy" value="Apprentice White Wizard" />
+    <property name="threatRange" type="int" value="20" />
+   </properties>
+  </object>
+  <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="164.5" y="120">
+   <properties>
+    <property name="enemy" value="Apprentice White Wizard" />
+    <property name="threatRange" type="int" value="20" />
+   </properties>
+  </object>
+  <object id="72" template="../../../../../../common/maps/obj/manashards.tx" x="97" y="128" />
+  <object id="73" template="../../../../../../common/maps/obj/waypoint.tx" x="207" y="94.5" />
+  <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="209" y="195.5" />
+  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="284" y="199" />
+  <object id="76" template="../../../../../../common/maps/obj/waypoint.tx" x="282" y="93.5" />
+  <object id="77" template="../../../../../../common/maps/obj/waypoint.tx" x="130.5" y="93" />
+  <object id="78" template="../../../../../../common/maps/obj/waypoint.tx" x="127.5" y="193.5" />
+  <object id="79" template="../../../../../../common/maps/obj/enemy.tx" x="125.5" y="130">
+   <properties>
+    <property name="enemy" value="Knight" />
+    <property name="threatRange" type="int" value="40" />
+    <property name="waypoints" value="77,78" />
+   <property name="effect">{"startBattleWithCard": ["Plains|2ED", "Darkest Hour|USG"]}</property>
+</properties>
+  </object>
+  <object id="80" template="../../../../../../common/maps/obj/enemy.tx" x="288" y="133.5">
+   <properties>
+    <property name="enemy" value="Knight" />
+    <property name="threatRange" type="int" value="40" />
+    <property name="waypoints" value="76,75" />
+   <property name="effect">{"startBattleWithCard": ["Plains|2ED", "Darkest Hour|USG"]}</property>
+</properties>
+  </object>
+  <object id="81" template="../../../../../../common/maps/obj/enemy.tx" x="210" y="131.5">
+   <properties>
+    <property name="enemy" value="Knight" />
+    <property name="threatRange" type="int" value="40" />
+    <property name="waypoints" value="73,74" />
+   <property name="effect">{"startBattleWithCard": ["Plains|2ED", "Darkest Hour|USG"]}</property>
+</properties>
+  </object>
+ </objectgroup>
+</map>

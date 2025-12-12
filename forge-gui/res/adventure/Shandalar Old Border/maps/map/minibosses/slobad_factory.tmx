@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="98">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  "startBattleWithCard": [ "Squee, Goblin Nabob|MMQ", "Squee's Toy|TMP" ],
+}</property>
+ </properties>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <layer id="6" name="Collision" width="50" height="27">
+  <data encoding="base64" compression="zlib">
+   eJxz42RgcBvEmFhACzMHAgwHP4DAqD8GFyDHH89YB8at+MCoPwYXGMn5YzCCwVwPLhAlXu1gaVeMAgRw5qMOxmYWLjtgYgMNcLmBkNuieBkY6rhxq8UXRujytASkmE+pW2jpF3r6g5TyjFQwXOKDnmDUH4MLDHd/kFM/kVqW75UgXi0xdpMjRwvzyWkzUNOto2AU4AMAfwpP8w==
+  </data>
+ </layer>
+ <layer id="7" name="Floor and Walls" width="50" height="27">
+  <data encoding="base64" compression="zlib">
+   eJztlrENwjAURH8K4iQwAiWwBGIdBqEglFSUGQYyC2tAXFgyUZx822fLBE460Xzd+dl8AdFv6VUQ3cq4zko8x1hfytk2XarPtTc1jv48IhstPfuajb+JLa/u5yIeR7/Lxn8OPIePbXNT5dDP5sLtq32FZeH4UOE5XBXqXvtar8J6J4g2InyP9ENgPJTVdr4zZ3161Z0dCz+rO5dZTTlu0+xW8DyU5cJxzonqzpccy9Ew9gjJoZ/jmznU970Fc3CE5Jhim+IwzcbmUDLtzBSHaTYmh1Tqe35afn6aOELtuTxjzPcItecoDs57hPwddLHOUecYD2WpPs6sT++c/ifOgeMNnIqt6w==
+  </data>
+ </layer>
+ <layer id="8" name="Walls Supplementary" width="50" height="27">
+  <data encoding="base64" compression="zlib">
+   eJxjYBhZwIKJgeEyHjxUgBkOt6qyU44Hgz9gAN09IP40Tkw8mPxxAIubsbkNl7vx+QPdbFr6o58Rtz8oBehmUxsg+4ObhXb20NJsEED2hy4Nyydamg0C+PIHNQGt88dwAdeGUF03CgYHIFRXEwNMmIg3ixS1xJpFC7BCkzy5UTB4QbIIKh6KYDj4YRSMguEO9koMtAuoA/D5g5Z+HG2XjAJqAwACbyJZ
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="50" height="27">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBjcwI2TOEwtcJmJ+tiSif7+oAUwoaE/3FkZGDyA2JMVu/w0TggmB6CbTUt/PAXaESLIwPAchz9gQJWdcrNp6Y9mNgaGfkYGhlY2/H7A5Q9YfGGLN3SzaekPEOBlwS0Hchu+uMDnD3SzaZ0/9Jhw5w9CAJ8/0M0eDPmDHH/QI3+YMUFoUBpuYcOfP4j1CzpAN5tW8TGdkXQ8A4inkaEPhK8PonoQFI+khCu5eBQMLXAIGGeHgfgIEB8F4mNAfBwUl2IQ+fuaDAwPNCm356QwhL4INOuSJiYNAz5yELtbxPGb16eOaTY+8Btoxx8K/TEbqH8O1IxkEfwYGQQK4jZzlTpuOVqB7UA/7NAk7Ad0f3wfZP6AAWT3vtFgYFihCaFx+WOqEG6zBos/iIkPYzzpnhh/4GvPYgPE5DMQINUf5OYPmPvbKGiT4APUyB+N3BAa5o9mbkw1pMYDOYAYf8yVhtDY8gfIHw1aDAyMWhAamz9AAN0fd4F58R4J5e5eCcr9AQPY8gcsPkB+AAFi/fET6IdfaP7wxZNu0eXCgPxwII4A4iBBwnxkgC1/yPMwMCggYUUe3G4ZBaOAEAAAWVzGLw==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="392.003" y="430.664">
+   <properties>
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="167.442" y="360.525">
+   <properties>
+    <property name="enemy" value="Goblin Artificer" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="85,wait1,84" />
+   </properties>
+  </object>
+  <object id="62" template="../../../../../../common/maps/obj/gold.tx" x="612.2" y="163.276" />
+  <object id="65" template="../../../../../../common/maps/obj/gold.tx" x="718.376" y="387.094" />
+  <object id="66" template="../../../../../../common/maps/obj/gold.tx" x="172.877" y="109.076" />
+  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="161.837" y="296.881">
+   <properties>
+    <property name="enemy" value="Goblin Artificer" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="86,87,83" />
+   </properties>
+  </object>
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="622.514" y="340.31">
+   <properties>
+    <property name="enemy" value="Construct" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="90,91,96,91" />
+   </properties>
+  </object>
+  <object id="72" template="../../../../../../common/maps/obj/gold.tx" x="34.7974" y="292.312" />
+  <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="391.834" y="231.5">
+   <properties>
+    <property name="enemy" value="Construct" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="74" template="../../../../../../common/maps/obj/enemy.tx" x="398.667" y="110">
+   <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Goblin Spy|INV", "Goblin War Drums|FEM", "Mountain|UGL" ] }</property>
+    <property name="enemy" value="Slobad" />
+    <property name="threatRange" type="int" value="90" />
+    <property name="waypoints" value="92,93,95,94" />
+   </properties>
+  </object>
+  <object id="79" template="../../../../../../common/maps/obj/manashards.tx" x="510" y="238" />
+  <object id="80" template="../../../../../../common/maps/obj/manashards.tx" x="615" y="70" />
+  <object id="81" template="../../../../../../common/maps/obj/manashards.tx" x="175" y="50" />
+  <object id="82" template="../../../../../../common/maps/obj/manashards.tx" x="30" y="243" />
+  <object id="83" template="../../../../../../common/maps/obj/waypoint.tx" x="158" y="264" />
+  <object id="84" template="../../../../../../common/maps/obj/waypoint.tx" x="237" y="381.667" />
+  <object id="85" template="../../../../../../common/maps/obj/waypoint.tx" x="91" y="376" />
+  <object id="86" template="../../../../../../common/maps/obj/waypoint.tx" x="238" y="321" />
+  <object id="87" template="../../../../../../common/maps/obj/waypoint.tx" x="101" y="297" />
+  <object id="90" template="../../../../../../common/maps/obj/waypoint.tx" x="680.333" y="262.667" />
+  <object id="91" template="../../../../../../common/maps/obj/waypoint.tx" x="679.333" y="346.667" />
+  <object id="92" template="../../../../../../common/maps/obj/waypoint.tx" x="504.667" y="54.3333" />
+  <object id="93" template="../../../../../../common/maps/obj/waypoint.tx" x="502.667" y="151" />
+  <object id="94" template="../../../../../../common/maps/obj/waypoint.tx" x="314.667" y="57.3333" />
+  <object id="95" template="../../../../../../common/maps/obj/waypoint.tx" x="314" y="148.667" />
+  <object id="96" template="../../../../../../common/maps/obj/waypoint.tx" x="563.667" y="343.667" />
+  <object id="97" template="../../../../../../common/maps/obj/booster.tx" x="401" y="43">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "ULG" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "WTH" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "ODY" ],
+    "type": "card",
+    "count": 1,
+    "rarity": [ "Rare", "Mythic Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

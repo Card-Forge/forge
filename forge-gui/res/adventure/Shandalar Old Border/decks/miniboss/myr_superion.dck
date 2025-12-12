@@ -1,0 +1,26 @@
+[metadata]
+Name=Colossus of Sardia
+[Main]
+4 Urza's Mine|ATQ
+4 Urza's Tower|ATQ
+4 Urza's Power Plant|ATQ
+4 Mishra's Workshop|ATQ
+4 Mishra's Factory|ATQ
+4 Thran Dynamo|UDS
+4 Teeka's Dragon|MIR
+2 Colossus of Sardia|ATQ
+2 Diabolic Machine|DRK
+2 Aladdin's Ring|3ED
+4 Phyrexian Colossus|USG
+2 Lotus Guardian|INV
+4 Triskelion|ATQ
+4 Tetravus|ATQ
+4 Clockwork Beast|LEA
+4 Juggernaut|LEA
+2 Sword of the Ages|LEG
+2 Armageddon Clock|4ED
+
+[StartInBattle_Reference]
+1 Colossus of Sardia|ATQ
+1 Mishra's Workshop|ATQ
+1 Sol Ring|LEA

@@ -4,7 +4,7 @@ Types:Instant
 K:Entwine:1
 A:SP$ Charm | Choices$ DBTap,DBEffect | CharmNum$ 1
 SVar:DBTap:DB$ Tap | ValidTgts$ Creature | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select two target creatures | SpellDescription$ Tap two target creatures.
-SVar:DBEffect:DB$ Effect | ValidTgts$ Player | TgtPrompt$ Select target player | IsCurse$ True | ReplacementEffects$ DontUntap | Triggers$ RestoreSight | RememberObjects$ Targeted | Duration$ Permanent | SpellDescription$ Creatures don't untap during target player's next untap step.
+SVar:DBEffect:DB$ Effect | ValidTgts$ Player | IsCurse$ True | ReplacementEffects$ DontUntap | Triggers$ RestoreSight | RememberObjects$ Targeted | Duration$ Permanent | SpellDescription$ Creatures don't untap during target player's next untap step.
 SVar:DontUntap:Event$ Untap | ValidCard$ Creature | ValidStepTurnToController$ Player.IsRemembered | Layer$ CantHappen | Description$ Creatures don't untap during target player's next untap step.
 SVar:RestoreSight:Mode$ Phase | Phase$ Untap | ValidPlayer$ Player.IsRemembered | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile

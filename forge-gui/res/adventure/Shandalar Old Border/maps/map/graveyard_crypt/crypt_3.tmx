@@ -1,0 +1,348 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="155">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon.tsx" />
+ <layer id="1" name="Background" width="40" height="25">
+  <data encoding="base64" compression="zlib">
+   eJybxsnAMG0AMLFgINwx1Nw3jxOCB6v7BjL8QDhZBGIXiEZ3N3q4ofPp5T4YHozuwxfvg9196GAg3HdMGIEpdd+8AQ4/dDAU3UeJG4lNM8M5/Aaz++iFR91HH/eNglEwCkbBSAUAn0g43w==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="25" opacity="0.9">
+  <data encoding="base64" compression="zlib">
+   eJzNlkEOAiEMRdkZE2elO8ele49j9AQeSu+h7r2Fd5HGNFYGSoEC85OfCYUMb0pLZlwZMwp8How5DfFYL++st4KY69vy3/vFdB5ir/X3CeOefO7+yIfK4YNzfNrn3fpBjDHujCV8oOshnw/ydBzC5nKI+4fyg/PvQj5XyAZK4fPVH8efy0fF8WHNY53NlQ/ZJHyhtRp8bq6wN+mYmvZv7FuwV309x4ky+fg4x9ZK7gOOL7ReyhdzLT4tTilfibX5tDk1+WiNz4GxFV8OI6hF/bmMUtacfmyZw1p83Pto/aTylXLBP3CMLzWXNc5W8+6uwXfZ/KxZg7V7g6p3j3BspXytJOH7AC5GQkc=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzllrFOAzEMhiMxoFOviLESlLdgYOvUh4AReALWA96CkddAUHiUTsCExIrERCzOis/YF/ty7cIv/WqbXOPvHDtKCP9bZ9MQnurk06lvftOax5jnxyFcRF9GH9S++W3wvca4b9HvCh+fP2w9hm4y+wHx76tkiY/Pl/Ctnc8P4QN5+T6U8QX7zdfddv6oGmFvNT6sAw/fWDWIXGh6Zqza+KjHunuerFoGfIccHz+P6BogqR+0mCjKl1OOj+fb2w+lsvLxfoC8AeuCjX8542P+pdr18EnS1uTxryfxk/h2YmMv5fPEONlLngtxeB3T/tb4llUZX0NiPMySJT5NFr5SDeVrhPNltp8MfC/1b71gP3BZ+mHM/HE+yji2tLsE7TsLHzJi/13tdI3jmu6qrq2Cvn828uVqUbtHDmHDM4mzWfg+d/+uB2N991xkg32zMGpslI+z0fx9k7Xwu4WP5pCf2dQaW46P1iD3kaMnaX7ofoE1Lml/JWv/62Pvy48nhoXP8o6b9A+8gaQv
+  </data>
+ </layer>
+ <layer id="6" name="Clutter Bis" width="40" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztycENABAQBdHfwUpUjLpwU5etgaw4zEvmNBJ+V0yqXrOzH60naXgznf0XVr77AAAAABBtA+08Ce0=
+  </data>
+ </layer>
+ <layer id="7" name="Clutter Bis" width="40" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztzSERAAAIADEiUZhodCECgsNt9sVHwF3lrX/r5b91AACAbwPwAQO1
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="351.333" y="271.333" width="48.3333" height="49.3333">
+   <properties>
+    <property name="direction" value="down" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/graveyard_crypt/graveyard_3.tmx" />
+   </properties>
+  </object>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="168.333" y="29.8333" />
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="167.235" y="326.392">
+   <properties>
+    <property name="enemy" value="Ghoul Gravecaller" />
+    <property name="threatRange" type="int" value="60" />
+   </properties>
+  </object>
+  <object id="63" template="../../../../../../common/maps/obj/enemy.tx" x="218" y="227">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="142,143" />
+   </properties>
+  </object>
+  <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="110" y="292.333">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="140,149,148,123" />
+   </properties>
+  </object>
+  <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="106.667" y="188.333">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="124,140" />
+   </properties>
+  </object>
+  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="272.667" y="188.333">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="124,140" />
+   </properties>
+  </object>
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="160" y="242.667">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="140,130" />
+   </properties>
+  </object>
+  <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="215.333" y="162">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="154,127" />
+   </properties>
+  </object>
+  <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="248.667" y="76.3333">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="144,130" />
+   </properties>
+  </object>
+  <object id="74" template="../../../../../../common/maps/obj/enemy.tx" x="126.667" y="227.666">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="140,149,148,123" />
+   </properties>
+  </object>
+  <object id="76" template="../../../../../../common/maps/obj/enemy.tx" x="489.667" y="264.667">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="131,136,124,125" />
+   </properties>
+  </object>
+  <object id="78" template="../../../../../../common/maps/obj/enemy.tx" x="161.333" y="87.333">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="142,143" />
+   </properties>
+  </object>
+  <object id="79" template="../../../../../../common/maps/obj/enemy.tx" x="209.667" y="114.667">
+   <properties>
+    <property name="enemy" value="Brain Mole" />
+    <property name="threatRange" type="int" value="60" />
+   <property name="effect">{"startBattleWithCard": ["Sky Diamond|MIR", "Sky Diamond|MIR", "Propaganda|TMP", "Ambassador Laquatus|TOR"]}</property>
+    </properties>
+  </object>
+  <object id="80" template="../../../../../../common/maps/obj/enemy.tx" x="464.333" y="320.667">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="125,128,125,122,126" />
+   </properties>
+  </object>
+  <object id="81" template="../../../../../../common/maps/obj/enemy.tx" x="428.667" y="247.667">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="128,126,127" />
+   </properties>
+  </object>
+  <object id="82" template="../../../../../../common/maps/obj/enemy.tx" x="416.667" y="173.333">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="139,134" />
+   </properties>
+  </object>
+  <object id="93" template="../../../../../../common/maps/obj/enemy.tx" x="270" y="317.333">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="122,125,124,123" />
+   </properties>
+  </object>
+  <object id="95" template="../../../../../../common/maps/obj/enemy.tx" x="506.334" y="186.333">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="137,127" />
+   </properties>
+  </object>
+  <object id="96" template="../../../../../../common/maps/obj/treasure.tx" x="168.667" y="363.667" />
+  <object id="97" template="../../../../../../common/maps/obj/gold.tx" x="495.667" y="339.333" />
+  <object id="98" template="../../../../../../common/maps/obj/gold.tx" x="544" y="176" />
+  <object id="99" template="../../../../../../common/maps/obj/gold.tx" x="249" y="32.3333" />
+  <object id="100" template="../../../../../../common/maps/obj/gold.tx" x="79.6667" y="173.667" />
+  <object id="107" template="../../../../../../common/maps/obj/enemy.tx" x="530.667" y="241">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="124,125,131,136" />
+   </properties>
+  </object>
+  <object id="111" template="../../../../../../common/maps/obj/gold.tx" x="407" y="226.333" />
+  <object id="112" template="../../../../../../common/maps/obj/gold.tx" x="211" y="358.333" />
+  <object id="113" template="../../../../../../common/maps/obj/booster.tx" x="416" y="54.3333">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="114" template="../../../../../../common/maps/obj/booster.tx" x="545.667" y="54.6667">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "ODY", "TOR", "JUD" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="115" template="../../../../../../common/maps/obj/enemy.tx" x="415.667" y="54.6667" visible="1">
+   <properties>
+    <property name="enemy" value="Ghost" />
+    <property name="hidden" type="bool" value="true" />
+    <property name="pursueRange" type="float" value="60" />
+    <property name="threatRange" type="float" value="40" />
+   </properties>
+  </object>
+  <object id="116" template="../../../../../../common/maps/obj/enemy.tx" x="548" y="52.6667" visible="1">
+   <properties>
+    <property name="enemy" value="Ghost" />
+    <property name="hidden" type="bool" value="true" />
+    <property name="pursueRange" type="float" value="60" />
+    <property name="threatRange" type="float" value="30" />
+   </properties>
+  </object>
+  <object id="117" template="../../../../../../common/maps/obj/enemy.tx" x="360.333" y="169">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="95,92" />
+   </properties>
+  </object>
+  <object id="118" template="../../../../../../common/maps/obj/enemy.tx" x="327" y="364">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="126,127,128" />
+   </properties>
+  </object>
+  <object id="119" template="../../../../../../common/maps/obj/enemy.tx" x="419.667" y="96.6667">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="132,131,128" />
+   </properties>
+  </object>
+  <object id="120" template="../../../../../../common/maps/obj/enemy.tx" x="545.333" y="98.6667">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="133,134,129,134" />
+   </properties>
+  </object>
+  <object id="121" template="../../../../../../common/maps/obj/enemy.tx" x="262.333" y="254.333">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="150,149,147" />
+   </properties>
+  </object>
+  <object id="122" template="../../../../../../common/maps/obj/waypoint.tx" x="308.333" y="325.667" />
+  <object id="123" template="../../../../../../common/maps/obj/waypoint.tx" x="304.667" y="186.333" />
+  <object id="124" template="../../../../../../common/maps/obj/waypoint.tx" x="484.333" y="185.333" />
+  <object id="125" template="../../../../../../common/maps/obj/waypoint.tx" x="494.667" y="316.667" />
+  <object id="126" template="../../../../../../common/maps/obj/waypoint.tx" x="256.667" y="370.333" />
+  <object id="127" template="../../../../../../common/maps/obj/waypoint.tx" x="377" y="374.333" />
+  <object id="128" template="../../../../../../common/maps/obj/waypoint.tx" x="463.667" y="242" />
+  <object id="129" template="../../../../../../common/maps/obj/waypoint.tx" x="376.667" y="299" />
+  <object id="130" template="../../../../../../common/maps/obj/waypoint.tx" x="236.667" y="296.667" />
+  <object id="131" template="../../../../../../common/maps/obj/waypoint.tx" x="419.667" y="341" />
+  <object id="132" template="../../../../../../common/maps/obj/waypoint.tx" x="418.667" y="113" />
+  <object id="133" template="../../../../../../common/maps/obj/waypoint.tx" x="544.667" y="99.3333" />
+  <object id="134" template="../../../../../../common/maps/obj/waypoint.tx" x="550" y="294" />
+  <object id="135" template="../../../../../../common/maps/obj/waypoint.tx" x="398.667" y="198.667" />
+  <object id="136" template="../../../../../../common/maps/obj/waypoint.tx" x="562.333" y="207" />
+  <object id="137" template="../../../../../../common/maps/obj/waypoint.tx" x="560.333" y="144.667" />
+  <object id="138" template="../../../../../../common/maps/obj/waypoint.tx" x="437.333" y="290" />
+  <object id="139" template="../../../../../../common/maps/obj/waypoint.tx" x="393.667" y="143" />
+  <object id="140" template="../../../../../../common/maps/obj/waypoint.tx" x="80.3333" y="193.333" />
+  <object id="141" template="../../../../../../common/maps/obj/enemy.tx" x="564.333" y="177">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="124,140" />
+   </properties>
+  </object>
+  <object id="142" template="../../../../../../common/maps/obj/waypoint.tx" x="167.333" y="46.3333" />
+  <object id="143" template="../../../../../../common/maps/obj/waypoint.tx" x="149.333" y="293" />
+  <object id="144" template="../../../../../../common/maps/obj/waypoint.tx" x="250" y="49.3333" />
+  <object id="145" template="../../../../../../common/maps/obj/enemy.tx" x="150.333" y="269.333">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="142,143" />
+   </properties>
+  </object>
+  <object id="146" template="../../../../../../common/maps/obj/enemy.tx" x="238.667" y="284">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="144,130" />
+   </properties>
+  </object>
+  <object id="147" template="../../../../../../common/maps/obj/waypoint.tx" x="74.6667" y="263" />
+  <object id="148" template="../../../../../../common/maps/obj/waypoint.tx" x="189.667" y="271" />
+  <object id="149" template="../../../../../../common/maps/obj/waypoint.tx" x="190.667" y="188.333" />
+  <object id="150" template="../../../../../../common/maps/obj/waypoint.tx" x="297.333" y="270.333" />
+  <object id="151" template="../../../../../../common/maps/obj/enemy.tx" x="300.667" y="221">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="140,149,148,123" />
+   </properties>
+  </object>
+  <object id="152" template="../../../../../../common/maps/obj/enemy.tx" x="488.667" y="160">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="131,136,124,125" />
+   </properties>
+  </object>
+  <object id="153" template="../../../../../../common/maps/obj/enemy.tx" x="413.667" y="312.333">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="137,127" />
+   </properties>
+  </object>
+  <object id="154" template="../../../../../../common/maps/obj/waypoint.tx" x="156.333" y="78.3333" />
+ </objectgroup>
+</map>

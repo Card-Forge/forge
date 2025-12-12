@@ -87,24 +87,24 @@ public class DrawAi extends SpellAbilityAi {
      * forge.game.card.Card)
      */
     @Override
-    protected boolean willPayCosts(Player ai, SpellAbility sa, Cost cost, Card source) {
-        if (!ComputerUtilCost.checkCreatureSacrificeCost(ai, cost, source, sa)) {
+    protected boolean willPayCosts(Player payer, SpellAbility sa, Cost cost, Card source) {
+        if (!ComputerUtilCost.checkCreatureSacrificeCost(payer, cost, source, sa)) {
             return false;
         }
 
-        if (!ComputerUtilCost.checkLifeCost(ai, cost, source, 4, sa)) {
+        if (!ComputerUtilCost.checkLifeCost(payer, cost, source, 4, sa)) {
             return false;
         }
 
-        if (!ComputerUtilCost.checkDiscardCost(ai, cost, source, sa)) {
-            AiCostDecision aiDecisions = new AiCostDecision(ai, sa, false);
+        if (!ComputerUtilCost.checkDiscardCost(payer, cost, source, sa)) {
+            AiCostDecision aiDecisions = new AiCostDecision(payer, sa, false);
             for (final CostPart part : cost.getCostParts()) {
                 if (part instanceof CostDiscard) {
                     PaymentDecision decision = part.accept(aiDecisions);
                     if (null == decision)
                         return false;
                     for (Card discard : decision.cards) {
-                        if (!ComputerUtil.isWorseThanDraw(ai, discard)) {
+                        if (!ComputerUtil.isWorseThanDraw(payer, discard)) {
                             return false;
                         }
                     }
@@ -171,7 +171,7 @@ public class DrawAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         if (targetAI(ai, sa, sa.isTrigger() && sa.getHostCard().isInPlay())) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
@@ -558,7 +558,7 @@ public class DrawAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+    public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         final Card host = sa.getHostCard();
         final String aiLogic = sa.getParam("UnlessAI");
 
@@ -586,6 +586,6 @@ public class DrawAi extends SpellAbilityAi {
         }
         // TODO add logic for Discard + Draw Effects
 
-        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+        return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
     }
 }

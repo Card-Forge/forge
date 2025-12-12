@@ -1,0 +1,11 @@
+Name:The Fire Nation Drill
+ManaCost:2 B B
+Types:Legendary Artifact Vehicle
+PT:6/3
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigImmediateTrigger | TriggerDescription$ When CARDNAME enters, you may tap it. When you do, destroy target creature with power 4 or less.
+SVar:TrigImmediateTrigger:AB$ ImmediateTrigger | Cost$ tapXType<1/Card.Self/CARDNAME> | Execute$ TrigDestroy | TriggerDescription$ When you do, destroy target creature with power 4 or less.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.powerLE4 | TgtPrompt$ Select target creature with power 4 or less
+A:AB$ AnimateAll | Cost$ 1 | ValidCards$ Permanent.OppCtrl | RemoveKeywords$ Hexproof & Indestructible | SpellDescription$ Permanents your opponents control lose hexproof and indestructible until end of turn.
+K:Crew:2
+Oracle:Trample\nWhen The Fire Nation Drill enters, you may tap it. When you do, destroy target creature with power 4 or less.\n{1}: Permanents your opponents control lose hexproof and indestructible until end of turn.\nCrew 2

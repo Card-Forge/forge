@@ -1,0 +1,27 @@
+[metadata]
+Name=Akroma, Angel of Wrath
+[Main]
+20 Plains|LEA
+4 Akroma, Angel of Wrath|LGN
+4 Serra Angel|LEA
+4 Exalted Angel|ONS
+2 Blinding Angel|NMS
+2 Radiant, Archangel|ULG
+2 Reya Dawnbringer|INV
+2 Karmic Guide|ULG
+2 Angel of Retribution|TOR
+4 Decree of Justice|SCG
+4 Swords to Plowshares|LEA
+2 Harsh Mercy|ONS
+2 Akroma's Blessing|ONS
+2 Aura of Silence|WTH
+2 Moat|LEG
+2 Akroma's Vengeance|ONS
+
+[StartInBattle_Reference]
+1 Plains|ONS|2
+1 Plains|ONS|3
+1 Plains|ONS|4
+1 Serra's Blessing|WTH
+1 Serra's Liturgy|USG
+1 Tormented Angel|UDS

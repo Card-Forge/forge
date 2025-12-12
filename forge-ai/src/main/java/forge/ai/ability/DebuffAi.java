@@ -87,7 +87,7 @@ public class DebuffAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         if (!sa.usesTargeting()) {
             // TODO - copied from AF_Pump.pumpDrawbackAI() - what should be here?
         } else {

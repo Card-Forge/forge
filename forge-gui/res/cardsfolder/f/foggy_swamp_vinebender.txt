@@ -1,0 +1,7 @@
+Name:Foggy Swamp Vinebender
+ManaCost:3 G
+Types:Creature Human Ranger Ally 
+PT:4/3
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ This creature can't be blocked by creatures with power 2 or less.
+A:AB$ PutCounter | Cost$ Waterbend<5> | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | PlayerTurn$ True | SpellDescription$ Put a +1/+1 counter on this creature. Activate only during your turn.
+Oracle:This creature can't be blocked by creatures with power 2 or less.\nWaterbend {5}: Put a +1/+1 counter on this creature. Activate only during your turn. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)

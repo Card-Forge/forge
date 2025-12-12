@@ -1,0 +1,43 @@
+[metadata]
+Name=Goblin King Phil
+[Main]
+4 Sulfurous Springs|ICE
+4 Underground River|ICE
+4 Snow-Covered Island|ICE
+4 Snow-Covered Mountain|ICE
+4 Snow-Covered Swamp|ICE
+1 Mishra's Factory|ATQ|1
+1 Mishra's Factory|ATQ|2
+1 Mishra's Factory|ATQ|3
+1 Mishra's Factory|ATQ|4
+4 Urza's Science Fair Project|UGL
+2 Mirror Universe|LEG
+2 Ramirez DePietro|LEG
+4 Goblin King|5ED
+3 Goblin Chirurgeon|FEM|2
+3 Goblin Digging Team|5ED
+3 Command of Unsummoning|POR
+1 Gaseous Form|LEG
+2 Cloud Pirates|POR
+1 Apathy|WTH
+1 Dream Cache|TMP
+1 Prosperity|POR
+1 Sleight of Hand|PO2
+2 Tidal Surge|PO2
+2 Pit Imp|TMP
+1 Taunt|POR
+1 Anarchy|ICE
+1 Basal Thrull|FEM|2
+1 Greed|LEG
+
+[StartInBattle_Reference]
+1 Mountain|UGL
+1 Island|UGL
+1 Swamp|UGL
+1 Runed Arch|ICE
+1 Conch Horn|FEM
+1 Orcish Librarian|ICE
+1 Sunstone|ICE
+1 Goblin Digging Team|5ED
+1 Goblin Chirurgeon|FEM|2
+1 Browse|ALL

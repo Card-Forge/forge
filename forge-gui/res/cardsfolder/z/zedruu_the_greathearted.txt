@@ -2,7 +2,7 @@ Name:Zedruu the Greathearted
 ManaCost:1 U R W
 Types:Legendary Creature Minotaur Monk
 PT:2/4
-A:AB$ Pump | Cost$ U R W | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBGainControl | AILogic$ DonateTargetPerm | SpellDescription$ Target opponent gains control of target permanent you control. | StackDescription$ None
+A:AB$ Pump | Cost$ U R W | ValidTgts$ Opponent | SubAbility$ DBGainControl | AILogic$ DonateTargetPerm | SpellDescription$ Target opponent gains control of target permanent you control. | StackDescription$ None
 SVar:DBGainControl:DB$ GainControl | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent that you control | NewController$ ParentTarget
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ GainLife | TriggerDescription$ At the beginning of your upkeep, you gain X life and draw X cards, where X is the number of permanents you own that your opponents control.
 SVar:GainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ DBDraw

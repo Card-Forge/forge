@@ -1,0 +1,27 @@
+[metadata]
+Name=Mishra
+[Main]
+4 Mishra's Factory|ATQ
+4 Mishra's Workshop|ATQ
+4 Strip Mine|ATQ
+4 Wasteland|TMP
+4 Ancient Tomb|TMP
+2 Mishra's War Machine|ATQ
+2 Su-Chi|ATQ
+4 Phyrexian Colossus|USG
+2 Dragon Engine|ATQ
+4 Masticore|UDS
+2 Phyrexian Devourer|ALL
+2 Phyrexian Hulk|TMP
+4 Thran Dynamo|UDS
+4 Triangle of War|VIS
+4 Power Matrix|MMQ
+2 Cursed Scroll|TMP
+4 Metalworker|UDS
+4 Amulet of Unmaking|MIR
+
+[StartInBattle_Reference]
+1 Mishra's Workshop|ATQ
+1 Mishra's Groundbreaker|ALL
+1 Ankh of Mishra|LEA
+1 Dragon Engine|3ED

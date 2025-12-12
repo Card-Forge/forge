@@ -1,0 +1,6 @@
+Name:Sokka's Sword Training
+ManaCost:1 W
+Types:Instant Lesson
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBToken | SpellDescription$ Target creature gets +2/+2 until end of turn. Create a Clue token. (It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_clue_draw | TokenOwner$ You
+Oracle:Target creature gets +2/+2 until end of turn.\nCreate a Clue token. (It's an artifact with "{2}, Sacrifice this token: Draw a card.")

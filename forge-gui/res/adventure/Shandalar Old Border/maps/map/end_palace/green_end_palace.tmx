@@ -1,0 +1,266 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="83">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{"startBattleWithCard": ["Gaea's Cradle|USG", "Gaea's Herald|PLS", "Gaea's Touch|DRK", "Lifeforce|LEA", "Choke|TMP"]}</property>
+  <property name="respawnEnemies" type="bool" value="true" />
+ </properties>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <layer id="1" name="Background" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt2LEJACEQRUFTsyvhqrZeuRrc049MMJksDxUER29tAAAAXOx9subATt+9rXKqP2mOfv369etfn7fz3Tn1zqXuv379Kf1Va/Tr169f///9lf8K1RLPKJn++/snqiFdMg==
+  </data>
+ </layer>
+ <layer id="6" name="Floor" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztmEEOwjAMBPOD5AdVBR9tq/Ir4Gtw4YbAbtdxDjNSbpZ3VCWy1VIAAAAAAAAA4BtLLWUVnq329Z+att8s7vePj//+/m6Pdvzcaq7/2VxVn6xc/HNz8c/NVftb59JV7H9pmjnnnUsqf1XevfPc8c7Bp+iejXr/e+eO7L8Y3tzI/qqaCPC310SAv70mAvztNR68+9uvvUtVE7m/9Ua1v3l2vLP/KCL2NwtZb1MF/jZe3r59Qg==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt2LEJgDAARNG4gY1gIWLh4K5g5XpyoNgb8Dz9D1LnVwdJKQAAAO+xtu4CAMgzHNs5sqEAgCBLd51E6f0yN+6CelvvLrhH3edJRH899/+H+37gr77wfp+C24V+L/p9tD/qZ398nujfAV7BEUs=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="48" height="48">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmG8OwiAMxTmBWxZdPMiO5r9j6b54PUMcERtK3xgwzdrkfRppf2FAHww7YwaVSqVSqVSqgupbYx6gbKBjD20d/v3ElTs65d8E/60x5gzo0ry5TuD4a1N/LyP/qda8boUfPT/Hif+u56fyK39xfmlfuv1Vmh85H0J7XeLqKvEj+UP/KpUf7a9cf87Ff5tycjyuv9P8qeuWy8P5E5+N8xo2p8TD1e3J+vSDfkuZhxiby297ptQvR6auz9ORMfRbiB+p68bQ/btkT3L8z+NHCH9KzRr8Nv6R34/S/HPvJKX4S991QjVz8i/xEKG+bUPyDnPXA8Lfk/rIPSFWH6mZkx9hUf7vb/QM4N4fOB+yNj+Xb069Jfwx/xabM67vS/d36kN8ttB57thiZ6fk30p5f2luJTbUv4XmLGdItUv4tzUip/9ZI1L9T8r9MPV+ufZb76++fyp/Xr0AEEL8qA==
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt17EJACAQA8Bs8Buro+sC1o94B+lTBZIAAAD8bVQyT1Z1NwEAAABu/Hegi/3hBRuEwwT/
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="47" template="../../../../../../common/maps/obj/gold.tx" x="427.667" y="460">
+   <properties>
+    <property name="reward">[
+  {
+    "type": "gold",
+    "count": 180,
+    "addMaxCount": 40
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="308.667" y="463.667">
+   <properties>
+    <property name="reward">[
+  {
+    "type": "gold",
+    "count": 180,
+    "addMaxCount": 40
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="172.506" y="501.224">
+   <properties>
+    <property name="enemy" value="Master Green Wizard" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="73,81,74,76,82,78,82,75,77,80,79,81" />
+   <property name="effect">{ "startBattleWithCard": [ "Wall of Brambles|LEA", "Mox Emerald|LEA" ] }</property></properties>
+  </object>
+  <object id="55" template="../../../../../../common/maps/obj/gate.tx" x="368.667" y="638.667">
+   <properties>
+    <property name="dialog">[
+	{
+		"name": "",
+		"text": "You come upon a gate.",
+		"loctext": "",
+		"action": [
+			{ "advanceMapFlag": "intro" }
+		],
+		"options":
+			[
+				{
+					"name": "Gaea, I've done as you asked! It's time to end this!",
+					"action": [ { "deleteMapObject": 55 } ],
+					"condition": [
+						{
+							"getMapFlag": {
+								"key": "enemiesDefeated",
+								"op": "&gt;=",
+								"val": 4
+							}
+						},
+						{
+                            "checkQuestFlag": "mainQuest",
+                            "not": true
+                        }
+					],
+					"text": "With an extremely loud roar, the gate burst open, leaving only ashes in your path. You are now free to pass.",
+					"options": [ { "name": "(continue)" } ]
+				},
+				{
+                	"name": "Gaea, I've done as you asked! It's time to end this!",
+                	"action": [ { "deleteMapObject": 55 } ],
+                	"condition": [
+                		{
+                			"getMapFlag": {
+                				"key": "enemiesDefeated",
+                				"op": "&gt;=",
+                				"val": 4
+                			}
+                		},
+                		{
+                               "checkQuestFlag": "Ch1GreenCastleComplete",
+                               "not": true
+                        },
+                        {
+                            "checkQuestFlag": "mainQuest"
+                        }
+                	],
+                	"text": "With an extremely loud roar, the gate burst open, leaving only ashes in your path. You are now free to pass.",
+                	"options": [ { "name": "(continue)" } ]
+                },
+				{
+					"name": "You knock on the door",
+					"condition": [ { "checkMapFlag": "intro" } ],
+					"text": "YOU ARE NOT WORTHY, BEGONE!",
+					"loctext": "",
+					"options": [ { "name": "(continue)" } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="60" template="../../../../../../common/maps/obj/entry_up.tx" x="357" y="768" width="38" height="16">
+   <properties>
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+  <object id="65" template="../../../../../../common/maps/obj/entry_down.tx" x="347.5" y="544.5" width="56.5" height="16">
+   <properties>
+    <property name="teleport" value="../common/maps/map/main_story/castles/green_castle_f1.tmx" />
+   </properties>
+  </object>
+  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="79.3333" y="603">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Jolrael, Empress of Beasts" />
+    <property name="threatRange" type="int" value="30" />
+   <property name="effect">{"startBattleWithCard": ["Jolrael, Empress of Beasts|PCY", "Undiscovered Paradise|VIS", "Jolrael's Centaur|MIR", "Nature's Revolt|TMP"]}</property>
+    </properties>
+  </object>
+  <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="658.333" y="600">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Verdeloth the Ancient" />
+    <property name="threatRange" type="int" value="30" />
+   <property name="effect">{"startBattleWithCard": ["Heart of Yavimaya|ALL", "Yavimaya Hollow|UDS", "Greener Pastures|USG", "Saproling Infestation|INV", "Night Soil|FEM", "Fires of Yavimaya|INV", "Yavimaya Gnats|ICE"]}</property>
+    </properties>
+  </object>
+  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="663.666" y="409.333">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Rofellos" />
+    <property name="threatRange" type="int" value="30" />
+   <property name="effect">{"startBattleWithCard": ["Forest|ICE", "Wirewood Lodge|ONS", "Rofellos, Llanowar Emissary|UDS", "Ivy Seer|UDS", "Heedless One|ONS", "Braidwood Cup|UDS"]}</property>
+    </properties>
+  </object>
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="363.833" y="223.874">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="effect">{ "startBattleWithCard": [ "Forest|TMP", "Forest|TMP", "Forest|TMP", "Forest|TMP", "Treefolk Seedlings|USG" ] }</property>
+    <property name="enemy" value="Forest Giant" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="97" y="410">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Multani" />
+    <property name="threatRange" type="int" value="30" />
+   <property name="effect">{"startBattleWithCard": ["Heart of Yavimaya|ALL", "Yavimaya Hollow|UDS", "Multani's Presence|ULG", "Rowen|VIS", "Primitive Etchings|SCG", "Library of Leng|LEA", "Primal Rage|STH", "Fires of Yavimaya|INV", "Yavimaya Gnats|ICE"]}</property>
+    </properties>
+  </object>
+  <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="600.667" y="494">
+   <properties>
+    <property name="enemy" value="Master Green Wizard" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="82,75,77,80,79,81,73,81,74,76,82,78" />
+   <property name="effect">{ "startBattleWithCard": [ "Wall of Brambles|LEA", "Mox Emerald|LEA" ] }</property></properties>
+  </object>
+  <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="398.667" y="648.667">
+   <properties>
+    <property name="dialog">[
+  {
+    "text": "Welcome {var=player_name}, queen Gaea has been waiting eagerly for this moment.",
+    "options": [
+      {
+        "name": "Is that so? I guess you wouldn't mind opening that gate in front of me?",
+        "text": "I'm afraid I'm not allowed to do that, I am a mere servant of the mighty Gaea, queen of Dinosaurs.",
+        "options": [
+          {
+            "name": "What do I need to do to get passed though this gate?",
+            "text": "To show you are worthy, you must prove your strength by defeating at least four of the five enemies lurking within this dungeon to be worthy of an audience with my illustrious master, who holds dominion over this realm of dinosaurs.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.",
+            "options": [
+              {
+                "name": "I'll show my worth, just make sure to open the gate when I do defeat your challengers.",
+                "text": "Leave"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Dinosaur" />
+   </properties>
+  </object>
+  <object id="73" template="../../../../../../common/maps/obj/waypoint.tx" x="54.6667" y="498.667" />
+  <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="224.667" y="350.667" />
+  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="513.333" y="703.333" />
+  <object id="76" template="../../../../../../common/maps/obj/waypoint.tx" x="512" y="356" />
+  <object id="77" template="../../../../../../common/maps/obj/waypoint.tx" x="679.333" y="702.667" />
+  <object id="78" template="../../../../../../common/maps/obj/waypoint.tx" x="686.667" y="496.667" />
+  <object id="79" template="../../../../../../common/maps/obj/waypoint.tx" x="225.333" y="698.667" />
+  <object id="80" template="../../../../../../common/maps/obj/waypoint.tx" x="50" y="710" />
+  <object id="81" template="../../../../../../common/maps/obj/waypoint.tx" x="223.333" y="499.333" />
+  <object id="82" template="../../../../../../common/maps/obj/waypoint.tx" x="508.667" y="500.667" />
+ </objectgroup>
+</map>

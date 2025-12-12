@@ -3,5 +3,5 @@ ManaCost:1 GW
 Types:Creature Elf Cleric
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRemoveCounter | TriggerDescription$ When CARDNAME enters, you may remove a counter from target permanent.
-SVar:TrigRemoveCounter:DB$ RemoveCounter | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | CounterType$ Any | CounterNum$ 1
+SVar:TrigRemoveCounter:DB$ RemoveCounter | ValidTgts$ Permanent | CounterType$ Any | CounterNum$ 1
 Oracle:When Medicine Runner enters, you may remove a counter from target permanent.

@@ -96,7 +96,6 @@ public enum TriggerType {
     Immediate(TriggerImmediate.class),
     Investigated(TriggerInvestigated.class),
     LandPlayed(TriggerLandPlayed.class),
-    LifeChanged(TriggerLifeChanged.class),
     LifeGained(TriggerLifeGained.class),
     LifeLost(TriggerLifeLost.class),
     LifeLostAll(TriggerLifeLostAll.class),

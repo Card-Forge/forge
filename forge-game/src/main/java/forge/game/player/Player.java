@@ -498,8 +498,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             runParams.put(AbilityKey.FirstTime, firstGain);
             game.getTriggerHandler().runTrigger(TriggerType.LifeGained, runParams, false);
 
-            game.getTriggerHandler().runTrigger(TriggerType.LifeChanged, runParams, false);
-
             game.fireEvent(new GameEventPlayerLivesChanged(this, oldLife, life));
             return true;
         }
@@ -559,8 +557,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         runParams.put(AbilityKey.LifeAmount, toLose);
         runParams.put(AbilityKey.FirstTime, firstLost);
         game.getTriggerHandler().runTrigger(TriggerType.LifeLost, runParams, false);
-
-        game.getTriggerHandler().runTrigger(TriggerType.LifeChanged, runParams, false);
 
         return toLose;
     }
@@ -1596,7 +1592,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         Iterable<Card> milledView = getCardsIn(ZoneType.Library);
-        // 614.13c
+        // CR 614.13c
         if (sa.getRootAbility().getReplacingObject(AbilityKey.SimultaneousETB) != null) {
             milledView = IterableUtil.filter(milledView, c -> !((CardCollection) sa.getRootAbility().getReplacingObject(AbilityKey.SimultaneousETB)).contains(c));
         }
@@ -3733,7 +3729,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean isCursed() {
-        return CardLists.count(getAttachedCards(), CardPredicates.CURSE) > 0;
+        return CardLists.count(getAttachedCards(), Card::isCurse) > 0;
     }
 
     public boolean canDiscardBy(SpellAbility sa, final boolean effect) {
@@ -3993,7 +3989,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             String label = Localizer.getInstance().getMessage("lblCrank", this.crankCounter);
             contraptionSprocketEffect.setOverlayText(label);
         }
-        else if (this.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.CONTRAPTIONS)) {
+        else if (this.getCardsIn(ZoneType.Battlefield).anyMatch(Card::isContraption)) {
             this.createContraptionSprockets();
         }
     }

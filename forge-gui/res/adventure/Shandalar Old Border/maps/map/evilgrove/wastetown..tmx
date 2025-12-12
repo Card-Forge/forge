@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="69">
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx" />
+ <layer id="1" name="Background" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt2t9qgzAUBnAZk672RihjezYv+xCFPUSfqtBXKGUvs0l28BBOnMn58qchFx8Gbc35maitOI1dN7Gc93Iur0v7NJrwdVJObH/9zuTWd93HYL5LebyZ5f13+Tm4+7fD65K2/xcybP0cGcgR0uda6JhRnz7x9aZwhNQYMm4pHcj9uxwxLLEMrnk1t2NYJAPK5nKQBT2vpPoR8y2Vgywug1RPiQ7X9Qrl4JEcKMsWB2Ke8fsgX48cE9/7X8jYlORAzKmaHShLbINtsdejLCkMsWNfr8jFl8+eUMfX3iT1eIT+l5Jq32q4RvrtjnKknjNoB1maQ2+oYV7NBnre86xjwWvQWnI7zmw+aCy+jpfDEuR4UDvUkvv8mJ9D2v1rLLkcrvDnvSkdoeP6Puj71tYg7SPn2Gr713wfdR/U1qE9BiU5NH0jHdwizXNpG+p8QDvsY4usNbUjR5qjvDRHWanBUcv50RxlpTnKSk2O3DU0h9ux9k6Y77tddvv7712xI3smMLdpvd2/tN+1/AB0LVyq
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzVmE1uE0EQhRuD47GdRewtJLCBK8ACjTmHpWxyCyQCVvacAIidsyByCIiBOJwDmNK4lOdK9e/0jKClJ8dx21Of63VVjY8PjDmOUDk15uTgVnPQ13JXr6q9r4e1+gNj3j8wZtIz5rKfXzEMyDH3MCAHMZDo77Y5VhNjLgL0barH7OPgvPg4eF8qx/fA2GLUhCOWhXPxZtYNx2dPPLTnbQJLiFdOLP5P4aCz7mJ5lsjiih2Fr5Wl/4y7OEjzcV6WEAbJ4Xu9KUcKSwiDTfMWOZAlliMkdt7nYyBhD0SOp5E1NdRXod+/tleeD36uMTDHl0iOEMX4SDLJc47POW70d5scsWdCfvf/CkcqA3rIxkEMm+L/4JD5wDNOHEeju7WqLQ6ft7Ra5OuDzEFadMDhq7m2mqpxPBnd5SBfHVb/p0UM9P+uOVyzkysfL6e7vvpZsTwe1Zxdc/hmQMlAsaPQV6g2OWLit4li5/s+FDLQ9Xh2741rtZGPVAbkuFfJWFguIf62OFI124o5PlV6UeyyMIdkyMnShGENQl8Ry6zQfWZjacpzXt0PLidpObBx2ORiaMpC5+5qGsZSitglh6xNXXOEsCCDjJd63aOqN9xUj78KnSWEIQeHi0XmAeO/gX5N6+Fol0XWrS44NBZkkDHR3KQtZIn1VSqL5GCWNWvLoPUEnjmui7ssp4m+yskhtazi+LDtb3/26kc8AzhDMdMZcITEvt7P6yspioX6we+9muV5Fee5Ze5gr/0o6pnQ1/9Q9xv2D1ocj42DWUrBoM1SR9u5NtRDlIdV9XiRiQN/1/CdVxcHx3W1H8bQNH6Ng79PPLenQ72G2kRx0d7luOZxifYuhu1wSJbYnPS3taA3qCXrnBReKzcHs3D9kTXUx0C1oCz858nWh5pyaPWHz22ot6ge+GLXcoJ9KAeHxuKa/Vx7Q94vecgDOTjk69Iztns9nhXlnBjDoV0/hcO1j87siuqRhYPPq5wTQzhy1Sv+fNue1eBW0vuYD557Ty0M2sK8ax7wxU97eOHvAJpcvZzf+070T+1exMZg83Go33nxfQRd18Vtq5ta/5S9h3Ou5SFEMh7tM2mxt5lnozCFsvB+OS+G1EoZu40FezOuhfDFoVL/bOfU5cnY/IZw0DqDWHBh/7b5N0e9Sam39DrXEcyzxiHvia4VX2m1M8f373svMpDknCQZUFh/pM9zcsT6kYS5kPnwLa2XUX//OKjvE0MYNlBDuPc3ZYjl6HL5WLT1F2sBn9I=
+  </data>
+ </layer>
+ <layer id="7" name="Clutter" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztmF1OwkAQgEcMPhSSNvEMegBfTfQU6AHA80j1AMSzYDyFHEKEdzspE8dh/7tdS7JfMgGVynzMTGcV4JhZCfCgiWUF8NU8vjSPr9XxNY/l3991NgEYHeJ8oniziMzE+9dVm6cueP50PfnJn6X0+G7ef1/aXyeZiRpJB4Q8NlOAtwQez1VbE11P8XrJ/FU1kh591wLBPtoeaoJOlBvFVnia8pc9mtIDoZosFbnVzMXUQ+S4/2cPXX5IbZhzRDfrqTz4/TRk1gnd55DKY1faZ9WGqp+IVB4us0rfU+050+6YFwB3024e1+Ow65Basat1uer6iTt02R2XI4AbaKMLJgeEO/M6xtrjXT1cdrV8PZ+RmOcR7C1fD59dzZH9Fftc5VoTl/z5mUXOuzyjcY/7Zj4WRRtPhV/+2FdXY/eaYB67Q+DeVp2pTI4mj1GH2qDHunF4D/CQPi5zIu9xPh4fhnsrn/NQDx4us07we67NAx0oYkDnp62jg9yV8+J3BlT5cw/sk8VF2ysxHUw+OgfdudYnkNtpfAeVj+vfsL4eCD3v20Xmb5r3kHrw6NvFdS/6eHDoa9wxfbj47vWQvuob285TMTQP2/lWR+j9akgOSOic94Htfw0mVk1On5odntpFnpF8GVJNumDz4AzVAdF5IKdQB0LlcYqgxybhWakvVif6+WcymUwmk8lkMpmMDz8dHNaS
+  </data>
+ </layer>
+ <layer id="8" name="Objects" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt2N0KgCAMhmHvSe//HuqKOopCLPIH/bbeB4QOKra5kRTDJYaxRr/vr/Zs1YrBz16QxzotvTdaTww9M7RKKd633lHqq3S7LtV+mxvOdEp7YU3e86l41/szSr7En3vqH2t9pTbnrX1ire5Pzv2418FLbivV1lC15r3zqpqXRd5qeZ4BrefV8g1pOQOoSNlSEUPd/w2l2Eusz8UXHnL08E/NQw4AAAAAAAC1DpXuG+c=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="127.833" y="672.917" />
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="110.583" y="673.75">
+   <properties>
+    <property name="enemy" value="Zombie Lord" />
+   <property name="effect">{ "startBattleWithCard": [ "Carrion Feeder|SCG", "Zombie Master|LEA" ] }</property>
+    </properties>
+  </object>
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="159.848" y="336.886" />
+  <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="767.75" y="783.417" />
+  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="736.205" y="50.333">
+   <properties>
+    <property name="enemy" value="Death Knight" />
+   </properties>
+  </object>
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="130.778" y="174.128">
+   <properties>
+    <property name="enemy" value="Lich" />
+   <property name="effect">{ "startBattleWithCard": [ "Mirror Universe|LEG|1" ] }</property></properties>
+  </object>
+  <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="767.069" y="767.78">
+   <properties>
+    <property name="enemy" value="Ghost" />
+   </properties>
+  </object>
+  <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="438.667" y="631.667">
+   <properties>
+    <property name="enemy" value="Ghoul" />
+   </properties>
+  </object>
+  <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="643.333" y="337.5">
+   <properties>
+    <property name="enemy" value="Big Zombie" />
+   </properties>
+  </object>
+  <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="358.606" y="385.031">
+   <properties>
+    <property name="enemy" value="Zombie" />
+   </properties>
+  </object>
+  <object id="59" template="../../../../../../common/maps/obj/enemy.tx" x="384" y="63.333">
+   <properties>
+    <property name="enemy" value="Geist" />
+   </properties>
+  </object>
+  <object id="62" template="../../../../../../common/maps/obj/entry_down.tx" x="384" y="16" width="48" height="16" />
+  <object id="63" template="../../../../../../common/maps/obj/gold.tx" x="720.667" y="46.6667" />
+  <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="416" y="63.6667">
+   <properties>
+    <property name="enemy" value="Skeleton Soldier" />
+   </properties>
+  </object>
+  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="276" y="208">
+   <properties>
+    <property name="enemy" value="Skeleton" />
+   </properties>
+  </object>
+  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="140.549" y="338.286">
+   <properties>
+    <property name="enemy" value="Grave Titan" />
+   <property name="effect">{ "startBattleWithCard": [ "Rotting Giant|ODY", "Swamp|ODY|1", "Swamp|ODY|2", "Swamp|ODY|3", "Swamp|ODY|4" ] }</property>
+    </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,172 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="87">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <layer id="1" name="Background" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzllVkOwiAQhudBS+XV5QQmHkyvYE0P4QlMTbyKiV7B5S42MrZYQoHSgvDgJJM0Zfn4mYWCAJQJwIv5kX3vRwD5RO1ZD5fXrtn+13HjOKcg3UxXLmeXScNF3zlybM9wqfUCqcYWFOCR+mfquCJb1OyTm2m4GNsn0zqn4bgnhdZcmq/LE5v8E/+vGO8scUWtLlxTbDGfl8Idm3LZhaurpQ3zGW1rVXFt2V3cG8ujezpsrQt3axhz4Xbdz5RWdxyayx17Rigujy32xQNps3/RH8XYYv3wGg7B5bHF+kGuSvMQfp9YiPZ5I2rje5nMZo6Nfd+nCPbv7Bj8mGyZH+McPrlv+OcW4g==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJy9lU1OwzAQhZ2IKKFRYcGaJYiuQOy65BZdACsOAJtKRag34AjQXAPBDolzAKcAVszQWH6xx65dNTzpqW5+5vPMOLZSXe0P1L/ptTDMlx65u7l7bbbdH89mX2dKHRbm2qQ24+OsH+4Nxd1p82Y255uSc16vfsancaXUE/Xzp14yubdjyPNipNQleUr3rgZ++8TvTYVcHkszlnKdEfN2ZN7lHCXHcrnGzMRrqTVeh/u3niO4mSd+DFcz7TovyiX7s+pyT6C/NjelzshF9kPp9jdU602w0acBbibETGHHcCX5+uubQwqX9wwfO7a/qdw5eZh32bgGFhSrSXAMlzVvf/fyLveLYjwnnEu8533Xrll6LHGlnLXf6Tv7qAzjDL4BrfN2nz2gGEdF96yRdAc1HcLZqNe2b38NqWnn9Va4jpHNRvN5aRu5kpnbCLVCcb81F41cFnKxLiHuqrz1/RAbc/X1JFRvnBf+l+pu1z6FLcW1Jd0P9TzExZj3W27MdRTq+UTYSzYlqdcx3F+Q942U
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJyllc9Kw0AQxvPH1TaxIHjwppfSqyCCNx/ARxBvrW8gSi9FvHvwCdSzF++iUFr1rKB3wVcQ0p7MsBkzmcxOYvrBRwqZnd9+000yMd6f1gLPu1yyv0/bsqmuvLI+Uh/Fwg0m5CDTxZO4LkncXYGLbFBTFtVPyn2MrJ+i4r337PrG2E1ZLtWZ+X+4tKaqnme+C+wVZ++abZ+t4xpERR+z+jnLPDV2DsO2zvXTmkCZVxAXHZJaPmdg7ng5dyicpX62//3Vcm/NGreXcedK3lFHzrRIXmRjVlST88y5fD09VxNj3xWgT1JD1/hKRo3Nufg8A5/nlLiuPFXsUKlBNuqi4+a6+HwPlLvtyz0wO9ci76o6eSVJ3xdJZsX2hyvqJs59q3BduWD2ScV+/Zq5tG/aiynXS+cNBTO5Jrm0WtCe0BvYwEWf+PaZrrNnbuj3nK0dm/w7SE3fF5SL2Tl7Fls/RPW4LsF+kM254PVAXpco7K+WfRd1K9jQ28UdO2ausTejnD1Ytu6a8vlBLtTdB9YHYXkPEp+yv1s5+5zMHHtz9pT8x7TOlb/H6hPhP8fMvCfmn2Z8qN2IrLFeY0N2zI99D+PyvLcy8z3wbzz4rEZu9KvAxXmPiLXn7hcsucNR
+  </data>
+ </layer>
+ <layer id="6" name="Roads" width="30" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAOorhxSNAI7OFiYNgLxN/pbC+9/TlY7N3CwsAgTgHexkK8nXuQ4jWQFVXOUwuCYWxkMWxy6PqJ8Ss+e3HZ74XmFmrZSyogRf8PoL27uTD1YfPrdXUGhhvqCDVeUD/D5N+T6O4oLPHriWYmCHwG2vlFHbu77HkYGFK4IDiVi3x7SQV3gfYu4IbghUTmS2rYCwKbSchH6PbCwhU9jHGlbRj2IjE9o9vrhcV8QvbC2KTaC0vT+PTd4YHQd3lwqyEnnkB+/sCKuwyUgMadGJ5y8hNQ/09u7Hg3njT+g4A8E1CeGYjLOEn31w8CaRyf3YxQe0EghgZ1GC63zeeGxDOoXKCFvfgAyM/2ULv3EVkuUQPA/DxQdsPS2Fdu+toN8jMpaWwPldyGnLZBft4LbZNi8ztym4aa9iIDZDfA8HdongcAp61grQ==
+  </data>
+ </layer>
+ <layer id="7" name="ClutterBis" width="30" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzFVm1uwjAM9QX4kd5jZWiFO23ZpLELjANuQzAOhKPU4mHsNmWBPclqmqR+/qoToowDXWIeiBYsn7P8/hDO5wUdj5csq3DaMwTk6mAs337z87khegxZFjC/7ccbtmnP41+WQwHnGFrWEZnzFeStyb6+NJlX7Hvn9zXLR3OpZzMb55J4Js422GsRbNBrlu0edF4tzmsxRU9bWBu1UJKHqRB/MQ+dvfVuSPy6LmrlFyHx9Py9Z27/E1hXteI8V31uCDXjnHrMF/Ra7PVWnmvWVerlP72k3qrPlFshqv4e++f+9tR/Qq34WH1xR77/chZb3FatoC79nAKsTYt7B+Mly2pAl9ip93l2jXFb0Lq8mOrzWOdDuLcDvE90irnnu6x7dlhzUd03roU+j0pj4wFjhL4n6P9C9qL+sfrw4P1zeCcsRbIn5b7Ed8wDxhLvhEdz8lHF
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="273.5" y="398.5" width="27" height="16" />
+  <object id="49" template="../../../../../../common/maps/obj/entry_up.tx" x="225.5" y="164.5" width="29.5" height="36.5">
+   <properties>
+    <property name="direction" value="down" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/graveyard_crypt/crypt_2.tmx" />
+   </properties>
+  </object>
+  <object id="54" template="../../../../../../common/maps/obj/gold.tx" x="1.5" y="33" />
+  <object id="55" template="../../../../../../common/maps/obj/gold.tx" x="422.5" y="63" />
+  <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="303.5" y="127" visible="1">
+   <properties>
+    <property name="enemy" value="Zombie" />
+    <property name="hidden" type="bool" value="true" />
+    <property name="pursueRange" type="float" value="60" />
+    <property name="threatRange" type="float" value="30" />
+   </properties>
+  </object>
+  <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="173.5" y="127" visible="1">
+   <properties>
+    <property name="enemy" value=" Zombie" />
+    <property name="hidden" type="bool" value="true" />
+    <property name="pursueRange" type="float" value="60" />
+    <property name="threatRange" type="float" value="30" />
+   </properties>
+  </object>
+  <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="298.5" y="182.5" visible="1">
+   <properties>
+    <property name="enemy" value="Skeleton Soldier" />
+    <property name="hidden" type="bool" value="true" />
+    <property name="pursueRange" type="float" value="60" />
+    <property name="threatRange" type="float" value="30" />
+   </properties>
+  </object>
+  <object id="59" template="../../../../../../common/maps/obj/enemy.tx" x="139" y="183" visible="1">
+   <properties>
+    <property name="enemy" value="Greater Zombie" />
+    <property name="hidden" type="bool" value="true" />
+    <property name="pursueRange" type="float" value="60" />
+    <property name="threatRange" type="float" value="30" />
+   </properties>
+  </object>
+  <object id="60" template="../../../../../../common/maps/obj/collision.tx" x="0.27" y="-17" width="480.96" height="16" />
+  <object id="61" template="../../../../../../common/maps/obj/collision.tx" x="1.02" y="400" width="480.96" height="16" />
+  <object id="62" template="../../../../../../common/maps/obj/collision.tx" x="480.5" y="-17.472" width="16" height="433.944" />
+  <object id="63" template="../../../../../../common/maps/obj/collision.tx" x="-16.5" y="-15.972" width="16" height="398.944" />
+  <object id="64" template="../../../../../../common/maps/obj/manashards.tx" x="378.5" y="19.5" />
+  <object id="65" template="../../../../../../common/maps/obj/manashards.tx" x="143" y="92.5" />
+  <object id="66" template="../../../../../../common/maps/obj/manashards.tx" x="414" y="397" />
+  <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="354" y="165.5" visible="1">
+   <properties>
+    <property name="enemy" value="Wild Rat" />
+    <property name="pursueRange" type="float" value="60" />
+    <property name="threatRange" type="float" value="30" />
+   </properties>
+  </object>
+  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="266.5" y="130" visible="1">
+   <properties>
+    <property name="enemy" value="Wild Rat" />
+    <property name="hidden" type="bool" value="true" />
+    <property name="pursueRange" type="float" value="60" />
+    <property name="threatRange" type="float" value="30" />
+   </properties>
+  </object>
+  <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="273" y="224.5" visible="1">
+   <properties>
+    <property name="enemy" value="Ghost" />
+    <property name="hidden" type="bool" value="true" />
+    <property name="pursueRange" type="float" value="60" />
+    <property name="threatRange" type="float" value="30" />
+   </properties>
+  </object>
+  <object id="71" template="../../../../../../common/maps/obj/gold.tx" x="322" y="223" />
+  <object id="72" template="../../../../../../common/maps/obj/gold.tx" x="120.5" y="128.5" />
+  <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="120" y="142.5" visible="1">
+   <properties>
+    <property name="enemy" value="Ghoul" />
+    <property name="pursueRange" type="float" value="60" />
+    <property name="threatRange" type="float" value="30" />
+   </properties>
+  </object>
+  <object id="74" template="../../../../../../common/maps/obj/enemy.tx" x="224.5" y="254.5" visible="1">
+   <properties>
+    <property name="enemy" value="Wild Rat" />
+    <property name="pursueRange" type="float" value="60" />
+    <property name="threatRange" type="float" value="30" />
+   </properties>
+  </object>
+  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="145" y="398.5" />
+  <object id="76" template="../../../../../../common/maps/obj/waypoint.tx" x="2.5" y="279" />
+  <object id="77" template="../../../../../../common/maps/obj/waypoint.tx" x="11.5" y="21.5" />
+  <object id="78" template="../../../../../../common/maps/obj/waypoint.tx" x="322.5" y="284.5" />
+  <object id="79" template="../../../../../../common/maps/obj/waypoint.tx" x="419.5" y="343.5" />
+  <object id="80" template="../../../../../../common/maps/obj/waypoint.tx" x="449" y="99.5" />
+  <object id="81" template="../../../../../../common/maps/obj/waypoint.tx" x="462.5" y="17.5" />
+  <object id="82" template="../../../../../../common/maps/obj/enemy.tx" x="208" y="185" visible="1">
+   <properties>
+    <property name="enemy" value="Skeleton Soldier" />
+    <property name="hidden" type="bool" value="true" />
+    <property name="pursueRange" type="float" value="60" />
+    <property name="threatRange" type="float" value="30" />
+   </properties>
+  </object>
+  <object id="83" template="../../../../../../common/maps/obj/enemy.tx" x="183.5" y="221.5" visible="1">
+   <properties>
+    <property name="enemy" value="Skeleton Soldier" />
+    <property name="hidden" type="bool" value="true" />
+    <property name="pursueRange" type="float" value="60" />
+    <property name="threatRange" type="float" value="30" />
+   </properties>
+  </object>
+  <object id="84" template="../../../../../../common/maps/obj/enemy.tx" x="14" y="310" visible="1">
+   <properties>
+    <property name="enemy" value="Raven" />
+    <property name="pursueRange" type="float" value="60" />
+    <property name="threatRange" type="float" value="30" />
+    <property name="waypoints" value="76,77,76,75,79,81" />
+   </properties>
+  </object>
+  <object id="85" template="../../../../../../common/maps/obj/enemy.tx" x="422.5" y="41" visible="1">
+   <properties>
+    <property name="enemy" value="Hippo" />
+    <property name="pursueRange" type="float" value="60" />
+    <property name="threatRange" type="float" value="30" />
+   <property name="effect">{ "startBattleWithCard": [ "Bull Hippo|POR", "Forest|POR", "Island|POR", "Plains|POR" ] }</property>
+    </properties>
+  </object>
+  <object id="86" template="../../../../../../common/maps/obj/enemy.tx" x="439" y="20" visible="1">
+   <properties>
+    <property name="enemy" value="Bat" />
+    <property name="pursueRange" type="float" value="60" />
+    <property name="threatRange" type="float" value="30" />
+    <property name="waypoints" value="79,76,77,76,75,79,81" />
+   </properties>
+  </object>
+ </objectgroup>
+</map>

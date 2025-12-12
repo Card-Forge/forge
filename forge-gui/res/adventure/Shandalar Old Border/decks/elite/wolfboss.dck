@@ -1,0 +1,28 @@
+[metadata]
+Name=wolfboss
+[Main]
+4 Savannah|2ED
+4 Brushland|ICE
+4 Windswept Heath|ONS
+4 Forest|ICE
+4 Plains|LEB
+4 Shared Triumph|ONS
+4 Tundra Wolves|5ED
+4 Lone Wolf|PO2
+4 Wyluli Wolf|6ED
+2 Wolf Pack|PTK
+2 Arctic Wolves|WTH
+4 Howling Wolf|MMQ
+4 Giant Growth|7ED
+4 Swords to Plowshares|LEA
+2 Disenchant|2ED
+2 Naturalize|ONS
+4 Overrun|ODY
+
+[StartInBattle_Reference]
+1 Forest|ICE
+1 Plains|ICE
+1 Timber Wolves|LEA
+1 Timber Wolves|LEA
+1 Tundra Wolves|LEG
+1 Tundra Wolves|LEG

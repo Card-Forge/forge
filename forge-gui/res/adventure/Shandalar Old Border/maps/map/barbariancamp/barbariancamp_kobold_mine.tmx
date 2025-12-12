@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="32" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="165">
+ <editorsettings>
+  <export format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <layer id="13" name="BackgroundBis" width="32" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzNlcENwjAMRTsCqCpnluHcETgyXzdikUo0gi++LNux05Zi6UtpEvnZTuLO566bP3r03/ER+hd+Jo5p2I7PvkoMW9WD/cJqeZa1iBXf3hrEZp039nKcv+bLOq3hw6fc6913xPtUdD29VdZxP7x6sT/Jt+4X9t+X8W3QaziJea1mPG/xuRZSWi5eza34ZG7MjPIlr/ZtWaZX1PxA4yXGbuVHczuCn8m9he+x8X724mt9a61l+Zyr5S8TZ2v+2nuIvEGrj2TOv6Y9+RnT/nGaSc4LNbFpuQ==
+  </data>
+ </layer>
+ <layer id="11" name="Background" width="32" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzNlc0NgzAMhRmhP4JzN+oIPXaO7tEl2Cbn7oFURWD1yTwbJwptn2QRJeDPcRwzHbtuWux+/ox/Yf/CvxV8M/brOVQJH33lWGrz8RhmQ79pMYzL85/XIhp7f01Msxkf16OK8lEWH/Pfgv9SbBl79S7xyvnLOeTn5TAbrkvMTOhP8636wpxpY3m1cobzmp+VVC68OyTveTm34tN7E19RvrV/1PO0joeJ9YoIn/lh9+pb/FpF+VbdaV2HffiJ1KsW3s09+Glj7zUqOX+sK7ZPfU6t+VjbrB8gE++2jpHNRevf64VbPaEFv0TsH8ekOW8u9mgZ
+  </data>
+ </layer>
+ <layer id="10" name="Lava" width="32" height="20">
+  <data encoding="base64" compression="zlib">
+   eJy1lVFOwzAMhneFbjj32ca4ChfgZdJAHefgEhXH4BlpTyydeo0xYjVWHc+OGtRG+lWpTf3Zju14WCx80CnoM+h51esEqS5BcywPgzhfivjr8Dy6Qdt/+HWt8vwuPL+WqerIe3epX20hfxP91/ho61bpfM7k736gt8lFS+amFr5D5D4G7djeDu7PX6sJVDfizCjnHnQ+5RD3XCudb8naO5aP/x/cELfGt2KnWrF842yyK/ly5eLnvUn1n+O3MLAl/zvo5cGu0x2kkrbfXK+O+ULf9q5Xq+SAeq+JvliL75c5uUD+O8+PnBW893N89A9F86bJ8LV6sfqB83nPWXw6M26/ZjF9LMf3SskMJ/5Z4WuxTcnnM57mba4Xpo7/t7Jj1/hTx1/CnyP/eAe9urxtujNQT4af8l4qqT/pg9ZLVKO4D33wcH+fyjkxdqHdWzwHmnVcDaQ6z8AvkeRrbI3/B/CpavA=
+  </data>
+ </layer>
+ <layer id="14" name="Background 2" width="32" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwSgYBdQAD/gG2gXEAQCmIgDv
+  </data>
+ </layer>
+ <layer id="9" name="Background" width="32" height="20" offsetx="-0.333333" offsety="1.66667">
+  <data encoding="base64" compression="zlib">
+   eJzNltENgjAQhm8AIQFT51FkDnl0DtfQZx2GCXhU5tBEL3hpuVzLlVTinzRQ2vT7216vAPyfqhzgwUqdL8NuioF/XI8L8bk3ra+dAThtbB3f92bcp//UXx6+yyRhv17J70y4Df30xo6LzClhP2mvpLVBhs8Dfqe5u/PX8n19Y2OG86cK8berNHzycA+sJ19v1yuJx2wqEf9QDOekYV65P21sxvKfRbiddMvScOnc+viVM1/f3s3NYXw9sX4uAS7fQu0azeW3pY0paX5apeBr8sKv+Phsy/Ge1MpcFcvvnFxMXJdPCsWW7w6LkZQLK2Ec7kG6F+bkA995ksT5S8vlX7Pl/lkkvpb9Bp2XhOg=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="32" height="20" offsetx="-1.21053" offsety="-2.91228">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBicoF2DgaFDY+DsXwy0ewkV7U8UZGCYLYSK0cEfQfxmdALd04XkpvuaxNv/D4/ZN0QhmJD9S4F2LyMzTAjZHweSxxIm1AL/geYnYHFDvCAEo9v9B0o78UDoBTz4zUeWjwPij+yYarCFwV9BBCYXRGCxyxRL2sAXB8igVgwRLjCMLexIBf8FcYc3IUCs22lhXiMwPJrEqGs/LCxoDe4C08E9TdLKCnTAqcPA4Ewg/YOAExY1P4H2/qKC/eSC/cDy6gAQp2qRpg9WJoIwzH5tbQgmBdwG2n2HjDITZjeloEoHgYkFsLISZj+XDirGBzaxke9WbG4gFxAqr4l1A3o5SG75NVgBADbSRNU=
+  </data>
+ </layer>
+ <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
+  <object id="114" template="../../../../../../common/maps/obj/entry_up.tx" x="300.842" y="317.718" width="48" height="16">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/barbariancamp/barbariancamp_kobold.tmx" />
+    <property name="teleportObjectId" value="108" />
+   </properties>
+  </object>
+  <object id="115" template="../../../../../../common/maps/obj/gold.tx" x="315.713" y="81.5369" />
+  <object id="141" template="../../../../../../common/maps/obj/treasure.tx" x="272.842" y="82.1053">
+   <properties>
+    <property name="reward">[{
+  "type": "randomCard",
+  "count": 1,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
+},{
+  "type": "randomCard",
+  "count": 4,
+  "rarity": [ "uncommon" ],
+  "addMaxCount": 2
+}]</property>
+    <property name="spawn.Hard" type="bool" value="false" />
+   </properties>
+  </object>
+  <object id="142" template="../../../../../../common/maps/obj/treasure.tx" x="100.176" y="78.4386">
+   <properties>
+    <property name="reward">[{
+  "type": "randomCard",
+  "count": 1,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
+},{
+  "type": "randomCard",
+  "count": 4,
+  "rarity": [ "uncommon" ],
+  "addMaxCount": 2
+}]</property>
+    <property name="spawn.Hard" type="bool" value="false" />
+   </properties>
+  </object>
+  <object id="150" template="../../../../../../common/maps/obj/enemy.tx" x="307.842" y="123.772">
+   <properties>
+    <property name="enemy" value="Curselord" />
+    <property name="spawn.Hard" type="bool" value="true" />
+   </properties>
+  </object>
+  <object id="159" template="../../../../../../common/maps/obj/booster.tx" x="335.359" y="82.7761">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "ICE", "ALL", "PTK" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "ICE", "ALL", "PTK" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "ICE", "ALL", "PTK" ],
+    "type": "card",
+    "count": 1,
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="160" template="../../../../../../common/maps/obj/manashards.tx" x="215.177" y="53.3151" />
+  <object id="161" template="../../../../../../common/maps/obj/enemy.tx" x="310.122" y="169.575">
+   <properties>
+    <property name="enemy" value="Kobold Pyromancer" />
+    <property name="threatRange" type="int" value="50" />
+   <property name="effect">{ "startBattleWithCard": [ "Fervor|WTH", "Mountain|BRB", "Smoke|LEA", "Sulfuric Vortex|SCG" ] }</property></properties>
+  </object>
+  <object id="162" template="../../../../../../common/maps/obj/enemy.tx" x="179.289" y="106.725">
+   <properties>
+    <property name="enemy" value="Kobold Pyromancer" />
+    <property name="threatRange" type="int" value="50" />
+   <property name="effect">{ "startBattleWithCard": [ "Fervor|WTH", "Mountain|BRB", "Smoke|LEA", "Sulfuric Vortex|SCG" ] }</property></properties>
+  </object>
+  <object id="163" template="../../../../../../common/maps/obj/enemy.tx" x="334.241" y="259.913">
+   <properties>
+    <property name="enemy" value="Kobold Pyromancer" />
+    <property name="threatRange" type="int" value="50" />
+   <property name="effect">{ "startBattleWithCard": [ "Fervor|WTH", "Mountain|BRB", "Smoke|LEA", "Sulfuric Vortex|SCG" ] }</property></properties>
+  </object>
+  <object id="164" template="../../../../../../common/maps/obj/enemy.tx" x="180.928" y="198.735">
+   <properties>
+    <property name="enemy" value="Kobold Pyromancer" />
+    <property name="threatRange" type="int" value="50" />
+   <property name="effect">{ "startBattleWithCard": [ "Fervor|WTH", "Mountain|BRB", "Smoke|LEA", "Sulfuric Vortex|SCG" ] }</property></properties>
+  </object>
+ </objectgroup>
+</map>

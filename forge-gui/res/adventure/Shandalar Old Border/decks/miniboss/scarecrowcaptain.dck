@@ -1,0 +1,43 @@
+[metadata]
+Name=Scarecrow Captain
+[Main]
+4 Savannah|LEA
+4 Windswept Heath|ONS
+4 Brushland|ICE
+2 Serra's Sanctum|USG
+1 Yavimaya Hollow|UDS
+1 Kor Haven|NMS
+8 Plains|LEA
+8 Forest|LEA
+4 Fertile Ground|USG
+2 Wild Growth|LEA
+2 Overgrowth|STH
+2 One with Nature|SCG
+2 Mirari's Wake|JUD
+3 Verduran Enchantress|LEA
+3 Enchantress's Presence|ONS
+2 Karmic Justice|ODY
+2 Sterling Grove|INV
+2 Argothian Enchantress|USG
+3 Rabid Wombat|LEG
+3 Fugitive Druid|TMP
+3 Opal Titan|USG
+3 Opal Archangel|USG
+4 Rancor|ULG
+4 Ancestral Mask|MMQ
+4 Armadillo Cloak|INV
+2 Gaea's Embrace|USG
+2 Serra's Embrace|USG
+2 Mythic Proportions|ONS
+2 Empyrial Armor|WTH
+2 Aura of Silence|WTH
+2 Seal of Cleansing|NMS
+2 Arrest|MMQ
+2 Pacifism|MIR
+
+[StartInBattle_Reference]
+1 Argothian Enchantress|USG
+1 Forest|LEA
+1 Plains|LEA
+1 Scarecrow|DRK
+1 Spellbook|EXO

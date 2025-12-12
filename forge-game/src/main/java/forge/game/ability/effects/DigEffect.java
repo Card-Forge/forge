@@ -35,7 +35,7 @@ public class DigEffect extends SpellAbilityEffect {
         } else {
             final int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
             final String toChange = sa.getParamOrDefault("ChangeNum", "1");
-            final int numToChange = toChange.startsWith("All") ? numToDig : AbilityUtils.calculateAmount(host, sa.getParam("ChangeNum"), sa);
+            final int numToChange = toChange.equals("All") || toChange.equals("Any") ? numToDig : AbilityUtils.calculateAmount(host, sa.getParam("ChangeNum"), sa);
 
             String verb = " looks at ";
             if (sa.hasParam("DestinationZone") && sa.getParam("DestinationZone").equals("Exile") &&
@@ -119,9 +119,7 @@ public class DigEffect extends SpellAbilityEffect {
         final int libraryPosition = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : -1;
         final int libraryPosition2 = sa.hasParam("LibraryPosition2") ? Integer.parseInt(sa.getParam("LibraryPosition2")) : -1;
 
-        int destZone1ChangeNum = 1;
         String changeValid = sa.getParamOrDefault("ChangeValid", "");
-        final boolean anyNumber = sa.hasParam("AnyNumber");
         final boolean optional = sa.hasParam("Optional");
         final boolean skipReorder = sa.hasParam("SkipReorder");
 
@@ -148,13 +146,17 @@ public class DigEffect extends SpellAbilityEffect {
             }
         }
 
-        boolean changeAll = false;
         boolean totalCMC = sa.hasParam("WithTotalCMC");
         int totcmc = AbilityUtils.calculateAmount(host, sa.getParam("WithTotalCMC"), sa);
 
+        int destZone1ChangeNum = 1;
+        boolean changeAll = false;
+        boolean anyNumber = false;
         if (sa.hasParam("ChangeNum")) {
             if (sa.getParam("ChangeNum").equalsIgnoreCase("All")) {
                 changeAll = true;
+            } else if (sa.getParam("ChangeNum").equalsIgnoreCase("Any")) {
+                anyNumber = true;
             } else {
                 destZone1ChangeNum = AbilityUtils.calculateAmount(host, sa.getParam("ChangeNum"), sa);
             }
@@ -215,25 +217,19 @@ public class DigEffect extends SpellAbilityEffect {
                     }
                 }
 
-                CardCollection movedCards;
                 rest.addAll(top);
-                CardCollection valid;
+                CardCollection valid = top;
+                if (totalCMC) {
+                    valid = CardLists.getValidCards(valid, "Card.cmcLE" + totcmc, cont, host, sa);
+                }
                 if (!changeValid.isEmpty()) {
                     if (changeValid.contains("ChosenType")) {
                         changeValid = changeValid.replace("ChosenType", host.getChosenType());
                     }
                     valid = CardLists.getValidCards(top, changeValid, cont, host, sa);
-                    if (totalCMC) {
-                        valid = CardLists.getValidCards(valid, "Card.cmcLE" + totcmc, cont, host, sa);
-                    }
-                } else if (totalCMC) {
-                    valid = CardLists.getValidCards(top, "Card.cmcLE" + totcmc, cont, host, sa);
-                } else {
-                    // If all the cards are valid choices, no need for a separate reveal dialog to the chooser. pfps??
-                    if (p == chooser && destZone1ChangeNum > 1) {
-                        delayedReveal = null;
-                    }
-                    valid = top;
+                } else if (!totalCMC && p == chooser && destZone1ChangeNum > 1) {
+                    // If all the cards are valid choices, no need for a separate reveal dialog to the chooser
+                    delayedReveal = null;
                 }
 
                 if (forceReveal) {
@@ -253,6 +249,7 @@ public class DigEffect extends SpellAbilityEffect {
                     }
                 }
 
+                CardCollection movedCards;
                 if (changeAll) {
                     movedCards = new CardCollection(valid);
                 } else if (sa.hasParam("RandomChange")) {

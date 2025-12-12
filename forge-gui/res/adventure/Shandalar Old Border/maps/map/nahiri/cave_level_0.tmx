@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="110">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon.tsx"/>
+ <tileset firstgid="16385" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <layer id="3" name="Foreground" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1s0JwCAMgNHgDE7ixZncqqOWHsQSLP6Biv0O76QxEYMarMjlRIzPe8a0r7klwSa1MaM5e+ts3dPO9c2sLZ7Z7JwA/uGk+2XF+4azxB7q+V/p+e81WnszF6vrWvFfAgAAAADgBj7Qdk8=
+  </data>
+ </layer>
+ <layer id="7" name="Tilelaag 3" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt2LEJACAMAEGHcgf330hSiGirwkf+wP4bI6YUhlbXQ7F3ZekjNQ70RnpfIDZJknQb9R0e7DuToU/SRL6z5L9bsO8Oep/0I/JsoM8u8m4xw+7zhQ51wR5G
+  </data>
+ </layer>
+ <layer id="9" name="Tilelaag 4" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt2LsJACAUQ1EXcGM3dgFLCdgrgpin94CdRXhF/KSEVW0sqTeDBKcZMr89bb4FAAAc5n4e657lnLHk2wkAvMS570Sdx/sXQDTu3SoRMrr67X+7A34ZD1o=
+  </data>
+ </layer>
+ <layer id="6" name="Walls" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzNWMtt20AQJXIiD2kgp7gHGamANsES4kvSSAqx4XxOcmR3FclmGdkB+aCHx5nh6hAgCyxEkbvzn7ePvOma5kbmoW2a5zJf2vWzfzlr9NqaU/m18aeb19s8dvO+Q7AfsiFf/2f6jose0/vt/aw32jOU+bhrmn15/lTmWzdPu57K722ZPcmFnGHxCX6d5H+k73WRjfm7nfeMgf8cO0+m2cf67fq4/P9w3awG7mU2au4shqNz38bHIu8qkMnrPFts7JeYWxz2FA8vJlFdWf54rcVEZXFuUH+cs2iMpKtfZNfYN3RrOVwDk8jS8e7T+ZpjjGE+2+gXeeYr6qAmx6b7S1n39fosJ4qvN7hf9Jfj3pM++MW+RTG09T+Lbb/EPu0LtQc2TBV149nHdbNvYzmcO16HXNyX/DzsfD8ZoxTPtG64n/H/1OW2qY8aY9ioejxsw7NLesbTmekHvnIcLL5a9xqLbHAe0Q/fSz5+7Nb+buUXfa8YUzO0DmDbFOSBRxRDL79qH8uOsDAaiI3qqe2NQfZMyz3FGLMRvYpr4Aj0eNgHG9EHb44cz7aD1DBsg59ZzW7hO+QpHkYxqsUUzoGH0RnP0Jxf4l9NzXlYCpvwDNihHM7DcPR3LZc9BLIQO+3Rccnb6DxTDpcNzs2x87msxgZnrZdXjh/4Juz7XPbcBdxpyzblpMgHeuCRcAlnLeeV+QHHtKf6vy/PHxz7mNfxQA3W4qfnG/bCZsYi4IxX/8xZ+LxWzh9xH+yPsNTrCfYZfgNfvfq8BCe8/MAnfb+AfMVm8EbULeLm9YPij4dF7D/zN++8jc4x9gf2sO6B1rB/W+9dU+fjNu8H/ijP0NpDrrGuF11P7RqDPNxgHphxm6ifVK7yRC93Xq7Y/xocZFzyas/jdxpPrLP3S+b3wKmoB6MY8H3GJfil/JL9Zk6g+GBya3CLuU7NfY0F10aUA9Qd+/La5fHnvR43wBkNPsXPlOd5uKo62J5oMu5CHvdf5r9iBHMBi4snm9dnvGmL92SDMYvzqd9xmN9oHWJt7VmwVVOoBc939g39zPWf+Z6dBTX26ZnD+vCMaw39zN8QszOaY5/lmnV47zcRx2QbM06gQ8+N7D1KbdRvPc9B/rSflGtkZ4liIWNSFseB8ublHPlT7n27O2OGfgtFH3vflZTz8b4shnquIF5c95xT/n7Mfb1V616dbvU05Ov7Y4SnWJ9974rke9/upo0c/w/zL6IBoak=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="148.559" y="42.3155">
+   <properties>
+    <property name="reward">[
+  {
+      &quot;type&quot;: &quot;card&quot;,
+      &quot;probability&quot;: 1,
+      &quot;count&quot;: 1,
+      &quot;addMaxCount&quot;: 5,
+      &quot;colors&quot;: [
+        &quot;Black&quot;
+      ],
+      &quot;rarity&quot;: [
+        &quot;Common&quot;,
+        &quot;Rare&quot;,
+        &quot;Uncommon&quot;
+      ],
+      &quot;subTypes&quot;: [
+        &quot;Spider&quot;
+      ],
+      &quot;cardTypes&quot;: [
+        &quot;Creature&quot;
+      ]
+    }
+]</property>
+   </properties>
+  </object>
+  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="144.327" y="139.568"/>
+  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="208.619" y="253.505">
+   <properties>
+    <property name="enemy" value="Giant Spider"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="183.226" y="210.729">
+   <properties>
+    <property name="enemy" value="Cave Spider"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="85,62"/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../../../common/maps/obj/booster.tx" x="200.563" y="45.4642">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;STH&quot;, &quot;EXO&quot;, &quot;NMS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;STH&quot;, &quot;EXO&quot;, &quot;NMS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;STH&quot;, &quot;EXO&quot;, &quot;NMS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="58" template="../../../../../../common/maps/obj/waypoint.tx" x="221.473" y="109.515"/>
+  <object id="59" template="../../../../../../common/maps/obj/waypoint.tx" x="311.197" y="52.0811"/>
+  <object id="60" template="../../../../../../common/maps/obj/waypoint.tx" x="588.667" y="46"/>
+  <object id="62" template="../../../../../../common/maps/obj/waypoint.tx" x="297.169" y="176.478"/>
+  <object id="64" template="../../../../../../common/maps/obj/waypoint.tx" x="80.3059" y="327.797"/>
+  <object id="65" template="../../../../../../common/maps/obj/waypoint.tx" x="68.7555" y="109.78"/>
+  <object id="66" template="../../../../../../common/maps/obj/manashards.tx" x="25.0843" y="99.9871"/>
+  <object id="67" template="../../../../../../common/maps/obj/manashards.tx" x="355.398" y="105.281"/>
+  <object id="68" gid="3298" x="179.333" y="173.333" width="16" height="16"/>
+  <object id="70" template="../../../../../../common/maps/obj/manashards.tx" x="54.6667" y="296.667"/>
+  <object id="71" template="../../../../../../common/maps/obj/manashards.tx" x="330" y="459.333"/>
+  <object id="72" template="../../../../../../common/maps/obj/manashards.tx" x="618" y="197.333"/>
+  <object id="73" template="../../../../../../common/maps/obj/gold.tx" x="446" y="300"/>
+  <object id="74" template="../../../../../../common/maps/obj/gold.tx" x="324.667" y="324.667"/>
+  <object id="75" template="../../../../../../common/maps/obj/enemy.tx" x="89.3333" y="454.667">
+   <properties>
+    <property name="enemy" value="Giant Spider"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="64,92"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../../../common/maps/obj/enemy.tx" x="292" y="437.333">
+   <properties>
+    <property name="enemy" value="Giant Spider"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="95,94,95,93"/>
+   </properties>
+  </object>
+  <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="461.333" y="394">
+   <properties>
+    <property name="enemy" value="Giant Spider"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="96,98,99,98"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../../../common/maps/obj/enemy.tx" x="576.667" y="324">
+   <properties>
+    <property name="enemy" value="Giant Spider"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="79" template="../../../../../../common/maps/obj/enemy.tx" x="478" y="543.333">
+   <properties>
+    <property name="enemy" value="Giant Spider"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="99,100,101,100"/>
+   </properties>
+  </object>
+  <object id="80" template="../../../../../../common/maps/obj/enemy.tx" x="115.333" y="533.333">
+   <properties>
+    <property name="enemy" value="Giant Spider"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="81" template="../../../../../../common/maps/obj/enemy.tx" x="528.667" y="420">
+   <properties>
+    <property name="enemy" value="Spider"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="82" template="../../../../../../common/maps/obj/enemy.tx" x="524" y="274.667">
+   <properties>
+    <property name="enemy" value="Giant Spider"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="96,94,97,60,97,94,96"/>
+   </properties>
+  </object>
+  <object id="83" template="../../../../../../common/maps/obj/enemy.tx" x="159.333" y="325.333">
+   <properties>
+    <property name="enemy" value="Giant Spider"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="91,64"/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../../../common/maps/obj/enemy.tx" x="290" y="91.3333">
+   <properties>
+    <property name="enemy" value="Giant Spider"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="62,59,58"/>
+   </properties>
+  </object>
+  <object id="85" template="../../../../../../common/maps/obj/waypoint.tx" x="66.6667" y="204.667"/>
+  <object id="86" template="../../../../../../common/maps/obj/waypoint.tx" x="91.3333" y="46.6667"/>
+  <object id="87" template="../../../../../../common/maps/obj/enemy.tx" x="64" y="145.333">
+   <properties>
+    <property name="enemy" value="Giant Spider"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="86,65"/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../../../common/maps/obj/waypoint.tx" x="240" y="311.333"/>
+  <object id="92" template="../../../../../../common/maps/obj/waypoint.tx" x="88" y="510"/>
+  <object id="93" template="../../../../../../common/maps/obj/waypoint.tx" x="172" y="441.333"/>
+  <object id="94" template="../../../../../../common/maps/obj/waypoint.tx" x="338" y="336"/>
+  <object id="95" template="../../../../../../common/maps/obj/waypoint.tx" x="314" y="423.333"/>
+  <object id="96" template="../../../../../../common/maps/obj/waypoint.tx" x="466.667" y="334.667"/>
+  <object id="97" template="../../../../../../common/maps/obj/waypoint.tx" x="570.667" y="199.333"/>
+  <object id="98" template="../../../../../../common/maps/obj/waypoint.tx" x="444" y="471.333"/>
+  <object id="99" template="../../../../../../common/maps/obj/waypoint.tx" x="482.667" y="501.333"/>
+  <object id="100" template="../../../../../../common/maps/obj/waypoint.tx" x="461.333" y="575.333"/>
+  <object id="101" template="../../../../../../common/maps/obj/waypoint.tx" x="352" y="538"/>
+  <object id="109" template="../../../../../../common/maps/obj/door_right.tx" x="322" y="615.333">
+   <properties>
+    <property name="portalState" value="inactive"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

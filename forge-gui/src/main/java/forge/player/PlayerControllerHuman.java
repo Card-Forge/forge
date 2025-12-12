@@ -10,7 +10,6 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.CardPool;
 import forge.deck.Deck;
-import forge.deck.DeckRecognizer;
 import forge.deck.DeckSection;
 import forge.game.*;
 import forge.game.ability.AbilityKey;
@@ -78,7 +77,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.io.*;
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -1747,18 +1745,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         final List<Pair<SpellAbilityStackInstance, GameObject>> chosen = getGui()
-                .getChoices(saSpellskite.getHostCard().getDisplayName(), 1, 1, allTargets, null, new FnTargetToString());
+                .getChoices(saSpellskite.getHostCard().getDisplayName(), 1, 1, allTargets, null, targ -> targ.getRight().toString() + " - " + targ.getLeft().getStackDescription());
         return Iterables.getFirst(chosen, null);
-    }
-
-    private final static class FnTargetToString
-            implements Function<Pair<SpellAbilityStackInstance, GameObject>, String>, Serializable {
-        private static final long serialVersionUID = -4779137632302777802L;
-
-        @Override
-        public String apply(final Pair<SpellAbilityStackInstance, GameObject> targ) {
-            return targ.getRight().toString() + " - " + targ.getLeft().getStackDescription();
-        }
     }
 
     @Override
@@ -1834,11 +1822,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public List<String> chooseColors(final String message, final SpellAbility sa, final int min, final int max,
-                                     List<String> options) {
-        options = options.stream().map(DeckRecognizer::getLocalisedMagicColorName).collect(Collectors.toList());
-        List<String> choices = getGui().getChoices(message, min, max, options);
-        return choices.stream().map(DeckRecognizer::getColorNameByLocalisedName).collect(Collectors.toList());
+    public ColorSet chooseColors(final String message, final SpellAbility sa, final int min, final int max, ColorSet options) {
+        return ColorSet.fromEnums(getGui().getChoices(message, min, max, Lists.newArrayList(options.getOrderedColors())));
     }
 
     @Override
@@ -1867,22 +1852,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     private byte chooseColorCommon(final String message, final Card c, final ColorSet colors,
                                    final boolean withColorless) {
-        final ImmutableList.Builder<String> colorNamesBuilder = ImmutableList.builder();
-        if (withColorless) {
-            colorNamesBuilder.add(MagicColor.toLongString(MagicColor.COLORLESS));
+        List<MagicColor.Color> choices = Lists.newArrayList(colors.getOrderedColors());
+        if (withColorless && !colors.isColorless()) {
+            choices.add(MagicColor.Color.COLORLESS);
         }
-        for (final MagicColor.Color color : colors) {
-            colorNamesBuilder.add(color.getName());
-        }
-        final ImmutableList<String> colorNames = colorNamesBuilder.build();
-        if (colorNames.size() > 2) {
-            return MagicColor.fromName(getGui().one(message, colorNames));
+        if (choices.size() > 2) {
+            return getGui().one(message, choices).getColorMask();
         }
 
-        boolean confirmed = false;
-        confirmed = InputConfirm.confirm(this, CardView.get(c), message, true, colorNames);
-        final int idxChosen = confirmed ? 0 : 1;
-        return MagicColor.fromName(colorNames.get(idxChosen));
+        final int idxChosen = InputConfirm.confirm(this, CardView.get(c), message, true, choices.stream().map(MagicColor.Color::getTranslatedName).collect(Collectors.toList()))
+                ? 0 : 1;
+        return choices.get(idxChosen).getColorMask();
     }
 
     @Override
@@ -2942,13 +2922,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             final Player p = pOld;
 
-
             final CardDb carddb = FModel.getMagicDb().getCommonCards();
-            final List<ICardFace> faces = Lists.newArrayList(carddb.getAllFaces());
 
             List<CardFaceView> choices = new ArrayList<>();
             CardFaceView cardFaceView;
-            for (ICardFace cardFace : faces) {
+            for (ICardFace cardFace : carddb.getAllFaces()) {
                 cardFaceView = new CardFaceView(CardTranslation.getTranslatedName(cardFace.getDisplayName()), cardFace.getName());
                 choices.add(cardFaceView);
             }

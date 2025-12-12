@@ -4,5 +4,5 @@ Types:Creature Vampire Rogue
 PT:2/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRevealUntil | TriggerDescription$ When CARDNAME enters, target player reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard.
-SVar:TrigRevealUntil:DB$ DigUntil | ValidTgts$ Player | TgtPrompt$ Select target player | IsCurse$ True | Amount$ 1 | Valid$ Land | ValidDescription$ land | RevealedDestination$ Graveyard
+SVar:TrigRevealUntil:DB$ DigUntil | ValidTgts$ Player | IsCurse$ True | Amount$ 1 | Valid$ Land | ValidDescription$ land | RevealedDestination$ Graveyard
 Oracle:Flying\nWhen Balustrade Spy enters, target player reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard.

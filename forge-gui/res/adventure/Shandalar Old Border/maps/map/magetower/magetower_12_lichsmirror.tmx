@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="57">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  "startBattleWithCard": [ "Crawlspace|ULG" ],
+}</property>
+ </properties>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF6IARCdMTLOdgYHjOiR2v5KCdvV6cEIzsbxD2AIq5c9LXXgYa2guzA2TnYyBeDQzTp2hsatsLsu8F0MxnOMIYhmlhrxsnAoP8h+zfJ1D8lAb2ruFA2IsvD+EKC3LtRbb7GZ6whsUJshspzevo/iYGU6t8IcVuapZr+MIX2U30LkcHouweagAA95omZQ==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNlN0JwjAUhYNY23QJn5xA0I7gZm5QjTs4guAsPriCqH0wB4m5XNJEkiv48NEf2nw5JyG9Vqr/U4ZJGmnno1HKaA91HadvfuE17HlRe7Yz38dnXo1cVty7bBz4adelftpvymu079v9cyhw3uz1Hpm389J1Buu2zMkdY3m5N2ef7RM9OQf9XtK7ZF3tIpkB7yfXG8qMdQvRWea2702l1LXK865a70UOnnuMi/Wd63yvc9MOv3HDCUq6DvnROfb6k4CzAe9Ogk6+f2NI+lIddBlng0QHpWO8AFO/SIc=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyTEGBgkBiE+DcTA8M2AfxYisp2SgPxTGYGhhYGCG5lQAXNULGtQHWKjNRzg6QAxPw2NgaGdjaEG1qhds4G8pUZIWr2A+l4JogbKLEf5NftUHtV2BkY1rAwYIB1QLGDjAg+zG4QEKfQTkL2wvwOiwOY3aTai24nzF4vVgYGbyB+BcUgtg8rJOyRw7uSHxLXNfzkxSkIyAPtU2CH2BvMgB2rAeVimSDhDbKTVPuw2fsU6J+HrBC7D0NxEgcEw/hH2CF+biUzTrHZuxdopgvQ3udADApGXBjkz2p+SFqnhr0wu+vYIH7GZe9WaJrYSkH+gdkbh2QuzG4lIO3Bih0/YqUsfmuhYYYOQHbHAeO1hQ0Tu1BoJ7LdVTjsRweVULWU2onNfmQMcwst7CMU/4wU5pmBtBcAchl6zg==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBicQFoAQu8A0owMqHiHAO3s3Y5mHzqAiW+jshtg5k4DEtPR8AwoRlYHCwdsbiTFPnT9j3hQ+WZMuPWSay8xAN1eewrsJAUg2wvzZxU/9cz/xI5qProYsji1wCW0sCSUtikFlcDwqoaGWRsB82cyMzCIC1AnTW0VgORfdDlkc2PRxPHldXz2IesB0b9xyOOyg1r2wjAszLGJMeDQR4696BgW5oTEKPUvPjOolW7Jcc9QBQCxBBg8
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="199.974" y="271.026" width="32" height="16">
+   <properties>
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+  <object id="47" template="../../../../../../common/maps/obj/gold.tx" x="342" y="108.5" />
+  <object id="56" template="../../../../../../common/maps/obj/gold.tx" x="225.5" y="78">
+   <properties>
+    <property name="reward">[
+  {
+    "type": "gold",
+    "count": 110,
+    "addMaxCount": 50
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="176.239" y="78.7583">
+   <properties>
+    <property name="reward">[{
+  "type": "randomCard",
+  "count": 2,
+  "probability": 1,
+  "colors": [ "colorID" ]
+},{
+  "type": "randomCard",
+  "count": 1,
+  "probability": 1,
+  "rarity": [ "mythicrare" ],
+  "colors": [ "colorID" ]
+},{
+  "type": "randomCard",
+  "count": 1,
+  "probability": 0.6,
+  "rarity": [ "rare", "mythicrare" ],
+  "addMaxCount": 1
+},{
+  "type": "randomCard",
+  "count": 1,
+  "probability": 0.5,
+  "addMaxCount": 2
+}]</property>
+   </properties>
+  </object>
+  <object id="55" template="../../../../../../common/maps/obj/treasure.tx" x="340.421" y="74.8947">
+   <properties>
+    <property name="reward">[{
+  "type": "randomCard",
+  "count": 2,
+  "probability": 1,
+  "colors": [ "colorID" ]
+},{
+  "type": "randomCard",
+  "count": 1,
+  "probability": 0.8,
+  "rarity": [ "rare" ],
+  "colors": [ "colorID" ]
+},{
+  "type": "randomCard",
+  "count": 1,
+  "addMaxCount": 2
+}]</property>
+   </properties>
+  </object>
+  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="72" y="200" />
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="199.823" y="96.2516">
+   <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Mirror Universe|LEG|1" ], "lifeModifier": 4 }</property>
+    <property name="enemy" value="Lich" />
+   </properties>
+  </object>
+  <object id="51" template="../../../../../../common/maps/obj/enemy.tx" x="200.079" y="127.263">
+   <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Dream Chisel|ONS", "Ixidor, Reality Sculptor|ONS", "Tropical Island|LEA", "Underground Sea|LEA" ] }</property>
+    <property name="enemy" value="Aether Channeler" />
+   </properties>
+  </object>
+  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="265.246" y="59.2632">
+   <properties>
+    <property name="enemy" value="Walking Brain" />
+   </properties>
+  </object>
+  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="101.579" y="108.263">
+   <properties>
+    <property name="enemy" value="Black Golem" />
+   </properties>
+  </object>
+  <object id="52" template="../../../../../../common/maps/obj/enemy.tx" x="154.184" y="231.579">
+   <properties>
+    <property name="enemy" value="Dark Knight" />
+   </properties>
+  </object>
+ </objectgroup>
+</map>

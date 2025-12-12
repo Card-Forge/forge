@@ -259,7 +259,7 @@ ScryfallCode=SCD
 251 U Thunderclap Wyvern @Jason Felix
 252 R Time Wipe @Svetlin Velinov
 253 M Trostani Discordant @Chase Stone
-254 R Undermine @Massimilano Frezzato
+254 R Undermine @Massimiliano Frezzato
 255 U Unlicensed Disintegration @Izzy
 256 M Vela the Night-Clad @Allen Williams
 257 C Arcane Signet @Dan Murayama Scott

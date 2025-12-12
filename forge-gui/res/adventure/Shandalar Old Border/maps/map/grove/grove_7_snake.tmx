@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="100">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx" />
+ <tileset firstgid="28289" source="../../../../../../common/maps/tileset/dungeon.tsx" />
+ <tileset firstgid="32769" source="../../../../../../common/maps/tileset/dungeon/animatedtiles.tsx" />
+ <layer id="10" name="Collision" width="40" height="50" opacity="0">
+  <data encoding="base64" compression="zlib">
+   eJztmF0OwiAMgIlve3A+saN4gLnodTySD85zuZ1Em43YaBkFxiCxX9LEAJZvP1AypQRBEIQQTvUnSuGulernwH6m7aHz+rXNcn/n6E9N6X7P9/zDHBjTNmb2w3TzumgLWh8Y8YtD/OIQPz47PYWpZ/Ab+920PVJh8o9o36XOA1AzsMuWbhCcmrbl/fvOH1JzUzlS1+/yA6hz1dqOtmfD8bOdW9Z63lSONfxsuWPdvvtj/Kg5ODmvB95/OLm4Y3wdOWOpfS10rwv1c41Zyu37Xvk4xuYNfe+5jpy1mQrsd6noMTn9gNL9gCW/lGcMLi6/3I4cv5yOXL9cjjDvsZ7qGQ6b49C441z9tmH6vV9wriE2zF4AZwX87c0VobWxNL9Yx1C/rb6/Yj9BEP6bF+81zMs=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="40" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztk0EOwiAUBevSpfU+4qZXqluvoLjwuAZN01qRT+n7QJM3yWzt+ICmIYQQQspxP5Uu2Ca7a+kCog3fxnbp96O1Me2quS+0n3sbg7mZN01bfJZG6svVOz/PpV0anb67trZLow/SZL61BtPmQG3WmtHjef2OiO2efbgvpRG5m9SXAuo8302dvN/SHZF9tvtt+9cX24rs822H6GsvHzVanVLfcHdz7ZdiqO+muN0h8rdj9nsodMb+99TzRdwD12iFzpJ9mvshjPle7e+XUkopRfoCwnDyvA==
+  </data>
+ </layer>
+ <layer id="8" name="Below BackGround" width="40" height="50" opacity="0.6">
+  <data encoding="base64" compression="zlib">
+   eJzt1UEKwjAURdEMnLgCN6aj7sOiZgudWXRn4m7048CClZrktfngvfBmDRxSaLtVCB1jjCXOqm1gjDFWd97/BfjwLWFI6V99h/XneyvJ050t4ZsjxTu1zVmJS2G77vVG5b394ks11s67z/Lus7z7LHzjbdsQdu30c7V856etn/DZt0npuxzzz46l9t0KfE18bWhT+zanvHP3+N4wtS+nJn73ERERKXsA0ABu3w==
+  </data>
+ </layer>
+ <layer id="9" name="Belove AboveGrass" width="40" height="50" opacity="0.46">
+  <data encoding="base64" compression="zlib">
+   eJztl0FShDAQRbMT4hFw0GN5GRyLtReyvIg7ET2E7qRr+DVNT6cJKJhFflXXUM7EvPzudIJzZ70Vzt1657riFHimTwS+ey/crJrSuQcWtY8bp4nY7obx/fB540/xIZ4pPovTXI/lcr7Ycdb/qoVX0jvwH/x0bfw38Kjy0zXRWBr3PMT3tXMvXmeRvnWjd3Kt4OXfafx9MfVX5rFlY8F/P/B9RTBqOVganBlr0f4WWiPWqdVm5c81RoFc7Bl9wHdSJ2onlOctoxa+w9PuH7yyPOR9gu+rFKL2055LeaZ9lRKjlvNq5Z7od/Kf91EE6sCaX/ZF8MZw836pzcv7idW3af7yya5nsIBXcofWJs+aJQJbTD3P/c7yE9/J3owzLcTeGvMtrdGDUePH8vLs42vW7hIx3sX4BDZIY6T5Q+xyPGSdx1autHsE8vM25kqywJ/KX97lNDaNjzNptc/7Pu///A7WjCwyN7wnEz/qTqu90D1LywHvD6F1yjVTrVm5Cd3jrD3Ba6CK8D6kdqbWrIB3Wt6Wclh8qEd+FqCfy9rjz6H9uvY9QRN8k/e7ys97oLH9pXeS8Ri5buyHPdgg5DnmXGtHFnC9Xi1b3xrx9znsT40TNUc1JnvbVt5ZnNxP/h5OLPBRvtPuIfQsvnfa8rKv7c2lcYKRvNuyxtaK5zxFPqgp9ffgVMTvgyky8jtEinnmd4gU+Uhtwv6Rmo3P2d8qhZ6clZWVlZWVlbVWP5xmqWY=
+  </data>
+ </layer>
+ <layer id="7" name="Below Forest" width="40" height="50" opacity="0.7">
+  <data encoding="base64" compression="zlib">
+   eJzVmN1uG0UUx32XnUjEDji1w/d1HgUJbkDiqy9AbxI7idcO5KslFxZCggKPU8ErVDa1i42ooA/CnO75d/57mF0vyTqIIx15MzM7+9vzOZvpRqPx1OuSVP6e6i/rkq6nBWO/eoUMkkbjFddo/ObH3INsbKH3TM19W37diV/f97rv9cjrl14PdEzmUp3r+rU7Lj/X1/kTUhk79tqi9cLzVDnbLtvrjgt8A7Nfn/RYuWb+3icbGV/HZWNYK/vj3WRNmsQV3OBZ0nqMsy3BN9J52EiYdlyeC3sPvf6RZO8pa1qR367+4nrHXMNubBO2w+8beb4B2UF8KgwL9S9seEB8CxMHS4oPfn/Iqd/nzOv7e43GB3vZWMe8x7bLxuR618X5EE/gBNtr9LfwNcke1iYzwyi2fncz4/vCs93b+ye/lclGPj96FB+IBfgYbPD9YVK8b4dsIVzPiO1Pf/3WZlj7sef8JML6aCuLN4lzjr/UMM7Uf8hh4RrofWXiroLN4E9h+9k/95etsO7Qjx8R3yOaG6ifwNchP9nYblENQP4uKIYhcx2TPU/VXvAn222VCGfP8MUEDG9vhprU1dgdqX0lRsSHE81x7PnGZsihWL4UyVzz7FWNEfed1wvS+2FtW9f8lWTKNhAWrmOIT6mp46+zfZpk96qMPY37bc3f8WV+/sXeF6uV682+9gJhe+6vL6jut93qnGJp6j5jfc74myyWF1q7puozFu59S50faq6k5tnY130bfIFnVhXZY3yVXbvLLN84f8Uf3PPhuxbZQnSkuc75LP6YaNy+9MX9GEU5G8eu7Nl24fm2f6MGolceam6g7qCfYK+Bzk8tZwUVtrnunSKH1YbnLsT0UHOSzzF8fknpPSSWezoOPvTVGcUNxwfLnHJ8HjkvvOgjyigyIPugh7SojxxSXggb9gQfzhop/fJ5aGhyBec9Ps/h/dAXnpMdkXPgt3G4TX0YbMeoLZehl6fEyOc2239GSb4eWEU/v3Ch3qCPcgzizCiC9+rQ+DO1X49shWfI87sFtWZEvYnPtf0Io62HEPTTc+WDHTH3sl5dBf/ys9h/1n7oTS3SoyTvZ9Qx8fH4wWq94/LcqCs2l2A32L/rwnuVCWKM4wKxJnacm28ZvpaaMYG9jd3wLbKrZ83dCixF0nHhW4bPVTib8hirzLddyAfUUokf9OC6BPWOa0GMi+tFX+PnVPmaLviyiu+sPB7kNcZo4/EkKa4RwsH1HjFn61qdjPZ7kTkR65hDP5M47CX580sdfEWCeOT6gx6FXnKUhO8j8WWV835VPivTCnbkGikcPWO/5g1ztIxPxsoYbR3nb+N2TVyr+FYxsp+5Tt6GcEyusiPqLuplbP126r9rjNbFV1Z7DshuOP9YPmH7KM3GRSekVeRh5F3Ydrj+PrIO31Tsb7mH7QS2SUR/uKYdi/zKjLNROD/imxJ8liM2dl22VQJG8Nn/BU7V1jF7QT9cExtL5ySfJ/hfIOwujD8WcN4Gnwj+d4E6vW/yo8iOt8VnzzjDSP7GGG+LT2SgdtvRvoE6YhkfktaZG8uvyudtP4vx1S2L80z52uo778XvBd86GF8/q65vnv3/+epm/NQ/8zOvn+tvmd79l3zrjsmqUsT2X/Ph+dZ+N/V1Xe9VxnUdvjrfb51sP92gpq+bbXrNc1hVrpvabR08fwMIRuon
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt2M9OwjAcB/DhwcQjcCAxKs/ClZuimIjCUZ9gKLrBKwBOPenN94EZifHfq/j7Seq67re2jA459Jv84hxs+6ztugbHsbGxscknW4P0sskvJS9ZZe+/VVEOvGQ1rE876+4beckar5GPpTCIysbGZr2y04+2T24cpyUU/+yKn63CFvqR7VFyzQ7x2ezKcV79fG0TuMY2/H1w5d9P8/2WYSNvm0K1YLut6C/0vbjxavbMG9E25Wyl3ny/yvcBx4x82ljpmTGm2XR8GGzDCWdjOTZgFPuUty3qE4PWZYwqmwkfZbwo6PlUNgyeE/Pejxe/b+LLfVmMoau2Yf6exW76d/AcKt+iRvSJtiIYSkIxY+VSfr86vkWM6CsKtsPu/BwhVzoZwnEjom6hAmKfjhGvzbcT2kI36Qsk/arjHhPHDzkjPlubG7RPp5YJ9kk55f6YUebDuUNmayzRdhjskyOJESPzsftg/5v2sfFH9bGujxl1fffCXCSu/ag6VazPZONPZqR8M8KnypNk3arrY0Z+LqD6pXKt9qTljTCi7xl854V4MV9TaA/qPSZmr5485hOu8wX1TfQvJq3vq/Xk+TFpc8i4BuMaKqjFt+9q8rbZ9cANVTX0W4epOY4lT58J46p8Wa1n4GpDdXLyme7vrGFrKBM+aj0me5fpZF9h0/Wx9ZiJdyJ/n9Q5TdgCyZye5T5X3W7UWNBpr0V8oo1fG6vaTWdc8fUDjjH8OQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="50">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlllOwzAQhs0RgIpFZT8BnADRR94AsbUVcAoKIQ1nIKXLE3AlhCiVEHAVZmhHcVw7ttOY5iG/9EtO7NhfZrwxVqhQoUKF0mjtjrF18MbdtEkizTaj8gVwXYKvwHPNoeeb6m//Qwfc+E/A9Qx+AR82hz7KER+vPPJ9+Yx9g3/8/PA9cOOvQnkNvA4OR25NmY8Xz5dHFXyTqeCbTHngK9/Hn9seYx1vWOb5Pu/jrvvj37rQIIiP8w5sfW+83WwFzl/wPLhUid67Zvy4hXuAr2/3AEwhuAV+rMTrXDIiX561KMmljfj/yzqOAwVbF+5TPcmd9PU6XqZnV4xLlvdi5CntyutcMPZH/98PzNoTX7gJ62RzvN6WsTGjrisJaxYZPzV9Et/2FmM7W/I2NoxzDfnecSbklfpcBsaFvcjdSlTm+XSyYSS+/rW6zak37BP5OnuRkY/Kr7fx9ZEVo8ne+wbjHgPjOfCFN5GRj8oHUB82zPlMGU34UC3LsU2l2/91fO2GPVvSXEGJ89uVShy3uN6zkune9seQYY51MSZh/m0YSVWIV21kl0I+HaPsHObnbc9iX7H9pxNPz0jnMJ8T4lPdFUjITk4rkbG8b+aaHzcv8V1SzLAvU8YBuBzYe0WI/XKKOU36gHwMhJzgGYGM0+ZrQ5w7ilgTYy2IuxqMvxPr6hPEi1fSPop8b6N5fOToPEsrng1FfLK5kKV0/Z9CPM8kMXUVP9szqAtsPUM+7DvtGUffZnFmy+4sSWxJa073LS9VLpPY0v5jmnmryqWKbdr6BbFFEHo=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="280.5" y="798.5" width="48" height="16">
+   <properties>
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="231.921" y="168.487" />
+  <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="460.22" y="539.626">
+   <properties>
+    <property name="enemy" value="Crag Hydra of Shandalar" />
+    <property name="threatRange" type="int" value="50" />
+    <property name="waypoints" value="98,69,79,83,97,83,79" />
+   </properties>
+  </object>
+  <object id="62" template="../../../../../../common/maps/obj/enemy.tx" x="93.307" y="538.539">
+   <properties>
+    <property name="enemy" value="Crag Hydra of Shandalar" />
+    <property name="threatRange" type="int" value="50" />
+    <property name="waypoints" value="79,69,98" />
+   </properties>
+  </object>
+  <object id="63" template="../../../../../../common/maps/obj/gold.tx" x="316.333" y="200.667" />
+  <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="274.026" y="206.114">
+   <properties>
+    <property name="enemy" value="The Dragon Lord" />
+    <property name="threatRange" type="int" value="50" />
+   <property name="effect">{"startBattleWithCard": ["Mox Ruby|LEA", "Nalathni Dragon|DRC94", "Dragon Engine|3ED"]}</property>
+    </properties>
+  </object>
+  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="237.575" y="398.439">
+   <properties>
+    <property name="enemy" value="Crag Hydra of Shandalar" />
+    <property name="threatRange" type="int" value="50" />
+   </properties>
+  </object>
+  <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="333.311" y="623.794">
+   <properties>
+    <property name="enemy" value="War Mage of Shandalar" />
+    <property name="threatRange" type="int" value="50" />
+   </properties>
+  </object>
+  <object id="68" template="../../../../../../common/maps/obj/manashards.tx" x="351.395" y="401.965" />
+  <object id="69" template="../../../../../../common/maps/obj/waypoint.tx" x="69.193" y="485.368" />
+  <object id="75" template="../../../../../../common/maps/obj/booster.tx" x="312.526" y="168.36">
+   <properties>
+    <property name="reward">[
+  {
+    "editions": [ "MIR", "VIS", "WTH", "POR" ],
+    "type": "card",
+    "count": 10,
+    "colors": ["Green"],
+    "rarity": [ "Common" ]
+  },
+  {
+    "editions": [ "MIR", "VIS", "WTH", "POR" ],
+    "type": "card",
+    "count": 3,
+    "colors": ["Green"],
+    "rarity": [ "Uncommon" ]
+  },
+  {
+    "editions": [ "MIR", "VIS", "WTH", "POR" ],
+    "type": "Green",
+    "count": 1,
+    "colors": ["Colorless"],
+    "rarity": [ "Rare" ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="79" template="../../../../../../common/maps/obj/waypoint.tx" x="167.807" y="583.675" />
+  <object id="80" template="../../../../../../common/maps/obj/waypoint.tx" x="272.754" y="433.175" />
+  <object id="83" template="../../../../../../common/maps/obj/waypoint.tx" x="410.43" y="468.693" />
+  <object id="87" template="../../../../../../common/maps/obj/collision.tx" x="-15" y="-2.9495" width="16" height="803.899" />
+  <object id="88" template="../../../../../../common/maps/obj/collision.tx" x="639.5" y="-0.4495" width="16" height="803.899" />
+  <object id="89" template="../../../../../../common/maps/obj/collision.tx" x="-13.72" y="-17.5" width="671.44" height="16" />
+  <object id="90" template="../../../../../../common/maps/obj/collision.tx" x="-14.22" y="800.5" width="671.44" height="16" />
+  <object id="91" template="../../../../../../common/maps/obj/manashards.tx" x="186" y="355" />
+  <object id="92" template="../../../../../../common/maps/obj/gold.tx" x="105" y="448.5" />
+  <object id="93" template="../../../../../../common/maps/obj/gold.tx" x="207" y="631" />
+  <object id="94" template="../../../../../../common/maps/obj/enemy.tx" x="390.5" y="464.5">
+   <properties>
+    <property name="enemy" value="Crag Hydra of Shandalar" />
+    <property name="threatRange" type="int" value="50" />
+    <property name="waypoints" value="77,69,73,74" />
+   </properties>
+  </object>
+  <object id="95" template="../../../../../../common/maps/obj/enemy.tx" x="112" y="479">
+   <properties>
+    <property name="enemy" value="War Mage of Shandalar" />
+    <property name="threatRange" type="int" value="50" />
+   </properties>
+  </object>
+  <object id="96" template="../../../../../../common/maps/obj/waypoint.tx" x="413.5" y="563.5" />
+  <object id="97" template="../../../../../../common/maps/obj/waypoint.tx" x="363" y="395.5" />
+  <object id="98" template="../../../../../../common/maps/obj/waypoint.tx" x="63" y="553.5" />
+ <object id="99" template="../../../../../../common/maps/obj/enemy.tx" x="250" y="150"><properties><property name="enemy" value="Dracur of Shandalar" /><property name="threatRange" type="int" value="100" /><property name="effect">{"startBattleWithCard": ["City of Brass|ARN"]}</property></properties></object></objectgroup>
+</map>

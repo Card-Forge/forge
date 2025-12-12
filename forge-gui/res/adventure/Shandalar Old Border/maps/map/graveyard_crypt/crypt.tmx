@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="86">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon.tsx" />
+ <tileset firstgid="16385" source="../../../../../../common/maps/tileset/main-nocollide.tsx" />
+ <layer id="1" name="Background" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJybxsnAMG0AMDYwEO4YCm6hBxhIu9HBqFuwg8HmloFOsyMFqLIPtAsgAOSOUbdggsHijlEwCgYzmCM60C4YBaNg6AIAYHk9+Q==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztkzEOgCAMRXVywZHBhNVLeTknL+GdvINpCLGSorRAwMSf/MGg5fW3GtV1poIp1eCQsPTaeh6sd0V7GfOwYB3T3Svi4Bi+xc9w99P7OVhArbDE5vJmSrgWxeLn4LM7c9klLFT/MSx4Z+E8Zm+pOXH7Ce0Qp45kL1piCeX9FRZqB3KwbLoMi+SfLJWLO4utJcmRw5IyLwlHiAUzlcokZO6cU2tzVbrXWny17m2VJZdaYvl16QR0BKZm
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF+MACUUw8GNww6hbc9o66hTy3qLIzMDDLMjCwA7GzCQODiwmEDcIgOXoCkH0tJqjYDUoPBre0DKBbYKDdBIKdoRiXW0DiyJiWbmmGYmz2oLuDWu6BmYMtflywuAWXOyhxC7o5D8UQuAUaJtjSC7Xdgs0cNzmIO9DNJja9kOMWUv1ErFvc5WjvFloCct3CJIqKmalYr5AaFjskEBhUpywcZG4ZqDbKYHKLnRgqthcbDZfB5hZS4wgAQCtwcQ==
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzNlk9OAjEUhztI4gZczTQmBHbcwI0hSCIslC1HgmMQlYAu1AN4A5ccAFlwENHX0Ekfz762jMMwv+Rbdf58ffPaqRDF5inhKYuHjwioBLKSQnwBa/l37Cd233tWYG0ePe+YldglIjU7pcss2R+z5XNUHhecRVOIKgNNF/XzPNnNCffuA1kvHWmu6eh7e9LtMrnapw8MgBcYa58bfMF18dWQc9lIg8pYOxXtorJsGMaoPpwL53YqlxqM1YEL1Fd5fKPnxJD2is0F8wpjb8A749Il+3aoC+1dri6Yu5YQ98CwZXfBbOMwl1t4Vp9hoN9Dv1NIv2BC9passdXJ5rKN/XvKsUJdsq4lmsjRd+rscCMN6XVq/sdwudZ1/bjcQRNybppqR/yv+M//2uficrP1bJY+/o7dLq7k7aLqm/bDocnbhdsrQs773N6Lzw6HQNdEFpeicOUXefTD2g==
+  </data>
+ </layer>
+ <layer id="6" name="Clutter" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF1Ab/RUgTpxSsEIVgEMgF2rEcyA6XhPAXimLXAxIPCwSqA+KIQOq55aAEbjnHMAR7JZK7cLmRGm5Zicf/pIhTAuYAzWRCwotDUfl2YqgYJm4vhmkWTyj13YcM0N0CwxyyuPXA/EQIEKMGF6iwYGCotCBfPzXBDqA7dlLJLd+pmPeEceS9fQoMDPsVEDQuMDWI9m6JUWRgiFVE0LiAcTBl9iOnF2LDRZUdv5nMZJYNyOmF2HAh5BZalZkgALIbHRMCtCqXSHUHIZAogokpAdT0N7XcNNgBJfUArQE1y2NKATXLY0oBpeXxKKAcAABkFTay
+  </data>
+ </layer>
+ <layer id="7" name="AboveAboveClutter" width="35" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF9ASTTBkYJpvSxmw1CcJyP5DELgHdcRnNLT8sGBh+WiDogQL4/DLSQKLIQLsAAWjlFmRzDxIZ9yA9uNxDiTvJ1YvPPeSaQQ0zk4F5PAUJpxJR/lDLHeh6FgPtXoKEl5JYFsLcMVjcQi5A98djoN1PkPBTOroF3U3UNgOfmYTksGFS3EKMmfQAxNhH73KeUPk5EO5Btnsg4gnZLQNhLy5Ab7dEMKC2FUfBwAMAz8s65Q==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="348.333" y="335" width="67.6667" height="46.3333">
+   <properties>
+    <property name="direction" value="right" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/graveyard_crypt/graveyard.tmx" />
+   </properties>
+  </object>
+  <object id="47" template="../../../../../../common/maps/obj/gold.tx" x="320.333" y="148" />
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="257.333" y="62.3333">
+   <properties>
+    <property name="reward">[{
+  "type": "item",
+  "count": 1,
+  "itemName": "Flaming Skull"
+}]</property>
+   </properties>
+  </object>
+  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="48.3333" y="126.333" />
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="298.667" y="182">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Black Market|MMQ&quot;]}" />
+    <property name="enemy" value="Cosmic Horror" />
+   <property name="effect">{ "startBattleWithCard": [ "Cursed Monstrosity|ODY" ] }</property>
+    <property name="threatRange" type="int" value="40" />
+   </properties>
+  </object>
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="47.6667" y="112.667" />
+  <object id="52" template="../../../../../../common/maps/obj/treasure.tx" x="63.3333" y="111.667" />
+  <object id="53" template="../../../../../../common/maps/obj/treasure.tx" x="495.667" y="65.3333" />
+  <object id="54" template="../../../../../../common/maps/obj/treasure.tx" x="48" y="367" />
+  <object id="55" template="../../../../../../common/maps/obj/gold.tx" x="64.3333" y="126.667" />
+  <object id="56" template="../../../../../../common/maps/obj/gold.tx" x="56.3333" y="125.333" />
+  <object id="57" template="../../../../../../common/maps/obj/gold.tx" x="52" y="125.667" />
+  <object id="58" template="../../../../../../common/maps/obj/gold.tx" x="60.3333" y="125" />
+  <object id="59" template="../../../../../../common/maps/obj/gold.tx" x="318.333" y="221" />
+  <object id="60" template="../../../../../../common/maps/obj/manashards.tx" x="320" y="63.3333" />
+  <object id="61" template="../../../../../../common/maps/obj/manashards.tx" x="416.667" y="62.3333" />
+  <object id="62" template="../../../../../../common/maps/obj/manashards.tx" x="303.333" y="365.333" />
+  <object id="63" template="../../../../../../common/maps/obj/enemy.tx" x="216" y="144.667">
+   <properties>
+    <property name="enemy" value="Necromancer" />
+    <property name="hidden" type="bool" value="false" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="164.667" y="79.6667">
+   <properties>
+    <property name="enemy" value="Adept Black Wizard" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="65" template="../../../../../../common/maps/obj/enemy.tx" x="288.333" y="69">
+   <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Wheel of Torture|ULG" ] }</property>
+    <property name="enemy" value="Torturer" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="63.3333" y="335.333">
+   <properties>
+    <property name="enemy" value="Curselord" />
+    <property name="hidden" type="bool" value="false" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="458.333" y="90">
+   <properties>
+    <property name="enemy" value="Walking Brain" />
+    <property name="threatRange" type="int" value="60" />
+   </properties>
+  </object>
+  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="466.333" y="198.333">
+   <properties>
+    <property name="enemy" value="Bone Dragon" />
+   <property name="effect">{ "startBattleWithCard": [ "Bladewing's Thrall|SCG", "Dragonspeaker Shaman|SCG", "Dwarven Ruins|FEM", "Ebon Stronghold|FEM", "Wall of Bone|LEA" ] }</property>
+    </properties>
+  </object>
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="139.333" y="214.667">
+   <properties>
+    <property name="enemy" value="Adept Black Wizard" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="80,72,79,81" />
+   </properties>
+  </object>
+  <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="226.333" y="346.333">
+   <properties>
+    <property name="enemy" value="Adept Black Wizard" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="81,72,73,77,73,72,81" />
+   </properties>
+  </object>
+  <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="363.667" y="193.667">
+   <properties>
+    <property name="enemy" value="Adept Black Wizard" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="75,74,82,74" />
+   </properties>
+  </object>
+  <object id="72" template="../../../../../../common/maps/obj/waypoint.tx" x="210" y="349" />
+  <object id="73" template="../../../../../../common/maps/obj/waypoint.tx" x="292.333" y="255.667" />
+  <object id="74" template="../../../../../../common/maps/obj/waypoint.tx" x="371.667" y="253.333" />
+  <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="366" y="87" />
+  <object id="76" template="../../../../../../common/maps/obj/waypoint.tx" x="489.333" y="257" />
+  <object id="77" template="../../../../../../common/maps/obj/waypoint.tx" x="470.667" y="150.667" />
+  <object id="78" template="../../../../../../common/maps/obj/waypoint.tx" x="373.333" y="158.333" />
+  <object id="79" template="../../../../../../common/maps/obj/waypoint.tx" x="175" y="189.667" />
+  <object id="80" template="../../../../../../common/maps/obj/waypoint.tx" x="176.667" y="128.333" />
+  <object id="81" template="../../../../../../common/maps/obj/waypoint.tx" x="61.6667" y="185.667" />
+  <object id="82" template="../../../../../../common/maps/obj/waypoint.tx" x="140.666" y="254.334" />
+  <object id="83" template="../../../../../../common/maps/obj/waypoint.tx" x="55.3333" y="299.667" />
+  <object id="84" name="switch" type="dialog" gid="4426" x="286.333" y="54" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  {
+    "text": "Hmm... A big switch is embedded into the wall.",
+    "options": [
+      {
+        "text": "You hear some loud sounds coming from the north",
+        "name": "flip the switch",
+        "options": [
+          {
+            "action": [ { "deleteMapObject": 85 } ],
+            "name": "ok"
+          }
+        ]
+      },
+      { "name": "go away" }
+    ]
+  }
+
+]</property>
+   </properties>
+  </object>
+  <object id="85" template="../../../../../../common/maps/obj/gate.tx" x="47.6667" y="152">
+   <properties>
+    <property name="dialog">[
+  {
+    "text":"This gate appears to be locked in place by some mechanism, but you do not see any controls here.",
+    "options":[ { "name":"Time to find it!" } ]
+  }
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

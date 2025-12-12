@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="107">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/FarmFood.tsx" />
+ <tileset firstgid="16001" source="../../../../../../common/maps/tileset/dungeon/dungeon_bis.tsx" />
+ <tileset firstgid="32385" source="../../../../../../common/maps/tileset/main-nocollide.tsx" />
+ <tileset firstgid="42497" source="../../../../../../common/maps/tileset/dungeon/dungeon_2.tsx" />
+ <tileset firstgid="66833" source="../../../../../../common/maps/tileset/dungeon/animatedtiles.tsx" />
+ <layer id="1" name="Background" width="50" height="60">
+  <data encoding="base64" compression="zlib">
+   eJzt0tENQEAQRVGKUjwlqUIDZrFr10TOJOeP5N2wLvO0BjJetLUk4+nIdTpyXYaOfbuWtePJzjvPjO442xRtzPg9zja1/kujOt7477/oGLF3REd0f+po0avj7Q2l/rvXu6Ompebdmg4AAAAAAAAAADgAOXxfkA==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="50" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztzwEJAAAIwDDr28h4lhAU2RL8EQAAAAB/VW4XzPBxy5cPAAAAAAAAuKYBQAwFBQ==
+  </data>
+ </layer>
+ <layer id="7" name="Mountain Walls" width="50" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztmFtywyAMRfFu2p/+2QF3V11K95Jm0scC2lU1NCYVsngI7ABONKNJxiHkHiQkghBCHPuuKY+10jqXZiutjaP/9bMNvSEW/doaC84ZmDuYpZW8ak2rKx6uPV17jnFrbWuxcjHVHpcQR2k9t8rB2Ss1+xY4QobHltbL0e7S2wqHaxz3e6lrd7e73e02bSs1YkmOxy8hvoFf0yiO1Jr+dGXt0LDOnN5UkgNbDMPLnvafijiMbWH/96oTO9U2h2Y4yE68yXZZLgzq7IfKONRJzxDhkKFGjr2y9UV7ZbkV4hi0Xlk/i4/jj2HsRD/Wz+LTqPeA6XlNs0z6tsQCxw3T2GFnu6+G9Y46aObGn4/In5V937IEizaFWU7vDw/z+Y0+XLfh3OZzvC7Q3+U/C74/4rBQa31UYQanfuXXTfmH4t0LqSl3oOu6ZY0Bawjj5eudOQwxHNzzqyLywLDE9tEUDlx3clmOhA6T6xyOGD74DPcCDgt+TsXCpSmaSRJ5LO154VrFxIS6kzXuYuByWGst53tPG6zvoZrDvZvee/Kak0uwVlMMUB9ZP4k+sARHav74GHBsMAvZB1I4TvOO49mdZxXEEKvbxWLlWUZMLj1c99Zx/nwtBmjW+TyTBTJc/AoMMw6ChbvnKQ6Tbyl7IJkDseQwwHq8tG5sMf8xUnhwT1nbTL0h9yKjR4b6YlGOiWVQc3fxuXr72tYTv0ud2WLOmL7zydpGxYLqxaHzso+hFIfvDEexDAGGtTlgTpG5E8ER62sa9+6T/T9NlefIXX8cz1/TQk52
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="50" height="60">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmM9PE0EUx5/6D8BBPJkgd+sZExJ+eRSiclDO6NE/QS5CAnjyiD9Ogho1YSm2hXbb2BuEq/4DnkUPwI3EN2knfZ3O7M7udtzXdT/JN4Rt075P386+2QWIxugBwI0EuY6pYxar3eknVz6Fv6eGNfgJonM477MHZXsH4P1O7/GlenceVaPFlcPLmv74tAcw4/Uev4nHCkpsHY48d324qJtddJg8Htft4vJcEi5JPGjEbz7UBBhudmq/1OjE9Xqw7cthu1YRwLpOsaYzkqffAD6jw5dmq+4z5XWXDpIofeHIG+zD23Yvoq4XToz7ALf9zv+2ffmA1+WPmmuzDVeLACMk14rxPofyHR1++N3HbPoyi2vkjubabIOHde+S2ot98DDh8hzzlLr75XF80PpL14pAuGw29HnViP99Ljxo7epaMfEaHY4s3mfi7h7AHMn8XvzPktDa1bUi+0SRDk+YXad161yielAHnYdpf8kJ1UHnYdpf/gue7wOsYFb3e1+j/SgoDpcTrHMXyHu8Mc1aoFAPbg6CGrlXC0J6cHQQPCT3agLTLBEeXB0Ep4Y9tTpLCgHz4tmum9psUX9zino9NnkIh7Q9bOf3oa+f3xwcBEEz8LzaHd28+BkyKzjMRXG/HeaxHNKLNOeiRHrIZwTc9lOUoOdlWfC45bWejVAPzrMjyGOQUJ8vyQyax/9Gkmc8aUDrFXNazrkkz3jSgNYrPMLmHDe47JOSIs6fLHgsZ6QfOTlZYILMoq8lgBKmjKmU0qspKffKAPcxDzAL5bSric8vrP0E8xvzp+0xMUB7B8laBWAds4F5UUm7muzwDveXWxH2xFzPnUmsa4ppbWnAtU+cyWcXL3SzaxDJZ1dOTk5OPP4CSRXePA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects" visible="0">
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="110.444" y="326.898" />
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="176.166" y="54.6663" />
+  <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="453.5" y="65.0004">
+   <properties>
+    <property name="enemy" value="Bear" />
+    <property name="threatRange" type="int" value="60" />
+   </properties>
+  </object>
+  <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="340.167" y="285.167">
+   <properties>
+    <property name="enemy" value="Kor Warrior" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="91,92" />
+   </properties>
+  </object>
+  <object id="59" template="../../../../../../common/maps/obj/enemy.tx" x="422.5" y="196.167">
+   <properties>
+    <property name="enemy" value="Dwarf" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="93,94" />
+   </properties>
+  </object>
+  <object id="61" template="../../../../../../common/maps/obj/entry_right.tx" x="623.5" y="320" width="16" height="32">
+   <properties>
+    <property name="direction" value="right" />
+   </properties>
+  </object>
+  <object id="67" template="../../../../../../common/maps/obj/gold.tx" x="416.978" y="181.522" />
+  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="471" y="285">
+   <properties>
+    <property name="enemy" value="Kor Warrior" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="288" y="224">
+   <properties>
+    <property name="enemy" value="Kor Warrior" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="94,95" />
+   </properties>
+  </object>
+  <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="177" y="171">
+   <properties>
+    <property name="enemy" value="Armored Knight" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="96,95" />
+   </properties>
+  </object>
+  <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="176" y="107.5">
+   <properties>
+    <property name="effect">{ "startBattleWithCard": [ "Plains|PALP", "Plains|PALP", "Plains|PALP", "Lin Sivvi, Defiant Hero|NMS", "Cho-Manno, Revolutionary|MMQ" ] }</property>
+    <property name="enemy" value="Nahiri" />
+   </properties>
+  </object>
+  <object id="72" template="../../../../../../common/maps/obj/treasure.tx" x="87.024" y="381.417" />
+  <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="413.724" y="311.841">
+   <properties>
+    <property name="enemy" value="Armored Knight" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="97,103" />
+   </properties>
+  </object>
+  <object id="79" template="../../../../../../common/maps/obj/door_down.tx" x="472.75" y="64.6667">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/nahiri/nahiricave.tmx" />
+    <property name="teleportObjectId" value="71" />
+   </properties>
+  </object>
+  <object id="85" template="../../../../../../common/maps/obj/waypoint.tx" x="391.5" y="57" />
+  <object id="91" template="../../../../../../common/maps/obj/waypoint.tx" x="385.5" y="282.667" />
+  <object id="92" template="../../../../../../common/maps/obj/waypoint.tx" x="320.667" y="282" />
+  <object id="93" template="../../../../../../common/maps/obj/waypoint.tx" x="423.5" y="223.917" />
+  <object id="94" template="../../../../../../common/maps/obj/waypoint.tx" x="309.833" y="223" />
+  <object id="95" template="../../../../../../common/maps/obj/waypoint.tx" x="177.25" y="224" />
+  <object id="96" template="../../../../../../common/maps/obj/waypoint.tx" x="178" y="144.5" />
+  <object id="97" template="../../../../../../common/maps/obj/waypoint.tx" x="418.5" y="291.333" />
+  <object id="98" template="../../../../../../common/maps/obj/manashards.tx" x="233" y="107.5" />
+  <object id="99" template="../../../../../../common/maps/obj/manashards.tx" x="326.75" y="55.75" />
+  <object id="100" template="../../../../../../common/maps/obj/manashards.tx" x="49.25" y="326" />
+  <object id="101" template="../../../../../../common/maps/obj/manashards.tx" x="59.5" y="366.75" />
+  <object id="102" template="../../../../../../common/maps/obj/manashards.tx" x="486" y="375" />
+  <object id="103" template="../../../../../../common/maps/obj/waypoint.tx" x="413.667" y="361.667" />
+  <object id="104" template="../../../../../../common/maps/obj/enemy.tx" x="81.5489" y="352.323">
+   <properties>
+    <property name="enemy" value="Yeti" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="106" template="../../../../../../common/maps/obj/door_down.tx" x="117" y="287">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/nahiri/nahiricave.tmx" />
+    <property name="teleportObjectId" value="96" />
+   </properties>
+  </object>
+ </objectgroup>
+</map>

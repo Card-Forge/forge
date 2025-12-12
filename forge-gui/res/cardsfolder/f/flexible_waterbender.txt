@@ -1,0 +1,7 @@
+Name:Flexible Waterbender
+ManaCost:3 U
+Types:Creature Human Warrior Ally 
+PT:2/5
+K:Vigilance
+A:AB$ Animate | Cost$ Waterbend<3> | Defined$ Self | Power$ 5 | Toughness$ 2 | SpellDescription$ This creature has base power and toughness 5/2 until end of turn.
+Oracle:Vigilance\nWaterbend {3}: This creature has base power and toughness 5/2 until end of turn. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)

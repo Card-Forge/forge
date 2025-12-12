@@ -1,0 +1,32 @@
+[metadata]
+Name=Rorix Bladewing
+[Main]
+16 Mountain|LEA
+2 Gauntlet of Might|LEA
+3 Nevinyrral's Disk|LEA
+2 Sneak Attack|USG
+2 Dragon Tyrant|SCG
+2 Crimson Hellkite|MIR
+2 Kilnmouth Dragon|LGN
+2 Dragon Mage|SCG
+2 Rorix Bladewing|ONS
+2 Two-Headed Dragon|MMQ
+2 Shivan Hellkite|USG
+4 Shivan Dragon|LEA
+1 Shichifukujin Dragon|PCEL
+2 Zirilan of the Claw|MIR
+2 Gratuitous Violence|ONS
+2 Torrent of Fire|SCG
+2 Kaervek's Torch|MIR
+2 Aftershock|TMP
+2 Insurrection|ONS
+2 Ruination|STH
+2 Relentless Assault|VIS
+2 Flame Wave|STH
+
+[StartInBattle_Reference]
+1 Dragon Roost|ONS
+1 Mountain|ONS|1
+1 Mountain|ONS|2
+1 Mountain|ONS|3
+1 Mountain|ONS|4

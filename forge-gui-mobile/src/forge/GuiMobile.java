@@ -33,7 +33,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 import org.jupnp.DefaultUpnpServiceConfiguration;
 import org.jupnp.UpnpServiceConfiguration;
@@ -198,7 +197,7 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final Collection<T> selected, final Function<T, String> display) {
+    public <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final Collection<T> selected, final FSerializableFunction<T, String> display) {
         return new WaitCallback<List<T>>() {
             @Override
             public void run() {
@@ -303,8 +302,13 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
+    public boolean isSupportedAudioFormat(File file) {
+        return Forge.getDeviceAdapter().isSupportedAudioFormat(file);
+    }
+
+    @Override
     public IAudioClip createAudioClip(final String filename) {
-        return AudioClip.createClip(SoundSystem.instance.getSoundDirectory() + filename);
+        return AudioClip.createClip(SoundSystem.instance.getSoundResource(filename));
     }
 
     @Override

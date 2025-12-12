@@ -15,7 +15,7 @@ Base=Common:!fromSheet("TLA allied lands"):fromSheet("TLA cards")
 
 [Common-Borderless]
 Base=Common:fromSheet("TLA cards")
-Replace=.0384F fromSheet("TLE borderless")
+Replace=.0384F fromSheet("TLE cards")
 
 [Uncommon]
 Base=Uncommon:fromSheet("TLA cards")
@@ -32,7 +32,7 @@ Replace=.001F Rare:fromSheet("TLA battle pose")
 Replace=.0005F Mythic:fromSheet("TLA battle pose")
 Replace=.001F Rare:fromSheet("TLA elemental frame")
 Replace=.0005F Mythic:fromSheet("TLA elemental frame")
-Replace=.0005F Mythic:fromSheet("TLA borderless saga")
+Replace=.0005F Mythic:fromSheet("TLA borderless dfc saga")
 
 [Wildcard]
 Base=Uncommon:fromSheet("TLA cards")
@@ -69,12 +69,12 @@ Replace=.0005F Mythic:fromSheet("TLA borderless dfc saga")
 [Land]
 Base=fromSheet("TLA allied lands")
 Replace=0.20F BasicLand:fromSheet("TLA default basic")
-Replace=0.10F BasicLand:fromSheet("TLA Avatar journey basic")
-Replace=0.10F BasicLand:fromSheet("TLA Appa basic")
+Replace=0.10F BasicLand:fromSheet("TLA avatar journey basic")
+Replace=0.10F BasicLand:fromSheet("TLA appa basic")
 Replace=0.10F fromSheet("TLA allied lands")+
 Replace=0.05F BasicLand:fromSheet("TLA default basic")+
-Replace=0.025F BasicLand:fromSheet("TLA Avatar journey basic")+
-Replace=0.025F BasicLand:fromSheet("TLA Appa basic")+
+Replace=0.025F BasicLand:fromSheet("TLA avatar journey basic")+
+Replace=0.025F BasicLand:fromSheet("TLA appa basic")+
 
 [cards]
 1 C Aang's Journey @Kotakan
@@ -376,7 +376,7 @@ Replace=0.025F BasicLand:fromSheet("TLA Appa basic")+
 295 L Mountain @Maojin Lee
 296 L Forest @Slawek Fedorczuk
 
-[scene cards]
+[borderless]
 297 M Fated Firepower @Claudiu-Antoniu Magherusan
 298 R Aang, Swift Savior @Claudiu-Antoniu Magherusan
 299 U Fire Nation Attacks @Claudiu-Antoniu Magherusan
@@ -396,8 +396,6 @@ Replace=0.025F BasicLand:fromSheet("TLA Appa basic")+
 313 R Fire Lord Azula @Dominik Mayer
 314 R The Last Agni Kai @Dominik Mayer
 315 R Fire Lord Zuko @Dominik Mayer
-
-[borderless]
 316 M Appa, Steadfast Guardian @Ilse Gort
 317 R Momo, Friendly Flier @Filip Burburan
 318 R Tiger-Seal @Andrea Piparo
@@ -418,6 +416,18 @@ Replace=0.025F BasicLand:fromSheet("TLA Appa basic")+
 333 R Avatar Destiny @Flavio Girón
 334 R Fire Lord Azula @JungShan
 335 M Ozai, the Phoenix King @Sidharth Chaturvedi
+354 M The Legend of Yangchen @Sija Hong
+355 M The Legend of Kuruk @Barbara Rosiak
+356 M The Rise of Sozin @Barbara Rosiak
+357 M The Legend of Roku @Barbara Rosiak
+358 M The Legend of Kyoshi @Sija Hong
+359 R Aang, Swift Savior @Flavio Girón
+360 R Fire Lord Zuko @Flavio Girón
+361 R Katara, the Fearless @Flavio Girón
+362 R Toph, the First Metalbender @Flavio Girón
+363 M Avatar Aang @Bryan Konietzko
+
+[showcase]
 336 R Aang's Iceberg @Brigitte Roka & Clifton Stommel
 337 M Secret of Bloodbending @Barbara Rosiak
 338 R Yue, the Moon Spirit @Barbara Rosiak
@@ -436,16 +446,8 @@ Replace=0.025F BasicLand:fromSheet("TLA Appa basic")+
 351 R Katara, Water Tribe's Hope @Chun Lo
 352 R Sokka, Tenacious Tactician @Faustine Dumontier
 353 R Toph, the First Metalbender @Barbara Rosiak
-354 M The Legend of Yangchen @Sija Hong
-355 M The Legend of Kuruk @Barbara Rosiak
-356 M The Rise of Sozin @Barbara Rosiak
-357 M The Legend of Roku @Barbara Rosiak
-358 M The Legend of Kyoshi @Sija Hong
-359 R Aang, Swift Savior @Flavio Girón
-360 R Fire Lord Zuko @Flavio Girón
-361 R Katara, the Fearless @Flavio Girón
-362 R Toph, the First Metalbender @Flavio Girón
-363 M Avatar Aang @Bryan Konietzko
+
+[extended art]
 364 R Airbender Ascension @Shiren
 365 R Avatar's Wrath @Ainezu
 366 R Hakoda, Selfless Commander @Rafater
@@ -475,8 +477,31 @@ Replace=0.025F BasicLand:fromSheet("TLA Appa basic")+
 390 R Jasmine Dragon Tea Shop @Leanna Crossan
 391 R Realm of Koh @Andreas Rocha
 392 R Secret Tunnel @Alexander Forssberg
+
+[promo]
 393 R Firebending Student @Airi Yoshihisa
 394 R Momo, Friendly Flier @Ryota Murayama
+
+[scene cards]
+1 Fated Firepower|TLA|[297]
+1 Aang, Swift Savior|TLA|[298]
+1 Fire Nation Attacks|TLA|[299]
+1 Crashing Wave|TLA|[300]
+1 Combustion Technique|TLA|[301]
+1 Zuko, Conflicted|TLA|[302]
+1 Azula, Cunning Usurper|TLA|[303]
+1 Aang, at the Crossroads|TLA|[304]
+1 Katara, the Fearless|TLA|[305]
+1 Dai Li Agents|TLA|[306]
+1 Earthbender Ascension|TLA|[307]
+1 Avatar Aang|TLA|[308]
+1 Sozin's Comet|TLA|[309]
+1 Waterbender Ascension|TLA|[310]
+1 Ozai, the Phoenix King|TLA|[311]
+1 Firebender Ascension|TLA|[312]
+1 Fire Lord Azula|TLA|[313]
+1 The Last Agni Kai|TLA|[314]
+1 Fire Lord Zuko|TLA|[315]
 
 [field notes]
 1 Appa, Steadfast Guardian|TLA|[316]
@@ -550,14 +575,14 @@ Replace=0.025F BasicLand:fromSheet("TLA Appa basic")+
 1 Mountain|TLA|[285]
 1 Forest|TLA|[286]
 
-[Appa basic]
+[appa basic]
 1 Plains|TLA|[287]
 1 Island|TLA|[288]
 1 Swamp|TLA|[289]
 1 Mountain|TLA|[290]
 1 Forest|TLA|[291]
 
-[Avatar journey basic]
+[avatar journey basic]
 1 Plains|TLA|[292]
 1 Island|TLA|[293]
 1 Swamp|TLA|[294]

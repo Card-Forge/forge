@@ -1,0 +1,31 @@
+[metadata]
+Name=Queen of Beasts
+[Main]
+10 Forest|LEA
+4 Ancient Tomb|TMP
+4 Wild Growth|LEA
+4 Overgrowth|STH
+4 Krosan Cloudscraper|LGN
+2 Wolf Pack|PTK
+2 Krosan Colossus|ONS
+4 Verdant Force|TMP
+2 Deathcoil Wurm|PO2
+4 Avatar of Might|PCY
+2 Penumbra Wurm|APC
+2 Rhox|S00
+2 Symbiotic Wurm|ONS
+1 Silvos, Rogue Elemental|ONS
+1 Molimo, Maro-Sorcerer|INV
+4 Crush of Wurms|JUD
+4 Thorn Elemental|UDS
+2 Whirlwind|USG
+2 Titania's Song|ATQ
+
+[StartInBattle_Reference]
+1 City of Solitude|VIS
+1 Dense Foliage|WTH
+1 Forest|LEA|1
+1 Forest|LEA|2
+1 Forest|LEA|1
+1 Forest|LEA|2
+1 Kavu Lair|INV

@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="104">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <properties><property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [&quot;Serra Aviary|HML&quot;]}" /></properties><tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/FarmFood.tsx" />
+ <tileset firstgid="16001" source="../../../../../../common/maps/tileset/dungeon.tsx" />
+ <tileset firstgid="20481" source="../../../../../../common/maps/tileset/main-nocollide.tsx" />
+ <layer id="9" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFowAC3DgH2gWDD1AaJoMxTOntJpB9gzEcRsEoGKkAADb2Ads=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxr4mZgaBqkuEYeOx4IO2lpLz47aWUvPvueyzEwvJCjn50w+1qB7DYa+BeXvTD7aBXO+PyKL363SyAwpfaihy297MVmH63sJRaHSKJiUXYEpqW96Jie9rZ6AuMBiN9n0tevR4F2HkOyl57hC8J9nCPDTnIxACezIf8=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzbwcPAsIMELEOiemR9yJgYPdG8DAy7eHDjKF7q2QuTB9m5G0jjAzuJsJsU/xJjJ7F2E2svKXYSYzcx9pJjJyG7ibFXlkw7YUCaTP+Sa+9lpoGxd7sEAg8le0HhBcKlwRDzSoIRYshYnwsVwwC54byXSP+KsqNiGNhDpr0yULvruQnbi8yu5YbYic1cUspJQnaj24vLTlLLSUJ2I4fxC07iynti6yOY3XVQu2FuAIUpsXaSYy+6HlgekybD/cgYAEhL2Bw=
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBi8wIKJgeEyHmzJRBs7rxAw9xKV7Ua204pOdiPbSYyfqWE3OXZSw27kNEOKnZQCMyLsMsGi5jITbjla2kuMHC3s3S4BwZTYezmIsL2gcC1lhvBLmMmzCx3MYCRsLzYwDajvOgVp8RoTYbtBQJSdgSGDmzp2kmI3yF4QppadhOxGDmdq24ls93RGCIa5wQRJjBZ2ogMzCssGGAAAS9AtWQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBhawIQJQvO50t6u52IQeqIiwl56A5i94ZK0MR/kNxjQV8KuZmUqA4O/EW3sRwfI4Uwte82wxF2nPm57kYFaBmVx70OG+0HuvQzFtAC43IQtnEgF6OEKAoeNGRiOGOPWA7J3uwTldqMDR0NUGh1cgfqX3Pi9RoK+Ti4Ghi4g7gbipeRZRxKA+Umdm4FhAQ8DgyY3HSxFsvco0L5jQHycTvbSC0xnhGB0saEGAOcfGvo=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="270.665" width="48" height="16">
+   <properties>
+    <property name="direction" value="up" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/aerie/aerie_0.tmx" />
+    <property name="teleportObjectId" value="90" />
+   </properties>
+  </object>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="268.333" y="135.342">
+   <properties>
+    <property name="enemy" value="Aerie Guard" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="94,93,102,103,92,91,90,91,92,103,102" />
+   </properties>
+  </object>
+  <object id="83" template="../../../../../../common/maps/obj/door_up.tx" x="309.411" y="157.773" width="37.0004" height="36.4089">
+   <properties>
+    <property name="direction" value="down" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/aerie/aerie_2.tmx" />
+    <property name="teleportObjectId" value="90" />
+   </properties>
+  </object>
+  <object id="90" template="../../../../../../common/maps/obj/waypoint.tx" x="119.777" y="199.342" />
+  <object id="91" template="../../../../../../common/maps/obj/waypoint.tx" x="129.834" y="149.06" />
+  <object id="92" template="../../../../../../common/maps/obj/waypoint.tx" x="214.427" y="78.368" />
+  <object id="93" template="../../../../../../common/maps/obj/waypoint.tx" x="269.739" y="115.933" />
+  <object id="94" template="../../../../../../common/maps/obj/waypoint.tx" x="271.513" y="189.285" />
+  <object id="96" template="../../../../../../common/maps/obj/treasure.tx" x="106.171" y="94.9317">
+   <properties>
+    <property name="reward">[
+  {
+      "type": "card",
+      "probability": 1,
+      "count": 1,
+      "addMaxCount": 5,
+      "colors": [
+        "White",
+        "Blue",
+        "Green"
+      ],
+      "rarity": [
+        "Common",
+        "Rare",
+        "Uncommon"
+      ],
+      "subTypes": [
+        "Bird"
+      ],
+      "cardTypes": [
+        "Creature"
+      ]
+    }
+]</property>
+   </properties>
+  </object>
+  <object id="97" template="../../../../../../common/maps/obj/enemy.tx" x="175.68" y="77.4806">
+   <properties>
+    <property name="enemy" value="Raven" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="91,92" />
+   </properties>
+  </object>
+  <object id="98" template="../../../../../../common/maps/obj/enemy.tx" x="271.513" y="204.666">
+   <properties>
+    <property name="enemy" value="Vulture" />
+    <property name="threatRange" type="int" value="30" />
+   </properties>
+  </object>
+  <object id="99" template="../../../../../../common/maps/obj/gold.tx" x="244.893" y="46.7194" />
+  <object id="100" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="207.92" y="174.793" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    "text":"The inscription reads: Unauthorized visitors be warned, dangerous birds ahead.",
+    "options":[
+      { "name":"Walk away" }
+]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="101" template="../../../../../../common/maps/obj/manashards.tx" x="241.639" y="187.807" />
+  <object id="102" template="../../../../../../common/maps/obj/waypoint.tx" x="244.597" y="112.974" />
+  <object id="103" template="../../../../../../common/maps/obj/waypoint.tx" x="244.301" y="81.03" />
+ </objectgroup>
+</map>

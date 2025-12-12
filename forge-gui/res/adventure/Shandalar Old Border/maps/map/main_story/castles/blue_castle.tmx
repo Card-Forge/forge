@@ -1,0 +1,269 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="88">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [&quot;Rhystic Study|PCY&quot;]}">{"startBattleWithCard": ["Rhystic Study|PCY"]}</property>
+  <property name="respawnEnemies" type="bool" value="true" />
+ </properties>
+ <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../../common/maps/tileset/buildings.tsx" />
+ <layer id="1" name="Background" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt2LEJACEQRUFTsyvhqrZeuRrc049MMJksDxUER29tAAAAXOx9subATt+9rXKqP2mOfv369etfn7fz3Tn1zqXuv379Kf1Va/Tr169f///9lf8K1RLPKJn++/snqiFdMg==
+  </data>
+ </layer>
+ <layer id="6" name="Floor" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztmEEOwjAMBPOD5AdVBR9tq/Ir4Gtw4YbAbtdxDjNSbpZ3VCWy1VIAAAAAAAAA4BtLLWUVnq329Z+att8s7vePj//+/m6Pdvzcaq7/2VxVn6xc/HNz8c/NVftb59JV7H9pmjnnnUsqf1XevfPc8c7Bp+iejXr/e+eO7L8Y3tzI/qqaCPC310SAv70mAvztNR68+9uvvUtVE7m/9Ua1v3l2vLP/KCL2NwtZb1MF/jZe3r59Qg==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt17EJgDAURVEt7RxAxMJZnNYh5YPgBj5jzoHUudUjGQYAgO8453QBQHuWeztXGwpAI+rdf0zP8Q/I2Md0AfQrvXvp+6FXf/i/bw23F/1Z+nNqf6rf/uS80X8BPoMHTQ==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="48" height="48">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmE0OgyAQhbmARRdNehDv1R8v1H3rutdrSCVawjBP5MfEmeRtxMx8QWEe9CelepFIJBKJRKKM6lql3qBMoO+2bRl+PXGljkb4D8E/aKVugO76x3UF33/o8msZ+U6l5vUo/Oj+OU78L9k/hV/4s/Nz69Kur9z8yP7gW+scV1OIH8nv+1ax/Gh/pfpzKv5hyknx2P7u5o/9b6k8lD9ZslFew+TkeKi6nfN/LsMdi5mHEJvNb3om1y9Hou6Sxzx7nme5Yz5+pK59x12/W9Ykxf+5zEL4Y2oK/z74155JcvHnPuv4aqbk3+IhfH3bBOcd1v4PCH/n1EfOCaH6SM2U/AiL8P+PuXsAdf9A+ZDa/FS+NfW28If8W2jOqL7Pnd9dH7Jk8+3nli20d3L+LZf35+aWY0P9m2/OUgZXO4d/qxEp/U+NiPU/MefD2PNl7bvevd5/Cn9afQEqOf42
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt17EJACAQA8Bs8Buro+sC1o94B+lTBZIAAAD8bVQyT1Z1NwEAAABu/Hegi/3hBRuEwwT/
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="47" template="../../../../../../../common/maps/obj/gold.tx" x="425.667" y="472.667">
+   <properties>
+    <property name="reward">[
+  {
+    "type": "gold",
+    "count": 180,
+    "addMaxCount": 40
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="49" template="../../../../../../../common/maps/obj/gold.tx" x="312" y="470.333">
+   <properties>
+    <property name="reward">[
+  {
+    "type": "gold",
+    "count": 180,
+    "addMaxCount": 40
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="54" template="../../../../../../../common/maps/obj/enemy.tx" x="96.3333" y="406.667">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Merfolk King" />
+    <property name="threatRange" type="int" value="30" />
+   <property name="effect">{"startBattleWithCard": ["Island|S99", "Island|S99", "Lord of Atlantis|LEA", "Tidal Warrior|STH"]}</property>
+    </properties>
+  </object>
+  <object id="55" template="../../../../../../../common/maps/obj/gate.tx" x="368" y="639.333">
+   <properties>
+    <property name="dialog">[
+	{
+		"name": "",
+		"text": "You come upon a gate.",
+		"loctext": "",
+		"action": [
+			{ "advanceMapFlag": "intro" }
+		],
+		"options":
+			[
+				{
+					"name": "Leviathan, I've done as you asked! It's time to end this!",
+					"action": [ { "deleteMapObject": 55 } ],
+					"condition": [
+						{
+							"getMapFlag": {
+								"key": "enemiesDefeated",
+								"op": "&gt;=",
+								"val": 4
+							}
+						},
+						{
+                            "checkQuestFlag": "mainQuest",
+                            "not": true
+                        }
+					],
+					"text": "Suddenly, the gate disappears right in front of your eyes, You are now free to pass.",
+					"options": [ { "name": "(continue)" } ]
+				},
+				{
+                	"name": "Leviathan, I've done as you asked! It's time to end this!",
+                	"action": [ { "deleteMapObject": 55 } ],
+                	"condition": [
+                		{
+                			"getMapFlag": {
+                				"key": "enemiesDefeated",
+                				"op": "&gt;=",
+                				"val": 4
+                			}
+                		},
+                		{
+                             "checkQuestFlag": "Ch1BlueCastleComplete",
+                             "not": true
+                        },
+                        {
+                             "checkQuestFlag": "mainQuest"
+                        }
+                	],
+                		"text": "Suddenly, the gate disappears right in front of your eyes, You are now free to pass.",
+                		"options": [ { "name": "(continue)" } ]
+                },
+				{
+					"name": "You knock on the door",
+					"condition": [ { "checkMapFlag": "intro" } ],
+					"text": "YOU ARE NOT WORTHY, BEGONE!",
+					"loctext": "",
+					"options": [ { "name": "(continue)" } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="60" template="../../../../../../../common/maps/obj/entry_up.tx" x="357" y="768" width="38" height="16">
+   <properties>
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+  <object id="65" template="../../../../../../../common/maps/obj/entry_down.tx" x="352" y="542.75" width="48" height="29">
+   <properties>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/main_story/castles/blue_castle_f1.tmx" />
+   </properties>
+  </object>
+  <object id="66" template="../../../../../../../common/maps/obj/enemy.tx" x="83.3333" y="603">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Aether Channeler" />
+    <property name="threatRange" type="int" value="30" />
+   <property name="effect">{ "startBattleWithCard": [ "Dream Chisel|ONS", "Ixidor, Reality Sculptor|ONS", "Tropical Island|LEA", "Underground Sea|LEA" ] }</property>
+    </properties>
+  </object>
+  <object id="67" template="../../../../../../../common/maps/obj/enemy.tx" x="649" y="601.333">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Archmage" />
+    <property name="threatRange" type="int" value="30" />
+   <property name="effect">{ "startBattleWithCard": [ "Island|2ED", "Mountain|2ED", "Phyrexian Tyranny|PLS", "Swamp|2ED" ] }</property>
+    </properties>
+  </object>
+  <object id="68" template="../../../../../../../common/maps/obj/enemy.tx" x="677.667" y="410.666">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Mill Mole" />
+    <property name="threatRange" type="int" value="30" />
+   <property name="effect">{ "startBattleWithCard": [ "Ambassador Laquatus|TOR", "Propaganda|TMP", "Sky Diamond|MIR", "Sky Diamond|7ED" ] }</property>
+    </properties>
+  </object>
+  <object id="69" template="../../../../../../../common/maps/obj/enemy.tx" x="365" y="223.333">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   "action": [
+      {"advanceMapFlag":"enemiesDefeated"},
+      {"deleteMapObject": -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Storm Titan" />
+    <property name="threatRange" type="int" value="30" />
+   <property name="effect">{ "startBattleWithCard": [ "Island|ONS", "Mountain|ATH", "Pendrell Mists|WTH" ] }</property>
+    </properties>
+  </object>
+  <object id="72" template="../../../../../../../common/maps/obj/enemy.tx" x="226.667" y="538">
+   <properties>
+    <property name="enemy" value="Master Blue Wizard" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="75,73,82,81,79,80,79,78,77,74,76" />
+   <property name="effect">{ "startBattleWithCard": [ "Wall of Air|LEA", "Mox Sapphire|LEA" ] }</property>
+    </properties>
+  </object>
+  <object id="73" template="../../../../../../../common/maps/obj/waypoint.tx" x="56" y="492" />
+  <object id="74" template="../../../../../../../common/maps/obj/waypoint.tx" x="58" y="698" />
+  <object id="75" template="../../../../../../../common/maps/obj/waypoint.tx" x="224" y="492" />
+  <object id="76" template="../../../../../../../common/maps/obj/waypoint.tx" x="224.667" y="702" />
+  <object id="77" template="../../../../../../../common/maps/obj/waypoint.tx" x="709.333" y="704.667" />
+  <object id="78" template="../../../../../../../common/maps/obj/waypoint.tx" x="510" y="700" />
+  <object id="79" template="../../../../../../../common/maps/obj/waypoint.tx" x="510.667" y="494" />
+  <object id="80" template="../../../../../../../common/maps/obj/waypoint.tx" x="695.333" y="494" />
+  <object id="81" template="../../../../../../../common/maps/obj/waypoint.tx" x="517.333" y="344.667" />
+  <object id="82" template="../../../../../../../common/maps/obj/waypoint.tx" x="228.667" y="346" />
+  <object id="84" template="../../../../../../../common/maps/obj/enemy.tx" x="532" y="494.667">
+   <properties>
+    <property name="enemy" value="Master Blue Wizard" />
+    <property name="threatRange" type="int" value="20" />
+    <property name="waypoints" value="79,80,79,78,77,74,76,75,73,82,81" />
+   <property name="effect">{ "startBattleWithCard": [ "Wall of Air|LEA", "Mox Sapphire|LEA" ] }</property>
+    </properties>
+  </object>
+  <object id="85" template="../../../../../../../common/maps/obj/enemy.tx" x="398.667" y="652.667">
+   <properties>
+    <property name="dialog">[
+  {
+    "text": "Welcome {var=player_name}, the Leviathan has been waiting eagerly for this moment.",
+    "options": [
+      {
+        "name": "Is that so? I guess you wouldn't mind opening that gate in front of me?",
+        "text": "I'm afraid I'm not allowed to do that, I am a mere servant of the mighty Leviathan, master of the depths of the sea.",
+        "options": [
+          {
+            "name": "What do I need to do to get passed though this gate?",
+            "text": "To show you are worthy, you must prove your strength by defeating at least four of the five enemies lurking within this dungeon to be worthy of an audience with my illustrious master.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.",
+            "options": [
+              {
+                "name": "I'll show my worth, just make sure to open the gate when I do defeat your challengers.",
+                "text": "Leave"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Djinn" />
+   <property name="effect">{"startBattleWithCard": ["Island|LEA", "Mountain|ARN", "Swamp|LEA", "Aladdin's Lamp|ARN", "Keeper of Kookus|VIS"]}</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

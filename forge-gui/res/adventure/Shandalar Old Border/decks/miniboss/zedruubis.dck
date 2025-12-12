@@ -1,0 +1,44 @@
+[metadata]
+Name=Portal Master
+[Main]
+10 Mountain|POR
+10 Plains|POR
+10 Island|POR
+4 Archangel|POR
+2 Alabaster Dragon|POR
+4 Breath of Life|POR
+2 Starlit Angel|POR
+4 Vengeance|POR
+4 Wrath of God|POR
+4 Cloud Dragon|POR
+4 Djinn of the Lamp|POR
+4 Snapping Drake|POR
+2 Exhaustion|POR
+2 Mystic Denial|POR
+2 Time Ebb|POR
+2 Symbol of Unsummoning|POR
+2 Ancestral Memories|POR
+2 Blaze|POR
+2 Seasoned Marshal|POR
+2 Fire Dragon|POR
+2 Earthquake|POR
+2 Thundermare|POR
+2 Lava Axe|POR
+2 Forked Lightning|POR
+2 Lava Flow|POR
+2 Fire Snake|POR
+4 Path of Peace|POR
+2 Volcanic Dragon|POR
+2 Fire Tempest|POR
+2 Thing from the Deep|POR
+
+[StartInBattle_Reference]
+1 Craven Giant|POR
+1 Island|POR|1
+1 Mountain|POR|1
+1 Plains|POR|1
+1 Island|POR|2
+1 Mountain|POR|2
+1 Plains|POR|2
+1 Storm Crow|ALL
+1 Wall of Swords|LEA

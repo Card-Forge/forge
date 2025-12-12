@@ -12,9 +12,7 @@ Adventure is baked into the Android/Mobile release of Forge, and as a separate e
 
 Java Requirement
 
-Forge Requires Java to run, please make sure you have Java installed on your machine prior to attempting to run.
-
-Choices:
+Forge requires Java to run, please make sure you have Java installed on your machine prior to attempting to run.
 
 Option 1: Java JDK
 Download - https://www.oracle.com/java/technologies/downloads/
@@ -26,4 +24,3 @@ Download - https://bell-sw.com/pages/downloads/#jdk-17-lts
 
 Adoptium
 Download - https://adoptium.net/temurin/releases/?version=17
-

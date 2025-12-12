@@ -1,0 +1,40 @@
+[metadata]
+Name=Gaea, the Worldsoul
+[Main]
+12 Forest|LEA
+4 Tropical Island|LEA
+4 Taiga|LEA
+4 Bayou|LEA
+4 Savannah|LEA
+2 Gaea's Cradle|USG
+2 Yavimaya Hollow|UDS
+4 Nature's Lore|ICE
+4 Skyshroud Claim|NMS
+4 Gaea's Liege|LEA
+4 Child of Gaea|USG
+4 Gaea's Embrace|USG
+4 Greater Good|USG
+2 Gaea's Blessing|WTH
+2 Gaea's Bounty|USG
+2 Calming Verse|PCY
+2 Seeds of Innocence|MIR
+4 Aura Shards|INV
+4 Tribal Flames|INV
+4 Gaea's Might|PLS
+4 Ordered Migration|INV
+4 Allied Strategies|PLS
+4 Collective Restraint|INV
+4 Blanchwood Armor|7ED
+4 Constant Mists|STH
+2 Whirlwind|USG
+2 Gang of Elk|ULG
+
+[StartInBattle_Reference]
+1 Forest|LEA
+1 Tropical Island|LEA
+1 Taiga|LEA
+1 Bayou|LEA
+1 Savannah|LEA
+1 Gaea's Avenger|ATQ
+1 Cradle Guard|USG
+1 Magnigoth Treefolk|PLS

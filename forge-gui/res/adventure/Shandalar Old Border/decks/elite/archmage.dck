@@ -1,0 +1,28 @@
+[metadata]
+Name=archmage
+[Main]
+4 Underground Sea|LEB
+4 Volcanic Island|2ED
+4 Badlands|2ED
+4 Reflecting Pool|TMP
+2 Shivan Reef|APC
+2 Underground River|ICE
+4 Crosis's Charm|PLS
+2 Crosis, the Purger|INV
+1 Nicol Bolas|CHR
+1 Sol'kanar the Swamp King|CHR
+4 Shadowmage Infiltrator|ODY
+4 Barrin's Spite|INV
+4 Recoil|INV
+4 Undermine|INV
+4 Terminate|PLS
+2 Spinal Embrace|INV
+2 Prophetic Bolt|APC
+4 Benthic Djinn|MIR
+4 Blazing Specter|INV
+
+[StartInBattle_Reference]
+1 Island|2ED
+1 Mountain|2ED
+1 Phyrexian Tyranny|PLS
+1 Swamp|2ED

@@ -159,6 +159,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         if (newLobbyPlayer == null) {
             message = localizer.getMessage("lblLogPlayerHasRestoredControlThemself", p.getName());
         } else {
+            if (newLobbyPlayer.getName().equals(p.getName())) return null;
             message = localizer.getMessage("lblLogPlayerControlledTargetPlayer", p.getName(), newLobbyPlayer.getName());
         }
         return new GameLogEntry(GameLogEntryType.PLAYER_CONTROL, message);
@@ -182,7 +183,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         if (event.type() == DamageType.LoyaltyLoss) {
             additionalLog = localizer.getMessage("lblRemovingNLoyaltyCounter", String.valueOf(event.amount()));
         }
-        String message = localizer.getMessage("lblSourceDealsNDamageToDest", event.source().toString(), String.valueOf(event.amount()), additionalLog, event.card().toString());
+        String message = localizer.getMessage("lblSourceDealsNDamageToDest", event.source().toString(), String.valueOf(event.amount()), additionalLog.isEmpty() ? "" : " (" + additionalLog + ")", event.card().toString());
         return new GameLogEntry(GameLogEntryType.DAMAGE, message);
     }
 
@@ -247,9 +248,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
             if (sb.length() > 0) sb.append("\n");
             sb.append(localizer.getMessage("lblLogPlayerAssignedAttackerToAttackTarget", ev.player(), Lang.joinHomogenous(attackers), k));
         }
-        if (sb.length() == 0) {
-            sb.append(localizer.getMessage("lblPlayerDidntAttackThisTurn").replace("%s", ev.player().toString()));
-        }
+        if (sb.length() == 0) return null;
         return new GameLogEntry(GameLogEntryType.COMBAT, sb.toString());
     }
 

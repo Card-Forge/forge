@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="73">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/main-nocollide.tsx" />
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJw7xsrAcAwJL2AnjFnRMD5AjHnE2IPOJwSIMR/mZ3z2kOJXSuwlhLEBmDg5cUbIn9jsRJcjx15y7SQlfEm1E91ebHK0shdmPjZxUvMKqW6gxF5YWUFJWFPiX3LTFrH+7WWhXXwPRnupbQe5bhm1lz72AgA+cYHg
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzFlN0JwkAQhBdyQaxBRS0iV4MasRzBB39BFG3IAiTPduFPFd6SHFnP3cuZhzgwIJeQLzuzMYsBMo/j1repuOuc5+1P+5hovGebAOyMN0nJxfNQJmcfE1nTCOBpfFIAF52f1WWFzmuF7BvkfJttSMaWweVs71kXWXY1sJpF1b2617GXKm7f8Mbm2RPn+ZI4pns21PLMlLtXeZaUfVBhXG7mjpZnptx7VO4RZY+YDCSWKzuzxO0VvSIbu3wUrJeQu6/XM8mNzky9IO/Sd3YKc09rcHH3U/LutGeub5dbJYnr7n4VF7Me/MCW+qXfxdJkfI3l76gu22qVlL9xR44qP5P2qglx8zUh7r+zKf2TS/t9A56SZVw=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy9lE0KwjAQhWdhKraIh5CiLt2oZxGXeg7BvQcSdCft2h/0CJ5ARFcmNEPHZFJqG/rgkUCG+fKGEABbm26+TwXAWa7bFlNYQo8eb9RFeqb3ipNIXl/6KDKmsmhnVsK1rG56XetM405+hjyOaXLLCutVronjLifImaugHnMXArwjtzEfzemD+Yl+e5g2meZs6ayqMGPZb0g8EjZXvV3FqJN1QZgDYc8zdXDrZKXcmGEmZJ6+3y9yi5h4XsT0xaX99/INLAObeYVqXFXr4lLmK8rqXTmr/BEcl2Nivcv/MCmX81wz6R/pS0/Z+xDyplmbkDm3abN4uDfM4/QFD9+Clw==
+  </data>
+ </layer>
+ <layer id="7" name="Clutter" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJylVbFOwzAQvSFJ20So4SNgLUgUEP8ALAyImQ3YYKZSAQn4DQb4B5gAMQVESZHgA0AImLtyln344tquqz7pKXbi+Pnd+ew2ACwiS6jiGYaxlen2ahNgDbmOPJwC+MDn5xgMAa1B6PZqsv2N//4gf9UcRznAMfJrAl3Tu83vKWqcIc9z2af1kL6PJ3m41+sUYJB5h/5DxD10Xt97ril8tSKAOcV55Bu+fw9bUgWuuJImrZ/00gTgMZJ8ivRYinUohLcF1d40YslzWkRaj5gl0rNNcybW7SXkMvtWKt0eWwPBjK9N1/Rsog2yTvvIV/cwp9eWEV+bZ0IH83LPvNryyGPMIbx22L68wLkvLbpX+G4XNfbi6v9C17dvbDF21cxOrLW5ni233O9DPPxd7CNXTgW6yjPVSsFyuuLxc4ta24nkHdOl2rhJqxxk7nrYmPXrdgPOC9/YF9QtFftsDaau6E8KfrY1GwC54nRjtC7dTWVtNOkOGxeFpWbpbhL3DD//9+sAB/Vqn99hZqx9ebLpmncTjxuPFx/3B95NpWY=
+  </data>
+ </layer>
+ <layer id="8" name="Clutter2" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4AwuAnEt/DIXwTiS3RyCy2ALxFqqO3HOl4GhtdUNI8c+0kBJrRxxoCDgfSXCQ72KBgFtAQAlmMIGA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="281" width="48" height="16">
+   <properties>
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="223.221" y="125.546">
+   <properties>
+    <property name="enemy" value="Shade" />
+    <property name="threatRange" type="int" value="40" />
+   <property name="effect">{"startBattleWithCard": ["Swamp|3ED", "Swamp|3ED", "Swamp|3ED", "Frozen Shade|LEA"]}</property>
+    </properties>
+  </object>
+  <object id="55" template="../../../../../../common/maps/obj/gold.tx" x="225.44" y="96.3423" />
+  <object id="56" template="../../../../../../common/maps/obj/collision.tx" x="-16" y="0" width="16" height="272" />
+  <object id="57" template="../../../../../../common/maps/obj/collision.tx" x="480" y="0" width="16" height="272" />
+  <object id="58" template="../../../../../../common/maps/obj/collision.tx" x="-16" y="272" width="512" height="16" />
+  <object id="59" template="../../../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="512" height="16" />
+  <object id="60" template="../../../../../../common/maps/obj/enemy.tx" x="86.4887" y="123.808">
+   <properties>
+    <property name="enemy" value="Dragonfly" />
+    <property name="threatRange" type="int" value="40" />
+    <property name="waypoints" value="66,69,67,68" />
+   </properties>
+  </object>
+  <object id="61" template="../../../../../../common/maps/obj/enemy.tx" x="364.397" y="80.1365">
+   <properties>
+    <property name="enemy" value="Dragonfly" />
+    <property name="threatRange" type="int" value="40" />
+    <property name="waypoints" value="63,62,64,65,64" />
+   </properties>
+  </object>
+  <object id="62" template="../../../../../../common/maps/obj/waypoint.tx" x="421.831" y="188.653" />
+  <object id="63" template="../../../../../../common/maps/obj/waypoint.tx" x="357.25" y="90.7235" />
+  <object id="64" template="../../../../../../common/maps/obj/waypoint.tx" x="459.679" y="85.43" />
+  <object id="65" template="../../../../../../common/maps/obj/waypoint.tx" x="352.222" y="189.182" />
+  <object id="66" template="../../../../../../common/maps/obj/waypoint.tx" x="0.734251" y="174.096" />
+  <object id="67" template="../../../../../../common/maps/obj/waypoint.tx" x="107.398" y="87.0181" />
+  <object id="68" template="../../../../../../common/maps/obj/waypoint.tx" x="137.306" y="16.0854" />
+  <object id="69" template="../../../../../../common/maps/obj/waypoint.tx" x="6.29241" y="23.7609" />
+  <object id="70" template="../../../../../../common/maps/obj/manashards.tx" x="251.381" y="85.43" />
+  <object id="71" template="../../../../../../common/maps/obj/manashards.tx" x="210.092" y="84.1066" />
+  <object id="72" template="../../../../../../common/maps/obj/gold.tx" x="462.591" y="106.604" />
+ </objectgroup>
+</map>

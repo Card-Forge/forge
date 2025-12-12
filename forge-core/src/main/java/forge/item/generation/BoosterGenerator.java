@@ -450,7 +450,7 @@ public class BoosterGenerator {
                 String setCode = template.getEdition();
                 PrintSheet ps;
                 try {
-                    // Apply the edition to the sheet name by default. We'll try again if thats not a real sheet
+                    // Apply the edition to the sheet name by default. We'll try again if that's not a real sheet
                     ps = getPrintSheet(determineSheet + " " + setCode);
                 } catch (Exception e) {
                     ps = getPrintSheet(determineSheet);

@@ -1,0 +1,26 @@
+[metadata]
+Name=hippo
+[Main]
+4 Island|POR
+4 Plains|POR
+4 Brushland|ICE
+4 Yavimaya Coast|APC
+4 Adarkar Wastes|ICE
+3 Forest|POR
+1 Yavimaya Hollow|UDS
+4 Pygmy Hippo|VIS
+4 Bull Hippo|POR
+4 Questing Phelddagrif|PLS
+2 Phelddagrif|ALL
+2 Seedtime|JUD
+4 Treva's Charm|PLS
+4 Rancor|ULG
+4 Armadillo Cloak|INV
+4 Swords to Plowshares|ICE
+4 Arcane Denial|ALL
+
+[StartInBattle_Reference]
+1 Bull Hippo|POR
+1 Forest|POR
+1 Island|POR
+1 Plains|POR

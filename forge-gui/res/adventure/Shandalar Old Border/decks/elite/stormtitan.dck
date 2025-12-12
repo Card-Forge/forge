@@ -1,0 +1,22 @@
+[metadata]
+Name=stormtitan
+[Main]
+4 Volcanic Island|2ED
+4 Shivan Reef|APC
+6 Island|ONS
+6 Mountain|ATH
+4 Suffocating Blast|APC
+4 Prophetic Bolt|APC
+4 Psionic Blast|LEA
+4 Lightning Bolt|LEB
+4 Chain Lightning|LEG
+4 Evacuation|STH
+4 Arcane Denial|ALL
+4 Kaervek's Torch|MIR
+4 Incinerate|ICE
+4 Mind Bomb|4ED
+
+[StartInBattle_Reference]
+1 Island|ONS
+1 Mountain|ATH
+1 Pendrell Mists|WTH

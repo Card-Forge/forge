@@ -1,0 +1,28 @@
+[metadata]
+Name=Empress Galina
+[Main]
+4 Tropical Island|LEA
+4 Yavimaya Coast|APC
+6 Island|PALP
+6 Forest|PALP
+4 Birds of Paradise|LEA
+1 Aboshan, Cephalid Emperor|ODY
+1 Empress Galina|INV
+1 Molimo, Maro-Sorcerer|INV
+1 Multani, Maro-Sorcerer|ULG
+2 Rhox|S00
+2 Thorn Elemental|UDS
+4 Gaea's Skyfolk|APC
+4 Jungle Barrier|APC
+4 Aether Mutation|APC
+4 Temporal Spring|APC
+4 Yavimaya's Embrace|APC
+2 Evacuation|STH
+2 Vitalizing Wind|PCY
+2 Exploration|USG
+2 Moment's Peace|ODY
+
+[StartInBattle_Reference]
+1 Forest|PALP
+1 Howling Mine|LEA
+1 Island|PALP

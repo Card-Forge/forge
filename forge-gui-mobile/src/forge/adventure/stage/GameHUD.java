@@ -2,8 +2,6 @@ package forge.adventure.stage;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -32,6 +30,9 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingLabel;
+
+import java.util.EnumSet;
+
 import forge.Forge;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.data.AdventureQuestData;
@@ -53,11 +54,8 @@ import forge.adventure.util.UIActor;
 import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
 import forge.gui.GuiBase;
-import forge.localinstance.properties.ForgePreferences;
-import forge.model.FModel;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
-import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * Stage to handle everything rendered in the HUD
@@ -349,11 +347,6 @@ public class GameHUD extends Stage {
                 !Controls.actorContainsVector(notificationPane, new Vector2(miniMapPlayer.getX(), miniMapPlayer.getY()))
                 && (!Controls.actorContainsVector(console, new Vector2(miniMapPlayer.getX(), miniMapPlayer.getY()))
                 || !console.isVisible())); // prevent drawing on top of console or notifications
-
-        if (!MapStage.getInstance().isInMap())
-            updateMusic();
-        else
-            SoundSystem.instance.pause();
     }
 
     Texture miniMapTexture;
@@ -406,13 +399,7 @@ public class GameHUD extends Stage {
         } else {
             deckActor.setColor(menuActor.getColor());
         }
-        if (MapStage.getInstance().isInMap()) {
-            SoundSystem.instance.pause();
-            playAudio();
-        } else {
-            unloadAudio();
-            SoundSystem.instance.resume(); // resume World BGM
-        }
+        updateBGM();
         //unequip and reequip abilities
         updateAbility();
         restorePlayerCollision();
@@ -487,124 +474,127 @@ public class GameHUD extends Stage {
         }
     }
 
-    private Pair<FileHandle, Music> audio = null;
-
-    public void switchAudio() {
+    public void updateBGM() {
         if (MapStage.getInstance().isInMap()) {
-            pauseMusic();
-            playAudio();
+
+            switch (GameScene.instance().getAdventurePlayerLocation(false, false)) {
+                case "capital":
+                case "town":
+                    changeBGM(MusicPlaylist.TOWN);
+                    break;
+                case "dungeon":
+                case "cave":
+                    changeBGM(MusicPlaylist.CAVE);
+                    break;
+                case "castle":
+                    changeBGM(MusicPlaylist.CASTLE);
+                    break;
+                default:
+                    break;
+            }
         }
+        else
+            switch (GameScene.instance().getAdventurePlayerLocation(false, false)) {
+                case "green":
+                    changeBGM(MusicPlaylist.GREEN);
+                    break;
+                case "red":
+                    changeBGM(MusicPlaylist.RED);
+                    break;
+                case "blue":
+                    changeBGM(MusicPlaylist.BLUE);
+                    break;
+                case "black":
+                    changeBGM(MusicPlaylist.BLACK);
+                    break;
+                case "white":
+                    changeBGM(MusicPlaylist.WHITE);
+                    break;
+                case "waste":
+                    changeBGM(MusicPlaylist.COLORLESS);
+                    break;
+                default:
+                    break;
+            }
     }
 
-    public void playAudio() {
-        switch (GameScene.instance().getAdventurePlayerLocation(false, false)) {
-            case "capital":
-            case "town":
-                setAudio(MusicPlaylist.TOWN);
-                break;
-            case "dungeon":
-            case "cave":
-                setAudio(MusicPlaylist.CAVE);
-                break;
-            case "castle":
-                setAudio(MusicPlaylist.CASTLE);
-                break;
-            default:
-                break;
+    private static final EnumSet<MusicPlaylist> PLAYLIST_OVERWORLD = EnumSet.of(MusicPlaylist.WHITE, MusicPlaylist.BLUE, MusicPlaylist.BLACK, MusicPlaylist.RED, MusicPlaylist.GREEN, MusicPlaylist.COLORLESS);
+
+    void changeBGM(MusicPlaylist playlist) {
+        MusicPlaylist currentPlaylist = SoundSystem.instance.getCurrentPlaylist();
+        if (playlist == currentPlaylist) {
+            return;
         }
-        if (audio != null) {
-            audio.getRight().setLooping(true);
-            audio.getRight().play();
-            audio.getRight().setVolume(FModel.getPreferences().getPrefInt(ForgePreferences.FPref.UI_VOL_MUSIC) / 100f);
+        //If we're going from an interior to an exterior or vice versa, skip the fade out.
+        if(PLAYLIST_OVERWORLD.contains(playlist) != PLAYLIST_OVERWORLD.contains(currentPlaylist)) {
+            if(SoundSystem.instance.getShelvedPlaylist() == playlist)
+                fadeTransition = 0.2f; // Resuming from the middle - do a little bit of fade in to reduce the abruptness.
+            else
+                fadeTransition = 1f; // Playing from the start, no fade needed.
+            SoundSystem.instance.setBackgroundMusic(playlist, true);
+            fadeAudio(fadeTransition * fadeDialog);
+            targetPlaylist = null;
         }
+        else //Otherwise, fade from one to the other.
+            targetPlaylist = playlist;
     }
+
+    //Fade for transitioning between playlists.
+    MusicPlaylist targetPlaylist = null;
+    float fadeTransition = 1f;
+
+    //Fade for dimming background music while a character with dialog is talking.
+    float fadeDialog = 1f;
+    float targetFadeDialog = 1f;
 
     public void fadeAudio(float value) {
-        if (audio != null) {
-            audio.getRight().setVolume((FModel.getPreferences().getPrefInt(ForgePreferences.FPref.UI_VOL_MUSIC) * value) / 100f);
-        }
-    }
-
-    public boolean audioIsPlaying() {
-        if (audio == null)
-            return false;
-        return audio.getRight().isPlaying();
+        SoundSystem.instance.fadeModifier(value);
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        if (fade < targetfade) {
-            fade += (delta / 2);
-            if (fade > targetfade)
-                fade = targetfade;
-            fadeAudio(fade);
-        } else if (fade > targetfade) {
-            fade -= (delta / 2);
-            if (fade < targetfade)
-                fade = targetfade;
-            fadeAudio(fade);
+
+        updateBGM();
+
+        updateAudioFades(delta);
+    }
+
+    private void updateAudioFades(float delta) {
+        boolean fadeChanged = false;
+
+        //If the targetPlaylist is set, we'll fade out the BGM, switch over, and fade back in.
+        if (targetPlaylist != null) {
+            fadeTransition -= delta * 1.5f;
+            if (fadeTransition < -0.3) {
+                SoundSystem.instance.setBackgroundMusic(targetPlaylist, true);
+                targetPlaylist = null;
+            }
+            fadeChanged = true;
+        }
+        else if(fadeTransition < 1f) {
+            fadeTransition = Math.min(1f, Math.max(fadeTransition + delta * 1.5f, 0.2f));
+            fadeChanged = true;
+        }
+
+        if (fadeDialog < targetFadeDialog) {
+            fadeDialog = Math.min(fadeDialog + delta * 0.5f, targetFadeDialog);
+            fadeChanged = true;
+        } else if (fadeDialog > targetFadeDialog) {
+            fadeDialog = Math.max(fadeDialog - delta * 0.5f, targetFadeDialog);
+            fadeChanged = true;
+        }
+        if(fadeChanged) {
+            fadeAudio(Math.max(0f, fadeTransition) * fadeDialog);
         }
     }
 
-    float fade = 1f;
-    float targetfade = 1f;
-
     public void fadeIn() {
-        targetfade = 1f;
+        targetFadeDialog = 1f;
     }
 
     public void fadeOut() {
-        targetfade = 0.1f;
-    }
-
-    public void stopAudio() {
-        if (audio != null) {
-            audio.getRight().stop();
-        }
-    }
-
-    public void pauseMusic() {
-        if (audio != null) {
-            audio.getRight().pause();
-        }
-        SoundSystem.instance.pause();
-    }
-
-    public void unloadAudio() {
-        if (audio != null) {
-            audio.getRight().setOnCompletionListener(null);
-            audio.getRight().stop();
-            Forge.getAssets().manager().unload(audio.getLeft().path());
-        }
-        audio = null;
-        currentAudioPlaylist = null;
-    }
-
-    private MusicPlaylist currentAudioPlaylist = null;
-
-    private void setAudio(MusicPlaylist playlist) {
-        if (playlist.equals(currentAudioPlaylist))
-            return;
-        //System.out.println("Playlist: "+playlist);
-        unloadAudio();
-        //System.out.println("Playlist: "+playlist);
-        audio = getMusic(playlist);
-    }
-
-    private Pair<FileHandle, Music> getMusic(MusicPlaylist playlist) {
-        String filename = playlist.getNewRandomFilename();
-        if (filename == null)
-            return null;
-        FileHandle file = Gdx.files.absolute(filename);
-        Music music = Forge.getAssets().getMusic(file);
-        if (music != null) {
-            currentAudioPlaylist = playlist;
-            return Pair.of(file, music);
-        } else {
-            currentAudioPlaylist = null;
-            return null;
-        }
+        targetFadeDialog = 0.1f;
     }
 
     private void openDeck() {
@@ -962,37 +952,6 @@ public class GameHUD extends Stage {
             else if (button == 0)
                 setHUDOpacity(!transluscent);
             super.tap(event, x, y, count, button);
-        }
-    }
-
-    public void updateMusic() {
-        switch (GameScene.instance().getAdventurePlayerLocation(false, false)) {
-            case "green":
-                changeBGM(MusicPlaylist.GREEN);
-                break;
-            case "red":
-                changeBGM(MusicPlaylist.RED);
-                break;
-            case "blue":
-                changeBGM(MusicPlaylist.BLUE);
-                break;
-            case "black":
-                changeBGM(MusicPlaylist.BLACK);
-                break;
-            case "white":
-                changeBGM(MusicPlaylist.WHITE);
-                break;
-            case "waste":
-                changeBGM(MusicPlaylist.COLORLESS);
-                break;
-            default:
-                break;
-        }
-    }
-
-    void changeBGM(MusicPlaylist playlist) {
-        if (!audioIsPlaying() && !playlist.equals(SoundSystem.instance.getCurrentPlaylist())) {
-            SoundSystem.instance.setBackgroundMusic(playlist);
         }
     }
 

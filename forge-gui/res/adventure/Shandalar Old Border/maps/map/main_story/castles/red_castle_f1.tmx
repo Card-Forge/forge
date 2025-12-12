@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="57">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [&quot;Fervor|WTH&quot;]}">{"startBattleWithCard": ["Fervor|WTH"]}</property>
+ </properties>
+ <tileset firstgid="1" source="../../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../../common/maps/tileset/buildings.tsx" />
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7C+8w/VWyFLIL2kqqqqvjuO1S8b
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJwz4WNgMBnFGNgciC9hwWY0ttcUiLEB41F7qYpn8jIwTAPi6bwQ+6ZC+TN46ZO+YP6mtT/paS8oz1wF4itY6MtQey/ikAfR5OYtbGnoMzv2dIVNnNywgNnbyM/A0EQCbuanjr3yAgwMCiRgRYFRe0ftHbV31N6BsXcv0Jx9WLAqDvH9VLIXF1ASwC8/ai9xGNaWwoZB7SuQvVPxqKFFmwsUFiB7B6J9NZTtBQBeSeVp
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt0jERACAMBMFUIAH/GjGAhXyRhtktr74qgL+clXXouDvr0OErJviKxANqBgYX
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztzbENADAIA0FvAANEGZUwOpHSU9LkT7JcvgTgF2HSuUub7S5/v322CwAAgF4BRR8CBQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="51" template="../../../../../../../common/maps/obj/entry_up.tx" x="209" y="480">
+   <properties>
+    <property name="teleport" value="" />
+   </properties>
+  </object>
+  <object id="52" template="../../../../../../../common/maps/obj/enemy.tx" x="193.477" y="293.735" width="32" height="32">
+   <properties>
+    <property name="defeatDialog">[{
+   "condition": [{"checkQuestFlag": "Ch1CastlesComplete", "not":true}],
+   "text": "As you land your final blow against Lathliss, you feel a significant pulse of mana. But with the immediate threat removed, you can now see clearly that the locked room at the north end of the chamber does not hold any prisoners.",
+   "options": [{
+      "name": "(Continue)", 
+      "action": [{"setQuestFlag": {"key":"Ch1RedCastleComplete", "val": 1} }, {"deleteMapObject": -1}, {"advanceQuestFlag": "Ch1CastlesComplete"}]
+   }]
+},
+{
+   "condition": [{"checkQuestFlag": "Ch1CastlesComplete"}],
+   "text": "As you land your final blow against Lathliss, you feel a another pulse of mana. But just as before, the locked room behind your fallen foe does not hold any prisoners.",
+   "options": [{
+      "name": "(Continue)", 
+      "action": [{"setQuestFlag": {"key":"Ch1RedCastleComplete", "val": 1} }, {"deleteMapObject": -1}, {"advanceQuestFlag": "Ch1CastlesComplete"}]
+   }]
+}]</property>
+    <property name="effect">{ "startBattleWithCard": [ "Dragon Roost|ONS", "Mountain|ONS|1", "Mountain|ONS|2", "Mountain|ONS|3", "Mountain|ONS|4" ] }</property>
+    <property name="enemy" value="Lathliss" />
+    <property name="spawn.Hard" type="bool" value="false" />
+    <property name="threatRange" type="int" value="50" />
+   </properties>
+  </object>
+  <object id="56" template="../../../../../../../common/maps/obj/enemy.tx" x="193.477" y="293.735" width="32" height="32">
+     <properties>
+      <property name="defeatDialog">[{
+     "condition": [{"checkQuestFlag": "Ch1CastlesComplete", "not":true}],
+     "text": "As you land your final blow against Lathliss, you feel a significant pulse of mana. But with the immediate threat removed, you can now see clearly that the locked room at the north end of the chamber does not hold any prisoners.",
+     "options": [{
+        "name": "(Continue)",
+        "action": [{"setQuestFlag": {"key":"Ch1RedCastleComplete", "val": 1} }, {"deleteMapObject": -1}, {"advanceQuestFlag": "Ch1CastlesComplete"}]
+     }]
+  },
+  {
+     "condition": [{"checkQuestFlag": "Ch1CastlesComplete"}],
+     "text": "As you land your final blow against Lathliss, you feel a another pulse of mana. But just as before, the locked room behind your fallen foe does not hold any prisoners.",
+     "options": [{
+        "name": "(Continue)",
+        "action": [{"setQuestFlag": {"key":"Ch1RedCastleComplete", "val": 1} }, {"deleteMapObject": -1}, {"advanceQuestFlag": "Ch1CastlesComplete"}]
+     }]
+  }]</property>
+      <property name="effect">{ "startBattleWithCard": [ "Dragon Roost|ONS", "Mountain|ONS|1", "Mountain|ONS|2", "Mountain|ONS|3", "Mountain|ONS|4" ] }</property>
+        <property name="enemy" value="Lathliss" />
+        <property name="spawn.Easy" type="bool" value="false" />
+        <property name="spawn.Hard" type="bool" value="true" />
+        <property name="spawn.Normal" type="bool" value="false" />
+        <property name="threatRange" type="int" value="50" />
+       </properties>
+    </object>
+  <object id="54" template="../../../../../../../common/maps/obj/scroll.tx" x="210" y="74">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Mox Ruby&quot;, &quot;count&quot;: 1 }, {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Strange Key&quot;} ]" />
+   </properties>
+  </object>
+  <object id="55" template="../../../../../../../common/maps/obj/gate.tx" x="208.333" y="159">
+   <properties>
+    <property name="dialog">[
+	{
+		"text": "A big gate is blocking the path, through the bars you can see a Mox Ruby in the room beyond. (you need all five colored keys to open this gate)",
+		"options": [
+			{ "name": "go away" },
+			{
+				"name": "unlock with the five colored keys",
+				"condition": [
+					{ "item": "Blue Key" },
+					{ "item": "Green Key" },
+					{ "item": "Black Key" },
+					{ "item": "White Key" },
+					{ "item": "Red Key" }
+				],
+				"text": "The gate is unlocked",
+				"options": [
+					{
+						"name": "continue",
+						"action": [
+							{ "deleteMapObject": -1 },
+							{ "removeItem": "Blue Key" },
+							{ "removeItem": "Green Key" },
+							{ "removeItem": "Black Key" },
+							{ "removeItem": "White Key" },
+							{ "removeItem": "Red Key" }
+						]
+					}
+				]
+			}
+		]
+	}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

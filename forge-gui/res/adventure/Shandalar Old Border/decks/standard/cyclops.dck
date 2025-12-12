@@ -1,13 +1,23 @@
 [metadata]
-Name=cyclops
+Name=Specter's Cyclops
 [Main]
-22 Mountain|LEB|2
-3 Shivan Dragon|LEB|1
-4 Cyclopean Tomb|LEB|1
-4 Fireball|LEB|1
-4 Incinerate|PLGM|1
-4 Ironclaw Orcs|LEB|1
-4 Lightning Bolt|LEB|1
-4 Orcish Artillery|LEB|1
-4 Orcish Cannoneers|ICE|1
-4 Shock|6ED|1
+20 Mountain|UGL
+4 Planar Chaos|JUD
+4 Mogg Assassin|EXO
+4 Chaotic Goo|TMP
+2 Scoria Wurm|USG
+4 Chaos Orb|LEA
+4 Falling Star|LEG
+4 Crazed Firecat|TOR
+2 Wild Wurm|TMP
+4 Bottle of Suleiman|ARN
+4 Mijae Djinn|ARN
+4 Ydwen Efreet|ARN
+
+[StartInBattle_Reference]
+1 Chance Encounter|ODY
+1 Goblin Bomb|WTH
+1 Impulsive Maneuvers|ODY
+1 Mana Crypt|PHPR
+1 Mountain|LEA
+1 Mountain|LEB

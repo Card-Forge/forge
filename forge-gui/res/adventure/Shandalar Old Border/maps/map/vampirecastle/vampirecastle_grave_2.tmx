@@ -1,0 +1,707 @@
+<?xml version='1.0' encoding='utf-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="27" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="106">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx" />
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Mind Slash|NMS&quot; ]}" />
+ </properties>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx" />
+ <layer id="1" name="Background" width="27" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztkzEKgDAMRbuJ4CZurl65s6fxXJKhUMJPU9tEOjTwEEHymuYb1xBiJ+cmg77T+mgu5NTOIXEtAVZLLw2pPFzIdx9+rtxHnpwRXTxPPIOonl3fm5TXUp5rSuvT4qJ5+EzeLnSHvS5e9E9LWLh4T8nv4cp96Z1yb+kqeS1cBNpL7b19Be3f05U/Jb+VK+0KZZ/Kcy5v/nRNJpNxeQEhvnMQ
+  </data>
+ </layer>
+ <layer id="2" name="Floor" width="27" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlV0OwiAMx3lTAzvB8NFL6aPnYF7HK8yPu5lmIalY1haB+CBJswzK/7e1pXhnjBfYYWPMzb0bzEn2ag10KdNoSEeO1WL0ZFG81qMXpwaLq51cntJ3SR2ehs+zcxzWWRQb/DmtPVH7Y+a/0limLE5Lw8rxvmHNqA9xsYsD/O8FrGCNmSxdczkm+F+snoXXpawa+aL04xx+ciywp1v+H9tD0OOpfs9pld4npXdLL9baWccsnLc0j1ItLp+wft3lDbMkWtr1mlozigHVCzS+HCugmqV6gcb3l2LYisWddbweYxQEviV9wxPfPRbu/7OWfJy3ZTl4AdpSgMg=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="27" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true" />
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzllEsSgjAMhrunLHEjrDmG7ryDnkXccRY9gq9z6AzjXSRTM0AnDU2lLvCb6RT6yN+kaZTyY5ea/piZBmxTz81CCm36zaIbW+q4Wqcsvta9tXtIuv99+32LpIV6v9BBIJaxYvdrLcj3izbt2raz7v6hTZn7xYgf4Gcu8LX+9CuH1qNU6lkOx3GMimlj2aXmKHz8oqDOzc3jHVHg+fD+JBoYk/7aKhm+YUoL3ltlraFibuvZwJ2HxtBls3bMo5YkN/r7qdygyPX3fkmZs5b0LXNwdYNjrXgt39zgGDtTw6zBd8nZ4OqY5ByuuhFKSN3g9o7Zc9l01Y0+L09bIXXj35gid+bEG/snQWQ=
+  </data>
+ </layer>
+ <layer id="7" name="Blood" width="27" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztzjENADAIADD+4XlWJnVBAgfhaRU0gvJyezDjnu0BAAD0faykATc=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="194.811" y="475.246" width="48" height="16">
+   <properties>
+    <property name="direction" value="up" />
+    <property name="teleport" value="../Shandalar Old Border/maps/map/vampirecastle/vampirecastle_2.tmx" />
+   </properties>
+  </object>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="170.637" y="27.2682">
+   <properties>
+    <property name="reward">[
+  {
+    "type": "randomCard",
+    "colors": [ "Black" ],
+    "subTypes": [ "Dementia" ],
+    "count": 5
+  },
+  {
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Dark Boots"
+  },
+  {
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Dark Shield"
+  },
+  {
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Dark Armor"
+  },
+  {
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Blood Vial"
+  },
+  {
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Dark Amulet"
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="243.161" y="219.409" width="26.041" height="20.418">
+   <properties>
+    <property name="enemy" value="Chainer Dementia Master" />
+    <property name="inactive" type="bool" value="true" />
+    <property name="threatRange" type="int" value="50" />
+   <property name="effect">{ "startBattleWithCard": ["Chainer, Dementia Master|TOR", "Cabal Coffers|TOR"] }</property></properties>
+  </object>
+  <object id="105" template="../../../../../../common/maps/obj/enemy.tx" x="280" y="260">
+   <properties>
+    <property name="enemy" value="Dementia Beast" />
+    <property name="threatRange" type="int" value="40" />
+   </properties>
+  </object>
+  <object id="65" template="../../../../../../common/maps/obj/treasure.tx" x="228.164" y="25.3361">
+   <properties>
+    <property name="reward">[
+  {
+    "type": "randomCard",
+    "colors": [ "Black" ],
+    "subTypes": [ "Dementia" ],
+    "count": 5
+  },
+  {
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Dark Boots"
+  },
+  {
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Dark Shield"
+  },
+  {
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Dark Armor"
+  },
+  {
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Blood Vial"
+  },
+  {
+    "type": "item",
+    "count": 1,
+    "probability": 0.1,
+    "itemName": "Dark Amulet"
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="66" template="../../../../../../common/maps/obj/manashards.tx" x="66.705" y="160.287" />
+  <object id="67" template="../../../../../../common/maps/obj/manashards.tx" x="359.099" y="314.919" />
+  <object id="68" template="../../../../../../common/maps/obj/manashards.tx" x="149.443" y="268.328" />
+  <object id="69" template="../../../../../../common/maps/obj/booster.tx" x="207.279" y="30.5574">
+   <properties>
+    <property name="reward">[
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Chainer's Edict|TOR"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Mesmeric Fiend|TOR"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Laquatus's Champion|TOR"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Lake of the Dead|ALL"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Cabal Coffers|TOR"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Corrupt|USG"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Faceless Butcher|TOR"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Nether Spirit|MMQ"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Phyrexian Negator|UDS"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Contamination|USG"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Hatred|EXO"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Twisted Abomination|SCG"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Diabolic Edict|TMP"
+	},
+	{
+		"type": "card",
+		"probability": 0.5,
+		"count": 1,
+		"cardName": "Mutilate|TOR"
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="80" template="../../../../../../common/maps/obj/enemy.tx" x="159.283" y="181.373" width="26.041" height="20.418">
+   <properties>
+    <property name="enemy" value="Naked Mole Rat" />
+    <property name="inactive" type="bool" value="true" />
+    <property name="speedModifier" type="float" value="3" />
+    <property name="threatRange" type="int" value="51" />
+   </properties>
+  </object>
+  <object id="81" template="../../../../../../common/maps/obj/enemy.tx" x="241.218" y="366.931" width="26.041" height="20.418">
+   <properties>
+    <property name="enemy" value="Naked Mole Rat" />
+    <property name="inactive" type="bool" value="true" />
+    <property name="threatRange" type="int" value="50" />
+   </properties>
+  </object>
+  <object id="82" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="240.774" y="383.06" width="27.7319" height="14.6679" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    "text": "You approach a cobweb covered coffin lying at the center of the room.",
+    "options": [
+      { "name": "Walk away" },
+      {
+        "name": "Take a closer look at the rusty coffin",
+        "text": "You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.",
+        "options": [
+          { "name": "Walk away" },
+          {
+            "name": "Open the coffin",
+            "text": "As you open the coffin, a giant mole rat jumps from the coffin looking at you very annoyed and angry",
+            "options": [
+              {
+                "name": "Time for some pest control!",
+                "action": [
+                  { "activateMapObject": 81 },
+                  { "deleteMapObject": -1 }
+                ]
+              }     
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="83" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="160.446" y="158.945" width="27.7319" height="14.6679" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    "text": "You approach a cobweb covered coffin lying at the center of the room.",
+    "options": [
+      { "name": "Walk away" },
+      {
+        "name": "Take a closer look at the rusty coffin",
+        "text": "You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.",
+        "options": [
+          { "name": "Walk away" },
+          {
+            "name": "Open the coffin",
+            "text": "As you open the coffin, a giant mole rat jumps from the coffin looking at you very annoyed and angry",
+            "options": [
+              {
+                "name": "Time for some pest control!",
+                "action": [
+                  { "activateMapObject": 80 },
+                  { "deleteMapObject": -1 }
+                ]
+              }     
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="86" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="353.635" y="366.995" width="27.7319" height="14.6679" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    "text": "You approach a cobweb covered coffin lying at the center of the room.",
+    "options": [
+      { "name": "Walk away" },
+      {
+        "name": "Take a closer look at the rusty coffin",
+        "text": "You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.",
+        "options": [
+          { "name": "Walk away" },
+          {
+            "name": "Open the coffin",
+            "text": "As you open the coffin, expecting an acient evil arriving from it, you realize that was only in your imagination",
+            "options": [
+              {
+                "name": "You grab the loot from the empty coffin",
+                "action": [
+                    {"deleteMapObject": -1 },
+                    {"grantRewards": [
+                        {
+                          "type": "gold",
+                          "count": 25
+                        }
+                      ]
+                    }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="92" template="../../../../../../common/maps/obj/enemy.tx" x="209.287" y="239.41">
+   <properties>
+    <property name="enemy" value="Dementia Beast" />
+    <property name="threatRange" type="int" value="30" />
+    <property name="waypoints" value="95,94" />
+   </properties>
+  </object>
+  <object id="93" template="../../../../../../common/maps/obj/enemy.tx" x="57.0657" y="336.607">
+   <properties>
+    <property name="enemy" value="Wild Rat" />
+    <property name="threatRange" type="int" value="50" />
+   </properties>
+  </object>
+  <object id="94" template="../../../../../../common/maps/obj/waypoint.tx" x="206.877" y="408.099" />
+  <object id="95" template="../../../../../../common/maps/obj/waypoint.tx" x="207.279" y="151.049" />
+  <object id="96" template="../../../../../../common/maps/obj/enemy.tx" x="358.296" y="179.968">
+   <properties>
+    <property name="enemy" value="Spider" />
+    <property name="threatRange" type="int" value="50" />
+   </properties>
+  </object>
+  <object id="97" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="161.249" y="382.659" width="27.7319" height="14.6679" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    "text": "You approach a cobweb covered coffin lying at the center of the room.",
+    "options": [
+      { "name": "Walk away" },
+      {
+        "name": "Take a closer look at the rusty coffin",
+        "text": "You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.",
+        "options": [
+          { "name": "Walk away" },
+          {
+            "name": "Open the coffin",
+            "text": "As you open the coffin, expecting an acient evil arriving from it, you realize that was only in your imagination",
+            "options": [
+              {
+                "name": "You grab the loot from the empty coffin",
+                "action": [
+                    {"deleteMapObject": -1 },
+                    {"grantRewards": [
+                        {
+                          "type": "gold",
+                          "count": 25
+                        }
+                      ]
+                    }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="98" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="49.1915" y="367.396" width="27.7319" height="14.6679" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    "text": "You approach a cobweb covered coffin lying at the center of the room.",
+    "options": [
+      { "name": "Walk away" },
+      {
+        "name": "Take a closer look at the rusty coffin",
+        "text": "You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.",
+        "options": [
+          { "name": "Walk away" },
+          {
+            "name": "Open the coffin",
+            "text": "As you open the coffin, expecting an acient evil arriving from it, you realize that was only in your imagination",
+            "options": [
+              {
+                "name": "You grab the loot from the empty coffin",
+                "action": [
+                    {"deleteMapObject": -1 },
+                    {"grantRewards": [
+                        {
+                          "type": "gold",
+                          "count": 25
+                        }
+                      ]
+                    }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="99" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="354.84" y="205.937" width="27.7319" height="14.6679" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    "text": "You approach a cobweb covered coffin lying at the center of the room.",
+    "options": [
+      { "name": "Walk away" },
+      {
+        "name": "Take a closer look at the rusty coffin",
+        "text": "You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.",
+        "options": [
+          { "name": "Walk away" },
+          {
+            "name": "Open the coffin",
+            "text": "As you open the coffin, expecting an acient evil arriving from it, you realize that was only in your imagination",
+            "options": [
+              {
+                "name": "You grab the loot from the empty coffin",
+                "action": [
+                    {"deleteMapObject": -1 },
+                    {"grantRewards": [
+                        {
+                          "type": "gold",
+                          "count": 25
+                        }
+                      ]
+                    }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="100" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="48.7899" y="206.339" width="27.7319" height="14.6679" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    "text": "You approach a cobweb covered coffin lying at the center of the room.",
+    "options": [
+      { "name": "Walk away" },
+      {
+        "name": "Take a closer look at the rusty coffin",
+        "text": "You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.",
+        "options": [
+          { "name": "Walk away" },
+          {
+            "name": "Open the coffin",
+            "text": "As you open the coffin, expecting an acient evil arriving from it, you realize that was only in your imagination",
+            "options": [
+              {
+                "name": "You grab the loot from the empty coffin",
+                "action": [
+                    {"deleteMapObject": -1 },
+                    {"grantRewards": [
+                        {
+                          "type": "gold",
+                          "count": 25
+                        }
+                      ]
+                    }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="101" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="241.577" y="302.732" width="27.7319" height="14.6679" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    "text": "You approach a cobweb covered coffin lying at the center of the room.",
+    "options": [
+      { "name": "Walk away" },
+      {
+        "name": "Take a closer look at the rusty coffin",
+        "text": "You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.",
+        "options": [
+          { "name": "Walk away" },
+          {
+            "name": "Open the coffin",
+            "text": "As you open the coffin, expecting an acient evil arriving from it, you realize that was only in your imagination",
+            "options": [
+              {
+                "name": "You grab the loot from the empty coffin",
+                "action": [
+                    {"deleteMapObject": -1 },
+                    {"grantRewards": [
+                        {
+                          "type": "gold",
+                          "count": 25
+                        }
+                      ]
+                    }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="102" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="162.454" y="302.732" width="27.7319" height="14.6679" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    "text": "You approach a cobweb covered coffin lying at the center of the room.",
+    "options": [
+      { "name": "Walk away" },
+      {
+        "name": "Take a closer look at the rusty coffin",
+        "text": "You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.",
+        "options": [
+          { "name": "Walk away" },
+          {
+            "name": "Open the coffin",
+            "text": "As you open the coffin, expecting an acient evil arriving from it, you realize that was only in your imagination",
+            "options": [
+              {
+                "name": "You grab the loot from the empty coffin",
+                "action": [
+                    {"deleteMapObject": -1 },
+                    {"grantRewards": [
+                        {
+                          "type": "gold",
+                          "count": 25
+                        }
+                      ]
+                    }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="103" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="160.847" y="239.675" width="27.7319" height="14.6679" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    "text": "You approach a cobweb covered coffin lying at the center of the room.",
+    "options": [
+      { "name": "Walk away" },
+      {
+        "name": "Take a closer look at the rusty coffin",
+        "text": "You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.",
+        "options": [
+          { "name": "Walk away" },
+          {
+            "name": "Open the coffin",
+            "text": "As you open the coffin, expecting an acient evil arriving from it, you realize that was only in your imagination",
+            "options": [
+              {
+                "name": "You grab the loot from the empty coffin",
+                "action": [
+                    {"deleteMapObject": -1 },
+                    {"grantRewards": [
+                        {
+                          "type": "gold",
+                          "count": 25
+                        }
+                      ]
+                    }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="104" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="241.577" y="160.552" width="27.7319" height="14.6679" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    "text": "You approach a cobweb covered coffin lying at the center of the room.",
+    "options": [
+      { "name": "Walk away" },
+      {
+        "name": "Take a closer look at the rusty coffin",
+        "text": "You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.",
+        "options": [
+          { "name": "Walk away" },
+          {
+            "name": "Open the coffin",
+            "text": "As you open the coffin, expecting an acient evil arriving from it, you realize that was only in your imagination",
+            "options": [
+              {
+                "name": "You grab the loot from the empty coffin",
+                "action": [
+                    {"deleteMapObject": -1 },
+                    {"grantRewards": [
+                        {
+                          "type": "gold",
+                          "count": 25
+                        }
+                      ]
+                    }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="106" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="243" y="235" width="27.7319" height="14.6679" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    "text": "You see an ornate black coffin at the center of the crypt. Dark energy pulses from within, and you can hear whispers of madness emanating from it.",
+    "options": [
+      { "name": "Walk away" },
+      {
+        "name": "Examine the coffin more closely",
+        "text": "The coffin is adorned with symbols of the Cabal. You sense an overwhelming presence of dementia and nightmares within. This is no ordinary resting place.",
+        "options": [
+          { "name": "Leave it undisturbed" },
+          {
+            "name": "Open the coffin",
+            "text": "As you lift the lid, a powerful figure rises from the depths. 'YOU DARE DISTURB THE DEMENTIA MASTER?' bellows Chainer, his eyes glowing with dark power!",
+            "options": [
+              {
+                "name": "Face the Dementia Master!",
+                "action": [
+                  { "activateMapObject": 50 },
+                  { "deleteMapObject": -1 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -4,7 +4,7 @@ Types:Creature Goblin
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create two 1/1 red Goblin creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ r_1_1_goblin | TokenOwner$ You
-A:AB$ LoseLife | Cost$ Sac<1/Goblin> | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 1 | SubAbility$ Gain | SpellDescription$ Target player loses 1 life and you gain 1 life.
+A:AB$ LoseLife | Cost$ Sac<1/Goblin> | ValidTgts$ Player | LifeAmount$ 1 | SubAbility$ Gain | SpellDescription$ Target player loses 1 life and you gain 1 life.
 SVar:Gain:DB$ GainLife | Defined$ You | LifeAmount$ 1
 SVar:AIPreference:SacCost$Creature.Goblin+token,Creature.Goblin+cmcLE1
 DeckHas:Ability$Token
