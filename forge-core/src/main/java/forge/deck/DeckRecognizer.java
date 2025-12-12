@@ -1010,7 +1010,7 @@ public class DeckRecognizer {
     private static MagicColor.Color getMagicColor(String colorName){
         if (colorName.toLowerCase().startsWith("multi") || colorName.equalsIgnoreCase("m"))
             return null;  // will be handled separately
-        return MagicColor.Color.fromByte(MagicColor.fromName(colorName.toLowerCase()));
+        return MagicColor.Color.fromName(colorName.toLowerCase());
     }
 
     public static boolean isDeckName(final String lineAsIs) {

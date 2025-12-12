@@ -1,0 +1,24 @@
+Name:Bruce Banner
+ManaCost:U
+Types:Legendary Creature Human Scientist Hero
+PT:1/1
+A:AB$ Draw | Cost$ X X T | NumCards$ X | SorcerySpeed$ True | SpellDescription$ Draw X cards. Activate only as a sorcery.
+A:AB$ SetState | Cost$ 2 R R G G | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery.
+SVar:X:Count$xPaid
+AlternateMode:Modal
+Oracle:{X}{X}, {T}: Draw X cards. Activate only as a sorcery.\n{2}{R}{R}{G}{G}: Transform Bruce Banner. Activate only as a sorcery.
+
+ALTERNATE
+
+Name:The Incredible Hulk
+ManaCost:2 R R G G
+Types:Legendary Creature Gamma Berserker Hero
+PT:8/8
+K:Reach
+K:Trample
+T:Mode$ DamageDoneOnce | Execute$ TrigPutCounter | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, put a +1/+1 counter on him. If he's attacking, untap him and there is an additional combat phase after this phase.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBUntap
+SVar:DBUntap:DB$ Untap | Defined$ Self | ConditionDefined$ TriggeredTargetLKICopy | ConditionPresent$ Creature.attacking | SubAbility$ DBAddCombat
+SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat | ConditionDefined$ TriggeredTargetLKICopy | ConditionPresent$ Creature.attacking
+SVar:HasCombatEffect:TRUE
+Oracle:Reach, trample\nEnrage — Whenever The Incredible Hulk is dealt damage, put a +1/+1 counter on him. If he's attacking, untap him and there is an additional combat phase after this phase.
