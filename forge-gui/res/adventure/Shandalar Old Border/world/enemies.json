@@ -19609,6 +19609,19 @@
         "type": "shards",
         "probability": 1,
         "count": 10
+      },
+      {
+        "type": "card",
+        "probability": 0.5,
+        "count": 1,
+        "rarity": [
+          "common",
+          "uncommon",
+          "rare"
+        ],
+        "subTypes": [
+          "Lhurgoyf"
+        ]
       }
     ],
     "colors": "B",
