@@ -1289,8 +1289,7 @@
     "deck": [
       "decks/standard/bluewizard_apprentice_1.dck",
       "decks/standard/bluewizard_apprentice_2.dck",
-      "decks/standard/bluewizard_apprentice_3.dck",
-      "decks/standard/bluewizard_easy.json"
+      "decks/standard/bluewizard_apprentice_3.dck"
     ],
     "ai": "cautious",
     "flying": true,
@@ -3218,87 +3217,6 @@
       "IdentityRed",
       "IdentityGrixis",
       "BiomeBlack"
-    ]
-  },
-  {
-    "name": "Berserker",
-    "nameOverride": "Dwarven Berserker",
-    "sprite": "sprites/enemy/humanoid/dwarf/dwarf_5.atlas",
-    "deck": [
-      "decks/standard/berserker.json"
-    ],
-    "ai": "",
-    "spawnRate": 1,
-    "difficulty": 0.1,
-    "speed": 22,
-    "life": 13,
-    "rewards": [
-      {
-        "type": "deckCard",
-        "probability": 1,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "probability": 0.25,
-        "count": 1,
-        "rarity": [
-          "rare"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "probability": 1,
-        "count": 3,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "card",
-        "probability": 0.5,
-        "count": 2,
-        "rarity": [
-          "common",
-          "uncommon",
-          "rare"
-        ],
-        "colors": [
-          "Black",
-          "Green",
-          "Red"
-        ]
-      },
-      {
-        "type": "shards",
-        "probability": 0.25,
-        "count": 0,
-        "addMaxCount": 3
-      },
-      {
-        "type": "gold",
-        "probability": 0.3,
-        "count": 0,
-        "addMaxCount": 300
-      }
-    ],
-    "colors": "BGR",
-    "questTags": [
-      "Dwarf",
-      "Aggressive",
-      "Loner",
-      "Barbarian",
-      "Warrior",
-      "IdentityRed",
-      "IdentityBlack",
-      "IdentityGreen",
-      "IdentityJund",
-      "BiomeRed"
     ]
   },
   {
@@ -5262,7 +5180,6 @@
     "sprite": "sprites/enemy/construct/golem_3.atlas",
     "deck": [
       "decks/standard/artificer.dck",
-      "decks/standard/construct.json",
       "decks/standard/rustic_construct.dck"
     ],
     "ai": "",
@@ -7517,7 +7434,6 @@
     "name": "Dog",
     "sprite": "sprites/enemy/beast/dog.atlas",
     "deck": [
-      "decks/standard/dog.json",
       "decks/standard/dog.dck",
       "decks/standard/dog_w_beginner.dck"
     ],
@@ -20837,7 +20753,6 @@
     "name": "Plant",
     "sprite": "sprites/enemy/plant/plant.atlas",
     "deck": [
-      "decks/standard/plant.json",
       "decks/standard/plant.dck"
     ],
     "ai": "cautious",
@@ -23307,7 +23222,7 @@
     "name": "Shaman",
     "sprite": "sprites/enemy/humanoid/elf/shaman_2.atlas",
     "deck": [
-      "decks/standard/shaman.json"
+      "decks/standard/mindclaw_shaman.dck"
     ],
     "ai": "",
     "spawnRate": 1,
@@ -23678,7 +23593,11 @@
     "name": "Sliver",
     "sprite": "sprites/enemy/aberration/sliver.atlas",
     "deck": [
-      "decks/standard/sliver.json"
+      "decks/standard/sliver_white.dck",
+      "decks/standard/sliver_blue.dck",
+      "decks/standard/sliver_black.dck",
+      "decks/standard/sliver_red.dck",
+      "decks/standard/sliver_green.dck"
     ],
     "ai": "",
     "spawnRate": 0.5,

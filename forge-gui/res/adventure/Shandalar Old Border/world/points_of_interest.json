@@ -1559,7 +1559,8 @@
 		"radiusFactor": 0.8
 	},
 	{
-		"name": "Halls of Time",
+		"name": "Crawlspace",
+		"displayName": "Halls of Time",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1569,7 +1570,8 @@
 		"questTags": [
 			"DungeonEffect",
 			"Dungeon",
-			"Hostile"
+			"Hostile",
+			"BiomeBlue"
 		]
 	},
 	{
