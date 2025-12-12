@@ -17,7 +17,7 @@
 	},
 	{
 		"name": "BarbarianCamp",
-		"displayName": "Barbarian Camp",
+		"displayName": "Goblin Camp",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -33,7 +33,7 @@
 	},
 	{
 		"name": "BarbarianCamp1",
-		"displayName": "Barbarian Camp",
+		"displayName": "Kobold Camp",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -66,7 +66,7 @@
 	},
 	{
 		"name": "BarbarianCamp2",
-		"displayName": "Barbarian Camp",
+		"displayName": "Orc Camp",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -82,7 +82,7 @@
 	},
 	{
 		"name": "BarbarianCamp3",
-		"displayName": "Barbarian Camp",
+		"displayName": "Bandit Camp",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -114,7 +114,7 @@
 	},
 	{
 		"name": "BarbarianCamp5",
-		"displayName": "Barbarian Camp",
+		"displayName": "Goblin War Camp",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -216,7 +216,7 @@
 	},
 	{
 		"name": "FortBlue3",
-		"displayName": "Esper Manufactory",
+		"displayName": "Clockwork Manufactory",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -313,7 +313,7 @@
 	},
 	{
 		"name": "Castle2",
-		"displayName": "Pharaoh's Fort",
+		"displayName": "Pharaoh's Domain",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -446,7 +446,7 @@
 	},
 	{
 		"name": "CaveB",
-		"displayName": "Cave",
+		"displayName": "Snake Cave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -462,7 +462,7 @@
 	},
 	{
 		"name": "CaveZombie",
-		"displayName": "Cave",
+		"displayName": "Zombie Cave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -477,7 +477,7 @@
 	},
 	{
 		"name": "CaveKobold",
-		"displayName": "Cave",
+		"displayName": "Kobold Cave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -492,7 +492,7 @@
 	},
 	{
 		"name": "CaveReptile",
-		"displayName": "Cave",
+		"displayName": "Reptile's Den",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -507,7 +507,7 @@
 	},
 	{
 		"name": "CaveTroll",
-		"displayName": "Cave",
+		"displayName": "Troll's Lair",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -537,7 +537,7 @@
 	},
 	{
 		"name": "CaveB1",
-		"displayName": "Cave",
+		"displayName": "Treasure Cave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -551,7 +551,7 @@
 	},
 	{
 		"name": "CaveB2",
-		"displayName": "Cave",
+		"displayName": "Hellhole",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -567,7 +567,7 @@
 	},
 	{
 		"name": "CaveB3",
-		"displayName": "Cave",
+		"displayName": "Bonecursed Grave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -583,7 +583,7 @@
 	},
 	{
 		"name": "CaveB4",
-		"displayName": "Cave",
+		"displayName": "Giant's Grave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -615,7 +615,7 @@
 	},
 	{
 		"name": "CaveB6",
-		"displayName": "Cave",
+		"displayName": "Wizard's Hideout",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -631,7 +631,7 @@
 	},
 	{
 		"name": "CaveB8",
-		"displayName": "Cave",
+		"displayName": "Treasure Cave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -663,7 +663,7 @@
 	},
 	{
 		"name": "CaveC",
-		"displayName": "Cave",
+		"displayName": "Snake Cave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -679,7 +679,7 @@
 	},
 	{
 		"name": "CaveC1",
-		"displayName": "Cave",
+		"displayName": "Treasure Cave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -693,7 +693,7 @@
 	},
 	{
 		"name": "CaveC2",
-		"displayName": "Cave",
+		"displayName": "Hellhole",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -709,7 +709,7 @@
 	},
 	{
 		"name": "CaveC3",
-		"displayName": "Cave",
+		"displayName": "Hibernation Den",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -725,7 +725,7 @@
 	},
 	{
 		"name": "CaveC4",
-		"displayName": "Cave",
+		"displayName": "Seemingly Unguarded Cave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -741,7 +741,7 @@
 	},
 	{
 		"name": "CaveC5",
-		"displayName": "Cave",
+		"displayName": "Bonecursed Grave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -757,7 +757,7 @@
 	},
 	{
 		"name": "CaveC6",
-		"displayName": "Cave",
+		"displayName": "Web Draped Parlor",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -773,7 +773,7 @@
 	},
 	{
 		"name": "CaveC7",
-		"displayName": "Cave",
+		"displayName": "Bandit's Secret Base",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -805,7 +805,7 @@
 	},
 	{
 		"name": "CaveC9",
-		"displayName": "Cave",
+		"displayName": "Wizard's Hideout",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -821,7 +821,7 @@
 	},
 	{
 		"name": "CaveCA",
-		"displayName": "Cave",
+		"displayName": "Goblin Warrens",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -837,7 +837,7 @@
 	},
 	{
 		"name": "CaveCB",
-		"displayName": "Cave",
+		"displayName": "Treasure Cave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -869,7 +869,7 @@
 	},
 	{
 		"name": "CaveCE",
-		"displayName": "Cave",
+		"displayName": "Treasure Cave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -885,7 +885,7 @@
 	},
 	{
 		"name": "CaveG",
-		"displayName": "Cave",
+		"displayName": "Snake Cave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -901,7 +901,7 @@
 	},
 	{
 		"name": "CaveG1",
-		"displayName": "Cave",
+		"displayName": "Treasure Cave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -915,7 +915,7 @@
 	},
 	{
 		"name": "CaveG2",
-		"displayName": "Cave",
+		"displayName": "Hellhole",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -931,7 +931,7 @@
 	},
 	{
 		"name": "CaveG3",
-		"displayName": "Cave",
+		"displayName": "Hibernation Den",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1172,7 +1172,7 @@
 	},
 	{
 		"name": "CaveR",
-		"displayName": "Cave",
+		"displayName": "Snake Cave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1202,7 +1202,7 @@
 	},
 	{
 		"name": "CaveR3",
-		"displayName": "Cave",
+		"displayName": "Hellhole",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1234,7 +1234,7 @@
 	},
 	{
 		"name": "CaveR5",
-		"displayName": "Cave",
+		"displayName": "Hibernation Den",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1456,7 +1456,7 @@
 	},
 	{
 		"name": "CaveW2",
-		"displayName": "Cave",
+		"displayName": "Hibernation Den",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1627,7 +1627,7 @@
 		"name": "DrossOutpost",
 		"displayName": "Dross Outpost",
 		"type": "dungeon",
-		"count": 2,
+		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/phyrexia/Phyrexian_Buildings.atlas",
 		"sprite": "DrossOutpost",
 		"map": "../Shandalar Old Border/maps/map/phyrexia/phyrexian_black1.tmx",
