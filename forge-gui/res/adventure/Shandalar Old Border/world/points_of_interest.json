@@ -947,7 +947,7 @@
 	},
 	{
 		"name": "CaveG4",
-		"displayName": "Cave",
+		"displayName": "Web Draped Parlor",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -979,7 +979,7 @@
 	},
 	{
 		"name": "CaveG6",
-		"displayName": "Cave",
+		"displayName": "Baloth Nest",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -995,7 +995,7 @@
 	},
 	{
 		"name": "CaveG9",
-		"displayName": "Cave",
+		"displayName": "Treasure Cave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1027,7 +1027,7 @@
 	},
 	{
 		"name": "CaveCerodon",
-		"displayName": "Cave",
+		"displayName": "Massive Beasts's Den",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1044,7 +1044,7 @@
 	},
 	{
 		"name": "CaveEldrazi",
-		"displayName": "Cave",
+		"displayName": "Elder Entity's Cavern",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1060,7 +1060,7 @@
 	},
 	{
 		"name": "CaveAmphin",
-		"displayName": "Flooded Cave",
+		"displayName": "Tidepool Cavern",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1077,7 +1077,7 @@
 	},
 	{
 		"name": "CaveRat",
-		"displayName": "Cave",
+		"displayName": "Rat's Nest",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1094,7 +1094,7 @@
 	},
 	{
 		"name": "CaveU",
-		"displayName": "Cave",
+		"displayName": "Treasure Cave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1124,7 +1124,7 @@
 	},
 	{
 		"name": "CaveU2",
-		"displayName": "Cave",
+		"displayName": "Wizard's Hideout",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1140,7 +1140,7 @@
 	},
 	{
 		"name": "CaveU3",
-		"displayName": "Cave",
+		"displayName": "Djinn's Domain",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1156,7 +1156,7 @@
 	},
 	{
 		"name": "CaveU4",
-		"displayName": "Cave",
+		"displayName": "Treasure Cave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1188,7 +1188,7 @@
 	},
 	{
 		"name": "CaveR2",
-		"displayName": "Cave",
+		"displayName": "Treasure Cave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1218,7 +1218,7 @@
 	},
 	{
 		"name": "CaveR4",
-		"displayName": "Cave",
+		"displayName": "Orc Cave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1250,7 +1250,7 @@
 	},
 	{
 		"name": "CaveR6",
-		"displayName": "Cave",
+		"displayName": "Minotaur Tunnels",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1266,7 +1266,7 @@
 	},
 	{
 		"name": "CaveR7",
-		"displayName": "Cave",
+		"displayName": "Giant's Grave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1282,7 +1282,7 @@
 	},
 	{
 		"name": "CaveR8",
-		"displayName": "Cave",
+		"displayName": "Web Draped Parlor",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1298,7 +1298,7 @@
 	},
 	{
 		"name": "CaveR9",
-		"displayName": "Cave",
+		"displayName": "Bandit's Hideout",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1314,7 +1314,7 @@
 	},
 	{
 		"name": "CaveRA",
-		"displayName": "Cave",
+		"displayName": "Wizard's Hideout",
 		"type": "cave",
 		"count": 2,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1330,7 +1330,7 @@
 	},
 	{
 		"name": "CaveRB",
-		"displayName": "Cave",
+		"displayName": "Goblin Cave",
 		"type": "cave",
 		"count": 2,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1346,7 +1346,7 @@
 	},
 	{
 		"name": "CaveRC",
-		"displayName": "Cave",
+		"displayName": "Kavu Lair",
 		"type": "cave",
 		"count": 2,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1362,7 +1362,7 @@
 	},
 	{
 		"name": "CaveRE",
-		"displayName": "Cave",
+		"displayName": "Barbarian's Base",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1378,7 +1378,7 @@
 	},
 	{
 		"name": "CaveRG",
-		"displayName": "Cave",
+		"displayName": "Dwarven Mines",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1394,7 +1394,7 @@
 	},
 	{
 		"name": "CaveRH",
-		"displayName": "Cave",
+		"displayName": "Treasure Cave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1426,7 +1426,7 @@
 	},
 	{
 		"name": "CaveW",
-		"displayName": "Cave",
+		"displayName": "Snake Cave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1442,7 +1442,7 @@
 	},
 	{
 		"name": "CaveW1",
-		"displayName": "Cave",
+		"displayName": "Treasure Cave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1472,7 +1472,7 @@
 	},
 	{
 		"name": "CaveW3",
-		"displayName": "Cave",
+		"displayName": "Wizard's Hideout",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1488,7 +1488,7 @@
 	},
 	{
 		"name": "CaveW4",
-		"displayName": "Cave",
+		"displayName": "Treasure Cave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1504,7 +1504,7 @@
 	},
 	{
 		"name": "CaveW5",
-		"displayName": "Cave",
+		"displayName": "Dwarven Mines",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1520,7 +1520,7 @@
 	},
 	{
 		"name": "CaveW6",
-		"displayName": "Cave",
+		"displayName": "Treasure Cave",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1552,7 +1552,7 @@
 		"name": "CopperhostForest",
 		"displayName": "Copper Host Forest",
 		"type": "dungeon",
-		"count": 2,
+		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/phyrexia/Phyrexian_Buildings.atlas",
 		"sprite": "CopperhostForest",
 		"map": "../Shandalar Old Border/maps/map/phyrexia/phyrexian_g1.tmx",
@@ -1610,7 +1610,7 @@
 	},
 	{
 		"name": "Dream Halls",
-		"displayName": "Blue Tower",
+		"displayName": "Dream Halls",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -1643,7 +1643,7 @@
 		"name": "ElfTown",
 		"displayName": "Secluded Elven Encampment",
 		"type": "dungeon",
-		"count": 2,
+		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
 		"sprite": "ForestTown",
 		"map": "../Shandalar Old Border/maps/map/hostiletown/elftown.tmx",
@@ -1723,7 +1723,7 @@
 		"name": "EvilGrove4",
 		"displayName": "Neverglades National Park",
 		"type": "cave",
-		"count": 2,
+		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
 		"sprite": "EvilGrove",
 		"map": "../Shandalar Old Border/maps/map/evilgrove/evilgrove_5_swamp.tmx",
@@ -1739,7 +1739,7 @@
 		"name": "EvilGrove5",
 		"displayName": "Black Dragon Mountain",
 		"type": "cave",
-		"count": 2,
+		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
 		"sprite": "EvilGrove",
 		"map": "../Shandalar Old Border/maps/map/evilgrove/evilgrove_7_dragon.tmx",
@@ -1755,7 +1755,7 @@
 		"name": "EvilGrove6",
 		"displayName": "Shade's Lair",
 		"type": "cave",
-		"count": 2,
+		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
 		"sprite": "EvilGrove",
 		"map": "../Shandalar Old Border/maps/map/evilgrove/evilgrove_6_shade.tmx",
@@ -1785,7 +1785,7 @@
 	},
 	{
 		"name": "Factory1",
-		"displayName": "Autonomous Factory",
+		"displayName": "Abandoned Factory",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1801,7 +1801,7 @@
 	},
 	{
 		"name": "Factory2",
-		"displayName": "Autonomous Factory",
+		"displayName": "Golem-Maker's Factory",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -1817,7 +1817,7 @@
 	},
 	{
 		"name": "Factory3",
-		"displayName": "Autonomous Factory",
+		"displayName": "Massive Factory",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -2080,7 +2080,7 @@
 		"name": "FurnaceBase",
 		"displayName": "Furnace Host Base",
 		"type": "dungeon",
-		"count": 2,
+		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/phyrexia/Phyrexian_Buildings.atlas",
 		"sprite": "FurnaceBase",
 		"map": "../Shandalar Old Border/maps/map/phyrexia/phyrexian_r1.tmx",
@@ -2111,7 +2111,7 @@
 		"name": "GitaxianLab",
 		"displayName": "Gitaxian Laboratory",
 		"type": "dungeon",
-		"count": 2,
+		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/phyrexia/Phyrexian_Buildings.atlas",
 		"sprite": "GitLabSmall",
 		"map": "../Shandalar Old Border/maps/map/phyrexia/phyrexian_b1.tmx",
@@ -2258,7 +2258,7 @@
 	},
 	{
 		"name": "Grove1",
-		"displayName": "Wolf's Nest",
+		"displayName": "Wolf Pack's Den",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -2274,9 +2274,9 @@
 	},
 	{
 		"name": "Grove2",
-		"displayName": "Dinosaur Crater",
+		"displayName": "Ancient Beast Crater",
 		"type": "cave",
-		"count": 3,
+		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
 		"sprite": "Grove",
 		"map": "../Shandalar Old Border/maps/map/grove/grove_3_dinosaur.tmx",
@@ -2509,7 +2509,7 @@
 	},
 	{
 		"name": "Jacehold",
-		"displayName": "Jace's Holdout",
+		"displayName": "Arcanis's Holdout",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -2524,7 +2524,7 @@
 	},
 	{
 		"name": "Kavu Lair",
-		"displayName": "Cave",
+		"displayName": "Kavu Lair",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -2555,7 +2555,7 @@
 	},
 	{
 		"name": "Lavaforge Kobold",
-		"displayName": "Lava Forge",
+		"displayName": "Draconic Lava Pools",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2570,7 +2570,7 @@
 	},
 	{
 		"name": "LavaForge1",
-		"displayName": "Lava Forge",
+		"displayName": "Sulfuric Springs",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2587,7 +2587,7 @@
 	},
 	{
 		"name": "LavaForge2",
-		"displayName": "Lava Forge",
+		"displayName": "Burning Sands",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2604,7 +2604,7 @@
 	},
 	{
 		"name": "Lich's Mirror",
-		"displayName": "Black Tower",
+		"displayName": "Lich's Tower",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2653,7 +2653,7 @@
 	},
 	{
 		"name": "MageTowerC3",
-		"displayName": "Red Tower",
+		"displayName": "Red Wizard's Tower",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2687,7 +2687,7 @@
 	},
 	{
 		"name": "MageTowerC5",
-		"displayName": "Green Tower",
+		"displayName": "Druid's Greenhouse",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2704,7 +2704,7 @@
 	},
 	{
 		"name": "MageTowerC6",
-		"displayName": "Black Tower",
+		"displayName": "Infernal Tower",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2721,7 +2721,7 @@
 	},
 	{
 		"name": "MageTower7Church",
-		"displayName": "White Tower",
+		"displayName": "High Priest's Church",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2738,7 +2738,7 @@
 	},
 	{
 		"name": "MageTowerC8",
-		"displayName": "Blue Tower",
+		"displayName": "Illusionist's Edifice",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2755,7 +2755,7 @@
 	},
 	{
 		"name": "MageTowerX",
-		"displayName": "Blue Tower",
+		"displayName": "Doppelganger's Domain",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2771,7 +2771,7 @@
 	},
 	{
 		"name": "MageTowerCE",
-		"displayName": "Blue Tower",
+		"displayName": "Lab of Horrors",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2788,7 +2788,7 @@
 	},
 	{
 		"name": "MageTowerU",
-		"displayName": "Blue Tower",
+		"displayName": "Djinn's Tower",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2856,7 +2856,7 @@
 	},
 	{
 		"name": "MageTowerG",
-		"displayName": "Green Tower",
+		"displayName": "Druid's Greenhouse",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2873,7 +2873,7 @@
 	},
 	{
 		"name": "MageTowerU5",
-		"displayName": "Black Tower",
+		"displayName": "Infernal Tower",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2890,7 +2890,7 @@
 	},
 	{
 		"name": "MageTowerU7",
-		"displayName": "Blue Tower",
+		"displayName": "Illusionist's Edifice",
 		"type": "dungeon",
 		"count": 2,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2907,7 +2907,7 @@
 	},
 	{
 		"name": "MageTowerUD",
-		"displayName": "Black Tower",
+		"displayName": "Lab of Horrors",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2924,7 +2924,7 @@
 	},
 	{
 		"name": "MageTowerRats",
-		"displayName": "Black Tower",
+		"displayName": "Wererat's Hideout",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -3094,9 +3094,9 @@
 	},
 	{
 		"name": "Monastery",
-		"displayName": "Dark Age Church",
+		"displayName": "Dark Ages Church",
 		"type": "dungeon",
-		"count": 3,
+		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
 		"sprite": "Monastery",
 		"map": "../Shandalar Old Border/maps/map/monastery/monastery_1.tmx",
@@ -3276,7 +3276,7 @@
 	},
 	{
 		"name": "NestW",
-		"displayName": "Nest",
+		"displayName": "Griffin's Mesa",
 		"type": "cave",
 		"count": 3,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -3291,7 +3291,7 @@
 	},
 	{
 		"name": "NestU",
-		"displayName": "Nest",
+		"displayName": "Seaside Nest",
 		"type": "cave",
 		"count": 3,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -3318,7 +3318,7 @@
 		"name": "OrthodoxyBasilica",
 		"displayName": "Orthodoxy Basilica",
 		"type": "dungeon",
-		"count": 2,
+		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/phyrexia/Phyrexian_Buildings.atlas",
 		"sprite": "BasilicaSmall",
 		"map": "../Shandalar Old Border/maps/map/phyrexia/phyrexian_w1.tmx",
@@ -3426,7 +3426,7 @@
 	},
 	{
 		"name": "Quest_BanditCave",
-		"displayName": "Bandit Cave",
+		"displayName": "Joven and Chandler's Cave",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
@@ -3699,7 +3699,7 @@
 	},
 	{
 		"name": "Slime Cave",
-		"displayName": "Slime Hive",
+		"displayName": "Slimy Sewers",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -3745,7 +3745,7 @@
 	},
 	{
 		"name": "Skep",
-		"displayName": "Skep",
+		"displayName": "The Skep",
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -3947,11 +3947,11 @@
 	},
 	{
 		"name": "VampireCastle",
-		"displayName": "Chainer's Castle",
+		"displayName": "Swamp Queen's Castle",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
-		"sprite": "ChainerCastle",
+		"sprite": "SwampQueenCastle",
 		"map": "../Shandalar Old Border/maps/map/vampirecastle/vampirecastle_1.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
@@ -3964,11 +3964,11 @@
 	},
 	{
 		"name": "VampireCastle1",
-		"displayName": "Cateran Castle",
+		"displayName": "Chainer's Castle",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
-		"sprite": "CateranCastle",
+		"sprite": "ChainerCastle",
 		"map": "../Shandalar Old Border/maps/map/vampirecastle/vampirecastle_2.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
@@ -3981,11 +3981,11 @@
 	},
 	{
 		"name": "VampireCastle2",
-		"displayName": "Castle Sengir",
+		"displayName": "Cateran Castle",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
-		"sprite": "VampireCastle",
+		"sprite": "CateranCastle",
 		"map": "../Shandalar Old Border/maps/map/vampirecastle/vampirecastle_3.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
@@ -3998,11 +3998,11 @@
 	},
 	{
 		"name": "VampireCastle3",
-		"displayName": "Swamp Queen's Castle",
+		"displayName": "Castle Sengir",
 		"type": "dungeon",
 		"count": 1,
 		"spriteAtlas": "sprites/buildings.atlas",
-		"sprite": "SwampQueenCastle",
+		"sprite": "VampireCastle",
 		"map": "../Shandalar Old Border/maps/map/vampirecastle/vampirecastle_4.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
