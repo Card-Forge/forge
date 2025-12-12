@@ -19,9 +19,11 @@ package forge.game.card;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.card.*;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostParser;
 import forge.game.CardTraitBase;
 import forge.game.ForgeScript;
 import forge.game.GameObject;
@@ -40,6 +42,7 @@ import forge.game.spellability.LandAbility;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
 import forge.util.CardTranslation;
 import forge.util.ITranslatable;
@@ -63,6 +66,8 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     private CardType type = new CardType(false);
     private CardTypeView changedType = null;
     private ManaCost manaCost = ManaCost.NO_COST;
+    // Track mana cost after adjustments from perpetual cost-changing effects for display
+    private ManaCost perpetualAdjustedManaCost = null;
     private ColorSet color = ColorSet.C;
     private String oracleText = "";
     private String functionalVariantName = null;
@@ -210,7 +215,79 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     }
     public final void setManaCost(final ManaCost manaCost0) {
         manaCost = manaCost0;
+        calculatePerpetualAdjustedManaCost();
+    }
+
+    /**
+     * Calculate and save the value of the mana cost adjusted by any perpetual raise/lower cost
+     * effects for display.
+     */
+    public void calculatePerpetualAdjustedManaCost() {
+        ManaCost manaCost = getManaCost();
+        final List<StaticAbility> raiseAbilities = Lists.newArrayList();
+        final List<StaticAbility> reduceAbilities = Lists.newArrayList();
+        // Separate abilities to apply them in proper order
+        if (getCard() == null || getCard().getGame() == null) {
+            setPerpetualAdjustedManaCost(manaCost);
+            return;
+        }
+        // I don't know why refetching the card data like in this next line is necessary but in some cases (when the cost reduction
+        // wasn't added when the card was in the current zone, I think) the static abilities are missing. There's probably
+        // a better way to do this.
+        for (final StaticAbility stAb : getCard().getGame().getCardsInGame().get(getCard()).getStaticAbilities()) {
+//        for (final StaticAbility stAb : getStaticAbilities()) { // For some reason the current state sometimes doesn't have static abilities
+            // Only collect perpetual cost changes
+            if ("Card.Self".equals(stAb.getParam("ValidCard")) && "DBCleanup".equals(stAb.getParam("SubAbility"))) {
+                if (stAb.checkMode(StaticAbilityMode.ReduceCost)) {
+                    reduceAbilities.add(stAb);
+                } else if (stAb.checkMode(StaticAbilityMode.RaiseCost)) {
+                    raiseAbilities.add(stAb);
+                }
+            }
+        }
+
+        int totalGenericCostAdjustment = 0;
+        for (final StaticAbility stAb : raiseAbilities) {
+            int amount = Integer.parseInt(stAb.getParamOrDefault("Amount", "1"));
+            totalGenericCostAdjustment = totalGenericCostAdjustment + amount;
+        }
+        for (final StaticAbility stAb : reduceAbilities) {
+            int amount = Integer.parseInt(stAb.getParamOrDefault("Amount", "1"));
+            totalGenericCostAdjustment = totalGenericCostAdjustment - amount;
+        }
+
+        if (totalGenericCostAdjustment != 0) {
+            int genericCost = manaCost.getGenericCost();
+            int genericCostAdjustment;
+            int remainingGenericCostAdjustment;
+            if (genericCost + totalGenericCostAdjustment < 0) {
+                genericCostAdjustment = -genericCost;
+                remainingGenericCostAdjustment = totalGenericCostAdjustment + genericCost;
+            } else {
+                genericCostAdjustment = totalGenericCostAdjustment;
+                remainingGenericCostAdjustment = 0;
+            }
+            if (genericCostAdjustment != 0) {
+                String manaCostString = manaCost.getShortString();
+                manaCostString = manaCostString.replace("" + genericCost, "" + (genericCost + genericCostAdjustment));
+                manaCost = new ManaCost(new ManaCostParser(manaCostString));
+            }
+            if (remainingGenericCostAdjustment != 0 && manaCost.getShortString().contains("X")) {
+                // Store extra cost adjustment for X cost spells as a negative generic value for display
+                String manaCostString = manaCost.getShortString();
+                manaCost = new ManaCost(new ManaCostParser(manaCostString + " " + remainingGenericCostAdjustment));
+            }
+        }
+        setPerpetualAdjustedManaCost(manaCost);
         view.updateManaCost(this);
+    }
+
+    public ManaCost getPerpetualAdjustedManaCost() {
+        return perpetualAdjustedManaCost;
+    }
+
+    private void setPerpetualAdjustedManaCost(ManaCost manaCost) {
+        perpetualAdjustedManaCost = manaCost;
     }
 
     public final ColorSet getColor() {
