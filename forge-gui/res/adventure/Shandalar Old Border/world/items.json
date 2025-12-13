@@ -2774,6 +2774,7 @@
     "description": "Start with Ana Disciple in play.",
     "equipmentSlot": "Right",
     "iconName": "AnaSpellbook",
+    "cost": 2000,
     "effect": {
       "startBattleWithCard": [
         "Ana Disciple|APC"
@@ -2785,6 +2786,7 @@
     "description": "Start with Ceta Disciple in play.",
     "equipmentSlot": "Right",
     "iconName": "CetaSpellbook",
+    "cost": 2000,
     "effect": {
       "startBattleWithCard": [
         "Ceta Disciple|APC"
@@ -2796,6 +2798,7 @@
     "description": "Start with Dega Disciple in play.",
     "equipmentSlot": "Right",
     "iconName": "DegaSpellbook",
+    "cost": 2000,
     "effect": {
       "startBattleWithCard": [
         "Dega Disciple|APC"
@@ -2807,6 +2810,7 @@
     "description": "Start with Necra Disciple in play.",
     "equipmentSlot": "Right",
     "iconName": "NecraSpellbook",
+    "cost": 2000,
     "effect": {
       "startBattleWithCard": [
         "Necra Disciple|APC"
@@ -2818,6 +2822,7 @@
     "description": "Start with Raka Disciple in play.",
     "equipmentSlot": "Right",
     "iconName": "RakaSpellbook",
+    "cost": 2000,
     "effect": {
       "startBattleWithCard": [
         "Raka Disciple|APC"
@@ -2829,6 +2834,7 @@
     "description": "Pay 2 and tap to draw a card, then discard a card.",
     "equipmentSlot": "Left",
     "iconName": "JalumTome",
+    "cost": 10000,
     "effect": {
       "startBattleWithCard": [
         "Jalum Tome|7ED"
@@ -2840,6 +2846,7 @@
     "description": "Pay 4 and tap to draw a card.",
     "equipmentSlot": "Left",
     "iconName": "JayemdaeTome",
+    "cost": 10000,
     "effect": {
       "startBattleWithCard": [
         "Jayemdae Tome|4ED"
@@ -2851,6 +2858,7 @@
     "description": "Pay 4 and tap to draw a card. Skip your next draw step.",
     "equipmentSlot": "Left",
     "iconName": "FoolsTome",
+    "cost": 10000,
     "effect": {
       "startBattleWithCard": [
         "Fool's Tome|TMP"
