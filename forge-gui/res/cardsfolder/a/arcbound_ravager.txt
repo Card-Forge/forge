@@ -2,8 +2,8 @@ Name:Arcbound Ravager
 ManaCost:2
 Types:Artifact Creature Beast
 PT:0/0
-A:AB$ PutCounter | Cost$ Sac<1/Artifact> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+A:AB$ PutCounter | Cost$ Sac<1/Artifact> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on this creature.
 K:Modular:1
 SVar:BuffedBy:Artifact
 DeckHas:Ability$Counters
-Oracle:Sacrifice an artifact: Put a +1/+1 counter on Arcbound Ravager.\nModular 1 (This creature enters with a +1/+1 counter on it. When it dies, you may put its +1/+1 counters on target artifact creature.)
+Oracle:Sacrifice an artifact: Put a +1/+1 counter on this creature.\nModular 1 (This creature enters with a +1/+1 counter on it. When it dies, you may put its +1/+1 counters on target artifact creature.)
