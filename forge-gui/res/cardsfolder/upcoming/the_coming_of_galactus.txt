@@ -1,0 +1,8 @@
+Name:The Coming of Galactus
+ManaCost:2 B B G
+Types:Enchantment Saga
+K:Chapter:4:DBDestroy,DBLoseLife,DBLoseLife,DBToken
+SVar:DBDestroy:DB$ Destroy | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select up to one target nonland permanent | SpellDescription$ Destroy up to one target nonland permanent.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ Player.Opponent | SpellDescription$ Each opponent loses 2 life.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ galactus | TokenOwner$ You | SpellDescription$ Create Galactus, a legendary 16/16 black Elder Alien creature token with flying, trample and "Whenever Galactus attacks, destroy target land."
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI — Destroy up to one target nonland permanent.\nII, III — Each opponent loses 2 life.\nIV — Create Galactus, a legendary 16/16 black Elder Alien creature token with flying, trample and "Whenever Galactus attacks, destroy target land."

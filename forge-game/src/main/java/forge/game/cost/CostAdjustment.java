@@ -225,6 +225,10 @@ public class CostAdjustment {
                 sumGeneric += num;
             }
         }
+        if (sa.isPowerUp() && originalCard.enteredThisTurn()) {
+            // TODO handle hybrid ManaCost
+            cost.subtractManaCost(originalCard.getManaCost());
+        }
 
         while (!reduceAbilities.isEmpty()) {
             StaticAbility choice = activator.getController().chooseSingleStaticAbility(Localizer.getInstance().getMessage("lblChooseCostReduction"), reduceAbilities);

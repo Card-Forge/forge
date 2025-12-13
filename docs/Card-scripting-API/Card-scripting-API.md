@@ -182,7 +182,7 @@ Creatures with "Multiple" in this SVar will always be preferred when the AI ench
 
 * `EquipMe:{Multiple/Once>}`
 
-Creatures with "Multiple" in this SVar will always be prefered when the AI equips, creatures with "Once" only if they are not equipped already.
+Creatures with "Multiple" in this SVar will always be preferred when the AI equips, creatures with "Once" only if they are not equipped already.
 
 * `EndOfTurnLeavePlay:True`
 
@@ -210,7 +210,13 @@ Uses operand-operator syntax, where `{cmp}` is a comparator:
 **GE** *Greater than or Equal*  
 **GT** *Greater Than*  
 
-*Tip:* the AI is smart enough to not play permanents if they have ineffective ETB triggers.
+*Tip:* the AI is (usually) smart enough to not play permanents if they have obviously ineffective ETB triggers.
+
+Here's a good example from *Eldrazi Monument* where the extra heuristics try to avoid playing it without a good enough boardstate:
+```
+SVar:NeedsToPlayVar:Y GE3
+SVar:Y:Count$Valid Creature.YouCtrl
+```
 
 * `NonStackingEffect:True`
 

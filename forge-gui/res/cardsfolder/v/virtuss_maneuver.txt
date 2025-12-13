@@ -7,5 +7,5 @@ SVar:DBSacrifice:DB$ Sacrifice | Defined$ Remembered | SacValid$ Creature | Stac
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:SVar$Z1/Plus.Z2
 SVar:Z1:Count$ValidGraveyard Creature.YourTeamCtrl
-SVar:Z2:Count$Valid Creature.OppCtrl+inZoneBattlefield
+SVar:Z2:Count$Valid Creature.OppCtrl
 Oracle:For each player, choose friend or foe. Each friend returns a creature card from their graveyard to their hand. Each foe sacrifices a creature they control.
