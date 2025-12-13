@@ -223,7 +223,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
      * effects for display.
      */
     public void calculatePerpetualAdjustedManaCost() {
-        ManaCost manaCost = getManaCost();
         final List<StaticAbility> raiseAbilities = Lists.newArrayList();
         final List<StaticAbility> reduceAbilities = Lists.newArrayList();
         // Separate abilities to apply them in proper order
@@ -231,6 +230,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             setPerpetualAdjustedManaCost(manaCost);
             return;
         }
+        ManaCost manaCost = getCard().getManaCost();
         // I don't know why refetching the card data like in this next line is necessary but in some cases (when the cost reduction
         // wasn't added when the card was in the current zone, I think) the static abilities are missing. There's probably
         // a better way to do this.
