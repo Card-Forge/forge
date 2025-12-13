@@ -81,7 +81,7 @@
 		"options":
 			[
 				{
-					"name": "Serra, I've done as you asked! It's time to end this!",
+					"name": "Serra, I've defeated your guardians! It's time to end this!",
 					"action": [ { "deleteMapObject": 55 } ],
 					"condition": [
 						{
@@ -100,7 +100,7 @@
 					"options": [ { "name": "(continue)" } ]
 				},
 					{
-                	    "name": "Serra, I've done as you asked! It's time to end this!",
+                	    "name": "Serra, I've defeated your guardians! It's time to end this!",
                 		"action": [ { "deleteMapObject": 55 } ],
                 		"condition": [
                 			{
@@ -232,15 +232,15 @@
    <properties>
     <property name="dialog">[
   {
-    "text": "Welcome {var=player_name}, Serra has been waiting eagerly for this moment.",
+    "text": "Welcome {var=player_name}, the great Serra the benevolent anticipated your arrival.",
     "options": [
       {
-        "name": "Is that so? I guess you wouldn't mind opening that gate in front of me?",
-        "text": "I'm afraid I'm not allowed to do that, I am a mere servant of the mighty Serra, ruler of Angels.",
+        "name": "Is that so? If she's so benevolent perhaps you can let me through?",
+        "text": "I'm afraid not, given your intention to duel her.",
         "options": [
           {
-            "name": "What do I need to do to get passed though this gate?",
-            "text": "To show you are worthy, you must prove your strength by defeating at least four of the five enemies lurking within this dungeon to be worthy of an audience with my illustrious master, who holds dominion over this realm of the holy.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.",
+            "name": "What do I need to do to get though this gate?",
+            "text": "To show you are worthy, you must prove your strength by defeating her four holy guardians.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.",
             "options": [
               {
                 "name": "I'll show my worth, just make sure to open the gate when I do defeat your challengers.",
