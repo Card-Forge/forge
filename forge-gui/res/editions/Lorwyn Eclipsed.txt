@@ -9,7 +9,9 @@ ScryfallCode=ECL
 13 M Eirdu, Carrier of Dawn @Lucas Graciano
 27 M Morningtide's Light @Mark Poole
 76 R Sygg, Wanderwine Wisdom @Justin Gerard
+80 C Unexpected Assistance @Gustavo Pelissari
 88 M Bitterbloom Bearer @Chris Rahn
+115 U Perfect Intimidation @Heather Hudson
 124 R Ashling, Rekindled @Ilse Gort
 176 R Formidable Speaker @Aurore Folny
 186 R Mutable Explorer @Wayne Reynolds
@@ -17,6 +19,8 @@ ScryfallCode=ECL
 212 M Deceit @Svetlin Velinov
 222 M Emptiness @Ryan Pancoast
 224 R Figure of Fable @Omar Rayyan
+229 R High Perfect Morcant @Victor Adame Minguez
+231 R Kirol, Attentive First-Year @Evyn Fong
 262 R Blood Crypt @Adam Paquette
 265 R Hallowed Fountain @Adam Paquette
 266 R Overgrown Tomb @Adam Paquette
@@ -44,3 +48,5 @@ ScryfallCode=ECL
 352 M Bitterbloom Bearer @Rebecca Guay
 366 R Formidable Speaker @Aurore Folny
 372 R Figure of Fable @Omar Rayyan
+373 R High Perfect Morcant @Victor Adame Minguez
+374 R Kirol, Attentive First-Year @Evyn Fong

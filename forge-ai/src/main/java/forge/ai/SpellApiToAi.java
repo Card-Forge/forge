@@ -38,6 +38,7 @@ public enum SpellApiToAi {
             .put(ApiType.BecomesBlocked, BecomesBlockedAi.class)
             .put(ApiType.BidLife, BidLifeAi.class)
             .put(ApiType.BlankLine, AlwaysPlayAi.class)
+            .put(ApiType.Blight, BlightAi.class)
             .put(ApiType.Bond, BondAi.class)
             .put(ApiType.Branch, BranchAi.class)
             .put(ApiType.Camouflage, ChooseCardAi.class)
