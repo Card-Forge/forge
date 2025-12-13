@@ -81,7 +81,7 @@
 		"options":
 			[
 				{
-					"name": "Jaya, I've done as you asked! It's time to end this!",
+					"name": "Jaya, I've defeated your guardians! It's time to end this!",
 					"action": [ { "deleteMapObject": 55 } ],
 					"condition": [
 						{
@@ -100,7 +100,7 @@
 					"options": [ { "name": "(continue)" } ]
 				},
 				{
-                	"name": "Lathliss, I've done as you asked! It's time to end this!",
+                	"name": "Jaya, I've defeated your guardians! It's time to end this!",
                 	"action": [ { "deleteMapObject": 55 } ],
                 	"condition": [
                 		{
@@ -233,14 +233,14 @@
     "options": [
       {
         "name": "Is that so? I guess you wouldn't mind opening that gate in front of me?",
-        "text": "I'm afraid I'm not allowed to do that, I am only a humble servant of the legendary Jaya Ballard, master of fire.",
+        "text": "Nah. Lady Jaya wouldn't appreciate you just waltzing on in without proving yourself.",
         "options": [
           {
-            "name": "What do I need to do to get passed though this gate?",
-            "text": "To show you are worthy, you must prove your strength by defeating at least four of Jaya's five lieutenants lurking within this palace in order to be worthy of an audience with my illustrious master, who holds dominion over this realm of flames.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.",
+            "name": "So how am I to do that?",
+            "text": "She's tricked four mighty warriors into guarding her. Defeat them and Jaya will be happy to burn you alive.",
             "options": [
               {
-                "name": "I'll show my worth, just make sure to open the gate when I defeat your challengers.",
+                "name": "I see you learned the art of sass from your mistress. Just make sure to open the gate when I defeat your challengers.",
                 "text": "Leave"
               }
             ]
