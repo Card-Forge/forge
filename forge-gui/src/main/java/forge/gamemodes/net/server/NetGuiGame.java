@@ -20,12 +20,12 @@ import forge.localinstance.skin.FSkinProp;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
+import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
 public class NetGuiGame extends AbstractGuiGame {
 
@@ -246,7 +246,7 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
-    public <T> List<T> getChoices(final String message, final int min, final int max, final List<T> choices, final List<T> selected, final Function<T, String> display) {
+    public <T> List<T> getChoices(final String message, final int min, final int max, final List<T> choices, final List<T> selected, final FSerializableFunction<T, String> display) {
         return sendAndWait(ProtocolMethod.getChoices, message, min, max, choices, selected, display);
     }
 
