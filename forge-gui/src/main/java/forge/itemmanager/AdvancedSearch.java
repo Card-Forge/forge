@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -47,6 +46,7 @@ import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.model.FModel;
 import forge.util.CardTranslation;
+import forge.util.FSerializableFunction;
 import forge.util.Localizer;
 
 public class AdvancedSearch {
@@ -1271,17 +1271,17 @@ public class AdvancedSearch {
 
     private static abstract class CustomListEvaluator<T extends InventoryItem, V> extends FilterEvaluator<T, V> {
         private final Collection<V> choices;
-        private final Function<V, String> toShortString, toLongString;
+        private final FSerializableFunction<V, String> toShortString, toLongString;
 
         public CustomListEvaluator(Collection<V> choices0) {
             this(choices0, null, null);
         }
 
-        public CustomListEvaluator(Collection<V> choices0, Function<V, String> toShortString0) {
+        public CustomListEvaluator(Collection<V> choices0, FSerializableFunction<V, String> toShortString0) {
             this(choices0, toShortString0, null);
         }
 
-        public CustomListEvaluator(Collection<V> choices0, Function<V, String> toShortString0, Function<V, String> toLongString0) {
+        public CustomListEvaluator(Collection<V> choices0, FSerializableFunction<V, String> toShortString0, FSerializableFunction<V, String> toLongString0) {
             choices = choices0;
             toShortString = toShortString0;
             toLongString = toLongString0;

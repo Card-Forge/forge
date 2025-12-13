@@ -145,7 +145,7 @@ public class ComputerUtilMana {
         }
 
         String[] colorsMostCommon;
-        if (manaAbilityMap.containsKey(ManaCostShard.GENERIC)) {
+        if (manaAbilityMap.keySet().stream().anyMatch(ManaCostShard::isGeneric)) {
             // early tempo is more important so we only look at hand here
             CardCollection hand = new CardCollection(sa.getActivatingPlayer().getCardsIn(ZoneType.Hand));
             hand.remove(sa.getHostCard());

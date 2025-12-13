@@ -22,12 +22,12 @@ import forge.localinstance.skin.FSkinProp;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
+import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
 public interface IGuiGame {
     void setGameView(GameView gameView);
@@ -150,7 +150,7 @@ public interface IGuiGame {
 
     <T> List<T> getChoices(String message, int min, int max, List<T> choices);
 
-    <T> List<T> getChoices(String message, int min, int max, List<T> choices, List<T> selected, Function<T, String> display);
+    <T> List<T> getChoices(String message, int min, int max, List<T> choices, List<T> selected, FSerializableFunction<T, String> display);
 
     // Get Integer in range
     Integer getInteger(String message, int min);
@@ -184,7 +184,7 @@ public interface IGuiGame {
      * @return One of {@code choices}. Can only be {@code null} if {@code choices} is empty.
      */
     <T> T one(String message, List<T> choices);
-    <T> T one(String message, List<T> choices, Function<T, String> display);
+    <T> T one(String message, List<T> choices, FSerializableFunction<T, String> display);
 
     <T> void reveal(String message, List<T> items);
 
