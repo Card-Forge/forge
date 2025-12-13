@@ -92,7 +92,7 @@
    <properties>
     <property name="enemy" value="Kobold Pyromancer" />
     <property name="threatRange" type="int" value="50" />
-   <property name="effect">{ "startBattleWithCard": [ "Fervor|WTH", "Mountain|BRB", "Smoke|LEA", "Sulfuric Vortex|SCG" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Mountain|BRB", "Smoke|LEA", "Sulfuric Vortex|SCG" ] }</property></properties>
   </object>
   <object id="82" template="../../../../../../common/maps/obj/waypoint.tx" x="819.676" y="501.765" />
   <object id="83" template="../../../../../../common/maps/obj/waypoint.tx" x="579.338" y="497.609" />

@@ -177,7 +177,7 @@
     <property name="enemy" value="Swamp Queen Tojira" />
     <property name="speedModifier" type="float" value="10" />
     <property name="threatRange" type="int" value="50" />
-   <property name="effect">{"startBattleWithCard": ["Lake of the Dead|ALL", "Everglades|VIS", "Nightstalker Engine|PO2", "Feral Shadow|MIR", "Breathstealer|MIR"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Everglades|VIS", "Nightstalker Engine|PO2", "Feral Shadow|MIR", "Breathstealer|MIR"]}</property>
     </properties>
   </object>
  </objectgroup>

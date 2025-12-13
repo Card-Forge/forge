@@ -1,8 +1,7 @@
 [metadata]
 Name=shade
 [Main]
-16 Swamp|3ED
-4 Cabal Coffers|TOR
+20 Swamp|3ED
 4 Bubbling Muck|UDS
 4 Nantuko Shade|TOR
 4 Dungeon Shade|STH
@@ -17,5 +16,5 @@ Name=shade
 4 Chainer's Edict|TOR
 
 [StartInBattle_Reference]
-3 Swamp|3ED
+1 Swamp|3ED
 1 Frozen Shade|LEA

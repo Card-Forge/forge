@@ -80,8 +80,9 @@
   </object>
   <object id="150" template="../../../../../../common/maps/obj/enemy.tx" x="307.842" y="123.772">
    <properties>
-    <property name="enemy" value="Curselord" />
+    <property name="enemy" value="King Rohgahh" />
     <property name="spawn.Hard" type="bool" value="true" />
+    <property name="effect">{ "startBattleWithCard": [ "Kobolds of Kher Keep|LEG", "Kobolds of Kher Keep|LEG", "Kobolds of Kher Keep|LEG", "Kobolds of Kher Keep|LEG", "Mountain|4ED", "Swamp|4ED", "Kobold Overlord|LEG" ] }</property>
    </properties>
   </object>
   <object id="159" template="../../../../../../common/maps/obj/booster.tx" x="335.359" y="82.7761">
@@ -114,25 +115,25 @@
    <properties>
     <property name="enemy" value="Kobold Pyromancer" />
     <property name="threatRange" type="int" value="50" />
-   <property name="effect">{ "startBattleWithCard": [ "Fervor|WTH", "Mountain|BRB", "Smoke|LEA", "Sulfuric Vortex|SCG" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Mountain|BRB", "Smoke|LEA", "Sulfuric Vortex|SCG" ] }</property></properties>
   </object>
   <object id="162" template="../../../../../../common/maps/obj/enemy.tx" x="179.289" y="106.725">
    <properties>
     <property name="enemy" value="Kobold Pyromancer" />
     <property name="threatRange" type="int" value="50" />
-   <property name="effect">{ "startBattleWithCard": [ "Fervor|WTH", "Mountain|BRB", "Smoke|LEA", "Sulfuric Vortex|SCG" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Mountain|BRB", "Smoke|LEA", "Sulfuric Vortex|SCG" ] }</property></properties>
   </object>
   <object id="163" template="../../../../../../common/maps/obj/enemy.tx" x="334.241" y="259.913">
    <properties>
     <property name="enemy" value="Kobold Pyromancer" />
     <property name="threatRange" type="int" value="50" />
-   <property name="effect">{ "startBattleWithCard": [ "Fervor|WTH", "Mountain|BRB", "Smoke|LEA", "Sulfuric Vortex|SCG" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Mountain|BRB", "Smoke|LEA", "Sulfuric Vortex|SCG" ] }</property></properties>
   </object>
   <object id="164" template="../../../../../../common/maps/obj/enemy.tx" x="180.928" y="198.735">
    <properties>
     <property name="enemy" value="Kobold Pyromancer" />
     <property name="threatRange" type="int" value="50" />
-   <property name="effect">{ "startBattleWithCard": [ "Fervor|WTH", "Mountain|BRB", "Smoke|LEA", "Sulfuric Vortex|SCG" ] }</property></properties>
+   <property name="effect">{ "startBattleWithCard": [ "Mountain|BRB", "Smoke|LEA", "Sulfuric Vortex|SCG" ] }</property></properties>
   </object>
  </objectgroup>
 </map>

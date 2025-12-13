@@ -1,22 +1,22 @@
 [metadata]
-Name=shamanelite
+Name=Portal Disciple
 [Main]
-1 Call of the Herd|ODY
-13 Mountain|ONS|3
-2 Browbeat|JUD
-2 Burning Wish|JUD
-2 Incinerate|5ED
-2 Nantuko Vigilante|LGN
-2 Naturalize|ONS
-2 Shock|ONS
-3 Grim Lavamancer|TOR
-3 Jackal Pup|TMP
-3 Mogg Fanatic|ATH
-3 Spined Sliver|STH
-3 Sulfuric Vortex|SCG
-4 Fireblast|VIS
-4 Forest|ONS|3
-4 Karplusan Forest|ICE
-4 Lightning Bolt|2ED
-4 Quirion Dryad|PLS
-4 Wooded Foothills|ONS
+12 Mountain|POR
+12 Mountain|PO2|2
+2 Goblin Firestarter|PO2
+2 Raging Goblin|POR
+2 Blaze|POR
+2 Blaze|PO2
+2 Volcanic Hammer|POR
+2 Volcanic Hammer|PO2
+2 Spitting Earth|POR
+2 Spitting Earth|PO2
+4 Fire Imp|POR
+2 Highland Giant|POR
+2 Raging Minotaur|POR
+2 Lava Axe|POR
+2 Lava Axe|PO2
+2 Thundermare|POR
+2 Ogre Arsonist|PO2
+2 Desert Drake|POR
+2 Pillaging Horde|POR

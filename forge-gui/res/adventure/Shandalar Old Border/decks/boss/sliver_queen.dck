@@ -11,11 +11,11 @@ Name=Sliver Queen
 2 Tropical Island|LEA
 2 Volcanic Island|LEB
 2 Taiga|LEA
-2 Island|LEA
-2 Swamp|LEA
-2 Mountain|LEA
-2 Forest|LEA
-2 Plains|LEA
+2 Island|PGRU
+2 Swamp|PGRU
+2 Mountain|PGRU
+2 Forest|PGRU
+2 Plains|PGRU
 2 Sliver Queen|STH
 2 Sliver Overlord|SCG
 2 Shifting Sliver|LGN
@@ -41,7 +41,6 @@ Name=Sliver Queen
 2 Coat of Arms|EXO
 
 [StartInBattle_Reference]
-1 City of Brass|ARN
+1 City of Brass|5ED
 1 Metallic Sliver|TMP
 1 Primitive Etchings|SCG
-1 Reflecting Pool|TMP

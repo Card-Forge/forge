@@ -106,7 +106,7 @@
   </object>
   <object id="54" template="../../../../../../common/maps/obj/enemy.tx" gid="11419" x="323.079" y="72.763">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Island|LEA", "Rhystic Study|PCY" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Island|PGRU", "Rhystic Study|PCY" ] }</property>
     <property name="enemy" value="Jace" />
    </properties>
   </object>

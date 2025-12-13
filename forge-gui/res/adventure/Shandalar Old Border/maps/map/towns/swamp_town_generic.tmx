@@ -21,7 +21,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy9ldENgjAQhk9IxMQ4B4nBINU3fTC+uYs4gUGdwQ10HowLMIUOYC/2Qiktoa3xTxqOlN53/xUKgL8uE7/5X+vfPF+deb2bAOA+cBvbwJ55Ej2qxNrdtDlU3cbtuLLkyh6LUHCzeh7jVwzwjs05EmbPxedX3NNa44uURv3y9BXuKT3flbuU5hYJwDJpxy5+Kbcpp8xNDbEP15RT5j54fB1+x2Hkz93zHDkfLKrvKSbujDVrQFFfXLm0Hnnk56lw51HTI4r64srVvVelwqWaMk2vffqMebC36AuvKleuRz3b6Nu35ZKQjx5ov9FbLvWePNr6U3UMu89cnTcbf4XDf6oSXF9vH2vxWHM=
+   eJxjYKAcNPJSJk9tQG/7KAUNQPc6MDEwLGYkDzsxkW5nPTSM7kL1emqhYnSwiBuTfZdEe5H9WMcMtdcQIQ9if1ZnYPiijtsMHSPS7QWptwb6yQaLv2BAn504c4gFDUhpEJ/ZZ5HkjHUYGEx0MNnk+BdmNi4zke3Vx8GmxF5cZiLbew7InswGwXkclNubAzQjF4iN2BF8GBtmr64RqhtAABYu5NoL0w+yD+afC2j2GrCj+hEEYOFCrr3Y0tVZNHthbjLEEtaUhDPIHFDYgvwFotHtRXYPetkGy/uk2gsDIPtBfoDFN8hvuUhhD/Mjqf5DBzXM+MtcbH4jxX91ZNRTd6H2Uuo3AGfTV5Q=
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="30" height="17">
@@ -33,50 +33,17 @@
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="208" y="272"/>
   <object id="41" template="../../../../../../common/maps/obj/shop.tx" x="129" y="146">
    <properties>
-    <property name="commonShopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,BlackBoosterPackShop,Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,PhyrexianBlack"/>
-    <property name="rareShopList" value="Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle,Colorless"/>
-    <property name="uncommonShopList" value="Artifact,Vampire,Zombie,Skeleton,Demon,Knight4Black,Rogue4Black,Sliver2Black,Wand,Equip,Multicolor"/>
+    <property name="commonShopList" value="Black1,Black2"/>
    </properties>
   </object>
   <object id="42" template="../../../../../../common/maps/obj/shop.tx" x="177" y="145">
    <properties>
-    <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,PhyrexianBlack"/>
-    <property name="rareShopList" value="Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle,Colorless"/>
-    <property name="uncommonShopList" value="Artifact,Vampire,Zombie,Skeleton,Demon,Knight4Black,Rogue4Black,Sliver2Black,Wand,Equip,Multicolor"/>
+    <property name="commonShopList" value="AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop"/>
    </properties>
   </object>
   <object id="43" template="../../../../../../common/maps/obj/shop.tx" x="321" y="129">
    <properties>
-    <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,PhyrexianBlack"/>
-    <property name="rareShopList" value="Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle,Colorless"/>
-    <property name="uncommonShopList" value="Artifact,Vampire,Zombie,Skeleton,Demon,Knight4Black,Rogue4Black,Sliver2Black,Wand,Equip,Multicolor"/>
-   </properties>
-  </object>
-  <object id="44" template="../../../../../../common/maps/obj/shop.tx" x="114" y="194">
-   <properties>
-    <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,PhyrexianBlack"/>
-    <property name="rareShopList" value="Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle,Colorless"/>
-    <property name="uncommonShopList" value="Artifact,Vampire,Zombie,Skeleton,Demon,Knight4Black,Rogue4Black,Sliver2Black,Wand,Equip,Multicolor"/>
-   </properties>
-  </object>
-  <object id="45" template="../../../../../../common/maps/obj/shop.tx" x="273" y="130">
-   <properties>
-    <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,PhyrexianBlack"/>
-    <property name="rareShopList" value="Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle,Colorless"/>
-    <property name="uncommonShopList" value="Artifact,Vampire,Zombie,Skeleton,Demon,Knight4Black,Rogue4Black,Sliver2Black,Wand,Equip,Multicolor"/>
-   </properties>
-  </object>
-  <object id="46" template="../../../../../../common/maps/obj/shop.tx" x="337" y="177">
-   <properties>
-    <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,PhyrexianBlack"/>
-    <property name="rareShopList" value="Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle,Colorless"/>
-    <property name="uncommonShopList" value="Artifact,Vampire,Zombie,Skeleton,Demon,Knight4Black,Rogue4Black,Sliver2Black,Wand,Equip,Multicolor"/>
+    <property name="commonShopList" value="ColorRandomBlack"/>
    </properties>
   </object>
   <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="230" y="98"/>
@@ -89,24 +56,6 @@
   <object id="51" template="../../../../../../common/maps/obj/quest.tx" x="95" y="114" width="35" height="16">
    <properties>
     <property name="questtype" value="swamp_town_generic"/>
-   </properties>
-  </object>
-  <object id="52" template="../../../../../../common/maps/obj/shop.tx" x="201" y="88">
-   <properties>
-    <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,PhyrexianBlack"/>
-    <property name="rareShopList" value="Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle,Colorless"/>
-    <property name="signXOffset" type="float" value="-4"/>
-    <property name="uncommonShopList" value="Artifact,Vampire,Zombie,Skeleton,Demon,Knight4Black,Rogue4Black,Sliver2Black,Wand,Equip,Multicolor"/>
-   </properties>
-  </object>
-  <object id="53" template="../../../../../../common/maps/obj/shop.tx" x="167" y="88">
-   <properties>
-    <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,PhyrexianBlack"/>
-    <property name="rareShopList" value="Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle,Colorless"/>
-    <property name="signXOffset" type="float" value="4"/>
-    <property name="uncommonShopList" value="Artifact,Vampire,Zombie,Skeleton,Demon,Knight4Black,Rogue4Black,Sliver2Black,Wand,Equip,Multicolor"/>
    </properties>
   </object>
  </objectgroup>

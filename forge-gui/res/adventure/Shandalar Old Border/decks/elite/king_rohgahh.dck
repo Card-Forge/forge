@@ -1,0 +1,22 @@
+[metadata]
+Name=King Rohgahh
+[Main]
+14 Mountain|MIR
+6 Swamp|MIR
+4 Sulfuric Vortex|SCG
+4 Crimson Kobolds|LEG
+4 Crookshank Kobolds|LEG
+4 Kobolds of Kher Keep|LEG
+4 Kobold Overlord|LEG
+4 Kobold Taskmaster|LEG
+4 Kobold Drill Sergeant|LEG
+4 Rohgahh of Kher Keep|LEG
+2 Orgg|FEM
+2 Ogre Enforcer|VIS
+4 Incinerate|MIR
+4 Terror|4ED
+[StartInBattle_Reference]
+4 Kobolds of Kher Keep|LEG
+1 Mountain|4ED
+1 Swamp|4ED
+1 Kobold Overlord|LEG

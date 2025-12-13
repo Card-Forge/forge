@@ -33,56 +33,17 @@
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="256" y="271"/>
   <object id="41" template="../../../../../../common/maps/obj/shop.tx" x="304" y="98">
    <properties>
-    <property name="commonShopList" value="Merfolk,Wizard,Bird4Blue,Sliver2Blue,
-    Rogue4Blue,Spirit4Blue,Pirate4Blue"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Blue,Mutants"/>
-    <property name="rareShopList" value="Azorius,Izzet,Simic,Dimir,Creature6Blue,Multicolor,Land4Blue,PhyrexianBlue,Mutants,Horrors,Shapeshifter,Sphinx,LargeSeaCreatures"/>
-    <property name="uncommonShopList" value="Creature2Blue,Creature,Blue"/>
+    <property name="commonShopList" value="Merfolk,Faerie,Wizard,Serpent,Pirate,Rogue,Shapeshifter,Cephalid"/>
    </properties>
   </object>
   <object id="42" template="../../../../../../common/maps/obj/shop.tx" x="368" y="162">
    <properties>
-    <property name="commonShopList" value="Merfolk,Wizard,Bird4Blue,Sliver2Blue,
-    Rogue4Blue,Spirit4Blue,Pirate4Blue"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Blue,Mutants"/>
-    <property name="rareShopList" value="Azorius,Izzet,Simic,Dimir,Creature6Blue,Multicolor,Land4Blue,PhyrexianBlue,Mutants,Horrors,Shapeshifter,Sphinx,LargeSeaCreatures"/>
-    <property name="uncommonShopList" value="Creature2Blue,Creature,Blue"/>
+    <property name="commonShopList" value="AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop"/>
    </properties>
   </object>
   <object id="43" template="../../../../../../common/maps/obj/shop.tx" x="353" y="98">
    <properties>
-    <property name="commonShopList" value="Merfolk,Wizard,Bird4Blue,Sliver2Blue,
-    Rogue4Blue,Spirit4Blue,Pirate4Blue"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Blue,Mutants"/>
-    <property name="rareShopList" value="Azorius,Izzet,Simic,Dimir,Creature6Blue,Multicolor,Land4Blue,PhyrexianBlue,Mutants,Horrors,Shapeshifter,Sphinx,LargeSeaCreatures"/>
-    <property name="uncommonShopList" value="Creature2Blue,Creature,Blue"/>
-   </properties>
-  </object>
-  <object id="44" template="../../../../../../common/maps/obj/shop.tx" x="208" y="162">
-   <properties>
-    <property name="commonShopList" value="Merfolk,Wizard,Bird4Blue,Sliver2Blue,
-    Rogue4Blue,Spirit4Blue,Pirate4Blue"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Blue,Mutants"/>
-    <property name="rareShopList" value="Azorius,Izzet,Simic,Dimir,Creature6Blue,Multicolor,Land4Blue,PhyrexianBlue,Mutants,Horrors,Shapeshifter,Sphinx,LargeSeaCreatures"/>
-    <property name="uncommonShopList" value="Creature2Blue,Creature,Blue"/>
-   </properties>
-  </object>
-  <object id="45" template="../../../../../../common/maps/obj/shop.tx" x="304" y="162">
-   <properties>
-    <property name="commonShopList" value="Merfolk,Wizard,Bird4Blue,Sliver2Blue,
-    Rogue4Blue,Spirit4Blue,Pirate4Blue"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Blue,Mutants"/>
-    <property name="rareShopList" value="Azorius,Izzet,Simic,Dimir,Creature6Blue,Multicolor,Land4Blue,PhyrexianBlue,Mutants,Horrors,Shapeshifter,Sphinx,LargeSeaCreatures"/>
-    <property name="uncommonShopList" value="Creature2Blue,Creature,Blue"/>
-   </properties>
-  </object>
-  <object id="46" template="../../../../../../common/maps/obj/shop.tx" x="336" y="162">
-   <properties>
-    <property name="commonShopList" value="Merfolk,Wizard,Bird4Blue,Sliver2Blue,
-    Rogue4Blue,Spirit4Blue,Pirate4Blue"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Blue,Mutants"/>
-    <property name="rareShopList" value="Azorius,Izzet,Simic,Dimir,Creature6Blue,Multicolor,Land4Blue,PhyrexianBlue,Mutants,Horrors,Shapeshifter,Sphinx,LargeSeaCreatures"/>
-    <property name="uncommonShopList" value="Creature2Blue,Creature,Blue"/>
+    <property name="commonShopList" value="ColorRandomBlue"/>
    </properties>
   </object>
   <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="215" y="82"/>
@@ -97,23 +58,5 @@
    </properties>
   </object>
   <object id="53" template="../../../../../../common/maps/obj/shardtrader.tx" x="398" y="178"/>
-  <object id="55" template="../../../../../../common/maps/obj/shop.tx" x="168" y="82">
-   <properties>
-    <property name="commonShopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,BlueBoosterPackShop,Merfolk,Wizard,Bird4Blue,Sliver2Blue,
-    Rogue4Blue,Spirit4Blue,Pirate4Blue"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Blue"/>
-    <property name="rareShopList" value="Azorius,Izzet,Simic,Dimir,Creature6Blue,Multicolor,Land4Blue,PhyrexianBlue"/>
-    <property name="uncommonShopList" value="Creature2Blue,Creature,Blue"/>
-   </properties>
-  </object>
-  <object id="56" template="../../../../../../common/maps/obj/shop.tx" x="256" y="66">
-   <properties>
-    <property name="commonShopList" value="Merfolk,Wizard,Bird4Blue,Sliver2Blue,
-    Rogue4Blue,Spirit4Blue,Pirate4Blue"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Blue,Mutants"/>
-    <property name="rareShopList" value="Azorius,Izzet,Simic,Dimir,Creature6Blue,Multicolor,Land4Blue,PhyrexianBlue,Mutants,Horrors,Shapeshifter,Sphinx,LargeSeaCreatures"/>
-    <property name="uncommonShopList" value="Creature2Blue,Creature,Blue"/>
-   </properties>
-  </object>
  </objectgroup>
 </map>

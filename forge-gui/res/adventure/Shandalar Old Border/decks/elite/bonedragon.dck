@@ -1,23 +1,25 @@
 [metadata]
-Name=bonedragon
+Name=Bone Dragon
 [Main]
-16 Mountain|LEB|3
-2 Fireblast|VIS
-4 Carrion Feeder|SCG
-4 Dragon Whelp|LEB
-4 Incinerate|ICE
-4 Lightning Bolt|LEA
-4 Rathi Dragon|TMP
-4 Shivan Dragon|3ED
+10 Mountain|LEB|3
+10 Swamp|LEB|3
 4 Sulfurous Springs|ICE
-4 Swamp|LEB|3
-4 Unholy Strength|LEB
-4 Volcanic Dragon|S99
-4 Zombie Infestation|ODY
+2 Bladewing the Risen|SCG
+2 Volcanic Dragon|MIR
+2 Catacomb Dragon|MIR
+2 Ebon Dragon|POR
+2 Shivan Dragon|7ED
+2 Fledgling Dragon|JUD
+2 Incinerate|ICE
+2 Fire Covenant|ICE
+2 Torrent of Fire|SCG
+4 Drudge Skeletons|LEB
+2 Vampiric Dragon|ODY
+4 Wall of Bone|LEA
+4 Duress|7ED
+4 Dark Ritual|LEB
 
 [StartInBattle_Reference]
 1 Bladewing's Thrall|SCG
 1 Dragonspeaker Shaman|SCG
-1 Dwarven Ruins|FEM
-1 Ebon Stronghold|FEM
 1 Wall of Bone|LEA

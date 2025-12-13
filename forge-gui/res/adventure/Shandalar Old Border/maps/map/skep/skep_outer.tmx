@@ -715,22 +715,6 @@
   <object id="246" template="../../../../../../common/maps/obj/waypoint.tx" x="144.667" y="992.333" />
   <object id="247" template="../../../../../../common/maps/obj/waypoint.tx" x="144" y="975" />
   <object id="248" template="../../../../../../common/maps/obj/waypoint.tx" x="114" y="976" />
-  <object id="249" template="../../../../../../common/maps/obj/gate.tx" x="481" y="1192">
-   <properties>
-    <property name="dialog">[{
-    "text":"This gate is locked",
-    "options":[
-    { "name":"go away" },
-    {      
-        "name":"unlock with Outer Gate Key",     
-        "condition":[{"item":"Outer Gate Key"}],    
-        "text":"The gate is unlocked",
-        "options":[{"name":"continue", "action":[ {"deleteMapObject":-1},{"removeItem":"Outer Gate Key"}]} ]
-    }
-    ]
-}]</property>
-   </properties>
-  </object>
   <object id="250" template="../../../../../../common/maps/obj/enemy.tx" x="550.667" y="1260.67" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[

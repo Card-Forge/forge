@@ -32,38 +32,18 @@
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="240" y="272"/>
   <object id="41" template="../../../../../../common/maps/obj/shop.tx" x="129" y="82">
    <properties>
-    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf"/>
+    <property name="commonShopList" value="Elf,Beast,Druid,Animals,Plant,Bear,Insects,Wurm,Kavu"/>
    </properties>
   </object>
   <object id="42" template="../../../../../../common/maps/obj/shop.tx" x="304" y="114">
    <properties>
-    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
-   </properties>
-  </object>
-  <object id="43" template="../../../../../../common/maps/obj/shop.tx" x="352" y="162">
-   <properties>
-    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
-   </properties>
-  </object>
-  <object id="44" template="../../../../../../common/maps/obj/shop.tx" x="177" y="81">
-   <properties>
-    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf"/>
-   </properties>
-  </object>
-  <object id="45" template="../../../../../../common/maps/obj/shop.tx" x="240" y="129">
-   <properties>
-    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
-   </properties>
-  </object>
-  <object id="46" template="../../../../../../common/maps/obj/shop.tx" x="368" y="226">
-   <properties>
-    <property name="shopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,GreenBoosterPackShop,Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf"/>
+    <property name="commonShopList" value="ColorRandomGreen"/>
    </properties>
   </object>
   <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="137" y="162"/>
   <object id="48" template="../../../../../../common/maps/obj/shop.tx" x="304" y="48">
    <properties>
-    <property name="shopList" value="Forest"/>
+    <property name="commonShopList" value="Forest"/>
    </properties>
   </object>
  </objectgroup>

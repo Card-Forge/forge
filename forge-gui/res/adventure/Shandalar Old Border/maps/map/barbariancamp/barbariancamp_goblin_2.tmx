@@ -72,7 +72,7 @@
     <property name="enemy" value="Goblin King Phil"/>
     <property name="speedModifier" type="float" value="6"/>
     <property name="threatRange" type="int" value="40"/>
-   <property name="effect">{"startBattleWithCard": ["Mountain|UGL", "Island|UGL", "Swamp|UGL", "Runed Arch|ICE", "Conch Horn|FEM", "Orcish Librarian|ICE", "Sunstone|ICE", "Goblin Digging Team|5ED", "Goblin Chirurgeon|FEM|2", "Browse|ALL"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Sulfurous Springs|ICE", "Island|UGL", "Runed Arch|ICE", "Conch Horn|FEM", "Orcish Librarian|ICE", "Goblin Digging Team|5ED", "Goblin Chirurgeon|FEM|2"]}</property>
    </properties>
   </object>
   <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="147" y="136.667">

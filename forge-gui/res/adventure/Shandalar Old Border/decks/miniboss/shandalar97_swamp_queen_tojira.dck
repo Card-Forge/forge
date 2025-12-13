@@ -1,15 +1,15 @@
 [metadata]
 Name=Swamp Queen Tojira
 [Main]
-20 Swamp|2ED
+22 Swamp|PO2|3
 2 Lurking Nightstalker|PO2
 2 Urborg Panther|MIR
 2 Raiding Nightstalker|PO2
 2 Abyssal Nightstalker|PO2
-4 Prowling Nightstalker|PO2
+3 Prowling Nightstalker|PO2
 2 Brutal Nightstalker|PO2
 2 Nightstalker Engine|PO2
-4 Predatory Nightstalker|PO2
+3 Predatory Nightstalker|PO2
 2 Spirit of the Night|MIR
 2 Shimian Night Stalker|LEG
 2 Return of the Nightstalkers|PO2
@@ -22,7 +22,6 @@ Name=Swamp Queen Tojira
 2 Bloodcurdling Scream|PO2
 
 [StartInBattle_Reference]
-1 Lake of the Dead|ALL
 1 Everglades|VIS
 1 Nightstalker Engine|PO2
 1 Feral Shadow|MIR

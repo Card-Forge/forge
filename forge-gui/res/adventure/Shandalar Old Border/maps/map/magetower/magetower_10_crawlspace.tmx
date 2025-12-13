@@ -5,7 +5,7 @@
  </editorsettings>
  <properties>
   <property name="dungeonEffect">{
-  "startBattleWithCard": [ "Crawlspace|ULG|1" ],
+  "startBattleWithCard": [ "Back to Basics|USG", "Heightened Awareness|PCY", "Future Sight|ONS" ]
 }</property>
  </properties>
  <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
@@ -77,30 +77,22 @@
 ]</property>
    </properties>
   </object>
-  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" gid="11419" x="288.527" y="172.914" rotation="0">
+  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" gid="11419" x="104.079" y="123.763">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Island|2ED", "Mountain|2ED", "Phyrexian Tyranny|PLS", "Swamp|2ED" ] }</property>
-    <property name="enemy" value="Archmage" />
-   </properties>
-  </object>
-  <object id="51" template="../../../../../../common/maps/obj/enemy.tx" gid="11419" x="183.579" y="127.263">
-   <properties>
-    <property name="enemy" value="Symbiote" />
+    <property name="effect">{ "startBattleWithCard": [ "Sylvan Yeti|PO2", "Library of Leng|LEA" ] }</property>
+    <property name="enemy" value="Recaller of Ancestry" />
    </properties>
   </object>
   <object id="54" template="../../../../../../common/maps/obj/enemy.tx" gid="11419" x="210.079" y="173.263">
    <properties>
-    <property name="enemy" value="Merfolk Avatar" />
+    <property name="effect">{ "startBattleWithCard": [ "Underworld Dreams|LEG" ] }</property>
+    <property name="enemy" value="Twister of Time" />
    </properties>
   </object>
-  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="104.079" y="123.763">
+  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" gid="11419" x="288.527" y="172.914" rotation="0">
    <properties>
-    <property name="enemy" value="Adept Blue Wizard" />
-   </properties>
-  </object>
-  <object id="52" template="../../../../../../common/maps/obj/enemy.tx" x="104.184" y="214.079">
-   <properties>
-    <property name="enemy" value="Illusionist" />
+    <property name="effect">{ "startBattleWithCard": [ "Covert Operative|LGN" ] }</property>
+    <property name="enemy" value="Time Walker" />
    </properties>
   </object>
   <object id="58" template="../../../../../../common/maps/obj/manashards.tx" x="105" y="91.6667" />

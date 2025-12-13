@@ -48,8 +48,8 @@
   </object>
   <object id="85" template="../../../../../../common/maps/obj/enemy.tx" x="328.022" y="216.915">
    <properties>
+    <property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN", "Keeper of Kookus|VIS" ] }</property>
     <property name="enemy" value="Djinn" />
-   <property name="effect">{"startBattleWithCard": ["Island|LEA", "Mountain|ARN", "Swamp|LEA", "Aladdin's Lamp|ARN", "Keeper of Kookus|VIS"]}</property>
    </properties>
   </object>
  </objectgroup>

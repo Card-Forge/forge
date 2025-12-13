@@ -76,7 +76,7 @@
 		]
 	}
 ]</property>
-    <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP|1", "Swamp|TMP|2", "Swamp|TMP|3", "Urborg Stalker|WTH" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP|1", "Urborg Stalker|WTH" ] }</property>
     <property name="enemy" value="Demon of Tibalt" />
     <property name="threatRange" type="int" value="60" />
     <property name="waypoints" value="208,198,210,209" />

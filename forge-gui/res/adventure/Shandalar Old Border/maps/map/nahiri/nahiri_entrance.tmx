@@ -84,7 +84,7 @@
   </object>
   <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="176" y="107.5">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Plains|PALP", "Plains|PALP", "Plains|PALP", "Lin Sivvi, Defiant Hero|NMS", "Cho-Manno, Revolutionary|MMQ" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Plains|PALP", "Lin Sivvi, Defiant Hero|NMS", "Cho-Manno, Revolutionary|MMQ" ] }</property>
     <property name="enemy" value="Nahiri" />
    </properties>
   </object>
