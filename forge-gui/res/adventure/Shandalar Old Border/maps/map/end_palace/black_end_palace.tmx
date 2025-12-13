@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+e<?xml version='1.0' encoding='utf-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="87">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx" />
@@ -74,7 +74,7 @@
 		"options":
 			[
 				{
-					"name": "Yawgmoth, I've done as you asked! It's time to end this!",
+					"name": "Yawgmoth, your guardians have fallen! It's time to end this!",
 					"action": [ { "deleteMapObject": 55 } ],
 					"condition": [
 						{
@@ -93,7 +93,7 @@
 					"options": [ { "name": "(continue)" } ]
 				},
 				{
-                	"name": "Griselbrand, I've done as you asked! It's time to end this!",
+                	"name": "Yawgmoth, your guardians have fallen! It's time to end this!",
                 	"action": [ { "deleteMapObject": 55 } ],
                 	"condition": [
                 	{
@@ -252,7 +252,7 @@
         "options": [
           {
             "name": "What do I need to do to get passed though this gate?",
-            "text": "To show you are worthy, you must prove your strength by defeating at least four of Yawgmoth's five lieutenants lurking within this cursed palace to be worthy of an audience with my illustrious master, who holds dominion over this realm of darkness. Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.",
+            "text": "To show you are worthy, you must prove your strength by defeating all four of Yawgmoth's lieutenants lurking within this cursed palace to be worthy of an audience with my illustrious master, who holds dominion over this realm of darkness. Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.",
             "options": [
               {
                 "name": "I'll show my worth, just make sure to open the gate when I defeat your challengers.",
