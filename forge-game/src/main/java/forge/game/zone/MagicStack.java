@@ -633,6 +633,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 // 702.102e: if its target is illegal, the effect making it an Aura spell ends.
                 // It continues resolving as a creature spell.
                 source.unanimateBestow();
+                game.getAction().checkStaticAbilities(false);
                 SpellAbility first = source.getFirstSpellAbility();
                 // need to set activating player
                 first.setActivatingPlayer(sa.getActivatingPlayer());
