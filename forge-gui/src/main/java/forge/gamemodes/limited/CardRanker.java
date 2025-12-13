@@ -7,6 +7,7 @@ import forge.card.ColorSet;
 import forge.card.DeckHints;
 import forge.card.MagicColor;
 import forge.item.PaperCard;
+import forge.model.FModel;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
@@ -150,6 +151,15 @@ public class CardRanker {
                 }
             } else {
                 rkg = DraftRankCache.getRanking(card.getName(), card.getEdition());
+                if(rkg == null){
+                    List<PaperCard> cardList = FModel.getMagicDb().getCommonCards().getAllCards(card.getName());
+                    for(PaperCard currentCard : cardList){
+                        rkg = DraftRankCache.getRanking(currentCard.getName(), currentCard.getEdition());
+                        if(rkg != null){
+                            break;
+                        }
+                    }
+                }
             }
 
             // Convert to a score from 0-100 where higher is better.
