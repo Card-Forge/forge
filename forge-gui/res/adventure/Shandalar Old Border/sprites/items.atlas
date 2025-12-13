@@ -967,3 +967,30 @@ ChristmasGift
 LumpOfCoal
   xy: 240, 944
   size: 16, 16
+AnaSpellbook
+  xy: 144, 704
+  size: 16, 16
+CetaSpellbook
+  xy: 128, 704
+  size: 16, 16
+DegaSpellbook
+  xy: 80, 704
+  size: 16, 16
+NecraSpellbook
+  xy: 96, 704
+  size: 16, 16
+RakaSpellbook
+  xy: 112, 704
+  size: 16, 16
+JalumTome
+  xy: 32, 688
+  size: 16, 16
+JayemdaeTome
+  xy: 32, 656
+  size: 16, 16
+FoolsTome
+  xy: 64, 688
+  size: 16, 16
+CrookedScales
+  xy: 128, 768
+  size: 16, 16

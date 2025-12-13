@@ -37234,5 +37234,113 @@
       "Humanoid",
       "Elf"
     ]
+  },
+  {
+    "name": "Bazaar Keeper",
+    "sprite": "sprites/enemy/humanoid/conjurer.atlas",
+    "deck": [
+      "decks/boss/bazaarkeeper.dck"
+    ],
+    "boss": true,
+    "life": 30,
+    "gamesPerMatch": 3,
+    "rewards": [
+      {
+        "type": "gold",
+        "probability": 1,
+        "count": 5000,
+        "addMaxCount": 5000
+      },
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Crooked Scales"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Bazaar of Baghdad|ARN"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Bazaar of Wonders|MIR"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Anavolver|APC"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Cetavolver|APC"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Degavolver|APC"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Necravolver|APC"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Rakavolver|APC"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Gem Bazaar|PAST"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Lightning Angel|APC"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Overgrown Estate|APC"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Fervent Charge|APC"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Fungal Shambler|APC"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Guided Passage|APC"
+      }
+    ],
+    "colors": "WUBRG",
+    "questTags": [
+      "Humanoid",
+      "Merchant",
+      "Boss"
+    ]
   }
 ]

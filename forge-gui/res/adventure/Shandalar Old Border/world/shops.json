@@ -1710,5 +1710,20 @@
 		"sprite": "BoosterShop",
 		"restockPrice": 5,
 		"rewards": [ { "type": "cardPackShop", "count": 8, "startDate": 2000, "endDate": 2003 } ]
+	  },
+	  {
+		"name": "BookStore",
+		"spriteAtlas": "maps/tileset/buildings.atlas",
+		"sprite": "LegendShop",
+		"rewards": [
+			{ "type": "item", "count": 1, "itemName": "Ana Spellbook" },
+			{ "type": "item", "count": 1, "itemName": "Ceta Spellbook" },
+			{ "type": "item", "count": 1, "itemName": "Dega Spellbook" },
+			{ "type": "item", "count": 1, "itemName": "Necra Spellbook" },
+			{ "type": "item", "count": 1, "itemName": "Raka Spellbook" },
+			{ "type": "item", "count": 1, "itemName": "Jalum Tome" },
+			{ "type": "item", "count": 1, "itemName": "Jayemdae Tome" },
+			{ "type": "item", "count": 1, "itemName": "Fool's Tome" }
+		]
 	  }
 	]

@@ -2768,5 +2768,104 @@
         "Charcoal Diamond|MIR"
       ]
     }
+  },
+  {
+    "name": "Ana Spellbook",
+    "description": "Start with Ana Disciple in play.",
+    "equipmentSlot": "Right",
+    "iconName": "AnaSpellbook",
+    "effect": {
+      "startBattleWithCard": [
+        "Ana Disciple|APC"
+      ]
+    }
+  },
+  {
+    "name": "Ceta Spellbook",
+    "description": "Start with Ceta Disciple in play.",
+    "equipmentSlot": "Right",
+    "iconName": "CetaSpellbook",
+    "effect": {
+      "startBattleWithCard": [
+        "Ceta Disciple|APC"
+      ]
+    }
+  },
+  {
+    "name": "Dega Spellbook",
+    "description": "Start with Dega Disciple in play.",
+    "equipmentSlot": "Right",
+    "iconName": "DegaSpellbook",
+    "effect": {
+      "startBattleWithCard": [
+        "Dega Disciple|APC"
+      ]
+    }
+  },
+  {
+    "name": "Necra Spellbook",
+    "description": "Start with Necra Disciple in play.",
+    "equipmentSlot": "Right",
+    "iconName": "NecraSpellbook",
+    "effect": {
+      "startBattleWithCard": [
+        "Necra Disciple|APC"
+      ]
+    }
+  },
+  {
+    "name": "Raka Spellbook",
+    "description": "Start with Raka Disciple in play.",
+    "equipmentSlot": "Right",
+    "iconName": "RakaSpellbook",
+    "effect": {
+      "startBattleWithCard": [
+        "Raka Disciple|APC"
+      ]
+    }
+  },
+  {
+    "name": "Jalum Tome",
+    "description": "Pay 2 and tap to draw a card, then discard a card.",
+    "equipmentSlot": "Left",
+    "iconName": "JalumTome",
+    "effect": {
+      "startBattleWithCard": [
+        "Jalum Tome|7ED"
+      ]
+    }
+  },
+  {
+    "name": "Jayemdae Tome",
+    "description": "Pay 4 and tap to draw a card.",
+    "equipmentSlot": "Left",
+    "iconName": "JayemdaeTome",
+    "effect": {
+      "startBattleWithCard": [
+        "Jayemdae Tome|4ED"
+      ]
+    }
+  },
+  {
+    "name": "Fool's Tome",
+    "description": "Pay 4 and tap to draw a card. Skip your next draw step.",
+    "equipmentSlot": "Left",
+    "iconName": "FoolsTome",
+    "effect": {
+      "startBattleWithCard": [
+        "Fool's Tome|TMP"
+      ]
+    }
+  },
+  {
+    "name": "Crooked Scales",
+    "description": "Pay 3 and tap to flip a coin. Win: destroy target creature. Lose: opponent may destroy one of yours.",
+    "equipmentSlot": "Left",
+    "iconName": "CrookedScales",
+    "effect": {
+      "startBattleWithCard": [
+        "Crooked Scales|MMQ"
+      ]
+    }
   }
 ]

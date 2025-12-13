@@ -4219,5 +4219,21 @@
 			"Debug",
 			"Testing"
 		]
+	},
+	{
+		"name": "Bazaar of Wonders",
+		"displayName": "Bazaar of Wonders",
+		"type": "town",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Building25",
+		"map": "../Shandalar Old Border/maps/map/towns/bazaar_of_wonders.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Boss",
+			"Merchant",
+			"BiomeColorless",
+			"Sidequest"
+		]
 	}
 ]
