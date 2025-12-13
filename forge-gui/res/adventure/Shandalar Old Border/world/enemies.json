@@ -37112,5 +37112,127 @@
       }
     ],
     "colors": "U"
+  },
+  {
+    "name": "Krampus",
+    "sprite": "sprites/enemy/fiend/abyssalbaron.atlas",
+    "deck": [
+      "decks/elite/krampus.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "speed": 25,
+    "scale": 1.4,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Lump of Coal"
+      }
+    ],
+    "colors": "BR",
+    "questTags": [
+      "Fiend",
+      "Aggressive",
+      "Unholy"
+    ]
+  },
+  {
+    "name": "Santa",
+    "sprite": "sprites/enemy/humanoid/human/wizard/red_wiz2.atlas",
+    "deck": [
+      "decks/elite/santa.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "speed": 20,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "item",
+        "probability": 1,
+        "count": 1,
+        "itemName": "Christmas Gift"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Dream Thrush|INV"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Carrier Pigeons|ALL"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Zodiac Rooster|PTK"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Battle Screech|JUD"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Sol Ring|LEA"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Rukh Egg|ARN"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Birds of Paradise|7ED"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Krazy Kow|UGL"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "The Lady of the Mountain|LEG"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Lord of the Pit|LEA"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Elvish Piper|UDS"
+      },
+      {
+        "type": "card",
+        "probability": 1,
+        "count": 1,
+        "cardName": "Goblin War Drums|FEM"
+      }
+    ],
+    "colors": "RG",
+    "questTags": [
+      "Humanoid",
+      "Elf"
+    ]
   }
 ]

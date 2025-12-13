@@ -961,3 +961,9 @@ Aeolipile
 SwordOfTheChosen
   xy: 224, 736
   size: 16, 16
+ChristmasGift
+  xy: 48, 624
+  size: 16, 16
+LumpOfCoal
+  xy: 240, 944
+  size: 16, 16

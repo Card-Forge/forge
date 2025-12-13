@@ -2743,5 +2743,30 @@
         "Aeolipile|FEM"
       ]
     }
+  },
+  {
+    "name": "Christmas Gift",
+    "description": "Start with Jack-in-the-Mox in play. -1 starting hand.",
+    "equipmentSlot": "Left",
+    "iconName": "ChristmasGift",
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Jack-in-the-Mox|UGL"
+      ]
+    }
+  },
+  {
+    "name": "Lump of Coal",
+    "description": "Start with Charcoal Diamond in play. -1 starting hand, -2 life.",
+    "equipmentSlot": "Left",
+    "iconName": "LumpOfCoal",
+    "effect": {
+      "changeStartCards": -1,
+      "lifeModifier": -2,
+      "startBattleWithCard": [
+        "Charcoal Diamond|MIR"
+      ]
+    }
   }
 ]

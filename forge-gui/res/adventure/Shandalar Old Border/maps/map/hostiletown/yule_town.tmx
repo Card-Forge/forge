@@ -84,14 +84,14 @@
   </object>
   <object id="60" template="../../../../../../common/maps/obj/enemy.tx" x="354.5" y="331.5">
    <properties>
-    <property name="enemy" value="Penguin"/>
-    <property name="threatRange" type="int" value="30"/>
+    <property name="enemy" value="Krampus"/>
+    <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
   <object id="61" template="../../../../../../common/maps/obj/enemy.tx" x="288.5" y="162">
    <properties>
-    <property name="enemy" value="Penguin"/>
-    <property name="threatRange" type="int" value="30"/>
+    <property name="enemy" value="Santa"/>
+    <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="79,81,79,76,79"/>
    </properties>
   </object>
