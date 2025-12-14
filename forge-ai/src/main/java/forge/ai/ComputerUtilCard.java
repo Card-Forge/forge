@@ -566,6 +566,9 @@ public class ComputerUtilCard {
     public static int evaluateCreature(final Card c) {
         return creatureEvaluator.evaluateCreature(c);
     }
+    public static int evaluateCreature(final Card c, final boolean considerPT, final boolean considerCMC) {
+        return creatureEvaluator.evaluateCreature(c, considerPT, considerCMC);
+    }
     public static int evaluateCreature(final SpellAbility sa) {
         final Card host = sa.getHostCard();
 
@@ -580,16 +583,13 @@ public class ComputerUtilCard {
             host.setState(sa.getCardStateName(), false);
         }
 
-        int eval = evaluateCreature(host);
+        int eval = evaluateCreature(host, true, false);
 
         if (currentState != null) {
             host.setState(currentState, false);
         }
 
         return eval;
-    }
-    public static int evaluateCreature(final Card c, final boolean considerPT, final boolean considerCMC) {
-        return creatureEvaluator.evaluateCreature(c, considerPT, considerCMC);
     }
 
     public static int evaluatePermanentList(final CardCollectionView list) {

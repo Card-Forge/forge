@@ -7652,8 +7652,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         boolean hasK1 = isOptionalCostPaid(OptionalCost.Kicker1);
         return hasK1 == isOptionalCostPaid(OptionalCost.Kicker2) ? (hasK1 ? 2 : 0) : 1;
     }
-
     public List<SpellAbility> getAllPossibleAbilities(final Player player, final boolean removeUnplayable) {
+        return getAllPossibleAbilities(player, removeUnplayable, null);
+    }
+    public List<SpellAbility> getAllPossibleAbilities(final Player player, final boolean removeUnplayable, final Multimap<SpellAbility, SpellAbility> unhiddenAltCost) {
         CardState oState = getState(CardStateName.Original);
         final List<SpellAbility> abilities = Lists.newArrayList();
         for (SpellAbility sa : getSpellAbilities()) {
@@ -7662,7 +7664,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             }
             abilities.add(sa);
             //add alternative costs as additional spell abilities
-            abilities.addAll(GameActionUtil.getAlternativeCosts(sa, player, false));
+            List<SpellAbility> altCost = GameActionUtil.getAlternativeCosts(sa, player, false);
+            abilities.addAll(altCost);
+            if (unhiddenAltCost != null) {
+                unhiddenAltCost.putAll(sa, altCost);
+            }
         }
 
         if (isFaceDown() && isInZone(ZoneType.Exile)) {
@@ -7684,7 +7690,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 // only add Spells there
                 if (sa.isSpell() || sa.isLandAbility()) {
                     abilities.add(sa);
-                    abilities.addAll(GameActionUtil.getAlternativeCosts(sa, player, false));
+                    List<SpellAbility> altCost = GameActionUtil.getAlternativeCosts(sa, player, false);
+                    abilities.addAll(altCost);
+                    if (unhiddenAltCost != null) {
+                        unhiddenAltCost.putAll(sa, altCost);
+                    }
                 }
             }
         }
@@ -7710,18 +7720,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         final Collection<SpellAbility> toRemove = Lists.newArrayListWithCapacity(abilities.size());
         for (final SpellAbility sa : abilities) {
-            Player oldController = sa.getActivatingPlayer();
             sa.setActivatingPlayer(player);
             // fix things like retrace
             // check only if SA can't be cast normally
-            if (sa.canPlay(true)) {
-                continue;
-            }
-            if ((removeUnplayable && !sa.canPlay()) || !sa.isPossible()) {
-                if (oldController != null) {
-                    // in case the ability is on the stack this should not change
-                    sa.setActivatingPlayer(oldController);
-                }
+            if (!sa.canPlay(true) && (removeUnplayable || !sa.isPossible())) {
                 toRemove.add(sa);
             }
         }
