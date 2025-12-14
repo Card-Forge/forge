@@ -122,7 +122,7 @@
    <properties>
     <property name="enemy" value="Brain Mole" />
     <property name="threatRange" type="int" value="60" />
-   <property name="effect">{"startBattleWithCard": ["Sky Diamond|MIR", "Sky Diamond|MIR", "Propaganda|TMP", "Ambassador Laquatus|TOR"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Sky Diamond|MIR", "Propaganda|TMP", "Ambassador Laquatus|TOR"]}</property>
     </properties>
   </object>
   <object id="80" template="../../../../../../common/maps/obj/enemy.tx" x="464.333" y="320.667">

@@ -79,24 +79,21 @@
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;MIR&quot;, &quot;VIS&quot;, &quot;WTH&quot;, &quot;POR&quot; ],
+    &quot;editions&quot;: [ &quot;EXO&quot; ],
     &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 10,
-    &quot;colors&quot;: [&quot;Colorless&quot;],
+    &quot;count&quot;: 11,
     &quot;rarity&quot;: [ &quot;Common&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;MIR&quot;, &quot;VIS&quot;, &quot;WTH&quot;, &quot;POR&quot; ],
+    &quot;editions&quot;: [ &quot;EXO&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
-    &quot;colors&quot;: [&quot;Colorless&quot;],
     &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;MIR&quot;, &quot;VIS&quot;, &quot;WTH&quot;, &quot;POR&quot; ],
+    &quot;editions&quot;: [ &quot;EXO&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
-    &quot;colors&quot;: [&quot;Colorless&quot;],
     &quot;rarity&quot;: [ &quot;Rare&quot; ]
   }
 ]

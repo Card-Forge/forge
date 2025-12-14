@@ -202,7 +202,7 @@
   </object>
   <object id="84" template="../../../../../../common/maps/obj/enemy.tx" x="456.333" y="250">
    <properties>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Plains|PO2&quot;, &quot;Alaborn Zealot|PO2&quot;, &quot;Alaborn Musketeer|PO2&quot;, &quot;Town Sentry|PO2&quot;, &quot;Trokin High Guard|PO2&quot; ] }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Plains|PO2&quot;, &quot;Alaborn Zealot|PO2&quot;, &quot;Alaborn Musketeer|PO2&quot;, &quot;Town Sentry|PO2&quot; ] }"/>
     <property name="enemy" value="Baron Levilain"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>

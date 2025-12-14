@@ -120,7 +120,7 @@
   <object id="88" template="../../../../../../common/maps/obj/enemy.tx" x="386.5" y="144">
    <properties>
     <property name="displayNameOverride" value="Alpha Wolf" />
-    <property name="effect">{ "startBattleWithCard": [ "Forest|ICE", "Plains|ICE", "Timber Wolves|LEA", "Tundra Wolves|LEG" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Savannah|2ED", "Timber Wolves|LEA", "Timber Wolves|LEA", "Tundra Wolves|LEG", "Tundra Wolves|LEG" ] }</property>
     <property name="enemy" value="Wolf" />
     <property name="threatRange" type="int" value="50" />
    </properties>

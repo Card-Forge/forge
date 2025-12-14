@@ -32,38 +32,18 @@
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="208" y="272"/>
   <object id="41" template="../../../../../../common/maps/obj/shop.tx" x="64" y="115">
    <properties>
-    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
+    <property name="commonShopList" value="Goblin,Dragon,Phoenix,Orc,Ogre,Dwarf,Giant,Viashino,Minotaur"/>
    </properties>
   </object>
   <object id="42" template="../../../../../../common/maps/obj/shop.tx" x="113" y="115">
    <properties>
-    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
-   </properties>
-  </object>
-  <object id="43" template="../../../../../../common/maps/obj/shop.tx" x="161" y="163">
-   <properties>
-    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
-   </properties>
-  </object>
-  <object id="44" template="../../../../../../common/maps/obj/shop.tx" x="257" y="162">
-   <properties>
-    <property name="shopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,RedBoosterPackShop,Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
-   </properties>
-  </object>
-  <object id="45" template="../../../../../../common/maps/obj/shop.tx" x="304" y="162">
-   <properties>
-    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
-   </properties>
-  </object>
-  <object id="46" template="../../../../../../common/maps/obj/shop.tx" x="351" y="162">
-   <properties>
-    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
+    <property name="commonShopList" value="ColorRandomRed"/>
    </properties>
   </object>
   <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="214" y="114"/>
   <object id="48" template="../../../../../../common/maps/obj/shop.tx" x="160" y="96">
    <properties>
-    <property name="shopList" value="Mountain"/>
+    <property name="commonShopList" value="Mountain"/>
    </properties>
   </object>
  </objectgroup>

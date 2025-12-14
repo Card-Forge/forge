@@ -402,8 +402,7 @@
     }]
 }]
 </property>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Marble Diamond|MIR&quot;, &quot;Charcoal Diamond|MIR&quot;, &quot;Edgewalker|SCG&quot;, &quot;Righteous War|VIS&quot;, &quot;Purgatory|MIR&quot; ]
-}</property>
+    <property name="effect">{ "startBattleWithCard": [ "Marble Diamond|7ED", "Charcoal Diamond|7ED", "Edgewalker|SCG", "Righteous War|VIS", "Purgatory|MIR" ] }</property>
     <property name="enemy" value="Valyx the Tormentor"/>
    </properties>
   </object>

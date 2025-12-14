@@ -72,7 +72,7 @@
   </object>
   <object id="74" template="../../../../../../common/maps/obj/enemy.tx" x="398.667" y="110">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Goblin Spy|INV", "Goblin War Drums|FEM", "Mountain|UGL" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Goblin Spy|INV", "Goblin War Drums|FEM", "Mountain|UGL", "Mountain|UGL" ] }</property>
     <property name="enemy" value="Slobad" />
     <property name="threatRange" type="int" value="90" />
     <property name="waypoints" value="92,93,95,94" />

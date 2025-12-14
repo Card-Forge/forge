@@ -87,10 +87,10 @@
     "options":[
     { "name":"go away" },
     {      
-        "name":"unlock with Grolnok's Key",     
-        "condition":[{"item":"Grolnok's Key"}],    
+        "name":"unlock with Grave Frog's Key",     
+        "condition":[{"item":"Grave Frog's Key"}],    
         "text":"The gate is unlocked",
-        "options":[{"name":"continue", "action":[ {"deleteMapObject":-1},{"removeItem":"Grolnok's Key"}]} ]
+        "options":[{"name":"continue", "action":[ {"deleteMapObject":-1},{"removeItem":"Grave Frog's Key"}]} ]
     }
     ]
 }]</property>
@@ -135,14 +135,14 @@
   </object>
   <object id="182" template="../../../../../../common/maps/obj/enemy.tx" x="231.038" y="148.247" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Forest|PELP", "Mortal Combat|TOR", "Swamp|PELP", "Worry Beads|MMQ" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Bayou|LEA", "Worry Beads|MMQ", "Mortal Combat|TOR" ] }</property>
     <property name="enemy" value="Grolnok" />
     <property name="reward">[
   {
     "type": "item",
     "probability": 1,
     "count": 1,
-    "itemName": "Grolnok's Key"
+    "itemName": "Grave Frog's Key"
   }
 ]
 </property>
@@ -169,7 +169,7 @@
    <properties>
     <property name="enemy" value="Witch" />
     <property name="threatRange" type="int" value="60" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP|1", "Swamp|TMP|2", "Vile Consumption|INV" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP|2", "Vile Consumption|INV" ] }</property>
     </properties>
   </object>
   <object id="190" template="../../../../../../common/maps/obj/enemy.tx" x="242" y="407.164" width="16" height="17.6724">
@@ -259,14 +259,14 @@
    <properties>
     <property name="enemy" value="Witch" />
     <property name="threatRange" type="int" value="20" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP|1", "Swamp|TMP|2", "Vile Consumption|INV" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP|2", "Vile Consumption|INV" ] }</property>
     </properties>
   </object>
   <object id="204" template="../../../../../../common/maps/obj/enemy.tx" x="372.667" y="688.497" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Witch" />
     <property name="threatRange" type="int" value="60" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP|1", "Swamp|TMP|2", "Vile Consumption|INV" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP|2", "Vile Consumption|INV" ] }</property>
     </properties>
   </object>
   <object id="205" template="../../../../../../common/maps/obj/enemy.tx" x="246" y="580.497" width="16" height="17.6724">
@@ -275,7 +275,7 @@
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="207,206" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP|1", "Swamp|TMP|2", "Vile Consumption|INV" ] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Swamp|TMP|1", "Vile Consumption|INV"]}</property></properties>
   </object>
   <object id="206" template="../../../../../../common/maps/obj/waypoint.tx" x="247.333" y="438" />
   <object id="207" template="../../../../../../common/maps/obj/waypoint.tx" x="244.667" y="780" />

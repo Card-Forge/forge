@@ -42,8 +42,8 @@
   </object>
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="246.905" y="148.192">
    <properties>
+    <property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN", "Keeper of Kookus|VIS" ] }</property>
     <property name="enemy" value="Djinn" />
-   <property name="effect">{"startBattleWithCard": ["Island|LEA", "Mountain|ARN", "Swamp|LEA", "Aladdin's Lamp|ARN", "Keeper of Kookus|VIS"]}</property>
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="82,80,81,79" />
    </properties>
@@ -52,16 +52,16 @@
   <object id="66" template="../../../../../../common/maps/obj/gold.tx" x="368.54" y="153.34" />
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="397.753" y="151.232">
    <properties>
+    <property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN", "Keeper of Kookus|VIS" ] }</property>
     <property name="enemy" value="Djinn" />
-   <property name="effect">{"startBattleWithCard": ["Island|LEA", "Mountain|ARN", "Swamp|LEA", "Aladdin's Lamp|ARN", "Keeper of Kookus|VIS"]}</property>
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="81,79,82,80" />
    </properties>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="322" y="238">
    <properties>
+    <property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN", "Keeper of Kookus|VIS" ] }</property>
     <property name="enemy" value="Djinn" />
-   <property name="effect">{"startBattleWithCard": ["Island|LEA", "Mountain|ARN", "Swamp|LEA", "Aladdin's Lamp|ARN", "Keeper of Kookus|VIS"]}</property>
     <property name="threatRange" type="int" value="40" />
     <property name="waypoints" value="79,82,80,81" />
    </properties>
@@ -154,7 +154,7 @@
   <object id="104" template="../../../../../../common/maps/obj/enemy.tx" x="327.667" y="213">
    <properties>
     <property name="enemy" value="Storm Titan" />
-   <property name="effect">{ "startBattleWithCard": [ "Island|ONS", "Mountain|ATH", "Pendrell Mists|WTH" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Pendrell Mists|WTH" ] }</property>
     </properties>
   </object>
   <object id="105" template="../../../../../../common/maps/obj/enemy.tx" x="213.333" y="333.333">

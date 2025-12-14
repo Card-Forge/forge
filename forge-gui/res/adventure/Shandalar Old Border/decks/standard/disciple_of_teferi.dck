@@ -1,18 +1,18 @@
 [metadata]
-Name=disciple_of_teferi
+Name=Disciple of Teferi
 [Main]
-17 Island|ICE
-2 Mahamoti Djinn|LEA
-3 Old Man of the Sea|ARN
-4 Brainstorm|5ED
-4 Counterspell|ICE
-4 Diabolic Edict|TMP
-4 Duress|USG
-4 Hymn to Tourach|FEM
-4 Mystical Tutor|MIR
-4 Phyrexian Furnace|WTH
-4 Teferi's Puzzle Box|7ED
-4 Time Ebb|TMP
-4 Time Warp|S99
-4 Underground River|ICE
-7 Swamp|ICE
+22 Island|MIR|3
+1 Tolaria|LEG
+1 Teferi's Isle|MIR
+4 Sky Diamond|MIR
+3 Time Elemental|LEG
+3 Temporal Adept|7ED
+4 Time Ebb|POR
+4 Temporal Manipulation|PO2
+2 Disruptive Student|USG
+2 Teferi's Imp|MIR
+2 Teferi's Drake|MIR
+3 Sandbar Crocodile|MIR
+3 Breezekeeper|VIS
+2 Time and Tide|VIS
+4 Power Sink|MIR

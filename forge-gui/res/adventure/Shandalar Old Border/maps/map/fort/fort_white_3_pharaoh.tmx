@@ -69,7 +69,7 @@
   <object id="56" template="../../../../../../common/maps/obj/gold.tx" x="459.28" y="273.299" />
   <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="275.803" y="202.417">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN", "Cyclopean Mummy|LEG", "Desert|ARN", "Diamond Valley|ARN", "Island of Wak-Wak|ARN", "Library of Alexandria|ARN", "Oasis|ARN", "Pyramids|ARN" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN", "Cyclopean Mummy|LEG", "Desert|ARN", "Diamond Valley|ARN", "Library of Alexandria|ARN", "Oasis|ARN", "Pyramids|ARN" ] }</property>
     <property name="enemy" value="Pharaoh" />
     <property name="threatRange" type="int" value="40" />
    </properties>

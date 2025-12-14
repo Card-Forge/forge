@@ -44,7 +44,7 @@
   <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="681.038" y="604.87" />
   <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="217.438" y="187.194" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Elvish Farmer|FEM", "Forest|PALP|1", "Forest|PALP|2", "Mindbender Spores|MIR", "Sporogenesis|USG", "Thallid|FEM|3" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Elvish Farmer|FEM", "Forest|PALP|2", "Mindbender Spores|MIR", "Sporogenesis|USG", "Thallid|FEM|3" ] }</property>
     <property name="enemy" value="Slimefoot" />
    </properties>
   </object>

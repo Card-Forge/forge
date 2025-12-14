@@ -56,7 +56,7 @@
     <property name="enemy" value="Elf Queen Guay" />
     <property name="speedModifier" type="float" value="50" />
     <property name="threatRange" type="int" value="30" />
-   <property name="effect">{"startBattleWithCard": ["Plains|CMM|2", "Plains|CMM|2", "Island|CMM|2", "Island|CMM|2", "Forest|CMM|2", "Forest|CMM|2", "Vernal Equinox|MMQ", "Briar Patch|MMQ", "Serra's Blessing|WTH", "Dispersing Orb|ONS", "Silent Attendant|USG", "Diplomatic Escort|MMQ", "Heartwood Dryad|TMP"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Plains|CMM|2", "Island|CMM|2", "Forest|CMM|2", "Vernal Equinox|MMQ", "Briar Patch|MMQ", "Serra's Blessing|WTH", "Silent Attendant|USG", "Diplomatic Escort|MMQ", "Heartwood Dryad|TMP"]}</property>
    </properties>
   </object>
   <object id="64" template="../../../../../../common/maps/obj/enemy.tx" x="452" y="422">

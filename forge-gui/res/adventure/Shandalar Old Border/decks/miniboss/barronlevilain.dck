@@ -1,7 +1,7 @@
 [metadata]
 Name=Baron Levilain
 [Main]
-20 Plains|PO2
+24 Plains|PO2
 2 Alaborn Cavalier|PO2
 2 Alaborn Musketeer|PO2
 2 Alaborn Grenadier|PO2
@@ -13,14 +13,12 @@ Name=Baron Levilain
 2 Angel of Mercy|PO2
 2 Archangel|PO2
 2 Righteous Charge|PO2
-2 Angelic Blessing|PO2
 2 Rally the Troops|PO2
 2 Warrior's Stand|PO2
 2 Path of Peace|PO2
 2 Just Fate|PO2
 2 Vengeance|PO2
 2 Righteous Fury|PO2
-2 Festival of Trokin|PO2
 2 Breath of Life|PO2
 
 [StartInBattle_Reference]
@@ -28,4 +26,3 @@ Name=Baron Levilain
 1 Alaborn Zealot|PO2
 1 Alaborn Musketeer|PO2
 1 Town Sentry|PO2
-1 Trokin High Guard|PO2

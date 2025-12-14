@@ -20,7 +20,4 @@ Name=hippo
 4 Arcane Denial|ALL
 
 [StartInBattle_Reference]
-1 Bull Hippo|POR
-1 Forest|POR
-1 Island|POR
-1 Plains|POR
+1 Phelddagrif|ALL

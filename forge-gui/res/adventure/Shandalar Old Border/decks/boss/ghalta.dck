@@ -23,9 +23,7 @@ Name=Queen of Beasts
 
 [StartInBattle_Reference]
 1 City of Solitude|VIS
-1 Dense Foliage|WTH
-1 Forest|LEA|1
-1 Forest|LEA|2
-1 Forest|LEA|1
-1 Forest|LEA|2
+1 Forest|ONS|1
+1 Forest|ONS|2
+1 Forest|ONS|3
 1 Kavu Lair|INV

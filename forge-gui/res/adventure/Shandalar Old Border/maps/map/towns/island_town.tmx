@@ -32,38 +32,18 @@
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="256" y="271"/>
   <object id="41" template="../../../../../../common/maps/obj/shop.tx" x="304" y="98">
    <properties>
-    <property name="shopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,BlueBoosterPackShop,Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
+    <property name="commonShopList" value="Merfolk,Faerie,Wizard,Serpent,Pirate,Rogue,Shapeshifter,Cephalid"/>
    </properties>
   </object>
   <object id="42" template="../../../../../../common/maps/obj/shop.tx" x="368" y="162">
    <properties>
-    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
-   </properties>
-  </object>
-  <object id="43" template="../../../../../../common/maps/obj/shop.tx" x="353" y="98">
-   <properties>
-    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
-   </properties>
-  </object>
-  <object id="44" template="../../../../../../common/maps/obj/shop.tx" x="208" y="162">
-   <properties>
-    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
-   </properties>
-  </object>
-  <object id="45" template="../../../../../../common/maps/obj/shop.tx" x="304" y="162">
-   <properties>
-    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
-   </properties>
-  </object>
-  <object id="46" template="../../../../../../common/maps/obj/shop.tx" x="336" y="162">
-   <properties>
-    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
+    <property name="commonShopList" value="ColorRandomBlue"/>
    </properties>
   </object>
   <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="215" y="82"/>
   <object id="48" template="../../../../../../common/maps/obj/shop.tx" x="176" y="192">
    <properties>
-    <property name="shopList" value="Island"/>
+    <property name="commonShopList" value="Island"/>
    </properties>
   </object>
  </objectgroup>

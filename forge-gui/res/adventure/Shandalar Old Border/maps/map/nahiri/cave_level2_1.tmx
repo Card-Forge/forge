@@ -49,6 +49,7 @@
   <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="429.333" y="329.667">
    <properties>
     <property name="enemy" value="Cyclops"/>
+    <property name="effect">{ "startBattleWithCard": [ "Chance Encounter|ODY", "Goblin Bomb|WTH", "Impulsive Maneuvers|ODY", "Mana Crypt|PHPR" ] }</property>
    </properties>
   </object>
  </objectgroup>
