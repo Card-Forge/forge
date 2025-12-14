@@ -239,7 +239,7 @@
     <property name="fleeRange" value="60" />
     <property name="pursueRange" type="int" value="60" />
     <property name="threatRange" type="int" value="60" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP|1", "Swamp|TMP|2", "Vile Consumption|INV" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP|2", "Vile Consumption|INV" ] }</property>
     </properties>
   </object>
   <object id="125" template="../../../../../../common/maps/obj/enemy.tx" x="932" y="321.664" width="16" height="17.6724">
@@ -256,7 +256,7 @@
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="96,93" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP|1", "Swamp|TMP|2", "Vile Consumption|INV" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP|2", "Vile Consumption|INV" ] }</property>
     </properties>
   </object>
   <object id="127" template="../../../../../../common/maps/obj/waypoint.tx" x="609.333" y="270.333" />
@@ -279,7 +279,7 @@
     <property name="enemy" value="Shade" />
     <property name="fleeRange" value="30" />
     <property name="threatRange" type="int" value="60" />
-   <property name="effect">{"startBattleWithCard": ["Swamp|3ED", "Swamp|3ED", "Swamp|3ED", "Frozen Shade|LEA"]}</property>
+   <property name="effect">{"startBattleWithCard": ["Swamp|3ED", "Frozen Shade|LEA"]}</property>
     </properties>
   </object>
   <object id="150" template="../../../../../../common/maps/obj/gold.tx" x="1026.5" y="416.5" />
@@ -313,7 +313,7 @@
   </object>
   <object id="155" template="../../../../../../common/maps/obj/enemy.tx" x="585" y="524.664" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Black Market|MMQ", "Enchantress's Presence|ONS", "Grim Feast|MIR" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Enchantress's Presence|ONS", "Grim Feast|MIR" ] }</property>
     <property name="enemy" value="Dark Enchanter" />
     <property name="reward">[
   {
@@ -469,15 +469,14 @@
   </object>
   <object id="197" template="../../../../../../common/maps/obj/enemy.tx" x="40" y="55.1638" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Bladewing's Thrall|SCG", "Dragonspeaker Shaman|SCG", "Dwarven Ruins|FEM", "Ebon Stronghold|FEM", "Wall of Bone|LEA" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Bladewing's Thrall|SCG", "Dragonspeaker Shaman|SCG", "Wall of Bone|LEA" ] }</property>
     <property name="enemy" value="Bone Dragon" />
    </properties>
   </object>
   <object id="198" template="../../../../../../common/maps/obj/enemy.tx" x="148" y="155.164" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ "startBattleWithCard": [ "Bull Hippo|POR", "Forest|POR", "Island|POR", "Plains|POR" ] }</property>
+    <property name="effect">{ "startBattleWithCard": [ "Phelddagrif|ALL" ] }</property>
     <property name="enemy" value="Hippo" />
-   <property name="effect">{"startBattleWithCard": ["Bull Hippo|POR", "Island|POR", "Forest|POR", "Plains|POR"]}</property>
     <property name="threatRange" type="int" value="20" />
    </properties>
   </object>
@@ -582,7 +581,7 @@
     <property name="fleeRange" value="60" />
     <property name="pursueRange" type="int" value="60" />
     <property name="threatRange" type="int" value="60" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP|1", "Swamp|TMP|2", "Vile Consumption|INV" ] }</property>
+   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP|2", "Vile Consumption|INV" ] }</property>
     </properties>
   </object>
   <object id="218" template="../../../../../../common/maps/obj/enemy.tx" x="697" y="269.164" width="16" height="17.6724">
@@ -591,7 +590,7 @@
     <property name="pursueRange" type="int" value="30" />
     <property name="threatRange" type="int" value="30" />
     <property name="waypoints" value="224,127" />
-   <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP|1", "Swamp|TMP|2", "Vile Consumption|INV" ] }</property></properties>
+   <property name="effect">{"startBattleWithCard": ["Swamp|TMP|1", "Vile Consumption|INV"]}</property></properties>
   </object>
   <object id="219" template="../../../../../../common/maps/obj/manashards.tx" x="837.333" y="100" />
   <object id="220" template="../../../../../../common/maps/obj/manashards.tx" x="1023" y="30.6667" />

@@ -7,12 +7,12 @@ Name=seraphim
 4 Worship|USG
 4 Opalescence|UDS
 4 Sacred Mesa|ATH
-4 Crackdown|MMQ
-4 Aurification|ONS
+3 Crackdown|MMQ
+3 Aurification|ONS
 4 Planar Collapse|ULG
 4 Arrest|MMQ
 4 Pacifism|MIR
+2 Mobilization|ONS
 
 [StartInBattle_Reference]
 1 Serra's Sanctum|USG
-1 Mobilization|ONS

@@ -9252,7 +9252,7 @@
 		{
 			"id": 1,
 			"name": "Complete a side quest",
-			"description": "Side quests are available in all towns (look for the question mark) and can be a great way to collect extra loot while exploring Shandalar.",
+			"description": "Side quests are available in special towns (look for the question mark) and can be a great way to collect extra loot while exploring Shandalar.",
 			"anyPOI": true,
 			"count3": 1,
 			"POITags": [
@@ -9273,7 +9273,7 @@
 		{
 			"id": 2,
 			"name": "Complete more side quests",
-			"description": "Side quests are available in all towns (look for the question mark) and can be a great way to collect extra loot while exploring Shandalar.",
+			"description": "Side quests are available in special towns (look for the question mark) and can be a great way to collect extra loot while exploring Shandalar.",
 			"anyPOI": true,
 			"count3": 3,
 			"POITags": [

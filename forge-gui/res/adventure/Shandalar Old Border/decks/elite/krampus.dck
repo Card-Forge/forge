@@ -1,0 +1,24 @@
+[metadata]
+Name=Krampus, Holiday Demon
+[Main]
+10 Snow-Covered Mountain|ICE
+10 Snow-Covered Swamp|ICE
+4 Coal Golem|DRK
+4 Hyalopterous Lemure|ICE
+4 Keeper of Tresserhorn|ALL
+2 Minion of Tevesh Szat|ICE
+4 Soul Burn|ICE
+2 Spoils of Evil|ICE
+2 Withering Wisps|ICE
+1 Stench of Evil|ICE
+1 Anarchy|ICE
+2 Glacial Crevasses|ICE
+3 Goblin Snowman|ICE
+3 Pyroclasm|ICE
+4 Karplusan Yeti|ICE
+4 Mountain Yeti|LEG
+
+
+[StartInBattle_Reference]
+3 Charcoal Diamond|MIR
+1 Coal Golem|DRK
